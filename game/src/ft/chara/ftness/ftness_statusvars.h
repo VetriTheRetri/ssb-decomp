@@ -1,0 +1,44 @@
+#ifndef _FTNESS_STATUSVARS_H_
+#define _FTNESS_STATUSVARS_H_
+
+#include <game/include/ssb_types.h>
+#include <game/include/PR/ultratypes.h>
+#include <game/src/sys/obj.h>
+
+typedef struct ftNess_FighterVars
+{
+    bool32 is_thunder_exist;        // Bool to check if PK Thunder exists
+    s32 pk_thunder_trail_id;
+    s16 pk_thunder_trail_x[12];
+    s16 pk_thunder_trail_y[12];
+
+} ftNess_FighterVars;
+
+typedef struct ftNess_SpecialHi_StatusVars
+{
+    s32 pk_jibaku_delay;            // Frames before PK Thunder Blast can be initiated (PK Thunder will go through Ness while this timer is greater than 0)
+    s32 pk_thunder_end_delay;       // Frames before PK Thunder transitions to its ending animation after the projectile despawns 
+    s32 pk_thunder_gravity_delay;   // Frames before Ness is affected by gravity while performing PK Thunder
+    GObj *pk_thunder_gobj;          // Pointer to the PK Thunder object
+    s32 pk_jibaku_anim_length;      // Number of frames PK Thunder Blast will loop
+    f32 pk_jibaku_vel;              // Velocity of PK Thunder Blast (converted to 2D vector with sin(vel) and cos(vel))
+    Vec3f pk_thunder_vel;           // Might be PK Thunder's collision detection when checking if Ness is hitting himself with it?
+
+} ftNess_SpecialHi_StatusVars;
+
+typedef struct ftNess_SpecialLw_StatusVars
+{
+    s32 release_lag;                // Frames PSI Magnet automatically stays in the hold animation after initiating the move
+    bool32 is_release;              // Bool to check if PSI Magnet should be dropped (alas the B button is no longer being held)
+    s32 gravity_delay;              // Frames before Ness is affected by gravity after initiating PSI Magnet
+
+} ftNess_SpecialLw_StatusVars;
+
+typedef union ftNess_StatusVars
+{
+    ftNess_SpecialHi_StatusVars specialhi;
+    ftNess_SpecialLw_StatusVars speciallw;
+
+} ftNess_StatusVars;
+
+#endif
