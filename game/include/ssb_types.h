@@ -14,17 +14,43 @@ typedef s32 intptr_t;
 // until there's a better place to put the math types...
 typedef f32 Mtx4f[4][4];
 
-struct Vec3i {
+typedef struct Vec3i
+{
     s32 x, y, z;
-};
 
-struct Vec3f {
+} Vec3i;
+
+typedef struct Vec3f
+{
     f32 x, y, z;
-};
 
-struct Vec2f {
+} Vec3f;
+
+typedef struct _Vec2b
+{
+    s8 x, y;
+
+} Vec2b;
+
+typedef struct Vec2f 
+{
     f32 x, y;
-};
+
+} Vec2f;
+
+typedef struct _Vec2h 
+{
+    s16 x, y;
+
+} Vec2h;
+
+typedef struct _Vec2i
+{
+    s32 x, y;
+
+} Vec2i;
+
+
 
 // boolean quick types
 

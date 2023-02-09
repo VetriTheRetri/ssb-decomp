@@ -16,7 +16,7 @@
 #define CUBE(x)   ((x) * (x) * (x))
 
 #define ABS(x)  ((x) < 0 ? -(x) : (x))
-#define ABSF(x) ((x) < 0.0f ? -(x) : (x))
+#define ABSF(x) ((x) < 0.0F ? -(x) : (x))
 
 // Helpful to have some defines that are explicitly float-sized
 #define M_PI_F      ((f32)M_PI)
