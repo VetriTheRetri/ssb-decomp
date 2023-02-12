@@ -29,16 +29,8 @@ void func_ovl3_80155E64(GObj *fighter_gobj)
             var = 0;
             break;
 
-        case Ft_Kind_Fox:
-        case Ft_Kind_Donkey:
-        case Ft_Kind_Link:
-        case Ft_Kind_Yoshi:
-        case Ft_Kind_Captain:
-        case Ft_Kind_Kirby:
-        case Ft_Kind_Pikachu:
-        case Ft_Kind_Purin:
-        case Ft_Kind_Ness: // Undefined behavior here, var is uninitialized, but projectile spawn function still runs
-            break;
+        default:
+            break; // Undefined behavior here, var is uninitialized, but projectile spawn function still runs
 
         case Ft_Kind_Luigi:
         case Ft_Kind_PolyLuigi:

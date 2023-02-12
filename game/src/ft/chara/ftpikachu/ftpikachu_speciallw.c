@@ -39,7 +39,7 @@ struct gmGroundInfo_80131300
     s16 blastzone_left;
 };
 
-static struct gmGroundInfo_80131300 *D_ovl2_80131300;
+static struct gmGroundInfo_80131300 *D_ovl2_80131300; // TO DO: move this to the correct file
 
 void func_ovl3_80151DB0(GObj *fighter_gobj)
 {

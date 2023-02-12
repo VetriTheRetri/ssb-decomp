@@ -1568,7 +1568,7 @@ glabel jtbl_ovl3_80188D50
   /* 572B8 1037F8 80188DB8 */  .4byte jtgt_ovl3_8015BAFC
   .incbin "ovl3.raw.bin", 0x572BC, 0x4
 
-glabel D_ovl3_80188DC0
+glabel ftMasterHand_StatusRandomPool
   .incbin "ovl3.raw.bin", 0x572C0, 0xC
 
 glabel D_ovl3_80188DCC

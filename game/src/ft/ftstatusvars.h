@@ -12,6 +12,7 @@
 #include <game/src/ft/chara/ftpikachu/ftpikachu_statusvars.h>
 #include <game/src/ft/chara/ftpurin/ftpurin_statusvars.h>
 #include <game/src/ft/chara/ftness/ftness_statusvars.h>
+#include <game/src/ft/chara/ftmasterhand/ftmasterhand_statusvars.h>
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -22,7 +23,7 @@ typedef struct ftCommon_YoshiEgg_StatusVars
 
 typedef struct ftCommon_CaptureCaptain_StatusVars
 {
-    u16 capture_flag;   // Collection of bits, only seen 0x4 and 0x2 used
+    u16 capture_flag;   // Collection of bit flags, only seen 0x4 and 0x2 used
 
 } ftCommon_CaptureCaptain_StatusVars;
 

@@ -9,6 +9,7 @@
 #include <game/src/ft/ftstatusvars.h>
 
 #define LEFT -1
+#define CENTER 0
 #define RIGHT 1
 
 typedef struct SpecialHit
@@ -189,6 +190,13 @@ typedef enum ftKind
 
 } ftKind;
 
+typedef enum plKind
+{
+    Pl_Kind_Human,
+    Pl_Kind_CPU
+
+} plKind;
+
 typedef enum ftHitUpdateState
 {
     ftHit_UpdateState_Disable,
@@ -241,7 +249,7 @@ typedef struct _Fighter_Struct
     struct // Status = Action State
     {
         s32 status_frame_curr; // 0x1C
-        s32 unk_0x20;
+        plKind pl_kind;
         s32 status_id;
         s32 anim_id;
 
@@ -436,8 +444,10 @@ typedef struct _Fighter_Struct
 
     } cpu;
 
-    u8 filler_unk_0x1D0[0x26C - 0x1D0];
+    u8 filler_unk_0x1D0[0x268 - 0x1CE];
 
+    u8 buffer_stick_x;
+    u8 buffer_stick_y;
     u8 buffer_button_b;
 
     u8 filler_0x26B[0x276 - 0x26B];
@@ -545,10 +555,19 @@ typedef struct _Fighter_Struct
 
     s32 unk_0xA64;
 
-    u8 filler_0xA68[0xA9C - 0xA68];
+    u8 filler_0xA68[0xA8C - 0xA68];
 
+    u8 unk_0xA8C;
+    u8 unk_0xA8D;
+    u8 unk_0xA8E;
+    u8 unk_0xA8F;
+    u32 unk_0xA90;
+    u32 unk_0xA94;
+    u32 unk_0xA98;
     s8 unk_0xA9C;
     s8 unk_0xA9D;
+    s8 unk_0xA9E;
+    s8 unk_0xA9F;
 
     u8 filler_0xAA0[0xADC - 0xAA0];
 
@@ -563,6 +582,7 @@ typedef struct _Fighter_Struct
         ftPikachu_FighterVars pikachu;
         ftPurin_FighterVars purin;
         ftNess_FighterVars ness;
+        ftMasterHand_FighterVars masterhand;
 
     } fighter_vars;
 
@@ -581,6 +601,7 @@ typedef struct _Fighter_Struct
         ftKirby_StatusVars kirby;
         ftPikachu_StatusVars pikachu;
         ftNess_StatusVars ness;
+        ftMasterHand_StatusVars masterhand;
 
     } status_vars;
 

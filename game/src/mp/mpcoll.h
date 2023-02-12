@@ -51,7 +51,7 @@ typedef struct _Coll_Data
     Vec2f ground_to_air_pos_last;
 
     s32 unk_0x74;
-    s32 ground_line_id; // "Clipping / Platform ID directly under character"
+    f32 unk_0x78; // "Clipping / Platform ID directly under character"
     u32 clip_flag; // "Distance of platform directly under character"        u32 ground_flag; // "Clipping flag of platform directly under character"
     Vec3f ground_angle;
 

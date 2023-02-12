@@ -5,6 +5,18 @@
 #define FLOAT_MAX     3.4028235e38
 #define FLOAT_NEG_MAX -FLOAT_MAX
 
+#define U8_MAX 0xFF
+#define S8_MAX 0x7F
+#define S8_MIN 0x80
+
+#define U16_MAX 0xFFFF
+#define S16_MAX 0x7FFF
+#define S16_MIN 0x8000
+
+#define U32_MAX 0xFFFFFFFF
+#define S32_MAX 0x7FFFFFFF
+#define S32_MIN 0x80000000
+
 /// Get the number of elements in a static array
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 

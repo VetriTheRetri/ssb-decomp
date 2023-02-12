@@ -226,7 +226,7 @@ void func_ovl3_8016104C(GObj *fighter_gobj)
                 func_ovl3_80144C24(fighter_gobj);
 
             }
-            else if ((fp->coll_data.coll_type & 0x800) && (fp->phys_info.vel_normal.y < 0.0F))
+            else if ((fp->coll_data.coll_type & MPCOLL_MASK_GROUND) && (fp->phys_info.vel_normal.y < 0.0F))
             {
                 func_ovl2_800DEE98(fp);
                 func_ovl3_80161210(fighter_gobj);
