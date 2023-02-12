@@ -1,0 +1,325 @@
+#include "ftmasterhand.h"
+
+#define HALF_PI32 1.5707964F
+
+const u8 ftMasterHand_StatusRandomPool[12];
+const u8 D_ovl3_80188DCC[16];
+const u8 D_ovl3_80188DDC[8];
+const u8 D_ovl3_80188DE4[8];
+const u8 D_ovl3_80188DEC[20];
+
+void func_ovl3_80158750(GObj *fighter_gobj)
+{
+    if (D_800A50E8->pause_status != gmPauseStatus_Disable)
+    {
+        func_ovl3_80159040(fighter_gobj);
+    }
+}
+
+void func_ovl3_80158784(GObj *fighter_gobj) // Unused
+{
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Unk, 0.0F, 1.0F, 0U);
+}
+
+void func_ovl3_801587B0(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    s32 vel_x = (ABS(fp->input.stick_range.x) >= 8) ? fp->input.stick_range.x : 0;
+    s32 vel_y = (ABS(fp->input.stick_range.y) >= 8) ? fp->input.stick_range.y : 0;
+
+    fp->phys_info.vel_normal.x = (f32)vel_x;
+    fp->phys_info.vel_normal.y = (f32)vel_y;
+}
+
+void func_ovl3_80158824(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    f32 angle;
+    Fighter_Struct *fp_target;
+    Vec3f sp30;
+
+    if (func_ovl3_8013E9D0(fighter_gobj) != FALSE)
+    {
+        fp->lr = -fp->lr;
+        fp->joint[0]->rotate.y = fp->lr * HALF_PI32;
+    }
+
+    angle = func_ovl2_800E8000(fp);
+
+    fp_target = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj);
+
+    if (fp->input.button_press & fp->input.button_mask_b)
+    {
+        if ((fp->input.stick_range.x * fp->lr) >= 20)
+        {
+            if (ABSF(angle) <= 0.87266463F)
+            {
+                func_ovl3_801580E0(fighter_gobj, &sp30);
+                func_ovl3_801592B4(fighter_gobj, func_ovl3_801593A4, &sp30);
+                return;
+            }
+        }
+        if ((fp->input.stick_range.y >= 20) && (0.87266463F < angle))
+        {
+            func_ovl3_80159524(fighter_gobj);
+            return;
+        }
+        else if ((fp->input.stick_range.y < -19) && (angle < -0.87266463F))
+        {
+            if ((fp_target->coll_data.unk_0x74 != -1) && (fp_target->coll_data.unk_0x74 != -2))
+            {
+                func_ovl3_8015817C(fighter_gobj, &sp30, 800.0F);
+                func_ovl3_801592B4(fighter_gobj, func_ovl3_80159B9C, &sp30);
+                return;
+            }
+        }
+        func_ovl3_801580E0(fighter_gobj, &sp30);
+        func_ovl3_801592B4(fighter_gobj, func_ovl3_80159854, &sp30);
+
+    }
+    else if (fp->input.button_press & fp->input.button_mask_a)
+    {
+        if ((ABS(fp->input.stick_range.x) >= 56) && ((s32)fp->buffer_stick_x < 3))
+        {
+            func_ovl3_80158310(fighter_gobj, &sp30, 3000.0F, 0);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A374, &sp30);
+            return;
+        }
+
+        else if ((fp->input.stick_range.y >= 53) && ((s32)fp->buffer_stick_y < 4))
+        {
+            func_ovl3_80158310(fighter_gobj, &sp30, 600.0F, 0);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A7C4, &sp30);
+            return;
+        }
+        else if ((fp->input.stick_range.y < -52) && ((s32)fp->buffer_stick_y < 4))
+        {
+            func_ovl3_80158310(fighter_gobj, &sp30, 600.0F, 0);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015ACD4, &sp30);
+            return;
+        }
+        else if (((fp->input.stick_range.x * fp->lr) >= 20) && (angle <= 0.87266463F))
+        {
+            func_ovl3_80158310(fighter_gobj, &sp30, 3000.0F, 100.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A314, &sp30);
+            return;
+        }
+        else if ((fp->input.stick_range.y >= 20) && (0.87266463F < angle))
+        {
+            if ((fp_target->coll_data.unk_0x74 != -1) && (fp_target->coll_data.unk_0x74 != -2))
+            {
+                func_ovl3_801581BC(fighter_gobj, &sp30, 600.0F, 100.0F);
+                func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A268, &sp30);
+                return;
+            }
+        }
+        if ((fp->input.stick_range.y < -19) && (angle < -0.87266463F))
+        {
+            func_ovl3_801580E0(fighter_gobj, &sp30);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_801594BC, &sp30);
+            return;
+        }
+        func_ovl3_8015817C(fighter_gobj, &sp30, 800.0F);
+        func_ovl3_801592B4(fighter_gobj, func_ovl3_80159EC4, &sp30);
+        return;
+    }
+    else func_ovl3_801587B0(fighter_gobj);
+}
+
+void func_ovl3_80158C34(GObj *fighter_gobj) // Decide Master Hand's next attack
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f pos;
+    u32 random;
+    u32 var;
+    s32 status_id;
+    u32 unused[2];
+    const u8 *index_ptr;
+
+    fp->fighter_vars.masterhand.p_masterhand->wait_timer--;
+
+    if (fp->fighter_vars.masterhand.p_masterhand->wait_timer == 0)
+    {
+        if (fp->fighter_vars.masterhand.p_masterhand->unk_0x16 == 3)
+        {
+            fp->fighter_vars.masterhand.p_masterhand->unk_0x16 = 0;
+            var = 2;
+        }
+        else
+        {
+            random = rand_u16_range(3);
+
+            var = D_ovl3_80188DEC[fp->fighter_vars.masterhand.p_masterhand->unk_0x14 * 3 + random];
+
+            if (var == 2)
+            {
+                fp->fighter_vars.masterhand.p_masterhand->unk_0x16 = 0;
+            }
+            else fp->fighter_vars.masterhand.p_masterhand->unk_0x16++;
+        }
+        if (FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.unk_0x74 == -1 ||
+            FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.unk_0x74 == -2)
+            {
+                index_ptr = &D_ovl3_80188DE4[var * 2];
+            }
+            else index_ptr = &D_ovl3_80188DDC[var * 2];
+
+        random = D_ovl3_80188DCC[*index_ptr + rand_u16_range(*(index_ptr + 1))];
+
+        fp->fighter_vars.masterhand.p_masterhand->unk_0x14 = var;
+
+        status_id = ftMasterHand_StatusRandomPool[random];
+
+        fp->fighter_vars.masterhand.p_masterhand->unk_0x15 = random;
+
+        switch (status_id)
+        {
+        case ftStatus_MasterHand_Hippataku:
+            func_ovl3_801580E0(fighter_gobj, &pos);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_801593A4, &pos);
+            break;
+
+        case ftStatus_MasterHand_Okuhikouki1:
+            func_ovl3_80159524(fighter_gobj);
+            break;
+
+        case ftStatus_MasterHand_GootsubuUp:
+            func_ovl3_8015817C(fighter_gobj, &pos, 800.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_80159B9C, &pos);
+            break;
+
+        case ftStatus_MasterHand_Walk:
+            func_ovl3_801580E0(fighter_gobj, &pos);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_80159854, &pos);
+            break;
+
+        case ftStatus_MasterHand_Yubideppou1:
+            func_ovl3_80158310(fighter_gobj, &pos, 3000.0F, 0.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A374, &pos);
+            break;
+
+        case ftStatus_MasterHand_OkuPunch1:
+            func_ovl3_80158310(fighter_gobj, &pos, 600.0F, 0.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A7C4, &pos);
+            break;
+
+        case ftStatus_MasterHand_OkutsubushiStart:
+            func_ovl3_80158310(fighter_gobj, &pos, 600.0F, 0.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015ACD4, &pos);
+            break;
+
+        case ftStatus_MasterHand_Okukouki:
+            func_ovl3_80158310(fighter_gobj, &pos, 3000.0F, 100.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A314, &pos);
+            break;
+
+        case ftStatus_MasterHand_Drill:
+            func_ovl3_801581BC(fighter_gobj, &pos, 600.0F, 100.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A268, &pos);
+            break;
+
+        case ftStatus_MasterHand_Harau:
+            func_ovl3_801580E0(fighter_gobj, &pos);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_801594BC, &pos);
+            break;
+
+        case ftStatus_MasterHand_Tsutsuku1:
+            func_ovl3_8015817C(fighter_gobj, &pos, 800.0F);
+            func_ovl3_801592B4(fighter_gobj, func_ovl3_80159EC4, &pos);
+            break;
+
+        default:
+            break;
+        }
+        func_ovl3_80158428(fighter_gobj);
+    }
+}
+
+void func_ovl3_80158F74(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->status_info.pl_kind == Pl_Kind_Human)
+    {
+        func_ovl3_80158824(fighter_gobj);
+    }
+    else func_ovl3_80158C34(fighter_gobj);
+}
+
+void func_ovl3_80158FB4(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f vel;
+    f32 magnitude;
+
+    if (fp->status_info.pl_kind != Pl_Kind_Human)
+    {
+        vec3f_sub(&vel, &fp->status_vars.masterhand.wait.pos, &JObjGetStruct(fighter_gobj)->translate);
+
+        magnitude = vec3f_mag(&vel);
+
+        vec3f_normalize(&vel);
+
+        vec3f_scale(&vel, magnitude * 0.1F);
+
+        fp->phys_info.vel_normal.x = vel.x;
+        fp->phys_info.vel_normal.y = vel.y;
+    }
+}
+
+typedef struct gmUnkInfo_80131308
+{
+    u8 filler_0x0[0x28];
+    Vec3f unk_0x28;
+
+} gmUnkInfo_80131308;
+
+static gmUnkInfo_80131308 D_ovl2_80131308;
+
+void func_ovl3_80159040(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp;
+    Vec3f *translate;
+    Vec3f pos;
+    s32 unk_a0;
+
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Wait, 0.0F, 1.0F, 0U);
+
+    fp = FighterGetStruct(fighter_gobj);
+
+    translate = &JObjGetStruct(fighter_gobj)->translate;
+
+    if (fp->coll_data.unk_0x74 != -1)
+    {
+        fp->status_vars.masterhand.wait.pos.x = (f32)translate->x;
+        fp->status_vars.masterhand.wait.pos.y = (f32)(translate->y + fp->coll_data.unk_0x78);
+    }
+    else
+    {
+        unk_a0 = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.unk_0x74;
+
+        if ((unk_a0 == -1) || (unk_a0 == -2))
+        {
+            unk_a0 = fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
+        }
+
+        if (D_ovl2_80131308.unk_0x28.x < translate->x)
+        {
+            func_ovl2_800F4408(unk_a0, &pos);
+        }
+        else if (translate->x < D_ovl2_80131308.unk_0x28.y)
+        {
+            func_ovl2_800F4428(unk_a0, &pos);
+        }
+        else
+        {
+            func_ovl3_8015839C(unk_a0, &pos);
+        }
+        fp->status_vars.masterhand.wait.pos.x = pos.x;
+        fp->status_vars.masterhand.wait.pos.y = pos.y;
+    }
+
+    fp->status_vars.masterhand.wait.pos.y += (fp->fighter_vars.masterhand.p_masterhand->unk_0xC == 1.5F) ? 600.0F : 400.0F;
+    fp->status_vars.masterhand.wait.pos.z = 0.0F;
+}
