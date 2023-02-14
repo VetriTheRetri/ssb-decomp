@@ -6,11 +6,9 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftdonkey",
-    "\\game\\src\\ft\\chara\\ftkirby",
-    "\\game\\src\\ft\\chara\\ftmasterhand",
+    "\\game\\src\\ft\\chara\\ftpikachu",
     "\\game\\src\\gm"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftmasterhand\\ftmasterhand_unused.c",
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftpikachu\\ftpikachu_speciallw.c",
   "PreviewInSolutionExplorer": false
 }
