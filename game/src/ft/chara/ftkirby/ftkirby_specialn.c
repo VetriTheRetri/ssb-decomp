@@ -89,7 +89,7 @@ void func_ovl3_80161F0C(GObj *fighter_gobj)
 {
     s16 index;
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftKirbyCopyData *copy_data = (ftKirbyCopyData*) (*(u32*)&D_ovl2_80131074 + &ftKirby_LoadedFiles_SpecialNData); // Linker thing
+    ftKirbyCopyData *copy_data = (ftKirbyCopyData*) (*(int*)&D_ovl2_80131074 + &ftKirby_LoadedFiles_SpecialNData); // Linker thing
 
     if (fp->cmd_flags.flag1 != 0)
     {
@@ -139,7 +139,7 @@ void func_ovl3_8016201C(GObj *fighter_gobj)
 void func_ovl3_80162078(GObj *fighter_gobj)
 {
     Fighter_Struct *kirby_fp = FighterGetStruct(fighter_gobj);
-    ftKirbyCopyData *copy_data = (ftKirbyCopyData*) (*(u32*)&D_ovl2_80131074 + &ftKirby_LoadedFiles_SpecialNData); // Linker thing
+    ftKirbyCopyData *copy_data = (ftKirbyCopyData*) (*(int*)&D_ovl2_80131074 + &ftKirby_LoadedFiles_SpecialNData); // Linker thing
     Fighter_Struct *victim_fp;
     Vec3f kirby_pos;
     f32 dist;

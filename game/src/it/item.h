@@ -121,7 +121,7 @@ typedef struct _ItemHitArray
 
 typedef struct _Item_Hit
 {
-    s32 update_state; // 0x0
+    s32 update_state; // 0 = disabled, 1 = new hitbox, 2 and 3 = interpolate/copy current position to previous
     u32 damage; // 0x4
     f32 stale; // Might be damage in float? At least based on Melee?
     u32 element; // 0xC // Placed AFTER offset?
@@ -169,7 +169,7 @@ typedef struct _Item_Hit
         u16 flags_0x4C;
     };
 
-    s32 hitbox_count; // 0 = disabled, 1 = enabled, 2 and 3 related to position update?
+    s32 hitbox_count; 
     ItemHitUnk item_hit_unk[2];
     ItemHitArray hit_targets[4];
 
@@ -177,7 +177,7 @@ typedef struct _Item_Hit
 
 typedef struct _Monster_Hit
 {
-    s32 lmao; // 0x0
+    s32 update_state; // 0x0
     u32 damage; // 0x4
     f32 stale; // Might be damage in float? At least based on Melee?
     u32 element; // 0xC // Placed AFTER offset?
@@ -190,7 +190,7 @@ typedef struct _Monster_Hit
     u16 hit_status; // "Tangibility flag? 0x07"
     u16 hit_sfx;
     u32 unk_0x3C;
-    u32 unk_0x40;
+    s32 unk_0x40;
     u16 flags_0x44 : 7; // Reflectability flag
 
     u16 flags_0x48_b123456 : 6;
@@ -199,7 +199,7 @@ typedef struct _Monster_Hit
     u16 flags_0x4A;
     u16 flags_0x4C;
     u16 flags_0x4E;
-    u32.hitbox_count; // 0 = disabled, 1 = enabled, 2 and 3 related to position update?
+    s32 hitbox_count; 
     Vec3f pos;
     Vec3f pos_prev;
 

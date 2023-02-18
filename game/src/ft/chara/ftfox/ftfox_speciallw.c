@@ -278,7 +278,7 @@ void func_ovl3_8015D1E0(GObj *fighter_gobj)
     {
         fp->x18F_flag_b3 = TRUE;
     }
-    fp->special_hit = (SpecialHit*) (*(u32*)&D_ovl2_80130E94 + &ftFox_LoadedFiles_SpecialLwData); // Another linker thing
+    fp->special_hit = (SpecialHit*) (*(int*)&D_ovl2_80130E94 + &ftFox_LoadedFiles_SpecialLwData); // Another linker thing
 }
 
 void jtgt_ovl3_8015D250(GObj *fighter_gobj)
