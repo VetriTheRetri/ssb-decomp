@@ -202,7 +202,7 @@ void func_ovl3_80157314(GObj *fighter_gobj)
             ip->item_vars.charge_shot.x4 = 1;
             ip->item_vars.charge_shot.charge_size = (s32)fp->fighter_vars.kirby.copysamus_charge_level;
 
-            func_ovl2_800DF09C(fp->status_vars.kirby.copysamus_specialn.charge_gobj, fp->coll_data.unk_0x0, &fp->coll_data);
+            func_ovl2_800DF09C(fp->status_vars.kirby.copysamus_specialn.charge_gobj, fp->coll_data.p_pos, &fp->coll_data);
 
             ip->item_vars.charge_shot.xC = 0;
             fp->status_vars.kirby.copysamus_specialn.charge_gobj = NULL;

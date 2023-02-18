@@ -17,7 +17,7 @@ void func_ovl3_80159524(GObj *fighter_gobj)
 
     target_fp = FighterGetStruct(masterhand_fp->fighter_vars.masterhand.p_masterhand->target_gobj);
 
-    var_a3 = ((target_fp->coll_data.unk_0x74 != -1) && (target_fp->coll_data.unk_0x74 != -2)) ? target_fp->coll_data.unk_0x74 : masterhand_fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
+    var_a3 = ((target_fp->coll_data.ground_line_id != -1) && (target_fp->coll_data.ground_line_id != -2)) ? target_fp->coll_data.ground_line_id : masterhand_fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
 
     func_ovl3_8015839C(var_a3, &masterhand_fp->status_vars.masterhand.okuhikouki.pos);
 }

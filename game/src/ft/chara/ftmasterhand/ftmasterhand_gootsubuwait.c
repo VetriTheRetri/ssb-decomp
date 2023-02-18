@@ -58,11 +58,11 @@ void func_ovl3_80159D34(GObj *fighter_gobj)
 
     fp->status_vars.masterhand.gootsubu.wait_timer = rand_u16_range(60) + 60;
 
-    func_ovl2_800F4428(fp->coll_data.unk_0x74, &pos);
+    func_ovl2_800F4428(fp->coll_data.ground_line_id, &pos);
 
     fp->status_vars.masterhand.gootsubu.pos_x1 = pos.x;
 
-    func_ovl2_800F4408(fp->coll_data.unk_0x74, &pos);
+    func_ovl2_800F4408(fp->coll_data.ground_line_id, &pos);
 
     fp->status_vars.masterhand.gootsubu.pos_x2 = pos.x;
 }

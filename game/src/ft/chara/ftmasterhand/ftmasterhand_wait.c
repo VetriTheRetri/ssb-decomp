@@ -67,7 +67,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
         }
         else if ((fp->input.stick_range.y < -19) && (angle < -0.87266463F))
         {
-            if ((fp_target->coll_data.unk_0x74 != -1) && (fp_target->coll_data.unk_0x74 != -2))
+            if ((fp_target->coll_data.ground_line_id != -1) && (fp_target->coll_data.ground_line_id != -2))
             {
                 func_ovl3_8015817C(fighter_gobj, &sp30, 800.0F);
                 func_ovl3_801592B4(fighter_gobj, func_ovl3_80159B9C, &sp30);
@@ -107,7 +107,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
         }
         else if ((fp->input.stick_range.y >= 20) && (0.87266463F < angle))
         {
-            if ((fp_target->coll_data.unk_0x74 != -1) && (fp_target->coll_data.unk_0x74 != -2))
+            if ((fp_target->coll_data.ground_line_id != -1) && (fp_target->coll_data.ground_line_id != -2))
             {
                 func_ovl3_801581BC(fighter_gobj, &sp30, 600.0F, 100.0F);
                 func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A268, &sp30);
@@ -158,8 +158,8 @@ void func_ovl3_80158C34(GObj *fighter_gobj) // Decide Master Hand's next attack
             }
             else fp->fighter_vars.masterhand.p_masterhand->unk_0x16++;
         }
-        if (FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.unk_0x74 == -1 ||
-            FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.unk_0x74 == -2)
+        if (FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id == -1 ||
+            FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id == -2)
             {
                 index_ptr = &D_ovl3_80188DE4[var * 2];
             }
@@ -290,14 +290,14 @@ void func_ovl3_80159040(GObj *fighter_gobj)
 
     translate = &JObjGetStruct(fighter_gobj)->translate;
 
-    if (fp->coll_data.unk_0x74 != -1)
+    if (fp->coll_data.ground_line_id != -1)
     {
         fp->status_vars.masterhand.wait.pos.x = (f32)translate->x;
         fp->status_vars.masterhand.wait.pos.y = (f32)(translate->y + fp->coll_data.unk_0x78);
     }
     else
     {
-        unk_a0 = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.unk_0x74;
+        unk_a0 = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id;
 
         if ((unk_a0 == -1) || (unk_a0 == -2))
         {

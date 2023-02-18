@@ -242,7 +242,8 @@ typedef struct _Fighter_Struct
     u8 shade_id; // i.e. When multiple instances of the same character costume are in-game
     u8 offset_hit_type; // Original note: offset to attack hitbox type in 5x (???)
     u8 cp_level; // CPU level
-    s16 unk_0x14;
+    s8 unk_0x14;
+    u8 unk_0x15;
     u8 unk_0x16;
     s32 unk_0x18; // Based on port
 
@@ -260,7 +261,7 @@ typedef struct _Fighter_Struct
     s32 x34_unk;
     s32 x38_unk;
     s32 x3C_unk;
-    u32 hitlag_timer;
+    u32 hitlag_timer; // Freeze if TRUE
     s32 lr; // Facing direction; -1 = LEFT, 1 = RIGHT
 
     struct
@@ -457,7 +458,7 @@ typedef struct _Fighter_Struct
     s32 unk_0x27C;
     s32 unk_0x280;
     s32 unk_0x284;
-    s32 stale_id;
+    s32 attack_id;
 
     union
     {
@@ -482,8 +483,7 @@ typedef struct _Fighter_Struct
 
         u32 unk_0x28C_word;
     };
-
-    u32 unk_0x290;
+    u16 unk_0x290;
 
     Fighter_Hit fighter_hit[4];
 
@@ -514,12 +514,7 @@ typedef struct _Fighter_Struct
     u8 filler_0x834[0xC];
     GObj *catch_gobj;
 
-    u8 filler_0x844[0x85C - 0x844];
-
-    GObj *item_hold;
-    SpecialHit *special_hit;
-
-    u8 filler_0x854[0x864 - 0x854];
+    u8 filler_0x844[0x864 - 0x844];
 
     f32 unk_0x864;
 
@@ -535,21 +530,21 @@ typedef struct _Fighter_Struct
     s32 x9CC;
     s32 x9D0;
 
-    void (*cb_anim)(GObj*);
-    void (*cb_accessory)(GObj*);
-    void (*cb_interrupt)(GObj*);
-    void (*cb_physics)(GObj*);
-    void (*cb_coll)(GObj*);
-    void (*cb_update_ik)(GObj*);
-    void (*cb_take_damage)(GObj*);
-    void (*unk_0x9F0)(GObj*);
-    void (*cb_hit_shield)(GObj*);
-    void (*cb_give_damage)(GObj*);
-    void (*cb_update_gfx)(GObj*);
-    void (*unk_0xA00)(GObj*);
-    void (*cb_hitlag_start)(GObj*);
-    void (*cb_hitlag_end)(GObj*);
-    void (*cb_status)(GObj*);
+    void (*cb_anim)(GObj *);
+    void (*cb_accessory)(GObj *);
+    void (*cb_interrupt)(GObj *);
+    void (*cb_physics)(GObj *);
+    void (*cb_coll)(GObj *);
+    void (*cb_update_ik)(GObj *);
+    void (*cb_take_damage)(GObj *);
+    void (*unk_0x9F0)(GObj *);
+    void (*cb_hit_shield)(GObj *);
+    void (*cb_give_damage)(GObj *);
+    void (*cb_update_gfx)(GObj *);
+    void (*unk_0xA00)(GObj *);
+    void (*cb_hitlag_start)(GObj *);
+    void (*cb_hitlag_end)(GObj *);
+    void (*cb_status)(GObj *);
 
     u8 filler_0xA10[0xA64 - 0xA10];
 
@@ -605,9 +600,9 @@ typedef struct _Fighter_Struct
 
     } status_vars;
 
+    s32 display_state;
+
 } Fighter_Struct;
-
-
 
 #define FighterGetStruct(fighter_gobj) \
 ((Fighter_Struct*)fighter_gobj->user_data) \

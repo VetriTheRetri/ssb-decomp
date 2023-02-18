@@ -14,6 +14,12 @@
 #include <game/src/ft/chara/ftness/ftness_statusvars.h>
 #include <game/src/ft/chara/ftmasterhand/ftmasterhand_statusvars.h>
 
+typedef struct ftCommon_Filler
+{
+    u8 filler[0xB4C - 0xB18];
+
+} ftCommon_Filler;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -40,6 +46,7 @@ typedef union ftCommon_StatusVars
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
+    ftCommon_Filler filler;
 
 } ftCommon_StatusVars;
 

@@ -14,6 +14,12 @@ typedef s32 intptr_t;
 // until there's a better place to put the math types...
 typedef f32 Mtx4f[4][4];
 
+typedef struct _Vec3h
+{
+    s16 x, y, z;
+
+} Vec3h;
+
 typedef struct Vec3i
 {
     s32 x, y, z;

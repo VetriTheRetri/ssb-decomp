@@ -17,7 +17,7 @@ void func_ovl3_8015ACD4(GObj *fighter_gobj)
 
     target_fp = FighterGetStruct(masterhand_fp->fighter_vars.masterhand.p_masterhand->target_gobj);
 
-    unk_coll = target_fp->coll_data.unk_0x74;
+    unk_coll = target_fp->coll_data.ground_line_id;
 
     var_a3 = ((unk_coll != -1) && (unk_coll != -2)) ? unk_coll : masterhand_fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
 

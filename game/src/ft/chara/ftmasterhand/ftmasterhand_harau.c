@@ -11,7 +11,7 @@ void func_ovl3_8015940C(GObj *fighter_gobj)
     {
         Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-        if (fp->coll_data.unk_0x74 == -1)
+        if (fp->coll_data.ground_line_id == -1)
         {
             func_ovl3_80159040(fighter_gobj);
         }

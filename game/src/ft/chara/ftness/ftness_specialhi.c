@@ -563,7 +563,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
     {
         if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_normal))
         {
-            pos.y += fp->coll_data.unk_0x30.z;
+            pos.y += fp->coll_data.object_coll.top;
             func_ovl3_80155114(fighter_gobj, &fp->coll_data.ceil_angle, &pos);
         }
     }
@@ -573,8 +573,8 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
 
         if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_normal))
         {
-            pos.x += fp->coll_data.coll_box.bottom_y;
-            pos.y += fp->coll_data.coll_box.top_y;
+            pos.x += fp->coll_data.object_coll.width;
+            pos.y += fp->coll_data.object_coll.center;
 
             func_ovl3_80155114(fighter_gobj, &fp->coll_data.rwall_angle, &pos);
         }
@@ -586,8 +586,8 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
 
         if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_normal))
         {
-            pos.x -= fp->coll_data.coll_box.bottom_y;
-            pos.y += fp->coll_data.coll_box.top_y;
+            pos.x -= fp->coll_data.object_coll.width;
+            pos.y += fp->coll_data.object_coll.center;
 
             func_ovl3_80155114(fighter_gobj, &fp->coll_data.lwall_angle, &pos);
         }

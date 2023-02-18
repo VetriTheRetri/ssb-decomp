@@ -10,6 +10,16 @@
 #define MPCOLL_MASK_CEIL 0x400
 #define MPCOLL_MASK_GROUND 0x800
 
+typedef enum gmHitCollision // Hitbox types, this is universal but I don't know where else to put it so both fighters and items can see it without redefining it for each
+{
+    gmHitCollision_Hurt,
+    gmHitCollision_Shield,
+    gmHitCollision_Hit = 0x3,
+    gmHitCollision_Absorb = 0x5,
+    gmHitCollision_Reflect
+
+} gmHitCollision;
+
 typedef enum Ground_Air
 {
     ground,
@@ -19,26 +29,24 @@ typedef enum Ground_Air
 
 typedef struct _ObjectColl
 {
-    f32 top_y;
-    f32 center_y;
-    f32 bottom_y;
+    f32 top;
+    f32 center;
+    f32 bottom;
     f32 width;
 
 } ObjectColl;
 
 typedef struct _Coll_Data
 {
-    void *unk_0x0;
-    void *unk_0x4;
-    void *unk_0x8;
-    Vec3f unk_0xC;
-    Vec3f pos; // 0x8C
-    Vec3f unk_0x24; // 0x94 - 0xA0;
-    Vec3f unk_0x30; // Wind speed
-    ObjectColl coll_box;
-    void *p_coll_box; // Points back to collision box???
-    u16 unk_0x50;
-    u16 unk_0x52;
+    Vec3f *p_pos; // Points to TopN translation vector
+    s32 *p_lr; // Points to facing direction?
+    Vec3f pos_curr;
+    Vec3f pos_correct; // Unconfirmed
+    Vec3f pos_prev; // Unconfirmed
+    Vec3f pos_project; // Unconfirmed
+    ObjectColl object_coll;
+    void *p_object_coll; // Points back to collision box???
+    Vec2f unk_0x4C;
     u16 unk_0x54;
     u16 unk_0x56;
     u16 unk_0x58;
@@ -47,10 +55,9 @@ typedef struct _Coll_Data
     u16 unk_0x60;
     u16 unk_0x62;
     u32 unk_0x64;
-    u32 unk_0x68;
-    Vec2f ground_to_air_pos_last;
+    Vec3f ground_to_air_pos_last;
 
-    s32 unk_0x74;
+    s32 ground_line_id;
     f32 unk_0x78; // "Clipping / Platform ID directly under character"
     u32 clip_flag; // "Distance of platform directly under character"        u32 ground_flag; // "Clipping flag of platform directly under character"
     Vec3f ground_angle;

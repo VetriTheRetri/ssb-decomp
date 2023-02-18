@@ -2,13 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftpikachu",
-    "\\game\\src\\gm"
+    "\\game\\src\\ft\\chara\\ftlink",
+    "\\game\\src\\gm",
+    "\\game\\src\\gr",
+    "\\game\\src\\it",
+    "\\game\\src\\mp"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftpikachu\\ftpikachu_speciallw.c",
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftdonkey",
   "PreviewInSolutionExplorer": false
 }

@@ -76,11 +76,11 @@ void func_ovl3_8015A268(GObj *fighter_gobj)
 
     fp = fighter_gobj->user_data;
 
-    func_ovl2_800F4428(fp->coll_data.unk_0x74, &pos);
+    func_ovl2_800F4428(fp->coll_data.ground_line_id, &pos);
 
     fp->status_vars.masterhand.drill.pos_x1 = pos.x;
 
-    func_ovl2_800F4408(fp->coll_data.unk_0x74, &pos);
+    func_ovl2_800F4408(fp->coll_data.ground_line_id, &pos);
 
     fp->status_vars.masterhand.drill.pos_x2 = pos.x;
 

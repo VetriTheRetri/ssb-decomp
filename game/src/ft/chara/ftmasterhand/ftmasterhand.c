@@ -54,15 +54,15 @@ void func_ovl3_801580E0(GObj *fighter_gobj, Vec3f *pos)
     Fighter_Struct *unk_fp = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj);
     MasterHand_Struct *p_masterhand = fp->fighter_vars.masterhand.p_masterhand;
 
-    if ((unk_fp->coll_data.unk_0x74 != -1) && (unk_fp->coll_data.unk_0x74 != -2))
+    if ((unk_fp->coll_data.ground_line_id != -1) && (unk_fp->coll_data.ground_line_id != -2))
     {
-        fp->fighter_vars.masterhand.p_masterhand->unk_0x4 = unk_fp->coll_data.unk_0x74;
+        fp->fighter_vars.masterhand.p_masterhand->unk_0x4 = unk_fp->coll_data.ground_line_id;
     }
     else
     {
-        if ((fp->coll_data.unk_0x74 != -1) && (unk_fp->coll_data.unk_0x74 != -2))
+        if ((fp->coll_data.ground_line_id != -1) && (unk_fp->coll_data.ground_line_id != -2))
         {
-            fp->fighter_vars.masterhand.p_masterhand->unk_0x4 = fp->coll_data.unk_0x74;
+            fp->fighter_vars.masterhand.p_masterhand->unk_0x4 = fp->coll_data.ground_line_id;
         }
         else
         {
@@ -95,7 +95,7 @@ void func_ovl3_801581BC(GObj *fighter_gobj, Vec3f *pos, f32 pos_x, f32 pos_y)
 
     translate.x += (rand_u16() & 1) ? pos_x : -pos_x;
 
-    if (func_ovl2_800F3DD8(fp_unk->coll_data.unk_0x74, &translate, &y, 0, 0) != FALSE)
+    if (func_ovl2_800F3DD8(fp_unk->coll_data.ground_line_id, &translate, &y, 0, 0) != FALSE)
     {
         pos->x = translate.x;
     }
@@ -103,7 +103,7 @@ void func_ovl3_801581BC(GObj *fighter_gobj, Vec3f *pos, f32 pos_x, f32 pos_y)
     {
         translate.x = (x < translate.x) ? x - pos_x : x + pos_x;
 
-        pos->x = (func_ovl2_800F3DD8(fp_unk->coll_data.unk_0x74, &translate, &y, 0, 0) != FALSE) ? translate.x : x;
+        pos->x = (func_ovl2_800F3DD8(fp_unk->coll_data.ground_line_id, &translate, &y, 0, 0) != FALSE) ? translate.x : x;
     }
     pos->y = (f32)(translate.y + y + pos_y);
     pos->z = 0.0F;
