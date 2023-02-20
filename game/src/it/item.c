@@ -573,7 +573,7 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
 {
     if (this_ip->group_id != 0)
     {
-        GObj *victim_gobj = gOMObjCommonLinks[5];
+        GObj *victim_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
 
         if (victim_gobj != NULL)
         {
