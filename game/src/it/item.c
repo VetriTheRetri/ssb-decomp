@@ -590,7 +590,8 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
                 }
                 victim_gobj = victim_gobj->group_gobj_next;
 
-            } while (victim_gobj != NULL);
+            } 
+            while (victim_gobj != NULL);
         }
     }
     else func_ovl3_80166594(it_hit, target_gobj, hitbox_type, arg4);
