@@ -59,7 +59,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         ip->item_hit[0].stale = func_ovl2_800EA470(fp->player_id, fp->attack_id, fp->unk_0x28C_halfword);
         ip->item_hit[0].attack_id = fp->attack_id;
         ip->item_hit[0].flags_0x4A_halfword = fp->unk_0x28C_halfword;
-        ip->item_hit[0].flags_0x4C_halfword = fp->unk_0x28E_halfword & 0xFFFF;
+        ip->item_hit[0].flags_0x4C_halfword = fp->unk_0x28E_halfword & U16_MAX;
         ip->item_hit[0].flags_0x4E = fp->unk_0x290;
         break;
 
@@ -77,7 +77,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         ip->item_hit[0].stale = owner_ip->item_hit[0].stale;
         ip->item_hit[0].attack_id = owner_ip->item_hit[0].attack_id;
         ip->item_hit[0].flags_0x4A_halfword = owner_ip->item_hit[0].flags_0x4A_halfword;
-        ip->item_hit[0].flags_0x4C_halfword = owner_ip->item_hit[0].flags_0x4C_halfword & 0xFFFF;
+        ip->item_hit[0].flags_0x4C_halfword = owner_ip->item_hit[0].flags_0x4C_halfword & U16_MAX;
         ip->item_hit[0].flags_0x4E = owner_ip->item_hit[0].flags_0x4E;
         break;
 
@@ -95,7 +95,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         ip->item_hit[0].stale = pm->monster_hit[0].stale;
         ip->item_hit[0].attack_id = pm->monster_hit[0].flags_0x48_b123456;
         ip->item_hit[0].flags_0x4A_halfword = pm->monster_hit[0].flags_0x4A_halfword;
-        ip->item_hit[0].flags_0x4C_halfword = pm->monster_hit[0].flags_0x4C_halfword & 0xFFFF;
+        ip->item_hit[0].flags_0x4C_halfword = pm->monster_hit[0].flags_0x4C_halfword & U16_MAX;
         ip->item_hit[0].flags_0x4E = pm->monster_hit[0].flags_0x4E;
         break;
 
@@ -107,12 +107,12 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         ip->unk_0x12 = ITEM_UNK_DEFAULT;
         ip->unk_0x14 = 0;
         ip->lr = RIGHT;
+
         ip->display_state = D_ovl3_8018CFF4;
+
         ip->item_hit[0].attack_id = 0;
         ip->item_hit[0].stale = 1.0F;
-
         ip->item_hit[0].flags_0x4A_halfword = func_ovl2_800EA5BC();
-
         ip->item_hit[0].flags_0x4C.flags_lw_0x3FF = 0;
         ip->item_hit[0].flags_0x4C.flags_lw_0x1000 = ip->item_hit[0].flags_0x4C.flags_lw_0x800 = ip->item_hit[0].flags_0x4C.flags_lw_0x400 = FALSE;
         ip->item_hit[0].flags_0x4E = func_ovl2_800EA74C();
@@ -798,7 +798,7 @@ next_check:
         ip->display_state = fp->display_state;
         ip->unk_0x14 = fp->unk_0x18;
         ip->unk_0x12 = fp->offset_hit_type;
-        ip->item_hit[0].flags_0x4C_halfword = ip->unk_0x258 & 0xFFFF;
+        ip->item_hit[0].flags_0x4C_halfword = ip->unk_0x258 & U16_MAX;
         ip->item_hit[0].flags_0x4E = ip->unk_0x25A;
 
         if (ip->cb_reflect != NULL)
