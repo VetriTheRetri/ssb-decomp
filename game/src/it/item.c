@@ -3,6 +3,8 @@
 #include <game/src/gr/ground.h>
 #include <game/src/gm/gmmatch.h>
 
+#define HALF_PI32 1.5707964F
+
 // Not the first function in this file
 
 GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spawn_pos, u32 flags)
@@ -177,6 +179,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
     ip->x260_flag_b0 = FALSE;
     ip->is_hitlag_item = FALSE;
     ip->x26C_flag_b0 = FALSE;
+
     ip->group_id = 0;
 
     ip->is_static_damage = FALSE;
@@ -740,7 +743,7 @@ void func_ovl3_80166BE4(GObj *item_gobj)
     {
         if ((ip->item_hit[0].is_hit_airborne) && (ip->ground_or_air == air))
         {
-            if (ip->shield_collide_angle < 2.3561945F)
+            if (ip->shield_collide_angle < ITEM_DEFLECT_ANGLE_DEFAULT)
             {
                 ip->shield_collide_angle -= HALF_PI32;
 

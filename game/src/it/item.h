@@ -19,10 +19,13 @@
 
 // Universal item hitbox attributes
 
-#define ITEM_REHIT_TIME_DEFAULT 16          // If the item is multihit, its hitbox will refresh per victim after this many frames have passed
-#define ITEM_REFLECT_MAX_DEFAULT 100        // Maximum damage cap for reflected items
-#define ITEM_REFLECT_MUL_DEFAULT 1.8F       // Universal reflect damage multiplier
-#define ITEM_REFLECT_ADD_DEFAULT 0.99F      // Added after multiplying item's hitbox damage
+#define ITEM_REHIT_TIME_DEFAULT 16              // If the item is multihit, its hitbox will refresh per victim after this many frames have passed
+
+#define ITEM_REFLECT_MAX_DEFAULT 100            // Maximum damage cap for reflected items
+#define ITEM_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
+#define ITEM_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying item's hitbox damage
+
+#define ITEM_DEFLECT_ANGLE_DEFAULT 2.3561945F   // Determines whether item bounces off a shield
 
 typedef enum It_Spawn
 {
