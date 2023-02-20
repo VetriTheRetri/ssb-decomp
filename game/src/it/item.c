@@ -219,9 +219,9 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
     ip->coll_data.p_pos = &JObjGetStruct(item_gobj)->translate;
     ip->coll_data.p_lr = &ip->lr;
 
-    ip->coll_data.object_coll.top_y = (f32)item_attrs->objectcoll_top;
-    ip->coll_data.object_coll.center_y = (f32)item_attrs->objectcoll_center;
-    ip->coll_data.object_coll.bottom_y = (f32)item_attrs->objectcoll_bottom;
+    ip->coll_data.object_coll.top = (f32)item_attrs->objectcoll_top;
+    ip->coll_data.object_coll.center = (f32)item_attrs->objectcoll_center;
+    ip->coll_data.object_coll.bottom = (f32)item_attrs->objectcoll_bottom;
     ip->coll_data.object_coll.width = (f32)item_attrs->objectcoll_width;
     ip->coll_data.p_coll_box = &ip->coll_data.object_coll;
 
