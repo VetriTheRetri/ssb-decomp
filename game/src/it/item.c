@@ -714,9 +714,9 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                         }
                     }
                 }
-            next_gobj:
-                other_gobj = other_gobj->group_gobj_next;
-            } while (other_gobj != NULL);
+                next_gobj: other_gobj = other_gobj->group_gobj_next;
+            }
+            while (other_gobj != NULL);
         }
     }
 }
