@@ -1,6 +1,7 @@
 #include "item.h"
 #include <game/src/ft/fighter.h>
 #include <game/src/gr/ground.h>
+#include <game/src/gm/gmmatch.h>
 
 // Not the first function in this file
 
@@ -55,8 +56,8 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
 
         ip->item_hit[0].stale = func_ovl2_800EA470(fp->player_id, fp->attack_id, fp->unk_0x28C_halfword);
         ip->item_hit[0].attack_id = fp->attack_id;
-        ip->item_hit[0].flags_0x4A = fp->unk_0x28C_halfword;
-        ip->item_hit[0].flags_0x4C = fp->unk_0x28E_halfword & 0xFFFF;
+        ip->item_hit[0].flags_0x4A_halfword = fp->unk_0x28C_halfword;
+        ip->item_hit[0].flags_0x4C_halfword = fp->unk_0x28E_halfword & 0xFFFF;
         ip->item_hit[0].flags_0x4E = fp->unk_0x290;
         break;
 
@@ -73,8 +74,8 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
 
         ip->item_hit[0].stale = owner_ip->item_hit[0].stale;
         ip->item_hit[0].attack_id = owner_ip->item_hit[0].attack_id;
-        ip->item_hit[0].flags_0x4A = owner_ip->item_hit[0].flags_0x4A;
-        ip->item_hit[0].flags_0x4C = owner_ip->item_hit[0].flags_0x4C & 0xFFFF;
+        ip->item_hit[0].flags_0x4A_halfword = owner_ip->item_hit[0].flags_0x4A_halfword;
+        ip->item_hit[0].flags_0x4C_halfword = owner_ip->item_hit[0].flags_0x4C_halfword & 0xFFFF;
         ip->item_hit[0].flags_0x4E = owner_ip->item_hit[0].flags_0x4E;
         break;
 
@@ -91,8 +92,8 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
 
         ip->item_hit[0].stale = pm->monster_hit[0].stale;
         ip->item_hit[0].attack_id = pm->monster_hit[0].flags_0x48_b123456;
-        ip->item_hit[0].flags_0x4A = pm->monster_hit[0].flags_0x4A;
-        ip->item_hit[0].flags_0x4C = pm->monster_hit[0].flags_0x4C & 0xFFFF;
+        ip->item_hit[0].flags_0x4A_halfword = pm->monster_hit[0].flags_0x4A_halfword;
+        ip->item_hit[0].flags_0x4C_halfword = pm->monster_hit[0].flags_0x4C_halfword & 0xFFFF;
         ip->item_hit[0].flags_0x4E = pm->monster_hit[0].flags_0x4E;
         break;
 
@@ -108,10 +109,10 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         ip->item_hit[0].attack_id = 0;
         ip->item_hit[0].stale = 1.0F;
 
-        ip->item_hit[0].flags_0x4A = func_ovl2_800EA5BC();
+        ip->item_hit[0].flags_0x4A_halfword = func_ovl2_800EA5BC();
 
-        ip->item_hit[0].flags_0x4C_10bit = 0;
-        ip->item_hit[0].flags_0x4C_b3 = ip->item_hit[0].flags_0x4C_b4 = ip->item_hit[0].flags_0x4C_b5 = FALSE;
+        ip->item_hit[0].flags_0x4C.flags_lw_0x3FF = 0;
+        ip->item_hit[0].flags_0x4C.flags_lw_0x1000 = ip->item_hit[0].flags_0x4C.flags_lw_0x800 = ip->item_hit[0].flags_0x4C.flags_lw_0x400 = FALSE;
         ip->item_hit[0].flags_0x4E = func_ovl2_800EA74C();
         break;
     }
@@ -153,7 +154,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
 
     ip->item_hit[0].flags_0x48_b3 = FALSE;
 
-    ip->item_hit[0].flags_0x48_b4 = item_attrs->flags_0x2F_b2;
+    ip->item_hit[0].is_hit_airborne = item_attrs->flags_0x2F_b2;
     ip->item_hit[0].flags_0x48_b5 = item_attrs->flags_0x2F_b3;
     ip->item_hit[0].flags_0x48_b6 = item_attrs->flags_0x2F_b4;
 
@@ -166,20 +167,24 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
 
     func_ovl3_80168158(ip);
 
-    ip->unk_0x234 = 0;
+    ip->hit_victim_damage = 0;
     ip->unk_0x238 = 0;
-    ip->unk_0x23C = 0;
-    ip->unk_0x240 = 0;
-    ip->unk_0x254 = 0;
-    ip->unk_0x25C = 0;
+    ip->hit_attack_damage = 0;
+    ip->hit_shield_damage = 0;
+    ip->reflect_gobj = NULL;
+    ip->absorb_gobj = NULL;
+
     ip->x260_flag_b0 = FALSE;
     ip->is_hitlag_item = FALSE;
     ip->x26C_flag_b0 = FALSE;
     ip->group_id = 0;
-    ip->x26C_flag_b1 = FALSE;
+
+    ip->is_static_damage = FALSE;
+
     ip->unk_0x270 = 0;
     ip->unk_0x274 = 0;
-    ip->unk_0x244 = 0.0F;
+
+    ip->shield_collide_angle = 0.0F;
     ip->unk_0x250 = 0.0F;
     ip->unk_0x24C = 0.0F;
     ip->unk_0x248 = 0.0F;
@@ -238,9 +243,9 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
     ip->cb_anim = item_desc->cb_anim;
     ip->cb_coll = item_desc->cb_coll;
     ip->cb_give_damage = item_desc->cb_give_damage;
-    ip->cb_unk_0x284 = item_desc->unk_0x20;
-    ip->cb_unk_0x288 = item_desc->unk_0x24;
-    ip->cb_unk_0x28C = item_desc->unk_0x28;
+    ip->cb_shield_block = item_desc->cb_shield_block;
+    ip->cb_shield_deflect = item_desc->cb_shield_deflect;
+    ip->cb_attack = item_desc->cb_attack;
     ip->cb_reflect = item_desc->cb_reflect;
     ip->cb_absorb = item_desc->cb_absorb;
     ip->cb_destroy = NULL;
@@ -376,17 +381,17 @@ void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
 
             if (targets->victim_gobj != NULL)
             {
-                if (targets->timer_rehit > 0)
+                if (targets->victim_flags.timer_rehit > 0)
                 {
-                    targets->timer_rehit--;
+                    targets->victim_flags.timer_rehit--;
 
-                    if (targets->timer_rehit <= 0)
+                    if (targets->victim_flags.timer_rehit <= 0)
                     {
                         targets->victim_gobj = NULL;
 
-                        targets->flags_b0 = targets->flags_b1 = targets->flags_b2 = targets->flags_b3 = FALSE;
+                        targets->victim_flags.flags_b0 = targets->victim_flags.flags_b1 = targets->victim_flags.flags_b2 = targets->victim_flags.flags_b3 = FALSE;
 
-                        targets->flags_b456 = 7;
+                        targets->victim_flags.flags_b456 = 7;
                     }
                 }
             }
@@ -480,34 +485,34 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s3
             switch (hitbox_type)
             {
             case gmHitCollision_Hurt:
-                it_hit->hit_targets[i].flags_b0 = TRUE;
+                it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
                 break;
 
             case gmHitCollision_Shield:
-                it_hit->hit_targets[i].flags_b1 = TRUE;
+                it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
                 break;
 
             case 2:
-                it_hit->hit_targets[i].flags_b1 = TRUE;
-                it_hit->hit_targets[i].timer_rehit = ITEM_REHIT_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Reflect:
-                it_hit->hit_targets[i].flags_b2 = TRUE;
-                it_hit->hit_targets[i].timer_rehit = ITEM_REHIT_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Absorb:
-                it_hit->hit_targets[i].flags_b3 = TRUE;
+                it_hit->hit_targets[i].victim_flags.flags_b3 = TRUE;
                 break;
 
             case gmHitCollision_Hit:
-                it_hit->hit_targets[i].flags_b456 = arg3;
+                it_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
                 break;
 
             case 4:
-                it_hit->hit_targets[i].flags_b0 = TRUE;
-                it_hit->hit_targets[i].timer_rehit = ITEM_REHIT_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             default: break;
@@ -529,39 +534,38 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s3
         switch (hitbox_type)
         {
         case gmHitCollision_Hurt:
-            it_hit->hit_targets[i].flags_b0 = TRUE;
+            it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
             break;
 
         case gmHitCollision_Shield:
-            it_hit->hit_targets[i].flags_b1 = TRUE;
+            it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
             break;
 
         case 2:
-            it_hit->hit_targets[i].flags_b1 = TRUE;
-            it_hit->hit_targets[i].timer_rehit = ITEM_REHIT_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Reflect:
-            it_hit->hit_targets[i].flags_b2 = TRUE;
-            it_hit->hit_targets[i].timer_rehit = ITEM_REHIT_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Absorb:
-            it_hit->hit_targets[i].flags_b3 = TRUE;
+            it_hit->hit_targets[i].victim_flags.flags_b3 = TRUE;
             break;
 
         case gmHitCollision_Hit:
-            it_hit->hit_targets[i].flags_b456 = arg3;
+            it_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
             break;
 
         case 4:
-            it_hit->hit_targets[i].flags_b0 = TRUE;
-            it_hit->hit_targets[i].timer_rehit = ITEM_REHIT_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         default: break;
         }
-
     }
 }
 
@@ -589,40 +593,245 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
     else func_ovl3_80166594(it_hit, target_gobj, hitbox_type, arg4);
 }
 
-void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 arg2, Item_Struct *victim_ip, Item_Hit *victim_hit, s32 arg5, s32 arg6, s32 arg7)
+void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_id, Item_Struct *victim_ip, Item_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
 {
-    s32 sp3C;
-    s32 sp38;
+    s32 this_hit_damage;
+    s32 victim_hit_damage;
     Vec3f sp2C;
     s32 var_a0;
     s32 var_v1;
 
-    sp3C = func_ovl3_80168128(this_ip);
-    sp38 = func_ovl3_80168128(victim_ip);
+    this_hit_damage = func_ovl3_80168128(this_ip);
+    victim_hit_damage = func_ovl3_80168128(victim_ip);
 
-    func_ovl2_800F0C94(&sp2C, victim_hit, arg5, this_hit, arg2);
+    func_ovl2_800F0C94(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
 
     var_a0 = victim_hit->unk_0x40;
     var_v1 = this_hit->unk_0x40;
 
     if (var_v1 >= victim_hit->unk_0x40)
     {
-        func_ovl3_8016679C(victim_ip, victim_hit, arg6, 3, 0);
-        if (victim_ip->unk_0x23C < sp38)
+        func_ovl3_8016679C(victim_ip, victim_hit, this_gobj, 3, 0);
+        if (victim_ip->hit_attack_damage < victim_hit_damage)
         {
-            victim_ip->unk_0x23C = sp38;
+            victim_ip->hit_attack_damage = victim_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, sp38);
+        func_ovl2_80100BF0(&sp2C, victim_hit_damage);
         var_v1 = this_hit->unk_0x40;
         var_a0 = victim_hit->unk_0x40;
     }
     if (var_a0 >= var_v1)
     {
-        func_ovl3_8016679C(this_ip, this_hit, arg7, 3, 0);
-        if (this_ip->unk_0x23C < sp3C)
+        func_ovl3_8016679C(this_ip, this_hit, victim_gobj, 3, 0);
+        if (this_ip->hit_attack_damage < this_hit_damage)
         {
-            this_ip->unk_0x23C = sp3C;
+            this_ip->hit_attack_damage = this_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, sp3C);
+        func_ovl2_80100BF0(&sp2C, this_hit_damage);
     }
+}
+
+void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other items
+{
+    GObj *other_gobj;
+    Item_Struct *this_ip, *other_ip;
+    Item_Hit *other_hit, *this_hit;
+    ItemHitVictimFlags these_flags, those_flags;
+    s32 m, n, i, j;
+    bool32 is_self_gobj;
+
+    this_ip = ItemGetStruct(this_gobj);
+    this_hit = &this_ip->item_hit[0];
+
+    if ((this_hit->flags_0x48_b0) && (this_hit->update_state != itHit_UpdateState_Disable) && (this_hit->hit_status & 2))
+    {
+        other_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
+
+        is_self_gobj = FALSE;
+
+        if (other_gobj != NULL)
+        {
+            do
+            {
+                other_ip = ItemGetStruct(other_gobj);
+                other_hit = &other_ip->item_hit[0];
+
+                if (other_gobj == this_gobj)
+                {
+                    is_self_gobj = TRUE; // Not really sure what to name this
+                }
+                else if ((is_self_gobj != FALSE) && (this_ip->owner_gobj != other_ip->owner_gobj))
+                {
+                    if ((D_800A50E8->is_team_battle != TRUE) || (D_800A50E8->is_team_attack != FALSE)) goto next_check;
+                    {
+                        if (this_ip->team == other_ip->team) goto next_gobj; // YUCKY match but you can't say it's only a half
+
+                    next_check:
+                        if ((other_hit->update_state != itHit_UpdateState_Disable) && (other_hit->flags_0x48_b0))
+                        {
+                            if (other_hit->hit_status & 2)
+                            {
+                                those_flags.flags_b456 = 7;
+
+                                for (m = 0; m < ARRAY_COUNT(other_hit->hit_targets); m++)
+                                {
+                                    if (this_gobj == other_hit->hit_targets[m].victim_gobj)
+                                    {
+                                        those_flags = other_hit->hit_targets[m].victim_flags;
+                                        break;
+                                    }
+                                }
+
+                                if (those_flags.flags_b456 == 7)
+                                {
+                                    these_flags.flags_b456 = 7;
+
+                                    for (n = 0; n < ARRAY_COUNT(this_hit->hit_targets); n++)
+                                    {
+                                        if (other_gobj == this_hit->hit_targets[n].victim_gobj)
+                                        {
+                                            these_flags = this_hit->hit_targets[n].victim_flags;
+                                            break;
+                                        }
+                                    }
+
+                                    if (these_flags.flags_b456 == 7)
+                                    {
+                                        for (i = 0; i < other_hit->hitbox_count; i++)
+                                        {
+                                            for (j = 0; j < this_hit->hitbox_count; j++)
+                                            {
+                                                if (func_ovl2_800F007C(other_hit, i, this_hit, j) != FALSE)
+                                                {
+                                                    func_ovl3_80166854(other_ip, other_hit, i, this_ip, this_hit, j, other_gobj, this_gobj);
+                                                    goto next_gobj;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            next_gobj:
+                other_gobj = other_gobj->group_gobj_next;
+            } while (other_gobj != NULL);
+        }
+    }
+}
+
+void func_ovl3_80166BE4(GObj *item_gobj)
+{
+    Item_Struct *ip = ItemGetStruct(item_gobj);
+
+    if ((ip->hit_victim_damage != 0) || (ip->unk_0x238 != 0))
+    {
+        if (ip->cb_give_damage != NULL)
+        {
+            if (ip->cb_give_damage(item_gobj) != FALSE)
+            {
+                func_ovl3_8016800C(item_gobj);
+                return;
+            }
+        }
+    }
+    if (ip->hit_shield_damage != 0)
+    {
+        if ((ip->item_hit[0].is_hit_airborne) && (ip->ground_or_air == air))
+        {
+            if (ip->shield_collide_angle < 2.3561945F)
+            {
+                ip->shield_collide_angle -= HALF_PI32;
+
+                if (ip->shield_collide_angle < 0.0F)
+                {
+                    ip->shield_collide_angle = 0.0F;
+                }
+                if (ip->cb_shield_deflect != NULL)
+                {
+                    if (ip->cb_shield_deflect(item_gobj) != FALSE)
+                    {
+                        func_ovl3_8016800C(item_gobj);
+                        return;
+                    }
+                }
+                goto next_check;
+            }
+        }
+        if (ip->cb_shield_block != NULL)
+        {
+            if (ip->cb_shield_block(item_gobj) != FALSE)
+            {
+                func_ovl3_8016800C(item_gobj);
+                return;
+            }
+        }
+    }
+next_check:
+    if (ip->hit_attack_damage != 0)
+    {
+        if (ip->cb_attack != NULL)
+        {
+            if (ip->cb_attack(item_gobj) != FALSE)
+            {
+                func_ovl3_8016800C(item_gobj);
+                return;
+            }
+        }
+    }
+
+    if (ip->reflect_gobj != NULL)
+    {
+        Fighter_Struct *fp;
+
+        ip->owner_gobj = ip->reflect_gobj;
+
+        fp = FighterGetStruct(ip->reflect_gobj);
+
+        ip->team = fp->team;
+        ip->port_index = fp->player_id;
+        ip->display_state = fp->display_state;
+        ip->unk_0x14 = fp->unk_0x18;
+        ip->unk_0x12 = fp->offset_hit_type;
+        ip->item_hit[0].flags_0x4C_halfword = ip->unk_0x258 & 0xFFFF;
+        ip->item_hit[0].flags_0x4E = ip->unk_0x25A;
+
+        if (ip->cb_reflect != NULL)
+        {
+
+            if (ip->cb_reflect(item_gobj) != FALSE)
+            {
+                func_ovl3_8016800C(item_gobj);
+                return;
+            }
+        }
+        if (!(ip->is_static_damage))
+        {
+            ip->item_hit[0].damage = (ip->item_hit[0].damage * ITEM_REFLECT_MUL_DEFAULT) + ITEM_REFLECT_ADD_DEFAULT;
+
+            if (ip->item_hit[0].damage > ITEM_REFLECT_MAX_DEFAULT)
+            {
+                ip->item_hit[0].damage = ITEM_REFLECT_MAX_DEFAULT;
+            }
+        }
+    }
+
+    if (ip->absorb_gobj != NULL)
+    {
+        if (ip->cb_absorb != NULL)
+        {
+
+            if (ip->cb_absorb(item_gobj) != FALSE)
+            {
+                func_ovl3_8016800C(item_gobj);
+                return;
+            }
+        }
+    }
+    ip->hit_victim_damage = 0;
+    ip->unk_0x238 = 0;
+    ip->hit_attack_damage = 0;
+    ip->hit_shield_damage = 0;
+    ip->reflect_gobj = NULL;
 }

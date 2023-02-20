@@ -5,14 +5,23 @@
 #include <ssb_types.h>
 #include <macros.h>
 
+typedef enum GObjLinkIndex
+{
+    GObjLinkIndex_Fighter = 0x3,
+    GObjLinkIndex_Item = 0x5, 
+
+} GObjLinkIndex;
+
 typedef f32 mtx[3][4];
 
-typedef struct _GObj
+typedef struct GObj GObj;
+
+struct GObj
 {
     // Info here acquired from halofactory of the Smash Remix team
     s32 unk_info; // arbitrary ID signifying related objects? e.g. 0x000003F8
-    struct GObj *group_gobj_next;
-    struct GObj *group_gobj_prev;
+    GObj *group_gobj_next;
+    GObj *group_gobj_prev;
     u8 group;
     u8 room;
     u8 asynchronous_timer; // For subaction events?
@@ -21,10 +30,10 @@ typedef struct _GObj
     void *call_unk;
     s32 unk_0x18;
     s32 unk_0x1C;
-    struct GObj *room_gobj_next;
-    struct GObj *room_gobj_prev;
+    GObj *room_gobj_next;
+    GObj *room_gobj_prev;
     s32 room_order; // Might be group? Assuming room based on order here
-    void (*renderer)(struct GObj *gobj);
+    void (*renderer)(GObj *gobj);
     s32 unk_0x30;
     s32 unk_0x34;
     s32 unk_0x38; // 0xFFFFFFFF, textures or series of flags?
@@ -34,7 +43,9 @@ typedef struct _GObj
     u8 filler_0x7C[0x84 - 0x7C];
     void *user_data;
 
-} GObj;
+};
+
+extern GObj *gOMObjCommonLinks[];
 
 typedef struct _Image // Image footer struct
 {
@@ -42,13 +53,15 @@ typedef struct _Image // Image footer struct
     s16 index;
 } Image;
 
-typedef struct _JObj
+typedef struct JObj JObj;
+
+struct JObj
 {
     u8 filler_0x0[0x8];
-    struct JObj *unk_0x8;
-    struct JObj *unk_0xC;
-    struct JObj *next;
-    struct JObj *prev;
+    JObj *unk_0x8;
+    JObj *unk_0xC;
+    JObj *next;
+    JObj *prev;
     mtx *mtx_translate; // 0x18
     Vec3f translate; // 0x1C - 0x24
     mtx *mtx_rotate; // 0x28
@@ -65,6 +78,6 @@ typedef struct _JObj
     f32 unk_0x7C;
     Image *image;
 
-} JObj;
+};
 
 #endif

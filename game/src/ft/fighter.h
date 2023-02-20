@@ -7,6 +7,7 @@
 #include <game/src/sys/obj.h>
 #include <game/src/mp/mpcoll.h>
 #include <game/src/ft/ftstatusvars.h>
+#include <game/src/gm/gmmisc.h>
 
 #define LEFT -1
 #define CENTER 0

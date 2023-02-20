@@ -5,12 +5,11 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftlink",
     "\\game\\src\\gm",
-    "\\game\\src\\gr",
     "\\game\\src\\it",
-    "\\game\\src\\mp"
+    "\\game\\src\\mp",
+    "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftdonkey",
+  "SelectedNode": "\\game\\src\\it\\item.c",
   "PreviewInSolutionExplorer": false
 }
