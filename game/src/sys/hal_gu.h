@@ -7,6 +7,13 @@
 #include <PR/mbi.h>
 #include <PR/ultratypes.h>
 
+typedef union MtxStore
+{
+    Mtx *gbi;
+    Mtx4f *f;
+
+} MtxStore;
+
 #define RAD_TO_IDX(x)      ((s32)((x) * ((f32)ARRAY_COUNT(gSinTable) / M_PI_F)))
 #define SIN_TABLE_IDX_MASK (ARRAY_COUNT(gSinTable) - 1)
 

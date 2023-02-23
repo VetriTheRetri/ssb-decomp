@@ -54,7 +54,7 @@ typedef struct _Coll_Data
     u16 wall_flag; // "Flag is enabled if moving into a wall"
     u16 unk_0x60;
     u16 unk_0x62;
-    u32 unk_0x64;
+    bool32 unk_0x64;
     Vec3f ground_to_air_pos_last;
 
     s32 ground_line_id;

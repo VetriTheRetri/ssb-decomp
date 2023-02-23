@@ -111,7 +111,9 @@ typedef struct ItemHitUnk
     Vec3f pos;
     Vec3f pos_prev;
     s32 unk_0x18;
-    u8 filler_0x1C[0x5C - 0x1C];
+    u8 filler_0x1C[0x54 - 0x1C];
+    f32 unk_0x54;
+    f32 unk_0x58;
     f32 unk_0x5C;
 
 } ItemHitUnk;
@@ -248,10 +250,10 @@ typedef struct _Item_Struct
     u8 unk_0x12;
     s32 unk_0x14;
     s32 lr;                     // Facing direction of item; -1 = LEFT, 0 = CENTER, 1 = RIGHT
-    f32 percent_damage; 
 
     struct
     {
+        f32 ground_vel;
         Vec3f vel;
 
     } phys_info;

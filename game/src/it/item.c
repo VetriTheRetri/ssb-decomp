@@ -14,10 +14,8 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
     GObj *item_gobj;
     f32 unk_float;
     Item_Attributes *item_attrs;
-    Item_Struct *ip;
-    Item_Struct *owner_ip;
-    Fighter_Struct *fp_coll;
-    Fighter_Struct *fp;
+    Item_Struct *ip, *owner_ip;
+    Fighter_Struct *fp_coll, *fp;
     u32 unused[5];
     Monster_Struct *pm;
     Item_Struct *ip_coll;
@@ -124,7 +122,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = 0.0F;
 
-    ip->percent_damage = 0.0F;
+    ip->phys_info.ground_vel = 0.0F;
 
     ip->item_hit[0].damage = item_attrs->damage;
 

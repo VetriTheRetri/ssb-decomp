@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
+    "\\game\\libultra",
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\gm",
+    "\\game\\src\\ft\\chara\\ftdonkey",
+    "\\game\\src\\ft\\chara\\ftness",
     "\\game\\src\\it",
-    "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\item.c",
+  "SelectedNode": "\\game\\src\\it\\item_render.c",
   "PreviewInSolutionExplorer": false
 }

@@ -306,7 +306,7 @@ void func_ovl3_801543E4(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        func_ovl3_801438F0(fighter_gobj, 0.6F, FALSE, TRUE, TRUE, 0.17F, FALSE);
+        func_ovl3_801438F0(fighter_gobj, FTNESS_PK_THUNDER_FALLSPECIAL_DRIFT, FALSE, TRUE, TRUE, FTNESS_PK_THUNDER_LANDING_LAG, FALSE);
     }
 }
 

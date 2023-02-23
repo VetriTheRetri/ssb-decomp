@@ -21,6 +21,7 @@
 #define FTNESS_PK_THUNDER_END_DELAY 30
 #define FTNESS_PK_THUNDER_GRAVITY_DELAY 25
 #define FTNESS_PK_THUNDER_LANDING_LAG 0.17F // Divides landing animation length by this value
+#define FTNESS_PK_THUNDER_FALLSPECIAL_DRIFT 0.6F
 #define FTNESS_PK_JIBAKU_HALT_ANGLE 2.7052603F // Maximum angle of stage collision that doesn't cancel PK Thunder Blast?
 #define FTNESS_PK_JIBAKU_DELAY 30
 #define FTNESS_PK_JIBAKU_ANIM_LENGTH 28

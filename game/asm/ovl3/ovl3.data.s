@@ -1586,10 +1586,10 @@ glabel D_ovl3_80188DEC
 glabel D_ovl3_80188E00
   .incbin "ovl3.raw.bin", 0x57300, 0x10
 
-glabel D_ovl3_80188E10
+glabel Item_PKThunder_PrimColor
   .incbin "ovl3.raw.bin", 0x57310, 0xC
 
-glabel D_ovl3_80188E1C
+glabel Item_PKThunder_EnvColor
   .incbin "ovl3.raw.bin", 0x5731C, 0x14
 
 glabel D_ovl3_80188E30

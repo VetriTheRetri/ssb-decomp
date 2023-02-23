@@ -5,6 +5,8 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+#define ITPKTHUNDER_TRAIL_COUNT 4
+
 typedef struct Thunder_ItemVars // Pikachu's Thunder
 {
     s32 thunder_state;
@@ -23,7 +25,7 @@ typedef struct _PK_Thunder_ItemVars
 typedef struct _PK_Thunder_Trail_ItemVars
 {
     s32 x0;
-    s32 x4;
+    s32 trail_index; // Also key of RGB struct to use to set color of PK Thunder trails?
     GObj *x8; // Original owner?
     GObj *xC[5];
 

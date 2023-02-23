@@ -80,4 +80,7 @@ struct JObj
 
 };
 
+#define JObjGetStruct(gobj) \
+((JObj*)gobj->obj) \
+
 #endif

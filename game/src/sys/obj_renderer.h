@@ -6,11 +6,20 @@
 #include <PR/mbi.h>
 #include <PR/ultratypes.h>
 
+#define hal_matrix_store_gbi(mtx_store, mtx_heap) \
+(mtx_store.gbi = mtx_heap.ptr, mtx_heap.ptr = (Mtx*)mtx_heap.ptr + 1) \
+
 // should be a concrete pointer type
 struct MtxProcTemp {
     /* 0x00 */ void *unk00;
     /* 0x04 */ void *unk04;
 };
+
+typedef struct GfxColor
+{
+    u8 r, g, b;
+
+} GfxColor;
 
 // gbi Mtx * ? pointer to some sort of matrix
 extern u32 *D_80046FA0;

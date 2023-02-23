@@ -608,9 +608,6 @@ typedef struct _Fighter_Struct
 #define FighterGetStruct(fighter_gobj) \
 ((Fighter_Struct*)fighter_gobj->user_data) \
 
-#define JObjGetStruct(gobj) \
-((JObj*)gobj->obj) \
-
 #define AttributesGetStruct(fp) \
 ((ftCommonAttributes*)fp->attributes) \
 
