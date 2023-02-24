@@ -77,7 +77,7 @@ typedef struct ftCommonAttributes
     f32 cam_offset_y;
     f32 cam_zoom;
     f32 cam_zoom_default;
-    ObjectColl coll_box;
+    ObjectColl object_coll;
     Vec2f cliff_catch; // Ledge grab box
     s16 dead_sfx[2]; // KO voices
     s16 star_sfx;  // Star-KO voice

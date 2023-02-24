@@ -51,6 +51,9 @@ typedef struct _Image // Image footer struct
 {
     u8 filler[0x80];
     s16 index;
+    f32 unk_0x84;
+    f32 anim_frame; // Unconfirmed
+
 } Image;
 
 typedef struct JObj JObj;
