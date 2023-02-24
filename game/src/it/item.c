@@ -41,7 +41,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
     ip->item_gobj = item_gobj;
     ip->it_kind = item_status_desc->it_kind;
 
-    switch (flags & ITEM_MASK_SPAWN)
+    switch (flags & ITEM_MASK_SPAWN_ALL)
     {
     case It_Spawn_Fighter: // Items spawned by fighters
         fp = FighterGetStruct(spawn_gobj);
@@ -154,7 +154,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     ip->item_hit[0].flags_0x48_b3 = FALSE;
 
-    ip->item_hit[0].is_hit_airborne = it_hit_desc->flags_0x2F_b2;
+    ip->item_hit[0].can_deflect = it_hit_desc->flags_0x2F_b2;
     ip->item_hit[0].flags_0x48_b5 = it_hit_desc->flags_0x2F_b3;
     ip->item_hit[0].flags_0x48_b6 = it_hit_desc->flags_0x2F_b4;
 
@@ -259,7 +259,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     if (flags & ITEM_FLAG_PROJECT)
     {
-        switch (flags & ITEM_MASK_SPAWN)
+        switch (flags & ITEM_MASK_SPAWN_ALL)
         {
         default:
         case It_Spawn_Default:
@@ -740,7 +740,7 @@ void func_ovl3_80166BE4(GObj *item_gobj)
     }
     if (ip->hit_shield_damage != 0)
     {
-        if ((ip->item_hit[0].is_hit_airborne) && (ip->ground_or_air == air))
+        if ((ip->item_hit[0].can_deflect) && (ip->ground_or_air == air))
         {
             if (ip->shield_collide_angle < ITEM_DEFLECT_ANGLE_DEFAULT)
             {

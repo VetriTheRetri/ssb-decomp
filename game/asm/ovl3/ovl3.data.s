@@ -1689,7 +1689,7 @@ glabel jtbl_ovl3_80189044
   /* 57560 103AA0 80189060 */  .4byte jtgt_ovl3_80168D24
   .incbin "ovl3.raw.bin", 0x57564, 0xC
 
-glabel D_ovl3_80189070
+glabel Item_SamusBomb_Desc
   .incbin "ovl3.raw.bin", 0x57570, 0x8
   /* 57578 103AB8 80189078 */  .4byte D_ovl2_80130F30
   .incbin "ovl3.raw.bin", 0x5757C, 0x8

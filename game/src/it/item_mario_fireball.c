@@ -86,7 +86,7 @@ GObj *func_ovl3_801687A0(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create it
     Item_Fireball_Desc.p_item = Item_Fireball_Attributes[index].p_item;
     Item_Fireball_Desc.offset_it_hit = Item_Fireball_Attributes[index].offset_it_hit;
 
-    item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_Fireball_Desc, pos, ITEM_FLAG_PROJECT);
+    item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_Fireball_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
 
     if (item_gobj == NULL)
     {

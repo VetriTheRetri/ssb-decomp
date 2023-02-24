@@ -121,7 +121,7 @@ extern ItemStatusDesc Item_ChargeShot_Desc;
 GObj *func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool32 is_release) // Create item
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_ChargeShot_Desc, pos, ((is_release != FALSE) ? ITEM_FLAG_PROJECT : 0));
+    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_ChargeShot_Desc, pos, ((is_release != FALSE) ? (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER) : ITEM_MASK_SPAWN_FIGHTER));
     Item_Struct *ip;
     f32 scale;
 

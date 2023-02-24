@@ -16,7 +16,12 @@
 
 #define ITEM_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
 
-#define ITEM_MASK_SPAWN 0xF                     // Mask all GObj classes that can spawn items?
+#define ITEM_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
+#define ITEM_MASK_SPAWN_NONE 1                  // Item spawned independently 
+#define ITEM_MASK_SPAWN_ITEM 2                  // Item spawned by another item
+#define ITEM_MASK_SPAWN_MONSTER 3               // Item spawned by Pokémon / misc entity class(es?)
+
+#define ITEM_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
 
 // Universal item hitbox attributes
 
@@ -163,7 +168,7 @@ typedef struct _Item_Hit
             u32 flags_0x48_b1 : 1;
             u32 flags_0x48_b2 : 1;
             u32 flags_0x48_b3 : 1;
-            u32 is_hit_airborne : 1; // Actually determines whether item's shield deflect routine can run?
+            u32 can_deflect : 1; // Actually determines whether item's shield deflect routine can run?
             u32 flags_0x48_b5 : 1;
             u32 flags_0x48_b6 : 1;
             u32 flags_0x48_b7 : 1;
@@ -361,6 +366,7 @@ typedef struct _Item_Struct
     {
         Fireball_ItemVars fireball;
         Charge_Shot_ItemVars charge_shot;
+        SamusBomb_ItemVars samus_bomb;
         Spin_Attack_ItemVars spin_attack; // Link's Up Special
         Egg_Throw_ItemVars egg_throw;
         Thunder_ItemVars thunder;

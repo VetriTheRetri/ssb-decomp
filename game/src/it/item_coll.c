@@ -41,7 +41,7 @@ bool32 func_ovl3_80167880(Coll_Data *coll_data, s32 arg1, s32 arg2)
     return is_collide_ground;
 }
 
-void func_ovl3_8016796C(GObj *item_gobj)
+bool32 func_ovl3_8016796C(GObj *item_gobj)
 {
     func_ovl2_800DA034(&ItemGetStruct(item_gobj)->coll_data, func_ovl3_80167880, item_gobj, FALSE);
 }
@@ -75,7 +75,7 @@ bool32 func_ovl3_801679A0(Coll_Data *coll_data, s32 arg1, s32 arg2)
     return FALSE;
 }
 
-void func_ovl3_80167A58(GObj *item_gobj)
+bool32 func_ovl3_80167A58(GObj *item_gobj)
 {
     func_ovl2_800DA034(&ItemGetStruct(item_gobj)->coll_data, func_ovl3_801679A0, item_gobj, 0);
 }
@@ -114,7 +114,7 @@ bool32 func_ovl3_80167A8C(Coll_Data *coll_data, s32 arg1, s32 arg2)
     return FALSE;
 }
 
-void func_ovl3_80167B58(GObj *item_gobj)
+bool32 func_ovl3_80167B58(GObj *item_gobj)
 {
     func_ovl2_800DA034(&ItemGetStruct(item_gobj)->coll_data, func_ovl3_80167A8C, item_gobj, 0);
 }

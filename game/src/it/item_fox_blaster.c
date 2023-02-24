@@ -65,7 +65,7 @@ extern ItemStatusDesc Item_Blaster_Desc;
 GObj* func_ovl3_80168A74(GObj *fighter_gobj, Vec3f *pos)
 {
     Item_Struct *ip;
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_Blaster_Desc, pos, ITEM_FLAG_PROJECT);
+    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_Blaster_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
 
     if (item_gobj == NULL)
     {

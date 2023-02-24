@@ -10,6 +10,22 @@
 #define ITCHARGESHOT_GFX_SIZE_DIV 30.0F
 #define ITCHARGESHOT_ROTATE_SPEED 0.31415927F
 
+#define ITSAMUSBOMB_EXPLODE_LIFETIME 6
+#define ITSAMUSBOMB_EXPLODE_RADIUS 180.0F
+
+#define ITSAMUSBOMB_WAIT_LIFETIME 100                           // Countdown of Bomb until it explodes
+#define ITSAMUSBOMB_WAIT_VEL_Y 10.0F                            // Initial velocity of Bomb
+#define ITSAMUSBOMB_WAIT_ROTATE_SPEED_AIR 0.34906587F           // Bomb spins at this rate while airborne
+#define ITSAMUSBOMB_WAIT_ROTATE_SPEED_GROUND 0.17453294F        // Bomb spins at this rate while grounded
+#define ITSAMUSBOMB_WAIT_COLLIDE_MOD_VEL 0.9F                   // Modify velocity when colliding with an obstruction?
+#define ITSAMUSBOMB_WAIT_GRAVITY 1.0F                           // Bomb's gravity
+#define ITSAMUSBOMB_WAIT_T_VEL 50.0F                            // Bomb's terminal velocity
+#define ITSAMUSBOMB_WAIT_BLINK_SLOW 40                          // The light in the center of the bomb blinks at its "slow" rate while lifetime is greater than this value
+#define ITSAMUSBOMB_WAIT_BLINK_MID 20                           // The light in the center of the bomb blinks at its "mid" rate while lifetime is greater than this value
+#define ITSAMUSBOMB_WAIT_BLINK_TIMER_SLOW 8                     // Switch out Bomb's texture animation frame when this timer reaches 0
+#define ITSAMUSBOMB_WAIT_BLINK_TIMER_MID 5                      // Switch out Bomb's texture animation frame when this timer reaches 0
+#define ITSAMUSBOMB_WAIT_BLINK_TIMER_FAST 3                     // Switch out Bomb's texture animation frame when this timer reaches 0
+
 #define ITPKTHUNDER_TRAIL_COUNT 4
 
 typedef struct ItemFireballAttributes
@@ -42,6 +58,12 @@ typedef struct ItemChargeShotAttributes
     s32 shield_damage;
 
 } ItemChargeShotAttributes;
+
+typedef struct SamusBomb_ItemVars
+{
+    s32 bomb_blink_timer;
+
+} SamusBomb_ItemVars;
 
 typedef struct Fireball_ItemVars
 {
