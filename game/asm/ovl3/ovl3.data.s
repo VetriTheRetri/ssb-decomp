@@ -1638,7 +1638,7 @@ glabel jtbl_ovl3_80188EA4
   /* 573C0 103900 80188EC0 */  .4byte jtgt_ovl3_801686C0
   .incbin "ovl3.raw.bin", 0x573C4, 0xC
 
-glabel D_ovl3_80188ED0
+glabel Item_Blaster_Desc
   .incbin "ovl3.raw.bin", 0x573D0, 0x8
   /* 573D8 103918 80188ED8 */  .4byte D_ovl2_80130E9C
   .incbin "ovl3.raw.bin", 0x573DC, 0x8
@@ -1654,7 +1654,7 @@ glabel jtbl_ovl3_80188EE4
   /* 57400 103940 80188F00 */  .4byte jtgt_ovl3_80168964
   .incbin "ovl3.raw.bin", 0x57404, 0xC
 
-glabel D_ovl3_80188F10
+glabel Item_ChargeShot_Attributes
   /* 57410 103950 80188F10 */
   .4byte 0x43160000 # .float 150.0
   /* 57414 103954 80188F14 */
@@ -1673,7 +1673,7 @@ glabel D_ovl3_80188F10
   .balign 4
   .incbin "ovl3.raw.bin", 0x57510, 0x20
 
-glabel D_ovl3_80189030
+glabel Item_ChargeShot_Desc
   .incbin "ovl3.raw.bin", 0x57530, 0x8
   /* 57538 103A78 80189038 */  .4byte D_ovl2_80130F3C
   .incbin "ovl3.raw.bin", 0x5753C, 0x8

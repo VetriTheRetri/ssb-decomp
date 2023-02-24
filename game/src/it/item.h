@@ -96,7 +96,7 @@ typedef struct ItemHitDesc // Moreso hitbox stuff
     u32 hitbox_count : 2U;
     u32 clang : 1U;
     u32 sfx : 10U;
-    u32 flags_0x2E_b567 : 3U;
+    u32 shield_damage : 3U;
     u32 flags_0x2F_b0 : 1U;
     u32 flags_0x2F_b1 : 1U;
     u32 flags_0x2F_b2 : 1U;
@@ -152,7 +152,7 @@ typedef struct _Item_Hit
     u32 knockback_weight; // Weight-Dependent Set Knockback
     u32 knockback_base; // Base knockback
     u32 unk_0x3C;
-    s32 unk_0x40;
+    s32 shield_damage;
     u8 hit_status; // "Tangibility flag? 0x07"
     u16 hit_sfx;
     union
@@ -215,7 +215,7 @@ typedef struct _Monster_Hit
     u16 hit_status; // "Tangibility flag? 0x07"
     u16 hit_sfx;
     u32 unk_0x3C;
-    u32 unk_0x40;
+    s32 unk_0x40;
     u16 flags_0x44 : 7; // Reflectability flag
 
     u16 flags_0x48_b123456 : 6;

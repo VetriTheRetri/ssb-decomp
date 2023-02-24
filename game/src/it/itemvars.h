@@ -5,6 +5,11 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+#define ITBLASTER_VEL_X 160.0F
+
+#define ITCHARGESHOT_GFX_SIZE_DIV 30.0F
+#define ITCHARGESHOT_ROTATE_SPEED 0.31415927F
+
 #define ITPKTHUNDER_TRAIL_COUNT 4
 
 typedef struct ItemFireballAttributes
@@ -23,6 +28,20 @@ typedef struct ItemFireballAttributes
     f32 frame_begin;    // Starting frame of texture animation?
 
 } ItemFireballAttributes;
+
+typedef struct ItemChargeShotAttributes
+{
+    f32 gfx_size;
+    f32 vel_x;
+    s32 damage;
+    s32 hit_size;
+    s32 coll_size;
+    u32 shoot_sfx_id;
+    u32 charge_sfx_id;
+    u32 hit_sfx_id;
+    s32 shield_damage;
+
+} ItemChargeShotAttributes;
 
 typedef struct Fireball_ItemVars
 {
@@ -56,10 +75,10 @@ typedef struct _PK_Thunder_Trail_ItemVars
 
 typedef struct Charge_Shot_ItemVars
 {
-    s32 x0;
-    s32 x4;
+    bool32 is_release;
+    bool32 is_full_charge;
     s32 charge_size;
-    s32 xC;
+    GObj *owner_gobj;
 
 } Charge_Shot_ItemVars;
 

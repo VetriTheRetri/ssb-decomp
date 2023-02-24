@@ -200,12 +200,12 @@ void func_ovl3_8015D7AC(GObj *fighter_gobj)
 
             JObjGetStruct(fp->status_vars.samus.specialn.charge_gobj)->translate = pos;
 
-            ip->item_vars.charge_shot.x4 = 1;
+            ip->item_vars.charge_shot.is_full_charge = TRUE;
             ip->item_vars.charge_shot.charge_size = (s32)fp->fighter_vars.samus.charge_level;
 
             func_ovl2_800DF09C(fp->status_vars.samus.specialn.charge_gobj, fp->coll_data.p_pos, &fp->coll_data);
 
-            ip->item_vars.charge_shot.xC = 0;
+            ip->item_vars.charge_shot.owner_gobj = NULL;
             fp->status_vars.samus.specialn.charge_gobj = NULL;
         }
         else func_ovl3_80168DDC(fighter_gobj, &pos, fp->fighter_vars.samus.charge_level, 1);

@@ -148,7 +148,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     ip->item_hit[0].hit_sfx = it_hit_desc->sfx;
 
-    ip->item_hit[0].unk_0x40 = it_hit_desc->flags_0x2E_b567;
+    ip->item_hit[0].shield_damage = it_hit_desc->shield_damage;
     ip->item_hit[0].flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
     ip->item_hit[0].flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
 
@@ -600,18 +600,18 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
     s32 this_hit_damage;
     s32 victim_hit_damage;
     Vec3f sp2C;
-    s32 var_a0;
-    s32 var_v1;
+    s32 victim_shield_damage;
+    s32 this_shield_damage;
 
     this_hit_damage = func_ovl3_80168128(this_ip);
     victim_hit_damage = func_ovl3_80168128(victim_ip);
 
     func_ovl2_800F0C94(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
 
-    var_a0 = victim_hit->unk_0x40;
-    var_v1 = this_hit->unk_0x40;
+    victim_shield_damage = victim_hit->shield_damage;
+    this_shield_damage = this_hit->shield_damage;
 
-    if (var_v1 >= victim_hit->unk_0x40)
+    if (this_shield_damage >= victim_hit->shield_damage)
     {
         func_ovl3_8016679C(victim_ip, victim_hit, this_gobj, 3, 0);
         if (victim_ip->hit_attack_damage < victim_hit_damage)
@@ -619,10 +619,10 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
             victim_ip->hit_attack_damage = victim_hit_damage;
         }
         func_ovl2_80100BF0(&sp2C, victim_hit_damage);
-        var_v1 = this_hit->unk_0x40;
-        var_a0 = victim_hit->unk_0x40;
+        this_shield_damage = this_hit->shield_damage;
+        victim_shield_damage = victim_hit->shield_damage;
     }
-    if (var_a0 >= var_v1)
+    if (victim_shield_damage >= this_shield_damage)
     {
         func_ovl3_8016679C(this_ip, this_hit, victim_gobj, 3, 0);
         if (this_ip->hit_attack_damage < this_hit_damage)

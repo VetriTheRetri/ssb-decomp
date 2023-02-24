@@ -4,7 +4,7 @@
 extern const ItemFireballAttributes Item_Fireball_Attributes[2];
 extern ItemStatusDesc Item_Fireball_Desc;
 
-bool32 jtgt_ovl3_80168540(GObj *item_gobj)
+bool32 jtgt_ovl3_80168540(GObj *item_gobj) // Animation
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
     JObj *joint;
@@ -24,7 +24,7 @@ bool32 jtgt_ovl3_80168540(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801685F0(GObj *item_gobj)
+bool32 jtgt_ovl3_801685F0(GObj *item_gobj) // Collision
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
     Vec3f pos;
@@ -75,7 +75,7 @@ bool32 jtgt_ovl3_80168748(GObj *item_gobj) // Hit reflector
     return FALSE;
 }
 
-GObj *func_ovl3_801687A0(GObj *fighter_gobj, Vec3f *pos, s32 index)
+GObj *func_ovl3_801687A0(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create item
 {
 
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
