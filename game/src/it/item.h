@@ -8,14 +8,15 @@
 #include <game/src/mp/mpcoll.h>
 #include <game/src/it/itemvars.h>
 #include <game/src/gm/gmmisc.h>
+#include <game/src/gm/gmsound.h>
 
 #define ITEM_TEAM_DEFAULT 4U
 #define ITEM_PORT_DEFAULT 4U
-#define ITEM_UNK_DEFAULT 9U // CPU level?
+#define ITEM_UNK_DEFAULT 9U                     // CPU level?
 
-#define ITEM_FLAG_PROJECT 0x80000000 // Perform initial collision check when spawning item?
+#define ITEM_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
 
-#define ITEM_MASK_SPAWN 0xF // Mask all GObj classes that can spawn items?
+#define ITEM_MASK_SPAWN 0xF                     // Mask all GObj classes that can spawn items?
 
 // Universal item hitbox attributes
 
@@ -25,6 +26,8 @@
 #define ITEM_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
 #define ITEM_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying item's hitbox damage
 
+#define ITEM_STALE_ADD_DEFAULT 0.999F           // Bonus 1% added after multiplying hitbox damage with staling modifier
+
 #define ITEM_DEFLECT_ANGLE_DEFAULT 2.3561945F   // Determines whether item bounces off a shield
 
 typedef enum It_Spawn
@@ -32,7 +35,7 @@ typedef enum It_Spawn
     It_Spawn_Fighter,
     It_Spawn_Default,
     It_Spawn_Item,
-    It_Spawn_Monster // Spawned by Pokémon / miscellaneous entity class?
+    It_Spawn_Monster                            // Spawned by Pokémon / miscellaneous entity class?
 
 } It_Spawn;
 
@@ -55,8 +58,8 @@ typedef struct ItemStatusDesc
 {
     u8 unk_0x0;
     s32 it_kind;
-    void *unk_0x8;
-    int unk_0xC;
+    void *p_item; // Pointer to various item data
+    int offset_it_hit; // Offset of item hitbox info
     u8 unk_0x10;
     u8 unk_0x11;
     u8 unk_0x12;
@@ -72,7 +75,7 @@ typedef struct ItemStatusDesc
 
 } ItemStatusDesc;
 
-typedef struct Item_Attributes
+typedef struct ItemHitDesc // Moreso hitbox stuff
 {
     void *unk_0x0;
     void *unk_0x4;
@@ -104,7 +107,7 @@ typedef struct Item_Attributes
     u32 flags_0x2F_b7 : 1U;
     u32 knockback_base : 10U;
 
-} Item_Attributes;
+} ItemHitDesc;
 
 typedef struct ItemHitUnk
 {
@@ -200,7 +203,7 @@ typedef struct _Item_Hit
 typedef struct _Monster_Hit
 {
     s32 update_state; // 0 = disabled, 1 = new hitbox, 2 and 3 = interpolate/copy current position to previous
-    u32 damage; // 0x4
+    s32 damage; // 0x4
     f32 stale;  // Multiplies damage
     u32 element; // 0xC // Placed AFTER offset?
     Vec3f offset[2]; // 0x10 - 0x18    
@@ -253,7 +256,7 @@ typedef struct _Item_Struct
 
     struct
     {
-        f32 ground_vel;
+        f32 vel_ground;
         Vec3f vel;
 
     } phys_info;
@@ -267,9 +270,7 @@ typedef struct _Item_Struct
     s32 hit_attack_damage;      // Set to item hitbox's final damage output when hitting another attack
     s32 hit_shield_damage;      // Set to item hitbox's final damage output when hitting a shield
     f32 shield_collide_angle;   // If this is less than 135 degrees, the item gets deflected
-    f32 unk_0x248;
-    f32 unk_0x24C;
-    f32 unk_0x250;
+    Vec3f shield_collide_vec;   //
     GObj *reflect_gobj;         // GObj that reflected this item
     u16 unk_0x258;              // Attack flags
     u16 unk_0x25A;              // Attack flags
@@ -344,8 +345,8 @@ typedef struct _Item_Struct
     u8 x26F_flag_b6 : 1;
     u8 x26F_flag_b7 : 1;
 
-    s32 unk_0x270;
-    s16 unk_0x274;
+    gmSoundEffect *p_sfx;                   // Pointer to item's current ongoing sound effect
+    u16 sfx_id;                             // ID of sound effect this item is supposed to play? (This gets checked against gmSoundEffect's ID when despawning)
 
     bool32 (*cb_anim)(GObj*);               // Main animation routine
     bool32 (*cb_coll)(GObj*);               // Main collision routine
@@ -358,6 +359,7 @@ typedef struct _Item_Struct
     bool32 (*cb_destroy)(GObj*);            // Item hits blastzones (only run on this condition?)
     union
     {
+        Fireball_ItemVars fireball;
         Charge_Shot_ItemVars charge_shot;
         Spin_Attack_ItemVars spin_attack; // Link's Up Special
         Egg_Throw_ItemVars egg_throw;

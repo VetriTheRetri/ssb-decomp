@@ -7,6 +7,29 @@
 
 #define ITPKTHUNDER_TRAIL_COUNT 4
 
+typedef struct ItemFireballAttributes
+{
+    s32 lifetime;
+    f32 fall_speed_max;
+    f32 collide_damage; // Item loses this much health when colliding with an obstruction
+    f32 gravity;
+    f32 collide_vel;
+    f32 rotate_speed;
+    f32 vel_ground;
+    f32 vel_air;
+    f32 vel_mul;
+    void *p_item;
+    int offset_it_hit;
+    f32 frame_begin;    // Starting frame of texture animation?
+
+} ItemFireballAttributes;
+
+typedef struct Fireball_ItemVars
+{
+    s32 index; // Index of Fireball description to use; 0 = Mario, 1 = Luigi
+
+} Fireball_ItemVars;
+
 typedef struct Thunder_ItemVars // Pikachu's Thunder
 {
     s32 thunder_state;

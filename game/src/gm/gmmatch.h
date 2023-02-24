@@ -74,7 +74,7 @@ typedef struct gmMatchInfo
     u8 unk_0x1D;
     u8 unk_0x1E;
     u8 unk_0x1F;
-    gmPlayerBlock player_block[4]; // Holds data for each player
+    gmPlayerBlock player_block[GMMATCH_PLAYERS_MAX]; // Holds data for each player
 
 } gmMatchInfo;
 

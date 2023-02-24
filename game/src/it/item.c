@@ -7,13 +7,13 @@
 
 // Not the first function in this file
 
-GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spawn_pos, u32 flags)
+GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
     // Non-matching, can't force Vec3f pos into proper stack position without compromises :(
 
     GObj *item_gobj;
     f32 unk_float;
-    Item_Attributes *item_attrs;
+    ItemHitDesc *it_hit_desc;
     Item_Struct *ip, *owner_ip;
     Fighter_Struct *fp_coll, *fp;
     u32 unused[5];
@@ -36,14 +36,14 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         func_ovl3_80165588(ip);
         return NULL;
     }
-    item_attrs = *(int*)item_desc->unk_0x8 + (int)item_desc->unk_0xC;
+    it_hit_desc = *(int*)item_status_desc->p_item + (int)item_status_desc->offset_it_hit;
     item_gobj->user_data = ip;
     ip->item_gobj = item_gobj;
-    ip->it_kind = item_desc->it_kind;
+    ip->it_kind = item_status_desc->it_kind;
 
     switch (flags & ITEM_MASK_SPAWN)
     {
-    case 0: // Items spawned by fighters
+    case It_Spawn_Fighter: // Items spawned by fighters
         fp = FighterGetStruct(spawn_gobj);
         ip->owner_gobj = spawn_gobj;
         ip->team = fp->team;
@@ -61,7 +61,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         ip->item_hit[0].flags_0x4E = fp->unk_0x290;
         break;
 
-    case 2: // Items spawned by other items
+    case It_Spawn_Item: // Items spawned by other items
         owner_ip = ItemGetStruct(spawn_gobj);
         ip->owner_gobj = owner_ip->owner_gobj;
         ip->team = owner_ip->team;
@@ -79,7 +79,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         ip->item_hit[0].flags_0x4E = owner_ip->item_hit[0].flags_0x4E;
         break;
 
-    case 3: // Items spawned by Pokémon
+    case It_Spawn_Monster: // Items spawned by Pokémon
         pm = MonsterGetStruct(spawn_gobj);
         ip->owner_gobj = pm->owner_gobj;
         ip->team = pm->team;
@@ -98,7 +98,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
         break;
 
     default: // Items spawned independently 
-    case 1:
+    case It_Spawn_Default:
         ip->owner_gobj = NULL;
         ip->team = ITEM_TEAM_DEFAULT;
         ip->port_index = ITEM_PORT_DEFAULT;
@@ -122,46 +122,46 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = 0.0F;
 
-    ip->phys_info.ground_vel = 0.0F;
+    ip->phys_info.vel_ground = 0.0F;
 
-    ip->item_hit[0].damage = item_attrs->damage;
+    ip->item_hit[0].damage = it_hit_desc->damage;
 
-    ip->item_hit[0].element = item_attrs->element;
+    ip->item_hit[0].element = it_hit_desc->element;
 
-    ip->item_hit[0].offset[0].x = item_attrs->offset[0].x;
-    ip->item_hit[0].offset[0].y = item_attrs->offset[0].y;
-    ip->item_hit[0].offset[0].z = item_attrs->offset[0].z;
-    ip->item_hit[0].offset[1].x = item_attrs->offset[1].x;
-    ip->item_hit[0].offset[1].y = item_attrs->offset[1].y;
-    ip->item_hit[0].offset[1].z = item_attrs->offset[1].z;
+    ip->item_hit[0].offset[0].x = it_hit_desc->offset[0].x;
+    ip->item_hit[0].offset[0].y = it_hit_desc->offset[0].y;
+    ip->item_hit[0].offset[0].z = it_hit_desc->offset[0].z;
+    ip->item_hit[0].offset[1].x = it_hit_desc->offset[1].x;
+    ip->item_hit[0].offset[1].y = it_hit_desc->offset[1].y;
+    ip->item_hit[0].offset[1].z = it_hit_desc->offset[1].z;
 
-    ip->item_hit[0].size = item_attrs->size * 0.5F;
+    ip->item_hit[0].size = it_hit_desc->size * 0.5F;
 
-    ip->item_hit[0].angle = item_attrs->angle;
+    ip->item_hit[0].angle = it_hit_desc->angle;
 
-    ip->item_hit[0].knockback_scale = item_attrs->knockback_scale;
-    ip->item_hit[0].knockback_weight = item_attrs->knockback_weight;
-    ip->item_hit[0].knockback_base = item_attrs->knockback_base;
+    ip->item_hit[0].knockback_scale = it_hit_desc->knockback_scale;
+    ip->item_hit[0].knockback_weight = it_hit_desc->knockback_weight;
+    ip->item_hit[0].knockback_base = it_hit_desc->knockback_base;
 
-    ip->item_hit[0].flags_0x48_b0 = item_attrs->clang;
-    ip->item_hit[0].unk_0x3C = item_attrs->flags_0x2C;
+    ip->item_hit[0].flags_0x48_b0 = it_hit_desc->clang;
+    ip->item_hit[0].unk_0x3C = it_hit_desc->flags_0x2C;
 
-    ip->item_hit[0].hit_sfx = item_attrs->sfx;
+    ip->item_hit[0].hit_sfx = it_hit_desc->sfx;
 
-    ip->item_hit[0].unk_0x40 = item_attrs->flags_0x2E_b567;
-    ip->item_hit[0].flags_0x48_b1 = item_attrs->flags_0x2F_b0;
-    ip->item_hit[0].flags_0x48_b2 = item_attrs->flags_0x2F_b1;
+    ip->item_hit[0].unk_0x40 = it_hit_desc->flags_0x2E_b567;
+    ip->item_hit[0].flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
+    ip->item_hit[0].flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
 
     ip->item_hit[0].flags_0x48_b3 = FALSE;
 
-    ip->item_hit[0].is_hit_airborne = item_attrs->flags_0x2F_b2;
-    ip->item_hit[0].flags_0x48_b5 = item_attrs->flags_0x2F_b3;
-    ip->item_hit[0].flags_0x48_b6 = item_attrs->flags_0x2F_b4;
+    ip->item_hit[0].is_hit_airborne = it_hit_desc->flags_0x2F_b2;
+    ip->item_hit[0].flags_0x48_b5 = it_hit_desc->flags_0x2F_b3;
+    ip->item_hit[0].flags_0x48_b6 = it_hit_desc->flags_0x2F_b4;
 
     ip->item_hit[0].flags_0x48_b7 = FALSE;
 
-    ip->item_hit[0].flags_0x49_b0 = item_attrs->flags_0x2F_b5;
-    ip->item_hit[0].hitbox_count = item_attrs-.hitbox_count;
+    ip->item_hit[0].flags_0x49_b0 = it_hit_desc->flags_0x2F_b5;
+    ip->item_hit[0].hitbox_count = it_hit_desc-.hitbox_count;
 
     ip->item_hit[0].hit_status = 7;
 
@@ -182,45 +182,45 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
 
     ip->is_static_damage = FALSE;
 
-    ip->unk_0x270 = 0;
-    ip->unk_0x274 = 0;
+    ip->p_sfx = NULL;
+    ip->sfx_id = 0;
 
     ip->shield_collide_angle = 0.0F;
-    ip->unk_0x250 = 0.0F;
-    ip->unk_0x24C = 0.0F;
-    ip->unk_0x248 = 0.0F;
+    ip->shield_collide_vec.z = 0.0F;
+    ip->shield_collide_vec.y = 0.0F;
+    ip->shield_collide_vec.x = 0.0F;
 
-    if (item_desc->unk_0x0 & 1)
+    if (item_status_desc->unk_0x0 & 1)
     {
-        func_8000F590(item_gobj, item_attrs->unk_0x0, NULL, item_desc->unk_0x10, item_desc->unk_0x11, item_desc->unk_0x12);
+        func_8000F590(item_gobj, it_hit_desc->unk_0x0, NULL, item_status_desc->unk_0x10, item_status_desc->unk_0x11, item_status_desc->unk_0x12);
 
-        cb = (item_desc->unk_0x0 & 2) ? func_ovl3_8016763C : func_ovl3_80167618;
+        cb = (item_status_desc->unk_0x0 & 2) ? func_ovl3_8016763C : func_ovl3_80167618;
     }
     else
     {
-        func_ovl0_800C89BC(func_800092D0(item_gobj, item_attrs->unk_0x0), item_desc->unk_0x10, item_desc->unk_0x11, item_desc->unk_0x12);
+        func_ovl0_800C89BC(func_800092D0(item_gobj, it_hit_desc->unk_0x0), item_status_desc->unk_0x10, item_status_desc->unk_0x11, item_status_desc->unk_0x12);
 
-        cb = (item_desc->unk_0x0 & 2) ? func_ovl3_801675F4 : func_ovl3_801675D0;
+        cb = (item_status_desc->unk_0x0 & 2) ? func_ovl3_801675F4 : func_ovl3_801675D0;
     }
     func_80009DF4(item_gobj, cb, 0xE, 0x80000000, -1);
 
-    if (item_attrs->unk_0x4 != NULL)
+    if (it_hit_desc->unk_0x4 != NULL)
     {
-        func_8000F8F4(item_gobj, item_attrs->unk_0x4);
+        func_8000F8F4(item_gobj, it_hit_desc->unk_0x4);
     }
 
-    if ((item_attrs->unk_0x8 != NULL) || (item_attrs->unk_0xC != NULL))
+    if ((it_hit_desc->unk_0x8 != NULL) || (it_hit_desc->unk_0xC != NULL))
     {
 
-        func_8000BED8(item_gobj, item_attrs->unk_0x8, item_attrs->unk_0xC, 0.0F);
+        func_8000BED8(item_gobj, it_hit_desc->unk_0x8, it_hit_desc->unk_0xC, 0.0F);
     }
     ip->coll_data.p_pos = &JObjGetStruct(item_gobj)->translate;
     ip->coll_data.p_lr = &ip->lr;
 
-    ip->coll_data.object_coll.top = (f32)item_attrs->objectcoll_top;
-    ip->coll_data.object_coll.center = (f32)item_attrs->objectcoll_center;
-    ip->coll_data.object_coll.bottom = (f32)item_attrs->objectcoll_bottom;
-    ip->coll_data.object_coll.width = (f32)item_attrs->objectcoll_width;
+    ip->coll_data.object_coll.top = (f32)it_hit_desc->objectcoll_top;
+    ip->coll_data.object_coll.center = (f32)it_hit_desc->objectcoll_center;
+    ip->coll_data.object_coll.bottom = (f32)it_hit_desc->objectcoll_bottom;
+    ip->coll_data.object_coll.width = (f32)it_hit_desc->objectcoll_width;
     ip->coll_data.p_coll_box = &ip->coll_data.object_coll;
 
     ip->coll_data.object_var = -1;
@@ -241,14 +241,14 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_desc, Vec3f *spa
     func_80008188(item_gobj, func_ovl3_80166954, 1U, 1U);
     func_80008188(item_gobj, func_ovl3_80166BE4, 1U, 0U);
 
-    ip->cb_anim = item_desc->cb_anim;
-    ip->cb_coll = item_desc->cb_coll;
-    ip->cb_give_damage = item_desc->cb_give_damage;
-    ip->cb_shield_block = item_desc->cb_shield_block;
-    ip->cb_shield_deflect = item_desc->cb_shield_deflect;
-    ip->cb_attack = item_desc->cb_attack;
-    ip->cb_reflect = item_desc->cb_reflect;
-    ip->cb_absorb = item_desc->cb_absorb;
+    ip->cb_anim = item_status_desc->cb_anim;
+    ip->cb_coll = item_status_desc->cb_coll;
+    ip->cb_give_damage = item_status_desc->cb_give_damage;
+    ip->cb_shield_block = item_status_desc->cb_shield_block;
+    ip->cb_shield_deflect = item_status_desc->cb_shield_deflect;
+    ip->cb_attack = item_status_desc->cb_attack;
+    ip->cb_reflect = item_status_desc->cb_reflect;
+    ip->cb_absorb = item_status_desc->cb_absorb;
     ip->cb_destroy = NULL;
 
     pos = *spawn_pos;

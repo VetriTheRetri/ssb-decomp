@@ -8,10 +8,7 @@
 #include <game/src/mp/mpcoll.h>
 #include <game/src/ft/ftstatusvars.h>
 #include <game/src/gm/gmmisc.h>
-
-#define LEFT -1
-#define CENTER 0
-#define RIGHT 1
+#include <game/src/gm/gmsound.h>
 
 typedef struct SpecialHit
 {

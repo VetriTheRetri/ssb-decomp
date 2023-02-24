@@ -1592,7 +1592,7 @@ glabel Item_PKThunder_PrimColor
 glabel Item_PKThunder_EnvColor
   .incbin "ovl3.raw.bin", 0x5731C, 0x14
 
-glabel D_ovl3_80188E30
+glabel Item_Fireball_Attributes
   .incbin "ovl3.raw.bin", 0x57330, 0x4
   /* 57334 103874 80188E34 */
   .asciz "B\\"
@@ -1622,7 +1622,7 @@ glabel D_ovl3_80188E44
   /* 57384 1038C4 80188E84 */  .4byte D_ovl2_80130F7C
   .incbin "ovl3.raw.bin", 0x57388, 0x8
 
-glabel D_ovl3_80188E90
+glabel Item_Fireball_Desc
   .incbin "ovl3.raw.bin", 0x57390, 0x8
   /* 57398 1038D8 80188E98 */  .4byte D_ovl2_80130E30
   .incbin "ovl3.raw.bin", 0x5739C, 0x8
