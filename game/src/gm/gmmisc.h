@@ -10,6 +10,8 @@
 #define LEFT -1
 #define CENTER 0
 #define RIGHT 1
+#define WALL_UP 2               // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
+#define WALL_DOWN 3             // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 
 typedef struct CommonAttackFlagsHi
 {

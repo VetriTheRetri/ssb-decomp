@@ -1705,7 +1705,7 @@ glabel jtbl_ovl3_80189084
   /* 575A0 103AE0 801890A0 */  .4byte jtgt_ovl3_8016923C
   .incbin "ovl3.raw.bin", 0x575A4, 0xC
 
-glabel D_ovl3_801890B0
+glabel Item_ThunderJoltAir_Desc
   .incbin "ovl3.raw.bin", 0x575B0, 0x8
   /* 575B8 103AF8 801890B8 */  .4byte D_ovl2_801310BC
   .incbin "ovl3.raw.bin", 0x575BC, 0x8
@@ -1720,7 +1720,7 @@ glabel jtbl_ovl3_801890C4
   /* 575DC 103B1C 801890DC */  .4byte jtgt_ovl3_801695B0
   /* 575E0 103B20 801890E0 */  .4byte jtgt_ovl3_8016953C
 
-glabel D_ovl3_801890E4
+glabel Item_ThunderJoltGround_Desc
   .incbin "ovl3.raw.bin", 0x575E4, 0x8
   /* 575EC 103B2C 801890EC */  .4byte D_ovl2_801310BC
   .incbin "ovl3.raw.bin", 0x575F0, 0x8
@@ -1738,7 +1738,7 @@ glabel jtbl_ovl3_8018910C
   /* 57614 103B54 80189114 */  .4byte jtgt_ovl3_8016A374
   .incbin "ovl3.raw.bin", 0x57618, 0x8
 
-glabel D_ovl3_80189120
+glabel Item_ThunderSpawn_Desc
   .incbin "ovl3.raw.bin", 0x57620, 0x8
   /* 57628 103B68 80189128 */  .4byte D_ovl2_801310B0
   .incbin "ovl3.raw.bin", 0x5762C, 0x8
@@ -1748,7 +1748,7 @@ glabel jtbl_ovl3_80189134
   /* 57638 103B78 80189138 */  .4byte jtgt_ovl3_8016A794
   .incbin "ovl3.raw.bin", 0x5763C, 0x18
 
-glabel D_ovl3_80189154
+glabel Item_ThunderChain_Desc
   .incbin "ovl3.raw.bin", 0x57654, 0x8
   /* 5765C 103B9C 8018915C */  .4byte D_ovl2_801310B0
   .incbin "ovl3.raw.bin", 0x57660, 0x8
@@ -1764,7 +1764,7 @@ glabel jtbl_ovl3_80189170
   /* 57684 103BC4 80189184 */  .4byte jtgt_ovl3_8016A950
   .incbin "ovl3.raw.bin", 0x57688, 0x8
 
-glabel D_ovl3_80189190
+glabel Item_PKFire_Desc
   .incbin "ovl3.raw.bin", 0x57690, 0x8
   /* 57698 103BD8 80189198 */  .4byte D_ovl2_8013113C
   .incbin "ovl3.raw.bin", 0x5769C, 0x8
@@ -1780,7 +1780,7 @@ glabel jtbl_ovl3_801891A4
   /* 576C0 103C00 801891C0 */  .4byte jtgt_ovl3_8016AC4C
   .incbin "ovl3.raw.bin", 0x576C4, 0xC
 
-glabel D_ovl3_801891D0
+glabel Item_PKThunder_Desc
   .incbin "ovl3.raw.bin", 0x576D0, 0x8
   /* 576D8 103C18 801891D8 */  .4byte D_ovl2_80131130
   .incbin "ovl3.raw.bin", 0x576DC, 0x8
@@ -1797,7 +1797,7 @@ glabel jtbl_ovl3_801891F8
   /* 576FC 103C3C 801891FC */  .4byte jtgt_ovl3_8016B22C
   /* 57700 103C40 80189200 */  .4byte jtgt_ovl3_8016B1E8
 
-glabel D_ovl3_80189204
+glabel Item_PKThunderTrail_Desc
   .incbin "ovl3.raw.bin", 0x57704, 0x8
   /* 5770C 103C4C 8018920C */  .4byte D_ovl2_80131130
   .incbin "ovl3.raw.bin", 0x57710, 0x8
@@ -1812,7 +1812,7 @@ glabel jtbl_ovl3_80189220
   .incbin "ovl3.raw.bin", 0x57730, 0x4
   /* 57734 103C74 80189234 */  .4byte jtgt_ovl3_8016B550
 
-glabel D_ovl3_80189238
+glabel Item_PKThunderReflect_Desc
   .incbin "ovl3.raw.bin", 0x57738, 0x8
   /* 57740 103C80 80189240 */  .4byte D_ovl2_80131130
   .incbin "ovl3.raw.bin", 0x57744, 0x8
@@ -1829,7 +1829,7 @@ glabel jtbl_ovl3_80189260
   /* 57764 103CA4 80189264 */  .4byte jtgt_ovl3_8016B840
   /* 57768 103CA8 80189268 */  .4byte jtgt_ovl3_8016B7FC
 
-glabel D_ovl3_8018926C
+glabel Item_PKThunderTrailReflect_Desc
   .incbin "ovl3.raw.bin", 0x5776C, 0x8
   /* 57774 103CB4 80189274 */  .4byte D_ovl2_80131130
   .incbin "ovl3.raw.bin", 0x57778, 0x8

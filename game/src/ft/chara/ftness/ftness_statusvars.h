@@ -4,13 +4,16 @@
 #include <game/include/ssb_types.h>
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
+#include "itemvars.h"
+
+#define FTNESS_PKTHUNDER_TRAIL_POS_COUNT ((ITPKTHUNDER_TRAIL_COUNT * 2) + ((ITPKTHUNDER_TRAIL_COUNT * 2) / ITPKTHUNDER_TRAIL_COUNT))
 
 typedef struct ftNess_FighterVars
 {
     bool32 is_thunder_exist;        // Bool to check if PK Thunder exists
     s32 pk_thunder_trail_id;
-    s16 pk_thunder_trail_x[12];
-    s16 pk_thunder_trail_y[12];
+    s16 pk_thunder_trail_x[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];
+    s16 pk_thunder_trail_y[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];
 
 } ftNess_FighterVars;
 

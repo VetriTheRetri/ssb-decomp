@@ -243,7 +243,8 @@ typedef struct _Fighter_Struct
     s8 unk_0x14;
     u8 unk_0x15;
     u8 unk_0x16;
-    s32 unk_0x18; // Based on port
+    s32 player_number; // Player's number? (Note: NOT player port, e.g. if players 2 and 4 are in a match,
+                       // player 2 will be number 1 and player 4 will be number 2; used to match fighters and items?)
 
     struct // Status = Action State
     {

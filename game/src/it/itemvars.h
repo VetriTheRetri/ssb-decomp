@@ -26,7 +26,53 @@
 #define ITSAMUSBOMB_WAIT_BLINK_TIMER_MID 5                      // Switch out Bomb's texture animation frame when this timer reaches 0
 #define ITSAMUSBOMB_WAIT_BLINK_TIMER_FAST 3                     // Switch out Bomb's texture animation frame when this timer reaches 0
 
-#define ITPKTHUNDER_TRAIL_COUNT 4
+#define ITPIKACHUJOLT_LIFETIME 100
+#define ITPIKACHUJOLT_VEL 55.0F
+#define ITPIKACHUJOLT_GRAVITY 0.0F
+#define ITPIKACHUJOLT_T_VEL 50.0F
+#define ITPIKACHUJOLT_ROTATE_ANGLE_MAX 1.7453293F               
+#define ITPIKACHUJOLT_ANIM_PUSH_FRAME 7.5F                      // Frame on which Thunder Jolt gets pushed ahead to simulate movement?
+#define ITPIKACHUJOLT_COLL_GROUND 0                             // ID of Thunder Jolt collision type
+#define ITPIKACHUJOLT_COLL_LWALL 1                              // ID of Thunder Jolt collision type
+#define ITPIKACHUJOLT_COLL_CEIL 2                               // ID of Thunder Jolt collision type
+#define ITPIKACHUJOLT_COLL_RWALL 3                              // ID of Thunder Jolt collision type
+
+#define ITPIKACHUTHUNDER_TEXTURE_COUNT 4                  // Number of textures Thunder contains
+#define ITPIKACHUTHUNDER_SPAWN_LIFETIME 40                      // Duration of inital Thunder projectile?
+#define ITPIKACHUTHUNDER_CHAIN_LIFETIME 10                      // Duration of subsequent Thunder segments?
+#define ITPIKACHUTHUNDER_EXPIRE 6                               // Thunder can no longer damage opponents once its lifetime has dipped below this number
+
+#define ITPKFIRE_LIFETIME 20
+#define ITPKFIRE_VEL_MUL 160.0F
+
+#define ITPKTHUNDER_LIFETIME 160
+#define ITPKTHUNDER_SPAWN_TRAIL_TIMER 2                         // Subtracted from PK Thunder's maximum lifetime to determine when to begin spawning trails
+#define ITPKTHUNDER_TURN_STICK_THRESHOLD 45                     // Minimum stick range required to steer PK Thunder
+#define ITPKTHUNDER_ANGLE_STEP 0.10471976F                      // If there is a difference between PK Thunder and the control stick's current angle, step this amount
+#define ITPKTHUNDER_ANGLE_DIV 7.5F                              // Divide angle difference then add to current PK Thunder angle if less than quarter pi
+#define ITPKTHUNDER_VEL 60.0F
+#define ITPKTHUNDER_REFLECT_POS_Y_ADD 250.0F                    // Added to Y position when PK Thunder is reflected
+#define ITPKTHUNDER_TRAIL_COUNT 5
+#define ITPKTHUNDER_TEXTURE_COUNT 4
+
+#define ITFINALCUTTER_LIFETIME 20
+#define ITFINALCUTTER_VEL 100.0F
+
+typedef enum itPikachuThunderCollide
+{
+    itPikachuThunderStatus_Active,
+    itPikachuThunderStatus_Collide,
+    itPikachuThunderStatus_Destroy
+
+} itPikachuThunderCollide;
+
+typedef enum itNessThunderCollide
+{
+    itNessThunderStatus_Active,                                 // PK Thunder is active
+    itNessThunderStatus_Destroy,                                // PK Thunder despawns
+    itNessThunderStatus_Collide                                 // PK Thunder collides with Ness
+
+} itNessThunderCollide;
 
 typedef struct ItemFireballAttributes
 {
@@ -71,6 +117,13 @@ typedef struct Fireball_ItemVars
 
 } Fireball_ItemVars;
 
+typedef struct ThunderJolt_ItemVars
+{
+    s32 coll_type;
+    Vec3f rotate;
+
+} ThunderJolt_ItemVars;
+
 typedef struct Thunder_ItemVars // Pikachu's Thunder
 {
     s32 thunder_state;
@@ -79,19 +132,19 @@ typedef struct Thunder_ItemVars // Pikachu's Thunder
 
 typedef struct _PK_Thunder_ItemVars
 {
-    s32 x0;
-    f32 x4;
-    GObj *x8; // Original owner?
-    GObj *xC[5];
+    s32 pk_thunder_state;
+    f32 angle;
+    GObj *spawn_gobj; // PK Thunder's original owner
+    GObj *trail_gobj[ITPKTHUNDER_TRAIL_COUNT];
 
 } PK_Thunder_ItemVars;
 
 typedef struct _PK_Thunder_Trail_ItemVars
 {
-    s32 x0;
+    s32 pk_thunder_trail_state;
     s32 trail_index; // Also key of RGB struct to use to set color of PK Thunder trails?
-    GObj *x8; // Original owner?
-    GObj *xC[5];
+    GObj *spawn_gobj; // Original owner?
+    GObj *trail_gobj[ITPKTHUNDER_TRAIL_COUNT];
 
 } PK_Thunder_Trail_ItemVars;
 

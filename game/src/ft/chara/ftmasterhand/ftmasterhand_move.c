@@ -49,7 +49,7 @@ void func_ovl3_80159260(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801592B4(GObj *fighter_gobj, void (*cb)(GObj *), Vec3f *vel)
+void func_ovl3_801592B4(GObj *fighter_gobj, void (*cb)(GObj*), Vec3f *vel)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 

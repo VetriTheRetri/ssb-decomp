@@ -9,6 +9,7 @@
 #include <game/include/PR/mbi.h>
 #include <game/include/PR/sp.h>
 #include <game/include/PR/ultratypes.h>
+#include "itemvars.h"
 
 extern Gfx *D_800465B0[4];
 
@@ -200,13 +201,13 @@ void func_ovl3_8016763C(GObj *item_gobj)
     func_ovl3_80167520(item_gobj, func_80014768);
 }
 
-extern GfxColor Item_PKThunder_PrimColor[ITPKTHUNDER_TRAIL_COUNT] = { { 94, 163, 255 }, { 152, 189, 255 }, { 194, 217, 255 }, { 179, 241, 255 } };
-extern GfxColor Item_PKThunder_EnvColor[ITPKTHUNDER_TRAIL_COUNT] = { { 58, 0, 131 }, { 91, 0, 178 }, { 134, 51, 217 }, { 167, 116, 248 } };
+extern GfxColor Item_PKThunder_PrimColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 94, 163, 255 }, { 152, 189, 255 }, { 194, 217, 255 }, { 179, 241, 255 } };
+extern GfxColor Item_PKThunder_EnvColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 58, 0, 131 }, { 91, 0, 178 }, { 134, 51, 217 }, { 167, 116, 248 } };
 
 void func_ovl3_80167660(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
-    s32 index = ip->item_vars.pk_thunder_trail_vars.trail_index;
+    s32 index = ip->item_vars.pk_thunder_trail.trail_index;
 
     if (ip->display_state == dbObjDisplayStatus_Env_Collision)
     {

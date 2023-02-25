@@ -256,8 +256,8 @@ typedef struct _Item_Struct
     u8 team;
     u8 port_index;
     u8 unk_0x12;
-    s32 unk_0x14;
-    s32 lr;                     // Facing direction of item; -1 = LEFT, 0 = CENTER, 1 = RIGHT
+    s32 player_number;          // Number of player that spawned this item? 0 = item spawned on its own
+    s32 lr;                     // Facing direction of item; -1 = LEFT, 0 = CENTER, 1 = RIGHT, 2 = WALL_UP (Thunder Jolt only?), 3 = WALL_DOWN (Thunder Jolt only?)
 
     struct
     {
@@ -367,11 +367,12 @@ typedef struct _Item_Struct
         Fireball_ItemVars fireball;
         Charge_Shot_ItemVars charge_shot;
         SamusBomb_ItemVars samus_bomb;
+        ThunderJolt_ItemVars thunder_jolt;
+        Thunder_ItemVars thunder;
+        PK_Thunder_ItemVars pk_thunder;
+        PK_Thunder_Trail_ItemVars pk_thunder_trail;
         Spin_Attack_ItemVars spin_attack; // Link's Up Special
         Egg_Throw_ItemVars egg_throw;
-        Thunder_ItemVars thunder;
-        PK_Thunder_ItemVars pk_thunder_vars;
-        PK_Thunder_Trail_ItemVars pk_thunder_trail_vars;
 
     } item_vars;
 
@@ -393,7 +394,7 @@ typedef struct Monster_Struct // Pokémon?
     u8 port_index;
     u8 unk_0x16;
     u8 unk_0x17;
-    u32 unk_0x18;
+    s32 player_number;
     u32 unk_0x1C;
     u32 unk_0x20;
     s32 lr;

@@ -18,6 +18,8 @@
 #define FTNESS_PK_FIRE_SPARK_VEL_GROUND 73.0F
 
 #define FTNESS_PK_THUNDER_SPAWN_JOINT 12
+#define FTNESS_PK_THUNDER_COLLIDE_X 250.0F  // Width of Ness + PK Thunder collision detection box
+#define FTNESS_PK_THUNDER_COLLIDE_Y 370.0F  // Height of Ness + PK Thunder collision detection box
 #define FTNESS_PK_THUNDER_END_DELAY 30
 #define FTNESS_PK_THUNDER_GRAVITY_DELAY 25
 #define FTNESS_PK_THUNDER_LANDING_LAG 0.17F // Divides landing animation length by this value

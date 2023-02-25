@@ -203,7 +203,7 @@ void func_ovl3_8015D7AC(GObj *fighter_gobj)
             ip->item_vars.charge_shot.is_full_charge = TRUE;
             ip->item_vars.charge_shot.charge_size = (s32)fp->fighter_vars.samus.charge_level;
 
-            func_ovl2_800DF09C(fp->status_vars.samus.specialn.charge_gobj, fp->coll_data.p_pos, &fp->coll_data);
+            func_ovl2_800DF09C(fp->status_vars.samus.specialn.charge_gobj, fp->coll_data.p_translate, &fp->coll_data);
 
             ip->item_vars.charge_shot.owner_gobj = NULL;
             fp->status_vars.samus.specialn.charge_gobj = NULL;

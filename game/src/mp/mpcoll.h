@@ -40,7 +40,7 @@ typedef struct _ObjectColl
 
 typedef struct _Coll_Data
 {
-    Vec3f *p_pos; // Points to TopN translation vector
+    Vec3f *p_translate; // Points to TopN translation vector
     s32 *p_lr; // Points to facing direction?
     Vec3f pos_curr;
     Vec3f pos_correct; // Unconfirmed

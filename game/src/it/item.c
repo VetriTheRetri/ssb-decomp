@@ -7,6 +7,20 @@
 
 // Not the first function in this file
 
+extern u32 D_ovl3_8018CFF8;
+
+u32 func_ovl3_801655A0(void)
+{
+    u32 group_id = D_ovl3_8018CFF8;
+
+    if ((D_ovl3_8018CFF8 += 1) == 0)
+    {
+        D_ovl3_8018CFF8++;
+    }
+
+    return group_id;
+}
+
 GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
     // Non-matching, can't force Vec3f pos into proper stack position without compromises :(
@@ -49,7 +63,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         ip->team = fp->team;
         ip->port_index = fp->player_id;
         ip->unk_0x12 = fp->offset_hit_type;
-        ip->unk_0x14 = fp->unk_0x18;
+        ip->player_number = fp->player_number;
         ip->lr = fp->lr;
 
         ip->display_state = fp->display_state;
@@ -67,7 +81,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         ip->team = owner_ip->team;
         ip->port_index = owner_ip->port_index;
         ip->unk_0x12 = owner_ip->unk_0x12;
-        ip->unk_0x14 = owner_ip->unk_0x14;
+        ip->player_number = owner_ip->player_number;
         ip->lr = owner_ip->lr;
 
         ip->display_state = owner_ip->display_state;
@@ -85,7 +99,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         ip->team = pm->team;
         ip->port_index = pm->port_index;
         ip->unk_0x12 = pm->unk_0x16;
-        ip->unk_0x14 = pm->unk_0x18;
+        ip->player_number = pm->player_number;
         ip->lr = pm->lr;
 
         ip->display_state = pm->display_state;
@@ -103,7 +117,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         ip->team = ITEM_TEAM_DEFAULT;
         ip->port_index = ITEM_PORT_DEFAULT;
         ip->unk_0x12 = ITEM_UNK_DEFAULT;
-        ip->unk_0x14 = 0;
+        ip->player_number = 0;
         ip->lr = RIGHT;
 
         ip->display_state = D_ovl3_8018CFF4;
@@ -214,7 +228,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
         func_8000BED8(item_gobj, it_hit_desc->unk_0x8, it_hit_desc->unk_0xC, 0.0F);
     }
-    ip->coll_data.p_pos = &JObjGetStruct(item_gobj)->translate;
+    ip->coll_data.p_translate = &JObjGetStruct(item_gobj)->translate;
     ip->coll_data.p_lr = &ip->lr;
 
     ip->coll_data.object_coll.top = (f32)it_hit_desc->objectcoll_top;
@@ -267,17 +281,17 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
         case It_Spawn_Fighter:
             fp_coll = FighterGetStruct(spawn_gobj);
-            func_ovl2_800DF09C(item_gobj, fp_coll->coll_data.p_pos, &fp_coll->coll_data);
+            func_ovl2_800DF09C(item_gobj, fp_coll->coll_data.p_translate, &fp_coll->coll_data);
             break;
 
         case It_Spawn_Item:
             ip_coll = ItemGetStruct(spawn_gobj);
-            func_ovl2_800DF09C(item_gobj, ip_coll->coll_data.p_pos, &ip_coll->coll_data);
+            func_ovl2_800DF09C(item_gobj, ip_coll->coll_data.p_translate, &ip_coll->coll_data);
             break;
 
         case It_Spawn_Monster:
             pm_coll = MonsterGetStruct(spawn_gobj);
-            func_ovl2_800DF09C(item_gobj, pm_coll->coll_data.p_pos, &pm_coll->coll_data);
+            func_ovl2_800DF09C(item_gobj, pm_coll->coll_data.p_translate, &pm_coll->coll_data);
             break;
         }
     }
@@ -794,7 +808,7 @@ next_check:
         ip->team = fp->team;
         ip->port_index = fp->player_id;
         ip->display_state = fp->display_state;
-        ip->unk_0x14 = fp->unk_0x18;
+        ip->player_number = fp->player_number;
         ip->unk_0x12 = fp->offset_hit_type;
         ip->item_hit[0].flags_0x4C_halfword = ip->unk_0x258 & U16_MAX;
         ip->item_hit[0].flags_0x4E = ip->unk_0x25A;
