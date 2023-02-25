@@ -1844,7 +1844,7 @@ glabel jtbl_ovl3_80189288
   .incbin "ovl3.raw.bin", 0x57798, 0x4
   /* 5779C 103CDC 8018929C */  .4byte jtgt_ovl3_8016BB3C
 
-glabel D_ovl3_801892A0
+glabel Item_FinalCutter_Desc
   .incbin "ovl3.raw.bin", 0x577A0, 0x8
   /* 577A8 103CE8 801892A8 */  .4byte D_ovl2_80131070
   .incbin "ovl3.raw.bin", 0x577AC, 0x8

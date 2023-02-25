@@ -86,12 +86,12 @@ bool32 jtgt_ovl3_8016BE4C(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemStatusDesc D_ovl3_801892A0;
+extern ItemStatusDesc Item_FinalCutter_Desc;
 
 GObj* func_ovl3_8016BE8C(GObj *fighter_gobj, Vec3f *pos)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &D_ovl3_801892A0, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
+    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_FinalCutter_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
     Item_Struct *ip;
 
     if (item_gobj == NULL)
