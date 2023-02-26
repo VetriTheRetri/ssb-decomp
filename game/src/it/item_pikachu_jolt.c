@@ -129,7 +129,7 @@ extern void *D_ovl2_801310C4;
 
 void func_ovl3_80169654(GObj *item_gobj)
 {
-    func_8000BED8(item_gobj, *(int*)&D_ovl2_801310C4 + &D_NF_00001A20, *(int*)&D_ovl2_801310C4 + &D_NF_00001AE0, 0.0F); // Linker thing
+    func_8000BED8(item_gobj, (uintptr_t)D_ovl2_801310C4 + &D_NF_00001A20, (uintptr_t)D_ovl2_801310C4 + &D_NF_00001AE0, 0.0F); // Linker thing
     func_8000DF34(item_gobj);
 }
 

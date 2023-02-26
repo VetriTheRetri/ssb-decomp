@@ -37,7 +37,7 @@
 #define ITPIKACHUJOLT_COLL_CEIL 2                               // ID of Thunder Jolt collision type
 #define ITPIKACHUJOLT_COLL_RWALL 3                              // ID of Thunder Jolt collision type
 
-#define ITPIKACHUTHUNDER_TEXTURE_COUNT 4                  // Number of textures Thunder contains
+#define ITPIKACHUTHUNDER_TEXTURE_COUNT 4                        // Number of textures Thunder contains
 #define ITPIKACHUTHUNDER_SPAWN_LIFETIME 40                      // Duration of inital Thunder projectile?
 #define ITPIKACHUTHUNDER_CHAIN_LIFETIME 10                      // Duration of subsequent Thunder segments?
 #define ITPIKACHUTHUNDER_EXPIRE 6                               // Thunder can no longer damage opponents once its lifetime has dipped below this number
@@ -57,6 +57,39 @@
 
 #define ITFINALCUTTER_LIFETIME 20
 #define ITFINALCUTTER_VEL 100.0F
+
+#define ITEGGTHROW_LIFETIME 50
+#define ITEGGTHROW_EXPLODE_LIFETIME 10
+#define ITEGGTHROW_EXPLODE_SIZE 340.0F
+#define ITEGGTHROW_TRAJECTORY_DIV 65.0F
+#define ITEGGTHROW_TRAJECTORY_SUB_RIGHT 1.8675023F              // Default: 107 degrees; subtract angle from this if egg's facing direction is RIGHT
+#define ITEGGTHROW_TRAJECTORY_SUB_LEFT 1.27409040928F           // Default: 73 degrees; subtract angle from this if egg's facing direction is LEFT
+#define ITEGGTHROW_ANGLE_MUL 0.34906587F                        // Default: 20 degrees
+#define ITEGGTHROW_ANGLE_CLAMP 0.10471976F                      // Default: 6 degrees; if less than this value, angle becomes 0.0
+#define ITEGGTHROW_VEL_ADD 50.0F
+#define ITEGGTHROW_VEL_FORCE_MUL 2.3F                           // Multiplies number of frames the B button was held
+#define ITEGGTHROW_ANGLE_FORCE_MUL (-2.1F)
+#define ITEGGTHROW_ANGLE_ADD (-1.5F)
+#define ITEGGTHROW_GRAVITY 2.7F
+#define ITEGGTHROW_T_VEL 120.0F
+
+#define ITYOSHISTAR_LIFETIME 16
+#define ITYOSHISTAR_LIFETIME_SCALE_MUL 0.175F
+#define ITYOSHISTAR_LIFETIME_SCALE_ADD 0.3F
+#define ITYOSHISTAR_ROTATE_SPEED 0.24F
+#define ITYOSHISTAR_VEL_CLAMP 1.8F
+#define ITYOSHISTAR_ANGLE 0.5235988F
+#define ITYOSHISTAR_VEL 30.0F
+#define ITYOSHISTAR_OFF_X 300.0F
+#define ITYOSHISTAR_OFF_Y 20.0F
+
+#define ITSPINATTACK_LIFETIME 100
+#define ITSPINATTACK_VEL 28.0F
+#define ITSPINATTACK_VEL_CLAMP 0.4F
+#define ITSPINATTACK_OFF_X 40.0F
+#define ITSPINATTACK_OFF_Y 80.0F
+#define ITSPINATTACK_ANGLE 0.17453294F
+
 
 typedef enum itPikachuThunderCollide
 {
@@ -161,18 +194,20 @@ typedef struct Spin_Attack_ItemVars
 {
     s16 pos_x[4];
     s16 pos_y[4];
-    u8 filler_0x10[0x18 - 0x10];
-    u8 unk_0x18;
+    Vec2f vel;
+    s8 is_destroy;
     s8 pos_index;
 
 } Spin_Attack_ItemVars;
 
 typedef struct Egg_Throw_ItemVars
 {
-    u8 unk_0x0;
-    u8 is_throw;
-    Vec2b trajectory;
+    s8 is_spin; // Also determines whether Egg Throw is affected by gravity, not sure what to name it
+    s8 is_throw;
+    s8 stick_range;
+    s8 lr;
     s16 throw_force;
+    f32 angle;
 
 } Egg_Throw_ItemVars;
 

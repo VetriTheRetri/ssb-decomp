@@ -229,7 +229,7 @@ GObj *func_ovl3_8016B2C4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create P
     ip->item_vars.pk_thunder.angle = HALF_PI32;
     ip->item_vars.pk_thunder.spawn_gobj = fighter_gobj;
 
-    ip->x26C_flag_b0 = TRUE;
+    ip->is_camera_follow = TRUE;
 
     for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj); i++)
     {

@@ -248,10 +248,10 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
     Vec3f stick_angle;
     f32 temp_stick_y;
 
-    temp_stick_x = (f32)fp->input.stick_range.x;
-    temp_stick_y = (f32)fp->input.stick_range.y;
+    temp_stick_x = fp->input.stick_range.x;
+    temp_stick_y = fp->input.stick_range.y;
 
-    sqrt_stick_range = sqrtf((temp_stick_x * temp_stick_x) + (temp_stick_y * temp_stick_y));
+    sqrt_stick_range = sqrtf(SQUARE(temp_stick_x) + SQUARE(temp_stick_y));
 
     if (sqrt_stick_range > 80.0F)
     {
@@ -259,8 +259,8 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
     }
     if (!(sqrt_stick_range < FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN) && !(fp->coll_data.clip_flag & 0x4000))
     {
-        stick_angle.x = (f32) fp->input.stick_range.x;
-        stick_angle.y = (f32) fp->input.stick_range.y;
+        stick_angle.x = fp->input.stick_range.x;
+        stick_angle.y = fp->input.stick_range.y;
         stick_angle.z = 0.0F;
 
         if ((vec3f_angle_diff(&fp->coll_data.ground_angle, &stick_angle) < HALF_PI32)) goto block_end;
@@ -292,7 +292,7 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 tangent;
-    f32 sqrt_stick_range = sqrtf(((f32)fp->input.stick_range.x * fp->input.stick_range.x) + ((f32)fp->input.stick_range.y * fp->input.stick_range.y));;
+    f32 sqrt_stick_range = sqrtf(SQUARE((f32)fp->input.stick_range.x) + SQUARE((f32)fp->input.stick_range.y));
 
     if (sqrt_stick_range > 80.0F)
     {

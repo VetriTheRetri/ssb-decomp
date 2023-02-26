@@ -104,10 +104,10 @@ typedef struct ItemHitDesc // Moreso hitbox stuff
     u32 shield_damage : 3U;
     u32 flags_0x2F_b0 : 1U;
     u32 flags_0x2F_b1 : 1U;
-    u32 flags_0x2F_b2 : 1U;
-    u32 flags_0x2F_b3 : 1U;
+    u32 can_deflect : 1U;
+    u32 can_reflect : 1U;
     u32 flags_0x2F_b4 : 1U;
-    u32 flags_0x2F_b5 : 1U;
+    u32 can_shield : 1U;
     u32 flags_0x2F_b6 : 1U;
     u32 flags_0x2F_b7 : 1U;
     u32 knockback_base : 10U;
@@ -164,15 +164,15 @@ typedef struct _Item_Hit
     {
         struct
         {
-            u32 flags_0x48_b0 : 1;
+            u32 clang : 1;
             u32 flags_0x48_b1 : 1;
             u32 flags_0x48_b2 : 1;
             u32 flags_0x48_b3 : 1;
             u32 can_deflect : 1; // Actually determines whether item's shield deflect routine can run?
-            u32 flags_0x48_b5 : 1;
+            u32 can_reflect : 1;
             u32 flags_0x48_b6 : 1;
             u32 flags_0x48_b7 : 1;
-            u32 flags_0x49_b0 : 1;
+            u32 can_shield : 1;
             u32 attack_id : 6;
             u32 flags_0x49_b7 : 1;
             union
@@ -317,7 +317,7 @@ typedef struct _Item_Struct
     u32 group_id;
     s32 lifetime; // Frames until item despawns
 
-    u8 x26C_flag_b0 : 1;
+    u8 is_camera_follow : 1;
     u8 is_static_damage : 1; // If this is FALSE, item's damage can be modified (on reflection only?)
     u8 x26C_flag_b2 : 1;
     u8 x26C_flag_b3 : 1;

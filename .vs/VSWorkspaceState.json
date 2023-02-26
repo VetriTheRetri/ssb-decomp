@@ -5,12 +5,12 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftness",
+    "\\game\\src\\ft\\chara\\ftmario",
     "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\item_ness_pkthunder.c",
+  "SelectedNode": "\\game\\src\\it\\item_yoshi_eggthrow.c",
   "PreviewInSolutionExplorer": false
 }

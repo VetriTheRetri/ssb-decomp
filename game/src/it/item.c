@@ -7,6 +7,7 @@
 
 // Not the first function in this file
 
+extern s32 D_ovl3_8018CFF4;
 extern u32 D_ovl3_8018CFF8;
 
 u32 func_ovl3_801655A0(void)
@@ -50,7 +51,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         func_ovl3_80165588(ip);
         return NULL;
     }
-    it_hit_desc = *(int*)item_status_desc->p_item + (int)item_status_desc->offset_it_hit;
+    it_hit_desc = *(uintptr_t*)item_status_desc->p_item + (size_t)item_status_desc->offset_it_hit; // I hope this is correct?
     item_gobj->user_data = ip;
     ip->item_gobj = item_gobj;
     ip->it_kind = item_status_desc->it_kind;
@@ -157,7 +158,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
     ip->item_hit[0].knockback_weight = it_hit_desc->knockback_weight;
     ip->item_hit[0].knockback_base = it_hit_desc->knockback_base;
 
-    ip->item_hit[0].flags_0x48_b0 = it_hit_desc->clang;
+    ip->item_hit[0].clang = it_hit_desc->clang;
     ip->item_hit[0].unk_0x3C = it_hit_desc->flags_0x2C;
 
     ip->item_hit[0].hit_sfx = it_hit_desc->sfx;
@@ -168,14 +169,14 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     ip->item_hit[0].flags_0x48_b3 = FALSE;
 
-    ip->item_hit[0].can_deflect = it_hit_desc->flags_0x2F_b2;
-    ip->item_hit[0].flags_0x48_b5 = it_hit_desc->flags_0x2F_b3;
+    ip->item_hit[0].can_deflect = it_hit_desc->can_deflect;
+    ip->item_hit[0].can_reflect = it_hit_desc->can_reflect;
     ip->item_hit[0].flags_0x48_b6 = it_hit_desc->flags_0x2F_b4;
 
     ip->item_hit[0].flags_0x48_b7 = FALSE;
 
-    ip->item_hit[0].flags_0x49_b0 = it_hit_desc->flags_0x2F_b5;
-    ip->item_hit[0].hitbox_count = it_hit_desc-.hitbox_count;
+    ip->item_hit[0].can_shield = it_hit_desc->can_shield;
+    ip->item_hit[0].hitbox_count = it_hit_desc->hitbox_count;
 
     ip->item_hit[0].hit_status = 7;
 
@@ -190,7 +191,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     ip->x260_flag_b0 = FALSE;
     ip->is_hitlag_item = FALSE;
-    ip->x26C_flag_b0 = FALSE;
+    ip->is_camera_follow = FALSE;
 
     ip->group_id = 0;
 
@@ -659,7 +660,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
     this_ip = ItemGetStruct(this_gobj);
     this_hit = &this_ip->item_hit[0];
 
-    if ((this_hit->flags_0x48_b0) && (this_hit->update_state != itHit_UpdateState_Disable) && (this_hit->hit_status & 2))
+    if ((this_hit->clang) && (this_hit->update_state != itHit_UpdateState_Disable) && (this_hit->hit_status & 2))
     {
         other_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
 
@@ -683,7 +684,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                         if (this_ip->team == other_ip->team) goto next_gobj; // YUCKY match but you can't say it's only a half
 
                     next_check:
-                        if ((other_hit->update_state != itHit_UpdateState_Disable) && (other_hit->flags_0x48_b0))
+                        if ((other_hit->update_state != itHit_UpdateState_Disable) && (other_hit->clang))
                         {
                             if (other_hit->hit_status & 2)
                             {

@@ -213,7 +213,7 @@ void func_ovl3_801556E0(GObj *fighter_gobj)
     }
     fp->x18D_flag_b0 = TRUE;
 
-    fp->special_hit = (SpecialHit*) (*(int*)&D_ovl2_80131134 + &ftNess_LoadedFiles_SpecialLwData); // Linker thing (attempt *(int*) for 64-bit compatibility?)
+    fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80131134 + &ftNess_LoadedFiles_SpecialLwData); // Linker thing (attempt uintptr_t for 64-bit compatibility?)
 
     fp->cmd_flags.flag1 = 0;
 }

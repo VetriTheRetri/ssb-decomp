@@ -1862,7 +1862,7 @@ glabel jtbl_ovl3_801892C8
   /* 577D0 103D10 801892D0 */  .4byte jtgt_ovl3_8016BE08
   .incbin "ovl3.raw.bin", 0x577D4, 0xC
 
-glabel D_ovl3_801892E0
+glabel Item_EggThrow_Desc
   .incbin "ovl3.raw.bin", 0x577E0, 0x8
   /* 577E8 103D28 801892E8 */  .4byte D_ovl2_80130FF0
   .incbin "ovl3.raw.bin", 0x577EC, 0x8
@@ -1877,7 +1877,7 @@ glabel jtbl_ovl3_801892F4
   /* 5780C 103D4C 8018930C */  .4byte jtgt_ovl3_8016C404
   .incbin "ovl3.raw.bin", 0x57810, 0x10
 
-glabel D_ovl3_80189320
+glabel Item_YoshiStar_Desc
   .incbin "ovl3.raw.bin", 0x57820, 0x8
   /* 57828 103D68 80189328 */  .4byte D_ovl2_80130FF0
   .incbin "ovl3.raw.bin", 0x5782C, 0x8
@@ -1893,7 +1893,7 @@ glabel jtbl_ovl3_80189334
   /* 57850 103D90 80189350 */  .4byte jtgt_ovl3_8016C6F0
   .incbin "ovl3.raw.bin", 0x57854, 0xC
 
-glabel D_ovl3_80189360
+glabel Item_SpinAttack_Desc
   .incbin "ovl3.raw.bin", 0x57860, 0x8
   /* 57868 103DA8 80189368 */  .4byte D_ovl2_80130FB0
   .incbin "ovl3.raw.bin", 0x5786C, 0x8
