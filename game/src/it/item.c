@@ -159,11 +159,11 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
     ip->item_hit[0].knockback_base = it_hit_desc->knockback_base;
 
     ip->item_hit[0].clang = it_hit_desc->clang;
-    ip->item_hit[0].unk_0x3C = it_hit_desc->flags_0x2C;
+    ip->item_hit[0].shield_damage = it_hit_desc->shield_damage;
 
     ip->item_hit[0].hit_sfx = it_hit_desc->sfx;
 
-    ip->item_hit[0].shield_damage = it_hit_desc->shield_damage;
+    ip->item_hit[0].priority = it_hit_desc->priority;
     ip->item_hit[0].flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
     ip->item_hit[0].flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
 
@@ -171,7 +171,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     ip->item_hit[0].can_deflect = it_hit_desc->can_deflect;
     ip->item_hit[0].can_reflect = it_hit_desc->can_reflect;
-    ip->item_hit[0].flags_0x48_b6 = it_hit_desc->flags_0x2F_b4;
+    ip->item_hit[0].can_absorb = it_hit_desc->can_absorb;
 
     ip->item_hit[0].flags_0x48_b7 = FALSE;
 
@@ -189,7 +189,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
     ip->reflect_gobj = NULL;
     ip->absorb_gobj = NULL;
 
-    ip->x260_flag_b0 = FALSE;
+    ip->is_hitlag_victim = FALSE;
     ip->is_hitlag_item = FALSE;
     ip->is_camera_follow = FALSE;
 
@@ -615,31 +615,31 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
     s32 this_hit_damage;
     s32 victim_hit_damage;
     Vec3f sp2C;
-    s32 victim_shield_damage;
-    s32 this_shield_damage;
+    s32 victim_hit_priority;
+    s32 this_hit_priority;
 
     this_hit_damage = func_ovl3_80168128(this_ip);
     victim_hit_damage = func_ovl3_80168128(victim_ip);
 
     func_ovl2_800F0C94(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
 
-    victim_shield_damage = victim_hit->shield_damage;
-    this_shield_damage = this_hit->shield_damage;
+    victim_hit_priority = victim_hit->priority;
+    this_hit_priority = this_hit->priority;
 
-    if (this_shield_damage >= victim_hit->shield_damage)
+    if (this_hit_priority >= victim_hit->priority)
     {
-        func_ovl3_8016679C(victim_ip, victim_hit, this_gobj, 3, 0);
+        func_ovl3_8016679C(victim_ip, victim_hit, this_gobj, gmHitCollision_Hit, 0);
         if (victim_ip->hit_attack_damage < victim_hit_damage)
         {
             victim_ip->hit_attack_damage = victim_hit_damage;
         }
         func_ovl2_80100BF0(&sp2C, victim_hit_damage);
-        this_shield_damage = this_hit->shield_damage;
-        victim_shield_damage = victim_hit->shield_damage;
+        this_hit_priority = this_hit->priority;
+        victim_hit_priority = victim_hit->priority;
     }
-    if (victim_shield_damage >= this_shield_damage)
+    if (victim_hit_priority >= this_hit_priority)
     {
-        func_ovl3_8016679C(this_ip, this_hit, victim_gobj, 3, 0);
+        func_ovl3_8016679C(this_ip, this_hit, victim_gobj, gmHitCollision_Hit, 0);
         if (this_ip->hit_attack_damage < this_hit_damage)
         {
             this_ip->hit_attack_damage = this_hit_damage;

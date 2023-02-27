@@ -46,6 +46,8 @@ typedef enum It_Spawn
 
 typedef enum It_Kind
 {
+    It_Kind_Ness_PKThunder_Head = 0xE,
+    It_Kind_Ness_PKThunder_Trail = 0xF,
     It_Kind_Link_Bomb = 0x15
 
 } It_Kind;
@@ -58,6 +60,13 @@ typedef enum itHitUpdateState
     itHit_UpdateState_Interpolate       // Copies current position to previous
 
 } itHitUpdateState;
+
+typedef enum Item_Hit_Element
+{
+    It_Hit_Kind_Normal,
+    It_Hit_Kind_Fire,
+
+} Item_Hit_Element;
 
 typedef struct ItemStatusDesc
 {
@@ -97,16 +106,16 @@ typedef struct ItemHitDesc // Moreso hitbox stuff
     u32 damage : 8U;
     u32 element : 4U;
     u32 knockback_weight : 10U;
-    s32 flags_0x2C : 8U;
+    s32 shield_damage : 8U;
     u32 hitbox_count : 2U;
     u32 clang : 1U;
     u32 sfx : 10U;
-    u32 shield_damage : 3U;
+    u32 priority : 3U;
     u32 flags_0x2F_b0 : 1U;
     u32 flags_0x2F_b1 : 1U;
     u32 can_deflect : 1U;
     u32 can_reflect : 1U;
-    u32 flags_0x2F_b4 : 1U;
+    u32 can_absorb : 1U;
     u32 can_shield : 1U;
     u32 flags_0x2F_b6 : 1U;
     u32 flags_0x2F_b7 : 1U;
@@ -156,8 +165,8 @@ typedef struct _Item_Hit
     u32 knockback_scale; // Unconfirmed
     u32 knockback_weight; // Weight-Dependent Set Knockback
     u32 knockback_base; // Base knockback
-    u32 unk_0x3C;
     s32 shield_damage;
+    s32 priority; // Used to determine winner in item hitbox vs item hitbox interaction?
     u8 hit_status; // "Tangibility flag? 0x07"
     u16 hit_sfx;
     union
@@ -170,7 +179,7 @@ typedef struct _Item_Hit
             u32 flags_0x48_b3 : 1;
             u32 can_deflect : 1; // Actually determines whether item's shield deflect routine can run?
             u32 can_reflect : 1;
-            u32 flags_0x48_b6 : 1;
+            u32 can_absorb : 1;
             u32 flags_0x48_b7 : 1;
             u32 can_shield : 1;
             u32 attack_id : 6;
@@ -281,7 +290,7 @@ typedef struct _Item_Struct
     u16 unk_0x25A;              // Attack flags
     GObj *absorb_gobj;          // GObj that absorbed this item
 
-    u8 x260_flag_b0 : 1;
+    u8 is_hitlag_victim : 1;
     u8 is_hitlag_item : 1;
     u8 x260_flag_b2 : 1;
     u8 x260_flag_b3 : 1;
@@ -371,8 +380,9 @@ typedef struct _Item_Struct
         Thunder_ItemVars thunder;
         PK_Thunder_ItemVars pk_thunder;
         PK_Thunder_Trail_ItemVars pk_thunder_trail;
-        Spin_Attack_ItemVars spin_attack; // Link's Up Special
         Egg_Throw_ItemVars egg_throw;
+        Spin_Attack_ItemVars spin_attack; // Link's Up Special
+        Boomerang_ItemVars boomerang;
 
     } item_vars;
 

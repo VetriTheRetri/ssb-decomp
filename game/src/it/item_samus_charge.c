@@ -22,7 +22,7 @@ void func_ovl3_80168B00(GObj *item_gobj) // Set Charge Shot's attributes on fire
     func_800269C0(Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].shoot_sfx_id);
 
     ip->item_hit[0].hit_sfx = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].hit_sfx_id;
-    ip->item_hit[0].shield_damage = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].shield_damage;
+    ip->item_hit[0].priority = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].priority;
 
     ip->item_vars.charge_shot.owner_gobj = NULL;
 }

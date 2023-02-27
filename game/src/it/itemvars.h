@@ -90,6 +90,22 @@
 #define ITSPINATTACK_OFF_Y 80.0F
 #define ITSPINATTACK_ANGLE 0.17453294F
 
+#define ITBOOMERANG_OFF_X 150.0F
+#define ITBOOMERANG_OFF_Y 290.0F
+#define ITBOOMERANG_HOMING_ANGLE_MAX 0.02617994F
+#define ITBOOMERANG_HOMING_ANGLE_MIN 0.01308997F
+#define ITBOOMERANG_VEL_SMASH 114.0F
+#define ITBOOMERANG_VEL_TILT 85.0F
+#define ITBOOMERANG_ANGLE_STICK_THRESHOLD 10                    // Minimum stick Y range required to angle Boomerang up or down
+#define ITBOOMERANG_LIFETIME_SMASH 190
+#define ITBOOMERANG_LIFETIME_TILT 160
+#define ITBOOMERANG_LIFETIME_REFLECT 100
+
+#define ITYUBIBULLET_EXPLODE_LIFETIME 6
+#define ITYUBIBULLET_EXPLODE_SIZE 180.0F
+#define ITYUBIBULLET_VEL_X 160.0F
+#define ITYUBIBULLET_VEL_Y -25.0F
+
 
 typedef enum itPikachuThunderCollide
 {
@@ -134,7 +150,7 @@ typedef struct ItemChargeShotAttributes
     u32 shoot_sfx_id;
     u32 charge_sfx_id;
     u32 hit_sfx_id;
-    s32 shield_damage;
+    s32 priority;
 
 } ItemChargeShotAttributes;
 
@@ -199,6 +215,18 @@ typedef struct Spin_Attack_ItemVars
     s8 pos_index;
 
 } Spin_Attack_ItemVars;
+
+typedef struct Boomerang_ItemVars
+{
+    GObj *spawn_gobj; // GObj that spawned Boomerang
+    u8 unk_0x4;
+    u8 homing_delay;
+    u8 flags;
+    u8 adjust_angle_delay;
+    f32 unk_0x8;
+    f32 homing_angle;
+
+} Boomerang_ItemVars;
 
 typedef struct Egg_Throw_ItemVars
 {

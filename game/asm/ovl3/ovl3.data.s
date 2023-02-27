@@ -1907,7 +1907,7 @@ glabel jtbl_ovl3_80189374
   /* 57888 103DC8 80189388 */  .4byte jtgt_ovl3_8016CB10
   .incbin "ovl3.raw.bin", 0x5788C, 0x14
 
-glabel D_ovl3_801893A0
+glabel Item_Boomerang_Desc
   .incbin "ovl3.raw.bin", 0x578A0, 0x8
   /* 578A8 103DE8 801893A8 */  .4byte D_ovl2_80130FBC
   .incbin "ovl3.raw.bin", 0x578AC, 0x8
@@ -1923,7 +1923,7 @@ glabel jtbl_ovl3_801893B4
   /* 578D0 103E10 801893D0 */  .4byte jtgt_ovl3_8016D714
   .incbin "ovl3.raw.bin", 0x578D4, 0xC
 
-glabel D_ovl3_801893E0
+glabel Item_YubiBullet_Easy
   .incbin "ovl3.raw.bin", 0x578E0, 0x8
   /* 578E8 103E28 801893E8 */  .4byte D_ovl2_80131174
   .incbin "ovl3.raw.bin", 0x578EC, 0xC
@@ -1937,7 +1937,7 @@ glabel jtbl_ovl3_801893F8
   /* 5790C 103E4C 8018940C */  .4byte jtgt_ovl3_8016DD7C
   /* 57910 103E50 80189410 */  .4byte jtgt_ovl3_8016DD04
 
-glabel D_ovl3_80189414
+glabel Item_YubiBullet_Hard
   .incbin "ovl3.raw.bin", 0x57914, 0x8
   /* 5791C 103E5C 8018941C */  .4byte D_ovl2_80131174
   .incbin "ovl3.raw.bin", 0x57920, 0xC
