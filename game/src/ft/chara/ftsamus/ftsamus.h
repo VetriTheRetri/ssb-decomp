@@ -5,7 +5,7 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 #include <game/src/ft/fighter.h>
-#include <game/src/it/item.h>
+#include <game/src/it/item/item.h>
 
 #define FTSAMUS_CHARGE_JOINT 16             // Bone to attach Charge Shot
 #define FTSAMUS_CHARGE_MAX 7                // Maximum charge level

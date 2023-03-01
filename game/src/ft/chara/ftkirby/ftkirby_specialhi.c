@@ -103,17 +103,9 @@ void func_ovl3_80160D40(GObj *fighter_gobj)
 
         func_ovl2_800EDF24(fp->joint[FTKIRBY_FINALCUTTER_BEAM_SPAWN_JOINT], &pos);
 
-#ifdef NON_MATCHING
-
-        pos.x = (fp->lr == RIGHT) ? pos.x + FTKIRBY_FINALCUTTER_OFF_X : pos.x - FTKIRBY_FINALCUTTER_OFF_X;
-
-#else
-
         if (fp->lr == RIGHT) pos.x += FTKIRBY_FINALCUTTER_OFF_X; // Ternary doesn't match here, only if/else :(
 
         else pos.x -= FTKIRBY_FINALCUTTER_OFF_X;
-
-#endif
 
         func_ovl3_8016BE8C(fighter_gobj, &pos);
     }

@@ -151,7 +151,7 @@ extern struct UnkA4AD0 D_800A4AD0;
 extern struct BattleState D_800A4B18;
 extern struct BattleState D_800A4D08;
 extern struct BattleState D_800A4EF8;
-extern struct UnkA4AD0 *D_800A50E8;
+extern struct UnkA4AD0 *Match_Info;
 extern u32 D_800A50EC;
 extern u8 D_800A50F0[8];
 extern u8 D_800A50F8[324];

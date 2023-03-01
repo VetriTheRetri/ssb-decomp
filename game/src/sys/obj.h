@@ -83,6 +83,16 @@ struct JObj
 
 };
 
+typedef struct JObjDesc
+{
+    s32 index;
+    void *x4;
+    Vec3f translate;
+    Vec3f rotate;
+    Vec3f scale;
+
+} JObjDesc;
+
 #define JObjGetStruct(gobj) \
 ((JObj*)gobj->obj) \
 

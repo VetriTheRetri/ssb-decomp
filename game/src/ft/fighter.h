@@ -20,22 +20,12 @@ typedef struct SpecialHit
 
 } SpecialHit;
 
-typedef struct RenderStateDesc
-{
-    s32 x0;
-    s32 x4;
-    Vec3f translate;
-    Vec3f rotate;
-    Vec3f scale;
-
-} RenderStateDesc;
-
-typedef struct RenderStateContainer
+typedef struct JObjContainer
 {
 
-    RenderStateDesc *renderstate[4];
+    JObjDesc *renderstate[4];
 
-} RenderStateContainer;
+} JObjContainer;
 
 typedef struct ftCommonAttributes
 {
@@ -96,7 +86,7 @@ typedef struct ftCommonAttributes
     s16 unk_0xE6;
     s32 unk_0xE8;
     u8 filler_0xEC[0x2D4 - 0xEC];
-    RenderStateContainer *renderstate;
+    JObjContainer *renderstate;
     u8 filler_0x2D8[0x324 - 0x2D8];
     s32 unk_0x324;
 

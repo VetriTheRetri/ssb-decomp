@@ -65,7 +65,7 @@ glabel D_ovl3_8018D098
     .space 4
 glabel D_ovl3_8018D09C
     .space 4
-glabel D_ovl3_8018D0A0
+glabel Item_Spawn_Timer
     .space 4
 glabel D_ovl3_8018D0A4
     .space 28

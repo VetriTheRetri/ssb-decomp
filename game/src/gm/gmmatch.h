@@ -16,11 +16,25 @@ typedef enum gmPauseStatus
 
 } gmPauseStatus;
 
+typedef struct gmItemSpawn
+{
+    u8 max_items; // Maximum number of items allowed to spawn?
+    u8 *item_toggles; // Pointer to array of item on/off toggles
+    u32 item_spawn_timer; // Spawn a random new item when this reaches 0
+    void *unk_0xC;
+    u32 unk_0x10;
+    s8 unk_0x14;
+    u8 *unk_0x18;
+    u16 unk_0x1C; // Also max items?
+    u16 *unk_0x20;
+
+} gmItemSpawn;
+
 typedef struct gmPlayerBlock
 {
     u8 level; // Actually begins at 1 instead of 0
     u8 handicap; // Master Hand's handicap value is 35!?
-    u8 player_kind; // 0 = HMN, 1 = CPU, 5 = How to Play,
+    u8 player_kind; // 0 = HMN, 1 = CPU, 5 = How to Play (?)
     u8 character_kind; // Same as ftKind
     u8 team_index;
     u8 port_index; // Identical to team index if team battle is on?
@@ -60,17 +74,14 @@ typedef struct gmMatchInfo
     u8 is_team_attack; // Boolean for friendly fire
     u8 unk_0xA;
     u8 unk_0xB;
-    u8 unk_0xC;
-    u8 unk_0xD;
-    u8 unk_0xE;
-    u8 unk_0xF;
+    u32 item_toggles; // Bits = item's on/off switch from match settings
     u8 unk_0x10;
     u8 pause_status;
     u8 unk_0x12;
     u8 unk_0x13;
     u32 match_time_remain; // Frames remaining until timeout
     u32 match_time_current; // Current match frame, counts up from 0
-    u8 unk_0x1C; // Has various settings (0x0 on Master Hand and Giant DK (?), 0x1 on Metal Mario battle, 0x2 on Hyrule Castle, 0x3 on various stages, 0x4 on Polygon Team? 
+    u8 item_switch; // Has various settings (0x0 on Master Hand and Giant DK (?), 0x1 on Metal Mario battle, 0x2 on Hyrule Castle, 0x3 on various stages, 0x4 on Polygon Team? 
     u8 unk_0x1D;
     u8 unk_0x1E;
     u8 unk_0x1F;
@@ -78,6 +89,6 @@ typedef struct gmMatchInfo
 
 } gmMatchInfo;
 
-extern gmMatchInfo *D_800A50E8;
+extern gmMatchInfo *Match_Info;
 
 #endif

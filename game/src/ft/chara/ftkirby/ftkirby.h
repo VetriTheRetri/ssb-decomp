@@ -5,7 +5,7 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 #include <game/src/ft/fighter.h>
-#include <game/src/it/item.h>
+#include <game/src/it/item/item.h>
 
 #define FTKIRBY_VACUUM_RELEASE_LAG 40                   // Automatic lag frames before Inhale can be released
 #define FTKIRBY_VACUUM_COPY_STICK_Y_MIN -40             // Minimum control stick threshold on Y-axis to get copy ability

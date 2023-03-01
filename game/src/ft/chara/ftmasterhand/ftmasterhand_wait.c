@@ -10,7 +10,7 @@ const u8 D_ovl3_80188DEC[20];
 
 void func_ovl3_80158750(GObj *fighter_gobj)
 {
-    if (D_800A50E8->pause_status != gmPauseStatus_Disable)
+    if (Match_Info->pause_status != gmPauseStatus_Disable)
     {
         func_ovl3_80159040(fighter_gobj);
     }

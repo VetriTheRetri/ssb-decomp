@@ -2,16 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
-    "\\game\\include\\PR",
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftkirby",
-    "\\game\\src\\ft\\chara\\ftlink",
-    "\\game\\src\\ft\\chara\\ftyoshi",
-    "\\game\\src\\it"
+    "\\game\\src\\ft\\chara\\ftpikachu",
+    "\\game\\src\\gm",
+    "\\game\\src\\it",
+    "\\game\\src\\it\\article",
+    "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\item_something.c",
+  "SelectedNode": "\\game\\src\\gm\\gmground.h",
   "PreviewInSolutionExplorer": false
 }

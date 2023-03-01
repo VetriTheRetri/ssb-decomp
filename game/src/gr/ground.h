@@ -5,7 +5,7 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
-struct gmGroundInfo_80131300
+struct Ground_Info_80131300
 {
     void *unk_0x0;
     void *unk_0x4;
@@ -44,6 +44,6 @@ struct gmGroundInfo_80131300
     s16 blastzone_left;
 };
 
-static struct gmGroundInfo_80131300 *D_ovl2_80131300; // TO DO: move this to the correct file
+static struct Ground_Info_80131300 *Ground_Info; // TO DO: move this to the correct file
 
 #endif

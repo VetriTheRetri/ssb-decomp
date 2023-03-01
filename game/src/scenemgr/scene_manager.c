@@ -32,7 +32,7 @@ struct BattleState D_800A4D08;
 struct BattleState D_800A4EF8;
 
 // pointer to battle settings
-struct UnkA4AD0 *D_800A50E8;
+struct UnkA4AD0 *Match_Info;
 u32 D_800A50EC;
 u8 D_800A50F0[8];
 u8 D_800A50F8[324];

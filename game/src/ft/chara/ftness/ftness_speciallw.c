@@ -1,5 +1,5 @@
 #include <game/src/ft/chara/ftness/ftness.h>
-#include <game/src/it/item.h>
+#include <game/src/it/item/item.h>
 
 #define HALF_PI32 1.5707964F
 #define PI32 3.1415927F
