@@ -5,6 +5,12 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+typedef  struct gmGroundUnkBytes
+{
+    u8 byte[1]; // Size currently unknown
+
+} gmGroundUnkBytes;
+
 typedef struct gmGroundInfo
 {
     void *unk_0x0;
@@ -44,7 +50,7 @@ typedef struct gmGroundInfo
     s16 blastzone_left;
     u32 unk_0x7C;
     u32 unk_0x80;
-    u8 *unk_0x84;
+    gmGroundUnkBytes *unk_0x84;
 
 } gmGroundInfo;
 

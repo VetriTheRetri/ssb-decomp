@@ -30,6 +30,16 @@ typedef struct gmItemSpawn
 
 } gmItemSpawn;
 
+typedef struct Unk_8018D048
+{
+    u8 filler_0x0[0x8];
+    u8 unk_0x8;
+    u8 *unk_0xC;
+    u16 unk_0x10;
+    u16 *unk_0x14;
+
+} Unk_8018D048; // Found in func_ovl3_8016EF40, very similar similar to gmItemSpawn
+
 typedef struct gmPlayerBlock
 {
     u8 level; // Actually begins at 1 instead of 0

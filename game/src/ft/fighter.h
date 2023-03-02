@@ -185,15 +185,6 @@ typedef enum plKind
 
 } plKind;
 
-typedef enum ftHitUpdateState
-{
-    ftHit_UpdateState_Disable,
-    ftHit_UpdateState_New,
-    ftHit_UpdateState_2,
-    ftHit_UpdateState_3
-
-} ftHitUpdateState;
-
 typedef struct _Fighter_Hit
 {
     s32 update_state;

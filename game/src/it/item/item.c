@@ -333,10 +333,10 @@ void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
         switch (ip->item_hit[0].update_state)
         {
         default:
-        case itHit_UpdateState_Disable:
+        case gmHitCollision_UpdateState_Disable:
             break;
 
-        case itHit_UpdateState_New:
+        case gmHitCollision_UpdateState_New:
 
             it_hit_unk->pos = *offset;
 
@@ -350,15 +350,15 @@ void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
             {
                 func_ovl3_80165ED0(joint, &it_hit_unk->pos);
             }
-            ip->item_hit[0].update_state = itHit_UpdateState_Transfer;
+            ip->item_hit[0].update_state = gmHitCollision_UpdateState_Transfer;
             it_hit_unk->unk_0x18 = 0;
             it_hit_unk->unk_0x5C = 0;
             break;
 
-        case itHit_UpdateState_Transfer:
-            ip->item_hit[0].update_state = itHit_UpdateState_Interpolate;
+        case gmHitCollision_UpdateState_Transfer:
+            ip->item_hit[0].update_state = gmHitCollision_UpdateState_Interpolate;
 
-        case itHit_UpdateState_Interpolate:
+        case gmHitCollision_UpdateState_Interpolate:
 
             it_hit_unk->pos_prev = it_hit_unk->pos;
 
@@ -390,7 +390,7 @@ void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
 
     it_hit = &ip->item_hit[0];
 
-    if (it_hit->update_state != itHit_UpdateState_Disable)
+    if (it_hit->update_state != gmHitCollision_UpdateState_Disable)
     {
         for (i = 0; i < ARRAY_COUNT(ip->item_hit[0].hit_targets); i++)
         {
@@ -661,7 +661,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
     this_ip = ItemGetStruct(this_gobj);
     this_hit = &this_ip->item_hit[0];
 
-    if ((this_hit->clang) && (this_hit->update_state != itHit_UpdateState_Disable) && (this_hit->hit_status & 2))
+    if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->hit_status & 2))
     {
         other_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
 
@@ -685,7 +685,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                         if (this_ip->team == other_ip->team) goto next_gobj; // YUCKY match but you can't say it's only a half
 
                     next_check:
-                        if ((other_hit->update_state != itHit_UpdateState_Disable) && (other_hit->clang))
+                        if ((other_hit->update_state != gmHitCollision_UpdateState_Disable) && (other_hit->clang))
                         {
                             if (other_hit->hit_status & 2)
                             {

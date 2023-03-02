@@ -13,6 +13,15 @@
 #define WALL_UP 2               // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 #define WALL_DOWN 3             // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 
+typedef enum gmHitUpdateState
+{
+    gmHitCollision_UpdateState_Disable,          // No active hitbox or updates
+    gmHitCollision_UpdateState_New,              // Initialize hitbox positions
+    gmHitCollision_UpdateState_Transfer,         // Transitions to update state 3, that's it
+    gmHitCollision_UpdateState_Interpolate       // Copies current position to previous
+
+} gmHitUpdateState;
+
 typedef struct CommonAttackFlagsHi
 {
     u16 flags_hi_b0 : 1;

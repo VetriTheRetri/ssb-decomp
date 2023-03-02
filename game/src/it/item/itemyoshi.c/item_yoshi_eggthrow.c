@@ -110,7 +110,7 @@ void func_ovl3_8016C07C(GObj *item_gobj)
 
     JObjGetStruct(item_gobj)->translate.z = 0.0F;
 
-    ip->item_hit[0].update_state = itHit_UpdateState_New;
+    ip->item_hit[0].update_state = gmHitCollision_UpdateState_New;
 
     func_ovl3_80165F60(item_gobj);
 }
@@ -237,7 +237,7 @@ GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
 
     ip->lifetime = ITEGGTHROW_LIFETIME;
 
-    ip->item_hit[0].update_state = itHit_UpdateState_Disable;
+    ip->item_hit[0].update_state = gmHitCollision_UpdateState_Disable;
 
     ip->is_camera_follow = TRUE;
 

@@ -122,14 +122,14 @@ GObj* func_ovl3_8016EC40(void)
     GObj *gobj;
     s32 i;
     s32 item_count;
-    u8 *unk_0x84_2;
+    gmGroundUnkBytes *unk_0x84_2;
     s32 item_count_2;
     s32 max_items;
     s32 item_toggles[30];
     u32 item_bits;
     s32 j;
     u32 item_bits_3;
-    u8 *unk_0x84;
+    gmGroundUnkBytes *unk_0x84;
     u32 item_bits_2;
 
     // TO DO: Figure out where the iterator limit of 20 is coming from
@@ -151,7 +151,7 @@ GObj* func_ovl3_8016EC40(void)
                 {
                     if (item_bits_2 & 1)
                     {
-                        item_count += unk_0x84_2[i];
+                        item_count += unk_0x84_2->byte[i];
                     }
                 }
                 if (item_count == 0)
@@ -193,7 +193,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 for (i = 0, j = 0; i < 20; i++, item_bits >>= 1)
                 {
-                    if ((item_bits & 1) && (unk_0x84[i] != 0))
+                    if ((item_bits & 1) && (unk_0x84->byte[i] != 0))
                     {
                         j++;
                     }
@@ -208,11 +208,11 @@ GObj* func_ovl3_8016EC40(void)
 
                 for (i = 0, j = 0; i < 20; i++, item_bits_3 >>= 1)
                 {
-                    if ((item_bits_3 & 1) && (unk_0x84[i] != 0))
+                    if ((item_bits_3 & 1) && (unk_0x84->byte[i] != 0))
                     {
                         item_settings.unk_0x18[j] = i;
                         item_settings.unk_0x20[j] = item_count_2;
-                        item_count_2 += unk_0x84[i];
+                        item_count_2 += unk_0x84->byte[i];
 
                         j++;
                     }
@@ -223,4 +223,187 @@ GObj* func_ovl3_8016EC40(void)
         }
     }
     return NULL;
+}
+
+static Unk_8018D048 D_ovl3_8018D048;
+
+void func_ovl3_8016EF40(void)
+{
+    s32 sp28;
+    s32 sp1C;
+    s32 item_count_2;
+    gmGroundUnkBytes *temp_a3;
+    s32 temp_f18;
+    s32 j;
+    s32 item_count_4;
+    s32 k;
+    gmGroundUnkBytes *temp_t1;
+    s32 item_count_2_2;
+    s32 temp_a0;
+    s32 i;
+    s32 item_count;
+    u32 item_bits;
+    u32 item_bits_2;
+    u32 item_bits_3;
+
+    if ((Match_Info->item_switch != 0) && (Match_Info->item_toggles != 0) && (Ground_Info->unk_0x84 != NULL))
+    {
+        item_bits = Match_Info->item_toggles >> 4;
+
+        temp_a3 = Ground_Info->unk_0x84;
+
+        item_count = 0;
+
+        for (i = 4; i < 20; i++, item_bits >>= 1)
+        {
+            if (item_bits & 1)
+            {
+                item_count += temp_a3->byte[i];
+            }
+        }
+        D_ovl3_8018D048.unk_0x10 = item_count;
+
+        if (item_count != 0)
+        {
+            item_bits_2 = (u32)Match_Info->item_toggles >> 4;
+
+            temp_t1 = Ground_Info->unk_0x84;
+
+            for (j = 0, i = 4; i < 20; i++, item_bits_2 >>= 1)
+            {
+                if ((item_bits_2 & 1) && (temp_t1->byte[i] != 0))
+                {
+                    j++;
+                }
+            }
+            j++;
+
+            D_ovl3_8018D048.unk_0x8 = j;
+            D_ovl3_8018D048.unk_0xC = hal_alloc(j * sizeof(*D_ovl3_8018D048.unk_0xC), 0U);
+            D_ovl3_8018D048.unk_0x14 = hal_alloc(j * sizeof(*D_ovl3_8018D048.unk_0x14), 2U);
+
+            item_bits_2 = Match_Info->item_toggles >> 4;
+
+            item_count_2 = 0;
+
+            for (j = 0, i = 4; i < 20; i += 4, item_bits_2 >>= 1)
+            {
+                if ((item_bits_2 & 1) && (temp_t1->byte[i] != 0))
+                {
+                    D_ovl3_8018D048.unk_0xC[j] = i;
+                    D_ovl3_8018D048.unk_0x14[j] = item_count_2;
+                    item_count_2 += temp_t1->byte[i];
+                    j++;
+                }
+                item_bits_2 >>= 1;
+
+                if ((item_bits_2 & 1) && (temp_t1->byte[i + 1] != 0))
+                {
+                    D_ovl3_8018D048.unk_0xC[j] = i + 1;
+                    D_ovl3_8018D048.unk_0x14[j] = item_count_2;
+                    item_count_2 += temp_t1->byte[i + 1];
+                    j++;
+                }
+                item_bits_2 >>= 1;
+
+                if ((item_bits_2 & 1) && (temp_t1->byte[i + 2] != 0))
+                {
+
+                    D_ovl3_8018D048.unk_0xC[j] = i + 2;
+                    D_ovl3_8018D048.unk_0x14[j] = item_count_2;
+                    item_count_2 += temp_t1->byte[i + 2];
+                    j++;
+                }
+                item_bits_2 >>= 1;
+
+                if ((item_bits_2 & 1) && (temp_t1->byte[i + 3] != 0))
+                {
+                    D_ovl3_8018D048.unk_0xC[j] = i + 3;
+                    D_ovl3_8018D048.unk_0x14[j] = item_count_2;
+                    item_count_2 += temp_t1->byte[i + 3];
+                    j++;
+                }
+            }
+            D_ovl3_8018D048.unk_0xC[j] = 32;
+            D_ovl3_8018D048.unk_0x14[j] = item_count_2;
+
+            temp_f18 = (s32)(D_ovl3_8018D048.unk_0x10 * 0.1F);
+
+            if (temp_f18 != 0)
+            {
+                item_count_4 = temp_f18;
+            }
+            else item_count_4 = 1;
+
+            D_ovl3_8018D048.unk_0x10 += item_count_4;
+        }
+    }
+    else
+    {
+        D_ovl3_8018D048.unk_0x10 = 0U;
+    }
+}
+
+typedef struct Unk_8018D060
+{
+    u8 unk_0x0;
+    u8 unk_0x1;
+    u8 filler_0x2[0x2E - 0x2];
+    u8 unk_0x2E;
+
+} Unk_8018D060;
+
+static Unk_8018D060 D_ovl3_8018D060;
+
+void func_ovl3_8016F218(void)
+{
+    D_ovl3_8018D060.unk_0x0 = D_ovl3_8018D060.unk_0x1 = U8_MAX;
+    D_ovl3_8018D060.unk_0x2E = 0xC;
+}
+
+extern void *(*jtbl_ovl3_8018946C[20])(s32, s32, s32, s32);
+
+void* func_ovl3_8016F238(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    return jtbl_ovl3_8018946C[arg1](arg0, arg2, arg3, arg4);
+}
+
+void func_ovl3_8016F280(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    s32 i;
+
+    for (i = 0; i < ap->article_hit[0].hitbox_count; i++)
+    {
+        switch (ap->article_hit[0].update_state)
+        {
+        case gmHitCollision_UpdateState_Disable:
+            break;
+
+        case gmHitCollision_UpdateState_New:
+            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + JObjGetStruct(article_gobj)->translate.x;
+            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + JObjGetStruct(article_gobj)->translate.y;
+            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + JObjGetStruct(article_gobj)->translate.z;
+
+            ap->article_hit[0].update_state = gmHitCollision_UpdateState_Transfer;
+
+            ap->article_hit[0].article_hit_unk[i].unk_0x18 = 0;
+            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0.0F;
+            break;
+
+        case gmHitCollision_UpdateState_Transfer:
+            ap->article_hit[0].update_state = gmHitCollision_UpdateState_Interpolate;
+
+        case gmHitCollision_UpdateState_Interpolate:
+            ap->article_hit[0].article_hit_unk[i].pos_prev = ap->article_hit[0].article_hit_unk[i].pos;
+
+            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + JObjGetStruct(article_gobj)->translate.x;
+            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + JObjGetStruct(article_gobj)->translate.y;
+            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + JObjGetStruct(article_gobj)->translate.z;
+
+            ap->article_hit[0].article_hit_unk[i].unk_0x18 = 0;
+            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0.0F;
+            break;
+        }
+    }
 }

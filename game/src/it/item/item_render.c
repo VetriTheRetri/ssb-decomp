@@ -28,7 +28,7 @@ void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
 
     for (i = 0; i < item_hit->hitbox_count; i++)
     {
-        if ((item_hit->update_state != itHit_UpdateState_Disable) && (item_hit->update_state != itHit_UpdateState_New))
+        if ((item_hit->update_state != gmHitCollision_UpdateState_Disable) && (item_hit->update_state != gmHitCollision_UpdateState_New))
         {
             gDPPipeSync(D_800465B0[0]++);
 
@@ -48,7 +48,7 @@ void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
 
                 gDPSetBlendColor(D_800465B0[0]++, 0, 0, 0, 0);
             }
-            if (item_hit->update_state == itHit_UpdateState_Interpolate)
+            if (item_hit->update_state == gmHitCollision_UpdateState_Interpolate)
             {
                 hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
@@ -78,7 +78,7 @@ void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
 
             gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-            if (item_hit->update_state == itHit_UpdateState_Interpolate)
+            if (item_hit->update_state == gmHitCollision_UpdateState_Interpolate)
             {
                 gSPDisplayList(D_800465B0[0]++, &D_ovl2_8012C160);
             }
@@ -169,7 +169,7 @@ void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
     }
     else
     {
-        if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit[0].update_state == itHit_UpdateState_Disable))
+        if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit[0].update_state == gmHitCollision_UpdateState_Disable))
         {
             func_ovl3_80167454();
 
@@ -225,7 +225,7 @@ void func_ovl3_80167660(GObj *item_gobj)
 
         func_ovl3_801671F0(item_gobj);
     }
-    else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit[0].update_state == itHit_UpdateState_Disable))
+    else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit[0].update_state == gmHitCollision_UpdateState_Disable))
     {
         func_ovl3_80167454();
 

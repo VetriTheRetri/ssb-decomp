@@ -58,7 +58,7 @@ bool32 jtgt_ovl3_80168BFC(GObj *item_gobj) // Animation
 
             func_ovl3_80168B00(item_gobj);
 
-            ip->item_hit[0].update_state = itHit_UpdateState_New;
+            ip->item_hit[0].update_state = gmHitCollision_UpdateState_New;
 
             func_ovl3_80165F60(item_gobj);
         }
@@ -118,7 +118,7 @@ bool32 jtgt_ovl3_80168DA4(GObj *item_gobj) // Hit reflector
 
 extern ItemStatusDesc Item_ChargeShot_Desc;
 
-GObj *func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool32 is_release) // Create item
+GObj* func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool32 is_release) // Create item
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_ChargeShot_Desc, pos, ((is_release != FALSE) ? (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER) : ITEM_MASK_SPAWN_FIGHTER));
@@ -140,7 +140,7 @@ GObj *func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool3
     }
     else
     {
-        ip->item_hit[0].update_state = ftHit_UpdateState_Disable;
+        ip->item_hit[0].update_state = gmHitCollision_UpdateState_Disable;
         ip->item_vars.charge_shot.is_full_charge = FALSE;
 
         ip->item_vars.charge_shot.owner_gobj = fighter_gobj;

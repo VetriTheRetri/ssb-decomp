@@ -182,7 +182,7 @@ void func_ovl3_8015B398(GObj *fighter_gobj)
         {
             Fighter_Hit *ft_hit = &fp->fighter_hit[i];
 
-            if (ft_hit->update_state == ftHit_UpdateState_New)
+            if (ft_hit->update_state == gmHitCollision_UpdateState_New)
             {
                 ft_hit->damage += fp->status_vars.donkey.specialn.charge_level * FTDONKEY_GIANTPUNCH_CHARGE_DAMAGE_MUL;
             }

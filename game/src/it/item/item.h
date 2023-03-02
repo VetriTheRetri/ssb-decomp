@@ -52,15 +52,6 @@ typedef enum It_Kind
 
 } It_Kind;
 
-typedef enum itHitUpdateState
-{
-    itHit_UpdateState_Disable,          // No active hitbox or updates
-    itHit_UpdateState_New,              // Initialize hitbox positions
-    itHit_UpdateState_Transfer,         // Transitions to update state 3, that's it
-    itHit_UpdateState_Interpolate       // Copies current position to previous
-
-} itHitUpdateState;
-
 typedef enum Item_Hit_Element
 {
     It_Hit_Kind_Normal,
