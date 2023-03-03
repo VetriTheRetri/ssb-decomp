@@ -1,4 +1,5 @@
 #include "article.h"
+#include "fighter.h"
 #include "gmmatch.h"
 #include "gmground.h"
 #include "gbi.h"
@@ -653,5 +654,150 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
 
         default: break;
         }
+    }
+}
+
+void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct *ap, Article_Hurt *arg3, GObj *fighter_gobj, GObj *article_gobj)
+{
+    s32 damage;
+    f32 temp_f0;
+    Vec3f sp4C;
+
+    func_ovl2_800E26BC(fp, ft_hit->unk_0x4, article_gobj, 0, 0, 0);
+
+    damage = ft_hit->damage;
+
+    if (fp->unk_0x7B0 < damage)
+    {
+        fp->unk_0x7B0 = damage;
+    }
+    if (arg3->hitstatus == gmHitCollision_Status_Normal)
+    {
+        ap->damage_taken += damage;
+
+        if (ap->unk_0x290 < damage)
+        {
+            ap->unk_0x290 = damage;
+            ap->unk_0x29C = ft_hit->unk_0x28;
+            ap->unk_0x2A0 = ft_hit->unk_0x10;
+
+            ap->lr_hit = (JObjGetStruct(article_gobj)->translate.x < JObjGetStruct(fighter_gobj)->translate.x) ? RIGHT : LEFT;
+
+            ap->damage_gobj = fighter_gobj;
+            ap->damage_team = fp->team;
+            ap->damage_port = fp->player_id;
+            ap->damage_player_number = fp->player_number;
+            ap->unk_0x70 = fp->offset_hit_type;
+            ap->damage_display_state = fp->display_state;
+        }
+        if (ap->x2D2_flag_b4)
+        {
+            temp_f0 = func_ovl2_800E9D78(ap->unk_0x1C, ap->damage_taken, damage, ft_hit->unk_0x30, ft_hit->unk_0x2C, ft_hit->unk_0x34, 1.0F, fp->offset_hit_type, (s32)ap->unk_0x16);
+
+            if (ap->unk_0x294 < temp_f0)
+            {
+                ap->unk_0x294 = temp_f0;
+            }
+        }
+        func_ovl2_800F0AF8(&sp4C, ft_hit, arg3, article_gobj);
+
+        switch (ft_hit->unk_0x10)
+        {
+        case 1:
+            func_ovl2_800FE2F4(&sp4C, ft_hit->damage);
+            break;
+        case 2:
+            func_ovl2_800FE4EC(&sp4C, ft_hit->damage);
+            break;
+        case 4:
+            func_ovl2_80100ACC(&sp4C);
+            break;
+        case 3:
+            func_ovl2_800FE6E4(&sp4C, ft_hit->damage, func_ovl2_800F0FC0(fp, ft_hit));
+            break;
+        default:
+            func_ovl2_800FDC04(&sp4C, fp->player_id, ft_hit->damage, 0);
+            break;
+        }
+    }
+    func_ovl2_800E2C24(fp, ft_hit);
+}
+
+void func_ovl3_8016FD4C(Article_Struct *this_ap, Article_Hit *this_hit, s32 this_hit_id, Article_Struct *victim_ap, Article_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
+{
+    s32 victim_hit_damage;
+    s32 this_hit_damage;
+    Vec3f sp2C;
+    s32 victim_hit_priority;
+    s32 this_hit_priority;
+
+    victim_hit_damage = func_ovl3_801727F4(victim_ap);
+    this_hit_damage = func_ovl3_801727F4(this_ap);
+
+    func_ovl2_800F0EFC(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
+
+    this_hit_priority = this_hit->priority;
+    victim_hit_priority = victim_hit->priority;
+
+    if (this_hit_priority >= victim_hit->priority)
+    {
+        func_ovl3_8016F930(victim_hit, this_gobj, gmHitCollision_Type_Hit, 0);
+
+        if (victim_ap->hit_attack_damage < victim_hit_damage)
+        {
+            victim_ap->hit_attack_damage = victim_hit_damage;
+        }
+        func_ovl2_80100BF0(&sp2C, victim_hit_damage);
+
+        this_hit_priority = this_hit->priority;
+        victim_hit_priority = victim_hit->priority;
+    }
+    if (victim_hit_priority >= this_hit_priority)
+    {
+        func_ovl3_8016F930(this_hit, victim_gobj, gmHitCollision_Type_Hit, 0);
+
+        if (this_ap->hit_attack_damage < this_hit_damage)
+        {
+            this_ap->hit_attack_damage = this_hit_damage;
+        }
+        func_ovl2_80100BF0(&sp2C, this_hit_damage);
+    }
+}
+
+void func_ovl3_8016FE4C(Item_Struct *ip, Item_Hit *it_hit, s32 it_hit_id, Article_Struct *ap, Article_Hit *at_hit, s32 at_hit_id, GObj *item_gobj, GObj *article_gobj)
+{
+    s32 it_hit_damage = func_ovl3_80168128(ip);
+    s32 at_hit_damage = func_ovl3_801727F4(ap);
+    Vec3f sp2C;
+    s32 at_hit_priority;
+    s32 it_hit_priority;
+
+    func_ovl2_800F0CDC(&sp2C, it_hit, it_hit_id, at_hit, at_hit_id);
+
+    it_hit_priority = it_hit->priority;
+    at_hit_priority = at_hit->priority;
+
+    if (it_hit_priority >= at_hit->priority)
+    {
+        func_ovl3_8016F930(at_hit, item_gobj, gmHitCollision_Type_Hit, 0);
+
+        if (ap->hit_attack_damage < at_hit_damage)
+        {
+            ap->hit_attack_damage = at_hit_damage;
+        }
+        func_ovl2_80100BF0(&sp2C, at_hit_damage);
+
+        it_hit_priority = it_hit->priority;
+        at_hit_priority = at_hit->priority;
+    }
+    if (at_hit_priority >= it_hit_priority)
+    {
+        func_ovl3_8016679C(ip, it_hit, article_gobj, gmHitCollision_Type_Hit, 0);
+
+        if (ip->hit_attack_damage < it_hit_damage)
+        {
+            ip->hit_attack_damage = it_hit_damage;
+        }
+        func_ovl2_80100BF0(&sp2C, it_hit_damage);
     }
 }

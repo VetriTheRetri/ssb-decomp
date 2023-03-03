@@ -136,15 +136,6 @@ typedef enum ftCommonAction
 
 } ftCommonAction;
 
-typedef enum ftHitStatus
-{
-    ftHitStatus_Normal,
-    ftHitStatus_Unk,
-    ftHitStatus_Invincible,
-    ftHitStatus_Intangible
-        
-} ftHitStatus;
-
 typedef enum ftKind
 {
 
@@ -187,11 +178,21 @@ typedef enum plKind
 
 typedef struct _Fighter_Hit
 {
-    s32 update_state;
+    s32 update_State;
     u32 unk_0x4;
     u32 unk_0x8;
     s32 damage;
-    u8 filler[0xC4 - 0x10];
+    s32 unk_0x10;
+    s32 unk_0x14;
+    s32 unk_0x18;
+    s32 unk_0x1C;
+    s32 unk_0x20;
+    s32 unk_0x24;
+    s32 unk_0x28;
+    s32 unk_0x2C;
+    s32 unk_0x30;
+    s32 unk_0x34;
+    u8 filler[0xC4 - 0x38];
 
 } Fighter_Hit;
 
@@ -471,7 +472,11 @@ typedef struct _Fighter_Struct
 
     s32 hitstatus;
 
-    u8 filler_0x58C[0x7E8 - 0x5BC];
+    u8 filler_0x58C[0x7B0 - 0x5BC];
+
+    s32 unk_0x7B0;
+
+    u8 filler_0x7B4[0x7E8 - 0x7B4];
 
     f32 unk_0x7E8;
     f32 unk_0x7EC;

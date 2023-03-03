@@ -159,6 +159,7 @@ typedef struct _Item_Hit
     s32 shield_damage;
     s32 priority; // Used to determine winner in item hitbox vs item hitbox interaction?
     u8 hit_status; // "Tangibility flag? 0x07"
+    u8 unk_0x45;
     u16 hit_sfx;
     union
     {

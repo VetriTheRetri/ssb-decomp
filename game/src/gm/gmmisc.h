@@ -13,6 +13,15 @@
 #define WALL_UP 2               // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 #define WALL_DOWN 3             // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 
+typedef enum gmHitCollisionStatus
+{
+    gmHitCollision_Status_None, // User's hurtboxes are disabled
+    gmHitCollision_Status_Normal, // User can be hit
+    gmHitCollision_Status_Invincible, // User can be hit, but is immune to damage
+    gmHitCollision_Status_Intangible // User cannot be hit
+
+} gmHitCollisionStatus;
+
 typedef enum gmHitCollisionType // Hitbox types, this is universal but I don't know where else to put it so both fighters and items can see it without redefining it for each
 {
     gmHitCollision_Type_Hurt,

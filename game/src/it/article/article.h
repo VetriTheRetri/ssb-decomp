@@ -45,7 +45,7 @@ typedef struct _Article_Hit
 {
     s32 update_state; // 0x0
     s32 damage; // 0x4
-    s32 unk;
+    f32 unk;
     f32 stale; // Might be damage in float? At least based on Melee?
     s32 element; // 0xC // Placed AFTER offset?
     Vec3f offset[2]; // 0x10 - 0x18    
@@ -54,25 +54,32 @@ typedef struct _Article_Hit
     u32 knockback_scale; // Unconfirmed
     u32 knockback_weight; // Weight-Dependent Set Knockback
     u32 knockback_base; // Base knockback
-    u16 hit_status; // "Tangibility flag? 0x07"
+    s32 shield_damage; // Shield damage?
+    s32 priority; // Priority?
+    u8 hit_status;
     u16 hit_sfx;
-    s32 unk_0x3C; // Shield damage?
-    s32 unk_0x40; // Priority?
-    u16 flags_0x44 : 7; // Reflectability flag
-
+    u16 flags_0x4C_b0 : 7;
     u16 attack_id : 6;
-    u16 flags_0x48_b7 : 1;
-
-    u16 flags_0x4A;
-    u16 flags_0x4C;
+    u16 flags_0x4C_b7 : 1;
     u16 flags_0x4E;
-    s32 hitbox_count;
+    u16 flags_0x50;
+    u16 flags_0x52;
+    s32 hitbox_count; // 0 = disabled, 1 = enabled, 2 and 3 related to position update?
     ArticleHitUnk article_hit_unk[2];
     ArticleHitArray hit_targets[4];
 
 } Article_Hit;
 
-typedef struct Article_Struct // Pokémon?
+typedef struct Article_Hurt
+{
+    s32 unk_0x0;
+    s32 hitstatus;
+    Vec3f pos;
+    Vec3f size;
+
+} Article_Hurt; // Article Hurtbox, might be larger
+
+typedef struct Article_Struct // Common items, stage hazards and Pokémon
 {
     void *unk_0x0;
     GObj *article_gobj;
@@ -96,10 +103,37 @@ typedef struct Article_Struct // Pokémon?
     } phys_info;
 
     Coll_Data coll_data;
-    Ground_Air ground_or_air;
-    Article_Hit article_hit[1];
 
-    u8 filler_0x160[0x2CC - 0x244];
+    Ground_Air ground_or_air;
+
+    Article_Hit article_hit[1];
+    Article_Hurt article_hurt;
+
+    s32 unk_0x264;
+    s32 unk_0x268;
+    s32 unk_0x26C;
+    s32 hit_attack_damage;
+    s32 unk_0x274;
+    s32 unk_0x278;
+    s32 unk_0x27C;
+    s32 unk_0x280;
+    s32 unk_0x284;
+    s32 unk_0x288;
+    s32 unk_0x28C;
+    s32 unk_0x290;
+    f32 unk_0x294;
+    s32 damage_taken;
+    s32 unk_0x29C;
+    s32 unk_0x2A0;
+    s32 lr_hit;
+    GObj *damage_gobj; // GObj that last dealt damage to this article?
+    u8 damage_team;
+    u8 damage_port;
+    s32 damage_player_number;
+    u8 unk_0x70;
+    s32 damage_display_state;
+
+    u8 filler_0x160[0x2CC - 0x2BC];
 
     u8 x2CC_flag_b0 : 1;
     u8 x2CC_flag_b1 : 1;
@@ -135,6 +169,10 @@ typedef struct Article_Struct // Pokémon?
     u8 x2CF_flag_b7 : 1;
     u16 unk_0x2D0;
     u16 x2D2_flag_12bit : 12; // Lifetime?
+    u8 x2D2_flag_b4 : 1;
+    u8 x2D2_flag_b5 : 1;
+    u8 x2D2_flag_b6 : 1;
+    u8 x2D2_flag_b7 : 1;
 
     u8 filler_0x2D4[0x34C - 0x2D4];
 
@@ -147,15 +185,15 @@ typedef struct Article_Struct // Pokémon?
 
     s32 display_state;
 
-    bool32 (*cb_anim)(GObj*);
-    bool32 (*cb_coll)(GObj*);
-    bool32 (*cb_give_damage)(GObj*);
-    bool32 (*cb_shield_block)(GObj*);
-    bool32 (*cb_shield_deflect)(GObj*);
-    bool32 (*cb_attack)(GObj*);
-    bool32 (*cb_reflect)(GObj*);
-    bool32 (*cb_absorb)(GObj*);
-    bool32 (*cb_destroy)(GObj*);
+    bool32(*cb_anim)(GObj *);
+    bool32(*cb_coll)(GObj *);
+    bool32(*cb_give_damage)(GObj *);
+    bool32(*cb_shield_block)(GObj *);
+    bool32(*cb_shield_deflect)(GObj *);
+    bool32(*cb_attack)(GObj *);
+    bool32(*cb_reflect)(GObj *);
+    bool32(*cb_absorb)(GObj *);
+    bool32(*cb_destroy)(GObj *);
 
 } Article_Struct;
 

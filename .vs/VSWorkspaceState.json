@@ -10,8 +10,9 @@
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
+    "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article.c",
+  "SelectedNode": "\\game\\src\\sys\\obj.h",
   "PreviewInSolutionExplorer": false
 }

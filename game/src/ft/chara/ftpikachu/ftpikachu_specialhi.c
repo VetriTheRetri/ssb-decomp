@@ -78,7 +78,7 @@ void func_ovl3_80152934(GObj *fighter_gobj)
 
 void func_ovl3_80152960(GObj *fighter_gobj)
 {
-    func_ovl2_800E8A24(fighter_gobj, ftHitStatus_Intangible); // Set hitstatus
+    func_ovl2_800E8A24(fighter_gobj, gmHitCollision_Status_Intangible); // Set hitstatus
 
     func_ovl2_800E9814(fighter_gobj, FTPIKACHU_QUICKATTACK_COLANIM_ID, 0); // Apply color animation
 
