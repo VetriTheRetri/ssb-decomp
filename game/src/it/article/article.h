@@ -9,6 +9,10 @@
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 
+#define ARTICLE_DESPAWN_FLASH_INT_DEFAULT 180U // Article starts flashing rapidly once its lifetime (?) drops below this value
+#define ARTICLE_ARROW_BLINK_INT_DEFAULT 45 // Red arrow pointing downward at article "blinks" at this frequency (45 frames visible, 45 frames invisible)
+#define ARTICLE_REHIT_TIME_DEFAULT 16
+
 typedef struct ArticleHitVictimFlags
 {
     u32 flags_b0 : 1;
@@ -41,9 +45,9 @@ typedef struct _Article_Hit
 {
     s32 update_state; // 0x0
     s32 damage; // 0x4
+    s32 unk;
     f32 stale; // Might be damage in float? At least based on Melee?
     s32 element; // 0xC // Placed AFTER offset?
-    s32 unk;
     Vec3f offset[2]; // 0x10 - 0x18    
     f32 size;
     s32 angle;
@@ -56,7 +60,7 @@ typedef struct _Article_Hit
     s32 unk_0x40; // Priority?
     u16 flags_0x44 : 7; // Reflectability flag
 
-    u16 flags_0x48_b123456 : 6;
+    u16 attack_id : 6;
     u16 flags_0x48_b7 : 1;
 
     u16 flags_0x4A;
@@ -68,7 +72,7 @@ typedef struct _Article_Hit
 
 } Article_Hit;
 
-typedef struct Article_Struct // Common Items / Pokémon 
+typedef struct Article_Struct // Pokémon?
 {
     void *unk_0x0;
     GObj *article_gobj;
@@ -81,20 +85,77 @@ typedef struct Article_Struct // Common Items / Pokémon
     u8 unk_0x17;
     s32 player_number;
     u32 unk_0x1C;
-    u32 unk_0x20;
+    u32 hitlag_timer;
     s32 lr;
 
-    u8 filler_0x28[0x38 - 0x28];
+    struct
+    {
+        f32 vel_ground;
+        Vec3f vel;
+
+    } phys_info;
 
     Coll_Data coll_data;
-
     Ground_Air ground_or_air;
-
     Article_Hit article_hit[1];
 
-    u8 filler_0x244[0x374 - 0x244];
+    u8 filler_0x160[0x2CC - 0x244];
+
+    u8 x2CC_flag_b0 : 1;
+    u8 x2CC_flag_b1 : 1;
+    u8 x2CC_flag_b2 : 1;
+    u8 x2CC_flag_b3 : 1;
+    u8 x2CC_flag_b4 : 1;
+    u8 x2CC_flag_b5 : 1;
+    u8 x2CC_flag_b6 : 1;
+    u8 x2CC_flag_b7 : 1;
+    u8 x2CD_flag_b0 : 1;
+    u8 x2CD_flag_b1 : 1;
+    u8 x2CD_flag_b2 : 1;
+    u8 x2CD_flag_b3 : 1;
+    u8 x2CD_flag_b4 : 1;
+    u8 x2CD_flag_b5 : 1;
+    u8 x2CD_flag_b6 : 1;
+    u8 x2CD_flag_b7 : 1;
+    u8 x2CE_flag_b0 : 1;
+    u8 is_hitlag_article : 1;
+    u8 x2CE_flag_b2 : 1;
+    u8 x2CE_flag_b3 : 1;
+    u8 x2CE_flag_b4 : 1;
+    u8 x2CE_flag_b5 : 1;
+    u8 x2CE_flag_b6 : 1;
+    u8 x2CE_flag_b7 : 1;
+    u8 x2CF_flag_b0 : 1;
+    u8 x2CF_flag_b1 : 1;
+    u8 x2CF_flag_b2 : 1;
+    u8 x2CF_flag_b3 : 1;
+    u8 x2CF_flag_b4 : 1;
+    u8 x2CF_flag_b5 : 1;
+    u8 x2CF_flag_b6 : 1;
+    u8 x2CF_flag_b7 : 1;
+    u16 unk_0x2D0;
+    u16 x2D2_flag_12bit : 12; // Lifetime?
+
+    u8 filler_0x2D4[0x34C - 0x2D4];
+
+    u8 arrow_flash_timer;
+    u8 unk_0x34D;
+    u8 unk_0x34E;
+    u8 unk_0x34F;
+
+    u8 filler_0x350[0x374 - 0x350];
 
     s32 display_state;
+
+    bool32 (*cb_anim)(GObj*);
+    bool32 (*cb_coll)(GObj*);
+    bool32 (*cb_give_damage)(GObj*);
+    bool32 (*cb_shield_block)(GObj*);
+    bool32 (*cb_shield_deflect)(GObj*);
+    bool32 (*cb_attack)(GObj*);
+    bool32 (*cb_reflect)(GObj*);
+    bool32 (*cb_absorb)(GObj*);
+    bool32 (*cb_destroy)(GObj*);
 
 } Article_Struct;
 

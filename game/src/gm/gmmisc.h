@@ -13,14 +13,26 @@
 #define WALL_UP 2               // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 #define WALL_DOWN 3             // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 
-typedef enum gmHitUpdateState
+typedef enum gmHitCollisionType // Hitbox types, this is universal but I don't know where else to put it so both fighters and items can see it without redefining it for each
+{
+    gmHitCollision_Type_Hurt,
+    gmHitCollision_Type_Shield,
+    gmHitCollision_Type_Unk,
+    gmHitCollision_Type_Hit,
+    gmHitCollision_Type_ArticleHurt,             // Only used for specific articles? e.g. Pirahna Plants dealing damage
+    gmHitCollision_Type_Absorb,
+    gmHitCollision_Type_Reflect
+
+} gmHitCollisionType;
+
+typedef enum gmHitCollisionUpdateState
 {
     gmHitCollision_UpdateState_Disable,          // No active hitbox or updates
     gmHitCollision_UpdateState_New,              // Initialize hitbox positions
-    gmHitCollision_UpdateState_Transfer,         // Transitions to update state 3, that's it
+    gmHitCollision_UpdateState_Transfer,         // Transitions to interpolation mode, that's it
     gmHitCollision_UpdateState_Interpolate       // Copies current position to previous
 
-} gmHitUpdateState;
+} gmHitCollisionUpdateState;
 
 typedef struct CommonAttackFlagsHi
 {

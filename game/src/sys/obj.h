@@ -40,7 +40,8 @@ struct GObj
     u8 filler_0x3C[0x74 - 0x3C];
     void *obj;
     f32 anim_frame; // Current frame of animation?
-    u8 filler_0x7C[0x84 - 0x7C];
+    bool32 is_render;
+    u32 unk_0x80;
     void *user_data;
 
 };

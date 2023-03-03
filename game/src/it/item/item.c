@@ -107,7 +107,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         ip->display_state = ap->display_state;
 
         ip->item_hit[0].stale = ap->article_hit[0].stale;
-        ip->item_hit[0].attack_id = ap->article_hit[0].flags_0x48_b123456;
+        ip->item_hit[0].attack_id = ap->article_hit[0].attack_id;
         ip->item_hit[0].flags_0x4A_halfword = ap->article_hit[0].flags_0x4A_halfword;
         ip->item_hit[0].flags_0x4C_halfword = ap->article_hit[0].flags_0x4C_halfword & U16_MAX;
         ip->item_hit[0].flags_0x4E = ap->article_hit[0].flags_0x4E;
@@ -501,33 +501,33 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s3
         {
             switch (hitbox_type)
             {
-            case gmHitCollision_Hurt:
+            case gmHitCollision_Type_Hurt:
                 it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
                 break;
 
-            case gmHitCollision_Shield:
+            case gmHitCollision_Type_Shield:
                 it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
                 break;
 
-            case 2:
+            case gmHitCollision_Type_Unk:
                 it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
-            case gmHitCollision_Reflect:
+            case gmHitCollision_Type_Reflect:
                 it_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
-            case gmHitCollision_Absorb:
+            case gmHitCollision_Type_Absorb:
                 it_hit->hit_targets[i].victim_flags.flags_b3 = TRUE;
                 break;
 
-            case gmHitCollision_Hit:
+            case gmHitCollision_Type_Hit:
                 it_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
                 break;
 
-            case 4:
+            case gmHitCollision_Type_ArticleHurt:
                 it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
@@ -550,33 +550,33 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s3
 
         switch (hitbox_type)
         {
-        case gmHitCollision_Hurt:
+        case gmHitCollision_Type_Hurt:
             it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
             break;
 
-        case gmHitCollision_Shield:
+        case gmHitCollision_Type_Shield:
             it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
             break;
 
-        case 2:
+        case gmHitCollision_Type_Unk:
             it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
-        case gmHitCollision_Reflect:
+        case gmHitCollision_Type_Reflect:
             it_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
-        case gmHitCollision_Absorb:
+        case gmHitCollision_Type_Absorb:
             it_hit->hit_targets[i].victim_flags.flags_b3 = TRUE;
             break;
 
-        case gmHitCollision_Hit:
+        case gmHitCollision_Type_Hit:
             it_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
             break;
 
-        case 4:
+        case gmHitCollision_Type_ArticleHurt:
             it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
@@ -629,7 +629,7 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
 
     if (this_hit_priority >= victim_hit->priority)
     {
-        func_ovl3_8016679C(victim_ip, victim_hit, this_gobj, gmHitCollision_Hit, 0);
+        func_ovl3_8016679C(victim_ip, victim_hit, this_gobj, gmHitCollision_Type_Hit, 0);
         if (victim_ip->hit_attack_damage < victim_hit_damage)
         {
             victim_ip->hit_attack_damage = victim_hit_damage;
@@ -640,7 +640,7 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
     }
     if (victim_hit_priority >= this_hit_priority)
     {
-        func_ovl3_8016679C(this_ip, this_hit, victim_gobj, gmHitCollision_Hit, 0);
+        func_ovl3_8016679C(this_ip, this_hit, victim_gobj, gmHitCollision_Type_Hit, 0);
         if (this_ip->hit_attack_damage < this_hit_damage)
         {
             this_ip->hit_attack_damage = this_hit_damage;

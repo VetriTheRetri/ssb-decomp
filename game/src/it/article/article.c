@@ -407,3 +407,251 @@ void func_ovl3_8016F280(GObj *article_gobj)
         }
     }
 }
+
+void func_ovl3_8016F3D4(GObj *article_gobj)
+{
+    Article_Struct *ip = ArticleGetStruct(article_gobj);
+    ArticleHitArray *targets;
+    Article_Hit *at_hit;
+    s32 i;
+
+    at_hit = &ip->article_hit[0];
+
+    if (at_hit->update_state != gmHitCollision_UpdateState_Disable)
+    {
+        for (i = 0; i < ARRAY_COUNT(ip->article_hit[0].hit_targets); i++)
+        {
+            targets = &at_hit->hit_targets[i];
+
+            if (targets->victim_gobj != NULL)
+            {
+                if (targets->victim_flags.timer_rehit > 0)
+                {
+                    targets->victim_flags.timer_rehit--;
+
+                    if (targets->victim_flags.timer_rehit <= 0)
+                    {
+                        targets->victim_gobj = NULL;
+
+                        targets->victim_flags.flags_b0 = targets->victim_flags.flags_b1 = targets->victim_flags.flags_b2 = FALSE;
+
+                        targets->victim_flags.flags_b456 = 7;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void func_ovl3_8016F534(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Vec3f *translate;
+    JObj *joint;
+
+    if (ap->hitlag_timer != 0)
+    {
+        ap->hitlag_timer--;
+    }
+    if (ap->hitlag_timer <= 0)
+    {
+        func_8000DF34(article_gobj);
+    }
+    if (ap->hitlag_timer <= 0)
+    {
+        if (ap->cb_anim != NULL)
+        {
+            if (ap->cb_anim(article_gobj) != FALSE)
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+    }
+    if (ap->x2CE_flag_b0)
+    {
+        ap->x2D2_flag_12bit--;
+
+        if (ap->x2D2_flag_12bit <= ARTICLE_DESPAWN_FLASH_INT_DEFAULT)
+        {
+            if (ap->x2D2_flag_12bit == 0)
+            {
+                func_ovl2_8010066C(&JObjGetStruct(article_gobj)->translate, 1.0F);
+
+                func_ovl3_801728D4(article_gobj);
+
+                return;
+            }
+            if (ap->x2D2_flag_12bit & 1) // Make article invisible on odd frames
+            {
+                article_gobj->is_render ^= TRUE;
+            }
+        }
+
+        if (ap->arrow_flash_timer == 0)
+        {
+            ap->arrow_flash_timer = ARTICLE_ARROW_BLINK_INT_DEFAULT;
+        }
+        ap->arrow_flash_timer--;
+    }
+    else article_gobj->is_render = FALSE;
+
+    if (!(ap->is_hitlag_article))
+    {
+        joint = JObjGetStruct(article_gobj);
+
+        translate = &JObjGetStruct(article_gobj)->translate;
+
+        ap->coll_data.pos_curr = *translate;
+
+        if (ap->hitlag_timer == 0)
+        {
+            translate->x += ap->phys_info.vel.x;
+            translate->y += ap->phys_info.vel.y;
+            translate->z += ap->phys_info.vel.z;
+        }
+        ap->coll_data.pos_prev.x = translate->x - ap->coll_data.pos_curr.x;
+        ap->coll_data.pos_prev.y = translate->y - ap->coll_data.pos_curr.y;
+        ap->coll_data.pos_prev.z = translate->z - ap->coll_data.pos_curr.z;
+
+        if ((ap->x2CF_flag_b1) && (func_ovl2_800FC67C(ap->unk_0x2D0) != FALSE))
+        {
+            Coll_Data *coll_data = &ap->coll_data;
+
+            func_ovl2_800FA7B8(ap->unk_0x2D0, &ap->coll_data.pos_correct);
+
+            translate->x += coll_data->pos_correct.x;
+            translate->y += coll_data->pos_correct.y;
+            translate->z += coll_data->pos_correct.z;
+        }
+
+        else if ((ap->ground_or_air == ground) && (ap->coll_data.ground_line_id != -1) && (ap->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(ap->coll_data.ground_line_id) != FALSE))
+        {
+            func_ovl2_800FA7B8(ap->coll_data.ground_line_id, &ap->coll_data.pos_correct);
+
+            translate->x += ap->coll_data.pos_correct.x;
+            translate->y += ap->coll_data.pos_correct.y;
+            translate->z += ap->coll_data.pos_correct.z;
+        }
+        else
+        {
+            ap->coll_data.pos_correct.z = 0.0F;
+            ap->coll_data.pos_correct.y = 0.0F;
+            ap->coll_data.pos_correct.x = 0.0F;
+        }
+
+        if ((translate->y < Ground_Info->blastzone_bottom) || (Ground_Info->blastzone_right < translate->x) || (translate->x < Ground_Info->blastzone_left) || (Ground_Info->blastzone_top < translate->y))
+        {
+            if ((ap->cb_destroy == NULL) || (ap->cb_destroy(article_gobj) != FALSE))
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+        if (ap->cb_coll != NULL)
+        {
+            ap->coll_data.unk_0x54 = ap->coll_data.unk_0x56;
+            ap->coll_data.unk_0x56 = 0U;
+            ap->coll_data.unk_0x64 = 0;
+            ap->coll_data.coll_type = 0;
+            ap->coll_data.unk_0x58 = 0;
+
+            if (ap->cb_coll(article_gobj) != FALSE)
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+        func_ovl3_8016F280(article_gobj);
+        func_ovl3_8016F3D4(article_gobj);
+    }
+    func_ovl3_801713B0(article_gobj);
+}
+
+void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type, s32 arg3)
+{
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(at_hit->hit_targets); i++)
+    {
+        if (victim_gobj == at_hit->hit_targets[i].victim_gobj) // Run this if the victim we're checking has already been hit
+        {
+            switch (hitbox_type)
+            {
+            case gmHitCollision_Type_Hurt:
+                at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+                break;
+
+            case gmHitCollision_Type_Shield:
+                at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+                break;
+
+            case gmHitCollision_Type_Unk:
+                at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+                at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+                break;
+
+            case gmHitCollision_Type_Reflect:
+                at_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+                at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+                break;
+
+            case gmHitCollision_Type_Hit:
+                at_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
+                break;
+
+            case gmHitCollision_Type_ArticleHurt:
+                at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+                at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+                break;
+
+            default: break;
+            }
+            break;
+        }
+    }
+    if (i == ARRAY_COUNT(at_hit->hit_targets)) // Check if all victim slots have been filled
+    {
+        for (i = 0; i < ARRAY_COUNT(at_hit->hit_targets); i++) // Reset hit count and increment until there is an empty slot
+        {
+            if (at_hit->hit_targets[i].victim_gobj == NULL) break;
+        }
+
+        if (i == ARRAY_COUNT(at_hit->hit_targets)) i = 0; // Reset hit count again if all victim slots are full
+
+        at_hit->hit_targets[i].victim_gobj = victim_gobj; // Store victim's pointer to slot
+
+        switch (hitbox_type)
+        {
+        case gmHitCollision_Type_Hurt:
+            at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+            break;
+
+        case gmHitCollision_Type_Shield:
+            at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+            break;
+
+        case gmHitCollision_Type_Unk:
+            at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+            at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+            break;
+
+        case gmHitCollision_Type_Reflect:
+            at_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+            at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+            break;
+
+
+        case gmHitCollision_Type_Hit:
+            at_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
+            break;
+
+        case gmHitCollision_Type_ArticleHurt:
+            at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+            at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+            break;
+
+        default: break;
+        }
+    }
+}

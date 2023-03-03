@@ -12,16 +12,6 @@
 
 #define MPCOLL_MASK_ALL (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every collision flag
 
-typedef enum gmHitCollision // Hitbox types, this is universal but I don't know where else to put it so both fighters and items can see it without redefining it for each
-{
-    gmHitCollision_Hurt,
-    gmHitCollision_Shield,
-    gmHitCollision_Hit = 0x3,
-    gmHitCollision_Absorb = 0x5,
-    gmHitCollision_Reflect
-
-} gmHitCollision;
-
 typedef enum Ground_Air
 {
     ground,
