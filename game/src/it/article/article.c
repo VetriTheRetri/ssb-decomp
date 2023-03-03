@@ -361,7 +361,7 @@ void func_ovl3_8016F218(void)
     D_ovl3_8018D060.unk_0x2E = 0xC;
 }
 
-extern void *(*jtbl_ovl3_8018946C[20])(s32, s32, s32, s32);
+extern void* (*jtbl_ovl3_8018946C[20])(s32, s32, s32, s32);
 
 void* func_ovl3_8016F238(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
@@ -388,7 +388,7 @@ void func_ovl3_8016F280(GObj *article_gobj)
             ap->article_hit[0].update_state = gmHitCollision_UpdateState_Transfer;
 
             ap->article_hit[0].article_hit_unk[i].unk_0x18 = 0;
-            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0.0F;
+            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0;
             break;
 
         case gmHitCollision_UpdateState_Transfer:
@@ -402,7 +402,7 @@ void func_ovl3_8016F280(GObj *article_gobj)
             ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + JObjGetStruct(article_gobj)->translate.z;
 
             ap->article_hit[0].article_hit_unk[i].unk_0x18 = 0;
-            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0.0F;
+            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0;
             break;
         }
     }
