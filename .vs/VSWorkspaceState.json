@@ -3,16 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftpikachu",
     "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
+    "\\game\\src\\it\\item\\itemness",
     "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\sys\\obj.h",
+  "SelectedNode": "\\game\\resources",
   "PreviewInSolutionExplorer": false
 }

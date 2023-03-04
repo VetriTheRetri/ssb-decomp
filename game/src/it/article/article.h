@@ -58,7 +58,9 @@ typedef struct _Article_Hit
     s32 priority; // Priority?
     u8 hit_status;
     u16 hit_sfx;
-    u16 flags_0x4C_b0 : 7;
+    u16 flags_0x4C_b0 : 1;
+    u16 flags_0x4C_b1 : 1;
+    u16 flags_0x4C_b23456 : 5;
     u16 attack_id : 6;
     u16 flags_0x4C_b7 : 1;
     u16 flags_0x4E;
@@ -72,7 +74,8 @@ typedef struct _Article_Hit
 
 typedef struct Article_Hurt
 {
-    s32 unk_0x0;
+    u8 unk_0x0_filler : 7;
+    u8 unk_0x0_b7 : 1;
     s32 hitstatus;
     Vec3f pos;
     Vec3f size;
@@ -110,7 +113,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     Article_Hurt article_hurt;
 
     s32 unk_0x264;
-    s32 unk_0x268;
+    s32 lr_attack; // Direction of outgoing attack?
     s32 unk_0x26C;
     s32 hit_attack_damage;
     s32 unk_0x274;
@@ -120,17 +123,17 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     s32 unk_0x284;
     s32 unk_0x288;
     s32 unk_0x28C;
-    s32 unk_0x290;
-    f32 unk_0x294;
+    s32 damage_last; // Last 
+    f32 damage_launch_angle; // Angle at which article will be launched when getting hit?
     s32 damage_taken;
-    s32 unk_0x29C;
-    s32 unk_0x2A0;
-    s32 lr_hit;
+    s32 damage_angle;
+    s32 damage_element;
+    s32 lr_damage; // Direction of incoming attack?
     GObj *damage_gobj; // GObj that last dealt damage to this article?
     u8 damage_team;
     u8 damage_port;
     s32 damage_player_number;
-    u8 unk_0x70;
+    u8 unk_0x2B4;
     s32 damage_display_state;
 
     u8 filler_0x160[0x2CC - 0x2BC];
@@ -159,7 +162,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2CE_flag_b5 : 1;
     u8 x2CE_flag_b6 : 1;
     u8 x2CE_flag_b7 : 1;
-    u8 x2CF_flag_b0 : 1;
+    u8 is_ignore_owner : 1; // Article ignores ownership and can damage anything?
     u8 x2CF_flag_b1 : 1;
     u8 x2CF_flag_b2 : 1;
     u8 x2CF_flag_b3 : 1;
@@ -174,7 +177,44 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2D2_flag_b6 : 1;
     u8 x2D2_flag_b7 : 1;
 
-    u8 filler_0x2D4[0x34C - 0x2D4];
+    u8 filler_0x2D4[0x33C - 0x2D4];
+
+    u8 is_hitlag_victim : 1;
+    u8 x3CC_flag_b1 : 1;
+    u8 x3CC_flag_b2 : 1;
+    u8 x3CC_flag_b3 : 1;
+    u8 x3CC_flag_b4 : 1;
+    u8 x3CC_flag_b5 : 1;
+    u8 x3CC_flag_b6 : 1;
+    u8 x3CC_flag_b7 : 1;
+    u8 x3CD_flag_b0 : 1;
+    u8 x3CD_flag_b1 : 1;
+    u8 x3CD_flag_b2 : 1;
+    u8 x3CD_flag_b3 : 1;
+    u8 x3CD_flag_b4 : 1;
+    u8 x3CD_flag_b5 : 1;
+    u8 x3CD_flag_b6 : 1;
+    u8 x3CD_flag_b7 : 1;
+    u8 x3CE_flag_b0 : 1;
+    u8 x3CE_flag_b1 : 1;
+    u8 x3CE_flag_b2 : 1;
+    u8 x3CE_flag_b3 : 1;
+    u8 x3CE_flag_b4 : 1;
+    u8 x3CE_flag_b5 : 1;
+    u8 x3CE_flag_b6 : 1;
+    u8 x3CE_flag_b7 : 1;
+    u8 x3CF_flag_b0 : 1;
+    u8 x3CF_flag_b1 : 1;
+    u8 x3CF_flag_b2 : 1;
+    u8 x3CF_flag_b3 : 1;
+    u8 x3CF_flag_b4 : 1;
+    u8 x3CF_flag_b5 : 1;
+    u8 x3CF_flag_b6 : 1;
+    u8 x3CF_flag_b7 : 1;
+
+    s32 unk_0x340;
+    s32 unk_0x344;
+    s32 unk_0x348;
 
     u8 arrow_flash_timer;
     u8 unk_0x34D;

@@ -176,23 +176,76 @@ typedef enum plKind
 
 } plKind;
 
+typedef struct FighterHitVictimFlags
+{
+    u32 flags_b0 : 1;
+    u32 flags_b1 : 1;
+    u32 flags_b2 : 1;
+    u32 flags_b3 : 1;
+    u32 flags_b456 : 3;
+    u32 timer_rehit : 6;
+
+} FighterHitVictimFlags;
+
+typedef struct FighterHitArray
+{
+    GObj *victim_gobj;
+    FighterHitVictimFlags victim_flags;
+
+} FighterHitArray;
+
 typedef struct _Fighter_Hit
 {
-    s32 update_State;
+    s32 update_state;
     u32 unk_0x4;
     u32 unk_0x8;
     s32 damage;
-    s32 unk_0x10;
+    s32 element;
     s32 unk_0x14;
     s32 unk_0x18;
     s32 unk_0x1C;
     s32 unk_0x20;
     s32 unk_0x24;
-    s32 unk_0x28;
-    s32 unk_0x2C;
-    s32 unk_0x30;
-    s32 unk_0x34;
-    u8 filler[0xC4 - 0x38];
+    s32 angle;
+    s32 knockback_scale;
+    s32 knockback_weight;
+    s32 knockback_base;
+    s32 unk_0x38;
+    u8 flags_0x3C_b0 : 1;
+    u8 flags_0x3C_b1 : 1;
+    u8 flags_0x3C_b2 : 1;
+    u8 flags_0x3C_b3 : 1;
+    u8 flags_0x3C_b4 : 1;
+    u8 flags_0x3C_b5 : 1;
+    u8 flags_0x3C_b6 : 1;
+    u8 is_hit_air : 1;
+    u8 is_hit_ground : 1;
+    u8 flags_0x3D_b1 : 1;
+    u8 flags_0x3D_b2 : 1;
+    u8 flags_0x3D_b3 : 1;
+    u8 flags_0x3D_b4 : 1;
+    u8 flags_0x3D_b5 : 1;
+    u8 flags_0x3D_b6 : 1;
+    u8 flags_0x3D_b7 : 1;
+    u8 flags_0x3E_b0 : 1;
+    u8 flags_0x3E_b1 : 1;
+    u8 flags_0x3E_b2 : 1;
+    u8 flags_0x3E_b3 : 1;
+    u8 flags_0x3E_b4 : 1;
+    u8 flags_0x3E_b5 : 1;
+    u8 flags_0x3E_b6 : 1;
+    u8 flags_0x3E_b7 : 1;
+    u8 flags_0x3F_b0 : 1;
+    u8 flags_0x3F_b1 : 1;
+    u8 flags_0x3F_b2 : 1;
+    u8 flags_0x3F_b3 : 1;
+    u8 flags_0x3F_b4 : 1;
+    u8 flags_0x3F_b5 : 1;
+    u8 flags_0x3F_b6 : 1;
+    u8 flags_0x3F_b7 : 1;
+    u8 filler_0x40[0x5C - 0x40];
+    FighterHitArray hit_targets[4];
+    u8 filler[0xC4 - 0x7C];
 
 } Fighter_Hit;
 
@@ -435,9 +488,9 @@ typedef struct _Fighter_Struct
     u8 filler_0x26B[0x276 - 0x26B];
 
     s16 unk_0x276;
-    s32 unk_0x278;
+    GObj *unk_0x278;
     s32 unk_0x27C;
-    s32 unk_0x280;
+    u8 unk_0x280;
     s32 unk_0x284;
     s32 attack_id;
 

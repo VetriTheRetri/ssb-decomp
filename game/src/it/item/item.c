@@ -743,7 +743,7 @@ void func_ovl3_80166BE4(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    if ((ip->hit_victim_damage != 0) || (ip->unk_0x238 != 0))
+    if ((ip->hit_victim_damage != 0) || (ip->unk_0x238 != 0)) // 0x238 = hit article damage?
     {
         if (ip->cb_give_damage != NULL)
         {
