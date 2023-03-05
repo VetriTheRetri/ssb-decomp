@@ -7,15 +7,19 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+#define PERCENT_DAMAGE_MAX 999
+
 #define LEFT -1
 #define CENTER 0
 #define RIGHT 1
 #define WALL_UP 2               // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 #define WALL_DOWN 3             // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 
+
 #define GMHITCOLLISION_MASK_FIGHTER 1 // Can interact with fighters
 #define GMHITCOLLISION_MASK_ITEM 2 // Can interact with items
 #define GMHITCOLLISION_MASK_ARTICLE 4 // Can interact with articles
+
 
 typedef enum gmHitCollisionStatus
 {
@@ -77,5 +81,28 @@ typedef struct FighterAttackFlags
     CommonAttackFlagsLw lw;
 
 } FighterAttackFlags;
+
+typedef struct Color_Overlay
+{
+    void *p_script; // Pointer to Color Animation script?
+    u16 color_event_timer;
+    u16 unk_0x6;
+    void *unk_0x8;
+    s32 count;
+    void *unk_0x10;
+    void *unk_0x14;
+    s32 unk_0x18;
+    s32 unk_0x1C;
+    s32 unk_0x20;
+    s32 unk_0x24;
+    s32 unk_0x28;
+    s32 unk_0x2C;
+    s32 unk_0x30;
+    s32 unk_0x34;
+    s32 unk_0x38;
+    s32 colanim_id;
+    u8 r, g, b, a; // RGBA
+    
+} Color_Overlay;
 
 #endif

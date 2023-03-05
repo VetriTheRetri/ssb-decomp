@@ -5,6 +5,8 @@
 #include "gmground.h"
 #include "gbi.h"
 
+#define HALF_PI32 1.5707964F
+
 extern Gfx *D_ovl3_8018D094;
 
 Gfx* func_ovl3_8016DFAC(void) // Might not actually be Gfx, but data immediately following these pointers is a display list
@@ -674,9 +676,9 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
     {
         fp->unk_0x7B0 = damage;
     }
-    if (at_hurt->hitstatus == gmHitCollision_Status_Normal)
+    if (at_hurt->hit_status == gmHitCollision_Status_Normal)
     {
-        ap->damage_taken += damage;
+        ap->damage_taken_recent += damage;
 
         if (ap->damage_last < damage)
         {
@@ -695,7 +697,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
         }
         if (ap->x2D2_flag_b4)
         {
-            damage_launch_angle = func_ovl2_800E9D78(ap->unk_0x1C, ap->damage_taken, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->offset_hit_type, ap->unk_0x16);
+            damage_launch_angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->offset_hit_type, ap->unk_0x16);
 
             if (ap->damage_launch_angle < damage_launch_angle)
             {
@@ -830,9 +832,9 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
             attack_ap->unk_0x26C = damage;
         }
     }
-    else if (attack_ap->unk_0x264 < damage)
+    else if (attack_ap->hit_victim_damage < damage)
     {
-        attack_ap->unk_0x264 = damage;
+        attack_ap->hit_victim_damage = damage;
     }
     vel = (attack_ap->phys_info.vel.x < 0.0F) ? -attack_ap->phys_info.vel.x : attack_ap->phys_info.vel.x;
 
@@ -846,9 +848,9 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
         attack_ap->lr_attack = lr;
     }
-    if (at_hurt->hitstatus == gmHitCollision_Status_Normal)
+    if (at_hurt->hit_status == gmHitCollision_Status_Normal)
     {
-        defend_ap->damage_taken += damage;
+        defend_ap->damage_taken_recent += damage;
 
         if (defend_ap->damage_last < damage)
         {
@@ -877,7 +879,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
         }
         if (defend_ap->x2D2_flag_b4)
         {
-            launch_angle = func_ovl2_800E9D78(defend_ap->unk_0x1C, defend_ap->damage_taken, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->unk_0x16, )defend_ap->unk_0x16);
+            launch_angle = func_ovl2_800E9D78(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->unk_0x16, )defend_ap->unk_0x16);
 
             if (defend_ap->damage_launch_angle < launch_angle)
             {
@@ -938,9 +940,9 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
     {
         ip->hit_victim_damage = damage;
     }
-    if (at_hurt->hitstatus == gmHitCollision_Status_Normal)
+    if (at_hurt->hit_status == gmHitCollision_Status_Normal)
     {
-        ap->damage_taken += damage;
+        ap->damage_taken_recent += damage;
 
         if (ap->damage_last < damage)
         {
@@ -969,7 +971,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
         }
         if (ap->x2D2_flag_b4)
         {
-            angle = func_ovl2_800E9D78(ap->unk_0x1C, ap->damage_taken, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->unk_0x12, ap->unk_0x16);
+            angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->unk_0x12, ap->unk_0x16);
 
             if (ap->damage_launch_angle < angle)
             {
@@ -1080,9 +1082,9 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 
                                         if (D_ovl2_801311A0[i] != 0)
                                         {
-                                            if (ap->article_hurt.hitstatus == gmHitCollision_Status_None) break;
+                                            if (ap->article_hurt.hit_status == gmHitCollision_Status_None) break;
 
-                                            if (at_hurt->hitstatus != gmHitCollision_Status_Intangible)
+                                            if (at_hurt->hit_status != gmHitCollision_Status_Intangible)
                                             {
                                                 if (func_ovl2_800EFC20(&fp->fighter_hit[i], at_hurt, article_gobj) != FALSE)
                                                 {
@@ -1205,9 +1207,9 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
                                         {
                                             at_hurt = &this_ap->article_hurt;
 
-                                            if (this_ap->article_hurt.hitstatus == gmHitCollision_Status_None) break;
+                                            if (this_ap->article_hurt.hit_status == gmHitCollision_Status_None) break;
 
-                                            else if (at_hurt->hitstatus == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
+                                            else if (at_hurt->hit_status == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
 
                                             else if (func_ovl2_800F06E8(other_hit, i, at_hurt, this_gobj) != FALSE)
                                             {
@@ -1328,9 +1330,9 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
                                     {
                                         at_hurt = &ap->article_hurt;
 
-                                        if (ap->article_hurt.hitstatus == gmHitCollision_Status_None) break;
+                                        if (ap->article_hurt.hit_status == gmHitCollision_Status_None) break;
 
-                                        else if (at_hurt->hitstatus == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
+                                        else if (at_hurt->hit_status == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
 
                                         else if (func_ovl2_800F079C(it_hit, i, at_hurt, article_gobj) != FALSE)
                                         {
@@ -1366,4 +1368,150 @@ void func_ovl3_80171080(GObj *article_gobj)
         func_ovl3_8017088C(article_gobj);
         func_ovl3_80170C84(article_gobj);
     }
+}
+
+void func_ovl3_801710C4(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (ap->damage_taken_recent != 0)
+    {
+        ap->percent_damage += ap->damage_taken_recent;
+
+        if (ap->percent_damage > PERCENT_DAMAGE_MAX)
+        {
+            ap->percent_damage = PERCENT_DAMAGE_MAX;
+        }
+        ap->damage_taken_last = ap->damage_taken_recent;
+
+        if (ap->cb_take_damage != NULL)
+        {
+            if (ap->cb_take_damage(article_gobj) != FALSE)
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+    }
+    if ((ap->hit_victim_damage != 0) || (ap->unk_0x26C != 0))
+    {
+        if (ap->cb_give_damage != NULL)
+        {
+            if (ap->cb_give_damage(article_gobj) != FALSE)
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+    }
+    if (ap->hit_shield_damage != 0)
+    {
+        if ((ap->article_hit[0].can_deflect) && (ap->ground_or_air == air))
+        {
+            if (ap->shield_collide_angle < 2.3561945F)
+            {
+                ap->shield_collide_angle -= HALF_PI32;
+
+                if (ap->shield_collide_angle < 0.0F)
+                {
+                    ap->shield_collide_angle = 0.0F;
+                }
+                if (ap->cb_shield_deflect != NULL)
+                {
+                    if (ap->cb_shield_deflect(article_gobj) != FALSE)
+                    {
+                        func_ovl3_801728D4(article_gobj);
+                        return;
+                    }
+                }
+                goto next_check;
+            }
+        }
+        if (ap->cb_shield_block != NULL)
+        {
+            if (ap->cb_shield_block(article_gobj) != FALSE)
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+    }
+next_check:
+    if (ap->hit_attack_damage != 0)
+    {
+        if (ap->cb_attack != NULL)
+        {
+            if (ap->cb_attack(article_gobj) != FALSE)
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+    }
+    if (ap->reflect_gobj != NULL)
+    {
+        Fighter_Struct *fp;
+
+        ap->owner_gobj = ap->reflect_gobj;
+
+        fp = FighterGetStruct(ap->reflect_gobj);
+
+        ap->team = fp->team;
+        ap->port_index = fp->player_id;
+        ap->player_number = fp->player_number;
+        ap->unk_0x16 = fp->offset_hit_type;
+        ap->article_hit[0].flags_0x50 = ap->unk_0x28C & U16_MAX;
+        ap->article_hit[0].flags_0x52 = ap->unk_0x28E;
+
+        if (ap->cb_reflect != NULL)
+        {
+            if (ap->cb_reflect(article_gobj) != FALSE)
+            {
+                func_ovl3_801728D4(article_gobj);
+                return;
+            }
+        }
+        if (!(ap->is_static_damage))
+        {
+            ap->article_hit[0].damage = (ap->article_hit[0].damage * ARTICLE_REFLECT_MUL_DEFAULT) + ARTICLE_REFLECT_ADD_DEFAULT;
+
+            if (ap->article_hit[0].damage > ARTICLE_REFLECT_MAX_DEFAULT)
+            {
+                ap->article_hit[0].damage = ARTICLE_REFLECT_MAX_DEFAULT;
+            }
+        }
+    }
+
+    if (ap->damage_taken_last != 0)
+    {
+        ap->hitlag_timer = func_ovl2_800EA1C0(ap->damage_taken_last, 10, 1.0F);
+    }
+
+    ap->hit_victim_damage = 0;
+    ap->unk_0x26C = 0;
+    ap->hit_attack_damage = 0;
+    ap->hit_shield_damage = 0;
+    ap->reflect_gobj = NULL;
+    ap->damage_last = 0;
+    ap->damage_taken_recent = 0;
+    ap->damage_taken_last = 0;
+    ap->damage_launch_angle = 0.0F;
+}
+
+void func_ovl3_801713B0(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (func_ovl2_800E0880(&ap->color_anim, article_gobj, 0, 0) != FALSE)
+    {
+        func_ovl3_80172FBC(article_gobj);
+    }
+}
+
+void func_ovl3_801713F4(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    JObj *joint = JObjGetStruct(article_gobj);
+
+    joint->rotate.z += ap->rotate_speed;
 }

@@ -9,6 +9,9 @@
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 
+#define ARTICLE_REFLECT_MAX_DEFAULT 100            // Maximum damage cap for reflected articles
+#define ARTICLE_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
+#define ARTICLE_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying article's hitbox damage
 #define ARTICLE_DESPAWN_FLASH_INT_DEFAULT 180U // Article starts flashing rapidly once its lifetime (?) drops below this value
 #define ARTICLE_ARROW_BLINK_INT_DEFAULT 45 // Red arrow pointing downward at article "blinks" at this frequency (45 frames visible, 45 frames invisible)
 #define ARTICLE_REHIT_TIME_DEFAULT 16
@@ -75,7 +78,7 @@ typedef struct _Article_Hit
 typedef struct Article_Hurt
 {
     u8 flags_0x0;
-    s32 hitstatus;
+    s32 hit_status;
     Vec3f pos;
     Vec3f size;
 
@@ -93,7 +96,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 unk_0x16;
     u8 unk_0x17;
     s32 player_number;
-    u32 unk_0x1C;
+    s32 percent_damage;
     u32 hitlag_timer;
     s32 lr;
 
@@ -111,20 +114,19 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     Article_Hit article_hit[1];
     Article_Hurt article_hurt;
 
-    s32 unk_0x264;
+    s32 hit_victim_damage;
     s32 lr_attack; // Direction of outgoing attack?
     s32 unk_0x26C;
     s32 hit_attack_damage;
-    s32 unk_0x274;
-    s32 unk_0x278;
-    s32 unk_0x27C;
-    s32 unk_0x280;
-    s32 unk_0x284;
-    s32 unk_0x288;
-    s32 unk_0x28C;
+    s32 hit_shield_damage;
+    f32 shield_collide_angle;
+    Vec3f shield_collide_vec;
+    GObj *reflect_gobj;
+    u16 unk_0x28C;
+    u16 unk_0x28E;
     s32 damage_last; // Last 
     f32 damage_launch_angle; // Angle at which article will be launched when getting hit?
-    s32 damage_taken;
+    s32 damage_taken_recent;
     s32 damage_angle;
     s32 damage_element;
     s32 lr_damage; // Direction of incoming attack?
@@ -134,8 +136,9 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     s32 damage_player_number;
     u8 unk_0x2B4;
     s32 damage_display_state;
+    s32 damage_taken_last;
 
-    u8 filler_0x160[0x2CC - 0x2BC];
+    u8 filler_0x160[0x2CC - 0x2C0];
 
     u8 x2CC_flag_b0 : 1;
     u8 x2CC_flag_b1 : 1;
@@ -173,10 +176,14 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u16 x2D2_flag_12bit : 12; // Lifetime?
     u8 x2D2_flag_b4 : 1;
     u8 x2D2_flag_b5 : 1;
-    u8 x2D2_flag_b6 : 1;
+    u8 is_static_damage : 1;
     u8 x2D2_flag_b7 : 1;
 
-    u8 filler_0x2D4[0x33C - 0x2D4];
+    s32 unk_0x2D4;
+
+    Color_Overlay color_anim;
+
+    u8 filler_0x2D4[0x33C - 0x31C];
 
     u8 is_hitlag_victim : 1;
     u8 x3CC_flag_b1 : 1;
@@ -212,7 +219,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x3CF_flag_b7 : 1;
 
     s32 unk_0x340;
-    s32 unk_0x344;
+    f32 rotate_speed;
     s32 unk_0x348;
 
     u8 arrow_flash_timer;

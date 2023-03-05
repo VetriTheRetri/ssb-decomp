@@ -817,7 +817,6 @@ next_check:
 
         if (ip->cb_reflect != NULL)
         {
-
             if (ip->cb_reflect(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);

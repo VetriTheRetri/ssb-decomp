@@ -523,7 +523,7 @@ typedef struct _Fighter_Struct
 
     u8 filler_0x290[0x5B8 - 0x5A4];
 
-    s32 hitstatus;
+    s32 hit_status;
 
     u8 filler_0x58C[0x7B0 - 0x5BC];
 
