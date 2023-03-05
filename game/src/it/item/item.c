@@ -656,16 +656,16 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
     Item_Hit *other_hit, *this_hit;
     ItemHitVictimFlags these_flags, those_flags;
     s32 m, n, i, j;
-    bool32 is_self_gobj;
+    bool32 is_check_self;
 
     this_ip = ItemGetStruct(this_gobj);
     this_hit = &this_ip->item_hit[0];
 
-    if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->hit_status & 2))
+    if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->hit_status & GMHITCOLLISION_MASK_ITEM))
     {
         other_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
 
-        is_self_gobj = FALSE;
+        is_check_self = FALSE;
 
         if (other_gobj != NULL)
         {
@@ -676,9 +676,9 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
 
                 if (other_gobj == this_gobj)
                 {
-                    is_self_gobj = TRUE; // Not really sure what to name this
+                    is_check_self = TRUE; // Not really sure what to name this
                 }
-                else if ((is_self_gobj != FALSE) && (this_ip->owner_gobj != other_ip->owner_gobj))
+                else if ((is_check_self != FALSE) && (this_ip->owner_gobj != other_ip->owner_gobj))
                 {
                     if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE)) goto next_check;
                     {
@@ -687,7 +687,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                     next_check:
                         if ((other_hit->update_state != gmHitCollision_UpdateState_Disable) && (other_hit->clang))
                         {
-                            if (other_hit->hit_status & 2)
+                            if (other_hit->hit_status & GMHITCOLLISION_MASK_ITEM)
                             {
                                 those_flags.flags_b456 = 7;
 

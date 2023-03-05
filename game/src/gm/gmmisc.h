@@ -13,6 +13,10 @@
 #define WALL_UP 2               // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 #define WALL_DOWN 3             // Apparently a valid facing direction value used by Pikachu's Thunder Jolt?
 
+#define GMHITCOLLISION_MASK_FIGHTER 1 // Can interact with fighters
+#define GMHITCOLLISION_MASK_ITEM 2 // Can interact with items
+#define GMHITCOLLISION_MASK_ARTICLE 4 // Can interact with articles
+
 typedef enum gmHitCollisionStatus
 {
     gmHitCollision_Status_None, // User's hurtboxes are disabled

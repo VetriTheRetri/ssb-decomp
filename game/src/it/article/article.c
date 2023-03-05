@@ -498,7 +498,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
     }
     else article_gobj->is_render = FALSE;
 
-    if (!(ap->is_hitlag_article))
+    if (!(ap->is_pause_article))
     {
         joint = JObjGetStruct(article_gobj);
 
@@ -1002,7 +1002,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
 
 extern s32 D_ovl2_801311A0[4]; // Static, array count might depend on GMMATCH_PLAYERS_MAX?
 
-void func_ovl3_801705C4(GObj *article_gobj)
+void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 {
     GObj *fighter_gobj;
     GObj *owner_gobj;
@@ -1018,9 +1018,9 @@ void func_ovl3_801705C4(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Fighter_Struct *fp;
 
-    if (ap->article_hurt.flags_0x0_b7)
+    if (ap->article_hurt.flags_0x0 & GMHITCOLLISION_MASK_FIGHTER)
     {
-        fighter_gobj = gOMObjCommonLinks[3];
+        fighter_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
 
         if (fighter_gobj != NULL)
         {
@@ -1028,11 +1028,11 @@ void func_ovl3_801705C4(GObj *article_gobj)
             {
                 owner_gobj = other_gobj = ap->owner_gobj; // Mandatory IDO meme because otherwise it swaps a0 and v1
 
-                if ((fighter_gobj != ap->owner_gobj) || (ap->is_ignore_owner))
+                if ((fighter_gobj != ap->owner_gobj) || (ap->is_damage_all))
                 {
                     fp = FighterGetStruct(fighter_gobj);
 
-                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (((fp->unk_0x278 != NULL) ? fp->unk_0x280 : fp->team) != ap->team) || (ap->is_ignore_owner))
+                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (((fp->unk_0x278 != NULL) ? fp->unk_0x280 : fp->team) != ap->team) || (ap->is_damage_all))
                     {
                         if (!(fp->x192_flag_b2))
                         {
@@ -1097,7 +1097,273 @@ void func_ovl3_801705C4(GObj *article_gobj)
                     }
                 }
                 fighter_gobj = fighter_gobj->group_gobj_next;
-            } while (fighter_gobj != NULL);
+            } 
+            while (fighter_gobj != NULL);
         }
+    }
+}
+
+void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detection
+{
+    Article_Hit *this_hit;
+    Article_Struct *other_ap;
+    Article_Struct *this_ap;
+    GObj *other_gobj;
+    Article_Hit *other_hit;
+    ArticleHitVictimFlags these_flags, those_flags;
+    s32 i, j, m, n;
+    bool32 is_check_self;
+    Article_Hurt *at_hurt;
+
+    this_ap = ArticleGetStruct(this_gobj);
+    this_hit = &this_ap->article_hit[0];
+
+    if (this_ap->article_hurt.flags_0x0 & GMHITCOLLISION_MASK_ARTICLE)
+    {
+        other_gobj = gOMObjCommonLinks[GObjLinkIndex_Article];
+
+        is_check_self = FALSE;
+
+        if (other_gobj != NULL)
+        {
+            do
+            {
+                if (other_gobj == this_gobj)
+                {
+                    is_check_self = TRUE;
+                }
+                else
+                {
+                    other_ap = ArticleGetStruct(other_gobj);
+                    other_hit = &other_ap->article_hit[0];
+
+                    if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
+                    {
+                        if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team) || (this_ap->is_damage_all))
+                        {
+                            if (other_hit->update_state != 0)
+                            {
+                                if (other_hit->hit_status & GMHITCOLLISION_MASK_ARTICLE)
+                                {
+                                    those_flags.flags_b0 = those_flags.flags_b1 = FALSE;
+
+                                    those_flags.flags_b456 = 7;
+
+                                    for (m = 0; m < ARRAY_COUNT(other_hit->hit_targets); m++) // IDO will flip you off if you don't use a new iterator here...
+                                    {
+                                        if (this_gobj == other_hit->hit_targets[m].victim_gobj)
+                                        {
+                                            those_flags = other_hit->hit_targets[m].victim_flags;
+                                            break;
+                                        }
+                                    }
+                                    if ((!(those_flags.flags_b0)) && (!(those_flags.flags_b1)) && (those_flags.flags_b456 == 7))
+                                    {
+                                        if ((is_check_self != FALSE) && (this_hit->clang) && (other_hit->clang) && (this_ap->owner_gobj != other_ap->owner_gobj))
+                                        {
+                                            if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
+                                            {
+                                                if ((this_hit->update_state != 0) && (this_hit->hit_status & GMHITCOLLISION_MASK_ARTICLE))
+                                                {
+                                                    these_flags.flags_b0 = these_flags.flags_b1 = FALSE;
+
+                                                    these_flags.flags_b456 = 7;
+
+                                                    for (n = 0; n < ARRAY_COUNT(this_hit->hit_targets); n++)
+                                                    {
+                                                        if (other_gobj == this_hit->hit_targets[n].victim_gobj)
+                                                        {
+                                                            these_flags = this_hit->hit_targets[n].victim_flags;
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    if ((these_flags.flags_b0) || (these_flags.flags_b1) || (these_flags.flags_b456 != 7)) goto hurtbox_check;
+
+                                                    else for (i = 0; i < other_hit->hitbox_count; i++)
+                                                    {
+                                                        for (j = 0; j < this_hit->hitbox_count; j++)
+                                                        {
+                                                            if (func_ovl2_800F05C8(other_hit, i, this_hit, j) != FALSE)
+                                                            {
+                                                                func_ovl3_8016FD4C(other_ap, other_hit, i, this_ap, this_hit, j, other_gobj, this_gobj);
+
+                                                                if (other_ap->hit_attack_damage != 0) goto next_gobj;
+
+                                                                else if (this_ap->hit_attack_damage != 0)
+                                                                {
+                                                                    goto hurtbox_check;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    hurtbox_check:
+                                        for (i = 0; i < other_hit->hitbox_count; i++) // ...it also flips you off if you DON'T reuse 'i' here
+                                        {
+                                            at_hurt = &this_ap->article_hurt;
+
+                                            if (this_ap->article_hurt.hitstatus == gmHitCollision_Status_None) break;
+
+                                            else if (at_hurt->hitstatus == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
+
+                                            else if (func_ovl2_800F06E8(other_hit, i, at_hurt, this_gobj) != FALSE)
+                                            {
+                                                func_ovl3_8016FF4C(other_ap, other_hit, i, this_ap, at_hurt, other_gobj, this_gobj);
+
+                                                break;
+                                            }
+                                        l_continue:
+                                            continue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            next_gobj:
+                other_gobj = other_gobj->group_gobj_next;
+            }
+            while (other_gobj != NULL);
+        }
+    }
+}
+
+void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
+{
+    Article_Hit *at_hit;
+    Item_Struct *ip;
+    Article_Struct *ap;
+    GObj *item_gobj;
+    Item_Hit *it_hit;
+    ArticleHitVictimFlags these_flags;
+    ItemHitVictimFlags those_flags;
+    s32 i, j, m, n;
+    bool32 is_check_self;
+    Article_Hurt *at_hurt;
+
+    ap = ArticleGetStruct(article_gobj);
+    at_hit = &ap->article_hit[0];
+
+    if (ap->article_hurt.flags_0x0 & GMHITCOLLISION_MASK_ITEM)
+    {
+        item_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
+
+        if (item_gobj != NULL)
+        {
+            do
+            {
+
+                ip = ItemGetStruct(item_gobj);
+                it_hit = &ip->item_hit[0];
+
+                if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))
+                {
+                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team) || (ap->is_damage_all))
+                    {
+                        if (it_hit->update_state != 0)
+                        {
+                            if (it_hit->hit_status & GMHITCOLLISION_MASK_ARTICLE)
+                            {
+                                those_flags.flags_b0 = those_flags.flags_b1 = FALSE;
+
+                                those_flags.flags_b456 = 7;
+
+                                for (m = 0; m < ARRAY_COUNT(it_hit->hit_targets); m++) // IDO will flip you off if you don't use a new iterator here...
+                                {
+                                    if (article_gobj == it_hit->hit_targets[m].victim_gobj)
+                                    {
+                                        those_flags = it_hit->hit_targets[m].victim_flags;
+                                        break;
+                                    }
+                                }
+                                if ((!(those_flags.flags_b0)) && (!(those_flags.flags_b1)) && (those_flags.flags_b456 == 7))
+                                {
+                                    if ((at_hit->clang) && (it_hit->clang) && (ap->owner_gobj != ip->owner_gobj))
+                                    {
+                                        if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team))
+                                        {
+                                            if ((at_hit->update_state != 0) && (at_hit->hit_status & GMHITCOLLISION_MASK_ITEM))
+                                            {
+                                                these_flags.flags_b0 = these_flags.flags_b1 = FALSE;
+
+                                                these_flags.flags_b456 = 7;
+
+                                                for (n = 0; n < ARRAY_COUNT(at_hit->hit_targets); n++)
+                                                {
+                                                    if (item_gobj == at_hit->hit_targets[n].victim_gobj)
+                                                    {
+                                                        these_flags = at_hit->hit_targets[n].victim_flags;
+                                                        break;
+                                                    }
+                                                }
+
+                                                if ((these_flags.flags_b0) || (these_flags.flags_b1) || (these_flags.flags_b456 != 7)) goto hurtbox_check;
+
+                                                else for (i = 0; i < it_hit->hitbox_count; i++)
+                                                {
+                                                    for (j = 0; j < at_hit->hitbox_count; j++)
+                                                    {
+                                                        if (func_ovl2_800F019C(it_hit, i, at_hit, j) != FALSE)
+                                                        {
+                                                            func_ovl3_8016FE4C(ip, it_hit, i, ap, at_hit, j, item_gobj, article_gobj);
+
+                                                            if (ip->hit_attack_damage != 0) goto next_gobj;
+
+                                                            else if (ap->hit_attack_damage != 0)
+                                                            {
+                                                                goto hurtbox_check;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                hurtbox_check:
+                                    for (i = 0; i < it_hit->hitbox_count; i++) // ...it also flips you off if you DON'T reuse 'i' here
+                                    {
+                                        at_hurt = &ap->article_hurt;
+
+                                        if (ap->article_hurt.hitstatus == gmHitCollision_Status_None) break;
+
+                                        else if (at_hurt->hitstatus == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
+
+                                        else if (func_ovl2_800F079C(it_hit, i, at_hurt, article_gobj) != FALSE)
+                                        {
+                                            func_ovl3_801702C8(ip, it_hit, i, ap, at_hurt, item_gobj, article_gobj);
+
+                                            break;
+                                        }
+                                    l_continue:
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            next_gobj:
+                item_gobj = item_gobj->group_gobj_next;
+            } 
+            while (item_gobj != NULL);
+        }
+    }
+}
+
+// Copy pasted everything from Article VS Article hit collision logic and it instantly matched 82% of Article VS Item, even the stack; apparently in a much similar fashion to HAL
+
+void func_ovl3_80171080(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (!(ap->is_pause_article))
+    {
+        func_ovl3_801705C4(article_gobj);
+        func_ovl3_8017088C(article_gobj);
+        func_ovl3_80170C84(article_gobj);
     }
 }

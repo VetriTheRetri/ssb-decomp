@@ -8,7 +8,8 @@
 typedef enum GObjLinkIndex
 {
     GObjLinkIndex_Fighter = 0x3,
-    GObjLinkIndex_Item = 0x5, 
+    GObjLinkIndex_Article,
+    GObjLinkIndex_Item
 
 } GObjLinkIndex;
 

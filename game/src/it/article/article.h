@@ -58,7 +58,7 @@ typedef struct _Article_Hit
     s32 priority; // Priority?
     u8 hit_status;
     u16 hit_sfx;
-    u16 flags_0x4C_b0 : 1;
+    u16 clang : 1;
     u16 flags_0x4C_b1 : 1;
     u16 flags_0x4C_b23456 : 5;
     u16 attack_id : 6;
@@ -74,8 +74,7 @@ typedef struct _Article_Hit
 
 typedef struct Article_Hurt
 {
-    u8 unk_0x0_filler : 7;
-    u8 unk_0x0_b7 : 1;
+    u8 flags_0x0;
     s32 hitstatus;
     Vec3f pos;
     Vec3f size;
@@ -155,14 +154,14 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2CD_flag_b6 : 1;
     u8 x2CD_flag_b7 : 1;
     u8 x2CE_flag_b0 : 1;
-    u8 is_hitlag_article : 1;
+    u8 is_pause_article : 1; // Suspend Article logic updates?
     u8 x2CE_flag_b2 : 1;
     u8 x2CE_flag_b3 : 1;
     u8 x2CE_flag_b4 : 1;
     u8 x2CE_flag_b5 : 1;
     u8 x2CE_flag_b6 : 1;
     u8 x2CE_flag_b7 : 1;
-    u8 is_ignore_owner : 1; // Article ignores ownership and can damage anything?
+    u8 is_damage_all : 1; // Article ignores ownership and can damage anything?
     u8 x2CF_flag_b1 : 1;
     u8 x2CF_flag_b2 : 1;
     u8 x2CF_flag_b3 : 1;
