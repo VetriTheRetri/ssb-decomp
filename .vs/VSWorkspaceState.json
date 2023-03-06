@@ -3,13 +3,11 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\item",
     "\\game\\src\\it\\item\\itemness",
-    "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
+  "SelectedNode": "\\game\\src\\it\\article\\article.c",
   "PreviewInSolutionExplorer": false
 }

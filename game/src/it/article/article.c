@@ -676,7 +676,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
     {
         fp->unk_0x7B0 = damage;
     }
-    if (at_hurt->hit_status == gmHitCollision_Status_Normal)
+    if (at_hurt->hit_status == gmHitCollision_HitStatus_Normal)
     {
         ap->damage_taken_recent += damage;
 
@@ -848,7 +848,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
         attack_ap->lr_attack = lr;
     }
-    if (at_hurt->hit_status == gmHitCollision_Status_Normal)
+    if (at_hurt->hit_status == gmHitCollision_HitStatus_Normal)
     {
         defend_ap->damage_taken_recent += damage;
 
@@ -940,7 +940,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
     {
         ip->hit_victim_damage = damage;
     }
-    if (at_hurt->hit_status == gmHitCollision_Status_Normal)
+    if (at_hurt->hit_status == gmHitCollision_HitStatus_Normal)
     {
         ap->damage_taken_recent += damage;
 
@@ -1082,9 +1082,9 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 
                                         if (D_ovl2_801311A0[i] != 0)
                                         {
-                                            if (ap->article_hurt.hit_status == gmHitCollision_Status_None) break;
+                                            if (ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
 
-                                            if (at_hurt->hit_status != gmHitCollision_Status_Intangible)
+                                            if (at_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
                                             {
                                                 if (func_ovl2_800EFC20(&fp->fighter_hit[i], at_hurt, article_gobj) != FALSE)
                                                 {
@@ -1207,9 +1207,9 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
                                         {
                                             at_hurt = &this_ap->article_hurt;
 
-                                            if (this_ap->article_hurt.hit_status == gmHitCollision_Status_None) break;
+                                            if (this_ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
 
-                                            else if (at_hurt->hit_status == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
+                                            else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) goto l_continue; // HAL WTF???
 
                                             else if (func_ovl2_800F06E8(other_hit, i, at_hurt, this_gobj) != FALSE)
                                             {
@@ -1330,9 +1330,9 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
                                     {
                                         at_hurt = &ap->article_hurt;
 
-                                        if (ap->article_hurt.hit_status == gmHitCollision_Status_None) break;
+                                        if (ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
 
-                                        else if (at_hurt->hit_status == gmHitCollision_Status_Intangible) goto l_continue; // HAL WTF???
+                                        else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) goto l_continue; // HAL WTF???
 
                                         else if (func_ovl2_800F079C(it_hit, i, at_hurt, article_gobj) != FALSE)
                                         {

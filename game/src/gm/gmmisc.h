@@ -23,10 +23,10 @@
 
 typedef enum gmHitCollisionStatus
 {
-    gmHitCollision_Status_None, // User's hurtboxes are disabled
-    gmHitCollision_Status_Normal, // User can be hit
-    gmHitCollision_Status_Invincible, // User can be hit, but is immune to damage
-    gmHitCollision_Status_Intangible // User cannot be hit
+    gmHitCollision_HitStatus_None, // User's hurtboxes are disabled
+    gmHitCollision_HitStatus_Normal, // User can be hit
+    gmHitCollision_HitStatus_Invincible, // User can be hit, but is immune to damage
+    gmHitCollision_HitStatus_Intangible // User cannot be hit
 
 } gmHitCollisionStatus;
 

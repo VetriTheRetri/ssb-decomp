@@ -79,7 +79,7 @@ typedef struct Article_Hurt
 {
     u8 flags_0x0;
     s32 hit_status;
-    Vec3f pos;
+    Vec3f offset; // Added to TopN joint
     Vec3f size;
 
 } Article_Hurt; // Article Hurtbox, might be larger
@@ -183,8 +183,40 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     Color_Overlay color_anim;
 
-    u8 filler_0x2D4[0x33C - 0x31C];
+    u8 filler_0x2D4[0x338 - 0x31C];
 
+    u8 x338_flag_b0 : 1;
+    u8 x338_flag_b1 : 1;
+    u8 x338_flag_b2 : 1;
+    u8 x338_flag_b3 : 1;
+    u8 x338_flag_b4 : 1;
+    u8 x338_flag_b5 : 1;
+    u8 x338_flag_b6 : 1;
+    u8 x338_flag_b7 : 1;
+    u8 x339_flag_b0 : 1;
+    u8 x339_flag_b1 : 1;
+    u8 x339_flag_b2 : 1;
+    u8 x339_flag_b3 : 1;
+    u8 x339_flag_b4 : 1;
+    u8 x339_flag_b5 : 1;
+    u8 x339_flag_b6 : 1;
+    u8 x339_flag_b7 : 1;
+    u8 x33A_flag_b0 : 1;
+    u8 x33A_flag_b1 : 1;
+    u8 x33A_flag_b2 : 1;
+    u8 x33A_flag_b3 : 1;
+    u8 x33A_flag_b4 : 1;
+    u8 x33A_flag_b5 : 1;
+    u8 x33A_flag_b6 : 1;
+    u8 x33A_flag_b7 : 1;
+    u8 x33B_flag_b0 : 1;
+    u8 x33B_flag_b1 : 1;
+    u8 x33B_flag_b2 : 1;
+    u8 x33B_flag_b3 : 1;
+    u8 x33B_flag_b4 : 1;
+    u8 x33B_flag_b5 : 1;
+    u8 x33B_flag_b6 : 1;
+    u8 x33B_flag_b7 : 1;
     u8 is_hitlag_victim : 1;
     u8 x3CC_flag_b1 : 1;
     u8 x3CC_flag_b2 : 1;
@@ -238,7 +270,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     bool32(*cb_shield_deflect)(GObj *);
     bool32(*cb_attack)(GObj *);
     bool32(*cb_reflect)(GObj *);
-    bool32(*cb_absorb)(GObj *);
+    bool32(*cb_take_damage)(GObj *);
     bool32(*cb_destroy)(GObj *);
 
 } Article_Struct;
