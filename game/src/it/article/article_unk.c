@@ -1,4 +1,5 @@
 #include "article.h"
+#include "fighter.h"
 
 void func_ovl3_80172310(GObj *article_gobj)
 {
@@ -167,4 +168,222 @@ bool32 func_ovl3_80172890(GObj *article_gobj)
         return TRUE;
     }
     else return FALSE;
+}
+
+void func_ovl3_801728D4(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if ((ap->is_pause_article) && (ap->owner_gobj != NULL))
+    {
+        Fighter_Struct *fp = FighterGetStruct(ap->owner_gobj);
+
+        fp->article_hold = NULL;
+
+        func_ovl2_800E8744(ap->owner_gobj);
+    }
+
+    else if ((ap->at_kind < At_Kind_Gr_Lucky) || (ap->at_kind >= At_Kind_Iwark))
+    {
+        func_ovl2_800FF590(&JObjGetStruct(article_gobj)->translate);
+    }
+    if (ap->unk_0x348 != NULL)
+    {
+        func_80009A84(ap->unk_0x348);
+    }
+    func_ovl3_8016DFDC(ap);
+    func_80009A84(article_gobj);
+}
+
+void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi, u16 flags_lw)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    GObj *fighter_gobj = ap->owner_gobj;
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f pos;
+    s32 joint_index;
+
+    func_ovl0_800C9424(JObjGetStruct(article_gobj));
+
+    pos.z = 0.0F;
+    pos.y = 0.0F;
+    pos.x = 0.0F;
+
+    joint_index = (!(ap->is_light_throw)) ? fp->attributes->joint_throw_heavy : fp->attributes->joint_throw_light;
+
+    func_ovl2_800EDF24(fp->joint[joint_index], &pos);
+
+    JObjGetStruct(article_gobj)->translate.x = pos.x;
+    JObjGetStruct(article_gobj)->translate.y = pos.y;
+    JObjGetStruct(article_gobj)->translate.z = 0.0F;
+
+    func_ovl2_800DF058(article_gobj, fp->coll_data.p_translate, &fp->coll_data);
+
+    fp->article_hold = NULL;
+
+    ap->is_pause_article = FALSE;
+
+    ap->phys_info.vel = *vel;
+
+    vec3f_scale(&ap->phys_info.vel, ap->vel_scale);
+
+    ap->x2CE_flag_b456++;
+    ap->x2CF_flag_b2 = TRUE;
+
+    ap->article_hit[0].stale = stale;
+    ap->article_hit[0].flags_hi.halfword = *(vu16*)&flags_hi & U16_MAX; // Uh...
+    ap->article_hit[0].flags_lw.halfword = flags_lw;
+
+    func_ovl2_800E8744(fighter_gobj);
+    func_ovl3_8017275C(article_gobj);
+}
+
+extern void (*Article_Callback_Drop[])(GObj*); // Assumed to contain 45 callbacks?
+
+void func_ovl3_80172AEC(GObj *article_gobj, Vec3f *vel, f32 stale)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    GObj *owner_gobj = ap->owner_gobj;
+    Fighter_Struct *fp = FighterGetStruct(owner_gobj);
+    void (*cb_drop)(GObj *) = Article_Callback_Drop[ap->at_kind];
+
+    if (cb_drop != NULL)
+    {
+        cb_drop(article_gobj);
+    }
+    func_ovl3_80172984(article_gobj, vel, stale, 0x38U, fp->unk_0x290);
+
+    func_800269C0(ap->drop_sfx);
+}
+
+extern void (*Article_Callback_Throw[])(GObj*); 
+
+void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_smash_throw)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    GObj *owner_gobj = ap->owner_gobj;
+    Fighter_Struct *fp = FighterGetStruct(owner_gobj);
+    void (*cb_throw)(GObj*);
+
+    if ((ap->is_light_throw) == TRUE)
+    {
+        if (is_smash_throw != FALSE)
+        {
+            func_ovl2_800E806C(fp, 6, 0);
+        }
+    }
+    else
+    {
+        func_ovl2_800E806C(fp, ((is_smash_throw != FALSE) ? 9 : 6), 0);
+    }
+    cb_throw = Article_Callback_Throw[ap->at_kind];
+
+    if (cb_throw != NULL)
+    {
+        cb_throw(article_gobj);
+    }
+    func_ovl3_80172984(article_gobj, vel, stale, fp->unk_0x28E_halfword, fp->unk_0x290);
+
+    func_ovl2_8010066C(&JObjGetStruct(article_gobj)->translate, 1.0F);
+
+    func_800269C0(((is_smash_throw != FALSE) ? ap->throw_sfx : ap->drop_sfx));
+
+    func_ovl3_8017245C(article_gobj, vel, is_smash_throw);
+}
+
+extern void (*Article_Callback_Pickup[])(GObj *);
+
+void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    JObj *joint;
+    void (*cb_pickup)(GObj*);
+    Vec3f pos;
+    s32 joint_index;
+
+    fp->article_hold = article_gobj;
+    ap->owner_gobj = fighter_gobj;
+
+    ap->x2CE_flag_b0 = FALSE;
+    ap->is_pause_article = TRUE;
+
+    ap->team = fp->team;
+    ap->port_index = fp->player_id;
+    ap->unk_0x16 = fp->offset_hit_type;
+    ap->player_number = fp->player_number;
+
+    ap->phys_info.vel.x = 0.0F;
+    ap->phys_info.vel.y = 0.0F;
+    ap->phys_info.vel.z = 0.0F;
+
+    ap->display_state = fp->display_state;
+
+    func_ovl3_80173F78(ap);
+
+    joint = func_800092D0(article_gobj, NULL);
+
+    joint->unk_0xC->unk_0x8 = NULL;
+    joint->unk_0xC = NULL;
+    joint->next = JObjGetStruct(article_gobj);
+
+    JObjGetStruct(article_gobj)->prev = joint;
+
+    article_gobj->obj = joint;
+
+    func_80008CC0(joint, 0x52, 0);
+
+    joint_index = (!(ap->is_light_throw)) ? fp->attributes->joint_throw_heavy : fp->attributes->joint_throw_light;
+
+    joint->unk_0x84 = fp->joint[joint_index];
+
+    pos.x = 0.0F;
+    pos.y = 0.0F;
+    pos.z = 0.0F;
+
+    func_ovl2_800EDF24(fp->joint[joint_index], &pos);
+
+    func_ovl2_80104458(&pos);
+
+    func_8000F988(article_gobj, ap->attributes->unk_0x0);
+
+    cb_pickup = Article_Callback_Pickup[ap->at_kind];
+
+    if (cb_pickup != NULL)
+    {
+        cb_pickup(article_gobj);
+    }
+    func_ovl2_800E86F0(fighter_gobj);
+
+    if (ap->is_light_throw == TRUE)
+    {
+        func_800269C0(0x31U);
+    }
+    else
+    {
+        if (fp->attributes->throw_heavy_sfx != 0x2B7)
+        {
+            func_800269C0(fp->attributes->throw_heavy_sfx);
+        }
+    }
+    func_ovl2_800E806C(fp, 6, 0);
+
+    ap->x2D2_flag_12bit = 1400;
+}
+
+void func_ovl3_80172E74(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+
+    ap->phys_info.vel.z = 0.0F;
+    ap->phys_info.vel.y = 0.0F;
+    ap->phys_info.vel.x = 0.0F;
+
+    ap->x2CE_flag_b0 = TRUE;
+    ap->x2CE_flag_b23 = 0;
+
+    func_ovl3_801725BC(article_gobj);
+    func_ovl3_80173F54(ap);
 }

@@ -84,11 +84,16 @@ typedef struct ftCommonAttributes
     f32 unk_0xE0;
     s16 unk_0xE4;
     s16 unk_0xE6;
-    s32 unk_0xE8;
+    u16 throw_heavy_sfx;
+    u16 unk_0xEA;
     u8 filler_0xEC[0x2D4 - 0xEC];
     JObjContainer *renderstate;
     u8 filler_0x2D8[0x324 - 0x2D8];
     s32 unk_0x324;
+    s32 filler_0x328[0x334 - 0x328];
+    s32 joint_throw_heavy;
+    s32 unk_0x338;
+    s32 joint_throw_light;
 
 } ftCommonAttributes;
 
@@ -550,8 +555,8 @@ typedef struct _Fighter_Struct
 
     GObj *unk_gobj;
     u8 filler_0x834[0xC];
-    GObj *catch_gobj;
-    s32 unk_0x844;
+    GObj *catch_gobj;   // GObj this fighter has caught
+    GObj *capture_gobj; // GObj this fighter is captured by
     s32 unk_0x848;
     GObj *article_hold;
     SpecialHit *special_hit;

@@ -144,8 +144,8 @@ typedef struct _Article_Hit
     u16 attack_id : 6;
     u16 flags_0x4C_b7 : 1;
     u16 flags_0x4E;
-    u16 flags_0x50;
-    u16 flags_0x52;
+    CommonAttackFlagsHi flags_hi;
+    CommonAttackFlagsLw flags_lw;
     s32 hitbox_count; // 0 = disabled, 1 = enabled, 2 and 3 related to position update?
     ArticleHitUnk article_hit_unk[2];
     ArticleHitArray hit_targets[4];
@@ -163,7 +163,8 @@ typedef struct Article_Hurt
 
 typedef struct atCommonAttributes
 {
-    u8 filler_0x0[0x46];
+    void *unk_0x0;
+    u8 filler_0x4[0x46 - 0x4];
     u16 spin_speed;
 
 } atCommonAttributes;
@@ -222,32 +223,18 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     s32 damage_display_state;
     s32 damage_taken_last;
 
-    u8 filler_0x160[0x2CC - 0x2C0];
+    u8 filler_0x160[0x2C4 - 0x2C0];
 
-    u8 x2CC_flag_b0 : 1;
-    u8 x2CC_flag_b1 : 1;
-    u8 x2CC_flag_b2 : 1;
-    u8 x2CC_flag_b3 : 1;
-    u8 x2CC_flag_b4 : 1;
-    u8 x2CC_flag_b5 : 1;
-    u8 x2CC_flag_b6 : 1;
-    u8 x2CC_flag_b7 : 1;
-    u8 x2CD_flag_b0 : 1;
-    u8 x2CD_flag_b1 : 1;
-    u8 x2CD_flag_b2 : 1;
-    u8 x2CD_flag_b3 : 1;
-    u8 x2CD_flag_b4 : 1;
-    u8 x2CD_flag_b5 : 1;
-    u8 x2CD_flag_b6 : 1;
-    u8 x2CD_flag_b7 : 1;
+    f32 vel_scale;
+    u16 unk_0x2C8;
+    u16 drop_sfx;
+    u16 throw_sfx;
+
     u8 x2CE_flag_b0 : 1;
     u8 is_pause_article : 1; // Suspend Article logic updates?
-    u8 x2CE_flag_b2 : 1;
-    u8 x2CE_flag_b3 : 1;
-    u8 x2CE_flag_b4 : 1;
-    u8 x2CE_flag_b5 : 1;
-    u8 x2CE_flag_b6 : 1;
-    u8 x2CE_flag_b7 : 1;
+    u8 x2CE_flag_b23 : 2;
+    u8 x2CE_flag_b456 : 3;
+    u8 is_light_throw : 1;
     u8 is_damage_all : 1; // Article ignores ownership and can damage anything?
     u8 x2CF_flag_b1 : 1;
     u8 x2CF_flag_b2 : 1;
@@ -321,7 +308,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     s32 unk_0x340;
     f32 rotate_speed;
-    s32 unk_0x348;
+    GObj *unk_0x348;
 
     u8 arrow_flash_timer;
     u8 unk_0x34D;

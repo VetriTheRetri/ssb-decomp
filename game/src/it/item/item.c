@@ -109,8 +109,8 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         ip->item_hit[0].stale = ap->article_hit[0].stale;
         ip->item_hit[0].attack_id = ap->article_hit[0].attack_id;
         ip->item_hit[0].flags_0x4A_halfword = ap->article_hit[0].flags_0x4E;
-        ip->item_hit[0].flags_0x4C_halfword = ap->article_hit[0].flags_0x50 & U16_MAX;
-        ip->item_hit[0].flags_0x4E = ap->article_hit[0].flags_0x52;
+        ip->item_hit[0].flags_0x4C_halfword = ap->article_hit[0].flags_lw.halfword & U16_MAX;
+        ip->item_hit[0].flags_0x4E = ap->article_hit[0].flags_hi.halfword;
         break;
 
     default: // Items spawned independently 

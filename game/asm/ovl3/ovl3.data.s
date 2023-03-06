@@ -2013,7 +2013,7 @@ glabel jtbl_ovl3_801894D4
   /* 57A18 103F58 80189518 */  .4byte jtgt_ovl3_80183690
   /* 57A1C 103F5C 8018951C */  .4byte jtgt_ovl3_8017EDE4
 
-glabel D_ovl3_80189520
+glabel Article_Callback_Drop
   /* 57A20 103F60 80189520 */  .4byte jtgt_ovl3_8017990C
   /* 57A24 103F64 80189524 */  .4byte jtgt_ovl3_80179F74
   /* 57A28 103F68 80189528 */  .4byte jtgt_ovl3_80174248
@@ -2041,7 +2041,7 @@ glabel jtbl_ovl3_8018953C
 glabel jtbl_ovl3_80189574
   /* 57A74 103FB4 80189574 */  .4byte jtgt_ovl3_80186314
 
-glabel D_ovl3_80189578
+glabel Article_Callback_Throw
   /* 57A78 103FB8 80189578 */  .4byte jtgt_ovl3_8017987C
   /* 57A7C 103FBC 8018957C */  .4byte jtgt_ovl3_80179F1C
   /* 57A80 103FC0 80189580 */  .4byte jtgt_ovl3_801741B0
@@ -2067,7 +2067,7 @@ glabel jtbl_ovl3_80189594
 glabel jtbl_ovl3_801895CC
   /* 57ACC 10400C 801895CC */  .4byte jtgt_ovl3_80186224
 
-glabel D_ovl3_801895D0
+glabel Article_Callback_Pickup
   /* 57AD0 104010 801895D0 */  .4byte jtgt_ovl3_801797E8
   /* 57AD4 104014 801895D4 */  .4byte jtgt_ovl3_80179D60
   /* 57AD8 104018 801895D8 */  .4byte jtgt_ovl3_801740FC

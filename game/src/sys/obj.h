@@ -82,6 +82,7 @@ struct JObj
     f32 anim_rate;
     f32 unk_0x7C;
     Image *image;
+    JObj *unk_0x84;
 
 };
 

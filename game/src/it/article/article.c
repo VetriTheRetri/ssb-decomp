@@ -1460,8 +1460,8 @@ next_check:
         ap->port_index = fp->player_id;
         ap->player_number = fp->player_number;
         ap->unk_0x16 = fp->offset_hit_type;
-        ap->article_hit[0].flags_0x50 = ap->unk_0x28C & U16_MAX;
-        ap->article_hit[0].flags_0x52 = ap->unk_0x28E;
+        ap->article_hit[0].flags_hi.halfword = ap->unk_0x28C & U16_MAX;
+        ap->article_hit[0].flags_hi.halfword = ap->unk_0x28E;
 
         if (ap->cb_reflect != NULL)
         {
