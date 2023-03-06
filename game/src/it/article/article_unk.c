@@ -227,7 +227,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi,
 
     vec3f_scale(&ap->phys_info.vel, ap->vel_scale);
 
-    ap->x2CE_flag_b456++;
+    ap->throw_count++;
     ap->x2CF_flag_b2 = TRUE;
 
     ap->article_hit[0].stale = stale;
@@ -291,7 +291,7 @@ void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_sma
     func_ovl3_8017245C(article_gobj, vel, is_smash_throw);
 }
 
-extern void (*Article_Callback_Pickup[])(GObj *);
+extern void (*Article_Callback_Pickup[])(GObj*);
 
 void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
 {
@@ -371,7 +371,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     ap->x2D2_flag_12bit = 1400;
 }
 
-void func_ovl3_80172E74(GObj *article_gobj)
+void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded?
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 

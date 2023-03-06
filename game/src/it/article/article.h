@@ -233,7 +233,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2CE_flag_b0 : 1;
     u8 is_pause_article : 1; // Suspend Article logic updates?
     u8 x2CE_flag_b23 : 2;
-    u8 x2CE_flag_b456 : 3;
+    u8 throw_count : 3; // Number of times item has been dropped or thrown; overflows after 7
     u8 is_light_throw : 1;
     u8 is_damage_all : 1; // Article ignores ownership and can damage anything?
     u8 x2CF_flag_b1 : 1;
