@@ -524,7 +524,7 @@ typedef struct _Fighter_Struct
     u8 filler_0x290[0x5B8 - 0x5A4];
 
     s32 hit_status;
-
+    
     u8 filler_0x58C[0x7B0 - 0x5BC];
 
     s32 unk_0x7B0;
@@ -551,8 +551,12 @@ typedef struct _Fighter_Struct
     GObj *unk_gobj;
     u8 filler_0x834[0xC];
     GObj *catch_gobj;
+    s32 unk_0x844;
+    s32 unk_0x848;
+    GObj *article_hold;
+    SpecialHit *special_hit;
 
-    u8 filler_0x844[0x864 - 0x844];
+    u8 filler_0x844[0x864 - 0x854];
 
     f32 unk_0x864;
 

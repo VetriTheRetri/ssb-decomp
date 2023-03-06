@@ -32,7 +32,7 @@ void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
         {
             gDPPipeSync(D_800465B0[0]++);
 
-            if (ip->display_state == dbObjDisplayStatus_Hit_Outline)
+            if (ip->display_state == dbObjDisplayStatus_HitCollision_Outline)
             {
                 gDPSetPrimColor(D_800465B0[0]++, 0, 0, 176, 0, 0, 255);
 
@@ -157,7 +157,7 @@ void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    if (ip->display_state == dbObjDisplayStatus_Env_Collision)
+    if (ip->display_state == dbObjDisplayStatus_EnvCollision)
     {
         func_ovl3_80167454(item_gobj);
 
@@ -209,7 +209,7 @@ void func_ovl3_80167660(GObj *item_gobj)
     Item_Struct *ip = ItemGetStruct(item_gobj);
     s32 index = ip->item_vars.pk_thunder_trail.trail_index;
 
-    if (ip->display_state == dbObjDisplayStatus_Env_Collision)
+    if (ip->display_state == dbObjDisplayStatus_EnvCollision)
     {
         func_ovl3_80167454();
 

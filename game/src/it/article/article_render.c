@@ -29,7 +29,7 @@ void func_ovl3_80171410(GObj *article_gobj)
         {
             gDPPipeSync(D_800465B0[0]++);
 
-            if (ap->display_state == dbObjDisplayStatus_Hit_Outline)
+            if (ap->display_state == dbObjDisplayStatus_HitCollision_Outline)
             {
                 gDPSetPrimColor(D_800465B0[0]++, 0, 0, 176, 0, 0, 255);
 
@@ -206,7 +206,7 @@ void func_ovl3_80171C7C(GObj *article_gobj) // Unused
         {
             func_80014038(article_gobj);
         }
-        else if (ap->display_state == dbObjDisplayStatus_Env_Collision)
+        else if (ap->display_state == dbObjDisplayStatus_EnvCollision)
         {
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
@@ -229,7 +229,7 @@ void func_ovl3_80171D38(GObj *article_gobj)
         {
             func_80014768(article_gobj);
         }
-        else if (ap->display_state == dbObjDisplayStatus_Env_Collision)
+        else if (ap->display_state == dbObjDisplayStatus_EnvCollision)
         {
             func_80014768(article_gobj);
             func_ovl3_801719AC(article_gobj);
@@ -279,7 +279,7 @@ void func_ovl3_80171F4C(GObj *article_gobj) // Unused
         {
             func_ovl3_80171DF4(article_gobj);
         }
-        else if (ap->display_state == dbObjDisplayStatus_Env_Collision)
+        else if (ap->display_state == dbObjDisplayStatus_EnvCollision)
         {
             func_ovl3_80171DF4(article_gobj);
             func_ovl3_801719AC(article_gobj);
@@ -287,6 +287,72 @@ void func_ovl3_80171F4C(GObj *article_gobj) // Unused
         else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit[0].update_state == gmHitCollision_UpdateState_Disable))
         {
             func_ovl3_80171DF4(article_gobj);
+        }
+        else func_ovl3_80171410(article_gobj);
+    }
+}
+
+void func_ovl3_80172008(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    gDPPipeSync(D_800465B0[0]++);
+
+    gDPSetCycleType(D_800465B0[0]++, G_CYC_2CYCLE);
+
+    gDPSetRenderMode(D_800465B0[0]++, G_RM_PASS, G_RM_AA_ZB_OPA_SURF2);
+
+    gDPPipeSync(D_800465B0[1]++);
+
+    gDPSetCycleType(D_800465B0[1]++, G_CYC_2CYCLE);
+
+    gDPSetRenderMode(D_800465B0[1]++, G_RM_PASS, G_RM_AA_ZB_XLU_SURF2);
+
+    if (ap->x338_flag_b0)
+    {
+        gDPSetEnvColor(D_800465B0[0]++, ap->color_anim.r, ap->color_anim.g, ap->color_anim.b, ap->color_anim.a);
+
+        gDPSetEnvColor(D_800465B0[1]++, ap->color_anim.r, ap->color_anim.g, ap->color_anim.b, ap->color_anim.a);
+    }
+    else
+    {
+        gDPSetEnvColor(D_800465B0[0]++, 0, 0, 0, 0);
+
+        gDPSetEnvColor(D_800465B0[1]++, 0, 0, 0, 0);
+    }
+    func_80014768(article_gobj);
+
+    gDPPipeSync(D_800465B0[0]++);
+
+    gDPSetCycleType(D_800465B0[0]++, G_CYC_1CYCLE);
+
+    gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+
+    gDPPipeSync(D_800465B0[1]++);
+
+    gDPSetCycleType(D_800465B0[1]++, G_CYC_1CYCLE);
+
+    gDPSetRenderMode(D_800465B0[1]++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
+}
+
+void func_ovl3_8017224C(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (func_ovl3_80171C10(ap) != FALSE)
+    {
+        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pause_article))
+        {
+            func_ovl3_80172008(article_gobj);
+        }
+        else if (ap->display_state == dbObjDisplayStatus_EnvCollision)
+        {
+            func_ovl3_80172008(article_gobj);
+            func_ovl3_801719AC(article_gobj);
+        }
+        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit[0].update_state == gmHitCollision_UpdateState_Disable))
+        {
+            func_ovl3_80172008(article_gobj);
         }
         else func_ovl3_80171410(article_gobj);
     }

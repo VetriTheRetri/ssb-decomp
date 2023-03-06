@@ -14,7 +14,7 @@ void func_ovl3_80153C50(Fighter_Struct *fp)
         fp->status_vars.ness.specialhi.pk_jibaku_delay--;
     }
 
-    if (fp->fighter_vars.ness.is_thunder_exist & TRUE)
+    if (fp->fighter_vars.ness.is_thunder_destroy & TRUE)
     {
         if (fp->status_vars.ness.specialhi.pk_thunder_end_delay != 0)
         {
@@ -60,7 +60,7 @@ bool32 func_ovl3_80153CFC(GObj *fighter_gobj)
 
     if (fp->fighter_vars.ness.pk_thunder_timer1 != 0) return FALSE;
 
-    if ((fp->fighter_vars.ness.is_thunder_exist & TRUE) || (pk_thunder_gobj == NULL)) return FALSE;
+    if ((fp->fighter_vars.ness.is_thunder_destroy & TRUE) || (pk_thunder_gobj == NULL)) return FALSE;
 
     ip = ItemGetStruct(pk_thunder_gobj);
 
@@ -154,7 +154,7 @@ void func_ovl3_80153FCC(GObj *fighter_gobj)
     fp->status_vars.ness.specialhi.pk_jibaku_delay = FTNESS_PK_JIBAKU_DELAY;
     fp->status_vars.ness.specialhi.pk_thunder_end_delay = FTNESS_PK_THUNDER_END_DELAY;
     fp->status_vars.ness.specialhi.pk_thunder_gravity_delay = FTNESS_PK_THUNDER_GRAVITY_DELAY;
-    fp->fighter_vars.ness.is_thunder_exist = FALSE;
+    fp->fighter_vars.ness.is_thunder_destroy = FALSE;
     fp->fighter_vars.ness.pk_thunder_trail_id = 0;
 }
 
@@ -185,7 +185,7 @@ void func_ovl3_80154098(GObj *fighter_gobj)
 
     if (gobj == NULL)
     {
-        fp->fighter_vars.ness.is_thunder_exist |= TRUE;
+        fp->fighter_vars.ness.is_thunder_destroy |= TRUE;
     }
 
     fp->fighter_vars.ness.pk_thunder_trail_id++;
@@ -206,7 +206,7 @@ void func_ovl3_801540EC(GObj *fighter_gobj)
 
     if ((fp->fighter_vars.ness.pk_jibaku_delay <= 0) &&
     (fp->fighter_vars.ness.pk_thunder_end_delay <= 0) &&
-    (fp->fighter_vars.ness.is_thunder_exist & TRUE))
+    (fp->fighter_vars.ness.is_thunder_destroy & TRUE))
     {
         func_ovl3_80154518(fighter_gobj);
     }
@@ -225,7 +225,7 @@ void func_ovl3_8015416C(GObj *fighter_gobj)
 
     if ((fp->fighter_vars.ness.pk_jibaku_delay <= 0) &&
         (fp->fighter_vars.ness.pk_thunder_end_delay <= 0) &&
-        (fp->fighter_vars.ness.is_thunder_exist & TRUE))
+        (fp->fighter_vars.ness.is_thunder_destroy & TRUE))
     {
         func_ovl3_80154558(fighter_gobj);
     }
@@ -251,11 +251,11 @@ void func_ovl3_80154234(GObj *fighter_gobj) // Unused
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     GObj *gobj = fp->status_vars.ness.specialhi.pk_thunder_gobj;
 
-    if (((fp->fighter_vars.ness.is_thunder_exist & TRUE) == FALSE) && (gobj != NULL))
+    if ((!(fp->fighter_vars.ness.is_thunder_destroy & TRUE)) && (gobj != NULL))
     {
         Item_Struct *ip = ItemGetStruct(gobj);
 
-        ip->item_vars.pk_thunder.pk_thunder_state = 1;
+        ip->item_vars.pk_thunder.pk_thunder_state = itNessThunderStatus_Destroy;
     }
 }
 
@@ -359,17 +359,17 @@ void func_ovl3_80154558(GObj *fighter_gobj)
 void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
 {
     f32 tan_rwall_angle;
-    f32 rot_y;
+    f32 rotation;
     f32 tangent;
     f32 tan_lwall_angle;
-    s32 coll_mask;
+    u32 coll_mask;
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    rot_y = (fp->lr == RIGHT) ? fp->status_vars.ness.specialhi.pk_jibaku_vel  : (PI32 - fp->status_vars.ness.specialhi.pk_jibaku_vel );
+    rotation = (fp->lr == RIGHT) ? fp->status_vars.ness.specialhi.pk_jibaku_vel : (PI32 - fp->status_vars.ness.specialhi.pk_jibaku_vel);
 
-    if (DOUBLE_PI32 < rot_y)
+    if (DOUBLE_PI32 < rotation)
     {
-        rot_y -= DOUBLE_PI32;
+        rotation -= DOUBLE_PI32;
     }
 
     coll_mask = coll_data->unk_0x56;
@@ -385,7 +385,7 @@ void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
             tangent = tan_rwall_angle - DOUBLE_PI32;
         }
 
-        if ((rot_y + PI32) < tangent)
+        if ((rotation + PI32) < tangent)
         {
             coll_mask = coll_data->unk_0x56;
             tangent += PI32;
@@ -408,12 +408,12 @@ void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
             tangent = tan_lwall_angle - DOUBLE_PI32;
         }
 
-        tangent = ((tangent + PI32) < rot_y) ? (tangent + (-PI32)) : (tangent + HALF_PI32);
+        tangent = ((tangent + PI32) < rotation) ? (tangent + (-PI32)) : (tangent + HALF_PI32);
     }
 
     vec3_get_euler_rotation(&fp->phys_info.vel_normal, 4, tangent - (fp->status_vars.ness.specialhi.pk_jibaku_vel  * (f32)fp->lr));
 
-    fp->status_vars.ness.specialhi.pk_jibaku_vel  = atan2f(fp->phys_info.vel_normal.y, fp->phys_info.vel_normal.x * (f32)fp->lr);
+    fp->status_vars.ness.specialhi.pk_jibaku_vel = atan2f(fp->phys_info.vel_normal.y, fp->phys_info.vel_normal.x * (f32)fp->lr);
 }
 
 void func_ovl3_80154758(GObj *fighter_gobj) // Joint use here, fix array later to include all joints w/ TopN 

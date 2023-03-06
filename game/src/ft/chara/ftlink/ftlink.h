@@ -6,6 +6,7 @@
 #include <game/src/sys/obj.h>
 #include <game/src/ft/fighter.h>
 #include <game/src/it/item/item.h>
+#include <game/src/it/article/article.h>
 
 #define FTLINK_BOOMERANG_SPAWN_JOINT 0                  // Joint to attach Boomerang
 #define FTLINK_BOOMERANG_SMASH_BUFFER 8                 // Frames of smash input buffer

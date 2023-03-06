@@ -57,7 +57,7 @@ glabel D_ovl3_8018D048
     .space 24
 glabel D_ovl3_8018D060
     .space 48
-glabel D_ovl3_8018D090
+glabel dbObjDisplayStatus_Global_Article
     .space 4
 glabel D_ovl3_8018D094
     .space 4

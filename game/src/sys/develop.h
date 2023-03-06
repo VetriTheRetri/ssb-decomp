@@ -5,13 +5,13 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
-typedef enum dbDisplayStatus
+typedef enum gmDevelopDisplayStatus
 {
 	dbObjDisplayStatus_Master,
-	dbObjDisplayStatus_Hit_Fill,
-	dbObjDisplayStatus_Hit_Outline,
-	dbObjDisplayStatus_Env_Collision
+	dbObjDisplayStatus_HitCollision_Fill,
+	dbObjDisplayStatus_HitCollision_Outline,
+	dbObjDisplayStatus_EnvCollision
 
-} gmDevelopHitDisplayStatus;
+} gmDevelopDisplayStatus;
 
 #endif

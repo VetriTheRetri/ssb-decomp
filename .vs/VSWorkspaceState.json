@@ -3,11 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
+    "\\game\\src\\ft",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftpurin",
     "\\game\\src\\it",
-    "\\game\\src\\it\\article",
-    "\\game\\src\\it\\item\\itemness",
+    "\\game\\src\\it\\item",
+    "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article.c",
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftpurin\\ftpurin_specialn.c",
   "PreviewInSolutionExplorer": false
 }

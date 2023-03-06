@@ -9,12 +9,89 @@
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 
+#define ARTICLE_TEAM_DEFAULT 4U // Article is teamless; deals damage to any eligible target
+#define ARTICLE_PORT_DEFAULT 4U
+#define ARTICLE_UNK_DEFAULT 9U // Handicap?
+#define ARTICLE_STALE_DEFAULT 1.0F
+
 #define ARTICLE_REFLECT_MAX_DEFAULT 100            // Maximum damage cap for reflected articles
 #define ARTICLE_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
 #define ARTICLE_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying article's hitbox damage
+
 #define ARTICLE_DESPAWN_FLASH_INT_DEFAULT 180U // Article starts flashing rapidly once its lifetime (?) drops below this value
 #define ARTICLE_ARROW_BLINK_INT_DEFAULT 45 // Red arrow pointing downward at article "blinks" at this frequency (45 frames visible, 45 frames invisible)
+
 #define ARTICLE_REHIT_TIME_DEFAULT 16
+
+#define ARTICLE_SPIN_SPEED_MUL_DEFAULT 0.31415927F
+#define ARTICLE_SPIN_SPEED_MUL_NEW_SPAWN 0.17453294F
+#define ARTICLE_SPIN_SPEED_MUL_PREV_SPAWN 0.27925268F
+
+#define ARTICLE_SPIN_SPEED_SET_SMASH_THROW -0.36651915F
+#define ARTICLE_SPIN_SPEED_SET_NORMAL_THROW -0.17453294F
+
+#define ARTICLE_SPIN_SPEED_FRACTION_DEFAULT 0.01F // Also multiplies spin speed
+
+typedef enum atKind
+{
+    // Common articles
+
+    At_Kind_Box,        // Crate
+    At_Kind_Taru,       // Barrel
+    At_Kind_Capsule,    // Capsule
+    At_Kind_Egg,        // Egg
+    At_Kind_Tomato,     // Maxim Tomato
+    At_Kind_Heart,      // Heart
+    At_Kind_Star,       // Star Man
+    At_Kind_Sword,      // Beam Sword
+    At_Kind_Bat,        // Home-Run Bat
+    At_Kind_Harisen,    // Fan
+    At_Kind_StarRod,    // Star Rod
+    At_Kind_L_Gun,      // Ray Gun
+    At_Kind_F_Flower,   // Fire Flower
+    At_Kind_Hammer,     // Hammer
+    At_Kind_MSBomb,     // Motion-Sensor Bomb
+    At_Kind_BombHei,    // Bob-Omb
+    At_Kind_It_Bumper,  // Bumper (Item)
+    At_Kind_G_Shell,    // Green Shell
+    At_Kind_R_Shell,    // Red Shell
+    At_Kind_M_Ball,     // Poké Ball
+
+    // Character articles
+
+    At_Kind_PK_Fire,    // PK Fire pillar
+    At_Kind_Link_Bomb,  // Link's Bomb
+    
+    // Stage hazards
+
+    At_Kind_POW,        // POW block
+    At_Kind_Gr_Bumper,  // Bumper (Peach's Castle)
+    At_Kind_Pakkun,     // Pirahna Plant
+    At_Kind_Mato,       // Target
+    At_Kind_Gr_Bomb,    // Race to the Finish bomb
+    At_Kind_Gr_Lucky,   // Chansey (Saffron City)
+    At_Kind_Marumine,   // Electrode
+    At_Kind_Hitokage,   // Charmander
+    At_Kind_Fushigibana,// Venusaur
+    At_Kind_Porygon,    // Porygon
+
+    // Pokémon
+
+    At_Kind_Iwark,      // Onix
+    At_Kind_Kabigon,    // Snorlax
+    At_Kind_Tosakinto,  // Goldeen
+    At_Kind_Nyars,      // Meowth
+    At_Kind_Lizardon,   // Charizard
+    At_Kind_Spear,      // Beedrill
+    At_Kind_Kamex,      // Blastoise
+    At_Kind_At_Lucky,   // Chansey (Poké Ball)
+    At_Kind_Starmie,    // Starmie
+    At_Kind_Sawamura,   // Hitmonlee
+    At_Kind_Dogas,      // Koffing
+    At_Kind_Pippi,      // Clefairy
+    At_Kind_Mew         // Mew
+
+} atKind;
 
 typedef struct ArticleHitVictimFlags
 {
@@ -48,8 +125,8 @@ typedef struct _Article_Hit
 {
     s32 update_state; // 0x0
     s32 damage; // 0x4
-    f32 unk;
     f32 stale; // Might be damage in float? At least based on Melee?
+    f32 throw_mul; // Multiplies damage on throw?
     s32 element; // 0xC // Placed AFTER offset?
     Vec3f offset[2]; // 0x10 - 0x18    
     f32 size;
@@ -84,12 +161,19 @@ typedef struct Article_Hurt
 
 } Article_Hurt; // Article Hurtbox, might be larger
 
+typedef struct atCommonAttributes
+{
+    u8 filler_0x0[0x46];
+    u16 spin_speed;
+
+} atCommonAttributes;
+
 typedef struct Article_Struct // Common items, stage hazards and Pokémon
 {
     void *unk_0x0;
     GObj *article_gobj;
     GObj *owner_gobj;
-    s32 article_kind;
+    atKind at_kind;
     s32 unk_0x10;
     u8 team;
     u8 port_index;
@@ -179,7 +263,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 is_static_damage : 1;
     u8 x2D2_flag_b7 : 1;
 
-    s32 unk_0x2D4;
+    atCommonAttributes *attributes;
 
     Color_Overlay color_anim;
 
@@ -218,37 +302,22 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x33B_flag_b6 : 1;
     u8 x33B_flag_b7 : 1;
     u8 is_hitlag_victim : 1;
-    u8 x3CC_flag_b1 : 1;
-    u8 x3CC_flag_b2 : 1;
-    u8 x3CC_flag_b3 : 1;
-    u8 x3CC_flag_b4 : 1;
-    u8 x3CC_flag_b5 : 1;
-    u8 x3CC_flag_b6 : 1;
-    u8 x3CC_flag_b7 : 1;
-    u8 x3CD_flag_b0 : 1;
-    u8 x3CD_flag_b1 : 1;
-    u8 x3CD_flag_b2 : 1;
-    u8 x3CD_flag_b3 : 1;
-    u8 x3CD_flag_b4 : 1;
-    u8 x3CD_flag_b5 : 1;
-    u8 x3CD_flag_b6 : 1;
-    u8 x3CD_flag_b7 : 1;
-    u8 x3CE_flag_b0 : 1;
-    u8 x3CE_flag_b1 : 1;
-    u8 x3CE_flag_b2 : 1;
-    u8 x3CE_flag_b3 : 1;
-    u8 x3CE_flag_b4 : 1;
-    u8 x3CE_flag_b5 : 1;
-    u8 x3CE_flag_b6 : 1;
-    u8 x3CE_flag_b7 : 1;
-    u8 x3CF_flag_b0 : 1;
-    u8 x3CF_flag_b1 : 1;
-    u8 x3CF_flag_b2 : 1;
-    u8 x3CF_flag_b3 : 1;
-    u8 x3CF_flag_b4 : 1;
-    u8 x3CF_flag_b5 : 1;
-    u8 x3CF_flag_b6 : 1;
-    u8 x3CF_flag_b7 : 1;
+    u8 x33C_flag_b1 : 1;
+    u8 x33C_flag_b2 : 1;
+    u8 x33C_flag_b3 : 1;
+    u8 x33C_flag_b4 : 1;
+    u8 x33C_flag_b5 : 1;
+    u8 x33C_flag_b6 : 1;
+    u8 x33C_flag_b7 : 1;
+    u8 x33D_flag_b0 : 1;
+    u8 x33D_flag_b1 : 1;
+    u8 x33D_flag_b2 : 1;
+    u8 x33D_flag_b3 : 1;
+    u8 x33D_flag_b4 : 1;
+    u8 x33D_flag_b5 : 1;
+    u8 x33D_flag_b6 : 1;
+    u8 x33D_flag_b7 : 1;
+    u16 unk_0x33E;
 
     s32 unk_0x340;
     f32 rotate_speed;
@@ -263,15 +332,15 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     s32 display_state;
 
-    bool32(*cb_anim)(GObj *);
-    bool32(*cb_coll)(GObj *);
-    bool32(*cb_give_damage)(GObj *);
-    bool32(*cb_shield_block)(GObj *);
-    bool32(*cb_shield_deflect)(GObj *);
-    bool32(*cb_attack)(GObj *);
-    bool32(*cb_reflect)(GObj *);
-    bool32(*cb_take_damage)(GObj *);
-    bool32(*cb_destroy)(GObj *);
+    bool32 (*cb_anim)(GObj*);
+    bool32 (*cb_coll)(GObj*);
+    bool32 (*cb_give_damage)(GObj*);
+    bool32 (*cb_shield_block)(GObj*);
+    bool32 (*cb_shield_deflect)(GObj*);
+    bool32 (*cb_attack)(GObj*);
+    bool32 (*cb_reflect)(GObj*);
+    bool32 (*cb_take_damage)(GObj*);
+    bool32 (*cb_destroy)(GObj*);
 
 } Article_Struct;
 

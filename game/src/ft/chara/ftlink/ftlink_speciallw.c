@@ -58,11 +58,11 @@ bool32 func_ovl3_80164524(GObj *fighter_gobj, bool32 is_ground)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->item_hold != NULL)
+    if (fp->article_hold != NULL)
     {
-        Item_Struct *ip = ItemGetStruct(fp->item_hold);
+        Article_Struct *ap = ArticleGetStruct(fp->article_hold);
 
-        if (ip->it_kind == It_Kind_Link_Bomb)
+        if (ap->at_kind == At_Kind_Link_Bomb)
         {
             if (is_ground == TRUE)
             {

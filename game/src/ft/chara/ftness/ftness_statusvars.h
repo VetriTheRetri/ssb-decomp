@@ -10,7 +10,7 @@
 
 typedef struct ftNess_FighterVars
 {
-    bool32 is_thunder_exist;        // Bool to check if PK Thunder exists
+    bool32 is_thunder_destroy;      // Bool to check if PK Thunder exists
     s32 pk_thunder_trail_id;
     s16 pk_thunder_trail_x[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];
     s16 pk_thunder_trail_y[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];

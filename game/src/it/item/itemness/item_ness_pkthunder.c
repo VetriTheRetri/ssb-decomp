@@ -30,7 +30,7 @@ void func_ovl3_8016AD30(GObj *item_gobj, bool32 is_destroy)
 
         if (fp->player_number == ip->player_number)
         {
-            fp->fighter_vars.ness.is_thunder_exist |= is_destroy;
+            fp->fighter_vars.ness.is_thunder_destroy |= is_destroy;
         }
     }
 
