@@ -121,6 +121,19 @@ typedef struct _ArticleHitArray
 
 } ArticleHitArray;
 
+typedef struct ArticleLogicDesc
+{
+    bool32 (*cb_anim)(GObj*);
+    bool32 (*cb_coll)(GObj*);
+    bool32 (*cb_give_damage)(GObj*);
+    bool32 (*cb_shield_block)(GObj*);
+    bool32 (*cb_shield_deflect)(GObj*);
+    bool32 (*cb_attack)(GObj*);
+    bool32 (*cb_reflect)(GObj*);
+    bool32 (*cb_take_damage)(GObj*);
+
+} ArticleLogicDesc;
+
 typedef struct _Article_Hit
 {
     s32 update_state; // 0x0
@@ -144,8 +157,8 @@ typedef struct _Article_Hit
     u16 attack_id : 6;
     u16 flags_0x4C_b7 : 1;
     u16 flags_0x4E;
-    CommonAttackFlagsHi flags_hi;
-    CommonAttackFlagsLw flags_lw;
+    CommonAttackFlags flags_hi;
+    CommonAttackFlags flags_lw;
     s32 hitbox_count; // 0 = disabled, 1 = enabled, 2 and 3 related to position update?
     ArticleHitUnk article_hit_unk[2];
     ArticleHitArray hit_targets[4];
@@ -233,7 +246,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2CE_flag_b0 : 1;
     u8 is_pause_article : 1; // Suspend Article logic updates?
     u8 x2CE_flag_b23 : 2;
-    u8 throw_count : 3; // Number of times item has been dropped or thrown; overflows after 7
+    u8 times_thrown : 3; // Number of times item has been dropped or thrown; overflows after 7
     u8 is_light_throw : 1;
     u8 is_damage_all : 1; // Article ignores ownership and can damage anything?
     u8 x2CF_flag_b1 : 1;

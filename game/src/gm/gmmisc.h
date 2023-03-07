@@ -51,42 +51,26 @@ typedef enum gmHitCollisionUpdateState
 
 } gmHitCollisionUpdateState;
 
-typedef union CommonAttackFlagsHi
+typedef union CommonAttackFlags
 {
     struct
     {
-        u16 flags_hi_b0 : 1;
-        u16 flags_hi_b1 : 1;
-        u16 flags_hi_b2 : 1;
-        u16 flags_hi_b3 : 1;
-        u16 flags_hi_b4 : 1;
-        u16 flags_hi_b5 : 1;
-        u16 flags_hi_0x3FF : 10;
+        u16 flags_0x8000 : 1;
+        u16 flags_0x4000 : 1;
+        u16 flags_0x2000 : 1;
+        u16 flags_0x1000 : 1;
+        u16 flags_0x800 : 1;
+        u16 flags_0x400 : 1;
+        u16 flags_0x3FF : 10;
     };
     u16 halfword;
 
-} CommonAttackFlagsHi;
-
-typedef union CommonAttackFlagsLw
-{
-    struct
-    {
-        u16 flags_lw_0x8000 : 1;
-        u16 flags_lw_0x4000 : 1;
-        u16 flags_lw_0x2000 : 1;
-        u16 flags_lw_0x1000 : 1;
-        u16 flags_lw_0x800 : 1;
-        u16 flags_lw_0x400 : 1;
-        u16 flags_lw_0x3FF : 10;
-    };
-    u16 halfword;
-
-} CommonAttackFlagsLw;
+} CommonAttackFlags;
 
 typedef struct FighterAttackFlags
 {
-    CommonAttackFlagsHi hi;
-    CommonAttackFlagsLw lw;
+    CommonAttackFlags hi;
+    CommonAttackFlags lw;
 
 } FighterAttackFlags;
 

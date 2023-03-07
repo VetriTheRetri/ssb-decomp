@@ -1,5 +1,6 @@
 #include "article.h"
 #include "fighter.h"
+#include "gmmatch.h"
 
 void func_ovl3_80172310(GObj *article_gobj)
 {
@@ -227,7 +228,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi,
 
     vec3f_scale(&ap->phys_info.vel, ap->vel_scale);
 
-    ap->throw_count++;
+    ap->times_thrown++;
     ap->x2CF_flag_b2 = TRUE;
 
     ap->article_hit[0].stale = stale;
@@ -245,7 +246,7 @@ void func_ovl3_80172AEC(GObj *article_gobj, Vec3f *vel, f32 stale)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     GObj *owner_gobj = ap->owner_gobj;
     Fighter_Struct *fp = FighterGetStruct(owner_gobj);
-    void (*cb_drop)(GObj *) = Article_Callback_Drop[ap->at_kind];
+    void (*cb_drop)(GObj*) = Article_Callback_Drop[ap->at_kind];
 
     if (cb_drop != NULL)
     {
@@ -386,4 +387,125 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
 
     func_ovl3_801725BC(article_gobj);
     func_ovl3_80173F54(ap);
+}
+
+void func_ovl3_80172EC8(GObj *article_gobj, ArticleLogicDesc *p_desc, s32 index) // Runs on article state change
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    ap->cb_anim = ((ArticleLogicDesc*)p_desc + index)->cb_anim;
+    ap->cb_coll = ((ArticleLogicDesc*)p_desc + index)->cb_coll;
+    ap->cb_give_damage = ((ArticleLogicDesc*)p_desc + index)->cb_give_damage;
+    ap->cb_shield_block = ((ArticleLogicDesc*)p_desc + index)->cb_shield_block;
+    ap->cb_shield_deflect = ((ArticleLogicDesc*)p_desc + index)->cb_shield_deflect;
+    ap->cb_attack = ((ArticleLogicDesc*)p_desc + index)->cb_attack;
+    ap->cb_reflect = ((ArticleLogicDesc*)p_desc + index)->cb_reflect;
+    ap->cb_take_damage = ((ArticleLogicDesc*)p_desc + index)->cb_take_damage;
+
+    ap->x2CF_flag_b2 = FALSE;
+
+    ap->article_hit[0].flags_hi.flags_0x3FF = 0x39U;
+    ap->article_hit[0].flags_hi.flags_0x1000 =
+    ap->article_hit[0].flags_hi.flags_0x800 =
+    ap->article_hit[0].flags_hi.flags_0x400 = FALSE;
+
+    ap->article_hit[0].flags_lw.halfword = func_ovl2_800EA74C();
+}
+
+void func_ovl3_80172F98(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    func_ovl2_800E974C(&ap->color_anim);
+}
+
+void func_ovl3_80172FBC(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    func_ovl2_800E9838(&ap->color_anim);
+}
+
+void func_ovl3_80172FE0(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    ap->phys_info.vel.x *= -0.06F;
+
+    ap->phys_info.vel.y = (ap->phys_info.vel.y * -0.3F) + 25.0F;
+}
+
+ // Oh my...
+
+typedef struct Unk_8017301C_Halfword // CODE RED, return to this later (it matches but NEEDS cleanup)
+{
+    u16 unk_0x0[1];
+
+} Unk_8017301C_Halfword;
+
+typedef struct ItemSettingsUnk
+{
+    s32 unk_0x0;
+    s32 unk_0x4;
+    u8 unk_0x8;
+    s32 unk_0xC;
+    u16 unk_0x10;
+    Unk_8017301C_Halfword *unk_0x14;
+
+} ItemSettingsUnk;
+
+s32 func_ovl3_8017301C(s32 arg0, Unk_8018D048 *arg1, s32 arg2, u32 arg3) // Recursive!
+{
+    u32 temp_v0; s32 temp_v1;
+    Unk_8017301C_Halfword *temp_t0;
+
+    if (arg3 == (arg2 + 1)) return arg2;
+
+    temp_v1 = (arg2 + arg3) / 2;
+
+    if (arg0 < arg1->unk_0x14[temp_v1])
+    {
+        func_ovl3_8017301C(arg0, arg1, arg2, temp_v1);
+    }
+    else if (arg0 < arg1->unk_0x14[temp_v1 + 1])
+    {
+        return temp_v1;
+    }
+    else func_ovl3_8017301C(arg0, arg1, temp_v1, arg3);
+}
+
+u8* func_ovl3_80173090(Unk_8018D048 *arg0)
+{
+    return *(u8*)(func_ovl3_8017301C(rand_u16_range((s32)arg0->unk_0x10), arg0, 0, arg0->unk_0x8) + arg0->unk_0xC);
+}
+
+extern u8 D_NF_00000000;
+extern uintptr_t *D_ovl3_8018D040;
+
+static Unk_8018D048 D_ovl3_8018D048;
+
+bool32 func_ovl3_801730D4(GObj *gobj)
+{
+    s32 unused;
+    s32 index;
+    Vec3f sp24;
+
+    if (D_ovl3_8018D048.unk_0x10 != 0)
+    {
+        index = func_ovl3_80173090(&D_ovl3_8018D048);
+
+        if (index < 20)
+        {
+            sp24.x = 0.0F;
+            sp24.y = *(f32 *)(((uintptr_t)D_ovl3_8018D040 + index * 4) + &D_NF_00000000); // Fake alert
+            sp24.z = 0;
+
+            if (func_ovl3_8016EA78(gobj, index, &JObjGetStruct(gobj)->translate, &sp24, 0x80000003U) != NULL)
+            {
+                func_ovl3_80172394(gobj, TRUE);
+            }
+            return TRUE;
+        }
+    }
+    return FALSE;
 }

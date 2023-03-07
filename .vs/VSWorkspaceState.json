@@ -6,11 +6,12 @@
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\chara\\ftpurin",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\item",
     "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftpurin\\ftpurin_specialn.c",
+  "SelectedNode": "\\game\\src\\gm\\gmmisc.h",
   "PreviewInSolutionExplorer": false
 }

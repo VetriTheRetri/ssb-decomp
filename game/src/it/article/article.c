@@ -74,6 +74,23 @@ void func_ovl3_8016DFF4(GObj *gobj, JObjDesc *joint_desc, JObj **p_ptr_jobj, u8 
 
 // Don't forget the following two functions here, stashed until I better understand articles (idk and func_ovl3_8016EA78)
 
+extern GObj* (*Article_Callback_Spawn[20])(GObj*, Vec3f*, Vec3f*, u32);
+
+GObj *func_ovl3_8016EA78(s32 article_gobj, s32 index, Vec3f *pos, Vec3f *arg3, u32 spawn_flags) // UPDATE: WHAT IS THIS OPTIMIZATION BRUH T.T
+{
+    GObj *gobj = Article_Callback_Spawn[index](article_gobj, pos, arg3, spawn_flags);
+
+    if (gobj != NULL)
+    {
+        if (index < ARRAY_COUNT(Article_Callback_Spawn))
+        {
+            func_ovl2_801044B4(pos);
+            func_ovl3_80172394(gobj, 0);
+        }
+    }
+    return gobj;
+}
+
 void* func_ovl3_8016EB00(void)
 {
     return D_ovl3_8018D094;
@@ -365,11 +382,11 @@ void func_ovl3_8016F218(void)
     D_ovl3_8018D060.unk_0x2E = 0xC;
 }
 
-extern void* (*jtbl_ovl3_8018946C[20])(s32, s32, s32, s32);
+extern void* (*Article_Callback_Spawn[20])(s32, s32, s32, s32);
 
 void* func_ovl3_8016F238(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
-    return jtbl_ovl3_8018946C[arg1](arg0, arg2, arg3, arg4);
+    return Article_Callback_Spawn[arg1](arg0, arg2, arg3, arg4);
 }
 
 void func_ovl3_8016F280(GObj *article_gobj)

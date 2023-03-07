@@ -30,6 +30,12 @@ typedef struct gmItemSpawn
 
 } gmItemSpawn;
 
+typedef struct Unk_8017301C_Halfword // CODE RED, return to this later (it matches but NEEDS cleanup)
+{
+    u16 unk_0x0[1];
+
+} Unk_8017301C_Halfword;
+
 typedef struct Unk_8018D048
 {
     u8 filler_0x0[0x8];
