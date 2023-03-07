@@ -76,19 +76,19 @@ void func_ovl3_8016DFF4(GObj *gobj, JObjDesc *joint_desc, JObj **p_ptr_jobj, u8 
 
 extern GObj* (*Article_Callback_Spawn[20])(GObj*, Vec3f*, Vec3f*, u32);
 
-GObj *func_ovl3_8016EA78(s32 article_gobj, s32 index, Vec3f *pos, Vec3f *arg3, u32 spawn_flags) // UPDATE: WHAT IS THIS OPTIMIZATION BRUH T.T
+GObj *func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *arg3, u32 spawn_flags) // UPDATE: WHAT IS THIS OPTIMIZATION BRUH T.T
 {
-    GObj *gobj = Article_Callback_Spawn[index](article_gobj, pos, arg3, spawn_flags);
+    GObj *new_gobj = Article_Callback_Spawn[index](article_gobj, pos, arg3, spawn_flags);
 
-    if (gobj != NULL)
+    if (new_gobj != NULL)
     {
         if (index < ARRAY_COUNT(Article_Callback_Spawn))
         {
             func_ovl2_801044B4(pos);
-            func_ovl3_80172394(gobj, 0);
+            func_ovl3_80172394(new_gobj, 0);
         }
     }
-    return gobj;
+    return new_gobj;
 }
 
 void* func_ovl3_8016EB00(void)
