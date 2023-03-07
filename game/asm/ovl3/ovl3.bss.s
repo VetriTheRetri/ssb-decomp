@@ -49,7 +49,7 @@ glabel D_ovl3_8018CFF4
     .space 4
 glabel D_ovl3_8018CFF8
     .space 72
-glabel D_ovl3_8018D040
+glabel Article_Spawn_Vel_Y
     .space 4
 glabel D_ovl3_8018D044
     .space 4

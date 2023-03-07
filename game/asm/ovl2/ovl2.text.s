@@ -50160,8 +50160,8 @@ glabel func_ovl2_80102D14
   /* 07E51C 80102D1C 24C6E584 */     addiu $a2, $a2, %lo(D_ovl2_8012E584)
   /* 07E520 80102D20 27AE0018 */     addiu $t6, $sp, 0x18
   /* 07E524 80102D24 ACCE0004 */        sw $t6, 4($a2) # D_ovl2_8012E584 + 4
-  /* 07E528 80102D28 3C0F8019 */       lui $t7, %hi(D_ovl3_8018D040)
-  /* 07E52C 80102D2C 8DEFD040 */        lw $t7, %lo(D_ovl3_8018D040)($t7)
+  /* 07E528 80102D28 3C0F8019 */       lui $t7, %hi(Article_Spawn_Vel_Y)
+  /* 07E52C 80102D2C 8DEFD040 */        lw $t7, %lo(Article_Spawn_Vel_Y)($t7)
   /* 07E530 80102D30 3C180000 */       lui $t8, %hi(D_NF_000006E4)
   /* 07E534 80102D34 271806E4 */     addiu $t8, $t8, %lo(D_NF_000006E4)
   /* 07E538 80102D38 AFBF0014 */        sw $ra, 0x14($sp)
@@ -51299,8 +51299,8 @@ glabel func_ovl2_80103CF8
   /* 07F50C 80103D0C 2484E720 */     addiu $a0, $a0, %lo(D_ovl2_8012E720)
   /* 07F510 80103D10 27B9002C */     addiu $t9, $sp, 0x2c
   /* 07F514 80103D14 AC990004 */        sw $t9, 4($a0) # D_ovl2_8012E720 + 4
-  /* 07F518 80103D18 3C088019 */       lui $t0, %hi(D_ovl3_8018D040)
-  /* 07F51C 80103D1C 8D08D040 */        lw $t0, %lo(D_ovl3_8018D040)($t0)
+  /* 07F518 80103D18 3C088019 */       lui $t0, %hi(Article_Spawn_Vel_Y)
+  /* 07F51C 80103D1C 8D08D040 */        lw $t0, %lo(Article_Spawn_Vel_Y)($t0)
   /* 07F520 80103D20 3C0F0000 */       lui $t7, %hi(D_NF_00000000)
   /* 07F524 80103D24 25EF0000 */     addiu $t7, $t7, %lo(D_NF_00000000)
   /* 07F528 80103D28 3C090000 */       lui $t1, %hi(D_NF_000004D4)
@@ -51467,8 +51467,8 @@ glabel func_ovl2_80103F78
   /* 07F784 80103F84 2484E748 */     addiu $a0, $a0, %lo(D_ovl2_8012E748)
   /* 07F788 80103F88 27AE0024 */     addiu $t6, $sp, 0x24
   /* 07F78C 80103F8C AC8E0004 */        sw $t6, 4($a0) # D_ovl2_8012E748 + 4
-  /* 07F790 80103F90 3C0F8019 */       lui $t7, %hi(D_ovl3_8018D040)
-  /* 07F794 80103F94 8DEFD040 */        lw $t7, %lo(D_ovl3_8018D040)($t7)
+  /* 07F790 80103F90 3C0F8019 */       lui $t7, %hi(Article_Spawn_Vel_Y)
+  /* 07F794 80103F94 8DEFD040 */        lw $t7, %lo(Article_Spawn_Vel_Y)($t7)
   /* 07F798 80103F98 3C180000 */       lui $t8, %hi(D_NF_000004D4)
   /* 07F79C 80103F9C 271804D4 */     addiu $t8, $t8, %lo(D_NF_000004D4)
   /* 07F7A0 80103FA0 AFBF0014 */        sw $ra, 0x14($sp)

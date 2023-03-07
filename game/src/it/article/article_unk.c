@@ -479,16 +479,23 @@ u8* func_ovl3_80173090(Unk_8018D048 *arg0)
     return *(u8*)(func_ovl3_8017301C(rand_u16_range((s32)arg0->unk_0x10), arg0, 0, arg0->unk_0x8) + arg0->unk_0xC);
 }
 
-extern u8 D_NF_00000000;
-extern uintptr_t *D_ovl3_8018D040;
+extern u8 hal_ld_article_floats;
 
 static Unk_8018D048 D_ovl3_8018D048;
+
+typedef struct ArticleSpawnVelY
+{
+    f32 f[20];
+
+} ArticleSpawnVelY;
+
+extern ArticleSpawnVelY *Article_Spawn_Vel_Y; // WARNING: This pointer exists in multiple areas and appears not to be exclusive to the Article section of Overlay 3
 
 bool32 func_ovl3_801730D4(GObj *gobj)
 {
     s32 unused;
     s32 index;
-    Vec3f sp24;
+    Vec3f vel; // Article's spawn velocity when falling out of a container
 
     if (D_ovl3_8018D048.unk_0x10 != 0)
     {
@@ -496,11 +503,11 @@ bool32 func_ovl3_801730D4(GObj *gobj)
 
         if (index < 20)
         {
-            sp24.x = 0.0F;
-            sp24.y = *(f32 *)(((uintptr_t)D_ovl3_8018D040 + index * 4) + &D_NF_00000000); // Fake alert
-            sp24.z = 0;
+            vel.x = 0.0F;
+            vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_Spawn_Vel_Y->f[index]));
+            vel.z = 0;
 
-            if (func_ovl3_8016EA78(gobj, index, &JObjGetStruct(gobj)->translate, &sp24, 0x80000003U) != NULL)
+            if (func_ovl3_8016EA78(gobj, index, &JObjGetStruct(gobj)->translate, &vel, 0x80000003U) != NULL)
             {
                 func_ovl3_80172394(gobj, TRUE);
             }
@@ -508,4 +515,23 @@ bool32 func_ovl3_801730D4(GObj *gobj)
         }
     }
     return FALSE;
+}
+
+void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent *event)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (((ArticleHitEvent*)event + ap->x340_flag_b0123)->opcode == ap->unk_0x33E)
+    {
+        ap->article_hit[0].angle = ((ArticleHitEvent*)event + ap->x340_flag_b0123)->angle;
+        ap->article_hit[0].damage = ((ArticleHitEvent*)event + ap->x340_flag_b0123)->damage;
+        ap->article_hit[0].size = ((ArticleHitEvent*)event + ap->x340_flag_b0123)->size;
+
+        ap->x340_flag_b0123++;
+
+        if (ap->x340_flag_b0123 == 4)
+        {
+            ap->x340_flag_b0123 = 3;
+        }
+    }
 }

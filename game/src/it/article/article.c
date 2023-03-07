@@ -74,7 +74,7 @@ void func_ovl3_8016DFF4(GObj *gobj, JObjDesc *joint_desc, JObj **p_ptr_jobj, u8 
 
 // Don't forget the following two functions here, stashed until I better understand articles (idk and func_ovl3_8016EA78)
 
-extern GObj* (*Article_Callback_Spawn[20])(GObj*, Vec3f*, Vec3f*, u32);
+extern GObj* (*Article_Callback_Spawn[])(GObj*, Vec3f*, Vec3f*, u32); // Array count is likely 45
 
 GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *arg3, u32 spawn_flags) // UPDATE: WHAT IS THIS OPTIMIZATION BRUH T.T
 {
@@ -82,7 +82,7 @@ GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *arg3,
 
     if (new_gobj != NULL)
     {
-        if (index < ARRAY_COUNT(Article_Callback_Spawn))
+        if (index < At_Kind_PK_Fire)
         {
             func_ovl2_801044B4(pos);
             func_ovl3_80172394(new_gobj, FALSE);

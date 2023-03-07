@@ -165,6 +165,15 @@ typedef struct _Article_Hit
 
 } Article_Hit;
 
+typedef struct ArticleHitEvent // Hitbox subaction event?
+{
+    u8 opcode;
+    s32 angle : 10;
+    u32 damage : 8;
+    u16 size;
+
+} ArticleHitEvent;
+
 typedef struct Article_Hurt
 {
     u8 flags_0x0;
@@ -319,7 +328,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x33D_flag_b7 : 1;
     u16 unk_0x33E;
 
-    s32 unk_0x340;
+    u8 x340_flag_b0123 : 4;
     f32 rotate_speed;
     GObj *unk_0x348;
 
