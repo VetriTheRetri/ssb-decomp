@@ -1961,7 +1961,7 @@ glabel D_ovl3_80189454
 glabel D_ovl3_80189460
   .incbin "ovl3.raw.bin", 0x57960, 0xC
 
-glabel jtbl_ovl3_8018946C
+glabel Article_Callback_Spawn
   /* 5796C 103EAC 8018946C */  .4byte jtgt_ovl3_801799A4
   /* 57970 103EB0 80189470 */  .4byte jtgt_ovl3_8017A1B8
   /* 57974 103EB4 80189474 */  .4byte jtgt_ovl3_801742CC
