@@ -93,6 +93,17 @@ typedef enum atKind
 
 } atKind;
 
+typedef struct gmMonsterInfo
+{
+    u8 monster_curr;
+    u8 monster_prev;
+    u8 monster_index[44];
+    u8 unk_0x2E;
+
+} gmMonsterInfo;
+
+static gmMonsterInfo Monster_Info; // Static (.bss) (0x8018D060)
+
 typedef struct ArticleHitVictimFlags
 {
     u32 flags_b0 : 1;

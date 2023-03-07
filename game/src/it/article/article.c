@@ -365,21 +365,10 @@ void func_ovl3_8016EF40(void)
     }
 }
 
-typedef struct Unk_8018D060
-{
-    u8 unk_0x0;
-    u8 unk_0x1;
-    u8 filler_0x2[0x2E - 0x2];
-    u8 unk_0x2E;
-
-} Unk_8018D060;
-
-static Unk_8018D060 D_ovl3_8018D060;
-
 void func_ovl3_8016F218(void)
 {
-    D_ovl3_8018D060.unk_0x0 = D_ovl3_8018D060.unk_0x1 = U8_MAX;
-    D_ovl3_8018D060.unk_0x2E = 0xC;
+    Monster_Info.monster_curr = Monster_Info.monster_prev = U8_MAX;
+    Monster_Info.unk_0x2E = 12;
 }
 
 extern void* (*Article_Callback_Spawn[20])(s32, s32, s32, s32);

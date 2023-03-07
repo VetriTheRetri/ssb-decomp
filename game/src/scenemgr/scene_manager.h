@@ -28,7 +28,7 @@ struct VsRecordData {
 // is this the saved data structure?
 struct BigA44E0 {
     /* 0x000 */ struct VsRecordData vsRecords[SSB64_NUM_PLAYABLE_CHARACTERS];
-    /* 0x450 */ u32 unk540[(0x5EC - 0x450) / 4];
+    /* 0x450 */ u8 unk540[(0x5EC - 0x450)];
 }; // size == 0x5EC
 
 // global and battle settings?
