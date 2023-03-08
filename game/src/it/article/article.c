@@ -701,7 +701,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
             ap->unk_0x2B4 = fp->offset_hit_type;
             ap->damage_display_state = fp->display_state;
         }
-        if (ap->x2D2_flag_b4)
+        if (ap->x2D3_flag_b4)
         {
             damage_launch_angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->offset_hit_type, ap->unk_0x16);
 
@@ -883,7 +883,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
             defend_ap->unk_0x2B4 = attack_ap->unk_0x16;
             defend_ap->damage_display_state = attack_ap->display_state;
         }
-        if (defend_ap->x2D2_flag_b4)
+        if (defend_ap->x2D3_flag_b4)
         {
             launch_angle = func_ovl2_800E9D78(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->unk_0x16, )defend_ap->unk_0x16);
 
@@ -975,7 +975,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
             ap->unk_0x2B4 = ip->unk_0x12;
             ap->damage_display_state = ip->display_state;
         }
-        if (ap->x2D2_flag_b4)
+        if (ap->x2D3_flag_b4)
         {
             angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->unk_0x12, ap->unk_0x16);
 

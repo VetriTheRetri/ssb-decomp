@@ -7,5 +7,6 @@
 
 #define ARTICLE_CAPSULE_GRAVITY 1.2F
 #define ARTICLE_CAPSULE_T_VEL 100.0F
+#define ARTICLE_CAPSULE_EXPLODE_SCALE 1.4F // Size of explosion graphics
 
 #endif

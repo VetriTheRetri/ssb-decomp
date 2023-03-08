@@ -9,6 +9,7 @@
 #include <game/src/it/article/articlevars.h>
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
+#include <game/src/ef/effect.h>
 
 #define ARTICLE_TEAM_DEFAULT 4U // Article is teamless; deals damage to any eligible target
 #define ARTICLE_PORT_DEFAULT 4U
@@ -104,6 +105,23 @@ typedef struct gmMonsterInfo
 } gmMonsterInfo;
 
 static gmMonsterInfo Monster_Info; // Static (.bss) (0x8018D060)
+
+typedef struct ArticleFileData
+{
+    f32 spawn_vel_y[20];
+
+} ArticleFileData;
+
+typedef struct ArticleStatusData
+{
+    u32 w0;
+    ArticleFileData **p_file;
+    u32 w2;
+    u32 w3;
+
+} ArticleStatusData;
+
+extern ArticleFileData *Article_File_Data; // WARNING: This pointer exists in multiple areas and appears not to be exclusive to the Article section of Overlay 3 (0x8018D040)
 
 typedef struct ArticleHitVictimFlags
 {
@@ -279,10 +297,10 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2CF_flag_b7 : 1;
     u16 unk_0x2D0;
     u16 x2D2_flag_12bit : 12; // Lifetime?
-    u8 x2D2_flag_b4 : 1;
-    u8 x2D2_flag_b5 : 1;
+    u8 x2D3_flag_b4 : 1;
+    u8 x2D3_flag_b5 : 1;
     u8 is_static_damage : 1;
-    u8 x2D2_flag_b7 : 1;
+    u8 x2D3_flag_b7 : 1;
 
     atCommonAttributes *attributes;
 

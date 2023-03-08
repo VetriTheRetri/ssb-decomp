@@ -389,7 +389,7 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
     func_ovl3_80173F54(ap);
 }
 
-void func_ovl3_80172EC8(GObj *article_gobj, ArticleLogicDesc p_desc[], s32 status_id) // Change article state
+void func_ovl3_80172EC8(GObj *article_gobj, ArticleLogicDesc *p_desc, s32 status_id) // Change article state
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
@@ -483,14 +483,6 @@ extern u8 hal_ld_article_floats;
 
 static Unk_8018D048 D_ovl3_8018D048;
 
-typedef struct ArticleSpawnVelY
-{
-    f32 f[20];
-
-} ArticleSpawnVelY;
-
-extern ArticleSpawnVelY *Article_Spawn_Vel_Y; // WARNING: This pointer exists in multiple areas and appears not to be exclusive to the Article section of Overlay 3
-
 bool32 func_ovl3_801730D4(GObj *gobj)
 {
     s32 unused;
@@ -504,7 +496,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
         if (index < 20)
         {
             vel.x = 0.0F;
-            vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_Spawn_Vel_Y->f[index])); // Linker thing
+            vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_File_Data->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
             if (func_ovl3_8016EA78(gobj, index, &JObjGetStruct(gobj)->translate, &vel, 0x80000003U) != NULL)
@@ -517,7 +509,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
     return FALSE;
 }
 
-void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent event[])
+void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent *event)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 

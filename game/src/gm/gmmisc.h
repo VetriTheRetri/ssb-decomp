@@ -30,6 +30,13 @@ typedef enum gmHitCollisionStatus
 
 } gmHitCollisionStatus;
 
+typedef enum gmHitCollisionElement
+{
+    gmHitCollision_Element_Normal,
+    gmHitCollision_Element_Fire // This continues but the rest is unconfirmed
+
+} gmHitCollisionElement;
+
 typedef enum gmHitCollisionType // Hitbox types, this is universal but I don't know where else to put it so both fighters and items can see it without redefining it for each
 {
     gmHitCollision_Type_Hurt,

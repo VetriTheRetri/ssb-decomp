@@ -3,16 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articlecommon",
     "\\game\\src\\it\\item",
-    "\\game\\src\\mp",
+    "\\game\\src\\it\\item\\itemsamus",
+    "\\game\\src\\it\\item\\itemyoshi",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\item\\item_coll.c",
+  "SelectedNode": "\\game\\src\\gm\\gmmisc.h",
   "PreviewInSolutionExplorer": false
 }
