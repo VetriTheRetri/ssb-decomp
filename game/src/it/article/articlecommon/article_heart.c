@@ -4,7 +4,7 @@ bool32 jtgt_ovl3_801746F0(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    func_ovl3_80172558(ap, ARTICLE_HEART_GRAVITY, ARTICLE_HEART_T_VEL);
+    func_ovl3_80172558(ap, ATHEART_GRAVITY, ATHEART_T_VEL);
     func_ovl3_801713F4(article_gobj);
 
     return FALSE;

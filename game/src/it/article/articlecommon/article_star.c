@@ -5,7 +5,7 @@ bool32 jtgt_ovl3_80174930(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    func_ovl3_80172558(ap, ARTICLE_STAR_GRAVITY, ARTICLE_STAR_T_VEL);
+    func_ovl3_80172558(ap, ATSTAR_GRAVITY, ATSTAR_T_VEL);
 
     ap->unk_0x33E--;
 
@@ -30,7 +30,7 @@ bool32 jtgt_ovl3_80174990(GObj *article_gobj)
     }
     if (is_collide_ground != FALSE)
     {
-        ap->phys_info.vel.y = ARTICLE_STAR_BOUNCE_Y;
+        ap->phys_info.vel.y = ATSTAR_BOUNCE_Y;
 
         func_800269C0(0x35U);
     }
@@ -53,8 +53,8 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     Vec3f vel_real;
     Vec3f translate;
 
-    vel_real.x = (pos->x < unk_ptr->unk_0x48) ? ARTICLE_STAR_VEL_X : -ARTICLE_STAR_VEL_X;
-    vel_real.y = ARTICLE_STAR_BOUNCE_Y;
+    vel_real.x = (pos->x < unk_ptr->unk_0x48) ? ATSTAR_VEL_X : -ATSTAR_VEL_X;
+    vel_real.y = ATSTAR_BOUNCE_Y;
     vel_real.z = 0.0F;
 
     article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Star_Data, pos, &vel_real, flags);
@@ -68,7 +68,7 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap = article_gobj->user_data;
 
         ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
-        ap->unk_0x33E = ARTICLE_STAR_INTERACT_DELAY;
+        ap->unk_0x33E = ATSTAR_INTERACT_DELAY;
 
         ap->x2D3_flag_b5 = TRUE;
 

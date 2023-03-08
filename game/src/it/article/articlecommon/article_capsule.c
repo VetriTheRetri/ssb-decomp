@@ -4,7 +4,7 @@ bool32 jtgt_ovl3_80173F90(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    func_ovl3_80172558(ap, ARTICLE_CAPSULE_GRAVITY, ARTICLE_CAPSULE_T_VEL);
+    func_ovl3_80172558(ap, ATCAPSULE_GRAVITY, ATCAPSULE_T_VEL);
     func_ovl3_801713F4(article_gobj);
 
     return FALSE;
@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_80174124(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    func_ovl3_80172558(ap, ARTICLE_CAPSULE_GRAVITY, ARTICLE_CAPSULE_T_VEL);
+    func_ovl3_80172558(ap, ATCAPSULE_GRAVITY, ATCAPSULE_T_VEL);
     func_ovl3_801713F4(article_gobj);
 
     return FALSE;
@@ -194,7 +194,7 @@ void func_ovl3_80174428(GObj *article_gobj)
 
     if (ep != NULL)
     {
-        ep->effect_info->scale.x = ep->effect_info->scale.y = ep->effect_info->scale.z = ARTICLE_CAPSULE_EXPLODE_SCALE;
+        ep->effect_info->scale.x = ep->effect_info->scale.y = ep->effect_info->scale.z = ATCAPSULE_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
     JObjGetStruct(article_gobj)->unk_0x54 = 2;
