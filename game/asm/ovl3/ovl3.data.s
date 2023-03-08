@@ -2188,7 +2188,7 @@ glabel jtbl_ovl3_80189844
   /* 57D48 104288 80189848 */  .4byte jtgt_ovl3_801747F8
   .incbin "ovl3.raw.bin", 0x57D4C, 0x24
 
-glabel D_ovl3_80189870
+glabel Article_Star_Data
   .incbin "ovl3.raw.bin", 0x57D70, 0x4
   /* 57D74 1042B4 80189874 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x57D78, 0xC

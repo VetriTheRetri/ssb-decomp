@@ -46,6 +46,31 @@ typedef struct Unk_8018D048
 
 } Unk_8018D048; // Found in func_ovl3_8016EF40, very similar similar to gmItemSpawn
 
+typedef struct Unk_80131460_Ptr74
+{
+    u8 filler_0x0[0x48];
+    f32 unk_0x48;
+
+} Unk_80131460_Ptr74;
+
+typedef struct Unk_80131460
+{
+    u8 filler_0x0[0x74];
+    Unk_80131460_Ptr74 *unk_0x74;
+
+} Unk_80131460;
+
+typedef struct Unk_801314B0
+{
+    u8 filler_0x0[0x38];
+    Vec3i unk_0x38;
+
+} Unk_801314B0;
+
+extern Unk_80131460 *D_ovl2_80131460;
+extern void *D_ovl2_80131470;
+extern Unk_801314B0 D_ovl2_801314B0;
+
 typedef struct gmPlayerBlock
 {
     u8 level; // Actually begins at 1 instead of 0

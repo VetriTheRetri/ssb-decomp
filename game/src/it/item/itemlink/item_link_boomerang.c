@@ -17,24 +17,6 @@ void func_ovl3_8016CC50(f32 *angle)
     }
 } 
 
-typedef struct Unk_80131460
-{
-    u8 filler_0x0[0x74];
-    void *unk_0x74;
-
-} Unk_80131460;
-
-typedef struct Unk_801314B0
-{
-    u8 filler_0x0[0x38];
-    Vec3i unk_0x38;
-
-} Unk_801314B0;
-
-extern Unk_80131460 *D_ovl2_80131460;
-extern void *D_ovl2_80131470;
-extern Unk_801314B0 D_ovl2_801314B0;
-
 bool32 func_ovl3_8016CCA0(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
