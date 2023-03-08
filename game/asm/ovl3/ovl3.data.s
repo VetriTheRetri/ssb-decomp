@@ -2138,7 +2138,7 @@ glabel jtbl_ovl3_801896C4
   /* 57C04 104144 80189704 */  .4byte jtgt_ovl3_80174270
   .incbin "ovl3.raw.bin", 0x57C08, 0x28
 
-glabel D_ovl3_80189730
+glabel Article_Tomato_Data
   .incbin "ovl3.raw.bin", 0x57C30, 0x4
   /* 57C34 104174 80189734 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x57C38, 0xC
@@ -2148,7 +2148,7 @@ glabel jtbl_ovl3_80189744
   /* 57C48 104188 80189748 */  .4byte jtgt_ovl3_80174524
   .incbin "ovl3.raw.bin", 0x57C4C, 0x18
 
-glabel D_ovl3_80189764
+glabel Article_Tomato_Status
   .incbin "ovl3.raw.bin", 0x57C64, 0x4
   /* 57C68 1041A8 80189768 */  .4byte func_ovl3_801744FC
   .incbin "ovl3.raw.bin", 0x57C6C, 0x18
@@ -2163,7 +2163,7 @@ glabel jtbl_ovl3_801897A4
   /* 57CA8 1041E8 801897A8 */  .4byte jtgt_ovl3_801745CC
   .incbin "ovl3.raw.bin", 0x57CAC, 0x24
 
-glabel D_ovl3_801897D0
+glabel Article_Heart_Data
   .incbin "ovl3.raw.bin", 0x57CD0, 0x4
   /* 57CD4 104214 801897D4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x57CD8, 0xC
@@ -2173,7 +2173,7 @@ glabel jtbl_ovl3_801897E4
   /* 57CE8 104228 801897E8 */  .4byte jtgt_ovl3_80174750
   .incbin "ovl3.raw.bin", 0x57CEC, 0x18
 
-glabel D_ovl3_80189804
+glabel Article_Heart_Status
   .incbin "ovl3.raw.bin", 0x57D04, 0x4
   /* 57D08 104248 80189808 */  .4byte func_ovl3_80174728
   .incbin "ovl3.raw.bin", 0x57D0C, 0x18

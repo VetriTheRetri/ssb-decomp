@@ -1022,8 +1022,8 @@ struct OMMtx *func_8000855C(struct DObj *arg0, u8 arg1, u8 arg2, s32 arg3) {
 #pragma GLOBAL_ASM("game/nonmatching/sys/om/func_8000855C.s")
 #endif
 
-void func_80008CC0(struct DObj *arg0, u8 arg1, u8 arg2) {
-    func_8000855C(arg0, arg1, arg2, arg0->unk56);
+void* func_80008CC0(struct DObj *arg0, u8 arg1, u8 arg2) { // This actually returns func_8000855C, see https://decomp.me/scratch/nIQ4X
+    return func_8000855C(arg0, arg1, arg2, arg0->unk56);
 }
 
 struct OMMtx *func_80008CF0(struct OMCamera *arg0, u8 arg1, u8 arg2) {

@@ -102,9 +102,9 @@ bool32 func_ovl3_801741F0(GObj *article_gobj) // Unused
     return FALSE;
 }
 
-void jtgt_ovl3_80174214(GObj *article_gobj)
+bool32 jtgt_ovl3_80174214(GObj *article_gobj)
 {
-    func_ovl3_80173B24(article_gobj, 0.2F, 0.4F, func_ovl3_80174064);
+    return func_ovl3_80173B24(article_gobj, 0.2F, 0.4F, func_ovl3_80174064);
 }
 
 void jtgt_ovl3_80174248(GObj *article_gobj)
