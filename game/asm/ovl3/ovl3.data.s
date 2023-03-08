@@ -2105,7 +2105,7 @@ glabel jtbl_ovl3_80189644
   .incbin "ovl3.raw.bin", 0x57B4C, 0x14
   /* 57B60 1040A0 80189660 */  .4byte func_ovl3_80173FF4
 
-glabel D_ovl3_80189664
+glabel Article_Capsule_Status
   .incbin "ovl3.raw.bin", 0x57B64, 0x4
   /* 57B68 1040A8 80189668 */  .4byte func_ovl3_80173FCC
   .incbin "ovl3.raw.bin", 0x57B6C, 0x14

@@ -6,10 +6,13 @@
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\chara\\ftness",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
+    "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
     "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
+  "SelectedNode": "\\game\\src\\it\\item\\item_coll.c",
   "PreviewInSolutionExplorer": false
 }

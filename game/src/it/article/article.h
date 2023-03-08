@@ -6,6 +6,7 @@
 #include <PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 #include <game/src/mp/mpcoll.h>
+#include <game/src/it/article/articlevars.h>
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 
@@ -264,8 +265,8 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u16 throw_sfx;
 
     u8 x2CE_flag_b0 : 1;
-    u8 is_pause_article : 1; // Suspend Article logic updates?
-    u8 x2CE_flag_b23 : 2;
+    u8 is_pause_article : 1; // Suspend Article logic updates? Might be used to tell if a fighter is holding this article?
+    u8 times_landed : 2; // Number of times item has touched the ground while not grabbed; overflows after 3
     u8 times_thrown : 3; // Number of times item has been dropped or thrown; overflows after 7
     u8 is_light_throw : 1;
     u8 is_damage_all : 1; // Article ignores ownership and can damage anything?

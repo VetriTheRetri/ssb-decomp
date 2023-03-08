@@ -58,14 +58,14 @@ void func_ovl3_80172508(GObj *article_gobj)
     func_ovl3_80172310(article_gobj);
 }
 
-void func_ovl3_80172558(Article_Struct *ap, f32 vel_y_sub, f32 gravity)
+void func_ovl3_80172558(Article_Struct *ap, f32 gravity, f32 terminal_velocity)
 {
-    ap->phys_info.vel.y -= vel_y_sub;
+    ap->phys_info.vel.y -= gravity;
 
-    if (gravity < func_ovl0_800C7A84(&ap->phys_info.vel))
+    if (terminal_velocity < func_ovl0_800C7A84(&ap->phys_info.vel))
     {
         func_ovl0_800C7A00(&ap->phys_info.vel);
-        func_ovl0_800C7AE0(&ap->phys_info.vel, gravity);
+        func_ovl0_800C7AE0(&ap->phys_info.vel, terminal_velocity);
     }
 }
 
@@ -383,24 +383,24 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
     ap->phys_info.vel.x = 0.0F;
 
     ap->x2CE_flag_b0 = TRUE;
-    ap->x2CE_flag_b23 = 0;
+    ap->times_landed = 0;
 
     func_ovl3_801725BC(article_gobj);
     func_ovl3_80173F54(ap);
 }
 
-void func_ovl3_80172EC8(GObj *article_gobj, ArticleLogicDesc *p_desc, s32 index) // Runs on article state change
+void func_ovl3_80172EC8(GObj *article_gobj, ArticleLogicDesc p_desc[], s32 status_id) // Change article state
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->cb_anim = ((ArticleLogicDesc*)p_desc + index)->cb_anim;
-    ap->cb_coll = ((ArticleLogicDesc*)p_desc + index)->cb_coll;
-    ap->cb_give_damage = ((ArticleLogicDesc*)p_desc + index)->cb_give_damage;
-    ap->cb_shield_block = ((ArticleLogicDesc*)p_desc + index)->cb_shield_block;
-    ap->cb_shield_deflect = ((ArticleLogicDesc*)p_desc + index)->cb_shield_deflect;
-    ap->cb_attack = ((ArticleLogicDesc*)p_desc + index)->cb_attack;
-    ap->cb_reflect = ((ArticleLogicDesc*)p_desc + index)->cb_reflect;
-    ap->cb_take_damage = ((ArticleLogicDesc*)p_desc + index)->cb_take_damage;
+    ap->cb_anim = p_desc[status_id].cb_anim;
+    ap->cb_coll = p_desc[status_id].cb_coll;
+    ap->cb_give_damage = p_desc[status_id].cb_give_damage;
+    ap->cb_shield_block = p_desc[status_id].cb_shield_block;
+    ap->cb_shield_deflect = p_desc[status_id].cb_shield_deflect;
+    ap->cb_attack = p_desc[status_id].cb_attack;
+    ap->cb_reflect = p_desc[status_id].cb_reflect;
+    ap->cb_take_damage = p_desc[status_id].cb_take_damage;
 
     ap->x2CF_flag_b2 = FALSE;
 
@@ -504,7 +504,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
         if (index < 20)
         {
             vel.x = 0.0F;
-            vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_Spawn_Vel_Y->f[index]));
+            vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_Spawn_Vel_Y->f[index])); // Linker thing
             vel.z = 0;
 
             if (func_ovl3_8016EA78(gobj, index, &JObjGetStruct(gobj)->translate, &vel, 0x80000003U) != NULL)
@@ -517,15 +517,15 @@ bool32 func_ovl3_801730D4(GObj *gobj)
     return FALSE;
 }
 
-void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent *event)
+void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent event[])
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (((ArticleHitEvent*)event + ap->x340_flag_b0123)->opcode == ap->unk_0x33E)
+    if (event[ap->x340_flag_b0123].opcode == ap->unk_0x33E)
     {
-        ap->article_hit[0].angle = ((ArticleHitEvent*)event + ap->x340_flag_b0123)->angle;
-        ap->article_hit[0].damage = ((ArticleHitEvent*)event + ap->x340_flag_b0123)->damage;
-        ap->article_hit[0].size = ((ArticleHitEvent*)event + ap->x340_flag_b0123)->size;
+        ap->article_hit[0].angle = event[ap->x340_flag_b0123].angle;
+        ap->article_hit[0].damage = event[ap->x340_flag_b0123].damage;
+        ap->article_hit[0].size = event[ap->x340_flag_b0123].size;
 
         ap->x340_flag_b0123++;
 
