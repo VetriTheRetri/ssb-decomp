@@ -33,7 +33,7 @@ bool32 jtgt_ovl3_80174030(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.2F, 0.4F, func_ovl3_80174064);
 }
 
-extern ArticleLogicDesc Article_Capsule_Status[]; // Capsule states
+extern ArticleStatusDesc Article_Capsule_Status[]; // Capsule states
 
 void func_ovl3_80174064(GObj *article_gobj)
 {
@@ -114,7 +114,7 @@ void jtgt_ovl3_80174248(GObj *article_gobj)
 
 extern u8 D_NF_00000098;
 
-extern ArticleStatusData Article_Capsule_Data;
+extern ArticleSpawnData Article_Capsule_Data;
 
 bool32 jtgt_ovl3_80174270(GObj *article_gobj)
 {

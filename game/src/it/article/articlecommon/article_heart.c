@@ -22,7 +22,7 @@ bool32 jtgt_ovl3_80174750(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.1F, 0.0F, func_ovl3_80174780);
 }
 
-extern ArticleLogicDesc Article_Heart_Status[];
+extern ArticleStatusDesc Article_Heart_Status[];
 
 void func_ovl3_80174780(GObj *article_gobj)
 {
@@ -50,7 +50,7 @@ void jtgt_ovl3_80174828(GObj *article_gobj)
     func_ovl3_80172EC8(article_gobj, Article_Heart_Status, 2);
 }
 
-extern ArticleStatusData Article_Heart_Data;
+extern ArticleSpawnData Article_Heart_Data;
 
 GObj *jtgt_ovl3_80174850(GObj *article_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {

@@ -42,7 +42,7 @@ bool32 jtgt_ovl3_80174A0C(GObj *article_gobj)
     return TRUE;
 }
 
-extern ArticleStatusData Article_Star_Data;
+extern ArticleSpawnData Article_Star_Data;
 
 GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {

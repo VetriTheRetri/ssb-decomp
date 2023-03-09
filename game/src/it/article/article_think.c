@@ -389,7 +389,7 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
     func_ovl3_80173F54(ap);
 }
 
-void func_ovl3_80172EC8(GObj *article_gobj, ArticleLogicDesc *p_desc, s32 status_id) // Change article state
+void func_ovl3_80172EC8(GObj *article_gobj, ArticleStatusDesc *p_desc, s32 status_id) // Change article state
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 

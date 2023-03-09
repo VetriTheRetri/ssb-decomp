@@ -22,7 +22,7 @@ bool32 jtgt_ovl3_80174524(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.3F, 0.5F, func_ovl3_80174554);
 }
 
-extern ArticleLogicDesc Article_Tomato_Status[];
+extern ArticleStatusDesc Article_Tomato_Status[];
 
 void func_ovl3_80174554(GObj *article_gobj)
 {
@@ -50,7 +50,7 @@ void jtgt_ovl3_801745FC(GObj *article_gobj)
     func_ovl3_80172EC8(article_gobj, Article_Tomato_Status, 2);
 }
 
-extern ArticleStatusData Article_Tomato_Data;
+extern ArticleSpawnData Article_Tomato_Data;
 
 GObj* jtgt_ovl3_80174624(GObj *article_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {

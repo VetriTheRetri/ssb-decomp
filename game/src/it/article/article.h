@@ -112,14 +112,14 @@ typedef struct ArticleFileData
 
 } ArticleFileData;
 
-typedef struct ArticleStatusData
+typedef struct ArticleSpawnData
 {
     u32 w0;
     ArticleFileData **p_file;
     u32 w2;
     u32 w3;
 
-} ArticleStatusData;
+} ArticleSpawnData;
 
 extern ArticleFileData *Article_File_Data; // WARNING: This pointer exists in multiple areas and appears not to be exclusive to the Article section of Overlay 3 (0x8018D040)
 
@@ -151,7 +151,7 @@ typedef struct _ArticleHitArray
 
 } ArticleHitArray;
 
-typedef struct ArticleLogicDesc
+typedef struct ArticleStatusDesc
 {
     bool32 (*cb_anim)(GObj*);
     bool32 (*cb_coll)(GObj*);
@@ -162,7 +162,7 @@ typedef struct ArticleLogicDesc
     bool32 (*cb_reflect)(GObj*);
     bool32 (*cb_take_damage)(GObj*);
 
-} ArticleLogicDesc;
+} ArticleStatusDesc;
 
 typedef struct _Article_Hit
 {
@@ -356,7 +356,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x33D_flag_b5 : 1;
     u8 x33D_flag_b6 : 1;
     u8 x33D_flag_b7 : 1;
-    u16 unk_0x33E;
+    u16 unk_0x33E; // Some sort of universal variable, used as intangibility delay for Star Man and ammo count for Ray Gun
 
     u8 x340_flag_b0123 : 4;
     f32 rotate_speed;

@@ -2322,7 +2322,7 @@ glabel jtbl_ovl3_80189B2C
   /* 58044 104584 80189B44 */  .4byte jtgt_ovl3_80173434
   .incbin "ovl3.raw.bin", 0x58048, 0x8
 
-glabel D_ovl3_80189B50
+glabel Article_L_Gun_Data
   .incbin "ovl3.raw.bin", 0x58050, 0x4
   /* 58054 104594 80189B54 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58058, 0xC
@@ -2332,7 +2332,7 @@ glabel jtbl_ovl3_80189B64
   /* 58068 1045A8 80189B68 */  .4byte jtgt_ovl3_80175550
   .incbin "ovl3.raw.bin", 0x5806C, 0x18
 
-glabel D_ovl3_80189B84
+glabel Article_L_Gun_Status
   .incbin "ovl3.raw.bin", 0x58084, 0x4
   /* 58088 1045C8 80189B88 */  .4byte func_ovl3_80175528
   .incbin "ovl3.raw.bin", 0x5808C, 0x18
@@ -2362,7 +2362,7 @@ glabel jtbl_ovl3_80189C04
   /* 5811C 10465C 80189C1C */  .4byte jtgt_ovl3_80173434
   .incbin "ovl3.raw.bin", 0x58120, 0x4
 
-glabel D_ovl3_80189C24
+glabel Item_L_Gun_Ammo_Desc
   .incbin "ovl3.raw.bin", 0x58124, 0x8
   /* 5812C 10466C 80189C2C */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58130, 0x8

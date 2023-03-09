@@ -33,7 +33,7 @@ bool32 jtgt_ovl3_801751C0(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleLogicDesc Article_Harisen_Status[];
+extern ArticleStatusDesc Article_Harisen_Status[];
 
 void func_ovl3_801751F4(GObj *article_gobj)
 {
@@ -118,7 +118,7 @@ void func_ovl3_80175408(GObj *article_gobj, s32 index) // Unused
     func_8000DF34(article_gobj);
 }
 
-extern ArticleStatusData Article_Harisen_Data;
+extern ArticleSpawnData Article_Harisen_Data;
 
 GObj* jtgt_ovl3_80175460(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {

@@ -26,7 +26,7 @@ bool32 jtgt_ovl3_80174E90(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleLogicDesc Article_Bat_Status[];
+extern ArticleStatusDesc Article_Bat_Status[];
 
 void func_ovl3_80174EC4(GObj *article_gobj)
 {
@@ -82,7 +82,7 @@ void jtgt_ovl3_80175074(GObj *article_gobj)
     JObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 }
 
-extern ArticleStatusData Article_Bat_Data;
+extern ArticleSpawnData Article_Bat_Data;
 
 GObj* jtgt_ovl3_801750B8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
