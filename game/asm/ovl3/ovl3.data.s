@@ -2437,7 +2437,7 @@ glabel jtbl_ovl3_80189D5C
   /* 58260 1047A0 80189D60 */  .4byte jtgt_ovl3_80175E84
   .incbin "ovl3.raw.bin", 0x58264, 0xC
 
-glabel D_ovl3_80189D70
+glabel Article_Hammer_Data
   .incbin "ovl3.raw.bin", 0x58270, 0x4
   /* 58274 1047B4 80189D74 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58278, 0xC
@@ -2447,7 +2447,7 @@ glabel jtbl_ovl3_80189D84
   /* 58288 1047C8 80189D88 */  .4byte jtgt_ovl3_80176194
   .incbin "ovl3.raw.bin", 0x5828C, 0x18
 
-glabel D_ovl3_80189DA4
+glabel Article_Hammer_Status
   .incbin "ovl3.raw.bin", 0x582A4, 0x4
   /* 582A8 1047E8 80189DA8 */  .4byte func_ovl3_8017616C
   .incbin "ovl3.raw.bin", 0x582AC, 0x18

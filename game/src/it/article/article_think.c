@@ -412,11 +412,11 @@ void func_ovl3_80172EC8(GObj *article_gobj, ArticleStatusDesc *p_desc, s32 statu
     ap->article_hit[0].flags_lw.halfword = func_ovl2_800EA74C();
 }
 
-void func_ovl3_80172F98(GObj *article_gobj)
+void func_ovl3_80172F98(GObj *article_gobj, s32 colanim_id, s32 duration)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    func_ovl2_800E974C(&ap->color_anim);
+    func_ovl2_800E974C(&ap->color_anim, colanim_id, duration);
 }
 
 void func_ovl3_80172FBC(GObj *article_gobj)
@@ -474,7 +474,7 @@ s32 func_ovl3_8017301C(s32 arg0, Unk_8018D048 *arg1, s32 arg2, u32 arg3) // Recu
     else func_ovl3_8017301C(arg0, arg1, temp_v1, arg3);
 }
 
-u8* func_ovl3_80173090(Unk_8018D048 *arg0)
+u8* func_ovl3_80173090(Unk_8018D048 *arg0) // Might actually be raw u8
 {
     return *(u8*)(func_ovl3_8017301C(rand_u16_range((s32)arg0->unk_0x10), arg0, 0, arg0->unk_0x8) + arg0->unk_0xC);
 }
