@@ -24,6 +24,10 @@
 #define ATSWORD_GRAVITY 1.2F
 #define ATSWORD_T_VEL 100.0F
 
-#define ARTICLE
+#define ATBAT_GRAVITY 1.5F
+#define ATBAT_T_VEL 120.0F
+
+#define ATHARISEN_GRAVITY 1.0F
+#define ATHARISEN_T_VEL 80.0F
 
 #endif

@@ -3,7 +3,7 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ef",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\article\\articlecommon",
@@ -12,6 +12,6 @@
     "\\game\\src\\it\\item\\itemyoshi",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\item\\itemyoshi\\item_yoshi_star.c",
+  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_tomato.c",
   "PreviewInSolutionExplorer": false
 }
