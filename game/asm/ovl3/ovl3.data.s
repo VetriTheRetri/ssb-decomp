@@ -2378,7 +2378,7 @@ glabel jtbl_ovl3_80189C38
   /* 58154 104694 80189C54 */  .4byte jtgt_ovl3_80175958
   .incbin "ovl3.raw.bin", 0x58158, 0x8
 
-glabel D_ovl3_80189C60
+glabel Article_F_Flower_Data
   .incbin "ovl3.raw.bin", 0x58160, 0x4
 
 glabel D_ovl3_80189C64
@@ -2390,7 +2390,7 @@ glabel jtbl_ovl3_80189C74
   /* 58178 1046B8 80189C78 */  .4byte jtgt_ovl3_80175B84
   .incbin "ovl3.raw.bin", 0x5817C, 0x18
 
-glabel D_ovl3_80189C94
+glabel Article_F_Flower_Status
   .incbin "ovl3.raw.bin", 0x58194, 0x4
   /* 58198 1046D8 80189C98 */  .4byte func_ovl3_80175B5C
   .incbin "ovl3.raw.bin", 0x5819C, 0x18
@@ -2420,7 +2420,7 @@ glabel jtbl_ovl3_80189D14
   /* 5822C 10476C 80189D2C */  .4byte jtgt_ovl3_80173434
   .incbin "ovl3.raw.bin", 0x58230, 0x4
 
-glabel D_ovl3_80189D34
+glabel Item_F_Flower_Ammo_Desc
   .incbin "ovl3.raw.bin", 0x58234, 0x8
   /* 5823C 10477C 80189D3C */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58240, 0x8

@@ -7,10 +7,12 @@
     "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\chara\\ftpurin",
     "\\game\\src\\it",
+    "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articlecommon",
     "\\game\\src\\it\\item",
     "\\game\\src\\it\\item\\itemyoshi",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_l_gun.c",
+  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_heart.c",
   "PreviewInSolutionExplorer": false
 }

@@ -1,4 +1,5 @@
 #include "article.h"
+#include "gmmatch.h"
 
 bool32 func_ovl3_80173480(Coll_Data *coll_data, s32 arg1, s32 arg2)
 {
