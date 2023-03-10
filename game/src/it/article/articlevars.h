@@ -47,4 +47,16 @@
 #define ATHAMMER_GRAVITY 1.5F
 #define ATHAMMER_T_VEL 120.0F
 
+#define ATMSBOMB_EXPLODE_LIFETIME 16
+#define ATMSBOMB_DETECT_FIGHTER_DELAY 100
+#define ATMSBOMB_DETECT_FIGHTER_RADIUS SQUARE(400.0F) // Radius is actually 400 units, but it is not sqrt'd in the detection function, so it ends up checking 160000.0F
+#define ATMSBOMB_GRAVITY 1.5F
+#define ATMSBOMB_T_VEL 80.0F
+#define ATMSBOMB_COLL_SIZE 30.0F // Size of Motion Sensor Bomb collision box
+#define ATMSBOMB_EXPLODE_SCALE 1.2F // Size of explosion graphics
+
+#define ATBOMBHEI_WALK_VEL_X 24.0F
+#define ATBOMBHEI_GRAVITY 1.2F
+#define ATBOMBHEI_T_VEL 100.0F
+
 #endif

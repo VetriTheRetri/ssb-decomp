@@ -216,7 +216,9 @@ typedef struct Article_Hurt
 typedef struct atCommonAttributes
 {
     void *unk_0x0;
-    u8 filler_0x4[0x46 - 0x4];
+    u8 filler_0x4[0x2E - 0x4];
+    s16 unk_0x2E;
+    u8 filler_0x30[0x46 - 0x30];
     u16 spin_speed;
 
 } atCommonAttributes;
