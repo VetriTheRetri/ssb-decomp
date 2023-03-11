@@ -197,7 +197,7 @@ typedef struct _Article_Hit
 
 typedef struct ArticleHitEvent // Hitbox subaction event?
 {
-    u8 opcode;
+    u8 timer;
     s32 angle : 10;
     u32 damage : 8;
     u16 size;
@@ -218,7 +218,8 @@ typedef struct atCommonAttributes
     void *unk_0x0;
     u8 filler_0x4[0x2E - 0x4];
     s16 unk_0x2E;
-    u8 filler_0x30[0x46 - 0x30];
+    s16 ledge_stop_width; // Used by Bob-Omb to determine when to turn around
+    u8 filler_0x32[0x46 - 0x32];
     u16 spin_speed;
 
 } atCommonAttributes;
@@ -284,8 +285,8 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u16 drop_sfx;
     u16 throw_sfx;
 
-    u8 x2CE_flag_b0 : 1;
-    u8 is_pause_article : 1; // Suspend Article logic updates? Might be used to tell if a fighter is holding this article?
+    u8 is_show_indicator : 1; // Bool to check whether to display red arrow indicator above article or not
+    u8 is_pause_article : 1; // Suspend article logic updates? Might be used to tell if a fighter is holding this article?
     u8 times_landed : 2; // Number of times item has touched the ground while not grabbed; overflows after 3
     u8 times_thrown : 3; // Number of times item has been dropped or thrown; overflows after 7
     u8 is_light_throw : 1;
@@ -358,18 +359,23 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x33D_flag_b5 : 1;
     u8 x33D_flag_b6 : 1;
     u8 x33D_flag_b7 : 1;
-    u16 unk_0x33E; // Some sort of universal variable, used as intangibility delay for Star Man and ammo count for Ray Gun
+    u16 at_multi; // Some sort of universal multi-purpose variable, e.g. it is used as intangibility delay for Star Man and ammo count for Ray Gun
 
     u8 x340_flag_b0123 : 4;
     f32 rotate_speed;
     GObj *unk_0x348;
 
-    u8 arrow_flash_timer;
+    u8 arrow_flash_timer; // Frequency of red arrow indicator flash
     u8 unk_0x34D;
     u8 unk_0x34E;
     u8 unk_0x34F;
 
-    u8 filler_0x350[0x374 - 0x350];
+    union
+    {
+        BombHei_ArticleVars bombhei;
+        Common_ArticleVars common;
+
+    } article_vars;
 
     s32 display_state;
 

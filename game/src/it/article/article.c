@@ -478,7 +478,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
             }
         }
     }
-    if (ap->x2CE_flag_b0)
+    if (ap->is_show_indicator)
     {
         ap->x2D2_flag_12bit--;
 

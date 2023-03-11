@@ -43,7 +43,7 @@
 #define ATFFLOWER_GRAVITY 1.2F
 #define ATFFLOWER_T_VEL 100.0F
 
-#define ATHAMMER_COLANIM_ID 0x4E
+#define ATHAMMER_COLANIM_ID 0x4E // Color animation applied to hammer when time is almost up
 #define ATHAMMER_GRAVITY 1.5F
 #define ATHAMMER_T_VEL 120.0F
 
@@ -55,8 +55,28 @@
 #define ATMSBOMB_COLL_SIZE 30.0F // Size of Motion Sensor Bomb collision box
 #define ATMSBOMB_EXPLODE_SCALE 1.2F // Size of explosion graphics
 
+#define ATBOMBHEI_EXPLODE_COLANIM_ID 0x4D
+#define ATBOMBHEI_EXPLODE_COLANIM_DURATION 90
+#define ATBOMBHEI_EXPLODE_LIFETIME 6
+#define ATBOMBHEI_WALK_WAIT 180 // Number of frames required to pass for Bob-Omb to begin walking
+#define ATBOMBHEI_FLASH_WAIT 480 // Number of frames required to pass for Bob-Omb to begin flashing
+#define ATBOMBHEI_SMOKE_WAIT 4 // Delay between smoke GFX?
+#define ATBOMBHEI_EXPLODE_WAIT 90.0F // Number of frames required to pass for Bob-Omb to explode after flashing? Also a float for some reason
 #define ATBOMBHEI_WALK_VEL_X 24.0F
 #define ATBOMBHEI_GRAVITY 1.2F
 #define ATBOMBHEI_T_VEL 100.0F
+#define ATBOMBHEI_EXPLODE_SCALE 1.4F
+
+typedef struct BombHei_ArticleVars
+{
+    u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
+
+} BombHei_ArticleVars;
+
+typedef struct Common_ArticleVars
+{
+    u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
+
+} Common_ArticleVars;
 
 #endif

@@ -7,9 +7,9 @@ bool32 jtgt_ovl3_80174930(GObj *article_gobj)
 
     func_ovl3_80172558(ap, ATSTAR_GRAVITY, ATSTAR_T_VEL);
 
-    ap->unk_0x33E--;
+    ap->at_multi--;
 
-    if (ap->unk_0x33E == 0)
+    if (ap->at_multi == 0)
     {
         func_ovl3_8017275C(article_gobj);
     }
@@ -68,7 +68,7 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap = article_gobj->user_data;
 
         ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
-        ap->unk_0x33E = ATSTAR_INTERACT_DELAY;
+        ap->at_multi = ATSTAR_INTERACT_DELAY;
 
         ap->x2D3_flag_b5 = TRUE;
 

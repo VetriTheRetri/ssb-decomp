@@ -41,7 +41,7 @@ void func_ovl3_80176538(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->x2CE_flag_b0 = FALSE;
+    ap->is_show_indicator = FALSE;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 1);
@@ -246,9 +246,9 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
     JObj *aj = JObjGetStruct(article_gobj);
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (ap->unk_0x33E < ATMSBOMB_DETECT_FIGHTER_DELAY)
+    if (ap->at_multi < ATMSBOMB_DETECT_FIGHTER_DELAY)
     {
-        ap->unk_0x33E++;
+        ap->at_multi++;
     }
     else
     {
@@ -309,7 +309,7 @@ void func_ovl3_80176C14(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     ArticleHitEvent *ev = (ArticleHitEvent*) ((uintptr_t)*Article_MSBomb_Data.p_file + &D_NF_00000404);
 
-    if (ap->unk_0x33E == ev[ap->x340_flag_b0123].opcode)
+    if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
     {
         ap->article_hit[0].angle = ev[ap->x340_flag_b0123].angle;
         ap->article_hit[0].damage = ev[ap->x340_flag_b0123].damage;
@@ -353,9 +353,9 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
 
     func_ovl3_80172558(ap, ATMSBOMB_GRAVITY, ATMSBOMB_T_VEL);
 
-    if (ap->unk_0x33E < ATMSBOMB_DETECT_FIGHTER_DELAY)
+    if (ap->at_multi < ATMSBOMB_DETECT_FIGHTER_DELAY)
     {
-        ap->unk_0x33E++;
+        ap->at_multi++;
     }
     else
     {
@@ -399,7 +399,7 @@ void func_ovl3_80176E9C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->unk_0x33E = 0;
+    ap->at_multi = 0;
 
     ap->x340_flag_b0123 = 0;
 
@@ -417,9 +417,9 @@ bool32 jtgt_ovl3_80176EE4(GObj *article_gobj)
 
     func_ovl3_80176C14(article_gobj);
 
-    ap->unk_0x33E++;
+    ap->at_multi++;
 
-    if (ap->unk_0x33E == ATMSBOMB_EXPLODE_LIFETIME)
+    if (ap->at_multi == ATMSBOMB_EXPLODE_LIFETIME)
     {
         return TRUE;
     }
@@ -455,7 +455,7 @@ GObj* jtgt_ovl3_80176F60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = ArticleGetStruct(article_gobj);
 
-        ap->unk_0x33E = 0;
+        ap->at_multi = 0;
 
         ap->x2D3_flag_b5 = TRUE;
 

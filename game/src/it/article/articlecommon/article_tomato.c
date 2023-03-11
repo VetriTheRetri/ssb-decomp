@@ -34,7 +34,7 @@ void func_ovl3_80174588(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->x2CE_flag_b0 = FALSE;
+    ap->is_show_indicator = FALSE;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_Tomato_Status, 1);

@@ -164,7 +164,7 @@ bool32 func_ovl3_80172890(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (((ap->at_kind == At_Kind_StarRod) || (ap->at_kind == At_Kind_L_Gun) || (ap->at_kind == At_Kind_F_Flower)) && (ap->unk_0x33E == 0))
+    if (((ap->at_kind == At_Kind_StarRod) || (ap->at_kind == At_Kind_L_Gun) || (ap->at_kind == At_Kind_F_Flower)) && (ap->at_multi == 0))
     {
         return TRUE;
     }
@@ -306,7 +306,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     fp->article_hold = article_gobj;
     ap->owner_gobj = fighter_gobj;
 
-    ap->x2CE_flag_b0 = FALSE;
+    ap->is_show_indicator = FALSE;
     ap->is_pause_article = TRUE;
 
     ap->team = fp->team;
@@ -382,7 +382,7 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    ap->x2CE_flag_b0 = TRUE;
+    ap->is_show_indicator = TRUE;
     ap->times_landed = 0;
 
     func_ovl3_801725BC(article_gobj);
@@ -513,7 +513,7 @@ void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent *event)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (event[ap->x340_flag_b0123].opcode == ap->unk_0x33E)
+    if (event[ap->x340_flag_b0123].timer == ap->at_multi)
     {
         ap->article_hit[0].angle = event[ap->x340_flag_b0123].angle;
         ap->article_hit[0].damage = event[ap->x340_flag_b0123].damage;

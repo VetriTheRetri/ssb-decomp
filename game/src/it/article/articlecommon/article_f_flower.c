@@ -36,7 +36,7 @@ void func_ovl3_80175BE4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->x2CE_flag_b0 = FALSE;
+    ap->is_show_indicator = FALSE;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_F_Flower_Status, 1);
@@ -51,7 +51,7 @@ bool32 jtgt_ovl3_80175C50(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (ap->unk_0x33E == 0)
+    if (ap->at_multi == 0)
     {
         return func_ovl3_80173DF4(article_gobj, 0.0F);
     }
@@ -78,7 +78,7 @@ bool32 jtgt_ovl3_80175CEC(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (ap->unk_0x33E == 0)
+    if (ap->at_multi == 0)
     {
         return func_ovl3_80173DF4(article_gobj, 0.0F);
     }
@@ -100,7 +100,7 @@ GObj* jtgt_ovl3_80175D60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        ap->unk_0x33E = ATFFLOWER_AMMO_MAX;
+        ap->at_multi = ATFFLOWER_AMMO_MAX;
 
         ap->x2D3_flag_b5 = TRUE;
 
@@ -199,5 +199,5 @@ void func_ovl3_8017604C(GObj *fighter_gobj, Vec3f *pos, s32 index, s32 ammo_sub)
 
     func_ovl3_80175F48(fighter_gobj, pos, &vel);
 
-    ap->unk_0x33E -= ammo_sub;
+    ap->at_multi -= ammo_sub;
 }

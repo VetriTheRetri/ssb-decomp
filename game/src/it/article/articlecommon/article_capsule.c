@@ -45,7 +45,7 @@ void func_ovl3_80174098(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->x2CE_flag_b0 = FALSE;
+    ap->is_show_indicator = FALSE;
 
     func_ovl3_80173F78(ap);
 
@@ -120,9 +120,9 @@ bool32 jtgt_ovl3_80174270(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->unk_0x33E++;
+    ap->at_multi++;
 
-    if (ap->unk_0x33E == 6)
+    if (ap->at_multi == 6)
     {
         return TRUE;
     }
@@ -150,7 +150,7 @@ void func_ovl3_80174340(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->unk_0x33E = 0;
+    ap->at_multi = 0;
     ap->x340_flag_b0123 = 0;
     ap->article_hit[0].hit_sfx = 1;
     ap->article_hit[0].stale = ARTICLE_STALE_DEFAULT;

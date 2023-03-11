@@ -55,6 +55,8 @@ typedef struct _Image // Image footer struct
     s16 index;
     f32 unk_0x84;
     f32 anim_frame; // Current frame of texture animation
+    u8 filler_0x8C[0x94 - 0x8C];
+    u32 unk_image_0x94;
 
 } Image;
 
