@@ -42,7 +42,7 @@
 
 typedef enum ftPikachuAction
 {
-	ftStatus_Pikachu_AppearR = 0xDC,
+	ftStatus_Pikachu_AppearR = ftStatus_Common_SpecialStart,
 	ftStatus_Pikachu_AppearL,
 	ftStatus_Pikachu_SpecialN,
 	ftStatus_Pikachu_SpecialAirN,

@@ -27,7 +27,7 @@
 
 typedef enum ftFoxAction
 {
-    ftStatus_Fox_Attack100Start = 0xDC,
+    ftStatus_Fox_Attack100Start = ftStatus_Common_SpecialStart,
     ftStatus_Fox_Attack100Loop,
     ftStatus_Fox_Attack100End,
     ftStatus_Fox_AppearR,

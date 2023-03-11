@@ -25,7 +25,7 @@
 
 typedef enum ftLinkAction
 {
-    ftStatus_Link_Attack13 = 0xDC,
+    ftStatus_Link_Attack13 = ftStatus_Common_SpecialStart,
     ftStatus_Link_Attack100Start,
     ftStatus_Link_Attack100Loop,
     ftStatus_Link_Attack100End,

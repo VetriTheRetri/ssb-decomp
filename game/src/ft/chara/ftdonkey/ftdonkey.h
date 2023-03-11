@@ -24,7 +24,7 @@
 
 typedef enum ftDonkeyAction
 {
-	ftStatus_Donkey_AppearR = 0xDC,
+	ftStatus_Donkey_AppearR = ftStatus_Common_SpecialStart,
 	ftStatus_Donkey_AppearL,
 	ftStatus_Donkey_SpecialNStart,
 	ftStatus_Donkey_SpecialAirNStart,

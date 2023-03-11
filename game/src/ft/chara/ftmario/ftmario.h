@@ -18,7 +18,7 @@
 
 typedef enum ftMarioAction
 {
-    ftStatus_Mario_Attack13 = 0xDC,
+    ftStatus_Mario_Attack13 = ftStatus_Common_SpecialStart,
     ftStatus_Mario_AppearR,
     ftStatus_Mario_AppearL,
     ftStatus_Mario_SpecialN,

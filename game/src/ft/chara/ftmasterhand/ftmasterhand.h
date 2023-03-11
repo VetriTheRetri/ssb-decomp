@@ -17,7 +17,7 @@
 
 typedef enum ftMasterHandAction
 {
-	ftStatus_MasterHand_Unk = 0xDC,
+	ftStatus_MasterHand_Unk = ftStatus_Common_SpecialStart,
 	ftStatus_MasterHand_Wait,
 	ftStatus_MasterHand_Move,
 	ftStatus_MasterHand_Hippataku,	// Horizontal slap

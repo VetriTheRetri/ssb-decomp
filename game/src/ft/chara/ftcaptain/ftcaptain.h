@@ -20,7 +20,7 @@
 
 typedef enum ftCaptainAction
 {
-    ftStatus_Captain_Attack13 = 0xDC,
+    ftStatus_Captain_Attack13 = ftStatus_Common_SpecialStart,
     ftStatus_Captain_Attack100Start,
     ftStatus_Captain_Attack100Loop,
     ftStatus_Captain_Attack100End,

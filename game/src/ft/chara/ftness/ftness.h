@@ -33,7 +33,7 @@
 
 typedef enum ftNessAction
 {
-    ftStatus_Ness_Attack13 = 0xDC,
+    ftStatus_Ness_Attack13 = ftStatus_Common_SpecialStart,
     ftStatus_Ness_AppearRStart,
     ftStatus_Ness_AppearLStart,
     ftStatus_Ness_AppearR,

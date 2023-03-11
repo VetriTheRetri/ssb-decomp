@@ -26,7 +26,7 @@
 
 typedef enum ftSamusAction
 {
-    ftStatus_Samus_AppearR = 0xDC,
+    ftStatus_Samus_AppearR = ftStatus_Common_SpecialStart,
     ftStatus_Samus_AppearL,
     ftStatus_Samus_SpecialNStart,
     ftStatus_Samus_SpecialNLoop,

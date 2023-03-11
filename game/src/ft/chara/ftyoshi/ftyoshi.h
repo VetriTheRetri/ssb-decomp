@@ -15,7 +15,7 @@
 
 typedef enum ftYoshiAction
 {
-    ftStatus_Yoshi_AppearR = 0xDC,
+    ftStatus_Yoshi_AppearR = ftStatus_Common_SpecialStart,
     ftStatus_Yoshi_AppearL,
     ftStatus_Yoshi_SpecialHi,
     ftStatus_Yoshi_SpecialAirHi,
