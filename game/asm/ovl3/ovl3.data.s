@@ -2613,7 +2613,7 @@ glabel jtbl_ovl3_8018A0E0
   /* 585E8 104B28 8018A0E8 */  .4byte jtgt_ovl3_80177B44
   .incbin "ovl3.raw.bin", 0x585EC, 0x4
 
-glabel D_ovl3_8018A0F0
+glabel Article_StarRod_Data
   .incbin "ovl3.raw.bin", 0x585F0, 0x4
   /* 585F4 104B34 8018A0F4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x585F8, 0xC
@@ -2623,7 +2623,7 @@ glabel jtbl_ovl3_8018A104
   /* 58608 104B48 8018A108 */  .4byte jtgt_ovl3_80177EE4
   .incbin "ovl3.raw.bin", 0x5860C, 0x18
 
-glabel D_ovl3_8018A124
+glabel Article_StarRod_Status
   .incbin "ovl3.raw.bin", 0x58624, 0x4
   /* 58628 104B68 8018A128 */  .4byte func_ovl3_80177EBC
   .incbin "ovl3.raw.bin", 0x5862C, 0x18
@@ -2653,7 +2653,7 @@ glabel jtbl_ovl3_8018A1A4
   /* 586BC 104BFC 8018A1BC */  .4byte jtgt_ovl3_80173434
   .incbin "ovl3.raw.bin", 0x586C0, 0x4
 
-glabel D_ovl3_8018A1C4
+glabel Item_StarRod_Desc
   .incbin "ovl3.raw.bin", 0x586C4, 0x8
   /* 586CC 104C0C 8018A1CC */  .4byte Article_File_Data
 

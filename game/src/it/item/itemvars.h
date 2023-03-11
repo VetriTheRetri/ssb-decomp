@@ -239,4 +239,10 @@ typedef struct Egg_Throw_ItemVars
 
 } Egg_Throw_ItemVars;
 
+typedef struct Star_ItemVars // Star Rod projectile
+{
+    s32 lifetime;
+
+} Star_ItemVars;
+
 #endif

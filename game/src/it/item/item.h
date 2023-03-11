@@ -333,6 +333,7 @@ typedef struct _Item_Struct
         Egg_Throw_ItemVars egg_throw;
         Spin_Attack_ItemVars spin_attack; // Link's Up Special
         Boomerang_ItemVars boomerang;
+        Star_ItemVars star;
 
     } item_vars;
 

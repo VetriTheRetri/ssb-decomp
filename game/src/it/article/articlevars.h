@@ -67,6 +67,14 @@
 #define ATBOMBHEI_T_VEL 100.0F
 #define ATBOMBHEI_EXPLODE_SCALE 1.4F
 
+#define ATSTARROD_AMMO_MAX 20
+#define ATSTARROD_GRAVITY 1.2F
+#define ATSTARROD_T_VEL 100.0F
+#define ATSTARROD_AMMO_SMASH_VEL_X 120.0F
+#define ATSTARROD_AMMO_TILT_VEL_X 80.0F
+#define ATSTARROD_AMMO_SMASH_LIFETIME 30.0F
+#define ATSTARROD_AMMO_TILT_LIFETIME 30.0F
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
