@@ -480,11 +480,11 @@ void func_ovl3_8016F534(GObj *article_gobj)
     }
     if (ap->is_show_indicator)
     {
-        ap->x2D2_flag_12bit--;
+        ap->pickup_wait--;
 
-        if (ap->x2D2_flag_12bit <= ARTICLE_DESPAWN_FLASH_INT_DEFAULT)
+        if (ap->pickup_wait <= ARTICLE_DESPAWN_FLASH_INT_DEFAULT)
         {
-            if (ap->x2D2_flag_12bit == 0)
+            if (ap->pickup_wait == 0)
             {
                 func_ovl2_8010066C(&JObjGetStruct(article_gobj)->translate, 1.0F);
 
@@ -492,7 +492,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
 
                 return;
             }
-            if (ap->x2D2_flag_12bit & 1) // Make article invisible on odd frames
+            if (ap->pickup_wait & 1) // Make article invisible on odd frames
             {
                 article_gobj->is_render ^= TRUE;
             }

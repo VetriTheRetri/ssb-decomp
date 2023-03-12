@@ -369,7 +369,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     }
     func_ovl2_800E806C(fp, 6, 0);
 
-    ap->x2D2_flag_12bit = 1400;
+    ap->pickup_wait = ARTICLE_PICKUP_WAIT_DEFAULT;
 }
 
 void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded?

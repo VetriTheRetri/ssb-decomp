@@ -16,6 +16,8 @@
 #define ARTICLE_UNK_DEFAULT 9U // Handicap?
 #define ARTICLE_STALE_DEFAULT 1.0F
 
+#define ARTICLE_PICKUP_WAIT_DEFAULT 1400           // "Lifetime" while item is not being carried
+
 #define ARTICLE_REFLECT_MAX_DEFAULT 100            // Maximum damage cap for reflected articles
 #define ARTICLE_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
 #define ARTICLE_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying article's hitbox damage
@@ -182,14 +184,18 @@ typedef struct _Article_Hit
     u8 hit_status;
     u16 hit_sfx;
     u16 clang : 1;
-    u16 flags_0x4C_b1 : 1;
-    u16 flags_0x4C_b23456 : 5;
+    u32 flags_0x4C_b1 : 1;
+    u32 flags_0x4C_b2 : 1;
+    u32 flags_0x4C_b3 : 1;
+    u32 can_deflect : 1;
+    u32 can_reflect : 1;
+    u32 can_absorb : 1; // Not actually absorb but not yet known either
     u16 attack_id : 6;
     u16 flags_0x4C_b7 : 1;
     u16 flags_0x4E;
     CommonAttackFlags flags_hi;
     CommonAttackFlags flags_lw;
-    s32 hitbox_count; // 0 = disabled, 1 = enabled, 2 and 3 related to position update?
+    s32 hitbox_count;
     ArticleHitUnk article_hit_unk[2];
     ArticleHitArray hit_targets[4];
 
@@ -216,8 +222,8 @@ typedef struct Article_Hurt
 typedef struct atCommonAttributes
 {
     void *unk_0x0;
-    u8 filler_0x4[0x2E - 0x4];
-    s16 unk_0x2E;
+    u8 filler_0x4[0x2C - 0x4];
+    Vec2h gfx_offset; // Universal?
     s16 ledge_stop_width; // Used by Bob-Omb to determine when to turn around
     u8 filler_0x32[0x46 - 0x32];
     u16 spin_speed;
@@ -277,9 +283,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 unk_0x2B4;
     s32 damage_display_state;
     s32 damage_taken_last;
-
-    u8 filler_0x160[0x2C4 - 0x2C0];
-
+    s32 lifetime;
     f32 vel_scale;
     u16 unk_0x2C8;
     u16 drop_sfx;
@@ -299,7 +303,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2CF_flag_b6 : 1;
     u8 x2CF_flag_b7 : 1;
     u16 unk_0x2D0;
-    u16 x2D2_flag_12bit : 12; // Lifetime?
+    u16 pickup_wait : 12; // Number of frames article can last without being picked up (if applicable)
     u8 x2D3_flag_b4 : 1;
     u8 x2D3_flag_b5 : 1;
     u8 is_static_damage : 1;
@@ -372,8 +376,9 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     union
     {
-        BombHei_ArticleVars bombhei;
         Common_ArticleVars common;
+        BombHei_ArticleVars bombhei;
+        Shell_ArticleVars shell;
 
     } article_vars;
 

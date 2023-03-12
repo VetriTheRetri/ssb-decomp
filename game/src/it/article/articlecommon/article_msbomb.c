@@ -198,7 +198,7 @@ void func_ovl3_80176934(GObj *article_gobj)
     {
         Vec3f translate = joint->translate;
 
-        translate.y += attributes->unk_0x2E;
+        translate.y += attributes->gfx_offset.y;
 
         func_ovl2_800FF3F4(&translate, ap->lr, 1.0F);
     }

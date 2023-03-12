@@ -80,7 +80,9 @@ struct JObj
     void *display_list;
     u8 unk_0x54;
     void *mtx_position; // ???
-    u8 filler_0x5C[0x78 - 0x5C];
+    u8 filler_0x5C[0x70 - 0x5C];
+    s32 unk_jobj_0x70;
+    s32 unk_jobj_0x74;
     f32 anim_rate;
     f32 unk_0x7C;
     Image *image;

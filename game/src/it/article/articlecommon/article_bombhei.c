@@ -66,7 +66,7 @@ void func_ovl3_80177180(GObj *article_gobj, u8 is_explode)
     {
         Vec3f pos = joint->translate;
 
-        pos.y += attributes->unk_0x2E;
+        pos.y += attributes->gfx_offset.y;
 
         func_ovl2_800FF3F4(&pos, ap->lr, 1.0F);
     }
