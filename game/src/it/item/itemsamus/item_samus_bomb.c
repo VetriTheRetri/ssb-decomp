@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_80168F98(GObj *item_gobj)
 
         if (ip->item_vars.samus_bomb.bomb_blink_timer == 0)
         {
-            Image *image = JObjGetStruct(item_gobj)->image;
+            MObj *image = JObjGetStruct(item_gobj)->mobj;
 
             image->anim_frame = (image->anim_frame != 0) ? 0.0F : 1.0F;
 

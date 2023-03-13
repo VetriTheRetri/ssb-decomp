@@ -49,7 +49,7 @@ struct GObj
 
 extern GObj *gOMObjCommonLinks[];
 
-typedef struct _Image // Image footer struct
+typedef struct MObj // Image footer struct
 {
     u8 filler[0x80];
     s16 index;
@@ -58,7 +58,7 @@ typedef struct _Image // Image footer struct
     u8 filler_0x8C[0x94 - 0x8C];
     u32 unk_image_0x94;
 
-} Image;
+} MObj;
 
 typedef struct JObj JObj;
 
@@ -82,10 +82,10 @@ struct JObj
     void *mtx_position; // ???
     u8 filler_0x5C[0x70 - 0x5C];
     s32 unk_jobj_0x70;
-    s32 unk_jobj_0x74;
-    f32 anim_rate;
-    f32 unk_0x7C;
-    Image *image;
+    f32 unk_jobj_0x74; // Multi-purpose? Usually FLOAT32_MAX, used as rotation step in Crate/Barrel smash GFX?
+    f32 unk_jobj_0x78; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?
+    f32 unk_jobj_0x7C; // Multi-purpose? Usually 0.0F, but used as rotation step in Crate/Barrel smash GFX?
+    MObj *mobj;
     JObj *unk_0x84;
 
 };

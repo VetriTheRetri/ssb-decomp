@@ -105,7 +105,7 @@ GObj *func_ovl3_801687A0(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create it
     ip->phys_info.vel.x = Item_Fireball_Attributes[index].vel_mul * cosf(vel) * fp->lr;
     ip->phys_info.vel.y = Item_Fireball_Attributes[index].vel_mul * __sinf(vel);
 
-    JObjGetStruct(item_gobj)->image->anim_frame = (f32)Item_Fireball_Attributes[index].frame_begin;
+    JObjGetStruct(item_gobj)->mobj->anim_frame = (f32)Item_Fireball_Attributes[index].frame_begin;
 
     func_ovl3_80167FA0(item_gobj);
     return item_gobj;

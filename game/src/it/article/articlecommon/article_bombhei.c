@@ -5,7 +5,7 @@ void func_ovl3_80177060(GObj *article_gobj, u8 arg1)
     s32 unused;
     JObj *joint = JObjGetStruct(article_gobj);
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    Effect_Struct *ep;
+    Effect_Unk *ep;
 
     func_ovl3_80177218(article_gobj);
 
@@ -336,7 +336,7 @@ void func_ovl3_80177848(GObj *article_gobj)
 
     texture = ((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_Unk; // Linker thing
 
-    func_8000BD54(joint->image, texture, 0.0F); // Set texture animation?
+    func_8000BD54(joint->mobj, texture, 0.0F); // Set texture animation?
 
     func_8000DF34(article_gobj);
 
@@ -503,7 +503,7 @@ void func_ovl3_80177D28(GObj *article_gobj)
 
     ap->at_multi = 0;
 
-    joint->image->unk_image_0x94 = 0;
+    joint->mobj->unk_image_0x94 = 0;
 
     func_ovl3_80172F98(article_gobj, ATBOMBHEI_EXPLODE_COLANIM_ID, ATBOMBHEI_EXPLODE_COLANIM_DURATION);
 }

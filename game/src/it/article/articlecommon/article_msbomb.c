@@ -206,7 +206,7 @@ void func_ovl3_80176934(GObj *article_gobj)
 
 void func_ovl3_801769AC(GObj *article_gobj, bool32 is_fighter)
 {
-    Effect_Struct *ep;
+    Effect_Unk *ep;
     JObj *joint = JObjGetStruct(article_gobj);
 
     if (is_fighter != FALSE)

@@ -88,6 +88,18 @@
 #define ATGSHELL_GRAVITY 1.2F
 #define ATGSHELL_T_VEL 100.0F
 
+#define ATCONTAINER_GFX_COUNT 7         // Number of pieces Barrel and Crate containers burst into when smashed open
+#define ATCONTAINER_GFX_LIFETIME 90     // Smashed container pieces despawn once this runs out
+
+#define ATBOX_HEALTH_MAX 15             // Maximum damage box can resist before breaking
+#define ATBOX_GRAVITY 4.0F
+#define ATBOX_T_VEL 120.0F
+
+#define ATTARU_LIFETIME 360
+#define ATTARU_HEALTH_MAX 10
+#define ATTARU_GRAVITY 4.0F
+#define ATTARU_T_VEL 90.0F
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -108,5 +120,11 @@ typedef struct Shell_ArticleVars
     u8 is_damage; // Shell can damage players
 
 } Shell_ArticleVars;
+
+typedef struct Taru_ArticleVars
+{
+    f32 roll_rotate_speed;
+
+} Taru_ArticleVars;
 
 #endif

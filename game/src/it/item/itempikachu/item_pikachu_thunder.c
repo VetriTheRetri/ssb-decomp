@@ -105,7 +105,7 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->group_id = func_ovl3_801655A0();
 
-    JObjGetStruct(item_gobj)->image->index = 3;
+    JObjGetStruct(item_gobj)->mobj->index = 3;
 
     JObjGetStruct(item_gobj)->scale.x = 0.5F;
     JObjGetStruct(item_gobj)->scale.y = 0.5F;
@@ -128,7 +128,7 @@ bool32 func_ovl3_8016A8D8(GObj *item_gobj)
 
         return TRUE;
     }
-    else JObjGetStruct(item_gobj)->image->index = rand_u16_range(ITPIKACHUTHUNDER_TEXTURE_COUNT - 1);
+    else JObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPIKACHUTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }

@@ -84,7 +84,7 @@ void func_ovl3_8015D4E4(GObj *fighter_gobj)
 
     func_ovl2_800DEE98(fp);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->anim_rate, 2U);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_jobj_0x78, 2U);
 
     fp->cb_take_damage = func_ovl3_8015D338;
 }
@@ -94,7 +94,7 @@ void func_ovl3_8015D540(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->anim_rate, 2U);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_jobj_0x78, 2U);
     func_ovl2_800D8EB8(fp);
 
     fp->cb_take_damage = func_ovl3_8015D338;

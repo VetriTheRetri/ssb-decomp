@@ -32,13 +32,13 @@ void func_ovl3_80178670(GObj *article_gobj)
     s32 unused[2];
 
     func_8000BD1C(joint, (((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&D_NF_00005F88)) + (uintptr_t)&D_NF_00006018, 0.0F); // Linker thing
-    func_8000BD54(joint->image, (((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&D_NF_00005F88)) + (uintptr_t)&D_NF_00006048, 0.0F); // Linker thing
+    func_8000BD54(joint->mobj, (((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&D_NF_00005F88)) + (uintptr_t)&D_NF_00006048, 0.0F); // Linker thing
     func_8000DF34(article_gobj);
 }
 
 void func_ovl3_80178704(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->image->unk_image_0x94 = 0;
+    JObjGetStruct(article_gobj)->mobj->unk_image_0x94 = 0;
     JObjGetStruct(article_gobj)->unk_jobj_0x70 = 0;
 }
 
@@ -398,7 +398,7 @@ GObj* jtgt_ovl3_80178FDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = translate;
 
-        joint->image->anim_frame = 1.0F;
+        joint->mobj->anim_frame = 1.0F;
 
         ap = ArticleGetStruct(article_gobj);
 

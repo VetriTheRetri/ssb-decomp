@@ -11,6 +11,15 @@
 #include <game/src/gm/gmsound.h>
 #include <game/src/ef/effect.h>
 
+#define ARTICLE_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
+
+#define ARTICLE_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
+#define ARTICLE_MASK_SPAWN_NONE 1                  // Item spawned independently 
+#define ARTICLE_MASK_SPAWN_ARTICLE 2                  // Item spawned by another item
+#define ARTICLE_MASK_SPAWN_ARTICLE 3               // Item spawned by Pokémon / misc entity class(es?)
+
+#define ARTICLE_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
+
 #define ARTICLE_TEAM_DEFAULT 4U // Article is teamless; deals damage to any eligible target
 #define ARTICLE_PORT_DEFAULT 4U
 #define ARTICLE_UNK_DEFAULT 9U // Handicap?
@@ -118,7 +127,7 @@ typedef struct ArticleSpawnData
 {
     u32 w0;
     ArticleFileData **p_file;
-    u32 w2;
+    s32 offset;
     u32 w3;
 
 } ArticleSpawnData;
@@ -379,6 +388,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Common_ArticleVars common;
         BombHei_ArticleVars bombhei;
         Shell_ArticleVars shell;
+        Taru_ArticleVars taru;
 
     } article_vars;
 

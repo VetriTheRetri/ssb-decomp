@@ -2750,7 +2750,7 @@ glabel D_ovl3_8018A328
 glabel D_ovl3_8018A338
   .incbin "ovl3.raw.bin", 0x58838, 0x18
 
-glabel D_ovl3_8018A350
+glabel Article_Box_Data
   .incbin "ovl3.raw.bin", 0x58850, 0x4
 
 glabel D_ovl3_8018A354
@@ -2762,7 +2762,7 @@ glabel jtbl_ovl3_8018A364
   /* 58868 104DA8 8018A368 */  .4byte jtgt_ovl3_80179718
   .incbin "ovl3.raw.bin", 0x5886C, 0x18
 
-glabel D_ovl3_8018A384
+glabel Article_Box_Status
   .incbin "ovl3.raw.bin", 0x58884, 0x4
   /* 58888 104DC8 8018A388 */  .4byte func_ovl3_80179674
   .incbin "ovl3.raw.bin", 0x5888C, 0x14
@@ -2809,7 +2809,7 @@ glabel jtbl_ovl3_8018A464
   /* 58968 104EA8 8018A468 */  .4byte jtgt_ovl3_80179CB8
   .incbin "ovl3.raw.bin", 0x5896C, 0x18
 
-glabel D_ovl3_8018A484
+glabel Article_Taru_Status
   .incbin "ovl3.raw.bin", 0x58984, 0x4
   /* 58988 104EC8 8018A488 */  .4byte func_ovl3_80179BF8
   .incbin "ovl3.raw.bin", 0x5898C, 0x14

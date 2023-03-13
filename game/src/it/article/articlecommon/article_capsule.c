@@ -182,7 +182,7 @@ void func_ovl3_80174428(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     JObj *joint = JObjGetStruct(article_gobj);
-    Effect_Struct *ep;
+    Effect_Unk *ep;
 
     ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
 

@@ -285,7 +285,7 @@ bool32 func_ovl3_8016B398(GObj *item_gobj)
 
     func_ovl3_80167FE8(ip);
 
-    JObjGetStruct(item_gobj)->image->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
+    JObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -515,7 +515,7 @@ bool32 func_ovl3_8016B9E0(GObj *item_gobj)
 
     func_ovl3_80167FE8(ip);
 
-    JObjGetStruct(item_gobj)->image->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
+    JObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }

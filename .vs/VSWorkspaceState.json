@@ -5,12 +5,13 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftmasterhand",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\ft\\chara\\ftpikachu",
-    "\\game\\src\\ft\\chara\\ftsamus",
-    "\\game\\src\\ft\\chara\\ftyoshi"
+    "\\game\\src\\ft\\chara\\ftdonkey",
+    "\\game\\src\\it",
+    "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articlecommon",
+    "\\game\\src\\mp",
+    "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftyoshi\\ftyoshi.h",
+  "SelectedNode": "\\game\\src\\it\\article\\article_think.c",
   "PreviewInSolutionExplorer": false
 }
