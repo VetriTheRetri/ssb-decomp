@@ -541,7 +541,7 @@ GObj *jtgt_ovl3_8017B1D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = ArticleGetStruct(article_gobj);
 
-        ap->article_hit[0].is_rehit = TRUE;
+        ap->article_hit[0].can_rehit = TRUE;
 
         ap->article_vars.shell.health = 1;
         ap->article_vars.shell.is_setup_vars = FALSE;

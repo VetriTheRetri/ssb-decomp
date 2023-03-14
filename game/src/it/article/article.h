@@ -195,7 +195,7 @@ typedef struct _Article_Hit
     u16 clang : 1;
     u32 flags_0x4C_b1 : 1;
     u32 flags_0x4C_b2 : 1;
-    u32 is_rehit : 1; // Article can rehit targets after default rehit cooldown expires
+    u32 can_rehit : 1; // Article can rehit targets after default rehit cooldown expires
     u32 can_deflect : 1;
     u32 can_reflect : 1;
     u32 can_absorb : 1; // Not actually absorb but not yet known either
