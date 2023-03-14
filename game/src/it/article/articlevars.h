@@ -106,6 +106,23 @@
 #define ATTARU_GRAVITY 4.0F
 #define ATTARU_T_VEL 90.0F
 
+#define ATRSHELL_INTERACT_MAX 24
+#define ATRSHELL_LIFETIME 480
+#define ATRSHELL_HEALTH_MAX 4
+#define ATRSHELL_GFX_SPAWN_INT 8
+#define ATRSHELL_DAMAGE_ALL_WAIT 16
+#define ATRSHELL_CLAMP_VEL_X 70.0F
+#define ATRSHELL_CLAMP_AIR_X 90.0F      // Leftover from Green Shell? This is checked only when the ground beneath the Red Shell collapses
+#define ATRSHELL_HIT_INIT_VEL_X 8.0F    // Initialize hitbox if it is currently inactive and velocity is less than this value
+#define ATRSHELL_MUL_VEL_X 1.2F
+#define ATRSHELL_STOP_VEL_X 8.0F        // Halt all horizontal velocity if less than this value OR disable hitbox
+#define ATRSHELL_ADD_VEL_X 60.0F        // Added when Red Shell is reflected
+#define ATRSHELL_RECOIL_VEL_X (-8.0F)   // Applied when shell is attacked
+#define ATRSHELL_RECOIL_MUL_X 0.7F      // Multiplies recoil velocity
+#define ATRSHELL_DAMAGE_MUL_NORMAL 10.0F// Multiplies damage taken and turns it into horizontal velocity; run when Shell is hit out of its "wait" state
+#define ATRSHELL_GRAVITY 1.2F
+#define ATRSHELL_T_VEL 100.0F
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -118,14 +135,17 @@ typedef struct BombHei_ArticleVars
 
 } BombHei_ArticleVars;
 
-typedef struct G_Shell_ArticleVars
+typedef struct Shell_ArticleVars
 {
-    u8 damage_all_delay; // Shell can hit owner once this frame timer reaches -1
+    u8 damage_all_delay; // Shell can hit owner and teammates once this frame timer reaches -1
     u8 dust_gfx_int; // Delay between dust GFX
     u8 health; // Appears to deterime whether Shell will despawn after hittin a target, shell can have up to 4 HP
     u8 is_damage; // Shell can damage players
+    u8 is_setup_vars;
+    u8 interact; // Decremented each time the shell is attacked, reflected, or it hits something; despawns shell at 0
+    f32 vel_x;
 
-} G_Shell_ArticleVars;
+} Shell_ArticleVars;
 
 typedef struct Taru_ArticleVars
 {

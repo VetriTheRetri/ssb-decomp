@@ -21,9 +21,9 @@ void func_ovl3_801785E0(GObj *article_gobj)
     ap->article_vars.shell.dust_gfx_int--;
 }
 
-extern u8 D_NF_00005F88;
-extern u8 D_NF_00006018;
-extern u8 D_NF_00006048;
+extern intptr_t D_NF_00005F88;
+extern intptr_t D_NF_00006018;
+extern intptr_t D_NF_00006048;
 
 void func_ovl3_80178670(GObj *article_gobj)
 {
@@ -31,8 +31,8 @@ void func_ovl3_80178670(GObj *article_gobj)
     JObj *joint = JObjGetStruct(article_gobj);
     s32 unused[2];
 
-    func_8000BD1C(joint, (((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&D_NF_00005F88)) + (uintptr_t)&D_NF_00006018, 0.0F); // Linker thing
-    func_8000BD54(joint->mobj, (((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&D_NF_00005F88)) + (uintptr_t)&D_NF_00006048, 0.0F); // Linker thing
+    func_8000BD1C(joint, (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00005F88)) + (intptr_t)&D_NF_00006018, 0.0F); // Linker thing
+    func_8000BD54(joint->mobj, (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00005F88)) + (intptr_t)&D_NF_00006048, 0.0F); // Linker thing
     func_8000DF34(article_gobj);
 }
 
@@ -94,29 +94,28 @@ void func_ovl3_801787CC(GObj *article_gobj)
 
         func_ovl3_80178704(article_gobj);
         func_ovl3_80172EC8(article_gobj, Article_G_Shell_Status, 0);
-
-        return;
     }
-    if (ap->article_vars.shell.is_damage != FALSE)
+    else if (ap->article_vars.shell.is_damage != FALSE)
     {
         ap->article_hit[0].update_state = gmHitCollision_UpdateState_New;
 
         func_ovl3_8016F280(article_gobj);
         func_ovl3_80178EDC(article_gobj);
-
-        return;
     }
-    func_ovl3_80172E74(article_gobj);
+    else
+    {
+        func_ovl3_80172E74(article_gobj);
 
-    ap->is_damage_all = TRUE;
+        ap->is_damage_all = TRUE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
 
-    ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel.x = 0.0F;
 
-    func_ovl3_80178704(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_G_Shell_Status, 0);
+        func_ovl3_80178704(article_gobj);
+        func_ovl3_80172EC8(article_gobj, Article_G_Shell_Status, 0);
+    }
 }
 
 void func_ovl3_80178910(GObj *article_gobj)
@@ -126,15 +125,15 @@ void func_ovl3_80178910(GObj *article_gobj)
 
 void func_ovl3_80178930(GObj *article_gobj)
 {
-    Article_Struct *temp_a0 = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    temp_a0->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
 
-    temp_a0->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
 
-    temp_a0->is_show_indicator = FALSE;
+    ap->is_show_indicator = FALSE;
 
-    func_ovl3_80173F78(temp_a0);
+    func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_G_Shell_Status, 1);
 }
 

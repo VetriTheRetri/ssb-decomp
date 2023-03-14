@@ -387,7 +387,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     {
         Common_ArticleVars common;
         BombHei_ArticleVars bombhei;
-        G_Shell_ArticleVars shell;
+        Shell_ArticleVars shell;
         Taru_ArticleVars taru;
 
     } article_vars;
