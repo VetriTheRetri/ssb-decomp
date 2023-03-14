@@ -255,7 +255,7 @@ void func_ovl3_80158FB4(GObj *fighter_gobj)
 
     if (fp->status_info.pl_kind != Pl_Kind_Human)
     {
-        vec3f_sub(&vel, &fp->status_vars.masterhand.wait.pos, &JObjGetStruct(fighter_gobj)->translate);
+        vec3f_sub(&vel, &fp->status_vars.masterhand.wait.pos, &DObjGetStruct(fighter_gobj)->translate);
 
         magnitude = vec3f_mag(&vel);
 
@@ -288,7 +288,7 @@ void func_ovl3_80159040(GObj *fighter_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    translate = &JObjGetStruct(fighter_gobj)->translate;
+    translate = &DObjGetStruct(fighter_gobj)->translate;
 
     if (fp->coll_data.ground_line_id != -1)
     {

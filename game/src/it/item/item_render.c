@@ -96,7 +96,7 @@ extern Mtx D_ovl2_8012C458;
 void func_ovl3_801671F0(GObj *item_gobj) // Render item ECB?
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
-    Vec3f *translate = &JObjGetStruct(item_gobj)->translate;
+    Vec3f *translate = &DObjGetStruct(item_gobj)->translate;
     ObjectColl *object_coll = &ip->coll_data.object_coll;
     MtxStore mtx_store;
 

@@ -56,8 +56,8 @@ bool32 jtgt_ovl3_8016CA9C(GObj *item_gobj)
 
     pos_y += ITSPINATTACK_OFF_Y;
 
-    ip->phys_info.vel.x = pos_x - JObjGetStruct(item_gobj)->translate.x;
-    ip->phys_info.vel.y = pos_y - JObjGetStruct(item_gobj)->translate.y;
+    ip->phys_info.vel.x = pos_x - DObjGetStruct(item_gobj)->translate.x;
+    ip->phys_info.vel.y = pos_y - DObjGetStruct(item_gobj)->translate.y;
 
     return FALSE;
 }

@@ -61,7 +61,7 @@ bool32 func_ovl3_801735A0(GObj *article_gobj, void (*cb_coll)(GObj*))
 bool32 func_ovl3_801735E0(Coll_Data *coll_data, GObj *article_gobj, s32 arg2)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     if (func_ovl2_800DB838(coll_data) != FALSE)
     {
@@ -95,7 +95,7 @@ bool32 func_ovl3_80173680(GObj *article_gobj)
 bool32 func_ovl3_801736B4(Coll_Data *coll_data, GObj *article_gobj, u32 coll_flags)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     if (func_ovl2_800DB838(coll_data) != FALSE)
     {
@@ -146,7 +146,7 @@ bool32 func_ovl3_801737EC(GObj *article_gobj, u32 check_flags, f32 mod_vel, Vec3
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Coll_Data *coll_data = &ap->coll_data;
-    Vec3f *translate = &JObjGetStruct(article_gobj)->translate;
+    Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
     Vec3f mod_pos;
     bool32 return_bool = FALSE;
     u16 coll_flags = (ap->coll_data.unk_0x54 ^ ap->coll_data.unk_0x56) & ap->coll_data.unk_0x56 & MPCOLL_MASK_ALL;

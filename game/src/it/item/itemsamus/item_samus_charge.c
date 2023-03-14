@@ -49,8 +49,8 @@ bool32 jtgt_ovl3_80168BFC(GObj *item_gobj) // Animation
     {
         scale = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].gfx_size / ITCHARGESHOT_GFX_SIZE_DIV;
 
-        JObjGetStruct(item_gobj)->scale.y = scale;
-        JObjGetStruct(item_gobj)->scale.x = scale;
+        DObjGetStruct(item_gobj)->scale.y = scale;
+        DObjGetStruct(item_gobj)->scale.x = scale;
 
         if (ip->item_vars.charge_shot.is_full_charge != FALSE)
         {
@@ -63,7 +63,7 @@ bool32 jtgt_ovl3_80168BFC(GObj *item_gobj) // Animation
             func_ovl3_80165F60(item_gobj);
         }
     }
-    JObjGetStruct(item_gobj)->rotate.z -= ITCHARGESHOT_ROTATE_SPEED * ip->lr;
+    DObjGetStruct(item_gobj)->rotate.z -= ITCHARGESHOT_ROTATE_SPEED * ip->lr;
 
     return FALSE;
 }
@@ -78,7 +78,7 @@ bool32 jtgt_ovl3_80168CC4(GObj *item_gobj) // Collision
 
         if (func_ovl3_80167C04(item_gobj) != FALSE) 
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
         else return FALSE; // Redundant return here lol
@@ -90,7 +90,7 @@ bool32 jtgt_ovl3_80168D24(GObj *item_gobj) // Hit target
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
 
     return TRUE;
 }
@@ -150,8 +150,8 @@ GObj* func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool3
 
     scale = Item_ChargeShot_Attributes[charge_level].gfx_size / ITCHARGESHOT_GFX_SIZE_DIV;
 
-    JObjGetStruct(item_gobj)->scale.y = scale;
-    JObjGetStruct(item_gobj)->scale.x = scale;
+    DObjGetStruct(item_gobj)->scale.y = scale;
+    DObjGetStruct(item_gobj)->scale.x = scale;
 
     ip->cb_destroy = func_ovl3_80168BDC;
 

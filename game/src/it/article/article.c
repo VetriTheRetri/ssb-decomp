@@ -32,26 +32,26 @@ void func_ovl3_8016DFDC(Gfx *display_list)
     D_ovl3_8018D094 = display_list;
 }
 
-void func_ovl3_8016DFF4(GObj *gobj, JObjDesc *joint_desc, JObj **p_ptr_jobj, u8 arg3)
+void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 arg3)
 {
     s32 i, index;
-    JObj *joint, *jobj_array[18];
+    DObj *joint, *dobj_array[18];
 
-    for (i = 0; i < ARRAY_COUNT(jobj_array); i++)
+    for (i = 0; i < ARRAY_COUNT(dobj_array); i++)
     {
-        jobj_array[i] = NULL;
+        dobj_array[i] = NULL;
     }
-    for (i = 0; joint_desc->index != ARRAY_COUNT(jobj_array); i++, joint_desc++)
+    for (i = 0; joint_desc->index != ARRAY_COUNT(dobj_array); i++, joint_desc++)
     {
         index = joint_desc->index & 0xFFF;
 
         if (index != 0)
         {
-            joint = jobj_array[index] = func_800093F4(jobj_array[index - 1], joint_desc->x4);
+            joint = dobj_array[index] = func_800093F4(dobj_array[index - 1], joint_desc->x4);
         }
         else
         {
-            joint = jobj_array[0] = func_800092D0(gobj, joint_desc->x4);
+            joint = dobj_array[0] = func_800092D0(gobj, joint_desc->x4);
         }
         if (i == 1)
         {
@@ -65,9 +65,9 @@ void func_ovl3_8016DFF4(GObj *gobj, JObjDesc *joint_desc, JObj **p_ptr_jobj, u8 
         joint->rotate = joint_desc->rotate;
         joint->scale = joint_desc->scale;
 
-        if (p_ptr_jobj != NULL) // I have yet to find a case where this point is actually reached
+        if (p_ptr_dobj != NULL) // I have yet to find a case where this point is actually reached
         {
-            p_ptr_jobj[i] = joint;
+            p_ptr_dobj[i] = joint;
         }
     }
 }
@@ -391,9 +391,9 @@ void func_ovl3_8016F280(GObj *article_gobj)
             break;
 
         case gmHitCollision_UpdateState_New:
-            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + JObjGetStruct(article_gobj)->translate.x;
-            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + JObjGetStruct(article_gobj)->translate.y;
-            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + JObjGetStruct(article_gobj)->translate.z;
+            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + DObjGetStruct(article_gobj)->translate.x;
+            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + DObjGetStruct(article_gobj)->translate.y;
+            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + DObjGetStruct(article_gobj)->translate.z;
 
             ap->article_hit[0].update_state = gmHitCollision_UpdateState_Transfer;
 
@@ -407,9 +407,9 @@ void func_ovl3_8016F280(GObj *article_gobj)
         case gmHitCollision_UpdateState_Interpolate:
             ap->article_hit[0].article_hit_unk[i].pos_prev = ap->article_hit[0].article_hit_unk[i].pos;
 
-            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + JObjGetStruct(article_gobj)->translate.x;
-            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + JObjGetStruct(article_gobj)->translate.y;
-            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + JObjGetStruct(article_gobj)->translate.z;
+            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + DObjGetStruct(article_gobj)->translate.x;
+            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + DObjGetStruct(article_gobj)->translate.y;
+            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + DObjGetStruct(article_gobj)->translate.z;
 
             ap->article_hit[0].article_hit_unk[i].unk_0x18 = 0;
             ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0;
@@ -457,7 +457,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Vec3f *translate;
-    JObj *joint;
+    DObj *joint;
 
     if (ap->hitlag_timer != 0)
     {
@@ -486,7 +486,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
         {
             if (ap->pickup_wait == 0)
             {
-                func_ovl2_8010066C(&JObjGetStruct(article_gobj)->translate, 1.0F);
+                func_ovl2_8010066C(&DObjGetStruct(article_gobj)->translate, 1.0F);
 
                 func_ovl3_801728D4(article_gobj);
 
@@ -508,9 +508,9 @@ void func_ovl3_8016F534(GObj *article_gobj)
 
     if (!(ap->is_pause_article))
     {
-        joint = JObjGetStruct(article_gobj);
+        joint = DObjGetStruct(article_gobj);
 
-        translate = &JObjGetStruct(article_gobj)->translate;
+        translate = &DObjGetStruct(article_gobj)->translate;
 
         ap->coll_data.pos_curr = *translate;
 
@@ -692,7 +692,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
             ap->damage_angle = ft_hit->angle;
             ap->damage_element = ft_hit->element;
 
-            ap->lr_damage = (JObjGetStruct(article_gobj)->translate.x < JObjGetStruct(fighter_gobj)->translate.x) ? RIGHT : LEFT;
+            ap->lr_damage = (DObjGetStruct(article_gobj)->translate.x < DObjGetStruct(fighter_gobj)->translate.x) ? RIGHT : LEFT;
 
             ap->damage_gobj = fighter_gobj;
             ap->damage_team = fp->team;
@@ -846,7 +846,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
     if (vel < 5.0F)
     {
-        attack_ap->lr_attack = lr = (JObjGetStruct(defend_gobj)->translate.x < JObjGetStruct(attack_gobj)->translate.x) ? LEFT : RIGHT;
+        attack_ap->lr_attack = lr = (DObjGetStruct(defend_gobj)->translate.x < DObjGetStruct(attack_gobj)->translate.x) ? LEFT : RIGHT;
     }
     else
     {
@@ -868,7 +868,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
             if (vel < 5.0F)
             {
-                defend_ap->lr_hit = lr = (JObjGetStruct(defend_gobj)->translate.x < JObjGetStruct(attack_gobj)->translate.x) ? RIGHT : LEFT;
+                defend_ap->lr_hit = lr = (DObjGetStruct(defend_gobj)->translate.x < DObjGetStruct(attack_gobj)->translate.x) ? RIGHT : LEFT;
             }
             else
             {
@@ -960,7 +960,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
 
             if (vel < 5.0F)
             {
-                ap->lr_hit = lr = (JObjGetStruct(article_gobj)->translate.x < JObjGetStruct(item_gobj)->translate.x) ? RIGHT : LEFT;
+                ap->lr_hit = lr = (DObjGetStruct(article_gobj)->translate.x < DObjGetStruct(item_gobj)->translate.x) ? RIGHT : LEFT;
             }
             else
             {
@@ -1517,7 +1517,7 @@ void func_ovl3_801713B0(GObj *article_gobj)
 void func_ovl3_801713F4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     joint->rotate.z += ap->rotate_speed;
 }

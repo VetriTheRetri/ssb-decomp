@@ -164,7 +164,7 @@ void func_ovl3_8015CEE8(GObj *fighter_gobj)
 void func_ovl3_8015CF50(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    JObj* joint;
+    DObj* joint;
 
     fp->status_vars.fox.speciallw.turn_frames--;
 

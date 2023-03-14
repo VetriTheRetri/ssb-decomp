@@ -230,7 +230,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
         func_8000BED8(item_gobj, it_hit_desc->unk_0x8, it_hit_desc->unk_0xC, 0.0F);
     }
-    ip->coll_data.p_translate = &JObjGetStruct(item_gobj)->translate;
+    ip->coll_data.p_translate = &DObjGetStruct(item_gobj)->translate;
     ip->coll_data.p_lr = &ip->lr;
 
     ip->coll_data.object_coll.top = (f32)it_hit_desc->objectcoll_top;
@@ -269,7 +269,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     pos = *spawn_pos;
 
-    JObjGetStruct(item_gobj)->translate = pos;
+    DObjGetStruct(item_gobj)->translate = pos;
 
     ip->coll_data.pos_curr = pos;
 
@@ -304,7 +304,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
     return item_gobj;
 }
 
-void func_ovl3_80165ED0(JObj *joint, Vec3f *vec)
+void func_ovl3_80165ED0(DObj *joint, Vec3f *vec)
 {
     vec->x *= joint->scale.x;
     vec->y *= joint->scale.y;
@@ -319,7 +319,7 @@ void func_ovl3_80165ED0(JObj *joint, Vec3f *vec)
 void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
-    JObj *joint = JObjGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
     s32 i;
 
     for (i = 0; i < ip->item_hit[0].hitbox_count; i++)
@@ -420,7 +420,7 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
     Vec3f *translate;
-    JObj *joint;
+    DObj *joint;
 
     if (!(ip->is_hitlag_item))
     {
@@ -434,9 +434,9 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
                 return;
             }
         }
-        joint = JObjGetStruct(item_gobj);
+        joint = DObjGetStruct(item_gobj);
 
-        translate = &JObjGetStruct(item_gobj)->translate;
+        translate = &DObjGetStruct(item_gobj)->translate;
 
         ip->coll_data.pos_curr = *translate;
 

@@ -4,8 +4,8 @@ bool32 func_ovl3_801598C0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    Vec3f *translate_m = &JObjGetStruct(fighter_gobj)->translate;
-    Vec3f *translate_t = &JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate;
+    Vec3f *translate_m = &DObjGetStruct(fighter_gobj)->translate;
+    Vec3f *translate_t = &DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate;
 
     if (((translate_t->y - translate_m->y) > -300.0F) &&
     ((translate_t->y - translate_m->y) < 500.0F) &&

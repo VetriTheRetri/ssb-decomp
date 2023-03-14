@@ -186,7 +186,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
 
     else if ((ap->at_kind < At_Kind_Gr_Lucky) || (ap->at_kind >= At_Kind_Iwark))
     {
-        func_ovl2_800FF590(&JObjGetStruct(article_gobj)->translate);
+        func_ovl2_800FF590(&DObjGetStruct(article_gobj)->translate);
     }
     if (ap->unk_0x348 != NULL)
     {
@@ -204,7 +204,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi,
     Vec3f pos;
     s32 joint_index;
 
-    func_ovl0_800C9424(JObjGetStruct(article_gobj));
+    func_ovl0_800C9424(DObjGetStruct(article_gobj));
 
     pos.z = 0.0F;
     pos.y = 0.0F;
@@ -214,9 +214,9 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi,
 
     func_ovl2_800EDF24(fp->joint[joint_index], &pos);
 
-    JObjGetStruct(article_gobj)->translate.x = pos.x;
-    JObjGetStruct(article_gobj)->translate.y = pos.y;
-    JObjGetStruct(article_gobj)->translate.z = 0.0F;
+    DObjGetStruct(article_gobj)->translate.x = pos.x;
+    DObjGetStruct(article_gobj)->translate.y = pos.y;
+    DObjGetStruct(article_gobj)->translate.z = 0.0F;
 
     func_ovl2_800DF058(article_gobj, fp->coll_data.p_translate, &fp->coll_data);
 
@@ -285,7 +285,7 @@ void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_sma
     }
     func_ovl3_80172984(article_gobj, vel, stale, fp->unk_0x28E_halfword, fp->unk_0x290);
 
-    func_ovl2_8010066C(&JObjGetStruct(article_gobj)->translate, 1.0F);
+    func_ovl2_8010066C(&DObjGetStruct(article_gobj)->translate, 1.0F);
 
     func_800269C0(((is_smash_throw != FALSE) ? ap->throw_sfx : ap->drop_sfx));
 
@@ -298,7 +298,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    JObj *joint;
+    DObj *joint;
     void (*cb_pickup)(GObj*);
     Vec3f pos;
     s32 joint_index;
@@ -326,9 +326,9 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
 
     joint->unk_0xC->unk_0x8 = NULL;
     joint->unk_0xC = NULL;
-    joint->next = JObjGetStruct(article_gobj);
+    joint->next = DObjGetStruct(article_gobj);
 
-    JObjGetStruct(article_gobj)->prev = joint;
+    DObjGetStruct(article_gobj)->prev = joint;
 
     article_gobj->obj = joint;
 
@@ -499,7 +499,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
             vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_File_Data->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
-            if (func_ovl3_8016EA78(gobj, index, &JObjGetStruct(gobj)->translate, &vel, 0x80000003U) != NULL)
+            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, 0x80000003U) != NULL)
             {
                 func_ovl3_80172394(gobj, TRUE);
             }
@@ -601,7 +601,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
     Monster_Info.monster_prev = Monster_Info.monster_curr;
     Monster_Info.monster_curr = index;
 
-    monster_gobj = func_ovl3_8016F238(article_gobj, index, &JObjGetStruct(article_gobj)->translate, &vel, 0x80000003);
+    monster_gobj = func_ovl3_8016F238(article_gobj, index, &DObjGetStruct(article_gobj)->translate, &vel, 0x80000003);
 
     if (monster_gobj != NULL)
     {

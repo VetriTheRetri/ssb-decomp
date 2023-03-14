@@ -25,7 +25,7 @@ void func_ovl3_80168F2C(GObj *item_gobj)
 
     ip->item_hit[0].size = ITSAMUSBOMB_EXPLODE_RADIUS;
 
-    JObjGetStruct(item_gobj)->display_list = NULL;
+    DObjGetStruct(item_gobj)->display_list = NULL;
 
     ip->cb_anim = func_ovl3_80168F00;
     ip->cb_coll = NULL;
@@ -42,7 +42,7 @@ bool32 jtgt_ovl3_80168F98(GObj *item_gobj)
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
-        func_ovl2_801005C8(&JObjGetStruct(item_gobj)->translate);
+        func_ovl2_801005C8(&DObjGetStruct(item_gobj)->translate);
         func_ovl3_80168F2C(item_gobj);
         func_800269C0(0U);
 
@@ -53,19 +53,19 @@ bool32 jtgt_ovl3_80168F98(GObj *item_gobj)
         if (ip->ground_or_air == air)
         {
             func_ovl3_80168088(ip, ITSAMUSBOMB_WAIT_GRAVITY, ITSAMUSBOMB_WAIT_T_VEL);
-            JObjGetStruct(item_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_AIR * ip->lr);
+            DObjGetStruct(item_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_AIR * ip->lr);
         }
         else
         {
             func_ovl3_80168044(item_gobj);
-            JObjGetStruct(item_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_GROUND * ip->lr);
+            DObjGetStruct(item_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_GROUND * ip->lr);
         }
 
         ip->item_vars.samus_bomb.bomb_blink_timer--;
 
         if (ip->item_vars.samus_bomb.bomb_blink_timer == 0)
         {
-            MObj *image = JObjGetStruct(item_gobj)->mobj;
+            MObj *image = DObjGetStruct(item_gobj)->mobj;
 
             image->anim_frame = (image->anim_frame != 0) ? 0.0F : 1.0F;
 
@@ -124,7 +124,7 @@ bool32 jtgt_ovl3_80169108(GObj *item_gobj)
 bool32 jtgt_ovl3_801691FC(GObj *item_gobj)
 {
     func_800269C0(0U);
-    func_ovl2_801005C8(&JObjGetStruct(item_gobj)->translate);
+    func_ovl2_801005C8(&DObjGetStruct(item_gobj)->translate);
     func_ovl3_80168F2C(item_gobj);
 
     return FALSE;
@@ -133,7 +133,7 @@ bool32 jtgt_ovl3_801691FC(GObj *item_gobj)
 bool32 jtgt_ovl3_8016923C(GObj *item_gobj)
 {
     func_800269C0(0U);
-    func_ovl2_801005C8(&JObjGetStruct(item_gobj)->translate);
+    func_ovl2_801005C8(&DObjGetStruct(item_gobj)->translate);
 
     return TRUE;
 }

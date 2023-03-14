@@ -12,7 +12,7 @@ void func_ovl3_8017A3A0(GObj *article_gobj, GObj *fighter_gobj)
 
     if (ap->ground_or_air == ground)
     {
-        dist_x = (JObjGetStruct(fighter_gobj)->translate.x - JObjGetStruct(article_gobj)->translate.x);
+        dist_x = (DObjGetStruct(fighter_gobj)->translate.x - DObjGetStruct(article_gobj)->translate.x);
 
         lr_dist = (dist_x < 0.0F) ? LEFT : RIGHT;
 
@@ -51,7 +51,7 @@ void func_ovl3_8017A534(GObj *article_gobj)
     s32 unused;
     GObj *fighter_gobj = gOMObjCommonLinks[3];
     GObj *victim_gobj;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     Vec3f *translate = &joint->translate;
     s32 ft_count = 0;
     f32 square_xy;
@@ -62,7 +62,7 @@ void func_ovl3_8017A534(GObj *article_gobj)
     {
         do
         {
-            vec3f_sub(&dist, &JObjGetStruct(fighter_gobj)->translate, translate);
+            vec3f_sub(&dist, &DObjGetStruct(fighter_gobj)->translate, translate);
 
             if (ft_count == 0)
             {
@@ -88,7 +88,7 @@ void func_ovl3_8017A534(GObj *article_gobj)
 void func_ovl3_8017A610(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.shell.dust_gfx_int == 0)
     {
@@ -110,7 +110,7 @@ extern intptr_t D_NF_00006048;
 void func_ovl3_8017A6A0(GObj *article_gobj) // Identical to Green Shell function
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     s32 unused[2];
 
     func_8000BD1C(joint, (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00005F88)) + (intptr_t)&D_NF_00006018, 0.0F); // Linker thing
@@ -120,8 +120,8 @@ void func_ovl3_8017A6A0(GObj *article_gobj) // Identical to Green Shell function
 
 void func_ovl3_8017A734(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->mobj->unk_image_0x94 = 0;
-    JObjGetStruct(article_gobj)->unk_jobj_0x70 = 0;
+    DObjGetStruct(article_gobj)->mobj->unk_image_0x94 = 0;
+    DObjGetStruct(article_gobj)->unk_dobj_0x70 = 0;
 }
 
 bool32 jtgt_ovl3_8017A74C(GObj *article_gobj)
@@ -260,7 +260,7 @@ bool32 jtgt_ovl3_8017A9D0(GObj *article_gobj)
 
 void jtgt_ovl3_8017AABC(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->rotate.y = 0.0F;
+    DObjGetStruct(article_gobj)->rotate.y = 0.0F;
 
     func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 2);
 }
@@ -327,7 +327,7 @@ void func_ovl3_8017AC84(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
     if (func_ovl2_800FC67C(ap->coll_data.ground_line_id) != FALSE)
@@ -526,7 +526,7 @@ GObj *jtgt_ovl3_8017B1D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        JObj *joint = JObjGetStruct(article_gobj);
+        DObj *joint = DObjGetStruct(article_gobj);
         Article_Struct *ap;
         Vec3f translate = joint->translate;
 
@@ -566,7 +566,7 @@ bool32 jtgt_ovl3_8017B2F8(GObj *article_gobj)
 bool32 jtgt_ovl3_8017B31C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *aj = JObjGetStruct(article_gobj), *fj = JObjGetStruct(ap->owner_gobj);
+    DObj *aj = DObjGetStruct(article_gobj), *fj = DObjGetStruct(ap->owner_gobj);
 
     ap->article_vars.shell.interact--;
 

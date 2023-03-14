@@ -7,17 +7,17 @@ extern ItemStatusDesc Item_Fireball_Desc;
 bool32 jtgt_ovl3_80168540(GObj *item_gobj) // Animation
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
-    JObj *joint;
+    DObj *joint;
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         return TRUE;
     }
 
     func_ovl3_80168088(ip, Item_Fireball_Attributes[ip->item_vars.fireball.index].gravity, Item_Fireball_Attributes[ip->item_vars.fireball.index].fall_speed_max);
 
-    joint = JObjGetStruct(item_gobj);
+    joint = DObjGetStruct(item_gobj);
 
     joint->rotate.x += Item_Fireball_Attributes[ip->item_vars.fireball.index].rotate_speed;
 
@@ -35,11 +35,11 @@ bool32 jtgt_ovl3_801685F0(GObj *item_gobj) // Collision
     {
         if (func_ovl0_800C7A84(&ip->phys_info.vel) < Item_Fireball_Attributes[ip->item_vars.fireball.index].collide_damage)
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
         func_ovl3_80167FA0(item_gobj);
-        func_ovl2_80102DEC(&JObjGetStruct(item_gobj)->translate);
+        func_ovl2_80102DEC(&DObjGetStruct(item_gobj)->translate);
     }
     return FALSE;
 }
@@ -47,7 +47,7 @@ bool32 jtgt_ovl3_801685F0(GObj *item_gobj) // Collision
 bool32 jtgt_ovl3_801686C0(GObj *item_gobj) // Hit target
 {
     func_800269C0(0U);
-    func_ovl2_80100480(&JObjGetStruct(item_gobj)->translate);
+    func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
 
     return TRUE;
 }
@@ -105,7 +105,7 @@ GObj *func_ovl3_801687A0(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create it
     ip->phys_info.vel.x = Item_Fireball_Attributes[index].vel_mul * cosf(vel) * fp->lr;
     ip->phys_info.vel.y = Item_Fireball_Attributes[index].vel_mul * __sinf(vel);
 
-    JObjGetStruct(item_gobj)->mobj->anim_frame = (f32)Item_Fireball_Attributes[index].frame_begin;
+    DObjGetStruct(item_gobj)->mobj->anim_frame = (f32)Item_Fireball_Attributes[index].frame_begin;
 
     func_ovl3_80167FA0(item_gobj);
     return item_gobj;

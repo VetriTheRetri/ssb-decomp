@@ -7,7 +7,7 @@
 void func_ovl3_80179120(GObj *effect_gobj) // Barrel/Crate smash GFX process
 {
     Effect_Struct *ep = EffectGetStruct(effect_gobj);
-    JObj *joint = JObjGetStruct(effect_gobj);
+    DObj *joint = DObjGetStruct(effect_gobj);
 
     ep->lifetime--;
 
@@ -26,9 +26,9 @@ void func_ovl3_80179120(GObj *effect_gobj) // Barrel/Crate smash GFX process
             joint->translate.y += joint->scale.y;
             joint->translate.z += joint->scale.z;
 
-            joint->rotate.x += joint->unk_jobj_0x74; // ??? Seems to be rotation step, but only in this case? Otherwise -FLOAT32_MAX?
-            joint->rotate.y += joint->unk_jobj_0x78;
-            joint->rotate.z += joint->unk_jobj_0x7C;
+            joint->rotate.x += joint->unk_dobj_0x74; // ??? Seems to be rotation step, but only in this case? Otherwise -FLOAT32_MAX?
+            joint->rotate.y += joint->unk_dobj_0x78;
+            joint->rotate.z += joint->unk_dobj_0x7C;
 
             joint = joint->unk_0x8;
         } 
@@ -44,7 +44,7 @@ void func_ovl3_801791F4(Vec3f *pos)
 {
     GObj *effect_gobj;
     Effect_Struct *ep = func_ovl2_800FD4B8();
-    JObj *joint;
+    DObj *joint;
     s32 i;
     void *temp_s4;
     u32 var = 0x80000000;
@@ -71,9 +71,9 @@ void func_ovl3_801791F4(Vec3f *pos)
                 joint->scale.y = (f32)((rand_f32() * 50.0F) + 10.0F);
                 joint->scale.z = (f32)((rand_f32() * 32.0F) + -16.0F);
 
-                joint->unk_jobj_0x74 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
-                joint->unk_jobj_0x78 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
-                joint->unk_jobj_0x7C = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
+                joint->unk_dobj_0x74 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
+                joint->unk_dobj_0x78 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
+                joint->unk_dobj_0x7C = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
             }
             ep->lifetime = ATCONTAINER_GFX_LIFETIME;
 
@@ -101,7 +101,7 @@ bool32 func_ovl3_80179424(GObj *article_gobj)
 
     func_800269C0(0x3BU);
 
-    func_ovl3_801791F4(&JObjGetStruct(article_gobj)->translate);
+    func_ovl3_801791F4(&DObjGetStruct(article_gobj)->translate);
 
     if (D_ovl3_8018D048.unk_0x10 != 0)
     {
@@ -139,7 +139,7 @@ bool32 func_ovl3_80179424(GObj *article_gobj)
                     pos1.x = spawn_pos[i].x;
                     pos1.y = spawn_pos[i].y;
 
-                    func_ovl3_8016EA78(article_gobj, index, &JObjGetStruct(article_gobj)->translate, &pos1, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(article_gobj, index, &DObjGetStruct(article_gobj)->translate, &pos1, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
                 }
             }
             else
@@ -162,7 +162,7 @@ bool32 func_ovl3_80179424(GObj *article_gobj)
                     pos2.x = spawn_pos[j].x;
                     pos2.y = spawn_pos[j].y;
 
-                    func_ovl3_8016EA78(article_gobj, index, &JObjGetStruct(article_gobj)->translate, &pos2, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(article_gobj, index, &DObjGetStruct(article_gobj)->translate, &pos2, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
                 }
                 D_ovl3_8018D048.unk_0x8++;
                 D_ovl3_8018D048.unk_0x10 = (u16)sp64;
@@ -225,7 +225,7 @@ void func_ovl3_80179748(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    JObjGetStruct(article_gobj)->rotate.z = atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32;
+    DObjGetStruct(article_gobj)->rotate.z = atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32;
 
     func_ovl3_80172E74(article_gobj);
     func_ovl3_80172EC8(article_gobj, Article_Box_Status, 0);
@@ -243,8 +243,8 @@ void func_ovl3_801797A4(GObj *article_gobj)
 
 void jtgt_ovl3_801797E8(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->next->rotate.z = 0.0F;
-    JObjGetStruct(article_gobj)->next->rotate.y = 0.0F;
+    DObjGetStruct(article_gobj)->next->rotate.z = 0.0F;
+    DObjGetStruct(article_gobj)->next->rotate.y = 0.0F;
 
     func_ovl3_80172EC8(article_gobj, Article_Box_Status, 2);
 }
@@ -264,7 +264,7 @@ bool32 jtgt_ovl3_8017982C(GObj *article_gobj)
 
 void jtgt_ovl3_8017987C(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
+    DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 
     func_ovl3_80172EC8(article_gobj, Article_Box_Status, 3);
 }
@@ -283,7 +283,7 @@ bool32 jtgt_ovl3_801798DC(GObj *article_gobj)
 
 void jtgt_ovl3_8017990C(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
+    DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 
     func_ovl3_80172EC8(article_gobj, Article_Box_Status, 4);
 }
@@ -313,7 +313,7 @@ GObj *jtgt_ovl3_801799A4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        JObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
+        DObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
 
         ap->is_damage_all = TRUE;
         ap->x2D3_flag_b5 = TRUE;
@@ -358,7 +358,7 @@ void func_ovl3_80179B08(GObj *article_gobj)
 {
     Effect_Unk *effect_unk;
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
 
@@ -376,7 +376,7 @@ void func_ovl3_80179B08(GObj *article_gobj)
     }
     func_ovl2_801008F4(1);
 
-    JObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(article_gobj)->unk_0x54 = 2;
 
     func_ovl3_80179AD4(article_gobj);
 }

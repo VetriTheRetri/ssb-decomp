@@ -86,7 +86,7 @@ void func_ovl3_801604D8(GObj *fighter_gobj)
             vec3f_normalize(&vec);
             vec3f_scale(&vec, 180.0F);
         }
-        vec3f_sub_from(&JObjGetStruct(fighter_gobj)->translate, &vec);
+        vec3f_sub_from(&DObjGetStruct(fighter_gobj)->translate, &vec);
     }
 }
 

@@ -15,11 +15,11 @@ void func_ovl3_80159F40(GObj *fighter_gobj)
     }
     else
     {
-        translate.x = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x + (-fp->lr * 900.0F);
-        translate.y = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y + 300.0F;
+        translate.x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x + (-fp->lr * 900.0F);
+        translate.y = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y + 300.0F;
         translate.z = 0.0F;
 
-        vec3f_sub(&vel, &translate, &JObjGetStruct(fighter_gobj)->translate);
+        vec3f_sub(&vel, &translate, &DObjGetStruct(fighter_gobj)->translate);
 
         magnitude = vec3f_mag(&vel);
 

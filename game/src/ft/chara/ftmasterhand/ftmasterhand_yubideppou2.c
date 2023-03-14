@@ -7,11 +7,11 @@ void func_ovl3_8015A600(GObj *fighter_gobj)
     Vec3f vel;
     f32 magnitude;
 
-    pos.x = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x + (-fp->lr * 3000.0F);
-    pos.y = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y;
+    pos.x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x + (-fp->lr * 3000.0F);
+    pos.y = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y;
     pos.z = 0.0F;
 
-    vec3f_sub(&vel, &pos, &JObjGetStruct(fighter_gobj)->translate);
+    vec3f_sub(&vel, &pos, &DObjGetStruct(fighter_gobj)->translate);
 
     magnitude = vec3f_mag(&vel);
 

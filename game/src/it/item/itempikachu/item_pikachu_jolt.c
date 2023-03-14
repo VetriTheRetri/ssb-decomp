@@ -11,7 +11,7 @@ bool32 jtgt_ovl3_80169390(GObj *item_gobj)
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         return TRUE;
     }
     else func_ovl3_80168088(ip, ITPIKACHUJOLT_GRAVITY, ITPIKACHUJOLT_T_VEL);
@@ -27,7 +27,7 @@ bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
 
     if (func_ovl3_80167B58(item_gobj) != FALSE)
     {
-        func_ovl3_8016A42C(item_gobj, &JObjGetStruct(item_gobj)->translate, 0);
+        func_ovl3_8016A42C(item_gobj, &DObjGetStruct(item_gobj)->translate, 0);
 
         return TRUE;
     }
@@ -36,18 +36,18 @@ bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
     {
         func_ovl2_800F4650(ip->coll_data.rwall_line_id, &pos);
 
-        if (pos.y < JObjGetStruct(item_gobj)->translate.y)
+        if (pos.y < DObjGetStruct(item_gobj)->translate.y)
         {
-            JObjGetStruct(item_gobj)->translate.y = pos.y;
+            DObjGetStruct(item_gobj)->translate.y = pos.y;
         }
 
         func_ovl2_800F4670(ip->coll_data.rwall_line_id, &pos);
 
-        if (JObjGetStruct(item_gobj)->translate.y < pos.y)
+        if (DObjGetStruct(item_gobj)->translate.y < pos.y)
         {
-            JObjGetStruct(item_gobj)->translate.y = pos.y;
+            DObjGetStruct(item_gobj)->translate.y = pos.y;
         }
-        func_ovl3_8016A42C(item_gobj, &JObjGetStruct(item_gobj)->translate, 3);
+        func_ovl3_8016A42C(item_gobj, &DObjGetStruct(item_gobj)->translate, 3);
 
         return TRUE;
     }
@@ -56,17 +56,17 @@ bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
     {
         func_ovl2_800F4690(ip->coll_data.lwall_line_id, &pos);
 
-        if (pos.y < JObjGetStruct(item_gobj)->translate.y)
+        if (pos.y < DObjGetStruct(item_gobj)->translate.y)
         {
-            JObjGetStruct(item_gobj)->translate.y = pos.y;
+            DObjGetStruct(item_gobj)->translate.y = pos.y;
         }
         func_ovl2_800F46B0(ip->coll_data.lwall_line_id, &pos);
 
-        if (JObjGetStruct(item_gobj)->translate.y < pos.y)
+        if (DObjGetStruct(item_gobj)->translate.y < pos.y)
         {
-            JObjGetStruct(item_gobj)->translate.y = pos.y;
+            DObjGetStruct(item_gobj)->translate.y = pos.y;
         }
-        func_ovl3_8016A42C(item_gobj, &JObjGetStruct(item_gobj)->translate, 1);
+        func_ovl3_8016A42C(item_gobj, &DObjGetStruct(item_gobj)->translate, 1);
 
         return TRUE;
     }
@@ -77,7 +77,7 @@ bool32 jtgt_ovl3_8016953C(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
 
     return TRUE;
 }
@@ -139,17 +139,17 @@ bool32 jtgt_ovl3_801696A0(GObj *item_gobj)
 
     if (item_gobj->anim_frame == ITPIKACHUJOLT_ANIM_PUSH_FRAME)
     {
-        func_ovl2_80101C34(&JObjGetStruct(item_gobj)->translate, JObjGetStruct(item_gobj)->rotate.z);
+        func_ovl2_80101C34(&DObjGetStruct(item_gobj)->translate, DObjGetStruct(item_gobj)->rotate.z);
         func_ovl3_80169654(item_gobj);
     }
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         return TRUE;
     }
 
-    ip->phys_info.vel.x = cosf(JObjGetStruct(item_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
-    ip->phys_info.vel.y = __sinf(JObjGetStruct(item_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
+    ip->phys_info.vel.x = cosf(DObjGetStruct(item_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
+    ip->phys_info.vel.y = __sinf(DObjGetStruct(item_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
 
     switch (ip->item_vars.thunder_jolt.coll_type)
     {
@@ -199,11 +199,11 @@ s32 func_ovl3_8016981C(GObj *item_gobj)
                     ip->coll_data.rwall_line_id = line_id;
                     ip->lr = WALL_UP;
 
-                    JObjGetStruct(item_gobj)->translate = pos;
+                    DObjGetStruct(item_gobj)->translate = pos;
 
                     func_ovl3_80169654(item_gobj);
 
-                    JObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
+                    DObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
 
                     return 1;
                 }
@@ -219,11 +219,11 @@ s32 func_ovl3_8016981C(GObj *item_gobj)
                 ip->coll_data.lwall_line_id = line_id;
                 ip->lr = WALL_UP;
 
-                JObjGetStruct(item_gobj)->translate = pos;
+                DObjGetStruct(item_gobj)->translate = pos;
 
                 func_ovl3_80169654(item_gobj);
 
-                JObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
+                DObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
 
                 return 1;
             }
@@ -243,11 +243,11 @@ s32 func_ovl3_8016981C(GObj *item_gobj)
                     ip->coll_data.ground_line_id = line_id;
                     ip->lr = LEFT;
 
-                    JObjGetStruct(item_gobj)->translate = pos;
+                    DObjGetStruct(item_gobj)->translate = pos;
 
                     func_ovl3_80169654(item_gobj);
 
-                    JObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
+                    DObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
                     return 1;
                 }
                 return 2;
@@ -272,11 +272,11 @@ s32 func_ovl3_8016981C(GObj *item_gobj)
                     ip->coll_data.ground_line_id = line_id;
                     ip->lr = RIGHT;
 
-                    JObjGetStruct(item_gobj)->translate = pos;
+                    DObjGetStruct(item_gobj)->translate = pos;
 
                     func_ovl3_80169654(item_gobj);
 
-                    JObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
+                    DObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
                     return 1;
                 }
                 return 2;
@@ -290,7 +290,7 @@ s32 func_ovl3_8016981C(GObj *item_gobj)
 
     default: break;
     }
-    JObjGetStruct(item_gobj)->rotate.z = atan2f(-ip->item_vars.thunder_jolt.rotate.x, ip->item_vars.thunder_jolt.rotate.y);
+    DObjGetStruct(item_gobj)->rotate.z = atan2f(-ip->item_vars.thunder_jolt.rotate.x, ip->item_vars.thunder_jolt.rotate.y);
 
     return 0;
 }
@@ -305,23 +305,23 @@ bool32 func_ovl3_80169BF0(GObj *item_gobj)
     switch (ip->item_vars.thunder_jolt.coll_type)
     {
     case 0:
-        func_ovl2_800F3DD8(ip->coll_data.ground_line_id, &JObjGetStruct(item_gobj)->translate, NULL, NULL, &rotate);
+        func_ovl2_800F3DD8(ip->coll_data.ground_line_id, &DObjGetStruct(item_gobj)->translate, NULL, NULL, &rotate);
         break;
     case 3:
-        func_ovl2_800F4194(ip->coll_data.rwall_line_id, &JObjGetStruct(item_gobj)->translate, NULL, NULL, &rotate);
+        func_ovl2_800F4194(ip->coll_data.rwall_line_id, &DObjGetStruct(item_gobj)->translate, NULL, NULL, &rotate);
         break;
     case 2:
-        func_ovl2_800F41C0(ip->coll_data.lwall_line_id, &JObjGetStruct(item_gobj)->translate, NULL, NULL, &rotate);
+        func_ovl2_800F41C0(ip->coll_data.lwall_line_id, &DObjGetStruct(item_gobj)->translate, NULL, NULL, &rotate);
         break;
     }
 
     if (ITPIKACHUJOLT_ROTATE_ANGLE_MAX < vec3f_angle_diff(&rotate, &ip->item_vars.thunder_jolt.rotate))
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
         return TRUE;
     }
-    else JObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
+    else DObjGetStruct(item_gobj)->rotate.z = atan2f(-rotate.x, rotate.y);
 
     return FALSE;
 }
@@ -340,17 +340,17 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
         if (func_ovl2_800FC67C(ip->coll_data.ground_line_id) == FALSE)
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
 
-        if (func_ovl2_800F3DD8(ip->coll_data.ground_line_id, &JObjGetStruct(item_gobj)->translate, &pos, NULL, &ip->item_vars.thunder_jolt.rotate) != FALSE)
+        if (func_ovl2_800F3DD8(ip->coll_data.ground_line_id, &DObjGetStruct(item_gobj)->translate, &pos, NULL, &ip->item_vars.thunder_jolt.rotate) != FALSE)
         {
-            JObjGetStruct(item_gobj)->translate.y += pos.x;
+            DObjGetStruct(item_gobj)->translate.y += pos.x;
 
             if (func_ovl3_8016981C(item_gobj) == 2)
             {
-                func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+                func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
                 return TRUE;
             }
@@ -373,7 +373,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
         {
             if (func_ovl3_8016981C(item_gobj) != 1)
             {
-                func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+                func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
                 return TRUE;
             }
@@ -390,7 +390,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
                 ip->item_vars.thunder_jolt.coll_type = coll_type;
                 ip->lr = WALL_UP;
 
-                func_ovl2_800F4670(line_id, &JObjGetStruct(item_gobj)->translate);
+                func_ovl2_800F4670(line_id, &DObjGetStruct(item_gobj)->translate);
 
                 return func_ovl3_80169BF0(item_gobj);
             }
@@ -400,7 +400,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
                 ip->item_vars.thunder_jolt.coll_type = coll_type;
                 ip->lr = WALL_DOWN;
 
-                func_ovl2_800F4690(line_id, &JObjGetStruct(item_gobj)->translate);
+                func_ovl2_800F4690(line_id, &DObjGetStruct(item_gobj)->translate);
 
                 return func_ovl3_80169BF0(item_gobj);
             }
@@ -411,7 +411,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
             ip->item_vars.thunder_jolt.coll_type = coll_type;
             ip->lr = WALL_DOWN;
 
-            func_ovl2_800F4650(line_id, &JObjGetStruct(item_gobj)->translate);
+            func_ovl2_800F4650(line_id, &DObjGetStruct(item_gobj)->translate);
 
             return func_ovl3_80169BF0(item_gobj);
         }
@@ -421,14 +421,14 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
             ip->item_vars.thunder_jolt.coll_type = coll_type;
             ip->lr = WALL_UP;
 
-            func_ovl2_800F46B0(line_id, &JObjGetStruct(item_gobj)->translate);
+            func_ovl2_800F46B0(line_id, &DObjGetStruct(item_gobj)->translate);
 
             return func_ovl3_80169BF0(item_gobj);
         }
 
         if (func_ovl3_8016981C(item_gobj) != 1)
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
         return FALSE;
@@ -439,17 +439,17 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
         if (func_ovl2_800FC67C(ip->coll_data.rwall_line_id) == 0)
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0f);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0f);
             return TRUE;
         }
 
-        if (func_ovl2_800F4194(ip->coll_data.rwall_line_id, &JObjGetStruct(item_gobj)->translate, &pos, NULL, &ip->item_vars.thunder_jolt.rotate) != FALSE)
+        if (func_ovl2_800F4194(ip->coll_data.rwall_line_id, &DObjGetStruct(item_gobj)->translate, &pos, NULL, &ip->item_vars.thunder_jolt.rotate) != FALSE)
         {
-            JObjGetStruct(item_gobj)->translate.x += pos.x;
+            DObjGetStruct(item_gobj)->translate.x += pos.x;
 
             if (func_ovl3_8016981C(item_gobj) == 2)
             {
-                func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+                func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
                 return TRUE;
             }
             return FALSE;
@@ -466,7 +466,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
         {
             if (func_ovl3_8016981C(item_gobj) != 1)
             {
-                func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+                func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
                 return TRUE;
             }
             return FALSE;
@@ -482,7 +482,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
                 ip->item_vars.thunder_jolt.coll_type = coll_type;
                 ip->lr = RIGHT;
 
-                func_ovl2_800F4428(line_id, &JObjGetStruct(item_gobj)->translate);
+                func_ovl2_800F4428(line_id, &DObjGetStruct(item_gobj)->translate);
 
                 return func_ovl3_80169BF0(item_gobj);
             }
@@ -493,14 +493,14 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
             ip->item_vars.thunder_jolt.coll_type = coll_type;
             ip->lr = LEFT;
 
-            func_ovl2_800F4408(line_id, &JObjGetStruct(item_gobj)->translate);
+            func_ovl2_800F4408(line_id, &DObjGetStruct(item_gobj)->translate);
 
             return func_ovl3_80169BF0(item_gobj);
         }
 
         if (func_ovl3_8016981C(item_gobj) != 1)
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
         return FALSE;
@@ -511,17 +511,17 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
         if (func_ovl2_800FC67C(ip->coll_data.lwall_line_id) == FALSE)
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
 
-        if (func_ovl2_800F41C0(ip->coll_data.lwall_line_id, &JObjGetStruct(item_gobj)->translate, &pos, NULL, &ip->item_vars.thunder_jolt.rotate) != FALSE)
+        if (func_ovl2_800F41C0(ip->coll_data.lwall_line_id, &DObjGetStruct(item_gobj)->translate, &pos, NULL, &ip->item_vars.thunder_jolt.rotate) != FALSE)
         {
-            JObjGetStruct(item_gobj)->translate.x += pos.x;
+            DObjGetStruct(item_gobj)->translate.x += pos.x;
 
             if (func_ovl3_8016981C(item_gobj) == 2)
             {
-                func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0f);
+                func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0f);
                 return TRUE;
             }
             return FALSE;
@@ -538,7 +538,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
         {
             if (func_ovl3_8016981C(item_gobj) != 1)
             {
-                func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+                func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
                 return TRUE;
             }
             return FALSE;
@@ -554,7 +554,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
                 ip->item_vars.thunder_jolt.coll_type = coll_type;
                 ip->lr = LEFT;
 
-                func_ovl2_800F4408(line_id, &JObjGetStruct(item_gobj)->translate);
+                func_ovl2_800F4408(line_id, &DObjGetStruct(item_gobj)->translate);
 
                 return func_ovl3_80169BF0(item_gobj);
             }
@@ -565,14 +565,14 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
             ip->item_vars.thunder_jolt.coll_type = coll_type;
             ip->lr = RIGHT;
 
-            func_ovl2_800F4428(line_id, &JObjGetStruct(item_gobj)->translate);
+            func_ovl2_800F4428(line_id, &DObjGetStruct(item_gobj)->translate);
 
             return func_ovl3_80169BF0(item_gobj);
         }
 
         if (func_ovl3_8016981C(item_gobj) != 1)
         {
-            func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
         return FALSE;
@@ -586,7 +586,7 @@ bool32 jtgt_ovl3_8016A374(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
 
     return TRUE;
 }
@@ -600,7 +600,7 @@ bool32 jtgt_ovl3_8016A3A4(GObj *item_gobj)
 
     func_ovl3_801680EC(ip, fp);
 
-    JObjGetStruct(item_gobj)->rotate.y = (ip->phys_info.vel.x >= 0.0F) ? PI32 : 0;
+    DObjGetStruct(item_gobj)->rotate.y = (ip->phys_info.vel.x >= 0.0F) ? PI32 : 0;
 
     func_ovl3_80167F68(item_gobj);
 
@@ -639,18 +639,18 @@ GObj* func_ovl3_8016A42C(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
     case 0:
         new_ip->lr = (prev_ip->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
 
-        JObjGetStruct(new_gobj)->rotate.y = (new_ip->lr >= 0.0F) ? PI32 : 0;
+        DObjGetStruct(new_gobj)->rotate.y = (new_ip->lr >= 0.0F) ? PI32 : 0;
         break;
 
     case 3:
         if (THREEQUART_PI32 < atan2f(new_ip->item_vars.thunder_jolt.rotate.y, new_ip->item_vars.thunder_jolt.rotate.x))
         {
-            JObjGetStruct(new_gobj)->rotate.y = 0;
+            DObjGetStruct(new_gobj)->rotate.y = 0;
             new_ip->lr = WALL_DOWN;
         }
         else
         {
-            JObjGetStruct(new_gobj)->rotate.y = PI32;
+            DObjGetStruct(new_gobj)->rotate.y = PI32;
             new_ip->lr = WALL_UP;
         }
         break;
@@ -658,17 +658,17 @@ GObj* func_ovl3_8016A42C(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
     case 2:
         if (QUART_PI32 < atan2f(new_ip->item_vars.thunder_jolt.rotate.y, new_ip->item_vars.thunder_jolt.rotate.x))
         {
-            JObjGetStruct(new_gobj)->rotate.y = 0;
+            DObjGetStruct(new_gobj)->rotate.y = 0;
             new_ip->lr = WALL_UP;
         }
         else
         {
-            JObjGetStruct(new_gobj)->rotate.y = PI32;
+            DObjGetStruct(new_gobj)->rotate.y = PI32;
             new_ip->lr = WALL_DOWN;
         }
         break;
     }
-    func_ovl2_80101C34(&JObjGetStruct(new_gobj)->translate, JObjGetStruct(new_gobj)->rotate.z);
+    func_ovl2_80101C34(&DObjGetStruct(new_gobj)->translate, DObjGetStruct(new_gobj)->rotate.z);
     func_ovl3_80167F08(new_ip, 0xE6);
 
     return new_gobj;

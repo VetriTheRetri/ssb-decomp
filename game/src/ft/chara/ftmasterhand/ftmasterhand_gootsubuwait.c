@@ -14,7 +14,7 @@ void func_ovl3_80159BD0(GObj *fighter_gobj)
     }
     else
     {
-        f32 dist_x = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - JObjGetStruct(fighter_gobj)->translate.x;
+        f32 dist_x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x;
 
         if (ABSF(dist_x) > 35.0F)
         {
@@ -27,7 +27,7 @@ void func_ovl3_80159BD0(GObj *fighter_gobj)
 void func_ovl3_80159CA4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    Vec3f *translate = &JObjGetStruct(fighter_gobj)->translate;
+    Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
     f32 var;
 
     if (fp->status_vars.masterhand.gootsubu.pos_x2 < translate->x)

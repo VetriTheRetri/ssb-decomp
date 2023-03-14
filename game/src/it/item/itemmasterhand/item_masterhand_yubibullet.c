@@ -30,7 +30,7 @@ void func_ovl3_8016DC2C(GObj *item_gobj)
 
     ip->item_hit[0].size = ITYUBIBULLET_EXPLODE_SIZE;
 
-    JObjGetStruct(item_gobj)->display_list = NULL;
+    DObjGetStruct(item_gobj)->display_list = NULL;
 
     ip->cb_anim = func_ovl3_8016DC00;
     ip->cb_coll = NULL;
@@ -47,7 +47,7 @@ bool32 jtgt_ovl3_8016DCB0(GObj *item_gobj)
     {
         func_ovl3_8016DC2C(item_gobj);
         func_800269C0(0U);
-        func_ovl2_801005C8(&JObjGetStruct(item_gobj)->translate);
+        func_ovl2_801005C8(&DObjGetStruct(item_gobj)->translate);
 
         return TRUE;
     }

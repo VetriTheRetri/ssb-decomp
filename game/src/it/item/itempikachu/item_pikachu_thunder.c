@@ -21,8 +21,8 @@ void func_ovl3_8016A680(GObj *item_gobj, s32 arg1)
     s32 unused;
     Vec3f pos;
 
-    pos.x = JObjGetStruct(item_gobj)->translate.x;
-    pos.y = JObjGetStruct(item_gobj)->translate.y;
+    pos.x = DObjGetStruct(item_gobj)->translate.x;
+    pos.y = DObjGetStruct(item_gobj)->translate.y;
     pos.z = 0.0F;
 
     if (arg1 == 3)
@@ -48,7 +48,7 @@ bool32 jtgt_ovl3_8016A700(GObj *item_gobj)
     }
     else if (func_ovl3_80167FE8(ip) != 0)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         func_ovl3_8016A640(item_gobj, TRUE);
         func_ovl3_8016A680(item_gobj, 3);
 
@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_8016A794(GObj *item_gobj)
     {
         func_ovl3_8016A640(item_gobj, TRUE);
         func_ovl2_801008F4(1);
-        func_ovl2_80100480(&JObjGetStruct(item_gobj)->translate);
+        func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
 
         return TRUE;
     }
@@ -105,11 +105,11 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->group_id = func_ovl3_801655A0();
 
-    JObjGetStruct(item_gobj)->mobj->index = 3;
+    DObjGetStruct(item_gobj)->mobj->index = 3;
 
-    JObjGetStruct(item_gobj)->scale.x = 0.5F;
-    JObjGetStruct(item_gobj)->scale.y = 0.5F;
-    JObjGetStruct(item_gobj)->scale.z = 0.5F;
+    DObjGetStruct(item_gobj)->scale.x = 0.5F;
+    DObjGetStruct(item_gobj)->scale.y = 0.5F;
+    DObjGetStruct(item_gobj)->scale.z = 0.5F;
 
     return item_gobj;
 }
@@ -128,7 +128,7 @@ bool32 func_ovl3_8016A8D8(GObj *item_gobj)
 
         return TRUE;
     }
-    else JObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPIKACHUTHUNDER_TEXTURE_COUNT - 1);
+    else DObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPIKACHUTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -137,7 +137,7 @@ bool32 jtgt_ovl3_8016A950(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
 
     return FALSE;
 }
@@ -166,9 +166,9 @@ GObj* func_ovl3_8016A980(GObj *item_gobj, Vec3f *pos)
         chain_ip->item_hit[0].hit_targets[i] = spawn_ip->item_hit[0].hit_targets[i];
     }
 
-    JObjGetStruct(chain_gobj)->scale.x = 0.5F;
-    JObjGetStruct(chain_gobj)->scale.y = 0.5F;
-    JObjGetStruct(chain_gobj)->scale.z = 0.5F;
+    DObjGetStruct(chain_gobj)->scale.x = 0.5F;
+    DObjGetStruct(chain_gobj)->scale.y = 0.5F;
+    DObjGetStruct(chain_gobj)->scale.z = 0.5F;
 
     return chain_gobj;
 }

@@ -4,9 +4,9 @@
 
 void func_ovl3_80175140(GObj *article_gobj, f32 scale)
 {
-    JObjGetStruct(article_gobj)->scale.x = scale;
-    JObjGetStruct(article_gobj)->scale.y = scale;
-    JObjGetStruct(article_gobj)->scale.z = scale;
+    DObjGetStruct(article_gobj)->scale.x = scale;
+    DObjGetStruct(article_gobj)->scale.y = scale;
+    DObjGetStruct(article_gobj)->scale.z = scale;
 }
 
 bool32 jtgt_ovl3_80175160(GObj *article_gobj)
@@ -53,7 +53,7 @@ void func_ovl3_80175228(GObj *article_gobj)
 
 void jtgt_ovl3_8017526C(GObj *article_gobj)
 {
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     func_80008CC0(joint, 0x20U, 0U);
 
@@ -92,7 +92,7 @@ void jtgt_ovl3_80175350(GObj *article_gobj)
 {
     func_ovl3_80172EC8(article_gobj, Article_Harisen_Status, 3);
 
-    JObjGetStruct(article_gobj)->next->rotate.y = -HALF_PI32;
+    DObjGetStruct(article_gobj)->next->rotate.y = -HALF_PI32;
 }
 
 bool32 jtgt_ovl3_80175394(GObj *article_gobj)
@@ -104,7 +104,7 @@ void jtgt_ovl3_801753C4(GObj *article_gobj)
 {
     func_ovl3_80172EC8(article_gobj, Article_Harisen_Status, 4);
 
-    JObjGetStruct(article_gobj)->next->rotate.y = -HALF_PI32;
+    DObjGetStruct(article_gobj)->next->rotate.y = -HALF_PI32;
 }
 
 extern u8 D_NF_00002198;
@@ -128,7 +128,7 @@ GObj* jtgt_ovl3_80175460(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        JObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
+        DObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
 
         ap->x2D3_flag_b5 = TRUE;
 

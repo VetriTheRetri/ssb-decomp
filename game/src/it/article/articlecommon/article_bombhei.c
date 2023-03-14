@@ -3,7 +3,7 @@
 void func_ovl3_80177060(GObj *article_gobj, u8 arg1)
 {
     s32 unused;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Effect_Unk *ep;
 
@@ -19,7 +19,7 @@ void func_ovl3_80177060(GObj *article_gobj, u8 arg1)
     }
     func_ovl2_801008F4(1);
 
-    JObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(article_gobj)->unk_0x54 = 2;
 
     ap->article_hit[0].hit_sfx = 1;
 
@@ -35,7 +35,7 @@ extern u8 BombHei_Motion_WalkLeft;
 void func_ovl3_80177104(GObj *article_gobj, u8 lr)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     void *dll = (void*)((uintptr_t)((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft); // Linker thing
     void *dlr = (void*)((uintptr_t)((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkRight); // Linker thing
 
@@ -60,7 +60,7 @@ void func_ovl3_80177180(GObj *article_gobj, u8 is_explode)
     s32 unused[4];
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     if ((ap->coll_data.unk_0x56 & MPCOLL_MASK_GROUND) || (is_explode != FALSE))
     {
@@ -103,14 +103,14 @@ s32 func_ovl3_80177260(GObj *article_gobj)
     s32 lr;
     s32 ret_lr = 0;
     Vec3f dist;
-    JObj *aj = JObjGetStruct(article_gobj);
+    DObj *aj = DObjGetStruct(article_gobj);
 
     if (fighter_gobj != NULL)
     {
         translate = &aj->translate;
         do
         {
-            JObj *fj = JObjGetStruct(fighter_gobj);
+            DObj *fj = DObjGetStruct(fighter_gobj);
 
             vec3f_sub(&dist, translate, &fj->translate);
 
@@ -128,7 +128,7 @@ s32 func_ovl3_80177260(GObj *article_gobj)
 bool32 jtgt_ovl3_80177304(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     void *dll = ((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft; // Linker thing
     s32 lr;
 
@@ -240,7 +240,7 @@ void func_ovl3_801775E8(GObj *article_gobj)
 void func_ovl3_8017761C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.bombhei.smoke_delay == 0)
     {
@@ -259,7 +259,7 @@ bool32 jtgt_ovl3_801776A0(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
     func_ovl3_8017761C(article_gobj);
@@ -321,7 +321,7 @@ void func_ovl3_80177848(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     void *texture;
     s32 unused;
     Vec3f pos;
@@ -499,7 +499,7 @@ bool32 jtgt_ovl3_80177D00(GObj *article_gobj)
 void func_ovl3_80177D28(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     ap->at_multi = 0;
 
@@ -518,13 +518,13 @@ void func_ovl3_80177D60(GObj *article_gobj)
 GObj *jtgt_ovl3_80177D9C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_BombHei_Data, pos, vel, flags);
-    JObj *joint;
+    DObj *joint;
     Article_Struct *ap;
     Vec3f translate;
 
     if (article_gobj != NULL)
     {
-        joint = JObjGetStruct(article_gobj);
+        joint = DObjGetStruct(article_gobj);
 
         translate = joint->translate;
 

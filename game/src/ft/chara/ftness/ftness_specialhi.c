@@ -46,10 +46,10 @@ void func_ovl3_80153C88(GObj *fighter_gobj)
 
 bool32 func_ovl3_80153CFC(GObj *fighter_gobj)
 {
-    f32 fighter_jobj_x;
-    f32 fighter_jobj_y;
-    f32 item_jobj_x;
-    f32 item_jobj_y;
+    f32 fighter_dobj_x;
+    f32 fighter_dobj_y;
+    f32 item_dobj_x;
+    f32 item_dobj_y;
     f32 collide_x;
     f32 collide_y;
     GObj *pk_thunder_gobj;
@@ -64,23 +64,23 @@ bool32 func_ovl3_80153CFC(GObj *fighter_gobj)
 
     ip = ItemGetStruct(pk_thunder_gobj);
 
-    fighter_jobj_x = JObjGetStruct(fighter_gobj)->translate.x;
-    item_jobj_x = JObjGetStruct(pk_thunder_gobj)->translate.x;
+    fighter_dobj_x = DObjGetStruct(fighter_gobj)->translate.x;
+    item_dobj_x = DObjGetStruct(pk_thunder_gobj)->translate.x;
 
-    collide_x = (fighter_jobj_x < item_jobj_x) ? -(fighter_jobj_x - item_jobj_x) : (fighter_jobj_x - item_jobj_x);
+    collide_x = (fighter_dobj_x < item_dobj_x) ? -(fighter_dobj_x - item_dobj_x) : (fighter_dobj_x - item_dobj_x);
 
     if (collide_x < FTNESS_PK_THUNDER_COLLIDE_X)
     {
-        fighter_jobj_y = JObjGetStruct(fighter_gobj)->translate.y + 150.0F;
-        item_jobj_y = JObjGetStruct(pk_thunder_gobj)->translate.y;
+        fighter_dobj_y = DObjGetStruct(fighter_gobj)->translate.y + 150.0F;
+        item_dobj_y = DObjGetStruct(pk_thunder_gobj)->translate.y;
 
-        collide_y = (fighter_jobj_y < item_jobj_y) ? -(fighter_jobj_y - item_jobj_y) : (fighter_jobj_y - item_jobj_y);
+        collide_y = (fighter_dobj_y < item_dobj_y) ? -(fighter_dobj_y - item_dobj_y) : (fighter_dobj_y - item_dobj_y);
 
         if (collide_y < FTNESS_PK_THUNDER_COLLIDE_Y)
         {
             ip->item_vars.pk_thunder.pk_thunder_state = 2;
 
-            fp->status_vars.ness.specialhi.pk_thunder_vel = JObjGetStruct(pk_thunder_gobj)->translate;
+            fp->status_vars.ness.specialhi.pk_thunder_vel = DObjGetStruct(pk_thunder_gobj)->translate;
 
             return TRUE;
         }
@@ -555,8 +555,8 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
         return;
     }
 
-    pos.x = JObjGetStruct(fighter_gobj)->translate.x;
-    pos.y = JObjGetStruct(fighter_gobj)->translate.y;
+    pos.x = DObjGetStruct(fighter_gobj)->translate.x;
+    pos.y = DObjGetStruct(fighter_gobj)->translate.y;
     pos.z = 0.0F;
 
     if (fp->coll_data.unk_0x56 & MPCOLL_MASK_CEIL)
@@ -654,8 +654,8 @@ void func_ovl3_80154DFC(GObj *fighter_gobj)
 
     if ((fp->coll_data.clip_flag & 0x4000)) goto block_2func;
     {
-        vel.x = JObjGetStruct(fighter_gobj)->translate.x - fp->status_vars.ness.specialhi.pk_thunder_vel.x;
-        vel.y = (JObjGetStruct(fighter_gobj)->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pk_thunder_vel.y;
+        vel.x = DObjGetStruct(fighter_gobj)->translate.x - fp->status_vars.ness.specialhi.pk_thunder_vel.x;
+        vel.y = (DObjGetStruct(fighter_gobj)->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pk_thunder_vel.y;
         vel.z = 0.0F;
 
         angle_diff = vec3f_angle_diff(&fp->coll_data.ground_angle, &vel);
@@ -692,9 +692,9 @@ void func_ovl3_80154DFC(GObj *fighter_gobj)
 void func_ovl3_80154F54(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    JObj *jobj = JObjGetStruct(fighter_gobj);
-    f32 vel_x = jobj->translate.x - fp->status_vars.ness.specialhi.pk_thunder_vel.x;
-    f32 vel_y = (jobj->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pk_thunder_vel.y;
+    DObj *dobj = DObjGetStruct(fighter_gobj);
+    f32 vel_x = dobj->translate.x - fp->status_vars.ness.specialhi.pk_thunder_vel.x;
+    f32 vel_y = (dobj->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pk_thunder_vel.y;
 
     fp->lr = (vel_x >= 0.0F) ? RIGHT : LEFT;
 

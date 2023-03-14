@@ -55,13 +55,13 @@ extern ArticleSpawnData Article_Tomato_Data;
 GObj* jtgt_ovl3_80174624(GObj *article_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *spawn_gobj = func_ovl3_8016E174(article_gobj, &Article_Tomato_Data, pos, vel, flags);
-    JObj *joint;
+    DObj *joint;
     Vec3f translate;
     Article_Struct *ap;
 
     if (spawn_gobj != NULL)
     {
-        joint = JObjGetStruct(spawn_gobj);
+        joint = DObjGetStruct(spawn_gobj);
         ap = ArticleGetStruct(spawn_gobj);
         translate = joint->translate;
 

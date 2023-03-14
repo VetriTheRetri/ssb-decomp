@@ -21,7 +21,7 @@ void func_ovl3_80159B3C(GObj *fighter_gobj)
 
     if (3000.0F <= -fp->coll_data.unk_0x78)
     {
-        JObj *joint = JObjGetStruct(fighter_gobj);
+        DObj *joint = DObjGetStruct(fighter_gobj);
 
         joint->translate.y += (fp->coll_data.unk_0x78 + 3000.0F);
 

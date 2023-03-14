@@ -124,7 +124,7 @@ bool32 jtgt_ovl3_80175E08(GObj *item_gobj)
 {
     if (func_ovl3_80167C04(item_gobj) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
         return TRUE;
     }
@@ -134,7 +134,7 @@ bool32 jtgt_ovl3_80175E08(GObj *item_gobj)
 bool32 jtgt_ovl3_80175E4C(GObj *item_gobj)
 {
     func_800269C0(0U);
-    func_ovl2_80100480(&JObjGetStruct(item_gobj)->translate);
+    func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
 
     return FALSE;
 }
@@ -151,7 +151,7 @@ bool32 jtgt_ovl3_80175E84(GObj *item_gobj)
 
     func_ovl3_801680EC(ip, fp);
 
-    translate = &JObjGetStruct(item_gobj)->translate;
+    translate = &DObjGetStruct(item_gobj)->translate;
 
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);

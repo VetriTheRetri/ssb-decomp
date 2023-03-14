@@ -38,7 +38,7 @@ bool32 func_ovl3_8016CCA0(GObj *item_gobj)
         {
             ip->item_vars.boomerang.adjust_angle_delay = 0;
 
-            func_ovl2_800EB924(D_ovl2_80131460->unk_0x74, &D_ovl2_80131470, &JObjGetStruct(item_gobj)->translate, &sp30, &sp2C);
+            func_ovl2_800EB924(D_ovl2_80131460->unk_0x74, &D_ovl2_80131470, &DObjGetStruct(item_gobj)->translate, &sp30, &sp2C);
 
             temp_f0 = (D_ovl2_801314B0.unk_0x38.x / 2) + 40.0F;
             temp_f2 = (D_ovl2_801314B0.unk_0x38.y / 2) + 40.0F;
@@ -72,7 +72,7 @@ void func_ovl3_8016CDC8(GObj *item_gobj, bool32 arg1)
 
     ip->item_vars.boomerang.homing_angle = (arg1 == TRUE) ? ITBOOMERANG_HOMING_ANGLE_MAX : ITBOOMERANG_HOMING_ANGLE_MIN;
 
-    JObjGetStruct(item_gobj)->next->next->unk_0x54 = 1;
+    DObjGetStruct(item_gobj)->next->next->unk_0x54 = 1;
 
     func_ovl3_80167F08(ip, 0xCEU);
 }
@@ -140,8 +140,8 @@ f32 func_ovl3_8016D0E4(GObj *item_gobj)
 
     if (ip->item_vars.boomerang.spawn_gobj != NULL)
     {
-        temp_f14 = JObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.x - JObjGetStruct(item_gobj)->translate.x;
-        temp_f0 = (JObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.y - JObjGetStruct(item_gobj)->translate.y) + 290.0F;
+        temp_f14 = DObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.x - DObjGetStruct(item_gobj)->translate.x;
+        temp_f0 = (DObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.y - DObjGetStruct(item_gobj)->translate.y) + 290.0F;
 
         var_f16 = sqrtf(SQUARE(temp_f14) + SQUARE(temp_f0));
 
@@ -331,7 +331,7 @@ bool32 jtgt_ovl3_8016D5EC(GObj *item_gobj)
 
         if (coll_flags)
         {
-            func_ovl2_800FECBC(&JObjGetStruct(item_gobj)->translate);
+            func_ovl2_800FECBC(&DObjGetStruct(item_gobj)->translate);
 
             if (coll_flags & MPCOLL_MASK_RWALL)
             {
@@ -421,8 +421,8 @@ bool32 jtgt_ovl3_8016D868(GObj *item_gobj)
         ip->lifetime = ITBOOMERANG_LIFETIME_REFLECT;
     }
 
-    dist_x = JObjGetStruct(item_gobj)->translate.x - JObjGetStruct(ip->owner_gobj)->translate.x;
-    dist_y = JObjGetStruct(item_gobj)->translate.y - (JObjGetStruct(ip->owner_gobj)->translate.y + 250.0F);
+    dist_x = DObjGetStruct(item_gobj)->translate.x - DObjGetStruct(ip->owner_gobj)->translate.x;
+    dist_y = DObjGetStruct(item_gobj)->translate.y - (DObjGetStruct(ip->owner_gobj)->translate.y + 250.0F);
 
     ip->item_vars.boomerang.unk_0x8 = atan2f(dist_y, dist_x);
 

@@ -17,9 +17,9 @@ void func_ovl3_8015E9E0(Fighter_Struct *fp)
     {
         func_ovl3_8015E9B0(fp, &pos);
 
-        JObjGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj)->translate = pos;
+        DObjGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj)->translate = pos;
 
-        JObjGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj)->scale = fp->joint[FTYOSHI_EGG_THROW_JOINT]->scale;
+        DObjGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj)->scale = fp->joint[FTYOSHI_EGG_THROW_JOINT]->scale;
     }
 }
 

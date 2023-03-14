@@ -151,7 +151,7 @@ bool32 func_ovl3_80167C38(GObj *item_gobj, u32 check_flags, f32 mod_vel, Vec3f *
     Item_Struct *ip = ItemGetStruct(item_gobj);
     Coll_Data *coll_data = &ip->coll_data;
     bool32 return_bool = FALSE;
-    Vec3f mod_pos, *translate = &JObjGetStruct(item_gobj)->translate;
+    Vec3f mod_pos, *translate = &DObjGetStruct(item_gobj)->translate;
     u16 coll_flags = (ip->coll_data.unk_0x54 ^ ip->coll_data.unk_0x56) & ip->coll_data.unk_0x56 & MPCOLL_MASK_ALL;
     u32 unused;
 

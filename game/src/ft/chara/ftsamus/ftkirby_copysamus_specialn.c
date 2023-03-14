@@ -36,7 +36,7 @@ void func_ovl3_80156EFC(Fighter_Struct *fp)
     {
         func_ovl3_80156EBC(fp, &pos);
 
-        JObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;
+        DObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;
     }
 }
 
@@ -83,7 +83,7 @@ void func_ovl3_8015704C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEE98(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_jobj_0x78, 2U);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
 
     fp->cb_take_damage = func_ovl3_80156E98;
 }
@@ -93,7 +93,7 @@ void func_ovl3_801570A8(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_jobj_0x78, 2U);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
     func_ovl2_800D8EB8(fp);
 
     fp->cb_take_damage = func_ovl3_80156E98;
@@ -197,7 +197,7 @@ void func_ovl3_80157314(GObj *fighter_gobj)
             ip = ItemGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
             func_ovl2_800E81E4(fp);
 
-            JObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;
+            DObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;
 
             ip->item_vars.charge_shot.is_full_charge = TRUE;
             ip->item_vars.charge_shot.charge_size = (s32)fp->fighter_vars.kirby.copysamus_charge_level;

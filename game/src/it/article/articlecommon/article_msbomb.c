@@ -7,7 +7,7 @@
 bool32 jtgt_ovl3_80176450(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMSBOMB_GRAVITY, ATMSBOMB_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -55,7 +55,7 @@ void jtgt_ovl3_8017657C(GObj *article_gobj)
 bool32 jtgt_ovl3_801765A4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMSBOMB_GRAVITY, ATMSBOMB_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -111,7 +111,7 @@ void func_ovl3_80176708(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Coll_Data *coll_data = &ap->coll_data;
     Vec3f angle;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
 
     if ((coll_data->unk_0x56 & MPCOLL_MASK_CEIL) || (coll_data->unk_0x56 & MPCOLL_MASK_GROUND))
@@ -151,7 +151,7 @@ void func_ovl3_80176708(GObj *article_gobj)
 void func_ovl3_80176840(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     ap->coll_data.object_coll.top = ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.center = 0.0F;
@@ -191,7 +191,7 @@ void func_ovl3_80176934(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     s32 unused[4];
 
     if (ap->coll_data.unk_0x56 & MPCOLL_MASK_GROUND)
@@ -207,7 +207,7 @@ void func_ovl3_80176934(GObj *article_gobj)
 void func_ovl3_801769AC(GObj *article_gobj, bool32 is_fighter)
 {
     Effect_Unk *ep;
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     if (is_fighter != FALSE)
     {
@@ -225,7 +225,7 @@ void func_ovl3_801769AC(GObj *article_gobj, bool32 is_fighter)
     func_ovl3_8017275C(article_gobj);
     func_ovl3_80176F2C(article_gobj);
 
-    JObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(article_gobj)->unk_0x54 = 2;
 }
 
 bool32 jtgt_ovl3_80176A34(GObj *article_gobj)
@@ -243,7 +243,7 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
     Vec3f *translate;
     Vec3f dist;
     Vec3f f_pos;
-    JObj *aj = JObjGetStruct(article_gobj);
+    DObj *aj = DObjGetStruct(article_gobj);
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
     if (ap->at_multi < ATMSBOMB_DETECT_FIGHTER_DELAY)
@@ -261,7 +261,7 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
             do
             {
                 Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-                JObj *fj = JObjGetStruct(fighter_gobj);
+                DObj *fj = DObjGetStruct(fighter_gobj);
                 f32 var = fp->attributes->object_coll.top * 0.5F;
 
                 f_pos = fj->translate;
@@ -348,7 +348,7 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
     Vec3f *translate;
     Vec3f dist;
     Vec3f f_pos;
-    JObj *aj = JObjGetStruct(article_gobj);
+    DObj *aj = DObjGetStruct(article_gobj);
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMSBOMB_GRAVITY, ATMSBOMB_T_VEL);
@@ -368,7 +368,7 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
             do
             {
                 Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-                JObj *fj = JObjGetStruct(fighter_gobj);
+                DObj *fj = DObjGetStruct(fighter_gobj);
                 f32 var = fp->attributes->object_coll.top * 0.5F;
 
                 f_pos = fj->translate;
@@ -435,13 +435,13 @@ void func_ovl3_80176F2C(GObj *article_gobj)
 GObj* jtgt_ovl3_80176F60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_MSBomb_Data, pos, vel, flags);
-    JObj *joint;
+    DObj *joint;
     Article_Struct *ap;
     Vec3f translate;
 
     if (article_gobj != NULL)
     {
-        joint = JObjGetStruct(article_gobj);
+        joint = DObjGetStruct(article_gobj);
 
         joint->next->unk_0x54 = 2;
         joint->next->unk_0x8->unk_0x54 = 0;

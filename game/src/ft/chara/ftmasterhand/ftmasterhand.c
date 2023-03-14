@@ -23,7 +23,7 @@ void func_ovl3_80157F90(GObj *fighter_gobj)
 
     func_ovl2_800F4408(fp->fighter_vars.masterhand.p_masterhand->unk_0x4, &pos_a);
 
-    if (((((pos_b.x + pos_a.x) * 0.5F) - JObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
+    if (((((pos_b.x + pos_a.x) * 0.5F) - DObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
     {
         func_ovl3_80157F60(fighter_gobj);
     }
@@ -33,7 +33,7 @@ void func_ovl3_80158030(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - JObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
+    if (((DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
     {
         func_ovl3_80157F60(fighter_gobj);
     }
@@ -78,8 +78,8 @@ void func_ovl3_8015817C(GObj *fighter_gobj, Vec3f *pos, f32 off_y)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    pos->x = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x;
-    pos->y = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y + off_y;
+    pos->x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x;
+    pos->y = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y + off_y;
     pos->z = 0.0F;
 }
 
@@ -87,7 +87,7 @@ void func_ovl3_801581BC(GObj *fighter_gobj, Vec3f *pos, f32 pos_x, f32 pos_y)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *fp_unk = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj);
-    Vec3f translate = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate;
+    Vec3f translate = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate;
     f32 x;
     f32 y;
 
@@ -113,8 +113,8 @@ void func_ovl3_80158310(GObj *fighter_gobj, Vec3f *pos, f32 pos_x, f32 pos_y)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    pos->x = (f32)((rand_u16() & 1) ? pos_x : -pos_x) + JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x;
-    pos->y = (f32)JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y + pos_y;
+    pos->x = (f32)((rand_u16() & 1) ? pos_x : -pos_x) + DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x;
+    pos->y = (f32)DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y + pos_y;
     pos->z = 0.0F;
 }
 

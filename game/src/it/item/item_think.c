@@ -43,7 +43,7 @@ void func_ovl3_80167FA0(GObj *item_gobj) // Set yaw rotation based on velocity
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    JObjGetStruct(item_gobj)->rotate.y = (ip->phys_info.vel.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
+    DObjGetStruct(item_gobj)->rotate.y = (ip->phys_info.vel.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
 }
 
 bool32 func_ovl3_80167FE8(Item_Struct *ip) // Decrement lifetime and check whether item has expired
@@ -131,7 +131,7 @@ void func_ovl3_80168428(GObj *item_gobj)
 
     func_ovl0_800CD5AC(&vel, &direction, &angle);
 
-    rotate = &JObjGetStruct(item_gobj)->rotate;
+    rotate = &DObjGetStruct(item_gobj)->rotate;
 
     if (direction.z == LEFT)
     {

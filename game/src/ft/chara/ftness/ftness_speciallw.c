@@ -26,7 +26,7 @@ void func_ovl3_80155204(Fighter_Struct *fp)
 void func_ovl3_8015521C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    JObj *joint = fp->joint[0];
+    DObj *joint = fp->joint[0];
 
     fp->lr = fp->lr_absorb;
     joint->rotate.y += (-PI32);

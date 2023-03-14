@@ -60,15 +60,15 @@ typedef struct MObj // Image footer struct
 
 } MObj;
 
-typedef struct JObj JObj;
+typedef struct DObj DObj;
 
-struct JObj
+struct DObj
 {
     u8 filler_0x0[0x8];
-    JObj *unk_0x8;
-    JObj *unk_0xC;
-    JObj *next;
-    JObj *prev;
+    DObj *unk_0x8;
+    DObj *unk_0xC;
+    DObj *next;
+    DObj *prev;
     mtx *mtx_translate; // 0x18
     Vec3f translate; // 0x1C - 0x24
     mtx *mtx_rotate; // 0x28
@@ -81,16 +81,16 @@ struct JObj
     u8 unk_0x54;
     void *mtx_position; // ???
     u8 filler_0x5C[0x70 - 0x5C];
-    s32 unk_jobj_0x70;
-    f32 unk_jobj_0x74; // Multi-purpose? Usually FLOAT32_MAX, used as rotation step in Crate/Barrel smash GFX?
-    f32 unk_jobj_0x78; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?
-    f32 unk_jobj_0x7C; // Multi-purpose? Usually 0.0F, but used as rotation step in Crate/Barrel smash GFX?
+    s32 unk_dobj_0x70;
+    f32 unk_dobj_0x74; // Multi-purpose? Usually FLOAT32_MAX, used as rotation step in Crate/Barrel smash GFX?
+    f32 unk_dobj_0x78; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?
+    f32 unk_dobj_0x7C; // Multi-purpose? Usually 0.0F, but used as rotation step in Crate/Barrel smash GFX?
     MObj *mobj;
-    JObj *unk_0x84;
+    DObj *unk_0x84;
 
 };
 
-typedef struct JObjDesc
+typedef struct DObjDesc
 {
     s32 index;
     void *x4;
@@ -98,9 +98,9 @@ typedef struct JObjDesc
     Vec3f rotate;
     Vec3f scale;
 
-} JObjDesc;
+} DObjDesc;
 
-#define JObjGetStruct(gobj) \
-((JObj*)gobj->obj) \
+#define DObjGetStruct(gobj) \
+((DObj*)gobj->obj) \
 
 #endif

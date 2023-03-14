@@ -46,7 +46,7 @@ void func_ovl3_801755B8(GObj *article_gobj)
 
 void jtgt_ovl3_801755FC(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->rotate.y = 0.0F;
+    DObjGetStruct(article_gobj)->rotate.y = 0.0F;
 
     func_ovl3_80172EC8(article_gobj, Article_L_Gun_Status, 2);
 }
@@ -79,7 +79,7 @@ void jtgt_ovl3_801756AC(GObj *article_gobj)
 
     func_ovl3_80172EC8(article_gobj, Article_L_Gun_Status, 3);
 
-    JObjGetStruct(article_gobj)->next->rotate.y = (lr == LEFT) ? -HALF_PI32 : HALF_PI32;
+    DObjGetStruct(article_gobj)->next->rotate.y = (lr == LEFT) ? -HALF_PI32 : HALF_PI32;
 }
 
 bool32 jtgt_ovl3_8017572C(GObj *article_gobj)
@@ -99,7 +99,7 @@ void jtgt_ovl3_80175780(GObj *article_gobj)
 
     func_ovl3_80172EC8(article_gobj, Article_L_Gun_Status, 4);
 
-    JObjGetStruct(article_gobj)->next->rotate.y = (lr == LEFT) ? -HALF_PI32 : HALF_PI32;
+    DObjGetStruct(article_gobj)->next->rotate.y = (lr == LEFT) ? -HALF_PI32 : HALF_PI32;
 }
 
 extern ArticleSpawnData Article_L_Gun_Data;
@@ -114,7 +114,7 @@ GObj* jtgt_ovl3_80175800(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = ATLGUN_AMMO_MAX;
 
-        JObjGetStruct(article_gobj)->rotate.y = (rand_u16() & 1) ? HALF_PI32 : -HALF_PI32;
+        DObjGetStruct(article_gobj)->rotate.y = (rand_u16() & 1) ? HALF_PI32 : -HALF_PI32;
 
         ap->x2D3_flag_b5 = TRUE;
 
@@ -127,13 +127,13 @@ GObj* jtgt_ovl3_80175800(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 jtgt_ovl3_801758BC(GObj *item_gobj)
 {
-    JObj *joint = JObjGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if (joint->scale.x < ATLGUN_AMMO_CLAMP_SCALE_X)
     {
         joint->scale.x += ATLGUN_AMMO_STEP_SCALE_X;
 
-        joint = JObjGetStruct(item_gobj); // Y tho lol
+        joint = DObjGetStruct(item_gobj); // Y tho lol
 
         if (ATLGUN_AMMO_CLAMP_SCALE_X < joint->scale.x)
         {
@@ -147,7 +147,7 @@ bool32 jtgt_ovl3_80175914(GObj *item_gobj)
 {
     if (func_ovl3_80167C04(item_gobj) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
         return TRUE;
     }
@@ -158,7 +158,7 @@ bool32 jtgt_ovl3_80175958(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
 
     return TRUE;
 }
@@ -169,8 +169,8 @@ bool32 jtgt_ovl3_80175988(GObj *item_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    JObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
-    JObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(item_gobj)->scale.x = 1.0F;
 
     return FALSE;
 }
@@ -182,8 +182,8 @@ bool32 jtgt_ovl3_80175A00(GObj *item_gobj)
 
     func_ovl3_801680EC(ip, fp);
 
-    JObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
-    JObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(item_gobj)->scale.x = 1.0F;
 
     return FALSE;
 }
@@ -203,7 +203,7 @@ GObj* func_ovl3_80175A60(GObj *fighter_gobj, Vec3f *pos)
 
     ip->phys_info.vel.x = ip->lr * ATLGUN_AMMO_VEL_X;
 
-    JObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
 
     return item_gobj;
 }

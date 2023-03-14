@@ -181,7 +181,7 @@ void func_ovl3_801743F4(GObj *article_gobj)
 void func_ovl3_80174428(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     Effect_Unk *ep;
 
     ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
@@ -197,6 +197,6 @@ void func_ovl3_80174428(GObj *article_gobj)
         ep->effect_info->scale.x = ep->effect_info->scale.y = ep->effect_info->scale.z = ATCAPSULE_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
-    JObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(article_gobj)->unk_0x54 = 2;
     func_ovl3_801743F4(article_gobj);
 }

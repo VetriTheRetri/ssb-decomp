@@ -5,7 +5,7 @@
 void func_ovl3_801785E0(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
     if (ap->article_vars.shell.dust_gfx_int == 0)
@@ -28,7 +28,7 @@ extern intptr_t D_NF_00006048;
 void func_ovl3_80178670(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
     s32 unused[2];
 
     func_8000BD1C(joint, (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00005F88)) + (intptr_t)&D_NF_00006018, 0.0F); // Linker thing
@@ -38,8 +38,8 @@ void func_ovl3_80178670(GObj *article_gobj)
 
 void func_ovl3_80178704(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->mobj->unk_image_0x94 = 0;
-    JObjGetStruct(article_gobj)->unk_jobj_0x70 = 0;
+    DObjGetStruct(article_gobj)->mobj->unk_image_0x94 = 0;
+    DObjGetStruct(article_gobj)->unk_dobj_0x70 = 0;
 }
 
 bool32 jtgt_ovl3_8017871C(GObj *article_gobj)
@@ -177,7 +177,7 @@ bool32 jtgt_ovl3_8017897C(GObj *article_gobj)
 
 void jtgt_ovl3_80178A90(GObj *article_gobj)
 {
-    JObjGetStruct(article_gobj)->rotate.y = 0.0F;
+    DObjGetStruct(article_gobj)->rotate.y = 0.0F;
 
     func_ovl3_80172EC8(article_gobj, Article_G_Shell_Status, 2);
 }
@@ -386,7 +386,7 @@ GObj* jtgt_ovl3_80178FDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        JObj *joint = JObjGetStruct(article_gobj);
+        DObj *joint = DObjGetStruct(article_gobj);
         Article_Struct *ap;
         Vec3f translate = joint->translate;
 

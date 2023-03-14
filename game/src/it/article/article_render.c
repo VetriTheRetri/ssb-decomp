@@ -88,7 +88,7 @@ void func_ovl3_80171410(GObj *article_gobj)
 
     if (ap->article_hurt.hit_status != gmHitCollision_HitStatus_None)
     {
-        translate = &JObjGetStruct(article_gobj)->translate;
+        translate = &DObjGetStruct(article_gobj)->translate;
 
         hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
@@ -132,7 +132,7 @@ void func_ovl3_80171410(GObj *article_gobj)
 void func_ovl3_801719AC(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    Vec3f *translate = &JObjGetStruct(article_gobj)->translate;
+    Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
     ObjectColl *object_coll = &ap->coll_data.object_coll;
     MtxStore mtx_store;
 

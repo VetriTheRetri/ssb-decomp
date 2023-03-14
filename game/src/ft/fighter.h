@@ -20,12 +20,12 @@ typedef struct SpecialHit
 
 } SpecialHit;
 
-typedef struct JObjContainer
+typedef struct DObjContainer
 {
 
-    JObjDesc *renderstate[4];
+    DObjDesc *renderstate[4];
 
-} JObjContainer;
+} DObjContainer;
 
 typedef struct ftCommonAttributes
 {
@@ -87,7 +87,7 @@ typedef struct ftCommonAttributes
     u16 throw_heavy_sfx;
     u16 unk_0xEA;
     u8 filler_0xEC[0x2D4 - 0xEC];
-    JObjContainer *renderstate;
+    DObjContainer *renderstate;
     u8 filler_0x2D8[0x324 - 0x2D8];
     s32 unk_0x324;
     s32 filler_0x328[0x334 - 0x328];
@@ -782,7 +782,7 @@ typedef struct _Fighter_Struct
 
     ftUnkFrameStruct unk_frame[4];
 
-    JObj *joint[36];
+    DObj *joint[36];
 
     u8 filler_0x980[0x9C4 - 0x978];
 
@@ -873,7 +873,7 @@ typedef struct _Fighter_Struct
 ((ftCommonAttributes*)fp->attributes) \
 
 #define FighterGetJoint(fp, id) \
-((JObj*)fp->joint[id]) \
+((DObj*)fp->joint[id]) \
 
 #define FighterCalcLandingLag(anim_length, target_length) \
 ((f32)anim_length / target_length) \

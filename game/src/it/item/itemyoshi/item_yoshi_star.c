@@ -21,16 +21,16 @@ bool32 jtgt_ovl3_8016C588(GObj *item_gobj)
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
         return TRUE;
     }
     scale = func_ovl3_8016C540(ip);
 
-    JObjGetStruct(item_gobj)->scale.x = scale;
-    JObjGetStruct(item_gobj)->scale.y = scale;
+    DObjGetStruct(item_gobj)->scale.x = scale;
+    DObjGetStruct(item_gobj)->scale.y = scale;
 
-    JObjGetStruct(item_gobj)->rotate.z += (ITYOSHISTAR_ROTATE_SPEED * ip->lr);
+    DObjGetStruct(item_gobj)->rotate.z += (ITYOSHISTAR_ROTATE_SPEED * ip->lr);
 
     vel_sqrt = sqrtf(SQUARE(ip->phys_info.vel.x) + SQUARE(ip->phys_info.vel.y));
 
@@ -59,7 +59,7 @@ bool32 jtgt_ovl3_8016C6AC(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_80100480(&JObjGetStruct(item_gobj)->translate);
+    func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
 
     if (ip->hit_victim_damage != 0)
     {
@@ -70,7 +70,7 @@ bool32 jtgt_ovl3_8016C6AC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C6F0(GObj *item_gobj)
 {
-    func_ovl2_80100480(&JObjGetStruct(item_gobj)->translate);
+    func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
 
     return TRUE;
 }
@@ -81,7 +81,7 @@ bool32 jtgt_ovl3_8016C718(GObj *item_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    JObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
 
     if (ip->phys_info.vel.x > 0.0F)
     {
@@ -101,10 +101,10 @@ bool32 jtgt_ovl3_8016C7B0(GObj *item_gobj)
 
     func_ovl3_801680EC(ip, fp);
 
-    JObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
 
-    JObjGetStruct(item_gobj)->scale.x = 1.0F;
-    JObjGetStruct(item_gobj)->scale.y = 1.0F;
+    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(item_gobj)->scale.y = 1.0F;
 
     ip->lr = -ip->lr;
 

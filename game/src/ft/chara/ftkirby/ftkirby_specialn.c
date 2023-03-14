@@ -25,7 +25,7 @@ f32 func_ovl3_80161D6C(Vec3f *kirby_pos, Vec3f *victim_pos) // Get distance betw
 
 void func_ovl3_80161DA8(Fighter_Struct *fp, GObj *fighter_gobj, Vec3f *pos)
 {
-    *pos = JObjGetStruct(fighter_gobj)->translate;
+    *pos = DObjGetStruct(fighter_gobj)->translate;
 
     pos->x += (160.0F * fp->lr);
     pos->y += 100.0F;
@@ -146,7 +146,7 @@ void func_ovl3_80162078(GObj *fighter_gobj)
 
     func_ovl3_80161DA8(kirby_fp, fighter_gobj, &kirby_pos);
 
-    dist = func_ovl3_80161D6C(&JObjGetStruct(kirby_fp->catch_gobj)->translate, &kirby_pos);
+    dist = func_ovl3_80161D6C(&DObjGetStruct(kirby_fp->catch_gobj)->translate, &kirby_pos);
 
     if (dist < 1024.0F)
     {
@@ -700,8 +700,8 @@ void func_ovl3_801630A0(GObj *fighter_gobj, s32 status_id)
     func_ovl2_800E0830(fighter_gobj);
     func_ovl3_80161DA8(fp, fighter_gobj, &pos);
 
-    fp->status_vars.kirby.specialn.pos.x = JObjGetStruct(fp->catch_gobj)->translate.x - pos.x;
-    fp->status_vars.kirby.specialn.pos.y = JObjGetStruct(fp->catch_gobj)->translate.y - pos.y;
+    fp->status_vars.kirby.specialn.pos.x = DObjGetStruct(fp->catch_gobj)->translate.x - pos.x;
+    fp->status_vars.kirby.specialn.pos.y = DObjGetStruct(fp->catch_gobj)->translate.y - pos.y;
 }
 
 void jtgt_ovl3_80163154(GObj *fighter_gobj)

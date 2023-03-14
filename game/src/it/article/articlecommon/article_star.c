@@ -48,7 +48,7 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     Unk_80131460_Ptr74 *unk_ptr = D_ovl2_80131460->unk_0x74;
     GObj *article_gobj;
-    JObj *joint;
+    DObj *joint;
     Article_Struct *ap;
     Vec3f vel_real;
     Vec3f translate;
@@ -61,7 +61,7 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        joint = JObjGetStruct(article_gobj);
+        joint = DObjGetStruct(article_gobj);
 
         translate = joint->translate;
 

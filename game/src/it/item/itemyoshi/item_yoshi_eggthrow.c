@@ -45,7 +45,7 @@ void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing succ
 
     ip->item_hit[0].size = ITEGGTHROW_EXPLODE_SIZE;
 
-    JObjGetStruct(item_gobj)->display_list = NULL;
+    DObjGetStruct(item_gobj)->display_list = NULL;
 
     ip->cb_anim = func_ovl3_8016BF74;
     ip->cb_coll = NULL;
@@ -71,7 +71,7 @@ void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring
 
     ip->item_hit[0].size = ITEGGTHROW_EXPLODE_SIZE;
 
-    JObjGetStruct(item_gobj)->display_list = NULL;
+    DObjGetStruct(item_gobj)->display_list = NULL;
 
     ip->cb_anim = func_ovl3_8016BF74;
     ip->cb_coll = NULL;
@@ -108,7 +108,7 @@ void func_ovl3_8016C07C(GObj *item_gobj)
 
     ip->item_vars.egg_throw.angle = ((((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD) * PI32) / 180.0F); // Deg2Rad macro pls
 
-    JObjGetStruct(item_gobj)->translate.z = 0.0F;
+    DObjGetStruct(item_gobj)->translate.z = 0.0F;
 
     ip->item_hit[0].update_state = gmHitCollision_UpdateState_New;
 
@@ -125,8 +125,8 @@ bool32 jtgt_ovl3_8016C218(GObj *item_gobj)
         {
             func_800269C0(0xFCU);
 
-            func_ovl2_80103A88(&JObjGetStruct(item_gobj)->translate);
-            func_ovl2_801041A0(&JObjGetStruct(item_gobj)->translate);
+            func_ovl2_80103A88(&DObjGetStruct(item_gobj)->translate);
+            func_ovl2_801041A0(&DObjGetStruct(item_gobj)->translate);
 
             func_ovl3_8016C00C(item_gobj);
 
@@ -134,7 +134,7 @@ bool32 jtgt_ovl3_8016C218(GObj *item_gobj)
         }
         else
         {
-            JObjGetStruct(item_gobj)->rotate.z += ip->item_vars.egg_throw.angle;
+            DObjGetStruct(item_gobj)->rotate.z += ip->item_vars.egg_throw.angle;
             func_ovl3_80168088(ip, ITEGGTHROW_GRAVITY, ITEGGTHROW_T_VEL);
 
             return FALSE;
@@ -159,10 +159,10 @@ bool32 jtgt_ovl3_8016C2E0(GObj *item_gobj)
 
         func_800269C0(0xFCU);
 
-        func_ovl2_80103A88(&JObjGetStruct(item_gobj)->translate);
-        func_ovl2_801041A0(&JObjGetStruct(item_gobj)->translate);
+        func_ovl2_80103A88(&DObjGetStruct(item_gobj)->translate);
+        func_ovl2_801041A0(&DObjGetStruct(item_gobj)->translate);
 
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
         func_ovl3_8016BFA0(item_gobj);
     }
@@ -173,8 +173,8 @@ bool32 jtgt_ovl3_8016C364(GObj *item_gobj)
 {
     func_800269C0(0xFCU);
 
-    func_ovl2_80103A88(&JObjGetStruct(item_gobj)->translate);
-    func_ovl2_801041A0(&JObjGetStruct(item_gobj)->translate);
+    func_ovl2_80103A88(&DObjGetStruct(item_gobj)->translate);
+    func_ovl2_801041A0(&DObjGetStruct(item_gobj)->translate);
 
     func_ovl3_8016BFA0(item_gobj);
 

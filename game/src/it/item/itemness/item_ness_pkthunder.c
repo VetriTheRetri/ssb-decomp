@@ -68,18 +68,18 @@ void func_ovl3_8016ADF4(GObj *item_gobj)
             trail_pos_id += (ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_y));
         }
 
-        fp->fighter_vars.ness.pk_thunder_trail_x[trail_pos_id] = JObjGetStruct(item_gobj)->translate.x;
-        fp->fighter_vars.ness.pk_thunder_trail_y[trail_pos_id] = JObjGetStruct(item_gobj)->translate.y;
+        fp->fighter_vars.ness.pk_thunder_trail_x[trail_pos_id] = DObjGetStruct(item_gobj)->translate.x;
+        fp->fighter_vars.ness.pk_thunder_trail_y[trail_pos_id] = DObjGetStruct(item_gobj)->translate.y;
     }
 }
 
 void func_ovl3_8016AE64(GObj *item_gobj, s32 trail_index)
 {
-    JObj *jobj = JObjGetStruct(item_gobj);
+    DObj *dobj = DObjGetStruct(item_gobj);
     Vec3f pos;
 
-    pos.x = JObjGetStruct(item_gobj)->translate.x;
-    pos.y = JObjGetStruct(item_gobj)->translate.y;
+    pos.x = DObjGetStruct(item_gobj)->translate.x;
+    pos.y = DObjGetStruct(item_gobj)->translate.y;
     pos.z = 0.0F;
 
     func_ovl3_8016B580(item_gobj, &pos, trail_index);
@@ -95,7 +95,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
 
     if (ip->item_vars.pk_thunder.pk_thunder_state & itNessThunderStatus_Destroy)
     {
-        func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+        func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
         func_ovl3_8016AD30(item_gobj, TRUE);
         return TRUE;
     }
@@ -104,7 +104,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
 
     if (ip->item_vars.pk_thunder.pk_thunder_state & itNessThunderStatus_Collide)
     {
-        func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+        func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
         func_ovl3_8016AD30(item_gobj, TRUE);
         return TRUE;
     }
@@ -116,7 +116,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         func_ovl3_8016AD30(item_gobj, TRUE);
         return TRUE;
     }
@@ -147,12 +147,12 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
             ip->phys_info.vel.y = __sinf(ip->item_vars.pk_thunder.angle) * ITPKTHUNDER_VEL;
             ip->phys_info.vel.z = 0.0F;
 
-            JObjGetStruct(item_gobj)->rotate.z = ip->item_vars.pk_thunder.angle - HALF_PI32;
+            DObjGetStruct(item_gobj)->rotate.z = ip->item_vars.pk_thunder.angle - HALF_PI32;
         }
     }
     else
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         func_ovl3_8016AD30(item_gobj, TRUE);
         return TRUE;
     }
@@ -163,7 +163,7 @@ bool32 jtgt_ovl3_8016B198(GObj *item_gobj)
 {
     if (func_ovl3_80167C04(item_gobj) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         func_ovl3_8016AD30(item_gobj, TRUE);
 
         return TRUE;
@@ -175,7 +175,7 @@ bool32 jtgt_ovl3_8016B1E8(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
     func_ovl3_8016AD30(item_gobj, TRUE);
 
     return TRUE;
@@ -185,7 +185,7 @@ bool32 jtgt_ovl3_8016B22C(GObj *item_gobj) // Behold, PK Thunder's dangerous ref
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
     Fighter_Struct *fp;
-    Vec3f pos = JObjGetStruct(item_gobj)->translate; // Get current position
+    Vec3f pos = DObjGetStruct(item_gobj)->translate; // Get current position
 
     func_ovl3_8016B898(item_gobj, &pos, ip->item_vars.pk_thunder.angle); // Spawn whole new PK Thunder instance
 
@@ -236,7 +236,7 @@ GObj *func_ovl3_8016B2C4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create P
         ip->item_vars.pk_thunder.trail_gobj[i] = NULL;
     }
 
-    JObjGetStruct(item_gobj)->rotate.z = ip->item_vars.pk_thunder.angle - HALF_PI32; // Bruh this effectively makes it 0.0F due to its init a few lines above
+    DObjGetStruct(item_gobj)->rotate.z = ip->item_vars.pk_thunder.angle - HALF_PI32; // Bruh this effectively makes it 0.0F due to its init a few lines above
 
     return item_gobj;
 }
@@ -258,19 +258,19 @@ bool32 func_ovl3_8016B398(GObj *item_gobj)
         index += (ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_y));
     }
 
-    JObjGetStruct(item_gobj)->translate.x = fp->fighter_vars.ness.pk_thunder_trail_x[index];
-    JObjGetStruct(item_gobj)->translate.y = fp->fighter_vars.ness.pk_thunder_trail_y[index];
+    DObjGetStruct(item_gobj)->translate.x = fp->fighter_vars.ness.pk_thunder_trail_x[index];
+    DObjGetStruct(item_gobj)->translate.y = fp->fighter_vars.ness.pk_thunder_trail_y[index];
 
     if (index > 0)
     {
-        JObjGetStruct(item_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pk_thunder_trail_y[index] - fp->fighter_vars.ness.pk_thunder_trail_y[index - 1]), (fp->fighter_vars.ness.pk_thunder_trail_x[index] - fp->fighter_vars.ness.pk_thunder_trail_x[index - 1]));
+        DObjGetStruct(item_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pk_thunder_trail_y[index] - fp->fighter_vars.ness.pk_thunder_trail_y[index - 1]), (fp->fighter_vars.ness.pk_thunder_trail_x[index] - fp->fighter_vars.ness.pk_thunder_trail_x[index - 1]));
     }
     else
     {
-        JObjGetStruct(item_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pk_thunder_trail_y[index] - fp->fighter_vars.ness.pk_thunder_trail_y[pktGetTrailPosIndex(fp) - 1]), (fp->fighter_vars.ness.pk_thunder_trail_x[index] - fp->fighter_vars.ness.pk_thunder_trail_x[pktGetTrailPosIndex(fp) - 1]));
+        DObjGetStruct(item_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pk_thunder_trail_y[index] - fp->fighter_vars.ness.pk_thunder_trail_y[pktGetTrailPosIndex(fp) - 1]), (fp->fighter_vars.ness.pk_thunder_trail_x[index] - fp->fighter_vars.ness.pk_thunder_trail_x[pktGetTrailPosIndex(fp) - 1]));
     }
 
-    JObjGetStruct(item_gobj)->rotate.z -= HALF_PI32;
+    DObjGetStruct(item_gobj)->rotate.z -= HALF_PI32;
 
 
     if ((ip->item_vars.pk_thunder_trail.trail_index < (ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
@@ -285,7 +285,7 @@ bool32 func_ovl3_8016B398(GObj *item_gobj)
 
     func_ovl3_80167FE8(ip);
 
-    JObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
+    DObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -294,7 +294,7 @@ bool32 jtgt_ovl3_8016B550(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
 
     return FALSE;
 }
@@ -351,8 +351,8 @@ void func_ovl3_8016B65C(GObj *item_gobj, s32 trail_index)
 {
     Vec3f pos;
 
-    pos.x = JObjGetStruct(item_gobj)->translate.x;
-    pos.y = JObjGetStruct(item_gobj)->translate.y;
+    pos.x = DObjGetStruct(item_gobj)->translate.x;
+    pos.y = DObjGetStruct(item_gobj)->translate.y;
     pos.z = 0.0F;
 
     func_ovl3_8016BB6C(item_gobj, &pos, trail_index);
@@ -394,7 +394,7 @@ bool32 jtgt_ovl3_8016B734(GObj *item_gobj)
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         func_ovl3_8016B6A0(item_gobj, TRUE);
 
         return TRUE;
@@ -406,7 +406,7 @@ bool32 jtgt_ovl3_8016B7AC(GObj *item_gobj)
 {
     if (func_ovl3_80167C04(item_gobj) != FALSE)
     {
-        func_ovl2_800FF648(&JObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         func_ovl3_8016B6A0(item_gobj, TRUE);
         return TRUE;
     }
@@ -417,7 +417,7 @@ bool32 jtgt_ovl3_8016B7FC(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
     func_ovl3_8016B6A0(item_gobj, TRUE);
 
     return TRUE;
@@ -469,9 +469,9 @@ GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
         ip->item_vars.pk_thunder.trail_gobj[i] = NULL;
     }
 
-    localvel.x = JObjGetStruct(new_gobj)->translate.x - JObjGetStruct(ip->owner_gobj)->translate.x;
-    localvel.y = JObjGetStruct(new_gobj)->translate.y - (JObjGetStruct(ip->owner_gobj)->translate.y + ITPKTHUNDER_REFLECT_POS_Y_ADD);
-    localvel.z = JObjGetStruct(new_gobj)->translate.z - JObjGetStruct(ip->owner_gobj)->translate.z;
+    localvel.x = DObjGetStruct(new_gobj)->translate.x - DObjGetStruct(ip->owner_gobj)->translate.x;
+    localvel.y = DObjGetStruct(new_gobj)->translate.y - (DObjGetStruct(ip->owner_gobj)->translate.y + ITPKTHUNDER_REFLECT_POS_Y_ADD);
+    localvel.z = DObjGetStruct(new_gobj)->translate.z - DObjGetStruct(ip->owner_gobj)->translate.z;
 
     vec3f_normalize(&localvel);
 
@@ -479,7 +479,7 @@ GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
     ip->phys_info.vel.y = (ITPKTHUNDER_VEL * localvel.y);
     ip->phys_info.vel.z = 0.0F;
 
-    JObjGetStruct(new_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(new_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
 
     return new_gobj;
 }
@@ -494,10 +494,10 @@ bool32 func_ovl3_8016B9E0(GObj *item_gobj)
         return TRUE;
     }
 
-    // Game hangs on the following line when PK Thunder crash occurs (JObjGetStruct returns invalid pointer)
+    // Game hangs on the following line when PK Thunder crash occurs (DObjGetStruct returns invalid pointer)
 
-    JObjGetStruct(item_gobj)->translate.x = (JObjGetStruct(ip->item_vars.pk_thunder_trail.trail_gobj[0])->translate.x - (ip->phys_info.vel.x * (ip->item_vars.pk_thunder_trail.trail_index + 1.5) * 2.0F));
-    JObjGetStruct(item_gobj)->translate.y = (JObjGetStruct(ip->item_vars.pk_thunder_trail.trail_gobj[0])->translate.y - (ip->phys_info.vel.y * (ip->item_vars.pk_thunder_trail.trail_index + 1.5) * 2.0F));
+    DObjGetStruct(item_gobj)->translate.x = (DObjGetStruct(ip->item_vars.pk_thunder_trail.trail_gobj[0])->translate.x - (ip->phys_info.vel.x * (ip->item_vars.pk_thunder_trail.trail_index + 1.5) * 2.0F));
+    DObjGetStruct(item_gobj)->translate.y = (DObjGetStruct(ip->item_vars.pk_thunder_trail.trail_gobj[0])->translate.y - (ip->phys_info.vel.y * (ip->item_vars.pk_thunder_trail.trail_index + 1.5) * 2.0F));
 
     trail_index = ip->item_vars.pk_thunder_trail.trail_index;
 
@@ -515,7 +515,7 @@ bool32 func_ovl3_8016B9E0(GObj *item_gobj)
 
     func_ovl3_80167FE8(ip);
 
-    JObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
+    DObjGetStruct(item_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -524,7 +524,7 @@ bool32 jtgt_ovl3_8016BB3C(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&JObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
 
     return FALSE;
 }
@@ -568,7 +568,7 @@ GObj* func_ovl3_8016BB6C(GObj *old_gobj, Vec3f *pos, s32 trail_index)
     new_ip->phys_info.vel.x = old_ip->phys_info.vel.x;
     new_ip->phys_info.vel.y = old_ip->phys_info.vel.y;
 
-    JObjGetStruct(new_gobj)->rotate.z = JObjGetStruct(old_gobj)->rotate.z - HALF_PI32;
+    DObjGetStruct(new_gobj)->rotate.z = DObjGetStruct(old_gobj)->rotate.z - HALF_PI32;
 
     func_ovl3_80165F60(new_gobj);
 

@@ -63,7 +63,7 @@ void func_ovl3_80157918(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < JObjGetStruct(fighter_gobj)->unk_jobj_0x78))
+    if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->unk_dobj_0x78))
     {
         if (fp->status_vars.kirby.copydonkey_specialn.is_charging != FALSE)
         {

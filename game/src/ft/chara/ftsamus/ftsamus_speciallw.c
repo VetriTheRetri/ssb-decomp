@@ -4,7 +4,7 @@ void func_ovl3_8015DF00(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
-    JObj *joint;
+    DObj *joint;
 
     if (fp->cmd_flags.flag0 != FALSE)
     {

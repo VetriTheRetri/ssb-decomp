@@ -20,7 +20,7 @@ void func_ovl3_801595F0(GObj *fighter_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    dist_x = JObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - JObjGetStruct(fighter_gobj)->translate.x;
+    dist_x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x;
 
     if (ABSF(dist_x) > FTMASTERHAND_OKUHIKOUKI_VEL_ADD)
     {
@@ -47,7 +47,7 @@ void func_ovl3_801596B0(GObj *fighter_gobj)
     func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Okuhikouki2, 0.0F, 1.0F, 0U);
     func_ovl2_800E0830(fighter_gobj);
 
-    translate = &JObjGetStruct(fighter_gobj)->translate;
+    translate = &DObjGetStruct(fighter_gobj)->translate;
 
     translate->x = fp->status_vars.masterhand.okuhikouki.pos.x + (-9000.0F);
     translate->y = fp->status_vars.masterhand.okuhikouki.pos.y + 6000.0F;

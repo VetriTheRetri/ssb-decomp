@@ -10,7 +10,7 @@ void func_ovl3_801643D0(GObj *fighter_gobj)
     {
         fp->cmd_flags.flag0 = 0;
 
-        pos = JObjGetStruct(fighter_gobj)->translate;
+        pos = DObjGetStruct(fighter_gobj)->translate;
 
         sp1C.x = 0.0F;
         sp1C.y = 0.0F;

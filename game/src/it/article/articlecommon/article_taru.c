@@ -8,7 +8,7 @@ bool32 jtgt_ovl3_80179BA0(GObj *article_gobj)
 
     func_ovl3_80172558(ap, ATTARU_GRAVITY, ATTARU_T_VEL);
 
-    JObjGetStruct(article_gobj)->rotate.z += ap->article_vars.taru.roll_rotate_speed;
+    DObjGetStruct(article_gobj)->rotate.z += ap->article_vars.taru.roll_rotate_speed;
 
     func_ovl3_801713F4(article_gobj);
 
@@ -26,7 +26,7 @@ bool32 func_ovl3_80179C20(GObj *article_gobj)
 {
     func_800269C0(0x3BU);
 
-    func_ovl3_801791F4(&JObjGetStruct(article_gobj)->translate);
+    func_ovl3_801791F4(&DObjGetStruct(article_gobj)->translate);
 
     if (func_ovl3_801730D4(article_gobj) != FALSE)
     {
@@ -137,7 +137,7 @@ void func_ovl3_80179EF0(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    JObjGetStruct(article_gobj)->next->rotate.x = HALF_PI32;
+    DObjGetStruct(article_gobj)->next->rotate.x = HALF_PI32;
 
     ap->coll_data.object_coll.top = ap->coll_data.object_coll.width;
     ap->coll_data.object_coll.bottom = -ap->coll_data.object_coll.width;
@@ -204,7 +204,7 @@ bool32 jtgt_ovl3_8017A004(GObj *article_gobj)
             }
             else if (ap->lifetime & 1)
             {
-                JObjGetStruct(article_gobj)->unk_0x54 ^= 2;
+                DObjGetStruct(article_gobj)->unk_0x54 ^= 2;
             }
         }
     }
@@ -212,7 +212,7 @@ bool32 jtgt_ovl3_8017A004(GObj *article_gobj)
 
     ap->article_vars.taru.roll_rotate_speed = roll_rotate_speed;
 
-    JObjGetStruct(article_gobj)->rotate.z += roll_rotate_speed;
+    DObjGetStruct(article_gobj)->rotate.z += roll_rotate_speed;
 
     return FALSE;
 }
@@ -285,7 +285,7 @@ void func_ovl3_8017A30C(GObj *article_gobj)
 {
     Effect_Unk *effect_unk;
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    JObj *joint = JObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(article_gobj);
 
     ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
 
@@ -303,7 +303,7 @@ void func_ovl3_8017A30C(GObj *article_gobj)
     }
     func_ovl2_801008F4(1);
 
-    JObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(article_gobj)->unk_0x54 = 2;
 
     func_ovl3_8017A2D8(article_gobj);
 }

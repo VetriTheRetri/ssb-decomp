@@ -8,7 +8,7 @@ void func_ovl3_801591A0(GObj *fighter_gobj)
     Vec3f vel;
     f32 magnitude;
 
-    vec3f_sub(&vel, &fp->status_vars.masterhand.move.vel, &JObjGetStruct(fighter_gobj)->translate);
+    vec3f_sub(&vel, &fp->status_vars.masterhand.move.vel, &DObjGetStruct(fighter_gobj)->translate);
 
     magnitude = vec3f_mag(&vel);
 
@@ -59,7 +59,7 @@ void func_ovl3_801592B4(GObj *fighter_gobj, void (*cb)(GObj*), Vec3f *vel)
 
     fp->status_vars.masterhand.move.vel = *vel;
 
-    if (((vel->x - JObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
+    if (((vel->x - DObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
     {
         fp->lr = -fp->lr;
         fp->joint[0]->rotate.y = fp->lr * HALF_PI32;

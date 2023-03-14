@@ -97,8 +97,8 @@ bool32 func_ovl3_8015203C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Item_Struct *ip;
-    JObj *fighter_joint;
-    JObj *item_joint;
+    DObj *fighter_joint;
+    DObj *item_joint;
     GObj *thunder_gobj;
     f32 ft_temp_x;
     f32 ft_temp_y;
@@ -121,8 +121,8 @@ bool32 func_ovl3_8015203C(GObj *fighter_gobj)
 
     ip = ItemGetStruct(thunder_gobj);
 
-    fighter_joint = JObjGetStruct(fighter_gobj);
-    item_joint = JObjGetStruct(thunder_gobj);
+    fighter_joint = DObjGetStruct(fighter_gobj);
+    item_joint = DObjGetStruct(thunder_gobj);
 
     ft_temp_x = fighter_joint->translate.x;
     it_temp_x = item_joint->translate.x;

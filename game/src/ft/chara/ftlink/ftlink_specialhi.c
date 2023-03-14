@@ -16,8 +16,8 @@ void func_ovl3_80163B80(GObj *fighter_gobj, Item_Struct *ip)
     ip->item_vars.spin_attack.pos_index++;
     ip->item_vars.spin_attack.pos_index %= (ARRAY_COUNT(ip->item_vars.spin_attack.pos_x) | ARRAY_COUNT(ip->item_vars.spin_attack.pos_y));
 
-    ip->item_vars.spin_attack.pos_x[ip->item_vars.spin_attack.pos_index] = (s16) JObjGetStruct(fighter_gobj)->translate.x;
-    ip->item_vars.spin_attack.pos_y[ip->item_vars.spin_attack.pos_index] = (s16) JObjGetStruct(fighter_gobj)->translate.y;
+    ip->item_vars.spin_attack.pos_x[ip->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
+    ip->item_vars.spin_attack.pos_y[ip->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
 }
 
 void func_ovl3_80163BF0(GObj *fighter_gobj, Item_Struct *ip)
@@ -150,8 +150,8 @@ void func_ovl3_80163D94(GObj *fighter_gobj, bool32 is_skip_gobj)
 
                 for (i = 0; i < (ARRAY_COUNT(ip->item_vars.spin_attack.pos_x) | ARRAY_COUNT(ip->item_vars.spin_attack.pos_y)); i++)
                 {
-                    ip->item_vars.spin_attack.pos_x[i] = (s16) JObjGetStruct(fighter_gobj)->translate.x;
-                    ip->item_vars.spin_attack.pos_y[i] = (s16) JObjGetStruct(fighter_gobj)->translate.y;
+                    ip->item_vars.spin_attack.pos_x[i] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
+                    ip->item_vars.spin_attack.pos_y[i] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
                 }
             }
         }
