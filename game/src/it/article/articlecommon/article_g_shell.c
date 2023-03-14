@@ -401,7 +401,7 @@ GObj* jtgt_ovl3_80178FDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = ArticleGetStruct(article_gobj);
 
-        ap->article_hit[0].flags_0x4C_b3 = TRUE;
+        ap->article_hit[0].is_rehit = TRUE;
 
         ap->article_vars.shell.health = 1;
         ap->article_vars.shell.is_damage = FALSE;

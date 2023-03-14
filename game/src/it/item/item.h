@@ -190,7 +190,7 @@ typedef struct _Item_Hit
         struct
         {
             u32 flags_0x4C_b012 : 3;
-            u32 flags_0x4C_b3 : 1;
+            u32 is_rehit : 1;
             u32 flags_0x4C_b4 : 1;
             u32 flags_0x4C_b5 : 1;
             u32 flags_0x4C_10bit : 10;

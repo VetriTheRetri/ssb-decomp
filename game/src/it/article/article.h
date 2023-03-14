@@ -15,7 +15,7 @@
 
 #define ARTICLE_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
 #define ARTICLE_MASK_SPAWN_NONE 1                  // Item spawned independently 
-#define ARTICLE_MASK_SPAWN_ARTICLE 2                  // Item spawned by another item
+#define ARTICLE_MASK_SPAWN_ARTICLE 2               // Item spawned by another item
 #define ARTICLE_MASK_SPAWN_ARTICLE 3               // Item spawned by Pokémon / misc entity class(es?)
 
 #define ARTICLE_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
@@ -195,7 +195,7 @@ typedef struct _Article_Hit
     u16 clang : 1;
     u32 flags_0x4C_b1 : 1;
     u32 flags_0x4C_b2 : 1;
-    u32 flags_0x4C_b3 : 1;
+    u32 is_rehit : 1; // Article can rehit targets after default rehit cooldown expires
     u32 can_deflect : 1;
     u32 can_reflect : 1;
     u32 can_absorb : 1; // Not actually absorb but not yet known either
