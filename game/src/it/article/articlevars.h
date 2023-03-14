@@ -92,11 +92,17 @@
 #define ATCONTAINER_GFX_LIFETIME 90     // Smashed container pieces despawn once this runs out
 
 #define ATBOX_HEALTH_MAX 15             // Maximum damage box can resist before breaking
+#define ATBOX_EXPLODE_SCALE 1.4F        // Size of explosion graphics
 #define ATBOX_GRAVITY 4.0F
 #define ATBOX_T_VEL 120.0F
 
 #define ATTARU_LIFETIME 360
+#define ATTARU_DESPAWN_FLASH_START 60   // Begin flashing when below this value
 #define ATTARU_HEALTH_MAX 10
+#define ATTARU_MUL_VEL_X 1.4F
+#define ATTARU_MIN_VEL_XY 0.1F          // Decrement lifetime if Barrel's XY velocity is less than this value
+#define ATTARU_ROLL_ROTATE_MUL 0.0045F  // Multiplies rotation of barrel
+#define ATTARU_EXPLODE_SCALE 1.4F       // Size of explosion graphics
 #define ATTARU_GRAVITY 4.0F
 #define ATTARU_T_VEL 90.0F
 
@@ -112,14 +118,14 @@ typedef struct BombHei_ArticleVars
 
 } BombHei_ArticleVars;
 
-typedef struct Shell_ArticleVars
+typedef struct G_Shell_ArticleVars
 {
     u8 damage_all_delay; // Shell can hit owner once this frame timer reaches -1
     u8 dust_gfx_int; // Delay between dust GFX
     u8 health; // Appears to deterime whether Shell will despawn after hittin a target, shell can have up to 4 HP
     u8 is_damage; // Shell can damage players
 
-} Shell_ArticleVars;
+} G_Shell_ArticleVars;
 
 typedef struct Taru_ArticleVars
 {

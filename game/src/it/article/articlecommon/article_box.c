@@ -345,7 +345,7 @@ void func_ovl3_80179A34(GObj *article_gobj)
 
     func_ovl3_8017279C(article_gobj);
     func_ovl3_8017275C(article_gobj);
-    func_ovl3_80173180(article_gobj, (ArticleHitEvent*)((uintptr_t)*Article_Spawn_Data.p_file + (uintptr_t)&Article_Box_Hit));
+    func_ovl3_80173180(article_gobj, (ArticleHitEvent*)((uintptr_t)*Article_Box_Data.p_file + (uintptr_t)&Article_Box_Hit));
 }
 
 void func_ovl3_80179AD4(GObj *article_gobj)
@@ -371,8 +371,8 @@ void func_ovl3_80179B08(GObj *article_gobj)
     if (effect_unk != NULL)
     {
         effect_unk->effect_info->scale.x =
-            effect_unk->effect_info->scale.y =
-            effect_unk->effect_info->scale.z = 1.4F;
+        effect_unk->effect_info->scale.y =
+        effect_unk->effect_info->scale.z = ATBOX_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
 

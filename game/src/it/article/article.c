@@ -482,7 +482,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
     {
         ap->pickup_wait--;
 
-        if (ap->pickup_wait <= ARTICLE_DESPAWN_FLASH_INT_DEFAULT)
+        if (ap->pickup_wait <= ARTICLE_DESPAWN_FLASH_START_DEFAULT)
         {
             if (ap->pickup_wait == 0)
             {

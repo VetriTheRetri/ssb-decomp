@@ -31,7 +31,7 @@
 #define ARTICLE_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
 #define ARTICLE_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying article's hitbox damage
 
-#define ARTICLE_DESPAWN_FLASH_INT_DEFAULT 180U // Article starts flashing rapidly once its lifetime (?) drops below this value
+#define ARTICLE_DESPAWN_FLASH_START_DEFAULT 180U // Article starts flashing rapidly once its lifetime (?) drops below this value
 #define ARTICLE_ARROW_BLINK_INT_DEFAULT 45 // Red arrow pointing downward at article "blinks" at this frequency (45 frames visible, 45 frames invisible)
 
 #define ARTICLE_REHIT_TIME_DEFAULT 16
@@ -387,7 +387,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     {
         Common_ArticleVars common;
         BombHei_ArticleVars bombhei;
-        Shell_ArticleVars shell;
+        G_Shell_ArticleVars shell;
         Taru_ArticleVars taru;
 
     } article_vars;

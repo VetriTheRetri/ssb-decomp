@@ -2797,7 +2797,7 @@ glabel jtbl_ovl3_8018A418
   /* 58924 104E64 8018A424 */  .4byte jtgt_ovl3_80179948
   .incbin "ovl3.raw.bin", 0x58928, 0x28
 
-glabel D_ovl3_8018A450
+glabel Article_Taru_Data
   .incbin "ovl3.raw.bin", 0x58950, 0x4
 
 glabel D_ovl3_8018A454
