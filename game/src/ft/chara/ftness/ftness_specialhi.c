@@ -102,7 +102,7 @@ void func_ovl3_80153E4C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->fighter_vars.ness.pk_thunder_timer3 != 0) fp->fighter_vars.ness.pk_thunder_timer3--;
+    if (fp->status_vars.ness.specialhi.pk_thunder_gravity_delay != 0) fp->status_vars.ness.specialhi.pk_thunder_gravity_delay--;
 
     func_ovl2_800D8BB4(fighter_gobj);
 }
@@ -112,7 +112,7 @@ void func_ovl3_80153E80(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *common_attrs = fp->attributes;
 
-    if (fp->fighter_vars.ness.pk_thunder_timer3 != 0) fp->fighter_vars.ness.pk_thunder_timer3--;
+    if (fp->status_vars.ness.specialhi.pk_thunder_gravity_delay != 0) fp->status_vars.ness.specialhi.pk_thunder_gravity_delay--;
 
     else func_ovl2_800D8D68(fp, 0.5F, common_attrs->fall_speed_max);
 
@@ -190,7 +190,7 @@ void func_ovl3_80154098(GObj *fighter_gobj)
 
     fp->fighter_vars.ness.pk_thunder_trail_id++;
 
-    if (fp->fighter_vars.ness.pk_thunder_trail_id >= ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x))
+    if (fp->fighter_vars.ness.pk_thunder_trail_id >= (ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_y))
     {
         fp->fighter_vars.ness.pk_thunder_trail_id = 0;
     }
@@ -224,8 +224,8 @@ void func_ovl3_8015416C(GObj *fighter_gobj)
     func_ovl3_80154098(fighter_gobj);
 
     if ((fp->fighter_vars.ness.pk_jibaku_delay <= 0) &&
-        (fp->fighter_vars.ness.pk_thunder_end_delay <= 0) &&
-        (fp->fighter_vars.ness.is_thunder_destroy & TRUE))
+    (fp->fighter_vars.ness.pk_thunder_end_delay <= 0) &&
+    (fp->fighter_vars.ness.is_thunder_destroy & TRUE))
     {
         func_ovl3_80154558(fighter_gobj);
     }
@@ -372,9 +372,7 @@ void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
         rotation -= DOUBLE_PI32;
     }
 
-    coll_mask = coll_data->unk_0x56;
-
-    if (coll_mask & MPCOLL_MASK_RWALL)
+    if (coll_data->unk_0x56 & MPCOLL_MASK_RWALL)
     {
         tan_rwall_angle = atan2f(coll_data->rwall_angle.y, coll_data->rwall_angle.x);
 
@@ -387,17 +385,14 @@ void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
 
         if ((rotation + PI32) < tangent)
         {
-            coll_mask = coll_data->unk_0x56;
             tangent += PI32;
         }
         else
         {
-            coll_mask = coll_data->unk_0x56;
             tangent += HALF_PI32;
         }
     }
-
-    if (coll_mask & MPCOLL_MASK_LWALL)
+    if (coll_data->unk_0x56 & MPCOLL_MASK_LWALL)
     {
         tan_lwall_angle = atan2f(coll_data->lwall_angle.y, coll_data->lwall_angle.x);
 
@@ -420,8 +415,9 @@ void func_ovl3_80154758(GObj *fighter_gobj) // Joint use here, fix array later t
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->joint[0]->rotate.x = (f32)((atan2f(fp->phys_info.vel_normal.x, fp->phys_info.vel_normal.y) * (f32)fp->lr) - HALF_PI32);
-    func_ovl2_800EB528(fp->joint[0]);
+    fp->joint[4]->rotate.x = (f32)((atan2f(fp->phys_info.vel_normal.x, fp->phys_info.vel_normal.y) * (f32)fp->lr) - HALF_PI32);
+
+    func_ovl2_800EB528(fp->joint[4]);
 }
 
 void func_ovl3_801547B8(GObj *fighter_gobj)
@@ -470,9 +466,9 @@ void func_ovl3_80154874(GObj *fighter_gobj)
     f32 fabs_axis;
     f32 fabs_axis_bak;
 
-    fp->phys_info.vel_normal.x -= (6.142857F * cosf(fp->status_vars.ness.specialhi.pk_jibaku_vel ) * (f32)fp->lr);
+    fp->phys_info.vel_normal.x -= (6.142857F * cosf(fp->status_vars.ness.specialhi.pk_jibaku_vel) * (f32)fp->lr);
 
-    fp->phys_info.vel_normal.y -= (6.142857F * __sinf(fp->status_vars.ness.specialhi.pk_jibaku_vel ));
+    fp->phys_info.vel_normal.y -= (6.142857F * __sinf(fp->status_vars.ness.specialhi.pk_jibaku_vel));
 
     fabs_axis = ABSF(fp->phys_info.vel_normal.x);
 
@@ -513,7 +509,7 @@ void func_ovl3_801549FC(GObj *fighter_gobj)
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        if (fp->coll_data.unk_0x56 & 0x21)
+        if (fp->coll_data.unk_0x56 & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
         {
             func_ovl2_800DEEC8(fp);
             func_ovl3_80154558(fighter_gobj);
@@ -521,7 +517,7 @@ void func_ovl3_801549FC(GObj *fighter_gobj)
         else func_ovl3_80154D1C(fighter_gobj);
     }
 
-    else if (fp->coll_data.unk_0x56 & 0x421)
+    else if (fp->coll_data.unk_0x56 & (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
         fp->phys_info.vel_ground.x = 0.0F;
         func_ovl3_80144498(fighter_gobj);
@@ -627,7 +623,7 @@ void func_ovl3_80154D1C(GObj *fighter_gobj)
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialAirHi, frame_begin, 1.0F, 0x93U);
 
-    fp->status_vars.ness.specialhi.pk_jibaku_vel  = atan2f(fp->phys_info.vel_normal.y, fp->phys_info.vel_normal.x * (f32)fp->lr);
+    fp->status_vars.ness.specialhi.pk_jibaku_vel = atan2f(fp->phys_info.vel_normal.y, fp->phys_info.vel_normal.x * (f32)fp->lr);
 
     fp->jumps_used = fp->attributes->jumps_max;
 }

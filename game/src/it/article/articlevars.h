@@ -123,6 +123,20 @@
 #define ATRSHELL_GRAVITY 1.2F
 #define ATRSHELL_T_VEL 100.0F
 
+#define ATBUMPER_LIFETIME 360
+#define ATBUMPER_DESPAWN_TIMER 60       // Bumper's lifetime is reset to this value; there is no hitbox during this state, and it vanishes for good once it runs out
+#define ATBUMPER_RESET_VEL_TIMER 4      // Bumper's X-velocity is reset to 0.0 when at_multi is less than this value
+#define ATBUMPER_DAMAGE_ALL_WAIT 16     
+#define ATBUMPER_HIT_SCALE 10           // Initial of bumper when hitting a target while airborne
+#define ATBUMPER_HIT_ANIM_LENGTH 3      // Number of frames bumper's airborne hit texture lasts 
+#define ATBUMPER_COLL_SIZE 120.0F           
+#define ATBUMPER_REBOUND_VEL_X (-100.0F)// Applied when bumper hits a target while grounded 
+#define ATBUMPER_REBOUND_AIR_X (-400.0F)// Applied when bumper hits a target while airborne
+#define ATBUMPER_REBOUND_AIR_Y 200.0F   // Applied when bumper hits a target while airborne
+#define ATBUMPER_GRAVITY_NORMAL 1.4F
+#define ATBUMPER_GRAVITY_HIT 4.0F
+#define ATBUMPER_T_VEL 80.0F
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -152,5 +166,13 @@ typedef struct Taru_ArticleVars
     f32 roll_rotate_speed;
 
 } Taru_ArticleVars;
+
+typedef struct Bumper_ArticleVars
+{
+    u16 hit_anim_length; // Number of frames "hit" animation lasts after bouncing off a target in midair
+    u16 unk_0x2;
+    u16 damage_all_delay; // Bumper is able to hit its owner (and teammates?) once this timer runs out
+
+} Bumper_ArticleVars;
 
 #endif
