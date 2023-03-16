@@ -221,7 +221,7 @@ typedef struct ArticleHitEvent // Hitbox subaction event?
 
 typedef struct Article_Hurt
 {
-    u8 flags_0x0;
+    u8 interact_mask; // 0x1 = interact with fighters, 0x2 = interact with items, 0x4 = interact with other articles
     s32 hit_status;
     Vec3f offset; // Added to TopN joint
     Vec3f size;
@@ -390,6 +390,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Shell_ArticleVars shell;
         Taru_ArticleVars taru;
         Bumper_ArticleVars bumper;
+        Gr_Lucky_ArticleVars gr_lucky;
 
     } article_vars;
 

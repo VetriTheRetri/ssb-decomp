@@ -2975,7 +2975,7 @@ glabel jtbl_ovl3_8018A784
   /* 58CA4 1051E4 8018A7A4 */  .4byte func_ovl3_8017BED4
   .incbin "ovl3.raw.bin", 0x58CA8, 0x28
 
-glabel D_ovl3_8018A7D0
+glabel Article_POW_Data
   .incbin "ovl3.raw.bin", 0x58CD0, 0x4
   /* 58CD4 105214 8018A7D4 */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x58CD8, 0x4
@@ -2986,12 +2986,12 @@ glabel D_ovl3_8018A7D0
   /* 58CE4 105224 8018A7E4 */  .4byte func_ovl3_8017C090
   .incbin "ovl3.raw.bin", 0x58CE8, 0x1C
 
-glabel D_ovl3_8018A804
+glabel Article_POW_Status
   .incbin "ovl3.raw.bin", 0x58D04, 0x1C
   /* 58D20 105260 8018A820 */  .4byte func_ovl3_8017C15C
   .incbin "ovl3.raw.bin", 0x58D24, 0xC
 
-glabel D_ovl3_8018A830
+glabel Article_Gr_Lucky_Data
   .incbin "ovl3.raw.bin", 0x58D30, 0x4
   /* 58D34 105274 8018A834 */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x58D38, 0xC
@@ -3003,7 +3003,7 @@ glabel D_ovl3_8018A830
 glabel jtbl_ovl3_8018A860
   /* 58D60 1052A0 8018A860 */  .4byte jtgt_ovl3_8017C530
 
-glabel D_ovl3_8018A864
+glabel Article_Gr_Lucky_Status
   /* 58D64 1052A4 8018A864 */  .4byte jtgt_ovl3_8017C4BC
   .incbin "ovl3.raw.bin", 0x58D68, 0x28
 

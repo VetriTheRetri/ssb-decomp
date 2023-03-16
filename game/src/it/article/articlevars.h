@@ -137,6 +137,18 @@
 #define ATBUMPER_GRAVITY_HIT 4.0F
 #define ATBUMPER_T_VEL 80.0F
 
+#define ATGRLUCKY_SPAWN_EGG_WAIT 1      // Wait this many frames before spawning egg (read only when egg spawn function is called)
+#define ATGRLUCKY_SPAWN_EGG_OFF_X 200.0F// X-offset of egg spawn
+#define ATGRLUCKY_SPAWN_EGG_OFF_Y 200.0F// Y-offset of egg spawn
+#define ATGRLUCKY_SPAWN_EGG_MUL 8.0F    // Multiplies random velocity of egg
+#define ATGRLUCKY_SPAWN_EGG_ADD_X 8.0F  // Added to mutliplied random velocity of egg
+#define ATGRLUCKY_SPAWN_EGG_ADD_Y 30.0F // Added to multiplide random velocity of egg
+#define ATGRLUCKY_SPAWN_EGG_BEGIN 80.0F // First frame egg spawn function is called
+#define ATGRLUCKY_SPAWN_EGG_END 85.0F   // Last frame egg spawn function is called
+#define ATGRLUCKY_HIT_ROTATE_Z 0.10471976F // Rotation step when Chansey is knocked out of the Pokémon hut? Not actually applied?
+#define ATGRLUCKY_GRAVITY 1.2F
+#define ATGRLUCKY_T_VEL 100.0F
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -174,5 +186,12 @@ typedef struct Bumper_ArticleVars
     u16 damage_all_delay; // Bumper is able to hit its owner (and teammates?) once this timer runs out
 
 } Bumper_ArticleVars;
+
+typedef struct Gr_Lucky_ArticleVars
+{
+    Vec3f pos;
+    u16 spawn_egg_wait;
+
+} Gr_Lucky_ArticleVars;
 
 #endif

@@ -84,7 +84,7 @@ struct DObj
     s32 unk_dobj_0x70;
     f32 unk_dobj_0x74; // Multi-purpose? Usually FLOAT32_MAX, used as rotation step in Crate/Barrel smash GFX?
     f32 unk_dobj_0x78; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?
-    f32 unk_dobj_0x7C; // Multi-purpose? Usually 0.0F, but used as rotation step in Crate/Barrel smash GFX?
+    f32 unk_dobj_0x7C; // Multi-purpose? Usually animation frame, but used as rotation step in Crate/Barrel smash GFX?
     MObj *mobj;
     DObj *unk_0x84;
 

@@ -76,9 +76,9 @@ void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 
 
 extern GObj* (*Article_Callback_Spawn[])(GObj*, Vec3f*, Vec3f*, u32); // Array count is likely 45
 
-GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *arg3, u32 spawn_flags) // UPDATE: WHAT IS THIS OPTIMIZATION BRUH T.T
+GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *vel, u32 spawn_flags) // UPDATE: WHAT IS THIS OPTIMIZATION BRUH T.T
 {
-    GObj *new_gobj = Article_Callback_Spawn[index](article_gobj, pos, arg3, spawn_flags);
+    GObj *new_gobj = Article_Callback_Spawn[index](article_gobj, pos, vel, spawn_flags);
 
     if (new_gobj != NULL)
     {
@@ -1026,7 +1026,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Fighter_Struct *fp;
 
-    if (ap->article_hurt.flags_0x0 & GMHITCOLLISION_MASK_FIGHTER)
+    if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_FIGHTER)
     {
         fighter_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
 
@@ -1126,7 +1126,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
     this_ap = ArticleGetStruct(this_gobj);
     this_hit = &this_ap->article_hit[0];
 
-    if (this_ap->article_hurt.flags_0x0 & GMHITCOLLISION_MASK_ARTICLE)
+    if (this_ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ARTICLE)
     {
         other_gobj = gOMObjCommonLinks[GObjLinkIndex_Article];
 
@@ -1256,7 +1256,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
     ap = ArticleGetStruct(article_gobj);
     at_hit = &ap->article_hit[0];
 
-    if (ap->article_hurt.flags_0x0 & GMHITCOLLISION_MASK_ITEM)
+    if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
     {
         item_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
 
