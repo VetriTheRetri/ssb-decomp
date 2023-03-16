@@ -503,7 +503,7 @@ void func_ovl3_80177D28(GObj *article_gobj)
 
     ap->at_multi = 0;
 
-    joint->mobj->unk_image_0x94 = 0;
+    joint->mobj->unk_mobj_0x94 = 0;
 
     func_ovl3_80172F98(article_gobj, ATBOMBHEI_EXPLODE_COLANIM_ID, ATBOMBHEI_EXPLODE_COLANIM_DURATION);
 }

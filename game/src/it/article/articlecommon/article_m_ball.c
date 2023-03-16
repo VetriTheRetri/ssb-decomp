@@ -19,7 +19,7 @@ void func_ovl3_8017C6F8(GObj *article_gobj)
 {
     DObj *joint = DObjGetStruct(article_gobj);
 
-    joint->next->unk_0x8->mobj->unk_image_0x94 = 0;
+    joint->next->unk_0x8->mobj->unk_mobj_0x94 = 0;
 }
 
 bool32 jtgt_ovl3_8017C710(GObj *article_gobj)

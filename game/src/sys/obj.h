@@ -49,6 +49,33 @@ struct GObj
 
 extern GObj *gOMObjCommonLinks[];
 
+#ifndef Mtx_t
+
+typedef long	Mtx_t[4][4];
+
+#endif
+
+#ifndef Mtx
+
+typedef union {
+    Mtx_t		m;
+    long long int	force_structure_alignment;
+} Mtx;
+
+#endif 
+
+typedef struct OMMtx OMMtx;
+
+struct OMMtx {
+    /* 0x00 */ struct OMMtx *next;
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ u8 unk05;
+    /* 0x08 */ Mtx unk08;
+    ///* 0x08 */ f32 unk08[4][4];
+    ///* 0x08 */ f32 (*unk08)[4][4];
+    ///* 0x0C */ u8 pad0C[0x48 - 0xc];
+}; // size == 0x48
+
 typedef struct MObj // Image footer struct
 {
     u8 filler[0x80];
@@ -56,7 +83,8 @@ typedef struct MObj // Image footer struct
     f32 unk_0x84;
     f32 anim_frame; // Current frame of texture animation
     u8 filler_0x8C[0x94 - 0x8C];
-    u32 unk_image_0x94;
+    u32 unk_mobj_0x94;
+    f32 unk_mobj_0x98;
 
 } MObj;
 
@@ -80,7 +108,7 @@ struct DObj
     void *display_list;
     u8 unk_0x54;
     void *mtx_position; // ???
-    u8 filler_0x5C[0x70 - 0x5C];
+    OMMtx om_mtx[5];
     s32 unk_dobj_0x70;
     f32 unk_dobj_0x74; // Multi-purpose? Usually FLOAT32_MAX, used as rotation step in Crate/Barrel smash GFX?
     f32 unk_dobj_0x78; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?

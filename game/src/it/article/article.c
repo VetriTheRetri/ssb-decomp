@@ -669,7 +669,7 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
 void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct *ap, Article_Hurt *at_hurt, GObj *fighter_gobj, GObj *article_gobj)
 {
     s32 damage;
-    f32 damage_launch_angle;
+    f32 damage_knockback;
     Vec3f sp4C;
 
     func_ovl2_800E26BC(fp, ft_hit->unk_0x4, article_gobj, 0, 0, 0);
@@ -701,11 +701,11 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
         }
         if (ap->x2D3_flag_b4)
         {
-            damage_launch_angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->offset_hit_type, ap->unk_0x16);
+            damage_knockback = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->offset_hit_type, ap->unk_0x16);
 
-            if (ap->damage_launch_angle < damage_launch_angle)
+            if (ap->damage_knockback < damage_knockback)
             {
-                ap->damage_launch_angle = damage_launch_angle;
+                ap->damage_knockback = damage_knockback;
             }
         }
         func_ovl2_800F0AF8(&sp4C, ft_hit, at_hurt, article_gobj);
@@ -885,9 +885,9 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
         {
             launch_angle = func_ovl2_800E9D78(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->unk_0x16, )defend_ap->unk_0x16);
 
-            if (defend_ap->damage_launch_angle < launch_angle)
+            if (defend_ap->damage_knockback < launch_angle)
             {
-                defend_ap->damage_launch_angle = launch_angle;
+                defend_ap->damage_knockback = launch_angle;
             }
         }
         if (attack_ap->is_hitlag_victim)
@@ -977,9 +977,9 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
         {
             angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->unk_0x12, ap->unk_0x16);
 
-            if (ap->damage_launch_angle < angle)
+            if (ap->damage_knockback < angle)
             {
-                ap->damage_launch_angle = angle;
+                ap->damage_knockback = angle;
             }
         }
         if (ip->is_hitlag_victim)
@@ -1499,7 +1499,7 @@ next_check:
     ap->damage_last = 0;
     ap->damage_taken_recent = 0;
     ap->damage_taken_last = 0;
-    ap->damage_launch_angle = 0.0F;
+    ap->damage_knockback = 0.0F;
 }
 
 void func_ovl3_801713B0(GObj *article_gobj)

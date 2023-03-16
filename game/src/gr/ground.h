@@ -5,6 +5,12 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+typedef enum grKind
+{
+    Gr_Kind_Castle // Peach's Castle
+
+} grKind;
+
 struct Ground_Info_80131300
 {
     void *unk_0x0;

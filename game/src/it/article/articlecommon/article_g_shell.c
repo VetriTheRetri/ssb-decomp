@@ -38,7 +38,7 @@ void func_ovl3_80178670(GObj *article_gobj)
 
 void func_ovl3_80178704(GObj *article_gobj)
 {
-    DObjGetStruct(article_gobj)->mobj->unk_image_0x94 = 0;
+    DObjGetStruct(article_gobj)->mobj->unk_mobj_0x94 = 0;
     DObjGetStruct(article_gobj)->unk_dobj_0x70 = 0;
 }
 

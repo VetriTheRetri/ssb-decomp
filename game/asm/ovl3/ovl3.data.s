@@ -2916,7 +2916,7 @@ glabel jtbl_ovl3_8018A67C
   /* 58B80 1050C0 8018A680 */  .4byte func_ovl3_8017A9D0
   .incbin "ovl3.raw.bin", 0x58B84, 0xC
 
-glabel Article_IBumper_Data
+glabel Article_At_Bumper_Data
   .incbin "ovl3.raw.bin", 0x58B90, 0x4
   /* 58B94 1050D4 8018A694 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58B98, 0xC
@@ -2926,7 +2926,7 @@ glabel jtbl_ovl3_8018A6A4
   /* 58BA8 1050E8 8018A6A8 */  .4byte jtgt_ovl3_8017B548
   .incbin "ovl3.raw.bin", 0x58BAC, 0x18
 
-glabel Article_IBumper_Status
+glabel Article_At_Bumper_Status
   .incbin "ovl3.raw.bin", 0x58BC4, 0x4
   /* 58BC8 105108 8018A6C8 */  .4byte func_ovl3_8017B520
   .incbin "ovl3.raw.bin", 0x58BCC, 0x18
@@ -3059,14 +3059,14 @@ glabel jtbl_ovl3_8018A984
   /* 58E9C 1053DC 8018A99C */  .4byte jtgt_ovl3_8017C97C
   .incbin "ovl3.raw.bin", 0x58EA0, 0x10
 
-glabel D_ovl3_8018A9B0
+glabel Article_Pakkun_Data
   .incbin "ovl3.raw.bin", 0x58EB0, 0x4
   /* 58EB4 1053F4 8018A9B4 */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x58EB8, 0xC
   /* 58EC4 105404 8018A9C4 */  .4byte func_ovl3_8017D0A4
   .incbin "ovl3.raw.bin", 0x58EC8, 0x1C
 
-glabel D_ovl3_8018A9E4
+glabel Article_Pakkun_Status
   /* 58EE4 105424 8018A9E4 */  .4byte func_ovl3_8017D0A4
   .incbin "ovl3.raw.bin", 0x58EE8, 0x1C
   /* 58F04 105444 8018AA04 */  .4byte func_ovl3_8017D298
@@ -3077,7 +3077,7 @@ glabel jtbl_ovl3_8018AA20
   /* 58F24 105464 8018AA24 */  .4byte jtgt_ovl3_8017D434
   .incbin "ovl3.raw.bin", 0x58F28, 0x28
 
-glabel D_ovl3_8018AA50
+glabel Article_Gr_Bumper_Data
   .incbin "ovl3.raw.bin", 0x58F50, 0x4
   /* 58F54 105494 8018AA54 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58F58, 0xC

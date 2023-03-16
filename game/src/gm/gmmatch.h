@@ -104,7 +104,7 @@ typedef struct gmPlayerBlock
 typedef struct gmMatchInfo
 {
     u8 unk_0x0;
-    u8 unk_0x1;
+    u8 gr_kind;
     u8 is_team_battle;
     u8 match_type; // 1 = stock, 2 = time
     u8 unk_0x4;

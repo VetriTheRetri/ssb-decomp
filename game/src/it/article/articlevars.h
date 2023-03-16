@@ -123,6 +123,8 @@
 #define ATRSHELL_GRAVITY 1.2F
 #define ATRSHELL_T_VEL 100.0F
 
+#define ATBUMPER_CASTLE_KNOCKBACK 300   // Weight-Dependent Set Knockback of Bumper on Peach's Castle
+#define ATBUMPER_CASTLE_ANGLE 361       // Knockback angle of Bumper on Peach's Castle
 #define ATBUMPER_LIFETIME 360
 #define ATBUMPER_DESPAWN_TIMER 60       // Bumper's lifetime is reset to this value; there is no hitbox during this state, and it vanishes for good once it runs out
 #define ATBUMPER_RESET_VEL_TIMER 4      // Bumper's X-velocity is reset to 0.0 when at_multi is less than this value
@@ -152,6 +154,15 @@
 #define ATMBALL_SPAWN_WAIT 30           // Wait this many frames before releasing Pokémon once thrown and landed
 #define ATMBALL_GRAVITY 1.5F 
 #define ATMBALL_T_VEL 120.0F
+
+#define ATPAKKUN_APPEAR_WAIT 180          // Duration Pirahna Plant waits before coming out of its pipe
+#define ATPAKKUN_REBIRTH_WAIT 1200        // Duration Pirahna Plant waits before respawning after being knocked out and hitting one of the blast zones
+#define ATPAKKUN_APPEAR_OFF_Y 245.0F      
+#define ATPAKKUN_CLAMP_OFF_Y 360.0F      
+#define ATPAKKUN_HURT_SIZE_MUL_Y 0.5F   
+#define ATPAKKUN_DETECT_SIZE_WIDTH 600.0F // Width of Pirahna Plant fighter detection box when checking to stay inside the pipe
+#define ATPAKKUN_DETECT_SIZE_BOTTOM (-300.0F) // Bottom of Pirahna Plant fighter detection box when checking to stay inside the pipe
+#define ATPAKKUN_DETECT_SIZE_TOP 700.0F   // Top of Pirahna Plant fighter detection box when checking to stay inside the pipe
 
 typedef struct Common_ArticleVars
 {
@@ -205,5 +216,12 @@ typedef struct M_Ball_ArticleVars
     GObj *effect_gobj; // Poké Ball ray scatter GFX
 
 } M_Ball_ArticleVars;
+
+typedef struct Pakkun_ArticleVars
+{
+    Vec3f pos;
+    u8 is_wait_fighter; // TRUE if a fighter is occupying the pipe
+
+} Pakkun_ArticleVars;
 
 #endif

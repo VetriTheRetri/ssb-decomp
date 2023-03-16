@@ -286,7 +286,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u16 unk_0x28C;
     u16 unk_0x28E;
     s32 damage_last; // Last 
-    f32 damage_launch_angle; // Angle at which article will be launched when getting hit?
+    f32 damage_knockback; // Angle at which article will be launched when getting hit?
     s32 damage_taken_recent;
     s32 damage_angle;
     s32 damage_element;
@@ -398,6 +398,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Bumper_ArticleVars bumper;
         Gr_Lucky_ArticleVars gr_lucky;
         M_Ball_ArticleVars m_ball;
+        Pakkun_ArticleVars pakkun;
 
     } article_vars;
 

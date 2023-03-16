@@ -120,7 +120,7 @@ void func_ovl3_8017A6A0(GObj *article_gobj) // Identical to Green Shell function
 
 void func_ovl3_8017A734(GObj *article_gobj)
 {
-    DObjGetStruct(article_gobj)->mobj->unk_image_0x94 = 0;
+    DObjGetStruct(article_gobj)->mobj->unk_mobj_0x94 = 0;
     DObjGetStruct(article_gobj)->unk_dobj_0x70 = 0;
 }
 

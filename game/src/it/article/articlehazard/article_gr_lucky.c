@@ -119,12 +119,12 @@ bool32 jtgt_ovl3_8017C530(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
-    if (ap->damage_launch_angle >= 100.0F)
+    if (ap->damage_knockback >= 100.0F)
     {
-        f32 angle = func_ovl3_801409BC(ap->damage_angle, ap->ground_or_air, ap->damage_launch_angle);
+        f32 angle = func_ovl3_801409BC(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
 
-        ap->phys_info.vel.x = (cosf(angle) * ap->damage_launch_angle * -ap->lr_damage);
-        ap->phys_info.vel.y = (__sinf(angle) * ap->damage_launch_angle);
+        ap->phys_info.vel.x = (cosf(angle) * ap->damage_knockback * -ap->lr_damage);
+        ap->phys_info.vel.y = (__sinf(angle) * ap->damage_knockback);
 
         ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
         ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
