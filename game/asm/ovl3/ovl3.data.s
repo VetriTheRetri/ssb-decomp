@@ -3017,7 +3017,7 @@ glabel jtbl_ovl3_8018A8A4
   /* 58DA8 1052E8 8018A8A8 */  .4byte jtgt_ovl3_8017C790
   .incbin "ovl3.raw.bin", 0x58DAC, 0x18
 
-glabel D_ovl3_8018A8C4
+glabel Article_M_Ball_Status
   .incbin "ovl3.raw.bin", 0x58DC4, 0x4
   /* 58DC8 105308 8018A8C8 */  .4byte func_ovl3_8017C768
   .incbin "ovl3.raw.bin", 0x58DCC, 0x18

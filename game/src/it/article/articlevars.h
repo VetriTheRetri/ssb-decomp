@@ -149,6 +149,9 @@
 #define ATGRLUCKY_GRAVITY 1.2F
 #define ATGRLUCKY_T_VEL 100.0F
 
+#define ATMBALL_GRAVITY 1.5F 
+#define ATMBALL_T_VEL 120.0F
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -193,5 +196,12 @@ typedef struct Gr_Lucky_ArticleVars
     u16 spawn_egg_wait;
 
 } Gr_Lucky_ArticleVars;
+
+typedef struct M_Ball_ArticleVars
+{
+    u16 is_rebound; // Set to TRUE when Poké Ball bounces back off a target
+    GObj *owner_gobj;
+
+} M_Ball_ArticleVars;
 
 #endif
