@@ -15,7 +15,7 @@
 
 #define ARTICLE_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
 #define ARTICLE_MASK_SPAWN_NONE 1                  // Item spawned independently 
-#define ARTICLE_MASK_SPAWN_ARTICLE 2               // Item spawned by another item
+#define ARTICLE_MASK_SPAWN_ITEM 2               // Item spawned by another item
 #define ARTICLE_MASK_SPAWN_ARTICLE 3               // Item spawned by Pokémon / misc entity class(es?)
 
 #define ARTICLE_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
@@ -49,60 +49,66 @@ typedef enum atKind
 {
     // Common articles
 
-    At_Kind_Box,        // Crate
-    At_Kind_Taru,       // Barrel
-    At_Kind_Capsule,    // Capsule
-    At_Kind_Egg,        // Egg
-    At_Kind_Tomato,     // Maxim Tomato
-    At_Kind_Heart,      // Heart
-    At_Kind_Star,       // Star Man
-    At_Kind_Sword,      // Beam Sword
-    At_Kind_Bat,        // Home-Run Bat
-    At_Kind_Harisen,    // Fan
-    At_Kind_StarRod,    // Star Rod
-    At_Kind_L_Gun,      // Ray Gun
-    At_Kind_F_Flower,   // Fire Flower
-    At_Kind_Hammer,     // Hammer
-    At_Kind_MSBomb,     // Motion-Sensor Bomb
-    At_Kind_BombHei,    // Bob-Omb
-    At_Kind_It_Bumper,  // Bumper (Item)
-    At_Kind_G_Shell,    // Green Shell
-    At_Kind_R_Shell,    // Red Shell
-    At_Kind_M_Ball,     // Poké Ball
+    At_Kind_CommonStart,                    // Start of common article IDs
+    At_Kind_Box = At_Kind_CommonStart,      // Crate
+    At_Kind_Taru,                           // Barrel
+    At_Kind_Capsule,                        // Capsule
+    At_Kind_Egg,                            // Egg
+    At_Kind_Tomato,                         // Maxim Tomato
+    At_Kind_Heart,                          // Heart
+    At_Kind_Star,                           // Star Man
+    At_Kind_Sword,                          // Beam Sword
+    At_Kind_Bat,                            // Home-Run Bat
+    At_Kind_Harisen,                        // Fan
+    At_Kind_StarRod,                        // Star Rod
+    At_Kind_L_Gun,                          // Ray Gun
+    At_Kind_F_Flower,                       // Fire Flower
+    At_Kind_Hammer,                         // Hammer
+    At_Kind_MSBomb,                         // Motion-Sensor Bomb
+    At_Kind_BombHei,                        // Bob-Omb
+    At_Kind_It_Bumper,                      // Bumper (Item)
+    At_Kind_G_Shell,                        // Green Shell
+    At_Kind_R_Shell,                        // Red Shell
+    At_Kind_M_Ball,                         // Poké Ball
 
     // Character articles
 
-    At_Kind_PK_Fire,    // PK Fire pillar
-    At_Kind_Link_Bomb,  // Link's Bomb
+    At_Kind_FighterStart,                   // Start of fighter article IDs
+    At_Kind_PK_Fire = At_Kind_FighterStart, // PK Fire pillar
+    At_Kind_Link_Bomb,                      // Link's Bomb
     
     // Stage hazards
 
-    At_Kind_POW,        // POW block
-    At_Kind_Gr_Bumper,  // Bumper (Peach's Castle)
-    At_Kind_Pakkun,     // Pirahna Plant
-    At_Kind_Mato,       // Target
-    At_Kind_Gr_Bomb,    // Race to the Finish bomb
-    At_Kind_Gr_Lucky,   // Chansey (Saffron City)
-    At_Kind_Marumine,   // Electrode
-    At_Kind_Hitokage,   // Charmander
-    At_Kind_Fushigibana,// Venusaur
-    At_Kind_Porygon,    // Porygon
+    At_Kind_GroundStart,                    // Start of stage hazard IDs
+    At_Kind_POW = At_Kind_GroundStart,      // POW block
+    At_Kind_Gr_Bumper,                      // Bumper (Peach's Castle)
+    At_Kind_Pakkun,                         // Pirahna Plant
+    At_Kind_Mato,                           // Target
+    At_Kind_Gr_Bomb,                        // Race to the Finish bomb
+    At_Kind_Gr_Lucky,                       // Chansey (Saffron City)
+    At_Kind_Marumine,                       // Electrode
+    At_Kind_Hitokage,                       // Charmander
+    At_Kind_Fushigibana,                    // Venusaur
+    At_Kind_Porygon,                        // Porygon
 
     // Pokémon
 
-    At_Kind_Iwark,      // Onix
-    At_Kind_Kabigon,    // Snorlax
-    At_Kind_Tosakinto,  // Goldeen
-    At_Kind_Nyars,      // Meowth
-    At_Kind_Lizardon,   // Charizard
-    At_Kind_Spear,      // Beedrill
-    At_Kind_Kamex,      // Blastoise
-    At_Kind_At_Lucky,   // Chansey (Poké Ball)
-    At_Kind_Starmie,    // Starmie
-    At_Kind_Sawamura,   // Hitmonlee
-    At_Kind_Dogas,      // Koffing
-    At_Kind_Pippi,      // Clefairy
-    At_Kind_Mew         // Mew
+    At_Kind_MonsterStart,                   // Start of Pokémon article IDs
+    At_Kind_Iwark = At_Kind_MonsterStart,   // Onix
+    At_Kind_Kabigon,                        // Snorlax
+    At_Kind_Tosakinto,                      // Goldeen
+    At_Kind_Nyars,                          // Meowth
+    At_Kind_Lizardon,                       // Charizard
+    At_Kind_Spear,                          // Beedrill
+    At_Kind_Kamex,                          // Blastoise
+    At_Kind_At_Lucky,                       // Chansey (Poké Ball)
+    At_Kind_Starmie,                        // Starmie
+    At_Kind_Sawamura,                       // Hitmonlee
+    At_Kind_Dogas,                          // Koffing
+    At_Kind_Pippi,                          // Clefairy
+    At_Kind_Mew,                            // Mew
+
+    At_Kind_CustomStart                     // Start of custom article IDs (future modding?)
 
 } atKind;
 

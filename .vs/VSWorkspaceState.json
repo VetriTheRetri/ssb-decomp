@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
     "\\game\\src",
-    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articlecommon",
+    "\\game\\src\\it\\article\\articlehazard",
     "\\game\\src\\it\\article\\articlemonster",
     "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_m_ball.c",
+  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_r_shell.c",
   "PreviewInSolutionExplorer": false
 }

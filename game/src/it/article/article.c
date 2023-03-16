@@ -82,7 +82,7 @@ GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *vel, 
 
     if (new_gobj != NULL)
     {
-        if (index < At_Kind_PK_Fire)
+        if (index < At_Kind_FighterStart)
         {
             func_ovl2_801044B4(pos);
             func_ovl3_80172394(new_gobj, FALSE);
@@ -168,7 +168,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 item_count = 0;
 
-                for (i = 0; i < 20; i++, item_bits_2 >>= 1)
+                for (i = 0; i < At_Kind_FighterStart; i++, item_bits_2 >>= 1)
                 {
                     if (item_bits_2 & 1)
                     {
@@ -212,7 +212,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 unk_0x84 = Ground_Info->unk_0x84;
 
-                for (i = 0, j = 0; i < 20; i++, item_bits >>= 1)
+                for (i = 0, j = 0; i < At_Kind_FighterStart; i++, item_bits >>= 1)
                 {
                     if ((item_bits & 1) && (unk_0x84->byte[i] != 0))
                     {
@@ -227,7 +227,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 item_count_2 = 0;
 
-                for (i = 0, j = 0; i < 20; i++, item_bits_3 >>= 1)
+                for (i = 0, j = 0; i < At_Kind_FighterStart; i++, item_bits_3 >>= 1)
                 {
                     if ((item_bits_3 & 1) && (unk_0x84->byte[i] != 0))
                     {
@@ -371,11 +371,9 @@ void func_ovl3_8016F218(void)
     Monster_Info.unk_0x2E = 12;
 }
 
-extern void* (*Article_Callback_Spawn[20])(s32, s32, s32, s32);
-
-void* func_ovl3_8016F238(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+GObj* func_ovl3_8016F238(GObj *spawn_gobj, s32 index, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    return Article_Callback_Spawn[arg1](arg0, arg2, arg3, arg4);
+    return Article_Callback_Spawn[index](spawn_gobj, pos, vel, flags);
 }
 
 void func_ovl3_8016F280(GObj *article_gobj)

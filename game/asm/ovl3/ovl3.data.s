@@ -3007,7 +3007,7 @@ glabel Article_Gr_Lucky_Status
   /* 58D64 1052A4 8018A864 */  .4byte jtgt_ovl3_8017C4BC
   .incbin "ovl3.raw.bin", 0x58D68, 0x28
 
-glabel D_ovl3_8018A890
+glabel Article_M_Ball_Data
   .incbin "ovl3.raw.bin", 0x58D90, 0x4
   /* 58D94 1052D4 8018A894 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58D98, 0xC

@@ -584,11 +584,11 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
     }
     else
     {
-        for (i = j = At_Kind_Iwark; i < At_Kind_Mew; i++) // Pokémon IDs
+        for (i = j = At_Kind_MonsterStart; i < At_Kind_Mew; i++) // Pokémon IDs
         {
             if ((i != Monster_Info.monster_curr) && (i != Monster_Info.monster_prev))
             {
-                Monster_Info.monster_index[j - At_Kind_Iwark] = i;
+                Monster_Info.monster_index[j - At_Kind_MonsterStart] = i;
                 j++;
             }
         }
@@ -601,7 +601,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
     Monster_Info.monster_prev = Monster_Info.monster_curr;
     Monster_Info.monster_curr = index;
 
-    monster_gobj = func_ovl3_8016F238(article_gobj, index, &DObjGetStruct(article_gobj)->translate, &vel, 0x80000003);
+    monster_gobj = func_ovl3_8016F238(article_gobj, index, &DObjGetStruct(article_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
 
     if (monster_gobj != NULL)
     {
