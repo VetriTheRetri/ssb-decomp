@@ -40,30 +40,30 @@ void func_ovl3_80163C2C(GObj *fighter_gobj, Item_Struct *ip)
         break;
 
     case 1:
-        ip->item_hit[0].update_state = 1;
-        ip->item_hit[0].size = FTLINK_SPIN_ATTACK_FLAG_SIZE_1;
+        ip->item_hit.update_state = 1;
+        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_1;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 2:
 
-        ip->item_hit[0].update_state = 1;
-        ip->item_hit[0].size = FTLINK_SPIN_ATTACK_FLAG_SIZE_2;
+        ip->item_hit.update_state = 1;
+        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_2;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 3:
-        ip->item_hit[0].update_state = 1;
-        ip->item_hit[0].size = FTLINK_SPIN_ATTACK_FLAG_SIZE_3;
+        ip->item_hit.update_state = 1;
+        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_3;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 4:
-        ip->item_hit[0].update_state = 1;
-        ip->item_hit[0].size = FTLINK_SPIN_ATTACK_FLAG_SIZE_4;
+        ip->item_hit.update_state = 1;
+        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_4;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
@@ -76,12 +76,12 @@ void func_ovl3_80163C2C(GObj *fighter_gobj, Item_Struct *ip)
     case 10:
     case 11:
     case 12:
-        ip->item_hit[0].update_state = 0;
+        ip->item_hit.update_state = 0;
         break;
 
     case 13:
     default:
-        ip->item_hit[0].update_state = 0;
+        ip->item_hit.update_state = 0;
         break;
     }
     fp->cmd_flags.flag2 = 0;
@@ -146,7 +146,7 @@ void func_ovl3_80163D94(GObj *fighter_gobj, bool32 is_skip_gobj)
                 Item_Struct *ip = ItemGetStruct(spin_attack_gobj);
                 s32 i;
 
-                ip->item_hit[0].update_state = 0;
+                ip->item_hit.update_state = 0;
 
                 for (i = 0; i < (ARRAY_COUNT(ip->item_vars.spin_attack.pos_x) | ARRAY_COUNT(ip->item_vars.spin_attack.pos_y)); i++)
                 {

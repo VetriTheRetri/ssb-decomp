@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\game",
+    "\\game\\include",
     "\\game\\src",
-    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\article\\articlehazard",
@@ -11,6 +11,6 @@
     "\\game\\src\\it\\item",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\item\\itemvars.h",
+  "SelectedNode": "\\game\\include\\ssb_types.h",
   "PreviewInSolutionExplorer": false
 }

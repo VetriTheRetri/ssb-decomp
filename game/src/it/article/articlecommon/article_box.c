@@ -330,16 +330,16 @@ void func_ovl3_80179A34(GObj *article_gobj)
     ap->x340_flag_b0123 = 0;
     ap->at_multi = 0;
 
-    ap->article_hit[0].hit_sfx = 1;
+    ap->article_hit.hit_sfx = 1;
 
-    ap->article_hit[0].flags_0x4C_b1 = TRUE;
-    ap->article_hit[0].can_deflect = FALSE;
-    ap->article_hit[0].can_reflect = FALSE;
+    ap->article_hit.flags_0x4C_b1 = TRUE;
+    ap->article_hit.can_deflect = FALSE;
+    ap->article_hit.can_reflect = FALSE;
 
-    ap->article_hit[0].stale = ARTICLE_STALE_DEFAULT;
-    ap->article_hit[0].element = gmHitCollision_Element_Fire;
+    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->article_hit.element = gmHitCollision_Element_Fire;
 
-    ap->article_hit[0].clang = FALSE;
+    ap->article_hit.clang = FALSE;
 
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
 
@@ -360,7 +360,7 @@ void func_ovl3_80179B08(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ap->phys_info.vel.x = 0.0F;
     ap->phys_info.vel.y = 0.0F;

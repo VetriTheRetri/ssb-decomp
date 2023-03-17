@@ -22,7 +22,7 @@ extern Mtx D_ovl2_8012C310;
 void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
-    Item_Hit *item_hit = &ip->item_hit[0];
+    Item_Hit *item_hit = &ip->item_hit;
     MtxStore mtx_store;
     s32 i;
 
@@ -169,7 +169,7 @@ void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
     }
     else
     {
-        if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit[0].update_state == gmHitCollision_UpdateState_Disable))
+        if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             func_ovl3_80167454();
 
@@ -225,7 +225,7 @@ void func_ovl3_80167660(GObj *item_gobj)
 
         func_ovl3_801671F0(item_gobj);
     }
-    else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit[0].update_state == gmHitCollision_UpdateState_Disable))
+    else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit.update_state == gmHitCollision_UpdateState_Disable))
     {
         func_ovl3_80167454();
 

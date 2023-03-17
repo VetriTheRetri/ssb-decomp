@@ -54,7 +54,7 @@ void func_ovl3_8017E100(GObj *article_gobj)
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit[0].update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
@@ -91,14 +91,14 @@ void func_ovl3_8017E25C(GObj *article_gobj)
         joint->scale.y = ATKABIGON_DROP_SIZE_KABIGON;
         joint->scale.x = ATKABIGON_DROP_SIZE_KABIGON;
 
-        ap->article_hit[0].size *= ATKABIGON_DROP_SIZE_KABIGON;
+        ap->article_hit.size *= ATKABIGON_DROP_SIZE_KABIGON;
     }
     else
     {
         joint->scale.y = ATKABIGON_DROP_SIZE_OTHER;
         joint->scale.x = ATKABIGON_DROP_SIZE_OTHER;
 
-        ap->article_hit[0].size *= ATKABIGON_DROP_SIZE_OTHER;
+        ap->article_hit.size *= ATKABIGON_DROP_SIZE_OTHER;
     }
     article_gobj->renderer = func_ovl3_8017E100;
 
@@ -167,7 +167,7 @@ void func_ovl3_8017E4A4(GObj *article_gobj)
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit[0].update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
@@ -228,7 +228,7 @@ GObj *jtgt_ovl3_8017E6C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = ATKABGON_RISE_STOP_WAIT;
 
-        ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER;
+        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel.z = 0.0F;
         ap->phys_info.vel.x = 0.0F;

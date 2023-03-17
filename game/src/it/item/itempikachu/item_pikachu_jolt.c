@@ -77,7 +77,7 @@ bool32 jtgt_ovl3_8016953C(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
     return TRUE;
 }
@@ -586,7 +586,7 @@ bool32 jtgt_ovl3_8016A374(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
     return TRUE;
 }

@@ -33,11 +33,11 @@ void func_ovl3_8017A3A0(GObj *article_gobj, GObj *fighter_gobj)
                 ap->phys_info.vel.x = ap->lr * ATRSHELL_CLAMP_VEL_X;
             }
         }
-        if (ap->article_hit[0].update_state == gmHitCollision_UpdateState_Disable)
+        if (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable)
         {
             if (ABSF(ap->phys_info.vel.x) <= ATRSHELL_HIT_INIT_VEL_X)
             {
-                ap->article_hit[0].update_state = gmHitCollision_UpdateState_New;
+                ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
                 func_ovl3_8016F280(article_gobj);
             }
@@ -181,14 +181,14 @@ void func_ovl3_8017A83C(GObj *article_gobj)
         func_ovl3_8017279C(article_gobj);
 
         ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(article_gobj);
         func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 0);
     }
     else if (ap->article_vars.shell.is_damage != FALSE)
     {
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_New;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
         func_ovl3_8016F280(article_gobj);
         func_ovl3_8017B0D4(article_gobj);
@@ -202,7 +202,7 @@ void func_ovl3_8017A83C(GObj *article_gobj)
         func_ovl3_8017279C(article_gobj);
 
         ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(article_gobj);
         func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 0);
@@ -236,7 +236,7 @@ bool32 jtgt_ovl3_8017A9D0(GObj *article_gobj)
     {
         ap->article_vars.shell.is_damage = TRUE;
 
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_New;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
         func_ovl3_8016F280(article_gobj);
 
@@ -253,7 +253,7 @@ bool32 jtgt_ovl3_8017A9D0(GObj *article_gobj)
     {
         ap->phys_info.vel.x = 0.0F;
 
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
     }
     return FALSE;
 }
@@ -429,7 +429,7 @@ bool32 jtgt_ovl3_8017AF18(GObj *article_gobj)
 
     if (ABSF(ap->phys_info.vel.x) > ATRSHELL_STOP_VEL_X)
     {
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_New;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
         func_ovl3_8016F280(article_gobj);
         func_ovl3_801727BC(article_gobj);
@@ -437,7 +437,7 @@ bool32 jtgt_ovl3_8017AF18(GObj *article_gobj)
     }
     else
     {
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
     }
     return FALSE;
 }
@@ -541,7 +541,7 @@ GObj *jtgt_ovl3_8017B1D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = ArticleGetStruct(article_gobj);
 
-        ap->article_hit[0].can_rehit = TRUE;
+        ap->article_hit.can_rehit = TRUE;
 
         ap->article_vars.shell.health = 1;
         ap->article_vars.shell.is_setup_vars = FALSE;

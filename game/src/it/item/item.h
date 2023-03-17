@@ -158,7 +158,7 @@ typedef struct _Item_Hit
     u32 knockback_base; // Base knockback
     s32 shield_damage;
     s32 priority; // Used to determine winner in item hitbox vs item hitbox interaction?
-    u8 hit_status; // "Tangibility flag? 0x07"
+    u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u8 unk_0x45;
     u16 hit_sfx;
     union
@@ -227,7 +227,7 @@ typedef struct _Item_Struct
 
     Coll_Data coll_data;
     Ground_Air ground_or_air;
-    Item_Hit item_hit[1];       // Indexed into an array so it can (hopefully) easily be expanded later
+    Item_Hit item_hit;          // Indexed into an array so it can (hopefully) easily be expanded later
 
     s32 hit_victim_damage;      // Set to item hitbox's final damage output when hitting a target
     s32 unk_0x238;              // Might be self-damage?

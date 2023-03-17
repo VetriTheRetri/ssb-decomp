@@ -37,10 +37,10 @@ bool32 jtgt_ovl3_8016C9B4(GObj *item_gobj)
         ip->item_vars.spin_attack.vel.x = (ip->item_vars.spin_attack.vel.x * mod_vel) / sqrt_vel;
         ip->item_vars.spin_attack.vel.y = (ip->item_vars.spin_attack.vel.y * mod_vel) / sqrt_vel;
 
-        ip->item_hit[0].offset[0].x += ip->item_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
-        ip->item_hit[0].offset[0].y += ip->item_vars.spin_attack.vel.y;
-        ip->item_hit[0].offset[1].x -= ip->item_vars.spin_attack.vel.x;
-        ip->item_hit[0].offset[1].y += ip->item_vars.spin_attack.vel.y;
+        ip->item_hit.offset[0].x += ip->item_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
+        ip->item_hit.offset[0].y += ip->item_vars.spin_attack.vel.y;
+        ip->item_hit.offset[1].x -= ip->item_vars.spin_attack.vel.x;
+        ip->item_hit.offset[1].y += ip->item_vars.spin_attack.vel.y;
     }
     return FALSE;
 }
@@ -87,10 +87,10 @@ GObj *func_ovl3_8016CB1C(GObj *fighter_gobj, Vec3f *pos)
     }
     ip = ItemGetStruct(item_gobj);
 
-    ip->item_hit[0].offset[0].x = ITSPINATTACK_OFF_X;
-    ip->item_hit[0].offset[0].y = 0.0F;
-    ip->item_hit[0].offset[1].x = -ITSPINATTACK_OFF_X;
-    ip->item_hit[0].offset[1].y = 0.0F;
+    ip->item_hit.offset[0].x = ITSPINATTACK_OFF_X;
+    ip->item_hit.offset[0].y = 0.0F;
+    ip->item_hit.offset[1].x = -ITSPINATTACK_OFF_X;
+    ip->item_hit.offset[1].y = 0.0F;
 
     ip->lr = fp->lr;
 

@@ -1,5 +1,6 @@
 #include "item.h"
 #include "fighter.h"
+#include "gmmatch.h"
 
 #define HALF_PI32 1.5707964F
 #define PI32 3.1415927F
@@ -58,7 +59,7 @@ void func_ovl3_8016CDC8(GObj *item_gobj, bool32 arg1)
 
     ip->item_vars.boomerang.flags |= 1;
 
-    ip->item_hit[0].damage = 8;
+    ip->item_hit.damage = 8;
 
     ip->item_vars.boomerang.unk_0x8 -= PI32;
 

@@ -14,13 +14,13 @@ void func_ovl3_8016DC2C(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    ip->item_hit[0].hit_sfx = 1;
+    ip->item_hit.hit_sfx = 1;
 
-    ip->item_hit[0].flags_0x48_b1 = TRUE;
-    ip->item_hit[0].can_deflect = FALSE;
-    ip->item_hit[0].can_reflect = FALSE;
+    ip->item_hit.flags_0x48_b1 = TRUE;
+    ip->item_hit.can_deflect = FALSE;
+    ip->item_hit.can_reflect = FALSE;
 
-    ip->item_hit[0].element = 1;
+    ip->item_hit.element = 1;
 
     ip->lifetime = ITYUBIBULLET_EXPLODE_LIFETIME;
 
@@ -28,7 +28,7 @@ void func_ovl3_8016DC2C(GObj *item_gobj)
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = 0.0F;
 
-    ip->item_hit[0].size = ITYUBIBULLET_EXPLODE_SIZE;
+    ip->item_hit.size = ITYUBIBULLET_EXPLODE_SIZE;
 
     DObjGetStruct(item_gobj)->display_list = NULL;
 

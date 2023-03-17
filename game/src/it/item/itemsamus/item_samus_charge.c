@@ -10,8 +10,8 @@ void func_ovl3_80168B00(GObj *item_gobj) // Set Charge Shot's attributes on fire
 
     ip->phys_info.vel.x = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].vel_x * ip->lr;
 
-    ip->item_hit[0].damage = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].damage;
-    ip->item_hit[0].size = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].hit_size * 0.5F;
+    ip->item_hit.damage = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].damage;
+    ip->item_hit.size = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].hit_size * 0.5F;
 
     coll_size = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].coll_size * 0.5F;
 
@@ -21,8 +21,8 @@ void func_ovl3_80168B00(GObj *item_gobj) // Set Charge Shot's attributes on fire
 
     func_800269C0(Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].shoot_sfx_id);
 
-    ip->item_hit[0].hit_sfx = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].hit_sfx_id;
-    ip->item_hit[0].priority = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].priority;
+    ip->item_hit.hit_sfx = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].hit_sfx_id;
+    ip->item_hit.priority = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].priority;
 
     ip->item_vars.charge_shot.owner_gobj = NULL;
 }
@@ -58,7 +58,7 @@ bool32 jtgt_ovl3_80168BFC(GObj *item_gobj) // Animation
 
             func_ovl3_80168B00(item_gobj);
 
-            ip->item_hit[0].update_state = gmHitCollision_UpdateState_New;
+            ip->item_hit.update_state = gmHitCollision_UpdateState_New;
 
             func_ovl3_80165F60(item_gobj);
         }
@@ -90,7 +90,7 @@ bool32 jtgt_ovl3_80168D24(GObj *item_gobj) // Hit target
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
     return TRUE;
 }
@@ -140,7 +140,7 @@ GObj* func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool3
     }
     else
     {
-        ip->item_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
         ip->item_vars.charge_shot.is_full_charge = FALSE;
 
         ip->item_vars.charge_shot.owner_gobj = fighter_gobj;

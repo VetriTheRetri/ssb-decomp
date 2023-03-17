@@ -66,7 +66,7 @@ bool32 jtgt_ovl3_80175684(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     func_ovl3_80172FE0(article_gobj);
 
@@ -158,7 +158,7 @@ bool32 jtgt_ovl3_80175958(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
     return TRUE;
 }

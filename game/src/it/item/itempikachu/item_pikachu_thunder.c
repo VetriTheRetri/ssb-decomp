@@ -100,7 +100,7 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->phys_info.vel = *vel;
 
-    ip->item_hit[0].update_state = 0;
+    ip->item_hit.update_state = 0;
     ip->item_vars.thunder.thunder_state = itPikachuThunderStatus_Active;
 
     ip->group_id = func_ovl3_801655A0();
@@ -137,7 +137,7 @@ bool32 jtgt_ovl3_8016A950(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
     return FALSE;
 }
@@ -161,9 +161,9 @@ GObj* func_ovl3_8016A980(GObj *item_gobj, Vec3f *pos)
     chain_ip->lifetime = ITPIKACHUTHUNDER_CHAIN_LIFETIME;
     chain_ip->group_id = spawn_ip->group_id;
 
-    for (i = 0; i < (ARRAY_COUNT(spawn_ip->item_hit[0].hit_targets) | ARRAY_COUNT(chain_ip->item_hit[0].hit_targets)); i++)
+    for (i = 0; i < (ARRAY_COUNT(spawn_ip->item_hit.hit_targets) | ARRAY_COUNT(chain_ip->item_hit.hit_targets)); i++)
     {
-        chain_ip->item_hit[0].hit_targets[i] = spawn_ip->item_hit[0].hit_targets[i];
+        chain_ip->item_hit.hit_targets[i] = spawn_ip->item_hit.hit_targets[i];
     }
 
     DObjGetStruct(chain_gobj)->scale.x = 0.5F;

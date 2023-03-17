@@ -90,7 +90,7 @@ bool32 func_ovl3_8017C4AC(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     return FALSE;
 }
@@ -126,7 +126,7 @@ bool32 jtgt_ovl3_8017C530(GObj *article_gobj)
         ap->phys_info.vel.x = (cosf(angle) * ap->damage_knockback * -ap->lr_damage);
         ap->phys_info.vel.y = (__sinf(angle) * ap->damage_knockback);
 
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
         ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
 
         joint->unk_dobj_0x74 = (f32)FLOAT_NEG_MAX;
@@ -147,7 +147,7 @@ GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER;
+        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->article_vars.gr_lucky.pos = *pos;
 

@@ -110,7 +110,7 @@ bool32 jtgt_ovl3_8017C94C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ap->article_vars.m_ball.is_rebound = TRUE;
 
@@ -125,7 +125,7 @@ bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
     Fighter_Struct *fp;
     GObj *fighter_gobj;
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ap->article_vars.m_ball.is_rebound = TRUE;
 
@@ -253,8 +253,8 @@ void func_ovl3_8017CB84(GObj *article_gobj)
 
     func_ovl3_8017C6F8(article_gobj);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
-    ap->article_hit[0].can_reflect = FALSE;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.can_reflect = FALSE;
 }
 
 void func_ovl3_8017CC88(GObj *article_gobj)

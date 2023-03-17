@@ -62,7 +62,7 @@ bool32 jtgt_ovl3_80175C9C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     func_ovl3_80172FE0(article_gobj);
 

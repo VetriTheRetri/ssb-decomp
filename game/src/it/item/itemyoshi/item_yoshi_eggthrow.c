@@ -36,14 +36,14 @@ void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing succ
 
     ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
-    ip->item_hit[0].can_deflect = FALSE;
-    ip->item_hit[0].can_reflect = FALSE;
+    ip->item_hit.can_deflect = FALSE;
+    ip->item_hit.can_reflect = FALSE;
 
     ip->phys_info.vel.z = 0.0F;
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = 0.0F;
 
-    ip->item_hit[0].size = ITEGGTHROW_EXPLODE_SIZE;
+    ip->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(item_gobj)->display_list = NULL;
 
@@ -62,14 +62,14 @@ void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring
 
     ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
-    ip->item_hit[0].can_reflect = FALSE;
-    ip->item_hit[0].can_shield = FALSE;
+    ip->item_hit.can_reflect = FALSE;
+    ip->item_hit.can_shield = FALSE;
 
     ip->phys_info.vel.z = 0.0F;
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = 0.0F;
 
-    ip->item_hit[0].size = ITEGGTHROW_EXPLODE_SIZE;
+    ip->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(item_gobj)->display_list = NULL;
 
@@ -110,7 +110,7 @@ void func_ovl3_8016C07C(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->translate.z = 0.0F;
 
-    ip->item_hit[0].update_state = gmHitCollision_UpdateState_New;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_New;
 
     func_ovl3_80165F60(item_gobj);
 }
@@ -237,7 +237,7 @@ GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
 
     ip->lifetime = ITEGGTHROW_LIFETIME;
 
-    ip->item_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ip->is_camera_follow = TRUE;
 

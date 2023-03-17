@@ -64,8 +64,8 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = 0;
 
-        ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER;
-        ap->article_hit[0].can_rehit = TRUE;
+        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ap->article_hit.can_rehit = TRUE;
 
         ap->phys_info.vel.x = 0.0F;
         ap->phys_info.vel.y = 0.0F;
@@ -75,8 +75,8 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         if (Match_Info->gr_kind == Gr_Kind_Castle)
         {
-            ap->article_hit[0].knockback_weight = ATBUMPER_CASTLE_KNOCKBACK;
-            ap->article_hit[0].angle = ATBUMPER_CASTLE_ANGLE;
+            ap->article_hit.knockback_weight = ATBUMPER_CASTLE_KNOCKBACK;
+            ap->article_hit.angle = ATBUMPER_CASTLE_ANGLE;
         }
     }
     return article_gobj;

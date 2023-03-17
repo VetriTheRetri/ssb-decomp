@@ -381,36 +381,36 @@ void func_ovl3_8016F280(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     s32 i;
 
-    for (i = 0; i < ap->article_hit[0].hitbox_count; i++)
+    for (i = 0; i < ap->article_hit.hitbox_count; i++)
     {
-        switch (ap->article_hit[0].update_state)
+        switch (ap->article_hit.update_state)
         {
         case gmHitCollision_UpdateState_Disable:
             break;
 
         case gmHitCollision_UpdateState_New:
-            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + DObjGetStruct(article_gobj)->translate.x;
-            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + DObjGetStruct(article_gobj)->translate.y;
-            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + DObjGetStruct(article_gobj)->translate.z;
+            ap->article_hit.article_hit_unk[i].pos.x = ap->article_hit.offset[i].x + DObjGetStruct(article_gobj)->translate.x;
+            ap->article_hit.article_hit_unk[i].pos.y = ap->article_hit.offset[i].y + DObjGetStruct(article_gobj)->translate.y;
+            ap->article_hit.article_hit_unk[i].pos.z = ap->article_hit.offset[i].z + DObjGetStruct(article_gobj)->translate.z;
 
-            ap->article_hit[0].update_state = gmHitCollision_UpdateState_Transfer;
+            ap->article_hit.update_state = gmHitCollision_UpdateState_Transfer;
 
-            ap->article_hit[0].article_hit_unk[i].unk_0x18 = 0;
-            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0;
+            ap->article_hit.article_hit_unk[i].unk_0x18 = 0;
+            ap->article_hit.article_hit_unk[i].unk_0x5C = 0;
             break;
 
         case gmHitCollision_UpdateState_Transfer:
-            ap->article_hit[0].update_state = gmHitCollision_UpdateState_Interpolate;
+            ap->article_hit.update_state = gmHitCollision_UpdateState_Interpolate;
 
         case gmHitCollision_UpdateState_Interpolate:
-            ap->article_hit[0].article_hit_unk[i].pos_prev = ap->article_hit[0].article_hit_unk[i].pos;
+            ap->article_hit.article_hit_unk[i].pos_prev = ap->article_hit.article_hit_unk[i].pos;
 
-            ap->article_hit[0].article_hit_unk[i].pos.x = ap->article_hit[0].offset[i].x + DObjGetStruct(article_gobj)->translate.x;
-            ap->article_hit[0].article_hit_unk[i].pos.y = ap->article_hit[0].offset[i].y + DObjGetStruct(article_gobj)->translate.y;
-            ap->article_hit[0].article_hit_unk[i].pos.z = ap->article_hit[0].offset[i].z + DObjGetStruct(article_gobj)->translate.z;
+            ap->article_hit.article_hit_unk[i].pos.x = ap->article_hit.offset[i].x + DObjGetStruct(article_gobj)->translate.x;
+            ap->article_hit.article_hit_unk[i].pos.y = ap->article_hit.offset[i].y + DObjGetStruct(article_gobj)->translate.y;
+            ap->article_hit.article_hit_unk[i].pos.z = ap->article_hit.offset[i].z + DObjGetStruct(article_gobj)->translate.z;
 
-            ap->article_hit[0].article_hit_unk[i].unk_0x18 = 0;
-            ap->article_hit[0].article_hit_unk[i].unk_0x5C = 0;
+            ap->article_hit.article_hit_unk[i].unk_0x18 = 0;
+            ap->article_hit.article_hit_unk[i].unk_0x5C = 0;
             break;
         }
     }
@@ -423,11 +423,11 @@ void func_ovl3_8016F3D4(GObj *article_gobj)
     Article_Hit *at_hit;
     s32 i;
 
-    at_hit = &ip->article_hit[0];
+    at_hit = &ip->article_hit;
 
     if (at_hit->update_state != gmHitCollision_UpdateState_Disable)
     {
-        for (i = 0; i < ARRAY_COUNT(ip->article_hit[0].hit_targets); i++)
+        for (i = 0; i < ARRAY_COUNT(ip->article_hit.hit_targets); i++)
         {
             targets = &at_hit->hit_targets[i];
 
@@ -1122,7 +1122,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
     Article_Hurt *at_hurt;
 
     this_ap = ArticleGetStruct(this_gobj);
-    this_hit = &this_ap->article_hit[0];
+    this_hit = &this_ap->article_hit;
 
     if (this_ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ARTICLE)
     {
@@ -1141,7 +1141,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
                 else
                 {
                     other_ap = ArticleGetStruct(other_gobj);
-                    other_hit = &other_ap->article_hit[0];
+                    other_hit = &other_ap->article_hit;
 
                     if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
                     {
@@ -1149,7 +1149,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
                         {
                             if (other_hit->update_state != 0)
                             {
-                                if (other_hit->hit_status & GMHITCOLLISION_MASK_ARTICLE)
+                                if (other_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
                                 {
                                     those_flags.flags_b0 = those_flags.flags_b1 = FALSE;
 
@@ -1169,7 +1169,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
                                         {
                                             if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
                                             {
-                                                if ((this_hit->update_state != 0) && (this_hit->hit_status & GMHITCOLLISION_MASK_ARTICLE))
+                                                if ((this_hit->update_state != 0) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE))
                                                 {
                                                     these_flags.flags_b0 = these_flags.flags_b1 = FALSE;
 
@@ -1252,7 +1252,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
     Article_Hurt *at_hurt;
 
     ap = ArticleGetStruct(article_gobj);
-    at_hit = &ap->article_hit[0];
+    at_hit = &ap->article_hit;
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
     {
@@ -1264,7 +1264,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
             {
 
                 ip = ItemGetStruct(item_gobj);
-                it_hit = &ip->item_hit[0];
+                it_hit = &ip->item_hit;
 
                 if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))
                 {
@@ -1272,7 +1272,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
                     {
                         if (it_hit->update_state != 0)
                         {
-                            if (it_hit->hit_status & GMHITCOLLISION_MASK_ARTICLE)
+                            if (it_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
                             {
                                 those_flags.flags_b0 = those_flags.flags_b1 = FALSE;
 
@@ -1292,7 +1292,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
                                     {
                                         if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team))
                                         {
-                                            if ((at_hit->update_state != 0) && (at_hit->hit_status & GMHITCOLLISION_MASK_ITEM))
+                                            if ((at_hit->update_state != 0) && (at_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
                                             {
                                                 these_flags.flags_b0 = these_flags.flags_b1 = FALSE;
 
@@ -1410,7 +1410,7 @@ void func_ovl3_801710C4(GObj *article_gobj)
     }
     if (ap->hit_shield_damage != 0)
     {
-        if ((ap->article_hit[0].can_deflect) && (ap->ground_or_air == air))
+        if ((ap->article_hit.can_deflect) && (ap->ground_or_air == air))
         {
             if (ap->shield_collide_angle < 2.3561945F)
             {
@@ -1464,8 +1464,8 @@ next_check:
         ap->port_index = fp->player_id;
         ap->player_number = fp->player_number;
         ap->unk_0x16 = fp->offset_hit_type;
-        ap->article_hit[0].flags_hi.halfword = ap->unk_0x28C & U16_MAX;
-        ap->article_hit[0].flags_hi.halfword = ap->unk_0x28E;
+        ap->article_hit.flags_hi.halfword = ap->unk_0x28C & U16_MAX;
+        ap->article_hit.flags_hi.halfword = ap->unk_0x28E;
 
         if (ap->cb_reflect != NULL)
         {
@@ -1477,11 +1477,11 @@ next_check:
         }
         if (!(ap->is_static_damage))
         {
-            ap->article_hit[0].damage = (ap->article_hit[0].damage * ARTICLE_REFLECT_MUL_DEFAULT) + ARTICLE_REFLECT_ADD_DEFAULT;
+            ap->article_hit.damage = (ap->article_hit.damage * ARTICLE_REFLECT_MUL_DEFAULT) + ARTICLE_REFLECT_ADD_DEFAULT;
 
-            if (ap->article_hit[0].damage > ARTICLE_REFLECT_MAX_DEFAULT)
+            if (ap->article_hit.damage > ARTICLE_REFLECT_MAX_DEFAULT)
             {
-                ap->article_hit[0].damage = ARTICLE_REFLECT_MAX_DEFAULT;
+                ap->article_hit.damage = ARTICLE_REFLECT_MAX_DEFAULT;
             }
         }
     }

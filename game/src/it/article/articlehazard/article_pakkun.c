@@ -116,7 +116,7 @@ void func_ovl3_8017D190(GObj *article_gobj)
     func_ovl3_8017CF20(article_gobj);
 
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     DObjGetStruct(article_gobj)->translate.y = ap->article_vars.pakkun.pos.y;
 }
@@ -130,7 +130,7 @@ void func_ovl3_8017D1DC(GObj *article_gobj)
     if (off_y <= ATPAKKUN_CLAMP_OFF_Y)
     {
         ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     }
     else
@@ -197,7 +197,7 @@ bool32 jtgt_ovl3_8017D334(GObj *article_gobj)
         ap->phys_info.vel.y = __sinf(angle) * ap->damage_knockback;
 
         ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
-        ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017CF80(article_gobj);
 
@@ -253,7 +253,7 @@ GObj* jtgt_ovl3_8017D4D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->article_vars.pakkun.is_wait_fighter = FALSE;
 
-        ap->article_hit[0].can_rehit = TRUE;
+        ap->article_hit.can_rehit = TRUE;
     }
     return article_gobj;
 }

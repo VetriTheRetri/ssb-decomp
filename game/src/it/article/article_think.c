@@ -80,7 +80,7 @@ void func_ovl3_801725BC(GObj *article_gobj)
     ap->port_index = ARTICLE_PORT_DEFAULT;
     ap->unk_0x16 = ARTICLE_UNK_DEFAULT;
     ap->player_number = 0;
-    ap->article_hit[0].stale = ARTICLE_STALE_DEFAULT;
+    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
 
     ap->display_state = dbObjDisplayStatus_Global_Article;
 }
@@ -89,9 +89,9 @@ void func_ovl3_801725F8(Article_Struct *ap)
 {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(ap->article_hit[0].hit_targets); i++)
+    for (i = 0; i < ARRAY_COUNT(ap->article_hit.hit_targets); i++)
     {
-        ArticleHitArray *targets = &ap->article_hit[0].hit_targets[i];
+        ArticleHitArray *targets = &ap->article_hit.hit_targets[i];
 
         targets->victim_gobj = NULL;
 
@@ -109,7 +109,7 @@ void func_ovl3_8017275C(GObj *article_gobj)
 
     func_ovl3_801725F8(ap);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_New;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
     func_ovl3_8016F280(article_gobj);
 }
@@ -146,18 +146,18 @@ s32 func_ovl3_801727F4(Article_Struct *ap)
     {
         f32 mag = (vec3f_mag(&ap->phys_info.vel) * 0.1F); // Wat
 
-        damage = ap->article_hit[0].stale * (ap->article_hit[0].damage + mag); // Wat
+        damage = ap->article_hit.stale * (ap->article_hit.damage + mag); // Wat
     }
     else
     {
-        damage = ap->article_hit[0].damage;
+        damage = ap->article_hit.damage;
     }
 
     f = damage; // Wat!
 
-    f *= ap->article_hit[0].throw_mul; // WAT!
+    f *= ap->article_hit.throw_mul; // WAT!
 
-    return (ap->article_hit[0].throw_mul * damage) + 0.999F; // WAT!!! (It doesn't match otherwise???)
+    return (ap->article_hit.throw_mul * damage) + 0.999F; // WAT!!! (It doesn't match otherwise???)
 }
 
 bool32 func_ovl3_80172890(GObj *article_gobj)
@@ -231,9 +231,9 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi,
     ap->times_thrown++;
     ap->x2CF_flag_b2 = TRUE;
 
-    ap->article_hit[0].stale = stale;
-    ap->article_hit[0].flags_hi.halfword = *(vu16*)&flags_hi & U16_MAX; // Uh...
-    ap->article_hit[0].flags_lw.halfword = flags_lw;
+    ap->article_hit.stale = stale;
+    ap->article_hit.flags_hi.halfword = *(vu16*)&flags_hi & U16_MAX; // Uh...
+    ap->article_hit.flags_lw.halfword = flags_lw;
 
     func_ovl2_800E8744(fighter_gobj);
     func_ovl3_8017275C(article_gobj);
@@ -376,7 +376,7 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ap->phys_info.vel.z = 0.0F;
     ap->phys_info.vel.y = 0.0F;
@@ -404,12 +404,12 @@ void func_ovl3_80172EC8(GObj *article_gobj, ArticleStatusDesc *p_desc, s32 statu
 
     ap->x2CF_flag_b2 = FALSE;
 
-    ap->article_hit[0].flags_hi.flags_0x3FF = 0x39U;
-    ap->article_hit[0].flags_hi.flags_0x1000 =
-    ap->article_hit[0].flags_hi.flags_0x800 =
-    ap->article_hit[0].flags_hi.flags_0x400 = FALSE;
+    ap->article_hit.flags_hi.flags_0x3FF = 0x39U;
+    ap->article_hit.flags_hi.flags_0x1000 =
+    ap->article_hit.flags_hi.flags_0x800 =
+    ap->article_hit.flags_hi.flags_0x400 = FALSE;
 
-    ap->article_hit[0].flags_lw.halfword = func_ovl2_800EA74C();
+    ap->article_hit.flags_lw.halfword = func_ovl2_800EA74C();
 }
 
 void func_ovl3_80172F98(GObj *article_gobj, s32 colanim_id, s32 duration)
@@ -515,9 +515,9 @@ void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent *event)
 
     if (event[ap->x340_flag_b0123].timer == ap->at_multi)
     {
-        ap->article_hit[0].angle = event[ap->x340_flag_b0123].angle;
-        ap->article_hit[0].damage = event[ap->x340_flag_b0123].damage;
-        ap->article_hit[0].size = event[ap->x340_flag_b0123].size;
+        ap->article_hit.angle = event[ap->x340_flag_b0123].angle;
+        ap->article_hit.damage = event[ap->x340_flag_b0123].damage;
+        ap->article_hit.size = event[ap->x340_flag_b0123].size;
 
         ap->x340_flag_b0123++;
 

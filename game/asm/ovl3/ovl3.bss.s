@@ -45,7 +45,7 @@ glabel D_ovl3_8018CFE8
     .space 8
 glabel D_ovl3_8018CFF0
     .space 4
-glabel D_ovl3_8018CFF4
+glabel dbObjDisplayStatus_Item
     .space 4
 glabel D_ovl3_8018CFF8
     .space 72

@@ -95,7 +95,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
 
     if (ip->item_vars.pk_thunder.pk_thunder_state & itNessThunderStatus_Destroy)
     {
-        func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+        func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
         func_ovl3_8016AD30(item_gobj, TRUE);
         return TRUE;
     }
@@ -104,7 +104,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
 
     if (ip->item_vars.pk_thunder.pk_thunder_state & itNessThunderStatus_Collide)
     {
-        func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+        func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
         func_ovl3_8016AD30(item_gobj, TRUE);
         return TRUE;
     }
@@ -175,7 +175,7 @@ bool32 jtgt_ovl3_8016B1E8(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
     func_ovl3_8016AD30(item_gobj, TRUE);
 
     return TRUE;
@@ -294,7 +294,7 @@ bool32 jtgt_ovl3_8016B550(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
     return FALSE;
 }
@@ -417,7 +417,7 @@ bool32 jtgt_ovl3_8016B7FC(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
     func_ovl3_8016B6A0(item_gobj, TRUE);
 
     return TRUE;
@@ -524,7 +524,7 @@ bool32 jtgt_ovl3_8016BB3C(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit[0].damage);
+    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
     return FALSE;
 }

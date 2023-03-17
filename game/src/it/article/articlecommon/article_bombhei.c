@@ -21,7 +21,7 @@ void func_ovl3_80177060(GObj *article_gobj, u8 arg1)
 
     DObjGetStruct(article_gobj)->unk_0x54 = 2;
 
-    ap->article_hit[0].hit_sfx = 1;
+    ap->article_hit.hit_sfx = 1;
 
     func_ovl3_8017275C(article_gobj);
     func_ovl3_8017279C(article_gobj);
@@ -396,16 +396,16 @@ void func_ovl3_80177A24(GObj *article_gobj)
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
     {
-        ap->article_hit[0].angle = ev[ap->x340_flag_b0123].angle;
-        ap->article_hit[0].damage = ev[ap->x340_flag_b0123].damage;
-        ap->article_hit[0].size = ev[ap->x340_flag_b0123].size;
+        ap->article_hit.angle = ev[ap->x340_flag_b0123].angle;
+        ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
+        ap->article_hit.size = ev[ap->x340_flag_b0123].size;
 
-        ap->article_hit[0].flags_0x4C_b1 = TRUE;
-        ap->article_hit[0].can_deflect = FALSE;
-        ap->article_hit[0].can_reflect = FALSE;
-        ap->article_hit[0].clang = FALSE;
+        ap->article_hit.flags_0x4C_b1 = TRUE;
+        ap->article_hit.can_deflect = FALSE;
+        ap->article_hit.can_reflect = FALSE;
+        ap->article_hit.clang = FALSE;
 
-        ap->article_hit[0].element = gmHitCollision_Element_Fire;
+        ap->article_hit.element = gmHitCollision_Element_Fire;
 
         ap->x340_flag_b0123++;
 
@@ -444,7 +444,7 @@ void func_ovl3_80177BAC(GObj *article_gobj)
 
     ap->at_multi = 0;
 
-    ap->article_hit[0].stale = ARTICLE_STALE_DEFAULT;
+    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
 
     ap->x340_flag_b0123 = 0;
 

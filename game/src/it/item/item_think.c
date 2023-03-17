@@ -95,16 +95,16 @@ void func_ovl3_801680EC(Item_Struct *ip, Fighter_Struct *fp) // Invert direction
 
 s32 func_ovl3_80168128(Item_Struct *ip) // Return final damage after applying staling and bonus 0.999%
 {
-    return (ip->item_hit[0].stale * ip->item_hit[0].damage) + 0.999F;
+    return (ip->item_hit.stale * ip->item_hit.damage) + 0.999F;
 }
 
 void func_ovl3_80168158(Item_Struct *ip) // Clear hit victims array
 {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(ip->item_hit[0].hit_targets); i++)
+    for (i = 0; i < ARRAY_COUNT(ip->item_hit.hit_targets); i++)
     {
-        ItemHitArray *targets = &ip->item_hit[0].hit_targets[i];
+        ItemHitArray *targets = &ip->item_hit.hit_targets[i];
 
         targets->victim_gobj = NULL;
 

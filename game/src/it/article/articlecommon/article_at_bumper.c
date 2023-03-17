@@ -447,7 +447,7 @@ void func_ovl3_8017BF1C(GObj *article_gobj)
 
     joint->unk_0x54 = 0;
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ap->phys_info.vel.x = 0.0F;
     ap->phys_info.vel.y = 0.0F;
@@ -472,9 +472,9 @@ GObj* jtgt_ovl3_8017BF8C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = 0;
 
-        ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER;
+        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
-        ap->article_hit[0].can_rehit = TRUE;
+        ap->article_hit.can_rehit = TRUE;
 
         joint->mobj->anim_frame = 0.0F;
 

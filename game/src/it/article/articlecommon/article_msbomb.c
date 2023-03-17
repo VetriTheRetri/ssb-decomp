@@ -171,7 +171,7 @@ void func_ovl3_80176840(GObj *article_gobj)
 
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
 
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     if ((ap->port_index != -1U) && (ap->port_index != GMMATCH_PLAYERS_MAX)) // Macro might be off though
     {
@@ -311,16 +311,16 @@ void func_ovl3_80176C14(GObj *article_gobj)
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
     {
-        ap->article_hit[0].angle = ev[ap->x340_flag_b0123].angle;
-        ap->article_hit[0].damage = ev[ap->x340_flag_b0123].damage;
-        ap->article_hit[0].size = ev[ap->x340_flag_b0123].size;
+        ap->article_hit.angle = ev[ap->x340_flag_b0123].angle;
+        ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
+        ap->article_hit.size = ev[ap->x340_flag_b0123].size;
 
-        ap->article_hit[0].flags_0x4C_b1 = TRUE;
-        ap->article_hit[0].can_deflect = FALSE;
-        ap->article_hit[0].can_reflect = FALSE;
-        ap->article_hit[0].clang = FALSE;
+        ap->article_hit.flags_0x4C_b1 = TRUE;
+        ap->article_hit.can_deflect = FALSE;
+        ap->article_hit.can_reflect = FALSE;
+        ap->article_hit.clang = FALSE;
 
-        ap->article_hit[0].element = gmHitCollision_Element_Fire;
+        ap->article_hit.element = gmHitCollision_Element_Fire;
 
         ap->x340_flag_b0123++;
 
@@ -336,7 +336,7 @@ void func_ovl3_80176D00(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
-    ap->article_hit[0].update_state = gmHitCollision_UpdateState_Disable;
+    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     func_ovl3_8017279C(article_gobj);
 }
@@ -403,8 +403,8 @@ void func_ovl3_80176E9C(GObj *article_gobj)
 
     ap->x340_flag_b0123 = 0;
 
-    ap->article_hit[0].stale = ARTICLE_STALE_DEFAULT;
-    ap->article_hit[0].hit_sfx = 1;
+    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->article_hit.hit_sfx = 1;
 
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
 

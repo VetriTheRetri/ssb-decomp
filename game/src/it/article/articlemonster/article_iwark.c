@@ -203,7 +203,7 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = ATIWARK_RISE_STOP_WAIT;
 
-        ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER;
+        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel.z = 0.0F;
         ap->phys_info.vel.x = 0.0F;

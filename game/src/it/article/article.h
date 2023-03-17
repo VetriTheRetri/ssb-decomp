@@ -196,7 +196,7 @@ typedef struct _Article_Hit
     u32 knockback_base; // Base knockback
     s32 shield_damage; // Shield damage?
     s32 priority; // Priority?
-    u8 hit_status;
+    u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;
     u16 clang : 1;
     u32 flags_0x4C_b1 : 1;
@@ -272,7 +272,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     Ground_Air ground_or_air;
 
-    Article_Hit article_hit[1];
+    Article_Hit article_hit;
     Article_Hurt article_hurt;
 
     s32 hit_victim_damage;

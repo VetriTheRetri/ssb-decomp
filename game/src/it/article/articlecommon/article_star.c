@@ -67,7 +67,7 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = article_gobj->user_data;
 
-        ap->article_hit[0].hit_status = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
+        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
         ap->at_multi = ATSTAR_INTERACT_DELAY;
 
         ap->x2D3_flag_b5 = TRUE;

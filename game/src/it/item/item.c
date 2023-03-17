@@ -8,7 +8,7 @@
 
 // Not the first function in this file
 
-extern s32 D_ovl3_8018CFF4;
+extern s32 dbObjDisplayStatus_Item;
 extern u32 D_ovl3_8018CFF8;
 
 u32 func_ovl3_801655A0(void)
@@ -22,6 +22,8 @@ u32 func_ovl3_801655A0(void)
 
     return group_id;
 }
+
+extern s32 D_ovl2_80131398;
 
 GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
@@ -52,14 +54,14 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         func_ovl3_80165588(ip);
         return NULL;
     }
-    it_hit_desc = *(uintptr_t*)item_status_desc->p_item + (size_t)item_status_desc->offset_it_hit; // I hope this is correct?
+    it_hit_desc = *(uintptr_t*)item_status_desc->p_item + (intptr_t)item_status_desc->offset_it_hit; // I hope this is correct?
     item_gobj->user_data = ip;
     ip->item_gobj = item_gobj;
     ip->it_kind = item_status_desc->it_kind;
 
     switch (flags & ITEM_MASK_SPAWN_ALL)
     {
-    case It_Spawn_Fighter: // Items spawned by fighters
+    case ITEM_MASK_SPAWN_FIGHTER: // Items spawned by fighters
         fp = FighterGetStruct(spawn_gobj);
         ip->owner_gobj = spawn_gobj;
         ip->team = fp->team;
@@ -70,14 +72,14 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
         ip->display_state = fp->display_state;
 
-        ip->item_hit[0].stale = func_ovl2_800EA470(fp->player_id, fp->attack_id, fp->unk_0x28C_halfword);
-        ip->item_hit[0].attack_id = fp->attack_id;
-        ip->item_hit[0].flags_0x4A_halfword = fp->unk_0x28C_halfword;
-        ip->item_hit[0].flags_0x4C_halfword = fp->unk_0x28E_halfword & U16_MAX;
-        ip->item_hit[0].flags_0x4E = fp->unk_0x290;
+        ip->item_hit.stale = func_ovl2_800EA470(fp->player_id, fp->attack_id, fp->unk_0x28C_halfword);
+        ip->item_hit.attack_id = fp->attack_id;
+        ip->item_hit.flags_0x4A_halfword = fp->unk_0x28C_halfword;
+        ip->item_hit.flags_0x4C_halfword = fp->unk_0x28E_halfword & U16_MAX;
+        ip->item_hit.flags_0x4E = fp->unk_0x290;
         break;
 
-    case It_Spawn_Item: // Items spawned by other items
+    case ITEM_MASK_SPAWN_ITEM: // Items spawned by other items
         owner_ip = ItemGetStruct(spawn_gobj);
         ip->owner_gobj = owner_ip->owner_gobj;
         ip->team = owner_ip->team;
@@ -88,14 +90,14 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
         ip->display_state = owner_ip->display_state;
 
-        ip->item_hit[0].stale = owner_ip->item_hit[0].stale;
-        ip->item_hit[0].attack_id = owner_ip->item_hit[0].attack_id;
-        ip->item_hit[0].flags_0x4A_halfword = owner_ip->item_hit[0].flags_0x4A_halfword;
-        ip->item_hit[0].flags_0x4C_halfword = owner_ip->item_hit[0].flags_0x4C_halfword & U16_MAX;
-        ip->item_hit[0].flags_0x4E = owner_ip->item_hit[0].flags_0x4E;
+        ip->item_hit.stale = owner_ip->item_hit.stale;
+        ip->item_hit.attack_id = owner_ip->item_hit.attack_id;
+        ip->item_hit.flags_0x4A_halfword = owner_ip->item_hit.flags_0x4A_halfword;
+        ip->item_hit.flags_0x4C_halfword = owner_ip->item_hit.flags_0x4C_halfword & U16_MAX;
+        ip->item_hit.flags_0x4E = owner_ip->item_hit.flags_0x4E;
         break;
 
-    case It_Spawn_Article: // Items spawned by Pokémon
+    case ITEM_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
         ap = ArticleGetStruct(spawn_gobj);
         ip->owner_gobj = ap->owner_gobj;
         ip->team = ap->team;
@@ -106,15 +108,15 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
         ip->display_state = ap->display_state;
 
-        ip->item_hit[0].stale = ap->article_hit[0].stale;
-        ip->item_hit[0].attack_id = ap->article_hit[0].attack_id;
-        ip->item_hit[0].flags_0x4A_halfword = ap->article_hit[0].flags_0x4E;
-        ip->item_hit[0].flags_0x4C_halfword = ap->article_hit[0].flags_lw.halfword & U16_MAX;
-        ip->item_hit[0].flags_0x4E = ap->article_hit[0].flags_hi.halfword;
+        ip->item_hit.stale = ap->article_hit.stale;
+        ip->item_hit.attack_id = ap->article_hit.attack_id;
+        ip->item_hit.flags_0x4A_halfword = ap->article_hit.flags_0x4E;
+        ip->item_hit.flags_0x4C_halfword = ap->article_hit.flags_lw.halfword & U16_MAX;
+        ip->item_hit.flags_0x4E = ap->article_hit.flags_hi.halfword;
         break;
 
     default: // Items spawned independently 
-    case It_Spawn_Default:
+    case ITEM_MASK_SPAWN_NONE:
         ip->owner_gobj = NULL;
         ip->team = ITEM_TEAM_DEFAULT;
         ip->port_index = ITEM_PORT_DEFAULT;
@@ -122,17 +124,17 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         ip->player_number = 0;
         ip->lr = RIGHT;
 
-        ip->display_state = D_ovl3_8018CFF4;
+        ip->display_state = dbObjDisplayStatus_Item;
 
-        ip->item_hit[0].attack_id = 0;
-        ip->item_hit[0].stale = 1.0F;
-        ip->item_hit[0].flags_0x4A_halfword = func_ovl2_800EA5BC();
-        ip->item_hit[0].flags_0x4C.flags_0x3FF = 0;
-        ip->item_hit[0].flags_0x4C.flags_0x1000 = ip->item_hit[0].flags_0x4C.flags_0x800 = ip->item_hit[0].flags_0x4C.flags_0x400 = FALSE;
-        ip->item_hit[0].flags_0x4E = func_ovl2_800EA74C();
+        ip->item_hit.attack_id = 0;
+        ip->item_hit.stale = 1.0F;
+        ip->item_hit.flags_0x4A_halfword = func_ovl2_800EA5BC();
+        ip->item_hit.flags_0x4C.flags_0x3FF = 0;
+        ip->item_hit.flags_0x4C.flags_0x1000 = ip->item_hit.flags_0x4C.flags_0x800 = ip->item_hit.flags_0x4C.flags_0x400 = FALSE;
+        ip->item_hit.flags_0x4E = func_ovl2_800EA74C();
         break;
     }
-    ip->item_hit[0].update_state = 1;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_New;
 
     ip->phys_info.vel.z = 0.0F;
     ip->phys_info.vel.y = 0.0F;
@@ -140,46 +142,46 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
 
     ip->phys_info.vel_ground = 0.0F;
 
-    ip->item_hit[0].damage = it_hit_desc->damage;
+    ip->item_hit.damage = it_hit_desc->damage;
 
-    ip->item_hit[0].element = it_hit_desc->element;
+    ip->item_hit.element = it_hit_desc->element;
 
-    ip->item_hit[0].offset[0].x = it_hit_desc->offset[0].x;
-    ip->item_hit[0].offset[0].y = it_hit_desc->offset[0].y;
-    ip->item_hit[0].offset[0].z = it_hit_desc->offset[0].z;
-    ip->item_hit[0].offset[1].x = it_hit_desc->offset[1].x;
-    ip->item_hit[0].offset[1].y = it_hit_desc->offset[1].y;
-    ip->item_hit[0].offset[1].z = it_hit_desc->offset[1].z;
+    ip->item_hit.offset[0].x = it_hit_desc->offset[0].x;
+    ip->item_hit.offset[0].y = it_hit_desc->offset[0].y;
+    ip->item_hit.offset[0].z = it_hit_desc->offset[0].z;
+    ip->item_hit.offset[1].x = it_hit_desc->offset[1].x;
+    ip->item_hit.offset[1].y = it_hit_desc->offset[1].y;
+    ip->item_hit.offset[1].z = it_hit_desc->offset[1].z;
 
-    ip->item_hit[0].size = it_hit_desc->size * 0.5F;
+    ip->item_hit.size = it_hit_desc->size * 0.5F;
 
-    ip->item_hit[0].angle = it_hit_desc->angle;
+    ip->item_hit.angle = it_hit_desc->angle;
 
-    ip->item_hit[0].knockback_scale = it_hit_desc->knockback_scale;
-    ip->item_hit[0].knockback_weight = it_hit_desc->knockback_weight;
-    ip->item_hit[0].knockback_base = it_hit_desc->knockback_base;
+    ip->item_hit.knockback_scale = it_hit_desc->knockback_scale;
+    ip->item_hit.knockback_weight = it_hit_desc->knockback_weight;
+    ip->item_hit.knockback_base = it_hit_desc->knockback_base;
 
-    ip->item_hit[0].clang = it_hit_desc->clang;
-    ip->item_hit[0].shield_damage = it_hit_desc->shield_damage;
+    ip->item_hit.clang = it_hit_desc->clang;
+    ip->item_hit.shield_damage = it_hit_desc->shield_damage;
 
-    ip->item_hit[0].hit_sfx = it_hit_desc->sfx;
+    ip->item_hit.hit_sfx = it_hit_desc->sfx;
 
-    ip->item_hit[0].priority = it_hit_desc->priority;
-    ip->item_hit[0].flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
-    ip->item_hit[0].flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
+    ip->item_hit.priority = it_hit_desc->priority;
+    ip->item_hit.flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
+    ip->item_hit.flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
 
-    ip->item_hit[0].flags_0x48_b3 = FALSE;
+    ip->item_hit.flags_0x48_b3 = FALSE;
 
-    ip->item_hit[0].can_deflect = it_hit_desc->can_deflect;
-    ip->item_hit[0].can_reflect = it_hit_desc->can_reflect;
-    ip->item_hit[0].can_absorb = it_hit_desc->can_absorb;
+    ip->item_hit.can_deflect = it_hit_desc->can_deflect;
+    ip->item_hit.can_reflect = it_hit_desc->can_reflect;
+    ip->item_hit.can_absorb = it_hit_desc->can_absorb;
 
-    ip->item_hit[0].flags_0x48_b7 = FALSE;
+    ip->item_hit.flags_0x48_b7 = FALSE;
 
-    ip->item_hit[0].can_shield = it_hit_desc->can_shield;
-    ip->item_hit[0].hitbox_count = it_hit_desc->hitbox_count;
+    ip->item_hit.can_shield = it_hit_desc->can_shield;
+    ip->item_hit.hitbox_count = it_hit_desc->hitbox_count;
 
-    ip->item_hit[0].hit_status = 7;
+    ip->item_hit.interact_mask = 7;
 
     func_ovl3_80168158(ip);
 
@@ -278,20 +280,20 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
         switch (flags & ITEM_MASK_SPAWN_ALL)
         {
         default:
-        case It_Spawn_Default:
+        case ITEM_MASK_SPAWN_NONE:
             break;
 
-        case It_Spawn_Fighter:
+        case ITEM_MASK_SPAWN_FIGHTER:
             fp_coll = FighterGetStruct(spawn_gobj);
             func_ovl2_800DF09C(item_gobj, fp_coll->coll_data.p_translate, &fp_coll->coll_data);
             break;
 
-        case It_Spawn_Item:
+        case ITEM_MASK_SPAWN_ITEM:
             ip_coll = ItemGetStruct(spawn_gobj);
             func_ovl2_800DF09C(item_gobj, ip_coll->coll_data.p_translate, &ip_coll->coll_data);
             break;
 
-        case It_Spawn_Article:
+        case ITEM_MASK_SPAWN_ARTICLE:
             ap_coll = ArticleGetStruct(spawn_gobj);
             func_ovl2_800DF09C(item_gobj, ap_coll->coll_data.p_translate, &ap_coll->coll_data);
             break;
@@ -322,15 +324,15 @@ void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
     DObj *joint = DObjGetStruct(item_gobj);
     s32 i;
 
-    for (i = 0; i < ip->item_hit[0].hitbox_count; i++)
+    for (i = 0; i < ip->item_hit.hitbox_count; i++)
     {
-        ItemHitUnk *it_hit_unk = &ip->item_hit[0].item_hit_unk[i];
+        ItemHitUnk *it_hit_unk = &ip->item_hit.item_hit_unk[i];
 
-        Vec3f *offset = &ip->item_hit[0].offset[i];
+        Vec3f *offset = &ip->item_hit.offset[i];
 
         Vec3f *translate = &joint->translate;
 
-        switch (ip->item_hit[0].update_state)
+        switch (ip->item_hit.update_state)
         {
         default:
         case gmHitCollision_UpdateState_Disable:
@@ -350,13 +352,13 @@ void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
             {
                 func_ovl3_80165ED0(joint, &it_hit_unk->pos);
             }
-            ip->item_hit[0].update_state = gmHitCollision_UpdateState_Transfer;
+            ip->item_hit.update_state = gmHitCollision_UpdateState_Transfer;
             it_hit_unk->unk_0x18 = 0;
             it_hit_unk->unk_0x5C = 0;
             break;
 
         case gmHitCollision_UpdateState_Transfer:
-            ip->item_hit[0].update_state = gmHitCollision_UpdateState_Interpolate;
+            ip->item_hit.update_state = gmHitCollision_UpdateState_Interpolate;
 
         case gmHitCollision_UpdateState_Interpolate:
 
@@ -388,11 +390,11 @@ void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
     Item_Hit *it_hit;
     s32 i;
 
-    it_hit = &ip->item_hit[0];
+    it_hit = &ip->item_hit;
 
     if (it_hit->update_state != gmHitCollision_UpdateState_Disable)
     {
-        for (i = 0; i < ARRAY_COUNT(ip->item_hit[0].hit_targets); i++)
+        for (i = 0; i < ARRAY_COUNT(ip->item_hit.hit_targets); i++)
         {
             targets = &it_hit->hit_targets[i];
 
@@ -600,7 +602,7 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
 
                 if (victim_ip->group_id == this_ip->group_id)
                 {
-                    func_ovl3_80166594(&victim_ip->item_hit[0], target_gobj, hitbox_type, arg4);
+                    func_ovl3_80166594(&victim_ip->item_hit, target_gobj, hitbox_type, arg4);
                 }
                 victim_gobj = victim_gobj->group_gobj_next;
 
@@ -659,9 +661,9 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
     bool32 is_check_self;
 
     this_ip = ItemGetStruct(this_gobj);
-    this_hit = &this_ip->item_hit[0];
+    this_hit = &this_ip->item_hit;
 
-    if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->hit_status & GMHITCOLLISION_MASK_ITEM))
+    if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
     {
         other_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
 
@@ -672,7 +674,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
             do
             {
                 other_ip = ItemGetStruct(other_gobj);
-                other_hit = &other_ip->item_hit[0];
+                other_hit = &other_ip->item_hit;
 
                 if (other_gobj == this_gobj)
                 {
@@ -687,7 +689,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                     next_check:
                         if ((other_hit->update_state != gmHitCollision_UpdateState_Disable) && (other_hit->clang))
                         {
-                            if (other_hit->hit_status & GMHITCOLLISION_MASK_ITEM)
+                            if (other_hit->interact_mask & GMHITCOLLISION_MASK_ITEM)
                             {
                                 those_flags.flags_b456 = 7;
 
@@ -756,7 +758,7 @@ void func_ovl3_80166BE4(GObj *item_gobj)
     }
     if (ip->hit_shield_damage != 0)
     {
-        if ((ip->item_hit[0].can_deflect) && (ip->ground_or_air == air))
+        if ((ip->item_hit.can_deflect) && (ip->ground_or_air == air))
         {
             if (ip->shield_collide_angle < ITEM_DEFLECT_ANGLE_DEFAULT)
             {
@@ -812,8 +814,8 @@ next_check:
         ip->display_state = fp->display_state;
         ip->player_number = fp->player_number;
         ip->unk_0x12 = fp->offset_hit_type;
-        ip->item_hit[0].flags_0x4C_halfword = ip->unk_0x258 & U16_MAX;
-        ip->item_hit[0].flags_0x4E = ip->unk_0x25A;
+        ip->item_hit.flags_0x4C_halfword = ip->unk_0x258 & U16_MAX;
+        ip->item_hit.flags_0x4E = ip->unk_0x25A;
 
         if (ip->cb_reflect != NULL)
         {
@@ -825,11 +827,11 @@ next_check:
         }
         if (!(ip->is_static_damage))
         {
-            ip->item_hit[0].damage = (ip->item_hit[0].damage * ITEM_REFLECT_MUL_DEFAULT) + ITEM_REFLECT_ADD_DEFAULT;
+            ip->item_hit.damage = (ip->item_hit.damage * ITEM_REFLECT_MUL_DEFAULT) + ITEM_REFLECT_ADD_DEFAULT;
 
-            if (ip->item_hit[0].damage > ITEM_REFLECT_MAX_DEFAULT)
+            if (ip->item_hit.damage > ITEM_REFLECT_MAX_DEFAULT)
             {
-                ip->item_hit[0].damage = ITEM_REFLECT_MAX_DEFAULT;
+                ip->item_hit.damage = ITEM_REFLECT_MAX_DEFAULT;
             }
         }
     }
