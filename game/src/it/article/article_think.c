@@ -592,7 +592,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
                 j++;
             }
         }
-        index = Monster_Info.unk_0x2[rand_u16_range(Monster_Info.unk_0x2E)];
+        index = Monster_Info.monster_index[rand_u16_range(Monster_Info.unk_0x2E)];
     }
     if (Monster_Info.unk_0x2E != 10)
     {

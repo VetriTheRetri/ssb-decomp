@@ -3086,7 +3086,7 @@ glabel Article_Gr_Bumper_Data
   /* 58F6C 1054AC 8018AA6C */  .4byte func_ovl3_8017D63C
   .incbin "ovl3.raw.bin", 0x58F70, 0x20
 
-glabel D_ovl3_8018AA90
+glabel Article_Iwark_Data
   .incbin "ovl3.raw.bin", 0x58F90, 0x4
   /* 58F94 1054D4 8018AA94 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x58F98, 0xC
@@ -3096,13 +3096,13 @@ glabel jtbl_ovl3_8018AAA4
   /* 58FA8 1054E8 8018AAA8 */  .4byte jtgt_ovl3_8017DB5C
   .incbin "ovl3.raw.bin", 0x58FAC, 0x18
 
-glabel D_ovl3_8018AAC4
+glabel Article_Iwark_Status
   /* 58FC4 105504 8018AAC4 */  .4byte func_ovl3_8017DA94
   .incbin "ovl3.raw.bin", 0x58FC8, 0x1C
   /* 58FE4 105524 8018AAE4 */  .4byte func_ovl3_8017D820
   .incbin "ovl3.raw.bin", 0x58FE8, 0x1C
 
-glabel D_ovl3_8018AB04
+glabel Item_Iwark_Rock_Data
   .incbin "ovl3.raw.bin", 0x59004, 0x8
   /* 5900C 10554C 8018AB0C */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59010, 0x8

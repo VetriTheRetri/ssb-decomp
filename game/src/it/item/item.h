@@ -240,7 +240,7 @@ typedef struct _Item_Struct
     u16 unk_0x25A;              // Attack flags
     GObj *absorb_gobj;          // GObj that absorbed this item
 
-    u8 is_hitlag_victim : 1;
+    u8 is_hitlag_victim : 1;    // Item can deal hitlag to target
     u8 is_hitlag_item : 1;
     u8 x260_flag_b2 : 1;
     u8 x260_flag_b3 : 1;
@@ -334,6 +334,7 @@ typedef struct _Item_Struct
         Spin_Attack_ItemVars spin_attack; // Link's Up Special
         Boomerang_ItemVars boomerang;
         Star_ItemVars star;
+        Rock_ItemVars rock; // Onix's Rock Slide
 
     } item_vars;
 

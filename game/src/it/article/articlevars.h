@@ -164,6 +164,32 @@
 #define ATPAKKUN_DETECT_SIZE_BOTTOM (-300.0F) // Bottom of Pirahna Plant fighter detection box when checking to stay inside the pipe
 #define ATPAKKUN_DETECT_SIZE_TOP 700.0F   // Top of Pirahna Plant fighter detection box when checking to stay inside the pipe
 
+#define ATIWARK_RISE_STOP_WAIT 22            // Wait this many frames to stop levitating upward after being summoned
+#define ATIWARK_FLY_WAIT 30                  // Unconfirmed?
+#define ATIWARK_MODEL_ROTATE_WAIT 6          // Onix's sprite is flipped every time this timer is up; counts up, reset to 0 when reaching destination value
+#define ATIWARK_ROCK_RUMBLE_WAIT 18          // Frames to wait between screen shake effects
+#define ATIWARK_ROCK_SPAWN_COUNT_MAX 9       // Maximum number of rocks that can be spawned
+#define ATIWARK_ROCK_SPAWN_COUNT_MIN 8       // Added to number of rocks that can be spawned
+#define ATIWARK_ROCK_SPAWN_WAIT_MAX 30       // Maximum random delay between spawned rocks
+#define ATIWARK_ROCK_SPAWN_WAIT_MIN 15       // Added to random delay between spawned rocks
+#define ATIWARK_ROCK_SPAWN_OFF_X_MUL 2000.0F // Multiplies random spawn position of rock projectile
+#define ATIWARK_ROCK_SPAWN_OFF_X_ADD (-1000.0F) // Added to random spawn position of rock projectile
+#define ATIWARK_RISE_VEL_Y 16.0F             // Applied when Onix spwans from its Poké Ball
+#define ATIWARK_FLY_VEL_Y 80.0F              // Y-velocity of Onix when flying up
+#define ATIWARK_FLY_STOP_Y 200.0F            // Stop this many units away from the upper blast zone
+#define ATIWARK_IWARK_ADD_POS_Y (-660.0F)    // Add this to Y-position if user is Onix
+#define ATIWARK_OTHER_ADD_POS_Y (-100.0F)    // Add this to Y-position if user is not Onix
+
+#define ATIWARK_ROCK_RANDOM_VEL_MAX 3        // Maximum number of random initial Y-velocities possible
+#define ATIWARK_ROCK_GRAVITY 2.0F            // Gravity of rock projectile
+#define ATIWARK_ROCK_T_VEL 200.0F            // Terminal velocity of rock projectile
+#define ATIWARK_ROCK_ROTATE_STEP (-0.5F)     // Z-rotation step of rock projectile
+#define ATIWARK_ROCK_VEL_Y_START_A (-100.0F) // One of three random initial Y-velocities possible
+#define ATIWARK_ROCK_VEL_Y_START_B (-50.0F)  // One of three random initial Y-velocities possible
+#define ATIWARK_ROCK_VEL_Y_START_C 0.0F      // One of three random initial Y-velocities possible
+#define ATIWARK_ROCK_COLLIDE_MUL_VEL_Y 0.1F  // Assume this is what slows the rocks down so much when they hit the ground
+#define ATIWARK_ROCK_COLLIDE_ADD_VEL_Y (-150.0F) // Added when rock collides with ground
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -212,7 +238,7 @@ typedef struct Gr_Lucky_ArticleVars
 typedef struct M_Ball_ArticleVars
 {
     u16 is_rebound; // Set to TRUE when Poké Ball bounces back off a target
-    GObj *owner_gobj;
+    GObj *owner_gobj; // While Poké Balls can be reflected, ownership is not transfered to the reflecting player; its original thrower remains its owner
     GObj *effect_gobj; // Poké Ball ray scatter GFX
 
 } M_Ball_ArticleVars;
@@ -223,5 +249,16 @@ typedef struct Pakkun_ArticleVars
     u8 is_wait_fighter; // TRUE if a fighter is occupying the pipe
 
 } Pakkun_ArticleVars;
+
+typedef struct Iwark_ArticleVars
+{
+    u16 rock_timer1;
+    s32 spawn_rock_wait; // Delay between rock projectiles
+    u16 rock_timer2;
+    u16 is_rumble;
+    u16 rumble_wait;
+    u16 spawn_rock_count; // Number of rocks to spawn?
+
+} Iwark_ArticleVars;
 
 #endif
