@@ -159,7 +159,6 @@ typedef struct _Item_Hit
     s32 shield_damage;
     s32 priority; // Used to determine winner in item hitbox vs item hitbox interaction?
     u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
-    u8 unk_0x45;
     u16 hit_sfx;
     union
     {
