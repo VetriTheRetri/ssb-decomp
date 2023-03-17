@@ -157,7 +157,7 @@ void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    if (ip->display_state == dbObjDisplayStatus_EnvCollision)
+    if (ip->display_state == dbObjDisplayStatus_MapCollision)
     {
         func_ovl3_80167454(item_gobj);
 
@@ -209,7 +209,7 @@ void func_ovl3_80167660(GObj *item_gobj)
     Item_Struct *ip = ItemGetStruct(item_gobj);
     s32 index = ip->item_vars.pk_thunder_trail.trail_index;
 
-    if (ip->display_state == dbObjDisplayStatus_EnvCollision)
+    if (ip->display_state == dbObjDisplayStatus_MapCollision)
     {
         func_ovl3_80167454();
 

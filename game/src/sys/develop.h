@@ -10,7 +10,7 @@ typedef enum gmDevelopDisplayStatus
 	dbObjDisplayStatus_Master,
 	dbObjDisplayStatus_HitCollision_Fill,
 	dbObjDisplayStatus_HitCollision_Outline,
-	dbObjDisplayStatus_EnvCollision
+	dbObjDisplayStatus_MapCollision
 
 } gmDevelopDisplayStatus;
 

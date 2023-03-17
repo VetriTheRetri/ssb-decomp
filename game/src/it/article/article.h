@@ -400,6 +400,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         M_Ball_ArticleVars m_ball;
         Pakkun_ArticleVars pakkun;
         Iwark_ArticleVars iwark;
+        Kabigon_ArticleVars kabigon;
 
     } article_vars;
 

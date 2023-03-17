@@ -2,17 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
-    "\\game\\include\\PR",
     "\\game\\src",
     "\\game\\src\\gm",
-    "\\game\\src\\gr",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articlehazard",
     "\\game\\src\\it\\article\\articlemonster",
-    "\\game\\src\\mp",
+    "\\game\\src\\it\\item",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\gr\\ground.h",
+  "SelectedNode": "\\game\\src\\it\\item\\itemvars.h",
   "PreviewInSolutionExplorer": false
 }

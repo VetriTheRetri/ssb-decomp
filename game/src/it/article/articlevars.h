@@ -190,6 +190,21 @@
 #define ATIWARK_ROCK_COLLIDE_MUL_VEL_Y 0.1F  // Assume this is what slows the rocks down so much when they hit the ground
 #define ATIWARK_ROCK_COLLIDE_ADD_VEL_Y (-150.0F) // Added when rock collides with ground
 
+#define ATKABGON_RISE_STOP_WAIT 22           // Wait this many frames to stop levitating upward after being summoned
+#define ATKABIGON_GFX_SPAWN_INT 4
+#define ATKABIGON_DROP_WAIT 60               // Wait this many frames before dropping after reaching the top of the screen
+#define ATKABIGON_RUMBLE_WAIT 18             // Wait this many frames between screen shake effects
+#define ATKABIGON_DROP_VEL_Y (-220.0F)       // Velocity of downward drop
+#define ATKABIGON_DROP_OFF_X_MUL 2000.0F     // Multiplies random drop X-position
+#define ATKABIGON_DROP_OFF_X_ADD (-1000.0F)  // Added to multiplied random drop X-position
+#define ATKABIGON_DROP_SIZE_KABIGON 4.0F     // Size of Snorlax's drop model and hitbox
+#define ATKABIGON_DROP_SIZE_OTHER 5.2F       // Size of non-Snorlax drop model and hitbox (Clefairy)
+#define ATKABIGON_RISE_VEL_Y 16.0F           // Applied when Snorlax spwans from its Poké Ball
+#define ATKABIGON_JUMP_VEL_Y 80.0F           // Y-velocity of Snorlax's jump
+#define ATKABIGON_JUMP_GFX_MUL_OFF 200.0F    // Multiplies random spawn position of dust GFX when Snorlax jumps
+#define ATKABIGON_JUMP_GFX_SUB_OFF 100.0F    // Subtracted from random spawn position of dust GFX when Snorlax jumps
+#define ATKABIGON_MAP_OFF_Y 200.0F           // Halt jump this many units away from top blastonze / despawn if Y-position is less than bottom blastzone + this value
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -260,5 +275,12 @@ typedef struct Iwark_ArticleVars
     u16 spawn_rock_count; // Number of rocks to spawn?
 
 } Iwark_ArticleVars;
+
+typedef struct Kabigon_ArticleVars
+{
+    s32 dust_gfx_int;
+    s32 rumble_wait;
+
+} Kabigon_ArticleVars;
 
 #endif

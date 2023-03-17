@@ -3116,14 +3116,14 @@ glabel jtbl_ovl3_8018AB18
   /* 59030 105570 8018AB30 */  .4byte func_ovl3_8017DEB8
   .incbin "ovl3.raw.bin", 0x59034, 0xC
 
-glabel D_ovl3_8018AB40
+glabel Article_Kabigon_Data
   .incbin "ovl3.raw.bin", 0x59040, 0x4
   /* 59044 105584 8018AB44 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59048, 0xC
   /* 59054 105594 8018AB54 */  .4byte func_ovl3_8017E67C
   .incbin "ovl3.raw.bin", 0x59058, 0x1C
 
-glabel D_ovl3_8018AB74
+glabel Article_Kabigon_Status
   /* 59074 1055B4 8018AB74 */  .4byte func_ovl3_8017E384
   .incbin "ovl3.raw.bin", 0x59078, 0x1C
   /* 59094 1055D4 8018AB94 */  .4byte func_ovl3_8017E070
