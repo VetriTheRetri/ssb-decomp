@@ -1,6 +1,6 @@
 #include "ftcaptain.h"
 
-#define HALF_PI32 1.5707964F
+
 
 void func_ovl3_80160280(Fighter_Struct *fp)
 {

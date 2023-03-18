@@ -5,7 +5,7 @@
 #include "gmground.h"
 #include "gbi.h"
 
-#define HALF_PI32 1.5707964F
+
 
 extern Gfx *D_ovl3_8018D094;
 

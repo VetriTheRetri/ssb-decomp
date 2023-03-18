@@ -1,8 +1,8 @@
 #include "article.h"
 #include "item.h"
 
-#define HALF_PI32 1.5707964F
-#define PI32 3.1415927F
+
+
 
 bool32 func_ovl3_8017EEB0(GObj *article_gobj)
 {
@@ -15,7 +15,7 @@ bool32 func_ovl3_8017EEB0(GObj *article_gobj)
     }
     if (ap->at_multi == ap->article_vars.nyars.coin_spawn_wait)
     {
-        func_ovl3_8017F408(article_gobj, ap->article_vars.nyars.coin_rotate_step * ATNYARS_COIN_ROTATE_STEP_MUL);
+        func_ovl3_8017F408(article_gobj, ap->article_vars.nyars.coin_rotate_step * ATNYARS_COIN_ANGLE_STEP);
 
         ap->article_vars.nyars.coin_rotate_step++;
         ap->article_vars.nyars.coin_spawn_wait = ap->at_multi - ATNYARS_COIN_SPAWN_WAIT;

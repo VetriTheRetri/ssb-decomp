@@ -6,7 +6,7 @@
 #include <game/include/PR/mbi.h>
 #include <game/include/PR/sp.h>
 
-#define PI32 3.1415927F
+
 
 bool32 func_ovl3_8016BF50(GObj *item_gobj)
 {

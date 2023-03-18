@@ -1,8 +1,8 @@
 #include <game/src/ft/chara/ftfox/ftfox.h>
 #include <game/src/it/item/item.h>
 
-#define QUART_PI32 0.7853982F
-#define HALF_PI32 1.5707964F
+
+
 
 void func_ovl3_8015CB80(Fighter_Struct *fp)
 {

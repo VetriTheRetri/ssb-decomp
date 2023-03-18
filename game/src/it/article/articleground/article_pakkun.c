@@ -1,7 +1,7 @@
 #include "article.h"
 #include "fighter.h"
 
-#define PI32 3.1415927F
+
 
 extern ArticleStatusDesc Article_Pakkun_Status[];
 

@@ -1,7 +1,7 @@
 #include <game/src/ft/chara/ftmario/ftmario.h>
 
-#define HALF_PI32 1.5707964F
-#define PI32 3.1415927F
+
+
 
 void func_ovl3_801560A0(GObj *fighter_gobj)
 {

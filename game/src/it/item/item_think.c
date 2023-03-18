@@ -1,7 +1,7 @@
 #include "item.h"
 #include "fighter.h"
 
-#define HALF_PI32 1.5707964F
+
 
 void func_ovl3_80167EB0(Item_Struct *ip) // Stop item's ongoing SFX
 {

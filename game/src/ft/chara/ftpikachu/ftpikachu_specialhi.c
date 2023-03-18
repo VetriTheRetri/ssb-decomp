@@ -1,6 +1,6 @@
 #include "ftpikachu.h"
 
-#define HALF_PI32 1.5707964F
+
 
 void func_ovl3_801527B0(GObj *fighter_gobj)
 {

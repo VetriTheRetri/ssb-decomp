@@ -1,6 +1,6 @@
 #include <game/src/ft/chara/ftfox/ftfox.h>
 
-#define HALF_PI32 1.5707964F
+
 
 void func_ovl3_8015BD00(GObj *fighter_gobj)
 {

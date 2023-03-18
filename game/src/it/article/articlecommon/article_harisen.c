@@ -1,6 +1,6 @@
 #include "article.h"
 
-#define HALF_PI32 1.5707964F
+
 
 void func_ovl3_80175140(GObj *article_gobj, f32 scale)
 {

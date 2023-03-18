@@ -1,6 +1,6 @@
 #include "article.h"
 
-#define HALF_PI32 1.5707964F
+
 
 bool32 jtgt_ovl3_80179BA0(GObj *article_gobj)
 {

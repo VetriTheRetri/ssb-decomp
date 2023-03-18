@@ -1,6 +1,6 @@
 #include "ftmasterhand.h"
 
-#define QUART_PI32 0.7853982F
+
 
 void func_ovl3_8015ADC0(GObj *fighter_gobj)
 {

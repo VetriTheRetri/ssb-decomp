@@ -1,6 +1,6 @@
 #include <game/src/ft/chara/ftkirby/ftkirby.h>
 
-#define PI32 3.1415927F
+
 
 void func_ovl3_80151860(GObj *fighter_gobj)
 {

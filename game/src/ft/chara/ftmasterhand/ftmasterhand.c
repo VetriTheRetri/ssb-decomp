@@ -2,7 +2,7 @@
 
 // General Master Hand code?
 
-#define HALF_PI32 1.5707964F
+
 
 void func_ovl3_80157F60(GObj *fighter_gobj) // Turn Master Hand around?
 {

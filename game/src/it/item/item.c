@@ -4,7 +4,7 @@
 #include <game/src/gm/gmmatch.h>
 #include <game/src/it/article/article.h>
 
-#define HALF_PI32 1.5707964F
+
 
 // Not the first function in this file
 

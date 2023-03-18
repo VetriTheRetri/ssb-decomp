@@ -5,6 +5,11 @@
 #define FLOAT_MAX     3.4028235e38
 #define FLOAT_NEG_MAX -FLOAT_MAX
 
+#define QUART_PI32 0.7853982F
+#define HALF_PI32 1.5707964F
+#define PI32 3.1415927F
+#define DOUBLE_PI32 6.2831855F
+
 #define U8_MAX 0xFF
 #define S8_MAX 0x7F
 #define S8_MIN 0x80

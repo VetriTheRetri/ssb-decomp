@@ -2,7 +2,7 @@
 #include "item.h"
 #include "fighter.h"
 
-#define PI32 3.1415927F
+
 
 void func_ovl3_8017D740(GObj *iwark_gobj)
 {

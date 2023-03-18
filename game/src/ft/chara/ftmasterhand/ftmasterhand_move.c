@@ -1,6 +1,6 @@
 #include "ftmasterhand.h"
 
-#define HALF_PI32 1.5707964F
+
 
 void func_ovl3_801591A0(GObj *fighter_gobj)
 {

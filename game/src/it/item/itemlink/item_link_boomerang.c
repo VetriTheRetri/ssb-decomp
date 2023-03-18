@@ -2,9 +2,9 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
-#define HALF_PI32 1.5707964F
-#define PI32 3.1415927F
-#define DOUBLE_PI32 6.2831855F
+
+
+
 
 void func_ovl3_8016CC50(f32 *angle)
 {

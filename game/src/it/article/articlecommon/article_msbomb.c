@@ -2,7 +2,7 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
-#define HALF_PI32 1.5707964F
+
 
 bool32 jtgt_ovl3_80176450(GObj *article_gobj)
 {

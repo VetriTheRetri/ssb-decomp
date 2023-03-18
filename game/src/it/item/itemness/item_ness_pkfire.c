@@ -1,7 +1,7 @@
 #include "item.h"
 #include "fighter.h"
 
-#define HALF_PI32 1.5707964F
+
 
 bool32 jtgt_ovl3_8016AA40(GObj *item_gobj)
 {

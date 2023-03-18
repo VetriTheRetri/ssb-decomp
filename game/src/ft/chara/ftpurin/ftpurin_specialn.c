@@ -1,6 +1,6 @@
 #include "ftpurin.h"
 
-#define PI32 3.1415927F
+
 
 void func_ovl3_80151260(GObj *fighter_gobj)
 {

@@ -1,8 +1,8 @@
 #include "article.h"
 #include "gmmatch.h"
 
-#define PI32 3.1415927F
-#define HALF_PI32 1.5707964F
+
+
 
 void func_ovl3_80179120(GObj *effect_gobj) // Barrel/Crate smash GFX process
 {

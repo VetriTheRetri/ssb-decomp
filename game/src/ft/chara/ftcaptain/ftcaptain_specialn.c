@@ -1,6 +1,6 @@
 #include "ftcaptain.h"
 
-#define PI32 3.1415927F
+
 
 void func_ovl3_8015F7F0(GObj *fighter_gobj) // Falcon Punch
 {

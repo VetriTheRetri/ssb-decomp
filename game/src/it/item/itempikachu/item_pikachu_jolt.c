@@ -1,8 +1,8 @@
 #include "item.h"
 #include "fighter.h"
 
-#define QUART_PI32 0.7853982F
-#define PI32 3.1415927F
+
+
 #define THREEQUART_PI32 2.3561945F
 
 bool32 jtgt_ovl3_80169390(GObj *item_gobj)

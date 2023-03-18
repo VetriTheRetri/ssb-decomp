@@ -221,7 +221,7 @@
 #define ATNYARS_COIN_SPAWN_MAX 4             // Spawn this many coins simultaneously
 #define ATNYARS_COIN_LIFETIME 10
 #define ATNYARS_COIN_SPAWN_WAIT 8            // Spawn a new set of coins at this frequency (frames)
-#define ATNYARS_COIN_ROTATE_STEP_MUL 13.0F   // Multiplies coin rotation step, actually angle in degrees?
+#define ATNYARS_COIN_ANGLE_STEP 13.0F   // Multiplies coin rotation step, actually angle in degrees
 #define ATNYARS_COIN_VEL_X 130.0F
 
 typedef struct Common_ArticleVars

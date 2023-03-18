@@ -1,6 +1,6 @@
 #include "ftmasterhand.h"
 
-#define HALF_PI32 1.5707964F
+
 
 const u8 ftMasterHand_StatusRandomPool[12];
 const u8 D_ovl3_80188DCC[16];

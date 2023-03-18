@@ -1,9 +1,9 @@
 #include <game/src/ft/chara/ftness/ftness.h>
 #include <game/src/it/item/item.h>
 
-#define HALF_PI32 1.5707964F
-#define PI32 3.1415927F
-#define DOUBLE_PI32 6.2831855F
+
+
+
 
 // PSI Magnet (SpecialLw/SpecialAirLw)
 
