@@ -305,6 +305,7 @@ GObj *func_ovl3_8017FC38(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 
 void func_ovl3_8017FD2C(GObj *article_gobj, Vec3f *pos, s32 lr)
 {
+    s32 unused;
     Vec3f vel;
 
     vel.x = cosf(ATLIZARDON_FLAME_SPAWN_ANGLE) * ATLIZARDON_FLAME_VEL_XY * lr;
