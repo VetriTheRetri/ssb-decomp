@@ -230,6 +230,7 @@
 #define ATLIZARDON_FLAME_SPAWN_WAIT 8        // Wait this many frames before spawning another flame projectile
 #define ATLIZARDON_TURN_WAIT 26              // Wait this many frames before flipping Charizard's sprite
 #define ATLIZARDON_FLAME_SPAWN_ANGLE -0.2617994F // Angle at which flame projectile spreads
+#define ATLIZARDON_FLAME_VEL_XY 50.0F       
 #define ATLIZARDON_LIZARDON_FLAME_OFF_X 180.0F // X-offset of Charizard's flame spawn position
 #define ATLIZARDON_LIZARDON_FLAME_OFF_Y 120.0F // Y-offset of Charizard's flame spawn position
 #define ATLIZARDON_OTHER_FLAME_OFF_X 100.0F  // X-offset of other flame spawn position (Clefairy)
