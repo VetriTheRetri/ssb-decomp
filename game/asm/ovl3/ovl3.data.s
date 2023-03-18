@@ -3193,7 +3193,7 @@ glabel jtbl_ovl3_8018AD10
   /* 59224 105764 8018AD24 */  .4byte jtgt_ovl3_8017F1A4
   .incbin "ovl3.raw.bin", 0x59228, 0x8
 
-glabel D_ovl3_8018AD30
+glabel Article_Lizardon_Data
   .incbin "ovl3.raw.bin", 0x59230, 0x4
   /* 59234 105774 8018AD34 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59238, 0xC
@@ -3203,7 +3203,7 @@ glabel jtbl_ovl3_8018AD44
   /* 59248 105788 8018AD48 */  .4byte jtgt_ovl3_8017F98C
   .incbin "ovl3.raw.bin", 0x5924C, 0x18
 
-glabel jtbl_ovl3_8018AD64
+glabel Article_Lizardon_Status
   /* 59264 1057A4 8018AD64 */  .4byte jtgt_ovl3_8017F470
   /* 59268 1057A8 8018AD68 */  .4byte jtgt_ovl3_8017F49C
   .incbin "ovl3.raw.bin", 0x5926C, 0x18
@@ -3218,7 +3218,7 @@ glabel jtbl_ovl3_8018ADA4
   /* 592A8 1057E8 8018ADA8 */  .4byte jtgt_ovl3_8017F7E8
   .incbin "ovl3.raw.bin", 0x592AC, 0x18
 
-glabel D_ovl3_8018ADC4
+glabel Item_Lizardon_Flame_Data
   .incbin "ovl3.raw.bin", 0x592C4, 0x8
   /* 592CC 10580C 8018ADCC */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x592D0, 0x8

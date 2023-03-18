@@ -221,8 +221,21 @@
 #define ATNYARS_COIN_SPAWN_MAX 4             // Spawn this many coins simultaneously
 #define ATNYARS_COIN_LIFETIME 10
 #define ATNYARS_COIN_SPAWN_WAIT 8            // Spawn a new set of coins at this frequency (frames)
-#define ATNYARS_COIN_ANGLE_STEP 13.0F   // Multiplies coin rotation step, actually angle in degrees
+#define ATNYARS_COIN_ANGLE_STEP 13.0F        // Multiplies coin rotation step, actually angle in degrees
+#define ATYNARS_COIN_ANGLE_DIFF 90.0F        // Angle difference between each simultaneously spawned coin (90 degrees by default, this is why it's cross-shaped)
 #define ATNYARS_COIN_VEL_X 130.0F
+
+#define ATLIZARDON_LIFETIME 480
+#define ATLIZARDON_FLAME_LIFETIME 30
+#define ATLIZARDON_FLAME_SPAWN_WAIT 8        // Wait this many frames before spawning another flame projectile
+#define ATLIZARDON_TURN_WAIT 26              // Wait this many frames before flipping Charizard's sprite
+#define ATLIZARDON_FLAME_SPAWN_ANGLE -0.2617994F // Angle at which flame projectile spreads
+#define ATLIZARDON_LIZARDON_FLAME_OFF_X 180.0F // X-offset of Charizard's flame spawn position
+#define ATLIZARDON_LIZARDON_FLAME_OFF_Y 120.0F // Y-offset of Charizard's flame spawn position
+#define ATLIZARDON_OTHER_FLAME_OFF_X 100.0F  // X-offset of other flame spawn position (Clefairy)
+#define ATLIZARDON_DUST_GFX_OFF_X (-400.0F)  // X-offset of dust GFX when turning around
+#define ATLIZARDON_GRAVITY 1.0F 
+#define ATLIZARDON_T_VEL 40.0F
 
 typedef struct Common_ArticleVars
 {
@@ -321,6 +334,14 @@ typedef struct Nyars_ArticleVars
     u16 model_rotate_wait;
 
 } Nyars_ArticleVars;
+
+typedef struct Lizardon_ArticleVars
+{
+    Vec3f pos;
+    u16 turn_wait;
+    u16 flame_spawn_wait;
+
+} Lizardon_ArticleVars;
 
 #define ArticleSetMonster(ap) \
     ap->at_multi = 22; \

@@ -170,7 +170,7 @@ bool32 jtgt_ovl3_8017F274(GObj *item_gobj)
 
 extern ItemStatusDesc D_ovl3_8018ACF4;
 
-GObj *func_ovl3_8017F2E4(GObj *article_gobj, u8 rotate_step, f32 rotate_angle)
+GObj *func_ovl3_8017F2E4(GObj *article_gobj, u8 coin_number, f32 rotate_angle)
 {
     Item_Struct *ip;
     GObj *item_gobj = func_ovl3_801655C8(article_gobj, &D_ovl3_8018ACF4, &DObjGetStruct(article_gobj)->translate, ITEM_MASK_SPAWN_ARTICLE);
@@ -188,7 +188,7 @@ GObj *func_ovl3_8017F2E4(GObj *article_gobj, u8 rotate_step, f32 rotate_angle)
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = ATNYARS_COIN_VEL_X;
 
-    vec3_get_euler_rotation(&ip->phys_info.vel, 4, (((rotate_step * 90.0F) + rotate_angle) * PI32) / 180.0F);
+    vec3_get_euler_rotation(&ip->phys_info.vel, 4, (((coin_number * ATYNARS_COIN_ANGLE_DIFF) + rotate_angle) * PI32) / 180.0F);
 
     joint = DObjGetStruct(item_gobj);
 
@@ -207,6 +207,5 @@ void func_ovl3_8017F408(GObj *article_gobj, f32 angle)
     for (coin_count = 0; coin_count < ATNYARS_COIN_SPAWN_MAX; coin_count++)
     {
         func_ovl3_8017F2E4(article_gobj, coin_count, angle);
-
     }
 }
