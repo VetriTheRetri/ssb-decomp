@@ -41,7 +41,7 @@ bool32 func_ovl3_8017C15C(GObj *article_gobj)
     ap->cb_anim = func_ovl3_8017C110;
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
 
-    func_8000BD1C(DObjGetStruct(article_gobj), ((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_000011F8) + (intptr_t)&D_NF_00001288, 0.0F); // Linker thing
+    func_8000BD1C(DObjGetStruct(article_gobj), ArticleGetPData(ap, D_NF_000011F8, D_NF_00001288), 0.0F); // Linker thing
     func_8000DF34(article_gobj);
     func_800269C0(0x117U);
     func_ovl2_801008F4(3);

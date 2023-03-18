@@ -31,8 +31,8 @@ void func_ovl3_80178670(GObj *article_gobj)
     DObj *joint = DObjGetStruct(article_gobj);
     s32 unused[2];
 
-    func_8000BD1C(joint, (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00005F88)) + (intptr_t)&D_NF_00006018, 0.0F); // Linker thing
-    func_8000BD54(joint->mobj, (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00005F88)) + (intptr_t)&D_NF_00006048, 0.0F); // Linker thing
+    func_8000BD1C(joint, ArticleGetPData(ap, D_NF_00005F88, D_NF_00006018), 0.0F); // Linker thing
+    func_8000BD54(joint->mobj, ArticleGetPData(ap, D_NF_00005F88, D_NF_00006048), 0.0F); // Linker thing
     func_8000DF34(article_gobj);
 }
 

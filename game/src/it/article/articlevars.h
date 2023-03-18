@@ -216,6 +216,14 @@
 #define ATMEW_START_VEL_Y -20.0F             // Mew's initial Y-velocity
 #define ATMEW_FLY_ADD_VEL_Y 0.8F             // Added to Mew's Y-velocity every frame
 
+#define ATNYARS_LIFETIME 240
+#define ATNYARS_MODEL_ROTATE_WAIT 30         // Flip Meowth's model every time this timer runs out; reset at 0
+#define ATNYARS_COIN_SPAWN_MAX 4             // Spawn this many coins simultaneously
+#define ATNYARS_COIN_LIFETIME 10
+#define ATNYARS_COIN_SPAWN_WAIT 8            // Spawn a new set of coins at this frequency (frames)
+#define ATNYARS_COIN_ROTATE_STEP_MUL 13.0F   // Multiplies coin rotation step, actually angle in degrees?
+#define ATNYARS_COIN_VEL_X 130.0F
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -279,11 +287,11 @@ typedef struct Pakkun_ArticleVars
 typedef struct Iwark_ArticleVars
 {
     u16 rock_timer1;
-    s32 spawn_rock_wait; // Delay between rock projectiles
+    s32 rock_spawn_wait; // Delay between rock projectiles
     u16 rock_timer2;
     u16 is_rumble; // Not really a bool?
     u16 rumble_wait;
-    u16 spawn_rock_count; // Number of rocks to spawn?
+    u16 rock_spawn_count; // Number of rocks to spawn?
 
 } Iwark_ArticleVars;
 
@@ -305,5 +313,19 @@ typedef struct Mew_ArticleVars
     s32 esper_gfx_int;
 
 } Mew_ArticleVars;
+
+typedef struct Nyars_ArticleVars
+{
+    u16 coin_spawn_wait;
+    u16 coin_rotate_step;
+    u16 model_rotate_wait;
+
+} Nyars_ArticleVars;
+
+#define ArticleSetMonster(ap) \
+    ap->at_multi = 22; \
+    ap->phys_info.vel.z = 0.0F; \
+    ap->phys_info.vel.x = 0.0F; \
+    ap->phys_info.vel.y = 16.0F; \
 
 #endif

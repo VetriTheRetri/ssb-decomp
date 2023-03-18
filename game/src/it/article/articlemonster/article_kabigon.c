@@ -234,7 +234,7 @@ GObj* jtgt_ovl3_8017E6C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap->phys_info.vel.x = 0.0F;
         ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
 
-        func_8000BD1C(joint, ((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_0000B158) + (intptr_t)&D_NF_00013624, 0.0F); // Linker thing
+        func_8000BD1C(joint, ArticleGetPData(ap, D_NF_0000B158, D_NF_00013624), 0.0F); // Linker thing
 
         if (ap->at_kind == At_Kind_Kabigon)
         {

@@ -334,6 +334,7 @@ typedef struct _Item_Struct
         Boomerang_ItemVars boomerang;
         Star_ItemVars star;
         Rock_ItemVars rock; // Onix's Rock Slide
+        Coin_ItemVars coin;
 
     } item_vars;
 

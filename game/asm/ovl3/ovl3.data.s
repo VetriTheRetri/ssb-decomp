@@ -3163,7 +3163,7 @@ glabel Article_Mew_Status
   /* 59174 1056B4 8018AC74 */  .4byte func_ovl3_8017EBE0
   .incbin "ovl3.raw.bin", 0x59178, 0x28
 
-glabel D_ovl3_8018ACA0
+glabel Article_Nyars_Data
   .incbin "ovl3.raw.bin", 0x591A0, 0x4
   /* 591A4 1056E4 8018ACA4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x591A8, 0xC
@@ -3173,7 +3173,7 @@ glabel jtbl_ovl3_8018ACB4
   /* 591B8 1056F8 8018ACB8 */  .4byte jtgt_ovl3_8017F04C
   .incbin "ovl3.raw.bin", 0x591BC, 0x18
 
-glabel D_ovl3_8018ACD4
+glabel Article_Nyars_Status
   /* 591D4 105714 8018ACD4 */  .4byte func_ovl3_8017EEB0
   .incbin "ovl3.raw.bin", 0x591D8, 0x1C
 

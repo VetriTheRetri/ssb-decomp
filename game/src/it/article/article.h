@@ -403,6 +403,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Kabigon_ArticleVars kabigon;
         Tosakinto_ArticleVars tosakinto;
         Mew_ArticleVars mew;
+        Nyars_ArticleVars nyars;
 
     } article_vars;
 
@@ -422,5 +423,11 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
 #define ArticleGetStruct(article_gobj) \
 ((Article_Struct*)article_gobj->user_data) \
+
+
+// Points to all sorts of data
+
+#define ArticleGetPData(ap, off1, off2) \
+( (void*) ( ((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&off1 ) + (intptr_t)&off2) ) \
 
 #endif

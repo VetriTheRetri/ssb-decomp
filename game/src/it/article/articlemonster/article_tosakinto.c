@@ -83,7 +83,7 @@ void func_ovl3_8017E93C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
-    void *t;
+    void *s;
     s32 unused[2];
 
     ap->article_vars.tosakinto.pos = joint->translate;
@@ -93,13 +93,13 @@ void func_ovl3_8017E93C(GObj *article_gobj)
 
     if (ap->at_kind == At_Kind_Tosakinto)
     {
-        t = (void*) (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_0000B708) + (intptr_t)&D_NF_0000B7CC); // Linker thing
+        s = ArticleGetPData(ap, D_NF_0000B708, D_NF_0000B7CC); // Linker thing
 
-        func_8000BD1C(joint->next, t, 0.0F);
+        func_8000BD1C(joint->next, s, 0.0F);
 
-        t = (void*) (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_0000B708) + (intptr_t)&D_NF_0000B90C); // Linker thing
+        s = ArticleGetPData(ap, D_NF_0000B708, D_NF_0000B90C); // Linker thing
 
-        func_8000BD54(joint->next->mobj, t, 0.0F);
+        func_8000BD54(joint->next->mobj, s, 0.0F);
 
         func_8000DF34(article_gobj);
     }
@@ -140,7 +140,7 @@ bool32 jtgt_ovl3_8017EA98(GObj *article_gobj)
 extern intptr_t D_NF_00013624;
 extern ArticleSpawnData Article_Tosakinto_Data;
 
-GObj *jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Tosakinto_Data, pos, vel, flags);
     DObj *joint;
@@ -167,7 +167,7 @@ GObj *jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->gfx_offset.y;
 
-        func_8000BD1C(joint, ((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_0000B708) + (intptr_t)&D_NF_00013624, 0.0F); // Linker thing
+        func_8000BD1C(joint, ArticleGetPData(ap, D_NF_0000B708, D_NF_00013624), 0.0F); // Linker thing
     }
     return article_gobj;
 }

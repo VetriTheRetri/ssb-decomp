@@ -255,4 +255,10 @@ typedef struct Rock_ItemVars
 
 } Rock_ItemVars;
 
+typedef struct Coin_ItemVars
+{
+    s32 lifetime;
+
+} Coin_ItemVars;
+
 #endif

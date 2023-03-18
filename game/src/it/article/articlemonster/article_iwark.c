@@ -9,7 +9,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
     Article_Struct *ap = ArticleGetStruct(iwark_gobj);
     DObj *joint = DObjGetStruct(iwark_gobj);
 
-    if (ap->article_vars.iwark.spawn_rock_wait <= 0)
+    if (ap->article_vars.iwark.rock_spawn_wait <= 0)
     {
         Item_Struct *ip;
         GObj *rock_gobj;
@@ -31,7 +31,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
             {
                 ip->item_vars.rock.unk_0xC = -1;
             }
-            ap->article_vars.iwark.spawn_rock_wait = rand_u16_range(ATIWARK_ROCK_SPAWN_WAIT_MAX) + ATIWARK_ROCK_SPAWN_WAIT_MIN;
+            ap->article_vars.iwark.rock_spawn_wait = rand_u16_range(ATIWARK_ROCK_SPAWN_WAIT_MAX) + ATIWARK_ROCK_SPAWN_WAIT_MIN;
         }
     }
 }
@@ -52,7 +52,7 @@ bool32 func_ovl3_8017D820(GObj *article_gobj)
         {
             func_ovl3_8017D740(article_gobj);
         }
-        else if (ap->article_vars.iwark.spawn_rock_count == ap->article_vars.iwark.rock_timer2)
+        else if (ap->article_vars.iwark.rock_spawn_count == ap->article_vars.iwark.rock_timer2)
         {
             return TRUE;
         }
@@ -66,7 +66,7 @@ bool32 func_ovl3_8017D820(GObj *article_gobj)
         {
             ap->article_vars.iwark.rumble_wait--;
         }
-        ap->article_vars.iwark.spawn_rock_wait--;
+        ap->article_vars.iwark.rock_spawn_wait--;
     }
     if (ap->at_multi == ATIWARK_MODEL_ROTATE_WAIT)
     {
@@ -95,8 +95,8 @@ void func_ovl3_8017D948(GObj *article_gobj)
 
     ap->article_vars.iwark.rock_timer1 = rand_u16_range(ATIWARK_ROCK_SPAWN_COUNT_MAX) + ATIWARK_ROCK_SPAWN_COUNT_MIN;
     ap->article_vars.iwark.rock_timer2 = ap->article_vars.iwark.rock_timer1;
-    ap->article_vars.iwark.spawn_rock_count = 0;
-    ap->article_vars.iwark.spawn_rock_wait = 0;
+    ap->article_vars.iwark.rock_spawn_count = 0;
+    ap->article_vars.iwark.rock_spawn_wait = 0;
     ap->article_vars.iwark.is_rumble = FALSE;
     ap->article_vars.iwark.rumble_wait = 0;
 
@@ -106,7 +106,7 @@ void func_ovl3_8017D948(GObj *article_gobj)
 
     if (ap->at_kind == At_Kind_Iwark)
     {
-        joint->display_list = dl = (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_0000A140) + (intptr_t)&D_NF_0000A640); // Linker thing
+        joint->display_list = dl = ArticleGetPData(ap, D_NF_0000A140, D_NF_0000A640); // Linker thing
 
         pos.y += ATIWARK_IWARK_ADD_POS_Y;
     }
@@ -211,7 +211,7 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->gfx_offset.y;
 
-        func_8000BD1C(joint, ((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_0000A140) + (intptr_t)&D_NF_00013624, 0.0F); // Linker thing
+        func_8000BD1C(joint, ArticleGetPData(ap, D_NF_0000A140, D_NF_00013624), 0.0F); // Linker thing
     }
     return article_gobj;
 }
@@ -221,7 +221,7 @@ bool32 func_ovl3_8017DCAC(GObj *item_gobj)
     Item_Struct *ip = ItemGetStruct(item_gobj);
     Article_Struct *ap = ArticleGetStruct(ip->item_vars.rock.owner_gobj);
 
-    ap->article_vars.iwark.spawn_rock_count++;
+    ap->article_vars.iwark.rock_spawn_count++;
 
     return TRUE;
 }
