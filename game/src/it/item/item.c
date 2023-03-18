@@ -249,7 +249,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec
     ip->coll_data.lwall_line_id = -1;
 
     ip->coll_data.wall_flag = D_ovl2_80131398;
-    ip->coll_data.unk_0x56 = 0;
+    ip->coll_data.coll_mask = 0;
 
     ip->coll_data.pos_project.x = 0.0F;
     ip->coll_data.pos_project.y = 0.0F;
@@ -476,8 +476,8 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
 
         if (ip->cb_coll != NULL)
         {
-            ip->coll_data.unk_0x54 = ip->coll_data.unk_0x56;
-            ip->coll_data.unk_0x56 = 0U;
+            ip->coll_data.unk_0x54 = ip->coll_data.coll_mask;
+            ip->coll_data.coll_mask = 0U;
             ip->coll_data.unk_0x64 = 0;
             ip->coll_data.coll_type = 0;
             ip->coll_data.unk_0x58 = 0;

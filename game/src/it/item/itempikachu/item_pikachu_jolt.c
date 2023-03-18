@@ -32,7 +32,7 @@ bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
         return TRUE;
     }
 
-    else if (ip->coll_data.unk_0x56 & MPCOLL_MASK_RWALL)
+    else if (ip->coll_data.coll_mask & MPCOLL_MASK_RWALL)
     {
         func_ovl2_800F4650(ip->coll_data.rwall_line_id, &pos);
 
@@ -52,7 +52,7 @@ bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
         return TRUE;
     }
 
-    else if (ip->coll_data.unk_0x56 & MPCOLL_MASK_LWALL)
+    else if (ip->coll_data.coll_mask & MPCOLL_MASK_LWALL)
     {
         func_ovl2_800F4690(ip->coll_data.lwall_line_id, &pos);
 

@@ -374,7 +374,7 @@ bool32 jtgt_ovl3_8017ADD4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if ((func_ovl3_801735A0(article_gobj, func_ovl3_8017B1A4) != FALSE) && (ap->coll_data.unk_0x56 & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
+    if ((func_ovl3_801735A0(article_gobj, func_ovl3_8017B1A4) != FALSE) && (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
         ap->phys_info.vel.x = -ap->phys_info.vel.x;
 

@@ -372,7 +372,7 @@ void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
         rotation -= DOUBLE_PI32;
     }
 
-    if (coll_data->unk_0x56 & MPCOLL_MASK_RWALL)
+    if (coll_data->coll_mask & MPCOLL_MASK_RWALL)
     {
         tan_rwall_angle = atan2f(coll_data->rwall_angle.y, coll_data->rwall_angle.x);
 
@@ -392,7 +392,7 @@ void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
             tangent += HALF_PI32;
         }
     }
-    if (coll_data->unk_0x56 & MPCOLL_MASK_LWALL)
+    if (coll_data->coll_mask & MPCOLL_MASK_LWALL)
     {
         tan_lwall_angle = atan2f(coll_data->lwall_angle.y, coll_data->lwall_angle.x);
 
@@ -509,7 +509,7 @@ void func_ovl3_801549FC(GObj *fighter_gobj)
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        if (fp->coll_data.unk_0x56 & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+        if (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
         {
             func_ovl2_800DEEC8(fp);
             func_ovl3_80154558(fighter_gobj);
@@ -517,7 +517,7 @@ void func_ovl3_801549FC(GObj *fighter_gobj)
         else func_ovl3_80154D1C(fighter_gobj);
     }
 
-    else if (fp->coll_data.unk_0x56 & (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+    else if (fp->coll_data.coll_mask & (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
         fp->phys_info.vel_ground.x = 0.0F;
         func_ovl3_80144498(fighter_gobj);
@@ -555,7 +555,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
     pos.y = DObjGetStruct(fighter_gobj)->translate.y;
     pos.z = 0.0F;
 
-    if (fp->coll_data.unk_0x56 & MPCOLL_MASK_CEIL)
+    if (fp->coll_data.coll_mask & MPCOLL_MASK_CEIL)
     {
         if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_normal))
         {
@@ -564,7 +564,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
         }
     }
 
-    if (fp->coll_data.unk_0x56 & MPCOLL_MASK_RWALL)
+    if (fp->coll_data.coll_mask & MPCOLL_MASK_RWALL)
     {
 
         if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_normal))
@@ -577,7 +577,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
         else func_ovl3_80154598(fighter_gobj, &fp->coll_data);
     }
 
-    if (fp->coll_data.unk_0x56 & MPCOLL_MASK_LWALL)
+    if (fp->coll_data.coll_mask & MPCOLL_MASK_LWALL)
     {
 
         if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_normal))

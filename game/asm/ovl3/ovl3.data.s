@@ -3129,7 +3129,7 @@ glabel Article_Kabigon_Status
   /* 59094 1055D4 8018AB94 */  .4byte func_ovl3_8017E070
   .incbin "ovl3.raw.bin", 0x59098, 0x28
 
-glabel D_ovl3_8018ABC0
+glabel Article_Tosakinto_Data
   .incbin "ovl3.raw.bin", 0x590C0, 0x4
   /* 590C4 105604 8018ABC4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x590C8, 0xC
@@ -3139,7 +3139,7 @@ glabel jtbl_ovl3_8018ABD4
   /* 590D8 105618 8018ABD8 */  .4byte jtgt_ovl3_8017EA98
   .incbin "ovl3.raw.bin", 0x590DC, 0x18
 
-glabel jtbl_ovl3_8018ABF4
+glabel Article_Tosakinto_Status
   /* 590F4 105634 8018ABF4 */  .4byte jtgt_ovl3_8017E7A0
   /* 590F8 105638 8018ABF8 */  .4byte jtgt_ovl3_8017E7CC
   .incbin "ovl3.raw.bin", 0x590FC, 0x18
@@ -3149,7 +3149,7 @@ glabel jtbl_ovl3_8018AC14
   /* 59118 105658 8018AC18 */  .4byte jtgt_ovl3_8017E8CC
   .incbin "ovl3.raw.bin", 0x5911C, 0x24
 
-glabel D_ovl3_8018AC40
+glabel Article_Mew_Data
   .incbin "ovl3.raw.bin", 0x59140, 0x4
   /* 59144 105684 8018AC44 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59148, 0xC
@@ -3159,7 +3159,7 @@ glabel jtbl_ovl3_8018AC54
   /* 59158 105698 8018AC58 */  .4byte jtgt_ovl3_8017EDA4
   .incbin "ovl3.raw.bin", 0x5915C, 0x18
 
-glabel D_ovl3_8018AC74
+glabel Article_Mew_Status
   /* 59174 1056B4 8018AC74 */  .4byte func_ovl3_8017EBE0
   .incbin "ovl3.raw.bin", 0x59178, 0x28
 

@@ -155,14 +155,14 @@ void func_ovl3_80152B6C(GObj *fighter_gobj)
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        if (fp->coll_data.unk_0x56 & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+        if (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
         {
             func_ovl2_800DEEC8(fp);
             func_ovl3_80153654(fighter_gobj);
         }
         else func_ovl3_80152DD8(fighter_gobj);
     }
-    else if (fp->coll_data.unk_0x56 & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+    else if (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
         func_ovl3_801535F4(fighter_gobj);
     }
@@ -201,15 +201,15 @@ void func_ovl3_80152C2C(GObj *fighter_gobj)
     }
     else
     {
-        if ((fp->coll_data.unk_0x56 & MPCOLL_MASK_CEIL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_normal)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_CEIL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_normal)))
         {
             func_ovl3_80153654(fighter_gobj);
         }
-        if ((fp->coll_data.unk_0x56 & MPCOLL_MASK_RWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_normal)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_RWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_normal)))
         {
             func_ovl3_80153654(fighter_gobj);
         }
-        if ((fp->coll_data.unk_0x56 & MPCOLL_MASK_LWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_normal)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_LWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_normal)))
         {
             func_ovl3_80153654(fighter_gobj);
         }

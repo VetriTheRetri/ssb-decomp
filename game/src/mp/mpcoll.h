@@ -40,7 +40,7 @@ typedef struct _Coll_Data
     void *p_object_coll; // Points back to collision box???
     Vec2f unk_0x4C;
     u16 unk_0x54;
-    u16 unk_0x56;
+    u16 coll_mask;
     u16 unk_0x58;
     u16 coll_type; // "Flag that relates to type of clipping?"
     u16 wall_flag; // "Flag is enabled if moving into a wall"

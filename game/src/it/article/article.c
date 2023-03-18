@@ -558,8 +558,8 @@ void func_ovl3_8016F534(GObj *article_gobj)
         }
         if (ap->cb_coll != NULL)
         {
-            ap->coll_data.unk_0x54 = ap->coll_data.unk_0x56;
-            ap->coll_data.unk_0x56 = 0U;
+            ap->coll_data.unk_0x54 = ap->coll_data.coll_mask;
+            ap->coll_data.coll_mask = 0U;
             ap->coll_data.unk_0x64 = 0;
             ap->coll_data.coll_type = 0;
             ap->coll_data.unk_0x58 = 0;

@@ -130,7 +130,7 @@ bool32 func_ovl3_801736B4(Coll_Data *coll_data, GObj *article_gobj, u32 coll_fla
             coll_data->unk_0x64 = TRUE;
         }
     }
-    if (coll_data->unk_0x56 & coll_flags)
+    if (coll_data->coll_mask & coll_flags)
     {
         return TRUE;
     }
@@ -149,7 +149,7 @@ bool32 func_ovl3_801737EC(GObj *article_gobj, u32 check_flags, f32 mod_vel, Vec3
     Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
     Vec3f mod_pos;
     bool32 return_bool = FALSE;
-    u16 coll_flags = (ap->coll_data.unk_0x54 ^ ap->coll_data.unk_0x56) & ap->coll_data.unk_0x56 & MPCOLL_MASK_ALL;
+    u16 coll_flags = (ap->coll_data.unk_0x54 ^ ap->coll_data.coll_mask) & ap->coll_data.coll_mask & MPCOLL_MASK_ALL;
 
     if (coll_flags & check_flags & MPCOLL_MASK_RWALL)
     {
@@ -313,7 +313,7 @@ bool32 func_ovl3_80173D24(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(
     {
         func_ovl3_80172508(article_gobj);
     }
-    if (coll_data->unk_0x56 & MPCOLL_MASK_GROUND)
+    if (coll_data->coll_mask & MPCOLL_MASK_GROUND)
     {
         func_ovl0_800C7B08(&ap->phys_info.vel, &coll_data->ground_angle);
         func_ovl0_800C7AE0(&ap->phys_info.vel, arg2);

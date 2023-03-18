@@ -4,13 +4,13 @@
     "\\game",
     "\\game\\include",
     "\\game\\src",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articlehazard",
     "\\game\\src\\it\\article\\articlemonster",
-    "\\game\\src\\it\\item",
+    "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\include\\ssb_types.h",
+  "SelectedNode": "\\game\\src\\mp\\mpcoll.h",
   "PreviewInSolutionExplorer": false
 }

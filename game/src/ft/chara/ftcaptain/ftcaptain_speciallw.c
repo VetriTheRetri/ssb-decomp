@@ -109,7 +109,7 @@ bool32 func_ovl3_8015FEB4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->cmd_flags.flag1 == 1) && (fp->coll_data.unk_0x56 & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
+    if ((fp->cmd_flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
         func_ovl2_800DEEC8(fp);
         func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialLwBound, 0.0F, 1.0F, 0U);

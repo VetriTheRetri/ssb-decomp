@@ -43,7 +43,7 @@ bool32 jtgt_ovl3_8016BCC8(GObj *item_gobj)
         }
     }
 
-    if (ip->coll_data.unk_0x56 & (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+    if (ip->coll_data.coll_mask & (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
         func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 

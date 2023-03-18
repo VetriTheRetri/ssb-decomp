@@ -62,7 +62,7 @@ void func_ovl3_80177180(GObj *article_gobj, u8 is_explode)
     atCommonAttributes *attributes = ap->attributes;
     DObj *joint = DObjGetStruct(article_gobj);
 
-    if ((ap->coll_data.unk_0x56 & MPCOLL_MASK_GROUND) || (is_explode != FALSE))
+    if ((ap->coll_data.coll_mask & MPCOLL_MASK_GROUND) || (is_explode != FALSE))
     {
         Vec3f pos = joint->translate;
 
@@ -304,11 +304,11 @@ bool32 jtgt_ovl3_801777D8(GObj *article_gobj)
 
     func_ovl3_801735A0(article_gobj, func_ovl3_801775E8);
 
-    if (ap->coll_data.unk_0x56 & MPCOLL_MASK_RWALL)
+    if (ap->coll_data.coll_mask & MPCOLL_MASK_RWALL)
     {
         func_ovl3_80177104(article_gobj, 0);
     }
-    if (ap->coll_data.unk_0x56 & MPCOLL_MASK_LWALL)
+    if (ap->coll_data.coll_mask & MPCOLL_MASK_LWALL)
     {
         func_ovl3_80177104(article_gobj, 1);
     }

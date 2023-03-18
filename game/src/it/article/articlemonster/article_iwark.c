@@ -201,13 +201,13 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = ArticleGetStruct(article_gobj);
 
-        ap->at_multi = ATIWARK_RISE_STOP_WAIT;
+        ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
         ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel.z = 0.0F;
         ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATIWARK_RISE_VEL_Y;
+        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->gfx_offset.y;
 
@@ -250,7 +250,7 @@ bool32 jtgt_ovl3_8017DD18(GObj *item_gobj)
 
     func_ovl3_80167C04(item_gobj);
 
-    if (coll_data->unk_0x56 & MPCOLL_MASK_GROUND)
+    if (coll_data->coll_mask & MPCOLL_MASK_GROUND)
     {
         if (line_id != coll_data->ground_line_id)
         {

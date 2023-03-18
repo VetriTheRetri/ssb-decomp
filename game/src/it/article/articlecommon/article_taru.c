@@ -225,7 +225,7 @@ bool32 jtgt_ovl3_8017A148(GObj *article_gobj)
     {
         func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 4);
     }
-    else if (ap->coll_data.unk_0x56 & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+    else if (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
         return func_ovl3_80179C20(article_gobj);
     }

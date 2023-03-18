@@ -155,6 +155,9 @@
 #define ATMBALL_GRAVITY 1.5F 
 #define ATMBALL_T_VEL 120.0F
 
+#define ATMONSTER_RISE_STOP_WAIT 22       // Universal attribute for Pokémon to stop slowly levitating upward and to use designated physics this many frames after spawning
+#define ATMONSTER_RISE_VEL_Y 16.0F        // Y-velocity of "levitate" effect after exiting Poké Ball
+
 #define ATPAKKUN_APPEAR_WAIT 180          // Duration Pirahna Plant waits before coming out of its pipe
 #define ATPAKKUN_REBIRTH_WAIT 1200        // Duration Pirahna Plant waits before respawning after being knocked out and hitting one of the blast zones
 #define ATPAKKUN_APPEAR_OFF_Y 245.0F      
@@ -164,7 +167,6 @@
 #define ATPAKKUN_DETECT_SIZE_BOTTOM (-300.0F) // Bottom of Pirahna Plant fighter detection box when checking to stay inside the pipe
 #define ATPAKKUN_DETECT_SIZE_TOP 700.0F   // Top of Pirahna Plant fighter detection box when checking to stay inside the pipe
 
-#define ATIWARK_RISE_STOP_WAIT 22            // Wait this many frames to stop levitating upward after being summoned
 #define ATIWARK_FLY_WAIT 30                  // Unconfirmed?
 #define ATIWARK_MODEL_ROTATE_WAIT 6          // Onix's sprite is flipped every time this timer is up; counts up, reset to 0 when reaching destination value
 #define ATIWARK_ROCK_RUMBLE_WAIT 18          // Frames to wait between screen shake effects
@@ -174,7 +176,6 @@
 #define ATIWARK_ROCK_SPAWN_WAIT_MIN 15       // Added to random delay between spawned rocks
 #define ATIWARK_ROCK_SPAWN_OFF_X_MUL 2000.0F // Multiplies random spawn position of rock projectile
 #define ATIWARK_ROCK_SPAWN_OFF_X_ADD (-1000.0F) // Added to random spawn position of rock projectile
-#define ATIWARK_RISE_VEL_Y 16.0F             // Applied when Onix spwans from its Poké Ball
 #define ATIWARK_FLY_VEL_Y 80.0F              // Y-velocity of Onix when flying up
 #define ATIWARK_FLY_STOP_Y 200.0F            // Stop this many units away from the upper blast zone
 #define ATIWARK_IWARK_ADD_POS_Y (-660.0F)    // Add this to Y-position if user is Onix
@@ -190,7 +191,6 @@
 #define ATIWARK_ROCK_COLLIDE_MUL_VEL_Y 0.1F  // Assume this is what slows the rocks down so much when they hit the ground
 #define ATIWARK_ROCK_COLLIDE_ADD_VEL_Y (-150.0F) // Added when rock collides with ground
 
-#define ATKABGON_RISE_STOP_WAIT 22           // Wait this many frames to stop levitating upward after being summoned
 #define ATKABIGON_GFX_SPAWN_INT 4
 #define ATKABIGON_DROP_WAIT 60               // Wait this many frames before dropping after reaching the top of the screen
 #define ATKABIGON_RUMBLE_WAIT 18             // Wait this many frames between screen shake effects
@@ -199,11 +199,22 @@
 #define ATKABIGON_DROP_OFF_X_ADD (-1000.0F)  // Added to multiplied random drop X-position
 #define ATKABIGON_DROP_SIZE_KABIGON 4.0F     // Size of Snorlax's drop model and hitbox
 #define ATKABIGON_DROP_SIZE_OTHER 5.2F       // Size of non-Snorlax drop model and hitbox (Clefairy)
-#define ATKABIGON_RISE_VEL_Y 16.0F           // Applied when Snorlax spwans from its Poké Ball
 #define ATKABIGON_JUMP_VEL_Y 80.0F           // Y-velocity of Snorlax's jump
 #define ATKABIGON_JUMP_GFX_MUL_OFF 200.0F    // Multiplies random spawn position of dust GFX when Snorlax jumps
 #define ATKABIGON_JUMP_GFX_SUB_OFF 100.0F    // Subtracted from random spawn position of dust GFX when Snorlax jumps
 #define ATKABIGON_MAP_OFF_Y 200.0F           // Halt jump this many units away from top blastonze / despawn if Y-position is less than bottom blastzone + this value
+
+#define ATTOSAKINTO_LIFETIME 360
+#define ATTOSAKINTO_FLAP_VEL_X 10.0F         // Semi-constant horizontal velocity that may randomly be inverted
+#define ATTOSAKINTO_FLAP_VEL_Y 60.0F         // Vertical velocity gained from touching the ground
+#define ATTOSAKINTO_GRAVITY 6.0F
+#define ATTOSAKINTO_T_VEL 90.0F
+
+#define ATMEW_LIFETIME 480
+#define ATMEW_GFX_SPAWN_INT 3
+#define ATMEW_START_VEL_X 8.0F               // Mew's initial X-velocity
+#define ATMEW_START_VEL_Y -20.0F             // Mew's initial Y-velocity
+#define ATMEW_FLY_ADD_VEL_Y 0.8F             // Added to Mew's Y-velocity every frame
 
 typedef struct Common_ArticleVars
 {
@@ -270,7 +281,7 @@ typedef struct Iwark_ArticleVars
     u16 rock_timer1;
     s32 spawn_rock_wait; // Delay between rock projectiles
     u16 rock_timer2;
-    u16 is_rumble;
+    u16 is_rumble; // Not really a bool?
     u16 rumble_wait;
     u16 spawn_rock_count; // Number of rocks to spawn?
 
@@ -282,5 +293,17 @@ typedef struct Kabigon_ArticleVars
     s32 rumble_wait;
 
 } Kabigon_ArticleVars;
+
+typedef struct Tosakinto_ArticleVars
+{
+    Vec3f pos;
+
+} Tosakinto_ArticleVars;
+
+typedef struct Mew_ArticleVars
+{
+    s32 esper_gfx_int;
+
+} Mew_ArticleVars;
 
 #endif

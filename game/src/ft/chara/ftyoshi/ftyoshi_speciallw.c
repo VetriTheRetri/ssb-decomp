@@ -53,7 +53,7 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
             }
         }
     }
-    else if ((func_ovl2_800DE8B0(fighter_gobj) != FALSE) && (fp->coll_data.unk_0x56 & 0x4000))
+    else if ((func_ovl2_800DE8B0(fighter_gobj) != FALSE) && (fp->coll_data.coll_mask & 0x4000))
     {
         func_ovl3_8015F0A8(fighter_gobj);
     }

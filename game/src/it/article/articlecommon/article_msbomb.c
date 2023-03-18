@@ -114,16 +114,16 @@ void func_ovl3_80176708(GObj *article_gobj)
     DObj *joint = DObjGetStruct(article_gobj);
 
 
-    if ((coll_data->unk_0x56 & MPCOLL_MASK_CEIL) || (coll_data->unk_0x56 & MPCOLL_MASK_GROUND))
+    if ((coll_data->coll_mask & MPCOLL_MASK_CEIL) || (coll_data->coll_mask & MPCOLL_MASK_GROUND))
     {
 
-        if (coll_data->unk_0x56 & MPCOLL_MASK_CEIL)
+        if (coll_data->coll_mask & MPCOLL_MASK_CEIL)
         {
             angle = coll_data->ceil_angle;
 
             ap->unk_0x2D0 = coll_data->ceil_line_id;
         }
-        if (coll_data->unk_0x56 & MPCOLL_MASK_GROUND)
+        if (coll_data->coll_mask & MPCOLL_MASK_GROUND)
         {
             angle = coll_data->ground_angle;
 
@@ -132,13 +132,13 @@ void func_ovl3_80176708(GObj *article_gobj)
     }
     else
     {
-        if (coll_data->unk_0x56 & MPCOLL_MASK_RWALL)
+        if (coll_data->coll_mask & MPCOLL_MASK_RWALL)
         {
             angle = coll_data->rwall_angle;
 
             ap->unk_0x2D0 = coll_data->rwall_line_id;
         }
-        if (coll_data->unk_0x56 & MPCOLL_MASK_LWALL)
+        if (coll_data->coll_mask & MPCOLL_MASK_LWALL)
         {
             angle = coll_data->lwall_angle;
 
@@ -194,7 +194,7 @@ void func_ovl3_80176934(GObj *article_gobj)
     DObj *joint = DObjGetStruct(article_gobj);
     s32 unused[4];
 
-    if (ap->coll_data.unk_0x56 & MPCOLL_MASK_GROUND)
+    if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
         Vec3f translate = joint->translate;
 
