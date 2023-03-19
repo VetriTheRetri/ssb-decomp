@@ -239,7 +239,7 @@
 #define ATLIZARDON_T_VEL 40.0F
 
 #define ATSPEAR_SPAWN_COUNT 16               // Swarm will have this many member Beedrill
-#define ATSPEAR_SPAWN_WAIT_BASE 12           // Minimum number of frames between Beedrill swarm member spawns
+#define ATSPEAR_SPAWN_WAIT_CONST 12           // Minimum number of frames between Beedrill swarm member spawns
 #define ATSPEAR_SPAWN_WAIT_RANDOM 9          // Added to minimum number of frames between Beedrill swarm member spawns
 #define ATSPEAR_SPAWN_OFF_Y_MUL 1800.0F      // Multiplies random vertical spawn position
 #define ATSPEAR_SPAWN_OFF_Y_ADD (-800.0F)    // Added to random vertical spawn position
@@ -250,6 +250,20 @@
 #define ATSPEAR_SWARM_CALL_WAIT 51.0F        // Fly off into the distance and call Beedrill swarm on this frame of the leader's wait animation
 #define ATSPEAR_GRAVITY 1.0F
 #define ATSPEAR_T_VEL 90.0F 
+
+#define ATKAMEX_LIFETIME 360
+#define ATKAMEX_HYDRO_LIFETIME 20
+#define ATKAMEX_HYDRO_SPAWN_WAIT_CONST 30          // Constant wait frames to spawn Hydro Pump
+#define ATKAMEX_HYDRO_SPAWN_WAIT_RANDOM 1          // Maximum random wait frames to spawn Hydro Pump
+#define ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_X 360.0F     // X-offset of Blastoise Hydro Pump spawn position
+#define ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_Y 100.0F     // Y-offset of Blastoise Hydro Pump spawn position
+#define ATKAMEX_OTHER_HYDRO_SPAWN_OFF_X 100.0F     // X-offset of other Hydro Pump spawn position (Clefairy)
+#define ATKAMEX_DUST_SPAWN_OFF_X (-150.0F)         // X-offset of dust GFX
+#define ATKAMEX_COLL_SIZE 341.0F
+#define ATKAMEX_PUSH_VEL_X 2.3F
+#define ATKAMEX_CONST_VEL_X 38.0F                  // Constant velocity after Blastoise lands
+#define ATKAMEX_GRAVITY 1.0F
+#define ATKAMEX_T_VEL 40.0F
 
 typedef struct Common_ArticleVars
 {
@@ -364,6 +378,14 @@ typedef struct Spear_ArticleVars
     f32 spear_spawn_pos_y;
 
 } Spear_ArticleVars;
+
+typedef struct Kamex_ArticleVars
+{
+    s32 hydro_spawn_wait;
+    f32 hydro_push_vel_x; // Added to Blastoise's velocity if is_apply_push is TRUE
+    bool32 is_apply_push; // Blastoise will be pushed forward after each Hydro Pump stream if enabled
+
+} Kamex_ArticleVars;
 
 #define ArticleSetMonster(ap) \
     ap->at_multi = 22; \

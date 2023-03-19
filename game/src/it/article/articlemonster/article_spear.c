@@ -29,7 +29,7 @@ void func_ovl3_8017FDC0(GObj *article_gobj)
         func_ovl3_80180608(article_gobj, &pos, ap->at_kind);
 
         ap->article_vars.spear.spear_spawn_count--;
-        ap->article_vars.spear.spear_spawn_wait = rand_u16_range(ATSPEAR_SPAWN_WAIT_RANDOM) + ATSPEAR_SPAWN_WAIT_BASE;
+        ap->article_vars.spear.spear_spawn_wait = rand_u16_range(ATSPEAR_SPAWN_WAIT_RANDOM) + ATSPEAR_SPAWN_WAIT_CONST;
     }
 }
 

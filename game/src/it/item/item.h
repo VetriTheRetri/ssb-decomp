@@ -335,6 +335,7 @@ typedef struct _Item_Struct
         Star_ItemVars star;
         Rock_ItemVars rock; // Onix's Rock Slide
         Coin_ItemVars coin;
+        Hydro_ItemVars hydro;
 
     } item_vars;
 

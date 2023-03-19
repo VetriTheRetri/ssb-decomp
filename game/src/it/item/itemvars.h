@@ -261,4 +261,11 @@ typedef struct Coin_ItemVars
 
 } Coin_ItemVars;
 
+typedef struct Hydro_ItemVars
+{
+    s32 unk_0x0; // Set to 0 but never used
+    s32 unk_0x4; // Set to 0 but never used
+
+} Hydro_ItemVars;
+
 #endif

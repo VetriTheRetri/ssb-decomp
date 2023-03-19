@@ -3265,7 +3265,7 @@ glabel Item_Pippi_Swarm_Data
   /* 593BC 1058FC 8018AEBC */  .4byte func_ovl3_80180354
   .incbin "ovl3.raw.bin", 0x593C0, 0x20
 
-glabel D_ovl3_8018AEE0
+glabel Article_Kamex_Data
   .incbin "ovl3.raw.bin", 0x593E0, 0x4
   /* 593E4 105924 8018AEE4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x593E8, 0xC
@@ -3275,7 +3275,7 @@ glabel jtbl_ovl3_8018AEF4
   /* 593F8 105938 8018AEF8 */  .4byte jtgt_ovl3_80180B6C
   .incbin "ovl3.raw.bin", 0x593FC, 0x18
 
-glabel jtbl_ovl3_8018AF14
+glabel Article_Kamex_Status
   /* 59414 105954 8018AF14 */  .4byte jtgt_ovl3_801807DC
   /* 59418 105958 8018AF18 */  .4byte jtgt_ovl3_80180808
   .incbin "ovl3.raw.bin", 0x5941C, 0x18
@@ -3290,7 +3290,7 @@ glabel jtbl_ovl3_8018AF54
   /* 59458 105998 8018AF58 */  .4byte jtgt_ovl3_80180A30
   .incbin "ovl3.raw.bin", 0x5945C, 0x18
 
-glabel D_ovl3_8018AF74
+glabel Item_Hydro_Data
   .incbin "ovl3.raw.bin", 0x59474, 0x8
   /* 5947C 1059BC 8018AF7C */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59480, 0x8
