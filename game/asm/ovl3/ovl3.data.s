@@ -3235,7 +3235,7 @@ glabel jtbl_ovl3_8018ADEC
   /* 592F0 105830 8018ADF0 */  .4byte jtgt_ovl3_8017FB74
   .incbin "ovl3.raw.bin", 0x592F4, 0xC
 
-glabel D_ovl3_8018AE00
+glabel Article_Spear_Data
   .incbin "ovl3.raw.bin", 0x59300, 0x4
   /* 59304 105844 8018AE04 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59308, 0xC
@@ -3245,20 +3245,20 @@ glabel jtbl_ovl3_8018AE14
   /* 59318 105858 8018AE18 */  .4byte jtgt_ovl3_801801D8
   .incbin "ovl3.raw.bin", 0x5931C, 0x18
 
-glabel D_ovl3_8018AE34
+glabel Article_Spear_Status
   /* 59334 105874 8018AE34 */  .4byte func_ovl3_8017FE70
   .incbin "ovl3.raw.bin", 0x59338, 0x1C
   /* 59354 105894 8018AE54 */  .4byte func_ovl3_8017FFA8
   .incbin "ovl3.raw.bin", 0x59358, 0x1C
 
-glabel D_ovl3_8018AE74
+glabel Item_Spear_Swarm_Data
   .incbin "ovl3.raw.bin", 0x59374, 0x8
   /* 5937C 1058BC 8018AE7C */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59380, 0x8
   /* 59388 1058C8 8018AE88 */  .4byte func_ovl3_80180354
   .incbin "ovl3.raw.bin", 0x5938C, 0x1C
 
-glabel D_ovl3_8018AEA8
+glabel Item_Pippi_Swarm_Data
   .incbin "ovl3.raw.bin", 0x593A8, 0x8
   /* 593B0 1058F0 8018AEB0 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x593B4, 0x8

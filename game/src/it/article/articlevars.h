@@ -238,6 +238,19 @@
 #define ATLIZARDON_GRAVITY 1.0F 
 #define ATLIZARDON_T_VEL 40.0F
 
+#define ATSPEAR_SPAWN_COUNT 16               // Swarm will have this many member Beedrill
+#define ATSPEAR_SPAWN_WAIT_BASE 12           // Minimum number of frames between Beedrill swarm member spawns
+#define ATSPEAR_SPAWN_WAIT_RANDOM 9          // Added to minimum number of frames between Beedrill swarm member spawns
+#define ATSPEAR_SPAWN_OFF_Y_MUL 1800.0F      // Multiplies random vertical spawn position
+#define ATSPEAR_SPAWN_OFF_Y_ADD (-800.0F)    // Added to random vertical spawn position
+#define ATSPEAR_SWARM_FLY_VEL_X 130.0F       // X-velocity of Beedrill swarm members
+#define ATSPEAR_SWARM_CALL_VEL_X 6.0F        // Leader Beedrill's X-velocity when flying off to call the swarm, added each frame until called
+#define ATSPEAR_SWARM_CALL_VEL_Y 60.0F       // ???
+#define ATSPEAR_SWARM_CALL_OFF_X 500.0F      // Begin swarm when leader is this many units away from the side blastzone
+#define ATSPEAR_SWARM_CALL_WAIT 51.0F        // Fly off into the distance and call Beedrill swarm on this frame of the leader's wait animation
+#define ATSPEAR_GRAVITY 1.0F
+#define ATSPEAR_T_VEL 90.0F 
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
@@ -279,7 +292,7 @@ typedef struct Bumper_ArticleVars
 typedef struct Gr_Lucky_ArticleVars
 {
     Vec3f pos;
-    u16 spawn_egg_wait;
+    u16 egg_spawn_wait;
 
 } Gr_Lucky_ArticleVars;
 
@@ -343,6 +356,14 @@ typedef struct Lizardon_ArticleVars
     u16 flame_spawn_wait;
 
 } Lizardon_ArticleVars;
+
+typedef struct Spear_ArticleVars
+{
+    u16 spear_spawn_count;
+    s32 spear_spawn_wait;
+    f32 spear_spawn_pos_y;
+
+} Spear_ArticleVars;
 
 #define ArticleSetMonster(ap) \
     ap->at_multi = 22; \

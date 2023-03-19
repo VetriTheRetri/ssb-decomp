@@ -405,6 +405,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Mew_ArticleVars mew;
         Nyars_ArticleVars nyars;
         Lizardon_ArticleVars lizardon;
+        Spear_ArticleVars spear;
 
     } article_vars;
 

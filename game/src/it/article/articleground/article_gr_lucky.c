@@ -22,7 +22,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
 
     if (lucky_ap->at_multi == 0)
     {
-        if (lucky_ap->article_vars.gr_lucky.spawn_egg_wait != 0)
+        if (lucky_ap->article_vars.gr_lucky.egg_spawn_wait != 0)
         {
             if ((Match_Info->item_toggles & 8) && (Match_Info->item_switch != 0)) // Return to this when 0x8 is mapped
             {
@@ -44,7 +44,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
                     func_800269C0(0xCAU);
 
                     lucky_ap->at_multi = 10;
-                    lucky_ap->article_vars.gr_lucky.spawn_egg_wait--;
+                    lucky_ap->article_vars.gr_lucky.egg_spawn_wait--;
 
                     func_ovl2_800FF048(&pos, egg_ap->lr, 1.0F);
                 }
@@ -52,11 +52,11 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
             else
             {
                 lucky_ap->at_multi = 10;
-                lucky_ap->article_vars.gr_lucky.spawn_egg_wait--;
+                lucky_ap->article_vars.gr_lucky.egg_spawn_wait--;
             }
         }
     }
-    if (lucky_ap->article_vars.gr_lucky.spawn_egg_wait != 0)
+    if (lucky_ap->article_vars.gr_lucky.egg_spawn_wait != 0)
     {
         if (lucky_ap->at_multi > 0)
         {
@@ -155,7 +155,7 @@ GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = 0;
 
-        ap->article_vars.gr_lucky.spawn_egg_wait = ATGRLUCKY_SPAWN_EGG_WAIT;
+        ap->article_vars.gr_lucky.egg_spawn_wait = ATGRLUCKY_SPAWN_EGG_WAIT;
 
         func_800269C0(0x22AU);
     }
