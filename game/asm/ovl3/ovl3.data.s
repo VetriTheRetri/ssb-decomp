@@ -3385,7 +3385,7 @@ glabel jtbl_ovl3_8018B104
   /* 59644 105B84 8018B144 */  .4byte jtgt_ovl3_80181928
   .incbin "ovl3.raw.bin", 0x59648, 0x28
 
-glabel D_ovl3_8018B170
+glabel Article_Starmie_Data
   .incbin "ovl3.raw.bin", 0x59670, 0x4
   /* 59674 105BB4 8018B174 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59678, 0xC
@@ -3395,13 +3395,13 @@ glabel jtbl_ovl3_8018B184
   /* 59688 105BC8 8018B188 */  .4byte jtgt_ovl3_80182270
   .incbin "ovl3.raw.bin", 0x5968C, 0x18
 
-glabel D_ovl3_8018B1A4
+glabel Article_Starmie_Status
   /* 596A4 105BE4 8018B1A4 */  .4byte func_ovl3_80181E40
   .incbin "ovl3.raw.bin", 0x596A8, 0x1C
   /* 596C4 105C04 8018B1C4 */  .4byte func_ovl3_80181D24
   .incbin "ovl3.raw.bin", 0x596C8, 0x1C
 
-glabel D_ovl3_8018B1E4
+glabel Item_Swift_Data
   .incbin "ovl3.raw.bin", 0x596E4, 0x8
   /* 596EC 105C2C 8018B1EC */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x596F0, 0x8

@@ -168,7 +168,7 @@ bool32 jtgt_ovl3_8017F274(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemStatusDesc D_ovl3_8018ACF4;
+extern ItemSpawnDesc D_ovl3_8018ACF4;
 
 GObj *func_ovl3_8017F2E4(GObj *article_gobj, u8 coin_number, f32 rotate_angle)
 {

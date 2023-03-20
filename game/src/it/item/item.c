@@ -25,7 +25,7 @@ u32 func_ovl3_801655A0(void)
 
 extern s32 D_ovl2_80131398;
 
-GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemStatusDesc *item_status_desc, Vec3f *spawn_pos, u32 flags)
+GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnDesc *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
     // Non-matching, can't force Vec3f pos into proper stack position without compromises :(
 

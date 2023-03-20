@@ -197,7 +197,6 @@ bool32 jtgt_ovl3_80180B1C(GObj *article_gobj)
         ap->phys_info.vel.y = 0.0F;
 
         func_ovl3_80180964(article_gobj);
-
     }
     ap->at_multi--;
 
@@ -341,7 +340,7 @@ bool32 jtgt_ovl3_80180E6C(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemStatusDesc Item_Hydro_Data;
+extern ItemSpawnDesc Item_Hydro_Data;
 
 GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
 {

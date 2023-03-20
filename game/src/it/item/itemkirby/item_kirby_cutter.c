@@ -86,7 +86,7 @@ bool32 jtgt_ovl3_8016BE4C(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemStatusDesc Item_FinalCutter_Desc;
+extern ItemSpawnDesc Item_FinalCutter_Desc;
 
 GObj* func_ovl3_8016BE8C(GObj *fighter_gobj, Vec3f *pos)
 {

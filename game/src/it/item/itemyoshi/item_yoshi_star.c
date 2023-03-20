@@ -111,7 +111,7 @@ bool32 jtgt_ovl3_8016C7B0(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemStatusDesc Item_YoshiStar_Desc;
+extern ItemSpawnDesc Item_YoshiStar_Desc;
 
 GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 {

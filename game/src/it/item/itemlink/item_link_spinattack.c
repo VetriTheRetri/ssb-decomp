@@ -67,7 +67,7 @@ bool32 jtgt_ovl3_8016CB10(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemStatusDesc Item_SpinAttack_Desc;
+extern ItemSpawnDesc Item_SpinAttack_Desc;
 
 GObj *func_ovl3_8016CB1C(GObj *fighter_gobj, Vec3f *pos)
 {

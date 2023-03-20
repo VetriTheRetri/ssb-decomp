@@ -82,7 +82,7 @@ bool32 jtgt_ovl3_8016AC4C(GObj *item_gobj)
     return TRUE;
 }
 
-extern ItemStatusDesc Item_PKFire_Desc;
+extern ItemSpawnDesc Item_PKFire_Desc;
 
 GObj* func_ovl3_8016AC78(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel, f32 angle)
 {

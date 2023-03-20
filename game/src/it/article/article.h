@@ -317,7 +317,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 x2CF_flag_b5 : 1;
     u8 x2CF_flag_b6 : 1;
     u8 x2CF_flag_b7 : 1;
-    u16 unk_0x2D0;
+    u16 unk_0x2D0; // Some line ID 
     u16 pickup_wait : 12; // Number of frames article can last without being picked up (if applicable)
     u8 x2D3_flag_b4 : 1;
     u8 x2D3_flag_b5 : 1;
@@ -391,7 +391,6 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     union
     {
-        Common_ArticleVars common;
         BombHei_ArticleVars bombhei;
         Shell_ArticleVars shell;
         Taru_ArticleVars taru;
@@ -408,6 +407,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Spear_ArticleVars spear;
         Kamex_ArticleVars kamex;
         Mb_Lucky_ArticleVars mb_lucky;
+        Starmie_ArticleVars starmie;
 
     } article_vars;
 

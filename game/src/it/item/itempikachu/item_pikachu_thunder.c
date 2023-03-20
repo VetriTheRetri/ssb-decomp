@@ -79,7 +79,7 @@ bool32 func_ovl3_8016A7E8(GObj *item_gobj)
     return TRUE;
 }
 
-extern ItemStatusDesc Item_ThunderSpawn_Desc;
+extern ItemSpawnDesc Item_ThunderSpawn_Desc;
 
 GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
@@ -142,7 +142,7 @@ bool32 jtgt_ovl3_8016A950(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemStatusDesc Item_ThunderChain_Desc;
+extern ItemSpawnDesc Item_ThunderChain_Desc;
 
 GObj* func_ovl3_8016A980(GObj *item_gobj, Vec3f *pos)
 {

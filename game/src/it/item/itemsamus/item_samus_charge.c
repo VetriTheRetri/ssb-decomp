@@ -116,7 +116,7 @@ bool32 jtgt_ovl3_80168DA4(GObj *item_gobj) // Hit reflector
     return FALSE;
 }
 
-extern ItemStatusDesc Item_ChargeShot_Desc;
+extern ItemSpawnDesc Item_ChargeShot_Desc;
 
 GObj* func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool32 is_release) // Create item
 {

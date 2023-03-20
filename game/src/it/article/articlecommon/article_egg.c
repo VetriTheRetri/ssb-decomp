@@ -177,7 +177,7 @@ GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        if (flags & 3)
+        if (flags & ARTICLE_MASK_SPAWN_ARTICLE)
         {
             Article_Struct *spawn_ap = ArticleGetStruct(spawn_gobj);
 

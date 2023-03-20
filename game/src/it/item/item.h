@@ -59,7 +59,7 @@ typedef enum Item_Hit_Element
 
 } Item_Hit_Element;
 
-typedef struct ItemStatusDesc
+typedef struct ItemSpawnDesc
 {
     u8 unk_0x0;
     s32 it_kind;
@@ -78,7 +78,7 @@ typedef struct ItemStatusDesc
     bool32 (*cb_reflect)(GObj*);
     bool32 (*cb_absorb)(GObj*);
 
-} ItemStatusDesc;
+} ItemSpawnDesc;
 
 typedef struct ItemHitDesc // Moreso hitbox stuff
 {

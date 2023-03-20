@@ -280,11 +280,21 @@
 #define ATEGG_GRAVITY 1.2F
 #define ATEGG_T_VEL 100.0F
 
-typedef struct Common_ArticleVars
-{
-    u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
+#define ATSTARMIE_LIFETIME 240
+#define ATSTARMIE_SWIFT_LIFETIME 30
+#define ATSTARMIE_SWIFT_SPAWN_WAIT_CONST 12        // Constant wait frames to spawn Hydro Pump
+#define ATSTARMIE_SWIFT_SPAWN_WAIT_RANDOM 1        // Maximum random wait frames to spawn Swift
+#define ATSTARMIE_SWIFT_VEL_X 150.0F
+#define ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_X 200.0F // X-offset of Starmie Swift spawn position
+#define ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_Y 100.0F // Y-offset of Starmie Swift spawn position
+#define ATSTARMIE_OTHER_SWIFT_SPAWN_OFF_X 100.0F   // X-offset of other Swift spawn position (Clefairy)
+#define ATSTARMIE_TARGET_POS_OFF_X 400.0F          // Added to Starmie's target travel position + fighter's collision box
+#define ATSTARMIE_TARGET_POS_OFF_Y 250.0F          // Added to Starmie's target travel position + fighter's collision box
+#define ATSTARMIE_FOLLOW_VEL_X 20.0F               // X-velocity at which Starmie follows its victim
+#define ATSTARMIE_ADD_VEL_X 10.0F
+#define ATSTARMIE_PUSH_VEL_X 70.0F                 // Set every time Starmie fires Swift
 
-} Common_ArticleVars;
+
 
 typedef struct BombHei_ArticleVars
 {
@@ -408,6 +418,16 @@ typedef struct Mb_Lucky_ArticleVars
     u16 lifetime;
 
 } Mb_Lucky_ArticleVars;
+
+typedef struct Starmie_ArticleVars
+{
+    s32 unk_0x0;
+    s32 swift_spawn_wait;
+    Vec3f target_pos; // Position Starmie is set to travel when released from its Poké Ball
+    Vec3f victim_pos; // Position of Starmie's selected victim
+    f32 add_vel_x;
+
+} Starmie_ArticleVars;
 
 #define ArticleSetMonster(ap) \
     ap->at_multi = 22; \

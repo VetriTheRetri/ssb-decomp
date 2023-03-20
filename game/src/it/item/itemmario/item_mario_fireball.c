@@ -2,7 +2,7 @@
 #include "fighter.h"
 
 extern const ItemFireballAttributes Item_Fireball_Attributes[2];
-extern ItemStatusDesc Item_Fireball_Desc;
+extern ItemSpawnDesc Item_Fireball_Desc;
 
 bool32 jtgt_ovl3_80168540(GObj *item_gobj) // Animation
 {
