@@ -3339,7 +3339,7 @@ glabel jtbl_ovl3_8018B040
   /* 59548 105A88 8018B048 */  .4byte jtgt_ovl3_80181368
   .incbin "ovl3.raw.bin", 0x5954C, 0x24
 
-glabel D_ovl3_8018B070
+glabel Article_Egg_Data
   .incbin "ovl3.raw.bin", 0x59570, 0x4
 
 glabel D_ovl3_8018B074
@@ -3352,7 +3352,7 @@ glabel jtbl_ovl3_8018B084
   .incbin "ovl3.raw.bin", 0x5958C, 0x14
   /* 595A0 105AE0 8018B0A0 */  .4byte func_ovl3_80181640
 
-glabel D_ovl3_8018B0A4
+glabel Article_Egg_Status
   .incbin "ovl3.raw.bin", 0x595A4, 0x4
   /* 595A8 105AE8 8018B0A8 */  .4byte func_ovl3_80181618
   .incbin "ovl3.raw.bin", 0x595AC, 0x14

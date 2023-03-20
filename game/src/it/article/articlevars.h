@@ -275,6 +275,11 @@
 #define ATMBLUCKY_GRAVITY 1.0F
 #define ATMBLUCKY_T_VEL 40.0F
 
+#define ATEGG_EXPLODE_GFX_WAIT 8                   // Wait this many frames before spawning eggshell break GFX on explosion
+#define ATEGG_EXPLODE_GFX_SCALE 1.4F               // Scale of explosion GFX
+#define ATEGG_GRAVITY 1.2F
+#define ATEGG_T_VEL 100.0F
+
 typedef struct Common_ArticleVars
 {
     u8 filler[0x24]; // fill 0x24 bytes until all vars are mapped
