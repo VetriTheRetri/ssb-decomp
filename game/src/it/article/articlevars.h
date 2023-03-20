@@ -139,14 +139,14 @@
 #define ATBUMPER_GRAVITY_HIT 4.0F
 #define ATBUMPER_T_VEL 80.0F
 
-#define ATGRLUCKY_SPAWN_EGG_WAIT 1      // Wait this many frames before spawning egg (read only when egg spawn function is called)
-#define ATGRLUCKY_SPAWN_EGG_OFF_X 200.0F// X-offset of egg spawn
-#define ATGRLUCKY_SPAWN_EGG_OFF_Y 200.0F// Y-offset of egg spawn
-#define ATGRLUCKY_SPAWN_EGG_MUL 8.0F    // Multiplies random velocity of egg
-#define ATGRLUCKY_SPAWN_EGG_ADD_X 8.0F  // Added to mutliplied random velocity of egg
-#define ATGRLUCKY_SPAWN_EGG_ADD_Y 30.0F // Added to multiplide random velocity of egg
-#define ATGRLUCKY_SPAWN_EGG_BEGIN 80.0F // First frame egg spawn function is called
-#define ATGRLUCKY_SPAWN_EGG_END 85.0F   // Last frame egg spawn function is called
+#define ATGRLUCKY_EGG_SPAWN_WAIT 1      // Wait this many frames before spawning egg (read only when egg spawn function is called)
+#define ATGRLUCKY_EGG_SPAWN_OFF_X 200.0F// X-offset of egg spawn
+#define ATGRLUCKY_EGG_SPAWN_OFF_Y 200.0F// Y-offset of egg spawn
+#define ATGRLUCKY_EGG_SPAWN_MUL 8.0F    // Multiplies random velocity of egg
+#define ATGRLUCKY_EGG_SPAWN_ADD_X 8.0F  // Added to mutliplied random velocity of egg
+#define ATGRLUCKY_EGG_SPAWN_ADD_Y 30.0F // Added to multiplide random velocity of egg
+#define ATGRLUCKY_EGG_SPAWN_BEGIN 80.0F // First frame egg spawn function is called
+#define ATGRLUCKY_EGG_SPAWN_END 85.0F   // Last frame egg spawn function is called
 #define ATGRLUCKY_HIT_ROTATE_Z 0.10471976F // Rotation step when Chansey is knocked out of the Pokémon hut? Not actually applied?
 #define ATGRLUCKY_GRAVITY 1.2F
 #define ATGRLUCKY_T_VEL 100.0F
@@ -264,6 +264,16 @@
 #define ATKAMEX_CONST_VEL_X 38.0F                  // Constant velocity after Blastoise lands
 #define ATKAMEX_GRAVITY 1.0F
 #define ATKAMEX_T_VEL 40.0F
+
+#define ATMBLUCKY_LIFETIME 90                      // Used only after Chansey has spawned all of its eggs
+#define ATMBLUCKY_EGG_SPAWN_WAIT_ADD 4             // Added when Chansey gets hit
+#define ATMBLUCKY_EGG_SPAWN_COUNT 3
+#define ATMBLUCKY_EGG_SPAWN_WAIT_CONST 30
+#define ATMBLUCKY_EGG_SPAWN_BASE_VEL 8.0F          // Multiplies random velocity
+#define ATMBLUCKY_EGG_SPAWN_ADD_VEL_X 7.0F         // Added to multiplied random X-velocity
+#define ATMBLUCKY_EGG_SPAWN_ADD_VEL_Y 40.0F        // Added to multiplide random Y-velocity
+#define ATMBLUCKY_GRAVITY 1.0F
+#define ATMBLUCKY_T_VEL 40.0F
 
 typedef struct Common_ArticleVars
 {
@@ -386,6 +396,13 @@ typedef struct Kamex_ArticleVars
     bool32 is_apply_push; // Blastoise will be pushed forward after each Hydro Pump stream if enabled
 
 } Kamex_ArticleVars;
+
+typedef struct Mb_Lucky_ArticleVars
+{
+    u16 egg_spawn_wait;
+    u16 lifetime;
+
+} Mb_Lucky_ArticleVars;
 
 #define ArticleSetMonster(ap) \
     ap->at_multi = 22; \

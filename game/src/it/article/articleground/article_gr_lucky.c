@@ -28,11 +28,11 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
             {
                 pos = joint->translate;
 
-                pos.x -= ATGRLUCKY_SPAWN_EGG_OFF_X;
-                pos.y += ATGRLUCKY_SPAWN_EGG_OFF_Y;
+                pos.x -= ATGRLUCKY_EGG_SPAWN_OFF_X;
+                pos.y += ATGRLUCKY_EGG_SPAWN_OFF_Y;
 
-                vel.x = -((rand_f32() * ATGRLUCKY_SPAWN_EGG_MUL) + ATGRLUCKY_SPAWN_EGG_ADD_X);
-                vel.y = (rand_f32() * ATGRLUCKY_SPAWN_EGG_MUL) + ATGRLUCKY_SPAWN_EGG_ADD_Y;
+                vel.x = -((rand_f32() * ATGRLUCKY_EGG_SPAWN_MUL) + ATGRLUCKY_EGG_SPAWN_ADD_X);
+                vel.y = (rand_f32() * ATGRLUCKY_EGG_SPAWN_MUL) + ATGRLUCKY_EGG_SPAWN_ADD_Y;
                 vel.z = 0.0F;
 
                 egg_gobj = func_ovl3_8016EA78(lucky_gobj, At_Kind_Egg, &pos, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
@@ -73,7 +73,7 @@ bool32 func_ovl3_8017C400(GObj *article_gobj)
     joint->translate.x += ap->article_vars.gr_lucky.pos.x;
     joint->translate.y += ap->article_vars.gr_lucky.pos.y;
 
-    if ((joint->unk_dobj_0x7C >= ATGRLUCKY_SPAWN_EGG_BEGIN) && (joint->unk_dobj_0x7C <= ATGRLUCKY_SPAWN_EGG_END))
+    if ((joint->unk_dobj_0x7C >= ATGRLUCKY_EGG_SPAWN_BEGIN) && (joint->unk_dobj_0x7C <= ATGRLUCKY_EGG_SPAWN_END))
     {
         func_ovl3_8017C280(article_gobj);
     }
@@ -155,7 +155,7 @@ GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = 0;
 
-        ap->article_vars.gr_lucky.egg_spawn_wait = ATGRLUCKY_SPAWN_EGG_WAIT;
+        ap->article_vars.gr_lucky.egg_spawn_wait = ATGRLUCKY_EGG_SPAWN_WAIT;
 
         func_800269C0(0x22AU);
     }

@@ -5,12 +5,12 @@
     "\\game\\src",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articlecommon",
     "\\game\\src\\it\\article\\articlefighter",
-    "\\game\\src\\it\\article\\articlemonster",
+    "\\game\\src\\it\\article\\articleground",
+    "\\game\\src\\it\\item",
     "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\articlemonster\\article_kabigon.c",
+  "SelectedNode": "\\game\\src\\mp\\mpcoll.h",
   "PreviewInSolutionExplorer": false
 }

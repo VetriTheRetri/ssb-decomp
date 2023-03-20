@@ -3308,7 +3308,7 @@ glabel jtbl_ovl3_8018AF9C
   /* 594A4 1059E4 8018AFA4 */  .4byte jtgt_ovl3_80180E60
   .incbin "ovl3.raw.bin", 0x594A8, 0x8
 
-glabel D_ovl3_8018AFB0
+glabel Article_Mb_Lucky_Data
   .incbin "ovl3.raw.bin", 0x594B0, 0x4
   /* 594B4 1059F4 8018AFB4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x594B8, 0xC
@@ -3318,7 +3318,7 @@ glabel jtbl_ovl3_8018AFC4
   /* 594C8 105A08 8018AFC8 */  .4byte jtgt_ovl3_80181480
   .incbin "ovl3.raw.bin", 0x594CC, 0x18
 
-glabel jtbl_ovl3_8018AFE4
+glabel Article_Mb_Lucky_Status
   /* 594E4 105A24 8018AFE4 */  .4byte jtgt_ovl3_80181048
   /* 594E8 105A28 8018AFE8 */  .4byte jtgt_ovl3_80181074
   .incbin "ovl3.raw.bin", 0x594EC, 0x18

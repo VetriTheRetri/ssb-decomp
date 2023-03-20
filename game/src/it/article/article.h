@@ -101,7 +101,7 @@ typedef enum atKind
     At_Kind_Lizardon,                       // Charizard
     At_Kind_Spear,                          // Beedrill
     At_Kind_Kamex,                          // Blastoise
-    At_Kind_At_Lucky,                       // Chansey (Poké Ball)
+    At_Kind_Mb_Lucky,                       // Chansey (Poké Ball)
     At_Kind_Starmie,                        // Starmie
     At_Kind_Sawamura,                       // Hitmonlee
     At_Kind_Dogas,                          // Koffing
@@ -407,6 +407,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Lizardon_ArticleVars lizardon;
         Spear_ArticleVars spear;
         Kamex_ArticleVars kamex;
+        Mb_Lucky_ArticleVars mb_lucky;
 
     } article_vars;
 
