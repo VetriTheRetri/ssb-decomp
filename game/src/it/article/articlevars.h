@@ -294,7 +294,14 @@
 #define ATSTARMIE_ADD_VEL_X 10.0F
 #define ATSTARMIE_PUSH_VEL_X 70.0F                 // Set every time Starmie fires Swift
 
-
+#define ATSAWAMURA_LIFETIME 600
+#define ATSAWAMURA_KICK_WAIT 40
+#define ATSAWAMURA_TARGET_POS_OFF_Y 500.0F         // Added to Hitmonlee's target travel position + fighter's collision box
+#define ATSAWAMURA_DESPAWN_OFF_X 500.0F            // Despawn if Hitmonlee is within this many units of the side blastzones
+#define ATSAWAMURA_KICK_SIZE 300.0F                // Size of kick hitbox
+#define ATSAWAMURA_KICK_VEL_X 400.0F
+#define ATSAWAMURA_GRAVITY 2.4F
+#define ATSAWAMURA_T_VEL 100.0F
 
 typedef struct BombHei_ArticleVars
 {

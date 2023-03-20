@@ -3417,7 +3417,7 @@ glabel jtbl_ovl3_8018B200
   /* 59714 105C54 8018B214 */  .4byte jtgt_ovl3_801823E8
   .incbin "ovl3.raw.bin", 0x59718, 0x8
 
-glabel D_ovl3_8018B220
+glabel Article_Sawamura_Data
   .incbin "ovl3.raw.bin", 0x59720, 0x4
   /* 59724 105C64 8018B224 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x59728, 0xC
@@ -3427,7 +3427,7 @@ glabel jtbl_ovl3_8018B234
   /* 59738 105C78 8018B238 */  .4byte jtgt_ovl3_80182B34
   .incbin "ovl3.raw.bin", 0x5973C, 0x18
 
-glabel jtbl_ovl3_8018B254
+glabel Article_Sawamura_Status
   /* 59754 105C94 8018B254 */  .4byte jtgt_ovl3_80182630
   /* 59758 105C98 8018B258 */  .4byte jtgt_ovl3_80182660
   .incbin "ovl3.raw.bin", 0x5975C, 0x18
