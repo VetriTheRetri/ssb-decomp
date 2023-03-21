@@ -340,7 +340,7 @@ bool32 jtgt_ovl3_80180E6C(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_Hydro_Data;
+extern ItemSpawnData Item_Hydro_Data;
 
 GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
 {

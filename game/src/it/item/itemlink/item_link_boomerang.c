@@ -478,7 +478,7 @@ f32 func_ovl3_8016D914(Vec3f *vel, Fighter_Struct *fp, s32 lr, f32 vel_mul)
     return angle;
 }
 
-extern ItemSpawnDesc Item_Boomerang_Desc;
+extern ItemSpawnData Item_Boomerang_Desc;
 
 GObj *func_ovl3_8016DA78(GObj *fighter_gobj, Vec3f *pos)
 {

@@ -313,7 +313,7 @@ bool32 jtgt_ovl3_801824C0(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_Swift_Data;
+extern ItemSpawnData Item_Swift_Data;
 
 GObj* func_ovl3_80182530(GObj *article_gobj, Vec3f *pos)
 {

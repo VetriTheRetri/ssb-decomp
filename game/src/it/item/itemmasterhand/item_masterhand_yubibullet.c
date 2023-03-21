@@ -75,7 +75,7 @@ bool32 jtgt_ovl3_8016DD7C(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_YubiBullet_Easy;
+extern ItemSpawnData Item_YubiBullet_Easy;
 
 GObj *func_ovl3_8016DDB4(GObj *fighter_gobj, Vec3f *pos)
 {
@@ -96,7 +96,7 @@ GObj *func_ovl3_8016DDB4(GObj *fighter_gobj, Vec3f *pos)
     return item_gobj;
 }
 
-extern ItemSpawnDesc Item_YubiBullet_Hard;
+extern ItemSpawnData Item_YubiBullet_Hard;
 
 GObj *func_ovl3_8016DE28(GObj *fighter_gobj, Vec3f *pos)
 {

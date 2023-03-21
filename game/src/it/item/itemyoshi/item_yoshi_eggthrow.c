@@ -214,7 +214,7 @@ void func_ovl3_8016C444(GObj *item_gobj)
     func_ovl3_801675D0(item_gobj);
 }
 
-extern ItemSpawnDesc Item_EggThrow_Desc;
+extern ItemSpawnData Item_EggThrow_Desc;
 
 GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
 {

@@ -268,4 +268,10 @@ typedef struct Hydro_ItemVars
 
 } Hydro_ItemVars;
 
+typedef struct Smog_ItemVars
+{
+    ItemHitDesc *hit_desc;
+
+} Smog_ItemVars;
+
 #endif

@@ -207,7 +207,7 @@ bool32 jtgt_ovl3_80182B34(GObj *article_gobj)
 extern intptr_t D_NF_00013624;
 extern ArticleSpawnData Article_Sawamura_Data;
 
-GObj *jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Sawamura_Data, pos, vel, flags);
 

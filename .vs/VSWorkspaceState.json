@@ -5,12 +5,12 @@
     "\\game\\src",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articlecommon",
-    "\\game\\src\\it\\article\\articlemonster",
+    "\\game\\src\\it\\article\\articleground",
     "\\game\\src\\it\\item",
     "\\game\\src\\it\\item\\itemness",
+    "\\game\\src\\mp",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_egg.c",
+  "SelectedNode": "\\game\\src\\it\\article\\articlemonster\\article_starmie.c",
   "PreviewInSolutionExplorer": false
 }

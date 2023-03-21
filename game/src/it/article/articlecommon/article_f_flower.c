@@ -159,7 +159,7 @@ bool32 jtgt_ovl3_80175E84(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_F_Flower_Ammo_Desc;
+extern ItemSpawnData Item_F_Flower_Ammo_Desc;
 
 GObj* func_ovl3_80175F48(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {

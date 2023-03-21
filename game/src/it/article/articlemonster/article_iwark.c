@@ -307,7 +307,7 @@ bool32 func_ovl3_8017DEB8(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_Iwark_Rock_Data;
+extern ItemSpawnData Item_Iwark_Rock_Data;
 
 GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
 {

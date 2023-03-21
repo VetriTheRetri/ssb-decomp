@@ -103,7 +103,7 @@ bool32 jtgt_ovl3_801695B0(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_ThunderJoltAir_Desc;
+extern ItemSpawnData Item_ThunderJoltAir_Desc;
 
 GObj* func_ovl3_801695E4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
@@ -607,7 +607,7 @@ bool32 jtgt_ovl3_8016A3A4(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_ThunderJoltGround_Desc;
+extern ItemSpawnData Item_ThunderJoltGround_Desc;
 
 GObj* func_ovl3_8016A42C(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
 {

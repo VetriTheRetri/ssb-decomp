@@ -167,7 +167,7 @@ bool32 jtgt_ovl3_801692C4(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_SamusBomb_Desc;
+extern ItemSpawnData Item_SamusBomb_Desc;
 
 GObj* func_ovl3_80169328(GObj *fighter_gobj, Vec3f *pos)
 {

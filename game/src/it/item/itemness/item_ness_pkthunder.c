@@ -207,7 +207,7 @@ bool32 func_ovl3_8016B2A0(GObj *item_gobj)
     return TRUE;
 }
 
-extern ItemSpawnDesc Item_PKThunder_Desc;
+extern ItemSpawnData Item_PKThunder_Desc;
 
 GObj *func_ovl3_8016B2C4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create PK Thunder 
 {
@@ -299,7 +299,7 @@ bool32 jtgt_ovl3_8016B550(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_PKThunderTrail_Desc;
+extern ItemSpawnData Item_PKThunderTrail_Desc;
 
 GObj* func_ovl3_8016B580(GObj *head_gobj, Vec3f *pos, s32 trail_index)
 {
@@ -442,7 +442,7 @@ bool32 func_ovl3_8016B874(GObj *item_gobj)
     return TRUE;
 }
 
-extern ItemSpawnDesc Item_PKThunderReflect_Desc;
+extern ItemSpawnData Item_PKThunderReflect_Desc;
 
 GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 {
@@ -529,7 +529,7 @@ bool32 jtgt_ovl3_8016BB3C(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnDesc Item_PKThunderTrailReflect_Desc;
+extern ItemSpawnData Item_PKThunderTrailReflect_Desc;
 
 GObj* func_ovl3_8016BB6C(GObj *old_gobj, Vec3f *pos, s32 trail_index)
 {

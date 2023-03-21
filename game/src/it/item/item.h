@@ -59,12 +59,12 @@ typedef enum Item_Hit_Element
 
 } Item_Hit_Element;
 
-typedef struct ItemSpawnDesc
+typedef struct ItemSpawnData
 {
     u8 unk_0x0;
     s32 it_kind;
-    void *p_item; // Pointer to various item data
-    int offset_it_hit; // Offset of item hitbox info
+    void **p_item; // Pointer to various item data
+    intptr_t offset_it_hit; // Offset of item hitbox info
     u8 unk_0x10;
     u8 unk_0x11;
     u8 unk_0x12;
@@ -78,7 +78,7 @@ typedef struct ItemSpawnDesc
     bool32 (*cb_reflect)(GObj*);
     bool32 (*cb_absorb)(GObj*);
 
-} ItemSpawnDesc;
+} ItemSpawnData;
 
 typedef struct ItemHitDesc // Moreso hitbox stuff
 {
@@ -336,6 +336,7 @@ typedef struct _Item_Struct
         Rock_ItemVars rock; // Onix's Rock Slide
         Coin_ItemVars coin;
         Hydro_ItemVars hydro;
+        Smog_ItemVars smog;
 
     } item_vars;
 

@@ -3439,7 +3439,7 @@ glabel jtbl_ovl3_8018B274
   /* 59794 105CD4 8018B294 */  .4byte func_ovl3_80182764
   .incbin "ovl3.raw.bin", 0x59798, 0x28
 
-glabel D_ovl3_8018B2C0
+glabel Article_Dogas_Data
   .incbin "ovl3.raw.bin", 0x597C0, 0x4
   /* 597C4 105D04 8018B2C4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x597C8, 0xC
@@ -3449,13 +3449,13 @@ glabel jtbl_ovl3_8018B2D4
   /* 597D8 105D18 8018B2D8 */  .4byte jtgt_ovl3_80182F94
   .incbin "ovl3.raw.bin", 0x597DC, 0x18
 
-glabel D_ovl3_8018B2F4
+glabel Article_Dogas_Status
   /* 597F4 105D34 8018B2F4 */  .4byte func_ovl3_80182E1C
   .incbin "ovl3.raw.bin", 0x597F8, 0x1C
   /* 59814 105D54 8018B314 */  .4byte func_ovl3_80182C80
   .incbin "ovl3.raw.bin", 0x59818, 0x1C
 
-glabel D_ovl3_8018B334
+glabel Item_Smog_Data
   .incbin "ovl3.raw.bin", 0x59834, 0x8
 
 glabel D_ovl3_8018B33C

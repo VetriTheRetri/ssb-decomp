@@ -303,6 +303,16 @@
 #define ATSAWAMURA_GRAVITY 2.4F
 #define ATSAWAMURA_T_VEL 100.0F
 
+#define ATDOGAS_DESPAWN_WAIT 90                    // Wait this many frames after running out of gas before despawning
+#define ATDOGAS_SMOG_SPAWN_WAIT 8
+#define ATDOGAS_SMOG_SPAWN_COUNT 32                // Spawn this many Smog clouds
+#define ATDOGAS_SMOG_LIFETIME 30
+#define ATDOGAS_SMOG_VEL_XY 18.0F                  
+#define ATDOGAS_SMOG_MUL_OFF_X 400.0F              // Multiply random spawn position
+#define ATDOGAS_SMOG_SUB_OFF_X 200.0F              // Subtracted from multiplied random spawn position
+#define ATDOGAS_SMOG_MUL_OFF_Y 800.0F              // Multiply random spawn position
+#define ATDGOAS_SMOG_SUB_OFF_Y 400.0F              // Subtracted from multiplied random spawn position
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
@@ -435,6 +445,13 @@ typedef struct Starmie_ArticleVars
     f32 add_vel_x;
 
 } Starmie_ArticleVars;
+
+typedef struct Dogas_ArticleVars
+{
+    Vec3f pos;
+    s32 smog_spawn_wait;
+
+} Dogas_ArticleVars;
 
 #define ArticleSetMonster(ap) \
     ap->at_multi = 22; \

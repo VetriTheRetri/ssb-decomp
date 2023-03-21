@@ -408,6 +408,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Kamex_ArticleVars kamex;
         Mb_Lucky_ArticleVars mb_lucky;
         Starmie_ArticleVars starmie;
+        Dogas_ArticleVars dogas;
 
     } article_vars;
 
