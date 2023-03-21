@@ -318,6 +318,17 @@
 
 #define ATPORYGON_SHAKE_STOP_WAIT 32               // Stop vertical shake after this many frames have passed?
 
+#define ATHITOKAGE_FLAME_LIFETIME 20
+#define ATHITOKAGE_FLAME_SPAWN_WAIT 8
+#define ATHITOKAGE_FLAME_SPAWN_ANGLE -0.20943952F
+#define ATHITOKAGE_FLAME_VEL_XY 45.0F
+#define ATHITOKAGE_FLAME_SPAWN_BEGIN 40.0F         // Charmander can begin firing Flamethrower this frame onward
+#define ATHITOKAGE_FLAME_SPAWN_END 120.0F          // Charmander can no longer fire Flamethrower this frame onward
+#define ATHITOKAGE_FLAME_SPAWN_OFF_X (-250.0F)     // X-offset of flame spawn
+#define ATHITOKAGE_HIT_ROTATE_Z 0.10471976F
+#define ATHITOKAGE_GRAVITY 1.2F
+#define ATHITOKAGE_T_VEL 100.0F
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
@@ -469,6 +480,14 @@ typedef struct Porygon_ArticleVars
     Vec3f offset;
 
 } Porygon_ArticleVars;
+
+typedef struct Hitokage_ArticleVars
+{
+    Vec3f offset;
+    u16 flags;
+    u16 flame_spawn_wait;
+
+} Hitokage_ArticleVars;
 
 // Thought this might be a macro but it's not consistent
 

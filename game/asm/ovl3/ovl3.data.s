@@ -3512,7 +3512,7 @@ glabel D_ovl3_8018B464
   /* 59974 105EB4 8018B474 */  .4byte func_ovl3_80183C84
   .incbin "ovl3.raw.bin", 0x59978, 0x28
 
-glabel D_ovl3_8018B4A0
+glabel Article_Hitokage_Data
   .incbin "ovl3.raw.bin", 0x599A0, 0x4
   /* 599A4 105EE4 8018B4A4 */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x599A8, 0xC
@@ -3522,11 +3522,11 @@ glabel D_ovl3_8018B4A0
 glabel jtbl_ovl3_8018B4D0
   /* 599D0 105F10 8018B4D0 */  .4byte jtgt_ovl3_80183F94
 
-glabel D_ovl3_8018B4D4
+glabel Article_Hitokage_Status
   /* 599D4 105F14 8018B4D4 */  .4byte jtgt_ovl3_80183F20
   .incbin "ovl3.raw.bin", 0x599D8, 0x1C
 
-glabel D_ovl3_8018B4F4
+glabel Item_Hitokage_Flame_Data
   .incbin "ovl3.raw.bin", 0x599F4, 0x8
   /* 599FC 105F3C 8018B4FC */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x59A00, 0x8

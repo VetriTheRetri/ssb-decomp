@@ -431,6 +431,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Dogas_ArticleVars dogas;
         Marumine_ArticleVars marumine;
         Porygon_ArticleVars porygon;
+        Hitokage_ArticleVars hitokage;
 
     } article_vars;
 
