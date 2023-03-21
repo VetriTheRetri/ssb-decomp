@@ -185,7 +185,7 @@ extern ItemSpawnData Item_Smog_Data;
 GObj* func_ovl3_80183144(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 {
     ItemSpawnData *p_data = &Item_Smog_Data;
-    GObj *item_gobj = func_ovl3_801655C8(article_gobj, &Item_Smog_Data, pos, 3U);
+    GObj *item_gobj = func_ovl3_801655C8(article_gobj, &Item_Smog_Data, pos, ITEM_MASK_SPAWN_ARTICLE);
     DObj *joint;
     Item_Struct *ip;
 
