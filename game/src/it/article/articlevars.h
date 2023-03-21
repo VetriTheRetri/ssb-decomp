@@ -313,6 +313,9 @@
 #define ATDOGAS_SMOG_MUL_OFF_Y 800.0F              // Multiply random spawn position
 #define ATDGOAS_SMOG_SUB_OFF_Y 400.0F              // Subtracted from multiplied random spawn position
 
+#define ATMARUMINE_EXPLODE_LIFETIME 6
+#define ATMARUMINE_EXPLODE_GFX_SCALE 1.4F
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
@@ -452,6 +455,12 @@ typedef struct Dogas_ArticleVars
     s32 smog_spawn_wait;
 
 } Dogas_ArticleVars;
+
+typedef struct Marumine_ArticleVars
+{
+    Vec3f offset;
+
+} Marumine_ArticleVars;
 
 // Thought this might be a macro but it's not consistent
 

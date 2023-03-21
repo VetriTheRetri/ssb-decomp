@@ -3490,7 +3490,7 @@ glabel jtbl_ovl3_8018B3B4
   /* 598B8 105DF8 8018B3B8 */  .4byte jtgt_ovl3_80183650
   .incbin "ovl3.raw.bin", 0x598BC, 0x44
 
-glabel D_ovl3_8018B400
+glabel Article_Marumine_Data
   .incbin "ovl3.raw.bin", 0x59900, 0x4
 
 glabel D_ovl3_8018B404
@@ -3499,7 +3499,7 @@ glabel D_ovl3_8018B404
   /* 59914 105E54 8018B414 */  .4byte func_ovl3_80183914
   .incbin "ovl3.raw.bin", 0x59918, 0x1C
 
-glabel D_ovl3_8018B434
+glabel Article_Marumine_Status
   /* 59934 105E74 8018B434 */  .4byte func_ovl3_801839A8
   .incbin "ovl3.raw.bin", 0x59938, 0x28
 
