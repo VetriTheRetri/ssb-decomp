@@ -3466,7 +3466,7 @@ glabel D_ovl3_8018B340
   /* 59848 105D88 8018B348 */  .4byte func_ovl3_801830DC
   .incbin "ovl3.raw.bin", 0x5984C, 0x24
 
-glabel jtbl_ovl3_8018B370
+glabel Article_Pippi_Status
   /* 59870 105DB0 8018B370 */  .4byte func_ovl3_8017DA60
   /* 59874 105DB4 8018B374 */  .4byte func_ovl3_8017E648
   /* 59878 105DB8 8018B378 */  .4byte func_ovl3_8017E828
@@ -3480,7 +3480,7 @@ glabel jtbl_ovl3_8018B370
   /* 59898 105DD8 8018B398 */  .4byte func_ovl3_80182F0C
   /* 5989C 105DDC 8018B39C */  .4byte func_ovl3_8017ED20
 
-glabel D_ovl3_8018B3A0
+glabel Article_Pippi_Data
   .incbin "ovl3.raw.bin", 0x598A0, 0x4
   /* 598A4 105DE4 8018B3A4 */  .4byte Article_File_Data
   .incbin "ovl3.raw.bin", 0x598A8, 0xC

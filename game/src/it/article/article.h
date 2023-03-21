@@ -70,13 +70,15 @@ typedef enum atKind
     At_Kind_G_Shell,                        // Green Shell
     At_Kind_R_Shell,                        // Red Shell
     At_Kind_M_Ball,                         // Poké Ball
+    At_Kind_CommonEnd = At_Kind_M_Ball,     // End of common article IDs
 
     // Character articles
 
     At_Kind_FighterStart,                   // Start of fighter article IDs
     At_Kind_PK_Fire = At_Kind_FighterStart, // PK Fire pillar
     At_Kind_Link_Bomb,                      // Link's Bomb
-    
+    At_Kind_FighterEnd = At_Kind_Link_Bomb, // End of fighter article IDs
+
     // Stage hazards
 
     At_Kind_GroundStart,                    // Start of stage hazard IDs
@@ -90,6 +92,7 @@ typedef enum atKind
     At_Kind_Hitokage,                       // Charmander
     At_Kind_Fushigibana,                    // Venusaur
     At_Kind_Porygon,                        // Porygon
+    At_Kind_GroundEnd = At_Kind_Porygon,    // End of stage hazard IDs
 
     // Pokémon
 
@@ -107,6 +110,7 @@ typedef enum atKind
     At_Kind_Dogas,                          // Koffing
     At_Kind_Pippi,                          // Clefairy
     At_Kind_Mew,                            // Mew
+    At_Kind_MonsterEnd = At_Kind_Mew,       // End of Pokémon article IDs
 
     At_Kind_CustomStart                     // Start of custom article IDs (future modding?)
 

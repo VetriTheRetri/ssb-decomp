@@ -453,6 +453,8 @@ typedef struct Dogas_ArticleVars
 
 } Dogas_ArticleVars;
 
+// Thought this might be a macro but it's not consistent
+
 #define ArticleSetMonster(ap) \
     ap->at_multi = 22; \
     ap->phys_info.vel.z = 0.0F; \
