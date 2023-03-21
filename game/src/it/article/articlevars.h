@@ -329,6 +329,15 @@
 #define ATHITOKAGE_GRAVITY 1.2F
 #define ATHITOKAGE_T_VEL 100.0F
 
+#define ATFUSHIGIBANA_RETURN_WAIT 128              // Wait this many frames before deactivating hitbox?
+#define ATFUSHIGIBANA_RAZOR_LIFETIME 24
+#define ATFUSHIGIBANA_RAZOR_SPAWN_WAIT 16
+#define ATFUSHIGIBANA_RAZOR_VEL_X (-100.0F)
+#define ATFUSHIGIBANA_RAZOR_ADD_VEL_X 5.0F              
+#define ATFUSHIGIBANA_RAZOR_SPAWN_BEGIN 40.0F      // Venusaur can begin shooting Razor Leaf this frame onward
+#define ATFUSHIGIBANA_RAZOR_SPAWN_END 120.0F       // Venusaur can no longer shoot Razor Leaf this frame onward
+#define ATFUSHIGIBANA_RAZOR_SPAWN_OFF_X (-540.0F)  // X-offset of leaf spawn
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
@@ -488,6 +497,14 @@ typedef struct Hitokage_ArticleVars
     u16 flame_spawn_wait;
 
 } Hitokage_ArticleVars;
+
+typedef struct Fushigibana_ArticleVars
+{
+    Vec3f offset;
+    u16 flags;
+    u16 razor_spawn_wait;
+
+} Fushigibana_ArticleVars;
 
 // Thought this might be a macro but it's not consistent
 

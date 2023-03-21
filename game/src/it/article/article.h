@@ -13,10 +13,10 @@
 
 #define ARTICLE_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
 
-#define ARTICLE_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
-#define ARTICLE_MASK_SPAWN_NONE 1                  // Item spawned independently 
-#define ARTICLE_MASK_SPAWN_ITEM 2               // Item spawned by another item
-#define ARTICLE_MASK_SPAWN_ARTICLE 3               // Item spawned by Pokémon / misc entity class(es?)
+#define ARTICLE_MASK_SPAWN_FIGHTER 0               // Article spawned by fighter
+#define ARTICLE_MASK_SPAWN_GROUND 1                // Article spawned by stage 
+#define ARTICLE_MASK_SPAWN_ITEM 2                  // Article spawned by another item
+#define ARTICLE_MASK_SPAWN_ARTICLE 3               // Article spawned by Pokémon / misc entity class(es?)
 
 #define ARTICLE_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
 
@@ -432,6 +432,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Marumine_ArticleVars marumine;
         Porygon_ArticleVars porygon;
         Hitokage_ArticleVars hitokage;
+        Fushigibana_ArticleVars fushigibana;
 
     } article_vars;
 

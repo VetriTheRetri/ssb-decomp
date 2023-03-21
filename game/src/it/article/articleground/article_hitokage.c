@@ -52,7 +52,7 @@ bool32 func_ovl3_80183DE0(GObj *article_gobj)
 
         return TRUE;
     }
-    else return FALSE;
+    return FALSE;
 }
 
 bool32 jtgt_ovl3_80183F20(GObj *article_gobj)

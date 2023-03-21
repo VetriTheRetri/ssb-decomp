@@ -17,7 +17,7 @@
 #define ITEM_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
 
 #define ITEM_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
-#define ITEM_MASK_SPAWN_NONE 1                  // Item spawned independently 
+#define ITEM_MASK_SPAWN_GROUND 1                // Item spawned by stage
 #define ITEM_MASK_SPAWN_ITEM 2                  // Item spawned by another item
 #define ITEM_MASK_SPAWN_ARTICLE 3               // Item spawned by Pokémon / misc entity class(es?)
 

@@ -116,7 +116,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         break;
 
     default: // Items spawned independently 
-    case ITEM_MASK_SPAWN_NONE:
+    case ITEM_MASK_SPAWN_GROUND:
         ip->owner_gobj = NULL;
         ip->team = ITEM_TEAM_DEFAULT;
         ip->port_index = ITEM_PORT_DEFAULT;
@@ -280,7 +280,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         switch (flags & ITEM_MASK_SPAWN_ALL)
         {
         default:
-        case ITEM_MASK_SPAWN_NONE:
+        case ITEM_MASK_SPAWN_GROUND:
             break;
 
         case ITEM_MASK_SPAWN_FIGHTER:

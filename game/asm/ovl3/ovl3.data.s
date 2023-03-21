@@ -3543,7 +3543,7 @@ glabel jtbl_ovl3_8018B51C
   /* 59A20 105F60 8018B520 */  .4byte jtgt_ovl3_80184204
   .incbin "ovl3.raw.bin", 0x59A24, 0xC
 
-glabel D_ovl3_8018B530
+glabel Article_Fushigibana_Data
   .incbin "ovl3.raw.bin", 0x59A30, 0x4
 
 glabel D_ovl3_8018B534
@@ -3552,7 +3552,7 @@ glabel D_ovl3_8018B534
   /* 59A44 105F84 8018B544 */  .4byte func_ovl3_801845B4
   .incbin "ovl3.raw.bin", 0x59A48, 0x1C
 
-glabel D_ovl3_8018B564
+glabel Item_Razor_Data
   .incbin "ovl3.raw.bin", 0x59A64, 0x8
   /* 59A6C 105FAC 8018B56C */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x59A70, 0x8
