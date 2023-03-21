@@ -386,13 +386,13 @@ void func_ovl3_801779E4(GObj *article_gobj, u8 arg1)
     func_800269C0(1U);
 }
 
-extern u8 BombHei_Event;
+extern intptr_t BombHei_Event;
 extern ArticleSpawnData Article_BombHei_Data;
 
 void func_ovl3_80177A24(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    ArticleHitEvent *ev = (ArticleHitEvent*) ((uintptr_t)*Article_BombHei_Data.p_file + &BombHei_Event); // Linker thing
+    ArticleHitEvent *ev = (ArticleHitEvent*) ((uintptr_t)*Article_BombHei_Data.p_file + (intptr_t)&BombHei_Event); // Linker thing
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
     {

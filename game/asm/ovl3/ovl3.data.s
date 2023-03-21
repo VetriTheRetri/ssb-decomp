@@ -3503,7 +3503,7 @@ glabel Article_Marumine_Status
   /* 59934 105E74 8018B434 */  .4byte func_ovl3_801839A8
   .incbin "ovl3.raw.bin", 0x59938, 0x28
 
-glabel D_ovl3_8018B460
+glabel Article_Porygon_Data
   .incbin "ovl3.raw.bin", 0x59960, 0x4
 
 glabel D_ovl3_8018B464

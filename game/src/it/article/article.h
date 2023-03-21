@@ -136,7 +136,7 @@ typedef struct ArticleFileData
 typedef struct ArticleSpawnData
 {
     u32 w0;
-    ArticleFileData **p_file;
+    void **p_file;
     s32 offset;
     u32 w3;
 
@@ -228,6 +228,22 @@ typedef struct ArticleHitEvent // Hitbox subaction event?
     u16 size;
 
 } ArticleHitEvent;
+
+typedef struct ArticleHitDesc
+{
+    u8 timer;
+    s32 angle : 10;
+    u32 damage : 8;
+    u16 size;
+    u32 knockback_scale;
+    u32 knockback_weight;
+    u32 knockback_base;
+    s32 element;
+    u32 clang : 1;
+    s32 shield_damage;
+    u16 hit_sfx;
+
+} ArticleHitDesc;
 
 typedef struct Article_Hurt
 {
@@ -414,6 +430,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Starmie_ArticleVars starmie;
         Dogas_ArticleVars dogas;
         Marumine_ArticleVars marumine;
+        Porygon_ArticleVars porygon;
 
     } article_vars;
 

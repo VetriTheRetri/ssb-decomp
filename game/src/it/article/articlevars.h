@@ -462,6 +462,12 @@ typedef struct Marumine_ArticleVars
 
 } Marumine_ArticleVars;
 
+typedef struct Porygon_ArticleVars
+{
+    Vec3f offset;
+
+} Porygon_ArticleVars;
+
 // Thought this might be a macro but it's not consistent
 
 #define ArticleSetMonster(ap) \
