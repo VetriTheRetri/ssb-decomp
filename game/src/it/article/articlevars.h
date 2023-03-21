@@ -316,6 +316,8 @@
 #define ATMARUMINE_EXPLODE_LIFETIME 6
 #define ATMARUMINE_EXPLODE_GFX_SCALE 1.4F
 
+#define ATPORYGON_SHAKE_STOP_WAIT 32               // Stop vertical shake after this many frames have passed?
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
