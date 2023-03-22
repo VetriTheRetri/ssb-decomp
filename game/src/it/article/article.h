@@ -208,7 +208,7 @@ typedef struct _Article_Hit
     u32 can_rehit : 1; // Article can rehit targets after default rehit cooldown expires
     u32 can_deflect : 1;
     u32 can_reflect : 1;
-    u32 can_absorb : 1; // Not actually absorb but not yet known either
+    u32 can_shield : 1; // Not actually absorb but not yet known either
     u16 attack_id : 6;
     u16 flags_0x4C_b7 : 1;
     u16 flags_0x4E;
@@ -257,10 +257,21 @@ typedef struct Article_Hurt
 typedef struct atCommonAttributes
 {
     void *unk_0x0;
-    u8 filler_0x4[0x2C - 0x4];
+    u8 filler_0x4[0x10 - 0x4];
+    u32 unk_0x10_5bit : 5U;
+    s32 hit_offset1_x : 16; // Uhh... alrighty lol
+    s16 hit_offset1_y;
+    s16 hit_offset1_z;
+    s16 hit_offset2_x;
+    s16 hit_offset2_y;
+    s16 hit_offset2_z;
+    Vec3h hurt_offset;
+    Vec3h hurt_size;
+    s16 unk_0x2A;
     Vec2h gfx_offset; // Universal?
     s16 ledge_stop_width; // Used by Bob-Omb to determine when to turn around
-    u8 filler_0x32[0x46 - 0x32];
+    u16 size;
+    u8 filler_0x32[0x46 - 0x34];
     u16 spin_speed;
 
 } atCommonAttributes;
@@ -434,6 +445,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Hitokage_ArticleVars hitokage;
         Fushigibana_ArticleVars fushigibana;
         Gr_Bomb_ArticleVars gr_bomb;
+        PK_Fire_ArticleVars pk_fire;
 
     } article_vars;
 

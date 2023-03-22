@@ -3614,14 +3614,14 @@ glabel jtbl_ovl3_8018B628
   /* 59B30 106070 8018B630 */  .4byte jtgt_ovl3_80184E04
   .incbin "ovl3.raw.bin", 0x59B34, 0xC
 
-glabel D_ovl3_8018B640
+glabel Article_PK_Fire_Data
   .incbin "ovl3.raw.bin", 0x59B40, 0x4
   /* 59B44 106084 8018B644 */  .4byte D_ovl2_8013113C
   .incbin "ovl3.raw.bin", 0x59B48, 0xC
   /* 59B54 106094 8018B654 */  .4byte func_ovl3_80185350
   .incbin "ovl3.raw.bin", 0x59B58, 0x1C
 
-glabel jtbl_ovl3_8018B674
+glabel Article_PK_Fire_Status
   /* 59B74 1060B4 8018B674 */  .4byte jtgt_ovl3_801855E4
   /* 59B78 1060B8 8018B678 */  .4byte jtgt_ovl3_80185660
   .incbin "ovl3.raw.bin", 0x59B7C, 0x14

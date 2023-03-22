@@ -8,8 +8,14 @@
 
 typedef struct Effect_Info
 {
-    u8 filler_0x0[0x1C];
+    u8 filler_0x0[0x4];
+    Vec3f translate;
+    u8 filler_0x10[0x1C - 0x10];
     Vec3f scale;
+    u16 unk_effect_0x28;
+    u16 unk_effect_0x2A;
+    u8 filler_0x2C[0xB8 - 0x2C];
+    u16 unk_effect_0xB8;
 
 } Effect_Info;
 
