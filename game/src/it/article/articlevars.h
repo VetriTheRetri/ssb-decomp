@@ -97,6 +97,7 @@
 #define ATBOX_T_VEL 120.0F
 
 #define ATTARU_LIFETIME 360
+#define ATTARU_EXPLODE_LIFETIME 8
 #define ATTARU_DESPAWN_FLASH_START 60   // Begin flashing when below this value
 #define ATTARU_HEALTH_MAX 10
 #define ATTARU_MUL_VEL_X 1.4F
@@ -338,6 +339,18 @@
 #define ATFUSHIGIBANA_RAZOR_SPAWN_END 120.0F       // Venusaur can no longer shoot Razor Leaf this frame onward
 #define ATFUSHIGIBANA_RAZOR_SPAWN_OFF_X (-540.0F)  // X-offset of leaf spawn
 
+#define ATGRBOMB_GFX_COUNT 7         // Number of pieces RTTF Bomb bursts into when smashed open
+#define ATGRBOMB_GFX_LIFETIME 90     // Smashed RTTF Bomb pieces despawn once this runs out
+
+#define ATGRBOMB_HEALTH_MAX 10
+#define ATGRBOMB_EXPLODE_LIFETIME 6
+#define ATGRBOMB_EXPLODE_GFX_SCALE 1.4F
+#define ATGRBOMB_MUL_VEL_X 1.4F
+#define ATGRBOMB_MIN_VEL_XY 0.1F          // Decrement lifetime if Barrel's XY velocity is less than this value
+#define ATGRBOMB_ROLL_ROTATE_MUL 0.0045F  // Multiplies rotation of barrel
+#define ATGRBOMB_GRAVITY 4.0F
+#define ATGRBOMB_T_VEL 90.0F
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay; // Frames before smoke effect is created when Bob-Omb begins walking?
@@ -505,6 +518,12 @@ typedef struct Fushigibana_ArticleVars
     u16 razor_spawn_wait;
 
 } Fushigibana_ArticleVars;
+
+typedef struct Gr_Bomb_ArticleVars
+{
+    f32 roll_rotate_speed;
+
+} Gr_Bomb_ArticleVars;
 
 // Thought this might be a macro but it's not consistent
 

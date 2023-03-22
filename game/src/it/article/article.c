@@ -504,7 +504,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
     }
     else article_gobj->is_render = FALSE;
 
-    if (!(ap->is_pause_article))
+    if (!(ap->is_pickup))
     {
         joint = DObjGetStruct(article_gobj);
 
@@ -1366,7 +1366,7 @@ void func_ovl3_80171080(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (!(ap->is_pause_article))
+    if (!(ap->is_pickup))
     {
         func_ovl3_801705C4(article_gobj);
         func_ovl3_8017088C(article_gobj);

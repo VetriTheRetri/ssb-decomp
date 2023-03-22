@@ -78,8 +78,8 @@ void jtgt_ovl3_80179D60(GObj *article_gobj)
 
 bool32 func_ovl3_80179D88(GObj *article_gobj, f32 vel_mod)
 {
-    s32 filler;
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    s32 unused;
+    Article_Struct *ap;
     bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
 
     if (func_ovl3_801737EC(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), vel_mod, NULL) != FALSE)
@@ -171,7 +171,7 @@ bool32 jtgt_ovl3_80179FA8(GObj *article_gobj)
 
     ap->at_multi++;
 
-    if (ap->at_multi == 8)
+    if (ap->at_multi == ATTARU_EXPLODE_LIFETIME)
     {
         return TRUE;
     }
@@ -238,7 +238,7 @@ GObj* jtgt_ovl3_8017A1B8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = article_gobj->user_data;
+        Article_Struct *ap = ArticleGetStruct(article_gobj);
 
         ap->article_vars.taru.roll_rotate_speed = 0.0F;
 
@@ -263,7 +263,7 @@ void func_ovl3_8017A240(GObj *article_gobj)
     ap->article_hit.flags_0x4C_b1 = TRUE;
     ap->article_hit.can_reflect = FALSE;
 
-    ap->article_hit.stale = 1.0F;
+    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
     ap->article_hit.element = gmHitCollision_Element_Fire;
 
     ap->article_hit.clang = FALSE;

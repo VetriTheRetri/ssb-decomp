@@ -175,7 +175,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if ((ap->is_pause_article) && (ap->owner_gobj != NULL))
+    if ((ap->is_pickup) && (ap->owner_gobj != NULL))
     {
         Fighter_Struct *fp = FighterGetStruct(ap->owner_gobj);
 
@@ -222,7 +222,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi,
 
     fp->article_hold = NULL;
 
-    ap->is_pause_article = FALSE;
+    ap->is_pickup = FALSE;
 
     ap->phys_info.vel = *vel;
 
@@ -307,7 +307,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     ap->owner_gobj = fighter_gobj;
 
     ap->is_show_indicator = FALSE;
-    ap->is_pause_article = TRUE;
+    ap->is_pickup = TRUE;
 
     ap->team = fp->team;
     ap->port_index = fp->player_id;

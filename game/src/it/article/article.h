@@ -325,7 +325,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u16 throw_sfx;
 
     u8 is_show_indicator : 1; // Bool to check whether to display red arrow indicator above article or not
-    u8 is_pause_article : 1; // Suspend article logic updates? Might be used to tell if a fighter is holding this article?
+    u8 is_pickup : 1; // I think this is used to tell if a fighter is holding this article?
     u8 times_landed : 2; // Number of times item has touched the ground while not grabbed; overflows after 3
     u8 times_thrown : 3; // Number of times item has been dropped or thrown; overflows after 7
     u8 is_light_throw : 1;
@@ -433,6 +433,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Porygon_ArticleVars porygon;
         Hitokage_ArticleVars hitokage;
         Fushigibana_ArticleVars fushigibana;
+        Gr_Bomb_ArticleVars gr_bomb;
 
     } article_vars;
 

@@ -81,7 +81,7 @@ void func_ovl3_80183344(GObj *article_gobj)
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pause_article))
+        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pickup))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
@@ -114,7 +114,7 @@ void func_ovl3_80183344(GObj *article_gobj)
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pause_article))
+        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pickup))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
