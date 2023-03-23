@@ -198,7 +198,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
     func_80009A84(article_gobj);
 }
 
-void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alright interesting
+void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alright interesting... Revelation from 0x80186024
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     GObj *fighter_gobj = ap->owner_gobj;
