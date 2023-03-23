@@ -6,11 +6,8 @@
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\article\\articlecommon",
-    "\\game\\src\\it\\article\\articlefighter",
-    "\\game\\src\\it\\item\\itempikachu",
-    "\\game\\src\\it\\item\\itemsamus",
-    "\\game\\src\\it\\item\\itemyoshi"
+    "\\game\\src\\it\\article\\articlefighter"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article.c",
+  "SelectedNode": "\\game\\src\\it\\article\\article_think.c",
   "PreviewInSolutionExplorer": false
 }

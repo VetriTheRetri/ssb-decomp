@@ -30,16 +30,13 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     // Non-matching, can't force Vec3f pos into proper stack position without compromises :(
 
     GObj *item_gobj;
-    f32 unk_float;
+    void (*cb)(GObj *);
     ItemHitDesc *it_hit_desc;
-    Item_Struct *ip, *owner_ip;
-    Fighter_Struct *fp_coll, *fp;
-    u32 unused[5];
+    Item_Struct *ip;
+    Item_Struct *owner_ip;
     Article_Struct *ap;
-    Item_Struct *ip_coll;
-    Article_Struct *ap_coll;
-    void (*cb)(GObj*);
-    Vec3f pos;
+    Fighter_Struct *fp;
+    s32 unused[8];
 
     ip = func_ovl3_80165558(spawn_gobj);
 
@@ -181,7 +178,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     ip->item_hit.can_shield = it_hit_desc->can_shield;
     ip->item_hit.hitbox_count = it_hit_desc->hitbox_count;
 
-    ip->item_hit.interact_mask = 7;
+    ip->item_hit.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
 
     func_ovl3_80168158(ip);
 
@@ -269,11 +266,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     ip->cb_absorb = item_status_desc->cb_absorb;
     ip->cb_destroy = NULL;
 
-    pos = *spawn_pos;
-
-    DObjGetStruct(item_gobj)->translate = pos;
-
-    ip->coll_data.pos_curr = pos;
+    ip->coll_data.pos_curr = DObjGetStruct(item_gobj)->translate = *spawn_pos;
 
     if (flags & ITEM_FLAG_PROJECT)
     {
