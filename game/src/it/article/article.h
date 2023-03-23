@@ -212,8 +212,8 @@ typedef struct _Article_Hit
     u16 attack_id : 6;
     u16 flags_0x4C_b7 : 1;
     u16 flags_0x4E;
-    CommonAttackFlags flags_hi;
-    CommonAttackFlags flags_lw;
+    gmAttackFlags flags_hi;
+    gmAttackFlags flags_lw;
     s32 hitbox_count;
     ArticleHitUnk article_hit_unk[2];
     ArticleHitArray hit_targets[4];

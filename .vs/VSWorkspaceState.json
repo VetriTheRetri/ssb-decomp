@@ -3,15 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ef",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articlecommon",
     "\\game\\src\\it\\article\\articlefighter",
-    "\\game\\src\\it\\item",
     "\\game\\src\\it\\item\\itempikachu",
     "\\game\\src\\it\\item\\itemsamus",
     "\\game\\src\\it\\item\\itemyoshi"
   ],
-  "SelectedNode": "\\game\\src\\ef\\effect.h",
+  "SelectedNode": "\\game\\src\\it\\article\\article.c",
   "PreviewInSolutionExplorer": false
 }

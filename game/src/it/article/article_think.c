@@ -2,6 +2,8 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
+#include <stdarg.h> // Wait and see...
+
 void func_ovl3_80172310(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
@@ -196,13 +198,14 @@ void func_ovl3_801728D4(GObj *article_gobj)
     func_80009A84(article_gobj);
 }
 
-void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi, u16 flags_lw)
+void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alright interesting
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     GObj *fighter_gobj = ap->owner_gobj;
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
     s32 joint_index;
+    va_list va;
 
     func_ovl0_800C9424(DObjGetStruct(article_gobj));
 
@@ -232,8 +235,17 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flags_hi,
     ap->x2CF_flag_b2 = TRUE;
 
     ap->article_hit.stale = stale;
-    ap->article_hit.flags_hi.halfword = *(vu16*)&flags_hi & U16_MAX; // Uh...
-    ap->article_hit.flags_lw.halfword = flags_lw;
+
+    va_start(va, stale);
+
+    // Probably fake but WTF
+    va++;
+    va++;
+
+    ap->article_hit.flags_hi = va_arg(va, gmAttackFlags); // WHAT
+    ap->article_hit.flags_lw.halfword = va_arg(va, u16);
+
+    va_end(va);
 
     func_ovl2_800E8744(fighter_gobj);
     func_ovl3_8017275C(article_gobj);

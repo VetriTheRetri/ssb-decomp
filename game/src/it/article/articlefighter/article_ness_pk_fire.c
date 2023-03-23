@@ -115,7 +115,7 @@ extern ArticleStatusDesc Article_PK_Fire_Status[];
 void func_ovl3_80185710(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    CommonAttackFlags flags_hi;
+    gmAttackFlags flags_hi;
     u16 flags_lw;
 
     func_ovl3_80173F54(ap);
@@ -136,7 +136,7 @@ void func_ovl3_80185710(GObj *article_gobj)
 void func_ovl3_8018579C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
-    CommonAttackFlags flags_hi;
+    gmAttackFlags flags_hi;
     u16 flags_lw;
 
     func_ovl3_80173F78(ap);

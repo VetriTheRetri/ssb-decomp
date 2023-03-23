@@ -357,8 +357,8 @@
 #define ATPKFIRE_T_VEL 55.0F
 
 #define ATLINKBOMB_HEALTH 7
-#define ATLINKBOMB_EXPLODE_COLANIM_ID 0x4F              // Apply this color animation when Bomb begins to bloat
-#define ATLINKBOMB_EXPLODE_COLANIM_LENGTH 96            // Duration of bloat color animation
+#define ATLINKBOMB_BLOAT_COLANIM_ID 0x4F                // Apply this color animation when Bomb begins to bloat
+#define ATLINKBOMB_BLOAT_COLANIM_LENGTH 96              // Duration of bloat color animation
 #define ATLINKBOMB_SCALE_INDEX_MAX 10                   // Maximum number of scale floats in array?
 #define ATLINKBOMB_SCALE_INDEX_REWIND 6                 // When index reaches this value, rewind
 #define ATLINKBOMB_SCALE_INT 4                          // Interval between Bomb inflate/deflate animation updates; effectively animation speed

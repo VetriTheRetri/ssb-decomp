@@ -138,7 +138,7 @@ bool32 func_ovl3_80185CF0(GObj *article_gobj)
     }
     if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
-        func_ovl3_80172F98(article_gobj, ATLINKBOMB_EXPLODE_COLANIM_ID, ATLINKBOMB_EXPLODE_COLANIM_LENGTH);
+        func_ovl3_80172F98(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ap->article_vars.link_bomb.scale_index = 1;
     }
@@ -171,7 +171,7 @@ bool32 jtgt_ovl3_80185DCC(GObj *article_gobj)
     }
     if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
-        func_ovl3_80172F98(article_gobj, ATLINKBOMB_EXPLODE_COLANIM_ID, ATLINKBOMB_EXPLODE_COLANIM_LENGTH);
+        func_ovl3_80172F98(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ap->article_vars.link_bomb.scale_index = 1;
     }
@@ -246,12 +246,13 @@ bool32 func_ovl3_80186024(GObj *article_gobj)
             func_ovl3_80172984(article_gobj, &ap->phys_info.vel, 1.0F); // Ok, WHAT? This function takes 5 arguments, but it doesn't match otherwise???
                                                                         // Did they actually redefine this? Passes pointer in a3 instead of u16...
                                                                         // Do we leave this out of the header and declare it separately to match?
+                                                                        // Update 3/23/2023: matches as variadic. No comment.
             func_ovl3_8017279C(article_gobj);
             func_ovl3_80186368(article_gobj);
         }
         if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
         {
-            func_ovl3_80172F98(article_gobj, 0x4F, 0x60);
+            func_ovl3_80172F98(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
             ap->article_vars.link_bomb.scale_index = 1;
         }

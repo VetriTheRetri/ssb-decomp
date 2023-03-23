@@ -177,7 +177,7 @@ typedef struct _Item_Hit
             u32 flags_0x49_b7 : 1;
             union
             {
-                CommonAttackFlags flags_0x4A;
+                gmAttackFlags flags_0x4A;
                 u16 flags_0x4A_halfword;
             };
         };
@@ -195,7 +195,7 @@ typedef struct _Item_Hit
             u32 flags_0x4C_10bit : 10;
             u16 flags_0x4E;
         };
-        CommonAttackFlags flags_0x4C;
+        gmAttackFlags flags_0x4C;
         u16 flags_0x4C_halfword;
     };
 

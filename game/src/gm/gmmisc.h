@@ -58,7 +58,7 @@ typedef enum gmHitCollisionUpdateState
 
 } gmHitCollisionUpdateState;
 
-typedef union CommonAttackFlags
+typedef union gmAttackFlags
 {
     struct
     {
@@ -72,12 +72,12 @@ typedef union CommonAttackFlags
     };
     u16 halfword;
 
-} CommonAttackFlags;
+} gmAttackFlags;
 
 typedef struct FighterAttackFlags
 {
-    CommonAttackFlags hi;
-    CommonAttackFlags lw;
+    gmAttackFlags hi;
+    gmAttackFlags lw;
 
 } FighterAttackFlags;
 
