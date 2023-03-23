@@ -804,8 +804,8 @@ next_check:
         ip->display_state = fp->display_state;
         ip->player_number = fp->player_number;
         ip->unk_0x12 = fp->offset_hit_type;
-        ip->item_hit.flags_0x4C_halfword = ip->unk_0x258 & U16_MAX;
-        ip->item_hit.flags_0x4E = ip->unk_0x25A;
+        ip->item_hit.flags_0x4C = ip->unk_0x258;
+        ip->item_hit.flags_0x4E.halfword = ip->unk_0x25A.halfword;
 
         if (ip->cb_reflect != NULL)
         {

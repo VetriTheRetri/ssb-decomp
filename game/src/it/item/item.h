@@ -235,8 +235,8 @@ typedef struct _Item_Struct
     f32 shield_collide_angle;   // If this is less than 135 degrees, the item gets deflected
     Vec3f shield_collide_vec;   //
     GObj *reflect_gobj;         // GObj that reflected this item
-    u16 unk_0x258;              // Attack flags
-    u16 unk_0x25A;              // Attack flags
+    gmAttackFlags unk_0x258;    // Attack flags
+    gmAttackFlags unk_0x25A;    // Attack flags
     GObj *absorb_gobj;          // GObj that absorbed this item
 
     u8 is_hitlag_victim : 1;    // Item can deal hitlag to target
