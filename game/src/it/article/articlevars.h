@@ -357,6 +357,8 @@
 #define ATPKFIRE_T_VEL 55.0F
 
 #define ATLINKBOMB_HEALTH 7
+#define ATLINKBOMB_LIFETIME 300
+#define ATLINKBOMB_EXPLODE_LIFETIME 6
 #define ATLINKBOMB_BLOAT_COLANIM_ID 0x4F                // Apply this color animation when Bomb begins to bloat
 #define ATLINKBOMB_BLOAT_COLANIM_LENGTH 96              // Duration of bloat color animation
 #define ATLINKBOMB_SCALE_INDEX_MAX 10                   // Maximum number of scale floats in array?
@@ -555,7 +557,8 @@ typedef struct PK_Fire_ArticleVars
 
 typedef struct Link_Bomb_ArticleVars
 {
-    s32 unk_0x0;
+    u16 unk_0x0;
+    u16 unk_0x2;
     u16 scale_index;
     u16 scale_int; // Interval between Bomb inflate/deflate animation updates; effectively animation speed
 

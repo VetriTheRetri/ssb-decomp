@@ -265,3 +265,206 @@ bool32 func_ovl3_80186024(GObj *article_gobj)
         return FALSE;
     }
 }
+
+void func_ovl3_8018611C(GObj *article_gobj)
+{
+    func_ovl3_80185CE4(article_gobj);
+    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 2);
+}
+
+bool32 jtgt_ovl3_80186150(GObj *article_gobj)
+{
+    s32 unused;
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Vec3f vel = ap->phys_info.vel;
+
+    if (func_ovl3_80173D24(article_gobj, 0.4F, 0.3F, &func_ovl3_80185FD8) != FALSE)
+    {
+        if ((ABSF(vel.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(vel.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
+        {
+            func_ovl3_80186368(article_gobj);
+        }
+    }
+    return FALSE;
+}
+
+void jtgt_ovl3_80186224(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    func_ovl3_80185CD4(article_gobj);
+
+    ap->is_damage_all = TRUE;
+
+    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 3);
+}
+
+bool32 jtgt_ovl3_80186270(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (ap->article_vars.link_bomb.unk_0x2 != 0)
+    {
+        ap->article_vars.link_bomb.unk_0x2--;
+    }
+    else func_ovl3_80185CF0(article_gobj);
+
+    return FALSE;
+}
+
+bool32 jtgt_ovl3_801862AC(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (ap->article_vars.link_bomb.unk_0x2 == 0)
+    {
+        func_ovl3_80185BFC(article_gobj);
+    }
+    return FALSE;
+}
+
+bool32 jtgt_ovl3_801862E0(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    if (ap->article_vars.link_bomb.unk_0x2 == 0)
+    {
+        func_ovl3_80185B84(article_gobj);
+    }
+    return FALSE;
+}
+
+void jtgt_ovl3_80186314(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    func_ovl3_80185CD4(article_gobj);
+
+    ap->article_vars.link_bomb.unk_0x2 = 10;
+
+    ap->is_damage_all = TRUE;
+
+    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 4);
+}
+
+void func_ovl3_80186368(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    ap->phys_info.vel.z = 0.0F;
+    ap->phys_info.vel.y = 0.0F;
+    ap->phys_info.vel.x = 0.0F;
+
+    func_ovl3_8017279C(article_gobj);
+    func_ovl3_80185A80(article_gobj);
+    func_800269C0(1U);
+}
+
+extern intptr_t Link_Bomb_Event;
+
+void func_ovl3_801863AC(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    ArticleHitEvent *ev = (ArticleHitEvent *)((uintptr_t)*Article_Link_Bomb_Data.p_file + (intptr_t)&Link_Bomb_Event); // Linker thing
+
+    if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
+    {
+        ap->article_hit.angle = ev[ap->x340_flag_b0123].angle;
+        ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
+        ap->article_hit.size = ev[ap->x340_flag_b0123].size;
+
+        ap->article_hit.flags_0x4C_b1 = TRUE;
+        ap->article_hit.can_deflect = FALSE;
+        ap->article_hit.can_reflect = FALSE;
+        ap->article_hit.clang = FALSE;
+
+        ap->article_hit.element = gmHitCollision_Element_Fire;
+
+        ap->x340_flag_b0123++;
+
+        if (ap->x340_flag_b0123 == 4)
+        {
+            ap->x340_flag_b0123 = 3;
+        }
+    }
+}
+
+bool32 jtgt_ovl3_80186498(GObj *article_gobj)
+{
+    func_ovl3_80172FE0(article_gobj);
+
+    return FALSE;
+}
+
+bool32 func_ovl3_801864BC(GObj *article_gobj) // Unused
+{
+    func_ovl3_80185B18(article_gobj);
+    func_ovl3_80186368(article_gobj);
+
+    return FALSE;
+}
+
+void func_ovl3_801864E8(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    ap->at_multi = 0;
+    ap->x340_flag_b0123 = 0;
+
+    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
+
+    func_ovl3_801863AC(article_gobj);
+}
+
+bool32 jtgt_ovl3_80186524(GObj *article_gobj)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    func_ovl3_801863AC(article_gobj);
+
+    ap->at_multi++;
+
+    if (ap->at_multi == ATLINKBOMB_EXPLODE_LIFETIME)
+    {
+        return TRUE;
+    }
+    else return FALSE;
+}
+
+void func_ovl3_8018656C(GObj *article_gobj)
+{
+    func_ovl3_801864E8(article_gobj);
+    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 5);
+}
+
+GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
+{
+    GObj *article_gobj = func_ovl3_8016E174(fighter_gobj, &Article_Link_Bomb_Data, pos, vel, 0U);
+    DObj *joint;
+    Article_Struct *ap;
+
+    if (article_gobj != NULL)
+    {
+        ap = ArticleGetStruct(article_gobj);
+        joint = DObjGetStruct(article_gobj);
+
+        func_80008CC0(joint, 0x2EU, 0U);
+        func_80008CC0(joint->next, 0x2EU, 0U);
+
+        ap->at_multi = 0;
+
+        ap->lifetime = ATLINKBOMB_LIFETIME;
+
+        ap->article_vars.link_bomb.scale_index = 0;
+        ap->article_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
+
+        ap->article_hit.can_rehit = TRUE;
+
+        ap->phys_info.vel.z = 0.0F;
+        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel.x = 0.0F;
+
+        func_ovl3_80172CA4(article_gobj, fighter_gobj);
+    }
+    return article_gobj;
+}
