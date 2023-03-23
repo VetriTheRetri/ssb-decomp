@@ -446,6 +446,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Fushigibana_ArticleVars fushigibana;
         Gr_Bomb_ArticleVars gr_bomb;
         PK_Fire_ArticleVars pk_fire;
+        Link_Bomb_ArticleVars link_bomb;
 
     } article_vars;
 

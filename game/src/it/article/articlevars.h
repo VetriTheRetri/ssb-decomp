@@ -356,6 +356,23 @@
 #define ATPKFIRE_GRAVITY 0.45F
 #define ATPKFIRE_T_VEL 55.0F
 
+#define ATLINKBOMB_HEALTH 7
+#define ATLINKBOMB_EXPLODE_COLANIM_ID 0x4F              // Apply this color animation when Bomb begins to bloat
+#define ATLINKBOMB_EXPLODE_COLANIM_LENGTH 96            // Duration of bloat color animation
+#define ATLINKBOMB_SCALE_INDEX_MAX 10                   // Maximum number of scale floats in array?
+#define ATLINKBOMB_SCALE_INDEX_REWIND 6                 // When index reaches this value, rewind
+#define ATLINKBOMB_SCALE_INT 4                          // Interval between Bomb inflate/deflate animation updates; effectively animation speed
+#define ATLINKBOMB_DAMAGE_RECOIL_VEL_X 20.0F            // Horizontal knockback taken from hits dealing less than ATLINKBOMB_HEALTH can sustain
+#define ATLINKBOMB_DAMAGE_RECOIL_VEL_Y 18.0F            // Vertical knockback taken from hits dealing less than ATLINKBOMB_HEALTH can sustain
+#define ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X 36.0F        // If X-velocity is greater than this value when hitting a target, explode
+#define ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y 25.0F        // If Y-velocity is greater than this value when hitting a target, explode
+#define ATLINKBOMB_BLOAT_BEGIN 96.0F                    // Bomb begins bloating when lifetime is equal or less than this value
+#define ATLINKBOMB_HIT_RECOIL_VEL_X 8.0F                // X-velocity upon hitting a target without exploding
+#define ATLINKBOMB_HIT_RECOIL_VEL_Y 20.0F               // Y-velocity upon hitting a target without exploding
+#define ATLINKBOMB_EXPLODE_GFX_SCALE 1.3F
+#define ATLINKBOMB_GRAVITY 1.2F
+#define ATLINKBOMB_T_VEL 100.0F
+
 typedef struct BombHei_ArticleVars
 {
     u16 smoke_delay;     // Frames before smoke effect is created when Bob-Omb begins walking?
@@ -535,6 +552,14 @@ typedef struct PK_Fire_ArticleVars
     Effect_Info *effect;
 
 } PK_Fire_ArticleVars;
+
+typedef struct Link_Bomb_ArticleVars
+{
+    s32 unk_0x0;
+    u16 scale_index;
+    u16 scale_int; // Interval between Bomb inflate/deflate animation updates; effectively animation speed
+
+} Link_Bomb_ArticleVars;
 
 // Thought this might be a macro but it's not consistent
 

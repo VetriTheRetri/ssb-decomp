@@ -3634,7 +3634,7 @@ glabel jtbl_ovl3_8018B690
   /* 59BB0 1060F0 8018B6B0 */  .4byte jtgt_ovl3_801856BC
   .incbin "ovl3.raw.bin", 0x59BB4, 0xC
 
-glabel D_ovl3_8018B6C0
+glabel Article_Link_Bomb_Data
   .incbin "ovl3.raw.bin", 0x59BC0, 0x4
 
 glabel D_ovl3_8018B6C4
@@ -3643,7 +3643,7 @@ glabel D_ovl3_8018B6C4
   /* 59BD4 106114 8018B6D4 */  .4byte func_ovl3_80186024
   .incbin "ovl3.raw.bin", 0x59BD8, 0x1C
 
-glabel jtbl_ovl3_8018B6F4
+glabel Article_Link_Bomb_Status
   /* 59BF4 106134 8018B6F4 */  .4byte jtgt_ovl3_80185DCC
   /* 59BF8 106138 8018B6F8 */  .4byte jtgt_ovl3_80185F10
   .incbin "ovl3.raw.bin", 0x59BFC, 0x14
