@@ -20,6 +20,7 @@
 #define GMHITCOLLISION_MASK_ITEM 2 // Can interact with items
 #define GMHITCOLLISION_MASK_ARTICLE 4 // Can interact with articles
 
+#define GMCONTROLLER_RANGE_MAX_F 80.0F // Maximum control stick range in float
 
 typedef enum gmHitCollisionStatus
 {

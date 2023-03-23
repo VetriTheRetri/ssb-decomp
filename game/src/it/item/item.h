@@ -46,9 +46,8 @@ typedef enum It_Spawn
 
 typedef enum It_Kind
 {
-    It_Kind_Ness_PKThunder_Head = 0xE,
-    It_Kind_Ness_PKThunder_Trail = 0xF,
-    It_Kind_Link_Bomb = 0x15 // Is this an article?
+    It_Kind_PKThunder_Head = 0xE,
+    It_Kind_PKThunder_Trail = 0xF,
 
 } It_Kind;
 

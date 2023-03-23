@@ -3,11 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
+    "\\game\\src\\ft",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftdonkey",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articlecommon",
-    "\\game\\src\\it\\article\\articlefighter"
+    "\\game\\src\\it\\article\\articlefighter",
+    "\\game\\src\\it\\item"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article_think.c",
+  "SelectedNode": "\\game\\src\\it\\item\\item.c",
   "PreviewInSolutionExplorer": false
 }

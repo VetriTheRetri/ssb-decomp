@@ -482,6 +482,52 @@ typedef struct ftUnkFrameStruct
 
 } ftUnkFrameStruct;
 
+typedef struct Fighter_Com
+{
+    u8 behave_current;
+    u8 behave_default;
+    u8 attack_id;
+    u8 behavior_set;
+    u8 unk_ftcom_0x4;
+    u8 behavior_write; // Override behavior
+    u8 input_wait; // "Controller command wait timer"
+    void *p_input;
+    void (*cb_com)(GObj *); // "Main behavior routine"
+    s32 unk_ftcom_0x10;
+    s32 unk_ftcom_0x14;
+    s16 unk_ftcom_0x18;
+    s16 unk_timer_0x1A;
+    s32 unk_timer_0x1C;
+    s32 unk_ftcom_0x20;
+    s16 target_find_wait;
+    s16 target_damage_percent;
+    s32 unk_ftcom_0x28;
+    s32 unk_ftcom_0x2C;
+    GObj *target_gobj;
+    s32 unk_ftcom_0x34;
+    u8 unk_ftcom_0x38;
+    u8 attack11;
+    u8 attacks3;
+    u8 attacks4;
+    u8 attackhi3;
+    u8 attackhi4;
+    u8 attacklw3;
+    u8 attacklw4;
+    u8 specialn;
+    u8 specialhi;
+    u8 speciallw;
+    u8 unk_ftcom_0x43; // Also neutral special?
+    u8 filler_0x44[0x4C - 0x44];
+    Vec2f cliff_left_pos; // Ledge position
+    Vec2f cliff_right_pos;
+    s32 target_line_id; // Line ID target is standing on
+    Vec2f target_pos;
+    f32 target_dist; // FLOAT_MAX when offstage
+    void *target_fp; // I assume this is what the documentation means?
+    u8 filler_0x70[0x8C - 0x70];
+
+} Fighter_Com;
+
 typedef struct _Fighter_Struct
 {
     GObj *next_fighter;
@@ -689,17 +735,14 @@ typedef struct _Fighter_Struct
         u16 button_unk;
         Vec2b stick_range; // Might be range?
         Vec2b padding;
+        u16 button_mask_com;
+        Vec2b stick_com; // CPU stick input?
 
     } input;
 
-    struct _cpu
-    {
-        u16 cpu_button_press;
-        Vec2h cpu_stick_range;
+    Fighter_Com fighter_com;
 
-    } cpu;
-
-    u8 filler_unk_0x1D0[0x268 - 0x1CE];
+    u8 filler_0x258[0x268 - 0x258];
 
     u8 buffer_stick_x;
     u8 buffer_stick_y;
