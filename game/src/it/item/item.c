@@ -125,10 +125,10 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->item_hit.attack_id = 0;
         ip->item_hit.stale = 1.0F;
-        ip->item_hit.flags_0x4A_halfword = func_ovl2_800EA5BC();
+        ip->item_hit.flags_0x4A.halfword = func_ovl2_800EA5BC();
         ip->item_hit.flags_0x4C.flags_0x3FF = 0;
         ip->item_hit.flags_0x4C.flags_0x1000 = ip->item_hit.flags_0x4C.flags_0x800 = ip->item_hit.flags_0x4C.flags_0x400 = FALSE;
-        ip->item_hit.flags_0x4E = func_ovl2_800EA74C();
+        ip->item_hit.flags_0x4E.halfword = func_ovl2_800EA74C();
         break;
     }
     ip->item_hit.update_state = gmHitCollision_UpdateState_New;
