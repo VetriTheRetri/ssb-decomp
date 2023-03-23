@@ -277,18 +277,15 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
             break;
 
         case ITEM_MASK_SPAWN_FIGHTER:
-            fp_coll = FighterGetStruct(spawn_gobj);
-            func_ovl2_800DF09C(item_gobj, fp_coll->coll_data.p_translate, &fp_coll->coll_data);
+            func_ovl2_800DF09C(item_gobj, FighterGetStruct(spawn_gobj)->coll_data.p_translate, &FighterGetStruct(spawn_gobj)->coll_data);
             break;
 
         case ITEM_MASK_SPAWN_ITEM:
-            ip_coll = ItemGetStruct(spawn_gobj);
-            func_ovl2_800DF09C(item_gobj, ip_coll->coll_data.p_translate, &ip_coll->coll_data);
+            func_ovl2_800DF09C(item_gobj, ItemGetStruct(spawn_gobj)->coll_data.p_translate, &ItemGetStruct(spawn_gobj)->coll_data);
             break;
 
         case ITEM_MASK_SPAWN_ARTICLE:
-            ap_coll = ArticleGetStruct(spawn_gobj);
-            func_ovl2_800DF09C(item_gobj, ap_coll->coll_data.p_translate, &ap_coll->coll_data);
+            func_ovl2_800DF09C(item_gobj, ArticleGetStruct(spawn_gobj)->coll_data.p_translate, &ArticleGetStruct(spawn_gobj)->coll_data);
             break;
         }
     }
