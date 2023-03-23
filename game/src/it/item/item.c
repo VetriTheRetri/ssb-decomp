@@ -69,11 +69,11 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->display_state = fp->display_state;
 
-        ip->item_hit.stale = func_ovl2_800EA470(fp->player_id, fp->attack_id, fp->unk_0x28C_halfword);
+        ip->item_hit.stale = func_ovl2_800EA470(fp->player_id, fp->attack_id, fp->flags_hi.halfword);
         ip->item_hit.attack_id = fp->attack_id;
-        ip->item_hit.flags_0x4A_halfword = fp->unk_0x28C_halfword;
-        ip->item_hit.flags_0x4C_halfword = fp->unk_0x28E_halfword & U16_MAX;
-        ip->item_hit.flags_0x4E = fp->unk_0x290;
+        ip->item_hit.flags_0x4A.halfword = fp->flags_hi.halfword;
+        ip->item_hit.flags_0x4C = fp->flags_lw;
+        ip->item_hit.flags_0x4E.halfword = fp->unk_0x290.halfword;
         break;
 
     case ITEM_MASK_SPAWN_ITEM: // Items spawned by other items
@@ -89,9 +89,9 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->item_hit.stale = owner_ip->item_hit.stale;
         ip->item_hit.attack_id = owner_ip->item_hit.attack_id;
-        ip->item_hit.flags_0x4A_halfword = owner_ip->item_hit.flags_0x4A_halfword;
-        ip->item_hit.flags_0x4C_halfword = owner_ip->item_hit.flags_0x4C_halfword & U16_MAX;
-        ip->item_hit.flags_0x4E = owner_ip->item_hit.flags_0x4E;
+        ip->item_hit.flags_0x4A.halfword = owner_ip->item_hit.flags_0x4A.halfword;
+        ip->item_hit.flags_0x4C = owner_ip->item_hit.flags_0x4C;
+        ip->item_hit.flags_0x4E.halfword = owner_ip->item_hit.flags_0x4E.halfword;
         break;
 
     case ITEM_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
@@ -107,9 +107,9 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->item_hit.stale = ap->article_hit.stale;
         ip->item_hit.attack_id = ap->article_hit.attack_id;
-        ip->item_hit.flags_0x4A_halfword = ap->article_hit.flags_0x4E;
-        ip->item_hit.flags_0x4C_halfword = ap->article_hit.flags_lw.halfword & U16_MAX;
-        ip->item_hit.flags_0x4E = ap->article_hit.flags_hi.halfword;
+        ip->item_hit.flags_0x4A.halfword = ap->article_hit.flags_0x4E.halfword;
+        ip->item_hit.flags_0x4C = ap->article_hit.flags_lw;
+        ip->item_hit.flags_0x4E.halfword = ap->article_hit.flags_hi.halfword;
         break;
 
     default: // Items spawned independently 

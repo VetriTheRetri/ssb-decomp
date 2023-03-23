@@ -80,7 +80,7 @@ void func_ovl3_8015B8E8(GObj *fighter_gobj, bool32 stale_unk)
 
     if (stale_unk == FALSE)
     {
-        fp->unk_0x28E_bit_0x8 = FALSE;
+        fp->flags_lw.flags_0x800 = FALSE;
     }
 }
 

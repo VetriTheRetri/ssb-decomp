@@ -149,7 +149,7 @@ typedef struct _Item_Hit
     s32 update_state; // 0 = disabled, 1 = new hitbox, 2 and 3 = interpolate/copy current position to previous
     s32 damage; // 0x4
     f32 stale; // Multiplies damage
-    u32 element; // 0xC // Placed AFTER offset?
+    s32 element; // 0xC // Placed AFTER offset?
     Vec3f offset[2]; // 0x10 - 0x24   
     f32 size;
     s32 angle;
@@ -193,7 +193,7 @@ typedef struct _Item_Hit
             u32 flags_0x4C_b4 : 1;
             u32 flags_0x4C_b5 : 1;
             u32 flags_0x4C_10bit : 10;
-            u16 flags_0x4E;
+            gmAttackFlags flags_0x4E;
         };
         gmAttackFlags flags_0x4C;
         u16 flags_0x4C_halfword;

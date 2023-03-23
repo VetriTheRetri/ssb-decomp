@@ -142,7 +142,7 @@ void jtgt_ovl3_8015688C(GObj *fighter_gobj)
     func_ovl2_800D8E78(fp, 17.0F);
     func_ovl3_8015686C(fighter_gobj);
 
-    fp->unk_0x28E_bit_0x8 = FALSE; // Related to staling?
+    fp->flags_lw.flags_0x800 = FALSE; // Related to staling?
 }
 
 

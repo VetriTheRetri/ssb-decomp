@@ -264,7 +264,7 @@ void func_ovl3_80172AEC(GObj *article_gobj, Vec3f *vel, f32 stale)
     {
         cb_drop(article_gobj);
     }
-    func_ovl3_80172984(article_gobj, vel, stale, 0x38U, fp->unk_0x290);
+    func_ovl3_80172984(article_gobj, vel, stale, 0x38U, fp->unk_0x290.halfword);
 
     func_800269C0(ap->drop_sfx);
 }
@@ -295,7 +295,7 @@ void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_sma
     {
         cb_throw(article_gobj);
     }
-    func_ovl3_80172984(article_gobj, vel, stale, fp->unk_0x28E_halfword, fp->unk_0x290);
+    func_ovl3_80172984(article_gobj, vel, stale, fp->flags_lw.halfword, fp->unk_0x290.halfword);
 
     func_ovl2_8010066C(&DObjGetStruct(article_gobj)->translate, 1.0F);
 

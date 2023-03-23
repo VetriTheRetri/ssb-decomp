@@ -734,10 +734,15 @@ typedef struct _Fighter_Struct
             u16 unk_0x28C_halfword;
             u16 unk_0x28E_halfword;
         };
+        struct
+        {
+            gmAttackFlags flags_hi;
+            gmAttackFlags flags_lw;
+        };
 
         u32 unk_0x28C_word;
     };
-    u16 unk_0x290;
+    gmAttackFlags unk_0x290;
 
     Fighter_Hit fighter_hit[4];
 

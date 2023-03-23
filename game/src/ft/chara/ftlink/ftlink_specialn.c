@@ -68,7 +68,7 @@ void func_ovl3_80163850(GObj *fighter_gobj)
     {
         fp->status_vars.link.specialn.is_smash = TRUE;
 
-        fp->unk_0x28E_bit_0x10 = TRUE;
+        fp->flags_lw.flags_0x1000 = TRUE;
     }
     else fp->status_vars.link.specialn.is_smash = FALSE;
 }
