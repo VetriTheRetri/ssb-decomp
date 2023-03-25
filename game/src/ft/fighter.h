@@ -10,6 +10,8 @@
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 
+typedef struct Fighter_Struct Fighter_Struct;
+
 typedef struct SpecialHit
 {
 
@@ -490,8 +492,9 @@ typedef struct Fighter_Com
     u8 behavior_set;
     u8 unk_ftcom_0x4;
     u8 behavior_write; // Override behavior
+    u8 unk_ftcom_0x6;
     u8 input_wait; // "Controller command wait timer"
-    void *p_input;
+    u8 *p_input;
     void (*cb_com)(GObj *); // "Main behavior routine"
     s32 unk_ftcom_0x10;
     s32 unk_ftcom_0x14;
@@ -517,18 +520,51 @@ typedef struct Fighter_Com
     u8 specialhi;
     u8 speciallw;
     u8 unk_ftcom_0x43; // Also neutral special?
-    u8 filler_0x44[0x4C - 0x44];
+    u8 filler_0x44[0x48 - 0x44];
+    u8 ftcom_flags_0x48_b0 : 1;
+    u8 ftcom_flags_0x48_b1 : 1;
+    u8 ftcom_flags_0x48__0x48_b2 : 1;
+    u8 ftcom_flags_0x48_b3 : 1;
+    u8 ftcom_flags_0x48_b4 : 1;
+    u8 ftcom_flags_0x48_b5 : 1;
+    u8 ftcom_flags_0x48_b6 : 1;
+    u8 ftcom_flags_0x48_b7 : 1;
+    u8 ftcom_flags_0x49_b0 : 1;
+    u8 ftcom_flags_0x49_b1 : 1;
+    u8 ftcom_flags_0x49_b2 : 1;
+    u8 ftcom_flags_0x49_b3 : 1;
+    u8 ftcom_flags_0x49_b4 : 1;
+    u8 ftcom_flags_0x49_b5 : 1;
+    u8 ftcom_flags_0x49_b6 : 1;
+    u8 ftcom_flags_0x49_b7 : 1;
+    u8 ftcom_flags_0x4A_b0 : 1;
+    u8 ftcom_flags_0x4A_b1 : 1;
+    u8 ftcom_flags_0x4A_b2 : 1;
+    u8 ftcom_flags_0x4A_b3 : 1;
+    u8 ftcom_flags_0x4A_b4 : 1;
+    u8 ftcom_flags_0x4A_b5 : 1;
+    u8 ftcom_flags_0x4A_b6 : 1;
+    u8 ftcom_flags_0x4A_b7 : 1;
+    u8 ftcom_flags_0x4B_b0 : 1;
+    u8 ftcom_flags_0x4B_b1 : 1;
+    u8 ftcom_flags_0x4B_b2 : 1;
+    u8 ftcom_flags_0x4B_b3 : 1;
+    u8 ftcom_flags_0x4B_b4 : 1;
+    u8 ftcom_flags_0x4B_b5 : 1;
+    u8 ftcom_flags_0x4B_b6 : 1;
+    u8 ftcom_flags_0x4B_b7 : 1;
     Vec2f cliff_left_pos; // Ledge position
     Vec2f cliff_right_pos;
     s32 target_line_id; // Line ID target is standing on
     Vec2f target_pos;
     f32 target_dist; // FLOAT_MAX when offstage
-    void *target_fp; // I assume this is what the documentation means?
+    Fighter_Struct *target_fp; // I assume this is what the documentation means?
     u8 filler_0x70[0x8C - 0x70];
+    f32 unk_ftcom_0x8C;
 
 } Fighter_Com;
 
-typedef struct _Fighter_Struct
+struct Fighter_Struct
 {
     GObj *next_fighter;
     GObj *this_fighter;
@@ -912,7 +948,7 @@ typedef struct _Fighter_Struct
 
     s32 display_state;
 
-} Fighter_Struct;
+};
 
 #define FighterGetStruct(fighter_gobj) \
 ((Fighter_Struct*)fighter_gobj->user_data) \
