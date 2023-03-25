@@ -1,6 +1,7 @@
 #include "fighter.h"
 #include "item.h"
 #include "ftfox.h"
+#include "gmmatch.h"
 
 Item_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
 {
@@ -305,7 +306,7 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
     }
 }
 
-extern u8 *D_ovl3_80188340[]; // 
+extern u8 *Fighter_Com_Script[]; // CPU player commands
 
 void func_ovl3_80132564(Fighter_Struct *fp, s32 index)
 {
@@ -313,11 +314,108 @@ void func_ovl3_80132564(Fighter_Struct *fp, s32 index)
 
     if (fp->ground_or_air == ground)
     {
-        ft_com->input_wait = ((2.0F * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 2) + 1.0F);
+        ft_com->input_wait = ((2 * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 2) + 1.0F);
     }
     else
     {
         ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) / 2) + 1.0F);
     }
-    ft_com->p_command = D_ovl3_80188340[index];
+    ft_com->p_command = Fighter_Com_Script[index];
+}
+
+void func_ovl3_80132758(Fighter_Struct *fp, s32 index)
+{
+    Fighter_Com *ft_com = &fp->fighter_com;
+
+    ft_com->input_wait = 1;
+    ft_com->p_command = Fighter_Com_Script[index];
+}
+
+void func_ovl3_80132778(Fighter_Struct *fp, s32 index)
+{
+    Fighter_Com *ft_com = &fp->fighter_com;
+
+    if (fp->ground_or_air == ground)
+    {
+        ft_com->input_wait = ((4 * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 4) + 1.0F);
+    }
+    else
+    {
+        ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + (GMCOMPLAYER_LEVEL_MAX - fp->cp_level) + 1.0F);
+    }
+    ft_com->p_command = Fighter_Com_Script[index];
+}
+
+static gmUnkInfo_80131308 D_ovl2_80131308; // Extern
+
+bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
+{
+    Fighter_Com *ft_com = &this_fp->fighter_com;
+    Fighter_Struct *other_fp;
+    f32 this_pos_x = this_fp->joint[0]->translate.x;
+    f32 this_pos_y = this_fp->joint[0]->translate.y;
+    GObj *other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+    f32 distance = (f32)FLOAT_MAX;
+    f32 square_xy;
+    f32 other_pos_x;
+    f32 other_pos_y;
+
+    while (other_gobj != NULL)
+    {
+
+        if (other_gobj != this_fp->this_fighter)
+        {
+            other_fp = FighterGetStruct(other_gobj);
+
+            if (this_fp->team != other_fp->team)
+            {
+                other_pos_x = other_fp->joint[0]->translate.x;
+                other_pos_y = other_fp->joint[0]->translate.y;
+
+                if ((other_fp->status_info.status_id >= ftStatus_Common_Wait) &&
+                (((func_ovl2_800F8FFC(&other_fp->joint[0]->translate) != FALSE) &&
+                (other_pos_x <= D_ovl2_80131308.unk_80131308_0x28) &&
+                (D_ovl2_80131308.unk_80131308_0x2C <= other_pos_x) &&
+                (D_ovl2_80131308.unk_80131308_0x24 <= other_pos_y) &&
+                (other_pos_y < Ground_Info->cam_bound_top)) ||
+                ((this_fp->ground_or_air == ground) &&
+                ((other_fp->status_info.status_id == ftStatus_Common_CliffCatch) ||
+                (other_fp->status_info.status_id == ftStatus_Common_CliffWait)))) &&
+                ((this_fp->ft_kind != Ft_Kind_MetalMario) ||
+                (other_fp->ground_or_air == ground)))
+                {
+                    square_xy = SQUARE(this_pos_x - other_pos_x) + SQUARE(this_pos_y - other_pos_y);
+
+                    if (square_xy < distance)
+                    {
+                        ft_com->target_pos.x = other_pos_x;
+                        ft_com->target_pos.y = other_pos_y;
+                        ft_com->target_fp = other_fp;
+
+                        distance = square_xy;
+                    }
+                }
+            }
+        }
+        other_gobj = other_gobj->group_gobj_next;
+    }
+
+    if (distance == (f32)FLOAT_MAX)
+    {
+        ft_com->target_line_id = -1;
+        ft_com->target_dist = (f32)FLOAT_MAX;
+        ft_com->ftcom_flags_0x4A_b1 = FALSE;
+
+        return FALSE;
+    }
+    ft_com->ftcom_flags_0x4A_b1 = TRUE;
+    ft_com->target_dist = sqrtf(distance);
+
+    if (ft_com->target_fp->ground_or_air == ground)
+    {
+        ft_com->target_line_id = ft_com->target_fp->coll_data.ground_line_id;
+    }
+    else ft_com->target_line_id = -1;
+
+    return TRUE;
 }

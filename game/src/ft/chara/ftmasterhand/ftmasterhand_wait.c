@@ -268,13 +268,6 @@ void func_ovl3_80158FB4(GObj *fighter_gobj)
     }
 }
 
-typedef struct gmUnkInfo_80131308
-{
-    u8 filler_0x0[0x28];
-    Vec3f unk_0x28;
-
-} gmUnkInfo_80131308;
-
 static gmUnkInfo_80131308 D_ovl2_80131308;
 
 void func_ovl3_80159040(GObj *fighter_gobj)
@@ -304,11 +297,11 @@ void func_ovl3_80159040(GObj *fighter_gobj)
             unk_a0 = fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
         }
 
-        if (D_ovl2_80131308.unk_0x28.x < translate->x)
+        if (D_ovl2_80131308.unk_80131308_0x28 < translate->x)
         {
             func_ovl2_800F4408(unk_a0, &pos);
         }
-        else if (translate->x < D_ovl2_80131308.unk_0x28.y)
+        else if (translate->x < D_ovl2_80131308.unk_80131308_0x2C)
         {
             func_ovl2_800F4428(unk_a0, &pos);
         }

@@ -806,7 +806,7 @@ glabel D_ovl3_80188324
 glabel D_ovl3_8018833C
   .incbin "ovl3.raw.bin", 0x5683C, 0x4
 
-glabel D_ovl3_80188340
+glabel Fighter_Com_Script
   /* 56840 102D80 80188340 */  .4byte D_ovl3_80188130
   /* 56844 102D84 80188344 */  .4byte D_ovl3_80188138
   /* 56848 102D88 80188348 */  .4byte D_ovl3_8018813C
