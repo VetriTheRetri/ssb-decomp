@@ -5,12 +5,12 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\gm",
+    "\\game\\src\\ft\\chara\\ftfox",
     "\\game\\src\\it",
     "\\game\\src\\it\\item",
     "\\game\\src\\it\\item\\itemness",
     "\\game\\src\\mp"
   ],
+  "SelectedNode": "\\game\\src\\gm\\gmmisc.h",
   "PreviewInSolutionExplorer": false
 }

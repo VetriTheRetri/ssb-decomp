@@ -494,7 +494,7 @@ typedef struct Fighter_Com
     u8 behavior_write; // Override behavior
     u8 unk_ftcom_0x6;
     u8 input_wait; // "Controller command wait timer"
-    u8 *p_input;
+    u8 *p_command;
     void (*cb_com)(GObj *); // "Main behavior routine"
     s32 unk_ftcom_0x10;
     s32 unk_ftcom_0x14;

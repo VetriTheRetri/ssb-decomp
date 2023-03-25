@@ -69,8 +69,8 @@ void func_ovl3_80131BA0(Fighter_Struct *fp)
 void func_ovl3_80131C68(Fighter_Struct *this_fp)
 {
     Fighter_Com *ft_com = &this_fp->fighter_com;
-    u8 *p_input = ft_com->p_input;
-    u8 input_timer;
+    u8 *p_command;
+    u8 command;
     s8 var_t1;
     s16 stick_range_y;
     s16 stick_range_x;
@@ -83,17 +83,17 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
 
         if (ft_com->input_wait == 0)
         {
-            p_input = ft_com->p_input;
+            p_command = ft_com->p_command;
 
             while (ft_com->input_wait == 0)
             {
-                input_timer = *p_input++;
+                command = *p_command++;
 
-                if (input_timer < 0xF0)
+                if (command < 0xF0)
                 {
-                    ft_com->input_wait = input_timer & 0xF;
+                    ft_com->input_wait = command & 0xF;
 
-                    switch (input_timer & 0xF0)
+                    switch (command & 0xF0)
                     {
                     case 0x0:
                         this_fp->input.button_mask_com |= 0x8000;
@@ -126,40 +126,40 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                         this_fp->input.button_mask_com &= 0xEFFF;
                         break;
                     case 0xA0:
-                        switch (*p_input)
+                        switch (*p_command)
                         {
                         default:
-                            this_fp->input.stick_com.x = *p_input++;
+                            this_fp->input.stick_com.x = *p_command++;
                             break;
 
                         case 0x7FU:
                             this_fp->input.stick_com.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GMCONTROLLER_RANGE_MAX_I) : -(GMCONTROLLER_RANGE_MAX_I);
-                            p_input++;
+                            p_command++;
                             break;
 
                         case 0x80U:
                             this_fp->input.stick_com.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GMCONTROLLER_RANGE_MAX_I / 2) : -(GMCONTROLLER_RANGE_MAX_I / 2);
-                            p_input++;
+                            p_command++;
                             break;
                         }
                         break;
 
                     case 0xB0:
-                        switch (*p_input)
+                        switch (*p_command)
                         {
                         default:
 
-                            this_fp->input.stick_com.y = *p_input++;
+                            this_fp->input.stick_com.y = *p_command++;
                             break;
 
                         case 0x7FU:
                             this_fp->input.stick_com.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GMCONTROLLER_RANGE_MAX_I) : -(GMCONTROLLER_RANGE_MAX_I);
-                            p_input++;
+                            p_command++;
                             break;
 
                         case 0x80U:
                             this_fp->input.stick_com.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GMCONTROLLER_RANGE_MAX_I / 2) : -(GMCONTROLLER_RANGE_MAX_I / 2);
-                            p_input++;
+                            p_command++;
                             break;
                         }
                         break;
@@ -280,10 +280,10 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                         break;
                     }
                 }
-                else switch (input_timer)
+                else switch (command)
                 {
                 case 0xF0:
-                    ft_com->input_wait = *p_input++;
+                    ft_com->input_wait = *p_command++;
                     break;
                 case 0xF1:
                     var_t1 = 1;
@@ -296,11 +296,28 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                     break;
                 case 0xFF:
                     ft_com->input_wait = 0;
-                    ft_com->p_input = NULL;
+                    ft_com->p_command = NULL;
                     return;
                 }
             }
-            ft_com->p_input = p_input;
+            ft_com->p_command = p_command;
         }
     }
+}
+
+extern u8 *D_ovl3_80188340[]; // 
+
+void func_ovl3_80132564(Fighter_Struct *fp, s32 index)
+{
+    Fighter_Com *ft_com = &fp->fighter_com;
+
+    if (fp->ground_or_air == ground)
+    {
+        ft_com->input_wait = ((2.0F * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 2) + 1.0F);
+    }
+    else
+    {
+        ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) / 2) + 1.0F);
+    }
+    ft_com->p_command = D_ovl3_80188340[index];
 }
