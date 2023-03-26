@@ -601,7 +601,7 @@ struct Fighter_Struct
 
     } status_info;
 
-    s32 percent_dmg_total;
+    s32 percent_damage;
     s32 armor; // Used as HP in Kirby's Stone
     s32 x34_unk;
     s32 x38_unk;
