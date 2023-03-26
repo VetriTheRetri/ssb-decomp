@@ -8,7 +8,7 @@ void func_ovl3_80161CA0(GObj *kirby_gobj, GObj *victim_gobj, s32 damage)
 
     damage = star_dmg_victim;
 
-    func_ovl3_801415F8(victim_gobj, func_ovl2_800E9D78(fp_victim->percent_dmg_total, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->offset_hit_type, fp_victim->offset_hit_type), 0);
+    func_ovl3_801415F8(victim_gobj, func_ovl2_800E9D78(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->offset_hit_type, fp_victim->offset_hit_type), 0);
     func_ovl2_800EA248(fp_victim, damage);
     func_ovl2_800EA98C(fp_kirby->player_id, fp_victim->player_id, damage);
     func_ovl2_800EA614(fp_kirby->player_id, fp_victim->player_id, fp_kirby->attack_id, fp_kirby->unk_0x28C_halfword);

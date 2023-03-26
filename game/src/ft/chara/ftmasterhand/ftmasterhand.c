@@ -234,7 +234,7 @@ void func_ovl3_801586A0(GObj *fighter_gobj)
 
     if ((status_id != ftStatus_MasterHand_Dead1) && (status_id != ftStatus_MasterHand_Dead2) && (status_id != ftStatus_MasterHand_Dead3))
     {
-        if (fp->percent_dmg_total >= 300)
+        if (fp->percent_damage >= 300)
         {
             func_unkmulti_8018F75C(fighter_gobj);
             if (fp->lr == LEFT)
@@ -243,7 +243,7 @@ void func_ovl3_801586A0(GObj *fighter_gobj)
             }
             else func_ovl3_8015AE80(fighter_gobj);
         }
-        else if (fp->percent_dmg_total >= 200)
+        else if (fp->percent_damage >= 200)
         {
             fp->fighter_vars.masterhand.p_masterhand->unk_0xC = 1.5F;
         }

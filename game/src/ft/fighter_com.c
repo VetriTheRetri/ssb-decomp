@@ -1,5 +1,6 @@
 #include "fighter.h"
 #include "item.h"
+#include "article.h"
 #include "ftfox.h"
 #include "gmmatch.h"
 
@@ -418,4 +419,94 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
     else ft_com->target_line_id = -1;
 
     return TRUE;
+}
+
+bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
+{
+    GObj *other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+
+    while (other_gobj != NULL)
+    {
+        if (other_gobj != this_fp->this_fighter)
+        {
+            Fighter_Struct *other_fp = FighterGetStruct(other_gobj);
+
+            if (this_fp->team != other_fp->team)
+            {
+                DObj *other_joint = other_fp->joint[0];
+                DObj *this_joint = this_fp->joint[0];
+                f32 other_x = (other_joint->translate.x + other_fp->phys_info.vel_normal.x * 3.0F);
+                f32 other_y = (other_joint->translate.y + other_fp->phys_info.vel_normal.x * 3.0F);
+                f32 sqrt_xy = sqrtf(SQUARE(this_joint->translate.y - other_y) + SQUARE(this_joint->translate.x - other_x));
+
+                if ((other_fp->special_status == ftSpecialStatus_Star) && (sqrt_xy < 1500.0F))
+                {
+                    return TRUE;
+                }
+                else if ((other_fp->article_hold != NULL) && (ArticleGetStruct(other_fp->article_hold)->at_kind == At_Kind_M_Ball) && (sqrt_xy < 2500.0F))
+                {
+                    return TRUE;
+                }
+            }
+        }
+        other_gobj = other_gobj->group_gobj_next;
+    }
+    return FALSE;
+}
+
+Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
+{
+    Fighter_Com *ft_com = &this_fp->fighter_com;
+    GObj *other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+    s32 target_damage = 9999;
+    Fighter_Struct *target_fp = NULL;
+
+    while (other_gobj != NULL)
+    {
+        if (other_gobj != this_fp->this_fighter)
+        {
+            Fighter_Struct *other_fp = FighterGetStruct(other_gobj);
+
+            if (this_fp->team != other_fp->team)
+            {
+                if (other_fp->status_info.status_id >= ftStatus_Common_Wait)
+                {
+                    if ((ft_com->target_gobj != NULL) && (other_fp->this_fighter == ft_com->target_gobj))
+                    {
+                        if (other_fp->percent_damage == ft_com->target_damage_percent)
+                        {
+                            if ((u32)ft_com->target_find_wait != 0)
+                            {
+                                ft_com->target_find_wait--;
+                            }
+                            if ((u32)ft_com->target_find_wait == 0)
+                            {
+                                return other_fp;
+                            }
+                            else return NULL;
+                        }
+                        ft_com->target_gobj = NULL;
+                    }
+                    if (other_fp->percent_damage < target_damage)
+                    {
+                        target_damage = other_fp->percent_damage;
+                        target_fp = other_fp;
+                    }
+                }
+            }
+        }
+        other_gobj = other_gobj->group_gobj_next;
+    }
+    if (target_fp != NULL)
+    {
+        ft_com->target_damage_percent = target_damage;
+        ft_com->target_gobj = target_fp->this_fighter;
+        ft_com->target_find_wait = (rand_f32() * 300.0F) + 600.0F;
+    }
+    return NULL;
+}
+
+void func_ovl3_80132EC0() // Unused
+{
+    return;
 }

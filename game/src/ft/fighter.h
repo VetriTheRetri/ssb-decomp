@@ -398,6 +398,15 @@ typedef enum plKind
 
 } plKind;
 
+typedef enum ftSpecialStatus
+{
+    ftSpecialStatus_Invincible, // Fighter cannot take damage?
+    ftSpecialStatus_Normal, // Fighter can take damage
+    ftSpecialStatus_Star, // CPUs run away from fighter; cannot take damage
+    ftSpecialStatus_Intangible // Fighter cannot be hit at all
+
+} ftSpecialStatus;
+
 typedef struct FighterHitVictimFlags
 {
     u32 flags_b0 : 1;
@@ -502,8 +511,8 @@ typedef struct Fighter_Com
     s16 unk_timer_0x1A;
     s32 unk_timer_0x1C;
     s32 unk_ftcom_0x20;
-    s16 target_find_wait;
-    s16 target_damage_percent;
+    u16 target_find_wait;
+    u16 target_damage_percent;
     s32 unk_ftcom_0x28;
     s32 unk_ftcom_0x2C;
     GObj *target_gobj;
@@ -523,7 +532,7 @@ typedef struct Fighter_Com
     u8 filler_0x44[0x48 - 0x44];
     u8 ftcom_flags_0x48_b0 : 1;
     u8 ftcom_flags_0x48_b1 : 1;
-    u8 ftcom_flags_0x48__0x48_b2 : 1;
+    u8 ftcom_flags_0x48_b2 : 1;
     u8 ftcom_flags_0x48_b3 : 1;
     u8 ftcom_flags_0x48_b4 : 1;
     u8 ftcom_flags_0x48_b5 : 1;
@@ -825,8 +834,9 @@ struct Fighter_Struct
 
     Fighter_Hit fighter_hit[4];
 
-    u8 filler_0x290[0x5B8 - 0x5A4];
+    u8 filler_0x290[0x5B4 - 0x5A4];
 
+    s32 special_status;
     s32 hit_status;
     
     u8 filler_0x58C[0x7B0 - 0x5BC];
