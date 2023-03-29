@@ -269,7 +269,7 @@ bool32 jtgt_ovl3_8017BA2C(GObj *article_gobj)
         {
             func_ovl2_800F4428(ap->coll_data.ground_line_id, &sp30);
 
-            if ((joint->translate.x - attributes->ledge_stop_width) <= sp30.x)
+            if ((joint->translate.x - attributes->objectcoll_width) <= sp30.x)
             {
                 ap->phys_info.vel.x = 0.0F;
             }
@@ -278,7 +278,7 @@ bool32 jtgt_ovl3_8017BA2C(GObj *article_gobj)
         {
             func_ovl2_800F4408(ap->coll_data.ground_line_id, &sp30);
 
-            if (sp30.x <= (joint->translate.x + attributes->ledge_stop_width))
+            if (sp30.x <= (joint->translate.x + attributes->objectcoll_width))
             {
                 ap->phys_info.vel.x = 0.0F;
             }

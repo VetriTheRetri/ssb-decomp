@@ -26,11 +26,11 @@ void func_ovl3_80180630(GObj *article_gobj)
 
         pos = joint->translate;
 
-        pos.y += ap->attributes->gfx_offset.y;
+        pos.y += ap->attributes->objectcoll_bottom;
 
         if (ap->at_kind == At_Kind_Kamex)
         {
-            pos.x += (ap->attributes->ledge_stop_width + ATKAMEX_DUST_SPAWN_OFF_X) * -ap->lr;
+            pos.x += (ap->attributes->objectcoll_width + ATKAMEX_DUST_SPAWN_OFF_X) * -ap->lr;
         }
         ap->article_vars.kamex.is_apply_push = TRUE;
 
@@ -299,7 +299,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         {
             joint->rotate.y = PI32;
         }
-        joint->translate.y -= kamex_ap->attributes->gfx_offset.y;
+        joint->translate.y -= kamex_ap->attributes->objectcoll_bottom;
 
         func_8000BD1C(joint, ArticleGetPData(kamex_ap, D_NF_0000EA60, D_NF_00013624), 0.0F); // Linker thing
     }

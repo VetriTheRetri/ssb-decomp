@@ -12,7 +12,7 @@ void func_ovl3_801785E0(GObj *article_gobj)
     {
         pos = joint->translate;
 
-        pos.y += ap->attributes->gfx_offset.y;
+        pos.y += ap->attributes->objectcoll_bottom;
 
         func_ovl2_800FF048(&pos, ap->lr, 1.0F);
 

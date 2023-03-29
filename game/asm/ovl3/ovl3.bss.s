@@ -59,7 +59,7 @@ glabel Monster_Info
     .space 48
 glabel dbObjDisplayStatus_Global_Article
     .space 4
-glabel D_ovl3_8018D094
+glabel Article_Alloc_Link
     .space 4
 glabel D_ovl3_8018D098
     .space 4

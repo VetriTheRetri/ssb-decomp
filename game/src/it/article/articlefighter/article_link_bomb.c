@@ -69,7 +69,7 @@ void func_ovl3_80185B18(GObj *article_gobj)
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos = joint->translate;
 
-    pos.y += attributes->gfx_offset.y;
+    pos.y += attributes->objectcoll_bottom;
 
     func_ovl2_800FF3F4(&pos, ap->lr, 1.0F);
 }

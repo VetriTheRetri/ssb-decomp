@@ -189,7 +189,7 @@ GObj *jtgt_ovl3_80183690(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        joint->translate.y -= ap->attributes->gfx_offset.y;
+        joint->translate.y -= ap->attributes->objectcoll_bottom;
 
         func_8000BD1C(joint, ArticleGetPData(ap, D_NF_00013598, D_NF_00013624), 0.0F); // Linker thing
         func_800269C0(0x13CU);

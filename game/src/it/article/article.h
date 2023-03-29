@@ -17,6 +17,7 @@
 #define ARTICLE_MASK_SPAWN_GROUND 1                // Article spawned by stage 
 #define ARTICLE_MASK_SPAWN_ITEM 2                  // Article spawned by another item
 #define ARTICLE_MASK_SPAWN_ARTICLE 3               // Article spawned by Pokémon / misc entity class(es?)
+#define ARTICLE_MASK_SPAWN_DEFAULT 4
 
 #define ARTICLE_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
 
@@ -135,10 +136,21 @@ typedef struct ArticleFileData
 
 typedef struct ArticleSpawnData
 {
-    u32 w0;
+    s32 at_kind;
     void **p_file;
-    s32 offset;
-    u32 w3;
+    intptr_t offset;
+    u8 unk_aspd_0xC;
+    u8 unk_aspd_0xD;
+    u8 unk_aspd_0xE;
+    s32 update_state;
+    bool32 (*cb_anim)(GObj*);
+    bool32 (*cb_coll)(GObj*);
+    bool32 (*cb_give_damage)(GObj*);
+    bool32 (*cb_shield_block)(GObj*);
+    bool32 (*cb_shield_deflect)(GObj*);
+    bool32 (*cb_attack)(GObj*);
+    bool32 (*cb_reflect)(GObj*);
+    bool32 (*cb_take_damage)(GObj*);
 
 } ArticleSpawnData;
 
@@ -189,8 +201,8 @@ typedef struct _Article_Hit
 {
     s32 update_state; // 0x0
     s32 damage; // 0x4
-    f32 stale; // Might be damage in float? At least based on Melee?
-    f32 throw_mul; // Multiplies damage on throw?
+    f32 stale; // Might be swapped with throw_mul
+    f32 throw_mul; // Might be swapped with stale
     s32 element; // 0xC // Placed AFTER offset?
     Vec3f offset[2]; // 0x10 - 0x18    
     f32 size;
@@ -202,15 +214,15 @@ typedef struct _Article_Hit
     s32 priority; // Priority?
     u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;
-    u16 clang : 1;
+    u32 clang : 1;
     u32 flags_0x4C_b1 : 1;
     u32 flags_0x4C_b2 : 1;
     u32 can_rehit : 1; // Article can rehit targets after default rehit cooldown expires
     u32 can_deflect : 1;
     u32 can_reflect : 1;
     u32 can_shield : 1; // Not actually absorb but not yet known either
-    u16 attack_id : 6;
-    u16 flags_0x4C_b7 : 1;
+    u32 attack_id : 6; // Unconfirmed
+    u32 flags_0x4C_b7 : 1;
     gmAttackFlags flags_0x4E;
     gmAttackFlags flags_hi;
     gmAttackFlags flags_lw;
@@ -257,9 +269,15 @@ typedef struct Article_Hurt
 typedef struct atCommonAttributes
 {
     void *unk_0x0;
-    u8 filler_0x4[0x10 - 0x4];
-    u32 unk_0x10_5bit : 5U;
-    s32 hit_offset1_x : 16; // Uhh... alrighty lol
+    void *unk_0x4;
+    void *unk_atca_0x8;
+    void *unk_atca_0xC;
+    u32 unk_0x10_b0 : 1;
+    u32 unk_0x10_b1 : 1;
+    u32 unk_0x10_b2 : 1;
+    u32 is_give_hitlag : 1;
+    u32 is_light : 1;
+    s32 hit_offset1_x : 16;
     s16 hit_offset1_y;
     s16 hit_offset1_z;
     s16 hit_offset2_x;
@@ -267,18 +285,42 @@ typedef struct atCommonAttributes
     s16 hit_offset2_z;
     Vec3h hurt_offset;
     Vec3h hurt_size;
-    s16 unk_0x2A;
-    Vec2h gfx_offset; // Universal?
-    s16 ledge_stop_width; // Used by Bob-Omb to determine when to turn around
+    s16 objectcoll_top;
+    s16 objectcoll_center;
+    s16 objectcoll_bottom;
+    s16 objectcoll_width;
     u16 size;
-    u8 filler_0x32[0x46 - 0x34];
+    s32 angle : 10;
+    u32 knockback_scale : 10;
+    u32 damage : 8;
+    u32 element : 4;
+    u32 knockback_weight : 10;
+    s32 shield_damage : 8;
+    u32 hitbox_count : 2;
+    u32 clang : 1;
+    u32 hit_sfx : 10;
+    u32 priority : 3;
+    u32 unk_atca_0x3C_b4 : 1;
+    u32 unk_atca_0x3C_b5 : 1;
+    u32 can_deflect : 1;
+    u32 can_reflect : 1;
+    u32 can_shield : 1;
+    u32 knockback_base : 10;
+    u32 unk_atca_0x3C_b3 : 4;
+    u32 hit_status : 4;
+    u32 unk_atca_0x3C_b6 : 1;
+    u32 unk_atca_0x3C_b7 : 1;
+    u32 unk_atca_sfx : 10;
+    u32 drop_sfx : 10;
+    u32 throw_sfx : 10;
+    u32 vel_scale : 9;
     u16 spin_speed;
 
 } atCommonAttributes;
 
 typedef struct Article_Struct // Common items, stage hazards and Pokémon
 {
-    void *unk_0x0;
+    void *ap_alloc_next; // Region allocated for next Article_Struct
     GObj *article_gobj;
     GObj *owner_gobj;
     atKind at_kind;
@@ -335,25 +377,25 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u16 drop_sfx;
     u16 throw_sfx;
 
-    u8 is_show_indicator : 1; // Bool to check whether to display red arrow indicator above article or not
-    u8 is_pickup : 1; // I think this is used to tell if a fighter is holding this article?
-    u8 times_landed : 2; // Number of times item has touched the ground while not grabbed; overflows after 3
-    u8 times_thrown : 3; // Number of times item has been dropped or thrown; overflows after 7
-    u8 is_light_throw : 1;
-    u8 is_damage_all : 1; // Article ignores ownership and can damage anything?
-    u8 x2CF_flag_b1 : 1;
-    u8 x2CF_flag_b2 : 1;
-    u8 x2CF_flag_b3 : 1;
-    u8 x2CF_flag_b4 : 1;
-    u8 x2CF_flag_b5 : 1;
-    u8 x2CF_flag_b6 : 1;
-    u8 x2CF_flag_b7 : 1;
+    u32 is_show_indicator : 1; // Bool to check whether to display red arrow indicator above article or not
+    u32 is_pickup : 1; // I think this is used to tell if a fighter is holding this article?
+    u32 times_landed : 2; // Number of times item has touched the ground while not grabbed; overflows after 3
+    u32 times_thrown : 3; // Number of times item has been dropped or thrown; overflows after 7
+    u32 is_light_throw : 1;
+    u32 is_damage_all : 1; // Article ignores ownership and can damage anything?
+    u32 x2CF_flag_b1 : 1;
+    u32 x2CF_flag_b2 : 1;
+    u32 x2CF_flag_b3 : 1;
+    u32 x2CF_flag_b4 : 1;
+    u32 x2CF_flag_b5 : 1;
+    u32 x2CF_flag_b6 : 1;
+    u32 x2CF_flag_b7 : 1;
     u16 unk_0x2D0; // Some line ID 
-    u16 pickup_wait : 12; // Number of frames article can last without being picked up (if applicable)
-    u8 x2D3_flag_b4 : 1;
-    u8 x2D3_flag_b5 : 1;
-    u8 is_static_damage : 1;
-    u8 x2D3_flag_b7 : 1;
+    u32 pickup_wait : 12; // Number of frames article can last without being picked up (if applicable)
+    u32 x2D3_flag_b4 : 1;
+    u32 x2D3_flag_b5 : 1;
+    u32 is_static_damage : 1;
+    u32 x2D3_flag_b7 : 1;
 
     atCommonAttributes *attributes;
 
@@ -361,64 +403,60 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     u8 filler_0x2D4[0x338 - 0x31C];
 
-    u8 x338_flag_b0 : 1;
-    u8 x338_flag_b1 : 1;
-    u8 x338_flag_b2 : 1;
-    u8 x338_flag_b3 : 1;
-    u8 x338_flag_b4 : 1;
-    u8 x338_flag_b5 : 1;
-    u8 x338_flag_b6 : 1;
-    u8 x338_flag_b7 : 1;
-    u8 x339_flag_b0 : 1;
-    u8 x339_flag_b1 : 1;
-    u8 x339_flag_b2 : 1;
-    u8 x339_flag_b3 : 1;
-    u8 x339_flag_b4 : 1;
-    u8 x339_flag_b5 : 1;
-    u8 x339_flag_b6 : 1;
-    u8 x339_flag_b7 : 1;
-    u8 x33A_flag_b0 : 1;
-    u8 x33A_flag_b1 : 1;
-    u8 x33A_flag_b2 : 1;
-    u8 x33A_flag_b3 : 1;
-    u8 x33A_flag_b4 : 1;
-    u8 x33A_flag_b5 : 1;
-    u8 x33A_flag_b6 : 1;
-    u8 x33A_flag_b7 : 1;
-    u8 x33B_flag_b0 : 1;
-    u8 x33B_flag_b1 : 1;
-    u8 x33B_flag_b2 : 1;
-    u8 x33B_flag_b3 : 1;
-    u8 x33B_flag_b4 : 1;
-    u8 x33B_flag_b5 : 1;
-    u8 x33B_flag_b6 : 1;
-    u8 x33B_flag_b7 : 1;
-    u8 is_hitlag_victim : 1;
-    u8 x33C_flag_b1 : 1;
-    u8 x33C_flag_b2 : 1;
-    u8 x33C_flag_b3 : 1;
-    u8 x33C_flag_b4 : 1;
-    u8 x33C_flag_b5 : 1;
-    u8 x33C_flag_b6 : 1;
-    u8 x33C_flag_b7 : 1;
-    u8 x33D_flag_b0 : 1;
-    u8 x33D_flag_b1 : 1;
-    u8 x33D_flag_b2 : 1;
-    u8 x33D_flag_b3 : 1;
-    u8 x33D_flag_b4 : 1;
-    u8 x33D_flag_b5 : 1;
-    u8 x33D_flag_b6 : 1;
-    u8 x33D_flag_b7 : 1;
+    u32 x338_flag_b0 : 1;
+    u32 x338_flag_b1 : 1;
+    u32 x338_flag_b2 : 1;
+    u32 x338_flag_b3 : 1;
+    u32 x338_flag_b4 : 1;
+    u32 x338_flag_b5 : 1;
+    u32 x338_flag_b6 : 1;
+    u32 x338_flag_b7 : 1;
+    u32 x339_flag_b0 : 1;
+    u32 x339_flag_b1 : 1;
+    u32 x339_flag_b2 : 1;
+    u32 x339_flag_b3 : 1;
+    u32 x339_flag_b4 : 1;
+    u32 x339_flag_b5 : 1;
+    u32 x339_flag_b6 : 1;
+    u32 x339_flag_b7 : 1;
+    u32 x33A_flag_b0 : 1;
+    u32 x33A_flag_b1 : 1;
+    u32 x33A_flag_b2 : 1;
+    u32 x33A_flag_b3 : 1;
+    u32 x33A_flag_b4 : 1;
+    u32 x33A_flag_b5 : 1;
+    u32 x33A_flag_b6 : 1;
+    u32 x33A_flag_b7 : 1;
+    u32 x33B_flag_b0 : 1;
+    u32 x33B_flag_b1 : 1;
+    u32 x33B_flag_b2 : 1;
+    u32 x33B_flag_b3 : 1;
+    u32 x33B_flag_b4 : 1;
+    u32 x33B_flag_b5 : 1;
+    u32 x33B_flag_b6 : 1;
+    u32 x33B_flag_b7 : 1;
+    u32 is_hitlag_victim : 1;
+    u32 x33C_flag_b1 : 1;
+    u32 x33C_flag_b2 : 1;
+    u32 x33C_flag_b3 : 1;
+    u32 x33C_flag_b4 : 1;
+    u32 x33C_flag_b5 : 1;
+    u32 x33C_flag_b6 : 1;
+    u32 x33C_flag_b7 : 1;
+    u32 x33D_flag_b0 : 1;
+    u32 x33D_flag_b1 : 1;
+    u32 x33D_flag_b2 : 1;
+    u32 x33D_flag_b3 : 1;
+    u32 x33D_flag_b4 : 1;
+    u32 x33D_flag_b5 : 1;
+    u32 x33D_flag_b6 : 1;
+    u32 x33D_flag_b7 : 1;
     u16 at_multi; // Some sort of universal multi-purpose variable, e.g. it is used as intangibility delay for Star Man and ammo count for Ray Gun
 
-    u8 x340_flag_b0123 : 4;
+    u8 x340_flag_b0123 : 4; // Script timer?
     f32 rotate_speed;
     GObj *unk_0x348;
-
     u8 arrow_flash_timer; // Frequency of red arrow indicator flash
-    u8 unk_0x34D;
-    u8 unk_0x34E;
-    u8 unk_0x34F;
 
     union
     {

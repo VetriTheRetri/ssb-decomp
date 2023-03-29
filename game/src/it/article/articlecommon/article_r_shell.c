@@ -94,7 +94,7 @@ void func_ovl3_8017A610(GObj *article_gobj)
     {
         Vec3f pos = joint->translate;
 
-        pos.y += ap->attributes->gfx_offset.y;
+        pos.y += ap->attributes->objectcoll_bottom;
 
         func_ovl2_800FF048(&pos, ap->lr, 1.0F);
 
@@ -336,7 +336,7 @@ void func_ovl3_8017AC84(GObj *article_gobj)
         {
             func_ovl2_800F4428(ap->coll_data.ground_line_id, &pos);
 
-            if ((joint->translate.x - attributes->ledge_stop_width) <= pos.x)
+            if ((joint->translate.x - attributes->objectcoll_width) <= pos.x)
             {
                 func_ovl3_8017AC40(article_gobj, 1);
             }
@@ -345,7 +345,7 @@ void func_ovl3_8017AC84(GObj *article_gobj)
         {
             func_ovl2_800F4408(ap->coll_data.ground_line_id, &pos);
 
-            if (pos.x <= (joint->translate.x + attributes->ledge_stop_width))
+            if (pos.x <= (joint->translate.x + attributes->objectcoll_width))
             {
                 func_ovl3_8017AC40(article_gobj, 0);
             }

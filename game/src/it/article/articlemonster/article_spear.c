@@ -204,7 +204,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap->phys_info.vel.x = 0.0F;
         ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
 
-        joint->translate.y -= ap->attributes->gfx_offset.y;
+        joint->translate.y -= ap->attributes->objectcoll_bottom;
 
         func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_0000DF38, D_NF_00013624), 0.0F);
     }

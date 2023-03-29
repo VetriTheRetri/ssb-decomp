@@ -3,33 +3,30 @@
 #include "item.h"
 #include "gmmatch.h"
 #include "gmground.h"
-#include "gbi.h"
 
+extern Article_Struct *Article_Alloc_Link;
 
-
-extern Gfx *D_ovl3_8018D094;
-
-Gfx* func_ovl3_8016DFAC(void) // Might not actually be Gfx, but data immediately following these pointers is a display list
+Article_Struct* func_ovl3_8016DFAC(void) // Set global Article user_data link pointer to next member
 {
-    Gfx *next_gfx = D_ovl3_8018D094;
-    Gfx *current_gfx;
+    Article_Struct *next_article = Article_Alloc_Link;
+    Article_Struct *current_article;
 
-    if (next_gfx == NULL)
+    if (next_article == NULL)
     {
         return NULL;
     }
-    current_gfx = next_gfx;
+    current_article = next_article;
 
-    D_ovl3_8018D094 = (Gfx*)(next_gfx->words.w0);
+    Article_Alloc_Link = next_article->ap_alloc_next;
 
-    return current_gfx;
+    return current_article;
 }
 
-void func_ovl3_8016DFDC(Gfx *display_list)
+void func_ovl3_8016DFDC(Article_Struct *ap) // Set global Article user_data link pointer to previous member
 {
-    display_list->words.w0 = (uintptr_t)D_ovl3_8018D094;
+    ap->ap_alloc_next = Article_Alloc_Link;
 
-    D_ovl3_8018D094 = display_list;
+    Article_Alloc_Link = ap;
 }
 
 void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 arg3)
@@ -72,6 +69,221 @@ void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 
     }
 }
 
+extern u16 D_ovl2_80131398;
+
+GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *pos, Vec3f *vel, u32 flags)
+{
+    Article_Struct *ap = func_ovl3_8016DFAC();
+    GObj *article_gobj;
+    atCommonAttributes *attributes;
+    void (*cb_render)(GObj*);
+    s32 unused[4];
+
+    if (ap == NULL)
+    {
+        return NULL;
+    }
+    else article_gobj = func_80009968(0x3F5U, NULL, 4U, 0x80000000U);
+
+    if (article_gobj == NULL)
+    {
+        func_ovl3_8016DFDC(ap);
+        return NULL;
+    }
+    attributes = (atCommonAttributes*) ((uintptr_t)*spawn_data->p_file + (intptr_t)spawn_data->offset);
+
+    if (attributes->unk_0x10_b2)
+    {
+        cb_render = (attributes->unk_0x10_b0) ? func_ovl3_8017224C : func_ovl3_80171F4C;
+    }
+    else cb_render = (attributes->unk_0x10_b0) ? func_ovl3_80171D38 : func_ovl3_80171C7C;
+
+    func_80009DF4(article_gobj, cb_render, 0xB, 0x80000000, -1);
+
+    article_gobj->user_data = ap;
+    ap->article_gobj = article_gobj;
+    ap->owner_gobj = NULL;
+    ap->at_kind = spawn_data->at_kind;
+    ap->unk_0x10 = attributes->unk_atca_0x3C_b3;
+    ap->phys_info.vel = *vel;
+    ap->phys_info.vel_ground = 0.0F;
+    ap->attributes = attributes;
+
+    func_ovl3_80172508(article_gobj);
+    func_ovl3_801725BC(article_gobj);
+
+    ap->is_show_indicator = FALSE;
+    ap->is_pickup = FALSE;
+    ap->x2D3_flag_b4 = FALSE;
+    ap->x2D3_flag_b5 = FALSE;
+    ap->is_static_damage = FALSE;
+
+    ap->pickup_wait = ARTICLE_PICKUP_WAIT_DEFAULT;
+
+    ap->percent_damage = 0;
+    ap->hitlag_timer = 0;
+    ap->damage_last = 0;
+    ap->damage_knockback = 0.0F;
+    ap->damage_taken_recent = 0;
+    ap->damage_taken_last = 0;
+
+    ap->times_landed = 0;
+    ap->times_thrown = 0;
+
+    ap->is_light_throw = attributes->is_light;
+    ap->is_hitlag_victim = attributes->is_give_hitlag;
+    ap->unk_0x2C8 = attributes->unk_atca_sfx;
+    ap->drop_sfx = attributes->drop_sfx;
+    ap->throw_sfx = attributes->throw_sfx;
+
+    ap->vel_scale = attributes->vel_scale * 0.01F;
+
+    ap->is_damage_all = FALSE;
+    ap->x2CF_flag_b2 = FALSE;
+    ap->x2CF_flag_b1 = FALSE;
+
+    ap->rotate_speed = 0.0F;
+    ap->unk_0x348 = NULL;
+    ap->arrow_flash_timer = 0;
+
+    ap->article_hit.update_state = spawn_data->update_state;
+    ap->article_hit.damage = attributes->damage;
+    ap->article_hit.stale = 1.0F;
+    ap->article_hit.throw_mul = 1.0F;
+    ap->article_hit.element = attributes->element;
+    ap->article_hit.offset[0].x = attributes->hit_offset1_x;
+    ap->article_hit.offset[0].y = attributes->hit_offset1_y;
+    ap->article_hit.offset[0].z = attributes->hit_offset1_z;
+    ap->article_hit.offset[1].x = attributes->hit_offset2_x;
+    ap->article_hit.offset[1].y = attributes->hit_offset2_y;
+    ap->article_hit.offset[1].z = attributes->hit_offset2_z;
+    ap->article_hit.size = attributes->size * 0.5F;
+    ap->article_hit.angle = attributes->angle;
+    ap->article_hit.knockback_scale = attributes->knockback_scale;
+    ap->article_hit.knockback_weight = attributes->knockback_weight;
+    ap->article_hit.knockback_base = attributes->knockback_base;
+    ap->article_hit.clang = attributes->clang;
+    ap->article_hit.shield_damage = attributes->shield_damage;
+    ap->article_hit.hit_sfx = attributes->hit_sfx;
+    ap->article_hit.priority = attributes->priority;
+    ap->article_hit.flags_0x4C_b1 = attributes->unk_atca_0x3C_b4;
+    ap->article_hit.flags_0x4C_b2 = attributes->unk_atca_0x3C_b5;
+    ap->article_hit.can_rehit = FALSE;
+    ap->article_hit.can_deflect = attributes->can_deflect;
+    ap->article_hit.can_reflect = attributes->can_reflect;
+    ap->article_hit.can_shield = attributes->can_shield;
+    ap->article_hit.hitbox_count = attributes->hitbox_count;
+    ap->article_hit.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+    ap->article_hit.attack_id = 0;
+    ap->article_hit.flags_0x4E.halfword = func_ovl2_800EA5BC();
+    ap->article_hit.flags_hi.flags_0x3FF = 0x39;
+    ap->article_hit.flags_hi.flags_0x1000 = ap->article_hit.flags_hi.flags_0x800 = ap->article_hit.flags_hi.flags_0x400 = FALSE;
+    ap->article_hit.flags_lw.halfword = func_ovl2_800EA74C();
+
+    func_ovl3_801725F8(ap);
+
+    ap->article_hurt.hit_status = attributes->hit_status;
+    ap->article_hurt.offset.x = attributes->hurt_offset.x;
+    ap->article_hurt.offset.y = attributes->hurt_offset.y;
+    ap->article_hurt.offset.z = attributes->hurt_offset.z;
+    ap->article_hurt.size.x = attributes->hurt_size.x * 0.5F;
+    ap->article_hurt.size.y = attributes->hurt_size.y * 0.5F;
+    ap->article_hurt.size.z = attributes->hurt_size.z * 0.5F;
+    ap->article_hurt.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+
+    ap->shield_collide_angle = 0.0F;
+    ap->shield_collide_vec.x = 0.0F;
+    ap->shield_collide_vec.y = 0.0F;
+    ap->shield_collide_vec.z = 0.0F;
+
+    ap->hit_victim_damage = 0;
+    ap->unk_0x26C = 0;
+    ap->hit_attack_damage = 0;
+    ap->hit_shield_damage = 0;
+    ap->reflect_gobj = NULL;
+
+    if (attributes->unk_0x0 != NULL)
+    {
+        if (!(attributes->unk_0x10_b1))
+        {
+            func_8000F720(article_gobj, attributes->unk_0x0, attributes->unk_0x4, 0, spawn_data->unk_aspd_0xC, (s32)spawn_data->unk_aspd_0xD, (s32)spawn_data->unk_aspd_0xE);
+        }
+        else
+        {
+            func_ovl3_8016DFF4(article_gobj, attributes->unk_0x0, 0, spawn_data->unk_aspd_0xC);
+
+            if (attributes->unk_0x4 != NULL)
+            {
+                func_8000F8F4(article_gobj, attributes->unk_0x4);
+            }
+        }
+        if ((attributes->unk_atca_0x8 != NULL) || (attributes->unk_atca_0xC != NULL))
+        {
+            func_8000BED8(article_gobj, attributes->unk_atca_0x8, attributes->unk_atca_0xC, 0.0F);
+            func_8000DF34(article_gobj);
+        }
+        func_ovl0_800C9424(DObjGetStruct(article_gobj));
+    }
+    else
+    {
+        func_800092D0(article_gobj, NULL);
+    }
+    ap->coll_data.p_translate = &DObjGetStruct(article_gobj)->translate;
+    ap->coll_data.p_lr = &ap->lr;
+    ap->coll_data.object_coll.top = attributes->objectcoll_top;
+    ap->coll_data.object_coll.center = attributes->objectcoll_center;
+    ap->coll_data.object_coll.bottom = attributes->objectcoll_bottom;
+    ap->coll_data.object_coll.width = attributes->objectcoll_width;
+    ap->coll_data.p_object_coll = &ap->coll_data.object_coll;
+    ap->coll_data.object_var = -1;
+    ap->coll_data.wall_flag = D_ovl2_80131398;
+    ap->coll_data.coll_mask = 0;
+    ap->coll_data.pos_project.x = 0.0F;
+    ap->coll_data.pos_project.y = 0.0F;
+    ap->coll_data.pos_project.z = 0.0F;
+
+    func_80008188(article_gobj, func_ovl3_8016F534, 1U, 3U);
+    func_80008188(article_gobj, func_ovl3_80171080, 1U, 1U);
+    func_80008188(article_gobj, func_ovl3_801710C4, 1U, 0U);
+
+    ap->cb_anim = spawn_data->cb_anim;
+    ap->cb_coll = spawn_data->cb_coll;
+    ap->cb_give_damage = spawn_data->cb_give_damage;
+    ap->cb_shield_block = spawn_data->cb_shield_block;
+    ap->cb_shield_deflect = spawn_data->cb_shield_deflect;
+    ap->cb_attack = spawn_data->cb_attack;
+    ap->cb_reflect = spawn_data->cb_reflect;
+    ap->cb_take_damage = spawn_data->cb_take_damage;
+    ap->cb_destroy = NULL;
+
+    ap->coll_data.pos_curr = DObjGetStruct(article_gobj)->translate = *pos;
+
+    if (flags & ARTICLE_FLAG_PROJECT)
+    {
+        switch (flags & ARTICLE_MASK_SPAWN_ALL)
+        {
+        case ARTICLE_MASK_SPAWN_GROUND:
+        case ARTICLE_MASK_SPAWN_DEFAULT: // Default?
+            break;
+        case ARTICLE_MASK_SPAWN_FIGHTER:
+            func_ovl2_800DF058(article_gobj, FighterGetStruct(spawn_gobj)->coll_data.p_translate, &FighterGetStruct(spawn_gobj)->coll_data);
+            break;
+        case ARTICLE_MASK_SPAWN_ITEM:
+            func_ovl2_800DF058(article_gobj, ItemGetStruct(spawn_gobj)->coll_data.p_translate, &ItemGetStruct(spawn_gobj)->coll_data);
+            break;
+        case ARTICLE_MASK_SPAWN_ARTICLE:
+            func_ovl2_800DF058(article_gobj, ArticleGetStruct(spawn_gobj)->coll_data.p_translate, &ArticleGetStruct(spawn_gobj)->coll_data);
+            break;
+        }
+    }
+    ap->ground_or_air = air;
+
+    func_ovl3_8016F280(article_gobj);
+    func_ovl3_80172FBC(article_gobj);
+
+    return article_gobj;
+}
+
 // Don't forget the following two functions here, stashed until I better understand articles (idk and func_ovl3_8016EA78)
 
 extern GObj* (*Article_Callback_Spawn[])(GObj*, Vec3f*, Vec3f*, u32); // Array count is likely 45
@@ -93,7 +305,7 @@ GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *vel, 
 
 void* func_ovl3_8016EB00(void)
 {
-    return D_ovl3_8018D094;
+    return Article_Alloc_Link;
 }
 
 extern u16 D_ovl3_80189454[6];

@@ -102,9 +102,9 @@ bool32 jtgt_ovl3_8017F5EC(GObj *article_gobj)
 
         pos = joint->translate;
 
-        pos.y += ap->attributes->gfx_offset.y;
+        pos.y += ap->attributes->objectcoll_bottom;
 
-        pos.x += (ap->attributes->ledge_stop_width + ATLIZARDON_DUST_GFX_OFF_X) * -ap->lr;
+        pos.x += (ap->attributes->objectcoll_width + ATLIZARDON_DUST_GFX_OFF_X) * -ap->lr;
 
         func_ovl2_800FF278(&pos, -ap->lr);
 
@@ -223,7 +223,7 @@ GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap->phys_info.vel.x = 0.0F;
         ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
 
-        joint->translate.y -= ap->attributes->gfx_offset.y;
+        joint->translate.y -= ap->attributes->objectcoll_bottom;
 
         func_8000BD1C(joint, ArticleGetPData(ap, D_NF_0000D5C0, D_NF_00013624), 0.0F);
     }

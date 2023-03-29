@@ -153,7 +153,7 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = ArticleGetStruct(article_gobj);
 
-        joint->translate.y -= ap->attributes->gfx_offset.y;
+        joint->translate.y -= ap->attributes->objectcoll_bottom;
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
