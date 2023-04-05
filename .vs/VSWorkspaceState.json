@@ -4,8 +4,6 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftfox",
     "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
@@ -13,6 +11,5 @@
     "\\game\\src\\it\\item\\itemness",
     "\\game\\src\\mp"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article.c",
   "PreviewInSolutionExplorer": false
 }
