@@ -834,8 +834,9 @@ struct Fighter_Struct
 
     Fighter_Hit fighter_hit[4];
 
-    u8 filler_0x290[0x5B4 - 0x5A4];
+    u8 filler_0x290[0x5B0 - 0x5A4];
 
+    s32 unk_ft_0x5B0;
     s32 special_status;
     s32 hit_status;
     
@@ -854,7 +855,7 @@ struct Fighter_Struct
     s32 unk_0x800;
     s32 unk_0x804;
     s32 unk_0x808;
-    s32 unk_0x80C;
+    s32 damage_player_id;
     s32 unk_0x810;
     s32 unk_0x814;
     s32 unk_0x818;

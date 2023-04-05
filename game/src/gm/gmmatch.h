@@ -95,10 +95,12 @@ typedef struct gmPlayerBlock
     u8 unk_0x9;
     u8 unk_0xA;
     s8 stock_count; // -1 = player has no stocks
-    u32 unk_0xC;
+    u8 is_rebirth_multi; // Respawn flag of multi-man enemy teams (Yoshi, Kirby, Fighting Polygons) in 1P mode
     s32 falls;
     s32 score; // Caps at positive 999, crashes if way too low
-    u8 filler_0x18[0x34 - 0x18];
+    s32 total_ko_player[GMMATCH_PLAYERS_MAX]; // KOs scored on other players
+    u8 filler_0x28[0x30 - 0x28];
+    s32 total_self_destruct; // Applied when damaging player's ID is -1 or GMMATCH_PLAYERS_MAX
     s32 total_damage_dealt; // Total damage dealt to all players
     s32 total_damage_all; // Damage received from all hazards
     s32 total_damage_player[GMMATCH_PLAYERS_MAX]; // Total damage received from each player present

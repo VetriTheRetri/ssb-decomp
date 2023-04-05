@@ -20,6 +20,12 @@ typedef struct ftCommon_Filler
 
 } ftCommon_Filler;
 
+typedef struct ftCommon_Dead_StatusVars
+{
+    s32 rebirth_wait;
+
+} ftCommon_Dead_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -43,6 +49,7 @@ typedef struct ftCommon_CaptureKirby_StatusVars
 
 typedef union ftCommon_StatusVars
 {
+    ftCommon_Dead_StatusVars dead;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
