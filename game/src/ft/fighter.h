@@ -71,10 +71,10 @@ typedef struct ftCommonAttributes
     f32 cam_zoom_default;
     ObjectColl object_coll;
     Vec2f cliff_catch; // Ledge grab box
-    s16 dead_sfx[2]; // KO voices
-    s16 star_sfx;  // Star-KO voice
-    s16 damage_sfx;
-    s16 smash_sfx[3]; // Random Smash SFX
+    u16 dead_sfx[2]; // KO voices
+    u16 star_sfx;  // Star-KO voice
+    u16 damage_sfx;
+    u16 smash_sfx[3]; // Random Smash SFX
     s16 unk_0xC2;
     f32 halo_size_mul; // Platform size?
     f32 unk_0xC8;

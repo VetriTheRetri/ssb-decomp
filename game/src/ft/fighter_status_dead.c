@@ -1,6 +1,8 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
+#define FTCOMMON_DEAD_REBIRTH_WAIT 45
+
 void func_ovl3_8013BC60(u16 sfx_id)
 {
     func_800269C0(sfx_id);
@@ -148,5 +150,31 @@ void func_ovl3_8013C0EC(GObj *fighter_gobj)
     if (fp->status_vars.common.dead.rebirth_wait == 0)
     {
         func_ovl3_8013BF94(fighter_gobj);
+    }
+}
+
+void func_ovl3_8013C120(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEAD_REBIRTH_WAIT;
+
+    func_ovl2_800D9444(fighter_gobj);
+
+    fp->x18D_flag_b7 = TRUE;
+    fp->x191_flag_b3 = TRUE;
+    fp->x18E_flag_b3 = TRUE;
+
+    func_ovl2_801008F4(2);
+    func_ovl3_8013BC8C(fp);
+    func_ovl3_8013BD64(fp);
+
+    if (fp->attributes->dead_sfx[0] != 0x2B7)
+    {
+        func_ovl3_8013BC60(fp->attributes->dead_sfx[0]);
+    }
+    if (fp->attributes->dead_sfx[1] != 0x2B7)
+    {
+        func_ovl3_8013BC60(fp->attributes->dead_sfx[1]);
     }
 }

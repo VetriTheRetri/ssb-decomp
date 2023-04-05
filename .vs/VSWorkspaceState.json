@@ -5,12 +5,13 @@
     "\\game\\include",
     "\\game\\include\\PR",
     "\\game\\src",
+    "\\game\\src\\ft",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
     "\\game\\src\\it\\item\\itemness",
     "\\game\\src\\mp"
   ],
-  "SelectedNode": "\\game\\src\\ft\\fighter_status_dead.c",
+  "SelectedNode": "\\game\\src\\ft\\ftstatusvars.h",
   "PreviewInSolutionExplorer": false
 }
