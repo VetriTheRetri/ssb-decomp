@@ -28,7 +28,7 @@ void func_ovl3_8013BC8C(Fighter_Struct *this_fp)
             {
                 Fighter_Struct *other_fp = FighterGetStruct(fighter_gobj);
 
-                if ((!(Match_Info->match_type & 2)) || (other_fp->unk_0x14 != -1))
+                if ((!(Match_Info->match_type & 2)) || (other_fp->stock_count != -1))
                 {
                     func_ovl2_800E806C(other_fp, 1, 15);
                 }
@@ -65,7 +65,7 @@ void func_ovl3_8013BD64(Fighter_Struct *this_fp)
     
     if (Match_Info->match_type & 2)
     {
-        this_fp->unk_0x14--;
+        this_fp->stock_count--;
 
         Match_Info->player_block[this_fp->player_id].stock_count--;
 
@@ -73,7 +73,7 @@ void func_ovl3_8013BD64(Fighter_Struct *this_fp)
     }
     if (Match_Info->match_type & 8)
     {
-        this_fp->unk_0x14--;
+        this_fp->stock_count--;
 
         Match_Info->player_block[this_fp->player_id].stock_count--;
 
@@ -91,7 +91,7 @@ void func_ovl3_8013BF94(GObj *fighter_gobj)
 
     if (Match_Info->match_type & 2)
     {
-        if (fp->unk_0x14 == -1)
+        if (fp->stock_count == -1)
         {
             func_ovl3_8013D8B0(fighter_gobj);
 
@@ -106,7 +106,7 @@ void func_ovl3_8013BF94(GObj *fighter_gobj)
 
             return;
         }
-        else if (fp->unk_0x14 == -1)
+        else if (fp->stock_count == -1)
         {
             func_ovl3_8013D8B0(fighter_gobj);
 

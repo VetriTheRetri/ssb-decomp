@@ -62,6 +62,15 @@ typedef struct ftCommon_Sleep_StatusVars
 
 } ftCommon_Sleep_StatusVars;
 
+typedef struct ftCommon_Entry_StatusVars
+{
+    s32 entry_timer;
+    s32 lr_entry;
+    s32 ground_line_id;
+    bool32 is_rotate;
+
+} ftCommon_Entry_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -88,6 +97,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Dead_StatusVars dead;
     ftCommon_Rebirth_StatusVars rebirth;
     ftCommon_Sleep_StatusVars sleep;
+    ftCommon_Entry_StatusVars entry;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

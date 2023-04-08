@@ -5,12 +5,12 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftpikachu",
     "\\game\\src\\ft\\chara\\ftpurin",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\mp"
+    "\\game\\src\\mp",
+    "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\fighter_status_rebirth.c",
+  "SelectedNode": "\\game\\src\\ft\\ftstatusvars.h",
   "PreviewInSolutionExplorer": false
 }

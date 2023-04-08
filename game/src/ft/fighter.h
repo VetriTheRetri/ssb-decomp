@@ -4,6 +4,7 @@
 #include <game/include/ssb_types.h>
 #include <game/include/macros.h>
 #include <game/include/ultratypes.h>
+#include <game/src/sys/hal_input.h>
 #include <game/src/sys/obj.h>
 #include <game/src/mp/mpcoll.h>
 #include <game/src/ft/ftstatusvars.h>
@@ -587,7 +588,7 @@ struct Fighter_Struct
     u8 shade_id; // i.e. When multiple instances of the same character costume are in-game
     u8 offset_hit_type; // Original note: offset to attack hitbox type in 5x (???)
     u8 cp_level; // CPU level
-    s8 unk_0x14;
+    s8 stock_count;
     u8 unk_0x15;
     u8 unk_0x16;
     s32 player_number; // Player's number? (Note: NOT player port, e.g. if players 2 and 4 are in a match,
@@ -871,8 +872,9 @@ struct Fighter_Struct
     s32 unk_0x848;
     GObj *article_hold;
     SpecialHit *special_hit;
+    Vec3f entry_pos;
 
-    u8 filler_0x844[0x864 - 0x854];
+    u8 filler_0x844[0x864 - 0x860];
 
     f32 fighter_cam_zoom_range;
 
