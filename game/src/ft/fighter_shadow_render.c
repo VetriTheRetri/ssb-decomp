@@ -21,8 +21,8 @@ f32 func_ovl3_8013AE10(Vec3f *a, Vec3f *b, f32 f)
 
 extern Gfx *D_800465B0[4];
 extern intptr_t D_NF_00003A68;
-extern GfxColor D_ovl2_8012CA78;
-extern GfxColor D_ovl2_8012CA7C[];
+extern GfxColorAlpha D_ovl2_8012CA78;
+extern GfxColorAlpha D_ovl2_8012CA7C[3];
 extern void *D_ovl2_801313B4;
 extern Gfx D_ovl3_80188410;
 extern Gfx D_ovl3_80188458;

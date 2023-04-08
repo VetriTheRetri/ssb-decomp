@@ -1,6 +1,6 @@
 #include "article.h"
 #include "fighter.h"
-#include "ground.h"
+#include "gmground.h"
 
 bool32 jtgt_ovl3_80182630(GObj *article_gobj)
 {

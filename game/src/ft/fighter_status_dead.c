@@ -1,7 +1,10 @@
 #include "fighter.h"
 #include "gmmatch.h"
+#include "gmground.h"
 
 #define FTCOMMON_DEAD_REBIRTH_WAIT 45
+#define FTCOMMON_DEADUP_REBIRTH_WAIT 180
+#define FTCOMMON_DEADUPFALL_VEL_Z -83.333336F
 
 void func_ovl3_8013BC60(u16 sfx_id)
 {
@@ -177,4 +180,440 @@ void func_ovl3_8013C120(GObj *fighter_gobj)
     {
         func_ovl3_8013BC60(fp->attributes->dead_sfx[1]);
     }
+}
+
+void func_ovl3_8013C1C4(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f pos;
+    u32 sfx_id;
+
+    func_ovl3_8013C050(fighter_gobj);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadDown, 0.0F, 1.0F, 0U);
+    func_ovl3_8013C0B0(fighter_gobj);
+    func_ovl3_8013C120(fighter_gobj);
+
+    pos = DObjGetStruct(fighter_gobj)->translate;
+
+    if (Match_Info->unk_0x0 != 2)
+    {
+        if (Ground_Info->cam_bound_right < pos.x)
+        {
+            pos.x = Ground_Info->cam_bound_right;
+        }
+
+        if (pos.x < Ground_Info->cam_bound_left)
+        {
+            pos.x = Ground_Info->cam_bound_left;
+        }
+    }
+    func_ovl2_801021C0(&pos, fp->player_id, 0);
+    func_ovl2_80115BF0(0x51, 0);
+
+    if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+    {
+        sfx_id = 0x9B;
+    }
+    else sfx_id = 0x9A;
+
+    func_ovl3_8013BC60(sfx_id);
+}
+
+void func_ovl3_8013C30C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f pos;
+    u32 sfx_id;
+
+    func_ovl3_8013C050(fighter_gobj);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
+    func_ovl3_8013C0B0(fighter_gobj);
+    func_ovl3_8013C120(fighter_gobj);
+
+    pos = DObjGetStruct(fighter_gobj)->translate;
+
+    if (Match_Info->unk_0x0 != 2)
+    {
+        if (Ground_Info->cam_bound_top < pos.y)
+        {
+            pos.y = Ground_Info->cam_bound_top;
+        }
+
+        if (pos.y < Ground_Info->cam_bound_bottom)
+        {
+            pos.y = Ground_Info->cam_bound_bottom;
+        }
+    }
+    func_ovl2_801021C0(&pos, fp->player_id, 1);
+    func_ovl2_80115BF0(0x51, 0);
+
+    if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+    {
+        sfx_id = 0x9B;
+    }
+    else sfx_id = 0x9A;
+
+    func_ovl3_8013BC60(sfx_id);
+}
+
+void func_ovl3_8013C454(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f pos;
+    u32 sfx_id;
+
+    func_ovl3_8013C050(fighter_gobj);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
+    func_ovl3_8013C0B0(fighter_gobj);
+    func_ovl3_8013C120(fighter_gobj);
+
+    pos = DObjGetStruct(fighter_gobj)->translate;
+
+    if (Match_Info->unk_0x0 != 2)
+    {
+        if (Ground_Info->cam_bound_top < pos.y)
+        {
+            pos.y = Ground_Info->cam_bound_top;
+        }
+
+        if (pos.y < Ground_Info->cam_bound_bottom)
+        {
+            pos.y = Ground_Info->cam_bound_bottom;
+        }
+    }
+    func_ovl2_801021C0(&pos, fp->player_id, 3);
+    func_ovl2_80115BF0(0x51, 0);
+
+    if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+    {
+        sfx_id = 0x9B;
+    }
+    else sfx_id = 0x9A;
+
+    func_ovl3_8013BC60(sfx_id);
+}
+
+void func_ovl3_8013C59C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    switch (fp->cmd_flags.flag1)
+    {
+    case 1:
+        fp->color_anim.a = 128 - ((fp->status_vars.common.dead.rebirth_wait * 128) / FTCOMMON_DEADUP_REBIRTH_WAIT);
+        break;
+
+    default:
+        break;
+    }
+    if (fp->status_vars.common.dead.rebirth_wait != 0)
+    {
+        fp->status_vars.common.dead.rebirth_wait--;
+    }
+    if (fp->status_vars.common.dead.rebirth_wait == 0)
+    {
+        switch (fp->cmd_flags.flag1)
+        {
+        case 0:
+            fp->phys_info.vel_normal.y = ((Ground_Info->cam_bound_top * 0.6F) - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
+            fp->phys_info.vel_normal.z = FTCOMMON_DEADUPFALL_VEL_Z;
+
+            fp->unk_ft_0xA88_b0 = TRUE;
+
+            fp->color_anim.r = Ground_Info->fog_color.r;
+            fp->color_anim.g = Ground_Info->fog_color.g;
+            fp->color_anim.b = Ground_Info->fog_color.b;
+            fp->color_anim.a = 0;
+
+            fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEADUP_REBIRTH_WAIT;
+
+            fp->cmd_flags.flag1++;
+            break;
+
+        case 1:
+            func_ovl2_800D9444(fighter_gobj);
+            func_ovl2_80100720(&fp->joint[0]->translate, 5.0F);
+
+            fp->x18D_flag_b7 = TRUE;
+            fp->x191_flag_b3 = TRUE;
+
+            func_ovl3_8013BD64(fp);
+            func_ovl3_8013BC60(0xCU);
+
+            fp->x18E_flag_b3 = TRUE;
+            fp->unk_ft_0xA88_b0 = FALSE;
+
+            fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEAD_REBIRTH_WAIT;
+
+            fp->cmd_flags.flag1++;
+            break;
+
+        case 2:
+            func_ovl3_8013BF94(fighter_gobj);
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+
+void func_ovl3_8013C740(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl3_8013C050(fighter_gobj);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadUpStar, 0.0F, 1.0F, 0U);
+    func_ovl2_800D9444(fighter_gobj);
+
+    fp->status_vars.common.dead.pos = DObjGetStruct(fighter_gobj)->translate;
+
+    fp->x191_flag_b4567 = 2;
+
+    fp->status_vars.common.dead.rebirth_wait = 1;
+
+    fp->cmd_flags.flag1 = 0;
+
+    func_ovl3_8013C0B0(fighter_gobj);
+    func_ovl2_800E7F7C(fighter_gobj, 1);
+
+    if (fp->attributes->deadup_sfx != 0x2B7)
+    {
+        func_800269C0(fp->attributes->deadup_sfx);
+    }
+    func_ovl2_800E827C(fighter_gobj, 1);
+    func_ovl2_800E98B0(fighter_gobj);
+}
+
+void func_ovl3_8013C80C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    s32 sfx_id;
+
+    switch (fp->cmd_flags.flag1)
+    {
+    case 1:
+        if (DObjGetStruct(fighter_gobj)->translate.y < Ground_Info->blastzone_bottom)
+        {
+            fp->phys_info.vel_normal.y = 0.0F;
+        }
+        break;
+
+    default:
+        break;
+    }
+    if (fp->status_vars.common.dead.rebirth_wait != 0)
+    {
+        fp->status_vars.common.dead.rebirth_wait--;
+    }
+    if (fp->status_vars.common.dead.rebirth_wait == 0)
+    {
+        switch (fp->cmd_flags.flag1)
+        {
+        case 0:
+            fp->phys_info.vel_normal.y = (Ground_Info->cam_bound_bottom - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
+            DObjGetStruct(fighter_gobj)->translate.z = (D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.z - 3000.0F);
+
+            if (DObjGetStruct(fighter_gobj)->translate.z < 2000.0F)
+            {
+                DObjGetStruct(fighter_gobj)->translate.z = 2000.0F;
+            }
+            DObjGetStruct(fighter_gobj)->translate.x = (f32)D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.x;
+            DObjGetStruct(fighter_gobj)->translate.y = (f32)(D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.y + 3000.0F);
+
+            if (Ground_Info->blastzone_top < DObjGetStruct(fighter_gobj)->translate.y)
+            {
+                DObjGetStruct(fighter_gobj)->translate.y = Ground_Info->blastzone_top;
+            }
+            fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEADUP_REBIRTH_WAIT;
+
+            fp->cmd_flags.flag1++;
+
+            break;
+
+        case 1:
+            func_ovl2_800D9444(fighter_gobj);
+            func_ovl2_80115BF0(0x51, 0);
+            func_ovl2_801008F4(2);
+            func_ovl3_8013BC8C(fp);
+
+            fp->x18E_flag_b3 = TRUE;
+            fp->x18D_flag_b7 = TRUE;
+            fp->x191_flag_b3 = TRUE;
+
+            func_ovl3_8013BD64(fp);
+
+            if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+            {
+                sfx_id = 0x9B;
+            }
+            else sfx_id = 0x9A;
+
+            func_ovl3_8013BC60(sfx_id);
+
+            if (fp->attributes->dead_sfx[0] != 0x2B7)
+            {
+                func_ovl3_8013BC60(fp->attributes->dead_sfx[0]);
+            }
+            if (fp->attributes->dead_sfx[1] != 0x2B7)
+            {
+                func_ovl3_8013BC60(fp->attributes->dead_sfx[1]);
+            }
+            fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEAD_REBIRTH_WAIT;
+            fp->cmd_flags.flag1++;
+
+            break;
+
+        case 2:
+            func_ovl3_8013BF94(fighter_gobj);
+
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+
+void func_ovl3_8013CAAC(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl3_8013C050(fighter_gobj);
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadUpFall, 0.0F, 1.0F, 0U);
+    func_ovl2_800D9444(fighter_gobj);
+
+    fp->status_vars.common.dead.pos = DObjGetStruct(fighter_gobj)->translate;
+
+    fp->x191_flag_b4567 = 2;
+
+    fp->status_vars.common.dead.rebirth_wait = 1;
+
+    fp->cmd_flags.flag1 = 0;
+
+    func_ovl3_8013C0B0(fighter_gobj);
+    func_ovl2_800E7F7C(fighter_gobj, 1);
+
+    if (fp->attributes->deadup_sfx != 0x2B7)
+    {
+        func_800269C0(fp->attributes->deadup_sfx);
+    }
+    func_ovl2_800E827C(fighter_gobj, 0x13);
+    func_ovl2_800E9198(fighter_gobj, 1);
+}
+
+bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f *pos = &fp->joint[0]->translate;
+
+    if (fp->ft_kind == Ft_Kind_MasterHand)
+    {
+        return FALSE;
+    }
+    if (fp->x192_flag_b1)
+    {
+        return FALSE;
+    }
+    if (fp->is_check_blastzone)
+    {
+        if (pos->y < Ground_Info->blastzone_bottom)
+        {
+            pos->y = Ground_Info->blastzone_bottom + 500.0F;
+
+            fp->phys_info.vel_normal.x = 0.0F;
+            fp->phys_info.vel_normal.y = 0.0F;
+            fp->phys_info.vel_normal.z = 0.0F;
+        }
+        else if (Ground_Info->blastzone_top < pos->y)
+        {
+            pos->y = Ground_Info->blastzone_top - 500.0F;
+
+            fp->phys_info.vel_normal.x = 0.0F;
+            fp->phys_info.vel_normal.y = 0.0F;
+            fp->phys_info.vel_normal.z = 0.0F;
+        }
+        if (Ground_Info->blastzone_right < pos->x)
+        {
+            pos->x = Ground_Info->blastzone_right - 500.0F;
+
+            fp->phys_info.vel_normal.x = 0.0F;
+            fp->phys_info.vel_normal.y = 0.0F;
+            fp->phys_info.vel_normal.z = 0.0F;
+        }
+        else if (pos->x < Ground_Info->blastzone_left)
+        {
+            pos->x = Ground_Info->blastzone_left + 500.0F;
+
+            fp->phys_info.vel_normal.x = 0.0F;
+            fp->phys_info.vel_normal.y = 0.0F;
+            fp->phys_info.vel_normal.z = 0.0F;
+        }
+        return FALSE;
+    }
+    else if (!(fp->x191_flag_b1))
+    {
+        if ((Match_Info->unk_0x0 == 5) && (Match_Info->player_block[fp->player_id].is_rebirth_multi != FALSE))
+        {
+            if (pos->y < Ground_Info->unk_bound_bottom)
+            {
+                func_ovl3_8013C1C4(fighter_gobj);
+
+                return TRUE;
+            }
+            if (Ground_Info->unk_bound_right < pos->x)
+            {
+                func_ovl3_8013C30C(fighter_gobj);
+
+                return TRUE;
+            }
+            if (pos->x < Ground_Info->unk_bound_left)
+            {
+                func_ovl3_8013C454(fighter_gobj);
+
+                return TRUE;
+            }
+            if (Ground_Info->unk_bound_top < pos->y)
+            {
+                if (rand_f32() < 0.16666667F)
+                {
+                    func_ovl3_8013CAAC(fighter_gobj);
+
+                    return TRUE;
+                }
+                else func_ovl3_8013C740(fighter_gobj);
+
+                return TRUE;
+            }
+        }
+        else if (pos->y < Ground_Info->blastzone_bottom)
+        {
+            func_ovl3_8013C1C4(fighter_gobj);
+
+            return TRUE;
+        }
+        else if (Ground_Info->blastzone_right < pos->x)
+        {
+            func_ovl3_8013C30C(fighter_gobj);
+
+            return TRUE;
+        }
+        else if (pos->x < Ground_Info->blastzone_left)
+        {
+            func_ovl3_8013C454(fighter_gobj);
+
+            return TRUE;
+        }
+        else if (Ground_Info->blastzone_top < pos->y)
+        {
+            if (rand_f32() < 0.16666667F)
+            {
+                func_ovl3_8013CAAC(fighter_gobj);
+            }
+            else func_ovl3_8013C740(fighter_gobj);
+
+            return TRUE;
+        }
+    }
+    return FALSE;
 }

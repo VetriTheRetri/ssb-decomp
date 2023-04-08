@@ -3,6 +3,7 @@
 
 #include "sys/om.h"
 
+#include <PR/gbi.h>
 #include <PR/mbi.h>
 #include <PR/ultratypes.h>
 
@@ -20,6 +21,12 @@ typedef struct GfxColor
     u8 r, g, b;
 
 } GfxColor;
+
+typedef struct GfxColorAlpha
+{
+    u8 r, g, b, a;
+
+} GfxColorAlpha;
 
 // gbi Mtx * ? pointer to some sort of matrix
 extern u32 *D_80046FA0;

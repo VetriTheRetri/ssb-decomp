@@ -4,6 +4,7 @@
 #include <game/include/ssb_types.h>
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
+#include <game/src/sys/obj_renderer.h>
 
 typedef  struct gmGroundUnkBytes
 {
@@ -32,7 +33,7 @@ typedef struct gmGroundInfo
     void *unk_0x40;
     void *unk_0x44;
     void *unk_0x48;
-    s32 unk_0x4C;
+    GfxColorAlpha fog_color;
     s32 unk_0x50;
     s32 unk_0x54;
     s32 unk_0x58;
@@ -51,6 +52,11 @@ typedef struct gmGroundInfo
     u32 unk_0x7C;
     u32 unk_0x80;
     gmGroundUnkBytes *unk_0x84;
+    u8 filler_0x88[0x92 - 0x88];
+    s16 unk_bound_top;
+    s16 unk_bound_bottom;
+    s16 unk_bound_right;
+    s16 unk_bound_left;
 
 } gmGroundInfo;
 

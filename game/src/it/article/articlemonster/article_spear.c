@@ -1,6 +1,6 @@
 #include "article.h"
 #include "item.h"
-#include "ground.h"
+#include "gmground.h"
 
 #include <game/src/sys/develop.h>
 #include <game/src/sys/hal_gu.h>

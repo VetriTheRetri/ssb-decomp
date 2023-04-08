@@ -48,7 +48,8 @@ typedef struct Unk_8018D048
 
 typedef struct Unk_80131460_Ptr74
 {
-    u8 filler_0x0[0x48];
+    u8 filler_0x0[0x3C];
+    Vec3f unk_p_80131460_vec;
     f32 unk_0x48;
 
 } Unk_80131460_Ptr74;

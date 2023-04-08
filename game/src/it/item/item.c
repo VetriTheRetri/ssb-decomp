@@ -1,6 +1,7 @@
 #include "item.h"
 #include <game/src/ft/fighter.h>
 #include <game/src/gr/ground.h>
+#include <game/src/gm/gmground.h>
 #include <game/src/gm/gmmatch.h>
 #include <game/src/it/article/article.h>
 
@@ -27,8 +28,6 @@ extern s32 D_ovl2_80131398;
 
 GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
-    // Non-matching, can't force Vec3f pos into proper stack position without compromises :(
-
     GObj *item_gobj;
     void (*cb)(GObj *);
     ItemHitDesc *it_hit_desc;

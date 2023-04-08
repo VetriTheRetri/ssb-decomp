@@ -72,7 +72,7 @@ typedef struct ftCommonAttributes
     ObjectColl object_coll;
     Vec2f cliff_catch; // Ledge grab box
     u16 dead_sfx[2]; // KO voices
-    u16 star_sfx;  // Star-KO voice
+    u16 deadup_sfx;  // Star-KO voice
     u16 damage_sfx;
     u16 smash_sfx[3]; // Random Smash SFX
     s16 unk_0xC2;
@@ -88,7 +88,8 @@ typedef struct ftCommonAttributes
     s16 unk_0xE6;
     u16 throw_heavy_sfx;
     u16 unk_0xEA;
-    u8 filler_0xEC[0x2D4 - 0xEC];
+    s32 unk_0xEC;
+    u8 filler_0xEC[0x2D4 - 0xF0];
     DObjContainer *renderstate;
     u8 filler_0x2D8[0x324 - 0x2D8];
     s32 unk_0x324;
@@ -138,11 +139,11 @@ typedef enum ftCommonAction
     ftStatus_Common_DeadLeftRight,
     ftStatus_Common_DeadUpStar,
     ftStatus_Common_DeadUpFall,
-    ftStatus_Common_DeadUpFallWait,
+    ftStatus_Common_Sleep,
     ftStatus_Common_Entry,
     ftStatus_Common_Unk1,
-    ftStatus_Common_RebirthStand1,
-    ftStatus_Common_RebirthStand2,
+    ftStatus_Common_RebirthDown,
+    ftStatus_Common_RebirthStand,
     ftStatus_Common_RebirthWait,
     ftStatus_Common_Wait,
     ftStatus_Common_WalkSlow,
@@ -654,7 +655,7 @@ struct Fighter_Struct
     u8 x18D_flag_b3 : 1;
     u8 x18D_flag_b4 : 1;
     u8 x18D_flag_b5 : 1;
-    u8 x18D_flag_b6 : 1;
+    u8 is_check_blastzone : 1;
     u8 x18D_flag_b7 : 1;
 
     u8 x18E_flag_b0 : 1;
@@ -873,7 +874,7 @@ struct Fighter_Struct
 
     u8 filler_0x844[0x864 - 0x854];
 
-    f32 unk_0x864;
+    f32 fighter_cam_zoom_range;
 
     ftUnkFrameStruct unk_frame[4];
 
@@ -903,11 +904,18 @@ struct Fighter_Struct
     void (*cb_hitlag_end)(GObj *);
     void (*cb_status)(GObj *);
 
-    u8 filler_0xA10[0xA64 - 0xA10];
+    u8 filler_0xA10[0xA28 - 0xA10];
 
-    s32 unk_0xA64;
+    Color_Overlay color_anim;
 
-    u8 filler_0xA68[0xA8C - 0xA68];
+    s32 unk_ft_0xA6C;
+    s32 unk_ft_0xA70;
+    f32 light_angle1;
+    f32 light_angle2;
+    s32 unk_ft_0xA7C;
+    s32 unk_ft_0xA80;
+    s32 unk_ft_0xA84;
+    u32 unk_ft_0xA88_b0 : 1;
 
     u8 unk_0xA8C;
     u8 unk_0xA8D;
@@ -983,5 +991,30 @@ void func_ovl2_800DEE98(Fighter_Struct*); // ???
 void func_ovl2_800D8EB8(Fighter_Struct*); // ???
 void func_ovl2_800DEEC8(Fighter_Struct*); // ???
 void func_ovl2_800E0830(GObj*); // ???
+
+// Macro to check if a move has been interrupted by any standard action
+#define ftStatus_CheckInterruptAll(fighter_gobj)   \
+(                                                  \
+    (func_ovl3_80151098(fighter_gobj) != FALSE) || \
+    (func_ovl3_80151160(fighter_gobj) != FALSE) || \
+    (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
+    (func_ovl3_80149CE0(fighter_gobj) != FALSE) || \
+    (func_ovl3_80150470(fighter_gobj) != FALSE) || \
+    (func_ovl3_8015070C(fighter_gobj) != FALSE) || \
+    (func_ovl3_80150884(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014F8C0(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014FB1C(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014FD70(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014EC78(fighter_gobj) != FALSE) || \
+    (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014E764(fighter_gobj) != FALSE) || \
+    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
+    (func_ovl3_8013ED64(fighter_gobj) != FALSE) || \
+    (func_ovl3_80141EA4(fighter_gobj) != FALSE) || \
+    (func_ovl3_80142258(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
+    (func_ovl3_8013EA04(fighter_gobj) != FALSE) || \
+    (func_ovl3_8013E648(fighter_gobj) != FALSE)    \
+)                                                  \
 
 #endif
