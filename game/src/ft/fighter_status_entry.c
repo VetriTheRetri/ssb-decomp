@@ -119,7 +119,7 @@ void func_ovl3_8013DBAC(GObj *fighter_gobj)
     fp->x18E_flag_b3 = TRUE;
 }
 
-extern s32 Fighter_Status_EntryStatusIndex[14][2]; // Rows = number of fighters with entry action states, columns = left or right
+extern s32 Fighter_Status_EntryStatusIndex[26][2]; // Rows = number of fighters with entry action states, columns = left or right
 
 void func_ovl3_8013DBE0(GObj *fighter_gobj)
 {
