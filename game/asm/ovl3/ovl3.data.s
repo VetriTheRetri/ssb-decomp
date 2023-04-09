@@ -873,7 +873,7 @@ glabel Rebirth_Halo_Offset_X
   .balign 4
   .incbin "ovl3.raw.bin", 0x5699C, 0x4
 
-glabel D_ovl3_801884A0
+glabel Fighter_Status_EntryStatusIndex
   .incbin "ovl3.raw.bin", 0x569A0, 0xD8
 
 glabel D_ovl3_80188578
