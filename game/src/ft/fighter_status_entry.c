@@ -1,8 +1,6 @@
 #include "fighter.h"
 #include "gmground.h"
 
-#define FTCOMMON_ENTRY_WAIT 120
-
 void func_ovl3_8013D930(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);

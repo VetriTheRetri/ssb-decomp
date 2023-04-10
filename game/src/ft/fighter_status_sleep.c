@@ -1,8 +1,6 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
-#define FTCOMMON_SLEEP_STOCK_STEAL_WAIT 30
-
 bool32 func_ovl3_8013D580(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);

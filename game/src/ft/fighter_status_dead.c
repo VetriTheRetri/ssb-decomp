@@ -2,10 +2,6 @@
 #include "gmmatch.h"
 #include "gmground.h"
 
-#define FTCOMMON_DEAD_REBIRTH_WAIT 45
-#define FTCOMMON_DEADUP_REBIRTH_WAIT 180
-#define FTCOMMON_DEADUPFALL_VEL_Z -83.333336F
-
 void func_ovl3_8013BC60(u16 sfx_id)
 {
     func_800269C0(sfx_id);

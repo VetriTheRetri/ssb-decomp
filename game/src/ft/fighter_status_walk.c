@@ -1,8 +1,5 @@
 #include "fighter.h"
 
-#define FTCOMMON_WALKFAST_STICK_RANGE_MIN 62        // Minimum stick range required for fast walk speed
-#define FTCOMMON_WALKMIDDLE_STICK_RANGE_MIN 26      // Minimum stick range required for medium walk speed
-
 f32 func_ovl3_8013E2E0(Fighter_Struct *fp, s32 status_id)
 {
     f32 walk_anim_speed;

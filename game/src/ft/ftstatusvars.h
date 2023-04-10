@@ -14,6 +14,33 @@
 #include <game/src/ft/chara/ftness/ftness_statusvars.h>
 #include <game/src/ft/chara/ftmasterhand/ftmasterhand_statusvars.h>
 
+#define FTCOMMON_DEAD_REBIRTH_WAIT 45
+#define FTCOMMON_DEADUP_REBIRTH_WAIT 180
+#define FTCOMMON_DEADUPFALL_VEL_Z -83.333336F
+
+#define FTCOMMON_REBIRTH_INVINCIBLE_FRAMES 120 // Invincibility frames; setting this to 0 makes invincibility last forever (?)
+#define FTCOMMON_REBIRTH_HALO_LOWER_WAIT 90
+#define FTCOMMON_REBIRTH_HALO_DESPAWN_WAIT 390
+#define FTCOMMON_REBIRTH_HALO_UNK_WAIT 45
+#define FTCOMMON_REBIRTH_HALO_STAND_WAIT 75
+
+#define FTCOMMON_SLEEP_STOCK_STEAL_WAIT 30
+
+#define FTCOMMON_ENTRY_WAIT 120
+
+#define FTCOMMON_WALKFAST_STICK_RANGE_MIN 62        // Minimum stick range required for fast walk speed
+#define FTCOMMON_WALKMIDDLE_STICK_RANGE_MIN 26      // Minimum stick range required for medium walk speed
+
+#define FTCOMMON_TURN_STICK_RANGE_MIN (-20)
+
+#define FTCOMMON_DASH_BUFFER_FRAMES_MAX 3           // Dash will register if stick range is greater than 56 units within this window of time
+#define FTCOMMON_DASH_STICK_RANGE_MIN 56
+#define FTCOMMON_DASH_DECELERATE_BEGIN 7.0F
+
+#define FTCOMMON_RUN_STICK_RANGE_MIN 50
+
+#define FTCOMMON_TURNRUN_STICK_RANGE_MIN (-30)
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -71,6 +98,17 @@ typedef struct ftCommon_Entry_StatusVars
 
 } ftCommon_Entry_StatusVars;
 
+typedef struct ftCommon_Turn_StatusVars
+{
+    bool32 is_allow_turn_direction; // Cannot turn around at all if disabled + horizontal controls are inverted?
+    bool32 is_disable_interrupts; // Sort of weird, still allows three interrupts even if false, one being shield and the other being jumpsquat, I don't know the third one
+    u16 button_mask;
+    s32 lr_dash;
+    s32 lr_turn;
+    s32 unk_0x14;
+
+} ftCommon_Turn_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -98,6 +136,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Rebirth_StatusVars rebirth;
     ftCommon_Sleep_StatusVars sleep;
     ftCommon_Entry_StatusVars entry;
+    ftCommon_Turn_StatusVars turn;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

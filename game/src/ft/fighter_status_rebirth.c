@@ -2,12 +2,6 @@
 #include "gmmatch.h"
 #include "gmground.h"
 
-#define FTCOMMON_REBIRTH_INVINCIBLE_FRAMES 120 // Invincibility frames; setting this to 0 makes invincibility last forever (?)
-#define FTCOMMON_REBIRTH_HALO_LOWER_WAIT 90
-#define FTCOMMON_REBIRTH_HALO_DESPAWN_WAIT 390
-#define FTCOMMON_REBIRTH_HALO_UNK_WAIT 45
-#define FTCOMMON_REBIRTH_HALO_STAND_WAIT 75
-
 extern ftStatus_Rebirth_CustomVars D_ovl2_80116DD0;
 extern f32 Rebirth_Halo_Offset_X[GMMATCH_PLAYERS_MAX];
 
