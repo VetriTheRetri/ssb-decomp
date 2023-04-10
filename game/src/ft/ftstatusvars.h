@@ -33,13 +33,21 @@
 
 #define FTCOMMON_TURN_STICK_RANGE_MIN (-20)
 
-#define FTCOMMON_DASH_BUFFER_FRAMES_MAX 3           // Dash will register if stick range is greater than 56 units within this window of time
+#define FTCOMMON_DASH_BUFFER_FRAMES_MAX 3           // Dash will register if stick range is greater than or equal to FTCOMMON_DASH_STICK_RANGE_MIN within this window of time
 #define FTCOMMON_DASH_STICK_RANGE_MIN 56
 #define FTCOMMON_DASH_DECELERATE_BEGIN 7.0F
 
 #define FTCOMMON_RUN_STICK_RANGE_MIN 50
 
 #define FTCOMMON_TURNRUN_STICK_RANGE_MIN (-30)
+
+#define FTCOMMON_KNEEBEND_INPUT_TYPE_NONE 0
+#define FTCOMMON_KNEEBEND_INPUT_TYPE_STICK 1
+#define FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON 2
+#define FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX 3       // Jumpsquat will register if stick range is greater than FTCOMMON_KNEEBEND_STICK_RANGE_MIN within this window of time
+#define FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN 44    // Used for jumpsquat interrupt from run?
+#define FTCOMMON_KNEEBEND_STICK_RANGE_MIN 52
+#define FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES 3.0F     // Universal short hop window, unlike Melee where the user must simply not be holding their jump input on the last frame of jumpsquat
 
 typedef struct ftCommon_Filler
 {
@@ -109,6 +117,15 @@ typedef struct ftCommon_Turn_StatusVars
 
 } ftCommon_Turn_StatusVars;
 
+typedef struct ftCommon_KneeBend_StatusVars
+{
+    f32 jump_force;
+    f32 anim_frame;
+    s32 input_source;
+    bool32 is_short_hop;
+
+} ftCommon_KneeBend_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -137,6 +154,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Sleep_StatusVars sleep;
     ftCommon_Entry_StatusVars entry;
     ftCommon_Turn_StatusVars turn;
+    ftCommon_KneeBend_StatusVars kneebend;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

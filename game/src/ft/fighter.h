@@ -779,7 +779,7 @@ struct Fighter_Struct
         u16 button_mask_l;
         u16 button_hold;
         u16 button_press;
-        u16 button_unk;
+        u16 button_mask_c;
         Vec2b stick_range; // Might be range?
         Vec2b padding;
         u16 button_mask_com;
