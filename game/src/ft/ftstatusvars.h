@@ -45,8 +45,14 @@
 #define FTCOMMON_KNEEBEND_INPUT_TYPE_STICK 1
 #define FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON 2
 #define FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX 3       // Jumpsquat will register if stick range is greater than FTCOMMON_KNEEBEND_STICK_RANGE_MIN within this window of time
+#define FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE (-10)   // Stick X range to determine whether to usee JumpF or JumpB action state
 #define FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN 44    // Used for jumpsquat interrupt from run?
-#define FTCOMMON_KNEEBEND_STICK_RANGE_MIN 52
+#define FTCOMMON_KNEEBEND_STICK_RANGE_MIN 53        // Minimum stick Y range required for stick jump
+#define FTCOMMON_KNEEBEND_BUTTON_SHORT_FORCE 9.0F   // Jump force of C-button short jump
+#define FTCOMMON_KNEEBEND_BUTTON_LONG_FORCE 17.0F   // Jump force of C-button long jump
+#define FTCOMMON_KNEEBEND_BUTTON_SHORT_MIN 36.0F    // Minimum short jump height possible with C-button input
+#define FTCOMMON_KNEEBEND_BUTTON_LONG_MIN 63.0F     // Minimum long jump height possible with C-button input
+#define FTCOMMON_KNEEBEND_BUTTON_HEIGHT_CLAMP 77.0F // Maximum jump height possible with C-button input
 #define FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES 3.0F     // Universal short hop window, unlike Melee where the user must simply not be holding their jump input on the last frame of jumpsquat
 
 typedef struct ftCommon_Filler

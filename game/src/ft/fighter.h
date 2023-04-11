@@ -57,7 +57,7 @@ typedef struct ftCommonAttributes
     f32 gravity;
     f32 fall_speed_max;
     f32 fast_fall_speed;
-    u32 jumps_max; // Number of jumps
+    s32 jumps_max; // Number of jumps
     f32 weight;
     f32 attack11_follow_window; // Jab combo connection frames
     f32 dash_to_run; // Frames before dash transitions to run?

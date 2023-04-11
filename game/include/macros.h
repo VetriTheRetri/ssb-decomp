@@ -10,15 +10,15 @@
 #define PI32 3.1415927F
 #define DOUBLE_PI32 6.2831855F
 
-#define U8_MAX 0xFF
+#define U8_MAX 0xFFU
 #define S8_MAX 0x7F
 #define S8_MIN 0x80
 
-#define U16_MAX 0xFFFF
+#define U16_MAX 0xFFFFU
 #define S16_MAX 0x7FFF
 #define S16_MIN 0x8000
 
-#define U32_MAX 0xFFFFFFFF
+#define U32_MAX 0xFFFFFFFFU
 #define S32_MAX 0x7FFFFFFF
 #define S32_MIN 0x80000000
 
