@@ -2,8 +2,11 @@
 #include "ftkirby.h"
 #include "ftpurin.h"
 
+// These arrays are strange, Kirby begins at .rodata padding 0x80188578, and index is never zero, but ends up using the correct values regardless???
+// If Kirby DOES beging at 0x80188578, that means his array accesses overflow into Jigglypuff's starting at index 0x4
+
 f32 Fighter_Kirby_JumpAerialVelY[ftStatus_Kirby_JumpAerialF5 - ftStatus_Kirby_JumpAerialF1] = { 60.0F, 52.0F, 47.0F, 40.0F };
-f32 Fighter_Purin_JumpAerialVelY[ftStatus_Purin_JumpAerialF5 - ftStatus_Purin_JumpAerialF1] = { 60.0F, 40.0F, 20.0F, 0.0F  };
+f32 Fighter_Purin_JumpAerialVelY[ftStatus_Purin_JumpAerialF5 - ftStatus_Purin_JumpAerialF1] = { 60.0F, 40.0F, 20.0F,  0.0F };
 
 void func_ovl3_8013FA90(Fighter_Struct *fp)
 {

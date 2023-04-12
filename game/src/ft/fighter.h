@@ -604,7 +604,7 @@ struct Fighter_Struct
     } status_info;
 
     s32 percent_damage;
-    s32 armor; // Used as HP in Kirby's Stone
+    s32 armor; // Resits a specified amount of % damage before breaking, effectively damage-based armor
     s32 x34_unk;
     s32 x38_unk;
     s32 x3C_unk;
@@ -848,7 +848,7 @@ struct Fighter_Struct
 
     u8 filler_0x7B4[0x7E8 - 0x7B4];
 
-    f32 knockback_resist; // Resist this many units of knockback; practically super armor, but why is this a different var than Kirby's Stone?
+    f32 knockback_resist; // Resist this many units of knockback, effectively knockback-based armor
     f32 unk_0x7EC;
     s32 unk_0x7F0;
     s32 unk_0x7F4;
