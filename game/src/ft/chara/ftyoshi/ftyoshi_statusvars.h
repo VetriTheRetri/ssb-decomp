@@ -5,6 +5,8 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+#define FTYOSHI_JUMPAERIAL_KNOCKBACK_RESIST 140.0F
+
 typedef struct ftYoshi_SpecialN_StatusVars
 {
     u32 unk_0x0;

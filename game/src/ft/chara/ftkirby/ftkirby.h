@@ -81,7 +81,7 @@ typedef enum ftKirbyAction
 {
     ftStatus_Kirby_Attack100Start = ftStatus_Common_SpecialStart,
     ftStatus_Kirby_Attack100Loop,
-    ftStatus_kirby_Attack100End,
+    ftStatus_Kirby_Attack100End,
     ftStatus_Kirby_JumpAerialF1,
     ftStatus_Kirby_JumpAerialF2,
     ftStatus_Kirby_JumpAerialF3,

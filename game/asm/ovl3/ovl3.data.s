@@ -876,7 +876,7 @@ glabel Rebirth_Halo_Offset_X
 glabel Fighter_Status_EntryStatusIndex
   .incbin "ovl3.raw.bin", 0x569A0, 0xD8
 
-glabel D_ovl3_80188578
+glabel Fighter_Kirby_JumpAerialVelY
   /* 56A78 102FB8 80188578 */
   .4byte 0x000000 # .float 0.0
   .incbin "ovl3.raw.bin", 0x56A7C, 0x4
@@ -887,7 +887,7 @@ glabel D_ovl3_80188578
   .asciz "BP"
   .balign 4
 
-glabel D_ovl3_80188588
+glabel Fighter_Purin_JumpAerialVelY
   /* 56A88 102FC8 80188588 */
   .4byte 0x423c0000 # .float 47.0
   /* 56A8C 102FCC 8018858C */

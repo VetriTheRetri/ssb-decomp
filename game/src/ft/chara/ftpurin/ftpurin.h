@@ -14,7 +14,7 @@ typedef enum ftPurinAction
     ftStatus_Purin_Attack100Start = ftStatus_Common_SpecialStart,
     ftStatus_Purin_Attack100Loop,
     ftStatus_Purin_Attack100End,            // These are all unused
-    ftStauts_Purin_JumpAerialF1,
+    ftStatus_Purin_JumpAerialF1,
     ftStatus_purin_JumpAerialF2,
     ftStatus_Purin_JumpAerialF3,
     ftStatus_Purin_JumpAerialF4,

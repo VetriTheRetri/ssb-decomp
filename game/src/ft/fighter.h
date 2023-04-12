@@ -7,7 +7,7 @@
 #include <game/src/sys/hal_input.h>
 #include <game/src/sys/obj.h>
 #include <game/src/mp/mpcoll.h>
-#include <game/src/ft/ftstatusvars.h>
+#include <game/src/ft/fightervars.h>
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 
@@ -848,7 +848,7 @@ struct Fighter_Struct
 
     u8 filler_0x7B4[0x7E8 - 0x7B4];
 
-    f32 unk_0x7E8;
+    f32 knockback_resist; // Resist this many units of knockback; practically super armor, but why is this a different var than Kirby's Stone?
     f32 unk_0x7EC;
     s32 unk_0x7F0;
     s32 unk_0x7F4;

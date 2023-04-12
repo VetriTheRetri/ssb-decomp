@@ -5,6 +5,8 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+#define FTKIRBY_JUMPAERIAL_VEL_MUL 0.8F
+
 typedef struct ftKirby_FighterVars
 {
     s32 copy_id;

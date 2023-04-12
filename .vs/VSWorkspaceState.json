@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftmario",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\mp",
-    "\\game\\src\\sys"
+    "\\game\\src\\ft\\chara\\ftkirby",
+    "\\game\\src\\ft\\chara\\ftpurin",
+    "\\game\\src\\ft\\chara\\ftyoshi",
+    "\\game\\src\\ft\\common",
+    "\\game\\src\\it\\article"
   ],
-  "SelectedNode": "\\game\\src\\ft\\fighter_status_walk.c",
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftyoshi\\ftyoshi_statusvars.h",
   "PreviewInSolutionExplorer": false
 }
