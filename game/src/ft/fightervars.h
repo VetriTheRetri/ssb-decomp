@@ -170,7 +170,8 @@ typedef struct ftCommon_Damage_StatusVars
     u32 hitstun_timer;
     s32 dust_gfx_int;
     f32 knockback;
-    u8 filler_0xC[0x30 - 0xC];
+    u16 coll_flags;
+    u8 filler_0xC[0x30 - 0xE];
     s32 unk_0x30;
 
 } ftCommon_Damage_StatusVars;

@@ -220,3 +220,17 @@ void func_ovl3_80140934(void) // Unused
 {
     return;
 }
+
+void func_ovl3_8014093C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if ((func_ovl2_800DEDAC(fighter_gobj) != FALSE)                 &&
+    (func_ovl3_80141C6C(fighter_gobj) == FALSE)                     &&
+    (fp->status_vars.common.damage.coll_flags & MPCOLL_MASK_GROUND) &&
+    (func_ovl3_80144760(fighter_gobj) == FALSE)                     &&
+    (func_ovl3_801446BC(fighter_gobj) == FALSE))
+    {
+        func_ovl3_80144498(fighter_gobj);
+    }
+}
