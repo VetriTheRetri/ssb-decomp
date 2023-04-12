@@ -35,17 +35,17 @@ void func_ovl3_8015A138(GObj *fighter_gobj)
 
     if (ABSF(dist_x) > 30.0F)
     {
-        fp->phys_info.vel_normal.x = (dist_x > 0.0F) ? 30.0F : -30.0F;
+        fp->phys_info.vel_air.x = (dist_x > 0.0F) ? 30.0F : -30.0F;
     }
     else
     {
-        fp->phys_info.vel_normal.x = dist_x;
+        fp->phys_info.vel_air.x = dist_x;
     }
     fp->status_vars.masterhand.drill.follow_timer--;
 
     if (fp->status_vars.masterhand.drill.follow_timer == 0)
     {
-        fp->phys_info.vel_normal.x = 0.0F;
+        fp->phys_info.vel_air.x = 0.0F;
         fp->cb_physics = jtgt_ovl2_800D9414;
     }
 }

@@ -15,7 +15,7 @@ void func_ovl3_8015DC94(GObj *fighter_gobj)
     if (fp->cmd_flags.flag1 != FALSE)
     {
         fp->cmd_flags.flag1 = FALSE;
-        fp->phys_info.vel_normal.x = (f32)fp->lr * FTSAMUS_SCREWATTACK_VEL_X_BASE;
+        fp->phys_info.vel_air.x = (f32)fp->lr * FTSAMUS_SCREWATTACK_VEL_X_BASE;
     }
     if (fp->ground_or_air == air)
     {
@@ -42,7 +42,7 @@ void func_ovl3_8015DD58(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        if (fp->phys_info.vel_normal.y >= 0.0F)
+        if (fp->phys_info.vel_air.y >= 0.0F)
         {
             func_ovl2_800DE724(fighter_gobj);
         }
@@ -84,7 +84,7 @@ void jtgt_ovl3_8015DE90(GObj *fighter_gobj)
     func_ovl2_800E0830(fighter_gobj);
 
     fp->jumps_used = fp->attributes->jumps_max;
-    fp->phys_info.vel_normal.y = FTSAMUS_SCREWATTACK_VEL_Y_BASE;
+    fp->phys_info.vel_air.y = FTSAMUS_SCREWATTACK_VEL_Y_BASE;
 
     func_ovl2_800D8E78(fp, 20.0F);
 }

@@ -18,9 +18,9 @@ void func_ovl3_80159BD0(GObj *fighter_gobj)
 
         if (ABSF(dist_x) > 35.0F)
         {
-            fp->phys_info.vel_normal.x = (dist_x > 0.0F) ? 35.0F : -35.0F;
+            fp->phys_info.vel_air.x = (dist_x > 0.0F) ? 35.0F : -35.0F;
         }
-        else fp->phys_info.vel_normal.x = dist_x;
+        else fp->phys_info.vel_air.x = dist_x;
     }
 }
 

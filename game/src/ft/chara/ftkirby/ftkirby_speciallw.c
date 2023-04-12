@@ -47,7 +47,7 @@ void func_ovl3_8016141C(GObj *fighter_gobj)
 
 void func_ovl3_80161468(Fighter_Struct *fp)
 {
-    fp->phys_info.vel_normal.y = FTKIRBY_STONE_FALL_VEL;
+    fp->phys_info.vel_air.y = FTKIRBY_STONE_FALL_VEL;
 }
 
 f32 func_ovl3_80161478(Fighter_Struct *fp)
@@ -280,8 +280,8 @@ void jtgt_ovl3_80161A94(GObj *fighter_gobj)
     fp->cmd_flags.flag2 = 0;
     fp->cmd_flags.flag1 = 0;
 
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x = 0.0F;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x = 0.0F;
 }
 
 void jtgt_ovl3_80161AEC(GObj *fighter_gobj) // Unused
@@ -319,8 +319,8 @@ void jtgt_ovl3_80161B70(GObj *fighter_gobj)
         fp->cmd_flags.flag1 = 0;
     }
 
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x = 0.0F;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x = 0.0F;
 }
 
 void func_ovl3_80161C0C(GObj *fighter_gobj)

@@ -159,7 +159,7 @@ void jtgt_ovl3_80164348(GObj *fighter_gobj)
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialAirHi, 0.0F, 1.0F, 0U);
     func_ovl2_800E0830(fighter_gobj);
 
-    fp->phys_info.vel_normal.y = 69.0F;
+    fp->phys_info.vel_air.y = 69.0F;
 
     fp->jumps_used = fp->attributes->jumps_max;
 

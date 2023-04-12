@@ -8,7 +8,7 @@ void func_ovl3_80159B00(GObj *fighter_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    fp->phys_info.vel_normal.y += 50.0F;
+    fp->phys_info.vel_air.y += 50.0F;
 }
 
 void func_ovl3_80159B3C(GObj *fighter_gobj)

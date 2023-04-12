@@ -215,13 +215,13 @@ void func_ovl3_8015D7AC(GObj *fighter_gobj)
         {
             charge_recoil_x = (f32)(fp->fighter_vars.samus.charge_level + 1);
 
-            fp->phys_info.vel_normal.x = (f32) (((FTSAMUS_CHARGE_RECOIL_MUL * charge_recoil_x) + FTSAMUS_CHARGE_RECOIL_BASE) * (f32)-fp->lr);
+            fp->phys_info.vel_air.x = (f32) (((FTSAMUS_CHARGE_RECOIL_MUL * charge_recoil_x) + FTSAMUS_CHARGE_RECOIL_BASE) * (f32)-fp->lr);
 
             charge_recoil_y = charge_recoil_x + FTSAMUS_CHARGE_RECOIL_ADD + ((f32)fp->fighter_vars.samus.charge_recoil * -FTSAMUS_CHARGE_RECOIL_BASE);
 
-            if (fp->phys_info.vel_normal.y < charge_recoil_y)
+            if (fp->phys_info.vel_air.y < charge_recoil_y)
             {
-                fp->phys_info.vel_normal.y = charge_recoil_y;
+                fp->phys_info.vel_air.y = charge_recoil_y;
             }
             fp->fighter_vars.samus.charge_recoil++;
         }

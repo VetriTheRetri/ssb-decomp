@@ -296,6 +296,6 @@ void jtgt_ovl3_8015D290(GObj* fighter_gobj)
     func_ovl2_800E0830(fighter_gobj);
     func_ovl3_8015D1E0(fighter_gobj);
 
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x /= 2;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x /= 2;
 }

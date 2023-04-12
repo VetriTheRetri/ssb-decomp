@@ -23,12 +23,12 @@ void func_ovl3_8015ADE8(GObj *fighter_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    fp->phys_info.vel_normal.x = 0.0F;
-    fp->phys_info.vel_normal.y = __sinf(QUART_PI32) * 100.0F;
+    fp->phys_info.vel_air.x = 0.0F;
+    fp->phys_info.vel_air.y = __sinf(QUART_PI32) * 100.0F;
 
     vel_z = cosf(QUART_PI32) * 100.0F;
 
     fp->status_vars.masterhand.dead.dead_timer = 200;
 
-    fp->phys_info.vel_normal.z = -vel_z;
+    fp->phys_info.vel_air.z = -vel_z;
 }

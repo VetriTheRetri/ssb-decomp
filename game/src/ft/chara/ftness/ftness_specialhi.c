@@ -171,8 +171,8 @@ void jtgt_ovl3_80154030(GObj *fighter_gobj)
 
     func_ovl3_80153FCC(fighter_gobj);
 
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x /= 2;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x /= 2;
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialAirHiStart, 0.0F, 1.0F, 0);
     func_ovl2_800E0830(fighter_gobj);
@@ -406,16 +406,16 @@ void func_ovl3_80154598(GObj *fighter_gobj, Coll_Data *coll_data)
         tangent = ((tangent + PI32) < rotation) ? (tangent + (-PI32)) : (tangent + HALF_PI32);
     }
 
-    vec3_get_euler_rotation(&fp->phys_info.vel_normal, 4, tangent - (fp->status_vars.ness.specialhi.pk_jibaku_vel  * (f32)fp->lr));
+    vec3_get_euler_rotation(&fp->phys_info.vel_air, 4, tangent - (fp->status_vars.ness.specialhi.pk_jibaku_vel  * (f32)fp->lr));
 
-    fp->status_vars.ness.specialhi.pk_jibaku_vel = atan2f(fp->phys_info.vel_normal.y, fp->phys_info.vel_normal.x * (f32)fp->lr);
+    fp->status_vars.ness.specialhi.pk_jibaku_vel = atan2f(fp->phys_info.vel_air.y, fp->phys_info.vel_air.x * (f32)fp->lr);
 }
 
 void func_ovl3_80154758(GObj *fighter_gobj) // Joint use here, fix array later to include all joints w/ TopN 
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->joint[4]->rotate.x = (f32)((atan2f(fp->phys_info.vel_normal.x, fp->phys_info.vel_normal.y) * (f32)fp->lr) - HALF_PI32);
+    fp->joint[4]->rotate.x = (f32)((atan2f(fp->phys_info.vel_air.x, fp->phys_info.vel_air.y) * (f32)fp->lr) - HALF_PI32);
 
     func_ovl2_800EB528(fp->joint[4]);
 }
@@ -461,31 +461,31 @@ void func_ovl3_80154820(GObj *fighter_gobj)
 void func_ovl3_80154874(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    f32 vel_x_bak = fp->phys_info.vel_normal.x;
-    f32 vel_y_bak = fp->phys_info.vel_normal.y;
+    f32 vel_x_bak = fp->phys_info.vel_air.x;
+    f32 vel_y_bak = fp->phys_info.vel_air.y;
     f32 fabs_axis;
     f32 fabs_axis_bak;
 
-    fp->phys_info.vel_normal.x -= (6.142857F * cosf(fp->status_vars.ness.specialhi.pk_jibaku_vel) * (f32)fp->lr);
+    fp->phys_info.vel_air.x -= (6.142857F * cosf(fp->status_vars.ness.specialhi.pk_jibaku_vel) * (f32)fp->lr);
 
-    fp->phys_info.vel_normal.y -= (6.142857F * __sinf(fp->status_vars.ness.specialhi.pk_jibaku_vel));
+    fp->phys_info.vel_air.y -= (6.142857F * __sinf(fp->status_vars.ness.specialhi.pk_jibaku_vel));
 
-    fabs_axis = ABSF(fp->phys_info.vel_normal.x);
+    fabs_axis = ABSF(fp->phys_info.vel_air.x);
 
     fabs_axis_bak = ABSF(vel_x_bak);
 
     if (fabs_axis_bak < fabs_axis)
     {
-        fp->phys_info.vel_normal.x = vel_x_bak;
+        fp->phys_info.vel_air.x = vel_x_bak;
     }
 
-    fabs_axis = ABSF(fp->phys_info.vel_normal.y);
+    fabs_axis = ABSF(fp->phys_info.vel_air.y);
 
     fabs_axis_bak = ABSF(vel_y_bak);
 
     if (fabs_axis_bak < fabs_axis)
     {
-        fp->phys_info.vel_normal.y = vel_y_bak;
+        fp->phys_info.vel_air.y = vel_y_bak;
     }
 
     func_ovl3_80154758(fighter_gobj);
@@ -538,10 +538,10 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
             func_ovl3_80144C24(fighter_gobj);
             return;
         }
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_normal))
+        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
         {
-            fp->phys_info.vel_normal.x = 0.0F;
-            fp->phys_info.vel_normal.y = 0.0F;
+            fp->phys_info.vel_air.x = 0.0F;
+            fp->phys_info.vel_air.y = 0.0F;
 
             func_ovl2_800DEE98(fp);
             func_ovl3_80144498(fighter_gobj);
@@ -557,7 +557,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
 
     if (fp->coll_data.coll_mask & MPCOLL_MASK_CEIL)
     {
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_normal))
+        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_air))
         {
             pos.y += fp->coll_data.object_coll.top;
             func_ovl3_80155114(fighter_gobj, &fp->coll_data.ceil_angle, &pos);
@@ -567,7 +567,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
     if (fp->coll_data.coll_mask & MPCOLL_MASK_RWALL)
     {
 
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_normal))
+        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_air))
         {
             pos.x += fp->coll_data.object_coll.width;
             pos.y += fp->coll_data.object_coll.center;
@@ -580,7 +580,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
     if (fp->coll_data.coll_mask & MPCOLL_MASK_LWALL)
     {
 
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_normal))
+        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_air))
         {
             pos.x -= fp->coll_data.object_coll.width;
             pos.y += fp->coll_data.object_coll.center;
@@ -623,7 +623,7 @@ void func_ovl3_80154D1C(GObj *fighter_gobj)
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialAirHi, frame_begin, 1.0F, 0x93U);
 
-    fp->status_vars.ness.specialhi.pk_jibaku_vel = atan2f(fp->phys_info.vel_normal.y, fp->phys_info.vel_normal.x * (f32)fp->lr);
+    fp->status_vars.ness.specialhi.pk_jibaku_vel = atan2f(fp->phys_info.vel_air.y, fp->phys_info.vel_air.x * (f32)fp->lr);
 
     fp->jumps_used = fp->attributes->jumps_max;
 }
@@ -696,8 +696,8 @@ void func_ovl3_80154F54(GObj *fighter_gobj)
 
     fp->status_vars.ness.specialhi.pk_jibaku_vel  = atan2f(vel_y, ((f32)fp->lr * vel_x));
 
-    fp->phys_info.vel_normal.x = (f32)(cosf(fp->status_vars.ness.specialhi.pk_jibaku_vel ) * 200.0F * (f32)fp->lr);
-    fp->phys_info.vel_normal.y = (f32)(__sinf(fp->status_vars.ness.specialhi.pk_jibaku_vel ) * 200.0F);
+    fp->phys_info.vel_air.x = (f32)(cosf(fp->status_vars.ness.specialhi.pk_jibaku_vel ) * 200.0F * (f32)fp->lr);
+    fp->phys_info.vel_air.y = (f32)(__sinf(fp->status_vars.ness.specialhi.pk_jibaku_vel ) * 200.0F);
 
     func_ovl3_80154DBC(fighter_gobj);
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialAirHi, 0.0F, 1.0F, 2U);
@@ -733,14 +733,14 @@ void func_ovl3_801550AC(GObj *fighter_gobj)
 void func_ovl3_80155114(GObj *fighter_gobj, Vec3f *arg1, Vec3f *arg2)
 {
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
-    Vec3f *vel = &fp->phys_info.vel_normal;
+    Vec3f *vel = &fp->phys_info.vel_air;
 
     func_ovl0_800C7B08(vel);
     func_ovl0_800C7AE0(vel, 0.5F);
     func_ovl0_800C7A84(vel);
     func_ovl2_800D8EB8(fp);
 
-    fp->lr = (fp->phys_info.vel_normal.x < 0.0F) ? RIGHT : LEFT;
+    fp->lr = (fp->phys_info.vel_air.x < 0.0F) ? RIGHT : LEFT;
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialAirHiBound, 0.0F, 1.0F, 0U);
     func_ovl2_800E0830(fighter_gobj);

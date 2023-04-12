@@ -90,7 +90,7 @@ void jtgt_ovl3_8015B974(GObj *fighter_gobj)
 
     func_ovl2_800DEEC8(fp);
 
-    fp->phys_info.vel_normal.y = 0.0F;
+    fp->phys_info.vel_air.y = 0.0F;
 
     func_ovl3_8015B8E8(fighter_gobj, FALSE);
 }
@@ -99,7 +99,7 @@ void jtgt_ovl3_8015B9B8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->phys_info.vel_normal.y = FTDONKEY_SPINNINGKONG_AIR_VEL_Y;
+    fp->phys_info.vel_air.y = FTDONKEY_SPINNINGKONG_AIR_VEL_Y;
 
     func_ovl3_8015B8E8(fighter_gobj, TRUE);
 }

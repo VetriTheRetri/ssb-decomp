@@ -15,8 +15,8 @@ void func_ovl3_801591A0(GObj *fighter_gobj)
     if (magnitude < 5.0F)
     {
         fp->status_vars.masterhand.move.magnitude = 0.0F;
-        fp->phys_info.vel_normal.x = vel.x;
-        fp->phys_info.vel_normal.y = vel.y;
+        fp->phys_info.vel_air.x = vel.x;
+        fp->phys_info.vel_air.y = vel.y;
     }
     else
     {
@@ -26,8 +26,8 @@ void func_ovl3_801591A0(GObj *fighter_gobj)
 
         vec3f_scale(&vel, magnitude * 0.1F);
 
-        fp->phys_info.vel_normal.x = vel.x;
-        fp->phys_info.vel_normal.y = vel.y;
+        fp->phys_info.vel_air.x = vel.x;
+        fp->phys_info.vel_air.y = vel.y;
     }
 }
 
@@ -41,9 +41,9 @@ void func_ovl3_80159260(GObj *fighter_gobj)
 
     if (fp->status_vars.masterhand.move.magnitude == 0.0F)
     {
-        fp->phys_info.vel_normal.z = 0.0F;
-        fp->phys_info.vel_normal.y = 0.0F;
-        fp->phys_info.vel_normal.x = 0.0F;
+        fp->phys_info.vel_air.z = 0.0F;
+        fp->phys_info.vel_air.y = 0.0F;
+        fp->phys_info.vel_air.x = 0.0F;
 
         fp->status_vars.masterhand.move.cb(fighter_gobj);
     }

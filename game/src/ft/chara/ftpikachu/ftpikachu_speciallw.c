@@ -333,7 +333,7 @@ void func_ovl3_801525C8(GObj *fighter_gobj)
     func_ovl2_800E0830(fighter_gobj);
     func_ovl3_80152578(fighter_gobj);
 
-    fp->phys_info.vel_normal.y = FTPIKACHU_THUNDER_HIT_VEL_Y;
+    fp->phys_info.vel_air.y = FTPIKACHU_THUNDER_HIT_VEL_Y;
 }
 
 void func_ovl3_80152620(GObj *fighter_gobj)

@@ -11,5 +11,5 @@ void func_ovl3_80159DD4(GObj *fighter_gobj)
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_GootsubuDown, 0.0F, 1.0F, 0U);
 
-    fp->phys_info.vel_normal.y = 0.0F;
+    fp->phys_info.vel_air.y = 0.0F;
 }

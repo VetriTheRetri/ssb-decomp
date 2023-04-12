@@ -61,18 +61,18 @@ void func_ovl3_8013FBC4(GObj *fighter_gobj)
     ftCommonAttributes *attributes = fp->attributes;
     f32 vel_x;
 
-    func_ovl2_800D9260(fp, &fp->status_vars.common.jumpaerial.drift, &fp->phys_info.vel_normal.y, &fp->phys_info.vel_normal.z);
+    func_ovl2_800D9260(fp, &fp->status_vars.common.jumpaerial.drift, &fp->phys_info.vel_air.y, &fp->phys_info.vel_air.z);
 
-    fp->phys_info.vel_normal.x = fp->status_vars.common.jumpaerial.vel_x;
+    fp->phys_info.vel_air.x = fp->status_vars.common.jumpaerial.vel_x;
 
     if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
         func_ovl2_800D9044(fp, attributes);
         func_ovl2_800D9074(fp, attributes);
     }
-    fp->status_vars.common.jumpaerial.vel_x = fp->phys_info.vel_normal.x;
+    fp->status_vars.common.jumpaerial.vel_x = fp->phys_info.vel_air.x;
 
-    fp->phys_info.vel_normal.x += fp->status_vars.common.jumpaerial.drift;
+    fp->phys_info.vel_air.x += fp->status_vars.common.jumpaerial.drift;
 }
 
 void func_ovl3_8013FC4C(GObj *fighter_gobj)
@@ -133,13 +133,13 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
     }
     else stick_range_x = fp->input.stick_range.x; // Last minute bruh moment from HAL
 
-    fp->phys_info.vel_normal.y = (((stick_range_y * attributes->jump_height_mul) + attributes->jump_height_base) * attributes->aerial_jump_height);
+    fp->phys_info.vel_air.y = (((stick_range_y * attributes->jump_height_mul) + attributes->jump_height_base) * attributes->aerial_jump_height);
 
     if ((fp->ft_kind == Ft_Kind_Ness) || (fp->ft_kind == Ft_Kind_PolyNess))
     {
         fp->status_vars.common.jumpaerial.vel_x = stick_range_x * attributes->aerial_jump_vel_x;
     }
-    else fp->phys_info.vel_normal.x = stick_range_x * attributes->aerial_jump_vel_x;
+    else fp->phys_info.vel_air.x = stick_range_x * attributes->aerial_jump_vel_x;
 
     fp->jumps_used++;
 
@@ -184,11 +184,11 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     }
     else stick_range_x = fp->input.stick_range.x;
 
-    fp->phys_info.vel_normal.x = stick_range_x * attributes->aerial_jump_vel_x;
+    fp->phys_info.vel_air.x = stick_range_x * attributes->aerial_jump_vel_x;
 
     if (fp->jumps_used == 1)
     {
-        fp->phys_info.vel_normal.y = (((stick_range_y * attributes->jump_height_mul) + attributes->jump_height_base) * attributes->aerial_jump_height);
+        fp->phys_info.vel_air.y = (((stick_range_y * attributes->jump_height_mul) + attributes->jump_height_base) * attributes->aerial_jump_height);
 
         fp->buffer_stick_y = U8_MAX - 1;
     }
@@ -196,12 +196,12 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     {
     case Ft_Kind_Kirby:
     case Ft_Kind_PolyKirby:
-        fp->phys_info.vel_normal.y = Fighter_Kirby_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
+        fp->phys_info.vel_air.y = Fighter_Kirby_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
         break;
 
     case Ft_Kind_Purin:
     case Ft_Kind_PolyPurin:
-        fp->phys_info.vel_normal.y = Fighter_Purin_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
+        fp->phys_info.vel_air.y = Fighter_Purin_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
         break;
     }
     fp->jumps_used++;

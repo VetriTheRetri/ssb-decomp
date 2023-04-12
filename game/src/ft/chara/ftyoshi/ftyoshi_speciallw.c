@@ -38,7 +38,7 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->cmd_flags.flag1 != 0U) && (fp->phys_info.vel_normal.y <= 0.0F))
+    if ((fp->cmd_flags.flag1 != 0U) && (fp->phys_info.vel_air.y <= 0.0F))
     {
         if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
         {
@@ -116,20 +116,20 @@ void func_ovl3_8015F0A8(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 vel_y_bak;
 
-    if (ABSF(fp->phys_info.vel_normal.x) > FTYOSHI_YOSHIBOMB_VEL_X_CLAMP)
+    if (ABSF(fp->phys_info.vel_air.x) > FTYOSHI_YOSHIBOMB_VEL_X_CLAMP)
     {
-        fp->phys_info.vel_normal.x = (f32)(TERN_VEL_LR(fp->phys_info.vel_normal.x) * FTYOSHI_YOSHIBOMB_VEL_X_CLAMP);
+        fp->phys_info.vel_air.x = (f32)(TERN_VEL_LR(fp->phys_info.vel_air.x) * FTYOSHI_YOSHIBOMB_VEL_X_CLAMP);
     }
 
-    vel_y_bak = fp->phys_info.vel_normal.y;
+    vel_y_bak = fp->phys_info.vel_air.y;
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Yoshi_SpecialAirLwLoop, fighter_gobj->anim_frame, 0, 1U);
     func_ovl2_800E0830(fighter_gobj);
 
-    fp->phys_info.vel_normal.y = vel_y_bak;
+    fp->phys_info.vel_air.y = vel_y_bak;
 
     if (vel_y_bak > FTYOSHI_YOSHIBOMB_VEL_Y_CLAMP)
     {
-        fp->phys_info.vel_normal.y = FTYOSHI_YOSHIBOMB_VEL_Y_CLAMP;
+        fp->phys_info.vel_air.y = FTYOSHI_YOSHIBOMB_VEL_Y_CLAMP;
     }
 }

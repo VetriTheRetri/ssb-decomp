@@ -218,7 +218,7 @@ void func_ovl3_8016104C(GObj *fighter_gobj)
                 func_ovl3_80144C24(fighter_gobj);
 
             }
-            else if ((fp->coll_data.coll_type & MPCOLL_MASK_GROUND) && (fp->phys_info.vel_normal.y < 0.0F))
+            else if ((fp->coll_data.coll_type & MPCOLL_MASK_GROUND) && (fp->phys_info.vel_air.y < 0.0F))
             {
                 func_ovl2_800DEE98(fp);
                 func_ovl3_80161210(fighter_gobj);
@@ -276,7 +276,7 @@ void jtgt_ovl3_801611A8(GObj *fighter_gobj)
 void func_ovl3_801612D8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    f32 vel_y_bak = fp->phys_info.vel_normal.y;
+    f32 vel_y_bak = fp->phys_info.vel_air.y;
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialHiFall, 0.0F, 1.0F, 4U);
     func_ovl2_800E0830(fighter_gobj);
@@ -286,5 +286,5 @@ void func_ovl3_801612D8(GObj *fighter_gobj)
 
     fp->jumps_used = fp->attributes->jumps_max;
 
-    fp->phys_info.vel_normal.y = vel_y_bak;
+    fp->phys_info.vel_air.y = vel_y_bak;
 }

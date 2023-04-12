@@ -214,9 +214,9 @@ void func_ovl3_80162258(GObj *fighter_gobj)
             func_ovl3_8014C508(kirby_fp->catch_gobj, fighter_gobj);
             func_ovl2_800E80C4(victim_fp, fighter_gobj);
 
-            victim_fp->phys_info.vel_normal.z = 0.0F;
-            victim_fp->phys_info.vel_normal.y = 0.0F;
-            victim_fp->phys_info.vel_normal.x = (f32) (-victim_fp->lr * 120.0F);
+            victim_fp->phys_info.vel_air.z = 0.0F;
+            victim_fp->phys_info.vel_air.y = 0.0F;
+            victim_fp->phys_info.vel_air.x = (f32) (-victim_fp->lr * 120.0F);
         }
     }
 }
@@ -233,11 +233,11 @@ void func_ovl3_801622DC(GObj *fighter_gobj)
 
             func_ovl3_8014C6AC(kirby_fp->catch_gobj);
 
-            victim_fp->phys_info.vel_normal.y = (f32) (__sinf(1.308997F) * 100.0F);
+            victim_fp->phys_info.vel_air.y = (f32) (__sinf(1.308997F) * 100.0F);
 
-            victim_fp->phys_info.vel_normal.x = (f32) (cosf(1.308997F) * victim_fp->lr * 100.0F);
+            victim_fp->phys_info.vel_air.x = (f32) (cosf(1.308997F) * victim_fp->lr * 100.0F);
 
-            victim_fp->phys_info.vel_normal.z = 0.0F;
+            victim_fp->phys_info.vel_air.z = 0.0F;
         }
     }
 }

@@ -72,8 +72,8 @@ void func_ovl3_80152934(GObj *fighter_gobj)
     fp->status_vars.pikachu.specialhi.coll_timer_unk = 0;
 
     fp->phys_info.vel_ground.x = 0.0F;
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x = 0.0F;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x = 0.0F;
 }
 
 void func_ovl3_80152960(GObj *fighter_gobj)
@@ -129,7 +129,7 @@ void func_ovl3_80152AA0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->joint[FTPIKACHU_QUICKATTACK_BASE_JOINT]->rotate.x = (atan2f(fp->phys_info.vel_normal.x, fp->phys_info.vel_normal.y) * (f32)fp->lr) - HALF_PI32;
+    fp->joint[FTPIKACHU_QUICKATTACK_BASE_JOINT]->rotate.x = (atan2f(fp->phys_info.vel_air.x, fp->phys_info.vel_air.y) * (f32)fp->lr) - HALF_PI32;
 
     fp->joint[FTPIKACHU_QUICKATTACK_BASE_JOINT]->scale.x = FTPIKACHU_QUICKATTACK_SCALE_X;
     fp->joint[FTPIKACHU_QUICKATTACK_BASE_JOINT]->scale.y = FTPIKACHU_QUICKATTACK_SCALE_Y;
@@ -192,7 +192,7 @@ void func_ovl3_80152C2C(GObj *fighter_gobj)
             func_ovl3_80144C24(fighter_gobj);
 
         }
-        else if (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_normal))
+        else if (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
         {
             func_ovl2_800DEE98(fp);
             func_ovl3_801535F4(fighter_gobj);
@@ -201,15 +201,15 @@ void func_ovl3_80152C2C(GObj *fighter_gobj)
     }
     else
     {
-        if ((fp->coll_data.coll_mask & MPCOLL_MASK_CEIL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_normal)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_CEIL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_air)))
         {
             func_ovl3_80153654(fighter_gobj);
         }
-        if ((fp->coll_data.coll_mask & MPCOLL_MASK_RWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_normal)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_RWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_air)))
         {
             func_ovl3_80153654(fighter_gobj);
         }
-        if ((fp->coll_data.coll_mask & MPCOLL_MASK_LWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_normal)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_LWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_air)))
         {
             func_ovl3_80153654(fighter_gobj);
         }
@@ -319,14 +319,14 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
 
     func_ovl3_80152E2C(fighter_gobj);
 
-    fp->phys_info.vel_normal.x = cosf(tangent) * ((FTPIKACHU_QUICKATTACK_VEL_BASE * sqrt_stick_range) + FTPIKACHU_QUICKATTACK_VEL_ADD) * (f32)fp->lr;
+    fp->phys_info.vel_air.x = cosf(tangent) * ((FTPIKACHU_QUICKATTACK_VEL_BASE * sqrt_stick_range) + FTPIKACHU_QUICKATTACK_VEL_ADD) * (f32)fp->lr;
 
-    fp->phys_info.vel_normal.y = __sinf(tangent) * ((FTPIKACHU_QUICKATTACK_VEL_BASE * sqrt_stick_range) + FTPIKACHU_QUICKATTACK_VEL_ADD);
+    fp->phys_info.vel_air.y = __sinf(tangent) * ((FTPIKACHU_QUICKATTACK_VEL_BASE * sqrt_stick_range) + FTPIKACHU_QUICKATTACK_VEL_ADD);
 
     if (fp->status_vars.pikachu.specialhi.is_subsequent_zip != FALSE)
     {
-        fp->phys_info.vel_normal.x *= FTPIKACHU_QUICKATTACK_VEL_MUL;
-        fp->phys_info.vel_normal.y *= FTPIKACHU_QUICKATTACK_VEL_MUL;
+        fp->phys_info.vel_air.x *= FTPIKACHU_QUICKATTACK_VEL_MUL;
+        fp->phys_info.vel_air.y *= FTPIKACHU_QUICKATTACK_VEL_MUL;
     }
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHi, 0.0F, 0.0F, 0U);
@@ -439,7 +439,7 @@ void func_ovl3_80153414(GObj *fighter_gobj)
     }
     else
     {
-        fp->phys_info.vel_normal.y -= (fp->phys_info.vel_normal.y / FTPIKACHU_QUICKATTACK_VEL_Y_DIV);
+        fp->phys_info.vel_air.y -= (fp->phys_info.vel_air.y / FTPIKACHU_QUICKATTACK_VEL_Y_DIV);
 
         func_ovl2_800D9074(fp, fp->attributes);
     }
@@ -480,12 +480,12 @@ void func_ovl3_801535C4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->status_vars.pikachu.specialhi.vel_x_bak = fp->phys_info.vel_normal.x;
-    fp->status_vars.pikachu.specialhi.vel_y_bak = fp->phys_info.vel_normal.y;
+    fp->status_vars.pikachu.specialhi.vel_x_bak = fp->phys_info.vel_air.x;
+    fp->status_vars.pikachu.specialhi.vel_y_bak = fp->phys_info.vel_air.y;
     fp->status_vars.pikachu.specialhi.vel_ground_bak = fp->phys_info.vel_ground.x;
 
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x = 0.0F;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x = 0.0F;
     fp->phys_info.vel_ground.x = 0.0F;
 }
 
@@ -507,8 +507,8 @@ void func_ovl3_80153654(GObj *fighter_gobj)
 
     func_ovl3_801535C4(fighter_gobj);
 
-    fp->phys_info.vel_normal.x = (f32)(fp->status_vars.pikachu.specialhi.vel_x_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
-    fp->phys_info.vel_normal.y = (f32)(fp->status_vars.pikachu.specialhi.vel_y_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
+    fp->phys_info.vel_air.x = (f32)(fp->status_vars.pikachu.specialhi.vel_x_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
+    fp->phys_info.vel_air.y = (f32)(fp->status_vars.pikachu.specialhi.vel_y_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHiEnd, 0.0F, 1.0F, 0U);
     func_ovl2_800E0830(fighter_gobj);

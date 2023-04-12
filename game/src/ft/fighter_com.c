@@ -435,8 +435,8 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
             {
                 DObj *other_joint = other_fp->joint[0];
                 DObj *this_joint = this_fp->joint[0];
-                f32 other_x = (other_joint->translate.x + other_fp->phys_info.vel_normal.x * 3.0F);
-                f32 other_y = (other_joint->translate.y + other_fp->phys_info.vel_normal.x * 3.0F);
+                f32 other_x = (other_joint->translate.x + other_fp->phys_info.vel_air.x * 3.0F);
+                f32 other_y = (other_joint->translate.y + other_fp->phys_info.vel_air.x * 3.0F);
                 f32 sqrt_xy = sqrtf(SQUARE(this_joint->translate.y - other_y) + SQUARE(this_joint->translate.x - other_x));
 
                 if ((other_fp->special_status == ftSpecialStatus_Star) && (sqrt_xy < 1500.0F))

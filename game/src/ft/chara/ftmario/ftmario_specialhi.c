@@ -78,9 +78,9 @@ void func_ovl3_80156240(GObj *fighter_gobj)
     {
         func_ovl2_800D93E4(fighter_gobj);
 
-        fp->phys_info.vel_normal.x *= 0.95F;
-        fp->phys_info.vel_normal.y *= 0.95F;
-        fp->phys_info.vel_normal.z *= 0.95F;
+        fp->phys_info.vel_air.x *= 0.95F;
+        fp->phys_info.vel_air.y *= 0.95F;
+        fp->phys_info.vel_air.z *= 0.95F;
         return;
     }
 
@@ -109,7 +109,7 @@ void func_ovl3_80156358(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        if ((fp->cmd_flags.flag1 == FALSE) || ((fp->phys_info.vel_normal.y >= 0.0F)))
+        if ((fp->cmd_flags.flag1 == FALSE) || ((fp->phys_info.vel_air.y >= 0.0F)))
         {
             func_ovl2_800DE724(fighter_gobj);
         }
@@ -157,8 +157,8 @@ void jtgt_ovl3_80156478(GObj* fighter_gobj)
 
     fp->status_vars.mario.specialhi.is_air_bool = TRUE;
 
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x /= 1.5F;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x /= 1.5F;
 
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialAirHi, 0.0F, 1.0F, 0U);
     func_ovl2_800E0830(fighter_gobj);

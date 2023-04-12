@@ -25,16 +25,16 @@ void func_ovl3_80159F40(GObj *fighter_gobj)
 
         if (magnitude < 5.0F)
         {
-            fp->phys_info.vel_normal.x = vel.x;
-            fp->phys_info.vel_normal.y = vel.y;
+            fp->phys_info.vel_air.x = vel.x;
+            fp->phys_info.vel_air.y = vel.y;
         }
         else
         {
             vec3f_normalize(&vel);
             vec3f_scale(&vel, magnitude * 0.1F);
 
-            fp->phys_info.vel_normal.x = vel.x;
-            fp->phys_info.vel_normal.y = vel.y;
+            fp->phys_info.vel_air.x = vel.x;
+            fp->phys_info.vel_air.y = vel.y;
         }
     }
 }

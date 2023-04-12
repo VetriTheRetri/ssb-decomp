@@ -55,22 +55,22 @@ void func_ovl3_801603F0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *common_attrs = AttributesGetStruct(fp);
 
-    fp->phys_info.vel_normal.x = fp->status_vars.captain.specialhi.vel.x;
-    fp->phys_info.vel_normal.y = fp->status_vars.captain.specialhi.vel.y;
-    fp->phys_info.vel_normal.z = 0.0F;
+    fp->phys_info.vel_air.x = fp->status_vars.captain.specialhi.vel.x;
+    fp->phys_info.vel_air.y = fp->status_vars.captain.specialhi.vel.y;
+    fp->phys_info.vel_air.z = 0.0F;
 
     if (func_ovl2_800D8EDC(fp, common_attrs->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL) == FALSE)
     {
         func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTCAPTAIN_FALCONDIVE_AIR_ACCEL_MUL, common_attrs->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL);
         func_ovl2_800D9074(fp, common_attrs);
     }
-    fp->status_vars.captain.specialhi.vel.x = fp->phys_info.vel_normal.x;
-    fp->status_vars.captain.specialhi.vel.y = fp->phys_info.vel_normal.y;
+    fp->status_vars.captain.specialhi.vel.x = fp->phys_info.vel_air.x;
+    fp->status_vars.captain.specialhi.vel.y = fp->phys_info.vel_air.y;
 
     func_ovl2_800D93E4(fighter_gobj);
 
-    fp->phys_info.vel_normal.x += fp->status_vars.captain.specialhi.vel.x;
-    fp->phys_info.vel_normal.y += fp->status_vars.captain.specialhi.vel.y;
+    fp->phys_info.vel_air.x += fp->status_vars.captain.specialhi.vel.x;
+    fp->phys_info.vel_air.y += fp->status_vars.captain.specialhi.vel.y;
 }
 
 void func_ovl3_801604D8(GObj *fighter_gobj)
@@ -94,7 +94,7 @@ void func_ovl3_80160560(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->phys_info.vel_normal.y < 0.0F)
+    if (fp->phys_info.vel_air.y < 0.0F)
     {
         if (fp->cmd_flags.flag2 == 0)
         {

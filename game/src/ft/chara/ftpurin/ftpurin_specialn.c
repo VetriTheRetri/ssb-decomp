@@ -49,8 +49,8 @@ void func_ovl3_801512EC(GObj *fighter_gobj)
 
         boost = func_ovl3_80151274(fp->input.stick_range.y);
 
-        fp->phys_info.vel_normal.y = (f32)(__sinf(boost) * FTPURIN_POUND_VEL_BASE);
-        fp->phys_info.vel_normal.x = (f32)(cosf(boost) * (f32)fp->lr * FTPURIN_POUND_VEL_BASE);
+        fp->phys_info.vel_air.y = (f32)(__sinf(boost) * FTPURIN_POUND_VEL_BASE);
+        fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTPURIN_POUND_VEL_BASE);
     }
 
     switch (fp->cmd_flags.flag2)
@@ -60,8 +60,8 @@ void func_ovl3_801512EC(GObj *fighter_gobj)
         break;
 
     case 1:
-        fp->phys_info.vel_normal.y *= FTPURIN_POUND_VEL_MUL;
-        fp->phys_info.vel_normal.x *= FTPURIN_POUND_VEL_MUL;
+        fp->phys_info.vel_air.y *= FTPURIN_POUND_VEL_MUL;
+        fp->phys_info.vel_air.x *= FTPURIN_POUND_VEL_MUL;
         break;
 
     case 2:

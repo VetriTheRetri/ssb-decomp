@@ -311,8 +311,8 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
         switch (fp->cmd_flags.flag1)
         {
         case 0:
-            fp->phys_info.vel_normal.y = ((Ground_Info->cam_bound_top * 0.6F) - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
-            fp->phys_info.vel_normal.z = FTCOMMON_DEADUPFALL_VEL_Z;
+            fp->phys_info.vel_air.y = ((Ground_Info->cam_bound_top * 0.6F) - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
+            fp->phys_info.vel_air.z = FTCOMMON_DEADUPFALL_VEL_Z;
 
             fp->unk_ft_0xA88_b0 = TRUE;
 
@@ -391,7 +391,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
     case 1:
         if (DObjGetStruct(fighter_gobj)->translate.y < Ground_Info->blastzone_bottom)
         {
-            fp->phys_info.vel_normal.y = 0.0F;
+            fp->phys_info.vel_air.y = 0.0F;
         }
         break;
 
@@ -407,7 +407,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
         switch (fp->cmd_flags.flag1)
         {
         case 0:
-            fp->phys_info.vel_normal.y = (Ground_Info->cam_bound_bottom - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
+            fp->phys_info.vel_air.y = (Ground_Info->cam_bound_bottom - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
             DObjGetStruct(fighter_gobj)->translate.z = (D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.z - 3000.0F);
 
             if (DObjGetStruct(fighter_gobj)->translate.z < 2000.0F)
@@ -517,33 +517,33 @@ bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
         {
             pos->y = Ground_Info->blastzone_bottom + 500.0F;
 
-            fp->phys_info.vel_normal.x = 0.0F;
-            fp->phys_info.vel_normal.y = 0.0F;
-            fp->phys_info.vel_normal.z = 0.0F;
+            fp->phys_info.vel_air.x = 0.0F;
+            fp->phys_info.vel_air.y = 0.0F;
+            fp->phys_info.vel_air.z = 0.0F;
         }
         else if (Ground_Info->blastzone_top < pos->y)
         {
             pos->y = Ground_Info->blastzone_top - 500.0F;
 
-            fp->phys_info.vel_normal.x = 0.0F;
-            fp->phys_info.vel_normal.y = 0.0F;
-            fp->phys_info.vel_normal.z = 0.0F;
+            fp->phys_info.vel_air.x = 0.0F;
+            fp->phys_info.vel_air.y = 0.0F;
+            fp->phys_info.vel_air.z = 0.0F;
         }
         if (Ground_Info->blastzone_right < pos->x)
         {
             pos->x = Ground_Info->blastzone_right - 500.0F;
 
-            fp->phys_info.vel_normal.x = 0.0F;
-            fp->phys_info.vel_normal.y = 0.0F;
-            fp->phys_info.vel_normal.z = 0.0F;
+            fp->phys_info.vel_air.x = 0.0F;
+            fp->phys_info.vel_air.y = 0.0F;
+            fp->phys_info.vel_air.z = 0.0F;
         }
         else if (pos->x < Ground_Info->blastzone_left)
         {
             pos->x = Ground_Info->blastzone_left + 500.0F;
 
-            fp->phys_info.vel_normal.x = 0.0F;
-            fp->phys_info.vel_normal.y = 0.0F;
-            fp->phys_info.vel_normal.z = 0.0F;
+            fp->phys_info.vel_air.x = 0.0F;
+            fp->phys_info.vel_air.y = 0.0F;
+            fp->phys_info.vel_air.z = 0.0F;
         }
         return FALSE;
     }

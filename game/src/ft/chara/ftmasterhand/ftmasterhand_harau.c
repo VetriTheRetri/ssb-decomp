@@ -27,7 +27,7 @@ void func_ovl3_8015946C(GObj *fighter_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    fp->phys_info.vel_normal.x += fp->lr * FTMASTERHAND_HARAU_VEL_X;
+    fp->phys_info.vel_air.x += fp->lr * FTMASTERHAND_HARAU_VEL_X;
 }
 
 void func_ovl3_801594BC(GObj *fighter_gobj)

@@ -123,7 +123,7 @@ void func_ovl3_8015C054(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->joint[4]->rotate.x = (atan2f(fp->phys_info.vel_normal.x, fp->phys_info.vel_normal.y) * (f32)fp->lr) - HALF_PI32;
+    fp->joint[4]->rotate.x = (atan2f(fp->phys_info.vel_air.x, fp->phys_info.vel_air.y) * (f32)fp->lr) - HALF_PI32;
     func_ovl2_800EB528(fp->joint[4]);
 }
 
@@ -165,8 +165,8 @@ void func_ovl3_8015C15C(GObj *fighter_gobj)
 
     if (fp->status_vars.fox.specialhi.decelerate_delay >= FTFOX_FIREFOX_DECELERATE_DELAY)
     {
-        fp->phys_info.vel_normal.x -= (f32)(FTFOX_FIREFOX_DECELERATE_VEL * cosf(fp->status_vars.fox.specialhi.angle) * (f32)fp->lr);
-        fp->phys_info.vel_normal.y -= (f32)(FTFOX_FIREFOX_DECELERATE_VEL * __sinf(fp->status_vars.fox.specialhi.angle));
+        fp->phys_info.vel_air.x -= (f32)(FTFOX_FIREFOX_DECELERATE_VEL * cosf(fp->status_vars.fox.specialhi.angle) * (f32)fp->lr);
+        fp->phys_info.vel_air.y -= (f32)(FTFOX_FIREFOX_DECELERATE_VEL * __sinf(fp->status_vars.fox.specialhi.angle));
     }
     func_ovl3_8015C054(fighter_gobj);
 }
@@ -205,9 +205,9 @@ void func_ovl3_8015C29C(GObj *fighter_gobj)
     {
         coll_mask = (fp->coll_data.unk_0x54 ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & MPCOLL_MASK_GROUND;
 
-        if (((coll_mask & MPCOLL_MASK_GROUND) == 0) || (func_ovl0_800C7C98(&fp->phys_info.vel_normal, &fp->coll_data.ground_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) == FALSE))
+        if (((coll_mask & MPCOLL_MASK_GROUND) == 0) || (func_ovl0_800C7C98(&fp->phys_info.vel_air, &fp->coll_data.ground_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) == FALSE))
         {
-            if (D_ovl3_8018C88C < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_normal))
+            if (D_ovl3_8018C88C < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
             {
                 func_ovl3_8015CA64(fighter_gobj);
                 return;
@@ -222,27 +222,27 @@ void func_ovl3_8015C29C(GObj *fighter_gobj)
 
     if (coll_mask & MPCOLL_MASK_CEIL)
     {
-        if (func_ovl0_800C7C98(&fp->phys_info.vel_normal, &fp->coll_data.ceil_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) != FALSE)
+        if (func_ovl0_800C7C98(&fp->phys_info.vel_air, &fp->coll_data.ceil_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) != FALSE)
         {
             goto coll_end;
         }
     }
     else if (coll_mask & MPCOLL_MASK_RWALL)
     {
-        if (func_ovl0_800C7C98(&fp->phys_info.vel_normal, &fp->coll_data.rwall_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) != FALSE)
+        if (func_ovl0_800C7C98(&fp->phys_info.vel_air, &fp->coll_data.rwall_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) != FALSE)
         {
             goto coll_end;
         }
     }
-    else if ((coll_mask & MPCOLL_MASK_LWALL) && (func_ovl0_800C7C98(&fp->phys_info.vel_normal, &fp->coll_data.lwall_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) != FALSE))
+    else if ((coll_mask & MPCOLL_MASK_LWALL) && (func_ovl0_800C7C98(&fp->phys_info.vel_air, &fp->coll_data.lwall_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) != FALSE))
     {
     coll_end:
 
-        fp->lr = (fp->phys_info.vel_normal.x >= 0.0F) ? RIGHT : LEFT;
+        fp->lr = (fp->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 
         fp->joint[0]->rotate.y = (f32)((f32)fp->lr * HALF_PI32);
 
-        fp->status_vars.fox.specialhi.angle = atan2f(fp->phys_info.vel_normal.y, fp->phys_info.vel_normal.x * (f32)fp->lr);
+        fp->status_vars.fox.specialhi.angle = atan2f(fp->phys_info.vel_air.y, fp->phys_info.vel_air.x * (f32)fp->lr);
 
         func_ovl3_8015C054(fighter_gobj);
     }
@@ -356,8 +356,8 @@ void func_ovl3_8015C60C(GObj *fighter_gobj)
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialAirHi, 0.0F, 1.0F, 2U);
     func_ovl3_8015C4C8(fp);
 
-    fp->phys_info.vel_normal.x = (f32)(cosf(fp->status_vars.fox.specialhi.angle) * 115.0F * (f32)fp->lr);
-    fp->phys_info.vel_normal.y = (f32)(__sinf(fp->status_vars.fox.specialhi.angle) * 115.0F);
+    fp->phys_info.vel_air.x = (f32)(cosf(fp->status_vars.fox.specialhi.angle) * 115.0F * (f32)fp->lr);
+    fp->phys_info.vel_air.y = (f32)(__sinf(fp->status_vars.fox.specialhi.angle) * 115.0F);
 
     func_ovl3_8015C054(fighter_gobj);
 
@@ -487,6 +487,6 @@ void jtgt_ovl3_8015CB10(GObj *fighter_gobj)
     func_ovl2_800E0830(fighter_gobj);
     func_ovl3_8015CAA4(fp);
 
-    fp->phys_info.vel_normal.y = 0.0F;
-    fp->phys_info.vel_normal.x /= 2;
+    fp->phys_info.vel_air.y = 0.0F;
+    fp->phys_info.vel_air.x /= 2;
 }

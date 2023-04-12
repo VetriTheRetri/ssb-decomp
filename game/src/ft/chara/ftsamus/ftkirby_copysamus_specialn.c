@@ -214,13 +214,13 @@ void func_ovl3_80157314(GObj *fighter_gobj)
         {
             charge_recoil_x = (f32)(fp->fighter_vars.kirby.copysamus_charge_level + 1);
 
-            fp->phys_info.vel_normal.x = (f32)(((FTKIRBY_COPYSAMUS_CHARGE_RECOIL_MUL * charge_recoil_x) + FTKIRBY_COPYSAMUS_CHARGE_RECOIL_BASE) * (f32)-fp->lr);
+            fp->phys_info.vel_air.x = (f32)(((FTKIRBY_COPYSAMUS_CHARGE_RECOIL_MUL * charge_recoil_x) + FTKIRBY_COPYSAMUS_CHARGE_RECOIL_BASE) * (f32)-fp->lr);
 
             charge_recoil_y = charge_recoil_x + FTKIRBY_COPYSAMUS_CHARGE_RECOIL_ADD + ((f32)fp->fighter_vars.kirby.copysamus_charge_recoil * -FTKIRBY_COPYSAMUS_CHARGE_RECOIL_BASE);
 
-            if (fp->phys_info.vel_normal.y < charge_recoil_y)
+            if (fp->phys_info.vel_air.y < charge_recoil_y)
             {
-                fp->phys_info.vel_normal.y = charge_recoil_y;
+                fp->phys_info.vel_air.y = charge_recoil_y;
             }
             fp->fighter_vars.kirby.copysamus_charge_recoil++;
         }

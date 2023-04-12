@@ -29,18 +29,18 @@ void func_ovl3_8015AB08(GObj *fighter_gobj)
     {
         f32 vel_x = (dist_x > 0.0F) ? 40.0F : -40.0F;
 
-        fp->phys_info.vel_normal.x += vel_x;
+        fp->phys_info.vel_air.x += vel_x;
     }
     else
     {
-        fp->phys_info.vel_normal.x += dist_x;
+        fp->phys_info.vel_air.x += dist_x;
     }
 
     fp->status_vars.masterhand.okutsubushi.follow_timer--;
 
     if (fp->status_vars.masterhand.okutsubushi.follow_timer == 0)
     {
-        fp->phys_info.vel_normal.x = 0.0F;
+        fp->phys_info.vel_air.x = 0.0F;
         fp->cb_physics = func_ovl2_800D938C;
     }
     func_ovl3_80158528(fighter_gobj);

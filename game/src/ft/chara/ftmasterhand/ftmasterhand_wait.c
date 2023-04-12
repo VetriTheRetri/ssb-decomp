@@ -28,8 +28,8 @@ void func_ovl3_801587B0(GObj *fighter_gobj)
     s32 vel_x = (ABS(fp->input.stick_range.x) >= 8) ? fp->input.stick_range.x : 0;
     s32 vel_y = (ABS(fp->input.stick_range.y) >= 8) ? fp->input.stick_range.y : 0;
 
-    fp->phys_info.vel_normal.x = (f32)vel_x;
-    fp->phys_info.vel_normal.y = (f32)vel_y;
+    fp->phys_info.vel_air.x = (f32)vel_x;
+    fp->phys_info.vel_air.y = (f32)vel_y;
 }
 
 void func_ovl3_80158824(GObj *fighter_gobj)
@@ -263,8 +263,8 @@ void func_ovl3_80158FB4(GObj *fighter_gobj)
 
         vec3f_scale(&vel, magnitude * 0.1F);
 
-        fp->phys_info.vel_normal.x = vel.x;
-        fp->phys_info.vel_normal.y = vel.y;
+        fp->phys_info.vel_air.x = vel.x;
+        fp->phys_info.vel_air.y = vel.y;
     }
 }
 

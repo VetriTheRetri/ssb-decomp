@@ -59,7 +59,7 @@ void func_ovl3_80156630(GObj *fighter_gobj)
 
     if ((fp->cmd_flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
     {
-        fp->phys_info.vel_normal.y += FTMARIO_TORNADO_TAP_VEL_ADD;
+        fp->phys_info.vel_air.y += FTMARIO_TORNADO_TAP_VEL_ADD;
 
         func_ovl3_80156808(fighter_gobj);
     }
@@ -137,7 +137,7 @@ void jtgt_ovl3_8015688C(GObj *fighter_gobj)
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
     func_ovl2_800E0830(fighter_gobj);
 
-    fp->phys_info.vel_normal.y = -7.0F;
+    fp->phys_info.vel_air.y = -7.0F;
 
     func_ovl2_800D8E78(fp, 17.0F);
     func_ovl3_8015686C(fighter_gobj);
@@ -157,7 +157,7 @@ void jtgt_ovl3_80156910(GObj *fighter_gobj)
 
     tornado_vel_y = (fp->fighter_vars.mario.is_tornado_charge != FALSE) ? 0.0F : 22.0F;
 
-    fp->phys_info.vel_normal.y = (f32)(15.0F - tornado_vel_y);
+    fp->phys_info.vel_air.y = (f32)(15.0F - tornado_vel_y);
 
     func_ovl2_800D8E78(fp, 17.0F);
     func_ovl3_8015686C(fighter_gobj);

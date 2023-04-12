@@ -65,6 +65,21 @@
 #define FTCOMMON_JUMPAERIAL_TURN_INVERT_LR_WAIT 6           // Invert facing direction on this frame of the direction turn process          
 #define FTCOMMON_JUMPAERIAL_TURN_ROTATE_STEP (-0.2617994F)  // Model Y-rotation step for characters who can turn around during their double jump
 
+#define FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX 4
+#define FTCOMMON_DAMAGE_SMASH_DI_RANGE_MIN 53
+#define FTCOMMON_DAMAGE_GFX_WAIT_LOW 0
+#define FTCOMMON_DAMAGE_GFX_WAIT_MID_LOW 8
+#define FTCOMMON_DAMAGE_GFX_WAIT_MID 5
+#define FTCOMMON_DAMAGE_GFX_WAIT_MID_HIGH 3
+#define FTCOMMON_DAMAGE_GFX_WAIT_HIGH 2
+#define FTCOMMON_DAMAGE_GFX_WAIT_DEFAULT 1
+#define FTCOMMON_DAMAGE_KNOCKBACK_LOW 120.0F
+#define FTCOMMON_DAMAGE_KNOCKBACK_MID_LOW 150.0F
+#define FTCOMMON_DAMAGE_KNOCKBACK_MID 200.0F
+#define FTCOMMON_DAMAGE_KNOCKBACK_MID_HIGH 300.0F
+#define FTCOMMON_DAMAGE_KNOCKBACK_HIGH 600.0F
+#define FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL 2.1F
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -150,6 +165,16 @@ typedef struct ftCommon_JumpAerial_StatusVars
 
 } ftCommon_JumpAerial_StatusVars;
 
+typedef struct ftCommon_Damage_StatusVars
+{
+    u32 hitstun_timer;
+    s32 dust_gfx_int;
+    f32 knockback;
+    u8 filler_0xC[0x30 - 0xC];
+    s32 unk_0x30;
+
+} ftCommon_Damage_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -180,10 +205,10 @@ typedef union ftCommon_StatusVars
     ftCommon_Turn_StatusVars turn;
     ftCommon_KneeBend_StatusVars kneebend;
     ftCommon_JumpAerial_StatusVars jumpaerial;
+    ftCommon_Damage_StatusVars damage;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
-    ftCommon_Filler filler;
 
 } ftCommon_StatusVars;
 

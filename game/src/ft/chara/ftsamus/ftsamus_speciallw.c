@@ -95,7 +95,7 @@ void func_ovl3_8015E170(GObj *fighter_gobj)
     func_ovl2_800DEEC8(fp);
     func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
 
-    fp->phys_info.vel_normal.y = FTSAMUS_BOMB_VEL_Y_BASE;
+    fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE;
     fp->jumps_used = common_attrs->jumps_max;
 }
 
@@ -132,7 +132,7 @@ void jtgt_ovl3_8015E274(GObj *fighter_gobj)
     func_ovl2_800E0830(fighter_gobj);
     func_ovl3_8015E218(fp);
 
-    fp->phys_info.vel_normal.y = FTSAMUS_BOMB_VEL_Y_BASE - FTSAMUS_BOMB_VEL_Y_SUB;
+    fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE - FTSAMUS_BOMB_VEL_Y_SUB;
 
     func_ovl2_800D8E78(fp, common_attrs->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
 

@@ -49,8 +49,8 @@ void func_ovl3_801518EC(GObj *fighter_gobj)
 
         boost = func_ovl3_80151874(fp->input.stick_range.y);
 
-        fp->phys_info.vel_normal.y = (f32)(__sinf(boost) * FTKIRBY_COPYPURIN_POUND_VEL_BASE);
-        fp->phys_info.vel_normal.x = (f32)(cosf(boost) * (f32)fp->lr * FTKIRBY_COPYPURIN_POUND_VEL_BASE);
+        fp->phys_info.vel_air.y = (f32)(__sinf(boost) * FTKIRBY_COPYPURIN_POUND_VEL_BASE);
+        fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTKIRBY_COPYPURIN_POUND_VEL_BASE);
     }
 
     switch (fp->cmd_flags.flag2)
@@ -60,8 +60,8 @@ void func_ovl3_801518EC(GObj *fighter_gobj)
         break;
 
     case 1:
-        fp->phys_info.vel_normal.y *= FTKIRBY_COPYPURIN_POUND_VEL_MUL;
-        fp->phys_info.vel_normal.x *= FTKIRBY_COPYPURIN_POUND_VEL_MUL;
+        fp->phys_info.vel_air.y *= FTKIRBY_COPYPURIN_POUND_VEL_MUL;
+        fp->phys_info.vel_air.x *= FTKIRBY_COPYPURIN_POUND_VEL_MUL;
         break;
 
     case 2:

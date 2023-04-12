@@ -67,8 +67,8 @@ void func_ovl3_80160934(GObj *fighter_gobj)
 
         boost = func_ovl3_80160894(fp->input.stick_range.y);
 
-        fp->phys_info.vel_normal.y = (f32)(__sinf(boost) * FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_BASE);
-        fp->phys_info.vel_normal.x = (f32)(cosf(boost) * (f32)fp->lr * FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_BASE);
+        fp->phys_info.vel_air.y = (f32)(__sinf(boost) * FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_BASE);
+        fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_BASE);
     }
 
     func_ovl3_80160810(fighter_gobj);
@@ -80,8 +80,8 @@ void func_ovl3_80160934(GObj *fighter_gobj)
         break;
 
     case 1:
-        fp->phys_info.vel_normal.y *= FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_MUL; // Interestingly, Kirby's version multiplies by singles, 
-        fp->phys_info.vel_normal.x *= FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_MUL; // as opposed to Falcon's multiplying by doubles
+        fp->phys_info.vel_air.y *= FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_MUL; // Interestingly, Kirby's version multiplies by singles, 
+        fp->phys_info.vel_air.x *= FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_MUL; // as opposed to Falcon's multiplying by doubles
         break;
 
     case 2:

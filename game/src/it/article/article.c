@@ -1250,19 +1250,19 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
                 {
                     fp = FighterGetStruct(fighter_gobj);
 
-                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (((fp->unk_0x278 != NULL) ? fp->unk_0x280 : fp->team) != ap->team) || (ap->is_damage_all))
+                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (((fp->throw_gobj != NULL) ? fp->unk_0x280 : fp->team) != ap->team) || (ap->is_damage_all))
                     {
                         if (!(fp->x192_flag_b2))
                         {
                             k = 0;
 
-                            if ((ap->owner_gobj == NULL) || (fp->unk_0x278 == NULL) || (fp->unk_0x278 != ap->owner_gobj))
+                            if ((ap->owner_gobj == NULL) || (fp->throw_gobj == NULL) || (fp->throw_gobj != ap->owner_gobj))
                             {
                                 for (i = 0; i < ARRAY_COUNT(D_ovl2_801311A0); i++)
                                 {
                                     ft_hit = &fp->fighter_hit[i];
 
-                                    if ((ft_hit->update_state != 0) && ((ap->ground_or_air == air) && (ft_hit->is_hit_air) || (ap->ground_or_air == ground) && (ft_hit->is_hit_ground)))
+                                    if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ap->ground_or_air == air) && (ft_hit->is_hit_air) || (ap->ground_or_air == ground) && (ft_hit->is_hit_ground)))
                                     {
                                         fighter_victim_flags.flags_b0 = fighter_victim_flags.flags_b1 = FALSE;
 

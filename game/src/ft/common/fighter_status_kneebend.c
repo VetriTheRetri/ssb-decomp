@@ -220,8 +220,8 @@ void func_ovl3_8013F880(GObj *fighter_gobj)
             vel_y = FTCOMMON_KNEEBEND_STICK_RANGE_MIN;
         }
     }
-    fp->phys_info.vel_normal.y = (vel_y * attributes->jump_height_mul) + attributes->jump_height_base;
-    fp->phys_info.vel_normal.x = vel_x * attributes->jump_vel_x;
+    fp->phys_info.vel_air.y = (vel_y * attributes->jump_height_mul) + attributes->jump_height_base;
+    fp->phys_info.vel_air.x = vel_x * attributes->jump_vel_x;
 
     fp->buffer_stick_y = U8_MAX - 1;
 

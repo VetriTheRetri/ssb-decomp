@@ -84,7 +84,7 @@ void func_ovl3_8015FDB4(GObj *fighter_gobj)
     }
     else func_ovl2_800D93E4(fighter_gobj);
 
-    vec3f_scale(&fp->phys_info.vel_normal, fp->status_vars.captain.speciallw.vel_scale);
+    vec3f_scale(&fp->phys_info.vel_air, fp->status_vars.captain.speciallw.vel_scale);
 
     func_ovl3_8015FC30(fighter_gobj);
 }

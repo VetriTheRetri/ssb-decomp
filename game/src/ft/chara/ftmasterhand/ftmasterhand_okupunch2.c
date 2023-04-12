@@ -25,11 +25,11 @@ void func_ovl3_8015A890(GObj *fighter_gobj)
     {
         f32 vel_x = (dist_x > 0.0F) ? 40.0F : -40.0F;
 
-        fp->phys_info.vel_normal.x += vel_x;
+        fp->phys_info.vel_air.x += vel_x;
     }
     else
     {
-        fp->phys_info.vel_normal.x += dist_x;
+        fp->phys_info.vel_air.x += dist_x;
     }
     func_ovl3_80158528(fighter_gobj);
 }

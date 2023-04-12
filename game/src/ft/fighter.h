@@ -142,7 +142,7 @@ typedef enum ftCommonAction
     ftStatus_Common_DeadUpFall,
     ftStatus_Common_Sleep,
     ftStatus_Common_Entry,
-    ftStatus_Common_Unk1,
+    ftStatus_Common_EntryNull,
     ftStatus_Common_RebirthDown,
     ftStatus_Common_RebirthStand,
     ftStatus_Common_RebirthWait,
@@ -362,7 +362,6 @@ typedef enum ftCommonAction
 
 typedef enum ftKind
 {
-
     Ft_Kind_Mario,
     Ft_Kind_Fox,
     Ft_Kind_Donkey,
@@ -613,10 +612,10 @@ struct Fighter_Struct
 
     struct
     {
-        Vec3f vel_normal; // Knockback / external velocity?
-        Vec3f vel_air;
-        Vec3f vel_ground; // Might be one float?
-        Vec3f unk_vec_0x6C;
+        Vec3f vel_air; // Aerial self-induced velocity
+        Vec3f vel_damage_air; // Aerial knockback velocity
+        Vec3f vel_ground; // Grounded self-induced velocity
+        Vec3f vel_damage_ground; // Grounded knockback velocity
 
     } phys_info;
 
@@ -675,7 +674,7 @@ struct Fighter_Struct
     u8 x18F_flag_b4 : 1;
     u8 x18F_flag_b5 : 1;
     u8 x18F_flag_b6 : 1;
-    u8 x18F_flag_b7 : 1;
+    u8 is_hitstun : 1;
 
     union
     {
@@ -798,7 +797,7 @@ struct Fighter_Struct
     u8 filler_0x26B[0x276 - 0x26B];
 
     s16 unk_0x276;
-    GObj *unk_0x278;
+    GObj *throw_gobj; // GObj pointer of player throwing this fighter?
     s32 unk_0x27C;
     u8 unk_0x280;
     s32 unk_0x284;
@@ -863,7 +862,9 @@ struct Fighter_Struct
     s32 unk_0x818;
     f32 unk_0x81C;
 
-    u8 filler_0x820[0x830 - 0x820];
+    u8 filler_0x820[0x82C - 0x820];
+
+    f32 knockback_last;
 
     GObj *unk_gobj;
     u8 filler_0x834[0xC];
