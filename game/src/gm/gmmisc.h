@@ -36,7 +36,11 @@ typedef enum gmHitCollisionStatus
 typedef enum gmHitCollisionElement
 {
     gmHitCollision_Element_Normal,
-    gmHitCollision_Element_Fire // This continues but the rest is unconfirmed
+    gmHitCollision_Element_Fire, // This continues but the rest is unconfirmed
+    gmHitCollision_Element_Electric,
+    gmHitCollision_Element_Slash,
+    gmHitCollision_Element_Coin,
+    gmHitCollision_Element_Sleep // ???
 
 } gmHitCollisionElement;
 

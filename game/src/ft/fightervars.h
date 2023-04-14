@@ -18,7 +18,7 @@
 #define FTCOMMON_DEADUP_REBIRTH_WAIT 180
 #define FTCOMMON_DEADUPFALL_VEL_Z -83.333336F
 
-#define FTCOMMON_REBIRTH_INVINCIBLE_FRAMES 120              // Invincibility frames; setting this to 0 makes invincibility last forever (?)
+#define FTCOMMON_REBIRTH_INVINCIBLE_FRAMES 120                  // Invincibility frames; setting this to 0 makes invincibility last forever (?)
 #define FTCOMMON_REBIRTH_HALO_LOWER_WAIT 90
 #define FTCOMMON_REBIRTH_HALO_DESPAWN_WAIT 390
 #define FTCOMMON_REBIRTH_HALO_UNK_WAIT 45
@@ -28,12 +28,12 @@
 
 #define FTCOMMON_ENTRY_WAIT 120
 
-#define FTCOMMON_WALKFAST_STICK_RANGE_MIN 62                // Minimum stick range required for fast walk speed
-#define FTCOMMON_WALKMIDDLE_STICK_RANGE_MIN 26              // Minimum stick range required for medium walk speed
+#define FTCOMMON_WALKFAST_STICK_RANGE_MIN 62                    // Minimum stick range required for fast walk speed
+#define FTCOMMON_WALKMIDDLE_STICK_RANGE_MIN 26                  // Minimum stick range required for medium walk speed
 
 #define FTCOMMON_TURN_STICK_RANGE_MIN (-20)
 
-#define FTCOMMON_DASH_BUFFER_FRAMES_MAX 3                   // Dash will register if stick range is greater than or equal to FTCOMMON_DASH_STICK_RANGE_MIN within this window of time
+#define FTCOMMON_DASH_BUFFER_FRAMES_MAX 3                       // Dash will register if stick range is greater than or equal to FTCOMMON_DASH_STICK_RANGE_MIN within this window of time
 #define FTCOMMON_DASH_STICK_RANGE_MIN 56
 #define FTCOMMON_DASH_DECELERATE_BEGIN 7.0F
 
@@ -44,16 +44,16 @@
 #define FTCOMMON_KNEEBEND_INPUT_TYPE_NONE 0
 #define FTCOMMON_KNEEBEND_INPUT_TYPE_STICK 1
 #define FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON 2
-#define FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX 3               // Jumpsquat will register if stick range is greater than FTCOMMON_KNEEBEND_STICK_RANGE_MIN within this window of time
-#define FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE (-10)           // Stick X range to determine whether to usee JumpF or JumpB action state
-#define FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN 44            // Used for jumpsquat interrupt from run?
-#define FTCOMMON_KNEEBEND_STICK_RANGE_MIN 53                // Minimum stick Y range required for stick jump
-#define FTCOMMON_KNEEBEND_BUTTON_SHORT_FORCE 9.0F           // Jump force of C-button short jump
-#define FTCOMMON_KNEEBEND_BUTTON_LONG_FORCE 17.0F           // Jump force of C-button long jump
-#define FTCOMMON_KNEEBEND_BUTTON_SHORT_MIN 36.0F            // Minimum short jump height possible with C-button input
-#define FTCOMMON_KNEEBEND_BUTTON_LONG_MIN 63.0F             // Minimum long jump height possible with C-button input
-#define FTCOMMON_KNEEBEND_BUTTON_HEIGHT_CLAMP 77.0F         // Maximum jump height possible with C-button input
-#define FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES 3.0F             // Universal short hop window, unlike Melee where the user must simply not be holding their jump input on the last frame of jumpsquat
+#define FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX 3                   // Jumpsquat will register if stick range is greater than FTCOMMON_KNEEBEND_STICK_RANGE_MIN within this window of time
+#define FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE (-10)               // Stick X range to determine whether to usee JumpF or JumpB action state
+#define FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN 44                // Used for jumpsquat interrupt from run?
+#define FTCOMMON_KNEEBEND_STICK_RANGE_MIN 53                    // Minimum stick Y range required for stick jump
+#define FTCOMMON_KNEEBEND_BUTTON_SHORT_FORCE 9.0F               // Jump force of C-button short jump
+#define FTCOMMON_KNEEBEND_BUTTON_LONG_FORCE 17.0F               // Jump force of C-button long jump
+#define FTCOMMON_KNEEBEND_BUTTON_SHORT_MIN 36.0F                // Minimum short jump height possible with C-button input
+#define FTCOMMON_KNEEBEND_BUTTON_LONG_MIN 63.0F                 // Minimum long jump height possible with C-button input
+#define FTCOMMON_KNEEBEND_BUTTON_HEIGHT_CLAMP 77.0F             // Maximum jump height possible with C-button input
+#define FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES 3.0F                 // Universal short hop window, unlike Melee where the user must simply not be holding their jump input on the last frame of jumpsquat
 
 #define FTCOMMON_JUMPAERIAL_INPUT_TYPE_NONE 0
 #define FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK 1
@@ -62,23 +62,41 @@
 #define FTCOMMON_JUMPAERIAL_STICK_RANGE_MIN 53
 #define FTCOMMON_JUMPAERIAL_TURN_STICK_RANGE_MIN (-30)
 #define FTCOMMON_JUMPAERIAL_TURN_FRAMES 12
-#define FTCOMMON_JUMPAERIAL_TURN_INVERT_LR_WAIT 6           // Invert facing direction on this frame of the direction turn process          
-#define FTCOMMON_JUMPAERIAL_TURN_ROTATE_STEP (-0.2617994F)  // Model Y-rotation step for characters who can turn around during their double jump
+#define FTCOMMON_JUMPAERIAL_TURN_INVERT_LR_WAIT 6               // Invert facing direction on this frame of the direction turn process          
+#define FTCOMMON_JUMPAERIAL_TURN_ROTATE_STEP (-0.2617994F)      // Model Y-rotation step for characters who can turn around during their double jump
 
 #define FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX 4
 #define FTCOMMON_DAMAGE_SMASH_DI_RANGE_MIN 53
+#define FTCOMMON_DAMAGE_CATCH_RELEASE_THRESHOLD 6               // If a grabbed fighter takes more than this much damage in one hit, they're released
+#define FTCOMMON_DAMAGE_FIGHTER_FLYROLL_DAMAGE_MIN 100
 #define FTCOMMON_DAMAGE_GFX_WAIT_LOW 0
 #define FTCOMMON_DAMAGE_GFX_WAIT_MID_LOW 8
 #define FTCOMMON_DAMAGE_GFX_WAIT_MID 5
 #define FTCOMMON_DAMAGE_GFX_WAIT_MID_HIGH 3
 #define FTCOMMON_DAMAGE_GFX_WAIT_HIGH 2
 #define FTCOMMON_DAMAGE_GFX_WAIT_DEFAULT 1
-#define FTCOMMON_DAMAGE_KNOCKBACK_LOW 120.0F
-#define FTCOMMON_DAMAGE_KNOCKBACK_MID_LOW 150.0F
-#define FTCOMMON_DAMAGE_KNOCKBACK_MID 200.0F
-#define FTCOMMON_DAMAGE_KNOCKBACK_MID_HIGH 300.0F
-#define FTCOMMON_DAMAGE_KNOCKBACK_HIGH 600.0F
+#define FTCOMMON_DAMAGE_GFX_KNOCKBACK_LOW 120.0F
+#define FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID_LOW 150.0F
+#define FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID 200.0F
+#define FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID_HIGH 300.0F
+#define FTCOMMON_DAMAGE_GFX_KNOCKBACK_HIGH 600.0F
 #define FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL 2.1F
+#define FTCOMMON_DAMAGE_SAKURAI_KNOCKBACK_LOW 32.0F
+#define FTCOMMON_DAMAGE_SAKURAI_ANGLE_LOW_GR 0.0F
+#define FTCOMMON_DAMAGE_SAKURAI_ANGLE_HIGH_GR 0.741764903069F
+#define FTCOMMON_DAMAGE_SAKURAI_ANGLE_HIGH_GD 42.5F
+#define FTCOMMON_DAMAGE_SAKURAI_ANGLE_DEFAULT_AR 0.75049156F
+#define FTCOMMON_DAMAGE_STATUS_KNOCKBACK_LOW 12.0F              // Knockback < this value                                                      -> DamageX1
+#define FTCOMMON_DAMAGE_STATUS_KNOCKBACK_MID 24.0F              // Knockback < this value && knockback >= FTCOMMON_DAMAGE_STATUS_KNOCKBACK_LOW -> DamageX2
+#define FTCOMMON_DAMAGE_STATUS_KNOCKBACK_HIGH 32.0F             // Knockback < this value && knockback >= FTCOMMON_DAMAGE_STATUS_KNOCKBACK_MID -> DamageX3
+#define FTCOMMON_DAMAGE_PUBLIC_REACT_GASP_ANGLE_LOW 1.308997F
+#define FTCOMMON_DAMAGE_PUBLIC_REACT_GASP_ANGLE_HIGH 2.0071287F
+#define FTCOMMON_DAMAGE_PUBLIC_REACT_GASP_KNOCKBACK_MUL 0.8F    // Multiply crowd reaction knockback by this value if angle > ANGLE_LOW && angle < ANGLE_HIGH
+#define FTCOMMON_DAMAGE_PUBLIC_REACT_GASP_KNOCKBACK_UNK 160.0F
+#define FTCOMMON_DAMAGE_FIGHTER_FLYTOP_ANGLE_LOW 1.2217306F
+#define FTCOMMON_DAMAGE_FIGHTER_FLYTOP_ANGLE_HIGH 1.9198622F
+#define FTCOMMON_DAMAGE_FIGHTER_FLYROLL_RANDOM_CHANCE 0.5F
+#define FTCOMMON_DAMAGE_FIGHTER_REACT_GASP_KNOCKBACK_MIN 80.0F  // Minimum knockback required for a fighter to play their damage voice effect when getting hit
 
 typedef struct ftCommon_Filler
 {
@@ -167,12 +185,13 @@ typedef struct ftCommon_JumpAerial_StatusVars
 
 typedef struct ftCommon_Damage_StatusVars
 {
-    u32 hitstun_timer;
+    s32 hitstun_timer;
     s32 dust_gfx_int;
-    f32 knockback;
+    f32 publicity_knockback;
     u16 coll_flags;
-    u8 filler_0xC[0x30 - 0xE];
-    s32 unk_0x30;
+    u8 filler_0xC[0x2C - 0xE];
+    s32 status_id;
+    bool32 is_limit_knockback;
 
 } ftCommon_Damage_StatusVars;
 

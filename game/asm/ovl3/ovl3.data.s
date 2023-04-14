@@ -901,10 +901,10 @@ glabel Fighter_Purin_JumpAerialVelY
   .balign 4
   .incbin "ovl3.raw.bin", 0x56A98, 0x8
 
-glabel D_ovl3_801885A0
+glabel Fighter_StatusList_DamageGround
   .incbin "ovl3.raw.bin", 0x56AA0, 0x30
 
-glabel D_ovl3_801885D0
+glabel Fighter_StatusList_DamageAir
   .incbin "ovl3.raw.bin", 0x56AD0, 0x30
 
 glabel D_ovl3_80188600

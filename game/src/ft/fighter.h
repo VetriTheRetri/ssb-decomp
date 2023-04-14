@@ -844,18 +844,22 @@ struct Fighter_Struct
     u8 filler_0x58C[0x7B0 - 0x5BC];
 
     s32 unk_0x7B0;
+    f32 attack_knockback; 
+    u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
 
-    u8 filler_0x7B4[0x7E8 - 0x7B4];
+    u8 filler_0x7B4[0x7E0 - 0x7BC];
 
-    f32 knockback_resist; // Resist this many units of knockback, effectively knockback-based armor
-    f32 unk_0x7EC;
-    s32 unk_0x7F0;
+    f32 damage_knockback;
+    f32 knockback_resist_passive;// Passive armor, always active (?)
+    f32 knockback_resist_status; // Resist this many units of knockback, effectively knockback-based armor
+    f32 damage_knockback_again;
+    s32 damage_taken_recent;
     s32 unk_0x7F4;
     s32 unk_0x7F8;
     s32 unk_0x7FC;
     s32 unk_0x800;
     s32 unk_0x804;
-    s32 unk_0x808;
+    s32 damage_player_number;
     s32 damage_player_id;
     s32 unk_0x810;
     s32 unk_0x814;
@@ -864,7 +868,7 @@ struct Fighter_Struct
 
     u8 filler_0x820[0x82C - 0x820];
 
-    f32 knockback_last;
+    f32 publicity_knockback; // Knockback value used for crowd reactions
 
     GObj *unk_gobj;
     u8 filler_0x834[0xC];

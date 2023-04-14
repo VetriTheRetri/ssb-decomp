@@ -5,12 +5,11 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftkirby",
-    "\\game\\src\\ft\\chara\\ftpurin",
-    "\\game\\src\\ft\\chara\\ftyoshi",
-    "\\game\\src\\ft\\common",
-    "\\game\\src\\it\\article"
+    "\\game\\src\\ft\\chara\\ftdonkey",
+    "\\game\\src\\gm",
+    "\\game\\src\\it",
+    "\\game\\src\\it\\article",
+    "\\game\\src\\it\\item"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftyoshi\\ftyoshi_statusvars.h",
   "PreviewInSolutionExplorer": false
 }

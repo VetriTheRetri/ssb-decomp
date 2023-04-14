@@ -120,7 +120,7 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
     if ((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi))
     {
         fp->cb_physics = func_ovl3_8013FB6C;
-        fp->knockback_resist = FTYOSHI_JUMPAERIAL_KNOCKBACK_RESIST;
+        fp->knockback_resist_status = FTYOSHI_JUMPAERIAL_KNOCKBACK_RESIST;
     }
     else if ((fp->ft_kind == Ft_Kind_Ness) || (fp->ft_kind == Ft_Kind_PolyNess))
     {
