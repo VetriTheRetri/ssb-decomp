@@ -99,7 +99,17 @@
 #define FTCOMMON_DAMAGE_FIGHTER_REACT_GASP_KNOCKBACK_MIN 80.0F  // Minimum knockback required for a fighter to play their damage voice effect when getting hit
 
 #define FTCOMMON_PASS_STICK_RANGE_MIN (-53)                     // Minimum stick Y range required for platform drop to register
-#define FTCOMMON_PASS_BUFFER_FRAMES_MAX 4                       
+#define FTCOMMON_PASS_BUFFER_FRAMES_MAX 4
+
+#define FTCOMMON_DOKAN_STICK_RANGE_MIN (-53)                    // Minimum stick Y range required for pipe enter to register
+#define FTCOMMON_DOKAN_BUFFER_FRAMES_MAX 4
+#define FTCOMMON_DOKAN_UNK_WAIT 20
+#define FTCOMMON_DOKAN_TURN_STOP_WAIT_DEFAULT 8
+#define FTCOMMON_DOKAN_TURN_STEP 0.19634955F
+#define FTCOMMON_DOKAN_POS_ADJUST 25.0F
+#define FTCOMMON_DOKAN_DETECT_WIDTH 200.0F
+#define FTCOMMON_DOKAN_POS_ADJUST_WAIT 30.0F
+#define FTCOMMON_DOKAN_EXIT_WAIT 30.0F
 
 typedef struct ftCommon_Filler
 {
@@ -205,6 +215,18 @@ typedef struct ftCommon_Squat_StatusVars
 
 } ftCommon_Squat_StatusVars;
 
+typedef struct ftCommon_Dokan_StatusVars
+{
+    s32 ground_line_id;
+    s32 wall_line_id;
+    Vec3f pos_current;
+    Vec3f pos_target;
+    s32 pos_adjust_wait;
+    s32 set_unk_wait;
+    s32 turn_stop_wait;
+
+} ftCommon_Dokan_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -237,6 +259,7 @@ typedef union ftCommon_StatusVars
     ftCommon_JumpAerial_StatusVars jumpaerial;
     ftCommon_Damage_StatusVars damage;
     ftCommon_Squat_StatusVars squat;
+    ftCommon_Dokan_StatusVars dokan;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
