@@ -111,6 +111,9 @@
 #define FTCOMMON_DOKAN_POS_ADJUST_WAIT 30.0F
 #define FTCOMMON_DOKAN_EXIT_WAIT 30.0F
 
+#define FTCOMMON_OTTOTTO_WALK_DIST_X_MIN 60.0F                  // ???
+#define FTCOMMON_OTTOTTO_WALK_STICK_RANGE_MIN 60                // Minimum stick range required for walk interrupt???
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
