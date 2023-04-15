@@ -625,8 +625,9 @@ struct Fighter_Struct
     Ground_Air ground_or_air;
 
     f32 unk_0x150;
-    u8 filler_0x154[0x160 - 0x154];
-    s32 timer_unk; // Unknown timer
+    u8 filler_0x154[0x15C - 0x154];
+    s32 timer_unk1;
+    s32 timer_unk2; // Unknown timer
     u8 filler_0x164[0x174 - 0x164];
     s32 unk_0x174;
     s32 unk_0x178;
@@ -841,28 +842,33 @@ struct Fighter_Struct
     s32 special_status;
     s32 hit_status;
     
-    u8 filler_0x58C[0x7B0 - 0x5BC];
+    u8 filler_0x58C[0x7A4 - 0x5BC];
+
+    f32 unk_ft_0x7A4;
+    s32 unk_ft_0x7A8;
+    s32 unk_ft_0x7AC;
 
     s32 unk_0x7B0;
-    f32 attack_knockback; 
-    u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
+    f32 attack_knockback;
+    u16 attack_hit_count; // Number of times this fighter successfully dealt damage
 
-    u8 filler_0x7B4[0x7E0 - 0x7BC];
+    u8 filler_0x7BC[0x7DC - 0x7BC];
 
+    s32 unk_ft_0x7DC;
     f32 damage_knockback;
     f32 knockback_resist_passive;// Passive armor, always active (?)
     f32 knockback_resist_status; // Resist this many units of knockback, effectively knockback-based armor
     f32 damage_knockback_again;
     s32 damage_taken_recent;
-    s32 unk_0x7F4;
-    s32 unk_0x7F8;
-    s32 unk_0x7FC;
-    s32 unk_0x800;
+    s32 damage_angle;
+    s32 damage_element;
+    s32 lr_damage;
+    s32 damage_index;
     s32 unk_0x804;
     s32 damage_player_number;
     s32 damage_player_id;
     s32 unk_0x810;
-    s32 unk_0x814;
+    s32 unk_ft_0x814;
     s32 unk_0x818;
     f32 unk_0x81C;
 

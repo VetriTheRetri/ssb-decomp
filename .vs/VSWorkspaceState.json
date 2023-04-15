@@ -4,12 +4,13 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftdonkey",
+    "\\game\\src\\ft\\common",
     "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\item"
+    "\\game\\src\\it\\item",
+    "\\game\\src\\mp"
   ],
+  "SelectedNode": "\\game\\src\\it\\article\\article_think.c",
   "PreviewInSolutionExplorer": false
 }
