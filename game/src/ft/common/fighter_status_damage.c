@@ -229,7 +229,7 @@ void func_ovl3_8014093C(GObj *fighter_gobj)
 
     if ((func_ovl2_800DEDAC(fighter_gobj) != FALSE)                 &&
     (func_ovl3_80141C6C(fighter_gobj) == FALSE)                     &&
-    (fp->status_vars.common.damage.coll_flags & MPCOLL_MASK_GROUND) &&
+    (fp->status_vars.common.damage.coll_mask & MPCOLL_MASK_GROUND) &&
     (func_ovl3_80144760(fighter_gobj) == FALSE)                     &&
     (func_ovl3_801446BC(fighter_gobj) == FALSE))
     {
@@ -621,7 +621,7 @@ next:
     {
         func_ovl2_800E7F7C(this_gobj, 0xA);
     }
-    this_fp->status_vars.common.damage.coll_flags = 0;
+    this_fp->status_vars.common.damage.coll_mask = 0;
 
     attacker_gobj = func_ovl2_800E7ED4(damage_player_number);
 
@@ -873,7 +873,7 @@ bool32 func_ovl3_80141C6C(GObj *fighter_gobj)
     pos.y = DObjGetStruct(fighter_gobj)->translate.y;
     pos.z = 0.0F;
 
-    if (fp->status_vars.common.damage.coll_flags & MPCOLL_MASK_RWALL)
+    if (fp->status_vars.common.damage.coll_mask & MPCOLL_MASK_RWALL)
     {
         pos.x += fp->coll_data.object_coll.width;
         pos.y += fp->coll_data.object_coll.center;
@@ -882,7 +882,7 @@ bool32 func_ovl3_80141C6C(GObj *fighter_gobj)
 
         return TRUE;
     }
-    else if (fp->status_vars.common.damage.coll_flags & MPCOLL_MASK_LWALL)
+    else if (fp->status_vars.common.damage.coll_mask & MPCOLL_MASK_LWALL)
     {
         pos.x -= fp->coll_data.object_coll.width;
         pos.y += fp->coll_data.object_coll.center;
@@ -891,7 +891,7 @@ bool32 func_ovl3_80141C6C(GObj *fighter_gobj)
 
         return TRUE;
     }
-    else if (fp->status_vars.common.damage.coll_flags & MPCOLL_MASK_CEIL)
+    else if (fp->status_vars.common.damage.coll_mask & MPCOLL_MASK_CEIL)
     {
         pos.y += fp->coll_data.object_coll.top;
 

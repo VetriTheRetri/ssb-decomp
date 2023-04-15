@@ -235,7 +235,7 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->coll_data.object_coll.bottom = attributes->objectcoll_bottom;
     ap->coll_data.object_coll.width = attributes->objectcoll_width;
     ap->coll_data.p_object_coll = &ap->coll_data.object_coll;
-    ap->coll_data.object_var = -1;
+    ap->coll_data.ignore_line_id = -1;
     ap->coll_data.wall_flag = D_ovl2_80131398;
     ap->coll_data.coll_mask = 0;
     ap->coll_data.pos_project.x = 0.0F;

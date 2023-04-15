@@ -237,7 +237,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     ip->coll_data.object_coll.width = (f32)it_hit_desc->objectcoll_width;
     ip->coll_data.p_object_coll = &ip->coll_data.object_coll;
 
-    ip->coll_data.object_var = -1;
+    ip->coll_data.ignore_line_id = -1;
 
     ip->coll_data.unk_0x74 = -1;
     ip->coll_data.ceil_line_id = -1;

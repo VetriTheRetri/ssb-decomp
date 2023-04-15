@@ -69,7 +69,7 @@ typedef struct _Coll_Data
     // Most of this is unconfirmed
 
     s32 unk_var;
-    s32 object_var; // Might be the same as 0x19C from Melee?
+    s32 ignore_line_id; // Might be the same as 0x19C from Melee?
 
 } Coll_Data;
 

@@ -98,6 +98,9 @@
 #define FTCOMMON_DAMAGE_FIGHTER_FLYROLL_RANDOM_CHANCE 0.5F
 #define FTCOMMON_DAMAGE_FIGHTER_REACT_GASP_KNOCKBACK_MIN 80.0F  // Minimum knockback required for a fighter to play their damage voice effect when getting hit
 
+#define FTCOMMON_PASS_STICK_RANGE_MIN (-53)                     // Minimum stick Y range required for platform drop to register
+#define FTCOMMON_PASS_BUFFER_FRAMES_MAX 4                       
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -188,12 +191,19 @@ typedef struct ftCommon_Damage_StatusVars
     s32 hitstun_timer;
     s32 dust_gfx_int;
     f32 publicity_knockback;
-    u16 coll_flags;
+    u16 coll_mask;
     u8 filler_0xC[0x2C - 0xE];
     s32 status_id;
     bool32 is_limit_knockback;
 
 } ftCommon_Damage_StatusVars;
+
+typedef struct ftCommon_Squat_StatusVars
+{
+    bool32 unk_0x0;
+    s32 unk_0x4;
+
+} ftCommon_Squat_StatusVars;
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -226,6 +236,7 @@ typedef union ftCommon_StatusVars
     ftCommon_KneeBend_StatusVars kneebend;
     ftCommon_JumpAerial_StatusVars jumpaerial;
     ftCommon_Damage_StatusVars damage;
+    ftCommon_Squat_StatusVars squat;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
