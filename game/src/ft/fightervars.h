@@ -101,6 +101,8 @@
 #define FTCOMMON_PASS_STICK_RANGE_MIN (-53)                     // Minimum stick Y range required for platform drop to register
 #define FTCOMMON_PASS_BUFFER_FRAMES_MAX 4
 
+#define FTCOMMON_SQUAT_STICK_RANGE_MIN (-53)
+#define FTCOMMON_SQUAT_BUFFER_FRAMES_MAX 4
 #define FTCOMMON_SQUAT_PASS_WAIT 3                              
 
 #define FTCOMMON_DOKAN_STICK_RANGE_MIN (-53)                    // Minimum stick Y range required for pipe enter to register

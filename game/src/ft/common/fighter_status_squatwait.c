@@ -58,3 +58,22 @@ void func_ovl3_80142EFC(GObj *fighter_gobj)
         func_ovl3_80142E70(fighter_gobj);
     }
 }
+
+void func_ovl3_80143024(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, 0U);
+    func_ovl2_800E0830(fighter_gobj);
+
+    fp->x192_flag_b0 = TRUE;
+
+    fp->status_vars.common.squat.is_allow_pass = FALSE;
+    fp->status_vars.common.squat.pass_wait = 0;
+
+    if ((fp->input.stick_range.y <= FTCOMMON_SQUAT_STICK_RANGE_MIN) && (fp->buffer_stick_y < FTCOMMON_SQUAT_BUFFER_FRAMES_MAX))
+    {
+        fp->status_vars.common.squat.unk_0x8 = 3;
+    }
+    else fp->status_vars.common.squat.unk_0x8 = 0;
+}
