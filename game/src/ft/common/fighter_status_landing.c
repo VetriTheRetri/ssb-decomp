@@ -70,3 +70,4 @@ void func_ovl3_80142E3C(GObj *fighter_gobj, bool32 is_allow_interrupt, f32 anim_
 {
     func_ovl3_80142D44(fighter_gobj, ftStatus_Common_LandingFallSpecial, is_allow_interrupt, anim_speed);
 }
+

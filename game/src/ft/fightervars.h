@@ -122,6 +122,9 @@
 #define FTCOMMON_LANDING_HEAVY_ANIM_SPEED 0.5F                  // Animation playback rate of landing after fastfall
 #define FTCOMMON_LANDING_LIGHT_ANIM_SPEED 1.0F                  // Animation playback rate of normal landing
 
+#define FTCOMMON_FALLSPECIAL_PASS_STICK_RANGE_MIN (-44)         // Minimum stick Y range required to pass through drop-through platforms while in FallSpecial
+#define FTCOMMON_FALLSPECIAL_SKIP_LANDING_VEL_Y_MAX (-20.0F)    // Maximum Y velocity allowed for no impact land
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -213,7 +216,7 @@ typedef struct ftCommon_Damage_StatusVars
     s32 dust_gfx_int;
     f32 publicity_knockback;
     u16 coll_mask;
-    u8 filler_0xC[0x2C - 0xE];
+    u8 filler_0xE[0x2C - 0xE];
     s32 status_id;
     bool32 is_limit_knockback;
 
@@ -244,6 +247,17 @@ typedef struct ftCommon_Landing_StatusVars
     bool32 is_allow_interrupt;
 
 } ftCommon_Landing_StatusVars;
+
+typedef struct ftCommon_FallSpecial_StatusVars
+{
+    f32 drift;
+    bool32 is_allow_pass;
+    bool32 is_goto_landing;
+    f32 landing_lag;
+    bool32 is_allow_interrupt;
+    bool32 is_fall_accelerate;
+
+} ftCommon_FallSpecial_StatusVars;
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -279,6 +293,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Squat_StatusVars squat;
     ftCommon_Dokan_StatusVars dokan;
     ftCommon_Landing_StatusVars landing;
+    ftCommon_FallSpecial_StatusVars fallspecial;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
