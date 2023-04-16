@@ -1,0 +1,60 @@
+#include "fighter.h"
+
+#define ftStatus_CheckInterruptSquatWait(fighter_gobj) \
+(                                                  \
+    (func_ovl3_80151098(fighter_gobj) != FALSE) || \
+    (func_ovl3_80151160(fighter_gobj) != FALSE) || \
+    (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
+    (func_ovl3_80149CE0(fighter_gobj) != FALSE) || \
+    (func_ovl3_80150470(fighter_gobj) != FALSE) || \
+    (func_ovl3_8015070C(fighter_gobj) != FALSE) || \
+    (func_ovl3_80150838(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014F8C0(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014FB1C(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014FD70(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014EC78(fighter_gobj) != FALSE) || \
+    (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
+    (func_ovl3_8014E764(fighter_gobj) != FALSE) || \
+    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
+    (func_ovl3_80141F0C(fighter_gobj) != FALSE) || \
+    (func_ovl3_80142258(fighter_gobj) != FALSE)    \
+)                                                  \
+
+bool32 func_ovl3_80142E70(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->status_vars.common.squat.is_allow_pass != FALSE)
+    {
+        if (fp->status_vars.common.squat.pass_wait != 0)
+        {
+            fp->status_vars.common.squat.pass_wait--;
+
+            if (fp->status_vars.common.squat.pass_wait == 0)
+            {
+                func_ovl3_80141DA0(fighter_gobj, ftStatus_Common_Pass, 1.0F, 0);
+
+                return TRUE;
+            }
+        }
+    }
+    if (fp->status_vars.common.squat.unk_0x8 != 0)
+    {
+        fp->status_vars.common.squat.unk_0x8--;
+    }
+
+    return FALSE;
+}
+
+void func_ovl3_80142ED8(GObj *fighter_gobj)
+{
+    func_ovl2_800D9480(fighter_gobj, func_ovl3_8014329C);
+}
+
+void func_ovl3_80142EFC(GObj *fighter_gobj)
+{
+    if (!ftStatus_CheckInterruptSquatWait(fighter_gobj))
+    {
+        func_ovl3_80142E70(fighter_gobj);
+    }
+}

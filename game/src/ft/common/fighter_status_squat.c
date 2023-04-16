@@ -34,12 +34,12 @@ bool32 func_ovl3_80141F0C(GObj *fighter_gobj)
     {
         return func_ovl3_80147E7C(fighter_gobj);
     }
-    if (fp->status_vars.common.squat.unk_0x0 == FALSE)
+    if (fp->status_vars.common.squat.is_allow_pass == FALSE)
     {
         if (func_ovl3_80141E60(fp) != FALSE)
         {
-            fp->status_vars.common.squat.unk_0x0 = TRUE;
-            fp->status_vars.common.squat.unk_0x4 = 3;
+            fp->status_vars.common.squat.is_allow_pass = TRUE;
+            fp->status_vars.common.squat.pass_wait = FTCOMMON_SQUAT_PASS_WAIT;
 
             return TRUE;
         }

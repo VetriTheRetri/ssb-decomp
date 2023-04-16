@@ -101,6 +101,8 @@
 #define FTCOMMON_PASS_STICK_RANGE_MIN (-53)                     // Minimum stick Y range required for platform drop to register
 #define FTCOMMON_PASS_BUFFER_FRAMES_MAX 4
 
+#define FTCOMMON_SQUAT_PASS_WAIT 3                              
+
 #define FTCOMMON_DOKAN_STICK_RANGE_MIN (-53)                    // Minimum stick Y range required for pipe enter to register
 #define FTCOMMON_DOKAN_BUFFER_FRAMES_MAX 4
 #define FTCOMMON_DOKAN_UNK_WAIT 20
@@ -113,6 +115,10 @@
 
 #define FTCOMMON_OTTOTTO_WALK_DIST_X_MIN 60.0F                  // ???
 #define FTCOMMON_OTTOTTO_WALK_STICK_RANGE_MIN 60                // Minimum stick range required for walk interrupt???
+
+#define FTCOMMON_LANDING_INTERRUPT_BEGIN 4.0F                   // If is_allow_interrupt == TRUE then landing can be interrupted once this many frames of the animation have played
+#define FTCOMMON_LANDING_HEAVY_ANIM_SPEED 0.5F                  // Animation playback rate of landing after fastfall
+#define FTCOMMON_LANDING_LIGHT_ANIM_SPEED 1.0F                  // Animation playback rate of normal landing
 
 typedef struct ftCommon_Filler
 {
@@ -213,8 +219,9 @@ typedef struct ftCommon_Damage_StatusVars
 
 typedef struct ftCommon_Squat_StatusVars
 {
-    bool32 unk_0x0;
-    s32 unk_0x4;
+    bool32 is_allow_pass;
+    s32 pass_wait;
+    s32 unk_0x8;
 
 } ftCommon_Squat_StatusVars;
 
@@ -229,6 +236,12 @@ typedef struct ftCommon_Dokan_StatusVars
     s32 turn_stop_wait;
 
 } ftCommon_Dokan_StatusVars;
+
+typedef struct ftCommon_Landing_StatusVars
+{
+    bool32 is_allow_interrupt;
+
+} ftCommon_Landing_StatusVars;
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -263,6 +276,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Damage_StatusVars damage;
     ftCommon_Squat_StatusVars squat;
     ftCommon_Dokan_StatusVars dokan;
+    ftCommon_Landing_StatusVars landing;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

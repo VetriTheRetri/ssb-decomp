@@ -1,27 +1,27 @@
 #include "fighter.h"
 
 #define ftStatus_CheckInterruptOttotto(fighter_gobj)\
-(                                                  \
-    (func_ovl3_80151098(fighter_gobj) != FALSE) || \
-    (func_ovl3_80151160(fighter_gobj) != FALSE) || \
-    (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
-    (func_ovl3_80149CE0(fighter_gobj) != FALSE) || \
-    (func_ovl3_80150470(fighter_gobj) != FALSE) || \
-    (func_ovl3_8015070C(fighter_gobj) != FALSE) || \
-    (func_ovl3_80150884(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014F8C0(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014FB1C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014FD70(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014EC78(fighter_gobj) != FALSE) || \
-    (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014E764(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013ED64(fighter_gobj) != FALSE) || \
-    (func_ovl3_80141EA4(fighter_gobj) != FALSE) || \
-    (func_ovl3_80142258(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013EA04(fighter_gobj) != FALSE)    \
-)                                                  \
+(                                                   \
+    (func_ovl3_80151098(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_80151160(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_801511E0(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_80149CE0(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_80150470(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8015070C(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_80150884(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8014F8C0(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8014FB1C(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8014FD70(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8014EC78(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_80148D0C(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8014E764(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8013ED64(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_80141EA4(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_80142258(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8014310C(fighter_gobj) != FALSE) ||  \
+    (func_ovl3_8013EA04(fighter_gobj) != FALSE)     \
+)                                                   \
 
 void func_ovl3_80142850(GObj *fighter_gobj)
 {

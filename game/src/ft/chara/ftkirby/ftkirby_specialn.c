@@ -377,7 +377,7 @@ void func_ovl3_801626C0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *common_attrs = fp->attributes;
 
-    if (fp->x18D_flag_b4)
+    if (fp->is_fast_fall)
     {
         func_ovl2_800D8DA0(fp, common_attrs);
     }

@@ -82,7 +82,7 @@ void func_ovl3_8013FC4C(GObj *fighter_gobj)
 
     func_ovl2_800D8DB0(fp);
 
-    (fp->x18D_flag_b4) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
+    (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
 
     switch (fp->ft_kind)
     {

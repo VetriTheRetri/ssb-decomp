@@ -654,7 +654,7 @@ struct Fighter_Struct
     u8 is_absorb : 1;
     s8 lr_absorb : 2;
     u8 x18D_flag_b3 : 1;
-    u8 x18D_flag_b4 : 1;
+    u8 is_fast_fall : 1;
     u8 x18D_flag_b5 : 1;
     u8 is_check_blastzone : 1;
     u8 x18D_flag_b7 : 1;
@@ -1028,27 +1028,6 @@ void func_ovl2_800E0830(GObj*); // ???
     (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
     (func_ovl3_8013EA04(fighter_gobj) != FALSE) || \
     (func_ovl3_8013E648(fighter_gobj) != FALSE)    \
-)                                                  \
-
-#define ftStatus_CheckInterruptGround(fighter_gobj)\
-(                                                  \
-    (func_ovl3_80151098(fighter_gobj) != FALSE) || \
-    (func_ovl3_80151160(fighter_gobj) != FALSE) || \
-    (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
-    (func_ovl3_80149CE0(fighter_gobj) != FALSE) || \
-    (func_ovl3_80150470(fighter_gobj) != FALSE) || \
-    (func_ovl3_8015070C(fighter_gobj) != FALSE) || \
-    (func_ovl3_80150884(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014F8C0(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014FB1C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014FD70(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014EC78(fighter_gobj) != FALSE) || \
-    (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014E764(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013ED64(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013E2A0(fighter_gobj) != FALSE)    \
 )                                                  \
 
 #endif
