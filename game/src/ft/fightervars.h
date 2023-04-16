@@ -125,6 +125,8 @@
 #define FTCOMMON_FALLSPECIAL_PASS_STICK_RANGE_MIN (-44)         // Minimum stick Y range required to pass through drop-through platforms while in FallSpecial
 #define FTCOMMON_FALLSPECIAL_SKIP_LANDING_VEL_Y_MAX (-20.0F)    // Maximum Y velocity allowed for no impact land
 
+#define FTCOMMON_TORNADO_RELEASE_WAIT 60.0F                     
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -259,6 +261,12 @@ typedef struct ftCommon_FallSpecial_StatusVars
 
 } ftCommon_FallSpecial_StatusVars;
 
+typedef struct ftCommon_Tornado_StatusVars
+{
+    s32 release_wait;
+
+} ftCommon_Tornado_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -294,6 +302,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Dokan_StatusVars dokan;
     ftCommon_Landing_StatusVars landing;
     ftCommon_FallSpecial_StatusVars fallspecial;
+    ftCommon_Tornado_StatusVars tornado;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
