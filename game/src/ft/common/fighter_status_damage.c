@@ -424,7 +424,7 @@ s32 Fighter_StatusList_DamageAir[4][3] =    { ftStatus_Common_DamageFlyLw, ftSta
                                               ftStatus_Common_DamageAir2,  ftStatus_Common_DamageAir2,  ftStatus_Common_DamageAir2,
                                               ftStatus_Common_DamageAir3,  ftStatus_Common_DamageAir3,  ftStatus_Common_DamageAir3 };
 
-void func_ovl3_80140EE4(GObj *this_gobj, s32 status_id_replace, s32 arg2, f32 knockback, s32 angle_start, s32 lr_damage,
+void func_ovl3_80140EE4(GObj *this_gobj, s32 status_id_replace, s32 damage, f32 knockback, s32 angle_start, s32 lr_damage,
 s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bool, bool32 is_publicity)
 {
     Fighter_Struct *this_fp = FighterGetStruct(this_gobj);
@@ -555,7 +555,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
     func_ovl3_80140B00(this_fp, knockback, angle_end);
 
-    if (arg2 != 0)
+    if (damage != 0)
     {
         func_ovl3_80140BCC(this_gobj, element, damage_level);
     }

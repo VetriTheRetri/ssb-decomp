@@ -126,6 +126,11 @@
 #define FTCOMMON_FALLSPECIAL_SKIP_LANDING_VEL_Y_MAX (-20.0F)    // Maximum Y velocity allowed for no impact land
 
 #define FTCOMMON_TORNADO_RELEASE_WAIT 60.0F                     
+#define FTCOMMON_TORNADO_PICKUP_WAIT 60                         // Frames before tornado can pick up individual fighter again
+
+#define FTCOMMON_TARUCANN_RELEASE_WAIT 180                      // Maximum number of frames fighter can spend inside the Barrel Cannon on Kongo Jungle before automatically firing
+#define FTCOMMON_TARUCANN_SHOOT_WAIT 10                         // Frames before fighter is released once the Barrel Cannon is in its firing state?
+#define FTCOMMON_TARUCANN_PICKUP_WAIT 16                        // Frames before Barrel Cannon can be used again
 
 typedef struct ftCommon_Filler
 {
@@ -264,8 +269,17 @@ typedef struct ftCommon_FallSpecial_StatusVars
 typedef struct ftCommon_Tornado_StatusVars
 {
     s32 release_wait;
+    GObj *tornado_gobj;
 
 } ftCommon_Tornado_StatusVars;
+
+typedef struct ftCommon_TaruCann_StatusVars
+{
+    s32 release_wait;
+    s32 shoot_wait;
+    GObj *tarucann_gobj;
+
+} ftCommon_TaruCann_StatusVars;
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -303,6 +317,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Landing_StatusVars landing;
     ftCommon_FallSpecial_StatusVars fallspecial;
     ftCommon_Tornado_StatusVars tornado;
+    ftCommon_TaruCann_StatusVars tarucann;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

@@ -610,7 +610,7 @@ struct Fighter_Struct
     u32 hitlag_timer; // Freeze if TRUE
     s32 lr; // Facing direction; -1 = LEFT, 1 = RIGHT
 
-    struct
+    struct phys_info
     {
         Vec3f vel_air; // Aerial self-induced velocity
         Vec3f vel_damage_air; // Aerial knockback velocity
@@ -628,11 +628,14 @@ struct Fighter_Struct
     u8 filler_0x154[0x15C - 0x154];
     s32 timer_unk1;
     s32 timer_unk2; // Unknown timer
-    u8 filler_0x164[0x174 - 0x164];
+    s32 timer_unk3;
+    s32 tornado_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
+    s32 tarucann_wait;// Wait this many frames before fighter can enter Barrel Cannon again
+    u8 filler_0x170[0x174 - 0x170];
     s32 unk_0x174;
     s32 unk_0x178;
 
-    struct
+    struct cmd_flags
     {
 
         u32 flag0;
@@ -779,7 +782,7 @@ struct Fighter_Struct
         u16 button_mask_l;
         u16 button_hold;
         u16 button_press;
-        u16 button_mask_c;
+        u16 button_mask_c; // Unconfirmed
         Vec2b stick_range; // Might be range?
         Vec2b padding;
         u16 button_mask_com;
@@ -838,7 +841,7 @@ struct Fighter_Struct
 
     u8 filler_0x290[0x5B0 - 0x5A4];
 
-    s32 unk_ft_0x5B0;
+    s32 star_invincible_time;
     s32 special_status;
     s32 hit_status;
     

@@ -1,0 +1,118 @@
+#include "fighter.h"
+#include "article.h"
+#include "gmground.h"
+
+void func_ovl3_80143E10(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->status_vars.common.tarucann.shoot_wait != 0)
+    {
+        fp->status_vars.common.tarucann.shoot_wait--;
+
+        if (fp->status_vars.common.tarucann.shoot_wait == (FTCOMMON_TARUCANN_SHOOT_WAIT / 2))
+        {
+            func_800269C0(0x119U);
+        }
+        if (fp->status_vars.common.tarucann.shoot_wait == 0)
+        {
+            func_ovl3_80144038(fighter_gobj);
+
+            return;
+        }
+    }
+    fp->status_vars.common.tarucann.release_wait++;
+
+    if ((fp->status_vars.common.tarucann.release_wait >= FTCOMMON_TARUCANN_RELEASE_WAIT) && (fp->status_vars.common.tarucann.shoot_wait == 0))
+    {
+        fp->status_vars.common.tarucann.shoot_wait = FTCOMMON_TARUCANN_SHOOT_WAIT;
+
+        func_ovl2_80109D20(fp->status_vars.common.tarucann.tarucann_gobj);
+    }
+}
+
+void func_ovl3_80143EB0(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if ((fp->status_vars.common.tarucann.shoot_wait == 0) && (fp->input.button_press & (fp->input.button_mask_a | fp->input.button_mask_b)))
+    {
+        fp->status_vars.common.tarucann.shoot_wait = FTCOMMON_TARUCANN_SHOOT_WAIT;
+
+        func_ovl2_80109D20(fp->status_vars.common.tarucann.tarucann_gobj);
+    }
+}
+
+void func_ovl3_80143F04(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    GObj *tarucann_gobj = fp->status_vars.common.tarucann.tarucann_gobj;
+
+    DObjGetStruct(fighter_gobj)->translate = DObjGetStruct(tarucann_gobj)->translate;
+}
+
+void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f vel;
+
+    func_ovl2_800E823C(fighter_gobj);
+
+    if ((fp->article_hold != NULL) && !(ArticleGetStruct(fp->article_hold)->is_light_throw))
+    {
+        vel.z = 0.0F;
+        vel.y = 0.0F;
+        vel.x = 0.0F;
+
+        func_ovl3_80172AEC(fp->article_hold, &vel, 1.0F);
+    }
+    if (fp->catch_gobj != NULL)
+    {
+        func_ovl3_8014B330(fp->catch_gobj);
+
+        fp->catch_gobj = NULL;
+    }
+    else if (fp->capture_gobj != NULL)
+    {
+        func_ovl3_8014AECC(fp->capture_gobj, fighter_gobj);
+    }
+    
+    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_TaruCann, 0.0F, 0.0F, 0U);
+    func_ovl2_800E0830(fighter_gobj);
+    func_ovl2_800D9444(fighter_gobj);
+
+    fp->status_vars.common.tarucann.shoot_wait = 0;
+    fp->status_vars.common.tarucann.release_wait = 0;
+    fp->status_vars.common.tarucann.tarucann_gobj = tarucann_gobj;
+
+    func_ovl2_800E8A24(fighter_gobj, 3);
+
+    fp->x18D_flag_b7 = TRUE;
+
+    func_ovl2_800E8098(fp, 0x3FU);
+    func_800269C0(0x11AU);
+}
+
+extern intptr_t D_NF_00000014;
+extern intptr_t D_NF_000000BC;
+
+void func_ovl3_80144038(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    GroundHazardAttributes *tarucann = (GroundHazardAttributes *)(((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
+    f32 knockback;
+    s32 angle;
+
+    DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
+
+    knockback = func_ovl2_800E9FC0(fp->percent_damage, tarucann->damage, tarucann->damage, tarucann->knockback_weight, tarucann->knockback_scale, tarucann->knockback_base, fp->attributes->weight, 9, 9);
+
+    angle = ((I_RAD_TO_DEG(func_ovl2_8010A12C()) * -fp->lr) + 90);
+    angle -= (angle / 360) * 360;
+
+    func_ovl3_80140EE4(fighter_gobj, ftStatus_Common_DamageFlyRoll, tarucann->damage, knockback, angle, fp->lr, 0, tarucann->element, 0, TRUE, TRUE, FALSE);
+    func_ovl2_800EAA2C(fp, 4, 4, 3, 0, 0);
+
+    fp->unk_0x174 = 0;
+    fp->tarucann_wait = FTCOMMON_TARUCANN_PICKUP_WAIT;
+}

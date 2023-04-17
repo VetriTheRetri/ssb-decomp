@@ -60,6 +60,18 @@ typedef struct gmGroundInfo
 
 } gmGroundInfo;
 
+typedef struct GroundHazardAttributes
+{
+    s32 unk_groundhazard_0x0;
+    s32 damage;
+    s32 angle;
+    s32 knockback_scale;
+    s32 knockback_weight;
+    s32 knockback_base;
+    s32 element;
+
+} GroundHazardAttributes;
+
 static gmGroundInfo *Ground_Info; // TO DO: move this to the correct file
 
 #endif

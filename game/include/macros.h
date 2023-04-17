@@ -10,7 +10,9 @@
 #define PI32 3.1415927F
 #define DOUBLE_PI32 6.2831855F
 
-#define F_DEG_TO_RAD(x) ((f32)((x * PI32) / 180.0F))
+#define F_DEG_TO_RAD(x) ((float)((x * PI32) / 180.0F))
+#define F_RAD_TO_DEG(x) ((float)((x / PI32) * 180.0F))
+#define I_RAD_TO_DEG(x) ((int)  ((x / PI32) * 180.0F))
 
 #define U8_MAX 0xFFU
 #define S8_MAX 0x7F
