@@ -303,6 +303,13 @@ typedef struct ftCommon_DownBounce_StatusVars
 
 } ftCommon_DownBounce_StatusVars;
 
+typedef struct ftCommon_Rebound_StatusVars
+{
+    f32 anim_speed;
+    f32 rebound_timer;
+
+} ftCommon_Rebound_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -342,6 +349,7 @@ typedef union ftCommon_StatusVars
     ftCommon_TaruCann_StatusVars tarucann;
     ftCommon_DownWait_StatusVars downwait;
     ftCommon_DownBounce_StatusVars downbounce;
+    ftCommon_Rebound_StatusVars rebound;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

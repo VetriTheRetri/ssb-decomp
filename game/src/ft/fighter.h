@@ -39,7 +39,7 @@ typedef struct ftCommonAttributes
     f32 throw_walkslow_anim_speed;
     f32 throw_walkmiddle_anim_speed;
     f32 throw_walkfast_anim_speed; // Cargo Throw
-    f32 unk_0x1C;
+    f32 rebound_anim_length;
     f32 walk_speed_mul;
     f32 traction;
     f32 dash_speed;
@@ -854,9 +854,12 @@ struct Fighter_Struct
 
     s32 unk_0x7B0;
     f32 attack_knockback;
-    u16 attack_hit_count; // Number of times this fighter successfully dealt damage
+    u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
+    s32 attack_damage;
+    f32 attack_damage_stale;
+    s32 lr_attack;
 
-    u8 filler_0x7BC[0x7DC - 0x7BC];
+    u8 filler_0x7B4[0x7DC - 0x7C8];
 
     s32 unk_ft_0x7DC;
     f32 damage_knockback;
