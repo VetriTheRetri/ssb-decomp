@@ -873,7 +873,7 @@ struct Fighter_Struct
     s32 unk_0x810;
     s32 unk_ft_0x814;
     s32 unk_0x818;
-    f32 unk_0x81C;
+    f32 damage_mul;
 
     u8 filler_0x820[0x82C - 0x820];
 
@@ -947,7 +947,7 @@ struct Fighter_Struct
 
     u8 filler_0xAA0[0xADC - 0xAA0];
 
-    union
+    union fighter_vars
     {
         ftMario_FighterVars mario;
         ftDonkey_FighterVars donkey;
@@ -964,7 +964,7 @@ struct Fighter_Struct
 
     s32 hammer_time;
 
-    union
+    union status_vars
     {
         ftCommon_StatusVars common;
         ftMario_StatusVars mario;

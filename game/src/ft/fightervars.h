@@ -132,6 +132,9 @@
 #define FTCOMMON_TARUCANN_SHOOT_WAIT 10                         // Frames before fighter is released once the Barrel Cannon is in its firing state?
 #define FTCOMMON_TARUCANN_PICKUP_WAIT 16                        // Frames before Barrel Cannon can be used again
 
+#define FTCOMMON_DOWNWAIT_STAND_WAIT 180                        // Frames until fighter automatically stands up from knockdown
+#define FTCOMMON_DOWNBOUNCE_ATTACK_BUFFER 60
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -281,6 +284,18 @@ typedef struct ftCommon_TaruCann_StatusVars
 
 } ftCommon_TaruCann_StatusVars;
 
+typedef struct ftCommon_DownWait_StatusVars
+{
+    s32 stand_wait;
+
+} ftCommon_DownWait_StatusVars;
+
+typedef struct ftCommon_DownBounce_StatusVars
+{
+    s32 attack_buffer;
+
+} ftCommon_DownBounce_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -318,6 +333,8 @@ typedef union ftCommon_StatusVars
     ftCommon_FallSpecial_StatusVars fallspecial;
     ftCommon_Tornado_StatusVars tornado;
     ftCommon_TaruCann_StatusVars tarucann;
+    ftCommon_DownWait_StatusVars downwait;
+    ftCommon_DownBounce_StatusVars downbounce;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

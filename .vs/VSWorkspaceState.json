@@ -4,13 +4,13 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\common",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
     "\\game\\src\\mp"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_entry.c",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_down1.c",
   "PreviewInSolutionExplorer": false
 }

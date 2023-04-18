@@ -5753,7 +5753,7 @@ glabel D_ovl2_8012C840
   .balign 4
   .incbin "ovl2.raw.bin", 0x56460, 0x80
 
-glabel D_ovl2_8012C970
+glabel Fighter_DownBounce_Sound
   .incbin "ovl2.raw.bin", 0x564E0, 0x38
 
 glabel D_ovl2_8012C9A8
