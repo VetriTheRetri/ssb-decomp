@@ -626,7 +626,7 @@ struct Fighter_Struct
 
     f32 unk_0x150;
     u8 filler_0x154[0x15C - 0x154];
-    s32 timer_unk1;
+    s32 cliffcatch_wait;
     s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
     s32 timer_unk3;
     s32 tornado_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
@@ -856,7 +856,7 @@ struct Fighter_Struct
     f32 attack_knockback;
     u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
     s32 attack_damage;
-    f32 attack_damage_stale;
+    f32 attack_damage_stale; // Actually 2x staled damage?
     s32 lr_attack;
 
     u8 filler_0x7B4[0x7DC - 0x7C8];

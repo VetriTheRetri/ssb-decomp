@@ -640,7 +640,7 @@ void func_ovl3_80141560(GObj *fighter_gobj)
 
     if (fp->x190_flag_b7)
     {
-        fp->timer_unk1 = 30;
+        fp->cliffcatch_wait = FTCOMMON_CLIFF_CATCH_WAIT;
     }
     if (fp->damage_element == 6)
     {

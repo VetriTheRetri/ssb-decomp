@@ -142,6 +142,11 @@
 #define FTCOMMON_PASSIVE_BUFFER_FRAMES_MAX 20                   // Tech buffer frames
 #define FTCOMMON_PASSIVE_F_OR_B_RANGE 20 
 
+#define FTCOMMON_CLIFF_CATCH_WAIT 30                            // Frames to wait before fighter can grab ledge again
+#define FTCOMMON_CLIFF_DAMAGE_HIGH 100                          // If fighter's damage is greater than or equal to this, use Slow action states and hang time
+#define FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_HIGH 480
+#define FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_LOW 1080
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -310,6 +315,13 @@ typedef struct ftCommon_Rebound_StatusVars
 
 } ftCommon_Rebound_StatusVars;
 
+typedef struct ftCommon_Cliff_StatusVars
+{
+    s32 status_id;
+    s32 fall_wait;
+
+} ftCommon_Cliff_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -350,6 +362,7 @@ typedef union ftCommon_StatusVars
     ftCommon_DownWait_StatusVars downwait;
     ftCommon_DownBounce_StatusVars downbounce;
     ftCommon_Rebound_StatusVars rebound;
+    ftCommon_Cliff_StatusVars cliff;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

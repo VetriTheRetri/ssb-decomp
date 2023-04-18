@@ -68,8 +68,8 @@ typedef struct _Coll_Data
 
     // Most of this is unconfirmed
 
-    s32 unk_var;
-    s32 ignore_line_id; // Might be the same as 0x19C from Melee?
+    s32 cliff_id; // Ledge ID
+    s32 ignore_line_id; // Ignore this line when checking for collision
 
 } Coll_Data;
 
