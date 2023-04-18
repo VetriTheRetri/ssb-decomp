@@ -95,8 +95,8 @@ void func_ovl3_8015FA2C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEE98(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
+    ftCollision_SetGround(fp);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
 
     fp->cb_hitlag_start = func_ovl2_800E9C8C;
     fp->cb_hitlag_end = func_ovl2_800E9CC4;
@@ -107,7 +107,7 @@ void func_ovl3_8015FA8C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
     func_ovl2_800D8EB8(fp);
 
     fp->cb_hitlag_start = func_ovl2_800E9C8C;
@@ -142,8 +142,8 @@ void jtgt_ovl3_8015FB5C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialN, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015FB40(fighter_gobj);
 
     fp->cb_hitlag_start = func_ovl2_800E9C8C;
@@ -154,8 +154,8 @@ void func_ovl3_8015FA8C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialAirN, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015FB40(fighter_gobj);
 
     fp->cb_hitlag_start = func_ovl2_800E9C8C;

@@ -18,7 +18,7 @@ void func_ovl3_80158750(GObj *fighter_gobj)
 
 void func_ovl3_80158784(GObj *fighter_gobj) // Unused
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Unk, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Unk, 0.0F, 1.0F, 0U);
 }
 
 void func_ovl3_801587B0(GObj *fighter_gobj)
@@ -277,7 +277,7 @@ void func_ovl3_80159040(GObj *fighter_gobj)
     Vec3f pos;
     s32 unk_a0;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Wait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Wait, 0.0F, 1.0F, 0U);
 
     fp = FighterGetStruct(fighter_gobj);
 

@@ -43,8 +43,8 @@ void func_ovl3_8015A950(GObj *fighter_gobj)
 
     fp->lr = CENTER;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_OkuPunch2, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_OkuPunch2, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     translate = &DObjGetStruct(fighter_gobj)->translate;
 

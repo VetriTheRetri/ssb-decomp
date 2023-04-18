@@ -54,7 +54,7 @@ void func_ovl3_80159D34(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_GootsubuWait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuWait, 0.0F, 1.0F, 0U);
 
     fp->status_vars.masterhand.gootsubu.wait_timer = rand_u16_range(60) + 60;
 

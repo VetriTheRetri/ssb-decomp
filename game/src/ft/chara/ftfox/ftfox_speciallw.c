@@ -106,13 +106,13 @@ void func_ovl3_8015CD7C(GObj *fighter_gobj)
 
 void func_ovl3_8015CD90(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialLwLoop, 0.0F, 1.0F, 6U);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialLwLoop, 0.0F, 1.0F, 6U);
     func_ovl3_8015CD7C(fighter_gobj);
 }
 
 void func_ovl3_8015CDCC(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialAirLwLoop, 0.0F, 1.0F, 6U);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirLwLoop, 0.0F, 1.0F, 6U);
     func_ovl3_8015CD7C(fighter_gobj);
 }
 
@@ -156,7 +156,7 @@ void func_ovl3_8015CEE8(GObj *fighter_gobj)
 
     fp->lr = fp->lr_reflect;
 
-    func_ovl2_800E6F24(fighter_gobj, ((fp->ground_or_air == ground) ? ftStatus_Fox_SpecialLwHit : ftStatus_Fox_SpecialAirLwHit), 0.0F, 1.0F, 6U);
+    ftStatus_Update(fighter_gobj, ((fp->ground_or_air == ground) ? ftStatus_Fox_SpecialLwHit : ftStatus_Fox_SpecialAirLwHit), 0.0F, 1.0F, 6U);
 
     fp->is_reflect = TRUE;
 }
@@ -208,13 +208,13 @@ void func_ovl3_8015D01C(GObj *fighter_gobj)
 
 void func_ovl3_8015D054(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialLwTurn, 0.0F, 1.0F, 6U);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialLwTurn, 0.0F, 1.0F, 6U);
     func_ovl3_8015D01C(fighter_gobj);
 }
 
 void func_ovl3_8015D090(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialAirLwTurn, 0.0F, 1.0F, 6U);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirLwTurn, 0.0F, 1.0F, 6U);
     func_ovl3_8015D01C(fighter_gobj);
 }
 
@@ -249,12 +249,12 @@ void func_ovl3_8015D130(GObj *fighter_gobj)
 
 void func_ovl3_8015D180(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialLwEnd, 0.0F, 1.0F, 6U);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialLwEnd, 0.0F, 1.0F, 6U);
 }
 
 void func_ovl3_8015D1B0(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialAirLwEnd, 0.0F, 1.0F, 6U);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirLwEnd, 0.0F, 1.0F, 6U);
 }
 
 extern u8 ftFox_LoadedFiles_SpecialLwData;
@@ -283,8 +283,8 @@ void func_ovl3_8015D1E0(GObj *fighter_gobj)
 
 void jtgt_ovl3_8015D250(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialLwStart, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialLwStart, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015D1E0(fighter_gobj);
 }
 
@@ -292,8 +292,8 @@ void jtgt_ovl3_8015D290(GObj* fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialAirLwStart, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirLwStart, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015D1E0(fighter_gobj);
 
     fp->phys_info.vel_air.y = 0.0F;

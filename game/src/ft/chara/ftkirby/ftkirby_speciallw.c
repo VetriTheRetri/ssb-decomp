@@ -90,7 +90,7 @@ void func_ovl3_80161530(GObj *fighter_gobj)
 
     if (fp->cmd_flags.flag1 != 0)
     {
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialLwHold, 0.0F, 1.0F, 0x32U);
+        ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwHold, 0.0F, 1.0F, 0x32U);
         func_ovl3_8016141C(fighter_gobj);
 
         fp->cmd_flags.flag1 = 0;
@@ -119,7 +119,7 @@ void func_ovl3_801615E4(GObj *fighter_gobj, bool32 is_release)
     {
         if (is_release == FALSE)
         {
-            func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialLwHold, 0.0F, 1.0F, 0x32U);
+            ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwHold, 0.0F, 1.0F, 0x32U);
         }
         func_ovl3_8016141C(fighter_gobj);
 
@@ -215,7 +215,7 @@ void func_ovl3_801618C4(GObj *fighter_gobj)
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
         func_ovl2_800DEEC8(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialAirLwStart, fighter_gobj->anim_frame, 1.0F, 0x12U);
+        ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwStart, fighter_gobj->anim_frame, 1.0F, 0x12U);
         func_ovl3_80161468(fp);
     }
 }
@@ -227,7 +227,7 @@ void func_ovl3_80161920(GObj *fighter_gobj)
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
         func_ovl2_800DEEC8(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialAirLwHold, fighter_gobj->anim_frame, 1.0F, 0x12U);
+        ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwHold, fighter_gobj->anim_frame, 1.0F, 0x12U);
     }
 }
 
@@ -238,7 +238,7 @@ void func_ovl3_80161974(GObj *fighter_gobj)
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
         func_ovl2_800DEEC8(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialAirLwFall, 0.0F, 1.0F, 0x32U);
+        ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwFall, 0.0F, 1.0F, 0x32U);
 
         fp->x191_flag_b2 = TRUE;
 
@@ -252,8 +252,8 @@ void func_ovl3_801619E0(GObj *fighter_gobj)
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        func_ovl2_800DEE98(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialLwStart, fighter_gobj->anim_frame, 1.0F, 0U);
+        ftCollision_SetGround(fp);
+        ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwStart, fighter_gobj->anim_frame, 1.0F, 0U);
     }
 }
 
@@ -263,8 +263,8 @@ void func_ovl3_80161A30(GObj *fighter_gobj)
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        func_ovl2_800DEE98(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialAirLwLand, 0.0F, 1.0F, 0x32U);
+        ftCollision_SetGround(fp);
+        ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwLand, 0.0F, 1.0F, 0x32U);
 
         fp->x191_flag_b2 = TRUE;
     }
@@ -274,8 +274,8 @@ void jtgt_ovl3_80161A94(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialLwStart, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwStart, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->cmd_flags.flag2 = 0;
     fp->cmd_flags.flag1 = 0;
@@ -288,8 +288,8 @@ void jtgt_ovl3_80161AEC(GObj *fighter_gobj) // Unused
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialLwUnk, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwUnk, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     func_ovl3_80161360(fighter_gobj);
 }
@@ -297,8 +297,8 @@ void jtgt_ovl3_80161AEC(GObj *fighter_gobj) // Unused
 void func_ovl3_80161B2C(GObj *fighter_gobj)
 {
     func_ovl2_800DEEC8(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialLwEnd, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwEnd, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 }
 
 void jtgt_ovl3_80161B70(GObj *fighter_gobj)
@@ -306,8 +306,8 @@ void jtgt_ovl3_80161B70(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     u32 armor_flag = fp->x191_flag_b2;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialAirLwStart, 0.0F, 1.0F, 0x32U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwStart, 0.0F, 1.0F, 0x32U);
+    ftAnim_Update(fighter_gobj);
 
     if ((fp->x191_flag_b2 = armor_flag & TRUE) != FALSE) // WAT
     {
@@ -327,14 +327,14 @@ void func_ovl3_80161C0C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialAirLwHold, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwHold, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_80161360(fighter_gobj);
     func_ovl3_80161468(fp);
 }
 
 void func_ovl3_80161C5C(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_SpecialAirLwEnd, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwEnd, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 }

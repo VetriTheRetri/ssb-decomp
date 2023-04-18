@@ -236,7 +236,7 @@ void func_ovl3_80164128(GObj *fighter_gobj)
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
         func_ovl2_800DEEC8(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 5U);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 5U);
 
         fp->cb_take_damage = func_ovl3_80163EFC;
 
@@ -266,8 +266,8 @@ void func_ovl3_801641D0(GObj *fighter_gobj)
         }
         else if (fp->coll_data.coll_type & 0x800)
         {
-            func_ovl2_800DEE98(fp);
-            func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
+            ftCollision_SetGround(fp);
+            ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
 
             fp->cb_take_damage = func_ovl3_80163EFC;
         }
@@ -291,8 +291,8 @@ void jtgt_ovl3_80164284(GObj *fighter_gobj)
 
     fp->cb_status = func_ovl3_8016426C;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialHi, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHi, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->cb_take_damage = func_ovl3_80163EFC;
     fp->cb_update_gfx = func_ovl3_80163D00;
@@ -302,8 +302,8 @@ void func_ovl3_801642EC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->cb_take_damage = func_ovl3_80163EFC;
     fp->cb_update_gfx = func_ovl3_80163D00;
@@ -315,8 +315,8 @@ void jtgt_ovl3_80164348(GObj *fighter_gobj)
 
     fp->cb_status = func_ovl3_8016426C;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialAirHi, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->phys_info.vel_air.y = FTLINK_SPIN_ATTACK_AIR_VEL_Y;
 

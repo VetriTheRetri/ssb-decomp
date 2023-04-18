@@ -39,7 +39,7 @@ void func_ovl3_80164484(GObj *fighter_gobj)
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
         func_ovl2_800DEEC8(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
     }
 }
 
@@ -49,8 +49,8 @@ void func_ovl3_801644D4(GObj *fighter_gobj)
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        func_ovl2_800DEE98(fp);
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0U);
+        ftCollision_SetGround(fp);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0U);
     }
 }
 
@@ -84,8 +84,8 @@ void jtgt_ovl3_8016458C(GObj *fighter_gobj)
     {
         fp->cmd_flags.flag0 = 0;
 
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialLw, 0.0F, 1.0F, 0U);
-        func_ovl2_800E0830(fighter_gobj);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialLw, 0.0F, 1.0F, 0U);
+        ftAnim_Update(fighter_gobj);
     }
 }
 
@@ -97,7 +97,7 @@ void jtgt_ovl3_801645E8(GObj *fighter_gobj)
     {
         fp->cmd_flags.flag0 = 0;
 
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Link_SpecialAirLw, 0.0F, 1.0F, 0U);
-        func_ovl2_800E0830(fighter_gobj);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirLw, 0.0F, 1.0F, 0U);
+        ftAnim_Update(fighter_gobj);
     }
 }

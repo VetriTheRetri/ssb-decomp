@@ -18,7 +18,7 @@ void func_ovl3_8013EEE8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_Run, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Run, 0.0F, 1.0F, 0U);
 
     fp->phys_info.vel_ground.x = fp->attributes->run_speed;
 }

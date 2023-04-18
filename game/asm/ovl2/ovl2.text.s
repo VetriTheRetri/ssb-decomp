@@ -9644,7 +9644,7 @@ glabel func_ovl2_800DEDF0
   /* 05A610 800DEE10 AFA5001C */        sw $a1, 0x1c($sp)
   /* 05A614 800DEE14 1040000B */      beqz $v0, .L800DEE44
   /* 05A618 800DEE18 8FA5001C */        lw $a1, 0x1c($sp)
-  /* 05A61C 800DEE1C 0C037BA6 */       jal func_ovl2_800DEE98
+  /* 05A61C 800DEE1C 0C037BA6 */       jal ftCollision_SetGround
   /* 05A620 800DEE20 00A02025 */        or $a0, $a1, $zero
   /* 05A624 800DEE24 10000008 */         b .L800DEE48
   /* 05A628 800DEE28 8FBF0014 */        lw $ra, 0x14($sp)
@@ -9683,7 +9683,7 @@ glabel func_ovl2_800DEE54
   /* 05A690 800DEE90 03E00008 */        jr $ra
   /* 05A694 800DEE94 00000000 */       nop 
 
-glabel func_ovl2_800DEE98
+glabel ftCollision_SetGround
   /* 05A698 800DEE98 8C8E0044 */        lw $t6, 0x44($a0)
   /* 05A69C 800DEE9C C4840048 */      lwc1 $f4, 0x48($a0)
   /* 05A6A0 800DEEA0 908F028E */       lbu $t7, 0x28e($a0)
@@ -11471,7 +11471,7 @@ glabel func_ovl2_800E07D4
   /* 05C028 800E0828 03E00008 */        jr $ra
   /* 05C02C 800E082C 00000000 */       nop 
 
-glabel func_ovl2_800E0830
+glabel ftAnim_Update
   /* 05C030 800E0830 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 05C034 800E0834 AFBF0014 */        sw $ra, 0x14($sp)
   /* 05C038 800E0838 0C0381F5 */       jal func_ovl2_800E07D4
@@ -12520,7 +12520,7 @@ glabel func_ovl2_800E1260
   /* 05CEF4 800E16F4 15600005 */      bnez $t3, .L800E170C
   /* 05CEF8 800E16F8 A0CA0191 */        sb $t2, 0x191($a2)
   /* 05CEFC 800E16FC 8FA40020 */        lw $a0, 0x20($sp)
-  /* 05CF00 800E1700 0C03820C */       jal func_ovl2_800E0830
+  /* 05CF00 800E1700 0C03820C */       jal ftAnim_Update
   /* 05CF04 800E1704 AFA6001C */        sw $a2, 0x1c($sp)
   /* 05CF08 800E1708 8FA6001C */        lw $a2, 0x1c($sp)
   .L800E170C:
@@ -18787,7 +18787,7 @@ glabel func_ovl2_800E6E00
   /* 06271C 800E6F1C 03E00008 */        jr $ra
   /* 062720 800E6F20 00000000 */       nop 
 
-glabel func_ovl2_800E6F24
+glabel ftStatus_Update
   /* 062724 800E6F24 27BDFF70 */     addiu $sp, $sp, -0x90
   /* 062728 800E6F28 AFBF001C */        sw $ra, 0x1c($sp)
   /* 06272C 800E6F2C AFB10018 */        sw $s1, 0x18($sp)
@@ -19540,7 +19540,7 @@ glabel func_ovl2_800E6F24
   /* 0631CC 800E79CC 1000000F */         b .L800E7A0C
   /* 0631D0 800E79D0 8E2B0020 */        lw $t3, 0x20($s1)
   .L800E79D4:
-  /* 0631D4 800E79D4 0C03820C */       jal func_ovl2_800E0830
+  /* 0631D4 800E79D4 0C03820C */       jal ftAnim_Update
   /* 0631D8 800E79D8 8FA40090 */        lw $a0, 0x90($sp)
   /* 0631DC 800E79DC 0C038472 */       jal func_ovl2_800E11C8
   /* 0631E0 800E79E0 8FA40090 */        lw $a0, 0x90($sp)
@@ -32984,7 +32984,7 @@ glabel func_ovl2_800F3938
   /* 06F150 800F3950 8CAE014C */        lw $t6, 0x14c($a1)
   /* 06F154 800F3954 15C10003 */       bne $t6, $at, .L800F3964
   /* 06F158 800F3958 00000000 */       nop 
-  /* 06F15C 800F395C 0C037BA6 */       jal func_ovl2_800DEE98
+  /* 06F15C 800F395C 0C037BA6 */       jal ftCollision_SetGround
   /* 06F160 800F3960 00A02025 */        or $a0, $a1, $zero
   .L800F3964:
   /* 06F164 800F3964 0C03CE0A */       jal func_ovl2_800F3828
@@ -32996,7 +32996,7 @@ glabel func_ovl2_800F3938
   /* 06F17C 800F397C 24050092 */     addiu $a1, $zero, 0x92
   /* 06F180 800F3980 8FA6002C */        lw $a2, 0x2c($sp)
   /* 06F184 800F3984 3C073F80 */       lui $a3, 0x3f80
-  /* 06F188 800F3988 0C039BC9 */       jal func_ovl2_800E6F24
+  /* 06F188 800F3988 0C039BC9 */       jal ftStatus_Update
   /* 06F18C 800F398C AFA20010 */        sw $v0, 0x10($sp)
   /* 06F190 800F3990 0C03CE23 */       jal func_ovl2_800F388C
   /* 06F194 800F3994 02002025 */        or $a0, $s0, $zero

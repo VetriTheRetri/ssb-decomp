@@ -52,7 +52,7 @@ void func_ovl3_8015A538(GObj *fighter_gobj)
     Fighter_Struct *fp;
     Vec3f pos;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Yubideppou3, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Yubideppou3, 0.0F, 1.0F, 0U);
 
     fp = FighterGetStruct(fighter_gobj);
 

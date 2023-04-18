@@ -145,8 +145,8 @@ void jtgt_ovl3_80156428(GObj *fighter_gobj)
 
     fp->status_vars.mario.specialhi.is_air_bool = FALSE;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialHi, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialHi, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 }
 
 void jtgt_ovl3_80156478(GObj* fighter_gobj)
@@ -160,6 +160,6 @@ void jtgt_ovl3_80156478(GObj* fighter_gobj)
     fp->phys_info.vel_air.y = 0.0F;
     fp->phys_info.vel_air.x /= 1.5F;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialAirHi, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirHi, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 }

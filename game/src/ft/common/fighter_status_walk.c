@@ -88,8 +88,8 @@ void func_ovl3_8013E580(GObj *fighter_gobj, f32 anim_frame_begin)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id = func_ovl3_8013E340(fp->input.stick_range.x);
 
-    func_ovl2_800E6F24(fighter_gobj, status_id, anim_frame_begin, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, status_id, anim_frame_begin, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     if (status_id != ftStatus_Common_WalkFast)
     {

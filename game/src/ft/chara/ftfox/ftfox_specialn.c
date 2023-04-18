@@ -51,14 +51,14 @@ void func_ovl3_8015BC68(GObj *fighter_gobj)
 
 void func_ovl3_8015BC78(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialN, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialN, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015BC68(fighter_gobj);
 }
 
 void func_ovl3_8015BCB8(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Fox_SpecialAirN, 0.0F, 1.0F, 8U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirN, 0.0F, 1.0F, 8U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015BC68(fighter_gobj);
 }

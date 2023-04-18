@@ -51,14 +51,14 @@ void func_ovl3_80152890(GObj *fighter_gobj)
 
 void func_ovl3_801528B4(GObj *fighter_gobj)
 {
-    func_ovl2_800DEE98(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialHiStart, fighter_gobj->anim_frame, 0.0F, 0x92U);
+    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHiStart, fighter_gobj->anim_frame, 0.0F, 0x92U);
 }
 
 void func_ovl3_801528F4(GObj *fighter_gobj)
 {
     func_ovl2_800DEEC8(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHiStart, fighter_gobj->anim_frame, 0.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHiStart, fighter_gobj->anim_frame, 0.0F, 0x92U);
 }
 
 void func_ovl3_80152934(GObj *fighter_gobj)
@@ -88,16 +88,16 @@ void func_ovl3_80152960(GObj *fighter_gobj)
 void jtgt_ovl3_801529A0(GObj *fighter_gobj)
 {
     func_ovl3_80152934(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialHiStart, 0.0F, 0.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHiStart, 0.0F, 0.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_80152960(fighter_gobj);
 }
 
 void jtgt_ovl3_801529EC(GObj *fighter_gobj)
 {
     func_ovl3_80152934(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHiStart, 0.0F, 0.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHiStart, 0.0F, 0.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_80152960(fighter_gobj);
 }
 
@@ -194,7 +194,7 @@ void func_ovl3_80152C2C(GObj *fighter_gobj)
         }
         else if (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
         {
-            func_ovl2_800DEE98(fp);
+            ftCollision_SetGround(fp);
             func_ovl3_801535F4(fighter_gobj);
         }
         else func_ovl3_80152D98(fighter_gobj);
@@ -218,8 +218,8 @@ void func_ovl3_80152C2C(GObj *fighter_gobj)
 
 void func_ovl3_80152D98(GObj *fighter_gobj)
 {
-    func_ovl2_800DEE98(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialHi, fighter_gobj->anim_frame, 0.0F, 0x92U);
+    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHi, fighter_gobj->anim_frame, 0.0F, 0x92U);
 }
 
 void func_ovl3_80152DD8(GObj *fighter_gobj)
@@ -227,7 +227,7 @@ void func_ovl3_80152DD8(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHi, fighter_gobj->anim_frame, 0.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHi, fighter_gobj->anim_frame, 0.0F, 0x92U);
 
     fp->jumps_used = fp->attributes->jumps_max;
 }
@@ -277,8 +277,8 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
             {
                 fp->phys_info.vel_ground.x *= FTPIKACHU_QUICKATTACK_VEL_MUL;
             }
-            func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialHi, 0.0F, 0.0F, 0U);
-            func_ovl2_800E0830(fighter_gobj);
+            ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHi, 0.0F, 0.0F, 0U);
+            ftAnim_Update(fighter_gobj);
             return;
         }
     }
@@ -329,8 +329,8 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
         fp->phys_info.vel_air.y *= FTPIKACHU_QUICKATTACK_VEL_MUL;
     }
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHi, 0.0F, 0.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHi, 0.0F, 0.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 }
 
 bool32 func_ovl3_801531AC(GObj *fighter_gobj)
@@ -466,14 +466,14 @@ void func_ovl3_801534E0(GObj *fighter_gobj)
 
 void func_ovl3_80153544(GObj *fighter_gobj) // Unused
 {
-    func_ovl2_800DEE98(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialHiEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHiEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
 }
 
 void func_ovl3_80153584(GObj *fighter_gobj)
 {
     func_ovl2_800DEEC8(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHiEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHiEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
 }
 
 void func_ovl3_801535C4(GObj *fighter_gobj)
@@ -497,8 +497,8 @@ void func_ovl3_801535F4(GObj *fighter_gobj)
 
     fp->phys_info.vel_ground.x = fp->status_vars.pikachu.specialhi.vel_ground_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialHiEnd, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHiEnd, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 }
 
 void func_ovl3_80153654(GObj *fighter_gobj)
@@ -510,6 +510,6 @@ void func_ovl3_80153654(GObj *fighter_gobj)
     fp->phys_info.vel_air.x = (f32)(fp->status_vars.pikachu.specialhi.vel_x_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
     fp->phys_info.vel_air.y = (f32)(fp->status_vars.pikachu.specialhi.vel_y_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Pikachu_SpecialAirHiEnd, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHiEnd, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 }

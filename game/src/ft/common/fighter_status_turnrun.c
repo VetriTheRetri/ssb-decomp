@@ -28,7 +28,7 @@ void func_ovl3_8013F208(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_TurnRun, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_TurnRun, 0.0F, 1.0F, 0U);
 
     fp->cmd_flags.flag1 = 0;
     fp->cmd_flags.flag2 = 0;

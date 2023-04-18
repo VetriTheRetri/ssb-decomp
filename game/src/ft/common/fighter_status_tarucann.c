@@ -77,8 +77,8 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
         func_ovl3_8014AECC(fp->capture_gobj, fighter_gobj);
     }
     
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_TaruCann, 0.0F, 0.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_TaruCann, 0.0F, 0.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->status_vars.common.tarucann.shoot_wait = 0;

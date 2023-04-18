@@ -7,5 +7,5 @@ void func_ovl3_80159EA0(GObj *fighter_gobj)
 
 void func_ovl3_80159EC4(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Tsutsuku1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Tsutsuku1, 0.0F, 1.0F, 0U);
 }

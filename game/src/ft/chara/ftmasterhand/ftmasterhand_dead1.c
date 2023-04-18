@@ -9,7 +9,7 @@ void func_ovl3_8015AD74(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Dead1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead1, 0.0F, 1.0F, 0U);
 
     fp = FighterGetStruct(fighter_gobj);
 

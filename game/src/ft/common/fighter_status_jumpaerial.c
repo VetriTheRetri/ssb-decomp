@@ -115,7 +115,7 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 
     // It would seem that the stick range jump mechanic was initially considered for double jumps as well...
 
-    func_ovl2_800E6F24(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
 
     if ((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi))
     {
@@ -176,7 +176,7 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
         status_id = fp->jumps_used + ftStatus_Purin_JumpAerialF1 - 1;
         break;
     }
-    func_ovl2_800E6F24(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
 
     if ((input_source != FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK) && (input_source == FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON))
     {

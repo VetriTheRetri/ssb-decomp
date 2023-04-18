@@ -53,8 +53,8 @@ void func_ovl3_80155CF4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEE98(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U);
+    ftCollision_SetGround(fp);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U);
 
     fp->cb_accessory = func_ovl3_80155B40;
 }
@@ -64,7 +64,7 @@ void func_ovl3_80155D48(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U);
     func_ovl2_800D8EB8(fp);
 
     fp->cb_accessory = func_ovl3_80155B40;
@@ -81,14 +81,14 @@ void func_ovl3_80155DA4(GObj *fighter_gobj)
 
 void jtgt_ovl3_80155DBC(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_80155DA4(fighter_gobj);
 }
 
 void jtgt_ovl3_80155DFC(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_80155DA4(fighter_gobj);
 }

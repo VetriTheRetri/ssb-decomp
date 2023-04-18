@@ -22,7 +22,7 @@ void func_ovl3_8013F9E0(GObj *fighter_gobj)
         {
             func_ovl2_800DEEC8(fp);
         }
-        func_ovl2_800E6F24(fighter_gobj, ((fp->jumps_used >= fp->attributes->jumps_max) ? ftStatus_Common_FallAerial : ftStatus_Common_Fall), 0.0F, 1.0F, 8U);
+        ftStatus_Update(fighter_gobj, ((fp->jumps_used >= fp->attributes->jumps_max) ? ftStatus_Common_FallAerial : ftStatus_Common_Fall), 0.0F, 1.0F, 8U);
 
         func_ovl2_800D8EB8(fp);
 

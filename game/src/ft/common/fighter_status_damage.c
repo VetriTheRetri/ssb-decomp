@@ -106,8 +106,8 @@ void func_ovl3_801405E4(GObj *fighter_gobj)
 
     if (fp->hitlag_timer <= 0)
     {
-        func_ovl2_800E6F24(fighter_gobj, fp->status_vars.common.damage.status_id, 0.0F, 1.0F, 0x1400U);
-        func_ovl2_800E0830(fighter_gobj);
+        ftStatus_Update(fighter_gobj, fp->status_vars.common.damage.status_id, 0.0F, 1.0F, 0x1400U);
+        ftAnim_Update(fighter_gobj);
 
         if (fp->status_info.status_id == ftStatus_Common_DamageFlyRoll)
         {
@@ -233,7 +233,7 @@ void func_ovl3_8014093C(GObj *fighter_gobj)
     (func_ovl3_80144760(fighter_gobj) == FALSE)                     &&
     (func_ovl3_801446BC(fighter_gobj) == FALSE))
     {
-        func_ovl3_80144498(fighter_gobj);
+        ftCommon_DownBounce_ApplyStatus(fighter_gobj);
     }
 }
 
@@ -566,8 +566,8 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
         func_ovl3_80163648(this_gobj);
     }
 
-    func_ovl2_800E6F24(this_gobj, status_id_set, 0.0F, 1.0F, 0x1000U);
-    func_ovl2_800E0830(this_gobj);
+    ftStatus_Update(this_gobj, status_id_set, 0.0F, 1.0F, 0x1000U);
+    ftAnim_Update(this_gobj);
 
     if (knockback >= 65000.0F)
     {
@@ -854,7 +854,7 @@ void func_ovl3_80141B08(GObj *fighter_gobj, Vec3f *angle, Vec3f *pos)
 
     fp->status_vars.common.damage.hitstun_timer = func_ovl2_800EA1B0(knockback);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_WallDamage, 0.0F, 2.0F, 0x1100U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_WallDamage, 0.0F, 2.0F, 0x1100U);
 
     fp->damage_knockback_again = knockback;
 

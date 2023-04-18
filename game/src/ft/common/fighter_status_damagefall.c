@@ -20,7 +20,7 @@ void func_ovl3_801435B0(GObj *fighter_gobj)
         }
         else if ((func_ovl3_80144760(fighter_gobj) == FALSE) && (func_ovl3_801446BC(fighter_gobj) == FALSE))
         {
-            func_ovl3_80144498(fighter_gobj);
+            ftCommon_DownBounce_ApplyStatus(fighter_gobj);
         }
     }
 }
@@ -35,7 +35,7 @@ void func_ovl3_80143630(GObj *fighter_gobj)
 
 void func_ovl3_80143664(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, 0x108U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, 0x108U);
     func_ovl3_80143630(fighter_gobj);
 }
 
@@ -43,7 +43,7 @@ void func_ovl3_801436A0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, 8U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, 8U);
     func_ovl3_80143630(fighter_gobj);
 
     fp->timer_unk2 = 0x10000;
@@ -51,6 +51,6 @@ void func_ovl3_801436A0(GObj *fighter_gobj)
 
 void func_ovl3_801436F0(GObj *fighter_gobj) // Unused
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DamageFall, fighter_gobj->anim_frame, 1.0F, 0x108U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, fighter_gobj->anim_frame, 1.0F, 0x108U);
     func_ovl3_80143630(fighter_gobj);
 }

@@ -83,8 +83,8 @@ void func_ovl3_8015E130(GObj *fighter_gobj)
 
     fp->cmd_flags.flag3 = FALSE;
 
-    func_ovl2_800DEE98(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftCollision_SetGround(fp);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0U);
 }
 
 void func_ovl3_8015E170(GObj *fighter_gobj)
@@ -93,7 +93,7 @@ void func_ovl3_8015E170(GObj *fighter_gobj)
     ftCommonAttributes *common_attrs = fp->attributes;
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
 
     fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE;
     fp->jumps_used = common_attrs->jumps_max;
@@ -102,7 +102,7 @@ void func_ovl3_8015E170(GObj *fighter_gobj)
 void func_ovl3_8015E1DC(GObj *fighter_gobj)
 {
     func_ovl2_800DEEC8(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
 }
 
 void func_ovl3_8015E218(Fighter_Struct *fp)
@@ -116,8 +116,8 @@ void jtgt_ovl3_8015E220(GObj *fighter_gobj)
 
     fp->cmd_flags.flag3 = FALSE;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialLw, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialLw, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015E218(fp);
 
     fp->status_vars.samus.speciallw.unused = FALSE;
@@ -128,8 +128,8 @@ void jtgt_ovl3_8015E274(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *common_attrs = fp->attributes;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015E218(fp);
 
     fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE - FTSAMUS_BOMB_VEL_Y_SUB;

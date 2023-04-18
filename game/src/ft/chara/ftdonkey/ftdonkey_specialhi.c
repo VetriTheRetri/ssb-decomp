@@ -48,8 +48,8 @@ void func_ovl3_8015B848(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEE98(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Donkey_SpecialHi, fighter_gobj->anim_frame, 1.0F, 0x4000U);
+    ftCollision_SetGround(fp);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialHi, fighter_gobj->anim_frame, 1.0F, 0x4000U);
     func_ovl2_800D8938(fp, FTDONKEY_SPINNINGKONG_GROUND_VEL_MAX);
 }
 
@@ -58,7 +58,7 @@ void func_ovl3_8015B898(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Donkey_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 0x4000U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 0x4000U);
     func_ovl2_800D8E78(fp, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
 }
 
@@ -67,8 +67,8 @@ void func_ovl3_8015B8E8(GObj *fighter_gobj, bool32 stale_unk)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *common_attrs = fp->attributes;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Donkey_SpecialAirHi, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirHi, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     func_ovl2_800D8E78(fp, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
 

@@ -136,9 +136,9 @@ void jtgt_ovl3_80160630(GObj *fighter_gobj)
 
     fp->cb_status = func_ovl3_801605FC;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, 0U);
     func_ovl3_80160280(fp);
-    func_ovl2_800E0830(fighter_gobj);
+    ftAnim_Update(fighter_gobj);
 }
 
 void func_ovl3_80160690(GObj *fighter_gobj)
@@ -146,8 +146,8 @@ void func_ovl3_80160690(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj), *fp_catch;
     GObj *unk_gobj;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, 4U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, 4U);
+    ftAnim_Update(fighter_gobj);
     func_ovl2_800E8098(fp, 0x3FU);
     func_ovl2_800D9444(fighter_gobj);
 
@@ -168,8 +168,8 @@ void func_ovl3_80160730(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, 4U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, 4U);
+    ftAnim_Update(fighter_gobj);
     func_ovl2_800E8098(fp, 0U);
 
     if ((fp->x192_flag_b3 == TRUE) && (fp->catch_gobj != NULL))
@@ -185,7 +185,7 @@ void jtgt_ovl3_801607B4(GObj *fighter_gobj)
 
     fp->cb_status = &func_ovl3_801605FC;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, 0U);
     func_ovl3_80160280(fp);
-    func_ovl2_800E0830(fighter_gobj);
+    ftAnim_Update(fighter_gobj);
 }

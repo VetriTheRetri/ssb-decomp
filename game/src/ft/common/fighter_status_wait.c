@@ -17,9 +17,9 @@ void func_ovl3_8013E1C8(GObj *fighter_gobj)
     {
         if (fp->ground_or_air == air)
         {
-            func_ovl2_800DEE98(fp);
+            ftCollision_SetGround(fp);
         }
-        func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_Wait, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Common_Wait, 0.0F, 1.0F, 0U);
 
         fp->x192_flag_b0 = TRUE;
 

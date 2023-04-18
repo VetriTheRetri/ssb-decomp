@@ -1,12 +1,9 @@
-#include <game/src/ft/chara/ftness/ftness.h>
-
-
-
-
+#include "ftness.h"
 
 // PK Fire (SpecialN/SpecialAirN)
 
-void func_ovl3_80153950(GObj *fighter_gobj) // PK Fire setup
+// 0x80153950
+void ftNess_ItemSpawn_PKFire(GObj *fighter_gobj) // PK Fire setup
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
@@ -46,58 +43,65 @@ void func_ovl3_80153950(GObj *fighter_gobj) // PK Fire setup
     }
 }
 
-void func_ovl3_80153AC0(GObj *fighter_gobj)
+// 0x80153AC0
+void ftNess_SpecialN_MapCollide(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_80153B08);
+    func_ovl2_800DE6E4(fighter_gobj, ftNess_SpecialAirN_SwitchStatusAir);
 }
 
-void func_ovl3_80153AE4(GObj *fighter_gobj)
+// 0x80153AE4
+void ftNess_SpecialAirN_MapCollide(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_80153B08);
+    func_ovl2_800DE6E4(fighter_gobj, ftNess_SpecialN_SwitchStatusGround);
 }
 
-void func_ovl3_80153B08(GObj *fighter_gobj) // Grounded PK Fire Action State callback
+// 0x80153B08
+void ftNess_SpecialN_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEE98(fp);
+    ftCollision_SetGround(fp);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U); // Action State Change
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U); // Action State Change
 
-    fp->cb_accessory = func_ovl3_80153950;
+    fp->cb_accessory = ftNess_ItemSpawn_PKFire;
 }
 
-void func_ovl3_80153B5C(GObj *fighter_gobj) // Aerial PK Fire Action State callback
+// 0x80153B5C
+void ftNess_SpecialAirN_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U); // Action State Change
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U); // Action State Change
 
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_accessory = func_ovl3_80153950;
+    fp->cb_accessory = ftNess_ItemSpawn_PKFire;
 }
 
-void func_ovl3_80153BB8(GObj *fighter_gobj)
+// 0x80153BB8
+void ftNess_SpecialN_SetStatusFlags(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->cmd_flags.flag0 = FALSE;
-    fp->cb_accessory = func_ovl3_80153950;
+    fp->cb_accessory = ftNess_ItemSpawn_PKFire;
 }
 
-void jtgt_ovl3_80153BD0(GObj *fighter_gobj) // Aerial PK Fire collision callback
+// 0x80153BD0
+void ftNess_SpecialN_ApplyStatusGround(GObj *fighter_gobj) // Aerial PK Fire collision callback
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialN, 0.0F, 1.0F, 0);
-    func_ovl2_800E0830(fighter_gobj);
-    func_ovl3_80153BB8(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, 0.0F, 1.0F, 0);
+    ftAnim_Update(fighter_gobj);
+    ftNess_SpecialN_SetStatusFlags(fighter_gobj);
 }
 
-void jtgt_ovl3_80153C10(GObj *fighter_gobj) // Grounded PK Fire collision callback
+// 0x80153C10
+void ftNess_SpecialAirN_ApplyStatusAir(GObj *fighter_gobj) // Grounded PK Fire collision callback
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_SpecialAirN, 0.0F, 1.0F, 0);
-    func_ovl2_800E0830(fighter_gobj);
-    func_ovl3_80153BB8(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, 0.0F, 1.0F, 0);
+    ftAnim_Update(fighter_gobj);
+    ftNess_SpecialN_SetStatusFlags(fighter_gobj);
 }

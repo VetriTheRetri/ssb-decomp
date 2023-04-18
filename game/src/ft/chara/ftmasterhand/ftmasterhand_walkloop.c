@@ -38,7 +38,7 @@ void func_ovl3_801599C4(GObj *fighter_gobj)
 
     fp->phys_info.vel_air.y = 0;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_WalkLoop, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_WalkLoop, 0.0F, 1.0F, 0U);
 
     fp->phys_info.vel_air.x = fp->lr * 35.0F;
 }

@@ -62,8 +62,8 @@ void jtgt_ovl3_8015DE0C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialHi, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialHi, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->cmd_flags.flag1 = FALSE;
 }
@@ -80,8 +80,8 @@ void jtgt_ovl3_8015DE90(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Samus_SpecialAirHi, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirHi, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->jumps_used = fp->attributes->jumps_max;
     fp->phys_info.vel_air.y = FTSAMUS_SCREWATTACK_VEL_Y_BASE;

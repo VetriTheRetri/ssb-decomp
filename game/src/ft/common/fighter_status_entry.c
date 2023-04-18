@@ -5,7 +5,7 @@ void func_ovl3_8013D930(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_Entry, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Entry, 0.0F, 1.0F, 0U);
 
     fp->x18D_flag_b7 = TRUE;
     fp->x18E_flag_b0 = TRUE;
@@ -203,7 +203,7 @@ void func_ovl3_8013DBE0(GObj *fighter_gobj)
         break;
     }
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->status_vars.common.entry.entry_wait = FTCOMMON_ENTRY_WAIT;

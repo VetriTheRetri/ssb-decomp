@@ -5196,12 +5196,12 @@ glabel jtbl_ovl2_8012B2C4
   /* 54EA4 0A6B34 8012B334 */  .4byte func_ovl2_800D94C4
   .incbin "ovl2.raw.bin", 0x54EA8, 0x4
   /* 54EAC 0A6B3C 8012B33C */  .4byte func_ovl2_800D8BB4
-  /* 54EB0 0A6B40 8012B340 */  .4byte func_ovl3_80153AC0
+  /* 54EB0 0A6B40 8012B340 */  .4byte ftNess_SpecialN_MapCollide
   .incbin "ovl2.raw.bin", 0x54EB4, 0x4
   /* 54EB8 0A6B48 8012B348 */  .4byte func_ovl2_800D94E8
   .incbin "ovl2.raw.bin", 0x54EBC, 0x4
   /* 54EC0 0A6B50 8012B350 */  .4byte func_ovl2_800D91EC
-  /* 54EC4 0A6B54 8012B354 */  .4byte func_ovl3_80153AE4
+  /* 54EC4 0A6B54 8012B354 */  .4byte ftNess_SpecialAirN_MapCollide
   .incbin "ovl2.raw.bin", 0x54EC8, 0x4
   /* 54ECC 0A6B5C 8012B35C */  .4byte func_ovl3_80153E04
   .incbin "ovl2.raw.bin", 0x54ED0, 0x4

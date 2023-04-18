@@ -185,7 +185,7 @@ void func_ovl3_8013C1C4(GObj *fighter_gobj)
     u32 sfx_id;
 
     func_ovl3_8013C050(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadDown, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadDown, 0.0F, 1.0F, 0U);
     func_ovl3_8013C0B0(fighter_gobj);
     func_ovl3_8013C120(fighter_gobj);
 
@@ -222,7 +222,7 @@ void func_ovl3_8013C30C(GObj *fighter_gobj)
     u32 sfx_id;
 
     func_ovl3_8013C050(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
     func_ovl3_8013C0B0(fighter_gobj);
     func_ovl3_8013C120(fighter_gobj);
 
@@ -259,7 +259,7 @@ void func_ovl3_8013C454(GObj *fighter_gobj)
     u32 sfx_id;
 
     func_ovl3_8013C050(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
     func_ovl3_8013C0B0(fighter_gobj);
     func_ovl3_8013C120(fighter_gobj);
 
@@ -359,7 +359,7 @@ void func_ovl3_8013C740(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_8013C050(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadUpStar, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpStar, 0.0F, 1.0F, 0U);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->status_vars.common.dead.pos = DObjGetStruct(fighter_gobj)->translate;
@@ -476,7 +476,7 @@ void func_ovl3_8013CAAC(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_8013C050(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_DeadUpFall, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpFall, 0.0F, 1.0F, 0U);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->status_vars.common.dead.pos = DObjGetStruct(fighter_gobj)->translate;

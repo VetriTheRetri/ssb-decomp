@@ -56,7 +56,7 @@ loop: // This makes no sense
 
     func_ovl2_800D79F0(this_gobj, &rebirth_vars);
     func_ovl2_8010F840(this_fp);
-    func_ovl2_800DEE98(this_fp);
+    ftCollision_SetGround(this_fp);
 
     this_fp->coll_data.ground_line_id = -2;
     this_fp->coll_data.clip_flag = 0x4000;
@@ -64,8 +64,8 @@ loop: // This makes no sense
     this_fp->coll_data.ground_angle.x = 0.0F;
     this_fp->coll_data.ground_angle.z = 0.0F;
 
-    func_ovl2_800E6F24(this_gobj, ftStatus_Common_RebirthDown, 100.0F, 1.0F, 0U);
-    func_ovl2_800E0830(this_gobj);
+    ftStatus_Update(this_gobj, ftStatus_Common_RebirthDown, 100.0F, 1.0F, 0U);
+    ftAnim_Update(this_gobj);
     func_ovl2_800D9444(this_gobj);
 
     this_fp->status_vars.common.rebirth.halo_lower_wait = FTCOMMON_REBIRTH_HALO_LOWER_WAIT;
@@ -141,8 +141,8 @@ void func_ovl3_8013D2DC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_RebirthStand, 0.0F, 1.0F, 0x106U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthStand, 0.0F, 1.0F, 0x106U);
+    ftAnim_Update(fighter_gobj);
 
     fp->x191_flag_b3 = TRUE;
     fp->x191_flag_b1 = TRUE;
@@ -179,7 +179,7 @@ void func_ovl3_8013D518(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, 0x106U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, 0x106U);
 
     fp->x191_flag_b1 = TRUE;
     fp->x18E_flag_b0 = TRUE;

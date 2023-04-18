@@ -63,7 +63,7 @@ void func_ovl3_801438F0(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fa
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_FallSpecial, 0.0F, 1.0F, 8U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_FallSpecial, 0.0F, 1.0F, 8U);
 
     fp->status_vars.common.fallspecial.drift = (attributes->aerial_speed_max_x * drift);
 

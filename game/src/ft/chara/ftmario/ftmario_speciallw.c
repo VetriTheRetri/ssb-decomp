@@ -101,8 +101,8 @@ void func_ovl3_801567B0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_801567A4(fighter_gobj);
-    func_ovl2_800DEE98(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0x4000U);
+    ftCollision_SetGround(fp);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0x4000U);
     func_ovl2_800D8938(fp, 17.0F);
 }
 
@@ -112,7 +112,7 @@ void func_ovl3_801567B0(GObj *fighter_gobj)
 
     func_ovl3_801567A4(fighter_gobj);
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0x4000U);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0x4000U);
     func_ovl2_800D8D10(fp, 40.0F);
     func_ovl2_800D8E78(fp, 17.0F);
 }
@@ -134,8 +134,8 @@ void jtgt_ovl3_8015688C(GObj *fighter_gobj)
 
     func_ovl3_801567A4(fighter_gobj);
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->phys_info.vel_air.y = -7.0F;
 
@@ -152,8 +152,8 @@ void jtgt_ovl3_80156910(GObj *fighter_gobj)
     f32 tornado_vel_y;
 
     func_ovl3_801567A4(fighter_gobj);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     tornado_vel_y = (fp->fighter_vars.mario.is_tornado_charge != FALSE) ? 0.0F : 22.0F;
 

@@ -44,8 +44,8 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
         {
             if (fp->coll_data.coll_type & 0x800)
             {
-                func_ovl2_800DEE98(fp);
-                func_ovl2_800E6F24(fighter_gobj, ftStatus_Yoshi_SpecialLwLanding, 0.0F, 1.0F, 0U);
+                ftCollision_SetGround(fp);
+                ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwLanding, 0.0F, 1.0F, 0U);
             }
             else if (fp->coll_data.coll_type & 0x3000)
             {
@@ -67,8 +67,8 @@ void func_ovl3_8015EF5C(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & 0x800)
         {
-            func_ovl2_800DEE98(fp);
-            func_ovl2_800E6F24(fighter_gobj, ftStatus_Yoshi_SpecialLwLanding, 0.0F, 1.0F, 0U);
+            ftCollision_SetGround(fp);
+            ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwLanding, 0.0F, 1.0F, 0U);
         }
 
         else if (fp->coll_data.coll_type & 0x3000)
@@ -93,8 +93,8 @@ void jtgt_ovl3_8015EFE4(GObj *fighter_gobj)
     fp->cb_status = func_ovl3_8015EFD4;
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Yoshi_SpecialLwStart, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwStart, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->jumps_used = fp->attributes->jumps_max;
 }
@@ -105,8 +105,8 @@ void jtgt_ovl3_8015F04C(GObj *fighter_gobj)
 
     fp->cb_status = func_ovl3_8015EFD4;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Yoshi_SpecialAirLwStart, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirLwStart, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     fp->jumps_used = fp->attributes->jumps_max;
 }
@@ -123,8 +123,8 @@ void func_ovl3_8015F0A8(GObj *fighter_gobj)
 
     vel_y_bak = fp->phys_info.vel_air.y;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Yoshi_SpecialAirLwLoop, fighter_gobj->anim_frame, 0, 1U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirLwLoop, fighter_gobj->anim_frame, 0, 1U);
+    ftAnim_Update(fighter_gobj);
 
     fp->phys_info.vel_air.y = vel_y_bak;
 

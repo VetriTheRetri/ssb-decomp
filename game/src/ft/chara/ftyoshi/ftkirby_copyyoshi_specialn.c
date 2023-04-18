@@ -118,8 +118,8 @@ void func_ovl3_8015F408(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEE98(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x25U);
+    ftCollision_SetGround(fp);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x25U);
     func_ovl3_8015F180(fp, func_ovl3_8015F6AC);
 }
 
@@ -128,32 +128,32 @@ void func_ovl3_8015F45C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl2_800DEEC8(fp);
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x25U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x25U);
     func_ovl3_8015F180(fp, func_ovl3_8015F6F0);
 }
 
 void func_ovl3_8015F4B0(GObj *fighter_gobj)
 {
-    func_ovl2_800DEE98(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
 }
 
 void func_ovl3_8015F4F0(GObj *fighter_gobj)
 {
     func_ovl2_800DEEC8(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
 }
 
 void func_ovl3_8015F530(GObj *fighter_gobj)
 {
-    func_ovl2_800DEE98(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
 }
 
 void func_ovl3_8015F570(GObj *fighter_gobj)
 {
     func_ovl2_800DEEC8(FighterGetStruct(fighter_gobj));
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
 }
 
 void jtgt_ovl3_8015F5B0(GObj *fighter_gobj)
@@ -162,9 +162,9 @@ void jtgt_ovl3_8015F5B0(GObj *fighter_gobj)
 
     fp->cb_status = func_ovl3_8015F3EC;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialN, 0.0F, 1.0F, 0U);
     func_ovl3_8015F180(fp, func_ovl3_8015F6AC);
-    func_ovl2_800E0830(fighter_gobj);
+    ftAnim_Update(fighter_gobj);
 }
 
 void jtgt_ovl3_8015F60C(GObj *fighter_gobj)
@@ -173,9 +173,9 @@ void jtgt_ovl3_8015F60C(GObj *fighter_gobj)
 
     fp->cb_status = &func_ovl3_8015F3F8;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirN, 0.0F, 1.0F, 0U);
     func_ovl3_8015F180(fp, func_ovl3_8015F6F0);
-    func_ovl2_800E0830(fighter_gobj);
+    ftAnim_Update(fighter_gobj);
 }
 
 void func_ovl3_8015F668(GObj *fighter_gobj)
@@ -190,15 +190,15 @@ void func_ovl3_8015F668(GObj *fighter_gobj)
 
 void func_ovl3_8015F6AC(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015F668(fighter_gobj);
 }
 
 void func_ovl3_8015F6F0(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015F668(fighter_gobj);
 }
 
@@ -214,14 +214,14 @@ void func_ovl3_8015F734(GObj *fighter_gobj)
 
 void func_ovl3_8015F768(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNRelease, 0.0F, 1.0F, 0x24U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialNRelease, 0.0F, 1.0F, 0x24U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015F734(fighter_gobj);
 }
 
 void func_ovl3_8015F7AC(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNRelease, 0.0F, 1.0F, 0x24U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirNRelease, 0.0F, 1.0F, 0x24U);
+    ftAnim_Update(fighter_gobj);
     func_ovl3_8015F734(fighter_gobj);
 }

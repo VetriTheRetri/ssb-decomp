@@ -53,7 +53,7 @@ void func_ovl3_801592B4(GObj *fighter_gobj, void (*cb)(GObj*), Vec3f *vel)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Move, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Move, fighter_gobj->anim_frame, 1.0F, 0U);
 
     fp->status_vars.masterhand.move.cb = cb;
 

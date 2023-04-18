@@ -76,7 +76,7 @@ void func_ovl3_80142AC4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_OttottoWait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_OttottoWait, 0.0F, 1.0F, 0U);
 
     fp->x192_flag_b0 = TRUE;
 }
@@ -85,7 +85,7 @@ void func_ovl3_80142B08(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_Ottotto, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Ottotto, 0.0F, 1.0F, 0U);
 
     fp->phys_info.vel_air.z = 0.0F;
     fp->phys_info.vel_air.y = 0.0F;

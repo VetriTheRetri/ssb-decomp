@@ -44,8 +44,8 @@ void func_ovl3_801596B0(GObj *fighter_gobj)
 
     fp->lr = CENTER;    // Sets LR to zero? ILLEGAL
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Okuhikouki2, 0.0F, 1.0F, 0U);
-    func_ovl2_800E0830(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okuhikouki2, 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
 
     translate = &DObjGetStruct(fighter_gobj)->translate;
 

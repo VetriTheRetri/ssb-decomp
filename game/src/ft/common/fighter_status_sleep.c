@@ -112,7 +112,7 @@ void func_ovl3_8013D8B0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Common_Sleep, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Sleep, 0.0F, 1.0F, 0U);
 
     fp->x18D_flag_b7 = TRUE;
     fp->x18E_flag_b0 = TRUE;

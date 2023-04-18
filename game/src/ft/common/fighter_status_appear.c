@@ -17,7 +17,7 @@ void func_ovl3_8013DEC0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_Ness_AppearStart, 0.0F, 1.0F, 0x22U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_AppearStart, 0.0F, 1.0F, 0x22U);
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->x18E_flag_b0 = FALSE;
@@ -27,7 +27,7 @@ void func_ovl3_8013DF14(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Ness_AppearR : ftStatus_Ness_AppearL), 0.0F, 1.0F, 0x22U);
+    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Ness_AppearR : ftStatus_Ness_AppearL), 0.0F, 1.0F, 0x22U);
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->x18E_flag_b0 = FALSE;
@@ -50,7 +50,7 @@ void func_ovl3_8013DF14(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Captain_AppearR : ftStatus_Captain_AppearL), 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Captain_AppearR : ftStatus_Captain_AppearL), 0.0F, 1.0F, 0U);
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->x18E_flag_b0 = FALSE;

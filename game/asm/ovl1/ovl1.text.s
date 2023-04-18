@@ -139,7 +139,7 @@ glabel func_ovl1_80390584
   /* 107B68 80390588 AFBF0014 */        sw $ra, 0x14($sp)
   /* 107B6C 8039058C 8C8E0084 */        lw $t6, 0x84($a0)
   /* 107B70 80390590 AFA40020 */        sw $a0, 0x20($sp)
-  /* 107B74 80390594 0C03820C */       jal func_ovl2_800E0830
+  /* 107B74 80390594 0C03820C */       jal ftAnim_Update
   /* 107B78 80390598 AFAE001C */        sw $t6, 0x1c($sp)
   /* 107B7C 8039059C 0C038472 */       jal func_ovl2_800E11C8
   /* 107B80 803905A0 8FA40020 */        lw $a0, 0x20($sp)
@@ -160,7 +160,7 @@ glabel func_ovl1_803905CC
   /* 107BB0 803905D0 AFBF001C */        sw $ra, 0x1c($sp)
   /* 107BB4 803905D4 AFA00010 */        sw $zero, 0x10($sp)
   /* 107BB8 803905D8 24060000 */     addiu $a2, $zero, 0
-  /* 107BBC 803905DC 0C039BC9 */       jal func_ovl2_800E6F24
+  /* 107BBC 803905DC 0C039BC9 */       jal ftStatus_Update
   /* 107BC0 803905E0 3C073F80 */       lui $a3, 0x3f80
   /* 107BC4 803905E4 8FBF001C */        lw $ra, 0x1c($sp)
   /* 107BC8 803905E8 27BD0020 */     addiu $sp, $sp, 0x20

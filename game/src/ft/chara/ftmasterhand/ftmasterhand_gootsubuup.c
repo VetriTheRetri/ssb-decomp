@@ -31,5 +31,5 @@ void func_ovl3_80159B3C(GObj *fighter_gobj)
 
 void func_ovl3_80159B9C(GObj *fighter_gobj)
 {
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_GootsubuUp, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuUp, 0.0F, 1.0F, 0U);
 }

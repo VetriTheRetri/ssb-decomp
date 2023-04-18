@@ -11,7 +11,7 @@ void func_ovl3_80159524(GObj *fighter_gobj)
     Fighter_Struct *masterhand_fp;
     s32 var_a3;
 
-    func_ovl2_800E6F24(fighter_gobj, ftStatus_MasterHand_Okuhikouki1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okuhikouki1, 0.0F, 1.0F, 0U);
 
     masterhand_fp = FighterGetStruct(fighter_gobj);
 

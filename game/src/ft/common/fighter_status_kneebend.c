@@ -39,7 +39,7 @@ void func_ovl3_8013F3A0(GObj *fighter_gobj, s32 status_id, u32 input_source)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E6F24(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
 
     fp->status_vars.common.kneebend.jump_force = fp->input.stick_range.y;
     fp->status_vars.common.kneebend.anim_frame = 0.0F;
@@ -204,7 +204,7 @@ void func_ovl3_8013F880(GObj *fighter_gobj)
 
     status_id = ((fp->input.stick_range.x * fp->lr) > FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE) ? ftStatus_Common_JumpF : ftStatus_Common_JumpB;
 
-    func_ovl2_800E6F24(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
 
     if ((fp->status_vars.common.kneebend.input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_STICK) && (fp->status_vars.common.kneebend.input_source == FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON))
     {

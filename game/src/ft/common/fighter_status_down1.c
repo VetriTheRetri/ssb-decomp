@@ -22,7 +22,8 @@ void func_ovl3_80144254(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80144294(GObj *fighter_gobj)
+// 0x80144294
+void ftCommon_DownWait_ApplyStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
@@ -33,7 +34,7 @@ void func_ovl3_80144294(GObj *fighter_gobj)
     }
     else status_id = ftStatus_Common_DownWaitU;
 
-    func_ovl2_800E6F24(fighter_gobj, status_id, 0.0F, 1.0F, 0x1E0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x1E0U);
 
     fp->status_vars.common.downwait.stand_wait = FTCOMMON_DOWNWAIT_STAND_WAIT;
 
@@ -56,11 +57,12 @@ void func_ovl3_80144308(GObj *fighter_gobj)
     }
     if ((fighter_gobj->anim_frame <= 0.0F) && (func_ovl3_80144944(fighter_gobj) == FALSE) && (func_ovl3_8014482C(fighter_gobj) == FALSE))
     {
-        func_ovl3_80144294(fighter_gobj);
+        ftCommon_DownWait_ApplyStatus(fighter_gobj);
     }
 }
 
-bool32 func_ovl3_80144398(GObj *fighter_gobj)
+// 0x80144398
+bool32 ftCommon_DownBounce_UpOrDown(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 rot_x = fp->joint[4]->rotate.x;
@@ -71,9 +73,9 @@ bool32 func_ovl3_80144398(GObj *fighter_gobj)
 
     if ((rot_x < -0.5F) || ((rot_x > 0.0F) && (rot_x < 0.5F)))
     {
-        return TRUE;
+        return 1;
     }
-    else return FALSE;
+    else return 0;
 }
 
 extern u16 Fighter_DownBounce_Sound[];
@@ -87,22 +89,23 @@ void func_ovl3_80144428(GObj *fighter_gobj)
     func_ovl2_800E806C(fp, 4, 0);
 }
 
-void func_ovl3_80144498(GObj *fighter_gobj)
+// 0x80144498
+void ftCommon_DownBounce_ApplyStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->ground_or_air == air)
     {
-        func_ovl2_800DEE98(fp);
+        ftCollision_SetGround(fp);
     }
-    if (func_ovl3_80144398(fighter_gobj) != FALSE)
+    if (ftCommon_DownBounce_UpOrDown(fighter_gobj) != 0)
     {
         status_id = ftStatus_Common_DownBounceD;
     }
     else status_id = ftStatus_Common_DownBounceU;
 
-    func_ovl2_800E6F24(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
     func_ovl3_80144428(fighter_gobj);
 
     fp->status_vars.common.downbounce.attack_buffer = 0;
