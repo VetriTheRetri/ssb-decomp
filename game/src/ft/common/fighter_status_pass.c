@@ -20,7 +20,7 @@ void func_ovl3_80141DA0(GObj *fighter_gobj, s32 status_id, f32 frame_begin, u32 
 
     fp->coll_data.ignore_line_id = fp->coll_data.ground_line_id;
 
-    fp->buffer_stick_y = U8_MAX - 1;
+    fp->hold_stick_y = U8_MAX - 1;
 }
 
 void func_ovl3_80141E18(GObj *fighter_gobj)
@@ -35,7 +35,7 @@ void func_ovl3_80141E38(GObj *fighter_gobj)
 
 bool32 func_ovl3_80141E60(Fighter_Struct *fp)
 {
-    if ((fp->input.stick_range.y <= FTCOMMON_PASS_STICK_RANGE_MIN) && (fp->buffer_stick_y < FTCOMMON_PASS_BUFFER_FRAMES_MAX) && (fp->coll_data.clip_flag & 0x4000))
+    if ((fp->input.stick_range.y <= FTCOMMON_PASS_STICK_RANGE_MIN) && (fp->hold_stick_y < FTCOMMON_PASS_BUFFER_FRAMES_MAX) && (fp->coll_data.clip_flag & 0x4000))
     {
         return TRUE;
     }

@@ -627,7 +627,7 @@ struct Fighter_Struct
     f32 unk_0x150;
     u8 filler_0x154[0x15C - 0x154];
     s32 timer_unk1;
-    s32 timer_unk2; // Unknown timer
+    s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
     s32 timer_unk3;
     s32 tornado_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
     s32 tarucann_wait;// Wait this many frames before fighter can enter Barrel Cannon again
@@ -794,11 +794,12 @@ struct Fighter_Struct
 
     u8 filler_0x258[0x268 - 0x258];
 
-    u8 buffer_stick_x;
-    u8 buffer_stick_y;
-    u8 buffer_button_b;
+    u8 hold_stick_x; // Frames control stick has been held
+    u8 hold_stick_y; // Frames control stick has been held
+    u8 tap_stick_x; // Frames control stick has been tapped + held
+    u8 tap_stick_y; // Frames control stick has been tapped + held
 
-    u8 filler_0x26B[0x276 - 0x26B];
+    u8 filler_0x26B[0x276 - 0x26C];
 
     s16 unk_0x276;
     GObj *throw_gobj; // GObj pointer of player throwing this fighter?

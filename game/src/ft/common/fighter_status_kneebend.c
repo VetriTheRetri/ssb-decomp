@@ -70,7 +70,7 @@ bool32 func_ovl3_8013F450(Fighter_Struct *fp)
 
 s32 func_ovl3_8013F474(Fighter_Struct *fp)
 {
-    if ((fp->input.stick_range.y >= FTCOMMON_KNEEBEND_STICK_RANGE_MIN) && (fp->buffer_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
+    if ((fp->input.stick_range.y >= FTCOMMON_KNEEBEND_STICK_RANGE_MIN) && (fp->hold_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
     {
         return FTCOMMON_KNEEBEND_INPUT_TYPE_STICK;
     }
@@ -103,7 +103,7 @@ bool32 func_ovl3_8013F4D0(GObj *fighter_gobj)
 
 s32 func_ovl3_8013F53C(Fighter_Struct *fp)
 {
-    if ((fp->input.stick_range.y > FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN) && (fp->buffer_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
+    if ((fp->input.stick_range.y > FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN) && (fp->hold_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
     {
         return FTCOMMON_KNEEBEND_INPUT_TYPE_STICK;
     }
@@ -223,7 +223,7 @@ void func_ovl3_8013F880(GObj *fighter_gobj)
     fp->phys_info.vel_air.y = (vel_y * attributes->jump_height_mul) + attributes->jump_height_base;
     fp->phys_info.vel_air.x = vel_x * attributes->jump_vel_x;
 
-    fp->buffer_stick_y = U8_MAX - 1;
+    fp->hold_stick_y = U8_MAX - 1;
 
     fp->x192_flag_b0 = TRUE;
 }

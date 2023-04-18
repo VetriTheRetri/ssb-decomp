@@ -205,14 +205,14 @@ void func_ovl3_80140878(GObj *fighter_gobj)
     {
         if ((SQUARE(fp->input.stick_range.x) + SQUARE(fp->input.stick_range.y)) >= SQUARE(FTCOMMON_DAMAGE_SMASH_DI_RANGE_MIN))
         {
-            if ((fp->buffer_stick_x < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX) || (fp->buffer_stick_y < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX))
+            if ((fp->hold_stick_x < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX) || (fp->hold_stick_y < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX))
             {
                 Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
                 translate->x += fp->input.stick_range.x * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
                 translate->y += fp->input.stick_range.y * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
 
-                fp->buffer_stick_x = fp->buffer_stick_y = U8_MAX - 1;
+                fp->hold_stick_x = fp->hold_stick_y = U8_MAX - 1;
             }
         }
     }
@@ -229,7 +229,7 @@ void func_ovl3_8014093C(GObj *fighter_gobj)
 
     if ((func_ovl2_800DEDAC(fighter_gobj) != FALSE)                 &&
     (func_ovl3_80141C6C(fighter_gobj) == FALSE)                     &&
-    (fp->status_vars.common.damage.coll_mask & MPCOLL_MASK_GROUND) &&
+    (fp->status_vars.common.damage.coll_mask & MPCOLL_MASK_GROUND)  &&
     (func_ovl3_80144760(fighter_gobj) == FALSE)                     &&
     (func_ovl3_801446BC(fighter_gobj) == FALSE))
     {
@@ -585,7 +585,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     
     this_fp->unk_0xA00 = func_ovl3_80140878;
 
-    this_fp->buffer_stick_x = this_fp->buffer_stick_y = U8_MAX - 1;
+    this_fp->hold_stick_x = this_fp->hold_stick_y = U8_MAX - 1;
 
     this_fp->damage_knockback_again = knockback;
 
@@ -615,7 +615,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     func_800269C0(this_fp->attributes->damage_sfx);
 next:
     this_fp->is_hitstun = TRUE;
-    this_fp->timer_unk2 = 0x10000;
+    this_fp->time_since_last_z = U16_MAX + 1;
 
     if ((damage_level == 3) && (knockback >= 130.0F))
     {

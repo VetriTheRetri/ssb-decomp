@@ -133,7 +133,14 @@
 #define FTCOMMON_TARUCANN_PICKUP_WAIT 16                        // Frames before Barrel Cannon can be used again
 
 #define FTCOMMON_DOWNWAIT_STAND_WAIT 180                        // Frames until fighter automatically stands up from knockdown
+#define FTCOMMON_DOWNWAIT_STAND_STICK_RANGE_MIN 20              // Minimum stick Y range required to stand up
+
 #define FTCOMMON_DOWNBOUNCE_ATTACK_BUFFER 60
+
+#define FTCOMMON_DOWN_FORWARD_BACK_RANGE_MIN 20                 // Minimum stick X range required for missed tech roll
+
+#define FTCOMMON_PASSIVE_BUFFER_FRAMES_MAX 20                   // Tech buffer frames
+#define FTCOMMON_PASSIVE_F_OR_B_RANGE 20 
 
 typedef struct ftCommon_Filler
 {

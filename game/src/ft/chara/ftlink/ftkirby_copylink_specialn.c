@@ -69,7 +69,7 @@ void func_ovl3_801647D0(GObj *fighter_gobj)
 
     fp->cmd_flags.flag0 = 0;
 
-    if ((ABS(fp->input.stick_range.x) >= FTKIRBY_COPYLINK_BOOMERANG_SMASH_STICK_MIN) && (fp->buffer_button_b < FTKIRBY_COPYLINK_BOOMERANG_SMASH_BUFFER))
+    if ((ABS(fp->input.stick_range.x) >= FTKIRBY_COPYLINK_BOOMERANG_SMASH_STICK_MIN) && (fp->tap_stick_x < FTKIRBY_COPYLINK_BOOMERANG_SMASH_BUFFER))
     {
         fp->status_vars.kirby.copylink_specialn.is_smash = TRUE;
     }

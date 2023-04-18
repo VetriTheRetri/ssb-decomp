@@ -143,7 +143,7 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 
     fp->jumps_used++;
 
-    fp->buffer_stick_y = U8_MAX - 1;
+    fp->hold_stick_y = U8_MAX - 1;
 
     fp->x192_flag_b0 = TRUE;
 
@@ -190,7 +190,7 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     {
         fp->phys_info.vel_air.y = (((stick_range_y * attributes->jump_height_mul) + attributes->jump_height_base) * attributes->aerial_jump_height);
 
-        fp->buffer_stick_y = U8_MAX - 1;
+        fp->hold_stick_y = U8_MAX - 1;
     }
     else switch (fp->ft_kind)
     {

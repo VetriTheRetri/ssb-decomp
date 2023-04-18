@@ -86,7 +86,7 @@ void func_ovl3_8013ED00(GObj *fighter_gobj, u32 flag)
     ftAnim_Update(fighter_gobj);
 
     fp->phys_info.vel_ground.x = fp->attributes->dash_speed;
-    fp->buffer_stick_x = (U8_MAX - 1);
+    fp->hold_stick_x = (U8_MAX - 1);
     fp->cmd_flags.flag1 = flag;
 }
 
@@ -94,7 +94,7 @@ bool32 func_ovl3_8013ED64(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->buffer_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
+    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->hold_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
     {
         if ((fp->input.stick_range.x * fp->lr) < 0)
         {
@@ -114,7 +114,7 @@ bool32 func_ovl3_8013EDFC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->input.stick_range.x * fp->status_vars.common.turn.lr_turn) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->buffer_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
+    if (((fp->input.stick_range.x * fp->status_vars.common.turn.lr_turn) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->hold_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
     {
         fp->status_vars.common.turn.lr_dash = fp->status_vars.common.turn.lr_turn;
         fp->status_vars.common.turn.unk_0x14 = 0;

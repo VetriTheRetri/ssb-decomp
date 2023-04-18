@@ -46,7 +46,7 @@ void func_ovl3_801436A0(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, 8U);
     func_ovl3_80143630(fighter_gobj);
 
-    fp->timer_unk2 = 0x10000;
+    fp->time_since_last_z = 0x10000;
 }
 
 void func_ovl3_801436F0(GObj *fighter_gobj) // Unused
