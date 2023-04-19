@@ -51,7 +51,7 @@ void func_ovl3_80144C24(GObj *fighter_gobj)
 
     func_ovl2_801016E0(&vel);
 
-    fp->cb_take_damage = &func_ovl3_80144CF8;
+    fp->cb_take_damage = func_ovl3_80144CF8;
 
     func_ovl2_800E8098(fp, 4U);
 }
@@ -88,13 +88,13 @@ void func_ovl3_80144DF4(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffWait, 0.0F, 1.0F, 0U);
 
-    fp->status_vars.common.cliff.status_id = 0;
+    fp->status_vars.common.cliffwait.status_id = 0;
 
     if (fp->percent_damage < FTCOMMON_CLIFF_DAMAGE_HIGH)
     {
-        fp->status_vars.common.cliff.fall_wait = FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_LOW;
+        fp->status_vars.common.cliffwait.fall_wait = FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_LOW;
     }
-    else fp->status_vars.common.cliff.fall_wait = FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_HIGH;
+    else fp->status_vars.common.cliffwait.fall_wait = FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_HIGH;
 
     fp->x190_flag_b7 = TRUE;
 
@@ -109,9 +109,9 @@ bool32 func_ovl3_80144E84(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->status_vars.common.cliff.fall_wait--;
+    fp->status_vars.common.cliffwait.fall_wait--;
 
-    if (fp->status_vars.common.cliff.fall_wait == 0)
+    if (fp->status_vars.common.cliffwait.fall_wait == 0)
     {
         fp->cliffcatch_wait = FTCOMMON_CLIFF_CATCH_WAIT;
 

@@ -90,7 +90,9 @@ typedef struct ftCommonAttributes
     u16 throw_heavy_sfx;
     u16 unk_0xEA;
     s32 unk_0xEC;
-    u8 filler_0xEC[0x2D4 - 0xF0];
+    u8 filler_0xEC[0x2B8 - 0xF0];
+    bool32 cliff_status_ground_air_id[5];
+    u8 filler_0x2CC[0x2D4 - 0x2CC];
     DObjContainer *renderstate;
     u8 filler_0x2D8[0x324 - 0x2D8];
     s32 unk_0x324;

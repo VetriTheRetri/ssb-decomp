@@ -146,6 +146,7 @@
 #define FTCOMMON_CLIFF_DAMAGE_HIGH 100                          // If fighter's damage is greater than or equal to this, use Slow action states and hang time
 #define FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_HIGH 480
 #define FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_LOW 1080
+#define FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN 20                // Minimum stick range required to preform ledge actions (and drop from ledge)
 
 typedef struct ftCommon_Filler
 {
@@ -315,12 +316,19 @@ typedef struct ftCommon_Rebound_StatusVars
 
 } ftCommon_Rebound_StatusVars;
 
-typedef struct ftCommon_Cliff_StatusVars
+typedef struct ftCommon_CliffWait_StatusVars
 {
     s32 status_id;
     s32 fall_wait;
 
-} ftCommon_Cliff_StatusVars;
+} ftCommon_CliffWait_StatusVars;
+
+typedef struct ftCommon_CliffMotion_StatusVars
+{
+    s32 status_id;
+    s32 cliff_id;
+
+} ftCommon_CliffMotion_StatusVars;
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -362,7 +370,8 @@ typedef union ftCommon_StatusVars
     ftCommon_DownWait_StatusVars downwait;
     ftCommon_DownBounce_StatusVars downbounce;
     ftCommon_Rebound_StatusVars rebound;
-    ftCommon_Cliff_StatusVars cliff;
+    ftCommon_CliffWait_StatusVars cliffwait;
+    ftCommon_CliffMotion_StatusVars cliffmotion;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
