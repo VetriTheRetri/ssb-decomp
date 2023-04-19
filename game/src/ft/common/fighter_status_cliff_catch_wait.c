@@ -1,5 +1,7 @@
 #include "fighter.h"
 
+// CliffCatch + CliffWait
+
 void func_ovl3_80144B30(GObj *fighter_gobj)
 {
     func_ovl2_800D9480(fighter_gobj, func_ovl3_80144DF4);
