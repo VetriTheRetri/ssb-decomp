@@ -112,8 +112,8 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     func_ovl3_80172508(article_gobj);
     func_ovl3_801725BC(article_gobj);
 
-    ap->is_show_indicator = FALSE;
-    ap->is_pickup = FALSE;
+    ap->is_allow_pickup = FALSE;
+    ap->is_hold = FALSE;
     ap->x2D3_flag_b4 = FALSE;
     ap->x2D3_flag_b5 = FALSE;
     ap->is_static_damage = FALSE;
@@ -688,7 +688,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
             }
         }
     }
-    if (ap->is_show_indicator)
+    if (ap->is_allow_pickup)
     {
         ap->pickup_wait--;
 
@@ -716,7 +716,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
     }
     else article_gobj->is_render = FALSE;
 
-    if (!(ap->is_pickup))
+    if (!(ap->is_hold))
     {
         joint = DObjGetStruct(article_gobj);
 
@@ -906,7 +906,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
 
             ap->damage_gobj = fighter_gobj;
             ap->damage_team = fp->team;
-            ap->damage_port = fp->player_id;
+            ap->damage_port = fp->port_id;
             ap->damage_player_number = fp->player_number;
             ap->unk_0x2B4 = fp->offset_hit_type;
             ap->damage_display_state = fp->display_state;
@@ -937,7 +937,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
             func_ovl2_800FE6E4(&sp4C, ft_hit->damage, func_ovl2_800F0FC0(fp, ft_hit));
             break;
         default:
-            func_ovl2_800FDC04(&sp4C, fp->player_id, ft_hit->damage, 0);
+            func_ovl2_800FDC04(&sp4C, fp->port_id, ft_hit->damage, 0);
             break;
         }
     }
@@ -1088,7 +1088,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
             }
             defend_ap->damage_gobj = attack_ap->owner_gobj;
             defend_ap->damage_team = attack_ap->team;
-            defend_ap->damage_port = attack_ap->port_index;
+            defend_ap->damage_port = attack_ap->port_id;
             defend_ap->damage_player_number = attack_ap->player_number;
             defend_ap->unk_0x2B4 = attack_ap->unk_0x16;
             defend_ap->damage_display_state = attack_ap->display_state;
@@ -1119,7 +1119,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
                 break;
 
             default:
-                func_ovl2_800FDC04(&sp4C, attack_ap->port_index, damage, 0);
+                func_ovl2_800FDC04(&sp4C, attack_ap->port_id, damage, 0);
                 break;
             }
         }
@@ -1180,7 +1180,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
             }
             ap->damage_gobj = ip->owner_gobj;
             ap->damage_team = ip->team;
-            ap->damage_port = ip->port_index;
+            ap->damage_port = ip->port_id;
             ap->damage_player_number = ip->player_number;
             ap->unk_0x2B4 = ip->unk_0x12;
             ap->damage_display_state = ip->display_state;
@@ -1210,7 +1210,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
                 func_ovl2_80100ACC(&sp4C);
                 break;
             default:
-                func_ovl2_800FDC04(&sp4C, ip->port_index, damage, NULL);
+                func_ovl2_800FDC04(&sp4C, ip->port_id, damage, NULL);
                 break;
             }
         }
@@ -1578,7 +1578,7 @@ void func_ovl3_80171080(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (!(ap->is_pickup))
+    if (!(ap->is_hold))
     {
         func_ovl3_801705C4(article_gobj);
         func_ovl3_8017088C(article_gobj);
@@ -1673,7 +1673,7 @@ next_check:
         fp = FighterGetStruct(ap->reflect_gobj);
 
         ap->team = fp->team;
-        ap->port_index = fp->player_id;
+        ap->port_id = fp->port_id;
         ap->player_number = fp->player_number;
         ap->unk_0x16 = fp->offset_hit_type;
         ap->article_hit.flags_hi = ap->unk_0x28C;

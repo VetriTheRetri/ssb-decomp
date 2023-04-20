@@ -72,7 +72,7 @@ void func_ovl3_80180860(GObj *article_gobj)
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     ap->article_vars.kamex.hydro_push_vel_x = 0.0F;
 }

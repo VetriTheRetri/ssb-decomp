@@ -32,7 +32,7 @@ typedef struct Shadow_Struct
 {
     Vtx shadow_vertex1[8];
     Vtx shadow_vertex2[8];
-    s32 player_id;
+    s32 port_id;
     s32 unk_0x104;
 
 } Shadow_Struct;
@@ -76,7 +76,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
     }
     sp = (Shadow_Struct*)shadow_gobj->user_data;
 
-    fighter_gobj = Match_Info->player_block[sp->player_id].fighter_gobj;
+    fighter_gobj = Match_Info->player_block[sp->port_id].fighter_gobj;
 
     fp = FighterGetStruct(fighter_gobj);
 
@@ -415,7 +415,7 @@ GObj *func_ovl3_8013BB88(GObj *fighter_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    sp->player_id = fp->player_id;
+    sp->port_id = fp->port_id;
 
     for (i = 0; i < (ARRAY_COUNT(sp->shadow_vertex1) + ARRAY_COUNT(sp->shadow_vertex2)) / 2; i++)
     {

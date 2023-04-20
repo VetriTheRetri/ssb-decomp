@@ -174,11 +174,11 @@ GObj* func_ovl3_80185824(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
     ap->owner_gobj = ip->owner_gobj;
 
-    ap->is_show_indicator = FALSE;
-    ap->is_pickup = FALSE;
+    ap->is_allow_pickup = FALSE;
+    ap->is_hold = FALSE;
 
     ap->team = ip->team;
-    ap->port_index = ip->port_index;
+    ap->port_id = ip->port_id;
     ap->unk_0x16 = ip->unk_0x12;
     ap->player_number = ip->player_number;
 

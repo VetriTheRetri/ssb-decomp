@@ -41,7 +41,7 @@ void func_ovl3_80176538(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 1);
@@ -173,9 +173,9 @@ void func_ovl3_80176840(GObj *article_gobj)
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    if ((ap->port_index != -1U) && (ap->port_index != GMMATCH_PLAYERS_MAX)) // Macro might be off though
+    if ((ap->port_id != -1U) && (ap->port_id != GMMATCH_PLAYERS_MAX)) // Macro might be off though
     {
-        GObj *fighter_gobj = Match_Info->player_block[ap->port_index].fighter_gobj;
+        GObj *fighter_gobj = Match_Info->player_block[ap->port_id].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {

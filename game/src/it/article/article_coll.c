@@ -265,7 +265,7 @@ bool32 func_ovl3_80173B24(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(
 
         if (ap->times_landed == 1)
         {
-            if ((Match_Info->unk_0x0 != 3) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
+            if ((Match_Info->game_type != 3) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
             {
                 return TRUE;
             }

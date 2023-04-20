@@ -30,7 +30,7 @@ bool32 func_ovl3_8017F49C(GObj *article_gobj) // Unused
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_Lizardon_Status, 0);

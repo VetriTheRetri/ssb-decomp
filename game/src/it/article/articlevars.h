@@ -9,9 +9,11 @@
 #define ATCAPSULE_T_VEL 100.0F
 #define ATCAPSULE_EXPLODE_SCALE 1.4F                    // Size of explosion graphics
 
+#define ATTOMATO_DAMAGE_HEAL 100
 #define ATTOMATO_GRAVITY 1.2F
 #define ATTOMATO_T_VEL 100.0F
 
+#define ATHEART_DAMAGE_HEAL 999
 #define ATHEART_GRAVITY 0.25F
 #define ATHEART_T_VEL 30.0F
 

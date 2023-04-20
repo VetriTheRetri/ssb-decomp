@@ -61,14 +61,14 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         fp = FighterGetStruct(spawn_gobj);
         ip->owner_gobj = spawn_gobj;
         ip->team = fp->team;
-        ip->port_index = fp->player_id;
+        ip->port_id = fp->port_id;
         ip->unk_0x12 = fp->offset_hit_type;
         ip->player_number = fp->player_number;
         ip->lr = fp->lr;
 
         ip->display_state = fp->display_state;
 
-        ip->item_hit.stale = func_ovl2_800EA470(fp->player_id, fp->attack_id, fp->flags_hi.halfword);
+        ip->item_hit.stale = func_ovl2_800EA470(fp->port_id, fp->attack_id, fp->flags_hi.halfword);
         ip->item_hit.attack_id = fp->attack_id;
         ip->item_hit.flags_0x4A.halfword = fp->flags_hi.halfword;
         ip->item_hit.flags_0x4C = fp->flags_lw;
@@ -79,7 +79,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         owner_ip = ItemGetStruct(spawn_gobj);
         ip->owner_gobj = owner_ip->owner_gobj;
         ip->team = owner_ip->team;
-        ip->port_index = owner_ip->port_index;
+        ip->port_id = owner_ip->port_id;
         ip->unk_0x12 = owner_ip->unk_0x12;
         ip->player_number = owner_ip->player_number;
         ip->lr = owner_ip->lr;
@@ -97,7 +97,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         ap = ArticleGetStruct(spawn_gobj);
         ip->owner_gobj = ap->owner_gobj;
         ip->team = ap->team;
-        ip->port_index = ap->port_index;
+        ip->port_id = ap->port_id;
         ip->unk_0x12 = ap->unk_0x16;
         ip->player_number = ap->player_number;
         ip->lr = ap->lr;
@@ -115,7 +115,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     case ITEM_MASK_SPAWN_GROUND:
         ip->owner_gobj = NULL;
         ip->team = ITEM_TEAM_DEFAULT;
-        ip->port_index = ITEM_PORT_DEFAULT;
+        ip->port_id = ITEM_PORT_DEFAULT;
         ip->unk_0x12 = ITEM_UNK_DEFAULT;
         ip->player_number = 0;
         ip->lr = RIGHT;
@@ -799,7 +799,7 @@ next_check:
         fp = FighterGetStruct(ip->reflect_gobj);
 
         ip->team = fp->team;
-        ip->port_index = fp->player_id;
+        ip->port_id = fp->port_id;
         ip->display_state = fp->display_state;
         ip->player_number = fp->player_number;
         ip->unk_0x12 = fp->offset_hit_type;

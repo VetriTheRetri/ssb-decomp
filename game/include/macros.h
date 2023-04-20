@@ -14,15 +14,15 @@
 #define F_RAD_TO_DEG(x) ((float)((x / PI32) * 180.0F))
 #define I_RAD_TO_DEG(x) ((int)  ((x / PI32) * 180.0F))
 
-#define U8_MAX 0xFFU
+#define U8_MAX 0xFF
 #define S8_MAX 0x7F
 #define S8_MIN 0x80
 
-#define U16_MAX 0xFFFFU
+#define U16_MAX 0xFFFF
 #define S16_MAX 0x7FFF
 #define S16_MIN 0x8000
 
-#define U32_MAX 0xFFFFFFFFU
+#define U32_MAX 0xFFFFFFFF
 #define S32_MAX 0x7FFFFFFF
 #define S32_MIN 0x80000000
 

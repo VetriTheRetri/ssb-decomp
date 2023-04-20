@@ -8,8 +8,8 @@
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
-    "\\game\\src\\mp"
+    "\\game\\src\\mp",
+    "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_cliffmotion.c",
   "PreviewInSolutionExplorer": false
 }

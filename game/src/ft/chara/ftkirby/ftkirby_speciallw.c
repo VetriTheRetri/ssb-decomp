@@ -9,9 +9,9 @@ void func_ovl3_80161368(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->armor < FTKIRBY_STONE_HEALTH_MID) // Apply color overlay based on remaining Stone HP
+    if (fp->damage_resist < FTKIRBY_STONE_HEALTH_MID) // Apply color overlay based on remaining Stone HP
     {
-        if (fp->armor < FTKIRBY_STONE_HEALTH_LOW)
+        if (fp->damage_resist < FTKIRBY_STONE_HEALTH_LOW)
         {
             if (fp->status_vars.kirby.speciallw.colanim_id != FTKIRBY_STONE_COLANIM_ID_LOW)
             {
@@ -36,9 +36,9 @@ void func_ovl3_8016141C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->x191_flag_b2 = TRUE;
+    fp->is_damage_resist = TRUE;
 
-    fp->armor = FTKIRBY_STONE_HEALTH_MAX;
+    fp->damage_resist = FTKIRBY_STONE_HEALTH_MAX;
     fp->status_vars.kirby.speciallw.duration = FTKIRBY_STONE_DURATION_MAX;
     fp->status_vars.kirby.speciallw.colanim_id = FTKIRBY_STONE_COLANIM_ID_HIGH;
 
@@ -115,7 +115,7 @@ void func_ovl3_801615E4(GObj *fighter_gobj, bool32 is_release)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->x191_flag_b2) && (fp->cmd_flags.flag1 != 0))
+    if (!(fp->is_damage_resist) && (fp->cmd_flags.flag1 != 0))
     {
         if (is_release == FALSE)
         {
@@ -240,7 +240,7 @@ void func_ovl3_80161974(GObj *fighter_gobj)
         func_ovl2_800DEEC8(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwFall, 0.0F, 1.0F, 0x32U);
 
-        fp->x191_flag_b2 = TRUE;
+        fp->is_damage_resist = TRUE;
 
         func_ovl3_80161468(fp);
     }
@@ -266,7 +266,7 @@ void func_ovl3_80161A30(GObj *fighter_gobj)
         ftCollision_SetGround(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwLand, 0.0F, 1.0F, 0x32U);
 
-        fp->x191_flag_b2 = TRUE;
+        fp->is_damage_resist = TRUE;
     }
 }
 
@@ -304,12 +304,12 @@ void func_ovl3_80161B2C(GObj *fighter_gobj)
 void jtgt_ovl3_80161B70(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    u32 armor_flag = fp->x191_flag_b2;
+    u32 armor_flag = fp->is_damage_resist;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwStart, 0.0F, 1.0F, 0x32U);
     ftAnim_Update(fighter_gobj);
 
-    if ((fp->x191_flag_b2 = armor_flag & TRUE) != FALSE) // WAT
+    if ((fp->is_damage_resist = armor_flag & TRUE) != FALSE) // WAT
     {
         fp->cmd_flags.flag2 = 1;
     }

@@ -31,8 +31,8 @@ struct GObj
     void *call_unk;
     s32 unk_0x18;
     s32 unk_0x1C;
-    GObj *room_gobj_next;
-    GObj *room_gobj_prev;
+    GObj *room_gobj_next; // Unconfirmed, might be int
+    GObj *room_gobj_prev; // Unconfirmed, might be int
     s32 room_order; // Might be group? Assuming room based on order here
     void (*renderer)(GObj *gobj);
     s32 unk_0x30;

@@ -15,7 +15,7 @@ void func_ovl3_801859C0(GObj *article_gobj)
 
         s32 index = (ap->article_vars.link_bomb.scale_index >= ATLINKBOMB_SCALE_INDEX_REWIND) ? ATLINKBOMB_SCALE_INDEX_MAX - ap->article_vars.link_bomb.scale_index : ap->article_vars.link_bomb.scale_index;
 
-        if (ap->is_pickup)
+        if (ap->is_hold)
         {
             joint->next->scale.x = joint->next->scale.y = p_scale[index];
         }
@@ -206,7 +206,7 @@ void func_ovl3_80185F70(GObj *article_gobj)
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ap->is_show_indicator = TRUE;
+    ap->is_allow_pickup = TRUE;
 
     ap->times_landed = 0;
 
@@ -223,7 +223,7 @@ void func_ovl3_80185FD8(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80185CD4(article_gobj);

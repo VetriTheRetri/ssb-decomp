@@ -45,7 +45,7 @@ void func_ovl3_80174098(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
 

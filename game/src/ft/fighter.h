@@ -25,10 +25,18 @@ typedef struct SpecialHit
 
 typedef struct DObjContainer
 {
-
     DObjDesc *renderstate[4];
 
 } DObjContainer;
+
+typedef struct ftItemPickup
+{
+    Vec2f pickup_offset_light;
+    Vec2f pickup_range_light;
+    Vec2f pickup_offset_heavy;
+    Vec2f pickup_range_heavy;
+
+} ftItemPickup;
 
 typedef struct ftCommonAttributes
 {
@@ -77,14 +85,7 @@ typedef struct ftCommonAttributes
     u16 damage_sfx;
     u16 smash_sfx[3]; // Random Smash SFX
     s16 unk_0xC2;
-    f32 halo_size_mul; // Platform size?
-    f32 unk_0xC8;
-    f32 unk_0xCC;
-    f32 unk_0xD0;
-    f32 unk_0xD4;
-    f32 unk_0xD8;
-    f32 unk_0xDC;
-    f32 unk_0xE0;
+    ftItemPickup item_pickup;
     s16 unk_0xE4;
     s16 unk_0xE6;
     u16 throw_heavy_sfx;
@@ -582,7 +583,7 @@ struct Fighter_Struct
     GObj *this_fighter;
     ftKind ft_kind;
     u8 team;
-    u8 player_id;
+    u8 port_id;
     u8 renderstate_curr;  // Hi-Poly = 1, Low-Poly = 2
     u8 renderstate_match; // Hi-Poly = 1, Low-Poly = 2
     u8 costume_id;
@@ -595,7 +596,7 @@ struct Fighter_Struct
     s32 player_number; // Player's number? (Note: NOT player port, e.g. if players 2 and 4 are in a match,
                        // player 2 will be number 1 and player 4 will be number 2; used to match fighters and items?)
 
-    struct // Status = Action State
+    struct status_info // Status = Action State
     {
         s32 status_frame_curr; // 0x1C
         plKind pl_kind;
@@ -605,7 +606,7 @@ struct Fighter_Struct
     } status_info;
 
     s32 percent_damage;
-    s32 armor; // Resits a specified amount of % damage before breaking, effectively damage-based armor
+    s32 damage_resist; // Resits a specified amount of % damage before breaking, effectively damage-based armor
     s32 x34_unk;
     s32 x38_unk;
     s32 x3C_unk;
@@ -694,7 +695,7 @@ struct Fighter_Struct
             u8 x190_flag_b7 : 1;
             u8 x191_flag_b0 : 1;
             u8 x191_flag_b1 : 1;
-            u8 x191_flag_b2 : 1;
+            u8 is_damage_resist : 1;
             u8 x191_flag_b3 : 1;
             u8 x191_flag_b4567 : 4;
         };
@@ -777,7 +778,7 @@ struct Fighter_Struct
 
     struct _input
     {
-        void *ptr_inputs; // Controller inputs?
+        void *p_controller; // Controller inputs?
         u16 button_mask_a;
         u16 button_mask_b;
         u16 button_mask_z;
@@ -801,7 +802,7 @@ struct Fighter_Struct
     u8 tap_stick_x; // Frames control stick has been tapped + held
     u8 tap_stick_y; // Frames control stick has been tapped + held
 
-    u8 filler_0x26B[0x276 - 0x26C];
+    u8 filler_0x26C[0x276 - 0x26C];
 
     s16 unk_0x276;
     GObj *throw_gobj; // GObj pointer of player throwing this fighter?
@@ -875,7 +876,7 @@ struct Fighter_Struct
     s32 damage_index;
     s32 unk_0x804;
     s32 damage_player_number;
-    s32 damage_player_id;
+    s32 damage_port_id; // Port index of damaging fighter
     s32 unk_0x810;
     s32 unk_ft_0x814;
     s32 unk_0x818;
@@ -910,21 +911,21 @@ struct Fighter_Struct
     s32 x9CC;
     s32 x9D0;
 
-    void (*cb_anim)(GObj *);
-    void (*cb_accessory)(GObj *);
-    void (*cb_interrupt)(GObj *);
-    void (*cb_physics)(GObj *);
-    void (*cb_coll)(GObj *);
-    void (*cb_update_ik)(GObj *);
-    void (*cb_take_damage)(GObj *);
-    void (*unk_0x9F0)(GObj *);
-    void (*cb_hit_shield)(GObj *);
-    void (*cb_give_damage)(GObj *);
-    void (*cb_update_gfx)(GObj *);
-    void (*unk_0xA00)(GObj *);
-    void (*cb_hitlag_start)(GObj *);
-    void (*cb_hitlag_end)(GObj *);
-    void (*cb_status)(GObj *);
+    void (*cb_anim)(GObj*);
+    void (*cb_accessory)(GObj*);
+    void (*cb_interrupt)(GObj*);
+    void (*cb_physics)(GObj*);
+    void (*cb_coll)(GObj*);
+    void (*cb_update_ik)(GObj*);
+    void (*cb_take_damage)(GObj*);
+    void (*unk_0x9F0)(GObj*);
+    void (*cb_hit_shield)(GObj*);
+    void (*cb_give_damage)(GObj*);
+    void (*cb_update_gfx)(GObj*);
+    void (*unk_0xA00)(GObj*);
+    void (*cb_hitlag_start)(GObj*);
+    void (*cb_hitlag_end)(GObj*);
+    void (*cb_status)(GObj*);
 
     u8 filler_0xA10[0xA28 - 0xA10];
 

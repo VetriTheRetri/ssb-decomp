@@ -61,7 +61,7 @@ void func_ovl3_8017C7FC(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 1);
@@ -136,7 +136,7 @@ bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
     fp = FighterGetStruct(fighter_gobj);
 
     ap->team = fp->team;
-    ap->port_index = fp->player_id;
+    ap->port_id = fp->port_id;
     ap->player_number = fp->player_number;
     ap->unk_0x16 = fp->offset_hit_type;
 
@@ -185,7 +185,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
-            monster_ap->port_index = m_ball_ap->port_index;
+            monster_ap->port_id = m_ball_ap->port_id;
             monster_ap->unk_0x16 = m_ball_ap->unk_0x16;
             monster_ap->player_number = m_ball_ap->player_number;
             monster_ap->display_state = m_ball_ap->display_state;
@@ -238,9 +238,9 @@ void func_ovl3_8017CB84(GObj *article_gobj)
 
     ap->x2CF_flag_b1 = TRUE;
 
-    if ((ap->port_index != -1) && (ap->port_index != GMMATCH_PLAYERS_MAX))
+    if ((ap->port_id != -1) && (ap->port_id != GMMATCH_PLAYERS_MAX))
     {
-        GObj *fighter_gobj = Match_Info->player_block[ap->port_index].fighter_gobj;
+        GObj *fighter_gobj = Match_Info->player_block[ap->port_id].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {
@@ -291,7 +291,7 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
-            monster_ap->port_index = m_ball_ap->port_index;
+            monster_ap->port_id = m_ball_ap->port_id;
             monster_ap->unk_0x16 = m_ball_ap->unk_0x16;
             monster_ap->player_number = m_ball_ap->player_number;
             monster_ap->display_state = m_ball_ap->display_state;

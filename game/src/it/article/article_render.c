@@ -179,7 +179,7 @@ bool32 func_ovl3_80171C10(Article_Struct *ap)
     {
         return TRUE;
     }
-    else if (!(ap->is_pickup))
+    else if (!(ap->is_hold))
     {
         return TRUE;
     }
@@ -202,7 +202,7 @@ void func_ovl3_80171C7C(GObj *article_gobj) // Unused
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pickup))
+        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
             func_80014038(article_gobj);
         }
@@ -225,7 +225,7 @@ void func_ovl3_80171D38(GObj *article_gobj)
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pickup))
+        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
             func_80014768(article_gobj);
         }
@@ -275,7 +275,7 @@ void func_ovl3_80171F4C(GObj *article_gobj) // Unused
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pickup))
+        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
             func_ovl3_80171DF4(article_gobj);
         }
@@ -341,7 +341,7 @@ void func_ovl3_8017224C(GObj *article_gobj)
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_pickup))
+        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
             func_ovl3_80172008(article_gobj);
         }

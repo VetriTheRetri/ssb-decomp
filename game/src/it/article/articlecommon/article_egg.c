@@ -62,7 +62,7 @@ void func_ovl3_8018171C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;

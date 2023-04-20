@@ -218,7 +218,7 @@ void func_ovl3_8017A984(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
 
@@ -446,7 +446,7 @@ void func_ovl3_8017AFEC(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
     ap->pickup_wait = ARTICLE_PICKUP_WAIT_DEFAULT;
 
     if (ap->phys_info.vel.x > ATRSHELL_CLAMP_VEL_X)
@@ -491,7 +491,7 @@ void func_ovl3_8017B108(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->is_show_indicator = FALSE;
+    ap->is_allow_pickup = FALSE;
 
     if (ap->phys_info.vel.x > ATRSHELL_CLAMP_AIR_X)
     {

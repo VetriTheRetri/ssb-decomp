@@ -79,7 +79,7 @@ void func_ovl3_801725BC(GObj *article_gobj)
 
     ap->owner_gobj = NULL;
     ap->team = ARTICLE_TEAM_DEFAULT;
-    ap->port_index = ARTICLE_PORT_DEFAULT;
+    ap->port_id = ARTICLE_PORT_DEFAULT;
     ap->unk_0x16 = ARTICLE_UNK_DEFAULT;
     ap->player_number = 0;
     ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
@@ -133,7 +133,7 @@ void func_ovl3_801727BC(GObj *article_gobj)
 
     ap->owner_gobj = ap->damage_gobj;
     ap->team = ap->damage_team;
-    ap->port_index = ap->damage_port;
+    ap->port_id = ap->damage_port;
     ap->player_number = ap->player_number; // Could potentially cause a bug? Didn't they mean damage_player_number?
     ap->unk_0x16 = ap->unk_0x2B4;
     ap->display_state = ap->damage_display_state;
@@ -177,7 +177,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if ((ap->is_pickup) && (ap->owner_gobj != NULL))
+    if ((ap->is_hold) && (ap->owner_gobj != NULL))
     {
         Fighter_Struct *fp = FighterGetStruct(ap->owner_gobj);
 
@@ -225,7 +225,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alrig
 
     fp->article_hold = NULL;
 
-    ap->is_pickup = FALSE;
+    ap->is_hold = FALSE;
 
     ap->phys_info.vel = *vel;
 
@@ -318,11 +318,11 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     fp->article_hold = article_gobj;
     ap->owner_gobj = fighter_gobj;
 
-    ap->is_show_indicator = FALSE;
-    ap->is_pickup = TRUE;
+    ap->is_allow_pickup = FALSE;
+    ap->is_hold = TRUE;
 
     ap->team = fp->team;
-    ap->port_index = fp->player_id;
+    ap->port_id = fp->port_id;
     ap->unk_0x16 = fp->offset_hit_type;
     ap->player_number = fp->player_number;
 
@@ -394,7 +394,7 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    ap->is_show_indicator = TRUE;
+    ap->is_allow_pickup = TRUE;
     ap->times_landed = 0;
 
     func_ovl3_801725BC(article_gobj);
@@ -620,14 +620,14 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
         mp = ArticleGetStruct(monster_gobj);
         mp->owner_gobj = ap->owner_gobj;
         mp->team = ap->team;
-        mp->port_index = ap->port_index;
+        mp->port_id = ap->port_id;
         mp->unk_0x16 = ap->unk_0x16;
         mp->player_number = ap->player_number;
         mp->display_state = ap->display_state;
 
-        if (Match_Info->unk_0x0 == 5)
+        if (Match_Info->game_type == 5)
         {
-            if ((mp->port_index == D_800A4AD0.unk_0x13) && (mp->at_kind == At_Kind_Mew))
+            if ((mp->port_id == D_800A4AD0.unk_0x13) && (mp->at_kind == At_Kind_Mew))
             {
                 D_ovl65_801936AD = 1;
             }

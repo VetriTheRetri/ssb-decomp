@@ -326,7 +326,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     atKind at_kind;
     s32 unk_0x10;
     u8 team;
-    u8 port_index;
+    u8 port_id;
     u8 unk_0x16;
     u8 unk_0x17;
     s32 player_number;
@@ -377,8 +377,8 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u16 drop_sfx;
     u16 throw_sfx;
 
-    u32 is_show_indicator : 1; // Bool to check whether to display red arrow indicator above article or not
-    u32 is_pickup : 1; // I think this is used to tell if a fighter is holding this article?
+    u32 is_allow_pickup : 1; // Bool to check whether item can be picked up or not
+    u32 is_hold : 1; // I think this is used to tell if a fighter is holding this article?
     u32 times_landed : 2; // Number of times item has touched the ground while not grabbed; overflows after 3
     u32 times_thrown : 3; // Number of times item has been dropped or thrown; overflows after 7
     u32 is_light_throw : 1;
@@ -458,7 +458,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     GObj *unk_0x348;
     u8 arrow_flash_timer; // Frequency of red arrow indicator flash
 
-    union
+    union article_vars
     {
         BombHei_ArticleVars bombhei;
         Shell_ArticleVars shell;

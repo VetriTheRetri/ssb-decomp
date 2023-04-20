@@ -4,14 +4,14 @@ void func_ovl3_80161CA0(GObj *kirby_gobj, GObj *victim_gobj, s32 damage)
 {
     Fighter_Struct *fp_kirby = FighterGetStruct(kirby_gobj);
     Fighter_Struct *fp_victim = FighterGetStruct(victim_gobj);
-    s32 star_dmg_victim = func_ovl2_800EA54C(fp_kirby->player_id, damage, fp_kirby->stale_id, fp_kirby->unk_0x28C_halfword);
+    s32 star_dmg_victim = func_ovl2_800EA54C(fp_kirby->port_id, damage, fp_kirby->stale_id, fp_kirby->unk_0x28C_halfword);
 
     damage = star_dmg_victim;
 
     func_ovl3_801415F8(victim_gobj, func_ovl2_800E9D78(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->offset_hit_type, fp_victim->offset_hit_type), 0);
     func_ovl2_800EA248(fp_victim, damage);
-    func_ovl2_800EA98C(fp_kirby->player_id, fp_victim->player_id, damage);
-    func_ovl2_800EA614(fp_kirby->player_id, fp_victim->player_id, fp_kirby->attack_id, fp_kirby->unk_0x28C_halfword);
+    func_ovl2_800EA98C(fp_kirby->port_id, fp_victim->port_id, damage);
+    func_ovl2_800EA614(fp_kirby->port_id, fp_victim->port_id, fp_kirby->attack_id, fp_kirby->unk_0x28C_halfword);
 }
 
 f32 func_ovl3_80161D6C(Vec3f *kirby_pos, Vec3f *victim_pos) // Get distance between Kirby and inhale victim
