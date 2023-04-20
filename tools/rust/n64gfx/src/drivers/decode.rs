@@ -58,7 +58,7 @@ pub fn decode_binary(opts: Decode) -> Result<(), Error> {
         ImageFormat::RGBA => export_rgba_png(info, &output),
         ImageFormat::IA | ImageFormat::I => export_gray_png(info, &output),
         ImageFormat::CI if !indexed_png => export_rgba_png(info, &output),
-        ImageFormat::CI => export_ided_png(info, &output),
+        ImageFormat::CI => export_indexed_png(info, &output),
     }
 }
 
@@ -121,7 +121,7 @@ fn export_gray_png(info: ImageInfo, name: &Path) -> Result<(), Error> {
     Ok(())
 }
 
-fn export_ided_png(info: ImageInfo, name: &Path) -> Result<(), Error> {
+fn export_indexed_png(info: ImageInfo, name: &Path) -> Result<(), Error> {
     use lodepng::{ffi::ColorType::PALETTE, Encoder};
 
     let ImageInfo {
