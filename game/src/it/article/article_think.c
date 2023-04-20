@@ -181,7 +181,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
     {
         Fighter_Struct *fp = FighterGetStruct(ap->owner_gobj);
 
-        fp->article_hold = NULL;
+        fp->item_hold = NULL;
 
         func_ovl2_800E8744(ap->owner_gobj);
     }
@@ -223,7 +223,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alrig
 
     func_ovl2_800DF058(article_gobj, fp->coll_data.p_translate, &fp->coll_data);
 
-    fp->article_hold = NULL;
+    fp->item_hold = NULL;
 
     ap->is_hold = FALSE;
 
@@ -315,7 +315,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     Vec3f pos;
     s32 joint_index;
 
-    fp->article_hold = article_gobj;
+    fp->item_hold = article_gobj;
     ap->owner_gobj = fighter_gobj;
 
     ap->is_allow_pickup = FALSE;

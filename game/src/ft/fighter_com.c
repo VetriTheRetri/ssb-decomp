@@ -443,7 +443,7 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
                 {
                     return TRUE;
                 }
-                else if ((other_fp->article_hold != NULL) && (ArticleGetStruct(other_fp->article_hold)->at_kind == At_Kind_M_Ball) && (sqrt_xy < 2500.0F))
+                else if ((other_fp->item_hold != NULL) && (ArticleGetStruct(other_fp->item_hold)->at_kind == At_Kind_M_Ball) && (sqrt_xy < 2500.0F))
                 {
                     return TRUE;
                 }

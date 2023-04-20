@@ -39,7 +39,7 @@ GObj *func_ovl3_80145990(GObj *fighter_gobj, u8 pickup_mask)
 
                 is_pickup = FALSE;
 
-                if ((ap->is_light_throw == TRUE) && (pickup_mask & 1))
+                if ((ap->is_light_throw == TRUE) && (pickup_mask & FTCOMMON_GET_MASK_LIGHT))
                 {
                     pickup_range.x = ft_translate->x + (fp->lr * item_pickup->pickup_offset_light.x);
                     pickup_range.y = ft_translate->y + item_pickup->pickup_offset_light.y;
@@ -52,7 +52,7 @@ GObj *func_ovl3_80145990(GObj *fighter_gobj, u8 pickup_mask)
                         }
                     }
                 }
-                if ((ap->is_light_throw == FALSE) && (pickup_mask & 2))
+                if ((ap->is_light_throw == FALSE) && (pickup_mask & FTCOMMON_GET_MASK_HEAVY))
                 {
                     pickup_range.x = ft_translate->x + (fp->lr * item_pickup->pickup_offset_heavy.x);
                     pickup_range.y = ft_translate->y + item_pickup->pickup_offset_heavy.y;
@@ -85,7 +85,7 @@ GObj *func_ovl3_80145990(GObj *fighter_gobj, u8 pickup_mask)
 void func_ovl3_80145BE4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    GObj *article_gobj = fp->article_hold;
+    GObj *article_gobj = fp->item_hold;
 
     if (article_gobj != NULL)
     {
@@ -116,7 +116,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
                 break;
 
             case At_Kind_Hammer:
-                fp->hammer_time = 720;
+                fp->hammer_time = FTCOMMON_HAMMER_TIME_MAX;
 
                 func_ovl2_800E7AFC(0x2D);
                 break;
@@ -126,4 +126,226 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
             }
         }
     }
+}
+
+void func_ovl3_80145D28(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->item_hold != NULL)
+    {
+        Vec3f vel;
+
+        vel.x = vel.y = vel.z = 0.0F;
+
+        func_ovl3_80172AEC(fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
+    }
+}
+
+void func_ovl3_80145D70(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    GObj *article_gobj;
+
+    if (fp->cmd_flags.flag1 != 0)
+    {
+        fp->cmd_flags.flag1 = 0;
+
+        article_gobj = func_ovl3_80145990(fighter_gobj, ((fp->status_info.status_id == ftStatus_Common_HeavyGet) ? FTCOMMON_GET_MASK_HEAVY : FTCOMMON_GET_MASK_LIGHT));
+
+        if (article_gobj != NULL)
+        {
+            func_ovl3_80172CA4(article_gobj, fighter_gobj);
+        }
+    }
+    if (fighter_gobj->anim_frame <= 0.0F)
+    {
+        if (fp->status_info.status_id == ftStatus_Common_HeavyGet)
+        {
+            if (fp->item_hold != NULL)
+            {
+                if ((fp->ft_kind == Ft_Kind_Donkey) || (fp->ft_kind == Ft_Kind_PolyDonkey) || (fp->ft_kind == Ft_Kind_GiantDonkey))
+                {
+                    func_ovl3_8014D49C(fighter_gobj);
+                }
+                else func_ovl3_801460E8(fighter_gobj);
+            }
+            else func_ovl3_8013E1C8(fighter_gobj);
+        }
+        else
+        {
+            article_gobj = fp->item_hold;
+
+            if (article_gobj != NULL)
+            {
+                Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+                if (ap->unk_0x10 == 5)
+                {
+                    func_ovl3_80145BE4(fighter_gobj);
+
+                    if (ap->at_kind == At_Kind_Hammer)
+                    {
+                        func_ovl2_800F3938(fighter_gobj);
+
+                        return;
+                    }
+                }
+            }
+            func_ovl3_8013E1C8(fighter_gobj);
+        }
+    }
+}
+
+void func_ovl3_80145ED8(GObj *fighter_gobj)
+{
+    if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
+    {
+        func_ovl3_80145BE4(fighter_gobj);
+        func_ovl3_8013F9E0(fighter_gobj);
+    }
+}
+
+void func_ovl3_80145F10(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
+    {
+        if (fp->item_hold != NULL)
+        {
+            Vec3f vel;
+
+            vel.x = vel.y = vel.z = 0.0F;
+
+            func_ovl3_80172AEC(fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
+        }
+        func_ovl3_8013F9E0(fighter_gobj);
+    }
+}
+
+void func_ovl3_80145F74(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (func_ovl2_800DDE50(fighter_gobj) == FALSE)
+    {
+        if (fp->item_hold != NULL)
+        {
+            Vec3f vel;
+
+            vel.x = vel.y = vel.z = 0.0F;
+
+            func_ovl3_80172AEC(fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
+        }
+        func_ovl3_8013F9E0(fighter_gobj);
+    }
+}
+
+void func_ovl3_80145FD8(GObj *fighter_gobj, GObj *article_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    fp->cmd_flags.flag1 = 0;
+
+    ftStatus_Update(fighter_gobj, (!(ap->is_light_throw) ? ftStatus_Common_HeavyGet : ftStatus_Common_LightGet), 0.0F, 1.0F, 0U);
+    ftAnim_Update(fighter_gobj);
+
+    if (fp->status_info.status_id == ftStatus_Common_HeavyGet)
+    {
+        fp->cb_take_damage = func_ovl3_80145D28;
+    }
+    else fp->cb_take_damage = func_ovl3_80145BE4;
+}
+
+bool32 func_ovl3_80146064(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->item_hold == NULL)
+    {
+        GObj *article_gobj = func_ovl3_80145990(fighter_gobj, (FTCOMMON_GET_MASK_LIGHT | FTCOMMON_GET_MASK_HEAVY));
+
+        if (article_gobj != NULL)
+        {
+            func_ovl3_80145FD8(fighter_gobj, article_gobj);
+
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void func_ovl3_801460B8(GObj *fighter_gobj)
+{
+    if (func_ovl3_80146BE0(fighter_gobj) == FALSE)
+    {
+        func_ovl3_8014625C(fighter_gobj);
+    }
+}
+
+void func_ovl3_801460E8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    ftStatus_Update(fighter_gobj, ftStatus_Common_LiftWait, 0.0F, 1.0F, 0x40U);
+
+    fp->cb_take_damage = func_ovl3_80145D28;
+}
+
+void func_ovl3_80146130(Fighter_Struct *fp)
+{
+    fp->status_vars.common.lift.turn_frames--;
+
+    fp->joint[0]->rotate.y += FTCOMMON_LIFT_TURN_STEP;
+
+    func_ovl2_800EB528(fp->joint[0]);
+
+    if (fp->status_vars.common.lift.turn_frames == (FTCOMMON_LIFT_TURN_FRAMES / 2))
+    {
+        fp->lr = -fp->lr;
+        fp->phys_info.vel_ground.x = -fp->phys_info.vel_ground.x;
+    }
+}
+
+void func_ovl3_801461A8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl3_80146130(fp);
+
+    if (fp->status_vars.common.lift.turn_frames == 0)
+    {
+        func_ovl3_801460E8(fighter_gobj);
+    }
+}
+
+void func_ovl3_801461E8(GObj *fighter_gobj)
+{
+    func_ovl3_80146BE0(fighter_gobj);
+}
+
+void func_ovl3_80146208(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    ftStatus_Update(fighter_gobj, ftStatus_Common_LiftTurn, 0.0F, 1.0F, 0x40U);
+
+    fp->cb_take_damage = func_ovl3_80145D28;
+
+    fp->status_vars.common.lift.turn_frames = FTCOMMON_LIFT_TURN_FRAMES;
+
+    func_ovl3_80146130(fp);
+}
+
+bool32 func_ovl3_8014625C(GObj *fighter_gobj)
+{
+    if (func_ovl3_8013E9D0(fighter_gobj) != FALSE)
+    {
+        func_ovl3_80146208(fighter_gobj);
+
+        return TRUE;
+    }
+    else return FALSE;
 }

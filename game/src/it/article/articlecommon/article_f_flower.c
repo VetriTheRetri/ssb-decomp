@@ -189,7 +189,7 @@ extern ArticleSpawnData D_ovl3_80189C60;
 
 void func_ovl3_8017604C(GObj *fighter_gobj, Vec3f *pos, s32 index, s32 ammo_sub)
 {
-    Article_Struct *ap = ArticleGetStruct(FighterGetStruct(fighter_gobj)->article_hold);
+    Article_Struct *ap = ArticleGetStruct(FighterGetStruct(fighter_gobj)->item_hold);
     Vec3f vel;
     f32 *flame_vel = (f32*)((uintptr_t)*D_ovl3_80189C60.p_file + (uintptr_t)&D_NF_00000360); // Linker thing
 

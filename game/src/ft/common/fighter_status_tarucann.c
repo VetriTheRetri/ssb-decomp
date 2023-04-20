@@ -58,13 +58,11 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
 
     func_ovl2_800E823C(fighter_gobj);
 
-    if ((fp->article_hold != NULL) && !(ArticleGetStruct(fp->article_hold)->is_light_throw))
+    if ((fp->item_hold != NULL) && !(ArticleGetStruct(fp->item_hold)->is_light_throw))
     {
-        vel.z = 0.0F;
-        vel.y = 0.0F;
-        vel.x = 0.0F;
+        vel.x = vel.y = vel.z = 0.0F;
 
-        func_ovl3_80172AEC(fp->article_hold, &vel, 1.0F);
+        func_ovl3_80172AEC(fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
     }
     if (fp->catch_gobj != NULL)
     {

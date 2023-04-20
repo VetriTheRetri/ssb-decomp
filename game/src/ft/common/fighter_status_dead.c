@@ -123,9 +123,9 @@ void func_ovl3_8013C050(GObj *fighter_gobj)
     fp->ground_or_air = air;
     fp->coll_data.ground_line_id = -1;
 
-    if (fp->article_hold != NULL)
+    if (fp->item_hold != NULL)
     {
-        func_ovl3_801728D4(fp->article_hold);
+        func_ovl3_801728D4(fp->item_hold);
     }
 }
 

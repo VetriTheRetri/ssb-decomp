@@ -250,7 +250,7 @@ GObj *func_ovl3_80178474(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
 
 void func_ovl3_80178594(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
 {
-    Article_Struct *ap = ArticleGetStruct(FighterGetStruct(fighter_gobj)->article_hold);
+    Article_Struct *ap = ArticleGetStruct(FighterGetStruct(fighter_gobj)->item_hold);
 
     func_ovl3_80178474(fighter_gobj, pos, is_smash);
 

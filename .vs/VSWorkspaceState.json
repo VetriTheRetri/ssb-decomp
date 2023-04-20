@@ -3,13 +3,15 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ft",
-    "\\game\\src\\ft\\common",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\item",
-    "\\game\\src\\mp",
-    "\\game\\src\\sys"
+    "\\tools",
+    "\\tools\\rust",
+    "\\tools\\rust\\n64gfx",
+    "\\tools\\rust\\n64gfx\\src",
+    "\\tools\\rust\\n64gfx\\src\\drivers"
   ],
+  "SelectedNode": "\\tools\\rust\\n64gfx\\src\\drivers\\decode.rs",
   "PreviewInSolutionExplorer": false
 }

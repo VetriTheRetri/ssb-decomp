@@ -786,9 +786,9 @@ void func_ovl3_80141670(GObj *fighter_gobj)
         }
         return;
     }
-    if (this_fp->article_hold != NULL)
+    if (this_fp->item_hold != NULL)
     {
-        if (!(ArticleGetStruct(this_fp->article_hold)->is_light_throw) && ((this_fp->ft_kind == Ft_Kind_Donkey) || (this_fp->ft_kind == Ft_Kind_PolyDonkey) || (this_fp->ft_kind == Ft_Kind_GiantDonkey)))
+        if (!(ArticleGetStruct(this_fp->item_hold)->is_light_throw) && ((this_fp->ft_kind == Ft_Kind_Donkey) || (this_fp->ft_kind == Ft_Kind_PolyDonkey) || (this_fp->ft_kind == Ft_Kind_GiantDonkey)))
         {
             if (func_ovl3_80140D30(this_fp) != FALSE)
             {
@@ -798,7 +798,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             {
                 vel.x = vel.y = vel.z = 0.0F;
 
-                func_ovl3_80172AEC(this_fp->article_hold, &vel, 1.0F);
+                func_ovl3_80172AEC(this_fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
                 func_ovl2_800E823C(fighter_gobj);
                 func_ovl3_80141560(fighter_gobj);
             }

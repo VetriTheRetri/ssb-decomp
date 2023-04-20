@@ -148,6 +148,14 @@
 #define FTCOMMON_CLIFF_FALL_WAIT_DAMAGE_LOW 1080
 #define FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN 20                // Minimum stick range required to preform ledge actions (and drop from ledge)
 
+#define FTCOMMON_GET_MASK_LIGHT (1 << 0)
+#define FTCOMMON_GET_MASK_HEAVY (1 << 1)
+
+#define FTCOMMON_LIFT_TURN_FRAMES 8
+#define FTCOMMON_LIFT_TURN_STEP (-0.3926991F)
+
+#define FTCOMMON_HAMMER_TIME_MAX 720
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -330,6 +338,12 @@ typedef struct ftCommon_CliffMotion_StatusVars
 
 } ftCommon_CliffMotion_StatusVars;
 
+typedef struct ftCommon_Lift_StatusVars 
+{
+    s32 turn_frames;
+
+} ftCommon_Lift_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -372,6 +386,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Rebound_StatusVars rebound;
     ftCommon_CliffWait_StatusVars cliffwait;
     ftCommon_CliffMotion_StatusVars cliffmotion;
+    ftCommon_Lift_StatusVars lift;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

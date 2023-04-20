@@ -891,7 +891,7 @@ struct Fighter_Struct
     GObj *catch_gobj;   // GObj this fighter has caught
     GObj *capture_gobj; // GObj this fighter is captured by
     s32 unk_0x848;
-    GObj *article_hold;
+    GObj *item_hold;
     SpecialHit *special_hit;
     Vec3f entry_pos;
 
