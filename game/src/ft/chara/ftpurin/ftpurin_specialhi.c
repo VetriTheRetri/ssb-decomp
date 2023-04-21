@@ -4,13 +4,13 @@ void func_ovl3_80151550(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 == 1)
+    if (fp->command_vars.flags.flag1 == 1)
     {
         if (func_ovl2_801020F4(fighter_gobj) != FALSE)
         {
             fp->x18F_flag_b3 = TRUE;
         }
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
     }
     if (fp->status_info.status_id == ftStatus_Purin_SpecialHi)
     {

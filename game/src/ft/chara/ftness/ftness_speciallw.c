@@ -215,7 +215,7 @@ void func_ovl3_801556E0(GObj *fighter_gobj)
 
     fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80131134 + &ftNess_LoadedFiles_SpecialLwData); // Linker thing (attempt uintptr_t for 64-bit compatibility?)
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 }
 
 void func_ovl3_80155750(GObj *fighter_gobj)
@@ -236,7 +236,7 @@ void func_ovl3_801557D8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl3_80155750(fighter_gobj);
     }
@@ -246,7 +246,7 @@ void func_ovl3_80155808(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl3_80155794(fighter_gobj);
     }

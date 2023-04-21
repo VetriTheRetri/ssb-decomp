@@ -14,15 +14,15 @@ void func_ovl3_8015CB80(Fighter_Struct *fp)
 
 void func_ovl3_8015CBA4(Fighter_Struct *fp)
 {
-    if (fp->cmd_flags.flag2 != 4)
+    if (fp->command_vars.flags.flag2 != 4)
     {
         if (fp->status_vars.fox.speciallw.reflect_gobj != NULL)
         {
             Item_Struct *ip = ItemGetStruct(fp->status_vars.fox.speciallw.reflect_gobj);
 
-            ip->unk_x1C = fp->cmd_flags.flag2;
+            ip->unk_x1C = fp->command_vars.flags.flag2;
         }
-        fp->cmd_flags.flag2 = 4;
+        fp->command_vars.flags.flag2 = 4;
     }
 }
 
@@ -168,9 +168,9 @@ void func_ovl3_8015CF50(GObj *fighter_gobj)
 
     fp->status_vars.fox.speciallw.turn_frames--;
 
-    if ((fp->cmd_flags.flag1 == FALSE) && (fp->status_vars.fox.speciallw.turn_frames < (FTFOX_REFLECTOR_TURN_FRAMES + 1)))
+    if ((fp->command_vars.flags.flag1 == FALSE) && (fp->status_vars.fox.speciallw.turn_frames < (FTFOX_REFLECTOR_TURN_FRAMES + 1)))
     {
-        fp->cmd_flags.flag1 = TRUE;
+        fp->command_vars.flags.flag1 = TRUE;
         fp->lr = (s32)-fp->lr;
     }
 
@@ -201,7 +201,7 @@ void func_ovl3_8015D01C(GObj *fighter_gobj)
 
     fp->is_reflect = TRUE;
     fp->status_vars.fox.speciallw.turn_frames = FTFOX_REFLECTOR_TURN_FRAMES;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     func_ovl3_8015CF50(fighter_gobj);
 }
@@ -267,7 +267,7 @@ void func_ovl3_8015D1E0(GObj *fighter_gobj)
 
     fp->status_vars.fox.speciallw.release_lag = FTFOX_REFLECTOR_RELEASE_LAG;
     fp->status_vars.fox.speciallw.is_release = FALSE;
-    fp->cmd_flags.flag2 = 4;
+    fp->command_vars.flags.flag2 = 4;
     fp->status_vars.fox.speciallw.gravity_delay = FTFOX_REFLECTOR_GRAVITY_DELAY;
 
     reflect_gobj = func_ovl2_80100FA4(fighter_gobj);

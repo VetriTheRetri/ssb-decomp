@@ -147,9 +147,9 @@ void func_ovl3_80145D70(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     GObj *article_gobj;
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
 
         article_gobj = func_ovl3_80145990(fighter_gobj, ((fp->status_info.status_id == ftStatus_Common_HeavyGet) ? FTCOMMON_GET_MASK_HEAVY : FTCOMMON_GET_MASK_LIGHT));
 
@@ -247,7 +247,7 @@ void func_ovl3_80145FD8(GObj *fighter_gobj, GObj *article_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     ftStatus_Update(fighter_gobj, (!(ap->is_light_throw) ? ftStatus_Common_HeavyGet : ftStatus_Common_LightGet), 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

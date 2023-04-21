@@ -35,9 +35,9 @@ void func_ovl3_80161E08(GObj *fighter_gobj, bool32 unused)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag0 = 0;
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag0 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     fp->status_vars.kirby.specialn.copy_id = Ft_Kind_Kirby;
     fp->status_vars.kirby.specialn.release_lag = FTKIRBY_VACUUM_RELEASE_LAG;
@@ -91,7 +91,7 @@ void func_ovl3_80161F0C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftKirbyCopyData *copy_data = (ftKirbyCopyData*) ((uintptr_t)D_ovl2_80131074 + &ftKirby_LoadedFiles_SpecialNData); // Linker thing
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         if (fp->fighter_vars.kirby.copy_id == fp->status_vars.kirby.specialn.copy_id)
         {
@@ -108,7 +108,7 @@ void func_ovl3_80161F0C(GObj *fighter_gobj)
             func_ovl2_800E8ECC(fighter_gobj);
             func_ovl3_80161EB4(fp);
         }
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
     }
 }
 
@@ -126,11 +126,11 @@ void func_ovl3_8016201C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->x18F_flag_b3) && (fp->cmd_flags.flag0 == 1))
+    if (!(fp->x18F_flag_b3) && (fp->command_vars.flags.flag0 == 1))
     {
         if (func_ovl2_801042B4(fighter_gobj) != FALSE)
         {
-            fp->cmd_flags.flag0 = 0;
+            fp->command_vars.flags.flag0 = 0;
             fp->x18F_flag_b3 = TRUE;
         }
     }
@@ -205,7 +205,7 @@ void func_ovl3_80162258(GObj *fighter_gobj)
 {
     Fighter_Struct *kirby_fp = FighterGetStruct(fighter_gobj);
 
-    if (kirby_fp->cmd_flags.flag2 != 0)
+    if (kirby_fp->command_vars.flags.flag2 != 0)
     {
         if (kirby_fp->catch_gobj != NULL)
         {
@@ -225,7 +225,7 @@ void func_ovl3_801622DC(GObj *fighter_gobj)
 {
     Fighter_Struct *kirby_fp = FighterGetStruct(fighter_gobj);
 
-    if (kirby_fp->cmd_flags.flag2 != 0)
+    if (kirby_fp->command_vars.flags.flag2 != 0)
     {
         if (kirby_fp->catch_gobj != NULL)
         {

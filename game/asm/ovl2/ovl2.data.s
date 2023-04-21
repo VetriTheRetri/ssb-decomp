@@ -5727,7 +5727,7 @@ glabel D_ovl2_8012C520
 glabel D_ovl2_8012C830
   .incbin "ovl2.raw.bin", 0x563A0, 0x10
 
-glabel D_ovl2_8012C840
+glabel Fighter_ItemSwing_Desc
   .incbin "ovl2.raw.bin", 0x563B0, 0x8
   /* 563B8 0A8048 8012C848 */
   .asciz "?@"
@@ -5759,7 +5759,7 @@ glabel Fighter_DownBounce_Sound
 glabel D_ovl2_8012C9A8
   .incbin "ovl2.raw.bin", 0x56518, 0x38
 
-glabel D_ovl2_8012C9E0
+glabel Fighter_ItemThrow_Desc
   .incbin "ovl2.raw.bin", 0x56550, 0x78
   /* 565C8 0A8258 8012CA58 */
   .asciz "2"

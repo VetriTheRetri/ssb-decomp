@@ -52,8 +52,8 @@ typedef enum ftDonkeyAction
 	ftStatus_Donkey_ThrowAirFF,
 	ftStatus_Donkey_HeavyThrowF,
 	ftStatus_Donkey_HeavyThrowB,
-	ftStatus_Donkey_HeavyThrowSmashF,
-	ftStatus_Donkey_HeavyThrowSmashB
+	ftStatus_Donkey_HeavyThrowF4,
+	ftStatus_Donkey_HeavyThrowB4
 
 } ftDonkeyAction;
 

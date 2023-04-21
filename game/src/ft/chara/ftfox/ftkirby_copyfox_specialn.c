@@ -5,9 +5,9 @@ void func_ovl3_80156CB0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
 
-    if (fp->cmd_flags.flag0 != FALSE)
+    if (fp->command_vars.flags.flag0 != FALSE)
     {
-        fp->cmd_flags.flag0 = FALSE;
+        fp->command_vars.flags.flag0 = FALSE;
 
         pos.x = FTKIRBY_COPYFOX_BLASTER_SPAWN_OFF_X;
         pos.y = 0.0F;
@@ -26,7 +26,7 @@ void func_ovl3_80156D38(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->cmd_flags.flag1 != 0) && (fp->input.button_press & fp->input.button_mask_b))
+    if ((fp->command_vars.flags.flag1 != 0) && (fp->input.button_press & fp->input.button_mask_b))
     {
         if (fp->ground_or_air == air)
         {
@@ -44,8 +44,8 @@ void func_ovl3_80156DC8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag0 = 0;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag0 = 0;
+    fp->command_vars.flags.flag1 = 0;
 }
 
 void func_ovl3_80156DD8(GObj *fighter_gobj)

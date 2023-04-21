@@ -403,7 +403,7 @@ void func_ovl3_8015C8BC(GObj* fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->cmd_flags.flag1 != 0) && (fp->ground_or_air == air))
+    if ((fp->command_vars.flags.flag1 != 0) && (fp->ground_or_air == air))
     {
         func_ovl3_801438F0(fighter_gobj, FTFOX_FIREFOX_AIR_DRIFT, FALSE, TRUE, FALSE, FTFOX_FIREFOX_LANDING_LAG, TRUE);
     }
@@ -460,7 +460,7 @@ void func_ovl3_8015CA64(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialHiBound, 0.0F, 1.0F, 2U);
 
-    fp->cmd_flags.flag1 = FALSE;
+    fp->command_vars.flags.flag1 = FALSE;
 }
 
 void func_ovl3_8015CAA4(Fighter_Struct *fp)

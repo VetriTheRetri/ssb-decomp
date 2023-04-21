@@ -197,16 +197,18 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     case Ft_Kind_Kirby:
     case Ft_Kind_PolyKirby:
         fp->phys_info.vel_air.y = Fighter_Kirby_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
+
         break;
 
     case Ft_Kind_Purin:
     case Ft_Kind_PolyPurin:
         fp->phys_info.vel_air.y = Fighter_Purin_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
+
         break;
     }
     fp->jumps_used++;
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     fp->x192_flag_b0 = TRUE;
 
@@ -271,7 +273,7 @@ bool32 func_ovl3_8014019C(GObj *fighter_gobj)
             case Ft_Kind_Kirby:
             case Ft_Kind_PolyKirby:
 
-                if ((fp->status_info.status_id < ftStatus_Kirby_JumpAerialF1) || (fp->status_info.status_id > ftStatus_Kirby_JumpAerialF5) || (fp->cmd_flags.flag1 != 0))
+                if ((fp->status_info.status_id < ftStatus_Kirby_JumpAerialF1) || (fp->status_info.status_id > ftStatus_Kirby_JumpAerialF5) || (fp->command_vars.flags.flag1 != 0))
                 {
                     input_source = func_ovl3_80140150(fp);
 
@@ -287,7 +289,7 @@ bool32 func_ovl3_8014019C(GObj *fighter_gobj)
             case Ft_Kind_Purin:
             case Ft_Kind_PolyPurin:
 
-                if ((fp->status_info.status_id < ftStatus_Purin_JumpAerialF1) || (fp->status_info.status_id > ftStatus_Purin_JumpAerialF5) || (fp->cmd_flags.flag1 != 0))
+                if ((fp->status_info.status_id < ftStatus_Purin_JumpAerialF1) || (fp->status_info.status_id > ftStatus_Purin_JumpAerialF5) || (fp->command_vars.flags.flag1 != 0))
                 {
                     input_source = func_ovl3_80140150(fp);
 

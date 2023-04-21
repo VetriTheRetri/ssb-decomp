@@ -27,7 +27,7 @@ void func_ovl3_8015B780(GObj *fighter_gobj)
 
     ftCommonAttributes *common_attrs = fp->attributes;
 
-    f32 gravity_mul = (fp->cmd_flags.flag1 != 0U) ? FTDONKEY_SPINNINGKONG_END_GRAVITY_MUL : FTDONKEY_SPINNINGKONG_START_GRAVITY_MUL;
+    f32 gravity_mul = (fp->command_vars.flags.flag1 != 0U) ? FTDONKEY_SPINNINGKONG_END_GRAVITY_MUL : FTDONKEY_SPINNINGKONG_START_GRAVITY_MUL;
 
     func_ovl2_800D8D68(fp, common_attrs->gravity * gravity_mul, common_attrs->fall_speed_max);
 
@@ -74,7 +74,7 @@ void func_ovl3_8015B8E8(GObj *fighter_gobj, bool32 stale_unk)
 
     fp->jumps_used = common_attrs->jumps_max;
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     fp->status_vars.donkey.specialhi.unk_0x0 = 9;
 

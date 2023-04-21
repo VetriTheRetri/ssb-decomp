@@ -6,7 +6,7 @@ void func_ovl3_8015FC30(GObj *fighter_gobj)
 
     if (!(fp->x18F_flag_b3))
     {
-        if (fp->cmd_flags.flag2 == 1)
+        if (fp->command_vars.flags.flag2 == 1)
         {
 
             if (func_ovl2_80101ED8(fighter_gobj) != FALSE)
@@ -14,14 +14,14 @@ void func_ovl3_8015FC30(GObj *fighter_gobj)
                 fp->x18F_flag_b3 = TRUE;
             }
 
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
     }
 
-    else if (fp->cmd_flags.flag2 == 2)
+    else if (fp->command_vars.flags.flag2 == 2)
     {
         func_ovl2_800E9C3C(fighter_gobj);
-        fp->cmd_flags.flag2 = 0;
+        fp->command_vars.flags.flag2 = 0;
     }
 }
 
@@ -44,7 +44,7 @@ void func_ovl3_8015FCE8(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        if (fp->cmd_flags.flag3 != 0)
+        if (fp->command_vars.flags.flag3 != 0)
         {
             func_ovl2_800DDE84(fighter_gobj, func_ovl3_8015FCB0);
         }
@@ -78,7 +78,7 @@ void func_ovl3_8015FDB4(GObj *fighter_gobj)
         fp->joint[0]->rotate.z = (f32)-atan2f(fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y);
         func_ovl2_800D8C14(fighter_gobj);
     }
-    else if (fp->cmd_flags.flag0 != 0)
+    else if (fp->command_vars.flags.flag0 != 0)
     {
         func_ovl2_800D91EC(fighter_gobj);
     }
@@ -109,12 +109,12 @@ bool32 func_ovl3_8015FEB4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->cmd_flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
+    if ((fp->command_vars.flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
         func_ovl2_800DEEC8(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwBound, 0.0F, 1.0F, 0U);
 
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
 
         return TRUE;
     }
@@ -125,17 +125,17 @@ bool32 func_ovl3_8015FF2C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 == 2)
+    if (fp->command_vars.flags.flag1 == 2)
     {
         if (fp->ground_or_air == air)
         {
             func_ovl3_80160060(fighter_gobj);
 
-            fp->cmd_flags.flag1 = 0;
+            fp->command_vars.flags.flag1 = 0;
 
             return TRUE;
         }
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
     }
     return FALSE;
 }
@@ -178,10 +178,10 @@ void func_ovl3_80160038(GObj *fighter_gobj)
 
     fp->status_vars.captain.speciallw.scale_apply_timer = 0;
 
-    fp->cmd_flags.flag0 = 0;
-    fp->cmd_flags.flag3 = 0;
-    fp->cmd_flags.flag1 = 0;
-    fp->cmd_flags.flag2 = 0;
+    fp->command_vars.flags.flag0 = 0;
+    fp->command_vars.flags.flag3 = 0;
+    fp->command_vars.flags.flag1 = 0;
+    fp->command_vars.flags.flag2 = 0;
 
     fp->status_vars.captain.speciallw.vel_scale = 1.0F;
 }

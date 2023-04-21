@@ -7,9 +7,9 @@ void func_ovl3_80155B40(GObj *fighter_gobj)
     Vec3f vel;
     f32 angle;
 
-    if (fp->cmd_flags.flag0 != FALSE) // Check if flag to summon PK Fire is true
+    if (fp->command_vars.flags.flag0 != FALSE) // Check if flag to summon PK Fire is true
     {
-        fp->cmd_flags.flag0 = FALSE; // Revert to 0 if PK Fire is summoned, so it doesn't repeat on every frame of the move
+        fp->command_vars.flags.flag0 = FALSE; // Revert to 0 if PK Fire is summoned, so it doesn't repeat on every frame of the move
 
         pos.x = 0.0F;
         pos.y = 0.0F;
@@ -74,7 +74,7 @@ void func_ovl3_80155DA4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag0 = 0;
 
     fp->cb_accessory = func_ovl3_80155B40;
 }

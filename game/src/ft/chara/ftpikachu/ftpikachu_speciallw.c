@@ -26,7 +26,7 @@ void func_ovl3_80151E44(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag0 != 0)
+    if (fp->command_vars.flags.flag0 != 0)
     {
         func_ovl3_80151DB0(fighter_gobj);
     }
@@ -73,8 +73,8 @@ void func_ovl3_80151FA8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag1 = 0;
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag1 = 0;
+    fp->command_vars.flags.flag0 = 0;
 
     fp->fighter_vars.pikachu.is_thunder_destroy = FALSE;
 }
@@ -158,7 +158,7 @@ void func_ovl3_80152124(GObj *fighter_gobj)
     {
         func_ovl3_80152724(fighter_gobj);
     }
-    else if (fp->cmd_flags.flag1 != 0)
+    else if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl3_80152724(fighter_gobj);
     }
@@ -176,7 +176,7 @@ void func_ovl3_8015219C(GObj *fighter_gobj)
     {
         func_ovl3_80152764(fighter_gobj);
     }
-    else if (fp->cmd_flags.flag1 != 0)
+    else if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl3_80152764(fighter_gobj);
     }
@@ -228,11 +228,11 @@ void func_ovl3_80152328(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag0 == 0)
+    if (fp->command_vars.flags.flag0 == 0)
     {
         func_ovl3_80151DB0(fighter_gobj);
     }
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag0 = 0;
 
     fp->cb_take_damage = func_ovl3_8015225C;
 }
@@ -255,7 +255,7 @@ void func_ovl3_801523F4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl3_80152724(fighter_gobj);
     }
@@ -265,7 +265,7 @@ void func_ovl3_80152424(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl3_80152764(fighter_gobj);
     }
@@ -313,7 +313,7 @@ void func_ovl3_80152578(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     fp->cb_take_damage = NULL;
 }

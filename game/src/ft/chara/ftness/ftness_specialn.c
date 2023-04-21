@@ -10,9 +10,9 @@ void ftNess_ItemSpawn_PKFire(GObj *fighter_gobj) // PK Fire setup
     Vec3f vel;
     f32 angle;
 
-    if (fp->cmd_flags.flag0 != FALSE) // Check if flag to summon PK Fire is true
+    if (fp->command_vars.flags.flag0 != FALSE) // Check if flag to summon PK Fire is true
     {
-        fp->cmd_flags.flag0 = FALSE; // Revert to 0 if PK Fire is summoned, so it doesn't repeat on every frame of the move
+        fp->command_vars.flags.flag0 = FALSE; // Revert to 0 if PK Fire is summoned, so it doesn't repeat on every frame of the move
 
         pos.x = 0.0F;
         pos.y = 0.0F;
@@ -86,7 +86,7 @@ void ftNess_SpecialN_SetStatusFlags(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag0 = FALSE;
+    fp->command_vars.flags.flag0 = FALSE;
     fp->cb_accessory = ftNess_ItemSpawn_PKFire;
 }
 

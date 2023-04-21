@@ -11,9 +11,9 @@ void func_ovl3_80155E64(GObj *fighter_gobj)
     Vec3f pos;
     s32 var;
 
-    if (fp->cmd_flags.flag0 != 0)
+    if (fp->command_vars.flags.flag0 != 0)
     {
-        fp->cmd_flags.flag0 = 0;
+        fp->command_vars.flags.flag0 = 0;
 
         pos.x = 0.0F;
         pos.y = 0.0F;
@@ -77,7 +77,7 @@ void func_ovl3_80155FFC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag0 = FALSE;
+    fp->command_vars.flags.flag0 = FALSE;
     fp->cb_accessory = func_ovl3_80155E64;
 }
 

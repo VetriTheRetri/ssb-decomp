@@ -4,16 +4,16 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
-        switch (fp->cmd_flags.flag1)
+        switch (fp->command_vars.flags.flag1)
         {
         case 1:
 
             if (fp->x18F_flag_b3 != FALSE)
             {
                 func_ovl2_800E9C3C(fighter_gobj);
-                fp->cmd_flags.flag1 = 0;
+                fp->command_vars.flags.flag1 = 0;
             }
             break;
 
@@ -21,19 +21,19 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
             while (TRUE)
             {
-                fatal_printf("gcFighterSpecialHiEffectKirby : Error  Unknown value %d \n", fp->cmd_flags.flag1);
+                fatal_printf("gcFighterSpecialHiEffectKirby : Error  Unknown value %d \n", fp->command_vars.flags.flag1);
                 scnmgr_crash_print_gobj_state();
             }
         }
     }
-    switch (fp->cmd_flags.flag2)
+    switch (fp->command_vars.flags.flag2)
     {
     case 0:
 
         if (fp->x18F_flag_b3 != FALSE)
         {
             func_ovl2_800E9C3C(fighter_gobj);
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
         break;
 
@@ -42,7 +42,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         if (func_ovl2_80102508(fighter_gobj) != FALSE)
         {
             fp->x18F_flag_b3 = TRUE;
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
         break;
 
@@ -51,7 +51,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         if (func_ovl2_80102418(fighter_gobj) != FALSE)
         {
             fp->x18F_flag_b3 = TRUE;
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
         break;
 
@@ -60,7 +60,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         if (func_ovl2_80102490(fighter_gobj) != FALSE)
         {
             fp->x18F_flag_b3 = TRUE;
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
         break;
 
@@ -69,7 +69,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         if (func_ovl2_80102560(fighter_gobj) != FALSE)
         {
             fp->x18F_flag_b3 = TRUE;
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
         break;
 
@@ -77,7 +77,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
         while (TRUE)
         {
-            fatal_printf("gcFighterSpecialHiEffectKirby : Error  Unknown value %d \n", fp->cmd_flags.flag2);
+            fatal_printf("gcFighterSpecialHiEffectKirby : Error  Unknown value %d \n", fp->command_vars.flags.flag2);
             scnmgr_crash_print_gobj_state();
         }
     }
@@ -93,9 +93,9 @@ void func_ovl3_80160D40(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
 
-    if (fp->cmd_flags.flag0 != 0)
+    if (fp->command_vars.flags.flag0 != 0)
     {
-        fp->cmd_flags.flag0 = 0;
+        fp->command_vars.flags.flag0 = 0;
 
         pos.x = 0.0F;
         pos.y = 0.0F;
@@ -231,9 +231,9 @@ void func_ovl3_80161194(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
+    fp->command_vars.flags.flag0 = 0;
 }
 
 void jtgt_ovl3_801611A8(GObj *fighter_gobj)

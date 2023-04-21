@@ -29,9 +29,9 @@ void func_ovl3_8015EA5C(GObj *fighter_gobj)
     Vec3f pos;
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag2 == 2)
+    if (fp->command_vars.flags.flag2 == 2)
     {
-        fp->cmd_flags.flag2 = 0;
+        fp->command_vars.flags.flag2 = 0;
 
         if (fp->status_vars.yoshi.specialhi.egg_gobj != NULL)
         {
@@ -45,12 +45,12 @@ void func_ovl3_8015EA5C(GObj *fighter_gobj)
 
             fp->status_vars.yoshi.specialhi.egg_gobj = NULL;
         }
-        fp->cmd_flags.flag1 = 1;
+        fp->command_vars.flags.flag1 = 1;
     }
 
-    else if (fp->cmd_flags.flag2 == 1)
+    else if (fp->command_vars.flags.flag2 == 1)
     {
-        fp->cmd_flags.flag2 = 0;
+        fp->command_vars.flags.flag2 = 0;
 
         func_ovl3_8015E9B0(fp, &pos);
 
@@ -125,7 +125,7 @@ void func_ovl3_8015ECD0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl2_800DE80C(fighter_gobj, func_ovl3_8015EC00);
     }
@@ -137,8 +137,8 @@ void func_ovl3_8015ED18(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->cb_take_damage = func_ovl3_8015E980;
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
     fp->status_vars.yoshi.specialhi.egg_gobj = NULL;
     fp->status_vars.yoshi.specialhi.throw_force = 0;
 }

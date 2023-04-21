@@ -10,9 +10,9 @@ void func_ovl3_8015EDE4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
 
-    if (fp->cmd_flags.flag0 != 0)
+    if (fp->command_vars.flags.flag0 != 0)
     {
-        fp->cmd_flags.flag0 = 0;
+        fp->command_vars.flags.flag0 = 0;
 
         pos.x = 0.0F;
         pos.y = 0.0F;
@@ -38,7 +38,7 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->cmd_flags.flag1 != 0U) && (fp->phys_info.vel_air.y <= 0.0F))
+    if ((fp->command_vars.flags.flag1 != 0U) && (fp->phys_info.vel_air.y <= 0.0F))
     {
         if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
         {
@@ -82,8 +82,8 @@ void func_ovl3_8015EFD4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag0 = 0;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag0 = 0;
+    fp->command_vars.flags.flag1 = 0;
 }
 
 void jtgt_ovl3_8015EFE4(GObj *fighter_gobj)

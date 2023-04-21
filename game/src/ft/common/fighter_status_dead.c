@@ -293,7 +293,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    switch (fp->cmd_flags.flag1)
+    switch (fp->command_vars.flags.flag1)
     {
     case 1:
         fp->color_anim.a = 128 - ((fp->status_vars.common.dead.rebirth_wait * 128) / FTCOMMON_DEADUP_REBIRTH_WAIT);
@@ -308,7 +308,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
     }
     if (fp->status_vars.common.dead.rebirth_wait == 0)
     {
-        switch (fp->cmd_flags.flag1)
+        switch (fp->command_vars.flags.flag1)
         {
         case 0:
             fp->phys_info.vel_air.y = ((Ground_Info->cam_bound_top * 0.6F) - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
@@ -323,7 +323,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
 
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEADUP_REBIRTH_WAIT;
 
-            fp->cmd_flags.flag1++;
+            fp->command_vars.flags.flag1++;
             break;
 
         case 1:
@@ -341,7 +341,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
 
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEAD_REBIRTH_WAIT;
 
-            fp->cmd_flags.flag1++;
+            fp->command_vars.flags.flag1++;
             break;
 
         case 2:
@@ -368,7 +368,7 @@ void func_ovl3_8013C740(GObj *fighter_gobj)
 
     fp->status_vars.common.dead.rebirth_wait = 1;
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     func_ovl3_8013C0B0(fighter_gobj);
     func_ovl2_800E7F7C(fighter_gobj, 1);
@@ -386,7 +386,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 sfx_id;
 
-    switch (fp->cmd_flags.flag1)
+    switch (fp->command_vars.flags.flag1)
     {
     case 1:
         if (DObjGetStruct(fighter_gobj)->translate.y < Ground_Info->blastzone_bottom)
@@ -404,7 +404,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
     }
     if (fp->status_vars.common.dead.rebirth_wait == 0)
     {
-        switch (fp->cmd_flags.flag1)
+        switch (fp->command_vars.flags.flag1)
         {
         case 0:
             fp->phys_info.vel_air.y = (Ground_Info->cam_bound_bottom - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
@@ -423,7 +423,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
             }
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEADUP_REBIRTH_WAIT;
 
-            fp->cmd_flags.flag1++;
+            fp->command_vars.flags.flag1++;
 
             break;
 
@@ -456,7 +456,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
                 func_ovl3_8013BC60(fp->attributes->dead_sfx[1]);
             }
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEAD_REBIRTH_WAIT;
-            fp->cmd_flags.flag1++;
+            fp->command_vars.flags.flag1++;
 
             break;
 
@@ -485,7 +485,7 @@ void func_ovl3_8013CAAC(GObj *fighter_gobj)
 
     fp->status_vars.common.dead.rebirth_wait = 1;
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     func_ovl3_8013C0B0(fighter_gobj);
     func_ovl2_800E7F7C(fighter_gobj, 1);

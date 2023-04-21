@@ -88,12 +88,12 @@ void func_ovl3_80161530(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwHold, 0.0F, 1.0F, 0x32U);
         func_ovl3_8016141C(fighter_gobj);
 
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
     }
     else func_ovl2_800D9480(fighter_gobj, func_ovl3_80161AEC);
 }
@@ -102,11 +102,11 @@ void func_ovl3_80161598(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl3_8016141C(fighter_gobj);
 
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
     }
     func_ovl2_800D9480(fighter_gobj, func_ovl3_80161C0C);
 }
@@ -115,7 +115,7 @@ void func_ovl3_801615E4(GObj *fighter_gobj, bool32 is_release)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->is_damage_resist) && (fp->cmd_flags.flag1 != 0))
+    if (!(fp->is_damage_resist) && (fp->command_vars.flags.flag1 != 0))
     {
         if (is_release == FALSE)
         {
@@ -123,16 +123,16 @@ void func_ovl3_801615E4(GObj *fighter_gobj, bool32 is_release)
         }
         func_ovl3_8016141C(fighter_gobj);
 
-        fp->cmd_flags.flag1 = 0;
-        fp->cmd_flags.flag2 = 1;
+        fp->command_vars.flags.flag1 = 0;
+        fp->command_vars.flags.flag2 = 1;
     }
-    if (fp->cmd_flags.flag2 != 0)
+    if (fp->command_vars.flags.flag2 != 0)
     {
         if (func_ovl3_801614B4(fighter_gobj, FALSE) == TRUE)
         {
             (is_release == FALSE) ? func_ovl3_80161B2C(fighter_gobj) : func_ovl3_80161C5C(fighter_gobj);
 
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
         func_ovl3_80161368(fighter_gobj);
     }
@@ -277,8 +277,8 @@ void jtgt_ovl3_80161A94(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwStart, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     fp->phys_info.vel_air.y = 0.0F;
     fp->phys_info.vel_air.x = 0.0F;
@@ -311,12 +311,12 @@ void jtgt_ovl3_80161B70(GObj *fighter_gobj)
 
     if ((fp->is_damage_resist = armor_flag & TRUE) != FALSE) // WAT
     {
-        fp->cmd_flags.flag2 = 1;
+        fp->command_vars.flags.flag2 = 1;
     }
     else
     {
-        fp->cmd_flags.flag2 = 0;
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag2 = 0;
+        fp->command_vars.flags.flag1 = 0;
     }
 
     fp->phys_info.vel_air.y = 0.0F;

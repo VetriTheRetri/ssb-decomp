@@ -19,7 +19,7 @@ void func_ovl3_80160304(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fighter_gobj->anim_frame <= 0.0F) || (fp->cmd_flags.flag0 != 0))
+    if ((fighter_gobj->anim_frame <= 0.0F) || (fp->command_vars.flags.flag0 != 0))
     {
         Fighter_Struct *fp_catch = FighterGetStruct(fp->catch_gobj);
 
@@ -35,9 +35,9 @@ void func_ovl3_80160370(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 stick_x;
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
 
         stick_x = ABS(fp->input.stick_range.x);
 
@@ -96,14 +96,14 @@ void func_ovl3_80160560(GObj *fighter_gobj)
 
     if (fp->phys_info.vel_air.y < 0.0F)
     {
-        if (fp->cmd_flags.flag2 == 0)
+        if (fp->command_vars.flags.flag2 == 0)
         {
             func_ovl2_800DE978(fighter_gobj);
         }
         else
         {
             func_ovl2_800DE958(fighter_gobj);
-            fp->cmd_flags.flag2--;
+            fp->command_vars.flags.flag2--;
         }
     }
     else if ((func_ovl2_800DE87C(fighter_gobj) != FALSE) && (fp->coll_data.coll_type & 0x3000))
@@ -120,9 +120,9 @@ void func_ovl3_801605FC(GObj *fighter_gobj)
 
     fp->status_vars.captain.specialhi.unk_0x0 = 0;
 
-    fp->cmd_flags.flag0 = 0;
-    fp->cmd_flags.flag1 = 0;
-    fp->cmd_flags.flag2 = FTCAPTAIN_FALCONDIVE_UNK_TIMER;
+    fp->command_vars.flags.flag0 = 0;
+    fp->command_vars.flags.flag1 = 0;
+    fp->command_vars.flags.flag2 = FTCAPTAIN_FALCONDIVE_UNK_TIMER;
 
     fp->status_vars.captain.specialhi.vel.x = 0.0F;
     fp->status_vars.captain.specialhi.vel.y = 0.0F;

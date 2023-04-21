@@ -186,9 +186,9 @@ void func_ovl3_80157314(GObj *fighter_gobj)
     f32 charge_recoil_x;
     f32 charge_recoil_y;
 
-    if (fp->cmd_flags.flag0 != FALSE)
+    if (fp->command_vars.flags.flag0 != FALSE)
     {
-        fp->cmd_flags.flag0 = FALSE;
+        fp->command_vars.flags.flag0 = FALSE;
 
         func_ovl3_80156EBC(fp, &pos);
 
@@ -306,7 +306,7 @@ void func_ovl3_801576B4(Fighter_Struct *fp)
 {
     fp->cb_take_damage = func_ovl3_80156E98;
     fp->status_vars.kirby.copysamus_specialn.charge_gobj = NULL;
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag0 = 0;
 }
 
 void jtgt_ovl3_801576CC(GObj *fighter_gobj)

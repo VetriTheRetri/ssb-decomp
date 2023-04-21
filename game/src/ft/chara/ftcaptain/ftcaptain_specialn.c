@@ -8,20 +8,20 @@ void func_ovl3_8015F7F0(GObj *fighter_gobj) // Falcon Punch
 
     if (!(fp->x18F_flag_b3))
     {
-        if (fp->cmd_flags.flag0 == 1)
+        if (fp->command_vars.flags.flag0 == 1)
         {
             if (func_ovl2_80101F84(fighter_gobj) != FALSE)
             {
                 fp->x18F_flag_b3 = TRUE;
             }
-            fp->cmd_flags.flag0 = 0;
+            fp->command_vars.flags.flag0 = 0;
         }
     }
 
-    else if (fp->cmd_flags.flag0 == 1)
+    else if (fp->command_vars.flags.flag0 == 1)
     {
         func_ovl2_800E9C3C(fighter_gobj);
-        fp->cmd_flags.flag0 = 2;
+        fp->command_vars.flags.flag0 = 2;
     }
 }
 
@@ -61,9 +61,9 @@ void func_ovl3_8015F914(GObj *fighter_gobj)
     f32 unused;
     f32 boost;
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
         fp->fighter_vars.captain.falcon_punch_unk++;
 
         boost = func_ovl3_8015F874(fp->input.stick_range.y);
@@ -74,7 +74,7 @@ void func_ovl3_8015F914(GObj *fighter_gobj)
 
     func_ovl3_8015F7F0(fighter_gobj);
 
-    switch (fp->cmd_flags.flag2)
+    switch (fp->command_vars.flags.flag2)
     {
     case 0:
         func_ovl2_800D91EC(fighter_gobj);
@@ -128,9 +128,9 @@ void func_ovl3_8015FB40(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
+    fp->command_vars.flags.flag0 = 0;
 }
 
 void func_ovl3_8015FB54() // Unused???

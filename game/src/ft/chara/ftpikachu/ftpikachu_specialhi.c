@@ -65,7 +65,7 @@ void func_ovl3_80152934(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     fp->status_vars.pikachu.specialhi.anim_frames = FTPIKACHU_QUICKATTACK_START_TIME;
     fp->status_vars.pikachu.specialhi.is_subsequent_zip = FALSE;
@@ -372,17 +372,17 @@ void func_ovl3_801532B8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 == 1)
+    if (fp->command_vars.flags.flag1 == 1)
     {
         if (func_ovl3_801531AC(fighter_gobj) != FALSE)
         {
-            fp->cmd_flags.flag1 = 0;
+            fp->command_vars.flags.flag1 = 0;
 
             fp->status_vars.pikachu.specialhi.is_subsequent_zip = TRUE;
 
             func_ovl3_80152E48(fighter_gobj);
         }
-        else fp->cmd_flags.flag1 = 2;
+        else fp->command_vars.flags.flag1 = 2;
     }
     else if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -394,16 +394,16 @@ void func_ovl3_80153340(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 == 1)
+    if (fp->command_vars.flags.flag1 == 1)
     {
         if (func_ovl3_801531AC(fighter_gobj) != FALSE)
         {
-            fp->cmd_flags.flag1 = 0;
+            fp->command_vars.flags.flag1 = 0;
             fp->status_vars.pikachu.specialhi.is_subsequent_zip = TRUE;
 
             func_ovl3_80152FEC(fighter_gobj);
         }
-        else fp->cmd_flags.flag1 = 2;
+        else fp->command_vars.flags.flag1 = 2;
     }
     else if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -415,7 +415,7 @@ void func_ovl3_801533E4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         func_ovl2_800D8BB4(fighter_gobj);
     }
@@ -425,7 +425,7 @@ void func_ovl3_80153414(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0U)
+    if (fp->command_vars.flags.flag1 != 0U)
     {
         ftCommonAttributes *common_attrs;
 

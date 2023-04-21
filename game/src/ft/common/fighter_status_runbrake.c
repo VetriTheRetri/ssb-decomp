@@ -4,7 +4,7 @@ void func_ovl3_8013EFB0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((func_ovl3_8013F598(fighter_gobj) == FALSE) && (fp->cmd_flags.flag1 != 0) && (fighter_gobj->anim_frame <= 4.0F))
+    if ((func_ovl3_8013F598(fighter_gobj) == FALSE) && (fp->command_vars.flags.flag1 != 0) && (fighter_gobj->anim_frame <= 4.0F))
     {
         func_ovl3_8013F248(fighter_gobj);
     }
@@ -25,7 +25,7 @@ void func_ovl3_8013F05C(GObj *fighter_gobj, u32 flag)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_RunBrake, 0.0F, 1.0F, 0U);
 
-    fp->cmd_flags.flag1 = flag;
+    fp->command_vars.flags.flag1 = flag;
 }
 
 bool32 func_ovl3_8013F0A0(GObj *fighter_gobj)

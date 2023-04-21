@@ -6,9 +6,9 @@ void func_ovl3_80151860(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
+    fp->command_vars.flags.flag0 = 0;
 }
 
 f32 func_ovl3_80151874(s32 stick_y)
@@ -41,9 +41,9 @@ void func_ovl3_801518EC(GObj *fighter_gobj)
     f32 unused;
     f32 boost;
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
 
         fp->fighter_vars.kirby.copypurin_unk++;
 
@@ -53,7 +53,7 @@ void func_ovl3_801518EC(GObj *fighter_gobj)
         fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTKIRBY_COPYPURIN_POUND_VEL_BASE);
     }
 
-    switch (fp->cmd_flags.flag2)
+    switch (fp->command_vars.flags.flag2)
     {
     case 0:
         func_ovl2_800D91EC(fighter_gobj);

@@ -45,17 +45,17 @@ void func_ovl3_8013DA14(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         if ((fp->ft_kind == Ft_Kind_Pikachu) || (fp->ft_kind == Ft_Kind_Purin) || (fp->ft_kind == Ft_Kind_PolyPikachu) || (fp->ft_kind == Ft_Kind_PolyPurin))
         {
             func_ovl2_80102C28(&fp->entry_pos);
         }
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
     }
-    if (fp->cmd_flags.flag2 != 0)
+    if (fp->command_vars.flags.flag2 != 0)
     {
-        fp->cmd_flags.flag2 = 0;
+        fp->command_vars.flags.flag2 = 0;
 
         fp->x18E_flag_b0 = FALSE;
     }
@@ -208,9 +208,9 @@ void func_ovl3_8013DBE0(GObj *fighter_gobj)
 
     fp->status_vars.common.entry.entry_wait = FTCOMMON_ENTRY_WAIT;
 
-    fp->cmd_flags.flag1 = 0;
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag0 = 0;
+    fp->command_vars.flags.flag1 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag0 = 0;
 
     if ((fp->ft_kind == Ft_Kind_Captain) && (fp->status_vars.common.entry.lr_entry == LEFT))
     {

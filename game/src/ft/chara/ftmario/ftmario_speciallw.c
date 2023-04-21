@@ -4,7 +4,7 @@ void func_ovl3_801564F0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag3 != FALSE)
+    if (fp->command_vars.flags.flag3 != FALSE)
     {
         fp->status_vars.mario.speciallw.dust_gfx_int--;
 
@@ -26,9 +26,9 @@ void func_ovl3_801565A8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag2 != FALSE)
+    if (fp->command_vars.flags.flag2 != FALSE)
     {
-        fp->cmd_flags.flag2 = FALSE;
+        fp->command_vars.flags.flag2 = FALSE;
         fp->fighter_vars.mario.is_tornado_charge = TRUE;
     }
     func_ovl2_800D94E8(fighter_gobj);
@@ -36,7 +36,7 @@ void func_ovl3_801565A8(GObj *fighter_gobj)
 
 f32 func_ovl3_801565E4(Fighter_Struct *fp, f32 drift)
 {
-    if (fp->cmd_flags.flag1 != FALSE)
+    if (fp->command_vars.flags.flag1 != FALSE)
     {
         fp->status_vars.mario.speciallw.tornado_drift -= 2.0F;
 
@@ -57,7 +57,7 @@ void func_ovl3_80156630(GObj *fighter_gobj)
     func_ovl2_800D89E0(fp, 0, 0.025F, func_ovl3_801565E4(fp, 17.0F));
     func_ovl2_800D87D0(fighter_gobj);
 
-    if ((fp->cmd_flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
+    if ((fp->command_vars.flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
     {
         fp->phys_info.vel_air.y += FTMARIO_TORNADO_TAP_VEL_ADD;
 
@@ -70,7 +70,7 @@ void func_ovl3_801566C4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *common_attrs = fp->attributes;
 
-    if ((fp->fighter_vars.mario.is_tornado_charge == FALSE) && (fp->cmd_flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
+    if ((fp->fighter_vars.mario.is_tornado_charge == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
     {
         func_ovl2_800D8D34(fp, FTMARIO_TORNADO_TAP_VEL_ADD, 40.0F);
     }
@@ -93,7 +93,7 @@ void func_ovl3_801567A4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag3 = FALSE;
+    fp->command_vars.flags.flag3 = FALSE;
 }
 
 void func_ovl3_801567B0(GObj *fighter_gobj)
@@ -121,8 +121,8 @@ void func_ovl3_8015686C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag1 = FALSE;
-    fp->cmd_flags.flag2 = FALSE;
+    fp->command_vars.flags.flag1 = FALSE;
+    fp->command_vars.flags.flag2 = FALSE;
 
     fp->status_vars.mario.speciallw.dust_gfx_int = 5;
     fp->status_vars.mario.speciallw.tornado_drift = 0.0F;

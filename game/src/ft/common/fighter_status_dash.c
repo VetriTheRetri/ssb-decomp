@@ -16,7 +16,7 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->cmd_flags.flag1 != 0) && (fighter_gobj->anim_frame <= 5.0F))
+    if ((fp->command_vars.flags.flag1 != 0) && (fighter_gobj->anim_frame <= 5.0F))
     {
         if ((func_ovl3_80151098(fighter_gobj) == FALSE) && (func_ovl3_80149CE0(fighter_gobj) == FALSE) && (func_ovl3_801501E0(fighter_gobj) == FALSE) && (!(fighter_gobj->anim_frame <= 3.0F) || (func_ovl3_801493A4(fighter_gobj) == FALSE)))
         {
@@ -87,7 +87,7 @@ void func_ovl3_8013ED00(GObj *fighter_gobj, u32 flag)
 
     fp->phys_info.vel_ground.x = fp->attributes->dash_speed;
     fp->hold_stick_x = (U8_MAX - 1);
-    fp->cmd_flags.flag1 = flag;
+    fp->command_vars.flags.flag1 = flag;
 }
 
 bool32 func_ovl3_8013ED64(GObj *fighter_gobj)

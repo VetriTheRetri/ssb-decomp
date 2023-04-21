@@ -4,9 +4,9 @@ void func_ovl3_8013E690(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != 0)
+    if (fp->command_vars.flags.flag1 != 0)
     {
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
 
         fp->status_vars.common.turn.unk_0x0 = 1;
         fp->status_vars.common.turn.unk_0x4 = 1;
@@ -101,7 +101,7 @@ void func_ovl3_8013E908(GObj *fighter_gobj, s32 lr_dash)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Turn, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

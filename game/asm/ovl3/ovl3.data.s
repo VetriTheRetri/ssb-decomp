@@ -907,21 +907,21 @@ glabel Fighter_StatusList_DamageGround
 glabel Fighter_StatusList_DamageAir
   .incbin "ovl3.raw.bin", 0x56AD0, 0x30
 
-glabel D_ovl3_80188600
+glabel Fighter_StarRodSwing_Star_Offset
   .incbin "ovl3.raw.bin", 0x56B00, 0x4
   /* 56B04 103044 80188604 */
   .asciz "CH"
   .balign 4
   .incbin "ovl3.raw.bin", 0x56B08, 0x4
 
-glabel D_ovl3_8018860C
+glabel Fighter_StarRodSwing_Dust_Offset
   .incbin "ovl3.raw.bin", 0x56B0C, 0x4
   /* 56B10 103050 80188610 */
   .asciz "CH"
   .balign 4
   .incbin "ovl3.raw.bin", 0x56B14, 0x4
 
-glabel D_ovl3_80188618
+glabel Fighter_ItemSwing_Status
   .incbin "ovl3.raw.bin", 0x56B18, 0x48
 
 glabel D_ovl3_80188660

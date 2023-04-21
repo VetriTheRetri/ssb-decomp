@@ -12,9 +12,9 @@ void func_ovl3_8015DC94(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->cmd_flags.flag1 != FALSE)
+    if (fp->command_vars.flags.flag1 != FALSE)
     {
-        fp->cmd_flags.flag1 = FALSE;
+        fp->command_vars.flags.flag1 = FALSE;
         fp->phys_info.vel_air.x = (f32)fp->lr * FTSAMUS_SCREWATTACK_VEL_X_BASE;
     }
     if (fp->ground_or_air == air)
@@ -65,7 +65,7 @@ void jtgt_ovl3_8015DE0C(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cmd_flags.flag1 = FALSE;
+    fp->command_vars.flags.flag1 = FALSE;
 }
 
 void func_ovl3_8015DE54(GObj *fighter_gobj)

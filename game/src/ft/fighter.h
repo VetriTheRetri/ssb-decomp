@@ -319,7 +319,7 @@ typedef enum ftCommonAction
     ftStatus_Common_CaptureYoshi,
     ftStatus_Common_YoshiEgg,
     ftStatus_Common_CaptureCaptain,
-    ftStatus_Common_Unk2,
+    ftStatus_Common_ThrownDonkeyUnk, // Related to DK throws?
     ftStatus_Common_ThrownDonkeyF,
     ftStatus_Common_ThrownMarioB,
     ftStatus_Common_ThrownFoxF,
@@ -484,6 +484,21 @@ typedef struct _Fighter_Hit
 
 } Fighter_Hit;
 
+typedef struct FighterItemThrow
+{
+    s32 is_smash_throw : 1;
+    s32 velocity : 10;
+    s32 angle : 11;
+    u32 damage : 10;
+
+} FighterItemThrow;
+
+typedef struct FighterItemSwing
+{
+    u32 anim_speed : 10;
+
+} FighterItemSwing;
+
 typedef struct ftUnkFrameStruct
 {
     f32 unk_0x0;
@@ -638,17 +653,40 @@ struct Fighter_Struct
     s32 unk_0x174;
     s32 unk_0x178;
 
-    struct cmd_flags
+    union command_vars
     {
+        struct flags
+        {
+            u32 flag0;
+            u32 flag1;
+            u32 flag2;
+            u32 flag3;
 
-        u32 flag0;
-        u32 flag1;
-        u32 flag2;
-        u32 flag3;
+        } flags;
+
+        struct item_throw
+        {
+            bool32 is_throw_item;
+            u8 unk1;
+            u32 damage : 24;
+            u8 unk2;
+            u32 vel : 12;
+            s32 angle : 12;
+
+        } item_throw;
+
+        struct words
+        {
+            u32 w0;
+            u32 w1;
+            u32 w2;
+            u32 w3;
+
+        } words;
 
         // Equivalent to ftcmd flags from Melee?
 
-    } cmd_flags;
+    } command_vars;
 
     u8 x18C_flag_b0 : 1;
     u8 x18C_flag_b1 : 1;

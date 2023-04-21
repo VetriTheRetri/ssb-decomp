@@ -9,9 +9,9 @@ void func_ovl3_8015F1AC(GObj *fighter_gobj, void (*cb_catch)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->cmd_flags.flag1 != 0) && (fp->catch_gobj != NULL)) || (fighter_gobj->anim_frame <= 0.0F))
+    if (((fp->command_vars.flags.flag1 != 0) && (fp->catch_gobj != NULL)) || (fighter_gobj->anim_frame <= 0.0F))
     {
-        fp->cmd_flags.flag1 = 0;
+        fp->command_vars.flags.flag1 = 0;
 
         cb_catch(fighter_gobj);
     }
@@ -29,7 +29,7 @@ void func_ovl3_8015F224(GObj *fighter_gobj)
 
 void func_ovl3_8015F248(Fighter_Struct *fp)
 {
-    if (fp->cmd_flags.flag2 != 0U)
+    if (fp->command_vars.flags.flag2 != 0U)
     {
         if (fp->catch_gobj != NULL)
         {
@@ -37,10 +37,10 @@ void func_ovl3_8015F248(Fighter_Struct *fp)
 
             fp_catch->status_vars.common.yoshiegg.unk_0x4 = 1;
 
-            fp->cmd_flags.flag2 = 0;
+            fp->command_vars.flags.flag2 = 0;
         }
     }
-    if (fp->cmd_flags.flag1 != 0U)
+    if (fp->command_vars.flags.flag1 != 0U)
     {
         if (fp->catch_gobj != NULL)
         {
@@ -50,7 +50,7 @@ void func_ovl3_8015F248(Fighter_Struct *fp)
 
             fp->catch_gobj = NULL;
 
-            fp->cmd_flags.flag1 = 0;
+            fp->command_vars.flags.flag1 = 0;
 
             func_ovl2_800E8098(fp, 0U);
         }
@@ -103,15 +103,15 @@ void func_ovl3_8015F3EC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag1 = 0;
 }
 
 void func_ovl3_8015F3EC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
 }
 
 void func_ovl3_8015F408(GObj *fighter_gobj)
@@ -208,8 +208,8 @@ void func_ovl3_8015F734(GObj *fighter_gobj)
 
     func_ovl2_800E8098(fp, 0x3FU);
 
-    fp->cmd_flags.flag2 = 0;
-    fp->cmd_flags.flag1 = 0;
+    fp->command_vars.flags.flag2 = 0;
+    fp->command_vars.flags.flag1 = 0;
 }
 
 void func_ovl3_8015F768(GObj *fighter_gobj)

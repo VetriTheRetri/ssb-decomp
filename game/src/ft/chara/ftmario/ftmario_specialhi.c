@@ -19,7 +19,7 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
     f32 joint_rot;
     s32 stick_x;
 
-    if (fp->cmd_flags.flag1 == FALSE)
+    if (fp->command_vars.flags.flag1 == FALSE)
     {
         stick_x = ABS(fp->input.stick_range.x);
 
@@ -42,9 +42,9 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
         }
     }
 
-    if (fp->cmd_flags.flag2 != FALSE)
+    if (fp->command_vars.flags.flag2 != FALSE)
     {
-        fp->cmd_flags.flag2 = FALSE;
+        fp->command_vars.flags.flag2 = FALSE;
 
         stick_x = ABS(fp->input.stick_range.x);
 
@@ -74,7 +74,7 @@ void func_ovl3_80156240(GObj *fighter_gobj)
         return;
     }
 
-    if (fp->cmd_flags.flag1 != FALSE)
+    if (fp->command_vars.flags.flag1 != FALSE)
     {
         func_ovl2_800D93E4(fighter_gobj);
 
@@ -109,7 +109,7 @@ void func_ovl3_80156358(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        if ((fp->cmd_flags.flag1 == FALSE) || ((fp->phys_info.vel_air.y >= 0.0F)))
+        if ((fp->command_vars.flags.flag1 == FALSE) || ((fp->phys_info.vel_air.y >= 0.0F)))
         {
             func_ovl2_800DE724(fighter_gobj);
         }
@@ -133,8 +133,8 @@ void func_ovl3_80156418(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cmd_flags.flag2 = FALSE;
-    fp->cmd_flags.flag1 = FALSE;
+    fp->command_vars.flags.flag2 = FALSE;
+    fp->command_vars.flags.flag1 = FALSE;
 }
 
 void jtgt_ovl3_80156428(GObj *fighter_gobj)

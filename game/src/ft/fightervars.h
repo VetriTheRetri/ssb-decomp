@@ -154,6 +154,23 @@
 #define FTCOMMON_LIFT_TURN_FRAMES 8
 #define FTCOMMON_LIFT_TURN_STEP (-0.3926991F)
 
+#define FTCOMMON_LIGHTTHROW_STICK_RANGE_XY_MIN 20
+#define FTCOMMON_LIGHTTHROW4_STICK_RANGE_X_MIN 56
+#define FTCOMMON_LIGHTTHROW4_STICK_RANGE_Y_MIN 53
+#define FTCOMMON_LIGHTTHROW4_F_OR_B_BUFFER_FRAMES_MAX 8
+#define FTCOMMON_LIGHTTHROW4_HI_OR_LW_BUFFER_FRAMES_MAX 4
+#define FTCOMMON_LIGHTTHROW_HI_OR_LW_ANGLE 0.87266463F
+
+#define FTCOMMON_HEAVYTHROW_STICK_RANGE_XY_MIN 20
+#define FTCOMMON_HEAVYTHROW4_STICK_RANGE_X_MIN 56
+#define FTCOMMON_HEAVYTHROW4_STICK_RANGE_Y_MIN 53
+#define FTCOMMON_HEAVYTHROW4_F_OR_B_BUFFER_FRAMES_MAX 8
+#define FTCOMMON_HEAVYTHROW4_HI_OR_LW_BUFFER_FRAMES_MAX 4
+#define FTCOMMON_HEAVYTHROW_HI_OR_LW_ANGLE 0.87266463F
+
+#define FTCOMMON_HARISENSWING_SCALE_RESET_WAIT 2
+#define FTCOMMON_HARISENSWING_SCALE_HIT 1.5F
+
 #define FTCOMMON_HAMMER_TIME_MAX 720
 
 typedef struct ftCommon_Filler
@@ -344,6 +361,25 @@ typedef struct ftCommon_Lift_StatusVars
 
 } ftCommon_Lift_StatusVars;
 
+typedef struct ftCommon_ItemThrow_StatusVars
+{
+    s32 turn_rotate_step;
+    s32 turn_frames;
+    s32 turn_invert_lr_wait;
+    f32 throw_vel;
+    s32 throw_angle;
+    f32 throw_damage;
+    Vec2f unk;
+    s32 get_heavy_wait;
+
+} ftCommon_ItemThrow_StatusVars;
+
+typedef struct ftCommon_ItemSwing_StatusVars
+{
+    s32 harisen_scale_reset_wait;
+
+} ftCommon_ItemSwing_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -387,6 +423,8 @@ typedef union ftCommon_StatusVars
     ftCommon_CliffWait_StatusVars cliffwait;
     ftCommon_CliffMotion_StatusVars cliffmotion;
     ftCommon_Lift_StatusVars lift;
+    ftCommon_ItemThrow_StatusVars itemthrow;
+    ftCommon_ItemSwing_StatusVars itemswing;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
