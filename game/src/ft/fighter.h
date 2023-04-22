@@ -289,7 +289,7 @@ typedef enum ftCommonAction
     ftStatus_Common_HammerWalk,
     ftStatus_Common_HammerTurn,
     ftStatus_Common_HammerKneeBend,
-    ftStatus_Common_HammerFall,
+    ftStatus_Common_HammerFall, // Pretty much any aerial Hammer state
     ftStatus_Common_HammerLanding,
     ftStatus_Common_GuardOn,
     ftStatus_Common_Guard,

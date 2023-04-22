@@ -127,11 +127,17 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
         fp->cb_physics = func_ovl3_8013FBC4;
         fp->status_vars.common.jumpaerial.drift = 0.0F;
     }
-    if ((input_source != FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK) && (input_source == FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON))
+    switch (input_source) // Last minute bruh moment from HAL
     {
+    case FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON:
         stick_range_x = fp->input.stick_range.x;
-    }
-    else stick_range_x = fp->input.stick_range.x; // Last minute bruh moment from HAL
+        break;
+
+    case FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK:
+    default:
+        stick_range_x = fp->input.stick_range.x;
+        break;
+    } 
 
     fp->phys_info.vel_air.y = (((stick_range_y * attributes->jump_height_mul) + attributes->jump_height_base) * attributes->aerial_jump_height);
 
@@ -178,11 +184,17 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
 
-    if ((input_source != FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK) && (input_source == FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON))
+    switch (input_source)
     {
+    case FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON:
         stick_range_x = fp->input.stick_range.x;
+        break;
+
+    case FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK:
+    default:
+        stick_range_x = fp->input.stick_range.x;
+        break;
     }
-    else stick_range_x = fp->input.stick_range.x;
 
     fp->phys_info.vel_air.x = stick_range_x * attributes->aerial_jump_vel_x;
 

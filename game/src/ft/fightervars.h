@@ -184,6 +184,9 @@
 #define FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Z 0.0F
 
 #define FTCOMMON_HAMMER_TIME_MAX 720
+#define FTCOMMON_HAMMER_TURN_FRAMES 12
+#define FTCOMMON_HAMMER_SKIP_LANDING_VEL_Y_MAX (-20.0F)
+#define FTCOMMON_HAMMER_TURN_ROTATE_STEP (-0.2617994F)
 
 typedef struct ftCommon_Filler
 {
@@ -403,6 +406,15 @@ typedef struct ftCommon_FireFlower_StatusVars
 
 } ftCommon_FireFlower_StatusVars;
 
+typedef struct ftCommon_Hammer_StatusVars
+{
+    f32 jump_force;
+    f32 anim_frame;
+    s32 input_source;
+    bool32 is_short_hop;
+
+} ftCommon_Hammer_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -448,6 +460,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Lift_StatusVars lift;
     ftCommon_ItemThrow_StatusVars itemthrow;
     ftCommon_ItemSwing_StatusVars itemswing;
+    ftCommon_Hammer_StatusVars hammer;
     ftCommon_FireFlower_StatusVars fireflower;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
