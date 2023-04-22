@@ -98,9 +98,9 @@ typedef struct ftCommonAttributes
     u8 filler_0x2D8[0x324 - 0x2D8];
     s32 unk_0x324;
     s32 filler_0x328[0x334 - 0x328];
-    s32 joint_throw_heavy;
+    s32 joint_itemhold_heavy;
     s32 unk_0x338;
-    s32 joint_throw_light;
+    s32 joint_itemhold_light;
 
 } ftCommonAttributes;
 

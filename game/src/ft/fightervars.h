@@ -171,6 +171,18 @@
 #define FTCOMMON_HARISENSWING_SCALE_RESET_WAIT 2
 #define FTCOMMON_HARISENSWING_SCALE_HIT 1.5F
 
+#define FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_X 0.0F
+#define FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Y 60.0F
+#define FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z 180.0F
+
+#define FTCOMMON_FIREFLOWERSHOOT_GFX_SPAWN_INT 12
+#define FTCOMMON_FIREFLOWERSHOOT_RELEASE_LAG 20
+#define FTCOMMON_FIREFLOWERSHOOT_AMMO_INDEX_MAX 8
+#define FTCOMMON_FIREFLOWERSHOOT_AMMO_INDEX_LOOP 5
+#define FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_X 60.0F
+#define FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Y 100.0F
+#define FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Z 0.0F
+
 #define FTCOMMON_HAMMER_TIME_MAX 720
 
 typedef struct ftCommon_Filler
@@ -380,6 +392,17 @@ typedef struct ftCommon_ItemSwing_StatusVars
 
 } ftCommon_ItemSwing_StatusVars;
 
+typedef struct ftCommon_FireFlower_StatusVars
+{
+    s32 flame_vel_index;
+    s32 ammo_sub;
+    s32 gfx_spawn_int;
+    s32 ammo_fire_count;
+    bool32 is_release;
+    s32 release_lag;
+
+} ftCommon_FireFlower_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -425,6 +448,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Lift_StatusVars lift;
     ftCommon_ItemThrow_StatusVars itemthrow;
     ftCommon_ItemSwing_StatusVars itemswing;
+    ftCommon_FireFlower_StatusVars fireflower;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

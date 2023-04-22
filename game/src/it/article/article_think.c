@@ -213,7 +213,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alrig
     pos.y = 0.0F;
     pos.x = 0.0F;
 
-    joint_index = (!(ap->is_light_throw)) ? fp->attributes->joint_throw_heavy : fp->attributes->joint_throw_light;
+    joint_index = (!(ap->is_light_throw)) ? fp->attributes->joint_itemhold_heavy : fp->attributes->joint_itemhold_light;
 
     func_ovl2_800EDF24(fp->joint[joint_index], &pos);
 
@@ -346,7 +346,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
 
     func_80008CC0(joint, 0x52, 0);
 
-    joint_index = (!(ap->is_light_throw)) ? fp->attributes->joint_throw_heavy : fp->attributes->joint_throw_light;
+    joint_index = (!(ap->is_light_throw)) ? fp->attributes->joint_itemhold_heavy : fp->attributes->joint_itemhold_light;
 
     joint->unk_0x84 = fp->joint[joint_index];
 

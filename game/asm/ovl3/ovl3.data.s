@@ -924,7 +924,7 @@ glabel Fighter_StarRodSwing_Dust_Offset
 glabel Fighter_ItemSwing_Status
   .incbin "ovl3.raw.bin", 0x56B18, 0x48
 
-glabel D_ovl3_80188660
+glabel Fighter_LGunShoot_Ammo_Offset
   .incbin "ovl3.raw.bin", 0x56B60, 0x4
   /* 56B64 1030A4 80188664 */
   .asciz "Bp"
@@ -933,7 +933,7 @@ glabel D_ovl3_80188660
   .asciz "C4"
   .balign 4
 
-glabel D_ovl3_8018866C
+glabel Fighter_LGunShoot_Dust_Offset
   .incbin "ovl3.raw.bin", 0x56B6C, 0x4
   /* 56B70 1030B0 80188670 */
   .asciz "Bp"
@@ -942,28 +942,28 @@ glabel D_ovl3_8018866C
   .asciz "C4"
   .balign 4
 
-glabel D_ovl3_80188678
+glabel Fighter_FireFlowerShoot_Ammo_Offset
   /* 56B78 1030B8 80188678 */
   .asciz "Bp"
   .balign 4
   .incbin "ovl3.raw.bin", 0x56B7C, 0x8
 
-glabel D_ovl3_80188684
+glabel Fighter_FireFlowerShoot_HaveAmmo_Dust_Offset
   /* 56B84 1030C4 80188684 */
   .asciz "Bp"
   .balign 4
   .incbin "ovl3.raw.bin", 0x56B88, 0x8
 
-glabel D_ovl3_80188690
+glabel Fighter_FireFlowerShoot_NoAmmo_Dust_Offset
   .incbin "ovl3.raw.bin", 0x56B90, 0xC
 
-glabel D_ovl3_8018869C
+glabel Fighter_FireFlowerShoot_Spark_Offset
   .incbin "ovl3.raw.bin", 0x56B9C, 0xC
 
-glabel D_ovl3_801886A8
+glabel Fighter_FireFlowerShoot_Spark_Scatter
   .incbin "ovl3.raw.bin", 0x56BA8, 0xC
 
-glabel D_ovl3_801886B4
+glabel Fighter_FireFlowerShoot_Kickup_Offset
   .incbin "ovl3.raw.bin", 0x56BB4, 0xC
 
 glabel D_ovl3_801886C0
