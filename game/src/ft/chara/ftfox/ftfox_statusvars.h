@@ -21,7 +21,7 @@ typedef struct ftFox_SpecialLw_StartusVars
     s32 release_lag;
     s32 turn_frames;
     bool32 is_release;
-    GObj *reflect_gobj;
+    GObj *effect_gobj;
     s32 gravity_delay;
 
 } ftFox_SpecialLw_StatusVars;

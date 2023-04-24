@@ -61,7 +61,7 @@ glabel D_ovl65_801936A9
     .space 1
 glabel D_ovl65_801936AA
     .space 1
-glabel D_ovl65_801936AB
+glabel gmBonusStat_ShieldBreaker
     .space 1
 glabel D_ovl65_801936AC
     .space 1

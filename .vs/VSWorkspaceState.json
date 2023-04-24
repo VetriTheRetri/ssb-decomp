@@ -3,6 +3,7 @@
     "",
     "\\game",
     "\\game\\src",
+    "\\game\\src\\ef",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\chara\\ftness",
@@ -11,5 +12,6 @@
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\article\\articlecommon"
   ],
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_escape.c",
   "PreviewInSolutionExplorer": false
 }

@@ -18,8 +18,8 @@ typedef struct SpecialHit
 
     s32 hit_type;
     s32 joint_index;
-    Vec3f unk_0x8;
-    Vec3f unk_0x14;
+    Vec3f offset;
+    Vec3f size;
 
 } SpecialHit;
 
@@ -852,7 +852,9 @@ struct Fighter_Struct
     u8 tap_stick_x; // Frames control stick has been tapped + held
     u8 tap_stick_y; // Frames control stick has been tapped + held
 
-    u8 filler_0x26C[0x276 - 0x26C];
+    s32 breakout_wait; // Frames until fighter breaks out of shield break / sleep / Cargo Throw
+
+    u8 filler_0x270[0x276 - 0x270];
 
     s16 unk_0x276;
     GObj *throw_gobj; // GObj pointer of player throwing this fighter?

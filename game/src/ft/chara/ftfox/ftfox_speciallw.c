@@ -1,8 +1,6 @@
 #include <game/src/ft/chara/ftfox/ftfox.h>
 #include <game/src/it/item/item.h>
-
-
-
+#include "effect.h"
 
 void func_ovl3_8015CB80(Fighter_Struct *fp)
 {
@@ -16,11 +14,11 @@ void func_ovl3_8015CBA4(Fighter_Struct *fp)
 {
     if (fp->command_vars.flags.flag2 != 4)
     {
-        if (fp->status_vars.fox.speciallw.reflect_gobj != NULL)
+        if (fp->status_vars.fox.speciallw.effect_gobj != NULL)
         {
-            Item_Struct *ip = ItemGetStruct(fp->status_vars.fox.speciallw.reflect_gobj);
+            Effect_Struct *ep = EffectGetStruct(fp->status_vars.fox.speciallw.effect_gobj);
 
-            ip->unk_x1C = fp->command_vars.flags.flag2;
+            ep->unk_ef_0x1C = fp->command_vars.flags.flag2;
         }
         fp->command_vars.flags.flag2 = 4;
     }
@@ -263,22 +261,22 @@ extern void *D_ovl2_80130E94;
 void func_ovl3_8015D1E0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    GObj *reflect_gobj;
+    GObj *effect_gobj;
 
     fp->status_vars.fox.speciallw.release_lag = FTFOX_REFLECTOR_RELEASE_LAG;
     fp->status_vars.fox.speciallw.is_release = FALSE;
     fp->command_vars.flags.flag2 = 4;
     fp->status_vars.fox.speciallw.gravity_delay = FTFOX_REFLECTOR_GRAVITY_DELAY;
 
-    reflect_gobj = func_ovl2_80100FA4(fighter_gobj);
+    effect_gobj = func_ovl2_80100FA4(fighter_gobj);
 
-    fp->status_vars.fox.speciallw.reflect_gobj = reflect_gobj;
+    fp->status_vars.fox.speciallw.effect_gobj = effect_gobj;
 
     if (reflect_gobj != NULL)
     {
         fp->x18F_flag_b3 = TRUE;
     }
-    fp->special_hit = (SpecialHit *)((uintptr_t)D_ovl2_80130E94 + &ftFox_LoadedFiles_SpecialLwData); // Another linker thing
+    fp->special_hit = (SpecialHit*)((uintptr_t)D_ovl2_80130E94 + &ftFox_LoadedFiles_SpecialLwData); // Another linker thing
 }
 
 void jtgt_ovl3_8015D250(GObj *fighter_gobj)

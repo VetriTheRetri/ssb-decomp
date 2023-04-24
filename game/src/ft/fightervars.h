@@ -199,6 +199,20 @@
 #define FTCOMMON_GUARD_SETOFF_ADD 4.0F
 #define FTCOMMON_GUARD_VEL_MUL 2.0F // Multiplies shieldstun frames and turns it into horizontal velocity
 
+#define FTCOMMON_ESCAPE_STICK_RANGE_MIN 56
+#define FTCOMMON_ESCAPE_BUFFER_FRAMES_MAX 4
+
+#define FTCOMMON_SHIELDBREAK_COLANIM_ID 0x24
+#define FTCOMMON_SHIELDBREAK_COLANIM_LENGTH 0
+
+#define FTCOMMON_FURAFURA_COLANIM_ID 0x25
+#define FTCOMMON_FURAFURA_BREAKOUT_WAIT_DEFAULT 400
+#define FTCOMMON_FURAFURA_BREAKOUT_WAIT_MIN 90
+
+#define FTCOMMON_FURASLEEP_COLANIM_ID 0x26
+#define FTCOMMON_FURASLEEP_BREAKOUT_WAIT_DEFAULT 300
+#define FTCOMMON_FURASLEEP_BREAKOUT_WAIT_MIN 75
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -445,6 +459,12 @@ typedef struct ftCommon_Guard_StatusVars
 
 } ftCommon_Guard_StatusVars;
 
+typedef struct ftCommon_Escape_StatusVars
+{
+    s32 unk_0x0;
+
+} ftCommon_Escape_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -493,6 +513,7 @@ typedef union ftCommon_StatusVars
     ftCommon_FireFlower_StatusVars fireflower;
     ftCommon_Hammer_StatusVars hammer;
     ftCommon_Guard_StatusVars guard;
+    ftCommon_Escape_StatusVars escape;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

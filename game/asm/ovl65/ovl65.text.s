@@ -1112,8 +1112,8 @@ glabel func_ovl65_8018D60C
   /* 10C8DC 8018E07C A02036A9 */        sb $zero, %lo(D_ovl65_801936A9)($at)
   /* 10C8E0 8018E080 3C018019 */       lui $at, %hi(D_ovl65_801936AA)
   /* 10C8E4 8018E084 A02036AA */        sb $zero, %lo(D_ovl65_801936AA)($at)
-  /* 10C8E8 8018E088 3C018019 */       lui $at, %hi(D_ovl65_801936AB)
-  /* 10C8EC 8018E08C A02036AB */        sb $zero, %lo(D_ovl65_801936AB)($at)
+  /* 10C8E8 8018E088 3C018019 */       lui $at, %hi(gmBonusStat_ShieldBreaker)
+  /* 10C8EC 8018E08C A02036AB */        sb $zero, %lo(gmBonusStat_ShieldBreaker)($at)
   /* 10C8F0 8018E090 3C018019 */       lui $at, %hi(D_ovl65_801936AC)
   /* 10C8F4 8018E094 A02036AC */        sb $zero, %lo(D_ovl65_801936AC)($at)
   /* 10C8F8 8018E098 3C018019 */       lui $at, %hi(D_ovl65_801936AD)
@@ -3268,8 +3268,8 @@ glabel func_ovl65_8018FD5C
   /* 10E804 8018FFA4 916B36A8 */       lbu $t3, %lo(D_ovl65_801936A8)($t3)
   /* 10E808 8018FFA8 24060001 */     addiu $a2, $zero, 1
   .L8018FFAC:
-  /* 10E80C 8018FFAC 3C0F8019 */       lui $t7, %hi(D_ovl65_801936AB)
-  /* 10E810 8018FFB0 91EF36AB */       lbu $t7, %lo(D_ovl65_801936AB)($t7)
+  /* 10E80C 8018FFAC 3C0F8019 */       lui $t7, %hi(gmBonusStat_ShieldBreaker)
+  /* 10E810 8018FFB0 91EF36AB */       lbu $t7, %lo(gmBonusStat_ShieldBreaker)($t7)
   /* 10E814 8018FFB4 51E00005 */      beql $t7, $zero, .L8018FFCC
   /* 10E818 8018FFB8 8C6E008C */        lw $t6, 0x8c($v1) # D_ovl65_801937B0 + 140
   /* 10E81C 8018FFBC 8D58002C */        lw $t8, 0x2c($t2) # D_800A4AD0 + 44
