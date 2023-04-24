@@ -91,12 +91,15 @@ void func_ovl3_80146CF4(GObj *fighter_gobj)
     func_ovl2_800D94C4(fighter_gobj);
 }
 
-extern FighterItemSwing Fighter_ItemSwing_Desc[4]; // Warning, seems to blend into another struct, possibly part of main move logic table?
+extern FighterItemSwing Fighter_ItemSwing_Desc[4]; // Warning: seems to blend into another struct, possibly part of main move logic table?
 
-const s32 Fighter_ItemSwing_Status[4][4] = { ftStatus_Common_SwordSwing1,   ftStatus_Common_SwordSwing3,   ftStatus_Common_SwordSwing4,   ftStatus_Common_SwordSwingDash,
-                                             ftStatus_Common_BatSwing1,     ftStatus_Common_BatSwing3,     ftStatus_Common_BatSwing4,     ftStatus_Common_BatSwingDash,
-                                             ftStatus_Common_HarisenSwing1, ftStatus_Common_HarisenSwing3, ftStatus_Common_HarisenSwing4, ftStatus_Common_HarisenSwingDash,
-                                             ftStatus_Common_StarRodSwing1, ftStatus_Common_StarRodSwing3, ftStatus_Common_StarRodSwing4, ftStatus_Common_StarRodSwingDash  };
+s32 Fighter_ItemSwing_Status[4][4] = 
+{ 
+    { ftStatus_Common_SwordSwing1,   ftStatus_Common_SwordSwing3,   ftStatus_Common_SwordSwing4,   ftStatus_Common_SwordSwingDash   },
+    { ftStatus_Common_BatSwing1,     ftStatus_Common_BatSwing3,     ftStatus_Common_BatSwing4,     ftStatus_Common_BatSwingDash     },
+    { ftStatus_Common_HarisenSwing1, ftStatus_Common_HarisenSwing3, ftStatus_Common_HarisenSwing4, ftStatus_Common_HarisenSwingDash },
+    { ftStatus_Common_StarRodSwing1, ftStatus_Common_StarRodSwing3, ftStatus_Common_StarRodSwing4, ftStatus_Common_StarRodSwingDash }
+};
 
 void func_ovl3_80146E94(GObj *fighter_gobj, s32 swing_type)
 {

@@ -32,6 +32,7 @@ typedef struct Effect_Struct
     GObj *fgobj;
     u8 filler_0x8[0x18 - 0x8];
     s32 lifetime;
+    s32 unk_ef_0x1C;
 
 } Effect_Struct;
 

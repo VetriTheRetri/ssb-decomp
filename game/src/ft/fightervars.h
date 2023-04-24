@@ -188,6 +188,17 @@
 #define FTCOMMON_HAMMER_SKIP_LANDING_VEL_Y_MAX (-20.0F)
 #define FTCOMMON_HAMMER_TURN_ROTATE_STEP (-0.2617994F)
 
+#define FTCOMMON_GUARD_RELEASE_LAG 8
+#define FTCOMMON_GUARD_DECAY_INT 16
+#define FTCOMMON_GUARD_ANGLE_MAX 359.0F
+#define FTCOMMON_GUARD_SIZE_HEALTH_DIV 55.0F
+#define FTCOMMON_GUARD_SIZE_SCALE_MUL_INIT 0.65F
+#define FTCOMMON_GUARD_SIZE_SCALE_MUL_ADD 0.35F
+#define FTCOMMON_GUARD_SIZE_SCALE_MUL_DIV 30.0F
+#define FTCOMMON_GUARD_SETOFF_MUL 1.62F
+#define FTCOMMON_GUARD_SETOFF_ADD 4.0F
+#define FTCOMMON_GUARD_VEL_MUL 2.0F // Multiplies shieldstun frames and turns it into horizontal velocity
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -408,12 +419,31 @@ typedef struct ftCommon_FireFlower_StatusVars
 
 typedef struct ftCommon_Hammer_StatusVars
 {
-    f32 jump_force;
-    f32 anim_frame;
+    union
+    {
+        f32 landing_anim_frame;
+        f32 jump_force;
+    };
+    f32 kneebend_anim_frame;
     s32 input_source;
     bool32 is_short_hop;
 
 } ftCommon_Hammer_StatusVars;
+
+typedef struct ftCommon_Guard_StatusVars
+{
+    s32 release_lag;
+    s32 shield_decay_wait;
+    GObj *effect_gobj;
+    bool32 is_release;
+    s32 angle_i;
+    f32 angle_f;
+    f32 shield_rotate_range;
+    f32 setoff_frames;// Shieldstun
+    s32 slide_frames; // Carried over from dash
+    bool32 is_setoff; // Set to TRUE if shield is hit, does not reset to FALSE until shield is released and put up again
+
+} ftCommon_Guard_StatusVars;
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -460,8 +490,9 @@ typedef union ftCommon_StatusVars
     ftCommon_Lift_StatusVars lift;
     ftCommon_ItemThrow_StatusVars itemthrow;
     ftCommon_ItemSwing_StatusVars itemswing;
-    ftCommon_Hammer_StatusVars hammer;
     ftCommon_FireFlower_StatusVars fireflower;
+    ftCommon_Hammer_StatusVars hammer;
+    ftCommon_Guard_StatusVars guard;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

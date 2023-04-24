@@ -1,4 +1,16 @@
 #include "fighter.h"
+#include "ftmario.h"
+#include "ftfox.h"
+#include "ftdonkey.h"
+#include "ftsamus.h"
+#include "ftlink.h"
+#include "ftyoshi.h"
+#include "ftcaptain.h"
+#include "ftkirby.h"
+#include "ftpikachu.h"
+#include "ftpurin.h"
+#include "ftness.h"
+#include "ftmasterhand.h"
 #include "gmground.h"
 
 void func_ovl3_8013D930(GObj *fighter_gobj)
@@ -117,7 +129,36 @@ void func_ovl3_8013DBAC(GObj *fighter_gobj)
     fp->x18E_flag_b3 = TRUE;
 }
 
-extern s32 Fighter_Status_EntryStatusIndex[26][2]; // Rows = number of fighters with entry action states, columns = left or right
+s32 Fighter_Status_EntryStatusIndex[Ft_Kind_EnumMax][2] =
+{
+    { ftStatus_Mario_AppearR,        ftStatus_Mario_AppearL         }, // Mario                                             
+    { ftStatus_Fox_AppearR,          ftStatus_Fox_AppearL           }, // Fox                                                                  
+    { ftStatus_Donkey_AppearR,       ftStatus_Donkey_AppearL        }, // Donkey Kong                                                                  
+    { ftStatus_Samus_AppearR,        ftStatus_Samus_AppearL         }, // Samus                                                           
+    { ftStatus_Mario_AppearR,        ftStatus_Mario_AppearL         }, // Luigi                                                                  
+    { ftStatus_Link_AppearR,         ftStatus_Link_AppearL          }, // Link                                                          
+    { ftStatus_Yoshi_AppearR,        ftStatus_Yoshi_AppearL         }, // Yoshi
+    { ftStatus_Captain_AppearRStart, ftStatus_Captain_AppearLStart, }, // Captain Falcon                                                         
+    { ftStatus_Kirby_AppearR,        ftStatus_Kirby_AppearL         }, // Kirby                                                 
+    { ftStatus_Pikachu_AppearR,      ftStatus_Pikachu_AppearL       }, // Pikachu                                                          
+    { ftStatus_Purin_AppearR,        ftStatus_Purin_AppearL         }, // Jigglypuff                                                        
+    { ftStatus_Ness_AppearRStart,    ftStatus_Ness_AppearLStart     }, // Ness                                                     
+    { ftStatus_MasterHand_Appear,    ftStatus_MasterHand_Appear     }, // Master Hand                                                           
+    { ftStatus_Mario_AppearR,        ftStatus_Mario_AppearL         }, // Metal Mario                                                    
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Mario                                                    
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Fox                                                     
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Donkey Kong                                                      
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Samus                                               
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Luigi
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Link                                                     
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Yoshi                                                      
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Captain Falcon                                                     
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Kirby                                           
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Pikachu                                                     
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Jigglypuff                                                   
+    { ftStatus_Common_EntryNull,     ftStatus_Common_EntryNull      }, // Poly Ness                                                
+    { ftStatus_Donkey_AppearR,       ftStatus_Donkey_AppearL        }  // Giant Donkey Kong
+};
 
 void func_ovl3_8013DBE0(GObj *fighter_gobj)
 {

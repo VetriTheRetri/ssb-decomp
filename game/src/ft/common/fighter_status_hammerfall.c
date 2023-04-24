@@ -63,7 +63,8 @@ void func_ovl3_80147D30(GObj *fighter_gobj)
 
     case FTCOMMON_KNEEBEND_INPUT_TYPE_STICK:
     default:
-        vel_x = fp->input.stick_range.x, vel_y = fp->status_vars.common.hammer.jump_force;
+        vel_x = fp->input.stick_range.x;
+        vel_y = fp->status_vars.common.hammer.jump_force;
         break;
     }
     fp->phys_info.vel_air.y = (vel_y * attributes->jump_height_mul) + attributes->jump_height_base;

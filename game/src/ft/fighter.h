@@ -23,11 +23,12 @@ typedef struct SpecialHit
 
 } SpecialHit;
 
-typedef struct DObjContainer
+typedef struct DObjDescContainer
 {
-    DObjDesc *renderstate[4];
+    DObjDesc *dobj_desc;
+    void *something[3];
 
-} DObjContainer;
+} DObjDescContainer;
 
 typedef struct ftItemPickup
 {
@@ -94,10 +95,20 @@ typedef struct ftCommonAttributes
     u8 filler_0xEC[0x2B8 - 0xF0];
     bool32 cliff_status_ground_air_id[5];
     u8 filler_0x2CC[0x2D4 - 0x2CC];
-    DObjContainer *renderstate;
-    u8 filler_0x2D8[0x324 - 0x2D8];
-    s32 unk_0x324;
-    s32 filler_0x328[0x334 - 0x328];
+    DObjDescContainer *dobj_desc_container;
+    DObjDesc *dobj_lookup; // WARNING: Not actually DObjDesc* but I don't know what this struct is or what its bounds are; bunch of consecutive floats
+    s32 *unk_joint[8];
+    s32 joint_index1; // What does this do?
+    f32 joint_float1;
+    s32 joint_index2;
+    f32 joint_float2;
+    u8 filler_0x304[0x31C - 0x30C];
+    f32 unk_0x31C;
+    f32 unk_0x320;
+    Vec3f *unk_0x324; // Pointer to some array of vectors, something to do with joints
+    s32 unk_0x328;
+    s32 unk_0x32C;
+    s32 unk_0x330;
     s32 joint_itemhold_heavy;
     s32 unk_0x338;
     s32 joint_itemhold_light;
@@ -391,7 +402,8 @@ typedef enum ftKind
     Ft_Kind_PolyPikachu,
     Ft_Kind_PolyPurin,
     Ft_Kind_PolyNess,
-    Ft_Kind_GiantDonkey
+    Ft_Kind_GiantDonkey,
+    Ft_Kind_EnumMax
 
 } ftKind;
 
@@ -621,8 +633,8 @@ struct Fighter_Struct
     } status_info;
 
     s32 percent_damage;
-    s32 damage_resist; // Resits a specified amount of % damage before breaking, effectively damage-based armor
-    s32 x34_unk;
+    s32 damage_resist; // Resits a specific amount of % damage before breaking, effectively damage-based armor
+    s32 shield_health;
     s32 x38_unk;
     s32 x3C_unk;
     u32 hitlag_timer; // Freeze if TRUE
@@ -898,10 +910,11 @@ struct Fighter_Struct
     u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
     s32 attack_damage;
     f32 attack_damage_stale; // Actually 2x staled damage?
-    s32 lr_attack;
-
-    u8 filler_0x7B4[0x7DC - 0x7C8];
-
+    s32 shield_damage;
+    u8 filler_0x7B4[0x7D0 - 0x7CC];
+    s32 lr_shield;
+    s32 unk_ft_0x7D4;
+    s32 unk_ft_0x7D8;
     s32 unk_ft_0x7DC;
     f32 damage_knockback;
     f32 knockback_resist_passive;// Passive armor, always active (?)
