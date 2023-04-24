@@ -40,7 +40,7 @@ void func_ovl3_80163C2C(GObj *fighter_gobj, Item_Struct *ip)
         break;
 
     case 1:
-        ip->item_hit.update_state = 1;
+        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
         ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_1;
 
         func_ovl3_80165F60(fighter_gobj);
@@ -48,21 +48,21 @@ void func_ovl3_80163C2C(GObj *fighter_gobj, Item_Struct *ip)
 
     case 2:
 
-        ip->item_hit.update_state = 1;
+        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
         ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_2;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 3:
-        ip->item_hit.update_state = 1;
+        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
         ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_3;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 4:
-        ip->item_hit.update_state = 1;
+        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
         ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_4;
 
         func_ovl3_80165F60(fighter_gobj);
@@ -129,7 +129,7 @@ void func_ovl3_80163D94(GObj *fighter_gobj, bool32 is_skip_gobj)
 
         if (func_ovl2_80103378(fighter_gobj) != FALSE)
         {
-            fp->x18F_flag_b3 = TRUE;
+            fp->gfx_stop_statupdate = TRUE;
         }
         if (is_skip_gobj == FALSE)
         {

@@ -280,9 +280,9 @@ void func_ovl3_801542F4(GObj *fighter_gobj)
 
     func_ovl3_80153C88(fighter_gobj);
 
-    if ((fp->x18F_flag_b3 == FALSE) && (func_ovl2_801029F8(fighter_gobj) != FALSE))
+    if ((fp->gfx_stop_statupdate == FALSE) && (func_ovl2_801029F8(fighter_gobj) != FALSE))
     {
-        fp->x18F_flag_b3 = TRUE;
+        fp->gfx_stop_statupdate = TRUE;
     }
 
     fp->jumps_used = fp->attributes->jumps_max;

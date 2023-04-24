@@ -465,6 +465,13 @@ typedef struct ftCommon_Escape_StatusVars
 
 } ftCommon_Escape_StatusVars;
 
+typedef struct ftCommon_Catch_StatusVars
+{
+    f32 catch_extend_timer; // ???
+    f32 capture_retract_timer; // Time it takes to retract grabbed fighter
+
+} ftCommon_Catch_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -514,6 +521,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Hammer_StatusVars hammer;
     ftCommon_Guard_StatusVars guard;
     ftCommon_Escape_StatusVars escape;
+    ftCommon_Catch_StatusVars catchmain;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

@@ -204,11 +204,11 @@ void func_ovl3_801556E0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 D_NF_0000164 = 0x16D4;
 
-    if (!(fp->x18F_flag_b3))
+    if (!(fp->gfx_stop_statupdate))
     {
         if (func_ovl2_801025D8(fighter_gobj) != FALSE)
         {
-            fp->x18F_flag_b3 = TRUE;
+            fp->gfx_stop_statupdate = TRUE;
         }
     }
     fp->x18D_flag_b0 = TRUE;

@@ -6,13 +6,13 @@ void func_ovl3_8015F7F0(GObj *fighter_gobj) // Falcon Punch
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->x18F_flag_b3))
+    if (!(fp->gfx_stop_statupdate))
     {
         if (fp->command_vars.flags.flag0 == 1)
         {
             if (func_ovl2_80101F84(fighter_gobj) != FALSE)
             {
-                fp->x18F_flag_b3 = TRUE;
+                fp->gfx_stop_statupdate = TRUE;
             }
             fp->command_vars.flags.flag0 = 0;
         }

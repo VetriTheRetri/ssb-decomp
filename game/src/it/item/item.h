@@ -319,7 +319,8 @@ typedef struct _Item_Struct
     bool32 (*cb_reflect)(GObj*);            // Item gets reflected
     bool32 (*cb_absorb)(GObj*);             // Item gets absorbed
     bool32 (*cb_destroy)(GObj*);            // Item hits blastzones (only run on this condition?)
-    union
+
+    union item_vars
     {
         Fireball_ItemVars fireball;
         Charge_Shot_ItemVars charge_shot;

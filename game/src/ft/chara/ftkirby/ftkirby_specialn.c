@@ -116,7 +116,7 @@ void func_ovl3_80161FBC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->x18F_flag_b3 == TRUE)
+    if (fp->gfx_stop_statupdate == TRUE)
     {
         func_ovl2_800E9C3C(fighter_gobj);
     }
@@ -126,12 +126,12 @@ void func_ovl3_8016201C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->x18F_flag_b3) && (fp->command_vars.flags.flag0 == 1))
+    if (!(fp->gfx_stop_statupdate) && (fp->command_vars.flags.flag0 == 1))
     {
         if (func_ovl2_801042B4(fighter_gobj) != FALSE)
         {
             fp->command_vars.flags.flag0 = 0;
-            fp->x18F_flag_b3 = TRUE;
+            fp->gfx_stop_statupdate = TRUE;
         }
     }
 }

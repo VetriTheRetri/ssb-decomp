@@ -687,51 +687,42 @@ struct Fighter_Struct
 
         } item_throw;
 
-        struct words
-        {
-            u32 w0;
-            u32 w1;
-            u32 w2;
-            u32 w3;
-
-        } words;
-
         // Equivalent to ftcmd flags from Melee?
 
     } command_vars;
 
-    u8 x18C_flag_b0 : 1;
-    u8 x18C_flag_b1 : 1;
-    u8 x18C_flag_b2 : 1;
-    u8 x18C_flag_b3 : 1;
-    u8 x18C_flag_b4 : 1;
-    u8 is_reflect : 1;
-    s8 lr_reflect : 2;
-    u8 is_absorb : 1;
-    s8 lr_absorb : 2;
-    u8 x18D_flag_b3 : 1;
-    u8 is_fast_fall : 1;
-    u8 x18D_flag_b5 : 1;
-    u8 is_check_blastzone : 1;
-    u8 x18D_flag_b7 : 1;
+    u32 x18C_flag_b0 : 1;
+    u32 x18C_flag_b1 : 1;
+    u32 x18C_flag_b2 : 1;
+    u32 x18C_flag_b3 : 1;
+    u32 x18C_flag_b4 : 1;
+    u32 is_reflect : 1;
+    s32 lr_reflect : 2;
+    u32 is_absorb : 1;
+    s32 lr_absorb : 2;
+    u32 x18D_flag_b3 : 1;
+    u32 is_fast_fall : 1;
+    u32 x18D_flag_b5 : 1;
+    u32 is_check_blastzone : 1;
+    u32 x18D_flag_b7 : 1;
 
-    u8 x18E_flag_b0 : 1;
-    u8 x18E_flag_b1 : 1;
-    u8 x18E_flag_b2 : 1;
-    u8 x18E_flag_b3 : 1;
-    u8 x18E_flag_b4 : 1;
-    u8 x18E_flag_b5 : 1;
-    u8 x18E_flag_b6 : 1;
-    u8 x18E_flag_b7 : 1;
+    u32 x18E_flag_b0 : 1;
+    u32 x18E_flag_b1 : 1;
+    u32 x18E_flag_b2 : 1;
+    u32 x18E_flag_b3 : 1;
+    u32 x18E_flag_b4 : 1;
+    u32 x18E_flag_b5 : 1;
+    u32 x18E_flag_b6 : 1;
+    u32 x18E_flag_b7 : 1;
 
-    u8 x18F_flag_b0 : 1;
-    u8 x18F_flag_b1 : 1;
-    u8 x18F_flag_b2 : 1;
-    u8 x18F_flag_b3 : 1;
-    u8 x18F_flag_b4 : 1;
-    u8 x18F_flag_b5 : 1;
-    u8 x18F_flag_b6 : 1;
-    u8 is_hitstun : 1;
+    u32 x18F_flag_b0 : 1;
+    u32 x18F_flag_b1 : 1;
+    u32 x18F_flag_b2 : 1;
+    u32 gfx_stop_statupdate : 1; // Destroy GFX on action state change if TRUE
+    u32 x18F_flag_b4 : 1;
+    u32 x18F_flag_b5 : 1;
+    u32 x18F_flag_b6 : 1;
+    u32 is_hitstun : 1;
 
     union
     {
