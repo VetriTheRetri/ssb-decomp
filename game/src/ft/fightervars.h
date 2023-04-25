@@ -491,7 +491,7 @@ typedef struct ftCommon_Capture_StatusVars
 
 typedef struct ftCommon_Thrown_StatusVars
 {
-    bool32 is_rotate_model;
+    s32 status_id;
 
 } ftCommon_Thrown_StatusVars;
 

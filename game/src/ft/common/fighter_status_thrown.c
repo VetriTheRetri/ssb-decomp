@@ -13,7 +13,7 @@ void func_ovl3_8014AAF0(GObj *fighter_gobj)
         (capture_fp->ft_kind != Ft_Kind_GiantDonkey) ||
         (capture_fp->status_info.status_id != ftStatus_Common_ThrowF))
         {
-            func_ovl3_8014ACB4(fighter_gobj, this_fp->status_vars.common.capture.is_goto_pulled_wait);
+            func_ovl3_8014ACB4(fighter_gobj, this_fp->status_vars.common.thrown.status_id);
         }
     }
 }
@@ -45,7 +45,7 @@ void func_ovl3_8014AB8C(GObj *fighter_gobj)
     func_ovl2_800DE324(fighter_gobj);
 }
 
-void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id, bool32 is_rotate_model)
+void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_queue)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
@@ -53,7 +53,7 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id, bool32 is_rotate_mode
     this_fp->ground_or_air = air;
     this_fp->jumps_used = 1;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id_new, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
     if ((capture_fp->ft_kind == Ft_Kind_Yoshi) || (capture_fp->ft_kind == Ft_Kind_PolyYoshi))
@@ -64,10 +64,10 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id, bool32 is_rotate_mode
     }
     func_ovl2_800E8098(this_fp, 0x3FU);
 
-    this_fp->status_vars.common.thrown.is_rotate_model = is_rotate_model;
+    this_fp->status_vars.common.thrown.status_id = status_id_queue;
 }
 
-void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id)
+void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
