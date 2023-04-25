@@ -185,7 +185,7 @@ void func_ovl3_8015F668(GObj *fighter_gobj)
     func_ovl2_800E8098(fp, 0x3FU);
     func_ovl2_800D9444(fighter_gobj);
 
-    fp->catch_gobj = fp->unk_gobj;
+    fp->catch_gobj = fp->search_gobj;
 }
 
 void func_ovl3_8015F6AC(GObj *fighter_gobj)

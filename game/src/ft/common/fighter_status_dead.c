@@ -134,7 +134,7 @@ void func_ovl3_8013C0B0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->star_invincible_time = 0;
-    fp->x191_flag_b1 = TRUE;
+    fp->is_ignore_blastzone_top = TRUE;
     fp->x18E_flag_b0 = TRUE;
 
     func_ovl2_800E7B54(fighter_gobj);
@@ -547,7 +547,7 @@ bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
         }
         return FALSE;
     }
-    else if (!(fp->x191_flag_b1))
+    else if (!(fp->is_ignore_blastzone_top))
     {
         if ((Match_Info->game_type == 5) && (Match_Info->player_block[fp->port_id].is_rebirth_multi != FALSE))
         {

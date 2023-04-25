@@ -969,7 +969,7 @@ glabel Fighter_FireFlowerShoot_Kickup_Offset
 glabel Fighter_Yoshi_GuardOffGfxOffset
   .incbin "ovl3.raw.bin", 0x56BC0, 0x10
 
-glabel D_ovl3_801886D0
+glabel Fighter_CatchPull_Gfx_Offset
   .incbin "ovl3.raw.bin", 0x56BD0, 0x10
 
 glabel D_ovl3_801886E0

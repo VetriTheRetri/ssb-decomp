@@ -21,7 +21,7 @@ void func_ovl3_8013D930(GObj *fighter_gobj)
 
     fp->x18D_flag_b7 = TRUE;
     fp->x18E_flag_b0 = TRUE;
-    fp->x191_flag_b1 = TRUE;
+    fp->is_ignore_blastzone_top = TRUE;
     fp->x18E_flag_b3 = TRUE;
 }
 
@@ -121,7 +121,7 @@ void func_ovl3_8013DBAC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->x191_flag_b1 = TRUE;
+    fp->is_ignore_blastzone_top = TRUE;
 
     fp->x191_flag_b4567 = 3;
 

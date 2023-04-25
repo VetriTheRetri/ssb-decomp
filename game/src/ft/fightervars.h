@@ -213,6 +213,8 @@
 #define FTCOMMON_FURASLEEP_BREAKOUT_WAIT_DEFAULT 300
 #define FTCOMMON_FURASLEEP_BREAKOUT_WAIT_MIN 75
 
+#define FTCOMMON_CATCH_THROW_WAIT 60
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -467,10 +469,24 @@ typedef struct ftCommon_Escape_StatusVars
 
 typedef struct ftCommon_Catch_StatusVars
 {
-    f32 catch_extend_timer; // ???
-    f32 capture_retract_timer; // Time it takes to retract grabbed fighter
+    f32 catch_pull_frame_begin; // ???
+    f32 catch_pull_anim_frames; // Time it takes to retract grabbed fighter
+    u8 filler_0x8[0xB3C - 0xB20];
+    u32 unk_0x24;
 
 } ftCommon_Catch_StatusVars;
+
+typedef struct ftCommon_CatchWait_StatusVars
+{
+    s32 throw_wait;
+
+} ftCommon_CatchWait_StatusVars;
+
+typedef struct ftCommon_Capture_StatusVars
+{
+    bool32 is_goto_pulled_wait;
+
+} ftCommon_Capture_StatusVars;
 
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
@@ -522,6 +538,8 @@ typedef union ftCommon_StatusVars
     ftCommon_Guard_StatusVars guard;
     ftCommon_Escape_StatusVars escape;
     ftCommon_Catch_StatusVars catchmain;
+    ftCommon_CatchWait_StatusVars catchwait;
+    ftCommon_Capture_StatusVars capture;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;

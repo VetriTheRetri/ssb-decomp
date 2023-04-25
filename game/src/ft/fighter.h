@@ -39,6 +39,18 @@ typedef struct ftItemPickup
 
 } ftItemPickup;
 
+typedef struct ftThrownStatus
+{
+    s32 status1, status2;
+
+} ftThrownStatus;
+
+typedef struct ftThrownStatusArray
+{
+    ftThrownStatus ft_thrown[2];
+
+} ftThrownStatusArray;
+
 typedef struct ftCommonAttributes
 {
     f32 size_mul;
@@ -92,7 +104,40 @@ typedef struct ftCommonAttributes
     u16 throw_heavy_sfx;
     u16 unk_0xEA;
     s32 unk_0xEC;
-    u8 filler_0xEC[0x2B8 - 0xF0];
+    u8 filler_0xEC[0x100 - 0xF0];
+    u32 catch_flags_b0 : 1;
+    u32 catch_flags_b1 : 1;
+    u32 catch_flags_b2 : 1;
+    u32 catch_flags_b3 : 1;
+    u32 catch_flags_b4 : 1;
+    u32 catch_flags_b5 : 1;
+    u32 catch_flags_b6 : 1;
+    u32 catch_flags_b7 : 1;
+    u32 catch_flags_b8 : 1;
+    u32 catch_flags_b9 : 1;
+    u32 catch_flags_b10 : 1;
+    u32 catch_flags_b11 : 1;
+    u32 catch_flags_b12 : 1;
+    u32 catch_flags_b13 : 1;
+    u32 catch_flags_b14 : 1;
+    u32 catch_flags_b15 : 1;
+    u32 catch_flags_b16 : 1;
+    u32 catch_flags_b17 : 1;
+    u32 catch_flags_b18 : 1;
+    u32 catch_flags_b19 : 1;
+    u32 is_have_catch : 1;   // Whether fighter has a grab
+    u32 catch_flags_b21 : 1;
+    u32 catch_flags_b22 : 1;
+    u32 catch_flags_b23 : 1;
+    u32 catch_flags_b24 : 1;
+    u32 catch_flags_b25 : 1;
+    u32 catch_flags_b26 : 1;
+    u32 catch_flags_b27 : 1;
+    u32 catch_flags_b28 : 1;
+    u32 catch_flags_b29 : 1;
+    u32 catch_flags_b30 : 1;
+    u32 catch_flags_b31 : 1;
+    u8 filler_0x104[0x2B8 - 0x104];
     bool32 cliff_status_ground_air_id[5];
     u8 filler_0x2CC[0x2D4 - 0x2CC];
     DObjDescContainer *dobj_desc_container;
@@ -110,7 +155,7 @@ typedef struct ftCommonAttributes
     s32 unk_0x32C;
     s32 unk_0x330;
     s32 joint_itemhold_heavy;
-    s32 unk_0x338;
+    ftThrownStatusArray *thrown_status;
     s32 joint_itemhold_light;
 
 } ftCommonAttributes;
@@ -735,7 +780,7 @@ struct Fighter_Struct
             u8 x190_flag_b6 : 1;
             u8 x190_flag_b7 : 1;
             u8 x191_flag_b0 : 1;
-            u8 x191_flag_b1 : 1;
+            u8 is_ignore_blastzone_top : 1;
             u8 is_damage_resist : 1;
             u8 x191_flag_b3 : 1;
             u8 x191_flag_b4567 : 4;
@@ -930,8 +975,10 @@ struct Fighter_Struct
 
     f32 publicity_knockback; // Knockback value used for crowd reactions
 
-    GObj *unk_gobj;
-    u8 filler_0x834[0xC];
+    GObj *search_gobj;  // GObj this fighter found when searching for grabbable fighters?
+    f32 search_gobj_dist;
+    void (*cb_catch)(GObj*); // Run this callback on grabbing attacker
+    void (*cb_capture)(GObj*); // Run this callback on grabbed victim
     GObj *catch_gobj;   // GObj this fighter has caught
     GObj *capture_gobj; // GObj this fighter is captured by
     s32 unk_0x848;

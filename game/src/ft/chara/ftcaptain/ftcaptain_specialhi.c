@@ -144,17 +144,17 @@ void jtgt_ovl3_80160630(GObj *fighter_gobj)
 void func_ovl3_80160690(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj), *fp_catch;
-    GObj *unk_gobj;
+    GObj *search_gobj;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800E8098(fp, 0x3FU);
     func_ovl2_800D9444(fighter_gobj);
 
-    unk_gobj = fp->unk_gobj;
-    fp->catch_gobj = unk_gobj;
+    search_gobj = fp->search_gobj;
+    fp->catch_gobj = search_gobj;
 
-    fp_catch = FighterGetStruct(unk_gobj); // No NULL check, might be dangerous
+    fp_catch = FighterGetStruct(search_gobj); // No NULL check, might be dangerous
 
     if (fp_catch->ground_or_air == air)
     {

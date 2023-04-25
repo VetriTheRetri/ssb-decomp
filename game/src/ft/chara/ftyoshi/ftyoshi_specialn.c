@@ -185,7 +185,7 @@ void func_ovl3_8015E7F8(GObj *fighter_gobj)
     func_ovl2_800E8098(fp, 0x3FU); // Store grab vulnerability flags?
     func_ovl2_800D9444(fighter_gobj);
 
-    fp->catch_gobj = fp->unk_gobj;
+    fp->catch_gobj = fp->search_gobj;
 }
 
 void func_ovl3_8015E83C(GObj *fighter_gobj)

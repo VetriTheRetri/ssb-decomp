@@ -3,15 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ef",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\ft\\common",
+    "\\game\\src\\ft\\chara\\ftfox",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articlecommon"
+    "\\game\\src\\it\\item"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_escape.c",
+  "SelectedNode": "\\game\\src\\it\\article\\article.h",
   "PreviewInSolutionExplorer": false
 }
