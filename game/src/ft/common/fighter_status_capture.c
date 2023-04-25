@@ -1,4 +1,5 @@
 #include "fighter.h"
+#include "article.h"
 
 void func_ovl3_8014A5F0(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)
 {

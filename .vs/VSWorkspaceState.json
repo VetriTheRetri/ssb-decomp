@@ -5,13 +5,12 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftfox",
-    "\\game\\src\\ft\\common",
-    "\\game\\src\\gm",
+    "\\game\\src\\ft\\chara\\ftkirby",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\item"
+    "\\game\\src\\it\\item",
+    "\\game\\src\\mp"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_throw.c",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_damage.c",
   "PreviewInSolutionExplorer": false
 }

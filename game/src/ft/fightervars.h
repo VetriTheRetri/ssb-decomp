@@ -307,7 +307,8 @@ typedef struct ftCommon_Damage_StatusVars
     s32 dust_gfx_int;
     f32 publicity_knockback;
     u16 coll_mask;
-    u8 filler_0xE[0x2C - 0xE];
+    u8 filler_0xE[0x28 - 0xE];
+    s32 unk_index;
     s32 status_id;
     bool32 is_limit_knockback;
 
