@@ -80,7 +80,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->x18D_flag_b7) && !(fp->x18E_flag_b0))
+    if (!(fp->is_invisible) && !(fp->x18E_flag_b0))
     {
         Vec3f spA0;
         Vec3f sp94;

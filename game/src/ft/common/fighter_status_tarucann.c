@@ -85,7 +85,7 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
 
     func_ovl2_800E8A24(fighter_gobj, 3);
 
-    fp->x18D_flag_b7 = TRUE;
+    fp->is_invisible = TRUE;
 
     func_ovl2_800E8098(fp, 0x3FU);
     func_800269C0(0x11AU);

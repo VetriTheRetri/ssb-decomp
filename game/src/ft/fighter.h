@@ -749,7 +749,7 @@ struct Fighter_Struct
     u32 is_fast_fall : 1;
     u32 x18D_flag_b5 : 1;
     u32 is_check_blastzone : 1;
-    u32 x18D_flag_b7 : 1;
+    u32 is_invisible : 1;
 
     u32 x18E_flag_b0 : 1;
     u32 x18E_flag_b1 : 1;
@@ -872,8 +872,8 @@ struct Fighter_Struct
         u16 button_hold;
         u16 button_press;
         u16 button_mask_c; // Unconfirmed
-        Vec2b stick_range; // Might be range?
-        Vec2b padding;
+        Vec2b stick_range;
+        Vec2b stick_prev;  // Previous stick range?
         u16 button_mask_com;
         Vec2b stick_com; // CPU stick input?
 

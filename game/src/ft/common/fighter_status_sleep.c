@@ -114,7 +114,7 @@ void func_ovl3_8013D8B0(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Sleep, 0.0F, 1.0F, 0U);
 
-    fp->x18D_flag_b7 = TRUE;
+    fp->is_invisible = TRUE;
     fp->x18E_flag_b0 = TRUE;
     fp->is_ignore_blastzone_top = TRUE;
     fp->x191_flag_b3 = TRUE;

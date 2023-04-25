@@ -189,7 +189,7 @@ bool32 func_ovl3_80171C10(Article_Struct *ap)
     {
         return FALSE;
     }
-    else if (fp->x18D_flag_b7)
+    else if (fp->is_invisible)
     {
         return FALSE;
     }

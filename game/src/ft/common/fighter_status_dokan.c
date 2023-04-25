@@ -169,7 +169,7 @@ void func_ovl3_801424BC(GObj *fighter_gobj)
     func_ovl2_800DEEC8(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_DokanWait, 0.0F, 1.0F, 0x10U);
 
-    fp->x18D_flag_b7 = TRUE;
+    fp->is_invisible = TRUE;
     fp->x18E_flag_b3 = TRUE;
     fp->x18E_flag_b5 = TRUE;
 

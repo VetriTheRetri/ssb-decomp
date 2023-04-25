@@ -160,7 +160,7 @@ void func_ovl3_8013C120(GObj *fighter_gobj)
 
     func_ovl2_800D9444(fighter_gobj);
 
-    fp->x18D_flag_b7 = TRUE;
+    fp->is_invisible = TRUE;
     fp->x191_flag_b3 = TRUE;
     fp->x18E_flag_b3 = TRUE;
 
@@ -330,7 +330,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
             func_ovl2_800D9444(fighter_gobj);
             func_ovl2_80100720(&fp->joint[0]->translate, 5.0F);
 
-            fp->x18D_flag_b7 = TRUE;
+            fp->is_invisible = TRUE;
             fp->x191_flag_b3 = TRUE;
 
             func_ovl3_8013BD64(fp);
@@ -434,7 +434,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
             func_ovl3_8013BC8C(fp);
 
             fp->x18E_flag_b3 = TRUE;
-            fp->x18D_flag_b7 = TRUE;
+            fp->is_invisible = TRUE;
             fp->x191_flag_b3 = TRUE;
 
             func_ovl3_8013BD64(fp);

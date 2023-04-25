@@ -6,11 +6,12 @@
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\chara\\ftfox",
+    "\\game\\src\\ft\\common",
     "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\item"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article.h",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_throw.c",
   "PreviewInSolutionExplorer": false
 }

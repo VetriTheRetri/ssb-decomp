@@ -51,7 +51,7 @@ typedef struct _Coll_Data
 
     s32 ground_line_id;
     f32 unk_0x78; // "Clipping / Platform ID directly under character"
-    u32 clip_flag; // "Distance of platform directly under character"        u32 ground_flag; // "Clipping flag of platform directly under character"
+    u32 clip_flag; // Line collision behavior (e.g. drop-through)
     Vec3f ground_angle;
 
     s32 ceil_line_id; // Clipping ID of last ceiling interacted with
@@ -65,8 +65,6 @@ typedef struct _Coll_Data
     s32 lwall_line_id;
     s32 lwall_material;
     Vec3f lwall_angle;
-
-    // Most of this is unconfirmed
 
     s32 cliff_id; // Ledge ID
     s32 ignore_line_id; // Ignore this line when checking for collision
