@@ -489,6 +489,12 @@ typedef struct ftCommon_Capture_StatusVars
 
 } ftCommon_Capture_StatusVars;
 
+typedef struct ftCommon_Thrown_StatusVars
+{
+    bool32 is_rotate_model;
+
+} ftCommon_Thrown_StatusVars;
+
 typedef struct ftCommon_YoshiEgg_StatusVars
 {
     u32 unk_0x0;
@@ -541,6 +547,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Catch_StatusVars catchmain;
     ftCommon_CatchWait_StatusVars catchwait;
     ftCommon_Capture_StatusVars capture;
+    ftCommon_Thrown_StatusVars thrown;
     ftCommon_YoshiEgg_StatusVars yoshiegg;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
