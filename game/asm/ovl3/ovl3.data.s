@@ -972,7 +972,7 @@ glabel Fighter_Yoshi_GuardOffGfxOffset
 glabel Fighter_CatchPull_Gfx_Offset
   .incbin "ovl3.raw.bin", 0x56BD0, 0x10
 
-glabel D_ovl3_801886E0
+glabel Fighter_ThrowHitDesc_Default # Struct spans until 0x80188700
   .incbin "ovl3.raw.bin", 0x56BE0, 0x4
 
 glabel D_ovl3_801886E4

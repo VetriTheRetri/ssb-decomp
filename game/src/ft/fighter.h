@@ -486,6 +486,18 @@ typedef struct FighterHitArray
 
 } FighterHitArray;
 
+typedef struct ftThrowHitDesc
+{
+    s32 status_id;
+    s32 damage;
+    s32 angle;
+    s32 knockback_scale;
+    s32 knockback_weight;
+    s32 knockback_base;
+    s32 element;
+
+} ftThrowHitDesc;
+
 typedef struct _Fighter_Hit
 {
     s32 update_state;
@@ -660,7 +672,7 @@ struct Fighter_Struct
     u8 renderstate_match; // Hi-Poly = 1, Low-Poly = 2
     u8 costume_id;
     u8 shade_id; // i.e. When multiple instances of the same character costume are in-game
-    u8 offset_hit_type; // Original note: offset to attack hitbox type in 5x (???)
+    u8 handicap; // Original note: offset to attack hitbox type in 5x (???)
     u8 cp_level; // CPU level
     s8 stock_count;
     u8 unk_0x15;
@@ -981,7 +993,7 @@ struct Fighter_Struct
     void (*cb_capture)(GObj*); // Run this callback on grabbed victim
     GObj *catch_gobj;   // GObj this fighter has caught
     GObj *capture_gobj; // GObj this fighter is captured by
-    s32 unk_0x848;
+    ftThrowHitDesc *fighter_throw; // Pointer to throw description
     GObj *item_hold;
     SpecialHit *special_hit;
     Vec3f entry_pos;

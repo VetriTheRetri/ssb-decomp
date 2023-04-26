@@ -138,7 +138,7 @@ bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
     ap->team = fp->team;
     ap->port_id = fp->port_id;
     ap->player_number = fp->player_number;
-    ap->unk_0x16 = fp->offset_hit_type;
+    ap->unk_0x16 = fp->handicap;
 
     return FALSE;
 }

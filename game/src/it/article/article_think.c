@@ -323,7 +323,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
 
     ap->team = fp->team;
     ap->port_id = fp->port_id;
-    ap->unk_0x16 = fp->offset_hit_type;
+    ap->unk_0x16 = fp->handicap;
     ap->player_number = fp->player_number;
 
     ap->phys_info.vel.x = 0.0F;

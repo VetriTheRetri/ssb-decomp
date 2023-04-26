@@ -62,7 +62,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         ip->owner_gobj = spawn_gobj;
         ip->team = fp->team;
         ip->port_id = fp->port_id;
-        ip->unk_0x12 = fp->offset_hit_type;
+        ip->unk_0x12 = fp->handicap;
         ip->player_number = fp->player_number;
         ip->lr = fp->lr;
 
@@ -802,7 +802,7 @@ next_check:
         ip->port_id = fp->port_id;
         ip->display_state = fp->display_state;
         ip->player_number = fp->player_number;
-        ip->unk_0x12 = fp->offset_hit_type;
+        ip->unk_0x12 = fp->handicap;
         ip->item_hit.flags_0x4C = ip->unk_0x258;
         ip->item_hit.flags_0x4E.halfword = ip->unk_0x25A.halfword;
 

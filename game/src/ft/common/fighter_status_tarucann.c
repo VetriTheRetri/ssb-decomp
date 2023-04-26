@@ -97,7 +97,7 @@ extern intptr_t D_NF_000000BC;
 void func_ovl3_80144038(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    GroundHazardAttributes *tarucann = (GroundHazardAttributes *)(((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
+    ftThrowHitDesc *tarucann = (ftThrowHitDesc *)(((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
     f32 knockback;
     s32 angle;
 

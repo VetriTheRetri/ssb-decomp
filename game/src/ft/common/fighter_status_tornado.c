@@ -89,13 +89,13 @@ extern intptr_t D_NF_000000BC;
 void func_ovl3_80143CC4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    GroundHazardAttributes *tornado = (GroundHazardAttributes*) (((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
+    ftThrowHitDesc *tornado = (ftThrowHitDesc*) (((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
     f32 knockback;
     s32 damage;
 
     DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
 
-    knockback = func_ovl2_800E9D78(fp->percent_damage, tornado->damage, tornado->damage, tornado->knockback_weight, tornado->knockback_scale, tornado->knockback_base, fp->attributes->weight, 9, fp->offset_hit_type);
+    knockback = func_ovl2_800E9D78(fp->percent_damage, tornado->damage, tornado->damage, tornado->knockback_weight, tornado->knockback_scale, tornado->knockback_base, fp->attributes->weight, 9, fp->handicap);
 
     if (func_ovl2_800E8AAC(fighter_gobj) != gmHitCollision_HitStatus_Normal)
     {
