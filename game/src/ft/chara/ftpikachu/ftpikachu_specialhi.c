@@ -82,7 +82,7 @@ void func_ovl3_80152960(GObj *fighter_gobj)
 
     func_ovl2_800E9814(fighter_gobj, FTPIKACHU_QUICKATTACK_COLANIM_ID, 0); // Apply color animation
 
-    func_8000BB04(fighter_gobj, 0.0F); // Set animation speed (0.0F = freeze)
+    GObjSetAnimSpeed(fighter_gobj, 0.0F); // Set animation speed (0.0F = freeze)
 }
 
 void jtgt_ovl3_801529A0(GObj *fighter_gobj)

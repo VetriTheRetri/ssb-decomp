@@ -205,7 +205,7 @@ void func_ovl3_8015225C(GObj *fighter_gobj)
     {
         Item_Struct *ip = ItemGetStruct(thunder_gobj);
 
-        ip->item_vars.thunder.thunder_state = 2;
+        ip->item_vars.thunder.thunder_state = itPikachuThunderStatus_Destroy;
     }
 }
 

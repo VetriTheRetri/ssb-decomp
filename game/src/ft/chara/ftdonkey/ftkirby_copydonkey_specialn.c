@@ -73,7 +73,7 @@ void func_ovl3_80157918(GObj *fighter_gobj)
 
                 if (fp->fighter_vars.kirby.copydonkey_charge_level == FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_MAX)
                 {
-                    func_8000BB04(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHRAGE_ANIM_SPEED);
+                    GObjSetAnimSpeed(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHRAGE_ANIM_SPEED);
 
                     func_ovl2_800E9814(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
 
@@ -132,7 +132,7 @@ void func_ovl3_80157AD4(GObj *fighter_gobj)
 
     if (fp->fighter_vars.kirby.copydonkey_charge_level == FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_MAX)
     {
-        func_8000BB04(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHRAGE_ANIM_SPEED);
+        GObjSetAnimSpeed(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHRAGE_ANIM_SPEED);
     }
 }
 

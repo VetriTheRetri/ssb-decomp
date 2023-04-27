@@ -6,7 +6,7 @@ void func_ovl3_80151550(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag1 == 1)
     {
-        if (func_ovl2_801020F4(fighter_gobj) != FALSE)
+        if (func_ovl2_801020F4(fighter_gobj) != NULL)
         {
             fp->is_statupdate_stop_gfx = TRUE;
         }

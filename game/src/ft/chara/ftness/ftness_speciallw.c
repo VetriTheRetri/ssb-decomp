@@ -206,7 +206,7 @@ void func_ovl3_801556E0(GObj *fighter_gobj)
 
     if (!(fp->is_statupdate_stop_gfx))
     {
-        if (func_ovl2_801025D8(fighter_gobj) != FALSE)
+        if (func_ovl2_801025D8(fighter_gobj) != NULL)
         {
             fp->is_statupdate_stop_gfx = TRUE;
         }
