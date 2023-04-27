@@ -498,6 +498,15 @@ typedef struct ftThrowHitDesc
 
 } ftThrowHitDesc;
 
+typedef struct ftThrowReleaseDesc
+{
+    s32 angle;
+    s32 knockback_scale;
+    s32 knockback_weight;
+    s32 knockback_base;
+
+} ftThrowReleaseDesc;
+
 typedef struct _Fighter_Hit
 {
     s32 update_state;
@@ -895,10 +904,10 @@ struct Fighter_Struct
 
     u8 filler_0x258[0x268 - 0x258];
 
-    u8 hold_stick_x; // Frames control stick has been held
-    u8 hold_stick_y; // Frames control stick has been held
-    u8 tap_stick_x; // Frames control stick has been tapped + held
-    u8 tap_stick_y; // Frames control stick has been tapped + held
+    u8 tap_stick_x; // Frames control stick has been tapped
+    u8 tap_stick_y; // Frames control stick has been tapped
+    u8 hold_stick_x; // Frames control stick has been tapped or held
+    u8 hold_stick_y; // Frames control stick has been tapped or held
 
     s32 breakout_wait; // Frames until fighter breaks out of shield break / sleep / Cargo Throw
 

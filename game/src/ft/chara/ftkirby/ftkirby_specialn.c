@@ -41,8 +41,8 @@ void func_ovl3_80161E08(GObj *fighter_gobj, bool32 unused)
 
     fp->status_vars.kirby.specialn.copy_id = Ft_Kind_Kirby;
     fp->status_vars.kirby.specialn.release_lag = FTKIRBY_VACUUM_RELEASE_LAG;
-    fp->status_vars.kirby.specialn.pos.x = 0.0F;
-    fp->status_vars.kirby.specialn.pos.y = 0.0F;
+    fp->status_vars.kirby.specialn.dist.x = 0.0F;
+    fp->status_vars.kirby.specialn.dist.y = 0.0F;
 }
 
 void func_ovl3_80161E3C(Fighter_Struct *fp)
@@ -82,14 +82,14 @@ void func_ovl3_80161EB4(Fighter_Struct *fp)
     }
 }
 
-extern u8 ftKirby_LoadedFiles_SpecialNData;
+extern intptr_t ftKirby_LoadedFiles_SpecialNData;
 extern void *D_ovl2_80131074;
 
 void func_ovl3_80161F0C(GObj *fighter_gobj)
 {
     s16 index;
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftKirbyCopyData *copy_data = (ftKirbyCopyData*) ((uintptr_t)D_ovl2_80131074 + &ftKirby_LoadedFiles_SpecialNData); // Linker thing
+    ftKirbyCopyData *copy_data = (ftKirbyCopyData*) ((uintptr_t)D_ovl2_80131074 + (intptr_t)&ftKirby_LoadedFiles_SpecialNData); // Linker thing
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -152,12 +152,12 @@ void func_ovl3_80162078(GObj *fighter_gobj)
     {
         victim_fp = FighterGetStruct(kirby_fp->catch_gobj); // No NULL check?
 
-        victim_fp->status_vars.common.capturekirby.unk_0x0 = 1;
+        victim_fp->status_vars.common.capturekirby.is_goto_capturewait = TRUE;
 
         if ((victim_fp->ft_kind == Ft_Kind_Kirby) || (victim_fp->ft_kind == Ft_Kind_PolyKirby))
         {
             kirby_fp->status_vars.kirby.specialn.copy_id = victim_fp->fighter_vars.kirby.copy_id;
-            victim_fp->status_vars.common.capturekirby.unk_0x4 = 1;
+            victim_fp->status_vars.common.capturekirby.is_kirby = TRUE;
         }
         else
         {
@@ -211,7 +211,7 @@ void func_ovl3_80162258(GObj *fighter_gobj)
         {
             Fighter_Struct *victim_fp = FighterGetStruct(kirby_fp->catch_gobj);
 
-            func_ovl3_8014C508(kirby_fp->catch_gobj, fighter_gobj);
+            func_ovl3_8014C508(kirby_fp->catch_gobj);
             func_ovl2_800E80C4(victim_fp, fighter_gobj);
 
             victim_fp->phys_info.vel_air.z = 0.0F;
@@ -700,8 +700,8 @@ void func_ovl3_801630A0(GObj *fighter_gobj, s32 status_id)
     ftAnim_Update(fighter_gobj);
     func_ovl3_80161DA8(fp, fighter_gobj, &pos);
 
-    fp->status_vars.kirby.specialn.pos.x = DObjGetStruct(fp->catch_gobj)->translate.x - pos.x;
-    fp->status_vars.kirby.specialn.pos.y = DObjGetStruct(fp->catch_gobj)->translate.y - pos.y;
+    fp->status_vars.kirby.specialn.dist.x = DObjGetStruct(fp->catch_gobj)->translate.x - pos.x;
+    fp->status_vars.kirby.specialn.dist.y = DObjGetStruct(fp->catch_gobj)->translate.y - pos.y;
 }
 
 void jtgt_ovl3_80163154(GObj *fighter_gobj)

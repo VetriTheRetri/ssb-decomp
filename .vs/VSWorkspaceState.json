@@ -6,10 +6,12 @@
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\chara\\ftkirby",
+    "\\game\\src\\ft\\common",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
     "\\game\\src\\mp"
   ],
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftkirby\\ftkirby.h",
   "PreviewInSolutionExplorer": false
 }

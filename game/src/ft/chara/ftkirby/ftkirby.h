@@ -187,7 +187,7 @@ typedef struct ftKirbyCopyData
     u16 copy_id;
     s16 unk_0x2;
     u32 unk_0x4;
-    u32 unk_0x8;
+    s32 star_damage;
 
 } ftKirbyCopyData;
 

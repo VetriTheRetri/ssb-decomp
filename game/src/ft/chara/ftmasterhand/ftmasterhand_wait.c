@@ -80,20 +80,20 @@ void func_ovl3_80158824(GObj *fighter_gobj)
     }
     else if (fp->input.button_press & fp->input.button_mask_a)
     {
-        if ((ABS(fp->input.stick_range.x) >= 56) && ((s32)fp->hold_stick_x < 3))
+        if ((ABS(fp->input.stick_range.x) >= 56) && ((s32)fp->tap_stick_x < 3))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 3000.0F, 0);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A374, &sp30);
             return;
         }
 
-        else if ((fp->input.stick_range.y >= 53) && ((s32)fp->hold_stick_y < 4))
+        else if ((fp->input.stick_range.y >= 53) && ((s32)fp->tap_stick_y < 4))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 600.0F, 0);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A7C4, &sp30);
             return;
         }
-        else if ((fp->input.stick_range.y < -52) && ((s32)fp->hold_stick_y < 4))
+        else if ((fp->input.stick_range.y < -52) && ((s32)fp->tap_stick_y < 4))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 600.0F, 0);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015ACD4, &sp30);

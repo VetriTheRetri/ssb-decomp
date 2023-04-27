@@ -993,10 +993,10 @@ glabel D_ovl3_801886F4
 glabel D_ovl3_801886F8
   .incbin "ovl3.raw.bin", 0x56BF8, 0x8
 
-glabel D_ovl3_80188700
+glabel Fighter_CaptureKirby_Catch_Release
   .incbin "ovl3.raw.bin", 0x56C00, 0x10
 
-glabel D_ovl3_80188710
+glabel Fighter_CaptureKirby_Capture_Release
   .incbin "ovl3.raw.bin", 0x56C10, 0x10
 
 glabel D_ovl3_80188720

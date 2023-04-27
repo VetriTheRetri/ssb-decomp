@@ -59,7 +59,7 @@ void func_ovl3_80142164(GObj *fighter_gobj, s32 ground_line_id)
     ftStatus_Update(fighter_gobj, ftStatus_Common_DokanStart, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->hold_stick_y = U8_MAX - 1;
+    fp->tap_stick_y = U8_MAX - 1;
 
     func_ovl2_800D9444(fighter_gobj);
 
@@ -94,7 +94,7 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
     s32 ground_line_id;
     f32 dist_x;
 
-    if ((fp->input.stick_range.y <= FTCOMMON_DOKAN_STICK_RANGE_MIN) && (fp->hold_stick_y < FTCOMMON_DOKAN_BUFFER_FRAMES_MAX))
+    if ((fp->input.stick_range.y <= FTCOMMON_DOKAN_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_DOKAN_BUFFER_FRAMES_MAX))
     {
         if ((fp->coll_data.clip_flag & 0xFFFF00FF) == 0xC)
         {

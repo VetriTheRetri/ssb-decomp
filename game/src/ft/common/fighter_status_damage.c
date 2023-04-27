@@ -205,14 +205,14 @@ void func_ovl3_80140878(GObj *fighter_gobj)
     {
         if ((SQUARE(fp->input.stick_range.x) + SQUARE(fp->input.stick_range.y)) >= SQUARE(FTCOMMON_DAMAGE_SMASH_DI_RANGE_MIN))
         {
-            if ((fp->hold_stick_x < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX) || (fp->hold_stick_y < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX))
+            if ((fp->tap_stick_x < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX) || (fp->tap_stick_y < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX))
             {
                 Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
                 translate->x += fp->input.stick_range.x * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
                 translate->y += fp->input.stick_range.y * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
 
-                fp->hold_stick_x = fp->hold_stick_y = U8_MAX - 1;
+                fp->tap_stick_x = fp->tap_stick_y = U8_MAX - 1;
             }
         }
     }
@@ -591,7 +591,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     
     this_fp->unk_0xA00 = func_ovl3_80140878;
 
-    this_fp->hold_stick_x = this_fp->hold_stick_y = U8_MAX - 1;
+    this_fp->tap_stick_x = this_fp->tap_stick_y = U8_MAX - 1;
 
     this_fp->damage_knockback_again = knockback;
 

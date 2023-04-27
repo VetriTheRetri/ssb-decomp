@@ -24,7 +24,7 @@ typedef struct ftKirby_SpecialN_StatusVars
 {
     s16 copy_id;
     s16 release_lag;
-    Vec3f pos;
+    Vec3f dist;
 
 } ftKirby_SpecialN_StatusVars;
 

@@ -49,7 +49,7 @@ void func_ovl3_80149294(GObj *fighter_gobj, s32 status_id, s32 arg2)
 
 s32 func_ovl3_801492F8(Fighter_Struct *fp)
 {
-    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_ESCAPE_STICK_RANGE_MIN) && (fp->hold_stick_x < FTCOMMON_ESCAPE_BUFFER_FRAMES_MAX))
+    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_ESCAPE_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_ESCAPE_BUFFER_FRAMES_MAX))
     {
         return ((fp->input.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_EscapeF : ftStatus_Common_EscapeB;
     }

@@ -216,6 +216,21 @@
 #define FTCOMMON_CATCH_THROW_WAIT 60
 #define FTCOMMON_CATCH_THROW_STICK_RANGE_MIN 20
 
+#define FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN 53
+#define FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX 4
+#define FTCOMMON_CAPTUREKIRBY_MAGNITUDE_MAX 220.0F
+#define FTCOMMON_CAPTUREKIRBY_MAGNITUDE_MUL 0.45F
+#define FTCOMMON_CAPTUREKIRBY_MAGNITUDE_ADD 0.55F
+#define FTCOMMON_CAPTUREKIRBY_DIST_X_MIN 28.0F
+#define FTCOMMON_CAPTUREKIRBY_DIST_Y_MIN 36.0F
+#define FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY 20.0F
+
+#define FTCOMMON_THROWNKIRBYSTAR_DECELERATE 4.0F
+#define FTCOMMON_THROWNKIRBYSTAR_RELEASE_VEL_X 22.0F
+#define FTCOMMON_THROWNKIRBYSTAR_RELEASE_VEL_Y 70.0F
+
+#define FTCOMMON_THROWNCOPYSTAR_DECELERATE 5.2F
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -511,9 +526,9 @@ typedef struct ftCommon_CaptureCaptain_StatusVars
 
 typedef struct ftCommon_CaptureKirby_StatusVars
 {
-    u16 unk_0x0;
-    u16 unk_0x2;
-    u16 unk_0x4;
+    s16 is_goto_capturewait;
+    s16 lr;
+    s16 is_kirby; // Set to TRUE if captured fighter is Kirby?
 
 } ftCommon_CaptureKirby_StatusVars;
 

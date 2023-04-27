@@ -70,7 +70,7 @@ void func_ovl3_80147D30(GObj *fighter_gobj)
     fp->phys_info.vel_air.y = (vel_y * attributes->jump_height_mul) + attributes->jump_height_base;
     fp->phys_info.vel_air.x = vel_x * attributes->jump_vel_x;
 
-    fp->hold_stick_y = U8_MAX - 1;
+    fp->tap_stick_y = U8_MAX - 1;
 }
 
 void func_ovl3_80147E34(GObj *fighter_gobj)
