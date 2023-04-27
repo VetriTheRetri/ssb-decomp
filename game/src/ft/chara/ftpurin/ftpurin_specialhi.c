@@ -8,7 +8,7 @@ void func_ovl3_80151550(GObj *fighter_gobj)
     {
         if (func_ovl2_801020F4(fighter_gobj) != FALSE)
         {
-            fp->gfx_stop_statupdate = TRUE;
+            fp->is_statupdate_stop_gfx = TRUE;
         }
         fp->command_vars.flags.flag1 = 0;
     }

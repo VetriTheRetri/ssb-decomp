@@ -999,7 +999,7 @@ glabel Fighter_CaptureKirby_Catch_Release
 glabel Fighter_CaptureKirby_Capture_Release
   .incbin "ovl3.raw.bin", 0x56C10, 0x10
 
-glabel D_ovl3_80188720
+glabel Fighter_YoshiEgg_HurtDesc
   /* 56C20 103160 80188720 */
   .asciz "@"
   .balign 4

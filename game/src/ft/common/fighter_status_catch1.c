@@ -86,7 +86,7 @@ void func_ovl3_80149BA8(GObj *fighter_gobj)
 
     if (((fp->ft_kind == Ft_Kind_Samus) || (fp->ft_kind == Ft_Kind_PolySamus)) && (func_ovl2_80101E80(fighter_gobj) != NULL))
     {
-        fp->gfx_stop_statupdate = TRUE;
+        fp->is_statupdate_stop_gfx = TRUE;
     }
 }
 

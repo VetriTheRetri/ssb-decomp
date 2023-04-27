@@ -82,7 +82,7 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
     {
         if (func_ovl2_80101E80(fighter_gobj) != NULL)
         {
-            this_fp->gfx_stop_statupdate = TRUE;
+            this_fp->is_statupdate_stop_gfx = TRUE;
         }
     }
     if (thrown_status->status1 != -1)

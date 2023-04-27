@@ -274,7 +274,7 @@ void func_ovl3_8015D1E0(GObj *fighter_gobj)
 
     if (reflect_gobj != NULL)
     {
-        fp->gfx_stop_statupdate = TRUE;
+        fp->is_statupdate_stop_gfx = TRUE;
     }
     fp->special_hit = (SpecialHit*)((uintptr_t)D_ovl2_80130E94 + &ftFox_LoadedFiles_SpecialLwData); // Another linker thing
 }

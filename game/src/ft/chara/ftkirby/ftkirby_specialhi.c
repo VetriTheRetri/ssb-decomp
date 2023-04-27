@@ -10,7 +10,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         {
         case 1:
 
-            if (fp->gfx_stop_statupdate != FALSE)
+            if (fp->is_statupdate_stop_gfx != FALSE)
             {
                 func_ovl2_800E9C3C(fighter_gobj);
                 fp->command_vars.flags.flag1 = 0;
@@ -30,7 +30,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
     {
     case 0:
 
-        if (fp->gfx_stop_statupdate != FALSE)
+        if (fp->is_statupdate_stop_gfx != FALSE)
         {
             func_ovl2_800E9C3C(fighter_gobj);
             fp->command_vars.flags.flag2 = 0;
@@ -41,7 +41,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
         if (func_ovl2_80102508(fighter_gobj) != FALSE)
         {
-            fp->gfx_stop_statupdate = TRUE;
+            fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -50,7 +50,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
         if (func_ovl2_80102418(fighter_gobj) != FALSE)
         {
-            fp->gfx_stop_statupdate = TRUE;
+            fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -59,7 +59,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
         if (func_ovl2_80102490(fighter_gobj) != FALSE)
         {
-            fp->gfx_stop_statupdate = TRUE;
+            fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -68,7 +68,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
         if (func_ovl2_80102560(fighter_gobj) != FALSE)
         {
-            fp->gfx_stop_statupdate = TRUE;
+            fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;

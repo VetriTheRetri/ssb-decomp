@@ -87,7 +87,7 @@ loop: // This makes no sense
 
     if (func_ovl2_80104068(this_gobj, this_fp->attributes->unk_0xEC) != 0)
     {
-        this_fp->gfx_stop_statupdate = TRUE;
+        this_fp->is_statupdate_stop_gfx = TRUE;
     }
     func_ovl2_800E9814(this_gobj, 0xB, 0);
     func_ovl2_800E7F7C(this_gobj, 1);

@@ -50410,7 +50410,7 @@ glabel func_ovl2_80103060
   .L80103094:
   /* 07E894 80103094 8CE20084 */        lw $v0, 0x84($a3)
   /* 07E898 80103098 24080002 */     addiu $t0, $zero, 2
-  /* 07E89C 8010309C 3C018019 */       lui $at, %hi(D_ovl3_80188720)
+  /* 07E89C 8010309C 3C018019 */       lui $at, %hi(Fighter_YoshiEgg_HurtDesc)
   /* 07E8A0 801030A0 AC490004 */        sw $t1, 4($v0)
   /* 07E8A4 801030A4 AC48001C */        sw $t0, 0x1c($v0)
   /* 07E8A8 801030A8 AC480018 */        sw $t0, 0x18($v0)
@@ -50428,7 +50428,7 @@ glabel func_ovl2_80103060
   /* 07E8D8 801030D8 018B6023 */      subu $t4, $t4, $t3
   /* 07E8DC 801030DC 000C6080 */       sll $t4, $t4, 2
   /* 07E8E0 801030E0 002C0821 */      addu $at, $at, $t4
-  /* 07E8E4 801030E4 C4208720 */      lwc1 $f0, %lo(D_ovl3_80188720)($at)
+  /* 07E8E4 801030E4 C4208720 */      lwc1 $f0, %lo(Fighter_YoshiEgg_HurtDesc)($at)
   /* 07E8E8 801030E8 3C013F80 */       lui $at, (0x3F800000 >> 16) # 1.0
   /* 07E8EC 801030EC 44812000 */      mtc1 $at, $f4 # 1.0 to cop1
   /* 07E8F0 801030F0 E4600044 */      swc1 $f0, 0x44($v1)

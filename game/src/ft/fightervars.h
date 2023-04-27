@@ -231,6 +231,19 @@
 
 #define FTCOMMON_THROWNCOPYSTAR_DECELERATE 5.2F
 
+#define FTCOMMON_YOSHIEGG_ESCAPE_WAIT_DEFAULT 15
+#define FTCOMMON_YOSHIEGG_ESCAPE_WAIT_MAX 250
+#define FTCOMMON_YOSHIEGG_WIGGLE_STICK_RANGE_MIN 26
+#define FTCOMMON_YOSHIEGG_LAY_VEL_X 20.0F
+#define FTCOMMON_YOSHIEGG_LAY_VEL_Y 60.0F
+#define FTCOMMON_YOSHIEGG_LAY_OFF_X 200.0F
+#define FTCOMMON_YOSHIEGG_LAY_OFF_Y 90.0F
+#define FTCOMMON_YOSHIEGG_DAMAGE_MUL 0.5F
+#define FTCOMMON_YOSHIEGG_WIGGLE_GFX_RANGE_XY 22.0F
+#define FTCOMMON_YOSHIEGG_WIGGLE_ANIM_SPEED 5.0F
+#define FTCOMMON_YOSHIEGG_ESCAPE_OFF_Y 10.0F
+#define FTCOMMON_YOSHIEGG_ESCAPE_VEL_Y 70.0F
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -511,19 +524,6 @@ typedef struct ftCommon_Thrown_StatusVars
 
 } ftCommon_Thrown_StatusVars;
 
-typedef struct ftCommon_YoshiEgg_StatusVars
-{
-    u32 unk_0x0;
-    u16 unk_0x4;
-
-} ftCommon_YoshiEgg_StatusVars;
-
-typedef struct ftCommon_CaptureCaptain_StatusVars
-{
-    u16 capture_flag;   // Collection of bit flags, only seen 0x4 and 0x2 used
-
-} ftCommon_CaptureCaptain_StatusVars;
-
 typedef struct ftCommon_CaptureKirby_StatusVars
 {
     s16 is_goto_capturewait;
@@ -531,6 +531,22 @@ typedef struct ftCommon_CaptureKirby_StatusVars
     s16 is_kirby; // Set to TRUE if captured fighter is Kirby?
 
 } ftCommon_CaptureKirby_StatusVars;
+
+typedef struct ftCommon_CaptureYoshi_StatusVars
+{
+    GObj *effect_gobj;
+    s16 stage;
+    s16 breakout_wait;
+    s8 lr;
+    s8 unk_0x9;
+
+} ftCommon_CaptureYoshi_StatusVars;
+
+typedef struct ftCommon_CaptureCaptain_StatusVars
+{
+    u16 capture_flag;   // Collection of bit flags, only seen 0x4 and 0x2 used
+
+} ftCommon_CaptureCaptain_StatusVars;
 
 typedef union ftCommon_StatusVars
 {
@@ -564,9 +580,9 @@ typedef union ftCommon_StatusVars
     ftCommon_CatchWait_StatusVars catchwait;
     ftCommon_Capture_StatusVars capture;
     ftCommon_Thrown_StatusVars thrown;
-    ftCommon_YoshiEgg_StatusVars yoshiegg;
-    ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_CaptureKirby_StatusVars capturekirby;
+    ftCommon_CaptureYoshi_StatusVars captureyoshi;
+    ftCommon_CaptureCaptain_StatusVars capturecaptain;
 
 } ftCommon_StatusVars;
 

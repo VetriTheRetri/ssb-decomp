@@ -90,7 +90,7 @@ void func_ovl3_80148304(GObj *fighter_gobj)
                 func_ovl2_800E8ECC(fighter_gobj);
                 func_ovl3_801482E4(fighter_gobj);
 
-                if (fp->gfx_stop_statupdate)
+                if (fp->is_statupdate_stop_gfx)
                 {
                     Vec3f egg_gfx_offset = Fighter_Yoshi_GuardOffGfxOffset;
 

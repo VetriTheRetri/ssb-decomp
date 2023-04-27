@@ -229,11 +229,11 @@ void func_ovl3_8014BE90(GObj *fighter_gobj, f32 arg1, f32 arg2)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->gfx_stop_statupdate))
+    if (!(fp->is_statupdate_stop_gfx))
     {
         if (func_ovl2_80103CF8(fighter_gobj) != NULL)
         {
-            fp->gfx_stop_statupdate = TRUE;
+            fp->is_statupdate_stop_gfx = TRUE;
         }
     }
 }
@@ -294,7 +294,7 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
 
             if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
             {
-                fp->gfx_stop_statupdate = TRUE;
+                fp->is_statupdate_stop_gfx = TRUE;
             }
         }
         else
@@ -316,7 +316,7 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
 
                 if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
                 {
-                    fp->gfx_stop_statupdate = TRUE;
+                    fp->is_statupdate_stop_gfx = TRUE;
                 }
                 fp->is_invisible = FALSE;
 

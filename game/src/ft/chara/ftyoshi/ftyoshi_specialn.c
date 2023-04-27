@@ -5,7 +5,7 @@ void func_ovl3_8015E310(Fighter_Struct *fp, void (*cb_unk)(GObj*))
     func_ovl2_800E80A4(fp, 1, cb_unk, func_ovl3_8014C83C);
 }
 
-void func_ovl3_8015E33C(GObj *fighter_gobj, void (*cb_catch)(GObj *))
+void func_ovl3_8015E33C(GObj *fighter_gobj, void (*cb_catch)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -35,7 +35,7 @@ void func_ovl3_8015E3D8(Fighter_Struct *fp)
         {
             Fighter_Struct *fp_catch = FighterGetStruct(fp->catch_gobj);
 
-            fp_catch->status_vars.common.yoshiegg.unk_0x4 = 1;
+            fp_catch->status_vars.common.captureyoshi.stage = 1;
 
             fp->command_vars.flags.flag2 = 0;
         }
@@ -46,7 +46,7 @@ void func_ovl3_8015E3D8(Fighter_Struct *fp)
         {
             Fighter_Struct *fp_catch = FighterGetStruct(fp->catch_gobj);
 
-            fp_catch->status_vars.common.yoshiegg.unk_0x4 = 3;
+            fp_catch->status_vars.common.captureyoshi.stage = 3;
 
             fp->catch_gobj = NULL;
 

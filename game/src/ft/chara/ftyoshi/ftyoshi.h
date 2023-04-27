@@ -32,4 +32,12 @@ typedef enum ftYoshiAction
 
 } ftYoshiAction;
 
+typedef struct ftYoshiEggDesc
+{
+    f32 gfx_size;
+    Vec3f offset;
+    Vec3f size;
+
+} ftYoshiEggDesc;
+
 #endif

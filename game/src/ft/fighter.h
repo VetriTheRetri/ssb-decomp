@@ -562,6 +562,18 @@ typedef struct _Fighter_Hit
 
 } Fighter_Hit;
 
+typedef struct Fighter_Hurt
+{
+    s32 hit_status;
+    s32 unk_ftht_0x4;
+    DObj *joint;
+    s32 unk_ftht_0xC;
+    s32 unk_ftht_0x10;
+    Vec3f offset;
+    Vec3f size;
+
+} Fighter_Hurt;
+
 typedef struct FighterItemThrow
 {
     s32 is_smash_throw : 1;
@@ -784,7 +796,7 @@ struct Fighter_Struct
     u32 x18F_flag_b0 : 1;
     u32 x18F_flag_b1 : 1;
     u32 x18F_flag_b2 : 1;
-    u32 gfx_stop_statupdate : 1; // Destroy GFX on action state change if TRUE
+    u32 is_statupdate_stop_gfx : 1; // Destroy GFX on action state change if TRUE
     u32 x18F_flag_b4 : 1;
     u32 x18F_flag_b5 : 1;
     u32 x18F_flag_b6 : 1;
@@ -957,8 +969,8 @@ struct Fighter_Struct
     s32 star_invincible_time;
     s32 special_status;
     s32 hit_status;
-    
-    u8 filler_0x58C[0x7A4 - 0x5BC];
+
+    Fighter_Hurt fighter_hurt[11];
 
     f32 unk_ft_0x7A4;
     s32 unk_ft_0x7A8;
@@ -992,7 +1004,9 @@ struct Fighter_Struct
     s32 unk_0x818;
     f32 damage_mul;
 
-    u8 filler_0x820[0x82C - 0x820];
+    s32 unk_ft_0x820;
+    s32 unk_ft_0x824;
+    s32 unk_ft_0x828;
 
     f32 publicity_knockback; // Knockback value used for crowd reactions
 

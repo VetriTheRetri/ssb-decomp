@@ -129,7 +129,7 @@ void func_ovl3_80163D94(GObj *fighter_gobj, bool32 is_skip_gobj)
 
         if (func_ovl2_80103378(fighter_gobj) != FALSE)
         {
-            fp->gfx_stop_statupdate = TRUE;
+            fp->is_statupdate_stop_gfx = TRUE;
         }
         if (is_skip_gobj == FALSE)
         {
