@@ -1323,10 +1323,10 @@ glabel Fighter_YoshiEgg_HurtDesc
 glabel Fighter_CaptureCaptain_Offset
   .incbin "ovl3.raw.bin", 0x56F20, 0x10
 
-glabel D_ovl3_80188A30
+glabel Fighter_ThrowF_Catch_Release
   .incbin "ovl3.raw.bin", 0x56F30, 0x10
 
-glabel D_ovl3_80188A40
+glabel Fighter_Shouldered_Capture_Release
   .incbin "ovl3.raw.bin", 0x56F40, 0x10
 
 glabel jtbl_ovl3_80188A50

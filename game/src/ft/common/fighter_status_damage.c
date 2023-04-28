@@ -383,7 +383,7 @@ bool32 func_ovl3_80140D30(Fighter_Struct *fp)
     }
     if ((fp->ft_kind == Ft_Kind_Donkey) || (fp->ft_kind == Ft_Kind_PolyDonkey) || (fp->ft_kind == Ft_Kind_GiantDonkey))
     {
-        if ((fp->status_info.status_id >= ftStatus_Donkey_ThrowFWait) && (fp->status_info.status_id <= ftStatus_Donkey_ThrowFUnk) && (func_ovl3_80140A94(func_ovl2_800EA1B0(fp->unk_0x7E0)) < 3))
+        if ((fp->status_info.status_id >= ftStatus_Donkey_ThrowFWait) && (fp->status_info.status_id <= ftStatus_Donkey_ThrowFDamage) && (func_ovl3_80140A94(func_ovl2_800EA1B0(fp->unk_0x7E0)) < 3))
         {
             return TRUE;
         }

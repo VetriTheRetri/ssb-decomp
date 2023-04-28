@@ -216,6 +216,8 @@
 #define FTCOMMON_CATCH_THROW_WAIT 60
 #define FTCOMMON_CATCH_THROW_STICK_RANGE_MIN 20
 
+#define FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN 40
+
 #define FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN 53
 #define FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX 4
 #define FTCOMMON_CAPTUREKIRBY_MAGNITUDE_MAX 220.0F
@@ -249,6 +251,11 @@
 #define FTCOMMON_CAPTURECAPTAIN_JOINT 29
 #define FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN 4.0F
 #define FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED 0.0F
+
+#define FTCOMMON_THROWFFALL_SKIP_LANDING_VEL_Y_MAX (-20.0F)
+
+#define FTCOMMON_THROWFF_TURN_STICK_RANGE_MIN 20
+#define FTCOMMON_THROWFF_TURN_FRAMES 6
 
 typedef struct ftCommon_Filler
 {
@@ -567,6 +574,26 @@ typedef struct ftCommon_ThrowF_StatusVars // Cargo Throw
 
 } ftCommon_ThrowF_StatusVars;
 
+typedef struct ftCommon_ThrowFF_StatusVars
+{
+    bool32 is_turn; // Used to tell if Donkey Kong is doing "Cargo Back Throw" (this is still just Forward Throw but he turns around first)
+    s32 turn_frames;
+
+} ftCommon_ThrowFF_StatusVars;
+
+typedef struct ftCommon_ThrowFCut_StatusVars
+{
+    s32 hitstun_timer;
+    s32 dust_gfx_int;
+    f32 publicity_knockback;
+    u16 coll_mask;
+    u8 filler_0xE[0x28 - 0xE];
+    s32 unk_index;
+    s32 status_id;
+    bool32 is_limit_knockback;
+
+} ftCommon_ThrowFDamage_StatusVars;
+
 typedef union ftCommon_StatusVars
 {
     ftCommon_Dead_StatusVars dead;
@@ -603,6 +630,8 @@ typedef union ftCommon_StatusVars
     ftCommon_CaptureYoshi_StatusVars captureyoshi;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
     ftCommon_ThrowF_StatusVars throwf;
+    ftCommon_ThrowFF_StatusVars throwff;
+    ftCommon_ThrowFDamage_StatusVars throwfdamage;
 
 } ftCommon_StatusVars;
 

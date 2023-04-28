@@ -164,7 +164,7 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
     }
 }
 
-ftThrowReleaseDesc Fighter_CaptureKirby_Catch_Release =   { 361, 100, 90, 0 };
+ftThrowReleaseDesc Fighter_CaptureKirby_Catch_Release   = { 361, 100, 90, 0 };
 ftThrowReleaseDesc Fighter_CaptureKirby_Capture_Release = {  80, 100, 60, 0 };
 
 void func_ovl3_8014BD04(GObj *fighter_gobj)

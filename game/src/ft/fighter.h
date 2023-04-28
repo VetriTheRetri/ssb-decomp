@@ -922,8 +922,10 @@ struct Fighter_Struct
     u8 hold_stick_y; // Frames control stick has been tapped or held
 
     s32 breakout_wait; // Frames until fighter breaks out of shield break / sleep / Cargo Throw
+    s8 breakout_lr; // Whether victim is mashing left or right
+    s8 breakout_ud; // Whether victim is mashing up or down
 
-    u8 filler_0x270[0x276 - 0x270];
+    u8 filler_0x272[0x276 - 0x272];
 
     s16 unk_0x276;
     GObj *throw_gobj; // GObj pointer of player throwing this fighter?
