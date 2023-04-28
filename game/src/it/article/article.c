@@ -5,6 +5,42 @@
 #include "gmground.h"
 
 extern Article_Struct *Article_Alloc_Link;
+extern void *Article_File_Data;
+extern intptr_t D_NF_000000FB;
+extern intptr_t D_NF_00B1BCA0;
+extern intptr_t D_NF_00B1BDE0;
+extern intptr_t D_NF_00B1BDE0_other;
+extern intptr_t D_NF_00B1E640;
+extern void *D_ovl3_8018D044;
+
+extern s32 dbObjDisplayStatus_Global_Article;
+
+void func_ovl3_8016DEA0(void)
+{
+    Article_Struct *ap;
+    s32 i;
+
+    Article_Alloc_Link = ap = hal_alloc(sizeof(Article_Struct) * ARTICLE_ALLOC_MAX, 8U);
+
+    for (i = 0; i < (ARTICLE_ALLOC_MAX - 1); i++)
+    {
+        ap[i].ap_alloc_next = &ap[i + 1];
+
+    }
+    if (ap != NULL)
+    {
+        ap[i].ap_alloc_next = NULL;
+    }
+    Article_File_Data = rldm_get_file_with_external_heap(&D_NF_000000FB, hal_alloc(rldm_bytes_needed_to_load(&D_NF_000000FB), 0x10U));
+
+    D_ovl3_8018D044 = func_ovl2_801159F8(&D_NF_00B1BCA0, &D_NF_00B1BDE0, &D_NF_00B1BDE0_other, &D_NF_00B1E640);
+
+    func_ovl3_8016EF40();
+    func_ovl3_8016F218();
+    func_ovl2_80111F80();
+
+    dbObjDisplayStatus_Global_Article = dbObjDisplayStatus_Master;
+}
 
 Article_Struct* func_ovl3_8016DFAC(void) // Set global Article user_data link pointer to next member
 {

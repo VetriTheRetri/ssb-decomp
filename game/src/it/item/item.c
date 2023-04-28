@@ -5,12 +5,31 @@
 #include <game/src/gm/gmmatch.h>
 #include <game/src/it/article/article.h>
 
+extern Item_Struct *D_ovl3_8018CFF0;
+extern s32 D_ovl3_8018CFF8;
+extern s32 dbObjDisplayStatus_Item;
+
+void func_ovl3_801654B0(void)
+{
+    Item_Struct *ip;
+    s32 i;
+
+    D_ovl3_8018CFF0 = ip = hal_alloc(sizeof(Item_Struct) * ITEM_ALLOC_MAX, 8U);
+
+    for (i = 0; i < (ITEM_ALLOC_MAX - 1); i++)
+    {
+        ip[i].ip_alloc_next = &ip[i + 1];
+    }
+    if (ip != NULL)
+    {
+        ip[i].ip_alloc_next = NULL;
+    }
+    D_ovl3_8018CFF8 = 1;
+    dbObjDisplayStatus_Item = dbObjDisplayStatus_Master;
+}
 
 
 // Not the first function in this file
-
-extern s32 dbObjDisplayStatus_Item;
-extern u32 D_ovl3_8018CFF8;
 
 u32 func_ovl3_801655A0(void)
 {
@@ -20,7 +39,6 @@ u32 func_ovl3_801655A0(void)
     {
         D_ovl3_8018CFF8++;
     }
-
     return group_id;
 }
 
@@ -29,7 +47,7 @@ extern s32 D_ovl2_80131398;
 GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
     GObj *item_gobj;
-    void (*cb)(GObj *);
+    void (*cb)(GObj*);
     ItemHitDesc *it_hit_desc;
     Item_Struct *ip;
     Item_Struct *owner_ip;
@@ -123,7 +141,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         ip->display_state = dbObjDisplayStatus_Item;
 
         ip->item_hit.attack_id = 0;
-        ip->item_hit.stale = 1.0F;
+        ip->item_hit.stale = ITEM_STALE_DEFAULT;
         ip->item_hit.flags_0x4A.halfword = func_ovl2_800EA5BC();
         ip->item_hit.flags_0x4C.flags_0x3FF = 0;
         ip->item_hit.flags_0x4C.flags_0x1000 = ip->item_hit.flags_0x4C.flags_0x800 = ip->item_hit.flags_0x4C.flags_0x400 = FALSE;

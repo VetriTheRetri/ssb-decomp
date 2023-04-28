@@ -11,6 +11,8 @@
 #include <game/src/gm/gmsound.h>
 #include <game/src/ef/effect.h>
 
+#define ARTICLE_ALLOC_MAX 16
+
 #define ARTICLE_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
 
 #define ARTICLE_MASK_SPAWN_FIGHTER 0               // Article spawned by fighter

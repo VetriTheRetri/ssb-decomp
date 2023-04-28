@@ -9,6 +9,11 @@
 #include <game/src/it/item/itemvars.h>
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
+#include <game/src/sys/develop.h>
+
+#define ITEM_ALLOC_MAX 32                       // Allocate this many item user_data structs at once
+
+#define ITEM_STALE_DEFAULT 1.0F
 
 #define ITEM_TEAM_DEFAULT 4U
 #define ITEM_PORT_DEFAULT 4U
