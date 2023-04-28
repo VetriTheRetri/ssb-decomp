@@ -1,8 +1,5 @@
 #include <game/src/ft/chara/ftmario/ftmario.h>
 
-
-
-
 void func_ovl3_801560A0(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
@@ -60,7 +57,7 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
 void func_ovl3_80156240(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->status_vars.mario.specialhi.is_air_bool == FALSE)
     {
@@ -84,11 +81,11 @@ void func_ovl3_80156240(GObj *fighter_gobj)
         return;
     }
 
-    func_ovl2_800D8D68(fp, 0.5F, common_attrs->fall_speed_max);
+    func_ovl2_800D8D68(fp, 0.5F, attributes->fall_speed_max);
 
-    if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 

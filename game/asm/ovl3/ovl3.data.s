@@ -1320,7 +1320,7 @@ glabel Fighter_YoshiEgg_HurtDesc
   .balign 4
   .incbin "ovl3.raw.bin", 0x56EF8, 0x28
 
-glabel D_ovl3_80188A20
+glabel Fighter_CaptureCaptain_Offset
   .incbin "ovl3.raw.bin", 0x56F20, 0x10
 
 glabel D_ovl3_80188A30

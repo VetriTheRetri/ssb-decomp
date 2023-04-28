@@ -115,22 +115,22 @@ void func_ovl3_80160D40(GObj *fighter_gobj)
 void func_ovl3_80160DF0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl3_80160BB0(fighter_gobj);
     jtgt_ovl2_800D9414(fighter_gobj);
 
-    if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, common_attrs->aerial_speed_max_x);
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 
 void func_ovl3_80160E70(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl3_80160BB0(fighter_gobj);
 
@@ -143,10 +143,10 @@ void func_ovl3_80160E70(GObj *fighter_gobj)
     {
         jtgt_ovl2_800D9414(fighter_gobj);
 
-        if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+        if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, common_attrs->aerial_speed_max_x);
-            func_ovl2_800D9074(fp, common_attrs);
+            func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+            func_ovl2_800D9074(fp, attributes);
         }
     }
 }
@@ -154,7 +154,7 @@ void func_ovl3_80160E70(GObj *fighter_gobj)
 void func_ovl3_80160F10(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
     f32 temp_scale;
 
     func_ovl3_80160BB0(fighter_gobj);
@@ -177,24 +177,24 @@ void func_ovl3_80160F10(GObj *fighter_gobj)
 
     fp->joint[0]->scale.x = temp_scale;
 
-    if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, common_attrs->aerial_speed_max_x);
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 
 void func_ovl3_80160FD8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl3_80160BB0(fighter_gobj);
 
-    if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, common_attrs->aerial_speed_max_x);
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 

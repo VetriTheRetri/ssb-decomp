@@ -63,7 +63,7 @@ void func_ovl3_801552E8(GObj *fighter_gobj)
 void func_ovl3_80155304(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->status_vars.ness.speciallw.gravity_delay != 0)
     {
@@ -71,12 +71,12 @@ void func_ovl3_80155304(GObj *fighter_gobj)
     }
     else
     {
-        func_ovl2_800D8D68(fp, 0.8F, common_attrs->fall_speed_max);
+        func_ovl2_800D8D68(fp, 0.8F, attributes->fall_speed_max);
     }
 
-    if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 

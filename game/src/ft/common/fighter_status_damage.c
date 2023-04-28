@@ -765,7 +765,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             {
                 grab_fp->hitlag_timer = func_ovl2_800EA1C0(this_fp->unk_ft_0x7DC, grab_fp->status_info.status_id, grab_fp->unk_ft_0x7A4, this_fp);
 
-                this_fp->input.button_press = this_fp->input.button_mask_c = 0;
+                this_fp->input.button_press = this_fp->input.button_tap_prev = 0;
 
                 if (this_fp->cb_hitlag_start != NULL)
                 {

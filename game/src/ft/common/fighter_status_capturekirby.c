@@ -1,4 +1,3 @@
-#include "fighter.h"
 #include "ftkirby.h"
 #include "article.h"
 
@@ -74,7 +73,7 @@ void func_ovl3_8014B968(GObj *fighter_gobj, GObj *capture_gobj)
 
         vel.x = vel.y = vel.z = 0.0F;
 
-        func_ovl3_80172AEC(this_fp->item_hold, &vel, 1.0F);
+        func_ovl3_80172AEC(this_fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
     }
     if (this_fp->catch_gobj != NULL)
     {

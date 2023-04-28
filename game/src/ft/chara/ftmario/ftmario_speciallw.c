@@ -68,14 +68,14 @@ void func_ovl3_80156630(GObj *fighter_gobj)
 void func_ovl3_801566C4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     if ((fp->fighter_vars.mario.is_tornado_charge == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
     {
         func_ovl2_800D8D34(fp, FTMARIO_TORNADO_TAP_VEL_ADD, 40.0F);
     }
 
-    func_ovl2_800D8E50(fp, common_attrs);
+    func_ovl2_800D8E50(fp, attributes);
     func_ovl2_800D8FC8(fp, 0, 0.03F, func_ovl3_801565E4(fp, 17.0F));
 }
 

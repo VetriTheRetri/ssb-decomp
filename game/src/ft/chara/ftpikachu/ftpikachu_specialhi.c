@@ -29,13 +29,13 @@ void func_ovl3_801527E4(GObj *fighter_gobj)
 void func_ovl3_80152818(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl2_800D8D68(fp, 0.8F, common_attrs->fall_speed_max);
+    func_ovl2_800D8D68(fp, 0.8F, attributes->fall_speed_max);
 
-    if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 
@@ -427,13 +427,13 @@ void func_ovl3_80153414(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag1 != 0U)
     {
-        ftCommonAttributes *common_attrs;
+        ftCommonAttributes *attributes;
 
         func_ovl2_800D8E50(fp, fp->attributes);
 
-        common_attrs = fp->attributes;
+        attributes = fp->attributes;
 
-        func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTPIKACHU_QUICKATTACK_AIR_ACCEL_MUL, common_attrs->aerial_speed_max_x * FTPIKACHU_QUICKATTACK_AIR_SPEED_MUL);
+        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTPIKACHU_QUICKATTACK_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTPIKACHU_QUICKATTACK_AIR_SPEED_MUL);
        
         func_ovl2_800D9074(fp, fp->attributes);
     }

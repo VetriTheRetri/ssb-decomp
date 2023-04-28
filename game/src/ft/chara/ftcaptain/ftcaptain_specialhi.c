@@ -17,13 +17,13 @@ void func_ovl3_801602B0(GObj *fighter_gobj)
 
 void func_ovl3_80160304(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
 
-    if ((fighter_gobj->anim_frame <= 0.0F) || (fp->command_vars.flags.flag0 != 0))
+    if ((fighter_gobj->anim_frame <= 0.0F) || (this_fp->command_vars.flags.flag0 != 0))
     {
-        Fighter_Struct *fp_catch = FighterGetStruct(fp->catch_gobj);
+        Fighter_Struct *catch_fp = FighterGetStruct(fp->catch_gobj);
 
-        fp_catch->status_vars.common.capturecaptain.capture_flag |= 0x2;
+        catch_fp->status_vars.common.capturecaptain.capture_flag |= FTCOMMON_CAPTURECAPTAIN_MASK_THROW;
 
         func_ovl2_801008F4(1); // Apply screen shake/rumble?
         func_ovl3_80160730(fighter_gobj);
@@ -53,16 +53,16 @@ void func_ovl3_80160370(GObj *fighter_gobj)
 void func_ovl3_801603F0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = AttributesGetStruct(fp);
+    ftCommonAttributes *attributes = AttributesGetStruct(fp);
 
     fp->phys_info.vel_air.x = fp->status_vars.captain.specialhi.vel.x;
     fp->phys_info.vel_air.y = fp->status_vars.captain.specialhi.vel.y;
     fp->phys_info.vel_air.z = 0.0F;
 
-    if (func_ovl2_800D8EDC(fp, common_attrs->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL) == FALSE)
+    if (func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTCAPTAIN_FALCONDIVE_AIR_ACCEL_MUL, common_attrs->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL);
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTCAPTAIN_FALCONDIVE_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL);
+        func_ovl2_800D9074(fp, attributes);
     }
     fp->status_vars.captain.specialhi.vel.x = fp->phys_info.vel_air.x;
     fp->status_vars.captain.specialhi.vel.y = fp->phys_info.vel_air.y;
@@ -143,7 +143,7 @@ void jtgt_ovl3_80160630(GObj *fighter_gobj)
 
 void func_ovl3_80160690(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj), *fp_catch;
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj), *catch_fp;
     GObj *search_gobj;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, 4U);
@@ -154,11 +154,11 @@ void func_ovl3_80160690(GObj *fighter_gobj)
     search_gobj = fp->search_gobj;
     fp->catch_gobj = search_gobj;
 
-    fp_catch = FighterGetStruct(search_gobj); // No NULL check, might be dangerous
+    catch_fp = FighterGetStruct(search_gobj); // No NULL check, might be dangerous
 
-    if (fp_catch->ground_or_air == air)
+    if (catch_fp->ground_or_air == air)
     {
-        fp->status_vars.common.capturecaptain.capture_flag |= 4;
+        fp->status_vars.common.capturecaptain.capture_flag |= FTCOMMON_CAPTURECAPTAIN_MASK_NOUPDATE;
         fp->x192_flag_b3 = FALSE;
     }
     else fp->x192_flag_b3 = TRUE;
@@ -183,7 +183,7 @@ void jtgt_ovl3_801607B4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = &func_ovl3_801605FC;
+    fp->cb_status = func_ovl3_801605FC;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, 0U);
     func_ovl3_80160280(fp);

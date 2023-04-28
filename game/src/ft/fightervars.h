@@ -244,6 +244,12 @@
 #define FTCOMMON_YOSHIEGG_ESCAPE_OFF_Y 10.0F
 #define FTCOMMON_YOSHIEGG_ESCAPE_VEL_Y 70.0F
 
+#define FTCOMMON_CAPTURECAPTAIN_MASK_THROW (1 << 1)
+#define FTCOMMON_CAPTURECAPTAIN_MASK_NOUPDATE (1 << 2) // No position adjustment? True only on grounded opponents?
+#define FTCOMMON_CAPTURECAPTAIN_JOINT 29
+#define FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN 4.0F
+#define FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED 0.0F
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -548,6 +554,19 @@ typedef struct ftCommon_CaptureCaptain_StatusVars
 
 } ftCommon_CaptureCaptain_StatusVars;
 
+typedef struct ftCommon_ThrowF_StatusVars // Cargo Throw
+{
+    union
+    {
+        f32 landing_anim_frame;
+        f32 jump_force;
+    };
+    f32 kneebend_anim_frame;
+    s32 input_source;
+    bool32 is_short_hop;
+
+} ftCommon_ThrowF_StatusVars;
+
 typedef union ftCommon_StatusVars
 {
     ftCommon_Dead_StatusVars dead;
@@ -583,6 +602,7 @@ typedef union ftCommon_StatusVars
     ftCommon_CaptureKirby_StatusVars capturekirby;
     ftCommon_CaptureYoshi_StatusVars captureyoshi;
     ftCommon_CaptureCaptain_StatusVars capturecaptain;
+    ftCommon_ThrowF_StatusVars throwf;
 
 } ftCommon_StatusVars;
 

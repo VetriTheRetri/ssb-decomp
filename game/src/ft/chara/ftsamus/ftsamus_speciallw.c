@@ -43,11 +43,11 @@ void func_ovl3_8015DFBC(GObj *fighter_gobj)
 void func_ovl3_8015DFE4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->command_vars.flags.flag3 != FALSE)
     {
-        func_ovl2_800D8ADC(fp, common_attrs->walk_speed_mul * FTSAMUS_BOMB_DRIFT, common_attrs->traction);
+        func_ovl2_800D8ADC(fp, attributes->walk_speed_mul * FTSAMUS_BOMB_DRIFT, attributes->traction);
         func_ovl2_800D87D0(fighter_gobj);
     }
     else func_ovl2_800D8BB4(fighter_gobj);
@@ -56,14 +56,14 @@ void func_ovl3_8015DFE4(GObj *fighter_gobj)
 void func_ovl3_8015E050(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl2_800D8E50(fp, common_attrs);
+    func_ovl2_800D8E50(fp, attributes);
 
-    if (func_ovl2_800D8EDC(fp, common_attrs->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT) == FALSE)
+    if (func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTSAMUS_BOMB_DRIFT, common_attrs->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTSAMUS_BOMB_DRIFT, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 
@@ -90,13 +90,13 @@ void func_ovl3_8015E130(GObj *fighter_gobj)
 void func_ovl3_8015E170(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800DEEC8(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
 
     fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE;
-    fp->jumps_used = common_attrs->jumps_max;
+    fp->jumps_used = attributes->jumps_max;
 }
 
 void func_ovl3_8015E1DC(GObj *fighter_gobj)
@@ -126,7 +126,7 @@ void jtgt_ovl3_8015E220(GObj *fighter_gobj)
 void jtgt_ovl3_8015E274(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -134,9 +134,9 @@ void jtgt_ovl3_8015E274(GObj *fighter_gobj)
 
     fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE - FTSAMUS_BOMB_VEL_Y_SUB;
 
-    func_ovl2_800D8E78(fp, common_attrs->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
+    func_ovl2_800D8E78(fp, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
 
-    fp->jumps_used = common_attrs->jumps_max; // Why tho
+    fp->jumps_used = attributes->jumps_max; // Why tho
 
     fp->status_vars.samus.speciallw.unused = TRUE;
 }

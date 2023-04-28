@@ -222,9 +222,9 @@ void func_ovl3_80164064(GObj *fighter_gobj)
 
     if (func_ovl2_800D8FA8(fp, fp->attributes) == FALSE)
     {
-        ftCommonAttributes *common_attrs = fp->attributes;
+        ftCommonAttributes *attributes = fp->attributes;
 
-        func_ovl2_800D8FC8(fp, 8, common_attrs->aerial_acceleration * FTLINK_SPIN_ATTACK_AIR_DRIFT_MUL, common_attrs->aerial_speed_max_x);
+        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTLINK_SPIN_ATTACK_AIR_DRIFT_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, fp->attributes);
     }
 }

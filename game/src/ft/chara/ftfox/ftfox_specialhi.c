@@ -15,7 +15,7 @@ void func_ovl3_8015BD24(GObj *fighter_gobj)
 void func_ovl3_8015BD48(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->status_vars.fox.specialhi.gravity_delay != 0)
     {
@@ -23,12 +23,12 @@ void func_ovl3_8015BD48(GObj *fighter_gobj)
     }
     else
     {
-        func_ovl2_800D8D68(fp, 0.5F, common_attrs->fall_speed_max);
+        func_ovl2_800D8D68(fp, 0.5F, attributes->fall_speed_max);
     }
 
-    if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D9074(fp, common_attrs);
+        func_ovl2_800D9074(fp, attributes);
     }
 }
 
@@ -251,12 +251,12 @@ void func_ovl3_8015C29C(GObj *fighter_gobj)
 void func_ovl3_8015C46C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800DEEC8(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 2U);
 
-    fp->jumps_used = common_attrs->jumps_max;
+    fp->jumps_used = attributes->jumps_max;
 }
 
 void func_ovl3_8015C4C8(Fighter_Struct *fp)
@@ -324,7 +324,7 @@ void func_ovl3_8015C4DC(GObj *fighter_gobj)
 void func_ovl3_8015C60C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
     s32 stick_x;
     s32 stick_y;
     s32 stick_x_2;
@@ -361,7 +361,7 @@ void func_ovl3_8015C60C(GObj *fighter_gobj)
 
     func_ovl3_8015C054(fighter_gobj);
 
-    fp->jumps_used = common_attrs->jumps_max;
+    fp->jumps_used = attributes->jumps_max;
 }
 
 void func_ovl3_8015C750(GObj *fighter_gobj)
@@ -421,15 +421,15 @@ void func_ovl3_8015C8BC(GObj* fighter_gobj)
 void func_ovl3_8015C97C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->ground_or_air == air)
     {
         jtgt_ovl2_800D9414(fighter_gobj);
 
-        if (func_ovl2_800D8FA8(fp, common_attrs) == FALSE)
+        if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            func_ovl2_800D9074(fp, common_attrs);
+            func_ovl2_800D9074(fp, attributes);
         }
     }
     else func_ovl2_800D8BB4(fighter_gobj);

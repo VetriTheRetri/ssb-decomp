@@ -5,13 +5,12 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftkirby",
-    "\\game\\src\\ft\\common",
-    "\\game\\src\\it",
-    "\\game\\src\\it\\article",
-    "\\game\\src\\it\\item",
-    "\\game\\src\\mp"
+    "\\game\\src\\ft\\chara\\ftdonkey",
+    "\\game\\src\\ft\\chara\\ftpikachu",
+    "\\game\\src\\ft\\chara\\ftpurin",
+    "\\game\\src\\ft\\chara\\ftyoshi",
+    "\\game\\src\\ft\\common"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_capturekirby.c",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_kneebend_jump.c",
   "PreviewInSolutionExplorer": false
 }

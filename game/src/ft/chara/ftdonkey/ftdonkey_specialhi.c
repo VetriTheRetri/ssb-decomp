@@ -25,11 +25,11 @@ void func_ovl3_8015B780(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     f32 gravity_mul = (fp->command_vars.flags.flag1 != 0U) ? FTDONKEY_SPINNINGKONG_END_GRAVITY_MUL : FTDONKEY_SPINNINGKONG_START_GRAVITY_MUL;
 
-    func_ovl2_800D8D68(fp, common_attrs->gravity * gravity_mul, common_attrs->fall_speed_max);
+    func_ovl2_800D8D68(fp, attributes->gravity * gravity_mul, attributes->fall_speed_max);
 
     func_ovl2_800D8FC8(fp, 0, FTDONKEY_SPINNINGKONG_AIR_ACCEL, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
 }
@@ -65,14 +65,14 @@ void func_ovl3_8015B898(GObj *fighter_gobj)
 void func_ovl3_8015B8E8(GObj *fighter_gobj, bool32 stale_unk)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftCommonAttributes *attributes = fp->attributes;
 
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
     func_ovl2_800D8E78(fp, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
 
-    fp->jumps_used = common_attrs->jumps_max;
+    fp->jumps_used = attributes->jumps_max;
 
     fp->command_vars.flags.flag1 = 0;
 

@@ -903,8 +903,8 @@ struct Fighter_Struct
         u16 button_mask_z;
         u16 button_mask_l;
         u16 button_hold;
-        u16 button_press;
-        u16 button_mask_c; // Unconfirmed
+        u16 button_tap;
+        u16 button_tap_prev; // Previous button tap?
         Vec2b stick_range;
         Vec2b stick_prev;  // Previous stick range?
         u16 button_mask_com;
