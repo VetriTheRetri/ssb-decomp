@@ -117,7 +117,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_cb_
     {
         knockback_final = 0.0F;
     }
-    damage = func_ovl2_800EA54C(capture_fp->port_id, ft_throw->damage, capture_fp->attack_id, capture_fp->attack_flags.hi.halfword);
+    damage = func_ovl2_800EA54C(capture_fp->port_id, ft_throw->damage, capture_fp->attack_id, capture_fp->flags_hi.halfword);
 
     if (capture_fp->x192_flag_b5)
     {
@@ -132,13 +132,13 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_cb_
         this_fp->cb_status = func_ovl3_8014AF98;
     }
     func_ovl3_80140EE4(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, ft_throw->element, capture_fp->player_number, TRUE, TRUE, TRUE);
-    func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->attack_flags.lw.halfword, capture_fp->unk_0x290.halfword);
+    func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->flags_lw.halfword, capture_fp->unk_0x290.halfword);
 
     if (damage != 0)
     {
         func_ovl2_800EA248(this_fp, damage);
         func_ovl2_800EA98C(capture_fp->port_id, this_fp->port_id, damage);
-        func_ovl2_800EA614(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->attack_flags.hi.halfword);
+        func_ovl2_800EA614(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->flags_hi.halfword);
 
         if ((s32) ((damage * 0.75F) + 4.0F) > 0)
         {

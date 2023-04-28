@@ -166,3 +166,29 @@ bool32 func_ovl3_80149E24(GObj *fighter_gobj)
     }
     else return FALSE;
 }
+
+void func_ovl3_8014E91C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->status_vars.common.attack1.interrupt_catch_timer < FTCOMMON_ATTACK1_INTERRUPT_CATCH_FRAMES_MAX)
+    {
+        fp->status_vars.common.attack1.interrupt_catch_timer++;
+
+        if (func_ovl3_80149E24(fighter_gobj) != FALSE)
+        {
+            return;
+        }
+    }
+    if (func_ovl3_8014F4EC(fighter_gobj) == FALSE)
+    {
+        if ((fp->ft_kind == Ft_Kind_Pikachu) || (fp->ft_kind == Ft_Kind_PolyPikachu))
+        {
+            if (func_ovl3_8014EEC0(fighter_gobj) != FALSE)
+            {
+                return;
+            }
+        }
+        else func_ovl3_8014EF50(fighter_gobj);
+    }
+}

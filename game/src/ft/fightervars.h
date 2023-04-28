@@ -257,6 +257,10 @@
 #define FTCOMMON_THROWFF_TURN_STICK_RANGE_MIN 20
 #define FTCOMMON_THROWFF_TURN_FRAMES 6
 
+#define FTCOMMON_ATTACK1_INTERRUPT_CATCH_FRAMES_MAX 2
+
+#define FTCOMMON_ATTACK1_FOLLOWUP_FRAMES_DEFAULT 24.0F
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -594,6 +598,13 @@ typedef struct ftCommon_ThrowFCut_StatusVars
 
 } ftCommon_ThrowFDamage_StatusVars;
 
+typedef struct ftCommon_Attack1_StatusVars
+{
+    bool32 is_goto_followup;
+    s32 interrupt_catch_timer; // Jab-Grab window
+
+} ftCommon_Attack1_StatusVars;
+
 typedef union ftCommon_StatusVars
 {
     ftCommon_Dead_StatusVars dead;
@@ -632,6 +643,7 @@ typedef union ftCommon_StatusVars
     ftCommon_ThrowF_StatusVars throwf;
     ftCommon_ThrowFF_StatusVars throwff;
     ftCommon_ThrowFDamage_StatusVars throwfdamage;
+    ftCommon_Attack1_StatusVars attack1;
 
 } ftCommon_StatusVars;
 

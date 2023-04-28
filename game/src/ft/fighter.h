@@ -80,7 +80,7 @@ typedef struct ftCommonAttributes
     f32 fast_fall_speed;
     s32 jumps_max; // Number of jumps
     f32 weight;
-    f32 attack11_follow_window; // Jab combo connection frames
+    f32 attack1_followup_frames; // Jab combo connection frames
     f32 dash_to_run; // Frames before dash transitions to run?
     f32 shield_size;
     f32 shield_break_vel_y;
@@ -728,12 +728,13 @@ struct Fighter_Struct
     } phys_info;
 
     Coll_Data coll_data;
-    u8 jumps_used;
 
+    u8 jumps_used;
     Ground_Air ground_or_air;
 
-    f32 unk_0x150;
-    u8 filler_0x154[0x15C - 0x154];
+    f32 attack1_followup_frames;
+    s32 attack1_status_id;
+    s32 unk_ft_0x158;
     s32 cliffcatch_wait;
     s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
     s32 timer_unk3;
@@ -778,7 +779,7 @@ struct Fighter_Struct
     s32 lr_reflect : 2;
     u32 is_absorb : 1;
     s32 lr_absorb : 2;
-    u32 x18D_flag_b3 : 1;
+    u32 is_goto_attack100 : 1;
     u32 is_fast_fall : 1;
     u32 x18D_flag_b5 : 1;
     u32 is_check_blastzone : 1;
@@ -802,50 +803,33 @@ struct Fighter_Struct
     u32 x18F_flag_b6 : 1;
     u32 is_hitstun : 1;
 
-    union
-    {
-        struct
-        {
-            u8 x190_flag_b012 : 3;
-            u8 x190_flag_b3 : 1;
-            u8 x190_flag_b4 : 1;
-            u8 x190_flag_b5 : 1;
-            u8 x190_flag_b6 : 1;
-            u8 x190_flag_b7 : 1;
-            u8 x191_flag_b0 : 1;
-            u8 is_ignore_blastzone_top : 1;
-            u8 is_damage_resist : 1;
-            u8 x191_flag_b3 : 1;
-            u8 x191_flag_b4567 : 4;
-        };
-        struct
-        {
-            s8 x190_sbyte;
-            s8 x191_sbyte;
-        };
-        struct
-        {
-            u16 x190_halfword;
-        };
-    };
-
-    u8 x192_flag_b0 : 1;
-    u8 x192_flag_b1 : 1;
-    u8 x192_flag_b2 : 1;
-    u8 x192_flag_b3 : 1;
-    u8 x192_flag_b4 : 1;
-    u8 x192_flag_b5 : 1;
-    u8 x192_flag_b6 : 1;
-    u8 x192_flag_b7 : 1;
-
-    u8 x193_flag_b0 : 1;
-    u8 x193_flag_b1 : 1;
-    u8 x193_flag_b2 : 1;
-    u8 x193_flag_b3 : 1;
-    u8 x193_flag_b4 : 1;
-    u8 x193_flag_b5 : 1;
-    u8 x193_flag_b6 : 1;
-    u8 x193_flag_b7 : 1;
+    u32 x190_flag_b012 : 3;
+    u32 x190_flag_b3 : 1;
+    u32 x190_flag_b4 : 1;
+    u32 x190_flag_b5 : 1;
+    u32 x190_flag_b6 : 1;
+    u32 x190_flag_b7 : 1;
+    u32 x191_flag_b0 : 1;
+    u32 is_ignore_blastzone_top : 1;
+    u32 is_damage_resist : 1;
+    u32 x191_flag_b3 : 1;
+    u32 x191_flag_b4567 : 4;
+    u32 x192_flag_b0 : 1;
+    u32 x192_flag_b1 : 1;
+    u32 x192_flag_b2 : 1;
+    u32 x192_flag_b3 : 1;
+    u32 x192_flag_b4 : 1;
+    u32 x192_flag_b5 : 1;
+    u32 x192_flag_b6 : 1;
+    u32 x192_flag_b7 : 1;
+    u32 x193_flag_b0 : 1;
+    u32 x193_flag_b1 : 1;
+    u32 x193_flag_b2 : 1;
+    u32 x193_flag_b3 : 1;
+    u32 x193_flag_b4 : 1;
+    u32 x193_flag_b5 : 1;
+    u32 x193_flag_b6 : 1;
+    u32 x193_flag_b7 : 1;
 
     u32 unk_0x194;
     union

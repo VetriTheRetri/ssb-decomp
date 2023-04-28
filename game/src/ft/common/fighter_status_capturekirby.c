@@ -406,7 +406,7 @@ void func_ovl3_8014C424(GObj *fighter_gobj)
         func_ovl3_8014ADB0(fighter_gobj);
         func_ovl2_800E8098(this_fp, 0U);
         func_ovl2_800E8098(capture_fp, 0U);
-        func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->attack_flags.lw.halfword, capture_fp->unk_0x290.halfword);
+        func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->flags_lw.halfword, capture_fp->unk_0x290.halfword);
 
         this_fp->capture_gobj = NULL;
         this_fp->catch_gobj = NULL;
