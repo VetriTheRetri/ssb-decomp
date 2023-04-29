@@ -166,19 +166,19 @@ typedef struct ftDataUnkContainer3
 
 } ftDataUnkContainer3;
 
-typedef struct ftDataUnkContainer2
+typedef struct ftScriptInfo
 {
-    s32 unk_0x0;
-    s32 unk_0x4;
-    s32 unk_0x8;
+    s32 unk_script_index;
+    intptr_t offset;
+    FighterAnimFlags anim_flags;
 
-} ftDataUnkContainer2;
+} ftScriptInfo;
 
-typedef struct ftDataUnkContainer
+typedef struct ftScriptInfoArray
 {
-    ftDataUnkContainer2 unk_0x0[1];
+    ftScriptInfo script_info[220]; // Array size = last animation ID?
 
-} ftDataUnkContainer;
+} ftScriptInfoArray;
 
 typedef struct ftData
 {
@@ -186,10 +186,10 @@ typedef struct ftData
     ftDataUnkContainer3 *unk_0x2C;
     ftDataUnkContainer3 *unk_0x30;
     s32 unk_0x34;
-    s32 unk_0x38;
+    void *unk_0x38;
     u8 filler_0x3C[0x64 - 0x3C];
-    ftDataUnkContainer *unk_0x64;
-    ftDataUnkContainer *unk_0x68;
+    ftScriptInfoArray *script1;
+    ftScriptInfoArray *script2;
 
 } ftData;
 
@@ -478,6 +478,50 @@ typedef struct FighterHitVictimFlags
     u32 timer_rehit : 6;
 
 } FighterHitVictimFlags;
+
+typedef struct FighterAnimFlags
+{
+    union
+    {
+        struct
+        {
+            u32 is_use_xrotn : 1;
+            u32 is_use_transn : 1;
+            u32 is_use_yrotn : 1;
+            u32 x198_flag_b3 : 1;
+            u32 x198_flag_b4 : 1;
+            u32 x198_flag_b5 : 1;
+            u32 x198_flag_b6 : 1;
+            u32 x198_flag_b7 : 1;
+            u32 x199_flag_b0 : 1;
+            u32 x199_flag_b1 : 1;
+            u32 x199_flag_b2 : 1;
+            u32 x199_flag_b3 : 1;
+            u32 x199_flag_b4 : 1;
+            u32 x199_flag_b5 : 1;
+            u32 x199_flag_b6 : 1;
+            u32 x199_flag_b7 : 1;
+            u32 x19A_flag_b0 : 1;
+            u32 x19A_flag_b1 : 1;
+            u32 x19A_flag_b2 : 1;
+            u32 x19A_flag_b3 : 1;
+            u32 x19A_flag_b4 : 1;
+            u32 x19A_flag_b5 : 1;
+            u32 x19A_flag_b6 : 1;
+            u32 x19A_flag_b7 : 1;
+            u32 x19B_flag_b0 : 1;
+            u32 x19B_flag_b1 : 1;
+            u32 x19B_flag_b2 : 1;
+            u32 x19B_flag_b3 : 1;
+            u32 x19B_flag_b4 : 1;
+            u32 x19B_flag_b5 : 1;
+            u32 x19B_flag_b6 : 1;
+            u32 x19B_flag_b7 : 1;
+        };
+        u32 flags;
+    };
+
+} FighterAnimFlags;
 
 typedef struct FighterHitArray
 {

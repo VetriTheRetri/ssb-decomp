@@ -19,7 +19,7 @@
 #define ITEM_PORT_DEFAULT 4U
 #define ITEM_UNK_DEFAULT 9U                     // CPU level?
 
-#define ITEM_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
+#define ITEM_FLAG_PROJECT (1U << 31)            // Perform initial collision check when spawning item?
 
 #define ITEM_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
 #define ITEM_MASK_SPAWN_GROUND 1                // Item spawned by stage
@@ -39,15 +39,6 @@
 #define ITEM_STALE_ADD_DEFAULT 0.999F           // Bonus 1% added after multiplying hitbox damage with staling modifier
 
 #define ITEM_DEFLECT_ANGLE_DEFAULT 2.3561945F   // Determines whether item bounces off a shield
-
-typedef enum It_Spawn
-{
-    It_Spawn_Fighter,
-    It_Spawn_Default,
-    It_Spawn_Item,
-    It_Spawn_Article                            // Spawned by Pokémon / miscellaneous entity class?
-
-} It_Spawn;
 
 typedef enum It_Kind
 {
@@ -97,24 +88,24 @@ typedef struct ItemHitDesc // Moreso hitbox stuff
     s16 objectcoll_width;
     u16 size;
     s32 angle : 10;
-    u32 knockback_scale : 10U;
-    u32 damage : 8U;
-    u32 element : 4U;
-    u32 knockback_weight : 10U;
-    s32 shield_damage : 8U;
-    u32 hitbox_count : 2U;
-    u32 clang : 1U;
-    u32 sfx : 10U;
-    u32 priority : 3U;
-    u32 flags_0x2F_b0 : 1U;
-    u32 flags_0x2F_b1 : 1U;
-    u32 can_deflect : 1U;
-    u32 can_reflect : 1U;
-    u32 can_absorb : 1U;
-    u32 can_shield : 1U;
-    u32 flags_0x2F_b6 : 1U;
-    u32 flags_0x2F_b7 : 1U;
-    u32 knockback_base : 10U;
+    u32 knockback_scale : 10;
+    u32 damage : 8;
+    u32 element : 4;
+    u32 knockback_weight : 10;
+    s32 shield_damage : 8;
+    u32 hitbox_count : 2;
+    u32 clang : 1;
+    u32 sfx : 10;
+    u32 priority : 3;
+    u32 flags_0x2F_b0 : 1;
+    u32 flags_0x2F_b1 : 1;
+    u32 can_deflect : 1;
+    u32 can_reflect : 1;
+    u32 can_absorb : 1;
+    u32 can_shield : 1;
+    u32 flags_0x2F_b6 : 1;
+    u32 flags_0x2F_b7 : 1;
+    u32 knockback_base : 10;
 
 } ItemHitDesc;
 

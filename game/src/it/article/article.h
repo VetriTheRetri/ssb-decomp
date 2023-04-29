@@ -13,7 +13,7 @@
 
 #define ARTICLE_ALLOC_MAX 16
 
-#define ARTICLE_FLAG_PROJECT 0x80000000            // Perform initial collision check when spawning item?
+#define ARTICLE_FLAG_PROJECT (1U << 31)            // Perform initial collision check when spawning item?
 
 #define ARTICLE_MASK_SPAWN_FIGHTER 0               // Article spawned by fighter
 #define ARTICLE_MASK_SPAWN_GROUND 1                // Article spawned by stage 
@@ -125,7 +125,7 @@ typedef enum atType
     At_Type_Swing, // Article can be thrown and swung
     At_Type_Shoot, // Article can be fired
     At_Type_Throw, // Article can only be thrown
-    At_Type_Unk2,
+    At_Type_Unk2,  // Pokémon?
     At_Type_Unk3,
     At_Type_FtItem // Article spawned by fighter's item (projectile) ?
 
