@@ -15,7 +15,7 @@ extern void *D_ovl3_8018D044;
 
 extern s32 dbObjDisplayStatus_Global_Article;
 
-void func_ovl3_8016DEA0(void)
+void func_ovl3_8016DEA0(void) // Many linker things here
 {
     Article_Struct *ap;
     s32 i;

@@ -605,6 +605,13 @@ typedef struct ftCommon_Attack1_StatusVars
 
 } ftCommon_Attack1_StatusVars;
 
+typedef struct ftCommon_Attack100_StatusVars
+{
+    bool32 is_anim_end;
+    bool32 is_goto_loop;
+
+} ftCommon_Attack100_StatusVars;
+
 typedef union ftCommon_StatusVars
 {
     ftCommon_Dead_StatusVars dead;
@@ -644,6 +651,7 @@ typedef union ftCommon_StatusVars
     ftCommon_ThrowFF_StatusVars throwff;
     ftCommon_ThrowFDamage_StatusVars throwfdamage;
     ftCommon_Attack1_StatusVars attack1;
+    ftCommon_Attack100_StatusVars attack100;
 
 } ftCommon_StatusVars;
 

@@ -105,8 +105,8 @@ typedef struct ftCommonAttributes
     u16 unk_0xEA;
     s32 unk_0xEC;
     u8 filler_0xEC[0x100 - 0xF0];
-    u32 catch_flags_b0 : 1;
-    u32 catch_flags_b1 : 1;
+    u32 is_have_attack11 : 1;
+    u32 is_have_attack12 : 1;
     u32 catch_flags_b2 : 1;
     u32 catch_flags_b3 : 1;
     u32 catch_flags_b4 : 1;
@@ -115,16 +115,16 @@ typedef struct ftCommonAttributes
     u32 catch_flags_b7 : 1;
     u32 catch_flags_b8 : 1;
     u32 catch_flags_b9 : 1;
-    u32 catch_flags_b10 : 1;
-    u32 catch_flags_b11 : 1;
-    u32 catch_flags_b12 : 1;
-    u32 catch_flags_b13 : 1;
-    u32 catch_flags_b14 : 1;
-    u32 catch_flags_b15 : 1;
-    u32 catch_flags_b16 : 1;
-    u32 catch_flags_b17 : 1;
-    u32 catch_flags_b18 : 1;
-    u32 catch_flags_b19 : 1;
+    u32 is_have_attack120 : 1;
+    u32 is_have_attack121 : 1;
+    u32 is_have_attack122 : 1;
+    u32 is_have_attack123 : 1;
+    u32 is_have_attack124 : 1;
+    u32 is_have_attack125 : 1;
+    u32 is_have_attack126 : 1;
+    u32 is_have_attack127 : 1;
+    u32 is_have_attack128 : 1;
+    u32 is_have_attack129 : 1;
     u32 is_have_catch : 1;   // Whether fighter has a grab
     u32 catch_flags_b21 : 1;
     u32 catch_flags_b22 : 1;
@@ -684,7 +684,7 @@ typedef struct Fighter_Com
 
 struct Fighter_Struct
 {
-    GObj *next_fighter;
+    void *fp_alloc_next;
     GObj *this_fighter;
     ftKind ft_kind;
     u8 team;
@@ -734,7 +734,7 @@ struct Fighter_Struct
 
     f32 attack1_followup_frames;
     s32 attack1_status_id;
-    s32 unk_ft_0x158;
+    s32 attack1_followup_count;
     s32 cliffcatch_wait;
     s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
     s32 timer_unk3;

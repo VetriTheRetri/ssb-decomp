@@ -165,23 +165,6 @@ typedef enum ftKirbyAction
 
 } ftKirbyAction;
 
-typedef enum ftKirbyCopy // Appears to be unnecessary since these IDs are identical to the ftKind enum
-{
-    ftKirby_CopyKind_Mario,
-    ftKirby_CopyKind_Fox,
-    ftKirby_CopyKind_Donkey,
-    ftKirby_CopyKind_Samus,
-    ftKirby_CopyKind_Luigi,
-    ftKirby_CopyKind_Link,
-    ftKirby_CopyKind_Yoshi,
-    ftKirby_CopyKind_Captain,
-    ftKirby_CopyKind_Kirby,
-    ftKirby_CopyKind_Pikachu,
-    ftKirby_CopyKind_Purin,
-    ftKirby_CopyKind_Ness
-
-} ftKirbyCopy;
-
 typedef struct ftKirbyCopyData
 {
     u16 copy_id;
@@ -190,5 +173,12 @@ typedef struct ftKirbyCopyData
     s32 star_damage;
 
 } ftKirbyCopyData;
+
+typedef struct ftKirbyAttack100Gfx
+{
+    Vec3f offset;
+    Vec3f vel;
+
+} ftKirbyAttack100Gfx;
 
 #endif
