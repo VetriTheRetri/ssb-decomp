@@ -476,7 +476,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
         if (ip->lr == WALL_UP)
         {
-            if (coll_type == 0)
+            if (coll_type == At_Type_Ground)
             {
                 ip->coll_data.ground_line_id = line_id;
                 ip->item_vars.thunder_jolt.coll_type = coll_type;
@@ -487,7 +487,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
                 return func_ovl3_80169BF0(item_gobj);
             }
         }
-        else if (coll_type == 0)
+        else if (coll_type == At_Type_Ground)
         {
             ip->coll_data.ground_line_id = line_id;
             ip->item_vars.thunder_jolt.coll_type = coll_type;
@@ -548,7 +548,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
         if (ip->lr == WALL_UP)
         {
-            if (coll_type == 0)
+            if (coll_type == At_Type_Ground)
             {
                 ip->coll_data.ground_line_id = line_id;
                 ip->item_vars.thunder_jolt.coll_type = coll_type;
@@ -559,7 +559,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
                 return func_ovl3_80169BF0(item_gobj);
             }
         }
-        else if (coll_type == 0)
+        else if (coll_type == At_Type_Ground)
         {
             ip->coll_data.ground_line_id = line_id;
             ip->item_vars.thunder_jolt.coll_type = coll_type;

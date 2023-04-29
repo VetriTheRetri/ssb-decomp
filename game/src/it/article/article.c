@@ -140,7 +140,7 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->article_gobj = article_gobj;
     ap->owner_gobj = NULL;
     ap->at_kind = spawn_data->at_kind;
-    ap->unk_0x10 = attributes->unk_atca_0x3C_b3;
+    ap->type = attributes->type;
     ap->phys_info.vel = *vel;
     ap->phys_info.vel_ground = 0.0F;
     ap->attributes = attributes;
@@ -1073,7 +1073,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
     damage = func_ovl3_801727F4(attack_ap);
 
-    unk_bool = (((defend_ap->unk_0x10 == 0) && (attack_at_hit->flags_0x4C_b1)) ? TRUE : FALSE);
+    unk_bool = (((defend_ap->type == At_Type_Ground) && (attack_at_hit->flags_0x4C_b1)) ? TRUE : FALSE);
 
     func_ovl3_8016F930(attack_at_hit, defend_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_ArticleHurt : gmHitCollision_Type_Hurt), 0);
 
@@ -1177,7 +1177,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
 
     damage = func_ovl3_80168128(ip);
 
-    unk_bool = ((ap->unk_0x10 == 0) && (it_hit->flags_0x48_b1)) ? TRUE : FALSE;
+    unk_bool = ((ap->type == At_Type_Ground) && (it_hit->flags_0x48_b1)) ? TRUE : FALSE;
 
     func_ovl3_8016679C(ip, it_hit, article_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_ArticleHurt : gmHitCollision_Type_Hurt), 0);
 

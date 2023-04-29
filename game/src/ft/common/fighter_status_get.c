@@ -91,7 +91,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        if (ap->unk_0x10 == 5)
+        if (ap->type == 5)
         {
             switch (ap->at_kind)
             {
@@ -180,7 +180,7 @@ void func_ovl3_80145D70(GObj *fighter_gobj)
             {
                 Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-                if (ap->unk_0x10 == 5)
+                if (ap->type == 5)
                 {
                     func_ovl3_80145BE4(fighter_gobj);
 

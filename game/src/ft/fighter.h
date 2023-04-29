@@ -107,7 +107,7 @@ typedef struct ftCommonAttributes
     u8 filler_0xEC[0x100 - 0xF0];
     u32 is_have_attack11 : 1;
     u32 is_have_attack12 : 1;
-    u32 catch_flags_b2 : 1;
+    u32 is_have_attackdash : 1;
     u32 catch_flags_b3 : 1;
     u32 catch_flags_b4 : 1;
     u32 catch_flags_b5 : 1;

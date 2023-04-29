@@ -119,6 +119,18 @@ typedef enum atKind
 
 } atKind;
 
+typedef enum atType
+{
+    At_Type_Ground,// Article is spawned by the stage (?)
+    At_Type_Swing, // Article can be thrown and swung
+    At_Type_Shoot, // Article can be fired
+    At_Type_Throw, // Article can only be thrown
+    At_Type_Unk2,
+    At_Type_Unk3,
+    At_Type_FtItem // Article spawned by fighter's item (projectile) ?
+
+} atType; 
+
 typedef struct gmMonsterInfo
 {
     u8 monster_curr;
@@ -308,7 +320,7 @@ typedef struct atCommonAttributes
     u32 can_reflect : 1;
     u32 can_shield : 1;
     u32 knockback_base : 10;
-    u32 unk_atca_0x3C_b3 : 4;
+    u32 type : 4;
     u32 hit_status : 4;
     u32 unk_atca_0x3C_b6 : 1;
     u32 unk_atca_0x3C_b7 : 1;
@@ -326,7 +338,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     GObj *article_gobj;
     GObj *owner_gobj;
     atKind at_kind;
-    s32 unk_0x10;
+    s32 type;
     u8 team;
     u8 port_id;
     u8 unk_0x16;
@@ -336,7 +348,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u32 hitlag_timer;
     s32 lr;
 
-    struct
+    struct phys_info
     {
         f32 vel_ground;
         Vec3f vel;

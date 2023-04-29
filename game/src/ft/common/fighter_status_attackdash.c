@@ -15,13 +15,13 @@ bool32 func_ovl3_8014F69C(GObj *fighter_gobj)
     {
         if (fp->item_hold != NULL)
         {
-            if ((fp->input.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->unk_0x10 == 3))
+            if ((fp->input.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
             {
                 func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowDash);
 
                 return TRUE;
             }
-            if (ArticleGetStruct(fp->item_hold)->unk_0x10 == 1)
+            if (ArticleGetStruct(fp->item_hold)->type == At_Type_Swing)
             {
                 func_ovl3_80146E94(fighter_gobj, 3);
 

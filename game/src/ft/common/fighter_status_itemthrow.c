@@ -168,7 +168,7 @@ void func_ovl3_801466EC(GObj *fighter_gobj)
     {
         status_id = ftStatus_Common_LightThrowLw; 
     }
-    else status_id = (ArticleGetStruct(fp->item_hold)->unk_0x10 == 3) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowDrop; // No NULL check
+    else status_id = (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowDrop; // No NULL check
 
     func_ovl3_80146690(fighter_gobj, status_id);
 }
@@ -203,7 +203,7 @@ bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
     {
         if (fp->input.button_press & fp->input.button_mask_a)
         {
-            if ((fp->input.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->unk_0x10 == 3))
+            if ((fp->input.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
             {
                 return TRUE;
             }

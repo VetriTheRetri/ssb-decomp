@@ -214,7 +214,7 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
     {
         if (fp->item_hold != NULL)
         {
-            if (ArticleGetStruct(fp->item_hold)->unk_0x10 == 3)
+            if (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw)
             {
                 func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowF);
 
@@ -226,13 +226,13 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
 
                 return TRUE;
             }
-            switch (ArticleGetStruct(fp->item_hold)->unk_0x10)
+            switch (ArticleGetStruct(fp->item_hold)->type)
             {
-            case 1:
+            case At_Type_Swing:
                 func_ovl3_80146E94(fighter_gobj, 0);
                 return TRUE;
 
-            case 2:
+            case At_Type_Shoot:
                 func_ovl3_80147844(fighter_gobj);
                 return TRUE;
             }
