@@ -261,13 +261,31 @@
 
 #define FTCOMMON_ATTACK1_FOLLOWUP_FRAMES_DEFAULT 24.0F
 
+#define FTCOMMON_ATTACKS3_STICK_RANGE_MIN 20
 #define FTCOMMON_ATTACKS3_5ANGLE_HI_MIN 0.5235988F
 #define FTCOMMON_ATTACKS3_5ANGLE_HIS_MIN 0.17453294F
 #define FTCOMMON_ATTACKS3_5ANGLE_LW_MIN (-0.5235988F)
 #define FTCOMMON_ATTACKS3_5ANGLE_LWS_MIN (-0.17453294F)
-
 #define FTCOMMON_ATTACKS3_3ANGLE_HI_MIN 0.296706F
 #define FTCOMMON_ATTACKS3_3ANGLE_LW_MIN (-0.296706F)
+
+#define FTCOMMON_ATTACKHI3_STICK_RANGE_MIN 20
+
+#define FTCOMMON_ATTACKLW3_STICK_RANGE_MIN (-20)
+
+#define FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_ID_MAX 3
+#define FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_OFF_X 60.0F
+#define FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_OFF_Y 10.0F
+#define FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_OFF_Z 100.0F
+
+#define FTCOMMON_ATTACKS4_STICK_RANGE_MIN 56
+#define FTCOMMON_ATTACKS4_BUFFER_FRAMES_MAX 3
+#define FTCOMMON_ATTACKS4_5ANGLE_HI_MIN 0.36651915F
+#define FTCOMMON_ATTACKS4_5ANGLE_HIS_MIN 0.122173056F
+#define FTCOMMON_ATTACKS4_5ANGLE_LW_MIN (-0.36651915F)
+#define FTCOMMON_ATTACKS4_5ANGLE_LWS_MIN (-0.122173056F)
+#define FTCOMMON_ATTACKS4_3ANGLE_HI_MIN 0.296706F
+#define FTCOMMON_ATTACKS4_3ANGLE_LW_MIN (-0.296706F)
 
 typedef struct ftCommon_Filler
 {
@@ -620,6 +638,20 @@ typedef struct ftCommon_Attack100_StatusVars
 
 } ftCommon_Attack100_StatusVars;
 
+typedef struct ftCommon_AttackLw3_StatusVars
+{
+    bool32 is_goto_attacklw3; // Interrupt Down Tilt into self
+
+} ftCommon_AttackLw3_StatusVars;
+
+typedef struct ftCommon_AttackS4_StatusVars
+{
+    s32 gfx_id;
+    u8 filler_0x4[0x10 - 0x4];
+    s32 lr;
+
+} ftCommon_AttackS4_StatusVars;
+
 typedef union ftCommon_StatusVars
 {
     ftCommon_Dead_StatusVars dead;
@@ -660,6 +692,8 @@ typedef union ftCommon_StatusVars
     ftCommon_ThrowFDamage_StatusVars throwfdamage;
     ftCommon_Attack1_StatusVars attack1;
     ftCommon_Attack100_StatusVars attack100;
+    ftCommon_AttackLw3_StatusVars attacklw3;
+    ftCommon_AttackS4_StatusVars attacks4;
 
 } ftCommon_StatusVars;
 

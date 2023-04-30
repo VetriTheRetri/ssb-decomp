@@ -108,10 +108,10 @@ typedef struct ftCommonAttributes
     u32 is_have_attack11 : 1;
     u32 is_have_attack12 : 1;
     u32 is_have_attackdash : 1;
-    u32 catch_flags_b3 : 1;
-    u32 catch_flags_b4 : 1;
-    u32 catch_flags_b5 : 1;
-    u32 catch_flags_b6 : 1;
+    u32 is_have_attacks3 : 1;
+    u32 is_have_attackhi3 : 1;
+    u32 is_have_attacklw3 : 1;
+    u32 is_have_attacks4 : 1;
     u32 catch_flags_b7 : 1;
     u32 catch_flags_b8 : 1;
     u32 catch_flags_b9 : 1;
@@ -168,7 +168,7 @@ typedef struct ftDataUnkContainer3
 
 typedef struct ftScriptInfo
 {
-    s32 unk_script_index;
+    s32 anim_id;
     intptr_t offset;
     FighterAnimFlags anim_flags;
 
@@ -393,9 +393,9 @@ typedef enum ftCommonAction
     ftStatus_Common_AttackS3,
     ftStatus_Common_AttackS3LwS,
     ftStatus_Common_AttackS3Lw,
-    ftStatus_Common_AttackHi3HiS, // Forward-angled up tilt???
+    ftStatus_Common_AttackHi3F, // Forward-angled up tilt???
     ftStatus_Common_AttackHi3,
-    ftStatus_Common_AttackHi3LwS, // Unknown
+    ftStatus_Common_AttackHi3B, // Backward-angled up tilt???
     ftStatus_Common_AttackLw3,
     ftStatus_Common_AttackS4Hi,
     ftStatus_Common_AttackS4HiS,
@@ -750,7 +750,7 @@ struct Fighter_Struct
         s32 status_frame_curr; // 0x1C
         plKind pl_kind;
         s32 status_id;
-        s32 anim_id;
+        s32 script_id; // Index of animation + subaction script?
 
     } status_info;
 
