@@ -506,7 +506,7 @@ Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
     return NULL;
 }
 
-void func_ovl3_80132EC0() // Unused
+void func_ovl3_80132EC0(void) // Unused
 {
     return;
 }

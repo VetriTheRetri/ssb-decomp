@@ -4,11 +4,13 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftness",
     "\\game\\src\\ft\\common",
     "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\item"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_attackair.c",
+  "SelectedNode": "\\game\\src\\ft\\fighter_com.c",
   "PreviewInSolutionExplorer": false
 }

@@ -19,7 +19,7 @@ glabel D_ovl3_8018CFA4
     .space 4
 glabel D_ovl3_8018CFA8
     .space 4
-glabel D_ovl3_8018CFAC
+glabel ftPublicReact_Player_Number
     .space 4
 glabel D_ovl3_8018CFB0
     .space 4
