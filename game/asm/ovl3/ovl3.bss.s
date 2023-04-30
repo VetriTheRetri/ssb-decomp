@@ -9,7 +9,7 @@ glabel D_ovl3_8018CF90
     .space 4
 glabel D_ovl3_8018CF94
     .space 4
-glabel D_ovl3_8018CF98
+glabel ftPublicReact_Damage_Knockback
     .space 4
 glabel D_ovl3_8018CF9C
     .space 4

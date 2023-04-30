@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
+    "\\game\\asm\\ovl44",
+    "\\game\\asm\\ultra",
     "\\game\\src",
-    "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\ft\\common",
-    "\\game\\src\\gm",
-    "\\game\\src\\it",
-    "\\game\\src\\it\\item"
+    "\\game\\src\\ft\\chara\\ftkirby",
+    "\\game\\src\\ft\\chara\\ftlink",
+    "\\game\\src\\it\\item",
+    "\\game\\src\\ovl2"
   ],
-  "SelectedNode": "\\game\\src\\ft\\fighter_com.c",
+  "SelectedNode": "\\game\\src\\ovl2\\ovl2_file1.c",
   "PreviewInSolutionExplorer": false
 }
