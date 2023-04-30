@@ -12,11 +12,11 @@ void func_ovl3_8014FE40(GObj *fighter_gobj)
     case Ft_Kind_PolyPikachu:
         if ((fp->command_vars.flags.flag1 != 0) || (fp->command_vars.flags.flag2 != 0))
         {
-            fp->status_vars.common.attacks4.gfx_id += rand_u16_range((FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_ID_MAX - 1)) + 1;
+            fp->status_vars.common.attack4.gfx_id += rand_u16_range((FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_ID_MAX - 1)) + 1;
 
-            if (fp->status_vars.common.attacks4.gfx_id >= FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_ID_MAX)
+            if (fp->status_vars.common.attack4.gfx_id >= FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_ID_MAX)
             {
-                fp->status_vars.common.attacks4.gfx_id -= FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_ID_MAX;
+                fp->status_vars.common.attack4.gfx_id -= FTCOMMON_ATTACKS4_THUNDERSHOCK_GFX_ID_MAX;
             }
             if (fp->command_vars.flags.flag1 != 0)
             {
@@ -38,7 +38,7 @@ void func_ovl3_8014FE40(GObj *fighter_gobj)
             func_ovl2_800EDF24(fp->joint[11], &offset);
             func_ovl2_800EE018(fp->joint[0], &offset);
 
-            if (func_ovl2_801018A8(fighter_gobj, &offset, fp->status_vars.common.attacks4.gfx_id) != NULL)
+            if (func_ovl2_801018A8(fighter_gobj, &offset, fp->status_vars.common.attack4.gfx_id) != NULL)
             {
                 fp->is_statupdate_stop_gfx = TRUE;
             }
@@ -108,7 +108,7 @@ void func_ovl3_8014FFE0(GObj *fighter_gobj)
     {
     case Ft_Kind_Pikachu:
     case Ft_Kind_PolyPikachu:
-        fp->status_vars.common.attacks4.gfx_id = 0;
+        fp->status_vars.common.attack4.gfx_id = 0;
 
         fp->cb_hitlag_start = func_ovl2_800E9C8C;
         fp->cb_hitlag_end = func_ovl2_800E9CC4;
@@ -166,7 +166,7 @@ bool32 func_ovl3_8015030C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (((fp->input.stick_range.x * fp->status_vars.common.attacks4.lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.button_tap & fp->input.button_mask_a))
+    if (((fp->input.stick_range.x * fp->status_vars.common.attack4.lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.button_tap & fp->input.button_mask_a))
     {
         GObj *article_gobj = fp->item_hold;
 

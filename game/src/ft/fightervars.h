@@ -287,6 +287,20 @@
 #define FTCOMMON_ATTACKS4_3ANGLE_HI_MIN 0.296706F
 #define FTCOMMON_ATTACKS4_3ANGLE_LW_MIN (-0.296706F)
 
+#define FTCOMMON_ATTACKHI4_STICK_RANGE_MIN 53
+#define FTCOMMON_ATTACKHI4_BUFFER_FRAMES_MAX 4
+
+#define FTCOMMON_ATTACKLW4_STICK_RANGE_MIN (-53)
+#define FTCOMMON_ATTACKLW4_BUFFER_FRAMES_MAX 4
+
+#define FTCOMMON_ATTACKAIR_SMOOTH_LANDING_BUFFER_FRAMES_MAX 10
+#define FTCOMMON_ATTACKAIR_SKIP_LANDING_VEL_Y_MAX (-20.0F)
+
+#define FTCOMMON_ATTACKAIRLW_LINK_REHIT_TIMER 30
+#define FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_BEGIN 35.0F
+#define FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_END 65.0F
+#define FTCOMMON_ATTACKAIRLW_LINK_REHIT_BOUNCE_VEL_Y 40.0F
+
 typedef struct ftCommon_Filler
 {
     u8 filler[0xB4C - 0xB18];
@@ -644,13 +658,21 @@ typedef struct ftCommon_AttackLw3_StatusVars
 
 } ftCommon_AttackLw3_StatusVars;
 
-typedef struct ftCommon_AttackS4_StatusVars
+typedef struct ftCommon_Attack4_StatusVars
 {
     s32 gfx_id;
-    u8 filler_0x4[0x10 - 0x4];
+    s32 unk_0x4;
+    bool32 is_goto_attacklw4;
+    s32 unk_0xC;
     s32 lr;
 
-} ftCommon_AttackS4_StatusVars;
+} ftCommon_Attack4_StatusVars;
+
+typedef struct ftCommon_AttackAir_StatusVars
+{
+    s32 rehit_timer;
+
+} ftCommon_AttackAir_StatusVars;
 
 typedef union ftCommon_StatusVars
 {
@@ -693,7 +715,8 @@ typedef union ftCommon_StatusVars
     ftCommon_Attack1_StatusVars attack1;
     ftCommon_Attack100_StatusVars attack100;
     ftCommon_AttackLw3_StatusVars attacklw3;
-    ftCommon_AttackS4_StatusVars attacks4;
+    ftCommon_Attack4_StatusVars attack4;
+    ftCommon_AttackAir_StatusVars attackair;
 
 } ftCommon_StatusVars;
 

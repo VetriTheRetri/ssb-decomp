@@ -112,8 +112,8 @@ typedef struct ftCommonAttributes
     u32 is_have_attackhi3 : 1;
     u32 is_have_attacklw3 : 1;
     u32 is_have_attacks4 : 1;
-    u32 catch_flags_b7 : 1;
-    u32 catch_flags_b8 : 1;
+    u32 is_have_attackhi4 : 1;
+    u32 is_have_attacklw4 : 1;
     u32 catch_flags_b9 : 1;
     u32 is_have_attack120 : 1;
     u32 is_have_attack121 : 1;
