@@ -91,7 +91,7 @@ void ftNess_SpecialN_SetStatusFlags(GObj *fighter_gobj)
 }
 
 // 0x80153BD0
-void ftNess_SpecialN_ApplyStatusGround(GObj *fighter_gobj) // Aerial PK Fire collision callback
+void ftNess_SpecialN_ProcStatus(GObj *fighter_gobj) // Aerial PK Fire collision callback
 {
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
@@ -99,7 +99,7 @@ void ftNess_SpecialN_ApplyStatusGround(GObj *fighter_gobj) // Aerial PK Fire col
 }
 
 // 0x80153C10
-void ftNess_SpecialAirN_ApplyStatusAir(GObj *fighter_gobj) // Grounded PK Fire collision callback
+void ftNess_SpecialAirN_ProcStatus(GObj *fighter_gobj) // Grounded PK Fire collision callback
 {
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);

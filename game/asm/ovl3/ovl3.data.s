@@ -1329,7 +1329,7 @@ glabel Fighter_ThrowF_Catch_Release
 glabel Fighter_Shouldered_Capture_Release
   .incbin "ovl3.raw.bin", 0x56F40, 0x10
 
-glabel jtbl_ovl3_80188A50
+glabel ftKirby_SpecialAirN_StatusList
   /* 56F50 103490 80188A50 */  .4byte jtgt_ovl3_80156C38
   /* 56F54 103494 80188A54 */  .4byte func_ovl3_80156E18
   /* 56F58 103498 80188A58 */  .4byte jtgt_ovl3_80157F04
@@ -1358,7 +1358,7 @@ glabel jtbl_ovl3_80188A50
   /* 56FB4 1034F4 80188AB4 */  .4byte jtgt_ovl3_801633A0
   /* 56FB8 1034F8 80188AB8 */  .4byte jtgt_ovl3_801633A0
 
-glabel D_ovl3_80188ABC
+glabel ftCommon_SpecialAirN_StatusList
   /* 56FBC 1034FC 80188ABC */  .4byte jtgt_ovl3_80156054
   /* 56FC0 103500 80188AC0 */  .4byte func_ovl3_8015BCB8
   /* 56FC4 103504 80188AC4 */  .4byte jtgt_ovl3_8015B674
@@ -1370,7 +1370,7 @@ glabel D_ovl3_80188ABC
   /* 56FDC 10351C 80188ADC */  .4byte jtgt_ovl3_80150ED0
   /* 56FE0 103520 80188AE0 */  .4byte jtgt_ovl3_80151D64
   /* 56FE4 103524 80188AE4 */  .4byte jtgt_ovl3_80151504
-  /* 56FE8 103528 80188AE8 */  .4byte ftNess_SpecialAirN_ApplyStatusAir
+  /* 56FE8 103528 80188AE8 */  .4byte ftNess_SpecialAirN_ProcStatus
   /* 56FEC 10352C 80188AEC */  .4byte jtgt_ovl3_80156054
   /* 56FF0 103530 80188AF0 */  .4byte jtgt_ovl3_80156054
   /* 56FF4 103534 80188AF4 */  .4byte jtgt_ovl3_80156054
@@ -1384,10 +1384,10 @@ glabel D_ovl3_80188ABC
   /* 57014 103554 80188B14 */  .4byte jtgt_ovl3_80150ED0
   /* 57018 103558 80188B18 */  .4byte jtgt_ovl3_80151D64
   /* 5701C 10355C 80188B1C */  .4byte jtgt_ovl3_80151504
-  /* 57020 103560 80188B20 */  .4byte ftNess_SpecialAirN_ApplyStatusAir
+  /* 57020 103560 80188B20 */  .4byte ftNess_SpecialAirN_ProcStatus
   /* 57024 103564 80188B24 */  .4byte jtgt_ovl3_8015B674
 
-glabel D_ovl3_80188B28
+glabel ftCommon_SpecialAirHi_StatusList
   /* 57028 103568 80188B28 */  .4byte jtgt_ovl3_80156478
   /* 5702C 10356C 80188B2C */  .4byte jtgt_ovl3_8015CB10
   /* 57030 103570 80188B30 */  .4byte jtgt_ovl3_8015B9B8
@@ -1416,7 +1416,7 @@ glabel D_ovl3_80188B28
   /* 5708C 1035CC 80188B8C */  .4byte jtgt_ovl3_80154030
   /* 57090 1035D0 80188B90 */  .4byte jtgt_ovl3_8015B9B8
 
-glabel D_ovl3_80188B94
+glabel ftCommon_SpecialAirLw_StatusList
   /* 57094 1035D4 80188B94 */  .4byte jtgt_ovl3_80156910
   /* 57098 1035D8 80188B98 */  .4byte jtgt_ovl3_8015D290
   .incbin "ovl3.raw.bin", 0x5709C, 0x4
@@ -1449,7 +1449,7 @@ glabel jtbl_ovl3_80188BD8
   /* 570F8 103638 80188BF8 */  .4byte jtgt_ovl3_801554B0
   .incbin "ovl3.raw.bin", 0x570FC, 0x4
 
-glabel jtbl_ovl3_80188C00
+glabel ftKirby_SpecialN_StatusList
   /* 57100 103640 80188C00 */  .4byte jtgt_ovl3_80156BD0
   /* 57104 103644 80188C04 */  .4byte func_ovl3_80156DD8
   /* 57108 103648 80188C08 */  .4byte jtgt_ovl3_80157EAC
@@ -1478,7 +1478,7 @@ glabel jtbl_ovl3_80188C00
   /* 57164 1036A4 80188C64 */  .4byte jtgt_ovl3_80163154
   /* 57168 1036A8 80188C68 */  .4byte jtgt_ovl3_80163154
 
-glabel D_ovl3_80188C6C
+glabel ftCommon_SpecialN_StatusList
   /* 5716C 1036AC 80188C6C */  .4byte jtgt_ovl3_80156014
   /* 57170 1036B0 80188C70 */  .4byte func_ovl3_8015BC78
   /* 57174 1036B4 80188C74 */  .4byte jtgt_ovl3_8015B61C
@@ -1490,7 +1490,7 @@ glabel D_ovl3_80188C6C
   /* 5718C 1036CC 80188C8C */  .4byte jtgt_ovl3_80151060
   /* 57190 1036D0 80188C90 */  .4byte jtgt_ovl3_80151D24
   /* 57194 1036D4 80188C94 */  .4byte jtgt_ovl3_801514C4
-  /* 57198 1036D8 80188C98 */  .4byte ftNess_SpecialN_ApplyStatusGround
+  /* 57198 1036D8 80188C98 */  .4byte ftNess_SpecialN_ProcStatus
   /* 5719C 1036DC 80188C9C */  .4byte jtgt_ovl3_80156014
   /* 571A0 1036E0 80188CA0 */  .4byte jtgt_ovl3_80156014
   /* 571A4 1036E4 80188CA4 */  .4byte jtgt_ovl3_80156014
@@ -1504,11 +1504,11 @@ glabel D_ovl3_80188C6C
   /* 571C4 103704 80188CC4 */  .4byte jtgt_ovl3_80151060
   /* 571C8 103708 80188CC8 */  .4byte jtgt_ovl3_80151D24
   /* 571CC 10370C 80188CCC */  .4byte jtgt_ovl3_801514C4
-  /* 571D0 103710 80188CD0 */  .4byte ftNess_SpecialN_ApplyStatusGround
+  /* 571D0 103710 80188CD0 */  .4byte ftNess_SpecialN_ProcStatus
   /* 571D4 103714 80188CD4 */  .4byte jtgt_ovl3_8015B61C
   .incbin "ovl3.raw.bin", 0x571D8, 0x8
 
-glabel jtbl_ovl3_80188CE0
+glabel ftCommon_SpecialHi_StatusList
   /* 571E0 103720 80188CE0 */  .4byte jtgt_ovl3_80156428
   /* 571E4 103724 80188CE4 */  .4byte jtgt_ovl3_8015CAB0
   /* 571E8 103728 80188CE8 */  .4byte jtgt_ovl3_8015B974
@@ -1538,7 +1538,7 @@ glabel jtbl_ovl3_80188CE0
   /* 57248 103788 80188D48 */  .4byte jtgt_ovl3_8015B974
   .incbin "ovl3.raw.bin", 0x5724C, 0x4
 
-glabel jtbl_ovl3_80188D50
+glabel ftCommon_SpecialLw_StatusList
   /* 57250 103790 80188D50 */  .4byte jtgt_ovl3_8015688C
   /* 57254 103794 80188D54 */  .4byte jtgt_ovl3_8015D250
   /* 57258 103798 80188D58 */  .4byte jtgt_ovl3_8015BAFC

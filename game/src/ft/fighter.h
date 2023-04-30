@@ -114,17 +114,17 @@ typedef struct ftCommonAttributes
     u32 is_have_attacks4 : 1;
     u32 is_have_attackhi4 : 1;
     u32 is_have_attacklw4 : 1;
-    u32 catch_flags_b9 : 1;
-    u32 is_have_attack120 : 1;
-    u32 is_have_attack121 : 1;
-    u32 is_have_attack122 : 1;
-    u32 is_have_attack123 : 1;
-    u32 is_have_attack124 : 1;
-    u32 is_have_attack125 : 1;
-    u32 is_have_attack126 : 1;
-    u32 is_have_attack127 : 1;
-    u32 is_have_attack128 : 1;
-    u32 is_have_attack129 : 1;
+    u32 is_have_attackairn : 1;
+    u32 is_have_attackairf : 1;
+    u32 is_have_attackairb : 1;
+    u32 is_have_attackairhi : 1;
+    u32 is_have_attackairlw : 1;
+    u32 is_have_specialn : 1;
+    u32 is_have_specialairn : 1;
+    u32 is_have_specialhi : 1;
+    u32 is_have_specialairhi : 1;
+    u32 is_have_speciallw : 1;
+    u32 is_have_specialairlw : 1;
     u32 is_have_catch : 1;   // Whether fighter has a grab
     u32 catch_flags_b21 : 1;
     u32 catch_flags_b22 : 1;
