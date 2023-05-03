@@ -405,8 +405,8 @@ glabel func_ovl23_80132040
   /* 12AA9C 801320DC 00000000 */       nop 
 
 glabel func_ovl23_801320E0
-  /* 12AAA0 801320E0 3C0E800A */       lui $t6, %hi((D_800A4AD0 + 0x9))
-  /* 12AAA4 801320E4 91CE4AD9 */       lbu $t6, %lo((D_800A4AD0 + 0x9))($t6)
+  /* 12AAA0 801320E0 3C0E800A */       lui $t6, %hi((Scene_Info + 0x9))
+  /* 12AAA4 801320E4 91CE4AD9 */       lbu $t6, %lo((Scene_Info + 0x9))($t6)
   /* 12AAA8 801320E8 44802000 */      mtc1 $zero, $f4
   /* 12AAAC 801320EC 3C018013 */       lui $at, %hi(D_ovl23_80132488)
   /* 12AAB0 801320F0 AC2E2488 */        sw $t6, %lo(D_ovl23_80132488)($at)
@@ -455,12 +455,12 @@ glabel func_ovl23_80132118
   /* 12AB44 80132184 3404D000 */       ori $a0, $zero, 0xd000
   /* 12AB48 80132188 10400009 */      beqz $v0, .L801321B0
   /* 12AB4C 8013218C 24090001 */     addiu $t1, $zero, 1
-  /* 12AB50 80132190 3C02800A */       lui $v0, %hi(D_800A4AD0)
-  /* 12AB54 80132194 24424AD0 */     addiu $v0, $v0, %lo(D_800A4AD0)
-  /* 12AB58 80132198 90480000 */       lbu $t0, ($v0) # D_800A4AD0 + 0
-  /* 12AB5C 8013219C A0490000 */        sb $t1, ($v0) # D_800A4AD0 + 0
+  /* 12AB50 80132190 3C02800A */       lui $v0, %hi(Scene_Info)
+  /* 12AB54 80132194 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 12AB58 80132198 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
+  /* 12AB5C 8013219C A0490000 */        sb $t1, ($v0) # Scene_Info + 0
   /* 12AB60 801321A0 0C04C844 */       jal func_ovl23_80132110
-  /* 12AB64 801321A4 A0480001 */        sb $t0, 1($v0) # D_800A4AD0 + 1
+  /* 12AB64 801321A4 A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
   /* 12AB68 801321A8 0C00171D */       jal func_80005C74
   /* 12AB6C 801321AC 00000000 */       nop 
   .L801321B0:

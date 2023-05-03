@@ -2,20 +2,20 @@
 #include "gmmatch.h"
 #include "gmground.h"
 
-extern ftStatus_Rebirth_CustomVars D_ovl2_80116DD0;
+extern ftSpawnInfo D_ovl2_80116DD0;
 extern f32 Rebirth_Halo_Offset_X[GMMATCH_PLAYERS_MAX];
 
 void func_ovl3_8013CF60(GObj *this_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(this_gobj);
-    ftStatus_Rebirth_CustomVars rebirth_vars = D_ovl2_80116DD0;
+    ftSpawnInfo rebirth_vars = D_ovl2_80116DD0;
     GObj *other_gobj;
     Fighter_Struct *other_fp;
     s32 halo_number;
     s32 sp3C;
     Vec3f halo_spawn_pos;
 
-    rebirth_vars.lr_rebirth = this_fp->lr;
+    rebirth_vars.lr_spawn = this_fp->lr;
     rebirth_vars.unk_rebirth_0x24 = 0;
 
     func_ovl2_800FC814(0x20, &sp3C);
@@ -50,9 +50,9 @@ loop: // This makes no sense
         }
         while (FALSE);
     }
-    rebirth_vars.halo_offset.x = Rebirth_Halo_Offset_X[halo_number] + halo_spawn_pos.x;
-    rebirth_vars.halo_offset.y = Ground_Info->blastzone_top;
-    rebirth_vars.halo_offset.z = 0.0F;
+    rebirth_vars.pos.x = Rebirth_Halo_Offset_X[halo_number] + halo_spawn_pos.x;
+    rebirth_vars.pos.y = Ground_Info->blastzone_top;
+    rebirth_vars.pos.z = 0.0F;
 
     func_ovl2_800D79F0(this_gobj, &rebirth_vars);
     func_ovl2_8010F840(this_fp);

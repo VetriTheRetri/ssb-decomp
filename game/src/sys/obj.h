@@ -88,6 +88,13 @@ typedef struct MObj // Image footer struct
 
 } MObj;
 
+typedef struct UnkDObjData
+{
+    u8 filler_0x0[0xDC];
+    GObj *unk_gobj;
+
+} UnkDObjData;
+
 typedef struct DObj DObj;
 
 struct DObj
@@ -114,7 +121,7 @@ struct DObj
     f32 unk_dobj_0x78; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?
     f32 unk_dobj_0x7C; // Multi-purpose? Usually animation frame, but used as rotation step in Crate/Barrel smash GFX?
     MObj *mobj;
-    DObj *unk_0x84;
+    void *unk_0x84;    // Multi-purpose? Articles store a fighter joint here, but func_ovl2_800D78E8 expects a different struct
 
 };
 

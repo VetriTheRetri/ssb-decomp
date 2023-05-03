@@ -511,7 +511,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
             vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_File_Data->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
-            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, 0x80000003U) != NULL)
+            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE)) != NULL)
             {
                 func_ovl3_80172394(gobj, TRUE);
             }
@@ -557,22 +557,22 @@ struct VsRecordData {
 }; // size == 0x5C
 
 // is this the saved data structure?
-struct BigA44E0 {
+struct gmSaveInfo {
     /* 0x000 */ struct VsRecordData vsRecords[12];
     /* 0x450 */ u8 unk540[(0x5EC - 0x450)];
 }; // size == 0x5EC
 
-struct UnkA4AD0 {
+struct gmSceneInfo {
     /* 0x00 */ u8 scene;
     /* 0x01 */ u8 pad01[0x13 - 0x01];
-    u8 unk_0x13;
+    u8 player_port;
     u8 filler_0x14[0x48 - 0x14];
 }; // size == 0x48
 
 
-extern struct BigA44E0 D_800A44E0;
-extern struct UnkA4AD0 D_800A4AD0;
-extern s8 D_ovl65_801936AD;
+extern struct gmSaveInfo Save_Info;
+extern struct gmSceneInfo Scene_Info;
+extern s8 gmBonusStat_MewCatcher;
 
 GObj* func_ovl3_80173228(GObj *article_gobj)
 {
@@ -590,7 +590,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
 
     // Is this checking to spawn Mew?
 
-    if ((D_800A44E0.unk540[7] & 0xF) && ((rand_u16_range(151) == 0)) && (Monster_Info.monster_curr != At_Kind_Mew) && (Monster_Info.monster_prev != At_Kind_Mew))
+    if ((Save_Info.unk540[7] & 0xF) && ((rand_u16_range(151) == 0)) && (Monster_Info.monster_curr != At_Kind_Mew) && (Monster_Info.monster_prev != At_Kind_Mew))
     {
         index = At_Kind_Mew;
     }
@@ -627,9 +627,9 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
 
         if (Match_Info->game_type == 5)
         {
-            if ((mp->port_id == D_800A4AD0.unk_0x13) && (mp->at_kind == At_Kind_Mew))
+            if ((mp->port_id == Scene_Info.unk_0x13) && (mp->at_kind == At_Kind_Mew))
             {
-                D_ovl65_801936AD = 1;
+                gmBonusStat_MewCatcher = 1;
             }
         }
     }

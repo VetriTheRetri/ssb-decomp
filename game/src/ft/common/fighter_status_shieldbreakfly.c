@@ -26,7 +26,7 @@ void func_ovl3_80149488(GObj *fighter_gobj)
     func_800269C0(0xFU);
 }
 
-struct UnkA4AD0 {
+struct gmSceneInfo {
     /* 0x00 */ u8 scene;
     /* 0x01 */ u8 previousScene;
     /* 0x02 */ u8 pad02[0x13 - 0x02];
@@ -34,7 +34,7 @@ struct UnkA4AD0 {
     /* 0x14 */ u8 pad14[0x48 - 0x14];
 }; // size == 0x48
 
-extern struct UnkA4AD0 D_800A4AD0;
+extern struct gmSceneInfo Scene_Info;
 extern s8 gmBonusStat_ShieldBreaker; // Bonus for breaking an enemy's shield in 1P game
 
 void func_ovl3_80149510(GObj *fighter_gobj)
@@ -59,7 +59,7 @@ void func_ovl3_80149510(GObj *fighter_gobj)
 
     if ((Match_Info->game_type == 5) && (fp->shield_damage != 0))
     {
-        if ((fp->shield_port_id == D_800A4AD0.player_port) && (fp->shield_port_id != fp->port_id))
+        if ((fp->shield_port_id == Scene_Info.player_port) && (fp->shield_port_id != fp->port_id))
         {
             gmBonusStat_ShieldBreaker = TRUE;
         }

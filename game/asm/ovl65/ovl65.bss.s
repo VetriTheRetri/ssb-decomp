@@ -65,7 +65,7 @@ glabel gmBonusStat_ShieldBreaker
     .space 1
 glabel D_ovl65_801936AC
     .space 1
-glabel D_ovl65_801936AD
+glabel gmBonusStat_MewCatcher
     .space 3
 glabel D_ovl65_801936B0
     .space 4

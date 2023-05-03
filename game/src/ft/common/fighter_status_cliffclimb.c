@@ -235,11 +235,11 @@ void func_ovl3_80145490(GObj *fighter_gobj)
     }
     coll_data->ground_line_id = coll_data->cliff_id;
 
-    func_ovl2_800F3DD8(coll_data->ground_line_id, translate, &coll_data->unk_0x78, &coll_data->clip_flag, &coll_data->ground_angle);
+    func_ovl2_800F3DD8(coll_data->ground_line_id, translate, &coll_data->ground_dist, &coll_data->clip_flag, &coll_data->ground_angle);
 
-    translate->y += coll_data->unk_0x78;
+    translate->y += coll_data->ground_dist;
 
-    coll_data->unk_0x78 = 0.0F;
+    coll_data->ground_dist = 0.0F;
 }
 
 void func_ovl3_8014557C(GObj *fighter_gobj)

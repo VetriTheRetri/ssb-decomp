@@ -50,7 +50,7 @@ typedef struct _Coll_Data
     Vec3f ground_to_air_pos_last;
 
     s32 ground_line_id;
-    f32 unk_0x78; // "Clipping / Platform ID directly under character"
+    f32 ground_dist; // Distance to nearest ground line? 
     u32 clip_flag; // Line collision behavior (e.g. drop-through)
     Vec3f ground_angle;
 

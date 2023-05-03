@@ -806,13 +806,13 @@ glabel func_ovl53_801325D4
   /* 176A90 80132690 24044000 */     addiu $a0, $zero, 0x4000
   /* 176A94 80132694 1040000C */      beqz $v0, .L801326C8
   /* 176A98 80132698 3C068013 */       lui $a2, 0x8013
-  /* 176A9C 8013269C 3C02800A */       lui $v0, %hi(D_800A4AD0)
-  /* 176AA0 801326A0 24424AD0 */     addiu $v0, $v0, %lo(D_800A4AD0)
-  /* 176AA4 801326A4 904A0000 */       lbu $t2, ($v0) # D_800A4AD0 + 0
+  /* 176A9C 8013269C 3C02800A */       lui $v0, %hi(Scene_Info)
+  /* 176AA0 801326A0 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 176AA4 801326A4 904A0000 */       lbu $t2, ($v0) # Scene_Info + 0
   /* 176AA8 801326A8 240B0039 */     addiu $t3, $zero, 0x39
-  /* 176AAC 801326AC A04B0000 */        sb $t3, ($v0) # D_800A4AD0 + 0
+  /* 176AAC 801326AC A04B0000 */        sb $t3, ($v0) # Scene_Info + 0
   /* 176AB0 801326B0 0C04C973 */       jal func_ovl53_801325CC
-  /* 176AB4 801326B4 A04A0001 */        sb $t2, 1($v0) # D_800A4AD0 + 1
+  /* 176AB4 801326B4 A04A0001 */        sb $t2, 1($v0) # Scene_Info + 1
   /* 176AB8 801326B8 0C00171D */       jal func_80005C74
   /* 176ABC 801326BC 00000000 */       nop 
   /* 176AC0 801326C0 10000096 */         b .L8013291C

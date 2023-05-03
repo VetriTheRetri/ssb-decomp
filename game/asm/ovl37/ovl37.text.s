@@ -882,12 +882,12 @@ glabel func_ovl37_8018DD80
   /* 168514 8018DDA4 3404D000 */       ori $a0, $zero, 0xd000
   /* 168518 8018DDA8 10400007 */      beqz $v0, .L8018DDC8
   /* 16851C 8018DDAC 24190001 */     addiu $t9, $zero, 1
-  /* 168520 8018DDB0 3C02800A */       lui $v0, %hi(D_800A4AD0)
-  /* 168524 8018DDB4 24424AD0 */     addiu $v0, $v0, %lo(D_800A4AD0)
-  /* 168528 8018DDB8 90580000 */       lbu $t8, ($v0) # D_800A4AD0 + 0
-  /* 16852C 8018DDBC A0590000 */        sb $t9, ($v0) # D_800A4AD0 + 0
+  /* 168520 8018DDB0 3C02800A */       lui $v0, %hi(Scene_Info)
+  /* 168524 8018DDB4 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 168528 8018DDB8 90580000 */       lbu $t8, ($v0) # Scene_Info + 0
+  /* 16852C 8018DDBC A0590000 */        sb $t9, ($v0) # Scene_Info + 0
   /* 168530 8018DDC0 0C00171D */       jal func_80005C74
-  /* 168534 8018DDC4 A0580001 */        sb $t8, 1($v0) # D_800A4AD0 + 1
+  /* 168534 8018DDC4 A0580001 */        sb $t8, 1($v0) # Scene_Info + 1
   .L8018DDC8:
   /* 168538 8018DDC8 3C028019 */       lui $v0, %hi(D_ovl37_8018E1C8)
   /* 16853C 8018DDCC 8C42E1C8 */        lw $v0, %lo(D_ovl37_8018E1C8)($v0)
@@ -909,12 +909,12 @@ glabel func_ovl37_8018DD80
   .L8018DE0C:
   /* 16857C 8018DE0C 14410007 */       bne $v0, $at, .L8018DE2C
   /* 168580 8018DE10 24090022 */     addiu $t1, $zero, 0x22
-  /* 168584 8018DE14 3C02800A */       lui $v0, %hi(D_800A4AD0)
-  /* 168588 8018DE18 24424AD0 */     addiu $v0, $v0, %lo(D_800A4AD0)
-  /* 16858C 8018DE1C 90480000 */       lbu $t0, ($v0) # D_800A4AD0 + 0
-  /* 168590 8018DE20 A0490000 */        sb $t1, ($v0) # D_800A4AD0 + 0
+  /* 168584 8018DE14 3C02800A */       lui $v0, %hi(Scene_Info)
+  /* 168588 8018DE18 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 16858C 8018DE1C 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
+  /* 168590 8018DE20 A0490000 */        sb $t1, ($v0) # Scene_Info + 0
   /* 168594 8018DE24 0C00171D */       jal func_80005C74
-  /* 168598 8018DE28 A0480001 */        sb $t0, 1($v0) # D_800A4AD0 + 1
+  /* 168598 8018DE28 A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
   .L8018DE2C:
   /* 16859C 8018DE2C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 1685A0 8018DE30 27BD0018 */     addiu $sp, $sp, 0x18

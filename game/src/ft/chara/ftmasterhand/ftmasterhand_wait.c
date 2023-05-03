@@ -286,7 +286,7 @@ void func_ovl3_80159040(GObj *fighter_gobj)
     if (fp->coll_data.ground_line_id != -1)
     {
         fp->status_vars.masterhand.wait.pos.x = (f32)translate->x;
-        fp->status_vars.masterhand.wait.pos.y = (f32)(translate->y + fp->coll_data.unk_0x78);
+        fp->status_vars.masterhand.wait.pos.y = (f32)(translate->y + fp->coll_data.ground_dist);
     }
     else
     {

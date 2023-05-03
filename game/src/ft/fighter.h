@@ -551,6 +551,25 @@ typedef struct ftThrowReleaseDesc
 
 } ftThrowReleaseDesc;
 
+typedef struct ftSpawnInfo
+{
+    s32 unk_rebirth_0x0;
+    Vec3f pos;
+    s32 lr_spawn;
+    s32 unk_rebirth_0x14;
+    s32 unk_rebirth_0x18;
+    s32 unk_rebirth_0x1C;
+    s32 ft_kind;    // Might be used exclusively for Kirby's copy ID
+    s32 damage;
+    s32 unk_rebirth_0x28;
+    s32 unk_rebirth_0x2C;
+    s32 unk_rebirth_0x30;
+    s32 unk_rebirth_0x34;
+    s32 unk_rebirth_0x38;
+    s32 unk_rebirth_0x3C;
+
+} ftSpawnInfo;
+
 typedef struct _Fighter_Hit
 {
     s32 update_state;
@@ -784,7 +803,7 @@ struct Fighter_Struct
     s32 timer_unk3;
     s32 tornado_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
     s32 tarucann_wait;// Wait this many frames before fighter can enter Barrel Cannon again
-    u8 filler_0x170[0x174 - 0x170];
+    s32 unk_0x170;
     s32 unk_0x174;
     s32 unk_0x178;
 
@@ -942,7 +961,9 @@ struct Fighter_Struct
 
     Fighter_Com fighter_com;
 
-    u8 filler_0x258[0x268 - 0x258];
+    f32 unk_fighter_0x25C;
+    f32 unk_fighter_0x260;
+    f32 unk_fighter_0x264;
 
     u8 tap_stick_x; // Frames control stick has been tapped
     u8 tap_stick_y; // Frames control stick has been tapped
@@ -953,10 +974,11 @@ struct Fighter_Struct
     s8 breakout_lr; // Whether victim is mashing left or right
     s8 breakout_ud; // Whether victim is mashing up or down
 
-    u8 filler_0x272[0x276 - 0x272];
-
+    u8 unk_ft_0x272;
+    u8 unk_ft_0x273;
+    s8 unk_0x274;
     s16 unk_0x276;
-    GObj *throw_gobj; // GObj pointer of player throwing this fighter?
+    GObj *throw_gobj;
     s32 unk_0x27C;
     u8 unk_0x280;
     s32 unk_0x284;
@@ -994,8 +1016,10 @@ struct Fighter_Struct
 
     Fighter_Hit fighter_hit[4];
 
-    u8 filler_0x290[0x5B0 - 0x5A4];
-
+    s32 unk_ft_0x5A4;
+    s32 unk_ft_0x5A8;
+    s32 unk_ft_0x5AC;
+    s32 unk_ft_0x5B0;
     s32 star_invincible_time;
     s32 special_status;
     s32 hit_status;
@@ -1036,7 +1060,8 @@ struct Fighter_Struct
 
     s32 unk_ft_0x820;
     s32 unk_ft_0x824;
-    s32 unk_ft_0x828;
+    gmAttackFlags unk_ft_0x828;
+    gmAttackFlags unk_ft_0x82A; // Might be raw u16
 
     f32 publicity_knockback; // Knockback value used for crowd reactions
 
@@ -1057,9 +1082,9 @@ struct Fighter_Struct
 
     ftUnkFrameStruct unk_frame[4];
 
-    DObj *joint[36];
+    DObj *joint[37];
 
-    u8 filler_0x980[0x9C4 - 0x978];
+    u8 filler_0x980[0x9C4 - 0x97C];
 
     ftData *ft_data;
     ftCommonAttributes *attributes;

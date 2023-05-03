@@ -14,25 +14,15 @@ typedef struct MasterHand_Struct
     u32 wait_timer; // Wait this many frames until next attack
     s8 unk_0x14;
     u8 unk_0x15;
-    u8 unk_0x16;
+    u8 unk_0x16; // Struct probably ends here
     u8 unk_0x17;
-    s32 unk_0x18;
-    s32 unk_0x1C;
-    s32 unk_0x20;
-    s32 unk_0x24;
-    s32 unk_0x28;
-    s32 unk_0x2C;
-    s32 unk_0x30;
-    s32 unk_0x34;
-    void (*unk_0x38)(GObj*); // Some callback
-    f32 unk_0x3C;
-    f32 unk_0x40;
 
 } MasterHand_Struct;
 
 typedef struct ftMasterHand_FighterVars
 {
     MasterHand_Struct *p_masterhand;
+    MasterHand_Struct s;
 
 } ftMasterHand_FighterVars;
 

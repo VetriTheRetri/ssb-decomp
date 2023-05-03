@@ -330,25 +330,6 @@ typedef struct ftCommon_Rebirth_StatusVars
 
 } ftCommon_Rebirth_StatusVars;
 
-typedef struct ftStatus_Rebirth_CustomVars
-{
-    s32 unk_rebirth_0x0;
-    Vec3f halo_offset;
-    s32 lr_rebirth;
-    s32 unk_rebirth_0x14;
-    s32 unk_rebirth_0x18;
-    s32 unk_rebirth_0x1C;
-    s32 unk_rebirth_0x20;
-    s32 unk_rebirth_0x24;
-    s32 unk_rebirth_0x28;
-    s32 unk_rebirth_0x2C;
-    s32 unk_rebirth_0x30;
-    s32 unk_rebirth_0x34;
-    s32 unk_rebirth_0x38;
-    s32 unk_rebirth_0x3C;
-
-} ftStatus_Rebirth_CustomVars;
-
 typedef struct ftCommon_Sleep_StatusVars
 {
     s32 stock_steal_wait;

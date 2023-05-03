@@ -27,7 +27,7 @@ void func_ovl3_8014ADB0(GObj *fighter_gobj)
     }
     func_ovl2_800DF014(fighter_gobj, &DObjGetStruct(interact_gobj)->translate, &interact_fp->coll_data);
 
-    if ((this_fp->ground_or_air == ground) && ((this_fp->coll_data.ground_line_id == -1) || (this_fp->coll_data.unk_0x78 != 0.0F)))
+    if ((this_fp->ground_or_air == ground) && ((this_fp->coll_data.ground_line_id == -1) || (this_fp->coll_data.ground_dist != 0.0F)))
     {
         func_ovl2_800DEEC8(this_fp);
     }

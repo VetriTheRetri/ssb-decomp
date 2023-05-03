@@ -5,7 +5,41 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
+#define DARIANTOU_CHR_PLAYABLE_MAX 12
 #define GMMATCH_PLAYERS_MAX 4 // Global limit for simultaneous players in a match
+
+#define gmSaveChrMask(kind) (1 << kind)
+
+#define GMSAVEINFO_CHARACTER_MASK_ALL \
+(                                     \
+    gmSaveChrMask(Ft_Kind_Mario)  |   \
+    gmSaveChrMask(Ft_Kind_Fox)    |   \
+    gmSaveChrMask(Ft_Kind_Donkey) |   \
+    gmSaveChrMask(Ft_Kind_Samus)  |   \
+    gmSaveChrMask(Ft_Kind_Luigi)  |   \
+    gmSaveChrMask(Ft_Kind_Link)   |   \
+    gmSaveChrMask(Ft_Kind_Yoshi)  |   \
+    gmSaveChrMask(Ft_Kind_Captain)|   \
+    gmSaveChrMask(Ft_Kind_Kirby)  |   \
+    gmSaveChrMask(Ft_Kind_Pikachu)|   \
+    gmSaveChrMask(Ft_Kind_Purin)  |   \
+    gmSaveChrMask(Ft_Kind_Ness)       \
+)                                     \
+
+typedef enum gmSaveUnlock
+{
+    gmSave_Unlock_Ness = 1,
+    gmSave_Unlock_Captain,
+    gmSave_Unlock_Purin,
+    gmSave_Unlock_Unk,
+    gmSave_Unlock_Luigi
+
+} gmSaveUnlock;
+
+#define GMSAVE_UNLOCK_MASK_NESS     (1 << gmSave_Unlock_Ness)
+#define GMSAVE_UNLOCK_MASK_CAPTAIN  (1 << gmSave_Unlock_Captain)
+#define GMSAVE_UNLOCK_MASK_PURIN    (1 << gmSave_Unlock_Purin)
+#define GMSAVE_UNLOCK_MASK_LUIGI    (1 << gmSave_Unlock_Luigi)
 
 typedef enum gmPauseStatus
 {
@@ -15,6 +49,14 @@ typedef enum gmPauseStatus
     gmPauseStatus_Unpause         // Player unpaused
 
 } gmPauseStatus;
+
+typedef enum gmSceneIndex
+{
+    gmSceneIndex_Challenger_Ness = 0xF,
+    gmSceneIndex_Challenger_Purin,
+    gmSceneIndex_Challenger_Captain
+
+} gmSceneIndex;
 
 typedef struct gmItemSpawn
 {
@@ -150,6 +192,100 @@ typedef struct gmMatchInfo
 
 } gmMatchInfo;
 
+struct RecordCharCombo {
+    /* 0x00 */ u16 gamesWith;
+    /* 0x02 */ u16 playedAgainst;
+}; // size == 4
+
+struct VsRecordData {
+    /* 0x00 */ u16 kos[DARIANTOU_CHR_PLAYABLE_MAX];
+    /* 0x18 */ u32 timeUsed; //< in seconds
+    /* 0x1C */ u32 damageDealt;
+    /* 0x20 */ u32 damageReceived;
+    /* 0x24 */ u16 totalSDs;
+    /* 0x26 */ u16 gamesPlayed;
+    /* 0x28 */ u16 gamesPlayedAgainst;
+    /* 0x2C */ struct RecordCharCombo combinations[DARIANTOU_CHR_PLAYABLE_MAX];
+}; // size == 0x5C
+
+struct SinglePlayerData
+{
+    u32 spgame_hiscore;
+    u32 spgame_continues;
+    u32 spgame_bonuses;
+    s8 spgame_best_difficulty;
+    u32 tt_time; // Break the Targets high score
+    u8 bt_target_count; // Targets broken
+    u32 bp_time; // Board the Platforms high scoree
+    u8 bp_platform_count; // Platforms boarded
+    u8 unk_0x1D;
+    u8 unk_0x1E;
+    u8 unk_0x1F;
+};
+
+// is this the saved data structure?
+struct gmSaveInfo {
+    /* 0x000 */ struct VsRecordData vsRecords[DARIANTOU_CHR_PLAYABLE_MAX];
+    u8 unk450;
+    u8 unk451;
+    u8 unk452;
+    u8 unk453;
+    u8 unk454;
+    u8 unk455;
+    u8 unk456;
+    u8 unlock_mask;
+    u16 unk458;
+    u8 spgame_difficulty;
+    u8 spgame_stock_count;
+    struct SinglePlayerData spgame_records[DARIANTOU_CHR_PLAYABLE_MAX];
+    u16 unk5DC;
+    u8 unk5DE;
+    u8 unk5DF;
+    u8 unk5E0;
+    u8 unk5E1;
+    u8 unk5E2;
+    u8 unk5E3;
+    u8 unk5E4;
+    u8 unk5E5;
+    u8 unk5E6;
+    u8 unk5E7;
+    u32 unk5E8;
+}; // size == 0x5EC
+
+struct gmSceneInfo
+{
+    u8 scene_current;
+    u8 scene_previous;
+    u8 unk02;
+    u8 pad03[0x09 - 0x03];
+    u8 unk09;
+    u8 unk0A;
+    u8 pad0B[0xF - 0xB];
+    u8 unk0F;
+    u8 unk10;
+    u8 is_select_continue;
+    u8 unk12;
+    u8 player_port;
+    u8 ft_kind;
+    u8 unk15;
+    u8 pad16[0x17 - 0x16];
+    u8 scene_queue; // Unconfirmed
+    u8 cpu_port[3];
+    u8 pad20[0x20 - 0x1B];
+    u32 spgame_score;
+    u32 continues_used;
+    u32 bonuses; // Number of bonuses player acquired throughout the game
+    u32 bonus_get_mask[5]; // Different bonuses the player has accumulated per match
+    u8 pad2C[0x43 - 0x40];
+    u8 unk43;
+    u8 unk44;
+    u8 unk45;
+    u8 unk46;
+    u8 unk47;
+}; // size == 0x48
+
 extern gmMatchInfo *Match_Info;
+extern struct gmSaveInfo Save_Info;
+extern struct gmSceneInfo Scene_Info;
 
 #endif

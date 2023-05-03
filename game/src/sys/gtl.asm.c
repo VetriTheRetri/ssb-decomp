@@ -89,7 +89,7 @@ struct DLBuffer D_80046570[2][4];
 Gfx *D_800465B0[4];
 Gfx *D_800465C0[4];
 
-// from smash remix: Writing 1 to this word will load the screen at current_screen (D_800A4AD0).
+// from smash remix: Writing 1 to this word will load the screen at current_screen (Scene_Info).
 u32 D_800465D0;
 s32 D_800465D4;
 struct BumpAllocRegion gMatrixHeap;  // D_800465D8

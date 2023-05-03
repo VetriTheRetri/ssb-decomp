@@ -249,7 +249,7 @@ void func_ovl3_801426D0(GObj *fighter_gobj)
 
     DObjGetStruct(fighter_gobj)->translate = fp->status_vars.common.dokan.pos_target;
 
-    func_ovl2_800F9348(&DObjGetStruct(fighter_gobj)->translate, &fp->coll_data.ground_line_id, &fp->coll_data.unk_0x78, &fp->coll_data.clip_flag, &fp->coll_data.ground_angle);
+    func_ovl2_800F9348(&DObjGetStruct(fighter_gobj)->translate, &fp->coll_data.ground_line_id, &fp->coll_data.ground_dist, &fp->coll_data.clip_flag, &fp->coll_data.ground_angle);
 
     fp->x18F_flag_b4 = TRUE;
     fp->status_vars.common.dokan.set_unk_wait = FTCOMMON_DOKAN_UNK_WAIT;

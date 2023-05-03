@@ -19,11 +19,11 @@ void func_ovl3_80159B3C(GObj *fighter_gobj)
 
     fp = FighterGetStruct(fighter_gobj);
 
-    if (3000.0F <= -fp->coll_data.unk_0x78)
+    if (3000.0F <= -fp->coll_data.ground_dist)
     {
         DObj *joint = DObjGetStruct(fighter_gobj);
 
-        joint->translate.y += (fp->coll_data.unk_0x78 + 3000.0F);
+        joint->translate.y += (fp->coll_data.ground_dist + 3000.0F);
 
         func_ovl3_80159D34(fighter_gobj);
     }

@@ -42,11 +42,11 @@ void func_ovl3_80159CA4(GObj *fighter_gobj)
 
     func_ovl2_800DE348(fighter_gobj);
 
-    var = fp->coll_data.unk_0x78 + 3000.0F;
+    var = fp->coll_data.ground_dist + 3000.0F;
 
     translate->y -= var;
 
-    fp->coll_data.unk_0x78 = 3000.0F;
+    fp->coll_data.ground_dist = 3000.0F;
 }
 
 void func_ovl3_80159D34(GObj *fighter_gobj)

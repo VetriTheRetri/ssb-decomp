@@ -13,8 +13,8 @@ static s32 ftPublicReact_Player_Number; // Or this is u32 and the other s32, not
 static gmSoundEffect *D_ovl3_8018CFB0;
 static u16 D_ovl3_8018CFB4;
 static s32 D_ovl3_8018CFB8;
-static u16 D_ovl3_8018CFBE;
-static s32 D_ovl3_8018CFC0;
+static u32 D_ovl3_8018CFBC;
+static s32 D_ovl3_8018CFC0; // Struct of 8 bytes? Why is there no 0x8018CFC4?
 static u16 D_ovl3_8018CFC8[10];
 static u32 D_ovl3_8018CFE0;
 static gmSoundEffect *D_ovl3_8018CFE4;
@@ -25,15 +25,13 @@ bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
     Fighter_Struct *fp;
     GObj *fighter_gobj = func_ovl2_800E7ED4(player_id);
     u16 sfx_id;
-    static vu32 D_ovl3_8018CFBC; // What (also overlaps with 8018CFBE?)
 
     if (fighter_gobj == NULL)
     {
         return FALSE;
     }
-    else fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->percent_damage < 100) || (D_ovl3_8018CFA8 < 1200))
+    if ((FighterGetStruct(fighter_gobj)->percent_damage < 100) || (D_ovl3_8018CFA8 < 1200))
     {
         return FALSE;
     }
@@ -41,7 +39,7 @@ bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
     {
         return FALSE;
     }
-    D_ovl3_8018CFBC = D_ovl2_8012C9A8[fp->ft_kind];
+    D_ovl3_8018CFBC = D_ovl2_8012C9A8[FighterGetStruct(fighter_gobj)->ft_kind];
 
     if (D_ovl3_8018CFBC == 0x2B7)
     {
@@ -309,7 +307,7 @@ void func_ovl3_80165134(s32 arg0)
                 }
                 else
                 {
-                    D_ovl3_8018CFB0 = func_800269C0(D_ovl3_8018CFBE);
+                    D_ovl3_8018CFB0 = func_800269C0(D_ovl3_8018CFBC);
 
                     if (D_ovl3_8018CFB0 != NULL)
                     {

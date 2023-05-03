@@ -15,7 +15,7 @@ glabel D_ovl2_80130D54
     .space 12
 glabel D_ovl2_80130D60
     .space 4
-glabel D_ovl2_80130D64
+glabel gmMatchInfo_1PGameTimeTotal
     .space 4
 glabel D_ovl2_80130D68
     .space 4
@@ -37,7 +37,7 @@ glabel D_ovl2_80130D88
     .space 4
 glabel D_ovl2_80130D8C
     .space 4
-glabel D_ovl2_80130D90
+glabel gmMatchInfo_PlayerCount
     .space 4
 glabel D_ovl2_80130D94
     .space 2

@@ -13,5 +13,5 @@ void func_ovl3_80159854(GObj *fighter_gobj)
     func_ovl3_80157F90(fighter_gobj);
 
     fp->phys_info.vel_air.x = 0.0F;
-    fp->phys_info.vel_air.y = fp->coll_data.unk_0x78 / 60.0F;
+    fp->phys_info.vel_air.y = fp->coll_data.ground_dist / 60.0F;
 }

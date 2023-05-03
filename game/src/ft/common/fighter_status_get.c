@@ -2,7 +2,7 @@
 #include "article.h"
 #include "gmmatch.h"
 
-struct UnkA4AD0 {
+struct gmSceneInfo {
     /* 0x00 */ u8 scene;
     /* 0x01 */ u8 previousScene;
     /* 0x02 */ u8 pad02[0x13 - 0x02];
@@ -10,7 +10,7 @@ struct UnkA4AD0 {
     /* 0x14 */ u8 pad14[0x48 - 0x14];
 }; // size == 0x48
 
-extern struct UnkA4AD0 D_800A4AD0;
+extern struct gmSceneInfo Scene_Info;
 extern u8 D_ovl65_801936A8;
 extern u8 D_ovl65_801936A9;
 
@@ -99,7 +99,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
                 func_ovl2_800EA3D4(fp, ATTOMATO_DAMAGE_HEAL);
                 func_ovl3_801728D4(article_gobj);
 
-                if ((Match_Info->game_type == 5) && (fp->port_id == D_800A4AD0.player_port) && (D_ovl65_801936A8 < U8_MAX))
+                if ((Match_Info->game_type == 5) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936A8 < U8_MAX))
                 {
                     D_ovl65_801936A8++;
                 }
@@ -109,7 +109,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
                 func_ovl2_800EA3D4(fp, ATHEART_DAMAGE_HEAL);
                 func_ovl3_801728D4(article_gobj);
 
-                if ((Match_Info->game_type == 5) && (fp->port_id == D_800A4AD0.player_port) && (D_ovl65_801936A9 < U8_MAX))
+                if ((Match_Info->game_type == 5) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936A9 < U8_MAX))
                 {
                     D_ovl65_801936A9++;
                 }

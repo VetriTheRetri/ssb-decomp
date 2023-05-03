@@ -1010,13 +1010,13 @@ glabel func_ovl63_8018DF18
   /* 18B548 8018DF38 306ED000 */      andi $t6, $v1, 0xd000
   /* 18B54C 8018DF3C 11C0000A */      beqz $t6, .L8018DF68
   /* 18B550 8018DF40 00000000 */       nop 
-  /* 18B554 8018DF44 3C02800A */       lui $v0, %hi(D_800A4AD0)
-  /* 18B558 8018DF48 24424AD0 */     addiu $v0, $v0, %lo(D_800A4AD0)
-  /* 18B55C 8018DF4C 904F0000 */       lbu $t7, ($v0) # D_800A4AD0 + 0
+  /* 18B554 8018DF44 3C02800A */       lui $v0, %hi(Scene_Info)
+  /* 18B558 8018DF48 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 18B55C 8018DF4C 904F0000 */       lbu $t7, ($v0) # Scene_Info + 0
   /* 18B560 8018DF50 24180001 */     addiu $t8, $zero, 1
-  /* 18B564 8018DF54 A0580000 */        sb $t8, ($v0) # D_800A4AD0 + 0
+  /* 18B564 8018DF54 A0580000 */        sb $t8, ($v0) # Scene_Info + 0
   /* 18B568 8018DF58 0C00171D */       jal func_80005C74
-  /* 18B56C 8018DF5C A04F0001 */        sb $t7, 1($v0) # D_800A4AD0 + 1
+  /* 18B56C 8018DF5C A04F0001 */        sb $t7, 1($v0) # Scene_Info + 1
   /* 18B570 8018DF60 10000004 */         b .L8018DF74
   /* 18B574 8018DF64 8FBF0014 */        lw $ra, 0x14($sp)
   .L8018DF68:
@@ -1078,13 +1078,13 @@ glabel func_ovl63_8018DFF8
   /* 18B63C 8018E02C 29E10017 */      slti $at, $t7, 0x17
   /* 18B640 8018E030 1420000A */      bnez $at, .L8018E05C
   /* 18B644 8018E034 AE2F002C */        sw $t7, 0x2c($s1) # D_ovl63_8018E9F0 + 44
-  /* 18B648 8018E038 3C02800A */       lui $v0, %hi(D_800A4AD0)
-  /* 18B64C 8018E03C 24424AD0 */     addiu $v0, $v0, %lo(D_800A4AD0)
-  /* 18B650 8018E040 90590000 */       lbu $t9, ($v0) # D_800A4AD0 + 0
+  /* 18B648 8018E038 3C02800A */       lui $v0, %hi(Scene_Info)
+  /* 18B64C 8018E03C 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 18B650 8018E040 90590000 */       lbu $t9, ($v0) # Scene_Info + 0
   /* 18B654 8018E044 2408001A */     addiu $t0, $zero, 0x1a
-  /* 18B658 8018E048 A0480000 */        sb $t0, ($v0) # D_800A4AD0 + 0
+  /* 18B658 8018E048 A0480000 */        sb $t0, ($v0) # Scene_Info + 0
   /* 18B65C 8018E04C 0C00171D */       jal func_80005C74
-  /* 18B660 8018E050 A0590001 */        sb $t9, 1($v0) # D_800A4AD0 + 1
+  /* 18B660 8018E050 A0590001 */        sb $t9, 1($v0) # Scene_Info + 1
   /* 18B664 8018E054 1000002B */         b .L8018E104
   /* 18B668 8018E058 8FBF001C */        lw $ra, 0x1c($sp)
   .L8018E05C:

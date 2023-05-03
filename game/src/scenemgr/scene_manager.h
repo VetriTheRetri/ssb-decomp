@@ -26,13 +26,13 @@ struct VsRecordData {
 }; // size == 0x5C
 
 // is this the saved data structure?
-struct BigA44E0 {
+struct gmSaveInfo {
     /* 0x000 */ struct VsRecordData vsRecords[SSB64_NUM_PLAYABLE_CHARACTERS];
     /* 0x450 */ u8 unk540[(0x5EC - 0x450)];
 }; // size == 0x5EC
 
 // global and battle settings?
-struct UnkA4AD0 {
+struct gmSceneInfo {
     /* 0x00 */ u8 scene;
     /* 0x01 */ u8 previousScene;
     /* 0x02 */ u8 pad02[0x48 - 0x02];
@@ -141,17 +141,17 @@ struct EffectInfo {
 }; // size >= 0x18
 
 // data
-extern struct BigA44E0 D_800A3994;
-extern struct UnkA4AD0 D_800A3F80;
+extern struct gmSaveInfo D_800A3994;
+extern struct gmSceneInfo D_800A3F80;
 extern struct BattleState gDefaultBattleSettings;
 
 // bss
-extern struct BigA44E0 D_800A44E0;
-extern struct UnkA4AD0 D_800A4AD0;
+extern struct gmSaveInfo Save_Info;
+extern struct gmSceneInfo Scene_Info;
 extern struct BattleState D_800A4B18;
 extern struct BattleState D_800A4D08;
 extern struct BattleState D_800A4EF8;
-extern struct UnkA4AD0 *Match_Info;
+// extern struct gmSceneInfo *Match_Info; //
 extern u32 D_800A50EC;
 extern u8 D_800A50F0[8];
 extern u8 D_800A50F8[324];

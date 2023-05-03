@@ -320,15 +320,15 @@ glabel overlay_set23_entry
   /* 10B7FC 8018D54C AC880010 */        sw $t0, 0x10($a0) # D_ovl5_8018D5D8 + 16
   /* 10B800 8018D550 0C00829D */       jal func_80020A74
   /* 10B804 8018D554 00000000 */       nop 
-  /* 10B808 8018D558 3C02800A */       lui $v0, %hi(D_800A4AD0)
+  /* 10B808 8018D558 3C02800A */       lui $v0, %hi(Scene_Info)
   /* 10B80C 8018D55C 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 10B810 8018D560 24424AD0 */     addiu $v0, $v0, %lo(D_800A4AD0)
-  /* 10B814 8018D564 90490000 */       lbu $t1, ($v0) # D_800A4AD0 + 0
+  /* 10B810 8018D560 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 10B814 8018D564 90490000 */       lbu $t1, ($v0) # Scene_Info + 0
   /* 10B818 8018D568 240A0001 */     addiu $t2, $zero, 1
-  /* 10B81C 8018D56C A04A0000 */        sb $t2, ($v0) # D_800A4AD0 + 0
+  /* 10B81C 8018D56C A04A0000 */        sb $t2, ($v0) # Scene_Info + 0
   /* 10B820 8018D570 27BD0018 */     addiu $sp, $sp, 0x18
   /* 10B824 8018D574 03E00008 */        jr $ra
-  /* 10B828 8018D578 A0490001 */        sb $t1, 1($v0) # D_800A4AD0 + 1
+  /* 10B828 8018D578 A0490001 */        sb $t1, 1($v0) # Scene_Info + 1
 
   /* 10B82C 8018D57C 00000000 */       nop 
 
