@@ -273,3 +273,151 @@ bool32 func_ovl2_800D8FA8(Fighter_Struct *fp, ftCommonAttributes *attributes)
 {
     return func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x);
 }
+
+void func_ovl2_800D8FC8(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 clamp)
+{
+    if (ABS(fp->input.stick_range.x) >= stick_range_min)
+    {
+        fp->phys_info.vel_air.x += (fp->input.stick_range.x * vel);
+
+        if (fp->phys_info.vel_air.x < -clamp)
+        {
+            fp->phys_info.vel_air.x = -clamp;
+        }
+        else if (clamp < fp->phys_info.vel_air.x)
+        {
+            fp->phys_info.vel_air.x = clamp;
+        }
+    }
+}
+
+void func_ovl2_800D9044(Fighter_Struct *fp, ftCommonAttributes *attributes)
+{
+    func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration, attributes->aerial_speed_max_x);
+}
+
+void func_ovl2_800D9074(Fighter_Struct *fp, ftCommonAttributes *attributes)
+{
+    if (fp->phys_info.vel_air.x < 0.0F)
+    {
+        fp->phys_info.vel_air.x += attributes->aerial_friction;
+
+        if (fp->phys_info.vel_air.x >= 0.0F)
+        {
+            fp->phys_info.vel_air.x = 0.0F;
+        }
+    }
+    else
+    {
+        fp->phys_info.vel_air.x -= attributes->aerial_friction;
+
+        if (fp->phys_info.vel_air.x <= 0.0F)
+        {
+            fp->phys_info.vel_air.x = 0.0F;
+        }
+    }
+}
+
+void jtgt_ovl2_800D90E0(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    ftCommonAttributes *attributes = fp->attributes;
+
+    (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
+
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
+    {
+        func_ovl2_800D9044(fp, attributes);
+        func_ovl2_800D9074(fp, attributes);
+    }
+}
+
+void jtgt_ovl2_800D9160(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    ftCommonAttributes *attributes = fp->attributes;
+
+    func_ovl2_800D8DB0(fp);
+
+    (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
+
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
+    {
+        func_ovl2_800D9044(fp, attributes);
+        func_ovl2_800D9074(fp, attributes);
+    }
+}
+
+void func_ovl2_800D91EC(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    ftCommonAttributes *attributes = fp->attributes;
+
+    (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
+
+    if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
+    {
+        func_ovl2_800D9074(fp, attributes);
+    }
+}
+
+void func_ovl2_800D9260(Fighter_Struct *fp, f32 *z, f32 *y, f32 *x) // Ness / Yoshi double jump physics
+{
+    DObj *topn_joint = fp->joint[0];
+    DObj *transn_joint = fp->joint[1];
+    f32 anim_vel_z = (transn_joint->translate.z - fp->anim_vel.z) * fp->lr * topn_joint->scale.z;
+    f32 anim_vel_y = (transn_joint->translate.y - fp->anim_vel.y) * topn_joint->scale.y;
+    f32 cos = cosf(transn_joint->rotate.z);
+    f32 sin = __sinf(transn_joint->rotate.z);
+
+    if (z != NULL)
+    {
+        *z = (anim_vel_z * cos) - (anim_vel_y * sin);
+    }
+    if (y != NULL)
+    {
+        *y = (anim_vel_z * sin) + (anim_vel_y * cos);
+    }
+    if (x != NULL)
+    {
+        *x = (transn_joint->translate.x - fp->anim_vel.x) * -fp->lr * topn_joint->scale.x;
+    }
+}
+
+void func_ovl2_800D938C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    DObj *topn_joint = fp->joint[0];
+    DObj *transn_joint = fp->joint[1];
+
+    fp->phys_info.vel_air.x = (transn_joint->translate.x - fp->anim_vel.x) * topn_joint->scale.x;
+    fp->phys_info.vel_air.y = (transn_joint->translate.y - fp->anim_vel.y) * topn_joint->scale.y;
+    fp->phys_info.vel_air.z = (transn_joint->translate.z - fp->anim_vel.z) * topn_joint->scale.z;
+}
+
+void func_ovl2_800D93E4(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl2_800D9260(fp, &fp->phys_info.vel_air.x, &fp->phys_info.vel_air.y, &fp->phys_info.vel_air.z);
+}
+
+void jtgt_ovl2_800D9414(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl2_800D9260(fp, NULL, &fp->phys_info.vel_air.y, &fp->phys_info.vel_air.z);
+}
+
+void func_ovl2_800D9444(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    fp->phys_info.vel_air.x = fp->phys_info.vel_air.y = fp->phys_info.vel_air.z = 0.0F;
+
+    fp->phys_info.vel_ground.x = fp->phys_info.vel_ground.y = fp->phys_info.vel_ground.z = 0.0F;
+
+    fp->phys_info.vel_damage_air.x = fp->phys_info.vel_damage_air.y = fp->phys_info.vel_damage_air.z = 0.0F;
+
+    fp->phys_info.vel_damage_ground.x = 0.0F;
+}
