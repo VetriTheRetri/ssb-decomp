@@ -14,7 +14,7 @@ Item_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
         {
             Item_Struct *ip = ItemGetStruct(item_gobj);
 
-            if (ip->owner_gobj == fp->this_fighter)
+            if (ip->owner_gobj == fp->fighter_gobj)
             {
                 return ip;
             }
@@ -35,7 +35,7 @@ Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 it_kind)
         {
             Item_Struct *ip = ItemGetStruct(item_gobj);
 
-            if ((ip->owner_gobj == fp->this_fighter) && (ip->it_kind == it_kind))
+            if ((ip->owner_gobj == fp->fighter_gobj) && (ip->it_kind == it_kind))
             {
                 return &DObjGetStruct(ip->item_gobj)->translate;
             }
@@ -364,7 +364,7 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
     while (other_gobj != NULL)
     {
 
-        if (other_gobj != this_fp->this_fighter)
+        if (other_gobj != this_fp->fighter_gobj)
         {
             other_fp = FighterGetStruct(other_gobj);
 
@@ -427,7 +427,7 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
 
     while (other_gobj != NULL)
     {
-        if (other_gobj != this_fp->this_fighter)
+        if (other_gobj != this_fp->fighter_gobj)
         {
             Fighter_Struct *other_fp = FighterGetStruct(other_gobj);
 
@@ -463,7 +463,7 @@ Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
 
     while (other_gobj != NULL)
     {
-        if (other_gobj != this_fp->this_fighter)
+        if (other_gobj != this_fp->fighter_gobj)
         {
             Fighter_Struct *other_fp = FighterGetStruct(other_gobj);
 
@@ -471,7 +471,7 @@ Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
             {
                 if (other_fp->status_info.status_id >= ftStatus_Common_Wait)
                 {
-                    if ((ft_com->target_gobj != NULL) && (other_fp->this_fighter == ft_com->target_gobj))
+                    if ((ft_com->target_gobj != NULL) && (other_fp->fighter_gobj == ft_com->target_gobj))
                     {
                         if (other_fp->percent_damage == ft_com->target_damage_percent)
                         {
@@ -500,7 +500,7 @@ Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
     if (target_fp != NULL)
     {
         ft_com->target_damage_percent = target_damage;
-        ft_com->target_gobj = target_fp->this_fighter;
+        ft_com->target_gobj = target_fp->fighter_gobj;
         ft_com->target_find_wait = (rand_f32() * 300.0F) + 600.0F;
     }
     return NULL;

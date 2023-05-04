@@ -305,7 +305,7 @@ void func_ovl3_80140B00(Fighter_Struct *this_fp, f32 knockback, f32 angle)
     }
     else unk_bool = FALSE;
 
-    func_ovl3_80164F2C(this_fp->this_fighter, this_fp->status_vars.common.damage.publicity_knockback, unk_bool);
+    func_ovl3_80164F2C(this_fp->fighter_gobj, this_fp->status_vars.common.damage.publicity_knockback, unk_bool);
 }
 
 s32 func_ovl3_80140BCC(GObj *fighter_gobj, s32 element, s32 damage_level)

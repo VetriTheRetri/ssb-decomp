@@ -204,7 +204,7 @@ void func_ovl3_80148714(GObj *fighter_gobj)
 
         // TO DO: figure out what this loop bound means
 
-        for (i = 2, index = 0; i < 0x25; i++, fj++)
+        for (i = 2, index = 0; i < ARRAY_COUNT(fp->joint); i++, fj++)
         {
             if (*fj != NULL)
             {
@@ -250,7 +250,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
     {
         func_ovl3_80148488(fp);
     }
-    fp->x19B_flag_b4 = TRUE;
+    fp->anim_flags.flags.x19B_flag_b4 = TRUE;
 
     func_ovl0_800C8758(fp->joint[2], attributes->unk_joint[fp->status_vars.common.guard.angle_i], fp->status_vars.common.guard.angle_f);
     ftAnim_Update(fighter_gobj);
@@ -259,7 +259,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
     {
         scale = &fp->attributes->unk_0x324[4];
 
-        for (i = 4; i < 0x25; i++, p_joint++, scale++)
+        for (i = 4; i < ARRAY_COUNT(fp->joint); i++, p_joint++, scale++)
         {
             joint = *p_joint;
 
@@ -284,7 +284,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
     }
     else
     {
-        for (i = 4; i < 0x25; i++, p_joint++)
+        for (i = 4; i < ARRAY_COUNT(fp->joint); i++, p_joint++)
         {
             joint = *p_joint;
 

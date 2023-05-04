@@ -3,6 +3,7 @@
 
 #include <game/include/ssb_types.h>
 #include <game/include/macros.h>
+#include <game/src/sys/obj_renderer.h> // Probably shouldn't be included
 #include <game/include/ultratypes.h>
 #include <game/src/sys/hal_input.h>
 #include <game/src/sys/obj.h>
@@ -10,6 +11,8 @@
 #include <game/src/ft/fightervars.h>
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
+
+#define FTPARTS_JOINT_NUM_MAX 37
 
 typedef struct Fighter_Struct Fighter_Struct;
 
@@ -23,10 +26,20 @@ typedef struct SpecialHit
 
 } SpecialHit;
 
+typedef struct UnkFighterDObjData
+{
+    s32 joint_index;
+    void *unk_ftdobj_0x4;
+    s32 unk_ftdobj_0x8;
+    s32 unk_ftdobj_0xC;
+
+} UnkFighterDObjData;
+
 typedef struct DObjDescContainer
 {
     DObjDesc *dobj_desc;
-    void *something[3];
+    void *filler[2];
+    u8 unk_dobjcontain_0xC;
 
 } DObjDescContainer;
 
@@ -51,115 +64,6 @@ typedef struct ftThrownStatusArray
 
 } ftThrownStatusArray;
 
-typedef struct ftCommonAttributes
-{
-    f32 size_mul;
-    f32 walkslow_anim_speed;
-    f32 walkmiddle_anim_speed;
-    f32 walkfast_anim_speed;
-    f32 throw_walkslow_anim_speed;
-    f32 throw_walkmiddle_anim_speed;
-    f32 throw_walkfast_anim_speed; // Cargo Throw
-    f32 rebound_anim_length;
-    f32 walk_speed_mul;
-    f32 traction;
-    f32 dash_speed;
-    f32 dash_decelerate;
-    f32 run_speed;
-    f32 kneebend_length; // Jump squat frames
-    f32 jump_vel_x;
-    f32 jump_height_mul;
-    f32 jump_height_base;
-    f32 aerial_jump_vel_x;
-    f32 aerial_jump_height;
-    f32 aerial_acceleration;
-    f32 aerial_speed_max_x;
-    f32 aerial_friction;
-    f32 gravity;
-    f32 fall_speed_max;
-    f32 fast_fall_speed;
-    s32 jumps_max; // Number of jumps
-    f32 weight;
-    f32 attack1_followup_frames; // Jab combo connection frames
-    f32 dash_to_run; // Frames before dash transitions to run?
-    f32 shield_size;
-    f32 shield_break_vel_y;
-    f32 shadow_size;
-    Vec2f jostle_box;
-    f32 unk_0x88;
-    f32 vs_pause_zoom;
-    f32 cam_offset_y;
-    f32 cam_zoom;
-    f32 cam_zoom_default;
-    ObjectColl object_coll;
-    Vec2f cliff_catch; // Ledge grab box
-    u16 dead_sfx[2]; // KO voices
-    u16 deadup_sfx;  // Star-KO voice
-    u16 damage_sfx;
-    u16 smash_sfx[3]; // Random Smash SFX
-    s16 unk_0xC2;
-    ftItemPickup item_pickup;
-    s16 unk_0xE4;
-    s16 unk_0xE6;
-    u16 throw_heavy_sfx;
-    u16 unk_0xEA;
-    s32 unk_0xEC;
-    u8 filler_0xEC[0x100 - 0xF0];
-    u32 is_have_attack11 : 1;
-    u32 is_have_attack12 : 1;
-    u32 is_have_attackdash : 1;
-    u32 is_have_attacks3 : 1;
-    u32 is_have_attackhi3 : 1;
-    u32 is_have_attacklw3 : 1;
-    u32 is_have_attacks4 : 1;
-    u32 is_have_attackhi4 : 1;
-    u32 is_have_attacklw4 : 1;
-    u32 is_have_attackairn : 1;
-    u32 is_have_attackairf : 1;
-    u32 is_have_attackairb : 1;
-    u32 is_have_attackairhi : 1;
-    u32 is_have_attackairlw : 1;
-    u32 is_have_specialn : 1;
-    u32 is_have_specialairn : 1;
-    u32 is_have_specialhi : 1;
-    u32 is_have_specialairhi : 1;
-    u32 is_have_speciallw : 1;
-    u32 is_have_specialairlw : 1;
-    u32 is_have_catch : 1;   // Whether fighter has a grab
-    u32 catch_flags_b21 : 1;
-    u32 catch_flags_b22 : 1;
-    u32 catch_flags_b23 : 1;
-    u32 catch_flags_b24 : 1;
-    u32 catch_flags_b25 : 1;
-    u32 catch_flags_b26 : 1;
-    u32 catch_flags_b27 : 1;
-    u32 catch_flags_b28 : 1;
-    u32 catch_flags_b29 : 1;
-    u32 catch_flags_b30 : 1;
-    u32 catch_flags_b31 : 1;
-    u8 filler_0x104[0x2B8 - 0x104];
-    bool32 cliff_status_ground_air_id[5];
-    u8 filler_0x2CC[0x2D4 - 0x2CC];
-    DObjDescContainer *dobj_desc_container;
-    DObjDesc *dobj_lookup; // WARNING: Not actually DObjDesc* but I don't know what this struct is or what its bounds are; bunch of consecutive floats
-    s32 *unk_joint[8];
-    s32 joint_index1; // What does this do?
-    f32 joint_float1;
-    s32 joint_index2;
-    f32 joint_float2;
-    u8 filler_0x304[0x31C - 0x30C];
-    f32 unk_0x31C;
-    f32 unk_0x320;
-    Vec3f *unk_0x324; // Pointer to some array of vectors, something to do with joints
-    s32 unk_0x328;
-    s32 unk_0x32C;
-    s32 unk_0x330;
-    s32 joint_itemhold_heavy;
-    ftThrownStatusArray *thrown_status;
-    s32 joint_itemhold_light;
-
-} ftCommonAttributes;
-
 typedef struct ftDataUnkContainer3
 {
     s32 x0;
@@ -182,12 +86,14 @@ typedef struct ftScriptInfoArray
 
 typedef struct ftData
 {
-    u8 filler_0x0[0x2C];
+    u8 filler_0x0[0x28];
+    void **p_file; // Pointer to character's file?
     ftDataUnkContainer3 *unk_0x2C;
     ftDataUnkContainer3 *unk_0x30;
     s32 unk_0x34;
     void *unk_0x38;
-    u8 filler_0x3C[0x64 - 0x3C];
+    u8 filler_0x3C[0x60 - 0x3C];
+    intptr_t o_attributes; // (*p_file + o_attributes) = pointer to fighter's attributes   
     ftScriptInfoArray *script1;
     ftScriptInfoArray *script2;
 
@@ -485,9 +391,9 @@ typedef struct FighterAnimFlags
     {
         struct
         {
-            u32 is_use_xrotn : 1;
-            u32 is_use_transn : 1;
-            u32 is_use_yrotn : 1;
+            u32 is_use_xrotn_joint : 1;
+            u32 is_use_transn_joint : 1;
+            u32 is_use_yrotn_joint : 1;
             u32 x198_flag_b3 : 1;
             u32 x198_flag_b4 : 1;
             u32 x198_flag_b5 : 1;
@@ -517,8 +423,10 @@ typedef struct FighterAnimFlags
             u32 x19B_flag_b5 : 1;
             u32 x19B_flag_b6 : 1;
             u32 x19B_flag_b7 : 1;
-        };
-        u32 flags;
+
+        } flags;
+
+        u32 word;
     };
 
 } FighterAnimFlags;
@@ -553,20 +461,34 @@ typedef struct ftThrowReleaseDesc
 
 typedef struct ftSpawnInfo
 {
-    s32 unk_rebirth_0x0;
+    s32 ft_kind;
     Vec3f pos;
     s32 lr_spawn;
-    s32 unk_rebirth_0x14;
-    s32 unk_rebirth_0x18;
-    s32 unk_rebirth_0x1C;
-    s32 ft_kind;    // Might be used exclusively for Kirby's copy ID
+    u8 team;
+    u8 port_id;
+    u8 model_lod;
+    u8 costume_id;
+    u8 shade_id;
+    u8 handicap;
+    u8 cp_level;
+    u8 stock_count;
+    u32 unk_rebirth_0x1C : 8;
+    u32 unk_rebirth_0x1D : 8;
+    u32 unk_rebirth_0x1E : 8;
+    bool32 unk_rebirth_0x1F_b0 : 1;
+    bool32 unk_rebirth_0x1F_b1 : 1;
+    u32 unk_rebirth_0x1F_b2 : 1;
+    u32 unk_rebirth_0x1F_b3 : 1;
+    s32 copy_kind;    // Might be used exclusively for Kirby's copy ID
     s32 damage;
-    s32 unk_rebirth_0x28;
-    s32 unk_rebirth_0x2C;
-    s32 unk_rebirth_0x30;
-    s32 unk_rebirth_0x34;
-    s32 unk_rebirth_0x38;
-    s32 unk_rebirth_0x3C;
+    s32 pl_kind;
+    void *p_controller; // Pointer to player's controller inputs
+    u16 button_mask_a;
+    u16 button_mask_b;
+    u16 button_mask_z;
+    u16 button_mask_l;
+    void *unk_rebirth_0x38; // Pointer to animation bank?
+    void *unk_rebirth_0x3C;
 
 } ftSpawnInfo;
 
@@ -625,10 +547,20 @@ typedef struct _Fighter_Hit
 
 } Fighter_Hit;
 
+typedef struct FighterHurtDesc
+{
+    s32 joint_index;
+    s32 unk_fthdesc_0x4;
+    s32 unk_fthdesc_0x8;
+    Vec3f offset;
+    Vec3f size;
+
+} FighterHurtDesc;
+
 typedef struct Fighter_Hurt
 {
     s32 hit_status;
-    s32 unk_ftht_0x4;
+    s32 joint_index;
     DObj *joint;
     s32 unk_ftht_0xC;
     s32 unk_ftht_0x10;
@@ -745,10 +677,124 @@ typedef struct Fighter_Com
 
 } Fighter_Com;
 
+typedef struct ftCommonAttributes
+{
+    f32 size_mul;
+    f32 walkslow_anim_speed;
+    f32 walkmiddle_anim_speed;
+    f32 walkfast_anim_speed;
+    f32 throw_walkslow_anim_speed;
+    f32 throw_walkmiddle_anim_speed;
+    f32 throw_walkfast_anim_speed; // Cargo Throw
+    f32 rebound_anim_length;
+    f32 walk_speed_mul;
+    f32 traction;
+    f32 dash_speed;
+    f32 dash_decelerate;
+    f32 run_speed;
+    f32 kneebend_length; // Jump squat frames
+    f32 jump_vel_x;
+    f32 jump_height_mul;
+    f32 jump_height_base;
+    f32 aerial_jump_vel_x;
+    f32 aerial_jump_height;
+    f32 aerial_acceleration;
+    f32 aerial_speed_max_x;
+    f32 aerial_friction;
+    f32 gravity;
+    f32 fall_speed_max;
+    f32 fast_fall_speed;
+    s32 jumps_max; // Number of jumps
+    f32 weight;
+    f32 attack1_followup_frames; // Jab combo connection frames
+    f32 dash_to_run; // Frames before dash transitions to run?
+    f32 shield_size;
+    f32 shield_break_vel_y;
+    f32 shadow_size;
+    Vec2f jostle_box;
+    f32 unk_0x88;
+    f32 vs_pause_zoom;
+    f32 cam_offset_y;
+    f32 cam_zoom;
+    f32 cam_zoom_default;
+    ObjectColl object_coll;
+    Vec2f cliff_catch; // Ledge grab box
+    u16 dead_sfx[2]; // KO voices
+    u16 deadup_sfx;  // Star-KO voice
+    u16 damage_sfx;
+    u16 smash_sfx[3]; // Random Smash SFX
+    s16 unk_0xC2;
+    ftItemPickup item_pickup;
+    s16 unk_0xE4;
+    s16 unk_0xE6;
+    u16 throw_heavy_sfx;
+    u16 unk_0xEA;
+    s32 unk_0xEC;
+    GfxColorAlpha shade_color[4];
+    u32 is_have_attack11 : 1;
+    u32 is_have_attack12 : 1;
+    u32 is_have_attackdash : 1;
+    u32 is_have_attacks3 : 1;
+    u32 is_have_attackhi3 : 1;
+    u32 is_have_attacklw3 : 1;
+    u32 is_have_attacks4 : 1;
+    u32 is_have_attackhi4 : 1;
+    u32 is_have_attacklw4 : 1;
+    u32 is_have_attackairn : 1;
+    u32 is_have_attackairf : 1;
+    u32 is_have_attackairb : 1;
+    u32 is_have_attackairhi : 1;
+    u32 is_have_attackairlw : 1;
+    u32 is_have_specialn : 1;
+    u32 is_have_specialairn : 1;
+    u32 is_have_specialhi : 1;
+    u32 is_have_specialairhi : 1;
+    u32 is_have_speciallw : 1;
+    u32 is_have_specialairlw : 1;
+    u32 is_have_catch : 1;   // Whether fighter has a grab
+    u32 catch_flags_b21 : 1;
+    u32 catch_flags_b22 : 1;
+    u32 catch_flags_b23 : 1;
+    u32 catch_flags_b24 : 1;
+    u32 catch_flags_b25 : 1;
+    u32 catch_flags_b26 : 1;
+    u32 catch_flags_b27 : 1;
+    u32 catch_flags_b28 : 1;
+    u32 catch_flags_b29 : 1;
+    u32 catch_flags_b30 : 1;
+    u32 catch_flags_b31 : 1;
+    FighterHurtDesc fighter_hurt_desc[11];
+    s32 unk_ftca_0x290;
+    s32 unk_ftca_0x294;
+    s32 unk_ftca_0x298;
+    s32 unk_ftca_0x29C;
+    u8 filler_0x2A0[0x2B8 - 0x2A0];
+    bool32 cliff_status_ground_air_id[5];
+    u8 filler_0x2CC[0x2D4 - 0x2CC];
+    DObjDescContainer *dobj_desc_container;
+    DObjDesc *dobj_lookup; // WARNING: Not actually DObjDesc* but I don't know what this struct is or what its bounds are; bunch of consecutive floats
+    s32 *unk_joint[8];
+    s32 joint_index1; // What does this do?
+    f32 joint_float1;
+    s32 joint_index2;
+    f32 joint_float2;
+    u8 filler_0x304[0x31C - 0x30C];
+    f32 unk_0x31C;
+    f32 unk_0x320;
+    Vec3f *unk_0x324; // Pointer to some array of vectors, something to do with joints
+    s32 unk_0x328;
+    UnkFighterDObjData *unk_0x32C;
+    s32 unk_0x330;
+    s32 joint_itemhold_heavy;
+    ftThrownStatusArray *thrown_status;
+    s32 joint_itemhold_light;
+
+} ftCommonAttributes;
+
 struct Fighter_Struct
 {
     void *fp_alloc_next;
-    GObj *this_fighter;
+    GObj *fighter_gobj;
     ftKind ft_kind;
     u8 team;
     u8 port_id;
@@ -776,7 +822,7 @@ struct Fighter_Struct
     s32 percent_damage;
     s32 damage_resist; // Resits a specific amount of % damage before breaking, effectively damage-based armor
     s32 shield_health;
-    s32 x38_unk;
+    f32 unk_ft_0x38;
     s32 x3C_unk;
     u32 hitlag_timer; // Freeze if TRUE
     s32 lr; // Facing direction; -1 = LEFT, 1 = RIGHT
@@ -793,6 +839,7 @@ struct Fighter_Struct
     Coll_Data coll_data;
 
     u8 jumps_used;
+    u8 unk_ft_0x149;
     Ground_Air ground_or_air;
 
     f32 attack1_followup_frames;
@@ -854,11 +901,7 @@ struct Fighter_Struct
     u32 x18E_flag_b3 : 1;
     u32 x18E_flag_b4 : 1;
     u32 x18E_flag_b5 : 1;
-    u32 x18E_flag_b6 : 1;
-    u32 x18E_flag_b7 : 1;
-
-    u32 x18F_flag_b0 : 1;
-    u32 x18F_flag_b1 : 1;
+    u32 x18E_flag_4bit : 4; // Slope Contour behavior?
     u32 x18F_flag_b2 : 1;
     u32 is_statupdate_stop_gfx : 1; // Destroy GFX on action state change if TRUE
     u32 x18F_flag_b4 : 1;
@@ -895,50 +938,10 @@ struct Fighter_Struct
     u32 x193_flag_b7 : 1;
 
     u32 unk_0x194;
-    union
-    {
-        struct
-        {
-            u32 x198_flag_b0 : 1;
-            u32 x198_flag_b1 : 1;
-            u32 x198_flag_b2 : 1;
-            u32 x198_flag_b3 : 1;
-            u32 x198_flag_b4 : 1;
-            u32 x198_flag_b5 : 1;
-            u32 x198_flag_b6 : 1;
-            u32 x198_flag_b7 : 1;
-            u32 x199_flag_b0 : 1;
-            u32 x199_flag_b1 : 1;
-            u32 x199_flag_b2 : 1;
-            u32 x199_flag_b3 : 1;
-            u32 x199_flag_b4 : 1;
-            u32 x199_flag_b5 : 1;
-            u32 x199_flag_b6 : 1;
-            u32 x199_flag_b7 : 1;
-            u32 x19A_flag_b0 : 1;
-            u32 x19A_flag_b1 : 1;
-            u32 x19A_flag_b2 : 1;
-            u32 x19A_flag_b3 : 1;
-            u32 x19A_flag_b4 : 1;
-            u32 x19A_flag_b5 : 1;
-            u32 x19A_flag_b6 : 1;
-            u32 x19A_flag_b7 : 1;
-            u32 x19B_flag_b0 : 1;
-            u32 x19B_flag_b1 : 1;
-            u32 x19B_flag_b2 : 1;
-            u32 x19B_flag_b3 : 1;
-            u32 x19B_flag_b4 : 1;
-            u32 x19B_flag_b5 : 1;
-            u32 x19B_flag_b6 : 1;
-            u32 x19B_flag_b7 : 1;
-        };
 
-        u32 unk_0x198;
-    };
+    FighterAnimFlags anim_flags;
 
-    u32 unk_0x19C;
-    u32 unk_0x1A0;
-    f32 float_unk;
+    Vec3f anim_vel;
     u32 unk_0x1A8;
     u32 unk_0x1AC;
 
@@ -1076,15 +1079,15 @@ struct Fighter_Struct
     SpecialHit *special_hit;
     Vec3f entry_pos;
 
-    u8 filler_0x844[0x864 - 0x860];
-
-    f32 fighter_cam_zoom_range;
+    f32 fighter_cam_zoom_frame; // Maximum size of fighter's camera range?
+    f32 fighter_cam_zoom_range; // Multiplier of fighter's camera range?
 
     ftUnkFrameStruct unk_frame[4];
 
-    DObj *joint[37];
+    DObj *joint[FTPARTS_JOINT_NUM_MAX];
 
-    u8 filler_0x980[0x9C4 - 0x97C];
+    s8 joint_render_state[FTPARTS_JOINT_NUM_MAX - 4][2]; // Display List active = 0, inactive = -1?
+    s8 unk_render[2][2];
 
     ftData *ft_data;
     ftCommonAttributes *attributes;
@@ -1108,7 +1111,12 @@ struct Fighter_Struct
     void (*cb_hitlag_end)(GObj*);
     void (*cb_status)(GObj*);
 
-    u8 filler_0xA10[0xA28 - 0xA10];
+    s32 unk_ft_0xA10;
+    s16 unk_ft_0xA14;
+    s32 unk_ft_0xA18;
+    s16 unk_ft_0xA1C;
+    s32 unk_ft_0xA20;
+    s16 unk_ft_0xA24;
 
     Color_Overlay color_anim;
 
@@ -1120,12 +1128,12 @@ struct Fighter_Struct
     s32 unk_ft_0xA80;
     s32 unk_ft_0xA84;
     u32 unk_ft_0xA88_b0 : 1;
-
+    u32 unk_ft_0xA88_b1_31 : 31;
     u8 unk_0xA8C;
     u8 unk_0xA8D;
     u8 unk_0xA8E;
     u8 unk_0xA8F;
-    u32 unk_0xA90;
+    GfxColorAlpha shade;
     u32 unk_0xA94;
     u32 unk_0xA98;
     s8 unk_0xA9C;

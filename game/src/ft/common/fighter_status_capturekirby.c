@@ -121,7 +121,7 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
 
             if (capture_fp->ground_or_air == ground)
             {
-                func_ovl3_80162D80(capture_fp->this_fighter);
+                func_ovl3_80162D80(capture_fp->fighter_gobj);
 
                 is_wiggle = TRUE;
 
@@ -135,7 +135,7 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
 
             if (capture_fp->ground_or_air == ground)
             {
-                func_ovl3_80162D80(capture_fp->this_fighter);
+                func_ovl3_80162D80(capture_fp->fighter_gobj);
 
                 is_wiggle = TRUE;
 

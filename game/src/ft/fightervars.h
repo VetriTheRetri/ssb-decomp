@@ -65,6 +65,9 @@
 #define FTCOMMON_JUMPAERIAL_TURN_INVERT_LR_WAIT 6               // Invert facing direction on this frame of the direction turn process          
 #define FTCOMMON_JUMPAERIAL_TURN_ROTATE_STEP (-0.2617994F)      // Model Y-rotation step for characters who can turn around during their double jump
 
+#define FTCOMMON_FALL_FAST_STICK_RANGE_MIN (-53)
+#define FTCOMMON_FALL_FAST_BUFFER_FRAMES_MAX 4
+
 #define FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX 4
 #define FTCOMMON_DAMAGE_SMASH_DI_RANGE_MIN 53
 #define FTCOMMON_DAMAGE_CATCH_RELEASE_THRESHOLD 6               // If a grabbed fighter takes more than this much damage in one hit, they're released

@@ -90,7 +90,10 @@ typedef struct MObj // Image footer struct
 
 typedef struct UnkDObjData
 {
-    u8 filler_0x0[0xDC];
+    u8 filler_0x0[0xc];
+    u8 unk_0xC;
+    u8 unk_0xD;
+    u8 filler_0xE[0xDC - 0xE];
     GObj *unk_gobj;
 
 } UnkDObjData;
@@ -114,8 +117,8 @@ struct DObj
     s32 unk_0x4C;
     void *display_list;
     u8 unk_0x54;
-    void *mtx_position; // ???
-    OMMtx om_mtx[5];
+    OMMtx *unk58[5];
+    void *aobj;
     s32 unk_dobj_0x70;
     f32 unk_dobj_0x74; // Multi-purpose? Usually FLOAT32_MAX, used as rotation step in Crate/Barrel smash GFX?
     f32 unk_dobj_0x78; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?

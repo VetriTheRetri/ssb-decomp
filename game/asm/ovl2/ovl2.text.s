@@ -845,13 +845,13 @@ glabel func_ovl2_800D6FE0
   /* 052844 800D7044 0C0337DE */       jal rldm_initialize
   /* 052848 800D7048 27A40048 */     addiu $a0, $sp, 0x48
   /* 05284C 800D704C 3C14800A */       lui $s4, %hi(D_800A50F8)
-  /* 052850 800D7050 3C158011 */       lui $s5, %hi(D_ovl2_80116E10)
+  /* 052850 800D7050 3C158011 */       lui $s5, %hi(Fighter_FileData_ContainerList)
   /* 052854 800D7054 3C178011 */       lui $s7, %hi(D_ovl2_80116E7C)
   /* 052858 800D7058 26F76E7C */     addiu $s7, $s7, %lo(D_ovl2_80116E7C)
-  /* 05285C 800D705C 26B56E10 */     addiu $s5, $s5, %lo(D_ovl2_80116E10)
+  /* 05285C 800D705C 26B56E10 */     addiu $s5, $s5, %lo(Fighter_FileData_ContainerList)
   /* 052860 800D7060 269450F8 */     addiu $s4, $s4, %lo(D_800A50F8)
   .L800D7064:
-  /* 052864 800D7064 8EB20000 */        lw $s2, ($s5) # D_ovl2_80116E10 + 0
+  /* 052864 800D7064 8EB20000 */        lw $s2, ($s5) # Fighter_FileData_ContainerList + 0
   /* 052868 800D7068 0280B025 */        or $s6, $s4, $zero
   /* 05286C 800D706C 00009825 */        or $s3, $zero, $zero
   /* 052870 800D7070 00008825 */        or $s1, $zero, $zero
@@ -1150,17 +1150,17 @@ glabel func_ovl2_800D7194
   /* 052CBC 800D74BC 0C033722 */       jal rldm_get_file_with_external_heap
   /* 052CC0 800D74C0 00402825 */        or $a1, $v0, $zero
   /* 052CC4 800D74C4 8FA30050 */        lw $v1, 0x50($sp)
-  /* 052CC8 800D74C8 3C068011 */       lui $a2, %hi(D_ovl2_80116E10)
+  /* 052CC8 800D74C8 3C068011 */       lui $a2, %hi(Fighter_FileData_ContainerList)
   /* 052CCC 800D74CC 3C05800A */       lui $a1, %hi(D_800A50F8)
   /* 052CD0 800D74D0 3C07800A */       lui $a3, %hi(D_800A523C)
   /* 052CD4 800D74D4 8FAA0038 */        lw $t2, 0x38($sp)
   /* 052CD8 800D74D8 24E7523C */     addiu $a3, $a3, %lo(D_800A523C)
   /* 052CDC 800D74DC 24A550F8 */     addiu $a1, $a1, %lo(D_800A50F8)
-  /* 052CE0 800D74E0 24C66E10 */     addiu $a2, $a2, %lo(D_ovl2_80116E10)
+  /* 052CE0 800D74E0 24C66E10 */     addiu $a2, $a2, %lo(Fighter_FileData_ContainerList)
   /* 052CE4 800D74E4 30690002 */      andi $t1, $v1, 2
   /* 052CE8 800D74E8 30680001 */      andi $t0, $v1, 1
   .L800D74EC:
-  /* 052CEC 800D74EC 8CC40000 */        lw $a0, ($a2) # D_ovl2_80116E10 + 0
+  /* 052CEC 800D74EC 8CC40000 */        lw $a0, ($a2) # Fighter_FileData_ContainerList + 0
   /* 052CF0 800D74F0 00001825 */        or $v1, $zero, $zero
   /* 052CF4 800D74F4 8C8F0028 */        lw $t7, 0x28($a0)
   /* 052CF8 800D74F8 ADE00000 */        sw $zero, ($t7)
@@ -1286,10 +1286,10 @@ glabel func_ovl2_800D767C
 glabel func_ovl2_800D7694
   /* 052E94 800D7694 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 052E98 800D7698 AFB00018 */        sw $s0, 0x18($sp)
-  /* 052E9C 800D769C 3C108011 */       lui $s0, %hi(D_ovl2_80116E10)
+  /* 052E9C 800D769C 3C108011 */       lui $s0, %hi(Fighter_FileData_ContainerList)
   /* 052EA0 800D76A0 00047080 */       sll $t6, $a0, 2
   /* 052EA4 800D76A4 020E8021 */      addu $s0, $s0, $t6
-  /* 052EA8 800D76A8 8E106E10 */        lw $s0, %lo(D_ovl2_80116E10)($s0)
+  /* 052EA8 800D76A8 8E106E10 */        lw $s0, %lo(Fighter_FileData_ContainerList)($s0)
   /* 052EAC 800D76AC AFBF001C */        sw $ra, 0x1c($sp)
   /* 052EB0 800D76B0 0C0336F4 */       jal rldm_bytes_needed_to_load
   /* 052EB4 800D76B4 8E040000 */        lw $a0, ($s0)
@@ -1320,10 +1320,10 @@ glabel func_ovl2_800D7694
 glabel func_ovl2_800D7710
   /* 052F10 800D7710 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 052F14 800D7714 AFB00018 */        sw $s0, 0x18($sp)
-  /* 052F18 800D7718 3C108011 */       lui $s0, %hi(D_ovl2_80116E10)
+  /* 052F18 800D7718 3C108011 */       lui $s0, %hi(Fighter_FileData_ContainerList)
   /* 052F1C 800D771C 00047080 */       sll $t6, $a0, 2
   /* 052F20 800D7720 020E8021 */      addu $s0, $s0, $t6
-  /* 052F24 800D7724 8E106E10 */        lw $s0, %lo(D_ovl2_80116E10)($s0)
+  /* 052F24 800D7724 8E106E10 */        lw $s0, %lo(Fighter_FileData_ContainerList)($s0)
   /* 052F28 800D7728 AFBF001C */        sw $ra, 0x1c($sp)
   /* 052F2C 800D772C 8E050004 */        lw $a1, 4($s0)
   /* 052F30 800D7730 50A00006 */      beql $a1, $zero, .L800D774C
@@ -1419,9 +1419,9 @@ glabel func_ovl2_800D782C
 
 glabel func_ovl2_800D786C
   /* 05306C 800D786C 00047080 */       sll $t6, $a0, 2
-  /* 053070 800D7870 3C028011 */       lui $v0, %hi(D_ovl2_80116E10)
+  /* 053070 800D7870 3C028011 */       lui $v0, %hi(Fighter_FileData_ContainerList)
   /* 053074 800D7874 004E1021 */      addu $v0, $v0, $t6
-  /* 053078 800D7878 8C426E10 */        lw $v0, %lo(D_ovl2_80116E10)($v0)
+  /* 053078 800D7878 8C426E10 */        lw $v0, %lo(Fighter_FileData_ContainerList)($v0)
   /* 05307C 800D787C 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 053080 800D7880 AFBF0014 */        sw $ra, 0x14($sp)
   /* 053084 800D7884 8C4F0028 */        lw $t7, 0x28($v0)
@@ -1440,9 +1440,9 @@ glabel func_ovl2_800D786C
 
 glabel func_ovl2_800D78B4
   /* 0530B4 800D78B4 00047080 */       sll $t6, $a0, 2
-  /* 0530B8 800D78B8 3C028011 */       lui $v0, %hi(D_ovl2_80116E10)
+  /* 0530B8 800D78B8 3C028011 */       lui $v0, %hi(Fighter_FileData_ContainerList)
   /* 0530BC 800D78BC 004E1021 */      addu $v0, $v0, $t6
-  /* 0530C0 800D78C0 8C426E10 */        lw $v0, %lo(D_ovl2_80116E10)($v0)
+  /* 0530C0 800D78C0 8C426E10 */        lw $v0, %lo(Fighter_FileData_ContainerList)($v0)
   /* 0530C4 800D78C4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 0530C8 800D78C8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 0530CC 800D78CC 24050010 */     addiu $a1, $zero, 0x10
@@ -1920,7 +1920,7 @@ glabel func_ovl2_800D7F3C
   /* 053798 800D7F98 0C035D65 */       jal func_ovl2_800D7594
   /* 05379C 800D7F9C 00000000 */       nop 
   /* 0537A0 800D7FA0 8FA60060 */        lw $a2, 0x60($sp)
-  /* 0537A4 800D7FA4 3C0B8011 */       lui $t3, %hi(D_ovl2_80116E10)
+  /* 0537A4 800D7FA4 3C0B8011 */       lui $t3, %hi(Fighter_FileData_ContainerList)
   /* 0537A8 800D7FA8 24010003 */     addiu $at, $zero, 3
   /* 0537AC 800D7FAC ACC20084 */        sw $v0, 0x84($a2)
   /* 0537B0 800D7FB0 8ECF0028 */        lw $t7, 0x28($s6)
@@ -1932,7 +1932,7 @@ glabel func_ovl2_800D7F3C
   /* 0537C8 800D7FC8 00185080 */       sll $t2, $t8, 2
   /* 0537CC 800D7FCC 016A5821 */      addu $t3, $t3, $t2
   /* 0537D0 800D7FD0 AC580008 */        sw $t8, 8($v0)
-  /* 0537D4 800D7FD4 8D6B6E10 */        lw $t3, %lo(D_ovl2_80116E10)($t3)
+  /* 0537D4 800D7FD4 8D6B6E10 */        lw $t3, %lo(Fighter_FileData_ContainerList)($t3)
   /* 0537D8 800D7FD8 AC4B09C4 */        sw $t3, 0x9c4($v0)
   /* 0537DC 800D7FDC 8D6C0028 */        lw $t4, 0x28($t3)
   /* 0537E0 800D7FE0 8D6E0060 */        lw $t6, 0x60($t3)

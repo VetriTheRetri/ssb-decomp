@@ -4,13 +4,13 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftcaptain",
-    "\\game\\src\\ft\\chara\\ftkirby",
-    "\\game\\src\\ft\\chara\\ftmario",
-    "\\game\\src\\ft\\chara\\ftpurin",
-    "\\game\\src\\ft\\chara\\ftsamus"
+    "\\game\\src\\ft\\common",
+    "\\game\\src\\it",
+    "\\game\\src\\it\\article",
+    "\\game\\src\\mp",
+    "\\game\\src\\ovl2",
+    "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftpurin\\ftpurin_statusvars.h",
+  "SelectedNode": "\\game\\src\\it\\article\\article.h",
   "PreviewInSolutionExplorer": false
 }

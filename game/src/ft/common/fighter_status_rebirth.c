@@ -85,7 +85,7 @@ loop: // This makes no sense
 
     this_fp->fighter_cam_zoom_range = 0.6F;
 
-    if (func_ovl2_80104068(this_gobj, this_fp->attributes->unk_0xEC) != 0)
+    if (func_ovl2_80104068(this_gobj, this_fp->attributes->unk_0xEC) != NULL)
     {
         this_fp->is_statupdate_stop_gfx = TRUE;
     }

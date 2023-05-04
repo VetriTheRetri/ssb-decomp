@@ -122,7 +122,7 @@ void func_ovl3_801472D4(Fighter_Struct *fp, s32 ammo_sub)
         }
         else flame_vel_index = fp->status_vars.common.fireflower.flame_vel_index;
 
-        func_ovl3_8017604C(fp->this_fighter, &flame_spawn_offset, flame_vel_index, ammo_sub);
+        func_ovl3_8017604C(fp->fighter_gobj, &flame_spawn_offset, flame_vel_index, ammo_sub);
         func_ovl2_800E806C(fp, 6, 0);
     }
     fp->status_vars.common.fireflower.ammo_fire_count++;

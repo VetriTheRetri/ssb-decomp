@@ -22,13 +22,13 @@ bool32 func_ovl3_80150660(Fighter_Struct *fp)
 
     if (func_ovl3_80146A8C(fp) != FALSE)
     {
-        func_ovl3_80146690(fp->this_fighter, ftStatus_Common_LightThrowHi4);
+        func_ovl3_80146690(fp->fighter_gobj, ftStatus_Common_LightThrowHi4);
 
         return TRUE;
     }
     if (attributes->is_have_attackhi4)
     {
-        func_ovl3_801505F0(fp->this_fighter);
+        func_ovl3_801505F0(fp->fighter_gobj);
 
         return TRUE;
     }
