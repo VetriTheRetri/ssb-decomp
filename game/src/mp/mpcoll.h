@@ -5,12 +5,12 @@
 #include <ssb_types.h>
 #include <macros.h>
 
-#define MPCOLL_MASK_RWALL 0x1
-#define MPCOLL_MASK_LWALL 0x20
-#define MPCOLL_MASK_CEIL 0x400
-#define MPCOLL_MASK_GROUND 0x800
+#define MPCOLL_MASK_RWALL   (1 << 0)
+#define MPCOLL_MASK_LWALL   (1 << 5)
+#define MPCOLL_MASK_CEIL    (1 << 10)
+#define MPCOLL_MASK_GROUND  (1 << 15)
 
-#define MPCOLL_MASK_ALL (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every collision flag
+#define MPCOLL_MASK_ALL     (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every collision flag
 
 typedef enum Ground_Air
 {
@@ -38,14 +38,13 @@ typedef struct _Coll_Data
     Vec3f pos_project; // Unconfirmed
     ObjectColl object_coll;
     void *p_object_coll; // Points back to collision box???
-    Vec2f unk_0x4C;
+    Vec2f cliffcatch_coll;
     u16 unk_0x54;
     u16 coll_mask;
     u16 unk_0x58;
     u16 coll_type; // "Flag that relates to type of clipping?"
     u16 wall_flag; // "Flag is enabled if moving into a wall"
-    u16 unk_0x60;
-    u16 unk_0x62;
+    s32 unk_0x60;
     bool32 unk_0x64;
     Vec3f ground_to_air_pos_last;
 
