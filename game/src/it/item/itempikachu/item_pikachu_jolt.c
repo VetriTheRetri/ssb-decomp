@@ -439,7 +439,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
         if (func_ovl2_800FC67C(ip->coll_data.rwall_line_id) == 0)
         {
-            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0f);
+            func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
             return TRUE;
         }
 
