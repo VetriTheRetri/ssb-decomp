@@ -44,7 +44,7 @@ void func_ovl3_8014A72C(GObj *fighter_gobj)
     Vec3f capture_pos;
     f32 dist_y;
 
-    if (func_ovl2_800F3DD8(capture_fp->coll_data.ground_line_id, this_pos, &dist_y, &this_fp->coll_data.clip_flag, &this_fp->coll_data.ground_angle.x) != FALSE)
+    if (func_ovl2_800F3DD8(capture_fp->coll_data.ground_line_id, this_pos, &dist_y, &this_fp->coll_data.ground_flags, &this_fp->coll_data.ground_angle.x) != FALSE)
     {
         this_fp->coll_data.ground_line_id = capture_fp->coll_data.ground_line_id;
 
@@ -133,7 +133,7 @@ void func_ovl3_8014A980(GObj *fighter_gobj)
     Vec3f capture_pos;
     f32 dist_y;
 
-    if (func_ovl2_800F3DD8(capture_fp->coll_data.ground_line_id, this_pos, &dist_y, &this_fp->coll_data.clip_flag, &this_fp->coll_data.ground_angle.x) != FALSE)
+    if (func_ovl2_800F3DD8(capture_fp->coll_data.ground_line_id, this_pos, &dist_y, &this_fp->coll_data.ground_flags, &this_fp->coll_data.ground_angle.x) != FALSE)
     {
         this_fp->coll_data.ground_line_id = capture_fp->coll_data.ground_line_id;
 

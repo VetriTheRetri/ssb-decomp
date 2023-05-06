@@ -204,7 +204,7 @@ void func_ovl3_8016178C(GObj *fighter_gobj)
         fp->phys_info.vel_ground.x = -FTKIRBY_STONE_SLIDE_CLAMP_VEL_X;
     }
 
-    func_ovl2_800D8978(fp, (D_ovl2_8012C4E0[fp->coll_data.clip_flag & 0xFFFF00FF] * attributes->traction * FTKIRBY_STONE_SLIDE_TRACTION_MUL));
+    func_ovl2_800D8978(fp, (D_ovl2_8012C4E0[fp->coll_data.ground_flags & 0xFFFF00FF] * attributes->traction * FTKIRBY_STONE_SLIDE_TRACTION_MUL));
     func_ovl2_800D87D0(fighter_gobj);
 }
 

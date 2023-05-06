@@ -128,7 +128,7 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
                 capture_fp->phys_info.vel_air.y = FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY;
             }
         }
-        else if ((this_fp->input.stick_range.y <= -FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN) && (this_fp->tap_stick_y < FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX) && (this_fp->coll_data.clip_flag & 0x4000))
+        else if ((this_fp->input.stick_range.y <= -FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN) && (this_fp->tap_stick_y < FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX) && (this_fp->coll_data.ground_flags & 0x4000))
         {
             this_fp->tap_stick_y = U8_MAX - 1;
             is_wiggle = TRUE;

@@ -93,7 +93,7 @@ bool32 func_ovl3_80156320(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->coll_data.clip_flag & 0x4000) == FALSE) || (fp->input.stick_range.y >= FTMARIO_SUPERJUMP_STICK_Y_UNK))
+    if (((fp->coll_data.ground_flags & 0x4000) == FALSE) || (fp->input.stick_range.y >= FTMARIO_SUPERJUMP_STICK_Y_UNK))
     {
         return TRUE;
     }

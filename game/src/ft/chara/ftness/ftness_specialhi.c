@@ -495,7 +495,7 @@ bool32 func_ovl3_801549B0(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->coll_data.clip_flag & 0x4000) || ((f32)fp->status_vars.ness.specialhi.pk_jibaku_anim_length <= 25.0F))
+    if (!(fp->coll_data.ground_flags & 0x4000) || ((f32)fp->status_vars.ness.specialhi.pk_jibaku_anim_length <= 25.0F))
     {
         return TRUE;
     }
@@ -648,7 +648,7 @@ void func_ovl3_80154DFC(GObj *fighter_gobj)
     s32 unused;
     Vec3f vel;
 
-    if ((fp->coll_data.clip_flag & 0x4000)) goto block_2func;
+    if ((fp->coll_data.ground_flags & 0x4000)) goto block_2func;
     {
         vel.x = DObjGetStruct(fighter_gobj)->translate.x - fp->status_vars.ness.specialhi.pk_thunder_vel.x;
         vel.y = (DObjGetStruct(fighter_gobj)->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pk_thunder_vel.y;

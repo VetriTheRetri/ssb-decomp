@@ -150,7 +150,7 @@ void func_ovl2_800D8BB4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl2_800D8978(fp, D_ovl2_8012C4E0[fp->coll_data.clip_flag & 0xFFFF00FF] * attributes->traction);
+    func_ovl2_800D8978(fp, D_ovl2_8012C4E0[fp->coll_data.ground_flags & 0xFFFF00FF] * attributes->traction);
     func_ovl2_800D87D0(fighter_gobj);
 }
 

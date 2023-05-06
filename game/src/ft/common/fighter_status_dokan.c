@@ -96,7 +96,7 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
 
     if ((fp->input.stick_range.y <= FTCOMMON_DOKAN_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_DOKAN_BUFFER_FRAMES_MAX))
     {
-        if ((fp->coll_data.clip_flag & 0xFFFF00FF) == 0xC)
+        if ((fp->coll_data.ground_flags & 0xFFFF00FF) == 0xC)
         {
             func_ovl2_800FC814(0xA, &ground_line_id);
             func_ovl2_800FC894(ground_line_id, &pos);
@@ -114,7 +114,7 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
                 return TRUE;
             }
         }
-        else if ((fp->coll_data.clip_flag & 0xFFFF00FF) == 0xD)
+        else if ((fp->coll_data.ground_flags & 0xFFFF00FF) == 0xD)
         {
             func_ovl2_800FC814(0xB, &ground_line_id);
             func_ovl2_800FC894(ground_line_id, &pos);
@@ -249,7 +249,7 @@ void func_ovl3_801426D0(GObj *fighter_gobj)
 
     DObjGetStruct(fighter_gobj)->translate = fp->status_vars.common.dokan.pos_target;
 
-    func_ovl2_800F9348(&DObjGetStruct(fighter_gobj)->translate, &fp->coll_data.ground_line_id, &fp->coll_data.ground_dist, &fp->coll_data.clip_flag, &fp->coll_data.ground_angle);
+    func_ovl2_800F9348(&DObjGetStruct(fighter_gobj)->translate, &fp->coll_data.ground_line_id, &fp->coll_data.ground_dist, &fp->coll_data.ground_flags, &fp->coll_data.ground_angle);
 
     fp->x18F_flag_b4 = TRUE;
     fp->status_vars.common.dokan.set_unk_wait = FTCOMMON_DOKAN_UNK_WAIT;

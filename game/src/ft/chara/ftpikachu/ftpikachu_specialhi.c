@@ -172,7 +172,7 @@ bool32 func_ovl3_80152BF4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->coll_data.clip_flag & 0x4000) || (fp->status_vars.pikachu.specialhi.coll_timer_unk >= 2))
+    if (!(fp->coll_data.ground_flags & 0x4000) || (fp->status_vars.pikachu.specialhi.coll_timer_unk >= 2))
     {
         return TRUE;
     }
@@ -257,7 +257,7 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
     {
         sqrt_stick_range = 80.0F;
     }
-    if (!(sqrt_stick_range < FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN) && !(fp->coll_data.clip_flag & 0x4000))
+    if (!(sqrt_stick_range < FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN) && !(fp->coll_data.ground_flags & 0x4000))
     {
         stick_angle.x = fp->input.stick_range.x;
         stick_angle.y = fp->input.stick_range.y;

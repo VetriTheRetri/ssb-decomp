@@ -59,7 +59,7 @@ loop: // This makes no sense
     ftCollision_SetGround(this_fp);
 
     this_fp->coll_data.ground_line_id = -2;
-    this_fp->coll_data.clip_flag = 0x4000;
+    this_fp->coll_data.ground_flags = 0x4000;
     this_fp->coll_data.ground_angle.y = 1.0F;
     this_fp->coll_data.ground_angle.x = 0.0F;
     this_fp->coll_data.ground_angle.z = 0.0F;

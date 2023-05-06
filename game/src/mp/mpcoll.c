@@ -104,7 +104,7 @@ void func_ovl2_800D96D8(Coll_Data *coll_data)
         sp30.x = coll_data->ground_to_air_pos_last.x - object_coll->width;
         sp30.y = translate->y + object_coll->top;
 
-        if (func_ovl2_800F3E04(coll_data->ceil_line_id, &sp30, &sp2C, &coll_data->ceil_material, &coll_data->ceil_angle.x) != 0)
+        if (func_ovl2_800F3E04(coll_data->ceil_line_id, &sp30, &sp2C, &coll_data->ceil_flags, &coll_data->ceil_angle) != 0)
         {
             translate->y += sp2C;
             translate->x = sp30.x;
@@ -157,7 +157,7 @@ void func_ovl2_800D98A0(Coll_Data *coll_data)
         sp30.x = coll_data->ground_to_air_pos_last.x + object_coll->width;
         sp30.y = translate->y + object_coll->top;
 
-        if (func_ovl2_800F3E04(coll_data->ceil_line_id, &sp30, &sp2C, &coll_data->ceil_material, &coll_data->ceil_angle.x) != 0)
+        if (func_ovl2_800F3E04(coll_data->ceil_line_id, &sp30, &sp2C, &coll_data->ceil_flags, &coll_data->ceil_angle) != 0)
         {
             translate->y += sp2C;
             translate->x = sp30.x;
@@ -223,7 +223,7 @@ void func_ovl2_800D9AB0(Coll_Data *coll_data)
             sp38.x = coll_data->ground_to_air_pos_last.x - object_coll->width;
             sp38.y = translate->y + object_coll->bottom;
 
-            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->clip_flag, &coll_data->ground_angle.x) != 0)
+            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->ground_flags, &coll_data->ground_angle) != 0)
             {
                 translate->y += sp34;
                 translate->x = sp38.x;
@@ -243,7 +243,7 @@ void func_ovl2_800D9AB0(Coll_Data *coll_data)
             sp38.x = coll_data->ground_to_air_pos_last.x;
             sp38.y = translate->y;
 
-            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->clip_flag, &coll_data->ground_angle.x) != 0)
+            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->ground_flags, &coll_data->ground_angle) != 0)
             {
                 translate->y += sp34;
                 translate->x = sp38.x;
@@ -298,7 +298,7 @@ void func_ovl2_800D9D70(Coll_Data *coll_data)
             sp38.x = coll_data->ground_to_air_pos_last.x + object_coll->width;
             sp38.y = translate->y + object_coll->bottom;
 
-            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->clip_flag, &coll_data->ground_angle.x) != 0)
+            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->ground_flags, &coll_data->ground_angle) != 0)
             {
                 translate->y += sp34;
                 translate->x = sp38.x;
@@ -318,7 +318,7 @@ void func_ovl2_800D9D70(Coll_Data *coll_data)
             sp38.x = coll_data->ground_to_air_pos_last.x;
             sp38.y = translate->y;
 
-            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->clip_flag, &coll_data->ground_angle.x) != 0)
+            if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp38, &sp34, &coll_data->ground_flags, &coll_data->ground_angle) != 0)
             {
                 translate->y += sp34;
                 translate->x = sp38.x;
@@ -348,7 +348,7 @@ void func_ovl2_800D9FCC(Coll_Data *coll_data) // Check if fighter is above groun
     sp2C.x = translate->x;
     sp2C.y = translate->y + object_coll->bottom;
 
-    if (func_ovl2_800F9348(&sp2C, &coll_data->ground_line_id, &coll_data->ground_dist, &coll_data->clip_flag, &coll_data->ground_angle.x) == FALSE)
+    if (func_ovl2_800F9348(&sp2C, &coll_data->ground_line_id, &coll_data->ground_dist, &coll_data->ground_flags, &coll_data->ground_angle) == FALSE)
     {
         coll_data->ground_line_id = -1;
     }
@@ -610,7 +610,7 @@ void func_ovl2_800DA658(Coll_Data *coll_data)
         }
         continue;
     }
-    func_ovl2_800D95E0(&sp64, &coll_data->rwall_line_id, &coll_data->rwall_material, &coll_data->rwall_angle);
+    func_ovl2_800D95E0(&sp64, &coll_data->rwall_line_id, &coll_data->rwall_flags, &coll_data->rwall_angle);
 
     if (sp64 < translate->x)
     {
@@ -808,7 +808,7 @@ void func_ovl2_800DAE6C(Coll_Data *coll_data)
         }
         continue;
     }
-    func_ovl2_800D95E0(&sp64, &coll_data->lwall_line_id, &coll_data->lwall_material, &coll_data->lwall_angle);
+    func_ovl2_800D95E0(&sp64, &coll_data->lwall_line_id, &coll_data->lwall_flags, &coll_data->lwall_angle);
 
     if (translate->x < sp64)
     {
@@ -836,7 +836,7 @@ bool32 func_ovl2_800DB2BC(Coll_Data *coll_data)
 
         return FALSE;
     }
-    if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp3C, &sp30, &coll_data->clip_flag, &coll_data->ground_angle) != FALSE)
+    if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp3C, &sp30, &coll_data->ground_flags, &coll_data->ground_angle) != FALSE)
     {
         translate->y += sp30;
 
@@ -875,7 +875,7 @@ bool32 func_ovl2_800DB2BC(Coll_Data *coll_data)
     {
         translate->x = sp3C.x;
 
-        func_ovl2_800F3DD8(coll_data->ground_line_id, &sp3C, NULL, &coll_data->clip_flag, &coll_data->ground_angle);
+        func_ovl2_800F3DD8(coll_data->ground_line_id, &sp3C, NULL, &coll_data->ground_flags, &coll_data->ground_angle);
 
         coll_data->coll_type |= MPCOLL_MASK_GROUND;
         coll_data->ground_dist = 0.0F;
@@ -922,7 +922,7 @@ bool32 func_ovl2_800DB474(Coll_Data *coll_data, s32 arg1)
     {
         coll_data->coll_mask |= MPCOLL_MASK_GROUND;
         coll_data->ground_line_id = ground_line_id;
-        coll_data->clip_flag = sp38;
+        coll_data->ground_flags = sp38;
         coll_data->ground_angle = sp2C;
 
         return TRUE;
@@ -1386,7 +1386,7 @@ void func_ovl2_800DBF58(Coll_Data *coll_data)
         }
         continue;
     }
-    func_ovl2_800D95E0(&sp64, &coll_data->rwall_line_id, &coll_data->rwall_material, &coll_data->rwall_angle);
+    func_ovl2_800D95E0(&sp64, &coll_data->rwall_line_id, &coll_data->rwall_flags, &coll_data->rwall_angle);
 
     if (sp64 < translate->x)
     {
@@ -1754,7 +1754,7 @@ void func_ovl2_800DCAE8(Coll_Data *coll_data)
         }
         continue;
     }
-    func_ovl2_800D95E0(&sp64, &coll_data->lwall_line_id, &coll_data->lwall_material, &coll_data->lwall_angle);
+    func_ovl2_800D95E0(&sp64, &coll_data->lwall_line_id, &coll_data->lwall_flags, &coll_data->lwall_angle);
 
     if (translate->x < sp64)
     {
@@ -1763,4 +1763,301 @@ void func_ovl2_800DCAE8(Coll_Data *coll_data)
         coll_data->coll_type |= MPCOLL_MASK_LWALL;
     }
     coll_data->unk_0x58 |= MPCOLL_MASK_LWALL;
+}
+
+bool32 func_ovl2_800DCF58(Coll_Data *coll_data)
+{
+    ObjectColl *object_coll = &coll_data->object_coll;
+    ObjectColl *p_object_coll = coll_data->p_object_coll;
+    Vec3f *translate = coll_data->p_translate;
+    s32 unused;
+    Vec3f sp4C;
+    Vec3f sp40;
+    s32 var_v0;
+    f32 sp38;
+    s32 line_id;
+
+    coll_data->coll_type &= ~(MPCOLL_MASK_CEIL);
+
+    sp4C.x = coll_data->pos_curr.x;
+    sp4C.y = coll_data->pos_curr.y + p_object_coll->top;
+
+    sp40.x = translate->x;
+    sp40.y = translate->y + object_coll->top;
+
+    var_v0 = (coll_data->wall_flag != D_ovl2_80131398)
+
+        ?
+
+        func_ovl2_800F64D4(&sp4C, &sp40, &coll_data->ground_to_air_pos_last, &coll_data->ceil_line_id, &coll_data->ceil_flags, &coll_data->ceil_angle)
+
+        :
+
+        func_ovl2_800F5E90(&sp4C, &sp40, &coll_data->ground_to_air_pos_last, &coll_data->ceil_line_id, &coll_data->ceil_flags, &coll_data->ceil_angle);
+
+    if (var_v0 != 0)
+    {
+        coll_data->coll_mask |= MPCOLL_MASK_CEIL;
+
+        return TRUE;
+    }
+    if (coll_data->unk_0x58 & MPCOLL_MASK_RWALL)
+    {
+        line_id = func_ovl2_800FAC64(coll_data->rwall_line_id);
+
+        if ((line_id != -1) && (func_ovl2_800FA8A4(line_id) == 1) && (func_ovl2_800F3E04(line_id, &sp40, &sp38, &coll_data->ceil_flags, &coll_data->ceil_angle) != 0) && (sp38 < 0.0F))
+        {
+            coll_data->ceil_line_id = line_id;
+            coll_data->coll_mask |= MPCOLL_MASK_CEIL;
+
+            return TRUE;
+        }
+    }
+    else if (coll_data->unk_0x58 & MPCOLL_MASK_LWALL)
+    {
+        line_id = func_ovl2_800FADE4(coll_data->lwall_line_id);
+
+        if ((line_id != -1) && (func_ovl2_800FA8A4(line_id) == 1) && (func_ovl2_800F3E04(line_id, &sp40, &sp38, &coll_data->ceil_flags, &coll_data->ceil_angle) != 0) && (sp38 < 0.0F))
+        {
+            coll_data->ceil_line_id = line_id;
+            coll_data->coll_mask |= MPCOLL_MASK_CEIL;
+
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void func_ovl2_800DD160(Coll_Data *coll_data)
+{
+    ObjectColl *object_coll = &coll_data->object_coll;
+    Vec3f *translate = coll_data->p_translate;
+    Vec3f sp3C;
+    s32 temp_v0;
+    bool32 is_collide_ceil;
+    f32 sp30;
+
+    sp3C.x = translate->x;
+    sp3C.y = translate->y + object_coll->top;
+
+    if (func_ovl2_800F3E04(coll_data->ceil_line_id, &sp3C, &sp30, &coll_data->ceil_flags, &coll_data->ceil_angle) != FALSE)
+    {
+        translate->y += sp30;
+        coll_data->coll_type |= MPCOLL_MASK_CEIL;
+
+        return;
+    }
+    is_collide_ceil = FALSE;
+
+    func_ovl2_800F4468(coll_data->ceil_line_id, &sp3C);
+
+    if (translate->x <= sp3C.x)
+    {
+        temp_v0 = func_ovl2_800FABA4(coll_data->ceil_line_id);
+
+        if ((temp_v0 != -1) && (func_ovl2_800FA8A4(temp_v0) == 2))
+        {
+            is_collide_ceil = TRUE;
+        }
+    }
+    else
+    {
+        func_ovl2_800F4448(coll_data->ceil_line_id, &sp3C);
+
+        temp_v0 = func_ovl2_800FAAE4(coll_data->ceil_line_id);
+
+        if ((temp_v0 != -1) && (func_ovl2_800FA8A4(temp_v0) == 3))
+        {
+            is_collide_ceil = TRUE;
+        }
+    }
+    translate->y = sp3C.y - object_coll->top;
+
+    if (is_collide_ceil != FALSE)
+    {
+        translate->x = sp3C.x;
+
+        func_ovl2_800F3E04(coll_data->ceil_line_id, &sp3C, NULL, &coll_data->ceil_flags, &coll_data->ceil_angle);
+
+        coll_data->coll_type |= MPCOLL_MASK_CEIL;
+    }
+}
+
+bool32 func_ovl2_800DD2C8(Coll_Data *coll_data, bool32(*proc_map)(GObj*), GObj *gobj)
+{
+    ObjectColl *p_object_coll = coll_data->p_object_coll;
+    ObjectColl *object_coll = &coll_data->object_coll;
+    Vec3f *translate = coll_data->p_translate;
+    Vec3f *pcurr = &coll_data->pos_curr;
+    Vec3f sp4C;
+    Vec3f sp40;
+    s32 line_id;
+    f32 sp38;
+    s32 var_v0;
+
+    coll_data->coll_type &= ~(MPCOLL_MASK_GROUND);
+
+    sp4C.x = pcurr->x;
+    sp4C.y = pcurr->y + p_object_coll->bottom;
+
+    sp40.x = translate->x;
+    sp40.y = translate->y + object_coll->bottom;
+
+                                                                        var_v0 = 
+                                        
+                                                        (coll_data->wall_flag != D_ovl2_80131398)
+
+                                                                            ?
+
+    func_ovl2_800F521C(&sp4C, &sp40, &coll_data->ground_to_air_pos_last, &coll_data->ground_line_id, &coll_data->ground_flags, &coll_data->ground_angle)
+
+                                                                            :
+
+    func_ovl2_800F4BD8(&sp4C, &sp40, &coll_data->ground_to_air_pos_last, &coll_data->ground_line_id, &coll_data->ground_flags, &coll_data->ground_angle);
+
+    if ((var_v0 != 0) && (!(coll_data->ground_flags & 0x4000) || (coll_data->ground_line_id != coll_data->ignore_line_id)) && ((proc_map == NULL) || (proc_map(gobj) != FALSE)))
+    {
+        coll_data->coll_mask |= MPCOLL_MASK_GROUND;
+
+        return TRUE;
+    }
+    if (coll_data->unk_0x58 & MPCOLL_MASK_RWALL)
+    {
+        line_id = func_ovl2_800FAD24(coll_data->rwall_line_id);
+
+        if (line_id != -1)
+        {
+            if ((func_ovl2_800FA8A4(line_id) == 0) && (func_ovl2_800F3DD8(line_id, &sp40, &sp38, &coll_data->ground_flags, &coll_data->ground_angle) != 0) && (sp38 > 0.0F))
+            {
+                coll_data->ground_line_id = line_id;
+
+                if (!(coll_data->ground_flags & 0x4000) || (coll_data->ground_line_id != coll_data->ignore_line_id))
+                {
+                    if ((proc_map == NULL) || (proc_map(gobj) != FALSE))
+                    {
+                        coll_data->coll_mask |= MPCOLL_MASK_GROUND;
+
+                        return TRUE;
+                    }
+                }
+            }
+        }
+    }
+    else if (coll_data->unk_0x58 & MPCOLL_MASK_LWALL)
+    {
+        line_id = func_ovl2_800FAEA4(coll_data->lwall_line_id);
+
+        if (line_id != -1)
+        {
+            if ((func_ovl2_800FA8A4(line_id) == 0) && (func_ovl2_800F3DD8(line_id, &sp40, &sp38, &coll_data->ground_flags, &coll_data->ground_angle) != 0) && (sp38 > 0.0F))
+            {
+                coll_data->ground_line_id = line_id;
+
+                if (!(coll_data->ground_flags & 0x4000) || (coll_data->ground_line_id != coll_data->ignore_line_id))
+                {
+                    if ((proc_map == NULL) || (proc_map(gobj) != FALSE))
+                    {
+                        coll_data->coll_mask |= MPCOLL_MASK_GROUND;
+
+                        return TRUE;
+                    }
+                }
+            }
+        }
+    }
+    return FALSE;
+}
+
+bool32 func_ovl2_800DD578(Coll_Data *coll_data)
+{
+    return func_ovl2_800DD2C8(coll_data, NULL, NULL);
+}
+
+void func_ovl2_800DD59C(Coll_Data *coll_data)
+{
+    ObjectColl *object_coll = &coll_data->object_coll;
+    Vec3f *translate = coll_data->p_translate;
+    Vec3f sp34;
+    f32 sp30;
+
+    sp34.x = translate->x;
+    sp34.y = translate->y + object_coll->bottom;
+
+    if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp34, &sp30, &coll_data->ground_flags, &coll_data->ground_angle) != 0)
+    {
+        translate->y += sp30;
+    }
+    else
+    {
+        func_ovl2_800F4428(coll_data->ground_line_id, &sp34);
+
+        if (sp34.x <= translate->x)
+        {
+            func_ovl2_800F4408(coll_data->ground_line_id, &sp34);
+        }
+        translate->y = sp34.y - object_coll->bottom;
+        translate->x = sp34.x;
+
+        func_ovl2_800F3DD8(coll_data->ground_line_id, &sp34, NULL, &coll_data->ground_flags, &coll_data->ground_angle);
+    }
+    coll_data->coll_type |= MPCOLL_MASK_GROUND;
+    coll_data->ground_dist = 0.0F;
+}
+
+void func_ovl2_800DD6A8(Coll_Data *coll_data)
+{
+    ObjectColl *object_coll = &coll_data->object_coll;
+    Vec3f *translate = coll_data->p_translate;
+    Vec3f sp3C;
+    s32 temp_v0;
+    s32 is_collide_ground;
+    f32 sp30;
+
+    sp3C.x = translate->x;
+    sp3C.y = translate->y + object_coll->bottom;
+
+    if (func_ovl2_800F3DD8(coll_data->ground_line_id, &sp3C, &sp30, &coll_data->ground_flags, &coll_data->ground_angle) != 0)
+    {
+        translate->y += sp30;
+
+        coll_data->coll_type |= MPCOLL_MASK_GROUND;
+        coll_data->ground_dist = 0.0F;
+
+        return;
+    }
+    is_collide_ground = FALSE;
+
+    func_ovl2_800F4428(coll_data->ground_line_id, &sp3C);
+
+    if (translate->x <= sp3C.x)
+    {
+        temp_v0 = func_ovl2_800FAA24(coll_data->ground_line_id);
+
+        if ((temp_v0 != -1) && (func_ovl2_800FA8A4(temp_v0) == 2))
+        {
+            is_collide_ground = TRUE;
+        }
+    }
+    else
+    {
+        func_ovl2_800F4408(coll_data->ground_line_id, &sp3C);
+
+        temp_v0 = func_ovl2_800FA964(coll_data->ground_line_id);
+
+        if ((temp_v0 != -1) && (func_ovl2_800FA8A4(temp_v0) == 3))
+        {
+            is_collide_ground = TRUE;
+        }
+    }
+    translate->y = sp3C.y - object_coll->bottom;
+
+    if (is_collide_ground != 0)
+    {
+        translate->x = sp3C.x;
+
+        func_ovl2_800F3DD8(coll_data->ground_line_id, &sp3C, NULL, &coll_data->ground_flags, &coll_data->ground_angle);
+
+        coll_data->coll_type |= MPCOLL_MASK_GROUND;
+        coll_data->ground_dist = 0.0F;
+    }
 }

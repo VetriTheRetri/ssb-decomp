@@ -8,10 +8,9 @@
 #define MPCOLL_MASK_RWALL   (1 << 0)
 #define MPCOLL_MASK_LWALL   (1 << 5)
 #define MPCOLL_MASK_CEIL    (1 << 10)
+#define MPCOLL_MASK_GROUND  (1 << 11)
 #define MPCOLL_MASK_LCLIFF  (1 << 12)
 #define MPCOLL_MASK_RCLIFF  (1 << 13)
-#define MPCOLL_MASK_GROUND  (1 << 15)
-
 
 #define MPCOLL_MASK_ALL     (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every main collision flag
 
@@ -53,19 +52,19 @@ typedef struct _Coll_Data
 
     s32 ground_line_id;
     f32 ground_dist; // Distance to nearest ground line? 
-    u32 clip_flag; // Line collision behavior (e.g. drop-through)
+    u32 ground_flags; // Line collision behavior (e.g. drop-through)
     Vec3f ground_angle;
 
     s32 ceil_line_id; // Clipping ID of last ceiling interacted with
-    s32 ceil_material;
+    u32 ceil_flags;
     Vec3f ceil_angle;
 
     s32 rwall_line_id; // Clipping ID of last right wall interacted with
-    s32 rwall_material;
+    u32 rwall_flags;
     Vec3f rwall_angle;
 
     s32 lwall_line_id;
-    s32 lwall_material;
+    u32 lwall_flags;
     Vec3f lwall_angle;
 
     s32 cliff_id; // Ledge ID

@@ -187,7 +187,7 @@ bool32 func_ovl3_8015C264(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->coll_data.clip_flag & 0x4000) || (fp->status_vars.fox.specialhi.coll_timer_unk >= 0xF))
+    if (!(fp->coll_data.ground_flags & 0x4000) || (fp->status_vars.fox.specialhi.coll_timer_unk >= 0xF))
     {
         return TRUE;
     }
@@ -300,7 +300,7 @@ void func_ovl3_8015C4DC(GObj *fighter_gobj)
     }
     else stick_y = temp_stick_y;
 
-    if (((stick_y + stick_x) >= FTFOX_FIREFOX_ANGLE_STICK_THRESHOLD) && !(fp->coll_data.clip_flag & 0x4000))
+    if (((stick_y + stick_x) >= FTFOX_FIREFOX_ANGLE_STICK_THRESHOLD) && !(fp->coll_data.ground_flags & 0x4000))
     {
         sp38.x = (f32)temp_stick_x;
         sp38.y = (f32)fp->input.stick_range.y;
