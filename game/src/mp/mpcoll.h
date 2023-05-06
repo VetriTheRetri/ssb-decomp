@@ -8,9 +8,12 @@
 #define MPCOLL_MASK_RWALL   (1 << 0)
 #define MPCOLL_MASK_LWALL   (1 << 5)
 #define MPCOLL_MASK_CEIL    (1 << 10)
+#define MPCOLL_MASK_LCLIFF  (1 << 12)
+#define MPCOLL_MASK_RCLIFF  (1 << 13)
 #define MPCOLL_MASK_GROUND  (1 << 15)
 
-#define MPCOLL_MASK_ALL     (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every collision flag
+
+#define MPCOLL_MASK_ALL     (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every main collision flag
 
 typedef enum Ground_Air
 {
