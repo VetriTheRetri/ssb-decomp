@@ -113,7 +113,7 @@ void func_ovl3_80156358(GObj *fighter_gobj)
 
         else if (func_ovl2_800DE798(fighter_gobj, func_ovl3_80156320) != FALSE)
         {
-            if (fp->coll_data.coll_type & 0x3000)
+            if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
             {
                 func_ovl3_80144C24(fighter_gobj);
             }

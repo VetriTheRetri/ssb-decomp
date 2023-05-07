@@ -444,7 +444,7 @@ void func_ovl3_8015C9E8(GObj *fighter_gobj)
     {
         if (func_ovl2_800DE7D8(fighter_gobj) != FALSE)
         {
-            if (fp->coll_data.coll_type & 0x3000)
+            if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
             {
                 func_ovl3_80144C24(fighter_gobj);
             }

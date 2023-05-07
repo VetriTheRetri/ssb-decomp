@@ -260,11 +260,11 @@ void func_ovl3_801641D0(GObj *fighter_gobj)
     {
         func_ovl3_80163EFC(fighter_gobj);
 
-        if (fp->coll_data.coll_type & 0x3000)
+        if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
             func_ovl3_80144C24(fighter_gobj);
         }
-        else if (fp->coll_data.coll_type & 0x800)
+        else if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {
             ftCollision_SetGround(fp);
             ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);

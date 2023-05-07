@@ -4,12 +4,13 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
+    "\\game\\src\\ft\\common",
     "\\game\\src\\it",
-    "\\game\\src\\it\\article",
     "\\game\\src\\it\\item",
     "\\game\\src\\mp",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_fallspecial.c",
   "PreviewInSolutionExplorer": false
 }

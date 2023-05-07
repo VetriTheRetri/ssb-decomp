@@ -187,7 +187,7 @@ void func_ovl3_80152C2C(GObj *fighter_gobj)
 
     if (func_ovl2_800DE798(fighter_gobj, func_ovl3_80152BF4) != FALSE)
     {
-        if (fp->coll_data.coll_type & 0x3000)
+        if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
             func_ovl3_80144C24(fighter_gobj);
 
@@ -456,7 +456,7 @@ void func_ovl3_801534E0(GObj *fighter_gobj)
 
     if (func_ovl2_800DE7D8(fighter_gobj) != FALSE)
     {
-        if (fp->coll_data.coll_type & 0x3000)
+        if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
             func_ovl3_80144C24(fighter_gobj);
         }
