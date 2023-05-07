@@ -5,14 +5,18 @@
 #include <ssb_types.h>
 #include <macros.h>
 
-#define MPCOLL_MASK_RWALL   (1 << 0)
-#define MPCOLL_MASK_LWALL   (1 << 5)
-#define MPCOLL_MASK_CEIL    (1 << 10)
-#define MPCOLL_MASK_GROUND  (1 << 11)
-#define MPCOLL_MASK_LCLIFF  (1 << 12)
-#define MPCOLL_MASK_RCLIFF  (1 << 13)
+#define MPCOLL_MASK_RWALL       (1 << 0)
+#define MPCOLL_MASK_LWALL       (1 << 5)
+#define MPCOLL_MASK_CEIL        (1 << 10)
+#define MPCOLL_MASK_GROUND      (1 << 11)
+#define MPCOLL_MASK_LCLIFF      (1 << 12)
+#define MPCOLL_MASK_RCLIFF      (1 << 13)
+#define MPCOLL_MASK_CEILHEAVY   (1 << 14) // Head bonk?
 
-#define MPCOLL_MASK_ALL     (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every main collision flag
+#define MPCOLL_MASK_MAIN_ALL    (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every main collision flag
+#define MPCOLL_MASK_CLIFF_ALL   (MPCOLL_MASK_LCLIFF | MPCOLL_MASK_RCLIFF) // Mask all ledge flags       
+
+#define MPCOLL_MASK_NONSOLID    (1 << 14) // Line ID can be passed through
 
 typedef enum Ground_Air
 {
@@ -39,7 +43,7 @@ typedef struct _Coll_Data
     Vec3f pos_prev; // Unconfirmed
     Vec3f pos_project; // Unconfirmed
     ObjectColl object_coll;
-    void *p_object_coll; // Points back to collision box???
+    ObjectColl *p_object_coll; // Points back to collision box???
     Vec2f cliffcatch_coll;
     u16 unk_0x54;
     u16 coll_mask;

@@ -149,7 +149,7 @@ bool32 func_ovl3_801737EC(GObj *article_gobj, u32 check_flags, f32 mod_vel, Vec3
     Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
     Vec3f mod_pos;
     bool32 return_bool = FALSE;
-    u16 coll_flags = (ap->coll_data.unk_0x54 ^ ap->coll_data.coll_mask) & ap->coll_data.coll_mask & MPCOLL_MASK_ALL;
+    u16 coll_flags = (ap->coll_data.unk_0x54 ^ ap->coll_data.coll_mask) & ap->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
 
     if (coll_flags & check_flags & MPCOLL_MASK_RWALL)
     {
@@ -307,7 +307,7 @@ bool32 func_ovl3_80173D24(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Coll_Data *coll_data = &ap->coll_data;
-    bool32 is_collide_any = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_ALL);
+    bool32 is_collide_any = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_MAIN_ALL);
 
     if (func_ovl3_801737EC(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), mod_vel, NULL) != FALSE)
     {
@@ -347,7 +347,7 @@ bool32 func_ovl3_80173DF4(GObj *article_gobj, f32 mod_vel)
 
 bool32 func_ovl3_80173E58(GObj *article_gobj, void (*cb)(GObj*))
 {
-    if ((func_ovl3_801737B8(article_gobj, MPCOLL_MASK_ALL) != FALSE) && (cb != NULL))
+    if ((func_ovl3_801737B8(article_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE) && (cb != NULL))
     {
         cb(article_gobj);
     }
@@ -356,7 +356,7 @@ bool32 func_ovl3_80173E58(GObj *article_gobj, void (*cb)(GObj*))
 
 bool32 func_ovl3_80173E9C(GObj *article_gobj, void (*cb)(GObj*)) // Unused
 {
-    if ((func_ovl3_801737B8(article_gobj, MPCOLL_MASK_ALL) != FALSE))
+    if ((func_ovl3_801737B8(article_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE))
     {
         if (cb != NULL)
         {

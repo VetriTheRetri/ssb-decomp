@@ -124,6 +124,8 @@ typedef struct gmUnkInfo_80131308
 
 } gmUnkInfo_80131308;
 
+static gmUnkInfo_80131308 D_ovl2_80131308;
+
 typedef struct gmPlayerBlock
 {
     u8 level; // Actually begins at 1 instead of 0

@@ -197,7 +197,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     case Ft_Kind_Mario:
     case Ft_Kind_PolyMario:
-        fp->fighter_vars.mario.is_tornado_charge = FALSE;
+        fp->fighter_vars.mario.is_expend_tornado = FALSE;
         break;
 
     case Ft_Kind_GiantDonkey:
@@ -216,7 +216,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     case Ft_Kind_Luigi:
     case Ft_Kind_PolyLuigi:
-        fp->fighter_vars.mario.is_tornado_charge = FALSE;
+        fp->fighter_vars.mario.is_expend_tornado = FALSE;
         break;
 
     case Ft_Kind_Captain:

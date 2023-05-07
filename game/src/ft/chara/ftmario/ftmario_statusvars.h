@@ -7,7 +7,7 @@
 
 typedef struct ftMario_FighterVars
 {
-    bool32 is_tornado_charge;
+    bool32 is_expend_tornado;
 
 } ftMario_FighterVars;
 

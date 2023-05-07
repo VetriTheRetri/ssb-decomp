@@ -1,5 +1,6 @@
 #include "mpcoll.h"
-#include "obj.h"
+#include "fighter.h"
+#include "gmmatch.h"
 
 extern s32 D_ovl2_80130DE0;
 extern s32 D_ovl2_80130DE8[5]; // Wall line ID?
@@ -354,7 +355,7 @@ void func_ovl2_800D9FCC(Coll_Data *coll_data) // Check if fighter is above groun
     }
 }
 
-bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*cb_coll)(Coll_Data *, GObj*, bool32), GObj *gobj, bool32 arg3)
+bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*cb_coll)(Coll_Data*, GObj*, s32), GObj *gobj, bool32 arg3)
 {
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
@@ -1915,7 +1916,7 @@ bool32 func_ovl2_800DD2C8(Coll_Data *coll_data, bool32(*proc_map)(GObj*), GObj *
 
     func_ovl2_800F4BD8(&sp4C, &sp40, &coll_data->ground_to_air_pos_last, &coll_data->ground_line_id, &coll_data->ground_flags, &coll_data->ground_angle);
 
-    if ((var_v0 != 0) && (!(coll_data->ground_flags & 0x4000) || (coll_data->ground_line_id != coll_data->ignore_line_id)) && ((proc_map == NULL) || (proc_map(gobj) != FALSE)))
+    if ((var_v0 != 0) && (!(coll_data->ground_flags & MPCOLL_MASK_NONSOLID) || (coll_data->ground_line_id != coll_data->ignore_line_id)) && ((proc_map == NULL) || (proc_map(gobj) != FALSE)))
     {
         coll_data->coll_mask |= MPCOLL_MASK_GROUND;
 
@@ -1931,7 +1932,7 @@ bool32 func_ovl2_800DD2C8(Coll_Data *coll_data, bool32(*proc_map)(GObj*), GObj *
             {
                 coll_data->ground_line_id = line_id;
 
-                if (!(coll_data->ground_flags & 0x4000) || (coll_data->ground_line_id != coll_data->ignore_line_id))
+                if (!(coll_data->ground_flags & MPCOLL_MASK_NONSOLID) || (coll_data->ground_line_id != coll_data->ignore_line_id))
                 {
                     if ((proc_map == NULL) || (proc_map(gobj) != FALSE))
                     {
@@ -1953,7 +1954,7 @@ bool32 func_ovl2_800DD2C8(Coll_Data *coll_data, bool32(*proc_map)(GObj*), GObj *
             {
                 coll_data->ground_line_id = line_id;
 
-                if (!(coll_data->ground_flags & 0x4000) || (coll_data->ground_line_id != coll_data->ignore_line_id))
+                if (!(coll_data->ground_flags & MPCOLL_MASK_NONSOLID) || (coll_data->ground_line_id != coll_data->ignore_line_id))
                 {
                     if ((proc_map == NULL) || (proc_map(gobj) != FALSE))
                     {
@@ -2059,5 +2060,659 @@ void func_ovl2_800DD6A8(Coll_Data *coll_data)
 
         coll_data->coll_type |= MPCOLL_MASK_GROUND;
         coll_data->ground_dist = 0.0F;
+    }
+}
+
+bool32 func_ovl2_800DD820(GObj *fighter_gobj, s32 ground_line_id)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    ObjectColl *object_coll = &fp->coll_data.object_coll;
+    Vec3f *translate = fp->coll_data.p_translate;
+    Vec3f sp58;
+    Vec3f sp4C;
+    Vec3f sp40;
+    u32 flags;
+    f32 sp38;
+
+    if (func_ovl2_800FC67C(ground_line_id) == FALSE)
+    {
+        return FALSE;
+    }
+    else
+    {
+        func_ovl2_800F4428(ground_line_id, &sp58);
+
+        if (translate->x <= sp58.x)
+        {
+            if ((fp->lr == LEFT) && (fp->input.stick_range.x >= -0x3B))
+            {
+                sp58.x += 40.0F;
+
+                func_ovl2_800F3DD8(ground_line_id, &sp58, &sp38, &flags, &sp40);
+
+                sp58.y += sp38;
+                sp4C.x = object_coll->width + sp58.x;
+                sp4C.y = (object_coll->center + sp58.y) - object_coll->bottom;
+
+                if (func_ovl2_800F7F00(&sp58, &sp4C, NULL, NULL, NULL, NULL) == FALSE)
+                {
+                    fp->lr = LEFT;
+
+                    goto setground;
+                }
+            }
+        }
+        else if ((fp->lr == RIGHT) && (fp->input.stick_range.x <= 0x3B))
+        {
+            func_ovl2_800F4408(ground_line_id, &sp58);
+
+            sp58.x -= 40.0F;
+
+            func_ovl2_800F3DD8(ground_line_id, &sp58, &sp38, &flags, &sp40);
+
+            sp58.y += sp38;
+            sp4C.x = sp58.x - object_coll->width;
+            sp4C.y = (object_coll->center + sp58.y) - object_coll->bottom;
+
+            if (func_ovl2_800F6B58(&sp58, &sp4C, NULL, NULL, NULL, NULL) == FALSE)
+            {
+                fp->lr = RIGHT;
+
+                goto setground;
+            }
+        }
+    }
+    return FALSE;
+
+setground: // ???
+    *translate = sp58; // This is what causes the infamous Dream Land teleport
+
+    fp->coll_data.ground_line_id = ground_line_id;
+    fp->coll_data.ground_flags = flags;
+    fp->coll_data.ground_angle = sp40;
+    fp->coll_data.ground_dist = 0.0F;
+
+    fp->coll_data.coll_type |= 0x8000;
+
+    return TRUE;
+}
+
+bool32 func_ovl2_800DDA6C(GObj *fighter_gobj, s32 ground_line_id)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    ObjectColl *object_coll = &fp->coll_data.object_coll;
+    Vec3f *translate = fp->coll_data.p_translate;
+    Vec3f sp58;
+    Vec3f sp4C;
+    Vec3f sp40;
+    Vec3f angle;
+    u32 flags;
+    f32 sp2C;
+
+    if (func_ovl2_800FC67C(ground_line_id) == FALSE)
+    {
+        return FALSE;
+    }
+    else
+    {
+        func_ovl2_800F4428(ground_line_id, &sp58);
+
+        if (translate->x <= sp58.x)
+        {
+            if (func_ovl2_800F3DD8(ground_line_id, &sp58, &sp2C, &flags, &angle));
+
+            sp4C.x = sp58.x + 1.0F;
+            sp4C.y = sp58.y + 1.0F;
+
+            sp40.x = object_coll->width + sp58.x;
+            sp40.y = (object_coll->center + sp58.y) - object_coll->bottom;
+
+            if (func_ovl2_800F7F00(&sp4C, &sp40, NULL, NULL, NULL, NULL) == 0)
+            {
+                if (TRUE) goto setground;
+            }
+        }
+        else
+        {
+            func_ovl2_800F4408(ground_line_id, &sp58);
+
+            if (func_ovl2_800F3DD8(ground_line_id, &sp58, &sp2C, &flags, &angle));
+
+            sp4C.x = sp58.x - 1.0F;
+            sp4C.y = sp58.y + 1.0F;
+
+            sp40.x = sp58.x - object_coll->width;
+            sp40.y = (object_coll->center + sp58.y) - object_coll->bottom;
+
+            if (func_ovl2_800F6B58(&sp4C, &sp40, NULL, NULL, NULL, NULL) == 0)
+            {
+                if (TRUE) goto setground;
+            }
+        }
+    }
+    return FALSE;
+
+setground: // Absolutely ridiculous match
+    *translate = sp58;
+
+    fp->coll_data.ground_line_id = ground_line_id;
+    fp->coll_data.ground_flags = flags;
+    fp->coll_data.ground_angle = angle;
+    fp->coll_data.ground_dist = 0.0F;
+
+    return TRUE;
+}
+
+bool32 func_ovl2_800DDC50(Coll_Data *coll_data, GObj *fighter_gobj, s32 arg2)
+{
+    s32 ground_line_id = coll_data->ground_line_id;
+    bool32 sp20 = FALSE;
+
+    if (func_ovl2_800DA294(coll_data) != FALSE)
+    {
+        func_ovl2_800DA658(coll_data);
+
+        coll_data->unk_0x64 = TRUE;
+    }
+    if (func_ovl2_800DAAA8(coll_data) != FALSE)
+    {
+        func_ovl2_800DAE6C(coll_data);
+
+        coll_data->unk_0x64 = TRUE;
+    }
+    if (func_ovl2_800DB2BC(coll_data) != FALSE)
+    {
+        if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+        {
+            func_ovl2_800D9F84(coll_data);
+
+            sp20 = TRUE;
+        }
+    }
+    else if (arg2 & 1)
+    {
+        func_ovl2_800DD820(fighter_gobj, ground_line_id);
+
+        coll_data->unk_0x64 = TRUE;
+    }
+    else if (arg2 & 2)
+    {
+        if (func_ovl2_800DDA6C(fighter_gobj, ground_line_id) != FALSE)
+        {
+            sp20 = TRUE;
+        }
+        else coll_data->unk_0x64 = TRUE;
+
+    }
+    else coll_data->unk_0x64 = TRUE;
+
+    if (func_ovl2_800DB474(coll_data, ground_line_id) != FALSE)
+    {
+        func_ovl2_800DD59C(coll_data);
+
+        if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+        {
+            func_ovl2_800D9F84(coll_data);
+
+            sp20 = TRUE;
+        }
+        coll_data->coll_type &= ~(0x8000);
+        coll_data->unk_0x64 = FALSE;
+    }
+    return sp20;
+}
+
+bool32 func_ovl2_800DDDA8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DDC50, fighter_gobj, 0);
+}
+
+bool32 func_ovl2_800DDDDC(GObj *fighter_gobj, void (*proc_map)(GObj*))
+{
+    if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
+    {
+        proc_map(fighter_gobj);
+
+        return FALSE;
+    }
+    else return TRUE;
+}
+
+void func_ovl2_800DDE1C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DDC50, fighter_gobj, 1);
+}
+
+void func_ovl2_800DDE50(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DDC50, fighter_gobj, 2);
+}
+
+bool32 func_ovl2_800DDE84(GObj *fighter_gobj, void (*proc_map)(GObj*))
+{
+    if (func_ovl2_800DDE50(fighter_gobj) == FALSE)
+    {
+        proc_map(fighter_gobj);
+
+        return FALSE;
+    }
+    else return TRUE;
+}
+
+void jtgt_ovl2_800DDEC4(GObj *fighter_gobj)
+{
+    func_ovl2_800DDDDC(fighter_gobj, func_ovl3_8013F9E0);
+}
+
+void jtgt_ovl2_800DDEE8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (func_ovl2_800DDE1C(fighter_gobj) == FALSE)
+    {
+        if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND0)
+        {
+            func_ovl3_80142B08(fighter_gobj);
+        }
+        else func_ovl3_8013F9E0(fighter_gobj);
+    }
+}
+
+void func_ovl2_800DDF44(GObj *fighter_gobj)
+{
+    if (func_ovl2_800DDE50(fighter_gobj) == FALSE)
+    {
+        func_ovl3_8013F9E0(fighter_gobj);
+    }
+}
+
+bool32 func_ovl2_800DDF74(GObj *fighter_gobj, Fighter_Struct *fp, ftCommonAttributes *attributes, DObj *target_joint, Vec3f *vec)
+{
+    Vec3f sp64;
+    Vec3f vec_translate;
+    Vec3f sp4C;
+    f32 sp48;
+    DObj *joint;
+    f32 tangent;
+    u32 sp3C;
+    f32 ternary;
+    f32 translate_y;
+
+    if (func_ovl2_800F3DD8(fp->coll_data.ground_line_id, vec, &sp48, &sp3C, &sp64) != FALSE)
+    {
+        translate_y = (vec->y + sp48) - DObjGetStruct(fighter_gobj)->translate.y;
+    }
+    else
+    {
+        func_ovl2_800F4428(fp->coll_data.ground_line_id, &vec_translate);
+
+        if (vec_translate.x < vec->x)
+        {
+            func_ovl2_800F4408(fp->coll_data.ground_line_id, &vec_translate);
+        }
+        translate_y = vec_translate.y - DObjGetStruct(fighter_gobj)->translate.y;
+    }
+
+    ternary = ABSF(translate_y);
+
+    if (ternary < 0.0001F)
+    {
+        return FALSE;
+    }
+
+    vec->y += translate_y;
+
+    joint = DObjGetStruct(fighter_gobj);
+
+    if (vec->y < joint->translate.y)
+    {
+        ternary = ((joint->translate.x < vec->x) ? -(joint->translate.x - vec->x) : (joint->translate.x - vec->x));
+
+        tangent = DObjGetStruct(fighter_gobj)->translate.y - ternary * tanf(attributes->unk_0x320);
+
+        if (vec->y < tangent)
+        {
+            vec->y = tangent;
+        }
+    }
+
+    sp4C.x = sp4C.y = sp4C.z = 0;
+
+    func_ovl2_800EDF24(target_joint, &sp4C);
+
+    if (sp4C.y - attributes->unk_0x31C < vec->y)
+    {
+        vec->y = sp4C.y - attributes->unk_0x31C;
+    }
+    return TRUE;
+}
+
+void func_ovl2_800DE150(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    ftCommonAttributes *common_attrs = fp->attributes;
+    DObj *joint;
+    Vec3f sp30;
+    f32 sp2C;
+
+    if (fp->ground_or_air == ground)
+    {
+        if ((fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2) && (fp->hitlag_timer <= 0))
+        {
+            if (fp->x190_flag_b012 & 2)
+            {
+                joint = fp->joint[common_attrs->joint_index1];
+
+                func_ovl2_800EBC0C(fp, &sp30, &sp2C, common_attrs->joint_float1, joint);
+
+                if (func_ovl2_800DDF74(fighter_gobj, fp, common_attrs, joint, &sp30) != FALSE)
+                {
+                    func_ovl2_800EE018(fp->joint[common_attrs->joint_index1], &sp30);
+                    func_ovl2_800EBD08(fp->joint[common_attrs->joint_index1], common_attrs->joint_float1, &sp30, sp2C);
+                }
+            }
+            if (fp->x190_flag_b012 & 1)
+            {
+                joint = fp->joint[common_attrs->joint_index2];
+
+                func_ovl2_800EBC0C(fp, &sp30, &sp2C, common_attrs->joint_float2, joint);
+
+                if (func_ovl2_800DDF74(fighter_gobj, fp, common_attrs, joint, &sp30) != FALSE)
+                {
+                    func_ovl2_800EE018(fp->joint[common_attrs->joint_index2], &sp30);
+                    func_ovl2_800EBD08(fp->joint[common_attrs->joint_index2], common_attrs->joint_float2, &sp30, sp2C);
+                }
+            }
+            if (fp->x190_flag_b012 & 4)
+            {
+                DObjGetStruct(fighter_gobj)->rotate.x = (atan2f(fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y) * fp->lr);
+            }
+        }
+    }
+    else return;
+}
+
+void func_ovl2_800DE324(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl2_800D9FCC(&fp->coll_data);
+}
+
+void func_ovl2_800DE348(GObj *fighter_gobj)
+{
+    func_ovl2_800DE324(fighter_gobj);
+}
+
+void func_ovl2_800DE368(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->publicity_knockback != 0.0F)
+    {
+        if ((fp->publicity_knockback >= 100.0F) && ((fp->joint[0]->translate.x < (D_ovl2_80131308.unk_80131308_0x2C + 450.0F)) || ((D_ovl2_80131308.unk_80131308_0x28 - 450.0F) < fp->joint[0]->translate.x)))
+        {
+            func_ovl3_80164F70(fighter_gobj, fp->publicity_knockback);
+        }
+        fp->publicity_knockback = 0.0F;
+    }
+    switch (fp->ft_kind)
+    {
+    case Ft_Kind_Mario:
+    case Ft_Kind_MetalMario:
+    case Ft_Kind_PolyMario:
+        fp->fighter_vars.mario.is_expend_tornado = FALSE;
+        break;
+
+    case Ft_Kind_Samus:
+    case Ft_Kind_PolySamus:
+        fp->fighter_vars.samus.charge_recoil = 0;
+        return;
+
+    case Ft_Kind_Luigi:
+    case Ft_Kind_PolyLuigi:
+        fp->fighter_vars.mario.is_expend_tornado = FALSE;
+        break;
+
+    case Ft_Kind_Captain:
+    case Ft_Kind_PolyCaptain:
+        fp->fighter_vars.captain.falcon_punch_unk = FALSE;
+        break;
+
+    case Ft_Kind_Purin:
+    case Ft_Kind_PolyPurin:
+        fp->fighter_vars.purin.unk_0x0 = FALSE;
+        break;
+    }
+}
+
+static bool32(*D_ovl2_80130E20)(GObj*); // Static function pointer???
+
+bool32 func_ovl2_800DE45C(Coll_Data *coll_data, GObj *fighter_gobj, u32 arg2)
+{
+    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    GObj *cliffcatch_gobj;
+    Fighter_Struct *cliffcatch_fp;
+    s32 unused;
+    s32 sp24 = FALSE;
+    s32 var_v0;
+
+    if (func_ovl2_800DB838(coll_data) != FALSE)
+    {
+        func_ovl2_800DBF58(coll_data);
+    }
+    if (func_ovl2_800DC3C8(coll_data) != FALSE)
+    {
+        func_ovl2_800DCAE8(coll_data);
+    }
+    if (func_ovl2_800DCF58(coll_data) != FALSE)
+    {
+        func_ovl2_800DD160(coll_data);
+
+        if (coll_data->coll_type & MPCOLL_MASK_CEIL)
+        {
+            func_ovl2_800D99B8(coll_data);
+        }
+        if ((arg2 & 8) && (this_fp->phys_info.vel_air.y >= 30.0F))
+        {
+            coll_data->coll_mask |= 0x4000;
+
+            sp24 = TRUE;
+
+            coll_data->unk_0x64 = TRUE;
+        }
+    }
+    var_v0 = ((arg2 & 4) ? func_ovl2_800DD2C8(coll_data, D_ovl2_80130E20, fighter_gobj) : func_ovl2_800DD578(coll_data));
+
+    if (var_v0 != FALSE)
+    {
+        if (arg2 & 2)
+        {
+            func_ovl2_800DD6A8(coll_data);
+
+            if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+            {
+                func_ovl2_800D9F84(coll_data);
+            }
+            else func_ovl2_800D9FCC(coll_data);
+        }
+        else
+        {
+            func_ovl2_800DD59C(coll_data);
+            func_ovl2_800DE368(fighter_gobj);
+
+            if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+            {
+                func_ovl2_800D9F84(coll_data);
+
+                coll_data->unk_0x64 = TRUE;
+
+                return TRUE;
+            }
+        }
+    }
+    else func_ovl2_800D9FCC(coll_data);
+
+    if ((arg2 & 1) && (this_fp->cliffcatch_wait == 0) && ((func_ovl2_800DB590(coll_data) != FALSE) || (func_ovl2_800DB6F0(coll_data) != FALSE)))
+    {
+        cliffcatch_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+
+        while (cliffcatch_gobj != NULL)
+        {
+            if (cliffcatch_gobj != fighter_gobj)
+            {
+                cliffcatch_fp = FighterGetStruct(cliffcatch_gobj);
+
+                if ((cliffcatch_fp->x190_flag_b7) && (this_fp->coll_data.cliff_id == cliffcatch_fp->coll_data.cliff_id) && (this_fp->lr == cliffcatch_fp->lr))
+                {
+                    return sp24;
+                }
+                else goto l_continue; // Bruh
+            }
+        l_continue:
+            cliffcatch_gobj = cliffcatch_gobj->group_gobj_next;
+        }
+        func_ovl2_800DE368(fighter_gobj);
+
+        coll_data->unk_0x64 = TRUE;
+
+        return TRUE;
+    }
+    else return sp24;
+}
+
+bool32 func_ovl2_800DE6B0(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 0);
+}
+
+bool32 func_ovl2_800DE6E4(GObj *fighter_gobj, void(*proc_map)(GObj*))
+{
+    if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
+    {
+        proc_map(fighter_gobj);
+
+        return TRUE;
+    }
+    else return FALSE;
+}
+
+bool32 func_ovl2_800DE724(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 2);
+}
+
+bool32 func_ovl2_800DE758(GObj *fighter_gobj, bool32(*proc_map)(GObj*))
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    D_ovl2_80130E20 = proc_map;
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 4);
+}
+
+bool32 func_ovl2_800DE798(GObj *fighter_gobj, bool32(*proc_map)(GObj *))
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    D_ovl2_80130E20 = proc_map;
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 5);
+}
+
+bool32 func_ovl2_800DE7D8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 1);
+}
+
+bool32 func_ovl2_800DE80C(GObj *fighter_gobj, void (*proc_map)(GObj *))
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (func_ovl2_800DE7D8(fighter_gobj) != FALSE)
+    {
+        if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
+        {
+            func_ovl3_80144C24(fighter_gobj);
+
+            return TRUE;
+        }
+        else proc_map(fighter_gobj);
+
+        return TRUE;
+    }
+    else return FALSE;
+}
+
+bool32 func_ovl2_800DE87C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 9);
+}
+
+bool32 func_ovl2_800DE8B0(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 8);
+}
+
+void func_ovl2_800DE8E4(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->phys_info.vel_air.y > FTCOMMON_ATTACKAIR_SKIP_LANDING_VEL_Y_MAX)
+    {
+        func_ovl3_8013E1C8(fighter_gobj);
+    }
+    else func_ovl3_80142D9C(fighter_gobj);
+}
+
+bool32 jtgt_ovl2_800DE934(GObj *fighter_gobj)
+{
+    return func_ovl2_800DE6E4(fighter_gobj, func_ovl2_800DE8E4);
+}
+
+bool32 func_ovl2_800DE958(GObj *fighter_gobj)
+{
+    return func_ovl2_800DE724(fighter_gobj);
+}
+
+bool32 func_ovl2_800DE978(GObj *fighter_gobj)
+{
+    return func_ovl2_800DE80C(fighter_gobj, func_ovl2_800DE8E4);
+}
+
+void jtgt_ovl2_800DE99C(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
+    {
+        if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
+        {
+            func_ovl3_80144C24(fighter_gobj);
+        }
+        else if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
+        {
+            func_ovl2_800DE8E4(fighter_gobj);
+        }
+        else if (fp->coll_data.coll_mask & MPCOLL_MASK_CEILHEAVY) // Enter ceiling bonk if true?
+        {
+            func_ovl3_801441C0(fighter_gobj);
+        }
     }
 }

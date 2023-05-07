@@ -42,18 +42,18 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
     {
         if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
         {
-            if (fp->coll_data.coll_type & 0x800)
+            if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
             {
                 ftCollision_SetGround(fp);
                 ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwLanding, 0.0F, 1.0F, 0U);
             }
-            else if (fp->coll_data.coll_type & 0x3000)
+            else if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
             {
                 func_ovl3_80144C24(fighter_gobj);
             }
         }
     }
-    else if ((func_ovl2_800DE8B0(fighter_gobj) != FALSE) && (fp->coll_data.coll_mask & 0x4000))
+    else if ((func_ovl2_800DE8B0(fighter_gobj) != FALSE) && (fp->coll_data.coll_mask & MPCOLL_MASK_CEILHEAVY))
     {
         func_ovl3_8015F0A8(fighter_gobj);
     }

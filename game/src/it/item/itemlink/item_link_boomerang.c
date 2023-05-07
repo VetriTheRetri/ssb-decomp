@@ -328,7 +328,7 @@ bool32 jtgt_ovl3_8016D5EC(GObj *item_gobj)
     {
         func_ovl3_80167A58(item_gobj);
 
-        coll_flags = (ip->coll_data.unk_0x54 ^ ip->coll_data.coll_mask) & ip->coll_data.coll_mask & MPCOLL_MASK_ALL;
+        coll_flags = (ip->coll_data.unk_0x54 ^ ip->coll_data.coll_mask) & ip->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
 
         if (coll_flags)
         {

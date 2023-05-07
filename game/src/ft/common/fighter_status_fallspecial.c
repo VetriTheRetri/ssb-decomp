@@ -33,7 +33,7 @@ bool32 func_ovl3_80143808(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->status_vars.common.fallspecial.is_allow_pass == FALSE) || !(fp->coll_data.ground_flags & 0x4000) || (fp->input.stick_range.y >= FTCOMMON_FALLSPECIAL_PASS_STICK_RANGE_MIN))
+    if ((fp->status_vars.common.fallspecial.is_allow_pass == FALSE) || !(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID) || (fp->input.stick_range.y >= FTCOMMON_FALLSPECIAL_PASS_STICK_RANGE_MIN))
     {
         return TRUE;
     }
@@ -46,7 +46,7 @@ void func_ovl3_8014384C(GObj *fighter_gobj)
 
     if (func_ovl2_800DE798(fighter_gobj, func_ovl3_80143808) != FALSE)
     {
-        if (fp->coll_data.coll_type & 0x3000)
+        if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
             func_ovl3_80144C24(fighter_gobj);
         }

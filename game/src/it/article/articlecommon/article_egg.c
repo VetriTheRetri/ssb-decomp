@@ -93,7 +93,7 @@ bool32 jtgt_ovl3_801817A0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801817F8(GObj *article_gobj)
 {
-    if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_ALL) != FALSE)
+    if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE)
     {
         if (func_ovl3_801730D4(article_gobj) != FALSE)
         {

@@ -31,7 +31,7 @@ bool32 jtgt_ovl3_801685F0(GObj *item_gobj) // Collision
 
     func_ovl3_80167A58(item_gobj);
 
-    if (func_ovl3_80167C38(item_gobj, MPCOLL_MASK_ALL, Item_Fireball_Attributes[ip->item_vars.fireball.index].collide_vel, &pos) != FALSE)
+    if (func_ovl3_80167C38(item_gobj, MPCOLL_MASK_MAIN_ALL, Item_Fireball_Attributes[ip->item_vars.fireball.index].collide_vel, &pos) != FALSE)
     {
         if (func_ovl0_800C7A84(&ip->phys_info.vel) < Item_Fireball_Attributes[ip->item_vars.fireball.index].collide_damage)
         {

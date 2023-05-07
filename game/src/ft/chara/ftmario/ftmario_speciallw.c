@@ -29,7 +29,7 @@ void func_ovl3_801565A8(GObj *fighter_gobj)
     if (fp->command_vars.flags.flag2 != FALSE)
     {
         fp->command_vars.flags.flag2 = FALSE;
-        fp->fighter_vars.mario.is_tornado_charge = TRUE;
+        fp->fighter_vars.mario.is_expend_tornado = TRUE;
     }
     func_ovl2_800D94E8(fighter_gobj);
 }
@@ -70,7 +70,7 @@ void func_ovl3_801566C4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if ((fp->fighter_vars.mario.is_tornado_charge == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
+    if ((fp->fighter_vars.mario.is_expend_tornado == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
     {
         func_ovl2_800D8D34(fp, FTMARIO_TORNADO_TAP_VEL_ADD, 40.0F);
     }
@@ -155,7 +155,7 @@ void jtgt_ovl3_80156910(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    tornado_vel_y = (fp->fighter_vars.mario.is_tornado_charge != FALSE) ? 0.0F : 22.0F;
+    tornado_vel_y = (fp->fighter_vars.mario.is_expend_tornado != FALSE) ? 0.0F : 22.0F;
 
     fp->phys_info.vel_air.y = (f32)(15.0F - tornado_vel_y);
 
