@@ -55,7 +55,7 @@ void func_ovl3_80155F4C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
 
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialN, fighter_gobj->anim_frame, 1.0F, 2U);
 
@@ -66,7 +66,7 @@ void func_ovl3_80155FA0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 2U);
     func_ovl2_800D8EB8(fp);
 

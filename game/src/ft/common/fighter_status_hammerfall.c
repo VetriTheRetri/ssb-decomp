@@ -25,7 +25,7 @@ void func_ovl3_80147C50(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, func_ovl2_800F3828(fighter_gobj), 1.0F, func_ovl2_800F385C(fighter_gobj));
     func_ovl2_800F388C(fighter_gobj);
@@ -51,7 +51,7 @@ void func_ovl3_80147D30(GObj *fighter_gobj)
     ftCommonAttributes *attributes = fp->attributes;
     s32 vel_x, vel_y;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, func_ovl2_800F3828(fighter_gobj), 1.0F, func_ovl2_800F385C(fighter_gobj));
     func_ovl2_800F388C(fighter_gobj);
 

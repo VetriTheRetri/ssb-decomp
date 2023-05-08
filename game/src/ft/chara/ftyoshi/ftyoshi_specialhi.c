@@ -98,7 +98,7 @@ void func_ovl3_8015EC00(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialHi, fighter_gobj->anim_frame, 1.0F, 4U);
 
     fp->cb_take_damage = func_ovl3_8015E980;
@@ -108,7 +108,7 @@ void func_ovl3_8015EC00(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 4U);
 
     fp->cb_take_damage = func_ovl3_8015E980;

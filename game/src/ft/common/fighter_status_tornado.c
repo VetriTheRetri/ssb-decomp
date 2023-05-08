@@ -70,7 +70,7 @@ void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
     }
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Common_Tornado, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

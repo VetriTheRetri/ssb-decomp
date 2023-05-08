@@ -82,7 +82,7 @@ void func_ovl3_8015704C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
 
     fp->cb_take_damage = func_ovl3_80156E98;
@@ -92,7 +92,7 @@ void func_ovl3_801570A8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
     func_ovl2_800D8EB8(fp);
 
@@ -253,7 +253,7 @@ void func_ovl3_80157518(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->cb_take_damage = func_ovl3_80156E98;
@@ -263,7 +263,7 @@ void func_ovl3_8015756C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
     func_ovl2_800D8EB8(fp);
 
@@ -285,7 +285,7 @@ void func_ovl3_80157610(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
         func_ovl2_800D8EB8(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, 0.0F, 1.F, 2U);

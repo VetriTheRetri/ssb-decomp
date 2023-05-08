@@ -235,7 +235,7 @@ void func_ovl3_80164128(GObj *fighter_gobj)
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 5U);
 
         fp->cb_take_damage = func_ovl3_80163EFC;
@@ -266,7 +266,7 @@ void func_ovl3_801641D0(GObj *fighter_gobj)
         }
         else if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {
-            ftCollision_SetGround(fp);
+            ftMapCollide_SetGround(fp);
             ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
 
             fp->cb_take_damage = func_ovl3_80163EFC;

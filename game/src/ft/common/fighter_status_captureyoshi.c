@@ -66,7 +66,7 @@ void func_ovl3_8014C83C(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->lr = -capture_fp->lr;
 
-    func_ovl2_800DEEC8(this_fp);
+    ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureYoshi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
@@ -147,7 +147,7 @@ void func_ovl3_8014C9A0(GObj *fighter_gobj)
 
         DObjGetStruct(fighter_gobj)->translate.y += FTCOMMON_YOSHIEGG_ESCAPE_OFF_Y;
 
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, 0x1000U);
         func_ovl2_800EA948(fp, 0xC);
     }
@@ -334,11 +334,11 @@ void func_ovl3_8014CF20(GObj *fighter_gobj)
 
     if (this_fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(this_fp);
+        ftMapCollide_SetAir(this_fp);
     }
     this_fp->cb_status = func_ovl3_8014CF0C;
 
-    func_ovl2_800DEEC8(this_fp);
+    ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_YoshiEgg, 0.0F, 0.0F, 0U);
     func_ovl2_800E8098(this_fp, 0x3FU);
 

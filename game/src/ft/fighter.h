@@ -1199,9 +1199,9 @@ void ftStatus_Update(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 ani
 void func_ovl3_801438F0(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt); // FallSpecial Action State
 void func_ovl2_800DDE84(GObj*, void(*cb_coll)(GObj*)); // Grounded Collision check (stop at ledge?)
 void func_ovl2_800DE80C(GObj*, void(*cb_coll)(GObj*)); // Aerial Collision check (ledge grab?)
-void ftCollision_SetGround(Fighter_Struct*); // ???
+void ftMapCollide_SetGround(Fighter_Struct*); // ???
 void func_ovl2_800D8EB8(Fighter_Struct*); // ???
-void func_ovl2_800DEEC8(Fighter_Struct*); // ???
+void ftMapCollide_SetAir(Fighter_Struct*); // ???
 void ftAnim_Update(GObj*); // ???
 
 // Macro to check if a move has been interrupted by any standard action

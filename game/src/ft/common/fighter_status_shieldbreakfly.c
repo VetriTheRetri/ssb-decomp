@@ -15,7 +15,7 @@ void func_ovl3_80149488(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_ShieldBreakFly, 0.0F, 1.0F, 0x1000U);
     ftAnim_Update(fighter_gobj);
 
@@ -90,7 +90,7 @@ void func_ovl3_801496A4(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        ftCollision_SetGround(fp);
+        ftMapCollide_SetGround(fp);
     }
     status_id = (ftCommon_DownBounce_UpOrDown(fighter_gobj) != 0) ? ftStatus_Common_ShieldBreakDownD : ftStatus_Common_ShieldBreakDownU;
 

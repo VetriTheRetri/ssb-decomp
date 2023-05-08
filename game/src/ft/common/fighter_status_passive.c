@@ -6,7 +6,7 @@ void func_ovl3_80144660(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        ftCollision_SetGround(fp);
+        ftMapCollide_SetGround(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Common_Passive, 0.0F, 1.0F, 0U);
     func_ovl2_800E9CE8(fp);

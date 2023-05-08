@@ -44,7 +44,7 @@ void func_ovl3_8015BDE4(GObj *fighter_gobj)
 
 void func_ovl3_8015BE08(GObj *fighter_gobj)
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialHiStart, fighter_gobj->anim_frame, 1.0F, 2U);
 }
 
@@ -52,7 +52,7 @@ void func_ovl3_8015BE48(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirHiStart, fighter_gobj->anim_frame, 1.0F, 2U);
     func_ovl2_800D8EB8(fp);
 }
@@ -86,7 +86,7 @@ void func_ovl3_8015BF0C(GObj *fighter_gobj)
 
 void func_ovl3_8015BF30(GObj *fighter_gobj)
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialHiHold, fighter_gobj->anim_frame, 1.0F, 0x4002U);
 }
 
@@ -94,7 +94,7 @@ void func_ovl3_8015BF70(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirHiHold, fighter_gobj->anim_frame, 1.0F, 0x4002U);
     func_ovl2_800D8EB8(fp);
 }
@@ -253,7 +253,7 @@ void func_ovl3_8015C46C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->jumps_used = attributes->jumps_max;
@@ -317,7 +317,7 @@ void func_ovl3_8015C4DC(GObj *fighter_gobj)
             return;
         }
     }
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     func_ovl3_8015C60C(fighter_gobj);
 }
 
@@ -389,7 +389,7 @@ void func_ovl3_8015C838(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        ftCollision_SetGround(fp);
+        ftMapCollide_SetGround(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialHiEnd, 0.0F, 1.0F, 2U);
 }
@@ -448,7 +448,7 @@ void func_ovl3_8015C9E8(GObj *fighter_gobj)
             {
                 func_ovl3_80144C24(fighter_gobj);
             }
-            else ftCollision_SetGround(fp);
+            else ftMapCollide_SetGround(fp);
         }
     }
     else jtgt_ovl2_800DDEC4(fighter_gobj);

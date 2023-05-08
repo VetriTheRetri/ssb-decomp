@@ -56,7 +56,7 @@ loop: // This makes no sense
 
     func_ovl2_800D79F0(this_gobj, &rebirth_vars);
     func_ovl2_8010F840(this_fp);
-    ftCollision_SetGround(this_fp);
+    ftMapCollide_SetGround(this_fp);
 
     this_fp->coll_data.ground_line_id = -2;
     this_fp->coll_data.ground_flags = 0x4000;

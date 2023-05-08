@@ -1,5 +1,7 @@
 #include "mpcoll.h"
 #include "fighter.h"
+#include "item.h"
+#include "article.h"
 #include "gmmatch.h"
 
 extern s32 D_ovl2_80130DE0;
@@ -2715,4 +2717,256 @@ void jtgt_ovl2_800DE99C(GObj *fighter_gobj)
             func_ovl3_801441C0(fighter_gobj);
         }
     }
+}
+
+bool32 func_ovl2_800DEA20(Coll_Data *coll_data, GObj *fighter_gobj, bool32 arg2)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    bool32 is_collide = FALSE;
+
+    if (func_ovl2_800DB838(coll_data) != FALSE)
+    {
+        func_ovl2_800DBF58(coll_data);
+
+        if (!(fp->status_vars.common.damage.coll_mask_prev & MPCOLL_MASK_RWALL) && (func_ovl0_800C7A84(&coll_data->pos_prev) > 30.0F) && (vec3f_angle_diff(&coll_data->pos_prev, &coll_data->rwall_angle) > 1.9198622F))
+        {
+            fp->status_vars.common.damage.coll_mask_curr |= MPCOLL_MASK_RWALL;
+
+            is_collide = TRUE;
+
+            coll_data->unk_0x64 = TRUE;
+        }
+        else if (!(coll_data->unk_0x54 & MPCOLL_MASK_RWALL))
+        {
+            fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_RWALL;
+        }
+    }
+    if (func_ovl2_800DC3C8(coll_data) != FALSE)
+    {
+        func_ovl2_800DCAE8(coll_data);
+
+        if (!(fp->status_vars.common.damage.coll_mask_prev & MPCOLL_MASK_LWALL) && (func_ovl0_800C7A84(&coll_data->pos_prev) > 30.0F) && (vec3f_angle_diff(&coll_data->pos_prev, &coll_data->lwall_angle) > 1.9198622F))
+        {
+            fp->status_vars.common.damage.coll_mask_curr |= MPCOLL_MASK_LWALL;
+
+            is_collide = TRUE;
+
+            coll_data->unk_0x64 = TRUE;
+        }
+        else if (!(coll_data->unk_0x54 & MPCOLL_MASK_LWALL))
+        {
+            fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_LWALL;
+        }
+    }
+    if (func_ovl2_800DCF58(coll_data) != FALSE)
+    {
+        func_ovl2_800DD160(coll_data);
+
+        if (coll_data->coll_type & MPCOLL_MASK_CEIL)
+        {
+            func_ovl2_800D99B8(coll_data);
+        }
+        if (!(fp->status_vars.common.damage.coll_mask_prev & MPCOLL_MASK_CEIL) && (func_ovl0_800C7A84(&coll_data->pos_prev) > 30.0F) && (vec3f_angle_diff(&coll_data->pos_prev, &coll_data->ceil_angle) > 1.9198622F))
+        {
+            fp->status_vars.common.damage.coll_mask_curr |= MPCOLL_MASK_CEIL;
+
+            is_collide = TRUE;
+
+            coll_data->unk_0x64 = TRUE;
+        }
+        else if (!(coll_data->unk_0x54 & MPCOLL_MASK_CEIL))
+        {
+            fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_CEIL;
+        }
+    }
+    if (func_ovl2_800DD578(coll_data) != FALSE)
+    {
+        if (fp->hitlag_timer > 0)
+        {
+            func_ovl2_800DD6A8(coll_data);
+
+            if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+            {
+                func_ovl2_800D9F84(coll_data);
+            }
+            else func_ovl2_800D9FCC(coll_data);
+
+        }
+        else
+        {
+            if (vec3f_angle_diff(&coll_data->pos_prev, &coll_data->ground_angle) > 1.9198622F)
+            {
+                func_ovl2_800DD59C(coll_data);
+                func_ovl2_800DE368(fighter_gobj);
+
+                if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+                {
+                    func_ovl2_800D9F84(coll_data);
+
+                    fp->status_vars.common.damage.coll_mask_curr |= MPCOLL_MASK_GROUND;
+
+                    is_collide = TRUE;
+
+                    coll_data->unk_0x64 = TRUE;
+                }
+            }
+            else
+            {
+                func_ovl2_800DD6A8(coll_data);
+
+                if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+                {
+                    func_ovl2_800D9F84(coll_data);
+
+                    if (!(coll_data->unk_0x54 & MPCOLL_MASK_GROUND))
+                    {
+                        fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_GROUND;
+
+                        fp->status_vars.common.damage.wall_collide_angle = coll_data->ground_angle;
+                    }
+                }
+                else func_ovl2_800D9FCC(coll_data);
+            }
+        }
+    }
+    else func_ovl2_800D9FCC(coll_data);
+
+    return is_collide;
+}
+
+void func_ovl2_800DEDAC(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    fp->status_vars.common.damage.coll_mask_prev = fp->status_vars.common.damage.coll_mask_curr;
+    fp->status_vars.common.damage.coll_mask_curr = 0;
+    fp->status_vars.common.damage.coll_mask_unk = 0;
+
+    func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DEA20, fighter_gobj, 0);
+}
+
+void func_ovl2_800DEDF0(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->ground_or_air == air)
+    {
+        if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
+        {
+            ftMapCollide_SetGround(fp);
+        }
+    }
+    else if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
+    {
+        ftMapCollide_SetAir(fp);
+    }
+}
+
+void func_ovl2_800DEE54(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->ground_or_air == air)
+    {
+        func_ovl3_8013F9E0(fighter_gobj);
+    }
+    else func_ovl3_8013E1C8(fighter_gobj);
+}
+
+void ftMapCollide_SetGround(Fighter_Struct *fp)
+{
+    fp->phys_info.vel_ground.x = fp->phys_info.vel_air.x * fp->lr;
+
+    fp->ground_or_air = ground;
+
+    fp->jumps_used = 0;
+
+    fp->flags_lw.flags_0x800 = FALSE; // Ground/Air bool?
+}
+
+void ftMapCollide_SetAir(Fighter_Struct *fp)
+{
+    fp->ground_or_air = air;
+
+    fp->phys_info.vel_air.z = fp->joint[0]->translate.z = 0.0F;
+
+    fp->jumps_used = 1;
+}
+
+void func_ovl2_800DEEF4(Coll_Data *coll_data, GObj *fighter_gobj, s32 arg2)
+{
+    if (func_ovl2_800DB838(coll_data) != FALSE)
+    {
+        func_ovl2_800DBF58(coll_data);
+    }
+    if (func_ovl2_800DC3C8(coll_data) != FALSE)
+    {
+        func_ovl2_800DCAE8(coll_data);
+    }
+    if (func_ovl2_800DCF58(coll_data) != FALSE)
+    {
+        func_ovl2_800DD160(coll_data);
+
+        if (coll_data->coll_type & MPCOLL_MASK_CEIL)
+        {
+            func_ovl2_800D99B8(coll_data);
+        }
+    }
+    if (func_ovl2_800DD578(coll_data) != FALSE)
+    {
+        func_ovl2_800DD6A8(coll_data);
+
+        if (coll_data->coll_type & MPCOLL_MASK_GROUND)
+        {
+            func_ovl2_800D9F84(coll_data);
+        }
+    }
+    else func_ovl2_800D9FCC(coll_data);
+}
+
+void func_ovl2_800DEFBC(Coll_Data *this_coll_data, Vec3f *pos, Coll_Data *other_coll_data)
+{
+    this_coll_data->pos_curr = *pos;
+
+    this_coll_data->p_object_coll = &other_coll_data->object_coll;
+    this_coll_data->coll_mask = 0;
+    this_coll_data->unk_0x58 = 0;
+    this_coll_data->coll_type = 0;
+    this_coll_data->unk_0x64 = FALSE;
+    this_coll_data->wall_flag = other_coll_data->wall_flag;
+}
+
+void func_ovl2_800DEFF8(Coll_Data *coll_data)
+{
+    coll_data->p_object_coll = &coll_data->object_coll;
+
+    coll_data->wall_flag = D_ovl2_80131398;
+    coll_data->coll_mask = 0;
+}
+
+void func_ovl2_800DF014(GObj *fighter_gobj, Vec3f *pos, Coll_Data *coll_data)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    func_ovl2_800DEFBC(&fp->coll_data, pos, coll_data);
+    func_ovl2_800DEEF4(&fp->coll_data, fighter_gobj, 0);
+    func_ovl2_800DEFF8(&fp->coll_data);
+}
+
+void func_ovl2_800DF058(GObj *article_gobj, Vec3f *pos, Coll_Data *coll_data)
+{
+    Article_Struct *ap = ArticleGetStruct(article_gobj);
+
+    func_ovl2_800DEFBC(&ap->coll_data, pos, coll_data);
+    func_ovl2_800DEEF4(&ap->coll_data, article_gobj, 0);
+    func_ovl2_800DEFF8(&ap->coll_data);
+}
+
+void func_ovl2_800DF09C(GObj *item_gobj, Vec3f *pos, Coll_Data *coll_data)
+{
+    Item_Struct *ip = ItemGetStruct(item_gobj);
+
+    func_ovl2_800DEFBC(&ip->coll_data, pos, coll_data);
+    func_ovl2_800DEEF4(&ip->coll_data, item_gobj, 0);
+    func_ovl2_800DEFF8(&ip->coll_data);
 }

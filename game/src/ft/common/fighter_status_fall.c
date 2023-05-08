@@ -20,7 +20,7 @@ void func_ovl3_8013F9E0(GObj *fighter_gobj)
     {
         if (fp->ground_or_air == ground)
         {
-            func_ovl2_800DEEC8(fp);
+            ftMapCollide_SetAir(fp);
         }
         ftStatus_Update(fighter_gobj, ((fp->jumps_used >= fp->attributes->jumps_max) ? ftStatus_Common_FallAerial : ftStatus_Common_Fall), 0.0F, 1.0F, 8U);
 

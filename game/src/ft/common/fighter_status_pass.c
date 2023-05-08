@@ -12,7 +12,7 @@ void func_ovl3_80141DA0(GObj *fighter_gobj, s32 status_id, f32 frame_begin, u32 
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, status_id, frame_begin, 1.0F, flags);
     func_ovl2_800D8EB8(fp);
 

@@ -193,7 +193,7 @@ void func_ovl3_801453F0(GObj *fighter_gobj)
     }
     else if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        ftCollision_SetGround(fp);
+        ftMapCollide_SetGround(fp);
     }
 }
 
@@ -207,7 +207,7 @@ void func_ovl3_80145440(GObj *fighter_gobj)
     }
     else if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        ftCollision_SetGround(fp);
+        ftMapCollide_SetGround(fp);
     }
 }
 
@@ -219,7 +219,7 @@ void func_ovl3_80145490(GObj *fighter_gobj)
 
     if (fp->attributes->cliff_status_ground_air_id[fp->status_vars.common.cliffmotion.status_id] == ground)
     {
-        ftCollision_SetGround(fp);
+        ftMapCollide_SetGround(fp);
     }
     if (fp->lr == RIGHT)
     {

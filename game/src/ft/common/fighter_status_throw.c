@@ -61,7 +61,7 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
         {
             status_id = ftStatus_Kirby_ThrowF;
 
-            func_ovl2_800DEEC8(this_fp);
+            ftMapCollide_SetAir(this_fp);
         }
         else status_id = ftStatus_Common_ThrowF;
         thrown_status = &this_fp->attributes->thrown_status[catch_fp->ft_kind].ft_thrown[0];
@@ -179,6 +179,6 @@ void func_ovl3_8014A5AC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFLanding, 0.0F, 1.0F, 0x80U);
 }

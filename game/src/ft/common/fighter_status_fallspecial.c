@@ -71,7 +71,7 @@ void func_ovl3_801438F0(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fa
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
     }
     fp->jumps_used = attributes->jumps_max;
 

@@ -41,7 +41,7 @@ void func_ovl3_8014DE30(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFF, fighter_gobj->anim_frame, 1.0F, 0U);
 
     fp->status_vars.common.throwff.is_turn = FALSE;
@@ -53,7 +53,7 @@ void func_ovl3_8014DE80(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowAirFF, fighter_gobj->anim_frame, 1.0F, 0U);
     func_ovl2_800E8098(fp, 0x3FU);
 }

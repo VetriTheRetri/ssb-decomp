@@ -95,7 +95,7 @@ void func_ovl3_8015FA2C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
 
     fp->cb_hitlag_start = func_ovl2_800E9C8C;
@@ -106,7 +106,7 @@ void func_ovl3_8015FA8C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
     func_ovl2_800D8EB8(fp);
 

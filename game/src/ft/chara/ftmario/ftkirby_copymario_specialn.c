@@ -61,7 +61,7 @@ void func_ovl3_80156ABC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
 
     ftStatus_Update(fighter_gobj, FTKIRBY_COPYMARIO_FIREBALL_CHECK_FT_KIND(fp, ftStatus_Kirby_CopyMario_SpecialN, ftStatus_Kirby_CopyLuigi_SpecialN), fighter_gobj->anim_frame, 1.0F, 2U);
 
@@ -72,7 +72,7 @@ void func_ovl3_80156B38(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
 
     ftStatus_Update(fighter_gobj, FTKIRBY_COPYMARIO_FIREBALL_CHECK_FT_KIND(fp, ftStatus_Kirby_CopyMario_SpecialAirN, ftStatus_Kirby_CopyLuigi_SpecialAirN), fighter_gobj->anim_frame, 1.0F, 2U);
 

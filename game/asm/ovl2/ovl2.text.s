@@ -9623,7 +9623,7 @@ glabel func_ovl2_800DEDF0
   /* 05A610 800DEE10 AFA5001C */        sw $a1, 0x1c($sp)
   /* 05A614 800DEE14 1040000B */      beqz $v0, .L800DEE44
   /* 05A618 800DEE18 8FA5001C */        lw $a1, 0x1c($sp)
-  /* 05A61C 800DEE1C 0C037BA6 */       jal ftCollision_SetGround
+  /* 05A61C 800DEE1C 0C037BA6 */       jal ftMapCollide_SetGround
   /* 05A620 800DEE20 00A02025 */        or $a0, $a1, $zero
   /* 05A624 800DEE24 10000008 */         b .L800DEE48
   /* 05A628 800DEE28 8FBF0014 */        lw $ra, 0x14($sp)
@@ -9632,7 +9632,7 @@ glabel func_ovl2_800DEDF0
   /* 05A630 800DEE30 AFA5001C */        sw $a1, 0x1c($sp)
   /* 05A634 800DEE34 14400003 */      bnez $v0, .L800DEE44
   /* 05A638 800DEE38 8FA5001C */        lw $a1, 0x1c($sp)
-  /* 05A63C 800DEE3C 0C037BB2 */       jal func_ovl2_800DEEC8
+  /* 05A63C 800DEE3C 0C037BB2 */       jal ftMapCollide_SetAir
   /* 05A640 800DEE40 00A02025 */        or $a0, $a1, $zero
   .L800DEE44:
   /* 05A644 800DEE44 8FBF0014 */        lw $ra, 0x14($sp)
@@ -9662,7 +9662,7 @@ glabel func_ovl2_800DEE54
   /* 05A690 800DEE90 03E00008 */        jr $ra
   /* 05A694 800DEE94 00000000 */       nop 
 
-glabel ftCollision_SetGround
+glabel ftMapCollide_SetGround
   /* 05A698 800DEE98 8C8E0044 */        lw $t6, 0x44($a0)
   /* 05A69C 800DEE9C C4840048 */      lwc1 $f4, 0x48($a0)
   /* 05A6A0 800DEEA0 908F028E */       lbu $t7, 0x28e($a0)
@@ -9676,7 +9676,7 @@ glabel ftCollision_SetGround
   /* 05A6C0 800DEEC0 03E00008 */        jr $ra
   /* 05A6C4 800DEEC4 E48A0060 */      swc1 $f10, 0x60($a0)
 
-glabel func_ovl2_800DEEC8
+glabel ftMapCollide_SetAir
   /* 05A6C8 800DEEC8 44802000 */      mtc1 $zero, $f4
   /* 05A6CC 800DEECC 8C8F08E8 */        lw $t7, 0x8e8($a0)
   /* 05A6D0 800DEED0 240E0001 */     addiu $t6, $zero, 1
@@ -32963,7 +32963,7 @@ glabel func_ovl2_800F3938
   /* 06F150 800F3950 8CAE014C */        lw $t6, 0x14c($a1)
   /* 06F154 800F3954 15C10003 */       bne $t6, $at, .L800F3964
   /* 06F158 800F3958 00000000 */       nop 
-  /* 06F15C 800F395C 0C037BA6 */       jal ftCollision_SetGround
+  /* 06F15C 800F395C 0C037BA6 */       jal ftMapCollide_SetGround
   /* 06F160 800F3960 00A02025 */        or $a0, $a1, $zero
   .L800F3964:
   /* 06F164 800F3964 0C03CE0A */       jal func_ovl2_800F3828

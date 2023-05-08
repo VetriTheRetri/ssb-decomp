@@ -93,7 +93,7 @@ void func_ovl3_8014B968(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->lr = -capture_fp->lr;
 
-    func_ovl2_800DEEC8(this_fp);
+    ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureKirby, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800E806C(this_fp, 7, 0);
@@ -438,7 +438,7 @@ void func_ovl3_8014C508(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
     }
     fp->cb_status = func_ovl3_8014C4D8;
 
@@ -489,7 +489,7 @@ void func_ovl3_8014C6AC(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
     }
     fp->cb_status = func_ovl3_8014C67C;
 

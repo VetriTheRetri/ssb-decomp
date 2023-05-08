@@ -33,10 +33,10 @@ void func_ovl3_80144C24(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f vel;
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffCatch, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->coll_data.ground_line_id = -1;

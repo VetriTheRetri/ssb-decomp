@@ -166,7 +166,7 @@ void func_ovl3_801424BC(GObj *fighter_gobj)
     f32 pos_target_x;
     s32 wall_line_id;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_DokanWait, 0.0F, 1.0F, 0x10U);
 
     fp->is_invisible = TRUE;
@@ -244,7 +244,7 @@ void func_ovl3_801426D0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_DokanEnd, 0.0F, 1.0F, 0x10U);
 
     DObjGetStruct(fighter_gobj)->translate = fp->status_vars.common.dokan.pos_target;
@@ -270,7 +270,7 @@ void func_ovl3_801427CC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
 
     fp->lr = RIGHT;
 

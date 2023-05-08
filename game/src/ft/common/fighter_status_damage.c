@@ -484,7 +484,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
         {
             status_id_var = status_id_set = Fighter_StatusList_DamageGround[damage_level][damage_index];
 
-            func_ovl2_800DEEC8(this_fp);
+            ftMapCollide_SetAir(this_fp);
 
             this_fp->phys_info.vel_damage_air.x = vel_damage.x;
             this_fp->phys_info.vel_damage_air.y = vel_damage.y;
@@ -492,7 +492,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
         }
         else if (damage_level == 3)
         {
-            func_ovl2_800DEEC8(this_fp);
+            ftMapCollide_SetAir(this_fp);
 
             status_id_var = status_id_set = Fighter_StatusList_DamageGround[damage_level][damage_index];
 

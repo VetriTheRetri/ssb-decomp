@@ -44,7 +44,7 @@ void func_ovl3_80142D44(GObj *fighter_gobj, s32 status_id, bool32 is_allow_inter
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, status_id, 0.0F, anim_speed, 0U);
 
     fp->status_vars.common.landing.is_allow_interrupt = is_allow_interrupt;

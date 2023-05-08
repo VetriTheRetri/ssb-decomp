@@ -38,7 +38,7 @@ void func_ovl3_80164484(GObj *fighter_gobj)
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
     }
 }
@@ -49,7 +49,7 @@ void func_ovl3_801644D4(GObj *fighter_gobj)
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        ftCollision_SetGround(fp);
+        ftMapCollide_SetGround(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0U);
     }
 }

@@ -41,7 +41,7 @@ void func_ovl3_8015AFDC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialNStart, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->cb_take_damage = func_ovl3_8015AF10;
@@ -51,7 +51,7 @@ void func_ovl3_8015B030(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirNStart, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->cb_take_damage = func_ovl3_8015AF10;
@@ -138,7 +138,7 @@ void func_ovl3_8015B244(GObj *fighter_gobj)
 
 void func_ovl3_8015B284(GObj *fighter_gobj)
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialNLoop, fighter_gobj->anim_frame, 1.0F, 0x4002U);
     func_ovl3_8015B244(fighter_gobj);
 }
@@ -147,7 +147,7 @@ void func_ovl3_8015B2CC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirNLoop, fighter_gobj->anim_frame, 1.0F, 0x4002U);
     func_ovl3_8015B244(fighter_gobj);
     func_ovl2_800D8EB8(fp);
@@ -200,7 +200,7 @@ void func_ovl3_8015B4AC(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
 
     status_id = (fp->status_info.status_id == ftStatus_Donkey_SpecialAirNEnd) ? ftStatus_Donkey_SpecialNEnd : ftStatus_Donkey_SpecialNFull;
 

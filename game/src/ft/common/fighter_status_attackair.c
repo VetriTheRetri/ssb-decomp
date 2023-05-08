@@ -203,6 +203,6 @@ void func_ovl3_80150E80(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirX - ftStatus_Common_LandingAirN), 0.0F, 1.0F, 0U);
 }

@@ -35,7 +35,7 @@ void func_ovl3_8015FCB0(GObj *fighter_gobj)
 
 void func_ovl3_8015FCC8(GObj *fighter_gobj) // Unused?
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
 }
 
 void func_ovl3_8015FCE8(GObj *fighter_gobj)
@@ -111,7 +111,7 @@ bool32 func_ovl3_8015FEB4(GObj *fighter_gobj)
 
     if ((fp->command_vars.flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwBound, 0.0F, 1.0F, 0U);
 
         fp->command_vars.flags.flag1 = 0;
@@ -191,7 +191,7 @@ void func_ovl3_80160060(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 rot_z = fp->joint[0]->rotate.z;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwEnd, 0.0F, 1.0F, 4U);
 
     fp->joint[0]->rotate.z = rot_z;
@@ -203,7 +203,7 @@ void func_ovl3_80160060(GObj *fighter_gobj)
 
 void func_ovl3_801600EC(GObj *fighter_gobj)
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwLanding, 0.0F, 1.0F, 0U);
 }
 

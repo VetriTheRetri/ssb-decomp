@@ -200,7 +200,7 @@ void func_ovl3_8013F880(GObj *fighter_gobj)
     s32 status_id;
     s32 vel_x, vel_y;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
 
     status_id = ((fp->input.stick_range.x * fp->lr) > FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE) ? ftStatus_Common_JumpF : ftStatus_Common_JumpB;
 

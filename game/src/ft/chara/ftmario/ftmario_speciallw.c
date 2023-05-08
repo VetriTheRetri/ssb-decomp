@@ -101,7 +101,7 @@ void func_ovl3_801567B0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_801567A4(fighter_gobj);
-    ftCollision_SetGround(fp);
+    ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0x4000U);
     func_ovl2_800D8938(fp, 17.0F);
 }
@@ -111,7 +111,7 @@ void func_ovl3_801567B0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_801567A4(fighter_gobj);
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0x4000U);
     func_ovl2_800D8D10(fp, 40.0F);
     func_ovl2_800D8E78(fp, 17.0F);
@@ -133,7 +133,7 @@ void jtgt_ovl3_8015688C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_801567A4(fighter_gobj);
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 

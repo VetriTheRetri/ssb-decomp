@@ -134,7 +134,7 @@ void func_ovl3_80153F1C(GObj *fighter_gobj)
 
 void func_ovl3_80153F40(GObj *fighter_gobj) // Ness' grounded PK Thunder Start Action State handler
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialHiStart, fighter_gobj->anim_frame, 1.0F, 0x92);
 }
 
@@ -142,7 +142,7 @@ void func_ovl3_80153F80(GObj *fighter_gobj) // Ness' aerial PK Thunder Start Act
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirHiStart, fighter_gobj->anim_frame, 1.0F, 0x92);
     func_ovl2_800D8EB8(fp);
 }
@@ -261,7 +261,7 @@ void func_ovl3_80154234(GObj *fighter_gobj) // Unused
 
 void func_ovl3_80154268(GObj *fighter_gobj)
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialHiHold, fighter_gobj->anim_frame, 1.0F, 0x4897);
 }
 
@@ -269,7 +269,7 @@ void func_ovl3_801542A8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = fighter_gobj->user_data;;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirHiHold, fighter_gobj->anim_frame, 1.0F, 0x4897U);
     func_ovl2_800D8EB8(fp);
 }
@@ -322,7 +322,7 @@ void func_ovl3_8015445C(GObj *fighter_gobj)
 
 void func_ovl3_80154480(GObj *fighter_gobj)
 {
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialHiEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
 }
 
@@ -330,7 +330,7 @@ void func_ovl3_801544C0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirHiEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
     func_ovl2_800D8EB8(fp);
 }
@@ -511,7 +511,7 @@ void func_ovl3_801549FC(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
         {
-            func_ovl2_800DEEC8(fp);
+            ftMapCollide_SetAir(fp);
             func_ovl3_80154558(fighter_gobj);
         }
         else func_ovl3_80154D1C(fighter_gobj);
@@ -543,7 +543,7 @@ void func_ovl3_80154A8C(GObj *fighter_gobj)
             fp->phys_info.vel_air.x = 0.0F;
             fp->phys_info.vel_air.y = 0.0F;
 
-            ftCollision_SetGround(fp);
+            ftMapCollide_SetGround(fp);
             ftCommon_DownBounce_ApplyStatus(fighter_gobj);
             return;
         }
@@ -595,7 +595,7 @@ void func_ovl3_80154CBC(GObj *fighter_gobj)
 {
     f32 frame_begin;
 
-    ftCollision_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
 
     frame_begin = fighter_gobj->anim_frame;
 
@@ -612,7 +612,7 @@ void func_ovl3_80154D1C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 frame_begin;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
 
     frame_begin = fighter_gobj->anim_frame;
 
@@ -676,7 +676,7 @@ void func_ovl3_80154DFC(GObj *fighter_gobj)
             }
         }
 
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
         func_ovl3_80154F54(fighter_gobj);
         return;
     }
@@ -724,7 +724,7 @@ void func_ovl3_801550AC(GObj *fighter_gobj)
         }
         else
         {
-            ftCollision_SetGround(fp);
+            ftMapCollide_SetGround(fp);
             ftCommon_DownBounce_ApplyStatus(fighter_gobj);
         }
     }

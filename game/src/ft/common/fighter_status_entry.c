@@ -243,7 +243,7 @@ void func_ovl3_8013DBE0(GObj *fighter_gobj)
 
         break;
     }
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
     func_ovl3_8013DBAC(fighter_gobj);
 

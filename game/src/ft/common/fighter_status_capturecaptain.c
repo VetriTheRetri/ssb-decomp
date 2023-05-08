@@ -85,7 +85,7 @@ void func_ovl3_8014D2A0(GObj *fighter_gobj, GObj *capture_gobj)
     }
     else this_fp->x192_flag_b3 = FALSE;
 
-    func_ovl2_800DEEC8(this_fp);
+    ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureCaptain, FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN, FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED, 0U);
     func_ovl2_800E8098(this_fp, 0x3FU);
     ftAnim_Update(fighter_gobj);

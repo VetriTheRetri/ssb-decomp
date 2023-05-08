@@ -132,7 +132,7 @@ void jtgt_ovl3_80160630(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
 
     fp->cb_status = func_ovl3_801605FC;
 

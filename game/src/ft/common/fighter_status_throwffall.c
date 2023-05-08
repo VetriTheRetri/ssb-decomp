@@ -28,7 +28,7 @@ void func_ovl3_8014DA98(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800DEEC8(fp);
+        ftMapCollide_SetAir(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFFall, 0.0F, 0.0F, 8U);
     func_ovl2_800D8EB8(fp);
@@ -41,7 +41,7 @@ void func_ovl3_8014DAF8(GObj *fighter_gobj)
     s32 vel_x;
     s32 vel_y;
 
-    func_ovl2_800DEEC8(fp);
+    ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFFall, 0.0F, 0.0F, 0U);
 
     switch (fp->status_vars.common.throwf.input_source)

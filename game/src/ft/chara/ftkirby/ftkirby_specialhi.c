@@ -220,7 +220,7 @@ void func_ovl3_8016104C(GObj *fighter_gobj)
             }
             else if ((fp->coll_data.coll_type & MPCOLL_MASK_GROUND) && (fp->phys_info.vel_air.y < 0.0F))
             {
-                ftCollision_SetGround(fp);
+                ftMapCollide_SetGround(fp);
                 func_ovl3_80161210(fighter_gobj);
             }
         }
