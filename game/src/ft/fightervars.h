@@ -387,7 +387,7 @@ typedef struct ftCommon_Damage_StatusVars
     Vec3f wall_collide_angle;
     s32 unk_0xB38;
     s32 unk_0xB3C;
-    s32 unk_index;
+    s32 script_index;
     s32 status_id;
     bool32 is_limit_knockback;
 

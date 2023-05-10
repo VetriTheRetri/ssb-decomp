@@ -11,6 +11,7 @@
 #include <game/src/ft/fightervars.h>
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
+#include <game/src/gm/gmscript.h>
 
 #define FTPARTS_JOINT_NUM_MAX 37
 
@@ -494,54 +495,29 @@ typedef struct ftSpawnInfo
 
 typedef struct _Fighter_Hit
 {
-    s32 update_state;
-    u32 unk_0x4;
-    u32 unk_0x8;
+    gmHitCollisionUpdateState update_state;
+    s32 unk_0x4;
+    s32 joint_index;
     s32 damage;
-    s32 element;
-    s32 unk_0x14;
-    s32 unk_0x18;
-    s32 unk_0x1C;
-    s32 unk_0x20;
-    s32 unk_0x24;
+    gmHitCollisionElement element;
+    DObj *joint;
+    Vec3f offset;
+    f32 size;
     s32 angle;
     s32 knockback_scale;
     s32 knockback_weight;
     s32 knockback_base;
-    s32 unk_0x38;
-    u8 flags_0x3C_b0 : 1;
-    u8 flags_0x3C_b1 : 1;
-    u8 flags_0x3C_b2 : 1;
-    u8 flags_0x3C_b3 : 1;
-    u8 flags_0x3C_b4 : 1;
-    u8 flags_0x3C_b5 : 1;
-    u8 flags_0x3C_b6 : 1;
-    u8 is_hit_air : 1;
-    u8 is_hit_ground : 1;
-    u8 flags_0x3D_b1 : 1;
-    u8 flags_0x3D_b2 : 1;
-    u8 flags_0x3D_b3 : 1;
-    u8 flags_0x3D_b4 : 1;
-    u8 flags_0x3D_b5 : 1;
-    u8 flags_0x3D_b6 : 1;
-    u8 flags_0x3D_b7 : 1;
-    u8 flags_0x3E_b0 : 1;
-    u8 flags_0x3E_b1 : 1;
-    u8 flags_0x3E_b2 : 1;
-    u8 flags_0x3E_b3 : 1;
-    u8 flags_0x3E_b4 : 1;
-    u8 flags_0x3E_b5 : 1;
-    u8 flags_0x3E_b6 : 1;
-    u8 flags_0x3E_b7 : 1;
-    u8 flags_0x3F_b0 : 1;
-    u8 flags_0x3F_b1 : 1;
-    u8 flags_0x3F_b2 : 1;
-    u8 flags_0x3F_b3 : 1;
-    u8 flags_0x3F_b4 : 1;
-    u8 flags_0x3F_b5 : 1;
-    u8 flags_0x3F_b6 : 1;
-    u8 flags_0x3F_b7 : 1;
-    u8 filler_0x40[0x5C - 0x40];
+    s32 shield_damage;
+    u32 sfx_level : 3;
+    u32 sfx_kind : 4;
+    u32 is_hit_air : 1;
+    u32 is_hit_ground : 1;
+    u32 clang : 1;
+    u32 is_itemswing : 1;
+    u32 attack_id : 6;
+    gmAttackFlags flags_hi;
+    gmAttackFlags flags_lw;
+    u8 filler_0x40[0x5C - 0x44];
     FighterHitArray hit_targets[4];
     u8 filler[0xC4 - 0x7C];
 
@@ -880,7 +856,7 @@ struct Fighter_Struct
 
     } command_vars;
 
-    u32 x18C_flag_b0 : 1;
+    u32 is_hit_enable : 1;
     u32 x18C_flag_b1 : 1;
     u32 x18C_flag_b2 : 1;
     u32 x18C_flag_b3 : 1;
@@ -909,9 +885,9 @@ struct Fighter_Struct
     u32 x18F_flag_b6 : 1;
     u32 is_hitstun : 1;
 
-    u32 x190_flag_b012 : 3;
+    u32 slope_contour : 3;
     u32 x190_flag_b3 : 1;
-    u32 x190_flag_b4 : 1;
+    u32 is_playing_sfx : 1;
     u32 x190_flag_b5 : 1;
     u32 x190_flag_b6 : 1;
     u32 x190_flag_b7 : 1;
@@ -982,7 +958,7 @@ struct Fighter_Struct
     s8 unk_0x274;
     s16 unk_0x276;
     GObj *throw_gobj;
-    s32 unk_0x27C;
+    ftKind throw_ft_kind;
     u8 unk_0x280;
     s32 unk_0x284;
     s32 attack_id;
@@ -1082,7 +1058,7 @@ struct Fighter_Struct
     f32 fighter_cam_zoom_frame; // Maximum size of fighter's camera range?
     f32 fighter_cam_zoom_range; // Multiplier of fighter's camera range?
 
-    ftUnkFrameStruct unk_frame[4];
+    gmScriptEvent script_event[2][2];
 
     DObj *joint[FTPARTS_JOINT_NUM_MAX];
 
@@ -1111,8 +1087,8 @@ struct Fighter_Struct
     void (*cb_hitlag_end)(GObj*);
     void (*cb_status)(GObj*);
 
-    s32 unk_ft_0xA10;
-    s16 unk_ft_0xA14;
+    gmSoundEffect *p_sfx1;
+    s16 sfx1_id;
     s32 unk_ft_0xA18;
     s16 unk_ft_0xA1C;
     s32 unk_ft_0xA20;
@@ -1136,8 +1112,14 @@ struct Fighter_Struct
     GfxColorAlpha shade;
     u32 unk_0xA94;
     u32 unk_0xA98;
-    s8 unk_0xA9C;
-    s8 unk_0xA9D;
+
+    struct
+    {
+        s8 is_itemswing;
+        s8 render_state;
+
+    } afterimage;
+
     s8 unk_0xA9E;
     s8 unk_0xA9F;
 

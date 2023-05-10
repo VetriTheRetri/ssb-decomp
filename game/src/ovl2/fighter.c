@@ -361,8 +361,9 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fp->unk_0x178 = 0;
     fp->x3C_unk = 0;
     fp->anim_flags.word = 0;
-    fp->unk_ft_0xA10 = 0;
-    fp->unk_ft_0xA14 = 0;
+
+    fp->p_sfx1 = NULL;
+    fp->sfx1_id = 0;
     fp->unk_ft_0xA18 = 0;
     fp->unk_ft_0xA1C = 0;
     fp->unk_ft_0xA20 = 0;
@@ -375,7 +376,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
 
     fp->display_state = 0;
 
-    fp->x190_flag_b4 = FALSE;
+    fp->is_playing_sfx = FALSE;
     fp->x191_flag_b0 = FALSE;
 
     fp->cb_status = NULL;

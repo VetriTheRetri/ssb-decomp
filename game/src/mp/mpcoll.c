@@ -2407,7 +2407,7 @@ void func_ovl2_800DE150(GObj *fighter_gobj)
     {
         if ((fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2) && (fp->hitlag_timer <= 0))
         {
-            if (fp->x190_flag_b012 & 2)
+            if (fp->slope_contour & 2)
             {
                 joint = fp->joint[common_attrs->joint_index1];
 
@@ -2419,7 +2419,7 @@ void func_ovl2_800DE150(GObj *fighter_gobj)
                     func_ovl2_800EBD08(fp->joint[common_attrs->joint_index1], common_attrs->joint_float1, &sp30, sp2C);
                 }
             }
-            if (fp->x190_flag_b012 & 1)
+            if (fp->slope_contour & 1)
             {
                 joint = fp->joint[common_attrs->joint_index2];
 
@@ -2431,7 +2431,7 @@ void func_ovl2_800DE150(GObj *fighter_gobj)
                     func_ovl2_800EBD08(fp->joint[common_attrs->joint_index2], common_attrs->joint_float2, &sp30, sp2C);
                 }
             }
-            if (fp->x190_flag_b012 & 4)
+            if (fp->slope_contour & 4)
             {
                 DObjGetStruct(fighter_gobj)->rotate.x = (atan2f(fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y) * fp->lr);
             }

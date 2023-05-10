@@ -79,7 +79,7 @@ void func_ovl3_8014AF98(GObj *fighter_gobj)
 
     func_ovl2_800E80C4(fp, fp->capture_gobj);
 
-    fp->status_vars.common.damage.unk_index = D_ovl3_8018CF80;
+    fp->status_vars.common.damage.script_index = D_ovl3_8018CF80;
 }
 
 void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_cb_status)
