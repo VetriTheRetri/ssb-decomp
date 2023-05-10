@@ -523,11 +523,11 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
 
     case gmScriptEvent_Kind_SlopeContour:
-        flag2 = fp->x190_flag_b012;
+        flag2 = fp->slope_contour;
 
-        fp->x190_flag_b012 = gmScriptEventCastUpdate(p_event, gmScriptEventSlopeContour)->mode;
+        fp->slope_contour = gmScriptEventCastUpdate(p_event, gmScriptEventSlopeContour)->mode;
 
-        if (!(flag2 & fp->x190_flag_b012 & 4))
+        if (!(flag2 & fp->slope_contour & 4))
         {
             DObjGetStruct(fighter_gobj)->rotate.x = 0.0F;
         }
