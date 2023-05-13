@@ -296,7 +296,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
     switch (fp->command_vars.flags.flag1)
     {
     case 1:
-        fp->color_anim.a = 128 - ((fp->status_vars.common.dead.rebirth_wait * 128) / FTCOMMON_DEADUP_REBIRTH_WAIT);
+        fp->colanim.color1.a = 128 - ((fp->status_vars.common.dead.rebirth_wait * 128) / FTCOMMON_DEADUP_REBIRTH_WAIT);
         break;
 
     default:
@@ -314,12 +314,12 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
             fp->phys_info.vel_air.y = ((Ground_Info->cam_bound_top * 0.6F) - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
             fp->phys_info.vel_air.z = FTCOMMON_DEADUPFALL_VEL_Z;
 
-            fp->unk_ft_0xA88_b0 = TRUE;
+            fp->colanim.is_use_color1 = TRUE;
 
-            fp->color_anim.r = Ground_Info->fog_color.r;
-            fp->color_anim.g = Ground_Info->fog_color.g;
-            fp->color_anim.b = Ground_Info->fog_color.b;
-            fp->color_anim.a = 0;
+            fp->colanim.color1.r = Ground_Info->fog_color.r;
+            fp->colanim.color1.g = Ground_Info->fog_color.g;
+            fp->colanim.color1.b = Ground_Info->fog_color.b;
+            fp->colanim.color1.a = 0;
 
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEADUP_REBIRTH_WAIT;
 
@@ -337,7 +337,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
             func_ovl3_8013BC60(0xCU);
 
             fp->x18E_flag_b3 = TRUE;
-            fp->unk_ft_0xA88_b0 = FALSE;
+            fp->colanim.is_use_color1 = FALSE;
 
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEAD_REBIRTH_WAIT;
 

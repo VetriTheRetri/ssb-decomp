@@ -1,9 +1,6 @@
 #include "article.h"
 #include "gmmatch.h"
 
-
-
-
 void func_ovl3_80179120(GObj *effect_gobj) // Barrel/Crate smash GFX process
 {
     Effect_Struct *ep = EffectGetStruct(effect_gobj);

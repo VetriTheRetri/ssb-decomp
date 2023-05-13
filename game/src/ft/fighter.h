@@ -876,7 +876,7 @@ struct Fighter_Struct
     u32 x18E_flag_b2 : 1;
     u32 x18E_flag_b3 : 1;
     u32 x18E_flag_b4 : 1;
-    u32 x18E_flag_b5 : 1;
+    u32 is_playing_gfx : 1;
     u32 x18E_flag_4bit : 4; // Slope Contour behavior?
     u32 x18F_flag_b2 : 1;
     u32 is_statupdate_stop_gfx : 1; // Destroy GFX on action state change if TRUE
@@ -1094,17 +1094,8 @@ struct Fighter_Struct
     s32 unk_ft_0xA20;
     s16 unk_ft_0xA24;
 
-    Color_Overlay color_anim;
+    Color_Overlay colanim;
 
-    s32 unk_ft_0xA6C;
-    s32 unk_ft_0xA70;
-    f32 light_angle1;
-    f32 light_angle2;
-    s32 unk_ft_0xA7C;
-    s32 unk_ft_0xA80;
-    s32 unk_ft_0xA84;
-    u32 unk_ft_0xA88_b0 : 1;
-    u32 unk_ft_0xA88_b1_31 : 31;
     u8 unk_0xA8C;
     u8 unk_0xA8D;
     u8 unk_0xA8E;

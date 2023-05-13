@@ -123,17 +123,17 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
     case gmScriptEvent_Kind_SetHitOffset:
 
-        hit_id = gmScriptEventCast(p_event, gmScriptEventSetHitOff1)->hit_id;
+        hit_id = gmScriptEventCast(p_event, gmScriptEventSetHitOffset1)->hit_id;
         ft_hit = &fp->fighter_hit[hit_id];
 
-        ft_hit->offset.x = gmScriptEventCast(p_event, gmScriptEventSetHitOff1)->off_x;
+        ft_hit->offset.x = gmScriptEventCast(p_event, gmScriptEventSetHitOffset1)->off_x;
 
-        gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitOff1);
+        gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitOffset1);
 
-        ft_hit->offset.y = gmScriptEventCast(p_event, gmScriptEventSetHitOff2)->off_y;
-        ft_hit->offset.z = gmScriptEventCast(p_event, gmScriptEventSetHitOff2)->off_z;
+        ft_hit->offset.y = gmScriptEventCast(p_event, gmScriptEventSetHitOffset2)->off_y;
+        ft_hit->offset.z = gmScriptEventCast(p_event, gmScriptEventSetHitOffset2)->off_z;
 
-        gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitOff2);
+        gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitOffset2);
         break;
 
     case gmScriptEvent_Kind_SetHitDamage:
@@ -295,7 +295,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
     case gmScriptEvent_Kind_GFX:
     case gmScriptEvent_Kind_GFXPersist:
 
-        if (!(fp->x18E_flag_b5))
+        if (!(fp->is_playing_gfx))
         {
             joint_index = func_ovl2_800E86D4(fp, gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->joint_index);
             gfx_id = gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->gfx_id;
@@ -563,5 +563,507 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         gmScriptEventUpdatePtr(p_event, gmScriptEventUnk32);
 
         break;
+    }
+}
+
+void func_ovl2_800E02A8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    gmScriptEvent *p_event;
+    u32 ev_kind;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(fp->script_event); i++)
+    {
+        p_event = &fp->script_event[0][i];
+
+        if (p_event->p_script != NULL)
+        {
+            if (p_event->frame_timer != (f32)FLOAT_MAX)
+            {
+                p_event->frame_timer -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+            }
+        loop:
+            if (p_event->p_script != NULL)
+            {
+                if (p_event->frame_timer == (f32)FLOAT_MAX)
+                {
+                    if ((DObjGetStruct(fighter_gobj)->unk_dobj_0x78 <= fighter_gobj->anim_frame)) continue;
+
+                    else p_event->frame_timer = -fighter_gobj->anim_frame;
+                }
+                else if (p_event->frame_timer > 0.0F) continue;
+
+                ev_kind = gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->opcode;
+
+                if (((ev_kind == gmScriptEvent_Kind_GFX) || (ev_kind == gmScriptEvent_Kind_GFXPersist)) && (fp->x191_flag_b0))
+                {
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventCreateGFX);
+                }
+                else func_ovl2_800DF0F0(fighter_gobj, fp, p_event, ev_kind);
+
+                goto loop;
+            }
+        }
+    }
+    if (!fp->x191_flag_b0)
+    {
+        for (i = 0; i < ARRAY_COUNT(fp->script_event); i++)
+        {
+            fp->script_event[1][i] = fp->script_event[0][i];
+        }
+    }
+}
+
+// Fast Forward script?
+void func_ovl2_800E02A8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    gmScriptEvent *p_event;
+    u32 ev_kind;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(fp->script_event); i++)
+    {
+        p_event = &fp->script_event[0][i];
+
+        if (p_event->p_script != NULL)
+        {
+            if (p_event->frame_timer != (f32)FLOAT_MAX)
+            {
+                p_event->frame_timer -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+            }
+        loop:
+            if (p_event->p_script != NULL)
+            {
+                if (p_event->frame_timer == (f32)FLOAT_MAX)
+                {
+                    if ((DObjGetStruct(fighter_gobj)->unk_dobj_0x78 <= fighter_gobj->anim_frame)) continue;
+
+                    else p_event->frame_timer = -fighter_gobj->anim_frame;
+                }
+                else if (p_event->frame_timer > 0.0F) continue;
+
+                ev_kind = gmScriptEventCast(p_event, gmScriptEventDefault)->opcode;
+
+                switch (ev_kind)
+                {
+                case gmScriptEvent_Kind_ClearHitIndex:
+                case gmScriptEvent_Kind_ClearHitAll:
+                case gmScriptEvent_Kind_SetHitDamage:
+                case gmScriptEvent_Kind_SetHitSize:
+                case gmScriptEvent_Kind_SetHitSoundLevel:
+                case gmScriptEvent_Kind_ResetHit:
+                case gmScriptEvent_Kind_PlaySFX:
+                case gmScriptEvent_Kind_UnkPlaySFX1:
+                case gmScriptEvent_Kind_UnkPlaySFX2:
+                case gmScriptEvent_Kind_PlayVoice:
+                case gmScriptEvent_Kind_UnkPlayVoice:
+                case gmScriptEvent_Kind_StorePlaySFX:
+                case gmScriptEvent_Kind_PlaySmashVoice:
+                case gmScriptEvent_Kind_SetFlag0:
+                case gmScriptEvent_Kind_SetFlag1:
+                case gmScriptEvent_Kind_SetFlag2:
+                case gmScriptEvent_Kind_SetAirJumpAdd:
+                case gmScriptEvent_Kind_SetAirJumpMax:
+                case gmScriptEvent_Kind_SetColAnim:
+                case gmScriptEvent_Kind_ResetColAnim:
+                case gmScriptEvent_Kind_Unk15:
+                case gmScriptEvent_Kind_Unk16:
+                case gmScriptEvent_Kind_AfterImage:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
+                    break;
+
+                case gmScriptEvent_Kind_GFX:
+                case gmScriptEvent_Kind_GFXPersist:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventCreateGFX);
+                    break;
+
+                case gmScriptEvent_Kind_FighterHit:
+                case gmScriptEvent_Kind_ItemSwingHit:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventCreateHit);
+                    break;
+
+                case gmScriptEvent_Kind_SetHitOffset:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitOffset);
+                    break;
+
+                default:
+                    func_ovl2_800DF0F0(fighter_gobj, fp, p_event, ev_kind);
+                    break;
+                }
+                goto loop;
+            }
+        }
+    }
+    for (i = 0; i < ARRAY_COUNT(fp->script_event); i++)
+    {
+        fp->script_event[1][i] = fp->script_event[0][i];
+    }
+}
+
+void func_ovl2_800E0654(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    gmScriptEvent *p_event;
+    u32 ev_kind;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(fp->script_event); i++)
+    {
+        p_event = &fp->script_event[1][i];
+
+        if (p_event->p_script != NULL)
+        {
+            if (p_event->frame_timer != (f32)FLOAT_MAX)
+            {
+                p_event->frame_timer -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+            }
+        loop:
+            if (p_event->p_script != NULL)
+            {
+                if (p_event->frame_timer == (f32)FLOAT_MAX)
+                {
+                    if ((DObjGetStruct(fighter_gobj)->unk_dobj_0x78 <= fighter_gobj->anim_frame)) continue;
+
+                    else p_event->frame_timer = -fighter_gobj->anim_frame;
+                }
+                else if (p_event->frame_timer > 0.0F) continue;
+
+                ev_kind = gmScriptEventCast(p_event, gmScriptEventDefault)->opcode;
+
+                switch (ev_kind)
+                {
+                case gmScriptEvent_Kind_End:
+                case gmScriptEvent_Kind_SyncWait:
+                case gmScriptEvent_Kind_AsyncWait:
+                case gmScriptEvent_Kind_SubroutineThrown:
+                case gmScriptEvent_Kind_LoopBegin:
+                case gmScriptEvent_Kind_LoopEnd:
+                case gmScriptEvent_Kind_Subroutine:
+                case gmScriptEvent_Kind_Return:
+                case gmScriptEvent_Kind_Goto:
+                case gmScriptEvent_Kind_ScriptPause:
+                case gmScriptEvent_Kind_GFX:
+                case gmScriptEvent_Kind_GFXPersist:
+                    func_ovl2_800DF0F0(fighter_gobj, fp, p_event, ev_kind);
+                    break;
+
+                case gmScriptEvent_Kind_FighterHit:
+                case gmScriptEvent_Kind_ItemSwingHit:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventCreateHit);
+                    break;
+
+                case gmScriptEvent_Kind_SetHitOffset:
+                case gmScriptEvent_Kind_SetFighterThrow:
+                case gmScriptEvent_Kind_SetParallelScript:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventDouble);
+                    break;
+
+                case gmScriptEvent_Kind_SetHurtPart:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventSetHurtPart);
+                    break;
+
+                default:
+                    gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
+                    break;
+                }
+                goto loop;
+            }
+        }
+    }
+}
+
+void func_ovl2_800E07D4(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->anim_flags.flags.is_use_transn_joint)
+    {
+        fp->anim_vel = fp->joint[1]->translate;
+    }
+    func_ovl2_800E82B8(fighter_gobj);
+    func_ovl2_800EB648(fp->joint[0]);
+}
+
+void ftAnim_Update(GObj *fighter_gobj)
+{
+    func_ovl2_800E07D4(fighter_gobj);
+    func_ovl2_800E02A8(fighter_gobj);
+}
+
+void func_ovl2_800E0858(GObj *fighter_gobj)
+{
+    func_ovl2_800E07D4(fighter_gobj);
+    func_ovl2_800E0478(fighter_gobj);
+}
+
+bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_playing_sfx, bool32 is_playing_gfx)
+{
+    s32 i, j;
+    Fighter_Struct *fp;
+    Color_Script *cs;
+    void *p_script;
+    s32 gfx_id;
+    s32 joint_index;
+    u32 flag;
+    gmColorEventDefault *def;
+    Vec3f gfx_offset;
+    Vec3f gfx_scatter;
+    u32 ev_kind;
+    s32 blend_frames;
+
+    for (i = 0; i < ARRAY_COUNT(colanim->cs); i++)
+    {
+        cs = &colanim->cs[i];
+
+        if ((colanim->cs[i].p_script != NULL) && (colanim->cs[i].color_event_timer != 0))
+        {
+            colanim->cs[i].color_event_timer--;
+        }
+        while ((colanim->cs[i].p_script != NULL) && (cs->color_event_timer == 0))
+        {
+            ev_kind = gmColorEventCast(colanim->cs[i].p_script, gmColorEventDefault)->opcode;
+
+            switch (ev_kind)
+            {
+            case gmColorEvent_Kind_End:
+                for (j = 0; j < ARRAY_COUNT(colanim->cs); j++)
+                {
+                    if ((j != i) && (colanim->cs[j].p_script != NULL)) break;
+                }
+
+                if (j == ARRAY_COUNT(colanim->cs))
+                {
+                    return TRUE;
+                }
+                else colanim->cs[i].p_script = NULL;
+
+                break;
+
+            case gmColorEvent_Kind_Wait:
+                colanim->cs[i].color_event_timer = gmColorEventCast(colanim->cs[i].p_script, gmColorEventDefault)->value1, gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+
+                break;
+
+            case gmColorEvent_Kind_Goto:
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventGoto1);
+
+                colanim->cs[i].p_script = gmColorEventCast(colanim->cs[i].p_script, gmColorEventGoto2)->p_goto;
+
+                break;
+
+            case gmColorEvent_Kind_LoopBegin:
+                colanim->cs[i].p_subroutine[colanim->cs[i].script_index++] = (void*) ((uintptr_t)colanim->cs[i].p_script + sizeof(gmColorEventLoopBegin));
+                colanim->cs[i].p_subroutine[colanim->cs[i].script_index++] = gmColorEventCast(colanim->cs[i].p_script, gmColorEventLoopBegin)->loop_count, gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventLoopBegin);
+
+                break;
+
+            case gmColorEvent_Kind_LoopEnd:
+                if (--colanim->cs[i].loop_count[colanim->cs[i].script_index - 2] != 0)
+                {
+                    colanim->cs[i].p_script = colanim->cs[i].p_subroutine[colanim->cs[i].script_index - 2];
+                }
+                else gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault), colanim->cs[i].script_index -= 2;
+
+                break;
+
+            case gmColorEvent_Kind_Subroutine:
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSubroutine1);
+
+                colanim->cs[i].p_subroutine[colanim->cs[i].script_index++] = (void*) ((uintptr_t)colanim->cs[i].p_script + sizeof(gmColorEventSubroutine1));
+
+                colanim->cs[i].p_script = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSubroutine2)->p_subroutine;
+
+                break;
+
+            case gmColorEvent_Kind_Return:
+                colanim->cs[i].p_script = colanim->cs[i].p_subroutine[--colanim->cs[i].script_index];
+
+                break;
+
+            case gmColorEvent_Kind_SetParallelScript:
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventParallel1);
+
+                if (colanim->cs[1].p_script == NULL)
+                {
+                    colanim->cs[1].p_script = gmColorEventCast(colanim->cs[i].p_script, gmColorEventParallel2)->p_script;
+                    colanim->cs[1].color_event_timer = 0;
+                    colanim->cs[1].script_index = 0;
+                }
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventParallel2);
+
+                break;
+
+            case gmColorEvent_Kind_ToggleColorOff:
+
+                colanim->is_use_color1 = colanim->is_use_color2 = colanim->unk_ca_0x60_b34 = 0;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+
+                break;
+
+            case gmColorEvent_Kind_SetColor1:
+                colanim->is_use_color1 = TRUE;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA1);
+
+                colanim->color1.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
+                colanim->color1.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
+                colanim->color1.b = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->b;
+                colanim->color1.a = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->a;
+
+                colanim->color1.ir = colanim->color1.ig = colanim->color1.ib = colanim->color1.ia = 0;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA2);
+
+                break;
+
+            case gmColorEvent_Kind_SetColor2:
+                colanim->is_use_color2 = TRUE;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA1);
+
+                colanim->color2.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
+                colanim->color2.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
+                colanim->color2.b = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->b;
+                colanim->color2.a = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->a;
+
+                colanim->color2.ir = colanim->color2.ig = colanim->color2.ib = colanim->color2.ia = 0;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA2);
+
+                break;
+
+            case gmColorEvent_Kind_BlendColor1:
+                blend_frames = gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA1)->blend_frames;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
+
+                colanim->color1.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->color1.r) / blend_frames;
+                colanim->color1.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->color1.g) / blend_frames;
+                colanim->color1.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->color1.b) / blend_frames;
+                colanim->color1.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->color1.a) / blend_frames;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
+
+                break;
+
+            case gmColorEvent_Kind_BlendColor2:
+                blend_frames = gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA1)->blend_frames;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
+
+                colanim->color2.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->color2.r) / blend_frames;
+                colanim->color2.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->color2.g) / blend_frames;
+                colanim->color2.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->color2.b) / blend_frames;
+                colanim->color2.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->color2.a) / blend_frames;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
+
+                break;
+
+            case gmColorEvent_Kind_GFX:
+            case gmColorEvent_Kind_GFXPersist:
+                if (is_playing_gfx == FALSE)
+                {
+                    fp = FighterGetStruct(fighter_gobj);
+
+                    joint_index = func_ovl2_800E86D4(fp, gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->joint_index);
+                    gfx_id = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->gfx_id;
+                    flag = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->flag;
+
+                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX1);
+
+                    gfx_offset.x = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX2)->off_x;
+                    gfx_offset.y = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX2)->off_y;
+
+                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX2);
+
+                    gfx_offset.z = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX3)->off_z;
+                    gfx_scatter.x = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX3)->rng_x;
+
+                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX3);
+
+                    gfx_scatter.y = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX4)->rng_y;
+                    gfx_scatter.z = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX4)->rng_z;
+
+                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX4);
+
+                    func_ovl2_800EABDC(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == gmColorEvent_Kind_GFXPersist) ? TRUE : FALSE, flag);
+                }
+                else gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX);
+
+                break;
+
+            case gmColorEvent_Kind_SetLight:
+                colanim->is_use_light = TRUE;
+
+                colanim->light_angle1 = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetLight)->light1;
+                colanim->light_angle2 = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetLight)->light2;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetLight);
+
+                break;
+
+            case gmColorEvent_Kind_ToggleLightOff:
+                colanim->is_use_light = FALSE;
+
+                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+
+                break;
+
+            case gmColorEvent_Kind_PlaySFX:
+                if (is_playing_sfx == FALSE)
+                {
+                    func_800269C0(gmColorEventCastUpdate(colanim->cs[i].p_script, gmColorEventPlaySFX)->sfx_id);
+                }
+                else gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+
+                break;
+
+            case gmColorEvent_Kind_SetUnk:
+                colanim->unk_ca_0x60_b34 = gmColorEventCastUpdate(colanim->cs[i].p_script, gmColorEventDefault)->value1;
+
+                break;
+
+            default:
+                break;
+            }
+        }
+    }
+    if (colanim->is_use_color1)
+    {
+        colanim->color1.r += colanim->color1.ir;
+        colanim->color1.g += colanim->color1.ig;
+        colanim->color1.b += colanim->color1.ib;
+        colanim->color1.a += colanim->color1.ia;
+    }
+    if (colanim->is_use_color2)
+    {
+        colanim->color2.r += colanim->color2.ir;
+        colanim->color2.g += colanim->color2.ig;
+        colanim->color2.b += colanim->color2.ib;
+        colanim->color2.a += colanim->color2.ia;
+    }
+    if (colanim->duration != 0)
+    {
+        colanim->duration--;
+
+        if (colanim->duration == 0)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void func_ovl2_800E11C8(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    while (func_ovl2_800E0880(&fp->colanim, fighter_gobj, fp->is_playing_sfx, fp->is_playing_gfx) != FALSE)
+    {
+        func_ovl2_800E98D4(fighter_gobj);
     }
 }

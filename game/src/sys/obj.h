@@ -125,7 +125,6 @@ struct DObj
     f32 unk_dobj_0x7C; // Multi-purpose? Usually animation frame, but used as rotation step in Crate/Barrel smash GFX?
     MObj *mobj;
     void *unk_0x84;    // Multi-purpose? Articles store a fighter joint here, but func_ovl2_800D78E8 expects a different struct
-
 };
 
 typedef struct DObjDesc

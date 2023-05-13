@@ -428,14 +428,14 @@ void func_ovl3_80172F98(GObj *article_gobj, s32 colanim_id, s32 duration)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    func_ovl2_800E974C(&ap->color_anim, colanim_id, duration);
+    func_ovl2_800E974C(&ap->colanim, colanim_id, duration);
 }
 
 void func_ovl3_80172FBC(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    func_ovl2_800E9838(&ap->color_anim);
+    func_ovl2_800E9838(&ap->colanim);
 }
 
 void func_ovl3_80172FE0(GObj *article_gobj)

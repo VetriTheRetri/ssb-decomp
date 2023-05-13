@@ -1754,7 +1754,7 @@ void func_ovl3_801713B0(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    if (func_ovl2_800E0880(&ap->color_anim, article_gobj, 0, 0) != FALSE)
+    if (func_ovl2_800E0880(&ap->colanim, article_gobj, 0, 0) != FALSE)
     {
         func_ovl3_80172FBC(article_gobj);
     }

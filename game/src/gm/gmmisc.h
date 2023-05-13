@@ -88,27 +88,39 @@ typedef struct FighterAttackFlags
 
 } FighterAttackFlags;
 
+typedef struct Color_Script
+{
+    u32 *p_script; // Pointer to Color Animation script?
+    u16 color_event_timer;
+    u16 script_index;
+    void *p_subroutine[1];
+    s32 loop_count[1];
+    void *p_goto[2];
+    s32 unk_ca_timer;
+
+} Color_Script;
+
+typedef struct Color_Info
+{
+    u8 r, g, b, a;
+    s16 ir, ig, ib, ia; // Interpolation step
+
+} Color_Info;
+
 typedef struct Color_Overlay
 {
-    void *p_script; // Pointer to Color Animation script?
-    u16 color_event_timer;
-    u16 unk_0x6;
-    void *unk_0x8;
-    s32 count;
-    void *unk_0x10;
-    void *unk_0x14;
-    s32 unk_0x18;
-    s32 unk_0x1C;
-    s32 unk_0x20;
-    s32 unk_0x24;
-    s32 unk_0x28;
-    s32 unk_0x2C;
-    s32 unk_0x30;
-    s32 unk_0x34;
-    s32 unk_0x38;
+    Color_Script cs[2];
+    s32 duration;
     s32 colanim_id;
-    u8 r, g, b, a; // RGBA
-    
+    Color_Info color1;
+    f32 light_angle1;
+    f32 light_angle2;
+    Color_Info color2;
+    u8 is_use_color1 : 1;
+    u8 is_use_light : 1;
+    u8 is_use_color2 : 1;
+    u8 unk_ca_0x60_b34 : 2;
+
 } Color_Overlay;
 
 #endif

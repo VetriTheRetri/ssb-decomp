@@ -2,15 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
-    "\\game\\include\\PR",
     "\\game\\src",
     "\\game\\src\\it",
-    "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articlemonster",
-    "\\game\\src\\ovl2",
-    "\\game\\src\\sys"
+    "\\game\\src\\it\\article"
   ],
-  "SelectedNode": "\\game\\include\\PR\\gbi.h",
   "PreviewInSolutionExplorer": false
 }

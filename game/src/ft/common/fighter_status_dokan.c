@@ -171,7 +171,7 @@ void func_ovl3_801424BC(GObj *fighter_gobj)
 
     fp->is_invisible = TRUE;
     fp->x18E_flag_b3 = TRUE;
-    fp->x18E_flag_b5 = TRUE;
+    fp->is_playing_gfx = TRUE;
 
     fp->status_vars.common.dokan.pos_adjust_wait = 0;
 

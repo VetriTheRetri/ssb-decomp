@@ -1,9 +1,5 @@
 #include <game/src/ft/chara/ftness/ftness.h>
 
-
-
-
-
 // PK Thunder (SpecialHi/SpecialAirHi)
 
 void func_ovl3_80153C50(Fighter_Struct *fp)

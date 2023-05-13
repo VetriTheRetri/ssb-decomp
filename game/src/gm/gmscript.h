@@ -15,6 +15,16 @@
 #define gmScriptEventCastUpdate(event, type)                                  \
 ((type*) event->p_script++)                                                   \
 
+#define gmColorEventUpdatePtr(event, type)                                    \
+(event = (void*) ((uintptr_t)event + sizeof(type)))                           \
+
+#define gmColorEventCast(event, type)                                         \
+((type*) event)                                                               \
+
+// WARNING: Only advances 4 bytes at a time
+#define gmColorEventCastUpdate(event, type)                                   \
+((type*) event++)                                                             \
+
 typedef enum gmScriptEventKind
 {
     gmScriptEvent_Kind_End,
@@ -72,6 +82,30 @@ typedef enum gmScriptEventKind
 
 } gmScriptEventKind;
 
+typedef enum gmColorEventKind
+{
+    gmColorEvent_Kind_End,
+    gmColorEvent_Kind_Wait,
+    gmColorEvent_Kind_Goto,
+    gmColorEvent_Kind_LoopBegin,
+    gmColorEvent_Kind_LoopEnd,
+    gmColorEvent_Kind_Subroutine,
+    gmColorEvent_Kind_Return,
+    gmColorEvent_Kind_SetParallelScript,
+    gmColorEvent_Kind_ToggleColorOff,
+    gmColorEvent_Kind_SetColor1,
+    gmColorEvent_Kind_BlendColor1,
+    gmColorEvent_Kind_SetColor2,
+    gmColorEvent_Kind_BlendColor2,
+    gmColorEvent_Kind_GFX,
+    gmColorEvent_Kind_GFXPersist, // ???
+    gmColorEvent_Kind_SetLight,
+    gmColorEvent_Kind_ToggleLightOff,
+    gmColorEvent_Kind_PlaySFX,
+    gmColorEvent_Kind_SetUnk
+
+} gmColorEventKind;
+
 typedef struct gmScriptPointer
 {
     void *p_goto[1];
@@ -94,6 +128,14 @@ typedef struct gmScriptEventDefault // Event with no arguments
     u32 opcode : 6;
 
 } gmScriptEventDefault;
+
+typedef struct gmScriptEventDouble // Event with no arguments
+{
+    u32 opcode : 6;
+    u32 filler1 : 26;
+    u32 filler2 : 32;
+    
+} gmScriptEventDouble;
 
 typedef struct gmScriptEventWait
 {
@@ -156,27 +198,27 @@ typedef struct gmScriptEventCreateHit
 
 } gmScriptEventCreateHit;
 
-typedef struct gmScriptEventSetHitOff1
+typedef struct gmScriptEventSetHitOffset1
 {
     u32 opcode : 6;
     u32 hit_id : 3;
     s32 off_x : 16;
 
-} gmScriptEventSetHitOff1;
+} gmScriptEventSetHitOffset1;
 
-typedef struct gmScriptEventSetHitOff2
+typedef struct gmScriptEventSetHitOffset2
 {
     s32 off_y : 16;
     s32 off_z : 16;
 
-} gmScriptEventSetHitOff2;
+} gmScriptEventSetHitOffset2;
 
-typedef struct gmScriptEventSetHitOff
+typedef struct gmScriptEventSetHitOffset
 {
-    gmScriptEventSetHitOff1 s1;
-    gmScriptEventSetHitOff2 s2;
+    gmScriptEventSetHitOffset1 s1;
+    gmScriptEventSetHitOffset2 s2;
 
-} gmScriptEventSetHitOff;
+} gmScriptEventSetHitOffset;
 
 typedef struct gmScriptEventSetHitDamage
 {
@@ -502,5 +544,168 @@ typedef struct gmScriptEventUnk32
     u32 value1 : 26;
 
 } gmScriptEventUnk32;
+
+typedef struct gmColorEventDefault
+{
+    u32 opcode : 6;
+    u32 value1 : 26;
+
+} gmColorEventDefault;
+
+typedef struct gmColorEventGoto1
+{
+    u32 opocode : 6;
+
+} gmColorEventGoto1;
+
+typedef struct gmColorEventGoto2
+{
+    void *p_goto;
+
+} gmColorEventGoto2;
+
+typedef struct gmColorEventGoto
+{
+    gmColorEventGoto1 s1;
+    gmColorEventGoto2 s2;
+
+} gmColorEventGoto;
+
+typedef struct gmColorEventLoopBegin
+{
+    u32 opcode : 6;
+    u32 loop_count : 26;
+
+} gmColorEventLoopBegin;
+
+typedef struct gmColorEventSubroutine1
+{
+    u32 opcode : 6;
+
+} gmColorEventSubroutine1;
+
+typedef struct gmColorEventSubroutine2
+{
+    void *p_subroutine;
+
+} gmColorEventSubroutine2;
+
+typedef struct gmColorEventSubroutine
+{
+    gmColorEventSubroutine1 s1;
+    gmColorEventSubroutine2 s2;
+
+} gmColorEventSubroutine;
+
+typedef struct gmColorEventParallel1
+{
+    u32 opcode : 6;
+
+} gmColorEventParallel1;
+
+typedef struct gmColorEventParallel2
+{
+    void *p_script;
+
+} gmColorEventParallel2;
+
+typedef struct gmColorEventParallel
+{
+    gmColorEventParallel1 s1;
+    gmColorEventParallel2 s2;
+
+} gmColorEventParallel;
+
+typedef struct gmColorEventSetRGBA1
+{
+    u32 opcode : 6;
+
+} gmColorEventSetRGBA1;
+
+typedef struct gmColorEventSetRGBA2
+{
+    u32 r : 8;
+    u32 g : 8;
+    u32 b : 8;
+    u32 a : 8;
+
+} gmColorEventSetRGBA2;
+
+typedef struct gmColorEventBlendRGBA1
+{
+    u32 opcode : 6;
+    u32 blend_frames : 26;
+
+} gmColorEventBlendRGBA1;
+
+typedef struct gmColorEventBlendRGBA2
+{
+    u32 r : 8;
+    u32 g : 8;
+    u32 b : 8;
+    u32 a : 8;
+
+} gmColorEventBlendRGBA2;
+
+typedef struct gmColorEventBlendRGBA
+{
+    gmColorEventBlendRGBA1 s1;
+    gmColorEventBlendRGBA2 s2;
+
+} gmColorEventBlendRGBA;
+
+typedef struct gmColorEventCreateGFX1
+{
+    u32 opcode : 6;
+    s32 joint_index : 7;
+    u32 gfx_id : 9;
+    u32 flag : 10;
+
+} gmColorEventCreateGFX1;
+
+typedef struct gmColorEventCreateGFX2
+{
+    s32 off_x : 16;
+    s32 off_y : 16;
+
+} gmColorEventCreateGFX2;
+
+typedef struct gmColorEventCreateGFX3
+{
+    s32 off_z : 16;
+    s32 rng_x : 16;
+
+} gmColorEventCreateGFX3;
+
+typedef struct gmColorEventCreateGFX4
+{
+    s32 rng_y : 16;
+    s32 rng_z : 16;
+
+} gmColorEventCreateGFX4;
+
+typedef struct gmColorEventCreateGFX
+{
+    gmColorEventCreateGFX1 s1;
+    gmColorEventCreateGFX2 s2;
+    gmColorEventCreateGFX3 s3;
+    gmColorEventCreateGFX4 s4;
+
+} gmColorEventCreateGFX;
+
+typedef struct gmColorEventSetLight
+{
+    u32 opcode : 6;
+    s32 light1 : 13;
+    s32 light2 : 13;
+
+} gmColorEventSetLight;
+
+typedef struct gmColorEventPlaySFX
+{
+    u32 opcode : 6;
+    u32 sfx_id : 26;
+
+} gmColorEventPlaySFX;
 
 #endif

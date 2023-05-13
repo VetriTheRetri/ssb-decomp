@@ -413,9 +413,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     atCommonAttributes *attributes;
 
-    Color_Overlay color_anim;
-
-    u8 filler_0x2D4[0x338 - 0x31C];
+    Color_Overlay colanim;
 
     u32 x338_flag_b0 : 1;
     u32 x338_flag_b1 : 1;

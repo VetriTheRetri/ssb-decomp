@@ -254,7 +254,7 @@ void func_ovl3_80171DF4(GObj *article_gobj)
 
     if (ap->x338_flag_b0)
     {
-        gDPSetEnvColor(D_800465B0[0]++, ap->color_anim.r, ap->color_anim.g, ap->color_anim.b, ap->color_anim.a);
+        gDPSetEnvColor(D_800465B0[0]++, ap->colanim.color1.r, ap->colanim.color1.g, ap->colanim.color1.b, ap->colanim.color1.a);
     }
     else
     {
@@ -310,9 +310,9 @@ void func_ovl3_80172008(GObj *article_gobj)
 
     if (ap->x338_flag_b0)
     {
-        gDPSetEnvColor(D_800465B0[0]++, ap->color_anim.r, ap->color_anim.g, ap->color_anim.b, ap->color_anim.a);
+        gDPSetEnvColor(D_800465B0[0]++, ap->colanim.color1.r, ap->colanim.color1.g, ap->colanim.color1.b, ap->colanim.color1.a);
 
-        gDPSetEnvColor(D_800465B0[1]++, ap->color_anim.r, ap->color_anim.g, ap->color_anim.b, ap->color_anim.a);
+        gDPSetEnvColor(D_800465B0[1]++, ap->colanim.color1.r, ap->colanim.color1.g, ap->colanim.color1.b, ap->colanim.color1.a);
     }
     else
     {
