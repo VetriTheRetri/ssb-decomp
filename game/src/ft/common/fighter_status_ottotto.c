@@ -34,7 +34,7 @@ void func_ovl3_80142874(GObj *fighter_gobj)
 
     if (!ftStatus_CheckInterruptOttotto(fighter_gobj))
     {
-        if ((fp->input.stick_range.x * fp->lr) >= FTCOMMON_OTTOTTO_WALK_STICK_RANGE_MIN)
+        if ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_OTTOTTO_WALK_STICK_RANGE_MIN)
         {
             func_ovl3_8013E648(fighter_gobj);
         }

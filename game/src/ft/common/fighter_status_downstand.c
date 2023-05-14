@@ -30,7 +30,7 @@ bool32 func_ovl3_801445D8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->input.stick_range.y >= FTCOMMON_DOWNWAIT_STAND_STICK_RANGE_MIN) && (0.87266463F <= func_ovl2_800E8000(fp)) || (fp->input.button_press & fp->input.button_mask_z)))
+    if (((fp->input.pl.stick_range.y >= FTCOMMON_DOWNWAIT_STAND_STICK_RANGE_MIN) && (0.87266463F <= func_ovl2_800E8000(fp)) || (fp->input.button_press & fp->input.button_mask_z)))
     {
         func_ovl3_80144580(fighter_gobj);
 

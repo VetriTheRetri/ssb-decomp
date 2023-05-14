@@ -92,7 +92,7 @@ void func_ovl3_80143024(GObj *fighter_gobj)
     fp->status_vars.common.squat.is_allow_pass = FALSE;
     fp->status_vars.common.squat.pass_wait = 0;
 
-    if ((fp->input.stick_range.y <= FTCOMMON_SQUAT_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_SQUAT_BUFFER_FRAMES_MAX))
+    if ((fp->input.pl.stick_range.y <= FTCOMMON_SQUAT_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_SQUAT_BUFFER_FRAMES_MAX))
     {
         fp->status_vars.common.squat.unk_0x8 = 3;
     }
@@ -117,7 +117,7 @@ bool32 func_ovl3_8014310C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
+    if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
         func_ovl3_80143024(fighter_gobj);
 
@@ -161,7 +161,7 @@ bool32 func_ovl3_8014310C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
+    if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
         func_ovl3_801432F0(fighter_gobj);
 
@@ -192,7 +192,7 @@ bool32 func_ovl3_8014351C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.stick_range.y >= (FTCOMMON_SQUAT_STICK_RANGE_MIN + 4))
+    if (fp->input.pl.stick_range.y >= (FTCOMMON_SQUAT_STICK_RANGE_MIN + 4))
     {
         func_ovl3_801434CC(fighter_gobj);
 

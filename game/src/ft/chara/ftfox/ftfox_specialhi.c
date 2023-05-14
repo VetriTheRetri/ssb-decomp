@@ -280,7 +280,7 @@ void func_ovl3_8015C4DC(GObj *fighter_gobj)
 
     s32 unused;
 
-    temp_stick_x = fp->input.stick_range.x;
+    temp_stick_x = fp->input.pl.stick_range.x;
 
     stick_x = temp_stick_x;
 
@@ -290,7 +290,7 @@ void func_ovl3_8015C4DC(GObj *fighter_gobj)
     }
     else stick_x = temp_stick_x;
 
-    temp_stick_y = fp->input.stick_range.y;
+    temp_stick_y = fp->input.pl.stick_range.y;
 
     stick_y = temp_stick_y;
 
@@ -303,7 +303,7 @@ void func_ovl3_8015C4DC(GObj *fighter_gobj)
     if (((stick_y + stick_x) >= FTFOX_FIREFOX_ANGLE_STICK_THRESHOLD) && !(fp->coll_data.ground_flags & 0x4000))
     {
         sp38.x = (f32)temp_stick_x;
-        sp38.y = (f32)fp->input.stick_range.y;
+        sp38.y = (f32)fp->input.pl.stick_range.y;
         sp38.z = 0.0F;
 
         if (!(vec3f_angle_diff(&fp->coll_data.ground_angle, &sp38) < HALF_PI32))
@@ -329,25 +329,25 @@ void func_ovl3_8015C60C(GObj *fighter_gobj)
     s32 stick_y;
     s32 stick_x_2;
 
-    stick_x = fp->input.stick_range.x;
+    stick_x = fp->input.pl.stick_range.x;
 
-    stick_x = ABS(fp->input.stick_range.x);
+    stick_x = ABS(fp->input.pl.stick_range.x);
 
-    stick_y = fp->input.stick_range.y;
+    stick_y = fp->input.pl.stick_range.y;
 
-    stick_y = ABS(fp->input.stick_range.y);
+    stick_y = ABS(fp->input.pl.stick_range.y);
 
     if ((stick_y + stick_x) >= FTFOX_FIREFOX_ANGLE_STICK_THRESHOLD)
     {
-        stick_x_2 = fp->input.stick_range.x;
+        stick_x_2 = fp->input.pl.stick_range.x;
 
-        stick_x_2 = ABS(fp->input.stick_range.x);
+        stick_x_2 = ABS(fp->input.pl.stick_range.x);
 
         if (stick_x_2 >= FTFOX_FIREFOX_MODEL_STICK_THRESHOLD)
         {
             func_ovl2_800E8044(fp);
         }
-        fp->status_vars.fox.specialhi.angle = atan2f((f32)fp->input.stick_range.y, (f32)(fp->input.stick_range.x * fp->lr));
+        fp->status_vars.fox.specialhi.angle = atan2f((f32)fp->input.pl.stick_range.y, (f32)(fp->input.pl.stick_range.x * fp->lr));
     }
     else
     {

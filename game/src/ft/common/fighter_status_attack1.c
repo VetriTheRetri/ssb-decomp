@@ -210,7 +210,7 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (fp->input.button_tap & fp->input.button_mask_a)
+    if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
         if (fp->item_hold != NULL)
         {
@@ -220,7 +220,7 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
 
                 return TRUE;
             }
-            if (fp->input.button_hold & fp->input.button_mask_z)
+            if (fp->input.pl.button_hold & fp->input.button_mask_z)
             {
                 func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowDrop);
 
@@ -297,7 +297,7 @@ bool32 func_ovl3_8014EEC0(GObj *fighter_gobj)
     {
         fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
 
-        if ((fp->input.button_tap & fp->input.button_mask_a) && (attributes->is_have_attack11))
+        if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_attack11))
         {
             if (fp->command_vars.flags.flag1 != 0)
             {
@@ -320,7 +320,7 @@ bool32 func_ovl3_8014EF50(GObj *fighter_gobj)
     {
         fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
 
-        if ((fp->input.button_tap & fp->input.button_mask_a) && (attributes->is_have_attack12))
+        if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_attack12))
         {
             if (fp->command_vars.flags.flag1 != 0)
             {
@@ -348,7 +348,7 @@ bool32 func_ovl3_8014EFE0(GObj *fighter_gobj)
         {
             fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
 
-            if (fp->input.button_tap & fp->input.button_mask_a)
+            if (fp->input.pl.button_tap & fp->input.button_mask_a)
             {
                 if (fp->command_vars.flags.flag1 != 0)
                 {

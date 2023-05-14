@@ -32,7 +32,7 @@ bool32 func_ovl3_8013EF2C(GObj *fighter_gobj)
     {
         if (fighter_gobj->anim_frame < (attributes->dash_to_run + DObjGetStruct(fighter_gobj)->unk_dobj_0x78))
         {
-            if ((fp->input.stick_range.x * fp->lr) >= FTCOMMON_RUN_STICK_RANGE_MIN)
+            if ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_RUN_STICK_RANGE_MIN)
             {
                 func_ovl3_8013EEE8(fighter_gobj);
 

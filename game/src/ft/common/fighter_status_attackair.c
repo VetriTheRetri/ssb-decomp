@@ -73,13 +73,13 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
     bool32 is_goto_shoot = FALSE;
     Vec3f vel;
 
-    if (fp->input.button_tap & fp->input.button_mask_a)
+    if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
         if (func_ovl2_800F3794(fighter_gobj) == FALSE)
         {
             if (func_ovl3_80146A8C(fp) != 0)
             {
-                if ((ABS(fp->input.stick_range.x) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN) && (ABS(fp->input.stick_range.y) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN))
+                if ((ABS(fp->input.pl.stick_range.x) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN) && (ABS(fp->input.pl.stick_range.y) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN))
                 {
                     if (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw)
                     {
@@ -113,7 +113,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
                         }
                         else status_id = ftStatus_Common_LightThrowAirLw;
                     }
-                    else if ((fp->input.stick_range.x * fp->lr) >= 0)
+                    else if ((fp->input.pl.stick_range.x * fp->lr) >= 0)
                     {
                         if (fp->hold_stick_x < FTCOMMON_LIGHTTHROWAIR4_BUFFER_FRAMES_MAX)
                         {
@@ -134,7 +134,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
             }
             else
             {
-                if ((ABS(fp->input.stick_range.x) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN) && (ABS(fp->input.stick_range.y) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN))
+                if ((ABS(fp->input.pl.stick_range.x) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN) && (ABS(fp->input.pl.stick_range.y) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN))
                 {
                     status_id = ftStatus_Common_AttackAirN;
                     is_have_attack_flag = attributes->is_have_attackairn;
@@ -154,7 +154,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
                         status_id = ftStatus_Common_AttackAirLw;
                         is_have_attack_flag = attributes->is_have_attackairlw;
                     }
-                    else if ((fp->input.stick_range.x * fp->lr) >= 0)
+                    else if ((fp->input.pl.stick_range.x * fp->lr) >= 0)
                     {
                         status_id = ftStatus_Common_AttackAirF;
                         is_have_attack_flag = attributes->is_have_attackairf;

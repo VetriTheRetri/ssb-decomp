@@ -66,7 +66,7 @@ void func_ovl3_8015F914(GObj *fighter_gobj)
         fp->command_vars.flags.flag1 = 0;
         fp->fighter_vars.captain.falcon_punch_unk++;
 
-        boost = func_ovl3_8015F874(fp->input.stick_range.y);
+        boost = func_ovl3_8015F874(fp->input.pl.stick_range.y);
 
         fp->phys_info.vel_air.y = (f32)(__sinf(boost) * FTCAPTAIN_FALCONPUNCH_VEL_BASE);
         fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTCAPTAIN_FALCONPUNCH_VEL_BASE);

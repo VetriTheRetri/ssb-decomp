@@ -4,7 +4,7 @@
 
 void func_ovl3_8015CB80(Fighter_Struct *fp)
 {
-    if ((fp->input.button_hold & fp->input.button_mask_b) == FALSE)
+    if ((fp->input.pl.button_hold & fp->input.button_mask_b) == FALSE)
     {
         fp->status_vars.fox.speciallw.is_release = TRUE;
     }

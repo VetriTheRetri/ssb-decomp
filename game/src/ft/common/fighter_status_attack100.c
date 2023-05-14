@@ -130,7 +130,7 @@ void func_ovl3_8014F388(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.button_tap & fp->input.button_mask_a) || (fp->input.button_tap_prev & fp->input.button_mask_a))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_a) || (fp->input.pl.button_tap_prev & fp->input.button_mask_a))
     {
         fp->status_vars.common.attack100.is_goto_loop = TRUE;
     }
@@ -217,7 +217,7 @@ bool32 func_ovl3_8014F4EC(GObj *fighter_gobj)
     {
         return FALSE;
     }
-    if ((fp->input.button_tap & fp->input.button_mask_a) || (fp->input.button_tap_prev & fp->input.button_mask_a))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_a) || (fp->input.pl.button_tap_prev & fp->input.button_mask_a))
     {
         fp->attack1_followup_count++;
 

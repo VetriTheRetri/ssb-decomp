@@ -105,9 +105,9 @@ bool32 func_ovl3_8014DFA8(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     bool32 is_turn = FALSE;
 
-    if (fp->input.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))
+    if (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))
     {
-        if ((ABS(fp->input.stick_range.x) >= FTCOMMON_THROWFF_TURN_STICK_RANGE_MIN) && ((fp->input.stick_range.x * fp->lr) < 0) && (fp->ground_or_air == air))
+        if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_THROWFF_TURN_STICK_RANGE_MIN) && ((fp->input.pl.stick_range.x * fp->lr) < 0) && (fp->ground_or_air == air))
         {
             is_turn = TRUE;
         }

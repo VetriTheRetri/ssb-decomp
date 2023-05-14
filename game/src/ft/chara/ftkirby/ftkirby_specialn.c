@@ -277,7 +277,7 @@ bool32 func_ovl3_80162424(GObj *fighter_gobj)
         fp->status_vars.kirby.specialn.release_lag--;
         return TRUE;
     }
-    else if (fp->input.button_hold & fp->input.button_mask_b)
+    else if (fp->input.pl.button_hold & fp->input.button_mask_b)
     {
         return TRUE;
     }
@@ -324,7 +324,7 @@ bool32 func_ovl3_80162534(GObj *fighter_gobj, void (*cb)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.button_press & fp->input.button_mask_b) || (fp->input.stick_range.y < -40))
+    if ((fp->input.button_press & fp->input.button_mask_b) || (fp->input.pl.stick_range.y < -40))
     {
         if (fp->catch_gobj != NULL)
         {
@@ -343,7 +343,7 @@ bool32 func_ovl3_801625B0(GObj *fighter_gobj, void (*cb)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    s32 stick_x = fp->input.stick_range.x;
+    s32 stick_x = fp->input.pl.stick_range.x;
 
     if (ABS(stick_x) < 28) stick_x = 0; // HAL Meme Laboratory
 

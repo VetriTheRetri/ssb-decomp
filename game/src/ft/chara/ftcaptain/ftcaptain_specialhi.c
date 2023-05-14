@@ -39,7 +39,7 @@ void func_ovl3_80160370(GObj *fighter_gobj)
     {
         fp->command_vars.flags.flag1 = 0;
 
-        stick_x = ABS(fp->input.stick_range.x);
+        stick_x = ABS(fp->input.pl.stick_range.x);
 
         if (stick_x >= 19)
         {

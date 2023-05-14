@@ -438,9 +438,9 @@ f32 func_ovl3_8016D914(Vec3f *vel, Fighter_Struct *fp, s32 lr, f32 vel_mul)
 {
     f32 angle;
 
-    if (ABS(fp->input.stick_range.y) > ITBOOMERANG_ANGLE_STICK_THRESHOLD)
+    if (ABS(fp->input.pl.stick_range.y) > ITBOOMERANG_ANGLE_STICK_THRESHOLD)
     {
-        angle = atan2f(fp->input.stick_range.y, ABS(fp->input.stick_range.x));
+        angle = atan2f(fp->input.pl.stick_range.y, ABS(fp->input.pl.stick_range.x));
 
         if (0.5235988F < angle)
         {

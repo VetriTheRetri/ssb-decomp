@@ -58,13 +58,13 @@ void func_ovl3_80131BA0(Fighter_Struct *fp)
 
         f32 sqrt = 1.0F / sqrtf(SQUARE(dist_x) + SQUARE(dist_y));
 
-        fp->input.stick_com.x = (GMCONTROLLER_RANGE_MAX_F * dist_x * sqrt);
-        fp->input.stick_com.y = (GMCONTROLLER_RANGE_MAX_F * dist_y * sqrt);
+        fp->input.cp.stick_range.x = (GCONTROLLER_RANGE_MAX_F * dist_x * sqrt);
+        fp->input.cp.stick_range.y = (GCONTROLLER_RANGE_MAX_F * dist_y * sqrt);
     }
     else
     {
-        fp->input.stick_com.x = 0;
-        fp->input.stick_com.y = 0;
+        fp->input.cp.stick_range.x = 0;
+        fp->input.cp.stick_range.y = 0;
     }
 }
 
@@ -98,49 +98,49 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                     switch (command & 0xF0)
                     {
                     case 0x0:
-                        this_fp->input.button_mask_com |= 0x8000;
+                        this_fp->input.cp.button_inputs |= 0x8000;
                         break;
                     case 0x10:
-                        this_fp->input.button_mask_com &= 0xFFFF7FFF;
+                        this_fp->input.cp.button_inputs &= 0xFFFF7FFF;
                         break;
                     case 0x20:
-                        this_fp->input.button_mask_com |= 0x4000;
+                        this_fp->input.cp.button_inputs |= 0x4000;
                         break;
                     case 0x30:
-                        this_fp->input.button_mask_com &= 0xBFFF;
+                        this_fp->input.cp.button_inputs &= 0xBFFF;
                         break;
                     case 0x40:
-                        this_fp->input.button_mask_com |= 0x2000;
+                        this_fp->input.cp.button_inputs |= 0x2000;
                         break;
                     case 0x50:
-                        this_fp->input.button_mask_com &= 0xDFFF;
+                        this_fp->input.cp.button_inputs &= 0xDFFF;
                         break;
                     case 0x60:
-                        this_fp->input.button_mask_com |= 0x20;
+                        this_fp->input.cp.button_inputs |= 0x20;
                         break;
                     case 0x70:
-                        this_fp->input.button_mask_com &= 0xFFDF;
+                        this_fp->input.cp.button_inputs &= 0xFFDF;
                         break;
                     case 0x80:
-                        this_fp->input.button_mask_com |= 0x1000;
+                        this_fp->input.cp.button_inputs |= 0x1000;
                         break;
                     case 0x90:
-                        this_fp->input.button_mask_com &= 0xEFFF;
+                        this_fp->input.cp.button_inputs &= 0xEFFF;
                         break;
                     case 0xA0:
                         switch (*p_command)
                         {
                         default:
-                            this_fp->input.stick_com.x = *p_command++;
+                            this_fp->input.cp.stick_range.x = *p_command++;
                             break;
 
                         case 0x7FU:
-                            this_fp->input.stick_com.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GMCONTROLLER_RANGE_MAX_I) : -(GMCONTROLLER_RANGE_MAX_I);
+                            this_fp->input.cp.stick_range.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GCONTROLLER_RANGE_MAX_I) : -(GCONTROLLER_RANGE_MAX_I);
                             p_command++;
                             break;
 
                         case 0x80U:
-                            this_fp->input.stick_com.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GMCONTROLLER_RANGE_MAX_I / 2) : -(GMCONTROLLER_RANGE_MAX_I / 2);
+                            this_fp->input.cp.stick_range.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GCONTROLLER_RANGE_MAX_I / 2) : -(GCONTROLLER_RANGE_MAX_I / 2);
                             p_command++;
                             break;
                         }
@@ -151,16 +151,16 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                         {
                         default:
 
-                            this_fp->input.stick_com.y = *p_command++;
+                            this_fp->input.cp.stick_range.y = *p_command++;
                             break;
 
                         case 0x7FU:
-                            this_fp->input.stick_com.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GMCONTROLLER_RANGE_MAX_I) : -(GMCONTROLLER_RANGE_MAX_I);
+                            this_fp->input.cp.stick_range.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GCONTROLLER_RANGE_MAX_I) : -(GCONTROLLER_RANGE_MAX_I);
                             p_command++;
                             break;
 
                         case 0x80U:
-                            this_fp->input.stick_com.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GMCONTROLLER_RANGE_MAX_I / 2) : -(GMCONTROLLER_RANGE_MAX_I / 2);
+                            this_fp->input.cp.stick_range.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GCONTROLLER_RANGE_MAX_I / 2) : -(GCONTROLLER_RANGE_MAX_I / 2);
                             p_command++;
                             break;
                         }
@@ -172,31 +172,31 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
 
                         if ((this_fp->ground_or_air == ground) && (this_fp->cp_level < 5))
                         {
-                            stick_range_x = (ABSF(dist_x) > 100.0F) ? (GMCONTROLLER_RANGE_MAX_I / 2) : 0;
+                            stick_range_x = (ABSF(dist_x) > 100.0F) ? (GCONTROLLER_RANGE_MAX_I / 2) : 0;
                         }
                         else if (this_fp->ground_or_air == ground)
                         {
                             if ((ft_com->unk_ftcom_0x8C * 1.5F) < ABSF(dist_x))
                             {
-                                stick_range_x = (GMCONTROLLER_RANGE_MAX_I);
+                                stick_range_x = (GCONTROLLER_RANGE_MAX_I);
                             }
                             else
                             {
                                 if (ft_com->unk_ftcom_0x8C < ABSF(dist_x))
                                 {
-                                    stick_range_x = ((2.0F * ((ABSF(dist_x) - ft_com->unk_ftcom_0x8C) / ft_com->unk_ftcom_0x8C) * (GMCONTROLLER_RANGE_MAX_F / 2)) + (GMCONTROLLER_RANGE_MAX_F / 2));
+                                    stick_range_x = ((2.0F * ((ABSF(dist_x) - ft_com->unk_ftcom_0x8C) / ft_com->unk_ftcom_0x8C) * (GCONTROLLER_RANGE_MAX_F / 2)) + (GCONTROLLER_RANGE_MAX_F / 2));
                                 }
                                 else
                                 {
-                                    stick_range_x = (ABSF(dist_x) > 100.0F) ? (GMCONTROLLER_RANGE_MAX_I / 2) : 0;
+                                    stick_range_x = (ABSF(dist_x) > 100.0F) ? (GCONTROLLER_RANGE_MAX_I / 2) : 0;
                                 }
                             }
                         }
                         else
                         {
-                            stick_range_x = ((ABSF(dist_x) > 100.0F) || ((this_fp->lr * dist_x) < 0.0F)) ? (GMCONTROLLER_RANGE_MAX_I) : (GMCONTROLLER_RANGE_MAX_I / 4);
+                            stick_range_x = ((ABSF(dist_x) > 100.0F) || ((this_fp->lr * dist_x) < 0.0F)) ? (GCONTROLLER_RANGE_MAX_I) : (GCONTROLLER_RANGE_MAX_I / 4);
                         }
-                        stick_range_y = GMCONTROLLER_RANGE_MAX_I;
+                        stick_range_y = GCONTROLLER_RANGE_MAX_I;
 
                         if (this_fp->ground_or_air == ground)
                         {
@@ -246,39 +246,39 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                         {
                             if (ABSF(dist_y) < ABSF(dist_x))
                             {
-                                this_fp->input.stick_com.x = (dist_x > 0.0F) ? stick_range_x : -stick_range_x;
+                                this_fp->input.cp.stick_range.x = (dist_x > 0.0F) ? stick_range_x : -stick_range_x;
 
-                                this_fp->input.stick_com.y = (ABSF((dist_y / dist_x)) * ((dist_y > 0.0F) ? stick_range_y : -stick_range_y));
+                                this_fp->input.cp.stick_range.y = (ABSF((dist_y / dist_x)) * ((dist_y > 0.0F) ? stick_range_y : -stick_range_y));
                             }
                             else
                             {
-                                this_fp->input.stick_com.x = (ABSF((dist_x / dist_y)) * ((dist_x > 0.0F) ? stick_range_x : -stick_range_x));
+                                this_fp->input.cp.stick_range.x = (ABSF((dist_x / dist_y)) * ((dist_x > 0.0F) ? stick_range_x : -stick_range_x));
 
-                                this_fp->input.stick_com.y = (dist_y > 0.0F) ? stick_range_y : -stick_range_y;
+                                this_fp->input.cp.stick_range.y = (dist_y > 0.0F) ? stick_range_y : -stick_range_y;
                             }
                         }
                         else if (dist_x != 0.0F)
                         {
-                            this_fp->input.stick_com.x = (dist_x > 0.0F) ? stick_range_x : -stick_range_x;
+                            this_fp->input.cp.stick_range.x = (dist_x > 0.0F) ? stick_range_x : -stick_range_x;
 
-                            this_fp->input.stick_com.y = (ABSF((dist_y / dist_x)) * ((dist_y > 0.0F) ? stick_range_y : -stick_range_y));
+                            this_fp->input.cp.stick_range.y = (ABSF((dist_y / dist_x)) * ((dist_y > 0.0F) ? stick_range_y : -stick_range_y));
                         }
                         else if (dist_y != 0.0F)
                         {
-                            this_fp->input.stick_com.x = (ABSF((dist_x / dist_y)) * ((dist_x > 0.0F) ? stick_range_x : -stick_range_x));
+                            this_fp->input.cp.stick_range.x = (ABSF((dist_x / dist_y)) * ((dist_x > 0.0F) ? stick_range_x : -stick_range_x));
 
-                            this_fp->input.stick_com.y = (dist_y > 0.0F) ? stick_range_y : -stick_range_y;
+                            this_fp->input.cp.stick_range.y = (dist_y > 0.0F) ? stick_range_y : -stick_range_y;
                         }
                         else
                         {
-                            this_fp->input.stick_com.x = this_fp->input.stick_com.y = 0;
+                            this_fp->input.cp.stick_range.x = this_fp->input.cp.stick_range.y = 0;
                         }
                         break;
                     case 0xD0:
-                        this_fp->input.stick_com.x = var_t1;
+                        this_fp->input.cp.stick_range.x = var_t1;
                         break;
                     case 0xE0:
-                        this_fp->input.stick_com.y = var_t1;
+                        this_fp->input.cp.stick_range.y = var_t1;
                         break;
                     }
                 }

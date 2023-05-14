@@ -35,7 +35,7 @@ void func_ovl3_80141E38(GObj *fighter_gobj)
 
 bool32 func_ovl3_80141E60(Fighter_Struct *fp)
 {
-    if ((fp->input.stick_range.y <= FTCOMMON_PASS_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_PASS_BUFFER_FRAMES_MAX) && (fp->coll_data.ground_flags & 0x4000))
+    if ((fp->input.pl.stick_range.y <= FTCOMMON_PASS_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_PASS_BUFFER_FRAMES_MAX) && (fp->coll_data.ground_flags & 0x4000))
     {
         return TRUE;
     }
@@ -84,7 +84,7 @@ bool32 func_ovl3_80141F8C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((func_ovl3_80141E60(fp) != FALSE) && (fp->input.button_hold & fp->input.button_mask_z))
+    if ((func_ovl3_80141E60(fp) != FALSE) && (fp->input.pl.button_hold & fp->input.button_mask_z))
     {
         func_ovl3_80141E38(fighter_gobj);
 

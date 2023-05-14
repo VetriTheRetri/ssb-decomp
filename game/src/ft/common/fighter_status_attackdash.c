@@ -11,11 +11,11 @@ bool32 func_ovl3_8014F69C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (fp->input.button_tap & fp->input.button_mask_a)
+    if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
         if (fp->item_hold != NULL)
         {
-            if ((fp->input.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
             {
                 func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowDash);
 

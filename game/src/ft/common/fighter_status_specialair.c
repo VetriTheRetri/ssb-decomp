@@ -136,11 +136,11 @@ bool32 func_ovl3_80150F08(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (fp->input.button_tap & fp->input.button_mask_b)
+    if (fp->input.pl.button_tap & fp->input.button_mask_b)
     {
         if (func_ovl2_800F3794(fighter_gobj) == FALSE)
         {
-            if (fp->input.stick_range.y >= FTCOMMON_SPECIALHI_STICK_RANGE_MIN)
+            if (fp->input.pl.stick_range.y >= FTCOMMON_SPECIALHI_STICK_RANGE_MIN)
             {
                 if (attributes->is_have_specialairhi)
                 {
@@ -149,7 +149,7 @@ bool32 func_ovl3_80150F08(GObj *fighter_gobj)
                     return TRUE;
                 }
             }
-            else if (fp->input.stick_range.y <= FTCOMMON_SPECIALLW_STICK_RANGE_MIN)
+            else if (fp->input.pl.stick_range.y <= FTCOMMON_SPECIALLW_STICK_RANGE_MIN)
             {
                 if (attributes->is_have_specialairlw)
                 {
@@ -160,7 +160,7 @@ bool32 func_ovl3_80150F08(GObj *fighter_gobj)
             }
             else if (attributes->is_have_specialairn)
             {
-                if ((fp->input.stick_range.x * fp->lr) < FTCOMMON_SPECIALN_TURN_STICK_RANGE_MIN)
+                if ((fp->input.pl.stick_range.x * fp->lr) < FTCOMMON_SPECIALN_TURN_STICK_RANGE_MIN)
                 {
                     func_ovl2_800E8044(fp);
                 }

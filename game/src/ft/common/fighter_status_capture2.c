@@ -53,7 +53,7 @@ bool32 func_ovl3_8014E400(Fighter_Struct *fp)
     bool32 is_mash = FALSE;
     s32 breakout_lr_bak, breakout_ud_bak;
 
-    if ((fp->input.button_tap & fp->input.button_mask_a) || (fp->input.button_tap & fp->input.button_mask_b) || (fp->input.button_tap & fp->input.button_mask_z))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_a) || (fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_z))
     {
         is_mash = TRUE;
 
@@ -61,19 +61,19 @@ bool32 func_ovl3_8014E400(Fighter_Struct *fp)
     }
     breakout_lr_bak = fp->breakout_lr, breakout_ud_bak = fp->breakout_ud;
 
-    if (fp->input.stick_range.x < -FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
+    if (fp->input.pl.stick_range.x < -FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
     {
         fp->breakout_lr = -1;
     }
-    if (fp->input.stick_range.x > FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
+    if (fp->input.pl.stick_range.x > FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
     {
         fp->breakout_lr = 1;
     }
-    if (fp->input.stick_range.y < -FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
+    if (fp->input.pl.stick_range.y < -FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
     {
         fp->breakout_ud = -1;
     }
-    if (fp->input.stick_range.y > FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
+    if (fp->input.pl.stick_range.y > FTCOMMON_CAPTURE_MASH_STICK_RANGE_MIN)
     {
         fp->breakout_ud = 1;
     }

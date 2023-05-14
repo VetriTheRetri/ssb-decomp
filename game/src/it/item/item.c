@@ -257,7 +257,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
     ip->coll_data.ignore_line_id = -1;
 
-    ip->coll_data.unk_0x74 = -1;
+    ip->coll_data.ground_line_id = -1;
     ip->coll_data.ceil_line_id = -1;
     ip->coll_data.rwall_line_id = -1;
     ip->coll_data.lwall_line_id = -1;
@@ -265,9 +265,9 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     ip->coll_data.wall_flag = D_ovl2_80131398;
     ip->coll_data.coll_mask = 0;
 
-    ip->coll_data.pos_project.x = 0.0F;
-    ip->coll_data.pos_project.y = 0.0F;
-    ip->coll_data.pos_project.z = 0.0F;
+    ip->coll_data.pos_push.x = 0.0F;
+    ip->coll_data.pos_push.y = 0.0F;
+    ip->coll_data.pos_push.z = 0.0F;
 
     func_80008188(item_gobj, func_ovl3_801662BC, 1U, 3U);
     func_80008188(item_gobj, func_ovl3_80166954, 1U, 1U);

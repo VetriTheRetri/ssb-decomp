@@ -4,11 +4,11 @@ void func_ovl2_800D87D0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->phys_info.vel_air.x = ((fp->lr * fp->coll_data.ground_angle.y * fp->phys_info.vel_ground.x) + fp->phys_info.vel_damage_ground.y);
+    fp->phys_info.vel_air.x = ((fp->lr * fp->coll_data.ground_angle.y * fp->phys_info.vel_ground.x) + fp->phys_info.vel_jostle_x);
     fp->phys_info.vel_air.y = (fp->lr * -fp->coll_data.ground_angle.x * fp->phys_info.vel_ground.x);
-    fp->phys_info.vel_air.z = fp->phys_info.vel_damage_ground.z;
+    fp->phys_info.vel_air.z = fp->phys_info.vel_jostle_z;
 
-    if ((fp->phys_info.vel_damage_ground.z > 0.0F)                                          &&
+    if ((fp->phys_info.vel_jostle_z > 0.0F)                                                 &&
     (DObjGetStruct(fighter_gobj)->translate.z < 0.0F)                                       &&
     ((DObjGetStruct(fighter_gobj)->translate.z + fp->phys_info.vel_air.z) > 0.0F)           ||
     (fp->phys_info.vel_air.z < 0.0F) && (DObjGetStruct(fighter_gobj)->translate.z > 0.0F)   &&
@@ -66,9 +66,9 @@ void func_ovl2_800D8978(Fighter_Struct *fp, f32 friction)
 
 void func_ovl2_800D89E0(Fighter_Struct *fp, s32 stick_x_min, f32 vel, f32 clamp)
 {
-    if (ABS(fp->input.stick_range.x) >= stick_x_min)
+    if (ABS(fp->input.pl.stick_range.x) >= stick_x_min)
     {
-        fp->phys_info.vel_ground.x += (fp->input.stick_range.x * vel * fp->lr);
+        fp->phys_info.vel_ground.x += (fp->input.pl.stick_range.x * vel * fp->lr);
 
         if (fp->phys_info.vel_ground.x < -clamp)
         {
@@ -83,7 +83,7 @@ void func_ovl2_800D89E0(Fighter_Struct *fp, s32 stick_x_min, f32 vel, f32 clamp)
 
 void func_ovl2_800D8A70(Fighter_Struct *fp, f32 vel, f32 friction)
 {
-    f32 v = ABS(fp->input.stick_range.x) * vel;
+    f32 v = ABS(fp->input.pl.stick_range.x) * vel;
 
     if (fp->phys_info.vel_ground.x < v)
     {
@@ -102,7 +102,7 @@ void func_ovl2_800D8A70(Fighter_Struct *fp, f32 vel, f32 friction)
 
 void func_ovl2_800D8ADC(Fighter_Struct *fp, f32 vel, f32 friction)
 {
-    f32 v = fp->input.stick_range.x * vel * fp->lr;
+    f32 v = fp->input.pl.stick_range.x * vel * fp->lr;
 
     if (fp->phys_info.vel_ground.x >= 0.0F)
     {
@@ -215,7 +215,7 @@ void func_ovl2_800D8DA0(Fighter_Struct *fp, ftCommonAttributes *attributes)
 
 void func_ovl2_800D8DB0(Fighter_Struct *fp)
 {
-    if (!(fp->is_fast_fall) && (fp->phys_info.vel_air.y < 0.0F) && (fp->input.stick_range.y <= FTCOMMON_FALL_FAST_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_FALL_FAST_BUFFER_FRAMES_MAX))
+    if (!(fp->is_fast_fall) && (fp->phys_info.vel_air.y < 0.0F) && (fp->input.pl.stick_range.y <= FTCOMMON_FALL_FAST_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_FALL_FAST_BUFFER_FRAMES_MAX))
     {
         fp->is_fast_fall = TRUE;
 
@@ -276,9 +276,9 @@ bool32 func_ovl2_800D8FA8(Fighter_Struct *fp, ftCommonAttributes *attributes)
 
 void func_ovl2_800D8FC8(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 clamp)
 {
-    if (ABS(fp->input.stick_range.x) >= stick_range_min)
+    if (ABS(fp->input.pl.stick_range.x) >= stick_range_min)
     {
-        fp->phys_info.vel_air.x += (fp->input.stick_range.x * vel);
+        fp->phys_info.vel_air.x += (fp->input.pl.stick_range.x * vel);
 
         if (fp->phys_info.vel_air.x < -clamp)
         {
@@ -419,5 +419,5 @@ void func_ovl2_800D9444(GObj *fighter_gobj)
 
     fp->phys_info.vel_damage_air.x = fp->phys_info.vel_damage_air.y = fp->phys_info.vel_damage_air.z = 0.0F;
 
-    fp->phys_info.vel_damage_ground.x = 0.0F;
+    fp->phys_info.vel_damage_ground = 0.0F;
 }

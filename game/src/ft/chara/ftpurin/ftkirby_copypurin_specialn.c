@@ -47,7 +47,7 @@ void func_ovl3_801518EC(GObj *fighter_gobj)
 
         fp->fighter_vars.kirby.copypurin_unk++;
 
-        boost = func_ovl3_80151874(fp->input.stick_range.y);
+        boost = func_ovl3_80151874(fp->input.pl.stick_range.y);
 
         fp->phys_info.vel_air.y = (f32)(__sinf(boost) * FTKIRBY_COPYPURIN_POUND_VEL_BASE);
         fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTKIRBY_COPYPURIN_POUND_VEL_BASE);

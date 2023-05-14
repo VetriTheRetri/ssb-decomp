@@ -21,7 +21,7 @@ bool32 func_ovl3_8014FC60(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if ((fp->input.button_tap & fp->input.button_mask_a) && (attributes->is_have_attacklw3))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_attacklw3))
     {
         if (fp->command_vars.flags.flag1 != 0)
         {
@@ -65,7 +65,7 @@ bool32 func_ovl3_8014FD70(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if ((fp->input.button_tap & fp->input.button_mask_a) && (fp->input.stick_range.y <= FTCOMMON_ATTACKLW3_STICK_RANGE_MIN))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (fp->input.pl.stick_range.y <= FTCOMMON_ATTACKLW3_STICK_RANGE_MIN))
     {
         if (func_ovl2_800E8000(fp) < -0.87266463F)
         {

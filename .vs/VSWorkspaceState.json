@@ -3,8 +3,11 @@
     "",
     "\\game",
     "\\game\\src",
+    "\\game\\src\\ft",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article"
   ],
+  "SelectedNode": "\\game\\src\\it\\article\\article.h",
   "PreviewInSolutionExplorer": false
 }

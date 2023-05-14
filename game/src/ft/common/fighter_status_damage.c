@@ -4,7 +4,7 @@
 
 void func_ovl3_80140340(Fighter_Struct *fp)
 {
-    f32 knockback = (fp->ground_or_air == air) ? vec3f_mag(&fp->phys_info.vel_damage_air) : ABSF(fp->phys_info.vel_damage_ground.x);
+    f32 knockback = (fp->ground_or_air == air) ? vec3f_mag(&fp->phys_info.vel_damage_air) : ABSF(fp->phys_info.vel_damage_ground);
     s32 spawn_gfx_wait;
 
     if (knockback < FTCOMMON_DAMAGE_GFX_KNOCKBACK_LOW)
@@ -203,14 +203,14 @@ void func_ovl3_80140878(GObj *fighter_gobj)
 
     if (fp->hitlag_timer != 0)
     {
-        if ((SQUARE(fp->input.stick_range.x) + SQUARE(fp->input.stick_range.y)) >= SQUARE(FTCOMMON_DAMAGE_SMASH_DI_RANGE_MIN))
+        if ((SQUARE(fp->input.pl.stick_range.x) + SQUARE(fp->input.pl.stick_range.y)) >= SQUARE(FTCOMMON_DAMAGE_SMASH_DI_RANGE_MIN))
         {
             if ((fp->tap_stick_x < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX) || (fp->tap_stick_y < FTCOMMON_DAMAGE_SMASH_DI_BUFFER_FRAMES_MAX))
             {
                 Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
-                translate->x += fp->input.stick_range.x * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
-                translate->y += fp->input.stick_range.y * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
+                translate->x += fp->input.pl.stick_range.x * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
+                translate->y += fp->input.pl.stick_range.y * FTCOMMON_DAMAGE_SMASH_DI_RANGE_MUL;
 
                 fp->tap_stick_x = fp->tap_stick_y = U8_MAX - 1;
             }
@@ -470,7 +470,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
         this_fp->phys_info.vel_damage_air.x = -vel_x * this_fp->lr;
         this_fp->phys_info.vel_damage_air.y = vel_y;
-        this_fp->phys_info.vel_damage_ground.x = 0.0F;
+        this_fp->phys_info.vel_damage_ground = 0.0F;
     }
     else
     {
@@ -488,7 +488,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
             this_fp->phys_info.vel_damage_air.x = vel_damage.x;
             this_fp->phys_info.vel_damage_air.y = vel_damage.y;
-            this_fp->phys_info.vel_damage_ground.x = 0.0F;
+            this_fp->phys_info.vel_damage_ground = 0.0F;
         }
         else if (damage_level == 3)
         {
@@ -500,7 +500,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
             {
                 this_fp->phys_info.vel_damage_air.x = vel_damage.x;
                 this_fp->phys_info.vel_damage_air.y = -vel_damage.y * 0.8F;
-                this_fp->phys_info.vel_damage_ground.x = 0.0F;
+                this_fp->phys_info.vel_damage_ground = 0.0F;
 
                 func_ovl2_800EABDC(this_gobj, 0x16, 0, 0, 0, this_fp->lr, 0, 0);
                 func_ovl2_800EABDC(this_gobj, 0x20, 0, 0, 0, this_fp->lr, 0, 0);
@@ -509,14 +509,14 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
             {
                 this_fp->phys_info.vel_damage_air.x = vel_damage.x;
                 this_fp->phys_info.vel_damage_air.y = vel_damage.y;
-                this_fp->phys_info.vel_damage_ground.x = 0.0F;
+                this_fp->phys_info.vel_damage_ground = 0.0F;
             }
         }
         else
         {
             status_id_var = status_id_set = Fighter_StatusList_DamageGround[damage_level][damage_index];
 
-            this_fp->phys_info.vel_damage_ground.x = (-vel_x * this_fp->lr);
+            this_fp->phys_info.vel_damage_ground = (-vel_x * this_fp->lr);
             this_fp->phys_info.vel_damage_air.x = this_fp->coll_data.ground_angle.y * (-vel_x * this_fp->lr);
             this_fp->phys_info.vel_damage_air.y = -this_fp->coll_data.ground_angle.x * (-vel_x * this_fp->lr);
         }
@@ -765,7 +765,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             {
                 grab_fp->hitlag_timer = func_ovl2_800EA1C0(this_fp->unk_ft_0x7DC, grab_fp->status_info.status_id, grab_fp->unk_ft_0x7A4, this_fp);
 
-                this_fp->input.button_press = this_fp->input.button_tap_prev = 0;
+                this_fp->input.button_press = this_fp->input.pl.button_tap_prev = 0;
 
                 if (this_fp->cb_hitlag_start != NULL)
                 {

@@ -36,7 +36,7 @@ void func_ovl3_8014D590(GObj *fighter_gobj)
 
     if (!ftStatus_CheckInterruptThrowFWalk(fighter_gobj))
     {
-        s32 status_id = func_ovl3_8013E340(ABS(fp->input.stick_range.x)) + (ftStatus_Donkey_ThrowFWalkSlow - ftStatus_Common_WalkSlow);
+        s32 status_id = func_ovl3_8013E340(ABS(fp->input.pl.stick_range.x)) + (ftStatus_Donkey_ThrowFWalkSlow - ftStatus_Common_WalkSlow);
 
         if (status_id != fp->status_info.status_id)
         {
@@ -52,7 +52,7 @@ void func_ovl3_8014D68C(GObj *fighter_gobj, f32 frame_begin)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, func_ovl3_8013E340(fp->input.stick_range.x) + (ftStatus_Donkey_ThrowFWalkSlow - ftStatus_Common_WalkSlow), frame_begin, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, func_ovl3_8013E340(fp->input.pl.stick_range.x) + (ftStatus_Donkey_ThrowFWalkSlow - ftStatus_Common_WalkSlow), frame_begin, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 }
 

@@ -39,7 +39,7 @@ void func_ovl3_8015EA5C(GObj *fighter_gobj)
 
             ip->item_vars.egg_throw.is_throw = TRUE;
             ip->item_vars.egg_throw.throw_force = fp->status_vars.yoshi.specialhi.throw_force;
-            ip->item_vars.egg_throw.stick_range = fp->input.stick_range.x;
+            ip->item_vars.egg_throw.stick_range = fp->input.pl.stick_range.x;
 
             func_ovl2_800DF09C(fp->status_vars.yoshi.specialhi.egg_gobj, fp->coll_data.p_translate, &fp->coll_data);
 
@@ -62,7 +62,7 @@ void func_ovl3_8015EB0C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.button_hold & fp->input.button_mask_b)
+    if (fp->input.pl.button_hold & fp->input.button_mask_b)
     {
         fp->status_vars.yoshi.specialhi.throw_force++;
     }

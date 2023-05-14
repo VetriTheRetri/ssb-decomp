@@ -8,7 +8,7 @@ void func_ovl3_8014FA50(GObj *fighter_gobj)
 
     if (fp->ft_data->script1->script_info[0xAD].anim_id != 0)
     {
-        stick_angle = atan2f(fp->input.stick_range.y, fp->input.stick_range.x * fp->lr);
+        stick_angle = atan2f(fp->input.pl.stick_range.y, fp->input.pl.stick_range.x * fp->lr);
 
         status_id = (stick_angle < 1.3439035F) ? ftStatus_Common_AttackHi3F : // WHAT
                     (stick_angle > 1.7976892F) ? ftStatus_Common_AttackHi3B : // WHAT
@@ -25,7 +25,7 @@ bool32 func_ovl3_8014FB1C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if ((fp->input.button_tap & fp->input.button_mask_a) && (fp->input.stick_range.y >= FTCOMMON_ATTACKHI3_STICK_RANGE_MIN))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (fp->input.pl.stick_range.y >= FTCOMMON_ATTACKHI3_STICK_RANGE_MIN))
     {
         if (func_ovl2_800E8000(fp) > 0.87266463F)
         {

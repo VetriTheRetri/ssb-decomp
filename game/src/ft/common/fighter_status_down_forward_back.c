@@ -15,11 +15,11 @@ bool32 func_ovl3_8014482C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
 
-    if (ABS(fp->input.stick_range.x) >= FTCOMMON_DOWN_FORWARD_BACK_RANGE_MIN)
+    if (ABS(fp->input.pl.stick_range.x) >= FTCOMMON_DOWN_FORWARD_BACK_RANGE_MIN)
     {
         if (func_ovl2_800E8000(fp) < 0.87266463F)
         {
-            if ((fp->input.stick_range.x * fp->lr) >= 0)
+            if ((fp->input.pl.stick_range.x * fp->lr) >= 0)
             {
                 if ((fp->status_info.status_id == ftStatus_Common_DownBounceD) || (fp->status_info.status_id == ftStatus_Common_DownWaitD))
                 {

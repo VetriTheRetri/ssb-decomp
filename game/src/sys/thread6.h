@@ -3,6 +3,7 @@
 
 #include <PR/os.h>
 #include <PR/ultratypes.h>
+#include <include/ssb_types.h>
 
 struct ControllerInput {
     /* 0x00 */ u16 unk00; // button
@@ -12,6 +13,15 @@ struct ControllerInput {
     /* 0x08 */ s8 unk08;  // stick_x
     /* 0x09 */ s8 unk09;  // stick_y
 };                        // size = 0x0A
+
+typedef struct gControllerInput {
+    /* 0x00 */ u16 button_press; // button
+    /* 0x02 */ u16 button_new; // new button presses?
+    /* 0x04 */ u16 button_update; // buttons to handle?
+    /* 0x06 */ u16 button_release; // released buttons?
+    Vec2b stick_range;
+
+} gControllerInput;                        // size = 0x0A
 
 extern u32 D_800451A0;
 extern u32 gUpdateContData;

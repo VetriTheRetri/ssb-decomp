@@ -75,11 +75,11 @@ bool32 func_ovl3_80145084(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN) || (ABS(fp->input.stick_range.y) >= FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN))
+    if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN) || (ABS(fp->input.pl.stick_range.y) >= FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN))
     {
         f32 angle = func_ovl2_800E8000(fp);
 
-        if ((angle > 0.87266463F) || ((angle > -0.87266463F) && ((fp->input.stick_range.x * fp->lr) >= 0)))
+        if ((angle > 0.87266463F) || ((angle > -0.87266463F) && ((fp->input.pl.stick_range.x * fp->lr) >= 0)))
         {
             if (fp->status_vars.common.cliffmotion.status_id != 0)
             {

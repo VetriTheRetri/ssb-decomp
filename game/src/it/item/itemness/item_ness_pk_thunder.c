@@ -125,10 +125,10 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
 
     if ((fp->status_info.status_id == ftStatus_Ness_SpecialHiHold) || (fp->status_info.status_id == ftStatus_Ness_SpecialAirHiHold))
     {
-        if ((ABS(fp->input.stick_range.x) + ABS(fp->input.stick_range.y)) > ITPKTHUNDER_TURN_STICK_THRESHOLD)
+        if ((ABS(fp->input.pl.stick_range.x) + ABS(fp->input.pl.stick_range.y)) > ITPKTHUNDER_TURN_STICK_THRESHOLD)
         {
-            stick_angle.x = fp->input.stick_range.x;
-            stick_angle.y = fp->input.stick_range.y;
+            stick_angle.x = fp->input.pl.stick_range.x;
+            stick_angle.y = fp->input.pl.stick_range.y;
             stick_angle.z = 0.0F;
 
             angle_diff = vec3f_angle_diff(&ip->phys_info.vel, &stick_angle);

@@ -114,7 +114,7 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
 
     if ((capture_fp->status_info.status_id == ftStatus_Kirby_SpecialAirNWait) || (capture_fp->status_info.status_id == ftStatus_Kirby_SpecialNWait))
     {
-        if ((this_fp->input.stick_range.y >= FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN) && (this_fp->tap_stick_y < FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX))
+        if ((this_fp->input.pl.stick_range.y >= FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN) && (this_fp->tap_stick_y < FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX))
         {
             this_fp->tap_stick_y = U8_MAX - 1;
             is_wiggle = TRUE;
@@ -128,7 +128,7 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
                 capture_fp->phys_info.vel_air.y = FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY;
             }
         }
-        else if ((this_fp->input.stick_range.y <= -FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN) && (this_fp->tap_stick_y < FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX) && (this_fp->coll_data.ground_flags & 0x4000))
+        else if ((this_fp->input.pl.stick_range.y <= -FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN) && (this_fp->tap_stick_y < FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX) && (this_fp->coll_data.ground_flags & 0x4000))
         {
             this_fp->tap_stick_y = U8_MAX - 1;
             is_wiggle = TRUE;
@@ -143,16 +143,16 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
                 capture_fp->phys_info.vel_air.y = -FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY;
             }
         }
-        if ((ABS(this_fp->input.stick_range.x) >= (FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN + 3)) && (this_fp->tap_stick_x < (FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX * 2)))
+        if ((ABS(this_fp->input.pl.stick_range.x) >= (FTCOMMON_CAPTUREKIRBY_WIGGLE_STICK_RANGE_MIN + 3)) && (this_fp->tap_stick_x < (FTCOMMON_CAPTUREKIRBY_WIGGLE_BUFFER_FRAMES_MAX * 2)))
         {
             this_fp->tap_stick_x = U8_MAX - 1;
             is_wiggle = TRUE;
 
             if (capture_fp->ground_or_air == FALSE)
             {
-                capture_fp->phys_info.vel_ground.x = (((this_fp->input.stick_range.x < 0) ? -1 : 1) * capture_fp->lr) * FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY;
+                capture_fp->phys_info.vel_ground.x = (((this_fp->input.pl.stick_range.x < 0) ? -1 : 1) * capture_fp->lr) * FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY;
             }
-            else capture_fp->phys_info.vel_air.x = ((this_fp->input.stick_range.x < 0) ? -1 : 1) * FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY;
+            else capture_fp->phys_info.vel_air.x = ((this_fp->input.pl.stick_range.x < 0) ? -1 : 1) * FTCOMMON_CAPTUREKIRBY_WIGGLE_VEL_XY;
         }
         if (is_wiggle != FALSE)
         {

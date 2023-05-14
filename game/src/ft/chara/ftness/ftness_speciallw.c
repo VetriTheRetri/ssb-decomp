@@ -9,7 +9,7 @@
 
 void func_ovl3_801551E0(Fighter_Struct *fp) // PSI Magnet interrupt?
 {
-    if ((fp->input.button_hold & fp->input.button_mask_b) == FALSE)
+    if ((fp->input.pl.button_hold & fp->input.button_mask_b) == FALSE)
     {
         fp->status_vars.ness.speciallw.is_release = TRUE;
     }

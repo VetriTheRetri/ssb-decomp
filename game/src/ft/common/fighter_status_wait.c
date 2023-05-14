@@ -31,7 +31,7 @@ bool32 func_ovl3_8013E258(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->input.stick_range.x * fp->lr) < 0) || (ABS(fp->input.stick_range.x) < 8))
+    if (((fp->input.pl.stick_range.x * fp->lr) < 0) || (ABS(fp->input.pl.stick_range.x) < 8))
     {
         return TRUE;
     }

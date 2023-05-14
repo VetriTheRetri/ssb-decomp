@@ -109,8 +109,8 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
-    s32 status_id = ((fp->input.stick_range.x * fp->lr) >= FTCOMMON_JUMPAERIAL_F_OR_B_RANGE) ? ftStatus_Common_JumpAerialF : ftStatus_Common_JumpAerialB;
-    s32 stick_range_y = GMCONTROLLER_RANGE_MAX_I;
+    s32 status_id = ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_JUMPAERIAL_F_OR_B_RANGE) ? ftStatus_Common_JumpAerialF : ftStatus_Common_JumpAerialB;
+    s32 stick_range_y = GCONTROLLER_RANGE_MAX_I;
     s32 stick_range_x;
 
     // It would seem that the stick range jump mechanic was initially considered for double jumps as well...
@@ -130,12 +130,12 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
     switch (input_source) // Last minute bruh moment from HAL
     {
     case FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON:
-        stick_range_x = fp->input.stick_range.x;
+        stick_range_x = fp->input.pl.stick_range.x;
         break;
 
     case FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK:
     default:
-        stick_range_x = fp->input.stick_range.x;
+        stick_range_x = fp->input.pl.stick_range.x;
         break;
     } 
 
@@ -153,7 +153,7 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 
     fp->x192_flag_b0 = TRUE;
 
-    if (((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi)) && ((fp->input.stick_range.x * fp->lr) < FTCOMMON_JUMPAERIAL_TURN_STICK_RANGE_MIN))
+    if (((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi)) && ((fp->input.pl.stick_range.x * fp->lr) < FTCOMMON_JUMPAERIAL_TURN_STICK_RANGE_MIN))
     {
         fp->status_vars.common.jumpaerial.turn_frames = FTCOMMON_JUMPAERIAL_TURN_FRAMES;
     }
@@ -168,7 +168,7 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id;
     s32 stick_range_x;
-    s32 stick_range_y = GMCONTROLLER_RANGE_MAX_I;
+    s32 stick_range_y = GCONTROLLER_RANGE_MAX_I;
 
     switch (fp->ft_kind)
     {
@@ -187,12 +187,12 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     switch (input_source)
     {
     case FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON:
-        stick_range_x = fp->input.stick_range.x;
+        stick_range_x = fp->input.pl.stick_range.x;
         break;
 
     case FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK:
     default:
-        stick_range_x = fp->input.stick_range.x;
+        stick_range_x = fp->input.pl.stick_range.x;
         break;
     }
 
@@ -208,13 +208,13 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     {
     case Ft_Kind_Kirby:
     case Ft_Kind_PolyKirby:
-        fp->phys_info.vel_air.y = Fighter_Kirby_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
+        fp->phys_info.vel_air.y = Fighter_Kirby_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GCONTROLLER_RANGE_MAX_F);
 
         break;
 
     case Ft_Kind_Purin:
     case Ft_Kind_PolyPurin:
-        fp->phys_info.vel_air.y = Fighter_Purin_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GMCONTROLLER_RANGE_MAX_F);
+        fp->phys_info.vel_air.y = Fighter_Purin_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GCONTROLLER_RANGE_MAX_F);
 
         break;
     }
@@ -224,7 +224,7 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
 
     fp->x192_flag_b0 = TRUE;
 
-    if ((fp->input.stick_range.x * fp->lr) < FTCOMMON_JUMPAERIAL_TURN_STICK_RANGE_MIN)
+    if ((fp->input.pl.stick_range.x * fp->lr) < FTCOMMON_JUMPAERIAL_TURN_STICK_RANGE_MIN)
     {
         fp->status_vars.common.jumpaerial.turn_frames = FTCOMMON_JUMPAERIAL_TURN_FRAMES;
     }
@@ -235,7 +235,7 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
 
 bool32 func_ovl3_8014012C(Fighter_Struct *fp)
 {
-    if (fp->input.button_hold & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
+    if (fp->input.pl.button_hold & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
     {
         return TRUE;
     }
@@ -244,7 +244,7 @@ bool32 func_ovl3_8014012C(Fighter_Struct *fp)
 
 s32 func_ovl3_80140150(Fighter_Struct *fp)
 {
-    if (fp->input.stick_range.y >= FTCOMMON_JUMPAERIAL_STICK_RANGE_MIN)
+    if (fp->input.pl.stick_range.y >= FTCOMMON_JUMPAERIAL_STICK_RANGE_MIN)
     {
         return FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK;
     }

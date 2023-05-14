@@ -118,7 +118,7 @@ bool32 func_ovl3_80149CE0(GObj *fighter_gobj)
 
         return TRUE;
     }
-    else if ((fp->input.button_hold & fp->input.button_mask_z) && (fp->input.button_press & fp->input.button_mask_a) && (attributes->is_have_catch))
+    else if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->input.button_press & fp->input.button_mask_a) && (attributes->is_have_catch))
     {
         func_ovl3_80149BA8(fighter_gobj);
 
@@ -138,7 +138,7 @@ bool32 func_ovl3_80149D80(GObj *fighter_gobj)
 
         return TRUE;
     }
-    else if ((fp->input.button_hold & fp->input.button_mask_z) && (fp->input.button_press & fp->input.button_mask_a) && (attributes->is_have_catch))
+    else if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->input.button_press & fp->input.button_mask_a) && (attributes->is_have_catch))
     {
         func_ovl3_80149BA8(fighter_gobj);
 

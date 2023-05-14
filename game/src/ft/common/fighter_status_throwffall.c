@@ -47,12 +47,12 @@ void func_ovl3_8014DAF8(GObj *fighter_gobj)
     switch (fp->status_vars.common.throwf.input_source)
     {
     case FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON:
-        func_ovl3_8013F6A0(fp->input.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.throwf.is_short_hop);
+        func_ovl3_8013F6A0(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.throwf.is_short_hop);
         break;
 
     case FTCOMMON_KNEEBEND_INPUT_TYPE_STICK:
     default:
-        vel_x = fp->input.stick_range.x;
+        vel_x = fp->input.pl.stick_range.x;
         vel_y = fp->status_vars.common.throwf.jump_force;
 
     }

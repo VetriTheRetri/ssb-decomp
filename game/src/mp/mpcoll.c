@@ -408,9 +408,9 @@ bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*cb_coll)(Coll_Data*, GOb
 
         if (var_s1 == 0)
         {
-            translate->x += coll_data->pos_correct.x + coll_data->pos_project.x;
-            translate->y += coll_data->pos_correct.y + coll_data->pos_project.y;
-            translate->z += coll_data->pos_correct.z + coll_data->pos_project.z;
+            translate->x += coll_data->pos_correct.x + coll_data->pos_push.x;
+            translate->y += coll_data->pos_correct.y + coll_data->pos_push.y;
+            translate->z += coll_data->pos_correct.z + coll_data->pos_push.z;
         }
         translate->x += var_f20;
         translate->y += var_f22;
@@ -2086,7 +2086,7 @@ bool32 func_ovl2_800DD820(GObj *fighter_gobj, s32 ground_line_id)
 
         if (translate->x <= sp58.x)
         {
-            if ((fp->lr == LEFT) && (fp->input.stick_range.x >= -0x3B))
+            if ((fp->lr == LEFT) && (fp->input.pl.stick_range.x >= -0x3B))
             {
                 sp58.x += 40.0F;
 
@@ -2104,7 +2104,7 @@ bool32 func_ovl2_800DD820(GObj *fighter_gobj, s32 ground_line_id)
                 }
             }
         }
-        else if ((fp->lr == RIGHT) && (fp->input.stick_range.x <= 0x3B))
+        else if ((fp->lr == RIGHT) && (fp->input.pl.stick_range.x <= 0x3B))
         {
             func_ovl2_800F4408(ground_line_id, &sp58);
 

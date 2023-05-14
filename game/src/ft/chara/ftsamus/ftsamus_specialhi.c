@@ -29,7 +29,7 @@ bool32 func_ovl3_8015DD20(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->coll_data.ground_flags & 0x4000) == FALSE) || (fp->input.stick_range.y >= -44))
+    if (((fp->coll_data.ground_flags & 0x4000) == FALSE) || (fp->input.pl.stick_range.y >= -44))
     {
         return TRUE;
     }

@@ -133,7 +133,7 @@ void func_ovl3_8013C0B0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->star_invincible_time = 0;
+    fp->interact_status = 0;
     fp->is_ignore_blastzone_top = TRUE;
     fp->x18E_flag_b0 = TRUE;
 

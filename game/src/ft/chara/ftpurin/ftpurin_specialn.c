@@ -47,7 +47,7 @@ void func_ovl3_801512EC(GObj *fighter_gobj)
 
         fp->fighter_vars.purin.unk_0x0++;
 
-        boost = func_ovl3_80151274(fp->input.stick_range.y);
+        boost = func_ovl3_80151274(fp->input.pl.stick_range.y);
 
         fp->phys_info.vel_air.y = (f32)(__sinf(boost) * FTPURIN_POUND_VEL_BASE);
         fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTPURIN_POUND_VEL_BASE);

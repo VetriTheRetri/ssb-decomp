@@ -248,8 +248,8 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
     Vec3f stick_angle;
     f32 temp_stick_y;
 
-    temp_stick_x = fp->input.stick_range.x;
-    temp_stick_y = fp->input.stick_range.y;
+    temp_stick_x = fp->input.pl.stick_range.x;
+    temp_stick_y = fp->input.pl.stick_range.y;
 
     sqrt_stick_range = sqrtf(SQUARE(temp_stick_x) + SQUARE(temp_stick_y));
 
@@ -259,8 +259,8 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
     }
     if (!(sqrt_stick_range < FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN) && !(fp->coll_data.ground_flags & 0x4000))
     {
-        stick_angle.x = fp->input.stick_range.x;
-        stick_angle.y = fp->input.stick_range.y;
+        stick_angle.x = fp->input.pl.stick_range.x;
+        stick_angle.y = fp->input.pl.stick_range.y;
         stick_angle.z = 0.0F;
 
         if ((vec3f_angle_diff(&fp->coll_data.ground_angle, &stick_angle) < HALF_PI32)) goto block_end;
@@ -292,7 +292,7 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 tangent;
-    f32 sqrt_stick_range = sqrtf(SQUARE((f32)fp->input.stick_range.x) + SQUARE((f32)fp->input.stick_range.y));
+    f32 sqrt_stick_range = sqrtf(SQUARE((f32)fp->input.pl.stick_range.x) + SQUARE((f32)fp->input.pl.stick_range.y));
 
     if (sqrt_stick_range > 80.0F)
     {
@@ -303,10 +303,10 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
 
     if (sqrt_stick_range > FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN)
     {
-        tangent = atan2f((f32)fp->input.stick_range.y, (f32)(fp->input.stick_range.x * fp->lr));
+        tangent = atan2f((f32)fp->input.pl.stick_range.y, (f32)(fp->input.pl.stick_range.x * fp->lr));
 
-        fp->status_vars.pikachu.specialhi.stick_range.x = (s32)fp->input.stick_range.x;
-        fp->status_vars.pikachu.specialhi.stick_range.y = (s32)fp->input.stick_range.y;
+        fp->status_vars.pikachu.specialhi.stick_range.x = (s32)fp->input.pl.stick_range.x;
+        fp->status_vars.pikachu.specialhi.stick_range.y = (s32)fp->input.pl.stick_range.y;
     }
     else
     {
@@ -342,8 +342,8 @@ bool32 func_ovl3_801531AC(GObj *fighter_gobj)
     f32 temp_stick_x;
     f32 temp_stick_y;
 
-    temp_stick_x = (f32)fp->input.stick_range.x;
-    temp_stick_y = (f32)fp->input.stick_range.y;
+    temp_stick_x = (f32)fp->input.pl.stick_range.x;
+    temp_stick_y = (f32)fp->input.pl.stick_range.y;
 
     if (sqrtf((temp_stick_x * temp_stick_x) + (temp_stick_y * temp_stick_y)) < FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN)
     {
@@ -351,8 +351,8 @@ bool32 func_ovl3_801531AC(GObj *fighter_gobj)
     }
     else if (fp->status_vars.pikachu.specialhi.is_subsequent_zip == FALSE)
     {
-        current_angle.x = (f32)fp->input.stick_range.x;
-        current_angle.y = (f32)fp->input.stick_range.y;
+        current_angle.x = (f32)fp->input.pl.stick_range.x;
+        current_angle.y = (f32)fp->input.pl.stick_range.y;
         current_angle.z = 0.0F;
 
         previous_angle.x = (f32)fp->status_vars.pikachu.specialhi.stick_range.x;

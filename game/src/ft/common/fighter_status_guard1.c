@@ -11,7 +11,7 @@
 
 void func_ovl3_80148120(Fighter_Struct *fp)
 {
-    if (!(fp->input.button_hold & fp->input.button_mask_z))
+    if (!(fp->input.pl.button_hold & fp->input.button_mask_z))
     {
         fp->status_vars.common.guard.is_release = TRUE;
     }
@@ -124,7 +124,7 @@ void func_ovl3_80148408(Fighter_Struct *fp)
 
 void func_ovl3_80148488(Fighter_Struct *fp)
 {
-    f32 angle_r = atan2f(fp->input.stick_range.y, fp->input.stick_range.x * fp->lr);
+    f32 angle_r = atan2f(fp->input.pl.stick_range.y, fp->input.pl.stick_range.x * fp->lr);
     f32 angle_d;
     f32 range;
 
@@ -145,7 +145,7 @@ void func_ovl3_80148488(Fighter_Struct *fp)
     fp->status_vars.common.guard.angle_i = (angle_d / 45.0F);
     fp->status_vars.common.guard.angle_f = (angle_d - (fp->status_vars.common.guard.angle_i * 45.0F));
 
-    range = sqrtf(SQUARE(fp->input.stick_range.x) + SQUARE(fp->input.stick_range.y)) / GMCONTROLLER_RANGE_MAX_F;
+    range = sqrtf(SQUARE(fp->input.pl.stick_range.x) + SQUARE(fp->input.pl.stick_range.y)) / GCONTROLLER_RANGE_MAX_F;
 
     if (range > 1.0F)
     {
@@ -396,7 +396,7 @@ bool32 func_ovl3_80148CBC(GObj *fighter_gobj, s32 slide_frames)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
+    if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
     {
         func_ovl3_80148BFC(fighter_gobj, slide_frames);
 

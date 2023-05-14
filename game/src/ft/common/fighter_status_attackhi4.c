@@ -9,7 +9,7 @@ void func_ovl3_801505F0(GObj *fighter_gobj)
 
 bool32 func_ovl3_80150628(Fighter_Struct *fp)
 {
-    if ((fp->input.stick_range.y >= FTCOMMON_ATTACKHI4_STICK_RANGE_MIN) && (fp->input.button_tap & fp->input.button_mask_a))
+    if ((fp->input.pl.stick_range.y >= FTCOMMON_ATTACKHI4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         return TRUE;
     }

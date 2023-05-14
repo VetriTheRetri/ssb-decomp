@@ -94,7 +94,7 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
     s32 ground_line_id;
     f32 dist_x;
 
-    if ((fp->input.stick_range.y <= FTCOMMON_DOKAN_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_DOKAN_BUFFER_FRAMES_MAX))
+    if ((fp->input.pl.stick_range.y <= FTCOMMON_DOKAN_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_DOKAN_BUFFER_FRAMES_MAX))
     {
         if ((fp->coll_data.ground_flags & 0xFFFF00FF) == 0xC)
         {

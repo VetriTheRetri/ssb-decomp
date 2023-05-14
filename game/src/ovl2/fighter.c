@@ -59,7 +59,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->lr = spawn->lr_spawn;
     fp->percent_damage = spawn->damage;
 
-    if (fp->status_info.pl_kind != 3)
+    if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
         Match_Info->player_block[fp->port_id].stock_damage_all = fp->percent_damage;
     }
@@ -97,15 +97,15 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->unk_ft_0x824 = 0;
     fp->unk_0x810 = 0;
     fp->unk_ft_0x814 = 0;
-    fp->unk_0x818 = 0;
+    fp->damage_heal = 0;
     fp->unk_0x804 = 0;
-    fp->unk_ft_0x5A4 = 0;
-    fp->unk_ft_0x5A8 = 0;
-    fp->unk_ft_0x5B0 = 0;
+    fp->invincible_timer = 0;
+    fp->walldamage_nohit_timer = 0;
+    fp->star_invincible_timer = 0;
 
     fp->hit_status = gmHitCollision_HitStatus_Normal;
     fp->special_status = 1;
-    fp->unk_ft_0x5AC = 1;
+    fp->special_hit_status = 1;
 
     fp->throw_gobj = NULL;
     fp->catch_gobj = NULL;
@@ -145,7 +145,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->x192_flag_b4 = FALSE;
 
     fp->unk_0x274 = 0;
-    fp->unk_0x276 = 0;
+    fp->shuffle_timer = 0;
 
     fp->attack_id = 0;
     fp->flags_hi.halfword = 0;
@@ -160,7 +160,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     DObjGetStruct(fighter_gobj)->translate = spawn->pos;
     DObjGetStruct(fighter_gobj)->scale.x = DObjGetStruct(fighter_gobj)->scale.y = DObjGetStruct(fighter_gobj)->scale.z = attributes->size_mul;
 
-    if (fp->status_info.pl_kind != 3)
+    if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
         bool32 is_collide_ground = func_ovl2_800F9348(&DObjGetStruct(fighter_gobj)->translate, &fp->coll_data.ground_line_id, &fp->coll_data.ground_dist, &fp->coll_data.ground_flags, &fp->coll_data.ground_angle.x);
 
@@ -269,7 +269,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         fp->fighter_vars.masterhand.p_masterhand->unk_0x15 = -1;
         fp->fighter_vars.masterhand.p_masterhand->unk_0x16 = 0;
 
-        if (fp->status_info.pl_kind != 3)
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
             func_ovl3_80158428(fighter_gobj);
             func_ovl3_80158634(fighter_gobj);
@@ -342,7 +342,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fp->port_id = spawn->port_id;
     fp->stock_count = spawn->stock_count;
 
-    if (fp->status_info.pl_kind != 3)
+    if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
         Match_Info->player_block[fp->port_id].stock_count = spawn->stock_count;
     }
@@ -387,7 +387,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
 
     fp->x18E_flag_b2 = spawn->unk_rebirth_0x1F_b2;
 
-    fp->status_info.status_frame_curr = 0;
+    fp->status_info.status_time_spent = 0;
 
     fp->fighter_cam_zoom_frame = attributes->cam_zoom;
     fp->fighter_cam_zoom_range = 1.0F;
@@ -446,8 +446,8 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
 
     func_ovl2_800EB6EC(fp);
 
-    fp->input.stick_range.x = fp->input.stick_range.y = fp->input.stick_prev.x = fp->input.stick_prev.y = fp->input.stick_com.x = fp->input.stick_com.y = 0;
-    fp->input.button_hold = fp->input.button_tap = fp->input.button_mask_com = 0;
+    fp->input.pl.stick_range.x = fp->input.pl.stick_range.y = fp->input.pl.stick_prev.x = fp->input.pl.stick_prev.y = fp->input.cp.stick_range.x = fp->input.cp.stick_range.y = 0;
+    fp->input.pl.button_hold = fp->input.pl.button_tap = fp->input.cp.button_inputs = 0;
 
     fp->input.p_controller = spawn->p_controller;
 
@@ -485,7 +485,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fp->coll_data.wall_flag = D_ovl2_80131398;
     fp->coll_data.coll_mask = 0;
 
-    if (fp->status_info.pl_kind != 3)
+    if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
         func_80008188(fighter_gobj, func_ovl2_800E1260, 1U, 5U);
         func_80008188(fighter_gobj, func_ovl2_800E2604, 1U, 4U);
@@ -534,7 +534,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     {
         func_unkmulti_8013AC00(fighter_gobj);
     }
-    if ((fp->status_info.pl_kind != 3) && !(spawn->unk_rebirth_0x1F_b1))
+    if ((fp->status_info.pl_kind != Pl_Kind_Result) && !(spawn->unk_rebirth_0x1F_b1))
     {
         func_unkmulti_8013BB88(fighter_gobj);
     }

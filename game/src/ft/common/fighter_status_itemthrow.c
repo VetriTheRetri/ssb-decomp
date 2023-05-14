@@ -144,27 +144,27 @@ void func_ovl3_801466EC(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
 
-    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_LIGHTTHROW4_STICK_RANGE_X_MIN) && (fp->hold_stick_x < FTCOMMON_LIGHTTHROW4_F_OR_B_BUFFER_FRAMES_MAX))
+    if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_LIGHTTHROW4_STICK_RANGE_X_MIN) && (fp->hold_stick_x < FTCOMMON_LIGHTTHROW4_F_OR_B_BUFFER_FRAMES_MAX))
     {
-        status_id = ((fp->input.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4;
+        status_id = ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4;
     }
-    else if ((fp->input.stick_range.y >= FTCOMMON_LIGHTTHROW4_STICK_RANGE_Y_MIN) && (fp->hold_stick_y < (FTCOMMON_LIGHTTHROW4_HI_OR_LW_BUFFER_FRAMES_MAX + fp->attributes->kneebend_frames)))
+    else if ((fp->input.pl.stick_range.y >= FTCOMMON_LIGHTTHROW4_STICK_RANGE_Y_MIN) && (fp->hold_stick_y < (FTCOMMON_LIGHTTHROW4_HI_OR_LW_BUFFER_FRAMES_MAX + fp->attributes->kneebend_frames)))
     {
         status_id = ftStatus_Common_LightThrowHi4;
     }
-    else if ((fp->input.stick_range.y <= -FTCOMMON_LIGHTTHROW4_STICK_RANGE_Y_MIN) && (fp->hold_stick_y < FTCOMMON_LIGHTTHROW4_HI_OR_LW_BUFFER_FRAMES_MAX))
+    else if ((fp->input.pl.stick_range.y <= -FTCOMMON_LIGHTTHROW4_STICK_RANGE_Y_MIN) && (fp->hold_stick_y < FTCOMMON_LIGHTTHROW4_HI_OR_LW_BUFFER_FRAMES_MAX))
     {
         status_id = ftStatus_Common_LightThrowLw4;
     }
-    else if ((ABS(fp->input.stick_range.x) >= FTCOMMON_LIGHTTHROW_STICK_RANGE_XY_MIN) && (((func_ovl2_800E8000(fp) < 0.0F) ? -func_ovl2_800E8000(fp) : func_ovl2_800E8000(fp)) <= FTCOMMON_LIGHTTHROW_HI_OR_LW_ANGLE))
+    else if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_LIGHTTHROW_STICK_RANGE_XY_MIN) && (((func_ovl2_800E8000(fp) < 0.0F) ? -func_ovl2_800E8000(fp) : func_ovl2_800E8000(fp)) <= FTCOMMON_LIGHTTHROW_HI_OR_LW_ANGLE))
     {
-        status_id = ((fp->input.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowB;
+        status_id = ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowB;
     }
-    else if ((fp->input.stick_range.y >= FTCOMMON_LIGHTTHROW_STICK_RANGE_XY_MIN) && (func_ovl2_800E8000(fp) > FTCOMMON_LIGHTTHROW_HI_OR_LW_ANGLE))
+    else if ((fp->input.pl.stick_range.y >= FTCOMMON_LIGHTTHROW_STICK_RANGE_XY_MIN) && (func_ovl2_800E8000(fp) > FTCOMMON_LIGHTTHROW_HI_OR_LW_ANGLE))
     {
         status_id = ftStatus_Common_LightThrowHi;
     }
-    else if ((fp->input.stick_range.y <= -FTCOMMON_LIGHTTHROW_STICK_RANGE_XY_MIN) && (func_ovl2_800E8000(fp) < -FTCOMMON_LIGHTTHROW_HI_OR_LW_ANGLE))
+    else if ((fp->input.pl.stick_range.y <= -FTCOMMON_LIGHTTHROW_STICK_RANGE_XY_MIN) && (func_ovl2_800E8000(fp) < -FTCOMMON_LIGHTTHROW_HI_OR_LW_ANGLE))
     {
         status_id = ftStatus_Common_LightThrowLw; 
     }
@@ -178,13 +178,13 @@ void func_ovl3_80146930(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
 
-    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_HEAVYTHROW4_STICK_RANGE_X_MIN) && (fp->hold_stick_x < FTCOMMON_HEAVYTHROW4_F_OR_B_BUFFER_FRAMES_MAX))
+    if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_HEAVYTHROW4_STICK_RANGE_X_MIN) && (fp->hold_stick_x < FTCOMMON_HEAVYTHROW4_F_OR_B_BUFFER_FRAMES_MAX))
     {
-        status_id = ((fp->input.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_HeavyThrowF4 : ftStatus_Common_HeavyThrowB4;
+        status_id = ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_HeavyThrowF4 : ftStatus_Common_HeavyThrowB4;
     }
-    else if (((ABS(fp->input.stick_range.x) >= 0x14) && ((func_ovl2_800E8000(fp) < 0.0F) ? -func_ovl2_800E8000(fp) : func_ovl2_800E8000(fp)) <= FTCOMMON_HEAVYTHROW_HI_OR_LW_ANGLE))
+    else if (((ABS(fp->input.pl.stick_range.x) >= 0x14) && ((func_ovl2_800E8000(fp) < 0.0F) ? -func_ovl2_800E8000(fp) : func_ovl2_800E8000(fp)) <= FTCOMMON_HEAVYTHROW_HI_OR_LW_ANGLE))
     {
-        status_id = ((fp->input.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_HeavyThrowF : ftStatus_Common_HeavyThrowB;
+        status_id = ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_HeavyThrowF : ftStatus_Common_HeavyThrowB;
     }
     else status_id = ftStatus_Common_HeavyThrowF;
 
@@ -203,7 +203,7 @@ bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
     {
         if (fp->input.button_press & fp->input.button_mask_a)
         {
-            if ((fp->input.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
             {
                 return TRUE;
             }

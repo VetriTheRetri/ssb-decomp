@@ -1,4 +1,7 @@
 #include "fighter.h"
+#include "article.h"
+#include "gmmatch.h"
+#include "thread6.h"
 
 void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p_event, u32 ev_kind)
 {
@@ -46,20 +49,20 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
     case gmScriptEvent_Kind_FighterHit:
     case gmScriptEvent_Kind_ItemSwingHit:
 
-        if (fp->status_info.pl_kind != 3)
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
             hit_id = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->hit_id;
             ft_hit = &fp->fighter_hit[hit_id];
 
-            if ((ft_hit->update_state == gmHitCollision_UpdateState_Disable) || (ft_hit->unk_0x4 != gmScriptEventCast(p_event, gmScriptEventCreateHit1)->group_id))
+            if ((ft_hit->update_state == gmHitCollision_UpdateState_Disable) || (ft_hit->group_id != gmScriptEventCast(p_event, gmScriptEventCreateHit1)->group_id))
             {
-                ft_hit->unk_0x4 = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->group_id;
+                ft_hit->group_id = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->group_id;
                 ft_hit->update_state = gmHitCollision_UpdateState_New;
                 fp->is_hit_enable = TRUE;
 
                 for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
                 {
-                    if ((i != hit_id) && (fp->fighter_hit[i].update_state != gmHitCollision_UpdateState_Disable) && (ft_hit->unk_0x4 == fp->fighter_hit[i].unk_0x4))
+                    if ((i != hit_id) && (fp->fighter_hit[i].update_state != gmHitCollision_UpdateState_Disable) && (ft_hit->group_id == fp->fighter_hit[i].group_id))
                     {
                         for (j = 0; j < ARRAY_COUNT(ft_hit->hit_targets); j++)
                         {
@@ -138,7 +141,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
     case gmScriptEvent_Kind_SetHitDamage:
 
-        if (fp->status_info.pl_kind != 3)
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
             hit_id = gmScriptEventCast(p_event, gmScriptEventSetHitDamage)->hit_id;
 
@@ -547,7 +550,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_Unk15:
-        if (fp->status_info.pl_kind != 3)
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
             func_ovl2_800E806C(fp, gmScriptEventCast(p_event, gmScriptEventUnk31)->value2, gmScriptEventCast(p_event, gmScriptEventUnk31)->value1);
         }
@@ -556,7 +559,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_Unk16:
-        if (fp->status_info.pl_kind != 3)
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
             func_ovl2_80115630(fp->port_id, gmScriptEventCast(p_event, gmScriptEventUnk32)->value1);
         }
@@ -815,7 +818,7 @@ bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_
 
     for (i = 0; i < ARRAY_COUNT(colanim->cs); i++)
     {
-        cs = &colanim->cs[i];
+        cs = &colanim->cs[i]; // What's the point bruh
 
         if ((colanim->cs[i].p_script != NULL) && (colanim->cs[i].color_event_timer != 0))
         {
@@ -1066,4 +1069,373 @@ void func_ovl2_800E11C8(GObj *fighter_gobj)
     {
         func_ovl2_800E98D4(fighter_gobj);
     }
+}
+
+void func_ovl2_800E1260(GObj *fighter_gobj)
+{
+    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *other_fp;
+    ftCommonAttributes *this_attributes;
+    ftCommonAttributes *other_attributes;
+    gmPlayerInput *pl;
+    gmComputerInput *cp;
+    gControllerInput *p_controller;
+    GObj *other_gobj;
+    f32 jostle_dist_x;
+    f32 dist_z;
+    bool32 is_check_self;
+    bool32 is_jostle;
+    u16 button_tap_mask;
+    u16 button_press;
+    u16 button_press_com;
+    f32 this_jostle;
+
+    if (!this_fp->x18F_flag_b6)
+    {
+        this_fp->status_info.status_time_spent++;
+    }
+    if (!this_fp->x18F_flag_b6)
+    {
+        this_fp->input.pl.stick_prev.x = this_fp->input.pl.stick_range.x;
+        this_fp->input.pl.stick_prev.y = this_fp->input.pl.stick_range.y;
+
+        switch (this_fp->status_info.pl_kind)
+        {
+        default:
+            pl = &this_fp->input.pl;
+            break;
+
+        case Pl_Kind_Human:
+            p_controller = this_fp->input.p_controller;
+            pl = &this_fp->input.pl;
+
+            button_press = p_controller->button_press;
+
+            if (button_press & HAL_BUTTON_R)
+            {
+                button_press |= (HAL_BUTTON_A | HAL_BUTTON_Z);
+            }
+
+            pl->stick_range.x = p_controller->stick_range.x;
+            pl->stick_range.y = p_controller->stick_range.y;
+
+            button_tap_mask = (button_press ^ pl->button_hold) & button_press;
+
+            pl->button_tap = (this_fp->hitlag_timer != 0) ? pl->button_tap | button_tap_mask : button_tap_mask;
+
+            button_tap_mask = (button_press ^ pl->button_hold) & pl->button_hold;
+
+            pl->button_tap_prev = (this_fp->hitlag_timer != 0) ? pl->button_tap_prev | button_tap_mask : button_tap_mask;
+
+            pl->button_hold = button_press;
+
+            break;
+
+        case Pl_Kind_CPU:
+            func_unkmulti_8013A834(fighter_gobj);
+            goto next;
+
+        case 4:
+        case 5:
+            func_ovl2_80115B10(fighter_gobj);
+
+        next:
+            cp = &this_fp->input.cp;
+            pl = &this_fp->input.pl;
+
+            button_press_com = this_fp->input.cp.button_inputs;
+
+            if (button_press_com & HAL_BUTTON_R)
+            {
+                button_press_com |= (HAL_BUTTON_A | HAL_BUTTON_Z);
+            }
+
+            pl->stick_range.x = cp->stick_range.x;
+            pl->stick_range.y = cp->stick_range.y;
+
+            button_tap_mask = (button_press_com ^ pl->button_hold) & button_press_com;
+
+            pl->button_tap = (this_fp->hitlag_timer != 0) ? pl->button_tap | button_tap_mask : button_tap_mask;
+
+            button_tap_mask = (button_press_com ^ pl->button_hold) & pl->button_hold;
+
+            pl->button_tap_prev = (this_fp->hitlag_timer != 0) ? pl->button_tap_prev | button_tap_mask : button_tap_mask;
+
+            pl->button_hold = button_press_com;
+
+            break;
+        }
+        if (pl->stick_range.x > GCONTROLLER_RANGE_MAX_I)
+        {
+            pl->stick_range.x = GCONTROLLER_RANGE_MAX_I;
+        }
+        if (pl->stick_range.x < -GCONTROLLER_RANGE_MAX_I)
+        {
+            pl->stick_range.x = -GCONTROLLER_RANGE_MAX_I;
+        }
+        if (pl->stick_range.y > GCONTROLLER_RANGE_MAX_I)
+        {
+            pl->stick_range.y = GCONTROLLER_RANGE_MAX_I;
+        }
+        if (pl->stick_range.y < -GCONTROLLER_RANGE_MAX_I)
+        {
+            pl->stick_range.y = -GCONTROLLER_RANGE_MAX_I;
+        }
+        if (Save_Info.unk5E2 & 2)
+        {
+            pl->stick_range.x *= 0.5F;
+            pl->stick_range.y *= 0.5F;
+        }
+        if (pl->stick_range.x >= 0x14)
+        {
+            if (pl->stick_prev.x >= 0x14)
+            {
+                this_fp->tap_stick_x++, this_fp->hold_stick_x++;
+            }
+            else this_fp->tap_stick_x = this_fp->hold_stick_x = 1;
+
+        }
+        else if (pl->stick_range.x <= -0x14)
+        {
+            if (pl->stick_prev.x <= -0x14)
+            {
+                this_fp->tap_stick_x++, this_fp->hold_stick_x++;
+            }
+            else this_fp->tap_stick_x = this_fp->hold_stick_x = 1;
+
+        }
+        else this_fp->tap_stick_x = this_fp->hold_stick_x = U8_MAX - 1;
+
+        if (this_fp->tap_stick_x > (U8_MAX - 1))
+        {
+            this_fp->tap_stick_x = U8_MAX - 1;
+        }
+        if (this_fp->hold_stick_x > (U8_MAX - 1))
+        {
+            this_fp->hold_stick_x = U8_MAX - 1;
+        }
+        if (pl->stick_range.y >= 0x14)
+        {
+            if (pl->stick_prev.y >= 0x14)
+            {
+                this_fp->tap_stick_y++, this_fp->hold_stick_y++;
+            }
+            else this_fp->tap_stick_y = this_fp->hold_stick_y = 1;
+        }
+        else if (pl->stick_range.y <= -0x14)
+        {
+            if (pl->stick_prev.y <= -0x14)
+            {
+                this_fp->tap_stick_y++, this_fp->hold_stick_y++;
+            }
+            else this_fp->tap_stick_y = this_fp->hold_stick_y = 1;
+        }
+        else this_fp->tap_stick_y = this_fp->hold_stick_y = U8_MAX - 1;
+
+        if (this_fp->tap_stick_y > (U8_MAX - 1))
+        {
+            this_fp->tap_stick_y = U8_MAX - 1;
+        }
+        if (this_fp->hold_stick_y > (U8_MAX - 1))
+        {
+            this_fp->hold_stick_y = U8_MAX - 1;
+        }
+    }
+    if (this_fp->time_since_last_z < (U16_MAX + 1))
+    {
+        this_fp->time_since_last_z++;
+    }
+    if (this_fp->input.pl.button_tap & this_fp->input.button_mask_z)
+    {
+        this_fp->time_since_last_z = 0;
+    }
+    if (this_fp->hitlag_timer != 0)
+    {
+        this_fp->hitlag_timer--;
+
+        if (this_fp->hitlag_timer == 0)
+        {
+            this_fp->x192_flag_b6 = FALSE;
+
+            if (this_fp->cb_hitlag_end != NULL)
+            {
+                this_fp->cb_hitlag_end(fighter_gobj);
+            }
+        }
+    }
+    this_fp->x191_flag_b0 = TRUE;
+
+    if (this_fp->hitlag_timer == 0)
+    {
+        ftAnim_Update(fighter_gobj);
+    }
+    func_ovl2_800E11C8(fighter_gobj);
+
+    if (this_fp->walldamage_nohit_timer != 0)
+    {
+        this_fp->walldamage_nohit_timer--;
+
+        if (this_fp->walldamage_nohit_timer == 0)
+        {
+            this_fp->special_hit_status = (this_fp->invincible_timer != FALSE) ? gmHitCollision_HitStatus_Invincible : gmHitCollision_HitStatus_Normal;
+
+            if (this_fp->colanim.colanim_id == 0xA)
+            {
+                func_ovl2_800E98D4(fighter_gobj);
+            }
+        }
+    }
+    if (this_fp->invincible_timer != 0)
+    {
+        this_fp->invincible_timer--;
+
+        if ((this_fp->invincible_timer == 0) && (this_fp->walldamage_nohit_timer == 0))
+        {
+            this_fp->special_hit_status = gmHitCollision_HitStatus_Normal;
+
+            if (this_fp->colanim.colanim_id == 0xA)
+            {
+                func_ovl2_800E98D4(fighter_gobj);
+            }
+        }
+    }
+    if (this_fp->star_invincible_timer != 0)
+    {
+        this_fp->star_invincible_timer--;
+
+        if (this_fp->star_invincible_timer == 0)
+        {
+            this_fp->special_status = 1;
+
+            if (this_fp->colanim.colanim_id == 0x4A)
+            {
+                func_ovl2_800E98D4(fighter_gobj);
+            }
+        }
+        else if (this_fp->star_invincible_timer == 120)
+        {
+            func_ovl2_800E7B54();
+        }
+    }
+    if (this_fp->damage_heal != 0)
+    {
+        this_fp->damage_heal--;
+
+        if (this_fp->percent_damage != 0)
+        {
+            this_fp->percent_damage--;
+
+            func_800269C0(0x112U);
+
+            Match_Info->player_block[this_fp->port_id].stock_damage_all = this_fp->percent_damage;
+        }
+        if (this_fp->percent_damage == 0)
+        {
+            this_fp->damage_heal = 0;
+        }
+        if ((this_fp->damage_heal == 0) && (this_fp->colanim.colanim_id == 9))
+        {
+            func_ovl2_800E98D4(fighter_gobj);
+        }
+    }
+    if ((this_fp->item_hold != NULL) && (this_fp->status_info.status_id != ftStatus_Common_LightGet) && (ArticleGetStruct(this_fp->item_hold)->at_kind == At_Kind_Hammer))
+    {
+        func_ovl2_800F36E0(fighter_gobj);
+    }
+    if (this_fp->shuffle_timer != 0)
+    {
+        this_fp->shuffle_timer--;
+
+        this_fp->unk_ft_0x272++;
+
+        if (this_fp->unk_ft_0x272 == this_fp->unk_ft_0x273)
+        {
+            this_fp->unk_ft_0x272 = 0U;
+        }
+    }
+    if (this_fp->cb_update_gfx != NULL)
+    {
+        this_fp->cb_update_gfx(fighter_gobj);
+    }
+    if (this_fp->hitlag_timer == 0)
+    {
+        if ((this_fp->unk_0x174 > 1) && !(this_fp->x18F_flag_b6))
+        {
+            this_fp->unk_0x174--;
+        }
+        if (this_fp->cb_anim != NULL)
+        {
+            this_fp->cb_anim(fighter_gobj);
+        }
+        if (this_fp->cb_interrupt != NULL)
+        {
+            this_fp->cb_interrupt(fighter_gobj);
+        }
+        if (!(this_fp->is_hitstun))
+        {
+            Match_Info->player_block[this_fp->port_id].combo_damage_foe = 0;
+            Match_Info->player_block[this_fp->port_id].combo_count_foe = 0;
+        }
+        is_jostle = FALSE;
+
+        this_fp->phys_info.vel_jostle_x = this_fp->phys_info.vel_jostle_z = 0.0F;
+
+        if ((this_fp->ground_or_air == ground) && !(this_fp->x18F_flag_b4))
+        {
+            other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+
+            is_check_self = FALSE;
+
+            while (other_gobj != NULL)
+            {
+
+                other_fp = FighterGetStruct(other_gobj);
+
+                if ((fighter_gobj != other_gobj) && (other_fp->capture_gobj == NULL))
+                {
+                    if ((other_fp->ground_or_air == ground) && (this_fp->coll_data.ground_line_id == other_fp->coll_data.ground_line_id))
+                    {
+                        this_attributes = this_fp->attributes;
+                        other_attributes = other_fp->attributes;
+
+                        this_jostle = this_fp->attributes->jostle_width;
+
+                        jostle_dist_x = (DObjGetStruct(fighter_gobj)->translate.x + (this_attributes->jostle_x * this_fp->lr)) - (DObjGetStruct(other_gobj)->translate.x + (other_attributes->jostle_x * other_fp->lr));
+
+                        if (ABS(jostle_dist_x) < (this_jostle + other_attributes->jostle_width))
+                        {
+                            is_jostle = TRUE;
+
+                            if (jostle_dist_x == 0.0F)
+                            {
+                                this_fp->phys_info.vel_jostle_x += (6.75F * ((is_check_self != FALSE) ? -1 : 1));
+                            }
+                            else this_fp->phys_info.vel_jostle_x += (6.75F * ((jostle_dist_x < 0.0F) ? -1 : 1));
+
+                            dist_z = DObjGetStruct(fighter_gobj)->translate.z - DObjGetStruct(other_gobj)->translate.z;
+
+                            if (dist_z == 0.0F)
+                            {
+                                if (jostle_dist_x == 0.0F)
+                                {
+                                    this_fp->phys_info.vel_jostle_z += (3.0F * ((is_check_self != FALSE) ? -1 : 1));
+                                }
+                                else this_fp->phys_info.vel_jostle_z += (3.0F * ((jostle_dist_x < 0.0F) ? 1 : -1));
+                            }
+                            else this_fp->phys_info.vel_jostle_z += (3.0F * ((dist_z < 0.0F) ? -1 : 1));
+                        }
+                    }
+                }
+                else is_check_self = TRUE;
+
+                other_gobj = other_gobj->group_gobj_next;
+
+            }
+            if ((is_jostle == FALSE) && (DObjGetStruct(fighter_gobj)->translate.z != 0.0F))
+            {
+                this_fp->phys_info.vel_jostle_z = ((DObjGetStruct(fighter_gobj)->translate.z < 0.0F) ? RIGHT : LEFT) * 3.0F;
+            }
+        }
+    }
+    this_fp->coll_data.pos_push.x = this_fp->coll_data.pos_push.y = this_fp->coll_data.pos_push.z = 0.0F;
 }

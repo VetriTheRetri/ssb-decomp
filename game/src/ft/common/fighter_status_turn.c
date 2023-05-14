@@ -75,7 +75,7 @@ interrupt1:
             {
                 if (fp->status_vars.common.turn.lr_dash != CENTER)
                 {
-                    if ((fp->input.stick_range.x * fp->status_vars.common.turn.lr_turn) >= FTCOMMON_DASH_STICK_RANGE_MIN)
+                    if ((fp->input.pl.stick_range.x * fp->status_vars.common.turn.lr_turn) >= FTCOMMON_DASH_STICK_RANGE_MIN)
                     {
                         func_ovl3_8013ED00(fighter_gobj, 0);
                     }
@@ -130,7 +130,7 @@ bool32 func_ovl3_8013E9D0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.stick_range.x * fp->lr) <= FTCOMMON_TURN_STICK_RANGE_MIN)
+    if ((fp->input.pl.stick_range.x * fp->lr) <= FTCOMMON_TURN_STICK_RANGE_MIN)
     {
         return TRUE;
     }

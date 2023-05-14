@@ -362,7 +362,11 @@ typedef enum ftKind
 typedef enum plKind
 {
     Pl_Kind_Human,
-    Pl_Kind_CPU
+    Pl_Kind_CPU,
+    Pl_Kind_Unk1,
+    Pl_Kind_Result,
+    Pl_Kind_Intro,
+    Pl_Kind_HowToPlay
 
 } plKind;
 
@@ -496,7 +500,7 @@ typedef struct ftSpawnInfo
 typedef struct _Fighter_Hit
 {
     gmHitCollisionUpdateState update_state;
-    s32 unk_0x4;
+    s32 group_id;
     s32 joint_index;
     s32 damage;
     gmHitCollisionElement element;
@@ -687,8 +691,9 @@ typedef struct ftCommonAttributes
     f32 shield_size;
     f32 shield_break_vel_y;
     f32 shadow_size;
-    Vec2f jostle_box;
-    f32 unk_0x88;
+    f32 jostle_width; // ???
+    f32 jostle_x;
+    f32 jostle_z;
     f32 vs_pause_zoom;
     f32 cam_offset_y;
     f32 cam_zoom;
@@ -788,7 +793,7 @@ struct Fighter_Struct
 
     struct status_info // Status = Action State
     {
-        s32 status_frame_curr; // 0x1C
+        s32 status_time_spent; // Frames spent in this action state
         plKind pl_kind;
         s32 status_id;
         s32 script_id; // Index of animation + subaction script?
@@ -808,7 +813,9 @@ struct Fighter_Struct
         Vec3f vel_air; // Aerial self-induced velocity
         Vec3f vel_damage_air; // Aerial knockback velocity
         Vec3f vel_ground; // Grounded self-induced velocity
-        Vec3f vel_damage_ground; // Grounded knockback velocity
+        f32 vel_damage_ground;
+        f32 vel_jostle_x;
+        f32 vel_jostle_z;
 
     } phys_info;
 
@@ -928,13 +935,8 @@ struct Fighter_Struct
         u16 button_mask_b;
         u16 button_mask_z;
         u16 button_mask_l;
-        u16 button_hold;
-        u16 button_tap;
-        u16 button_tap_prev; // Previous button tap?
-        Vec2b stick_range;
-        Vec2b stick_prev;  // Previous stick range?
-        u16 button_mask_com;
-        Vec2b stick_com; // CPU stick input?
+        gmPlayerInput pl;
+        gmComputerInput cp;
 
     } input;
 
@@ -956,7 +958,7 @@ struct Fighter_Struct
     u8 unk_ft_0x272;
     u8 unk_ft_0x273;
     s8 unk_0x274;
-    s16 unk_0x276;
+    u16 shuffle_timer;
     GObj *throw_gobj;
     ftKind throw_ft_kind;
     u8 unk_0x280;
@@ -995,12 +997,12 @@ struct Fighter_Struct
 
     Fighter_Hit fighter_hit[4];
 
-    s32 unk_ft_0x5A4;
-    s32 unk_ft_0x5A8;
-    s32 unk_ft_0x5AC;
-    s32 unk_ft_0x5B0;
-    s32 star_invincible_time;
-    s32 special_status;
+    s32 invincible_timer;
+    s32 walldamage_nohit_timer;
+    s32 special_hit_status;
+    s32 star_invincible_timer;
+    s32 interact_status; // Used to disable hit detection completely when Fighter is on respawn platform?
+    s32 special_status;  // Enemy CPUs avoid player depending on this?
     s32 hit_status;
 
     Fighter_Hurt fighter_hurt[11];
@@ -1034,7 +1036,7 @@ struct Fighter_Struct
     s32 damage_port_id; // Port index of damaging fighter
     s32 unk_0x810;
     s32 unk_ft_0x814;
-    s32 unk_0x818;
+    s32 damage_heal; // Percent damage to heal
     f32 damage_mul;
 
     s32 unk_ft_0x820;

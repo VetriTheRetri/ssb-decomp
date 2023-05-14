@@ -9,7 +9,7 @@ void func_ovl3_80147EC0(GObj *fighter_gobj)
 
     if ((fp->status_vars.common.hammer.input_source == FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON) && 
     (fp->status_vars.common.hammer.kneebend_anim_frame <= FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES) && 
-    (fp->input.button_tap_prev & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP)))
+    (fp->input.pl.button_tap_prev & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP)))
     {
         fp->status_vars.common.hammer.is_short_hop = TRUE;
     }
@@ -23,9 +23,9 @@ void func_ovl3_80147F54(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->status_vars.common.hammer.jump_force < fp->input.stick_range.y)
+    if (fp->status_vars.common.hammer.jump_force < fp->input.pl.stick_range.y)
     {
-        fp->status_vars.common.hammer.jump_force = fp->input.stick_range.y;
+        fp->status_vars.common.hammer.jump_force = fp->input.pl.stick_range.y;
     }
 }
 
@@ -36,7 +36,7 @@ void func_ovl3_80147F88(GObj *fighter_gobj, s32 input_source)
     ftStatus_Update(fighter_gobj, ftStatus_Common_HammerKneeBend, func_ovl2_800F3828(fighter_gobj), 1.0F, func_ovl2_800F385C(fighter_gobj));
     func_ovl2_800F388C(fighter_gobj);
 
-    fp->status_vars.common.hammer.jump_force = fp->input.stick_range.y;
+    fp->status_vars.common.hammer.jump_force = fp->input.pl.stick_range.y;
     fp->status_vars.common.hammer.kneebend_anim_frame = 0.0F;
     fp->status_vars.common.hammer.input_source = input_source;
     fp->status_vars.common.hammer.is_short_hop = FALSE;

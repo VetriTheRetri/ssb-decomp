@@ -33,7 +33,7 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
         {
             if (func_ovl3_80149D80(fighter_gobj) == FALSE)
             {
-                if ((func_ovl3_8014F69C(fighter_gobj) == FALSE) && (((fp->input.stick_range.x * fp->lr) >= 0) || (func_ovl3_8013ED64(fighter_gobj) == FALSE)))
+                if ((func_ovl3_8014F69C(fighter_gobj) == FALSE) && (((fp->input.pl.stick_range.x * fp->lr) >= 0) || (func_ovl3_8013ED64(fighter_gobj) == FALSE)))
                 {
                     if (func_ovl3_80148D2C(fighter_gobj, (s32) (20.0F - fighter_gobj->anim_frame)) != FALSE)
                     {
@@ -94,9 +94,9 @@ bool32 func_ovl3_8013ED64(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
+    if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
     {
-        if ((fp->input.stick_range.x * fp->lr) < 0)
+        if ((fp->input.pl.stick_range.x * fp->lr) < 0)
         {
             func_ovl3_8013E9A8(fighter_gobj);
 
@@ -114,7 +114,7 @@ bool32 func_ovl3_8013EDFC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->input.stick_range.x * fp->status_vars.common.turn.lr_turn) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
+    if (((fp->input.pl.stick_range.x * fp->status_vars.common.turn.lr_turn) >= FTCOMMON_DASH_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_DASH_BUFFER_FRAMES_MAX))
     {
         fp->status_vars.common.turn.lr_dash = fp->status_vars.common.turn.lr_turn;
         fp->status_vars.common.turn.unk_0x14 = 0;

@@ -25,8 +25,8 @@ void func_ovl3_801587B0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    s32 vel_x = (ABS(fp->input.stick_range.x) >= 8) ? fp->input.stick_range.x : 0;
-    s32 vel_y = (ABS(fp->input.stick_range.y) >= 8) ? fp->input.stick_range.y : 0;
+    s32 vel_x = (ABS(fp->input.pl.stick_range.x) >= 8) ? fp->input.pl.stick_range.x : 0;
+    s32 vel_y = (ABS(fp->input.pl.stick_range.y) >= 8) ? fp->input.pl.stick_range.y : 0;
 
     fp->phys_info.vel_air.x = (f32)vel_x;
     fp->phys_info.vel_air.y = (f32)vel_y;
@@ -51,7 +51,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
 
     if (fp->input.button_press & fp->input.button_mask_b)
     {
-        if ((fp->input.stick_range.x * fp->lr) >= 20)
+        if ((fp->input.pl.stick_range.x * fp->lr) >= 20)
         {
             if (ABSF(angle) <= 0.87266463F)
             {
@@ -60,12 +60,12 @@ void func_ovl3_80158824(GObj *fighter_gobj)
                 return;
             }
         }
-        if ((fp->input.stick_range.y >= 20) && (0.87266463F < angle))
+        if ((fp->input.pl.stick_range.y >= 20) && (0.87266463F < angle))
         {
             func_ovl3_80159524(fighter_gobj);
             return;
         }
-        else if ((fp->input.stick_range.y < -19) && (angle < -0.87266463F))
+        else if ((fp->input.pl.stick_range.y < -19) && (angle < -0.87266463F))
         {
             if ((fp_target->coll_data.ground_line_id != -1) && (fp_target->coll_data.ground_line_id != -2))
             {
@@ -80,32 +80,32 @@ void func_ovl3_80158824(GObj *fighter_gobj)
     }
     else if (fp->input.button_press & fp->input.button_mask_a)
     {
-        if ((ABS(fp->input.stick_range.x) >= 56) && ((s32)fp->tap_stick_x < 3))
+        if ((ABS(fp->input.pl.stick_range.x) >= 56) && ((s32)fp->tap_stick_x < 3))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 3000.0F, 0);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A374, &sp30);
             return;
         }
 
-        else if ((fp->input.stick_range.y >= 53) && ((s32)fp->tap_stick_y < 4))
+        else if ((fp->input.pl.stick_range.y >= 53) && ((s32)fp->tap_stick_y < 4))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 600.0F, 0);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A7C4, &sp30);
             return;
         }
-        else if ((fp->input.stick_range.y < -52) && ((s32)fp->tap_stick_y < 4))
+        else if ((fp->input.pl.stick_range.y < -52) && ((s32)fp->tap_stick_y < 4))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 600.0F, 0);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015ACD4, &sp30);
             return;
         }
-        else if (((fp->input.stick_range.x * fp->lr) >= 20) && (angle <= 0.87266463F))
+        else if (((fp->input.pl.stick_range.x * fp->lr) >= 20) && (angle <= 0.87266463F))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 3000.0F, 100.0F);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A314, &sp30);
             return;
         }
-        else if ((fp->input.stick_range.y >= 20) && (0.87266463F < angle))
+        else if ((fp->input.pl.stick_range.y >= 20) && (0.87266463F < angle))
         {
             if ((fp_target->coll_data.ground_line_id != -1) && (fp_target->coll_data.ground_line_id != -2))
             {
@@ -114,7 +114,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
                 return;
             }
         }
-        if ((fp->input.stick_range.y < -19) && (angle < -0.87266463F))
+        if ((fp->input.pl.stick_range.y < -19) && (angle < -0.87266463F))
         {
             func_ovl3_801580E0(fighter_gobj, &sp30);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_801594BC, &sp30);

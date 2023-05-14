@@ -160,7 +160,7 @@ void func_ovl3_80147434(GObj *fighter_gobj)
     Vec3f gfx_spark_scatter;
     Vec3f gfx_dust_offset;
 
-    if (!(fp->input.button_hold & fp->input.button_mask_a))
+    if (!(fp->input.pl.button_hold & fp->input.button_mask_a))
     {
         fp->status_vars.common.fireflower.is_release = TRUE;
     }

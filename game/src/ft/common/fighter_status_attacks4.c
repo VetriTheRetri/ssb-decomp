@@ -126,7 +126,7 @@ bool32 func_ovl3_801501E0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (((fp->input.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.button_tap & fp->input.button_mask_a))
+    if (((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         GObj *article_gobj = fp->item_hold;
 
@@ -134,7 +134,7 @@ bool32 func_ovl3_801501E0(GObj *fighter_gobj)
         {
             Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-            if ((fp->input.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (func_ovl3_80172890(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (func_ovl3_80172890(article_gobj) != FALSE)))
             {
                 func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowF4);
 
@@ -166,7 +166,7 @@ bool32 func_ovl3_8015030C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (((fp->input.stick_range.x * fp->status_vars.common.attack4.lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.button_tap & fp->input.button_mask_a))
+    if (((fp->input.pl.stick_range.x * fp->status_vars.common.attack4.lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         GObj *article_gobj = fp->item_hold;
 
@@ -174,9 +174,9 @@ bool32 func_ovl3_8015030C(GObj *fighter_gobj)
         {
             Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-            if ((fp->input.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (func_ovl3_80172890(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (func_ovl3_80172890(article_gobj) != FALSE)))
             {
-                func_ovl3_80146690(fighter_gobj, ((fp->input.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
+                func_ovl3_80146690(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 
                 return TRUE;
             }
@@ -209,7 +209,7 @@ bool32 func_ovl3_80150470(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if ((ABS(fp->input.stick_range.x) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_ATTACKS4_BUFFER_FRAMES_MAX) && (fp->input.button_tap & fp->input.button_mask_a))
+    if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_ATTACKS4_BUFFER_FRAMES_MAX) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         GObj *article_gobj = fp->item_hold;
 
@@ -217,9 +217,9 @@ bool32 func_ovl3_80150470(GObj *fighter_gobj)
         {
             Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-            if ((fp->input.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (func_ovl3_80172890(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (func_ovl3_80172890(article_gobj) != FALSE)))
             {
-                func_ovl3_80146690(fighter_gobj, ((fp->input.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
+                func_ovl3_80146690(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 
                 return TRUE;
             }

@@ -64,7 +64,7 @@ void func_ovl3_80163850(GObj *fighter_gobj)
 
     fp->command_vars.flags.flag0 = 0;
 
-    if ((ABS(fp->input.stick_range.x) >= FTLINK_BOOMERANG_SMASH_STICK_MIN) && (fp->hold_stick_x < FTLINK_BOOMERANG_SMASH_BUFFER))
+    if ((ABS(fp->input.pl.stick_range.x) >= FTLINK_BOOMERANG_SMASH_STICK_MIN) && (fp->hold_stick_x < FTLINK_BOOMERANG_SMASH_BUFFER))
     {
         fp->status_vars.link.specialn.is_smash = TRUE;
 

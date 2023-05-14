@@ -32,7 +32,7 @@ bool32 func_ovl3_8013F0A0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.stick_range.x * fp->lr) < FTCOMMON_RUN_STICK_RANGE_MIN)
+    if ((fp->input.pl.stick_range.x * fp->lr) < FTCOMMON_RUN_STICK_RANGE_MIN)
     {
         func_ovl3_8013F05C(fighter_gobj, 1);
 
@@ -45,7 +45,7 @@ bool32 func_ovl3_8013F0EC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (ABS(fp->input.stick_range.x) < FTCOMMON_RUN_STICK_RANGE_MIN)
+    if (ABS(fp->input.pl.stick_range.x) < FTCOMMON_RUN_STICK_RANGE_MIN)
     {
         func_ovl3_8013F05C(fighter_gobj, 0);
 

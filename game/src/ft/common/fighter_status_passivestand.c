@@ -19,9 +19,9 @@ bool32 func_ovl3_80144760(GObj *fighter_gobj)
 
     if (fp->time_since_last_z < FTCOMMON_PASSIVE_BUFFER_FRAMES_MAX)
     {
-        if (ABS(fp->input.stick_range.x) >= FTCOMMON_PASSIVE_F_OR_B_RANGE)
+        if (ABS(fp->input.pl.stick_range.x) >= FTCOMMON_PASSIVE_F_OR_B_RANGE)
         {
-            if ((fp->input.stick_range.x * fp->lr) >= 0)
+            if ((fp->input.pl.stick_range.x * fp->lr) >= 0)
             {
                 status_id = ftStatus_Common_PassiveStandF;
             }

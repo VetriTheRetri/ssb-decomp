@@ -18,13 +18,13 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag1 == FALSE)
     {
-        stick_x = ABS(fp->input.stick_range.x);
+        stick_x = ABS(fp->input.pl.stick_range.x);
 
         if (stick_x >= (FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD + 1))
         {
-            stick_x = (fp->input.stick_range.x > 0) ? FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD : -FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD;
+            stick_x = (fp->input.pl.stick_range.x > 0) ? FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD : -FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD;
 
-            rot_z = (f32)((fp->input.stick_range.x - stick_x) * FTMARIO_SUPERJUMP_AIR_DRIFT);
+            rot_z = (f32)((fp->input.pl.stick_range.x - stick_x) * FTMARIO_SUPERJUMP_AIR_DRIFT);
 
             rot_z = -(((f32)rot_z * PI32) / 180.0F);
 
@@ -43,7 +43,7 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
     {
         fp->command_vars.flags.flag2 = FALSE;
 
-        stick_x = ABS(fp->input.stick_range.x);
+        stick_x = ABS(fp->input.pl.stick_range.x);
 
         if (stick_x >= 21)
         {
@@ -93,7 +93,7 @@ bool32 func_ovl3_80156320(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->coll_data.ground_flags & 0x4000) == FALSE) || (fp->input.stick_range.y >= FTMARIO_SUPERJUMP_STICK_Y_UNK))
+    if (((fp->coll_data.ground_flags & 0x4000) == FALSE) || (fp->input.pl.stick_range.y >= FTMARIO_SUPERJUMP_STICK_Y_UNK))
     {
         return TRUE;
     }

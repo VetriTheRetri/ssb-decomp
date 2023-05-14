@@ -30,7 +30,7 @@ bool32 func_ovl3_8014E764(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.button_tap & fp->input.button_mask_l)
+    if (fp->input.pl.button_tap & fp->input.button_mask_l)
     {
         func_ovl3_8014E6E0(fighter_gobj);
 

@@ -21,9 +21,6 @@
 #define GMHITCOLLISION_MASK_ITEM 2 // Can interact with items
 #define GMHITCOLLISION_MASK_ARTICLE 4 // Can interact with articles
 
-#define GMCONTROLLER_RANGE_MAX_I 80                                 // Maximum control stick range in integer
-#define GMCONTROLLER_RANGE_MAX_F ((float)GMCONTROLLER_RANGE_MAX_I)  // Maximum control stick range in float
-
 typedef enum gmHitCollisionStatus
 {
     gmHitCollision_HitStatus_None, // User's hurtboxes are disabled
@@ -64,6 +61,23 @@ typedef enum gmHitCollisionUpdateState
     gmHitCollision_UpdateState_Interpolate       // Copies current position to previous
 
 } gmHitCollisionUpdateState;
+
+typedef struct gmPlayerInput
+{
+    u16 button_hold;
+    u16 button_tap;
+    u16 button_tap_prev;
+    Vec2b stick_range;
+    Vec2b stick_prev; // Previous stick range?
+
+} gmPlayerInput;
+
+typedef struct gmComputerInput
+{
+    u16 button_inputs;
+    Vec2b stick_range; // CPU stick input?
+
+} gmComputerInput;
 
 typedef union gmAttackFlags
 {

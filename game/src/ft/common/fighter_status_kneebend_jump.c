@@ -9,7 +9,7 @@ void func_ovl3_8013F2A0(GObj *fighter_gobj)
 
     if ((fp->status_vars.common.kneebend.input_source == FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON) &&
     (fp->status_vars.common.kneebend.anim_frame <= FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES) &&
-    (fp->input.button_tap_prev & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP)))
+    (fp->input.pl.button_tap_prev & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP)))
     {
         fp->status_vars.common.kneebend.is_short_hop = TRUE;
     }
@@ -27,9 +27,9 @@ void func_ovl3_8013F334(GObj *fighter_gobj)
     {
         if (func_ovl3_801506CC(fighter_gobj) == FALSE)
         {
-            if (fp->status_vars.common.kneebend.jump_force < fp->input.stick_range.y)
+            if (fp->status_vars.common.kneebend.jump_force < fp->input.pl.stick_range.y)
             {
-                fp->status_vars.common.kneebend.jump_force = fp->input.stick_range.y;
+                fp->status_vars.common.kneebend.jump_force = fp->input.pl.stick_range.y;
             }
         }
     }
@@ -41,7 +41,7 @@ void func_ovl3_8013F3A0(GObj *fighter_gobj, s32 status_id, u32 input_source)
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
 
-    fp->status_vars.common.kneebend.jump_force = fp->input.stick_range.y;
+    fp->status_vars.common.kneebend.jump_force = fp->input.pl.stick_range.y;
     fp->status_vars.common.kneebend.anim_frame = 0.0F;
     fp->status_vars.common.kneebend.input_source = input_source;
     fp->status_vars.common.kneebend.is_short_hop = FALSE;
@@ -70,7 +70,7 @@ bool32 func_ovl3_8013F450(Fighter_Struct *fp)
 
 s32 func_ovl3_8013F474(Fighter_Struct *fp)
 {
-    if ((fp->input.stick_range.y >= FTCOMMON_KNEEBEND_STICK_RANGE_MIN) && (fp->tap_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
+    if ((fp->input.pl.stick_range.y >= FTCOMMON_KNEEBEND_STICK_RANGE_MIN) && (fp->tap_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
     {
         return FTCOMMON_KNEEBEND_INPUT_TYPE_STICK;
     }
@@ -103,7 +103,7 @@ bool32 func_ovl3_8013F4D0(GObj *fighter_gobj)
 
 s32 func_ovl3_8013F53C(Fighter_Struct *fp)
 {
-    if ((fp->input.stick_range.y > FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN) && (fp->tap_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
+    if ((fp->input.pl.stick_range.y > FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN) && (fp->tap_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
     {
         return FTCOMMON_KNEEBEND_INPUT_TYPE_STICK;
     }
@@ -139,7 +139,7 @@ bool32 func_ovl3_8013F604(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 input_source = func_ovl3_8013F474(fp);
 
-    if ((input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE) && (fp->input.button_hold & fp->input.button_mask_z))
+    if ((input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE) && (fp->input.pl.button_hold & fp->input.button_mask_z))
     {
         func_ovl3_8013F42C(fighter_gobj, input_source);
 
@@ -156,15 +156,15 @@ void func_ovl3_8013F6A0(s32 stick_range_x, s32 *jump_vel_x, s32 *jump_vel_y, boo
 
     vel_x = ABS(stick_range_x);
 
-    sqrt_vel_x = sqrtf(1.0F - SQUARE(vel_x / GMCONTROLLER_RANGE_MAX_F));
+    sqrt_vel_x = sqrtf(1.0F - SQUARE(vel_x / GCONTROLLER_RANGE_MAX_F));
 
     if (is_short_hop == FALSE)
     {
         vel_y = (FTCOMMON_KNEEBEND_BUTTON_LONG_FORCE * sqrt_vel_x) + FTCOMMON_KNEEBEND_BUTTON_LONG_MIN;
 
-        if ((SQUARE(vel_x) + SQUARE(vel_y)) > SQUARE(GMCONTROLLER_RANGE_MAX_F))
+        if ((SQUARE(vel_x) + SQUARE(vel_y)) > SQUARE(GCONTROLLER_RANGE_MAX_F))
         {
-            vel_y = sqrtf(SQUARE(GMCONTROLLER_RANGE_MAX_F) - SQUARE(vel_x));
+            vel_y = sqrtf(SQUARE(GCONTROLLER_RANGE_MAX_F) - SQUARE(vel_x));
         }
         if (vel_y < FTCOMMON_KNEEBEND_BUTTON_LONG_MIN)
         {
@@ -175,9 +175,9 @@ void func_ovl3_8013F6A0(s32 stick_range_x, s32 *jump_vel_x, s32 *jump_vel_y, boo
     {
         vel_y = (FTCOMMON_KNEEBEND_BUTTON_SHORT_FORCE * sqrt_vel_x) + FTCOMMON_KNEEBEND_BUTTON_SHORT_MIN;
 
-        if ((SQUARE(vel_x) + SQUARE(vel_y)) > SQUARE(GMCONTROLLER_RANGE_MAX_F))
+        if ((SQUARE(vel_x) + SQUARE(vel_y)) > SQUARE(GCONTROLLER_RANGE_MAX_F))
         {
-            vel_y = sqrtf(SQUARE(GMCONTROLLER_RANGE_MAX_F) - SQUARE(vel_x));
+            vel_y = sqrtf(SQUARE(GCONTROLLER_RANGE_MAX_F) - SQUARE(vel_x));
         }
         if (vel_y < FTCOMMON_KNEEBEND_BUTTON_SHORT_MIN)
         {
@@ -202,19 +202,19 @@ void func_ovl3_8013F880(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
 
-    status_id = ((fp->input.stick_range.x * fp->lr) > FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE) ? ftStatus_Common_JumpF : ftStatus_Common_JumpB;
+    status_id = ((fp->input.pl.stick_range.x * fp->lr) > FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE) ? ftStatus_Common_JumpF : ftStatus_Common_JumpB;
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
 
     switch (fp->status_vars.common.hammer.input_source)
     {
     case FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON:
-        func_ovl3_8013F6A0(fp->input.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.hammer.is_short_hop);
+        func_ovl3_8013F6A0(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.hammer.is_short_hop);
         break;
 
     case FTCOMMON_KNEEBEND_INPUT_TYPE_STICK:
     default:
-        vel_x = fp->input.stick_range.x;
+        vel_x = fp->input.pl.stick_range.x;
         vel_y = fp->status_vars.common.hammer.jump_force;
 
         if (vel_y < FTCOMMON_KNEEBEND_STICK_RANGE_MIN)

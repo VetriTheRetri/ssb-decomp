@@ -40,7 +40,7 @@ bool32 func_ovl3_80148F24(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
+    if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
     {
         func_ovl3_80148E30(fighter_gobj);
 

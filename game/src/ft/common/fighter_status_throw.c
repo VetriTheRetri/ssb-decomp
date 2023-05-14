@@ -55,7 +55,7 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
     catch_gobj = this_fp->catch_gobj;
     catch_fp = FighterGetStruct(catch_gobj);
 
-    if ((is_throwf != FALSE) || ((this_fp->input.stick_range.x * this_fp->lr) >= 0))
+    if ((is_throwf != FALSE) || ((this_fp->input.pl.stick_range.x * this_fp->lr) >= 0))
     {
         if ((this_fp->ft_kind == Ft_Kind_Kirby) || (this_fp->ft_kind == Ft_Kind_PolyKirby))
         {
@@ -110,9 +110,9 @@ bool32 func_ovl3_8014A394(GObj *fighter_gobj)
     {
         is_throwf = TRUE;
     }
-    else if ((fp->input.stick_prev.x >= FTCOMMON_CATCH_THROW_STICK_RANGE_MIN) || (fp->input.stick_range.x < FTCOMMON_CATCH_THROW_STICK_RANGE_MIN))
+    else if ((fp->input.pl.stick_prev.x >= FTCOMMON_CATCH_THROW_STICK_RANGE_MIN) || (fp->input.pl.stick_range.x < FTCOMMON_CATCH_THROW_STICK_RANGE_MIN))
     {
-        if ((fp->input.stick_prev.x <= -FTCOMMON_CATCH_THROW_STICK_RANGE_MIN) || (fp->input.stick_range.x > -FTCOMMON_CATCH_THROW_STICK_RANGE_MIN))
+        if ((fp->input.pl.stick_prev.x <= -FTCOMMON_CATCH_THROW_STICK_RANGE_MIN) || (fp->input.pl.stick_range.x > -FTCOMMON_CATCH_THROW_STICK_RANGE_MIN))
         {
             return FALSE;
         }
