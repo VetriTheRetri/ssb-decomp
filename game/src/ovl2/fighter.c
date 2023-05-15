@@ -123,7 +123,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->attack1_followup_frames = 0.0F;
     fp->unk_ft_0x7A0 = 0.0F;
     fp->attack_knockback = 0.0F;
-    fp->attack_damage_stale = 0.0F;
+    fp->attack_rebound = 0.0F;
     fp->damage_knockback_again = 0.0F;
     fp->knockback_resist_status = 0.0F;
     fp->knockback_resist_passive = 0.0F;

@@ -1866,3 +1866,18 @@ void func_ovl2_800E26BC(Fighter_Struct *fp, s32 group_id, GObj *victim_gobj, s32
         }
     }
 }
+
+void func_ovl2_800E287C(GObj *attacker_gobj, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *victim_gobj)
+{
+    if (fp->attack_damage < ft_hit->damage)
+    {
+        fp->attack_damage = ft_hit->damage;
+
+        if ((ft_hit->clang) && (fp->ground_or_air == ground))
+        {
+            fp->attack_rebound = (fp->attack_damage * 1.62F) + 4.0F;
+
+            fp->lr_attack = (DObjGetStruct(attacker_gobj)->translate.x < DObjGetStruct(victim_gobj)->translate.x) ? RIGHT : LEFT;
+        }
+    }
+}

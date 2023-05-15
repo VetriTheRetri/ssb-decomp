@@ -31,9 +31,9 @@ void func_ovl3_80144AB0(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ReboundWait, 0.0F, 1.0F, 0U);
 
-    fp->status_vars.common.rebound.anim_speed = fp->attributes->rebound_anim_length / fp->attack_damage_stale;
+    fp->status_vars.common.rebound.anim_speed = fp->attributes->rebound_anim_length / fp->attack_rebound;
 
-    fp->status_vars.common.rebound.rebound_timer = fp->attack_damage_stale;
+    fp->status_vars.common.rebound.rebound_timer = fp->attack_rebound;
 
     if (fp->lr == fp->lr_attack)
     {

@@ -1007,7 +1007,7 @@ struct Fighter_Struct
     f32 attack_knockback;
     u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
     s32 attack_damage;
-    f32 attack_damage_stale; // Actually 2x staled damage?
+    f32 attack_rebound; // Actually 2x staled damage?
     s32 shield_damage;
     u8 filler_0x7B4[0x7D0 - 0x7CC];
     s32 lr_shield;
