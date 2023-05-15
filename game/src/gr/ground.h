@@ -52,11 +52,23 @@ typedef enum grKind
     Gr_kind_PKirby,
     Gr_Kind_PPikachu,
     Gr_Kind_PPurin,
-    Gr_Kind_PNess,
+    Gr_Kind_PNess, // Please don't laugh
 
     Gr_Kind_CustomStart // Start of custom stages
 
 } grKind;
+
+typedef struct grMapObject
+{
+    GObj *ogobj;
+    bool32 (*proc_update)(GObj*, GObj*, s32*);
+
+} grMapObject;
+
+static grMapObject D_ovl2_80131180[2];
+static grMapObject D_ovl2_80131190[1];
+static s32 D_ovl2_80131198;
+static s32 D_ovl2_8013119C;
 
 /*
 

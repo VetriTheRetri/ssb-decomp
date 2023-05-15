@@ -149,7 +149,7 @@ bool32 func_ovl3_801737EC(GObj *article_gobj, u32 check_flags, f32 mod_vel, Vec3
     Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
     Vec3f mod_pos;
     bool32 return_bool = FALSE;
-    u16 coll_flags = (ap->coll_data.unk_0x54 ^ ap->coll_data.coll_mask) & ap->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
+    u16 coll_flags = (ap->coll_data.coll_mask_prev ^ ap->coll_data.coll_mask) & ap->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
 
     if (coll_flags & check_flags & MPCOLL_MASK_RWALL)
     {

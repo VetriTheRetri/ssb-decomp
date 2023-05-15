@@ -2736,7 +2736,7 @@ bool32 func_ovl2_800DEA20(Coll_Data *coll_data, GObj *fighter_gobj, bool32 arg2)
 
             coll_data->unk_0x64 = TRUE;
         }
-        else if (!(coll_data->unk_0x54 & MPCOLL_MASK_RWALL))
+        else if (!(coll_data->coll_mask_prev & MPCOLL_MASK_RWALL))
         {
             fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_RWALL;
         }
@@ -2753,7 +2753,7 @@ bool32 func_ovl2_800DEA20(Coll_Data *coll_data, GObj *fighter_gobj, bool32 arg2)
 
             coll_data->unk_0x64 = TRUE;
         }
-        else if (!(coll_data->unk_0x54 & MPCOLL_MASK_LWALL))
+        else if (!(coll_data->coll_mask_prev & MPCOLL_MASK_LWALL))
         {
             fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_LWALL;
         }
@@ -2774,7 +2774,7 @@ bool32 func_ovl2_800DEA20(Coll_Data *coll_data, GObj *fighter_gobj, bool32 arg2)
 
             coll_data->unk_0x64 = TRUE;
         }
-        else if (!(coll_data->unk_0x54 & MPCOLL_MASK_CEIL))
+        else if (!(coll_data->coll_mask_prev & MPCOLL_MASK_CEIL))
         {
             fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_CEIL;
         }
@@ -2818,7 +2818,7 @@ bool32 func_ovl2_800DEA20(Coll_Data *coll_data, GObj *fighter_gobj, bool32 arg2)
                 {
                     func_ovl2_800D9F84(coll_data);
 
-                    if (!(coll_data->unk_0x54 & MPCOLL_MASK_GROUND))
+                    if (!(coll_data->coll_mask_prev & MPCOLL_MASK_GROUND))
                     {
                         fp->status_vars.common.damage.coll_mask_unk |= MPCOLL_MASK_GROUND;
 

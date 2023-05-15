@@ -483,7 +483,7 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
 
         if (ip->cb_coll != NULL)
         {
-            ip->coll_data.unk_0x54 = ip->coll_data.coll_mask;
+            ip->coll_data.coll_mask_prev = ip->coll_data.coll_mask;
             ip->coll_data.coll_mask = 0U;
             ip->coll_data.unk_0x64 = 0;
             ip->coll_data.coll_type = 0;

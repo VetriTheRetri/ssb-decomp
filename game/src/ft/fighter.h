@@ -521,9 +521,12 @@ typedef struct _Fighter_Hit
     u32 attack_id : 6;
     gmAttackFlags flags_hi;
     gmAttackFlags flags_lw;
-    u8 filler_0x40[0x5C - 0x44];
+    Vec3f pos;
+    Vec3f pos_prev;
     FighterHitArray hit_targets[4];
-    u8 filler[0xC4 - 0x7C];
+    s32 unk_fthit_0x7C;
+    u8 filler[0xC0 - 0x80];
+    f32 unk_fthit_0xC0;
 
 } Fighter_Hit;
 

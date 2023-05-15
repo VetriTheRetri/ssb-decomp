@@ -45,7 +45,7 @@ typedef struct _Coll_Data
     ObjectColl object_coll;
     ObjectColl *p_object_coll; // Points back to collision box???
     Vec2f cliffcatch_coll;
-    u16 unk_0x54;
+    u16 coll_mask_prev;
     u16 coll_mask;
     u16 unk_0x58;
     u16 coll_type; // "Flag that relates to type of clipping?"

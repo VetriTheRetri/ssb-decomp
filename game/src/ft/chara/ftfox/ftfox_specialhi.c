@@ -203,7 +203,7 @@ void func_ovl3_8015C29C(GObj *fighter_gobj)
 
     if (func_ovl2_800DE758(fighter_gobj, func_ovl3_8015C264) != FALSE)
     {
-        coll_mask = (fp->coll_data.unk_0x54 ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & MPCOLL_MASK_GROUND;
+        coll_mask = (fp->coll_data.coll_mask_prev ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & MPCOLL_MASK_GROUND;
 
         if (((coll_mask & MPCOLL_MASK_GROUND) == 0) || (func_ovl0_800C7C98(&fp->phys_info.vel_air, &fp->coll_data.ground_angle, FTFOX_FIREFOX_COLL_ANGLE_UNK) == FALSE))
         {
@@ -218,7 +218,7 @@ void func_ovl3_8015C29C(GObj *fighter_gobj)
         goto coll_end;
     }
 
-    coll_mask = (fp->coll_data.unk_0x54 ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) & 0xFFFF;
+    coll_mask = (fp->coll_data.coll_mask_prev ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) & 0xFFFF;
 
     if (coll_mask & MPCOLL_MASK_CEIL)
     {

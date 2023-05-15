@@ -806,7 +806,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
         }
         if (ap->cb_coll != NULL)
         {
-            ap->coll_data.unk_0x54 = ap->coll_data.coll_mask;
+            ap->coll_data.coll_mask_prev = ap->coll_data.coll_mask;
             ap->coll_data.coll_mask = 0U;
             ap->coll_data.unk_0x64 = 0;
             ap->coll_data.coll_type = 0;
@@ -861,7 +861,8 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
                 at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
                 break;
 
-            default: break;
+            default: 
+                break;
             }
             break;
         }
@@ -897,7 +898,6 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
             at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
             break;
 
-
         case gmHitCollision_Type_Hit:
             at_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
             break;
@@ -907,7 +907,8 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
             at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
             break;
 
-        default: break;
+        default: 
+            break;
         }
     }
 }
