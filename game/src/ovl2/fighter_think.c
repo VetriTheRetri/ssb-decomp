@@ -1813,15 +1813,15 @@ void func_ovl2_800E26BC(Fighter_Struct *fp, s32 group_id, GObj *victim_gobj, s32
                     switch (hitbox_type)
                     {
                     case gmHitCollision_Type_Hurt:
-                        fp->fighter_hit[i].hit_targets[j].victim_flags.flags_b0 = TRUE;
+                        fp->fighter_hit[i].hit_targets[j].victim_flags.is_interact_hurt = TRUE;
                         break;
 
                     case gmHitCollision_Type_Shield:
-                        fp->fighter_hit[i].hit_targets[j].victim_flags.flags_b1 = TRUE;
+                        fp->fighter_hit[i].hit_targets[j].victim_flags.is_interact_shield = TRUE;
                         break;
 
                     case gmHitCollision_Type_Hit:
-                        fp->fighter_hit[i].hit_targets[j].victim_flags.flags_b456 = interact_mask;
+                        fp->fighter_hit[i].hit_targets[j].victim_flags.interact_mask = interact_mask;
                         break;
 
                     default:
@@ -1843,15 +1843,15 @@ void func_ovl2_800E26BC(Fighter_Struct *fp, s32 group_id, GObj *victim_gobj, s32
                 switch (hitbox_type)
                 {
                 case gmHitCollision_Type_Hurt:
-                    fp->fighter_hit[i].hit_targets[j].victim_flags.flags_b0 = TRUE;
+                    fp->fighter_hit[i].hit_targets[j].victim_flags.is_interact_hurt = TRUE;
                     break;
 
                 case gmHitCollision_Type_Shield:
-                    fp->fighter_hit[i].hit_targets[j].victim_flags.flags_b1 = TRUE;
+                    fp->fighter_hit[i].hit_targets[j].victim_flags.is_interact_shield = TRUE;
                     break;
 
                 case gmHitCollision_Type_Hit:
-                    fp->fighter_hit[i].hit_targets[j].victim_flags.flags_b456 = interact_mask;
+                    fp->fighter_hit[i].hit_targets[j].victim_flags.interact_mask = interact_mask;
                     break;
 
                 default:

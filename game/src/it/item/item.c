@@ -415,9 +415,9 @@ void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
                     {
                         targets->victim_gobj = NULL;
 
-                        targets->victim_flags.flags_b0 = targets->victim_flags.flags_b1 = targets->victim_flags.flags_b2 = targets->victim_flags.flags_b3 = FALSE;
+                        targets->victim_flags.is_interact_hurt = targets->victim_flags.is_interact_shield = targets->victim_flags.is_interact_reflect = targets->victim_flags.is_interact_absorb = FALSE;
 
-                        targets->victim_flags.flags_b456 = 7;
+                        targets->victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
                     }
                 }
             }
@@ -500,7 +500,7 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
     }
 }
 
-void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s32 arg3)
+void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u32 interact_mask)
 {
     s32 i;
 
@@ -511,33 +511,33 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s3
             switch (hitbox_type)
             {
             case gmHitCollision_Type_Hurt:
-                it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+                it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
                 break;
 
             case gmHitCollision_Type_Shield:
-                it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+                it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 break;
 
             case gmHitCollision_Type_Unk:
-                it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+                it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Reflect:
-                it_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+                it_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Absorb:
-                it_hit->hit_targets[i].victim_flags.flags_b3 = TRUE;
+                it_hit->hit_targets[i].victim_flags.is_interact_absorb = TRUE;
                 break;
 
             case gmHitCollision_Type_Hit:
-                it_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
+                it_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
                 break;
 
             case gmHitCollision_Type_ArticleHurt:
-                it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+                it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
@@ -560,33 +560,33 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s3
         switch (hitbox_type)
         {
         case gmHitCollision_Type_Hurt:
-            it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+            it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
             break;
 
         case gmHitCollision_Type_Shield:
-            it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+            it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             break;
 
         case gmHitCollision_Type_Unk:
-            it_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+            it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Reflect:
-            it_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+            it_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Absorb:
-            it_hit->hit_targets[i].victim_flags.flags_b3 = TRUE;
+            it_hit->hit_targets[i].victim_flags.is_interact_absorb = TRUE;
             break;
 
         case gmHitCollision_Type_Hit:
-            it_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
+            it_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
             break;
 
         case gmHitCollision_Type_ArticleHurt:
-            it_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+            it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
@@ -595,7 +595,7 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, s3
     }
 }
 
-void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gobj, s32 hitbox_type, s32 arg4)
+void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gobj, s32 hitbox_type, u32 interact_mask)
 {
     if (this_ip->group_id != 0)
     {
@@ -609,7 +609,7 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
 
                 if (victim_ip->group_id == this_ip->group_id)
                 {
-                    func_ovl3_80166594(&victim_ip->item_hit, target_gobj, hitbox_type, arg4);
+                    func_ovl3_80166594(&victim_ip->item_hit, target_gobj, hitbox_type, interact_mask);
                 }
                 victim_gobj = victim_gobj->group_gobj_next;
 
@@ -663,7 +663,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
     GObj *other_gobj;
     Item_Struct *this_ip, *other_ip;
     Item_Hit *other_hit, *this_hit;
-    ItemHitVictimFlags these_flags, those_flags;
+    gmHitCollisionFlags these_flags, those_flags;
     s32 m, n, i, j;
     bool32 is_check_self;
 

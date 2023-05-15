@@ -121,21 +121,10 @@ typedef struct ItemHitUnk
 
 } ItemHitUnk;
 
-typedef struct ItemHitVictimFlags
-{
-    u32 flags_b0 : 1;
-    u32 flags_b1 : 1;
-    u32 flags_b2 : 1;
-    u32 flags_b3 : 1;
-    u32 flags_b456 : 3;
-    u32 timer_rehit : 6;
-
-} ItemHitVictimFlags;
-
 typedef struct _ItemHitArray
 {
     GObj *victim_gobj;
-    ItemHitVictimFlags victim_flags;
+    gmHitCollisionFlags victim_flags;
 
 } ItemHitArray;
 

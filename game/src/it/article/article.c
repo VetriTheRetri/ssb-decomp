@@ -689,9 +689,9 @@ void func_ovl3_8016F3D4(GObj *article_gobj)
                     {
                         targets->victim_gobj = NULL;
 
-                        targets->victim_flags.flags_b0 = targets->victim_flags.flags_b1 = targets->victim_flags.flags_b2 = FALSE;
+                        targets->victim_flags.is_interact_hurt = targets->victim_flags.is_interact_shield = targets->victim_flags.is_interact_reflect = FALSE;
 
-                        targets->victim_flags.flags_b456 = 7;
+                        targets->victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
                     }
                 }
             }
@@ -824,7 +824,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
     func_ovl3_801713B0(article_gobj);
 }
 
-void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type, s32 arg3)
+void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type, u32 interact_mask)
 {
     s32 i;
 
@@ -835,29 +835,29 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
             switch (hitbox_type)
             {
             case gmHitCollision_Type_Hurt:
-                at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+                at_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
                 break;
 
             case gmHitCollision_Type_Shield:
-                at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+                at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 break;
 
             case gmHitCollision_Type_Unk:
-                at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+                at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Reflect:
-                at_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+                at_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
                 at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Hit:
-                at_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
+                at_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
                 break;
 
             case gmHitCollision_Type_ArticleHurt:
-                at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+                at_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
                 at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
                 break;
 
@@ -881,29 +881,29 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
         switch (hitbox_type)
         {
         case gmHitCollision_Type_Hurt:
-            at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+            at_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
             break;
 
         case gmHitCollision_Type_Shield:
-            at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+            at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             break;
 
         case gmHitCollision_Type_Unk:
-            at_hit->hit_targets[i].victim_flags.flags_b1 = TRUE;
+            at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Reflect:
-            at_hit->hit_targets[i].victim_flags.flags_b2 = TRUE;
+            at_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
             at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Hit:
-            at_hit->hit_targets[i].victim_flags.flags_b456 = arg3;
+            at_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
             break;
 
         case gmHitCollision_Type_ArticleHurt:
-            at_hit->hit_targets[i].victim_flags.flags_b0 = TRUE;
+            at_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
             at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
             break;
 
@@ -1268,7 +1268,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
     GObj *other_gobj;
     u32 team;
     Fighter_Hit *ft_hit;
-    FighterHitVictimFlags fighter_victim_flags;
+    gmHitCollisionFlags fighter_victim_flags;
     Article_Hurt *at_hurt;
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Fighter_Struct *fp;
@@ -1301,9 +1301,9 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 
                                     if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ap->ground_or_air == air) && (ft_hit->is_hit_air) || (ap->ground_or_air == ground) && (ft_hit->is_hit_ground)))
                                     {
-                                        fighter_victim_flags.flags_b0 = fighter_victim_flags.flags_b1 = FALSE;
+                                        fighter_victim_flags.is_interact_hurt = fighter_victim_flags.is_interact_shield = FALSE;
 
-                                        fighter_victim_flags.flags_b456 = 7;
+                                        fighter_victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
 
                                         for (j = 0; j < ARRAY_COUNT(ft_hit->hit_targets); j++)
                                         {
@@ -1314,7 +1314,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
                                             }
                                         }
 
-                                        if ((!(fighter_victim_flags.flags_b0)) && (!(fighter_victim_flags.flags_b1)) && (fighter_victim_flags.flags_b456 == 7))
+                                        if ((!(fighter_victim_flags.is_interact_hurt)) && (!(fighter_victim_flags.is_interact_shield)) && (fighter_victim_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)))
                                         {
                                             D_ovl2_801311A0[i] = TRUE;
                                             k++;
@@ -1365,7 +1365,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
     Article_Struct *this_ap;
     GObj *other_gobj;
     Article_Hit *other_hit;
-    ArticleHitVictimFlags these_flags, those_flags;
+    gmHitCollisionFlags these_flags, those_flags;
     s32 i, j, m, n;
     bool32 is_check_self;
     Article_Hurt *at_hurt;
@@ -1494,8 +1494,8 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
     Article_Struct *ap;
     GObj *item_gobj;
     Item_Hit *it_hit;
-    ArticleHitVictimFlags these_flags;
-    ItemHitVictimFlags those_flags;
+    gmHitCollisionFlags these_flags;
+    gmHitCollisionFlags those_flags;
     s32 i, j, m, n;
     bool32 is_check_self;
     Article_Hurt *at_hurt;

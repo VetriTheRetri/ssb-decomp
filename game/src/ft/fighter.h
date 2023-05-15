@@ -379,17 +379,6 @@ typedef enum ftSpecialStatus
 
 } ftSpecialStatus;
 
-typedef struct FighterHitVictimFlags
-{
-    u32 flags_b0 : 1;
-    u32 flags_b1 : 1;
-    u32 flags_b2 : 1;
-    u32 flags_b3 : 1;
-    u32 flags_b456 : 3;
-    u32 timer_rehit : 6;
-
-} FighterHitVictimFlags;
-
 typedef struct FighterAnimFlags
 {
     union
@@ -439,7 +428,7 @@ typedef struct FighterAnimFlags
 typedef struct FighterHitArray
 {
     GObj *victim_gobj;
-    FighterHitVictimFlags victim_flags;
+    gmHitCollisionFlags victim_flags;
 
 } FighterHitArray;
 

@@ -62,6 +62,17 @@ typedef enum gmHitCollisionUpdateState
 
 } gmHitCollisionUpdateState;
 
+typedef struct gmHitCollisionFlags
+{
+    u32 is_interact_hurt : 1;
+    u32 is_interact_shield : 1;
+    u32 is_interact_reflect : 1;
+    u32 is_interact_absorb : 1;
+    u32 interact_mask : 3;
+    u32 timer_rehit : 6;
+
+} gmHitCollisionFlags;
+
 typedef struct gmPlayerInput
 {
     u16 button_hold;

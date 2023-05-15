@@ -3,14 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ft",
     "\\game\\src\\gm",
     "\\game\\src\\gr",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\mp",
+    "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\gr\\ground_init.c",
+  "SelectedNode": "\\game\\src\\it\\article\\article.c",
   "PreviewInSolutionExplorer": false
 }

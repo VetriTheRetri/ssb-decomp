@@ -170,17 +170,6 @@ typedef struct ArticleSpawnData
 
 extern ArticleFileData *Article_File_Data; // WARNING: This pointer exists in multiple areas and appears not to be exclusive to the Article section of Overlay 3 (0x8018D040)
 
-typedef struct ArticleHitVictimFlags
-{
-    u32 flags_b0 : 1;
-    u32 flags_b1 : 1;
-    u32 flags_b2 : 1;
-    u32 flags_b3 : 1;
-    u32 flags_b456 : 3;
-    u32 timer_rehit : 6;
-
-} ArticleHitVictimFlags;
-
 typedef struct ArticleHitUnk
 {
     Vec3f pos;
@@ -194,7 +183,7 @@ typedef struct ArticleHitUnk
 typedef struct _ArticleHitArray
 {
     GObj *victim_gobj;
-    ArticleHitVictimFlags victim_flags;
+    gmHitCollisionFlags victim_flags;
 
 } ArticleHitArray;
 

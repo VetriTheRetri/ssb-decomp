@@ -108,11 +108,11 @@ void func_ovl3_80168158(Item_Struct *ip) // Clear hit victims array
 
         targets->victim_gobj = NULL;
 
-        targets->victim_flags.flags_b0 = targets->victim_flags.flags_b1 = targets->victim_flags.flags_b2 = targets->victim_flags.flags_b3 = FALSE;
+        targets->victim_flags.is_interact_hurt = targets->victim_flags.is_interact_shield = targets->victim_flags.is_interact_reflect = targets->victim_flags.is_interact_absorb = FALSE;
 
         targets->victim_flags.timer_rehit = 0;
 
-        targets->victim_flags.flags_b456 = 7;
+        targets->victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
     }
 }
 

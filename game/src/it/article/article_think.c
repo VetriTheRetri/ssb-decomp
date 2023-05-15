@@ -97,11 +97,11 @@ void func_ovl3_801725F8(Article_Struct *ap)
 
         targets->victim_gobj = NULL;
 
-        targets->victim_flags.flags_b0 = targets->victim_flags.flags_b1 = targets->victim_flags.flags_b2 = FALSE;
+        targets->victim_flags.is_interact_hurt = targets->victim_flags.is_interact_shield = targets->victim_flags.is_interact_reflect = FALSE;
 
         targets->victim_flags.timer_rehit = 0;
 
-        targets->victim_flags.flags_b456 = 7;
+        targets->victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
     }
 }
 
