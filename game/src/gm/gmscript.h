@@ -148,7 +148,7 @@ typedef struct gmScriptEventCreateHit1
 {
     u32 opcode : 6;
     u32 hit_id : 3;
-    u32 group_id : 3;
+    u32 interact_mask : 3;
     s32 joint_index : 7;
     u32 damage : 8;
     u32 clang : 1;

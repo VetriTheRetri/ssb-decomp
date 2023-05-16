@@ -200,7 +200,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     func_ovl3_80168158(ip);
 
     ip->hit_victim_damage = 0;
-    ip->unk_0x238 = 0;
+    ip->hit_reflect_damage = 0;
     ip->hit_attack_damage = 0;
     ip->hit_shield_damage = 0;
     ip->reflect_gobj = NULL;
@@ -752,7 +752,7 @@ void func_ovl3_80166BE4(GObj *item_gobj)
 {
     Item_Struct *ip = ItemGetStruct(item_gobj);
 
-    if ((ip->hit_victim_damage != 0) || (ip->unk_0x238 != 0)) // 0x238 = hit article damage?
+    if ((ip->hit_victim_damage != 0) || (ip->hit_reflect_damage != 0)) // 0x238 = hit article damage?
     {
         if (ip->cb_give_damage != NULL)
         {
@@ -856,7 +856,7 @@ next_check:
         }
     }
     ip->hit_victim_damage = 0;
-    ip->unk_0x238 = 0;
+    ip->hit_reflect_damage = 0;
     ip->hit_attack_damage = 0;
     ip->hit_shield_damage = 0;
     ip->reflect_gobj = NULL;

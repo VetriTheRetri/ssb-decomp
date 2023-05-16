@@ -3,14 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\gm",
-    "\\game\\src\\gr",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articleground",
+    "\\game\\src\\it\\item",
     "\\game\\src\\mp",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article.c",
+  "SelectedNode": "\\game\\src\\gm\\gmmisc.h",
   "PreviewInSolutionExplorer": false
 }

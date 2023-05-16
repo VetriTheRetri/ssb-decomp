@@ -353,7 +353,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     s32 hit_victim_damage;
     s32 lr_attack; // Direction of outgoing attack?
-    s32 unk_0x26C;
+    s32 hit_reflect_damage;
     s32 hit_attack_damage;
     s32 hit_shield_damage;
     f32 shield_collide_angle;

@@ -549,7 +549,7 @@ bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
     }
     else if (!(fp->is_ignore_blastzone_top))
     {
-        if ((Match_Info->game_type == 5) && (Match_Info->player_block[fp->port_id].is_rebirth_multi != FALSE))
+        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (Match_Info->player_block[fp->port_id].is_rebirth_multi != FALSE))
         {
             if (pos->y < Ground_Info->unk_bound_bottom)
             {

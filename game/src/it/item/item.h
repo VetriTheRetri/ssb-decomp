@@ -213,7 +213,7 @@ typedef struct _Item_Struct
     Item_Hit item_hit;          // Indexed into an array so it can (hopefully) easily be expanded later
 
     s32 hit_victim_damage;      // Set to item hitbox's final damage output when hitting a target
-    s32 unk_0x238;              // Might be self-damage?
+    s32 hit_reflect_damage;              // Might be self-damage?
     s32 hit_attack_damage;      // Set to item hitbox's final damage output when hitting another attack
     s32 hit_shield_damage;      // Set to item hitbox's final damage output when hitting a shield
     f32 shield_collide_angle;   // If this is less than 135 degrees, the item gets deflected

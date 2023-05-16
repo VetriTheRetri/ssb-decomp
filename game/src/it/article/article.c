@@ -233,7 +233,7 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->shield_collide_vec.z = 0.0F;
 
     ap->hit_victim_damage = 0;
-    ap->unk_0x26C = 0;
+    ap->hit_reflect_damage = 0;
     ap->hit_attack_damage = 0;
     ap->hit_shield_damage = 0;
     ap->reflect_gobj = NULL;
@@ -961,16 +961,16 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
 
         switch (ft_hit->element)
         {
-        case 1:
+        case gmHitCollision_Element_Fire:
             func_ovl2_800FE2F4(&sp4C, ft_hit->damage);
             break;
-        case 2:
+        case gmHitCollision_Element_Electric:
             func_ovl2_800FE4EC(&sp4C, ft_hit->damage);
             break;
-        case 4:
+        case gmHitCollision_Element_Coin:
             func_ovl2_80100ACC(&sp4C);
             break;
-        case 3:
+        case gmHitCollision_Element_Slash:
             func_ovl2_800FE6E4(&sp4C, ft_hit->damage, func_ovl2_800F0FC0(fp, ft_hit));
             break;
         default:
@@ -1080,9 +1080,9 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
     if (unk_bool != FALSE)
     {
-        if (attack_ap->unk_0x26C < damage)
+        if (attack_ap->hit_reflect_damage < damage)
         {
-            attack_ap->unk_0x26C = damage;
+            attack_ap->hit_reflect_damage = damage;
         }
     }
     else if (attack_ap->hit_victim_damage < damage)
@@ -1145,13 +1145,13 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
             switch (attack_at_hit->element)
             {
-            case 1:
+            case gmHitCollision_Element_Fire:
                 func_ovl2_800FE2F4(&sp4C, damage);
                 break;
-            case 2:
+            case gmHitCollision_Element_Electric:
                 func_ovl2_800FE4EC(&sp4C, damage);
                 break;
-            case 4:
+            case gmHitCollision_Element_Coin:
                 func_ovl2_80100ACC(&sp4C);
                 break;
 
@@ -1184,9 +1184,9 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
 
     if (unk_bool != FALSE)
     {
-        if (ip->unk_0x238 < damage)
+        if (ip->hit_reflect_damage < damage)
         {
-            ip->unk_0x238 = damage;
+            ip->hit_reflect_damage = damage;
         }
     }
     else if (ip->hit_victim_damage < damage)
@@ -1237,13 +1237,13 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
 
             switch (it_hit->element)
             {
-            case 1:
+            case gmHitCollision_Element_Fire:
                 func_ovl2_800FE2F4(&sp4C, damage);
                 break;
-            case 2:
+            case gmHitCollision_Element_Electric:
                 func_ovl2_800FE4EC(&sp4C, damage);
                 break;
-            case 4:
+            case gmHitCollision_Element_Coin:
                 func_ovl2_80100ACC(&sp4C);
                 break;
             default:
@@ -1646,7 +1646,7 @@ void func_ovl3_801710C4(GObj *article_gobj)
             }
         }
     }
-    if ((ap->hit_victim_damage != 0) || (ap->unk_0x26C != 0))
+    if ((ap->hit_victim_damage != 0) || (ap->hit_reflect_damage != 0))
     {
         if (ap->cb_give_damage != NULL)
         {
@@ -1741,7 +1741,7 @@ next_check:
     }
 
     ap->hit_victim_damage = 0;
-    ap->unk_0x26C = 0;
+    ap->hit_reflect_damage = 0;
     ap->hit_attack_damage = 0;
     ap->hit_shield_damage = 0;
     ap->reflect_gobj = NULL;

@@ -489,7 +489,7 @@ typedef struct ftSpawnInfo
 typedef struct _Fighter_Hit
 {
     gmHitCollisionUpdateState update_state;
-    s32 group_id;
+    u32 interact_mask;
     s32 joint_index;
     s32 damage;
     gmHitCollisionElement element;
@@ -953,8 +953,9 @@ struct Fighter_Struct
     u16 shuffle_timer;
     GObj *throw_gobj;
     ftKind throw_ft_kind;
-    u8 unk_0x280;
-    s32 unk_0x284;
+    u8 unk_0x280; // Thrower's team?
+    u8 throw_port_id; 
+    s32 throw_player_number;
     s32 attack_id;
 
     union
@@ -1009,10 +1010,10 @@ struct Fighter_Struct
     s32 attack_damage;
     f32 attack_rebound; // Actually 2x staled damage?
     s32 shield_damage;
-    u8 filler_0x7B4[0x7D0 - 0x7CC];
+    s32 shield_damage_total; // shield_damage + hitbox damage + hitbox shield damage, does not persist?
     s32 lr_shield;
-    s32 unk_ft_0x7D4;
-    s32 unk_ft_0x7D8;
+    s32 shield_port_id; // Port of player hitting this fighter's shield
+    s32 reflect_damage;
     s32 unk_ft_0x7DC;
     f32 damage_knockback;
     f32 knockback_resist_passive;// Passive armor, always active (?)

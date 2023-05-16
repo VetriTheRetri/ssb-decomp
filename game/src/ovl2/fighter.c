@@ -117,7 +117,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->lr_reflect = CENTER;
     fp->lr_absorb = CENTER;
 
-    fp->unk_ft_0x7D8 = 0;
+    fp->reflect_damage = 0;
     fp->special_hit = NULL;
 
     fp->attack1_followup_frames = 0.0F;

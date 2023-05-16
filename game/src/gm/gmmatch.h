@@ -50,6 +50,12 @@ typedef enum gmPauseStatus
 
 } gmPauseStatus;
 
+typedef enum gmMatchGameType
+{
+    gmMatch_GameType_1PGame = 5
+
+} gmMatchGameType;
+
 typedef enum gmSceneIndex
 {
     gmSceneIndex_Challenger_Ness = 0xF,

@@ -33,11 +33,13 @@ typedef enum gmHitCollisionStatus
 typedef enum gmHitCollisionElement
 {
     gmHitCollision_Element_Normal,
-    gmHitCollision_Element_Fire, // This continues but the rest is unconfirmed
+    gmHitCollision_Element_Fire,
     gmHitCollision_Element_Electric,
     gmHitCollision_Element_Slash,
     gmHitCollision_Element_Coin,
-    gmHitCollision_Element_Sleep // ???
+    gmHitCollision_Element_Unk1,
+    gmHitCollision_Element_Sleep,
+    gmHitCollision_Element_Unk2
 
 } gmHitCollisionElement;
 
@@ -62,6 +64,29 @@ typedef enum gmHitCollisionUpdateState
 
 } gmHitCollisionUpdateState;
 
+typedef enum gmHitCollisionSoundEffect
+{
+    gmHitCollision_SoundEffect_Punch,
+    gmHitCollision_SoundEffect_Kick,
+    gmHitCollision_SoundEffect_Coin,
+    gmHitCollision_SoundEffect_Burn,
+    gmHitCollision_SoundEffect_Zap,
+    gmHitCollision_SoundEffect_Slash,
+    gmHitCollision_SoundEffect_Fan,
+    gmHitCollision_SoundEffect_Bat,
+    gmHitCollision_SoundEffect_EnumMax
+
+} gmHitCollisionSoundEffect;
+
+typedef enum gmHitCollisionSoundLevel
+{
+    gmHitCollision_SoundLevel_Weak,
+    gmHitCollision_SoundLevel_Mid,
+    gmHitCollision_SoundLevel_Strong,
+    gmHitCollision_SoundLevel_EnumMax
+
+} gmHitCollisionSoundLevel;
+
 typedef struct gmHitCollisionFlags
 {
     u32 is_interact_hurt : 1;
@@ -72,6 +97,18 @@ typedef struct gmHitCollisionFlags
     u32 timer_rehit : 6;
 
 } gmHitCollisionFlags;
+
+typedef struct gmHitCollisionLog // Might have to return once structs are cleaned up (alas once forward declarations are implemented to replace void* with struct*)
+{
+    s32 unk_hitlog_0x0;
+    void *attacker_hit;
+    s32 unk_hitlog_0x8;
+    void *attacker_gobj;
+    void *victim_hit;
+    u8 attacker_port_id;
+    s32 attacker_player_number;
+
+} gmHitCollisionLog;
 
 typedef struct gmPlayerInput
 {

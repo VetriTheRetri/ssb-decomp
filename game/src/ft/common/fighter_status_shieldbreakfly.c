@@ -1,4 +1,5 @@
 #include "fighter.h"
+#include "gmmatch.h"
 
 void func_ovl3_80149440(GObj *fighter_gobj)
 {
@@ -26,15 +27,6 @@ void func_ovl3_80149488(GObj *fighter_gobj)
     func_800269C0(0xFU);
 }
 
-struct gmSceneInfo {
-    /* 0x00 */ u8 scene;
-    /* 0x01 */ u8 previousScene;
-    /* 0x02 */ u8 pad02[0x13 - 0x02];
-    /* 0x13 */ u8 player_port; // Port index of player in 1P game?
-    /* 0x14 */ u8 pad14[0x48 - 0x14];
-}; // size == 0x48
-
-extern struct gmSceneInfo Scene_Info;
 extern s8 gmBonusStat_ShieldBreaker; // Bonus for breaking an enemy's shield in 1P game
 
 void func_ovl3_80149510(GObj *fighter_gobj)
@@ -57,7 +49,7 @@ void func_ovl3_80149510(GObj *fighter_gobj)
 
     func_ovl2_800EAA2C(fp, fp->shield_port_id, 0, 0, 0, 0);
 
-    if ((Match_Info->game_type == 5) && (fp->shield_damage != 0))
+    if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->shield_damage != 0))
     {
         if ((fp->shield_port_id == Scene_Info.player_port) && (fp->shield_port_id != fp->port_id))
         {

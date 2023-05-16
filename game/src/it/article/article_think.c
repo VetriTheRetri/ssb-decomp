@@ -625,11 +625,11 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
         mp->player_number = ap->player_number;
         mp->display_state = ap->display_state;
 
-        if (Match_Info->game_type == 5)
+        if (Match_Info->game_type == gmMatch_GameType_1PGame)
         {
             if ((mp->port_id == Scene_Info.unk_0x13) && (mp->at_kind == At_Kind_Mew))
             {
-                gmBonusStat_MewCatcher = 1;
+                gmBonusStat_MewCatcher = TRUE;
             }
         }
     }
