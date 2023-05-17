@@ -138,7 +138,7 @@ bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
     ap->team = fp->team;
     ap->port_id = fp->port_id;
     ap->player_number = fp->player_number;
-    ap->unk_0x16 = fp->handicap;
+    ap->handicap = fp->handicap;
 
     return FALSE;
 }
@@ -186,7 +186,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
             monster_ap->port_id = m_ball_ap->port_id;
-            monster_ap->unk_0x16 = m_ball_ap->unk_0x16;
+            monster_ap->handicap = m_ball_ap->handicap;
             monster_ap->player_number = m_ball_ap->player_number;
             monster_ap->display_state = m_ball_ap->display_state;
         }
@@ -292,7 +292,7 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
             monster_ap->port_id = m_ball_ap->port_id;
-            monster_ap->unk_0x16 = m_ball_ap->unk_0x16;
+            monster_ap->handicap = m_ball_ap->handicap;
             monster_ap->player_number = m_ball_ap->player_number;
             monster_ap->display_state = m_ball_ap->display_state;
         }

@@ -541,6 +541,18 @@ typedef struct Fighter_Hurt
 
 } Fighter_Hurt;
 
+typedef struct ftHitCollisionLog // Might have to return once structs are cleaned up (alas once forward declarations are implemented to replace void* with struct*)
+{
+    s32 hit_source;
+    void *attacker_hit;
+    s32 unk_hitlog_0x8;
+    GObj *attacker_gobj;
+    Fighter_Hurt *victim_hurt; // Victim fighter's hurtbox
+    u8 attacker_port_id;
+    s32 attacker_player_number;
+
+} ftHitCollisionLog;
+
 typedef struct FighterItemThrow
 {
     s32 is_smash_throw : 1;
@@ -685,7 +697,7 @@ typedef struct ftCommonAttributes
     f32 shadow_size;
     f32 jostle_width; // ???
     f32 jostle_x;
-    f32 jostle_z;
+    s32 unk_ftca_0x88;
     f32 vs_pause_zoom;
     f32 cam_offset_y;
     f32 cam_zoom;
@@ -950,7 +962,7 @@ struct Fighter_Struct
     u8 unk_ft_0x272;
     u8 unk_ft_0x273;
     s8 unk_0x274;
-    u16 shuffle_timer;
+    u16 shuffle_timer; // Model shift timer
     GObj *throw_gobj;
     ftKind throw_ft_kind;
     u8 unk_0x280; // Thrower's team?
@@ -999,8 +1011,8 @@ struct Fighter_Struct
     s32 hit_status;
 
     Fighter_Hurt fighter_hurt[11];
-
-    f32 unk_ft_0x7A4;
+    f32 unk_ft_0x7A0;
+    f32 hitlag_mul;
     s32 unk_ft_0x7A8;
     s32 unk_ft_0x7AC;
 

@@ -179,7 +179,7 @@ GObj* func_ovl3_80185824(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
     ap->team = ip->team;
     ap->port_id = ip->port_id;
-    ap->unk_0x16 = ip->unk_0x12;
+    ap->handicap = ip->handicap;
     ap->player_number = ip->player_number;
 
     ap->article_hit.can_rehit = TRUE;

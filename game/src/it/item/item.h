@@ -197,7 +197,7 @@ typedef struct _Item_Struct
     s32 it_kind;                // Item ID
     u8 team;
     u8 port_id;
-    u8 unk_0x12;
+    u8 handicap;
     s32 player_number;          // Number of player that spawned this item? 0 = item spawned on its own
     s32 lr;                     // Facing direction of item; -1 = LEFT, 0 = CENTER, 1 = RIGHT, 2 = WALL_UP (Thunder Jolt only?), 3 = WALL_DOWN (Thunder Jolt only?)
 

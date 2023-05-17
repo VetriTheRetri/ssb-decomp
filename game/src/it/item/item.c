@@ -80,7 +80,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         ip->owner_gobj = spawn_gobj;
         ip->team = fp->team;
         ip->port_id = fp->port_id;
-        ip->unk_0x12 = fp->handicap;
+        ip->handicap = fp->handicap;
         ip->player_number = fp->player_number;
         ip->lr = fp->lr;
 
@@ -98,7 +98,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         ip->owner_gobj = owner_ip->owner_gobj;
         ip->team = owner_ip->team;
         ip->port_id = owner_ip->port_id;
-        ip->unk_0x12 = owner_ip->unk_0x12;
+        ip->handicap = owner_ip->handicap;
         ip->player_number = owner_ip->player_number;
         ip->lr = owner_ip->lr;
 
@@ -116,7 +116,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         ip->owner_gobj = ap->owner_gobj;
         ip->team = ap->team;
         ip->port_id = ap->port_id;
-        ip->unk_0x12 = ap->unk_0x16;
+        ip->handicap = ap->handicap;
         ip->player_number = ap->player_number;
         ip->lr = ap->lr;
 
@@ -134,7 +134,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         ip->owner_gobj = NULL;
         ip->team = ITEM_TEAM_DEFAULT;
         ip->port_id = ITEM_PORT_DEFAULT;
-        ip->unk_0x12 = ITEM_UNK_DEFAULT;
+        ip->handicap = ITEM_UNK_DEFAULT;
         ip->player_number = 0;
         ip->lr = RIGHT;
 
@@ -820,7 +820,7 @@ next_check:
         ip->port_id = fp->port_id;
         ip->display_state = fp->display_state;
         ip->player_number = fp->player_number;
-        ip->unk_0x12 = fp->handicap;
+        ip->handicap = fp->handicap;
         ip->item_hit.flags_0x4C = ip->unk_0x258;
         ip->item_hit.flags_0x4E.halfword = ip->unk_0x25A.halfword;
 

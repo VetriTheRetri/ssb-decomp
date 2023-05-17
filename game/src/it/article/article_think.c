@@ -80,7 +80,7 @@ void func_ovl3_801725BC(GObj *article_gobj)
     ap->owner_gobj = NULL;
     ap->team = ARTICLE_TEAM_DEFAULT;
     ap->port_id = ARTICLE_PORT_DEFAULT;
-    ap->unk_0x16 = ARTICLE_UNK_DEFAULT;
+    ap->handicap = ARTICLE_UNK_DEFAULT;
     ap->player_number = 0;
     ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
 
@@ -135,7 +135,7 @@ void func_ovl3_801727BC(GObj *article_gobj)
     ap->team = ap->damage_team;
     ap->port_id = ap->damage_port;
     ap->player_number = ap->player_number; // Could potentially cause a bug? Didn't they mean damage_player_number?
-    ap->unk_0x16 = ap->unk_0x2B4;
+    ap->handicap = ap->damage_handicap;
     ap->display_state = ap->damage_display_state;
 }
 
@@ -323,7 +323,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
 
     ap->team = fp->team;
     ap->port_id = fp->port_id;
-    ap->unk_0x16 = fp->handicap;
+    ap->handicap = fp->handicap;
     ap->player_number = fp->player_number;
 
     ap->phys_info.vel.x = 0.0F;
@@ -621,7 +621,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
         mp->owner_gobj = ap->owner_gobj;
         mp->team = ap->team;
         mp->port_id = ap->port_id;
-        mp->unk_0x16 = ap->unk_0x16;
+        mp->unk_0x16 = ap->handicap;
         mp->player_number = ap->player_number;
         mp->display_state = ap->display_state;
 

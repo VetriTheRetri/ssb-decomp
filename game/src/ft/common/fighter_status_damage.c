@@ -688,7 +688,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
                 if (func_ovl3_80140EC0(grab_fp) != FALSE)
                 {
                     grab_fp->unk_ft_0x7DC = this_fp->unk_ft_0x7DC;
-                    grab_fp->unk_ft_0x7A4 = this_fp->unk_ft_0x7A4;
+                    grab_fp->hitlag_mul = this_fp->hitlag_mul;
 
                     func_ovl3_80140E2C(fighter_gobj);
 
@@ -746,7 +746,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
                 if (func_ovl3_80140D30(grab_fp) != 0)
                 {
                     this_fp->unk_ft_0x7DC = grab_fp->unk_ft_0x7DC;
-                    this_fp->unk_ft_0x7A4 = grab_fp->unk_ft_0x7A4;
+                    this_fp->hitlag_mul = grab_fp->hitlag_mul;
                     grab_fp->unk_ft_0x814 = 3;
 
                     func_ovl3_80141648(fighter_gobj);
@@ -763,7 +763,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             }
             else
             {
-                grab_fp->hitlag_timer = func_ovl2_800EA1C0(this_fp->unk_ft_0x7DC, grab_fp->status_info.status_id, grab_fp->unk_ft_0x7A4, this_fp);
+                grab_fp->hitlag_timer = func_ovl2_800EA1C0(this_fp->unk_ft_0x7DC, grab_fp->status_info.status_id, grab_fp->hitlag_mul, this_fp);
 
                 this_fp->input.button_press = this_fp->input.pl.button_tap_prev = 0;
 

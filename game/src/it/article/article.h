@@ -330,8 +330,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     s32 type;
     u8 team;
     u8 port_id;
-    u8 unk_0x16;
-    u8 unk_0x17;
+    u8 handicap;
     s32 player_number;
     s32 percent_damage;
     u32 hitlag_timer;
@@ -371,7 +370,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     u8 damage_team;
     u8 damage_port;
     s32 damage_player_number;
-    u8 unk_0x2B4;
+    u8 damage_handicap;
     s32 damage_display_state;
     s32 damage_taken_last;
     s32 lifetime;
@@ -404,54 +403,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     Color_Overlay colanim;
 
-    u32 x338_flag_b0 : 1;
-    u32 x338_flag_b1 : 1;
-    u32 x338_flag_b2 : 1;
-    u32 x338_flag_b3 : 1;
-    u32 x338_flag_b4 : 1;
-    u32 x338_flag_b5 : 1;
-    u32 x338_flag_b6 : 1;
-    u32 x338_flag_b7 : 1;
-    u32 x339_flag_b0 : 1;
-    u32 x339_flag_b1 : 1;
-    u32 x339_flag_b2 : 1;
-    u32 x339_flag_b3 : 1;
-    u32 x339_flag_b4 : 1;
-    u32 x339_flag_b5 : 1;
-    u32 x339_flag_b6 : 1;
-    u32 x339_flag_b7 : 1;
-    u32 x33A_flag_b0 : 1;
-    u32 x33A_flag_b1 : 1;
-    u32 x33A_flag_b2 : 1;
-    u32 x33A_flag_b3 : 1;
-    u32 x33A_flag_b4 : 1;
-    u32 x33A_flag_b5 : 1;
-    u32 x33A_flag_b6 : 1;
-    u32 x33A_flag_b7 : 1;
-    u32 x33B_flag_b0 : 1;
-    u32 x33B_flag_b1 : 1;
-    u32 x33B_flag_b2 : 1;
-    u32 x33B_flag_b3 : 1;
-    u32 x33B_flag_b4 : 1;
-    u32 x33B_flag_b5 : 1;
-    u32 x33B_flag_b6 : 1;
-    u32 x33B_flag_b7 : 1;
     u32 is_hitlag_victim : 1;
-    u32 x33C_flag_b1 : 1;
-    u32 x33C_flag_b2 : 1;
-    u32 x33C_flag_b3 : 1;
-    u32 x33C_flag_b4 : 1;
-    u32 x33C_flag_b5 : 1;
-    u32 x33C_flag_b6 : 1;
-    u32 x33C_flag_b7 : 1;
-    u32 x33D_flag_b0 : 1;
-    u32 x33D_flag_b1 : 1;
-    u32 x33D_flag_b2 : 1;
-    u32 x33D_flag_b3 : 1;
-    u32 x33D_flag_b4 : 1;
-    u32 x33D_flag_b5 : 1;
-    u32 x33D_flag_b6 : 1;
-    u32 x33D_flag_b7 : 1;
     u16 at_multi; // Some sort of universal multi-purpose variable, e.g. it is used as intangibility delay for Star Man and ammo count for Ray Gun
 
     u8 x340_flag_b0123 : 4; // Script timer?

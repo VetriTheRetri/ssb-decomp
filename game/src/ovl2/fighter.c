@@ -128,7 +128,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->knockback_resist_status = 0.0F;
     fp->knockback_resist_passive = 0.0F;
     fp->damage_knockback = 0.0F;
-    fp->unk_ft_0x7A4 = 1.0F;
+    fp->hitlag_mul = 1.0F;
     fp->unk_ft_0x7A8 = 10.0F;
 
     fp->is_fast_fall = FALSE;

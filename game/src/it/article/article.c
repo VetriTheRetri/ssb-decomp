@@ -945,12 +945,12 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
             ap->damage_team = fp->team;
             ap->damage_port = fp->port_id;
             ap->damage_player_number = fp->player_number;
-            ap->unk_0x2B4 = fp->handicap;
+            ap->damage_handicap = fp->handicap;
             ap->damage_display_state = fp->display_state;
         }
         if (ap->x2D3_flag_b4)
         {
-            damage_knockback = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->handicap, ap->unk_0x16);
+            damage_knockback = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->handicap, ap->handicap);
 
             if (ap->damage_knockback < damage_knockback)
             {
@@ -1127,12 +1127,12 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
             defend_ap->damage_team = attack_ap->team;
             defend_ap->damage_port = attack_ap->port_id;
             defend_ap->damage_player_number = attack_ap->player_number;
-            defend_ap->unk_0x2B4 = attack_ap->unk_0x16;
+            defend_ap->damage_handicap = attack_ap->handicap;
             defend_ap->damage_display_state = attack_ap->display_state;
         }
         if (defend_ap->x2D3_flag_b4)
         {
-            launch_angle = func_ovl2_800E9D78(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->unk_0x16, )defend_ap->unk_0x16);
+            launch_angle = func_ovl2_800E9D78(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->handicap, )defend_ap->handicap);
 
             if (defend_ap->damage_knockback < launch_angle)
             {
@@ -1219,12 +1219,12 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
             ap->damage_team = ip->team;
             ap->damage_port = ip->port_id;
             ap->damage_player_number = ip->player_number;
-            ap->unk_0x2B4 = ip->unk_0x12;
+            ap->damage_handicap = ip->handicap;
             ap->damage_display_state = ip->display_state;
         }
         if (ap->x2D3_flag_b4)
         {
-            angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->unk_0x12, ap->unk_0x16);
+            angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->handicap, ap->handicap);
 
             if (ap->damage_knockback < angle)
             {
@@ -1712,7 +1712,7 @@ next_check:
         ap->team = fp->team;
         ap->port_id = fp->port_id;
         ap->player_number = fp->player_number;
-        ap->unk_0x16 = fp->handicap;
+        ap->handicap = fp->handicap;
         ap->article_hit.flags_hi = ap->unk_0x28C;
         ap->article_hit.flags_hi.halfword = ap->unk_0x28E.halfword;
 

@@ -361,9 +361,9 @@ glabel D_ovl2_801311A0
     .space 16
 glabel D_ovl2_801311B0
     .space 16
-glabel gmHitCollisionLogIndex
+glabel ftHitCollisionLogIndex
     .space 8
-glabel gmHitCollisionLogTable
+glabel ftHitCollisionLogTable
     .space 296
 glabel D_ovl2_801312F0
     .space 1

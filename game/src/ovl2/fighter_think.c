@@ -2011,10 +2011,10 @@ bool32 func_ovl2_800E2CC0(Fighter_Struct *fp, s32 *damage)
     else return FALSE;
 }
 
-static s32 gmHitCollisionLogIndex;
-static gmHitCollisionLog gmHitCollisionLogTable[10];
+static s32 ftHitCollisionLogIndex;
+static ftHitCollisionLog ftHitCollisionLogTable[10];
 
-void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, Fighter_Struct *victim_fp, Fighter_Hit *victim_hit, GObj *attacker_gobj, GObj *victim_gobj)
+void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, Fighter_Struct *victim_fp, Fighter_Hurt *victim_hurt, GObj *attacker_gobj, GObj *victim_gobj)
 {
     s32 damage;
     s32 attacker_port_id;
@@ -2035,7 +2035,7 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
         (victim_fp->special_hit_status == gmHitCollision_HitStatus_Normal)  &&
         (victim_fp->special_status == ftSpecialStatus_Normal)               &&
         (victim_fp->hit_status == gmHitCollision_HitStatus_Normal)          &&
-        (victim_hit->update_state == gmHitCollision_UpdateState_New)
+        (victim_hurt->hit_status == gmHitCollision_HitStatus_Normal)
     )
     {
         if (func_ovl2_800E2CC0(victim_fp, &damage) != FALSE)
@@ -2050,18 +2050,18 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
                 attacker_port_id = attacker_fp->port_id;
                 attacker_player_number = attacker_fp->player_number;
             }
-            if (gmHitCollisionLogIndex < ARRAY_COUNT(gmHitCollisionLogTable))
+            if (ftHitCollisionLogIndex < ARRAY_COUNT(ftHitCollisionLogTable))
             {
-                gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
+                ftHitCollisionLog *hitlog = &ftHitCollisionLogTable[ftHitCollisionLogIndex];
 
-                hitlog->hit_source = gmHitCollision_LogKind_Fighter;
+                hitlog->hit_source = ftHitCollision_LogKind_Fighter;
                 hitlog->attacker_hit = attacker_hit;
                 hitlog->attacker_gobj = attacker_gobj;
-                hitlog->victim_hit = victim_hit;
+                hitlog->victim_hurt = victim_hurt;
                 hitlog->attacker_port_id = attacker_port_id;
                 hitlog->attacker_player_number = attacker_player_number;
 
-                gmHitCollisionLogIndex++;
+                ftHitCollisionLogIndex++;
             }
             func_ovl2_800EA98C(attacker_port_id, victim_fp->port_id, damage);
             func_ovl2_800EA614(attacker_port_id, victim_fp->port_id, attacker_hit->attack_id, attacker_hit->flags_hi.halfword);
@@ -2201,7 +2201,7 @@ void func_ovl2_800E3308(Item_Struct *ip, Item_Hit *it_hit, Fighter_Struct *fp, G
     }
 }
 
-void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *item_gobj, GObj *fighter_gobj)
+void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hurt *ft_hurt, GObj *item_gobj, GObj *fighter_gobj)
 {
     s32 unk = func_ovl3_80168128(ip);
     s32 damage;
@@ -2226,23 +2226,23 @@ void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
         (fp->special_hit_status == ftSpecialStatus_Normal)      &&
         (fp->special_status == gmHitCollision_HitStatus_Normal) &&
         (fp->hit_status == gmHitCollision_HitStatus_Normal)     &&
-        (ft_hit->update_state == gmHitCollision_UpdateState_New)&&
+        (ft_hurt->hit_status == gmHitCollision_HitStatus_Normal)&&
         (func_ovl2_800E2CC0(fp, &damage) != 0)
     )
     {
-        if (gmHitCollisionLogIndex < ARRAY_COUNT(gmHitCollisionLogTable))
+        if (ftHitCollisionLogIndex < ARRAY_COUNT(ftHitCollisionLogTable))
         {
-            gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
+            ftHitCollisionLog *hitlog = &ftHitCollisionLogTable[ftHitCollisionLogIndex];
 
-            hitlog->hit_source = gmHitCollision_LogKind_Item;
+            hitlog->hit_source = ftHitCollision_LogKind_Item;
             hitlog->attacker_hit = it_hit;
             hitlog->unk_hitlog_0x8 = arg2;
             hitlog->attacker_gobj = item_gobj;
-            hitlog->victim_hit = ft_hit;
+            hitlog->victim_hurt = ft_hurt;
             hitlog->attacker_port_id = ip->port_id;
             hitlog->attacker_player_number = ip->player_number;
 
-            gmHitCollisionLogIndex++;
+            ftHitCollisionLogIndex++;
         }
         func_ovl2_800EA98C(ip->port_id, fp->port_id, damage);
         func_ovl2_800EA614(ip->port_id, fp->port_id, it_hit->attack_id, it_hit->flags_0x4A.halfword);
@@ -2380,7 +2380,7 @@ void func_ovl2_800E3860(Article_Struct *ap, Article_Hit *at_hit, Fighter_Struct 
 
 extern u8 D_ovl65_801936AA;
 
-void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *article_gobj, GObj *fighter_gobj)
+void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hurt *ft_hurt, GObj *article_gobj, GObj *fighter_gobj)
 {
     s32 damage = func_ovl3_801727F4(ap);
     s32 damage_again;
@@ -2443,23 +2443,23 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
             (fp->special_hit_status == ftSpecialStatus_Normal)      &&
             (fp->special_status == gmHitCollision_HitStatus_Normal) &&
             (fp->hit_status == gmHitCollision_HitStatus_Normal)     &&
-            (ft_hit->update_state == gmHitCollision_UpdateState_New)&&
+            (ft_hurt->hit_status == gmHitCollision_HitStatus_Normal)&&
             (func_ovl2_800E2CC0(fp, &damage) != 0)
         )
         {
-            if (gmHitCollisionLogIndex < ARRAY_COUNT(gmHitCollisionLogTable))
+            if (ftHitCollisionLogIndex < ARRAY_COUNT(ftHitCollisionLogTable))
             {
-                gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
+                ftHitCollisionLog *hitlog = &ftHitCollisionLogTable[ftHitCollisionLogIndex];
 
-                hitlog->hit_source = gmHitCollision_LogKind_Article;
+                hitlog->hit_source = ftHitCollision_LogKind_Article;
                 hitlog->attacker_hit = at_hit;
                 hitlog->unk_hitlog_0x8 = arg2;
                 hitlog->attacker_gobj = article_gobj;
-                hitlog->victim_hit = ft_hit;
+                hitlog->victim_hurt = ft_hurt;
                 hitlog->attacker_port_id = ap->port_id;
                 hitlog->attacker_player_number = ap->player_number;
 
-                gmHitCollisionLogIndex++;
+                ftHitCollisionLogIndex++;
             }
             func_ovl2_800EA98C(ap->port_id, fp->port_id, damage_again);
             func_ovl2_800EA614(ap->port_id, fp->port_id, at_hit->attack_id, at_hit->flags_0x4E.halfword);
@@ -2473,15 +2473,15 @@ void func_ovl2_800E3CAC(GObj *special_gobj, void *arg1, Fighter_Struct *fp, Grou
     s32 damage = func_ovl2_800EA40C(fp, gr_hit->damage);
     s32 temp_v0 = func_ovl2_800E2CC0(fp, &damage);
 
-    if ((temp_v0 != 0) && (gmHitCollisionLogIndex < ARRAY_COUNT(gmHitCollisionLogTable)))
+    if ((temp_v0 != 0) && (ftHitCollisionLogIndex < ARRAY_COUNT(ftHitCollisionLogTable)))
     {
-        gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
+        ftHitCollisionLog *hitlog = &ftHitCollisionLogTable[ftHitCollisionLogIndex];
 
-        hitlog->hit_source = gmHitCollision_LogKind_Special;
+        hitlog->hit_source = ftHitCollision_LogKind_Special;
         hitlog->attacker_hit = gr_hit;
         hitlog->attacker_gobj = special_gobj;
 
-        gmHitCollisionLogIndex++;
+        ftHitCollisionLogIndex++;
     }
     switch (target_kind)
     {
@@ -2537,5 +2537,327 @@ void func_ovl2_800E3DD0(GObj *fighter_gobj, GObj *attacker_gobj)
         dist_y = (DObjGetStruct(fighter_gobj)->translate.y + fp->coll_data.object_coll.center) - DObjGetStruct(attacker_gobj)->translate.y;
 
         fp->damage_angle = (dist_x == 0) ? 0 : F_RAD_TO_DEG(atanf(dist_y / dist_x));
+    }
+}
+
+void func_ovl2_800E3EBC(GObj *fighter_gobj)
+{
+    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *attacker_fp;
+    Item_Struct *ip;
+    Article_Struct *ap;
+    ftCommonAttributes *attributes = this_fp->attributes;
+    ftHitCollisionLog *hitlog;
+    s32 i, j;
+    f32 var_f20;
+    f32 knockback;
+    Fighter_Hit *ft_hit;
+    Item_Hit *it_hit;
+    Article_Hit *at_hit;
+    Ground_Hit *gr_hit;
+    Vec3f sp84;
+    s32 damage;
+    u8 gr_handicap;
+    GObj *attacker_gobj;
+    s32 lr_damage;
+
+    knockback = -1.0F;
+
+    for (i = 0; i < ftHitCollisionLogIndex; i++)
+    {
+        hitlog = &ftHitCollisionLogTable[i];
+
+        switch (hitlog->hit_source)
+        {
+        case ftHitCollision_LogKind_Fighter:
+            ft_hit = hitlog->attacker_hit;
+            attacker_fp = FighterGetStruct(hitlog->attacker_gobj);
+            var_f20 = func_ovl2_800E9D78(this_fp->percent_damage, this_fp->damage_taken_recent, ft_hit->damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, attributes->weight, attacker_fp->handicap, this_fp->handicap);
+
+            func_ovl2_800F0A90(&sp84, ft_hit, hitlog->victim_hurt);
+
+            switch (ft_hit->element)
+            {
+            case gmHitCollision_Element_Fire:
+                func_ovl2_800FE2F4(&sp84, ft_hit->damage);
+                break;
+
+            case gmHitCollision_Element_Electric:
+                func_ovl2_800FE4EC(&sp84, ft_hit->damage);
+                break;
+
+            case gmHitCollision_Element_Coin:
+                func_ovl2_80100ACC(&sp84);
+                break;
+
+            case gmHitCollision_Element_Slash:
+                func_ovl2_800FE6E4(&sp84, ft_hit->damage, func_ovl2_800F0FC0(attacker_fp, ft_hit));
+                break;
+
+            default:
+                if (var_f20 < 180.0F)
+                {
+                    func_ovl2_800FDC04(&sp84, hitlog->attacker_port_id, ft_hit->damage, NULL);
+                }
+                else func_ovl2_800FDEAC(&sp84, hitlog->attacker_port_id, ft_hit->damage);
+
+                if (ft_hit->sfx_level != 0)
+                {
+                    func_ovl2_800FFB38(&sp84);
+
+                    switch (this_fp->attributes->unk_ftca_0x88)
+                    {
+                    case 0:
+                        func_ovl2_80100218(&sp84, this_fp->lr);
+                        break;
+
+                    case 1:
+                        func_ovl2_80100440(&sp84, this_fp->lr);
+                        break;
+
+                    default:
+                        break;
+                    }
+                }
+                break;
+            }
+            break;
+
+        case ftHitCollision_LogKind_Item:
+            it_hit = hitlog->attacker_hit;
+            ip = ItemGetStruct(hitlog->attacker_gobj);
+            damage = func_ovl3_80168128(ip);
+
+            var_f20 = func_ovl2_800E9D78(this_fp->percent_damage, this_fp->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, attributes->weight, ip->handicap, this_fp->handicap);
+
+            if (ip->is_hitlag_victim)
+            {
+                func_ovl2_800F0D24(&sp84, it_hit, hitlog->unk_hitlog_0x8, hitlog->victim_hurt);
+
+                switch (it_hit->element)
+                {
+                case gmHitCollision_Element_Fire:
+                    func_ovl2_800FE2F4(&sp84, damage);
+                    break;
+                case gmHitCollision_Element_Electric:
+                    func_ovl2_800FE4EC(&sp84, damage);
+                    break;
+                case gmHitCollision_Element_Coin:
+                    func_ovl2_80100ACC(&sp84);
+                    break;
+
+                default:
+                    if (var_f20 < 180.0F)
+                    {
+                        func_ovl2_800FDC04(&sp84, hitlog->attacker_port_id, damage, NULL);
+                    }
+                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_port_id, damage);
+
+                    break;
+                }
+            }
+            break;
+
+        case ftHitCollision_LogKind_Article:
+            at_hit = hitlog->attacker_hit;
+            ap = ArticleGetStruct(hitlog->attacker_gobj);
+
+            damage = func_ovl3_801727F4(ap);
+
+            var_f20 = func_ovl2_800E9D78(this_fp->percent_damage, this_fp->damage_taken_recent, damage, at_hit->knockback_weight, at_hit->knockback_scale, at_hit->knockback_base, attributes->weight, ap->handicap, this_fp->handicap);
+
+            if (ap->is_hitlag_victim)
+            {
+                func_ovl2_800F0E08(&sp84, at_hit, hitlog->unk_hitlog_0x8, hitlog->victim_hurt);
+
+                switch (at_hit->element)
+                {
+                case gmHitCollision_Element_Fire:
+                    func_ovl2_800FE2F4(&sp84, damage);
+                    break;
+                case gmHitCollision_Element_Electric:
+                    func_ovl2_800FE4EC(&sp84, damage);
+                    break;
+                case gmHitCollision_Element_Coin:
+                    func_ovl2_80100ACC(&sp84);
+                    break;
+
+                default:
+                    if (var_f20 < 180.0F)
+                    {
+                        func_ovl2_800FDC04(&sp84, hitlog->attacker_port_id, damage, NULL);
+                    }
+                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_port_id, damage);
+
+                    break;
+                }
+            }
+            break;
+
+        case ftHitCollision_LogKind_Special:
+            gr_hit = hitlog->attacker_hit;
+
+            if (gr_hit->update_state == gmHitCollision_UpdateState_New)
+            {
+                gr_handicap = ArticleGetStruct(hitlog->attacker_gobj)->damage_handicap;
+            }
+            else gr_handicap = 9;
+
+            var_f20 = func_ovl2_800E9D78(this_fp->percent_damage, this_fp->damage_taken_recent, gr_hit->damage, gr_hit->knockback_weight, gr_hit->knockback_scale, gr_hit->knockback_base, attributes->weight, gr_handicap, this_fp->handicap);
+
+            break;
+
+        default:
+            break;
+        }
+        if (knockback < var_f20)
+        {
+            knockback = var_f20;
+
+            j = i;
+        }
+    }
+    hitlog = &ftHitCollisionLogTable[j];
+    attacker_gobj = hitlog->attacker_gobj;
+
+    switch (hitlog->hit_source)
+    {
+    case ftHitCollision_LogKind_Fighter:
+        ft_hit = hitlog->attacker_hit;
+        attacker_fp = FighterGetStruct(attacker_gobj);
+        this_fp->damage_angle = ft_hit->angle;
+        this_fp->damage_element = ft_hit->element;
+
+        this_fp->lr_damage = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(attacker_gobj)->translate.x) ? RIGHT : LEFT;
+
+        this_fp->damage_player_number = hitlog->attacker_player_number;
+
+        func_ovl2_800EAA2C(this_fp, hitlog->attacker_port_id, hitlog->hit_source, attacker_fp->ft_kind, attacker_fp->flags_lw.halfword & ~0x400, attacker_fp->unk_0x290.halfword);
+
+        this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
+        this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
+
+        if (this_fp->damage_element == gmHitCollision_Element_Electric)
+        {
+            attacker_fp->hitlag_mul = 1.5F;
+        }
+        break;
+
+    case ftHitCollision_LogKind_Item:
+        it_hit = hitlog->attacker_hit;
+        ip = ItemGetStruct(attacker_gobj);
+        this_fp->damage_angle = it_hit->angle;
+        this_fp->damage_element = it_hit->element;
+
+        if (ABSF(ip->phys_info.vel.x) < 5.0F)
+        {
+            this_fp->lr_damage = lr_damage = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(attacker_gobj)->translate.x) ? RIGHT : LEFT;
+        }
+        else
+        {
+            lr_damage = (ip->phys_info.vel.x < 0) ? RIGHT : LEFT;
+
+            this_fp->lr_damage = lr_damage;
+        }
+        if (this_fp->port_id == hitlog->attacker_port_id)
+        {
+            this_fp->damage_player_number = 0;
+            func_ovl2_800EAA2C(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ip->it_kind, 0, 0);
+        }
+        else
+        {
+            this_fp->damage_player_number = hitlog->attacker_player_number;
+
+            func_ovl2_800EAA2C(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ip->it_kind, it_hit->flags_0x4C.halfword, it_hit->flags_0x4E.halfword);
+        }
+        this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
+        this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
+
+        func_ovl2_800E3DD0(fighter_gobj, attacker_gobj);
+        break;
+
+    case ftHitCollision_LogKind_Article:
+        at_hit = hitlog->attacker_hit;
+        ap = ArticleGetStruct(attacker_gobj);
+
+        this_fp->damage_angle = at_hit->angle;
+        this_fp->damage_element = at_hit->element;
+
+        if (ABSF(ap->phys_info.vel.x) < 5.0F)
+        {
+            this_fp->lr_damage = lr_damage = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(attacker_gobj)->translate.x) ? RIGHT : LEFT;
+        }
+        else
+        {
+            lr_damage = (ap->phys_info.vel.x < 0) ? RIGHT : LEFT;
+
+            this_fp->lr_damage = lr_damage;
+        }
+
+        if (this_fp->port_id == hitlog->attacker_port_id)
+        {
+            this_fp->damage_player_number = 0;
+
+            func_ovl2_800EAA2C(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ap->at_kind, 0, 0);
+        }
+        else
+        {
+            this_fp->damage_player_number = hitlog->attacker_player_number;
+            func_ovl2_800EAA2C(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ap->at_kind, at_hit->flags_hi.halfword, at_hit->flags_lw.halfword);
+        }
+        this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
+        this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
+
+        func_ovl2_800E3DD0(fighter_gobj, attacker_gobj);
+        break;
+
+    case ftHitCollision_LogKind_Special:
+        gr_hit = hitlog->attacker_hit;
+
+        this_fp->damage_angle = gr_hit->angle;
+        this_fp->damage_element = gr_hit->element;
+
+        this_fp->lr_damage = this_fp->lr;
+
+        switch (gr_hit->update_state)
+        {
+        case 0:
+            this_fp->damage_player_number = 0;
+
+            if (this_fp->damage_port_id == -1)
+            {
+                this_fp->damage_port_id = GMMATCH_PLAYERS_MAX;
+            }
+            func_ovl2_800EAA2C(this_fp, this_fp->damage_port_id, hitlog->hit_source, gr_hit->update_state, 0, 0);
+            break;
+
+        case 1:
+            ap = ArticleGetStruct(attacker_gobj);
+
+            this_fp->damage_player_number = ap->damage_player_number;
+
+            func_ovl2_800EAA2C(this_fp, ap->damage_port, hitlog->hit_source, gr_hit->update_state, 0, 0);
+
+            break;
+
+        default:
+            this_fp->damage_player_number = 0;
+
+            func_ovl2_800EAA2C(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, gr_hit->update_state, 0, 0);
+            break;
+        }
+        this_fp->damage_joint_index = 0;
+        this_fp->damage_index = 0;
+
+        break;
+
+    default:
+        break;
+    }
+    this_fp->damage_knockback = knockback;
+
+    if (this_fp->damage_element == gmHitCollision_Element_Electric)
+    {
+        this_fp->hitlag_mul = 1.5F;
     }
 }

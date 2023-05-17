@@ -87,14 +87,14 @@ typedef enum gmHitCollisionSoundLevel
 
 } gmHitCollisionSoundLevel;
 
-typedef enum gmHitCollisionLogKind
+typedef enum ftHitCollisionLogKind
 {
-    gmHitCollision_LogKind_Fighter = 1,
-    gmHitCollision_LogKind_Item,
-    gmHitCollision_LogKind_Article,
-    gmHitCollision_LogKind_Special
+    ftHitCollision_LogKind_Fighter = 1,
+    ftHitCollision_LogKind_Item,
+    ftHitCollision_LogKind_Article,
+    ftHitCollision_LogKind_Special
 
-} gmHitCollisionLogKind;
+} ftHitCollisionLogKind;
 
 typedef struct gmHitCollisionFlags
 {
@@ -106,18 +106,6 @@ typedef struct gmHitCollisionFlags
     u32 timer_rehit : 6;
 
 } gmHitCollisionFlags;
-
-typedef struct gmHitCollisionLog // Might have to return once structs are cleaned up (alas once forward declarations are implemented to replace void* with struct*)
-{
-    s32 hit_source;
-    void *attacker_hit;
-    s32 unk_hitlog_0x8;
-    void *attacker_gobj;
-    void *victim_hit;
-    u8 attacker_port_id;
-    s32 attacker_player_number;
-
-} gmHitCollisionLog;
 
 typedef struct gmPlayerInput
 {

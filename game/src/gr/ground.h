@@ -69,6 +69,11 @@ typedef struct _Ground_Hit
 {
     s32 update_state;
     s32 damage;
+    s32 angle;
+    s32 knockback_scale;
+    s32 knockback_weight;
+    s32 knockback_base;
+    s32 element;
 
 } Ground_Hit;
 
