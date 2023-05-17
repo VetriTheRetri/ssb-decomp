@@ -65,6 +65,13 @@ typedef struct grMapObject
 
 } grMapObject;
 
+typedef struct _Ground_Hit
+{
+    s32 update_state;
+    s32 damage;
+
+} Ground_Hit;
+
 static grMapObject D_ovl2_80131180[2];
 static grMapObject D_ovl2_80131190[1];
 static s32 D_ovl2_80131198;

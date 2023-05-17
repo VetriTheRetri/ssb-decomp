@@ -1308,14 +1308,14 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
         if (this_fp->star_invincible_timer == 0)
         {
-            this_fp->special_status = 1;
+            this_fp->special_status = ftSpecialStatus_Normal;
 
             if (this_fp->colanim.colanim_id == 0x4A)
             {
                 func_ovl2_800E98D4(fighter_gobj);
             }
         }
-        else if (this_fp->star_invincible_timer == 120)
+        else if (this_fp->star_invincible_timer == (ATSTAR_INVINCIBLE_TIME - ATSTAR_WARN_BEGIN_FRAME))
         {
             func_ovl2_800E7B54();
         }
@@ -1459,7 +1459,7 @@ void func_ovl2_800E1CF0(void)
     }
 }
 
-bool32 func_ovl2_800E1D48(GObj *ogobj, bool32(*proc_update)(GObj *, GObj *, s32 *))
+bool32 func_ovl2_800E1D48(GObj *ogobj, bool32(*proc_update)(GObj*, GObj*, s32*))
 {
     s32 i;
 
@@ -1493,7 +1493,7 @@ void func_ovl2_800E1D9C(GObj *ogobj)
     }
 }
 
-bool32 func_ovl2_800E1DE8(GObj *ogobj, bool32(*proc_update)(GObj *, GObj *, s32 *))
+bool32 func_ovl2_800E1DE8(GObj *ogobj, bool32(*proc_update)(GObj*, GObj*, s32*))
 {
     s32 i;
 
@@ -2054,7 +2054,7 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
             {
                 gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
 
-                hitlog->unk_hitlog_0x0 = 1;
+                hitlog->hit_source = gmHitCollision_LogKind_Fighter;
                 hitlog->attacker_hit = attacker_hit;
                 hitlog->attacker_gobj = attacker_gobj;
                 hitlog->victim_hit = victim_hit;
@@ -2234,7 +2234,7 @@ void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
         {
             gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
 
-            hitlog->unk_hitlog_0x0 = 2;
+            hitlog->hit_source = gmHitCollision_LogKind_Item;
             hitlog->attacker_hit = it_hit;
             hitlog->unk_hitlog_0x8 = arg2;
             hitlog->attacker_gobj = item_gobj;
@@ -2388,26 +2388,26 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
 
     func_ovl3_8016F930(at_hit, fighter_gobj, (at_hit->flags_0x4C_b2) ? gmHitCollision_Type_ArticleHurt : gmHitCollision_Type_Hurt, 0);
 
-    if (ap->type == 4)
+    if (ap->type == At_Type_Touch)
     {
         switch (ap->at_kind)
         {
-        case 6:
+        case At_Kind_Star:
 
             at_hit->update_state = gmHitCollision_UpdateState_Disable;
             ap->hit_victim_damage = 1;
 
-            func_ovl2_800EA8B0(fp, 0x258);
+            func_ovl2_800EA8B0(fp, ATSTAR_INVINCIBLE_TIME);
             func_ovl2_800E7AFC(0x2E);
             func_800269C0(0x36U);
 
-            if ((Match_Info->game_type == 5) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936AA < U8_MAX))
+            if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936AA < U8_MAX))
             {
                 D_ovl65_801936AA++;
             }
             break;
 
-        case 27:
+        case At_Kind_Gr_Lucky:
             func_ovl2_800EA3D4(fp, at_hit->damage);
 
             break;
@@ -2451,7 +2451,7 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
             {
                 gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
 
-                hitlog->unk_hitlog_0x0 = 3;
+                hitlog->hit_source = gmHitCollision_LogKind_Article;
                 hitlog->attacker_hit = at_hit;
                 hitlog->unk_hitlog_0x8 = arg2;
                 hitlog->attacker_gobj = article_gobj;
@@ -2465,5 +2465,77 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
             func_ovl2_800EA614(ap->port_id, fp->port_id, at_hit->attack_id, at_hit->flags_0x4E.halfword);
         }
         func_800269C0(at_hit->hit_sfx);
+    }
+}
+
+void func_ovl2_800E3CAC(GObj *special_gobj, void *arg1, Fighter_Struct *fp, Ground_Hit *gr_hit, s32 target_kind)
+{
+    s32 damage = func_ovl2_800EA40C(fp, gr_hit->damage);
+    s32 temp_v0 = func_ovl2_800E2CC0(fp, &damage);
+
+    if ((temp_v0 != 0) && (gmHitCollisionLogIndex < ARRAY_COUNT(gmHitCollisionLogTable)))
+    {
+        gmHitCollisionLog *hitlog = &gmHitCollisionLogTable[gmHitCollisionLogIndex];
+
+        hitlog->hit_source = gmHitCollision_LogKind_Special;
+        hitlog->attacker_hit = gr_hit;
+        hitlog->attacker_gobj = special_gobj;
+
+        gmHitCollisionLogIndex++;
+    }
+    switch (target_kind)
+    {
+    case 0:
+        fp->acid_wait = 30;
+        func_800269C0(0x11EU);
+
+        break;
+
+    case 1:
+        if (temp_v0 != 0)
+        {
+            func_ovl2_800EA98C(ArticleGetStruct(special_gobj)->damage_port, fp->port_id, damage);
+        }
+        break;
+
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+        fp->hotfloor_wait = 16;
+
+        if (target_kind == 7)
+        {
+            func_800269C0(0x1DU);
+        }
+        else func_800269C0(0x11EU);
+
+        break;
+
+    default:
+        break;
+    }
+}
+
+void func_ovl2_800E3DD0(GObj *fighter_gobj, GObj *attacker_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->damage_angle == 362)
+    {
+        f32 dist_x = DObjGetStruct(fighter_gobj)->translate.x - DObjGetStruct(attacker_gobj)->translate.x;
+        f32 dist_y;
+
+        fp->lr_damage = (dist_x < 0) ? RIGHT : LEFT;
+
+        if (dist_x < 0.0F)
+        {
+            dist_x = -dist_x;
+        }
+        dist_y = (DObjGetStruct(fighter_gobj)->translate.y + fp->coll_data.object_coll.center) - DObjGetStruct(attacker_gobj)->translate.y;
+
+        fp->damage_angle = (dist_x == 0) ? 0 : F_RAD_TO_DEG(atanf(dist_y / dist_x));
     }
 }

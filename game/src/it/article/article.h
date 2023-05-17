@@ -121,13 +121,13 @@ typedef enum atKind
 
 typedef enum atType
 {
-    At_Type_Ground,// Article is spawned by the stage (?)
-    At_Type_Swing, // Article can be thrown and swung
-    At_Type_Shoot, // Article can be fired
-    At_Type_Throw, // Article can only be thrown
-    At_Type_Unk2,  // Pokémon?
+    At_Type_Ground,     // Article is spawned by the stage (?)
+    At_Type_Swing,      // Article can be thrown and swung
+    At_Type_Shoot,      // Article can be fired
+    At_Type_Throw,      // Article can only be thrown
+    At_Type_Touch,   // Article has special properties on interaction
     At_Type_Unk3,
-    At_Type_FtItem // Article spawned by fighter's item (projectile) ?
+    At_Type_FtItem      // Article spawned by fighter's item (projectile) ?
 
 } atType; 
 

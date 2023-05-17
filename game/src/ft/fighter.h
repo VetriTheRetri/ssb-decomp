@@ -822,10 +822,10 @@ struct Fighter_Struct
     s32 attack1_followup_count;
     s32 cliffcatch_wait;
     s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
-    s32 timer_unk3;
+    s32 acid_wait;    // Wait this many frames before fighter can be hurt by Planet Zebes acid again?
     s32 tornado_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
     s32 tarucann_wait;// Wait this many frames before fighter can enter Barrel Cannon again
-    s32 unk_0x170;
+    s32 hotfloor_wait;// Wait this many frames before fighter can be hurt by damaging floors again (e.g. Mario's Board the Platforms stage)
     s32 unk_0x174;
     s32 unk_0x178;
 

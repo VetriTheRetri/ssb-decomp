@@ -80,11 +80,11 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     fp->cliffcatch_wait = 0;
     fp->time_since_last_z = 0;
-    fp->timer_unk3 = 0;
+    fp->acid_wait = 0;
 
     fp->tornado_wait = fp->tarucann_wait = 0;
 
-    fp->unk_0x170 = 0;
+    fp->hotfloor_wait = 0;
     fp->unk_ft_0x7AC = 0;
     fp->unk_0x7B0 = 0;
     fp->attack_hit_count = 0;
@@ -104,8 +104,8 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->star_invincible_timer = 0;
 
     fp->hit_status = gmHitCollision_HitStatus_Normal;
-    fp->special_status = 1;
-    fp->special_hit_status = 1;
+    fp->special_status = ftSpecialStatus_Normal;
+    fp->special_hit_status = gmHitCollision_HitStatus_Normal;
 
     fp->throw_gobj = NULL;
     fp->catch_gobj = NULL;

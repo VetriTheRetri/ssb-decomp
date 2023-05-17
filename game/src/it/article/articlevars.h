@@ -17,6 +17,8 @@
 #define ATHEART_GRAVITY 0.25F
 #define ATHEART_T_VEL 30.0F
 
+#define ATSTAR_INVINCIBLE_TIME 600
+#define ATSTAR_WARN_BEGIN_FRAME 480
 #define ATSTAR_INTERACT_DELAY 16                        // Wait this many frames before becoming tangible
 #define ATSTAR_GRAVITY 1.2F
 #define ATSTAR_T_VEL 100.0F
