@@ -209,7 +209,7 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->article_hit.can_reflect = attributes->can_reflect;
     ap->article_hit.can_shield = attributes->can_shield;
     ap->article_hit.hitbox_count = attributes->hitbox_count;
-    ap->article_hit.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+    ap->article_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
     ap->article_hit.attack_id = 0;
     ap->article_hit.flags_0x4E.halfword = func_ovl2_800EA5BC();
     ap->article_hit.flags_hi.flags_0x3FF = 0x39;
@@ -225,7 +225,7 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->article_hurt.size.x = attributes->hurt_size.x * 0.5F;
     ap->article_hurt.size.y = attributes->hurt_size.y * 0.5F;
     ap->article_hurt.size.z = attributes->hurt_size.z * 0.5F;
-    ap->article_hurt.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+    ap->article_hurt.interact_mask = GMHITCOLLISION_MASK_ALL;
 
     ap->shield_collide_angle = 0.0F;
     ap->shield_collide_vec.x = 0.0F;
@@ -691,7 +691,7 @@ void func_ovl3_8016F3D4(GObj *article_gobj)
 
                         targets->victim_flags.is_interact_hurt = targets->victim_flags.is_interact_shield = targets->victim_flags.is_interact_reflect = FALSE;
 
-                        targets->victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+                        targets->victim_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
                     }
                 }
             }
@@ -1303,7 +1303,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
                                     {
                                         fighter_victim_flags.is_interact_hurt = fighter_victim_flags.is_interact_shield = FALSE;
 
-                                        fighter_victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+                                        fighter_victim_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 
                                         for (j = 0; j < ARRAY_COUNT(ft_hit->hit_targets); j++)
                                         {
@@ -1313,7 +1313,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
                                                 break;
                                             }
                                         }
-                                        if ((!(fighter_victim_flags.is_interact_hurt)) && (!(fighter_victim_flags.is_interact_shield)) && (fighter_victim_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)))
+                                        if ((!(fighter_victim_flags.is_interact_hurt)) && (!(fighter_victim_flags.is_interact_shield)) && (fighter_victim_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
                                         {
                                             D_ovl2_801311A0[i] = TRUE;
                                             k++;
@@ -1375,99 +1375,94 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
 
         is_check_self = FALSE;
 
-        if (other_gobj != NULL)
+        while (other_gobj != NULL)
         {
-            do
+            if (other_gobj == this_gobj)
             {
-                if (other_gobj == this_gobj)
-                {
-                    is_check_self = TRUE;
-                }
-                else
-                {
-                    other_ap = ArticleGetStruct(other_gobj);
-                    other_hit = &other_ap->article_hit;
+                is_check_self = TRUE;
+            }
+            else
+            {
+                other_ap = ArticleGetStruct(other_gobj);
+                other_hit = &other_ap->article_hit;
 
-                    if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
+                if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
+                {
+                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team) || (this_ap->is_damage_all))
                     {
-                        if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team) || (this_ap->is_damage_all))
+                        if (other_hit->update_state != gmHitCollision_UpdateState_Disable)
                         {
-                            if (other_hit->update_state != gmHitCollision_UpdateState_Disable)
+                            if (other_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
                             {
-                                if (other_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
+                                those_flags.is_interact_hurt = those_flags.is_interact_shield = FALSE;
+
+                                those_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                                for (m = 0; m < ARRAY_COUNT(other_hit->hit_targets); m++) // IDO will flip you off if you don't use a new iterator here...
                                 {
-                                    those_flags.is_interact_hurt = those_flags.is_interact_shield = FALSE;
-
-                                    those_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
-
-                                    for (m = 0; m < ARRAY_COUNT(other_hit->hit_targets); m++) // IDO will flip you off if you don't use a new iterator here...
+                                    if (this_gobj == other_hit->hit_targets[m].victim_gobj)
                                     {
-                                        if (this_gobj == other_hit->hit_targets[m].victim_gobj)
-                                        {
-                                            those_flags = other_hit->hit_targets[m].victim_flags;
-                                            break;
-                                        }
+                                        those_flags = other_hit->hit_targets[m].victim_flags;
+
+                                        break;
                                     }
-                                    if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)))
+                                }
+                                if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
+                                {
+                                    if ((is_check_self != FALSE) && (this_hit->clang) && (other_hit->clang) && (this_ap->owner_gobj != other_ap->owner_gobj))
                                     {
-                                        if ((is_check_self != FALSE) && (this_hit->clang) && (other_hit->clang) && (this_ap->owner_gobj != other_ap->owner_gobj))
+                                        if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
                                         {
-                                            if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
+                                            if ((this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE))
                                             {
-                                                if ((this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE))
+                                                these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
+
+                                                these_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                                                for (n = 0; n < ARRAY_COUNT(this_hit->hit_targets); n++)
                                                 {
-                                                    these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
-
-                                                    these_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
-
-                                                    for (n = 0; n < ARRAY_COUNT(this_hit->hit_targets); n++)
+                                                    if (other_gobj == this_hit->hit_targets[n].victim_gobj)
                                                     {
-                                                        if (other_gobj == this_hit->hit_targets[n].victim_gobj)
-                                                        {
-                                                            these_flags = this_hit->hit_targets[n].victim_flags;
-                                                            break;
-                                                        }
+                                                        these_flags = this_hit->hit_targets[n].victim_flags;
+                                                        break;
                                                     }
+                                                }
 
-                                                    if ((these_flags.is_interact_hurt) || (these_flags.is_interact_shield) || (these_flags.interact_mask != (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE))) goto hurtbox_check;
+                                                if ((these_flags.is_interact_hurt) || (these_flags.is_interact_shield) || (these_flags.interact_mask != GMHITCOLLISION_MASK_ALL)) goto hurtbox_check;
 
-                                                    else for (i = 0; i < other_hit->hitbox_count; i++)
+                                                else for (i = 0; i < other_hit->hitbox_count; i++)
+                                                {
+                                                    for (j = 0; j < this_hit->hitbox_count; j++)
                                                     {
-                                                        for (j = 0; j < this_hit->hitbox_count; j++)
+                                                        if (func_ovl2_800F05C8(other_hit, i, this_hit, j) != FALSE)
                                                         {
-                                                            if (func_ovl2_800F05C8(other_hit, i, this_hit, j) != FALSE)
+                                                            func_ovl3_8016FD4C(other_ap, other_hit, i, this_ap, this_hit, j, other_gobj, this_gobj);
+
+                                                            if (other_ap->hit_attack_damage == 0)
                                                             {
-                                                                func_ovl3_8016FD4C(other_ap, other_hit, i, this_ap, this_hit, j, other_gobj, this_gobj);
-
-                                                                if (other_ap->hit_attack_damage != 0) goto next_gobj;
-
-                                                                else if (this_ap->hit_attack_damage != 0)
-                                                                {
-                                                                    goto hurtbox_check;
-                                                                }
+                                                                if (this_ap->hit_attack_damage != 0) goto hurtbox_check;
                                                             }
+                                                            else goto next_gobj;
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-                                    hurtbox_check:
-                                        for (i = 0; i < other_hit->hitbox_count; i++) // ...it also flips you off if you DON'T reuse 'i' here
+                                    }
+                                hurtbox_check:
+                                    for (i = 0; i < other_hit->hitbox_count; i++) // ...it also flips you off if you DON'T reuse 'i' here
+                                    {
+                                        at_hurt = &this_ap->article_hurt;
+
+                                        if (this_ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
+
+                                        else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) continue;
+
+                                        else if (func_ovl2_800F06E8(other_hit, i, at_hurt, this_gobj) != FALSE)
                                         {
-                                            at_hurt = &this_ap->article_hurt;
+                                            func_ovl3_8016FF4C(other_ap, other_hit, i, this_ap, at_hurt, other_gobj, this_gobj);
 
-                                            if (this_ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
-
-                                            else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) goto l_continue; // HAL WTF???
-
-                                            else if (func_ovl2_800F06E8(other_hit, i, at_hurt, this_gobj) != FALSE)
-                                            {
-                                                func_ovl3_8016FF4C(other_ap, other_hit, i, this_ap, at_hurt, other_gobj, this_gobj);
-
-                                                break;
-                                            }
-                                        l_continue:
-                                            continue;
+                                            break;
                                         }
                                     }
                                 }
@@ -1475,10 +1470,9 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
                         }
                     }
                 }
-            next_gobj:
-                other_gobj = other_gobj->group_gobj_next;
             }
-            while (other_gobj != NULL);
+        next_gobj:
+            other_gobj = other_gobj->group_gobj_next;
         }
     }
 }
@@ -1505,101 +1499,95 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
 
         if (item_gobj != NULL)
         {
-            do
+
+
+            ip = ItemGetStruct(item_gobj);
+            it_hit = &ip->item_hit;
+
+            if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))
             {
-                ip = ItemGetStruct(item_gobj);
-                it_hit = &ip->item_hit;
-
-                if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))
+                if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team) || (ap->is_damage_all))
                 {
-                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team) || (ap->is_damage_all))
+                    if (it_hit->update_state != 0)
                     {
-                        if (it_hit->update_state != 0)
+                        if (it_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
                         {
-                            if (it_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
+                            those_flags.is_interact_hurt = those_flags.is_interact_shield = FALSE;
+
+                            those_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                            for (m = 0; m < ARRAY_COUNT(it_hit->hit_targets); m++) // IDO will flip you off if you don't use a new iterator here...
                             {
-                                those_flags.flags_b0 = those_flags.flags_b1 = FALSE;
-
-                                those_flags.flags_b456 = 7;
-
-                                for (m = 0; m < ARRAY_COUNT(it_hit->hit_targets); m++) // IDO will flip you off if you don't use a new iterator here...
+                                if (article_gobj == it_hit->hit_targets[m].victim_gobj)
                                 {
-                                    if (article_gobj == it_hit->hit_targets[m].victim_gobj)
-                                    {
-                                        those_flags = it_hit->hit_targets[m].victim_flags;
-                                        break;
-                                    }
+                                    those_flags = it_hit->hit_targets[m].victim_flags;
+                                    break;
                                 }
-                                if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)))
+                            }
+                            if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
+                            {
+                                if ((at_hit->clang) && (it_hit->clang) && (ap->owner_gobj != ip->owner_gobj))
                                 {
-                                    if ((at_hit->clang) && (it_hit->clang) && (ap->owner_gobj != ip->owner_gobj))
+                                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team))
                                     {
-                                        if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team))
+                                        if ((at_hit->update_state != gmHitCollision_UpdateState_Disable) && (at_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
                                         {
-                                            if ((at_hit->update_state != gmHitCollision_UpdateState_Disable) && (at_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
+                                            these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
+
+                                            these_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                                            for (n = 0; n < ARRAY_COUNT(at_hit->hit_targets); n++)
                                             {
-                                                these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
-
-                                                these_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
-
-                                                for (n = 0; n < ARRAY_COUNT(at_hit->hit_targets); n++)
+                                                if (item_gobj == at_hit->hit_targets[n].victim_gobj)
                                                 {
-                                                    if (item_gobj == at_hit->hit_targets[n].victim_gobj)
-                                                    {
-                                                        these_flags = at_hit->hit_targets[n].victim_flags;
-                                                        break;
-                                                    }
+                                                    these_flags = at_hit->hit_targets[n].victim_flags;
+
+                                                    break;
                                                 }
+                                            }
 
-                                                if ((these_flags.is_interact_hurt) || (these_flags.is_interact_shield) || (these_flags.interact_mask != (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE))) goto hurtbox_check;
+                                            if ((these_flags.is_interact_hurt) || (these_flags.is_interact_shield) || (these_flags.interact_mask != GMHITCOLLISION_MASK_ALL)) goto hurtbox_check;
 
-                                                else for (i = 0; i < it_hit->hitbox_count; i++)
+                                            else for (i = 0; i < it_hit->hitbox_count; i++)
+                                            {
+                                                for (j = 0; j < at_hit->hitbox_count; j++)
                                                 {
-                                                    for (j = 0; j < at_hit->hitbox_count; j++)
+                                                    if (func_ovl2_800F019C(it_hit, i, at_hit, j) != FALSE)
                                                     {
-                                                        if (func_ovl2_800F019C(it_hit, i, at_hit, j) != FALSE)
-                                                        {
-                                                            func_ovl3_8016FE4C(ip, it_hit, i, ap, at_hit, j, item_gobj, article_gobj);
+                                                        func_ovl3_8016FE4C(ip, it_hit, i, ap, at_hit, j, item_gobj, article_gobj);
 
-                                                            if (ip->hit_attack_damage != 0) goto next_gobj;
+                                                        if (ip->hit_attack_damage != 0) goto next_gobj;
 
-                                                            else if (ap->hit_attack_damage != 0)
-                                                            {
-                                                                goto hurtbox_check;
-                                                            }
-                                                        }
+                                                        else if (ap->hit_attack_damage != 0) goto hurtbox_check;
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                hurtbox_check:
-                                    for (i = 0; i < it_hit->hitbox_count; i++) // ...it also flips you off if you DON'T reuse 'i' here
+                                }
+                            hurtbox_check:
+                                for (i = 0; i < it_hit->hitbox_count; i++) // ...it also flips you off if you DON'T reuse 'i' here
+                                {
+                                    at_hurt = &ap->article_hurt;
+
+                                    if (ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
+
+                                    else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) continue;
+
+                                    else if (func_ovl2_800F079C(it_hit, i, at_hurt, article_gobj) != FALSE)
                                     {
-                                        at_hurt = &ap->article_hurt;
+                                        func_ovl3_801702C8(ip, it_hit, i, ap, at_hurt, item_gobj, article_gobj);
 
-                                        if (ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
-
-                                        else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) goto l_continue; // HAL WTF???
-
-                                        else if (func_ovl2_800F079C(it_hit, i, at_hurt, article_gobj) != FALSE)
-                                        {
-                                            func_ovl3_801702C8(ip, it_hit, i, ap, at_hurt, item_gobj, article_gobj);
-
-                                            break;
-                                        }
-                                    l_continue:
-                                        continue;
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
                 }
-            next_gobj:
-                item_gobj = item_gobj->group_gobj_next;
-            } 
-            while (item_gobj != NULL);
+            }
+        next_gobj:
+            item_gobj = item_gobj->group_gobj_next;
         }
     }
 }

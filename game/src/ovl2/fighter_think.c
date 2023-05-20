@@ -2236,7 +2236,7 @@ void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
 
             hitlog->hit_source = ftHitCollision_LogKind_Item;
             hitlog->attacker_hit = it_hit;
-            hitlog->unk_hitlog_0x8 = arg2;
+            hitlog->hitbox_id = arg2;
             hitlog->attacker_gobj = item_gobj;
             hitlog->victim_hurt = ft_hurt;
             hitlog->attacker_port_id = ip->port_id;
@@ -2453,7 +2453,7 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
 
                 hitlog->hit_source = ftHitCollision_LogKind_Article;
                 hitlog->attacker_hit = at_hit;
-                hitlog->unk_hitlog_0x8 = arg2;
+                hitlog->hitbox_id = arg2;
                 hitlog->attacker_gobj = article_gobj;
                 hitlog->victim_hurt = ft_hurt;
                 hitlog->attacker_port_id = ap->port_id;
@@ -2632,7 +2632,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
             if (ip->is_hitlag_victim)
             {
-                func_ovl2_800F0D24(&sp84, it_hit, hitlog->unk_hitlog_0x8, hitlog->victim_hurt);
+                func_ovl2_800F0D24(&sp84, it_hit, hitlog->hitbox_id, hitlog->victim_hurt);
 
                 switch (it_hit->element)
                 {
@@ -2668,7 +2668,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
             if (ap->is_hitlag_victim)
             {
-                func_ovl2_800F0E08(&sp84, at_hit, hitlog->unk_hitlog_0x8, hitlog->victim_hurt);
+                func_ovl2_800F0E08(&sp84, at_hit, hitlog->hitbox_id, hitlog->victim_hurt);
 
                 switch (at_hit->element)
                 {
@@ -2889,7 +2889,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
 
             goto next_gobj;
         }
-        if (other_gobj == this_fp->capture_gobj) goto next_gobj;
+        else if (other_gobj == this_fp->capture_gobj) goto next_gobj;
 
         other_fp = FighterGetStruct(other_gobj);
 
@@ -2897,8 +2897,6 @@ void func_ovl2_800E4870(GObj *this_gobj)
         {
             goto next_gobj;
         }
-        else;
-
         if (!(other_fp->x192_flag_b2))
         {
             if ((other_fp->throw_gobj != NULL) && (this_gobj == other_fp->throw_gobj))
@@ -2909,7 +2907,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
             {
                 k = 0;
 
-                for (i = 0; i < ARRAY_COUNT(D_ovl2_801311A0); i++)
+                for (i = 0; i < ARRAY_COUNT(other_fp->fighter_hit); i++)
                 {
                     other_ft_hit = &other_fp->fighter_hit[i];
 
@@ -2919,7 +2917,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
                         {
                             these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
 
-                            these_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+                            these_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 
                             for (m = 0; m < ARRAY_COUNT(other_ft_hit->hit_targets); m++)
                             {
@@ -2930,7 +2928,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
                                     break;
                                 }
                             }
-                            if ((!(these_flags.is_interact_hurt)) && (!(these_flags.is_interact_shield)) && (these_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)))
+                            if ((!(these_flags.is_interact_hurt)) && (!(these_flags.is_interact_shield)) && (these_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
                             {
                                 D_ovl2_801311A0[i] = TRUE;
 
@@ -2954,7 +2952,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
                         {
                             l = 0;
 
-                            for (i = 0; i < ARRAY_COUNT(D_ovl2_801311B0); i++)
+                            for (i = 0; i < ARRAY_COUNT(this_fp->fighter_hit); i++)
                             {
                                 this_ft_hit = &this_fp->fighter_hit[i];
 
@@ -2964,7 +2962,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
                                     {
                                         those_flags.is_interact_hurt = those_flags.is_interact_shield = FALSE;
 
-                                        those_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+                                        those_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 
                                         for (n = 0; n < ARRAY_COUNT(this_ft_hit->hit_targets); n++)
                                         {
@@ -2975,7 +2973,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
                                                 break;
                                             }
                                         }
-                                        if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)))
+                                        if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
                                         {
                                             D_ovl2_801311B0[i] = TRUE;
 
@@ -2989,95 +2987,83 @@ void func_ovl2_800E4870(GObj *this_gobj)
                             }
                             if (l != 0)
                             {
-                                other_ft_hit = &other_fp->fighter_hit[0];
-
                                 for (i = 0; i < ARRAY_COUNT(other_fp->fighter_hit); i++)
                                 {
                                     other_ft_hit = &other_fp->fighter_hit[i];
 
-                                    if (D_ovl2_801311A0[i] != FALSE)
+                                    if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                    else for (j = 0; j < ARRAY_COUNT(this_fp->fighter_hit); j++)
                                     {
-                                        for (j = 0; j < ARRAY_COUNT(this_fp->fighter_hit); j++)
+                                        this_ft_hit = &this_fp->fighter_hit[j];
+
+                                        if (D_ovl2_801311B0[j] == FALSE) continue;
+
+                                        else if (func_ovl2_800EFABC(other_ft_hit, this_ft_hit) != FALSE)
                                         {
-                                            this_ft_hit = &this_fp->fighter_hit[j];
+                                            func_ovl2_800E2910(other_fp, other_ft_hit, this_fp, this_ft_hit, other_gobj, this_gobj);
 
-                                            if (D_ovl2_801311B0[j] != FALSE)
+                                            if (D_ovl2_801311A0[i] == FALSE)
                                             {
-                                                if (func_ovl2_800EFABC(other_ft_hit, this_ft_hit) != FALSE)
-                                                {
-                                                    func_ovl2_800E2910(other_fp, other_ft_hit, this_fp, this_ft_hit, other_gobj, this_gobj);
-
-                                                    if (D_ovl2_801311A0[i] == FALSE)
-                                                    {
-                                                        break;
-                                                    }
-                                                    else continue;
-                                                }
+                                                break;
                                             }
+                                            else continue;
                                         }
                                     }
-                                    else continue;
                                 }
                             }
                         }
                     }
-                    for (i = 0; i < ARRAY_COUNT(D_ovl2_801311A0); i++) // 175 here
+                    for (i = 0; i < ARRAY_COUNT(other_fp->fighter_hit); i++) // 175 here
                     {
                         other_ft_hit = &other_fp->fighter_hit[i];
 
-                        if (D_ovl2_801311A0[i] != FALSE)
-                        {
-                            D_ovl2_801311A0[i] = func_ovl2_800EF364(other_ft_hit, this_gobj);
+                        if (D_ovl2_801311A0[i] == FALSE) continue;
 
-                            if (D_ovl2_801311A0[i] != FALSE)
-                            {
-                                k++;
-                            }
-                        }
+                        D_ovl2_801311A0[i] = func_ovl2_800EF364(other_ft_hit, this_gobj);
+
+                        if (D_ovl2_801311A0[i] != FALSE) k++;
                     }
                     if (k != 0)
                     {
-                        if (this_fp->x18F_flag_b2)
+                        if (this_fp->is_shield)
                         {
-                            for (i = 0; i < ARRAY_COUNT(D_ovl2_801311A0); i++)
+                            for (i = 0; i < ARRAY_COUNT(other_fp->fighter_hit); i++)
                             {
                                 other_ft_hit = &other_fp->fighter_hit[i];
 
-                                if (D_ovl2_801311A0[i] != FALSE)
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else if (func_ovl2_800EFCC0(other_ft_hit, this_gobj, this_fp->joint[3], &angle) != FALSE)
                                 {
-                                    if (func_ovl2_800EFCC0(other_ft_hit, this_gobj, this_fp->joint[3], &angle) != FALSE)
-                                    {
-                                        func_ovl2_800E2A90(other_fp, other_ft_hit, this_fp, other_gobj, this_gobj);
-                                    }
+                                    func_ovl2_800E2A90(other_fp, other_ft_hit, this_fp, other_gobj, this_gobj);
                                 }
                             }
                         }
                         if ((this_fp->special_hit_status != gmHitCollision_HitStatus_Intangible) && (this_fp->special_status != ftSpecialStatus_Intangible) && (this_fp->hit_status != gmHitCollision_HitStatus_Intangible))
                         {
-                            for (i = 0; i < ARRAY_COUNT(D_ovl2_801311A0); i++)
+                            for (i = 0; i < ARRAY_COUNT(other_fp->fighter_hit); i++)
                             {
                                 other_ft_hit = &other_fp->fighter_hit[i];
 
-                                if (D_ovl2_801311A0[i] != FALSE)
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else for (j = 0; j < ARRAY_COUNT(this_fp->fighter_hurt); j++)
                                 {
-                                    for (j = 0; j < ARRAY_COUNT(this_fp->fighter_hurt); j++)
+                                    ft_hurt = &this_fp->fighter_hurt[j];
+
+                                    if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
+
+                                    if (ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
                                     {
-                                        ft_hurt = &this_fp->fighter_hurt[j];
-
-                                        if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
-
-                                        if (ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
+                                        if (func_ovl2_800EFBA4(other_ft_hit, ft_hurt) != FALSE)
                                         {
-                                            if (func_ovl2_800EFBA4(other_ft_hit, ft_hurt) != FALSE)
-                                            {
-                                                func_ovl2_800E2D44(other_fp, other_ft_hit, this_fp, ft_hurt, other_gobj, this_gobj);
+                                            func_ovl2_800E2D44(other_fp, other_ft_hit, this_fp, ft_hurt, other_gobj, this_gobj);
 
-                                                break;
-                                            }
+                                            break;
                                         }
                                     }
                                 }
-                                else continue;
                             }
                         }
                     }
@@ -3088,4 +3074,409 @@ void func_ovl2_800E4870(GObj *this_gobj)
     next_gobj:
         other_gobj = other_gobj->group_gobj_next;
     }
+}
+
+void func_ovl2_800E4ED4(GObj *fighter_gobj)
+{
+    GObj *item_gobj;
+    s32 i, j, k, l, m, n;
+    gmHitCollisionFlags fighter_flags;
+    gmHitCollisionFlags item_flags;
+    Fighter_Struct *fp;
+    Item_Struct *ip;
+    Item_Hit *it_hit;
+    f32 angle;
+    Fighter_Hurt *ft_hurt;
+    Fighter_Hit *ft_hit;
+    f32 lr;
+    s32 unused1[4];
+
+    fp = FighterGetStruct(fighter_gobj);
+    item_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
+
+    while (item_gobj != NULL)
+    {
+        ip = ItemGetStruct(item_gobj);
+        it_hit = &ip->item_hit;
+
+        if ((fighter_gobj != ip->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->team != ip->team)) && (it_hit->update_state != gmHitCollision_UpdateState_Disable))
+        {
+            if (it_hit->interact_mask & GMHITCOLLISION_MASK_FIGHTER)
+            {
+                item_flags.is_interact_hurt = item_flags.is_interact_shield = item_flags.is_interact_reflect = item_flags.is_interact_absorb = FALSE;
+
+                item_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                for (m = 0; m < ARRAY_COUNT(it_hit->hit_targets); m++)
+                {
+                    if (fighter_gobj == it_hit->hit_targets[m].victim_gobj)
+                    {
+                        item_flags = it_hit->hit_targets[m].victim_flags;
+
+                        break;
+                    }
+                }
+                if (!(item_flags.is_interact_hurt) && !(item_flags.is_interact_shield) && !(item_flags.is_interact_reflect) && !(item_flags.is_interact_absorb) && (item_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
+                {
+                    if ((it_hit->clang) && !(fp->x192_flag_b2) && ((fp->throw_gobj == NULL) || (fp->throw_gobj != ip->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->throw_team != ip->team))))
+                    {
+
+                        if (!(fp->is_reflect) || !(it_hit->can_reflect))
+                        {
+                            k = 0;
+
+                            for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
+                            {
+                                ft_hit = &fp->fighter_hit[i];
+
+                                if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ip->ground_or_air == air) && (ft_hit->is_hit_air) || (ip->ground_or_air == ground) && (ft_hit->is_hit_ground)))
+                                {
+                                    fighter_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                                    for (n = 0; n < ARRAY_COUNT(ft_hit->hit_targets); n++)
+                                    {
+                                        if (item_gobj == ft_hit->hit_targets[n].victim_gobj)
+                                        {
+                                            fighter_flags = ft_hit->hit_targets[n].victim_flags;
+
+                                            break;
+                                        }
+                                    }
+                                    if (fighter_flags.interact_mask == GMHITCOLLISION_MASK_ALL)
+                                    {
+                                        D_ovl2_801311B0[i] = TRUE;
+
+                                        k++;
+
+                                        continue;
+                                    }
+                                }
+                                D_ovl2_801311B0[i] = FALSE;
+                            }
+                            if (k != 0)
+                            {
+                                for (i = 0; i < it_hit->hitbox_count; i++)
+                                {
+                                    for (j = 0; j < ARRAY_COUNT(fp->fighter_hit); j++)
+                                    {
+                                        ft_hit = &fp->fighter_hit[j];
+
+                                        if (D_ovl2_801311B0[j] == FALSE) continue;
+
+                                        else if (func_ovl2_800EFD70(it_hit, i, ft_hit) != FALSE)
+                                        {
+                                            func_ovl2_800E2F04(ip, it_hit, i, fp, ft_hit, item_gobj, fighter_gobj);
+
+                                            if (ip->hit_attack_damage != 0) goto next_gobj;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    for (i = 0, l = 0; i < it_hit->hitbox_count; i++)
+                    {
+                        D_ovl2_801311A0[i] = func_ovl2_800EF414(it_hit, i, fighter_gobj);
+
+                        if (D_ovl2_801311A0[i] != 0)
+                        {
+                            l++;
+                        }
+                    }
+                    if (l != 0)
+                    {
+                        if ((fp->is_reflect) && (it_hit->can_reflect))
+                        {
+                            for (i = 0; i < it_hit->hitbox_count; i++)
+                            {
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else if (func_ovl2_800EFFCC(it_hit, i, fp, fp->special_hit) != FALSE)
+                                {
+                                    func_ovl2_800E31B4(ip, it_hit, fp, fighter_gobj);
+
+                                    goto next_gobj;
+                                }
+                            }
+                        }
+                        if ((fp->is_absorb) && (it_hit->can_absorb))
+                        {
+                            for (i = 0; i < it_hit->hitbox_count; i++)
+                            {
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else if (func_ovl2_800EFFCC(it_hit, i, fp, fp->special_hit) != FALSE)
+                                {
+                                    func_ovl2_800E3308(ip, it_hit, fp, fighter_gobj);
+
+                                    goto next_gobj;
+                                }
+                            }
+                        }
+                        if ((fp->is_shield) && (it_hit->can_shield))
+                        {
+                            for (i = 0; i < it_hit->hitbox_count; i++)
+                            {
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else if (func_ovl2_800EFF00(it_hit, i, fighter_gobj, fp->joint[3], &angle, &lr) != FALSE)
+                                {
+                                    func_ovl2_800E3048(ip, it_hit, i, fp, item_gobj, fighter_gobj, angle, &lr);
+
+                                    goto next_gobj;
+                                }
+                            }
+                        }
+                        if ((fp->special_hit_status != gmHitCollision_HitStatus_Intangible) && (fp->special_status != ftSpecialStatus_Intangible) && (fp->hit_status != gmHitCollision_HitStatus_Intangible))
+                        {
+                            for (i = 0; i < it_hit->hitbox_count; i++)
+                            {
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else for (j = 0; j < ARRAY_COUNT(fp->fighter_hurt); j++)
+                                {
+                                    ft_hurt = &fp->fighter_hurt[j];
+
+                                    if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
+
+                                    if (ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
+                                    {
+                                        if (func_ovl2_800EFE6C(it_hit, i, ft_hurt) != FALSE)
+                                        {
+                                            func_ovl2_800E3418(ip, it_hit, i, fp, ft_hurt, item_gobj, fighter_gobj);
+
+                                            goto next_gobj;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    next_gobj:
+        item_gobj = item_gobj->group_gobj_next;
+    }
+}
+
+void func_ovl2_800E4ED4(GObj *fighter_gobj)
+{
+    GObj *article_gobj;
+    s32 i, j, k, l, m, n;
+    gmHitCollisionFlags fighter_flags;
+    gmHitCollisionFlags article_flags;
+    Fighter_Struct *fp;
+    Article_Struct *ap;
+    Article_Hit *at_hit;
+    f32 angle;
+    Fighter_Hurt *ft_hurt;
+    Fighter_Hit *ft_hit;
+    f32 lr;
+    s32 unused1[4];
+
+    fp = FighterGetStruct(fighter_gobj);
+    article_gobj = gOMObjCommonLinks[4];
+
+    while (article_gobj != NULL)
+    {
+        ap = article_gobj->user_data;
+        at_hit = &ap->article_hit;
+
+        if ((fighter_gobj != ap->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->team != ap->team)) && (at_hit->update_state != gmHitCollision_UpdateState_Disable))
+        {
+            if (at_hit->interact_mask & GMHITCOLLISION_MASK_FIGHTER)
+            {
+                article_flags.is_interact_hurt = article_flags.is_interact_shield = article_flags.is_interact_reflect = FALSE;
+
+                article_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                for (m = 0; m < ARRAY_COUNT(at_hit->hit_targets); m++)
+                {
+                    if (fighter_gobj == at_hit->hit_targets[m].victim_gobj)
+                    {
+                        article_flags = at_hit->hit_targets[m].victim_flags;
+
+                        break;
+                    }
+                }
+                if (!(article_flags.is_interact_hurt) && !(article_flags.is_interact_shield) && !(article_flags.is_interact_reflect) && (article_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
+                {
+                    if ((at_hit->clang) && !(fp->x192_flag_b2) && ((fp->throw_gobj == NULL) || (fp->throw_gobj != ap->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->throw_team != ap->team))))
+                    {
+
+                        if (!(fp->is_reflect) || !(at_hit->can_reflect))
+                        {
+                            k = 0;
+
+                            for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
+                            {
+                                ft_hit = &fp->fighter_hit[i];
+
+                                if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ap->ground_or_air == air) && (ft_hit->is_hit_air) || (ap->ground_or_air == ground) && (ft_hit->is_hit_ground)))
+                                {
+                                    fighter_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+                                    for (n = 0; n < ARRAY_COUNT(ft_hit->hit_targets); n++)
+                                    {
+                                        if (article_gobj == ft_hit->hit_targets[n].victim_gobj)
+                                        {
+                                            fighter_flags = ft_hit->hit_targets[n].victim_flags;
+
+                                            break;
+                                        }
+                                    }
+                                    if (fighter_flags.interact_mask == GMHITCOLLISION_MASK_ALL)
+                                    {
+                                        D_ovl2_801311B0[i] = TRUE;
+
+                                        k++;
+
+                                        continue;
+                                    }
+                                }
+                                D_ovl2_801311B0[i] = FALSE;
+                            }
+                            if (k != 0)
+                            {
+                                for (i = 0; i < at_hit->hitbox_count; i++)
+                                {
+                                    for (j = 0; j < ARRAY_COUNT(fp->fighter_hit); j++)
+                                    {
+                                        ft_hit = &fp->fighter_hit[j];
+
+                                        if (D_ovl2_801311B0[j] == FALSE) continue;
+
+                                        else if (func_ovl2_800F02BC(at_hit, i, ft_hit) != FALSE)
+                                        {
+                                            func_ovl2_800E35BC(ap, at_hit, i, fp, ft_hit, article_gobj, fighter_gobj);
+
+                                            if (ap->hit_attack_damage != 0) goto next_gobj;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    for (i = 0, l = 0; i < at_hit->hitbox_count; i++)
+                    {
+                        D_ovl2_801311A0[i] = func_ovl2_800EF4F4(at_hit, i, fighter_gobj);
+
+                        if (D_ovl2_801311A0[i] != 0)
+                        {
+                            l++;
+                        }
+                    }
+                    if (l != 0)
+                    {
+                        if ((fp->is_reflect) && (at_hit->can_reflect))
+                        {
+                            for (i = 0; i < at_hit->hitbox_count; i++)
+                            {
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else if (func_ovl2_800F0518(at_hit, i, fp, fp->special_hit) != FALSE)
+                                {
+                                    func_ovl2_800E3860(ap, at_hit, fp, fighter_gobj);
+
+                                    goto next_gobj;
+                                }
+                            }
+                        }
+                        if ((fp->is_shield) && (at_hit->can_shield))
+                        {
+                            for (i = 0; i < at_hit->hitbox_count; i++)
+                            {
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else if (func_ovl2_800F044C(at_hit, i, fighter_gobj, fp->joint[3], &angle, &lr) != FALSE)
+                                {
+                                    func_ovl2_800E36F8(ap, at_hit, i, fp, article_gobj, fighter_gobj, angle, &lr);
+
+                                    goto next_gobj;
+                                }
+                            }
+                        }
+                        if ((fp->special_hit_status != gmHitCollision_HitStatus_Intangible) && (fp->special_status != ftSpecialStatus_Intangible) && (fp->hit_status != gmHitCollision_HitStatus_Intangible))
+                        {
+                            for (i = 0; i < at_hit->hitbox_count; i++)
+                            {
+                                if (D_ovl2_801311A0[i] == FALSE) continue;
+
+                                else for (j = 0; j < ARRAY_COUNT(fp->fighter_hurt); j++)
+                                {
+                                    ft_hurt = &fp->fighter_hurt[j];
+
+                                    if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
+
+                                    if (ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
+                                    {
+                                        if (func_ovl2_800F03B8(at_hit, i, ft_hurt) != FALSE)
+                                        {
+                                            func_ovl2_800E39B0(ap, at_hit, i, fp, ft_hurt, article_gobj, fighter_gobj);
+
+                                            goto next_gobj;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    next_gobj:
+        article_gobj = article_gobj->group_gobj_next;
+    }
+}
+
+extern Ground_Hit D_ovl2_80128D30[6] = 
+{
+    {  4,  1, 361, 100, 100, 0, gmHitCollision_Element_Fire  },
+    {  5, 10,  90, 100, 200, 0, gmHitCollision_Element_Fire  },
+    {  6, 10,  90, 100, 100, 0, gmHitCollision_Element_Fire  },
+    {  7, 10, 361, 100,  80, 0, gmHitCollision_Element_Slash },
+    {  8,  1,  90, 100, 100, 0, gmHitCollision_Element_Fire  },
+    {  9,  1,  90, 100, 100, 0, gmHitCollision_Element_Fire  }
+};
+
+bool32 func_ovl2_800E5C30(Fighter_Struct *fp, Ground_Hit **p_gr_hit)
+{
+    if ((fp->hotfloor_wait == 0) && (fp->ground_or_air == ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
+    {
+        switch (fp->coll_data.ground_flags & 0xFFFF00FF)
+        {
+        case 7:
+            *p_gr_hit = &D_ovl2_80128D30[0];
+            return TRUE;
+
+        case 8:
+            *p_gr_hit = &D_ovl2_80128D30[1];
+            return TRUE;
+
+        case 9:
+            *p_gr_hit = &D_ovl2_80128D30[2];
+            return TRUE;
+
+        case 10:
+            *p_gr_hit = &D_ovl2_80128D30[3];
+            return TRUE;
+
+        case 11:
+            *p_gr_hit = &D_ovl2_80128D30[4];
+            return TRUE;
+
+        case 15:
+            *p_gr_hit = &D_ovl2_80128D30[5];
+            return TRUE;
+
+        default:
+            return FALSE;
+        }
+    }
+    else return FALSE;
 }

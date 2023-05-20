@@ -19,7 +19,7 @@ void func_ovl3_80148E30(GObj *fighter_gobj)
         }
         else fp->status_vars.common.guard.effect_gobj = func_ovl2_80101108(fighter_gobj);
 
-        fp->x18F_flag_b2 = TRUE;
+        fp->is_shield = TRUE;
     }
     func_ovl3_80148714(fighter_gobj);
 
@@ -33,7 +33,7 @@ void func_ovl3_80148E30(GObj *fighter_gobj)
 
     func_ovl3_8014889C(fighter_gobj);
 
-    fp->x18F_flag_b2 = TRUE;
+    fp->is_shield = TRUE;
 }
 
 bool32 func_ovl3_80148F24(GObj *fighter_gobj)
@@ -69,12 +69,12 @@ void func_ovl3_80148F74(GObj *fighter_gobj)
 void func_ovl3_80148FF0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    u32 flag = fp->x18F_flag_b2;
+    u32 flag = fp->is_shield;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOff, 0.0F, 1.0F, 0x34U);
     ftAnim_Update(fighter_gobj);
 
-    fp->x18F_flag_b2 = flag;
+    fp->is_shield = flag;
 
     func_ovl3_80148714(fighter_gobj);
     func_800269C0(0xEU);
@@ -115,7 +115,7 @@ void func_ovl3_80149108(GObj *fighter_gobj)
 
         ep->unk_ef_0x1C = 1;
     }
-    fp->x18F_flag_b2 = TRUE;
+    fp->is_shield = TRUE;
 
     fp->status_vars.common.guard.is_setoff = TRUE;
 }

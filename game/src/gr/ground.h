@@ -67,7 +67,7 @@ typedef struct grMapObject
 
 typedef struct _Ground_Hit
 {
-    s32 update_state;
+    s32 update_state; // Not actually UpdateState, no idea what this is; something to do with sound effects?
     s32 damage;
     s32 angle;
     s32 knockback_scale;

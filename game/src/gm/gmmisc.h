@@ -21,6 +21,8 @@
 #define GMHITCOLLISION_MASK_ITEM    (1 << 1) // Can interact with items
 #define GMHITCOLLISION_MASK_ARTICLE (1 << 2) // Can interact with articles
 
+#define GMHITCOLLISION_MASK_ALL     (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)
+
 typedef enum gmHitCollisionStatus
 {
     gmHitCollision_HitStatus_None, // User's hurtboxes are disabled

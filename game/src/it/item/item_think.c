@@ -112,7 +112,7 @@ void func_ovl3_80168158(Item_Struct *ip) // Clear hit victims array
 
         targets->victim_flags.timer_rehit = 0;
 
-        targets->victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+        targets->victim_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
     }
 }
 

@@ -58,7 +58,7 @@ void func_ovl3_80148304(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->x18F_flag_b2)
+    if (fp->is_shield)
     {
         if (fp->status_vars.common.guard.shield_decay_wait != 0)
         {
@@ -100,7 +100,7 @@ void func_ovl3_80148304(GObj *fighter_gobj)
             }
             func_ovl2_800E9C3C(fighter_gobj);
 
-            fp->x18F_flag_b2 = FALSE;
+            fp->is_shield = FALSE;
         }
     }
 }
@@ -198,7 +198,7 @@ void func_ovl3_80148714(GObj *fighter_gobj)
     s32 i;
     Vec3f *scale = &fp->attributes->unk_0x324[3];
 
-    if (fp->x18F_flag_b2)
+    if (fp->is_shield)
     {
         func_ovl3_80148488(fp);
 
@@ -344,7 +344,7 @@ void func_ovl3_80148A88(GObj *fighter_gobj)
                     func_ovl2_800E90F8(fighter_gobj);
                     func_ovl3_80148214(fighter_gobj);
 
-                    fp->x18F_flag_b2 = TRUE;
+                    fp->is_shield = TRUE;
 
                     func_ovl3_80148714(fighter_gobj);
                 }
@@ -379,7 +379,7 @@ void func_ovl3_80148BFC(GObj *fighter_gobj, s32 slide_frames)
         else
         {
             fp->status_vars.common.guard.effect_gobj = func_ovl2_80101108(fighter_gobj);
-            fp->x18F_flag_b2 = TRUE;
+            fp->is_shield = TRUE;
         }
     }
     func_ovl3_80148714(fighter_gobj);
@@ -426,7 +426,7 @@ void func_ovl3_80148D4C(GObj *fighter_gobj)
     {
         func_ovl3_80149510(fighter_gobj);
     }
-    else if ((fp->status_vars.common.guard.is_release != FALSE) || !(fp->x18F_flag_b2))
+    else if ((fp->status_vars.common.guard.is_release != FALSE) || !(fp->is_shield))
     {
         func_ovl3_80148FF0(fighter_gobj);
     }
@@ -440,5 +440,5 @@ void func_ovl3_80148DDC(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Common_Guard, 0.0F, 1.0F, 0x34U);
     func_ovl3_8014889C(fighter_gobj);
 
-    fp->x18F_flag_b2 = TRUE;
+    fp->is_shield = TRUE;
 }

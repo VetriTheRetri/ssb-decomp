@@ -195,7 +195,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     ip->item_hit.can_shield = it_hit_desc->can_shield;
     ip->item_hit.hitbox_count = it_hit_desc->hitbox_count;
 
-    ip->item_hit.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+    ip->item_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
 
     func_ovl3_80168158(ip);
 
@@ -417,7 +417,7 @@ void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
 
                         targets->victim_flags.is_interact_hurt = targets->victim_flags.is_interact_shield = targets->victim_flags.is_interact_reflect = targets->victim_flags.is_interact_absorb = FALSE;
 
-                        targets->victim_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+                        targets->victim_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
                     }
                 }
             }
@@ -698,7 +698,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                         {
                             if (other_hit->interact_mask & GMHITCOLLISION_MASK_ITEM)
                             {
-                                those_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+                                those_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 
                                 for (m = 0; m < ARRAY_COUNT(other_hit->hit_targets); m++)
                                 {
@@ -709,9 +709,9 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                                     }
                                 }
 
-                                if (those_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE))
+                                if (those_flags.interact_mask == GMHITCOLLISION_MASK_ALL)
                                 {
-                                    these_flags.interact_mask = (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE);
+                                    these_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 
                                     for (n = 0; n < ARRAY_COUNT(this_hit->hit_targets); n++)
                                     {
@@ -722,7 +722,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                                         }
                                     }
 
-                                    if (these_flags.interact_mask == (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE))
+                                    if (these_flags.interact_mask == GMHITCOLLISION_MASK_ALL)
                                     {
                                         for (i = 0; i < other_hit->hitbox_count; i++)
                                         {

@@ -546,7 +546,7 @@ typedef struct ftHitCollisionLog // Might have to return once structs are cleane
 {
     s32 hit_source;
     void *attacker_hit;
-    s32 unk_hitlog_0x8;
+    s32 hitbox_id;
     GObj *attacker_gobj;
     Fighter_Hurt *victim_hurt; // Victim fighter's hurtbox
     u8 attacker_port_id;
@@ -873,9 +873,9 @@ struct Fighter_Struct
     u32 x18C_flag_b2 : 1;
     u32 x18C_flag_b3 : 1;
     u32 x18C_flag_b4 : 1;
-    u32 is_reflect : 1;
+    u32 is_reflect : 1; // Fighter's reflect box is active
     s32 lr_reflect : 2;
-    u32 is_absorb : 1;
+    u32 is_absorb : 1; // Fighter's absorb box is active
     s32 lr_absorb : 2;
     u32 is_goto_attack100 : 1;
     u32 is_fast_fall : 1;
@@ -890,7 +890,7 @@ struct Fighter_Struct
     u32 x18E_flag_b4 : 1;
     u32 is_playing_gfx : 1;
     u32 x18E_flag_4bit : 4; // Slope Contour behavior?
-    u32 x18F_flag_b2 : 1;
+    u32 is_shield : 1; // Fighter's shield bubble is active
     u32 is_statupdate_stop_gfx : 1; // Destroy GFX on action state change if TRUE
     u32 x18F_flag_b4 : 1;
     u32 x18F_flag_b5 : 1;

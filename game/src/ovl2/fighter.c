@@ -74,7 +74,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->jumps_used = 0;
     fp->is_reflect = FALSE;
     fp->is_absorb = FALSE;
-    fp->x18F_flag_b2 = FALSE;
+    fp->is_shield = FALSE;
     fp->is_statupdate_stop_gfx = FALSE;
     fp->x18F_flag_b4 = FALSE;
 
