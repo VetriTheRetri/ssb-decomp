@@ -98,7 +98,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->unk_0x810 = 0;
     fp->unk_ft_0x814 = 0;
     fp->damage_heal = 0;
-    fp->unk_0x804 = 0;
+    fp->damage_joint_index = 0;
     fp->invincible_timer = 0;
     fp->walldamage_nohit_timer = 0;
     fp->star_invincible_timer = 0;

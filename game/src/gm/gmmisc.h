@@ -17,9 +17,9 @@
 
 #define GMCOMPLAYER_LEVEL_MAX 9
 
-#define GMHITCOLLISION_MASK_FIGHTER 1 // Can interact with fighters
-#define GMHITCOLLISION_MASK_ITEM 2 // Can interact with items
-#define GMHITCOLLISION_MASK_ARTICLE 4 // Can interact with articles
+#define GMHITCOLLISION_MASK_FIGHTER (1 << 0) // Can interact with fighters
+#define GMHITCOLLISION_MASK_ITEM    (1 << 1) // Can interact with items
+#define GMHITCOLLISION_MASK_ARTICLE (1 << 2) // Can interact with articles
 
 typedef enum gmHitCollisionStatus
 {

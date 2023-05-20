@@ -24,6 +24,7 @@ typedef struct SpecialHit
     s32 joint_index;
     Vec3f offset;
     Vec3f size;
+    s32 damage_resist;
 
 } SpecialHit;
 
@@ -965,7 +966,7 @@ struct Fighter_Struct
     u16 shuffle_timer; // Model shift timer
     GObj *throw_gobj;
     ftKind throw_ft_kind;
-    u8 unk_0x280; // Thrower's team?
+    u8 throw_team; // Thrower's team?
     u8 throw_port_id; 
     s32 throw_player_number;
     s32 attack_id;
@@ -1036,7 +1037,7 @@ struct Fighter_Struct
     s32 damage_element;
     s32 lr_damage;
     s32 damage_index;
-    s32 unk_0x804;
+    s32 damage_joint_index;
     s32 damage_player_number;
     s32 damage_port_id; // Port index of damaging fighter
     s32 unk_0x810;
