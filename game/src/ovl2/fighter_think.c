@@ -3278,11 +3278,11 @@ void func_ovl2_800E4ED4(GObj *fighter_gobj)
     s32 unused1[4];
 
     fp = FighterGetStruct(fighter_gobj);
-    article_gobj = gOMObjCommonLinks[4];
+    article_gobj = gOMObjCommonLinks[GObjLinkIndex_Article];
 
     while (article_gobj != NULL)
     {
-        ap = article_gobj->user_data;
+        ap = ArticleGetStruct(article_gobj);
         at_hit = &ap->article_hit;
 
         if ((fighter_gobj != ap->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->team != ap->team)) && (at_hit->update_state != gmHitCollision_UpdateState_Disable))
