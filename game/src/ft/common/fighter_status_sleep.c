@@ -116,7 +116,7 @@ void func_ovl3_8013D8B0(GObj *fighter_gobj)
 
     fp->is_invisible = TRUE;
     fp->x18E_flag_b0 = TRUE;
-    fp->is_ignore_blastzone_top = TRUE;
+    fp->is_stat_nodamage = TRUE;
     fp->x191_flag_b3 = TRUE;
 
     fp->status_vars.common.sleep.stock_steal_wait = 0;

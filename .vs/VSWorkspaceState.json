@@ -3,6 +3,7 @@
     "",
     "\\game",
     "\\game\\src",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\article\\articleground",
@@ -11,6 +12,6 @@
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\article_think.c",
+  "SelectedNode": "\\game\\src\\gm\\gmmisc.h",
   "PreviewInSolutionExplorer": false
 }

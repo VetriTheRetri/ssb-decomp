@@ -119,12 +119,12 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 
     if ((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi))
     {
-        fp->cb_physics = func_ovl3_8013FB6C;
+        fp->proc_physics = func_ovl3_8013FB6C;
         fp->knockback_resist_status = FTYOSHI_JUMPAERIAL_KNOCKBACK_RESIST;
     }
     else if ((fp->ft_kind == Ft_Kind_Ness) || (fp->ft_kind == Ft_Kind_PolyNess))
     {
-        fp->cb_physics = func_ovl3_8013FBC4;
+        fp->proc_physics = func_ovl3_8013FBC4;
         fp->status_vars.common.jumpaerial.drift = 0.0F;
     }
     switch (input_source) // Last minute bruh moment from HAL

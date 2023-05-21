@@ -219,7 +219,7 @@ GObj *func_ovl3_8016B2C4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create P
 
     ip = ItemGetStruct(item_gobj);
 
-    ip->cb_destroy = func_ovl3_8016B2A0;
+    ip->proc_dead = func_ovl3_8016B2A0;
 
     ip->lifetime = ITPKTHUNDER_LIFETIME;
 
@@ -458,7 +458,7 @@ GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 
     ip = ItemGetStruct(new_gobj);
 
-    ip->cb_destroy = func_ovl3_8016B874;
+    ip->proc_dead = func_ovl3_8016B874;
 
     ip->lifetime = ITPKTHUNDER_LIFETIME;
 

@@ -47,11 +47,11 @@ bool32 func_ovl3_8017356C(GObj *article_gobj)
     return func_ovl2_800DA034(&ArticleGetStruct(article_gobj)->coll_data, func_ovl3_80173480, article_gobj, FALSE);
 }
 
-bool32 func_ovl3_801735A0(GObj *article_gobj, void (*cb_coll)(GObj*))
+bool32 func_ovl3_801735A0(GObj *article_gobj, void (*proc_map)(GObj*))
 {
     if (func_ovl3_8017356C(article_gobj) == FALSE)
     {
-        cb_coll(article_gobj);
+        proc_map(article_gobj);
 
         return FALSE;
     }

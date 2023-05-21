@@ -37,7 +37,7 @@ void func_ovl3_80149294(GObj *fighter_gobj, s32 status_id, s32 arg2)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_80149288;
+    fp->proc_status = func_ovl3_80149288;
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

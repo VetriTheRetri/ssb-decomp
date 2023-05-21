@@ -336,7 +336,7 @@ void func_ovl3_8014CF20(GObj *fighter_gobj)
     {
         ftMapCollide_SetAir(this_fp);
     }
-    this_fp->cb_status = func_ovl3_8014CF0C;
+    this_fp->proc_status = func_ovl3_8014CF0C;
 
     ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_YoshiEgg, 0.0F, 0.0F, 0U);

@@ -56,7 +56,7 @@ void func_ovl3_80155CF4(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U);
 
-    fp->cb_accessory = func_ovl3_80155B40;
+    fp->proc_accessory = func_ovl3_80155B40;
 }
 
 void func_ovl3_80155D48(GObj *fighter_gobj)
@@ -67,7 +67,7 @@ void func_ovl3_80155D48(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U);
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_accessory = func_ovl3_80155B40;
+    fp->proc_accessory = func_ovl3_80155B40;
 }
 
 void func_ovl3_80155DA4(GObj *fighter_gobj)
@@ -76,7 +76,7 @@ void func_ovl3_80155DA4(GObj *fighter_gobj)
 
     fp->command_vars.flags.flag0 = 0;
 
-    fp->cb_accessory = func_ovl3_80155B40;
+    fp->proc_accessory = func_ovl3_80155B40;
 }
 
 void jtgt_ovl3_80155DBC(GObj *fighter_gobj)

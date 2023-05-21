@@ -584,12 +584,12 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
     if ((this_fp->status_info.status_id == ftStatus_Common_DamageElec1) || (this_fp->status_info.status_id == ftStatus_Common_DamageElec2))
     {
-        this_fp->cb_update_gfx = func_ovl3_801405E4;
+        this_fp->proc_gfx = func_ovl3_801405E4;
         this_fp->status_vars.common.damage.status_id = status_id_var;
     }
-    else this_fp->cb_update_gfx = func_ovl3_801405A0;
+    else this_fp->proc_gfx = func_ovl3_801405A0;
     
-    this_fp->unk_0xA00 = func_ovl3_80140878;
+    this_fp->proc_lagupdate = func_ovl3_80140878;
 
     this_fp->tap_stick_x = this_fp->tap_stick_y = U8_MAX - 1;
 
@@ -767,9 +767,9 @@ void func_ovl3_80141670(GObj *fighter_gobj)
 
                 this_fp->input.button_press = this_fp->input.pl.button_tap_prev = 0;
 
-                if (this_fp->cb_hitlag_start != NULL)
+                if (this_fp->proc_lagstart != NULL)
                 {
-                    this_fp->cb_hitlag_start(fighter_gobj);
+                    this_fp->proc_lagstart(fighter_gobj);
                 }
                 func_ovl3_80141648(fighter_gobj);
             }

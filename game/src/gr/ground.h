@@ -58,16 +58,9 @@ typedef enum grKind
 
 } grKind;
 
-typedef struct grMapObject
-{
-    GObj *ogobj;
-    bool32 (*proc_update)(GObj*, GObj*, s32*);
-
-} grMapObject;
-
 typedef struct _Ground_Hit
 {
-    s32 update_state; // Not actually UpdateState, no idea what this is; something to do with sound effects?
+    s32 env_kind; // Not actually UpdateState, no idea what this is; something to do with sound effects?
     s32 damage;
     s32 angle;
     s32 knockback_scale;
@@ -77,8 +70,22 @@ typedef struct _Ground_Hit
 
 } Ground_Hit;
 
+typedef struct grMapObject
+{
+    GObj *ogobj;
+    bool32 (*proc_update)(GObj*, GObj*, s32*);
+
+} grMapObject;
+
+typedef struct grMapEnvironment
+{
+    GObj *egobj;
+    bool32 (*proc_update)(GObj*, GObj*, Ground_Hit*, s32*);
+
+} grMapEnvironment;
+
 static grMapObject D_ovl2_80131180[2];
-static grMapObject D_ovl2_80131190[1];
+static grMapEnvironment D_ovl2_80131190[1];
 static s32 D_ovl2_80131198;
 static s32 D_ovl2_8013119C;
 

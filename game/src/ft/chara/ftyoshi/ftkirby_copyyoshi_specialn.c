@@ -160,7 +160,7 @@ void jtgt_ovl3_8015F5B0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_8015F3EC;
+    fp->proc_status = func_ovl3_8015F3EC;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialN, 0.0F, 1.0F, 0U);
     func_ovl3_8015F180(fp, func_ovl3_8015F6AC);
@@ -171,7 +171,7 @@ void jtgt_ovl3_8015F60C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = &func_ovl3_8015F3F8;
+    fp->proc_status = &func_ovl3_8015F3F8;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirN, 0.0F, 1.0F, 0U);
     func_ovl3_8015F180(fp, func_ovl3_8015F6F0);

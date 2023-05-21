@@ -64,14 +64,14 @@ typedef struct ItemSpawnData
     u8 unk_0x11;
     u8 unk_0x12;
     u8 unk_0x13;
-    bool32 (*cb_anim)(GObj*);
-    bool32 (*cb_coll)(GObj*);
-    bool32 (*cb_give_damage)(GObj*);
-    bool32 (*cb_shield_block)(GObj*);
-    bool32 (*cb_shield_deflect)(GObj*);
-    bool32 (*cb_attack)(GObj*);
-    bool32 (*cb_reflect)(GObj*);
-    bool32 (*cb_absorb)(GObj*);
+    bool32 (*proc_update)(GObj*);
+    bool32 (*proc_map)(GObj*);
+    bool32 (*proc_hit)(GObj*);
+    bool32 (*proc_shield)(GObj*);
+    bool32 (*proc_hop)(GObj*);
+    bool32 (*proc_setoff)(GObj*);
+    bool32 (*proc_reflector)(GObj*);
+    bool32 (*proc_absorb)(GObj*);
 
 } ItemSpawnData;
 
@@ -151,11 +151,11 @@ typedef struct _Item_Hit
             u32 clang : 1;
             u32 flags_0x48_b1 : 1;
             u32 flags_0x48_b2 : 1;
-            u32 flags_0x48_b3 : 1;
+            u32 can_rehit : 1;
             u32 can_deflect : 1; // Actually determines whether item's shield deflect routine can run?
             u32 can_reflect : 1;
             u32 can_absorb : 1;
-            u32 flags_0x48_b7 : 1;
+            u32 noheal : 1;
             u32 can_shield : 1;
             u32 attack_id : 6;
             u32 flags_0x49_b7 : 1;
@@ -295,15 +295,15 @@ typedef struct _Item_Struct
     gmSoundEffect *p_sfx;                   // Pointer to item's current ongoing sound effect
     u16 sfx_id;                             // ID of sound effect this item is supposed to play? (This gets checked against gmSoundEffect's ID when despawning)
 
-    bool32 (*cb_anim)(GObj*);               // Main animation routine
-    bool32 (*cb_coll)(GObj*);               // Main collision routine
-    bool32 (*cb_give_damage)(GObj*);        // Item hits a hurtbox
-    bool32 (*cb_shield_block)(GObj*);       // Item collides with shield head-on
-    bool32 (*cb_shield_deflect)(GObj*);     // Item hits corner of shield and bounces off
-    bool32 (*cb_attack)(GObj*);             // Item collides with another attack hitbox
-    bool32 (*cb_reflect)(GObj*);            // Item gets reflected
-    bool32 (*cb_absorb)(GObj*);             // Item gets absorbed
-    bool32 (*cb_destroy)(GObj*);            // Item hits blastzones (only run on this condition?)
+    bool32 (*proc_update)(GObj*);               // Main animation routine
+    bool32 (*proc_map)(GObj*);               // Main collision routine
+    bool32 (*proc_hit)(GObj*);        // Item hits a hurtbox
+    bool32 (*proc_shield)(GObj*);       // Item collides with shield head-on
+    bool32 (*proc_hop)(GObj*);     // Item hits corner of shield and bounces off
+    bool32 (*proc_setoff)(GObj*);             // Item collides with another attack hitbox
+    bool32 (*proc_reflector)(GObj*);            // Item gets reflected
+    bool32 (*proc_absorb)(GObj*);             // Item gets absorbed
+    bool32 (*proc_dead)(GObj*);            // Item hits blastzones (only run on this condition?)
 
     union item_vars
     {

@@ -42,7 +42,7 @@ void func_ovl3_80151C5C(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U);
 
-    fp->cb_accessory = func_ovl3_80151B50;
+    fp->proc_accessory = func_ovl3_80151B50;
 }
 
 void func_ovl3_80151CB0(GObj *fighter_gobj)
@@ -53,7 +53,7 @@ void func_ovl3_80151CB0(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U);
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_accessory = func_ovl3_80151B50;
+    fp->proc_accessory = func_ovl3_80151B50;
 }
 
 void func_ovl3_80151D0C(GObj *fighter_gobj)
@@ -61,7 +61,7 @@ void func_ovl3_80151D0C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
-    fp->cb_accessory = func_ovl3_80151B50;
+    fp->proc_accessory = func_ovl3_80151B50;
 }
 
 void jtgt_ovl3_80151D24(GObj *fighter_gobj)

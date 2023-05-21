@@ -184,13 +184,13 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     ip->item_hit.flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
     ip->item_hit.flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
 
-    ip->item_hit.flags_0x48_b3 = FALSE;
+    ip->item_hit.can_rehit = FALSE;
 
     ip->item_hit.can_deflect = it_hit_desc->can_deflect;
     ip->item_hit.can_reflect = it_hit_desc->can_reflect;
     ip->item_hit.can_absorb = it_hit_desc->can_absorb;
 
-    ip->item_hit.flags_0x48_b7 = FALSE;
+    ip->item_hit.noheal = FALSE;
 
     ip->item_hit.can_shield = it_hit_desc->can_shield;
     ip->item_hit.hitbox_count = it_hit_desc->hitbox_count;
@@ -273,15 +273,15 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     func_80008188(item_gobj, func_ovl3_80166954, 1U, 1U);
     func_80008188(item_gobj, func_ovl3_80166BE4, 1U, 0U);
 
-    ip->cb_anim = item_status_desc->cb_anim;
-    ip->cb_coll = item_status_desc->cb_coll;
-    ip->cb_give_damage = item_status_desc->cb_give_damage;
-    ip->cb_shield_block = item_status_desc->cb_shield_block;
-    ip->cb_shield_deflect = item_status_desc->cb_shield_deflect;
-    ip->cb_attack = item_status_desc->cb_attack;
-    ip->cb_reflect = item_status_desc->cb_reflect;
-    ip->cb_absorb = item_status_desc->cb_absorb;
-    ip->cb_destroy = NULL;
+    ip->proc_update = item_status_desc->proc_update;
+    ip->proc_map = item_status_desc->proc_map;
+    ip->proc_hit = item_status_desc->proc_hit;
+    ip->proc_shield = item_status_desc->proc_shield;
+    ip->proc_hop = item_status_desc->proc_hop;
+    ip->proc_setoff = item_status_desc->proc_setoff;
+    ip->proc_reflector = item_status_desc->proc_reflector;
+    ip->proc_absorb = item_status_desc->proc_absorb;
+    ip->proc_dead = NULL;
 
     ip->coll_data.pos_curr = DObjGetStruct(item_gobj)->translate = *spawn_pos;
 
@@ -435,9 +435,9 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
     {
         func_8000DF34(item_gobj);
 
-        if (ip->cb_anim != NULL)
+        if (ip->proc_update != NULL)
         {
-            if (ip->cb_anim(item_gobj) != FALSE)
+            if (ip->proc_update(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);
                 return;
@@ -474,14 +474,14 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
 
         if ((translate->y < Ground_Info->blastzone_bottom) || (Ground_Info->blastzone_right < translate->x) || (translate->x < Ground_Info->blastzone_left) || (Ground_Info->blastzone_top < translate->y) || (translate->z < -20000.0F) || (20000.0F < translate->z))
         {
-            if ((ip->cb_destroy == NULL) || (ip->cb_destroy(item_gobj) != FALSE))
+            if ((ip->proc_dead == NULL) || (ip->proc_dead(item_gobj) != FALSE))
             {
                 func_ovl3_8016800C(item_gobj);
                 return;
             }
         }
 
-        if (ip->cb_coll != NULL)
+        if (ip->proc_map != NULL)
         {
             ip->coll_data.coll_mask_prev = ip->coll_data.coll_mask;
             ip->coll_data.coll_mask = 0U;
@@ -489,7 +489,7 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
             ip->coll_data.coll_type = 0;
             ip->coll_data.unk_0x58 = 0;
 
-            if (ip->cb_coll(item_gobj) != FALSE)
+            if (ip->proc_map(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);
                 return;
@@ -754,9 +754,9 @@ void func_ovl3_80166BE4(GObj *item_gobj)
 
     if ((ip->hit_victim_damage != 0) || (ip->hit_reflect_damage != 0)) // 0x238 = hit article damage?
     {
-        if (ip->cb_give_damage != NULL)
+        if (ip->proc_hit != NULL)
         {
-            if (ip->cb_give_damage(item_gobj) != FALSE)
+            if (ip->proc_hit(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);
                 return;
@@ -775,9 +775,9 @@ void func_ovl3_80166BE4(GObj *item_gobj)
                 {
                     ip->shield_collide_angle = 0.0F;
                 }
-                if (ip->cb_shield_deflect != NULL)
+                if (ip->proc_hop != NULL)
                 {
-                    if (ip->cb_shield_deflect(item_gobj) != FALSE)
+                    if (ip->proc_hop(item_gobj) != FALSE)
                     {
                         func_ovl3_8016800C(item_gobj);
                         return;
@@ -786,9 +786,9 @@ void func_ovl3_80166BE4(GObj *item_gobj)
                 goto next_check;
             }
         }
-        if (ip->cb_shield_block != NULL)
+        if (ip->proc_shield != NULL)
         {
-            if (ip->cb_shield_block(item_gobj) != FALSE)
+            if (ip->proc_shield(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);
                 return;
@@ -798,9 +798,9 @@ void func_ovl3_80166BE4(GObj *item_gobj)
 next_check:
     if (ip->hit_attack_damage != 0)
     {
-        if (ip->cb_attack != NULL)
+        if (ip->proc_setoff != NULL)
         {
-            if (ip->cb_attack(item_gobj) != FALSE)
+            if (ip->proc_setoff(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);
                 return;
@@ -824,9 +824,9 @@ next_check:
         ip->item_hit.flags_0x4C = ip->unk_0x258;
         ip->item_hit.flags_0x4E.halfword = ip->unk_0x25A.halfword;
 
-        if (ip->cb_reflect != NULL)
+        if (ip->proc_reflector != NULL)
         {
-            if (ip->cb_reflect(item_gobj) != FALSE)
+            if (ip->proc_reflector(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);
                 return;
@@ -845,10 +845,10 @@ next_check:
 
     if (ip->absorb_gobj != NULL)
     {
-        if (ip->cb_absorb != NULL)
+        if (ip->proc_absorb != NULL)
         {
 
-            if (ip->cb_absorb(item_gobj) != FALSE)
+            if (ip->proc_absorb(item_gobj) != FALSE)
             {
                 func_ovl3_8016800C(item_gobj);
                 return;

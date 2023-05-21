@@ -153,7 +153,7 @@ GObj* func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool3
     DObjGetStruct(item_gobj)->scale.y = scale;
     DObjGetStruct(item_gobj)->scale.x = scale;
 
-    ip->cb_destroy = func_ovl3_80168BDC;
+    ip->proc_dead = func_ovl3_80168BDC;
 
     return item_gobj;
 }

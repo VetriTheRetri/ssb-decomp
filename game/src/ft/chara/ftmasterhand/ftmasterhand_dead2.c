@@ -10,7 +10,7 @@ void func_ovl3_8015ADC0(GObj *fighter_gobj)
 
     if (fp->status_vars.masterhand.dead.dead_timer == 0)
     {
-        fp->cb_physics = NULL;
+        fp->proc_physics = NULL;
     }
 }
 

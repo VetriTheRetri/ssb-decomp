@@ -514,8 +514,8 @@ GObj *func_ovl3_8016DA78(GObj *fighter_gobj, Vec3f *pos)
         ip->lifetime = ITBOOMERANG_LIFETIME_TILT;
         ip->item_vars.boomerang.unk_0x8 = func_ovl3_8016D914(&ip->phys_info.vel, fp, ip->lr, ITBOOMERANG_VEL_TILT);
     }
-    ip->cb_attack = func_ovl3_8016D77C;
-    ip->cb_destroy = func_ovl3_8016D4B8;
+    ip->proc_setoff = func_ovl3_8016D77C;
+    ip->proc_dead = func_ovl3_8016D4B8;
 
     ip->is_camera_follow = TRUE;
 

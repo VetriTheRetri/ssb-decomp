@@ -240,13 +240,13 @@ void jtgt_ovl3_801611A8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_80161194;
+    fp->proc_status = func_ovl3_80161194;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 }
 
 void func_ovl3_80161210(GObj *fighter_gobj)
@@ -256,21 +256,21 @@ void func_ovl3_80161210(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiLanding, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 }
 
 void jtgt_ovl3_801611A8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_80161194;
+    fp->proc_status = func_ovl3_80161194;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 }
 
 void func_ovl3_801612D8(GObj *fighter_gobj)
@@ -281,8 +281,8 @@ void func_ovl3_801612D8(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiFall, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 
     fp->jumps_used = fp->attributes->jumps_max;
 

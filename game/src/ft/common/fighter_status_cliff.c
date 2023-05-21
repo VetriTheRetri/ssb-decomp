@@ -53,7 +53,7 @@ void func_ovl3_80144C24(GObj *fighter_gobj)
 
     func_ovl2_801016E0(&vel);
 
-    fp->cb_take_damage = func_ovl3_80144CF8;
+    fp->proc_damage = func_ovl3_80144CF8;
 
     func_ovl2_800E8098(fp, 4U);
 }
@@ -102,7 +102,7 @@ void func_ovl3_80144DF4(GObj *fighter_gobj)
 
     func_ovl2_800E7F7C(fighter_gobj, 120);
 
-    fp->cb_take_damage = func_ovl3_80144CF8;
+    fp->proc_damage = func_ovl3_80144CF8;
 
     func_ovl2_800E8098(fp, 4U);
 }

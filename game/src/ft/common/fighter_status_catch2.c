@@ -27,9 +27,9 @@ void func_ovl3_80149F04(GObj *fighter_gobj)
 
     func_ovl2_800E8098(fp, 0x3FU);
 
-    if (fp->cb_update_ik != NULL)
+    if (fp->proc_slope != NULL)
     {
-        fp->cb_update_ik(fighter_gobj);
+        fp->proc_slope(fighter_gobj);
     }
     offset = Fighter_CatchPull_Gfx_Offset;
 

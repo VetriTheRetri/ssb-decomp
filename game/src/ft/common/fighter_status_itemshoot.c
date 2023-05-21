@@ -78,7 +78,7 @@ void func_ovl3_80147208(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShoot, fighter_gobj->anim_frame, 1.0F, 0U);
 
-    fp->cb_accessory = func_ovl3_80146FD4;
+    fp->proc_accessory = func_ovl3_80146FD4;
 }
 
 void func_ovl3_80147258(GObj *fighter_gobj)
@@ -89,7 +89,7 @@ void func_ovl3_80147258(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShootAir, fighter_gobj->anim_frame, 1.0F, 0U);
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_accessory = func_ovl3_80146FD4;
+    fp->proc_accessory = func_ovl3_80146FD4;
 }
 
 void func_ovl3_801472B0(GObj *fighter_gobj)
@@ -251,7 +251,7 @@ void func_ovl3_80147774(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShoot, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, 0U);
 
-    fp->cb_accessory = func_ovl3_80147434;
+    fp->proc_accessory = func_ovl3_80147434;
 }
 
 void func_ovl3_801477C8(GObj *fighter_gobj)
@@ -262,7 +262,7 @@ void func_ovl3_801477C8(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShootAir, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, 0U);
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_accessory = func_ovl3_80147434;
+    fp->proc_accessory = func_ovl3_80147434;
 }
 
 void func_ovl3_80147824(Fighter_Struct *fp)
@@ -280,18 +280,18 @@ void func_ovl3_80147844(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Article_Struct *ap = ArticleGetStruct(fp->item_hold);
     s32 status_id;
-    void (*cb_accessory)(GObj*);
+    void (*proc_accessory)(GObj*);
 
     switch (ap->at_kind)
     {
     case At_Kind_L_Gun:
         status_id = ftStatus_Common_LGunShoot;
-        cb_accessory = func_ovl3_80146FD4;
+        proc_accessory = func_ovl3_80146FD4;
         break;
 
     case At_Kind_F_Flower:
         status_id = ftStatus_Common_FireFlowerShoot;
-        cb_accessory = func_ovl3_80147434;
+        proc_accessory = func_ovl3_80147434;
         break;
     }
     fp->command_vars.flags.flag0 = 0;
@@ -299,7 +299,7 @@ void func_ovl3_80147844(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_accessory = cb_accessory;
+    fp->proc_accessory = proc_accessory;
 
     func_ovl3_80147824(fp);
 }
@@ -309,18 +309,18 @@ void func_ovl3_801478EC(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Article_Struct *ap = ArticleGetStruct(fp->item_hold);
     s32 status_id;
-    void (*cb_accessory)(GObj*);
+    void (*proc_accessory)(GObj*);
 
     switch (ap->at_kind)
     {
     case At_Kind_L_Gun:
         status_id = ftStatus_Common_LGunShootAir;
-        cb_accessory = func_ovl3_80146FD4;
+        proc_accessory = func_ovl3_80146FD4;
         break;
 
     case At_Kind_F_Flower:
         status_id = ftStatus_Common_FireFlowerShootAir;
-        cb_accessory = func_ovl3_80147434;
+        proc_accessory = func_ovl3_80147434;
         break;
     }
     fp->command_vars.flags.flag0 = 0;
@@ -328,7 +328,7 @@ void func_ovl3_801478EC(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_accessory = cb_accessory;
+    fp->proc_accessory = proc_accessory;
 
     func_ovl2_800D8EB8(fp);
     func_ovl3_80147824(fp);

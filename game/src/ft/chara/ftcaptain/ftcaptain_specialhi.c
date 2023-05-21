@@ -134,7 +134,7 @@ void jtgt_ovl3_80160630(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
 
-    fp->cb_status = func_ovl3_801605FC;
+    fp->proc_status = func_ovl3_801605FC;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, 0U);
     func_ovl3_80160280(fp);
@@ -183,7 +183,7 @@ void jtgt_ovl3_801607B4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_801605FC;
+    fp->proc_status = func_ovl3_801605FC;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, 0U);
     func_ovl3_80160280(fp);

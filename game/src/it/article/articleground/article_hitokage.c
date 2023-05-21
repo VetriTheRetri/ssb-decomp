@@ -8,7 +8,7 @@ void func_ovl3_80183DA0(GObj *article_gobj)
 {
     func_ovl3_80172EC8(article_gobj, Article_Hitokage_Status, 0);
 
-    ArticleGetStruct(article_gobj)->cb_destroy = func_ovl3_80183F88;
+    ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_80183F88;
 }
 
 bool32 func_ovl3_80183DE0(GObj *article_gobj)

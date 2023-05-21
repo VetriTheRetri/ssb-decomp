@@ -59,7 +59,7 @@ void func_ovl3_80155F4C(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialN, fighter_gobj->anim_frame, 1.0F, 2U);
 
-    fp->cb_accessory = func_ovl3_80155E64;
+    fp->proc_accessory = func_ovl3_80155E64;
 }
 
 void func_ovl3_80155FA0(GObj *fighter_gobj)
@@ -70,7 +70,7 @@ void func_ovl3_80155FA0(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 2U);
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_accessory = func_ovl3_80155E64;
+    fp->proc_accessory = func_ovl3_80155E64;
 }
 
 void func_ovl3_80155FFC(GObj *fighter_gobj)
@@ -78,7 +78,7 @@ void func_ovl3_80155FFC(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = FALSE;
-    fp->cb_accessory = func_ovl3_80155E64;
+    fp->proc_accessory = func_ovl3_80155E64;
 }
 
 void jtgt_ovl3_80156014(GObj *fighter_gobj)

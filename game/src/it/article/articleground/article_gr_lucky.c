@@ -7,7 +7,7 @@ void func_ovl3_8017C240(GObj *article_gobj)
 {
     func_ovl3_80172EC8(article_gobj, Article_Gr_Lucky_Status, 0);
 
-    ArticleGetStruct(article_gobj)->cb_destroy = func_ovl3_8017C524;
+    ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_8017C524;
 }
 
 void func_ovl3_8017C280(GObj *lucky_gobj)

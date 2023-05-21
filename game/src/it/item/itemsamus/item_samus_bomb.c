@@ -27,13 +27,13 @@ void func_ovl3_80168F2C(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->display_list = NULL;
 
-    ip->cb_anim = func_ovl3_80168F00;
-    ip->cb_coll = NULL;
-    ip->cb_give_damage = NULL;
-    ip->cb_shield_block = NULL;
-    ip->cb_shield_deflect = NULL;
-    ip->cb_attack = NULL;
-    ip->cb_reflect = NULL;
+    ip->proc_update = func_ovl3_80168F00;
+    ip->proc_map = NULL;
+    ip->proc_hit = NULL;
+    ip->proc_shield = NULL;
+    ip->proc_hop = NULL;
+    ip->proc_setoff = NULL;
+    ip->proc_reflector = NULL;
 }
 
 bool32 jtgt_ovl3_80168F98(GObj *item_gobj)

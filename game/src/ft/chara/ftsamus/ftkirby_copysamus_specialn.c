@@ -85,7 +85,7 @@ void func_ovl3_8015704C(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
 
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
 }
 
 void func_ovl3_801570A8(GObj *fighter_gobj)
@@ -96,7 +96,7 @@ void func_ovl3_801570A8(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
 
     fp->status_vars.kirby.copysamus_specialn.is_release = TRUE;
 }
@@ -171,7 +171,7 @@ void func_ovl3_8015729C(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNLoop, 0.0F, 1.0F, 2U);
 
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
     fp->status_vars.samus.specialn.charge_int = FTKIRBY_COPYSAMUS_CHARGE_INT;
 
     func_ovl3_80156EBC(fp, &pos);
@@ -230,7 +230,7 @@ void func_ovl3_80157314(GObj *fighter_gobj)
         }
 
         fp->fighter_vars.kirby.copysamus_charge_level = 0;
-        fp->cb_take_damage = NULL;
+        fp->proc_damage = NULL;
 
     }
     if (fighter_gobj->anim_frame <= 0.0F)
@@ -256,7 +256,7 @@ void func_ovl3_80157518(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
 
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
 }
 
 void func_ovl3_8015756C(GObj *fighter_gobj)
@@ -267,7 +267,7 @@ void func_ovl3_8015756C(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
 }
 
 void func_ovl3_801575C8(GObj *fighter_gobj)
@@ -276,7 +276,7 @@ void func_ovl3_801575C8(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, 0.0F, 1.0F, 2U);
 
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
 }
 
 void func_ovl3_80157610(GObj *fighter_gobj)
@@ -290,7 +290,7 @@ void func_ovl3_80157610(GObj *fighter_gobj)
     }
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, 0.0F, 1.F, 2U);
 
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
 }
 
 f32 func_ovl3_8015767C(Fighter_Struct *fp)
@@ -304,7 +304,7 @@ f32 func_ovl3_8015767C(Fighter_Struct *fp)
 
 void func_ovl3_801576B4(Fighter_Struct *fp)
 {
-    fp->cb_take_damage = func_ovl3_80156E98;
+    fp->proc_damage = func_ovl3_80156E98;
     fp->status_vars.kirby.copysamus_specialn.charge_gobj = NULL;
     fp->command_vars.flags.flag0 = 0;
 }

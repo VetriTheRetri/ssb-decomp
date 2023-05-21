@@ -184,7 +184,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
 
                 if (status_id == ftStatus_Common_AttackAirLw)
                 {
-                    fp->cb_give_damage = func_ovl3_801508E0;
+                    fp->proc_hit = func_ovl3_801508E0;
 
                     fp->status_vars.common.attackair.rehit_timer = 0;
                 }

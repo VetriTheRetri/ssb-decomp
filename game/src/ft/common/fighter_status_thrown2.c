@@ -82,7 +82,7 @@ void func_ovl3_8014AF98(GObj *fighter_gobj)
     fp->status_vars.common.damage.script_index = D_ovl3_8018CF80;
 }
 
-void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_cb_status)
+void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_proc_status)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -127,9 +127,9 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_cb_
     {
         damage = 0;
     }
-    if (is_cb_status != FALSE)
+    if (is_proc_status != FALSE)
     {
-        this_fp->cb_status = func_ovl3_8014AF98;
+        this_fp->proc_status = func_ovl3_8014AF98;
     }
     func_ovl3_80140EE4(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, ft_throw->element, capture_fp->player_number, TRUE, TRUE, TRUE);
     func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->flags_lw.halfword, capture_fp->unk_0x290.halfword);

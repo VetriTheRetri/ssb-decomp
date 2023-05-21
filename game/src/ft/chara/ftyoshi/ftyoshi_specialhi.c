@@ -101,7 +101,7 @@ void func_ovl3_8015EC00(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialHi, fighter_gobj->anim_frame, 1.0F, 4U);
 
-    fp->cb_take_damage = func_ovl3_8015E980;
+    fp->proc_damage = func_ovl3_8015E980;
 }
 
 void func_ovl3_8015EC00(GObj *fighter_gobj)
@@ -111,7 +111,7 @@ void func_ovl3_8015EC00(GObj *fighter_gobj)
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 4U);
 
-    fp->cb_take_damage = func_ovl3_8015E980;
+    fp->proc_damage = func_ovl3_8015E980;
 
     func_ovl2_800D8EB8(fp);
 }
@@ -136,7 +136,7 @@ void func_ovl3_8015ED18(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_take_damage = func_ovl3_8015E980;
+    fp->proc_damage = func_ovl3_8015E980;
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;
     fp->status_vars.yoshi.specialhi.egg_gobj = NULL;

@@ -194,7 +194,7 @@ void func_ovl3_80146930(GObj *fighter_gobj)
     }
     func_ovl3_80146690(fighter_gobj, status_id);
 
-    fp->cb_take_damage = func_ovl3_80145D28;
+    fp->proc_damage = func_ovl3_80145D28;
 }
 
 bool32 func_ovl3_80146A8C(Fighter_Struct *fp)

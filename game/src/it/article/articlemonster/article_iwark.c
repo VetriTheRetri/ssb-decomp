@@ -361,7 +361,7 @@ GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
 
     ip->is_hitlag_victim = TRUE;
 
-    ip->cb_destroy = func_ovl3_8017DCAC;
+    ip->proc_dead = func_ovl3_8017DCAC;
 
     return item_gobj;
 }

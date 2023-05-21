@@ -1,10 +1,10 @@
 #include "fighter.h"
 
-bool32 func_ovl2_800D9480(GObj *fighter_gobj, void (*cb_coll)(GObj*))
+bool32 func_ovl2_800D9480(GObj *fighter_gobj, void (*proc_map)(GObj*))
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        cb_coll(fighter_gobj);
+        proc_map(fighter_gobj);
 
         return TRUE;
     }

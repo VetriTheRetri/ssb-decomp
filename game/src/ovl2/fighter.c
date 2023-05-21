@@ -379,7 +379,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fp->is_playing_sfx = FALSE;
     fp->x191_flag_b0 = FALSE;
 
-    fp->cb_status = NULL;
+    fp->proc_status = NULL;
 
     fp->unk_ft_0x149 = spawn->unk_rebirth_0x1C;
     fp->unk_0x15 = spawn->unk_rebirth_0x1E;

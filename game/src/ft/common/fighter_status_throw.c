@@ -95,8 +95,8 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
     {
         if (status_id == ftStatus_Kirby_ThrowF)
         {
-            this_fp->is_ignore_blastzone_top = TRUE;
-            catch_fp->is_ignore_blastzone_top = TRUE;
+            this_fp->is_stat_nodamage = TRUE;
+            catch_fp->is_stat_nodamage = TRUE;
         }
     }
 }
@@ -147,7 +147,7 @@ void func_ovl3_8014A4A8(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFFall, 0.0F, 1.0F, 0x80U);
 
-    catch_fp->is_ignore_blastzone_top = FALSE;
+    catch_fp->is_stat_nodamage = FALSE;
 }
 
 void func_ovl3_8014A4F8(GObj *fighter_gobj)

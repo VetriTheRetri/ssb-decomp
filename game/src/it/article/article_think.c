@@ -405,14 +405,14 @@ void func_ovl3_80172EC8(GObj *article_gobj, ArticleStatusDesc *p_desc, s32 statu
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->cb_anim = p_desc[status_id].cb_anim;
-    ap->cb_coll = p_desc[status_id].cb_coll;
-    ap->cb_give_damage = p_desc[status_id].cb_give_damage;
-    ap->cb_shield_block = p_desc[status_id].cb_shield_block;
-    ap->cb_shield_deflect = p_desc[status_id].cb_shield_deflect;
-    ap->cb_attack = p_desc[status_id].cb_attack;
-    ap->cb_reflect = p_desc[status_id].cb_reflect;
-    ap->cb_take_damage = p_desc[status_id].cb_take_damage;
+    ap->proc_update = p_desc[status_id].proc_update;
+    ap->proc_map = p_desc[status_id].proc_map;
+    ap->proc_hit = p_desc[status_id].proc_hit;
+    ap->proc_shield = p_desc[status_id].proc_shield;
+    ap->proc_hop = p_desc[status_id].proc_hop;
+    ap->proc_setoff = p_desc[status_id].proc_setoff;
+    ap->proc_reflector = p_desc[status_id].proc_reflector;
+    ap->proc_damage = p_desc[status_id].proc_damage;
 
     ap->x2CF_flag_b2 = FALSE;
 

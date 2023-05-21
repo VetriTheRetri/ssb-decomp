@@ -90,7 +90,7 @@ void jtgt_ovl3_8015EFE4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_8015EFD4;
+    fp->proc_status = func_ovl3_8015EFD4;
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwStart, 0.0F, 1.0F, 0U);
@@ -103,7 +103,7 @@ void jtgt_ovl3_8015F04C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_8015EFD4;
+    fp->proc_status = func_ovl3_8015EFD4;
 
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirLwStart, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

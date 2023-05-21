@@ -197,8 +197,8 @@ void func_ovl3_80160060(GObj *fighter_gobj)
     fp->joint[0]->rotate.z = rot_z;
     fp->joint[1]->rotate.z = fp->joint[0]->rotate.z;
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 }
 
 void func_ovl3_801600EC(GObj *fighter_gobj)
@@ -211,16 +211,16 @@ void jtgt_ovl3_80160128(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_80160038;
+    fp->proc_status = func_ovl3_80160038;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_hit_shield = func_ovl3_80160004;
-    fp->cb_give_damage = func_ovl3_80160004;
+    fp->proc_shield = func_ovl3_80160004;
+    fp->proc_hit = func_ovl3_80160004;
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 }
 
 void jtgt_ovl3_801601A0(GObj *fighter_gobj) // Unused
@@ -230,21 +230,21 @@ void jtgt_ovl3_801601A0(GObj *fighter_gobj) // Unused
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwEnd, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_give_damage = func_ovl3_80160004;
+    fp->proc_hit = func_ovl3_80160004;
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 }
 
 void jtgt_ovl3_8016020C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_80160038;
+    fp->proc_status = func_ovl3_80160038;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_hitlag_start = func_ovl2_800E9C8C;
-    fp->cb_hitlag_end = func_ovl2_800E9CC4;
+    fp->proc_lagstart = func_ovl2_800E9C8C;
+    fp->proc_lagend = func_ovl2_800E9CC4;
 }

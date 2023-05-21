@@ -47,13 +47,13 @@ void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing succ
 
     DObjGetStruct(item_gobj)->display_list = NULL;
 
-    ip->cb_anim = func_ovl3_8016BF74;
-    ip->cb_coll = NULL;
-    ip->cb_give_damage = NULL;
-    ip->cb_shield_block = NULL;
-    ip->cb_shield_deflect = NULL;
-    ip->cb_attack = NULL;
-    ip->cb_reflect = NULL;
+    ip->proc_update = func_ovl3_8016BF74;
+    ip->proc_map = NULL;
+    ip->proc_hit = NULL;
+    ip->proc_shield = NULL;
+    ip->proc_hop = NULL;
+    ip->proc_setoff = NULL;
+    ip->proc_reflector = NULL;
 }
 
 void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring 
@@ -73,13 +73,13 @@ void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring
 
     DObjGetStruct(item_gobj)->display_list = NULL;
 
-    ip->cb_anim = func_ovl3_8016BF74;
-    ip->cb_coll = NULL;
-    ip->cb_give_damage = NULL;
-    ip->cb_shield_block = NULL;
-    ip->cb_shield_deflect = NULL;
-    ip->cb_attack = NULL;
-    ip->cb_reflect = NULL;
+    ip->proc_update = func_ovl3_8016BF74;
+    ip->proc_map = NULL;
+    ip->proc_hit = NULL;
+    ip->proc_shield = NULL;
+    ip->proc_hop = NULL;
+    ip->proc_setoff = NULL;
+    ip->proc_reflector = NULL;
 }
 
 void func_ovl3_8016C07C(GObj *item_gobj)
@@ -233,7 +233,7 @@ GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
 
     ip->item_vars.egg_throw.is_throw = FALSE;
 
-    ip->cb_destroy = func_ovl3_8016BF50;
+    ip->proc_dead = func_ovl3_8016BF50;
 
     ip->lifetime = ITEGGTHROW_LIFETIME;
 

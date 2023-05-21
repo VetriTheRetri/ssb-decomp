@@ -440,12 +440,12 @@ void func_ovl3_8014C508(GObj *fighter_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    fp->cb_status = func_ovl3_8014C4D8;
+    fp->proc_status = func_ovl3_8014C4D8;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownKirbyStar, 0.0F, 1.0F, 0x200U);
     func_ovl2_800E8098(fp, 0x3FU);
 
-    fp->cb_give_damage = func_ovl3_8014BE54;
+    fp->proc_hit = func_ovl3_8014BE54;
 
     for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
     {
@@ -491,12 +491,12 @@ void func_ovl3_8014C6AC(GObj *fighter_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    fp->cb_status = func_ovl3_8014C67C;
+    fp->proc_status = func_ovl3_8014C67C;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownCopyStar, 0.0F, 1.0F, 0x200U);
     func_ovl2_800E8098(fp, 0x3FU);
 
-    fp->cb_give_damage = func_ovl3_8014BE54;
+    fp->proc_hit = func_ovl3_8014BE54;
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
     func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);

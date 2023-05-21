@@ -107,7 +107,7 @@ void jtgt_ovl3_801639CC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_80163850;
+    fp->proc_status = func_ovl3_80163850;
 
     if (fp->fighter_vars.link.boomerang_gobj != NULL)
     {
@@ -124,7 +124,7 @@ void jtgt_ovl3_80163A4C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_80163850;
+    fp->proc_status = func_ovl3_80163850;
 
     if (fp->fighter_vars.link.boomerang_gobj != NULL)
     {
@@ -154,7 +154,7 @@ void jtgt_ovl3_80164348(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_8016426C;
+    fp->proc_status = func_ovl3_8016426C;
 
     ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -163,6 +163,6 @@ void jtgt_ovl3_80164348(GObj *fighter_gobj)
 
     fp->jumps_used = fp->attributes->jumps_max;
 
-    fp->cb_take_damage = func_ovl3_80163EFC;
-    fp->cb_update_gfx = func_ovl3_80163D00;
+    fp->proc_damage = func_ovl3_80163EFC;
+    fp->proc_gfx = func_ovl3_80163D00;
 }

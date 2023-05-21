@@ -112,7 +112,7 @@ void jtgt_ovl3_80164940(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_801647D0;
+    fp->proc_status = func_ovl3_801647D0;
 
     if (fp->fighter_vars.kirby.copylink_boomerang_gobj != NULL)
     {
@@ -128,7 +128,7 @@ void jtgt_ovl3_801649C0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_801647D0;
+    fp->proc_status = func_ovl3_801647D0;
 
     if (fp->fighter_vars.kirby.copylink_boomerang_gobj != NULL)
     {

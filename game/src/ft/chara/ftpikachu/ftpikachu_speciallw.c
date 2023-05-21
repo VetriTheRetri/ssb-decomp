@@ -234,7 +234,7 @@ void func_ovl3_80152328(GObj *fighter_gobj)
     }
     fp->command_vars.flags.flag0 = 0;
 
-    fp->cb_take_damage = func_ovl3_8015225C;
+    fp->proc_damage = func_ovl3_8015225C;
 }
 
 void func_ovl3_8015236C(GObj *fighter_gobj)
@@ -315,7 +315,7 @@ void func_ovl3_80152578(GObj *fighter_gobj)
 
     fp->command_vars.flags.flag1 = 0;
 
-    fp->cb_take_damage = NULL;
+    fp->proc_damage = NULL;
 }
 
 void func_ovl3_80152588(GObj *fighter_gobj)
@@ -371,7 +371,7 @@ void func_ovl3_80152718(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_take_damage = NULL;
+    fp->proc_damage = NULL;
 }
 
 void func_ovl3_80152724(GObj *fighter_gobj)

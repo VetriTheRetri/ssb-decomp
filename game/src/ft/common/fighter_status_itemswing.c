@@ -135,7 +135,7 @@ void func_ovl3_80146E94(GObj *fighter_gobj, s32 swing_type)
     ftStatus_Update(fighter_gobj, status_id, 0.0F, anim_speed, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_give_damage = func_ovl3_80146C40;
+    fp->proc_hit = func_ovl3_80146C40;
 
     fp->status_vars.common.itemswing.harisen_scale_reset_wait = 0;
 

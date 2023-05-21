@@ -357,7 +357,7 @@ void func_ovl2_800D9FCC(Coll_Data *coll_data) // Check if fighter is above groun
     }
 }
 
-bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*cb_coll)(Coll_Data*, GObj*, s32), GObj *gobj, bool32 arg3)
+bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*proc_map)(Coll_Data*, GObj*, s32), GObj *gobj, bool32 arg3)
 {
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
@@ -416,7 +416,7 @@ bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*cb_coll)(Coll_Data*, GOb
         translate->y += var_f22;
         translate->z += var_f24;
 
-        sp50 = cb_coll(coll_data, gobj, arg3);
+        sp50 = proc_map(coll_data, gobj, arg3);
     }
     coll_data->wall_flag = D_ovl2_80131398;
 

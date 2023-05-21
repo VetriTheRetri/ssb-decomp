@@ -65,7 +65,7 @@ void func_ovl3_80156ABC(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, FTKIRBY_COPYMARIO_FIREBALL_CHECK_FT_KIND(fp, ftStatus_Kirby_CopyMario_SpecialN, ftStatus_Kirby_CopyLuigi_SpecialN), fighter_gobj->anim_frame, 1.0F, 2U);
 
-    fp->cb_accessory = func_ovl3_801569D4;
+    fp->proc_accessory = func_ovl3_801569D4;
 }
 
 void func_ovl3_80156B38(GObj *fighter_gobj)
@@ -78,7 +78,7 @@ void func_ovl3_80156B38(GObj *fighter_gobj)
 
     func_ovl2_800D8EB8(fp);
 
-    fp->cb_accessory = func_ovl3_801569D4;
+    fp->proc_accessory = func_ovl3_801569D4;
 }
 
 void func_ovl3_80156BB8(GObj *fighter_gobj)
@@ -86,7 +86,7 @@ void func_ovl3_80156BB8(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
-    fp->cb_accessory = func_ovl3_801569D4;
+    fp->proc_accessory = func_ovl3_801569D4;
 }
 
 void jtgt_ovl3_80156BD0(GObj *fighter_gobj)

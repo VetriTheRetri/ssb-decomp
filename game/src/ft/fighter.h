@@ -622,11 +622,11 @@ typedef struct Fighter_Com
     u8 ftcom_flags_0x48_b0 : 1;
     u8 ftcom_flags_0x48_b1 : 1;
     u8 ftcom_flags_0x48_b2 : 1;
-    u8 ftcom_flags_0x48_b3 : 1;
+    u8 ftcom_can_rehit : 1;
     u8 ftcom_flags_0x48_b4 : 1;
     u8 ftcom_flags_0x48_b5 : 1;
     u8 ftcom_flags_0x48_b6 : 1;
-    u8 ftcom_flags_0x48_b7 : 1;
+    u8 ftcom_noheal : 1;
     u8 ftcom_flags_0x49_b0 : 1;
     u8 ftcom_flags_0x49_b1 : 1;
     u8 ftcom_flags_0x49_b2 : 1;
@@ -904,7 +904,7 @@ struct Fighter_Struct
     u32 x190_flag_b6 : 1;
     u32 x190_flag_b7 : 1;
     u32 x191_flag_b0 : 1;
-    u32 is_ignore_blastzone_top : 1;
+    u32 is_stat_nodamage : 1; // ???
     u32 is_damage_resist : 1;
     u32 x191_flag_b3 : 1;
     u32 x191_flag_b4567 : 4;
@@ -916,16 +916,8 @@ struct Fighter_Struct
     u32 x192_flag_b5 : 1;
     u32 x192_flag_b6 : 1;
     u32 x192_flag_b7 : 1;
-    u32 x193_flag_b0 : 1;
-    u32 x193_flag_b1 : 1;
-    u32 x193_flag_b2 : 1;
-    u32 x193_flag_b3 : 1;
-    u32 x193_flag_b4 : 1;
-    u32 x193_flag_b5 : 1;
-    u32 x193_flag_b6 : 1;
-    u32 x193_flag_b7 : 1;
-
-    u32 unk_0x194;
+    u8 capture_flags;
+    u8 catch_flags;
 
     FighterAnimFlags anim_flags;
 
@@ -1055,7 +1047,7 @@ struct Fighter_Struct
     GObj *search_gobj;  // GObj this fighter found when searching for grabbable fighters?
     f32 search_gobj_dist;
     void (*cb_catch)(GObj*); // Run this callback on grabbing attacker
-    void (*cb_capture)(GObj*); // Run this callback on grabbed victim
+    void (*cb_capture)(GObj*, GObj*); // Run this callback on grabbed victim
     GObj *catch_gobj;   // GObj this fighter has caught
     GObj *capture_gobj; // GObj this fighter is captured by
     ftThrowHitDesc *fighter_throw; // Pointer to throw description
@@ -1079,21 +1071,21 @@ struct Fighter_Struct
     s32 x9CC;
     s32 x9D0;
 
-    void (*cb_anim)(GObj*);
-    void (*cb_accessory)(GObj*);
-    void (*cb_interrupt)(GObj*);
-    void (*cb_physics)(GObj*);
-    void (*cb_coll)(GObj*);
-    void (*cb_update_ik)(GObj*);
-    void (*cb_take_damage)(GObj*);
+    void (*proc_update)(GObj*);
+    void (*proc_accessory)(GObj*);
+    void (*proc_interrupt)(GObj*); // Unconfirmed
+    void (*proc_physics)(GObj*);
+    void (*proc_map)(GObj*);
+    void (*proc_slope)(GObj*); // Slope Contour update
+    void (*proc_damage)(GObj*);
     void (*unk_0x9F0)(GObj*);
-    void (*cb_hit_shield)(GObj*);
-    void (*cb_give_damage)(GObj*);
-    void (*cb_update_gfx)(GObj*);
-    void (*unk_0xA00)(GObj*);
-    void (*cb_hitlag_start)(GObj*);
-    void (*cb_hitlag_end)(GObj*);
-    void (*cb_status)(GObj*);
+    void (*proc_shield)(GObj*);
+    void (*proc_hit)(GObj*);
+    void (*proc_gfx)(GObj*);
+    void (*proc_lagupdate)(GObj*);
+    void (*proc_lagstart)(GObj*);
+    void (*proc_lagend)(GObj*);
+    void (*proc_status)(GObj*);
 
     gmSoundEffect *p_sfx1;
     s16 sfx1_id;
@@ -1178,8 +1170,8 @@ struct Fighter_Struct
 
 void ftStatus_Update(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 anim_rate, u32 flags); // Action State Change
 void func_ovl3_801438F0(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt); // FallSpecial Action State
-void func_ovl2_800DDE84(GObj*, void(*cb_coll)(GObj*)); // Grounded Collision check (stop at ledge?)
-void func_ovl2_800DE80C(GObj*, void(*cb_coll)(GObj*)); // Aerial Collision check (ledge grab?)
+void func_ovl2_800DDE84(GObj*, void(*proc_map)(GObj*)); // Grounded Collision check (stop at ledge?)
+void func_ovl2_800DE80C(GObj*, void(*proc_map)(GObj*)); // Aerial Collision check (ledge grab?)
 void ftMapCollide_SetGround(Fighter_Struct*); // ???
 void func_ovl2_800D8EB8(Fighter_Struct*); // ???
 void ftMapCollide_SetAir(Fighter_Struct*); // ???

@@ -282,15 +282,15 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     func_80008188(article_gobj, func_ovl3_80171080, 1U, 1U);
     func_80008188(article_gobj, func_ovl3_801710C4, 1U, 0U);
 
-    ap->cb_anim = spawn_data->cb_anim;
-    ap->cb_coll = spawn_data->cb_coll;
-    ap->cb_give_damage = spawn_data->cb_give_damage;
-    ap->cb_shield_block = spawn_data->cb_shield_block;
-    ap->cb_shield_deflect = spawn_data->cb_shield_deflect;
-    ap->cb_attack = spawn_data->cb_attack;
-    ap->cb_reflect = spawn_data->cb_reflect;
-    ap->cb_take_damage = spawn_data->cb_take_damage;
-    ap->cb_destroy = NULL;
+    ap->proc_update = spawn_data->proc_update;
+    ap->proc_map = spawn_data->proc_map;
+    ap->proc_hit = spawn_data->proc_hit;
+    ap->proc_shield = spawn_data->proc_shield;
+    ap->proc_hop = spawn_data->proc_hop;
+    ap->proc_setoff = spawn_data->proc_setoff;
+    ap->proc_reflector = spawn_data->proc_reflector;
+    ap->proc_damage = spawn_data->proc_damage;
+    ap->proc_dead = NULL;
 
     ap->coll_data.pos_curr = DObjGetStruct(article_gobj)->translate = *pos;
 
@@ -715,9 +715,9 @@ void func_ovl3_8016F534(GObj *article_gobj)
     }
     if (ap->hitlag_timer <= 0)
     {
-        if (ap->cb_anim != NULL)
+        if (ap->proc_update != NULL)
         {
-            if (ap->cb_anim(article_gobj) != FALSE)
+            if (ap->proc_update(article_gobj) != FALSE)
             {
                 func_ovl3_801728D4(article_gobj);
                 return;
@@ -798,13 +798,13 @@ void func_ovl3_8016F534(GObj *article_gobj)
 
         if ((translate->y < Ground_Info->blastzone_bottom) || (Ground_Info->blastzone_right < translate->x) || (translate->x < Ground_Info->blastzone_left) || (Ground_Info->blastzone_top < translate->y))
         {
-            if ((ap->cb_destroy == NULL) || (ap->cb_destroy(article_gobj) != FALSE))
+            if ((ap->proc_dead == NULL) || (ap->proc_dead(article_gobj) != FALSE))
             {
                 func_ovl3_801728D4(article_gobj);
                 return;
             }
         }
-        if (ap->cb_coll != NULL)
+        if (ap->proc_map != NULL)
         {
             ap->coll_data.coll_mask_prev = ap->coll_data.coll_mask;
             ap->coll_data.coll_mask = 0U;
@@ -812,7 +812,7 @@ void func_ovl3_8016F534(GObj *article_gobj)
             ap->coll_data.coll_type = 0;
             ap->coll_data.unk_0x58 = 0;
 
-            if (ap->cb_coll(article_gobj) != FALSE)
+            if (ap->proc_map(article_gobj) != FALSE)
             {
                 func_ovl3_801728D4(article_gobj);
                 return;
@@ -1620,9 +1620,9 @@ void func_ovl3_801710C4(GObj *article_gobj)
         }
         ap->damage_taken_last = ap->damage_taken_recent;
 
-        if (ap->cb_take_damage != NULL)
+        if (ap->proc_damage != NULL)
         {
-            if (ap->cb_take_damage(article_gobj) != FALSE)
+            if (ap->proc_damage(article_gobj) != FALSE)
             {
                 func_ovl3_801728D4(article_gobj);
                 return;
@@ -1631,9 +1631,9 @@ void func_ovl3_801710C4(GObj *article_gobj)
     }
     if ((ap->hit_victim_damage != 0) || (ap->hit_reflect_damage != 0))
     {
-        if (ap->cb_give_damage != NULL)
+        if (ap->proc_hit != NULL)
         {
-            if (ap->cb_give_damage(article_gobj) != FALSE)
+            if (ap->proc_hit(article_gobj) != FALSE)
             {
                 func_ovl3_801728D4(article_gobj);
                 return;
@@ -1652,9 +1652,9 @@ void func_ovl3_801710C4(GObj *article_gobj)
                 {
                     ap->shield_collide_angle = 0.0F;
                 }
-                if (ap->cb_shield_deflect != NULL)
+                if (ap->proc_hop != NULL)
                 {
-                    if (ap->cb_shield_deflect(article_gobj) != FALSE)
+                    if (ap->proc_hop(article_gobj) != FALSE)
                     {
                         func_ovl3_801728D4(article_gobj);
                         return;
@@ -1663,9 +1663,9 @@ void func_ovl3_801710C4(GObj *article_gobj)
                 goto next_check;
             }
         }
-        if (ap->cb_shield_block != NULL)
+        if (ap->proc_shield != NULL)
         {
-            if (ap->cb_shield_block(article_gobj) != FALSE)
+            if (ap->proc_shield(article_gobj) != FALSE)
             {
                 func_ovl3_801728D4(article_gobj);
                 return;
@@ -1675,9 +1675,9 @@ void func_ovl3_801710C4(GObj *article_gobj)
 next_check:
     if (ap->hit_attack_damage != 0)
     {
-        if (ap->cb_attack != NULL)
+        if (ap->proc_setoff != NULL)
         {
-            if (ap->cb_attack(article_gobj) != FALSE)
+            if (ap->proc_setoff(article_gobj) != FALSE)
             {
                 func_ovl3_801728D4(article_gobj);
                 return;
@@ -1699,9 +1699,9 @@ next_check:
         ap->article_hit.flags_hi = ap->unk_0x28C;
         ap->article_hit.flags_hi.halfword = ap->unk_0x28E.halfword;
 
-        if (ap->cb_reflect != NULL)
+        if (ap->proc_reflector != NULL)
         {
-            if (ap->cb_reflect(article_gobj) != FALSE)
+            if (ap->proc_reflector(article_gobj) != FALSE)
             {
                 func_ovl3_801728D4(article_gobj);
                 return;

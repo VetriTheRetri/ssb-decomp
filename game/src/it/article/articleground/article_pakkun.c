@@ -9,7 +9,7 @@ void func_ovl3_8017CF20(GObj *article_gobj)
 {
     func_ovl3_80172EC8(article_gobj, Article_Pakkun_Status, 0);
 
-    ArticleGetStruct(article_gobj)->cb_destroy = NULL;
+    ArticleGetStruct(article_gobj)->proc_dead = NULL;
 }
 
 void func_ovl3_8017CF58(GObj *article_gobj)
@@ -21,7 +21,7 @@ void func_ovl3_8017CF80(GObj *article_gobj)
 {
     func_ovl3_80172EC8(article_gobj, Article_Pakkun_Status, 2);
 
-    ArticleGetStruct(article_gobj)->cb_destroy = func_ovl3_8017D460;
+    ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_8017D460;
 }
 
 void func_ovl3_8017CFC0(GObj *article_gobj)

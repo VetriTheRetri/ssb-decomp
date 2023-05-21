@@ -157,14 +157,14 @@ typedef struct ArticleSpawnData
     u8 unk_aspd_0xD;
     u8 unk_aspd_0xE;
     s32 update_state;
-    bool32 (*cb_anim)(GObj*);
-    bool32 (*cb_coll)(GObj*);
-    bool32 (*cb_give_damage)(GObj*);
-    bool32 (*cb_shield_block)(GObj*);
-    bool32 (*cb_shield_deflect)(GObj*);
-    bool32 (*cb_attack)(GObj*);
-    bool32 (*cb_reflect)(GObj*);
-    bool32 (*cb_take_damage)(GObj*);
+    bool32 (*proc_update)(GObj*);
+    bool32 (*proc_map)(GObj*);
+    bool32 (*proc_hit)(GObj*);
+    bool32 (*proc_shield)(GObj*);
+    bool32 (*proc_hop)(GObj*);
+    bool32 (*proc_setoff)(GObj*);
+    bool32 (*proc_reflector)(GObj*);
+    bool32 (*proc_damage)(GObj*);
 
 } ArticleSpawnData;
 
@@ -189,14 +189,14 @@ typedef struct _ArticleHitArray
 
 typedef struct ArticleStatusDesc
 {
-    bool32 (*cb_anim)(GObj*);
-    bool32 (*cb_coll)(GObj*);
-    bool32 (*cb_give_damage)(GObj*);
-    bool32 (*cb_shield_block)(GObj*);
-    bool32 (*cb_shield_deflect)(GObj*);
-    bool32 (*cb_attack)(GObj*);
-    bool32 (*cb_reflect)(GObj*);
-    bool32 (*cb_take_damage)(GObj*);
+    bool32 (*proc_update)(GObj*);
+    bool32 (*proc_map)(GObj*);
+    bool32 (*proc_hit)(GObj*);
+    bool32 (*proc_shield)(GObj*);
+    bool32 (*proc_hop)(GObj*);
+    bool32 (*proc_setoff)(GObj*);
+    bool32 (*proc_reflector)(GObj*);
+    bool32 (*proc_damage)(GObj*);
 
 } ArticleStatusDesc;
 
@@ -443,15 +443,15 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     s32 display_state;
 
-    bool32 (*cb_anim)(GObj*);
-    bool32 (*cb_coll)(GObj*);
-    bool32 (*cb_give_damage)(GObj*);
-    bool32 (*cb_shield_block)(GObj*);
-    bool32 (*cb_shield_deflect)(GObj*);
-    bool32 (*cb_attack)(GObj*);
-    bool32 (*cb_reflect)(GObj*);
-    bool32 (*cb_take_damage)(GObj*);
-    bool32 (*cb_destroy)(GObj*);
+    bool32 (*proc_update)(GObj*);
+    bool32 (*proc_map)(GObj*);
+    bool32 (*proc_hit)(GObj*);
+    bool32 (*proc_shield)(GObj*);
+    bool32 (*proc_hop)(GObj*);
+    bool32 (*proc_setoff)(GObj*);
+    bool32 (*proc_reflector)(GObj*);
+    bool32 (*proc_damage)(GObj*);
+    bool32 (*proc_dead)(GObj*);
 
 } Article_Struct;
 

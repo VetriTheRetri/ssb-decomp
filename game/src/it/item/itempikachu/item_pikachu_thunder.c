@@ -94,7 +94,7 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
     ip = ItemGetStruct(item_gobj);
 
-    ip->cb_destroy = func_ovl3_8016A7E8;
+    ip->proc_dead = func_ovl3_8016A7E8;
 
     ip->lifetime = ITPIKACHUTHUNDER_SPAWN_LIFETIME;
 

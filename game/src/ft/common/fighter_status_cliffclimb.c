@@ -68,7 +68,7 @@ void func_ovl3_80144FE8(GObj *fighter_gobj, s32 status_input)
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->cb_take_damage = func_ovl3_80144CF8;
+    fp->proc_damage = func_ovl3_80144CF8;
 }
 
 bool32 func_ovl3_80145084(GObj *fighter_gobj)
@@ -123,7 +123,7 @@ void func_ovl3_801451F0(GObj *fighter_gobj)
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->cb_take_damage = func_ovl3_80144CF8;
+    fp->proc_damage = func_ovl3_80144CF8;
 }
 
 void func_ovl3_80145240(GObj *fighter_gobj)
@@ -134,7 +134,7 @@ void func_ovl3_80145240(GObj *fighter_gobj)
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->cb_take_damage = func_ovl3_80144CF8;
+    fp->proc_damage = func_ovl3_80144CF8;
 }
 
 void func_ovl3_80145290(GObj *fighter_gobj)

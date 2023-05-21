@@ -44,7 +44,7 @@ void func_ovl3_8015AFDC(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialNStart, fighter_gobj->anim_frame, 1.0F, 2U);
 
-    fp->cb_take_damage = func_ovl3_8015AF10;
+    fp->proc_damage = func_ovl3_8015AF10;
 }
 
 void func_ovl3_8015B030(GObj *fighter_gobj)
@@ -54,7 +54,7 @@ void func_ovl3_8015B030(GObj *fighter_gobj)
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirNStart, fighter_gobj->anim_frame, 1.0F, 2U);
 
-    fp->cb_take_damage = func_ovl3_8015AF10;
+    fp->proc_damage = func_ovl3_8015AF10;
 
     func_ovl2_800D8EB8(fp);
 }
@@ -128,7 +128,7 @@ void func_ovl3_8015B244(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_take_damage = func_ovl3_8015AF10;
+    fp->proc_damage = func_ovl3_8015AF10;
 
     if (fp->fighter_vars.donkey.charge_level == FTDONKEY_GIANTPUNCH_CHARGE_MAX)
     {
@@ -256,7 +256,7 @@ void jtgt_ovl3_8015B61C(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialNStart, 0.0F, 1.0F, 0U);
 
-    fp->cb_take_damage = func_ovl3_8015AF10;
+    fp->proc_damage = func_ovl3_8015AF10;
 
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015B5EC(fighter_gobj);
@@ -268,7 +268,7 @@ void jtgt_ovl3_8015B674(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirNStart, 0.0F, 1.0F, 8U);
 
-    fp->cb_take_damage = func_ovl3_8015AF10;
+    fp->proc_damage = func_ovl3_8015AF10;
 
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015B5EC(fighter_gobj);

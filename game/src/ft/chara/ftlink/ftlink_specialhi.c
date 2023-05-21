@@ -238,7 +238,7 @@ void func_ovl3_80164128(GObj *fighter_gobj)
         ftMapCollide_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 5U);
 
-        fp->cb_take_damage = func_ovl3_80163EFC;
+        fp->proc_damage = func_ovl3_80163EFC;
 
         fp->jumps_used = fp->attributes->jumps_max;
     }
@@ -269,7 +269,7 @@ void func_ovl3_801641D0(GObj *fighter_gobj)
             ftMapCollide_SetGround(fp);
             ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
 
-            fp->cb_take_damage = func_ovl3_80163EFC;
+            fp->proc_damage = func_ovl3_80163EFC;
         }
     }
 }
@@ -289,13 +289,13 @@ void jtgt_ovl3_80164284(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_8016426C;
+    fp->proc_status = func_ovl3_8016426C;
 
     ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_take_damage = func_ovl3_80163EFC;
-    fp->cb_update_gfx = func_ovl3_80163D00;
+    fp->proc_damage = func_ovl3_80163EFC;
+    fp->proc_gfx = func_ovl3_80163D00;
 }
 
 void func_ovl3_801642EC(GObj *fighter_gobj)
@@ -305,15 +305,15 @@ void func_ovl3_801642EC(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->cb_take_damage = func_ovl3_80163EFC;
-    fp->cb_update_gfx = func_ovl3_80163D00;
+    fp->proc_damage = func_ovl3_80163EFC;
+    fp->proc_gfx = func_ovl3_80163D00;
 }
 
 void jtgt_ovl3_80164348(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_status = func_ovl3_8016426C;
+    fp->proc_status = func_ovl3_8016426C;
 
     ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -322,6 +322,6 @@ void jtgt_ovl3_80164348(GObj *fighter_gobj)
 
     fp->jumps_used = fp->attributes->jumps_max;
 
-    fp->cb_take_damage = func_ovl3_80163EFC;
-    fp->cb_update_gfx = func_ovl3_80163D00;
+    fp->proc_damage = func_ovl3_80163EFC;
+    fp->proc_gfx = func_ovl3_80163D00;
 }

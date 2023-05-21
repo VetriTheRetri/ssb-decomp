@@ -196,9 +196,9 @@ void func_ovl3_801621F0(GObj *fighter_gobj)
 void func_ovl3_80162214(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    void (*cb_coll)(GObj*) = (fp->ground_or_air == ground) ? func_ovl3_80163274 : func_ovl3_801634C0;
+    void (*proc_map)(GObj*) = (fp->ground_or_air == ground) ? func_ovl3_80163274 : func_ovl3_801634C0;
 
-    func_ovl2_800D9480(fighter_gobj, cb_coll);
+    func_ovl2_800D9480(fighter_gobj, proc_map);
 }
 
 void func_ovl3_80162258(GObj *fighter_gobj)
@@ -674,9 +674,9 @@ void func_ovl3_80163018(GObj *fighter_gobj, s32 status_id)
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x40U);
     func_ovl2_800E8098(fp, 0x3FU);
 
-    if (fp->cb_update_ik != NULL)
+    if (fp->proc_slope != NULL)
     {
-        fp->cb_update_ik(fighter_gobj);
+        fp->proc_slope(fighter_gobj);
     }
     ftAnim_Update(fighter_gobj);
 }
@@ -693,9 +693,9 @@ void func_ovl3_801630A0(GObj *fighter_gobj, s32 status_id)
 
     fp->x192_flag_b3 = FALSE;
 
-    if (fp->cb_update_ik != NULL)
+    if (fp->proc_slope != NULL)
     {
-        fp->cb_update_ik(fighter_gobj);
+        fp->proc_slope(fighter_gobj);
     }
     ftAnim_Update(fighter_gobj);
     func_ovl3_80161DA8(fp, fighter_gobj, &pos);

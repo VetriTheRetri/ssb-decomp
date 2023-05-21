@@ -17,7 +17,7 @@ void func_ovl3_8015A0E4(GObj *fighter_gobj)
 
     if (fp->status_vars.masterhand.drill.follow_timer == 0) // Wait until timer reaches 0 to switch physics?
     {
-        fp->cb_physics = func_ovl3_8015A138;
+        fp->proc_physics = func_ovl3_8015A138;
         fp->status_vars.masterhand.drill.follow_timer = 39;
     }
 }
@@ -46,7 +46,7 @@ void func_ovl3_8015A138(GObj *fighter_gobj)
     if (fp->status_vars.masterhand.drill.follow_timer == 0)
     {
         fp->phys_info.vel_air.x = 0.0F;
-        fp->cb_physics = jtgt_ovl2_800D9414;
+        fp->proc_physics = jtgt_ovl2_800D9414;
     }
 }
 

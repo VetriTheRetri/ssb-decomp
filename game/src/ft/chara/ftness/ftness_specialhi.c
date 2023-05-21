@@ -335,7 +335,7 @@ void func_ovl3_8015450C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    fp->cb_take_damage = NULL;
+    fp->proc_damage = NULL;
 }
 
 void func_ovl3_80154518(GObj *fighter_gobj)
@@ -632,7 +632,7 @@ void func_ovl3_80154DBC(GObj *fighter_gobj)
 
     func_ovl3_80154758(fighter_gobj);
 
-    fp->cb_take_damage = NULL;
+    fp->proc_damage = NULL;
 
     fp->jumps_used = fp->attributes->jumps_max;
 }

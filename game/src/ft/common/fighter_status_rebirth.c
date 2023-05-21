@@ -76,7 +76,7 @@ loop: // This makes no sense
     this_fp->status_vars.common.rebirth.halo_offset.z = 0.0F;
 
     this_fp->x191_flag_b3 = TRUE;
-    this_fp->is_ignore_blastzone_top = TRUE;
+    this_fp->is_stat_nodamage = TRUE;
     this_fp->x18E_flag_b0 = TRUE;
     this_fp->x18E_flag_b1 = TRUE;
     this_fp->x191_flag_b4567 = 1;
@@ -145,7 +145,7 @@ void func_ovl3_8013D2DC(GObj *fighter_gobj)
     ftAnim_Update(fighter_gobj);
 
     fp->x191_flag_b3 = TRUE;
-    fp->is_ignore_blastzone_top = TRUE;
+    fp->is_stat_nodamage = TRUE;
     fp->x18E_flag_b0 = TRUE;
     fp->x18E_flag_b1 = TRUE;
 
@@ -181,7 +181,7 @@ void func_ovl3_8013D518(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, 0x106U);
 
-    fp->is_ignore_blastzone_top = TRUE;
+    fp->is_stat_nodamage = TRUE;
     fp->x18E_flag_b0 = TRUE;
     fp->x18E_flag_b1 = TRUE;
 

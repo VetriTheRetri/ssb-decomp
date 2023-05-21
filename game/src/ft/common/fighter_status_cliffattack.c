@@ -31,7 +31,7 @@ void func_ovl3_801456B4(GObj *fighter_gobj)
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->cb_take_damage = func_ovl3_80144CF8;
+    fp->proc_damage = func_ovl3_80144CF8;
 }
 
 void func_ovl3_80145704(GObj *fighter_gobj)
@@ -42,7 +42,7 @@ void func_ovl3_80145704(GObj *fighter_gobj)
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->cb_take_damage = func_ovl3_80144CF8;
+    fp->proc_damage = func_ovl3_80144CF8;
 }
 
 void func_ovl3_80145754(GObj *fighter_gobj)

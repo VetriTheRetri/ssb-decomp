@@ -96,7 +96,7 @@ GObj *func_ovl3_8016CB1C(GObj *fighter_gobj, Vec3f *pos)
 
     ip->lifetime = ITSPINATTACK_LIFETIME;
 
-    ip->cb_destroy = func_ovl3_8016C9A8;
+    ip->proc_dead = func_ovl3_8016C9A8;
 
     _bzero(&ip->item_vars.spin_attack, sizeof(ip->item_vars));
 

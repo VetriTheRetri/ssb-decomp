@@ -38,7 +38,7 @@ bool32 func_ovl3_8017C15C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->cb_anim = func_ovl3_8017C110;
+    ap->proc_update = func_ovl3_8017C110;
     ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
 
     func_8000BD1C(DObjGetStruct(article_gobj), ArticleGetPData(ap, D_NF_000011F8, D_NF_00001288), 0.0F); // Linker thing

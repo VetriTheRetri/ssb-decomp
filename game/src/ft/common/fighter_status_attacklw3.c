@@ -53,7 +53,7 @@ void func_ovl3_8014FD14(GObj *fighter_gobj)
 
     if (func_ovl3_80146064(fighter_gobj) == FALSE)
     {
-        fp->cb_status = func_ovl3_8014FCCC;
+        fp->proc_status = func_ovl3_8014FCCC;
 
         ftStatus_Update(fighter_gobj, ftStatus_Common_AttackLw3, 0.0F, 1.0F, 0U);
         ftAnim_Update(fighter_gobj);

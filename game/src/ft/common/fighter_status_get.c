@@ -254,9 +254,9 @@ void func_ovl3_80145FD8(GObj *fighter_gobj, GObj *article_gobj)
 
     if (fp->status_info.status_id == ftStatus_Common_HeavyGet)
     {
-        fp->cb_take_damage = func_ovl3_80145D28;
+        fp->proc_damage = func_ovl3_80145D28;
     }
-    else fp->cb_take_damage = func_ovl3_80145BE4;
+    else fp->proc_damage = func_ovl3_80145BE4;
 }
 
 bool32 func_ovl3_80146064(GObj *fighter_gobj)
@@ -291,7 +291,7 @@ void func_ovl3_801460E8(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_LiftWait, 0.0F, 1.0F, 0x40U);
 
-    fp->cb_take_damage = func_ovl3_80145D28;
+    fp->proc_damage = func_ovl3_80145D28;
 }
 
 void func_ovl3_80146130(Fighter_Struct *fp)
@@ -332,7 +332,7 @@ void func_ovl3_80146208(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_LiftTurn, 0.0F, 1.0F, 0x40U);
 
-    fp->cb_take_damage = func_ovl3_80145D28;
+    fp->proc_damage = func_ovl3_80145D28;
 
     fp->status_vars.common.lift.turn_frames = FTCOMMON_LIFT_TURN_FRAMES;
 

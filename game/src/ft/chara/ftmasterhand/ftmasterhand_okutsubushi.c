@@ -41,7 +41,7 @@ void func_ovl3_8015AB08(GObj *fighter_gobj)
     if (fp->status_vars.masterhand.okutsubushi.follow_timer == 0)
     {
         fp->phys_info.vel_air.x = 0.0F;
-        fp->cb_physics = func_ovl2_800D938C;
+        fp->proc_physics = func_ovl2_800D938C;
     }
     func_ovl3_80158528(fighter_gobj);
 }
