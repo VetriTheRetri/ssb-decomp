@@ -106,7 +106,7 @@ bool32 func_ovl3_8014A394(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     bool32 is_throwf = FALSE;
 
-    if ((fp->status_vars.common.catchwait.throw_wait == 0) || (fp->input.button_press & (fp->input.button_mask_a | fp->input.button_mask_b)))
+    if ((fp->status_vars.common.catchwait.throw_wait == 0) || (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
         is_throwf = TRUE;
     }

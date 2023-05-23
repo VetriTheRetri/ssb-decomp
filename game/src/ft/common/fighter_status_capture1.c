@@ -6,17 +6,16 @@ void func_ovl3_8014A5F0(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
     DObj *joint = DObjGetStruct(fighter_gobj)->next;
-    s32 unused[13]; // Why so much stack?
-    Vec3f capture_pos;
+    HAL_Bitmap capture;
 
-    func_ovl0_800C9A38(&capture_pos, capture_fp->joint[capture_fp->attributes->joint_itemhold_heavy], rotate);
-    func_ovl2_800EDA0C(&capture_pos, rotate);
+    func_ovl0_800C9A38(&capture, capture_fp->joint[capture_fp->attributes->joint_itemhold_heavy]);
+    func_ovl2_800EDA0C(&capture.unk_bitmap_0x0, rotate);
 
     this_pos->x = (-joint->translate.x * DObjGetStruct(fighter_gobj)->scale.x);
     this_pos->y = (-joint->translate.y * DObjGetStruct(fighter_gobj)->scale.y);
     this_pos->z = (-joint->translate.z * DObjGetStruct(fighter_gobj)->scale.z);
 
-    func_ovl2_800ED3C0(&capture_pos, this_pos);
+    func_ovl2_800ED3C0(&capture.unk_bitmap_0x0, this_pos);
 }
 
 void func_ovl3_8014A6B4(GObj *fighter_gobj)

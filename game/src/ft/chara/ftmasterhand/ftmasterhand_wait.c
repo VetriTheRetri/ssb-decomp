@@ -49,7 +49,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
 
     fp_target = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj);
 
-    if (fp->input.button_press & fp->input.button_mask_b)
+    if (fp->input.pl.button_tap & fp->input.button_mask_b)
     {
         if ((fp->input.pl.stick_range.x * fp->lr) >= 20)
         {
@@ -78,7 +78,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
         func_ovl3_801592B4(fighter_gobj, func_ovl3_80159854, &sp30);
 
     }
-    else if (fp->input.button_press & fp->input.button_mask_a)
+    else if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
         if ((ABS(fp->input.pl.stick_range.x) >= 56) && ((s32)fp->tap_stick_x < 3))
         {

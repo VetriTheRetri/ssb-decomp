@@ -28,7 +28,7 @@ void func_ovl3_8013E700(GObj *fighter_gobj)
 
     if (fp->status_vars.common.turn.is_allow_turn_direction != FALSE)
     {
-        fp->input.button_press |= fp->status_vars.common.turn.button_mask;
+        fp->input.pl.button_tap |= fp->status_vars.common.turn.button_mask;
     }
 
     if (fp->status_vars.common.turn.is_disable_interrupts == FALSE) goto interrupt1;
@@ -81,11 +81,11 @@ interrupt1:
                     }
                 }
             }
-            if (fp->input.button_press & fp->input.button_mask_a)
+            if (fp->input.pl.button_tap & fp->input.button_mask_a)
             {
                 fp->status_vars.common.turn.button_mask |= fp->input.button_mask_a;
             }
-            if (fp->input.button_press & fp->input.button_mask_b)
+            if (fp->input.pl.button_tap & fp->input.button_mask_b)
             {
                 fp->status_vars.common.turn.button_mask |= fp->input.button_mask_b;
             }

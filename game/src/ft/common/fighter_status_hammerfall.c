@@ -36,7 +36,7 @@ bool32 func_ovl3_80147CCC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((func_ovl2_800F3794(fighter_gobj) != FALSE) && (fp->input.button_press & (fp->input.button_mask_a | fp->input.button_mask_b)))
+    if ((func_ovl2_800F3794(fighter_gobj) != FALSE) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
         func_ovl3_80147C50(fighter_gobj); // Wiggle out of DamageFall if A or B is pressed
 

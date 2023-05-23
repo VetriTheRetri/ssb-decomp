@@ -65,12 +65,12 @@ bool32 func_ovl3_801614B4(GObj *fighter_gobj, bool32 is_allow_release)
 
     if (is_allow_release == TRUE)
     {
-        if (fp->input.button_press & fp->input.button_mask_b)
+        if (fp->input.pl.button_tap & fp->input.button_mask_b)
         {
             return TRUE;
         }
     }
-    else if ((fp->status_vars.kirby.speciallw.duration < (FTKIRBY_STONE_DURATION_MAX - FTKIRBY_STONE_DURATION_MIN)) && (fp->input.button_press & fp->input.button_mask_b))
+    else if ((fp->status_vars.kirby.speciallw.duration < (FTKIRBY_STONE_DURATION_MAX - FTKIRBY_STONE_DURATION_MIN)) && (fp->input.pl.button_tap & fp->input.button_mask_b))
     {
         return TRUE;
     }

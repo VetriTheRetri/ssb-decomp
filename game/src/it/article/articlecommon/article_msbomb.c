@@ -316,7 +316,7 @@ void func_ovl3_80176C14(GObj *article_gobj)
         ap->article_hit.size = ev[ap->x340_flag_b0123].size;
 
         ap->article_hit.flags_0x4C_b1 = TRUE;
-        ap->article_hit.can_deflect = FALSE;
+        ap->article_hit.can_hop = FALSE;
         ap->article_hit.can_reflect = FALSE;
         ap->article_hit.clang = FALSE;
 

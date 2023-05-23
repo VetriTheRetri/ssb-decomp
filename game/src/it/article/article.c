@@ -205,7 +205,7 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->article_hit.flags_0x4C_b1 = attributes->unk_atca_0x3C_b4;
     ap->article_hit.flags_0x4C_b2 = attributes->unk_atca_0x3C_b5;
     ap->article_hit.can_rehit = FALSE;
-    ap->article_hit.can_deflect = attributes->can_deflect;
+    ap->article_hit.can_hop = attributes->can_hop;
     ap->article_hit.can_reflect = attributes->can_reflect;
     ap->article_hit.can_shield = attributes->can_shield;
     ap->article_hit.hitbox_count = attributes->hitbox_count;
@@ -842,7 +842,7 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
                 at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 break;
 
-            case gmHitCollision_Type_Unk:
+            case gmHitCollision_Type_ShieldRehit:
                 at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
                 break;
@@ -856,7 +856,7 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
                 at_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
                 break;
 
-            case gmHitCollision_Type_ArticleHurt:
+            case gmHitCollision_Type_HurtRehit:
                 at_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
                 at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
                 break;
@@ -888,7 +888,7 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
             at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             break;
 
-        case gmHitCollision_Type_Unk:
+        case gmHitCollision_Type_ShieldRehit:
             at_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
             break;
@@ -902,7 +902,7 @@ void func_ovl3_8016F930(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type,
             at_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
             break;
 
-        case gmHitCollision_Type_ArticleHurt:
+        case gmHitCollision_Type_HurtRehit:
             at_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
             at_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
             break;
@@ -925,9 +925,9 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
 
     damage = ft_hit->damage;
 
-    if (fp->unk_0x7B0 < damage)
+    if (fp->attack_damage < damage)
     {
-        fp->unk_0x7B0 = damage;
+        fp->attack_damage = damage;
     }
     if (at_hurt->hit_status == gmHitCollision_HitStatus_Normal)
     {
@@ -1076,7 +1076,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
     unk_bool = (((defend_ap->type == At_Type_Ground) && (attack_at_hit->flags_0x4C_b1)) ? TRUE : FALSE);
 
-    func_ovl3_8016F930(attack_at_hit, defend_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_ArticleHurt : gmHitCollision_Type_Hurt), 0);
+    func_ovl3_8016F930(attack_at_hit, defend_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt), 0);
 
     if (unk_bool != FALSE)
     {
@@ -1180,7 +1180,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
 
     unk_bool = ((ap->type == At_Type_Ground) && (it_hit->flags_0x48_b1)) ? TRUE : FALSE;
 
-    func_ovl3_8016679C(ip, it_hit, article_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_ArticleHurt : gmHitCollision_Type_Hurt), 0);
+    func_ovl3_8016679C(ip, it_hit, article_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt), 0);
 
     if (unk_bool != FALSE)
     {
@@ -1642,7 +1642,7 @@ void func_ovl3_801710C4(GObj *article_gobj)
     }
     if (ap->hit_shield_damage != 0)
     {
-        if ((ap->article_hit.can_deflect) && (ap->ground_or_air == air))
+        if ((ap->article_hit.can_hop) && (ap->ground_or_air == air))
         {
             if (ap->shield_collide_angle < 2.3561945F)
             {

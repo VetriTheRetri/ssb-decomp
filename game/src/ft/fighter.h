@@ -37,14 +37,6 @@ typedef struct UnkFighterDObjData
 
 } UnkFighterDObjData;
 
-typedef struct DObjDescContainer
-{
-    DObjDesc *dobj_desc;
-    void *filler[2];
-    u8 unk_dobjcontain_0xC;
-
-} DObjDescContainer;
-
 typedef struct ftItemPickup
 {
     Vec2f pickup_offset_light;
@@ -582,6 +574,24 @@ typedef struct ftUnkFrameStruct
 
 } ftUnkFrameStruct;
 
+typedef struct ftPartIndex
+{
+    s32 partindex_0x0;
+    s32 partindex_0x4;
+    s32 partindex_0x8;
+    s32 partindex_0xC;
+
+} ftPartIndex;
+
+typedef struct AfterImageDesc
+{
+    s16 unk_afid_0x0;
+    s16 unk_afid_0x2;
+    s16 unk_afid_0x4;
+    Vec3f vec;
+
+} AfterImageDesc;
+
 typedef struct Fighter_Com
 {
     u8 behave_current;
@@ -756,7 +766,8 @@ typedef struct ftCommonAttributes
     s32 unk_ftca_0x29C;
     u8 filler_0x2A0[0x2B8 - 0x2A0];
     bool32 cliff_status_ground_air_id[5];
-    u8 filler_0x2CC[0x2D4 - 0x2CC];
+    u8 filler_0x2CC[0x2D0 - 0x2CC];
+    ftPartIndex *p_ftpart_lookup;
     DObjDescContainer *dobj_desc_container;
     DObjDesc *dobj_lookup; // WARNING: Not actually DObjDesc* but I don't know what this struct is or what its bounds are; bunch of consecutive floats
     s32 *unk_joint[8];
@@ -784,8 +795,8 @@ struct Fighter_Struct
     ftKind ft_kind;
     u8 team;
     u8 port_id;
-    u8 renderstate_curr;  // Hi-Poly = 1, Low-Poly = 2
-    u8 renderstate_match; // Hi-Poly = 1, Low-Poly = 2
+    u8 lod_current;  // Hi-Poly = 1, Low-Poly = 2
+    u8 lod_match; // Hi-Poly = 1, Low-Poly = 2
     u8 costume_id;
     u8 shade_id; // i.e. When multiple instances of the same character costume are in-game
     u8 handicap; // Original note: offset to attack hitbox type in 5x (???)
@@ -1006,13 +1017,13 @@ struct Fighter_Struct
     Fighter_Hurt fighter_hurt[11];
     f32 unk_ft_0x7A0;
     f32 hitlag_mul;
-    s32 unk_ft_0x7A8;
+    f32 shield_lifeup_wait;
     s32 unk_ft_0x7AC;
 
-    s32 unk_0x7B0;
+    s32 attack_damage;
     f32 attack_knockback;
     u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
-    s32 attack_damage;
+    s32 shield_attack_damage;
     f32 attack_rebound; // Actually 2x staled damage?
     s32 shield_damage;
     s32 shield_damage_total; // shield_damage + hitbox damage + hitbox shield damage, does not persist?
@@ -1046,8 +1057,8 @@ struct Fighter_Struct
 
     GObj *search_gobj;  // GObj this fighter found when searching for grabbable fighters?
     f32 search_gobj_dist;
-    void (*cb_catch)(GObj*); // Run this callback on grabbing attacker
-    void (*cb_capture)(GObj*, GObj*); // Run this callback on grabbed victim
+    void (*proc_catch)(GObj*); // Run this callback on grabbing attacker
+    void (*proc_capture)(GObj*, GObj*); // Run this callback on grabbed victim
     GObj *catch_gobj;   // GObj this fighter has caught
     GObj *capture_gobj; // GObj this fighter is captured by
     ftThrowHitDesc *fighter_throw; // Pointer to throw description
@@ -1078,7 +1089,7 @@ struct Fighter_Struct
     void (*proc_map)(GObj*);
     void (*proc_slope)(GObj*); // Slope Contour update
     void (*proc_damage)(GObj*);
-    void (*unk_0x9F0)(GObj*);
+    void (*proc_trap)(GObj*); // Used only by Yoshi Egg so far
     void (*proc_shield)(GObj*);
     void (*proc_hit)(GObj*);
     void (*proc_gfx)(GObj*);
@@ -1106,15 +1117,12 @@ struct Fighter_Struct
 
     struct
     {
-        s8 is_itemswing;
+        u8 is_itemswing;
         s8 render_state;
+        u8 desc_index;
+        AfterImageDesc desc[3];
 
     } afterimage;
-
-    s8 unk_0xA9E;
-    s8 unk_0xA9F;
-
-    u8 filler_0xAA0[0xADC - 0xAA0];
 
     union fighter_vars
     {

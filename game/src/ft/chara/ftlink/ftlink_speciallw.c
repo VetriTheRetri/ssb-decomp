@@ -67,6 +67,7 @@ bool32 func_ovl3_80164524(GObj *fighter_gobj, bool32 is_ground)
             if (is_ground == TRUE)
             {
                 func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowF4);
+
                 return TRUE;
             }
             else func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowAirF4);

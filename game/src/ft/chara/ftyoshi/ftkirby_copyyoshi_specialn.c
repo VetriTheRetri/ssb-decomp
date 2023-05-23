@@ -5,7 +5,7 @@ void func_ovl3_8015F180(Fighter_Struct *fp, void (*cb)(GObj*)) // Kirby's Yoshi 
     func_ovl2_800E80A4(fp, 1, cb, func_ovl3_8014C83C);
 }
 
-void func_ovl3_8015F1AC(GObj *fighter_gobj, void (*cb_catch)(GObj*))
+void func_ovl3_8015F1AC(GObj *fighter_gobj, void (*proc_catch)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -13,7 +13,7 @@ void func_ovl3_8015F1AC(GObj *fighter_gobj, void (*cb_catch)(GObj*))
     {
         fp->command_vars.flags.flag1 = 0;
 
-        cb_catch(fighter_gobj);
+        proc_catch(fighter_gobj);
     }
 }
 

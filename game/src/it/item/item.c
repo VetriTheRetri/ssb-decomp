@@ -186,7 +186,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
     ip->item_hit.can_rehit = FALSE;
 
-    ip->item_hit.can_deflect = it_hit_desc->can_deflect;
+    ip->item_hit.can_hop = it_hit_desc->can_hop;
     ip->item_hit.can_reflect = it_hit_desc->can_reflect;
     ip->item_hit.can_absorb = it_hit_desc->can_absorb;
 
@@ -518,7 +518,7 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
                 it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 break;
 
-            case gmHitCollision_Type_Unk:
+            case gmHitCollision_Type_ShieldRehit:
                 it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
@@ -536,7 +536,7 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
                 it_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
                 break;
 
-            case gmHitCollision_Type_ArticleHurt:
+            case gmHitCollision_Type_HurtRehit:
                 it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
                 it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
@@ -567,7 +567,7 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
             it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             break;
 
-        case gmHitCollision_Type_Unk:
+        case gmHitCollision_Type_ShieldRehit:
             it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
@@ -585,7 +585,7 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
             it_hit->hit_targets[i].victim_flags.interact_mask = interact_mask;
             break;
 
-        case gmHitCollision_Type_ArticleHurt:
+        case gmHitCollision_Type_HurtRehit:
             it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
             it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
@@ -765,7 +765,7 @@ void func_ovl3_80166BE4(GObj *item_gobj)
     }
     if (ip->hit_shield_damage != 0)
     {
-        if ((ip->item_hit.can_deflect) && (ip->ground_or_air == air))
+        if ((ip->item_hit.can_hop) && (ip->ground_or_air == air))
         {
             if (ip->shield_collide_angle < ITEM_DEFLECT_ANGLE_DEFAULT)
             {

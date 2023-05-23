@@ -330,7 +330,7 @@ void func_ovl3_80179A34(GObj *article_gobj)
     ap->article_hit.hit_sfx = 1;
 
     ap->article_hit.flags_0x4C_b1 = TRUE;
-    ap->article_hit.can_deflect = FALSE;
+    ap->article_hit.can_hop = FALSE;
     ap->article_hit.can_reflect = FALSE;
 
     ap->article_hit.stale = ARTICLE_STALE_DEFAULT;

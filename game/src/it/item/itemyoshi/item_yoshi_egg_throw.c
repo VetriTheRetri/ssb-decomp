@@ -36,7 +36,7 @@ void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing succ
 
     ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
-    ip->item_hit.can_deflect = FALSE;
+    ip->item_hit.can_hop = FALSE;
     ip->item_hit.can_reflect = FALSE;
 
     ip->phys_info.vel.z = 0.0F;

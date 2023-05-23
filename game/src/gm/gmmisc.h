@@ -49,9 +49,9 @@ typedef enum gmHitCollisionType // Hitbox types, this is universal but I don't k
 {
     gmHitCollision_Type_Hurt,
     gmHitCollision_Type_Shield,
-    gmHitCollision_Type_Unk,
+    gmHitCollision_Type_ShieldRehit,
     gmHitCollision_Type_Hit,
-    gmHitCollision_Type_ArticleHurt,             // Only used for specific articles? e.g. Pirahna Plants dealing damage
+    gmHitCollision_Type_HurtRehit,             // Only used for specific articles? e.g. Pirahna Plants dealing damage
     gmHitCollision_Type_Absorb,
     gmHitCollision_Type_Reflect
 

@@ -158,7 +158,7 @@ void func_ovl3_80174340(GObj *article_gobj)
     func_800269C0(1U);
 
     ap->article_hit.flags_0x4C_b1 = TRUE;
-    ap->article_hit.can_deflect = FALSE;
+    ap->article_hit.can_hop = FALSE;
     ap->article_hit.can_reflect = FALSE;
 
     ap->article_hit.element = gmHitCollision_Element_Fire;

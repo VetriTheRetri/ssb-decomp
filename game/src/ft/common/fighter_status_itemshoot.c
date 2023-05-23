@@ -168,7 +168,7 @@ void func_ovl3_80147434(GObj *fighter_gobj)
     {
         fp->status_vars.common.fireflower.release_lag++;
     }
-    if ((fp->status_vars.common.fireflower.release_lag < FTCOMMON_FIREFLOWERSHOOT_RELEASE_LAG) && (fp->input.button_press & fp->input.button_mask_a))
+    if ((fp->status_vars.common.fireflower.release_lag < FTCOMMON_FIREFLOWERSHOOT_RELEASE_LAG) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         fp->status_vars.common.fireflower.release_lag = 0;
     }

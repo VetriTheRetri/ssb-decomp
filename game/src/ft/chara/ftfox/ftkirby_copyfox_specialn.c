@@ -26,7 +26,7 @@ void func_ovl3_80156D38(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->command_vars.flags.flag1 != 0) && (fp->input.button_press & fp->input.button_mask_b))
+    if ((fp->command_vars.flags.flag1 != 0) && (fp->input.pl.button_tap & fp->input.button_mask_b))
     {
         if (fp->ground_or_air == air)
         {

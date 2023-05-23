@@ -86,9 +86,9 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     fp->hotfloor_wait = 0;
     fp->unk_ft_0x7AC = 0;
-    fp->unk_0x7B0 = 0;
-    fp->attack_hit_count = 0;
     fp->attack_damage = 0;
+    fp->attack_hit_count = 0;
+    fp->shield_attack_damage = 0;
     fp->shield_damage = 0;
     fp->unk_ft_0x7DC = 0;
     fp->damage_taken_recent = 0;
@@ -129,7 +129,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->knockback_resist_passive = 0.0F;
     fp->damage_knockback = 0.0F;
     fp->hitlag_mul = 1.0F;
-    fp->unk_ft_0x7A8 = 10.0F;
+    fp->shield_lifeup_wait = 10.0F;
 
     fp->is_fast_fall = FALSE;
 
@@ -155,7 +155,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->unk_0x290.halfword = fp->unk_ft_0x82A.halfword = 0;
     fp->unk_ft_0x828 = fp->flags_lw;
 
-    fp->unk_0xA9E = 0;
+    fp->afterimage.desc_index = 0;
 
     DObjGetStruct(fighter_gobj)->translate = spawn->pos;
     DObjGetStruct(fighter_gobj)->scale.x = DObjGetStruct(fighter_gobj)->scale.y = DObjGetStruct(fighter_gobj)->scale.z = attributes->size_mul;
@@ -346,7 +346,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     {
         Match_Info->player_block[fp->port_id].stock_count = spawn->stock_count;
     }
-    fp->renderstate_curr = fp->renderstate_match = spawn->model_lod;
+    fp->lod_current = fp->lod_match = spawn->model_lod;
 
     fp->costume_id = spawn->costume_id;
     fp->shade_id = spawn->shade_id;
@@ -406,7 +406,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     func_ovl0_800C89BC(topn_joint, 0x4BU, 0U, 0U);
     fp->joint[0]->om_mtx[0]->unk05 = spawn->unk_rebirth_0x1D;
 
-    func_ovl0_800C8DB4(fighter_gobj->obj, attributes->dobj_desc_container, fp->renderstate_curr, &fp->joint[4], attributes->unk_ftca_0x29C, 0x4B, 0, 0, fp->costume_id, fp->unk_ft_0x149);
+    func_ovl0_800C8DB4(fighter_gobj->obj, attributes->dobj_desc_container, fp->lod_current, &fp->joint[4], attributes->unk_ftca_0x29C, 0x4B, 0, 0, fp->costume_id, fp->unk_ft_0x149);
 
     for (i = 0; i < ARRAY_COUNT(fp->joint); i++)
     {
@@ -415,7 +415,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
             fp->joint[i]->unk_0x84 = func_ovl2_800D7604();
 
             dobj_unk = fp->joint[i]->unk_0x84;
-            dobj_unk->unk_0xC = attributes->dobj_desc_container[fp->renderstate_curr - 1].unk_dobjcontain_0xC;
+            dobj_unk->unk_0xC = attributes->dobj_desc_container[fp->lod_current - 1].unk_dobjcontain_0xC;
             dobj_unk->unk_0xD = i;
 
             if (fp->costume_id != 0)

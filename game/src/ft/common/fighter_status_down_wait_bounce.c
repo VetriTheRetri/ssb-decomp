@@ -51,7 +51,7 @@ void func_ovl3_80144308(GObj *fighter_gobj)
     {
         fp->status_vars.common.downbounce.attack_buffer--;
     }
-    if (fp->input.button_press & (fp->input.button_mask_a | fp->input.button_mask_b))
+    if (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))
     {
         fp->status_vars.common.downbounce.attack_buffer = FTCOMMON_DOWNBOUNCE_ATTACK_BUFFER;
     }

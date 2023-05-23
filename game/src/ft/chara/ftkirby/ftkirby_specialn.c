@@ -304,7 +304,7 @@ bool32 func_ovl3_801624C8(GObj *fighter_gobj, void (*cb)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.button_press & fp->input.button_mask_a)
+    if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
         if (fp->catch_gobj != NULL)
         {
@@ -324,7 +324,7 @@ bool32 func_ovl3_80162534(GObj *fighter_gobj, void (*cb)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.button_press & fp->input.button_mask_b) || (fp->input.pl.stick_range.y < -40))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.stick_range.y < -40))
     {
         if (fp->catch_gobj != NULL)
         {

@@ -21,7 +21,7 @@ void func_ovl3_8015AF64(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.button_press & (fp->input.button_mask_b | fp->input.button_mask_a))
+    if (fp->input.pl.button_tap & (fp->input.button_mask_b | fp->input.button_mask_a))
     {
         fp->status_vars.donkey.specialn.is_release = TRUE;
     }
@@ -103,11 +103,11 @@ void func_ovl3_8015B188(GObj *fighter_gobj)
 
     if ((fp->ground_or_air != ground) || (func_ovl3_8014935C(fighter_gobj) == FALSE))
     {
-        if (fp->input.button_press & (fp->input.button_mask_b | fp->input.button_mask_a))
+        if (fp->input.pl.button_tap & (fp->input.button_mask_b | fp->input.button_mask_a))
         {
             fp->status_vars.donkey.specialn.is_release = TRUE;
         }
-        if (fp->input.button_press & fp->input.button_mask_z)
+        if (fp->input.pl.button_tap & fp->input.button_mask_z)
         {
             fp->status_vars.donkey.specialn.is_cancel = TRUE;
         }

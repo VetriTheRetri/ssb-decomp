@@ -201,7 +201,7 @@ bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
 {
     if (fp->item_hold != NULL)
     {
-        if (fp->input.button_press & fp->input.button_mask_a)
+        if (fp->input.pl.button_tap & fp->input.button_mask_a)
         {
             if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
             {
@@ -216,7 +216,7 @@ bool32 func_ovl3_80146AE8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->item_hold != NULL) && (fp->input.button_press & fp->input.button_mask_a))
+    if ((fp->item_hold != NULL) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         if (fp->status_vars.common.itemthrow.get_heavy_wait != 0)
         {
@@ -263,7 +263,7 @@ bool32 func_ovl3_80146BE0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->item_hold != NULL) && (fp->input.button_press & (fp->input.button_mask_a | fp->input.button_mask_b)))
+    if ((fp->item_hold != NULL) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
         func_ovl3_80146930(fighter_gobj);
 

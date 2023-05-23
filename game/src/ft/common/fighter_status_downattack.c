@@ -31,7 +31,7 @@ bool32 func_ovl3_8014499C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
 
-    if (fp->input.button_press & (fp->input.button_mask_a | fp->input.button_mask_b))
+    if (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))
     {
         if (fp->status_info.status_id == ftStatus_Common_DownWaitD)
         {

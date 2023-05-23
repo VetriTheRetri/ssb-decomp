@@ -3,15 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\gm",
+    "\\game\\src\\ft",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftlink",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articleground",
-    "\\game\\src\\it\\item",
-    "\\game\\src\\mp",
-    "\\game\\src\\ovl2",
+    "\\game\\src\\it\\article\\articlecommon",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\gm\\gmmisc.h",
+  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_bombhei.c",
   "PreviewInSolutionExplorer": false
 }

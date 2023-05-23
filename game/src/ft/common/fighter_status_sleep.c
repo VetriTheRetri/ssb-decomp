@@ -65,7 +65,7 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
         }
         else
         {
-            if (this_fp->input.button_press & HAL_BUTTON_START)
+            if (this_fp->input.pl.button_tap & HAL_BUTTON_START)
             {
                 for (active_teammate_count = 0, stock_count = 0, port_id = 0; port_id < ARRAY_COUNT(Match_Info->player_block); port_id++)
                 {

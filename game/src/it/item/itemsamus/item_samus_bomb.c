@@ -17,7 +17,7 @@ void func_ovl3_80168F2C(GObj *item_gobj)
     ip->lifetime = ITSAMUSBOMB_EXPLODE_LIFETIME;
 
     ip->item_hit.flags_0x48_b1 = TRUE;
-    ip->item_hit.can_deflect = FALSE;
+    ip->item_hit.can_hop = FALSE;
 
     ip->phys_info.vel.z = 0.0F;
     ip->phys_info.vel.y = 0.0F;

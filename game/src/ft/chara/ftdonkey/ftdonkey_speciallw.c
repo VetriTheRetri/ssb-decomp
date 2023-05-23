@@ -23,7 +23,7 @@ void func_ovl3_8015BA7C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->input.button_press & fp->input.button_mask_b)
+    if (fp->input.pl.button_tap & fp->input.button_mask_b)
     {
         fp->status_vars.donkey.speciallw.is_loop = TRUE;
     }

@@ -47,6 +47,19 @@ struct GObj
 
 };
 
+typedef struct HAL_Bitmap // Probably belongs in a different header
+{
+    Vec3f unk_bitmap_0x0;
+    void *unk_bitmap_0xC;
+    Vec3f unk_bitmap_0x10;
+    s32 unk_bitmap_0x1C;
+    Vec3f unk_bitmap_0x20;
+    void *unk_bitmap_0x2C;
+    Vec3f unk_bitmap_0x30;
+    f32 unk_bitmap_0x3C;
+
+} HAL_Bitmap;
+
 extern GObj *gOMObjCommonLinks[];
 
 #ifndef Mtx_t
@@ -98,6 +111,25 @@ typedef struct UnkDObjData
 
 } UnkDObjData;
 
+typedef struct DObjDesc
+{
+    s32 index;
+    void *x4;
+    Vec3f translate;
+    Vec3f rotate;
+    Vec3f scale;
+
+} DObjDesc;
+
+typedef struct DObjDescContainer
+{
+    DObjDesc *dobj_desc;
+    DObjDesc **d2;
+    DObjDesc **d3;
+    u8 unk_dobjcontain_0xC;
+
+} DObjDescContainer;
+
 typedef struct DObj DObj;
 
 struct DObj
@@ -126,16 +158,6 @@ struct DObj
     MObj *mobj;
     void *unk_0x84;    // Multi-purpose? Articles store a fighter joint here, but func_ovl2_800D78E8 expects a different struct
 };
-
-typedef struct DObjDesc
-{
-    s32 index;
-    void *x4;
-    Vec3f translate;
-    Vec3f rotate;
-    Vec3f scale;
-
-} DObjDesc;
 
 #define DObjGetStruct(gobj) \
 ((DObj*)gobj->obj) \

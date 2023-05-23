@@ -221,7 +221,7 @@ typedef struct _Article_Hit
     u32 flags_0x4C_b1 : 1;
     u32 flags_0x4C_b2 : 1;
     u32 can_rehit : 1; // Article can rehit targets after default rehit cooldown expires
-    u32 can_deflect : 1;
+    u32 can_hop : 1;
     u32 can_reflect : 1;
     u32 can_shield : 1; // Not actually absorb but not yet known either
     u32 attack_id : 6; // Unconfirmed
@@ -305,7 +305,7 @@ typedef struct atCommonAttributes
     u32 priority : 3;
     u32 unk_atca_0x3C_b4 : 1;
     u32 unk_atca_0x3C_b5 : 1;
-    u32 can_deflect : 1;
+    u32 can_hop : 1;
     u32 can_reflect : 1;
     u32 can_shield : 1;
     u32 knockback_base : 10;

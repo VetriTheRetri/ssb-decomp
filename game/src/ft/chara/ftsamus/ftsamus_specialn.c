@@ -62,7 +62,7 @@ void func_ovl3_8015D464(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->input.button_press & fp->input.button_mask_b) || (fp->input.button_press & fp->input.button_mask_a))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         fp->status_vars.samus.specialn.is_release = TRUE;
     }
@@ -138,7 +138,7 @@ void func_ovl3_8015D640(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 ret;
 
-    if ((fp->input.button_press & fp->input.button_mask_b) || (fp->input.button_press & fp->input.button_mask_a))
+    if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
         func_ovl3_8015DA60(fighter_gobj);
         return;
@@ -152,7 +152,7 @@ void func_ovl3_8015D640(GObj *fighter_gobj)
         func_ovl3_80149294(fighter_gobj, ret);
     }
 
-    else if (fp->input.button_press & fp->input.button_mask_z)
+    else if (fp->input.pl.button_tap & fp->input.button_mask_z)
     {
         func_ovl3_8015D300(fp);
         func_ovl3_8013E1C8(fighter_gobj);

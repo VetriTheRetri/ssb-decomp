@@ -61,7 +61,7 @@ void func_ovl3_8013F42C(GObj *fighter_gobj, u32 input_source)
 
 bool32 func_ovl3_8013F450(Fighter_Struct *fp)
 {
-    if (fp->input.button_press & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
+    if (fp->input.pl.button_tap & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
     {
         return TRUE;
     }

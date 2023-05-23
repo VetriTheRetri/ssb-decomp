@@ -57,7 +57,7 @@ void func_ovl3_80156630(GObj *fighter_gobj)
     func_ovl2_800D89E0(fp, 0, 0.025F, func_ovl3_801565E4(fp, 17.0F));
     func_ovl2_800D87D0(fighter_gobj);
 
-    if ((fp->command_vars.flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
+    if ((fp->command_vars.flags.flag3 != FALSE) && (fp->input.pl.button_tap & fp->input.button_mask_b))
     {
         fp->phys_info.vel_air.y += FTMARIO_TORNADO_TAP_VEL_ADD;
 
@@ -70,7 +70,7 @@ void func_ovl3_801566C4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if ((fp->fighter_vars.mario.is_expend_tornado == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.button_press & fp->input.button_mask_b))
+    if ((fp->fighter_vars.mario.is_expend_tornado == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.pl.button_tap & fp->input.button_mask_b))
     {
         func_ovl2_800D8D34(fp, FTMARIO_TORNADO_TAP_VEL_ADD, 40.0F);
     }

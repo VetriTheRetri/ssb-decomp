@@ -363,7 +363,7 @@ void func_ovl3_8014CF20(GObj *fighter_gobj)
 
     this_fp->capture_gobj = NULL;
 
-    this_fp->unk_0x9F0 = func_ovl3_8014CD7C;
+    this_fp->proc_trap = func_ovl3_8014CD7C;
 
     this_fp->status_vars.common.captureyoshi.lr = capture_fp->lr;
     this_fp->status_vars.common.captureyoshi.effect_gobj = NULL;

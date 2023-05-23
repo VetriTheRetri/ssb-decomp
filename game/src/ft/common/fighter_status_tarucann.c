@@ -35,7 +35,7 @@ void func_ovl3_80143EB0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->status_vars.common.tarucann.shoot_wait == 0) && (fp->input.button_press & (fp->input.button_mask_a | fp->input.button_mask_b)))
+    if ((fp->status_vars.common.tarucann.shoot_wait == 0) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
         fp->status_vars.common.tarucann.shoot_wait = FTCOMMON_TARUCANN_SHOOT_WAIT;
 

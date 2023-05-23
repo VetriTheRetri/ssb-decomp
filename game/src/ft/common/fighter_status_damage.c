@@ -648,7 +648,7 @@ void func_ovl3_80141560(GObj *fighter_gobj)
     {
         fp->cliffcatch_wait = FTCOMMON_CLIFF_CATCH_WAIT;
     }
-    if (fp->damage_element == 6)
+    if (fp->damage_element == gmHitCollision_Element_Sleep)
     {
         func_ovl3_801499A4(fighter_gobj);
     }
@@ -763,9 +763,9 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             }
             else
             {
-                grab_fp->hitlag_timer = func_ovl2_800EA1C0(this_fp->unk_ft_0x7DC, grab_fp->status_info.status_id, grab_fp->hitlag_mul, this_fp);
+                grab_fp->hitlag_timer = func_ovl2_800EA1C0(this_fp->unk_ft_0x7DC, grab_fp->status_info.status_id, grab_fp->hitlag_mul);
 
-                this_fp->input.button_press = this_fp->input.pl.button_tap_prev = 0;
+                this_fp->input.pl.button_tap = this_fp->input.pl.button_tap_prev = 0;
 
                 if (this_fp->proc_lagstart != NULL)
                 {

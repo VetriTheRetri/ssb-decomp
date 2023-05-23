@@ -99,7 +99,7 @@ typedef struct ItemHitDesc // Moreso hitbox stuff
     u32 priority : 3;
     u32 flags_0x2F_b0 : 1;
     u32 flags_0x2F_b1 : 1;
-    u32 can_deflect : 1;
+    u32 can_hop : 1;
     u32 can_reflect : 1;
     u32 can_absorb : 1;
     u32 can_shield : 1;
@@ -152,7 +152,7 @@ typedef struct _Item_Hit
             u32 flags_0x48_b1 : 1;
             u32 flags_0x48_b2 : 1;
             u32 can_rehit : 1;
-            u32 can_deflect : 1; // Actually determines whether item's shield deflect routine can run?
+            u32 can_hop : 1; // Actually determines whether item's shield deflect routine can run?
             u32 can_reflect : 1;
             u32 can_absorb : 1;
             u32 noheal : 1;
