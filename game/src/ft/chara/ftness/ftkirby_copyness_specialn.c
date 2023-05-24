@@ -1,6 +1,9 @@
 #include <game/src/ft/chara/ftkirby/ftkirby.h>
 
-void func_ovl3_80155B40(GObj *fighter_gobj)
+#define FTKIRBY_COPYNESS_SPECIALN_STATUPDATE_FLAGS (FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
+
+// 0x80155B40
+void ftKirby_CopyNess_SpecialN_SpawnPKFire(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
@@ -39,56 +42,63 @@ void func_ovl3_80155B40(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80155CAC(GObj *fighter_gobj)
+// 0x80155CAC
+void ftKirby_CopyNess_SpecialN_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDDDC(fighter_gobj, func_ovl3_80155D48);
+    func_ovl2_800DDDDC(fighter_gobj, ftKirby_CopyNess_SpecialN_SwitchStatusAir);
 }
 
-void func_ovl3_80155CD0(GObj *fighter_gobj)
+// 0x80155CD0
+void ftKirby_CopyNess_SpecialAirN_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_80155CF4);
+    func_ovl2_800DE6E4(fighter_gobj, ftKirby_CopyNess_SpecialAirN_SwitchStatusGround);
 }
 
-void func_ovl3_80155CF4(GObj *fighter_gobj)
+// 0x80155CF4
+void ftKirby_CopyNess_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYNESS_SPECIALN_STATUPDATE_FLAGS);
 
-    fp->proc_accessory = func_ovl3_80155B40;
+    fp->proc_accessory = ftKirby_CopyNess_SpecialN_SpawnPKFire;
 }
 
-void func_ovl3_80155D48(GObj *fighter_gobj)
+// 0x80155D48
+void ftKirby_CopyNess_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYNESS_SPECIALN_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_accessory = func_ovl3_80155B40;
+    fp->proc_accessory = ftKirby_CopyNess_SpecialN_SpawnPKFire;
 }
 
-void func_ovl3_80155DA4(GObj *fighter_gobj)
+// 0x80155DA4
+void ftKirby_CopyNess_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
 
-    fp->proc_accessory = func_ovl3_80155B40;
+    fp->proc_accessory = ftKirby_CopyNess_SpecialN_SpawnPKFire;
 }
 
-void jtgt_ovl3_80155DBC(GObj *fighter_gobj)
+// 0x80155DBC
+void ftKirby_CopyNess_SpecialN_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_80155DA4(fighter_gobj);
+    ftKirby_CopyNess_SpecialN_InitStatusVars(fighter_gobj);
 }
 
-void jtgt_ovl3_80155DFC(GObj *fighter_gobj)
+// 0x80155DFC
+void ftKirby_CopyNess_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_80155DA4(fighter_gobj);
+    ftKirby_CopyNess_SpecialN_InitStatusVars(fighter_gobj);
 }

@@ -2623,7 +2623,7 @@ bool32 func_ovl2_800DE758(GObj *fighter_gobj, bool32(*proc_map)(GObj*))
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 4);
 }
 
-bool32 func_ovl2_800DE798(GObj *fighter_gobj, bool32(*proc_map)(GObj *))
+bool32 func_ovl2_800DE798(GObj *fighter_gobj, bool32(*proc_map)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -2639,7 +2639,8 @@ bool32 func_ovl2_800DE7D8(GObj *fighter_gobj)
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 1);
 }
 
-bool32 func_ovl2_800DE80C(GObj *fighter_gobj, void (*proc_map)(GObj *))
+// Check if fighter becomes grounded, allow CliffCatch interrupt
+bool32 ftMapCollide_CheckGroundCliff(GObj *fighter_gobj, void (*proc_map)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -2695,7 +2696,7 @@ bool32 func_ovl2_800DE958(GObj *fighter_gobj)
 
 bool32 func_ovl2_800DE978(GObj *fighter_gobj)
 {
-    return func_ovl2_800DE80C(fighter_gobj, func_ovl2_800DE8E4);
+    return ftMapCollide_CheckGroundCliff(fighter_gobj, func_ovl2_800DE8E4);
 }
 
 void jtgt_ovl2_800DE99C(GObj *fighter_gobj)

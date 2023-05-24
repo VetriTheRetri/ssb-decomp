@@ -9,12 +9,12 @@ void func_ovl3_8015AF10(GObj *fighter_gobj)
 
 void func_ovl3_8015AF1C(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8015B320);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015B320);
 }
 
 void func_ovl3_8015AF40(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8015B35C);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015B35C);
 }
 
 void func_ovl3_8015AF64(GObj *fighter_gobj)

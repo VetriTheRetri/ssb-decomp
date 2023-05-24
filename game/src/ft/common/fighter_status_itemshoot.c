@@ -3,7 +3,7 @@
 
 void func_ovl3_80146FB0(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl2_800DEE54);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
 
 const Vec3f Fighter_LGunShoot_Ammo_Offset = { FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_X, FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Y, FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z };
@@ -94,7 +94,7 @@ void func_ovl3_80147258(GObj *fighter_gobj)
 
 void func_ovl3_801472B0(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl2_800DEE54);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
 
 const Vec3f Fighter_FireFlowerShoot_Ammo_Offset = { FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_X, FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Y, FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Z };

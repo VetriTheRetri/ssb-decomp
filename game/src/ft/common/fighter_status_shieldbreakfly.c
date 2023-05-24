@@ -3,7 +3,7 @@
 
 void func_ovl3_80149440(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_80149744);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80149744);
 }
 
 void func_ovl3_80149464(GObj *fighter_gobj)
@@ -72,7 +72,7 @@ void func_ovl3_80149608(GObj *fighter_gobj)
 
 void func_ovl3_80149680(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_801497C4);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801497C4);
 }
 
 void func_ovl3_801496A4(GObj *fighter_gobj)

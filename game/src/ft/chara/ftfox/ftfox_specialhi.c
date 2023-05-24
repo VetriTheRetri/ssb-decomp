@@ -4,12 +4,12 @@
 
 void func_ovl3_8015BD00(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8015BFCC);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015BFCC);
 }
 
 void func_ovl3_8015BD24(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8015C010);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015C010);
 }
 
 void func_ovl3_8015BD48(GObj *fighter_gobj)
@@ -380,7 +380,7 @@ void func_ovl3_8015C7A4(GObj *fighter_gobj)
 
 void func_ovl3_8015C7D4(GObj *fighter_gobj)
 {
-    func_ovl2_800DE80C(fighter_gobj, func_ovl3_8015C7F8);
+    ftMapCollide_CheckGroundCliff(fighter_gobj, func_ovl3_8015C7F8);
 }
 
 void func_ovl3_8015C838(GObj *fighter_gobj)

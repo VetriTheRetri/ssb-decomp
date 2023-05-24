@@ -126,7 +126,7 @@ bool32 func_ovl3_8014A394(GObj *fighter_gobj)
 
 void func_ovl3_8014A430(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8014A4A8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014A4A8);
 }
 
 void func_ovl3_8014A454(GObj *fighter_gobj)

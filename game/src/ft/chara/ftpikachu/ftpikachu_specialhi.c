@@ -46,7 +46,7 @@ void func_ovl3_8015286C(GObj *fighter_gobj)
 
 void func_ovl3_80152890(GObj *fighter_gobj)
 {
-    func_ovl2_800DE80C(fighter_gobj, func_ovl3_801528B4);
+    ftMapCollide_CheckGroundCliff(fighter_gobj, func_ovl3_801528B4);
 }
 
 void func_ovl3_801528B4(GObj *fighter_gobj)

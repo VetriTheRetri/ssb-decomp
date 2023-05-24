@@ -17,7 +17,7 @@ void func_ovl3_8014204C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_80141FF0(fp);
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_801424BC);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801424BC);
 }
 
 void func_ovl3_80142080(GObj *fighter_gobj)
@@ -237,7 +237,7 @@ void func_ovl3_80142698(GObj *fighter_gobj)
 {
     func_ovl3_80142660(fighter_gobj);
     func_ovl3_801425E4(fighter_gobj);
-    func_ovl2_800D9480(fighter_gobj, func_ovl2_800DEE54);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
 
 void func_ovl3_801426D0(GObj *fighter_gobj)

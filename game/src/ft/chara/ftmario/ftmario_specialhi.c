@@ -1,6 +1,7 @@
 #include <game/src/ft/chara/ftmario/ftmario.h>
 
-void func_ovl3_801560A0(GObj *fighter_gobj)
+// 0x801560A0
+void ftMario_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -8,7 +9,8 @@ void func_ovl3_801560A0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801560F4(GObj *fighter_gobj)
+// 0x801560F4
+void ftMario_SpecialHi_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 rot_z;
@@ -20,13 +22,13 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
     {
         stick_x = ABS(fp->input.pl.stick_range.x);
 
-        if (stick_x >= (FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD + 1))
+        if (stick_x > FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD)
         {
             stick_x = (fp->input.pl.stick_range.x > 0) ? FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD : -FTMARIO_SUPERJUMP_TURN_STICK_THRESHOLD;
 
             rot_z = (f32)((fp->input.pl.stick_range.x - stick_x) * FTMARIO_SUPERJUMP_AIR_DRIFT);
 
-            rot_z = -(((f32)rot_z * PI32) / 180.0F);
+            rot_z = -F_DEG_TO_RAD(rot_z);
 
             stick_rot = ABSF(rot_z);
 
@@ -45,7 +47,7 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
 
         stick_x = ABS(fp->input.pl.stick_range.x);
 
-        if (stick_x >= 21)
+        if (stick_x > 20)
         {
             func_ovl2_800E8044(fp);
 
@@ -54,7 +56,8 @@ void func_ovl3_801560F4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80156240(GObj *fighter_gobj)
+// 0x80156240
+void ftMario_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -64,10 +67,11 @@ void func_ovl3_80156240(GObj *fighter_gobj)
         if (fp->ground_or_air == air)
         {
             func_ovl2_800D93E4(fighter_gobj);
+
             return;
         }
-
         func_ovl2_800D8C14(fighter_gobj);
+
         return;
     }
 
@@ -89,18 +93,20 @@ void func_ovl3_80156240(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl3_80156320(GObj *fighter_gobj)
+// 0x80156320
+bool32 ftMario_SpecialHi_CheckIgnorePass(GObj *fighter_gobj) // TRUE = no platform pass?
 {
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->coll_data.ground_flags & 0x4000) == FALSE) || (fp->input.pl.stick_range.y >= FTMARIO_SUPERJUMP_STICK_Y_UNK))
+    if (!(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID) || (fp->input.pl.stick_range.y >= FTMARIO_SUPERJUMP_STICK_Y_UNK))
     {
         return TRUE;
     }
     else return FALSE;
 }
 
-void func_ovl3_80156358(GObj *fighter_gobj)
+// 0x80156358
+void ftMario_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -111,22 +117,20 @@ void func_ovl3_80156358(GObj *fighter_gobj)
             func_ovl2_800DE724(fighter_gobj);
         }
 
-        else if (func_ovl2_800DE798(fighter_gobj, func_ovl3_80156320) != FALSE)
+        else if (func_ovl2_800DE798(fighter_gobj, ftMario_SpecialHi_CheckIgnorePass) != FALSE)
         {
             if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
             {
                 func_ovl3_80144C24(fighter_gobj);
             }
-            else func_ovl3_80142E3C(fighter_gobj, NULL, FTMARIO_SUPERJUMP_LANDING_LAG);
+            else func_ovl3_80142E3C(fighter_gobj, FALSE, FTMARIO_SUPERJUMP_LANDING_LAG);
         }
     }
-    else
-    {
-        func_ovl2_800DDF44(fighter_gobj);
-    }
+    else func_ovl2_800DDF44(fighter_gobj);
 }
 
-void func_ovl3_80156418(GObj *fighter_gobj)
+// 0x80156418
+void ftMario_SpecialHi_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -134,11 +138,12 @@ void func_ovl3_80156418(GObj *fighter_gobj)
     fp->command_vars.flags.flag1 = FALSE;
 }
 
-void jtgt_ovl3_80156428(GObj *fighter_gobj)
+// 0x80156428
+void ftMario_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl3_80156418(fighter_gobj);
+    ftMario_SpecialHi_InitStatusVars(fighter_gobj);
 
     fp->status_vars.mario.specialhi.is_air_bool = FALSE;
 
@@ -146,11 +151,12 @@ void jtgt_ovl3_80156428(GObj *fighter_gobj)
     ftAnim_Update(fighter_gobj);
 }
 
-void jtgt_ovl3_80156478(GObj* fighter_gobj)
+// 0x80156478
+void ftMario_SpecialAirHi_SetStatus(GObj* fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl3_80156418(fighter_gobj);
+    ftMario_SpecialHi_InitStatusVars(fighter_gobj);
 
     fp->status_vars.mario.specialhi.is_air_bool = TRUE;
 

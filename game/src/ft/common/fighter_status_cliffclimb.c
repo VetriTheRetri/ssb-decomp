@@ -107,12 +107,12 @@ bool32 func_ovl3_80145084(GObj *fighter_gobj)
 
 void func_ovl3_801451A8(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_801455A0);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801455A0);
 }
 
 void func_ovl3_801451CC(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_801455E0);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801455E0);
 }
 
 void func_ovl3_801451F0(GObj *fighter_gobj)
@@ -139,7 +139,7 @@ void func_ovl3_80145240(GObj *fighter_gobj)
 
 void func_ovl3_80145290(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl2_800DEE54);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
 
 void func_ovl3_801452B4(GObj *fighter_gobj)

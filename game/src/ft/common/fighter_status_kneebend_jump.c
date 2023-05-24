@@ -206,16 +206,16 @@ void func_ovl3_8013F880(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
 
-    switch (fp->status_vars.common.hammer.input_source)
+    switch (fp->status_vars.common.kneebend.input_source)
     {
     case FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON:
-        func_ovl3_8013F6A0(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.hammer.is_short_hop);
+        func_ovl3_8013F6A0(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.kneebend.is_short_hop);
         break;
 
     case FTCOMMON_KNEEBEND_INPUT_TYPE_STICK:
     default:
         vel_x = fp->input.pl.stick_range.x;
-        vel_y = fp->status_vars.common.hammer.jump_force;
+        vel_y = fp->status_vars.common.kneebend.jump_force;
 
         if (vel_y < FTCOMMON_KNEEBEND_STICK_RANGE_MIN)
         {

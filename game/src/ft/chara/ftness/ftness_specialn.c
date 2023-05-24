@@ -46,13 +46,13 @@ void ftNess_SpecialN_SpawnPKFire(GObj *fighter_gobj) // PK Fire setup
 }
 
 // 0x80153AC0
-void ftNess_SpecialN_Proc_Map(GObj *fighter_gobj)
+void ftNess_SpecialN_ProcMap(GObj *fighter_gobj)
 {
     func_ovl2_800DE6E4(fighter_gobj, ftNess_SpecialN_SwitchStatusAir);
 }
 
 // 0x80153AE4
-void ftNess_SpecialAirN_Proc_Map(GObj *fighter_gobj)
+void ftNess_SpecialAirN_ProcMap(GObj *fighter_gobj)
 {
     func_ovl2_800DE6E4(fighter_gobj, ftNess_SpecialAirN_SwitchStatusGround);
 }
@@ -84,7 +84,7 @@ void ftNess_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 }
 
 // 0x80153BB8
-void ftNess_SpecialN_SetStatusFlags(GObj *fighter_gobj)
+void ftNess_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -97,7 +97,7 @@ void ftNess_SpecialN_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
-    ftNess_SpecialN_SetStatusFlags(fighter_gobj);
+    ftNess_SpecialN_InitStatusVars(fighter_gobj);
 }
 
 // 0x80153C10
@@ -105,5 +105,5 @@ void ftNess_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
-    ftNess_SpecialN_SetStatusFlags(fighter_gobj);
+    ftNess_SpecialN_InitStatusVars(fighter_gobj);
 }

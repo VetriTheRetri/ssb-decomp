@@ -4,15 +4,13 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\gm",
+    "\\game\\src\\ft\\common",
     "\\game\\src\\it",
     "\\game\\src\\it\\article",
     "\\game\\src\\it\\article\\articlecommon",
     "\\game\\src\\mp",
+    "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftness\\ftness.h",
   "PreviewInSolutionExplorer": false
 }

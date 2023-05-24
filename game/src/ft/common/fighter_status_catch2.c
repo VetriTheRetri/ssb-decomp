@@ -4,7 +4,7 @@ void func_ovl3_80149EC0(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
 
-    if (func_ovl2_800D9480(fighter_gobj, func_ovl3_8014A000) != 0)
+    if (ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014A000) != 0)
     {
         Fighter_Struct *catch_fp = FighterGetStruct(this_fp->catch_gobj);
 

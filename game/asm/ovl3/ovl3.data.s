@@ -1330,20 +1330,20 @@ glabel Fighter_Shouldered_Capture_Release
   .incbin "ovl3.raw.bin", 0x56F40, 0x10
 
 glabel ftKirby_SpecialAirN_StatusList
-  /* 56F50 103490 80188A50 */  .4byte jtgt_ovl3_80156C38
+  /* 56F50 103490 80188A50 */  .4byte ftKirby_CopyMario_SpecialAirN_SetStatus
   /* 56F54 103494 80188A54 */  .4byte func_ovl3_80156E18
   /* 56F58 103498 80188A58 */  .4byte jtgt_ovl3_80157F04
   /* 56F5C 10349C 80188A5C */  .4byte jtgt_ovl3_80157744
-  /* 56F60 1034A0 80188A60 */  .4byte jtgt_ovl3_80156C38
+  /* 56F60 1034A0 80188A60 */  .4byte ftKirby_CopyMario_SpecialAirN_SetStatus
   /* 56F64 1034A4 80188A64 */  .4byte jtgt_ovl3_801649C0
   /* 56F68 1034A8 80188A68 */  .4byte jtgt_ovl3_8015F60C
   /* 56F6C 1034AC 80188A6C */  .4byte jtgt_ovl3_80160B70
   /* 56F70 1034B0 80188A70 */  .4byte jtgt_ovl3_801633A0
   /* 56F74 1034B4 80188A74 */  .4byte jtgt_ovl3_80153908
   /* 56F78 1034B8 80188A78 */  .4byte jtgt_ovl3_80151B04
-  /* 56F7C 1034BC 80188A7C */  .4byte jtgt_ovl3_80155DFC
+  /* 56F7C 1034BC 80188A7C */  .4byte ftKirby_CopyNess_SpecialAirN_SetStatus
   /* 56F80 1034C0 80188A80 */  .4byte jtgt_ovl3_801633A0
-  /* 56F84 1034C4 80188A84 */  .4byte jtgt_ovl3_80156C38
+  /* 56F84 1034C4 80188A84 */  .4byte ftKirby_CopyMario_SpecialAirN_SetStatus
   /* 56F88 1034C8 80188A88 */  .4byte jtgt_ovl3_801633A0
   /* 56F8C 1034CC 80188A8C */  .4byte jtgt_ovl3_801633A0
   /* 56F90 1034D0 80188A90 */  .4byte jtgt_ovl3_801633A0
@@ -1359,11 +1359,11 @@ glabel ftKirby_SpecialAirN_StatusList
   /* 56FB8 1034F8 80188AB8 */  .4byte jtgt_ovl3_801633A0
 
 glabel ftCommon_SpecialAirN_StatusList
-  /* 56FBC 1034FC 80188ABC */  .4byte jtgt_ovl3_80156054
+  /* 56FBC 1034FC 80188ABC */  .4byte ftMario_SpecialAirN_SetStatus
   /* 56FC0 103500 80188AC0 */  .4byte func_ovl3_8015BCB8
   /* 56FC4 103504 80188AC4 */  .4byte jtgt_ovl3_8015B674
   /* 56FC8 103508 80188AC8 */  .4byte jtgt_ovl3_8015DBDC
-  /* 56FCC 10350C 80188ACC */  .4byte jtgt_ovl3_80156054
+  /* 56FCC 10350C 80188ACC */  .4byte ftMario_SpecialAirN_SetStatus
   /* 56FD0 103510 80188AD0 */  .4byte jtgt_ovl3_80163A4C
   /* 56FD4 103514 80188AD4 */  .4byte jtgt_ovl3_8015E79C
   /* 56FD8 103518 80188AD8 */  .4byte jtgt_ovl3_8015FBC0
@@ -1371,15 +1371,15 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 56FE0 103520 80188AE0 */  .4byte jtgt_ovl3_80151D64
   /* 56FE4 103524 80188AE4 */  .4byte jtgt_ovl3_80151504
   /* 56FE8 103528 80188AE8 */  .4byte ftNess_SpecialAirN_SetStatus
-  /* 56FEC 10352C 80188AEC */  .4byte jtgt_ovl3_80156054
-  /* 56FF0 103530 80188AF0 */  .4byte jtgt_ovl3_80156054
-  /* 56FF4 103534 80188AF4 */  .4byte jtgt_ovl3_80156054
+  /* 56FEC 10352C 80188AEC */  .4byte ftMario_SpecialAirN_SetStatus
+  /* 56FF0 103530 80188AF0 */  .4byte ftMario_SpecialAirN_SetStatus
+  /* 56FF4 103534 80188AF4 */  .4byte ftMario_SpecialAirN_SetStatus
   /* 56FF8 103538 80188AF8 */  .4byte func_ovl3_8015BCB8
   /* 56FFC 10353C 80188AFC */  .4byte jtgt_ovl3_8015B674
   /* 57000 103540 80188B00 */  .4byte jtgt_ovl3_8015DBDC
-  /* 57004 103544 80188B04 */  .4byte jtgt_ovl3_80156054
+  /* 57004 103544 80188B04 */  .4byte ftMario_SpecialAirN_SetStatus
   /* 57008 103548 80188B08 */  .4byte jtgt_ovl3_80163A4C
-  /* 5700C 10354C 80188B0C */  .4byte jtgt_ovl3_80156054
+  /* 5700C 10354C 80188B0C */  .4byte ftMario_SpecialAirN_SetStatus
   /* 57010 103550 80188B10 */  .4byte jtgt_ovl3_8015FBC0
   /* 57014 103554 80188B14 */  .4byte jtgt_ovl3_80150ED0
   /* 57018 103558 80188B18 */  .4byte jtgt_ovl3_80151D64
@@ -1388,11 +1388,11 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 57024 103564 80188B24 */  .4byte jtgt_ovl3_8015B674
 
 glabel ftCommon_SpecialAirHi_StatusList
-  /* 57028 103568 80188B28 */  .4byte jtgt_ovl3_80156478
+  /* 57028 103568 80188B28 */  .4byte ftMario_SpecialAirHi_SetStatus
   /* 5702C 10356C 80188B2C */  .4byte jtgt_ovl3_8015CB10
   /* 57030 103570 80188B30 */  .4byte jtgt_ovl3_8015B9B8
   /* 57034 103574 80188B34 */  .4byte jtgt_ovl3_8015DE90
-  /* 57038 103578 80188B38 */  .4byte jtgt_ovl3_80156478
+  /* 57038 103578 80188B38 */  .4byte ftMario_SpecialAirHi_SetStatus
   /* 5703C 10357C 80188B3C */  .4byte jtgt_ovl3_80164348
   /* 57040 103580 80188B40 */  .4byte jtgt_ovl3_8015ED7C
   /* 57044 103584 80188B44 */  .4byte jtgt_ovl3_801607B4
@@ -1400,13 +1400,13 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 5704C 10358C 80188B4C */  .4byte jtgt_ovl3_801529EC
   /* 57050 103590 80188B50 */  .4byte jtgt_ovl3_801516D8
   /* 57054 103594 80188B54 */  .4byte ftNess_SpecialAirHiStart_SetStatus
-  /* 57058 103598 80188B58 */  .4byte jtgt_ovl3_80156054
-  /* 5705C 10359C 80188B5C */  .4byte jtgt_ovl3_80156478
-  /* 57060 1035A0 80188B60 */  .4byte jtgt_ovl3_80156478
+  /* 57058 103598 80188B58 */  .4byte ftMario_SpecialAirN_SetStatus
+  /* 5705C 10359C 80188B5C */  .4byte ftMario_SpecialAirHi_SetStatus
+  /* 57060 1035A0 80188B60 */  .4byte ftMario_SpecialAirHi_SetStatus
   /* 57064 1035A4 80188B64 */  .4byte jtgt_ovl3_8015CB10
   /* 57068 1035A8 80188B68 */  .4byte jtgt_ovl3_8015B9B8
   /* 5706C 1035AC 80188B6C */  .4byte jtgt_ovl3_8015DE90
-  /* 57070 1035B0 80188B70 */  .4byte jtgt_ovl3_80156478
+  /* 57070 1035B0 80188B70 */  .4byte ftMario_SpecialAirHi_SetStatus
   /* 57074 1035B4 80188B74 */  .4byte jtgt_ovl3_80164348
   /* 57078 1035B8 80188B78 */  .4byte jtgt_ovl3_8015ED7C
   /* 5707C 1035BC 80188B7C */  .4byte jtgt_ovl3_801607B4
@@ -1417,13 +1417,13 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 57090 1035D0 80188B90 */  .4byte jtgt_ovl3_8015B9B8
 
 glabel ftCommon_SpecialAirLw_StatusList
-  /* 57094 1035D4 80188B94 */  .4byte jtgt_ovl3_80156910
+  /* 57094 1035D4 80188B94 */  .4byte ftMario_SpecialAirLw_SetStatus
   /* 57098 1035D8 80188B98 */  .4byte jtgt_ovl3_8015D290
   .incbin "ovl3.raw.bin", 0x5709C, 0x4
 
 glabel jtbl_ovl3_80188BA0
   /* 570A0 1035E0 80188BA0 */  .4byte jtgt_ovl3_8015E274
-  /* 570A4 1035E4 80188BA4 */  .4byte jtgt_ovl3_80156910
+  /* 570A4 1035E4 80188BA4 */  .4byte ftMario_SpecialAirLw_SetStatus
   /* 570A8 1035E8 80188BA8 */  .4byte jtgt_ovl3_801645E8
   /* 570AC 1035EC 80188BAC */  .4byte jtgt_ovl3_8015F04C
   /* 570B0 1035F0 80188BB0 */  .4byte jtgt_ovl3_8016020C
@@ -1431,15 +1431,15 @@ glabel jtbl_ovl3_80188BA0
   /* 570B8 1035F8 80188BB8 */  .4byte jtgt_ovl3_80151FFC
   /* 570BC 1035FC 80188BBC */  .4byte jtgt_ovl3_8015181C
   /* 570C0 103600 80188BC0 */  .4byte ftNess_SpecialAirLwStart_SetStatus
-  /* 570C4 103604 80188BC4 */  .4byte jtgt_ovl3_80156910
-  /* 570C8 103608 80188BC8 */  .4byte jtgt_ovl3_80156910
-  /* 570CC 10360C 80188BCC */  .4byte jtgt_ovl3_80156910
+  /* 570C4 103604 80188BC4 */  .4byte ftMario_SpecialAirLw_SetStatus
+  /* 570C8 103608 80188BC8 */  .4byte ftMario_SpecialAirLw_SetStatus
+  /* 570CC 10360C 80188BCC */  .4byte ftMario_SpecialAirLw_SetStatus
   /* 570D0 103610 80188BD0 */  .4byte jtgt_ovl3_8015D290
   .incbin "ovl3.raw.bin", 0x570D4, 0x4
 
 glabel jtbl_ovl3_80188BD8
   /* 570D8 103618 80188BD8 */  .4byte jtgt_ovl3_8015E274
-  /* 570DC 10361C 80188BDC */  .4byte jtgt_ovl3_80156910
+  /* 570DC 10361C 80188BDC */  .4byte ftMario_SpecialAirLw_SetStatus
   /* 570E0 103620 80188BE0 */  .4byte jtgt_ovl3_801645E8
   /* 570E4 103624 80188BE4 */  .4byte jtgt_ovl3_8015F04C
   /* 570E8 103628 80188BE8 */  .4byte jtgt_ovl3_8016020C
@@ -1450,20 +1450,20 @@ glabel jtbl_ovl3_80188BD8
   .incbin "ovl3.raw.bin", 0x570FC, 0x4
 
 glabel ftKirby_SpecialN_StatusList
-  /* 57100 103640 80188C00 */  .4byte jtgt_ovl3_80156BD0
+  /* 57100 103640 80188C00 */  .4byte ftKirby_CopyMario_SpecialN_SetStatus
   /* 57104 103644 80188C04 */  .4byte func_ovl3_80156DD8
   /* 57108 103648 80188C08 */  .4byte jtgt_ovl3_80157EAC
   /* 5710C 10364C 80188C0C */  .4byte jtgt_ovl3_801576CC
-  /* 57110 103650 80188C10 */  .4byte jtgt_ovl3_80156BD0
+  /* 57110 103650 80188C10 */  .4byte ftKirby_CopyMario_SpecialN_SetStatus
   /* 57114 103654 80188C14 */  .4byte jtgt_ovl3_80164940
   /* 57118 103658 80188C18 */  .4byte jtgt_ovl3_8015F5B0
   /* 5711C 10365C 80188C1C */  .4byte jtgt_ovl3_80160B30
   /* 57120 103660 80188C20 */  .4byte jtgt_ovl3_80163154
   /* 57124 103664 80188C24 */  .4byte jtgt_ovl3_801538C8
   /* 57128 103668 80188C28 */  .4byte jtgt_ovl3_80151AC4
-  /* 5712C 10366C 80188C2C */  .4byte jtgt_ovl3_80155DBC
+  /* 5712C 10366C 80188C2C */  .4byte ftKirby_CopyNess_SpecialN_SetStatus
   /* 57130 103670 80188C30 */  .4byte jtgt_ovl3_80163154
-  /* 57134 103674 80188C34 */  .4byte jtgt_ovl3_80156BD0
+  /* 57134 103674 80188C34 */  .4byte ftKirby_CopyMario_SpecialN_SetStatus
   /* 57138 103678 80188C38 */  .4byte jtgt_ovl3_80163154
   /* 5713C 10367C 80188C3C */  .4byte jtgt_ovl3_80163154
   /* 57140 103680 80188C40 */  .4byte jtgt_ovl3_80163154
@@ -1479,11 +1479,11 @@ glabel ftKirby_SpecialN_StatusList
   /* 57168 1036A8 80188C68 */  .4byte jtgt_ovl3_80163154
 
 glabel ftCommon_SpecialN_StatusList
-  /* 5716C 1036AC 80188C6C */  .4byte jtgt_ovl3_80156014
+  /* 5716C 1036AC 80188C6C */  .4byte ftMario_SpecialN_SetStatus
   /* 57170 1036B0 80188C70 */  .4byte func_ovl3_8015BC78
   /* 57174 1036B4 80188C74 */  .4byte jtgt_ovl3_8015B61C
   /* 57178 1036B8 80188C78 */  .4byte jtgt_ovl3_8015DB64
-  /* 5717C 1036BC 80188C7C */  .4byte jtgt_ovl3_80156014
+  /* 5717C 1036BC 80188C7C */  .4byte ftMario_SpecialN_SetStatus
   /* 57180 1036C0 80188C80 */  .4byte jtgt_ovl3_801639CC
   /* 57184 1036C4 80188C84 */  .4byte jtgt_ovl3_8015E740
   /* 57188 1036C8 80188C88 */  .4byte jtgt_ovl3_8015FB5C
@@ -1491,15 +1491,15 @@ glabel ftCommon_SpecialN_StatusList
   /* 57190 1036D0 80188C90 */  .4byte jtgt_ovl3_80151D24
   /* 57194 1036D4 80188C94 */  .4byte jtgt_ovl3_801514C4
   /* 57198 1036D8 80188C98 */  .4byte ftNess_SpecialN_SetStatus
-  /* 5719C 1036DC 80188C9C */  .4byte jtgt_ovl3_80156014
-  /* 571A0 1036E0 80188CA0 */  .4byte jtgt_ovl3_80156014
-  /* 571A4 1036E4 80188CA4 */  .4byte jtgt_ovl3_80156014
+  /* 5719C 1036DC 80188C9C */  .4byte ftMario_SpecialN_SetStatus
+  /* 571A0 1036E0 80188CA0 */  .4byte ftMario_SpecialN_SetStatus
+  /* 571A4 1036E4 80188CA4 */  .4byte ftMario_SpecialN_SetStatus
   /* 571A8 1036E8 80188CA8 */  .4byte func_ovl3_8015BC78
   /* 571AC 1036EC 80188CAC */  .4byte jtgt_ovl3_8015B61C
   /* 571B0 1036F0 80188CB0 */  .4byte jtgt_ovl3_8015DB64
-  /* 571B4 1036F4 80188CB4 */  .4byte jtgt_ovl3_80156014
+  /* 571B4 1036F4 80188CB4 */  .4byte ftMario_SpecialN_SetStatus
   /* 571B8 1036F8 80188CB8 */  .4byte jtgt_ovl3_801639CC
-  /* 571BC 1036FC 80188CBC */  .4byte jtgt_ovl3_80156014
+  /* 571BC 1036FC 80188CBC */  .4byte ftMario_SpecialN_SetStatus
   /* 571C0 103700 80188CC0 */  .4byte jtgt_ovl3_8015FB5C
   /* 571C4 103704 80188CC4 */  .4byte jtgt_ovl3_80151060
   /* 571C8 103708 80188CC8 */  .4byte jtgt_ovl3_80151D24
@@ -1509,11 +1509,11 @@ glabel ftCommon_SpecialN_StatusList
   .incbin "ovl3.raw.bin", 0x571D8, 0x8
 
 glabel ftCommon_SpecialHi_StatusList
-  /* 571E0 103720 80188CE0 */  .4byte jtgt_ovl3_80156428
+  /* 571E0 103720 80188CE0 */  .4byte ftMario_SpecialHi_SetStatus
   /* 571E4 103724 80188CE4 */  .4byte jtgt_ovl3_8015CAB0
   /* 571E8 103728 80188CE8 */  .4byte jtgt_ovl3_8015B974
   /* 571EC 10372C 80188CEC */  .4byte jtgt_ovl3_8015DE0C
-  /* 571F0 103730 80188CF0 */  .4byte jtgt_ovl3_80156428
+  /* 571F0 103730 80188CF0 */  .4byte ftMario_SpecialHi_SetStatus
   /* 571F4 103734 80188CF4 */  .4byte jtgt_ovl3_80164284
   /* 571F8 103738 80188CF8 */  .4byte jtgt_ovl3_8015ED3C
   /* 571FC 10373C 80188CFC */  .4byte jtgt_ovl3_80160630
@@ -1521,13 +1521,13 @@ glabel ftCommon_SpecialHi_StatusList
   /* 57204 103744 80188D04 */  .4byte jtgt_ovl3_801529A0
   /* 57208 103748 80188D08 */  .4byte jtgt_ovl3_801516A0
   /* 5720C 10374C 80188D0C */  .4byte ftNess_SpecialHiStart_SetStatus
-  /* 57210 103750 80188D10 */  .4byte jtgt_ovl3_80156428
-  /* 57214 103754 80188D14 */  .4byte jtgt_ovl3_80156428
-  /* 57218 103758 80188D18 */  .4byte jtgt_ovl3_80156428
+  /* 57210 103750 80188D10 */  .4byte ftMario_SpecialHi_SetStatus
+  /* 57214 103754 80188D14 */  .4byte ftMario_SpecialHi_SetStatus
+  /* 57218 103758 80188D18 */  .4byte ftMario_SpecialHi_SetStatus
   /* 5721C 10375C 80188D1C */  .4byte jtgt_ovl3_8015CAB0
   /* 57220 103760 80188D20 */  .4byte jtgt_ovl3_8015B974
   /* 57224 103764 80188D24 */  .4byte jtgt_ovl3_8015DE0C
-  /* 57228 103768 80188D28 */  .4byte jtgt_ovl3_80156428
+  /* 57228 103768 80188D28 */  .4byte ftMario_SpecialHi_SetStatus
   /* 5722C 10376C 80188D2C */  .4byte jtgt_ovl3_80164284
   /* 57230 103770 80188D30 */  .4byte jtgt_ovl3_8015ED3C
   /* 57234 103774 80188D34 */  .4byte jtgt_ovl3_80160630
@@ -1539,11 +1539,11 @@ glabel ftCommon_SpecialHi_StatusList
   .incbin "ovl3.raw.bin", 0x5724C, 0x4
 
 glabel ftCommon_SpecialLw_StatusList
-  /* 57250 103790 80188D50 */  .4byte jtgt_ovl3_8015688C
+  /* 57250 103790 80188D50 */  .4byte ftMario_SpecialLw_SetStatus
   /* 57254 103794 80188D54 */  .4byte jtgt_ovl3_8015D250
   /* 57258 103798 80188D58 */  .4byte jtgt_ovl3_8015BAFC
   /* 5725C 10379C 80188D5C */  .4byte jtgt_ovl3_8015E220
-  /* 57260 1037A0 80188D60 */  .4byte jtgt_ovl3_8015688C
+  /* 57260 1037A0 80188D60 */  .4byte ftMario_SpecialLw_SetStatus
   /* 57264 1037A4 80188D64 */  .4byte jtgt_ovl3_8016458C
   /* 57268 1037A8 80188D68 */  .4byte jtgt_ovl3_8015EFE4
   /* 5726C 1037AC 80188D6C */  .4byte jtgt_ovl3_80160128
@@ -1551,13 +1551,13 @@ glabel ftCommon_SpecialLw_StatusList
   /* 57274 1037B4 80188D74 */  .4byte jtgt_ovl3_80151FBC
   /* 57278 1037B8 80188D78 */  .4byte jtgt_ovl3_801517E4
   /* 5727C 1037BC 80188D7C */  .4byte ftNess_SpeciaLwStart_SetStatus
-  /* 57280 1037C0 80188D80 */  .4byte jtgt_ovl3_8015688C
-  /* 57284 1037C4 80188D84 */  .4byte jtgt_ovl3_8015688C
-  /* 57288 1037C8 80188D88 */  .4byte jtgt_ovl3_8015688C
+  /* 57280 1037C0 80188D80 */  .4byte ftMario_SpecialLw_SetStatus
+  /* 57284 1037C4 80188D84 */  .4byte ftMario_SpecialLw_SetStatus
+  /* 57288 1037C8 80188D88 */  .4byte ftMario_SpecialLw_SetStatus
   /* 5728C 1037CC 80188D8C */  .4byte jtgt_ovl3_8015D250
   /* 57290 1037D0 80188D90 */  .4byte jtgt_ovl3_8015BAFC
   /* 57294 1037D4 80188D94 */  .4byte jtgt_ovl3_8015E220
-  /* 57298 1037D8 80188D98 */  .4byte jtgt_ovl3_8015688C
+  /* 57298 1037D8 80188D98 */  .4byte ftMario_SpecialLw_SetStatus
   /* 5729C 1037DC 80188D9C */  .4byte jtgt_ovl3_8016458C
   /* 572A0 1037E0 80188DA0 */  .4byte jtgt_ovl3_8015EFE4
   /* 572A4 1037E4 80188DA4 */  .4byte jtgt_ovl3_80160128

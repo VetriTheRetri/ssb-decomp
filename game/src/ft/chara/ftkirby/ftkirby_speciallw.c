@@ -95,7 +95,7 @@ void func_ovl3_80161530(GObj *fighter_gobj)
 
         fp->command_vars.flags.flag1 = 0;
     }
-    else func_ovl2_800D9480(fighter_gobj, func_ovl3_80161AEC);
+    else ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80161AEC);
 }
 
 void func_ovl3_80161598(GObj *fighter_gobj)
@@ -108,7 +108,7 @@ void func_ovl3_80161598(GObj *fighter_gobj)
 
         fp->command_vars.flags.flag1 = 0;
     }
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_80161C0C);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80161C0C);
 }
 
 void func_ovl3_801615E4(GObj *fighter_gobj, bool32 is_release)

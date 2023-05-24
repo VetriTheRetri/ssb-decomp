@@ -80,7 +80,7 @@ typedef union {
 typedef struct OMMtx OMMtx;
 
 struct OMMtx {
-    /* 0x00 */ struct OMMtx *next;
+    /* 0x00 */ OMMtx *next;
     /* 0x04 */ u8 unk04;
     /* 0x05 */ u8 unk05;
     /* 0x08 */ Mtx unk08;

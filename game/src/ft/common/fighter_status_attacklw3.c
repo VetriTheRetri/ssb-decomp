@@ -8,7 +8,7 @@ void func_ovl3_8014FBF0(GObj *fighter_gobj)
     {
         func_ovl3_8014FD14(fighter_gobj);
     }
-    else func_ovl2_800D9480(fighter_gobj, func_ovl3_8014329C);
+    else ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014329C);
 }
 
 void func_ovl3_8014FC40(GObj *fighter_gobj)

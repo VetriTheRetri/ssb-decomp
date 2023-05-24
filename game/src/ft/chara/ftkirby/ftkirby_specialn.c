@@ -180,17 +180,17 @@ void func_ovl3_80162078(GObj *fighter_gobj)
 
 void func_ovl3_801621A8(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_801633EC);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801633EC);
 }
 
 void func_ovl3_801621CC(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_80162FA8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80162FA8);
 }
 
 void func_ovl3_801621F0(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_80162FE0);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80162FE0);
 }
 
 void func_ovl3_80162214(GObj *fighter_gobj)
@@ -198,7 +198,7 @@ void func_ovl3_80162214(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     void (*proc_map)(GObj*) = (fp->ground_or_air == ground) ? func_ovl3_80163274 : func_ovl3_801634C0;
 
-    func_ovl2_800D9480(fighter_gobj, proc_map);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, proc_map);
 }
 
 void func_ovl3_80162258(GObj *fighter_gobj)

@@ -2,7 +2,7 @@
 
 void func_ovl3_8015EDC0(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8015F0A8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015F0A8);
 }
 
 void func_ovl3_8015EDE4(GObj *fighter_gobj)
@@ -21,7 +21,7 @@ void func_ovl3_8015EDE4(GObj *fighter_gobj)
         func_ovl2_800EDF24(fp->joint[FTYOSHI_YOSHIBOMB_STAR_SPAWN_JOINT], &pos);
         func_ovl3_8016C954(fighter_gobj, &pos);
     }
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8013E1C8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013E1C8);
 }
 
 void func_ovl3_8015EE4C(GObj *fighter_gobj)

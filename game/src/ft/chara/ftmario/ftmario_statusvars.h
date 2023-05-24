@@ -19,7 +19,7 @@ typedef struct ftMario_SpecialHi_StatusVars
 
 typedef struct ftMario_SpecialLw_StatusVars
 {
-    f32 tornado_drift; // Ground drift of Mario Tornado
+    f32 friction; // Ground drift of Mario Tornado
     s32 dust_gfx_int;  // Interval between dust GFX kicked up during Mario Tornado
 
 } ftMario_SpecialLw_StatusVars;

@@ -239,7 +239,7 @@ void func_ovl2_800D8E78(Fighter_Struct *fp, f32 clamp)
     {
         fp->phys_info.vel_air.x = -clamp;
     }
-    else if (clamp < fp->phys_info.vel_air.x)
+    else if (fp->phys_info.vel_air.x > clamp)
     {
         fp->phys_info.vel_air.x = clamp;
     }
@@ -252,7 +252,7 @@ void func_ovl2_800D8EB8(Fighter_Struct *fp)
 
 bool32 func_ovl2_800D8EDC(Fighter_Struct *fp, f32 clamp)
 {
-    if (clamp < ABSF(fp->phys_info.vel_air.x))
+    if (ABSF(fp->phys_info.vel_air.x) > clamp)
     {
         fp->phys_info.vel_air.x += ((fp->phys_info.vel_air.x >= 0.0F) ? (f32)LEFT : (f32)RIGHT);
 

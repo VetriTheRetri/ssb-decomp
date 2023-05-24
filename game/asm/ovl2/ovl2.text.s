@@ -3423,7 +3423,7 @@ glabel func_ovl2_800D9444
   /* 054C7C 800D947C 00000000 */       nop 
 
 # Likely start of new file
-glabel func_ovl2_800D9480
+glabel ftAnim_IfAnimEnd_ProcStatus
   /* 054C80 800D9480 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 054C84 800D9484 AFBF0014 */        sw $ra, 0x14($sp)
   /* 054C88 800D9488 C4860078 */      lwc1 $f6, 0x78($a0)
@@ -3447,7 +3447,7 @@ glabel func_ovl2_800D94C4
   /* 054CC4 800D94C4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 054CC8 800D94C8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 054CCC 800D94CC 3C058014 */       lui $a1, %hi(func_ovl3_8013E1C8)
-  /* 054CD0 800D94D0 0C036520 */       jal func_ovl2_800D9480
+  /* 054CD0 800D94D0 0C036520 */       jal ftAnim_IfAnimEnd_ProcStatus
   /* 054CD4 800D94D4 24A5E1C8 */     addiu $a1, $a1, %lo(func_ovl3_8013E1C8)
   /* 054CD8 800D94D8 8FBF0014 */        lw $ra, 0x14($sp)
   /* 054CDC 800D94DC 27BD0018 */     addiu $sp, $sp, 0x18
@@ -3458,7 +3458,7 @@ glabel func_ovl2_800D94E8
   /* 054CE8 800D94E8 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 054CEC 800D94EC AFBF0014 */        sw $ra, 0x14($sp)
   /* 054CF0 800D94F0 3C058014 */       lui $a1, %hi(func_ovl3_8013F9E0)
-  /* 054CF4 800D94F4 0C036520 */       jal func_ovl2_800D9480
+  /* 054CF4 800D94F4 0C036520 */       jal ftAnim_IfAnimEnd_ProcStatus
   /* 054CF8 800D94F8 24A5F9E0 */     addiu $a1, $a1, %lo(func_ovl3_8013F9E0)
   /* 054CFC 800D94FC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 054D00 800D9500 27BD0018 */     addiu $sp, $sp, 0x18
@@ -9191,7 +9191,7 @@ glabel func_ovl2_800DE7D8
   /* 05A004 800DE804 03E00008 */        jr $ra
   /* 05A008 800DE808 00000000 */       nop 
 
-glabel func_ovl2_800DE80C
+glabel ftMapCollide_CheckGroundCliff
   /* 05A00C 800DE80C 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 05A010 800DE810 AFBF0014 */        sw $ra, 0x14($sp)
   /* 05A014 800DE814 AFA50024 */        sw $a1, 0x24($sp)
@@ -9303,7 +9303,7 @@ glabel func_ovl2_800DE978
   /* 05A178 800DE978 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 05A17C 800DE97C AFBF0014 */        sw $ra, 0x14($sp)
   /* 05A180 800DE980 3C05800E */       lui $a1, %hi(func_ovl2_800DE8E4)
-  /* 05A184 800DE984 0C037A03 */       jal func_ovl2_800DE80C
+  /* 05A184 800DE984 0C037A03 */       jal ftMapCollide_CheckGroundCliff
   /* 05A188 800DE988 24A5E8E4 */     addiu $a1, $a1, %lo(func_ovl2_800DE8E4)
   /* 05A18C 800DE98C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 05A190 800DE990 27BD0018 */     addiu $sp, $sp, 0x18

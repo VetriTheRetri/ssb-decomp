@@ -18,7 +18,7 @@ void func_ovl3_8014D740(GObj *fighter_gobj)
 
         fp->phys_info.vel_ground.x = -fp->phys_info.vel_ground.x;
     }
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8014D49C);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014D49C);
 }
 
 void func_ovl3_8014D790(GObj *fighter_gobj)

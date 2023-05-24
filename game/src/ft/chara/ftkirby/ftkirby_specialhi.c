@@ -85,7 +85,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
 void func_ovl3_80160D1C(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_801612D8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801612D8);
 }
 
 void func_ovl3_80160D40(GObj *fighter_gobj)
@@ -109,7 +109,7 @@ void func_ovl3_80160D40(GObj *fighter_gobj)
 
         func_ovl3_8016BE8C(fighter_gobj, &pos);
     }
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8013E1C8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013E1C8);
 }
 
 void func_ovl3_80160DF0(GObj *fighter_gobj)

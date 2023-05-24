@@ -134,7 +134,7 @@ void func_ovl3_8013D264(GObj *fighter_gobj)
 void func_ovl3_8013D2AC(GObj *fighter_gobj)
 {
     func_ovl3_8013D1D4(fighter_gobj);
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_8013D518);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013D518);
 }
 
 void func_ovl3_8013D2DC(GObj *fighter_gobj)

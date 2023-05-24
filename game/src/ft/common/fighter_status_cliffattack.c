@@ -15,12 +15,12 @@ bool32 func_ovl3_80145620(GObj *fighter_gobj)
 
 void func_ovl3_8014566C(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_80145754);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80145754);
 }
 
 void func_ovl3_80145690(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, func_ovl3_80145794);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80145794);
 }
 
 void func_ovl3_801456B4(GObj *fighter_gobj)

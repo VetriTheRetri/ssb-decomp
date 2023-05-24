@@ -2,20 +2,20 @@
 
 void (*ftKirby_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) = 
 { 
-    jtgt_ovl3_80156C38, // Mario
+    ftKirby_CopyMario_SpecialAirN_SetStatus, // Mario
     jtgt_ovl3_80156E18, // Fox
     jtgt_ovl3_80157F04, // Donkey Kong
     jtgt_ovl3_80157744, // Samus
-    jtgt_ovl3_80156C38, // Luigi
+    ftKirby_CopyMario_SpecialAirN_SetStatus, // Luigi
     jtgt_ovl3_801649C0, // Link
     jtgt_ovl3_8015F60C, // Yoshi
     jtgt_ovl3_80160B70, // Captain Faclon
     jtgt_ovl3_801633A0, // Kirby
     jtgt_ovl3_80153908, // Pikachu
     jtgt_ovl3_80151B04, // Jigglypuff
-    jtgt_ovl3_80155DFC, // Ness
+    ftKirby_CopyNess_SpecialAirN_SetStatus, // Ness
     jtgt_ovl3_801633A0, // Master Hand
-    jtgt_ovl3_80156C38, // Metal Mario
+    ftKirby_CopyMario_SpecialAirN_SetStatus, // Metal Mario
     jtgt_ovl3_801633A0, // Poly Mario
     jtgt_ovl3_801633A0, // Poly Fox
     jtgt_ovl3_801633A0, // Poly Donkey Kong
@@ -31,13 +31,13 @@ void (*ftKirby_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801633A0, // Giant Donkey Kong (This is actually inaccessible, Kirby's copy ID for Giant DK is always 2)
 };
 
-void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj *) =
+void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {
-    jtgt_ovl3_80156054,
+    ftMario_SpecialAirN_SetStatus,
     jtgt_ovl3_8015BCB8,
     jtgt_ovl3_8015B674,
     jtgt_ovl3_8015DBDC,
-    jtgt_ovl3_80156054,
+    ftMario_SpecialAirN_SetStatus,
     jtgt_ovl3_80163A4C,
     jtgt_ovl3_8015E79C,
     jtgt_ovl3_8015FBC0,
@@ -45,13 +45,13 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80151D64,
     jtgt_ovl3_80151504,
     ftNess_SpecialAirN_SetStatus,
-    jtgt_ovl3_80156054,
-    jtgt_ovl3_80156054,
-    jtgt_ovl3_80156054,
+    ftMario_SpecialAirN_SetStatus,
+    ftMario_SpecialAirN_SetStatus,
+    ftMario_SpecialAirN_SetStatus,
     jtgt_ovl3_8015BCB8,
     jtgt_ovl3_8015B674,
     jtgt_ovl3_8015DBDC,
-    jtgt_ovl3_80156054,
+    ftMario_SpecialAirN_SetStatus,
     jtgt_ovl3_80163A4C,
     jtgt_ovl3_8015E79C,
     jtgt_ovl3_8015FBC0,
@@ -62,13 +62,13 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_8015B674
 };
 
-void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj *) =
+void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {
-    jtgt_ovl3_80156478,
+    ftMario_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015CB10,
     jtgt_ovl3_8015B9B8,
     jtgt_ovl3_8015DE90,
-    jtgt_ovl3_80156478,
+    ftMario_SpecialAirHi_SetStatus,
     jtgt_ovl3_80164348,
     jtgt_ovl3_8015ED7C,
     jtgt_ovl3_801607B4,
@@ -76,13 +76,13 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_801529EC,
     jtgt_ovl3_801516D8,
     ftNess_SpecialAirHiStart_SetStatus,
-    jtgt_ovl3_80156054,
-    jtgt_ovl3_80156478,
-    jtgt_ovl3_80156478,
+    ftMario_SpecialAirN_SetStatus,
+    ftMario_SpecialAirHi_SetStatus,
+    ftMario_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015CB10,
     jtgt_ovl3_8015B9B8,
     jtgt_ovl3_8015DE90,
-    jtgt_ovl3_80156478,
+    ftMario_SpecialAirHi_SetStatus,
     jtgt_ovl3_80164348,
     jtgt_ovl3_8015ED7C,
     jtgt_ovl3_801607B4,
@@ -93,13 +93,13 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_8015B9B8
 };
 
-void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj *) =
+void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {
-    jtgt_ovl3_80156910,
+    ftMario_SpecialAirLw_SetStatus,
     jtgt_ovl3_8015D290,
     NULL,
     jtgt_ovl3_8015E274,
-    jtgt_ovl3_80156910,
+    ftMario_SpecialAirLw_SetStatus,
     jtgt_ovl3_801645E8,
     jtgt_ovl3_8015F04C,
     jtgt_ovl3_8016020C,
@@ -107,13 +107,13 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80151FFC,
     jtgt_ovl3_8015181C,
     ftNess_SpecialAirLwStart_SetStatus,
-    jtgt_ovl3_80156910,
-    jtgt_ovl3_80156910,
-    jtgt_ovl3_80156910,
+    ftMario_SpecialAirLw_SetStatus,
+    ftMario_SpecialAirLw_SetStatus,
+    ftMario_SpecialAirLw_SetStatus,
     jtgt_ovl3_8015D290,
     NULL,
     jtgt_ovl3_8015E274,
-    jtgt_ovl3_80156910,
+    ftMario_SpecialAirLw_SetStatus,
     jtgt_ovl3_801645E8,
     jtgt_ovl3_8015F04C,
     jtgt_ovl3_8016020C,
