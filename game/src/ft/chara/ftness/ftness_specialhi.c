@@ -208,7 +208,7 @@ void ftNess_SpecialHi_UpdatePKThunder(GObj *fighter_gobj)
     }
     fp->fighter_vars.ness.pk_thunder_trail_id++;
 
-    if (fp->fighter_vars.ness.pk_thunder_trail_id >= (ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_y)))
+    if (fp->fighter_vars.ness.pk_thunder_trail_id >= FTNESS_PKTHUNDER_TRAIL_POS_COUNT)
     {
         fp->fighter_vars.ness.pk_thunder_trail_id = 0;
     }
