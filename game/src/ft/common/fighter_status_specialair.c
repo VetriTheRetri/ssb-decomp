@@ -75,7 +75,7 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80161270,
     jtgt_ovl3_801529EC,
     jtgt_ovl3_801516D8,
-    jtgt_ovl3_80154030,
+    ftNess_SpecialAirHiStart_SetStatus,
     jtgt_ovl3_80156054,
     jtgt_ovl3_80156478,
     jtgt_ovl3_80156478,
@@ -89,7 +89,7 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80161270,
     jtgt_ovl3_801529EC,
     jtgt_ovl3_801516D8,
-    jtgt_ovl3_80154030,
+    ftNess_SpecialAirHiStart_SetStatus,
     jtgt_ovl3_8015B9B8
 };
 

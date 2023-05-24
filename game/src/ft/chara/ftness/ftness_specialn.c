@@ -5,7 +5,7 @@
 // PK Fire (SpecialN/SpecialAirN)
 
 // 0x80153950
-void ftNess_ItemSpawn_PKFire(GObj *fighter_gobj) // PK Fire setup
+void ftNess_SpecialN_SpawnPKFire(GObj *fighter_gobj) // PK Fire setup
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
@@ -66,7 +66,7 @@ void ftNess_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALN_STATUPDATE_FLAGS); // Action State Change
 
-    fp->proc_accessory = ftNess_ItemSpawn_PKFire;
+    fp->proc_accessory = ftNess_SpecialN_SpawnPKFire;
 }
 
 // 0x80153B5C
@@ -80,7 +80,7 @@ void ftNess_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_accessory = ftNess_ItemSpawn_PKFire;
+    fp->proc_accessory = ftNess_SpecialN_SpawnPKFire;
 }
 
 // 0x80153BB8
@@ -89,7 +89,7 @@ void ftNess_SpecialN_SetStatusFlags(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = FALSE;
-    fp->proc_accessory = ftNess_ItemSpawn_PKFire;
+    fp->proc_accessory = ftNess_SpecialN_SpawnPKFire;
 }
 
 // 0x80153BD0

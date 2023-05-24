@@ -1399,7 +1399,7 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 57048 103588 80188B48 */  .4byte jtgt_ovl3_80161270
   /* 5704C 10358C 80188B4C */  .4byte jtgt_ovl3_801529EC
   /* 57050 103590 80188B50 */  .4byte jtgt_ovl3_801516D8
-  /* 57054 103594 80188B54 */  .4byte jtgt_ovl3_80154030
+  /* 57054 103594 80188B54 */  .4byte ftNess_SpecialAirHiStart_SetStatus
   /* 57058 103598 80188B58 */  .4byte jtgt_ovl3_80156054
   /* 5705C 10359C 80188B5C */  .4byte jtgt_ovl3_80156478
   /* 57060 1035A0 80188B60 */  .4byte jtgt_ovl3_80156478
@@ -1413,7 +1413,7 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 57080 1035C0 80188B80 */  .4byte jtgt_ovl3_80161270
   /* 57084 1035C4 80188B84 */  .4byte jtgt_ovl3_801529EC
   /* 57088 1035C8 80188B88 */  .4byte jtgt_ovl3_801516D8
-  /* 5708C 1035CC 80188B8C */  .4byte jtgt_ovl3_80154030
+  /* 5708C 1035CC 80188B8C */  .4byte ftNess_SpecialAirHiStart_SetStatus
   /* 57090 1035D0 80188B90 */  .4byte jtgt_ovl3_8015B9B8
 
 glabel ftCommon_SpecialAirLw_StatusList
@@ -1520,7 +1520,7 @@ glabel ftCommon_SpecialHi_StatusList
   /* 57200 103740 80188D00 */  .4byte jtgt_ovl3_801611A8
   /* 57204 103744 80188D04 */  .4byte jtgt_ovl3_801529A0
   /* 57208 103748 80188D08 */  .4byte jtgt_ovl3_801516A0
-  /* 5720C 10374C 80188D0C */  .4byte jtgt_ovl3_80153FF0
+  /* 5720C 10374C 80188D0C */  .4byte ftNess_SpecialHiStart_SetStatus
   /* 57210 103750 80188D10 */  .4byte jtgt_ovl3_80156428
   /* 57214 103754 80188D14 */  .4byte jtgt_ovl3_80156428
   /* 57218 103758 80188D18 */  .4byte jtgt_ovl3_80156428
@@ -1534,7 +1534,7 @@ glabel ftCommon_SpecialHi_StatusList
   /* 57238 103778 80188D38 */  .4byte jtgt_ovl3_801611A8
   /* 5723C 10377C 80188D3C */  .4byte jtgt_ovl3_801529A0
   /* 57240 103780 80188D40 */  .4byte jtgt_ovl3_801516A0
-  /* 57244 103784 80188D44 */  .4byte jtgt_ovl3_80153FF0
+  /* 57244 103784 80188D44 */  .4byte ftNess_SpecialHiStart_SetStatus
   /* 57248 103788 80188D48 */  .4byte jtgt_ovl3_8015B974
   .incbin "ovl3.raw.bin", 0x5724C, 0x4
 

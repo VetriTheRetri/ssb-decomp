@@ -25,7 +25,7 @@ typedef struct ftNess_SpecialHi_StatusVars
     GObj *pk_thunder_gobj;          // Pointer to the PK Thunder object
     s32 pk_jibaku_anim_length;      // Number of frames PK Thunder Blast will loop
     f32 pk_jibaku_angle;            // Angle of PK Thunder Blast (converted to 2D velocity vector with sin(vel) and cos(vel))
-    Vec3f pk_thunder_vel;           // Might be PK Thunder's collision detection when checking if Ness is hitting himself with it?
+    Vec3f pk_thunder_pos;           // Might be PK Thunder's collision detection when checking if Ness is hitting himself with it?
 
 } ftNess_SpecialHi_StatusVars;
 

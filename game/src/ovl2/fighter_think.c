@@ -4242,7 +4242,6 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
             fp->proc_accessory(fighter_gobj);
         }
     }
-
     fp->status_info.status_id = status_id;
 
     if (fp->lod_current != fp->lod_match)
@@ -4250,15 +4249,15 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
         func_ovl2_800E9198(fighter_gobj, fp->lod_match);
         fp->lod_current = fp->lod_match;
     }
-    if (!(flags & 1) && (fp->is_hit_enable))
+    if (!(flags & FTSTATUPDATE_HIT_PRESERVE) && (fp->is_hit_enable))
     {
         func_ovl2_800E8518(fighter_gobj);
     }
-    if (!(flags & 0x200))
+    if (!(flags & FTSTATUPDATE_THROWPOINTER_PRESERVE))
     {
         fp->throw_gobj = NULL;
     }
-    if (!(flags & 0x10))
+    if (!(flags & FTSTATUPDATE_HITSTATUS_PRESERVE))
     {
         if (fp->x18C_flag_b1)
         {
@@ -4273,19 +4272,19 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     {
         func_ovl2_800E8B00(fighter_gobj);
     }
-    if (!(flags & 0x20) && (fp->x18C_flag_b3))
+    if (!(flags & FTSTATUPDATE_UNK1_PRESERVE) && (fp->x18C_flag_b3))
     {
         func_ovl2_800E8ECC(fighter_gobj);
     }
-    if (!(flags & 0x80) && (fp->x18C_flag_b4))
+    if (!(flags & FTSTATUPDATE_UNK2_PRESERVE) && (fp->x18C_flag_b4))
     {
         func_ovl2_800E96B0(fighter_gobj);
     }
-    if (!(flags & 2) && (D_ovl2_8012DBD4[fp->colanim.colanim_id].unk_colanimdesc_0x1 != FALSE))
+    if (!(flags & FTSTATUPDATE_COLANIM_PRESERVE) && (D_ovl2_8012DBD4[fp->colanim.colanim_id].unk_colanimdesc_0x1 != FALSE))
     {
         func_ovl2_800E98D4(fighter_gobj);
     }
-    if (!(flags & 4) && (fp->is_statupdate_stop_gfx))
+    if (!(flags & FTSTATUPDATE_GFX_PRESERVE) && (fp->is_statupdate_stop_gfx))
     {
         func_ovl2_800E9C3C(fighter_gobj);
     }
@@ -4293,7 +4292,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     fp->is_absorb = FALSE;
     fp->is_shield = FALSE;
 
-    if (!(flags & 8))
+    if (!(flags & FTSTATUPDATE_FASTFALL_PRESERVE))
     {
         fp->is_fast_fall = FALSE;
     }
@@ -4302,14 +4301,14 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     fp->x18E_flag_b0 = FALSE;
     fp->x18E_flag_b1 = FALSE;
     fp->x18E_flag_b3 = FALSE;
-    fp->is_playing_gfx = FALSE;
+    fp->is_playing_gfx = FALSE; // Not sure exactly what this is, but it prevents certain ColAnim events from running if true?
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
         func_ovl2_80115630(fp->port_id, 2);
         func_ovl2_80115630(fp->port_id, 3);
 
-        if (!(flags & 0x4000))
+        if (!(flags & FTSTATUPDATE_UNK5_PRESERVE))
         {
             func_ovl2_80115630(fp->port_id, 7);
         }
@@ -4328,11 +4327,11 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 
     fp->damage_mul = 1.0F;
 
-    if ((fp->ground_or_air == ground) && !(flags & 0x1000))
+    if ((fp->ground_or_air == ground) && !(flags & FTSTATUPDATE_DAMAGEPORT_PRESERVE))
     {
         fp->damage_port_id = -1;
     }
-    if (!(flags & 0x40))
+    if (!(flags & FTSTATUPDATE_SLOPECONTOUR_PRESERVE))
     {
         fp->slope_contour = 0;
     }
@@ -4353,7 +4352,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     }
     fp->fighter_cam_zoom_range = 1.0F;
 
-    if (!(flags & 0x100))
+    if (!(flags & FTSTATUPDATE_UNK3_PRESERVE))
     {
         fp->unk_0x174 = 0;
     }
@@ -4362,18 +4361,18 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     fp->x192_flag_b2 = FALSE;
     fp->x192_flag_b1 = FALSE;
 
-    if (!(flags & 0x400))
+    if (!(flags & FTSTATUPDATE_SHUFFLETIME_PRESERVE))
     {
         fp->shuffle_timer = 0;
     }
-    if (!(flags & 0x800))
+    if (!(flags & FTSTATUPDATE_UNK4_PRESERVE))
     {
         func_ovl2_800E81E4(fp);
     }
     fp->knockback_resist_status = 0.0F;
     fp->damage_knockback_again = 0.0F;
 
-    if (!(flags & 0x2000))
+    if (!(flags & FTSTATUPDATE_AFTERIMAGE_PRESERVE))
     {
         fp->afterimage.render_state = -1;
     }
@@ -4419,7 +4418,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     }
     status_desc = &status_struct[status_struct_id];
 
-    if (fp->status_info.pl_kind != 3)
+    if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
         if ((status_struct[status_struct_id].flags_h.flags_hi_0x3F == 0) || (status_struct[status_struct_id].flags_h.flags_hi_0x3F != fp->attack_id))
         {
@@ -4432,7 +4431,6 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
             func_ovl2_800EA778(fp, status_struct[status_struct_id].flags_l.halfword);
         }
     }
-
     if (fp->proc_status != NULL)
     {
         fp->proc_status(fighter_gobj);
