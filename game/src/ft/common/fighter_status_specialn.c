@@ -43,7 +43,7 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80151060,
     jtgt_ovl3_80151D24,
     jtgt_ovl3_801514C4,
-    ftNess_SpecialN_ProcStatus,
+    ftNess_SpecialN_SetStatus,
     jtgt_ovl3_80156014,
     jtgt_ovl3_80156014,
     jtgt_ovl3_80156014,
@@ -57,7 +57,7 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80151060,
     jtgt_ovl3_80151D24,
     jtgt_ovl3_801514C4,
-    ftNess_SpecialN_ProcStatus,
+    ftNess_SpecialN_SetStatus,
     jtgt_ovl3_8015B61C
 };
 

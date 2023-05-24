@@ -18145,7 +18145,7 @@ glabel func_ovl2_800E61EC
   /* 061E64 800E6664 000C6F83 */       sra $t5, $t4, 0x1e
   /* 061E68 800E6668 51A00004 */      beql $t5, $zero, .L800E667C
   /* 061E6C 800E666C 8FAE0098 */        lw $t6, 0x98($sp)
-  /* 061E70 800E6670 0C055487 */       jal func_ovl3_8015521C
+  /* 061E70 800E6670 0C055487 */       jal ftNess_SpecialLw_Proc_Absorb
   /* 061E74 800E6674 8FA400A0 */        lw $a0, 0xa0($sp)
   .L800E6678:
   /* 061E78 800E6678 8FAE0098 */        lw $t6, 0x98($sp)

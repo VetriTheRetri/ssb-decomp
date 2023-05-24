@@ -28,7 +28,7 @@ void func_ovl3_80153C88(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
-    Vec3f sp1C;
+    Vec3f vel;
 
     pos.x = 0.0F;
     pos.y = 0.0F;
@@ -38,11 +38,11 @@ void func_ovl3_80153C88(GObj *fighter_gobj)
 
     pos.z = 0.0F;
 
-    sp1C.z = 0.0F;
-    sp1C.y = 60.0F;
-    sp1C.x = 0.0F;
+    vel.z = 0.0F;
+    vel.y = 60.0F;
+    vel.x = 0.0F;
 
-    fp->status_vars.ness.specialhi.pk_thunder_gobj = func_ovl3_8016B2C4(fighter_gobj, &pos, &sp1C);
+    fp->status_vars.ness.specialhi.pk_thunder_gobj = func_ovl3_8016B2C4(fighter_gobj, &pos, &vel);
 }
 
 bool32 func_ovl3_80153CFC(GObj *fighter_gobj)
@@ -91,12 +91,12 @@ bool32 func_ovl3_80153CFC(GObj *fighter_gobj)
 
 void func_ovl3_80153E04(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, &func_ovl3_8015435C);
+    func_ovl2_800D9480(fighter_gobj, func_ovl3_8015435C);
 }
 
 void func_ovl3_80153E28(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, &func_ovl3_801543A0);
+    func_ovl2_800D9480(fighter_gobj, func_ovl3_801543A0);
 }
 
 void func_ovl3_80153E4C(GObj *fighter_gobj)

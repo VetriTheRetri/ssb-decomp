@@ -5196,12 +5196,12 @@ glabel jtbl_ovl2_8012B2C4
   /* 54EA4 0A6B34 8012B334 */  .4byte func_ovl2_800D94C4
   .incbin "ovl2.raw.bin", 0x54EA8, 0x4
   /* 54EAC 0A6B3C 8012B33C */  .4byte func_ovl2_800D8BB4
-  /* 54EB0 0A6B40 8012B340 */  .4byte ftNess_SpecialN_MapCollide
+  /* 54EB0 0A6B40 8012B340 */  .4byte ftNess_SpecialN_Proc_Map
   .incbin "ovl2.raw.bin", 0x54EB4, 0x4
   /* 54EB8 0A6B48 8012B348 */  .4byte func_ovl2_800D94E8
   .incbin "ovl2.raw.bin", 0x54EBC, 0x4
   /* 54EC0 0A6B50 8012B350 */  .4byte func_ovl2_800D91EC
-  /* 54EC4 0A6B54 8012B354 */  .4byte ftNess_SpecialAirN_MapCollide
+  /* 54EC4 0A6B54 8012B354 */  .4byte ftNess_SpecialAirN_Proc_Map
   .incbin "ovl2.raw.bin", 0x54EC8, 0x4
   /* 54ECC 0A6B5C 8012B35C */  .4byte func_ovl3_80153E04
   .incbin "ovl2.raw.bin", 0x54ED0, 0x4
@@ -5248,45 +5248,45 @@ glabel jtbl_ovl2_8012B2C4
   /* 54F74 0A6C04 8012B404 */  .4byte func_ovl3_80154874
   /* 54F78 0A6C08 8012B408 */  .4byte func_ovl3_80154A8C
   .incbin "ovl2.raw.bin", 0x54F7C, 0x4
-  /* 54F80 0A6C10 8012B410 */  .4byte func_ovl3_801552A0
+  /* 54F80 0A6C10 8012B410 */  .4byte ftNess_SpecialLwStart_Proc_Update
   .incbin "ovl2.raw.bin", 0x54F84, 0x4
-  /* 54F88 0A6C18 8012B418 */  .4byte func_ovl3_801552E8
-  /* 54F8C 0A6C1C 8012B41C */  .4byte func_ovl3_80155380
+  /* 54F88 0A6C18 8012B418 */  .4byte ftNess_SpecialLw_Proc_Physics
+  /* 54F8C 0A6C1C 8012B41C */  .4byte ftNess_SpecialLwStart_Proc_Map
   .incbin "ovl2.raw.bin", 0x54F90, 0x4
-  /* 54F94 0A6C24 8012B424 */  .4byte func_ovl3_80155544
+  /* 54F94 0A6C24 8012B424 */  .4byte ftNess_SpecialLwHold_Proc_Update
   .incbin "ovl2.raw.bin", 0x54F98, 0x4
   /* 54F9C 0A6C2C 8012B42C */  .4byte func_ovl2_800D8BB4
-  /* 54FA0 0A6C30 8012B430 */  .4byte func_ovl3_801555E4
+  /* 54FA0 0A6C30 8012B430 */  .4byte ftNess_SpecialLwHold_Proc_Map
   .incbin "ovl2.raw.bin", 0x54FA4, 0x4
-  /* 54FA8 0A6C38 8012B438 */  .4byte func_ovl3_801557D8
+  /* 54FA8 0A6C38 8012B438 */  .4byte ftNess_SpecialLwHit_Proc_Update
   .incbin "ovl2.raw.bin", 0x54FAC, 0x4
   /* 54FB0 0A6C40 8012B440 */  .4byte func_ovl2_800D8BB4
-  /* 54FB4 0A6C44 8012B444 */  .4byte func_ovl3_80155838
+  /* 54FB4 0A6C44 8012B444 */  .4byte ftNess_SpecialLwHit_Proc_Map
   .incbin "ovl2.raw.bin", 0x54FB8, 0x4
   /* 54FBC 0A6C4C 8012B44C */  .4byte func_ovl2_800D94C4
   .incbin "ovl2.raw.bin", 0x54FC0, 0x4
   /* 54FC4 0A6C54 8012B454 */  .4byte func_ovl2_800D8BB4
-  /* 54FC8 0A6C58 8012B458 */  .4byte func_ovl3_801559F4
+  /* 54FC8 0A6C58 8012B458 */  .4byte ftNess_SpecialLwEnd_Proc_Map
   .incbin "ovl2.raw.bin", 0x54FCC, 0x4
-  /* 54FD0 0A6C60 8012B460 */  .4byte func_ovl3_801552C4
+  /* 54FD0 0A6C60 8012B460 */  .4byte ftNess_SpecialAirLwStart_Proc_Update
   .incbin "ovl2.raw.bin", 0x54FD4, 0x4
-  /* 54FD8 0A6C68 8012B468 */  .4byte func_ovl3_80155304
-  /* 54FDC 0A6C6C 8012B46C */  .4byte func_ovl3_801553A4
+  /* 54FD8 0A6C68 8012B468 */  .4byte ftNess_SpecialAirLw_Proc_Physics
+  /* 54FDC 0A6C6C 8012B46C */  .4byte ftNess_SpecialAirLwStart_Proc_Map
   .incbin "ovl2.raw.bin", 0x54FE0, 0x4
-  /* 54FE4 0A6C74 8012B474 */  .4byte func_ovl3_80155594
+  /* 54FE4 0A6C74 8012B474 */  .4byte ftNess_SpecialAirLwHold_Proc_Update
   .incbin "ovl2.raw.bin", 0x54FE8, 0x4
-  /* 54FEC 0A6C7C 8012B47C */  .4byte func_ovl3_80155304
-  /* 54FF0 0A6C80 8012B480 */  .4byte func_ovl3_80155608
+  /* 54FEC 0A6C7C 8012B47C */  .4byte ftNess_SpecialAirLw_Proc_Physics
+  /* 54FF0 0A6C80 8012B480 */  .4byte ftNess_SpecialAirLwHold_Proc_Map
   .incbin "ovl2.raw.bin", 0x54FF4, 0x4
-  /* 54FF8 0A6C88 8012B488 */  .4byte func_ovl3_80155808
+  /* 54FF8 0A6C88 8012B488 */  .4byte ftNess_SpecialAirLwHit_Proc_Update
   .incbin "ovl2.raw.bin", 0x54FFC, 0x4
-  /* 55000 0A6C90 8012B490 */  .4byte func_ovl3_80155304
-  /* 55004 0A6C94 8012B494 */  .4byte func_ovl3_8015585C
+  /* 55000 0A6C90 8012B490 */  .4byte ftNess_SpecialAirLw_Proc_Physics
+  /* 55004 0A6C94 8012B494 */  .4byte ftNess_SpecialAirLwHit_Proc_Map
   .incbin "ovl2.raw.bin", 0x55008, 0x4
-  /* 5500C 0A6C9C 8012B49C */  .4byte func_ovl3_801559D0
+  /* 5500C 0A6C9C 8012B49C */  .4byte ftNess_SpecialAirLwEnd_Proc_Update
   .incbin "ovl2.raw.bin", 0x55010, 0x4
-  /* 55014 0A6CA4 8012B4A4 */  .4byte func_ovl3_80155304
-  /* 55018 0A6CA8 8012B4A8 */  .4byte func_ovl3_80155A18
+  /* 55014 0A6CA4 8012B4A4 */  .4byte ftNess_SpecialAirLw_Proc_Physics
+  /* 55018 0A6CA8 8012B4A8 */  .4byte ftNess_SpecialAirLwEnd_Proc_Map
 
 glabel D_ovl2_8012B4AC
   .incbin "ovl2.raw.bin", 0x5501C, 0x8

@@ -44,7 +44,7 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80150ED0,
     jtgt_ovl3_80151D64,
     jtgt_ovl3_80151504,
-    ftNess_SpecialAirN_ProcStatus,
+    ftNess_SpecialAirN_SetStatus,
     jtgt_ovl3_80156054,
     jtgt_ovl3_80156054,
     jtgt_ovl3_80156054,
@@ -58,7 +58,7 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80150ED0,
     jtgt_ovl3_80151D64,
     jtgt_ovl3_80151504,
-    ftNess_SpecialAirN_ProcStatus,
+    ftNess_SpecialAirN_SetStatus,
     jtgt_ovl3_8015B674
 };
 
@@ -106,7 +106,7 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80161B70,
     jtgt_ovl3_80151FFC,
     jtgt_ovl3_8015181C,
-    jtgt_ovl3_801554B0,
+    ftNess_SpecialAirLwStart_SetStatus,
     jtgt_ovl3_80156910,
     jtgt_ovl3_80156910,
     jtgt_ovl3_80156910,
@@ -120,7 +120,7 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80161B70,
     jtgt_ovl3_80151FFC,
     jtgt_ovl3_8015181C,
-    jtgt_ovl3_801554B0,
+    ftNess_SpecialAirLwStart_SetStatus,
     NULL
 };
 

@@ -1,6 +1,6 @@
 #include "fighter.h"
 
-void (*ftCommon_SpecialLw_StatusList[Ft_Kind_EnumMax])(GObj *) = 
+void (*ftCommon_SpecialLw_StatusList[Ft_Kind_EnumMax])(GObj*) = 
 {
     jtgt_ovl3_8015688C,
     jtgt_ovl3_8015D250,
@@ -13,7 +13,7 @@ void (*ftCommon_SpecialLw_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80161A94,
     jtgt_ovl3_80151FBC,
     jtgt_ovl3_801517E4,
-    jtgt_ovl3_80155470,
+    ftNess_SpeciaLwStart_SetStatus,
     jtgt_ovl3_8015688C,
     jtgt_ovl3_8015688C,
     jtgt_ovl3_8015688C,
@@ -27,7 +27,7 @@ void (*ftCommon_SpecialLw_StatusList[Ft_Kind_EnumMax])(GObj *) =
     jtgt_ovl3_80161A94,
     jtgt_ovl3_80151FBC,
     jtgt_ovl3_801517E4,
-    jtgt_ovl3_80155470,
+    ftNess_SpeciaLwStart_SetStatus,
     jtgt_ovl3_8015BAFC
 };
 

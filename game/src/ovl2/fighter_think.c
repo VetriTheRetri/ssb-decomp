@@ -1217,17 +1217,17 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
         {
             this_fp->hold_stick_x = U8_MAX - 1;
         }
-        if (pl->stick_range.y >= 0x14)
+        if (pl->stick_range.y >= 20)
         {
-            if (pl->stick_prev.y >= 0x14)
+            if (pl->stick_prev.y >= 20)
             {
                 this_fp->tap_stick_y++, this_fp->hold_stick_y++;
             }
             else this_fp->tap_stick_y = this_fp->hold_stick_y = 1;
         }
-        else if (pl->stick_range.y <= -0x14)
+        else if (pl->stick_range.y <= -20)
         {
-            if (pl->stick_prev.y <= -0x14)
+            if (pl->stick_prev.y <= -20)
             {
                 this_fp->tap_stick_y++, this_fp->hold_stick_y++;
             }
@@ -3804,7 +3804,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
     }
     else if (fp->lr_absorb != CENTER)
     {
-        func_ovl3_8015521C(fighter_gobj);
+        ftNess_SpecialLw_Proc_Absorb(fighter_gobj);
     }
     if (damage != 0)
     {
