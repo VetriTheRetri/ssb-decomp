@@ -1,5 +1,7 @@
 #include "ftness.h"
 
+#define FTNESS_SPECIALN_STATUPDATE_FLAGS (FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
+
 // PK Fire (SpecialN/SpecialAirN)
 
 // 0x80153950
@@ -62,7 +64,7 @@ void ftNess_SpecialN_SwitchStatusGround(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U); // Action State Change
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALN_STATUPDATE_FLAGS); // Action State Change
 
     fp->proc_accessory = ftNess_ItemSpawn_PKFire;
 }
@@ -74,7 +76,7 @@ void ftNess_SpecialAirN_SwitchStatusAir(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U); // Action State Change
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALN_STATUPDATE_FLAGS); // Action State Change
 
     func_ovl2_800D8EB8(fp);
 

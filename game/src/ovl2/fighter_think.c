@@ -4191,3 +4191,483 @@ void func_ovl2_800E6E00(Fighter_Struct *fp, s32 index)
 
     func_8000948C(joint);
 }
+
+extern ftIntroStatusDesc *D_ovl1_80390D20[];
+extern ftIntroStatusDesc D_ovl1_80390BE8;
+extern ftStatusDesc D_ovl2_80128DD8;
+extern ftStatusDesc D_ovl2_80128E50;
+extern ftStatusDesc *D_ovl2_8012FE90;
+extern ftStatusDesc *D_ovl2_8012B740[];
+extern ColAnimDesc D_ovl2_8012DBD4[];
+
+void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 anim_rate, u32 flags)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    s32 event_ptr;
+    ftCommonAttributes *attributes = fp->attributes;
+    ftStatusDesc *status_struct;
+    ftIntroStatusDesc *unk_callback;
+    f32 anim_frame;
+    s32 status_struct_id;
+    s32 var_v0_3;
+    s32 var_v1;
+    s32 var_s0_2;
+    gmAttackFlags status_flags;
+    gmAttackFlags attack_flags;
+    s32 var_v0;
+    s32 anim_id;
+    void *event_script_ptr;
+    DObjDesc *dobj_desc;
+    s32 temp_t8;
+    ftStatusDesc *status_desc;
+    ftScriptInfoArray *script_array;
+    ftScriptInfo *script_info;
+    DObj *joint;
+    DObj *temp_a1_3;
+    DObj *temp_v1_2;
+    ftData *temp_v1_3;
+    s32 i;
+
+    status_struct = NULL;
+    unk_callback = NULL;
+
+    status_flags = fp->flags_lw;
+
+    if (fp->x191_flag_b0)
+    {
+        func_ovl2_800E0654(fighter_gobj);
+
+        if (fp->proc_accessory != NULL)
+        {
+            fp->proc_accessory(fighter_gobj);
+        }
+    }
+
+    fp->status_info.status_id = status_id;
+
+    if (fp->lod_current != fp->lod_match)
+    {
+        func_ovl2_800E9198(fighter_gobj, fp->lod_match);
+        fp->lod_current = fp->lod_match;
+    }
+    if (!(flags & 1) && (fp->is_hit_enable))
+    {
+        func_ovl2_800E8518(fighter_gobj);
+    }
+    if (!(flags & 0x200))
+    {
+        fp->throw_gobj = NULL;
+    }
+    if (!(flags & 0x10))
+    {
+        if (fp->x18C_flag_b1)
+        {
+            func_ovl2_800E880C(fighter_gobj, gmHitCollision_HitStatus_Normal);
+        }
+        if (fp->hit_status != gmHitCollision_HitStatus_Normal)
+        {
+            func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Normal);
+        }
+    }
+    if (fp->x18C_flag_b2)
+    {
+        func_ovl2_800E8B00(fighter_gobj);
+    }
+    if (!(flags & 0x20) && (fp->x18C_flag_b3))
+    {
+        func_ovl2_800E8ECC(fighter_gobj);
+    }
+    if (!(flags & 0x80) && (fp->x18C_flag_b4))
+    {
+        func_ovl2_800E96B0(fighter_gobj);
+    }
+    if (!(flags & 2) && (D_ovl2_8012DBD4[fp->colanim.colanim_id].unk_colanimdesc_0x1 != FALSE))
+    {
+        func_ovl2_800E98D4(fighter_gobj);
+    }
+    if (!(flags & 4) && (fp->is_statupdate_stop_gfx))
+    {
+        func_ovl2_800E9C3C(fighter_gobj);
+    }
+    fp->is_reflect = FALSE;
+    fp->is_absorb = FALSE;
+    fp->is_shield = FALSE;
+
+    if (!(flags & 8))
+    {
+        fp->is_fast_fall = FALSE;
+    }
+
+    fp->is_invisible = FALSE;
+    fp->x18E_flag_b0 = FALSE;
+    fp->x18E_flag_b1 = FALSE;
+    fp->x18E_flag_b3 = FALSE;
+    fp->is_playing_gfx = FALSE;
+
+    if (fp->status_info.pl_kind != Pl_Kind_Result)
+    {
+        func_ovl2_80115630(fp->port_id, 2);
+        func_ovl2_80115630(fp->port_id, 3);
+
+        if (!(flags & 0x4000))
+        {
+            func_ovl2_80115630(fp->port_id, 7);
+        }
+        fp->joint[0]->rotate.y = fp->lr * HALF_PI32;
+
+        DObjGetStruct(fighter_gobj)->rotate.z = 0.0F;
+
+        fp->joint[0]->rotate.x = DObjGetStruct(fighter_gobj)->rotate.z;
+
+        fp->phys_info.vel_air.z = 0.0F;
+        fp->phys_info.vel_ground.z = 0.0F;
+    }
+
+    fp->x18F_flag_b4 = FALSE;
+    fp->is_hitstun = FALSE;
+
+    fp->damage_mul = 1.0F;
+
+    if ((fp->ground_or_air == ground) && !(flags & 0x1000))
+    {
+        fp->damage_port_id = -1;
+    }
+    if (!(flags & 0x40))
+    {
+        fp->slope_contour = 0;
+    }
+    fp->coll_data.ignore_line_id = -1;
+
+    fp->x190_flag_b6 = TRUE;
+    fp->x190_flag_b7 = FALSE;
+
+    func_ovl2_800E8098(fp, 0);
+
+    fp->is_stat_nodamage = FALSE;
+    fp->is_damage_resist = FALSE;
+    fp->x191_flag_b3 = FALSE;
+
+    if (fp->x191_flag_b4567 != 3)
+    {
+        fp->x191_flag_b4567 = 0;
+    }
+    fp->fighter_cam_zoom_range = 1.0F;
+
+    if (!(flags & 0x100))
+    {
+        fp->unk_0x174 = 0;
+    }
+
+    fp->x192_flag_b0 = FALSE;
+    fp->x192_flag_b2 = FALSE;
+    fp->x192_flag_b1 = FALSE;
+
+    if (!(flags & 0x400))
+    {
+        fp->shuffle_timer = 0;
+    }
+    if (!(flags & 0x800))
+    {
+        func_ovl2_800E81E4(fp);
+    }
+    fp->knockback_resist_status = 0.0F;
+    fp->damage_knockback_again = 0.0F;
+
+    if (!(flags & 0x2000))
+    {
+        fp->afterimage.render_state = -1;
+    }
+
+    if ((status_id != ftStatus_Common_Wait) && (status_id != ftStatus_Common_WalkSlow) && (status_id != ftStatus_Common_WalkMiddle) && (status_id != ftStatus_Common_WalkFast))
+    {
+        fp->attack1_followup_frames = 0.0F;
+    }
+    if ((fp->status_info.pl_kind != 3) && (fp->unk_0x16 != 9))
+    {
+        func_ovl2_800E827C(fighter_gobj, 9);
+    }
+    fp->status_info.status_time_spent = 0;
+
+    if (status_id >= 0x20000) // Check if Character Data status ID
+    {
+        status_id -= 0x20000;
+    }
+    if (status_id >= 0x1000F) // Check if Opening status ID 1
+    {
+        unk_callback = D_ovl1_80390D20[fp->ft_kind];
+        status_struct_id = status_id - 0x1000F;
+    }
+    else if (status_id >= 0x10000) // Check if Opening status ID 2
+    {
+        unk_callback = &D_ovl1_80390BE8;
+        status_struct_id = status_id - 0x10000;
+    }
+    else if (status_id >= 0xDC)
+    {
+        status_struct = D_ovl2_8012B740[fp->ft_kind];
+        status_struct_id = status_id - 0xDC;
+    }
+    else if (status_id >= 6)
+    {
+        status_struct = &D_ovl2_80128E50;
+        status_struct_id = status_id - 6;
+    }
+    else
+    {
+        status_struct = &D_ovl2_80128DD8;
+        status_struct_id = status_id;
+    }
+    status_desc = &status_struct[status_struct_id];
+
+    if (fp->status_info.pl_kind != 3)
+    {
+        if ((status_struct[status_struct_id].flags_h.flags_hi_0x3F == 0) || (status_struct[status_struct_id].flags_h.flags_hi_0x3F != fp->attack_id))
+        {
+            func_ovl2_800EA5E8(fp, status_struct[status_struct_id].flags_h.flags_hi_0x3F);
+        }
+        attack_flags = status_desc->flags_l;
+
+        if ((attack_flags.flags_0x3FF == 0) || (attack_flags.flags_0x3FF != fp->flags_lw.flags_0x3FF))
+        {
+            func_ovl2_800EA778(fp, status_struct[status_struct_id].flags_l.halfword);
+        }
+    }
+
+    if (fp->proc_status != NULL)
+    {
+        fp->proc_status(fighter_gobj);
+        fp->proc_status = NULL;
+    }
+    func_ovl2_800EA7B0(fp, status_flags.halfword);
+
+    if (status_struct != NULL)
+    {
+        anim_id = status_struct[status_struct_id].flags_h.anim_id;
+        fp->status_info.script_id = anim_id;
+        script_array = fp->ft_data->script1;
+    }
+    else
+    {
+        anim_id = unk_callback[status_struct_id].anim_id - 0x10000;
+        fp->status_info.script_id = anim_id;
+        script_array = fp->ft_data->script2;
+    }
+
+    if ((anim_id != -1) && (anim_id != -2))
+    {
+        script_info = &script_array->script_info[anim_id];
+
+        if (script_info->anim_flags.flags.x19B_flag_b6)
+        {
+            fp->x9CC = (void*)((s32)script_info->anim_id + (u32)fp->ft_data->unk_0x38);
+        }
+        else
+        {
+            if (script_info->anim_id != 0)
+            {
+                rldm_get_file_external_force(script_info->anim_id, fp->x9D0);
+                fp->x9CC = fp->x9D0;
+            }
+            else
+            {
+                fp->x9CC = NULL;
+            }
+        }
+
+        if (fp->x9CC != NULL)
+        {
+            var_v1 = fp->anim_flags.word & 0xFFFFFFE0;
+            fp->anim_flags.word = script_info->anim_flags.word;
+            var_v0_3 = fp->anim_flags.word & 0xFFFFFFE0;
+
+            for (i = 0; ((var_v1 != 0) || (var_v0_3 != 0)); i++, var_v0_3 <<= 1, var_v1 <<= 1)
+            {
+                if (!(var_v1 & (1 << 31)))
+                {
+                    if (var_v0_3 & (1 << 31))
+                    {
+                        func_ovl2_800E69C4(fp, i);
+                    }
+                }
+                else if (var_v0_3 & (1 << 31))
+                {
+                    func_ovl2_800E6CE0(fp, i);
+                }
+                else func_ovl2_800E6E00(fp, i);
+            }
+
+            dobj_desc = attributes->dobj_desc_container[fp->lod_current - 1].dobj_desc;
+
+            for (i = 4; dobj_desc->index != ARRAY_COUNT(fp->joint) / 2; i++, dobj_desc++)
+            {
+                joint = fp->joint[i];
+
+                if (joint != NULL)
+                {
+                    joint->translate = dobj_desc->translate;
+                    joint->rotate = dobj_desc->rotate;
+                    joint->scale = dobj_desc->scale;
+                    joint->unk_0x54 = 0;
+                }
+            }
+            if (fp->anim_flags.flags.is_use_transn_joint)
+            {
+                joint = fp->joint[1];
+                joint->unk_0x54 = 0;
+                joint->translate.z = 0.0F;
+                joint->translate.y = 0.0F;
+                joint->translate.x = 0.0F;
+                joint->rotate.z = 0.0F;
+            }
+            if (fp->anim_flags.flags.is_use_xrotn_joint)
+            {
+                joint = fp->joint[2];
+                joint->translate.z = 0.0F;
+                joint->translate.y = 0.0F;
+                joint->translate.x = 0.0F;
+                joint->rotate.z = 0.0F;
+                joint->rotate.y = 0.0F;
+                joint->rotate.x = 0.0F;
+                joint->unk_0x54 = 0;
+                joint->scale.z = 1.0F;
+                joint->scale.y = 1.0F;
+                joint->scale.x = 1.0F;
+            }
+            if (fp->anim_flags.flags.is_use_yrotn_joint)
+            {
+                joint = fp->joint[3];
+                joint->translate.z = 0.0F;
+                joint->translate.y = 0.0F;
+                joint->translate.x = 0.0F;
+                joint->rotate.z = 0.0F;
+                joint->rotate.y = 0.0F;
+                joint->rotate.x = 0.0F;
+                joint->unk_0x54 = 0;
+                joint->scale.z = 1.0F;
+                joint->scale.y = 1.0F;
+                joint->scale.x = 1.0F;
+            }
+            func_ovl0_800C87F4(fp->joint[0]->next, fp->x9CC, frame_begin);
+
+            if (anim_rate != DObjGetStruct(fighter_gobj)->unk_dobj_0x78)
+            {
+                func_8000BB04(fighter_gobj, anim_rate);
+            }
+            if (fp->anim_flags.flags.is_use_transn_joint)
+            {
+                joint = fp->joint[1];
+
+                temp_a1_3 = joint->prev;
+                temp_v1_2 = joint->next;
+                temp_a1_3->next = temp_v1_2;
+                temp_v1_2->prev = temp_a1_3;
+                temp_v1_2->prev = temp_a1_3;
+                temp_v1_2->unk_0x8 = joint;
+                joint->unk_0xC = temp_v1_2;
+                joint->prev = temp_v1_2->prev;
+                joint->next = NULL;
+            }
+
+            if (fp->x190_flag_b3)
+            {
+                if (!(fp->anim_flags.flags.x19B_flag_b7))
+                {
+                    func_ovl2_800EB6EC(fp);
+                }
+            }
+            else if (fp->anim_flags.flags.x19B_flag_b7)
+            {
+                func_ovl2_800EB7F4(fp);
+            }
+
+            fp->x190_flag_b3 = fp->anim_flags.flags.x19B_flag_b7;
+
+            if (attributes->unk_0x324 != NULL)
+            {
+                if (fp->anim_flags.flags.x19B_flag_b5)
+                {
+                    fp->x18F_flag_b5 = FALSE;
+                }
+                else fp->x18F_flag_b5 = TRUE;
+            }
+        }
+        if (status_struct != NULL)
+        {
+            if (script_info->offset != 0x80000000)
+            {
+                // Actually subaction scripts?
+                if (fp->anim_flags.flags.x19B_flag_b3)
+                {
+                    event_ptr = fp->ft_data->unk_0x30->x0;
+
+                    event_script_ptr = (void*)((uintptr_t)script_info->offset + (intptr_t)event_ptr);
+                }
+                else
+                {
+                    event_ptr = fp->ft_data->unk_0x2C->x0;
+
+                    event_script_ptr = (void*)((uintptr_t)script_info->offset + (intptr_t)event_ptr);
+                }
+            }
+            else event_script_ptr = NULL;
+
+            fp->script_event[0][0].p_script = fp->script_event[1][0].p_script = event_script_ptr;
+        }
+        else
+        {
+            if (script_info->offset != 0x80000000)
+            {
+                event_script_ptr = (void*)script_info->offset;
+            }
+            else event_script_ptr = NULL;
+
+            fp->script_event[0][0].p_script = fp->script_event[1][0].p_script = event_script_ptr;
+        }
+        anim_frame = DObjGetStruct(fighter_gobj)->unk_dobj_0x78 - frame_begin;
+
+        fp->script_event[0][0].frame_timer = fp->script_event[1][0].frame_timer = anim_frame;
+
+        fp->script_event[0][0].script_index = fp->script_event[1][0].script_index = 0;
+
+        for (i = 1; i < ARRAY_COUNT(fp->script_event); i++)
+        {
+            fp->script_event[0][i].p_script = fp->script_event[1][i].p_script = NULL;
+        }
+
+        if (frame_begin != 0.0F)
+        {
+            func_ovl2_800E0858(fighter_gobj);
+        }
+        else
+        {
+            func_ovl2_800E0830(fighter_gobj);
+            func_ovl2_800E11C8(fighter_gobj);
+        }
+    }
+    else for (i = 0; i < ARRAY_COUNT(fp->script_event); i++)
+    {
+        fp->script_event[0][i].p_script = fp->script_event[1][i].p_script = NULL;
+    }
+    if (fp->status_info.pl_kind != Pl_Kind_Result)
+    {
+        fp->proc_update = status_struct[status_struct_id].proc_update;
+        fp->proc_interrupt = status_struct[status_struct_id].proc_interrupt;
+        fp->proc_physics = status_struct[status_struct_id].proc_physics;
+        fp->proc_map = status_struct[status_struct_id].proc_map;
+        fp->proc_slope = func_ovl2_800DE150;
+        fp->proc_accessory = NULL;
+        fp->proc_damage = NULL;
+        fp->proc_trap = NULL;
+        fp->proc_hit = NULL;
+        fp->proc_shield = NULL;
+        fp->proc_gfx = NULL;
+        fp->proc_lagupdate = NULL;
+        fp->proc_lagstart = NULL;
+        fp->proc_lagend = NULL;
+    }
+    else if (unk_callback != NULL)
+    {
+        fp->proc_update = unk_callback[status_struct_id].proc_update;
+    }
+    else fp->proc_update = NULL;
+}

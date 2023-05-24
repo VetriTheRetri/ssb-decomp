@@ -184,4 +184,12 @@ typedef struct Color_Overlay
 
 } Color_Overlay;
 
+typedef struct ColAnimDesc
+{
+    u8 unk_colanimdesc_0x0;
+    u8 unk_colanimdesc_0x1;
+    void *p_script;
+
+} ColAnimDesc;
+
 #endif

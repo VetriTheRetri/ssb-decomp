@@ -13,6 +13,42 @@
 #include <game/src/gm/gmsound.h>
 #include <game/src/gm/gmscript.h>
 
+typedef enum ftStatusUpdateFlags
+{
+    ftStatusUpdate_Hit_Preserve,
+    ftStatusUpdate_ColAnim_Preserve,
+    ftStatusUpdate_GFX_Preserve,
+    ftStatusUpdate_FastFall_Preserve,
+    ftStatusUpdate_HitStatus_Preserve,
+    ftStatusUpdate_Unk1_Preserve,
+    ftStatusUpdate_SlopeContour_Preserve,
+    ftStatusUpdate_Unk2_Preserve,
+    ftStatusUpdate_Unk3_Preserve,
+    ftStatusUpdate_ThrowGObj_Preserve,
+    ftStatusUpdate_ShuffleTime_Preserve, // Don't reset hitlag vibration frames?
+    ftStatusUpdate_Unk4_Preserve,
+    ftStatusUpdate_DamagePort_Preserve,
+    ftStatusUpdate_AfterImage_Preserve,
+    ftStatusUpdate_Unk5_Preserve
+
+} ftStatusUpdateFlags;
+
+#define FTSTATUPDATE_HIT_PRESERVE           (1 << ftStatusUpdate_Hit_Preserve)          // 0x1
+#define FTSTATUPDATE_COLANIM_PRESERVE       (1 << ftStatusUpdate_ColAnim_Preserve)      // 0x2
+#define FTSTATUPDATE_GFX_PRESERVE           (1 << ftStatusUpdate_GFX_Preserve)          // 0x4
+#define FTSTATUPDATE_FASTFALL_PRESERVE      (1 << ftStatusUpdate_FastFall_Preserve)     // 0x8
+#define FTSTATUPDATE_HITSTATUS_PRESERVE     (1 << ftStatusUpdate_HitStatus_Preserve)    // 0x10
+#define FTSTATUPDATE_UNK1_PRESERVE          (1 << ftStatusUpdate_Unk1_Preserve)         // 0x20
+#define FTSTATUPDATE_SLOPECONTOUR_PRESERVE  (1 << ftStatusUpdate_SlopeContour_Preserve) // 0x40
+#define FTSTATUPDATE_UNK2_PRESERVE          (1 << ftStatusUpdate_Unk2_Preserve)         // 0x80
+#define FTSTATUPDATE_UNK3_PRESERVE          (1 << ftStatusUpdate_Unk3_Preserve)         // 0x100
+#define FTSTATUPDATE_THROWPOINTER_PRESERVE  (1 << ftStatusUpdate_ThrowGObj_Preserve)    // 0x200
+#define FTSTATUPDATE_SHUFFLETIME_PRESERVE   (1 << ftStatusUpdate_ShuffleTime_Preserve)  // 0x400
+#define FTSTATUPDATE_UNK4_PRESERVE          (1 << ftStatusUpdate_Unk4_Preserve)         // 0x800
+#define FTSTATUPDATE_DAMAGEPORT_PRESERVE    (1 << ftStatusUpdate_DamagePort_Preserve)   // 0x1000
+#define FTSTATUPDATE_AFTERIMAGE_PRESERVE    (1 << ftStatusUpdate_AfterImage_Preserve)   // 0x2000
+#define FTSTATUPDATE_UNK5_PRESERVE          (1 << ftStatusUpdate_Unk5_Preserve)         // 0x4000
+
 #define FTPARTS_JOINT_NUM_MAX 37
 
 typedef struct Fighter_Struct Fighter_Struct;
@@ -787,6 +823,32 @@ typedef struct ftCommonAttributes
     s32 joint_itemhold_light;
 
 } ftCommonAttributes;
+
+typedef struct ftStatusDescFlags
+{
+    s16 anim_id : 10;
+    u16 flags_hi_0x3F : 6;
+
+} ftStatusDescFlags;
+
+typedef struct ftStatusDesc
+{
+    ftStatusDescFlags flags_h;
+    gmAttackFlags flags_l;
+
+    void (*proc_update)(GObj*);
+    void (*proc_interrupt)(GObj*);
+    void (*proc_physics)(GObj*);
+    void (*proc_map)(GObj*);
+
+} ftStatusDesc;
+
+typedef struct ftIntroStatusDesc
+{
+    s32 anim_id;
+    void (*proc_update)(GObj*);
+
+} ftIntroStatusDesc;
 
 struct Fighter_Struct
 {

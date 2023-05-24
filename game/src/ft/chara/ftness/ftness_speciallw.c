@@ -1,9 +1,10 @@
 #include <game/src/ft/chara/ftness/ftness.h>
 #include <game/src/it/item/item.h>
 
-
-
-
+#define FTNESS_SPECIALLWSTART_STATUPDATE_FLAGS (FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
+#define FTNESS_SPECIALLWHOLD_STATUPDATE_FLAGS (FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
+#define FTNESS_SPECIALLWHIT_STATUPDATE_FLAGS (FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
+#define FTNESS_SPECIALLWEND_STATUPDATE_FLAGS (FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
 
 // PSI Magnet (SpecialLw/SpecialAirLw)
 
@@ -42,12 +43,12 @@ void func_ovl3_8015521C(GObj *fighter_gobj)
 
 void func_ovl3_801552A0(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, &func_ovl3_80155750);
+    func_ovl2_800D9480(fighter_gobj, func_ovl3_80155750);
 }
 
 void func_ovl3_801552C4(GObj *fighter_gobj)
 {
-    func_ovl2_800D9480(fighter_gobj, &func_ovl3_80155794);
+    func_ovl2_800D9480(fighter_gobj, func_ovl3_80155794);
 }
 
 void func_ovl3_801552E8(GObj *fighter_gobj)
@@ -93,7 +94,7 @@ void func_ovl3_801553A4(GObj *fighter_gobj)
 void func_ovl3_801553C8(GObj *fighter_gobj)
 {
     ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwStart, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwStart, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWSTART_STATUPDATE_FLAGS);
 }
 
 void func_ovl3_80155408(GObj *fighter_gobj)
@@ -101,7 +102,7 @@ void func_ovl3_80155408(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwStart, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwStart, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWSTART_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 }
 
@@ -180,7 +181,7 @@ void func_ovl3_8015562C(GObj *fighter_gobj)
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHold, fighter_gobj->anim_frame, 1.0F, 0x97U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHold, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHOLD_STATUPDATE_FLAGS);
 
     fp->is_absorb = TRUE;
 }
@@ -190,13 +191,13 @@ void func_ovl3_8015562C(GObj *fighter_gobj)
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHold, fighter_gobj->anim_frame, 1.0F, 0x97U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHold, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHOLD_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 
     fp->is_absorb = TRUE;
 }
 
-extern u8 ftNess_LoadedFiles_SpecialLwData;
+extern intptr_t ftNess_LoadedFiles_SpecialLwData;
 extern void *D_ovl2_80131134;
 
 void func_ovl3_801556E0(GObj *fighter_gobj)
@@ -211,23 +212,23 @@ void func_ovl3_801556E0(GObj *fighter_gobj)
             fp->is_statupdate_stop_gfx = TRUE;
         }
     }
-    fp->x18D_flag_b0 = TRUE;
+    fp->is_absorb = TRUE;
 
-    fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80131134 + &ftNess_LoadedFiles_SpecialLwData); // Linker thing (attempt uintptr_t for 64-bit compatibility?)
+    fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80131134 + (intptr_t)&ftNess_LoadedFiles_SpecialLwData); // Linker thing (attempt uintptr_t for 64-bit compatibility?)
 
     fp->command_vars.flags.flag1 = 0;
 }
 
 void func_ovl3_80155750(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHold, 0.0F, 1.0F, 0x804U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHold, 0.0F, 1.0F, (FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     func_ovl3_801556E0(fighter_gobj);
 }
 
 void func_ovl3_80155794(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHold, 0.0F, 1.0F, 0x804U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHold, 0.0F, 1.0F, (FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     func_ovl3_801556E0(fighter_gobj);
 }
@@ -267,7 +268,7 @@ void func_ovl3_80155880(GObj *fighter_gobj)
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHit, fighter_gobj->anim_frame, 1.0F, 0x897U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHit, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHIT_STATUPDATE_FLAGS);
     fp->is_absorb = TRUE;
 }
 
@@ -276,7 +277,7 @@ void func_ovl3_801558D4(GObj *fighter_gobj)
     Fighter_Struct* fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHit, fighter_gobj->anim_frame, 1.0F, 0x897U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHit, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHIT_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 
     fp->is_absorb = TRUE;
@@ -291,14 +292,14 @@ void func_ovl3_80155934(GObj *fighter_gobj)
 
 void func_ovl3_80155948(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHit, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHit, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl3_80155934(fighter_gobj);
 }
 
 void func_ovl3_8015598C(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHit, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHit, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl3_80155934(fighter_gobj);
 }
@@ -322,7 +323,7 @@ void func_ovl3_80155A18(GObj *fighter_gobj)
 void func_ovl3_80155A3C(GObj *fighter_gobj)
 {
     ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwEnd, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWEND_STATUPDATE_FLAGS);
 }
 
 void func_ovl3_80155A7C(GObj *fighter_gobj)
@@ -330,7 +331,7 @@ void func_ovl3_80155A7C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwEnd, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwEnd, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWEND_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 }
 
