@@ -268,7 +268,7 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
             fp->status_vars.pikachu.specialhi.stick_range.x = stick_angle.x;
             fp->status_vars.pikachu.specialhi.stick_range.y = stick_angle.y;
 
-            func_ovl2_800E8044(fp);
+            ftCommon_StickInputSetLR(fp);
             func_ovl3_80152E2C(fighter_gobj);
 
             fp->phys_info.vel_ground.x = (FTPIKACHU_QUICKATTACK_VEL_BASE * sqrt_stick_range) + FTPIKACHU_QUICKATTACK_VEL_ADD;
@@ -299,7 +299,7 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
         sqrt_stick_range = 80.0F;
     }
 
-    func_ovl2_800E8044(fp);
+    ftCommon_StickInputSetLR(fp);
 
     if (sqrt_stick_range > FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN)
     {

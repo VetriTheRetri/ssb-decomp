@@ -49,7 +49,7 @@ void ftMario_SpecialHi_ProcInterrupt(GObj *fighter_gobj)
 
         if (stick_x > 20)
         {
-            func_ovl2_800E8044(fp);
+            ftCommon_StickInputSetLR(fp);
 
             fp->joint[0]->rotate.y = ((f32)fp->lr * HALF_PI32);
         }

@@ -73,7 +73,7 @@ void func_ovl3_8014C83C(GObj *fighter_gobj, GObj *capture_gobj)
     this_fp->status_vars.common.captureyoshi.stage = 0;
     this_fp->status_vars.common.captureyoshi.breakout_wait = 0;
 
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
     func_ovl2_800D9444(fighter_gobj);
     func_ovl3_8014C778(fighter_gobj);
     func_ovl2_800DE348(fighter_gobj);
@@ -340,7 +340,7 @@ void func_ovl3_8014CF20(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_YoshiEgg, 0.0F, 0.0F, 0U);
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 
     this_fp->is_invisible = TRUE;
 

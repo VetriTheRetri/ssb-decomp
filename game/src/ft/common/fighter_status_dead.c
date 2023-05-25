@@ -24,7 +24,7 @@ void func_ovl3_8013BC8C(Fighter_Struct *this_fp)
             {
                 Fighter_Struct *other_fp = FighterGetStruct(fighter_gobj);
 
-                if ((!(Match_Info->match_type & 2)) || (other_fp->stock_count != -1))
+                if ((!(Match_Info->match_rules & GMMATCH_GAMERULE_STOCK)) || (other_fp->stock_count != -1))
                 {
                     func_ovl2_800E806C(other_fp, 1, 15);
                 }
@@ -59,7 +59,7 @@ void func_ovl3_8013BD64(Fighter_Struct *this_fp)
     }
     else Match_Info->player_block[this_fp->port_id].total_self_destruct++;
     
-    if (Match_Info->match_type & 2)
+    if (Match_Info->match_rules & GMMATCH_GAMERULE_STOCK)
     {
         this_fp->stock_count--;
 
@@ -67,7 +67,7 @@ void func_ovl3_8013BD64(Fighter_Struct *this_fp)
 
         func_ovl2_8011388C(this_fp);
     }
-    if (Match_Info->match_type & 8)
+    if (Match_Info->match_rules & GMMATCH_GAMERULE_1PGAME)
     {
         this_fp->stock_count--;
 
@@ -75,7 +75,7 @@ void func_ovl3_8013BD64(Fighter_Struct *this_fp)
 
         func_unkmulti_8018EFFC(this_fp->port_id, this_fp->unk_0x15);
     }
-    if (Match_Info->match_type & 4)
+    if (Match_Info->match_rules & GMMATCH_GAMERULE_BONUS)
     {
         func_ovl2_80114C80();
     }
@@ -85,7 +85,7 @@ void func_ovl3_8013BF94(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (Match_Info->match_type & 2)
+    if (Match_Info->match_rules & GMMATCH_GAMERULE_STOCK)
     {
         if (fp->stock_count == -1)
         {
@@ -94,7 +94,7 @@ void func_ovl3_8013BF94(GObj *fighter_gobj)
             return;
         }
     }
-    else if (Match_Info->match_type & 8)
+    else if (Match_Info->match_rules & GMMATCH_GAMERULE_1PGAME)
     {
         if (Match_Info->player_block[fp->port_id].is_rebirth_multi != FALSE)
         {
@@ -137,7 +137,7 @@ void func_ovl3_8013C0B0(GObj *fighter_gobj)
     fp->is_stat_nodamage = TRUE;
     fp->x18E_flag_b0 = TRUE;
 
-    func_ovl2_800E7B54(fighter_gobj);
+    ftSpecialItem_BGMCheckFighters(fighter_gobj);
 }
 
 void func_ovl3_8013C0EC(GObj *fighter_gobj)

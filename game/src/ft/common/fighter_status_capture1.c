@@ -116,7 +116,7 @@ void func_ovl3_8014A860(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->status_vars.common.capture.is_goto_pulled_wait = FALSE;
 
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
     func_ovl2_800E806C(this_fp, 9, 0);
     func_ovl2_800D9444(fighter_gobj);
     func_ovl3_8014A6B4(fighter_gobj);
@@ -171,5 +171,5 @@ void func_ovl3_8014AA58(GObj *fighter_gobj)
 
         func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 }

@@ -87,7 +87,7 @@ void func_ovl3_8014D2A0(GObj *fighter_gobj, GObj *capture_gobj)
 
     ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureCaptain, FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN, FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED, 0U);
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800D9444(fighter_gobj);
     func_ovl3_8014D200(fighter_gobj);
@@ -98,5 +98,5 @@ void func_ovl3_8014D3BC(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_8014AFD0(fighter_gobj, fp->lr, 0, 0);
-    func_ovl2_800E8098(fp, 0U);
+    ftCommon_SetCaptureFlags(fp, 0U);
 }

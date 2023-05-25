@@ -95,7 +95,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
                 }
                 else
                 {
-                    angle = func_ovl2_800E8000(fp);
+                    angle = ftCommon_GetStickAngleRadians(fp);
 
                     if (angle > 0.87266463F)
                     {
@@ -142,7 +142,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
                 }
                 else
                 {
-                    angle = func_ovl2_800E8000(fp);
+                    angle = ftCommon_GetStickAngleRadians(fp);
 
                     if (angle > 0.87266463F)
                     {

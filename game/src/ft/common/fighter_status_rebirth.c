@@ -24,7 +24,7 @@ void func_ovl3_8013CF60(GObj *this_gobj)
     halo_number = 0;
 
 loop: // This makes no sense
-    other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+    other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
     while (other_gobj != NULL)
     {

@@ -102,7 +102,7 @@ void func_ovl3_8014B968(GObj *fighter_gobj, GObj *capture_gobj)
     this_fp->status_vars.common.capturekirby.lr = CENTER;
     this_fp->status_vars.common.capturekirby.is_kirby = 0;
 
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
     func_ovl2_800D9444(fighter_gobj);
     func_ovl3_8014B914(fighter_gobj);
     func_ovl2_800DE348(fighter_gobj);
@@ -203,7 +203,7 @@ void func_ovl3_8014BDB4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWaitKirby, 0.0F, 1.0F, 0xA0U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     fp->is_invisible = TRUE;
 
@@ -404,8 +404,8 @@ void func_ovl3_8014C424(GObj *fighter_gobj)
         Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
 
         func_ovl3_8014ADB0(fighter_gobj);
-        func_ovl2_800E8098(this_fp, 0U);
-        func_ovl2_800E8098(capture_fp, 0U);
+        ftCommon_SetCaptureFlags(this_fp, 0U);
+        ftCommon_SetCaptureFlags(capture_fp, 0U);
         func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->flags_lw.halfword, capture_fp->unk_0x290.halfword);
 
         this_fp->capture_gobj = NULL;
@@ -443,7 +443,7 @@ void func_ovl3_8014C508(GObj *fighter_gobj)
     fp->proc_status = func_ovl3_8014C4D8;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownKirbyStar, 0.0F, 1.0F, 0x200U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     fp->proc_hit = func_ovl3_8014BE54;
 
@@ -494,7 +494,7 @@ void func_ovl3_8014C6AC(GObj *fighter_gobj)
     fp->proc_status = func_ovl3_8014C67C;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownCopyStar, 0.0F, 1.0F, 0x200U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     fp->proc_hit = func_ovl3_8014BE54;
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;

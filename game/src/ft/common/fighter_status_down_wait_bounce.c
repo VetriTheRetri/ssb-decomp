@@ -38,7 +38,7 @@ void ftCommon_DownWait_ApplyStatus(GObj *fighter_gobj)
 
     fp->status_vars.common.downwait.stand_wait = FTCOMMON_DOWNWAIT_STAND_WAIT;
 
-    func_ovl2_800E8098(fp, 0x33U);
+    ftCommon_SetCaptureFlags(fp, 0x33U);
 
     fp->damage_mul = 0.5F;
 }

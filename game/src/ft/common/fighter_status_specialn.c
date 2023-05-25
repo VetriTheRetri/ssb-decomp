@@ -12,7 +12,7 @@ void (*ftKirby_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80160B30,
     jtgt_ovl3_80163154,
     jtgt_ovl3_801538C8,
-    jtgt_ovl3_80151AC4,
+    ftKirby_CopyPurin_SpecialN_SetStatus,
     ftKirby_CopyNess_SpecialN_SetStatus,
     jtgt_ovl3_80163154,
     ftKirby_CopyMario_SpecialN_SetStatus,
@@ -42,7 +42,7 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8015FB5C,
     jtgt_ovl3_80151060,
     jtgt_ovl3_80151D24,
-    jtgt_ovl3_801514C4,
+    ftPurin_SpecialN_SetStatus,
     ftNess_SpecialN_SetStatus,
     ftMario_SpecialN_SetStatus,
     ftMario_SpecialN_SetStatus,
@@ -56,7 +56,7 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8015FB5C,
     jtgt_ovl3_80151060,
     jtgt_ovl3_80151D24,
-    jtgt_ovl3_801514C4,
+    ftPurin_SpecialN_SetStatus,
     ftNess_SpecialN_SetStatus,
     jtgt_ovl3_8015B61C
 };
@@ -79,7 +79,7 @@ bool32 func_ovl3_80151098(GObj *fighter_gobj)
         {
             if ((fp->input.pl.stick_range.x * fp->lr) < FTCOMMON_SPECIALN_TURN_STICK_RANGE_MIN)
             {
-                func_ovl2_800E8044(fp);
+                ftCommon_StickInputSetLR(fp);
             }
             ftCommon_SpecialN_StatusList[fp->ft_kind](fighter_gobj);
 

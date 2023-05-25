@@ -26,7 +26,7 @@ void func_ovl3_8014A0C0(GObj *fighter_gobj)
 
         fp->catch_gobj = NULL;
 
-        func_ovl2_800E8098(fp, 0U);
+        ftCommon_SetCaptureFlags(fp, 0U);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -73,7 +73,7 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 
     this_fp->command_vars.flags.flag2 = 0;
     this_fp->command_vars.flags.flag1 = 0;

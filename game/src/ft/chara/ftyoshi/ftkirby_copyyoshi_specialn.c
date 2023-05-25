@@ -2,7 +2,7 @@
 
 void func_ovl3_8015F180(Fighter_Struct *fp, void (*cb)(GObj*)) // Kirby's Yoshi Copy
 {
-    func_ovl2_800E80A4(fp, 1, cb, func_ovl3_8014C83C);
+    ftCommon_SetCatchVars(fp, 1, cb, func_ovl3_8014C83C);
 }
 
 void func_ovl3_8015F1AC(GObj *fighter_gobj, void (*proc_catch)(GObj*))
@@ -52,7 +52,7 @@ void func_ovl3_8015F248(Fighter_Struct *fp)
 
             fp->command_vars.flags.flag1 = 0;
 
-            func_ovl2_800E8098(fp, 0U);
+            ftCommon_SetCaptureFlags(fp, 0U);
         }
     }
 }
@@ -182,7 +182,7 @@ void func_ovl3_8015F668(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->catch_gobj = fp->search_gobj;
@@ -206,7 +206,7 @@ void func_ovl3_8015F734(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;

@@ -326,7 +326,7 @@ glabel func_ovl51_8018D2DC
   /* 174DE0 8018D560 240C0006 */     addiu $t4, $zero, 6
   /* 174DE4 8018D564 AC6C0ADC */        sw $t4, 0xadc($v1)
   .L8018D568:
-  /* 174DE8 8018D568 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 174DE8 8018D568 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 174DEC 8018D56C 02002825 */        or $a1, $s0, $zero
   /* 174DF0 8018D570 8EAD0000 */        lw $t5, ($s5) # Match_Info + 0
   /* 174DF4 8018D574 02002025 */        or $a0, $s0, $zero

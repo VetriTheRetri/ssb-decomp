@@ -1013,7 +1013,7 @@ glabel func_ovl64_8018DCC4
   /* 18CC28 8018DEE8 A1D00028 */        sb $s0, 0x28($t6)
   /* 18CC2C 8018DEEC 8E490000 */        lw $t1, ($s2) # Match_Info + 0
   /* 18CC30 8018DEF0 01317821 */      addu $t7, $t1, $s1
-  /* 18CC34 8018DEF4 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 18CC34 8018DEF4 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 18CC38 8018DEF8 A1F0002A */        sb $s0, 0x2a($t7)
   /* 18CC3C 8018DEFC 26100001 */     addiu $s0, $s0, 1
   /* 18CC40 8018DF00 24010004 */     addiu $at, $zero, 4

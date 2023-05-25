@@ -79,7 +79,7 @@ void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
     fp->status_vars.common.tornado.release_wait = 0;
     fp->status_vars.common.tornado.tornado_gobj = tornado_gobj;
 
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     func_800269C0(0x11CU);
 }
 

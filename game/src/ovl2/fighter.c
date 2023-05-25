@@ -140,11 +140,11 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->is_hitstun = FALSE;
     fp->x190_flag_b3 = FALSE;
 
-    fp->unk_ft_0x272 = fp->unk_ft_0x273 = 0;
+    fp->shuffle_frame_index = fp->shuffle_index_max = 0;
 
     fp->x192_flag_b4 = FALSE;
 
-    fp->unk_0x274 = 0;
+    fp->is_shuffle_electric = 0;
     fp->shuffle_timer = 0;
 
     fp->attack_id = 0;
@@ -521,12 +521,12 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
         if (spawn->unk_rebirth_0x1F_b0)
         {
             func_ovl2_800DEE54(fighter_gobj);
-            func_ovl2_800E7F14(fighter_gobj);
+            ftCommon_ResetControllerInputs(fighter_gobj);
         }
         else
         {
             func_ovl3_8013D930(fighter_gobj);
-            func_ovl2_800E7F14(fighter_gobj);
+            ftCommon_ResetControllerInputs(fighter_gobj);
         }
         break;
     }

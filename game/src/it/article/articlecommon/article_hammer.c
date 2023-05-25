@@ -1,10 +1,8 @@
 #include "article.h"
 
-
-
 void func_ovl3_80176110(GObj *article_gobj)
 {
-    func_ovl3_80172F98(article_gobj, ATHAMMER_COLANIM_ID, 0);
+    func_ovl3_80172F98(article_gobj, ATHAMMER_WEAR_COLANIM_ID, 0);
 }
 
 bool32 jtgt_ovl3_80176134(GObj *article_gobj)
@@ -88,7 +86,7 @@ void jtgt_ovl3_80176300(GObj *article_gobj)
 
     DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 
-    func_ovl2_800E7B54();
+    ftSpecialItem_BGMCheckFighters();
 }
 
 bool32 jtgt_ovl3_80176348(GObj *article_gobj)
@@ -103,7 +101,7 @@ void jtgt_ovl3_80176378(GObj *article_gobj)
 
     DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 
-    func_ovl2_800E7B54();
+    ftSpecialItem_BGMCheckFighters();
 }
 
 extern ArticleSpawnData Article_Hammer_Data;

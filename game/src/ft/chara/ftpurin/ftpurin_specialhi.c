@@ -1,6 +1,9 @@
 #include "ftpurin.h"
 
-void func_ovl3_80151550(GObj *fighter_gobj)
+#define FTPURIN_SPECIALHI_STATUPDATE_FLAGS (FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
+
+// 0x80151550
+void ftPurin_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -19,38 +22,44 @@ void func_ovl3_80151550(GObj *fighter_gobj)
     else func_ovl2_800D94E8(fighter_gobj);
 }
 
-void func_ovl3_801515F0(GObj *fighter_gobj)
+// 0x801515F0
+void ftPurin_SpecialAirHi_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_80151614);
+    func_ovl2_800DE6E4(fighter_gobj, ftPurin_SpecialAirHi_SwitchStatusGround);
 }
 
-void func_ovl3_801515CC(GObj *fighter_gobj)
+// 0x801515CC
+void ftPurin_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_80151654);
+    func_ovl2_800DDE84(fighter_gobj, ftPurin_SpecialHi_SwitchStatusAir);
 }
 
-void func_ovl3_80151614(GObj *fighter_gobj)
+// 0x80151614
+void ftPurin_SpecialAirHi_SwitchStatusGround(GObj *fighter_gobj)
 {
     ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialHi, fighter_gobj->anim_frame, 1.0F, 0x97U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialHi, fighter_gobj->anim_frame, 1.0F, FTPURIN_SPECIALHI_STATUPDATE_FLAGS);
 }
 
-void func_ovl3_80151654(GObj *fighter_gobj)
+// 0x80151654
+void ftPurin_SpecialHi_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 0x97U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, FTPURIN_SPECIALHI_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 }
 
-void jtgt_ovl3_801516A0(GObj *fighter_gobj)
+// 0x801516A0
+void ftPurin_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 }
 
-void jtgt_ovl3_801516D8(GObj *fighter_gobj)
+// 0x801516D8
+void ftPurin_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

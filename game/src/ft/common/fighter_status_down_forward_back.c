@@ -17,7 +17,7 @@ bool32 func_ovl3_8014482C(GObj *fighter_gobj)
 
     if (ABS(fp->input.pl.stick_range.x) >= FTCOMMON_DOWN_FORWARD_BACK_RANGE_MIN)
     {
-        if (func_ovl2_800E8000(fp) < 0.87266463F)
+        if (ftCommon_GetStickAngleRadians(fp) < 0.87266463F)
         {
             if ((fp->input.pl.stick_range.x * fp->lr) >= 0)
             {

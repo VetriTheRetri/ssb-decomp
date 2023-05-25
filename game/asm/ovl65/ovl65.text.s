@@ -1431,7 +1431,7 @@ glabel func_ovl65_8018D60C
   /* 10CD9C 8018E53C 8C460084 */        lw $a2, 0x84($v0)
   /* 10CDA0 8018E540 02002025 */        or $a0, $s0, $zero
   /* 10CDA4 8018E544 00402825 */        or $a1, $v0, $zero
-  /* 10CDA8 8018E548 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 10CDA8 8018E548 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 10CDAC 8018E54C AFA6008C */        sw $a2, 0x8c($sp)
   /* 10CDB0 8018E550 0C039FDA */       jal func_ovl2_800E7F68
   /* 10CDB4 8018E554 8FA4003C */        lw $a0, 0x3c($sp)
@@ -1808,9 +1808,9 @@ glabel func_ovl65_8018E9A4
   /* 10D314 8018EAB4 0C0439A4 */       jal func_ovl2_8010E690
   /* 10D318 8018EAB8 A0221580 */        sb $v0, %lo(D_ovl2_80131580)($at)
   /* 10D31C 8018EABC 240C0019 */     addiu $t4, $zero, 0x19
-  /* 10D320 8018EAC0 3C018013 */       lui $at, %hi(D_ovl2_801313A0)
-  /* 10D324 8018EAC4 0C039ED5 */       jal func_ovl2_800E7B54
-  /* 10D328 8018EAC8 AC2C13A0 */        sw $t4, %lo(D_ovl2_801313A0)($at)
+  /* 10D320 8018EAC0 3C018013 */       lui $at, %hi(gmMusicIndexDefault)
+  /* 10D324 8018EAC4 0C039ED5 */       jal ftSpecialItem_BGMCheckFighters
+  /* 10D328 8018EAC8 AC2C13A0 */        sw $t4, %lo(gmMusicIndexDefault)($at)
   /* 10D32C 8018EACC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 10D330 8018EAD0 27BD0040 */     addiu $sp, $sp, 0x40
   /* 10D334 8018EAD4 03E00008 */        jr $ra
@@ -2580,7 +2580,7 @@ glabel func_ovl65_8018F574
 glabel func_ovl65_8018F5AC
   /* 10DE0C 8018F5AC 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 10DE10 8018F5B0 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 10DE14 8018F5B4 0C039FC5 */       jal func_ovl2_800E7F14
+  /* 10DE14 8018F5B4 0C039FC5 */       jal ftCommon_ResetControllerInputs
   /* 10DE18 8018F5B8 AFA5001C */        sw $a1, 0x1c($sp)
   /* 10DE1C 8018F5BC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 10DE20 8018F5C0 27BD0018 */     addiu $sp, $sp, 0x18
@@ -3012,7 +3012,7 @@ glabel func_ovl65_8018F7B4
   /* 10E464 8018FC04 8C430084 */        lw $v1, 0x84($v0)
   /* 10E468 8018FC08 02202025 */        or $a0, $s1, $zero
   /* 10E46C 8018FC0C 00402825 */        or $a1, $v0, $zero
-  /* 10E470 8018FC10 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 10E470 8018FC10 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 10E474 8018FC14 AFA300B8 */        sw $v1, 0xb8($sp)
   /* 10E478 8018FC18 8FA300B8 */        lw $v1, 0xb8($sp)
   /* 10E47C 8018FC1C 920F0018 */       lbu $t7, 0x18($s0)

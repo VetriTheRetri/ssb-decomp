@@ -4,7 +4,7 @@
 
 void func_ovl3_80160280(Fighter_Struct *fp)
 {
-    func_ovl2_800E80A4(fp, 32, func_ovl3_80160690, func_ovl3_8014D2A0);
+    ftCommon_SetCatchVars(fp, 32, func_ovl3_80160690, func_ovl3_8014D2A0);
 }
 
 void func_ovl3_801602B0(GObj *fighter_gobj)
@@ -43,7 +43,7 @@ void func_ovl3_80160370(GObj *fighter_gobj)
 
         if (stick_x >= 19)
         {
-            func_ovl2_800E8044(fp);
+            ftCommon_StickInputSetLR(fp);
 
             fp->joint[0]->rotate.y = (f32)fp->lr * HALF_PI32;
         }
@@ -148,7 +148,7 @@ void func_ovl3_80160690(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     func_ovl2_800D9444(fighter_gobj);
 
     search_gobj = fp->search_gobj;
@@ -170,7 +170,7 @@ void func_ovl3_80160730(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
-    func_ovl2_800E8098(fp, 0U);
+    ftCommon_SetCaptureFlags(fp, 0U);
 
     if ((fp->x192_flag_b3 == TRUE) && (fp->catch_gobj != NULL))
     {

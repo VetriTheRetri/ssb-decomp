@@ -2,7 +2,7 @@
 
 void func_ovl3_8015E310(Fighter_Struct *fp, void (*cb_unk)(GObj*))
 {
-    func_ovl2_800E80A4(fp, 1, cb_unk, func_ovl3_8014C83C);
+    ftCommon_SetCatchVars(fp, 1, cb_unk, func_ovl3_8014C83C);
 }
 
 void func_ovl3_8015E33C(GObj *fighter_gobj, void (*proc_catch)(GObj*))
@@ -52,7 +52,7 @@ void func_ovl3_8015E3D8(Fighter_Struct *fp)
 
             fp->command_vars.flags.flag1 = 0;
 
-            func_ovl2_800E8098(fp, 0U);
+            ftCommon_SetCaptureFlags(fp, 0U);
         }
     }
 }
@@ -182,7 +182,7 @@ void func_ovl3_8015E7F8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E8098(fp, 0x3FU); // Store grab vulnerability flags?
+    ftCommon_SetCaptureFlags(fp, 0x3FU); // Store grab vulnerability flags?
     func_ovl2_800D9444(fighter_gobj);
 
     fp->catch_gobj = fp->search_gobj;
@@ -206,7 +206,7 @@ void func_ovl3_8015E8C4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;
 }

@@ -1,37 +1,45 @@
 #include "ftpurin.h"
 
-void func_ovl3_80151710(GObj *fighter_gobj)
+#define FTPURIN_SPECIALLW_STATUPDATE_FLAGS (FTSTATUPDATE_UNK2_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
+
+// 0x80151710
+void ftPurin_SpecialLw_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDDDC(fighter_gobj, func_ovl3_80151798);
+    func_ovl2_800DDDDC(fighter_gobj, ftPurin_SpecialLw_SwitchStatusAir);
 }
 
-void func_ovl3_80151734(GObj *fighter_gobj)
+// 0x80151734
+void ftPurin_SpecialAirLw_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_80151758);
+    func_ovl2_800DE6E4(fighter_gobj, ftPurin_SpecialAirLw_SwitchStatusGround);
 }
 
-void func_ovl3_80151758(GObj *fighter_gobj)
+// 0x80151758
+void ftPurin_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 {
     ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialLw, fighter_gobj->anim_frame, 1.0F, FTPURIN_SPECIALLW_STATUPDATE_FLAGS);
 }
 
-void func_ovl3_80151798(GObj *fighter_gobj)
+// 0x80151798
+void ftPurin_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0x92U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTPURIN_SPECIALLW_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 }
 
-void jtgt_ovl3_801517E4(GObj *fighter_gobj)
+// 0x801517E4
+void ftPurin_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 }
 
-void jtgt_ovl3_8015181C(GObj *fighter_gobj)
+// 0x8015181C
+void ftPurin_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

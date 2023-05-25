@@ -11,7 +11,7 @@ void func_ovl3_8014F760(GObj *fighter_gobj)
     {
         if (fp->ft_data->script1->script_info[0xA9].anim_id != 0)
         {
-            stick_angle = func_ovl2_800E8000(fp);
+            stick_angle = ftCommon_GetStickAngleRadians(fp);
 
             status_id = (stick_angle > FTCOMMON_ATTACKS3_5ANGLE_HI_MIN)  ? ftStatus_Common_AttackS3Hi  : // High-Angled Forward Tilt
                         (stick_angle > FTCOMMON_ATTACKS3_5ANGLE_HIS_MIN) ? ftStatus_Common_AttackS3HiS : // Middle High-Angled Forward Tilt
@@ -21,7 +21,7 @@ void func_ovl3_8014F760(GObj *fighter_gobj)
         }
         else if (fp->ft_data->script1->script_info[0xA8].anim_id != 0)
         {
-            stick_angle = func_ovl2_800E8000(fp);
+            stick_angle = ftCommon_GetStickAngleRadians(fp);
 
             status_id = (stick_angle > FTCOMMON_ATTACKS3_3ANGLE_HI_MIN)  ? ftStatus_Common_AttackS3Hi  : // High-Angled Forward Tilt
                         (stick_angle < FTCOMMON_ATTACKS3_3ANGLE_LW_MIN)  ? ftStatus_Common_AttackS3Lw  : // Low-Angled Forward Tilt
@@ -41,7 +41,7 @@ bool32 func_ovl3_8014F8C0(GObj *fighter_gobj)
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS3_STICK_RANGE_MIN))
     {
-        if (((func_ovl2_800E8000(fp) < 0.0F) ? -func_ovl2_800E8000(fp) : func_ovl2_800E8000(fp)) <= 0.87266463F)
+        if (((ftCommon_GetStickAngleRadians(fp) < 0.0F) ? -ftCommon_GetStickAngleRadians(fp) : ftCommon_GetStickAngleRadians(fp)) <= 0.87266463F)
         {
             if (fp->item_hold != NULL)
             {

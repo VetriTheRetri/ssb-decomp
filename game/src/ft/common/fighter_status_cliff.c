@@ -55,7 +55,7 @@ void func_ovl3_80144C24(GObj *fighter_gobj)
 
     fp->proc_damage = func_ovl3_80144CF8;
 
-    func_ovl2_800E8098(fp, 4U);
+    ftCommon_SetCaptureFlags(fp, 4U);
 }
 
 void func_ovl3_80144CF8(GObj *fighter_gobj)
@@ -104,7 +104,7 @@ void func_ovl3_80144DF4(GObj *fighter_gobj)
 
     fp->proc_damage = func_ovl3_80144CF8;
 
-    func_ovl2_800E8098(fp, 4U);
+    ftCommon_SetCaptureFlags(fp, 4U);
 }
 
 bool32 func_ovl3_80144E84(GObj *fighter_gobj)

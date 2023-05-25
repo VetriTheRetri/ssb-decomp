@@ -8,7 +8,7 @@
 #define DARIANTOU_CHR_PLAYABLE_MAX 12
 #define GMMATCH_PLAYERS_MAX 4 // Global limit for simultaneous players in a match
 
-#define gmSaveChrMask(kind) (1 << kind)
+#define gmSaveChrMask(kind) (1 << (kind))
 
 #define GMSAVEINFO_CHARACTER_MASK_ALL \
 (                                     \
@@ -49,6 +49,20 @@ typedef enum gmPauseStatus
     gmPauseStatus_Unpause         // Player unpaused
 
 } gmPauseStatus;
+
+typedef enum gmMatchGameRules
+{
+    gmMatch_GameRule_Time,
+    gmMatch_GameRule_Stock,
+    gmMatch_GameRule_Bonus,
+    gmMatch_GameRule_1PGame
+
+} gmMatchGameRules;
+
+#define GMMATCH_GAMERULE_TIME    (1 << gmMatch_GameRule_Time)
+#define GMMATCH_GAMERULE_STOCK   (1 << gmMatch_GameRule_Stock)
+#define GMMATCH_GAMERULE_BONUS   (1 << gmMatch_GameRule_Bonus)
+#define GMMATCH_GAMERULE_1PGAME  (1 << gmMatch_GameRule_1PGame)
 
 typedef enum gmMatchGameType
 {
@@ -145,12 +159,16 @@ typedef struct gmPlayerBlock
     u8 unk_0x8;
     u8 unk_0x9;
     u8 unk_0xA;
+    u8 unk_0xB;
+    u8 unk_0xC;
+    u8 unk_pblock_0xD;
     s8 stock_count; // -1 = player has no stocks
     u8 is_rebirth_multi; // Respawn flag of multi-man enemy teams (Yoshi, Kirby, Fighting Polygons) in 1P mode
     s32 falls;
     s32 score; // Caps at positive 999, crashes if way too low
     s32 total_ko_player[GMMATCH_PLAYERS_MAX]; // KOs scored on other players
-    u8 filler_0x28[0x30 - 0x28];
+    s32 unk_pblock_0x28;
+    s32 unk_pblock_0x2C;
     s32 total_self_destruct; // Applied when damaging player's ID is -1 or GMMATCH_PLAYERS_MAX
     s32 total_damage_dealt; // Total damage dealt to all players
     s32 total_damage_all; // Damage received from all hazards
@@ -169,7 +187,7 @@ typedef struct gmMatchInfo
     u8 game_type;
     u8 gr_kind;
     u8 is_team_battle;
-    u8 match_type; // 1 = stock, 2 = time
+    u8 match_rules; // Series of flags; 0x1 = time, 0x2 = stock
     u8 unk_0x4;
     u8 unk_0x5;
     u8 unk_0x6;

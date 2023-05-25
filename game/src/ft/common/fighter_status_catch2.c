@@ -25,7 +25,7 @@ void func_ovl3_80149F04(GObj *fighter_gobj)
 
     fp->x192_flag_b3 = FALSE;
 
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     if (fp->proc_slope != NULL)
     {
@@ -57,7 +57,7 @@ void func_ovl3_8014A000(GObj *fighter_gobj)
 
     fp->status_vars.common.catchwait.throw_wait = FTCOMMON_CATCH_THROW_WAIT;
 
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     if ((fp->ft_kind == Ft_Kind_Link) || (fp->ft_kind == Ft_Kind_PolyLink))
     {

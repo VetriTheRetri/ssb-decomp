@@ -29,7 +29,7 @@ void func_ovl3_8014DD00(GObj *fighter_gobj)
         fp->command_vars.flags.flag2 = 0;
         fp->catch_gobj = NULL;
 
-        func_ovl2_800E8098(fp, 0U);
+        ftCommon_SetCaptureFlags(fp, 0U);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -46,7 +46,7 @@ void func_ovl3_8014DE30(GObj *fighter_gobj)
 
     fp->status_vars.common.throwff.is_turn = FALSE;
 
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_8014DE80(GObj *fighter_gobj)
@@ -55,7 +55,7 @@ void func_ovl3_8014DE80(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowAirFF, fighter_gobj->anim_frame, 1.0F, 0U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_8014DECC(GObj *fighter_gobj)
@@ -86,7 +86,7 @@ void func_ovl3_8014DF14(GObj *fighter_gobj, bool32 is_turn)
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, flags);
     ftAnim_Update(fighter_gobj);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     fp->command_vars.flags.flag2 = 0;
 

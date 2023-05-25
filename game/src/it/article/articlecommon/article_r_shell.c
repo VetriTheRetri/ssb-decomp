@@ -49,7 +49,7 @@ void func_ovl3_8017A3A0(GObj *article_gobj, GObj *fighter_gobj)
 void func_ovl3_8017A534(GObj *article_gobj)
 {
     s32 unused;
-    GObj *fighter_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+    GObj *fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
     GObj *victim_gobj;
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f *translate = &joint->translate;

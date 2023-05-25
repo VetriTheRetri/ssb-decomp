@@ -19,7 +19,7 @@ GObj *func_ovl3_80145990(GObj *fighter_gobj, u8 pickup_mask)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     GObj *pickup_gobj = NULL;
     ftItemPickup *item_pickup = &fp->attributes->item_pickup;
-    GObj *article_gobj = gOMObjCommonLinks[GObjLinkIndex_Article];
+    GObj *article_gobj = gOMObjCommonLinks[GObjLinkIndexArticle];
     f32 closest_item_dist = (f32)FLOAT_MAX;
     bool32 is_pickup;
     f32 current_item_dist;
@@ -91,7 +91,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        if (ap->type == 5)
+        if (ap->type == At_Type_Special)
         {
             switch (ap->at_kind)
             {
@@ -118,7 +118,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
             case At_Kind_Hammer:
                 fp->hammer_time = FTCOMMON_HAMMER_TIME_MAX;
 
-                func_ovl2_800E7AFC(0x2D);
+                ftSpecialItem_BGMSetPlay(ATHAMMER_BGM_ID);
                 break;
 
             default:

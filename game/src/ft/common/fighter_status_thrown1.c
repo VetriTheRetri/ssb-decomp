@@ -62,7 +62,7 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_que
 
         func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 
     this_fp->status_vars.common.thrown.status_id = status_id_queue;
 }
@@ -84,7 +84,7 @@ void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
 
         func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    func_ovl2_800E8098(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 
     if ((capture_fp->ft_kind == Ft_Kind_Mario)  ||
     (capture_fp->ft_kind == Ft_Kind_MetalMario) ||

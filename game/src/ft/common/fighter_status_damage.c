@@ -288,7 +288,7 @@ s32 func_ovl3_80140A94(f32 knockback)
 
 void func_ovl3_80140B00(Fighter_Struct *this_fp, f32 knockback, f32 angle)
 {
-    GObj *victim_gobj = func_ovl2_800E7ED4(this_fp->damage_player_number);
+    GObj *victim_gobj = ftCommon_GetPlayerNumGObj(this_fp->damage_player_number);
     bool32 unk_bool;
 
     this_fp->status_vars.common.damage.publicity_knockback = knockback;
@@ -629,7 +629,7 @@ next:
     }
     this_fp->status_vars.common.damage.coll_mask = 0;
 
-    attacker_gobj = func_ovl2_800E7ED4(damage_player_number);
+    attacker_gobj = ftCommon_GetPlayerNumGObj(damage_player_number);
 
     if (attacker_gobj != NULL)
     {

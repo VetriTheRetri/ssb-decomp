@@ -70,7 +70,7 @@ void func_ovl3_8014FFE0(GObj *fighter_gobj)
 
     if (fp->ft_data->script1->script_info[0xB2].anim_id != 0)
     {
-        stick_angle = func_ovl2_800E8000(fp);
+        stick_angle = ftCommon_GetStickAngleRadians(fp);
 
         status_id = (stick_angle > FTCOMMON_ATTACKS4_5ANGLE_HI_MIN)  ? ftStatus_Common_AttackS4Hi  :
                     (stick_angle > FTCOMMON_ATTACKS4_5ANGLE_HIS_MIN) ? ftStatus_Common_AttackS4HiS :
@@ -80,7 +80,7 @@ void func_ovl3_8014FFE0(GObj *fighter_gobj)
     }
     else if (fp->ft_data->script1->script_info[0xB1].anim_id != 0)
     {
-        stick_angle = func_ovl2_800E8000(fp);
+        stick_angle = ftCommon_GetStickAngleRadians(fp);
 
         status_id = (stick_angle > FTCOMMON_ATTACKS4_3ANGLE_HI_MIN)  ? ftStatus_Common_AttackS4Hi  :
                     (stick_angle < FTCOMMON_ATTACKS4_3ANGLE_LW_MIN)  ? ftStatus_Common_AttackS4Lw  :
@@ -183,19 +183,19 @@ bool32 func_ovl3_8015030C(GObj *fighter_gobj)
             switch (ap->type)
             {
             case At_Type_Swing:
-                func_ovl2_800E8044(fp);
+                ftCommon_StickInputSetLR(fp);
                 func_ovl3_80146E94(fighter_gobj, 2);
                 return TRUE;
 
             case At_Type_Shoot:
-                func_ovl2_800E8044(fp);
+                ftCommon_StickInputSetLR(fp);
                 func_ovl3_80147844(fighter_gobj);
                 return TRUE;
             }
         }
         if (attributes->is_have_attacks4)
         {
-            func_ovl2_800E8044(fp);
+            ftCommon_StickInputSetLR(fp);
             func_ovl3_8014FFE0(fighter_gobj);
 
             return TRUE;
@@ -226,19 +226,19 @@ bool32 func_ovl3_80150470(GObj *fighter_gobj)
             switch (ap->type)
             {
             case At_Type_Swing:
-                func_ovl2_800E8044(fp);
+                ftCommon_StickInputSetLR(fp);
                 func_ovl3_80146E94(fighter_gobj, 2);
                 return TRUE;
 
             case At_Type_Shoot:
-                func_ovl2_800E8044(fp);
+                ftCommon_StickInputSetLR(fp);
                 func_ovl3_80147844(fighter_gobj);
                 return TRUE;
             }
         }
         if (attributes->is_have_attacks4)
         {
-            func_ovl2_800E8044(fp);
+            ftCommon_StickInputSetLR(fp);
             func_ovl3_8014FFE0(fighter_gobj);
 
             return TRUE;

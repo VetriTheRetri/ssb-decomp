@@ -252,7 +252,7 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
     }
     else
     {
-        fighter_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+        fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
         translate = &aj->translate;
 
@@ -359,7 +359,7 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
     }
     else
     {
-        fighter_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+        fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
         translate = &aj->translate;
 

@@ -40,7 +40,7 @@ bool32 func_ovl3_8017CFDC(GObj *article_gobj)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        GObj *fighter_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+        GObj *fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
         f32 pos_x = ap->article_vars.pakkun.pos.x, pos_y = ap->article_vars.pakkun.pos.y;
 

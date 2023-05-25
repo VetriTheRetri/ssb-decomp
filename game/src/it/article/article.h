@@ -125,8 +125,8 @@ typedef enum atType
     At_Type_Swing,      // Article can be thrown and swung
     At_Type_Shoot,      // Article can be fired
     At_Type_Throw,      // Article can only be thrown
-    At_Type_Touch,   // Article has special properties on interaction
-    At_Type_Unk3,
+    At_Type_Touch,      // Article has special properties on interaction
+    At_Type_Special,    // Hammer, Heart and Maxim Tomato?
     At_Type_FtItem      // Article spawned by fighter's item (projectile) ?
 
 } atType; 

@@ -12,7 +12,7 @@ void (*ftCommon_SpecialLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80160128,
     jtgt_ovl3_80161A94,
     jtgt_ovl3_80151FBC,
-    jtgt_ovl3_801517E4,
+    ftPurin_SpecialLw_SetStatus,
     ftNess_SpeciaLwStart_SetStatus,
     ftMario_SpecialLw_SetStatus,
     ftMario_SpecialLw_SetStatus,
@@ -26,7 +26,7 @@ void (*ftCommon_SpecialLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80160128,
     jtgt_ovl3_80161A94,
     jtgt_ovl3_80151FBC,
-    jtgt_ovl3_801517E4,
+    ftPurin_SpecialLw_SetStatus,
     ftNess_SpeciaLwStart_SetStatus,
     jtgt_ovl3_8015BAFC
 };

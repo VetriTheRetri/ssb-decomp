@@ -23,7 +23,7 @@ static u16 D_ovl3_8018CFE8;
 bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
 {
     Fighter_Struct *fp;
-    GObj *fighter_gobj = func_ovl2_800E7ED4(player_id);
+    GObj *fighter_gobj = ftCommon_GetPlayerNumGObj(player_id);
     u16 sfx_id;
 
     if (fighter_gobj == NULL)
@@ -258,7 +258,7 @@ void func_ovl3_80165134(s32 arg0)
     }
     D_8018CFC0_prev = D_ovl3_8018CFC0;
     D_ovl3_8018CFC0 = 0;
-    gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+    gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
     var_gobj = NULL;
 
@@ -268,7 +268,7 @@ void func_ovl3_80165134(s32 arg0)
         {
             Fighter_Struct *fp = FighterGetStruct(gobj);
 
-            if (!(Match_Info->match_type & 2) || (fp->stock_count != -1))
+            if (!(Match_Info->match_rules & GMMATCH_GAMERULE_STOCK) || (fp->stock_count != -1))
             {
                 if (DObjGetStruct(gobj)->translate.y < (D_ovl2_80131308.unk_80131308_0x24 - 100.0F)) // 0x80131308 = stage data?
                 {
@@ -280,7 +280,8 @@ void func_ovl3_80165134(s32 arg0)
                 }
             }
             gobj = (GObj *)gobj->group_gobj_next;
-        } while (gobj != NULL);
+        } 
+        while (gobj != NULL);
     }
     if ((D_8018CFC0_prev < 3) && (D_ovl3_8018CFC0 >= 3))
     {

@@ -64,7 +64,7 @@ glabel func_ovl7_8018D0E8
   /* 113990 8018D170 8D8C50E8 */        lw $t4, %lo(Match_Info)($t4)
   /* 113994 8018D174 8FAD0018 */        lw $t5, 0x18($sp)
   /* 113998 8018D178 018D7021 */      addu $t6, $t4, $t5
-  /* 11399C 8018D17C 0C039FC5 */       jal func_ovl2_800E7F14
+  /* 11399C 8018D17C 0C039FC5 */       jal ftCommon_ResetControllerInputs
   /* 1139A0 8018D180 8DC40078 */        lw $a0, 0x78($t6)
   /* 1139A4 8018D184 3C188019 */       lui $t8, %hi(D_ovl7_80190B78)
   /* 1139A8 8018D188 8F180B78 */        lw $t8, %lo(D_ovl7_80190B78)($t8)
@@ -76,7 +76,7 @@ glabel func_ovl7_8018D0E8
   /* 1139C0 8018D1A0 0338C821 */      addu $t9, $t9, $t8
   /* 1139C4 8018D1A4 0019C880 */       sll $t9, $t9, 2
   /* 1139C8 8018D1A8 01F94021 */      addu $t0, $t7, $t9
-  /* 1139CC 8018D1AC 0C039FC5 */       jal func_ovl2_800E7F14
+  /* 1139CC 8018D1AC 0C039FC5 */       jal ftCommon_ResetControllerInputs
   /* 1139D0 8018D1B0 8D040078 */        lw $a0, 0x78($t0)
   /* 1139D4 8018D1B4 3C0A800A */       lui $t2, %hi(Match_Info)
   /* 1139D8 8018D1B8 8D4A50E8 */        lw $t2, %lo(Match_Info)($t2)
@@ -3421,20 +3421,20 @@ glabel func_ovl7_801900C4
 
 glabel func_ovl7_80190164
   /* 116984 80190164 27BDFFE8 */     addiu $sp, $sp, -0x18
-  /* 116988 80190168 3C028013 */       lui $v0, %hi(D_ovl2_801313A0)
-  /* 11698C 8019016C 244213A0 */     addiu $v0, $v0, %lo(D_ovl2_801313A0)
+  /* 116988 80190168 3C028013 */       lui $v0, %hi(gmMusicIndexDefault)
+  /* 11698C 8019016C 244213A0 */     addiu $v0, $v0, %lo(gmMusicIndexDefault)
   /* 116990 80190170 AFBF0014 */        sw $ra, 0x14($sp)
   /* 116994 80190174 2405002A */     addiu $a1, $zero, 0x2a
-  /* 116998 80190178 AC450000 */        sw $a1, ($v0) # D_ovl2_801313A0 + 0
+  /* 116998 80190178 AC450000 */        sw $a1, ($v0) # gmMusicIndexDefault + 0
   /* 11699C 8019017C 0C0082AD */       jal func_80020AB4
   /* 1169A0 80190180 00002025 */        or $a0, $zero, $zero
   /* 1169A4 80190184 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 1169A8 80190188 3C0F8013 */       lui $t7, %hi(D_ovl2_801313A0)
-  /* 1169AC 8019018C 8DEF13A0 */        lw $t7, %lo(D_ovl2_801313A0)($t7)
-  /* 1169B0 80190190 3C018013 */       lui $at, %hi(D_ovl2_8013139C)
+  /* 1169A8 80190188 3C0F8013 */       lui $t7, %hi(gmMusicIndexDefault)
+  /* 1169AC 8019018C 8DEF13A0 */        lw $t7, %lo(gmMusicIndexDefault)($t7)
+  /* 1169B0 80190190 3C018013 */       lui $at, %hi(gmMusicIndexCurrent)
   /* 1169B4 80190194 27BD0018 */     addiu $sp, $sp, 0x18
   /* 1169B8 80190198 03E00008 */        jr $ra
-  /* 1169BC 8019019C AC2F139C */        sw $t7, %lo(D_ovl2_8013139C)($at)
+  /* 1169BC 8019019C AC2F139C */        sw $t7, %lo(gmMusicIndexCurrent)($at)
 
 glabel func_ovl7_801901A0
   /* 1169C0 801901A0 27BDFFE0 */     addiu $sp, $sp, -0x20
@@ -3638,7 +3638,7 @@ glabel func_ovl7_80190260
   /* 116CAC 8019048C 0C035FCF */       jal func_ovl2_800D7F3C
   /* 116CB0 80190490 A3AD007B */        sb $t5, 0x7b($sp)
   /* 116CB4 80190494 02002025 */        or $a0, $s0, $zero
-  /* 116CB8 80190498 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 116CB8 80190498 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 116CBC 8019049C 00402825 */        or $a1, $v0, $zero
   .L801904A0:
   /* 116CC0 801904A0 26100001 */     addiu $s0, $s0, 1

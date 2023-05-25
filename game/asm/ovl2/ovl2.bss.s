@@ -415,9 +415,9 @@ glabel D_ovl2_80131394
     .space 4
 glabel D_ovl2_80131398
     .space 4
-glabel D_ovl2_8013139C
+glabel gmMusicIndexCurrent
     .space 4
-glabel D_ovl2_801313A0
+glabel gmMusicIndexDefault
     .space 16
 glabel D_ovl2_801313B0
     .space 4

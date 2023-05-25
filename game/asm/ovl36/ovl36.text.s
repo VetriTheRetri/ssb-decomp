@@ -490,7 +490,7 @@ glabel func_ovl36_8018D614
   /* 166E14 8018D7E4 AC22E210 */        sw $v0, %lo(D_ovl36_8018E210)($at)
   /* 166E18 8018D7E8 00408025 */        or $s0, $v0, $zero
   /* 166E1C 8018D7EC 02202025 */        or $a0, $s1, $zero
-  /* 166E20 8018D7F0 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 166E20 8018D7F0 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 166E24 8018D7F4 00402825 */        or $a1, $v0, $zero
   /* 166E28 8018D7F8 3C058019 */       lui $a1, %hi(D_ovl36_8018E0C8)
   /* 166E2C 8018D7FC 24A5E0C8 */     addiu $a1, $a1, %lo(D_ovl36_8018E0C8)

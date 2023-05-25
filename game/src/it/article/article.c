@@ -1275,7 +1275,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_FIGHTER)
     {
-        fighter_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+        fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
         if (fighter_gobj != NULL)
         {
@@ -1371,7 +1371,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
 
     if (this_ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ARTICLE)
     {
-        other_gobj = gOMObjCommonLinks[GObjLinkIndex_Article];
+        other_gobj = gOMObjCommonLinks[GObjLinkIndexArticle];
 
         is_check_self = FALSE;
 
@@ -1495,7 +1495,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
     {
-        item_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
+        item_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
 
         if (item_gobj != NULL)
         {
@@ -1720,7 +1720,7 @@ next_check:
 
     if (ap->damage_taken_last != 0)
     {
-        ap->hitlag_timer = func_ovl2_800EA1C0(ap->damage_taken_last, 10, 1.0F);
+        ap->hitlag_timer = func_ovl2_800EA1C0(ap->damage_taken_last, ftStatus_Common_Wait, 1.0F); // Maybe 10 is the "none" status ID?
     }
 
     ap->hit_victim_damage = 0;

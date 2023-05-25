@@ -4,12 +4,12 @@
 bool32 func_ovl3_8013D580(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    s32 steal_from_port_id[4];
+    s32 steal_from_port_id[GMMATCH_PLAYERS_MAX];
     s32 active_teammate_count;
     s32 port_id;
     s32 stock_count;
 
-    if ((Match_Info->match_type & 2) && (Match_Info->is_team_battle == TRUE) && (fp->status_info.status_id == ftStatus_Common_Sleep))
+    if ((Match_Info->match_rules & GMMATCH_GAMERULE_STOCK) && (Match_Info->is_team_battle == TRUE) && (fp->status_info.status_id == ftStatus_Common_Sleep))
     {
         if (fp->status_vars.common.sleep.stock_steal_wait == 0)
         {
@@ -44,12 +44,12 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *steal_gobj;
     s32 active_teammate_count;
-    s32 steal_from_port_id[4];
+    s32 steal_from_port_id[GMMATCH_PLAYERS_MAX];
     s32 port_id;
     s32 random_steal_target;
     s32 stock_count;
 
-    if ((Match_Info->match_type & 2) && (Match_Info->is_team_battle == TRUE))
+    if ((Match_Info->match_rules & GMMATCH_GAMERULE_STOCK) && (Match_Info->is_team_battle == TRUE))
     {
         if (this_fp->status_vars.common.sleep.stock_steal_wait != 0)
         {
@@ -69,8 +69,8 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
             {
                 for (active_teammate_count = 0, stock_count = 0, port_id = 0; port_id < ARRAY_COUNT(Match_Info->player_block); port_id++)
                 {
-                    if ((port_id != this_fp->port_id) && (Match_Info->player_block[port_id].player_kind != 2) && (this_fp->team == Match_Info->player_block[port_id].port_id)) {
-
+                    if ((port_id != this_fp->port_id) && (Match_Info->player_block[port_id].player_kind != 2) && (this_fp->team == Match_Info->player_block[port_id].port_id)) 
+                    {
                         if (Match_Info->player_block[port_id].stock_count > 0)
                         {
                             if (stock_count < Match_Info->player_block[port_id].stock_count)

@@ -1315,9 +1315,9 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
                 func_ovl2_800E98D4(fighter_gobj);
             }
         }
-        else if (this_fp->star_invincible_timer == (ATSTAR_INVINCIBLE_TIME - ATSTAR_WARN_BEGIN_FRAME))
+        else if (this_fp->star_invincible_timer == ATSTAR_WARN_BEGIN_FRAME)
         {
-            func_ovl2_800E7B54();
+            ftSpecialItem_BGMCheckFighters();
         }
     }
     if (this_fp->damage_heal != 0)
@@ -1349,11 +1349,11 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
     {
         this_fp->shuffle_timer--;
 
-        this_fp->unk_ft_0x272++;
+        this_fp->shuffle_frame_index++;
 
-        if (this_fp->unk_ft_0x272 == this_fp->unk_ft_0x273)
+        if (this_fp->shuffle_frame_index == this_fp->shuffle_index_max)
         {
-            this_fp->unk_ft_0x272 = 0U;
+            this_fp->shuffle_frame_index = 0U;
         }
     }
     if (this_fp->proc_gfx != NULL)
@@ -1385,7 +1385,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
         if ((this_fp->ground_or_air == ground) && !(this_fp->x18F_flag_b4))
         {
-            other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+            other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
             is_check_self = FALSE;
 
@@ -2398,7 +2398,7 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
             ap->hit_victim_damage = 1;
 
             func_ovl2_800EA8B0(fp, ATSTAR_INVINCIBLE_TIME);
-            func_ovl2_800E7AFC(0x2E);
+            ftSpecialItem_BGMSetPlay(0x2E);
             func_800269C0(0x36U);
 
             if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936AA < U8_MAX))
@@ -2878,7 +2878,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
     bool32 is_check_self;
 
     this_fp = FighterGetStruct(this_gobj);
-    other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+    other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
     is_check_self = FALSE;
 
     while (other_gobj != NULL)
@@ -3092,7 +3092,7 @@ void func_ovl2_800E4ED4(GObj *fighter_gobj)
     s32 unused1[4];
 
     fp = FighterGetStruct(fighter_gobj);
-    item_gobj = gOMObjCommonLinks[GObjLinkIndex_Item];
+    item_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
 
     while (item_gobj != NULL)
     {
@@ -3278,7 +3278,7 @@ void func_ovl2_800E55DC(GObj *fighter_gobj)
     s32 unused1[4];
 
     fp = FighterGetStruct(fighter_gobj);
-    article_gobj = gOMObjCommonLinks[GObjLinkIndex_Article];
+    article_gobj = gOMObjCommonLinks[GObjLinkIndexArticle];
 
     while (article_gobj != NULL)
     {
@@ -3532,7 +3532,7 @@ void func_ovl2_800E5E58(GObj *this_gobj)
     this_fp->search_gobj = NULL;
     this_fp->search_gobj_dist = (f32)FLOAT_MAX;
 
-    other_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+    other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
     while (other_gobj != NULL)
     {
@@ -3738,7 +3738,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         damage = fp->unk_ft_0x7DC;
         sp84 = 1;
 
-        func_ovl2_800E7F88(fp, (fp->damage_element == gmHitCollision_Element_Electric) ? TRUE : FALSE, damage, status_id, fp->hitlag_mul);
+        ftCommon_SetShuffleInfo(fp, (fp->damage_element == gmHitCollision_Element_Electric) ? TRUE : FALSE, damage, status_id, fp->hitlag_mul);
 
         if ((s32)((fp->damage_taken_recent * 0.75F) + 4.0F) > 0)
         {
@@ -4209,8 +4209,8 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     ftIntroStatusDesc *unk_callback;
     f32 anim_frame;
     s32 status_struct_id;
-    s32 var_v0_3;
-    s32 var_v1;
+    s32 anim_flags_update;
+    s32 anim_flags_bak;
     s32 var_s0_2;
     gmAttackFlags status_flags;
     gmAttackFlags attack_flags;
@@ -4340,7 +4340,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     fp->x190_flag_b6 = TRUE;
     fp->x190_flag_b7 = FALSE;
 
-    func_ovl2_800E8098(fp, 0);
+    ftCommon_SetCaptureFlags(fp, 0);
 
     fp->is_stat_nodamage = FALSE;
     fp->is_damage_resist = FALSE;
@@ -4474,20 +4474,20 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 
         if (fp->x9CC != NULL)
         {
-            var_v1 = fp->anim_flags.word & 0xFFFFFFE0;
+            anim_flags_bak = fp->anim_flags.word & 0xFFFFFFE0;
             fp->anim_flags.word = script_info->anim_flags.word;
-            var_v0_3 = fp->anim_flags.word & 0xFFFFFFE0;
+            anim_flags_update = fp->anim_flags.word & 0xFFFFFFE0;
 
-            for (i = 0; ((var_v1 != 0) || (var_v0_3 != 0)); i++, var_v0_3 <<= 1, var_v1 <<= 1)
+            for (i = 0; ((anim_flags_bak != 0) || (anim_flags_update != 0)); i++, anim_flags_update <<= 1, anim_flags_bak <<= 1)
             {
-                if (!(var_v1 & (1 << 31)))
+                if (!(anim_flags_bak & (1 << 31)))
                 {
-                    if (var_v0_3 & (1 << 31))
+                    if (anim_flags_update & (1 << 31))
                     {
                         func_ovl2_800E69C4(fp, i);
                     }
                 }
-                else if (var_v0_3 & (1 << 31))
+                else if (anim_flags_update & (1 << 31))
                 {
                     func_ovl2_800E6CE0(fp, i);
                 }

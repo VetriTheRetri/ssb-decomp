@@ -1025,14 +1025,14 @@ struct Fighter_Struct
     s8 breakout_lr; // Whether victim is mashing left or right
     s8 breakout_ud; // Whether victim is mashing up or down
 
-    u8 unk_ft_0x272;
-    u8 unk_ft_0x273;
-    s8 unk_0x274;
-    u16 shuffle_timer; // Model shift timer
+    u8 shuffle_frame_index; // Ranges from 0-3; position of fighter's model vibration is adjusted based on this index when receiving hitlag
+    u8 shuffle_index_max;   // How many iterations the frame index increments before looping back to 0;
+    s8 is_shuffle_electric; // Fighter vibrates horizontally instead of vertically if hit by an electric attack
+    s16 shuffle_timer; // Model shift timer
     GObj *throw_gobj;
     ftKind throw_ft_kind;
     u8 throw_team; // Thrower's team?
-    u8 throw_port_id; 
+    u8 throw_port_id;
     s32 throw_player_number;
     s32 attack_id;
 
@@ -1221,7 +1221,6 @@ struct Fighter_Struct
     } status_vars;
 
     s32 display_state;
-
 };
 
 #define FighterGetStruct(fighter_gobj) \

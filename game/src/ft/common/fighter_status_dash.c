@@ -102,7 +102,7 @@ bool32 func_ovl3_8013ED64(GObj *fighter_gobj)
 
             return TRUE;
         }
-        func_ovl2_800E8044(fp);
+        ftCommon_StickInputSetLR(fp);
         func_ovl3_8013ED00(fighter_gobj, 1);
 
         return TRUE;

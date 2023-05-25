@@ -49,9 +49,9 @@ void func_ovl3_80161E3C(Fighter_Struct *fp)
 {
     if (fp->ground_or_air == ground)
     {
-        func_ovl2_800E80A4(fp, 2, func_ovl3_801631E4, func_ovl3_8014B968);
+        ftCommon_SetCatchVars(fp, 2, func_ovl3_801631E4, func_ovl3_8014B968);
     }
-    else func_ovl2_800E80A4(fp, 2, func_ovl3_80163430, func_ovl3_8014B968);
+    else ftCommon_SetCatchVars(fp, 2, func_ovl3_80163430, func_ovl3_8014B968);
 }
 
 void func_ovl3_80161E94(GObj *fighter_gobj)
@@ -503,7 +503,7 @@ void func_ovl3_80162A6C(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162ABC(GObj *fighter_gobj)
@@ -528,7 +528,7 @@ void func_ovl3_80162B50(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162BA0(GObj *fighter_gobj)
@@ -537,7 +537,7 @@ void func_ovl3_80162BA0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, 4U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162BF0(GObj *fighter_gobj)
@@ -546,7 +546,7 @@ void func_ovl3_80162BF0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNHit, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162C40(GObj *fighter_gobj)
@@ -555,7 +555,7 @@ void func_ovl3_80162C40(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNHit, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162C90(GObj *fighter_gobj)
@@ -564,7 +564,7 @@ void func_ovl3_80162C90(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, 4U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162CE0(GObj *fighter_gobj)
@@ -573,7 +573,7 @@ void func_ovl3_80162CE0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162D30(GObj *fighter_gobj)
@@ -582,7 +582,7 @@ void func_ovl3_80162D30(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162D80(GObj *fighter_gobj)
@@ -591,7 +591,7 @@ void func_ovl3_80162D80(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNWait, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162DD0(GObj *fighter_gobj)
@@ -600,7 +600,7 @@ void func_ovl3_80162DD0(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNWait, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162E20(GObj *fighter_gobj)
@@ -609,7 +609,7 @@ void func_ovl3_80162E20(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNTurn, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162E70(GObj *fighter_gobj)
@@ -618,7 +618,7 @@ void func_ovl3_80162E70(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNTurn, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162EC0(GObj *fighter_gobj)
@@ -627,7 +627,7 @@ void func_ovl3_80162EC0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNCopy, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162F10(GObj *fighter_gobj)
@@ -636,7 +636,7 @@ void func_ovl3_80162F10(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNCopy, fighter_gobj->anim_frame, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 }
 
 void func_ovl3_80162F60(GObj *fighter_gobj)
@@ -672,7 +672,7 @@ void func_ovl3_80163018(GObj *fighter_gobj, s32 status_id)
     Vec3f pos = D_ovl3_80188E00; // Never used???
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x40U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     if (fp->proc_slope != NULL)
     {
@@ -687,7 +687,7 @@ void func_ovl3_801630A0(GObj *fighter_gobj, s32 status_id)
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x864U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
 
     fp->catch_gobj = fp->search_gobj;
 
@@ -734,7 +734,7 @@ void func_ovl3_80163224(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNRelease, 0.0F, 1.0F, 0xA4U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -743,7 +743,7 @@ void func_ovl3_80163274(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNWait, 0.0F, 1.0F, 0xA0U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -752,7 +752,7 @@ void func_ovl3_801632C4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNTurn, 0.0F, 1.0F, 0xA4U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -761,7 +761,7 @@ void func_ovl3_80163314(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNCopy, 0.0F, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -801,7 +801,7 @@ void func_ovl3_80163470(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNRelease, 0.0F, 1.0F, 0xA4U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -810,7 +810,7 @@ void func_ovl3_801634C0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNWait, 0.0F, 1.0F, 0xA0U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -819,7 +819,7 @@ void func_ovl3_80163510(GObj *fighter_gobj) // Unused
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNTurn, 0.0F, 1.0F, 0xA4U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -828,7 +828,7 @@ void func_ovl3_80163560(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNCopy, 0.0F, 1.0F, 0x24U);
-    func_ovl2_800E8098(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, 0x3FU);
     ftAnim_Update(fighter_gobj);
 }
 

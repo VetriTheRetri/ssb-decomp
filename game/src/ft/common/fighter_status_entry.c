@@ -229,7 +229,7 @@ void func_ovl3_8013DBE0(GObj *fighter_gobj)
         break;
 
     case Ft_Kind_MasterHand:
-        mh_target_gobj = gOMObjCommonLinks[GObjLinkIndex_Fighter];
+        mh_target_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
 
         while (mh_target_gobj != NULL)
         {

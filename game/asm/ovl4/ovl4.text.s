@@ -290,7 +290,7 @@ glabel func_ovl4_8018D228
   /* 10A3C0 8018D4D0 0C035FCF */       jal func_ovl2_800D7F3C
   /* 10A3C4 8018D4D4 02802025 */        or $a0, $s4, $zero
   /* 10A3C8 8018D4D8 02002025 */        or $a0, $s0, $zero
-  /* 10A3CC 8018D4DC 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 10A3CC 8018D4DC 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 10A3D0 8018D4E0 00402825 */        or $a1, $v0, $zero
   .L8018D4E4:
   /* 10A3D4 8018D4E4 26100001 */     addiu $s0, $s0, 1
@@ -1097,7 +1097,7 @@ glabel func_ovl4_8018DE20
   /* 10AF18 8018E028 0C035FCF */       jal func_ovl2_800D7F3C
   /* 10AF1C 8018E02C 02802025 */        or $a0, $s4, $zero
   /* 10AF20 8018E030 02002025 */        or $a0, $s0, $zero
-  /* 10AF24 8018E034 0C039F13 */       jal func_ovl2_800E7C4C
+  /* 10AF24 8018E034 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
   /* 10AF28 8018E038 00402825 */        or $a1, $v0, $zero
   /* 10AF2C 8018E03C 8E4C0000 */        lw $t4, ($s2) # Match_Info + 0
   /* 10AF30 8018E040 01916821 */      addu $t5, $t4, $s1

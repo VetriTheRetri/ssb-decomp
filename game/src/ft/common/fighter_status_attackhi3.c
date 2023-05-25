@@ -27,7 +27,7 @@ bool32 func_ovl3_8014FB1C(GObj *fighter_gobj)
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (fp->input.pl.stick_range.y >= FTCOMMON_ATTACKHI3_STICK_RANGE_MIN))
     {
-        if (func_ovl2_800E8000(fp) > 0.87266463F)
+        if (ftCommon_GetStickAngleRadians(fp) > 0.87266463F)
         {
             if (func_ovl3_80146A8C(fp) != FALSE)
             {

@@ -308,7 +308,7 @@ void func_ovl3_8015C4DC(GObj *fighter_gobj)
 
         if (!(vec3f_angle_diff(&fp->coll_data.ground_angle, &sp38) < HALF_PI32))
         {
-            func_ovl2_800E8044(fp);
+            ftCommon_StickInputSetLR(fp);
             ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialHi, 0.0F, 1.0F, 2U);
             func_ovl3_8015C4C8(fp);
 
@@ -345,7 +345,7 @@ void func_ovl3_8015C60C(GObj *fighter_gobj)
 
         if (stick_x_2 >= FTFOX_FIREFOX_MODEL_STICK_THRESHOLD)
         {
-            func_ovl2_800E8044(fp);
+            ftCommon_StickInputSetLR(fp);
         }
         fp->status_vars.fox.specialhi.angle = atan2f((f32)fp->input.pl.stick_range.y, (f32)(fp->input.pl.stick_range.x * fp->lr));
     }

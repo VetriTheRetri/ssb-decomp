@@ -45,7 +45,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
         fp->joint[0]->rotate.y = fp->lr * HALF_PI32;
     }
 
-    angle = func_ovl2_800E8000(fp);
+    angle = ftCommon_GetStickAngleRadians(fp);
 
     fp_target = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj);
 

@@ -12,7 +12,7 @@ void (*ftKirby_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80160B70, // Captain Faclon
     jtgt_ovl3_801633A0, // Kirby
     jtgt_ovl3_80153908, // Pikachu
-    jtgt_ovl3_80151B04, // Jigglypuff
+    ftKirby_CopyPurin_SpecialAirN_SetStatus, // Jigglypuff
     ftKirby_CopyNess_SpecialAirN_SetStatus, // Ness
     jtgt_ovl3_801633A0, // Master Hand
     ftKirby_CopyMario_SpecialAirN_SetStatus, // Metal Mario
@@ -43,7 +43,7 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8015FBC0,
     jtgt_ovl3_80150ED0,
     jtgt_ovl3_80151D64,
-    jtgt_ovl3_80151504,
+    ftPurin_SpecialAirN_SetStatus,
     ftNess_SpecialAirN_SetStatus,
     ftMario_SpecialAirN_SetStatus,
     ftMario_SpecialAirN_SetStatus,
@@ -57,7 +57,7 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8015FBC0,
     jtgt_ovl3_80150ED0,
     jtgt_ovl3_80151D64,
-    jtgt_ovl3_80151504,
+    ftPurin_SpecialAirN_SetStatus,
     ftNess_SpecialAirN_SetStatus,
     jtgt_ovl3_8015B674
 };
@@ -74,7 +74,7 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801607B4,
     jtgt_ovl3_80161270,
     jtgt_ovl3_801529EC,
-    jtgt_ovl3_801516D8,
+    ftPurin_SpecialAirHi_SetStatus,
     ftNess_SpecialAirHiStart_SetStatus,
     ftMario_SpecialAirN_SetStatus,
     ftMario_SpecialAirHi_SetStatus,
@@ -88,7 +88,7 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801607B4,
     jtgt_ovl3_80161270,
     jtgt_ovl3_801529EC,
-    jtgt_ovl3_801516D8,
+    ftPurin_SpecialAirHi_SetStatus,
     ftNess_SpecialAirHiStart_SetStatus,
     jtgt_ovl3_8015B9B8
 };
@@ -105,7 +105,7 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8016020C,
     jtgt_ovl3_80161B70,
     jtgt_ovl3_80151FFC,
-    jtgt_ovl3_8015181C,
+    ftPurin_SpecialAirLw_SetStatus,
     ftNess_SpecialAirLwStart_SetStatus,
     ftMario_SpecialAirLw_SetStatus,
     ftMario_SpecialAirLw_SetStatus,
@@ -119,7 +119,7 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8016020C,
     jtgt_ovl3_80161B70,
     jtgt_ovl3_80151FFC,
-    jtgt_ovl3_8015181C,
+    ftPurin_SpecialAirLw_SetStatus,
     ftNess_SpecialAirLwStart_SetStatus,
     NULL
 };
@@ -162,7 +162,7 @@ bool32 func_ovl3_80150F08(GObj *fighter_gobj)
             {
                 if ((fp->input.pl.stick_range.x * fp->lr) < FTCOMMON_SPECIALN_TURN_STICK_RANGE_MIN)
                 {
-                    func_ovl2_800E8044(fp);
+                    ftCommon_StickInputSetLR(fp);
                 }
                 ftCommon_SpecialAirN_StatusList[fp->ft_kind](fighter_gobj);
 
