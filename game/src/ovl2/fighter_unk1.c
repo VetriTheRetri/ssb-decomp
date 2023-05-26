@@ -650,7 +650,7 @@ void ftCommon_UpdateFighterHurtPartIndex(GObj *fighter_gobj, s32 joint_index, Ve
 
             fp->is_fthurt_modify = TRUE;
 
-            break;
+            return; // The same oversight as ftCommon_SetHitStatusPart except this time on hurtbox offset and size
         }
     }
 }

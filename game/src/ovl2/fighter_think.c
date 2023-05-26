@@ -128,8 +128,8 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_SetHitOffset:
-
         hit_id = gmScriptEventCast(p_event, gmScriptEventSetHitOffset1)->hit_id;
+
         ft_hit = &fp->fighter_hit[hit_id];
 
         ft_hit->offset.x = gmScriptEventCast(p_event, gmScriptEventSetHitOffset1)->off_x;
@@ -143,7 +143,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_SetHitDamage:
-
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
             hit_id = gmScriptEventCast(p_event, gmScriptEventSetHitDamage)->hit_id;
@@ -159,7 +158,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_SetHitSize:
-
         hit_id = gmScriptEventCast(p_event, gmScriptEventSetHitSize)->hit_id;
 
         fp->fighter_hit[hit_id].size = gmScriptEventCast(p_event, gmScriptEventSetHitSize)->size * 0.5F;
@@ -236,14 +234,12 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
         break;
 
-    case gmScriptEvent_Kind_UnkPlaySFX2:
-
+    case gmScriptEvent_Kind_StopLoopSFX:
         ftCommon_StopLoopSFX(fp), gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
 
         break;
 
     case gmScriptEvent_Kind_PlayVoiceStoreInfo:
-
         if (!(fp->is_playing_sfx) && (fp->attributes->is_have_voice))
         {
             ftCommon_PlayVoiceStoreInfo(fp, gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
@@ -273,7 +269,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_SetAirJumpAdd:
-
         fp->ground_or_air = air;
 
         fp->phys_info.vel_air.z = DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
@@ -285,7 +280,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_SetAirJumpMax:
-
         attributes = fp->attributes;
 
         fp->ground_or_air = air;
@@ -300,7 +294,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
     case gmScriptEvent_Kind_GFX:
     case gmScriptEvent_Kind_GFXPersist:
-
         if (!(fp->is_playing_gfx))
         {
             joint_index = ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->joint_index);
@@ -330,7 +323,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
         break;
 
-    case gmScriptEvent_Kind_ResetHitStatusAll:
+    case gmScriptEvent_SetHitStatusPartAll:
         ftCommon_SetHitStatusPartAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hit_status);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusAll);
@@ -378,7 +371,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_LoopBegin:
-
         p_event->p_goto[p_event->script_index] = (void*) ((uintptr_t)p_event->p_script + sizeof(gmScriptEventLoopBegin));
 
         p_event->script_index++;
@@ -388,7 +380,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_LoopEnd:
-
         if (--p_event->loop_count[p_event->script_index - 2] != 0)
         {
             p_event->p_script = p_event->p_goto[p_event->script_index - 2];
@@ -398,7 +389,6 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_Subroutine:
-
         gmScriptEventUpdatePtr(p_event, gmScriptEventSubroutine1);
 
         p_event->p_goto[p_event->script_index] = (void*) ((uintptr_t)p_event->p_script + sizeof(gmScriptEventSubroutine2));
@@ -414,26 +404,25 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         {
             ft_kind = fp->throw_ft_kind;
 
-            gmScriptEventUpdatePtr(p_event, gmScriptEventDamageUnk1);
+            gmScriptEventUpdatePtr(p_event, gmScriptEventSubroutineThrown1);
 
-            p_damage = gmScriptEventCast(p_event, gmScriptEventDamageUnk2)->p_subroutine;
+            p_damage = gmScriptEventCast(p_event, gmScriptEventSubroutineThrown2)->p_subroutine;
 
             if (p_damage->p_script[fp->status_vars.common.damage.script_index][ft_kind] != NULL)
             {
-                p_event->p_goto[p_event->script_index] = (void*) ((uintptr_t)p_event->p_script + sizeof(gmScriptEventDamageUnk2));
+                p_event->p_goto[p_event->script_index] = (void*) ((uintptr_t)p_event->p_script + sizeof(gmScriptEventSubroutineThrown2));
 
                 p_event->script_index++;
 
                 p_event->p_script = p_damage->p_script[fp->status_vars.common.damage.script_index][ft_kind];
             }
-            else gmScriptEventUpdatePtr(p_event, gmScriptEventDamageUnk2);
+            else gmScriptEventUpdatePtr(p_event, gmScriptEventSubroutineThrown2);
         }
-        else gmScriptEventUpdatePtr(p_event, gmScriptEventDamageUnk);
+        else gmScriptEventUpdatePtr(p_event, gmScriptEventSubroutineThrown);
 
         break;
 
     case gmScriptEvent_Kind_Return:
-
         p_event->p_script = p_event->p_goto[--p_event->script_index];
         break;
 
@@ -662,7 +651,7 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
                 case gmScriptEvent_Kind_ResetHit:
                 case gmScriptEvent_Kind_PlaySFX:
                 case gmScriptEvent_Kind_PlayLoopSFXStoreInfo:
-                case gmScriptEvent_Kind_UnkPlaySFX2:
+                case gmScriptEvent_Kind_StopLoopSFX:
                 case gmScriptEvent_Kind_PlayVoiceStoreInfo:
                 case gmScriptEvent_Kind_PlayLoopVoiceStoreInfo:
                 case gmScriptEvent_Kind_PlaySFXStoreInfo:

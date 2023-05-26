@@ -43,7 +43,7 @@ typedef enum gmScriptEventKind
     gmScriptEvent_Kind_SubroutineThrown, // ???
     gmScriptEvent_Kind_PlaySFX,
     gmScriptEvent_Kind_PlayLoopSFXStoreInfo,
-    gmScriptEvent_Kind_UnkPlaySFX2,
+    gmScriptEvent_Kind_StopLoopSFX,
     gmScriptEvent_Kind_PlayVoiceStoreInfo,
     gmScriptEvent_Kind_PlayLoopVoiceStoreInfo,
     gmScriptEvent_Kind_PlaySFXStoreInfo,
@@ -54,7 +54,7 @@ typedef enum gmScriptEventKind
     gmScriptEvent_Kind_SetFlag3,
     gmScriptEvent_Kind_SetAirJumpAdd,
     gmScriptEvent_Kind_SetAirJumpMax,
-    gmScriptEvent_Kind_ResetHitStatusAll,
+    gmScriptEvent_SetHitStatusPartAll,
     gmScriptEvent_Kind_SetHitStatusPart,
     gmScriptEvent_Kind_SetHitStatusAll,
     gmScriptEvent_Kind_ResetHurtAll,
@@ -407,17 +407,17 @@ typedef struct gmScriptEventSubroutine
 
 } gmScriptEventSubroutine;
 
-typedef struct gmScriptEventDamageUnk1
+typedef struct gmScriptEventSubroutineThrown1
 {
     u32 opcode : 6;
 
-} gmScriptEventDamageUnk1;
+} gmScriptEventSubroutineThrown1;
 
-typedef struct gmScriptEventDamageUnk2
+typedef struct gmScriptEventSubroutineThrown2
 {
     void *p_subroutine;
 
-} gmScriptEventDamageUnk2;
+} gmScriptEventSubroutineThrown2;
 
 typedef struct gmScriptEventDamage
 {
@@ -425,12 +425,12 @@ typedef struct gmScriptEventDamage
 
 } gmScriptEventDamage;
 
-typedef struct gmScriptEventDamageUnk
+typedef struct gmScriptEventSubroutineThrown
 {
-    gmScriptEventDamageUnk1 s1;
-    gmScriptEventDamageUnk2 s2;
+    gmScriptEventSubroutineThrown1 s1;
+    gmScriptEventSubroutineThrown2 s2;
 
-} gmScriptEventDamageUnk;
+} gmScriptEventSubroutineThrown;
 
 typedef struct gmScriptEventReturn
 {
