@@ -41,7 +41,7 @@ typedef struct _Coll_Data
     Vec3f pos_curr;
     Vec3f pos_correct; // Unconfirmed
     Vec3f pos_prev; // Unconfirmed
-    Vec3f pos_push; // Whispy's Wind has something to do with this
+    Vec3f vel_push; // Applied from extern stage objects such as Whispy's Wind?
     ObjectColl object_coll;
     ObjectColl *p_object_coll; // Points back to collision box???
     Vec2f cliffcatch_coll;

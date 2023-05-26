@@ -106,7 +106,12 @@ typedef struct UnkDObjData
     u8 filler_0x0[0xc];
     u8 unk_0xC;
     u8 unk_0xD;
-    u8 filler_0xE[0xDC - 0xE];
+    u8 unk_dobjdata_0xE;
+    u8 filler_0xF[0x70 - 0xF];
+    Vec3f unk_dobjdata_0x70; // Might be HAL_Bitmap?
+    s32 unk_dobjdata_0x7C;
+    Vec3f unk_dobjdata_0x80;
+    u8 filler_0x8C[0xDC - 0x8C];
     GObj *unk_gobj;
 
 } UnkDObjData;

@@ -85,7 +85,7 @@ void func_ovl3_8014A860(GObj *fighter_gobj, GObj *capture_gobj)
     Fighter_Struct *capture_fp;
     Vec3f vel;
 
-    func_ovl2_800E823C(fighter_gobj);
+    ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((this_fp->item_hold != NULL) && !(ArticleGetStruct(this_fp->item_hold)->is_light_throw))
     {
@@ -169,7 +169,7 @@ void func_ovl3_8014AA58(GObj *fighter_gobj)
     {
         this_fp->is_invisible = TRUE;
 
-        func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
     ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 }

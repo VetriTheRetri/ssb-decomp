@@ -60,7 +60,7 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_que
     {
         this_fp->is_invisible = TRUE;
 
-        func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
     ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 
@@ -82,7 +82,7 @@ void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
     {
         this_fp->is_invisible = TRUE;
 
-        func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
     ftCommon_SetCaptureFlags(this_fp, 0x3FU);
 

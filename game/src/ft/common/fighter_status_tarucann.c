@@ -56,7 +56,7 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f vel;
 
-    func_ovl2_800E823C(fighter_gobj);
+    ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((fp->item_hold != NULL) && !(ArticleGetStruct(fp->item_hold)->is_light_throw))
     {
@@ -83,7 +83,7 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
     fp->status_vars.common.tarucann.release_wait = 0;
     fp->status_vars.common.tarucann.tarucann_gobj = tarucann_gobj;
 
-    func_ovl2_800E8A24(fighter_gobj, 3);
+    ftCommon_SetHitStatusAll(fighter_gobj, 3);
 
     fp->is_invisible = TRUE;
 

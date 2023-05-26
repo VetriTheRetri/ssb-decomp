@@ -193,7 +193,7 @@ void func_ovl3_801407A8(GObj *fighter_gobj)
     }
     if ((fp->throw_gobj != NULL) && (vec3f_mag(&fp->phys_info.vel_damage_air) < 70.0F))
     {
-        func_ovl2_800E8518(fighter_gobj);
+        ftCommon_ClearHitAll(fighter_gobj);
     }
 }
 
@@ -401,7 +401,7 @@ void func_ovl3_80140E2C(GObj *fighter_gobj)
     }
     else
     {
-        func_ovl2_800E823C(fighter_gobj);
+        ftCommon_ProcDamageStopVoice(fighter_gobj);
         func_ovl3_8014E0E0(fighter_gobj);
     }
 }
@@ -697,7 +697,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
                 else
                 {
                     func_ovl3_8014AECC(fighter_gobj, grab_gobj);
-                    func_ovl2_800E823C(fighter_gobj);
+                    ftCommon_ProcDamageStopVoice(fighter_gobj);
                     func_ovl3_80141560(fighter_gobj);
 
                     grab_fp->unk_ft_0x814 = 1;
@@ -712,14 +712,14 @@ void func_ovl3_80141670(GObj *fighter_gobj)
                 func_ovl3_8014B2AC(grab_fp);
             }
             func_ovl3_8014AECC(fighter_gobj, grab_gobj);
-            func_ovl2_800E823C(fighter_gobj);
+            ftCommon_ProcDamageStopVoice(fighter_gobj);
             func_ovl3_80141560(fighter_gobj);
 
             grab_fp->unk_ft_0x814 = 1;
         }
         else
         {
-            func_ovl2_800E823C(grab_gobj);
+            ftCommon_ProcDamageStopVoice(grab_gobj);
             func_ovl3_8014B330(grab_gobj);
 
             if (this_fp->x192_flag_b3)
@@ -728,7 +728,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             }
             this_fp->catch_gobj = NULL;
 
-            func_ovl2_800E823C(fighter_gobj);
+            ftCommon_ProcDamageStopVoice(fighter_gobj);
             func_ovl3_80141560(fighter_gobj);
         }
         return;
@@ -755,7 +755,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
                 {
                     func_ovl3_8014B2AC(this_fp);
                     func_ovl3_8014AECC(grab_gobj, fighter_gobj);
-                    func_ovl2_800E823C(fighter_gobj);
+                    ftCommon_ProcDamageStopVoice(fighter_gobj);
                     func_ovl3_80141560(fighter_gobj);
 
                     grab_fp->unk_ft_0x814 = 1;
@@ -777,7 +777,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
         else if (grab_fp->damage_knockback != 0)
         {
             func_ovl3_8014AECC(grab_gobj, fighter_gobj);
-            func_ovl2_800E823C(fighter_gobj);
+            ftCommon_ProcDamageStopVoice(fighter_gobj);
             func_ovl3_80141560(fighter_gobj);
 
             grab_fp->unk_ft_0x814 = 1;
@@ -785,9 +785,9 @@ void func_ovl3_80141670(GObj *fighter_gobj)
         else
         {
             func_ovl3_8014AECC(grab_gobj, fighter_gobj);
-            func_ovl2_800E823C(fighter_gobj);
+            ftCommon_ProcDamageStopVoice(fighter_gobj);
             func_ovl3_80141560(fighter_gobj);
-            func_ovl2_800E823C(grab_gobj);
+            ftCommon_ProcDamageStopVoice(grab_gobj);
             func_ovl3_8014B5B4(grab_gobj);
         }
         return;
@@ -805,7 +805,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
                 vel.x = vel.y = vel.z = 0.0F;
 
                 func_ovl3_80172AEC(this_fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
-                func_ovl2_800E823C(fighter_gobj);
+                ftCommon_ProcDamageStopVoice(fighter_gobj);
                 func_ovl3_80141560(fighter_gobj);
             }
             return;
@@ -817,7 +817,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
     }
     else
     {
-        func_ovl2_800E823C(fighter_gobj);
+        ftCommon_ProcDamageStopVoice(fighter_gobj);
         func_ovl3_80141560(fighter_gobj);
     }
 }

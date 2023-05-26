@@ -76,10 +76,10 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
                 }
                 if (i == ARRAY_COUNT(fp->fighter_hit))
                 {
-                    func_ovl2_800E853C(fp, hit_id);
+                    ftCommon_ClearHitTargetsIndex(fp, hit_id);
                 }
             }
-            ft_hit->joint_index = func_ovl2_800E86D4(fp, gmScriptEventCast(p_event, gmScriptEventCreateHit1)->joint_index);
+            ft_hit->joint_index = ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventCreateHit1)->joint_index);
             ft_hit->joint = fp->joint[ft_hit->joint_index];
             ft_hit->damage = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->damage;
             ft_hit->clang = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->clang;
@@ -181,7 +181,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventResetHit);
 
-        func_ovl2_800E8668(fighter_gobj, hit_id);
+        ftCommon_RefreshHitIndex(fighter_gobj, hit_id);
         break;
 
     case gmScriptEvent_Kind_ClearHitIndex:
@@ -193,7 +193,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_ClearHitAll:
-        func_ovl2_800E8518(fighter_gobj);
+        ftCommon_ClearHitAll(fighter_gobj);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventClearHitAll);
         break;
@@ -206,12 +206,12 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetFighterThrow2);
         break;
 
-    case gmScriptEvent_Kind_StorePlaySFX:
+    case gmScriptEvent_Kind_PlaySFXStoreInfo:
         if (!(fp->is_playing_sfx))
         {
-            fp->p_sfx1 = func_800269C0(gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
+            fp->p_sfx = func_800269C0(gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
 
-            fp->sfx1_id = (fp->p_sfx1 != NULL) ? fp->p_sfx1->sfx_id : 0;
+            fp->sfx_id = (fp->p_sfx != NULL) ? fp->p_sfx->sfx_id : 0;
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
 
@@ -226,11 +226,11 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
         break;
 
-    case gmScriptEvent_Kind_UnkPlaySFX1:
+    case gmScriptEvent_Kind_PlayLoopSFXStoreInfo:
 
         if (!(fp->is_playing_sfx))
         {
-            func_ovl2_800E8190(fp, gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
+            ftCommon_PlayLoopSFXStoreInfo(fp, gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
 
@@ -238,24 +238,24 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
     case gmScriptEvent_Kind_UnkPlaySFX2:
 
-        func_ovl2_800E81E4(fp), gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
+        ftCommon_StopLoopSFX(fp), gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
 
         break;
 
-    case gmScriptEvent_Kind_PlayVoice:
+    case gmScriptEvent_Kind_PlayVoiceStoreInfo:
 
         if (!(fp->is_playing_sfx) && (fp->attributes->is_have_voice))
         {
-            func_ovl2_800E80F0(fp, gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
+            ftCommon_PlayVoiceStoreInfo(fp, gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
 
         break;
 
-    case gmScriptEvent_Kind_UnkPlayVoice:
+    case gmScriptEvent_Kind_PlayLoopVoiceStoreInfo:
         if (!(fp->is_playing_sfx) && (fp->attributes->is_have_voice))
         {
-            func_ovl2_800E8190(fp, gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
+            ftCommon_PlayLoopSFXStoreInfo(fp, gmScriptEventCastUpdate(p_event, gmScriptEventPlaySFX)->sfx_id);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
 
@@ -264,7 +264,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
     case gmScriptEvent_Kind_PlaySmashVoice:
         if (!(fp->is_playing_sfx))
         {
-            func_ovl2_800E80F0(fp, fp->attributes->smash_sfx[rand_u16_range(ARRAY_COUNT(fp->attributes->smash_sfx))]);
+            ftCommon_PlayVoiceStoreInfo(fp, fp->attributes->smash_sfx[rand_u16_range(ARRAY_COUNT(fp->attributes->smash_sfx))]);
 
             gmScriptEventUpdatePtr(p_event, gmScriptEventPlaySFX);
         }
@@ -303,7 +303,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
         if (!(fp->is_playing_gfx))
         {
-            joint_index = func_ovl2_800E86D4(fp, gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->joint_index);
+            joint_index = ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->joint_index);
             gfx_id = gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->gfx_id;
             flag = gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->flag;
 
@@ -331,31 +331,31 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_ResetHitStatusAll:
-        func_ovl2_800E880C(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hit_status);
+        ftCommon_SetHitStatusPartAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hit_status);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusAll);
         break;
 
     case gmScriptEvent_Kind_SetHitStatusPart:
-        func_ovl2_800E8884(fighter_gobj, func_ovl2_800E86D4(fp, gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->hit_status);
+        ftCommon_SetHitStatusPart(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->hit_status);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusPart);
         break;
 
     case gmScriptEvent_Kind_SetHitStatusAll:
-        func_ovl2_800E8A24(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hit_status);
+        ftCommon_SetHitStatusAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hit_status);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusAll);
         break;
 
     case gmScriptEvent_Kind_ResetHurtAll:
-        func_ovl2_800E8B00(fighter_gobj);
+        ftCommon_InitFighterHurtParts(fighter_gobj);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
         break;
 
     case gmScriptEvent_Kind_SetHurtPart:
-        joint_index = func_ovl2_800E86D4(fp, gmScriptEventCast(p_event, gmScriptEventSetHurtPart1)->joint_index);
+        joint_index = ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventSetHurtPart1)->joint_index);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHurtPart1);
 
@@ -374,7 +374,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHurtPart4);
 
-        func_ovl2_800E8BC8(fighter_gobj, joint_index, &hurt_offset, &hurt_size);
+        ftCommon_UpdateFighterHurtPartIndex(fighter_gobj, joint_index, &hurt_offset, &hurt_size);
         break;
 
     case gmScriptEvent_Kind_LoopBegin:
@@ -465,7 +465,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_SetModelPart:
-        func_ovl2_800E8C70(fighter_gobj, func_ovl2_800E86D4(fp, gmScriptEventCast(p_event, gmScriptEventSetModelPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetModelPart)->mode);
+        func_ovl2_800E8C70(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventSetModelPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetModelPart)->mode);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetModelPart);
         break;
@@ -661,11 +661,11 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
                 case gmScriptEvent_Kind_SetHitSoundLevel:
                 case gmScriptEvent_Kind_ResetHit:
                 case gmScriptEvent_Kind_PlaySFX:
-                case gmScriptEvent_Kind_UnkPlaySFX1:
+                case gmScriptEvent_Kind_PlayLoopSFXStoreInfo:
                 case gmScriptEvent_Kind_UnkPlaySFX2:
-                case gmScriptEvent_Kind_PlayVoice:
-                case gmScriptEvent_Kind_UnkPlayVoice:
-                case gmScriptEvent_Kind_StorePlaySFX:
+                case gmScriptEvent_Kind_PlayVoiceStoreInfo:
+                case gmScriptEvent_Kind_PlayLoopVoiceStoreInfo:
+                case gmScriptEvent_Kind_PlaySFXStoreInfo:
                 case gmScriptEvent_Kind_PlaySmashVoice:
                 case gmScriptEvent_Kind_SetFlag0:
                 case gmScriptEvent_Kind_SetFlag1:
@@ -975,7 +975,7 @@ bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_
                 {
                     fp = FighterGetStruct(fighter_gobj);
 
-                    joint_index = func_ovl2_800E86D4(fp, gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->joint_index);
+                    joint_index = ftCommon_GetLightHoldJointIndex(fp, gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->joint_index);
                     gfx_id = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->gfx_id;
                     flag = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->flag;
 
@@ -1440,7 +1440,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
             }
         }
     }
-    this_fp->coll_data.pos_push.x = this_fp->coll_data.pos_push.y = this_fp->coll_data.pos_push.z = 0.0F;
+    this_fp->coll_data.vel_push.x = this_fp->coll_data.vel_push.y = this_fp->coll_data.vel_push.z = 0.0F;
 }
 
 void func_ovl2_800E1CF0(void)
@@ -1976,11 +1976,11 @@ u16 D_ovl2_80128D00[gmHitCollision_SoundEffect_EnumMax][gmHitCollision_SoundLeve
 
 void func_ovl2_800E2C24(Fighter_Struct *fp, Fighter_Hit *ft_hit)
 {
-    if ((fp->p_sfx1 != NULL) && (fp->p_sfx1->sfx_id != 0) && (fp->p_sfx1->sfx_id == fp->sfx1_id))
+    if ((fp->p_sfx != NULL) && (fp->p_sfx->sfx_id != 0) && (fp->p_sfx->sfx_id == fp->sfx_id))
     {
-        func_80026738(fp->p_sfx1);
+        func_80026738(fp->p_sfx);
     }
-    fp->p_sfx1 = NULL, fp->sfx1_id = 0;
+    fp->p_sfx = NULL, fp->sfx_id = 0;
 
     func_ovl0_800C8654(D_ovl2_80128D00[ft_hit->sfx_kind][ft_hit->sfx_level], fp->joint[0]->translate.x);
 }
@@ -3500,7 +3500,7 @@ void func_ovl2_800E5D20(GObj *fighter_gobj)
             fp->hotfloor_wait--;
         }
     }
-    if (func_ovl2_800E8AAC(fighter_gobj) == TRUE)
+    if (ftCommon_GetBestHitStatusAll(fighter_gobj) == TRUE)
     {
         for (i = 0; i < D_ovl2_8013119C; i++, me++)
         {
@@ -3712,7 +3712,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
                 break;
 
             case 1:
-                func_ovl2_800E823C(fighter_gobj);
+                ftCommon_ProcDamageStopVoice(fighter_gobj);
                 func_ovl3_80141560(fighter_gobj);
                 break;
 
@@ -3721,7 +3721,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
                 break;
 
             case 3:
-                func_ovl2_800E823C(fighter_gobj);
+                ftCommon_ProcDamageStopVoice(fighter_gobj);
                 func_ovl3_80140E2C(fighter_gobj);
                 break;
 
@@ -3763,7 +3763,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         }
         if ((fp->attack_rebound != 0) && (fp->catch_gobj == NULL) && (fp->capture_gobj == NULL))
         {
-            func_ovl2_800E823C(fighter_gobj);
+            ftCommon_ProcDamageStopVoice(fighter_gobj);
             func_ovl3_80144AB0(fighter_gobj);
         }
         damage = fp->shield_attack_damage;
@@ -4251,7 +4251,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     }
     if (!(flags & FTSTATUPDATE_HIT_PRESERVE) && (fp->is_hit_enable))
     {
-        func_ovl2_800E8518(fighter_gobj);
+        ftCommon_ClearHitAll(fighter_gobj);
     }
     if (!(flags & FTSTATUPDATE_THROWPOINTER_PRESERVE))
     {
@@ -4259,18 +4259,18 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     }
     if (!(flags & FTSTATUPDATE_HITSTATUS_PRESERVE))
     {
-        if (fp->x18C_flag_b1)
+        if (fp->is_hitstatus_nodamage)
         {
-            func_ovl2_800E880C(fighter_gobj, gmHitCollision_HitStatus_Normal);
+            ftCommon_SetHitStatusPartAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
         }
         if (fp->hit_status != gmHitCollision_HitStatus_Normal)
         {
-            func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Normal);
+            ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
         }
     }
-    if (fp->x18C_flag_b2)
+    if (fp->is_fthurt_modify)
     {
-        func_ovl2_800E8B00(fighter_gobj);
+        ftCommon_InitFighterHurtParts(fighter_gobj);
     }
     if (!(flags & FTSTATUPDATE_UNK1_PRESERVE) && (fp->x18C_flag_b3))
     {
@@ -4367,7 +4367,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     }
     if (!(flags & FTSTATUPDATE_UNK4_PRESERVE))
     {
-        func_ovl2_800E81E4(fp);
+        ftCommon_StopLoopSFX(fp);
     }
     fp->knockback_resist_status = 0.0F;
     fp->damage_knockback_again = 0.0F;
@@ -4381,7 +4381,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     {
         fp->attack1_followup_frames = 0.0F;
     }
-    if ((fp->status_info.pl_kind != 3) && (fp->unk_0x16 != 9))
+    if ((fp->status_info.pl_kind != Pl_Kind_Result) && (fp->unk_0x16 != 9))
     {
         func_ovl2_800E827C(fighter_gobj, 9);
     }

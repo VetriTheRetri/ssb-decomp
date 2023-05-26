@@ -408,9 +408,9 @@ bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*proc_map)(Coll_Data*, GO
 
         if (var_s1 == 0)
         {
-            translate->x += coll_data->pos_correct.x + coll_data->pos_push.x;
-            translate->y += coll_data->pos_correct.y + coll_data->pos_push.y;
-            translate->z += coll_data->pos_correct.z + coll_data->pos_push.z;
+            translate->x += coll_data->pos_correct.x + coll_data->vel_push.x;
+            translate->y += coll_data->pos_correct.y + coll_data->vel_push.y;
+            translate->z += coll_data->pos_correct.z + coll_data->vel_push.z;
         }
         translate->x += var_f20;
         translate->y += var_f22;

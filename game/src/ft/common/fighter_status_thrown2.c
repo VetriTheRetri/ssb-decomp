@@ -77,7 +77,7 @@ void func_ovl3_8014AF98(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E80C4(fp, fp->capture_gobj);
+    ftCommon_ThrownUpdateEnemyInfo(fp, fp->capture_gobj);
 
     fp->status_vars.common.damage.script_index = D_ovl3_8018CF80;
 }
@@ -99,7 +99,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
 
     if (this_fp->hit_status != gmHitCollision_HitStatus_Normal)
     {
-        func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Normal);
+        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
     }
     if (!(this_fp->x192_flag_b3))
     {
@@ -123,7 +123,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
     {
         damage = ((damage * 0.5F) + 0.999F);
     }
-    if (func_ovl2_800E8AAC(fighter_gobj) != 1)
+    if (ftCommon_GetBestHitStatusAll(fighter_gobj) != 1)
     {
         damage = 0;
     }
@@ -180,7 +180,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
 
     if (this_fp->hit_status != gmHitCollision_HitStatus_Normal)
     {
-        func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Normal);
+        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
     }
     if (!(this_fp->x192_flag_b3))
     {
@@ -209,7 +209,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
         damage = ((damage * 0.5F) + 0.999F);
     }
 
-    if (func_ovl2_800E8AAC(fighter_gobj) != 1)
+    if (ftCommon_GetBestHitStatusAll(fighter_gobj) != 1)
     {
         damage = 0;
     }

@@ -245,7 +245,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         {
             ftKirbyCopyData *copy_data = (ftKirbyCopyData*) ((uintptr_t)D_ovl2_80131074 + (intptr_t)&ftKirby_LoadedFiles_SpecialNData);
 
-            func_ovl2_800E8EAC(fighter_gobj, 6, copy_data[fp->fighter_vars.kirby.copy_id].unk_0x2);
+            ftCommon_SetModelPartRenderState(fighter_gobj, 6, copy_data[fp->fighter_vars.kirby.copy_id].unk_0x2);
         }
         break;
 
@@ -253,8 +253,8 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     case Ft_Kind_PolyLink:
         fp->fighter_vars.link.boomerang_gobj = NULL;
 
-        func_ovl2_800E8EAC(fighter_gobj, 0x15, -1);
-        func_ovl2_800E8EAC(fighter_gobj, 0x13, 0);
+        ftCommon_SetModelPartRenderState(fighter_gobj, 0x15, -1);
+        ftCommon_SetModelPartRenderState(fighter_gobj, 0x13, 0);
         break;
 
     case Ft_Kind_Purin:
@@ -276,8 +276,8 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         }
         break;
     }
-    func_ovl2_800E8518(fighter_gobj);
-    func_ovl2_800E880C(fighter_gobj, 1);
+    ftCommon_ClearHitAll(fighter_gobj);
+    ftCommon_SetHitStatusPartAll(fighter_gobj, 1);
     func_ovl2_800E98B0(fighter_gobj);
 }
 
@@ -362,12 +362,12 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fp->x3C_unk = 0;
     fp->anim_flags.word = 0;
 
-    fp->p_sfx1 = NULL;
-    fp->sfx1_id = 0;
-    fp->unk_ft_0xA18 = 0;
-    fp->unk_ft_0xA1C = 0;
-    fp->unk_ft_0xA20 = 0;
-    fp->unk_ft_0xA24 = 0;
+    fp->p_sfx = NULL;
+    fp->sfx_id = 0;
+    fp->p_voice = NULL;
+    fp->voice_id = 0;
+    fp->p_loop_sfx = NULL;
+    fp->loop_sfx_id = 0;
 
     fp->x18E_flag_4bit = 0;
 

@@ -195,7 +195,7 @@ void func_ovl3_80157314(GObj *fighter_gobj)
         if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
         {
             ip = ItemGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
-            func_ovl2_800E81E4(fp);
+            ftCommon_StopLoopSFX(fp);
 
             DObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;
 

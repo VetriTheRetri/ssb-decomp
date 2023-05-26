@@ -145,7 +145,7 @@ GObj* func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool3
 
         ip->item_vars.charge_shot.owner_gobj = fighter_gobj;
 
-        func_ovl2_800E8190(fp, Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].charge_sfx_id);
+        ftCommon_PlayLoopSFXStoreInfo(fp, Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].charge_sfx_id);
     }
 
     scale = Item_ChargeShot_Attributes[charge_level].gfx_size / ITCHARGESHOT_GFX_SIZE_DIV;

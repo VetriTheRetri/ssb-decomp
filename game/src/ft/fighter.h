@@ -49,6 +49,7 @@ typedef enum ftStatusUpdateFlags
 #define FTSTATUPDATE_AFTERIMAGE_PRESERVE    (1 << ftStatusUpdate_AfterImage_Preserve)   // 0x2000
 #define FTSTATUPDATE_UNK5_PRESERVE          (1 << ftStatusUpdate_Unk5_Preserve)         // 0x4000
 
+#define FTPARTS_HURT_NUM_MAX 11
 #define FTPARTS_JOINT_NUM_MAX 37
 
 typedef struct Fighter_Struct Fighter_Struct;
@@ -784,7 +785,7 @@ typedef struct ftCommonAttributes
     u32 is_have_speciallw : 1;
     u32 is_have_specialairlw : 1;
     u32 is_have_catch : 1;   // Whether fighter has a grab
-    u32 catch_flags_b21 : 1;
+    u32 is_have_voice : 1;
     u32 catch_flags_b22 : 1;
     u32 catch_flags_b23 : 1;
     u32 catch_flags_b24 : 1;
@@ -795,7 +796,7 @@ typedef struct ftCommonAttributes
     u32 catch_flags_b29 : 1;
     u32 catch_flags_b30 : 1;
     u32 catch_flags_b31 : 1;
-    FighterHurtDesc fighter_hurt_desc[11];
+    FighterHurtDesc fighter_hurt_desc[FTPARTS_HURT_NUM_MAX];
     s32 unk_ftca_0x290;
     s32 unk_ftca_0x294;
     s32 unk_ftca_0x298;
@@ -942,8 +943,8 @@ struct Fighter_Struct
     } command_vars;
 
     u32 is_hit_enable : 1;
-    u32 x18C_flag_b1 : 1;
-    u32 x18C_flag_b2 : 1;
+    u32 is_hitstatus_nodamage : 1;
+    u32 is_fthurt_modify : 1;
     u32 x18C_flag_b3 : 1;
     u32 x18C_flag_b4 : 1;
     u32 is_reflect : 1; // Fighter's reflect box is active
@@ -1076,7 +1077,7 @@ struct Fighter_Struct
     s32 special_status;  // Enemy CPUs avoid player depending on this?
     s32 hit_status;
 
-    Fighter_Hurt fighter_hurt[11];
+    Fighter_Hurt fighter_hurt[FTPARTS_HURT_NUM_MAX];
     f32 unk_ft_0x7A0;
     f32 hitlag_mul;
     f32 shield_lifeup_wait;
@@ -1160,12 +1161,12 @@ struct Fighter_Struct
     void (*proc_lagend)(GObj*);
     void (*proc_status)(GObj*);
 
-    gmSoundEffect *p_sfx1;
-    s16 sfx1_id;
-    s32 unk_ft_0xA18;
-    s16 unk_ft_0xA1C;
-    s32 unk_ft_0xA20;
-    s16 unk_ft_0xA24;
+    gmSoundEffect *p_sfx;
+    u16 sfx_id;
+    gmSoundEffect *p_voice;
+    u16 voice_id;
+    gmSoundEffect *p_loop_sfx;
+    u16 loop_sfx_id;
 
     Color_Overlay colanim;
 

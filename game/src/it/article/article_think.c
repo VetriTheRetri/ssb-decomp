@@ -183,7 +183,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
 
         fp->item_hold = NULL;
 
-        func_ovl2_800E8744(ap->owner_gobj);
+        ftCommon_GetHammerSetBGM(ap->owner_gobj);
     }
 
     else if ((ap->at_kind < At_Kind_Gr_Lucky) || (ap->at_kind >= At_Kind_Iwark))
@@ -247,7 +247,7 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alrig
 
     va_end(va);
 
-    func_ovl2_800E8744(fighter_gobj);
+    ftCommon_GetHammerSetBGM(fighter_gobj);
     func_ovl3_8017275C(article_gobj);
 }
 
@@ -366,7 +366,7 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     {
         cb_pickup(article_gobj);
     }
-    func_ovl2_800E86F0(fighter_gobj);
+    ftLink_SetModelPartHideShield(fighter_gobj);
 
     if (ap->is_light_throw == TRUE)
     {

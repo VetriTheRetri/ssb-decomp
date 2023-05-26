@@ -65,7 +65,7 @@ void func_ovl3_8014B968(GObj *fighter_gobj, GObj *capture_gobj)
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
 
-    func_ovl2_800E823C(fighter_gobj);
+    ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((this_fp->item_hold != NULL) && !(ArticleGetStruct(this_fp->item_hold)->is_light_throw))
     {
@@ -207,7 +207,7 @@ void func_ovl3_8014BDB4(GObj *fighter_gobj)
 
     fp->is_invisible = TRUE;
 
-    func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     func_ovl3_8014E3EC(fp, 0x1F4);
 }
 
@@ -282,12 +282,12 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
 
                 fp->fighter_vars.kirby.copy_id = Ft_Kind_Kirby;
 
-                func_ovl2_800E8EAC(fighter_gobj, 6, 0);
+                ftCommon_SetModelPartRenderState(fighter_gobj, 6, 0);
                 func_ovl2_800E8ECC(fighter_gobj);
             }
             fp->is_invisible = FALSE;
 
-            func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Normal);
+            ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
             func_ovl2_800E9C3C(fighter_gobj);
             func_ovl3_8014BE24(fighter_gobj);
 
@@ -319,7 +319,7 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
                 }
                 fp->is_invisible = FALSE;
 
-                func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Normal);
+                ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
             }
             if (fp->command_vars.flags.flag2 == 3)
             {
@@ -458,7 +458,7 @@ void func_ovl3_8014C508(GObj *fighter_gobj)
     }
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
-    func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     func_ovl2_800E7F7C(fighter_gobj, 1);
     func_ovl3_8014E3EC(fp, 3);
 }
@@ -499,6 +499,6 @@ void func_ovl3_8014C6AC(GObj *fighter_gobj)
     fp->proc_hit = func_ovl3_8014BE54;
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
-    func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     func_ovl2_800E7F7C(fighter_gobj, 1);
 }

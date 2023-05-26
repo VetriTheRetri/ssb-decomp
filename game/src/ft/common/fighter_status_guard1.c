@@ -19,37 +19,37 @@ void func_ovl3_80148120(Fighter_Struct *fp)
 
 void func_ovl3_80148144(GObj *fighter_gobj) // Set all of Yoshi's hurtbox collision states to invincible (GuardOn)
 {
-    func_ovl2_800E8884(fighter_gobj, 5,  gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 6,  gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 7,  gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 15, gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 11, gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 16, gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 12, gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 27, gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 22, gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 28, gmHitCollision_HitStatus_Invincible);
-    func_ovl2_800E8884(fighter_gobj, 23, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 5,  gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 6,  gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 7,  gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 15, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 11, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 16, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 12, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 27, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 22, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 28, gmHitCollision_HitStatus_Invincible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 23, gmHitCollision_HitStatus_Invincible);
 }
 
 void func_ovl3_80148214(GObj *fighter_gobj) // Set all of Yoshi's hurtbox collision states to intangible (Guard)
 {
-    func_ovl2_800E8884(fighter_gobj, 5,  gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 6,  gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 7,  gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 15, gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 11, gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 16, gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 12, gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 27, gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 22, gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 28, gmHitCollision_HitStatus_Intangible);
-    func_ovl2_800E8884(fighter_gobj, 23, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 5,  gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 6,  gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 7,  gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 15, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 11, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 16, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 12, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 27, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 22, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 28, gmHitCollision_HitStatus_Intangible);
+    ftCommon_SetHitStatusPart(fighter_gobj, 23, gmHitCollision_HitStatus_Intangible);
 }
 
 void func_ovl3_801482E4(GObj *fighter_gobj)
 {
-    func_ovl2_800E880C(fighter_gobj, 1);
+    ftCommon_SetHitStatusPartAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
 }
 
 Vec3f Fighter_Yoshi_GuardOffGfxOffset = { 0.0F, 0.0F, 0.0F };

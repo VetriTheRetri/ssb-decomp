@@ -104,7 +104,7 @@ void func_ovl3_80161F0C(GObj *fighter_gobj)
             index = fp->status_vars.kirby.specialn.copy_id;
             fp->fighter_vars.kirby.copy_id = index;
 
-            func_ovl2_800E8EAC(fighter_gobj, 6, copy_data[index].unk_0x2);
+            ftCommon_SetModelPartRenderState(fighter_gobj, 6, copy_data[index].unk_0x2);
             func_ovl2_800E8ECC(fighter_gobj);
             func_ovl3_80161EB4(fp);
         }
@@ -212,7 +212,7 @@ void func_ovl3_80162258(GObj *fighter_gobj)
             Fighter_Struct *victim_fp = FighterGetStruct(kirby_fp->catch_gobj);
 
             func_ovl3_8014C508(kirby_fp->catch_gobj);
-            func_ovl2_800E80C4(victim_fp, fighter_gobj);
+            ftCommon_ThrownUpdateEnemyInfo(victim_fp, fighter_gobj);
 
             victim_fp->phys_info.vel_air.z = 0.0F;
             victim_fp->phys_info.vel_air.y = 0.0F;
@@ -849,7 +849,7 @@ void func_ovl3_801635EC(GObj *fighter_gobj)
     fp->fighter_vars.kirby.copy_id = 
         _Kirby;
 
-    func_ovl2_800E8EAC(fighter_gobj, 6, 0);
+    ftCommon_SetModelPartRenderState(fighter_gobj, 6, 0);
     func_ovl2_800E98D4(fighter_gobj);
 }
 

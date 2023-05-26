@@ -53,7 +53,7 @@ void func_ovl3_8014D2A0(GObj *fighter_gobj, GObj *capture_gobj)
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
 
-    func_ovl2_800E823C(fighter_gobj);
+    ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((this_fp->item_hold != NULL) && !(ArticleGetStruct(this_fp->item_hold)->is_light_throw))
     {

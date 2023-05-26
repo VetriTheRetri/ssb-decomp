@@ -50,7 +50,7 @@ void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f vel;
 
-    func_ovl2_800E823C(fighter_gobj);
+    ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((fp->item_hold != NULL) && !(ArticleGetStruct(fp->item_hold)->is_light_throw))
     {
@@ -97,7 +97,7 @@ void func_ovl3_80143CC4(GObj *fighter_gobj)
 
     knockback = func_ovl2_800E9D78(fp->percent_damage, tornado->damage, tornado->damage, tornado->knockback_weight, tornado->knockback_scale, tornado->knockback_base, fp->attributes->weight, 9, fp->handicap);
 
-    if (func_ovl2_800E8AAC(fighter_gobj) != gmHitCollision_HitStatus_Normal)
+    if (ftCommon_GetBestHitStatusAll(fighter_gobj) != gmHitCollision_HitStatus_Normal)
     {
         damage = 0;
     }

@@ -28,7 +28,7 @@ void func_ovl3_8014C778(GObj *fighter_gobj)
 
             fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
-            func_ovl2_800E8A24(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+            ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
         }
     }
 }
@@ -38,7 +38,7 @@ void func_ovl3_8014C83C(GObj *fighter_gobj, GObj *capture_gobj)
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
 
-    func_ovl2_800E823C(fighter_gobj);
+    ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((this_fp->item_hold != NULL) && !(ArticleGetStruct(this_fp->item_hold)->is_light_throw))
     {
@@ -314,8 +314,8 @@ void func_ovl3_8014CDFC(GObj *fighter_gobj)
             ft_hurt->hit_status = gmHitCollision_HitStatus_Intangible;
         }
     }
-    fp->x18C_flag_b1 = TRUE;
-    fp->x18C_flag_b2 = TRUE;
+    fp->is_hitstatus_nodamage = TRUE;
+    fp->is_fthurt_modify = TRUE;
 }
 
 void func_ovl3_8014CF0C(GObj *fighter_gobj)

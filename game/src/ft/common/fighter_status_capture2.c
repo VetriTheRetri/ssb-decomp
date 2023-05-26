@@ -120,7 +120,7 @@ void func_ovl3_8014E558(GObj *fighter_gobj)
 
     damage = func_ovl2_800EA54C(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->flags_hi.halfword);
 
-    if (func_ovl2_800E8AAC(fighter_gobj) != 1)
+    if (ftCommon_GetBestHitStatusAll(fighter_gobj) != 1)
     {
         damage = 0;
     }

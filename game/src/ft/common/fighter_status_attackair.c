@@ -7,7 +7,7 @@ void func_ovl3_801508E0(GObj *fighter_gobj)
 
     if ((fp->ft_kind == Ft_Kind_Link) || (fp->ft_kind == Ft_Kind_PolyLink))
     {
-        func_ovl2_800E8518(fighter_gobj);
+        ftCommon_ClearHitAll(fighter_gobj);
 
         fp->is_fast_fall = FALSE;
 
@@ -33,8 +33,8 @@ void func_ovl3_80150980(GObj *fighter_gobj)
 
             if ((fp->status_vars.common.attackair.rehit_timer == 0) && (fighter_gobj->anim_frame < FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_END))
             {
-                func_ovl2_800E8668(fighter_gobj, 0);
-                func_ovl2_800E8668(fighter_gobj, 1);
+                ftCommon_RefreshHitIndex(fighter_gobj, 0);
+                ftCommon_RefreshHitIndex(fighter_gobj, 1);
             }
         }
     }

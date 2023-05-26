@@ -274,9 +274,9 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->coll_data.ignore_line_id = -1;
     ap->coll_data.wall_flag = D_ovl2_80131398;
     ap->coll_data.coll_mask = 0;
-    ap->coll_data.pos_push.x = 0.0F;
-    ap->coll_data.pos_push.y = 0.0F;
-    ap->coll_data.pos_push.z = 0.0F;
+    ap->coll_data.vel_push.x = 0.0F;
+    ap->coll_data.vel_push.y = 0.0F;
+    ap->coll_data.vel_push.z = 0.0F;
 
     func_80008188(article_gobj, func_ovl3_8016F534, 1U, 3U);
     func_80008188(article_gobj, func_ovl3_80171080, 1U, 1U);

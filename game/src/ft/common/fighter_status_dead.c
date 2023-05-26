@@ -116,7 +116,7 @@ void func_ovl3_8013C050(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800E823C(fighter_gobj);
+    ftCommon_ProcDamageStopVoice(fighter_gobj);
     func_ovl2_800D7994(fighter_gobj);
     func_ovl3_8014AF2C(fighter_gobj);
 
