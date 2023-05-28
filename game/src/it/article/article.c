@@ -218,7 +218,7 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
 
     func_ovl3_801725F8(ap);
 
-    ap->article_hurt.hit_status = attributes->hit_status;
+    ap->article_hurt.hitstatus = attributes->hitstatus;
     ap->article_hurt.offset.x = attributes->hurt_offset.x;
     ap->article_hurt.offset.y = attributes->hurt_offset.y;
     ap->article_hurt.offset.z = attributes->hurt_offset.z;
@@ -929,7 +929,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
     {
         fp->attack_damage = damage;
     }
-    if (at_hurt->hit_status == gmHitCollision_HitStatus_Normal)
+    if (at_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     {
         ap->damage_taken_recent += damage;
 
@@ -1101,7 +1101,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
         attack_ap->lr_attack = lr;
     }
-    if (at_hurt->hit_status == gmHitCollision_HitStatus_Normal)
+    if (at_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     {
         defend_ap->damage_taken_recent += damage;
 
@@ -1193,7 +1193,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
     {
         ip->hit_victim_damage = damage;
     }
-    if (at_hurt->hit_status == gmHitCollision_HitStatus_Normal)
+    if (at_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     {
         ap->damage_taken_recent += damage;
 
@@ -1275,7 +1275,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_FIGHTER)
     {
-        fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+        fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
         if (fighter_gobj != NULL)
         {
@@ -1331,9 +1331,9 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 
                                         if (D_ovl2_801311A0[i] != 0)
                                         {
-                                            if (ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
+                                            if (ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) break;
 
-                                            if (at_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
+                                            if (at_hurt->hitstatus != gmHitCollision_HitStatus_Intangible)
                                             {
                                                 if (func_ovl2_800EFC20(&fp->fighter_hit[i], at_hurt, article_gobj) != FALSE)
                                                 {
@@ -1371,7 +1371,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
 
     if (this_ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ARTICLE)
     {
-        other_gobj = gOMObjCommonLinks[GObjLinkIndexArticle];
+        other_gobj = gOMObjCommonLinks[gOMObjLinkIndexArticle];
 
         is_check_self = FALSE;
 
@@ -1454,9 +1454,9 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
                                     {
                                         at_hurt = &this_ap->article_hurt;
 
-                                        if (this_ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
+                                        if (this_ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) break;
 
-                                        else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) continue;
+                                        else if (at_hurt->hitstatus == gmHitCollision_HitStatus_Intangible) continue;
 
                                         else if (func_ovl2_800F06E8(other_hit, i, at_hurt, this_gobj) != FALSE)
                                         {
@@ -1495,7 +1495,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
     {
-        item_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
+        item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
         if (item_gobj != NULL)
         {
@@ -1570,9 +1570,9 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
                                 {
                                     at_hurt = &ap->article_hurt;
 
-                                    if (ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) break;
+                                    if (ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) break;
 
-                                    else if (at_hurt->hit_status == gmHitCollision_HitStatus_Intangible) continue;
+                                    else if (at_hurt->hitstatus == gmHitCollision_HitStatus_Intangible) continue;
 
                                     else if (func_ovl2_800F079C(it_hit, i, at_hurt, article_gobj) != FALSE)
                                     {

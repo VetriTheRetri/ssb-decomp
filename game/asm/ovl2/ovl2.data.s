@@ -6766,7 +6766,7 @@ glabel D_ovl2_8012DBB8
   .balign 4
   .incbin "ovl2.raw.bin", 0x5772C, 0x14
 
-glabel D_ovl2_8012DBD0
+glabel ColAnimTable
   .incbin "ovl2.raw.bin", 0x57740, 0x5
 
 glabel D_ovl2_8012DBD5

@@ -54,7 +54,7 @@ void func_ovl3_8017E100(GObj *article_gobj)
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
@@ -167,7 +167,7 @@ void func_ovl3_8017E4A4(GObj *article_gobj)
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 

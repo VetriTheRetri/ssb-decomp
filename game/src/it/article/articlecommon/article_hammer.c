@@ -2,7 +2,7 @@
 
 void func_ovl3_80176110(GObj *article_gobj)
 {
-    func_ovl3_80172F98(article_gobj, ATHAMMER_WEAR_COLANIM_ID, 0);
+    atCommon_CheckSetColAnimIndex(article_gobj, ATHAMMER_WEAR_COLANIM_ID, 0);
 }
 
 bool32 jtgt_ovl3_80176134(GObj *article_gobj)

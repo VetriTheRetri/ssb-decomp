@@ -3451,7 +3451,7 @@ glabel func_ovl26_80134A8C
   /* 132EBC 80134C3C 8D090084 */        lw $t1, 0x84($t0)
   /* 132EC0 80134C40 55210004 */      bnel $t1, $at, .L80134C54
   /* 132EC4 80134C44 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 132EC8 80134C48 0C03A605 */       jal func_ovl2_800E9814
+  /* 132EC8 80134C48 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 132ECC 80134C4C 00003025 */        or $a2, $zero, $zero
   /* 132ED0 80134C50 8FBF001C */        lw $ra, 0x1c($sp)
   .L80134C54:

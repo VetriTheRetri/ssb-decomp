@@ -5,13 +5,13 @@
 #include <ssb_types.h>
 #include <macros.h>
 
-typedef enum GObjLinkIndex
+typedef enum gOMObjLinkIndex
 {
-    GObjLinkIndexFighter = 0x3,
-    GObjLinkIndexArticle,
-    GObjLinkIndexItem
+    gOMObjLinkIndexFighter = 0x3,
+    gOMObjLinkIndexArticle,
+    gOMObjLinkIndexItem
 
-} GObjLinkIndex;
+} gOMObjLinkIndex;
 
 typedef f32 mtx[3][4];
 
@@ -119,19 +119,25 @@ typedef struct UnkDObjData
 typedef struct DObjDesc
 {
     s32 index;
-    void *x4;
+    void *display_list;
     Vec3f translate;
     Vec3f rotate;
     Vec3f scale;
 
 } DObjDesc;
 
-typedef struct DObjDescContainer
+typedef struct DObjDescArray
 {
     DObjDesc *dobj_desc;
     DObjDesc **d2;
     DObjDesc **d3;
     u8 unk_dobjcontain_0xC;
+
+} DObjDescArray;
+
+typedef struct DObjDescContainer
+{
+    DObjDescArray dobj_desc_array[2];
 
 } DObjDescContainer;
 

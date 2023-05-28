@@ -7,7 +7,7 @@ void func_ovl3_801837A0(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     ep = func_ovl2_801005C8(&joint->translate);
 

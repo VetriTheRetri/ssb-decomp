@@ -117,7 +117,7 @@ void func_ovl3_80157114(GObj *fighter_gobj)
 
             if (fp->fighter_vars.kirby.copysamus_charge_level == FTKIRBY_COPYSAMUS_CHARGE_MAX)
             {
-                func_ovl2_800E9814(fighter_gobj, 6, 0);
+                ftCommon_CheckSetColAnimIndex(fighter_gobj, 6, 0);
                 func_ovl3_80156E60(fp);
                 func_ovl3_8013E1C8(fighter_gobj);
             }

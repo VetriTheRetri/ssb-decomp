@@ -19,7 +19,7 @@ GObj *func_ovl3_80145990(GObj *fighter_gobj, u8 pickup_mask)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     GObj *pickup_gobj = NULL;
     ftItemPickup *item_pickup = &fp->attributes->item_pickup;
-    GObj *article_gobj = gOMObjCommonLinks[GObjLinkIndexArticle];
+    GObj *article_gobj = gOMObjCommonLinks[gOMObjLinkIndexArticle];
     f32 closest_item_dist = (f32)FLOAT_MAX;
     bool32 is_pickup;
     f32 current_item_dist;

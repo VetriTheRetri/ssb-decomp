@@ -76,14 +76,14 @@ void func_ovl3_80177208(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
 void func_ovl3_80177218(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 }
 
 bool32 jtgt_ovl3_80177224(GObj *article_gobj)
@@ -505,7 +505,7 @@ void func_ovl3_80177D28(GObj *article_gobj)
 
     joint->mobj->unk_mobj_0x94 = 0;
 
-    func_ovl3_80172F98(article_gobj, ATBOMBHEI_EXPLODE_COLANIM_ID, ATBOMBHEI_EXPLODE_COLANIM_DURATION);
+    atCommon_CheckSetColAnimIndex(article_gobj, ATBOMBHEI_EXPLODE_COLANIM_ID, ATBOMBHEI_EXPLODE_COLANIM_DURATION);
 }
 
 void func_ovl3_80177D60(GObj *article_gobj)

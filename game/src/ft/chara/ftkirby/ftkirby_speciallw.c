@@ -15,19 +15,19 @@ void func_ovl3_80161368(GObj *fighter_gobj)
         {
             if (fp->status_vars.kirby.speciallw.colanim_id != FTKIRBY_STONE_COLANIM_ID_LOW)
             {
-                func_ovl2_800E9814(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_LOW, 0);
+                ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_LOW, 0);
                 fp->status_vars.kirby.speciallw.colanim_id = FTKIRBY_STONE_COLANIM_ID_LOW;
             }
         }
         else if (fp->status_vars.kirby.speciallw.colanim_id != FTKIRBY_STONE_COLANIM_ID_MID)
         {
-            func_ovl2_800E9814(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_MID, 0);
+            ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_MID, 0);
             fp->status_vars.kirby.speciallw.colanim_id = FTKIRBY_STONE_COLANIM_ID_MID;
         }
     }
     else if (fp->status_vars.kirby.speciallw.colanim_id != FTKIRBY_STONE_COLANIM_ID_HIGH)
     {
-        func_ovl2_800E9814(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_HIGH, 0);
+        ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_HIGH, 0);
         fp->status_vars.kirby.speciallw.colanim_id = FTKIRBY_STONE_COLANIM_ID_HIGH;
     }
 }
@@ -42,7 +42,7 @@ void func_ovl3_8016141C(GObj *fighter_gobj)
     fp->status_vars.kirby.speciallw.duration = FTKIRBY_STONE_DURATION_MAX;
     fp->status_vars.kirby.speciallw.colanim_id = FTKIRBY_STONE_COLANIM_ID_HIGH;
 
-    func_ovl2_800E9814(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_HIGH, 0);
+    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_STONE_COLANIM_ID_HIGH, 0);
 }
 
 void func_ovl3_80161468(Fighter_Struct *fp)

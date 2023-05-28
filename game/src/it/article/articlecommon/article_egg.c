@@ -64,7 +64,7 @@ void func_ovl3_8018171C(GObj *article_gobj)
 
     ap->is_allow_pickup = FALSE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ap->is_damage_all = TRUE;
@@ -112,7 +112,7 @@ void jtgt_ovl3_80181854(GObj *article_gobj)
 
     ap->is_damage_all = TRUE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 3);
 }
@@ -135,7 +135,7 @@ void jtgt_ovl3_801818E8(GObj *article_gobj)
 
     ap->is_damage_all = TRUE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 4);
 }
@@ -215,7 +215,7 @@ void func_ovl3_80181AA8(GObj *article_gobj)
     ap->article_hit.clang = FALSE;
     ap->article_hit.element = gmHitCollision_Element_Fire;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     func_ovl3_8017279C(article_gobj);
     func_ovl3_8017275C(article_gobj);

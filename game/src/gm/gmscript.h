@@ -68,8 +68,8 @@ typedef enum gmScriptEventKind
     gmScriptEvent_Kind_GFX,
     gmScriptEvent_Kind_GFXPersist, // ???
     gmScriptEvent_Kind_SetModelPart,
-    gmScriptEvent_Kind_Unk10,
-    gmScriptEvent_Kind_Unk11,
+    gmScriptEvent_Kind_ResetModelPartAll,
+    gmScriptEvent_Kind_HideModelPartAll,
     gmScriptEvent_Kind_SetTexturePart,
     gmScriptEvent_Kind_SetColAnim,
     gmScriptEvent_Kind_ResetColAnim,
@@ -148,7 +148,7 @@ typedef struct gmScriptEventCreateHit1
 {
     u32 opcode : 6;
     u32 hit_id : 3;
-    u32 interact_mask : 3;
+    u32 group_id : 3;
     s32 joint_index : 7;
     u32 damage : 8;
     u32 clang : 1;
@@ -332,7 +332,7 @@ typedef struct gmScriptEventCreateGFX
 typedef struct gmScriptEventSetHitStatusAll
 {
     u32 opcode : 6;
-    u32 hit_status : 26;
+    u32 hitstatus : 26;
 
 } gmScriptEventSetHitStatusAll;
 
@@ -340,7 +340,7 @@ typedef struct gmScriptEventSetHitStatusPart
 {
     u32 opcode : 6;
     s32 joint_index : 7;
-    u32 hit_status : 19;
+    u32 hitstatus : 19;
 
 } gmScriptEventSetHitStatusPart;
 

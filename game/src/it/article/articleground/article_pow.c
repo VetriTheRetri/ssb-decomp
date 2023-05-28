@@ -17,7 +17,7 @@ void func_ovl3_8017C0D4(GObj *article_gobj)
 
     func_ovl3_80172EC8(article_gobj, Article_POW_Status, 0);
 
-    ap = ArticleGetStruct(article_gobj), ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap = ArticleGetStruct(article_gobj), ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
 bool32 func_ovl3_8017C110(GObj *article_gobj)
@@ -39,7 +39,7 @@ bool32 func_ovl3_8017C15C(GObj *article_gobj)
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
     ap->proc_update = func_ovl3_8017C110;
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     func_8000BD1C(DObjGetStruct(article_gobj), ArticleGetPData(ap, D_NF_000011F8, D_NF_00001288), 0.0F); // Linker thing
     func_8000DF34(article_gobj);

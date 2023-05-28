@@ -315,16 +315,16 @@ s32 func_ovl3_80140BCC(GObj *fighter_gobj, s32 element, s32 damage_level)
     switch (element)
     {
     case gmHitCollision_Element_Fire:
-        thing = func_ovl2_800E9814(fighter_gobj, damage_level + 0xC, 0);
+        thing = ftCommon_CheckSetColAnimIndex(fighter_gobj, damage_level + 0xC, 0);
         break;
     case gmHitCollision_Element_Electric:
         thing = func_ovl2_800E9AF4(fighter_gobj, damage_level);
         break;
     case gmHitCollision_Element_Sleep:
-        thing = func_ovl2_800E9814(fighter_gobj, damage_level + 0x20, 0);
+        thing = ftCommon_CheckSetColAnimIndex(fighter_gobj, damage_level + 0x20, 0);
         break;
     default:
-        thing = func_ovl2_800E9814(fighter_gobj, 5, 0);
+        thing = ftCommon_CheckSetColAnimIndex(fighter_gobj, 5, 0);
         break;
     }
     return thing;

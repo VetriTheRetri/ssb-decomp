@@ -103,9 +103,9 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->walldamage_nohit_timer = 0;
     fp->star_invincible_timer = 0;
 
-    fp->hit_status = gmHitCollision_HitStatus_Normal;
+    fp->hitstatus = gmHitCollision_HitStatus_Normal;
     fp->special_status = ftSpecialStatus_Normal;
-    fp->special_hit_status = gmHitCollision_HitStatus_Normal;
+    fp->special_hitstatus = gmHitCollision_HitStatus_Normal;
 
     fp->throw_gobj = NULL;
     fp->catch_gobj = NULL;
@@ -245,7 +245,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         {
             ftKirbyCopyData *copy_data = (ftKirbyCopyData*) ((uintptr_t)D_ovl2_80131074 + (intptr_t)&ftKirby_LoadedFiles_SpecialNData);
 
-            ftCommon_SetModelPartRenderState(fighter_gobj, 6, copy_data[fp->fighter_vars.kirby.copy_id].unk_0x2);
+            ftCommon_SetModelPartRenderStateIndex(fighter_gobj, 6, copy_data[fp->fighter_vars.kirby.copy_id].unk_0x2);
         }
         break;
 
@@ -253,8 +253,8 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     case Ft_Kind_PolyLink:
         fp->fighter_vars.link.boomerang_gobj = NULL;
 
-        ftCommon_SetModelPartRenderState(fighter_gobj, 0x15, -1);
-        ftCommon_SetModelPartRenderState(fighter_gobj, 0x13, 0);
+        ftCommon_SetModelPartRenderStateIndex(fighter_gobj, 0x15, -1);
+        ftCommon_SetModelPartRenderStateIndex(fighter_gobj, 0x13, 0);
         break;
 
     case Ft_Kind_Purin:
@@ -278,7 +278,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     }
     ftCommon_ClearHitAll(fighter_gobj);
     ftCommon_SetHitStatusPartAll(fighter_gobj, 1);
-    func_ovl2_800E98B0(fighter_gobj);
+    ftCommon_ResetColAnim(fighter_gobj);
 }
 
 extern ftData *Fighter_FileData_ContainerList[Ft_Kind_EnumMax] =
@@ -313,7 +313,7 @@ extern ftData *Fighter_FileData_ContainerList[Ft_Kind_EnumMax] =
 };
 extern u16 D_ovl2_80131398;
 
-GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
+GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
 {
     Fighter_Struct *fp;
     GObj *fighter_gobj;
@@ -333,10 +333,10 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fighter_gobj->user_data = fp;
 
     fp->status_info.pl_kind = spawn->pl_kind;
-    fp->this_fighter = fighter_gobj;
+    fp->fighter_gobj = fighter_gobj;
     fp->ft_kind = spawn->ft_kind;
     fp->ft_data = Fighter_FileData_ContainerList[fp->ft_kind];
-    attributes = fp->attributes = (ftCommonAttributes*) ((uintptr_t)*fp->ft_data->p_file + (intptr_t)fp->ft_data->o_attributes);
+    attributes = fp->attributes = (ftCommonAttributes *)((uintptr_t)*fp->ft_data->p_file + (intptr_t)fp->ft_data->o_attributes);
     fp->x9D0 = spawn->unk_rebirth_0x38;
     fp->team = spawn->team;
     fp->port_id = spawn->port_id;
@@ -415,7 +415,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
             fp->joint[i]->unk_0x84 = func_ovl2_800D7604();
 
             dobj_unk = fp->joint[i]->unk_0x84;
-            dobj_unk->unk_0xC = attributes->dobj_desc_container[fp->lod_current - 1].unk_dobjcontain_0xC;
+            dobj_unk->unk_0xC = attributes->dobj_desc_container->dobj_desc_array[fp->lod_current - 1].unk_dobjcontain_0xC;
             dobj_unk->unk_0xD = i;
 
             if (fp->costume_id != 0)
@@ -436,12 +436,12 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     {
         if (fp->joint[i] != NULL)
         {
-            fp->joint_render_state[i - 4][0] = fp->joint_render_state[i - 4][1] = (fp->joint[i]->display_list != NULL) ? 0 : -1;
+            fp->joint_render_state[i - 4].render_state_b0 = fp->joint_render_state[i - 4].render_state_b1 = (fp->joint[i]->display_list != NULL) ? 0 : -1;
         }
     }
-    for (i = 0; i < ARRAY_COUNT(fp->unk_render); i++)
+    for (i = 0; i < ARRAY_COUNT(fp->texture_render_state); i++)
     {
-        fp->unk_render[i][0] = fp->unk_render[i][1] = 0;
+        fp->texture_render_state[i].frame_index_default = fp->texture_render_state[i].frame_index_current = 0;
     }
 
     func_ovl2_800EB6EC(fp);
@@ -462,7 +462,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     {
         if (attributes->fighter_hurt_desc[i].joint_index != -1)
         {
-            fp->fighter_hurt[i].hit_status = gmHitCollision_HitStatus_Normal;
+            fp->fighter_hurt[i].hitstatus = gmHitCollision_HitStatus_Normal;
             fp->fighter_hurt[i].joint_index = attributes->fighter_hurt_desc[i].joint_index;
             fp->fighter_hurt[i].joint = fp->joint[fp->fighter_hurt[i].joint_index];
             fp->fighter_hurt[i].unk_ftht_0xC = attributes->fighter_hurt_desc[i].unk_fthdesc_0x4;
@@ -474,7 +474,7 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
             fp->fighter_hurt[i].size.y *= 0.5F;
             fp->fighter_hurt[i].size.z *= 0.5F;
         }
-        else fp->fighter_hurt[i].hit_status = gmHitCollision_HitStatus_None;
+        else fp->fighter_hurt[i].hitstatus = gmHitCollision_HitStatus_None;
     }
     fp->coll_data.p_translate = &DObjGetStruct(fighter_gobj)->translate;
     fp->coll_data.p_lr = &fp->lr;
@@ -498,22 +498,22 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
 
     func_ovl2_800D79F0(fighter_gobj, spawn);
 
-    if (fp->status_info.pl_kind == 1)
+    if (fp->status_info.pl_kind == Pl_Kind_CPU)
     {
         func_unkmulti_8013A8A8(fighter_gobj);
     }
-    if ((fp->status_info.pl_kind == 4) || (fp->status_info.pl_kind == 5))
+    if ((fp->status_info.pl_kind == Pl_Kind_Intro) || (fp->status_info.pl_kind == Pl_Kind_HowToPlay))
     {
         fp->unk_0xA98 = 0;
         fp->unk_0xA94 = 0;
     }
     switch (fp->status_info.pl_kind)
     {
-    case 3:
+    case Pl_Kind_Result:
         func_ovl1_803905CC(fighter_gobj, 0x10000);
         break;
 
-    case 4:
+    case Pl_Kind_Intro:
         func_ovl2_800DEE54(fighter_gobj);
         break;
 
@@ -540,3 +540,4 @@ GObj* func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     }
     return fighter_gobj;
 }
+

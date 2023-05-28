@@ -118,7 +118,7 @@ void func_ovl3_8015D5AC(GObj *fighter_gobj)
 
             if (fp->fighter_vars.samus.charge_level == FTSAMUS_CHARGE_MAX)
             {
-                func_ovl2_800E9814(fighter_gobj, 6, 0);
+                ftCommon_CheckSetColAnimIndex(fighter_gobj, 6, 0);
                 func_ovl3_8015D300(fp);
                 func_ovl3_8013E1C8(fighter_gobj);
             }

@@ -40,7 +40,7 @@ bool32 func_ovl3_8017CFDC(GObj *article_gobj)
     {
         Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-        GObj *fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+        GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
         f32 pos_x = ap->article_vars.pakkun.pos.x, pos_y = ap->article_vars.pakkun.pos.y;
 
@@ -115,7 +115,7 @@ void func_ovl3_8017D190(GObj *article_gobj)
 
     func_ovl3_8017CF20(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     DObjGetStruct(article_gobj)->translate.y = ap->article_vars.pakkun.pos.y;
@@ -129,15 +129,15 @@ void func_ovl3_8017D1DC(GObj *article_gobj)
 
     if (off_y <= ATPAKKUN_CLAMP_OFF_Y)
     {
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     }
     else
     {
-        if (ap->article_hurt.hit_status == gmHitCollision_HitStatus_None)
+        if (ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None)
         {
-            ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+            ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
             func_ovl3_8017275C(article_gobj);
         }
@@ -196,7 +196,7 @@ bool32 jtgt_ovl3_8017D334(GObj *article_gobj)
         ap->phys_info.vel.x = (f32)(cosf(angle) * ap->damage_knockback * -ap->lr_damage);
         ap->phys_info.vel.y = __sinf(angle) * ap->damage_knockback;
 
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017CF80(article_gobj);

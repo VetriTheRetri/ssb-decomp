@@ -80,7 +80,7 @@ void func_ovl3_80152960(GObj *fighter_gobj)
 {
     ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible); // Set hit status
 
-    func_ovl2_800E9814(fighter_gobj, FTPIKACHU_QUICKATTACK_COLANIM_ID, 0); // Apply color animation
+    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTPIKACHU_QUICKATTACK_COLANIM_ID, 0); // Apply color animation
 
     GObjSetAnimSpeed(fighter_gobj, 0.0F); // Set animation speed (0.0F = freeze)
 }

@@ -263,7 +263,7 @@ typedef struct ArticleHitDesc
 typedef struct Article_Hurt
 {
     u8 interact_mask; // 0x1 = interact with fighters, 0x2 = interact with items, 0x4 = interact with other articles
-    s32 hit_status;
+    s32 hitstatus;
     Vec3f offset; // Added to TopN joint
     Vec3f size;
 
@@ -310,7 +310,7 @@ typedef struct atCommonAttributes
     u32 can_shield : 1;
     u32 knockback_base : 10;
     u32 type : 4;
-    u32 hit_status : 4;
+    u32 hitstatus : 4;
     u32 unk_atca_0x3C_b6 : 1;
     u32 unk_atca_0x3C_b7 : 1;
     u32 unk_atca_sfx : 10;

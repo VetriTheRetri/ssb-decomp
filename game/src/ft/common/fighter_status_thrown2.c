@@ -97,7 +97,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
 
     D_ovl3_8018CF80 = unk_index;
 
-    if (this_fp->hit_status != gmHitCollision_HitStatus_Normal)
+    if (this_fp->hitstatus != gmHitCollision_HitStatus_Normal)
     {
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
     }
@@ -178,7 +178,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
 
     knockback_resist = (this_fp->knockback_resist_status < this_fp->knockback_resist_passive) ? this_fp->knockback_resist_passive : this_fp->knockback_resist_status;
 
-    if (this_fp->hit_status != gmHitCollision_HitStatus_Normal)
+    if (this_fp->hitstatus != gmHitCollision_HitStatus_Normal)
     {
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
     }

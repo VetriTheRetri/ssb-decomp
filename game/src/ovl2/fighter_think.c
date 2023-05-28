@@ -33,6 +33,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
     {
     case gmScriptEvent_Kind_End:
         p_event->p_script = NULL;
+
         break;
 
     case gmScriptEvent_Kind_SyncWait:
@@ -40,6 +41,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         p_event->frame_timer += gmScriptEventCast(p_event, gmScriptEventWait)->frames;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventWait);
+
         break;
 
     case gmScriptEvent_Kind_AsyncWait:
@@ -47,6 +49,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         p_event->frame_timer = gmScriptEventCast(p_event, gmScriptEventWait)->frames - fighter_gobj->anim_frame;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventWait);
+
         break;
 
     case gmScriptEvent_Kind_FighterHit:
@@ -57,15 +60,15 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
             hit_id = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->hit_id;
             ft_hit = &fp->fighter_hit[hit_id];
 
-            if ((ft_hit->update_state == gmHitCollision_UpdateState_Disable) || (ft_hit->interact_mask != gmScriptEventCast(p_event, gmScriptEventCreateHit1)->interact_mask))
+            if ((ft_hit->update_state == gmHitCollision_UpdateState_Disable) || (ft_hit->group_id != gmScriptEventCast(p_event, gmScriptEventCreateHit1)->group_id))
             {
-                ft_hit->interact_mask = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->interact_mask;
+                ft_hit->group_id = gmScriptEventCast(p_event, gmScriptEventCreateHit1)->group_id;
                 ft_hit->update_state = gmHitCollision_UpdateState_New;
                 fp->is_hit_enable = TRUE;
 
                 for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
                 {
-                    if ((i != hit_id) && (fp->fighter_hit[i].update_state != gmHitCollision_UpdateState_Disable) && (ft_hit->interact_mask == fp->fighter_hit[i].interact_mask))
+                    if ((i != hit_id) && (fp->fighter_hit[i].update_state != gmHitCollision_UpdateState_Disable) && (ft_hit->group_id == fp->fighter_hit[i].group_id))
                     {
                         for (j = 0; j < ARRAY_COUNT(ft_hit->hit_targets); j++)
                         {
@@ -140,6 +143,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         ft_hit->offset.z = gmScriptEventCast(p_event, gmScriptEventSetHitOffset2)->off_z;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitOffset2);
+
         break;
 
     case gmScriptEvent_Kind_SetHitDamage:
@@ -163,6 +167,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         fp->fighter_hit[hit_id].size = gmScriptEventCast(p_event, gmScriptEventSetHitSize)->size * 0.5F;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitSize);
+
         break;
 
     case gmScriptEvent_Kind_SetHitSoundLevel:
@@ -180,6 +185,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         gmScriptEventUpdatePtr(p_event, gmScriptEventResetHit);
 
         ftCommon_RefreshHitIndex(fighter_gobj, hit_id);
+
         break;
 
     case gmScriptEvent_Kind_ClearHitIndex:
@@ -188,12 +194,14 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         gmScriptEventUpdatePtr(p_event, gmScriptEventClearHitIndex);
 
         fp->fighter_hit[hit_id].update_state = gmHitCollision_UpdateState_Disable;
+
         break;
 
     case gmScriptEvent_Kind_ClearHitAll:
         ftCommon_ClearHitAll(fighter_gobj);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventClearHitAll);
+
         break;
 
     case gmScriptEvent_Kind_SetFighterThrow:
@@ -202,6 +210,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         fp->fighter_throw = gmScriptEventCast(p_event, gmScriptEventSetFighterThrow2)->fighter_throw;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetFighterThrow2);
+
         break;
 
     case gmScriptEvent_Kind_PlaySFXStoreInfo:
@@ -324,27 +333,31 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_SetHitStatusPartAll:
-        ftCommon_SetHitStatusPartAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hit_status);
+        ftCommon_SetHitStatusPartAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hitstatus);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusAll);
+
         break;
 
     case gmScriptEvent_Kind_SetHitStatusPart:
-        ftCommon_SetHitStatusPart(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->hit_status);
+        ftCommon_SetHitStatusPart(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetHitStatusPart)->hitstatus);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusPart);
+
         break;
 
     case gmScriptEvent_Kind_SetHitStatusAll:
-        ftCommon_SetHitStatusAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hit_status);
+        ftCommon_SetHitStatusAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hitstatus);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusAll);
+
         break;
 
     case gmScriptEvent_Kind_ResetHurtAll:
         ftCommon_InitFighterHurtParts(fighter_gobj);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
+
         break;
 
     case gmScriptEvent_Kind_SetHurtPart:
@@ -368,6 +381,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHurtPart4);
 
         ftCommon_UpdateFighterHurtPartIndex(fighter_gobj, joint_index, &hurt_offset, &hurt_size);
+
         break;
 
     case gmScriptEvent_Kind_LoopBegin:
@@ -424,12 +438,14 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
     case gmScriptEvent_Kind_Return:
         p_event->p_script = p_event->p_goto[--p_event->script_index];
+
         break;
 
     case gmScriptEvent_Kind_Goto:
         gmScriptEventUpdatePtr(p_event, gmScriptEventGoto1);
 
         p_event->p_script = gmScriptEventCast(p_event, gmScriptEventGoto2)->p_goto;
+
         break;
 
     case gmScriptEvent_Kind_SetParallelScript:
@@ -454,40 +470,42 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_SetModelPart:
-        func_ovl2_800E8C70(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventSetModelPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetModelPart)->mode);
+        ftCommon_SetModelPartRenderIndex(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventSetModelPart)->joint_index), gmScriptEventCast(p_event, gmScriptEventSetModelPart)->mode);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetModelPart);
         break;
 
-    case gmScriptEvent_Kind_Unk10:
-        func_ovl2_800E8ECC(fighter_gobj);
+    case gmScriptEvent_Kind_ResetModelPartAll:
+        ftCommon_ResetModelPartRenderAll(fighter_gobj);
+
         gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
 
         break;
 
-    case gmScriptEvent_Kind_Unk11:
-        func_ovl2_800E90F8(fighter_gobj);
+    case gmScriptEvent_Kind_HideModelPartAll:
+        ftCommon_HideModelPartAll(fighter_gobj);
+
         gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
 
         break;
 
     case gmScriptEvent_Kind_SetTexturePart:
-
-        func_ovl2_800E962C(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetTexturePart)->obj_index, gmScriptEventCast(p_event, gmScriptEventSetTexturePart)->frame);
+        ftCommon_SetTexturePartIndex(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetTexturePart)->obj_index, gmScriptEventCast(p_event, gmScriptEventSetTexturePart)->frame);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetTexturePart);
 
         break;
 
     case gmScriptEvent_Kind_SetColAnim:
-        func_ovl2_800E9814(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetColAnim)->colanim_id, gmScriptEventCast(p_event, gmScriptEventSetColAnim)->length);
+        ftCommon_CheckSetColAnimIndex(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetColAnim)->colanim_id, gmScriptEventCast(p_event, gmScriptEventSetColAnim)->length);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetColAnim);
 
         break;
 
     case gmScriptEvent_Kind_ResetColAnim:
-        func_ovl2_800E98D4(fighter_gobj);
+        ftCommon_ResetColAnimStatUpdate(fighter_gobj);
+
         gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
 
         break;
@@ -496,26 +514,29 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         fp->command_vars.flags.flag0 = gmScriptEventCast(p_event, gmScriptEventSetFlag)->flag;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetFlag);
+
         break;
 
     case gmScriptEvent_Kind_SetFlag1:
         fp->command_vars.flags.flag1 = gmScriptEventCast(p_event, gmScriptEventSetFlag)->flag;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetFlag);
+
         break;
 
     case gmScriptEvent_Kind_SetFlag2:
         fp->command_vars.flags.flag2 = gmScriptEventCast(p_event, gmScriptEventSetFlag)->flag;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetFlag);
+
         break;
 
     case gmScriptEvent_Kind_SetFlag3:
         fp->command_vars.flags.flag3 = gmScriptEventCast(p_event, gmScriptEventSetFlag)->flag;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetFlag);
-        break;
 
+        break;
 
     case gmScriptEvent_Kind_SlopeContour:
         flag2 = fp->slope_contour;
@@ -530,15 +551,17 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
     case gmScriptEvent_Kind_Unk14:
         fp->x190_flag_b6 = gmScriptEventCast(p_event, gmScriptEventUnkFlag)->flag;
-        gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
-        return;
 
+        gmScriptEventUpdatePtr(p_event, gmScriptEventDefault);
+
+        break;
 
     case gmScriptEvent_Kind_AfterImage:
         fp->afterimage.is_itemswing = gmScriptEventCast(p_event, gmScriptEventAfterImage)->is_itemswing;
         fp->afterimage.render_state = gmScriptEventCast(p_event, gmScriptEventAfterImage)->render_state;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventAfterImage);
+
         break;
 
     case gmScriptEvent_Kind_Unk15:
@@ -891,7 +914,6 @@ bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_
                 break;
 
             case gmColorEvent_Kind_ToggleColorOff:
-
                 colanim->is_use_color1 = colanim->is_use_color2 = colanim->unk_ca_0x60_b34 = 0;
 
                 gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
@@ -1059,7 +1081,7 @@ void func_ovl2_800E11C8(GObj *fighter_gobj)
 
     while (func_ovl2_800E0880(&fp->colanim, fighter_gobj, fp->is_playing_sfx, fp->is_playing_gfx) != FALSE)
     {
-        func_ovl2_800E98D4(fighter_gobj);
+        ftCommon_ResetColAnimStatUpdate(fighter_gobj);
     }
 }
 
@@ -1178,18 +1200,18 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
             pl->stick_range.x *= 0.5F;
             pl->stick_range.y *= 0.5F;
         }
-        if (pl->stick_range.x >= 0x14)
+        if (pl->stick_range.x >= 20)
         {
-            if (pl->stick_prev.x >= 0x14)
+            if (pl->stick_prev.x >= 20)
             {
                 this_fp->tap_stick_x++, this_fp->hold_stick_x++;
             }
             else this_fp->tap_stick_x = this_fp->hold_stick_x = 1;
 
         }
-        else if (pl->stick_range.x <= -0x14)
+        else if (pl->stick_range.x <= -20)
         {
-            if (pl->stick_prev.x <= -0x14)
+            if (pl->stick_prev.x <= -20)
             {
                 this_fp->tap_stick_x++, this_fp->hold_stick_x++;
             }
@@ -1269,11 +1291,11 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
         if (this_fp->walldamage_nohit_timer == 0)
         {
-            this_fp->special_hit_status = (this_fp->invincible_timer != FALSE) ? gmHitCollision_HitStatus_Invincible : gmHitCollision_HitStatus_Normal;
+            this_fp->special_hitstatus = (this_fp->invincible_timer != FALSE) ? gmHitCollision_HitStatus_Invincible : gmHitCollision_HitStatus_Normal;
 
             if (this_fp->colanim.colanim_id == 0xA)
             {
-                func_ovl2_800E98D4(fighter_gobj);
+                ftCommon_ResetColAnimStatUpdate(fighter_gobj);
             }
         }
     }
@@ -1283,11 +1305,11 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
         if ((this_fp->invincible_timer == 0) && (this_fp->walldamage_nohit_timer == 0))
         {
-            this_fp->special_hit_status = gmHitCollision_HitStatus_Normal;
+            this_fp->special_hitstatus = gmHitCollision_HitStatus_Normal;
 
             if (this_fp->colanim.colanim_id == 0xA)
             {
-                func_ovl2_800E98D4(fighter_gobj);
+                ftCommon_ResetColAnimStatUpdate(fighter_gobj);
             }
         }
     }
@@ -1301,7 +1323,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
             if (this_fp->colanim.colanim_id == 0x4A)
             {
-                func_ovl2_800E98D4(fighter_gobj);
+                ftCommon_ResetColAnimStatUpdate(fighter_gobj);
             }
         }
         else if (this_fp->star_invincible_timer == ATSTAR_WARN_BEGIN_FRAME)
@@ -1325,9 +1347,9 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
         {
             this_fp->damage_heal = 0;
         }
-        if ((this_fp->damage_heal == 0) && (this_fp->colanim.colanim_id == 9))
+        if ((this_fp->damage_heal == 0) && (this_fp->colanim.colanim_id == 0x9))
         {
-            func_ovl2_800E98D4(fighter_gobj);
+            ftCommon_ResetColAnimStatUpdate(fighter_gobj);
         }
     }
     if ((this_fp->item_hold != NULL) && (this_fp->status_info.status_id != ftStatus_Common_LightGet) && (ArticleGetStruct(this_fp->item_hold)->at_kind == At_Kind_Hammer))
@@ -1374,7 +1396,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
         if ((this_fp->ground_or_air == ground) && !(this_fp->x18F_flag_b4))
         {
-            other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+            other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
             is_check_self = FALSE;
 
@@ -1482,7 +1504,7 @@ void func_ovl2_800E1D9C(GObj *ogobj)
     }
 }
 
-bool32 func_ovl2_800E1DE8(GObj *ogobj, bool32(*proc_update)(GObj*, GObj*, Ground_Hit*, s32*))
+bool32 func_ovl2_800E1DE8(GObj *egobj, bool32(*proc_update)(GObj*, GObj*, Ground_Hit*, s32*))
 {
     s32 i;
 
@@ -1490,7 +1512,7 @@ bool32 func_ovl2_800E1DE8(GObj *ogobj, bool32(*proc_update)(GObj*, GObj*, Ground
     {
         if (D_ovl2_80131190[i].egobj == NULL)
         {
-            D_ovl2_80131190[i].egobj = ogobj;
+            D_ovl2_80131190[i].egobj = egobj;
             D_ovl2_80131190[i].proc_update = proc_update;
             D_ovl2_8013119C++;
 
@@ -1500,13 +1522,13 @@ bool32 func_ovl2_800E1DE8(GObj *ogobj, bool32(*proc_update)(GObj*, GObj*, Ground
     return FALSE;
 }
 
-void func_ovl2_800E1E3C(GObj *ogobj)
+void func_ovl2_800E1E3C(GObj *egobj)
 {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_ovl2_80131190); i++)
     {
-        if (D_ovl2_80131190[i].egobj == ogobj)
+        if (D_ovl2_80131190[i].egobj == egobj)
         {
             D_ovl2_80131190[i].egobj = NULL;
             D_ovl2_8013119C--;
@@ -1786,7 +1808,7 @@ void func_ovl2_800E2660(GObj *fighter_gobj)
 static s32 D_ovl2_801311A0[4];
 static s32 D_ovl2_801311B0[4];
 
-void func_ovl2_800E26BC(Fighter_Struct *fp, u32 attacker_mask, GObj *victim_gobj, s32 hitbox_type, u32 victim_mask, bool32 unk_bool)
+void func_ovl2_800E26BC(Fighter_Struct *fp, u32 attack_group_id, GObj *victim_gobj, s32 hitbox_type, u32 victim_group_id, bool32 unk_bool)
 {
     s32 i, j;
 
@@ -1794,7 +1816,7 @@ void func_ovl2_800E26BC(Fighter_Struct *fp, u32 attacker_mask, GObj *victim_gobj
     {
         if (i == ARRAY_COUNT(fp->fighter_hit)); // WAT
 
-        if ((fp->fighter_hit[i].update_state != gmHitCollision_UpdateState_Disable) && (attacker_mask == fp->fighter_hit[i].interact_mask))
+        if ((fp->fighter_hit[i].update_state != gmHitCollision_UpdateState_Disable) && (attack_group_id == fp->fighter_hit[i].group_id))
         {
             for (j = 0; j < ARRAY_COUNT(fp->fighter_hit[i].hit_targets); j++)
             {
@@ -1811,7 +1833,7 @@ void func_ovl2_800E26BC(Fighter_Struct *fp, u32 attacker_mask, GObj *victim_gobj
                         break;
 
                     case gmHitCollision_Type_Hit:
-                        fp->fighter_hit[i].hit_targets[j].victim_flags.interact_mask = victim_mask;
+                        fp->fighter_hit[i].hit_targets[j].victim_flags.interact_mask = victim_group_id;
                         break;
 
                     default:
@@ -1841,7 +1863,7 @@ void func_ovl2_800E26BC(Fighter_Struct *fp, u32 attacker_mask, GObj *victim_gobj
                     break;
 
                 case gmHitCollision_Type_Hit:
-                    fp->fighter_hit[i].hit_targets[j].victim_flags.interact_mask = victim_mask;
+                    fp->fighter_hit[i].hit_targets[j].victim_flags.interact_mask = victim_group_id;
                     break;
 
                 default:
@@ -1882,7 +1904,7 @@ void func_ovl2_800E2910(Fighter_Struct *other_fp, Fighter_Hit *other_hit, Fighte
 
     if ((this_hit->damage - 10) < other_hit->damage)
     {
-        func_ovl2_800E26BC(this_fp, this_hit->interact_mask, other_gobj, gmHitCollision_Type_Hit, other_hit->interact_mask, TRUE);
+        func_ovl2_800E26BC(this_fp, this_hit->group_id, other_gobj, gmHitCollision_Type_Hit, other_hit->group_id, TRUE);
         func_ovl2_800E287C(this_gobj, this_fp, this_hit, other_gobj);
         func_ovl2_80100BF0(&sp2C, this_hit->damage);
 
@@ -1893,7 +1915,7 @@ void func_ovl2_800E2910(Fighter_Struct *other_fp, Fighter_Hit *other_hit, Fighte
     }
     if ((other_hit->damage - 10) < this_hit->damage)
     {
-        func_ovl2_800E26BC(other_fp, other_hit->interact_mask, this_gobj, gmHitCollision_Type_Hit, this_hit->interact_mask, FALSE);
+        func_ovl2_800E26BC(other_fp, other_hit->group_id, this_gobj, gmHitCollision_Type_Hit, this_hit->group_id, FALSE);
         func_ovl2_800E287C(other_gobj, other_fp, other_hit, this_gobj);
         func_ovl2_80100BF0(&sp2C, other_hit->damage);
 
@@ -1908,7 +1930,7 @@ void func_ovl2_800E2A90(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
 {
     Vec3f sp2C;
 
-    func_ovl2_800E26BC(attacker_fp, attacker_hit->interact_mask, victim_gobj, gmHitCollision_Type_Shield, 0U, FALSE);
+    func_ovl2_800E26BC(attacker_fp, attacker_hit->group_id, victim_gobj, gmHitCollision_Type_Shield, 0U, FALSE);
 
     if (attacker_fp->shield_attack_damage < attacker_hit->damage)
     {
@@ -1932,7 +1954,7 @@ void func_ovl2_800E2B88(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
 {
     f32 dist;
 
-    func_ovl2_800E26BC(attacker_fp, attacker_hit->interact_mask, victim_gobj, gmHitCollision_Type_Hurt, 0U, TRUE);
+    func_ovl2_800E26BC(attacker_fp, attacker_hit->group_id, victim_gobj, gmHitCollision_Type_Hurt, 0U, TRUE);
 
     if (DObjGetStruct(victim_gobj)->translate.x < DObjGetStruct(attacker_gobj)->translate.x)
     {
@@ -2011,7 +2033,7 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
     s32 unused;
     Vec3f sp3C;
 
-    func_ovl2_800E26BC(attacker_fp, attacker_hit->interact_mask, victim_gobj, gmHitCollision_Type_Hurt, 0U, FALSE);
+    func_ovl2_800E26BC(attacker_fp, attacker_hit->group_id, victim_gobj, gmHitCollision_Type_Hurt, 0U, FALSE);
 
     damage = func_ovl2_800EA40C(victim_fp, attacker_hit->damage);
 
@@ -2021,10 +2043,10 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
     }
     if
     (
-        (victim_fp->special_hit_status == gmHitCollision_HitStatus_Normal)  &&
+        (victim_fp->special_hitstatus == gmHitCollision_HitStatus_Normal)  &&
         (victim_fp->special_status == ftSpecialStatus_Normal)               &&
-        (victim_fp->hit_status == gmHitCollision_HitStatus_Normal)          &&
-        (victim_hurt->hit_status == gmHitCollision_HitStatus_Normal)
+        (victim_fp->hitstatus == gmHitCollision_HitStatus_Normal)          &&
+        (victim_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     )
     {
         if (func_ovl2_800E2CC0(victim_fp, &damage) != FALSE)
@@ -2078,14 +2100,14 @@ void func_ovl2_800E2F04(Item_Struct *ip, Item_Hit *it_hit, s32 index, Fighter_St
 
     if ((ft_hit->damage - 10) < damage)
     {
-        func_ovl2_800E26BC(fp, ft_hit->interact_mask, item_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
+        func_ovl2_800E26BC(fp, ft_hit->group_id, item_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
         func_ovl2_800E287C(fighter_gobj, fp, ft_hit, item_gobj);
         func_ovl2_80100BF0(&sp30, ft_hit->damage);
     }
 
     if ((damage - 10) < ft_hit->damage)
     {
-        func_ovl3_8016679C(ip, it_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->interact_mask);
+        func_ovl3_8016679C(ip, it_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
 
         if (ip->hit_attack_damage < damage)
         {
@@ -2100,7 +2122,7 @@ void func_ovl2_800E2F04(Item_Struct *ip, Item_Hit *it_hit, s32 index, Fighter_St
     }
 }
 
-void func_ovl2_800E3048(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Struct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *arg7)
+void func_ovl2_800E3048(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Struct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
 {
     s32 damage = func_ovl3_80168128(ip);
     Vec3f sp30;
@@ -2116,7 +2138,7 @@ void func_ovl2_800E3048(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
         ip->shield_collide_vec.x = 0.0F;
         ip->shield_collide_vec.y = 0.0F;
 
-        ip->shield_collide_vec.z = (fp->lr == RIGHT) ? -(*arg7) : *arg7;
+        ip->shield_collide_vec.z = (fp->lr == RIGHT) ? -(*lr) : *lr;
 
         vec3f_normalize(&ip->shield_collide_vec);
     }
@@ -2212,10 +2234,10 @@ void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
     }
     if
     (
-        (fp->special_hit_status == ftSpecialStatus_Normal)      &&
+        (fp->special_hitstatus == ftSpecialStatus_Normal)      &&
         (fp->special_status == gmHitCollision_HitStatus_Normal) &&
-        (fp->hit_status == gmHitCollision_HitStatus_Normal)     &&
-        (ft_hurt->hit_status == gmHitCollision_HitStatus_Normal)&&
+        (fp->hitstatus == gmHitCollision_HitStatus_Normal)     &&
+        (ft_hurt->hitstatus == gmHitCollision_HitStatus_Normal)&&
         (func_ovl2_800E2CC0(fp, &damage) != 0)
     )
     {
@@ -2248,13 +2270,13 @@ void func_ovl2_800E35BC(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
 
     if ((ft_hit->damage - 10) < damage)
     {
-        func_ovl2_800E26BC(fp, ft_hit->interact_mask, article_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
+        func_ovl2_800E26BC(fp, ft_hit->group_id, article_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
         func_ovl2_800E287C(fighter_gobj, fp, ft_hit, article_gobj);
         func_ovl2_80100BF0(&sp30, ft_hit->damage);
     }
     if ((damage - 10) < ft_hit->damage)
     {
-        func_ovl3_8016F930(at_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->interact_mask);
+        func_ovl3_8016F930(at_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
 
         if (ap->hit_attack_damage < damage)
         {
@@ -2278,13 +2300,13 @@ void func_ovl2_800E35BC(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
 
     if ((ft_hit->damage - 10) < damage)
     {
-        func_ovl2_800E26BC(fp, ft_hit->interact_mask, article_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
+        func_ovl2_800E26BC(fp, ft_hit->group_id, article_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
         func_ovl2_800E287C(fighter_gobj, fp, ft_hit, article_gobj);
         func_ovl2_80100BF0(&sp30, ft_hit->damage);
     }
     if ((damage - 10) < ft_hit->damage)
     {
-        func_ovl3_8016F930(at_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->interact_mask);
+        func_ovl3_8016F930(at_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
 
         if (ap->hit_attack_damage < damage)
         {
@@ -2429,10 +2451,10 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
         }
         if 
         (
-            (fp->special_hit_status == ftSpecialStatus_Normal)      &&
+            (fp->special_hitstatus == ftSpecialStatus_Normal)      &&
             (fp->special_status == gmHitCollision_HitStatus_Normal) &&
-            (fp->hit_status == gmHitCollision_HitStatus_Normal)     &&
-            (ft_hurt->hit_status == gmHitCollision_HitStatus_Normal)&&
+            (fp->hitstatus == gmHitCollision_HitStatus_Normal)     &&
+            (ft_hurt->hitstatus == gmHitCollision_HitStatus_Normal)&&
             (func_ovl2_800E2CC0(fp, &damage) != 0)
         )
         {
@@ -2867,7 +2889,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
     bool32 is_check_self;
 
     this_fp = FighterGetStruct(this_gobj);
-    other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+    other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
     is_check_self = FALSE;
 
     while (other_gobj != NULL)
@@ -3029,7 +3051,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
                                 }
                             }
                         }
-                        if ((this_fp->special_hit_status != gmHitCollision_HitStatus_Intangible) && (this_fp->special_status != ftSpecialStatus_Intangible) && (this_fp->hit_status != gmHitCollision_HitStatus_Intangible))
+                        if ((this_fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (this_fp->special_status != ftSpecialStatus_Intangible) && (this_fp->hitstatus != gmHitCollision_HitStatus_Intangible))
                         {
                             for (i = 0; i < ARRAY_COUNT(other_fp->fighter_hit); i++)
                             {
@@ -3041,9 +3063,9 @@ void func_ovl2_800E4870(GObj *this_gobj)
                                 {
                                     ft_hurt = &this_fp->fighter_hurt[j];
 
-                                    if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
+                                    if (ft_hurt->hitstatus == gmHitCollision_HitStatus_None) break;
 
-                                    if (ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
+                                    if (ft_hurt->hitstatus != gmHitCollision_HitStatus_Intangible)
                                     {
                                         if (func_ovl2_800EFBA4(other_ft_hit, ft_hurt) != FALSE)
                                         {
@@ -3081,7 +3103,7 @@ void func_ovl2_800E4ED4(GObj *fighter_gobj)
     s32 unused1[4];
 
     fp = FighterGetStruct(fighter_gobj);
-    item_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
+    item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
     while (item_gobj != NULL)
     {
@@ -3217,7 +3239,7 @@ void func_ovl2_800E4ED4(GObj *fighter_gobj)
                                 }
                             }
                         }
-                        if ((fp->special_hit_status != gmHitCollision_HitStatus_Intangible) && (fp->special_status != ftSpecialStatus_Intangible) && (fp->hit_status != gmHitCollision_HitStatus_Intangible))
+                        if ((fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->special_status != ftSpecialStatus_Intangible) && (fp->hitstatus != gmHitCollision_HitStatus_Intangible))
                         {
                             for (i = 0; i < it_hit->hitbox_count; i++)
                             {
@@ -3227,9 +3249,9 @@ void func_ovl2_800E4ED4(GObj *fighter_gobj)
                                 {
                                     ft_hurt = &fp->fighter_hurt[j];
 
-                                    if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
+                                    if (ft_hurt->hitstatus == gmHitCollision_HitStatus_None) break;
 
-                                    if (ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
+                                    if (ft_hurt->hitstatus != gmHitCollision_HitStatus_Intangible)
                                     {
                                         if (func_ovl2_800EFE6C(it_hit, i, ft_hurt) != FALSE)
                                         {
@@ -3267,7 +3289,7 @@ void func_ovl2_800E55DC(GObj *fighter_gobj)
     s32 unused1[4];
 
     fp = FighterGetStruct(fighter_gobj);
-    article_gobj = gOMObjCommonLinks[GObjLinkIndexArticle];
+    article_gobj = gOMObjCommonLinks[gOMObjLinkIndexArticle];
 
     while (article_gobj != NULL)
     {
@@ -3389,7 +3411,7 @@ void func_ovl2_800E55DC(GObj *fighter_gobj)
                                 }
                             }
                         }
-                        if ((fp->special_hit_status != gmHitCollision_HitStatus_Intangible) && (fp->special_status != ftSpecialStatus_Intangible) && (fp->hit_status != gmHitCollision_HitStatus_Intangible))
+                        if ((fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->special_status != ftSpecialStatus_Intangible) && (fp->hitstatus != gmHitCollision_HitStatus_Intangible))
                         {
                             for (i = 0; i < at_hit->hitbox_count; i++)
                             {
@@ -3399,9 +3421,9 @@ void func_ovl2_800E55DC(GObj *fighter_gobj)
                                 {
                                     ft_hurt = &fp->fighter_hurt[j];
 
-                                    if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
+                                    if (ft_hurt->hitstatus == gmHitCollision_HitStatus_None) break;
 
-                                    if (ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible)
+                                    if (ft_hurt->hitstatus != gmHitCollision_HitStatus_Intangible)
                                     {
                                         if (func_ovl2_800F03B8(at_hit, i, ft_hurt) != FALSE)
                                         {
@@ -3521,7 +3543,7 @@ void func_ovl2_800E5E58(GObj *this_gobj)
     this_fp->search_gobj = NULL;
     this_fp->search_gobj_dist = (f32)FLOAT_MAX;
 
-    other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+    other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
     while (other_gobj != NULL)
     {
@@ -3537,7 +3559,7 @@ void func_ovl2_800E5E58(GObj *this_gobj)
 
         if ((other_fp->capture_flags & this_fp->catch_flags)) goto next_gobj;
 
-        if ((other_fp->special_hit_status != gmHitCollision_HitStatus_Normal) || (other_fp->special_status != ftSpecialStatus_Normal) || (other_fp->hit_status != gmHitCollision_HitStatus_Normal)) goto next_gobj;
+        if ((other_fp->special_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->special_status != ftSpecialStatus_Normal) || (other_fp->hitstatus != gmHitCollision_HitStatus_Normal)) goto next_gobj;
 
         for (i = 0; i < ARRAY_COUNT(this_fp->fighter_hit) ^ 0; i++) // XOR 0 ???
         {
@@ -3566,9 +3588,9 @@ void func_ovl2_800E5E58(GObj *this_gobj)
                     {
                         ft_hurt = &other_fp->fighter_hurt[j];
 
-                        if (ft_hurt->hit_status == gmHitCollision_HitStatus_None) break;
+                        if (ft_hurt->hitstatus == gmHitCollision_HitStatus_None) break;
 
-                        else if ((ft_hurt->hit_status != gmHitCollision_HitStatus_Intangible) && (ft_hurt->hit_status != gmHitCollision_HitStatus_Invincible))
+                        else if ((ft_hurt->hitstatus != gmHitCollision_HitStatus_Intangible) && (ft_hurt->hitstatus != gmHitCollision_HitStatus_Invincible))
                         {
                             if ((ft_hurt->unk_ftht_0x10 != 0) && (func_ovl2_800EFBA4(ft_hit, ft_hurt) != FALSE))
                             {
@@ -3833,7 +3855,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         switch (fp->afterimage.is_itemswing)
         {
         case FALSE:
-            if ((fp->ft_kind == Ft_Kind_Link) && (fp->joint_render_state[7][1] == 0))
+            if ((fp->ft_kind == Ft_Kind_Link) && (fp->joint_render_state[7].render_state_b1 == 0))
             {
                 UnkDObjData *unk_dobj = fp->joint[11]->unk_0x84;
 
@@ -3901,7 +3923,7 @@ void func_ovl2_800E69C4(Fighter_Struct *fp, s32 index)
     DObj *j2;
     DObj *j1;
     ftCommonAttributes *attributes;
-    DObjDescContainer *container;
+    DObjDescArray *container;
     DObj *part_joint;
     UnkDObjData *unk_dobj;
 
@@ -3912,17 +3934,17 @@ void func_ovl2_800E69C4(Fighter_Struct *fp, s32 index)
     {
         if (fp->lod_current == 1)
         {
-            container = &fp->attributes->dobj_desc_container[0];
+            container = &fp->attributes->dobj_desc_container->dobj_desc_array[0];
         }
-        else if (attributes->dobj_desc_container[1].dobj_desc[part_index->partindex_0x0 - 4].unk_dobjdesc_0x4 != NULL)
+        else if (attributes->dobj_desc_container->dobj_desc_array[1].dobj_desc[part_index->partindex_0x0 - 4].display_list != NULL)
         {
-            container = &attributes->dobj_desc_container[1];
+            container = &attributes->dobj_desc_container->dobj_desc_array[1];
         }
-        else container = &attributes->dobj_desc_container[0];
+        else container = &attributes->dobj_desc_container->dobj_desc_array[0];
     }
     else container = NULL;
 
-    sp38 = (container != NULL) ? container->dobj_desc[part_index->partindex_0x0 - 4].unk_dobjdesc_0x4 : NULL;
+    sp38 = (container != NULL) ? container->dobj_desc[part_index->partindex_0x0 - 4].display_list : NULL;
 
     joint = func_800092D0(fp->fighter_gobj, sp38);
     joint->unk_0xC->unk_0x8 = NULL;
@@ -3934,7 +3956,7 @@ void func_ovl2_800E69C4(Fighter_Struct *fp, s32 index)
     }
     if (container != NULL)
     {
-        fp->joint_render_state[part_index->partindex_0x0 - 4][0] = fp->joint_render_state[part_index->partindex_0x0 - 4][1] = (sp38 != NULL) ? 0 : -1;
+        fp->joint_render_state[part_index->partindex_0x0 - 4].render_state_b0 = fp->joint_render_state[part_index->partindex_0x0 - 4].render_state_b1 = (sp38 != NULL) ? 0 : -1;
     }
     part_joint = fp->joint[part_index->partindex_0x4];
 
@@ -3994,8 +4016,7 @@ void func_ovl2_800E69C4(Fighter_Struct *fp, s32 index)
             {
                 j2->prev = joint;
                 j2 = j2->unk_0x8;
-            }
-            while (j2 != NULL);
+            } while (j2 != NULL);
         }
         part_joint->next = joint;
 
@@ -4007,7 +4028,7 @@ void func_ovl2_800E69C4(Fighter_Struct *fp, s32 index)
 
     joint->unk_0x84 = unk_dobj = func_ovl2_800D7604();
 
-    unk_dobj->unk_0xC = attributes->dobj_desc_container[fp->lod_current - 1].unk_dobjcontain_0xC;
+    unk_dobj->unk_0xC = attributes->dobj_desc_container->dobj_desc_array[fp->lod_current - 1].unk_dobjcontain_0xC;
     unk_dobj->unk_0xD = part_index->partindex_0x0;
 
     if (part_index->partindex_0x8 != 0)
@@ -4187,7 +4208,7 @@ extern ftStatusDesc D_ovl2_80128DD8;
 extern ftStatusDesc D_ovl2_80128E50;
 extern ftStatusDesc *D_ovl2_8012FE90;
 extern ftStatusDesc *D_ovl2_8012B740[];
-extern ColAnimDesc D_ovl2_8012DBD4[];
+extern ColAnimDesc ColAnimTable[]; // The disassembler thinks this is 0x8012DBD5, actually starts at 0x8012DBD0
 
 void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 anim_rate, u32 flags)
 {
@@ -4235,7 +4256,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 
     if (fp->lod_current != fp->lod_match)
     {
-        func_ovl2_800E9198(fighter_gobj, fp->lod_match);
+        ftCommon_SetModelPartLoDAll(fighter_gobj, fp->lod_match);
         fp->lod_current = fp->lod_match;
     }
     if (!(flags & FTSTATUPDATE_HIT_PRESERVE) && (fp->is_hit_enable))
@@ -4252,7 +4273,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
         {
             ftCommon_SetHitStatusPartAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
         }
-        if (fp->hit_status != gmHitCollision_HitStatus_Normal)
+        if (fp->hitstatus != gmHitCollision_HitStatus_Normal)
         {
             ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
         }
@@ -4261,17 +4282,17 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     {
         ftCommon_InitFighterHurtParts(fighter_gobj);
     }
-    if (!(flags & FTSTATUPDATE_UNK1_PRESERVE) && (fp->x18C_flag_b3))
+    if (!(flags & FTSTATUPDATE_MODELPART_PRESERVE) && (fp->is_modelpart_modify))
     {
-        func_ovl2_800E8ECC(fighter_gobj);
+        ftCommon_ResetModelPartRenderAll(fighter_gobj);
     }
-    if (!(flags & FTSTATUPDATE_UNK2_PRESERVE) && (fp->x18C_flag_b4))
+    if (!(flags & FTSTATUPDATE_TEXTUREPART_PRESERVE) && (fp->is_texturepart_modify))
     {
         func_ovl2_800E96B0(fighter_gobj);
     }
-    if (!(flags & FTSTATUPDATE_COLANIM_PRESERVE) && (D_ovl2_8012DBD4[fp->colanim.colanim_id].unk_colanimdesc_0x1 != FALSE))
+    if (!(flags & FTSTATUPDATE_COLANIM_PRESERVE) && (ColAnimTable[fp->colanim.colanim_id].unk_colanimdesc_0x5 != FALSE))
     {
-        func_ovl2_800E98D4(fighter_gobj);
+        ftCommon_ResetColAnimStatUpdate(fighter_gobj);
     }
     if (!(flags & FTSTATUPDATE_GFX_PRESERVE) && (fp->is_statupdate_stop_gfx))
     {
@@ -4390,7 +4411,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
         unk_callback = &D_ovl1_80390BE8;
         status_struct_id = status_id - 0x10000;
     }
-    else if (status_id >= 0xDC)
+    else if (status_id >= ftStatus_Common_SpecialStart)
     {
         status_struct = D_ovl2_8012B740[fp->ft_kind];
         status_struct_id = status_id - 0xDC;
@@ -4483,7 +4504,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
                 else func_ovl2_800E6E00(fp, i);
             }
 
-            dobj_desc = attributes->dobj_desc_container[fp->lod_current - 1].dobj_desc;
+            dobj_desc = attributes->dobj_desc_container->dobj_desc_array[fp->lod_current - 1].dobj_desc;
 
             for (i = 4; dobj_desc->index != ARRAY_COUNT(fp->joint) / 2; i++, dobj_desc++)
             {

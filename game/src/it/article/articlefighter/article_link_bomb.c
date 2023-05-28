@@ -116,14 +116,14 @@ void func_ovl3_80185CD4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
 void func_ovl3_80185CD4(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 }
 
 bool32 func_ovl3_80185CF0(GObj *article_gobj)
@@ -138,7 +138,7 @@ bool32 func_ovl3_80185CF0(GObj *article_gobj)
     }
     if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
-        func_ovl3_80172F98(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+        atCommon_CheckSetColAnimIndex(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ap->article_vars.link_bomb.scale_index = 1;
     }
@@ -171,7 +171,7 @@ bool32 jtgt_ovl3_80185DCC(GObj *article_gobj)
     }
     if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
-        func_ovl3_80172F98(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+        atCommon_CheckSetColAnimIndex(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ap->article_vars.link_bomb.scale_index = 1;
     }
@@ -252,7 +252,7 @@ bool32 func_ovl3_80186024(GObj *article_gobj)
         }
         if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
         {
-            func_ovl3_80172F98(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+            atCommon_CheckSetColAnimIndex(article_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
             ap->article_vars.link_bomb.scale_index = 1;
         }

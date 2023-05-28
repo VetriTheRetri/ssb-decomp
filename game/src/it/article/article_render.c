@@ -86,7 +86,7 @@ void func_ovl3_80171410(GObj *article_gobj)
     }
     at_hurt = &ap->article_hurt;
 
-    if (ap->article_hurt.hit_status != gmHitCollision_HitStatus_None)
+    if (ap->article_hurt.hitstatus != gmHitCollision_HitStatus_None)
     {
         translate = &DObjGetStruct(article_gobj)->translate;
 
@@ -104,7 +104,7 @@ void func_ovl3_80171410(GObj *article_gobj)
 
         gDPPipeSync(D_800465B0[0]++);
 
-        switch (at_hurt->hit_status)
+        switch (at_hurt->hitstatus)
         {
         case 1:
             gDPSetPrimColor(D_800465B0[0]++, 0, 0, 255, 255, 255, 255);
@@ -211,7 +211,7 @@ void func_ovl3_80171C7C(GObj *article_gobj) // Unused
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             func_80014038(article_gobj);
         }
@@ -234,7 +234,7 @@ void func_ovl3_80171D38(GObj *article_gobj)
             func_80014768(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             func_80014768(article_gobj);
         }
@@ -284,7 +284,7 @@ void func_ovl3_80171F4C(GObj *article_gobj) // Unused
             func_ovl3_80171DF4(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             func_ovl3_80171DF4(article_gobj);
         }
@@ -350,7 +350,7 @@ void func_ovl3_8017224C(GObj *article_gobj)
             func_ovl3_80172008(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             func_ovl3_80172008(article_gobj);
         }

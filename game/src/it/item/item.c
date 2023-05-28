@@ -599,7 +599,7 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
 {
     if (this_ip->group_id != 0)
     {
-        GObj *victim_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
+        GObj *victim_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
         if (victim_gobj != NULL)
         {
@@ -672,7 +672,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
 
     if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
     {
-        other_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
+        other_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
         is_check_self = FALSE;
 

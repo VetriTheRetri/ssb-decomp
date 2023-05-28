@@ -1082,7 +1082,7 @@ glabel func_ovl33_801329E8
   /* 15EACC 80132A7C 8D4B0024 */        lw $t3, 0x24($t2)
   /* 15EAD0 80132A80 55610004 */      bnel $t3, $at, .L80132A94
   /* 15EAD4 80132A84 8FAC0044 */        lw $t4, 0x44($sp)
-  /* 15EAD8 80132A88 0C03A62C */       jal func_ovl2_800E98B0
+  /* 15EAD8 80132A88 0C03A62C */       jal ftCommon_ResetColAnim
   /* 15EADC 80132A8C 8FA40048 */        lw $a0, 0x48($sp)
   /* 15EAE0 80132A90 8FAC0044 */        lw $t4, 0x44($sp)
   .L80132A94:

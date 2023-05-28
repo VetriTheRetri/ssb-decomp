@@ -2497,7 +2497,7 @@ glabel func_ovl65_8018F240
   /* 10DCE8 8018F488 0C0433D1 */       jal func_ovl2_8010CF44
   /* 10DCEC 8018F48C 00000000 */       nop 
   /* 10DCF0 8018F490 02002025 */        or $a0, $s0, $zero
-  /* 10DCF4 8018F494 0C03A466 */       jal func_ovl2_800E9198
+  /* 10DCF4 8018F494 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 10DCF8 8018F498 24050001 */     addiu $a1, $zero, 1
   /* 10DCFC 8018F49C 8FBF0024 */        lw $ra, 0x24($sp)
   /* 10DD00 8018F4A0 8FB00020 */        lw $s0, 0x20($sp)

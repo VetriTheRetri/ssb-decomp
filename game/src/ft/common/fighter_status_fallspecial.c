@@ -81,7 +81,7 @@ void func_ovl3_801438F0(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fa
     fp->status_vars.common.fallspecial.is_allow_interrupt = is_allow_interrupt;
     fp->status_vars.common.fallspecial.is_fall_accelerate = is_fall_accelerate;
 
-    func_ovl2_800E9814(fighter_gobj, 7, 0);
+    ftCommon_CheckSetColAnimIndex(fighter_gobj, 7, 0);
     func_ovl3_80165024(fighter_gobj);
 
     fp->x192_flag_b0 = TRUE;

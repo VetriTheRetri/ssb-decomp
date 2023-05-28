@@ -87,7 +87,7 @@ void func_ovl3_801787CC(GObj *article_gobj)
 
         ap->is_damage_all = TRUE;
 
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         ap->phys_info.vel.x = 0.0F;
@@ -108,7 +108,7 @@ void func_ovl3_801787CC(GObj *article_gobj)
 
         ap->is_damage_all = TRUE;
 
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         ap->phys_info.vel.x = 0.0F;
@@ -127,7 +127,7 @@ void func_ovl3_80178930(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -151,7 +151,7 @@ bool32 jtgt_ovl3_8017897C(GObj *article_gobj)
 
         func_ovl3_8016F280(article_gobj);
 
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
         func_ovl3_801727BC(article_gobj);
 
@@ -261,7 +261,7 @@ bool32 jtgt_ovl3_80178C6C(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     ap->article_vars.shell.health = rand_u16_range(ATGSHELL_HEALTH_MAX);
 

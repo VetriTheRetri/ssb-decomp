@@ -200,7 +200,7 @@ glabel func_ovl64_8018D2CC
   /* 18C08C 8018D34C 0C063488 */       jal func_ovl64_8018D220
   /* 18C090 8018D350 8FA4001C */        lw $a0, 0x1c($sp)
   /* 18C094 8018D354 8FA4001C */        lw $a0, 0x1c($sp)
-  /* 18C098 8018D358 0C03A466 */       jal func_ovl2_800E9198
+  /* 18C098 8018D358 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 18C09C 8018D35C 24050001 */     addiu $a1, $zero, 1
   /* 18C0A0 8018D360 8FAF0018 */        lw $t7, 0x18($sp)
   /* 18C0A4 8018D364 24190001 */     addiu $t9, $zero, 1
@@ -254,7 +254,7 @@ glabel func_ovl64_8018D2CC
   /* 18C14C 8018D40C 37190004 */       ori $t9, $t8, 4
   /* 18C150 8018D410 A4790024 */        sh $t9, 0x24($v1)
   /* 18C154 8018D414 AFA80024 */        sw $t0, 0x24($sp)
-  /* 18C158 8018D418 0C03A466 */       jal func_ovl2_800E9198
+  /* 18C158 8018D418 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 18C15C 8018D41C AFA40020 */        sw $a0, 0x20($sp)
   /* 18C160 8018D420 8FA70020 */        lw $a3, 0x20($sp)
   /* 18C164 8018D424 24090002 */     addiu $t1, $zero, 2
@@ -293,7 +293,7 @@ glabel func_ovl64_8018D2CC
   /* 18C1E4 8018D4A4 0C063488 */       jal func_ovl64_8018D220
   /* 18C1E8 8018D4A8 8FA40024 */        lw $a0, 0x24($sp)
   /* 18C1EC 8018D4AC 8FA40024 */        lw $a0, 0x24($sp)
-  /* 18C1F0 8018D4B0 0C03A466 */       jal func_ovl2_800E9198
+  /* 18C1F0 8018D4B0 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 18C1F4 8018D4B4 24050001 */     addiu $a1, $zero, 1
   /* 18C1F8 8018D4B8 8FA9001C */        lw $t1, 0x1c($sp)
   /* 18C1FC 8018D4BC 240F0001 */     addiu $t7, $zero, 1
@@ -358,7 +358,7 @@ glabel func_ovl64_8018D2CC
   /* 18C2D0 8018D590 8CCF0000 */        lw $t7, ($a2) # Match_Info + 0
   /* 18C2D4 8018D594 8DF90078 */        lw $t9, 0x78($t7)
   /* 18C2D8 8018D598 8F280084 */        lw $t0, 0x84($t9)
-  /* 18C2DC 8018D59C 0C03A466 */       jal func_ovl2_800E9198
+  /* 18C2DC 8018D59C 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 18C2E0 8018D5A0 A1020013 */        sb $v0, 0x13($t0)
   /* 18C2E4 8018D5A4 8FA9001C */        lw $t1, 0x1c($sp)
   /* 18C2E8 8018D5A8 24180002 */     addiu $t8, $zero, 2

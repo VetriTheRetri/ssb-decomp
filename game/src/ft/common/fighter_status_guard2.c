@@ -14,7 +14,7 @@ void func_ovl3_80148E30(GObj *fighter_gobj)
         {
             fp->status_vars.common.guard.effect_gobj = func_ovl2_80101374(fighter_gobj);
 
-            func_ovl2_800E90F8(fighter_gobj);
+            ftCommon_HideModelPartAll(fighter_gobj);
             func_ovl3_80148214(fighter_gobj);
         }
         else fp->status_vars.common.guard.effect_gobj = func_ovl2_80101108(fighter_gobj);

@@ -6,7 +6,7 @@
 
 Item_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
 {
-    GObj *item_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
+    GObj *item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
     if (item_gobj != NULL)
     {
@@ -27,7 +27,7 @@ Item_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
 
 Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 it_kind)
 {
-    GObj *item_gobj = gOMObjCommonLinks[GObjLinkIndexItem];
+    GObj *item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
     if (item_gobj != NULL)
     {
@@ -355,7 +355,7 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
     Fighter_Struct *other_fp;
     f32 this_pos_x = this_fp->joint[0]->translate.x;
     f32 this_pos_y = this_fp->joint[0]->translate.y;
-    GObj *other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+    GObj *other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
     f32 distance = (f32)FLOAT_MAX;
     f32 square_xy;
     f32 other_pos_x;
@@ -423,7 +423,7 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
 
 bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
 {
-    GObj *other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+    GObj *other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
     while (other_gobj != NULL)
     {
@@ -457,7 +457,7 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
 Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
 {
     Fighter_Com *ft_com = &this_fp->fighter_com;
-    GObj *other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+    GObj *other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
     s32 target_damage = 9999;
     Fighter_Struct *target_fp = NULL;
 

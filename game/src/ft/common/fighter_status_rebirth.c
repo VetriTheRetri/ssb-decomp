@@ -24,7 +24,7 @@ void func_ovl3_8013CF60(GObj *this_gobj)
     halo_number = 0;
 
 loop: // This makes no sense
-    other_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+    other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
     while (other_gobj != NULL)
     {
@@ -89,7 +89,7 @@ loop: // This makes no sense
     {
         this_fp->is_statupdate_stop_gfx = TRUE;
     }
-    func_ovl2_800E9814(this_gobj, 0xB, 0);
+    ftCommon_CheckSetColAnimIndex(this_gobj, 0xB, 0);
     func_ovl2_800E7F7C(this_gobj, 1);
 }
 

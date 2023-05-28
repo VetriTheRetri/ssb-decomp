@@ -14,7 +14,7 @@ void func_ovl3_80180FC0(GObj *article_gobj)
         func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_00010000, D_NF_000100BC), 0.0F); // Linker thing
         func_8000DF34(article_gobj);
     }
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     ap->article_vars.mb_lucky.egg_spawn_wait = ATMBLUCKY_EGG_SPAWN_WAIT_CONST;
 
@@ -194,7 +194,7 @@ void func_ovl3_801813F8(GObj *article_gobj)
 
     ap->article_vars.mb_lucky.lifetime = ATMBLUCKY_LIFETIME;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     func_ovl3_80172EC8(article_gobj, Article_Mb_Lucky_Status, 3);
 }

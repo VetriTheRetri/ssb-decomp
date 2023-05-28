@@ -61,11 +61,11 @@ void func_ovl3_8014A000(GObj *fighter_gobj)
 
     if ((fp->ft_kind == Ft_Kind_Link) || (fp->ft_kind == Ft_Kind_PolyLink))
     {
-        func_ovl2_800E8C70(fighter_gobj, 0x15, 0);
-        func_ovl2_800E8C70(fighter_gobj, 0x13, -1);
+        ftCommon_SetModelPartRenderIndex(fighter_gobj, 0x15, 0);
+        ftCommon_SetModelPartRenderIndex(fighter_gobj, 0x13, -1);
     }
     else if ((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi))
     {
-        func_ovl2_800E8C70(fighter_gobj, 7, 1);
+        ftCommon_SetModelPartRenderIndex(fighter_gobj, 7, 1);
     }
 }

@@ -159,9 +159,6 @@ typedef struct gmPlayerBlock
     u8 unk_0x8;
     u8 unk_0x9;
     u8 unk_0xA;
-    u8 unk_0xB;
-    u8 unk_0xC;
-    u8 unk_pblock_0xD;
     s8 stock_count; // -1 = player has no stocks
     u8 is_rebirth_multi; // Respawn flag of multi-man enemy teams (Yoshi, Kirby, Fighting Polygons) in 1P mode
     s32 falls;

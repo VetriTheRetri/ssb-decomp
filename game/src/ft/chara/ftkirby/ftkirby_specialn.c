@@ -104,8 +104,8 @@ void func_ovl3_80161F0C(GObj *fighter_gobj)
             index = fp->status_vars.kirby.specialn.copy_id;
             fp->fighter_vars.kirby.copy_id = index;
 
-            ftCommon_SetModelPartRenderState(fighter_gobj, 6, copy_data[index].unk_0x2);
-            func_ovl2_800E8ECC(fighter_gobj);
+            ftCommon_SetModelPartRenderStateIndex(fighter_gobj, 6, copy_data[index].unk_0x2);
+            ftCommon_ResetModelPartRenderAll(fighter_gobj);
             func_ovl3_80161EB4(fp);
         }
         fp->command_vars.flags.flag1 = 0;
@@ -849,8 +849,8 @@ void func_ovl3_801635EC(GObj *fighter_gobj)
     fp->fighter_vars.kirby.copy_id = 
         _Kirby;
 
-    ftCommon_SetModelPartRenderState(fighter_gobj, 6, 0);
-    func_ovl2_800E98D4(fighter_gobj);
+    ftCommon_SetModelPartRenderStateIndex(fighter_gobj, 6, 0);
+    ftCommon_ResetColAnimStatUpdate(fighter_gobj);
 }
 
 void func_ovl3_80163648(GObj *fighter_gobj)

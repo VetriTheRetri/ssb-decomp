@@ -87,7 +87,7 @@ void func_ovl3_80148304(GObj *fighter_gobj)
         lag_end:
             if (fp->ft_kind == Ft_Kind_Yoshi)
             {
-                func_ovl2_800E8ECC(fighter_gobj);
+                ftCommon_ResetModelPartRenderAll(fighter_gobj);
                 func_ovl3_801482E4(fighter_gobj);
 
                 if (fp->is_statupdate_stop_gfx)
@@ -341,7 +341,7 @@ void func_ovl3_80148A88(GObj *fighter_gobj)
                 {
                     fp->status_vars.common.guard.effect_gobj = func_ovl2_80101374(fighter_gobj);
 
-                    func_ovl2_800E90F8(fighter_gobj);
+                    ftCommon_HideModelPartAll(fighter_gobj);
                     func_ovl3_80148214(fighter_gobj);
 
                     fp->is_shield = TRUE;

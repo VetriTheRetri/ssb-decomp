@@ -35,5 +35,5 @@ void func_ovl3_801499A4(GObj *fighter_gobj)
     breakout_wait += FTCOMMON_FURASLEEP_BREAKOUT_WAIT_MIN;
 
     func_ovl3_8014E3EC(fp, breakout_wait);
-    func_ovl2_800E9814(fighter_gobj, FTCOMMON_FURASLEEP_COLANIM_ID, 0);
+    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_FURASLEEP_COLANIM_ID, 0);
 }

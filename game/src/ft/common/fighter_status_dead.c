@@ -378,7 +378,7 @@ void func_ovl3_8013C740(GObj *fighter_gobj)
         func_800269C0(fp->attributes->deadup_sfx);
     }
     func_ovl2_800E827C(fighter_gobj, 1);
-    func_ovl2_800E98B0(fighter_gobj);
+    ftCommon_ResetColAnim(fighter_gobj);
 }
 
 void func_ovl3_8013C80C(GObj *fighter_gobj)
@@ -495,7 +495,7 @@ void func_ovl3_8013CAAC(GObj *fighter_gobj)
         func_800269C0(fp->attributes->deadup_sfx);
     }
     func_ovl2_800E827C(fighter_gobj, 0x13);
-    func_ovl2_800E9198(fighter_gobj, 1);
+    ftCommon_SetModelPartLoDAll(fighter_gobj, 1);
 }
 
 bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)

@@ -309,9 +309,9 @@ void func_ovl3_8014CDFC(GObj *fighter_gobj)
 
     for (i = 1; i < ARRAY_COUNT(fp->fighter_hurt); i++, ft_hurt++)
     {
-        if (ft_hurt->hit_status != gmHitCollision_HitStatus_None)
+        if (ft_hurt->hitstatus != gmHitCollision_HitStatus_None)
         {
-            ft_hurt->hit_status = gmHitCollision_HitStatus_Intangible;
+            ft_hurt->hitstatus = gmHitCollision_HitStatus_Intangible;
         }
     }
     fp->is_hitstatus_nodamage = TRUE;

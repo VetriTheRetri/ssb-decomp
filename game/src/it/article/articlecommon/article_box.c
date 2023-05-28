@@ -338,7 +338,7 @@ void func_ovl3_80179A34(GObj *article_gobj)
 
     ap->article_hit.clang = FALSE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     func_ovl3_8017279C(article_gobj);
     func_ovl3_8017275C(article_gobj);

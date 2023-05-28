@@ -24,7 +24,7 @@ void func_ovl3_801536C0(GObj *fighter_gobj)
         vel.z = 0.0F;
 
         func_ovl3_801695E4(fighter_gobj, &pos, &vel);
-        func_ovl2_800E9814(fighter_gobj, FTKIRBY_COPYPIKACHU_THUNDERJOLT_COLANIM_ID, 0);
+        ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYPIKACHU_THUNDERJOLT_COLANIM_ID, 0);
     }
 }
 

@@ -1535,12 +1535,12 @@ glabel func_ovl24_80133080
   /* 12C438 801330F8 14C10006 */       bne $a2, $at, .L80133114
   /* 12C43C 801330FC 00000000 */       nop 
   /* 12C440 80133100 3C068013 */       lui $a2, %hi(D_ovl2_80130D76)
-  /* 12C444 80133104 0C03A31C */       jal func_ovl2_800E8C70
+  /* 12C444 80133104 0C03A31C */       jal ftCommon_SetModelPartRenderIndex
   /* 12C448 80133108 90C60D76 */       lbu $a2, %lo(D_ovl2_80130D76)($a2)
   /* 12C44C 8013310C 10000004 */         b .L80133120
   /* 12C450 80133110 8FBF0014 */        lw $ra, 0x14($sp)
   .L80133114:
-  /* 12C454 80133114 0C03A31C */       jal func_ovl2_800E8C70
+  /* 12C454 80133114 0C03A31C */       jal ftCommon_SetModelPartRenderIndex
   /* 12C458 80133118 24050006 */     addiu $a1, $zero, 6
   .L8013311C:
   /* 12C45C 8013311C 8FBF0014 */        lw $ra, 0x14($sp)

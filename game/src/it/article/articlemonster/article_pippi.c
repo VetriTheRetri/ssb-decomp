@@ -23,7 +23,7 @@ extern void func_ovl3_801826A8(GObj *);
 extern void func_ovl3_80182F0C(GObj *);
 extern void func_ovl3_8017ED20(GObj *);
 
-void (*Article_Pippi_Status[At_Kind_MonsterEnd - At_Kind_MonsterStart])(GObj*) =
+void (*Article_Pippi_ProcStatus[At_Kind_MonsterEnd - At_Kind_MonsterStart])(GObj*) =
 {
     func_ovl3_8017DA60, func_ovl3_8017E648, func_ovl3_8017E828, func_ovl3_8017EFC4,
     func_ovl3_8017F5C4, func_ovl3_80180160, func_ovl3_80180964, func_ovl3_801811AC,
@@ -38,6 +38,7 @@ void func_ovl3_80183210(GObj *article_gobj)
     DObj *joint = DObjGetStruct(article_gobj);
 
     index = rand_u16_range(At_Kind_MonsterEnd - At_Kind_MonsterStart);
+
     at_kind = index + At_Kind_MonsterStart;
 
     if ((index == (At_Kind_Spear - At_Kind_MonsterStart)) || (at_kind == At_Kind_Kamex))
@@ -68,7 +69,7 @@ void func_ovl3_80183210(GObj *article_gobj)
     {
         ap->at_multi = ATLIZARDON_LIFETIME;
     }
-    Article_Pippi_Status[index](article_gobj);
+    Article_Pippi_ProcStatus[index](article_gobj);
 }
 
 extern Gfx *D_800465B0[4];
@@ -93,7 +94,7 @@ void func_ovl3_80183344(GObj *article_gobj)
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
             func_80014038(article_gobj);
@@ -126,7 +127,7 @@ void func_ovl3_80183344(GObj *article_gobj)
             func_80014038(article_gobj);
             func_ovl3_801719AC(article_gobj);
         }
-        else if ((ap->article_hurt.hit_status == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
             func_80014038(article_gobj);

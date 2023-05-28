@@ -20,9 +20,9 @@ typedef enum ftStatusUpdateFlags
     ftStatusUpdate_GFX_Preserve,
     ftStatusUpdate_FastFall_Preserve,
     ftStatusUpdate_HitStatus_Preserve,
-    ftStatusUpdate_Unk1_Preserve,
+    ftStatusUpdate_ModelPart_Preserve,
     ftStatusUpdate_SlopeContour_Preserve,
-    ftStatusUpdate_Unk2_Preserve,
+    ftStatusUpdate_TexturePart_Preserve,
     ftStatusUpdate_Unk3_Preserve,
     ftStatusUpdate_ThrowGObj_Preserve,
     ftStatusUpdate_ShuffleTime_Preserve, // Don't reset hitlag vibration frames?
@@ -38,9 +38,9 @@ typedef enum ftStatusUpdateFlags
 #define FTSTATUPDATE_GFX_PRESERVE           (1 << ftStatusUpdate_GFX_Preserve)          // 0x4
 #define FTSTATUPDATE_FASTFALL_PRESERVE      (1 << ftStatusUpdate_FastFall_Preserve)     // 0x8
 #define FTSTATUPDATE_HITSTATUS_PRESERVE     (1 << ftStatusUpdate_HitStatus_Preserve)    // 0x10
-#define FTSTATUPDATE_UNK1_PRESERVE          (1 << ftStatusUpdate_Unk1_Preserve)         // 0x20
+#define FTSTATUPDATE_MODELPART_PRESERVE     (1 << ftStatusUpdate_ModelPart_Preserve)    // 0x20
 #define FTSTATUPDATE_SLOPECONTOUR_PRESERVE  (1 << ftStatusUpdate_SlopeContour_Preserve) // 0x40
-#define FTSTATUPDATE_UNK2_PRESERVE          (1 << ftStatusUpdate_Unk2_Preserve)         // 0x80
+#define FTSTATUPDATE_TEXTUREPART_PRESERVE   (1 << ftStatusUpdate_TexturePart_Preserve)  // 0x80
 #define FTSTATUPDATE_UNK3_PRESERVE          (1 << ftStatusUpdate_Unk3_Preserve)         // 0x100
 #define FTSTATUPDATE_THROWPOINTER_PRESERVE  (1 << ftStatusUpdate_ThrowGObj_Preserve)    // 0x200
 #define FTSTATUPDATE_SHUFFLETIME_PRESERVE   (1 << ftStatusUpdate_ShuffleTime_Preserve)  // 0x400
@@ -129,6 +129,55 @@ typedef struct ftData
     ftScriptInfoArray *script2;
 
 } ftData;
+
+typedef struct ftModelPart
+{
+    void *display_list;
+    void *unk_modelpart_0x4;
+    void *unk_modelpart_0x8;
+    void *unk_modelpart_0xC;
+    u8 unk_modelpart_0x10;
+
+} ftModelPart;
+
+typedef struct ftModelPartDesc
+{
+    ftModelPart model_part[4][2];
+
+} ftModelPartDesc;
+
+typedef struct ftModelPartContainer
+{
+    ftModelPartDesc *model_part_desc[37];
+
+} ftModelPartContainer;
+
+typedef struct ftModelPartRenderState
+{
+    s8 render_state_b0;
+    s8 render_state_b1;
+
+} ftModelPartRenderState;
+
+typedef struct ftTexturePartInfo
+{
+    u8 joint_index;
+    u8 lod[2];
+
+} ftTexturePartInfo;
+
+typedef struct ftTexturePartContainer
+{
+    ftTexturePartInfo texture_part_info[2];
+
+} ftTexturePartContainer;
+
+typedef struct ftTexturePartRenderState
+{
+    s8 frame_index_default;
+    s8 frame_index_current;
+
+} ftTexturePartRenderState;
 
 typedef enum ftCommonAction
 {
@@ -519,7 +568,7 @@ typedef struct ftSpawnInfo
 typedef struct _Fighter_Hit
 {
     gmHitCollisionUpdateState update_state;
-    u32 interact_mask;
+    u32 group_id;
     s32 joint_index;
     s32 damage;
     gmHitCollisionElement element;
@@ -561,7 +610,7 @@ typedef struct FighterHurtDesc
 
 typedef struct Fighter_Hurt
 {
-    s32 hit_status;
+    s32 hitstatus;
     s32 joint_index;
     DObj *joint;
     s32 unk_ftht_0xC;
@@ -816,9 +865,9 @@ typedef struct ftCommonAttributes
     f32 unk_0x31C;
     f32 unk_0x320;
     Vec3f *unk_0x324; // Pointer to some array of vectors, something to do with joints
-    s32 unk_0x328;
+    ftModelPartContainer *model_parts;
     UnkFighterDObjData *unk_0x32C;
-    s32 unk_0x330;
+    ftTexturePartContainer *texture_parts;
     s32 joint_itemhold_heavy;
     ftThrownStatusArray *thrown_status;
     s32 joint_itemhold_light;
@@ -945,8 +994,8 @@ struct Fighter_Struct
     u32 is_hit_enable : 1;
     u32 is_hitstatus_nodamage : 1;
     u32 is_fthurt_modify : 1;
-    u32 x18C_flag_b3 : 1;
-    u32 x18C_flag_b4 : 1;
+    u32 is_modelpart_modify : 1;
+    u32 is_texturepart_modify : 1;
     u32 is_reflect : 1; // Fighter's reflect box is active
     s32 lr_reflect : 2;
     u32 is_absorb : 1; // Fighter's absorb box is active
@@ -1071,11 +1120,11 @@ struct Fighter_Struct
 
     s32 invincible_timer;
     s32 walldamage_nohit_timer;
-    s32 special_hit_status;
+    s32 special_hitstatus;
     s32 star_invincible_timer;
     s32 interact_status; // Used to disable hit detection completely when Fighter is on respawn platform?
     s32 special_status;  // Enemy CPUs avoid player depending on this?
-    s32 hit_status;
+    s32 hitstatus;
 
     Fighter_Hurt fighter_hurt[FTPARTS_HURT_NUM_MAX];
     f32 unk_ft_0x7A0;
@@ -1136,8 +1185,8 @@ struct Fighter_Struct
 
     DObj *joint[FTPARTS_JOINT_NUM_MAX];
 
-    s8 joint_render_state[FTPARTS_JOINT_NUM_MAX - 4][2]; // Display List active = 0, inactive = -1?
-    s8 unk_render[2][2];
+    ftModelPartRenderState joint_render_state[FTPARTS_JOINT_NUM_MAX - 4]; // Display List active = 0, inactive = -1?
+    ftTexturePartRenderState texture_render_state[2];
 
     ftData *ft_data;
     ftCommonAttributes *attributes;

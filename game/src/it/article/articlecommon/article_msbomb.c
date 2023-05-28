@@ -169,7 +169,7 @@ void func_ovl3_80176840(GObj *article_gobj)
 
     ap->x2CF_flag_b1 = TRUE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -252,7 +252,7 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
     }
     else
     {
-        fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+        fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
         translate = &aj->translate;
 
@@ -335,7 +335,7 @@ void func_ovl3_80176D00(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     func_ovl3_8017279C(article_gobj);
@@ -359,7 +359,7 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
     }
     else
     {
-        fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+        fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
         translate = &aj->translate;
 
@@ -406,7 +406,7 @@ void func_ovl3_80176E9C(GObj *article_gobj)
     ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
     ap->article_hit.hit_sfx = 1;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     func_ovl3_80176C14(article_gobj);
 }

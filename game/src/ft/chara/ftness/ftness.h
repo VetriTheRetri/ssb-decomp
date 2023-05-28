@@ -34,6 +34,7 @@
 
 #define FTNESS_PSI_MAGNET_RELEASE_LAG 30
 #define FTNESS_PSI_MAGNET_GRAVITY_DELAY 4
+#define FTNESS_PSI_MAGNET_COLANIM_ID 0x3F
 
 typedef enum ftNessAction
 {

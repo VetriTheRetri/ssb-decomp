@@ -48,6 +48,7 @@
 #define FTKIRBY_COPYSAMUS_CHARGE_OFF_Z 210.0F
 #define FTKIRBY_COPYSAMUS_CHARGE_MAX 7                  // Maximum charge level
 #define FTKIRBY_COPYSAMUS_CHARGE_INT 20                 // Charge interval, level increrments once this timer hits zero, then begins counting the next iteration
+#define FTKIRBY_COPYSAMUS_CHARGE_COLANIM_ID 6
 #define FTKIRBY_COPYSAMUS_CHARGE_RECOIL_BASE 10.0F      // Base unit of recoil taken from firing Charge Shot
 #define FTKIRBY_COPYSAMUS_CHARGE_RECOIL_MUL 2.0F        // Charge Recoil multiplier
 #define FTKIRBY_COPYSAMUS_CHARGE_RECOIL_ADD 20.0F       // Added velocity

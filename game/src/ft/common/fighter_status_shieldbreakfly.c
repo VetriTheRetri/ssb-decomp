@@ -23,7 +23,7 @@ void func_ovl3_80149488(GObj *fighter_gobj)
     fp->phys_info.vel_air.x = 0.0F;
     fp->phys_info.vel_air.y = attributes->shield_break_vel_y;
 
-    func_ovl2_800E9814(fighter_gobj, FTCOMMON_SHIELDBREAK_COLANIM_ID, FTCOMMON_SHIELDBREAK_COLANIM_LENGTH);
+    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_SHIELDBREAK_COLANIM_ID, FTCOMMON_SHIELDBREAK_COLANIM_LENGTH);
     func_800269C0(0xFU);
 }
 

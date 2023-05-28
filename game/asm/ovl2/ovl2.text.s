@@ -1840,7 +1840,7 @@ glabel func_ovl2_800D79F0
   /* 053670 800D7E70 000C6080 */       sll $t4, $t4, 2
   /* 053674 800D7E74 032E1021 */      addu $v0, $t9, $t6
   /* 053678 800D7E78 004CC021 */      addu $t8, $v0, $t4
-  /* 05367C 800D7E7C 0C03A3AB */       jal ftCommon_SetModelPartRenderState
+  /* 05367C 800D7E7C 0C03A3AB */       jal ftCommon_SetModelPartRenderStateIndex
   /* 053680 800D7E80 87060002 */        lh $a2, 2($t8)
   /* 053684 800D7E84 10000021 */         b jtgt_ovl2_800D7F0C
   /* 053688 800D7E88 00000000 */       nop 
@@ -1848,11 +1848,11 @@ glabel func_ovl2_800D79F0
   /* 05368C 800D7E8C AC600ADC */        sw $zero, 0xadc($v1)
   /* 053690 800D7E90 02002025 */        or $a0, $s0, $zero
   /* 053694 800D7E94 24050015 */     addiu $a1, $zero, 0x15
-  /* 053698 800D7E98 0C03A3AB */       jal ftCommon_SetModelPartRenderState
+  /* 053698 800D7E98 0C03A3AB */       jal ftCommon_SetModelPartRenderStateIndex
   /* 05369C 800D7E9C 2406FFFF */     addiu $a2, $zero, -1
   /* 0536A0 800D7EA0 02002025 */        or $a0, $s0, $zero
   /* 0536A4 800D7EA4 24050013 */     addiu $a1, $zero, 0x13
-  /* 0536A8 800D7EA8 0C03A3AB */       jal ftCommon_SetModelPartRenderState
+  /* 0536A8 800D7EA8 0C03A3AB */       jal ftCommon_SetModelPartRenderStateIndex
   /* 0536AC 800D7EAC 00003025 */        or $a2, $zero, $zero
   /* 0536B0 800D7EB0 10000016 */         b jtgt_ovl2_800D7F0C
   /* 0536B4 800D7EB4 00000000 */       nop 
@@ -1885,7 +1885,7 @@ glabel func_ovl2_800D79F0
   /* 053714 800D7F14 02002025 */        or $a0, $s0, $zero
   /* 053718 800D7F18 0C03A203 */       jal ftCommon_SetHitStatusPartAll
   /* 05371C 800D7F1C 24050001 */     addiu $a1, $zero, 1
-  /* 053720 800D7F20 0C03A62C */       jal func_ovl2_800E98B0
+  /* 053720 800D7F20 0C03A62C */       jal ftCommon_ResetColAnim
   /* 053724 800D7F24 02002025 */        or $a0, $s0, $zero
   /* 053728 800D7F28 8FBF0024 */        lw $ra, 0x24($sp)
   /* 05372C 800D7F2C 8FB00020 */        lw $s0, 0x20($sp)
@@ -2949,7 +2949,7 @@ glabel func_ovl2_800D8DB0
   /* 05461C 800D8E1C 354B0008 */       ori $t3, $t2, 8
   /* 054620 800D8E20 A08B018D */        sb $t3, 0x18d($a0)
   /* 054624 800D8E24 8C840004 */        lw $a0, 4($a0)
-  /* 054628 800D8E28 0C03A605 */       jal func_ovl2_800E9814
+  /* 054628 800D8E28 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 05462C 800D8E2C AFA70018 */        sw $a3, 0x18($sp)
   /* 054630 800D8E30 10400003 */      beqz $v0, .L800D8E40
   /* 054634 800D8E34 8FA70018 */        lw $a3, 0x18($sp)
@@ -10863,7 +10863,7 @@ glabel func_ovl2_800DF0F0
   /* 05B7F0 800DFFF0 00402825 */        or $a1, $v0, $zero
   /* 05B7F4 800DFFF4 8DA60000 */        lw $a2, ($t5)
   /* 05B7F8 800DFFF8 00063340 */       sll $a2, $a2, 0xd
-  /* 05B7FC 800DFFFC 0C03A31C */       jal func_ovl2_800E8C70
+  /* 05B7FC 800DFFFC 0C03A31C */       jal ftCommon_SetModelPartRenderIndex
 glabel func_ovl2_800E0000
   /* 05B800 800E0000 00063343 */       sra $a2, $a2, 0xd
   /* 05B804 800E0004 8E190004 */        lw $t9, 4($s0)
@@ -10871,14 +10871,14 @@ glabel func_ovl2_800E0000
   /* 05B80C 800E000C 100000A1 */         b .L800E0294
   /* 05B810 800E0010 AE180004 */        sw $t8, 4($s0)
   glabel jtgt_ovl2_800E0014
-  /* 05B814 800E0014 0C03A3B3 */       jal func_ovl2_800E8ECC
+  /* 05B814 800E0014 0C03A3B3 */       jal ftCommon_ResetModelPartRenderAll
   /* 05B818 800E0018 8FA400C0 */        lw $a0, 0xc0($sp)
   /* 05B81C 800E001C 8E0E0004 */        lw $t6, 4($s0)
   /* 05B820 800E0020 25CF0004 */     addiu $t7, $t6, 4
   /* 05B824 800E0024 1000009B */         b .L800E0294
   /* 05B828 800E0028 AE0F0004 */        sw $t7, 4($s0)
   glabel jtgt_ovl2_800E002C
-  /* 05B82C 800E002C 0C03A43E */       jal func_ovl2_800E90F8
+  /* 05B82C 800E002C 0C03A43E */       jal ftCommon_HideModelPartAll
   /* 05B830 800E0030 8FA400C0 */        lw $a0, 0xc0($sp)
   /* 05B834 800E0034 8E0D0004 */        lw $t5, 4($s0)
   /* 05B838 800E0038 25B90004 */     addiu $t9, $t5, 4
@@ -10892,7 +10892,7 @@ glabel func_ovl2_800E0000
   /* 05B854 800E0054 8FA400C0 */        lw $a0, 0xc0($sp)
   /* 05B858 800E0058 00092980 */       sll $a1, $t1, 6
   /* 05B85C 800E005C 00052E82 */       srl $a1, $a1, 0x1a
-  /* 05B860 800E0060 0C03A58B */       jal func_ovl2_800E962C
+  /* 05B860 800E0060 0C03A58B */       jal ftCommon_SetTexturePartIndex
   /* 05B864 800E0064 01213024 */       and $a2, $t1, $at
   /* 05B868 800E0068 8E0E0004 */        lw $t6, 4($s0)
   /* 05B86C 800E006C 25CF0004 */     addiu $t7, $t6, 4
@@ -10906,14 +10906,14 @@ glabel func_ovl2_800E0000
   /* 05B888 800E0088 8FA400C0 */        lw $a0, 0xc0($sp)
   /* 05B88C 800E008C 00092980 */       sll $a1, $t1, 6
   /* 05B890 800E0090 00052E02 */       srl $a1, $a1, 0x18
-  /* 05B894 800E0094 0C03A605 */       jal func_ovl2_800E9814
+  /* 05B894 800E0094 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 05B898 800E0098 01213024 */       and $a2, $t1, $at
   /* 05B89C 800E009C 8E190004 */        lw $t9, 4($s0)
   /* 05B8A0 800E00A0 27380004 */     addiu $t8, $t9, 4
   /* 05B8A4 800E00A4 1000007B */         b .L800E0294
   /* 05B8A8 800E00A8 AE180004 */        sw $t8, 4($s0)
   glabel jtgt_ovl2_800E00AC
-  /* 05B8AC 800E00AC 0C03A635 */       jal func_ovl2_800E98D4
+  /* 05B8AC 800E00AC 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 05B8B0 800E00B0 8FA400C0 */        lw $a0, 0xc0($sp)
   /* 05B8B4 800E00B4 8E0E0004 */        lw $t6, 4($s0)
   /* 05B8B8 800E00B8 25CF0004 */     addiu $t7, $t6, 4
@@ -12145,7 +12145,7 @@ glabel func_ovl2_800E11C8
   /* 05CA0C 800E120C 5040000F */      beql $v0, $zero, .L800E124C
   /* 05CA10 800E1210 8FBF0024 */        lw $ra, 0x24($sp)
   .L800E1214:
-  /* 05CA14 800E1214 0C03A635 */       jal func_ovl2_800E98D4
+  /* 05CA14 800E1214 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 05CA18 800E1218 02202025 */        or $a0, $s1, $zero
   /* 05CA1C 800E121C 8E060190 */        lw $a2, 0x190($s0)
   /* 05CA20 800E1220 8E07018C */        lw $a3, 0x18c($s0)
@@ -12527,7 +12527,7 @@ glabel func_ovl2_800E1260
   /* 05CF5C 800E175C 8FA40020 */        lw $a0, 0x20($sp)
   /* 05CF60 800E1760 57210006 */      bnel $t9, $at, .L800E177C
   /* 05CF64 800E1764 8CC205A4 */        lw $v0, 0x5a4($a2)
-  /* 05CF68 800E1768 0C03A635 */       jal func_ovl2_800E98D4
+  /* 05CF68 800E1768 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 05CF6C 800E176C AFA6001C */        sw $a2, 0x1c($sp)
   /* 05CF70 800E1770 8FA6001C */        lw $a2, 0x1c($sp)
   /* 05CF74 800E1774 8FA90020 */        lw $t1, 0x20($sp)
@@ -12547,7 +12547,7 @@ glabel func_ovl2_800E1260
   /* 05CFA4 800E17A4 15C10006 */       bne $t6, $at, .L800E17C0
   /* 05CFA8 800E17A8 ACCD05AC */        sw $t5, 0x5ac($a2)
   /* 05CFAC 800E17AC 8FA40020 */        lw $a0, 0x20($sp)
-  /* 05CFB0 800E17B0 0C03A635 */       jal func_ovl2_800E98D4
+  /* 05CFB0 800E17B0 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 05CFB4 800E17B4 AFA6001C */        sw $a2, 0x1c($sp)
   /* 05CFB8 800E17B8 8FA6001C */        lw $a2, 0x1c($sp)
   /* 05CFBC 800E17BC 8FA90020 */        lw $t1, 0x20($sp)
@@ -12565,7 +12565,7 @@ glabel func_ovl2_800E1260
   /* 05CFE4 800E17E4 1721000E */       bne $t9, $at, .L800E1820
   /* 05CFE8 800E17E8 ACD805B4 */        sw $t8, 0x5b4($a2)
   /* 05CFEC 800E17EC 8FA40020 */        lw $a0, 0x20($sp)
-  /* 05CFF0 800E17F0 0C03A635 */       jal func_ovl2_800E98D4
+  /* 05CFF0 800E17F0 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 05CFF4 800E17F4 AFA6001C */        sw $a2, 0x1c($sp)
   /* 05CFF8 800E17F8 8FA6001C */        lw $a2, 0x1c($sp)
   /* 05CFFC 800E17FC 10000008 */         b .L800E1820
@@ -12619,7 +12619,7 @@ glabel func_ovl2_800E1260
   /* 05D0A8 800E18A8 8FA40020 */        lw $a0, 0x20($sp)
   /* 05D0AC 800E18AC 55410006 */      bnel $t2, $at, .L800E18C8
   /* 05D0B0 800E18B0 8CC2084C */        lw $v0, 0x84c($a2)
-  /* 05D0B4 800E18B4 0C03A635 */       jal func_ovl2_800E98D4
+  /* 05D0B4 800E18B4 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 05D0B8 800E18B8 AFA6001C */        sw $a2, 0x1c($sp)
   /* 05D0BC 800E18BC 8FA6001C */        lw $a2, 0x1c($sp)
   /* 05D0C0 800E18C0 8FA90020 */        lw $t1, 0x20($sp)
@@ -18799,7 +18799,7 @@ glabel ftStatus_Update
   /* 062794 800E6F94 8FAB0094 */        lw $t3, 0x94($sp)
   /* 062798 800E6F98 10AC0005 */       beq $a1, $t4, .L800E6FB0
   /* 06279C 800E6F9C AE2B0024 */        sw $t3, 0x24($s1)
-  /* 0627A0 800E6FA0 0C03A466 */       jal func_ovl2_800E9198
+  /* 0627A0 800E6FA0 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 0627A4 800E6FA4 8FA40090 */        lw $a0, 0x90($sp)
   /* 0627A8 800E6FA8 922D000F */       lbu $t5, 0xf($s1)
   /* 0627AC 800E6FAC A22D000E */        sb $t5, 0xe($s1)
@@ -18852,7 +18852,7 @@ glabel ftStatus_Update
   /* 062850 800E7050 001948C0 */       sll $t1, $t9, 3
   /* 062854 800E7054 05230004 */     bgezl $t1, .L800E7068
   /* 062858 800E7058 320A0080 */      andi $t2, $s0, 0x80
-  /* 06285C 800E705C 0C03A3B3 */       jal func_ovl2_800E8ECC
+  /* 06285C 800E705C 0C03A3B3 */       jal ftCommon_ResetModelPartRenderAll
   /* 062860 800E7060 8FA40090 */        lw $a0, 0x90($sp)
   /* 062864 800E7064 320A0080 */      andi $t2, $s0, 0x80
   .L800E7068:
@@ -18875,7 +18875,7 @@ glabel ftStatus_Update
   /* 0628A4 800E70A4 9339DBD5 */       lbu $t9, %lo(D_ovl2_8012DBD5)($t9)
   /* 0628A8 800E70A8 53200004 */      beql $t9, $zero, .L800E70BC
   /* 0628AC 800E70AC 32080004 */      andi $t0, $s0, 4
-  /* 0628B0 800E70B0 0C03A635 */       jal func_ovl2_800E98D4
+  /* 0628B0 800E70B0 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 0628B4 800E70B4 8FA40090 */        lw $a0, 0x90($sp)
   /* 0628B8 800E70B8 32080004 */      andi $t0, $s0, 4
   .L800E70BC:
@@ -20481,11 +20481,11 @@ glabel ftLink_SetModelPartHideShield
   /* 063F14 800E8714 54610008 */      bnel $v1, $at, .L800E8738
   /* 063F18 800E8718 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E871C:
-  /* 063F1C 800E871C 0C03A3AB */       jal ftCommon_SetModelPartRenderState
+  /* 063F1C 800E871C 0C03A3AB */       jal ftCommon_SetModelPartRenderStateIndex
   /* 063F20 800E8720 AFA40018 */        sw $a0, 0x18($sp)
   /* 063F24 800E8724 8FA40018 */        lw $a0, 0x18($sp)
   /* 063F28 800E8728 24050013 */     addiu $a1, $zero, 0x13
-  /* 063F2C 800E872C 0C03A3AB */       jal ftCommon_SetModelPartRenderState
+  /* 063F2C 800E872C 0C03A3AB */       jal ftCommon_SetModelPartRenderStateIndex
   /* 063F30 800E8730 2406FFFF */     addiu $a2, $zero, -1
   /* 063F34 800E8734 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E8738:
@@ -20506,11 +20506,11 @@ glabel ftCommon_GetHammerSetBGM
   /* 063F68 800E8768 14610007 */       bne $v1, $at, .L800E8788
   /* 063F6C 800E876C 00000000 */       nop 
   .L800E8770:
-  /* 063F70 800E8770 0C03A3AB */       jal ftCommon_SetModelPartRenderState
+  /* 063F70 800E8770 0C03A3AB */       jal ftCommon_SetModelPartRenderStateIndex
   /* 063F74 800E8774 AFA40018 */        sw $a0, 0x18($sp)
   /* 063F78 800E8778 8FA40018 */        lw $a0, 0x18($sp)
   /* 063F7C 800E877C 24050013 */     addiu $a1, $zero, 0x13
-  /* 063F80 800E8780 0C03A3AB */       jal ftCommon_SetModelPartRenderState
+  /* 063F80 800E8780 0C03A3AB */       jal ftCommon_SetModelPartRenderStateIndex
   /* 063F84 800E8784 00003025 */        or $a2, $zero, $zero
   .L800E8788:
   /* 063F88 800E8788 0C039ED5 */       jal ftSpecialItem_BGMCheckFighters
@@ -20535,17 +20535,17 @@ glabel ftCommon_HitStatusSetColAnim
   /* 063FCC 800E87CC 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E87D0:
   /* 063FD0 800E87D0 24050002 */     addiu $a1, $zero, 2
-  /* 063FD4 800E87D4 0C03A605 */       jal func_ovl2_800E9814
+  /* 063FD4 800E87D4 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 063FD8 800E87D8 00003025 */        or $a2, $zero, $zero
   /* 063FDC 800E87DC 10000008 */         b .L800E8800
   /* 063FE0 800E87E0 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E87E4:
-  /* 063FE4 800E87E4 0C03A605 */       jal func_ovl2_800E9814
+  /* 063FE4 800E87E4 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 063FE8 800E87E8 24050004 */     addiu $a1, $zero, 4
   /* 063FEC 800E87EC 10000004 */         b .L800E8800
   /* 063FF0 800E87F0 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E87F4:
-  /* 063FF4 800E87F4 0C03A605 */       jal func_ovl2_800E9814
+  /* 063FF4 800E87F4 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 063FF8 800E87F8 24050003 */     addiu $a1, $zero, 3
   /* 063FFC 800E87FC 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E8800:
@@ -20883,7 +20883,7 @@ glabel ftCommon_UpdateFighterHurtPartIndex
   /* 064468 800E8C68 03E00008 */        jr $ra
   /* 06446C 800E8C6C 00000000 */       nop 
 
-glabel func_ovl2_800E8C70
+glabel ftCommon_SetModelPartRenderIndex
   /* 064470 800E8C70 27BDFFA0 */     addiu $sp, $sp, -0x60
   /* 064474 800E8C74 AFBF0024 */        sw $ra, 0x24($sp)
   /* 064478 800E8C78 AFB00020 */        sw $s0, 0x20($sp)
@@ -21040,7 +21040,7 @@ glabel func_ovl2_800E8C70
   /* 0646A4 800E8EA4 03E00008 */        jr $ra
   /* 0646A8 800E8EA8 00000000 */       nop 
 
-glabel ftCommon_SetModelPartRenderState
+glabel ftCommon_SetModelPartRenderStateIndex
   /* 0646AC 800E8EAC 8C820084 */        lw $v0, 0x84($a0)
   /* 0646B0 800E8EB0 00057040 */       sll $t6, $a1, 1
   /* 0646B4 800E8EB4 004E7821 */      addu $t7, $v0, $t6
@@ -21050,7 +21050,7 @@ glabel ftCommon_SetModelPartRenderState
   /* 0646C4 800E8EC4 03E00008 */        jr $ra
   /* 0646C8 800E8EC8 A048018C */        sb $t0, 0x18c($v0)
 
-glabel func_ovl2_800E8ECC
+glabel ftCommon_ResetModelPartRenderAll
   /* 0646CC 800E8ECC 27BDFFB8 */     addiu $sp, $sp, -0x48
   /* 0646D0 800E8ED0 AFBF0044 */        sw $ra, 0x44($sp)
   /* 0646D4 800E8ED4 AFBE0040 */        sw $fp, 0x40($sp)
@@ -21202,7 +21202,7 @@ glabel func_ovl2_800E8ECC
   /* 0648F0 800E90F0 03E00008 */        jr $ra
   /* 0648F4 800E90F4 27BD0048 */     addiu $sp, $sp, 0x48
 
-glabel func_ovl2_800E90F8
+glabel ftCommon_HideModelPartAll
   /* 0648F8 800E90F8 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 0648FC 800E90FC AFBF002C */        sw $ra, 0x2c($sp)
   /* 064900 800E9100 AFB50028 */        sw $s5, 0x28($sp)
@@ -21246,7 +21246,7 @@ glabel func_ovl2_800E90F8
   /* 064990 800E9190 03E00008 */        jr $ra
   /* 064994 800E9194 27BD0030 */     addiu $sp, $sp, 0x30
 
-glabel func_ovl2_800E9198
+glabel ftCommon_SetModelPartLoDAll
   /* 064998 800E9198 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 06499C 800E919C AFBF002C */        sw $ra, 0x2c($sp)
   /* 0649A0 800E91A0 AFB50028 */        sw $s5, 0x28($sp)
@@ -21276,7 +21276,7 @@ glabel func_ovl2_800E9198
   /* 0649FC 800E91FC 02002825 */        or $a1, $s0, $zero
   /* 064A00 800E9200 50D20004 */      beql $a2, $s2, .L800E9214
   /* 064A04 800E9204 26100001 */     addiu $s0, $s0, 1
-  /* 064A08 800E9208 0C03A31C */       jal func_ovl2_800E8C70
+  /* 064A08 800E9208 0C03A31C */       jal ftCommon_SetModelPartRenderIndex
   /* 064A0C 800E920C A0520975 */        sb $s2, 0x975($v0)
   .L800E9210:
   /* 064A10 800E9210 26100001 */     addiu $s0, $s0, 1
@@ -21568,7 +21568,7 @@ glabel func_ovl2_800E9598
   /* 064E24 800E9624 03E00008 */        jr $ra
   /* 064E28 800E9628 A059018C */        sb $t9, 0x18c($v0)
 
-glabel func_ovl2_800E962C
+glabel ftCommon_SetTexturePartIndex
   /* 064E2C 800E962C 8C820084 */        lw $v0, 0x84($a0)
   /* 064E30 800E9630 0005C080 */       sll $t8, $a1, 2
   /* 064E34 800E9634 0305C023 */      subu $t8, $t8, $a1
@@ -21651,10 +21651,10 @@ glabel func_ovl2_800E96B0
   /* 064F44 800E9744 03E00008 */        jr $ra
   /* 064F48 800E9748 A058018C */        sb $t8, 0x18c($v0)
 
-glabel func_ovl2_800E974C
+glabel caCheckSetColAnimIndex
   /* 064F4C 800E974C 8C98003C */        lw $t8, 0x3c($a0)
-  /* 064F50 800E9750 3C038013 */       lui $v1, %hi(D_ovl2_8012DBD0)
-  /* 064F54 800E9754 2463DBD0 */     addiu $v1, $v1, %lo(D_ovl2_8012DBD0)
+  /* 064F50 800E9750 3C038013 */       lui $v1, %hi(ColAnimTable)
+  /* 064F54 800E9754 2463DBD0 */     addiu $v1, $v1, %lo(ColAnimTable)
   /* 064F58 800E9758 000570C0 */       sll $t6, $a1, 3
   /* 064F5C 800E975C 0018C8C0 */       sll $t9, $t8, 3
   /* 064F60 800E9760 00794021 */      addu $t0, $v1, $t9
@@ -21706,18 +21706,18 @@ glabel func_ovl2_800E974C
   /* 06500C 800E980C 03E00008 */        jr $ra
   /* 065010 800E9810 00000000 */       nop 
 
-glabel func_ovl2_800E9814
+glabel ftCommon_CheckSetColAnimIndex
   /* 065014 800E9814 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 065018 800E9818 AFBF0014 */        sw $ra, 0x14($sp)
   /* 06501C 800E981C 8C820084 */        lw $v0, 0x84($a0)
-  /* 065020 800E9820 0C03A5D3 */       jal func_ovl2_800E974C
+  /* 065020 800E9820 0C03A5D3 */       jal caCheckSetColAnimIndex
   /* 065024 800E9824 24440A28 */     addiu $a0, $v0, 0xa28
   /* 065028 800E9828 8FBF0014 */        lw $ra, 0x14($sp)
   /* 06502C 800E982C 27BD0018 */     addiu $sp, $sp, 0x18
   /* 065030 800E9830 03E00008 */        jr $ra
   /* 065034 800E9834 00000000 */       nop 
 
-glabel func_ovl2_800E9838
+glabel caResetColAnim
   /* 065038 800E9838 00001025 */        or $v0, $zero, $zero
   /* 06503C 800E983C 00801825 */        or $v1, $a0, $zero
   /* 065040 800E9840 24050002 */     addiu $a1, $zero, 2
@@ -21750,23 +21750,23 @@ glabel func_ovl2_800E9838
   /* 0650A8 800E98A8 03E00008 */        jr $ra
   /* 0650AC 800E98AC A08A0060 */        sb $t2, 0x60($a0)
 
-glabel func_ovl2_800E98B0
+glabel ftCommon_ResetColAnim
   /* 0650B0 800E98B0 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 0650B4 800E98B4 AFBF0014 */        sw $ra, 0x14($sp)
   /* 0650B8 800E98B8 8C820084 */        lw $v0, 0x84($a0)
-  /* 0650BC 800E98BC 0C03A60E */       jal func_ovl2_800E9838
+  /* 0650BC 800E98BC 0C03A60E */       jal caResetColAnim
   /* 0650C0 800E98C0 24440A28 */     addiu $a0, $v0, 0xa28
   /* 0650C4 800E98C4 8FBF0014 */        lw $ra, 0x14($sp)
   /* 0650C8 800E98C8 27BD0018 */     addiu $sp, $sp, 0x18
   /* 0650CC 800E98CC 03E00008 */        jr $ra
   /* 0650D0 800E98D0 00000000 */       nop 
 
-glabel func_ovl2_800E98D4
+glabel ftCommon_ResetColAnimStatUpdate
   /* 0650D4 800E98D4 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 0650D8 800E98D8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 0650DC 800E98DC 8C870084 */        lw $a3, 0x84($a0)
   /* 0650E0 800E98E0 AFA40020 */        sw $a0, 0x20($sp)
-  /* 0650E4 800E98E4 0C03A62C */       jal func_ovl2_800E98B0
+  /* 0650E4 800E98E4 0C03A62C */       jal ftCommon_ResetColAnim
   /* 0650E8 800E98E8 AFA7001C */        sw $a3, 0x1c($sp)
   /* 0650EC 800E98EC 0C03A292 */       jal ftCommon_GetBestHitStatusPart
   /* 0650F0 800E98F0 8FA40020 */        lw $a0, 0x20($sp)
@@ -21782,14 +21782,14 @@ glabel func_ovl2_800E98D4
   /* 065114 800E9914 8FA40020 */        lw $a0, 0x20($sp)
   /* 065118 800E9918 24050004 */     addiu $a1, $zero, 4
   /* 06511C 800E991C 00003025 */        or $a2, $zero, $zero
-  /* 065120 800E9920 0C03A605 */       jal func_ovl2_800E9814
+  /* 065120 800E9920 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 065124 800E9924 AFA7001C */        sw $a3, 0x1c($sp)
   /* 065128 800E9928 10000006 */         b .L800E9944
   /* 06512C 800E992C 8FA7001C */        lw $a3, 0x1c($sp)
   .L800E9930:
   /* 065130 800E9930 24050003 */     addiu $a1, $zero, 3
   /* 065134 800E9934 00003025 */        or $a2, $zero, $zero
-  /* 065138 800E9938 0C03A605 */       jal func_ovl2_800E9814
+  /* 065138 800E9938 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 06513C 800E993C AFA7001C */        sw $a3, 0x1c($sp)
   /* 065140 800E9940 8FA7001C */        lw $a3, 0x1c($sp)
   .L800E9944:
@@ -21811,7 +21811,7 @@ glabel func_ovl2_800E98D4
   /* 065178 800E9978 17010039 */       bne $t8, $at, jtgt_ovl2_800E9A60
   /* 06517C 800E997C 24050006 */     addiu $a1, $zero, 6
   /* 065180 800E9980 00003025 */        or $a2, $zero, $zero
-  /* 065184 800E9984 0C03A605 */       jal func_ovl2_800E9814
+  /* 065184 800E9984 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 065188 800E9988 AFA7001C */        sw $a3, 0x1c($sp)
   /* 06518C 800E998C 10000034 */         b jtgt_ovl2_800E9A60
   /* 065190 800E9990 8FA7001C */        lw $a3, 0x1c($sp)
@@ -21822,7 +21822,7 @@ glabel func_ovl2_800E98D4
   /* 0651A0 800E99A0 1721002F */       bne $t9, $at, jtgt_ovl2_800E9A60
   /* 0651A4 800E99A4 24050006 */     addiu $a1, $zero, 6
   /* 0651A8 800E99A8 00003025 */        or $a2, $zero, $zero
-  /* 0651AC 800E99AC 0C03A605 */       jal func_ovl2_800E9814
+  /* 0651AC 800E99AC 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 0651B0 800E99B0 AFA7001C */        sw $a3, 0x1c($sp)
   /* 0651B4 800E99B4 1000002A */         b jtgt_ovl2_800E9A60
   /* 0651B8 800E99B8 8FA7001C */        lw $a3, 0x1c($sp)
@@ -21840,7 +21840,7 @@ glabel func_ovl2_800E98D4
   /* 0651E0 800E99E0 15010006 */       bne $t0, $at, .L800E99FC
   /* 0651E4 800E99E4 24050006 */     addiu $a1, $zero, 6
   /* 0651E8 800E99E8 00003025 */        or $a2, $zero, $zero
-  /* 0651EC 800E99EC 0C03A605 */       jal func_ovl2_800E9814
+  /* 0651EC 800E99EC 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 0651F0 800E99F0 AFA7001C */        sw $a3, 0x1c($sp)
   /* 0651F4 800E99F4 8FA7001C */        lw $a3, 0x1c($sp)
   /* 0651F8 800E99F8 8CE30ADC */        lw $v1, 0xadc($a3)
@@ -21860,7 +21860,7 @@ glabel func_ovl2_800E98D4
   /* 065224 800E9A24 1521000E */       bne $t1, $at, jtgt_ovl2_800E9A60
   /* 065228 800E9A28 24050006 */     addiu $a1, $zero, 6
   /* 06522C 800E9A2C 00003025 */        or $a2, $zero, $zero
-  /* 065230 800E9A30 0C03A605 */       jal func_ovl2_800E9814
+  /* 065230 800E9A30 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 065234 800E9A34 AFA7001C */        sw $a3, 0x1c($sp)
   /* 065238 800E9A38 10000009 */         b jtgt_ovl2_800E9A60
   /* 06523C 800E9A3C 8FA7001C */        lw $a3, 0x1c($sp)
@@ -21870,7 +21870,7 @@ glabel func_ovl2_800E98D4
   /* 065248 800E9A48 2405003F */     addiu $a1, $zero, 0x3f
   /* 06524C 800E9A4C 05610004 */      bgez $t3, jtgt_ovl2_800E9A60
   /* 065250 800E9A50 00003025 */        or $a2, $zero, $zero
-  /* 065254 800E9A54 0C03A605 */       jal func_ovl2_800E9814
+  /* 065254 800E9A54 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 065258 800E9A58 AFA7001C */        sw $a3, 0x1c($sp)
   /* 06525C 800E9A5C 8FA7001C */        lw $a3, 0x1c($sp)
   glabel jtgt_ovl2_800E9A60
@@ -21880,7 +21880,7 @@ glabel func_ovl2_800E98D4
   /* 065268 800E9A68 24050009 */     addiu $a1, $zero, 9
   /* 06526C 800E9A6C 11800004 */      beqz $t4, .L800E9A80
   /* 065270 800E9A70 00003025 */        or $a2, $zero, $zero
-  /* 065274 800E9A74 0C03A605 */       jal func_ovl2_800E9814
+  /* 065274 800E9A74 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 065278 800E9A78 AFA7001C */        sw $a3, 0x1c($sp)
   /* 06527C 800E9A7C 8FA7001C */        lw $a3, 0x1c($sp)
   .L800E9A80:
@@ -21889,7 +21889,7 @@ glabel func_ovl2_800E98D4
   /* 065288 800E9A88 2405004A */     addiu $a1, $zero, 0x4a
   /* 06528C 800E9A8C 11A00004 */      beqz $t5, .L800E9AA0
   /* 065290 800E9A90 00003025 */        or $a2, $zero, $zero
-  /* 065294 800E9A94 0C03A605 */       jal func_ovl2_800E9814
+  /* 065294 800E9A94 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 065298 800E9A98 AFA7001C */        sw $a3, 0x1c($sp)
   /* 06529C 800E9A9C 8FA7001C */        lw $a3, 0x1c($sp)
   .L800E9AA0:
@@ -21902,7 +21902,7 @@ glabel func_ovl2_800E98D4
   /* 0652B8 800E9AB8 11E00003 */      beqz $t7, .L800E9AC8
   /* 0652BC 800E9ABC 00000000 */       nop 
   .L800E9AC0:
-  /* 0652C0 800E9AC0 0C03A605 */       jal func_ovl2_800E9814
+  /* 0652C0 800E9AC0 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 0652C4 800E9AC4 00003025 */        or $a2, $zero, $zero
   .L800E9AC8:
   /* 0652C8 800E9AC8 0C03CDF3 */       jal func_ovl2_800F37CC
@@ -21910,7 +21910,7 @@ glabel func_ovl2_800E98D4
   /* 0652D0 800E9AD0 10400004 */      beqz $v0, .L800E9AE4
   /* 0652D4 800E9AD4 8FA40020 */        lw $a0, 0x20($sp)
   /* 0652D8 800E9AD8 24050049 */     addiu $a1, $zero, 0x49
-  /* 0652DC 800E9ADC 0C03A605 */       jal func_ovl2_800E9814
+  /* 0652DC 800E9ADC 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 0652E0 800E9AE0 00003025 */        or $a2, $zero, $zero
   .L800E9AE4:
   /* 0652E4 800E9AE4 8FBF0014 */        lw $ra, 0x14($sp)
@@ -21928,7 +21928,7 @@ glabel func_ovl2_800E9AF4
   /* 06530C 800E9B0C 000E7880 */       sll $t7, $t6, 2
   /* 065310 800E9B10 030FC021 */      addu $t8, $t8, $t7
   /* 065314 800E9B14 8F18B7B4 */        lw $t8, %lo(D_ovl2_8012B7B4)($t8)
-  /* 065318 800E9B18 0C03A605 */       jal func_ovl2_800E9814
+  /* 065318 800E9B18 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 06531C 800E9B1C 03052821 */      addu $a1, $t8, $a1
   /* 065320 800E9B20 8FBF0014 */        lw $ra, 0x14($sp)
   /* 065324 800E9B24 27BD0018 */     addiu $sp, $sp, 0x18
@@ -22554,7 +22554,7 @@ glabel func_ovl2_800EA3D4
   /* 065BE8 800EA3E8 01C5C021 */      addu $t8, $t6, $a1
   /* 065BEC 800EA3EC AC980818 */        sw $t8, 0x818($a0)
   /* 065BF0 800EA3F0 8C840004 */        lw $a0, 4($a0)
-  /* 065BF4 800EA3F4 0C03A605 */       jal func_ovl2_800E9814
+  /* 065BF4 800EA3F4 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 065BF8 800EA3F8 24050009 */     addiu $a1, $zero, 9
   /* 065BFC 800EA3FC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 065C00 800EA400 27BD0018 */     addiu $sp, $sp, 0x18
@@ -22908,7 +22908,7 @@ glabel func_ovl2_800EA8B0
   /* 0660C8 800EA8C8 2405004A */     addiu $a1, $zero, 0x4a
   /* 0660CC 800EA8CC 00003025 */        or $a2, $zero, $zero
   /* 0660D0 800EA8D0 AC8F05B0 */        sw $t7, 0x5b0($a0)
-  /* 0660D4 800EA8D4 0C03A605 */       jal func_ovl2_800E9814
+  /* 0660D4 800EA8D4 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 0660D8 800EA8D8 8C840004 */        lw $a0, 4($a0)
   /* 0660DC 800EA8DC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 0660E0 800EA8E0 27BD0018 */     addiu $sp, $sp, 0x18
@@ -22935,7 +22935,7 @@ glabel func_ovl2_800EA8EC
   /* 066128 800EA928 ACF805AC */        sw $t8, 0x5ac($a3)
   /* 06612C 800EA92C ACF905AC */        sw $t9, 0x5ac($a3)
   .L800EA930:
-  /* 066130 800EA930 0C03A605 */       jal func_ovl2_800E9814
+  /* 066130 800EA930 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 066134 800EA934 8CE40004 */        lw $a0, 4($a3)
   /* 066138 800EA938 8FBF0014 */        lw $ra, 0x14($sp)
   /* 06613C 800EA93C 27BD0018 */     addiu $sp, $sp, 0x18
@@ -22955,7 +22955,7 @@ glabel func_ovl2_800EA948
   .L800EA96C:
   /* 06616C 800EA96C ACEF05AC */        sw $t7, 0x5ac($a3)
   /* 066170 800EA970 8CE40004 */        lw $a0, 4($a3)
-  /* 066174 800EA974 0C03A605 */       jal func_ovl2_800E9814
+  /* 066174 800EA974 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 066178 800EA978 2405000A */     addiu $a1, $zero, 0xa
   /* 06617C 800EA97C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 066180 800EA980 27BD0018 */     addiu $sp, $sp, 0x18
@@ -32810,7 +32810,7 @@ glabel func_ovl2_800F36E0
   .L800F3770:
   /* 06EF70 800F3770 51000004 */      beql $t0, $zero, .L800F3784
   /* 06EF74 800F3774 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 06EF78 800F3778 0C03A635 */       jal func_ovl2_800E98D4
+  /* 06EF78 800F3778 0C03A635 */       jal ftCommon_ResetColAnimStatUpdate
   /* 06EF7C 800F377C 8FA40028 */        lw $a0, 0x28($sp)
   /* 06EF80 800F3780 8FBF001C */        lw $ra, 0x1c($sp)
   .L800F3784:
@@ -32911,7 +32911,7 @@ glabel func_ovl2_800F388C
   /* 06F0A0 800F38A0 8C4E0A64 */        lw $t6, 0xa64($v0)
   /* 06F0A4 800F38A4 51C10004 */      beql $t6, $at, .L800F38B8
   /* 06F0A8 800F38A8 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 06F0AC 800F38AC 0C03A605 */       jal func_ovl2_800E9814
+  /* 06F0AC 800F38AC 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
   /* 06F0B0 800F38B0 00003025 */        or $a2, $zero, $zero
   /* 06F0B4 800F38B4 8FBF0014 */        lw $ra, 0x14($sp)
   .L800F38B8:
@@ -50451,7 +50451,7 @@ glabel func_ovl2_80103150
   /* 07E97C 8010317C 00001025 */        or $v0, $zero, $zero
   .L80103180:
   /* 07E980 80103180 8FA40028 */        lw $a0, 0x28($sp)
-  /* 07E984 80103184 0C03A43E */       jal func_ovl2_800E90F8
+  /* 07E984 80103184 0C03A43E */       jal ftCommon_HideModelPartAll
   /* 07E988 80103188 AFA5001C */        sw $a1, 0x1c($sp)
   /* 07E98C 8010318C 8FA60024 */        lw $a2, 0x24($sp)
   /* 07E990 80103190 8FA2001C */        lw $v0, 0x1c($sp)
@@ -69588,7 +69588,7 @@ glabel func_ovl2_8011403C
   /* 08FA34 80114234 924E000E */       lbu $t6, 0xe($s2)
   /* 08FA38 80114238 3C018013 */       lui $at, %hi(D_ovl2_801317E5)
   /* 08FA3C 8011423C 24050001 */     addiu $a1, $zero, 1
-  /* 08FA40 80114240 0C03A466 */       jal func_ovl2_800E9198
+  /* 08FA40 80114240 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 08FA44 80114244 A02E17E5 */        sb $t6, %lo(D_ovl2_801317E5)($at)
   .L80114248:
   /* 08FA48 80114248 0C044FF1 */       jal func_ovl2_80113FC4
@@ -69899,7 +69899,7 @@ glabel func_ovl2_80114588
   /* 08FEB0 801146B0 00094880 */       sll $t1, $t1, 2
   /* 08FEB4 801146B4 03295021 */      addu $t2, $t9, $t1
   /* 08FEB8 801146B8 8D440078 */        lw $a0, 0x78($t2)
-  /* 08FEBC 801146BC 0C03A466 */       jal func_ovl2_800E9198
+  /* 08FEBC 801146BC 0C03A466 */       jal ftCommon_SetModelPartLoDAll
   /* 08FEC0 801146C0 90A517E5 */       lbu $a1, %lo(D_ovl2_801317E5)($a1)
   .L801146C4:
   /* 08FEC4 801146C4 0C002979 */       jal func_8000A5E4
@@ -71477,7 +71477,7 @@ glabel func_ovl2_80115BF0
   /* 0913FC 80115BFC AFA40018 */        sw $a0, 0x18($sp)
   /* 091400 80115C00 AFBF0014 */        sw $ra, 0x14($sp)
   /* 091404 80115C04 3C048013 */       lui $a0, %hi(D_ovl2_80131A40)
-  /* 091408 80115C08 0C03A5D3 */       jal func_ovl2_800E974C
+  /* 091408 80115C08 0C03A5D3 */       jal caCheckSetColAnimIndex
   /* 09140C 80115C0C 24841A40 */     addiu $a0, $a0, %lo(D_ovl2_80131A40)
   /* 091410 80115C10 8FBF0014 */        lw $ra, 0x14($sp)
   /* 091414 80115C14 27BD0018 */     addiu $sp, $sp, 0x18
@@ -71596,7 +71596,7 @@ glabel func_ovl2_80115DA8
   /* 0915C4 80115DC4 00003825 */        or $a3, $zero, $zero
   /* 0915C8 80115DC8 10400003 */      beqz $v0, .L80115DD8
   /* 0915CC 80115DCC 3C048013 */       lui $a0, %hi(D_ovl2_80131A40)
-  /* 0915D0 80115DD0 0C03A60E */       jal func_ovl2_800E9838
+  /* 0915D0 80115DD0 0C03A60E */       jal caResetColAnim
   /* 0915D4 80115DD4 24841A40 */     addiu $a0, $a0, %lo(D_ovl2_80131A40)
   .L80115DD8:
   /* 0915D8 80115DD8 8FBF0014 */        lw $ra, 0x14($sp)
@@ -71612,7 +71612,7 @@ glabel func_ovl2_80115DE8
   /* 0915F8 80115DF8 3C018013 */       lui $at, %hi(D_ovl2_80131AA4)
   /* 0915FC 80115DFC 3C048013 */       lui $a0, %hi(D_ovl2_80131A40)
   /* 091600 80115E00 A0251AA4 */        sb $a1, %lo(D_ovl2_80131AA4)($at)
-  /* 091604 80115E04 0C03A60E */       jal func_ovl2_800E9838
+  /* 091604 80115E04 0C03A60E */       jal caResetColAnim
   /* 091608 80115E08 24841A40 */     addiu $a0, $a0, %lo(D_ovl2_80131A40)
   /* 09160C 80115E0C 3C0E800A */       lui $t6, %hi((Save_Info + 0x450))
   /* 091610 80115E10 91CE4930 */       lbu $t6, %lo((Save_Info + 0x450))($t6)

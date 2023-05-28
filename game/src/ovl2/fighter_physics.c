@@ -221,7 +221,7 @@ void func_ovl2_800D8DB0(Fighter_Struct *fp)
 
         fp->tap_stick_y = U8_MAX - 1;
 
-        if (func_ovl2_800E9814(fp->fighter_gobj, 8, 0) != FALSE)
+        if (ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 8, 0) != FALSE)
         {
             func_ovl2_800E11C8(fp->fighter_gobj);
         }

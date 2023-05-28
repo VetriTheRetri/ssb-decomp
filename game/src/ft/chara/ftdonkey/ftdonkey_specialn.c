@@ -75,7 +75,7 @@ void func_ovl3_8015B088(GObj *fighter_gobj)
                 {
                     GObjSetAnimSpeed(fighter_gobj, FTDONKEY_GIANTPUNCH_CHRAGE_ANIM_SPEED);
 
-                    func_ovl2_800E9814(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
+                    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
 
                     fp->status_vars.donkey.specialn.is_cancel = TRUE;
                 }

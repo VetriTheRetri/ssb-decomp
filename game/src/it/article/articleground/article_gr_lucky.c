@@ -127,7 +127,7 @@ bool32 jtgt_ovl3_8017C530(GObj *article_gobj)
         ap->phys_info.vel.y = (__sinf(angle) * ap->damage_knockback);
 
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
         joint->unk_dobj_0x74 = (f32)FLOAT_NEG_MAX;
 

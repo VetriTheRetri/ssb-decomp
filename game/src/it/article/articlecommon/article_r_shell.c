@@ -49,7 +49,7 @@ void func_ovl3_8017A3A0(GObj *article_gobj, GObj *fighter_gobj)
 void func_ovl3_8017A534(GObj *article_gobj)
 {
     s32 unused;
-    GObj *fighter_gobj = gOMObjCommonLinks[GObjLinkIndexFighter];
+    GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
     GObj *victim_gobj;
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f *translate = &joint->translate;
@@ -180,7 +180,7 @@ void func_ovl3_8017A83C(GObj *article_gobj)
 
         func_ovl3_8017279C(article_gobj);
 
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(article_gobj);
@@ -201,7 +201,7 @@ void func_ovl3_8017A83C(GObj *article_gobj)
 
         func_ovl3_8017279C(article_gobj);
 
-        ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(article_gobj);
@@ -220,7 +220,7 @@ void func_ovl3_8017A984(GObj *article_gobj)
 
     ap->is_allow_pickup = FALSE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     func_ovl3_80173F78(ap);
     func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 1);
@@ -396,7 +396,7 @@ bool32 jtgt_ovl3_8017AE48(GObj *article_gobj)
     {
         return TRUE;
     }
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     ap->article_vars.shell.health = rand_u16_range(ATRSHELL_HEALTH_MAX);
 

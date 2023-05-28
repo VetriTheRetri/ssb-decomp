@@ -51,7 +51,7 @@ void func_ovl3_80174098(GObj *article_gobj)
 
     ap->is_damage_all = TRUE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 1);
 }
@@ -90,7 +90,7 @@ void jtgt_ovl3_801741B0(GObj *article_gobj) // Capsule gets thrown
 
     ap->is_damage_all = TRUE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_Normal;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 3);
 }
@@ -165,7 +165,7 @@ void func_ovl3_80174340(GObj *article_gobj)
 
     ap->article_hit.clang = FALSE;
 
-    ap->article_hurt.hit_status = gmHitCollision_HitStatus_None;
+    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     func_ovl3_8017279C(article_gobj);
     func_ovl3_8017275C(article_gobj);

@@ -282,8 +282,8 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
 
                 fp->fighter_vars.kirby.copy_id = Ft_Kind_Kirby;
 
-                ftCommon_SetModelPartRenderState(fighter_gobj, 6, 0);
-                func_ovl2_800E8ECC(fighter_gobj);
+                ftCommon_SetModelPartRenderStateIndex(fighter_gobj, 6, 0);
+                ftCommon_ResetModelPartRenderAll(fighter_gobj);
             }
             fp->is_invisible = FALSE;
 
