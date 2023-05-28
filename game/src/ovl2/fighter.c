@@ -8,7 +8,7 @@ void func_ovl2_800D78E8(GObj *fighter_gobj)
 
     if (fp->is_statupdate_stop_gfx)
     {
-        func_ovl2_800E9C3C(fighter_gobj);
+        ftCommon_ProcDestroyGFX(fighter_gobj);
     }
 
     for (i = 0; i < ARRAY_COUNT(fp->joint); i++)
@@ -104,8 +104,8 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->star_invincible_timer = 0;
 
     fp->hitstatus = gmHitCollision_HitStatus_Normal;
-    fp->special_status = ftSpecialStatus_Normal;
     fp->special_hitstatus = gmHitCollision_HitStatus_Normal;
+    fp->itemstat_hitstatus = gmHitCollision_HitStatus_Normal;
 
     fp->throw_gobj = NULL;
     fp->catch_gobj = NULL;
@@ -504,8 +504,8 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     }
     if ((fp->status_info.pl_kind == Pl_Kind_Intro) || (fp->status_info.pl_kind == Pl_Kind_HowToPlay))
     {
-        fp->unk_0xA98 = 0;
-        fp->unk_0xA94 = 0;
+        fp->p_howtoplay_input = 0;
+        fp->howtoplay_input_wait = 0;
     }
     switch (fp->status_info.pl_kind)
     {

@@ -29,8 +29,14 @@ typedef struct Effect_Unk
 typedef struct Effect_Struct
 {
     s32 unk_0x0;
-    GObj *fgobj;
-    u8 filler_0x8[0x18 - 0x8];
+    GObj *fighter_gobj;
+    u16 unk_effectstruct_0x8;
+    Effect_Info *einfo;
+    u32 is_pause_effect : 1;
+    u32 effect_flags_b1 : 1;
+    u32 effect_flags_b2 : 1;
+    u32 effect_flags_b3 : 1;
+    u8 filler_0x14[0x18 - 0x14];
     s32 lifetime;
     s32 unk_ef_0x1C;
 

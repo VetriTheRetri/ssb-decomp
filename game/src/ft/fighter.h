@@ -449,15 +449,6 @@ typedef enum plKind
 
 } plKind;
 
-typedef enum ftSpecialStatus
-{
-    ftSpecialStatus_Invincible, // Fighter cannot take damage?
-    ftSpecialStatus_Normal, // Fighter can take damage
-    ftSpecialStatus_Star, // CPUs run away from fighter; cannot take damage
-    ftSpecialStatus_Intangible // Fighter cannot be hit at all
-
-} ftSpecialStatus;
-
 typedef struct FighterAnimFlags
 {
     union
@@ -1120,10 +1111,9 @@ struct Fighter_Struct
 
     s32 invincible_timer;
     s32 walldamage_nohit_timer;
-    s32 special_hitstatus;
+    s32 itemstat_hitstatus;
     s32 star_invincible_timer;
-    s32 interact_status; // Used to disable hit detection completely when Fighter is on respawn platform?
-    s32 special_status;  // Enemy CPUs avoid player depending on this?
+    s32 special_hitstatus;  // Enemy CPUs avoid player depending on this?
     s32 hitstatus;
 
     Fighter_Hurt fighter_hurt[FTPARTS_HURT_NUM_MAX];
@@ -1224,8 +1214,8 @@ struct Fighter_Struct
     u8 unk_0xA8E;
     u8 unk_0xA8F;
     GfxColorAlpha shade;
-    u32 unk_0xA94;
-    u32 unk_0xA98;
+    s32 howtoplay_input_wait;
+    void *p_howtoplay_input;
 
     struct
     {

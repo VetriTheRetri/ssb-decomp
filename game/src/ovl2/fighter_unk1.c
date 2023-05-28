@@ -593,13 +593,13 @@ s32 ftCommon_GetBestHitStatusAll(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 hitstatus_best = ftCommon_GetBestHitStatusPart(fighter_gobj);
 
-    if (hitstatus_best < fp->special_status)
-    {
-        hitstatus_best = fp->special_status;
-    }
     if (hitstatus_best < fp->special_hitstatus)
     {
         hitstatus_best = fp->special_hitstatus;
+    }
+    if (hitstatus_best < fp->itemstat_hitstatus)
+    {
+        hitstatus_best = fp->itemstat_hitstatus;
     }
     return hitstatus_best;
 }
@@ -1231,4 +1231,251 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     {
         ftCommon_CheckSetColAnimIndex(fighter_gobj, 0x49, 0);
     }
+}
+
+extern s32 Fighter_ColAnimIndex_Skeleton[Ft_Kind_EnumMax] = 
+{
+    0x14,
+    0x14,
+    0x14,
+    0x1C,
+    0x14,
+    0x14,
+    0x14,
+    0x14,
+    0x18,
+    0x14,
+    0x18,
+    0x14,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10,
+    0x10
+};
+
+bool32 func_ovl2_800E9AF4(GObj *fighter_gobj, s32 colanim_id)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    return ftCommon_CheckSetColAnimIndex(fighter_gobj, Fighter_ColAnimIndex_Skeleton[fp->ft_kind] + colanim_id, 0);
+}
+
+// 0x800E9B30 - Set How to Play input sequence
+void ftCommon_SetHowToPlayInputSeq(GObj *fighter_gobj, void *p_inputseq)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    fp->howtoplay_input_wait = 0;
+    fp->p_howtoplay_input = p_inputseq;
+}
+
+// 0x800E9B40 - Check if How to Play input sequence exists
+bool32 ftCommon_CheckHowToPlayInputSeq(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->p_howtoplay_input != NULL)
+    {
+        return TRUE;
+    }
+    else return FALSE;
+}
+
+// 0x800E9B64
+void efRunProc(GObj *fighter_gobj, void (*proc)(GObj*, Effect_Struct*))
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->is_statupdate_stop_gfx)
+    {
+        GObj *effect_gobj = gOMObjCommonLinks[gOMObjLinkIndexEffect];
+
+        while (effect_gobj != NULL)
+        {
+            Effect_Struct *ep = EffectGetStruct(effect_gobj);
+
+            GObj *next_effect = effect_gobj->group_gobj_next;
+
+            if ((ep != NULL) && (fighter_gobj == ep->fighter_gobj))
+            {
+                proc(effect_gobj, ep);
+            }
+            effect_gobj = next_effect;
+        }
+    }
+}
+
+// 0x800E9BE8
+void efDestroyGFX(GObj *effect_gobj, Effect_Struct *ep)
+{
+    Effect_Info *einfo = ep->einfo;
+
+    if (einfo != NULL)
+    {
+        func_ovl0_800D39D4(einfo->unk_effect_0xB8, ep->unk_effectstruct_0x8 >> 3);
+    }
+    func_ovl2_800FD4F8(ep);
+    func_80009A84(effect_gobj);
+}
+
+// 0x800E9C3C
+void ftCommon_ProcDestroyGFX(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    efRunProc(fighter_gobj, efDestroyGFX);
+
+    fp->is_statupdate_stop_gfx = FALSE;
+}
+
+// 0x800E9C78
+void efPauseGFX(GObj *effect_gobj, Effect_Struct *ep)
+{
+    ep->is_pause_effect = TRUE;
+}
+
+// 0x800E9C78
+void ftCommon_ProcPauseGFX(GObj *effect_gobj)
+{
+    efRunProc(effect_gobj, efPauseGFX);
+}
+
+// 0x800E9CB0
+void efResumeGFX(GObj *effect_gobj, Effect_Struct *ep)
+{
+    ep->is_pause_effect = FALSE;
+}
+
+// 0x800E9CC4
+void ftCommon_ProcResumeGFX(GObj *fighter_gobj)
+{
+    efRunProc(fighter_gobj, efResumeGFX);
+}
+
+// 0x800E9CE8
+void ftCommon_VelDamageTransferGround(Fighter_Struct *fp)
+{
+    if (fp->ground_or_air == ground)
+    {
+        Vec3f *ground_angle = &fp->coll_data.ground_angle;
+
+        if (fp->phys_info.vel_damage_ground == 0.0F)
+        {
+            fp->phys_info.vel_damage_ground = fp->phys_info.vel_damage_air.x;
+
+            if (fp->phys_info.vel_damage_ground > 250.0F)
+            {
+                fp->phys_info.vel_damage_ground = 250.0F;
+            }
+            if (fp->phys_info.vel_damage_ground < -250.0F)
+            {
+                fp->phys_info.vel_damage_ground = -250.0F;
+            }
+            fp->phys_info.vel_damage_air.x = ground_angle->y * fp->phys_info.vel_damage_ground;
+            fp->phys_info.vel_damage_air.y = -ground_angle->x * fp->phys_info.vel_damage_ground;
+        }
+    }
+}
+
+/*
+3F0CCCCD 3FE8BA2E 3F19999A 3FD55555
+3F333333 3FB6DB6E 3F400000 3FAAAAAB
+3F4CCCCD 3FA00000 3F666666 3F8E38E4
+3F733333 3F86BCA2 3F800000 3F800000
+3F8B851F 3F6ADCC5 3F000000 40A00000
+3F0CCCCD 40800000 3F19999A 40555555
+3F266666 4036DB6E 3F333333 40200000
+3F400000 3FE8BA2E 3F4CCCCD 3FD8F2FC
+3F59999A 3FCB2CB3 3F666666 3FBF0B76
+3F733333 3FB4481D 3F266666 40555555
+3F333333 4036DB6E 3F3D70A4 40200000
+3F451EB8 400E38E4 3F4CCCCD 40000000
+3F800000 3F124925 3F866666 3F09A269
+3F8CCCCD 3F034834 3F933333 3EF3CF3E
+3F9D70A4 3EE6A171 3F866666 3EDE9BD4
+3F8CCCCD 3ECCCCCD 3F933333 3EBDA12F
+3F99999A 3EB6DB6E 3FA00000 3EAAAAAB
+3F666666 3F800000 3F800000 3F800000
+3F8CCCCD 3F800000 3F9C28F6 3F800000
+3FC00000 3F800000 3F8A3D71 3F6D097B
+*/
+
+extern f32 Knockback_Handicap_MulTable[40][2] = 
+{
+    { 0.55F,  16.363636363636F / 9.0F },
+    {  0.6F,             15.0F / 9.0F },
+    {  0.7F,   12.85714316367F / 9.0F },
+    { 0.75F,             12.0F / 9.0F },
+    {  0.8F,            11.25F / 9.0F },
+    {  0.9F,             10.0F / 9.0F },
+    { 0.95F,    9.47368454931F / 9.0F },
+    {  1.0F,              9.0F / 9.0F },
+    { 1.09F,   8.256880581381F / 9.0F },
+    {  0.5F,             45.0F / 9.0F },
+    { 0.55F,             36.0F / 9.0F },
+    {  0.6F,             30.0F / 9.0F },
+    { 0.65F,    25.7142863268F / 9.0F },
+    {  0.7F,             22.5F / 9.0F },
+    { 0.75F,  16.363636363636F / 9.0F },
+    {  0.8F,  15.254237651824F / 9.0F },
+    { 0.85F,  14.285714507102F / 9.0F },
+    {  0.9F,  13.432835340495F / 9.0F },
+    { 0.95F,  12.676056504246F / 9.0F },
+    { 0.65F,             30.0F / 9.0F },
+    {  0.7F,  25.714286327358F / 9.0F },
+    { 0.74F,             22.5F / 9.0F },
+    { 0.77F,             20.0F / 9.0F },
+    {  0.8F,             18.0F / 9.0F },
+    {  1.0F,   5.142857372757F / 9.0F },
+    { 1.05F,   4.838709890842F / 9.0F },
+    {  1.1F,   4.615384340286F / 9.0F },
+    { 1.15F,   4.285714566707F / 9.0F },
+    { 1.23F,   4.054054054054F / 9.0F },
+    { 1.05F,   3.913043618196F / 9.0F },
+    {  1.1F,              3.6F / 9.0F },
+    { 1.15F,   3.333333333333F / 9.0F },
+    {  1.2F,   3.214285790920F / 9.0F },
+    { 1.25F,              3.0F / 9.0F },
+    {  0.9F,              9.0F / 9.0F },
+    {  1.0F,              9.0F / 9.0F },
+    {  1.1F,              9.0F / 9.0F },
+    { 1.22F,              9.0F / 9.0F },
+    {  1.5F,              9.0F / 9.0F },
+    { 1.08F,   8.333333333333F / 9.0F }
+};
+
+f32 gmCommon_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 hit_damage, s32 knockback_weight, s32 knockback_scale, s32 knockback_base, f32 weight, s32 attack_handicap, s32 defend_handicap) 
+{
+    f32 knockback;
+
+    if (knockback_weight != 0)
+    {
+        knockback = ( ( ( ( ( ( 1.0F + ( 10.0F * knockback_weight * 0.05F) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+    } 
+    else 
+    {
+        f32 damage_add = percent_damage + recent_damage;
+
+        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+    }
+    if (knockback >= 2500.0F)
+    {
+        knockback = 2500.0F;
+    }
+    if (Save_Info.unk5E2 & 1) 
+    {
+        knockback = rand_f32() * 200.0F;
+    }
+    return knockback;
 }

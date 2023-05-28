@@ -8,7 +8,7 @@ void func_ovl3_80161CA0(GObj *kirby_gobj, GObj *victim_gobj, s32 damage)
 
     damage = star_dmg_victim;
 
-    func_ovl3_801415F8(victim_gobj, func_ovl2_800E9D78(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->handicap, fp_victim->handicap), 0);
+    func_ovl3_801415F8(victim_gobj, gmCommon_DamageCalcKnockback(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->handicap, fp_victim->handicap), 0);
     func_ovl2_800EA248(fp_victim, damage);
     func_ovl2_800EA98C(fp_kirby->port_id, fp_victim->port_id, damage);
     func_ovl2_800EA614(fp_kirby->port_id, fp_victim->port_id, fp_kirby->attack_id, fp_kirby->unk_0x28C_halfword);
@@ -118,7 +118,7 @@ void func_ovl3_80161FBC(GObj *fighter_gobj)
 
     if (fp->is_statupdate_stop_gfx == TRUE)
     {
-        func_ovl2_800E9C3C(fighter_gobj);
+        ftCommon_ProcDestroyGFX(fighter_gobj);
     }
 }
 

@@ -1331,7 +1331,7 @@ glabel func_ovl63_8018E1A0
   /* 18B9FC 8018E3EC 8F39E9E4 */        lw $t9, %lo(D_ovl63_8018E9E4)($t9)
   /* 18BA00 8018E3F0 8E8E0000 */        lw $t6, ($s4)
   /* 18BA04 8018E3F4 02402025 */        or $a0, $s2, $zero
-  /* 18BA08 8018E3F8 0C03A6CC */       jal func_ovl2_800E9B30
+  /* 18BA08 8018E3F8 0C03A6CC */       jal ftCommon_SetHowToPlayInputSeq
   /* 18BA0C 8018E3FC 01D92821 */      addu $a1, $t6, $t9
   .L8018E400:
   /* 18BA10 8018E400 26100001 */     addiu $s0, $s0, 1

@@ -98,7 +98,7 @@ void func_ovl3_80148304(GObj *fighter_gobj)
                     func_ovl2_801041A0(&egg_gfx_offset);
                 }
             }
-            func_ovl2_800E9C3C(fighter_gobj);
+            ftCommon_ProcDestroyGFX(fighter_gobj);
 
             fp->is_shield = FALSE;
         }

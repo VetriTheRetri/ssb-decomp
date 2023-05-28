@@ -439,7 +439,7 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
                 f32 other_y = (other_joint->translate.y + other_fp->phys_info.vel_air.x * 3.0F);
                 f32 sqrt_xy = sqrtf(SQUARE(this_joint->translate.y - other_y) + SQUARE(this_joint->translate.x - other_x));
 
-                if ((other_fp->special_status == ftSpecialStatus_Star) && (sqrt_xy < 1500.0F))
+                if ((other_fp->special_hitstatus == gmHitCollision_HitStatus_Invincible) && (sqrt_xy < 1500.0F))
                 {
                     return TRUE;
                 }

@@ -9,7 +9,7 @@ void func_ovl3_80144700(GObj *fighter_gobj, s32 status_id)
         ftMapCollide_SetGround(fp);
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
-    func_ovl2_800E9CE8(fp);
+    ftCommon_VelDamageTransferGround(fp);
 }
 
 bool32 func_ovl3_80144760(GObj *fighter_gobj)

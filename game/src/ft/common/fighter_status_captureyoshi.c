@@ -105,7 +105,7 @@ void func_ovl3_8014C9A0(GObj *fighter_gobj)
 
         if (fp->status_vars.common.captureyoshi.effect_gobj != NULL)
         {
-            func_ovl2_800E9C3C(fighter_gobj);
+            ftCommon_ProcDestroyGFX(fighter_gobj);
 
             fp->status_vars.common.captureyoshi.effect_gobj = NULL;
         }

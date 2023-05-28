@@ -337,12 +337,12 @@ glabel func_ovl51_8018D2DC
   /* 174E08 8018D588 00000000 */       nop 
   /* 174E0C 8018D58C 3C058019 */       lui $a1, %hi(D_ovl51_8018D8A8)
   /* 174E10 8018D590 24A5D8A8 */     addiu $a1, $a1, %lo(D_ovl51_8018D8A8)
-  /* 174E14 8018D594 0C03A6CC */       jal func_ovl2_800E9B30
+  /* 174E14 8018D594 0C03A6CC */       jal ftCommon_SetHowToPlayInputSeq
   /* 174E18 8018D598 02002025 */        or $a0, $s0, $zero
   /* 174E1C 8018D59C 10000004 */         b .L8018D5B0
   /* 174E20 8018D5A0 26310001 */     addiu $s1, $s1, 1
   .L8018D5A4:
-  /* 174E24 8018D5A4 0C03A6CC */       jal func_ovl2_800E9B30
+  /* 174E24 8018D5A4 0C03A6CC */       jal ftCommon_SetHowToPlayInputSeq
   /* 174E28 8018D5A8 24A5D8F0 */     addiu $a1, $a1, -0x2710
   /* 174E2C 8018D5AC 26310001 */     addiu $s1, $s1, 1
   .L8018D5B0:

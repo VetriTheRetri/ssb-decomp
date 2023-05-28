@@ -950,7 +950,7 @@ void func_ovl3_8016FB18(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct 
         }
         if (ap->x2D3_flag_b4)
         {
-            damage_knockback = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->handicap, ap->handicap);
+            damage_knockback = gmCommon_DamageCalcKnockback(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->handicap, ap->handicap);
 
             if (ap->damage_knockback < damage_knockback)
             {
@@ -1132,7 +1132,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
         }
         if (defend_ap->x2D3_flag_b4)
         {
-            launch_angle = func_ovl2_800E9D78(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->handicap, )defend_ap->handicap);
+            launch_angle = gmCommon_DamageCalcKnockback(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_at_hit->knockback_weight, attack_at_hit->knockback_scale, attack_at_hit->knockback_base, 1.0f, attack_ap->handicap, )defend_ap->handicap);
 
             if (defend_ap->damage_knockback < launch_angle)
             {
@@ -1224,7 +1224,7 @@ void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Str
         }
         if (ap->x2D3_flag_b4)
         {
-            angle = func_ovl2_800E9D78(ap->percent_damage, ap->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->handicap, ap->handicap);
+            angle = gmCommon_DamageCalcKnockback(ap->percent_damage, ap->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, 1.0F, ip->handicap, ap->handicap);
 
             if (ap->damage_knockback < angle)
             {

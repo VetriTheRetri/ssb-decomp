@@ -12,7 +12,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
             if (fp->is_statupdate_stop_gfx != FALSE)
             {
-                func_ovl2_800E9C3C(fighter_gobj);
+                ftCommon_ProcDestroyGFX(fighter_gobj);
                 fp->command_vars.flags.flag1 = 0;
             }
             break;
@@ -32,7 +32,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
 
         if (fp->is_statupdate_stop_gfx != FALSE)
         {
-            func_ovl2_800E9C3C(fighter_gobj);
+            ftCommon_ProcDestroyGFX(fighter_gobj);
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -245,8 +245,8 @@ void jtgt_ovl3_801611A8(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
 void func_ovl3_80161210(GObj *fighter_gobj)
@@ -256,8 +256,8 @@ void func_ovl3_80161210(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiLanding, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
 void jtgt_ovl3_801611A8(GObj *fighter_gobj)
@@ -269,8 +269,8 @@ void jtgt_ovl3_801611A8(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirHi, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
 void func_ovl3_801612D8(GObj *fighter_gobj)
@@ -281,8 +281,8 @@ void func_ovl3_801612D8(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiFall, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 
     fp->jumps_used = fp->attributes->jumps_max;
 

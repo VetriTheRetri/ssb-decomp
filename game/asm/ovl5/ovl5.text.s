@@ -59,7 +59,7 @@ glabel func_ovl5_8018D160
   /* 10B414 8018D164 AFA40018 */        sw $a0, 0x18($sp)
   /* 10B418 8018D168 AFBF0014 */        sw $ra, 0x14($sp)
   /* 10B41C 8018D16C 3C048019 */       lui $a0, %hi(D_ovl5_8018D750)
-  /* 10B420 8018D170 0C03A6D0 */       jal func_ovl2_800E9B40
+  /* 10B420 8018D170 0C03A6D0 */       jal ftCommon_CheckHowToPlayInputSeq
   /* 10B424 8018D174 8C84D750 */        lw $a0, %lo(D_ovl5_8018D750)($a0)
   /* 10B428 8018D178 54400006 */      bnel $v0, $zero, .L8018D194
   /* 10B42C 8018D17C 8FBF0014 */        lw $ra, 0x14($sp)
@@ -243,7 +243,7 @@ glabel func_ovl5_8018D1A0
   /* 10B6DC 8018D42C 00402825 */        or $a1, $v0, $zero
   /* 10B6E0 8018D430 3C058019 */       lui $a1, %hi(D_ovl5_8018D580)
   /* 10B6E4 8018D434 24A5D580 */     addiu $a1, $a1, %lo(D_ovl5_8018D580)
-  /* 10B6E8 8018D438 0C03A6CC */       jal func_ovl2_800E9B30
+  /* 10B6E8 8018D438 0C03A6CC */       jal ftCommon_SetHowToPlayInputSeq
   /* 10B6EC 8018D43C 02002025 */        or $a0, $s0, $zero
   .L8018D440:
   /* 10B6F0 8018D440 26310001 */     addiu $s1, $s1, 1

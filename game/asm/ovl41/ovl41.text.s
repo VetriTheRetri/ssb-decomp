@@ -506,7 +506,7 @@ glabel func_ovl41_8018D61C
   /* 16C474 8018D824 00402825 */        or $a1, $v0, $zero
   /* 16C478 8018D828 3C058019 */       lui $a1, %hi(D_ovl41_8018E0F8)
   /* 16C47C 8018D82C 24A5E0F8 */     addiu $a1, $a1, %lo(D_ovl41_8018E0F8)
-  /* 16C480 8018D830 0C03A6CC */       jal func_ovl2_800E9B30
+  /* 16C480 8018D830 0C03A6CC */       jal ftCommon_SetHowToPlayInputSeq
   /* 16C484 8018D834 02002025 */        or $a0, $s0, $zero
   /* 16C488 8018D838 26310001 */     addiu $s1, $s1, 1
   .L8018D83C:

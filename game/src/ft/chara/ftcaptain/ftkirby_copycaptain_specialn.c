@@ -19,7 +19,7 @@ void func_ovl3_80160810(GObj *fighter_gobj)
     }
     else if (fp->command_vars.flags.flag0 == 1)
     {
-        func_ovl2_800E9C3C(fighter_gobj);
+        ftCommon_ProcDestroyGFX(fighter_gobj);
         fp->command_vars.flags.flag0 = 2;
     }
 }

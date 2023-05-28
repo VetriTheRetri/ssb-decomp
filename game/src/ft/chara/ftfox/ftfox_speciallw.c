@@ -240,7 +240,7 @@ void func_ovl3_8015D130(GObj *fighter_gobj)
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        func_ovl2_800E9C3C(fighter_gobj);
+        ftCommon_ProcDestroyGFX(fighter_gobj);
         func_ovl2_800DEE54(fighter_gobj);
     }
 }

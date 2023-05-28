@@ -110,8 +110,8 @@ void func_ovl3_8014FFE0(GObj *fighter_gobj)
     case Ft_Kind_PolyPikachu:
         fp->status_vars.common.attack4.gfx_id = 0;
 
-        fp->proc_lagstart = func_ovl2_800E9C8C;
-        fp->proc_lagend = func_ovl2_800E9CC4;
+        fp->proc_lagstart = ftCommon_ProcPauseGFX;
+        fp->proc_lagend = ftCommon_ProcResumeGFX;
         break;
 
     case Ft_Kind_Ness:

@@ -2,6 +2,8 @@
 
 // Covers DownBounce, DownWait
 
+#define FTCOMMON_DOWNBOUNCE_STATUPDATE_FLAGS (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE)
+
 void func_ovl3_80144220(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
@@ -34,7 +36,7 @@ void ftCommon_DownWait_ApplyStatus(GObj *fighter_gobj)
     }
     else status_id = ftStatus_Common_DownWaitU;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x1E0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTCOMMON_DOWNBOUNCE_STATUPDATE_FLAGS);
 
     fp->status_vars.common.downwait.stand_wait = FTCOMMON_DOWNWAIT_STAND_WAIT;
 
@@ -105,11 +107,11 @@ void ftCommon_DownBounce_ApplyStatus(GObj *fighter_gobj)
     }
     else status_id = ftStatus_Common_DownBounceU;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_UNK3_PRESERVE);
     func_ovl3_80144428(fighter_gobj);
 
     fp->status_vars.common.downbounce.attack_buffer = 0;
     fp->damage_mul = 0.5F;
 
-    func_ovl2_800E9CE8(fp);
+    ftCommon_VelDamageTransferGround(fp);
 }

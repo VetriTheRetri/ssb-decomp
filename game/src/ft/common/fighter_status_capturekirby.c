@@ -288,7 +288,7 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
             fp->is_invisible = FALSE;
 
             ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
-            func_ovl2_800E9C3C(fighter_gobj);
+            ftCommon_ProcDestroyGFX(fighter_gobj);
             func_ovl3_8014BE24(fighter_gobj);
 
             if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
@@ -311,7 +311,7 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
                 }
                 else fp->phys_info.vel_air.x = ((fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) * FTCOMMON_THROWNKIRBYSTAR_RELEASE_VEL_X;
 
-                func_ovl2_800E9C3C(fighter_gobj);
+                ftCommon_ProcDestroyGFX(fighter_gobj);
 
                 if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
                 {

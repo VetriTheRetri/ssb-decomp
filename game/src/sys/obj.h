@@ -9,7 +9,8 @@ typedef enum gOMObjLinkIndex
 {
     gOMObjLinkIndexFighter = 0x3,
     gOMObjLinkIndexArticle,
-    gOMObjLinkIndexItem
+    gOMObjLinkIndexItem,
+    gOMObjLinkIndexEffect
 
 } gOMObjLinkIndex;
 

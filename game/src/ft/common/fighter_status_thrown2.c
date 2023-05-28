@@ -109,7 +109,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
 
     ft_throw = capture_fp->fighter_throw;
 
-    knockback_calc = func_ovl2_800E9D78(this_fp->percent_damage, ft_throw->damage, ft_throw->damage, ft_throw->knockback_weight, ft_throw->knockback_scale, ft_throw->knockback_base, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap);
+    knockback_calc = gmCommon_DamageCalcKnockback(this_fp->percent_damage, ft_throw->damage, ft_throw->damage, ft_throw->knockback_weight, ft_throw->knockback_scale, ft_throw->knockback_base, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap);
 
     knockback_final = knockback_calc - knockback_resist;
 
@@ -192,7 +192,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
     }
     ft_throw = &capture_fp->fighter_throw[1];
 
-    knockback_calc = func_ovl2_800E9D78(this_fp->percent_damage, ft_throw->damage, ft_throw->damage, ft_throw->knockback_weight, ft_throw->knockback_scale, ft_throw->knockback_base, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap);
+    knockback_calc = gmCommon_DamageCalcKnockback(this_fp->percent_damage, ft_throw->damage, ft_throw->damage, ft_throw->knockback_weight, ft_throw->knockback_scale, ft_throw->knockback_base, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap);
 
     knockback_final = knockback_calc - knockback_resist;
 
@@ -243,7 +243,7 @@ void func_ovl3_8014B5B4(GObj *fighter_gobj)
 
     DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
 
-    knockback_calc = func_ovl2_800E9D78(fp->percent_damage, ft_throw->damage, ft_throw->damage, ft_throw->knockback_weight, ft_throw->knockback_scale, ft_throw->knockback_base, fp->attributes->weight, 9, fp->handicap);
+    knockback_calc = gmCommon_DamageCalcKnockback(fp->percent_damage, ft_throw->damage, ft_throw->damage, ft_throw->knockback_weight, ft_throw->knockback_scale, ft_throw->knockback_base, fp->attributes->weight, 9, fp->handicap);
 
     knockback_final = knockback_calc - knockback_resist;
 

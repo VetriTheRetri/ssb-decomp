@@ -5516,7 +5516,7 @@ glabel D_ovl2_8012B740
 glabel ftCommon_ShuffleFrameIndexMax
   .incbin "ovl2.raw.bin", 0x55320, 0x4
 
-glabel D_ovl2_8012B7B4
+glabel Fighter_ColAnimIndex_Skeleton
   .incbin "ovl2.raw.bin", 0x55324, 0x6C
 
 glabel D_ovl2_8012B820
@@ -5724,7 +5724,7 @@ glabel D_ovl2_8012C520
   .balign 4
   .incbin "ovl2.raw.bin", 0x56388, 0x18
 
-glabel D_ovl2_8012C830
+glabel Knockback_Handicap_MulTable
   .incbin "ovl2.raw.bin", 0x563A0, 0x10
 
 glabel Fighter_ItemSwing_Desc

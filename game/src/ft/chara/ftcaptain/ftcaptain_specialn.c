@@ -20,7 +20,7 @@ void func_ovl3_8015F7F0(GObj *fighter_gobj) // Falcon Punch
 
     else if (fp->command_vars.flags.flag0 == 1)
     {
-        func_ovl2_800E9C3C(fighter_gobj);
+        ftCommon_ProcDestroyGFX(fighter_gobj);
         fp->command_vars.flags.flag0 = 2;
     }
 }
@@ -98,8 +98,8 @@ void func_ovl3_8015FA2C(GObj *fighter_gobj)
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
 void func_ovl3_8015FA8C(GObj *fighter_gobj)
@@ -110,8 +110,8 @@ void func_ovl3_8015FA8C(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
 void func_ovl3_8015FAF8(GObj *fighter_gobj)
@@ -146,8 +146,8 @@ void jtgt_ovl3_8015FB5C(GObj *fighter_gobj)
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015FB40(fighter_gobj);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
 void func_ovl3_8015FA8C(GObj *fighter_gobj)
@@ -158,6 +158,6 @@ void func_ovl3_8015FA8C(GObj *fighter_gobj)
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015FB40(fighter_gobj);
 
-    fp->proc_lagstart = func_ovl2_800E9C8C;
-    fp->proc_lagend = func_ovl2_800E9CC4;
+    fp->proc_lagstart = ftCommon_ProcPauseGFX;
+    fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
