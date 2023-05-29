@@ -225,7 +225,7 @@ void func_ovl3_80179748(GObj *article_gobj)
     DObjGetStruct(article_gobj)->rotate.z = atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32;
 
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Box_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Box_Status, 0);
 }
 
 void func_ovl3_801797A4(GObj *article_gobj)
@@ -235,7 +235,7 @@ void func_ovl3_801797A4(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Box_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Box_Status, 1);
 }
 
 void jtgt_ovl3_801797E8(GObj *article_gobj)
@@ -243,7 +243,7 @@ void jtgt_ovl3_801797E8(GObj *article_gobj)
     DObjGetStruct(article_gobj)->next->rotate.z = 0.0F;
     DObjGetStruct(article_gobj)->next->rotate.y = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_Box_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Box_Status, 2);
 }
 
 bool32 jtgt_ovl3_8017982C(GObj *article_gobj)
@@ -263,7 +263,7 @@ void jtgt_ovl3_8017987C(GObj *article_gobj)
 {
     DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 
-    func_ovl3_80172EC8(article_gobj, Article_Box_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Box_Status, 3);
 }
 
 bool32 func_ovl3_801798B8(GObj *article_gobj) // Unused
@@ -282,7 +282,7 @@ void jtgt_ovl3_8017990C(GObj *article_gobj)
 {
     DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 
-    func_ovl3_80172EC8(article_gobj, Article_Box_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Box_Status, 4);
 }
 
 extern u8 Article_Box_Hit; // 0x614
@@ -348,7 +348,7 @@ void func_ovl3_80179A34(GObj *article_gobj)
 void func_ovl3_80179AD4(GObj *article_gobj)
 {
     func_ovl3_80179A34(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Box_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Box_Status, 5);
 }
 
 void func_ovl3_80179B08(GObj *article_gobj)

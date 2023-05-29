@@ -103,7 +103,7 @@ void func_ovl3_80144038(GObj *fighter_gobj)
 
     DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
 
-    knockback = func_ovl2_800E9FC0(fp->percent_damage, tarucann->damage, tarucann->damage, tarucann->knockback_weight, tarucann->knockback_scale, tarucann->knockback_base, fp->attributes->weight, 9, 9);
+    knockback = grMapObject_DamageCalcKnockback(fp->percent_damage, tarucann->damage, tarucann->damage, tarucann->knockback_weight, tarucann->knockback_scale, tarucann->knockback_base, fp->attributes->weight, 9, 9);
 
     angle = ((I_RAD_TO_DEG(func_ovl2_8010A12C()) * -fp->lr) + 90);
     angle -= (angle / 360) * 360;

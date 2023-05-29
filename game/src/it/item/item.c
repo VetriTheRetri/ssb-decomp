@@ -86,7 +86,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->display_state = fp->display_state;
 
-        ip->item_hit.stale = func_ovl2_800EA470(fp->port_id, fp->attack_id, fp->flags_hi.halfword);
+        ip->item_hit.stale = gmCommon_GetStaleMulfp->port_id, fp->attack_id, fp->flags_hi.halfword);
         ip->item_hit.attack_id = fp->attack_id;
         ip->item_hit.flags_0x4A.halfword = fp->flags_hi.halfword;
         ip->item_hit.flags_0x4C = fp->flags_lw;

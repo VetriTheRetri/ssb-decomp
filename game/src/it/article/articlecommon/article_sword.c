@@ -29,7 +29,7 @@ extern ArticleStatusDesc Article_Sword_Status[];
 void func_ovl3_80174BE4(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Sword_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sword_Status, 0);
 }
 
 void func_ovl3_80174C18(GObj *article_gobj)
@@ -39,14 +39,14 @@ void func_ovl3_80174C18(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Sword_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sword_Status, 1);
 }
 
 void jtgt_ovl3_80174C5C(GObj *article_gobj)
 {
     DObjGetStruct(article_gobj)->rotate.y = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_Sword_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sword_Status, 2);
 }
 
 bool32 jtgt_ovl3_80174C90(GObj *article_gobj)
@@ -67,7 +67,7 @@ bool32 jtgt_ovl3_80174CC0(GObj *article_gobj)
 
 void jtgt_ovl3_80174CE8(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Sword_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sword_Status, 3);
 
     DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 }
@@ -79,7 +79,7 @@ void jtgt_ovl3_80174D2C(GObj *article_gobj)
 
 void jtgt_ovl3_80174D5C(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Sword_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sword_Status, 4);
 
     DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 }

@@ -55,7 +55,7 @@ void func_ovl3_801816E0(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
     func_ovl3_801816B8(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Egg_Status, 0);
 }
 
 void func_ovl3_8018171C(GObj *article_gobj)
@@ -70,12 +70,12 @@ void func_ovl3_8018171C(GObj *article_gobj)
     ap->is_damage_all = TRUE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Egg_Status, 1);
 }
 
 void jtgt_ovl3_80181778(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Egg_Status, 2);
 }
 
 bool32 jtgt_ovl3_801817A0(GObj *article_gobj)
@@ -114,7 +114,7 @@ void jtgt_ovl3_80181854(GObj *article_gobj)
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Egg_Status, 3);
 }
 
 bool32 func_ovl3_80181894(GObj *article_gobj) // Unused
@@ -137,7 +137,7 @@ void jtgt_ovl3_801818E8(GObj *article_gobj)
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Egg_Status, 4);
 }
 
 extern ArticleSpawnData Article_Egg_Data;
@@ -225,7 +225,7 @@ void func_ovl3_80181AA8(GObj *article_gobj)
 void func_ovl3_80181B5C(GObj *article_gobj)
 {
     func_ovl3_80181AA8(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Egg_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Egg_Status, 5);
 }
 
 void func_ovl3_80181B90(GObj *article_gobj)

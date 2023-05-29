@@ -152,7 +152,7 @@ extern u8 ftCommon_ShuffleFrameIndexMax[2] = { 4, 3 };
 // 0x800E7F88
 void ftCommon_SetShuffleInfo(Fighter_Struct *fp, bool32 is_electric, s32 damage, s32 status_id, f32 hitlag_mul)
 {
-    fp->shuffle_timer = func_ovl2_800EA1C0(damage, status_id, hitlag_mul) * FTCOMMON_DAMAGE_SHUFFLE_MUL;
+    fp->shuffle_timer = gmCommon_DamageCalcHitLag(damage, status_id, hitlag_mul) * FTCOMMON_DAMAGE_SHUFFLE_MUL;
     fp->shuffle_frame_index = 0;
     fp->is_shuffle_electric = is_electric;
     fp->shuffle_index_max = ftCommon_ShuffleFrameIndexMax[is_electric];
@@ -1411,7 +1411,7 @@ void ftCommon_VelDamageTransferGround(Fighter_Struct *fp)
 3FC00000 3F800000 3F8A3D71 3F6D097B
 */
 
-extern f32 Knockback_Handicap_MulTable[40][2] = 
+f32 Knockback_Handicap_MulTable[40][2] = 
 {
     { 0.55F,  16.363636363636F / 9.0F },
     {  0.6F,             15.0F / 9.0F },
@@ -1455,13 +1455,14 @@ extern f32 Knockback_Handicap_MulTable[40][2] =
     { 1.08F,   8.333333333333F / 9.0F }
 };
 
-f32 gmCommon_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 hit_damage, s32 knockback_weight, s32 knockback_scale, s32 knockback_base, f32 weight, s32 attack_handicap, s32 defend_handicap) 
+// 0x800E9D78
+f32 gmCommonObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 hit_damage, s32 knockback_weight, s32 knockback_scale, s32 knockback_base, f32 weight, s32 attack_handicap, s32 defend_handicap) 
 {
     f32 knockback;
 
     if (knockback_weight != 0)
     {
-        knockback = ( ( ( ( ( ( 1.0F + ( 10.0F * knockback_weight * 0.05F) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
     } 
     else 
     {
@@ -1478,4 +1479,148 @@ f32 gmCommon_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 hit_
         knockback = rand_f32() * 200.0F;
     }
     return knockback;
+}
+
+// 0x800E9FC0 - Used by Barrel Cannon on Kongo Jungle
+f32 grMapObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 hit_damage, s32 knockback_weight, s32 knockback_scale, s32 knockback_base, f32 weight, s32 attack_handicap, s32 defend_handicap)
+{
+    f32 knockback;
+
+    if (knockback_weight != 0)
+    {
+        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * 1 * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+    }
+    else
+    {
+        f32 damage_add = percent_damage + recent_damage;
+
+        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base) * 1 * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+    }
+    if (knockback >= 2500.0F)
+    {
+        knockback = 2500.0F;
+    }
+    if (Save_Info.unk5E2 & 1)
+    {
+        knockback = rand_f32() * 200.0F;
+    }
+    return knockback;
+}
+
+// 0x800EA1B0
+f32 ftCommon_DamageCalcHitStun(f32 knockback)
+{
+    return knockback / 1.875F;
+}
+
+// 0x800EA1C0
+s32 gmCommon_DamageCalcHitLag(s32 damage, s32 status_id, f32 hitlag_mul)
+{
+    s32 hitlag_timer = (s32) ((damage * 0.33333333F) + 5.0F) * hitlag_mul;
+
+    if ((status_id == ftStatus_Common_Squat) || (status_id == ftStatus_Common_SquatWait))
+    {
+        hitlag_timer *= 0.66666667F;
+    }
+    return hitlag_timer;
+}
+
+// 0x800EA248
+void ftCommon_DamageUpdateStats(Fighter_Struct *fp, s32 damage)
+{
+    fp->percent_damage += damage;
+    Match_Info->player_block[fp->port_id].total_damage_all += damage;
+
+    if (fp->percent_damage > 999)
+    {
+        fp->percent_damage = 999;
+    }
+    Match_Info->player_block[fp->port_id].stock_damage_all = fp->percent_damage;
+
+    if (fp->item_hold != NULL)
+    {
+        if ((fp->damage_knockback != 0.0F) && ((fp->hitlag_timer == 0) || !(fp->x192_flag_b6) || !(fp->damage_knockback < (fp->damage_knockback_again + 30.0F))))
+        {
+            Article_Struct *ap = ArticleGetStruct(fp->item_hold);
+
+            if ((ap->is_light_throw) || (fp->ft_kind != Ft_Kind_Donkey) && (fp->ft_kind != Ft_Kind_PolyDonkey) && (fp->ft_kind != Ft_Kind_GiantDonkey))
+            {
+                if (((s32)rand_u16_range(60) < damage) || ((atCommon_CheckTypeShootEmpty(fp->item_hold, damage) != FALSE) && (rand_u16_range(2) == 0)))
+                {
+                    Vec3f vel;
+
+                    vel.x = vel.y = vel.z = 0.0F;
+
+                    func_ovl3_80172AEC(fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
+                }
+            }
+        }
+    }
+}
+
+// 0x800EA3D4
+void ftCommon_ApplyDamageHeal(Fighter_Struct *fp, s32 heal)
+{
+    fp->damage_heal += heal;
+    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 9, 0);
+}
+
+// 0x800EA40C - If fighter is grabbed, halve damage received
+s32 ftCommon_DamageAdjustCapture(Fighter_Struct *fp, s32 damage)
+{
+    if (fp->capture_gobj != NULL)
+    {
+        damage = (damage * 0.5F) + 0.999F;
+    }
+    return (damage * fp->damage_mul) + 0.999F;
+}
+
+// 0x8012B820
+extern f32 Damage_Stale_MulTable[4] = 
+{
+    0.75F, 0.82F, 0.89F, 0.96F
+};
+
+// 0x800EA470
+f32 gmCommon_DamageGetStaleMul(u32 port_id, s32 attack_id, u16 flags)
+{
+    s32 stale_index;
+    s32 backup_stale_id;
+    s32 stale_id;
+    s32 flag_id;
+
+    stale_index = Match_Info->player_block[port_id].stale_index;
+
+    if (attack_id != 0)
+    {
+        flag_id = backup_stale_id = (stale_index != 0) ? stale_index - 1 : ARRAY_COUNT(Match_Info->player_block);
+
+        for (stale_id = 0; stale_id < ARRAY_COUNT(Damage_Stale_MulTable); stale_id++)
+        {
+            if (attack_id == Match_Info->player_block[port_id].stale_flags[flag_id][0])
+            {
+                if (flags != Match_Info->player_block[port_id].stale_flags[flag_id][1])
+                {
+                    return Damage_Stale_MulTable[stale_id];
+                }
+                else if (flag_id == backup_stale_id)
+                {
+                    stale_id--;
+                }
+            }
+            flag_id = (flag_id != 0) ? flag_id-- : ARRAY_COUNT(Damage_Stale_MulTable);
+        }
+    }
+    return 1.0F;
+}
+
+s32 gmCommon_DamageApplyStale(u32 port_id, s32 damage, s32 attack_id, u16 flags)
+{
+    f32 stale = gmCommon_DamageGetStaleMul(port_id, attack_id, flags);
+
+    if (stale != 1.0F)
+    {
+        damage = (damage * stale) + 0.999F;
+    }
+    return damage;
 }

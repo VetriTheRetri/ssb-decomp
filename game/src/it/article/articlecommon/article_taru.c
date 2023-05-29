@@ -58,7 +58,7 @@ extern ArticleStatusDesc Article_Taru_Status[];
 void func_ovl3_80179CE8(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 0);
 }
 
 void func_ovl3_80179D1C(GObj *article_gobj)
@@ -68,12 +68,12 @@ void func_ovl3_80179D1C(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 1);
 }
 
 void jtgt_ovl3_80179D60(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 2);
 }
 
 bool32 func_ovl3_80179D88(GObj *article_gobj, f32 vel_mod)
@@ -101,7 +101,7 @@ void func_ovl3_80179DEC(GObj *article_gobj)
 
     ap->phys_info.vel.y = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 6);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 6);
 }
 
 bool32 jtgt_ovl3_80179E28(GObj *article_gobj)
@@ -145,7 +145,7 @@ void func_ovl3_80179EF0(GObj *article_gobj)
 
 void jtgt_ovl3_80179F1C(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 3);
     func_ovl3_80179EF0(article_gobj);
 }
 
@@ -158,7 +158,7 @@ bool32 func_ovl3_80179F40(GObj *article_gobj)
 
 void jtgt_ovl3_80179F74(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 4);
     func_ovl3_80179EF0(article_gobj);
 }
 
@@ -223,7 +223,7 @@ bool32 jtgt_ovl3_8017A148(GObj *article_gobj)
 
     if (func_ovl3_8017356C(article_gobj) == FALSE)
     {
-        func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 4);
+        atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 4);
     }
     else if (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
@@ -278,7 +278,7 @@ void func_ovl3_8017A240(GObj *article_gobj)
 void func_ovl3_8017A2D8(GObj *article_gobj)
 {
     func_ovl3_8017A240(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Taru_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Taru_Status, 5);
 }
 
 void func_ovl3_8017A30C(GObj *article_gobj)

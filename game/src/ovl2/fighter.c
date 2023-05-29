@@ -90,7 +90,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->attack_hit_count = 0;
     fp->shield_attack_damage = 0;
     fp->shield_damage = 0;
-    fp->unk_ft_0x7DC = 0;
+    fp->damage_queue = 0;
     fp->damage_taken_recent = 0;
     fp->damage_port_id = -1;
     fp->unk_ft_0x820 = 0;

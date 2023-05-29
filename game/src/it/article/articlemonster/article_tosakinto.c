@@ -38,7 +38,7 @@ void func_ovl3_8017E828(GObj *article_gobj)
     {
         func_800269C0(0x143U);
     }
-    func_ovl3_80172EC8(article_gobj, Article_Tosakinto_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Tosakinto_Status, 0);
 }
 
 bool32 jtgt_ovl3_8017E880(GObj *article_gobj)
@@ -108,7 +108,7 @@ void func_ovl3_8017E93C(GObj *article_gobj)
 void func_ovl3_8017EA14(GObj *article_gobj)
 {
     func_ovl3_8017E93C(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Tosakinto_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Tosakinto_Status, 1);
 }
 
 bool32 jtgt_ovl3_8017EA48(GObj *article_gobj)

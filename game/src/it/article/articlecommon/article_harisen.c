@@ -38,7 +38,7 @@ extern ArticleStatusDesc Article_Harisen_Status[];
 void func_ovl3_801751F4(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Harisen_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Harisen_Status, 0);
 }
 
 void func_ovl3_80175228(GObj *article_gobj)
@@ -48,7 +48,7 @@ void func_ovl3_80175228(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Harisen_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Harisen_Status, 1);
 }
 
 void jtgt_ovl3_8017526C(GObj *article_gobj)
@@ -59,7 +59,7 @@ void jtgt_ovl3_8017526C(GObj *article_gobj)
 
     joint->rotate.y = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_Harisen_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Harisen_Status, 2);
 }
 
 bool32 jtgt_ovl3_801752C0(GObj *article_gobj)
@@ -90,7 +90,7 @@ bool32 jtgt_ovl3_80175328(GObj *article_gobj)
 
 void jtgt_ovl3_80175350(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Harisen_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Harisen_Status, 3);
 
     DObjGetStruct(article_gobj)->next->rotate.y = -HALF_PI32;
 }
@@ -102,7 +102,7 @@ bool32 jtgt_ovl3_80175394(GObj *article_gobj)
 
 void jtgt_ovl3_801753C4(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Harisen_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Harisen_Status, 4);
 
     DObjGetStruct(article_gobj)->next->rotate.y = -HALF_PI32;
 }

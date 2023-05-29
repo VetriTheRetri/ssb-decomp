@@ -15,7 +15,7 @@ void func_ovl3_8017C0D4(GObj *article_gobj)
 {
     Article_Struct *ap;
 
-    func_ovl3_80172EC8(article_gobj, Article_POW_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_POW_Status, 0);
 
     ap = ArticleGetStruct(article_gobj), ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }

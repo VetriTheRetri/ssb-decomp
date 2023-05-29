@@ -78,7 +78,7 @@ extern ArticleStatusDesc Article_At_Bumper_Status[];
 void func_ovl3_8017B600(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 0);
 }
 
 void func_ovl3_8017B634(GObj *article_gobj)
@@ -88,12 +88,12 @@ void func_ovl3_8017B634(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 1);
 }
 
 void jtgt_ovl3_8017B678(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 2);
 }
 
 bool32 jtgt_ovl3_8017B6A0(GObj *article_gobj)
@@ -153,7 +153,7 @@ void jtgt_ovl3_8017B7DC(GObj *article_gobj)
     ap->coll_data.object_coll.top = ATBUMPER_COLL_SIZE;
     ap->coll_data.object_coll.bottom = -ATBUMPER_COLL_SIZE;
 
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 3);
 }
 
 void func_ovl3_8017B828(GObj *article_gobj)
@@ -165,7 +165,7 @@ void func_ovl3_8017B828(GObj *article_gobj)
     ap->coll_data.object_coll.top = ATBUMPER_COLL_SIZE;
     ap->coll_data.object_coll.bottom = -ATBUMPER_COLL_SIZE;
 
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 4);
 }
 
 void func_ovl3_8017B874(GObj *article_gobj)
@@ -363,7 +363,7 @@ bool32 func_ovl3_8017BCC0(GObj *article_gobj)
 void func_ovl3_8017BD4C(GObj *article_gobj)
 {
     func_ovl3_8017B8DC(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 5);
 }
 
 bool32 jtgt_ovl3_8017BD80(GObj *article_gobj)
@@ -410,7 +410,7 @@ void func_ovl3_8017BEA0(GObj *article_gobj)
 
     ap->article_vars.bumper.damage_all_delay = ATBUMPER_DAMAGE_ALL_WAIT;
 
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 6);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 6);
 }
 
 bool32 func_ovl3_8017BED4(GObj *article_gobj)
@@ -453,7 +453,7 @@ void func_ovl3_8017BF1C(GObj *article_gobj)
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.z = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_At_Bumper_Status, 7);
+    atCommon_UpdateArticleStatus(article_gobj, Article_At_Bumper_Status, 7);
 }
 
 extern ArticleSpawnData Article_At_Bumper_Data;

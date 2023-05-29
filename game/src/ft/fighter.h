@@ -800,7 +800,7 @@ typedef struct ftCommonAttributes
     ftItemPickup item_pickup;
     s16 unk_0xE4;
     s16 unk_0xE6;
-    u16 throw_heavy_sfx;
+    u16 heavyget_sfx;
     u16 unk_0xEA;
     s32 unk_0xEC;
     GfxColorAlpha shade_color[4];
@@ -1127,12 +1127,13 @@ struct Fighter_Struct
     u16 attack_hit_count; // Number of times this fighter successfully dealt damage 
     s32 shield_attack_damage;
     f32 attack_rebound; // Actually 2x staled damage?
+    s32 lr_attack;
     s32 shield_damage;
     s32 shield_damage_total; // shield_damage + hitbox damage + hitbox shield damage, does not persist?
     s32 lr_shield;
     s32 shield_port_id; // Port of player hitting this fighter's shield
     s32 reflect_damage;
-    s32 unk_ft_0x7DC;
+    s32 damage_queue; // Not sure how this is different from damage_taken_recent
     f32 damage_knockback;
     f32 knockback_resist_passive;// Passive armor, always active (?)
     f32 knockback_resist_status; // Resist this many units of knockback, effectively knockback-based armor

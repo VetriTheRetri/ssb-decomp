@@ -86,7 +86,7 @@ bool32 func_ovl2_800D6630(void)
     {
         for (ft_index = 0, bonus_record_count = 0; ft_index < ARRAY_COUNT(Save_Info.spgame_records); ft_index++)
         {
-            if (Save_Info.spgame_records[ft_index].bt_target_count == 10) // Check if fighter has broken all targets
+            if (Save_Info.spgame_records[ft_index].bonus1_task_count == 10) // Check if fighter has broken all targets
             {
                 bonus_record_count |= (ft_index << ft_index);
             }
@@ -95,7 +95,7 @@ bool32 func_ovl2_800D6630(void)
         {
             for (ft_index = 0, bonus_record_count = 0; ft_index < ARRAY_COUNT(Save_Info.spgame_records); ft_index++)
             {
-                if (Save_Info.spgame_records[ft_index].bp_platform_count == 10) // Check if fighter has boarded all platforms
+                if (Save_Info.spgame_records[ft_index].bonus2_task_count == 10) // Check if fighter has boarded all platforms
                 {
                     bonus_record_count |= (ft_index << ft_index);
                 }

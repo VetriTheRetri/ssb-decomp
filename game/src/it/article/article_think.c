@@ -162,7 +162,8 @@ s32 func_ovl3_801727F4(Article_Struct *ap)
     return (ap->article_hit.throw_mul * damage) + 0.999F; // WAT!!! (It doesn't match otherwise???)
 }
 
-bool32 func_ovl3_80172890(GObj *article_gobj)
+// 0x80172890
+bool32 atCommon_CheckTypeShootEmpty(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 
@@ -185,7 +186,6 @@ void func_ovl3_801728D4(GObj *article_gobj)
 
         ftCommon_GetHammerSetBGM(ap->owner_gobj);
     }
-
     else if ((ap->at_kind < At_Kind_Gr_Lucky) || (ap->at_kind >= At_Kind_Iwark))
     {
         func_ovl2_800FF590(&DObjGetStruct(article_gobj)->translate);
@@ -306,7 +306,8 @@ void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_sma
 
 extern void (*Article_Callback_Pickup[])(GObj*);
 
-void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
+// 0x80172CA4
+void atCommon_PickupSetHoldFighter(GObj *article_gobj, GObj *fighter_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
@@ -374,9 +375,9 @@ void func_ovl3_80172CA4(GObj *article_gobj, GObj *fighter_gobj)
     }
     else
     {
-        if (fp->attributes->throw_heavy_sfx != 0x2B7)
+        if (fp->attributes->heavyget_sfx != 0x2B7)
         {
-            func_800269C0(fp->attributes->throw_heavy_sfx);
+            func_800269C0(fp->attributes->heavyget_sfx);
         }
     }
     func_ovl2_800E806C(fp, 6, 0);
@@ -401,7 +402,8 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
     func_ovl3_80173F54(ap);
 }
 
-void func_ovl3_80172EC8(GObj *article_gobj, ArticleStatusDesc *p_desc, s32 status_id) // Change article state
+// 0x80172EC8
+void atCommon_UpdateArticleStatus(GObj *article_gobj, ArticleStatusDesc *p_desc, s32 status_id) // Change article state
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
 

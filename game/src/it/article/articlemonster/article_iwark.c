@@ -125,7 +125,7 @@ extern ArticleStatusDesc Article_Iwark_Status[];
 void func_ovl3_8017DA60(GObj *article_gobj)
 {
     func_ovl3_8017D948(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Iwark_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Iwark_Status, 1);
 }
 
 bool32 func_ovl3_8017DA94(GObj *article_gobj)
@@ -150,7 +150,7 @@ void func_ovl3_8017DAD8(GObj *article_gobj)
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_Iwark_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Iwark_Status, 0);
 }
 
 bool32 jtgt_ovl3_8017DB18(GObj *article_gobj)

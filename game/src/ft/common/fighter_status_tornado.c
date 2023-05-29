@@ -95,7 +95,7 @@ void func_ovl3_80143CC4(GObj *fighter_gobj)
 
     DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
 
-    knockback = gmCommon_DamageCalcKnockback(fp->percent_damage, tornado->damage, tornado->damage, tornado->knockback_weight, tornado->knockback_scale, tornado->knockback_base, fp->attributes->weight, 9, fp->handicap);
+    knockback = gmCommonObject_DamageCalcKnockback(fp->percent_damage, tornado->damage, tornado->damage, tornado->knockback_weight, tornado->knockback_scale, tornado->knockback_base, fp->attributes->weight, 9, fp->handicap);
 
     if (ftCommon_GetBestHitStatusAll(fighter_gobj) != gmHitCollision_HitStatus_Normal)
     {
@@ -108,7 +108,7 @@ void func_ovl3_80143CC4(GObj *fighter_gobj)
 
     if (damage != 0)
     {
-        func_ovl2_800EA248(fp, damage);
+        ftCommon_DamageUpdateStats(fp, damage);
     }
     fp->tornado_wait = FTCOMMON_TORNADO_PICKUP_WAIT;
 }

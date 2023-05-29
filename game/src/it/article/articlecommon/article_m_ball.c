@@ -54,7 +54,7 @@ extern ArticleStatusDesc Article_M_Ball_Status[];
 void func_ovl3_8017C7C8(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 0);
 }
 
 void func_ovl3_8017C7FC(GObj *article_gobj)
@@ -64,7 +64,7 @@ void func_ovl3_8017C7FC(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 1);
 }
 
 void jtgt_ovl3_8017C840(GObj *article_gobj)
@@ -75,7 +75,7 @@ void jtgt_ovl3_8017C840(GObj *article_gobj)
 
     ap->article_vars.m_ball.owner_gobj = ap->owner_gobj;
 
-    func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 2);
 }
 
 bool32 jtgt_ovl3_8017C880(GObj *article_gobj)
@@ -146,13 +146,13 @@ bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
 void jtgt_ovl3_8017C9E0(GObj *article_gobj)
 {
     func_ovl3_8017C690(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 3);
 }
 
 void jtgt_ovl3_8017CA14(GObj *article_gobj)
 {
     func_ovl3_8017C690(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 4);
 }
 
 extern s32 D_ovl3_80189450;
@@ -260,7 +260,7 @@ void func_ovl3_8017CB84(GObj *article_gobj)
 void func_ovl3_8017CC88(GObj *article_gobj)
 {
     func_ovl3_8017CB84(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 5);
 }
 
 bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
@@ -316,7 +316,7 @@ bool32 jtgt_ovl3_8017CDAC(GObj *article_gobj)
 
 void func_ovl3_8017CDE4(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_M_Ball_Status, 6);
+    atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 6);
 }
 
 extern ArticleSpawnData Article_M_Ball_Data;

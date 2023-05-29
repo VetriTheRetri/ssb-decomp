@@ -33,7 +33,7 @@ bool32 func_ovl3_8017F49C(GObj *article_gobj) // Unused
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Lizardon_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Lizardon_Status, 0);
 }
 
 bool32 jtgt_ovl3_8017F53C(GObj *article_gobj)
@@ -63,7 +63,7 @@ bool32 jtgt_ovl3_8017F568(GObj *article_gobj)
 
 void func_ovl3_8017F5C4(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Lizardon_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Lizardon_Status, 1);
 }
 
 bool32 jtgt_ovl3_8017F5EC(GObj *article_gobj)
@@ -162,7 +162,7 @@ void func_ovl3_8017F810(GObj *article_gobj)
 
 void func_ovl3_8017F8E4(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Lizardon_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Lizardon_Status, 2);
 }
 
 bool32 jtgt_ovl3_8017F90C(GObj *article_gobj)

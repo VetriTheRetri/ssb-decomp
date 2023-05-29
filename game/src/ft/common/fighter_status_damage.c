@@ -377,13 +377,13 @@ bool32 func_ovl3_80140D30(Fighter_Struct *fp)
     {
         return TRUE;
     }
-    if ((fp->hitlag_timer > 0) && (fp->x192_flag_b6) && (fp->unk_0x7E0 < (fp->damage_knockback_again + 30.0F)))
+    if ((fp->hitlag_timer > 0) && (fp->x192_flag_b6) && (fp->damage_knockback < (fp->damage_knockback_again + 30.0F)))
     {
         return TRUE;
     }
     if ((fp->ft_kind == Ft_Kind_Donkey) || (fp->ft_kind == Ft_Kind_PolyDonkey) || (fp->ft_kind == Ft_Kind_GiantDonkey))
     {
-        if ((fp->status_info.status_id >= ftStatus_Donkey_ThrowFWait) && (fp->status_info.status_id <= ftStatus_Donkey_ThrowFDamage) && (func_ovl3_80140A94(func_ovl2_800EA1B0(fp->unk_0x7E0)) < 3))
+        if ((fp->status_info.status_id >= ftStatus_Donkey_ThrowFWait) && (fp->status_info.status_id <= ftStatus_Donkey_ThrowFDamage) && (func_ovl3_80140A94(ftCommon_DamageCalcHitStun(fp->damage_knockback)) < 3))
         {
             return TRUE;
         }
@@ -439,7 +439,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     f32 vel_x = cosf(angle_end) * knockback;
     s32 unused2;
     f32 vel_y = __sinf(angle_end) * knockback;
-    f32 hitstun_timer = func_ovl2_800EA1B0(knockback);
+    f32 hitstun_timer = ftCommon_DamageCalcHitStun(knockback);
     s32 unused1;
     s32 damage_level;
     s32 status_id_set;
@@ -657,7 +657,7 @@ void func_ovl3_80141560(GObj *fighter_gobj)
 
 void func_ovl3_801415F8(GObj *fighter_gobj, f32 knockback, s32 element)
 {
-    if (func_ovl3_80140BCC(fighter_gobj, element, func_ovl3_80140A94(func_ovl2_800EA1B0(knockback))) != FALSE)
+    if (func_ovl3_80140BCC(fighter_gobj, element, func_ovl3_80140A94(ftCommon_DamageCalcHitStun(knockback))) != FALSE)
     {
         func_ovl2_800E11C8(fighter_gobj);
     }
@@ -687,7 +687,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             {
                 if (func_ovl3_80140EC0(grab_fp) != FALSE)
                 {
-                    grab_fp->unk_ft_0x7DC = this_fp->unk_ft_0x7DC;
+                    grab_fp->damage_queue = this_fp->damage_queue;
                     grab_fp->hitlag_mul = this_fp->hitlag_mul;
 
                     func_ovl3_80140E2C(fighter_gobj);
@@ -745,7 +745,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             {
                 if (func_ovl3_80140D30(grab_fp) != 0)
                 {
-                    this_fp->unk_ft_0x7DC = grab_fp->unk_ft_0x7DC;
+                    this_fp->damage_queue = grab_fp->damage_queue;
                     this_fp->hitlag_mul = grab_fp->hitlag_mul;
                     grab_fp->unk_ft_0x814 = 3;
 
@@ -763,7 +763,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             }
             else
             {
-                grab_fp->hitlag_timer = func_ovl2_800EA1C0(this_fp->unk_ft_0x7DC, grab_fp->status_info.status_id, grab_fp->hitlag_mul);
+                grab_fp->hitlag_timer = gmCommon_DamageCalcHitLag(this_fp->damage_queue, grab_fp->status_info.status_id, grab_fp->hitlag_mul);
 
                 this_fp->input.pl.button_tap = this_fp->input.pl.button_tap_prev = 0;
 
@@ -811,7 +811,7 @@ void func_ovl3_80141670(GObj *fighter_gobj)
             return;
         }
     }
-    if ((this_fp->damage_element != 6) && ((this_fp->damage_knockback == 0.0F) || ((this_fp->hitlag_timer > 0) && (this_fp->x192_flag_b6) && (this_fp->damage_knockback < (this_fp->damage_knockback_again + 30.0F)))))
+    if ((this_fp->damage_element != gmHitCollision_Element_Sleep) && ((this_fp->damage_knockback == 0.0F) || ((this_fp->hitlag_timer > 0) && (this_fp->x192_flag_b6) && (this_fp->damage_knockback < (this_fp->damage_knockback_again + 30.0F)))))
     {
         func_ovl3_80141648(fighter_gobj);
     }
@@ -858,7 +858,7 @@ void func_ovl3_80141B08(GObj *fighter_gobj, Vec3f *angle, Vec3f *pos)
 
     knockback = func_ovl0_800C7A84(&vel_air);
 
-    fp->status_vars.common.damage.hitstun_timer = func_ovl2_800EA1B0(knockback);
+    fp->status_vars.common.damage.hitstun_timer = ftCommon_DamageCalcHitStun(knockback);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_WallDamage, 0.0F, 2.0F, 0x1100U);
 

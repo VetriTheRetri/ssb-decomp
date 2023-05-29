@@ -82,7 +82,7 @@ extern ArticleStatusDesc Article_Kamex_Status[];
 void func_ovl3_801808A4(GObj *article_gobj)
 {
     func_ovl3_80180860(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Kamex_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Kamex_Status, 0);
 }
 
 bool32 jtgt_ovl3_801808D8(GObj *article_gobj)
@@ -120,7 +120,7 @@ void func_ovl3_80180964(GObj *article_gobj)
     {
         func_800269C0(0x139U);
     }
-    func_ovl3_80172EC8(article_gobj, Article_Kamex_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Kamex_Status, 1);
 }
 
 bool32 jtgt_ovl3_801809BC(GObj *article_gobj)
@@ -185,7 +185,7 @@ void func_ovl3_80180A58(GObj *article_gobj, bool32 is_setup_vars)
 
 void func_ovl3_80180AF4(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Kamex_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Kamex_Status, 2);
 }
 
 bool32 jtgt_ovl3_80180B1C(GObj *article_gobj)

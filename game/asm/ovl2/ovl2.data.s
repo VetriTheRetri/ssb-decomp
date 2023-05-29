@@ -5519,7 +5519,7 @@ glabel ftCommon_ShuffleFrameIndexMax
 glabel Fighter_ColAnimIndex_Skeleton
   .incbin "ovl2.raw.bin", 0x55324, 0x6C
 
-glabel D_ovl2_8012B820
+glabel Damage_Stale_MulTable
   /* 55390 0A7020 8012B820 */
   .4byte 0x3f400000 # .float 0.75
   .incbin "ovl2.raw.bin", 0x55394, 0xC

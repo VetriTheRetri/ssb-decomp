@@ -113,7 +113,7 @@ void func_ovl3_80183A20(GObj *article_gobj)
     ap->x340_flag_b0123 = 0;
 
     func_ovl3_80183830(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Marumine_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Marumine_Status, 0);
 }
 
 GObj* jtgt_ovl3_80183A74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)

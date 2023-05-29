@@ -28,7 +28,7 @@ extern ArticleStatusDesc Article_Sawamura_Status[];
 
 void func_ovl3_801826A8(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Sawamura_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sawamura_Status, 0);
 }
 
 bool32 jtgt_ovl3_801826D0(GObj *article_gobj)
@@ -53,7 +53,7 @@ bool32 jtgt_ovl3_80182714(GObj *article_gobj)
 
 void func_ovl3_8018273C(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Sawamura_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sawamura_Status, 1);
 }
 
 bool32 func_ovl3_80182764(GObj *article_gobj)
@@ -173,7 +173,7 @@ void func_ovl3_80182958(GObj *article_gobj)
 void func_ovl3_80182AAC(GObj *article_gobj)
 {
     func_ovl3_80182958(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Sawamura_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Sawamura_Status, 2);
 }
 
 bool32 jtgt_ovl3_80182AE0(GObj *article_gobj)

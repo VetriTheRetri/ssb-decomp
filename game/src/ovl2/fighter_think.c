@@ -124,7 +124,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
             ft_hit->flags_hi.halfword = fp->flags_hi.halfword;
 
-            ft_hit->damage = func_ovl2_800EA54C(fp->port_id, ft_hit->damage, ft_hit->attack_id, ft_hit->flags_hi.halfword);
+            ft_hit->damage = gmCommon_DamageApplyStale(fp->port_id, ft_hit->damage, ft_hit->attack_id, ft_hit->flags_hi.halfword);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventCreateHit);
 
@@ -155,7 +155,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
             gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitDamage);
 
-            fp->fighter_hit[hit_id].damage = func_ovl2_800EA54C(fp->port_id, fp->fighter_hit[hit_id].damage, fp->fighter_hit[hit_id].attack_id, fp->fighter_hit[hit_id].flags_hi.halfword);
+            fp->fighter_hit[hit_id].damage = gmCommon_DamageApplyStale(fp->port_id, fp->fighter_hit[hit_id].damage, fp->fighter_hit[hit_id].attack_id, fp->fighter_hit[hit_id].flags_hi.halfword);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitDamage);
 
@@ -2013,9 +2013,9 @@ bool32 func_ovl2_800E2CC0(Fighter_Struct *fp, s32 *damage)
     {
         fp->damage_taken_recent += *damage;
 
-        if (fp->unk_ft_0x7DC < *damage)
+        if (fp->damage_queue < *damage)
         {
-            fp->unk_ft_0x7DC = *damage;
+            fp->damage_queue = *damage;
         }
         return TRUE;
     }
@@ -2035,7 +2035,7 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
 
     func_ovl2_800E26BC(attacker_fp, attacker_hit->group_id, victim_gobj, gmHitCollision_Type_Hurt, 0U, FALSE);
 
-    damage = func_ovl2_800EA40C(victim_fp, attacker_hit->damage);
+    damage = ftCommon_DamageAdjustCapture(victim_fp, attacker_hit->damage);
 
     if (attacker_fp->attack_damage < damage)
     {
@@ -2219,7 +2219,7 @@ void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
 
     func_ovl3_8016679C(ip, it_hit, fighter_gobj, (it_hit->flags_0x48_b2) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0U);
 
-    damage = func_ovl2_800EA40C(fp, unk);
+    damage = ftCommon_DamageAdjustCapture(fp, unk);
 
     if (it_hit->flags_0x48_b2)
     {
@@ -2419,14 +2419,14 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
             break;
 
         case At_Kind_Gr_Lucky:
-            func_ovl2_800EA3D4(fp, at_hit->damage);
+            ftCommon_ApplyDamageHeal(fp, at_hit->damage);
 
             break;
         }
     }
     else
     {
-        damage_again = func_ovl2_800EA40C(fp, damage);
+        damage_again = ftCommon_DamageAdjustCapture(fp, damage);
 
         if (at_hit->flags_0x4C_b2)
         {
@@ -2481,7 +2481,7 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
 
 void func_ovl2_800E3CAC(GObj *special_gobj, GObj *fighter_gobj, Fighter_Struct *fp, Ground_Hit *gr_hit, s32 target_kind)
 {
-    s32 damage = func_ovl2_800EA40C(fp, gr_hit->damage);
+    s32 damage = ftCommon_DamageAdjustCapture(fp, gr_hit->damage);
     s32 temp_v0 = func_ovl2_800E2CC0(fp, &damage);
 
     if ((temp_v0 != 0) && (ftHitCollisionLogIndex < ARRAY_COUNT(ftHitCollisionLogTable)))
@@ -2583,7 +2583,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         case ftHitCollision_LogKind_Fighter:
             ft_hit = hitlog->attacker_hit;
             attacker_fp = FighterGetStruct(hitlog->attacker_gobj);
-            var_f20 = gmCommon_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, ft_hit->damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, attributes->weight, attacker_fp->handicap, this_fp->handicap);
+            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, ft_hit->damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, attributes->weight, attacker_fp->handicap, this_fp->handicap);
 
             func_ovl2_800F0A90(&sp84, ft_hit, hitlog->victim_hurt);
 
@@ -2639,7 +2639,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             ip = ItemGetStruct(hitlog->attacker_gobj);
             damage = func_ovl3_80168128(ip);
 
-            var_f20 = gmCommon_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, attributes->weight, ip->handicap, this_fp->handicap);
+            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, attributes->weight, ip->handicap, this_fp->handicap);
 
             if (ip->is_hitlag_victim)
             {
@@ -2675,7 +2675,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
             damage = func_ovl3_801727F4(ap);
 
-            var_f20 = gmCommon_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, damage, at_hit->knockback_weight, at_hit->knockback_scale, at_hit->knockback_base, attributes->weight, ap->handicap, this_fp->handicap);
+            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, damage, at_hit->knockback_weight, at_hit->knockback_scale, at_hit->knockback_base, attributes->weight, ap->handicap, this_fp->handicap);
 
             if (ap->is_hitlag_victim)
             {
@@ -2714,7 +2714,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             }
             else gr_handicap = 9;
 
-            var_f20 = gmCommon_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, gr_hit->damage, gr_hit->knockback_weight, gr_hit->knockback_scale, gr_hit->knockback_base, attributes->weight, gr_handicap, this_fp->handicap);
+            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, gr_hit->damage, gr_hit->knockback_weight, gr_hit->knockback_scale, gr_hit->knockback_base, attributes->weight, gr_handicap, this_fp->handicap);
 
             break;
 
@@ -3709,7 +3709,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         {
             fp->damage_knockback = 0;
         }
-        func_ovl2_800EA248(fp, fp->damage_taken_recent);
+        ftCommon_DamageUpdateStats(fp, fp->damage_taken_recent);
 
         if (fp->proc_trap != NULL)
         {
@@ -3746,7 +3746,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
             func_ovl3_80141648(fighter_gobj);
             func_ovl3_801586A0(fighter_gobj);
         }
-        damage = fp->unk_ft_0x7DC;
+        damage = fp->damage_queue;
         sp84 = 1;
 
         ftCommon_SetShuffleInfo(fp, (fp->damage_element == gmHitCollision_Element_Electric) ? TRUE : FALSE, damage, status_id, fp->hitlag_mul);
@@ -3819,7 +3819,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
     }
     if (damage != 0)
     {
-        fp->hitlag_timer = func_ovl2_800EA1C0(damage, status_id, fp->hitlag_mul);
+        fp->hitlag_timer = gmCommon_DamageCalcHitLag(damage, status_id, fp->hitlag_mul);
 
         if ((fp->hitlag_timer != 0) && (sp84 != 0))
         {
@@ -3837,7 +3837,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
     fp->shield_attack_damage = 0;
     fp->shield_damage = 0;
     fp->shield_damage_total = 0;
-    fp->unk_ft_0x7DC = 0;
+    fp->damage_queue = 0;
     fp->damage_taken_recent = 0;
     fp->unk_ft_0x814 = 0;
 

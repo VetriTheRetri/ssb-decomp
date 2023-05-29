@@ -27,7 +27,7 @@ extern ArticleStatusDesc Article_Tomato_Status[];
 void func_ovl3_80174554(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Tomato_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Tomato_Status, 0);
 }
 
 void func_ovl3_80174588(GObj *article_gobj)
@@ -37,7 +37,7 @@ void func_ovl3_80174588(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Tomato_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Tomato_Status, 1);
 }
 
 bool32 jtgt_ovl3_801745CC(GObj *arg0)
@@ -47,7 +47,7 @@ bool32 jtgt_ovl3_801745CC(GObj *arg0)
 
 void jtgt_ovl3_801745FC(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Tomato_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Tomato_Status, 2);
 }
 
 extern ArticleSpawnData Article_Tomato_Data;

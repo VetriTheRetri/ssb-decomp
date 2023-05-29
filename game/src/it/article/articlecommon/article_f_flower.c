@@ -29,7 +29,7 @@ extern ArticleStatusDesc Article_F_Flower_Status[];
 void func_ovl3_80175BB0(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_F_Flower_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_F_Flower_Status, 0);
 }
 
 void func_ovl3_80175BE4(GObj *article_gobj)
@@ -39,12 +39,12 @@ void func_ovl3_80175BE4(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_F_Flower_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_F_Flower_Status, 1);
 }
 
 void jtgt_ovl3_80175C28(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_F_Flower_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_F_Flower_Status, 2);
 }
 
 bool32 jtgt_ovl3_80175C50(GObj *article_gobj)
@@ -71,7 +71,7 @@ bool32 jtgt_ovl3_80175C9C(GObj *article_gobj)
 
 void jtgt_ovl3_80175CC4(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_F_Flower_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_F_Flower_Status, 3);
 }
 
 bool32 jtgt_ovl3_80175CEC(GObj *article_gobj)
@@ -87,7 +87,7 @@ bool32 jtgt_ovl3_80175CEC(GObj *article_gobj)
 
 void jtgt_ovl3_80175D38(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_F_Flower_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_F_Flower_Status, 4);
 }
 
 extern ArticleSpawnData Article_F_Flower_Data;

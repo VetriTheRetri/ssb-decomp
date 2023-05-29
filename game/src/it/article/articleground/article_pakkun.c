@@ -7,19 +7,19 @@ extern ArticleStatusDesc Article_Pakkun_Status[];
 
 void func_ovl3_8017CF20(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Pakkun_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Pakkun_Status, 0);
 
     ArticleGetStruct(article_gobj)->proc_dead = NULL;
 }
 
 void func_ovl3_8017CF58(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Pakkun_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Pakkun_Status, 1);
 }
 
 void func_ovl3_8017CF80(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Pakkun_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Pakkun_Status, 2);
 
     ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_8017D460;
 }

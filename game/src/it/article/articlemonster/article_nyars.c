@@ -51,7 +51,7 @@ extern ArticleStatusDesc Article_Nyars_Status[];
 void func_ovl3_8017EFC4(GObj *article_gobj)
 {
     func_ovl3_8017EFA0(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Nyars_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Nyars_Status, 0);
 }
 
 bool32 jtgt_ovl3_8017EFF8(GObj *article_gobj)

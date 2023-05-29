@@ -5,7 +5,7 @@ extern ArticleStatusDesc Article_Gr_Lucky_Status[];
 
 void func_ovl3_8017C240(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Gr_Lucky_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Lucky_Status, 0);
 
     ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_8017C524;
 }

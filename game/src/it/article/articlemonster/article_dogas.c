@@ -22,7 +22,7 @@ void func_ovl3_80182CA8(GObj *article_gobj)
 
     ap->at_multi = ATDOGAS_DESPAWN_WAIT;
 
-    func_ovl3_80172EC8(article_gobj, Article_Dogas_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Dogas_Status, 1);
 }
 
 void func_ovl3_80182CDC(GObj *article_gobj)
@@ -103,7 +103,7 @@ void func_ovl3_80182E78(GObj *article_gobj)
 void func_ovl3_80182F0C(GObj *article_gobj)
 {
     func_ovl3_80182E78(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Dogas_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Dogas_Status, 0);
 }
 
 bool32 jtgt_ovl3_80182F40(GObj *article_gobj)

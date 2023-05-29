@@ -70,7 +70,7 @@ extern ArticleStatusDesc Article_Starmie_Status[];
 void func_ovl3_80181E0C(GObj *article_gobj)
 {
     func_ovl3_80181D8C(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Starmie_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Starmie_Status, 1);
 }
 
 bool32 func_ovl3_80181E40(GObj *article_gobj)
@@ -197,7 +197,7 @@ void func_ovl3_801820CC(GObj *article_gobj)
 void func_ovl3_801821E8(GObj *article_gobj)
 {
     func_ovl3_801820CC(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Starmie_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Starmie_Status, 0);
 }
 
 bool32 jtgt_ovl3_8018221C(GObj *article_gobj)

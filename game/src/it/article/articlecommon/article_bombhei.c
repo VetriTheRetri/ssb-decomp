@@ -185,7 +185,7 @@ void func_ovl3_80177474(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
     func_ovl3_80177208(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 0);
 }
 
 void func_ovl3_801774B0(GObj *article_gobj)
@@ -196,13 +196,13 @@ void func_ovl3_801774B0(GObj *article_gobj)
 
     func_ovl3_80173F78(ap);
     func_ovl3_80177208(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 1);
 }
 
 void jtgt_ovl3_801774FC(GObj *article_gobj)
 {
     func_ovl3_80177218(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 2);
 }
 
 bool32 jtgt_ovl3_80177530(GObj *article_gobj)
@@ -223,7 +223,7 @@ bool32 jtgt_ovl3_8017756C(GObj *article_gobj)
 void jtgt_ovl3_80177590(GObj *article_gobj)
 {
     func_ovl3_80177208(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 3);
 }
 
 bool32 jtgt_ovl3_801775C4(GObj *article_gobj)
@@ -234,7 +234,7 @@ bool32 jtgt_ovl3_801775C4(GObj *article_gobj)
 void func_ovl3_801775E8(GObj *article_gobj)
 {
     func_ovl3_80177208(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 4);
 }
 
 void func_ovl3_8017761C(GObj *article_gobj)
@@ -370,7 +370,7 @@ void func_ovl3_801779A8(GObj *article_gobj)
 {
     func_ovl3_80177208(article_gobj);
     func_ovl3_80177848(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 5);
 }
 
 void func_ovl3_801779E4(GObj *article_gobj, u8 arg1)
@@ -435,7 +435,7 @@ bool32 jtgt_ovl3_80177B44(GObj *article_gobj)
 void func_ovl3_80177B78(GObj *article_gobj)
 {
     func_ovl3_80177208(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 6);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 6);
 }
 
 void func_ovl3_80177BAC(GObj *article_gobj)
@@ -469,7 +469,7 @@ bool32 jtgt_ovl3_80177BE8(GObj *article_gobj)
 void func_ovl3_80177C30(GObj *article_gobj)
 {
     func_ovl3_80177BAC(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 7);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 7);
 }
 
 bool32 jtgt_ovl3_80177C64(GObj *article_gobj)
@@ -512,7 +512,7 @@ void func_ovl3_80177D60(GObj *article_gobj)
 {
     func_ovl3_80177208(article_gobj);
     func_ovl3_80177D28(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_BombHei_Status, 8);
+    atCommon_UpdateArticleStatus(article_gobj, Article_BombHei_Status, 8);
 }
 
 GObj *jtgt_ovl3_80177D9C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)

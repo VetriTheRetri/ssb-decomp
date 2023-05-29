@@ -5,7 +5,7 @@ void func_ovl3_8014E1D0(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *catch_gobj = this_fp->catch_gobj;
     Fighter_Struct *catch_fp = FighterGetStruct(catch_gobj);
-    f32 knockback = gmCommon_DamageCalcKnockback(this_fp->percent_damage, 0, 0, throw_release->knockback_weight, throw_release->knockback_scale, throw_release->knockback_base, this_fp->attributes->weight, catch_fp->handicap, this_fp->handicap);
+    f32 knockback = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, 0, 0, throw_release->knockback_weight, throw_release->knockback_scale, throw_release->knockback_base, this_fp->attributes->weight, catch_fp->handicap, this_fp->handicap);
     
     func_ovl3_80140EE4(fighter_gobj, -1, 0, knockback, throw_release->angle, this_fp->lr, 1, 0, 0, FALSE, FALSE, FALSE);
     
@@ -30,7 +30,7 @@ void func_ovl3_8014E2A8(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
 
         this_fp->phys_info.vel_air.z = DObjGetStruct(fighter_gobj)->translate.z;
     }
-    knockback = gmCommon_DamageCalcKnockback(this_fp->percent_damage, 0, 0, throw_release->knockback_weight, throw_release->knockback_scale, throw_release->knockback_base, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap);
+    knockback = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, 0, 0, throw_release->knockback_weight, throw_release->knockback_scale, throw_release->knockback_base, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap);
 
     if (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(capture_gobj)->translate.x)
     {
@@ -118,16 +118,16 @@ void func_ovl3_8014E558(GObj *fighter_gobj)
     func_ovl3_8014ACB4(fighter_gobj, ftStatus_Common_Shouldered);
     func_ovl3_8014E3EC(this_fp, ((this_fp->percent_damage * 0.08F) + 14.0F));
 
-    damage = func_ovl2_800EA54C(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->flags_hi.halfword);
+    damage = gmCommon_DamageApplyStale(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->flags_hi.halfword);
 
-    if (ftCommon_GetBestHitStatusAll(fighter_gobj) != 1)
+    if (ftCommon_GetBestHitStatusAll(fighter_gobj) != gmHitCollision_HitStatus_Normal)
     {
         damage = 0;
     }
     if (damage != 0)
     {
-        func_ovl3_801415F8(fighter_gobj, gmCommon_DamageCalcKnockback(this_fp->percent_damage, damage, damage, 0, 100, 0, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap), 0);
-        func_ovl2_800EA248(this_fp, damage);
+        func_ovl3_801415F8(fighter_gobj, gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, damage, damage, 0, 100, 0, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap), 0);
+        ftCommon_DamageUpdateStats(this_fp, damage);
         func_ovl2_800EA98C(capture_fp->port_id, this_fp->port_id, damage);
         func_ovl2_800EA614(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->flags_hi.halfword);
     }

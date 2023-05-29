@@ -237,10 +237,10 @@ struct SinglePlayerData
     u32 spgame_continues;
     u32 spgame_bonuses;
     s8 spgame_best_difficulty;
-    u32 tt_time; // Break the Targets high score
-    u8 bt_target_count; // Targets broken
-    u32 bp_time; // Board the Platforms high scoree
-    u8 bp_platform_count; // Platforms boarded
+    u32 bonus1_time; // Break the Targets high score
+    u8 bonus1_task_count; // Targets broken
+    u32 bonus2_time; // Board the Platforms high scoree
+    u8 bonus2_task_count; // Platforms boarded
     u8 unk_0x1D;
     u8 unk_0x1E;
     u8 unk_0x1F;
@@ -266,7 +266,7 @@ struct gmSaveInfo {
     u8 unk5DF;
     u8 unk5E0;
     u8 unk5E1;
-    u8 unk5E2;
+    u8 unk5E2; // Some kind of anti-piracy measure??? 0x1 results in random knockback velocity, 0x2 halves stick range
     u8 unk5E3;
     u8 unk5E4;
     u8 unk5E5;

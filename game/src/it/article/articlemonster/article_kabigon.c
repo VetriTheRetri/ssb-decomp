@@ -110,7 +110,7 @@ extern ArticleStatusDesc Article_Kabigon_Status[];
 void func_ovl3_8017E350(GObj *article_gobj)
 {
     func_ovl3_8017E25C(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Kabigon_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Kabigon_Status, 1);
 }
 
 bool32 func_ovl3_8017E384(GObj *article_gobj)
@@ -197,7 +197,7 @@ void func_ovl3_8017E600(GObj *article_gobj)
 void func_ovl3_8017E648(GObj *article_gobj)
 {
     func_ovl3_8017E600(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Kabigon_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Kabigon_Status, 0);
 }
 
 bool32 func_ovl3_8017E67C(GObj *article_gobj)

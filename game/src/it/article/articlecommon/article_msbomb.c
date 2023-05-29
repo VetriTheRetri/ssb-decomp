@@ -34,7 +34,7 @@ extern ArticleStatusDesc Article_MSBomb_Status[];
 void func_ovl3_80176504(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 0);
 }
 
 void func_ovl3_80176538(GObj *article_gobj)
@@ -44,12 +44,12 @@ void func_ovl3_80176538(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 1);
 }
 
 void jtgt_ovl3_8017657C(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 2);
 }
 
 bool32 jtgt_ovl3_801765A4(GObj *article_gobj)
@@ -86,7 +86,7 @@ void jtgt_ovl3_80176644(GObj *article_gobj)
     ap->coll_data.object_coll.bottom = -ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.width = ATMSBOMB_COLL_SIZE;
 
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 3);
 }
 
 bool32 jtgt_ovl3_80176694(GObj *article_gobj)
@@ -103,7 +103,7 @@ void jtgt_ovl3_801766B8(GObj *article_gobj)
     ap->coll_data.object_coll.bottom = -ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.width = ATMSBOMB_COLL_SIZE;
 
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 4);
 }
 
 void func_ovl3_80176708(GObj *article_gobj)
@@ -285,7 +285,7 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
 void func_ovl3_80176B94(GObj *article_gobj)
 {
     func_ovl3_80176840(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 5);
 }
 
 bool32 jtgt_ovl3_80176BC8(GObj *article_gobj)
@@ -392,7 +392,7 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
 void func_ovl3_80176E68(GObj *article_gobj)
 {
     func_ovl3_80176D00(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 6);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 6);
 }
 
 void func_ovl3_80176E9C(GObj *article_gobj)
@@ -429,7 +429,7 @@ bool32 jtgt_ovl3_80176EE4(GObj *article_gobj)
 void func_ovl3_80176F2C(GObj *article_gobj)
 {
     func_ovl3_80176E9C(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_MSBomb_Status, 7);
+    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 7);
 }
 
 GObj* jtgt_ovl3_80176F60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)

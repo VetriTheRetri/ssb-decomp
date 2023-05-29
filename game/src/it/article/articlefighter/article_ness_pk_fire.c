@@ -127,7 +127,7 @@ void func_ovl3_80185710(GObj *article_gobj)
     flags_hi = ap->article_hit.flags_hi;
     flags_lw = ap->article_hit.flags_lw.halfword;
 
-    func_ovl3_80172EC8(article_gobj, Article_PK_Fire_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_PK_Fire_Status, 0);
 
     ap->article_hit.flags_hi = flags_hi;
     ap->article_hit.flags_lw.halfword = flags_lw;
@@ -147,7 +147,7 @@ void func_ovl3_8018579C(GObj *article_gobj)
     flags_hi = ap->article_hit.flags_hi;
     flags_lw = ap->article_hit.flags_lw.halfword;
 
-    func_ovl3_80172EC8(article_gobj, Article_PK_Fire_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_PK_Fire_Status, 1);
 
     ap->article_hit.flags_hi = flags_hi;
     ap->article_hit.flags_lw.halfword = flags_lw;

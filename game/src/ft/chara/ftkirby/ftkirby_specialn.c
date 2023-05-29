@@ -4,12 +4,12 @@ void func_ovl3_80161CA0(GObj *kirby_gobj, GObj *victim_gobj, s32 damage)
 {
     Fighter_Struct *fp_kirby = FighterGetStruct(kirby_gobj);
     Fighter_Struct *fp_victim = FighterGetStruct(victim_gobj);
-    s32 star_dmg_victim = func_ovl2_800EA54C(fp_kirby->port_id, damage, fp_kirby->stale_id, fp_kirby->unk_0x28C_halfword);
+    s32 star_dmg_victim = gmCommon_DamageApplyStale(fp_kirby->port_id, damage, fp_kirby->stale_id, fp_kirby->unk_0x28C_halfword);
 
     damage = star_dmg_victim;
 
-    func_ovl3_801415F8(victim_gobj, gmCommon_DamageCalcKnockback(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->handicap, fp_victim->handicap), 0);
-    func_ovl2_800EA248(fp_victim, damage);
+    func_ovl3_801415F8(victim_gobj, gmCommonObject_DamageCalcKnockback(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->handicap, fp_victim->handicap), 0);
+    ftCommon_DamageUpdateStats(fp_victim, damage);
     func_ovl2_800EA98C(fp_kirby->port_id, fp_victim->port_id, damage);
     func_ovl2_800EA614(fp_kirby->port_id, fp_victim->port_id, fp_kirby->attack_id, fp_kirby->unk_0x28C_halfword);
 }

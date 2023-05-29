@@ -96,7 +96,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
             switch (ap->at_kind)
             {
             case At_Kind_Tomato:
-                func_ovl2_800EA3D4(fp, ATTOMATO_DAMAGE_HEAL);
+                ftCommon_ApplyDamageHeal(fp, ATTOMATO_DAMAGE_HEAL);
                 func_ovl3_801728D4(article_gobj);
 
                 if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936A8 < U8_MAX))
@@ -106,7 +106,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
                 break;
 
             case At_Kind_Heart:
-                func_ovl2_800EA3D4(fp, ATHEART_DAMAGE_HEAL);
+                ftCommon_ApplyDamageHeal(fp, ATHEART_DAMAGE_HEAL);
                 func_ovl3_801728D4(article_gobj);
 
                 if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936A9 < U8_MAX))
@@ -155,7 +155,7 @@ void func_ovl3_80145D70(GObj *fighter_gobj)
 
         if (article_gobj != NULL)
         {
-            func_ovl3_80172CA4(article_gobj, fighter_gobj);
+            atCommon_PickupSetHoldFighter(article_gobj, fighter_gobj);
         }
     }
     if (fighter_gobj->anim_frame <= 0.0F)

@@ -216,7 +216,7 @@ void func_ovl3_80185F70(GObj *article_gobj)
 
     func_ovl3_80173F54(ap);
     func_ovl3_80185CD4(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Link_Bomb_Status, 0);
 }
 
 void func_ovl3_80185FD8(GObj *article_gobj)
@@ -227,7 +227,7 @@ void func_ovl3_80185FD8(GObj *article_gobj)
 
     func_ovl3_80173F78(ap);
     func_ovl3_80185CD4(article_gobj);
-    func_ovl3_80172EC8(article_gobj, &Article_Link_Bomb_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, &Article_Link_Bomb_Status, 1);
 }
 
 bool32 func_ovl3_80186024(GObj *article_gobj)
@@ -269,7 +269,7 @@ bool32 func_ovl3_80186024(GObj *article_gobj)
 void func_ovl3_8018611C(GObj *article_gobj)
 {
     func_ovl3_80185CE4(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Link_Bomb_Status, 2);
 }
 
 bool32 jtgt_ovl3_80186150(GObj *article_gobj)
@@ -296,7 +296,7 @@ void jtgt_ovl3_80186224(GObj *article_gobj)
 
     ap->is_damage_all = TRUE;
 
-    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Link_Bomb_Status, 3);
 }
 
 bool32 jtgt_ovl3_80186270(GObj *article_gobj)
@@ -344,7 +344,7 @@ void jtgt_ovl3_80186314(GObj *article_gobj)
 
     ap->is_damage_all = TRUE;
 
-    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Link_Bomb_Status, 4);
 }
 
 void func_ovl3_80186368(GObj *article_gobj)
@@ -434,7 +434,7 @@ bool32 jtgt_ovl3_80186524(GObj *article_gobj)
 void func_ovl3_8018656C(GObj *article_gobj)
 {
     func_ovl3_801864E8(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Link_Bomb_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Link_Bomb_Status, 5);
 }
 
 GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
@@ -464,7 +464,7 @@ GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
         ap->phys_info.vel.y = 0.0F;
         ap->phys_info.vel.x = 0.0F;
 
-        func_ovl3_80172CA4(article_gobj, fighter_gobj);
+        atCommon_PickupSetHoldFighter(article_gobj, fighter_gobj);
     }
     return article_gobj;
 }

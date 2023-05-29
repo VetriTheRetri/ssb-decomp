@@ -38,7 +38,7 @@ extern ArticleStatusDesc Article_Capsule_Status[]; // Capsule states
 void func_ovl3_80174064(GObj *article_gobj)
 {
     func_ovl3_80172E74(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Capsule_Status, 0);
 }
 
 void func_ovl3_80174098(GObj *article_gobj)
@@ -53,12 +53,12 @@ void func_ovl3_80174098(GObj *article_gobj)
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Capsule_Status, 1);
 }
 
 void jtgt_ovl3_801740FC(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Capsule_Status, 2);
 }
 
 bool32 jtgt_ovl3_80174124(GObj *article_gobj)
@@ -92,7 +92,7 @@ void jtgt_ovl3_801741B0(GObj *article_gobj) // Capsule gets thrown
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Capsule_Status, 3);
 }
 
 bool32 func_ovl3_801741F0(GObj *article_gobj) // Unused
@@ -109,7 +109,7 @@ bool32 jtgt_ovl3_80174214(GObj *article_gobj)
 
 void jtgt_ovl3_80174248(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Capsule_Status, 4);
 }
 
 extern u8 D_NF_00000098;
@@ -175,7 +175,7 @@ void func_ovl3_80174340(GObj *article_gobj)
 void func_ovl3_801743F4(GObj *article_gobj)
 {
     func_ovl3_80174340(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Capsule_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Capsule_Status, 5);
 }
 
 void func_ovl3_80174428(GObj *article_gobj)

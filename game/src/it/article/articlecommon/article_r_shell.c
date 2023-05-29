@@ -184,7 +184,7 @@ void func_ovl3_8017A83C(GObj *article_gobj)
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(article_gobj);
-        func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 0);
+        atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 0);
     }
     else if (ap->article_vars.shell.is_damage != FALSE)
     {
@@ -205,7 +205,7 @@ void func_ovl3_8017A83C(GObj *article_gobj)
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(article_gobj);
-        func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 0);
+        atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 0);
     }
 }
 
@@ -223,7 +223,7 @@ void func_ovl3_8017A984(GObj *article_gobj)
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 1);
 }
 
 bool32 jtgt_ovl3_8017A9D0(GObj *article_gobj)
@@ -262,7 +262,7 @@ void jtgt_ovl3_8017AABC(GObj *article_gobj)
 {
     DObjGetStruct(article_gobj)->rotate.y = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 2);
 }
 
 void jtgt_ovl3_8017AAF0(GObj *article_gobj)
@@ -276,7 +276,7 @@ void jtgt_ovl3_8017AAF0(GObj *article_gobj)
     ap->times_thrown = 0;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 3);
 }
 
 void jtgt_ovl3_8017AB48(GObj *article_gobj)
@@ -290,7 +290,7 @@ void jtgt_ovl3_8017AB48(GObj *article_gobj)
     ap->times_thrown = 0;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 4);
+    atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 4);
 }
 
 bool32 jtgt_ovl3_8017ABA0(GObj *article_gobj)
@@ -484,7 +484,7 @@ void func_ovl3_8017AFEC(GObj *article_gobj)
 void func_ovl3_8017B0D4(GObj *article_gobj)
 {
     func_ovl3_8017AFEC(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 5);
+    atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 5);
 }
 
 void func_ovl3_8017B108(GObj *article_gobj)
@@ -514,7 +514,7 @@ void func_ovl3_8017B108(GObj *article_gobj)
 void func_ovl3_8017B1A4(GObj *article_gobj)
 {
     func_ovl3_8017B108(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_R_Shell_Status, 6);
+    atCommon_UpdateArticleStatus(article_gobj, Article_R_Shell_Status, 6);
 }
 
 extern ArticleSpawnData Article_R_Shell_Data;

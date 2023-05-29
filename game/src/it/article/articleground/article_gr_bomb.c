@@ -122,7 +122,7 @@ void func_ovl3_80184E44(GObj *article_gobj)
 
     ap->phys_info.vel.y = 0.0F;
 
-    func_ovl3_80172EC8(article_gobj, Article_Gr_Bomb_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Bomb_Status, 2);
 }
 
 bool32 func_ovl3_80184E78(GObj *article_gobj, f32 vel_mod)
@@ -226,7 +226,7 @@ bool32 jtgt_ovl3_8018511C(GObj *article_gobj)
 
     if (func_ovl3_8017356C(article_gobj) == FALSE)
     {
-        func_ovl3_80172EC8(article_gobj, Article_Gr_Bomb_Status, 0);
+        atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Bomb_Status, 0);
     }
     else if (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
@@ -276,7 +276,7 @@ void func_ovl3_801851F4(GObj *article_gobj)
 void func_ovl3_80185284(GObj *article_gobj)
 {
     func_ovl3_801851F4(article_gobj);
-    func_ovl3_80172EC8(article_gobj, Article_Gr_Bomb_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Bomb_Status, 1);
 }
 
 void func_ovl3_801852B8(GObj *article_gobj)

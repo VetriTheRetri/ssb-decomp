@@ -58,7 +58,7 @@ void func_ovl3_801810E0(GObj *article_gobj)
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_80172EC8(article_gobj, Article_Mb_Lucky_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Mb_Lucky_Status, 0);
 }
 
 bool32 jtgt_ovl3_80181124(GObj *article_gobj)
@@ -95,7 +95,7 @@ void func_ovl3_801811AC(GObj *article_gobj)
     {
         func_800269C0(0x13AU);
     }
-    func_ovl3_80172EC8(article_gobj, Article_Mb_Lucky_Status, 1);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Mb_Lucky_Status, 1);
 }
 
 bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
@@ -172,7 +172,7 @@ bool32 jtgt_ovl3_80181390(GObj *article_gobj)
 
 void func_ovl3_801813A8(GObj *article_gobj)
 {
-    func_ovl3_80172EC8(article_gobj, Article_Mb_Lucky_Status, 2);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Mb_Lucky_Status, 2);
 }
 
 bool32 jtgt_ovl3_801813D0(GObj *article_gobj)
@@ -196,7 +196,7 @@ void func_ovl3_801813F8(GObj *article_gobj)
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_80172EC8(article_gobj, Article_Mb_Lucky_Status, 3);
+    atCommon_UpdateArticleStatus(article_gobj, Article_Mb_Lucky_Status, 3);
 }
 
 bool32 jtgt_ovl3_80181430(GObj *article_gobj)
