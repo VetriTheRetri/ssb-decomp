@@ -84,7 +84,7 @@ void func_ovl3_80146CF4(GObj *fighter_gobj)
         {
             Vec3f gfx_offset = Fighter_StarRodSwing_Dust_Offset;
 
-            func_ovl2_800EABDC(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &gfx_offset, 0, -fp->lr, 1, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &gfx_offset, 0, -fp->lr, 1, 0);
         }
         fp->command_vars.flags.flag0 = 0;
     }

@@ -39,13 +39,13 @@ void func_ovl3_80146FD4(GObj *fighter_gobj)
             spawn_gfx_offset.y = FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Y;
             spawn_gfx_offset.z = FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z;
 
-            func_ovl2_800EABDC(fighter_gobj, 0x1F, fp->attributes->joint_itemhold_light, &spawn_gfx_offset, 0, fp->lr, 1, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0x1F, fp->attributes->joint_itemhold_light, &spawn_gfx_offset, 0, fp->lr, 1, 0);
 
             spawn_gfx_offset.x = 0.0F;
             spawn_gfx_offset.y = 0.0F;
             spawn_gfx_offset.z = -FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z;
 
-            func_ovl2_800EABDC(fighter_gobj, 0x13, 0, &spawn_gfx_offset, 0, fp->lr, 0, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0x13, 0, &spawn_gfx_offset, 0, fp->lr, 0, 0);
 
             func_800269C0(0x3DU);
             func_ovl2_800E806C(fp, 9, 0);
@@ -54,7 +54,7 @@ void func_ovl3_80146FD4(GObj *fighter_gobj)
         {
             dust_gfx_offset = Fighter_LGunShoot_Dust_Offset;
 
-            func_ovl2_800EABDC(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &dust_gfx_offset, 0, -fp->lr, 1, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &dust_gfx_offset, 0, -fp->lr, 1, 0);
             func_800269C0(0x3EU);
         }
         fp->command_vars.flags.flag0 = 0;
@@ -190,14 +190,14 @@ void func_ovl3_80147434(GObj *fighter_gobj)
                 {
                     gfx_haveammo_offset = Fighter_FireFlowerShoot_HaveAmmo_Dust_Offset;
 
-                    func_ovl2_800EABDC(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &gfx_haveammo_offset, 0, -fp->lr, 1, 0);
+                    ftCommon_GFXSpawn(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &gfx_haveammo_offset, 0, -fp->lr, 1, 0);
                     func_800269C0(0x30U);
                 }
                 else
                 {
                     gfx_noammo_offset = Fighter_FireFlowerShoot_NoAmmo_Dust_Offset;
 
-                    func_ovl2_800EABDC(fighter_gobj, 0xB, 0, &gfx_noammo_offset, 0, fp->lr, 0, 0);
+                    ftCommon_GFXSpawn(fighter_gobj, 0xB, 0, &gfx_noammo_offset, 0, fp->lr, 0, 0);
                     func_800269C0(0x1AU);
                 }
             }
@@ -217,8 +217,8 @@ void func_ovl3_80147434(GObj *fighter_gobj)
                     gfx_spark_scatter = Fighter_FireFlowerShoot_Spark_Scatter;
                     gfx_dust_offset = Fighter_FireFlowerShoot_Kickup_Offset;
 
-                    func_ovl2_800EABDC(fighter_gobj, 0x1F, fp->attributes->joint_itemhold_light, &gfx_spark_offset, &gfx_spark_scatter, fp->lr, 1, 0);
-                    func_ovl2_800EABDC(fighter_gobj, 0x13, 0, &gfx_dust_offset, 0, fp->lr, 0, 0);
+                    ftCommon_GFXSpawn(fighter_gobj, 0x1F, fp->attributes->joint_itemhold_light, &gfx_spark_offset, &gfx_spark_scatter, fp->lr, 1, 0);
+                    ftCommon_GFXSpawn(fighter_gobj, 0x13, 0, &gfx_dust_offset, 0, fp->lr, 0, 0);
                 }
                 fp->command_vars.flags.flag0 = 2;
 

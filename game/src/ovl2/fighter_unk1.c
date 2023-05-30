@@ -1767,10 +1767,10 @@ void ftCommon_AttackUpdateMatchStats(s32 attack_port_id, s32 defend_port_id, s32
     }
 }
 
-extern s32 gmBonusStat_Defender_AttackGroupIndex_Count[];
-extern s32 gmBonusStat_Defender_IsSmashAttack_Count[2];
-extern s32 gmBonusStat_Defender_GroundOrAirAttack_Count[2];
-extern s32 gmBonusStat_Defender_IsSpecialAttack_Count[2];
+extern s32 gmBonusStat_Defender_AttackGroupIndex_Count[];   // Attacks successfully landed on opponent
+extern s32 gmBonusStat_Defender_IsSmashAttack_Count[2];     // Smash Attacks successfully landed on opponent
+extern s32 gmBonusStat_Defender_GroundOrAirAttack_Count[2]; // Grounded / Airborne attacks successfully landed on opponent
+extern s32 gmBonusStat_Defender_IsSpecialAttack_Count[2];   // Special attacks successfully landed on opponent
 
 // 0x800EAA2C
 void ftCommon_Update1PGameDamageStats(Fighter_Struct *fp, s32 damage_port_id, s32 arg2, s32 arg3, u16 flags, u16 damage_stat_count)
@@ -1794,6 +1794,434 @@ void ftCommon_Update1PGameDamageStats(Fighter_Struct *fp, s32 damage_port_id, s3
                 gmBonusStat_Defender_GroundOrAirAttack_Count[fp->damage_stat_flags.is_ground_or_air]++;
                 gmBonusStat_Defender_IsSpecialAttack_Count[fp->damage_stat_flags.is_special_attack]++;
             }
+        }
+    }
+}
+
+// 0x800EAB40
+void ftCommon_GFXJointCycle(Fighter_Struct *fp, Vec3f *pos)
+{
+    ftCommonAttributes *attributes = fp->attributes;
+
+    fp->joint_cycle_array_index++;
+
+    if (fp->joint_cycle_array_index == ARRAY_COUNT(attributes->gfx_joint_cycle_index))
+    {
+        fp->joint_cycle_array_index = 0;
+    }
+    pos->x = pos->y = pos->z = 0.0F;
+
+    func_ovl2_800EDF24(fp->joint[attributes->gfx_joint_cycle_index[fp->joint_cycle_array_index]], pos);
+}
+
+// union with u8 and u16?
+struct FourBytes {
+    u8 b0, b1, b2, b3;
+};
+
+struct Temp002 {
+    /* 0x00 */ struct Temp002 *next;
+    /* 0x04 */ u16 unk04;
+    /* 0x06 */ u16 unk06; // flags?
+    /* 0x08 */ u8 unk08;  // load bank idx?
+    /* 0x09 */ u8 unk09;
+    /* 0x0A */ s8 unk0A;
+    /* 0x0B */ u8 unk0B;
+    /* 0x0C */ u16 unk0C;
+    /* 0x0E */ u16 unk0E;
+    /* 0x10 */ u16 unk10;
+    /* 0x12 */ u16 unk12;
+    /* 0x14 */ u8 *unk14; // command bytecode ?
+    /* 0x18 */ u16 unk18; // cusor into unk14 ?
+    /* 0x1A */ u16 unk1A;
+    /* 0x1C */ u16 unk1C;
+    /* 0x1E */ u16 unk1E; // total frames (+1?)
+    /* 0x20 */ f32 unk20;
+    /* 0x24 */ f32 unk24;
+    /* 0x28 */ f32 unk28;
+    /* 0x2C */ f32 unk2C;
+    /* 0x30 */ f32 unk30; // x?
+    /* 0x34 */ f32 unk34; // y?
+    /* 0x38 */ f32 unk38; // angle?
+    /* 0x3C */ f32 unk3C;
+    /* 0x40 */ f32 unk40;
+    /* 0x44 */ f32 unk44;
+    /* 0x48 */ struct FourBytes unk48;
+    ///* 0x49 */ u8 unk49;
+    ///* 0x4A */ u8 unk4A;
+    ///* 0x4B */ u8 unk4B;
+    // /* 0x4C */ struct Temp001 *unk4C;
+    /* 0x4C */ struct FourBytes unk4C;
+    ///* 0x4D */ u8 unk4D;
+    ///* 0x4E */ u8 unk4E;
+    ///* 0x4F */ u8 unk4F;
+    ///* 0x50 */ u8 unk50[4];
+    /* 0x50 */ struct FourBytes unk50;
+    ///* 0x50 */ u8 unk50;
+    ///* 0x51 */ u8 unk51;
+    ///* 0x52 */ u8 unk52;
+    ///* 0x53 */ u8 unk53;
+    /* 0x54 */ struct FourBytes unk54;
+    /* 0x58 */ struct Temp003 *unk58;
+    /* 0x5C */ struct Temp001 *unk5C;
+}; // sizeof == 0x60
+
+// 0x800EABDC
+void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *gfx_offset, Vec3f *gfx_scatter, s32 lr, bool32 is_scale_offset, u32 arg7)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Vec3f offset;
+    Vec3f gfx_offset_mod;
+    void *p_effect;
+    f32 scale;
+    struct Temp002 *temp_v0_3;
+
+    p_effect = NULL;
+
+    switch (gfx_id)
+    {
+    case 0x49:
+        switch (fp->ft_kind)
+        {
+        case Ft_Kind_Samus:
+            joint_index = 0x10;
+
+            gfx_offset_mod.z = gfx_offset_mod.y = 0.0F;
+            gfx_offset_mod.x = 180.0F;
+
+            gfx_offset = &gfx_offset_mod;
+            break;
+
+        case Ft_Kind_Donkey:
+            joint_index = 0x10;
+
+            gfx_offset_mod.z = gfx_offset_mod.y = 0.0F;
+            gfx_offset_mod.x = 100.0F;
+
+            gfx_offset = &gfx_offset_mod;
+            break;
+
+        case Ft_Kind_Kirby:
+            joint_index = 0x10;
+
+            gfx_offset_mod.z = gfx_offset_mod.y = 0.0F;
+            gfx_offset_mod.x = 50.0F;
+
+            gfx_offset = &gfx_offset_mod;
+            break;
+
+        case Ft_Kind_GiantDonkey:
+            joint_index = 0x10;
+
+            gfx_offset_mod.z = gfx_offset_mod.y = 0.0F;
+            gfx_offset_mod.x = 100.0F;
+
+        default: // Falthrough for final case; gfx_offset becomes uninitialized data if jumping straight to default
+            gfx_offset = &gfx_offset_mod;
+            break;
+        }
+        break;
+
+    default:
+        break;
+    }
+    if (joint_index != -1)
+    {
+        if (gfx_offset != NULL)
+        {
+            offset = *gfx_offset;
+        }
+        else offset.x = offset.y = offset.z = 0.0F;
+
+        if (gfx_scatter != NULL)
+        {
+            if (gfx_scatter->x != 0)
+            {
+                offset.x += (rand_f32() - 0.5F) * (gfx_scatter->x * 2.0F);
+            }
+            if (gfx_scatter->y != 0)
+            {
+                offset.y += (rand_f32() - 0.5F) * (gfx_scatter->y * 2.0F);
+            }
+            if (gfx_scatter->z != 0)
+            {
+                offset.z += (rand_f32() - 0.5F) * (gfx_scatter->z * 2.0F);
+            }
+        }
+        if (is_scale_offset != FALSE)
+        {
+            scale = 1.0F / fp->attributes->size_mul;
+
+            offset.x *= scale;
+            offset.y *= scale;
+            offset.z *= scale;
+        }
+        func_ovl2_800EDF24(fp->joint[joint_index], &offset);
+    }
+    switch (gfx_id)
+    {
+    case 0x0:
+        ftCommon_GFXJointCycle(fp, &offset);
+        p_effect = func_ovl2_800FDC04(&offset, fp->port_id, 0xA, NULL);
+        break;
+
+    case 0x6:
+        ftCommon_GFXJointCycle(fp, &offset);
+        p_effect = func_ovl2_800FE7B4(&offset, lr);
+        break;
+
+    case 0x7:
+        ftCommon_GFXJointCycle(fp, &offset);
+        p_effect = func_ovl2_800FE9B4(&offset);
+        break;
+
+    case 0x8:
+        ftCommon_GFXJointCycle(fp, &offset);
+        p_effect = func_ovl2_800FEB58(&offset);
+        break;
+
+    case 0xA:
+        ftCommon_GFXJointCycle(fp, &offset);
+        p_effect = func_ovl2_800FEEB0(&offset);
+        break;
+
+    case 0xB:
+        p_effect = func_ovl2_800FF048(&offset, lr, 1.0F);
+        break;
+
+    case 0xC:
+        p_effect = func_ovl2_800FF048(&offset, lr, 2.0F);
+        break;
+
+    case 0xD:
+        p_effect = func_ovl2_800FF3F4(&offset, lr, 1.0F);
+        break;
+
+    case 0xE:
+        p_effect = func_ovl2_800FF3F4(&offset, lr, 1.7F);
+        break;
+
+    case 0xF:
+        p_effect = func_ovl2_800FF278(&offset, lr);
+        break;
+
+    case 0x10:
+        p_effect = func_ovl2_800FF278(&offset, -lr);
+        break;
+
+    case 0x11:
+        offset.x += (rand_f32() * 160.0F) - 80.0F;
+        offset.y += (rand_f32() * 160.0F) - 80.0F;
+
+        p_effect = func_ovl2_800FF590(&offset);
+        break;
+
+    case 0x12:
+        p_effect = func_ovl2_800FF648(&offset, 1.0F);
+        break;
+
+    case 0x13:
+        p_effect = func_ovl2_800FF7D8(&offset, lr, 1.0F);
+        break;
+
+    case 0x14:
+        p_effect = func_ovl2_800FF7D8(&offset, lr, 1.5F);
+        break;
+
+    case 0x15:
+        p_effect = func_ovl2_800FFAB8(&offset);
+        break;
+
+    case 0x16:
+        if ((fp->ground_or_air == ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
+        {
+            p_effect = func_ovl2_800FFD58(&offset, 4, atan2f(-fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y));
+        }
+        else p_effect = func_ovl2_800FFDE8(&offset, 4);
+        break;
+
+    case 0x17:
+        p_effect = func_ovl2_800FFEA4(&offset, -lr);
+        break;
+
+    case 0x18:
+        p_effect = func_ovl2_801001A8(&offset, lr);
+        break;
+
+    case 0x19:
+        p_effect = func_ovl2_801001A8(&offset, -lr);
+        break;
+
+    case 0x1A:
+        p_effect = func_ovl2_801003D0(&offset, lr);
+        break;
+
+    case 0x1B:
+        p_effect = func_ovl2_801003D0(&offset, -lr);
+        break;
+
+    case 0x1C:
+        p_effect = func_ovl2_80100480(&offset);
+        break;
+
+    case 0x1D:
+        p_effect = func_ovl2_801005C8(&offset);
+        break;
+
+    case 0x1E:
+        p_effect = func_ovl2_80100524(&offset);
+        break;
+
+    case 0x1F:
+        p_effect = func_ovl2_8010066C(&offset, 1.0F);
+        break;
+
+    case 0x20:
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
+        {
+            p_effect = func_ovl2_801008F4(0);
+        }
+        break;
+
+    case 0x21:
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
+        {
+            p_effect = func_ovl2_801008F4(1);
+        }
+        break;
+
+    case 0x22:
+        if (fp->status_info.pl_kind != Pl_Kind_Result)
+        {
+            p_effect = func_ovl2_801008F4(2);
+        }
+        break;
+
+    case 0x29:
+        p_effect = func_ovl2_80101630(&offset);
+        break;
+
+    case 0x2A:
+        p_effect = func_ovl2_80101688(&offset);
+        break;
+
+    case 0x2B:
+        p_effect = func_ovl2_801016E0(&offset);
+        break;
+
+    case 0x2C:
+        p_effect = func_ovl2_80101738(&offset);
+        break;
+
+    case 0x28:
+        p_effect = func_ovl2_801015D4(&offset);
+        break;
+
+    case 0x36:
+        p_effect = func_ovl2_80102018(&offset);
+        break;
+
+    case 0x2F:
+        p_effect = func_ovl2_8010183C(&offset, arg7);
+        break;
+
+    case 0x49:
+        temp_v0_3 = func_ovl2_8010066C(&offset, 0.7F);
+
+        if (temp_v0_3 != NULL)
+        {
+            temp_v0_3->unk48.b3 = 0xC0;
+        }
+        break;
+
+    case 0x46:
+        p_effect = func_ovl2_80101408(&offset);
+        break;
+
+    case 0x47:
+        p_effect = func_ovl2_801014A8(&offset);
+        break;
+
+    case 0x4C:
+        p_effect = func_ovl2_801031E0(&offset);
+        break;
+
+    case 0x4D:
+        p_effect = func_ovl2_80103280(&offset);
+        break;
+
+    case 0x4A:
+        p_effect = func_ovl2_80102E90(&offset);
+        break;
+
+    case 0x2E:
+        func_ovl3_801791F4(&offset);
+        break;
+
+    case 0x5A:
+        func_ovl2_801039D4(&offset);
+        break;
+
+    case 0x5B:
+        func_ovl2_801041A0(&offset);
+        break;
+
+    case 0x57:
+        if (fp->ft_kind == Ft_Kind_Yoshi)
+        {
+            func_ovl2_80103150(fighter_gobj);
+        }
+        break;
+
+    case 0x25:
+        func_ovl2_80100DEC(fighter_gobj);
+        break;
+    }
+    return p_effect;
+}
+
+// 0x800EB39C - Check to spawn Kirby star GFX on stage collision
+void ftKirby_MapCheckSpawnStarGFX(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    u16 coll_mask = (fp->coll_data.coll_mask_prev ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & (MPCOLL_MASK_MAIN_ALL);
+    Vec3f pos;
+
+    if (coll_mask)
+    {
+        if (coll_mask & MPCOLL_MASK_RWALL)
+        {
+            pos = DObjGetStruct(fighter_gobj)->translate;
+
+            pos.x += fp->coll_data.object_coll.width;
+            pos.y += fp->coll_data.object_coll.center;
+
+            func_ovl2_80102018(&pos);
+        }
+        if (coll_mask & MPCOLL_MASK_LWALL)
+        {
+            pos = DObjGetStruct(fighter_gobj)->translate;
+
+            pos.x -= fp->coll_data.object_coll.width;
+            pos.y += fp->coll_data.object_coll.center;
+
+            func_ovl2_80102018(&pos);
+        }
+        if (coll_mask & MPCOLL_MASK_CEIL)
+        {
+            pos = DObjGetStruct(fighter_gobj)->translate;
+
+            pos.y += fp->coll_data.object_coll.top;
+
+            func_ovl2_80102018(&pos);
+        }
+        if (coll_mask & MPCOLL_MASK_GROUND)
+        {
+            pos = DObjGetStruct(fighter_gobj)->translate;
+
+            pos.y += fp->coll_data.object_coll.bottom;
+
+            func_ovl2_80102018(&pos);
         }
     }
 }

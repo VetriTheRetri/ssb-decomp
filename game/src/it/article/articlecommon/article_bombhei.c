@@ -9,7 +9,7 @@ void func_ovl3_80177060(GObj *article_gobj, u8 arg1)
 
     func_ovl3_80177218(article_gobj);
 
-    ep = func_ovl2_801005C8(&joint->translate);
+    ep = func_ovl2_801005C8(&joint->translate); // WARNING: Actually some sprite struct
 
     if (ep != NULL)
     {
@@ -39,7 +39,7 @@ void func_ovl3_80177104(GObj *article_gobj, u8 lr)
     void *dll = (void*)((uintptr_t)((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft); // Linker thing
     void *dlr = (void*)((uintptr_t)((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkRight); // Linker thing
 
-    if (lr != 0)
+    if (lr != CENTER)
     {
         ap->lr = RIGHT;
         ap->phys_info.vel.x = ATBOMBHEI_WALK_VEL_X;

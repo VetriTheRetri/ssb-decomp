@@ -10572,7 +10572,7 @@ glabel func_ovl2_800DF0F0
   /* 05B3B0 800DFBB0 AFA8001C */        sw $t0, 0x1c($sp)
   /* 05B3B4 800DFBB4 AFA20018 */        sw $v0, 0x18($sp)
   /* 05B3B8 800DFBB8 8FA400C0 */        lw $a0, 0xc0($sp)
-  /* 05B3BC 800DFBBC 0C03AAF7 */       jal func_ovl2_800EABDC
+  /* 05B3BC 800DFBBC 0C03AAF7 */       jal ftCommon_GFXSpawn
   /* 05B3C0 800DFBC0 AFB80014 */        sw $t8, 0x14($sp)
   /* 05B3C4 800DFBC4 100001B4 */         b .L800E0298
   /* 05B3C8 800DFBC8 8FBF002C */        lw $ra, 0x2c($sp)
@@ -11974,7 +11974,7 @@ glabel func_ovl2_800E0880
   /* 05C79C 800E0F9C 8E8B0044 */        lw $t3, 0x44($s4)
   /* 05C7A0 800E0FA0 AFA8001C */        sw $t0, 0x1c($sp)
   /* 05C7A4 800E0FA4 AFA20018 */        sw $v0, 0x18($sp)
-  /* 05C7A8 800E0FA8 0C03AAF7 */       jal func_ovl2_800EABDC
+  /* 05C7A8 800E0FA8 0C03AAF7 */       jal ftCommon_GFXSpawn
   /* 05C7AC 800E0FAC AFAB0014 */        sw $t3, 0x14($sp)
   /* 05C7B0 800E0FB0 10000002 */         b .L800E0FBC
   /* 05C7B4 800E0FB4 00000000 */       nop 
@@ -13426,7 +13426,7 @@ glabel func_ovl2_800E2048
   /* 05DBE4 800E23E4 24010008 */     addiu $at, $zero, 8
   /* 05DBE8 800E23E8 55010004 */      bnel $t0, $at, .L800E23FC
   /* 05DBEC 800E23EC 8E2209E8 */        lw $v0, 0x9e8($s1)
-  /* 05DBF0 800E23F0 0C03ACE7 */       jal func_ovl2_800EB39C
+  /* 05DBF0 800E23F0 0C03ACE7 */       jal ftKirby_MapCheckSpawnStarGFX
   /* 05DBF4 800E23F4 8FA40070 */        lw $a0, 0x70($sp)
   /* 05DBF8 800E23F8 8E2209E8 */        lw $v0, 0x9e8($s1)
   .L800E23FC:
@@ -23078,7 +23078,7 @@ glabel ftCommon_Update1PGameDamageStats
   /* 066338 800EAB38 03E00008 */        jr $ra
   /* 06633C 800EAB3C 00000000 */       nop 
 
-glabel func_ovl2_800EAB40
+glabel ftCommon_GFXJointCycle
   /* 066340 800EAB40 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 066344 800EAB44 AFBF0014 */        sw $ra, 0x14($sp)
   /* 066348 800EAB48 8C8E018C */        lw $t6, 0x18c($a0)
@@ -23120,7 +23120,7 @@ glabel func_ovl2_800EAB40
   /* 0663D4 800EABD4 03E00008 */        jr $ra
   /* 0663D8 800EABD8 00000000 */       nop 
 
-glabel func_ovl2_800EABDC
+glabel ftCommon_GFXSpawn
   /* 0663DC 800EABDC 27BDFFA8 */     addiu $sp, $sp, -0x58
   /* 0663E0 800EABE0 AFBF001C */        sw $ra, 0x1c($sp)
   /* 0663E4 800EABE4 AFB00018 */        sw $s0, 0x18($sp)
@@ -23320,7 +23320,7 @@ glabel func_ovl2_800EABDC
   /* 0666B8 800EAEB8 00000000 */       nop 
   glabel jtgt_ovl2_800EAEBC
   /* 0666BC 800EAEBC 8FA40054 */        lw $a0, 0x54($sp)
-  /* 0666C0 800EAEC0 0C03AAD0 */       jal func_ovl2_800EAB40
+  /* 0666C0 800EAEC0 0C03AAD0 */       jal ftCommon_GFXJointCycle
   /* 0666C4 800EAEC4 02002825 */        or $a1, $s0, $zero
   /* 0666C8 800EAEC8 8FB90054 */        lw $t9, 0x54($sp)
   /* 0666CC 800EAECC 02002025 */        or $a0, $s0, $zero
@@ -23332,7 +23332,7 @@ glabel func_ovl2_800EABDC
   /* 0666E4 800EAEE4 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EAEE8
   /* 0666E8 800EAEE8 8FA40054 */        lw $a0, 0x54($sp)
-  /* 0666EC 800EAEEC 0C03AAD0 */       jal func_ovl2_800EAB40
+  /* 0666EC 800EAEEC 0C03AAD0 */       jal ftCommon_GFXJointCycle
   /* 0666F0 800EAEF0 02002825 */        or $a1, $s0, $zero
   /* 0666F4 800EAEF4 02002025 */        or $a0, $s0, $zero
   /* 0666F8 800EAEF8 0C03F9ED */       jal func_ovl2_800FE7B4
@@ -23341,7 +23341,7 @@ glabel func_ovl2_800EABDC
   /* 066704 800EAF04 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EAF08
   /* 066708 800EAF08 8FA40054 */        lw $a0, 0x54($sp)
-  /* 06670C 800EAF0C 0C03AAD0 */       jal func_ovl2_800EAB40
+  /* 06670C 800EAF0C 0C03AAD0 */       jal ftCommon_GFXJointCycle
   /* 066710 800EAF10 02002825 */        or $a1, $s0, $zero
   /* 066714 800EAF14 0C03FA6D */       jal func_ovl2_800FE9B4
   /* 066718 800EAF18 02002025 */        or $a0, $s0, $zero
@@ -23349,7 +23349,7 @@ glabel func_ovl2_800EABDC
   /* 066720 800EAF20 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EAF24
   /* 066724 800EAF24 8FA40054 */        lw $a0, 0x54($sp)
-  /* 066728 800EAF28 0C03AAD0 */       jal func_ovl2_800EAB40
+  /* 066728 800EAF28 0C03AAD0 */       jal ftCommon_GFXJointCycle
   /* 06672C 800EAF2C 02002825 */        or $a1, $s0, $zero
   /* 066730 800EAF30 0C03FAD6 */       jal func_ovl2_800FEB58
   /* 066734 800EAF34 02002025 */        or $a0, $s0, $zero
@@ -23357,7 +23357,7 @@ glabel func_ovl2_800EABDC
   /* 06673C 800EAF3C 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EAF40
   /* 066740 800EAF40 8FA40054 */        lw $a0, 0x54($sp)
-  /* 066744 800EAF44 0C03AAD0 */       jal func_ovl2_800EAB40
+  /* 066744 800EAF44 0C03AAD0 */       jal ftCommon_GFXJointCycle
   /* 066748 800EAF48 02002825 */        or $a1, $s0, $zero
   /* 06674C 800EAF4C 0C03FBAC */       jal func_ovl2_800FEEB0
   /* 066750 800EAF50 02002025 */        or $a0, $s0, $zero
@@ -23681,7 +23681,7 @@ glabel func_ovl2_800EABDC
   /* 066B94 800EB394 03E00008 */        jr $ra
   /* 066B98 800EB398 00601025 */        or $v0, $v1, $zero
 
-glabel func_ovl2_800EB39C
+glabel ftKirby_MapCheckSpawnStarGFX
   /* 066B9C 800EB39C 27BDFFC0 */     addiu $sp, $sp, -0x40
   /* 066BA0 800EB3A0 AFBF0024 */        sw $ra, 0x24($sp)
   /* 066BA4 800EB3A4 AFB20020 */        sw $s2, 0x20($sp)

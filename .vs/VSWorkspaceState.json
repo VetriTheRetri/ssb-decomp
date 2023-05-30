@@ -5,11 +5,13 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftkirby",
-    "\\game\\src\\ft\\chara\\ftness",
     "\\game\\src\\ft\\chara\\ftsamus",
+    "\\game\\src\\it",
+    "\\game\\src\\it\\article",
+    "\\game\\src\\it\\item",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
+  "SelectedNode": "\\game\\src\\it\\article\\articlevars.h",
   "PreviewInSolutionExplorer": false
 }

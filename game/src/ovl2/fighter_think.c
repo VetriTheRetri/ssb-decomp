@@ -53,7 +53,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_FighterHit:
-    case gmScriptEvent_Kind_ItemSwingHit:
+    case gmScriptEvent_Kind_HitScaleOffset:
 
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
@@ -118,7 +118,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
             gmScriptEventUpdatePtr(p_event, gmScriptEventCreateHit5);
 
-            ft_hit->is_itemswing = (ev_kind == gmScriptEvent_Kind_ItemSwingHit) ? TRUE : FALSE;
+            ft_hit->is_scale_pos = (ev_kind == gmScriptEvent_Kind_HitScaleOffset) ? TRUE : FALSE;
 
             ft_hit->attack_id = fp->attack_id;
 
@@ -179,7 +179,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
         break;
 
-    case gmScriptEvent_Kind_ResetHit:
+    case gmScriptEvent_Kind_RefreshHit:
         hit_id = gmScriptEventCast(p_event, gmScriptEventResetHit)->hit_id;
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventResetHit);
@@ -302,7 +302,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
         break;
 
     case gmScriptEvent_Kind_GFX:
-    case gmScriptEvent_Kind_GFXPersist:
+    case gmScriptEvent_Kind_GFXScaleOffset:
         if (!(fp->is_playing_gfx))
         {
             joint_index = ftCommon_GetLightHoldJointIndex(fp, gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->joint_index);
@@ -326,13 +326,13 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
             gmScriptEventUpdatePtr(p_event, gmScriptEventCreateGFX4);
 
-            func_ovl2_800EABDC(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == gmScriptEvent_Kind_GFXPersist) ? TRUE : FALSE, flag);
+            ftCommon_GFXSpawn(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == gmScriptEvent_Kind_GFXScaleOffset) ? TRUE : FALSE, flag);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventCreateGFX);
 
         break;
 
-    case gmScriptEvent_SetHitStatusPartAll:
+    case gmScriptEvent_Kind_SetHitStatusPartAll:
         ftCommon_SetHitStatusPartAll(fighter_gobj, gmScriptEventCast(p_event, gmScriptEventSetHitStatusAll)->hitstatus);
 
         gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitStatusAll);
@@ -614,7 +614,7 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
 
                 ev_kind = gmScriptEventCast(p_event, gmScriptEventCreateGFX1)->opcode;
 
-                if (((ev_kind == gmScriptEvent_Kind_GFX) || (ev_kind == gmScriptEvent_Kind_GFXPersist)) && (fp->x191_flag_b0))
+                if (((ev_kind == gmScriptEvent_Kind_GFX) || (ev_kind == gmScriptEvent_Kind_GFXScaleOffset)) && (fp->x191_flag_b0))
                 {
                     gmScriptEventUpdatePtr(p_event, gmScriptEventCreateGFX);
                 }
@@ -671,7 +671,7 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
                 case gmScriptEvent_Kind_SetHitDamage:
                 case gmScriptEvent_Kind_SetHitSize:
                 case gmScriptEvent_Kind_SetHitSoundLevel:
-                case gmScriptEvent_Kind_ResetHit:
+                case gmScriptEvent_Kind_RefreshHit:
                 case gmScriptEvent_Kind_PlaySFX:
                 case gmScriptEvent_Kind_PlayLoopSFXStoreInfo:
                 case gmScriptEvent_Kind_StopLoopSFX:
@@ -693,12 +693,12 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
                     break;
 
                 case gmScriptEvent_Kind_GFX:
-                case gmScriptEvent_Kind_GFXPersist:
+                case gmScriptEvent_Kind_GFXScaleOffset:
                     gmScriptEventUpdatePtr(p_event, gmScriptEventCreateGFX);
                     break;
 
                 case gmScriptEvent_Kind_FighterHit:
-                case gmScriptEvent_Kind_ItemSwingHit:
+                case gmScriptEvent_Kind_HitScaleOffset:
                     gmScriptEventUpdatePtr(p_event, gmScriptEventCreateHit);
                     break;
 
@@ -763,12 +763,12 @@ void func_ovl2_800E0654(GObj *fighter_gobj)
                 case gmScriptEvent_Kind_Goto:
                 case gmScriptEvent_Kind_ScriptPause:
                 case gmScriptEvent_Kind_GFX:
-                case gmScriptEvent_Kind_GFXPersist:
+                case gmScriptEvent_Kind_GFXScaleOffset:
                     func_ovl2_800DF0F0(fighter_gobj, fp, p_event, ev_kind);
                     break;
 
                 case gmScriptEvent_Kind_FighterHit:
-                case gmScriptEvent_Kind_ItemSwingHit:
+                case gmScriptEvent_Kind_HitScaleOffset:
                     gmScriptEventUpdatePtr(p_event, gmScriptEventCreateHit);
                     break;
 
@@ -981,7 +981,7 @@ bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_
                 break;
 
             case gmColorEvent_Kind_GFX:
-            case gmColorEvent_Kind_GFXPersist:
+            case gmColorEvent_Kind_GFXScaleOffset:
                 if (is_playing_gfx == FALSE)
                 {
                     fp = FighterGetStruct(fighter_gobj);
@@ -1007,7 +1007,7 @@ bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_
 
                     gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX4);
 
-                    func_ovl2_800EABDC(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == gmColorEvent_Kind_GFXPersist) ? TRUE : FALSE, flag);
+                    ftCommon_GFXSpawn(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == gmColorEvent_Kind_GFXScaleOffset) ? TRUE : FALSE, flag);
                 }
                 else gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX);
 
@@ -1707,7 +1707,7 @@ void func_ovl2_800E2048(GObj *fighter_gobj)
 
         if (fp->ft_kind == Ft_Kind_Kirby)
         {
-            func_ovl2_800EB39C(fighter_gobj);
+            ftKirby_MapCheckSpawnStarGFX(fighter_gobj);
         }
     }
     if (fp->proc_slope != NULL)
@@ -1742,7 +1742,7 @@ void func_ovl2_800E2048(GObj *fighter_gobj)
 
             ft_hit->pos = ft_hit->offset;
 
-            if (ft_hit->is_itemswing)
+            if (ft_hit->is_scale_pos)
             {
                 size_mul = 1.0F / fp->attributes->size_mul;
 
@@ -1767,7 +1767,7 @@ void func_ovl2_800E2048(GObj *fighter_gobj)
             ft_hit->pos_prev = ft_hit->pos;
             ft_hit->pos = ft_hit->offset;
 
-            if (ft_hit->is_itemswing)
+            if (ft_hit->is_scale_pos)
             {
                 size_mul = 1.0F / fp->attributes->size_mul;
 

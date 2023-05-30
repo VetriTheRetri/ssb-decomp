@@ -31,16 +31,16 @@ typedef enum gmScriptEventKind
     gmScriptEvent_Kind_SyncWait,
     gmScriptEvent_Kind_AsyncWait,
     gmScriptEvent_Kind_FighterHit,
-    gmScriptEvent_Kind_ItemSwingHit,
+    gmScriptEvent_Kind_HitScaleOffset,
     gmScriptEvent_Kind_ClearHitIndex,
     gmScriptEvent_Kind_ClearHitAll,
     gmScriptEvent_Kind_SetHitOffset,
     gmScriptEvent_Kind_SetHitDamage,
     gmScriptEvent_Kind_SetHitSize,
     gmScriptEvent_Kind_SetHitSoundLevel,
-    gmScriptEvent_Kind_ResetHit, // ???
+    gmScriptEvent_Kind_RefreshHit,
     gmScriptEvent_Kind_SetFighterThrow,
-    gmScriptEvent_Kind_SubroutineThrown, // ???
+    gmScriptEvent_Kind_SubroutineThrown,
     gmScriptEvent_Kind_PlaySFX,
     gmScriptEvent_Kind_PlayLoopSFXStoreInfo,
     gmScriptEvent_Kind_StopLoopSFX,
@@ -54,7 +54,7 @@ typedef enum gmScriptEventKind
     gmScriptEvent_Kind_SetFlag3,
     gmScriptEvent_Kind_SetAirJumpAdd,
     gmScriptEvent_Kind_SetAirJumpMax,
-    gmScriptEvent_SetHitStatusPartAll,
+    gmScriptEvent_Kind_SetHitStatusPartAll,
     gmScriptEvent_Kind_SetHitStatusPart,
     gmScriptEvent_Kind_SetHitStatusAll,
     gmScriptEvent_Kind_ResetHurtAll,
@@ -66,7 +66,7 @@ typedef enum gmScriptEventKind
     gmScriptEvent_Kind_Goto,
     gmScriptEvent_Kind_ScriptPause,
     gmScriptEvent_Kind_GFX,
-    gmScriptEvent_Kind_GFXPersist, // ???
+    gmScriptEvent_Kind_GFXScaleOffset, // ???
     gmScriptEvent_Kind_SetModelPart,
     gmScriptEvent_Kind_ResetModelPartAll,
     gmScriptEvent_Kind_HideModelPartAll,
@@ -98,7 +98,7 @@ typedef enum gmColorEventKind
     gmColorEvent_Kind_SetColor2,
     gmColorEvent_Kind_BlendColor2,
     gmColorEvent_Kind_GFX,
-    gmColorEvent_Kind_GFXPersist, // ???
+    gmColorEvent_Kind_GFXScaleOffset, // ???
     gmColorEvent_Kind_SetLight,
     gmColorEvent_Kind_ToggleLightOff,
     gmColorEvent_Kind_PlaySFX,

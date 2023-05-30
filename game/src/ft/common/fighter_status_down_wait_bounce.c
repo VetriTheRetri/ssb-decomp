@@ -86,7 +86,7 @@ void func_ovl3_80144428(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl2_800EABDC(fighter_gobj, 0x16, 0, 0, 0, fp->lr, 0, 0);
+    ftCommon_GFXSpawn(fighter_gobj, 0x16, 0, 0, 0, fp->lr, 0, 0);
     func_800269C0(Fighter_DownBounce_Sound[fp->ft_kind]);
     func_ovl2_800E806C(fp, 4, 0);
 }

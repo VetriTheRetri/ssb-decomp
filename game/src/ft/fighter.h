@@ -576,10 +576,10 @@ typedef struct _Fighter_Hit
     u32 is_hit_air : 1;
     u32 is_hit_ground : 1;
     u32 clang : 1;
-    u32 is_itemswing : 1;
+    u32 is_scale_pos : 1;
     u32 attack_id : 6;
     u16 motion_count;
-    gmAttackFlags flags_hi;
+    u16 stat_count;
     Vec3f pos;
     Vec3f pos_prev;
     FighterHitArray hit_targets[4];
@@ -841,7 +841,8 @@ typedef struct ftCommonAttributes
     s32 unk_ftca_0x294;
     s32 unk_ftca_0x298;
     s32 unk_ftca_0x29C;
-    u8 filler_0x2A0[0x2B8 - 0x2A0];
+    void *unk_ftca_0x2A0;
+    s32 gfx_joint_cycle_index[5]; // The game will cycle through these joints when applying certain particles such as electricity and flames
     bool32 cliff_status_ground_air_id[5];
     u8 filler_0x2CC[0x2D0 - 0x2CC];
     ftPartIndex *p_ftpart_lookup;
@@ -1003,7 +1004,7 @@ struct Fighter_Struct
     u32 x18E_flag_b3 : 1;
     u32 x18E_flag_b4 : 1;
     u32 is_playing_gfx : 1;
-    u32 x18E_flag_4bit : 4; // Slope Contour behavior?
+    u32 joint_cycle_array_index : 4; // Goes up to 5 by default; index of the array from gfx_joint_cycle_index from ftCommonAttributes which houses the actual joint ID
     u32 is_shield : 1; // Fighter's shield bubble is active
     u32 is_statupdate_stop_gfx : 1; // Destroy GFX on action state change if TRUE
     u32 x18F_flag_b4 : 1;

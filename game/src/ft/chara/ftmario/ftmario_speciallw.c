@@ -11,11 +11,11 @@ void ftMario_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 
         if (fp->status_vars.mario.speciallw.dust_gfx_int == 4)
         {
-            func_ovl2_800EABDC(fighter_gobj, 11, 0, 0, 0, -fp->lr, 0, 0); // Spawn GFX
+            ftCommon_GFXSpawn(fighter_gobj, 11, 0, 0, 0, -fp->lr, 0, 0); // Spawn GFX
         }
         else if (fp->status_vars.mario.speciallw.dust_gfx_int == 0)
         {
-            func_ovl2_800EABDC(fighter_gobj, 11, 0, 0, 0, fp->lr, 0, 0); // Spawn GFX 
+            ftCommon_GFXSpawn(fighter_gobj, 11, 0, 0, 0, fp->lr, 0, 0); // Spawn GFX 
 
             fp->status_vars.mario.speciallw.dust_gfx_int = 8;
         }

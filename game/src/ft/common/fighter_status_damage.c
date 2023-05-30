@@ -42,7 +42,7 @@ void func_ovl3_80140454(GObj *fighter_gobj)
 
         if (fp->status_vars.common.damage.dust_gfx_int == 0)
         {
-            func_ovl2_800EABDC(fighter_gobj, 0x11, 4, 0, 0, fp->lr, 0, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0x11, 4, 0, 0, fp->lr, 0, 0);
             func_ovl3_80140340(fp);
         }
     }
@@ -502,8 +502,8 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
                 this_fp->phys_info.vel_damage_air.y = -vel_damage.y * 0.8F;
                 this_fp->phys_info.vel_damage_ground = 0.0F;
 
-                func_ovl2_800EABDC(this_gobj, 0x16, 0, 0, 0, this_fp->lr, 0, 0);
-                func_ovl2_800EABDC(this_gobj, 0x20, 0, 0, 0, this_fp->lr, 0, 0);
+                ftCommon_GFXSpawn(this_gobj, 0x16, 0, 0, 0, this_fp->lr, 0, 0);
+                ftCommon_GFXSpawn(this_gobj, 0x20, 0, 0, 0, this_fp->lr, 0, 0);
             }
             else
             {

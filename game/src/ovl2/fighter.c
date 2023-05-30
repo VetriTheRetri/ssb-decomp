@@ -369,7 +369,7 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fp->p_loop_sfx = NULL;
     fp->loop_sfx_id = 0;
 
-    fp->x18E_flag_4bit = 0;
+    fp->joint_cycle_array_index = 0;
 
     fp->is_invisible = FALSE;
     fp->x18E_flag_b0 = FALSE;
