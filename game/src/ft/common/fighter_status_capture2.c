@@ -9,7 +9,7 @@ void func_ovl3_8014E1D0(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
     
     func_ovl3_80140EE4(fighter_gobj, -1, 0, knockback, throw_release->angle, this_fp->lr, 1, 0, 0, FALSE, FALSE, FALSE);
     
-    func_ovl2_800EAA2C(this_fp, 4, 0, 0, 0, 0);
+    ftCommon_Update1PGameDamageStats(this_fp, 4, 0, 0, 0, 0);
 }
 
 void func_ovl3_8014E2A8(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
@@ -39,7 +39,7 @@ void func_ovl3_8014E2A8(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
     else lr = LEFT;
 
     func_ovl3_80140EE4(fighter_gobj, -1, 0, knockback, throw_release->angle, lr, 1, 0, 0, FALSE, FALSE, FALSE);
-    func_ovl2_800EAA2C(this_fp, 4, 0, 0, 0, 0);
+    ftCommon_Update1PGameDamageStats(this_fp, 4, 0, 0, 0, 0);
 }
 
 void func_ovl3_8014E3EC(Fighter_Struct *fp, s32 breakout_wait)
@@ -118,7 +118,7 @@ void func_ovl3_8014E558(GObj *fighter_gobj)
     func_ovl3_8014ACB4(fighter_gobj, ftStatus_Common_Shouldered);
     func_ovl3_8014E3EC(this_fp, ((this_fp->percent_damage * 0.08F) + 14.0F));
 
-    damage = gmCommon_DamageApplyStale(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->flags_hi.halfword);
+    damage = gmCommon_DamageApplyStale(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->motion_count);
 
     if (ftCommon_GetBestHitStatusAll(fighter_gobj) != gmHitCollision_HitStatus_Normal)
     {
@@ -127,9 +127,9 @@ void func_ovl3_8014E558(GObj *fighter_gobj)
     if (damage != 0)
     {
         func_ovl3_801415F8(fighter_gobj, gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, damage, damage, 0, 100, 0, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap), 0);
-        ftCommon_DamageUpdateStats(this_fp, damage);
-        func_ovl2_800EA98C(capture_fp->port_id, this_fp->port_id, damage);
-        func_ovl2_800EA614(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->flags_hi.halfword);
+        ftCommon_DamageUpdateCheckDropItem(this_fp, damage);
+        ftCommon_AttackUpdateMatchStats(capture_fp->port_id, this_fp->port_id, damage);
+        ftCommon_AttackAddStaleQueue(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->motion_count);
     }
     func_ovl2_800E806C(this_fp, 7, 0);
 }

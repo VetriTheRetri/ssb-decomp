@@ -578,8 +578,8 @@ typedef struct _Fighter_Hit
     u32 clang : 1;
     u32 is_itemswing : 1;
     u32 attack_id : 6;
+    u16 motion_count;
     gmAttackFlags flags_hi;
-    gmAttackFlags flags_lw;
     Vec3f pos;
     Vec3f pos_prev;
     FighterHitArray hit_targets[4];
@@ -1076,44 +1076,17 @@ struct Fighter_Struct
     u8 throw_port_id;
     s32 throw_player_number;
     s32 attack_id;
-
-    union
-    {
-        struct
-        {
-            u8 unk_0x28C_byte;
-            u8 unk_0x28E_byte_4bit : 4;
-            u8 unk_0x28E_byte;
-        };
-        struct
-        {
-            u16 unk_0x28C_half_fill;
-            u16 unk_0x28E_half_3bit : 3;
-            u8 unk_0x28E_bit_0x10 : 1;
-            u8 unk_0x28E_bit_0x8 : 1;
-        };
-        struct
-        {
-            u16 unk_0x28C_halfword;
-            u16 unk_0x28E_halfword;
-        };
-        struct
-        {
-            gmAttackFlags flags_hi;
-            gmAttackFlags flags_lw;
-        };
-
-        u32 unk_0x28C_word;
-    };
-    gmAttackFlags unk_0x290;
+    u16 motion_count;
+    gmAttackFlags stat_flags;
+    u16 stat_count;
 
     Fighter_Hit fighter_hit[4];
 
     s32 invincible_timer;
-    s32 walldamage_nohit_timer;
-    s32 itemstat_hitstatus;
+    s32 intangible_timer;
+    s32 special_hitstatus;
     s32 star_invincible_timer;
-    s32 special_hitstatus;  // Enemy CPUs avoid player depending on this?
+    s32 star_hitstatus;  // Enemy CPUs avoid player depending on this?
     s32 hitstatus;
 
     Fighter_Hurt fighter_hurt[FTPARTS_HURT_NUM_MAX];
@@ -1146,15 +1119,15 @@ struct Fighter_Struct
     s32 damage_joint_index;
     s32 damage_player_number;
     s32 damage_port_id; // Port index of damaging fighter
-    s32 unk_0x810;
+    u16 damage_count;
     s32 unk_ft_0x814;
     s32 damage_heal; // Percent damage to heal
     f32 damage_mul;
 
     s32 unk_ft_0x820;
     s32 unk_ft_0x824;
-    gmAttackFlags unk_ft_0x828;
-    gmAttackFlags unk_ft_0x82A; // Might be raw u16
+    gmAttackFlags damage_stat_flags;
+    u16 damage_stat_count; // Might be raw u16
 
     f32 publicity_knockback; // Knockback value used for crowd reactions
 

@@ -96,7 +96,7 @@ void func_ovl3_801405A0(GObj *fighter_gobj)
     {
         fp->status_vars.common.damage.is_limit_knockback = 0;
 
-        func_ovl2_800EA8EC(fp, 1);
+        ftCommon_ApplyInvincibleTimer(fp, 1);
     }
 }
 
@@ -118,7 +118,7 @@ void func_ovl3_801405E4(GObj *fighter_gobj)
         if (fp->status_vars.common.damage.is_limit_knockback != 0)
         {
             fp->status_vars.common.damage.is_limit_knockback = 0;
-            func_ovl2_800EA8EC(fp, 1);
+            ftCommon_ApplyInvincibleTimer(fp, 1);
         }
     }
 }
@@ -865,7 +865,7 @@ void func_ovl3_80141B08(GObj *fighter_gobj, Vec3f *angle, Vec3f *pos)
     fp->damage_knockback_again = knockback;
 
     func_ovl2_800E806C(fp, 2, 0);
-    func_ovl2_800EA948(fp, 0xF);
+    ftCommon_ApplyIntangibleTimer(fp, 15);
 
     fp->is_hitstun = FALSE;
 }

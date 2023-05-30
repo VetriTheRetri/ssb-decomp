@@ -153,7 +153,7 @@ void ftMario_SpecialLw_SetStatus(GObj *fighter_gobj)
     func_ovl2_800D8E78(fp, 17.0F);
     ftMario_SpecialLw_InitStatusVars(fighter_gobj);
 
-    fp->flags_lw.flags_0x800 = FALSE; // Related to staling?
+    fp->stat_flags.is_ground_or_air = ground; // Related to staling?
 }
 
 // 0x80156910

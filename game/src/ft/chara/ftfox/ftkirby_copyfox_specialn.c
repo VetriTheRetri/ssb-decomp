@@ -34,9 +34,9 @@ void func_ovl3_80156D38(GObj *fighter_gobj)
         }
         else func_ovl3_80156DD8(fighter_gobj);
 
-        func_ovl2_800EA5E8(fp, 0x15);
-        func_ovl2_800EA778(fp, fp->flags_lw.halfword);
-        func_ovl2_800EA7B0(fp, 0);
+        ftCommon_MotionCountIncSetID(fp, 0x15);
+        ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
+        ftCommon_Update1PGameAttackStats(fp, 0);
     }
 }
 

@@ -107,7 +107,7 @@ void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 
 
 extern u16 D_ovl2_80131398;
 
-GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     Article_Struct *ap = func_ovl3_8016DFAC();
     GObj *article_gobj;
@@ -211,10 +211,10 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
     ap->article_hit.hitbox_count = attributes->hitbox_count;
     ap->article_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
     ap->article_hit.attack_id = 0;
-    ap->article_hit.flags_0x4E.halfword = func_ovl2_800EA5BC();
-    ap->article_hit.flags_hi.flags_0x3FF = 0x39;
-    ap->article_hit.flags_hi.flags_0x1000 = ap->article_hit.flags_hi.flags_0x800 = ap->article_hit.flags_hi.flags_0x400 = FALSE;
-    ap->article_hit.flags_lw.halfword = func_ovl2_800EA74C();
+    ap->article_hit.stat_count = gmCommon_MotionCountInc();
+    ap->article_hit.stat_flags.attack_group_id = 0x39;
+    ap->article_hit.stat_flags.is_smash_attack = ap->article_hit.stat_flags.is_ground_or_air = ap->article_hit.stat_flags.is_special_attack = FALSE;
+    ap->article_hit.stat_count = gmCommon_StatUpdateCountInc();
 
     func_ovl3_801725F8(ap);
 
@@ -301,12 +301,15 @@ GObj *func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
         case ARTICLE_MASK_SPAWN_GROUND:
         case ARTICLE_MASK_SPAWN_DEFAULT: // Default?
             break;
+
         case ARTICLE_MASK_SPAWN_FIGHTER:
             func_ovl2_800DF058(article_gobj, FighterGetStruct(spawn_gobj)->coll_data.p_translate, &FighterGetStruct(spawn_gobj)->coll_data);
             break;
+
         case ARTICLE_MASK_SPAWN_ITEM:
             func_ovl2_800DF058(article_gobj, ItemGetStruct(spawn_gobj)->coll_data.p_translate, &ItemGetStruct(spawn_gobj)->coll_data);
             break;
+
         case ARTICLE_MASK_SPAWN_ARTICLE:
             func_ovl2_800DF058(article_gobj, ArticleGetStruct(spawn_gobj)->coll_data.p_translate, &ArticleGetStruct(spawn_gobj)->coll_data);
             break;
@@ -1696,8 +1699,8 @@ next_check:
         ap->port_id = fp->port_id;
         ap->player_number = fp->player_number;
         ap->handicap = fp->handicap;
-        ap->article_hit.flags_hi = ap->unk_0x28C;
-        ap->article_hit.flags_hi.halfword = ap->unk_0x28E.halfword;
+        ap->article_hit.stat_flags = ap->reflect_stat_flags;
+        ap->article_hit.stat_count = ap->reflect_stat_count;
 
         if (ap->proc_reflector != NULL)
         {
@@ -1717,7 +1720,6 @@ next_check:
             }
         }
     }
-
     if (ap->damage_taken_last != 0)
     {
         ap->hitlag_timer = gmCommon_DamageCalcHitLag(ap->damage_taken_last, ftStatus_Common_Wait, 1.0F); // Maybe 10 is the "none" status ID?

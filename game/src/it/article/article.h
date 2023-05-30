@@ -226,9 +226,9 @@ typedef struct _Article_Hit
     u32 can_shield : 1; // Not actually absorb but not yet known either
     u32 attack_id : 6; // Unconfirmed
     u32 flags_0x4C_b7 : 1;
-    gmAttackFlags flags_0x4E;
-    gmAttackFlags flags_hi;
-    gmAttackFlags flags_lw;
+    u16 motion_count;
+    gmAttackFlags stat_flags;
+    u16 stat_count;
     s32 hitbox_count;
     ArticleHitUnk article_hit_unk[2];
     ArticleHitArray hit_targets[4];
@@ -358,8 +358,8 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     f32 shield_collide_angle;
     Vec3f shield_collide_vec;
     GObj *reflect_gobj;
-    gmAttackFlags unk_0x28C;
-    gmAttackFlags unk_0x28E;
+    gmAttackFlags reflect_stat_flags;
+    u16 reflect_stat_count;
     s32 damage_last; // Last 
     f32 damage_knockback; // Angle at which article will be launched when getting hit?
     s32 damage_taken_recent;

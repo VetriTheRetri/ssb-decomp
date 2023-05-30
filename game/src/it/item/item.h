@@ -144,45 +144,20 @@ typedef struct _Item_Hit
     s32 priority; // Used to determine winner in item hitbox vs item hitbox interaction?
     u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;
-    union
-    {
-        struct
-        {
-            u32 clang : 1;
-            u32 flags_0x48_b1 : 1;
-            u32 flags_0x48_b2 : 1;
-            u32 can_rehit : 1;
-            u32 can_hop : 1; // Actually determines whether item's shield deflect routine can run?
-            u32 can_reflect : 1;
-            u32 can_absorb : 1;
-            u32 noheal : 1;
-            u32 can_shield : 1;
-            u32 attack_id : 6;
-            u32 flags_0x49_b7 : 1;
-            union
-            {
-                gmAttackFlags flags_0x4A;
-                u16 flags_0x4A_halfword;
-            };
-        };
-        u8 flags_0x48;
-    };
-
-    union
-    {
-        struct
-        {
-            u32 flags_0x4C_b012 : 3;
-            u32 can_rehit : 1;
-            u32 flags_0x4C_b4 : 1;
-            u32 flags_0x4C_b5 : 1;
-            u32 flags_0x4C_10bit : 10;
-            gmAttackFlags flags_0x4E;
-        };
-        gmAttackFlags flags_0x4C;
-        u16 flags_0x4C_halfword;
-    };
-
+    u32 clang : 1;
+    u32 flags_0x48_b1 : 1;
+    u32 flags_0x48_b2 : 1;
+    u32 can_rehit : 1;
+    u32 can_hop : 1; // Actually determines whether item's shield deflect routine can run?
+    u32 can_reflect : 1;
+    u32 can_absorb : 1;
+    u32 noheal : 1;
+    u32 can_shield : 1;
+    u32 attack_id : 6;
+    u32 flags_0x49_b7 : 1;
+    u16 motion_count;
+    gmAttackFlags stat_flags;
+    u16 stat_count;
     s32 hitbox_count;
     ItemHitUnk item_hit_unk[2];
     ItemHitArray hit_targets[4];
@@ -191,7 +166,7 @@ typedef struct _Item_Hit
 
 typedef struct _Item_Struct
 {
-    u32 unk_x0;
+    void *ip_alloc_next;        // Pointer to next item struct
     GObj *item_gobj;            // Pointer to item's GObj
     GObj *owner_gobj;           // Current owner of this item; expected to be fighter?
     s32 it_kind;                // Item ID
@@ -210,17 +185,17 @@ typedef struct _Item_Struct
 
     Coll_Data coll_data;
     Ground_Air ground_or_air;
-    Item_Hit item_hit;          // Indexed into an array so it can (hopefully) easily be expanded later
+    Item_Hit item_hit;          
 
     s32 hit_victim_damage;      // Set to item hitbox's final damage output when hitting a target
-    s32 hit_reflect_damage;              // Might be self-damage?
+    s32 hit_reflect_damage;     // Might be self-damage?
     s32 hit_attack_damage;      // Set to item hitbox's final damage output when hitting another attack
     s32 hit_shield_damage;      // Set to item hitbox's final damage output when hitting a shield
     f32 shield_collide_angle;   // If this is less than 135 degrees, the item gets deflected
     Vec3f shield_collide_vec;   //
     GObj *reflect_gobj;         // GObj that reflected this item
-    gmAttackFlags unk_0x258;    // Attack flags
-    gmAttackFlags unk_0x25A;    // Attack flags
+    gmAttackFlags reflect_stat_flags;    // Attack flags
+    u16 reflect_stat_count;     // Attack flags
     GObj *absorb_gobj;          // GObj that absorbed this item
 
     u8 is_hitlag_victim : 1;    // Item can deal hitlag to target

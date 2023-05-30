@@ -593,13 +593,13 @@ s32 ftCommon_GetBestHitStatusAll(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 hitstatus_best = ftCommon_GetBestHitStatusPart(fighter_gobj);
 
+    if (hitstatus_best < fp->star_hitstatus)
+    {
+        hitstatus_best = fp->star_hitstatus;
+    }
     if (hitstatus_best < fp->special_hitstatus)
     {
         hitstatus_best = fp->special_hitstatus;
-    }
-    if (hitstatus_best < fp->itemstat_hitstatus)
-    {
-        hitstatus_best = fp->itemstat_hitstatus;
     }
     return hitstatus_best;
 }
@@ -1223,7 +1223,7 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     {
         ftCommon_CheckSetColAnimIndex(fighter_gobj, 0x4A, 0);
     }
-    if ((fp->invincible_timer != 0) || (fp->walldamage_nohit_timer != 0))
+    if ((fp->invincible_timer != 0) || (fp->intangible_timer != 0))
     {
         ftCommon_CheckSetColAnimIndex(fighter_gobj, 0xA, 0);
     }
@@ -1526,7 +1526,7 @@ s32 gmCommon_DamageCalcHitLag(s32 damage, s32 status_id, f32 hitlag_mul)
 }
 
 // 0x800EA248
-void ftCommon_DamageUpdateStats(Fighter_Struct *fp, s32 damage)
+void ftCommon_DamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
 {
     fp->percent_damage += damage;
     Match_Info->player_block[fp->port_id].total_damage_all += damage;
@@ -1582,7 +1582,7 @@ extern f32 Damage_Stale_MulTable[4] =
 };
 
 // 0x800EA470
-f32 gmCommon_DamageGetStaleMul(u32 port_id, s32 attack_id, u16 flags)
+f32 gmCommon_DamageGetStaleMul(s32 port_id, s32 attack_id, u16 flags)
 {
     s32 stale_index;
     s32 backup_stale_id;
@@ -1614,7 +1614,7 @@ f32 gmCommon_DamageGetStaleMul(u32 port_id, s32 attack_id, u16 flags)
     return 1.0F;
 }
 
-s32 gmCommon_DamageApplyStale(u32 port_id, s32 damage, s32 attack_id, u16 flags)
+s32 gmCommon_DamageApplyStale(s32 port_id, s32 damage, s32 attack_id, u16 flags)
 {
     f32 stale = gmCommon_DamageGetStaleMul(port_id, attack_id, flags);
 
@@ -1623,4 +1623,177 @@ s32 gmCommon_DamageApplyStale(u32 port_id, s32 damage, s32 attack_id, u16 flags)
         damage = (damage * stale) + 0.999F;
     }
     return damage;
+}
+
+extern u16 Entity_Global_MotionCount; // Updated each time a new move is used? Includes non-attacks.
+
+// 0x800EA5BC
+u16 gmCommon_MotionCountInc(void)
+{
+    u16 motion_count = Entity_Global_MotionCount++;
+
+    if (Entity_Global_MotionCount == 0)
+    {
+        Entity_Global_MotionCount = 1;
+    }
+    return motion_count;
+}
+
+// 0x800EA5E8
+void ftCommon_MotionCountIncSetID(Fighter_Struct *fp, s32 attack_id)
+{
+    fp->attack_id = attack_id;
+    fp->motion_count = gmCommon_MotionCountInc();
+}
+
+// 0x800EA614
+void ftCommon_AttackAddStaleQueue(s32 attack_port_id, s32 defend_port_id, s32 attack_id, u16 motion_count)
+{
+    if ((attack_port_id != GMMATCH_PLAYERS_MAX) && (attack_port_id != defend_port_id))
+    {
+        s32 i, stale_index = Match_Info->player_block[attack_port_id].stale_index;
+
+        for (i = 0; i < ARRAY_COUNT(Match_Info->player_block[attack_port_id].stale_flags); i++)
+        {
+            if ((attack_id == Match_Info->player_block[attack_port_id].stale_flags[i][0]) && (motion_count == Match_Info->player_block[attack_port_id].stale_flags[i][1]))
+            {
+                return;
+            }
+        }
+        Match_Info->player_block[attack_port_id].stale_flags[stale_index][0] = attack_id;
+        Match_Info->player_block[attack_port_id].stale_flags[stale_index][1] = motion_count;
+
+        if (stale_index == (ARRAY_COUNT(Match_Info->player_block[attack_port_id].stale_flags) - 1))
+        {
+            Match_Info->player_block[attack_port_id].stale_index = 0;
+        }
+        else Match_Info->player_block[attack_port_id].stale_index = stale_index + 1;
+    }
+}
+
+extern u16 Entity_Global_StatUpdateCount; // Updated each time an entity's status is changed? e.g. PK Fire pillar increments this twice, desyncing it from Entity_Global_MotionCount
+
+// 0x800EA74C
+u16 gmCommon_StatUpdateCountInc(void)
+{
+    u16 update_count = Entity_Global_StatUpdateCount++; 
+
+    if (Entity_Global_StatUpdateCount == 0)
+    {
+        Entity_Global_StatUpdateCount = 1;
+    }
+    return update_count;
+}
+
+// 0x800EA778
+void ftCommon_StatUpdateCountIncSetFlags(Fighter_Struct *fp, u16 flags)
+{
+    fp->stat_flags = *(gmAttackFlags*)&flags;
+    fp->stat_count = gmCommon_StatUpdateCountInc();
+}
+
+extern s32 gmBonusStat_Attacker_AttackGroupIndex_Count[];    // Index of attack groups
+extern s32 gmBonusStat_Attacker_IsSmashAttack_Count[2];      // Index 0 = non-smash attack, index 1 = smash attack
+extern s32 gmBonusStat_Attacker_GroundOrAirAttack_Count[2];  // Index 0 = ground, index 1 = air
+extern s32 gmBonusStat_Attacker_IsSpecialAttack_Count[2];    // Index 0 = non-special attack, index 1 = special attack
+
+// 0x800EA7B0
+void ftCommon_Update1PGameAttackStats(Fighter_Struct *fp, u16 flags)
+{
+    gmAttackFlags stat_flags = *(gmAttackFlags*)&flags;
+
+    if ((fp->status_info.pl_kind != Pl_Kind_Result) && (Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port))
+    {
+        if ((fp->stat_flags.attack_group_id != 0) && (fp->stat_flags.attack_group_id != stat_flags.attack_group_id))
+        {
+            gmBonusStat_Attacker_AttackGroupIndex_Count[fp->stat_flags.attack_group_id]++;
+
+            gmBonusStat_Attacker_IsSmashAttack_Count[fp->stat_flags.is_smash_attack]++;
+
+            gmBonusStat_Attacker_GroundOrAirAttack_Count[fp->stat_flags.is_ground_or_air]++;
+
+            gmBonusStat_Attacker_IsSpecialAttack_Count[fp->stat_flags.is_special_attack]++;
+        }
+    }
+}
+
+// 0x800EA8B0
+void ftCommon_ApplyStarInvincibleTimer(Fighter_Struct *fp, s32 star_invincible_timer)
+{
+    fp->star_hitstatus = gmHitCollision_HitStatus_Invincible;
+    fp->star_invincible_timer = star_invincible_timer;
+
+    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, ATSTAR_COLANIM_ID, 0);
+}
+
+// 0x800EA8EC
+void ftCommon_ApplyInvincibleTimer(Fighter_Struct *fp, s32 invincible_timer)
+{
+    if (fp->invincible_timer < invincible_timer)
+    {
+        fp->invincible_timer = invincible_timer;
+    }
+    if (fp->intangible_timer != 0)
+    {
+        fp->special_hitstatus = gmHitCollision_HitStatus_Intangible;
+    }
+    else fp->special_hitstatus = gmHitCollision_HitStatus_Invincible;
+
+    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 0xA, 0);
+}
+
+// 0x800EA948
+void ftCommon_ApplyIntangibleTimer(Fighter_Struct *fp, s32 intangible_timer)
+{
+    if (fp->intangible_timer < intangible_timer)
+    {
+        fp->intangible_timer = intangible_timer;
+    }
+    fp->special_hitstatus = gmHitCollision_HitStatus_Intangible;
+
+    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 0xA, 0);
+}
+
+// 0x800EA98C
+void ftCommon_AttackUpdateMatchStats(s32 attack_port_id, s32 defend_port_id, s32 attack_damage)
+{
+    if ((attack_port_id != GMMATCH_PLAYERS_MAX) && (attack_port_id != defend_port_id))
+    {
+        Match_Info->player_block[attack_port_id].total_damage_dealt += attack_damage;
+
+        Match_Info->player_block[defend_port_id].total_damage_player[attack_port_id] += attack_damage;
+        Match_Info->player_block[defend_port_id].combo_damage_foe += attack_damage;
+        Match_Info->player_block[defend_port_id].combo_count_foe++;
+    }
+}
+
+extern s32 gmBonusStat_Defender_AttackGroupIndex_Count[];
+extern s32 gmBonusStat_Defender_IsSmashAttack_Count[2];
+extern s32 gmBonusStat_Defender_GroundOrAirAttack_Count[2];
+extern s32 gmBonusStat_Defender_IsSpecialAttack_Count[2];
+
+// 0x800EAA2C
+void ftCommon_Update1PGameDamageStats(Fighter_Struct *fp, s32 damage_port_id, s32 arg2, s32 arg3, u16 flags, u16 damage_stat_count)
+{
+    fp->damage_port_id = damage_port_id;
+    fp->unk_ft_0x820 = arg2;
+    fp->unk_ft_0x824 = arg3;
+    fp->damage_count++;
+
+    if (!(damage_stat_count) || (fp->damage_stat_count != damage_stat_count))
+    {
+        fp->damage_stat_flags = *(gmAttackFlags*)&flags;
+        fp->damage_stat_count = damage_stat_count;
+
+        if (Match_Info->game_type == gmMatch_GameType_1PGame)
+        {
+            if ((Scene_Info.player_port == damage_port_id) && (fp->damage_stat_flags.attack_group_id != 0))
+            {
+                gmBonusStat_Defender_AttackGroupIndex_Count[fp->damage_stat_flags.attack_group_id]++;
+                gmBonusStat_Defender_IsSmashAttack_Count[fp->damage_stat_flags.is_smash_attack]++;
+                gmBonusStat_Defender_GroundOrAirAttack_Count[fp->damage_stat_flags.is_ground_or_air]++;
+                gmBonusStat_Defender_IsSpecialAttack_Count[fp->damage_stat_flags.is_special_attack]++;
+            }
+        }
+    }
 }

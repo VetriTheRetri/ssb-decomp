@@ -122,9 +122,9 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
             ft_hit->attack_id = fp->attack_id;
 
-            ft_hit->flags_hi.halfword = fp->flags_hi.halfword;
+            ft_hit->motion_count = fp->motion_count;
 
-            ft_hit->damage = gmCommon_DamageApplyStale(fp->port_id, ft_hit->damage, ft_hit->attack_id, ft_hit->flags_hi.halfword);
+            ft_hit->damage = gmCommon_DamageApplyStale(fp->port_id, ft_hit->damage, ft_hit->attack_id, ft_hit->motion_count);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventCreateHit);
 
@@ -155,7 +155,7 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, gmScriptEvent *p
 
             gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitDamage);
 
-            fp->fighter_hit[hit_id].damage = gmCommon_DamageApplyStale(fp->port_id, fp->fighter_hit[hit_id].damage, fp->fighter_hit[hit_id].attack_id, fp->fighter_hit[hit_id].flags_hi.halfword);
+            fp->fighter_hit[hit_id].damage = gmCommon_DamageApplyStale(fp->port_id, fp->fighter_hit[hit_id].damage, fp->fighter_hit[hit_id].attack_id, fp->fighter_hit[hit_id].motion_count);
         }
         else gmScriptEventUpdatePtr(p_event, gmScriptEventSetHitDamage);
 
@@ -1285,13 +1285,13 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
     }
     func_ovl2_800E11C8(fighter_gobj);
 
-    if (this_fp->walldamage_nohit_timer != 0)
+    if (this_fp->intangible_timer != 0)
     {
-        this_fp->walldamage_nohit_timer--;
+        this_fp->intangible_timer--;
 
-        if (this_fp->walldamage_nohit_timer == 0)
+        if (this_fp->intangible_timer == 0)
         {
-            this_fp->itemstat_hitstatus = (this_fp->invincible_timer != FALSE) ? gmHitCollision_HitStatus_Invincible : gmHitCollision_HitStatus_Normal;
+            this_fp->special_hitstatus = (this_fp->invincible_timer != FALSE) ? gmHitCollision_HitStatus_Invincible : gmHitCollision_HitStatus_Normal;
 
             if (this_fp->colanim.colanim_id == 0xA)
             {
@@ -1303,9 +1303,9 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
     {
         this_fp->invincible_timer--;
 
-        if ((this_fp->invincible_timer == 0) && (this_fp->walldamage_nohit_timer == 0))
+        if ((this_fp->invincible_timer == 0) && (this_fp->intangible_timer == 0))
         {
-            this_fp->itemstat_hitstatus = gmHitCollision_HitStatus_Normal;
+            this_fp->special_hitstatus = gmHitCollision_HitStatus_Normal;
 
             if (this_fp->colanim.colanim_id == 0xA)
             {
@@ -1319,7 +1319,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
         if (this_fp->star_invincible_timer == 0)
         {
-            this_fp->special_hitstatus = gmHitCollision_HitStatus_Normal;
+            this_fp->star_hitstatus = gmHitCollision_HitStatus_Normal;
 
             if (this_fp->colanim.colanim_id == 0x4A)
             {
@@ -2043,9 +2043,9 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
     }
     if
     (
-        (victim_fp->itemstat_hitstatus == gmHitCollision_HitStatus_Normal)  &&
-        (victim_fp->special_hitstatus == gmHitCollision_HitStatus_Normal)               &&
-        (victim_fp->hitstatus == gmHitCollision_HitStatus_Normal)          &&
+        (victim_fp->special_hitstatus == gmHitCollision_HitStatus_Normal) &&
+        (victim_fp->star_hitstatus == gmHitCollision_HitStatus_Normal)    &&
+        (victim_fp->hitstatus == gmHitCollision_HitStatus_Normal)         &&
         (victim_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     )
     {
@@ -2074,8 +2074,8 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
 
                 ftHitCollisionLogIndex++;
             }
-            func_ovl2_800EA98C(attacker_port_id, victim_fp->port_id, damage);
-            func_ovl2_800EA614(attacker_port_id, victim_fp->port_id, attacker_hit->attack_id, attacker_hit->flags_hi.halfword);
+            ftCommon_AttackUpdateMatchStats(attacker_port_id, victim_fp->port_id, damage);
+            ftCommon_AttackAddStaleQueue(attacker_port_id, victim_fp->port_id, attacker_hit->attack_id, attacker_hit->flags_hi.halfword);
         }
         else
         {
@@ -2183,8 +2183,8 @@ void func_ovl2_800E31B4(Item_Struct *ip, Item_Hit *it_hit, Fighter_Struct *fp, G
     {
         ip->reflect_gobj = fighter_gobj;
 
-        ip->unk_0x258 = fp->flags_lw;
-        ip->unk_0x25A.halfword = fp->unk_0x290.halfword;
+        ip->reflect_stat_flags = fp->stat_flags;
+        ip->reflect_stat_count = fp->stat_count;
 
         fp->lr_reflect = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(ip->item_gobj)->translate.x) ? RIGHT : LEFT;
     }
@@ -2234,10 +2234,10 @@ void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
     }
     if
     (
-        (fp->itemstat_hitstatus == gmHitCollision_HitStatus_Normal)      &&
         (fp->special_hitstatus == gmHitCollision_HitStatus_Normal) &&
-        (fp->hitstatus == gmHitCollision_HitStatus_Normal)     &&
-        (ft_hurt->hitstatus == gmHitCollision_HitStatus_Normal)&&
+        (fp->star_hitstatus == gmHitCollision_HitStatus_Normal)    &&
+        (fp->hitstatus == gmHitCollision_HitStatus_Normal)         &&
+        (ft_hurt->hitstatus == gmHitCollision_HitStatus_Normal)    &&
         (func_ovl2_800E2CC0(fp, &damage) != 0)
     )
     {
@@ -2255,8 +2255,8 @@ void func_ovl2_800E3418(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Fighter_Str
 
             ftHitCollisionLogIndex++;
         }
-        func_ovl2_800EA98C(ip->port_id, fp->port_id, damage);
-        func_ovl2_800EA614(ip->port_id, fp->port_id, it_hit->attack_id, it_hit->flags_0x4A.halfword);
+        ftCommon_AttackUpdateMatchStats(ip->port_id, fp->port_id, damage);
+        ftCommon_AttackAddStaleQueue(ip->port_id, fp->port_id, it_hit->attack_id, it_hit->motion_count);
     }
     func_800269C0(it_hit->hit_sfx);
 }
@@ -2382,8 +2382,8 @@ void func_ovl2_800E3860(Article_Struct *ap, Article_Hit *at_hit, Fighter_Struct 
     {
         ap->reflect_gobj = fighter_gobj;
 
-        ap->unk_0x28C = fp->flags_lw;
-        ap->unk_0x28E.halfword = fp->unk_0x290.halfword;
+        ap->reflect_stat_flags = fp->stat_flags;
+        ap->reflect_stat_count = fp->stat_count;
 
         fp->lr_reflect = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(ap->article_gobj)->translate.x) ? RIGHT : LEFT;
     }
@@ -2408,7 +2408,7 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
             at_hit->update_state = gmHitCollision_UpdateState_Disable;
             ap->hit_victim_damage = 1;
 
-            func_ovl2_800EA8B0(fp, ATSTAR_INVINCIBLE_TIME);
+            ftCommon_ApplyStarInvincibleTimer(fp, ATSTAR_INVINCIBLE_TIME);
             ftSpecialItem_BGMSetPlay(0x2E);
             func_800269C0(0x36U);
 
@@ -2451,10 +2451,10 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
         }
         if 
         (
-            (fp->itemstat_hitstatus == gmHitCollision_HitStatus_Normal)      &&
             (fp->special_hitstatus == gmHitCollision_HitStatus_Normal) &&
-            (fp->hitstatus == gmHitCollision_HitStatus_Normal)     &&
-            (ft_hurt->hitstatus == gmHitCollision_HitStatus_Normal)&&
+            (fp->star_hitstatus == gmHitCollision_HitStatus_Normal)    &&
+            (fp->hitstatus == gmHitCollision_HitStatus_Normal)         &&
+            (ft_hurt->hitstatus == gmHitCollision_HitStatus_Normal)    &&
             (func_ovl2_800E2CC0(fp, &damage) != 0)
         )
         {
@@ -2472,8 +2472,8 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
 
                 ftHitCollisionLogIndex++;
             }
-            func_ovl2_800EA98C(ap->port_id, fp->port_id, damage_again);
-            func_ovl2_800EA614(ap->port_id, fp->port_id, at_hit->attack_id, at_hit->flags_0x4E.halfword);
+            ftCommon_AttackUpdateMatchStats(ap->port_id, fp->port_id, damage_again);
+            ftCommon_AttackAddStaleQueue(ap->port_id, fp->port_id, at_hit->attack_id, at_hit->stat_count);
         }
         func_800269C0(at_hit->hit_sfx);
     }
@@ -2505,7 +2505,7 @@ void func_ovl2_800E3CAC(GObj *special_gobj, GObj *fighter_gobj, Fighter_Struct *
     case 1:
         if (temp_v0 != 0)
         {
-            func_ovl2_800EA98C(ArticleGetStruct(special_gobj)->damage_port, fp->port_id, damage);
+            ftCommon_AttackUpdateMatchStats(ArticleGetStruct(special_gobj)->damage_port, fp->port_id, damage);
         }
         break;
 
@@ -2743,7 +2743,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
         this_fp->damage_player_number = hitlog->attacker_player_number;
 
-        func_ovl2_800EAA2C(this_fp, hitlog->attacker_port_id, hitlog->hit_source, attacker_fp->ft_kind, attacker_fp->flags_lw.halfword & ~0x400, attacker_fp->unk_0x290.halfword);
+        ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, attacker_fp->ft_kind, attacker_fp->stat_flags.halfword & ~0x400, attacker_fp->stat_count);
 
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
         this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
@@ -2773,13 +2773,13 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         if (this_fp->port_id == hitlog->attacker_port_id)
         {
             this_fp->damage_player_number = 0;
-            func_ovl2_800EAA2C(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ip->it_kind, 0, 0);
+            ftCommon_Update1PGameDamageStats(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ip->it_kind, 0, 0);
         }
         else
         {
             this_fp->damage_player_number = hitlog->attacker_player_number;
 
-            func_ovl2_800EAA2C(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ip->it_kind, it_hit->flags_0x4C.halfword, it_hit->flags_0x4E.halfword);
+            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ip->it_kind, it_hit->stat_flags.halfword, it_hit->stat_count);
         }
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
         this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
@@ -2809,12 +2809,12 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         {
             this_fp->damage_player_number = 0;
 
-            func_ovl2_800EAA2C(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ap->at_kind, 0, 0);
+            ftCommon_Update1PGameDamageStats(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ap->at_kind, 0, 0);
         }
         else
         {
             this_fp->damage_player_number = hitlog->attacker_player_number;
-            func_ovl2_800EAA2C(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ap->at_kind, at_hit->flags_hi.halfword, at_hit->flags_lw.halfword);
+            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ap->at_kind, at_hit->stat_flags.halfword, at_hit->stat_count);
         }
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
         this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
@@ -2839,7 +2839,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             {
                 this_fp->damage_port_id = GMMATCH_PLAYERS_MAX;
             }
-            func_ovl2_800EAA2C(this_fp, this_fp->damage_port_id, hitlog->hit_source, gr_hit->env_kind, 0, 0);
+            ftCommon_Update1PGameDamageStats(this_fp, this_fp->damage_port_id, hitlog->hit_source, gr_hit->env_kind, 0, 0);
             break;
 
         case 1:
@@ -2847,14 +2847,14 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
             this_fp->damage_player_number = ap->damage_player_number;
 
-            func_ovl2_800EAA2C(this_fp, ap->damage_port, hitlog->hit_source, gr_hit->env_kind, 0, 0);
+            ftCommon_Update1PGameDamageStats(this_fp, ap->damage_port, hitlog->hit_source, gr_hit->env_kind, 0, 0);
 
             break;
 
         default:
             this_fp->damage_player_number = 0;
 
-            func_ovl2_800EAA2C(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, gr_hit->env_kind, 0, 0);
+            ftCommon_Update1PGameDamageStats(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, gr_hit->env_kind, 0, 0);
             break;
         }
         this_fp->damage_joint_index = 0;
@@ -3051,7 +3051,7 @@ void func_ovl2_800E4870(GObj *this_gobj)
                                 }
                             }
                         }
-                        if ((this_fp->itemstat_hitstatus != gmHitCollision_HitStatus_Intangible) && (this_fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (this_fp->hitstatus != gmHitCollision_HitStatus_Intangible))
+                        if ((this_fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (this_fp->star_hitstatus != gmHitCollision_HitStatus_Intangible) && (this_fp->hitstatus != gmHitCollision_HitStatus_Intangible))
                         {
                             for (i = 0; i < ARRAY_COUNT(other_fp->fighter_hit); i++)
                             {
@@ -3239,7 +3239,7 @@ void func_ovl2_800E4ED4(GObj *fighter_gobj)
                                 }
                             }
                         }
-                        if ((fp->itemstat_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->hitstatus != gmHitCollision_HitStatus_Intangible))
+                        if ((fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->star_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->hitstatus != gmHitCollision_HitStatus_Intangible))
                         {
                             for (i = 0; i < it_hit->hitbox_count; i++)
                             {
@@ -3411,7 +3411,7 @@ void func_ovl2_800E55DC(GObj *fighter_gobj)
                                 }
                             }
                         }
-                        if ((fp->itemstat_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->hitstatus != gmHitCollision_HitStatus_Intangible))
+                        if ((fp->special_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->star_hitstatus != gmHitCollision_HitStatus_Intangible) && (fp->hitstatus != gmHitCollision_HitStatus_Intangible))
                         {
                             for (i = 0; i < at_hit->hitbox_count; i++)
                             {
@@ -3559,7 +3559,7 @@ void func_ovl2_800E5E58(GObj *this_gobj)
 
         if ((other_fp->capture_flags & this_fp->catch_flags)) goto next_gobj;
 
-        if ((other_fp->itemstat_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->special_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->hitstatus != gmHitCollision_HitStatus_Normal)) goto next_gobj;
+        if ((other_fp->special_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->star_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->hitstatus != gmHitCollision_HitStatus_Normal)) goto next_gobj;
 
         for (i = 0; i < ARRAY_COUNT(this_fp->fighter_hit) ^ 0; i++) // XOR 0 ???
         {
@@ -3709,7 +3709,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         {
             fp->damage_knockback = 0;
         }
-        ftCommon_DamageUpdateStats(fp, fp->damage_taken_recent);
+        ftCommon_DamageUpdateCheckDropItem(fp, fp->damage_taken_recent);
 
         if (fp->proc_trap != NULL)
         {
@@ -3787,7 +3787,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         }
         damage = fp->attack_damage;
 
-        if (fp->flags_lw.flags_0x3FF == 0x2B)
+        if (fp->stat_flags.attack_group_id == 0x2B)
         {
             func_ovl2_800E806C(fp, 10, 0);
         }
@@ -4241,7 +4241,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     status_struct = NULL;
     unk_callback = NULL;
 
-    status_flags = fp->flags_lw;
+    status_flags = fp->stat_flags;
 
     if (fp->x191_flag_b0)
     {
@@ -4432,13 +4432,13 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     {
         if ((status_struct[status_struct_id].flags_h.flags_hi_0x3F == 0) || (status_struct[status_struct_id].flags_h.flags_hi_0x3F != fp->attack_id))
         {
-            func_ovl2_800EA5E8(fp, status_struct[status_struct_id].flags_h.flags_hi_0x3F);
+            ftCommon_MotionCountIncSetID(fp, status_struct[status_struct_id].flags_h.flags_hi_0x3F);
         }
         attack_flags = status_desc->flags_l;
 
-        if ((attack_flags.flags_0x3FF == 0) || (attack_flags.flags_0x3FF != fp->flags_lw.flags_0x3FF))
+        if ((attack_flags.attack_group_id == 0) || (attack_flags.attack_group_id != fp->stat_flags.attack_group_id))
         {
-            func_ovl2_800EA778(fp, status_struct[status_struct_id].flags_l.halfword);
+            ftCommon_StatUpdateCountIncSetFlags(fp, status_struct[status_struct_id].flags_l.halfword);
         }
     }
     if (fp->proc_status != NULL)
@@ -4446,7 +4446,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
         fp->proc_status(fighter_gobj);
         fp->proc_status = NULL;
     }
-    func_ovl2_800EA7B0(fp, status_flags.halfword);
+    ftCommon_Update1PGameAttackStats(fp, status_flags.halfword);
 
     if (status_struct != NULL)
     {

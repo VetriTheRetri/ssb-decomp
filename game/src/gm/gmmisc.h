@@ -130,13 +130,13 @@ typedef union gmAttackFlags
 {
     struct
     {
-        u16 flags_0x8000 : 1;
-        u16 flags_0x4000 : 1;
+        u16 is_ground_or_air0 : 1;
+        u16 is_special_attack0 : 1;
         u16 flags_0x2000 : 1;
-        u16 flags_0x1000 : 1;
-        u16 flags_0x800 : 1;
-        u16 flags_0x400 : 1;
-        u16 flags_0x3FF : 10;
+        u16 is_smash_attack : 1;
+        u16 is_ground_or_air : 1;
+        u16 is_special_attack : 1;
+        u16 attack_group_id : 10;
     };
     u16 halfword;
 

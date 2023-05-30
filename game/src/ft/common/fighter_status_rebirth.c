@@ -160,7 +160,7 @@ void func_ovl3_8013D358(GObj *fighter_gobj)
 
     if (fp->status_vars.common.rebirth.halo_despawn_wait == 0)
     {
-        func_ovl2_800EA8EC(fp, FTCOMMON_REBIRTH_INVINCIBLE_FRAMES);
+        ftCommon_ApplyInvincibleTimer(fp, FTCOMMON_REBIRTH_INVINCIBLE_FRAMES);
         func_ovl3_8013F9E0(fighter_gobj);
     }
 }
@@ -171,7 +171,7 @@ void func_ovl3_8013D3A4(GObj *fighter_gobj)
 
     if (ftStatus_CheckInterruptAll(fighter_gobj))
     {
-        func_ovl2_800EA8EC(fp, FTCOMMON_REBIRTH_INVINCIBLE_FRAMES);
+        ftCommon_ApplyInvincibleTimer(fp, FTCOMMON_REBIRTH_INVINCIBLE_FRAMES);
     }
 }
 

@@ -39,9 +39,9 @@ glabel D_ovl2_80130D8C
     .space 4
 glabel gmMatchInfo_PlayerCount
     .space 4
-glabel D_ovl2_80130D94
+glabel Entity_Global_MotionCount
     .space 2
-glabel D_ovl2_80130D96
+glabel Entity_Global_StatUpdateCount
     .space 2
 glabel D_ovl2_80130D98
     .space 4

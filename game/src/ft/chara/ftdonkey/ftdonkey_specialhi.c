@@ -80,7 +80,7 @@ void func_ovl3_8015B8E8(GObj *fighter_gobj, bool32 stale_unk)
 
     if (stale_unk == FALSE)
     {
-        fp->flags_lw.flags_0x800 = FALSE;
+        fp->stat_flags.is_ground_or_air = ground;
     }
 }
 

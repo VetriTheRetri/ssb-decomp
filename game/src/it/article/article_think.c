@@ -2,8 +2,6 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
-#include <stdarg.h> // Wait and see...
-
 void func_ovl3_80172310(GObj *article_gobj)
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
@@ -142,24 +140,16 @@ void func_ovl3_801727BC(GObj *article_gobj)
 s32 func_ovl3_801727F4(Article_Struct *ap)
 {
     s32 damage;
-    f32 f;
 
     if (ap->x2CF_flag_b2)
     {
-        f32 mag = (vec3f_mag(&ap->phys_info.vel) * 0.1F); // Wat
+        f32 mag = vec3f_mag(&ap->phys_info.vel) * 0.1F;
 
-        damage = ap->article_hit.stale * (ap->article_hit.damage + mag); // Wat
+        damage = (ap->article_hit.damage + mag) * ap->article_hit.stale;
     }
-    else
-    {
-        damage = ap->article_hit.damage;
-    }
+    else damage = ap->article_hit.damage;
 
-    f = damage; // Wat!
-
-    f *= ap->article_hit.throw_mul; // WAT!
-
-    return (ap->article_hit.throw_mul * damage) + 0.999F; // WAT!!! (It doesn't match otherwise???)
+    return (damage * ap->article_hit.throw_mul) + 0.999F;
 }
 
 // 0x80172890
@@ -198,14 +188,13 @@ void func_ovl3_801728D4(GObj *article_gobj)
     func_80009A84(article_gobj);
 }
 
-void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alright interesting... Revelation from 0x80186024
+void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flag1, u16 flag2) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2
 {
     Article_Struct *ap = ArticleGetStruct(article_gobj);
     GObj *fighter_gobj = ap->owner_gobj;
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
     s32 joint_index;
-    va_list va;
 
     func_ovl0_800C9424(DObjGetStruct(article_gobj));
 
@@ -236,16 +225,8 @@ void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, ...) // Alrig
 
     ap->article_hit.stale = stale;
 
-    va_start(va, stale);
-
-    // Probably fake but WTF
-    va++;
-    va++;
-
-    ap->article_hit.flags_hi = va_arg(va, gmAttackFlags); // WHAT
-    ap->article_hit.flags_lw.halfword = va_arg(va, u16);
-
-    va_end(va);
+    ap->article_hit.stat_flags = *(gmAttackFlags*)&flag1;
+    ap->article_hit.stat_count = flag2;
 
     ftCommon_GetHammerSetBGM(fighter_gobj);
     func_ovl3_8017275C(article_gobj);
@@ -264,7 +245,7 @@ void func_ovl3_80172AEC(GObj *article_gobj, Vec3f *vel, f32 stale)
     {
         cb_drop(article_gobj);
     }
-    func_ovl3_80172984(article_gobj, vel, stale, 0x38U, fp->unk_0x290.halfword);
+    func_ovl3_80172984(article_gobj, vel, stale, 0x38U, fp->stat_count);
 
     func_800269C0(ap->drop_sfx);
 }
@@ -295,7 +276,7 @@ void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_sma
     {
         cb_throw(article_gobj);
     }
-    func_ovl3_80172984(article_gobj, vel, stale, fp->flags_lw.halfword, fp->unk_0x290.halfword);
+    func_ovl3_80172984(article_gobj, vel, stale, fp->stat_flags.halfword, fp->stat_count);
 
     func_ovl2_8010066C(&DObjGetStruct(article_gobj)->translate, 1.0F);
 
@@ -418,12 +399,12 @@ void atCommon_UpdateArticleStatus(GObj *article_gobj, ArticleStatusDesc *p_desc,
 
     ap->x2CF_flag_b2 = FALSE;
 
-    ap->article_hit.flags_hi.flags_0x3FF = 0x39U;
-    ap->article_hit.flags_hi.flags_0x1000 =
-    ap->article_hit.flags_hi.flags_0x800 =
-    ap->article_hit.flags_hi.flags_0x400 = FALSE;
+    ap->article_hit.stat_flags.attack_group_id = 0x39U;
+    ap->article_hit.stat_flags.is_smash_attack =
+    ap->article_hit.stat_flags.is_ground_or_air =
+    ap->article_hit.stat_flags.is_special_attack = FALSE;
 
-    ap->article_hit.flags_lw.halfword = func_ovl2_800EA74C();
+    ap->article_hit.stat_count = gmCommon_StatUpdateCountInc();
 }
 
 // 0x80172F98
@@ -508,7 +489,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
     {
         index = func_ovl3_80173090(&D_ovl3_8018D048);
 
-        if (index < 20)
+        if (index <= At_Kind_CommonEnd)
         {
             vel.x = 0.0F;
             vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_File_Data->spawn_vel_y[index])); // Linker thing

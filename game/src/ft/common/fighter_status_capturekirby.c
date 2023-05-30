@@ -406,7 +406,7 @@ void func_ovl3_8014C424(GObj *fighter_gobj)
         func_ovl3_8014ADB0(fighter_gobj);
         ftCommon_SetCaptureFlags(this_fp, 0U);
         ftCommon_SetCaptureFlags(capture_fp, 0U);
-        func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->flags_lw.halfword, capture_fp->unk_0x290.halfword);
+        ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
 
         this_fp->capture_gobj = NULL;
         this_fp->catch_gobj = NULL;

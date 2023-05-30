@@ -2882,7 +2882,7 @@ void ftMapCollide_SetGround(Fighter_Struct *fp)
 
     fp->jumps_used = 0;
 
-    fp->flags_lw.flags_0x800 = FALSE; // Ground/Air bool?
+    fp->stat_flags.is_ground_or_air = ground; // Ground/Air bool?
 }
 
 void ftMapCollide_SetAir(Fighter_Struct *fp)

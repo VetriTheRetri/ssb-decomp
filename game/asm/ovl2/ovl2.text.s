@@ -1121,12 +1121,12 @@ glabel func_ovl2_800D7194
   /* 052C48 800D7448 ADC00008 */        sw $zero, 8($t6)
   /* 052C4C 800D744C 3C018013 */       lui $at, %hi(gmMatchInfo_PlayerCount)
   /* 052C50 800D7450 AC220D90 */        sw $v0, %lo(gmMatchInfo_PlayerCount)($at)
-  /* 052C54 800D7454 3C018013 */       lui $at, %hi(D_ovl2_80130D94)
-  /* 052C58 800D7458 A4220D94 */        sh $v0, %lo(D_ovl2_80130D94)($at)
+  /* 052C54 800D7454 3C018013 */       lui $at, %hi(Entity_Global_MotionCount)
+  /* 052C58 800D7458 A4220D94 */        sh $v0, %lo(Entity_Global_MotionCount)($at)
   /* 052C5C 800D745C 3C040000 */       lui $a0, %hi(D_NF_000000A3)
-  /* 052C60 800D7460 3C018013 */       lui $at, %hi(D_ovl2_80130D96)
+  /* 052C60 800D7460 3C018013 */       lui $at, %hi(Entity_Global_StatUpdateCount)
   /* 052C64 800D7464 248400A3 */     addiu $a0, $a0, %lo(D_NF_000000A3)
-  /* 052C68 800D7468 A4220D96 */        sh $v0, %lo(D_ovl2_80130D96)($at)
+  /* 052C68 800D7468 A4220D96 */        sh $v0, %lo(Entity_Global_StatUpdateCount)($at)
   /* 052C6C 800D746C AFA40020 */        sw $a0, 0x20($sp)
   /* 052C70 800D7470 AFAA0038 */        sw $t2, 0x38($sp)
   /* 052C74 800D7474 0C0336F4 */       jal rldm_bytes_needed_to_load
@@ -14175,14 +14175,14 @@ glabel func_ovl2_800E2D44
   .L800E2E68:
   /* 05E668 800E2E68 9205000D */       lbu $a1, 0xd($s0)
   /* 05E66C 800E2E6C AFA40050 */        sw $a0, 0x50($sp)
-  /* 05E670 800E2E70 0C03AA63 */       jal func_ovl2_800EA98C
+  /* 05E670 800E2E70 0C03AA63 */       jal ftCommon_AttackUpdateMatchStats
   /* 05E674 800E2E74 8FA60054 */        lw $a2, 0x54($sp)
   /* 05E678 800E2E78 8E46003C */        lw $a2, 0x3c($s2)
   /* 05E67C 800E2E7C 8FA40050 */        lw $a0, 0x50($sp)
   /* 05E680 800E2E80 9205000D */       lbu $a1, 0xd($s0)
   /* 05E684 800E2E84 000632C0 */       sll $a2, $a2, 0xb
   /* 05E688 800E2E88 00063682 */       srl $a2, $a2, 0x1a
-  /* 05E68C 800E2E8C 0C03A985 */       jal func_ovl2_800EA614
+  /* 05E68C 800E2E8C 0C03A985 */       jal ftCommon_AttackAddStaleQueue
   /* 05E690 800E2E90 96470040 */       lhu $a3, 0x40($s2)
   /* 05E694 800E2E94 10000013 */         b .L800E2EE4
   /* 05E698 800E2E98 02202025 */        or $a0, $s1, $zero
@@ -14665,14 +14665,14 @@ glabel func_ovl2_800E3418
   .L800E3570:
   /* 05ED70 800E3570 92040011 */       lbu $a0, 0x11($s0)
   /* 05ED74 800E3574 9245000D */       lbu $a1, 0xd($s2)
-  /* 05ED78 800E3578 0C03AA63 */       jal func_ovl2_800EA98C
+  /* 05ED78 800E3578 0C03AA63 */       jal ftCommon_AttackUpdateMatchStats
   /* 05ED7C 800E357C 8FA60040 */        lw $a2, 0x40($sp)
   /* 05ED80 800E3580 8E260048 */        lw $a2, 0x48($s1)
   /* 05ED84 800E3584 92040011 */       lbu $a0, 0x11($s0)
   /* 05ED88 800E3588 9245000D */       lbu $a1, 0xd($s2)
   /* 05ED8C 800E358C 00063240 */       sll $a2, $a2, 9
   /* 05ED90 800E3590 00063682 */       srl $a2, $a2, 0x1a
-  /* 05ED94 800E3594 0C03A985 */       jal func_ovl2_800EA614
+  /* 05ED94 800E3594 0C03A985 */       jal ftCommon_AttackAddStaleQueue
   /* 05ED98 800E3598 9627004A */       lhu $a3, 0x4a($s1)
   .L800E359C:
   /* 05ED9C 800E359C 0C009A70 */       jal func_800269C0
@@ -15000,7 +15000,7 @@ glabel func_ovl2_800E39B0
   .L800E3A3C:
   /* 05F23C 800E3A3C AD000000 */        sw $zero, ($t0)
   /* 05F240 800E3A40 AE020264 */        sw $v0, 0x264($s0)
-  /* 05F244 800E3A44 0C03AA2C */       jal func_ovl2_800EA8B0
+  /* 05F244 800E3A44 0C03AA2C */       jal ftCommon_ApplyStarInvincibleTimer
   /* 05F248 800E3A48 8FA4004C */        lw $a0, 0x4c($sp)
   /* 05F24C 800E3A4C 0C039EBF */       jal ftSpecialItem_BGMSetPlay
   /* 05F250 800E3A50 2404002E */     addiu $a0, $zero, 0x2e
@@ -15146,7 +15146,7 @@ glabel func_ovl2_800E39B0
   /* 05F454 800E3C54 8FAB004C */        lw $t3, 0x4c($sp)
   /* 05F458 800E3C58 92040015 */       lbu $a0, 0x15($s0)
   /* 05F45C 800E3C5C 8FA60038 */        lw $a2, 0x38($sp)
-  /* 05F460 800E3C60 0C03AA63 */       jal func_ovl2_800EA98C
+  /* 05F460 800E3C60 0C03AA63 */       jal ftCommon_AttackUpdateMatchStats
   /* 05F464 800E3C64 9165000D */       lbu $a1, 0xd($t3)
   /* 05F468 800E3C68 8FA80044 */        lw $t0, 0x44($sp)
   /* 05F46C 800E3C6C 8FAD004C */        lw $t5, 0x4c($sp)
@@ -15155,7 +15155,7 @@ glabel func_ovl2_800E39B0
   /* 05F478 800E3C78 9507004E */       lhu $a3, 0x4e($t0)
   /* 05F47C 800E3C7C 91A5000D */       lbu $a1, 0xd($t5)
   /* 05F480 800E3C80 000631C0 */       sll $a2, $a2, 7
-  /* 05F484 800E3C84 0C03A985 */       jal func_ovl2_800EA614
+  /* 05F484 800E3C84 0C03A985 */       jal ftCommon_AttackAddStaleQueue
   /* 05F488 800E3C88 00063682 */       srl $a2, $a2, 0x1a
   /* 05F48C 800E3C8C 8FA80044 */        lw $t0, 0x44($sp)
   .L800E3C90:
@@ -15228,7 +15228,7 @@ glabel func_ovl2_800E3CAC
   /* 05F57C 800E3D7C 8DCF0084 */        lw $t7, 0x84($t6)
   /* 05F580 800E3D80 90E5000D */       lbu $a1, 0xd($a3)
   /* 05F584 800E3D84 8FA60024 */        lw $a2, 0x24($sp)
-  /* 05F588 800E3D88 0C03AA63 */       jal func_ovl2_800EA98C
+  /* 05F588 800E3D88 0C03AA63 */       jal ftCommon_AttackUpdateMatchStats
   /* 05F58C 800E3D8C 91E402AD */       lbu $a0, 0x2ad($t7)
   /* 05F590 800E3D90 1000000C */         b .L800E3DC4
   /* 05F594 800E3D94 8FBF0014 */        lw $ra, 0x14($sp)
@@ -15727,7 +15727,7 @@ glabel func_ovl2_800E3EBC
   /* 05FC8C 800E448C 03214824 */       and $t1, $t9, $at
   /* 05FC90 800E4490 AFA90010 */        sw $t1, 0x10($sp)
   /* 05FC94 800E4494 962A0290 */       lhu $t2, 0x290($s1)
-  /* 05FC98 800E4498 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 05FC98 800E4498 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 05FC9C 800E449C AFAA0014 */        sw $t2, 0x14($sp)
   /* 05FCA0 800E44A0 8E4B0010 */        lw $t3, 0x10($s2) # ftHitCollisionLogTable + 16
   /* 05FCA4 800E44A4 8EA207F8 */        lw $v0, 0x7f8($s5)
@@ -15803,7 +15803,7 @@ glabel func_ovl2_800E3EBC
   /* 05FDA4 800E45A4 8E87000C */        lw $a3, 0xc($s4)
   /* 05FDA8 800E45A8 8E460000 */        lw $a2, ($s2) # ftHitCollisionLogTable + 0
   /* 05FDAC 800E45AC AFA00014 */        sw $zero, 0x14($sp)
-  /* 05FDB0 800E45B0 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 05FDB0 800E45B0 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 05FDB4 800E45B4 AFA00010 */        sw $zero, 0x10($sp)
   /* 05FDB8 800E45B8 1000000D */         b .L800E45F0
   /* 05FDBC 800E45BC 8E580010 */        lw $t8, 0x10($s2) # ftHitCollisionLogTable + 16
@@ -15817,7 +15817,7 @@ glabel func_ovl2_800E3EBC
   /* 05FDD8 800E45D8 92450014 */       lbu $a1, 0x14($s2) # ftHitCollisionLogTable + 20
   /* 05FDDC 800E45DC AFAE0010 */        sw $t6, 0x10($sp)
   /* 05FDE0 800E45E0 962F004E */       lhu $t7, 0x4e($s1)
-  /* 05FDE4 800E45E4 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 05FDE4 800E45E4 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 05FDE8 800E45E8 AFAF0014 */        sw $t7, 0x14($sp)
   /* 05FDEC 800E45EC 8E580010 */        lw $t8, 0x10($s2) # ftHitCollisionLogTable + 16
   .L800E45F0:
@@ -15890,7 +15890,7 @@ glabel func_ovl2_800E3EBC
   /* 05FEE0 800E46E0 8E87000C */        lw $a3, 0xc($s4)
   /* 05FEE4 800E46E4 8E460000 */        lw $a2, ($s2) # ftHitCollisionLogTable + 0
   /* 05FEE8 800E46E8 AFA00014 */        sw $zero, 0x14($sp)
-  /* 05FEEC 800E46EC 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 05FEEC 800E46EC 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 05FEF0 800E46F0 AFA00010 */        sw $zero, 0x10($sp)
   /* 05FEF4 800E46F4 1000000D */         b .L800E472C
   /* 05FEF8 800E46F8 8E4C0010 */        lw $t4, 0x10($s2) # ftHitCollisionLogTable + 16
@@ -15904,7 +15904,7 @@ glabel func_ovl2_800E3EBC
   /* 05FF14 800E4714 92450014 */       lbu $a1, 0x14($s2) # ftHitCollisionLogTable + 20
   /* 05FF18 800E4718 AFAA0010 */        sw $t2, 0x10($sp)
   /* 05FF1C 800E471C 962B0052 */       lhu $t3, 0x52($s1)
-  /* 05FF20 800E4720 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 05FF20 800E4720 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 05FF24 800E4724 AFAB0014 */        sw $t3, 0x14($sp)
   /* 05FF28 800E4728 8E4C0010 */        lw $t4, 0x10($s2) # ftHitCollisionLogTable + 16
   .L800E472C:
@@ -15946,7 +15946,7 @@ glabel func_ovl2_800E3EBC
   .L800E47B0:
   /* 05FFB0 800E47B0 8C470000 */        lw $a3, ($v0)
   /* 05FFB4 800E47B4 AFA00014 */        sw $zero, 0x14($sp)
-  /* 05FFB8 800E47B8 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 05FFB8 800E47B8 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 05FFBC 800E47BC AFA00010 */        sw $zero, 0x10($sp)
   /* 05FFC0 800E47C0 10000014 */         b .L800E4814
   /* 05FFC4 800E47C4 AEA00804 */        sw $zero, 0x804($s5)
@@ -15959,7 +15959,7 @@ glabel func_ovl2_800E3EBC
   /* 05FFDC 800E47DC 8E460000 */        lw $a2, ($s2) # ftHitCollisionLogTable + 0
   /* 05FFE0 800E47E0 928502AD */       lbu $a1, 0x2ad($s4)
   /* 05FFE4 800E47E4 AFA00014 */        sw $zero, 0x14($sp)
-  /* 05FFE8 800E47E8 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 05FFE8 800E47E8 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 05FFEC 800E47EC AFA00010 */        sw $zero, 0x10($sp)
   /* 05FFF0 800E47F0 10000008 */         b .L800E4814
   /* 05FFF4 800E47F4 AEA00804 */        sw $zero, 0x804($s5)
@@ -15968,7 +15968,7 @@ glabel func_ovl2_800E3EBC
   /* 05FFFC 800E47FC 8C470000 */        lw $a3, ($v0)
   /* 060000 800E4800 8E460000 */        lw $a2, ($s2) # ftHitCollisionLogTable + 0
   /* 060004 800E4804 AFA00014 */        sw $zero, 0x14($sp)
-  /* 060008 800E4808 0C03AA8B */       jal func_ovl2_800EAA2C
+  /* 060008 800E4808 0C03AA8B */       jal ftCommon_Update1PGameDamageStats
   /* 06000C 800E480C AFA00010 */        sw $zero, 0x10($sp)
   /* 060010 800E4810 AEA00804 */        sw $zero, 0x804($s5)
   .L800E4814:
@@ -17929,7 +17929,7 @@ glabel func_ovl2_800E61EC
   /* 061B64 800E6364 00000000 */       nop 
   /* 061B68 800E6368 E60207E0 */      swc1 $f2, 0x7e0($s0)
   .L800E636C:
-  /* 061B6C 800E636C 0C03A892 */       jal ftCommon_DamageUpdateStats
+  /* 061B6C 800E636C 0C03A892 */       jal ftCommon_DamageUpdateCheckDropItem
   /* 061B70 800E6370 8E0507F0 */        lw $a1, 0x7f0($s0)
   /* 061B74 800E6374 8E0209F0 */        lw $v0, 0x9f0($s0)
   /* 061B78 800E6378 50400004 */      beql $v0, $zero, .L800E638C
@@ -19136,7 +19136,7 @@ glabel ftStatus_Update
   /* 062C60 800E7460 51C50005 */      beql $t6, $a1, .L800E7478
   /* 062C64 800E7464 8FB80080 */        lw $t8, 0x80($sp)
   .L800E7468:
-  /* 062C68 800E7468 0C03A97A */       jal func_ovl2_800EA5E8
+  /* 062C68 800E7468 0C03A97A */       jal ftCommon_MotionCountIncSetID
   /* 062C6C 800E746C AFA30028 */        sw $v1, 0x28($sp)
   /* 062C70 800E7470 8FA30028 */        lw $v1, 0x28($sp)
   /* 062C74 800E7474 8FB80080 */        lw $t8, 0x80($sp)
@@ -19155,7 +19155,7 @@ glabel ftStatus_Update
   /* 062CA4 800E74A4 51620004 */      beql $t3, $v0, .L800E74B8
   /* 062CA8 800E74A8 8E220A0C */        lw $v0, 0xa0c($s1)
   .L800E74AC:
-  /* 062CAC 800E74AC 0C03A9DE */       jal func_ovl2_800EA778
+  /* 062CAC 800E74AC 0C03A9DE */       jal ftCommon_StatUpdateCountIncSetFlags
   /* 062CB0 800E74B0 96050002 */       lhu $a1, 2($s0)
   .L800E74B4:
   /* 062CB4 800E74B4 8E220A0C */        lw $v0, 0xa0c($s1)
@@ -19167,7 +19167,7 @@ glabel ftStatus_Update
   /* 062CC8 800E74C8 AE200A0C */        sw $zero, 0xa0c($s1)
   /* 062CCC 800E74CC 02202025 */        or $a0, $s1, $zero
   .L800E74D0:
-  /* 062CD0 800E74D0 0C03A9EC */       jal func_ovl2_800EA7B0
+  /* 062CD0 800E74D0 0C03A9EC */       jal ftCommon_Update1PGameAttackStats
   /* 062CD4 800E74D4 97A50064 */       lhu $a1, 0x64($sp)
   /* 062CD8 800E74D8 8FAC0080 */        lw $t4, 0x80($sp)
   /* 062CDC 800E74DC 8FAD0074 */        lw $t5, 0x74($sp)
@@ -22438,7 +22438,7 @@ glabel gmCommon_DamageCalcHitLag
   /* 065A40 800EA240 03E00008 */        jr $ra
   /* 065A44 800EA244 00601025 */        or $v0, $v1, $zero
 
-glabel ftCommon_DamageUpdateStats
+glabel ftCommon_DamageUpdateCheckDropItem
   /* 065A48 800EA248 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 065A4C 800EA24C AFBF0014 */        sw $ra, 0x14($sp)
   /* 065A50 800EA250 9099000D */       lbu $t9, 0xd($a0)
@@ -22686,25 +22686,25 @@ glabel gmCommon_DamageApplyStale
   /* 065DB4 800EA5B4 03E00008 */        jr $ra
   /* 065DB8 800EA5B8 27BD0018 */     addiu $sp, $sp, 0x18
 
-glabel func_ovl2_800EA5BC
-  /* 065DBC 800EA5BC 3C048013 */       lui $a0, %hi(D_ovl2_80130D94)
-  /* 065DC0 800EA5C0 24840D94 */     addiu $a0, $a0, %lo(D_ovl2_80130D94)
-  /* 065DC4 800EA5C4 94830000 */       lhu $v1, ($a0) # D_ovl2_80130D94 + 0
+glabel gmCommon_MotionCountInc
+  /* 065DBC 800EA5BC 3C048013 */       lui $a0, %hi(Entity_Global_MotionCount)
+  /* 065DC0 800EA5C0 24840D94 */     addiu $a0, $a0, %lo(Entity_Global_MotionCount)
+  /* 065DC4 800EA5C4 94830000 */       lhu $v1, ($a0) # Entity_Global_MotionCount + 0
   /* 065DC8 800EA5C8 24180001 */     addiu $t8, $zero, 1
   /* 065DCC 800EA5CC 246E0001 */     addiu $t6, $v1, 1
   /* 065DD0 800EA5D0 31CFFFFF */      andi $t7, $t6, 0xffff
   /* 065DD4 800EA5D4 15E00002 */      bnez $t7, .L800EA5E0
-  /* 065DD8 800EA5D8 A48E0000 */        sh $t6, ($a0) # D_ovl2_80130D94 + 0
-  /* 065DDC 800EA5DC A4980000 */        sh $t8, ($a0) # D_ovl2_80130D94 + 0
+  /* 065DD8 800EA5D8 A48E0000 */        sh $t6, ($a0) # Entity_Global_MotionCount + 0
+  /* 065DDC 800EA5DC A4980000 */        sh $t8, ($a0) # Entity_Global_MotionCount + 0
   .L800EA5E0:
   /* 065DE0 800EA5E0 03E00008 */        jr $ra
   /* 065DE4 800EA5E4 00601025 */        or $v0, $v1, $zero
 
-glabel func_ovl2_800EA5E8
+glabel ftCommon_MotionCountIncSetID
   /* 065DE8 800EA5E8 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 065DEC 800EA5EC AFBF0014 */        sw $ra, 0x14($sp)
   /* 065DF0 800EA5F0 AFA40018 */        sw $a0, 0x18($sp)
-  /* 065DF4 800EA5F4 0C03A96F */       jal func_ovl2_800EA5BC
+  /* 065DF4 800EA5F4 0C03A96F */       jal gmCommon_MotionCountInc
   /* 065DF8 800EA5F8 AC850288 */        sw $a1, 0x288($a0)
   /* 065DFC 800EA5FC 8FAF0018 */        lw $t7, 0x18($sp)
   /* 065E00 800EA600 A5E2028C */        sh $v0, 0x28c($t7)
@@ -22713,7 +22713,7 @@ glabel func_ovl2_800EA5E8
   /* 065E0C 800EA60C 03E00008 */        jr $ra
   /* 065E10 800EA610 00000000 */       nop 
 
-glabel func_ovl2_800EA614
+glabel ftCommon_AttackAddStaleQueue
   /* 065E14 800EA614 27BDFFF8 */     addiu $sp, $sp, -8
   /* 065E18 800EA618 AFB00004 */        sw $s0, 4($sp)
   /* 065E1C 800EA61C 24090004 */     addiu $t1, $zero, 4
@@ -22801,28 +22801,28 @@ glabel func_ovl2_800EA614
   /* 065F44 800EA744 03E00008 */        jr $ra
   /* 065F48 800EA748 27BD0008 */     addiu $sp, $sp, 8
 
-glabel func_ovl2_800EA74C
-  /* 065F4C 800EA74C 3C048013 */       lui $a0, %hi(D_ovl2_80130D96)
-  /* 065F50 800EA750 24840D96 */     addiu $a0, $a0, %lo(D_ovl2_80130D96)
-  /* 065F54 800EA754 94830000 */       lhu $v1, ($a0) # D_ovl2_80130D96 + 0
+glabel gmCommon_StatUpdateCountInc
+  /* 065F4C 800EA74C 3C048013 */       lui $a0, %hi(Entity_Global_StatUpdateCount)
+  /* 065F50 800EA750 24840D96 */     addiu $a0, $a0, %lo(Entity_Global_StatUpdateCount)
+  /* 065F54 800EA754 94830000 */       lhu $v1, ($a0) # Entity_Global_StatUpdateCount + 0
   /* 065F58 800EA758 24180001 */     addiu $t8, $zero, 1
   /* 065F5C 800EA75C 246E0001 */     addiu $t6, $v1, 1
   /* 065F60 800EA760 31CFFFFF */      andi $t7, $t6, 0xffff
   /* 065F64 800EA764 15E00002 */      bnez $t7, .L800EA770
-  /* 065F68 800EA768 A48E0000 */        sh $t6, ($a0) # D_ovl2_80130D96 + 0
-  /* 065F6C 800EA76C A4980000 */        sh $t8, ($a0) # D_ovl2_80130D96 + 0
+  /* 065F68 800EA768 A48E0000 */        sh $t6, ($a0) # Entity_Global_StatUpdateCount + 0
+  /* 065F6C 800EA76C A4980000 */        sh $t8, ($a0) # Entity_Global_StatUpdateCount + 0
   .L800EA770:
   /* 065F70 800EA770 03E00008 */        jr $ra
   /* 065F74 800EA774 00601025 */        or $v0, $v1, $zero
 
-glabel func_ovl2_800EA778
+glabel ftCommon_StatUpdateCountIncSetFlags
   /* 065F78 800EA778 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 065F7C 800EA77C AFBF0014 */        sw $ra, 0x14($sp)
   /* 065F80 800EA780 AFA40018 */        sw $a0, 0x18($sp)
   /* 065F84 800EA784 AFA5001C */        sw $a1, 0x1c($sp)
   /* 065F88 800EA788 27AF001E */     addiu $t7, $sp, 0x1e
   /* 065F8C 800EA78C 95F90000 */       lhu $t9, ($t7)
-  /* 065F90 800EA790 0C03A9D3 */       jal func_ovl2_800EA74C
+  /* 065F90 800EA790 0C03A9D3 */       jal gmCommon_StatUpdateCountInc
   /* 065F94 800EA794 A499028E */        sh $t9, 0x28e($a0)
   /* 065F98 800EA798 8FA80018 */        lw $t0, 0x18($sp)
   /* 065F9C 800EA79C A5020290 */        sh $v0, 0x290($t0)
@@ -22831,7 +22831,7 @@ glabel func_ovl2_800EA778
   /* 065FA8 800EA7A8 03E00008 */        jr $ra
   /* 065FAC 800EA7AC 00000000 */       nop 
 
-glabel func_ovl2_800EA7B0
+glabel ftCommon_Update1PGameAttackStats
   /* 065FB0 800EA7B0 27BDFFF0 */     addiu $sp, $sp, -0x10
   /* 065FB4 800EA7B4 AFA50014 */        sw $a1, 0x14($sp)
   /* 065FB8 800EA7B8 97AE0016 */       lhu $t6, 0x16($sp)
@@ -22858,12 +22858,12 @@ glabel func_ovl2_800EA7B0
   /* 06600C 800EA80C 00000000 */       nop 
   /* 066010 800EA810 11620025 */       beq $t3, $v0, .L800EA8A8
   /* 066014 800EA814 00026080 */       sll $t4, $v0, 2
-  /* 066018 800EA818 3C0D8019 */       lui $t5, %hi(D_ovl65_801936B0)
-  /* 06601C 800EA81C 25AD36B0 */     addiu $t5, $t5, %lo(D_ovl65_801936B0)
+  /* 066018 800EA818 3C0D8019 */       lui $t5, %hi(gmBonusStat_Attacker_AttackGroupIndex_Count)
+  /* 06601C 800EA81C 25AD36B0 */     addiu $t5, $t5, %lo(gmBonusStat_Attacker_AttackGroupIndex_Count)
   /* 066020 800EA820 018D1821 */      addu $v1, $t4, $t5
   /* 066024 800EA824 8C6E0000 */        lw $t6, ($v1)
-  /* 066028 800EA828 3C0A8019 */       lui $t2, %hi(D_ovl65_80193798)
-  /* 06602C 800EA82C 254A3798 */     addiu $t2, $t2, %lo(D_ovl65_80193798)
+  /* 066028 800EA828 3C0A8019 */       lui $t2, %hi(gmBonusStat_Attacker_IsSmashAttack_Count)
+  /* 06602C 800EA82C 254A3798 */     addiu $t2, $t2, %lo(gmBonusStat_Attacker_IsSmashAttack_Count)
   /* 066030 800EA830 25CF0001 */     addiu $t7, $t6, 1
   /* 066034 800EA834 AC6F0000 */        sw $t7, ($v1)
   /* 066038 800EA838 8C98028C */        lw $t8, 0x28c($a0)
@@ -22872,8 +22872,8 @@ glabel func_ovl2_800EA7B0
   /* 066044 800EA844 00084880 */       sll $t1, $t0, 2
   /* 066048 800EA848 012A2821 */      addu $a1, $t1, $t2
   /* 06604C 800EA84C 8CAB0000 */        lw $t3, ($a1)
-  /* 066050 800EA850 3C198019 */       lui $t9, %hi(D_ovl65_801937A0)
-  /* 066054 800EA854 273937A0 */     addiu $t9, $t9, %lo(D_ovl65_801937A0)
+  /* 066050 800EA850 3C198019 */       lui $t9, %hi(gmBonusStat_Attacker_GroundOrAirAttack_Count)
+  /* 066054 800EA854 273937A0 */     addiu $t9, $t9, %lo(gmBonusStat_Attacker_GroundOrAirAttack_Count)
   /* 066058 800EA858 256C0001 */     addiu $t4, $t3, 1
   /* 06605C 800EA85C ACAC0000 */        sw $t4, ($a1)
   /* 066060 800EA860 8C8D028C */        lw $t5, 0x28c($a0)
@@ -22882,8 +22882,8 @@ glabel func_ovl2_800EA7B0
   /* 06606C 800EA86C 000FC080 */       sll $t8, $t7, 2
   /* 066070 800EA870 03193021 */      addu $a2, $t8, $t9
   /* 066074 800EA874 8CC80000 */        lw $t0, ($a2)
-  /* 066078 800EA878 3C0E8019 */       lui $t6, %hi(D_ovl65_801937A8)
-  /* 06607C 800EA87C 25CE37A8 */     addiu $t6, $t6, %lo(D_ovl65_801937A8)
+  /* 066078 800EA878 3C0E8019 */       lui $t6, %hi(gmBonusStat_Attacker_IsSpecialAttack_Count)
+  /* 06607C 800EA87C 25CE37A8 */     addiu $t6, $t6, %lo(gmBonusStat_Attacker_IsSpecialAttack_Count)
   /* 066080 800EA880 25090001 */     addiu $t1, $t0, 1
   /* 066084 800EA884 ACC90000 */        sw $t1, ($a2)
   /* 066088 800EA888 8C8A028C */        lw $t2, 0x28c($a0)
@@ -22898,7 +22898,7 @@ glabel func_ovl2_800EA7B0
   /* 0660A8 800EA8A8 03E00008 */        jr $ra
   /* 0660AC 800EA8AC 27BD0010 */     addiu $sp, $sp, 0x10
 
-glabel func_ovl2_800EA8B0
+glabel ftCommon_ApplyStarInvincibleTimer
   /* 0660B0 800EA8B0 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 0660B4 800EA8B4 AFBF0014 */        sw $ra, 0x14($sp)
   /* 0660B8 800EA8B8 AFA5001C */        sw $a1, 0x1c($sp)
@@ -22915,7 +22915,7 @@ glabel func_ovl2_800EA8B0
   /* 0660E4 800EA8E4 03E00008 */        jr $ra
   /* 0660E8 800EA8E8 00000000 */       nop 
 
-glabel func_ovl2_800EA8EC
+glabel ftCommon_ApplyInvincibleTimer
   /* 0660EC 800EA8EC 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 0660F0 800EA8F0 AFBF0014 */        sw $ra, 0x14($sp)
   /* 0660F4 800EA8F4 8C8E05A4 */        lw $t6, 0x5a4($a0)
@@ -22942,7 +22942,7 @@ glabel func_ovl2_800EA8EC
   /* 066140 800EA940 03E00008 */        jr $ra
   /* 066144 800EA944 00000000 */       nop 
 
-glabel func_ovl2_800EA948
+glabel ftCommon_ApplyIntangibleTimer
   /* 066148 800EA948 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 06614C 800EA94C AFBF0014 */        sw $ra, 0x14($sp)
   /* 066150 800EA950 8C8E05A8 */        lw $t6, 0x5a8($a0)
@@ -22962,7 +22962,7 @@ glabel func_ovl2_800EA948
   /* 066184 800EA984 03E00008 */        jr $ra
   /* 066188 800EA988 00000000 */       nop 
 
-glabel func_ovl2_800EA98C
+glabel ftCommon_AttackUpdateMatchStats
   /* 06618C 800EA98C 24010004 */     addiu $at, $zero, 4
   /* 066190 800EA990 10810024 */       beq $a0, $at, .L800EAA24
   /* 066194 800EA994 00000000 */       nop 
@@ -23005,7 +23005,7 @@ glabel func_ovl2_800EA98C
   /* 066224 800EAA24 03E00008 */        jr $ra
   /* 066228 800EAA28 00000000 */       nop 
 
-glabel func_ovl2_800EAA2C
+glabel ftCommon_Update1PGameDamageStats
   /* 06622C 800EAA2C 948E0810 */       lhu $t6, 0x810($a0)
   /* 066230 800EAA30 AC85080C */        sw $a1, 0x80c($a0)
   /* 066234 800EAA34 AC860820 */        sw $a2, 0x820($a0)
@@ -23038,12 +23038,12 @@ glabel func_ovl2_800EAA2C
   /* 06629C 800EAA9C 00000000 */       nop 
   /* 0662A0 800EAAA0 10400025 */      beqz $v0, .L800EAB38
   /* 0662A4 800EAAA4 00027880 */       sll $t7, $v0, 2
-  /* 0662A8 800EAAA8 3C188019 */       lui $t8, %hi(D_ovl65_801937B0)
-  /* 0662AC 800EAAAC 271837B0 */     addiu $t8, $t8, %lo(D_ovl65_801937B0)
+  /* 0662A8 800EAAA8 3C188019 */       lui $t8, %hi(gmBonusStat_Defender_AttackGroupIndex_Count)
+  /* 0662AC 800EAAAC 271837B0 */     addiu $t8, $t8, %lo(gmBonusStat_Defender_AttackGroupIndex_Count)
   /* 0662B0 800EAAB0 01F81821 */      addu $v1, $t7, $t8
   /* 0662B4 800EAAB4 8C790000 */        lw $t9, ($v1)
-  /* 0662B8 800EAAB8 3C0D8019 */       lui $t5, %hi(D_ovl65_80193898)
-  /* 0662BC 800EAABC 25AD3898 */     addiu $t5, $t5, %lo(D_ovl65_80193898)
+  /* 0662B8 800EAAB8 3C0D8019 */       lui $t5, %hi(gmBonusStat_Defender_IsSmashAttack_Count)
+  /* 0662BC 800EAABC 25AD3898 */     addiu $t5, $t5, %lo(gmBonusStat_Defender_IsSmashAttack_Count)
   /* 0662C0 800EAAC0 27280001 */     addiu $t0, $t9, 1
   /* 0662C4 800EAAC4 AC680000 */        sw $t0, ($v1)
   /* 0662C8 800EAAC8 8C890828 */        lw $t1, 0x828($a0)
@@ -23052,8 +23052,8 @@ glabel func_ovl2_800EAA2C
   /* 0662D4 800EAAD4 000B6080 */       sll $t4, $t3, 2
   /* 0662D8 800EAAD8 018D2821 */      addu $a1, $t4, $t5
   /* 0662DC 800EAADC 8CAE0000 */        lw $t6, ($a1)
-  /* 0662E0 800EAAE0 3C0A8019 */       lui $t2, %hi(D_ovl65_801938A0)
-  /* 0662E4 800EAAE4 254A38A0 */     addiu $t2, $t2, %lo(D_ovl65_801938A0)
+  /* 0662E0 800EAAE0 3C0A8019 */       lui $t2, %hi(gmBonusStat_Defender_GroundOrAirAttack_Count)
+  /* 0662E4 800EAAE4 254A38A0 */     addiu $t2, $t2, %lo(gmBonusStat_Defender_GroundOrAirAttack_Count)
   /* 0662E8 800EAAE8 25CF0001 */     addiu $t7, $t6, 1
   /* 0662EC 800EAAEC ACAF0000 */        sw $t7, ($a1)
   /* 0662F0 800EAAF0 8C980828 */        lw $t8, 0x828($a0)
@@ -23062,8 +23062,8 @@ glabel func_ovl2_800EAA2C
   /* 0662FC 800EAAFC 00084880 */       sll $t1, $t0, 2
   /* 066300 800EAB00 012A3021 */      addu $a2, $t1, $t2
   /* 066304 800EAB04 8CCB0000 */        lw $t3, ($a2)
-  /* 066308 800EAB08 3C198019 */       lui $t9, %hi(D_ovl65_801938A8)
-  /* 06630C 800EAB0C 273938A8 */     addiu $t9, $t9, %lo(D_ovl65_801938A8)
+  /* 066308 800EAB08 3C198019 */       lui $t9, %hi(gmBonusStat_Defender_IsSpecialAttack_Count)
+  /* 06630C 800EAB0C 273938A8 */     addiu $t9, $t9, %lo(gmBonusStat_Defender_IsSpecialAttack_Count)
   /* 066310 800EAB10 256C0001 */     addiu $t4, $t3, 1
   /* 066314 800EAB14 ACCC0000 */        sw $t4, ($a2)
   /* 066318 800EAB18 8C8D0828 */        lw $t5, 0x828($a0)

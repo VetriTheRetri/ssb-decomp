@@ -124,13 +124,13 @@ void func_ovl3_80185710(GObj *article_gobj)
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    flags_hi = ap->article_hit.flags_hi;
-    flags_lw = ap->article_hit.flags_lw.halfword;
+    flags_hi = ap->article_hit.stat_flags;
+    flags_lw = ap->article_hit.stat_count;
 
     atCommon_UpdateArticleStatus(article_gobj, Article_PK_Fire_Status, 0);
 
-    ap->article_hit.flags_hi = flags_hi;
-    ap->article_hit.flags_lw.halfword = flags_lw;
+    ap->article_hit.stat_flags = flags_hi;
+    ap->article_hit.stat_count = flags_lw;
 }
 
 void func_ovl3_8018579C(GObj *article_gobj)
@@ -144,13 +144,13 @@ void func_ovl3_8018579C(GObj *article_gobj)
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    flags_hi = ap->article_hit.flags_hi;
-    flags_lw = ap->article_hit.flags_lw.halfword;
+    flags_hi = ap->article_hit.stat_flags;
+    flags_lw = ap->article_hit.stat_count;
 
     atCommon_UpdateArticleStatus(article_gobj, Article_PK_Fire_Status, 1);
 
-    ap->article_hit.flags_hi = flags_hi;
-    ap->article_hit.flags_lw.halfword = flags_lw;
+    ap->article_hit.stat_flags = flags_hi;
+    ap->article_hit.stat_count = flags_lw;
 }
 
 extern s32 D_ovl2_80131148;
@@ -185,9 +185,9 @@ GObj* func_ovl3_80185824(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
     ap->article_hit.can_rehit = TRUE;
     ap->article_hit.throw_mul = ip->item_hit.stale;
     ap->article_hit.attack_id = ip->item_hit.attack_id;
-    ap->article_hit.flags_0x4E = ip->item_hit.flags_0x4A.halfword;
-    ap->article_hit.flags_hi.halfword = ip->item_hit.flags_0x4C.halfword & U16_MAX;
-    ap->article_hit.flags_lw.halfword = ip->item_hit.flags_0x4E;
+    ap->article_hit.motion_count = ip->item_hit.motion_count;
+    ap->article_hit.stat_flags = ip->item_hit.stat_flags;
+    ap->article_hit.stat_count = ip->item_hit.stat_count;
 
     func_ovl3_80173F78(ap);
     func_ovl3_8016F280(article_gobj);

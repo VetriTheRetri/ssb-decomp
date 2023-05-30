@@ -86,11 +86,11 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->display_state = fp->display_state;
 
-        ip->item_hit.stale = gmCommon_GetStaleMulfp->port_id, fp->attack_id, fp->flags_hi.halfword);
+        ip->item_hit.stale = gmCommon_DamageGetStaleMul(fp->port_id, fp->attack_id, fp->motion_count);
         ip->item_hit.attack_id = fp->attack_id;
-        ip->item_hit.flags_0x4A.halfword = fp->flags_hi.halfword;
-        ip->item_hit.flags_0x4C = fp->flags_lw;
-        ip->item_hit.flags_0x4E.halfword = fp->unk_0x290.halfword;
+        ip->item_hit.motion_count = fp->motion_count;
+        ip->item_hit.stat_flags = fp->stat_flags;
+        ip->item_hit.stat_count = fp->stat_count;
         break;
 
     case ITEM_MASK_SPAWN_ITEM: // Items spawned by other items
@@ -106,9 +106,9 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->item_hit.stale = owner_ip->item_hit.stale;
         ip->item_hit.attack_id = owner_ip->item_hit.attack_id;
-        ip->item_hit.flags_0x4A.halfword = owner_ip->item_hit.flags_0x4A.halfword;
-        ip->item_hit.flags_0x4C = owner_ip->item_hit.flags_0x4C;
-        ip->item_hit.flags_0x4E.halfword = owner_ip->item_hit.flags_0x4E.halfword;
+        ip->item_hit.motion_count = owner_ip->item_hit.motion_count;
+        ip->item_hit.stat_flags = owner_ip->item_hit.stat_flags;
+        ip->item_hit.stat_count = owner_ip->item_hit.stat_count;
         break;
 
     case ITEM_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
@@ -124,9 +124,9 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->item_hit.stale = ap->article_hit.stale;
         ip->item_hit.attack_id = ap->article_hit.attack_id;
-        ip->item_hit.flags_0x4A.halfword = ap->article_hit.flags_0x4E.halfword;
-        ip->item_hit.flags_0x4C = ap->article_hit.flags_lw;
-        ip->item_hit.flags_0x4E.halfword = ap->article_hit.flags_hi.halfword;
+        ip->item_hit.motion_count = ap->article_hit.stat_count;
+        ip->item_hit.stat_flags = ap->article_hit.stat_flags;
+        ip->item_hit.stat_count = ap->article_hit.stat_count;
         break;
 
     default: // Items spawned independently 
@@ -142,10 +142,10 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         ip->item_hit.attack_id = 0;
         ip->item_hit.stale = ITEM_STALE_DEFAULT;
-        ip->item_hit.flags_0x4A.halfword = func_ovl2_800EA5BC();
-        ip->item_hit.flags_0x4C.flags_0x3FF = 0;
-        ip->item_hit.flags_0x4C.flags_0x1000 = ip->item_hit.flags_0x4C.flags_0x800 = ip->item_hit.flags_0x4C.flags_0x400 = FALSE;
-        ip->item_hit.flags_0x4E.halfword = func_ovl2_800EA74C();
+        ip->item_hit.motion_count = gmCommon_MotionCountInc();
+        ip->item_hit.stat_flags.attack_group_id = 0;
+        ip->item_hit.stat_flags.is_smash_attack = ip->item_hit.stat_flags.is_ground_or_air = ip->item_hit.stat_flags.is_special_attack = FALSE;
+        ip->item_hit.stat_count = gmCommon_StatUpdateCountInc();
         break;
     }
     ip->item_hit.update_state = gmHitCollision_UpdateState_New;
@@ -821,8 +821,8 @@ next_check:
         ip->display_state = fp->display_state;
         ip->player_number = fp->player_number;
         ip->handicap = fp->handicap;
-        ip->item_hit.flags_0x4C = ip->unk_0x258;
-        ip->item_hit.flags_0x4E.halfword = ip->unk_0x25A.halfword;
+        ip->item_hit.stat_flags = ip->reflect_stat_flags;
+        ip->item_hit.stat_count = ip->reflect_stat_count;
 
         if (ip->proc_reflector != NULL)
         {

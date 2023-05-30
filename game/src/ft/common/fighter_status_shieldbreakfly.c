@@ -47,7 +47,7 @@ void func_ovl3_80149510(GObj *fighter_gobj)
     }
     else func_ovl2_80101790(&offset);
 
-    func_ovl2_800EAA2C(fp, fp->shield_port_id, 0, 0, 0, 0);
+    ftCommon_Update1PGameDamageStats(fp, fp->shield_port_id, 0, 0, 0, 0);
 
     if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->shield_damage != 0))
     {

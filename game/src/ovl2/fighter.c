@@ -95,17 +95,17 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->damage_port_id = -1;
     fp->unk_ft_0x820 = 0;
     fp->unk_ft_0x824 = 0;
-    fp->unk_0x810 = 0;
+    fp->damage_count = 0;
     fp->unk_ft_0x814 = 0;
     fp->damage_heal = 0;
     fp->damage_joint_index = 0;
     fp->invincible_timer = 0;
-    fp->walldamage_nohit_timer = 0;
+    fp->intangible_timer = 0;
     fp->star_invincible_timer = 0;
 
     fp->hitstatus = gmHitCollision_HitStatus_Normal;
+    fp->star_hitstatus = gmHitCollision_HitStatus_Normal;
     fp->special_hitstatus = gmHitCollision_HitStatus_Normal;
-    fp->itemstat_hitstatus = gmHitCollision_HitStatus_Normal;
 
     fp->throw_gobj = NULL;
     fp->catch_gobj = NULL;
@@ -144,16 +144,16 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     fp->x192_flag_b4 = FALSE;
 
-    fp->is_shuffle_electric = 0;
+    fp->is_shuffle_electric = FALSE;
     fp->shuffle_timer = 0;
 
     fp->attack_id = 0;
-    fp->flags_hi.halfword = 0;
-    fp->flags_lw.flags_0x3FF = 0;
-    fp->flags_lw.flags_0x1000 = fp->flags_lw.flags_0x800 = fp->flags_lw.flags_0x400 = FALSE;
+    fp->motion_count = 0;
+    fp->stat_flags.attack_group_id = 0;
+    fp->stat_flags.is_smash_attack = fp->stat_flags.is_ground_or_air = fp->stat_flags.is_special_attack = FALSE;
 
-    fp->unk_0x290.halfword = fp->unk_ft_0x82A.halfword = 0;
-    fp->unk_ft_0x828 = fp->flags_lw;
+    fp->stat_count = fp->damage_stat_count = 0;
+    fp->damage_stat_flags = fp->stat_flags;
 
     fp->afterimage.desc_index = 0;
 

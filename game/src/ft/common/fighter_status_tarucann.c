@@ -109,7 +109,7 @@ void func_ovl3_80144038(GObj *fighter_gobj)
     angle -= (angle / 360) * 360;
 
     func_ovl3_80140EE4(fighter_gobj, ftStatus_Common_DamageFlyRoll, tarucann->damage, knockback, angle, fp->lr, 0, tarucann->element, 0, TRUE, TRUE, FALSE);
-    func_ovl2_800EAA2C(fp, 4, 4, 3, 0, 0);
+    ftCommon_Update1PGameDamageStats(fp, 4, 4, 3, 0, 0);
 
     fp->unk_0x174 = 0;
     fp->tarucann_wait = FTCOMMON_TARUCANN_PICKUP_WAIT;

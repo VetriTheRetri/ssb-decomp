@@ -137,9 +137,9 @@ void func_ovl3_801472D4(Fighter_Struct *fp, s32 ammo_sub)
     {
         fp->status_vars.common.fireflower.flame_vel_index = 0;
 
-        func_ovl2_800EA5E8(fp, 0x36);
-        func_ovl2_800EA778(fp, fp->flags_lw.halfword);
-        func_ovl2_800EA7B0(fp, 0);
+        ftCommon_MotionCountIncSetID(fp, 0x36);
+        ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
+        ftCommon_Update1PGameAttackStats(fp, 0);
     }
 }
 

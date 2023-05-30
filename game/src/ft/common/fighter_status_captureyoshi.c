@@ -149,7 +149,7 @@ void func_ovl3_8014C9A0(GObj *fighter_gobj)
 
         ftMapCollide_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, 0x1000U);
-        func_ovl2_800EA948(fp, 0xC);
+        ftCommon_ApplyIntangibleTimer(fp, 12);
     }
 }
 
@@ -369,6 +369,6 @@ void func_ovl3_8014CF20(GObj *fighter_gobj)
     this_fp->status_vars.common.captureyoshi.effect_gobj = NULL;
     this_fp->status_vars.common.captureyoshi.unk_0x9 = 0;
 
-    func_ovl2_800EAA2C(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->flags_lw.halfword, capture_fp->unk_0x290.halfword);
+    ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
     func_ovl3_8014C958(fighter_gobj);
 }
