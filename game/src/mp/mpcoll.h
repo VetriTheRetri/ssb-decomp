@@ -5,13 +5,14 @@
 #include <ssb_types.h>
 #include <macros.h>
 
-#define MPCOLL_MASK_RWALL       (1 << 0)
-#define MPCOLL_MASK_LWALL       (1 << 5)
-#define MPCOLL_MASK_CEIL        (1 << 10)
-#define MPCOLL_MASK_GROUND      (1 << 11)
-#define MPCOLL_MASK_LCLIFF      (1 << 12)
-#define MPCOLL_MASK_RCLIFF      (1 << 13)
-#define MPCOLL_MASK_CEILHEAVY   (1 << 14) // Head bonk?
+#define MPCOLL_MASK_RWALL       (1 << 0)    // 0x1
+#define MPCOLL_MASK_LWALL       (1 << 5)    // 0x20
+#define MPCOLL_MASK_CEIL        (1 << 10)   // 0x400 
+#define MPCOLL_MASK_GROUND      (1 << 11)   // 0x800
+#define MPCOLL_MASK_LCLIFF      (1 << 12)   // 0x1000
+#define MPCOLL_MASK_RCLIFF      (1 << 13)   // 0x2000
+#define MPCOLL_MASK_CEILHEAVY   (1 << 14)   // 0x4000 - head bonk?
+#define MPCOLL_MASK_UNK1        (1 << 15)   // 0x8000
 
 #define MPCOLL_MASK_MAIN_ALL    (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every main collision flag
 #define MPCOLL_MASK_CLIFF_ALL   (MPCOLL_MASK_LCLIFF | MPCOLL_MASK_RCLIFF) // Mask all ledge flags       
@@ -24,6 +25,53 @@ typedef enum Ground_Air
     air
 
 } Ground_Air;
+
+typedef struct CollisionGroupInfo
+{
+    u8 filler_0x0[0x1C];
+    Vec3f dynacoll_pos;
+    u8 filler_0x28[0x70 - 0x28];
+    void *p_dynacoll;
+    u8 filler_0x74[0x84 - 0x74];
+    s32 collision_kind;
+
+} CollisionGroupInfo;
+
+typedef struct CollisionVertexInfo
+{
+    u8 coll_group_id;
+    u8 coll_vertex_id;
+    s16 coll_pos_next;
+    s16 coll_pos_prev;
+    s16 coll_type_next;
+    s16 coll_type_prev;
+
+} CollisionVertexInfo;
+
+typedef struct CollisionVertexLinks
+{
+    u16 vertex1, vertex2;
+
+} CollisionVertexLinks;
+
+typedef struct CollisionVertexArray
+{
+    u16 unk_vertex[1];
+
+} CollisionVertexArray;
+
+typedef struct CollisionVertexPosition
+{
+    Vec2h pos;
+    u16 unk_0x4;
+
+} CollisionVertexPosition;
+
+typedef struct CollisionVtxPosContainer
+{
+    CollisionVertexPosition vpos[1];
+
+} CollisionVtxPosContainer;
 
 typedef struct _ObjectColl
 {

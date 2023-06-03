@@ -133,15 +133,15 @@ void func_ovl3_80140674(GObj *fighter_gobj)
 
         if (fp->ground_or_air == air)
         {
-            if (func_ovl2_800F3794(fighter_gobj) != FALSE)
+            if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
             {
                 func_ovl3_80147BE0(fighter_gobj);
             }
             else func_ovl3_8013F9A0(fighter_gobj);
         }
-        else if (func_ovl2_800F3794(fighter_gobj) != FALSE)
+        else if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
         {
-            jtgt_ovl2_800F38C4(fighter_gobj);
+            ftCommon_HammerProcInterrupt(fighter_gobj);
         }
         else func_ovl3_8013E070(fighter_gobj);
     }

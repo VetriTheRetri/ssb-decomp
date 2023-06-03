@@ -86,7 +86,7 @@ bool32 func_ovl3_8013F4D0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 input_source;
 
-    if (func_ovl2_800F3794(fighter_gobj) != FALSE)
+    if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
         return func_ovl3_8014800C(fighter_gobj);
     }
@@ -119,7 +119,7 @@ s32 func_ovl3_8013F598(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 input_source;
 
-    if (func_ovl2_800F3794(fighter_gobj) != FALSE)
+    if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
         return func_ovl3_8014800C(fighter_gobj);
     }

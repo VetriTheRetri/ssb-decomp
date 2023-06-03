@@ -260,7 +260,7 @@ bool32 func_ovl3_8014019C(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 input_source;
 
-    if (func_ovl2_800F3794(fighter_gobj) != FALSE)
+    if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
         return FALSE;
     }

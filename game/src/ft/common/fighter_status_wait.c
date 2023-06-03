@@ -9,9 +9,9 @@ void func_ovl3_8013E1C8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (func_ovl2_800F3794(fighter_gobj) != FALSE)
+    if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
-        func_ovl2_800F3938(fighter_gobj);
+        ftCommon_HammerWaitSetStatus(fighter_gobj);
     }
     else
     {

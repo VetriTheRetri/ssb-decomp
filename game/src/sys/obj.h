@@ -104,12 +104,15 @@ typedef struct MObj // Image footer struct
 
 typedef struct UnkDObjData
 {
-    u8 filler_0x0[0xc];
+    s32 unk_dobjdata_0x0;
+    s32 unk_dobjdata_0x4;
+    u8 filler_0x4[0xC - 0x8];
     u8 unk_0xC;
     u8 unk_0xD;
     u8 unk_dobjdata_0xE;
-    u8 filler_0xF[0x70 - 0xF];
-    Vec3f unk_dobjdata_0x70; // Might be HAL_Bitmap?
+    u8 unk_dobjdata_0xF;
+    u8 filler_0x10[0x70 - 0x10]; // Probably bitmap/sprite/texture?
+    Vec3f unk_dobjdata_0x70;
     s32 unk_dobjdata_0x7C;
     Vec3f unk_dobjdata_0x80;
     u8 filler_0x8C[0xDC - 0x8C];

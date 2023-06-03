@@ -490,8 +490,8 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
         func_80008188(fighter_gobj, func_ovl2_800E1260, 1U, 5U);
         func_80008188(fighter_gobj, func_ovl2_800E2604, 1U, 4U);
         func_80008188(fighter_gobj, func_ovl2_800E2660, 1U, 3U);
-        func_80008188(fighter_gobj, func_ovl2_800E6100, 1U, 2U);
-        func_80008188(fighter_gobj, func_ovl2_800E6178, 1U, 1U);
+        func_80008188(fighter_gobj, ftObjectProc_SearchAllCatch, 1U, 2U);
+        func_80008188(fighter_gobj, ftObjectProc_SearchAllHit, 1U, 1U);
         func_80008188(fighter_gobj, func_ovl2_800E61EC, 1U, 0U);
     }
     else func_80008188(fighter_gobj, func_ovl1_80390584, 1U, 5U);

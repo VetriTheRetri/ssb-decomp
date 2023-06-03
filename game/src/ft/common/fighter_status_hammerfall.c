@@ -13,7 +13,7 @@ void func_ovl3_80147BE8(GObj *fighter_gobj)
     {
         if (fp->phys_info.vel_air.y > FTCOMMON_HAMMER_SKIP_LANDING_VEL_Y_MAX)
         {
-            func_ovl2_800F3938(fighter_gobj);
+            ftCommon_HammerWaitSetStatus(fighter_gobj);
         }
         else func_ovl3_801480A4(fighter_gobj);
     }
@@ -27,8 +27,8 @@ void func_ovl3_80147C50(GObj *fighter_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, func_ovl2_800F3828(fighter_gobj), 1.0F, func_ovl2_800F385C(fighter_gobj));
-    func_ovl2_800F388C(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
+    ftCommon_HammerCheckSetColAnim(fighter_gobj);
     func_ovl2_800D8EB8(fp);
 }
 
@@ -36,7 +36,7 @@ bool32 func_ovl3_80147CCC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((func_ovl2_800F3794(fighter_gobj) != FALSE) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
+    if ((ftCommon_HammerCheckHold(fighter_gobj) != FALSE) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
         func_ovl3_80147C50(fighter_gobj); // Wiggle out of DamageFall if A or B is pressed
 
@@ -52,8 +52,8 @@ void func_ovl3_80147D30(GObj *fighter_gobj)
     s32 vel_x, vel_y;
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, func_ovl2_800F3828(fighter_gobj), 1.0F, func_ovl2_800F385C(fighter_gobj));
-    func_ovl2_800F388C(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
+    ftCommon_HammerCheckSetColAnim(fighter_gobj);
 
     switch (fp->status_vars.common.hammer.input_source)
     {
@@ -75,8 +75,8 @@ void func_ovl3_80147D30(GObj *fighter_gobj)
 
 void func_ovl3_80147E34(GObj *fighter_gobj)
 {
-    func_ovl3_80141DA0(fighter_gobj, ftStatus_Common_HammerFall, func_ovl2_800F3828(fighter_gobj), func_ovl2_800F385C(fighter_gobj));
-    func_ovl2_800F388C(fighter_gobj);
+    func_ovl3_80141DA0(fighter_gobj, ftStatus_Common_HammerFall, ftCommon_HammerGetAnimFrame(fighter_gobj), ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
+    ftCommon_HammerCheckSetColAnim(fighter_gobj);
 }
 
 bool32 func_ovl3_80147E7C(GObj *fighter_gobj)

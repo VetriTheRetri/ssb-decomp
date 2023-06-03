@@ -33,8 +33,8 @@ void func_ovl3_80147F88(GObj *fighter_gobj, s32 input_source)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerKneeBend, func_ovl2_800F3828(fighter_gobj), 1.0F, func_ovl2_800F385C(fighter_gobj));
-    func_ovl2_800F388C(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerKneeBend, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
+    ftCommon_HammerCheckSetColAnim(fighter_gobj);
 
     fp->status_vars.common.hammer.jump_force = fp->input.pl.stick_range.y;
     fp->status_vars.common.hammer.kneebend_anim_frame = 0.0F;

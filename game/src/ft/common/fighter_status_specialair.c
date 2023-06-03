@@ -138,7 +138,7 @@ bool32 func_ovl3_80150F08(GObj *fighter_gobj)
 
     if (fp->input.pl.button_tap & fp->input.button_mask_b)
     {
-        if (func_ovl2_800F3794(fighter_gobj) == FALSE)
+        if (ftCommon_HammerCheckHold(fighter_gobj) == FALSE)
         {
             if (fp->input.pl.stick_range.y >= FTCOMMON_SPECIALHI_STICK_RANGE_MIN)
             {

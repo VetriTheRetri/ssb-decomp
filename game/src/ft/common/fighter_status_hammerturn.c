@@ -26,7 +26,7 @@ void func_ovl3_80147AD0(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag1 == 0)
     {
-        func_ovl2_800F3938(fighter_gobj);
+        ftCommon_HammerWaitSetStatus(fighter_gobj);
     }
 }
 
@@ -41,8 +41,8 @@ void func_ovl3_80147B34(GObj *fighter_gobj)
 
     fp->command_vars.flags.flag1 = FTCOMMON_HAMMER_TURN_FRAMES;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerTurn, func_ovl2_800F3828(fighter_gobj), 1.0F, func_ovl2_800F385C(fighter_gobj));
-    func_ovl2_800F388C(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerTurn, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
+    ftCommon_HammerCheckSetColAnim(fighter_gobj);
     func_ovl3_80147A70(fighter_gobj);
 }
 

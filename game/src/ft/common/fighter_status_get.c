@@ -116,7 +116,7 @@ void func_ovl3_80145BE4(GObj *fighter_gobj)
                 break;
 
             case At_Kind_Hammer:
-                fp->hammer_time = FTCOMMON_HAMMER_TIME_MAX;
+                fp->hammer_timer = ATHAMMER_TIME;
 
                 ftSpecialItem_BGMSetPlay(ATHAMMER_BGM_ID);
                 break;
@@ -186,7 +186,7 @@ void func_ovl3_80145D70(GObj *fighter_gobj)
 
                     if (ap->at_kind == At_Kind_Hammer)
                     {
-                        func_ovl2_800F3938(fighter_gobj);
+                        ftCommon_HammerWaitSetStatus(fighter_gobj);
 
                         return;
                     }

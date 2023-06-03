@@ -1354,7 +1354,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
     }
     if ((this_fp->item_hold != NULL) && (this_fp->status_info.status_id != ftStatus_Common_LightGet) && (ArticleGetStruct(this_fp->item_hold)->at_kind == At_Kind_Hammer))
     {
-        func_ovl2_800F36E0(fighter_gobj);
+        ftCommon_HammerUpdateStats(fighter_gobj);
     }
     if (this_fp->shuffle_timer != 0)
     {
@@ -2708,7 +2708,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         case ftHitCollision_LogKind_Special:
             gr_hit = hitlog->attacker_hit;
 
-            if (gr_hit->env_kind == 1)
+            if (gr_hit->env_kind == 1) // POW Block?
             {
                 gr_handicap = ArticleGetStruct(hitlog->attacker_gobj)->damage_handicap;
             }
@@ -2773,6 +2773,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         if (this_fp->port_id == hitlog->attacker_port_id)
         {
             this_fp->damage_player_number = 0;
+
             ftCommon_Update1PGameDamageStats(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ip->it_kind, 0, 0);
         }
         else
@@ -2873,8 +2874,8 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
     }
 }
 
-// My brain hurts
-void func_ovl2_800E4870(GObj *this_gobj)
+// 0x800E4870 - My brain hurts
+void ftObjectProc_SearchFighterHit(GObj *this_gobj)
 {
     GObj *other_gobj;
     Fighter_Struct *this_fp;
@@ -3081,13 +3082,13 @@ void func_ovl2_800E4870(GObj *this_gobj)
                 }
             }
         }
-
     next_gobj:
         other_gobj = other_gobj->group_gobj_next;
     }
 }
 
-void func_ovl2_800E4ED4(GObj *fighter_gobj)
+// 0x800E4ED4
+void ftObjectProc_SearchItemHit(GObj *fighter_gobj)
 {
     GObj *item_gobj;
     s32 i, j, k, l, m, n;
@@ -3273,7 +3274,8 @@ void func_ovl2_800E4ED4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl2_800E55DC(GObj *fighter_gobj)
+// 0x800E55DC
+void ftObjectProc_SearchArticleHit(GObj *fighter_gobj)
 {
     GObj *article_gobj;
     s32 i, j, k, l, m, n;
@@ -3317,7 +3319,6 @@ void func_ovl2_800E55DC(GObj *fighter_gobj)
                 {
                     if ((at_hit->clang) && !(fp->x192_flag_b2) && ((fp->throw_gobj == NULL) || (fp->throw_gobj != ap->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->throw_team != ap->team))))
                     {
-
                         if (!(fp->is_reflect) || !(at_hit->can_reflect))
                         {
                             k = 0;
@@ -3455,33 +3456,34 @@ extern Ground_Hit D_ovl2_80128D30[6] =
     {  9,  1,  90, 100, 100, 0, gmHitCollision_Element_Fire  }
 };
 
-bool32 func_ovl2_800E5C30(Fighter_Struct *fp, Ground_Hit **p_gr_hit)
+// 0x800E5C30
+bool32 grHitCollision_HitCheckGetPointer(Fighter_Struct *fp, Ground_Hit **p_gr_hit)
 {
     if ((fp->hotfloor_wait == 0) && (fp->ground_or_air == ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
     {
         switch (fp->coll_data.ground_flags & 0xFFFF00FF)
         {
-        case 7:
+        case Gr_Mat_FireWeakHz1:
             *p_gr_hit = &D_ovl2_80128D30[0];
             return TRUE;
 
-        case 8:
+        case Gr_Mat_FireStrongVt1:
             *p_gr_hit = &D_ovl2_80128D30[1];
             return TRUE;
 
-        case 9:
+        case Gr_Mat_FireWeakVt1:
             *p_gr_hit = &D_ovl2_80128D30[2];
             return TRUE;
 
-        case 10:
+        case Gr_Mat_SpikeStrongHz1:
             *p_gr_hit = &D_ovl2_80128D30[3];
             return TRUE;
 
-        case 11:
+        case Gr_Mat_FireWeakVt2:
             *p_gr_hit = &D_ovl2_80128D30[4];
             return TRUE;
 
-        case 15:
+        case Gr_Mat_FireWeakVt3:
             *p_gr_hit = &D_ovl2_80128D30[5];
             return TRUE;
 
@@ -3492,7 +3494,7 @@ bool32 func_ovl2_800E5C30(Fighter_Struct *fp, Ground_Hit **p_gr_hit)
     else return FALSE;
 }
 
-void func_ovl2_800E5D20(GObj *fighter_gobj)
+void ftObjectProc_SearchGroundHit(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     grMapEnvironment *me = &D_ovl2_80131190[0];
@@ -3511,7 +3513,7 @@ void func_ovl2_800E5D20(GObj *fighter_gobj)
             fp->hotfloor_wait--;
         }
     }
-    if (ftCommon_GetBestHitStatusAll(fighter_gobj) == TRUE)
+    if (ftCommon_GetBestHitStatusAll(fighter_gobj) == gmHitCollision_HitStatus_Normal)
     {
         for (i = 0; i < D_ovl2_8013119C; i++, me++)
         {
@@ -3520,15 +3522,15 @@ void func_ovl2_800E5D20(GObj *fighter_gobj)
                 func_ovl2_800E3CAC(me->egobj, fighter_gobj, fp, gr_hit, sp44);
             }
         }
-        if (func_ovl2_800E5C30(fp, &gr_hit) != FALSE)
+        if (grHitCollision_HitCheckGetPointer(fp, &gr_hit) != FALSE)
         {
             func_ovl2_800E3CAC(NULL, fighter_gobj, fp, gr_hit, gr_hit->env_kind);
         }
     }
 }
 
-// Meth
-void func_ovl2_800E5E58(GObj *this_gobj)
+// 0x800E5E58 Meth
+void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 {
     GObj *other_gobj;
     Fighter_Struct *this_fp;
@@ -3609,7 +3611,8 @@ void func_ovl2_800E5E58(GObj *this_gobj)
     }
 }
 
-void func_ovl2_800E6100(GObj *fighter_gobj)
+// 0x800E6100
+void ftObjectProc_SearchAllCatch(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -3617,7 +3620,7 @@ void func_ovl2_800E6100(GObj *fighter_gobj)
 
     if (fp->x192_flag_b2)
     {
-        func_ovl2_800E5E58(fighter_gobj);
+        ftObjectProc_SearchFighterCatch(fighter_gobj);
 
         if (fp->search_gobj != NULL)
         {
@@ -3627,7 +3630,8 @@ void func_ovl2_800E6100(GObj *fighter_gobj)
     }
 }
 
-void func_ovl2_800E6178(GObj *fighter_gobj)
+// 0x800E6178
+void ftObjectProc_SearchAllHit(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -3635,10 +3639,10 @@ void func_ovl2_800E6178(GObj *fighter_gobj)
     {
         ftHitCollisionLogIndex = 0;
 
-        func_ovl2_800E4870(fighter_gobj);
-        func_ovl2_800E55DC(fighter_gobj);
-        func_ovl2_800E4ED4(fighter_gobj);
-        func_ovl2_800E5D20(fighter_gobj);
+        ftObjectProc_SearchFighterHit(fighter_gobj);
+        ftObjectProc_SearchArticleHit(fighter_gobj);
+        ftObjectProc_SearchItemHit(fighter_gobj);
+        ftObjectProc_SearchGroundHit(fighter_gobj);
 
         if (ftHitCollisionLogIndex != 0)
         {

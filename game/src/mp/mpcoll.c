@@ -716,7 +716,7 @@ void func_ovl2_800DAE6C(Coll_Data *coll_data)
     s32 i;
     s32 temp_v0;
     s32 j;
-    f32 sp6C;
+    u32 sp6C;
     s32 wall_line_id;
     f32 sp64;
 
@@ -968,14 +968,14 @@ bool32 func_ovl2_800DB590(Coll_Data *coll_data)
     func_ovl2_800F4BD8(&sp48, &sp3C, &coll_data->ground_to_air_pos_last, &coll_data->cliff_id, &sp38, NULL);
 
 
-    if ((var_v0 != 0) && (sp38 & 0x8000) && ((sp38 & 0xFFFF00FF) != 4))
+    if ((var_v0 != 0) && (sp38 & MPCOLL_MASK_UNK1) && ((sp38 & 0xFFFF00FF) != 4))
     {
         func_ovl2_800F4428(coll_data->cliff_id, &sp3C);
 
         if ((coll_data->ground_to_air_pos_last.x - sp3C.x) < 800.0F)
         {
-            coll_data->coll_mask |= MPCOLL_MASK_CLIFF;
-            coll_data->coll_type |= MPCOLL_MASK_CLIFF;
+            coll_data->coll_mask |= MPCOLL_MASK_LCLIFF;
+            coll_data->coll_type |= MPCOLL_MASK_LCLIFF;
 
             return TRUE;
         }
@@ -1017,7 +1017,7 @@ bool32 func_ovl2_800DB6F0(Coll_Data *coll_data)
 
     func_ovl2_800F4BD8(&sp48, &sp3C, &coll_data->ground_to_air_pos_last, &coll_data->cliff_id, &sp38, NULL);
 
-    if ((var_v0 != 0) && (sp38 & 0x8000))
+    if ((var_v0 != 0) && (sp38 & MPCOLL_MASK_UNK1))
     {
         func_ovl2_800F4408(coll_data->cliff_id, &sp3C);
 

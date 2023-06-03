@@ -75,7 +75,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
 
     if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
-        if (func_ovl2_800F3794(fighter_gobj) == FALSE)
+        if (ftCommon_HammerCheckHold(fighter_gobj) == FALSE)
         {
             if (func_ovl3_80146A8C(fp) != 0)
             {

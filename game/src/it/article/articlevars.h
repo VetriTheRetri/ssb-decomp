@@ -18,7 +18,7 @@
 #define ATHEART_T_VEL 30.0F
 
 #define ATSTAR_COLANIM_ID 0x4A
-#define ATSTAR_BGM_ID 0x2E
+#define ATSTAR_BGM_ID 0x2D
 #define ATSTAR_BGM_DURATION 10
 #define ATSTAR_INVINCIBLE_TIME 600
 #define ATSTAR_WARN_BEGIN_FRAME (ATSTAR_INVINCIBLE_TIME - 480)
@@ -50,9 +50,11 @@
 #define ATFFLOWER_GRAVITY 1.2F
 #define ATFFLOWER_T_VEL 100.0F
     
-#define ATHAMMER_BGM_ID 0x2D
+#define ATHAMMER_TIME 720
+#define ATHAMMER_BGM_ID 0x2E
 #define ATHAMMER_BGM_DURATION 20
 #define ATHAMMER_WEAR_COLANIM_ID 0x4E                        // Color animation applied to hammer when time is almost up
+#define ATHAMMER_WARN_BEGIN_FRAME (ATHAMMER_TIME - 600)
 #define ATHAMMER_GRAVITY 1.5F
 #define ATHAMMER_T_VEL 120.0F
 

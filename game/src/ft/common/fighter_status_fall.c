@@ -12,7 +12,7 @@ void func_ovl3_8013F9E0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (func_ovl2_800F3794(fighter_gobj) != FALSE)
+    if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
         func_ovl3_80147C50(fighter_gobj);
     }

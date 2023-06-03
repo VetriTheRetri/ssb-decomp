@@ -14,10 +14,10 @@ s32 ftSpecialItem_BGMGetDuration(s32 bgm_id)
 {
     switch (bgm_id)
     {
-    case ATSTAR_BGM_ID:
+    case ATHAMMER_BGM_ID:
         return ATHAMMER_BGM_DURATION;
 
-    case ATHAMMER_BGM_ID:
+    case ATSTAR_BGM_ID:
         return ATSTAR_BGM_DURATION;
 
     default:
@@ -1227,7 +1227,7 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     {
         ftCommon_CheckSetColAnimIndex(fighter_gobj, 0xA, 0);
     }
-    if (func_ovl2_800F37CC(fighter_gobj) != 0)
+    if (ftCommon_HammerCheckStatusID(fighter_gobj) != 0)
     {
         ftCommon_CheckSetColAnimIndex(fighter_gobj, 0x49, 0);
     }
@@ -2184,7 +2184,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
 void ftKirby_MapCheckSpawnStarGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    u16 coll_mask = (fp->coll_data.coll_mask_prev ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & (MPCOLL_MASK_MAIN_ALL);
+    u16 coll_mask = (fp->coll_data.coll_mask_prev ^ fp->coll_data.coll_mask) & fp->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
     Vec3f pos;
 
     if (coll_mask)
@@ -2225,3 +2225,269 @@ void ftKirby_MapCheckSpawnStarGFX(GObj *fighter_gobj)
         }
     }
 }
+
+void func_ovl2_800EB528(DObj *arg0)
+{
+    DObj *temp_a1;
+    DObj *temp_a1_2;
+    DObj *temp_v1_2;
+    DObj *temp_v1_3;
+    DObj *temp_v1_4;
+    DObj *temp_v1_6;
+    DObj *temp_v1_7;
+    DObj *temp_v1_8;
+    DObj *var_v0;
+    DObj *var_v0_2;
+    UnkDObjData *temp_v1;
+    UnkDObjData *temp_v1_5;
+
+    var_v0 = arg0;
+    temp_v1 = arg0->unk_0x84;
+
+    if (temp_v1 != NULL)
+    {
+        if (temp_v1->unk_dobjdata_0x0 == 1)
+        {
+            temp_v1->unk_dobjdata_0x0 = 0;
+        }
+        temp_v1->unk_dobjdata_0x4 = 0;
+    }
+    temp_v1_2 = arg0->next;
+
+    if (temp_v1_2 != NULL)
+    {
+        var_v0_2 = temp_v1_2;
+    }
+    else if (var_v0 == arg0)
+    {
+        var_v0_2 = NULL;
+    }
+    else
+    {
+        temp_v1_3 = arg0->unk_0x8;
+
+        if (temp_v1_3 != NULL)
+        {
+            var_v0_2 = temp_v1_3;
+        }
+        else
+        {
+        loop_10:
+            temp_v1_4 = var_v0->prev;
+
+            if (arg0 == temp_v1_4)
+            {
+                var_v0_2 = NULL;
+            }
+            else
+            {
+                temp_a1 = temp_v1_4->unk_0x8;
+                if (temp_a1 != NULL)
+                {
+                    var_v0_2 = temp_a1;
+                }
+                else
+                {
+                    var_v0 = temp_v1_4;
+
+                    goto loop_10;
+                }
+            }
+        }
+    }
+    while (var_v0_2 != NULL)
+    {
+        temp_v1_5 = var_v0_2->unk_0x84;
+
+        if (temp_v1_5 != NULL)
+        {
+            temp_v1_5->unk_dobjdata_0x4 = 0;
+        }
+        temp_v1_6 = var_v0_2->next;
+
+        if (temp_v1_6 != NULL)
+        {
+            var_v0_2 = temp_v1_6;
+        }
+        else if (var_v0_2 == arg0)
+        {
+            var_v0_2 = NULL;
+        }
+        else
+        {
+            temp_v1_7 = var_v0_2->unk_0x8;
+
+            if (temp_v1_7 != NULL)
+            {
+                var_v0_2 = temp_v1_7;
+            }
+            else
+            {
+            loop_24:
+                temp_v1_8 = var_v0_2->prev;
+
+                if (arg0 == temp_v1_8)
+                {
+                    var_v0_2 = NULL;
+                }
+                else
+                {
+                    temp_a1_2 = temp_v1_8->unk_0x8;
+
+                    if (temp_a1_2 != NULL)
+                    {
+                        var_v0_2 = temp_a1_2;
+                    }
+                    else
+                    {
+                        var_v0_2 = temp_v1_8;
+
+                        goto loop_24;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void func_ovl2_800EB648(DObj *arg0)
+{
+    DObj *temp_a1;
+    DObj *temp_v1_2;
+    DObj *temp_v1_3;
+    DObj *temp_v1_4;
+    DObj *var_v0;
+    UnkDObjData *temp_v1;
+
+    var_v0 = arg0;
+
+    while (var_v0 != NULL)
+    {
+
+        temp_v1 = var_v0->unk_0x84;
+
+        if (temp_v1 != NULL)
+        {
+            if (temp_v1->unk_dobjdata_0x0 == 1)
+            {
+                temp_v1->unk_dobjdata_0x0 = 0;
+            }
+            temp_v1->unk_dobjdata_0x4 = 0;
+        }
+        temp_v1_2 = var_v0->next;
+
+        if (temp_v1_2 != NULL)
+        {
+            var_v0 = temp_v1_2;
+        }
+        else if (var_v0 == arg0)
+        {
+            var_v0 = NULL;
+        }
+        else
+        {
+            temp_v1_3 = var_v0->unk_0x8;
+
+            if (temp_v1_3 != NULL)
+            {
+                var_v0 = temp_v1_3;
+            }
+            else
+            {
+            loop_12:
+                temp_v1_4 = var_v0->prev;
+
+                if (arg0 == temp_v1_4)
+                {
+                    var_v0 = NULL;
+                }
+                else
+                {
+                    temp_a1 = temp_v1_4->unk_0x8;
+
+                    if (temp_a1 != NULL)
+                    {
+                        var_v0 = temp_a1;
+                    }
+                    else
+                    {
+                        var_v0 = temp_v1_4;
+
+                        goto loop_12;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void func_ovl2_800EB6EC(Fighter_Struct *fp)
+{
+    s32 var_s2;
+    s32 var_s3;
+    s32 var_s4;
+    s32 var_v0;
+    UnkDObjData *temp_s0;
+    s32 i;
+    ftPartsUnkIndexTable *temp_v0;
+    ftCommonAttributes *attributes = fp->attributes;
+
+    var_s2 = 4;
+    temp_v0 = attributes->unk_ftca_0x2A0;
+    var_s3 = temp_v0->unk_ftpartunkindex_0x0;
+    var_s4 = temp_v0->unk_ftpartunkindex_0x4;
+
+    for (i = 4; ((var_s3 != 0) || (var_s4 != 0)); i++)
+    {
+        if (i < ARRAY_COUNT(fp->joint) - 1)
+        {
+            var_v0 = var_s3;
+        }
+        else var_v0 = var_s4;
+
+        if (var_v0 & 0x80000000)
+        {
+            if (fp->joint[i] != NULL)
+            {
+                temp_s0 = fp->joint[i]->unk_0x84;
+
+                if (temp_s0 != NULL)
+                {
+                    func_ovl2_800ECDE4(fp->joint[i], temp_s0, &temp_s0->filler_0x10[0]); // filler_0x10[0] is VERY fake but I don't know what this struct is
+                    temp_s0->unk_dobjdata_0x0 = 3;
+                    fp->joint[i]->om_mtx[0]->unk05 = 1;
+                }
+            }
+        }
+        if (i < ARRAY_COUNT(fp->joint) - 1)
+        {
+            var_s3 <<= 1;
+        }
+        else var_s4 <<= 1;
+    }
+}
+
+void func_ovl2_800EB7F4(Fighter_Struct *fp)
+{
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(fp->joint); i++)
+    {
+        if (fp->joint[i] != NULL)
+        {
+            UnkDObjData *unk_dobj = fp->joint[i]->unk_0x84;
+
+            if (unk_dobj != NULL)
+            {
+                if (unk_dobj->unk_dobjdata_0x0 == 3)
+                {
+                    unk_dobj->unk_dobjdata_0x0 = 0;
+
+                    fp->joint[i]->om_mtx[0]->unk05 = 0;
+                }
+            }
+        }
+    }
+}
+
+// MISSING: func_ovl2_800EB924 through ftCommon_HammerUpdateStats; lots of new files, but I don't feel like I can do these at the moment

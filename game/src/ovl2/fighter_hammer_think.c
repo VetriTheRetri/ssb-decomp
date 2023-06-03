@@ -1,0 +1,149 @@
+#include "fighter.h"
+#include "article.h"
+#include "gmmatch.h"
+
+// 0x800F36E0
+void ftCommon_HammerUpdateStats(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->hammer_timer != 0)
+    {
+        fp->hammer_timer--;
+    }
+    if (fp->hammer_timer == ATHAMMER_WARN_BEGIN_FRAME)
+    {
+        func_ovl3_80176110(fp->item_hold);
+    }
+    if (fp->hammer_timer == 0)
+    {
+        bool32 is_colanim_reset = FALSE;
+
+        func_ovl3_801728D4(fp->item_hold);
+        ftSpecialItem_BGMCheckFighters();
+
+        if (fp->colanim.colanim_id == FTCOMMON_HAMMER_COLANIM_ID)
+        {
+            is_colanim_reset = TRUE;
+        }
+        if (ftCommon_HammerCheckStatusID(fighter_gobj) != FALSE)
+        {
+            func_ovl2_800DEE54(fighter_gobj);
+        }
+        if (is_colanim_reset != FALSE)
+        {
+            ftCommon_ResetColAnimStatUpdate(fighter_gobj);
+        }
+    }
+}
+
+// 0x800F3794
+bool32 ftCommon_HammerCheckHold(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if ((fp->item_hold != NULL) && (ArticleGetStruct(fp->item_hold)->at_kind == At_Kind_Hammer))
+    {
+        return TRUE;
+    }
+    else return FALSE;
+}
+
+// 0x800F37CC
+bool32 ftCommon_HammerCheckStatusID(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if ((fp->status_info.status_id >= ftStatus_Common_HammerWait) && (fp->status_info.status_id <= ftStatus_Common_HammerLanding))
+    {
+        return TRUE;
+    }
+    else return FALSE;
+}
+
+// 0x800F37FC
+bool32 ftCommon_HammerCheckScriptID(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if ((fp->status_info.script_id == 0x84) || (fp->status_info.script_id == 0x85))
+    {
+        return TRUE;
+    }
+    else return FALSE;
+}
+
+// 0x800F3828
+f32 ftCommon_HammerGetAnimFrame(GObj *fighter_gobj)
+{
+    if (ftCommon_HammerCheckScriptID(fighter_gobj) != FALSE)
+    {
+        return fighter_gobj->anim_frame;
+    }
+    else return 0.0F;
+}
+
+// 0x800F385C
+u32 ftCommon_HammerGetStatUpdateFlags(GObj *fighter_gobj)
+{
+    u32 flags;
+
+    if (ftCommon_HammerCheckScriptID(fighter_gobj) != FALSE)
+    {
+        flags = (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE);
+    }
+    else flags = 0;
+
+    return flags;
+}
+
+// 0x800F388C
+void ftCommon_HammerCheckSetColAnim(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->colanim.colanim_id != FTCOMMON_HAMMER_COLANIM_ID)
+    {
+        ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_HAMMER_COLANIM_ID, 0);
+    }
+}
+
+// 0x800F38C4
+void ftCommon_HammerProcInterrupt(GObj *fighter_gobj)
+{
+    if ((func_ovl3_8014800C(fighter_gobj) == FALSE) && (func_ovl3_80147E7C(fighter_gobj) == FALSE) && (func_ovl3_80147B9C(fighter_gobj) == FALSE))
+    {
+        func_ovl3_80147A2C(fighter_gobj);
+    }
+}
+
+// 0x800F3914
+void ftCommon_HammerProcMap(GObj *fighter_gobj)
+{
+    func_ovl2_800DDDDC(fighter_gobj, func_ovl3_80147C50);
+}
+
+// 0x800F3938
+void ftCommon_HammerWaitSetStatus(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (fp->ground_or_air == air)
+    {
+        ftMapCollide_SetGround(fp);
+    }
+    ftStatus_Update(fighter_gobj, ftStatus_Common_HammerWait, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
+    ftCommon_HammerCheckSetColAnim(fighter_gobj);
+}
+
+// 0x800F39AC
+bool32 ftCommon_HammerWaitCheckSetStatus(GObj *fighter_gobj)
+{
+    if (func_ovl3_8013E258(fighter_gobj) != FALSE)
+    {
+        ftCommon_HammerWaitSetStatus(fighter_gobj);
+
+        return TRUE;
+    }
+    else return FALSE;
+}

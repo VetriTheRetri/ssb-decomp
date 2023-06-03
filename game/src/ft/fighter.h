@@ -660,6 +660,13 @@ typedef struct ftPartIndex
 
 } ftPartIndex;
 
+typedef struct ftPartsUnkIndexTable // Probably animation-related
+{
+    s32 unk_ftpartunkindex_0x0;
+    s32 unk_ftpartunkindex_0x4;
+
+} ftPartsUnkIndexTable;
+
 typedef struct AfterImageDesc
 {
     s16 unk_afid_0x0;
@@ -841,7 +848,7 @@ typedef struct ftCommonAttributes
     s32 unk_ftca_0x294;
     s32 unk_ftca_0x298;
     s32 unk_ftca_0x29C;
-    void *unk_ftca_0x2A0;
+    ftPartsUnkIndexTable *unk_ftca_0x2A0;
     s32 gfx_joint_cycle_index[5]; // The game will cycle through these joints when applying certain particles such as electricity and flames
     bool32 cliff_status_ground_air_id[5];
     u8 filler_0x2CC[0x2D0 - 0x2CC];
@@ -1216,7 +1223,7 @@ struct Fighter_Struct
 
     } fighter_vars;
 
-    s32 hammer_time;
+    s32 hammer_timer;
 
     union status_vars
     {
