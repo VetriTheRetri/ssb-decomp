@@ -15,21 +15,21 @@
 
 typedef enum ftStatusUpdateFlags
 {
-    ftStatusUpdate_Hit_Preserve,
-    ftStatusUpdate_ColAnim_Preserve,
-    ftStatusUpdate_GFX_Preserve,
-    ftStatusUpdate_FastFall_Preserve,
-    ftStatusUpdate_HitStatus_Preserve,
-    ftStatusUpdate_ModelPart_Preserve,
-    ftStatusUpdate_SlopeContour_Preserve,
-    ftStatusUpdate_TexturePart_Preserve,
-    ftStatusUpdate_Unk3_Preserve,
-    ftStatusUpdate_ThrowGObj_Preserve,
-    ftStatusUpdate_ShuffleTime_Preserve, // Don't reset hitlag vibration frames?
-    ftStatusUpdate_Unk4_Preserve,
-    ftStatusUpdate_DamagePort_Preserve,
-    ftStatusUpdate_AfterImage_Preserve,
-    ftStatusUpdate_Unk5_Preserve
+    ftStatusUpdate_Hit_Preserve,            // Preserve hitboxes between action states
+    ftStatusUpdate_ColAnim_Preserve,        // Preserve color animation between action states
+    ftStatusUpdate_GFX_Preserve,            // Preserve GFX between action states
+    ftStatusUpdate_FastFall_Preserve,       // Preserve fastfall between action states
+    ftStatusUpdate_HitStatus_Preserve,      // Preserve hurtbox collision state between action states
+    ftStatusUpdate_ModelPart_Preserve,      // Preserve modified model part display state between action states
+    ftStatusUpdate_SlopeContour_Preserve,   // Preserve inverse kinematics mode between action states
+    ftStatusUpdate_TexturePart_Preserve,    // Preserve modified texture part display state between action states
+    ftStatusUpdate_Unk3_Preserve,           // Preserve ???
+    ftStatusUpdate_ThrowGObj_Preserve,      // Preserve thrower's GObj pointer between action states; used to tell the game not to check thrower's collateral hitbox on thrown victim?  
+    ftStatusUpdate_ShuffleTime_Preserve,    // Preserve model vibration frames from hitlag between action states
+    ftStatusUpdate_Unk4_Preserve,           // Preserve ???
+    ftStatusUpdate_DamagePort_Preserve,     // Preserve damaging player's port ID if grounded?
+    ftStatusUpdate_AfterImage_Preserve,     // Preserve sword trail display state
+    ftStatusUpdate_Unk5_Preserve            // Preserve ???
 
 } ftStatusUpdateFlags;
 

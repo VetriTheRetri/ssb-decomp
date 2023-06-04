@@ -504,7 +504,7 @@ void ftNess_JibakuAir_ProcPhysics(GObj *fighter_gobj)
     f32 fabs_axis;
     f32 fabs_axis_bak;
 
-    fp->phys_info.vel_air.x -= (FTNESS_PK_JIBAKU_DECELERATE * cosf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * (f32)fp->lr);
+    fp->phys_info.vel_air.x -= (FTNESS_PK_JIBAKU_DECELERATE * cosf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * fp->lr);
 
     fp->phys_info.vel_air.y -= (FTNESS_PK_JIBAKU_DECELERATE * __sinf(fp->status_vars.ness.specialhi.pk_jibaku_angle));
 

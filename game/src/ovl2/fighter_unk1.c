@@ -1723,7 +1723,7 @@ void ftCommon_ApplyStarInvincibleTimer(Fighter_Struct *fp, s32 star_invincible_t
     fp->star_hitstatus = gmHitCollision_HitStatus_Invincible;
     fp->star_invincible_timer = star_invincible_timer;
 
-    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, ATSTAR_COLANIM_ID, 0);
+    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, ATSTAR_COLANIM_ID, ATSTAR_COLANIM_LENGTH);
 }
 
 // 0x800EA8EC

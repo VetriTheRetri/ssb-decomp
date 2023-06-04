@@ -34,8 +34,8 @@ void (*ftKirby_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
 void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {
     ftMario_SpecialAirN_SetStatus,
-    jtgt_ovl3_8015BCB8,
-    jtgt_ovl3_8015B674,
+    ftFox_SpecialAirN_SetStatus,
+    ftDonkey_SpecialAirNStart_SetStatus,
     jtgt_ovl3_8015DBDC,
     ftMario_SpecialAirN_SetStatus,
     jtgt_ovl3_80163A4C,
@@ -48,8 +48,8 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialAirN_SetStatus,
     ftMario_SpecialAirN_SetStatus,
     ftMario_SpecialAirN_SetStatus,
-    jtgt_ovl3_8015BCB8,
-    jtgt_ovl3_8015B674,
+    ftFox_SpecialAirN_SetStatus,
+    ftDonkey_SpecialAirNStart_SetStatus,
     jtgt_ovl3_8015DBDC,
     ftMario_SpecialAirN_SetStatus,
     jtgt_ovl3_80163A4C,
@@ -59,14 +59,14 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80151D64,
     ftPurin_SpecialAirN_SetStatus,
     ftNess_SpecialAirN_SetStatus,
-    jtgt_ovl3_8015B674
+    ftDonkey_SpecialAirNStart_SetStatus
 };
 
 void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {
     ftMario_SpecialAirHi_SetStatus,
-    jtgt_ovl3_8015CB10,
-    jtgt_ovl3_8015B9B8,
+    ftFox_SpecialAirHiStart_SetStatus,
+    ftDonkey_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015DE90,
     ftMario_SpecialAirHi_SetStatus,
     jtgt_ovl3_80164348,
@@ -79,8 +79,8 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialAirN_SetStatus,
     ftMario_SpecialAirHi_SetStatus,
     ftMario_SpecialAirHi_SetStatus,
-    jtgt_ovl3_8015CB10,
-    jtgt_ovl3_8015B9B8,
+    ftFox_SpecialAirHiStart_SetStatus,
+    ftDonkey_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015DE90,
     ftMario_SpecialAirHi_SetStatus,
     jtgt_ovl3_80164348,
@@ -90,7 +90,7 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801529EC,
     ftPurin_SpecialAirHi_SetStatus,
     ftNess_SpecialAirHiStart_SetStatus,
-    jtgt_ovl3_8015B9B8
+    ftDonkey_SpecialAirHi_SetStatus
 };
 
 void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =

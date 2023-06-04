@@ -465,3 +465,128 @@ void mpCollision_VertexCalcAngle(Vec3f *angle, s32 v1x, s32 v1y, s32 v2x, s32 v2
     }
     vec3f_normalize(angle);
 }
+
+// Also calculates angle? Runs whenever character lands directly on a line surface that isn't 0 degrees
+bool32 func_ovl2_800F47AC(s32 v1x, s32 v1y, s32 v2x, s32 v2y, f32 d1x, f32 d1y, f32 d2x, f32 d2y, f32 *dfx, f32 *dfy)
+{
+    s32 vfary;
+    s32 vneary;
+    f32 ddist_x;
+    f32 ddist_y;
+    s32 vfarx;
+    s32 vnearx;
+    s32 vdist_y;
+    s32 vdist_x;
+    f32 temp_f12_2;
+    f32 temp_f14;
+    f32 vddiv;
+    f32 vddist_x;
+    f32 vddist_y;
+    f32 vddistdiv;
+    f32 vdscale;
+    f32 scale;
+    f32 var_f18;
+
+    vdist_y = v2y - v1y;
+    ddist_y = d1y - d2y;
+
+    if (vdist_y < 0)
+    {
+        vneary = v2y;
+        vfary = v1y;
+    }
+    else
+    {
+        vfary = v2y;
+        vneary = v1y;
+    }
+    if (ddist_y > 0.0F)
+    {
+        if (((vfary + 0.001F) < d2y) || (d1y < (vneary - 0.001F)))
+        {
+            return FALSE;
+        }
+    }
+    else if (((vfary + 0.001F) < d1y) || (d2y < (vneary - 0.001F)))
+    {
+        return FALSE;
+    }
+    ddist_x = d1x - d2x;
+    vdist_x = v2x - v1x;
+
+    if (vdist_x < 0)
+    {
+        vnearx = v2x;
+        vfarx = v1x;
+    }
+    else
+    {
+        vfarx = v2x;
+        vnearx = v1x;
+    }
+    if (ddist_x > 0.0F)
+    {
+        if ((vfarx < d2x) || (d1x < vnearx))
+        {
+            return FALSE;
+        }
+    }
+    else if ((vfarx < d1x) || (d2x < vnearx))
+    {
+        return FALSE;
+    }
+    if ((d2y - (v1y + (((d2x - v1x) / vdist_x) * vdist_y))) <= (-0.001F))
+    {
+        temp_f12_2 = v1y + (((d1x - v1x) / vdist_x) * vdist_y);
+
+        if ((d1y - temp_f12_2) < 0.001F)
+        {
+            if (((-0.001F) < (d1y - temp_f12_2)) && (d1x <= vfarx) && (vnearx <= d1x))
+            {
+                *dfx = d1x;
+                *dfy = temp_f12_2;
+
+                return TRUE;
+            }
+        }
+        else
+        {
+            vddist_x = v1x - d1x;
+            vddist_y = v1y - d1y;
+
+            var_f18 = (ddist_y * vddist_x) - (ddist_x * vddist_y);
+            scale = (vdist_y * ddist_x) - (vdist_x * ddist_y);
+            vddiv = var_f18 / scale;
+
+            if (vddiv < 0.0F)
+            {
+                if (vddiv < (-0.001F))
+                {
+                    return FALSE;
+                }
+                var_f18 = 0.0F;
+            }
+            else if (vddiv > 1.0F)
+            {
+                if (1.001F < vddiv)
+                {
+                    return FALSE;
+                }
+                var_f18 = scale;
+            }
+            vddistdiv = ((vdist_x * vddist_y) - (vdist_y * vddist_x)) / scale;
+
+            if ((vddistdiv < (-0.001F)) || (1.001F < vddistdiv))
+            {
+                return FALSE;
+            }
+            vdscale = 1.0F / scale;
+
+            *dfx = v1x + (var_f18 * vdist_x * vdscale);
+            *dfy = v1y + (var_f18 * vdist_y * vdscale);
+
+            return TRUE;
+        }
+    }
+    return FALSE;
+}

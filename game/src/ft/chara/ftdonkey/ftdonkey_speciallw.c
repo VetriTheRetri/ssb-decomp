@@ -1,11 +1,13 @@
 #include "ftdonkey.h"
 
-void func_ovl3_8015B9F0(GObj *fighter_gobj)
+// 0x8015B9F0
+void ftDonkey_SpecialLwStart_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015BAA4);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftDonkey_SpecialLwLoop_SetStatus);
 }
 
-void func_ovl3_8015BA14(GObj *fighter_gobj)
+// 0x8015BA14
+void ftDonkey_SpecialLwLoop_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -15,11 +17,12 @@ void func_ovl3_8015BA14(GObj *fighter_gobj)
         {
             fp->status_vars.donkey.speciallw.is_loop = FALSE;
         }
-        else func_ovl3_8015BAD0(fighter_gobj);
+        else ftDonkey_SpecialLwEnd_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8015BA7C(GObj *fighter_gobj)
+// 0x8015BA7C
+void ftDonkey_SpecialLwLoop_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -29,21 +32,24 @@ void func_ovl3_8015BA7C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015BAA4(GObj *fighter_gobj)
+// 0x8015BAA4
+void ftDonkey_SpecialLwLoop_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialLwLoop, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialLwLoop, 0.0F, 1.0F, 0);
 }
 
-void func_ovl3_8015BAD0(GObj *fighter_gobj)
+// 0x8015BAD0
+void ftDonkey_SpecialLwEnd_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialLwEnd, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialLwEnd, 0.0F, 1.0F, 0);
 }
 
-void jtgt_ovl3_8015BAFC(GObj *fighter_gobj)
+// 0x8015BAFC
+void ftDonkey_SpecialLwStart_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialLwStart, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialLwStart, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
 
     fp->status_vars.donkey.speciallw.is_loop = FALSE;

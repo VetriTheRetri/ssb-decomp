@@ -5,13 +5,12 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftsamus",
-    "\\game\\src\\it",
-    "\\game\\src\\it\\article",
-    "\\game\\src\\it\\item",
+    "\\game\\src\\ft\\chara\\ftfox",
+    "\\game\\src\\ft\\chara\\ftness",
     "\\game\\src\\mp",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftness\\ftness_specialhi.c",
   "PreviewInSolutionExplorer": false
 }

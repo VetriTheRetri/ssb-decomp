@@ -3,8 +3,8 @@
 void (*ftCommon_SpecialHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {
     ftMario_SpecialHi_SetStatus,
-    jtgt_ovl3_8015CAB0,
-    jtgt_ovl3_8015B974,
+    ftFox_SpecialHiStart_SetStatus,
+    ftDonkey_SpecialHi_SetStatus,
     jtgt_ovl3_8015DE0C,
     ftMario_SpecialHi_SetStatus,
     jtgt_ovl3_80164284,
@@ -17,8 +17,8 @@ void (*ftCommon_SpecialHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialHi_SetStatus,
     ftMario_SpecialHi_SetStatus,
     ftMario_SpecialHi_SetStatus,
-    jtgt_ovl3_8015CAB0,
-    jtgt_ovl3_8015B974,
+    ftFox_SpecialHiStart_SetStatus,
+    ftDonkey_SpecialHi_SetStatus,
     jtgt_ovl3_8015DE0C,
     ftMario_SpecialHi_SetStatus,
     jtgt_ovl3_80164284,
@@ -28,7 +28,7 @@ void (*ftCommon_SpecialHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801529A0,
     ftPurin_SpecialHi_SetStatus,
     ftNess_SpecialHiStart_SetStatus,
-    jtgt_ovl3_8015B974
+    ftDonkey_SpecialHi_SetStatus
 };
 
 bool32 func_ovl3_80151160(GObj *fighter_gobj)

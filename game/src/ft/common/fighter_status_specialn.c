@@ -33,8 +33,8 @@ void (*ftKirby_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
 void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) = 
 {
     ftMario_SpecialN_SetStatus,
-    jtgt_ovl3_8015BC78,
-    jtgt_ovl3_8015B61C,
+    ftFox_SpecialN_SetStatus,
+    ftDonkey_SpecialNStart_SetStatus,
     jtgt_ovl3_8015DB64,
     ftMario_SpecialN_SetStatus,
     jtgt_ovl3_801639CC,
@@ -47,8 +47,8 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialN_SetStatus,
     ftMario_SpecialN_SetStatus,
     ftMario_SpecialN_SetStatus,
-    jtgt_ovl3_8015BC78,
-    jtgt_ovl3_8015B61C,
+    ftFox_SpecialN_SetStatus,
+    ftDonkey_SpecialNStart_SetStatus,
     jtgt_ovl3_8015DB64,
     ftMario_SpecialN_SetStatus,
     jtgt_ovl3_801639CC,
@@ -58,7 +58,7 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_80151D24,
     ftPurin_SpecialN_SetStatus,
     ftNess_SpecialN_SetStatus,
-    jtgt_ovl3_8015B61C
+    ftDonkey_SpecialNStart_SetStatus
 };
 
 void jtgt_ovl3_80151060(GObj *fighter_gobj)
