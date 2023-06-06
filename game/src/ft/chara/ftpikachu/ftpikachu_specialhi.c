@@ -1,7 +1,5 @@
 #include "ftpikachu.h"
 
-
-
 void func_ovl3_801527B0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
@@ -82,7 +80,7 @@ void func_ovl3_80152960(GObj *fighter_gobj)
 
     ftCommon_CheckSetColAnimIndex(fighter_gobj, FTPIKACHU_QUICKATTACK_COLANIM_ID, 0); // Apply color animation
 
-    gcSetAnimSpeed(fighter_gobj, 0.0F); // Set animation speed (0.0F = freeze)
+    gcSetAnimPlaybackRate(fighter_gobj, 0.0F); // Set animation speed (0.0F = freeze)
 }
 
 void jtgt_ovl3_801529A0(GObj *fighter_gobj)
@@ -172,7 +170,7 @@ bool32 func_ovl3_80152BF4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (!(fp->coll_data.ground_flags & 0x4000) || (fp->status_vars.pikachu.specialhi.coll_timer_unk >= 2))
+    if (!(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID) || (fp->status_vars.pikachu.specialhi.coll_timer_unk >= 2))
     {
         return TRUE;
     }
@@ -245,7 +243,7 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 sqrt_stick_range;
     f32 temp_stick_x;
-    Vec3f stick_angle;
+    Vec3f stick_range;
     f32 temp_stick_y;
 
     temp_stick_x = fp->input.pl.stick_range.x;
@@ -257,16 +255,16 @@ void func_ovl3_80152E48(GObj *fighter_gobj)
     {
         sqrt_stick_range = 80.0F;
     }
-    if (!(sqrt_stick_range < FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN) && !(fp->coll_data.ground_flags & 0x4000))
+    if (!(sqrt_stick_range < FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN) && !(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID))
     {
-        stick_angle.x = fp->input.pl.stick_range.x;
-        stick_angle.y = fp->input.pl.stick_range.y;
-        stick_angle.z = 0.0F;
+        stick_range.x = fp->input.pl.stick_range.x;
+        stick_range.y = fp->input.pl.stick_range.y;
+        stick_range.z = 0.0F;
 
-        if ((vec3f_angle_diff(&fp->coll_data.ground_angle, &stick_angle) < HALF_PI32)) goto block_end;
+        if ((vec3f_angle_diff(&fp->coll_data.ground_angle, &stick_range) < HALF_PI32)) goto block_end;
         {
-            fp->status_vars.pikachu.specialhi.stick_range.x = stick_angle.x;
-            fp->status_vars.pikachu.specialhi.stick_range.y = stick_angle.y;
+            fp->status_vars.pikachu.specialhi.stick_range.x = stick_range.x;
+            fp->status_vars.pikachu.specialhi.stick_range.y = stick_range.y;
 
             ftCommon_StickInputSetLR(fp);
             func_ovl3_80152E2C(fighter_gobj);
@@ -298,7 +296,6 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
     {
         sqrt_stick_range = 80.0F;
     }
-
     ftCommon_StickInputSetLR(fp);
 
     if (sqrt_stick_range > FTPIKACHU_QUICKATTACK_STICK_RANGE_MIN)
@@ -328,7 +325,6 @@ void func_ovl3_80152FEC(GObj *fighter_gobj)
         fp->phys_info.vel_air.x *= FTPIKACHU_QUICKATTACK_VEL_MUL;
         fp->phys_info.vel_air.y *= FTPIKACHU_QUICKATTACK_VEL_MUL;
     }
-
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHi, 0.0F, 0.0F, 0U);
     ftAnim_Update(fighter_gobj);
 }
@@ -425,7 +421,7 @@ void func_ovl3_80153414(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (fp->command_vars.flags.flag1 != 0U)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         ftCommonAttributes *attributes;
 
@@ -433,7 +429,7 @@ void func_ovl3_80153414(GObj *fighter_gobj)
 
         attributes = fp->attributes;
 
-        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTPIKACHU_QUICKATTACK_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTPIKACHU_QUICKATTACK_AIR_SPEED_MUL);
+        func_ovl2_800D8FC8(F(fp, 8, attributes->aerial_acceleration * FTPIKACHU_QUICKATTACK_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTPIKACHU_QUICKATTACK_AIR_SPEED_MUL);
        
         func_ovl2_800D9074(fp, fp->attributes);
     }
@@ -497,7 +493,7 @@ void func_ovl3_801535F4(GObj *fighter_gobj)
 
     fp->phys_info.vel_ground.x = fp->status_vars.pikachu.specialhi.vel_ground_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHiEnd, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialHiEnd, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -510,6 +506,6 @@ void func_ovl3_80153654(GObj *fighter_gobj)
     fp->phys_info.vel_air.x = (f32)(fp->status_vars.pikachu.specialhi.vel_x_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
     fp->phys_info.vel_air.y = (f32)(fp->status_vars.pikachu.specialhi.vel_y_bak * FTPIKACHU_QUICKATTACK_VEL_BAK_MUL);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHiEnd, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirHiEnd, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
 }

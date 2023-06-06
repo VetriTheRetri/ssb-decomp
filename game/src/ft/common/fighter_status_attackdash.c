@@ -1,12 +1,14 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_8014F670(GObj *fighter_gobj)
+// 0x8014F670
+void ftCommon_AttackDash_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Common_AttackDash, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_AttackDash, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
 }
 
-bool32 func_ovl3_8014F69C(GObj *fighter_gobj)
+// 0x8014F69C - Also checks LightThrowDash and ItemSwingDash
+bool32 ftCommon_AttackDash_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -30,7 +32,7 @@ bool32 func_ovl3_8014F69C(GObj *fighter_gobj)
         }
         if (attributes->is_have_attackdash)
         {
-            func_ovl3_8014F670(fighter_gobj);
+            ftCommon_AttackDash_SetStatus(fighter_gobj);
 
             return TRUE;
         }

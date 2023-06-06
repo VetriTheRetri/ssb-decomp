@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_8014E6A0(GObj *fighter_gobj)
+// 0x8014E6A0
+void ftCommon_Appeal_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -10,7 +11,8 @@ void func_ovl3_8014E6A0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014E6E0(GObj *fighter_gobj)
+// 0x8014E6E0
+void ftCommon_Appeal_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -21,18 +23,19 @@ void func_ovl3_8014E6E0(GObj *fighter_gobj)
             func_ovl3_801635EC(fighter_gobj);
         }
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Appeal, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Appeal, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
 
     fp->command_vars.flags.flag1 = 0;
 }
 
-bool32 func_ovl3_8014E764(GObj *fighter_gobj)
+// 0x8014E764
+bool32 ftCommon_Appeal_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_tap & fp->input.button_mask_l)
     {
-        func_ovl3_8014E6E0(fighter_gobj);
+        ftCommon_Appeal_SetStatus(fighter_gobj);
 
         return TRUE;
     }

@@ -284,7 +284,7 @@ void func_ovl2_800D8FC8(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 cl
         {
             fp->phys_info.vel_air.x = -clamp;
         }
-        else if (clamp < fp->phys_info.vel_air.x)
+        else if (fp->phys_info.vel_air.x > clamp)
         {
             fp->phys_info.vel_air.x = clamp;
         }

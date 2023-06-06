@@ -19387,7 +19387,7 @@ glabel ftStatus_Update
   /* 062FF4 800E77F4 45030005 */     bc1tl .L800E780C
   /* 062FF8 800E77F8 8E240198 */        lw $a0, 0x198($s1)
   /* 062FFC 800E77FC 44058000 */      mfc1 $a1, $f16
-  /* 063000 800E7800 0C002EC1 */       jal gcSetAnimSpeed
+  /* 063000 800E7800 0C002EC1 */       jal gcSetAnimPlaybackRate
   /* 063004 800E7804 01002025 */        or $a0, $t0, $zero
   /* 063008 800E7808 8E240198 */        lw $a0, 0x198($s1)
   .L800E780C:

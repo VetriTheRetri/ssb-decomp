@@ -1,13 +1,15 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_801505F0(GObj *fighter_gobj)
+// 0x801505F0
+void ftCommon_AttackHi4_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Common_AttackHi4, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_AttackHi4, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }
 
-bool32 func_ovl3_80150628(Fighter_Struct *fp)
+// 0x80150628
+bool32 ftCommon_AttackHi4_CheckInputSuccess(Fighter_Struct *fp)
 {
     if ((fp->input.pl.stick_range.y >= FTCOMMON_ATTACKHI4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -16,7 +18,8 @@ bool32 func_ovl3_80150628(Fighter_Struct *fp)
     else return FALSE;
 }
 
-bool32 func_ovl3_80150660(Fighter_Struct *fp)
+// 0x80150660
+bool32 ftCommon_AttackHi4_CheckInterruptCommon(Fighter_Struct *fp)
 {
     ftCommonAttributes *attributes = fp->attributes;
 
@@ -28,31 +31,33 @@ bool32 func_ovl3_80150660(Fighter_Struct *fp)
     }
     if (attributes->is_have_attackhi4)
     {
-        func_ovl3_801505F0(fp->fighter_gobj);
+        ftCommon_AttackHi4_SetStatus(fp->fighter_gobj);
 
         return TRUE;
     }
     return FALSE;
 }
 
-bool32 func_ovl3_801506CC(GObj *fighter_gobj)
+// 0x801506CC
+bool32 ftCommon_AttackHi4_CheckInterruptKneebend(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (func_ovl3_80150628(fp) != FALSE)
+    if (ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE)
     {
-        return func_ovl3_80150660(fp);
+        return ftCommon_AttackHi4_CheckInterruptCommon(fp);
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_8015070C(GObj *fighter_gobj)
+// 0x8015070C
+bool32 ftCommon_AttackHi4_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((func_ovl3_80150628(fp) != FALSE) && (fp->tap_stick_y < FTCOMMON_ATTACKHI4_BUFFER_FRAMES_MAX))
+    if ((ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE) && (fp->tap_stick_y < FTCOMMON_ATTACKHI4_BUFFER_FRAMES_MAX))
     {
-        return func_ovl3_80150660(fp);
+        return ftCommon_AttackHi4_CheckInterruptCommon(fp);
     }
     else return FALSE;
 }

@@ -60,7 +60,7 @@ extern u32 gmMatchInfo_1PGameTimeTotal; // Static (.bss); Total time taken to co
 
 void func_ovl2_800D6590(void)
 {
-    if (!(Save_Info.unlock_mask & GMSAVE_UNLOCK_MASK_NESS) && (Save_Info.spgame_difficulty >= 2) && (Scene_Info.continues_used == 0) && (Save_Info.spgame_stock_count < 3))
+    if (!(Save_Info.unlock_mask & GMSAVE_UNLOCK_MASK_NESS) && (Save_Info.spgame_difficulty >= gmMatch_Difficulty_Normal) && (Scene_Info.continues_used == 0) && (Save_Info.spgame_stock_count < 3))
     {
         Scene_Info.scene_queue = gmSceneIndex_Challenger_Ness;
         return;
@@ -187,7 +187,7 @@ void func_ovl2_800D67DC(void)
 
     if (Save_Info.unk5E2 & 4)
     {
-        Scene_Info.ft_kind = 0;
+        Scene_Info.ft_kind = Ft_Kind_Mario;
         Scene_Info.unk15 = 0;
     }
     D_800A4B18.player_block[Scene_Info.player_port].handicap = 9;

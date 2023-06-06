@@ -25,7 +25,7 @@ void func_ovl3_8013F334(GObj *fighter_gobj)
 
     if (func_ovl3_80151160(fighter_gobj) == FALSE)
     {
-        if (func_ovl3_801506CC(fighter_gobj) == FALSE)
+        if (ftCommon_AttackHi4_CheckInterruptKneebend(fighter_gobj) == FALSE)
         {
             if (fp->status_vars.common.kneebend.jump_force < fp->input.pl.stick_range.y)
             {

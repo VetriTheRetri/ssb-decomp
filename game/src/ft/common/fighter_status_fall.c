@@ -2,7 +2,7 @@
 
 void func_ovl3_8013F9A0(GObj *fighter_gobj)
 {
-    if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (func_ovl3_80150B00(fighter_gobj) == FALSE))
+    if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
         func_ovl3_8014019C(fighter_gobj);
     }

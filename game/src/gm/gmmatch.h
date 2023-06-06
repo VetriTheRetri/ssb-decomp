@@ -64,6 +64,16 @@ typedef enum gmMatchGameRules
 #define GMMATCH_GAMERULE_BONUS   (1 << gmMatch_GameRule_Bonus)
 #define GMMATCH_GAMERULE_1PGAME  (1 << gmMatch_GameRule_1PGame)
 
+typedef enum gmMatchGameDifficulty
+{
+    gmMatch_Difficulty_VeryEasy,
+    gmMatch_Difficulty_Easy,
+    gmMatch_Difficulty_Normal,
+    gmMatch_Difficulty_Hard,
+    gmMatch_Difficulty_VeryHard
+
+} gmMatchGameDifficulty;
+
 typedef enum gmMatchGameType
 {
     gmMatch_GameType_1PGame = 5

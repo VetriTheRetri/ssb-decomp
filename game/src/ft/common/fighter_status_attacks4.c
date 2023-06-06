@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_8014FE40(GObj *fighter_gobj)
+// 0x8014FE40
+void ftCommon_AttackS4_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f offset;
@@ -62,7 +63,8 @@ void func_ovl3_8014FE40(GObj *fighter_gobj)
 extern intptr_t ftNess_AttackS4_SpecialHit; // 0x00001114
 extern void *D_ovl2_80131134;               // Pointer to Ness' file?
 
-void func_ovl3_8014FFE0(GObj *fighter_gobj)
+// 0x8014FFE0
+void ftCommon_AttackS4_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 stick_angle;
@@ -101,7 +103,7 @@ void func_ovl3_8014FFE0(GObj *fighter_gobj)
         fp->command_vars.flags.flag1 = 0;
         break;
     }
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     switch (fp->ft_kind)
@@ -116,12 +118,13 @@ void func_ovl3_8014FFE0(GObj *fighter_gobj)
 
     case Ft_Kind_Ness:
     case Ft_Kind_PolyNess:
-        fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80131134 + (intptr_t)&ftNess_AttackS4_SpecialHit);
+        fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80131134 + (intptr_t)&ftNess_AttackS4_SpecialHit); // Linker thing
         break;
     }
 }
 
-bool32 func_ovl3_801501E0(GObj *fighter_gobj)
+// 0x801501E0
+bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -153,7 +156,7 @@ bool32 func_ovl3_801501E0(GObj *fighter_gobj)
         }
         if (attributes->is_have_attacks4)
         {
-            func_ovl3_8014FFE0(fighter_gobj);
+            ftCommon_AttackS4_SetStatus(fighter_gobj);
 
             return TRUE;
         }
@@ -161,7 +164,8 @@ bool32 func_ovl3_801501E0(GObj *fighter_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_8015030C(GObj *fighter_gobj)
+// 0x8015030C
+bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -196,7 +200,7 @@ bool32 func_ovl3_8015030C(GObj *fighter_gobj)
         if (attributes->is_have_attacks4)
         {
             ftCommon_StickInputSetLR(fp);
-            func_ovl3_8014FFE0(fighter_gobj);
+            ftCommon_AttackS4_SetStatus(fighter_gobj);
 
             return TRUE;
         }
@@ -204,7 +208,8 @@ bool32 func_ovl3_8015030C(GObj *fighter_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_80150470(GObj *fighter_gobj)
+// 0x80150470
+bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -239,7 +244,7 @@ bool32 func_ovl3_80150470(GObj *fighter_gobj)
         if (attributes->is_have_attacks4)
         {
             ftCommon_StickInputSetLR(fp);
-            func_ovl3_8014FFE0(fighter_gobj);
+            ftCommon_AttackS4_SetStatus(fighter_gobj);
 
             return TRUE;
         }

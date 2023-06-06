@@ -53,19 +53,19 @@ void func_ovl3_80158824(GObj *fighter_gobj)
     {
         if ((fp->input.pl.stick_range.x * fp->lr) >= 20)
         {
-            if (ABSF(angle) <= 0.87266463F)
+            if (ABSF(angle) <= F_DEG_TO_RAD(50.0F)) // 0.87266463F
             {
                 func_ovl3_801580E0(fighter_gobj, &sp30);
                 func_ovl3_801592B4(fighter_gobj, func_ovl3_801593A4, &sp30);
                 return;
             }
         }
-        if ((fp->input.pl.stick_range.y >= 20) && (0.87266463F < angle))
+        if ((fp->input.pl.stick_range.y >= 20) && (F_DEG_TO_RAD(50.0F) < angle)) // 0.87266463F
         {
             func_ovl3_80159524(fighter_gobj);
             return;
         }
-        else if ((fp->input.pl.stick_range.y < -19) && (angle < -0.87266463F))
+        else if ((fp->input.pl.stick_range.y <= -20) && (angle < F_DEG_TO_RAD(-50.0F))) // -0.87266463F
         {
             if ((fp_target->coll_data.ground_line_id != -1) && (fp_target->coll_data.ground_line_id != -2))
             {
@@ -93,19 +93,19 @@ void func_ovl3_80158824(GObj *fighter_gobj)
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A7C4, &sp30);
             return;
         }
-        else if ((fp->input.pl.stick_range.y < -52) && ((s32)fp->tap_stick_y < 4))
+        else if ((fp->input.pl.stick_range.y <= -53) && ((s32)fp->tap_stick_y < 4))
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 600.0F, 0);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015ACD4, &sp30);
             return;
         }
-        else if (((fp->input.pl.stick_range.x * fp->lr) >= 20) && (angle <= 0.87266463F))
+        else if (((fp->input.pl.stick_range.x * fp->lr) >= 20) && (angle <= F_DEG_TO_RAD(50.0F))) // 0.87266463F
         {
             func_ovl3_80158310(fighter_gobj, &sp30, 3000.0F, 100.0F);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_8015A314, &sp30);
             return;
         }
-        else if ((fp->input.pl.stick_range.y >= 20) && (0.87266463F < angle))
+        else if ((fp->input.pl.stick_range.y >= 20) && (F_DEG_TO_RAD(50.0F) < angle)) // 0.87266463F
         {
             if ((fp_target->coll_data.ground_line_id != -1) && (fp_target->coll_data.ground_line_id != -2))
             {
@@ -114,7 +114,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
                 return;
             }
         }
-        if ((fp->input.pl.stick_range.y < -19) && (angle < -0.87266463F))
+        if ((fp->input.pl.stick_range.y <= -20) && (angle < F_DEG_TO_RAD(-50.0F)))
         {
             func_ovl3_801580E0(fighter_gobj, &sp30);
             func_ovl3_801592B4(fighter_gobj, func_ovl3_801594BC, &sp30);
@@ -144,6 +144,7 @@ void func_ovl3_80158C34(GObj *fighter_gobj) // Decide Master Hand's next attack
         if (fp->fighter_vars.masterhand.p_masterhand->unk_0x16 == 3)
         {
             fp->fighter_vars.masterhand.p_masterhand->unk_0x16 = 0;
+
             var = 2;
         }
         else
@@ -275,9 +276,9 @@ void func_ovl3_80159040(GObj *fighter_gobj)
     Fighter_Struct *fp;
     Vec3f *translate;
     Vec3f pos;
-    s32 unk_a0;
+    s32 ground_line_id;
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Wait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Wait, 0.0F, 1.0F, 0);
 
     fp = FighterGetStruct(fighter_gobj);
 
@@ -290,24 +291,24 @@ void func_ovl3_80159040(GObj *fighter_gobj)
     }
     else
     {
-        unk_a0 = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id;
+        ground_line_id = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id;
 
-        if ((unk_a0 == -1) || (unk_a0 == -2))
+        if ((ground_line_id == -1) || (ground_line_id == -2))
         {
-            unk_a0 = fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
+            ground_line_id = fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
         }
 
         if (D_ovl2_80131308.unk_80131308_0x28 < translate->x)
         {
-            func_ovl2_800F4408(unk_a0, &pos);
+            func_ovl2_800F4408(ground_line_id, &pos);
         }
         else if (translate->x < D_ovl2_80131308.unk_80131308_0x2C)
         {
-            func_ovl2_800F4428(unk_a0, &pos);
+            func_ovl2_800F4428(ground_line_id, &pos);
         }
         else
         {
-            func_ovl3_8015839C(unk_a0, &pos);
+            func_ovl3_8015839C(ground_line_id, &pos);
         }
         fp->status_vars.masterhand.wait.pos.x = pos.x;
         fp->status_vars.masterhand.wait.pos.y = pos.y;

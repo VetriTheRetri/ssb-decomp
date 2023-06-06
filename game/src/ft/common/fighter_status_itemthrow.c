@@ -182,7 +182,7 @@ void func_ovl3_80146930(GObj *fighter_gobj)
     {
         status_id = ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_HeavyThrowF4 : ftStatus_Common_HeavyThrowB4;
     }
-    else if (((ABS(fp->input.pl.stick_range.x) >= 0x14) && ((ftCommon_GetStickAngleRadians(fp) < 0.0F) ? -ftCommon_GetStickAngleRadians(fp) : ftCommon_GetStickAngleRadians(fp)) <= FTCOMMON_HEAVYTHROW_HI_OR_LW_ANGLE))
+    else if (((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_HEAVYTHROW_STICK_RANGE_XY_MIN) && ((ftCommon_GetStickAngleRadians(fp) < 0.0F) ? -ftCommon_GetStickAngleRadians(fp) : ftCommon_GetStickAngleRadians(fp)) <= FTCOMMON_HEAVYTHROW_HI_OR_LW_ANGLE))
     {
         status_id = ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_HeavyThrowF : ftStatus_Common_HeavyThrowB;
     }

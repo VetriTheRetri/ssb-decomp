@@ -1,39 +1,44 @@
 #include "ftcaptain.h"
 #include "ftness.h"
 
-void func_ovl3_8013DE60(GObj *fighter_gobj)
+// 0x8013DE60
+void ftNess_AppearStart_ProcUpdate(GObj *fighter_gobj)
 {
     func_ovl3_8013DA14(fighter_gobj);
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013DEC0);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftNess_AppearWait_SetStatus);
 }
 
-void func_ovl3_8013DE90(GObj *fighter_gobj)
+// 0x8013DE90
+void ftNess_AppearWait_ProcUpdate(GObj *fighter_gobj)
 {
     func_ovl3_8013DA14(fighter_gobj);
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013DF14);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftNess_AppearEnd_SetStatus);
 }
 
-void func_ovl3_8013DEC0(GObj *fighter_gobj)
+// 0x8013DEC0
+void ftNess_AppearWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_AppearStart, 0.0F, 1.0F, 0x22U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_AppearWait, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->x18E_flag_b0 = FALSE;
 }
 
-void func_ovl3_8013DF14(GObj *fighter_gobj)
+// 0x8013DF14
+void ftNess_AppearEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Ness_AppearR : ftStatus_Ness_AppearL), 0.0F, 1.0F, 0x22U);
+    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Ness_AppearREnd : ftStatus_Ness_AppearLEnd), 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->x18E_flag_b0 = FALSE;
 }
 
-void func_ovl3_8013DF7C(GObj *fighter_gobj)
+// 0x8013DF7C
+void ftCaptain_AppearStart_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -43,14 +48,15 @@ void func_ovl3_8013DF7C(GObj *fighter_gobj)
     {
         func_ovl2_800E827C(fighter_gobj, 9);
     }
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013E008);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCaptain_AppearEnd_SetStatus);
 }
 
-void func_ovl3_8013DF14(GObj *fighter_gobj)
+// 0x8013E008
+void ftCaptain_AppearEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Captain_AppearR : ftStatus_Captain_AppearL), 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Captain_AppearREnd : ftStatus_Captain_AppearLEnd), 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->x18E_flag_b0 = FALSE;

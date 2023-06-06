@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_8014F760(GObj *fighter_gobj)
+// 0x8014F760
+void ftCommon_AttackS3_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 stick_angle;
@@ -29,19 +30,20 @@ void func_ovl3_8014F760(GObj *fighter_gobj)
         }
         else status_id = ftStatus_Common_AttackS3;
 
-        ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
         ftAnim_Update(fighter_gobj);
     }
 }
 
-bool32 func_ovl3_8014F8C0(GObj *fighter_gobj)
+// 0x8014F8C0
+bool32 ftCommon_AttackS3_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS3_STICK_RANGE_MIN))
     {
-        if (((ftCommon_GetStickAngleRadians(fp) < 0.0F) ? -ftCommon_GetStickAngleRadians(fp) : ftCommon_GetStickAngleRadians(fp)) <= 0.87266463F)
+        if (((ftCommon_GetStickAngleRadians(fp) < 0.0F) ? -ftCommon_GetStickAngleRadians(fp) : ftCommon_GetStickAngleRadians(fp)) <= F_DEG_TO_RAD(50.0F)) // 0.87266463F
         {
             if (fp->item_hold != NULL)
             {
@@ -64,7 +66,7 @@ bool32 func_ovl3_8014F8C0(GObj *fighter_gobj)
             }
             if (attributes->is_have_attacks3)
             {
-                func_ovl3_8014F760(fighter_gobj);
+                ftCommon_AttackS3_SetStatus(fighter_gobj);
 
                 return TRUE;
             }

@@ -8,8 +8,8 @@ void func_ovl3_8013E690(GObj *fighter_gobj)
     {
         fp->command_vars.flags.flag1 = 0;
 
-        fp->status_vars.common.turn.unk_0x0 = 1;
-        fp->status_vars.common.turn.unk_0x4 = 1;
+        fp->status_vars.common.turn.is_allow_turn_direction = TRUE;
+        fp->status_vars.common.turn.is_disable_interrupts = TRUE;
 
         fp->lr = -fp->lr;
         fp->phys_info.vel_ground.x = -fp->phys_info.vel_ground.x;
@@ -44,28 +44,28 @@ interrupt1:
     {
         if (fp->status_vars.common.turn.unk_0x14 < 256) fp->status_vars.common.turn.unk_0x14++;
 
-        unk_bool = (fp->status_vars.common.turn.unk_0x14 < 6) ? func_ovl3_8015030C(fighter_gobj) : func_ovl3_80150470(fighter_gobj);
+        unk_bool = (fp->status_vars.common.turn.unk_0x14 < 6) ? ftCommon_AttackS4_CheckInterruptTurn(fighter_gobj) : ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj);
 
         if (unk_bool == FALSE)
         {
             if (fp->status_vars.common.turn.is_disable_interrupts == FALSE) goto interrupt2;
 
-            if (func_ovl3_8015070C(fighter_gobj) != FALSE) return;
+            if (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-            if (func_ovl3_80150884(fighter_gobj) != FALSE) return;
+            if (ftCommon_AttackLw4_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-            if (func_ovl3_8014F8C0(fighter_gobj) != FALSE) return;
+            if (ftCommon_AttackS3_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-            if (func_ovl3_8014FB1C(fighter_gobj) != FALSE) return;
+            if (ftCommon_AttackHi3_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-            if (func_ovl3_8014FD70(fighter_gobj) != FALSE) return;
+            if (ftCommon_AttackLw3_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-            if (func_ovl3_8014EC78(fighter_gobj) != FALSE) return;
+            if (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
         interrupt2:
             if (func_ovl3_80148D0C(fighter_gobj) != FALSE) return;
 
-            if (func_ovl3_8014E764(fighter_gobj) != FALSE) return;
+            if (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
             if (func_ovl3_8013F4D0(fighter_gobj) != FALSE) return;
 

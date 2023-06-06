@@ -1462,7 +1462,7 @@ f32 gmCommonObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s3
 
     if (knockback_weight != 0)
     {
-        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
     } 
     else 
     {
@@ -1545,7 +1545,7 @@ void ftCommon_DamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
 
             if ((ap->is_light_throw) || (fp->ft_kind != Ft_Kind_Donkey) && (fp->ft_kind != Ft_Kind_PolyDonkey) && (fp->ft_kind != Ft_Kind_GiantDonkey))
             {
-                if (((s32)rand_u16_range(60) < damage) || ((atCommon_CheckTypeShootEmpty(fp->item_hold, damage) != FALSE) && (rand_u16_range(2) == 0)))
+                if ((damage > (s32)rand_u16_range(60)) || ((atCommon_CheckTypeShootEmpty(fp->item_hold, damage) != FALSE) && (rand_u16_range(2) == 0)))
                 {
                     Vec3f vel;
 

@@ -11,22 +11,23 @@
 #include "ftpurin.h"
 #include "ftness.h"
 
-#define ftStatus_CheckAttack13Kind(fp)      \
-(                                           \
-    (fp->ft_kind == Ft_Kind_Mario)      ||  \
-    (fp->ft_kind == Ft_Kind_MetalMario) ||  \
-    (fp->ft_kind == Ft_Kind_PolyMario)  ||  \
-    (fp->ft_kind == Ft_Kind_Luigi)      ||  \
-    (fp->ft_kind == Ft_Kind_PolyLuigi)  ||  \
-    (fp->ft_kind == Ft_Kind_Captain)    ||  \
-    (fp->ft_kind == Ft_Kind_PolyCaptain)||  \
-    (fp->ft_kind == Ft_Kind_Link)       ||  \
-    (fp->ft_kind == Ft_Kind_PolyLink)   ||  \
-    (fp->ft_kind == Ft_Kind_Ness)       ||  \
-    (fp->ft_kind == Ft_Kind_PolyNess)       \
-)                                           \
+#define ftStatus_CheckAttack13Kind(fp)        \
+(                                             \
+    ((fp)->ft_kind == Ft_Kind_Mario)      ||  \
+    ((fp)->ft_kind == Ft_Kind_MetalMario) ||  \
+    ((fp)->ft_kind == Ft_Kind_PolyMario)  ||  \
+    ((fp)->ft_kind == Ft_Kind_Luigi)      ||  \
+    ((fp)->ft_kind == Ft_Kind_PolyLuigi)  ||  \
+    ((fp)->ft_kind == Ft_Kind_Captain)    ||  \
+    ((fp)->ft_kind == Ft_Kind_PolyCaptain)||  \
+    ((fp)->ft_kind == Ft_Kind_Link)       ||  \
+    ((fp)->ft_kind == Ft_Kind_PolyLink)   ||  \
+    ((fp)->ft_kind == Ft_Kind_Ness)       ||  \
+    ((fp)->ft_kind == Ft_Kind_PolyNess)       \
+)                                             \
 
-void func_ovl3_8014E7B0(GObj *fighter_gobj)
+// 0x8014E7B0
+void ftCommon_Attack11_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -34,71 +35,104 @@ void func_ovl3_8014E7B0(GObj *fighter_gobj)
     {
         if ((fp->ft_kind == Ft_Kind_Pikachu) || (fp->ft_kind == Ft_Kind_PolyPikachu))
         {
-            func_ovl3_8014EA44(fighter_gobj);
+            ftCommon_Attack11_SetStatus(fighter_gobj);
         }
-        else func_ovl3_8014EAD8(fighter_gobj);
+        else ftCommon_Attack12_SetStatus(fighter_gobj);
     }
     else func_ovl2_800D94C4(fighter_gobj);
 }
 
-void func_ovl3_8014E824(GObj *fighter_gobj)
+// 0x8014E824
+void ftCommon_Attack12_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     if ((fp->ft_kind != Ft_Kind_Captain) && (fp->ft_kind != Ft_Kind_PolyCaptain) && (fp->command_vars.flags.flag1 != 0) && (fp->is_goto_attack100))
     {
-        func_ovl3_8014F0F4(fighter_gobj);
+        ftCommon_Attack100Start_SetStatus(fighter_gobj);
     }
     else if ((fp->command_vars.flags.flag1 != 0) && (fp->status_vars.common.attack1.is_goto_followup != FALSE))
     {
-        func_ovl3_8014EBB4(fighter_gobj);
+        ftCommon_Attack13_SetStatus(fighter_gobj);
     }
     else func_ovl2_800D94C4(fighter_gobj);
 }
 
-void func_ovl3_8014E8B4(GObj *fighter_gobj)
+// 0x8014E8B4
+void ftCommon_Attack13_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     if (((fp->ft_kind == Ft_Kind_Captain) || (fp->ft_kind == Ft_Kind_PolyCaptain)) && (fp->command_vars.flags.flag1 != 0) && (fp->is_goto_attack100))
     {
-        func_ovl3_8014F0F4(fighter_gobj);
+        ftCommon_Attack100Start_SetStatus(fighter_gobj);
     }
     else func_ovl2_800D94C4(fighter_gobj);
 }
 
-void func_ovl3_8014E9B4(GObj *fighter_gobj)
-{
-    if (func_ovl3_8014EFE0(fighter_gobj) == FALSE)
-    {
-        func_ovl3_8014F4EC(fighter_gobj);
-    }
-}
-
-void func_ovl3_8014E9E4(GObj *fighter_gobj)
-{
-    func_ovl3_8014F4EC(fighter_gobj);
-}
-
-void func_ovl3_8014EA04(GObj *fighter_gobj)
+// 0x8014E91C
+void ftCommon_Attack11_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCommon_MotionCountIncSetID(fp, 1);
+    if (fp->status_vars.common.attack1.interrupt_catch_timer < 2)
+    {
+        fp->status_vars.common.attack1.interrupt_catch_timer++;
+
+        if (func_ovl3_80149E24(fighter_gobj) != FALSE)
+        {
+            return;
+        }
+    }
+    if (ftCommon_Attack100Start_CheckInterruptCommon(fighter_gobj) == FALSE)
+    {
+        if ((fp->ft_kind == Ft_Kind_Pikachu) || (fp->ft_kind == Ft_Kind_PolyPikachu))
+        {
+            if (ftCommon_Attack11_CheckGoto(fighter_gobj) != FALSE)
+            {
+                return;
+            }
+        }
+        else ftCommon_Attack12_CheckGoto(fighter_gobj);
+    }
+}
+
+// 0x8014E9B4
+void ftCommon_Attack12_ProcInterrupt(GObj *fighter_gobj)
+{
+    if (ftCommon_Attack13_CheckGoto(fighter_gobj) == FALSE)
+    {
+        ftCommon_Attack100Start_CheckInterruptCommon(fighter_gobj);
+    }
+}
+
+// 0x8014E9E4
+void ftCommon_Attack13_ProcInterrupt(GObj *fighter_gobj)
+{
+    ftCommon_Attack100Start_CheckInterruptCommon(fighter_gobj);
+}
+
+// 0x8014EA04
+void ftCommon_Attack11_ProcStatus(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    ftCommon_MotionCountIncSetID(fp, ftAttack_Index_Attack11);
     ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
     ftCommon_Update1PGameAttackStats(fp, 0);
 }
 
-void func_ovl3_8014EA44(GObj *fighter_gobj)
+// 0x8014EA44
+void ftCommon_Attack11_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (func_ovl3_80146064(fighter_gobj) == FALSE)
     {
-        fp->proc_status = func_ovl3_8014EA04;
+        fp->proc_status = ftCommon_Attack11_ProcStatus;
 
-        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack11, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack11, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
         ftAnim_Update(fighter_gobj);
 
         fp->command_vars.flags.flag1 = 0;
@@ -113,13 +147,14 @@ void func_ovl3_8014EA44(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014EAD8(GObj *fighter_gobj)
+// 0x8014EAD8
+void ftCommon_Attack12_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     if (func_ovl3_80146064(fighter_gobj) == FALSE)
     {
-        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack12, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack12, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
         ftAnim_Update(fighter_gobj);
 
         fp->command_vars.flags.flag1 = 0;
@@ -159,7 +194,8 @@ void func_ovl3_8014EAD8(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014EBB4(GObj *fighter_gobj)
+// 0x8014EBB4
+void ftCommon_Attack13_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
@@ -194,7 +230,7 @@ void func_ovl3_8014EBB4(GObj *fighter_gobj)
             status_id = ftStatus_Ness_Attack13;
             break;
         }
-        ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
         ftAnim_Update(fighter_gobj);
 
         fp->command_vars.flags.flag1 = 0;
@@ -205,7 +241,8 @@ void func_ovl3_8014EBB4(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
+// 0x8014EC78
+bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -246,7 +283,7 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
                 {
                     if (attributes->is_have_attack11)
                     {
-                        func_ovl3_8014EA44(fighter_gobj);
+                        ftCommon_Attack11_SetStatus(fighter_gobj);
 
                         fp->attack1_followup_count++;
 
@@ -254,9 +291,9 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
                     }
                     break;
                 }
-                if (attributes->is_have_attack12)
+                else if (attributes->is_have_attack12)
                 {
-                    func_ovl3_8014EAD8(fighter_gobj);
+                    ftCommon_Attack12_SetStatus(fighter_gobj);
 
                     fp->attack1_followup_count++;
 
@@ -267,7 +304,7 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
             case ftStatus_Common_Attack12:
                 if(ftStatus_CheckAttack13Kind(fp))
                 {
-                    func_ovl3_8014EBB4(fighter_gobj);
+                    ftCommon_Attack13_SetStatus(fighter_gobj);
 
                     return TRUE;
                 }
@@ -276,7 +313,7 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
         }
         else if (attributes->is_have_attack11)
         {
-            func_ovl3_8014EA44(fighter_gobj);
+            ftCommon_Attack11_SetStatus(fighter_gobj);
 
             return TRUE;
         }
@@ -288,7 +325,8 @@ bool32 func_ovl3_8014EC78(GObj *fighter_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_8014EEC0(GObj *fighter_gobj)
+// 0x8014EEC0
+bool32 ftCommon_Attack11_CheckGoto(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -301,7 +339,7 @@ bool32 func_ovl3_8014EEC0(GObj *fighter_gobj)
         {
             if (fp->command_vars.flags.flag1 != 0)
             {
-                func_ovl3_8014EA44(fighter_gobj);
+                ftCommon_Attack11_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
@@ -311,7 +349,8 @@ bool32 func_ovl3_8014EEC0(GObj *fighter_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_8014EF50(GObj *fighter_gobj)
+// 0x8014EF50
+bool32 ftCommon_Attack12_CheckGoto(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -324,7 +363,7 @@ bool32 func_ovl3_8014EF50(GObj *fighter_gobj)
         {
             if (fp->command_vars.flags.flag1 != 0)
             {
-                func_ovl3_8014EAD8(fighter_gobj);
+                ftCommon_Attack12_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
@@ -334,7 +373,8 @@ bool32 func_ovl3_8014EF50(GObj *fighter_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_8014EFE0(GObj *fighter_gobj)
+// 0x8014EFE0
+bool32 ftCommon_Attack13_CheckGoto(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -352,7 +392,7 @@ bool32 func_ovl3_8014EFE0(GObj *fighter_gobj)
             {
                 if (fp->command_vars.flags.flag1 != 0)
                 {
-                    func_ovl3_8014EBB4(fighter_gobj);
+                    ftCommon_Attack13_SetStatus(fighter_gobj);
 
                     return TRUE;
                 }

@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_801508E0(GObj *fighter_gobj)
+// 0x801508E0
+void ftCommon_AttackAirLw_ProcHit(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -15,13 +16,14 @@ void func_ovl3_801508E0(GObj *fighter_gobj)
 
         if (fighter_gobj->anim_frame > FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_BEGIN)
         {
-            ftStatus_Update(fighter_gobj, ftStatus_Common_AttackAirLw, FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_BEGIN, 1.0F, 0U);
+            ftStatus_Update(fighter_gobj, ftStatus_Common_AttackAirLw, FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_BEGIN, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
         }
         fp->status_vars.common.attackair.rehit_timer = FTCOMMON_ATTACKAIRLW_LINK_REHIT_TIMER;
     }
 }
 
-void func_ovl3_80150980(GObj *fighter_gobj)
+// 0x80150980
+void ftCommon_AttackAirLw_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -41,7 +43,8 @@ void func_ovl3_80150980(GObj *fighter_gobj)
     func_ovl2_800D94E8(fighter_gobj);
 }
 
-void func_ovl3_80150A08(GObj *fighter_gobj)
+// 0x80150A08
+void ftCommon_AttackAir_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -51,7 +54,7 @@ void func_ovl3_80150A08(GObj *fighter_gobj)
         {
             if (fp->ft_data->script1->script_info[fp->status_info.script_id + (ftStatus_Common_LandingAirN - ftStatus_Common_AttackAirN)].anim_id != 0)
             {
-                func_ovl3_80150E80(fighter_gobj);
+                ftCommon_LandingAir_SetStatus(fighter_gobj);
             }
             else func_ovl3_80142E10(fighter_gobj, fp->command_vars.flags.flag1 * 0.01F);
         }
@@ -63,7 +66,8 @@ void func_ovl3_80150A08(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl3_80150B00(GObj *fighter_gobj)
+// 0x80150B00 - Also checks LightThrowAir and ItemShoot
+bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -97,7 +101,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
                 {
                     angle = ftCommon_GetStickAngleRadians(fp);
 
-                    if (angle > 0.87266463F)
+                    if (angle > F_DEG_TO_RAD(50.0F)) // 0.87266463F
                     {
                         if (fp->hold_stick_y < FTCOMMON_LIGHTTHROWAIR4_BUFFER_FRAMES_MAX)
                         {
@@ -105,7 +109,7 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
                         }
                         else status_id = ftStatus_Common_LightThrowAirHi;
                     }
-                    else if (angle < -0.87266463F)
+                    else if (angle < F_DEG_TO_RAD(-50.0F)) // -0.87266463F
                     {
                         if (fp->hold_stick_y < FTCOMMON_LIGHTTHROWAIR4_BUFFER_FRAMES_MAX)
                         {
@@ -144,12 +148,12 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
                 {
                     angle = ftCommon_GetStickAngleRadians(fp);
 
-                    if (angle > 0.87266463F)
+                    if (angle > F_DEG_TO_RAD(50.0F)) // 0.87266463F
                     {
                         status_id = ftStatus_Common_AttackAirHi;
                         is_have_attack_flag = attributes->is_have_attackairhi;
                     }
-                    else if (angle < -0.87266463F)
+                    else if (angle < F_DEG_TO_RAD(-50.0F)) // -0.87266463F
                     {
                         status_id = ftStatus_Common_AttackAirLw;
                         is_have_attack_flag = attributes->is_have_attackairlw;
@@ -180,11 +184,11 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
             {
                 fp->command_vars.flags.flag1 = 0;
 
-                ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 8U);
+                ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_FASTFALL_PRESERVE);
 
                 if (status_id == ftStatus_Common_AttackAirLw)
                 {
-                    fp->proc_hit = func_ovl3_801508E0;
+                    fp->proc_hit = ftCommon_AttackAirLw_ProcHit;
 
                     fp->status_vars.common.attackair.rehit_timer = 0;
                 }
@@ -199,10 +203,11 @@ bool32 func_ovl3_80150B00(GObj *fighter_gobj)
     return FALSE;
 }
 
-void func_ovl3_80150E80(GObj *fighter_gobj)
+// 0x80150E80
+void ftCommon_LandingAir_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirX - ftStatus_Common_LandingAirN), 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirX - ftStatus_Common_LandingAirN), 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
 }

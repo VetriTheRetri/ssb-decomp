@@ -33,6 +33,7 @@ typedef enum ftStatusUpdateFlags
 
 } ftStatusUpdateFlags;
 
+#define FTSTATUPDATE_NULL_PRESERVE          (0)                                         // 0x0 - Just zero
 #define FTSTATUPDATE_HIT_PRESERVE           (1 << ftStatusUpdate_Hit_Preserve)          // 0x1
 #define FTSTATUPDATE_COLANIM_PRESERVE       (1 << ftStatusUpdate_ColAnim_Preserve)      // 0x2
 #define FTSTATUPDATE_GFX_PRESERVE           (1 << ftStatusUpdate_GFX_Preserve)          // 0x4
@@ -404,6 +405,19 @@ typedef enum ftCommonAction
     ftStatus_Common_SpecialStart // Start of special move table
 
 } ftCommonAction;
+
+typedef enum ftAttackIndex
+{
+    ftAttack_Index_None,
+    ftAttack_Index_Attack11,
+    ftAttack_Index_Attack12,
+    ftAttack_Index_Attack13,
+    ftAttack_Index_Attack100Loop,
+    ftAttack_Index_AttackUnk1,
+    ftAttack_Index_AttackS3,
+    ftAttack_Index_AttackHi3,
+    ftAttack_Index_AttackLw3,
+};
 
 typedef enum ftKind
 {
@@ -1168,7 +1182,7 @@ struct Fighter_Struct
 
     void (*proc_update)(GObj*);
     void (*proc_accessory)(GObj*);
-    void (*proc_interrupt)(GObj*); // Unconfirmed
+    void (*proc_interrupt)(GObj*);
     void (*proc_physics)(GObj*);
     void (*proc_map)(GObj*);
     void (*proc_slope)(GObj*); // Slope Contour update
@@ -1275,15 +1289,15 @@ void ftAnim_Update(GObj*); // ???
     (func_ovl3_80151160(fighter_gobj) != FALSE) || \
     (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
     (func_ovl3_80149CE0(fighter_gobj) != FALSE) || \
-    (func_ovl3_80150470(fighter_gobj) != FALSE) || \
-    (func_ovl3_8015070C(fighter_gobj) != FALSE) || \
-    (func_ovl3_80150884(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014F8C0(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014FB1C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014FD70(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014EC78(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackLw4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackS3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackHi3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackLw3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014E764(fighter_gobj) != FALSE) || \
+    (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
     (func_ovl3_8013ED64(fighter_gobj) != FALSE) || \
     (func_ovl3_80141EA4(fighter_gobj) != FALSE) || \

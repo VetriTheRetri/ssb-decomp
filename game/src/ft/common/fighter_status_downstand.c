@@ -21,7 +21,7 @@ void func_ovl3_80144580(GObj *fighter_gobj)
     }
     else status_id = ftStatus_Common_DownStandU;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0);
 
     fp->command_vars.flags.flag1 = 0;
 }
@@ -30,7 +30,7 @@ bool32 func_ovl3_801445D8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if (((fp->input.pl.stick_range.y >= FTCOMMON_DOWNWAIT_STAND_STICK_RANGE_MIN) && (0.87266463F <= ftCommon_GetStickAngleRadians(fp)) || (fp->input.pl.button_tap & fp->input.button_mask_z)))
+    if (((fp->input.pl.stick_range.y >= FTCOMMON_DOWNWAIT_STAND_STICK_RANGE_MIN) && (F_DEG_TO_RAD(50.0F) /* 0.87266463F */ <= ftCommon_GetStickAngleRadians(fp)) || (fp->input.pl.button_tap & fp->input.button_mask_z)))
     {
         func_ovl3_80144580(fighter_gobj);
 

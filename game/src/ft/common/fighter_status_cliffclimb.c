@@ -60,7 +60,7 @@ void func_ovl3_80144FE8(GObj *fighter_gobj, s32 status_input)
     }
     else status_id = ftStatus_Common_CliffSlow, status_new = 3;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
 
     fp->status_vars.common.cliffmotion.status_id = status_input + status_new;
@@ -79,7 +79,7 @@ bool32 func_ovl3_80145084(GObj *fighter_gobj)
     {
         f32 angle = ftCommon_GetStickAngleRadians(fp);
 
-        if ((angle > 0.87266463F) || ((angle > -0.87266463F) && ((fp->input.pl.stick_range.x * fp->lr) >= 0)))
+        if ((angle > F_DEG_TO_RAD(50.0F)) /* 0.87266463F */ || ((angle > F_DEG_TO_RAD(-50.0F)) /* -0.87266463F */ && ((fp->input.pl.stick_range.x * fp->lr) >= 0)))
         {
             if (fp->status_vars.common.cliffmotion.status_id != 0)
             {
@@ -119,7 +119,7 @@ void func_ovl3_801451F0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick1, 0.0F, 1.0F, 0);
 
     fp->x190_flag_b7 = TRUE;
 
@@ -130,7 +130,7 @@ void func_ovl3_80145240(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow1, 0.0F, 1.0F, 0);
 
     fp->x190_flag_b7 = TRUE;
 
@@ -255,13 +255,13 @@ void func_ovl3_8014557C(GObj *fighter_gobj)
 void func_ovl3_801455A0(GObj *fighter_gobj)
 {
     func_ovl3_80145490(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick2, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick2, 0.0F, 1.0F, 0);
     func_ovl3_8014557C(fighter_gobj);
 }
 
 void func_ovl3_801455E0(GObj *fighter_gobj)
 {
     func_ovl3_80145490(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow2, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow2, 0.0F, 1.0F, 0);
     func_ovl3_8014557C(fighter_gobj);
 }
