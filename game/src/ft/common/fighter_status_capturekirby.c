@@ -167,6 +167,23 @@ void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fight
     }
 }
 
+// 0x8014BC94
+void ftCommon_CaptureWaitKirby_ProcMap(GObj *fighter_gobj)
+{
+    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    GObj *capture_gobj = this_fp->capture_gobj;
+    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Vec3f *this_translate = &DObjGetStruct(fighter_gobj)->translate;
+
+    *this_translate = DObjGetStruct(capture_gobj)->translate;
+
+    if (capture_fp->lr == RIGHT)
+    {
+        this_translate->x += 10.0F;
+    }
+    else this_translate->x -= 10.0F;
+}
+
 ftThrowReleaseDesc Fighter_CaptureKirby_Catch_Release   = { 361, 100, 90, 0 };
 ftThrowReleaseDesc Fighter_CaptureKirby_Capture_Release = {  80, 100, 60, 0 };
 
@@ -356,7 +373,7 @@ void ftCommon_ThrownKirbyStar_ProcPhysics(GObj *fighter_gobj)
 }
 
 // 0x8014C280
-void ftCommon_ThrownKirbyStar_ProcMap(GObj *fighter_gobj)
+void ftCommon_ThrownStar_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f *angle;

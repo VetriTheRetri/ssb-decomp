@@ -2,7 +2,7 @@
 
 void func_ovl3_8015F180(Fighter_Struct *fp, void (*cb)(GObj*)) // Kirby's Yoshi Copy
 {
-    ftCommon_SetCatchVars(fp, 1, cb, func_ovl3_8014C83C);
+    ftCommon_SetCatchVars(fp, 1, cb, ftCommon_CaptureYoshi_SetStatus);
 }
 
 void func_ovl3_8015F1AC(GObj *fighter_gobj, void (*proc_catch)(GObj*))

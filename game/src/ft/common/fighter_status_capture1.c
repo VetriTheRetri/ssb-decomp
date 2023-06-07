@@ -20,7 +20,7 @@ void ftCommon_CapturePulled_BitmapRotateScale(GObj *fighter_gobj, Vec3f *this_po
 }
 
 // 0x8014A6B4
-void ftCommon_CapturePulled_ProcPhysics(GObj *fighter_gobj)
+void ftCommon_Capture_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
@@ -123,7 +123,7 @@ void ftCommon_CapturePulled_SetStatus(GObj *fighter_gobj, GObj *capture_gobj)
     ftCommon_SetCaptureFlags(this_fp, 0x3FU);
     func_ovl2_800E806C(this_fp, 9, 0);
     func_ovl2_800D9444(fighter_gobj);
-    ftCommon_CapturePulled_ProcPhysics(fighter_gobj);
+    ftCommon_Capture_ProcPhysics(fighter_gobj);
     ftCommon_CapturePulled_ProcMap(fighter_gobj);
 }
 

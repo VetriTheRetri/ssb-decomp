@@ -2,7 +2,7 @@
 
 void func_ovl3_8015E310(Fighter_Struct *fp, void (*cb_unk)(GObj*))
 {
-    ftCommon_SetCatchVars(fp, 1, cb_unk, func_ovl3_8014C83C);
+    ftCommon_SetCatchVars(fp, 1, cb_unk, ftCommon_CaptureYoshi_SetStatus);
 }
 
 void func_ovl3_8015E33C(GObj *fighter_gobj, void (*proc_catch)(GObj*))
