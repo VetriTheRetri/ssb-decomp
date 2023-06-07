@@ -1,10 +1,8 @@
 #include "ftcaptain.h"
 
-
-
 void func_ovl3_80160280(Fighter_Struct *fp)
 {
-    ftCommon_SetCatchVars(fp, 32, func_ovl3_80160690, ftCommon_CaptureCaptain_ProcCapture);
+    ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_SPECIALHICAPTAIN, func_ovl3_80160690, ftCommon_CaptureCaptain_ProcCapture);
 }
 
 void func_ovl3_801602B0(GObj *fighter_gobj)
@@ -41,7 +39,7 @@ void func_ovl3_80160370(GObj *fighter_gobj)
 
         stick_x = ABS(fp->input.pl.stick_range.x);
 
-        if (stick_x >= 19)
+        if (stick_x > 18)
         {
             ftCommon_StickInputSetLR(fp);
 
@@ -81,6 +79,7 @@ void func_ovl3_801604D8(GObj *fighter_gobj)
     if (!(fp->status_vars.captain.specialhi.unk_0x0 & 4))
     {
         ftCommon_CaptureCaptain_UpdateCapturePos(fighter_gobj, fp->catch_gobj, &vec);
+
         if (vec3f_mag(&vec) > 180.0F)
         {
             vec3f_normalize(&vec);
@@ -136,7 +135,7 @@ void jtgt_ovl3_80160630(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_801605FC;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     func_ovl3_80160280(fp);
     ftAnim_Update(fighter_gobj);
 }
@@ -146,9 +145,9 @@ void func_ovl3_80160690(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj), *catch_fp;
     GObj *search_gobj;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
     func_ovl2_800D9444(fighter_gobj);
 
     search_gobj = fp->search_gobj;
@@ -168,9 +167,9 @@ void func_ovl3_80160730(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCaptureFlags(fp, 0U);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
 
     if ((fp->x192_flag_b3 == TRUE) && (fp->catch_gobj != NULL))
     {
@@ -185,7 +184,7 @@ void jtgt_ovl3_801607B4(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_801605FC;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     func_ovl3_80160280(fp);
     ftAnim_Update(fighter_gobj);
 }

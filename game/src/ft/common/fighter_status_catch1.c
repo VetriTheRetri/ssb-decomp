@@ -71,7 +71,7 @@ void func_ovl3_80149BA8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Catch, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Catch, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 1;
@@ -80,7 +80,7 @@ void func_ovl3_80149BA8(GObj *fighter_gobj)
     fp->status_vars.common.catchmain.catch_pull_anim_frames = 0.0F;
     fp->status_vars.common.catchmain.catch_pull_frame_begin = 0.0F;
 
-    ftCommon_SetCatchVars(fp, 0x10, func_ovl3_80149F04, ftCommon_CapturePulled_SetStatus);
+    ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_CATCHCOMMON, func_ovl3_80149F04, ftCommon_CapturePulled_ProcCapture);
 
     fp->x192_flag_b5 = FALSE;
 
@@ -165,30 +165,4 @@ bool32 func_ovl3_80149E24(GObj *fighter_gobj)
         return TRUE;
     }
     else return FALSE;
-}
-
-void ftCommon_Attack11_ProcInterrupt(GObj *fighter_gobj)
-{
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-
-    if (fp->status_vars.common.attack1.interrupt_catch_timer < FTCOMMON_ATTACK1_INTERRUPT_CATCH_FRAMES_MAX)
-    {
-        fp->status_vars.common.attack1.interrupt_catch_timer++;
-
-        if (func_ovl3_80149E24(fighter_gobj) != FALSE)
-        {
-            return;
-        }
-    }
-    if (ftCommon_Attack100Start_CheckInterruptCommon(fighter_gobj) == FALSE)
-    {
-        if ((fp->ft_kind == Ft_Kind_Pikachu) || (fp->ft_kind == Ft_Kind_PolyPikachu))
-        {
-            if (ftCommon_Attack11_CheckGoto(fighter_gobj) != FALSE)
-            {
-                return;
-            }
-        }
-        else ftCommon_Attack12_CheckGoto(fighter_gobj);
-    }
 }

@@ -4,7 +4,7 @@ void func_ovl3_80149EC0(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
 
-    if (ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014A000) != 0)
+    if (ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014A000) != FALSE)
     {
         Fighter_Struct *catch_fp = FighterGetStruct(this_fp->catch_gobj);
 
@@ -19,13 +19,13 @@ void func_ovl3_80149F04(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f offset;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CatchPull, fp->status_vars.common.catchmain.catch_pull_frame_begin, 1.0F, 0x44U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CatchPull, fp->status_vars.common.catchmain.catch_pull_frame_begin, 1.0F, (FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 
     fp->catch_gobj = fp->search_gobj;
 
     fp->x192_flag_b3 = FALSE;
 
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 
     if (fp->proc_slope != NULL)
     {
@@ -53,11 +53,11 @@ void func_ovl3_8014A000(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CatchWait, 0.0F, 1.0F, 0x40U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CatchWait, 0.0F, 1.0F, FTSTATUPDATE_SLOPECONTOUR_PRESERVE);
 
     fp->status_vars.common.catchwait.throw_wait = FTCOMMON_CATCH_THROW_WAIT;
 
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 
     if ((fp->ft_kind == Ft_Kind_Link) || (fp->ft_kind == Ft_Kind_PolyLink))
     {

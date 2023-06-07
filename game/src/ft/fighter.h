@@ -422,6 +422,27 @@ typedef enum ftAttackIndex
     ftAttack_Index_AttackLw4
 };
 
+typedef enum ftGrabInteractFlags
+{
+    ftGrabInteract_Flags_SpecialNYoshi, // Also used for Kirby's Yoshi Copy
+    ftGrabInteract_Flags_SpecialNKirby,
+    ftGrabInteract_Flags_Unk1,
+    ftGrabInteract_Flags_Unk2,
+    ftGrabInteract_Flags_CatchCommon,
+    ftGrabInteract_Flags_SpecialHiCaptain
+
+} ftGrabInteractFlags;
+
+#define FTGRABINTERACT_MASK_SPECIALNYOSHI    (1 << ftGrabInteract_Flags_SpecialNYoshi)
+#define FTGRABINTERACT_MASK_SPECIALNKIRBY    (1 << ftGrabInteract_Flags_SpecialNKirby)
+#define FTGRABINTERACT_MASK_UNK1             (1 << ftGrabInteract_Flags_Unk1)
+#define FTGRABINTERACT_MASK_UNK2             (1 << ftGrabInteract_Flags_Unk2)
+#define FTGRABINTERACT_MASK_CATCHCOMMON      (1 << ftGrabInteract_Flags_CatchCommon)
+#define FTGRABINTERACT_MASK_SPECIALHICAPTAIN (1 << ftGrabInteract_Flags_SpecialHiCaptain)
+
+#define FTGRABINTERACT_MASK_NONE (0)
+#define FTGRABINTERACT_MASK_ALL  (FTGRABINTERACT_MASK_SPECIALHICAPTAIN | FTGRABINTERACT_MASK_CATCHCOMMON | FTGRABINTERACT_MASK_UNK2 | FTGRABINTERACT_MASK_UNK1 | FTGRABINTERACT_MASK_SPECIALNKIRBY | FTGRABINTERACT_MASK_SPECIALNYOSHI)
+
 typedef enum ftKind
 {
     Ft_Kind_Mario,

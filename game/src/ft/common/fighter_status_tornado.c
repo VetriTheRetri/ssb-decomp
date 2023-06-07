@@ -72,14 +72,14 @@ void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Tornado, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Tornado, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->status_vars.common.tornado.release_wait = 0;
     fp->status_vars.common.tornado.tornado_gobj = tornado_gobj;
 
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
     func_800269C0(0x11CU);
 }
 

@@ -34,7 +34,7 @@ void func_ovl3_80144C24(GObj *fighter_gobj)
     Vec3f vel;
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffCatch, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffCatch, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);
     ftMapCollide_SetAir(fp);
     func_ovl2_800D9444(fighter_gobj);
@@ -55,7 +55,7 @@ void func_ovl3_80144C24(GObj *fighter_gobj)
 
     fp->proc_damage = func_ovl3_80144CF8;
 
-    ftCommon_SetCaptureFlags(fp, 4U);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_UNK1);
 }
 
 void func_ovl3_80144CF8(GObj *fighter_gobj)
@@ -104,7 +104,7 @@ void func_ovl3_80144DF4(GObj *fighter_gobj)
 
     fp->proc_damage = func_ovl3_80144CF8;
 
-    ftCommon_SetCaptureFlags(fp, 4U);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_UNK1);
 }
 
 bool32 func_ovl3_80144E84(GObj *fighter_gobj)

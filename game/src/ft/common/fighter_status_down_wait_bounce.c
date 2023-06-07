@@ -40,7 +40,7 @@ void ftCommon_DownWait_ApplyStatus(GObj *fighter_gobj)
 
     fp->status_vars.common.downwait.stand_wait = FTCOMMON_DOWNWAIT_STAND_WAIT;
 
-    ftCommon_SetCaptureFlags(fp, 0x33U);
+    ftCommon_SetCaptureFlags(fp, (FTGRABINTERACT_MASK_SPECIALHICAPTAIN | FTGRABINTERACT_MASK_CATCHCOMMON | FTGRABINTERACT_MASK_SPECIALNKIRBY | FTGRABINTERACT_MASK_SPECIALNYOSHI));
 
     fp->damage_mul = 0.5F;
 }

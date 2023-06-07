@@ -35,7 +35,7 @@ void ftCommon_CaptureYoshi_ProcPhysics(GObj *fighter_gobj)
 }
 
 // 0x8014C83C
-void ftCommon_CaptureYoshi_SetStatus(GObj *fighter_gobj, GObj *capture_gobj)
+void ftCommon_CaptureYoshi_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
@@ -75,7 +75,7 @@ void ftCommon_CaptureYoshi_SetStatus(GObj *fighter_gobj, GObj *capture_gobj)
     this_fp->status_vars.common.captureyoshi.stage = 0;
     this_fp->status_vars.common.captureyoshi.breakout_wait = 0;
 
-    ftCommon_SetCaptureFlags(this_fp, 0x3F);
+    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
     func_ovl2_800D9444(fighter_gobj);
     ftCommon_CaptureYoshi_ProcPhysics(fighter_gobj);
     func_ovl2_800DE348(fighter_gobj);
@@ -350,7 +350,7 @@ void ftCommon_YoshiEgg_SetStatus(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_YoshiEgg, 0.0F, 0.0F, FTSTATUPDATE_NULL_PRESERVE);
-    ftCommon_SetCaptureFlags(this_fp, 0x3F);
+    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
 
     this_fp->is_invisible = TRUE;
 

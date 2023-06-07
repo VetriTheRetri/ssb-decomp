@@ -185,7 +185,7 @@ void ftCommon_SetCaptureFlags(Fighter_Struct *fp, u8 capture_flags)
 }
 
 // 0x800E80A4
-void ftCommon_SetCatchVars(Fighter_Struct *fp, u8 catch_flags, void (*proc_catch)(GObj*), void (*proc_capture)(GObj*, GObj*))
+void ftCommon_SetCatchFlags(Fighter_Struct *fp, u8 catch_flags, void (*proc_catch)(GObj*), void (*proc_capture)(GObj*, GObj*))
 {
     fp->x192_flag_b2 = TRUE;
 

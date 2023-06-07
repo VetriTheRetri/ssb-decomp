@@ -21,7 +21,7 @@ void func_ovl3_8014DD00(GObj *fighter_gobj)
             fp->status_vars.common.throwff.is_turn = FALSE;
         }
     }
-    if (fp->command_vars.flags.flag2 != 0U)
+    if (fp->command_vars.flags.flag2 != 0)
     {
         func_ovl3_8014AB64(fp->catch_gobj);
         func_ovl3_8014AFD0(fp->catch_gobj, -fp->lr, 0, 1);
@@ -29,7 +29,7 @@ void func_ovl3_8014DD00(GObj *fighter_gobj)
         fp->command_vars.flags.flag2 = 0;
         fp->catch_gobj = NULL;
 
-        ftCommon_SetCaptureFlags(fp, 0U);
+        ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -42,11 +42,11 @@ void func_ovl3_8014DE30(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFF, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFF, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
 
     fp->status_vars.common.throwff.is_turn = FALSE;
 
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 }
 
 void func_ovl3_8014DE80(GObj *fighter_gobj)
@@ -54,8 +54,8 @@ void func_ovl3_8014DE80(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowAirFF, fighter_gobj->anim_frame, 1.0F, 0U);
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowAirFF, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 }
 
 void func_ovl3_8014DECC(GObj *fighter_gobj)
@@ -77,16 +77,16 @@ void func_ovl3_8014DF14(GObj *fighter_gobj, bool32 is_turn)
     if (fp->ground_or_air == ground)
     {
         status_id = ftStatus_Donkey_ThrowFF;
-        flags = 0;
+        flags = FTSTATUPDATE_NULL_PRESERVE;
     }
     else
     {
         status_id = ftStatus_Donkey_ThrowAirFF;
-        flags = 8;
+        flags = FTSTATUPDATE_FASTFALL_PRESERVE;
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, flags);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 
     fp->command_vars.flags.flag2 = 0;
 

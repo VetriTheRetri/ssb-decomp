@@ -104,7 +104,7 @@ void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
     this_fp->status_vars.common.capturekirby.lr = CENTER;
     this_fp->status_vars.common.capturekirby.is_kirby = FALSE;
 
-    ftCommon_SetCaptureFlags(this_fp, 0x3F);
+    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
     func_ovl2_800D9444(fighter_gobj);
     ftCommon_CaptureKirby_ProcPhysics(fighter_gobj);
     func_ovl2_800DE348(fighter_gobj);
@@ -225,7 +225,7 @@ void ftCommon_CaptureWaitKirby_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWaitKirby, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, 0x3F);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 
     fp->is_invisible = TRUE;
 
@@ -434,8 +434,8 @@ void ftCommon_ThrownKirbyStar_InitStatusVars(GObj *fighter_gobj)
         Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
 
         func_ovl3_8014ADB0(fighter_gobj);
-        ftCommon_SetCaptureFlags(this_fp, 0);
-        ftCommon_SetCaptureFlags(capture_fp, 0);
+        ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_NONE);
+        ftCommon_SetCaptureFlags(capture_fp, FTGRABINTERACT_MASK_NONE);
         ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
 
         this_fp->capture_gobj = NULL;
@@ -475,7 +475,7 @@ void ftCommon_ThrownKirbyStar_SetStatus(GObj *fighter_gobj)
     fp->proc_status = ftCommon_ThrownKirbyStar_ProcStatus;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownKirbyStar, 0.0F, 1.0F, FTSTATUPDATE_THROWPOINTER_PRESERVE);
-    ftCommon_SetCaptureFlags(fp, 0x3F);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 
     fp->proc_hit = ftCommon_ThrownStar_ProcHit;
 
@@ -530,7 +530,7 @@ void ftCommon_ThrownCopyStar_SetStatus(GObj *fighter_gobj)
     fp->proc_status = ftCommon_ThrownCopyStar_ProcStatus;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownCopyStar, 0.0F, 1.0F, FTSTATUPDATE_THROWPOINTER_PRESERVE);
-    ftCommon_SetCaptureFlags(fp, 0x3F);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
 
     fp->proc_hit = ftCommon_ThrownStar_ProcHit;
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;

@@ -1,11 +1,11 @@
 #include "ftyoshi.h"
 
-void func_ovl3_8015E310(Fighter_Struct *fp, void (*cb_unk)(GObj*))
+void func_ovl3_8015E310(Fighter_Struct *fp, void (*proc_catch)(GObj*))
 {
-    ftCommon_SetCatchVars(fp, 1, cb_unk, ftCommon_CaptureYoshi_SetStatus);
+    ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_SPECIALNYOSHI, proc_catch, ftCommon_CaptureYoshi_ProcCapture);
 }
 
-void func_ovl3_8015E33C(GObj *fighter_gobj, void (*proc_catch)(GObj*))
+void func_ovl3_8015E33C(GObj *fighter_gobj, void (*proc_status)(GObj*))
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -13,7 +13,7 @@ void func_ovl3_8015E33C(GObj *fighter_gobj, void (*proc_catch)(GObj*))
     {
         fp->command_vars.flags.flag1 = 0;
 
-        proc_catch(fighter_gobj);
+        proc_status(fighter_gobj);
     }
 }
 
@@ -29,7 +29,7 @@ void func_ovl3_8015E3B4(GObj *fighter_gobj)
 
 void func_ovl3_8015E3D8(Fighter_Struct *fp)
 {
-    if (fp->command_vars.flags.flag2 != 0U)
+    if (fp->command_vars.flags.flag2 != 0)
     {
         if (fp->catch_gobj != NULL)
         {
@@ -40,7 +40,7 @@ void func_ovl3_8015E3D8(Fighter_Struct *fp)
             fp->command_vars.flags.flag2 = 0;
         }
     }
-    if (fp->command_vars.flags.flag1 != 0U)
+    if (fp->command_vars.flags.flag1 != 0)
     {
         if (fp->catch_gobj != NULL)
         {
@@ -52,7 +52,7 @@ void func_ovl3_8015E3D8(Fighter_Struct *fp)
 
             fp->command_vars.flags.flag1 = 0;
 
-            ftCommon_SetCaptureFlags(fp, 0U);
+            ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
         }
     }
 }
@@ -119,7 +119,7 @@ void func_ovl3_8015E598(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x25U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_HIT_PRESERVE));
     func_ovl3_8015E310(fp, func_ovl3_8015E83C);
 }
 
@@ -128,32 +128,32 @@ void func_ovl3_8015E5EC(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x25U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_HIT_PRESERVE));
     func_ovl3_8015E310(fp, func_ovl3_8015E880);
 }
 
 void func_ovl3_8015E640(GObj *fighter_gobj)
 {
     ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 }
 
 void func_ovl3_8015E680(GObj *fighter_gobj)
 {
     ftMapCollide_SetAir(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 }
 
 void func_ovl3_8015E6C0(GObj *fighter_gobj)
 {
     ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNRelease, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 }
 
 void func_ovl3_8015E700(GObj *fighter_gobj)
 {
     ftMapCollide_SetAir(FighterGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNRelease, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNRelease, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 }
 
 void jtgt_ovl3_8015E740(GObj *fighter_gobj)
@@ -162,7 +162,7 @@ void jtgt_ovl3_8015E740(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_8015E57C;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     func_ovl3_8015E310(fp, func_ovl3_8015E83C);
     ftAnim_Update(fighter_gobj);
 }
@@ -173,7 +173,7 @@ void jtgt_ovl3_8015E740(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_8015E588;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     func_ovl3_8015E310(fp, func_ovl3_8015E880);
     ftAnim_Update(fighter_gobj);
 }
@@ -182,7 +182,7 @@ void func_ovl3_8015E7F8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCommon_SetCaptureFlags(fp, 0x3FU); // Store grab vulnerability flags?
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL); // Store grab vulnerability flags?
     func_ovl2_800D9444(fighter_gobj);
 
     fp->catch_gobj = fp->search_gobj;
@@ -190,14 +190,14 @@ void func_ovl3_8015E7F8(GObj *fighter_gobj)
 
 void func_ovl3_8015E83C(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015E7F8(fighter_gobj);
 }
 
 void func_ovl3_8015E880(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015E7F8(fighter_gobj);
 }
@@ -206,21 +206,21 @@ void func_ovl3_8015E8C4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;
 }
 
 void func_ovl3_8015E8F8(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNRelease, 0.0F, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialNRelease, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015E8C4(fighter_gobj);
 }
 
 void func_ovl3_8015E93C(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNRelease, 0.0F, 1.0F, 0x24U);
+    ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirNRelease, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     func_ovl3_8015E8C4(fighter_gobj);
 }

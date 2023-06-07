@@ -20012,7 +20012,7 @@ glabel ftCommon_SetCaptureFlags
   /* 06389C 800E809C 03E00008 */        jr $ra
   /* 0638A0 800E80A0 A0850193 */        sb $a1, 0x193($a0)
 
-glabel ftCommon_SetCatchVars
+glabel ftCommon_SetCatchFlags
   /* 0638A4 800E80A4 AFA50004 */        sw $a1, 4($sp)
   /* 0638A8 800E80A8 908F0192 */       lbu $t7, 0x192($a0)
   /* 0638AC 800E80AC A0850194 */        sb $a1, 0x194($a0)

@@ -3559,7 +3559,7 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 
         if ((Match_Info->is_team_battle == TRUE) && (Match_Info->is_team_attack == FALSE) && (this_fp->team == other_fp->team)) goto next_gobj;
 
-        if ((other_fp->capture_flags & this_fp->catch_flags)) goto next_gobj;
+        if (other_fp->capture_flags & this_fp->catch_flags) goto next_gobj;
 
         if ((other_fp->special_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->star_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->hitstatus != gmHitCollision_HitStatus_Normal)) goto next_gobj;
 
@@ -4354,7 +4354,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     fp->x190_flag_b6 = TRUE;
     fp->x190_flag_b7 = FALSE;
 
-    ftCommon_SetCaptureFlags(fp, 0);
+    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
 
     fp->is_stat_nodamage = FALSE;
     fp->is_damage_resist = FALSE;

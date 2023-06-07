@@ -16,7 +16,7 @@ void func_ovl3_8014A0C0(GObj *fighter_gobj)
 
     // flag2 = bool to invert facing direction
 
-    if (fp->command_vars.flags.flag2 != 0U)
+    if (fp->command_vars.flags.flag2 != 0)
     {
         func_ovl3_8014AB64(fp->catch_gobj);
 
@@ -26,7 +26,7 @@ void func_ovl3_8014A0C0(GObj *fighter_gobj)
 
         fp->catch_gobj = NULL;
 
-        ftCommon_SetCaptureFlags(fp, 0U);
+        ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -71,9 +71,9 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
         status_id = ftStatus_Common_ThrowB;
         thrown_status = &this_fp->attributes->thrown_status[catch_fp->ft_kind].ft_thrown[1];
     }
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
 
     this_fp->command_vars.flags.flag2 = 0;
     this_fp->command_vars.flags.flag1 = 0;
