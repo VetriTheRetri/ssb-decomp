@@ -21,7 +21,7 @@ void func_ovl3_8014AAF0(GObj *fighter_gobj)
 void func_ovl3_8014AB64(GObj *fighter_gobj)
 {
     DObj *joint = DObjGetStruct(fighter_gobj);
-    func_ovl3_8014A5F0(fighter_gobj, &joint->translate, &joint->rotate);
+    ftCommon_CapturePulled_BitmapRotateScale(fighter_gobj, &joint->translate, &joint->rotate);
 }
 
 void func_ovl3_8014AB8C(GObj *fighter_gobj)

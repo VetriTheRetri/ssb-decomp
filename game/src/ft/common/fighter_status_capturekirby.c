@@ -1,7 +1,8 @@
 #include "ftkirby.h"
 #include "article.h"
 
-void func_ovl3_8014B700(GObj *fighter_gobj, Vec3f *dist)
+// 0x8014B700
+void ftCommon_CaptureKirby_UpdatePosMag(GObj *fighter_gobj, Vec3f *dist)
 {
     f32 mag = vec3f_mag(dist);
 
@@ -16,7 +17,8 @@ void func_ovl3_8014B700(GObj *fighter_gobj, Vec3f *dist)
     }
 }
 
-void func_ovl3_8014B774(GObj *fighter_gobj)
+// 0x8014B774
+void ftCommon_CaptureKirby_UpdatePosAll(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Vec3f dist;
@@ -26,7 +28,7 @@ void func_ovl3_8014B774(GObj *fighter_gobj)
     dist.y = capture_fp->status_vars.kirby.specialn.dist.y;
     dist.z = 0;
 
-    func_ovl3_8014B700(fighter_gobj, &dist);
+    ftCommon_CaptureKirby_UpdatePosMag(fighter_gobj, &dist);
 
     if (ABSF(dist.x) > FTCOMMON_CAPTUREKIRBY_DIST_X_MIN)
     {
@@ -46,21 +48,21 @@ void func_ovl3_8014B774(GObj *fighter_gobj)
     DObjGetStruct(fighter_gobj)->translate.z = DObjGetStruct(this_fp->capture_gobj)->translate.z;
 }
 
-void func_ovl3_8014B914(GObj *fighter_gobj)
+// 0x8014B914
+void ftCommon_CaptureKirby_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl3_8014B774(fighter_gobj);
+    ftCommon_CaptureKirby_UpdatePosAll(fighter_gobj);
 
     if ((fp->status_info.status_id == ftStatus_Common_CaptureKirby) && (fp->status_vars.common.capturekirby.is_goto_capturewait != FALSE))
     {
-        func_ovl3_8014BDB4(fighter_gobj);
+        ftCommon_CaptureWaitKirby_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8014B914(GObj *);                        /* extern */
-
-void func_ovl3_8014B968(GObj *fighter_gobj, GObj *capture_gobj)
+// 0x8014B968
+void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
@@ -94,21 +96,22 @@ void func_ovl3_8014B968(GObj *fighter_gobj, GObj *capture_gobj)
     this_fp->lr = -capture_fp->lr;
 
     ftMapCollide_SetAir(this_fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureKirby, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureKirby, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800E806C(this_fp, 7, 0);
 
     this_fp->status_vars.common.capturekirby.is_goto_capturewait = FALSE;
     this_fp->status_vars.common.capturekirby.lr = CENTER;
-    this_fp->status_vars.common.capturekirby.is_kirby = 0;
+    this_fp->status_vars.common.capturekirby.is_kirby = FALSE;
 
-    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3F);
     func_ovl2_800D9444(fighter_gobj);
-    func_ovl3_8014B914(fighter_gobj);
+    ftCommon_CaptureKirby_ProcPhysics(fighter_gobj);
     func_ovl2_800DE348(fighter_gobj);
 }
 
-void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
+// 0x8014BA98
+void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
 {
     bool32 is_wiggle = FALSE;
 
@@ -167,7 +170,8 @@ void func_ovl3_8014BA98(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
 ftThrowReleaseDesc Fighter_CaptureKirby_Catch_Release   = { 361, 100, 90, 0 };
 ftThrowReleaseDesc Fighter_CaptureKirby_Capture_Release = {  80, 100, 60, 0 };
 
-void func_ovl3_8014BD04(GObj *fighter_gobj)
+// 0x8014BD04
+void ftCommon_CaptureWaitKirby_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -177,11 +181,11 @@ void func_ovl3_8014BD04(GObj *fighter_gobj)
         Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
         s32 breakout_wait;
 
-        func_ovl3_8014BA98(this_fp, capture_fp);
+        ftCommon_CaptureWaitKirby_UpdateBreakoutVars(this_fp, capture_fp);
 
         breakout_wait = this_fp->breakout_wait;
 
-        func_ovl3_8014E400(this_fp);
+        ftCommon_Trap_UpdateBreakoutVars(this_fp);
 
         this_fp->breakout_wait -= ((breakout_wait - this_fp->breakout_wait) * 5);
 
@@ -189,8 +193,8 @@ void func_ovl3_8014BD04(GObj *fighter_gobj)
 
         if (this_fp->breakout_wait <= 0)
         {
-            func_ovl3_8014E1D0(capture_gobj, &Fighter_CaptureKirby_Catch_Release);
-            func_ovl3_8014E2A8(fighter_gobj, &Fighter_CaptureKirby_Capture_Release);
+            ftCommon_CatchCut_DamageApplyKnockback(capture_gobj, &Fighter_CaptureKirby_Catch_Release);
+            ftCommon_CaptureCut_DamageApplyKnockback(fighter_gobj, &Fighter_CaptureKirby_Capture_Release);
 
             capture_fp->catch_gobj = NULL;
             this_fp->capture_gobj = NULL;
@@ -198,33 +202,37 @@ void func_ovl3_8014BD04(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014BDB4(GObj *fighter_gobj)
+// 0x8014BDB4
+void ftCommon_CaptureWaitKirby_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWaitKirby, 0.0F, 1.0F, 0xA0U);
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWaitKirby, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
+    ftCommon_SetCaptureFlags(fp, 0x3F);
 
     fp->is_invisible = TRUE;
 
     ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
-    func_ovl3_8014E3EC(fp, 0x1F4);
+    ftCommon_Trap_InitBreakoutVars(fp, 500);
 }
 
-void func_ovl3_8014BE24(GObj *fighter_gobj)
+// 0x8014BE24
+void ftCommon_ThrownKirby_Escape(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, 0x1000U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, FTSTATUPDATE_DAMAGEPORT_PRESERVE);
 }
 
-void func_ovl3_8014BE54(GObj *fighter_gobj)
+// 0x8014BE54
+void ftCommon_ThrownStar_ProcHit(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     func_ovl2_800D8EB8(fp);
 }
 
-void func_ovl3_8014BE90(GObj *fighter_gobj, f32 arg1, f32 arg2)
+// 0x8014BE90
+void ftCommon_ThrownKirby_SpawnStarGFX(GObj *fighter_gobj, f32 arg1, f32 arg2)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -237,12 +245,14 @@ void func_ovl3_8014BE90(GObj *fighter_gobj, f32 arg1, f32 arg2)
     }
 }
 
-void func_ovl3_8014BEE0(GObj *fighter_gobj)
+// 0x8014BEE0
+void ftCommon_ThrownKirbyStar_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_8014BE90(fighter_gobj, 360.0F, 210.0F);
+    ftCommon_ThrownKirby_SpawnStarGFX(fighter_gobj, 360.0F, 210.0F);
 }
 
-void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
+// 0x8014BF04
+void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -265,7 +275,7 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
 
         fp->command_vars.flags.flag1--;
 
-        func_ovl3_8014E400(fp);
+        ftCommon_Trap_UpdateBreakoutVars(fp);
 
         if (fp->breakout_wait <= 0)
         {
@@ -289,7 +299,7 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
 
             ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
             ftCommon_ProcDestroyGFX(fighter_gobj);
-            func_ovl3_8014BE24(fighter_gobj);
+            ftCommon_ThrownKirby_Escape(fighter_gobj);
 
             if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
             {
@@ -332,19 +342,21 @@ void func_ovl3_8014BF04(GObj *fighter_gobj, f32 decelerate)
 
                 if (fp->command_vars.flags.flag1-- <= 0)
                 {
-                    func_ovl3_8014BE24(fighter_gobj);
+                    ftCommon_ThrownKirby_Escape(fighter_gobj);
                 }
             }
         }
     }
 }
 
-void func_ovl3_8014C260(GObj *fighter_gobj)
+// 0x8014C260
+void ftCommon_ThrownKirbyStar_ProcPhysics(GObj *fighter_gobj)
 {
-    func_ovl3_8014BF04(fighter_gobj, FTCOMMON_THROWNKIRBYSTAR_DECELERATE);
+    ftCommon_ThrownStar_UpdatePhysics(fighter_gobj, FTCOMMON_THROWNKIRBYSTAR_DECELERATE);
 }
 
-void func_ovl3_8014C280(GObj *fighter_gobj)
+// 0x8014C280
+void ftCommon_ThrownKirbyStar_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f *angle;
@@ -394,7 +406,8 @@ void func_ovl3_8014C280(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014C424(GObj *fighter_gobj)
+// 0x8014C424
+void ftCommon_ThrownKirbyStar_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -404,8 +417,8 @@ void func_ovl3_8014C424(GObj *fighter_gobj)
         Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
 
         func_ovl3_8014ADB0(fighter_gobj);
-        ftCommon_SetCaptureFlags(this_fp, 0U);
-        ftCommon_SetCaptureFlags(capture_fp, 0U);
+        ftCommon_SetCaptureFlags(this_fp, 0);
+        ftCommon_SetCaptureFlags(capture_fp, 0);
         ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
 
         this_fp->capture_gobj = NULL;
@@ -417,20 +430,22 @@ void func_ovl3_8014C424(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014C4D8(GObj *fighter_gobj)
+// 0x8014C4D8
+void ftCommon_ThrownKirbyStar_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 30;
     fp->command_vars.flags.flag2 = 2;
 
-    func_ovl3_8014C424(fighter_gobj);
+    ftCommon_ThrownKirbyStar_InitStatusVars(fighter_gobj);
 }
 
 extern intptr_t ftKirby_LoadedFiles_SpecialNData;
 extern void *D_ovl2_80131074;
 
-void func_ovl3_8014C508(GObj *fighter_gobj)
+// 0x8014C508
+void ftCommon_ThrownKirbyStar_SetStatus(GObj *fighter_gobj)
 {
     s32 i;
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
@@ -440,12 +455,12 @@ void func_ovl3_8014C508(GObj *fighter_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    fp->proc_status = func_ovl3_8014C4D8;
+    fp->proc_status = ftCommon_ThrownKirbyStar_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownKirbyStar, 0.0F, 1.0F, 0x200U);
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownKirbyStar, 0.0F, 1.0F, FTSTATUPDATE_THROWPOINTER_PRESERVE);
+    ftCommon_SetCaptureFlags(fp, 0x3F);
 
-    fp->proc_hit = func_ovl3_8014BE54;
+    fp->proc_hit = ftCommon_ThrownStar_ProcHit;
 
     for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
     {
@@ -460,30 +475,34 @@ void func_ovl3_8014C508(GObj *fighter_gobj)
 
     ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     func_ovl2_800E7F7C(fighter_gobj, 1);
-    func_ovl3_8014E3EC(fp, 3);
+    ftCommon_Trap_InitBreakoutVars(fp, FTCOMMON_THROWNKIRBYSTAR_BREAKOUT_INPUTS_MIN);
 }
 
-void func_ovl3_8014C634(GObj *fighter_gobj)
+// 0x8014C634
+void ftCommon_ThrownCopyStar_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_8014BE90(fighter_gobj, -400.0F, 280.0F);
+    ftCommon_ThrownKirby_SpawnStarGFX(fighter_gobj, -400.0F, 280.0F);
 }
 
-void func_ovl3_8014C658(GObj *fighter_gobj)
+// 0x8014C658
+void ftCommon_ThrownCopyStar_ProcPhysics(GObj *fighter_gobj)
 {
-    func_ovl3_8014BF04(fighter_gobj, FTCOMMON_THROWNCOPYSTAR_DECELERATE);
+    ftCommon_ThrownStar_UpdatePhysics(fighter_gobj, FTCOMMON_THROWNCOPYSTAR_DECELERATE);
 }
 
-void func_ovl3_8014C67C(GObj *fighter_gobj)
+// 0x8014C67C
+void ftCommon_ThrownCopyStar_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 10;
     fp->command_vars.flags.flag2 = 1;
 
-    func_ovl3_8014C424(fighter_gobj);
+    ftCommon_ThrownKirbyStar_InitStatusVars(fighter_gobj);
 }
 
-void func_ovl3_8014C6AC(GObj *fighter_gobj)
+// 0x8014C6AC
+void ftCommon_ThrownCopyStar_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -491,12 +510,12 @@ void func_ovl3_8014C6AC(GObj *fighter_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    fp->proc_status = func_ovl3_8014C67C;
+    fp->proc_status = ftCommon_ThrownCopyStar_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownCopyStar, 0.0F, 1.0F, 0x200U);
-    ftCommon_SetCaptureFlags(fp, 0x3FU);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_ThrownCopyStar, 0.0F, 1.0F, FTSTATUPDATE_THROWPOINTER_PRESERVE);
+    ftCommon_SetCaptureFlags(fp, 0x3F);
 
-    fp->proc_hit = func_ovl3_8014BE54;
+    fp->proc_hit = ftCommon_ThrownStar_ProcHit;
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
     ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);

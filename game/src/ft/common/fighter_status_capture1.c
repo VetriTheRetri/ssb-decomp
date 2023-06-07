@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_8014A5F0(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)
+// 0x8014A5F0
+void ftCommon_CapturePulled_BitmapRotateScale(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
@@ -18,23 +19,25 @@ void func_ovl3_8014A5F0(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)
     func_ovl2_800ED3C0(&capture.unk_bitmap_0x0, this_pos);
 }
 
-void func_ovl3_8014A6B4(GObj *fighter_gobj)
+// 0x8014A6B4
+void ftCommon_CapturePulled_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
 
-    func_ovl3_8014A5F0(fighter_gobj, &pos, &DObjGetStruct(fighter_gobj)->rotate);
+    ftCommon_CapturePulled_BitmapRotateScale(fighter_gobj, &pos, &DObjGetStruct(fighter_gobj)->rotate);
 
     DObjGetStruct(fighter_gobj)->translate.x = pos.x;
     DObjGetStruct(fighter_gobj)->translate.z = pos.z;
 
     if ((fp->status_info.status_id == ftStatus_Common_CapturePulled) && (fp->status_vars.common.capture.is_goto_pulled_wait != FALSE))
     {
-        func_ovl3_8014AA58(fighter_gobj);
+        ftCommon_CaptureWait_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8014A72C(GObj *fighter_gobj)
+// 0x8014A72C
+void ftCommon_CapturePulled_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -79,7 +82,8 @@ void func_ovl3_8014A72C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014A860(GObj *fighter_gobj, GObj *capture_gobj)
+// 0x8014A860
+void ftCommon_CapturePulled_SetStatus(GObj *fighter_gobj, GObj *capture_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
@@ -111,7 +115,7 @@ void func_ovl3_8014A860(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->lr = -capture_fp->lr;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CapturePulled, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CapturePulled, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     this_fp->status_vars.common.capture.is_goto_pulled_wait = FALSE;
@@ -119,11 +123,12 @@ void func_ovl3_8014A860(GObj *fighter_gobj, GObj *capture_gobj)
     ftCommon_SetCaptureFlags(this_fp, 0x3FU);
     func_ovl2_800E806C(this_fp, 9, 0);
     func_ovl2_800D9444(fighter_gobj);
-    func_ovl3_8014A6B4(fighter_gobj);
-    func_ovl3_8014A72C(fighter_gobj);
+    ftCommon_CapturePulled_ProcPhysics(fighter_gobj);
+    ftCommon_CapturePulled_ProcMap(fighter_gobj);
 }
 
-void func_ovl3_8014A980(GObj *fighter_gobj)
+// 0x8014A980
+void ftCommon_CaptureWait_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -158,12 +163,13 @@ void func_ovl3_8014A980(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014AA58(GObj *fighter_gobj)
+// 0x8014AA58
+void ftCommon_CaptureWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWait, 0.0F, 1.0F, 0xA0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWait, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
 
     if ((capture_fp->ft_kind == Ft_Kind_Yoshi) || (capture_fp->ft_kind == Ft_Kind_PolyYoshi))
     {
@@ -171,5 +177,5 @@ void func_ovl3_8014AA58(GObj *fighter_gobj)
 
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
+    ftCommon_SetCaptureFlags(this_fp, 0x3F);
 }

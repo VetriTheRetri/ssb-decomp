@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara\\ftpikachu",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftcaptain",
+    "\\game\\src\\ft\\chara\\ftness",
     "\\game\\src\\ft\\common",
-    "\\game\\src\\mp",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_attacks4.c",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_capture2.c",
   "PreviewInSolutionExplorer": false
 }

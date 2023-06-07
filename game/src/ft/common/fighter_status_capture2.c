@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_8014E1D0(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release) 
+// 0x8014E1D0
+void ftCommon_CatchCut_DamageApplyKnockback(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release) 
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *catch_gobj = this_fp->catch_gobj;
@@ -12,7 +13,8 @@ void func_ovl3_8014E1D0(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
     ftCommon_Update1PGameDamageStats(this_fp, 4, 0, 0, 0, 0);
 }
 
-void func_ovl3_8014E2A8(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
+// 0x8014E2A8
+void ftCommon_CaptureCut_DamageApplyKnockback(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -42,13 +44,15 @@ void func_ovl3_8014E2A8(GObj *fighter_gobj, ftThrowReleaseDesc *throw_release)
     ftCommon_Update1PGameDamageStats(this_fp, 4, 0, 0, 0, 0);
 }
 
-void func_ovl3_8014E3EC(Fighter_Struct *fp, s32 breakout_wait)
+// 0x8014E3EC
+void ftCommon_Trap_InitBreakoutVars(Fighter_Struct *fp, s32 breakout_wait)
 {
     fp->breakout_wait = breakout_wait;
     fp->breakout_lr = fp->breakout_ud = 0;
 }
 
-bool32 func_ovl3_8014E400(Fighter_Struct *fp)
+// 0x8014E400
+bool32 ftCommon_Trap_UpdateBreakoutVars(Fighter_Struct *fp)
 {
     bool32 is_mash = FALSE;
     s32 breakout_lr_bak, breakout_ud_bak;
@@ -89,18 +93,19 @@ bool32 func_ovl3_8014E400(Fighter_Struct *fp)
 ftThrowReleaseDesc Fighter_ThrowF_Catch_Release       = { 361, 100, 30, 0 };
 ftThrowReleaseDesc Fighter_Shouldered_Capture_Release = { 361,  80,  0, 0 };
 
-void func_ovl3_8014E4D4(GObj *fighter_gobj)
+// 0x8014E4D4
+void ftCommon_Trap_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
     Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
 
-    func_ovl3_8014E400(this_fp);
+    ftCommon_Trap_UpdateBreakoutVars(this_fp);
 
     if (this_fp->breakout_wait <= 0)
     {
-        func_ovl3_8014E1D0(capture_gobj, &Fighter_ThrowF_Catch_Release);
-        func_ovl3_8014E2A8(fighter_gobj, &Fighter_Shouldered_Capture_Release);
+        ftCommon_CatchCut_DamageApplyKnockback(capture_gobj, &Fighter_ThrowF_Catch_Release);
+        ftCommon_CaptureCut_DamageApplyKnockback(fighter_gobj, &Fighter_Shouldered_Capture_Release);
 
         capture_fp->catch_gobj = NULL;
 
@@ -108,7 +113,8 @@ void func_ovl3_8014E4D4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014E558(GObj *fighter_gobj)
+// 0x8014E558
+void ftCommon_Shouldered_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -116,7 +122,7 @@ void func_ovl3_8014E558(GObj *fighter_gobj)
     s32 damage;
 
     func_ovl3_8014ACB4(fighter_gobj, ftStatus_Common_Shouldered);
-    func_ovl3_8014E3EC(this_fp, ((this_fp->percent_damage * 0.08F) + 14.0F));
+    ftCommon_Trap_InitBreakoutVars(this_fp, ((this_fp->percent_damage * 0.08F) + 14.0F));
 
     damage = gmCommon_DamageApplyStale(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->motion_count);
 

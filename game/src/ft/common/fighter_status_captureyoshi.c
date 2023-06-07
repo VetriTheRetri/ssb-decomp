@@ -11,7 +11,7 @@ void func_ovl3_8014C778(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
 
-    func_ovl3_8014A5F0(fighter_gobj, &pos, &DObjGetStruct(fighter_gobj)->rotate);
+    ftCommon_CapturePulled_BitmapRotateScale(fighter_gobj, &pos, &DObjGetStruct(fighter_gobj)->rotate);
 
     DObjGetStruct(fighter_gobj)->translate.x = pos.x;
     DObjGetStruct(fighter_gobj)->translate.z = pos.z;
@@ -191,7 +191,7 @@ void func_ovl3_8014CC0C(GObj *fighter_gobj)
     {
         s32 breakout_wait = fp->breakout_wait;
 
-        if (func_ovl3_8014E400(fp) == TRUE)
+        if (ftCommon_Trap_UpdateBreakoutVars(fp) == TRUE)
         {
             if (fp->status_vars.common.captureyoshi.effect_gobj != NULL)
             {
@@ -345,7 +345,7 @@ void func_ovl3_8014CF20(GObj *fighter_gobj)
     this_fp->is_invisible = TRUE;
 
     func_ovl3_8014CDFC(fighter_gobj);
-    func_ovl3_8014E3EC(this_fp, 0x2EE);
+    ftCommon_Trap_InitBreakoutVars(this_fp, 0x2EE);
     func_ovl3_80161CA0(this_fp->capture_gobj, fighter_gobj, 5);
     func_ovl2_800E7F7C(fighter_gobj, 1);
 

@@ -59,10 +59,10 @@ typedef enum gmMatchGameRules
 
 } gmMatchGameRules;
 
-#define GMMATCH_GAMERULE_TIME    (1 << gmMatch_GameRule_Time)
-#define GMMATCH_GAMERULE_STOCK   (1 << gmMatch_GameRule_Stock)
-#define GMMATCH_GAMERULE_BONUS   (1 << gmMatch_GameRule_Bonus)
-#define GMMATCH_GAMERULE_1PGAME  (1 << gmMatch_GameRule_1PGame)
+#define GMMATCH_GAMERULE_TIME    (1 << gmMatch_GameRule_Time)   // 0x1
+#define GMMATCH_GAMERULE_STOCK   (1 << gmMatch_GameRule_Stock)  // 0x2
+#define GMMATCH_GAMERULE_BONUS   (1 << gmMatch_GameRule_Bonus)  // 0x4
+#define GMMATCH_GAMERULE_1PGAME  (1 << gmMatch_GameRule_1PGame) // 0x8
 
 typedef enum gmMatchGameDifficulty
 {

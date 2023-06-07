@@ -80,7 +80,7 @@ void func_ovl3_80149BA8(GObj *fighter_gobj)
     fp->status_vars.common.catchmain.catch_pull_anim_frames = 0.0F;
     fp->status_vars.common.catchmain.catch_pull_frame_begin = 0.0F;
 
-    ftCommon_SetCatchVars(fp, 0x10, func_ovl3_80149F04, func_ovl3_8014A860);
+    ftCommon_SetCatchVars(fp, 0x10, func_ovl3_80149F04, ftCommon_CapturePulled_SetStatus);
 
     fp->x192_flag_b5 = FALSE;
 

@@ -34,7 +34,7 @@ void func_ovl3_8014A0C0(GObj *fighter_gobj)
         {
             if (fp->status_info.status_id == ftStatus_Common_ThrowF)
             {
-                func_ovl3_8014E558(fp->catch_gobj);
+                ftCommon_Shouldered_SetStatus(fp->catch_gobj);
                 func_ovl3_8014D49C(fighter_gobj);
 
                 return;

@@ -413,10 +413,13 @@ typedef enum ftAttackIndex
     ftAttack_Index_Attack12,
     ftAttack_Index_Attack13,
     ftAttack_Index_Attack100Loop,
-    ftAttack_Index_AttackUnk1,
+    ftAttack_Index_AttackDash,
     ftAttack_Index_AttackS3,
     ftAttack_Index_AttackHi3,
     ftAttack_Index_AttackLw3,
+    ftAttack_Index_AttackS4,
+    ftAttack_Index_AttackHi4,
+    ftAttack_Index_AttackLw4
 };
 
 typedef enum ftKind
@@ -1289,15 +1292,15 @@ void ftAnim_Update(GObj*); // ???
     (func_ovl3_80151160(fighter_gobj) != FALSE) || \
     (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
     (func_ovl3_80149CE0(fighter_gobj) != FALSE) || \
-    (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackLw4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_AttackS3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_AttackS3_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
     (ftCommon_AttackHi3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackLw3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
-    (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE)    || \
     (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
     (func_ovl3_8013ED64(fighter_gobj) != FALSE) || \
     (func_ovl3_80141EA4(fighter_gobj) != FALSE) || \

@@ -49,9 +49,9 @@ void func_ovl3_80161E3C(Fighter_Struct *fp)
 {
     if (fp->ground_or_air == ground)
     {
-        ftCommon_SetCatchVars(fp, 2, func_ovl3_801631E4, func_ovl3_8014B968);
+        ftCommon_SetCatchVars(fp, 2, func_ovl3_801631E4, ftCommon_CaptureKirby_ProcCapture);
     }
-    else ftCommon_SetCatchVars(fp, 2, func_ovl3_80163430, func_ovl3_8014B968);
+    else ftCommon_SetCatchVars(fp, 2, func_ovl3_80163430, ftCommon_CaptureKirby_ProcCapture);
 }
 
 void func_ovl3_80161E94(GObj *fighter_gobj)
@@ -211,7 +211,7 @@ void func_ovl3_80162258(GObj *fighter_gobj)
         {
             Fighter_Struct *victim_fp = FighterGetStruct(kirby_fp->catch_gobj);
 
-            func_ovl3_8014C508(kirby_fp->catch_gobj);
+            ftCommon_ThrownKirbyStar_SetStatus(kirby_fp->catch_gobj);
             ftCommon_ThrownUpdateEnemyInfo(victim_fp, fighter_gobj);
 
             victim_fp->phys_info.vel_air.z = 0.0F;
@@ -231,7 +231,7 @@ void func_ovl3_801622DC(GObj *fighter_gobj)
         {
             Fighter_Struct *victim_fp = FighterGetStruct(kirby_fp->catch_gobj);
 
-            func_ovl3_8014C6AC(kirby_fp->catch_gobj);
+            ftCommon_ThrownCopyStar_SetStatus(kirby_fp->catch_gobj);
 
             victim_fp->phys_info.vel_air.y = (f32) (__sinf(1.308997F) * 100.0F);
 

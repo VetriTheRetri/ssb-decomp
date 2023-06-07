@@ -4,7 +4,7 @@
 
 void func_ovl3_80160280(Fighter_Struct *fp)
 {
-    ftCommon_SetCatchVars(fp, 32, func_ovl3_80160690, func_ovl3_8014D2A0);
+    ftCommon_SetCatchVars(fp, 32, func_ovl3_80160690, ftCommon_CaptureCaptain_ProcCapture);
 }
 
 void func_ovl3_801602B0(GObj *fighter_gobj)
@@ -80,7 +80,7 @@ void func_ovl3_801604D8(GObj *fighter_gobj)
 
     if (!(fp->status_vars.captain.specialhi.unk_0x0 & 4))
     {
-        func_ovl3_8014D0F0(fighter_gobj, fp->catch_gobj, &vec);
+        ftCommon_CaptureCaptain_UpdateCapturePos(fighter_gobj, fp->catch_gobj, &vec);
         if (vec3f_mag(&vec) > 180.0F)
         {
             vec3f_normalize(&vec);

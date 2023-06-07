@@ -5,7 +5,8 @@ extern intptr_t ftCaptain_CaptureCaptain_Offset_Add; // 0x00000000
 extern void *D_ovl2_80131034;
 Vec3f Fighter_CaptureCaptain_Offset = { 0.0F, 0.0F, 0.0F };
 
-void func_ovl3_8014D0F0(GObj *fighter_gobj, GObj *capture_gobj, Vec3f *pos)
+// 0x8014D0F0
+void ftCommon_CaptureCaptain_UpdateCapturePos(GObj *fighter_gobj, GObj *capture_gobj, Vec3f *pos)
 {
     Vec3f offset = Fighter_CaptureCaptain_Offset;
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
@@ -26,18 +27,19 @@ void func_ovl3_8014D0F0(GObj *fighter_gobj, GObj *capture_gobj, Vec3f *pos)
     vec3f_sub_from(pos, &offset);
 }
 
-void func_ovl3_8014D200(GObj *fighter_gobj)
+// 0x8014D0F0
+void ftCommon_CaptureCaptain_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f offset;
 
     if (fp->status_vars.common.capturecaptain.capture_flag & FTCOMMON_CAPTURECAPTAIN_MASK_THROW)
     {
-        func_ovl3_8014D3BC(fighter_gobj);
+        ftCommon_CaptureCaptain_Release(fighter_gobj);
     }
     else if (!(fp->status_vars.common.capturecaptain.capture_flag & FTCOMMON_CAPTURECAPTAIN_MASK_NOUPDATE))
     {
-        func_ovl3_8014D0F0(fp->capture_gobj, fighter_gobj, &offset);
+        ftCommon_CaptureCaptain_UpdateCapturePos(fp->capture_gobj, fighter_gobj, &offset);
 
         if (vec3f_mag(&offset) > 180.0F)
         {
@@ -48,7 +50,8 @@ void func_ovl3_8014D200(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014D2A0(GObj *fighter_gobj, GObj *capture_gobj)
+// 0x8014D2A0
+void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
@@ -86,17 +89,18 @@ void func_ovl3_8014D2A0(GObj *fighter_gobj, GObj *capture_gobj)
     else this_fp->x192_flag_b3 = FALSE;
 
     ftMapCollide_SetAir(this_fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureCaptain, FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN, FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED, 0U);
-    ftCommon_SetCaptureFlags(this_fp, 0x3FU);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureCaptain, FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN, FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED, FTSTATUPDATE_NULL_PRESERVE);
+    ftCommon_SetCaptureFlags(this_fp, 0x3F);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800D9444(fighter_gobj);
-    func_ovl3_8014D200(fighter_gobj);
+    ftCommon_CaptureCaptain_ProcPhysics(fighter_gobj);
 }
 
-void func_ovl3_8014D3BC(GObj *fighter_gobj)
+// 0x8014D3BC
+void ftCommon_CaptureCaptain_Release(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     func_ovl3_8014AFD0(fighter_gobj, fp->lr, 0, 0);
-    ftCommon_SetCaptureFlags(fp, 0U);
+    ftCommon_SetCaptureFlags(fp, 0);
 }
