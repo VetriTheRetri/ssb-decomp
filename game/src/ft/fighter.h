@@ -1076,8 +1076,8 @@ struct Fighter_Struct
     u32 x192_flag_b5 : 1;
     u32 x192_flag_b6 : 1;
     u32 x192_flag_b7 : 1;
-    u8 capture_flags;
-    u8 catch_flags;
+    u8 capture_flags;       // Fighter is immune to these grab types
+    u8 catch_flags;         // Fighter's current grab type
 
     FighterAnimFlags anim_flags;
 
