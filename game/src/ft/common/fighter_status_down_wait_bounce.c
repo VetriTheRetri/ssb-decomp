@@ -92,7 +92,7 @@ void func_ovl3_80144428(GObj *fighter_gobj)
 }
 
 // 0x80144498
-void ftCommon_DownBounce_ApplyStatus(GObj *fighter_gobj)
+void ftCommon_DownBounce_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;

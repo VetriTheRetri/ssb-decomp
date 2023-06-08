@@ -20,7 +20,7 @@ void func_ovl3_801435B0(GObj *fighter_gobj)
         }
         else if ((func_ovl3_80144760(fighter_gobj) == FALSE) && (func_ovl3_801446BC(fighter_gobj) == FALSE))
         {
-            ftCommon_DownBounce_ApplyStatus(fighter_gobj);
+            ftCommon_DownBounce_SetStatus(fighter_gobj);
         }
     }
 }
@@ -35,7 +35,7 @@ void func_ovl3_80143630(GObj *fighter_gobj)
 
 void func_ovl3_80143664(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, 0x108U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_FASTFALL_PRESERVE));
     func_ovl3_80143630(fighter_gobj);
 }
 
@@ -43,14 +43,14 @@ void func_ovl3_801436A0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, 8U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, FTSTATUPDATE_FASTFALL_PRESERVE);
     func_ovl3_80143630(fighter_gobj);
 
-    fp->time_since_last_z = 0x10000;
+    fp->time_since_last_z = U16_MAX + 1;
 }
 
 void func_ovl3_801436F0(GObj *fighter_gobj) // Unused
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, fighter_gobj->anim_frame, 1.0F, 0x108U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_FASTFALL_PRESERVE));
     func_ovl3_80143630(fighter_gobj);
 }

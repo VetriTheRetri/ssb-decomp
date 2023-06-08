@@ -1075,7 +1075,7 @@ bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_
     return FALSE;
 }
 
-void func_ovl2_800E11C8(GObj *fighter_gobj)
+void ftCommon_UpdateColAnim(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -1283,7 +1283,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
     {
         ftAnim_Update(fighter_gobj);
     }
-    func_ovl2_800E11C8(fighter_gobj);
+    ftCommon_UpdateColAnim(fighter_gobj);
 
     if (this_fp->intangible_timer != 0)
     {
@@ -3728,11 +3728,11 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
 
             case 1:
                 ftCommon_ProcDamageStopVoice(fighter_gobj);
-                func_ovl3_80141560(fighter_gobj);
+                ftCommon_Damage_GotoDamageStatus(fighter_gobj);
                 break;
 
             case 2:
-                func_ovl3_80141648(fighter_gobj);
+                ftCommon_Damage_SetDamageColAnim(fighter_gobj);
                 break;
 
             case 3:
@@ -3741,13 +3741,13 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
                 break;
 
             default:
-                func_ovl3_80141670(fighter_gobj);
+                ftCommon_Damage_UpdateMain(fighter_gobj);
                 break;
             }
         }
         else
         {
-            func_ovl3_80141648(fighter_gobj);
+            ftCommon_Damage_SetDamageColAnim(fighter_gobj);
             func_ovl3_801586A0(fighter_gobj);
         }
         damage = fp->damage_queue;
@@ -4653,7 +4653,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
         else
         {
             func_ovl2_800E0830(fighter_gobj);
-            func_ovl2_800E11C8(fighter_gobj);
+            ftCommon_UpdateColAnim(fighter_gobj);
         }
     }
     else for (i = 0; i < ARRAY_COUNT(fp->script_event); i++)

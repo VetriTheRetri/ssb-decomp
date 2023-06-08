@@ -102,6 +102,8 @@
 #define FTCOMMON_DAMAGE_FIGHTER_FLYROLL_RANDOM_CHANCE 0.5F
 #define FTCOMMON_DAMAGE_FIGHTER_REACT_GASP_KNOCKBACK_MIN 80.0F  // Minimum knockback required for a fighter to play their damage voice effect when getting hit
 
+#define FTCOMMON_WALLDAMAGE_INTANGIBLE_TIMER 15
+
 #define FTCOMMON_PASS_STICK_RANGE_MIN (-53)                     // Minimum stick Y range required for platform drop to register
 #define FTCOMMON_PASS_BUFFER_FRAMES_MAX 4
 
@@ -394,7 +396,7 @@ typedef struct ftCommon_Damage_StatusVars
     s32 unk_0xB3C;
     s32 script_index;
     s32 status_id;
-    bool32 is_limit_knockback;
+    bool32 is_knockback_over;
 
 } ftCommon_Damage_StatusVars;
 
@@ -624,7 +626,7 @@ typedef struct ftCommon_ThrowFF_StatusVars
 
 } ftCommon_ThrowFF_StatusVars;
 
-typedef struct ftCommon_ThrowFCut_StatusVars
+typedef struct ftCommon_ThrowFDamaage_StatusVars
 {
     s32 hitstun_timer;
     s32 dust_gfx_int;
@@ -633,7 +635,7 @@ typedef struct ftCommon_ThrowFCut_StatusVars
     u8 filler_0xE[0x28 - 0xE];
     s32 unk_index;
     s32 status_id;
-    bool32 is_limit_knockback;
+    bool32 is_knockback_over;
 
 } ftCommon_ThrowFDamage_StatusVars;
 

@@ -103,7 +103,7 @@ void func_ovl3_80143CC4(GObj *fighter_gobj)
     }
     else damage = tornado->damage;
 
-    func_ovl3_80140EE4(fighter_gobj, -1, damage, knockback, tornado->angle, fp->lr, 0, tornado->element, 0, TRUE, TRUE, TRUE);
+    ftCommon_Damage_InitDamageVars(fighter_gobj, -1, damage, knockback, tornado->angle, fp->lr, 0, tornado->element, 0, TRUE, TRUE, TRUE);
     ftCommon_Update1PGameDamageStats(fp, 4, 4, 2, 0, 0);
 
     if (damage != 0)

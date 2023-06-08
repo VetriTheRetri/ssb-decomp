@@ -131,7 +131,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
     {
         this_fp->proc_status = func_ovl3_8014AF98;
     }
-    func_ovl3_80140EE4(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, ft_throw->element, capture_fp->player_number, TRUE, TRUE, TRUE);
+    ftCommon_Damage_InitDamageVars(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, ft_throw->element, capture_fp->player_number, TRUE, TRUE, TRUE);
     ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
 
     if (damage != 0)
@@ -213,7 +213,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
     {
         damage = 0;
     }
-    func_ovl3_80140EE4(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, gmHitCollision_Element_Normal, capture_fp->player_number, FALSE, FALSE, TRUE);
+    ftCommon_Damage_InitDamageVars(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, gmHitCollision_Element_Normal, capture_fp->player_number, FALSE, FALSE, TRUE);
     ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
 
     if (damage != 0)
@@ -251,6 +251,6 @@ void func_ovl3_8014B5B4(GObj *fighter_gobj)
     {
         knockback_final = 0.0F;
     }
-    func_ovl3_80140EE4(fighter_gobj, ft_throw->status_id, 0, knockback_final, ft_throw->angle, fp->lr, 1, ft_throw->element, 0, TRUE, TRUE, FALSE);
+    ftCommon_Damage_InitDamageVars(fighter_gobj, ft_throw->status_id, 0, knockback_final, ft_throw->angle, fp->lr, 1, ft_throw->element, 0, TRUE, TRUE, FALSE);
     ftCommon_Update1PGameDamageStats(fp, 4, 0, 0, 0, 0);
 }

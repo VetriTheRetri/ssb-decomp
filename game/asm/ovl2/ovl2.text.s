@@ -2953,7 +2953,7 @@ glabel func_ovl2_800D8DB0
   /* 05462C 800D8E2C AFA70018 */        sw $a3, 0x18($sp)
   /* 054630 800D8E30 10400003 */      beqz $v0, .L800D8E40
   /* 054634 800D8E34 8FA70018 */        lw $a3, 0x18($sp)
-  /* 054638 800D8E38 0C038472 */       jal func_ovl2_800E11C8
+  /* 054638 800D8E38 0C038472 */       jal ftCommon_UpdateColAnim
   /* 05463C 800D8E3C 8CE40004 */        lw $a0, 4($a3)
   .L800D8E40:
   /* 054640 800D8E40 8FBF0014 */        lw $ra, 0x14($sp)
@@ -12124,7 +12124,7 @@ glabel func_ovl2_800E0880
   /* 05C9C0 800E11C0 03E00008 */        jr $ra
   /* 05C9C4 800E11C4 27BD00B0 */     addiu $sp, $sp, 0xb0
 
-glabel func_ovl2_800E11C8
+glabel ftCommon_UpdateColAnim
   /* 05C9C8 800E11C8 27BDFFD8 */     addiu $sp, $sp, -0x28
   /* 05C9CC 800E11CC AFBF0024 */        sw $ra, 0x24($sp)
   /* 05C9D0 800E11D0 AFB20020 */        sw $s2, 0x20($sp)
@@ -12504,7 +12504,7 @@ glabel func_ovl2_800E1260
   /* 05CF08 800E1708 8FA6001C */        lw $a2, 0x1c($sp)
   .L800E170C:
   /* 05CF0C 800E170C 8FA40020 */        lw $a0, 0x20($sp)
-  /* 05CF10 800E1710 0C038472 */       jal func_ovl2_800E11C8
+  /* 05CF10 800E1710 0C038472 */       jal ftCommon_UpdateColAnim
   /* 05CF14 800E1714 AFA6001C */        sw $a2, 0x1c($sp)
   /* 05CF18 800E1718 8FA6001C */        lw $a2, 0x1c($sp)
   /* 05CF1C 800E171C 8FA90020 */        lw $t1, 0x20($sp)
@@ -17956,12 +17956,12 @@ glabel func_ovl2_800E61EC
   .L800E63C8:
   /* 061BC8 800E63C8 0C03A08F */       jal ftCommon_ProcDamageStopVoice
   /* 061BCC 800E63CC 8FA400A0 */        lw $a0, 0xa0($sp)
-  /* 061BD0 800E63D0 0C050558 */       jal func_ovl3_80141560
+  /* 061BD0 800E63D0 0C050558 */       jal ftCommon_Damage_GotoDamageStatus
   /* 061BD4 800E63D4 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061BD8 800E63D8 10000014 */         b .L800E642C
   /* 061BDC 800E63DC 8E0E07DC */        lw $t6, 0x7dc($s0)
   .L800E63E0:
-  /* 061BE0 800E63E0 0C050592 */       jal func_ovl3_80141648
+  /* 061BE0 800E63E0 0C050592 */       jal ftCommon_Damage_SetDamageColAnim
   /* 061BE4 800E63E4 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061BE8 800E63E8 10000010 */         b .L800E642C
   /* 061BEC 800E63EC 8E0E07DC */        lw $t6, 0x7dc($s0)
@@ -17973,12 +17973,12 @@ glabel func_ovl2_800E61EC
   /* 061C00 800E6400 1000000A */         b .L800E642C
   /* 061C04 800E6404 8E0E07DC */        lw $t6, 0x7dc($s0)
   .L800E6408:
-  /* 061C08 800E6408 0C05059C */       jal func_ovl3_80141670
+  /* 061C08 800E6408 0C05059C */       jal ftCommon_Damage_UpdateMain
   /* 061C0C 800E640C 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061C10 800E6410 10000006 */         b .L800E642C
   /* 061C14 800E6414 8E0E07DC */        lw $t6, 0x7dc($s0)
   .L800E6418:
-  /* 061C18 800E6418 0C050592 */       jal func_ovl3_80141648
+  /* 061C18 800E6418 0C050592 */       jal ftCommon_Damage_SetDamageColAnim
   /* 061C1C 800E641C 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061C20 800E6420 0C0561A8 */       jal func_ovl3_801586A0
   /* 061C24 800E6424 8FA400A0 */        lw $a0, 0xa0($sp)
@@ -19521,7 +19521,7 @@ glabel ftStatus_Update
   .L800E79D4:
   /* 0631D4 800E79D4 0C03820C */       jal ftAnim_Update
   /* 0631D8 800E79D8 8FA40090 */        lw $a0, 0x90($sp)
-  /* 0631DC 800E79DC 0C038472 */       jal func_ovl2_800E11C8
+  /* 0631DC 800E79DC 0C038472 */       jal ftCommon_UpdateColAnim
   /* 0631E0 800E79E0 8FA40090 */        lw $a0, 0x90($sp)
   /* 0631E4 800E79E4 10000009 */         b .L800E7A0C
   /* 0631E8 800E79E8 8E2B0020 */        lw $t3, 0x20($s1)

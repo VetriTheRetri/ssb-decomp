@@ -108,7 +108,7 @@ void func_ovl3_80144038(GObj *fighter_gobj)
     angle = ((I_RAD_TO_DEG(func_ovl2_8010A12C()) * -fp->lr) + 90);
     angle -= (angle / 360) * 360;
 
-    func_ovl3_80140EE4(fighter_gobj, ftStatus_Common_DamageFlyRoll, tarucann->damage, knockback, angle, fp->lr, 0, tarucann->element, 0, TRUE, TRUE, FALSE);
+    ftCommon_Damage_InitDamageVars(fighter_gobj, ftStatus_Common_DamageFlyRoll, tarucann->damage, knockback, angle, fp->lr, 0, tarucann->element, 0, TRUE, TRUE, FALSE);
     ftCommon_Update1PGameDamageStats(fp, 4, 4, 3, 0, 0);
 
     fp->unk_0x174 = 0;

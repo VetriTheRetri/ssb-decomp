@@ -223,7 +223,7 @@ void func_ovl2_800D8DB0(Fighter_Struct *fp)
 
         if (ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 8, 0) != FALSE)
         {
-            func_ovl2_800E11C8(fp->fighter_gobj);
+            ftCommon_UpdateColAnim(fp->fighter_gobj);
         }
     }
 }

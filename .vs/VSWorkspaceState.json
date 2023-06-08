@@ -4,12 +4,10 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara\\ftkirby",
-    "\\game\\src\\ft\\chara\\ftyoshi",
     "\\game\\src\\ft\\common",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_catch2.c",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_damage.c",
   "PreviewInSolutionExplorer": false
 }

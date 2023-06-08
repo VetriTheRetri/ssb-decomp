@@ -11,7 +11,7 @@ void func_ovl3_80161CA0(GObj *kirby_gobj, GObj *victim_gobj, s32 damage)
 
     damage = star_dmg_victim;
 
-    func_ovl3_801415F8(victim_gobj, gmCommonObject_DamageCalcKnockback(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->handicap, fp_victim->handicap), 0);
+    ftCommon_Damage_UpdateDamageColAnim(victim_gobj, gmCommonObject_DamageCalcKnockback(fp_victim->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, fp_victim->attributes->weight, fp_kirby->handicap, fp_victim->handicap), 0);
     ftCommon_DamageUpdateCheckDropItem(fp_victim, damage);
     ftCommon_AttackUpdateMatchStats(fp_kirby->port_id, fp_victim->port_id, damage);
     ftCommon_AttackAddStaleQueue(fp_kirby->port_id, fp_victim->port_id, fp_kirby->attack_id, fp_kirby->motion_count);

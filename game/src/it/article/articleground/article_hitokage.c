@@ -81,7 +81,7 @@ bool32 jtgt_ovl3_80183F94(GObj *article_gobj)
 
     if (ap->damage_knockback >= 100.0F)
     {
-        f32 angle = func_ovl3_801409BC(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
+        f32 angle = gmCommon_Damage_GetKnockbackAngle(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
 
         ap->phys_info.vel.x = cosf(angle) * ap->damage_knockback * -ap->lr_damage;
         ap->phys_info.vel.y = __sinf(angle) * ap->damage_knockback;

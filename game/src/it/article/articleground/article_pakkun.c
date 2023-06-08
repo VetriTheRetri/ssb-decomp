@@ -191,7 +191,7 @@ bool32 jtgt_ovl3_8017D334(GObj *article_gobj)
 
         joint->rotate.z = PI32;
 
-        angle = func_ovl3_801409BC(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
+        angle = gmCommon_Damage_GetKnockbackAngle(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
 
         ap->phys_info.vel.x = (f32)(cosf(angle) * ap->damage_knockback * -ap->lr_damage);
         ap->phys_info.vel.y = __sinf(angle) * ap->damage_knockback;

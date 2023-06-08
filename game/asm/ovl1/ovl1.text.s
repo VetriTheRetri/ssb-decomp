@@ -141,7 +141,7 @@ glabel func_ovl1_80390584
   /* 107B70 80390590 AFA40020 */        sw $a0, 0x20($sp)
   /* 107B74 80390594 0C03820C */       jal ftAnim_Update
   /* 107B78 80390598 AFAE001C */        sw $t6, 0x1c($sp)
-  /* 107B7C 8039059C 0C038472 */       jal func_ovl2_800E11C8
+  /* 107B7C 8039059C 0C038472 */       jal ftCommon_UpdateColAnim
   /* 107B80 803905A0 8FA40020 */        lw $a0, 0x20($sp)
   /* 107B84 803905A4 8FAF001C */        lw $t7, 0x1c($sp)
   /* 107B88 803905A8 8DE209D4 */        lw $v0, 0x9d4($t7)
