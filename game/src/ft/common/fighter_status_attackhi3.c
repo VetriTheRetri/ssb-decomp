@@ -17,7 +17,7 @@ void ftCommon_AttackHi3_SetStatus(GObj *fighter_gobj)
     }
     else status_id = ftStatus_Common_AttackHi3;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }
 

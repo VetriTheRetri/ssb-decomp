@@ -49,7 +49,7 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
             }
             else if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
             {
-                func_ovl3_80144C24(fighter_gobj);
+                ftCommon_CliffCatch_SetStatus(fighter_gobj);
             }
         }
     }
@@ -73,7 +73,7 @@ void func_ovl3_8015EF5C(GObj *fighter_gobj)
 
         else if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
     }
 }

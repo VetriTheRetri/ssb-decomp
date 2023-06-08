@@ -26,7 +26,7 @@ void func_ovl3_8014A0C0(GObj *fighter_gobj)
 
         fp->catch_gobj = NULL;
 
-        ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
+        ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -71,9 +71,9 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
         status_id = ftStatus_Common_ThrowB;
         thrown_status = &this_fp->attributes->thrown_status[catch_fp->ft_kind].ft_thrown[1];
     }
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
     this_fp->command_vars.flags.flag2 = 0;
     this_fp->command_vars.flags.flag1 = 0;
@@ -167,7 +167,7 @@ void func_ovl3_8014A538(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl3_80149B78(fighter_gobj);
+        ftCommon_Catch_ProcMap(fighter_gobj);
     }
     else if ((func_ovl2_800DE6B0(fighter_gobj) != FALSE) && (fp->phys_info.vel_air.y < 0.0F))
     {

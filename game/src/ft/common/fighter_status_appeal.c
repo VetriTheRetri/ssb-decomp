@@ -5,7 +5,7 @@ void ftCommon_Appeal_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    if ((fp->command_vars.flags.flag1 != 0) && (func_ovl3_80149CE0(fighter_gobj) == FALSE))
+    if ((fp->command_vars.flags.flag1 != 0) && (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
         func_ovl3_80148D0C(fighter_gobj);
     }
@@ -23,7 +23,7 @@ void ftCommon_Appeal_SetStatus(GObj *fighter_gobj)
             func_ovl3_801635EC(fighter_gobj);
         }
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Appeal, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Appeal, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->command_vars.flags.flag1 = 0;
 }

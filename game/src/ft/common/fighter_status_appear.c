@@ -56,7 +56,7 @@ void ftCaptain_AppearEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Captain_AppearREnd : ftStatus_Captain_AppearLEnd), 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ((fp->status_vars.common.entry.lr_entry == RIGHT) ? ftStatus_Captain_AppearREnd : ftStatus_Captain_AppearLEnd), 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_8013DBAC(fighter_gobj);
 
     fp->x18E_flag_b0 = FALSE;

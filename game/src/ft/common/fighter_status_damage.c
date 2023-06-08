@@ -2,28 +2,29 @@
 #include "ftdonkey.h"
 #include "article.h"
 
-void func_ovl3_80140340(Fighter_Struct *fp)
+// 0x80140340
+void ftCommon_Damage_SetDustGFXInterval(Fighter_Struct *fp)
 {
-    f32 knockback = (fp->ground_or_air == air) ? vec3f_mag(&fp->phys_info.vel_damage_air) : ABSF(fp->phys_info.vel_damage_ground);
+    f32 vel = (fp->ground_or_air == air) ? vec3f_mag(&fp->phys_info.vel_damage_air) : ABSF(fp->phys_info.vel_damage_ground);
     s32 spawn_gfx_wait;
 
-    if (knockback < FTCOMMON_DAMAGE_GFX_KNOCKBACK_LOW)
+    if (vel < FTCOMMON_DAMAGE_GFX_KNOCKBACK_LOW)
     {
         spawn_gfx_wait = FTCOMMON_DAMAGE_GFX_WAIT_LOW;
     }
-    else if (knockback < FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID_LOW)
+    else if (vel < FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID_LOW)
     {
         spawn_gfx_wait = FTCOMMON_DAMAGE_GFX_WAIT_MID_LOW;
     }
-    else if (knockback < FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID)
+    else if (vel < FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID)
     {
         spawn_gfx_wait = FTCOMMON_DAMAGE_GFX_WAIT_MID;
     }
-    else if (knockback < FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID_HIGH)
+    else if (vel < FTCOMMON_DAMAGE_GFX_KNOCKBACK_MID_HIGH)
     {
         spawn_gfx_wait = FTCOMMON_DAMAGE_GFX_WAIT_MID_HIGH;
     }
-    else if (knockback < FTCOMMON_DAMAGE_GFX_KNOCKBACK_HIGH)
+    else if (vel < FTCOMMON_DAMAGE_GFX_KNOCKBACK_HIGH)
     {
         spawn_gfx_wait = FTCOMMON_DAMAGE_GFX_WAIT_HIGH;
     }
@@ -43,7 +44,7 @@ void func_ovl3_80140454(GObj *fighter_gobj)
         if (fp->status_vars.common.damage.dust_gfx_int == 0)
         {
             ftCommon_GFXSpawn(fighter_gobj, 0x11, 4, 0, 0, fp->lr, 0, 0);
-            func_ovl3_80140340(fp);
+            ftCommon_Damage_SetDustGFXInterval(fp);
         }
     }
 }
@@ -603,7 +604,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     {
         func_ovl3_80140744(this_gobj);
     }
-    func_ovl3_80140340(this_fp);
+    ftCommon_Damage_SetDustGFXInterval(this_fp);
 
     if (this_fp->status_vars.common.damage.dust_gfx_int != 0)
     {

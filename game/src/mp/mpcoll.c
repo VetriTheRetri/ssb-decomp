@@ -2648,7 +2648,7 @@ bool32 ftMapCollide_CheckGroundCliff(GObj *fighter_gobj, void (*proc_map)(GObj*)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
 
             return TRUE;
         }
@@ -2707,7 +2707,7 @@ void jtgt_ovl2_800DE99C(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
         else if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {

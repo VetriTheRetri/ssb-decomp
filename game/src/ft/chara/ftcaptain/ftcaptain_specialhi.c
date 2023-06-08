@@ -2,7 +2,7 @@
 
 void func_ovl3_80160280(Fighter_Struct *fp)
 {
-    ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_SPECIALHICAPTAIN, func_ovl3_80160690, ftCommon_CaptureCaptain_ProcCapture);
+    ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALHICAPTAIN, func_ovl3_80160690, ftCommon_CaptureCaptain_ProcCapture);
 }
 
 void func_ovl3_801602B0(GObj *fighter_gobj)
@@ -107,7 +107,7 @@ void func_ovl3_80160560(GObj *fighter_gobj)
     }
     else if ((func_ovl2_800DE87C(fighter_gobj) != FALSE) && (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL))
     {
-        func_ovl3_80144C24(fighter_gobj);
+        ftCommon_CliffCatch_SetStatus(fighter_gobj);
     }
 }
 
@@ -135,7 +135,7 @@ void jtgt_ovl3_80160630(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_801605FC;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_80160280(fp);
     ftAnim_Update(fighter_gobj);
 }
@@ -147,7 +147,7 @@ void func_ovl3_80160690(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     func_ovl2_800D9444(fighter_gobj);
 
     search_gobj = fp->search_gobj;
@@ -169,7 +169,7 @@ void func_ovl3_80160730(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
 
     if ((fp->x192_flag_b3 == TRUE) && (fp->catch_gobj != NULL))
     {
@@ -184,7 +184,7 @@ void jtgt_ovl3_801607B4(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_801605FC;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_80160280(fp);
     ftAnim_Update(fighter_gobj);
 }

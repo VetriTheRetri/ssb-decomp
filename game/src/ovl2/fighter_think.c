@@ -3537,7 +3537,7 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
     Fighter_Struct *other_fp;
     s32 i, j, m;
     Fighter_Hurt *ft_hurt;
-    gmHitCollisionFlags catch_flags;
+    gmHitCollisionFlags catch_mask;
     Fighter_Hit *ft_hit;
 
     this_fp = FighterGetStruct(this_gobj);
@@ -3559,7 +3559,7 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 
         if ((Match_Info->is_team_battle == TRUE) && (Match_Info->is_team_attack == FALSE) && (this_fp->team == other_fp->team)) goto next_gobj;
 
-        if (other_fp->capture_flags & this_fp->catch_flags) goto next_gobj;
+        if (other_fp->catch_ignore_mask & this_fp->catch_mask) goto next_gobj;
 
         if ((other_fp->special_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->star_hitstatus != gmHitCollision_HitStatus_Normal) || (other_fp->hitstatus != gmHitCollision_HitStatus_Normal)) goto next_gobj;
 
@@ -3573,18 +3573,18 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 
                 if ((other_fp->ground_or_air == ground) && (!ft_hit->is_hit_ground)) continue; // ???
 
-                catch_flags.is_interact_hurt = catch_flags.is_interact_shield = 0, catch_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
+                catch_mask.is_interact_hurt = catch_mask.is_interact_shield = 0, catch_mask.interact_mask = GMHITCOLLISION_MASK_ALL;
 
                 for (m = 0; m < ARRAY_COUNT(ft_hit->hit_targets); m++)
                 {
                     if (other_gobj == ft_hit->hit_targets[m].victim_gobj)
                     {
-                        catch_flags = ft_hit->hit_targets[m].victim_flags;
+                        catch_mask = ft_hit->hit_targets[m].victim_flags;
 
                         break;
                     }
                 }
-                if (!(catch_flags.is_interact_hurt) && !(catch_flags.is_interact_shield) && (catch_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
+                if (!(catch_mask.is_interact_hurt) && !(catch_mask.is_interact_shield) && (catch_mask.interact_mask == GMHITCOLLISION_MASK_ALL))
                 {
                     for (j = 0; j < ARRAY_COUNT(other_fp->fighter_hurt); j++)
                     {
@@ -4354,7 +4354,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     fp->x190_flag_b6 = TRUE;
     fp->x190_flag_b7 = FALSE;
 
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
 
     fp->is_stat_nodamage = FALSE;
     fp->is_damage_resist = FALSE;

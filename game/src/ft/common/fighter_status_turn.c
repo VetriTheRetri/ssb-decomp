@@ -40,7 +40,7 @@ void func_ovl3_8013E700(GObj *fighter_gobj)
     if (func_ovl3_801511E0(fighter_gobj) != FALSE) return;
 
 interrupt1:
-    if (func_ovl3_80149CE0(fighter_gobj) == FALSE)
+    if (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
         if (fp->status_vars.common.turn.unk_0x14 < 256) fp->status_vars.common.turn.unk_0x14++;
 

@@ -572,7 +572,7 @@ void ftNess_JibakuAir_ProcMap(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
             return;
         }
         if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
@@ -758,7 +758,7 @@ void ftNess_SpecialAirHiBound_ProcMap(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
         else
         {

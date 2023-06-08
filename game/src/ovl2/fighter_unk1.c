@@ -179,17 +179,17 @@ void func_ovl2_800E806C(Fighter_Struct *fp, s32 arg1, s32 arg2)
 }
 
 // 0x800E8098
-void ftCommon_SetCaptureFlags(Fighter_Struct *fp, u8 capture_flags)
+void ftCommon_SetCatchIgnoreMask(Fighter_Struct *fp, u8 catch_ignore_mask)
 {
-    fp->capture_flags = capture_flags;
+    fp->catch_ignore_mask = catch_ignore_mask;
 }
 
 // 0x800E80A4
-void ftCommon_SetCatchFlags(Fighter_Struct *fp, u8 catch_flags, void (*proc_catch)(GObj*), void (*proc_capture)(GObj*, GObj*))
+void ftCommon_SetCatchVars(Fighter_Struct *fp, u8 catch_mask, void (*proc_catch)(GObj*), void (*proc_capture)(GObj*, GObj*))
 {
     fp->x192_flag_b2 = TRUE;
 
-    fp->catch_flags = catch_flags;
+    fp->catch_mask = catch_mask;
     fp->proc_catch = proc_catch;
     fp->proc_capture = proc_capture;
 }

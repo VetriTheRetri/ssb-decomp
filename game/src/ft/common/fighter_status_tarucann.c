@@ -87,7 +87,7 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
 
     fp->is_invisible = TRUE;
 
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     func_800269C0(0x11AU);
 }
 

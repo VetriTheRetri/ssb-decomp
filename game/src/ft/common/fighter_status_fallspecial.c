@@ -48,7 +48,7 @@ void func_ovl3_8014384C(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
         else if ((fp->status_vars.common.fallspecial.is_goto_landing != FALSE) || (fp->phys_info.vel_air.y < FTCOMMON_FALLSPECIAL_SKIP_LANDING_VEL_Y_MAX))
         {

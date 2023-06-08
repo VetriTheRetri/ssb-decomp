@@ -16,7 +16,7 @@ void ftCommon_AttackAirLw_ProcHit(GObj *fighter_gobj)
 
         if (fighter_gobj->anim_frame > FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_BEGIN)
         {
-            ftStatus_Update(fighter_gobj, ftStatus_Common_AttackAirLw, FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_BEGIN, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+            ftStatus_Update(fighter_gobj, ftStatus_Common_AttackAirLw, FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_BEGIN, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
         }
         fp->status_vars.common.attackair.rehit_timer = FTCOMMON_ATTACKAIRLW_LINK_REHIT_TIMER;
     }
@@ -209,5 +209,5 @@ void ftCommon_LandingAir_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirX - ftStatus_Common_LandingAirN), 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirX - ftStatus_Common_LandingAirN), 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }

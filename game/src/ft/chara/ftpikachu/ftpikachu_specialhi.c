@@ -187,7 +187,7 @@ void func_ovl3_80152C2C(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
 
         }
         else if (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
@@ -454,7 +454,7 @@ void func_ovl3_801534E0(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
         else func_ovl3_80142E3C(fighter_gobj, 0, 0.4F);
     }

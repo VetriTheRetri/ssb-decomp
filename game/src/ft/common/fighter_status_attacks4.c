@@ -103,7 +103,7 @@ void ftCommon_AttackS4_SetStatus(GObj *fighter_gobj)
         fp->command_vars.flags.flag1 = 0;
         break;
     }
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     switch (fp->ft_kind)

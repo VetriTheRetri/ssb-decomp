@@ -52,9 +52,9 @@ void func_ovl3_80161E3C(Fighter_Struct *fp)
 {
     if (fp->ground_or_air == ground)
     {
-        ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_SPECIALNKIRBY, func_ovl3_801631E4, ftCommon_CaptureKirby_ProcCapture);
+        ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALNKIRBY, func_ovl3_801631E4, ftCommon_CaptureKirby_ProcCapture);
     }
-    else ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_SPECIALNKIRBY, func_ovl3_80163430, ftCommon_CaptureKirby_ProcCapture);
+    else ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALNKIRBY, func_ovl3_80163430, ftCommon_CaptureKirby_ProcCapture);
 }
 
 void func_ovl3_80161E94(GObj *fighter_gobj)
@@ -506,7 +506,7 @@ void func_ovl3_80162A6C(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162ABC(GObj *fighter_gobj)
@@ -531,7 +531,7 @@ void func_ovl3_80162B50(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162BA0(GObj *fighter_gobj)
@@ -540,7 +540,7 @@ void func_ovl3_80162BA0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNCatch, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162BF0(GObj *fighter_gobj)
@@ -549,7 +549,7 @@ void func_ovl3_80162BF0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNHit, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162C40(GObj *fighter_gobj)
@@ -558,7 +558,7 @@ void func_ovl3_80162C40(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNHit, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162C90(GObj *fighter_gobj)
@@ -567,7 +567,7 @@ void func_ovl3_80162C90(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNCatch, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162CE0(GObj *fighter_gobj)
@@ -576,7 +576,7 @@ void func_ovl3_80162CE0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNRelease, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162D30(GObj *fighter_gobj)
@@ -585,7 +585,7 @@ void func_ovl3_80162D30(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNRelease, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162D80(GObj *fighter_gobj)
@@ -594,7 +594,7 @@ void func_ovl3_80162D80(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNWait, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162DD0(GObj *fighter_gobj)
@@ -603,7 +603,7 @@ void func_ovl3_80162DD0(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNWait, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162E20(GObj *fighter_gobj)
@@ -612,7 +612,7 @@ void func_ovl3_80162E20(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNTurn, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162E70(GObj *fighter_gobj)
@@ -621,7 +621,7 @@ void func_ovl3_80162E70(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNTurn, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162EC0(GObj *fighter_gobj)
@@ -630,7 +630,7 @@ void func_ovl3_80162EC0(GObj *fighter_gobj)
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNCopy, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162F10(GObj *fighter_gobj)
@@ -639,7 +639,7 @@ void func_ovl3_80162F10(GObj *fighter_gobj)
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNCopy, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_80162F60(GObj *fighter_gobj)
@@ -658,13 +658,13 @@ void func_ovl3_80162F60(GObj *fighter_gobj)
 void func_ovl3_80162FA8(GObj *fighter_gobj)
 {
     func_ovl3_80162F60(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNWait, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 
 void func_ovl3_80162FE0(GObj *fighter_gobj)
 {
     func_ovl3_80162F60(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNWait, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 
 extern const Vec3f D_ovl3_80188E00;
@@ -675,7 +675,7 @@ void func_ovl3_80163018(GObj *fighter_gobj, s32 status_id)
     Vec3f pos = D_ovl3_80188E00; // Never used???
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_SLOPECONTOUR_PRESERVE);
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 
     if (fp->proc_slope != NULL)
     {
@@ -690,7 +690,7 @@ void func_ovl3_801630A0(GObj *fighter_gobj, s32 status_id)
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, (FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 
     fp->catch_gobj = fp->search_gobj;
 
@@ -709,7 +709,7 @@ void func_ovl3_801630A0(GObj *fighter_gobj, s32 status_id)
 
 void jtgt_ovl3_80163154(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNStart, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNStart, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_80161E08(fighter_gobj, FALSE);
     func_ovl3_80161E94(fighter_gobj);
     ftAnim_Update(fighter_gobj);
@@ -737,7 +737,7 @@ void func_ovl3_80163224(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNRelease, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -746,7 +746,7 @@ void func_ovl3_80163274(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNWait, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -755,7 +755,7 @@ void func_ovl3_801632C4(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNTurn, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -764,7 +764,7 @@ void func_ovl3_80163314(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialNCopy, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -776,7 +776,7 @@ void func_ovl3_80163364(GObj *fighter_gobj)
 
 void jtgt_ovl3_801633A0(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNStart, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNStart, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_80161E08(fighter_gobj, TRUE);
     func_ovl3_80161E94(fighter_gobj);
     ftAnim_Update(fighter_gobj);
@@ -804,7 +804,7 @@ void func_ovl3_80163470(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNRelease, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -813,7 +813,7 @@ void func_ovl3_801634C0(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNWait, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -822,7 +822,7 @@ void func_ovl3_80163510(GObj *fighter_gobj) // Unused
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNTurn, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 
@@ -831,7 +831,7 @@ void func_ovl3_80163560(GObj *fighter_gobj)
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirNCopy, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
 }
 

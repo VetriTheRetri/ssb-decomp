@@ -33,7 +33,7 @@ typedef enum ftStatusUpdateFlags
 
 } ftStatusUpdateFlags;
 
-#define FTSTATUPDATE_NULL_PRESERVE          (0)                                         // 0x0 - Just zero
+#define FTSTATUPDATE_NONE_PRESERVE          (0)                                         // 0x0 - Just zero
 #define FTSTATUPDATE_HIT_PRESERVE           (1 << ftStatusUpdate_Hit_Preserve)          // 0x1
 #define FTSTATUPDATE_COLANIM_PRESERVE       (1 << ftStatusUpdate_ColAnim_Preserve)      // 0x2
 #define FTSTATUPDATE_GFX_PRESERVE           (1 << ftStatusUpdate_GFX_Preserve)          // 0x4
@@ -422,26 +422,27 @@ typedef enum ftAttackIndex
     ftAttack_Index_AttackLw4
 };
 
-typedef enum ftGrabInteractFlags
+// Enum of flags for each unique type of grab, used to check if attacker can grab victim by ANDing attacker's grab type with victim's grab type ignore mask
+typedef enum ftCatchKind
 {
-    ftGrabInteract_Flags_SpecialNYoshi, // Also used for Kirby's Yoshi Copy
-    ftGrabInteract_Flags_SpecialNKirby,
-    ftGrabInteract_Flags_Unk1,
-    ftGrabInteract_Flags_Unk2,
-    ftGrabInteract_Flags_CatchCommon,
-    ftGrabInteract_Flags_SpecialHiCaptain
+    ftCatch_Kind_SpecialNYoshi,             // Yoshi's Egg Lay, also used for Kirby's copy ability version of it
+    ftCatch_Kind_SpecialNKirby,             // Kirby's Inhale
+    ftCatch_Kind_CliffCommon,               // Fighters ignore only this grab type when hanging on the ledge, but it is not assigned to any move?
+    ftCatch_Kind_UnusedCommon,              // Completely unused?
+    ftCatch_Kind_CatchCommon,               // Common grab
+    ftCatch_Kind_SpecialHiCaptain           // Captain Falcon's Falcon Dive
 
-} ftGrabInteractFlags;
+} ftCatchKind;
 
-#define FTGRABINTERACT_MASK_SPECIALNYOSHI    (1 << ftGrabInteract_Flags_SpecialNYoshi)
-#define FTGRABINTERACT_MASK_SPECIALNKIRBY    (1 << ftGrabInteract_Flags_SpecialNKirby)
-#define FTGRABINTERACT_MASK_UNK1             (1 << ftGrabInteract_Flags_Unk1)
-#define FTGRABINTERACT_MASK_UNK2             (1 << ftGrabInteract_Flags_Unk2)
-#define FTGRABINTERACT_MASK_CATCHCOMMON      (1 << ftGrabInteract_Flags_CatchCommon)
-#define FTGRABINTERACT_MASK_SPECIALHICAPTAIN (1 << ftGrabInteract_Flags_SpecialHiCaptain)
+#define FTCATCHKIND_MASK_SPECIALNYOSHI      (1 << ftCatch_Kind_SpecialNYoshi)     // 0x1
+#define FTCATCHKIND_MASK_SPECIALNKIRBY      (1 << ftCatch_Kind_SpecialNKirby)     // 0x2
+#define FTCATCHKIND_MASK_CLIFFCOMMON        (1 << ftCatch_Kind_CliffCommon)       // 0x4
+#define FTCATCHKIND_MASK_UNUSEDCOMMON       (1 << ftCatch_Kind_UnusedCommon)      // 0x8
+#define FTCATCHKIND_MASK_CATCHCOMMON        (1 << ftCatch_Kind_CatchCommon)       // 0x10
+#define FTCATCHKIND_MASK_SPECIALHICAPTAIN   (1 << ftCatch_Kind_SpecialHiCaptain)  // 0x20
 
-#define FTGRABINTERACT_MASK_NONE (0)
-#define FTGRABINTERACT_MASK_ALL  (FTGRABINTERACT_MASK_SPECIALHICAPTAIN | FTGRABINTERACT_MASK_CATCHCOMMON | FTGRABINTERACT_MASK_UNK2 | FTGRABINTERACT_MASK_UNK1 | FTGRABINTERACT_MASK_SPECIALNKIRBY | FTGRABINTERACT_MASK_SPECIALNYOSHI)
+#define FTCATCHKIND_MASK_NONE (0)
+#define FTCATCHKIND_MASK_ALL (FTCATCHKIND_MASK_SPECIALHICAPTAIN | FTCATCHKIND_MASK_CATCHCOMMON | FTCATCHKIND_MASK_UNUSEDCOMMON | FTCATCHKIND_MASK_CLIFFCOMMON | FTCATCHKIND_MASK_SPECIALNKIRBY | FTCATCHKIND_MASK_SPECIALNYOSHI)
 
 typedef enum ftKind
 {
@@ -871,16 +872,16 @@ typedef struct ftCommonAttributes
     u32 is_have_specialairlw : 1;
     u32 is_have_catch : 1;   // Whether fighter has a grab
     u32 is_have_voice : 1;
-    u32 catch_flags_b22 : 1;
-    u32 catch_flags_b23 : 1;
-    u32 catch_flags_b24 : 1;
-    u32 catch_flags_b25 : 1;
-    u32 catch_flags_b26 : 1;
-    u32 catch_flags_b27 : 1;
-    u32 catch_flags_b28 : 1;
-    u32 catch_flags_b29 : 1;
-    u32 catch_flags_b30 : 1;
-    u32 catch_flags_b31 : 1;
+    u32 catch_mask_b22 : 1;
+    u32 catch_mask_b23 : 1;
+    u32 catch_mask_b24 : 1;
+    u32 catch_mask_b25 : 1;
+    u32 catch_mask_b26 : 1;
+    u32 catch_mask_b27 : 1;
+    u32 catch_mask_b28 : 1;
+    u32 catch_mask_b29 : 1;
+    u32 catch_mask_b30 : 1;
+    u32 catch_mask_b31 : 1;
     FighterHurtDesc fighter_hurt_desc[FTPARTS_HURT_NUM_MAX];
     s32 unk_ftca_0x290;
     s32 unk_ftca_0x294;
@@ -1076,8 +1077,8 @@ struct Fighter_Struct
     u32 x192_flag_b5 : 1;
     u32 x192_flag_b6 : 1;
     u32 x192_flag_b7 : 1;
-    u8 capture_flags;       // Fighter is immune to these grab types
-    u8 catch_flags;         // Fighter's current grab type
+    u8 catch_ignore_mask;       // Fighter is immune to these grab types
+    u8 catch_mask;              // Fighter's current grab type
 
     FighterAnimFlags anim_flags;
 
@@ -1312,7 +1313,7 @@ void ftAnim_Update(GObj*); // ???
     (func_ovl3_80151098(fighter_gobj) != FALSE) || \
     (func_ovl3_80151160(fighter_gobj) != FALSE) || \
     (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
-    (func_ovl3_80149CE0(fighter_gobj) != FALSE) || \
+    (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackLw4_CheckInterruptCommon(fighter_gobj) != FALSE) || \

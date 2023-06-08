@@ -69,13 +69,13 @@ void ftCommon_CaptureYoshi_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
     this_fp->lr = -capture_fp->lr;
 
     ftMapCollide_SetAir(this_fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureYoshi, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureYoshi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     this_fp->status_vars.common.captureyoshi.stage = 0;
     this_fp->status_vars.common.captureyoshi.breakout_wait = 0;
 
-    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
     func_ovl2_800D9444(fighter_gobj);
     ftCommon_CaptureYoshi_ProcPhysics(fighter_gobj);
     func_ovl2_800DE348(fighter_gobj);
@@ -349,8 +349,8 @@ void ftCommon_YoshiEgg_SetStatus(GObj *fighter_gobj)
     this_fp->proc_status = ftCommon_YoshiEgg_ProcStatus;
 
     ftMapCollide_SetAir(this_fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_YoshiEgg, 0.0F, 0.0F, FTSTATUPDATE_NULL_PRESERVE);
-    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_YoshiEgg, 0.0F, 0.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
     this_fp->is_invisible = TRUE;
 

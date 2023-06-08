@@ -19,7 +19,7 @@ void func_ovl3_8013E1C8(GObj *fighter_gobj)
         {
             ftMapCollide_SetGround(fp);
         }
-        ftStatus_Update(fighter_gobj, ftStatus_Common_Wait, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Common_Wait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
         fp->x192_flag_b0 = TRUE;
 

@@ -79,7 +79,7 @@ void ftCommon_Attack11_ProcInterrupt(GObj *fighter_gobj)
     {
         fp->status_vars.common.attack1.interrupt_catch_timer++;
 
-        if (func_ovl3_80149E24(fighter_gobj) != FALSE)
+        if (ftCommon_Catch_CheckInterruptAttack11(fighter_gobj) != FALSE)
         {
             return;
         }
@@ -132,7 +132,7 @@ void ftCommon_Attack11_SetStatus(GObj *fighter_gobj)
     {
         fp->proc_status = ftCommon_Attack11_ProcStatus;
 
-        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack11, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack11, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
         ftAnim_Update(fighter_gobj);
 
         fp->command_vars.flags.flag1 = 0;
@@ -154,7 +154,7 @@ void ftCommon_Attack12_SetStatus(GObj *fighter_gobj)
 
     if (func_ovl3_80146064(fighter_gobj) == FALSE)
     {
-        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack12, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+        ftStatus_Update(fighter_gobj, ftStatus_Common_Attack12, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
         ftAnim_Update(fighter_gobj);
 
         fp->command_vars.flags.flag1 = 0;
@@ -230,7 +230,7 @@ void ftCommon_Attack13_SetStatus(GObj *fighter_gobj)
             status_id = ftStatus_Ness_Attack13;
             break;
         }
-        ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+        ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
         ftAnim_Update(fighter_gobj);
 
         fp->command_vars.flags.flag1 = 0;

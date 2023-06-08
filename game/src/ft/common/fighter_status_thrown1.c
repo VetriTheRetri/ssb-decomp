@@ -53,7 +53,7 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_que
     this_fp->ground_or_air = air;
     this_fp->jumps_used = 1;
 
-    ftStatus_Update(fighter_gobj, status_id_new, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id_new, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     if ((capture_fp->ft_kind == Ft_Kind_Yoshi) || (capture_fp->ft_kind == Ft_Kind_PolyYoshi))
@@ -62,7 +62,7 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_que
 
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
     this_fp->status_vars.common.thrown.status_id = status_id_queue;
 }
@@ -75,7 +75,7 @@ void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
     this_fp->ground_or_air = air;
     this_fp->jumps_used = 1;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     if ((capture_fp->ft_kind == Ft_Kind_Yoshi) || (capture_fp->ft_kind == Ft_Kind_PolyYoshi))
@@ -84,7 +84,7 @@ void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
 
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
     if ((capture_fp->ft_kind == Ft_Kind_Mario)  ||
     (capture_fp->ft_kind == Ft_Kind_MetalMario) ||

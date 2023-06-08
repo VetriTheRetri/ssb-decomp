@@ -2,12 +2,14 @@
 
 // CliffCatch + CliffWait
 
-void func_ovl3_80144B30(GObj *fighter_gobj)
+// 0x80144B30
+void ftCommon_CliffCatch_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80144DF4);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_CliffWait_SetStatus);
 }
 
-void func_ovl3_80144B54(GObj *fighter_gobj)
+// 0x80144B54
+void ftCommon_CliffCommon_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     DObj *topn_joint = fp->joint[0], *transn_joint = fp->joint[1];
@@ -23,25 +25,27 @@ void func_ovl3_80144B54(GObj *fighter_gobj)
     topn_joint->translate.y = ((transn_joint->translate.y * topn_joint->scale.y) + vel.y);
 }
 
-void func_ovl3_80144C1C(GObj *fighter_gobj)
+// 0x80144C1C
+void ftCommon_CliffCommon_ProcMap(GObj *fighter_gobj)
 {
     return;
 }
 
-void func_ovl3_80144C24(GObj *fighter_gobj)
+// 0x80144C24
+void ftCommon_CliffCatch_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f vel;
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffCatch, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffCatch, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftMapCollide_SetAir(fp);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->coll_data.ground_line_id = -1;
 
-    func_ovl3_80144B54(fighter_gobj);
+    ftCommon_CliffCommon_ProcPhysics(fighter_gobj);
 
     fp->x190_flag_b7 = TRUE;
 
@@ -53,12 +57,13 @@ void func_ovl3_80144C24(GObj *fighter_gobj)
 
     func_ovl2_801016E0(&vel);
 
-    fp->proc_damage = func_ovl3_80144CF8;
+    fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_UNK1);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_CLIFFCOMMON);
 }
 
-void func_ovl3_80144CF8(GObj *fighter_gobj)
+// 0x80144CF8
+void ftCommon_CliffCommon_ProcDamage(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ObjectColl *object_coll = &fp->coll_data.object_coll;
@@ -76,19 +81,21 @@ void func_ovl3_80144CF8(GObj *fighter_gobj)
     func_ovl2_800DF014(fighter_gobj, &vel, &fp->coll_data);
 }
 
-void func_ovl3_80144DA4(GObj *fighter_gobj)
+// 0x80144DA4
+void ftCommon_CliffWait_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_80145620(fighter_gobj) == FALSE) && (func_ovl3_801457E0(fighter_gobj) == FALSE) && (func_ovl3_80145084(fighter_gobj) == FALSE))
+    if ((ftCommon_CliffAttack_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_CliffEscape_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_CliffClimbOrFall_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_80144E84(fighter_gobj);
+        ftCommon_CliffWait_CheckFall(fighter_gobj);
     }
 }
 
-void func_ovl3_80144DF4(GObj *fighter_gobj)
+// 0x80144DF4
+void ftCommon_CliffWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffWait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->status_vars.common.cliffwait.status_id = 0;
 
@@ -102,12 +109,13 @@ void func_ovl3_80144DF4(GObj *fighter_gobj)
 
     func_ovl2_800E7F7C(fighter_gobj, 120);
 
-    fp->proc_damage = func_ovl3_80144CF8;
+    fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_UNK1);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_CLIFFCOMMON);
 }
 
-bool32 func_ovl3_80144E84(GObj *fighter_gobj)
+// 0x80144E84
+bool32 ftCommon_CliffWait_CheckFall(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -117,7 +125,7 @@ bool32 func_ovl3_80144E84(GObj *fighter_gobj)
     {
         fp->cliffcatch_wait = FTCOMMON_CLIFF_CATCH_WAIT;
 
-        func_ovl3_80144CF8(fighter_gobj);
+        ftCommon_CliffCommon_ProcDamage(fighter_gobj);
         func_ovl3_801436A0(fighter_gobj);
 
         return TRUE;

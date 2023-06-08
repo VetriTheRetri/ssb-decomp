@@ -115,12 +115,12 @@ void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->lr = -capture_fp->lr;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CapturePulled, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CapturePulled, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     this_fp->status_vars.common.capture.is_goto_pulled_wait = FALSE;
 
-    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
     func_ovl2_800E806C(this_fp, 9, 0);
     func_ovl2_800D9444(fighter_gobj);
     ftCommon_Capture_ProcPhysics(fighter_gobj);
@@ -177,5 +177,5 @@ void ftCommon_CaptureWait_SetStatus(GObj *fighter_gobj)
 
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    ftCommon_SetCaptureFlags(this_fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 }

@@ -4,7 +4,7 @@
 (                                                  \
     (func_ovl3_80146AE8(fighter_gobj) != FALSE) || \
     (func_ovl3_801493EC(fighter_gobj) != FALSE) || \
-    (func_ovl3_80149C60(fighter_gobj) != FALSE) || \
+    (ftCommon_Catch_CheckInterruptGuard(fighter_gobj) != FALSE) || \
     (func_ovl3_8013F604(fighter_gobj) != FALSE) || \
     (func_ovl3_80141F8C(fighter_gobj) != FALSE)    \
 )                                                  \

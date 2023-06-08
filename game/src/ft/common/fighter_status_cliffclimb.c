@@ -1,8 +1,7 @@
 #include "fighter.h"
 
-// CliffClimb + CliffAttack
-
-void func_ovl3_80144EE0(GObj *fighter_gobj)
+// 0x80144EE0
+void ftCommon_CliffQuick_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -11,21 +10,22 @@ void func_ovl3_80144EE0(GObj *fighter_gobj)
         switch (fp->status_vars.common.cliffmotion.status_id)
         {
         case 0:
-            func_ovl3_801451F0(fighter_gobj);
+            ftCommon_CliffClimbQuick1_SetStatus(fighter_gobj);
             break;
 
         case 1:
-            func_ovl3_801456B4(fighter_gobj);
+            ftCommon_CliffAttackQuick1_SetStatus(fighter_gobj);
             break;
 
         case 2:
-            func_ovl3_8014586C(fighter_gobj);
+            ftCommon_CliffEscapeQuick1_SetStatus(fighter_gobj);
             break;
         }
     }
 }
 
-void func_ovl3_80144F64(GObj *fighter_gobj)
+// 0x80144F64
+void ftCommon_CliffSlow_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -34,21 +34,22 @@ void func_ovl3_80144F64(GObj *fighter_gobj)
         switch (fp->status_vars.common.cliffmotion.status_id)
         {
         case 3:
-            func_ovl3_80145240(fighter_gobj);
+            ftCommon_CliffClimbSlow1_SetStatus(fighter_gobj);
             break;
 
         case 4:
-            func_ovl3_80145704(fighter_gobj);
+            ftCommon_CliffAttackSlow1_SetStatus(fighter_gobj);
             break;
 
         case 5:
-            func_ovl3_801458BC(fighter_gobj);
+            ftCommon_CliffEscapeSlow1_SetStatus(fighter_gobj);
             break;
         }
     }
 }
 
-void func_ovl3_80144FE8(GObj *fighter_gobj, s32 status_input)
+// 0x80144FE8
+void ftCommon_CliffQuickOrSlow_SetStatus(GObj *fighter_gobj, s32 status_input)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 status_id;
@@ -60,7 +61,7 @@ void func_ovl3_80144FE8(GObj *fighter_gobj, s32 status_input)
     }
     else status_id = ftStatus_Common_CliffSlow, status_new = 3;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->status_vars.common.cliffmotion.status_id = status_input + status_new;
@@ -68,10 +69,10 @@ void func_ovl3_80144FE8(GObj *fighter_gobj, s32 status_input)
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->proc_damage = func_ovl3_80144CF8;
+    fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 }
 
-bool32 func_ovl3_80145084(GObj *fighter_gobj)
+bool32 ftCommon_CliffClimbOrFall_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -83,7 +84,7 @@ bool32 func_ovl3_80145084(GObj *fighter_gobj)
         {
             if (fp->status_vars.common.cliffmotion.status_id != 0)
             {
-                func_ovl3_80144FE8(fighter_gobj, 0);
+                ftCommon_CliffQuickOrSlow_SetStatus(fighter_gobj, 0);
 
                 return TRUE;
             }
@@ -93,7 +94,7 @@ bool32 func_ovl3_80145084(GObj *fighter_gobj)
         {
             fp->cliffcatch_wait = FTCOMMON_CLIFF_CATCH_WAIT;
 
-            func_ovl3_80144CF8(fighter_gobj);
+            ftCommon_CliffCommon_ProcDamage(fighter_gobj);
             func_ovl3_8013F9E0(fighter_gobj);
 
             return TRUE;
@@ -105,44 +106,50 @@ bool32 func_ovl3_80145084(GObj *fighter_gobj)
     return FALSE;
 }
 
-void func_ovl3_801451A8(GObj *fighter_gobj)
+// 0x801451A8
+void ftCommon_CliffClimbQuick1_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801455A0);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_CliffClimbQuick2_SetStatus);
 }
 
-void func_ovl3_801451CC(GObj *fighter_gobj)
+// 0x801451CC
+void ftCommon_CliffClimbSlow1_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801455E0);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_CliffClimbSlow2_SetStatus);
 }
 
-void func_ovl3_801451F0(GObj *fighter_gobj)
-{
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick1, 0.0F, 1.0F, 0);
-
-    fp->x190_flag_b7 = TRUE;
-
-    fp->proc_damage = func_ovl3_80144CF8;
-}
-
-void func_ovl3_80145240(GObj *fighter_gobj)
+// 0x801451F0
+void ftCommon_CliffClimbQuick1_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow1, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->proc_damage = func_ovl3_80144CF8;
+    fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 }
 
-void func_ovl3_80145290(GObj *fighter_gobj)
+// 0x80145240
+void ftCommon_CliffClimbSlow1_SetStatus(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+
+    fp->x190_flag_b7 = TRUE;
+
+    fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
+}
+
+// 0x80145290
+void ftCommon_CliffCommon2_ProcUpdate(GObj *fighter_gobj)
 {
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
 
-void func_ovl3_801452B4(GObj *fighter_gobj)
+// 0x801452B4
+void ftCommon_CliffCommon2_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
@@ -183,7 +190,8 @@ void func_ovl3_801452B4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801453F0(GObj *fighter_gobj)
+// 0x801453F0
+void ftCommon_CliffClimbCommon2_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -197,7 +205,8 @@ void func_ovl3_801453F0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80145440(GObj *fighter_gobj)
+// 0x80145440
+void ftCommon_CliffAttackEscape2_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -211,7 +220,8 @@ void func_ovl3_80145440(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80145490(GObj *fighter_gobj)
+// 0x80145490
+void ftCommon_CliffCommon2_UpdateCollData(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Coll_Data *coll_data = &fp->coll_data;
@@ -242,7 +252,8 @@ void func_ovl3_80145490(GObj *fighter_gobj)
     coll_data->ground_dist = 0.0F;
 }
 
-void func_ovl3_8014557C(GObj *fighter_gobj)
+// 0x8014557C
+void ftCommon_CliffCommon2_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -252,16 +263,18 @@ void func_ovl3_8014557C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801455A0(GObj *fighter_gobj)
+// 0x801455A0
+void ftCommon_CliffClimbQuick2_SetStatus(GObj *fighter_gobj)
 {
-    func_ovl3_80145490(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick2, 0.0F, 1.0F, 0);
-    func_ovl3_8014557C(fighter_gobj);
+    ftCommon_CliffCommon2_UpdateCollData(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_CliffCommon2_InitStatusVars(fighter_gobj);
 }
 
-void func_ovl3_801455E0(GObj *fighter_gobj)
+// 0x801455E0
+void ftCommon_CliffClimbSlow2_SetStatus(GObj *fighter_gobj)
 {
-    func_ovl3_80145490(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow2, 0.0F, 1.0F, 0);
-    func_ovl3_8014557C(fighter_gobj);
+    ftCommon_CliffCommon2_UpdateCollData(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_CliffCommon2_InitStatusVars(fighter_gobj);
 }

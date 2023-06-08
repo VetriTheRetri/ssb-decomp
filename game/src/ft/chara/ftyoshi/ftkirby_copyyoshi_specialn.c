@@ -2,7 +2,7 @@
 
 void func_ovl3_8015F180(Fighter_Struct *fp, void (*proc_catch)(GObj*)) // Kirby's Yoshi Copy
 {
-    ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_SPECIALNYOSHI, proc_catch, ftCommon_CaptureYoshi_ProcCapture);
+    ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALNYOSHI, proc_catch, ftCommon_CaptureYoshi_ProcCapture);
 }
 
 void func_ovl3_8015F1AC(GObj *fighter_gobj, void (*proc_status)(GObj*))
@@ -52,7 +52,7 @@ void func_ovl3_8015F248(Fighter_Struct *fp)
 
             fp->command_vars.flags.flag1 = 0;
 
-            ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_NONE);
+            ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
         }
     }
 }
@@ -162,7 +162,7 @@ void jtgt_ovl3_8015F5B0(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_8015F3EC;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_8015F180(fp, func_ovl3_8015F6AC);
     ftAnim_Update(fighter_gobj);
 }
@@ -173,7 +173,7 @@ void jtgt_ovl3_8015F60C(GObj *fighter_gobj)
 
     fp->proc_status = &func_ovl3_8015F3F8;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyYoshi_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_8015F180(fp, func_ovl3_8015F6F0);
     ftAnim_Update(fighter_gobj);
 }
@@ -182,7 +182,7 @@ void func_ovl3_8015F668(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->catch_gobj = fp->search_gobj;
@@ -206,7 +206,7 @@ void func_ovl3_8015F734(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftCommon_SetCaptureFlags(fp, FTGRABINTERACT_MASK_ALL);
+    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;

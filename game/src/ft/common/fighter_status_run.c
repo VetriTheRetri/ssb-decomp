@@ -3,7 +3,7 @@
 void func_ovl3_8013EE50(GObj *fighter_gobj)
 {
     if ((func_ovl3_80151098(fighter_gobj) == FALSE) &&
-    (func_ovl3_80149D80(fighter_gobj) == FALSE) &&
+    (ftCommon_Catch_CheckInterruptRunDash(fighter_gobj) == FALSE) &&
     (ftCommon_AttackDash_CheckInterruptCommon(fighter_gobj) == FALSE) &&
     (func_ovl3_80148D2C(fighter_gobj, 4) == FALSE) &&
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) == FALSE) &&
@@ -18,7 +18,7 @@ void func_ovl3_8013EEE8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Run, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Run, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->phys_info.vel_ground.x = fp->attributes->run_speed;
 }

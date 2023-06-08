@@ -60,7 +60,7 @@ void ftCommon_AttackLw3_SetStatus(GObj *fighter_gobj)
     {
         fp->proc_status = ftCommon_AttackLw3_InitStatusVars;
 
-        ftStatus_Update(fighter_gobj, ftStatus_Common_AttackLw3, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+        ftStatus_Update(fighter_gobj, ftStatus_Common_AttackLw3, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
         ftAnim_Update(fighter_gobj);
     }
 }

@@ -18,7 +18,7 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
 
     if ((fp->command_vars.flags.flag1 != 0) && (fighter_gobj->anim_frame <= 5.0F))
     {
-        if ((func_ovl3_80151098(fighter_gobj) == FALSE) && (func_ovl3_80149CE0(fighter_gobj) == FALSE) && (ftCommon_AttackS4_CheckInterruptDash(fighter_gobj) == FALSE) && (!(fighter_gobj->anim_frame <= 3.0F) || (func_ovl3_801493A4(fighter_gobj) == FALSE)))
+        if ((func_ovl3_80151098(fighter_gobj) == FALSE) && (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_AttackS4_CheckInterruptDash(fighter_gobj) == FALSE) && (!(fighter_gobj->anim_frame <= 3.0F) || (func_ovl3_801493A4(fighter_gobj) == FALSE)))
         {
             if (func_ovl3_80148D0C(fighter_gobj) != FALSE) // Jump interrupt?
             {
@@ -31,7 +31,7 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
     {
         if (func_ovl3_80151098(fighter_gobj) == FALSE)
         {
-            if (func_ovl3_80149D80(fighter_gobj) == FALSE)
+            if (ftCommon_Catch_CheckInterruptRunDash(fighter_gobj) == FALSE)
             {
                 if ((ftCommon_AttackDash_CheckInterruptCommon(fighter_gobj) == FALSE) && (((fp->input.pl.stick_range.x * fp->lr) >= 0) || (func_ovl3_8013ED64(fighter_gobj) == FALSE)))
                 {
@@ -44,7 +44,7 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
             }
         }
     }
-    else if ((func_ovl3_80149CE0(fighter_gobj) == FALSE) && (func_ovl3_8013ED64(fighter_gobj) == FALSE) && (func_ovl3_80148D0C(fighter_gobj) == FALSE))
+    else if ((ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_8013ED64(fighter_gobj) == FALSE) && (func_ovl3_80148D0C(fighter_gobj) == FALSE))
     {
     next:
         if ((ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_8013F598(fighter_gobj) == FALSE))

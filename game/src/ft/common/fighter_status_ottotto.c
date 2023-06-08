@@ -5,7 +5,7 @@
     (func_ovl3_80151098(fighter_gobj) != FALSE) ||  \
     (func_ovl3_80151160(fighter_gobj) != FALSE) ||  \
     (func_ovl3_801511E0(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_80149CE0(fighter_gobj) != FALSE) ||  \
+    (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_AttackLw4_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \

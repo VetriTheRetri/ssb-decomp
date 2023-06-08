@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_80149A10(GObj *fighter_gobj)
+// 0x80149A10
+void ftCommon_Catch_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -24,7 +25,8 @@ void func_ovl3_80149A10(GObj *fighter_gobj)
     func_ovl2_800D94C4(fighter_gobj);
 }
 
-void func_ovl3_80149AC8(GObj *fighter_gobj)
+// 0x80149AC8
+void ftCommon_Catch_CaptureSetStatusRelease(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
     Fighter_Struct *catch_fp;
@@ -51,27 +53,30 @@ void func_ovl3_80149AC8(GObj *fighter_gobj)
     }
 }
 
+// 0x80149B48
 void func_ovl3_80149B48(GObj *fighter_gobj) // Unused
 {
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        func_ovl3_80149AC8(fighter_gobj);
+        ftCommon_Catch_CaptureSetStatusRelease(fighter_gobj);
     }
 }
 
-void func_ovl3_80149B78(GObj *fighter_gobj)
+// 0x80149B78
+void ftCommon_Catch_ProcMap(GObj *fighter_gobj)
 {
     if (func_ovl2_800DDE50(fighter_gobj) == FALSE)
     {
-        func_ovl3_80149AC8(fighter_gobj);
+        ftCommon_Catch_CaptureSetStatusRelease(fighter_gobj);
     }
 }
 
-void func_ovl3_80149BA8(GObj *fighter_gobj)
+// 0x80149BA8
+void ftCommon_Catch_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Catch, 0.0F, 1.0F, FTSTATUPDATE_NULL_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Catch, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 1;
@@ -80,7 +85,7 @@ void func_ovl3_80149BA8(GObj *fighter_gobj)
     fp->status_vars.common.catchmain.catch_pull_anim_frames = 0.0F;
     fp->status_vars.common.catchmain.catch_pull_frame_begin = 0.0F;
 
-    ftCommon_SetCatchFlags(fp, FTGRABINTERACT_MASK_CATCHCOMMON, func_ovl3_80149F04, ftCommon_CapturePulled_ProcCapture);
+    ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_CATCHCOMMON, ftCommon_CatchPull_SetStatus, ftCommon_CapturePulled_ProcCapture);
 
     fp->x192_flag_b5 = FALSE;
 
@@ -90,7 +95,8 @@ void func_ovl3_80149BA8(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl3_80149C60(GObj *fighter_gobj)
+// 0x80149C60
+bool32 ftCommon_Catch_CheckInterruptGuard(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -98,7 +104,7 @@ bool32 func_ovl3_80149C60(GObj *fighter_gobj)
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_catch))
     {
-        func_ovl3_80149BA8(fighter_gobj);
+        ftCommon_Catch_SetStatus(fighter_gobj);
 
         fp->x192_flag_b5 = flags;
 
@@ -107,7 +113,8 @@ bool32 func_ovl3_80149C60(GObj *fighter_gobj)
     else return FALSE;
 }
 
-bool32 func_ovl3_80149CE0(GObj *fighter_gobj)
+// 0x80149CE0
+bool32 ftCommon_Catch_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -120,14 +127,15 @@ bool32 func_ovl3_80149CE0(GObj *fighter_gobj)
     }
     else if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_catch))
     {
-        func_ovl3_80149BA8(fighter_gobj);
+        ftCommon_Catch_SetStatus(fighter_gobj);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_80149D80(GObj *fighter_gobj)
+// 0x80149D80
+bool32 ftCommon_Catch_CheckInterruptRunDash(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -140,14 +148,15 @@ bool32 func_ovl3_80149D80(GObj *fighter_gobj)
     }
     else if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_catch))
     {
-        func_ovl3_80149BA8(fighter_gobj);
+        ftCommon_Catch_SetStatus(fighter_gobj);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_80149E24(GObj *fighter_gobj)
+// 0x80149E24
+bool32 ftCommon_Catch_CheckInterruptAttack11(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -160,7 +169,7 @@ bool32 func_ovl3_80149E24(GObj *fighter_gobj)
     }
     else if ((fp->input.pl.button_tap & fp->input.button_mask_z) && (attributes->is_have_catch))
     {
-        func_ovl3_80149BA8(fighter_gobj);
+        ftCommon_Catch_SetStatus(fighter_gobj);
 
         return TRUE;
     }

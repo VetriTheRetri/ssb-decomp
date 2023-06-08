@@ -9206,7 +9206,7 @@ glabel ftMapCollide_CheckGroundCliff
   /* 05A038 800DE838 33193000 */      andi $t9, $t8, 0x3000
   /* 05A03C 800DE83C 53200006 */      beql $t9, $zero, .L800DE858
   /* 05A040 800DE840 8FB90024 */        lw $t9, 0x24($sp)
-  /* 05A044 800DE844 0C051309 */       jal func_ovl3_80144C24
+  /* 05A044 800DE844 0C051309 */       jal ftCommon_CliffCatch_SetStatus
   /* 05A048 800DE848 00000000 */       nop 
   /* 05A04C 800DE84C 10000007 */         b .L800DE86C
   /* 05A050 800DE850 24020001 */     addiu $v0, $zero, 1
@@ -9324,7 +9324,7 @@ glabel func_ovl2_800DE978
   /* 05A1C4 800DE9C4 304E3000 */      andi $t6, $v0, 0x3000
   /* 05A1C8 800DE9C8 11C00005 */      beqz $t6, .L800DE9E0
   /* 05A1CC 800DE9CC 304F0800 */      andi $t7, $v0, 0x800
-  /* 05A1D0 800DE9D0 0C051309 */       jal func_ovl3_80144C24
+  /* 05A1D0 800DE9D0 0C051309 */       jal ftCommon_CliffCatch_SetStatus
   /* 05A1D4 800DE9D4 00000000 */       nop 
   /* 05A1D8 800DE9D8 1000000E */         b .L800DEA14
   /* 05A1DC 800DE9DC 8FBF0014 */        lw $ra, 0x14($sp)
@@ -18978,7 +18978,7 @@ glabel ftStatus_Update
   /* 062A24 800E7224 A22E0190 */        sb $t6, 0x190($s1)
   /* 062A28 800E7228 31CF00FE */      andi $t7, $t6, 0xfe
   /* 062A2C 800E722C A22F0190 */        sb $t7, 0x190($s1)
-  /* 062A30 800E7230 0C03A026 */       jal ftCommon_SetCaptureFlags
+  /* 062A30 800E7230 0C03A026 */       jal ftCommon_SetCatchIgnoreMask
   /* 062A34 800E7234 00002825 */        or $a1, $zero, $zero
   /* 062A38 800E7238 92380191 */       lbu $t8, 0x191($s1)
   /* 062A3C 800E723C 24010003 */     addiu $at, $zero, 3
@@ -20007,12 +20007,12 @@ glabel func_ovl2_800E806C
   /* 063890 800E8090 03E00008 */        jr $ra
   /* 063894 800E8094 00000000 */       nop 
 
-glabel ftCommon_SetCaptureFlags
+glabel ftCommon_SetCatchIgnoreMask
   /* 063898 800E8098 AFA50004 */        sw $a1, 4($sp)
   /* 06389C 800E809C 03E00008 */        jr $ra
   /* 0638A0 800E80A0 A0850193 */        sb $a1, 0x193($a0)
 
-glabel ftCommon_SetCatchFlags
+glabel ftCommon_SetCatchVars
   /* 0638A4 800E80A4 AFA50004 */        sw $a1, 4($sp)
   /* 0638A8 800E80A8 908F0192 */       lbu $t7, 0x192($a0)
   /* 0638AC 800E80AC A0850194 */        sb $a1, 0x194($a0)

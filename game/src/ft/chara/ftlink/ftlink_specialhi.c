@@ -262,7 +262,7 @@ void func_ovl3_801641D0(GObj *fighter_gobj)
 
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
-            func_ovl3_80144C24(fighter_gobj);
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
         else if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {

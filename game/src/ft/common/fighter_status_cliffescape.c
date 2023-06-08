@@ -1,60 +1,67 @@
 #include "fighter.h"
 
-bool32 func_ovl3_801457E0(GObj *fighter_gobj)
+// 0x801457E0
+bool32 ftCommon_CliffEscape_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_tap & fp->input.button_mask_z)
     {
-        func_ovl3_80144FE8(fighter_gobj, 2);
+        ftCommon_CliffQuickOrSlow_SetStatus(fighter_gobj, 2);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-void func_ovl3_80145824(GObj *fighter_gobj)
+// 0x80145824
+void ftCommon_CliffEscapeQuick1_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014590C);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_CliffEscapeQuick2_SetStatus);
 }
 
-void func_ovl3_80145848(GObj *fighter_gobj)
+// 0x80145848
+void ftCommon_CliffEscapeSlow1_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014594C);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_CliffEscapeSlow2_SetStatus);
 }
 
-void func_ovl3_8014586C(GObj *fighter_gobj)
+// 0x8014586C
+void ftCommon_CliffEscapeQuick1_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeQuick1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeQuick1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->proc_damage = func_ovl3_80144CF8;
+    fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 }
 
-void func_ovl3_801458BC(GObj *fighter_gobj)
+// 0x801458BC
+void ftCommon_CliffEscapeSlow1_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeSlow1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeSlow1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->x190_flag_b7 = TRUE;
 
-    fp->proc_damage = func_ovl3_80144CF8;
+    fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 }
 
-void func_ovl3_8014590C(GObj *fighter_gobj)
+// 0x8014590C
+void ftCommon_CliffEscapeQuick2_SetStatus(GObj *fighter_gobj)
 {
-    func_ovl3_80145490(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeQuick2, 0.0F, 1.0F, 0U);
-    func_ovl3_8014557C(fighter_gobj);
+    ftCommon_CliffCommon2_UpdateCollData(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeQuick2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_CliffCommon2_InitStatusVars(fighter_gobj);
 }
 
-void func_ovl3_8014594C(GObj *fighter_gobj)
+// 0x8014594C
+void ftCommon_CliffEscapeSlow2_SetStatus(GObj *fighter_gobj)
 {
-    func_ovl3_80145490(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeSlow2, 0.0F, 1.0F, 0U);
-    func_ovl3_8014557C(fighter_gobj);
+    ftCommon_CliffCommon2_UpdateCollData(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeSlow2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_CliffCommon2_InitStatusVars(fighter_gobj);
 }

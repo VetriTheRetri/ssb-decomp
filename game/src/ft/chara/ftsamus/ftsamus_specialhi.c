@@ -50,7 +50,7 @@ void func_ovl3_8015DD58(GObj *fighter_gobj)
         {
             if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
             {
-                func_ovl3_80144C24(fighter_gobj);
+                ftCommon_CliffCatch_SetStatus(fighter_gobj);
             }
             else func_ovl3_80142E3C(fighter_gobj, 0, FTSAMUS_SCREWATTACK_LANDING_LAG);
         }
