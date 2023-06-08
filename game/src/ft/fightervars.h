@@ -90,9 +90,9 @@
 #define FTCOMMON_DAMAGE_SAKURAI_ANGLE_HIGH_GR 0.741764903069F
 #define FTCOMMON_DAMAGE_SAKURAI_ANGLE_HIGH_GD 42.5F
 #define FTCOMMON_DAMAGE_SAKURAI_ANGLE_DEFAULT_AR 0.75049156F
-#define FTCOMMON_DAMAGE_STATUS_KNOCKBACK_LOW 12.0F              // Knockback < this value                                                      -> DamageX1
-#define FTCOMMON_DAMAGE_STATUS_KNOCKBACK_MID 24.0F              // Knockback < this value && knockback >= FTCOMMON_DAMAGE_STATUS_KNOCKBACK_LOW -> DamageX2
-#define FTCOMMON_DAMAGE_STATUS_KNOCKBACK_HIGH 32.0F             // Knockback < this value && knockback >= FTCOMMON_DAMAGE_STATUS_KNOCKBACK_MID -> DamageX3
+#define FTCOMMON_DAMAGE_LEVEL_HITSTUN_LOW 12.0F              // Knockback < this value                                                      -> DamageX1
+#define FTCOMMON_DAMAGE_LEVEL_HITSTUN_MID 24.0F              // Knockback < this value && knockback >= FTCOMMON_DAMAGE_LEVEL_HITSTUN_LOW -> DamageX2
+#define FTCOMMON_DAMAGE_LEVEL_HITSTUN_HIGH 32.0F             // Knockback < this value && knockback >= FTCOMMON_DAMAGE_LEVEL_HITSTUN_MID -> DamageX3
 #define FTCOMMON_DAMAGE_PUBLIC_REACT_GASP_ANGLE_LOW 1.308997F
 #define FTCOMMON_DAMAGE_PUBLIC_REACT_GASP_ANGLE_HIGH 2.0071287F
 #define FTCOMMON_DAMAGE_PUBLIC_REACT_GASP_KNOCKBACK_MUL 0.8F    // Multiply crowd reaction knockback by this value if angle > ANGLE_LOW && angle < ANGLE_HIGH
@@ -410,7 +410,7 @@ typedef struct ftCommon_Squat_StatusVars
 
 typedef struct ftCommon_Dokan_StatusVars
 {
-    s32 ground_line_id;
+    s32 ground_material;
     s32 wall_line_id;
     Vec3f pos_current;
     Vec3f pos_target;

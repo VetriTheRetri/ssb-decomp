@@ -1682,7 +1682,7 @@ void func_ovl2_800E2048(GObj *fighter_gobj)
     }
     else fp->coll_data.pos_correct.x = fp->coll_data.pos_correct.y = fp->coll_data.pos_correct.z = 0.0F;
 
-    func_ovl3_8013CB7C(fighter_gobj);
+    ftCommon_Dead_CheckInterruptCommon(fighter_gobj);
 
     if ((Ground_Info->unk_groundinfo_0x88 <= fp->coll_data.pos_curr.y) && (topn_translate->y < Ground_Info->unk_groundinfo_0x88) && (fp->ft_kind != Ft_Kind_MasterHand))
     {

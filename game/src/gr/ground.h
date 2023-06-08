@@ -26,8 +26,8 @@ typedef enum grKind
     Gr_Kind_Bonus3, // Race to the Finish
     Gr_Kind_Last, // Final Destination
 
-    Gr_Kind_TargetStart, // Start of Target Test stages
-    Gr_Kind_Bonus1Mario = Gr_Kind_TargetStart,
+    Gr_Kind_Bonus1Start, // Start of Target Test stages
+    Gr_Kind_Bonus1Mario = Gr_Kind_Bonus1Start,
     Gr_Kind_Bonus1Fox,
     Gr_Kind_Bonus1Donkey,
     Gr_Kind_Bonus1Samus,
@@ -40,8 +40,8 @@ typedef enum grKind
     Gr_Kind_Bonus1Purin,
     Gr_Kind_Bonus1Ness,
 
-    Gr_Kind_PlatformStart, // Start of Board the Platforms stages
-    Gr_Kind_Bonus2Mario = Gr_Kind_PlatformStart,
+    Gr_Kind_Bonus2Start, // Start of Board the Platforms stages
+    Gr_Kind_Bonus2Mario = Gr_Kind_Bonus2Start,
     Gr_Kind_Bonus2Fox,
     Gr_Kind_Bonus2Donkey,
     Gr_Kind_Bonus2Samus,
@@ -72,8 +72,8 @@ typedef enum grMaterial
     Gr_Mat_FireWeakVt1,
     Gr_Mat_SpikeStrongHz1,
     Gr_Mat_FireWeakVt2,
-    Gr_Mat_Dokan1,
-    Gr_Mat_Dokan2,
+    Gr_Mat_DokanLeft,
+    Gr_Mat_DokanRight,
     Gr_Mat_Detect, // Board the Platforms / Race to the Finish gate
     Gr_Mat_FireWeakVt3,
     Gr_Mat_Custom

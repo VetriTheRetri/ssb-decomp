@@ -57,7 +57,6 @@ typedef struct Fighter_Struct Fighter_Struct;
 
 typedef struct SpecialHit
 {
-
     s32 hit_type;
     s32 joint_index;
     Vec3f offset;
@@ -247,7 +246,7 @@ typedef enum ftCommonAction
     ftStatus_Common_DokanStart, // Enter pipe
     ftStatus_Common_DokanWait, // In pipe
     ftStatus_Common_DokanEnd, // Exit pipe
-    ftStatus_Common_DokanWalk, // Exit horizontal pipe
+    ftStatus_Common_DokanEndWalk, // Exit horizontal pipe
     ftStatus_Common_StopCeil, // Bump head into ceiling
     ftStatus_Common_DownBounceD,
     ftStatus_Common_DownBounceU,
@@ -1324,9 +1323,9 @@ void ftAnim_Update(GObj*); // ???
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE)    || \
     (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013ED64(fighter_gobj) != FALSE) || \
+    (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_80141EA4(fighter_gobj) != FALSE) || \
-    (func_ovl3_80142258(fighter_gobj) != FALSE) || \
+    (ftCommon_Dokan_CheckEnter(fighter_gobj) != FALSE) || \
     (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
     (func_ovl3_8013EA04(fighter_gobj) != FALSE) || \
     (func_ovl3_8013E648(fighter_gobj) != FALSE)    \

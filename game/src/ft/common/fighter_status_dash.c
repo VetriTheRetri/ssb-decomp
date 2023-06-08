@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_8013EA40(GObj *fighter_gobj)
+// 0x8013EA40
+void ftCommon_Dash_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -12,7 +13,8 @@ void func_ovl3_8013EA40(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013EA90(GObj *fighter_gobj)
+// 0x8013EA90
+void ftCommon_Dash_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -33,7 +35,7 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
         {
             if (ftCommon_Catch_CheckInterruptRunDash(fighter_gobj) == FALSE)
             {
-                if ((ftCommon_AttackDash_CheckInterruptCommon(fighter_gobj) == FALSE) && (((fp->input.pl.stick_range.x * fp->lr) >= 0) || (func_ovl3_8013ED64(fighter_gobj) == FALSE)))
+                if ((ftCommon_AttackDash_CheckInterruptCommon(fighter_gobj) == FALSE) && (((fp->input.pl.stick_range.x * fp->lr) >= 0) || (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) == FALSE)))
                 {
                     if (func_ovl3_80148D2C(fighter_gobj, (s32) (20.0F - fighter_gobj->anim_frame)) != FALSE)
                     {
@@ -44,7 +46,7 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
             }
         }
     }
-    else if ((ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_8013ED64(fighter_gobj) == FALSE) && (func_ovl3_80148D0C(fighter_gobj) == FALSE))
+    else if ((ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_80148D0C(fighter_gobj) == FALSE))
     {
     next:
         if ((ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_8013F598(fighter_gobj) == FALSE))
@@ -54,7 +56,8 @@ void func_ovl3_8013EA90(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013EC58(GObj *fighter_gobj)
+// 0x8013EC58
+void ftCommon_Dash_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -66,7 +69,8 @@ void func_ovl3_8013EC58(GObj *fighter_gobj)
     func_ovl2_800D87D0(fighter_gobj);
 }
 
-void func_ovl3_8013ECB0(GObj *fighter_gobj)
+// 0x8013ECB0
+void ftCommon_Dash_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -78,19 +82,21 @@ void func_ovl3_8013ECB0(GObj *fighter_gobj)
     else jtgt_ovl2_800DDEC4(fighter_gobj);
 }
 
-void func_ovl3_8013ED00(GObj *fighter_gobj, u32 flag)
+// 0x8013ED00
+void ftCommon_Dash_SetStatus(GObj *fighter_gobj, u32 flag)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Dash, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Dash, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->phys_info.vel_ground.x = fp->attributes->dash_speed;
-    fp->tap_stick_x = (U8_MAX - 1);
+    fp->tap_stick_x = U8_MAX - 1;
     fp->command_vars.flags.flag1 = flag;
 }
 
-bool32 func_ovl3_8013ED64(GObj *fighter_gobj)
+// 0x8013ED64
+bool32 ftCommon_Dash_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -103,14 +109,15 @@ bool32 func_ovl3_8013ED64(GObj *fighter_gobj)
             return TRUE;
         }
         ftCommon_StickInputSetLR(fp);
-        func_ovl3_8013ED00(fighter_gobj, 1);
+        ftCommon_Dash_SetStatus(fighter_gobj, 1);
 
         return TRUE;
     }
     return FALSE;
 }
 
-bool32 func_ovl3_8013EDFC(GObj *fighter_gobj)
+// 0x8013EDFC
+bool32 ftCommon_Dash_CheckTurn(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 

@@ -359,7 +359,7 @@ void func_ovl3_80148B84(GObj *fighter_gobj)
 {
     if (!ftStatus_CheckInterruptGuard(fighter_gobj))
     {
-        func_ovl3_80142258(fighter_gobj);
+        ftCommon_Dokan_CheckEnter(fighter_gobj);
     }
 }
 

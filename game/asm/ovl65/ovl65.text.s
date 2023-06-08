@@ -2206,7 +2206,7 @@ glabel func_ovl65_8018EE44
   /* 10D8B8 8018F058 24010005 */     addiu $at, $zero, 5
   /* 10D8BC 8018F05C 53210006 */      beql $t9, $at, .L8018F078
   /* 10D8C0 8018F060 90CA002C */       lbu $t2, 0x2c($a2)
-  /* 10D8C4 8018F064 0C045320 */       jal func_ovl2_80114C80
+  /* 10D8C4 8018F064 0C045320 */       jal ifDisplayBonusFailure
   /* 10D8C8 8018F068 00000000 */       nop 
   /* 10D8CC 8018F06C 10000051 */         b .L8018F1B4
   /* 10D8D0 8018F070 8FBF0014 */        lw $ra, 0x14($sp)
@@ -2292,7 +2292,7 @@ glabel func_ovl65_8018EE44
   .L8018F1A0:
   /* 10DA00 8018F1A0 55400004 */      bnel $t2, $zero, .L8018F1B4
   /* 10DA04 8018F1A4 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 10DA08 8018F1A8 0C045320 */       jal func_ovl2_80114C80
+  /* 10DA08 8018F1A8 0C045320 */       jal ifDisplayBonusFailure
   /* 10DA0C 8018F1AC 00000000 */       nop 
   .L8018F1B0:
   /* 10DA10 8018F1B0 8FBF0014 */        lw $ra, 0x14($sp)

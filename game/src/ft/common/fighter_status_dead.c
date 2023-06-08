@@ -1,13 +1,16 @@
 #include "fighter.h"
 #include "gmmatch.h"
 #include "gmground.h"
+#include "ground.h"
 
+// 0x8013BC60
 void func_ovl3_8013BC60(u16 sfx_id)
 {
     func_800269C0(sfx_id);
     func_ovl2_80113804(sfx_id);
 }
 
+// 0x8013BC8C
 void func_ovl3_8013BC8C(Fighter_Struct *this_fp)
 {
     s32 i;
@@ -34,27 +37,27 @@ void func_ovl3_8013BC8C(Fighter_Struct *this_fp)
     }
 }
 
-void func_ovl3_8013BD64(Fighter_Struct *this_fp)
+// 0x8013BD64
+void ftCommon_Dead_UpdateScore(Fighter_Struct *this_fp)
 {
     func_ovl2_8010F76C(this_fp);
     func_ovl2_80114968(this_fp);
 
     Match_Info->player_block[this_fp->port_id].falls++;
 
-    if (Match_Info->unk_minfo_0x1D_b0)
+    if (Match_Info->is_display_score)
     {
-        func_ovl2_801149CC(this_fp, -1);
+        ifDisplayScoreFighter(this_fp, -1);
     }
-
     if ((this_fp->damage_port_id != -1) && (this_fp->damage_port_id != GMMATCH_PLAYERS_MAX))
     {
         Match_Info->player_block[this_fp->damage_port_id].score++;
 
         Match_Info->player_block[this_fp->damage_port_id].total_ko_player[this_fp->port_id]++;
 
-        if (Match_Info->unk_minfo_0x1D_b0)
+        if (Match_Info->is_display_score)
         {
-            func_ovl2_801149CC(FighterGetStruct(Match_Info->player_block[this_fp->damage_port_id].fighter_gobj), 1);
+            ifDisplayScoreFighter(FighterGetStruct(Match_Info->player_block[this_fp->damage_port_id].fighter_gobj), 1);
         }
     }
     else Match_Info->player_block[this_fp->port_id].total_self_destruct++;
@@ -65,7 +68,7 @@ void func_ovl3_8013BD64(Fighter_Struct *this_fp)
 
         Match_Info->player_block[this_fp->port_id].stock_count--;
 
-        func_ovl2_8011388C(this_fp);
+        ifDisplayStockIconFall(this_fp);
     }
     if (Match_Info->match_rules & GMMATCH_GAMERULE_1PGAME)
     {
@@ -77,11 +80,12 @@ void func_ovl3_8013BD64(Fighter_Struct *this_fp)
     }
     if (Match_Info->match_rules & GMMATCH_GAMERULE_BONUS)
     {
-        func_ovl2_80114C80();
+        ifDisplayBonusFailure();
     }
 }
 
-void func_ovl3_8013BF94(GObj *fighter_gobj)
+// 0x8013BF94
+void ftCommon_Dead_CheckRebirth(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -112,7 +116,8 @@ void func_ovl3_8013BF94(GObj *fighter_gobj)
     func_ovl3_8013CF60(fighter_gobj);
 }
 
-void func_ovl3_8013C050(GObj *fighter_gobj)
+// 0x8013C050
+void ftCommon_Dead_ResetCommonVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -129,7 +134,8 @@ void func_ovl3_8013C050(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013C0B0(GObj *fighter_gobj)
+// 0x8013C0B0
+void ftCommon_Dead_ClearSpecialStats(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -140,7 +146,8 @@ void func_ovl3_8013C0B0(GObj *fighter_gobj)
     ftSpecialItem_BGMCheckFighters(fighter_gobj);
 }
 
-void func_ovl3_8013C0EC(GObj *fighter_gobj)
+// 0x8013C0EC
+void ftCommon_Dead_UpdateRebirthWait(GObj *fighter_gobj) // Unused
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -148,11 +155,12 @@ void func_ovl3_8013C0EC(GObj *fighter_gobj)
 
     if (fp->status_vars.common.dead.rebirth_wait == 0)
     {
-        func_ovl3_8013BF94(fighter_gobj);
+        ftCommon_Dead_CheckRebirth(fighter_gobj);
     }
 }
 
-void func_ovl3_8013C120(GObj *fighter_gobj)
+// 0x8013C120
+void ftCommon_Dead_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -166,7 +174,7 @@ void func_ovl3_8013C120(GObj *fighter_gobj)
 
     func_ovl2_801008F4(2);
     func_ovl3_8013BC8C(fp);
-    func_ovl3_8013BD64(fp);
+    ftCommon_Dead_UpdateScore(fp);
 
     if (fp->attributes->dead_sfx[0] != 0x2B7)
     {
@@ -178,16 +186,17 @@ void func_ovl3_8013C120(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013C1C4(GObj *fighter_gobj)
+// 0x8013C1C4
+void ftCommon_DeadDown_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
     u32 sfx_id;
 
-    func_ovl3_8013C050(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadDown, 0.0F, 1.0F, 0U);
-    func_ovl3_8013C0B0(fighter_gobj);
-    func_ovl3_8013C120(fighter_gobj);
+    ftCommon_Dead_ResetCommonVars(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadDown, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_Dead_ClearSpecialStats(fighter_gobj);
+    ftCommon_Dead_InitStatusVars(fighter_gobj);
 
     pos = DObjGetStruct(fighter_gobj)->translate;
 
@@ -206,7 +215,7 @@ void func_ovl3_8013C1C4(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->port_id, 0);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+    if (((Match_Info->gr_kind >= Gr_Kind_Bonus1Start) && (Match_Info->gr_kind < Gr_Kind_Bonus2Start)) || ((Match_Info->gr_kind >= Gr_Kind_Bonus2Start) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
     {
         sfx_id = 0x9B;
     }
@@ -215,22 +224,23 @@ void func_ovl3_8013C1C4(GObj *fighter_gobj)
     func_ovl3_8013BC60(sfx_id);
 }
 
-void func_ovl3_8013C30C(GObj *fighter_gobj)
+// 0x8013C30C
+void ftCommon_DeadRight_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
     u32 sfx_id;
 
-    func_ovl3_8013C050(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
-    func_ovl3_8013C0B0(fighter_gobj);
-    func_ovl3_8013C120(fighter_gobj);
+    ftCommon_Dead_ResetCommonVars(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_Dead_ClearSpecialStats(fighter_gobj);
+    ftCommon_Dead_InitStatusVars(fighter_gobj);
 
     pos = DObjGetStruct(fighter_gobj)->translate;
 
-    if (Match_Info->game_type != 2)
+    if (Match_Info->game_type != gmMatch_GameType_Bonus)
     {
-        if (Ground_Info->cam_bound_top < pos.y)
+        if (pos.y > Ground_Info->cam_bound_top)
         {
             pos.y = Ground_Info->cam_bound_top;
         }
@@ -243,7 +253,7 @@ void func_ovl3_8013C30C(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->port_id, 1);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+    if (((Match_Info->gr_kind >= Gr_Kind_Bonus1Start) && (Match_Info->gr_kind < Gr_Kind_Bonus2Start)) || ((Match_Info->gr_kind >= Gr_Kind_Bonus2Start) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
     {
         sfx_id = 0x9B;
     }
@@ -252,26 +262,26 @@ void func_ovl3_8013C30C(GObj *fighter_gobj)
     func_ovl3_8013BC60(sfx_id);
 }
 
-void func_ovl3_8013C454(GObj *fighter_gobj)
+// 0x8013C454
+void ftCommon_DeadLeft_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
     u32 sfx_id;
 
-    func_ovl3_8013C050(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, 0U);
-    func_ovl3_8013C0B0(fighter_gobj);
-    func_ovl3_8013C120(fighter_gobj);
+    ftCommon_Dead_ResetCommonVars(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadLeftRight, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_Dead_ClearSpecialStats(fighter_gobj);
+    ftCommon_Dead_InitStatusVars(fighter_gobj);
 
     pos = DObjGetStruct(fighter_gobj)->translate;
 
-    if (Match_Info->game_type != 2)
+    if (Match_Info->game_type != gmMatch_GameType_Bonus)
     {
-        if (Ground_Info->cam_bound_top < pos.y)
+        if (pos.y > Ground_Info->cam_bound_top)
         {
             pos.y = Ground_Info->cam_bound_top;
         }
-
         if (pos.y < Ground_Info->cam_bound_bottom)
         {
             pos.y = Ground_Info->cam_bound_bottom;
@@ -280,7 +290,7 @@ void func_ovl3_8013C454(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->port_id, 3);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+    if (((Match_Info->gr_kind >= Gr_Kind_Bonus1Start) && (Match_Info->gr_kind < Gr_Kind_Bonus2Start)) || ((Match_Info->gr_kind >= Gr_Kind_Bonus2Start) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
     {
         sfx_id = 0x9B;
     }
@@ -289,7 +299,8 @@ void func_ovl3_8013C454(GObj *fighter_gobj)
     func_ovl3_8013BC60(sfx_id);
 }
 
-void func_ovl3_8013C59C(GObj *fighter_gobj)
+// 0x8013C59C
+void ftCommon_DeadUpStar_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -333,7 +344,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
             fp->is_invisible = TRUE;
             fp->x191_flag_b3 = TRUE;
 
-            func_ovl3_8013BD64(fp);
+            ftCommon_Dead_UpdateScore(fp);
             func_ovl3_8013BC60(0xCU);
 
             fp->x18E_flag_b3 = TRUE;
@@ -345,7 +356,7 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
             break;
 
         case 2:
-            func_ovl3_8013BF94(fighter_gobj);
+            ftCommon_Dead_CheckRebirth(fighter_gobj);
             break;
 
         default:
@@ -354,12 +365,13 @@ void func_ovl3_8013C59C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013C740(GObj *fighter_gobj)
+// 0x8013C740
+void ftCommon_DeadUpStar_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl3_8013C050(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpStar, 0.0F, 1.0F, 0U);
+    ftCommon_Dead_ResetCommonVars(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpStar, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->status_vars.common.dead.pos = DObjGetStruct(fighter_gobj)->translate;
@@ -370,7 +382,7 @@ void func_ovl3_8013C740(GObj *fighter_gobj)
 
     fp->command_vars.flags.flag1 = 0;
 
-    func_ovl3_8013C0B0(fighter_gobj);
+    ftCommon_Dead_ClearSpecialStats(fighter_gobj);
     func_ovl2_800E7F7C(fighter_gobj, 1);
 
     if (fp->attributes->deadup_sfx != 0x2B7)
@@ -381,7 +393,8 @@ void func_ovl3_8013C740(GObj *fighter_gobj)
     ftCommon_ResetColAnim(fighter_gobj);
 }
 
-void func_ovl3_8013C80C(GObj *fighter_gobj)
+// 0x8013C80C
+void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 sfx_id;
@@ -437,9 +450,9 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
             fp->is_invisible = TRUE;
             fp->x191_flag_b3 = TRUE;
 
-            func_ovl3_8013BD64(fp);
+            ftCommon_Dead_UpdateScore(fp);
 
-            if (((Match_Info->gr_kind >= Gr_Kind_TargetStart) && (Match_Info->gr_kind < Gr_Kind_PlatformStart)) || ((Match_Info->gr_kind >= Gr_Kind_PlatformStart) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
+            if (((Match_Info->gr_kind >= Gr_Kind_Bonus1Start) && (Match_Info->gr_kind < Gr_Kind_Bonus2Start)) || ((Match_Info->gr_kind >= Gr_Kind_Bonus2Start) && (Match_Info->gr_kind < Gr_Kind_CustomStart)))
             {
                 sfx_id = 0x9B;
             }
@@ -461,7 +474,7 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
             break;
 
         case 2:
-            func_ovl3_8013BF94(fighter_gobj);
+            ftCommon_Dead_CheckRebirth(fighter_gobj);
 
             break;
 
@@ -471,12 +484,13 @@ void func_ovl3_8013C80C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013CAAC(GObj *fighter_gobj)
+// 0x8013CAAC
+void ftCommon_DeadUpFall_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl3_8013C050(fighter_gobj);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpFall, 0.0F, 1.0F, 0U);
+    ftCommon_Dead_ResetCommonVars(fighter_gobj);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpFall, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->status_vars.common.dead.pos = DObjGetStruct(fighter_gobj)->translate;
@@ -487,7 +501,7 @@ void func_ovl3_8013CAAC(GObj *fighter_gobj)
 
     fp->command_vars.flags.flag1 = 0;
 
-    func_ovl3_8013C0B0(fighter_gobj);
+    ftCommon_Dead_ClearSpecialStats(fighter_gobj);
     func_ovl2_800E7F7C(fighter_gobj, 1);
 
     if (fp->attributes->deadup_sfx != 0x2B7)
@@ -498,7 +512,8 @@ void func_ovl3_8013CAAC(GObj *fighter_gobj)
     ftCommon_SetModelPartLoDAll(fighter_gobj, 1);
 }
 
-bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
+// 0x8013CB7C
+bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f *pos = &fp->joint[0]->translate;
@@ -553,19 +568,19 @@ bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
         {
             if (pos->y < Ground_Info->unk_bound_bottom)
             {
-                func_ovl3_8013C1C4(fighter_gobj);
+                ftCommon_DeadDown_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
             if (Ground_Info->unk_bound_right < pos->x)
             {
-                func_ovl3_8013C30C(fighter_gobj);
+                ftCommon_DeadRight_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
             if (pos->x < Ground_Info->unk_bound_left)
             {
-                func_ovl3_8013C454(fighter_gobj);
+                ftCommon_DeadLeft_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
@@ -573,30 +588,30 @@ bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
             {
                 if (rand_f32() < 0.16666667F)
                 {
-                    func_ovl3_8013CAAC(fighter_gobj);
+                    ftCommon_DeadUpFall_SetStatus(fighter_gobj);
 
                     return TRUE;
                 }
-                else func_ovl3_8013C740(fighter_gobj);
+                else ftCommon_DeadUpStar_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
         }
         else if (pos->y < Ground_Info->blastzone_bottom)
         {
-            func_ovl3_8013C1C4(fighter_gobj);
+            ftCommon_DeadDown_SetStatus(fighter_gobj);
 
             return TRUE;
         }
         else if (Ground_Info->blastzone_right < pos->x)
         {
-            func_ovl3_8013C30C(fighter_gobj);
+            ftCommon_DeadRight_SetStatus(fighter_gobj);
 
             return TRUE;
         }
         else if (pos->x < Ground_Info->blastzone_left)
         {
-            func_ovl3_8013C454(fighter_gobj);
+            ftCommon_DeadLeft_SetStatus(fighter_gobj);
 
             return TRUE;
         }
@@ -604,9 +619,9 @@ bool32 func_ovl3_8013CB7C(GObj *fighter_gobj)
         {
             if (rand_f32() < 0.16666667F)
             {
-                func_ovl3_8013CAAC(fighter_gobj);
+                ftCommon_DeadUpFall_SetStatus(fighter_gobj);
             }
-            else func_ovl3_8013C740(fighter_gobj);
+            else ftCommon_DeadUpStar_SetStatus(fighter_gobj);
 
             return TRUE;
         }

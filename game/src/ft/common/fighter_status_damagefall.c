@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_80143560(GObj *fighter_gobj)
+// 0x80143560
+void ftCommon_DamageFall_ProcInterrupt(GObj *fighter_gobj)
 {
     if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_8014019C(fighter_gobj) == FALSE))
     {
@@ -8,7 +9,8 @@ void func_ovl3_80143560(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801435B0(GObj *fighter_gobj)
+// 0x801435B0
+void ftCommon_DamageFall_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -33,13 +35,15 @@ void func_ovl3_80143630(GObj *fighter_gobj)
     func_ovl2_800E806C(fp, 3, 0);
 }
 
-void func_ovl3_80143664(GObj *fighter_gobj)
+// 0x80143664
+void ftCommon_DamageFall_SetStatusFromDamage(GObj *fighter_gobj)
 {
     ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_FASTFALL_PRESERVE));
     func_ovl3_80143630(fighter_gobj);
 }
 
-void func_ovl3_801436A0(GObj *fighter_gobj)
+// 0x801436A0
+void ftCommon_DamageFall_SetStatusFromCliffWait(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 

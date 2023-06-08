@@ -1,6 +1,8 @@
 #include "fighter.h"
+#include "ground.h"
 
-void func_ovl3_80141FF0(Fighter_Struct *fp)
+// 0x80141FF0
+void ftCommon_DokanStart_UpdateModelYaw(Fighter_Struct *fp)
 {
     if (fp->status_vars.common.dokan.turn_stop_wait != 0)
     {
@@ -12,15 +14,17 @@ void func_ovl3_80141FF0(Fighter_Struct *fp)
     }
 }
 
-void func_ovl3_8014204C(GObj *fighter_gobj)
+// 0x8014204C
+void ftCommon_DokanStart_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
-    func_ovl3_80141FF0(fp);
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801424BC);
+    ftCommon_DokanStart_UpdateModelYaw(fp);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_DokanWait_SetStatus);
 }
 
-void func_ovl3_80142080(GObj *fighter_gobj)
+// 0x80142080
+void ftCommon_DokanStart_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 unused[2];
@@ -28,10 +32,10 @@ void func_ovl3_80142080(GObj *fighter_gobj)
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
     s32 ground_line_id;
 
-    func_ovl2_800FC814((fp->status_vars.common.dokan.ground_line_id == 0xC) ? 0xA : 0xB, &ground_line_id);
+    func_ovl2_800FC814((fp->status_vars.common.dokan.ground_material == Gr_Mat_DokanLeft) ? 0xA : 0xB, &ground_line_id);
     func_ovl2_800FC894(ground_line_id, &pos_x);
 
-    if (pos_x < translate->x)
+    if (translate->x > pos_x)
     {
         translate->x -= FTCOMMON_DOKAN_POS_ADJUST;
 
@@ -51,12 +55,13 @@ void func_ovl3_80142080(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80142164(GObj *fighter_gobj, s32 ground_line_id)
+// 0x80142164
+void ftCommon_DokanStart_SetStatus(GObj *fighter_gobj, s32 ground_line_id)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     s32 new_line_id;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanStart, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanStart, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->tap_stick_y = U8_MAX - 1;
@@ -65,9 +70,9 @@ void func_ovl3_80142164(GObj *fighter_gobj, s32 ground_line_id)
 
     fp->x18F_flag_b4 = TRUE;
 
-    fp->status_vars.common.dokan.ground_line_id = ground_line_id;
+    fp->status_vars.common.dokan.ground_material = ground_line_id;
 
-    func_ovl2_800FC814((fp->status_vars.common.dokan.ground_line_id == 0xC) ? 0xA : 0xB, &new_line_id);
+    func_ovl2_800FC814((fp->status_vars.common.dokan.ground_material == Gr_Mat_DokanLeft) ? 0xA : 0xB, &new_line_id);
     func_ovl2_800FC894(new_line_id, &fp->status_vars.common.dokan.pos_current);
 
     func_800269C0(0xD6U);
@@ -83,11 +88,12 @@ void func_ovl3_80142164(GObj *fighter_gobj, s32 ground_line_id)
     }
     else fp->status_vars.common.dokan.turn_stop_wait = FTCOMMON_DOKAN_TURN_STOP_WAIT_DEFAULT;
 
-    func_ovl3_80141FF0(fp);
+    ftCommon_DokanStart_UpdateModelYaw(fp);
     func_ovl2_8010972C();
 }
 
-bool32 func_ovl3_80142258(GObj *fighter_gobj)
+// 0x80142258
+bool32 ftCommon_Dokan_CheckEnter(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     Vec3f pos;
@@ -96,7 +102,7 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
 
     if ((fp->input.pl.stick_range.y <= FTCOMMON_DOKAN_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_DOKAN_BUFFER_FRAMES_MAX))
     {
-        if ((fp->coll_data.ground_flags & 0xFFFF00FF) == 0xC)
+        if ((fp->coll_data.ground_flags & 0xFFFF00FF) == Gr_Mat_DokanLeft)
         {
             func_ovl2_800FC814(0xA, &ground_line_id);
             func_ovl2_800FC894(ground_line_id, &pos);
@@ -109,12 +115,12 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
 
             if (dist_x <= FTCOMMON_DOKAN_DETECT_WIDTH)
             {
-                func_ovl3_80142164(fighter_gobj, 0xC);
+                ftCommon_DokanStart_SetStatus(fighter_gobj, Gr_Mat_DokanLeft);
 
                 return TRUE;
             }
         }
-        else if ((fp->coll_data.ground_flags & 0xFFFF00FF) == 0xD)
+        else if ((fp->coll_data.ground_flags & 0xFFFF00FF) == Gr_Mat_DokanRight)
         {
             func_ovl2_800FC814(0xB, &ground_line_id);
             func_ovl2_800FC894(ground_line_id, &pos);
@@ -127,7 +133,7 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
 
             if (dist_x <= FTCOMMON_DOKAN_DETECT_WIDTH)
             {
-                func_ovl3_80142164(fighter_gobj, 0xD);
+                ftCommon_DokanStart_SetStatus(fighter_gobj, Gr_Mat_DokanRight);
 
                 return TRUE;
             }
@@ -136,7 +142,8 @@ bool32 func_ovl3_80142258(GObj *fighter_gobj)
     return FALSE;
 }
 
-void func_ovl3_801423B4(GObj *fighter_gobj)
+// 0x801423B4
+void ftCommon_DokanWait_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -146,13 +153,14 @@ void func_ovl3_801423B4(GObj *fighter_gobj)
     {
         if (fp->status_vars.common.dokan.wall_line_id == 0x14)
         {
-            func_ovl3_801427CC(fighter_gobj);
+            ftCommon_DokanEndWalk_SetStatus(fighter_gobj);
         }
-        else func_ovl3_801426D0(fighter_gobj);
+        else ftCommon_DokanEnd_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_80142424(GObj *fighter_gobj)
+// 0x80142424
+void ftCommon_DokanWait_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -160,14 +168,15 @@ void func_ovl3_80142424(GObj *fighter_gobj)
     DObjGetStruct(fighter_gobj)->translate.y = func_8000CA28(0.033333335F, fp->status_vars.common.dokan.pos_adjust_wait, fp->status_vars.common.dokan.pos_current.y, fp->status_vars.common.dokan.pos_target.y, 0.0F, 0.0F);
 }
 
-void func_ovl3_801424BC(GObj *fighter_gobj)
+// 0x801424BC
+void ftCommon_DokanWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
     f32 pos_target_x;
     s32 wall_line_id;
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanWait, 0.0F, 1.0F, 0x10U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanWait, 0.0F, 1.0F, FTSTATUPDATE_HITSTATUS_PRESERVE);
 
     fp->is_invisible = TRUE;
     fp->x18E_flag_b3 = TRUE;
@@ -177,7 +186,7 @@ void func_ovl3_801424BC(GObj *fighter_gobj)
 
     fp->x191_flag_b3 = TRUE;
 
-    if (fp->status_vars.common.dokan.ground_line_id == 0xC)
+    if (fp->status_vars.common.dokan.ground_material == Gr_Mat_DokanLeft)
     {
         fp->status_vars.common.dokan.wall_line_id = 0xB;
     }
@@ -201,7 +210,8 @@ void func_ovl3_801424BC(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801425E4(GObj *fighter_gobj)
+// 0x801425E4
+void ftCommon_DokanEnd_UpdateModelYaw(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -218,7 +228,8 @@ void func_ovl3_801425E4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80142660(GObj *fighter_gobj)
+// 0x80142660
+void ftCommon_DokanEnd_UpdateUnknown(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -233,19 +244,21 @@ void func_ovl3_80142660(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80142698(GObj *fighter_gobj)
+// 0x80142698
+void ftCommon_DokanEnd_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_80142660(fighter_gobj);
-    func_ovl3_801425E4(fighter_gobj);
+    ftCommon_DokanEnd_UpdateUnknown(fighter_gobj);
+    ftCommon_DokanEnd_UpdateModelYaw(fighter_gobj);
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
 
-void func_ovl3_801426D0(GObj *fighter_gobj)
+// 0x801426D0
+void ftCommon_DokanEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanEnd, 0.0F, 1.0F, 0x10U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanEnd, 0.0F, 1.0F, FTSTATUPDATE_HITSTATUS_PRESERVE);
 
     DObjGetStruct(fighter_gobj)->translate = fp->status_vars.common.dokan.pos_target;
 
@@ -266,7 +279,8 @@ void func_ovl3_801426D0(GObj *fighter_gobj)
     func_800269C0(0xD6U);
 }
 
-void func_ovl3_801427CC(GObj *fighter_gobj)
+// 0x801427CC
+void ftCommon_DokanEndWalk_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -274,7 +288,7 @@ void func_ovl3_801427CC(GObj *fighter_gobj)
 
     fp->lr = RIGHT;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanWalk, 0.0F, 1.0F, 0x10U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_DokanEndWalk, 0.0F, 1.0F, FTSTATUPDATE_HITSTATUS_PRESERVE);
 
     DObjGetStruct(fighter_gobj)->translate = fp->status_vars.common.dokan.pos_target;
 

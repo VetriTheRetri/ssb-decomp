@@ -13360,7 +13360,7 @@ glabel func_ovl2_800E2048
   /* 05DAE8 800E22E8 E634009C */      swc1 $f20, 0x9c($s1)
   /* 05DAEC 800E22EC E6340098 */      swc1 $f20, 0x98($s1)
   .L800E22F0:
-  /* 05DAF0 800E22F0 0C04F2DF */       jal func_ovl3_8013CB7C
+  /* 05DAF0 800E22F0 0C04F2DF */       jal ftCommon_Dead_CheckInterruptCommon
   /* 05DAF4 800E22F4 8FA40070 */        lw $a0, 0x70($sp)
   /* 05DAF8 800E22F8 3C0C8013 */       lui $t4, %hi(Ground_Info)
   /* 05DAFC 800E22FC 8D8C1300 */        lw $t4, %lo(Ground_Info)($t4)
@@ -68913,7 +68913,7 @@ glabel func_ovl2_80113854
   /* 08F084 80113884 03E00008 */        jr $ra
   /* 08F088 80113888 00000000 */       nop 
 
-glabel func_ovl2_8011388C
+glabel ifDisplayStockIconFall
   /* 08F08C 8011388C 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 08F090 80113890 3C09800A */       lui $t1, %hi(Match_Info)
   /* 08F094 80113894 8D2950E8 */        lw $t1, %lo(Match_Info)($t1)
@@ -69031,7 +69031,7 @@ glabel func_ovl2_8011388C
   /* 08F220 80113A20 25CFFFFF */     addiu $t7, $t6, -1
   /* 08F224 80113A24 15E00004 */      bnez $t7, .L80113A38
   /* 08F228 80113A28 AC6F0000 */        sw $t7, ($v1) # D_ovl2_801317F4 + 0
-  /* 08F22C 80113A2C 0C045320 */       jal func_ovl2_80114C80
+  /* 08F22C 80113A2C 0C045320 */       jal ifDisplayBonusFailure
   /* 08F230 80113A30 00000000 */       nop 
   /* 08F234 80113A34 240BFFFF */     addiu $t3, $zero, -1
   .L80113A38:
@@ -70131,7 +70131,7 @@ glabel func_ovl2_80114968
   /* 0901C4 801149C4 03E00008 */        jr $ra
   /* 0901C8 801149C8 00000000 */       nop 
 
-glabel func_ovl2_801149CC
+glabel ifDisplayScoreFighter
   /* 0901CC 801149CC 27BDFFD8 */     addiu $sp, $sp, -0x28
   /* 0901D0 801149D0 AFBF0014 */        sw $ra, 0x14($sp)
   /* 0901D4 801149D4 9082000D */       lbu $v0, 0xd($a0)
@@ -70319,7 +70319,7 @@ glabel func_ovl2_80114C20
   /* 090478 80114C78 03E00008 */        jr $ra
   /* 09047C 80114C7C 27BD0018 */     addiu $sp, $sp, 0x18
 
-glabel func_ovl2_80114C80
+glabel ifDisplayBonusFailure
   /* 090480 80114C80 3C02800A */       lui $v0, %hi(Match_Info)
   /* 090484 80114C84 8C4250E8 */        lw $v0, %lo(Match_Info)($v0)
   /* 090488 80114C88 27BDFFE8 */     addiu $sp, $sp, -0x18

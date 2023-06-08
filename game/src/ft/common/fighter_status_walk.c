@@ -16,7 +16,7 @@
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013ED64(fighter_gobj) != FALSE) || \
+    (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
     (func_ovl3_8013E2A0(fighter_gobj) != FALSE)    \
 )                                                  \

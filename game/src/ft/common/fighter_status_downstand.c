@@ -6,7 +6,7 @@ void func_ovl3_80144530(GObj *fighter_gobj)
 
     if ((fp->command_vars.flags.flag1 != 0) && (func_ovl3_8013F4D0(fighter_gobj) == FALSE) && (func_ovl3_80141EA4(fighter_gobj) == FALSE))
     {
-        func_ovl3_80142258(fighter_gobj);
+        ftCommon_Dokan_CheckEnter(fighter_gobj);
     }
 }
 
@@ -21,7 +21,7 @@ void func_ovl3_80144580(GObj *fighter_gobj)
     }
     else status_id = ftStatus_Common_DownStandU;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->command_vars.flags.flag1 = 0;
 }

@@ -2480,9 +2480,9 @@ glabel D_ovl2_80128DD8
   .incbin "ovl2.raw.bin", 0x52950, 0x10
   /* 52960 0A45F0 80128DF0 */  .4byte D_unkmulti_8013C0EC
   .incbin "ovl2.raw.bin", 0x52964, 0x10
-  /* 52974 0A4604 80128E04 */  .4byte func_ovl3_8013C59C
+  /* 52974 0A4604 80128E04 */  .4byte ftCommon_DeadUpStar_ProcUpdate
   .incbin "ovl2.raw.bin", 0x52978, 0x10
-  /* 52988 0A4618 80128E18 */  .4byte func_ovl3_8013C80C
+  /* 52988 0A4618 80128E18 */  .4byte ftCommon_DeadUpFall_ProcUpdate
   .incbin "ovl2.raw.bin", 0x5298C, 0x10
   /* 5299C 0A462C 80128E2C */  .4byte func_ovl3_8013D6D0
   .incbin "ovl2.raw.bin", 0x529A0, 0x20
@@ -2522,10 +2522,10 @@ glabel jtbl_ovl2_80128EAC
   /* 52A58 0A46E8 80128EE8 */  .4byte func_ovl3_8013E548
   /* 52A5C 0A46EC 80128EEC */  .4byte jtgt_ovl2_800DDEE8
   .incbin "ovl2.raw.bin", 0x52A60, 0x18
-  /* 52A78 0A4708 80128F08 */  .4byte func_ovl3_8013EA40
-  /* 52A7C 0A470C 80128F0C */  .4byte func_ovl3_8013EA90
-  /* 52A80 0A4710 80128F10 */  .4byte func_ovl3_8013EC58
-  /* 52A84 0A4714 80128F14 */  .4byte func_ovl3_8013ECB0
+  /* 52A78 0A4708 80128F08 */  .4byte ftCommon_Dash_ProcUpdate
+  /* 52A7C 0A470C 80128F0C */  .4byte ftCommon_Dash_ProcInterrupt
+  /* 52A80 0A4710 80128F10 */  .4byte ftCommon_Dash_ProcPhysics
+  /* 52A84 0A4714 80128F14 */  .4byte ftCommon_Dash_ProcMap
   .incbin "ovl2.raw.bin", 0x52A88, 0x8
   /* 52A90 0A4720 80128F20 */  .4byte func_ovl3_8013EE50
 
@@ -2772,9 +2772,9 @@ glabel jtbl_ovl2_8012908C
   /* 52DB4 0A4A44 80129244 */  .4byte ftCommon_DamageCommon_ProcPhysics
   /* 52DB8 0A4A48 80129248 */  .4byte ftCommon_DamageAirCommon_ProcMap
   .incbin "ovl2.raw.bin", 0x52DBC, 0x8
-  /* 52DC4 0A4A54 80129254 */  .4byte func_ovl3_80143560
+  /* 52DC4 0A4A54 80129254 */  .4byte ftCommon_DamageFall_ProcInterrupt
   /* 52DC8 0A4A58 80129258 */  .4byte jtgt_ovl2_800D9160
-  /* 52DCC 0A4A5C 8012925C */  .4byte func_ovl3_801435B0
+  /* 52DCC 0A4A5C 8012925C */  .4byte ftCommon_DamageFall_ProcMap
   .incbin "ovl2.raw.bin", 0x52DD0, 0x8
   /* 52DD8 0A4A68 80129268 */  .4byte func_ovl3_80143730
   /* 52DDC 0A4A6C 8012926C */  .4byte func_ovl3_80143750
@@ -2801,20 +2801,20 @@ glabel jtbl_ovl2_80129280
   /* 52E18 0A4AA8 801292A8 */  .4byte func_ovl3_80143F04
   /* 52E1C 0A4AAC 801292AC */  .4byte func_ovl2_800DE958
   .incbin "ovl2.raw.bin", 0x52E20, 0x4
-  /* 52E24 0A4AB4 801292B4 */  .4byte func_ovl3_8014204C
+  /* 52E24 0A4AB4 801292B4 */  .4byte ftCommon_DokanStart_ProcUpdate
   .incbin "ovl2.raw.bin", 0x52E28, 0x4
-  /* 52E2C 0A4ABC 801292BC */  .4byte func_ovl3_80142080
+  /* 52E2C 0A4ABC 801292BC */  .4byte ftCommon_DokanStart_ProcPhysics
   /* 52E30 0A4AC0 801292C0 */  .4byte func_ovl2_800DDF44
   .incbin "ovl2.raw.bin", 0x52E34, 0x4
-  /* 52E38 0A4AC8 801292C8 */  .4byte func_ovl3_801423B4
+  /* 52E38 0A4AC8 801292C8 */  .4byte ftCommon_DokanWait_ProcUpdate
   .incbin "ovl2.raw.bin", 0x52E3C, 0x8
-  /* 52E44 0A4AD4 801292D4 */  .4byte func_ovl3_80142424
+  /* 52E44 0A4AD4 801292D4 */  .4byte ftCommon_DokanWait_ProcMap
   .incbin "ovl2.raw.bin", 0x52E48, 0x4
-  /* 52E4C 0A4ADC 801292DC */  .4byte func_ovl3_80142698
+  /* 52E4C 0A4ADC 801292DC */  .4byte ftCommon_DokanEnd_ProcUpdate
   .incbin "ovl2.raw.bin", 0x52E50, 0x8
   /* 52E58 0A4AE8 801292E8 */  .4byte func_ovl2_800DDF44
   .incbin "ovl2.raw.bin", 0x52E5C, 0x4
-  /* 52E60 0A4AF0 801292F0 */  .4byte func_ovl3_80142698
+  /* 52E60 0A4AF0 801292F0 */  .4byte ftCommon_DokanEnd_ProcUpdate
   .incbin "ovl2.raw.bin", 0x52E64, 0x8
   /* 52E6C 0A4AFC 801292FC */  .4byte func_ovl2_800DE348
   .incbin "ovl2.raw.bin", 0x52E70, 0x4

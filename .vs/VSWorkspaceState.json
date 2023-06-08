@@ -2,12 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\game",
+    "\\game\\include",
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\common",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_damage.c",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_damagefall.c",
   "PreviewInSolutionExplorer": false
 }

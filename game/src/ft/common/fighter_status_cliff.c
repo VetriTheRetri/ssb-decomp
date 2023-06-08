@@ -126,7 +126,7 @@ bool32 ftCommon_CliffWait_CheckFall(GObj *fighter_gobj)
         fp->cliffcatch_wait = FTCOMMON_CLIFF_CATCH_WAIT;
 
         ftCommon_CliffCommon_ProcDamage(fighter_gobj);
-        func_ovl3_801436A0(fighter_gobj);
+        ftCommon_DamageFall_SetStatusFromCliffWait(fighter_gobj);
 
         return TRUE;
     }

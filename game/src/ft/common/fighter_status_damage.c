@@ -88,7 +88,7 @@ void ftCommon_DamageAirCommon_ProcUpdate(GObj *fighter_gobj)
 
     if ((fighter_gobj->anim_frame <= 0.0F) && (fp->status_vars.common.damage.hitstun_timer == 0))
     {
-        func_ovl3_80143664(fighter_gobj);
+        ftCommon_DamageFall_SetStatusFromDamage(fighter_gobj);
     }
 }
 
@@ -117,7 +117,7 @@ void ftCommon_Damage_SetStatus(GObj *fighter_gobj)
 
         if (fp->status_info.status_id == ftStatus_Common_DamageFlyRoll)
         {
-            ftCommon_DamageFlyRoll_UpdateModelRoll(fighter_gobj);
+            ftCommon_DamageFlyRoll_UpdateModelPitch(fighter_gobj);
         }
         fp->is_hitstun = TRUE;
 
@@ -164,12 +164,12 @@ void ftCommon_DamageAirCommon_ProcInterrupt(GObj *fighter_gobj)
     {
         fp->is_hitstun = FALSE;
 
-        func_ovl3_80143560(fighter_gobj);
+        ftCommon_DamageFall_ProcInterrupt(fighter_gobj);
     }
 }
 
 // 0x80140744
-void ftCommon_DamageFlyRoll_UpdateModelRoll(GObj *fighter_gobj)
+void ftCommon_DamageFlyRoll_UpdateModelPitch(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
 
@@ -195,7 +195,7 @@ void ftCommon_DamageCommon_ProcPhysics(GObj *fighter_gobj)
     
     if (fp->status_info.status_id == ftStatus_Common_DamageFlyRoll)
     {
-        ftCommon_DamageFlyRoll_UpdateModelRoll(fighter_gobj);
+        ftCommon_DamageFlyRoll_UpdateModelPitch(fighter_gobj);
     }
     if ((fp->throw_gobj != NULL) && (vec3f_mag(&fp->phys_info.vel_damage_air) < 70.0F))
     {
@@ -278,19 +278,19 @@ f32 gmCommon_Damage_GetKnockbackAngle(s32 angle_i, s32 ground_or_air, f32 knockb
 }
 
 // 0x80140A94
-s32 ftCommon_Damage_GetDamageLevel(f32 knockback)
+s32 ftCommon_Damage_GetDamageLevel(f32 hitstun)
 {
     s32 damage_level;
 
-    if (knockback < FTCOMMON_DAMAGE_STATUS_KNOCKBACK_LOW)
+    if (hitstun < FTCOMMON_DAMAGE_LEVEL_HITSTUN_LOW)
     {
         damage_level = 0; // DamageX1
     }
-    else if (knockback < FTCOMMON_DAMAGE_STATUS_KNOCKBACK_MID)
+    else if (hitstun < FTCOMMON_DAMAGE_LEVEL_HITSTUN_MID)
     {
         damage_level = 1; // DamageX2
     }
-    else if (knockback < FTCOMMON_DAMAGE_STATUS_KNOCKBACK_HIGH)
+    else if (hitstun < FTCOMMON_DAMAGE_LEVEL_HITSTUN_HIGH)
     {
         damage_level = 2; // DamageX3
     }
@@ -620,7 +620,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     }
     if (this_fp->status_info.status_id == ftStatus_Common_DamageFlyRoll)
     {
-        ftCommon_DamageFlyRoll_UpdateModelRoll(this_gobj);
+        ftCommon_DamageFlyRoll_UpdateModelPitch(this_gobj);
     }
     ftCommon_Damage_SetDustGFXInterval(this_fp);
 
@@ -855,7 +855,7 @@ void ftCommon_WallDamage_ProcUpdate(GObj *fighter_gobj)
 
     if (fp->status_vars.common.damage.hitstun_timer == 0)
     {
-        func_ovl3_80143664(fighter_gobj);
+        ftCommon_DamageFall_SetStatusFromDamage(fighter_gobj);
     }
 }
 

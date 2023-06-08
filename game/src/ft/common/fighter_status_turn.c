@@ -69,7 +69,7 @@ interrupt1:
 
             if (func_ovl3_8013F4D0(fighter_gobj) != FALSE) return;
 
-            func_ovl3_8013EDFC(fighter_gobj);
+            ftCommon_Dash_CheckTurn(fighter_gobj);
 
             if (fp->status_vars.common.turn.is_allow_turn_direction != FALSE)
             {
@@ -77,7 +77,7 @@ interrupt1:
                 {
                     if ((fp->input.pl.stick_range.x * fp->status_vars.common.turn.lr_turn) >= FTCOMMON_DASH_STICK_RANGE_MIN)
                     {
-                        func_ovl3_8013ED00(fighter_gobj, 0);
+                        ftCommon_Dash_SetStatus(fighter_gobj, 0);
                     }
                 }
             }

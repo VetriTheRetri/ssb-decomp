@@ -76,6 +76,7 @@ typedef enum gmMatchGameDifficulty
 
 typedef enum gmMatchGameType
 {
+    gmMatch_GameType_Bonus = 2,
     gmMatch_GameType_1PGame = 5
 
 } gmMatchGameType;
@@ -211,7 +212,7 @@ typedef struct gmMatchInfo
     u32 match_time_remain; // Frames remaining until timeout
     u32 match_time_current; // Current match frame, counts up from 0
     u8 item_switch; // Has various settings (0x0 on Master Hand and Giant DK (?), 0x1 on Metal Mario battle, 0x2 on Hyrule Castle, 0x3 on various stages, 0x4 on Polygon Team? 
-    u32 unk_minfo_0x1D_b0 : 1;
+    u32 is_display_score : 1;   // Displays score when a fighter falls
     u32 unk_minfo_0x1D_b1 : 1;
     u32 unk_minfo_0x1D_b2 : 1;
     u32 unk_minfo_0x1D_b3 : 1;
