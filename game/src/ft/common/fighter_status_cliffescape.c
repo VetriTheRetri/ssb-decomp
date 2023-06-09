@@ -3,7 +3,7 @@
 // 0x801457E0
 bool32 ftCommon_CliffEscape_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_tap & fp->input.button_mask_z)
     {
@@ -29,7 +29,7 @@ void ftCommon_CliffEscapeSlow1_ProcUpdate(GObj *fighter_gobj)
 // 0x8014586C
 void ftCommon_CliffEscapeQuick1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeQuick1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -41,7 +41,7 @@ void ftCommon_CliffEscapeQuick1_SetStatus(GObj *fighter_gobj)
 // 0x801458BC
 void ftCommon_CliffEscapeSlow1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffEscapeSlow1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

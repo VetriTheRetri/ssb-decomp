@@ -126,14 +126,14 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
 
 void jtgt_ovl3_80150ED0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftKirby_SpecialAirN_StatusList[fp->fighter_vars.kirby.copy_id](fighter_gobj);
 }
 
 bool32 func_ovl3_80150F08(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->input.pl.button_tap & fp->input.button_mask_b)

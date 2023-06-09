@@ -4,7 +4,7 @@
 
 void func_ovl3_801462A0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag3 != 0)
     {
@@ -39,7 +39,7 @@ extern FighterItemThrow Fighter_ItemThrow_Desc[ftStatus_Common_SpecialStart];
 
 void func_ovl3_8014634C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 vel_base;
     FighterItemThrow *item_throw_desc;
     f32 stale;
@@ -101,7 +101,7 @@ void func_ovl3_8014634C(GObj *fighter_gobj)
 
 void func_ovl3_80146618(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == air)
     {
@@ -128,7 +128,7 @@ void func_ovl3_80146670(Fighter_Struct *fp)
 
 void func_ovl3_80146690(GObj *fighter_gobj, s32 status_id)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8014665C(fp);
 
@@ -141,7 +141,7 @@ void func_ovl3_80146690(GObj *fighter_gobj, s32 status_id)
 
 void func_ovl3_801466EC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_LIGHTTHROW4_STICK_RANGE_X_MIN) && (fp->hold_stick_x < FTCOMMON_LIGHTTHROW4_F_OR_B_BUFFER_FRAMES_MAX))
@@ -168,14 +168,14 @@ void func_ovl3_801466EC(GObj *fighter_gobj)
     {
         status_id = ftStatus_Common_LightThrowLw; 
     }
-    else status_id = (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowDrop; // No NULL check
+    else status_id = (atGetStruct(fp->item_hold)->type == At_Type_Throw) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowDrop; // No NULL check
 
     func_ovl3_80146690(fighter_gobj, status_id);
 }
 
 void func_ovl3_80146930(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_HEAVYTHROW4_STICK_RANGE_X_MIN) && (fp->hold_stick_x < FTCOMMON_HEAVYTHROW4_F_OR_B_BUFFER_FRAMES_MAX))
@@ -194,7 +194,7 @@ void func_ovl3_80146930(GObj *fighter_gobj)
     }
     func_ovl3_80146690(fighter_gobj, status_id);
 
-    fp->proc_damage = func_ovl3_80145D28;
+    fp->proc_damage = ftCommon_Get_DropItem;
 }
 
 bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
@@ -203,7 +203,7 @@ bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
     {
         if (fp->input.pl.button_tap & fp->input.button_mask_a)
         {
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (atGetStruct(fp->item_hold)->type == At_Type_Throw))
             {
                 return TRUE;
             }
@@ -214,7 +214,7 @@ bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
 
 bool32 func_ovl3_80146AE8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->item_hold != NULL) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -237,7 +237,7 @@ bool32 func_ovl3_80146AE8(GObj *fighter_gobj)
 
 bool32 func_ovl3_80146B64(GObj *fighter_gobj) // Interrupt item throw from roll
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if ((func_ovl3_80146A8C(fp) != FALSE) && (fp->status_vars.common.itemthrow.turn_rotate_step != 0)) // Might be a different var? Not sure, this is just LightThrow again
@@ -261,7 +261,7 @@ bool32 func_ovl3_80146B64(GObj *fighter_gobj) // Interrupt item throw from roll
 
 bool32 func_ovl3_80146BE0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->item_hold != NULL) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {

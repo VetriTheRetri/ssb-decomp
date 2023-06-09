@@ -2,7 +2,7 @@
 
 void func_ovl3_80151B50(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
 
@@ -37,7 +37,7 @@ void func_ovl3_80151C38(GObj *fighter_gobj)
 
 void func_ovl3_80151C5C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U);
@@ -47,7 +47,7 @@ void func_ovl3_80151C5C(GObj *fighter_gobj)
 
 void func_ovl3_80151CB0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U);
@@ -58,7 +58,7 @@ void func_ovl3_80151CB0(GObj *fighter_gobj)
 
 void func_ovl3_80151D0C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
     fp->proc_accessory = func_ovl3_80151B50;

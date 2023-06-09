@@ -1,14 +1,16 @@
 #include "fighter.h"
 
-void func_ovl3_80144910(GObj *fighter_gobj, s32 status_id)
+// 0x80144910
+void ftCommon_DownAttack_SetStatus(GObj *fighter_gobj, s32 status_id)
 {
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }
 
-bool32 func_ovl3_80144944(GObj *fighter_gobj)
+// 0x80144944
+bool32 ftCommon_DownAttack_CheckInterruptDownBounce(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->status_vars.common.downbounce.attack_buffer != 0)
@@ -19,16 +21,17 @@ bool32 func_ovl3_80144944(GObj *fighter_gobj)
         }
         else status_id = ftStatus_Common_DownAttackU;
 
-        func_ovl3_80144910(fighter_gobj, status_id);
+        ftCommon_DownAttack_SetStatus(fighter_gobj, status_id);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_8014499C(GObj *fighter_gobj)
+// 0x8014499C
+bool32 ftCommon_DownAttack_CheckInterruptDownWait(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))
@@ -39,7 +42,7 @@ bool32 func_ovl3_8014499C(GObj *fighter_gobj)
         }
         else status_id = ftStatus_Common_DownAttackU;
 
-        func_ovl3_80144910(fighter_gobj, status_id);
+        ftCommon_DownAttack_SetStatus(fighter_gobj, status_id);
 
         return TRUE;
     }

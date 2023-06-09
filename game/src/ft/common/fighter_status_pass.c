@@ -10,7 +10,7 @@ void func_ovl3_80141D60(GObj *fighter_gobj)
 
 void func_ovl3_80141DA0(GObj *fighter_gobj, s32 status_id, f32 frame_begin, u32 flags)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, status_id, frame_begin, 1.0F, flags);
@@ -44,7 +44,7 @@ bool32 func_ovl3_80141E60(Fighter_Struct *fp)
 
 bool32 func_ovl3_80141EA4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
@@ -61,7 +61,7 @@ bool32 func_ovl3_80141EA4(GObj *fighter_gobj)
 
 bool32 func_ovl3_80141F0C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
@@ -82,7 +82,7 @@ bool32 func_ovl3_80141F0C(GObj *fighter_gobj)
 
 bool32 func_ovl3_80141F8C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((func_ovl3_80141E60(fp) != FALSE) && (fp->input.pl.button_hold & fp->input.button_mask_z))
     {

@@ -2,7 +2,7 @@
 
 void func_ovl3_8015A600(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
     f32 magnitude;
@@ -32,7 +32,7 @@ void func_ovl3_8015A600(GObj *fighter_gobj)
 
 void func_ovl3_8015A6FC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.masterhand.yubideppou.wait_timer--;
 
@@ -49,7 +49,7 @@ void func_ovl3_8015A748(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Yubideppou2, 0.0F, 1.0F, 0U);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.masterhand.yubideppou.wait_timer = rand_u16_range(120) + 60;
 }

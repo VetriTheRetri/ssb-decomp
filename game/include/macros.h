@@ -12,6 +12,7 @@
 
 #define F_DEG_TO_RAD(x) ((float)(((x) * PI32) / 180.0F))
 #define F_RAD_TO_DEG(x) ((float)(((x) / PI32) * 180.0F))
+#define I_DEG_TO_RAD(x) (( int )(((x) * PI32) / 180.0F))
 #define I_RAD_TO_DEG(x) (( int )(((x) / PI32) * 180.0F))
 
 #define U8_MAX 0xFF

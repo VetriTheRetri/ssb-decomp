@@ -3,7 +3,7 @@
 
 bool32 jtgt_ovl3_8016BC50(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
@@ -20,7 +20,7 @@ bool32 jtgt_ovl3_8016BC50(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016BCC8(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->ground_or_air == air)
     {
@@ -75,8 +75,8 @@ bool32 jtgt_ovl3_8016BE14(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016BE4C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITFINALCUTTER_LIFETIME;
 
@@ -90,7 +90,7 @@ extern ItemSpawnData Item_FinalCutter_Desc;
 
 GObj* func_ovl3_8016BE8C(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_FinalCutter_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
     Item_Struct *ip;
 
@@ -98,7 +98,7 @@ GObj* func_ovl3_8016BE8C(GObj *fighter_gobj, Vec3f *pos)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->lifetime = ITFINALCUTTER_LIFETIME;
 

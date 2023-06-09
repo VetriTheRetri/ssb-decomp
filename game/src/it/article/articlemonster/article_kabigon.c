@@ -13,7 +13,7 @@
 
 bool32 func_ovl3_8017E070(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.kabigon.rumble_wait == 0)
@@ -35,7 +35,7 @@ extern Gfx *D_800465B0[4];
 
 void func_ovl3_8017E100(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -71,7 +71,7 @@ void func_ovl3_8017E100(GObj *article_gobj)
 
 void func_ovl3_8017E25C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->phys_info.vel.y = ATKABIGON_DROP_VEL_Y;
@@ -115,7 +115,7 @@ void func_ovl3_8017E350(GObj *article_gobj)
 
 bool32 func_ovl3_8017E384(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if ((Ground_Info->blastzone_top - ATKABIGON_MAP_OFF_Y) <= joint->translate.y)
@@ -148,7 +148,7 @@ bool32 func_ovl3_8017E384(GObj *article_gobj)
 
 void func_ovl3_8017E4A4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -183,7 +183,7 @@ void func_ovl3_8017E4A4(GObj *article_gobj)
 
 void func_ovl3_8017E600(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_800269C0(0x86U);
 
@@ -202,7 +202,7 @@ void func_ovl3_8017E648(GObj *article_gobj)
 
 bool32 func_ovl3_8017E67C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -224,7 +224,7 @@ GObj* jtgt_ovl3_8017E6C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 

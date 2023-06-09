@@ -4,30 +4,32 @@
 
 #define FTCOMMON_DOWNBOUNCE_STATUPDATE_FLAGS (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE)
 
-void func_ovl3_80144220(GObj *fighter_gobj)
+// 0x80144220
+void ftCommon_DownWait_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.downwait.stand_wait--;
 
     if (fp->status_vars.common.downwait.stand_wait == 0)
     {
-        func_ovl3_80144580(fighter_gobj);
+        ftCommon_DownStand_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_80144254(GObj *fighter_gobj)
+// 0x80144254
+void ftCommon_DownWait_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_8014499C(fighter_gobj) == FALSE) && (func_ovl3_8014482C(fighter_gobj) == FALSE))
+    if ((ftCommon_DownAttack_CheckInterruptDownWait(fighter_gobj) == FALSE) && (ftCommon_DownForwardOrBack_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_801445D8(fighter_gobj);
+        ftCommon_DownStand_CheckInterruptCommon(fighter_gobj);
     }
 }
 
 // 0x80144294
-void ftCommon_DownWait_ApplyStatus(GObj *fighter_gobj)
+void ftCommon_DownWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->status_info.status_id == ftStatus_Common_DownBounceD)
@@ -40,14 +42,15 @@ void ftCommon_DownWait_ApplyStatus(GObj *fighter_gobj)
 
     fp->status_vars.common.downwait.stand_wait = FTCOMMON_DOWNWAIT_STAND_WAIT;
 
-    ftCommon_SetCatchIgnoreMask(fp, (FTCATCHKIND_MASK_SPECIALHICAPTAIN | FTCATCHKIND_MASK_CATCHCOMMON | FTCATCHKIND_MASK_SPECIALNKIRBY | FTCATCHKIND_MASK_SPECIALNYOSHI));
+    ftCommon_SetCaptureIgnoreMask(fp, (FTCATCHKIND_MASK_SPECIALHICAPTAIN | FTCATCHKIND_MASK_CATCHCOMMON | FTCATCHKIND_MASK_SPECIALNKIRBY | FTCATCHKIND_MASK_SPECIALNYOSHI));
 
     fp->damage_mul = 0.5F;
 }
 
-void func_ovl3_80144308(GObj *fighter_gobj)
+// 0x80144308
+void ftCommon_DownBounce_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.downbounce.attack_buffer != 0)
     {
@@ -57,16 +60,16 @@ void func_ovl3_80144308(GObj *fighter_gobj)
     {
         fp->status_vars.common.downbounce.attack_buffer = FTCOMMON_DOWNBOUNCE_ATTACK_BUFFER;
     }
-    if ((fighter_gobj->anim_frame <= 0.0F) && (func_ovl3_80144944(fighter_gobj) == FALSE) && (func_ovl3_8014482C(fighter_gobj) == FALSE))
+    if ((fighter_gobj->anim_frame <= 0.0F) && (ftCommon_DownAttack_CheckInterruptDownBounce(fighter_gobj) == FALSE) && (ftCommon_DownForwardOrBack_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        ftCommon_DownWait_ApplyStatus(fighter_gobj);
+        ftCommon_DownWait_SetStatus(fighter_gobj);
     }
 }
 
 // 0x80144398
 bool32 ftCommon_DownBounce_UpOrDown(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 rot_x = fp->joint[4]->rotate.x;
 
     rot_x /= DOUBLE_PI32;
@@ -82,11 +85,12 @@ bool32 ftCommon_DownBounce_UpOrDown(GObj *fighter_gobj)
 
 extern u16 Fighter_DownBounce_Sound[];
 
-void func_ovl3_80144428(GObj *fighter_gobj)
+// 0x801444248
+void ftCommon_DownBounce_UpdateEffects(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftCommon_GFXSpawn(fighter_gobj, 0x16, 0, 0, 0, fp->lr, 0, 0);
+    ftCommon_GFXSpawn(fighter_gobj, 0x16, 0, NULL, NULL, fp->lr, FALSE, 0);
     func_800269C0(Fighter_DownBounce_Sound[fp->ft_kind]);
     func_ovl2_800E806C(fp, 4, 0);
 }
@@ -94,7 +98,7 @@ void func_ovl3_80144428(GObj *fighter_gobj)
 // 0x80144498
 void ftCommon_DownBounce_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->ground_or_air == air)
@@ -108,7 +112,7 @@ void ftCommon_DownBounce_SetStatus(GObj *fighter_gobj)
     else status_id = ftStatus_Common_DownBounceU;
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_UNK3_PRESERVE);
-    func_ovl3_80144428(fighter_gobj);
+    ftCommon_DownBounce_UpdateEffects(fighter_gobj);
 
     fp->status_vars.common.downbounce.attack_buffer = 0;
     fp->damage_mul = 0.5F;

@@ -8,12 +8,12 @@ void func_ovl3_80183DA0(GObj *article_gobj)
 {
     atCommon_UpdateArticleStatus(article_gobj, Article_Hitokage_Status, 0);
 
-    ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_80183F88;
+    atGetStruct(article_gobj)->proc_dead = func_ovl3_80183F88;
 }
 
 bool32 func_ovl3_80183DE0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
@@ -57,7 +57,7 @@ bool32 func_ovl3_80183DE0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80183F20(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint;
 
     func_ovl3_80172558(ap, ATHITOKAGE_GRAVITY, ATHITOKAGE_T_VEL);
@@ -76,7 +76,7 @@ bool32 func_ovl3_80183F88(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80183F94(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->damage_knockback >= 100.0F)
@@ -109,7 +109,7 @@ GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
         joint = DObjGetStruct(article_gobj);
 
         ap->article_vars.hitokage.flame_spawn_wait = 0;
@@ -138,7 +138,7 @@ GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 jtgt_ovl3_8018415C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
@@ -170,8 +170,8 @@ extern s32 D_ovl3_8018D044;
 
 bool32 jtgt_ovl3_80184204(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
     Vec3f *translate;
 
     ip->lifetime = ATHITOKAGE_FLAME_LIFETIME;
@@ -197,7 +197,7 @@ GObj *func_ovl3_801842C8(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel = *vel;
 

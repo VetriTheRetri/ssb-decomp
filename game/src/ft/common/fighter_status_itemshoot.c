@@ -11,7 +11,7 @@ const Vec3f Fighter_LGunShoot_Dust_Offset = { FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_
 
 void func_ovl3_80146FD4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap;
     f32 size_mul;
     Vec3f spawn_ammo_offset;
@@ -20,7 +20,7 @@ void func_ovl3_80146FD4(GObj *fighter_gobj)
 
     if ((fp->item_hold != NULL) && (fp->command_vars.flags.flag0 != 0))
     {
-        ap = ArticleGetStruct(fp->item_hold);
+        ap = atGetStruct(fp->item_hold);
 
         if (ap->at_multi != 0)
         {
@@ -73,7 +73,7 @@ void func_ovl3_801471E4(GObj *fighter_gobj)
 
 void func_ovl3_80147208(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShoot, fighter_gobj->anim_frame, 1.0F, 0U);
@@ -83,7 +83,7 @@ void func_ovl3_80147208(GObj *fighter_gobj)
 
 void func_ovl3_80147258(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShootAir, fighter_gobj->anim_frame, 1.0F, 0U);
@@ -101,7 +101,7 @@ const Vec3f Fighter_FireFlowerShoot_Ammo_Offset = { FTCOMMON_FIREFLOWERSHOOT_AMM
 
 void func_ovl3_801472D4(Fighter_Struct *fp, s32 ammo_sub)
 {
-    Article_Struct *ap = ArticleGetStruct(fp->item_hold);
+    Article_Struct *ap = atGetStruct(fp->item_hold);
     Vec3f flame_spawn_offset = Fighter_FireFlowerShoot_Ammo_Offset;
     f32 size_mul;
     s32 flame_vel_index;
@@ -151,7 +151,7 @@ const Vec3f Fighter_FireFlowerShoot_Kickup_Offset        = { 0.0F, 0.0F, -180.0F
 
 void func_ovl3_80147434(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap;
     s32 ammo_sub;
     Vec3f gfx_haveammo_offset;
@@ -176,7 +176,7 @@ void func_ovl3_80147434(GObj *fighter_gobj)
     {
         if (fp->command_vars.flags.flag0 != 0)
         {
-            ap = ArticleGetStruct(fp->item_hold);
+            ap = atGetStruct(fp->item_hold);
 
             ammo_sub = (fp->status_vars.common.fireflower.ammo_fire_count == 0) ? 2 : 1;
 
@@ -246,7 +246,7 @@ void func_ovl3_80147750(GObj *fighter_gobj)
 
 void func_ovl3_80147774(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShoot, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, 0U);
@@ -256,7 +256,7 @@ void func_ovl3_80147774(GObj *fighter_gobj)
 
 void func_ovl3_801477C8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShootAir, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, 0U);
@@ -277,8 +277,8 @@ void func_ovl3_80147824(Fighter_Struct *fp)
 
 void func_ovl3_80147844(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    Article_Struct *ap = ArticleGetStruct(fp->item_hold);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    Article_Struct *ap = atGetStruct(fp->item_hold);
     s32 status_id;
     void (*proc_accessory)(GObj*);
 
@@ -306,8 +306,8 @@ void func_ovl3_80147844(GObj *fighter_gobj)
 
 void func_ovl3_801478EC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    Article_Struct *ap = ArticleGetStruct(fp->item_hold);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    Article_Struct *ap = atGetStruct(fp->item_hold);
     s32 status_id;
     void (*proc_accessory)(GObj*);
 

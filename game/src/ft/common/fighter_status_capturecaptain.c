@@ -9,8 +9,8 @@ Vec3f Fighter_CaptureCaptain_Offset = { 0.0F, 0.0F, 0.0F };
 void ftCommon_CaptureCaptain_UpdateCapturePos(GObj *fighter_gobj, GObj *capture_gobj, Vec3f *pos)
 {
     Vec3f offset = Fighter_CaptureCaptain_Offset;
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     Vec2h *offset_add = (Vec2h*) ((uintptr_t)D_ovl2_80131034 + (intptr_t)&ftCaptain_CaptureCaptain_Offset_Add);
     s32 unused;
 
@@ -30,7 +30,7 @@ void ftCommon_CaptureCaptain_UpdateCapturePos(GObj *fighter_gobj, GObj *capture_
 // 0x8014D0F0
 void ftCommon_CaptureCaptain_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f offset;
 
     if (fp->status_vars.common.capturecaptain.capture_flag & FTCOMMON_CAPTURECAPTAIN_MASK_THROW)
@@ -53,12 +53,12 @@ void ftCommon_CaptureCaptain_ProcPhysics(GObj *fighter_gobj)
 // 0x8014D2A0
 void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((this_fp->item_hold != NULL) && !(ArticleGetStruct(this_fp->item_hold)->is_light_throw))
+    if ((this_fp->item_hold != NULL) && !(atGetStruct(this_fp->item_hold)->is_light_throw))
     {
         Vec3f vel;
 
@@ -74,7 +74,7 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
     }
     this_fp->capture_gobj = capture_gobj;
 
-    capture_fp = FighterGetStruct(capture_gobj);
+    capture_fp = ftGetStruct(capture_gobj);
 
     this_fp->lr = -capture_fp->lr;
 
@@ -90,7 +90,7 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     ftMapCollide_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureCaptain, FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN, FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED, FTSTATUPDATE_NONE_PRESERVE);
-    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800D9444(fighter_gobj);
     ftCommon_CaptureCaptain_ProcPhysics(fighter_gobj);
@@ -99,8 +99,8 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 // 0x8014D3BC
 void ftCommon_CaptureCaptain_Release(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8014AFD0(fighter_gobj, fp->lr, 0, 0);
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
 }

@@ -7,7 +7,7 @@ extern intptr_t D_NF_00009520;
 
 void func_ovl3_8017C690(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     void *t = (void*) (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00009430) + (intptr_t)&D_NF_00009520); // Linker thing
 
@@ -24,7 +24,7 @@ void func_ovl3_8017C6F8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C710(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMBALL_GRAVITY, ATMBALL_T_VEL);
@@ -59,7 +59,7 @@ void func_ovl3_8017C7C8(GObj *article_gobj)
 
 void func_ovl3_8017C7FC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -69,7 +69,7 @@ void func_ovl3_8017C7FC(GObj *article_gobj)
 
 void jtgt_ovl3_8017C840(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     DObjGetStruct(article_gobj)->rotate.y = 0.0F;
 
@@ -80,7 +80,7 @@ void jtgt_ovl3_8017C840(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C880(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMBALL_GRAVITY, ATMBALL_T_VEL);
@@ -93,7 +93,7 @@ bool32 jtgt_ovl3_8017C880(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C8D8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.m_ball.is_rebound != FALSE)
     {
@@ -108,7 +108,7 @@ bool32 jtgt_ovl3_8017C8D8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C94C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -121,7 +121,7 @@ bool32 jtgt_ovl3_8017C94C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Fighter_Struct *fp;
     GObj *fighter_gobj;
 
@@ -133,7 +133,7 @@ bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
 
     fighter_gobj = ap->article_vars.m_ball.owner_gobj;
     ap->owner_gobj = fighter_gobj;
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     ap->team = fp->team;
     ap->port_id = fp->port_id;
@@ -159,7 +159,7 @@ extern s32 D_ovl3_80189450;
 
 bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 {
-    Article_Struct *m_ball_ap = ArticleGetStruct(m_ball_gobj);
+    Article_Struct *m_ball_ap = atGetStruct(m_ball_gobj);
     Article_Struct *monster_ap;
     GObj *monster_gobj;
     Vec3f vel;
@@ -181,7 +181,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
         if (monster_gobj != NULL)
         {
-            monster_ap = ArticleGetStruct(monster_gobj);
+            monster_ap = atGetStruct(monster_gobj);
 
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
@@ -203,7 +203,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
 bool32 jtgt_ovl3_8017CB38(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl2_800FC67C(ap->unk_0x2D0) == FALSE)
     {
@@ -218,7 +218,7 @@ void func_ovl3_8017CB84(GObj *article_gobj)
 {
     s32 unused[2];
     DObj *joint = DObjGetStruct(article_gobj);
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *next;
     DObj *child;
 
@@ -244,7 +244,7 @@ void func_ovl3_8017CB84(GObj *article_gobj)
 
         if (fighter_gobj != NULL)
         {
-            Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
             func_ovl2_800E806C(fp, 8, 20);
         }
@@ -265,7 +265,7 @@ void func_ovl3_8017CC88(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 {
-    Article_Struct *m_ball_ap = ArticleGetStruct(m_ball_gobj);
+    Article_Struct *m_ball_ap = atGetStruct(m_ball_gobj);
     Article_Struct *monster_ap;
     GObj *monster_gobj;
     Vec3f vel;
@@ -287,7 +287,7 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
         if (monster_gobj != NULL)
         {
-            monster_ap = ArticleGetStruct(monster_gobj);
+            monster_ap = atGetStruct(monster_gobj);
 
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
@@ -328,7 +328,7 @@ GObj* jtgt_ovl3_8017CE0C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
         Vec3f translate = joint->translate;
 
         joint->next->unk_0x54 = 2;

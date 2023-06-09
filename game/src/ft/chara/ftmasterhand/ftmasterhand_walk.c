@@ -7,7 +7,7 @@ void func_ovl3_80159830(GObj *fighter_gobj)
 
 void func_ovl3_80159854(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Walk, 0.0F, 1.0F, 0U);
     func_ovl3_80157F90(fighter_gobj);

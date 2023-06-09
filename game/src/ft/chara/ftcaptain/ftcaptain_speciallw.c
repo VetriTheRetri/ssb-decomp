@@ -2,7 +2,7 @@
 
 void func_ovl3_8015FC30(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fp->is_statupdate_stop_gfx))
     {
@@ -27,7 +27,7 @@ void func_ovl3_8015FC30(GObj *fighter_gobj)
 
 void func_ovl3_8015FCB0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->ground_or_air = air;
     fp->jumps_used = 1;
@@ -35,12 +35,12 @@ void func_ovl3_8015FCB0(GObj *fighter_gobj)
 
 void func_ovl3_8015FCC8(GObj *fighter_gobj) // Unused?
 {
-    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
 }
 
 void func_ovl3_8015FCE8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -55,13 +55,13 @@ void func_ovl3_8015FCE8(GObj *fighter_gobj)
 
 void func_ovl3_8015FD50(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
         func_ovl3_8013E1C8(fighter_gobj);
     }
-    else func_ovl3_8013F9E0(fighter_gobj);
+    else ftCommon_Fall_SetStatus(fighter_gobj);
 }
 
 void func_ovl3_8015FD90(GObj *fighter_gobj)
@@ -71,7 +71,7 @@ void func_ovl3_8015FD90(GObj *fighter_gobj)
 
 void func_ovl3_8015FDB4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -107,7 +107,7 @@ void func_ovl3_8015FE94(GObj *fighter_gobj)
 
 bool32 func_ovl3_8015FEB4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
@@ -123,7 +123,7 @@ bool32 func_ovl3_8015FEB4(GObj *fighter_gobj)
 
 bool32 func_ovl3_8015FF2C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 == 2)
     {
@@ -162,7 +162,7 @@ void func_ovl3_8015FFE0(GObj *fighter_gobj)
 
 void func_ovl3_80160004(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.captain.speciallw.scale_apply_timer < FTCAPTAIN_FALCONKICK_VEL_SCALE_APPLY_TIME)
     {
@@ -174,7 +174,7 @@ void func_ovl3_80160004(GObj *fighter_gobj)
 
 void func_ovl3_80160038(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.captain.speciallw.scale_apply_timer = 0;
 
@@ -188,7 +188,7 @@ void func_ovl3_80160038(GObj *fighter_gobj)
 
 void func_ovl3_80160060(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 rot_z = fp->joint[0]->rotate.z;
 
     ftMapCollide_SetAir(fp);
@@ -203,13 +203,13 @@ void func_ovl3_80160060(GObj *fighter_gobj)
 
 void func_ovl3_801600EC(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwLanding, 0.0F, 1.0F, 0U);
 }
 
 void jtgt_ovl3_80160128(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = func_ovl3_80160038;
 
@@ -225,7 +225,7 @@ void jtgt_ovl3_80160128(GObj *fighter_gobj)
 
 void jtgt_ovl3_801601A0(GObj *fighter_gobj) // Unused
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwEnd, 0.0F, 1.0F, 4U);
     ftAnim_Update(fighter_gobj);
@@ -238,7 +238,7 @@ void jtgt_ovl3_801601A0(GObj *fighter_gobj) // Unused
 
 void jtgt_ovl3_8016020C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = func_ovl3_80160038;
 

@@ -3,11 +3,11 @@
 
 void func_ovl3_8016A640(GObj *item_gobj, bool32 thunder_state)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (!(ip->item_vars.thunder.thunder_state & itPikachuThunderStatus_Destroy))
     {
-        Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+        Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
         if (fp->player_number == ip->player_number) // Check number of player that spawned Thunder
         {
@@ -38,7 +38,7 @@ void func_ovl3_8016A680(GObj *item_gobj, s32 arg1)
 
 bool32 jtgt_ovl3_8016A700(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->item_vars.thunder.thunder_state == itPikachuThunderStatus_Collide)
     {
@@ -92,7 +92,7 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
         return NULL;
     }
 
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->proc_dead = func_ovl3_8016A7E8;
 
@@ -116,7 +116,7 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
 bool32 func_ovl3_8016A8D8(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
@@ -135,7 +135,7 @@ bool32 func_ovl3_8016A8D8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016A950(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -147,7 +147,7 @@ extern ItemSpawnData Item_ThunderChain_Desc;
 GObj* func_ovl3_8016A980(GObj *item_gobj, Vec3f *pos)
 {
     s32 unused[2];
-    Item_Struct *spawn_ip = ItemGetStruct(item_gobj);
+    Item_Struct *spawn_ip = itGetStruct(item_gobj);
     GObj *chain_gobj = func_ovl3_801655C8(item_gobj, &Item_ThunderChain_Desc, pos, ITEM_MASK_SPAWN_ITEM);
     Item_Struct *chain_ip;
     s32 i;
@@ -156,7 +156,7 @@ GObj* func_ovl3_8016A980(GObj *item_gobj, Vec3f *pos)
     {
         return NULL;
     }
-    chain_ip = ItemGetStruct(chain_gobj);
+    chain_ip = itGetStruct(chain_gobj);
 
     chain_ip->lifetime = ITPIKACHUTHUNDER_CHAIN_LIFETIME;
     chain_ip->group_id = spawn_ip->group_id;

@@ -7,12 +7,12 @@ void func_ovl3_8017C240(GObj *article_gobj)
 {
     atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Lucky_Status, 0);
 
-    ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_8017C524;
+    atGetStruct(article_gobj)->proc_dead = func_ovl3_8017C524;
 }
 
 void func_ovl3_8017C280(GObj *lucky_gobj)
 {
-    Article_Struct *lucky_ap = ArticleGetStruct(lucky_gobj);
+    Article_Struct *lucky_ap = atGetStruct(lucky_gobj);
     Article_Struct *egg_ap;
     s32 unused;
     DObj *joint = DObjGetStruct(lucky_gobj);
@@ -39,7 +39,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
 
                 if (egg_gobj != NULL)
                 {
-                    egg_ap = ArticleGetStruct(egg_gobj);
+                    egg_ap = atGetStruct(egg_gobj);
 
                     func_800269C0(0xCAU);
 
@@ -67,7 +67,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
 
 bool32 func_ovl3_8017C400(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->translate.x += ap->article_vars.gr_lucky.pos.x;
@@ -88,7 +88,7 @@ bool32 func_ovl3_8017C400(GObj *article_gobj)
 
 bool32 func_ovl3_8017C4AC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -97,7 +97,7 @@ bool32 func_ovl3_8017C4AC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C4BC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint;
 
     func_ovl3_80172558(ap, ATGRLUCKY_GRAVITY, ATGRLUCKY_T_VEL);
@@ -116,7 +116,7 @@ bool32 func_ovl3_8017C524(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C530(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->damage_knockback >= 100.0F)
@@ -145,7 +145,7 @@ GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 

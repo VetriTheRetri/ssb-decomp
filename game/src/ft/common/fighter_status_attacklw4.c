@@ -41,7 +41,7 @@ bool32 ftCommon_AttackLw4_CheckInterruptCommon(Fighter_Struct *fp)
 // 0x80150838
 bool32 ftCommon_AttackLw4_CheckInterruptSquat(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((ftCommon_AttackLw4_CheckInputSuccess(fp) != FALSE) && (fp->status_vars.common.attack4.is_goto_attacklw4 != FALSE))
     {
@@ -53,7 +53,7 @@ bool32 ftCommon_AttackLw4_CheckInterruptSquat(GObj *fighter_gobj)
 // 0x80150884
 bool32 ftCommon_AttackLw4_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((ftCommon_AttackLw4_CheckInputSuccess(fp) != FALSE) && (fp->tap_stick_y < FTCOMMON_ATTACKLW4_BUFFER_FRAMES_MAX))
     {

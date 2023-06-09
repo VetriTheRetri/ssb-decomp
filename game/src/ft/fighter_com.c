@@ -12,7 +12,7 @@ Item_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
     {
         do
         {
-            Item_Struct *ip = ItemGetStruct(item_gobj);
+            Item_Struct *ip = itGetStruct(item_gobj);
 
             if (ip->owner_gobj == fp->fighter_gobj)
             {
@@ -33,7 +33,7 @@ Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 it_kind)
     {
         do
         {
-            Item_Struct *ip = ItemGetStruct(item_gobj);
+            Item_Struct *ip = itGetStruct(item_gobj);
 
             if ((ip->owner_gobj == fp->fighter_gobj) && (ip->it_kind == it_kind))
             {
@@ -366,7 +366,7 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
 
         if (other_gobj != this_fp->fighter_gobj)
         {
-            other_fp = FighterGetStruct(other_gobj);
+            other_fp = ftGetStruct(other_gobj);
 
             if (this_fp->team != other_fp->team)
             {
@@ -429,7 +429,7 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
     {
         if (other_gobj != this_fp->fighter_gobj)
         {
-            Fighter_Struct *other_fp = FighterGetStruct(other_gobj);
+            Fighter_Struct *other_fp = ftGetStruct(other_gobj);
 
             if (this_fp->team != other_fp->team)
             {
@@ -443,7 +443,7 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
                 {
                     return TRUE;
                 }
-                else if ((other_fp->item_hold != NULL) && (ArticleGetStruct(other_fp->item_hold)->at_kind == At_Kind_M_Ball) && (sqrt_xy < 2500.0F))
+                else if ((other_fp->item_hold != NULL) && (atGetStruct(other_fp->item_hold)->at_kind == At_Kind_M_Ball) && (sqrt_xy < 2500.0F))
                 {
                     return TRUE;
                 }
@@ -465,7 +465,7 @@ Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
     {
         if (other_gobj != this_fp->fighter_gobj)
         {
-            Fighter_Struct *other_fp = FighterGetStruct(other_gobj);
+            Fighter_Struct *other_fp = ftGetStruct(other_gobj);
 
             if (this_fp->team != other_fp->team)
             {

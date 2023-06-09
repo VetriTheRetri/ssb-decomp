@@ -3,7 +3,7 @@
 // 0x80145620
 bool32 ftCommon_CliffAttack_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))
     {
@@ -29,7 +29,7 @@ void ftCommon_CliffAttackSlow1_ProcUpdate(GObj *fighter_gobj)
 // 0x801456B4
 void ftCommon_CliffAttackQuick1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffAttackQuick1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -41,7 +41,7 @@ void ftCommon_CliffAttackQuick1_SetStatus(GObj *fighter_gobj)
 // 0x80145704
 void ftCommon_CliffAttackSlow1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffAttackSlow1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

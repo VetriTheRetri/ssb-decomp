@@ -4,11 +4,11 @@
 // 0x8014F760
 void ftCommon_AttackS3_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 stick_angle;
     s32 status_id;
 
-    if (func_ovl3_80146064(fighter_gobj) == FALSE)
+    if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
         if (fp->ft_data->script1->script_info[0xA9].anim_id != 0)
         {
@@ -38,7 +38,7 @@ void ftCommon_AttackS3_SetStatus(GObj *fighter_gobj)
 // 0x8014F8C0
 bool32 ftCommon_AttackS3_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS3_STICK_RANGE_MIN))
@@ -47,13 +47,13 @@ bool32 ftCommon_AttackS3_CheckInterruptCommon(GObj *fighter_gobj)
         {
             if (fp->item_hold != NULL)
             {
-                if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw))
+                if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (atGetStruct(fp->item_hold)->type == At_Type_Throw))
                 {
                     func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowF);
 
                     return TRUE;
                 }
-                switch (ArticleGetStruct(fp->item_hold)->type)
+                switch (atGetStruct(fp->item_hold)->type)
                 {
                 case At_Type_Swing:
                     func_ovl3_80146E94(fighter_gobj, 1);

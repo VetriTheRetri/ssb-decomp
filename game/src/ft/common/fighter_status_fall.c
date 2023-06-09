@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_8013F9A0(GObj *fighter_gobj)
+// 0x8013F9A0
+void ftCommon_Fall_ProcInterrupt(GObj *fighter_gobj)
 {
     if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
@@ -8,9 +9,10 @@ void func_ovl3_8013F9A0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013F9E0(GObj *fighter_gobj)
+// 0x8013F9E0
+void ftCommon_Fall_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
@@ -22,7 +24,7 @@ void func_ovl3_8013F9E0(GObj *fighter_gobj)
         {
             ftMapCollide_SetAir(fp);
         }
-        ftStatus_Update(fighter_gobj, ((fp->jumps_used >= fp->attributes->jumps_max) ? ftStatus_Common_FallAerial : ftStatus_Common_Fall), 0.0F, 1.0F, 8U);
+        ftStatus_Update(fighter_gobj, ((fp->jumps_used >= fp->attributes->jumps_max) ? ftStatus_Common_FallAerial : ftStatus_Common_Fall), 0.0F, 1.0F, FTSTATUPDATE_FASTFALL_PRESERVE);
 
         func_ovl2_800D8EB8(fp);
 

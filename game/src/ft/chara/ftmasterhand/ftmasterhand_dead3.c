@@ -2,7 +2,7 @@
 
 void func_ovl3_8015AE80(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->lr = LEFT;
 

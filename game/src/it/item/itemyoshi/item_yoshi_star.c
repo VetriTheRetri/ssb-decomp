@@ -14,7 +14,7 @@ f32 func_ovl3_8016C540(Item_Struct *ip)
 
 bool32 jtgt_ovl3_8016C588(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     f32 scale;
     f32 vel_sqrt;
     f32 vel_mul;
@@ -57,7 +57,7 @@ bool32 jtgt_ovl3_8016C6A0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C6AC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
 
@@ -77,7 +77,7 @@ bool32 jtgt_ovl3_8016C6F0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C718(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -94,8 +94,8 @@ bool32 jtgt_ovl3_8016C718(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C7B0(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITYOSHISTAR_LIFETIME;
 
@@ -136,7 +136,7 @@ GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->lr = lr;
 
@@ -150,7 +150,7 @@ GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 
 bool32 func_ovl3_8016C954(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8016C834(fighter_gobj, pos, fp->lr);
     func_ovl3_8016C834(fighter_gobj, pos, -fp->lr);

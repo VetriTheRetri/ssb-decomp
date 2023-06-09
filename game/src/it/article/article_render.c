@@ -20,7 +20,7 @@ void func_ovl3_80171410(GObj *article_gobj)
     MtxStore mtx_store;
     Vec3f *translate;
 
-    ap = ArticleGetStruct(article_gobj);
+    ap = atGetStruct(article_gobj);
     at_hit = &ap->article_hit;
 
     for (i = 0; i < at_hit->hitbox_count; i++)
@@ -131,7 +131,7 @@ void func_ovl3_80171410(GObj *article_gobj)
 
 void func_ovl3_801719AC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
     ObjectColl *object_coll = &ap->coll_data.object_coll;
     MtxStore mtx_store;
@@ -183,7 +183,7 @@ bool32 func_ovl3_80171C10(Article_Struct *ap)
     {
         return TRUE;
     }
-    fp = FighterGetStruct(ap->owner_gobj);
+    fp = ftGetStruct(ap->owner_gobj);
 
     if (!(fp->x190_flag_b6))
     {
@@ -198,7 +198,7 @@ bool32 func_ovl3_80171C10(Article_Struct *ap)
 
 void func_ovl3_80171C7C(GObj *article_gobj) // Unused
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
@@ -221,7 +221,7 @@ void func_ovl3_80171C7C(GObj *article_gobj) // Unused
 
 void func_ovl3_80171D38(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
@@ -244,7 +244,7 @@ void func_ovl3_80171D38(GObj *article_gobj)
 
 void func_ovl3_80171DF4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -271,7 +271,7 @@ void func_ovl3_80171DF4(GObj *article_gobj)
 
 void func_ovl3_80171F4C(GObj *article_gobj) // Unused
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
@@ -294,7 +294,7 @@ void func_ovl3_80171F4C(GObj *article_gobj) // Unused
 
 void func_ovl3_80172008(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -337,7 +337,7 @@ void func_ovl3_80172008(GObj *article_gobj)
 
 void func_ovl3_8017224C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {

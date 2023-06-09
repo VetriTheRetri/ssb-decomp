@@ -2,7 +2,7 @@
 
 void func_ovl3_8015DF00(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     DObj *joint;
 
@@ -23,7 +23,7 @@ void func_ovl3_8015DF00(GObj *fighter_gobj)
 
 void func_ovl3_8015DF64(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8015DF00(fighter_gobj);
 
@@ -31,18 +31,18 @@ void func_ovl3_8015DF64(GObj *fighter_gobj)
     {
         func_ovl3_8015E170(fighter_gobj);
     }
-    else func_ovl2_800D94C4(fighter_gobj);
+    else ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
 void func_ovl3_8015DFBC(GObj *fighter_gobj)
 {
     func_ovl3_8015DF00(fighter_gobj);
-    func_ovl2_800D94E8(fighter_gobj);
+    ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
 void func_ovl3_8015DFE4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->command_vars.flags.flag3 != FALSE)
@@ -55,7 +55,7 @@ void func_ovl3_8015DFE4(GObj *fighter_gobj)
 
 void func_ovl3_8015E050(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8E50(fp, attributes);
@@ -79,7 +79,7 @@ void func_ovl3_8015E10C(GObj *fighter_gobj)
 
 void func_ovl3_8015E130(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag3 = FALSE;
 
@@ -89,7 +89,7 @@ void func_ovl3_8015E130(GObj *fighter_gobj)
 
 void func_ovl3_8015E170(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftMapCollide_SetAir(fp);
@@ -101,7 +101,7 @@ void func_ovl3_8015E170(GObj *fighter_gobj)
 
 void func_ovl3_8015E1DC(GObj *fighter_gobj)
 {
-    ftMapCollide_SetAir(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetAir(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
 }
 
@@ -112,7 +112,7 @@ void func_ovl3_8015E218(Fighter_Struct *fp)
 
 void jtgt_ovl3_8015E220(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag3 = FALSE;
 
@@ -125,7 +125,7 @@ void jtgt_ovl3_8015E220(GObj *fighter_gobj)
 
 void jtgt_ovl3_8015E274(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, 0U);

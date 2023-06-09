@@ -9,7 +9,7 @@ void func_ovl3_8015940C(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+        Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
         if (fp->coll_data.ground_line_id == -1)
         {
@@ -25,7 +25,7 @@ void func_ovl3_8015946C(GObj *fighter_gobj)
 
     func_ovl2_800D93E4(fighter_gobj);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_air.x += fp->lr * FTMASTERHAND_HARAU_VEL_X;
 }

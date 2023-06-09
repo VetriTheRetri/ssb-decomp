@@ -3,7 +3,7 @@
 
 bool32 jtgt_ovl3_80174930(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSTAR_GRAVITY, ATSTAR_T_VEL);
 
@@ -20,7 +20,7 @@ bool32 jtgt_ovl3_80174930(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80174990(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
 

@@ -3,7 +3,7 @@
 
 void func_ovl3_8014A0C0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0U)
     {
@@ -26,7 +26,7 @@ void func_ovl3_8014A0C0(GObj *fighter_gobj)
 
         fp->catch_gobj = NULL;
 
-        ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
+        ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -46,14 +46,14 @@ void func_ovl3_8014A0C0(GObj *fighter_gobj)
 
 void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     s32 status_id;
     GObj *catch_gobj;
     Fighter_Struct *catch_fp;
     ftThrownStatus *thrown_status;
 
     catch_gobj = this_fp->catch_gobj;
-    catch_fp = FighterGetStruct(catch_gobj);
+    catch_fp = ftGetStruct(catch_gobj);
 
     if ((is_throwf != FALSE) || ((this_fp->input.pl.stick_range.x * this_fp->lr) >= 0))
     {
@@ -73,7 +73,7 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
     this_fp->command_vars.flags.flag2 = 0;
     this_fp->command_vars.flags.flag1 = 0;
@@ -103,7 +103,7 @@ void func_ovl3_8014A1E8(GObj *fighter_gobj, bool32 is_throwf)
 
 bool32 func_ovl3_8014A394(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     bool32 is_throwf = FALSE;
 
     if ((fp->status_vars.common.catchwait.throw_wait == 0) || (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
@@ -131,7 +131,7 @@ void func_ovl3_8014A430(GObj *fighter_gobj)
 
 void func_ovl3_8014A454(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((func_ovl2_800DE6B0(fighter_gobj) != FALSE) && (fp->phys_info.vel_air.y < 0.0F))
     {
@@ -141,9 +141,9 @@ void func_ovl3_8014A454(GObj *fighter_gobj)
 
 void func_ovl3_8014A4A8(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *catch_gobj = this_fp->catch_gobj;
-    Fighter_Struct *catch_fp = FighterGetStruct(catch_gobj);
+    Fighter_Struct *catch_fp = ftGetStruct(catch_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFFall, 0.0F, 1.0F, 0x80U);
 
@@ -152,7 +152,7 @@ void func_ovl3_8014A4A8(GObj *fighter_gobj)
 
 void func_ovl3_8014A4F8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -163,7 +163,7 @@ void func_ovl3_8014A4F8(GObj *fighter_gobj)
 
 void func_ovl3_8014A538(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -177,7 +177,7 @@ void func_ovl3_8014A538(GObj *fighter_gobj)
 
 void func_ovl3_8014A5AC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFLanding, 0.0F, 1.0F, 0x80U);

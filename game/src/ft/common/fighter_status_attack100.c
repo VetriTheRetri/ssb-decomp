@@ -28,10 +28,10 @@ void ftCommon_Attack100Start_ProcUpdate(GObj *fighter_gobj)
 // 0x8014F0F4
 void ftCommon_Attack100Start_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
-    if (func_ovl3_80146064(fighter_gobj) == FALSE)
+    if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
         switch (fp->ft_kind)
         {
@@ -101,7 +101,7 @@ void ftCommon_Attack100Start_KirbyUpdateGFX(Fighter_Struct *fp)
 // 0x8014F2A8
 void ftCommon_Attack100Loop_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->unk_dobj_0x78))
     {
@@ -121,7 +121,7 @@ void ftCommon_Attack100Loop_ProcUpdate(GObj *fighter_gobj)
 
             return;
         }
-        else if (func_ovl3_80146064(fighter_gobj) == FALSE)
+        else if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
         {
             fp->status_vars.common.attack100.is_goto_loop = FALSE;
         }
@@ -133,7 +133,7 @@ void ftCommon_Attack100Loop_ProcUpdate(GObj *fighter_gobj)
 // 0x8014F388
 void ftCommon_Attack100Loop_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) || (fp->input.pl.button_tap_prev & fp->input.button_mask_a))
     {
@@ -144,7 +144,7 @@ void ftCommon_Attack100Loop_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014F3C0
 void ftCommon_Attack100Loop_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     switch (fp->ft_kind)
@@ -181,7 +181,7 @@ void ftCommon_Attack100Loop_SetStatus(GObj *fighter_gobj)
 // 0x8014F45C
 void ftCommon_Attack100End_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     switch (fp->ft_kind)
@@ -217,9 +217,9 @@ void ftCommon_Attack100End_SetStatus(GObj *fighter_gobj)
 // 0x8014F4EC
 bool32 ftCommon_Attack100Start_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
-    s32 followup_count;
+    s32 inputs_req;
 
     if(!ftStatus_CheckAttack100Kind(fp))
     {
@@ -227,41 +227,41 @@ bool32 ftCommon_Attack100Start_CheckInterruptCommon(GObj *fighter_gobj)
     }
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) || (fp->input.pl.button_tap_prev & fp->input.button_mask_a))
     {
-        fp->attack1_followup_count++;
+        fp->attack1_input_count++;
 
         switch (fp->ft_kind)
         {
         case Ft_Kind_Fox:
         case Ft_Kind_PolyFox:
-            followup_count = 4;
+            inputs_req = 4;
             status_id = ftStatus_Common_Attack12;
             break;
 
         case Ft_Kind_Link:
         case Ft_Kind_PolyLink:
-            followup_count = 5;
+            inputs_req = 5;
             status_id = ftStatus_Common_Attack12;
             break;
 
         case Ft_Kind_Kirby:
         case Ft_Kind_PolyKirby:
-            followup_count = 4;
+            inputs_req = 4;
             status_id = ftStatus_Common_Attack12;
             break;
 
         case Ft_Kind_Purin:
         case Ft_Kind_PolyPurin:
-            followup_count = 4;
+            inputs_req = 4;
             status_id = ftStatus_Common_Attack12;
             break;
 
         case Ft_Kind_Captain:
         case Ft_Kind_PolyCaptain:
-            followup_count = 6;
+            inputs_req = 6;
             status_id = ftStatus_Captain_Attack13;
             break;
         }
-        if (fp->attack1_followup_count >= followup_count)
+        if (fp->attack1_input_count >= inputs_req)
         {
             if ((status_id == fp->status_info.status_id) && (fp->command_vars.flags.flag1 != 0))
             {

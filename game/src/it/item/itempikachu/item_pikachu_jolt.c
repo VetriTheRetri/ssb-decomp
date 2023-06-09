@@ -7,7 +7,7 @@
 
 bool32 jtgt_ovl3_80169390(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
@@ -21,7 +21,7 @@ bool32 jtgt_ovl3_80169390(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Vec3f pos;
     u32 unused[2];
 
@@ -75,7 +75,7 @@ bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016953C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -84,7 +84,7 @@ bool32 jtgt_ovl3_8016953C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016956C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -93,8 +93,8 @@ bool32 jtgt_ovl3_8016956C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801695B0(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITPIKACHUJOLT_LIFETIME;
 
@@ -114,7 +114,7 @@ GObj* func_ovl3_801695E4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->lifetime = ITPIKACHUJOLT_LIFETIME;
 
@@ -135,7 +135,7 @@ void func_ovl3_80169654(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801696A0(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (item_gobj->anim_frame == ITPIKACHUJOLT_ANIM_PUSH_FRAME)
     {
@@ -180,7 +180,7 @@ bool32 jtgt_ovl3_801696A0(GObj *item_gobj)
 
 s32 func_ovl3_8016981C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Vec3f pos;
     Vec3f rotate;
     s32 line_id;
@@ -297,7 +297,7 @@ s32 func_ovl3_8016981C(GObj *item_gobj)
 
 bool32 func_ovl3_80169BF0(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Vec3f rotate;
 
     func_ovl3_80169654(item_gobj);
@@ -328,7 +328,7 @@ bool32 func_ovl3_80169BF0(GObj *item_gobj)
 
 bool32 func_ovl3_80169D08(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     s32 coll_type;
     Vec3f pos;
     s32 line_id;
@@ -584,7 +584,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016A374(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -593,8 +593,8 @@ bool32 jtgt_ovl3_8016A374(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016A3A4(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITPIKACHUJOLT_LIFETIME;
 
@@ -620,7 +620,7 @@ GObj* func_ovl3_8016A42C(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
     {
         return NULL;
     }
-    new_ip = ItemGetStruct(new_gobj);
+    new_ip = itGetStruct(new_gobj);
 
     new_ip->item_vars.thunder_jolt.coll_type = coll_type;
 

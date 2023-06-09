@@ -2,11 +2,11 @@
 
 void func_ovl3_8014AAF0(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
+        Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
         if ((capture_fp->ft_kind != Ft_Kind_Donkey) &&
         (capture_fp->ft_kind != Ft_Kind_PolyDonkey) &&
@@ -26,9 +26,9 @@ void func_ovl3_8014AB64(GObj *fighter_gobj)
 
 void func_ovl3_8014AB8C(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     Vec3f *this_pos = &DObjGetStruct(fighter_gobj)->translate;
     s32 unused[3];
     f32 dist_y;
@@ -47,8 +47,8 @@ void func_ovl3_8014AB8C(GObj *fighter_gobj)
 
 void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_queue)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
     this_fp->ground_or_air = air;
     this_fp->jumps_used = 1;
@@ -62,15 +62,15 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_que
 
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
     this_fp->status_vars.common.thrown.status_id = status_id_queue;
 }
 
 void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
     this_fp->ground_or_air = air;
     this_fp->jumps_used = 1;
@@ -84,7 +84,7 @@ void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
 
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
     if ((capture_fp->ft_kind == Ft_Kind_Mario)  ||
     (capture_fp->ft_kind == Ft_Kind_MetalMario) ||

@@ -4,8 +4,8 @@
 // 0x8014A5F0
 void ftCommon_CapturePulled_BitmapRotateScale(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
     DObj *joint = DObjGetStruct(fighter_gobj)->next;
     HAL_Bitmap capture;
 
@@ -22,7 +22,7 @@ void ftCommon_CapturePulled_BitmapRotateScale(GObj *fighter_gobj, Vec3f *this_po
 // 0x8014A6B4
 void ftCommon_Capture_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     ftCommon_CapturePulled_BitmapRotateScale(fighter_gobj, &pos, &DObjGetStruct(fighter_gobj)->rotate);
@@ -39,9 +39,9 @@ void ftCommon_Capture_ProcPhysics(GObj *fighter_gobj)
 // 0x8014A72C
 void ftCommon_CapturePulled_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     Vec3f *this_pos = &DObjGetStruct(fighter_gobj)->translate;
     Vec3f capture_pos;
     f32 dist_y;
@@ -85,13 +85,13 @@ void ftCommon_CapturePulled_ProcMap(GObj *fighter_gobj)
 // 0x8014A860
 void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
     Vec3f vel;
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((this_fp->item_hold != NULL) && !(ArticleGetStruct(this_fp->item_hold)->is_light_throw))
+    if ((this_fp->item_hold != NULL) && !(atGetStruct(this_fp->item_hold)->is_light_throw))
     {
         vel.x = vel.y = vel.z = 0.0F;
 
@@ -111,7 +111,7 @@ void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->capture_gobj = capture_gobj;
 
-    capture_fp = FighterGetStruct(capture_gobj);
+    capture_fp = ftGetStruct(capture_gobj);
 
     this_fp->lr = -capture_fp->lr;
 
@@ -120,7 +120,7 @@ void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->status_vars.common.capture.is_goto_pulled_wait = FALSE;
 
-    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
     func_ovl2_800E806C(this_fp, 9, 0);
     func_ovl2_800D9444(fighter_gobj);
     ftCommon_Capture_ProcPhysics(fighter_gobj);
@@ -130,9 +130,9 @@ void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 // 0x8014A980
 void ftCommon_CaptureWait_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     Vec3f *this_pos = &DObjGetStruct(fighter_gobj)->translate;
     Vec3f capture_pos;
     f32 dist_y;
@@ -166,8 +166,8 @@ void ftCommon_CaptureWait_ProcMap(GObj *fighter_gobj)
 // 0x8014AA58
 void ftCommon_CaptureWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp = FighterGetStruct(this_fp->capture_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWait, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
 
@@ -177,5 +177,5 @@ void ftCommon_CaptureWait_SetStatus(GObj *fighter_gobj)
 
         ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
-    ftCommon_SetCatchIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 }

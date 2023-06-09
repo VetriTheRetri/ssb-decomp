@@ -304,7 +304,7 @@ typedef struct _Item_Struct
 
 } Item_Struct;
 
-#define ItemGetStruct(item_gobj) \
+#define itGetStruct(item_gobj) \
 ((Item_Struct*)item_gobj->user_data) \
 
 #endif

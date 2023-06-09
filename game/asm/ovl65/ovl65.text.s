@@ -1106,10 +1106,10 @@ glabel func_ovl65_8018D60C
   .L8018E068:
   /* 10C8C8 8018E068 5420FFED */      bnel $at, $zero, .L8018E020
   /* 10C8CC 8018E06C 8EC20000 */        lw $v0, ($s6) # Match_Info + 0
-  /* 10C8D0 8018E070 3C018019 */       lui $at, %hi(D_ovl65_801936A8)
-  /* 10C8D4 8018E074 A02036A8 */        sb $zero, %lo(D_ovl65_801936A8)($at)
-  /* 10C8D8 8018E078 3C018019 */       lui $at, %hi(D_ovl65_801936A9)
-  /* 10C8DC 8018E07C A02036A9 */        sb $zero, %lo(D_ovl65_801936A9)($at)
+  /* 10C8D0 8018E070 3C018019 */       lui $at, %hi(gmBonusStat_TomatoPickupCount)
+  /* 10C8D4 8018E074 A02036A8 */        sb $zero, %lo(gmBonusStat_TomatoPickupCount)($at)
+  /* 10C8D8 8018E078 3C018019 */       lui $at, %hi(gmBonusStat_HeartPickupCount)
+  /* 10C8DC 8018E07C A02036A9 */        sb $zero, %lo(gmBonusStat_HeartPickupCount)($at)
   /* 10C8E0 8018E080 3C018019 */       lui $at, %hi(D_ovl65_801936AA)
   /* 10C8E4 8018E084 A02036AA */        sb $zero, %lo(D_ovl65_801936AA)($at)
   /* 10C8E8 8018E088 3C018019 */       lui $at, %hi(gmBonusStat_ShieldBreaker)
@@ -1575,7 +1575,7 @@ glabel func_ovl65_8018E670
   /* 10CFB4 8018E754 00004812 */      mflo $t1
   /* 10CFB8 8018E758 01095021 */      addu $t2, $t0, $t1
   /* 10CFBC 8018E75C 8D500078 */        lw $s0, 0x78($t2)
-  /* 10CFC0 8018E760 0C04F6F8 */       jal func_ovl3_8013DBE0
+  /* 10CFC0 8018E760 0C04F6F8 */       jal ftCommon_Appear_SetStatus
   /* 10CFC4 8018E764 02002025 */        or $a0, $s0, $zero
   /* 10CFC8 8018E768 17D70010 */       bne $fp, $s7, .L8018E7AC
   /* 10CFCC 8018E76C 2404001E */     addiu $a0, $zero, 0x1e
@@ -1662,12 +1662,12 @@ glabel func_ovl65_8018E824
   /* 10D0F4 8018E894 03194021 */      addu $t0, $t8, $t9
   /* 10D0F8 8018E898 16090005 */       bne $s0, $t1, .L8018E8B0
   /* 10D0FC 8018E89C 8D040078 */        lw $a0, 0x78($t0)
-  /* 10D100 8018E8A0 0C04F6F8 */       jal func_ovl3_8013DBE0
+  /* 10D100 8018E8A0 0C04F6F8 */       jal ftCommon_Appear_SetStatus
   /* 10D104 8018E8A4 00000000 */       nop 
   /* 10D108 8018E8A8 10000003 */         b .L8018E8B8
   /* 10D10C 8018E8AC 00000000 */       nop 
   .L8018E8B0:
-  /* 10D110 8018E8B0 0C04F778 */       jal func_ovl3_8013DDE0
+  /* 10D110 8018E8B0 0C04F778 */       jal ftCommon_Appear_SetPosition
   /* 10D114 8018E8B4 00000000 */       nop 
   .L8018E8B8:
   /* 10D118 8018E8B8 0C002C7A */       jal stop_current_process
@@ -1784,7 +1784,7 @@ glabel func_ovl65_8018E9A4
   .L8018EA58:
   /* 10D2B8 8018EA58 8C980084 */        lw $t8, 0x84($a0)
   /* 10D2BC 8018EA5C AFA40030 */        sw $a0, 0x30($sp)
-  /* 10D2C0 8018EA60 0C04F6F8 */       jal func_ovl3_8013DBE0
+  /* 10D2C0 8018EA60 0C04F6F8 */       jal ftCommon_Appear_SetStatus
   /* 10D2C4 8018EA64 AFB80034 */        sw $t8, 0x34($sp)
   /* 10D2C8 8018EA68 0C002C7A */       jal stop_current_process
   /* 10D2CC 8018EA6C 24040258 */     addiu $a0, $zero, 0x258
@@ -2497,7 +2497,7 @@ glabel func_ovl65_8018F240
   /* 10DCE8 8018F488 0C0433D1 */       jal func_ovl2_8010CF44
   /* 10DCEC 8018F48C 00000000 */       nop 
   /* 10DCF0 8018F490 02002025 */        or $a0, $s0, $zero
-  /* 10DCF4 8018F494 0C03A466 */       jal ftCommon_SetModelPartLoDAll
+  /* 10DCF4 8018F494 0C03A466 */       jal ftCommon_SetModelPartLevelDetailAll
   /* 10DCF8 8018F498 24050001 */     addiu $a1, $zero, 1
   /* 10DCFC 8018F49C 8FBF0024 */        lw $ra, 0x24($sp)
   /* 10DD00 8018F4A0 8FB00020 */        lw $s0, 0x20($sp)
@@ -3221,14 +3221,14 @@ glabel func_ovl65_8018FD5C
   /* 10E754 8018FEF4 17000026 */      bnez $t8, .L8018FF90
   /* 10E758 8018FEF8 00000000 */       nop 
   /* 10E75C 8018FEFC 932E001C */       lbu $t6, 0x1c($t9)
-  /* 10E760 8018FF00 3C0B8019 */       lui $t3, %hi(D_ovl65_801936A8)
+  /* 10E760 8018FF00 3C0B8019 */       lui $t3, %hi(gmBonusStat_TomatoPickupCount)
   /* 10E764 8018FF04 11C00022 */      beqz $t6, .L8018FF90
   /* 10E768 8018FF08 00000000 */       nop 
-  /* 10E76C 8018FF0C 916B36A8 */       lbu $t3, %lo(D_ovl65_801936A8)($t3)
-  /* 10E770 8018FF10 3C0C8019 */       lui $t4, %hi(D_ovl65_801936A9)
+  /* 10E76C 8018FF0C 916B36A8 */       lbu $t3, %lo(gmBonusStat_TomatoPickupCount)($t3)
+  /* 10E770 8018FF10 3C0C8019 */       lui $t4, %hi(gmBonusStat_HeartPickupCount)
   /* 10E774 8018FF14 1560001E */      bnez $t3, .L8018FF90
   /* 10E778 8018FF18 00000000 */       nop 
-  /* 10E77C 8018FF1C 918C36A9 */       lbu $t4, %lo(D_ovl65_801936A9)($t4)
+  /* 10E77C 8018FF1C 918C36A9 */       lbu $t4, %lo(gmBonusStat_HeartPickupCount)($t4)
   /* 10E780 8018FF20 3C0F8019 */       lui $t7, %hi(D_ovl65_801936AA)
   /* 10E784 8018FF24 1580001A */      bnez $t4, .L8018FF90
   /* 10E788 8018FF28 00000000 */       nop 
@@ -3261,11 +3261,11 @@ glabel func_ovl65_8018FD5C
   /* 10E7EC 8018FF8C AD4E002C */        sw $t6, 0x2c($t2) # Scene_Info + 44
   .L8018FF90:
   /* 10E7F0 8018FF90 3C038019 */       lui $v1, %hi(gmBonusStat_Defender_AttackGroupIndex_Count)
-  /* 10E7F4 8018FF94 3C0B8019 */       lui $t3, %hi(D_ovl65_801936A8)
-  /* 10E7F8 8018FF98 3C0C8019 */       lui $t4, %hi(D_ovl65_801936A9)
+  /* 10E7F4 8018FF94 3C0B8019 */       lui $t3, %hi(gmBonusStat_TomatoPickupCount)
+  /* 10E7F8 8018FF98 3C0C8019 */       lui $t4, %hi(gmBonusStat_HeartPickupCount)
   /* 10E7FC 8018FF9C 246337B0 */     addiu $v1, $v1, %lo(gmBonusStat_Defender_AttackGroupIndex_Count)
-  /* 10E800 8018FFA0 918C36A9 */       lbu $t4, %lo(D_ovl65_801936A9)($t4)
-  /* 10E804 8018FFA4 916B36A8 */       lbu $t3, %lo(D_ovl65_801936A8)($t3)
+  /* 10E800 8018FFA0 918C36A9 */       lbu $t4, %lo(gmBonusStat_HeartPickupCount)($t4)
+  /* 10E804 8018FFA4 916B36A8 */       lbu $t3, %lo(gmBonusStat_TomatoPickupCount)($t3)
   /* 10E808 8018FFA8 24060001 */     addiu $a2, $zero, 1
   .L8018FFAC:
   /* 10E80C 8018FFAC 3C0F8019 */       lui $t7, %hi(gmBonusStat_ShieldBreaker)

@@ -1,18 +1,20 @@
 #include "fighter.h"
 
-void func_ovl3_801447E0(GObj *fighter_gobj, s32 status_id)
+// 0x801447E0
+void ftCommon_DownForwardOrBack_SetStatus(GObj *fighter_gobj, s32 status_id)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->x18F_flag_b4 = TRUE;
 }
 
-bool32 func_ovl3_8014482C(GObj *fighter_gobj)
+// 0x8014482C
+bool32 ftCommon_DownForwardOrBack_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (ABS(fp->input.pl.stick_range.x) >= FTCOMMON_DOWN_FORWARD_BACK_RANGE_MIN)
@@ -33,7 +35,7 @@ bool32 func_ovl3_8014482C(GObj *fighter_gobj)
             }
             else status_id = ftStatus_Common_DownBackU;
 
-            func_ovl3_801447E0(fighter_gobj, status_id);
+            ftCommon_DownForwardOrBack_SetStatus(fighter_gobj, status_id);
 
             return TRUE;
         }

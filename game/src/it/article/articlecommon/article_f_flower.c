@@ -4,7 +4,7 @@
 
 bool32 jtgt_ovl3_80175B20(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATFFLOWER_GRAVITY, ATFFLOWER_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -34,7 +34,7 @@ void func_ovl3_80175BB0(GObj *article_gobj)
 
 void func_ovl3_80175BE4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -49,7 +49,7 @@ void jtgt_ovl3_80175C28(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80175C50(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -60,7 +60,7 @@ bool32 jtgt_ovl3_80175C50(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80175C9C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -76,7 +76,7 @@ void jtgt_ovl3_80175CC4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80175CEC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -98,7 +98,7 @@ GObj* jtgt_ovl3_80175D60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         ap->at_multi = ATFFLOWER_AMMO_MAX;
 
@@ -111,7 +111,7 @@ GObj* jtgt_ovl3_80175D60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 jtgt_ovl3_80175DDC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
@@ -143,8 +143,8 @@ extern s32 D_ovl3_8018D044; // Something to do with GFX IDs; static (.bss)
 
 bool32 jtgt_ovl3_80175E84(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
     Vec3f *translate;
 
     ip->lifetime = ATFFLOWER_AMMO_LIFETIME;
@@ -170,7 +170,7 @@ GObj* func_ovl3_80175F48(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel.x = vel->x * ip->lr;
     ip->phys_info.vel.y = vel->y;
@@ -189,7 +189,7 @@ extern ArticleSpawnData D_ovl3_80189C60;
 
 void func_ovl3_8017604C(GObj *fighter_gobj, Vec3f *pos, s32 index, s32 ammo_sub)
 {
-    Article_Struct *ap = ArticleGetStruct(FighterGetStruct(fighter_gobj)->item_hold);
+    Article_Struct *ap = atGetStruct(ftGetStruct(fighter_gobj)->item_hold);
     Vec3f vel;
     f32 *flame_vel = (f32*)((uintptr_t)*D_ovl3_80189C60.p_file + (uintptr_t)&D_NF_00000360); // Linker thing
 

@@ -2,7 +2,7 @@
 
 void func_ovl3_8014D850(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.throwf.kneebend_anim_frame++;
@@ -21,7 +21,7 @@ void func_ovl3_8014D850(GObj *fighter_gobj)
 
 void func_ovl3_8014D8E4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl3_80146BE0(fighter_gobj) == FALSE)
     {
@@ -37,7 +37,7 @@ void func_ovl3_8014D8E4(GObj *fighter_gobj)
 
 void func_ovl3_8014D950(GObj *fighter_gobj, s32 input_source)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFKneeBend, 0.0F, 0.0F, 0.0F);
 
@@ -49,7 +49,7 @@ void func_ovl3_8014D950(GObj *fighter_gobj, s32 input_source)
 
 bool32 func_ovl3_8014D9B8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 input_source = func_ovl3_8013F474(fp);
 
     if (input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE)

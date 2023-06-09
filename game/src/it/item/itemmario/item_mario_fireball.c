@@ -6,7 +6,7 @@ extern ItemSpawnData Item_Fireball_Desc;
 
 bool32 jtgt_ovl3_80168540(GObj *item_gobj) // Animation
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint;
 
     if (func_ovl3_80167FE8(ip) != FALSE)
@@ -26,7 +26,7 @@ bool32 jtgt_ovl3_80168540(GObj *item_gobj) // Animation
 
 bool32 jtgt_ovl3_801685F0(GObj *item_gobj) // Collision
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Vec3f pos;
 
     func_ovl3_80167A58(item_gobj);
@@ -54,7 +54,7 @@ bool32 jtgt_ovl3_801686C0(GObj *item_gobj) // Hit target
 
 bool32 jtgt_ovl3_801686F8(GObj *item_gobj) // Hit shield at deflect angle
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
     func_ovl3_80167FA0(item_gobj);
@@ -64,8 +64,8 @@ bool32 jtgt_ovl3_801686F8(GObj *item_gobj) // Hit shield at deflect angle
 
 bool32 jtgt_ovl3_80168748(GObj *item_gobj) // Hit reflector
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = Item_Fireball_Attributes[ip->item_vars.fireball.index].lifetime;
 
@@ -78,7 +78,7 @@ bool32 jtgt_ovl3_80168748(GObj *item_gobj) // Hit reflector
 GObj *func_ovl3_801687A0(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create item
 {
 
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *item_gobj;
     Item_Struct *ip;
     f32 vel;
@@ -92,7 +92,7 @@ GObj *func_ovl3_801687A0(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create it
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->item_vars.fireball.index = index;
 

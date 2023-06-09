@@ -11,7 +11,7 @@ void ftCommon_CliffCatch_ProcUpdate(GObj *fighter_gobj)
 // 0x80144B54
 void ftCommon_CliffCommon_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *topn_joint = fp->joint[0], *transn_joint = fp->joint[1];
     Vec3f vel;
 
@@ -34,7 +34,7 @@ void ftCommon_CliffCommon_ProcMap(GObj *fighter_gobj)
 // 0x80144C24
 void ftCommon_CliffCatch_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
 
     ftMapCollide_SetGround(fp);
@@ -59,13 +59,13 @@ void ftCommon_CliffCatch_SetStatus(GObj *fighter_gobj)
 
     fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_CLIFFCOMMON);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_CLIFFCOMMON);
 }
 
 // 0x80144CF8
 void ftCommon_CliffCommon_ProcDamage(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ObjectColl *object_coll = &fp->coll_data.object_coll;
     Vec3f vel;
 
@@ -93,7 +93,7 @@ void ftCommon_CliffWait_ProcInterrupt(GObj *fighter_gobj)
 // 0x80144DF4
 void ftCommon_CliffWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -111,13 +111,13 @@ void ftCommon_CliffWait_SetStatus(GObj *fighter_gobj)
 
     fp->proc_damage = ftCommon_CliffCommon_ProcDamage;
 
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_CLIFFCOMMON);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_CLIFFCOMMON);
 }
 
 // 0x80144E84
 bool32 ftCommon_CliffWait_CheckFall(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.cliffwait.fall_wait--;
 

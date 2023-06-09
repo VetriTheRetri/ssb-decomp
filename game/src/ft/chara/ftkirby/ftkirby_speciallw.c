@@ -7,7 +7,7 @@ void func_ovl3_80161360(GObj *fighter_gobj)
 
 void func_ovl3_80161368(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->damage_resist < FTKIRBY_STONE_HEALTH_MID) // Apply color overlay based on remaining Stone HP
     {
@@ -34,7 +34,7 @@ void func_ovl3_80161368(GObj *fighter_gobj)
 
 void func_ovl3_8016141C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->is_damage_resist = TRUE;
 
@@ -61,7 +61,7 @@ f32 func_ovl3_80161478(Fighter_Struct *fp)
 
 bool32 func_ovl3_801614B4(GObj *fighter_gobj, bool32 is_allow_release)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (is_allow_release == TRUE)
     {
@@ -86,7 +86,7 @@ bool32 func_ovl3_801614B4(GObj *fighter_gobj, bool32 is_allow_release)
 
 void func_ovl3_80161530(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -100,7 +100,7 @@ void func_ovl3_80161530(GObj *fighter_gobj)
 
 void func_ovl3_80161598(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -113,7 +113,7 @@ void func_ovl3_80161598(GObj *fighter_gobj)
 
 void func_ovl3_801615E4(GObj *fighter_gobj, bool32 is_release)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fp->is_damage_resist) && (fp->command_vars.flags.flag1 != 0))
     {
@@ -171,7 +171,7 @@ extern f32 D_ovl2_8012C4E0[6];
 
 void func_ovl3_8016178C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     f32 temp_slide_angle;
     f32 ground_vel_x;
@@ -210,7 +210,7 @@ void func_ovl3_8016178C(GObj *fighter_gobj)
 
 void func_ovl3_801618C4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
@@ -222,7 +222,7 @@ void func_ovl3_801618C4(GObj *fighter_gobj)
 
 void func_ovl3_80161920(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
@@ -233,7 +233,7 @@ void func_ovl3_80161920(GObj *fighter_gobj)
 
 void func_ovl3_80161974(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
@@ -248,7 +248,7 @@ void func_ovl3_80161974(GObj *fighter_gobj)
 
 void func_ovl3_801619E0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -259,7 +259,7 @@ void func_ovl3_801619E0(GObj *fighter_gobj)
 
 void func_ovl3_80161A30(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -272,7 +272,7 @@ void func_ovl3_80161A30(GObj *fighter_gobj)
 
 void jtgt_ovl3_80161A94(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwStart, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -286,7 +286,7 @@ void jtgt_ovl3_80161A94(GObj *fighter_gobj)
 
 void jtgt_ovl3_80161AEC(GObj *fighter_gobj) // Unused
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwUnk, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -296,14 +296,14 @@ void jtgt_ovl3_80161AEC(GObj *fighter_gobj) // Unused
 
 void func_ovl3_80161B2C(GObj *fighter_gobj)
 {
-    ftMapCollide_SetAir(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetAir(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwEnd, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 }
 
 void jtgt_ovl3_80161B70(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     u32 armor_flag = fp->is_damage_resist;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwStart, 0.0F, 1.0F, 0x32U);
@@ -325,7 +325,7 @@ void jtgt_ovl3_80161B70(GObj *fighter_gobj)
 
 void func_ovl3_80161C0C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirLwHold, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

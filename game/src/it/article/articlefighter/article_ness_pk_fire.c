@@ -11,7 +11,7 @@ bool32 func_ovl3_80185350(GObj *article_gobj)
 bool32 func_ovl3_80185374(GObj *article_gobj)
 {
     s32 unused1[4];
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Effect_Info *effect = ap->article_vars.pk_fire.effect;
     atCommonAttributes *attributes;
     f32 lifetime_scale = ((ap->lifetime * (f32)0.5) / 100.0F) + (f32)0.5;
@@ -70,7 +70,7 @@ bool32 jtgt_ovl3_801855E4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80185614(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_80185374(article_gobj) == TRUE)
     {
@@ -97,7 +97,7 @@ bool32 jtgt_ovl3_80185688(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801856BC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->lifetime > 0)
     {
@@ -114,7 +114,7 @@ extern ArticleStatusDesc Article_PK_Fire_Status[];
 
 void func_ovl3_80185710(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     gmAttackFlags flags_hi;
     u16 flags_lw;
 
@@ -135,7 +135,7 @@ void func_ovl3_80185710(GObj *article_gobj)
 
 void func_ovl3_8018579C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     gmAttackFlags flags_hi;
     u16 flags_lw;
 
@@ -159,7 +159,7 @@ extern ArticleSpawnData Article_PK_Fire_Data;
 GObj* func_ovl3_80185824(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *article_gobj;
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Article_Struct *ap;
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
@@ -170,7 +170,7 @@ GObj* func_ovl3_80185824(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
     {
         return NULL;
     }
-    ap = ArticleGetStruct(article_gobj);
+    ap = atGetStruct(article_gobj);
 
     ap->owner_gobj = ip->owner_gobj;
 

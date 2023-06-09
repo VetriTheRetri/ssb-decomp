@@ -35,7 +35,7 @@ bool32 jtgt_ovl3_80168964(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016898C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -49,8 +49,8 @@ bool32 jtgt_ovl3_8016898C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80168A14(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
 
@@ -71,7 +71,7 @@ GObj* func_ovl3_80168A74(GObj *fighter_gobj, Vec3f *pos)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel.x = ip->lr * ITBLASTER_VEL_X;
 

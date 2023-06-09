@@ -2,7 +2,7 @@
 
 void func_ovl3_80159BD0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
@@ -26,7 +26,7 @@ void func_ovl3_80159BD0(GObj *fighter_gobj)
 
 void func_ovl3_80159CA4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
     f32 var;
 
@@ -51,7 +51,7 @@ void func_ovl3_80159CA4(GObj *fighter_gobj)
 
 void func_ovl3_80159D34(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuWait, 0.0F, 1.0F, 0U);

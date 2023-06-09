@@ -5,7 +5,7 @@
 // 0x80151550
 void ftPurin_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 == 1)
     {
@@ -17,9 +17,9 @@ void ftPurin_SpecialHi_ProcUpdate(GObj *fighter_gobj)
     }
     if (fp->status_info.status_id == ftStatus_Purin_SpecialHi)
     {
-        func_ovl2_800D94C4(fighter_gobj);
+        ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
     }
-    else func_ovl2_800D94E8(fighter_gobj);
+    else ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
 // 0x801515F0
@@ -37,14 +37,14 @@ void ftPurin_SpecialHi_ProcMap(GObj *fighter_gobj)
 // 0x80151614
 void ftPurin_SpecialAirHi_SwitchStatusGround(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(FighterGetStruct(fighter_gobj));
+    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialHi, fighter_gobj->anim_frame, 1.0F, FTPURIN_SPECIALHI_STATUPDATE_FLAGS);
 }
 
 // 0x80151654
 void ftPurin_SpecialHi_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, FTPURIN_SPECIALHI_STATUPDATE_FLAGS);

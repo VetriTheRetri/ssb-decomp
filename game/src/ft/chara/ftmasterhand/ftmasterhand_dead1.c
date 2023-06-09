@@ -11,7 +11,7 @@ void func_ovl3_8015AD74(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead1, 0.0F, 1.0F, 0U);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_air.z = 0.0F;
     fp->phys_info.vel_air.y = 0.0F;

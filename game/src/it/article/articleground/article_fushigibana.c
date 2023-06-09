@@ -7,7 +7,7 @@ extern ArticleSpawnData Article_Fushigibana_Data;
 
 void func_ovl3_80184440(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     ArticleHitDesc *hit_desc = (ArticleHitDesc *)((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
 
     if (ap->at_multi == hit_desc[ap->x340_flag_b0123].timer)
@@ -44,7 +44,7 @@ void func_ovl3_80184440(GObj *article_gobj)
 
 bool32 func_ovl3_801845B4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
@@ -101,7 +101,7 @@ GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
         joint = DObjGetStruct(article_gobj);
 
         ap->x340_flag_b0123 = 0;
@@ -134,7 +134,7 @@ GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_80184820(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel.x += ATFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
 
@@ -147,7 +147,7 @@ bool32 func_ovl3_80184820(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80184874(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE6E4(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage, ip->lr);
 
@@ -156,7 +156,7 @@ bool32 jtgt_ovl3_80184874(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801848BC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -174,8 +174,8 @@ bool32 jtgt_ovl3_801848BC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80184970(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
 
@@ -199,7 +199,7 @@ GObj *func_ovl3_801849EC(GObj *article_gobj, Vec3f *pos)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->lr = LEFT;
 

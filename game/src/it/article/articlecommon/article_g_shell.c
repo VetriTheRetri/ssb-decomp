@@ -4,7 +4,7 @@
 
 void func_ovl3_801785E0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
@@ -27,7 +27,7 @@ extern intptr_t D_NF_00006048;
 
 void func_ovl3_80178670(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     s32 unused[2];
 
@@ -44,7 +44,7 @@ void func_ovl3_80178704(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017871C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATGSHELL_GRAVITY, ATGSHELL_T_VEL);
 
@@ -60,7 +60,7 @@ bool32 func_ovl3_8017874C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80178774(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.shell.health == FALSE)
     {
@@ -75,7 +75,7 @@ extern ArticleStatusDesc Article_G_Shell_Status[];
 
 void func_ovl3_801787CC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80173F54(ap);
 
@@ -125,7 +125,7 @@ void func_ovl3_80178910(GObj *article_gobj)
 
 void func_ovl3_80178930(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
@@ -139,7 +139,7 @@ void func_ovl3_80178930(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017897C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->phys_info.vel.x = ap->damage_taken_recent * ATGSHELL_DAMAGE_MUL_NORMAL * (-ap->lr_damage);
 
@@ -191,7 +191,7 @@ bool32 jtgt_ovl3_80178AC4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80178AF8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATGSHELL_GRAVITY, ATGSHELL_T_VEL);
 
@@ -200,7 +200,7 @@ bool32 jtgt_ovl3_80178AF8(GObj *article_gobj)
 
 void jtgt_ovl3_80178B28(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_vars.shell.health = TRUE;
     ap->article_vars.shell.is_damage = TRUE;
@@ -210,7 +210,7 @@ void jtgt_ovl3_80178B28(GObj *article_gobj)
 
 void jtgt_ovl3_80178B60(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_vars.shell.health = TRUE;
     ap->article_vars.shell.is_damage = TRUE;
@@ -220,7 +220,7 @@ void jtgt_ovl3_80178B60(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80178B98(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_801785E0(article_gobj);
 
@@ -259,7 +259,7 @@ bool32 jtgt_ovl3_80178C10(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80178C6C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
@@ -278,7 +278,7 @@ bool32 jtgt_ovl3_80178C6C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80178CF8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->phys_info.vel.x += (ap->damage_taken_recent * ATGSHELL_DAMAGE_MUL_ADD * (-ap->lr_damage));
 
@@ -310,7 +310,7 @@ bool32 jtgt_ovl3_80178CF8(GObj *article_gobj)
 
 void func_ovl3_80178E04(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -351,7 +351,7 @@ void func_ovl3_80178EDC(GObj *article_gobj)
 
 void func_ovl3_80178F10(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->phys_info.vel.x > ATGSHELL_CLAMP_VEL_X)
     {
@@ -399,7 +399,7 @@ GObj* jtgt_ovl3_80178FDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->mobj->anim_frame = 1.0F;
 
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
 
         ap->article_hit.can_rehit = TRUE;
 

@@ -2,7 +2,7 @@
 
 void func_ovl3_8014DD00(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.throwff.is_turn != FALSE)
     {
@@ -29,7 +29,7 @@ void func_ovl3_8014DD00(GObj *fighter_gobj)
         fp->command_vars.flags.flag2 = 0;
         fp->catch_gobj = NULL;
 
-        ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
+        ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -39,23 +39,23 @@ void func_ovl3_8014DD00(GObj *fighter_gobj)
 
 void func_ovl3_8014DE30(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFF, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->status_vars.common.throwff.is_turn = FALSE;
 
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_8014DE80(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowAirFF, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
 void func_ovl3_8014DECC(GObj *fighter_gobj)
@@ -70,7 +70,7 @@ void func_ovl3_8014DEF0(GObj *fighter_gobj)
 
 void func_ovl3_8014DF14(GObj *fighter_gobj, bool32 is_turn)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
     u32 flags;
 
@@ -86,7 +86,7 @@ void func_ovl3_8014DF14(GObj *fighter_gobj, bool32 is_turn)
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, flags);
     ftAnim_Update(fighter_gobj);
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 
     fp->command_vars.flags.flag2 = 0;
 
@@ -102,7 +102,7 @@ void func_ovl3_8014DF14(GObj *fighter_gobj, bool32 is_turn)
 
 bool32 func_ovl3_8014DFA8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     bool32 is_turn = FALSE;
 
     if (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))

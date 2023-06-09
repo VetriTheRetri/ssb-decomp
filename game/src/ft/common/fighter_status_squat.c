@@ -43,7 +43,7 @@
 
 bool32 func_ovl3_80142E70(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.squat.is_allow_pass != FALSE)
     {
@@ -82,7 +82,7 @@ void func_ovl3_80142EFC(GObj *fighter_gobj)
 
 void func_ovl3_80143024(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -101,7 +101,7 @@ void func_ovl3_80143024(GObj *fighter_gobj)
 
 void func_ovl3_801430A8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -115,7 +115,7 @@ void func_ovl3_801430A8(GObj *fighter_gobj)
 
 bool32 func_ovl3_8014310C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
@@ -133,7 +133,7 @@ void func_ovl3_8014314C(GObj *fighter_gobj)
 
 void func_ovl3_8014329C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, 0U);
 
@@ -144,7 +144,7 @@ void func_ovl3_8014329C(GObj *fighter_gobj)
 
 void func_ovl3_801432F0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, 0U);
 
@@ -159,7 +159,7 @@ void func_ovl3_801432F0(GObj *fighter_gobj)
 
 bool32 func_ovl3_8014310C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
@@ -180,7 +180,7 @@ void func_ovl3_80143394(GObj *fighter_gobj)
 
 void func_ovl3_801434CC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_SquatRv, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -190,7 +190,7 @@ void func_ovl3_801434CC(GObj *fighter_gobj)
 
 bool32 func_ovl3_8014351C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y >= (FTCOMMON_SQUAT_STICK_RANGE_MIN + 4))
     {

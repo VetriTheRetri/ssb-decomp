@@ -32,7 +32,7 @@ f32 func_ovl3_8014D530(Fighter_Struct *fp, s32 status_id)
 
 void func_ovl3_8014D590(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (!ftStatus_CheckInterruptThrowFWalk(fighter_gobj))
     {
@@ -50,7 +50,7 @@ void func_ovl3_8014D590(GObj *fighter_gobj)
 
 void func_ovl3_8014D68C(GObj *fighter_gobj, f32 frame_begin)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, func_ovl3_8013E340(fp->input.pl.stick_range.x) + (ftStatus_Donkey_ThrowFWalkSlow - ftStatus_Common_WalkSlow), frame_begin, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

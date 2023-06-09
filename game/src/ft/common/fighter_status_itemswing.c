@@ -3,11 +3,11 @@
 
 void func_ovl3_80146C40(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(fp->item_hold);
+        Article_Struct *ap = atGetStruct(fp->item_hold);
 
         if (ap->at_kind == At_Kind_Harisen)
         {
@@ -20,7 +20,7 @@ void func_ovl3_80146C40(GObj *fighter_gobj)
 
 void func_ovl3_80146C98(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold != NULL)
     {
@@ -34,7 +34,7 @@ void func_ovl3_80146C98(GObj *fighter_gobj)
             }
         }
     }
-    func_ovl2_800D94C4(fighter_gobj);
+    ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
 const Vec3f Fighter_StarRodSwing_Star_Offset = { 0.0F, 200.0F, 0.0F };
@@ -42,7 +42,7 @@ const Vec3f Fighter_StarRodSwing_Dust_Offset = { 0.0F, 200.0F, 0.0F };
 
 void func_ovl3_80146CF4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap;
     f32 scale_mul;
     s32 unused;
@@ -51,7 +51,7 @@ void func_ovl3_80146CF4(GObj *fighter_gobj)
     {
         if (fp->command_vars.flags.flag1 != 0)
         {
-            ap = ArticleGetStruct(fp->item_hold);
+            ap = atGetStruct(fp->item_hold);
 
             if (ap->at_multi != 0)
             {
@@ -64,7 +64,7 @@ void func_ovl3_80146CF4(GObj *fighter_gobj)
     }
     if ((fp->item_hold != NULL) && (fp->command_vars.flags.flag0 != 0))
     {
-        ap = ArticleGetStruct(fp->item_hold);
+        ap = atGetStruct(fp->item_hold);
 
         if (ap->at_multi != 0)
         {
@@ -88,7 +88,7 @@ void func_ovl3_80146CF4(GObj *fighter_gobj)
         }
         fp->command_vars.flags.flag0 = 0;
     }
-    func_ovl2_800D94C4(fighter_gobj);
+    ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
 extern FighterItemSwing Fighter_ItemSwing_Desc[4]; // Warning: seems to blend into another struct, possibly part of main move logic table?
@@ -103,8 +103,8 @@ s32 Fighter_ItemSwing_Status[4][4] =
 
 void func_ovl3_80146E94(GObj *fighter_gobj, s32 swing_type)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    Article_Struct *ap = ArticleGetStruct(fp->item_hold);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    Article_Struct *ap = atGetStruct(fp->item_hold);
     s32 swing_item;
     s32 status_id;
     f32 anim_speed;

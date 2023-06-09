@@ -7,7 +7,7 @@
 // 0x80153950
 void ftNess_SpecialN_SpawnPKFire(GObj *fighter_gobj) // PK Fire setup
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
     f32 angle;
@@ -60,7 +60,7 @@ void ftNess_SpecialAirN_ProcMap(GObj *fighter_gobj)
 // 0x80153B08
 void ftNess_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
 
@@ -72,7 +72,7 @@ void ftNess_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80153B5C
 void ftNess_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
 
@@ -86,7 +86,7 @@ void ftNess_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 // 0x80153BB8
 void ftNess_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = FALSE;
     fp->proc_accessory = ftNess_SpecialN_SpawnPKFire;

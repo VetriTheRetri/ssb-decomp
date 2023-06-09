@@ -2,7 +2,7 @@
 
 void func_ovl3_80144700(GObj *fighter_gobj, s32 status_id)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == air)
     {
@@ -14,7 +14,7 @@ void func_ovl3_80144700(GObj *fighter_gobj, s32 status_id)
 
 bool32 func_ovl3_80144760(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->time_since_last_z < FTCOMMON_PASSIVE_BUFFER_FRAMES_MAX)

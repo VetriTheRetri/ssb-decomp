@@ -7,7 +7,7 @@ void func_ovl3_8015EDC0(GObj *fighter_gobj)
 
 void func_ovl3_8015EDE4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->command_vars.flags.flag0 != 0)
@@ -26,7 +26,7 @@ void func_ovl3_8015EDE4(GObj *fighter_gobj)
 
 void func_ovl3_8015EE4C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800D8FA8(fp, fp->attributes) == FALSE)
     {
@@ -36,7 +36,7 @@ void func_ovl3_8015EE4C(GObj *fighter_gobj)
 
 void func_ovl3_8015EE84(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 != 0U) && (fp->phys_info.vel_air.y <= 0.0F))
     {
@@ -61,7 +61,7 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
 
 void func_ovl3_8015EF5C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
     {
@@ -80,7 +80,7 @@ void func_ovl3_8015EF5C(GObj *fighter_gobj)
 
 void func_ovl3_8015EFD4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
     fp->command_vars.flags.flag1 = 0;
@@ -88,7 +88,7 @@ void func_ovl3_8015EFD4(GObj *fighter_gobj)
 
 void jtgt_ovl3_8015EFE4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = func_ovl3_8015EFD4;
 
@@ -101,7 +101,7 @@ void jtgt_ovl3_8015EFE4(GObj *fighter_gobj)
 
 void jtgt_ovl3_8015F04C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = func_ovl3_8015EFD4;
 
@@ -113,7 +113,7 @@ void jtgt_ovl3_8015F04C(GObj *fighter_gobj)
 
 void func_ovl3_8015F0A8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 vel_y_bak;
 
     if (ABSF(fp->phys_info.vel_air.x) > FTYOSHI_YOSHIBOMB_VEL_X_CLAMP)

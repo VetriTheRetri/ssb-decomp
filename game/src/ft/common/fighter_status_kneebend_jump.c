@@ -2,7 +2,7 @@
 
 void func_ovl3_8013F2A0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.kneebend.anim_frame += DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
@@ -21,7 +21,7 @@ void func_ovl3_8013F2A0(GObj *fighter_gobj)
 
 void func_ovl3_8013F334(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl3_80151160(fighter_gobj) == FALSE)
     {
@@ -37,7 +37,7 @@ void func_ovl3_8013F334(GObj *fighter_gobj)
 
 void func_ovl3_8013F3A0(GObj *fighter_gobj, s32 status_id, u32 input_source)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
 
@@ -83,7 +83,7 @@ s32 func_ovl3_8013F474(Fighter_Struct *fp)
 
 bool32 func_ovl3_8013F4D0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 input_source;
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
@@ -116,7 +116,7 @@ s32 func_ovl3_8013F53C(Fighter_Struct *fp)
 
 s32 func_ovl3_8013F598(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 input_source;
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
@@ -136,7 +136,7 @@ s32 func_ovl3_8013F598(GObj *fighter_gobj)
 
 bool32 func_ovl3_8013F604(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 input_source = func_ovl3_8013F474(fp);
 
     if ((input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE) && (fp->input.pl.button_hold & fp->input.button_mask_z))
@@ -195,7 +195,7 @@ void func_ovl3_8013F6A0(s32 stick_range_x, s32 *jump_vel_x, s32 *jump_vel_y, boo
 
 void func_ovl3_8013F880(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id;
     s32 vel_x, vel_y;

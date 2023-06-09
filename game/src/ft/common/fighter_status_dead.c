@@ -25,7 +25,7 @@ void func_ovl3_8013BC8C(Fighter_Struct *this_fp)
 
             if (fighter_gobj != NULL)
             {
-                Fighter_Struct *other_fp = FighterGetStruct(fighter_gobj);
+                Fighter_Struct *other_fp = ftGetStruct(fighter_gobj);
 
                 if ((!(Match_Info->match_rules & GMMATCH_GAMERULE_STOCK)) || (other_fp->stock_count != -1))
                 {
@@ -57,7 +57,7 @@ void ftCommon_Dead_UpdateScore(Fighter_Struct *this_fp)
 
         if (Match_Info->is_display_score)
         {
-            ifDisplayScoreFighter(FighterGetStruct(Match_Info->player_block[this_fp->damage_port_id].fighter_gobj), 1);
+            ifDisplayScoreFighter(ftGetStruct(Match_Info->player_block[this_fp->damage_port_id].fighter_gobj), 1);
         }
     }
     else Match_Info->player_block[this_fp->port_id].total_self_destruct++;
@@ -87,7 +87,7 @@ void ftCommon_Dead_UpdateScore(Fighter_Struct *this_fp)
 // 0x8013BF94
 void ftCommon_Dead_CheckRebirth(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (Match_Info->match_rules & GMMATCH_GAMERULE_STOCK)
     {
@@ -119,7 +119,7 @@ void ftCommon_Dead_CheckRebirth(GObj *fighter_gobj)
 // 0x8013C050
 void ftCommon_Dead_ResetCommonVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
     func_ovl2_800D7994(fighter_gobj);
@@ -137,7 +137,7 @@ void ftCommon_Dead_ResetCommonVars(GObj *fighter_gobj)
 // 0x8013C0B0
 void ftCommon_Dead_ClearSpecialStats(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->star_invincible_timer = 0;
     fp->is_stat_nodamage = TRUE;
@@ -149,7 +149,7 @@ void ftCommon_Dead_ClearSpecialStats(GObj *fighter_gobj)
 // 0x8013C0EC
 void ftCommon_Dead_UpdateRebirthWait(GObj *fighter_gobj) // Unused
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.dead.rebirth_wait--;
 
@@ -162,7 +162,7 @@ void ftCommon_Dead_UpdateRebirthWait(GObj *fighter_gobj) // Unused
 // 0x8013C120
 void ftCommon_Dead_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEAD_REBIRTH_WAIT;
 
@@ -189,7 +189,7 @@ void ftCommon_Dead_InitStatusVars(GObj *fighter_gobj)
 // 0x8013C1C4
 void ftCommon_DeadDown_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     u32 sfx_id;
 
@@ -227,7 +227,7 @@ void ftCommon_DeadDown_SetStatus(GObj *fighter_gobj)
 // 0x8013C30C
 void ftCommon_DeadRight_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     u32 sfx_id;
 
@@ -265,7 +265,7 @@ void ftCommon_DeadRight_SetStatus(GObj *fighter_gobj)
 // 0x8013C454
 void ftCommon_DeadLeft_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     u32 sfx_id;
 
@@ -302,7 +302,7 @@ void ftCommon_DeadLeft_SetStatus(GObj *fighter_gobj)
 // 0x8013C59C
 void ftCommon_DeadUpStar_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     switch (fp->command_vars.flags.flag1)
     {
@@ -368,7 +368,7 @@ void ftCommon_DeadUpStar_ProcUpdate(GObj *fighter_gobj)
 // 0x8013C740
 void ftCommon_DeadUpStar_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Dead_ResetCommonVars(fighter_gobj);
     ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpStar, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -396,7 +396,7 @@ void ftCommon_DeadUpStar_SetStatus(GObj *fighter_gobj)
 // 0x8013C80C
 void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 sfx_id;
 
     switch (fp->command_vars.flags.flag1)
@@ -487,7 +487,7 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
 // 0x8013CAAC
 void ftCommon_DeadUpFall_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Dead_ResetCommonVars(fighter_gobj);
     ftStatus_Update(fighter_gobj, ftStatus_Common_DeadUpFall, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -509,13 +509,13 @@ void ftCommon_DeadUpFall_SetStatus(GObj *fighter_gobj)
         func_800269C0(fp->attributes->deadup_sfx);
     }
     func_ovl2_800E827C(fighter_gobj, 0x13);
-    ftCommon_SetModelPartLoDAll(fighter_gobj, 1);
+    ftCommon_SetModelPartLevelDetailAll(fighter_gobj, 1);
 }
 
 // 0x8013CB7C
 bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f *pos = &fp->joint[0]->translate;
 
     if (fp->ft_kind == Ft_Kind_MasterHand)

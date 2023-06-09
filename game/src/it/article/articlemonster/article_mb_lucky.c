@@ -6,7 +6,7 @@ extern intptr_t D_NF_000100BC;
 
 void func_ovl3_80180FC0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->at_kind == At_Kind_Mb_Lucky)
@@ -23,7 +23,7 @@ void func_ovl3_80180FC0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181048(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMBLUCKY_GRAVITY, ATMBLUCKY_T_VEL);
 
@@ -32,7 +32,7 @@ bool32 jtgt_ovl3_80181048(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181074(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80173680(article_gobj);
 
@@ -53,7 +53,7 @@ extern ArticleStatusDesc Article_Mb_Lucky_Status[];
 
 void func_ovl3_801810E0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -63,7 +63,7 @@ void func_ovl3_801810E0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181124(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMBLUCKY_GRAVITY, ATMBLUCKY_T_VEL);
 
@@ -72,7 +72,7 @@ bool32 jtgt_ovl3_80181124(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181150(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80173680(article_gobj);
 
@@ -89,7 +89,7 @@ bool32 jtgt_ovl3_80181150(GObj *article_gobj)
 
 void func_ovl3_801811AC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_kind == At_Kind_Mb_Lucky)
     {
@@ -100,7 +100,7 @@ void func_ovl3_801811AC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
 {
-    Article_Struct *lucky_ap = ArticleGetStruct(lucky_gobj), *egg_ap;
+    Article_Struct *lucky_ap = atGetStruct(lucky_gobj), *egg_ap;
     DObj *joint = DObjGetStruct(lucky_gobj);
     GObj *egg_gobj;
     s32 unused;
@@ -129,7 +129,7 @@ bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
 
                 if (egg_gobj != NULL)
                 {
-                    egg_ap = ArticleGetStruct(egg_gobj);
+                    egg_ap = atGetStruct(egg_gobj);
 
                     func_800269C0(0xCAU);
 
@@ -163,7 +163,7 @@ bool32 jtgt_ovl3_80181368(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181390(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_vars.mb_lucky.egg_spawn_wait += ATMBLUCKY_EGG_SPAWN_WAIT_ADD;
 
@@ -177,7 +177,7 @@ void func_ovl3_801813A8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801813D0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.mb_lucky.lifetime == 0)
     {
@@ -190,7 +190,7 @@ bool32 jtgt_ovl3_801813D0(GObj *article_gobj)
 
 void func_ovl3_801813F8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_vars.mb_lucky.lifetime = ATMBLUCKY_LIFETIME;
 
@@ -201,7 +201,7 @@ void func_ovl3_801813F8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181430(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -216,7 +216,7 @@ bool32 jtgt_ovl3_80181430(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80181480(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -242,7 +242,7 @@ GObj *jtgt_ovl3_801814C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 

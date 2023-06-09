@@ -14,7 +14,7 @@
 
 void func_ovl3_8017FDC0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.spear.spear_spawn_wait <= 0)
@@ -52,7 +52,7 @@ extern intptr_t D_NF_0000E12C;
 
 void func_ovl3_8017FEB8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->at_multi = 0;
@@ -84,7 +84,7 @@ void func_ovl3_8017FF74(GObj *article_gobj)
 
 bool32 func_ovl3_8017FFA8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSPEAR_GRAVITY, ATSPEAR_T_VEL);
@@ -128,7 +128,7 @@ bool32 func_ovl3_8017FFA8(GObj *article_gobj)
 
 void func_ovl3_8018010C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->phys_info.vel.y = ATSPEAR_SWARM_CALL_VEL_Y;
 
@@ -144,7 +144,7 @@ void func_ovl3_8018010C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180194(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -157,7 +157,7 @@ bool32 jtgt_ovl3_80180194(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801801D8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -177,7 +177,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
 
         func_ovl3_8017279C(article_gobj);
 
@@ -213,7 +213,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_80180354(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if ((ip->lr == RIGHT) && ((Ground_Info->blastzone_right - ATSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
@@ -250,7 +250,7 @@ extern ItemSpawnData Item_Pippi_Swarm_Data;
 
 GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     GObj *item_gobj = func_ovl3_801655C8(article_gobj, ((at_kind == At_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, ITEM_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
@@ -260,7 +260,7 @@ GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->lr = -ap->lr;
 

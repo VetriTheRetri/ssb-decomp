@@ -303,15 +303,15 @@ GObj* func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
             break;
 
         case ARTICLE_MASK_SPAWN_FIGHTER:
-            func_ovl2_800DF058(article_gobj, FighterGetStruct(spawn_gobj)->coll_data.p_translate, &FighterGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF058(article_gobj, ftGetStruct(spawn_gobj)->coll_data.p_translate, &ftGetStruct(spawn_gobj)->coll_data);
             break;
 
         case ARTICLE_MASK_SPAWN_ITEM:
-            func_ovl2_800DF058(article_gobj, ItemGetStruct(spawn_gobj)->coll_data.p_translate, &ItemGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF058(article_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
             break;
 
         case ARTICLE_MASK_SPAWN_ARTICLE:
-            func_ovl2_800DF058(article_gobj, ArticleGetStruct(spawn_gobj)->coll_data.p_translate, &ArticleGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF058(article_gobj, atGetStruct(spawn_gobj)->coll_data.p_translate, &atGetStruct(spawn_gobj)->coll_data);
             break;
         }
     }
@@ -629,7 +629,7 @@ GObj* func_ovl3_8016F238(GObj *spawn_gobj, s32 index, Vec3f *pos, Vec3f *vel, u3
 
 void func_ovl3_8016F280(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     s32 i;
 
     for (i = 0; i < ap->article_hit.hitbox_count; i++)
@@ -669,7 +669,7 @@ void func_ovl3_8016F280(GObj *article_gobj)
 
 void func_ovl3_8016F3D4(GObj *article_gobj)
 {
-    Article_Struct *ip = ArticleGetStruct(article_gobj);
+    Article_Struct *ip = atGetStruct(article_gobj);
     ArticleHitArray *targets;
     Article_Hit *at_hit;
     s32 i;
@@ -704,7 +704,7 @@ void func_ovl3_8016F3D4(GObj *article_gobj)
 
 void func_ovl3_8016F534(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Vec3f *translate;
     DObj *joint;
 
@@ -1273,7 +1273,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
     Fighter_Hit *ft_hit;
     gmHitCollisionFlags fighter_victim_flags;
     Article_Hurt *at_hurt;
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Fighter_Struct *fp;
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_FIGHTER)
@@ -1288,7 +1288,7 @@ void func_ovl3_801705C4(GObj *article_gobj) // Check fighters for hit detection
 
                 if ((fighter_gobj != ap->owner_gobj) || (ap->is_damage_all))
                 {
-                    fp = FighterGetStruct(fighter_gobj);
+                    fp = ftGetStruct(fighter_gobj);
 
                     if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (((fp->throw_gobj != NULL) ? fp->throw_team : fp->team) != ap->team) || (ap->is_damage_all))
                     {
@@ -1369,7 +1369,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
     bool32 is_check_self;
     Article_Hurt *at_hurt;
 
-    this_ap = ArticleGetStruct(this_gobj);
+    this_ap = atGetStruct(this_gobj);
     this_hit = &this_ap->article_hit;
 
     if (this_ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ARTICLE)
@@ -1386,7 +1386,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
             }
             else
             {
-                other_ap = ArticleGetStruct(other_gobj);
+                other_ap = atGetStruct(other_gobj);
                 other_hit = &other_ap->article_hit;
 
                 if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
@@ -1493,7 +1493,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
     bool32 is_check_self;
     Article_Hurt *at_hurt;
 
-    ap = ArticleGetStruct(article_gobj);
+    ap = atGetStruct(article_gobj);
     at_hit = &ap->article_hit;
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
@@ -1504,7 +1504,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
         {
 
 
-            ip = ItemGetStruct(item_gobj);
+            ip = itGetStruct(item_gobj);
             it_hit = &ip->item_hit;
 
             if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))
@@ -1599,7 +1599,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
 
 void func_ovl3_80171080(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (!(ap->is_hold))
     {
@@ -1611,7 +1611,7 @@ void func_ovl3_80171080(GObj *article_gobj)
 
 void func_ovl3_801710C4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->damage_taken_recent != 0)
     {
@@ -1693,7 +1693,7 @@ next_check:
 
         ap->owner_gobj = ap->reflect_gobj;
 
-        fp = FighterGetStruct(ap->reflect_gobj);
+        fp = ftGetStruct(ap->reflect_gobj);
 
         ap->team = fp->team;
         ap->port_id = fp->port_id;
@@ -1738,7 +1738,7 @@ next_check:
 
 void func_ovl3_801713B0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl2_800E0880(&ap->colanim, article_gobj, 0, 0) != FALSE)
     {
@@ -1748,7 +1748,7 @@ void func_ovl3_801713B0(GObj *article_gobj)
 
 void func_ovl3_801713F4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->rotate.z += ap->rotate_speed;

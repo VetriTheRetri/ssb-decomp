@@ -7,7 +7,7 @@ void func_ovl3_80147BE0(GObj *fighter_gobj)
 
 void func_ovl3_80147BE8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -21,7 +21,7 @@ void func_ovl3_80147BE8(GObj *fighter_gobj)
 
 void func_ovl3_80147C50(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -34,7 +34,7 @@ void func_ovl3_80147C50(GObj *fighter_gobj)
 
 bool32 func_ovl3_80147CCC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((ftCommon_HammerCheckHold(fighter_gobj) != FALSE) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
@@ -47,7 +47,7 @@ bool32 func_ovl3_80147CCC(GObj *fighter_gobj)
 
 void func_ovl3_80147D30(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 vel_x, vel_y;
 
@@ -81,7 +81,7 @@ void func_ovl3_80147E34(GObj *fighter_gobj)
 
 bool32 func_ovl3_80147E7C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl3_80141E60(fp) != FALSE)
     {

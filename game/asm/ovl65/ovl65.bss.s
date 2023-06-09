@@ -55,9 +55,9 @@ glabel D_ovl65_801936A0
     .space 4
 glabel D_ovl65_801936A4
     .space 4
-glabel D_ovl65_801936A8
+glabel gmBonusStat_TomatoPickupCount
     .space 1
-glabel D_ovl65_801936A9
+glabel gmBonusStat_HeartPickupCount
     .space 1
 glabel D_ovl65_801936AA
     .space 1

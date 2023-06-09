@@ -2,7 +2,7 @@
 
 void func_ovl3_80144A10(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.rebound.rebound_timer--;
 
@@ -14,7 +14,7 @@ void func_ovl3_80144A10(GObj *fighter_gobj)
 
 void func_ovl3_80144A60(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Rebound, 0.0F, fp->status_vars.common.rebound.anim_speed, 0U);
 }
@@ -26,7 +26,7 @@ void func_ovl3_80144A90(GObj *fighter_gobj)
 
 void func_ovl3_80144AB0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 lr_rebound;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ReboundWait, 0.0F, 1.0F, 0U);

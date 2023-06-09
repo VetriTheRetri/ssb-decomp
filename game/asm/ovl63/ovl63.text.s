@@ -97,7 +97,7 @@ glabel func_ovl63_8018D1D4
   /* 18A800 8018D1F0 00000000 */       nop 
   /* 18A804 8018D1F4 8E110084 */        lw $s1, 0x84($s0)
   .L8018D1F8:
-  /* 18A808 8018D1F8 0C04F6F8 */       jal func_ovl3_8013DBE0
+  /* 18A808 8018D1F8 0C04F6F8 */       jal ftCommon_Appear_SetStatus
   /* 18A80C 8018D1FC 02002025 */        or $a0, $s0, $zero
   /* 18A810 8018D200 0C039FDA */       jal func_ovl2_800E7F68
   /* 18A814 8018D204 02002025 */        or $a0, $s0, $zero

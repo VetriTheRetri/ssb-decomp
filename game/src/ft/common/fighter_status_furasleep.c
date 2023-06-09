@@ -1,8 +1,9 @@
 #include "fighter.h"
 
-void func_ovl3_80149940(GObj *fighter_gobj)
+// 0x80149940
+void ftCommon_FuraSleep_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 breakout_wait;
 
     fp->breakout_wait--;
@@ -19,9 +20,10 @@ void func_ovl3_80149940(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801499A4(GObj *fighter_gobj)
+// 0x801499A4
+void ftCommon_FuraSleep_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 breakout_wait;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_FuraSleep, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -35,5 +37,5 @@ void func_ovl3_801499A4(GObj *fighter_gobj)
     breakout_wait += FTCOMMON_FURASLEEP_BREAKOUT_WAIT_MIN;
 
     ftCommon_Trap_InitBreakoutVars(fp, breakout_wait);
-    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_FURASLEEP_COLANIM_ID, 0);
+    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_FURASLEEP_COLANIM_ID, FTCOMMON_FURASLEEP_COLANIM_LENGTH);
 }

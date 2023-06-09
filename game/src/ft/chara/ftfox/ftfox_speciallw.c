@@ -16,7 +16,7 @@ void func_ovl3_8015CBA4(Fighter_Struct *fp)
     {
         if (fp->status_vars.fox.speciallw.effect_gobj != NULL)
         {
-            Effect_Struct *ep = EffectGetStruct(fp->status_vars.fox.speciallw.effect_gobj);
+            Effect_Struct *ep = efGetStruct(fp->status_vars.fox.speciallw.effect_gobj);
 
             ep->unk_ef_0x1C = fp->command_vars.flags.flag2;
         }
@@ -34,7 +34,7 @@ void func_ovl3_8015CBD4(Fighter_Struct *fp)
 
 void func_ovl3_8015CBEC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8015CBA4(fp);
     func_ovl3_8015CB80(fp);
@@ -51,7 +51,7 @@ void func_ovl3_8015CBEC(GObj *fighter_gobj)
 
 void func_ovl3_8015CC64(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 var;
 
@@ -74,7 +74,7 @@ void func_ovl3_8015CC64(GObj *fighter_gobj)
 
 void func_ovl3_8015CCE0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8015CBA4(fp);
     func_ovl3_8015CB80(fp);
@@ -97,7 +97,7 @@ void func_ovl3_8015CD5C(GObj *fighter_gobj)
 
 void func_ovl3_8015CD7C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->is_reflect = TRUE;
 }
@@ -116,7 +116,7 @@ void func_ovl3_8015CDCC(GObj *fighter_gobj)
 
 void func_ovl3_8015CE08(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->status_vars.fox.speciallw.release_lag <= 0) && (fp->status_vars.fox.speciallw.is_release != FALSE))
     {
@@ -136,7 +136,7 @@ void func_ovl3_8015CE08(GObj *fighter_gobj)
 
 void func_ovl3_8015CE8C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8015CBA4(fp);
     func_ovl3_8015CB80(fp);
@@ -150,7 +150,7 @@ void func_ovl3_8015CE8C(GObj *fighter_gobj)
 
 void func_ovl3_8015CEE8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->lr = fp->lr_reflect;
 
@@ -161,7 +161,7 @@ void func_ovl3_8015CEE8(GObj *fighter_gobj)
 
 void func_ovl3_8015CF50(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj* joint;
 
     fp->status_vars.fox.speciallw.turn_frames--;
@@ -180,7 +180,7 @@ void func_ovl3_8015CF50(GObj *fighter_gobj)
 
 void func_ovl3_8015CFC0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8015CBA4(fp);
     func_ovl3_8015CB80(fp);
@@ -195,7 +195,7 @@ void func_ovl3_8015CFC0(GObj *fighter_gobj)
 
 void func_ovl3_8015D01C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->is_reflect = TRUE;
     fp->status_vars.fox.speciallw.turn_frames = FTFOX_REFLECTOR_TURN_FRAMES;
@@ -218,7 +218,7 @@ void func_ovl3_8015D090(GObj *fighter_gobj)
 
 bool32 func_ovl3_8015D0CC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl3_8013E9D0(fighter_gobj) != FALSE)
     {
@@ -236,7 +236,7 @@ bool32 func_ovl3_8015D0CC(GObj *fighter_gobj)
 
 void func_ovl3_8015D130(GObj *fighter_gobj)
 {
-    func_ovl3_8015CBA4(FighterGetStruct(fighter_gobj));
+    func_ovl3_8015CBA4(ftGetStruct(fighter_gobj));
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -260,7 +260,7 @@ extern void *D_ovl2_80130E94;
 
 void func_ovl3_8015D1E0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *effect_gobj;
 
     fp->status_vars.fox.speciallw.release_lag = FTFOX_REFLECTOR_RELEASE_LAG;
@@ -288,7 +288,7 @@ void jtgt_ovl3_8015D250(GObj *fighter_gobj)
 
 void jtgt_ovl3_8015D290(GObj* fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirLwStart, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);

@@ -44,7 +44,7 @@ bool32 func_ovl3_80173480(Coll_Data *coll_data, s32 arg1, s32 arg2)
 
 bool32 func_ovl3_8017356C(GObj *article_gobj)
 {
-    return func_ovl2_800DA034(&ArticleGetStruct(article_gobj)->coll_data, func_ovl3_80173480, article_gobj, FALSE);
+    return func_ovl2_800DA034(&atGetStruct(article_gobj)->coll_data, func_ovl3_80173480, article_gobj, FALSE);
 }
 
 bool32 func_ovl3_801735A0(GObj *article_gobj, void (*proc_map)(GObj*))
@@ -60,7 +60,7 @@ bool32 func_ovl3_801735A0(GObj *article_gobj, void (*proc_map)(GObj*))
 
 bool32 func_ovl3_801735E0(Coll_Data *coll_data, GObj *article_gobj, s32 arg2)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (func_ovl2_800DB838(coll_data) != FALSE)
@@ -89,12 +89,12 @@ bool32 func_ovl3_801735E0(Coll_Data *coll_data, GObj *article_gobj, s32 arg2)
 
 bool32 func_ovl3_80173680(GObj *article_gobj)
 {
-    return func_ovl2_800DA034(&ArticleGetStruct(article_gobj)->coll_data, func_ovl3_801735E0, article_gobj, FALSE);
+    return func_ovl2_800DA034(&atGetStruct(article_gobj)->coll_data, func_ovl3_801735E0, article_gobj, FALSE);
 }
 
 bool32 func_ovl3_801736B4(Coll_Data *coll_data, GObj *article_gobj, u32 coll_flags)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (func_ovl2_800DB838(coll_data) != FALSE)
@@ -139,12 +139,12 @@ bool32 func_ovl3_801736B4(Coll_Data *coll_data, GObj *article_gobj, u32 coll_fla
 
 bool32 func_ovl3_801737B8(GObj *article_gobj, bool32 flag)
 {
-    return func_ovl2_800DA034(&ArticleGetStruct(article_gobj)->coll_data, func_ovl3_801736B4, article_gobj, flag);
+    return func_ovl2_800DA034(&atGetStruct(article_gobj)->coll_data, func_ovl3_801736B4, article_gobj, flag);
 }
 
 bool32 func_ovl3_801737EC(GObj *article_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Coll_Data *coll_data = &ap->coll_data;
     Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
     Vec3f mod_pos;
@@ -248,7 +248,7 @@ void func_ovl3_80173A48(Vec3f *arg0, Vec3f *arg1, f32 arg2)
 
 bool32 func_ovl3_80173B24(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(GObj*))
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
 
@@ -280,7 +280,7 @@ bool32 func_ovl3_80173B24(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(
 
 bool32 func_ovl3_80173C68(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(GObj*))
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
 
@@ -305,7 +305,7 @@ bool32 func_ovl3_80173C68(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(
 
 bool32 func_ovl3_80173D24(GObj *article_gobj, f32 mod_vel, f32 arg2, void (*cb)(GObj*))
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Coll_Data *coll_data = &ap->coll_data;
     bool32 is_collide_any = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_MAIN_ALL);
 

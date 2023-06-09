@@ -2,7 +2,7 @@
 
 void func_ovl3_8013F170(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -16,7 +16,7 @@ void func_ovl3_8013F170(GObj *fighter_gobj)
 
 void func_ovl3_8013F1C0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((func_ovl3_8013F598(fighter_gobj) == FALSE) && (fp->command_vars.flags.flag2 != 0))
     {
@@ -26,7 +26,7 @@ void func_ovl3_8013F1C0(GObj *fighter_gobj)
 
 void func_ovl3_8013F208(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_TurnRun, 0.0F, 1.0F, 0U);
 
@@ -36,7 +36,7 @@ void func_ovl3_8013F208(GObj *fighter_gobj)
 
 bool32 func_ovl3_8013F248(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.stick_range.x * fp->lr) <= FTCOMMON_TURNRUN_STICK_RANGE_MIN)
     {

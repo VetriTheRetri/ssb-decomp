@@ -1,8 +1,9 @@
 #include "fighter.h"
 
-void func_ovl3_801491D0(GObj *fighter_gobj)
+// 0x801491D0
+void ftCommon_Escape_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -21,25 +22,28 @@ void func_ovl3_801491D0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80149268(GObj *fighter_gobj)
+// 0x80149268
+void ftCommon_Escape_ProcInterrupt(GObj *fighter_gobj)
 {
     func_ovl3_80146B64(fighter_gobj);
 }
 
-void func_ovl3_80149288(GObj *fighter_gobj)
+// 0x80149288
+void ftCommon_Escape_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 }
 
-void func_ovl3_80149294(GObj *fighter_gobj, s32 status_id, s32 arg2)
+// 0x80149294
+void ftCommon_Escape_SetStatus(GObj *fighter_gobj, s32 status_id, s32 arg2)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_80149288;
+    fp->proc_status = ftCommon_Escape_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->x18F_flag_b4 = TRUE;
@@ -47,7 +51,8 @@ void func_ovl3_80149294(GObj *fighter_gobj, s32 status_id, s32 arg2)
     fp->status_vars.common.escape.unk_0x0 = arg2;
 }
 
-s32 func_ovl3_801492F8(Fighter_Struct *fp)
+// 0x801492F8
+s32 ftCommon_Escape_GetStatus(Fighter_Struct *fp)
 {
     if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_ESCAPE_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_ESCAPE_BUFFER_FRAMES_MAX))
     {
@@ -56,41 +61,44 @@ s32 func_ovl3_801492F8(Fighter_Struct *fp)
     else return -1;
 }
 
-bool32 func_ovl3_8014935C(GObj *fighter_gobj)
+// 0x8014935C
+bool32 ftCommon_Escape_CheckInterruptSpecialNDonkey(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    s32 status_id = func_ovl3_801492F8(fp);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    s32 status_id = ftCommon_Escape_GetStatus(fp);
 
     if (status_id != -1)
     {
-        func_ovl3_80149294(fighter_gobj, status_id, 0);
+        ftCommon_Escape_SetStatus(fighter_gobj, status_id, 0);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_801493A4(GObj *fighter_gobj)
+// 0x801493A4
+bool32 ftCommon_Escape_CheckInterruptDash(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_tap & fp->input.button_mask_z)
     {
-        func_ovl3_80149294(fighter_gobj, ftStatus_Common_EscapeF, 0);
+        ftCommon_Escape_SetStatus(fighter_gobj, ftStatus_Common_EscapeF, 0);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_801493EC(GObj *fighter_gobj)
+// 0x801493EC
+bool32 ftCommon_Escape_CheckInterruptGuard(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    s32 status_id = func_ovl3_801492F8(fp);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    s32 status_id = ftCommon_Escape_GetStatus(fp);
 
     if (status_id != -1)
     {
-        func_ovl3_80149294(fighter_gobj, status_id, 5);
+        ftCommon_Escape_SetStatus(fighter_gobj, status_id, 5);
 
         return TRUE;
     }

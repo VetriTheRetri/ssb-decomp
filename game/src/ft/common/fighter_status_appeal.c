@@ -3,7 +3,7 @@
 // 0x8014E6A0
 void ftCommon_Appeal_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 != 0) && (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
@@ -14,7 +14,7 @@ void ftCommon_Appeal_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014E6E0
 void ftCommon_Appeal_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby))
     {
@@ -31,7 +31,7 @@ void ftCommon_Appeal_SetStatus(GObj *fighter_gobj)
 // 0x8014E764
 bool32 ftCommon_Appeal_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_tap & fp->input.button_mask_l)
     {

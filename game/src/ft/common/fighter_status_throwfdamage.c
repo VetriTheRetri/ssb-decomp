@@ -4,7 +4,7 @@
 
 void func_ovl3_8014E050(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.throwfdamage.hitstun_timer -= 1.0F;
 
@@ -22,7 +22,7 @@ void func_ovl3_8014E050(GObj *fighter_gobj)
 
 void func_ovl3_8014E0E0(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     f32 knockback_resist = (this_fp->knockback_resist_status < this_fp->knockback_resist_passive) ? this_fp->knockback_resist_passive : this_fp->knockback_resist_status;
 
     this_fp->damage_knockback -= knockback_resist;
@@ -36,7 +36,7 @@ void func_ovl3_8014E0E0(GObj *fighter_gobj)
     if (this_fp->catch_gobj != NULL)
     {
         GObj *catch_gobj = this_fp->catch_gobj;
-        Fighter_Struct *capture_fp = FighterGetStruct(catch_gobj);
+        Fighter_Struct *capture_fp = ftGetStruct(catch_gobj);
 
         func_ovl3_8014AB64(catch_gobj);
         func_ovl2_800EB528(capture_fp->joint[0]);

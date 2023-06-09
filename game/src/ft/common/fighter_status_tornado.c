@@ -4,7 +4,7 @@
 
 void func_ovl3_801439D0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.tornado.release_wait++;
 
@@ -16,7 +16,7 @@ void func_ovl3_801439D0(GObj *fighter_gobj)
 
 void func_ovl3_80143A20(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *tornado_gobj = fp->status_vars.common.tornado.tornado_gobj;
     Vec3f pos = DObjGetStruct(tornado_gobj)->translate;
     Vec3f vel;
@@ -47,12 +47,12 @@ void func_ovl3_80143A20(GObj *fighter_gobj)
 
 void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((fp->item_hold != NULL) && !(ArticleGetStruct(fp->item_hold)->is_light_throw))
+    if ((fp->item_hold != NULL) && !(atGetStruct(fp->item_hold)->is_light_throw))
     {
         vel.x = vel.y = vel.z = 0.0F;
 
@@ -79,7 +79,7 @@ void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
     fp->status_vars.common.tornado.release_wait = 0;
     fp->status_vars.common.tornado.tornado_gobj = tornado_gobj;
 
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     func_800269C0(0x11CU);
 }
 
@@ -88,7 +88,7 @@ extern intptr_t D_NF_000000BC;
 
 void func_ovl3_80143CC4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftThrowHitDesc *tornado = (ftThrowHitDesc*) (((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
     f32 knockback;
     s32 damage;

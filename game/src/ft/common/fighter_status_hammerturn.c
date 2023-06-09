@@ -2,7 +2,7 @@
 
 void func_ovl3_80147A70(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -20,7 +20,7 @@ void func_ovl3_80147A70(GObj *fighter_gobj)
 
 void func_ovl3_80147AD0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_80147A70(fighter_gobj);
 
@@ -37,7 +37,7 @@ void func_ovl3_80147B14(GObj *fighter_gobj)
 
 void func_ovl3_80147B34(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = FTCOMMON_HAMMER_TURN_FRAMES;
 

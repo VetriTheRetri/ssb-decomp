@@ -2,7 +2,7 @@
 
 void func_ovl3_8014ADB0(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *interact_gobj;
     Fighter_Struct *interact_fp;
     Vec3f pos;
@@ -13,7 +13,7 @@ void func_ovl3_8014ADB0(GObj *fighter_gobj)
     }
     else interact_gobj = this_fp->capture_gobj;
 
-    interact_fp = FighterGetStruct(interact_gobj);
+    interact_fp = ftGetStruct(interact_gobj);
 
     if ((this_fp->status_info.status_id >= ftStatus_Common_ThrownDonkeyF) && (this_fp->status_info.status_id <= ftStatus_Common_ThrownFoxB))
     {
@@ -35,8 +35,8 @@ void func_ovl3_8014ADB0(GObj *fighter_gobj)
 
 void func_ovl3_8014AECC(GObj *fighter_gobj, GObj *interact_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
-    Fighter_Struct *interact_fp = FighterGetStruct(interact_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    Fighter_Struct *interact_fp = ftGetStruct(interact_gobj);
 
     if (this_fp->x192_flag_b3)
     {
@@ -50,7 +50,7 @@ void func_ovl3_8014AECC(GObj *fighter_gobj, GObj *interact_gobj)
 
 void func_ovl3_8014AF2C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *interact_gobj = fp->catch_gobj;
 
     if (interact_gobj != NULL)
@@ -75,7 +75,7 @@ static s32 D_ovl3_8018CF80; // Static (.bss)
 
 void func_ovl3_8014AF98(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_ThrownUpdateEnemyInfo(fp, fp->capture_gobj);
 
@@ -84,9 +84,9 @@ void func_ovl3_8014AF98(GObj *fighter_gobj)
 
 void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_proc_status)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     ftThrowHitDesc *ft_throw;
     f32 knockback_final;
     s32 damage;
@@ -155,7 +155,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
 void func_ovl3_8014B2AC(Fighter_Struct *this_fp)
 {
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     ftThrowHitDesc *ft_throw = &capture_fp->fighter_throw[1];
     s32 damage = gmCommon_DamageApplyStale(capture_fp->port_id, ft_throw->damage, capture_fp->attack_id, capture_fp->motion_count);
 
@@ -166,9 +166,9 @@ void func_ovl3_8014B2AC(Fighter_Struct *this_fp)
 
 void func_ovl3_8014B330(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = FighterGetStruct(capture_gobj);
+    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     ftThrowHitDesc *ft_throw;
     f32 knockback_final;
     s32 lr;
@@ -229,7 +229,7 @@ ftThrowHitDesc Fighter_ThrowHitDesc_Default = { -1, 0, 361, 0, 0, 20, 0 };
 
 void func_ovl3_8014B5B4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftThrowHitDesc *ft_throw = &Fighter_ThrowHitDesc_Default;
     f32 knockback_calc;
     f32 knockback_resist;

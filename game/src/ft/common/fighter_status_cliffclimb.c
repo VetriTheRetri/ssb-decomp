@@ -3,7 +3,7 @@
 // 0x80144EE0
 void ftCommon_CliffQuick_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -27,7 +27,7 @@ void ftCommon_CliffQuick_ProcUpdate(GObj *fighter_gobj)
 // 0x80144F64
 void ftCommon_CliffSlow_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -51,7 +51,7 @@ void ftCommon_CliffSlow_ProcUpdate(GObj *fighter_gobj)
 // 0x80144FE8
 void ftCommon_CliffQuickOrSlow_SetStatus(GObj *fighter_gobj, s32 status_input)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
     s32 status_new;
 
@@ -74,7 +74,7 @@ void ftCommon_CliffQuickOrSlow_SetStatus(GObj *fighter_gobj, s32 status_input)
 
 bool32 ftCommon_CliffClimbOrFall_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN) || (ABS(fp->input.pl.stick_range.y) >= FTCOMMON_CLIFF_MOTION_STICK_RANGE_MIN))
     {
@@ -95,7 +95,7 @@ bool32 ftCommon_CliffClimbOrFall_CheckInterruptCommon(GObj *fighter_gobj)
             fp->cliffcatch_wait = FTCOMMON_CLIFF_CATCH_WAIT;
 
             ftCommon_CliffCommon_ProcDamage(fighter_gobj);
-            func_ovl3_8013F9E0(fighter_gobj);
+            ftCommon_Fall_SetStatus(fighter_gobj);
 
             return TRUE;
         }
@@ -121,7 +121,7 @@ void ftCommon_CliffClimbSlow1_ProcUpdate(GObj *fighter_gobj)
 // 0x801451F0
 void ftCommon_CliffClimbQuick1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbQuick1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -133,7 +133,7 @@ void ftCommon_CliffClimbQuick1_SetStatus(GObj *fighter_gobj)
 // 0x80145240
 void ftCommon_CliffClimbSlow1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffClimbSlow1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -151,7 +151,7 @@ void ftCommon_CliffCommon2_ProcUpdate(GObj *fighter_gobj)
 // 0x801452B4
 void ftCommon_CliffCommon2_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
     Vec3f *translate;
@@ -193,7 +193,7 @@ void ftCommon_CliffCommon2_ProcPhysics(GObj *fighter_gobj)
 // 0x801453F0
 void ftCommon_CliffClimbCommon2_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -208,7 +208,7 @@ void ftCommon_CliffClimbCommon2_ProcMap(GObj *fighter_gobj)
 // 0x80145440
 void ftCommon_CliffAttackEscape2_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -223,7 +223,7 @@ void ftCommon_CliffAttackEscape2_ProcMap(GObj *fighter_gobj)
 // 0x80145490
 void ftCommon_CliffCommon2_UpdateCollData(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Coll_Data *coll_data = &fp->coll_data;
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
@@ -255,7 +255,7 @@ void ftCommon_CliffCommon2_UpdateCollData(GObj *fighter_gobj)
 // 0x8014557C
 void ftCommon_CliffCommon2_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {

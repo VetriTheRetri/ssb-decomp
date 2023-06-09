@@ -2,7 +2,7 @@
 
 void func_ovl3_801643D0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f sp1C;
 
@@ -23,18 +23,18 @@ void func_ovl3_801643D0(GObj *fighter_gobj)
 void func_ovl3_80164434(GObj *fighter_gobj)
 {
     func_ovl3_801643D0(fighter_gobj);
-    func_ovl2_800D94C4(fighter_gobj);
+    ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
 void func_ovl3_8016445C(GObj *fighter_gobj)
 {
     func_ovl3_801643D0(fighter_gobj);
-    func_ovl2_800D94E8(fighter_gobj);
+    ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
 void func_ovl3_80164484(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
@@ -45,7 +45,7 @@ void func_ovl3_80164484(GObj *fighter_gobj)
 
 void func_ovl3_801644D4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -56,11 +56,11 @@ void func_ovl3_801644D4(GObj *fighter_gobj)
 
 bool32 func_ovl3_80164524(GObj *fighter_gobj, bool32 is_ground)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(fp->item_hold);
+        Article_Struct *ap = atGetStruct(fp->item_hold);
 
         if (ap->at_kind == At_Kind_Link_Bomb)
         {
@@ -79,7 +79,7 @@ bool32 func_ovl3_80164524(GObj *fighter_gobj, bool32 is_ground)
 
 void jtgt_ovl3_8016458C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl3_80164524(fighter_gobj, TRUE) != TRUE)
     {
@@ -92,7 +92,7 @@ void jtgt_ovl3_8016458C(GObj *fighter_gobj)
 
 void jtgt_ovl3_801645E8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl3_80164524(fighter_gobj, FALSE) != TRUE)
     {

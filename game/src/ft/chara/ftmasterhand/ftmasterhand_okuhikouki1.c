@@ -13,9 +13,9 @@ void func_ovl3_80159524(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okuhikouki1, 0.0F, 1.0F, 0U);
 
-    masterhand_fp = FighterGetStruct(fighter_gobj);
+    masterhand_fp = ftGetStruct(fighter_gobj);
 
-    target_fp = FighterGetStruct(masterhand_fp->fighter_vars.masterhand.p_masterhand->target_gobj);
+    target_fp = ftGetStruct(masterhand_fp->fighter_vars.masterhand.p_masterhand->target_gobj);
 
     var_a3 = ((target_fp->coll_data.ground_line_id != -1) && (target_fp->coll_data.ground_line_id != -2)) ? target_fp->coll_data.ground_line_id : masterhand_fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
 

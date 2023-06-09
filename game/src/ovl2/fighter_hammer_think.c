@@ -5,7 +5,7 @@
 // 0x800F36E0
 void ftCommon_HammerUpdateStats(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->hammer_timer != 0)
     {
@@ -40,9 +40,9 @@ void ftCommon_HammerUpdateStats(GObj *fighter_gobj)
 // 0x800F3794
 bool32 ftCommon_HammerCheckHold(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fp->item_hold != NULL) && (ArticleGetStruct(fp->item_hold)->at_kind == At_Kind_Hammer))
+    if ((fp->item_hold != NULL) && (atGetStruct(fp->item_hold)->at_kind == At_Kind_Hammer))
     {
         return TRUE;
     }
@@ -52,7 +52,7 @@ bool32 ftCommon_HammerCheckHold(GObj *fighter_gobj)
 // 0x800F37CC
 bool32 ftCommon_HammerCheckStatusID(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->status_info.status_id >= ftStatus_Common_HammerWait) && (fp->status_info.status_id <= ftStatus_Common_HammerLanding))
     {
@@ -64,7 +64,7 @@ bool32 ftCommon_HammerCheckStatusID(GObj *fighter_gobj)
 // 0x800F37FC
 bool32 ftCommon_HammerCheckScriptID(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->status_info.script_id == 0x84) || (fp->status_info.script_id == 0x85))
     {
@@ -100,7 +100,7 @@ u32 ftCommon_HammerGetStatUpdateFlags(GObj *fighter_gobj)
 // 0x800F388C
 void ftCommon_HammerCheckSetColAnim(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->colanim.colanim_id != FTCOMMON_HAMMER_COLANIM_ID)
     {
@@ -126,7 +126,7 @@ void ftCommon_HammerProcMap(GObj *fighter_gobj)
 // 0x800F3938
 void ftCommon_HammerWaitSetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == air)
     {

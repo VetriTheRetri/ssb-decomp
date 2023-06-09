@@ -23,7 +23,7 @@
 
 void func_ovl3_80142B70(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fighter_gobj->anim_frame < FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fp->status_vars.common.landing.is_allow_interrupt != FALSE) && !ftStatus_CheckInterruptLanding(fighter_gobj))
     {
@@ -42,7 +42,7 @@ void func_ovl3_80142B70(GObj *fighter_gobj)
 
 void func_ovl3_80142D44(GObj *fighter_gobj, s32 status_id, bool32 is_allow_interrupt, f32 anim_speed)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, status_id, 0.0F, anim_speed, 0U);
@@ -52,7 +52,7 @@ void func_ovl3_80142D44(GObj *fighter_gobj, s32 status_id, bool32 is_allow_inter
 
 void func_ovl3_80142D9C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->is_fast_fall) && (fp->phys_info.vel_air.y <= -fp->attributes->fast_fall_speed))
     {

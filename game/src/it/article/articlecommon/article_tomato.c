@@ -2,7 +2,7 @@
 
 bool32 jtgt_ovl3_801744C0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATTOMATO_GRAVITY, ATTOMATO_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -32,7 +32,7 @@ void func_ovl3_80174554(GObj *article_gobj)
 
 void func_ovl3_80174588(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -62,7 +62,7 @@ GObj* jtgt_ovl3_80174624(GObj *article_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (spawn_gobj != NULL)
     {
         joint = DObjGetStruct(spawn_gobj);
-        ap = ArticleGetStruct(spawn_gobj);
+        ap = atGetStruct(spawn_gobj);
         translate = joint->translate;
 
         func_80008CC0(joint, 0x2E, 0);

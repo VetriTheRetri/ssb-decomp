@@ -26,7 +26,7 @@ void func_ovl3_8014D478(GObj *fighter_gobj)
 
 void func_ovl3_8014D49C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == air)
     {

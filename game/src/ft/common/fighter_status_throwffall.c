@@ -10,7 +10,7 @@ void func_ovl3_8014DA00(GObj *fighter_gobj)
 
 void func_ovl3_8014DA30(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -24,7 +24,7 @@ void func_ovl3_8014DA30(GObj *fighter_gobj)
 
 void func_ovl3_8014DA98(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -36,7 +36,7 @@ void func_ovl3_8014DA98(GObj *fighter_gobj)
 
 void func_ovl3_8014DAF8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 vel_x;
     s32 vel_y;
@@ -69,7 +69,7 @@ void func_ovl3_8014DBE0(GObj *fighter_gobj)
 
 bool32 func_ovl3_8014DC08(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl3_80141E60(fp) != FALSE)
     {

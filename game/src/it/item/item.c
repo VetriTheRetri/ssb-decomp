@@ -76,7 +76,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
     switch (flags & ITEM_MASK_SPAWN_ALL)
     {
     case ITEM_MASK_SPAWN_FIGHTER: // Items spawned by fighters
-        fp = FighterGetStruct(spawn_gobj);
+        fp = ftGetStruct(spawn_gobj);
         ip->owner_gobj = spawn_gobj;
         ip->team = fp->team;
         ip->port_id = fp->port_id;
@@ -94,7 +94,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         break;
 
     case ITEM_MASK_SPAWN_ITEM: // Items spawned by other items
-        owner_ip = ItemGetStruct(spawn_gobj);
+        owner_ip = itGetStruct(spawn_gobj);
         ip->owner_gobj = owner_ip->owner_gobj;
         ip->team = owner_ip->team;
         ip->port_id = owner_ip->port_id;
@@ -112,7 +112,7 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
         break;
 
     case ITEM_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
-        ap = ArticleGetStruct(spawn_gobj);
+        ap = atGetStruct(spawn_gobj);
         ip->owner_gobj = ap->owner_gobj;
         ip->team = ap->team;
         ip->port_id = ap->port_id;
@@ -294,15 +294,15 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
             break;
 
         case ITEM_MASK_SPAWN_FIGHTER:
-            func_ovl2_800DF09C(item_gobj, FighterGetStruct(spawn_gobj)->coll_data.p_translate, &FighterGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF09C(item_gobj, ftGetStruct(spawn_gobj)->coll_data.p_translate, &ftGetStruct(spawn_gobj)->coll_data);
             break;
 
         case ITEM_MASK_SPAWN_ITEM:
-            func_ovl2_800DF09C(item_gobj, ItemGetStruct(spawn_gobj)->coll_data.p_translate, &ItemGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF09C(item_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
             break;
 
         case ITEM_MASK_SPAWN_ARTICLE:
-            func_ovl2_800DF09C(item_gobj, ArticleGetStruct(spawn_gobj)->coll_data.p_translate, &ArticleGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF09C(item_gobj, atGetStruct(spawn_gobj)->coll_data.p_translate, &atGetStruct(spawn_gobj)->coll_data);
             break;
         }
     }
@@ -327,7 +327,7 @@ void func_ovl3_80165ED0(DObj *joint, Vec3f *vec)
 
 void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     s32 i;
 
@@ -392,7 +392,7 @@ void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
 
 void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     ItemHitArray *targets;
     Item_Hit *it_hit;
     s32 i;
@@ -427,7 +427,7 @@ void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
 
 void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, physics, collision, despawn check)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Vec3f *translate;
     DObj *joint;
 
@@ -605,7 +605,7 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
         {
             do
             {
-                Item_Struct *victim_ip = ItemGetStruct(victim_gobj);
+                Item_Struct *victim_ip = itGetStruct(victim_gobj);
 
                 if (victim_ip->group_id == this_ip->group_id)
                 {
@@ -667,7 +667,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
     s32 m, n, i, j;
     bool32 is_check_self;
 
-    this_ip = ItemGetStruct(this_gobj);
+    this_ip = itGetStruct(this_gobj);
     this_hit = &this_ip->item_hit;
 
     if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
@@ -680,7 +680,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
         {
             do
             {
-                other_ip = ItemGetStruct(other_gobj);
+                other_ip = itGetStruct(other_gobj);
                 other_hit = &other_ip->item_hit;
 
                 if (other_gobj == this_gobj)
@@ -750,7 +750,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
 
 void func_ovl3_80166BE4(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if ((ip->hit_victim_damage != 0) || (ip->hit_reflect_damage != 0)) // 0x238 = hit article damage?
     {
@@ -814,7 +814,7 @@ next_check:
 
         ip->owner_gobj = ip->reflect_gobj;
 
-        fp = FighterGetStruct(ip->reflect_gobj);
+        fp = ftGetStruct(ip->reflect_gobj);
 
         ip->team = fp->team;
         ip->port_id = fp->port_id;

@@ -34,14 +34,14 @@ void func_ovl3_80167F08(Item_Struct *ip, u16 sfx_id) // Play OnDestroy SFX if ap
 
 void func_ovl3_80167F68(GObj *item_gobj) // Set item's facing direction based on velocity
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->lr = (ip->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
 }
 
 void func_ovl3_80167FA0(GObj *item_gobj) // Set yaw rotation based on velocity
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     DObjGetStruct(item_gobj)->rotate.y = (ip->phys_info.vel.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
 }
@@ -59,7 +59,7 @@ bool32 func_ovl3_80167FE8(Item_Struct *ip) // Decrement lifetime and check wheth
 
 void func_ovl3_8016800C(GObj *item_gobj) // Destroy item?
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl3_80167EB0(ip);     // Stop item's SFX
     func_ovl3_80165588(ip);     // Eject item's user_data from memory?
@@ -68,7 +68,7 @@ void func_ovl3_8016800C(GObj *item_gobj) // Destroy item?
 
 void func_ovl3_80168044(GObj *item_gobj) // Transfer item's base ground velocity to aerial velocity
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel.x = ip->lr * ip->coll_data.ground_angle.y * ip->phys_info.vel_ground;
     ip->phys_info.vel.y = ip->lr * -ip->coll_data.ground_angle.x * ip->phys_info.vel_ground;
@@ -120,7 +120,7 @@ void func_ovl3_80168158(Item_Struct *ip) // Clear hit victims array
 
 void func_ovl3_80168428(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Vec3f vel = ip->phys_info.vel, direction, angle, *rotate;
 
     direction.x = 0;

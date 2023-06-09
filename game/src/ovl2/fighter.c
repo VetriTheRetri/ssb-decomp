@@ -3,7 +3,7 @@
 
 void func_ovl2_800D78E8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 i;
 
     if (fp->is_statupdate_stop_gfx)
@@ -30,7 +30,7 @@ void func_ovl2_800D78E8(GObj *fighter_gobj)
 
 void func_ovl2_800D7994(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     switch (fp->ft_kind)
     {
@@ -52,7 +52,7 @@ extern void *D_ovl2_80131074; // Pointer to fighter files?
 
 void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     f32 scale;
 
@@ -525,7 +525,7 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
         }
         else
         {
-            func_ovl3_8013D930(fighter_gobj);
+            ftCommon_Entry_SetStatus(fighter_gobj);
             ftCommon_ResetControllerInputs(fighter_gobj);
         }
         break;

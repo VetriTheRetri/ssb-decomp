@@ -6,7 +6,7 @@ void func_ovl3_80159B00(GObj *fighter_gobj)
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_air.y += 50.0F;
 }
@@ -17,7 +17,7 @@ void func_ovl3_80159B3C(GObj *fighter_gobj)
 
     func_ovl2_800DE324(fighter_gobj);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     if (3000.0F <= -fp->coll_data.ground_dist)
     {

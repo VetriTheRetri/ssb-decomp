@@ -41,7 +41,7 @@ bool32 ftCommon_AttackHi4_CheckInterruptCommon(Fighter_Struct *fp)
 // 0x801506CC
 bool32 ftCommon_AttackHi4_CheckInterruptKneebend(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE)
     {
@@ -53,7 +53,7 @@ bool32 ftCommon_AttackHi4_CheckInterruptKneebend(GObj *fighter_gobj)
 // 0x8015070C
 bool32 ftCommon_AttackHi4_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE) && (fp->tap_stick_y < FTCOMMON_ATTACKHI4_BUFFER_FRAMES_MAX))
     {

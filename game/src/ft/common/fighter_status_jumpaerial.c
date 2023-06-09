@@ -3,7 +3,7 @@
 #include "ftpurin.h"
 
 // These arrays are strange, Kirby begins at .rodata padding 0x80188578, and index is never zero, but ends up using the correct values regardless???
-// If Kirby DOES beging at 0x80188578, that means his array accesses overflow into Jigglypuff's starting at index 0x4
+// If Kirby DOES begin at 0x80188578, that means his array accesses overflow into Jigglypuff's starting at index 0x4
 
 f32 Fighter_Kirby_JumpAerialVelY[ftStatus_Kirby_JumpAerialF5 - ftStatus_Kirby_JumpAerialF1] = { 60.0F, 52.0F, 47.0F, 40.0F };
 f32 Fighter_Purin_JumpAerialVelY[ftStatus_Purin_JumpAerialF5 - ftStatus_Purin_JumpAerialF1] = { 60.0F, 40.0F, 20.0F,  0.0F };
@@ -27,10 +27,10 @@ void func_ovl3_8013FA90(Fighter_Struct *fp)
 
 void func_ovl3_8013FB00(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8013FA90(fp);
-    func_ovl2_800D94E8(fighter_gobj);
+    ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
 void func_ovl3_8013FB2C(GObj *fighter_gobj)
@@ -43,7 +43,7 @@ void func_ovl3_8013FB2C(GObj *fighter_gobj)
 
 void func_ovl3_8013FB6C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     jtgt_ovl2_800D9414(fighter_gobj);
@@ -57,7 +57,7 @@ void func_ovl3_8013FB6C(GObj *fighter_gobj)
 
 void func_ovl3_8013FBC4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     f32 vel_x;
 
@@ -77,7 +77,7 @@ void func_ovl3_8013FBC4(GObj *fighter_gobj)
 
 void func_ovl3_8013FC4C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8DB0(fp);
@@ -107,7 +107,7 @@ void func_ovl3_8013FC4C(GObj *fighter_gobj)
 
 void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id = ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_JUMPAERIAL_F_OR_B_RANGE) ? ftStatus_Common_JumpAerialF : ftStatus_Common_JumpAerialB;
     s32 stick_range_y = GCONTROLLER_RANGE_MAX_I;
@@ -164,7 +164,7 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 
 void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id;
     s32 stick_range_x;
@@ -257,7 +257,7 @@ s32 func_ovl3_80140150(Fighter_Struct *fp)
 
 bool32 func_ovl3_8014019C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 input_source;
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)

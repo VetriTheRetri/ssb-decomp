@@ -23,7 +23,7 @@ void func_ovl3_80158784(GObj *fighter_gobj) // Unused
 
 void func_ovl3_801587B0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     s32 vel_x = (ABS(fp->input.pl.stick_range.x) >= 8) ? fp->input.pl.stick_range.x : 0;
     s32 vel_y = (ABS(fp->input.pl.stick_range.y) >= 8) ? fp->input.pl.stick_range.y : 0;
@@ -34,7 +34,7 @@ void func_ovl3_801587B0(GObj *fighter_gobj)
 
 void func_ovl3_80158824(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 angle;
     Fighter_Struct *fp_target;
     Vec3f sp30;
@@ -47,7 +47,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
 
     angle = ftCommon_GetStickAngleRadians(fp);
 
-    fp_target = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj);
+    fp_target = ftGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj);
 
     if (fp->input.pl.button_tap & fp->input.button_mask_b)
     {
@@ -129,7 +129,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
 
 void func_ovl3_80158C34(GObj *fighter_gobj) // Decide Master Hand's next attack
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     u32 random;
     u32 var;
@@ -159,8 +159,8 @@ void func_ovl3_80158C34(GObj *fighter_gobj) // Decide Master Hand's next attack
             }
             else fp->fighter_vars.masterhand.p_masterhand->unk_0x16++;
         }
-        if (FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id == -1 ||
-            FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id == -2)
+        if (ftGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id == -1 ||
+            ftGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id == -2)
             {
                 index_ptr = &D_ovl3_80188DE4[var * 2];
             }
@@ -239,7 +239,7 @@ void func_ovl3_80158C34(GObj *fighter_gobj) // Decide Master Hand's next attack
 
 void func_ovl3_80158F74(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_info.pl_kind == Pl_Kind_Human)
     {
@@ -250,7 +250,7 @@ void func_ovl3_80158F74(GObj *fighter_gobj)
 
 void func_ovl3_80158FB4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
     f32 magnitude;
 
@@ -280,7 +280,7 @@ void func_ovl3_80159040(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Wait, 0.0F, 1.0F, 0);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     translate = &DObjGetStruct(fighter_gobj)->translate;
 
@@ -291,7 +291,7 @@ void func_ovl3_80159040(GObj *fighter_gobj)
     }
     else
     {
-        ground_line_id = FighterGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id;
+        ground_line_id = ftGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->coll_data.ground_line_id;
 
         if ((ground_line_id == -1) || (ground_line_id == -2))
         {

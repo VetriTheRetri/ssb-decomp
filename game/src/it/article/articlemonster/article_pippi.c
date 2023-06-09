@@ -34,7 +34,7 @@ void func_ovl3_80183210(GObj *article_gobj)
 {
     s32 at_kind;
     s32 index;
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     index = rand_u16_range(At_Kind_MonsterEnd - At_Kind_MonsterStart);
@@ -76,7 +76,7 @@ extern Gfx *D_800465B0[4];
 
 void func_ovl3_80183344(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -109,7 +109,7 @@ void func_ovl3_80183344(GObj *article_gobj)
 
 void func_ovl3_80183344(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -142,7 +142,7 @@ void func_ovl3_80183344(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801835FC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -158,7 +158,7 @@ bool32 jtgt_ovl3_801835FC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80183650(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -178,7 +178,7 @@ GObj *jtgt_ovl3_80183690(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 

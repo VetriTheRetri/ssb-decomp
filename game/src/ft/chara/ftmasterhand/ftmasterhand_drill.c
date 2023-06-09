@@ -11,7 +11,7 @@ void func_ovl3_8015A0E4(GObj *fighter_gobj)
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.masterhand.drill.follow_timer--;
 
@@ -29,7 +29,7 @@ void func_ovl3_8015A138(GObj *fighter_gobj)
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     dist_x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x;
 
@@ -52,7 +52,7 @@ void func_ovl3_8015A138(GObj *fighter_gobj)
 
 void func_ovl3_8015A204(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
     if (fp->status_vars.masterhand.drill.pos_x2 < translate->x)

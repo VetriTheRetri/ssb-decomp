@@ -3,9 +3,9 @@
 
 void func_ovl3_80148E30(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOn, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOn, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     if (fp->shield_health != 0)
@@ -15,7 +15,7 @@ void func_ovl3_80148E30(GObj *fighter_gobj)
             fp->status_vars.common.guard.effect_gobj = func_ovl2_80101374(fighter_gobj);
 
             ftCommon_HideModelPartAll(fighter_gobj);
-            func_ovl3_80148214(fighter_gobj);
+            ftCommon_Guard_SetHitStatusYoshi(fighter_gobj);
         }
         else fp->status_vars.common.guard.effect_gobj = func_ovl2_80101108(fighter_gobj);
 
@@ -29,7 +29,7 @@ void func_ovl3_80148E30(GObj *fighter_gobj)
     fp->status_vars.common.guard.slide_frames = 0;
     fp->status_vars.common.guard.is_setoff = FALSE;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Guard, 0.0F, 1.0F, 0x34U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Guard, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 
     func_ovl3_8014889C(fighter_gobj);
 
@@ -38,7 +38,7 @@ void func_ovl3_80148E30(GObj *fighter_gobj)
 
 bool32 func_ovl3_80148F24(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
     {
@@ -51,9 +51,9 @@ bool32 func_ovl3_80148F24(GObj *fighter_gobj)
 
 void func_ovl3_80148F74(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_80148304(fighter_gobj);
+    ftCommon_Guard_UpdateShieldVars(fighter_gobj);
 
     if (fp->shield_health == 0)
     {
@@ -68,10 +68,10 @@ void func_ovl3_80148F74(GObj *fighter_gobj)
 
 void func_ovl3_80148FF0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     u32 flag = fp->is_shield;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOff, 0.0F, 1.0F, 0x34U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOff, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
 
     fp->is_shield = flag;
@@ -82,9 +82,9 @@ void func_ovl3_80148FF0(GObj *fighter_gobj)
 
 void func_ovl3_80149074(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_80148120(fp);
+    ftCommon_Guard_CheckScheduleRelease(fp);
 
     fp->status_vars.common.guard.setoff_frames--;
 
@@ -101,9 +101,9 @@ void func_ovl3_80149074(GObj *fighter_gobj)
 
 void func_ovl3_80149108(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardSetOff, 0.0F, 1.0F, 0x34U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardSetOff, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 
     fp->status_vars.common.guard.setoff_frames = (fp->shield_damage * FTCOMMON_GUARD_SETOFF_MUL) + FTCOMMON_GUARD_SETOFF_ADD;
 
@@ -111,7 +111,7 @@ void func_ovl3_80149108(GObj *fighter_gobj)
 
     if (fp->status_vars.common.guard.effect_gobj != NULL)
     {
-        Effect_Struct *ep = EffectGetStruct(fp->status_vars.common.guard.effect_gobj);
+        Effect_Struct *ep = efGetStruct(fp->status_vars.common.guard.effect_gobj);
 
         ep->unk_ef_0x1C = 1;
     }

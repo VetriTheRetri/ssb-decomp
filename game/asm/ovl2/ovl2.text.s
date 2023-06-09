@@ -2440,7 +2440,7 @@ glabel func_ovl2_800D7F3C
   /* 053F44 800D8744 10000006 */         b .L800D8760
   /* 053F48 800D8748 8EA20020 */        lw $v0, 0x20($s5)
   .L800D874C:
-  /* 053F4C 800D874C 0C04F64C */       jal func_ovl3_8013D930
+  /* 053F4C 800D874C 0C04F64C */       jal ftCommon_Entry_SetStatus
   /* 053F50 800D8750 8FA40060 */        lw $a0, 0x60($sp)
   /* 053F54 800D8754 0C039FC5 */       jal ftCommon_ResetControllerInputs
   /* 053F58 800D8758 8FA40060 */        lw $a0, 0x60($sp)
@@ -3443,7 +3443,7 @@ glabel ftAnim_IfAnimEnd_ProcStatus
   /* 054CBC 800D94BC 03E00008 */        jr $ra
   /* 054CC0 800D94C0 00000000 */       nop 
 
-glabel func_ovl2_800D94C4
+glabel ftCommon_IfAnimEnd_SetStatusWait
   /* 054CC4 800D94C4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 054CC8 800D94C8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 054CCC 800D94CC 3C058014 */       lui $a1, %hi(func_ovl3_8013E1C8)
@@ -3454,12 +3454,12 @@ glabel func_ovl2_800D94C4
   /* 054CE0 800D94E0 03E00008 */        jr $ra
   /* 054CE4 800D94E4 00000000 */       nop 
 
-glabel func_ovl2_800D94E8
+glabel ftCommon_IfAnimEnd_SetStatusFall
   /* 054CE8 800D94E8 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 054CEC 800D94EC AFBF0014 */        sw $ra, 0x14($sp)
-  /* 054CF0 800D94F0 3C058014 */       lui $a1, %hi(func_ovl3_8013F9E0)
+  /* 054CF0 800D94F0 3C058014 */       lui $a1, %hi(ftCommon_Fall_SetStatus)
   /* 054CF4 800D94F4 0C036520 */       jal ftAnim_IfAnimEnd_ProcStatus
-  /* 054CF8 800D94F8 24A5F9E0 */     addiu $a1, $a1, %lo(func_ovl3_8013F9E0)
+  /* 054CF8 800D94F8 24A5F9E0 */     addiu $a1, $a1, %lo(ftCommon_Fall_SetStatus)
   /* 054CFC 800D94FC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 054D00 800D9500 27BD0018 */     addiu $sp, $sp, 0x18
   /* 054D04 800D9504 03E00008 */        jr $ra
@@ -8548,9 +8548,9 @@ glabel func_ovl2_800DDE84
   glabel jtgt_ovl2_800DDEC4
   /* 0596C4 800DDEC4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 0596C8 800DDEC8 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 0596CC 800DDECC 3C058014 */       lui $a1, %hi(func_ovl3_8013F9E0)
+  /* 0596CC 800DDECC 3C058014 */       lui $a1, %hi(ftCommon_Fall_SetStatus)
   /* 0596D0 800DDED0 0C037777 */       jal func_ovl2_800DDDDC
-  /* 0596D4 800DDED4 24A5F9E0 */     addiu $a1, $a1, %lo(func_ovl3_8013F9E0)
+  /* 0596D4 800DDED4 24A5F9E0 */     addiu $a1, $a1, %lo(ftCommon_Fall_SetStatus)
   /* 0596D8 800DDED8 8FBF0014 */        lw $ra, 0x14($sp)
   /* 0596DC 800DDEDC 27BD0018 */     addiu $sp, $sp, 0x18
   /* 0596E0 800DDEE0 03E00008 */        jr $ra
@@ -8575,7 +8575,7 @@ glabel func_ovl2_800DDE84
   /* 059724 800DDF24 10000004 */         b .L800DDF38
   /* 059728 800DDF28 8FBF0014 */        lw $ra, 0x14($sp)
   .L800DDF2C:
-  /* 05972C 800DDF2C 0C04FE78 */       jal func_ovl3_8013F9E0
+  /* 05972C 800DDF2C 0C04FE78 */       jal ftCommon_Fall_SetStatus
   /* 059730 800DDF30 00000000 */       nop 
   .L800DDF34:
   /* 059734 800DDF34 8FBF0014 */        lw $ra, 0x14($sp)
@@ -8591,7 +8591,7 @@ glabel func_ovl2_800DDF44
   /* 059750 800DDF50 AFA40018 */        sw $a0, 0x18($sp)
   /* 059754 800DDF54 54400004 */      bnel $v0, $zero, .L800DDF68
   /* 059758 800DDF58 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 05975C 800DDF5C 0C04FE78 */       jal func_ovl3_8013F9E0
+  /* 05975C 800DDF5C 0C04FE78 */       jal ftCommon_Fall_SetStatus
   /* 059760 800DDF60 8FA40018 */        lw $a0, 0x18($sp)
   /* 059764 800DDF64 8FBF0014 */        lw $ra, 0x14($sp)
   .L800DDF68:
@@ -9649,7 +9649,7 @@ glabel func_ovl2_800DEE54
   /* 05A664 800DEE64 8C4E014C */        lw $t6, 0x14c($v0)
   /* 05A668 800DEE68 15C10005 */       bne $t6, $at, .L800DEE80
   /* 05A66C 800DEE6C 00000000 */       nop 
-  /* 05A670 800DEE70 0C04FE78 */       jal func_ovl3_8013F9E0
+  /* 05A670 800DEE70 0C04FE78 */       jal ftCommon_Fall_SetStatus
   /* 05A674 800DEE74 00000000 */       nop 
   /* 05A678 800DEE78 10000004 */         b .L800DEE8C
   /* 05A67C 800DEE7C 8FBF0014 */        lw $ra, 0x14($sp)
@@ -18799,7 +18799,7 @@ glabel ftStatus_Update
   /* 062794 800E6F94 8FAB0094 */        lw $t3, 0x94($sp)
   /* 062798 800E6F98 10AC0005 */       beq $a1, $t4, .L800E6FB0
   /* 06279C 800E6F9C AE2B0024 */        sw $t3, 0x24($s1)
-  /* 0627A0 800E6FA0 0C03A466 */       jal ftCommon_SetModelPartLoDAll
+  /* 0627A0 800E6FA0 0C03A466 */       jal ftCommon_SetModelPartLevelDetailAll
   /* 0627A4 800E6FA4 8FA40090 */        lw $a0, 0x90($sp)
   /* 0627A8 800E6FA8 922D000F */       lbu $t5, 0xf($s1)
   /* 0627AC 800E6FAC A22D000E */        sb $t5, 0xe($s1)
@@ -18978,7 +18978,7 @@ glabel ftStatus_Update
   /* 062A24 800E7224 A22E0190 */        sb $t6, 0x190($s1)
   /* 062A28 800E7228 31CF00FE */      andi $t7, $t6, 0xfe
   /* 062A2C 800E722C A22F0190 */        sb $t7, 0x190($s1)
-  /* 062A30 800E7230 0C03A026 */       jal ftCommon_SetCatchIgnoreMask
+  /* 062A30 800E7230 0C03A026 */       jal ftCommon_SetCaptureIgnoreMask
   /* 062A34 800E7234 00002825 */        or $a1, $zero, $zero
   /* 062A38 800E7238 92380191 */       lbu $t8, 0x191($s1)
   /* 062A3C 800E723C 24010003 */     addiu $at, $zero, 3
@@ -20007,7 +20007,7 @@ glabel func_ovl2_800E806C
   /* 063890 800E8090 03E00008 */        jr $ra
   /* 063894 800E8094 00000000 */       nop 
 
-glabel ftCommon_SetCatchIgnoreMask
+glabel ftCommon_SetCaptureIgnoreMask
   /* 063898 800E8098 AFA50004 */        sw $a1, 4($sp)
   /* 06389C 800E809C 03E00008 */        jr $ra
   /* 0638A0 800E80A0 A0850193 */        sb $a1, 0x193($a0)
@@ -21246,7 +21246,7 @@ glabel ftCommon_HideModelPartAll
   /* 064990 800E9190 03E00008 */        jr $ra
   /* 064994 800E9194 27BD0030 */     addiu $sp, $sp, 0x30
 
-glabel ftCommon_SetModelPartLoDAll
+glabel ftCommon_SetModelPartLevelDetailAll
   /* 064998 800E9198 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 06499C 800E919C AFBF002C */        sw $ra, 0x2c($sp)
   /* 0649A0 800E91A0 AFB50028 */        sw $s5, 0x28($sp)
@@ -67828,7 +67828,7 @@ glabel func_ovl2_80112880
   /* 08E118 80112918 4480A000 */      mtc1 $zero, $f20
   /* 08E11C 8011291C C4360C8C */      lwc1 $f22, %lo(D_ovl2_80130C8C)($at)
   .L80112920:
-  /* 08E120 80112920 0C04F6F8 */       jal func_ovl3_8013DBE0
+  /* 08E120 80112920 0C04F6F8 */       jal ftCommon_Appear_SetStatus
   /* 08E124 80112924 02002025 */        or $a0, $s0, $zero
   /* 08E128 80112928 16930010 */       bne $s4, $s3, .L8011296C
   /* 08E12C 8011292C 2404001E */     addiu $a0, $zero, 0x1e
@@ -69588,7 +69588,7 @@ glabel func_ovl2_8011403C
   /* 08FA34 80114234 924E000E */       lbu $t6, 0xe($s2)
   /* 08FA38 80114238 3C018013 */       lui $at, %hi(D_ovl2_801317E5)
   /* 08FA3C 8011423C 24050001 */     addiu $a1, $zero, 1
-  /* 08FA40 80114240 0C03A466 */       jal ftCommon_SetModelPartLoDAll
+  /* 08FA40 80114240 0C03A466 */       jal ftCommon_SetModelPartLevelDetailAll
   /* 08FA44 80114244 A02E17E5 */        sb $t6, %lo(D_ovl2_801317E5)($at)
   .L80114248:
   /* 08FA48 80114248 0C044FF1 */       jal func_ovl2_80113FC4
@@ -69899,7 +69899,7 @@ glabel func_ovl2_80114588
   /* 08FEB0 801146B0 00094880 */       sll $t1, $t1, 2
   /* 08FEB4 801146B4 03295021 */      addu $t2, $t9, $t1
   /* 08FEB8 801146B8 8D440078 */        lw $a0, 0x78($t2)
-  /* 08FEBC 801146BC 0C03A466 */       jal ftCommon_SetModelPartLoDAll
+  /* 08FEBC 801146BC 0C03A466 */       jal ftCommon_SetModelPartLevelDetailAll
   /* 08FEC0 801146C0 90A517E5 */       lbu $a1, %lo(D_ovl2_801317E5)($a1)
   .L801146C4:
   /* 08FEC4 801146C4 0C002979 */       jal func_8000A5E4

@@ -13,11 +13,12 @@
 #include "ftmasterhand.h"
 #include "gmground.h"
 
-void func_ovl3_8013D930(GObj *fighter_gobj)
+// 0x8013D930
+void ftCommon_Entry_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Entry, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Entry, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->is_invisible = TRUE;
     fp->x18E_flag_b0 = TRUE;
@@ -25,9 +26,10 @@ void func_ovl3_8013D930(GObj *fighter_gobj)
     fp->x18E_flag_b3 = TRUE;
 }
 
-void func_ovl3_8013D994(GObj *fighter_gobj)
+// 0x8013D994
+void ftCommon_Entry_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.entry.entry_wait != 0)
     {
@@ -53,9 +55,10 @@ void func_ovl3_8013D994(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013DA14(GObj *fighter_gobj)
+// 0x8013DA14
+void ftCommon_Entry_UpdateEffects(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -73,11 +76,12 @@ void func_ovl3_8013DA14(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013DA94(GObj *fighter_gobj)
+// 0x8013DA94
+void ftCommon_Appear_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8013DA14(fighter_gobj);
+    ftCommon_Entry_UpdateEffects(fighter_gobj);
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -95,9 +99,10 @@ void func_ovl3_8013DA94(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013DB2C(GObj *fighter_gobj)
+// 0x8013DB2C
+void ftCommon_Appear_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *topn_joint = fp->joint[0];
     DObj *transn_joint = fp->joint[1];
 
@@ -117,9 +122,10 @@ void func_ovl3_8013DB2C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013DBAC(GObj *fighter_gobj)
+// 0x8013DBAC
+void ftCommon_Appear_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->is_stat_nodamage = TRUE;
 
@@ -160,9 +166,10 @@ s32 Fighter_Status_EntryStatusIndex[Ft_Kind_EnumMax][2] =
     { ftStatus_Donkey_AppearR,       ftStatus_Donkey_AppearL        }  // Giant Donkey Kong
 };
 
-void func_ovl3_8013DBE0(GObj *fighter_gobj)
+// 0x8013DBE0
+void ftCommon_Appear_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
     s32 entry_id;
     GObj *mh_target_gobj;
@@ -233,9 +240,9 @@ void func_ovl3_8013DBE0(GObj *fighter_gobj)
 
         while (mh_target_gobj != NULL)
         {
-            if (mh_target_gobj != fighter_gobj)
+            if (mh_target_gobj != fighter_gobj) 
             {
-                break;
+                break;  // If Master Hand's GObj is not
             }
             else mh_target_gobj = mh_target_gobj->group_gobj_next;
         }
@@ -244,8 +251,8 @@ void func_ovl3_8013DBE0(GObj *fighter_gobj)
         break;
     }
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
-    func_ovl3_8013DBAC(fighter_gobj);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCommon_Appear_InitStatusVars(fighter_gobj);
 
     fp->status_vars.common.entry.entry_wait = FTCOMMON_ENTRY_WAIT;
 
@@ -259,9 +266,10 @@ void func_ovl3_8013DBE0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013DDE0(GObj *fighter_gobj)
+// 0x8013DDE0
+void ftCommon_Appear_SetPosition(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->x191_flag_b4567 = 3;
 
@@ -269,5 +277,5 @@ void func_ovl3_8013DDE0(GObj *fighter_gobj)
 
     DObjGetStruct(fighter_gobj)->translate.y = (Ground_Info->cam_bound_top + Ground_Info->blastzone_top) * 0.5F;
 
-    func_ovl3_8013F9E0(fighter_gobj);
+    ftCommon_Fall_SetStatus(fighter_gobj);
 }

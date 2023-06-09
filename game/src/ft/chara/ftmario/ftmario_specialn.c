@@ -9,7 +9,7 @@ void ftMario_SpecialN_ProcUpdate(GObj *fighter_gobj)
 // 0x80155E64
 void ftMario_SpecialN_SpawnFireball(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     s32 fireball_item_id; // 0 = Mario, 1 = Luigi
 
@@ -58,7 +58,7 @@ void ftMario_SpecialAirN_ProcMap(GObj *fighter_gobj)
 // 0x80155F4C
 void ftMario_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
 
@@ -70,7 +70,7 @@ void ftMario_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80155FA0
 void ftMario_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -82,7 +82,7 @@ void ftMario_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 // 0x80155FFC
 void ftMario_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = FALSE;
     fp->proc_accessory = ftMario_SpecialN_SpawnFireball;

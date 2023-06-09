@@ -1,13 +1,15 @@
 #include "fighter.h"
 
-void func_ovl3_80143730(GObj *fighter_gobj)
+// 0x80143730
+void ftCommon_FallSpecial_ProcInterrupt(GObj *fighter_gobj)
 {
     func_ovl3_8014019C(fighter_gobj);
 }
 
-void func_ovl3_80143750(GObj *fighter_gobj)
+// 0x80143750
+void ftCommon_FallSpecial_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8DB0(fp);
@@ -29,9 +31,10 @@ void func_ovl3_80143750(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl3_80143808(GObj *fighter_gobj)
+// 0x80143808
+bool32 ftCommon_FallSpecial_CheckIgnorePass(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->status_vars.common.fallspecial.is_allow_pass == FALSE) || !(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID) || (fp->input.pl.stick_range.y >= FTCOMMON_FALLSPECIAL_PASS_STICK_RANGE_MIN))
     {
@@ -40,11 +43,12 @@ bool32 func_ovl3_80143808(GObj *fighter_gobj)
     else return FALSE;
 }
 
-void func_ovl3_8014384C(GObj *fighter_gobj)
+// 0x8014384C
+void ftCommon_FallSpecial_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl2_800DE798(fighter_gobj, func_ovl3_80143808) != FALSE)
+    if (func_ovl2_800DE798(fighter_gobj, ftCommon_FallSpecial_CheckIgnorePass) != FALSE)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
@@ -58,12 +62,13 @@ void func_ovl3_8014384C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801438F0(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt)
+// 0x801438F0
+void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_FallSpecial, 0.0F, 1.0F, 8U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_FallSpecial, 0.0F, 1.0F, FTSTATUPDATE_FASTFALL_PRESERVE);
 
     fp->status_vars.common.fallspecial.drift = (attributes->aerial_speed_max_x * drift);
 

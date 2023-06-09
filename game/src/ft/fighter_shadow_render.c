@@ -78,7 +78,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 
     fighter_gobj = Match_Info->player_block[sp->port_id].fighter_gobj;
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     if (!(fp->is_invisible) && !(fp->x18E_flag_b0))
     {
@@ -413,7 +413,7 @@ GObj *func_ovl3_8013BB88(GObj *fighter_gobj)
 
     if (sp == NULL) return NULL;
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     sp->port_id = fp->port_id;
 

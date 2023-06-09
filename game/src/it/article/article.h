@@ -455,7 +455,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
 } Article_Struct;
 
-#define ArticleGetStruct(article_gobj) \
+#define atGetStruct(article_gobj) \
 ((Article_Struct*)article_gobj->user_data) \
 
 

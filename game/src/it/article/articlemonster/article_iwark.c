@@ -6,7 +6,7 @@
 
 void func_ovl3_8017D740(GObj *iwark_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(iwark_gobj);
+    Article_Struct *ap = atGetStruct(iwark_gobj);
     DObj *joint = DObjGetStruct(iwark_gobj);
 
     if (ap->article_vars.iwark.rock_spawn_wait <= 0)
@@ -21,7 +21,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
 
         if (rock_gobj != NULL)
         {
-            ip = ItemGetStruct(rock_gobj);
+            ip = itGetStruct(rock_gobj);
 
             ip->item_vars.rock.unk_0xC = ap->article_vars.iwark.rock_timer2 - ap->article_vars.iwark.rock_timer1;
 
@@ -38,7 +38,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
 
 bool32 func_ovl3_8017D820(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     f32 pos_y = Ground_Info->blastzone_top - ATIWARK_FLY_STOP_Y;
 
@@ -84,7 +84,7 @@ extern intptr_t D_NF_0000A640;
 
 void func_ovl3_8017D948(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     void *dl;
     Vec3f pos;
@@ -130,7 +130,7 @@ void func_ovl3_8017DA60(GObj *article_gobj)
 
 bool32 func_ovl3_8017DA94(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -143,7 +143,7 @@ bool32 func_ovl3_8017DA94(GObj *article_gobj)
 
 void func_ovl3_8017DAD8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi = ATIWARK_FLY_WAIT;
 
@@ -155,7 +155,7 @@ void func_ovl3_8017DAD8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017DB18(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -168,7 +168,7 @@ bool32 jtgt_ovl3_8017DB18(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017DB5C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -199,7 +199,7 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
@@ -218,8 +218,8 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_8017DCAC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Article_Struct *ap = ArticleGetStruct(ip->item_vars.rock.owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Article_Struct *ap = atGetStruct(ip->item_vars.rock.owner_gobj);
 
     ap->article_vars.iwark.rock_spawn_count++;
 
@@ -228,7 +228,7 @@ bool32 func_ovl3_8017DCAC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017DCCC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint;
 
     func_ovl3_80168088(ip, ATIWARK_ROCK_GRAVITY, ATIWARK_ROCK_T_VEL);
@@ -242,8 +242,8 @@ bool32 jtgt_ovl3_8017DCCC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017DD18(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Article_Struct *ap = ArticleGetStruct(ip->item_vars.rock.owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Article_Struct *ap = atGetStruct(ip->item_vars.rock.owner_gobj);
     Coll_Data *coll_data = &ip->coll_data;
     Vec3f pos = DObjGetStruct(item_gobj)->translate;
     s32 line_id = ip->item_vars.rock.ground_line_id;
@@ -276,7 +276,7 @@ bool32 jtgt_ovl3_8017DD18(GObj *item_gobj)
 
 bool32 func_ovl3_8017DE10(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -294,8 +294,8 @@ bool32 func_ovl3_8017DE10(GObj *item_gobj)
 
 bool32 func_ovl3_8017DEB8(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
 
@@ -321,7 +321,7 @@ GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->item_vars.rock.ground_line_id = -1;
 

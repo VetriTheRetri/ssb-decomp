@@ -30,7 +30,7 @@ void func_ovl3_80142850(GObj *fighter_gobj)
 
 void func_ovl3_80142874(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (!ftStatus_CheckInterruptOttotto(fighter_gobj))
     {
@@ -43,13 +43,13 @@ void func_ovl3_80142874(GObj *fighter_gobj)
 
 void func_ovl3_801429F4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     f32 dist_x;
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        func_ovl3_8013F9E0(fighter_gobj);
+        ftCommon_Fall_SetStatus(fighter_gobj);
     }
     else
     {
@@ -74,7 +74,7 @@ void func_ovl3_801429F4(GObj *fighter_gobj)
 
 void func_ovl3_80142AC4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_OttottoWait, 0.0F, 1.0F, 0U);
 
@@ -83,7 +83,7 @@ void func_ovl3_80142AC4(GObj *fighter_gobj)
 
 void func_ovl3_80142B08(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Ottotto, 0.0F, 1.0F, 0U);
 

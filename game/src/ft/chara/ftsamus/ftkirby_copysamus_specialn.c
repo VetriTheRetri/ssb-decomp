@@ -12,7 +12,7 @@ void func_ovl3_80156E60(Fighter_Struct *fp)
 
 void func_ovl3_80156E98(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->fighter_vars.kirby.copysamus_charge_level = 0;
 
@@ -42,7 +42,7 @@ void func_ovl3_80156EFC(Fighter_Struct *fp)
 
 void func_ovl3_80156F54(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -60,7 +60,7 @@ void func_ovl3_80156F54(GObj *fighter_gobj)
 
 void func_ovl3_80156FCC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -80,7 +80,7 @@ void func_ovl3_80157028(GObj *fighter_gobj)
 
 void func_ovl3_8015704C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
@@ -90,7 +90,7 @@ void func_ovl3_8015704C(GObj *fighter_gobj)
 
 void func_ovl3_801570A8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
@@ -103,7 +103,7 @@ void func_ovl3_801570A8(GObj *fighter_gobj)
 
 void func_ovl3_80157114(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.kirby.copysamus_specialn.charge_int--;
 
@@ -124,7 +124,7 @@ void func_ovl3_80157114(GObj *fighter_gobj)
 
             else if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
             {
-                Item_Struct *ip = ItemGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
+                Item_Struct *ip = itGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
 
                 ip->item_vars.charge_shot.charge_size = fp->fighter_vars.kirby.copysamus_charge_level;
             }
@@ -134,8 +134,8 @@ void func_ovl3_80157114(GObj *fighter_gobj)
 
 void func_ovl3_801571A8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
-    s32 ret;
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    s32 status_id;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -143,12 +143,12 @@ void func_ovl3_801571A8(GObj *fighter_gobj)
         return;
     }
 
-    ret = func_ovl3_801492F8(fp);
+    status_id = ftCommon_Escape_GetStatus(fp);
 
-    if (ret != -1)
+    if (status_id != -1)
     {
         func_ovl3_80156E60(fp);
-        func_ovl3_80149294(fighter_gobj, ret);
+        ftCommon_Escape_SetStatus(fighter_gobj, status_id);
     }
 
     else if (fp->input.pl.button_tap & fp->input.button_mask_z)
@@ -160,13 +160,13 @@ void func_ovl3_801571A8(GObj *fighter_gobj)
 
 void func_ovl3_80157268(GObj *fighter_gobj)
 {
-    func_ovl3_80156EFC(FighterGetStruct(fighter_gobj));
+    func_ovl3_80156EFC(ftGetStruct(fighter_gobj));
     func_ovl2_800DDE84(fighter_gobj, func_ovl3_80157610);
 }
 
 void func_ovl3_8015729C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNLoop, 0.0F, 1.0F, 2U);
@@ -180,7 +180,7 @@ void func_ovl3_8015729C(GObj *fighter_gobj)
 
 void func_ovl3_80157314(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Item_Struct *ip;
     f32 charge_recoil_x;
@@ -194,7 +194,7 @@ void func_ovl3_80157314(GObj *fighter_gobj)
 
         if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
         {
-            ip = ItemGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
+            ip = itGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
             ftCommon_StopLoopSFX(fp);
 
             DObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;
@@ -251,7 +251,7 @@ void func_ovl3_801574F4(GObj *fighter_gobj)
 
 void func_ovl3_80157518(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
@@ -261,7 +261,7 @@ void func_ovl3_80157518(GObj *fighter_gobj)
 
 void func_ovl3_8015756C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
@@ -272,7 +272,7 @@ void func_ovl3_8015756C(GObj *fighter_gobj)
 
 void func_ovl3_801575C8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, 0.0F, 1.0F, 2U);
 
@@ -281,7 +281,7 @@ void func_ovl3_801575C8(GObj *fighter_gobj)
 
 void func_ovl3_80157610(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -311,7 +311,7 @@ void func_ovl3_801576B4(Fighter_Struct *fp)
 
 void jtgt_ovl3_801576CC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, 0.0f, func_ovl3_8015767C(fp), 0U);
     ftAnim_Update(fighter_gobj);
@@ -322,7 +322,7 @@ void jtgt_ovl3_801576CC(GObj *fighter_gobj)
 
 void jtgt_ovl3_80157744(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, 0.0F, func_ovl3_8015767C(fp), 0U);
     ftAnim_Update(fighter_gobj);

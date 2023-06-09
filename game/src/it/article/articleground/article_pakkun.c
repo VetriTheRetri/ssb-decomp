@@ -9,7 +9,7 @@ void func_ovl3_8017CF20(GObj *article_gobj)
 {
     atCommon_UpdateArticleStatus(article_gobj, Article_Pakkun_Status, 0);
 
-    ArticleGetStruct(article_gobj)->proc_dead = NULL;
+    atGetStruct(article_gobj)->proc_dead = NULL;
 }
 
 void func_ovl3_8017CF58(GObj *article_gobj)
@@ -21,14 +21,14 @@ void func_ovl3_8017CF80(GObj *article_gobj)
 {
     atCommon_UpdateArticleStatus(article_gobj, Article_Pakkun_Status, 2);
 
-    ArticleGetStruct(article_gobj)->proc_dead = func_ovl3_8017D460;
+    atGetStruct(article_gobj)->proc_dead = func_ovl3_8017D460;
 }
 
 void func_ovl3_8017CFC0(GObj *article_gobj)
 {
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         ap->article_vars.pakkun.is_wait_fighter = TRUE;
     }
@@ -38,7 +38,7 @@ bool32 func_ovl3_8017CFDC(GObj *article_gobj)
 {
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
@@ -46,7 +46,7 @@ bool32 func_ovl3_8017CFDC(GObj *article_gobj)
 
         while (fighter_gobj != NULL)
         {
-            Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
             DObj *joint = fp->joint[0];
             f32 dist_x, translate_y;
 
@@ -76,7 +76,7 @@ extern void *D_ovl2_801313F0;
 
 bool32 func_ovl3_8017D0A4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.pakkun.is_wait_fighter != FALSE)
     {
@@ -109,7 +109,7 @@ bool32 func_ovl3_8017D0A4(GObj *article_gobj)
 
 void func_ovl3_8017D190(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi = ATPAKKUN_APPEAR_WAIT;
 
@@ -123,7 +123,7 @@ void func_ovl3_8017D190(GObj *article_gobj)
 
 void func_ovl3_8017D1DC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     f32 pos_y = DObjGetStruct(article_gobj)->translate.y - ap->article_vars.pakkun.pos.y;
     f32 off_y = pos_y + ATPAKKUN_APPEAR_OFF_Y;
 
@@ -148,7 +148,7 @@ void func_ovl3_8017D1DC(GObj *article_gobj)
 
 bool32 func_ovl3_8017D298(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint;
 
     if (ap->article_vars.pakkun.is_wait_fighter != FALSE)
@@ -180,7 +180,7 @@ extern intptr_t D_NF_00000E04;
 
 bool32 jtgt_ovl3_8017D334(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->damage_knockback >= 100.0F)
     {
@@ -211,7 +211,7 @@ bool32 jtgt_ovl3_8017D334(GObj *article_gobj)
 
 bool32 func_ovl3_8017D460(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->translate = ap->article_vars.pakkun.pos;
@@ -241,7 +241,7 @@ GObj* jtgt_ovl3_8017D4D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         ap->article_vars.pakkun.pos = *pos;
 

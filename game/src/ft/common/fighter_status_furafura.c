@@ -1,8 +1,9 @@
 #include "fighter.h"
 
-void func_ovl3_80149810(GObj *fighter_gobj)
+// 0x80149810
+void ftCommon_FuraFura_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 breakout_wait;
 
     fp->shield_health = (fp->ft_kind == Ft_Kind_Yoshi) ? 30 : 30;
@@ -21,12 +22,13 @@ void func_ovl3_80149810(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801498A4(GObj *fighter_gobj)
+// 0x801498A4
+void ftCommon_FuraFura_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 breakout_wait;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_FuraFura, 0.0F, 1.0F, 0xA0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_FuraFura, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
 
     fp->shield_health = (fp->ft_kind == Ft_Kind_Yoshi) ? 30 : 30;
 
@@ -39,5 +41,5 @@ void func_ovl3_801498A4(GObj *fighter_gobj)
     breakout_wait += FTCOMMON_FURAFURA_BREAKOUT_WAIT_MIN;
 
     ftCommon_Trap_InitBreakoutVars(fp, breakout_wait);
-    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_FURAFURA_COLANIM_ID, 0);
+    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_FURAFURA_COLANIM_ID, FTCOMMON_FURAFURA_COLANIM_LENGTH);
 }

@@ -20,7 +20,7 @@ void func_ovl3_8016CC50(f32 *angle)
 
 bool32 func_ovl3_8016CCA0(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     f32 sp30;
     f32 sp2C;
     f32 temp_f0;
@@ -55,7 +55,7 @@ bool32 func_ovl3_8016CCA0(GObj *item_gobj)
 
 void func_ovl3_8016CDC8(GObj *item_gobj, bool32 arg1)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.boomerang.flags |= 1;
 
@@ -132,7 +132,7 @@ void func_ovl3_8016CFFC(f32 *angle)
 
 f32 func_ovl3_8016D0E4(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     f32 unused;
     f32 temp_f14;
     f32 temp_f0;
@@ -211,7 +211,7 @@ void func_ovl3_8016D31C(Item_Struct *ip)
 {
     if (ip->item_vars.boomerang.spawn_gobj != NULL)
     {
-        Fighter_Struct *fp = FighterGetStruct(ip->item_vars.boomerang.spawn_gobj);
+        Fighter_Struct *fp = ftGetStruct(ip->item_vars.boomerang.spawn_gobj);
 
         if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby))
         {
@@ -227,13 +227,13 @@ void func_ovl3_8016D31C(Item_Struct *ip)
 
 void func_ovl3_8016D35C(GObj *item_gobj, f32 distance)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if ((ip->item_vars.boomerang.flags & 1) && (distance < 180.0F))
     {
         if (ip->item_vars.boomerang.spawn_gobj != NULL)
         {
-            Fighter_Struct *fp = FighterGetStruct(ip->item_vars.boomerang.spawn_gobj);
+            Fighter_Struct *fp = ftGetStruct(ip->item_vars.boomerang.spawn_gobj);
 
             if (fp->x192_flag_b0)
             {
@@ -273,14 +273,14 @@ bool32 func_ovl3_8016D40C(Item_Struct *ip, Vec3f *coll_angle)
 
 bool32 func_ovl3_8016D4B8(GObj *item_gobj)
 {
-    func_ovl3_8016D31C(ItemGetStruct(item_gobj));
+    func_ovl3_8016D31C(itGetStruct(item_gobj));
 
     return TRUE;
 }
 
 bool32 jtgt_ovl3_8016D4DC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if ((func_ovl3_80167FE8(ip) != FALSE) || (func_ovl3_8016CCA0(item_gobj) == TRUE))
     {
@@ -320,7 +320,7 @@ bool32 jtgt_ovl3_8016D4DC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016D5EC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     bool32 unk_bool = FALSE;
     u16 coll_flags;
 
@@ -361,7 +361,7 @@ bool32 jtgt_ovl3_8016D5EC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016D714(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (!(ip->item_vars.boomerang.flags & 0x21) && (ip->hit_victim_damage != 0))
     {
@@ -373,7 +373,7 @@ bool32 jtgt_ovl3_8016D714(GObj *item_gobj)
 
 bool32 func_ovl3_8016D77C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (!(ip->item_vars.boomerang.flags & 0x21))
     {
@@ -384,7 +384,7 @@ bool32 func_ovl3_8016D77C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016D7B4(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (!(ip->item_vars.boomerang.flags & 0x21))
     {
@@ -395,7 +395,7 @@ bool32 jtgt_ovl3_8016D7B4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016D7EC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->shield_collide_vec.z > 0.0F)
     {
@@ -412,7 +412,7 @@ bool32 jtgt_ovl3_8016D7EC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016D868(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     f32 dist_x, dist_y;
 
@@ -482,7 +482,7 @@ extern ItemSpawnData Item_Boomerang_Desc;
 
 GObj *func_ovl3_8016DA78(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *item_gobj;
     Item_Struct *ip;
     Vec3f offset;
@@ -500,7 +500,7 @@ GObj *func_ovl3_8016DA78(GObj *fighter_gobj, Vec3f *pos)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->lr = fp->lr;
 

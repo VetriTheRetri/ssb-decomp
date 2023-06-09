@@ -77,7 +77,7 @@ void func_ovl3_8013E390(GObj *fighter_gobj)
 
 void func_ovl3_8013E548(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D8A70(fp, fp->attributes->walk_speed_mul, fp->attributes->traction);
     func_ovl2_800D87D0(fighter_gobj);
@@ -85,7 +85,7 @@ void func_ovl3_8013E548(GObj *fighter_gobj)
 
 void func_ovl3_8013E580(GObj *fighter_gobj, f32 anim_frame_begin)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id = func_ovl3_8013E340(fp->input.pl.stick_range.x);
 
     ftStatus_Update(fighter_gobj, status_id, anim_frame_begin, 1.0F, 0U);
@@ -104,7 +104,7 @@ void func_ovl3_8013E5F4(GObj *fighter_gobj)
 
 bool32 func_ovl3_8013E614(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.stick_range.x * fp->lr) >= 8)
     {

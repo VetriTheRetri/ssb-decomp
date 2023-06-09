@@ -7,7 +7,7 @@ void func_ovl3_8015AA10(GObj *fighter_gobj)
 
 void func_ovl3_8015AA34(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate;
 
     fp->lr = LEFT;

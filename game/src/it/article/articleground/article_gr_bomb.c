@@ -2,7 +2,7 @@
 
 void func_ovl3_80184A70(GObj *effect_gobj) // RTTF bomb explode GFX process
 {
-    Effect_Struct *ep = EffectGetStruct(effect_gobj);
+    Effect_Struct *ep = efGetStruct(effect_gobj);
     DObj *joint = DObjGetStruct(effect_gobj);
 
     ep->lifetime--;
@@ -83,7 +83,7 @@ void func_ovl3_801791F4(Vec3f *pos)
 
 bool32 jtgt_ovl3_80184D74(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint;
 
     func_ovl3_80172558(ap, ATGRBOMB_GRAVITY, ATGRBOMB_T_VEL);
@@ -105,7 +105,7 @@ bool32 func_ovl3_80184DC4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80184E04(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->percent_damage >= ATGRBOMB_HEALTH_MAX)
     {
@@ -118,7 +118,7 @@ extern ArticleStatusDesc Article_Gr_Bomb_Status[];
 
 void func_ovl3_80184E44(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->phys_info.vel.y = 0.0F;
 
@@ -146,7 +146,7 @@ bool32 jtgt_ovl3_80184EDC(GObj *article_gobj)
 {
     if (func_ovl3_80184E78(article_gobj, 0.5F) != FALSE)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         if (ap->phys_info.vel.y >= 90.0F) // Is it even possible to meet this condition? Didn't they mean ABSF(ap->phys_info.vel.y)?
         {
@@ -176,7 +176,7 @@ extern intptr_t Article_Gr_Bomb_Hit;
 
 void func_ovl3_80184FAC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     DObjGetStruct(article_gobj)->rotate.x = HALF_PI32;
 
@@ -186,7 +186,7 @@ void func_ovl3_80184FAC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80184FD4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi++;
 
@@ -201,7 +201,7 @@ bool32 jtgt_ovl3_80184FD4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80185030(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     f32 roll_rotate_speed;
     f32 sqrt_vel;
 
@@ -222,7 +222,7 @@ bool32 jtgt_ovl3_80185030(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8018511C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_8017356C(article_gobj) == FALSE)
     {
@@ -241,7 +241,7 @@ GObj* jtgt_ovl3_8018518C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         ap->article_vars.gr_bomb.roll_rotate_speed = 0.0F;
 
@@ -252,7 +252,7 @@ GObj* jtgt_ovl3_8018518C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 void func_ovl3_801851F4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi = 0;
     ap->x340_flag_b0123 = 0;
@@ -282,7 +282,7 @@ void func_ovl3_80185284(GObj *article_gobj)
 void func_ovl3_801852B8(GObj *article_gobj)
 {
     Effect_Unk *effect_unk;
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;

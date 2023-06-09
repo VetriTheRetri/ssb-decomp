@@ -3,7 +3,7 @@
 
 void func_ovl3_80179120(GObj *effect_gobj) // Barrel/Crate smash GFX process
 {
-    Effect_Struct *ep = EffectGetStruct(effect_gobj);
+    Effect_Struct *ep = efGetStruct(effect_gobj);
     DObj *joint = DObjGetStruct(effect_gobj);
 
     ep->lifetime--;
@@ -174,7 +174,7 @@ bool32 func_ovl3_80179424(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017963C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATBOX_GRAVITY, ATBOX_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -202,7 +202,7 @@ bool32 func_ovl3_8017969C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801796D8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->percent_damage >= ATBOX_HEALTH_MAX)
     {
@@ -220,7 +220,7 @@ extern ArticleStatusDesc Article_Box_Status[];
 
 void func_ovl3_80179748(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     DObjGetStruct(article_gobj)->rotate.z = atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32;
 
@@ -230,7 +230,7 @@ void func_ovl3_80179748(GObj *article_gobj)
 
 void func_ovl3_801797A4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -289,7 +289,7 @@ extern u8 Article_Box_Hit; // 0x614
 
 bool32 jtgt_ovl3_80179948(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi--;
 
@@ -308,7 +308,7 @@ GObj *jtgt_ovl3_801799A4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         DObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
 
@@ -322,7 +322,7 @@ GObj *jtgt_ovl3_801799A4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 void func_ovl3_80179A34(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->x340_flag_b0123 = 0;
     ap->at_multi = 0;
@@ -354,7 +354,7 @@ void func_ovl3_80179AD4(GObj *article_gobj)
 void func_ovl3_80179B08(GObj *article_gobj)
 {
     Effect_Unk *effect_unk;
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;

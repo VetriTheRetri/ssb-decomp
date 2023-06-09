@@ -4,7 +4,7 @@ void func_ovl3_801837A0(GObj *article_gobj)
 {
     s32 unused;
     Effect_Unk *ep;
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
@@ -32,7 +32,7 @@ extern ArticleSpawnData Article_Marumine_Data;
 
 void func_ovl3_80183830(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     ArticleHitEvent *ev = (ArticleHitEvent*) ((uintptr_t)*Article_Marumine_Data.p_file + (intptr_t)&Marumine_Event); // Linker thing
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
@@ -59,7 +59,7 @@ void func_ovl3_80183830(GObj *article_gobj)
 
 bool32 func_ovl3_80183914(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->translate.x += ap->article_vars.marumine.offset.x;
@@ -81,7 +81,7 @@ bool32 func_ovl3_80183914(GObj *article_gobj)
 
 bool32 func_ovl3_801839A8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->translate.x += ap->article_vars.marumine.offset.x;
@@ -104,7 +104,7 @@ extern ArticleStatusDesc Article_Marumine_Status[];
 
 void func_ovl3_80183A20(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi = 0;
 
@@ -122,7 +122,7 @@ GObj* jtgt_ovl3_80183A74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
         DObj *joint = DObjGetStruct(article_gobj);
 
         ap->article_vars.marumine.offset = *pos;

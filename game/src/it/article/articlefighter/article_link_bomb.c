@@ -7,7 +7,7 @@ extern ArticleSpawnData Article_Link_Bomb_Data;
 void func_ovl3_801859C0(GObj *article_gobj)
 {
     DObj *joint = DObjGetStruct(article_gobj);
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.link_bomb.scale_int == 0)
     {
@@ -38,7 +38,7 @@ void func_ovl3_80185A80(GObj *article_gobj)
 {
     s32 unused;
     DObj *joint = DObjGetStruct(article_gobj);
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Effect_Unk *ep;
 
     func_ovl3_80185CE4(article_gobj);
@@ -64,7 +64,7 @@ void func_ovl3_80185A80(GObj *article_gobj)
 void func_ovl3_80185B18(GObj *article_gobj)
 {
     s32 unused[5];
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos = joint->translate;
@@ -76,7 +76,7 @@ void func_ovl3_80185B18(GObj *article_gobj)
 
 bool32 func_ovl3_80185B84(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->damage_taken_recent >= ATLINKBOMB_HEALTH)
     {
@@ -94,7 +94,7 @@ bool32 func_ovl3_80185B84(GObj *article_gobj)
 
 bool32 func_ovl3_80185BFC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if ((ABSF(ap->phys_info.vel.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(ap->phys_info.vel.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
     {
@@ -114,21 +114,21 @@ bool32 func_ovl3_80185BFC(GObj *article_gobj)
 
 void func_ovl3_80185CD4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
 void func_ovl3_80185CD4(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 }
 
 bool32 func_ovl3_80185CF0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATLINKBOMB_GRAVITY, ATLINKBOMB_T_VEL);
 
@@ -155,7 +155,7 @@ bool32 func_ovl3_80185CF0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80185DCC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->phys_info.vel.x != 0.0F)
     {
@@ -202,7 +202,7 @@ extern ArticleStatusDesc Article_Link_Bomb_Status[];
 
 void func_ovl3_80185F70(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -221,7 +221,7 @@ void func_ovl3_80185F70(GObj *article_gobj)
 
 void func_ovl3_80185FD8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -232,8 +232,8 @@ void func_ovl3_80185FD8(GObj *article_gobj)
 
 bool32 func_ovl3_80186024(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ap->owner_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
+    Fighter_Struct *fp = ftGetStruct(ap->owner_gobj);
 
     if (fp->status_info.status_id == ftStatus_Common_DokanWait) // Odd but go off
     {
@@ -275,7 +275,7 @@ void func_ovl3_8018611C(GObj *article_gobj)
 bool32 jtgt_ovl3_80186150(GObj *article_gobj)
 {
     s32 unused;
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     Vec3f vel = ap->phys_info.vel;
 
     if (func_ovl3_80173D24(article_gobj, 0.4F, 0.3F, &func_ovl3_80185FD8) != FALSE)
@@ -290,7 +290,7 @@ bool32 jtgt_ovl3_80186150(GObj *article_gobj)
 
 void jtgt_ovl3_80186224(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80185CD4(article_gobj);
 
@@ -301,7 +301,7 @@ void jtgt_ovl3_80186224(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80186270(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.link_bomb.unk_0x2 != 0)
     {
@@ -314,7 +314,7 @@ bool32 jtgt_ovl3_80186270(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801862AC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.link_bomb.unk_0x2 == 0)
     {
@@ -325,7 +325,7 @@ bool32 jtgt_ovl3_801862AC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801862E0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->article_vars.link_bomb.unk_0x2 == 0)
     {
@@ -336,7 +336,7 @@ bool32 jtgt_ovl3_801862E0(GObj *article_gobj)
 
 void jtgt_ovl3_80186314(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80185CD4(article_gobj);
 
@@ -349,7 +349,7 @@ void jtgt_ovl3_80186314(GObj *article_gobj)
 
 void func_ovl3_80186368(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->phys_info.vel.z = 0.0F;
     ap->phys_info.vel.y = 0.0F;
@@ -364,7 +364,7 @@ extern intptr_t Link_Bomb_Event;
 
 void func_ovl3_801863AC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     ArticleHitEvent *ev = (ArticleHitEvent *)((uintptr_t)*Article_Link_Bomb_Data.p_file + (intptr_t)&Link_Bomb_Event); // Linker thing
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
@@ -406,7 +406,7 @@ bool32 func_ovl3_801864BC(GObj *article_gobj) // Unused
 
 void func_ovl3_801864E8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi = 0;
     ap->x340_flag_b0123 = 0;
@@ -418,7 +418,7 @@ void func_ovl3_801864E8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80186524(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_801863AC(article_gobj);
 
@@ -445,7 +445,7 @@ GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
     if (article_gobj != NULL)
     {
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
         joint = DObjGetStruct(article_gobj);
 
         func_80008CC0(joint, 0x2EU, 0U);

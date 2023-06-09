@@ -11,12 +11,14 @@ bool32 ftAnim_IfAnimEnd_ProcStatus(GObj *fighter_gobj, void (*proc_status)(GObj*
     else return FALSE;
 }
 
-void func_ovl2_800D94C4(GObj *fighter_gobj)
+// 0x800D94C4
+void ftCommon_IfAnimEnd_SetStatusWait(GObj *fighter_gobj)
 {
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013E1C8);
 }
 
-void func_ovl2_800D94E8(GObj *fighter_gobj)
+// 0x800D94E8
+void ftCommon_IfAnimEnd_SetStatusFall(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013F9E0);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_Fall_SetStatus);
 }

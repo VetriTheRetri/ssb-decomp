@@ -4,7 +4,7 @@
 // 0x801508E0
 void ftCommon_AttackAirLw_ProcHit(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->ft_kind == Ft_Kind_Link) || (fp->ft_kind == Ft_Kind_PolyLink))
     {
@@ -25,7 +25,7 @@ void ftCommon_AttackAirLw_ProcHit(GObj *fighter_gobj)
 // 0x80150980
 void ftCommon_AttackAirLw_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->ft_kind == Ft_Kind_Link) || (fp->ft_kind == Ft_Kind_PolyLink))
     {
@@ -40,13 +40,13 @@ void ftCommon_AttackAirLw_ProcUpdate(GObj *fighter_gobj)
             }
         }
     }
-    func_ovl2_800D94E8(fighter_gobj);
+    ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
 // 0x80150A08
 void ftCommon_AttackAir_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -69,7 +69,7 @@ void ftCommon_AttackAir_ProcMap(GObj *fighter_gobj)
 // 0x80150B00 - Also checks LightThrowAir and ItemShoot
 bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id;
     u32 is_have_attack_flag;
@@ -85,7 +85,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
             {
                 if ((ABS(fp->input.pl.stick_range.x) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN) && (ABS(fp->input.pl.stick_range.y) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN))
                 {
-                    if (ArticleGetStruct(fp->item_hold)->type == At_Type_Throw)
+                    if (atGetStruct(fp->item_hold)->type == At_Type_Throw)
                     {
                         func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowAirF);
 
@@ -173,7 +173,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
             }
             if (is_goto_shoot != FALSE)
             {
-                if ((fp->item_hold != NULL) && (ArticleGetStruct(fp->item_hold)->type == At_Type_Shoot))
+                if ((fp->item_hold != NULL) && (atGetStruct(fp->item_hold)->type == At_Type_Shoot))
                 {
                     func_ovl3_801478EC(fighter_gobj, status_id);
 
@@ -206,7 +206,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
 // 0x80150E80
 void ftCommon_LandingAir_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
     ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirX - ftStatus_Common_LandingAirN), 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

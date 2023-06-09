@@ -4,7 +4,7 @@
 
 bool32 func_ovl3_8017D590(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if ((ap->article_vars.bumper.hit_anim_length == 0) && (joint->mobj->anim_frame == 1.0F))
@@ -31,7 +31,7 @@ bool32 func_ovl3_8017D590(GObj *article_gobj)
 
 bool32 func_ovl3_8017D63C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->scale.x = 2.0F;
@@ -59,7 +59,7 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_ovl3_8017279C(article_gobj);
 
-        ap = ArticleGetStruct(article_gobj);
+        ap = atGetStruct(article_gobj);
         joint = DObjGetStruct(article_gobj);
 
         ap->at_multi = 0;

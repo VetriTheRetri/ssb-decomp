@@ -3,7 +3,7 @@
 // 0x8015BB50
 void ftFox_SpecialN_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->command_vars.flags.flag0 != 0)
@@ -26,7 +26,7 @@ void ftFox_SpecialN_ProcUpdate(GObj *fighter_gobj)
 // 0x8015BBD8
 void ftFox_SpecialN_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 != 0) && (fp->input.pl.button_tap & fp->input.button_mask_b))
     {
@@ -45,7 +45,7 @@ void ftFox_SpecialN_ProcInterrupt(GObj *fighter_gobj)
 // 0x8015BC68
 void ftFox_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
     fp->command_vars.flags.flag1 = 0;

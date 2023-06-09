@@ -4,7 +4,7 @@
 
 void func_ovl3_801591A0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
     f32 magnitude;
 
@@ -37,7 +37,7 @@ void func_ovl3_80159260(GObj *fighter_gobj)
 
     func_ovl2_800DE324(fighter_gobj);
 
-    fp = FighterGetStruct(fighter_gobj);
+    fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.masterhand.move.magnitude == 0.0F)
     {
@@ -51,7 +51,7 @@ void func_ovl3_80159260(GObj *fighter_gobj)
 
 void func_ovl3_801592B4(GObj *fighter_gobj, void (*cb)(GObj*), Vec3f *vel)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Move, fighter_gobj->anim_frame, 1.0F, 0U);
 

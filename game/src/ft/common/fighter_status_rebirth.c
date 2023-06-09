@@ -7,7 +7,7 @@ extern f32 Rebirth_Halo_Offset_X[GMMATCH_PLAYERS_MAX];
 
 void func_ovl3_8013CF60(GObj *this_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(this_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(this_gobj);
     ftSpawnInfo rebirth_vars = D_ovl2_80116DD0;
     GObj *other_gobj;
     Fighter_Struct *other_fp;
@@ -32,7 +32,7 @@ loop: // This makes no sense
         {
             if (other_gobj != this_gobj)
             {
-                other_fp = FighterGetStruct(other_gobj);
+                other_fp = ftGetStruct(other_gobj);
 
                 if ((other_fp->status_info.status_id >= ftStatus_Common_RebirthDown) && (other_fp->status_info.status_id <= ftStatus_Common_RebirthWait))
                 {
@@ -95,7 +95,7 @@ loop: // This makes no sense
 
 void func_ovl3_8013D1D4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.rebirth.halo_despawn_wait != 0)
     {
@@ -109,7 +109,7 @@ void func_ovl3_8013D1D4(GObj *fighter_gobj)
 
 void func_ovl3_8013D200(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8013D1D4(fighter_gobj);
 
@@ -125,7 +125,7 @@ void func_ovl3_8013D200(GObj *fighter_gobj)
 
 void func_ovl3_8013D264(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     DObjGetStruct(fighter_gobj)->translate.y = (((fp->status_vars.common.rebirth.pos.y - fp->status_vars.common.rebirth.halo_offset.y) / 8100.0F) *
                                                SQUARE(fp->status_vars.common.rebirth.halo_lower_wait)) + fp->status_vars.common.rebirth.halo_offset.y;
@@ -139,7 +139,7 @@ void func_ovl3_8013D2AC(GObj *fighter_gobj)
 
 void func_ovl3_8013D2DC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthStand, 0.0F, 1.0F, 0x106U);
     ftAnim_Update(fighter_gobj);
@@ -154,20 +154,20 @@ void func_ovl3_8013D2DC(GObj *fighter_gobj)
 
 void func_ovl3_8013D358(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl3_8013D1D4(fighter_gobj);
 
     if (fp->status_vars.common.rebirth.halo_despawn_wait == 0)
     {
         ftCommon_ApplyInvincibleTimer(fp, FTCOMMON_REBIRTH_INVINCIBLE_FRAMES);
-        func_ovl3_8013F9E0(fighter_gobj);
+        ftCommon_Fall_SetStatus(fighter_gobj);
     }
 }
 
 void func_ovl3_8013D3A4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftStatus_CheckInterruptAll(fighter_gobj))
     {
@@ -177,7 +177,7 @@ void func_ovl3_8013D3A4(GObj *fighter_gobj)
 
 void func_ovl3_8013D518(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, 0x106U);
 

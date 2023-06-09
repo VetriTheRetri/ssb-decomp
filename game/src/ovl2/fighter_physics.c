@@ -2,7 +2,7 @@
 
 void func_ovl2_800D87D0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_air.x = ((fp->lr * fp->coll_data.ground_angle.y * fp->phys_info.vel_ground.x) + fp->phys_info.vel_jostle_x);
     fp->phys_info.vel_air.y = (fp->lr * -fp->coll_data.ground_angle.x * fp->phys_info.vel_ground.x);
@@ -147,7 +147,7 @@ extern f32 D_ovl2_8012C4E0[16] = { 4.0F, 3.0F, 3.0F, 1.0F, 2.0F, 2.0F, 4.0F, 4.0
 
 void func_ovl2_800D8BB4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8978(fp, D_ovl2_8012C4E0[fp->coll_data.ground_flags & 0xFFFF00FF] * attributes->traction);
@@ -156,7 +156,7 @@ void func_ovl2_800D8BB4(GObj *fighter_gobj)
 
 void func_ovl2_800D8C14(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_ground.x = ((fp->joint[1]->translate.z - fp->anim_vel.z) * DObjGetStruct(fighter_gobj)->scale.z);
     fp->phys_info.vel_ground.z = ((fp->joint[1]->translate.x - fp->anim_vel.x) * -fp->lr * DObjGetStruct(fighter_gobj)->scale.x);
@@ -171,7 +171,7 @@ void func_ovl2_800D8C14(GObj *fighter_gobj)
 
 void jtgt_ovl2_800D8CCC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->anim_flags.flags.is_use_transn_joint)
     {
@@ -320,7 +320,7 @@ void func_ovl2_800D9074(Fighter_Struct *fp, ftCommonAttributes *attributes)
 
 void jtgt_ovl2_800D90E0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
@@ -334,7 +334,7 @@ void jtgt_ovl2_800D90E0(GObj *fighter_gobj)
 
 void jtgt_ovl2_800D9160(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8DB0(fp);
@@ -350,7 +350,7 @@ void jtgt_ovl2_800D9160(GObj *fighter_gobj)
 
 void func_ovl2_800D91EC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
@@ -386,7 +386,7 @@ void func_ovl2_800D9260(Fighter_Struct *fp, f32 *z, f32 *y, f32 *x) // Ness / Yo
 
 void func_ovl2_800D938C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *topn_joint = fp->joint[0];
     DObj *transn_joint = fp->joint[1];
 
@@ -397,21 +397,21 @@ void func_ovl2_800D938C(GObj *fighter_gobj)
 
 void func_ovl2_800D93E4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D9260(fp, &fp->phys_info.vel_air.x, &fp->phys_info.vel_air.y, &fp->phys_info.vel_air.z);
 }
 
 void jtgt_ovl2_800D9414(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D9260(fp, NULL, &fp->phys_info.vel_air.y, &fp->phys_info.vel_air.z);
 }
 
 void func_ovl2_800D9444(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_air.x = fp->phys_info.vel_air.y = fp->phys_info.vel_air.z = 0.0F;
 

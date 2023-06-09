@@ -7,7 +7,7 @@ void func_ovl3_8013E070(GObj *fighter_gobj)
 
 void func_ovl3_8013E1C8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
@@ -29,7 +29,7 @@ void func_ovl3_8013E1C8(GObj *fighter_gobj)
 
 bool32 func_ovl3_8013E258(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (((fp->input.pl.stick_range.x * fp->lr) < 0) || (ABS(fp->input.pl.stick_range.x) < 8))
     {

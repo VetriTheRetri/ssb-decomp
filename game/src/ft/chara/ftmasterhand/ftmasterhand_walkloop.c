@@ -2,7 +2,7 @@
 
 bool32 func_ovl3_801598C0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     Vec3f *translate_m = &DObjGetStruct(fighter_gobj)->translate;
     Vec3f *translate_t = &DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate;
@@ -34,7 +34,7 @@ void func_ovl3_80159994(GObj *fighter_gobj)
 
 void func_ovl3_801599C4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_air.y = 0;
 

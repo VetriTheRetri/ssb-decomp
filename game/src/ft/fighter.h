@@ -992,7 +992,7 @@ struct Fighter_Struct
 
     f32 attack1_followup_frames;
     s32 attack1_status_id;
-    s32 attack1_followup_count;
+    s32 attack1_input_count;
     s32 cliffcatch_wait;
     s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
     s32 acid_wait;    // Wait this many frames before fighter can be hurt by Planet Zebes acid again?
@@ -1076,8 +1076,8 @@ struct Fighter_Struct
     u32 x192_flag_b5 : 1;
     u32 x192_flag_b6 : 1;
     u32 x192_flag_b7 : 1;
-    u8 catch_ignore_mask;       // Fighter is immune to these grab types
-    u8 catch_mask;              // Fighter's current grab type
+    u8 capture_ignore_mask; // Fighter is immune to these grab types
+    u8 catch_mask;          // Fighter's current grab type
 
     FighterAnimFlags anim_flags;
 
@@ -1283,7 +1283,7 @@ struct Fighter_Struct
     s32 display_state;
 };
 
-#define FighterGetStruct(fighter_gobj) \
+#define ftGetStruct(fighter_gobj) \
 ((Fighter_Struct*)fighter_gobj->user_data) \
 
 #define AttributesGetStruct(fp) \
@@ -1298,7 +1298,7 @@ struct Fighter_Struct
 // Fighter Functions
 
 void ftStatus_Update(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 anim_rate, u32 flags); // Action State Change
-void func_ovl3_801438F0(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt); // FallSpecial Action State
+void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt); // FallSpecial Action State
 void func_ovl2_800DDE84(GObj*, void(*proc_map)(GObj*)); // Grounded Collision check (stop at ledge?)
 void ftMapCollide_CheckGroundCliff(GObj*, void(*proc_map)(GObj*)); // Aerial Collision check (ledge grab?)
 void ftMapCollide_SetGround(Fighter_Struct*); // ???

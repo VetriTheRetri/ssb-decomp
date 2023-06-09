@@ -8,7 +8,7 @@ void func_ovl3_80149720(GObj *fighter_gobj)
 
 void func_ovl3_80149744(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ShieldBreakFall, 0.0F, 1.0F, 0x10B2U);
     func_ovl2_800D8EB8(fp);

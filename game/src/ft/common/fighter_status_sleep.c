@@ -3,7 +3,7 @@
 
 bool32 func_ovl3_8013D580(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 steal_from_port_id[GMMATCH_PLAYERS_MAX];
     s32 active_teammate_count;
     s32 port_id;
@@ -41,7 +41,7 @@ bool32 func_ovl3_8013D580(GObj *fighter_gobj)
 
 void func_ovl3_8013D6D0(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *steal_gobj;
     s32 active_teammate_count;
     s32 steal_from_port_id[GMMATCH_PLAYERS_MAX];
@@ -91,7 +91,7 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
 
                     steal_gobj = Match_Info->player_block[steal_from_port_id[random_steal_target]].fighter_gobj;
 
-                    FighterGetStruct(steal_gobj)->stock_count--;
+                    ftGetStruct(steal_gobj)->stock_count--;
 
                     this_fp->stock_count = -2;
 
@@ -110,7 +110,7 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
 
 void func_ovl3_8013D8B0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Sleep, 0.0F, 1.0F, 0U);
 

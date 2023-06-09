@@ -4,7 +4,7 @@
 
 void func_ovl3_80180630(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.kamex.hydro_spawn_wait <= 0)
@@ -42,7 +42,7 @@ void func_ovl3_80180630(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801807DC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATKAMEX_GRAVITY, ATKAMEX_T_VEL);
 
@@ -51,7 +51,7 @@ bool32 jtgt_ovl3_801807DC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180808(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_801737B8(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL));
 
@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_80180808(GObj *article_gobj)
 
 void func_ovl3_80180860(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80173F78(ap);
 
@@ -87,7 +87,7 @@ void func_ovl3_801808A4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801808D8(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATKAMEX_GRAVITY, ATKAMEX_T_VEL);
 
@@ -96,7 +96,7 @@ bool32 jtgt_ovl3_801808D8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180904(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_801737B8(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL));
 
@@ -112,7 +112,7 @@ bool32 jtgt_ovl3_80180904(GObj *article_gobj)
 
 void func_ovl3_80180964(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->at_multi = ATKAMEX_LIFETIME;
 
@@ -125,7 +125,7 @@ void func_ovl3_80180964(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801809BC(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -156,7 +156,7 @@ extern intptr_t D_NF_0000ED60;
 
 void func_ovl3_80180A58(GObj *article_gobj, bool32 is_setup_vars)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (is_setup_vars == FALSE)
@@ -190,7 +190,7 @@ void func_ovl3_80180AF4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180B1C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -205,7 +205,7 @@ bool32 jtgt_ovl3_80180B1C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180B6C(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -220,7 +220,7 @@ void func_ovl3_80180BAC(GObj *article_gobj)
     s32 unused1;
     GObj *victim_gobj;
     s32 unused2[3];
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     f32 dist_xy;
     f32 dist_x;
@@ -232,7 +232,7 @@ void func_ovl3_80180BAC(GObj *article_gobj)
     {
         do
         {
-            Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
             if ((fighter_gobj != ap->owner_gobj) && (fp->team != ap->team))
             {
@@ -280,7 +280,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        kamex_ap = ArticleGetStruct(article_gobj);
+        kamex_ap = atGetStruct(article_gobj);
 
         kamex_ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
@@ -288,7 +288,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         kamex_ap->phys_info.vel.x = 0.0F;
         kamex_ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
 
-        m_ball_ap = ArticleGetStruct(spawn_gobj);
+        m_ball_ap = atGetStruct(spawn_gobj);
 
         kamex_ap->owner_gobj = m_ball_ap->owner_gobj;
         kamex_ap->team = m_ball_ap->team;
@@ -308,7 +308,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_80180E10(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     ip->item_hit.offset[0].x = joint->next->translate.x * ip->lr;
@@ -327,8 +327,8 @@ bool32 jtgt_ovl3_80180E60(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80180E6C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
 
@@ -344,7 +344,7 @@ extern ItemSpawnData Item_Hydro_Data;
 
 GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
     GObj *item_gobj = func_ovl3_801655C8(article_gobj, &Item_Hydro_Data, pos, ITEM_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
@@ -355,7 +355,7 @@ GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
     {
         return NULL;
     }
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->lr = ap->lr;
 

@@ -21,7 +21,7 @@ extern Mtx D_ovl2_8012C310;
 
 void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Item_Hit *item_hit = &ip->item_hit;
     MtxStore mtx_store;
     s32 i;
@@ -95,7 +95,7 @@ extern Mtx D_ovl2_8012C458;
 
 void func_ovl3_801671F0(GObj *item_gobj) // Render item ECB?
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Vec3f *translate = &DObjGetStruct(item_gobj)->translate;
     ObjectColl *object_coll = &ip->coll_data.object_coll;
     MtxStore mtx_store;
@@ -155,7 +155,7 @@ void func_ovl3_801674B8(void)
 
 void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->display_state == dbObjDisplayStatus_MapCollision)
     {
@@ -206,7 +206,7 @@ extern GfxColor Item_PKThunder_EnvColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 58, 0
 
 void func_ovl3_80167660(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     s32 index = ip->item_vars.pk_thunder_trail.trail_index;
 
     if (ip->display_state == dbObjDisplayStatus_MapCollision)

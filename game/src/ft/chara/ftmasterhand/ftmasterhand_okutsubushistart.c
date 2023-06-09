@@ -13,9 +13,9 @@ void func_ovl3_8015ACD4(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_OkutsubushiStart, 0.0F, 1.0F, 0U);
 
-    masterhand_fp = FighterGetStruct(fighter_gobj);
+    masterhand_fp = ftGetStruct(fighter_gobj);
 
-    target_fp = FighterGetStruct(masterhand_fp->fighter_vars.masterhand.p_masterhand->target_gobj);
+    target_fp = ftGetStruct(masterhand_fp->fighter_vars.masterhand.p_masterhand->target_gobj);
 
     unk_coll = target_fp->coll_data.ground_line_id;
 

@@ -16,7 +16,7 @@ void func_ovl3_8013EE50(GObj *fighter_gobj)
 
 void func_ovl3_8013EEE8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Run, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -25,7 +25,7 @@ void func_ovl3_8013EEE8(GObj *fighter_gobj)
 
 bool32 func_ovl3_8013EF2C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (attributes->dash_to_run <= fighter_gobj->anim_frame)

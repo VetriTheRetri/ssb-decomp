@@ -42,7 +42,7 @@ typedef struct Effect_Struct
 
 } Effect_Struct;
 
-#define EffectGetStruct(effect_gobj) \
+#define efGetStruct(effect_gobj) \
 ((Effect_Struct*)effect_gobj->user_data) \
 
 #endif

@@ -4,7 +4,7 @@
 
 bool32 jtgt_ovl3_80174B50(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSWORD_GRAVITY, ATSWORD_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -34,7 +34,7 @@ void func_ovl3_80174BE4(GObj *article_gobj)
 
 void func_ovl3_80174C18(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -56,7 +56,7 @@ bool32 jtgt_ovl3_80174C90(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80174CC0(GObj *article_gobj)
 {
-    Article_Struct *ap = ArticleGetStruct(article_gobj);
+    Article_Struct *ap = atGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -92,7 +92,7 @@ GObj* jtgt_ovl3_80174DA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = ArticleGetStruct(article_gobj);
+        Article_Struct *ap = atGetStruct(article_gobj);
 
         DObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
 

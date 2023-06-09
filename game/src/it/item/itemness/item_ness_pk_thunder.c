@@ -22,11 +22,11 @@ void func_ovl3_8016AD30(GObj *item_gobj, bool32 is_destroy)
     Item_Struct *ip, *ip2, *ip3;
     s32 i;
 
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     if (!(ip->item_vars.pk_thunder.pk_thunder_state & itNessThunderStatus_Destroy))
     {
-        fp = FighterGetStruct(ip->owner_gobj);
+        fp = ftGetStruct(ip->owner_gobj);
 
         if (fp->player_number == ip->player_number)
         {
@@ -34,13 +34,13 @@ void func_ovl3_8016AD30(GObj *item_gobj, bool32 is_destroy)
         }
     }
 
-    fp = FighterGetStruct(ip->owner_gobj);
+    fp = ftGetStruct(ip->owner_gobj);
 
     for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1; i++)
     {
         if (pktGetGObj(ip, i) != NULL)
         {
-            ip2 = ItemGetStruct(pktGetGObj(ip, i));
+            ip2 = itGetStruct(pktGetGObj(ip, i));
             ip2->item_vars.pk_thunder_trail.pk_thunder_trail_state = itNessThunderStatus_Destroy;
             ip->item_vars.pk_thunder.trail_gobj[i] = NULL;
         }
@@ -48,7 +48,7 @@ void func_ovl3_8016AD30(GObj *item_gobj, bool32 is_destroy)
 
     if (pktGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1) != NULL)
     {
-        ip3 = ItemGetStruct(pktGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1));
+        ip3 = itGetStruct(pktGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1));
         ip3->lr = RIGHT;
         ip->item_vars.pk_thunder.trail_gobj[ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1] = NULL;
     }
@@ -56,8 +56,8 @@ void func_ovl3_8016AD30(GObj *item_gobj, bool32 is_destroy)
 
 void func_ovl3_8016ADF4(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     if (fp->player_number == ip->player_number)
     {
@@ -87,7 +87,7 @@ void func_ovl3_8016AE64(GObj *item_gobj, s32 trail_index)
 
 bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp;
     f32 angle_diff;
     Vec3f stick_angle;
@@ -100,7 +100,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *item_gobj) // PK Thunder physics callback?
         return TRUE;
     }
 
-    fp = FighterGetStruct(ip->owner_gobj);
+    fp = ftGetStruct(ip->owner_gobj);
 
     if (ip->item_vars.pk_thunder.pk_thunder_state & itNessThunderStatus_Collide)
     {
@@ -173,7 +173,7 @@ bool32 jtgt_ovl3_8016B198(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016B1E8(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
     func_ovl3_8016AD30(item_gobj, TRUE);
@@ -183,7 +183,7 @@ bool32 jtgt_ovl3_8016B1E8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016B22C(GObj *item_gobj) // Behold, PK Thunder's dangerous reflect callback
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp;
     Vec3f pos = DObjGetStruct(item_gobj)->translate; // Get current position
 
@@ -191,7 +191,7 @@ bool32 jtgt_ovl3_8016B22C(GObj *item_gobj) // Behold, PK Thunder's dangerous ref
 
     ip->owner_gobj = ip->item_vars.pk_thunder.spawn_gobj;
 
-    fp = FighterGetStruct(ip->item_vars.pk_thunder.spawn_gobj);
+    fp = ftGetStruct(ip->item_vars.pk_thunder.spawn_gobj);
 
     ip->player_number = fp->player_number;
 
@@ -217,7 +217,7 @@ GObj *func_ovl3_8016B2C4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create P
 
     if (item_gobj == NULL) return NULL;
 
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     ip->proc_dead = func_ovl3_8016B2A0;
 
@@ -243,13 +243,13 @@ GObj *func_ovl3_8016B2C4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create P
 
 bool32 func_ovl3_8016B398(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     s32 index;
     Fighter_Struct *fp;
 
     if (ip->item_vars.pk_thunder_trail.pk_thunder_trail_state & itNessThunderStatus_Destroy) return TRUE;
 
-    fp = FighterGetStruct(ip->owner_gobj);
+    fp = ftGetStruct(ip->owner_gobj);
 
     index = (fp->fighter_vars.ness.pk_thunder_trail_id - (ip->item_vars.pk_thunder_trail.trail_index * 2)) - 2;
 
@@ -292,7 +292,7 @@ bool32 func_ovl3_8016B398(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016B550(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -305,7 +305,7 @@ GObj* func_ovl3_8016B580(GObj *head_gobj, Vec3f *pos, s32 trail_index)
 {
     GObj *trail_gobj;
     Item_Struct *trail_ip;
-    Item_Struct *head_ip = ItemGetStruct(head_gobj);
+    Item_Struct *head_ip = itGetStruct(head_gobj);
     s32 i;
 
     trail_gobj = func_ovl3_801655C8(head_gobj, &Item_PKThunderTrail_Desc, pos, ITEM_MASK_SPAWN_ITEM);
@@ -315,7 +315,7 @@ GObj* func_ovl3_8016B580(GObj *head_gobj, Vec3f *pos, s32 trail_index)
         return NULL;
     }
 
-    trail_ip = ItemGetStruct(trail_gobj);
+    trail_ip = itGetStruct(trail_gobj);
 
     trail_gobj->renderer = func_ovl3_80167660;
 
@@ -334,7 +334,7 @@ GObj* func_ovl3_8016B580(GObj *head_gobj, Vec3f *pos, s32 trail_index)
     if (trail_index != 0)
     {
         head_gobj = head_ip->item_vars.pk_thunder.trail_gobj[0];
-        head_ip = ItemGetStruct(head_gobj);
+        head_ip = itGetStruct(head_gobj);
     }
 
     trail_ip->item_vars.pk_thunder_trail.trail_gobj[0] = head_gobj;
@@ -363,13 +363,13 @@ void func_ovl3_8016B6A0(GObj *item_gobj, s32 unused)
     Item_Struct *ip, *ip2, *ip3;
     s32 i;
 
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1; i++)
     {
         if (pktTrailGetGObj(ip, i) != NULL)
         {
-            ip2 = ItemGetStruct(pktTrailGetGObj(ip, i));
+            ip2 = itGetStruct(pktTrailGetGObj(ip, i));
             ip2->item_vars.pk_thunder_trail.pk_thunder_trail_state = itNessThunderStatus_Destroy;
             ip->item_vars.pk_thunder_trail.trail_gobj[i] = NULL;
         }
@@ -377,7 +377,7 @@ void func_ovl3_8016B6A0(GObj *item_gobj, s32 unused)
 
     if (pktTrailGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1) != NULL)
     {
-        ip3 = ItemGetStruct(pktTrailGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1));
+        ip3 = itGetStruct(pktTrailGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1));
         ip3->lr = RIGHT;
         ip->item_vars.pk_thunder_trail.trail_gobj[ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1] = NULL;
     }
@@ -385,7 +385,7 @@ void func_ovl3_8016B6A0(GObj *item_gobj, s32 unused)
 
 bool32 jtgt_ovl3_8016B734(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER))
     {
@@ -415,7 +415,7 @@ bool32 jtgt_ovl3_8016B7AC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016B7FC(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
     func_ovl3_8016B6A0(item_gobj, TRUE);
@@ -425,8 +425,8 @@ bool32 jtgt_ovl3_8016B7FC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016B840(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITPKTHUNDER_LIFETIME; // This line is directly responsible for the PK Thunder double reflect crash; omitting it fixes the oversight
 
@@ -456,7 +456,7 @@ GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 
     if (new_gobj == NULL) return NULL;
 
-    ip = ItemGetStruct(new_gobj);
+    ip = itGetStruct(new_gobj);
 
     ip->proc_dead = func_ovl3_8016B874;
 
@@ -486,7 +486,7 @@ GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 
 bool32 func_ovl3_8016B9E0(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     s32 trail_index;
 
     if (ip->item_vars.pk_thunder_trail.pk_thunder_trail_state & itNessThunderStatus_Destroy)
@@ -522,7 +522,7 @@ bool32 func_ovl3_8016B9E0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016BB3C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -537,13 +537,13 @@ GObj* func_ovl3_8016BB6C(GObj *old_gobj, Vec3f *pos, s32 trail_index)
     s32 unused;
     Item_Struct *old_ip, *new_ip;
 
-    old_ip = ItemGetStruct(old_gobj);
+    old_ip = itGetStruct(old_gobj);
 
     new_gobj = func_ovl3_801655C8(old_gobj, &Item_PKThunderTrailReflect_Desc, pos, ITEM_MASK_SPAWN_ITEM);
 
     if (new_gobj == NULL) return NULL;
 
-    new_ip = ItemGetStruct(new_gobj);
+    new_ip = itGetStruct(new_gobj);
 
     new_gobj->renderer = func_ovl3_80167660;
 
@@ -558,7 +558,7 @@ GObj* func_ovl3_8016BB6C(GObj *old_gobj, Vec3f *pos, s32 trail_index)
     if (trail_index != 0)
     {
         old_gobj = old_ip->item_vars.pk_thunder_trail.trail_gobj[0];
-        old_ip = ItemGetStruct(old_gobj);
+        old_ip = itGetStruct(old_gobj);
     }
 
     new_ip->item_vars.pk_thunder_trail.trail_gobj[0] = old_gobj;

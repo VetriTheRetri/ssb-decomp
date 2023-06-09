@@ -31,7 +31,7 @@ bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
         return FALSE;
     }
 
-    if ((FighterGetStruct(fighter_gobj)->percent_damage < 100) || (D_ovl3_8018CFA8 < 1200))
+    if ((ftGetStruct(fighter_gobj)->percent_damage < 100) || (D_ovl3_8018CFA8 < 1200))
     {
         return FALSE;
     }
@@ -39,7 +39,7 @@ bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
     {
         return FALSE;
     }
-    D_ovl3_8018CFBC = D_ovl2_8012C9A8[FighterGetStruct(fighter_gobj)->ft_kind];
+    D_ovl3_8018CFBC = D_ovl2_8012C9A8[ftGetStruct(fighter_gobj)->ft_kind];
 
     if (D_ovl3_8018CFBC == 0x2B7)
     {
@@ -178,7 +178,7 @@ void func_ovl3_80164DE4(f32 arg0, s32 arg1, f32 knockback, s32 arg3)
 
 void func_ovl3_80164F2C(GObj *fighter_gobj, f32 knockback, bool32 arg2)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (knockback >= 100.0F) // Check if knockback is over 100 units
     {
@@ -188,7 +188,7 @@ void func_ovl3_80164F2C(GObj *fighter_gobj, f32 knockback, bool32 arg2)
 
 void func_ovl3_80164F70(GObj *fighter_gobj, f32 knockback)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftPublicReact_Player_Number == fp->player_number)
     {
@@ -212,7 +212,7 @@ static f32 D_ovl2_8013132C; // Extern
 
 void func_ovl3_80165024(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     f32 pos_y = fp->joint[0]->translate.y;
 
@@ -266,7 +266,7 @@ void func_ovl3_80165134(s32 arg0)
     {
         do
         {
-            Fighter_Struct *fp = FighterGetStruct(gobj);
+            Fighter_Struct *fp = ftGetStruct(gobj);
 
             if (!(Match_Info->match_rules & GMMATCH_GAMERULE_STOCK) || (fp->stock_count != -1))
             {
@@ -287,7 +287,7 @@ void func_ovl3_80165134(s32 arg0)
     {
         func_ovl3_80164C44(0x267);
 
-        if ((var_gobj != NULL) && (ftPublicReact_Player_Number == FighterGetStruct(var_gobj)->player_number))
+        if ((var_gobj != NULL) && (ftPublicReact_Player_Number == ftGetStruct(var_gobj)->player_number))
         {
             func_ovl3_80164C18();
         }

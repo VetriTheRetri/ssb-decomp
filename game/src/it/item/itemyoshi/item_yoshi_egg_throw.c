@@ -10,7 +10,7 @@
 
 bool32 func_ovl3_8016BF50(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->item_vars.egg_throw.is_throw == FALSE)
     {
@@ -21,7 +21,7 @@ bool32 func_ovl3_8016BF50(GObj *item_gobj)
 
 bool32 func_ovl3_8016BF74(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (func_ovl3_80167FE8(ip) != FALSE)
     {
@@ -32,7 +32,7 @@ bool32 func_ovl3_8016BF74(GObj *item_gobj)
 
 void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing successfully
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
@@ -58,7 +58,7 @@ void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing succ
 
 void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring 
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
@@ -84,7 +84,7 @@ void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring
 
 void func_ovl3_8016C07C(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     f32 angle = ABS(ip->item_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
 
     if (angle > 1.0F)
@@ -117,7 +117,7 @@ void func_ovl3_8016C07C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C218(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->item_vars.egg_throw.is_spin != FALSE)
     {
@@ -151,7 +151,7 @@ bool32 jtgt_ovl3_8016C218(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C2E0(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     if ((ip->item_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(item_gobj) != FALSE))
     {
@@ -183,7 +183,7 @@ bool32 jtgt_ovl3_8016C364(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C3B4(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -194,8 +194,8 @@ bool32 jtgt_ovl3_8016C3B4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C404(GObj *item_gobj)
 {
-    Item_Struct *ip = ItemGetStruct(item_gobj);
-    Fighter_Struct *fp = FighterGetStruct(ip->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITEGGTHROW_LIFETIME;
 
@@ -227,7 +227,7 @@ GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
         return NULL;
     }
 
-    ip = ItemGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
     item_gobj->renderer = func_ovl3_8016C444;
 

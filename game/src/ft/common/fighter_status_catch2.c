@@ -3,11 +3,11 @@
 // 0x80149EC0
 void ftCommon_CatchPull_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
 
     if (ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_CatchWait_SetStatus) != FALSE)
     {
-        Fighter_Struct *catch_fp = FighterGetStruct(this_fp->catch_gobj);
+        Fighter_Struct *catch_fp = ftGetStruct(this_fp->catch_gobj);
 
         catch_fp->status_vars.common.capture.is_goto_pulled_wait = TRUE;
     }
@@ -18,7 +18,7 @@ Vec3f Fighter_CatchPull_Gfx_Offset = { 0.0F, 0.0F, 0.0F };
 // 0x80149F04
 void ftCommon_CatchPull_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f offset;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CatchPull, fp->status_vars.common.catchmain.catch_pull_frame_begin, 1.0F, (FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
@@ -27,7 +27,7 @@ void ftCommon_CatchPull_SetStatus(GObj *fighter_gobj)
 
     fp->x192_flag_b3 = FALSE;
 
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 
     if (fp->proc_slope != NULL)
     {
@@ -43,7 +43,7 @@ void ftCommon_CatchPull_SetStatus(GObj *fighter_gobj)
 // 0x80149FCC
 void ftCommon_CatchWait_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.catchwait.throw_wait != 0)
     {
@@ -55,13 +55,13 @@ void ftCommon_CatchWait_ProcUpdate(GObj *fighter_gobj)
 // 0x8014A000
 void ftCommon_CatchWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CatchWait, 0.0F, 1.0F, FTSTATUPDATE_SLOPECONTOUR_PRESERVE);
 
     fp->status_vars.common.catchwait.throw_wait = FTCOMMON_CATCH_THROW_WAIT;
 
-    ftCommon_SetCatchIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
+    ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 
     if ((fp->ft_kind == Ft_Kind_Link) || (fp->ft_kind == Ft_Kind_PolyLink))
     {
