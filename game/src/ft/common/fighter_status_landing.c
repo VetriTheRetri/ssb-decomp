@@ -34,9 +34,9 @@ void ftCommon_Landing_ProcInterrupt(GObj *fighter_gobj)
         }
         else if (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-        if (func_ovl3_8013EA04(fighter_gobj) == FALSE)
+        if (ftCommon_Turn_CheckInterruptCommon(fighter_gobj) == FALSE)
         {
-            func_ovl3_8013E648(fighter_gobj);
+            ftCommon_Walk_CheckInterruptCommon(fighter_gobj);
         }
     }
 }

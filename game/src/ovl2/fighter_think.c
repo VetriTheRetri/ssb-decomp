@@ -1543,7 +1543,7 @@ void func_ovl2_800E1E88(GObj *ogobj, GObj *fighter_gobj, void *unused, s32 kind)
     switch (kind)
     {
     case 2:
-        func_ovl3_80143BC4(fighter_gobj, ogobj);
+        ftCommon_Twister_SetStatus(fighter_gobj, ogobj);
         break;
 
     case 3:
@@ -3697,7 +3697,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         {
             fp->damage_knockback *= 0.6666667F;
         }
-        if (fp->status_info.status_id == ftStatus_Common_Tornado)
+        if (fp->status_info.status_id == ftStatus_Common_Twister)
         {
             fp->unk_ft_0x814 = 2;
         }

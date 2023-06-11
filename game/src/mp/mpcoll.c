@@ -2679,7 +2679,7 @@ void func_ovl2_800DE8E4(GObj *fighter_gobj)
 
     if (fp->phys_info.vel_air.y > FTCOMMON_ATTACKAIR_SKIP_LANDING_VEL_Y_MAX)
     {
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
     else ftCommon_Landing_SetStatus(fighter_gobj);
 }
@@ -2871,7 +2871,7 @@ void func_ovl2_800DEE54(GObj *fighter_gobj)
     {
         ftCommon_Fall_SetStatus(fighter_gobj);
     }
-    else func_ovl3_8013E1C8(fighter_gobj);
+    else ftCommon_Wait_SetStatus(fighter_gobj);
 }
 
 void ftMapCollide_SetGround(Fighter_Struct *fp)

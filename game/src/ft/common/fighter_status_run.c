@@ -9,7 +9,7 @@ void ftCommon_Run_ProcInterrupt(GObj *fighter_gobj)
     (func_ovl3_80148D2C(fighter_gobj, 4) == FALSE) &&
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) == FALSE) &&
     (ftCommon_KneeBend_CheckInterruptRun(fighter_gobj) == FALSE) &&
-    (func_ovl3_8013F248(fighter_gobj) == FALSE))
+    (ftCommon_TurnRun_CheckInterruptRun(fighter_gobj) == FALSE))
     {
         ftCommon_RunBrake_CheckInterruptRun(fighter_gobj);
     }

@@ -183,7 +183,7 @@ void func_ovl3_80163F54(GObj *fighter_gobj)
         {
             func_ovl3_80163B40(fp, itGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj));
         }
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 

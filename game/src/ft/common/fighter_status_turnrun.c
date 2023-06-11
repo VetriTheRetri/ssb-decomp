@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_8013F170(GObj *fighter_gobj)
+// 0x8013F170
+void ftCommon_TurnRun_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -14,7 +15,8 @@ void func_ovl3_8013F170(GObj *fighter_gobj)
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_Run_SetStatus);
 }
 
-void func_ovl3_8013F1C0(GObj *fighter_gobj)
+// 0x8013F1C0
+void ftCommon_TurnRun_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -24,23 +26,25 @@ void func_ovl3_8013F1C0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013F208(GObj *fighter_gobj)
+// 0x8013F208
+void ftCommon_TurnRun_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_TurnRun, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_TurnRun, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->command_vars.flags.flag1 = 0;
     fp->command_vars.flags.flag2 = 0;
 }
 
-bool32 func_ovl3_8013F248(GObj *fighter_gobj)
+// 0x8013F248
+bool32 ftCommon_TurnRun_CheckInterruptRun(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.stick_range.x * fp->lr) <= FTCOMMON_TURNRUN_STICK_RANGE_MIN)
     {
-        func_ovl3_8013F208(fighter_gobj);
+        ftCommon_TurnRun_SetStatus(fighter_gobj);
 
         return TRUE;
     }

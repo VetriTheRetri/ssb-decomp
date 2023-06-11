@@ -9,7 +9,7 @@ void ftCommon_Dash_ProcUpdate(GObj *fighter_gobj)
     {
         fp->phys_info.vel_ground.x *= 0.75F;
 
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 
@@ -104,7 +104,7 @@ bool32 ftCommon_Dash_CheckInterruptCommon(GObj *fighter_gobj)
     {
         if ((fp->input.pl.stick_range.x * fp->lr) < 0)
         {
-            func_ovl3_8013E9A8(fighter_gobj);
+            ftCommon_Turn_SetStatusInvertLR(fighter_gobj);
 
             return TRUE;
         }

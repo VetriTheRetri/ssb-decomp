@@ -220,7 +220,7 @@ bool32 func_ovl3_8015D0CC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl3_8013E9D0(fighter_gobj) != FALSE)
+    if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
     {
         if (fp->ground_or_air == ground)
         {

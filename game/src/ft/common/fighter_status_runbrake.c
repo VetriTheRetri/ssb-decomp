@@ -7,7 +7,7 @@ void ftCommon_RunBrake_ProcInterrupt(GObj *fighter_gobj)
 
     if ((ftCommon_KneeBend_CheckInterruptRun(fighter_gobj) == FALSE) && (fp->command_vars.flags.flag1 != 0) && (fighter_gobj->anim_frame <= 4.0F))
     {
-        func_ovl3_8013F248(fighter_gobj);
+        ftCommon_TurnRun_CheckInterruptRun(fighter_gobj);
     }
 }
 

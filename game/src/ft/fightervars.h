@@ -433,12 +433,12 @@ typedef struct ftCommon_FallSpecial_StatusVars
 
 } ftCommon_FallSpecial_StatusVars;
 
-typedef struct ftCommon_Tornado_StatusVars
+typedef struct ftCommon_Twister_StatusVars
 {
     s32 release_wait;
     GObj *tornado_gobj;
 
-} ftCommon_Tornado_StatusVars;
+} ftCommon_Twister_StatusVars;
 
 typedef struct ftCommon_TaruCann_StatusVars
 {
@@ -685,7 +685,7 @@ typedef union ftCommon_StatusVars
     ftCommon_Dokan_StatusVars dokan;
     ftCommon_Landing_StatusVars landing;
     ftCommon_FallSpecial_StatusVars fallspecial;
-    ftCommon_Tornado_StatusVars tornado;
+    ftCommon_Twister_StatusVars twister;
     ftCommon_TaruCann_StatusVars tarucann;
     ftCommon_DownWait_StatusVars downwait;
     ftCommon_DownBounce_StatusVars downbounce;

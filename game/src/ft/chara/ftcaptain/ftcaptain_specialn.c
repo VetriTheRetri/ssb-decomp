@@ -1,7 +1,5 @@
 #include "ftcaptain.h"
 
-
-
 void func_ovl3_8015F7F0(GObj *fighter_gobj) // Falcon Punch
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
@@ -29,7 +27,7 @@ f32 func_ovl3_8015F874(s32 stick_y)
 {
     s32 temp_stick_y = ABS(stick_y);
 
-    if (temp_stick_y >= 51)
+    if (temp_stick_y > 50)
     {
         temp_stick_y = 50;
     }
@@ -46,7 +44,7 @@ f32 func_ovl3_8015F874(s32 stick_y)
         temp_stick_y = -temp_stick_y;
     }
 
-    return (f32) (((temp_stick_y * 30) / 40.0F) * PI32) / 180.0F;
+    return F_DEG_TO_RAD((temp_y * 30) / 40.0F);
 }
 
 void func_ovl3_8015F8EC(GObj *fighter_gobj)
@@ -68,8 +66,8 @@ void func_ovl3_8015F914(GObj *fighter_gobj)
 
         boost = func_ovl3_8015F874(fp->input.pl.stick_range.y);
 
-        fp->phys_info.vel_air.y = (f32)(__sinf(boost) * FTCAPTAIN_FALCONPUNCH_VEL_BASE);
-        fp->phys_info.vel_air.x = (f32)(cosf(boost) * (f32)fp->lr * FTCAPTAIN_FALCONPUNCH_VEL_BASE);
+        fp->phys_info.vel_air.y = (__sinf(boost) * FTCAPTAIN_FALCONPUNCH_VEL_BASE);
+        fp->phys_info.vel_air.x = (cosf(boost) * fp->lr * FTCAPTAIN_FALCONPUNCH_VEL_BASE);
     }
 
     func_ovl3_8015F7F0(fighter_gobj);

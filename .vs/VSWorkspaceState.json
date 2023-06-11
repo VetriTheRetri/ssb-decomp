@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
     "\\game\\src",
     "\\game\\src\\ft",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftpikachu",
     "\\game\\src\\ft\\common",
     "\\game\\src\\gm",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_rebirth.c",
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftpikachu\\ftpikachu_specialn.c",
   "PreviewInSolutionExplorer": false
 }

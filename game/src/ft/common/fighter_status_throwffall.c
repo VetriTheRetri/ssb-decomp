@@ -1,14 +1,16 @@
 #include "ftdonkey.h"
 
-void func_ovl3_8014DA00(GObj *fighter_gobj)
+// 0x8014DA00
+void ftDonkey_ThrowFFall_ProcInterrupt(GObj *fighter_gobj)
 {
     if (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
-        func_ovl3_8014DFA8(fighter_gobj);
+        ftDonkey_ThrowFF_CheckInterruptThrowFCommon(fighter_gobj);
     }
 }
 
-void func_ovl3_8014DA30(GObj *fighter_gobj)
+// 0x8014DA30
+void ftDonkey_ThrowFFall_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -16,13 +18,14 @@ void func_ovl3_8014DA30(GObj *fighter_gobj)
     {
         if (fp->phys_info.vel_air.y > FTCOMMON_THROWFFALL_SKIP_LANDING_VEL_Y_MAX)
         {
-            func_ovl3_8014D49C(fighter_gobj);
+            ftDonkey_ThrowFWait_SetStatus(fighter_gobj);
         }
-        else func_ovl3_8014DCA4(fighter_gobj);
+        else ftDonkey_ThrowFLanding_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8014DA98(GObj *fighter_gobj)
+// 0x8014DA98
+void ftDonkey_ThrowFFall_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -30,11 +33,12 @@ void func_ovl3_8014DA98(GObj *fighter_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFFall, 0.0F, 0.0F, 8U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFFall, 0.0F, 0.0F, FTSTATUPDATE_FASTFALL_PRESERVE);
     func_ovl2_800D8EB8(fp);
 }
 
-void func_ovl3_8014DAF8(GObj *fighter_gobj)
+// 0x8014DAF8
+void ftDonkey_ThrowFJump_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -42,7 +46,7 @@ void func_ovl3_8014DAF8(GObj *fighter_gobj)
     s32 vel_y;
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFFall, 0.0F, 0.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFFall, 0.0F, 0.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     switch (fp->status_vars.common.throwf.input_source)
     {
@@ -62,18 +66,20 @@ void func_ovl3_8014DAF8(GObj *fighter_gobj)
     fp->tap_stick_y = U8_MAX - 1;
 }
 
-void func_ovl3_8014DBE0(GObj *fighter_gobj)
+// 0x8014DBE0
+void ftDonkey_ThrowFFall_SetStatusPass(GObj *fighter_gobj)
 {
     ftCommon_Pass_SetStatusParam(fighter_gobj, ftStatus_Donkey_ThrowFFall, 1.0F, 0);
 }
 
-bool32 func_ovl3_8014DC08(GObj *fighter_gobj)
+// 0x8014DC08
+bool32 ftDonkey_ThrowFFall_CheckInterruptPass(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_Pass_CheckInputSuccess(fp) != FALSE)
     {
-        func_ovl3_8014DBE0(fighter_gobj);
+        ftDonkey_ThrowFFall_SetStatusPass(fighter_gobj);
 
         return TRUE;
     }

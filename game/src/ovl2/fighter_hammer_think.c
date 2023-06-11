@@ -139,7 +139,7 @@ void ftCommon_HammerWait_SetStatus(GObj *fighter_gobj)
 // 0x800F39AC
 bool32 ftCommon_HammerWaitCheckSetStatus(GObj *fighter_gobj)
 {
-    if (func_ovl3_8013E258(fighter_gobj) != FALSE)
+    if (ftCommon_Wait_CheckInputSuccess(fighter_gobj) != FALSE)
     {
         ftCommon_HammerWait_SetStatus(fighter_gobj);
 

@@ -14,7 +14,7 @@ bool32 ftAnim_IfAnimEnd_ProcStatus(GObj *fighter_gobj, void (*proc_status)(GObj*
 // 0x800D94C4
 void ftCommon_IfAnimEnd_SetStatusWait(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013E1C8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_Wait_SetStatus);
 }
 
 // 0x800D94E8

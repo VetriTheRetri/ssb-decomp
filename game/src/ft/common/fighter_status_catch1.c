@@ -44,7 +44,7 @@ void ftCommon_Catch_CaptureSetStatusRelease(GObj *fighter_gobj)
 
         if (catch_fp->ground_or_air == ground)
         {
-            func_ovl3_8013E1C8(catch_gobj);
+            ftCommon_Wait_SetStatus(catch_gobj);
         }
         else ftCommon_Fall_SetStatus(catch_gobj);
 

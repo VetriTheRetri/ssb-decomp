@@ -49,7 +49,7 @@ void ftCommon_Entry_ProcUpdate(GObj *fighter_gobj)
 
                 fp->coll_data.ground_line_id = fp->status_vars.common.entry.ground_line_id;
 
-                func_ovl3_8013E1C8(fighter_gobj);
+                ftCommon_Wait_SetStatus(fighter_gobj);
             }
         }
     }
@@ -95,7 +95,7 @@ void ftCommon_Appear_ProcUpdate(GObj *fighter_gobj)
         {
             func_ovl3_80159040(fighter_gobj);
         }
-        else func_ovl3_8013E1C8(fighter_gobj);
+        else ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 

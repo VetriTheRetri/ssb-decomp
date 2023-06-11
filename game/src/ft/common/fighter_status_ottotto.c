@@ -20,7 +20,7 @@
     (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_8013EA04(fighter_gobj) != FALSE)     \
+    (ftCommon_Turn_CheckInterruptCommon(fighter_gobj) != FALSE)     \
 )                                                   \
 
 // 0x80142850
@@ -38,7 +38,7 @@ void ftCommon_Ottotto_ProcInterrupt(GObj *fighter_gobj)
     {
         if ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_OTTOTTO_WALK_STICK_RANGE_MIN)
         {
-            func_ovl3_8013E648(fighter_gobj);
+            ftCommon_Walk_CheckInterruptCommon(fighter_gobj);
         }
     }
 }
@@ -70,7 +70,7 @@ void ftCommon_Ottotto_ProcMap(GObj *fighter_gobj)
 
         if (dist_x > FTCOMMON_OTTOTTO_WALK_DIST_X_MIN)
         {
-            func_ovl3_8013E1C8(fighter_gobj);
+            ftCommon_Wait_SetStatus(fighter_gobj);
         }
     }
 }

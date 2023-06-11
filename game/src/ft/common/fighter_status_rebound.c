@@ -9,7 +9,7 @@ void ftCommon_Rebound_ProcUpdate(GObj *fighter_gobj)
 
     if (fp->status_vars.common.rebound.rebound_timer <= 0.0F)
     {
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 

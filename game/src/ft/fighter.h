@@ -241,7 +241,7 @@ typedef enum ftCommonAction
     ftStatus_Common_DamageFall,
     ftStatus_Common_FallSpecial,
     ftStatus_Common_LandingFallSpecial,
-    ftStatus_Common_Tornado,
+    ftStatus_Common_Twister,
     ftStatus_Common_TaruCann, // DK Barrel
     ftStatus_Common_DokanStart, // Enter pipe
     ftStatus_Common_DokanWait, // In pipe
@@ -1328,8 +1328,8 @@ void ftAnim_Update(GObj*); // ???
     (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013EA04(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013E648(fighter_gobj) != FALSE)    \
+    (ftCommon_Turn_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_Walk_CheckInterruptCommon(fighter_gobj) != FALSE)    \
 )                                                  \
 
 #endif

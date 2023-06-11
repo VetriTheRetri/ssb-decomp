@@ -21,7 +21,7 @@ void func_ovl3_8015EDE4(GObj *fighter_gobj)
         func_ovl2_800EDF24(fp->joint[FTYOSHI_YOSHIBOMB_STAR_SPAWN_JOINT], &pos);
         func_ovl3_8016C954(fighter_gobj, &pos);
     }
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013E1C8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_Wait_SetStatus);
 }
 
 void func_ovl3_8015EE4C(GObj *fighter_gobj)

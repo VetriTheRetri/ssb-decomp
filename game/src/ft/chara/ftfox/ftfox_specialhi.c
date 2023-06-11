@@ -449,7 +449,7 @@ void ftFox_SpecialHiBound_ProcUpdate(GObj* fighter_gobj)
         {
             ftCommon_FallSpecial_SetStatus(fighter_gobj, FTFOX_FIREFOX_AIR_DRIFT, FALSE, TRUE, FALSE, FTFOX_FIREFOX_LANDING_LAG, TRUE);
         }
-        else func_ovl3_8013E1C8(fighter_gobj);
+        else ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 

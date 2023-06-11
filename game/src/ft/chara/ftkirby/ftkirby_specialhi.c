@@ -109,7 +109,7 @@ void func_ovl3_80160D40(GObj *fighter_gobj)
 
         func_ovl3_8016BE8C(fighter_gobj, &pos);
     }
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013E1C8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_Wait_SetStatus);
 }
 
 void func_ovl3_80160DF0(GObj *fighter_gobj)

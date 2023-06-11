@@ -1,7 +1,7 @@
 #include "ftdonkey.h"
 
 // 0x8014DD00
-void func_ovl3_8014DD00(GObj *fighter_gobj)
+void ftDonkey_ThrowFF_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -24,7 +24,7 @@ void func_ovl3_8014DD00(GObj *fighter_gobj)
     }
     if (fp->command_vars.flags.flag2 != 0)
     {
-        func_ovl3_8014AB64(fp->catch_gobj);
+        ftCommon_Thrown_ProcPhysics(fp->catch_gobj);
         func_ovl3_8014AFD0(fp->catch_gobj, -fp->lr, 0, 1);
 
         fp->command_vars.flags.flag2 = 0;
@@ -38,7 +38,8 @@ void func_ovl3_8014DD00(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014DE30(GObj *fighter_gobj)
+// 0x8014DE30
+void ftDonkey_ThrowAirFF_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -50,7 +51,8 @@ void func_ovl3_8014DE30(GObj *fighter_gobj)
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
-void func_ovl3_8014DE80(GObj *fighter_gobj)
+// 0x8014DE80
+void ftDonkey_ThrowFF_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -59,17 +61,20 @@ void func_ovl3_8014DE80(GObj *fighter_gobj)
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }
 
-void func_ovl3_8014DECC(GObj *fighter_gobj)
+// 0x8014DECC
+void ftDonkey_ThrowFF_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDDDC(fighter_gobj, func_ovl3_8014DE80);
+    func_ovl2_800DDDDC(fighter_gobj, ftDonkey_ThrowFF_SwitchStatusAir);
 }
 
-void func_ovl3_8014DEF0(GObj *fighter_gobj)
+// 0x8014DEF0
+void ftDonkey_ThrowAirFF_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_8014DE30);
+    func_ovl2_800DE6E4(fighter_gobj, ftDonkey_ThrowAirFF_SwitchStatusGround);
 }
 
-void func_ovl3_8014DF14(GObj *fighter_gobj, bool32 is_turn)
+// 0x8014DF14
+void ftDonkey_ThrowFF_SetStatus(GObj *fighter_gobj, bool32 is_turn)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
@@ -101,7 +106,8 @@ void func_ovl3_8014DF14(GObj *fighter_gobj, bool32 is_turn)
     }
 }
 
-bool32 func_ovl3_8014DFA8(GObj *fighter_gobj)
+// 0x8014DFA8
+bool32 ftDonkey_ThrowFF_CheckInterruptThrowFCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     bool32 is_turn = FALSE;
@@ -112,7 +118,7 @@ bool32 func_ovl3_8014DFA8(GObj *fighter_gobj)
         {
             is_turn = TRUE;
         }
-        func_ovl3_8014DF14(fighter_gobj, is_turn);
+        ftDonkey_ThrowFF_SetStatus(fighter_gobj, is_turn);
 
         return TRUE;
     }

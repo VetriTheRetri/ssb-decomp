@@ -19,7 +19,7 @@ void ftCommon_Throw_ProcUpdate(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag2 != 0)
     {
-        func_ovl3_8014AB64(fp->catch_gobj);
+        ftCommon_Thrown_ProcPhysics(fp->catch_gobj);
 
         func_ovl3_8014AFD0(fp->catch_gobj, (fp->command_vars.flags.flag2 == 1) ? -fp->lr : fp->lr, (fp->status_info.status_id == ftStatus_Common_ThrowB) ? 1 : 0, 1);
 
@@ -36,7 +36,7 @@ void ftCommon_Throw_ProcUpdate(GObj *fighter_gobj)
             if (fp->status_info.status_id == ftStatus_Common_ThrowF)
             {
                 ftCommon_Shouldered_SetStatus(fp->catch_gobj);
-                func_ovl3_8014D49C(fighter_gobj);
+                ftDonkey_ThrowFWait_SetStatus(fighter_gobj);
 
                 return;
             }
@@ -89,9 +89,9 @@ void ftCommon_Throw_SetStatus(GObj *fighter_gobj, bool32 is_throwf)
     }
     if (thrown_status->status1 != -1)
     {
-        func_ovl3_8014AC0C(catch_gobj, thrown_status->status1, thrown_status->status2);
+        ftCommon_Thrown_SetStatusQueue(catch_gobj, thrown_status->status1, thrown_status->status2);
     }
-    else func_ovl3_8014ACB4(catch_gobj, thrown_status->status2);
+    else ftCommon_Thrown_SetStatusImmediate(catch_gobj, thrown_status->status2);
 
     if ((this_fp->ft_kind == Ft_Kind_Kirby) || (this_fp->ft_kind == Ft_Kind_PolyKirby))
     {

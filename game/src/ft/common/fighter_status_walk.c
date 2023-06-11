@@ -18,10 +18,11 @@
     (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013E2A0(fighter_gobj) != FALSE)    \
+    (ftCommon_Wait_CheckInterruptCommon(fighter_gobj) != FALSE)    \
 )                                                  \
 
-f32 func_ovl3_8013E2E0(Fighter_Struct *fp, s32 status_id)
+// 0x8013E2E0
+f32 ftCommon_Walk_GetWalkAnimSpeed(Fighter_Struct *fp, s32 status_id)
 {
     f32 walk_anim_speed;
 
@@ -42,7 +43,8 @@ f32 func_ovl3_8013E2E0(Fighter_Struct *fp, s32 status_id)
     return walk_anim_speed;
 }
 
-s32 func_ovl3_8013E340(s8 stick_range_x)
+// 0x8013E340
+s32 ftCommon_Walk_GetWalkStatus(s8 stick_range_x)
 {
     s32 status_id;
 
@@ -57,25 +59,27 @@ s32 func_ovl3_8013E340(s8 stick_range_x)
     return status_id;
 }
 
-void func_ovl3_8013E390(GObj *fighter_gobj)
+// 0x8013E390
+void ftCommon_Walk_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = fighter_gobj->user_data;
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (!ftStatus_CheckInterruptWalk(fighter_gobj))
     {
-        s32 status_id = func_ovl3_8013E340(ABS(fp->input.pl.stick_range.x));
+        s32 status_id = ftCommon_Walk_GetWalkStatus(ABS(fp->input.pl.stick_range.x));
 
         if (status_id != fp->status_info.status_id)
         {
-            f32 div = func_ovl3_8013E2E0(fp, fp->status_info.status_id);
-            f32 mul = func_ovl3_8013E2E0(fp, status_id);
+            f32 div = ftCommon_Walk_GetWalkAnimSpeed(fp, fp->status_info.status_id);
+            f32 mul = ftCommon_Walk_GetWalkAnimSpeed(fp, status_id);
 
-            func_ovl3_8013E580(fighter_gobj, (s32) ((fighter_gobj->anim_frame / div) * mul));
+            ftCommon_Walk_SetStatusParam(fighter_gobj, (s32) ((fighter_gobj->anim_frame / div) * mul));
         }
     }
 }
 
-void func_ovl3_8013E548(GObj *fighter_gobj)
+// 0x8013E548
+void ftCommon_Walk_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -83,12 +87,13 @@ void func_ovl3_8013E548(GObj *fighter_gobj)
     func_ovl2_800D87D0(fighter_gobj);
 }
 
-void func_ovl3_8013E580(GObj *fighter_gobj, f32 anim_frame_begin)
+// 0x8013E580
+void ftCommon_Walk_SetStatusParam(GObj *fighter_gobj, f32 anim_frame_begin)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    s32 status_id = func_ovl3_8013E340(fp->input.pl.stick_range.x);
+    s32 status_id = ftCommon_Walk_GetWalkStatus(fp->input.pl.stick_range.x);
 
-    ftStatus_Update(fighter_gobj, status_id, anim_frame_begin, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, anim_frame_begin, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     if (status_id != ftStatus_Common_WalkFast)
@@ -97,12 +102,14 @@ void func_ovl3_8013E580(GObj *fighter_gobj, f32 anim_frame_begin)
     }
 }
 
-void func_ovl3_8013E5F4(GObj *fighter_gobj)
+// 0x8013E5F4
+void ftCommon_Walk_SetStatusDefault(GObj *fighter_gobj)
 {
-    func_ovl3_8013E580(fighter_gobj, 0.0F);
+    ftCommon_Walk_SetStatusParam(fighter_gobj, 0.0F);
 }
 
-bool32 func_ovl3_8013E614(GObj *fighter_gobj)
+// 0x8013E614
+bool32 ftCommon_Walk_CheckInputSuccess(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -113,11 +120,12 @@ bool32 func_ovl3_8013E614(GObj *fighter_gobj)
     else return FALSE;
 }
 
-bool32 func_ovl3_8013E648(GObj *fighter_gobj)
+// 0x8013E648
+bool32 ftCommon_Walk_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    if (func_ovl3_8013E614(fighter_gobj) != FALSE)
+    if (ftCommon_Walk_CheckInputSuccess(fighter_gobj) != FALSE)
     {
-        func_ovl3_8013E5F4(fighter_gobj);
+        ftCommon_Walk_SetStatusDefault(fighter_gobj);
 
         return TRUE;
     }

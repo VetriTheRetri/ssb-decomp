@@ -1,12 +1,13 @@
 #include "ftdonkey.h"
 
-#define ftStatus_CheckInterruptThrowFTurn(fighter_gobj) \
-(                                                       \
-    (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) != FALSE) ||      \
-    (func_ovl3_8014DFA8(fighter_gobj) != FALSE)         \
-)                                                       \
+#define ftStatus_CheckInterruptThrowFTurn(fighter_gobj)                     \
+(                                                                           \
+    (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) != FALSE) ||    \
+    (ftDonkey_ThrowFF_CheckInterruptThrowFCommon(fighter_gobj) != FALSE)    \
+)                                                                           \
 
-void func_ovl3_8014D740(GObj *fighter_gobj)
+// 0x8014D740
+void ftDonkey_ThrowFTurn_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -18,32 +19,35 @@ void func_ovl3_8014D740(GObj *fighter_gobj)
 
         fp->phys_info.vel_ground.x = -fp->phys_info.vel_ground.x;
     }
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014D49C);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftDonkey_ThrowFWait_SetStatus);
 }
 
-void func_ovl3_8014D790(GObj *fighter_gobj)
+// 0x8014D790
+void ftDonkey_ThrowFTurn_ProcInterrupt(GObj *fighter_gobj)
 {
     if (!ftStatus_CheckInterruptThrowFTurn(fighter_gobj))
     {
-        func_ovl3_8014D9B8(fighter_gobj);
+        ftDonkey_ThrowFKneeBend_CheckInterruptThrowFCommon(fighter_gobj);
     }
 }
 
-void func_ovl3_8014D7D0(GObj *fighter_gobj)
+// 0x8014D7D0
+void ftDonkey_ThrowFTurn_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFTurn, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFTurn, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }
 
-bool32 func_ovl3_8014D810(GObj *fighter_gobj)
+// 0x8014D810
+bool32 ftDonkey_ThrowFTurn_CheckInterruptThrowFCommon(GObj *fighter_gobj)
 {
-    if (func_ovl3_8013E9D0(fighter_gobj) != FALSE)
+    if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
     {
-        func_ovl3_8014D7D0(fighter_gobj);
+        ftDonkey_ThrowFTurn_SetStatus(fighter_gobj);
 
         return TRUE;
     }

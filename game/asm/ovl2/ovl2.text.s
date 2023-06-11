@@ -3446,9 +3446,9 @@ glabel ftAnim_IfAnimEnd_ProcStatus
 glabel ftCommon_IfAnimEnd_SetStatusWait
   /* 054CC4 800D94C4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 054CC8 800D94C8 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 054CCC 800D94CC 3C058014 */       lui $a1, %hi(func_ovl3_8013E1C8)
+  /* 054CCC 800D94CC 3C058014 */       lui $a1, %hi(ftCommon_Wait_SetStatus)
   /* 054CD0 800D94D0 0C036520 */       jal ftAnim_IfAnimEnd_ProcStatus
-  /* 054CD4 800D94D4 24A5E1C8 */     addiu $a1, $a1, %lo(func_ovl3_8013E1C8)
+  /* 054CD4 800D94D4 24A5E1C8 */     addiu $a1, $a1, %lo(ftCommon_Wait_SetStatus)
   /* 054CD8 800D94D8 8FBF0014 */        lw $ra, 0x14($sp)
   /* 054CDC 800D94DC 27BD0018 */     addiu $sp, $sp, 0x18
   /* 054CE0 800D94E0 03E00008 */        jr $ra
@@ -9265,7 +9265,7 @@ glabel func_ovl2_800DE8E4
   /* 05A100 800DE900 00000000 */       nop 
   /* 05A104 800DE904 45000005 */      bc1f .L800DE91C
   /* 05A108 800DE908 00000000 */       nop 
-  /* 05A10C 800DE90C 0C04F872 */       jal func_ovl3_8013E1C8
+  /* 05A10C 800DE90C 0C04F872 */       jal ftCommon_Wait_SetStatus
   /* 05A110 800DE910 00000000 */       nop 
   /* 05A114 800DE914 10000004 */         b .L800DE928
   /* 05A118 800DE918 8FBF0014 */        lw $ra, 0x14($sp)
@@ -9654,7 +9654,7 @@ glabel func_ovl2_800DEE54
   /* 05A678 800DEE78 10000004 */         b .L800DEE8C
   /* 05A67C 800DEE7C 8FBF0014 */        lw $ra, 0x14($sp)
   .L800DEE80:
-  /* 05A680 800DEE80 0C04F872 */       jal func_ovl3_8013E1C8
+  /* 05A680 800DEE80 0C04F872 */       jal ftCommon_Wait_SetStatus
   /* 05A684 800DEE84 00000000 */       nop 
   /* 05A688 800DEE88 8FBF0014 */        lw $ra, 0x14($sp)
   .L800DEE8C:
@@ -13059,7 +13059,7 @@ glabel func_ovl2_800E1E88
   /* 05D6B8 800E1EB8 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E1EBC:
   /* 05D6BC 800E1EBC 00C02025 */        or $a0, $a2, $zero
-  /* 05D6C0 800E1EC0 0C050EF1 */       jal func_ovl3_80143BC4
+  /* 05D6C0 800E1EC0 0C050EF1 */       jal ftCommon_Twister_SetStatus
   /* 05D6C4 800E1EC4 8FA50018 */        lw $a1, 0x18($sp)
   /* 05D6C8 800E1EC8 10000004 */         b .L800E1EDC
   /* 05D6CC 800E1ECC 8FBF0014 */        lw $ra, 0x14($sp)
@@ -32988,7 +32988,7 @@ glabel ftCommon_HammerWait_SetStatus
 glabel ftCommon_HammerWaitCheckSetStatus
   /* 06F1AC 800F39AC 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 06F1B0 800F39B0 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 06F1B4 800F39B4 0C04F896 */       jal func_ovl3_8013E258
+  /* 06F1B4 800F39B4 0C04F896 */       jal ftCommon_Wait_CheckInputSuccess
   /* 06F1B8 800F39B8 AFA40018 */        sw $a0, 0x18($sp)
   /* 06F1BC 800F39BC 50400006 */      beql $v0, $zero, .L800F39D8
   /* 06F1C0 800F39C0 00001025 */        or $v0, $zero, $zero

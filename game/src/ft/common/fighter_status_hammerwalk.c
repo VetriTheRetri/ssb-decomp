@@ -21,7 +21,7 @@ void ftCommon_HammerWalk_SetStatus(GObj *fighter_gobj)
 // 0x80147A2C
 bool32 ftCommon_HammerWalk_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    if (func_ovl3_8013E614(fighter_gobj) != FALSE)
+    if (ftCommon_Walk_CheckInputSuccess(fighter_gobj) != FALSE)
     {
         ftCommon_HammerWalk_SetStatus(fighter_gobj);
 

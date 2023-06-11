@@ -58,7 +58,7 @@ void ftCommon_FallSpecial_ProcMap(GObj *fighter_gobj)
         {
             ftCommon_LandingFallSpecial_SetStatus(fighter_gobj, fp->status_vars.common.fallspecial.is_allow_interrupt, fp->status_vars.common.fallspecial.landing_lag);
         }
-        else func_ovl3_8013E1C8(fighter_gobj);
+        else ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 

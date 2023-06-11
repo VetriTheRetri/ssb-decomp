@@ -120,7 +120,7 @@ void func_ovl3_8015D5AC(GObj *fighter_gobj)
             {
                 ftCommon_CheckSetColAnimIndex(fighter_gobj, 6, 0);
                 func_ovl3_8015D300(fp);
-                func_ovl3_8013E1C8(fighter_gobj);
+                ftCommon_Wait_SetStatus(fighter_gobj);
             }
 
             else if (fp->status_vars.samus.specialn.charge_gobj != NULL)
@@ -155,7 +155,7 @@ void func_ovl3_8015D640(GObj *fighter_gobj)
     else if (fp->input.pl.button_tap & fp->input.button_mask_z)
     {
         func_ovl3_8015D300(fp);
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 

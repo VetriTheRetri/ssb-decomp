@@ -17,7 +17,7 @@ void ftCommon_Escape_ProcUpdate(GObj *fighter_gobj)
 
         if ((fp->ft_kind != Ft_Kind_Yoshi) && (fp->ft_kind != Ft_Kind_PolyYoshi) || (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) == FALSE))
         {
-            func_ovl3_8013E1C8(fighter_gobj);
+            ftCommon_Wait_SetStatus(fighter_gobj);
         }
     }
 }

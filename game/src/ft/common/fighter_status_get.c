@@ -161,11 +161,11 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
             {
                 if ((fp->ft_kind == Ft_Kind_Donkey) || (fp->ft_kind == Ft_Kind_PolyDonkey) || (fp->ft_kind == Ft_Kind_GiantDonkey))
                 {
-                    func_ovl3_8014D49C(fighter_gobj);
+                    ftDonkey_ThrowFWait_SetStatus(fighter_gobj);
                 }
                 else ftCommon_LiftWait_SetStatus(fighter_gobj);
             }
-            else func_ovl3_8013E1C8(fighter_gobj);
+            else ftCommon_Wait_SetStatus(fighter_gobj);
         }
         else
         {
@@ -187,7 +187,7 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
                     }
                 }
             }
-            func_ovl3_8013E1C8(fighter_gobj);
+            ftCommon_Wait_SetStatus(fighter_gobj);
         }
     }
 }
@@ -348,7 +348,7 @@ void ftCommon_LiftTurn_SetStatus(GObj *fighter_gobj)
 // 0x8014625C
 bool32 ftCommon_LiftTurn_CheckInterruptLiftWait(GObj *fighter_gobj)
 {
-    if (func_ovl3_8013E9D0(fighter_gobj) != FALSE)
+    if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
     {
         ftCommon_LiftTurn_SetStatus(fighter_gobj);
 

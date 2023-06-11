@@ -16,7 +16,7 @@ void func_ovl3_80151B50(GObj *fighter_gobj)
 
         func_ovl2_800EDF24(fp->joint[FTPIKACHU_THUNDERJOLT_SPAWN_JOINT], &pos);
 
-        vel.x = cosf(FTPIKACHU_THUNDERJOLT_SPAWN_ANGLE) * FTPIKACHU_THUNDERJOLT_VEL * (f32)fp->lr;
+        vel.x = cosf(FTPIKACHU_THUNDERJOLT_SPAWN_ANGLE) * FTPIKACHU_THUNDERJOLT_VEL * fp->lr;
         vel.y = __sinf(FTPIKACHU_THUNDERJOLT_SPAWN_ANGLE) * FTPIKACHU_THUNDERJOLT_VEL;
         vel.z = 0.0F;
 

@@ -2,22 +2,23 @@
 #include "article.h"
 #include "gmground.h"
 
-void func_ovl3_801439D0(GObj *fighter_gobj)
+void ftCommon_Twister_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->status_vars.common.tornado.release_wait++;
+    fp->status_vars.common.twister.release_wait++;
 
-    if (fp->status_vars.common.tornado.release_wait >= FTCOMMON_TORNADO_RELEASE_WAIT)
+    if (fp->status_vars.common.twister.release_wait >= FTCOMMON_TORNADO_RELEASE_WAIT)
     {
-        func_ovl3_80143CC4(fighter_gobj);
+        ftCommon_Twister_ShootFighter(fighter_gobj);
     }
 }
 
-void func_ovl3_80143A20(GObj *fighter_gobj)
+// 0x80143A20
+void ftCommon_Twister_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *tornado_gobj = fp->status_vars.common.tornado.tornado_gobj;
+    GObj *tornado_gobj = fp->status_vars.common.twister.tornado_gobj;
     Vec3f pos = DObjGetStruct(tornado_gobj)->translate;
     Vec3f vel;
     f32 mul;
@@ -25,7 +26,7 @@ void func_ovl3_80143A20(GObj *fighter_gobj)
     f32 mag;
     f32 unused[2];
 
-    angle_d = (fp->status_vars.common.tornado.release_wait * 0.016666668F);
+    angle_d = (fp->status_vars.common.twister.release_wait * 0.016666668F);
     mul = (((400.0F * angle_d) + 100.0F) * 0.5F);
 
     pos.x += (mul * func_ovl0_800C78B8(F_DEG_TO_RAD(1800.0F * angle_d)));
@@ -45,7 +46,8 @@ void func_ovl3_80143A20(GObj *fighter_gobj)
     DObjGetStruct(fighter_gobj)->rotate.y = (fp->lr * HALF_PI32) + F_DEG_TO_RAD(1800.0F * angle_d);
 }
 
-void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
+// 0x80143BC4
+void ftCommon_Twister_SetStatus(GObj *fighter_gobj, GObj *tornado_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
@@ -72,12 +74,12 @@ void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
     {
         ftMapCollide_SetAir(fp);
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Tornado, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Twister, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800D9444(fighter_gobj);
 
-    fp->status_vars.common.tornado.release_wait = 0;
-    fp->status_vars.common.tornado.tornado_gobj = tornado_gobj;
+    fp->status_vars.common.twister.release_wait = 0;
+    fp->status_vars.common.twister.tornado_gobj = tornado_gobj;
 
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     func_800269C0(0x11CU);
@@ -86,7 +88,8 @@ void func_ovl3_80143BC4(GObj *fighter_gobj, GObj *tornado_gobj)
 extern intptr_t D_NF_00000014;
 extern intptr_t D_NF_000000BC;
 
-void func_ovl3_80143CC4(GObj *fighter_gobj)
+// 0x80143CC4
+void ftCommon_Twister_ShootFighter(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftThrowHitDesc *tornado = (ftThrowHitDesc*) (((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing

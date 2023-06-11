@@ -1,11 +1,13 @@
 #include "fighter.h"
 
-void func_ovl3_8013E070(GObj *fighter_gobj)
+// 0x8013E070
+void ftCommon_Wait_ProcInterrupt(GObj *fighter_gobj)
 {
     !ftStatus_CheckInterruptAll(fighter_gobj);
 }
 
-void func_ovl3_8013E1C8(GObj *fighter_gobj)
+// 0x8013E1C8
+void ftCommon_Wait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -27,7 +29,8 @@ void func_ovl3_8013E1C8(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl3_8013E258(GObj *fighter_gobj)
+// 0x8013E258
+bool32 ftCommon_Wait_CheckInputSuccess(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -38,12 +41,12 @@ bool32 func_ovl3_8013E258(GObj *fighter_gobj)
     else return FALSE;
 }
 
-
-bool32 func_ovl3_8013E2A0(GObj *fighter_gobj)
+// 0x8013E2A0
+bool32 ftCommon_Wait_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    if (func_ovl3_8013E258(fighter_gobj) != FALSE)
+    if (ftCommon_Wait_CheckInputSuccess(fighter_gobj) != FALSE)
     {
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
 
         return TRUE;
     }

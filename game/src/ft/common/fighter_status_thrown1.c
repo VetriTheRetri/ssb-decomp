@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_8014AAF0(GObj *fighter_gobj)
+// 0x8014AAF0
+void ftCommon_Thrown_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
 
@@ -8,23 +9,28 @@ void func_ovl3_8014AAF0(GObj *fighter_gobj)
     {
         Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
-        if ((capture_fp->ft_kind != Ft_Kind_Donkey) &&
-        (capture_fp->ft_kind != Ft_Kind_PolyDonkey) &&
-        (capture_fp->ft_kind != Ft_Kind_GiantDonkey) ||
-        (capture_fp->status_info.status_id != ftStatus_Common_ThrowF))
+        if 
+        (
+            (capture_fp->ft_kind != Ft_Kind_Donkey)                       &&
+            (capture_fp->ft_kind != Ft_Kind_PolyDonkey)                   &&
+            (capture_fp->ft_kind != Ft_Kind_GiantDonkey)                  ||
+            (capture_fp->status_info.status_id != ftStatus_Common_ThrowF)
+        )
         {
-            func_ovl3_8014ACB4(fighter_gobj, this_fp->status_vars.common.thrown.status_id);
+            ftCommon_Thrown_SetStatusImmediate(fighter_gobj, this_fp->status_vars.common.thrown.status_id);
         }
     }
 }
 
-void func_ovl3_8014AB64(GObj *fighter_gobj)
+// 0x8014AB64
+void ftCommon_Thrown_ProcPhysics(GObj *fighter_gobj)
 {
     DObj *joint = DObjGetStruct(fighter_gobj);
     ftCommon_CapturePulled_BitmapRotateScale(fighter_gobj, &joint->translate, &joint->rotate);
 }
 
-void func_ovl3_8014AB8C(GObj *fighter_gobj)
+// 0x8014AB8C
+void ftCommon_Thrown_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
@@ -45,7 +51,8 @@ void func_ovl3_8014AB8C(GObj *fighter_gobj)
     func_ovl2_800DE324(fighter_gobj);
 }
 
-void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_queue)
+// 0x8014AC0C
+void ftCommon_Thrown_SetStatusQueue(GObj *fighter_gobj, s32 status_id_new, s32 status_id_queue)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
@@ -67,7 +74,8 @@ void func_ovl3_8014AC0C(GObj *fighter_gobj, s32 status_id_new, s32 status_id_que
     this_fp->status_vars.common.thrown.status_id = status_id_queue;
 }
 
-void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
+// 0x8014ACB4
+void ftCommon_Thrown_SetStatusImmediate(GObj *fighter_gobj, s32 status_id)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
@@ -86,11 +94,14 @@ void func_ovl3_8014ACB4(GObj *fighter_gobj, s32 status_id)
     }
     ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 
-    if ((capture_fp->ft_kind == Ft_Kind_Mario)  ||
-    (capture_fp->ft_kind == Ft_Kind_MetalMario) ||
-    (capture_fp->ft_kind == Ft_Kind_Luigi)      ||
-    (capture_fp->ft_kind == Ft_Kind_PolyMario)  ||
-    (capture_fp->ft_kind == Ft_Kind_PolyLuigi))
+    if 
+    (
+        (capture_fp->ft_kind == Ft_Kind_Mario)      ||
+        (capture_fp->ft_kind == Ft_Kind_MetalMario) ||
+        (capture_fp->ft_kind == Ft_Kind_Luigi)      ||
+        (capture_fp->ft_kind == Ft_Kind_PolyMario)  ||
+        (capture_fp->ft_kind == Ft_Kind_PolyLuigi)
+    )
     {
         if (capture_fp->status_info.status_id == ftStatus_Common_ThrowB)
         {

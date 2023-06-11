@@ -121,7 +121,7 @@ void ftCommon_Shouldered_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     s32 damage;
 
-    func_ovl3_8014ACB4(fighter_gobj, ftStatus_Common_Shouldered);
+    ftCommon_Thrown_SetStatusImmediate(fighter_gobj, ftStatus_Common_Shouldered);
     ftCommon_Trap_InitBreakoutVars(this_fp, ((this_fp->percent_damage * 0.08F) + 14.0F));
 
     damage = gmCommon_DamageApplyStale(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->motion_count);

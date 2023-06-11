@@ -64,7 +64,7 @@ void ftCommon_GuardOn_ProcUpdate(GObj *fighter_gobj)
     }
     else if (fighter_gobj->anim_frame <= 0.0F)
     {
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
     else func_ovl3_80148714(fighter_gobj);
 }

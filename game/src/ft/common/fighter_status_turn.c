@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_8013E690(GObj *fighter_gobj)
+// 0x8013E690
+void ftCommon_Turn_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -16,12 +17,12 @@ void func_ovl3_8013E690(GObj *fighter_gobj)
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 
 // Dawg what
-void func_ovl3_8013E700(GObj *fighter_gobj)
+void ftCommon_Turn_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     bool32 unk_bool;
@@ -97,36 +98,40 @@ interrupt1:
     }
 }
 
-void func_ovl3_8013E908(GObj *fighter_gobj, s32 lr_dash)
+// 0x8013E908
+void ftCommon_Turn_SetStatus(GObj *fighter_gobj, s32 lr_dash)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Turn, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Turn, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->status_vars.common.turn.is_allow_turn_direction = FALSE;
     fp->status_vars.common.turn.is_disable_interrupts = FALSE;
-    fp->status_vars.common.turn.button_mask = 0U;
+    fp->status_vars.common.turn.button_mask = 0;
     fp->status_vars.common.turn.lr_dash = lr_dash;
     fp->status_vars.common.turn.unk_0x14 = (lr_dash != 0) ? 0 : 256;
     fp->status_vars.common.turn.lr_turn = -fp->lr;
 }
 
-void func_ovl3_8013E988(GObj *fighter_gobj)
+// 0x8013E988
+void ftCommon_Turn_SetStatusCenter(GObj *fighter_gobj)
 {
-    func_ovl3_8013E908(fighter_gobj, CENTER);
+    ftCommon_Turn_SetStatus(fighter_gobj, CENTER);
 }
 
-void func_ovl3_8013E9A8(GObj *fighter_gobj)
+// 0x8013E9A8
+void ftCommon_Turn_SetStatusInvertLR(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8013E908(fighter_gobj, -fp->lr);
+    ftCommon_Turn_SetStatus(fighter_gobj, -fp->lr);
 }
 
-bool32 func_ovl3_8013E9D0(GObj *fighter_gobj)
+// 0x8013ED90
+bool32 ftCommon_Turn_CheckInputSuccess(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -137,11 +142,12 @@ bool32 func_ovl3_8013E9D0(GObj *fighter_gobj)
     else return FALSE;
 }
 
-bool32 func_ovl3_8013EA04(GObj *fighter_gobj)
+// 0x8013EA04
+bool32 ftCommon_Turn_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    if (func_ovl3_8013E9D0(fighter_gobj) != FALSE)
+    if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
     {
-        func_ovl3_8013E988(fighter_gobj);
+        ftCommon_Turn_SetStatusCenter(fighter_gobj);
 
         return TRUE;
     }

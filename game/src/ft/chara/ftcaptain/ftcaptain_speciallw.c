@@ -59,7 +59,7 @@ void func_ovl3_8015FD50(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        func_ovl3_8013E1C8(fighter_gobj);
+        ftCommon_Wait_SetStatus(fighter_gobj);
     }
     else ftCommon_Fall_SetStatus(fighter_gobj);
 }

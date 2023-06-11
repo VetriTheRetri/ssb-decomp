@@ -71,12 +71,12 @@ void ftDonkey_SpecialHi_SwitchStatusAir(GObj *fighter_gobj)
 }
 
 // 0x8015B8E8
-void ftDonkey_SpecialHi_SetGroundFlagStatusAir(GObj *fighter_gobj, bool32 ground_or_air)
+void ftDonkey_SpecialHi_SetStatusFlagGA(GObj *fighter_gobj, bool32 ground_or_air)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirHi, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     func_ovl2_800D8E78(fp, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
@@ -102,7 +102,7 @@ void ftDonkey_SpecialHi_SetStatus(GObj *fighter_gobj)
 
     fp->phys_info.vel_air.y = 0.0F;
 
-    ftDonkey_SpecialHi_SetGroundFlagStatusAir(fighter_gobj, ground);
+    ftDonkey_SpecialHi_SetStatusFlagGA(fighter_gobj, ground);
 }
 
 // 0x8015B9B8
@@ -112,5 +112,5 @@ void ftDonkey_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 
     fp->phys_info.vel_air.y = FTDONKEY_SPINNINGKONG_AIR_VEL_Y;
 
-    ftDonkey_SpecialHi_SetGroundFlagStatusAir(fighter_gobj, air);
+    ftDonkey_SpecialHi_SetStatusFlagGA(fighter_gobj, air);
 }

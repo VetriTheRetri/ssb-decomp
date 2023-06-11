@@ -151,7 +151,7 @@ void ftCommon_DamageCommon_ProcInterrupt(GObj *fighter_gobj)
         {
             ftCommon_HammerProcInterrupt(fighter_gobj);
         }
-        else func_ovl3_8013E070(fighter_gobj);
+        else ftCommon_Wait_ProcInterrupt(fighter_gobj);
     }
 }
 

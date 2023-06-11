@@ -15,9 +15,9 @@ void ftDonkey_ThrowFDamage_ProcUpdate(GObj *fighter_gobj)
         {
             fp->publicity_knockback = fp->status_vars.common.throwfdamage.publicity_knockback;
 
-            func_ovl3_8014DA98(fighter_gobj);
+            ftDonkey_ThrowFFall_SetStatus(fighter_gobj);
         }
-        else func_ovl3_8014D49C(fighter_gobj);
+        else ftDonkey_ThrowFWait_SetStatus(fighter_gobj);
     }
 }
 
@@ -40,7 +40,7 @@ void ftDonkey_ThrowFDamage_SetStatus(GObj *fighter_gobj)
         GObj *catch_gobj = this_fp->catch_gobj;
         Fighter_Struct *capture_fp = ftGetStruct(catch_gobj);
 
-        func_ovl3_8014AB64(catch_gobj);
+        ftCommon_Thrown_ProcPhysics(catch_gobj);
         func_ovl2_800EB528(capture_fp->joint[0]);
     }
 }

@@ -214,7 +214,7 @@ void ftCommon_SquatRv_ProcInterrupt(GObj *fighter_gobj)
 {
     if (!ftStatus_CheckInterruptSquatRv(fighter_gobj))
     {
-        func_ovl3_8013E648(fighter_gobj);
+        ftCommon_Walk_CheckInterruptCommon(fighter_gobj);
     }
 }
 
