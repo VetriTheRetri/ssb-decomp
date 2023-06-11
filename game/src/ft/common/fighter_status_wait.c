@@ -11,7 +11,7 @@ void func_ovl3_8013E1C8(GObj *fighter_gobj)
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
-        ftCommon_HammerWaitSetStatus(fighter_gobj);
+        ftCommon_HammerWait_SetStatus(fighter_gobj);
     }
     else
     {

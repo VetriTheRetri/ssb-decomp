@@ -496,7 +496,7 @@ typedef struct ftCommon_ItemThrow_StatusVars
     s32 throw_angle;
     f32 throw_damage;
     Vec2f unk;
-    s32 get_heavy_wait;
+    s32 throw_wait;
 
 } ftCommon_ItemThrow_StatusVars;
 

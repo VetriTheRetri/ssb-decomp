@@ -181,7 +181,7 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 
                     if (ap->at_kind == At_Kind_Hammer)
                     {
-                        ftCommon_HammerWaitSetStatus(fighter_gobj);
+                        ftCommon_HammerWait_SetStatus(fighter_gobj);
 
                         return;
                     }
@@ -280,7 +280,7 @@ bool32 ftCommon_Get_CheckInterruptCommon(GObj *fighter_gobj)
 // 0x801460B8
 void ftCommon_LiftWait_ProcInterrupt(GObj *fighter_gobj)
 {
-    if (func_ovl3_80146BE0(fighter_gobj) == FALSE)
+    if (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
         ftCommon_LiftTurn_CheckInterruptLiftWait(fighter_gobj);
     }
@@ -328,7 +328,7 @@ void ftCommon_LiftTurn_ProcUpdate(GObj *fighter_gobj)
 // 0x801461E8
 void ftCommon_LiftTurn_ProcInterrupt(GObj *fighter_gobj)
 {
-    func_ovl3_80146BE0(fighter_gobj);
+    ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj);
 }
 
 // 0x80146208

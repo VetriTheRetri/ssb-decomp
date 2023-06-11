@@ -2,11 +2,11 @@
 
 #define ftStatus_CheckInterruptGuard(fighter_gobj) \
 (                                                  \
-    (func_ovl3_80146AE8(fighter_gobj) != FALSE) || \
-    (ftCommon_Escape_CheckInterruptGuard(fighter_gobj) != FALSE) || \
-    (ftCommon_Catch_CheckInterruptGuard(fighter_gobj) != FALSE)  || \
-    (func_ovl3_8013F604(fighter_gobj) != FALSE) || \
-    (func_ovl3_80141F8C(fighter_gobj) != FALSE)    \
+    (ftCommon_LightThrow_CheckInterruptGuard(fighter_gobj) != FALSE) || \
+    (ftCommon_Escape_CheckInterruptGuard(fighter_gobj) != FALSE)     || \
+    (ftCommon_Catch_CheckInterruptGuard(fighter_gobj) != FALSE)      || \
+    (ftCommon_GuardKneeBend_CheckInterruptGuard(fighter_gobj) != FALSE) || \
+    (ftCommon_GuardPass_CheckInterruptGuard(fighter_gobj) != FALSE)    \
 )                                                  \
 
 // 0x80148120
@@ -328,7 +328,7 @@ void func_ovl3_80148A88(GObj *fighter_gobj)
 
     if (fp->shield_health == 0)
     {
-        func_ovl3_80149510(fighter_gobj);
+        ftCommon_ShieldBreakFly_UpdateVarsSetStatus(fighter_gobj);
     }
     else
     {
@@ -340,7 +340,7 @@ void func_ovl3_80148A88(GObj *fighter_gobj)
                 {
                     ftCommon_GuardOff_SetHitStatusYoshi(fighter_gobj);
                 }
-                func_ovl3_80148FF0(fighter_gobj);
+                ftCommon_GuardOff_SetStatus(fighter_gobj);
             }
             else
             {
@@ -366,7 +366,7 @@ void func_ovl3_80148B84(GObj *fighter_gobj)
 {
     if (!ftStatus_CheckInterruptGuard(fighter_gobj))
     {
-        ftCommon_Dokan_CheckEnter(fighter_gobj);
+        ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj);
     }
 }
 
@@ -431,11 +431,11 @@ void func_ovl3_80148D4C(GObj *fighter_gobj)
 
     if (fp->shield_health == 0)
     {
-        func_ovl3_80149510(fighter_gobj);
+        ftCommon_ShieldBreakFly_UpdateVarsSetStatus(fighter_gobj);
     }
     else if ((fp->status_vars.common.guard.is_release != FALSE) || !(fp->is_shield))
     {
-        func_ovl3_80148FF0(fighter_gobj);
+        ftCommon_GuardOff_SetStatus(fighter_gobj);
     }
     else func_ovl3_8014889C(fighter_gobj);
 }

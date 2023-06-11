@@ -111,20 +111,20 @@ void ftCommon_HammerCheckSetColAnim(GObj *fighter_gobj)
 // 0x800F38C4
 void ftCommon_HammerProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_8014800C(fighter_gobj) == FALSE) && (func_ovl3_80147E7C(fighter_gobj) == FALSE) && (func_ovl3_80147B9C(fighter_gobj) == FALSE))
+    if ((ftCommon_HammerKneeBend_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_HammerFall_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_HammerTurn_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_80147A2C(fighter_gobj);
+        ftCommon_HammerWalk_CheckInterruptCommon(fighter_gobj);
     }
 }
 
 // 0x800F3914
-void ftCommon_HammerProcMap(GObj *fighter_gobj)
+void ftCommon_HammerCommon_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDDDC(fighter_gobj, func_ovl3_80147C50);
+    func_ovl2_800DDDDC(fighter_gobj, ftCommon_HammerFall_SetStatus);
 }
 
 // 0x800F3938
-void ftCommon_HammerWaitSetStatus(GObj *fighter_gobj)
+void ftCommon_HammerWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -141,7 +141,7 @@ bool32 ftCommon_HammerWaitCheckSetStatus(GObj *fighter_gobj)
 {
     if (func_ovl3_8013E258(fighter_gobj) != FALSE)
     {
-        ftCommon_HammerWaitSetStatus(fighter_gobj);
+        ftCommon_HammerWait_SetStatus(fighter_gobj);
 
         return TRUE;
     }

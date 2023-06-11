@@ -143,7 +143,7 @@ void ftCommon_DamageCommon_ProcInterrupt(GObj *fighter_gobj)
         {
             if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
             {
-                func_ovl3_80147BE0(fighter_gobj);
+                ftCommon_HammerFall_ProcInterrupt(fighter_gobj);
             }
             else ftCommon_Fall_ProcInterrupt(fighter_gobj);
         }
@@ -240,8 +240,8 @@ void ftCommon_DamageAirCommon_ProcMap(GObj *fighter_gobj)
         (func_ovl2_800DEDAC(fighter_gobj) != FALSE)                         &&
         (ftCommon_WallDamage_CheckGoto(fighter_gobj) == FALSE)              &&
         (fp->status_vars.common.damage.coll_mask_curr & MPCOLL_MASK_GROUND) &&
-        (func_ovl3_80144760(fighter_gobj) == FALSE)                         &&
-        (func_ovl3_801446BC(fighter_gobj) == FALSE)
+        (ftCommon_PassiveStand_CheckInterruptDamage(fighter_gobj) == FALSE)                         &&
+        (ftCommon_Passive_CheckInterruptDamage(fighter_gobj) == FALSE)
     )
     {
         ftCommon_DownBounce_SetStatus(fighter_gobj);
@@ -422,7 +422,7 @@ void func_ovl3_80140E2C(GObj *fighter_gobj)
     else
     {
         ftCommon_ProcDamageStopVoice(fighter_gobj);
-        func_ovl3_8014E0E0(fighter_gobj);
+        ftDonkey_ThrowFDamage_SetStatus(fighter_gobj);
     }
 }
 

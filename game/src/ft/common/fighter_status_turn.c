@@ -33,11 +33,11 @@ void func_ovl3_8013E700(GObj *fighter_gobj)
 
     if (fp->status_vars.common.turn.is_disable_interrupts == FALSE) goto interrupt1;
 
-    if (func_ovl3_80151098(fighter_gobj) != FALSE) return;
+    if (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-    if (func_ovl3_80151160(fighter_gobj) != FALSE) return;
+    if (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-    if (func_ovl3_801511E0(fighter_gobj) != FALSE) return;
+    if (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
 interrupt1:
     if (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE)
@@ -67,7 +67,7 @@ interrupt1:
 
             if (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
-            if (func_ovl3_8013F4D0(fighter_gobj) != FALSE) return;
+            if (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
             ftCommon_Dash_CheckTurn(fighter_gobj);
 

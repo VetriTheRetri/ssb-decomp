@@ -1,17 +1,20 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
-void func_ovl3_80149440(GObj *fighter_gobj)
+// 0x80149440
+void ftCommon_ShieldBreakFly_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80149744);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_ShieldBreakFall_SetStatus);
 }
 
-void func_ovl3_80149464(GObj *fighter_gobj)
+// 0x80149464
+void ftCommon_ShieldBreakFly_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_801496A4);
+    func_ovl2_800DE6E4(fighter_gobj, ftCommon_ShieldBreakDown_SetStatus);
 }
 
-void func_ovl3_80149488(GObj *fighter_gobj)
+// 0x80149488
+void ftCommon_ShieldBreakFly_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -29,7 +32,8 @@ void func_ovl3_80149488(GObj *fighter_gobj)
 
 extern s8 gmBonusStat_ShieldBreaker; // Bonus for breaking an enemy's shield in 1P game
 
-void func_ovl3_80149510(GObj *fighter_gobj)
+// 0x80149510
+void ftCommon_ShieldBreakFly_UpdateVarsSetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f offset;
@@ -56,10 +60,11 @@ void func_ovl3_80149510(GObj *fighter_gobj)
             gmBonusStat_ShieldBreaker = TRUE;
         }
     }
-    func_ovl3_80149488(fighter_gobj);
+    ftCommon_ShieldBreakFly_SetStatus(fighter_gobj);
 }
 
-void func_ovl3_80149608(GObj *fighter_gobj)
+// 0x80149608
+void ftCommon_ShieldBreakFlyReflector_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     SpecialHit *special_hit = fp->special_hit;
@@ -67,25 +72,5 @@ void func_ovl3_80149608(GObj *fighter_gobj)
 
     func_ovl2_800EDF24(fp->joint[special_hit->joint_index], &offset);
     func_ovl2_8010155C(&offset, fp->lr_reflect);
-    func_ovl3_80149488(fighter_gobj);
-}
-
-void func_ovl3_80149680(GObj *fighter_gobj)
-{
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801497C4);
-}
-
-void func_ovl3_801496A4(GObj *fighter_gobj)
-{
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    s32 status_id;
-
-    if (fp->ground_or_air == air)
-    {
-        ftMapCollide_SetGround(fp);
-    }
-    status_id = (ftCommon_DownBounce_UpOrDown(fighter_gobj) != 0) ? ftStatus_Common_ShieldBreakDownD : ftStatus_Common_ShieldBreakDownU;
-
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0xB2U);
-    ftCommon_DownBounce_UpdateEffects(fighter_gobj);
+    ftCommon_ShieldBreakFly_SetStatus(fighter_gobj);
 }

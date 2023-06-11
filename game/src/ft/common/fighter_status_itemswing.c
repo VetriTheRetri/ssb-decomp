@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_80146C40(GObj *fighter_gobj)
+// 0x80146C40
+void ftCommon_HarisenSwing_ProcHit(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -18,7 +19,8 @@ void func_ovl3_80146C40(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80146C98(GObj *fighter_gobj)
+// 0x80146C98
+void ftCommon_HarisenSwing_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -40,7 +42,8 @@ void func_ovl3_80146C98(GObj *fighter_gobj)
 const Vec3f Fighter_StarRodSwing_Star_Offset = { 0.0F, 200.0F, 0.0F };
 const Vec3f Fighter_StarRodSwing_Dust_Offset = { 0.0F, 200.0F, 0.0F };
 
-void func_ovl3_80146CF4(GObj *fighter_gobj)
+// 0x80146CF4
+void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap;
@@ -84,7 +87,7 @@ void func_ovl3_80146CF4(GObj *fighter_gobj)
         {
             Vec3f gfx_offset = Fighter_StarRodSwing_Dust_Offset;
 
-            ftCommon_GFXSpawn(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &gfx_offset, 0, -fp->lr, 1, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &gfx_offset, NULL, -fp->lr, TRUE, 0);
         }
         fp->command_vars.flags.flag0 = 0;
     }
@@ -101,7 +104,8 @@ s32 Fighter_ItemSwing_Status[4][4] =
     { ftStatus_Common_StarRodSwing1, ftStatus_Common_StarRodSwing3, ftStatus_Common_StarRodSwing4, ftStatus_Common_StarRodSwingDash }
 };
 
-void func_ovl3_80146E94(GObj *fighter_gobj, s32 swing_type)
+// 0x80146E94
+void ftCommon_ItemSwing_SetStatus(GObj *fighter_gobj, s32 swing_type)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap = atGetStruct(fp->item_hold);
@@ -132,10 +136,10 @@ void func_ovl3_80146E94(GObj *fighter_gobj, s32 swing_type)
 
     fp->command_vars.flags.flag0 = 0;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, anim_speed, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, anim_speed, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_hit = func_ovl3_80146C40;
+    fp->proc_hit = ftCommon_HarisenSwing_ProcHit;
 
     fp->status_vars.common.itemswing.harisen_scale_reset_wait = 0;
 

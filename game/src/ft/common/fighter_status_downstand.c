@@ -5,9 +5,9 @@ void ftCommon_DownStand_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fp->command_vars.flags.flag1 != 0) && (func_ovl3_8013F4D0(fighter_gobj) == FALSE) && (func_ovl3_80141EA4(fighter_gobj) == FALSE))
+    if ((fp->command_vars.flags.flag1 != 0) && (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        ftCommon_Dokan_CheckEnter(fighter_gobj);
+        ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj);
     }
 }
 

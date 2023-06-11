@@ -8570,7 +8570,7 @@ glabel func_ovl2_800DDE84
   /* 059710 800DDF10 33198000 */      andi $t9, $t8, 0x8000
   /* 059714 800DDF14 13200005 */      beqz $t9, .L800DDF2C
   /* 059718 800DDF18 00000000 */       nop 
-  /* 05971C 800DDF1C 0C050AC2 */       jal func_ovl3_80142B08
+  /* 05971C 800DDF1C 0C050AC2 */       jal ftCommon_Ottotto_SetStatus
   /* 059720 800DDF20 00000000 */       nop 
   /* 059724 800DDF24 10000004 */         b .L800DDF38
   /* 059728 800DDF28 8FBF0014 */        lw $ra, 0x14($sp)
@@ -9270,7 +9270,7 @@ glabel func_ovl2_800DE8E4
   /* 05A114 800DE914 10000004 */         b .L800DE928
   /* 05A118 800DE918 8FBF0014 */        lw $ra, 0x14($sp)
   .L800DE91C:
-  /* 05A11C 800DE91C 0C050B67 */       jal func_ovl3_80142D9C
+  /* 05A11C 800DE91C 0C050B67 */       jal ftCommon_Landing_SetStatus
   /* 05A120 800DE920 00000000 */       nop 
   /* 05A124 800DE924 8FBF0014 */        lw $ra, 0x14($sp)
   .L800DE928:
@@ -9340,7 +9340,7 @@ glabel func_ovl2_800DE978
   /* 05A1FC 800DE9FC 33194000 */      andi $t9, $t8, 0x4000
   /* 05A200 800DEA00 53200004 */      beql $t9, $zero, .L800DEA14
   /* 05A204 800DEA04 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 05A208 800DEA08 0C051070 */       jal func_ovl3_801441C0
+  /* 05A208 800DEA08 0C051070 */       jal ftCommon_StopCeil_SetStatus
   /* 05A20C 800DEA0C 00000000 */       nop 
   .L800DEA10:
   /* 05A210 800DEA10 8FBF0014 */        lw $ra, 0x14($sp)
@@ -13064,7 +13064,7 @@ glabel func_ovl2_800E1E88
   /* 05D6C8 800E1EC8 10000004 */         b .L800E1EDC
   /* 05D6CC 800E1ECC 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E1ED0:
-  /* 05D6D0 800E1ED0 0C050FCC */       jal func_ovl3_80143F30
+  /* 05D6D0 800E1ED0 0C050FCC */       jal ftCommon_TaruCann_SetStatus
   /* 05D6D4 800E1ED4 8FA50018 */        lw $a1, 0x18($sp)
   /* 05D6D8 800E1ED8 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E1EDC:
@@ -18026,12 +18026,12 @@ glabel func_ovl2_800E61EC
   /* 061CBC 800E64BC 8E0B07BC */        lw $t3, 0x7bc($s0)
   /* 061CC0 800E64C0 10600005 */      beqz $v1, .L800E64D8
   /* 061CC4 800E64C4 00000000 */       nop 
-  /* 061CC8 800E64C8 0C052544 */       jal func_ovl3_80149510
+  /* 061CC8 800E64C8 0C052544 */       jal ftCommon_ShieldBreakFly_UpdateVarsSetStatus
   /* 061CCC 800E64CC 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061CD0 800E64D0 10000004 */         b .L800E64E4
   /* 061CD4 800E64D4 8E0A07C8 */        lw $t2, 0x7c8($s0)
   .L800E64D8:
-  /* 061CD8 800E64D8 0C052442 */       jal func_ovl3_80149108
+  /* 061CD8 800E64D8 0C052442 */       jal ftCommon_GuardSetOff_SetStatus
   /* 061CDC 800E64DC 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061CE0 800E64E0 8E0A07C8 */        lw $t2, 0x7c8($s0)
   .L800E64E4:
@@ -18061,7 +18061,7 @@ glabel func_ovl2_800E61EC
   /* 061D38 800E6538 8E0E07BC */        lw $t6, 0x7bc($s0)
   /* 061D3C 800E653C 0C03A08F */       jal ftCommon_ProcDamageStopVoice
   /* 061D40 800E6540 8FA400A0 */        lw $a0, 0xa0($sp)
-  /* 061D44 800E6544 0C0512AC */       jal func_ovl3_80144AB0
+  /* 061D44 800E6544 0C0512AC */       jal ftCommon_ReboundWait_SetStatus
   /* 061D48 800E6548 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061D4C 800E654C 8E0E07BC */        lw $t6, 0x7bc($s0)
   .L800E6550:
@@ -18112,7 +18112,7 @@ glabel func_ovl2_800E61EC
   .L800E65F4:
   /* 061DF4 800E65F4 51000006 */      beql $t0, $zero, .L800E6610
   /* 061DF8 800E65F8 8E02018C */        lw $v0, 0x18c($s0)
-  /* 061DFC 800E65FC 0C052582 */       jal func_ovl3_80149608
+  /* 061DFC 800E65FC 0C052582 */       jal ftCommon_ShieldBreakFlyReflector_SetStatus
   /* 061E00 800E6600 8FA400A0 */        lw $a0, 0xa0($sp)
   /* 061E04 800E6604 1000001D */         b .L800E667C
   /* 061E08 800E6608 8FAE0098 */        lw $t6, 0x98($sp)
@@ -32922,19 +32922,19 @@ glabel ftCommon_HammerCheckSetColAnim
   glabel ftCommon_HammerProcInterrupt
   /* 06F0C4 800F38C4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 06F0C8 800F38C8 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 06F0CC 800F38CC 0C052003 */       jal func_ovl3_8014800C
+  /* 06F0CC 800F38CC 0C052003 */       jal ftCommon_HammerKneeBend_CheckInterruptCommon
   /* 06F0D0 800F38D0 AFA40018 */        sw $a0, 0x18($sp)
   /* 06F0D4 800F38D4 5440000C */      bnel $v0, $zero, .L800F3908
   /* 06F0D8 800F38D8 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 06F0DC 800F38DC 0C051F9F */       jal func_ovl3_80147E7C
+  /* 06F0DC 800F38DC 0C051F9F */       jal ftCommon_HammerFall_CheckInterruptCommon
   /* 06F0E0 800F38E0 8FA40018 */        lw $a0, 0x18($sp)
   /* 06F0E4 800F38E4 54400008 */      bnel $v0, $zero, .L800F3908
   /* 06F0E8 800F38E8 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 06F0EC 800F38EC 0C051EE7 */       jal func_ovl3_80147B9C
+  /* 06F0EC 800F38EC 0C051EE7 */       jal ftCommon_HammerTurn_CheckInterruptCommon
   /* 06F0F0 800F38F0 8FA40018 */        lw $a0, 0x18($sp)
   /* 06F0F4 800F38F4 54400004 */      bnel $v0, $zero, .L800F3908
   /* 06F0F8 800F38F8 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 06F0FC 800F38FC 0C051E8B */       jal func_ovl3_80147A2C
+  /* 06F0FC 800F38FC 0C051E8B */       jal ftCommon_HammerWalk_CheckInterruptCommon
   /* 06F100 800F3900 8FA40018 */        lw $a0, 0x18($sp)
   /* 06F104 800F3904 8FBF0014 */        lw $ra, 0x14($sp)
   .L800F3908:
@@ -32942,18 +32942,18 @@ glabel ftCommon_HammerCheckSetColAnim
   /* 06F10C 800F390C 03E00008 */        jr $ra
   /* 06F110 800F3910 00000000 */       nop 
 
-  glabel ftCommon_HammerProcMap
+  glabel ftCommon_HammerCommon_ProcMap
   /* 06F114 800F3914 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 06F118 800F3918 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 06F11C 800F391C 3C058014 */       lui $a1, %hi(func_ovl3_80147C50)
+  /* 06F11C 800F391C 3C058014 */       lui $a1, %hi(ftCommon_HammerFall_SetStatus)
   /* 06F120 800F3920 0C037777 */       jal func_ovl2_800DDDDC
-  /* 06F124 800F3924 24A57C50 */     addiu $a1, $a1, %lo(func_ovl3_80147C50)
+  /* 06F124 800F3924 24A57C50 */     addiu $a1, $a1, %lo(ftCommon_HammerFall_SetStatus)
   /* 06F128 800F3928 8FBF0014 */        lw $ra, 0x14($sp)
   /* 06F12C 800F392C 27BD0018 */     addiu $sp, $sp, 0x18
   /* 06F130 800F3930 03E00008 */        jr $ra
   /* 06F134 800F3934 00000000 */       nop 
 
-glabel ftCommon_HammerWaitSetStatus
+glabel ftCommon_HammerWait_SetStatus
   /* 06F138 800F3938 27BDFFC8 */     addiu $sp, $sp, -0x38
   /* 06F13C 800F393C AFBF0024 */        sw $ra, 0x24($sp)
   /* 06F140 800F3940 AFB00020 */        sw $s0, 0x20($sp)
@@ -32992,7 +32992,7 @@ glabel ftCommon_HammerWaitCheckSetStatus
   /* 06F1B8 800F39B8 AFA40018 */        sw $a0, 0x18($sp)
   /* 06F1BC 800F39BC 50400006 */      beql $v0, $zero, .L800F39D8
   /* 06F1C0 800F39C0 00001025 */        or $v0, $zero, $zero
-  /* 06F1C4 800F39C4 0C03CE4E */       jal ftCommon_HammerWaitSetStatus
+  /* 06F1C4 800F39C4 0C03CE4E */       jal ftCommon_HammerWait_SetStatus
   /* 06F1C8 800F39C8 8FA40018 */        lw $a0, 0x18($sp)
   /* 06F1CC 800F39CC 10000002 */         b .L800F39D8
   /* 06F1D0 800F39D0 24020001 */     addiu $v0, $zero, 1
@@ -69498,7 +69498,7 @@ glabel func_ovl2_8011403C
   /* 08F8D8 801140D8 8E480024 */        lw $t0, 0x24($s2)
   /* 08F8DC 801140DC 56880006 */      bnel $s4, $t0, .L801140F8
   /* 08F8E0 801140E0 8E490190 */        lw $t1, 0x190($s2)
-  /* 08F8E4 801140E4 0C04F560 */       jal func_ovl3_8013D580
+  /* 08F8E4 801140E4 0C04F560 */       jal ftCommon_Sleep_CheckIgnorePauseMenu
   /* 08F8E8 801140E8 02002025 */        or $a0, $s0, $zero
   /* 08F8EC 801140EC 54400061 */      bnel $v0, $zero, .L80114274
   /* 08F8F0 801140F0 26730001 */     addiu $s3, $s3, 1

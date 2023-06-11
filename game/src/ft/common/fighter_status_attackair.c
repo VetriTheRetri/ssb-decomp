@@ -56,13 +56,13 @@ void ftCommon_AttackAir_ProcMap(GObj *fighter_gobj)
             {
                 ftCommon_LandingAir_SetStatus(fighter_gobj);
             }
-            else func_ovl3_80142E10(fighter_gobj, fp->command_vars.flags.flag1 * 0.01F);
+            else ftCommon_LandingAirNull_SetStatus(fighter_gobj, fp->command_vars.flags.flag1 * 0.01F);
         }
         else if (fp->phys_info.vel_air.y > FTCOMMON_ATTACKAIR_SKIP_LANDING_VEL_Y_MAX)
         {
             func_ovl3_8013E1C8(fighter_gobj);
         }
-        else func_ovl3_80142D9C(fighter_gobj);
+        else ftCommon_Landing_SetStatus(fighter_gobj);
     }
 }
 
@@ -81,13 +81,13 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
     {
         if (ftCommon_HammerCheckHold(fighter_gobj) == FALSE)
         {
-            if (func_ovl3_80146A8C(fp) != 0)
+            if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != 0)
             {
                 if ((ABS(fp->input.pl.stick_range.x) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN) && (ABS(fp->input.pl.stick_range.y) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN))
                 {
                     if (atGetStruct(fp->item_hold)->type == At_Type_Throw)
                     {
-                        func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowAirF);
+                        ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowAirF);
 
                         return TRUE;
                     }
@@ -131,7 +131,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
                     }
                     else status_id = ftStatus_Common_LightThrowAirB;
 
-                    func_ovl3_80146690(fighter_gobj, status_id);
+                    ftCommon_ItemThrow_SetStatus(fighter_gobj, status_id);
 
                     return TRUE;
                 }
@@ -175,7 +175,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
             {
                 if ((fp->item_hold != NULL) && (atGetStruct(fp->item_hold)->type == At_Type_Shoot))
                 {
-                    func_ovl3_801478EC(fighter_gobj, status_id);
+                    ftCommon_ItemShootAir_SetStatus(fighter_gobj, status_id);
 
                     return TRUE;
                 }
@@ -209,5 +209,5 @@ void ftCommon_LandingAir_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirX - ftStatus_Common_LandingAirN), 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftStatus_Update(fighter_gobj, fp->status_info.status_id + (ftStatus_Common_LandingAirNull - ftStatus_Common_LandingAirN), 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }

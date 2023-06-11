@@ -1,14 +1,16 @@
 #include "fighter.h"
 
-void func_ovl3_80141D60(GObj *fighter_gobj)
+// 0x80141D60
+void ftCommon_Pass_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
+    if ((ftCommon_SpecialAir_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_8014019C(fighter_gobj);
+        ftCommon_JumpAerial_CheckInterruptCommon(fighter_gobj);
     }
 }
 
-void func_ovl3_80141DA0(GObj *fighter_gobj, s32 status_id, f32 frame_begin, u32 flags)
+// 0x80141DA0
+void ftCommon_Pass_SetStatusParam(GObj *fighter_gobj, s32 status_id, f32 frame_begin, u32 flags)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -23,53 +25,58 @@ void func_ovl3_80141DA0(GObj *fighter_gobj, s32 status_id, f32 frame_begin, u32 
     fp->tap_stick_y = U8_MAX - 1;
 }
 
-void func_ovl3_80141E18(GObj *fighter_gobj)
+// 0x80141E18
+void ftCommon_Pass_SetStatusSquat(GObj *fighter_gobj)
 {
-    func_ovl3_801430A8(fighter_gobj);
+    ftCommon_Squat_SetStatusPass(fighter_gobj);
 }
 
-void func_ovl3_80141E38(GObj *fighter_gobj)
+// 0x80141E38
+void ftCommon_GuardPass_SetStatus(GObj *fighter_gobj)
 {
-    func_ovl3_80141DA0(fighter_gobj, ftStatus_Common_GuardPass, 1.0F, 0U);
+    ftCommon_Pass_SetStatusParam(fighter_gobj, ftStatus_Common_GuardPass, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 
-bool32 func_ovl3_80141E60(Fighter_Struct *fp)
+// 0x80141E60
+bool32 ftCommon_Pass_CheckInputSuccess(Fighter_Struct *fp)
 {
-    if ((fp->input.pl.stick_range.y <= FTCOMMON_PASS_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_PASS_BUFFER_FRAMES_MAX) && (fp->coll_data.ground_flags & 0x4000))
+    if ((fp->input.pl.stick_range.y <= FTCOMMON_PASS_STICK_RANGE_MIN) && (fp->tap_stick_y < FTCOMMON_PASS_BUFFER_FRAMES_MAX) && (fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID))
     {
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_80141EA4(GObj *fighter_gobj)
+// 0x80141EA4
+bool32 ftCommon_Pass_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
-        return func_ovl3_80147E7C(fighter_gobj);
+        return ftCommon_HammerFall_CheckInterruptCommon(fighter_gobj);
     }
-    else if (func_ovl3_80141E60(fp) != FALSE)
+    else if (ftCommon_Pass_CheckInputSuccess(fp) != FALSE)
     {
-        func_ovl3_80141E18(fighter_gobj);
+        ftCommon_Pass_SetStatusSquat(fighter_gobj);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_80141F0C(GObj *fighter_gobj)
+// 0x80141F0C
+bool32 ftCommon_Pass_CheckInterruptSquat(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
-        return func_ovl3_80147E7C(fighter_gobj);
+        return ftCommon_HammerFall_CheckInterruptCommon(fighter_gobj);
     }
     if (fp->status_vars.common.squat.is_allow_pass == FALSE)
     {
-        if (func_ovl3_80141E60(fp) != FALSE)
+        if (ftCommon_Pass_CheckInputSuccess(fp) != FALSE)
         {
             fp->status_vars.common.squat.is_allow_pass = TRUE;
             fp->status_vars.common.squat.pass_wait = FTCOMMON_SQUAT_PASS_WAIT;
@@ -80,13 +87,14 @@ bool32 func_ovl3_80141F0C(GObj *fighter_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_80141F8C(GObj *fighter_gobj)
+// 0x80141F8C
+bool32 ftCommon_GuardPass_CheckInterruptGuard(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((func_ovl3_80141E60(fp) != FALSE) && (fp->input.pl.button_hold & fp->input.button_mask_z))
+    if ((ftCommon_Pass_CheckInputSuccess(fp) != FALSE) && (fp->input.pl.button_hold & fp->input.button_mask_z))
     {
-        func_ovl3_80141E38(fighter_gobj);
+        ftCommon_GuardPass_SetStatus(fighter_gobj);
 
         return TRUE;
     }

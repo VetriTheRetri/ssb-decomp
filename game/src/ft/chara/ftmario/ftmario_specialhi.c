@@ -123,7 +123,7 @@ void ftMario_SpecialHi_ProcMap(GObj *fighter_gobj)
             {
                 ftCommon_CliffCatch_SetStatus(fighter_gobj);
             }
-            else func_ovl3_80142E3C(fighter_gobj, FALSE, FTMARIO_SUPERJUMP_LANDING_LAG);
+            else ftCommon_LandingFallSpecial_SetStatus(fighter_gobj, FALSE, FTMARIO_SUPERJUMP_LANDING_LAG);
         }
     }
     else func_ovl2_800DDF44(fighter_gobj);

@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "effect.h"
 
-void func_ovl3_80148E30(GObj *fighter_gobj)
+// 0x80148E30
+void ftCommon_GuardOn_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -36,20 +37,22 @@ void func_ovl3_80148E30(GObj *fighter_gobj)
     fp->is_shield = TRUE;
 }
 
-bool32 func_ovl3_80148F24(GObj *fighter_gobj)
+// 0x80148F24
+bool32 ftCommon_GuardOn_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
     {
-        func_ovl3_80148E30(fighter_gobj);
+        ftCommon_GuardOn_SetStatus(fighter_gobj);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-void func_ovl3_80148F74(GObj *fighter_gobj)
+// 0x80148F74
+void ftCommon_GuardOn_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -57,7 +60,7 @@ void func_ovl3_80148F74(GObj *fighter_gobj)
 
     if (fp->shield_health == 0)
     {
-        func_ovl3_80149510(fighter_gobj);
+        ftCommon_ShieldBreakFly_UpdateVarsSetStatus(fighter_gobj);
     }
     else if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -66,7 +69,8 @@ void func_ovl3_80148F74(GObj *fighter_gobj)
     else func_ovl3_80148714(fighter_gobj);
 }
 
-void func_ovl3_80148FF0(GObj *fighter_gobj)
+// 0x80148FF0
+void ftCommon_GuardOff_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     u32 flag = fp->is_shield;
@@ -80,7 +84,8 @@ void func_ovl3_80148FF0(GObj *fighter_gobj)
     func_800269C0(0xEU);
 }
 
-void func_ovl3_80149074(GObj *fighter_gobj)
+// 0x80149074
+void ftCommon_GuardSetOff_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -92,14 +97,15 @@ void func_ovl3_80149074(GObj *fighter_gobj)
     {
         if (fp->status_vars.common.guard.is_release != FALSE)
         {
-            func_ovl3_80148FF0(fighter_gobj);
+            ftCommon_GuardOff_SetStatus(fighter_gobj);
         }
         else func_ovl3_80148DDC(fighter_gobj);
     }
     else func_ovl3_8014889C(fighter_gobj);
 }
 
-void func_ovl3_80149108(GObj *fighter_gobj)
+// 0x80149108
+void ftCommon_GuardSetOff_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 

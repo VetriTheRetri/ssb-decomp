@@ -23,7 +23,7 @@ void func_ovl3_8014D8E4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl3_80146BE0(fighter_gobj) == FALSE)
+    if (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
         if (func_ovl3_8014DFA8(fighter_gobj) == FALSE)
         {
@@ -39,7 +39,7 @@ void func_ovl3_8014D950(GObj *fighter_gobj, s32 input_source)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFKneeBend, 0.0F, 0.0F, 0.0F);
+    ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFKneeBend, 0.0F, 0.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->status_vars.common.throwf.jump_force = fp->input.pl.stick_range.y;
     fp->status_vars.common.throwf.kneebend_anim_frame = 0.0F;
@@ -50,7 +50,7 @@ void func_ovl3_8014D950(GObj *fighter_gobj, s32 input_source)
 bool32 func_ovl3_8014D9B8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    s32 input_source = func_ovl3_8013F474(fp);
+    s32 input_source = ftCommon_KneeBend_GetInputTypeCommon(fp);
 
     if (input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE)
     {

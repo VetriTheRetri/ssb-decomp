@@ -2320,7 +2320,7 @@ void jtgt_ovl2_800DDEE8(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND0)
         {
-            func_ovl3_80142B08(fighter_gobj);
+            ftCommon_Ottotto_SetStatus(fighter_gobj);
         }
         else ftCommon_Fall_SetStatus(fighter_gobj);
     }
@@ -2681,7 +2681,7 @@ void func_ovl2_800DE8E4(GObj *fighter_gobj)
     {
         func_ovl3_8013E1C8(fighter_gobj);
     }
-    else func_ovl3_80142D9C(fighter_gobj);
+    else ftCommon_Landing_SetStatus(fighter_gobj);
 }
 
 bool32 jtgt_ovl2_800DE934(GObj *fighter_gobj)
@@ -2715,7 +2715,7 @@ void jtgt_ovl2_800DE99C(GObj *fighter_gobj)
         }
         else if (fp->coll_data.coll_mask & MPCOLL_MASK_CEILHEAVY) // Enter ceiling bonk if true?
         {
-            func_ovl3_801441C0(fighter_gobj);
+            ftCommon_StopCeil_SetStatus(fighter_gobj);
         }
     }
 }

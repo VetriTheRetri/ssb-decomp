@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
-bool32 func_ovl3_8013D580(GObj *fighter_gobj)
+// 0x8013D580
+bool32 ftCommon_Sleep_CheckIgnorePauseMenu(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 steal_from_port_id[GMMATCH_PLAYERS_MAX];
@@ -15,7 +16,7 @@ bool32 func_ovl3_8013D580(GObj *fighter_gobj)
         {
             for (active_teammate_count = 0, stock_count = 0, port_id = 0; port_id < ARRAY_COUNT(Match_Info->player_block); port_id++)
             {
-                if ((port_id != fp->port_id) && (Match_Info->player_block[port_id].player_kind != 2) && (fp->team == Match_Info->player_block[port_id].port_id))
+                if ((port_id != fp->port_id) && (Match_Info->player_block[port_id].player_kind != Pl_Kind_Unk1) && (fp->team == Match_Info->player_block[port_id].port_id))
                 {
                     if (Match_Info->player_block[port_id].stock_count > 0)
                     {
@@ -39,7 +40,8 @@ bool32 func_ovl3_8013D580(GObj *fighter_gobj)
     return FALSE; // Bring up pause menu
 }
 
-void func_ovl3_8013D6D0(GObj *fighter_gobj)
+// 0x8013D6D0
+void ftCommon_Sleep_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *steal_gobj;
@@ -60,7 +62,7 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
                 this_fp->stock_count = 0;
                 Match_Info->player_block[this_fp->port_id].stock_count = 0;
 
-                func_ovl3_8013CF60(fighter_gobj);
+                ftCommon_RebirthDown_SetStatus(fighter_gobj);
             }
         }
         else
@@ -69,7 +71,7 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
             {
                 for (active_teammate_count = 0, stock_count = 0, port_id = 0; port_id < ARRAY_COUNT(Match_Info->player_block); port_id++)
                 {
-                    if ((port_id != this_fp->port_id) && (Match_Info->player_block[port_id].player_kind != 2) && (this_fp->team == Match_Info->player_block[port_id].port_id)) 
+                    if ((port_id != this_fp->port_id) && (Match_Info->player_block[port_id].player_kind != Pl_Kind_Unk1) && (this_fp->team == Match_Info->player_block[port_id].port_id)) 
                     {
                         if (Match_Info->player_block[port_id].stock_count > 0)
                         {
@@ -108,11 +110,12 @@ void func_ovl3_8013D6D0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013D8B0(GObj *fighter_gobj)
+// 0x8013D8B0
+void ftCommon_Sleep_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Sleep, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Sleep, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->is_invisible = TRUE;
     fp->x18E_flag_b0 = TRUE;

@@ -1,20 +1,22 @@
 #include "fighter.h"
 
-void func_ovl3_8013EE50(GObj *fighter_gobj)
+// 0x8013EE50
+void ftCommon_Run_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_80151098(fighter_gobj) == FALSE) &&
+    if ((ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) == FALSE) &&
     (ftCommon_Catch_CheckInterruptRunDash(fighter_gobj) == FALSE) &&
     (ftCommon_AttackDash_CheckInterruptCommon(fighter_gobj) == FALSE) &&
     (func_ovl3_80148D2C(fighter_gobj, 4) == FALSE) &&
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) == FALSE) &&
-    (func_ovl3_8013F598(fighter_gobj) == FALSE) &&
+    (ftCommon_KneeBend_CheckInterruptRun(fighter_gobj) == FALSE) &&
     (func_ovl3_8013F248(fighter_gobj) == FALSE))
     {
-        func_ovl3_8013F0A0(fighter_gobj);
+        ftCommon_RunBrake_CheckInterruptRun(fighter_gobj);
     }
 }
 
-void func_ovl3_8013EEE8(GObj *fighter_gobj)
+// 0x8013EEE8
+void ftCommon_Run_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -23,7 +25,8 @@ void func_ovl3_8013EEE8(GObj *fighter_gobj)
     fp->phys_info.vel_ground.x = fp->attributes->run_speed;
 }
 
-bool32 func_ovl3_8013EF2C(GObj *fighter_gobj)
+// 0x8013EF2C
+bool32 ftCommon_Run_CheckInterruptDash(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -34,7 +37,7 @@ bool32 func_ovl3_8013EF2C(GObj *fighter_gobj)
         {
             if ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_RUN_STICK_RANGE_MIN)
             {
-                func_ovl3_8013EEE8(fighter_gobj);
+                ftCommon_Run_SetStatus(fighter_gobj);
 
                 return TRUE;
             }

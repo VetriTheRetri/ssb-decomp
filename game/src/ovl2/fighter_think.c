@@ -1547,7 +1547,7 @@ void func_ovl2_800E1E88(GObj *ogobj, GObj *fighter_gobj, void *unused, s32 kind)
         break;
 
     case 3:
-        func_ovl3_80143F30(fighter_gobj, ogobj);
+        ftCommon_TaruCann_SetStatus(fighter_gobj, ogobj);
         break;
     }
 }
@@ -3764,9 +3764,9 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
     {
         if (is_shieldbreak != FALSE)
         {
-            func_ovl3_80149510(fighter_gobj);
+            ftCommon_ShieldBreakFly_UpdateVarsSetStatus(fighter_gobj);
         }
-        else func_ovl3_80149108(fighter_gobj);
+        else ftCommon_GuardSetOff_SetStatus(fighter_gobj);
 
         damage = fp->shield_damage;
     }
@@ -3779,7 +3779,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         if ((fp->attack_rebound != 0) && (fp->catch_gobj == NULL) && (fp->capture_gobj == NULL))
         {
             ftCommon_ProcDamageStopVoice(fighter_gobj);
-            func_ovl3_80144AB0(fighter_gobj);
+            ftCommon_ReboundWait_SetStatus(fighter_gobj);
         }
         damage = fp->shield_attack_damage;
     }
@@ -3802,7 +3802,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
     }
     else if (fp->reflect_damage != 0)
     {
-        func_ovl3_80149608(fighter_gobj);
+        ftCommon_ShieldBreakFlyReflector_SetStatus(fighter_gobj);
     }
     else if (fp->lr_reflect != CENTER)
     {

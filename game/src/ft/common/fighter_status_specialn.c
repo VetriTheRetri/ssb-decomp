@@ -40,7 +40,7 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801639CC,
     jtgt_ovl3_8015E740,
     jtgt_ovl3_8015FB5C,
-    jtgt_ovl3_80151060,
+    ftKirby_SpecialN_SetStatusIndex,
     jtgt_ovl3_80151D24,
     ftPurin_SpecialN_SetStatus,
     ftNess_SpecialN_SetStatus,
@@ -54,21 +54,23 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801639CC,
     jtgt_ovl3_8015E740,
     jtgt_ovl3_8015FB5C,
-    jtgt_ovl3_80151060,
+    ftKirby_SpecialN_SetStatusIndex,
     jtgt_ovl3_80151D24,
     ftPurin_SpecialN_SetStatus,
     ftNess_SpecialN_SetStatus,
     ftDonkey_SpecialNStart_SetStatus
 };
 
-void jtgt_ovl3_80151060(GObj *fighter_gobj)
+// 0x80151060
+void ftKirby_SpecialN_SetStatusIndex(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftKirby_SpecialN_StatusList[fp->fighter_vars.kirby.copy_id](fighter_gobj);
 }
 
-bool32 func_ovl3_80151098(GObj *fighter_gobj)
+// 0x80151098
+bool32 ftCommon_SpecialN_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;

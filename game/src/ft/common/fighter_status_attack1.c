@@ -253,24 +253,24 @@ bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
         {
             if (atGetStruct(fp->item_hold)->type == At_Type_Throw)
             {
-                func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowF);
+                ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowF);
 
                 return TRUE;
             }
             if (fp->input.pl.button_hold & fp->input.button_mask_z)
             {
-                func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowDrop);
+                ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowDrop);
 
                 return TRUE;
             }
             switch (atGetStruct(fp->item_hold)->type)
             {
             case At_Type_Swing:
-                func_ovl3_80146E94(fighter_gobj, 0);
+                ftCommon_ItemSwing_SetStatus(fighter_gobj, 0);
                 return TRUE;
 
             case At_Type_Shoot:
-                func_ovl3_80147844(fighter_gobj);
+                ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;
             }
         }

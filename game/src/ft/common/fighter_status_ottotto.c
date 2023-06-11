@@ -2,9 +2,9 @@
 
 #define ftStatus_CheckInterruptOttotto(fighter_gobj)\
 (                                                   \
-    (func_ovl3_80151098(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_80151160(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_801511E0(fighter_gobj) != FALSE) ||  \
+    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
+    (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
+    (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
@@ -15,20 +15,22 @@
     (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) ||  \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) ||  \
+    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_80141EA4(fighter_gobj) != FALSE) ||  \
-    (ftCommon_Dokan_CheckEnter(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_8014310C(fighter_gobj) != FALSE) ||  \
+    (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
+    (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
+    (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (func_ovl3_8013EA04(fighter_gobj) != FALSE)     \
 )                                                   \
 
-void func_ovl3_80142850(GObj *fighter_gobj)
+// 0x80142850
+void ftCommon_Ottotto_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80142AC4);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_OttottoWait_SetStatus);
 }
 
-void func_ovl3_80142874(GObj *fighter_gobj)
+// 0x80142874
+void ftCommon_Ottotto_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -41,7 +43,8 @@ void func_ovl3_80142874(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801429F4(GObj *fighter_gobj)
+// 0x801429F4
+void ftCommon_Ottotto_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -72,20 +75,22 @@ void func_ovl3_801429F4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80142AC4(GObj *fighter_gobj)
+// 0x80142AC4
+void ftCommon_OttottoWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_OttottoWait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_OttottoWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->x192_flag_b0 = TRUE;
 }
 
-void func_ovl3_80142B08(GObj *fighter_gobj)
+// 0x80142B08
+void ftCommon_Ottotto_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Ottotto, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Ottotto, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->phys_info.vel_air.z = 0.0F;
     fp->phys_info.vel_air.y = 0.0F;

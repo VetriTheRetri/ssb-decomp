@@ -3,9 +3,9 @@
 // 0x8013F9A0
 void ftCommon_Fall_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
+    if ((ftCommon_SpecialAir_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_8014019C(fighter_gobj);
+        ftCommon_JumpAerial_CheckInterruptCommon(fighter_gobj);
     }
 }
 
@@ -16,7 +16,7 @@ void ftCommon_Fall_SetStatus(GObj *fighter_gobj)
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
-        func_ovl3_80147C50(fighter_gobj);
+        ftCommon_HammerFall_SetStatus(fighter_gobj);
     }
     else
     {

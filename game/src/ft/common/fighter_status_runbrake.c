@@ -1,16 +1,18 @@
 #include "fighter.h"
 
-void func_ovl3_8013EFB0(GObj *fighter_gobj)
+// 0x8013EFB0
+void ftCommon_RunBrake_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((func_ovl3_8013F598(fighter_gobj) == FALSE) && (fp->command_vars.flags.flag1 != 0) && (fighter_gobj->anim_frame <= 4.0F))
+    if ((ftCommon_KneeBend_CheckInterruptRun(fighter_gobj) == FALSE) && (fp->command_vars.flags.flag1 != 0) && (fighter_gobj->anim_frame <= 4.0F))
     {
         func_ovl3_8013F248(fighter_gobj);
     }
 }
 
-void func_ovl3_8013F014(GObj *fighter_gobj)
+// 0x8013F014
+void ftCommon_RunBrake_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -19,37 +21,40 @@ void func_ovl3_8013F014(GObj *fighter_gobj)
     func_ovl2_800D87D0(fighter_gobj);
 }
 
-void func_ovl3_8013F05C(GObj *fighter_gobj, u32 flag)
+// 0x8013F05C
+void ftCommon_RunBrake_SetStatus(GObj *fighter_gobj, u32 flag)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_RunBrake, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_RunBrake, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->command_vars.flags.flag1 = flag;
 }
 
-bool32 func_ovl3_8013F0A0(GObj *fighter_gobj)
+// 0x8013F0A0
+bool32 ftCommon_RunBrake_CheckInterruptRun(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.stick_range.x * fp->lr) < FTCOMMON_RUN_STICK_RANGE_MIN)
     {
-        func_ovl3_8013F05C(fighter_gobj, 1);
+        ftCommon_RunBrake_SetStatus(fighter_gobj, 1);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_8013F0EC(GObj *fighter_gobj)
+// 0x8013F0EC
+bool32 ftCommon_RunBrake_CheckInterruptTurnRun(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (ABS(fp->input.pl.stick_range.x) < FTCOMMON_RUN_STICK_RANGE_MIN)
     {
-        func_ovl3_8013F05C(fighter_gobj, 0);
+        ftCommon_RunBrake_SetStatus(fighter_gobj, 0);
 
-        if (fp->attributes->run_speed < fp->phys_info.vel_ground.x)
+        if (fp->phys_info.vel_ground.x > fp->attributes->run_speed)
         {
             fp->phys_info.vel_ground.x = fp->attributes->run_speed;
         }

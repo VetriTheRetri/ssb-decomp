@@ -1,14 +1,16 @@
 #include "fighter.h"
 
-void func_ovl3_801479A0(GObj *fighter_gobj)
+// 0x801479A0
+void ftCommon_HammerWalk_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_8014800C(fighter_gobj) == FALSE) && (func_ovl3_80147E7C(fighter_gobj) == FALSE))
+    if ((ftCommon_HammerKneeBend_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_HammerFall_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
         ftCommon_HammerWaitCheckSetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_801479E0(GObj *fighter_gobj)
+// 0x801479E0
+void ftCommon_HammerWalk_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -16,11 +18,12 @@ void func_ovl3_801479E0(GObj *fighter_gobj)
     ftCommon_HammerCheckSetColAnim(fighter_gobj);
 }
 
-bool32 func_ovl3_80147A2C(GObj *fighter_gobj)
+// 0x80147A2C
+bool32 ftCommon_HammerWalk_CheckInterruptCommon(GObj *fighter_gobj)
 {
     if (func_ovl3_8013E614(fighter_gobj) != FALSE)
     {
-        func_ovl3_801479E0(fighter_gobj);
+        ftCommon_HammerWalk_SetStatus(fighter_gobj);
 
         return TRUE;
     }

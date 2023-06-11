@@ -23,9 +23,9 @@ bool32 ftCommon_AttackHi4_CheckInterruptCommon(Fighter_Struct *fp)
 {
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (func_ovl3_80146A8C(fp) != FALSE)
+    if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {
-        func_ovl3_80146690(fp->fighter_gobj, ftStatus_Common_LightThrowHi4);
+        ftCommon_ItemThrow_SetStatus(fp->fighter_gobj, ftStatus_Common_LightThrowHi4);
 
         return TRUE;
     }
@@ -39,7 +39,7 @@ bool32 ftCommon_AttackHi4_CheckInterruptCommon(Fighter_Struct *fp)
 }
 
 // 0x801506CC
-bool32 ftCommon_AttackHi4_CheckInterruptKneebend(GObj *fighter_gobj)
+bool32 ftCommon_AttackHi4_CheckInterruptKneeBend(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 

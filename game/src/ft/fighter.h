@@ -400,7 +400,7 @@ typedef enum ftCommonAction
     ftStatus_Common_LandingAirB,
     ftStatus_Common_LandingAirHi,
     ftStatus_Common_LandingAirLw,
-    ftStatus_Common_LandingAirX,
+    ftStatus_Common_LandingAirNull,
     ftStatus_Common_SpecialStart // Start of special move table
 
 } ftCommonAction;
@@ -418,7 +418,8 @@ typedef enum ftAttackIndex
     ftAttack_Index_AttackLw3,
     ftAttack_Index_AttackS4,
     ftAttack_Index_AttackHi4,
-    ftAttack_Index_AttackLw4
+    ftAttack_Index_AttackLw4,
+    ftAttack_Index_FireFlowerShoot = 0x36
 };
 
 // Enum of flags for each unique type of grab, used to check if attacker can grab victim by ANDing attacker's grab type with victim's grab type ignore mask
@@ -1309,9 +1310,9 @@ void ftAnim_Update(GObj*); // ???
 // Macro to check if a move has been interrupted by any standard action
 #define ftStatus_CheckInterruptAll(fighter_gobj)   \
 (                                                  \
-    (func_ovl3_80151098(fighter_gobj) != FALSE) || \
-    (func_ovl3_80151160(fighter_gobj) != FALSE) || \
-    (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
@@ -1322,11 +1323,11 @@ void ftAnim_Update(GObj*); // ???
     (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE)    || \
-    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
+    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (func_ovl3_80141EA4(fighter_gobj) != FALSE) || \
-    (ftCommon_Dokan_CheckEnter(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
+    (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_8013EA04(fighter_gobj) != FALSE) || \
     (func_ovl3_8013E648(fighter_gobj) != FALSE)    \
 )                                                  \

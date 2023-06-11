@@ -2,7 +2,8 @@
 
 // DK enters this state when hit out of Cargo Thorw but it does not persist?
 
-void func_ovl3_8014E050(GObj *fighter_gobj)
+// 0x8014E050
+void ftDonkey_ThrowFDamage_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -20,7 +21,8 @@ void func_ovl3_8014E050(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014E0E0(GObj *fighter_gobj)
+// 0x8014E0E0
+void ftDonkey_ThrowFDamage_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     f32 knockback_resist = (this_fp->knockback_resist_status < this_fp->knockback_resist_passive) ? this_fp->knockback_resist_passive : this_fp->knockback_resist_status;

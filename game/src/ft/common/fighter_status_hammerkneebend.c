@@ -1,25 +1,30 @@
 #include "fighter.h"
 
-void func_ovl3_80147EC0(GObj *fighter_gobj)
+// 0x80147EC0
+void ftCommon_HammerKneeBend_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.hammer.kneebend_anim_frame++;
 
-    if ((fp->status_vars.common.hammer.input_source == FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON) && 
-    (fp->status_vars.common.hammer.kneebend_anim_frame <= FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES) && 
-    (fp->input.pl.button_tap_prev & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP)))
+    if 
+    (
+        (fp->status_vars.common.hammer.input_source == FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON)                             &&
+        (fp->status_vars.common.hammer.kneebend_anim_frame <= FTCOMMON_KNEEBEND_SHORT_HOP_FRAMES)                       &&
+        (fp->input.pl.button_tap_prev & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
+    )
     {
         fp->status_vars.common.hammer.is_short_hop = TRUE;
     }
     if (attributes->kneebend_frames <= fp->status_vars.common.hammer.kneebend_anim_frame)
     {
-        func_ovl3_80147D30(fighter_gobj);
+        ftCommon_HammerFall_SetStatusJump(fighter_gobj);
     }
 }
 
-void func_ovl3_80147F54(GObj *fighter_gobj)
+// 0x80147F54
+void ftCommon_HammerKneeBend_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -29,7 +34,8 @@ void func_ovl3_80147F54(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80147F88(GObj *fighter_gobj, s32 input_source)
+// 0x80147F88
+void ftCommon_HammerKneeBend_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -42,14 +48,15 @@ void func_ovl3_80147F88(GObj *fighter_gobj, s32 input_source)
     fp->status_vars.common.hammer.is_short_hop = FALSE;
 }
 
-bool32 func_ovl3_8014800C(GObj *fighter_gobj)
+// 0x8014800C
+bool32 ftCommon_HammerKneeBend_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    s32 input_source = func_ovl3_8013F474(fp);
+    s32 input_source = ftCommon_KneeBend_GetInputTypeCommon(fp);
 
     if (input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE)
     {
-        func_ovl3_80147F88(fighter_gobj, input_source);
+        ftCommon_HammerKneeBend_SetStatus(fighter_gobj, input_source);
 
         return TRUE;
     }

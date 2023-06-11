@@ -3,7 +3,7 @@
 // 0x80143730
 void ftCommon_FallSpecial_ProcInterrupt(GObj *fighter_gobj)
 {
-    func_ovl3_8014019C(fighter_gobj);
+    ftCommon_JumpAerial_CheckInterruptCommon(fighter_gobj);
 }
 
 // 0x80143750
@@ -56,7 +56,7 @@ void ftCommon_FallSpecial_ProcMap(GObj *fighter_gobj)
         }
         else if ((fp->status_vars.common.fallspecial.is_goto_landing != FALSE) || (fp->phys_info.vel_air.y < FTCOMMON_FALLSPECIAL_SKIP_LANDING_VEL_Y_MAX))
         {
-            func_ovl3_80142E3C(fighter_gobj, fp->status_vars.common.fallspecial.is_allow_interrupt, fp->status_vars.common.fallspecial.landing_lag);
+            ftCommon_LandingFallSpecial_SetStatus(fighter_gobj, fp->status_vars.common.fallspecial.is_allow_interrupt, fp->status_vars.common.fallspecial.landing_lag);
         }
         else func_ovl3_8013E1C8(fighter_gobj);
     }

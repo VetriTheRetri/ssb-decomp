@@ -31,7 +31,8 @@ void (*ftCommon_SpecialLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftDonkey_SpecialLwStart_SetStatus
 };
 
-bool32 func_ovl3_801511E0(GObj *fighter_gobj)
+// 0x801511E0
+bool32 ftCommon_SpecialLw_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;

@@ -2,7 +2,7 @@
 
 void func_ovl3_8014DA00(GObj *fighter_gobj)
 {
-    if (func_ovl3_80146BE0(fighter_gobj) == FALSE)
+    if (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
         func_ovl3_8014DFA8(fighter_gobj);
     }
@@ -47,7 +47,7 @@ void func_ovl3_8014DAF8(GObj *fighter_gobj)
     switch (fp->status_vars.common.throwf.input_source)
     {
     case FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON:
-        func_ovl3_8013F6A0(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.throwf.is_short_hop);
+        ftCommon_Jump_GetJumpForceButton(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.throwf.is_short_hop);
         break;
 
     case FTCOMMON_KNEEBEND_INPUT_TYPE_STICK:
@@ -64,14 +64,14 @@ void func_ovl3_8014DAF8(GObj *fighter_gobj)
 
 void func_ovl3_8014DBE0(GObj *fighter_gobj)
 {
-    func_ovl3_80141DA0(fighter_gobj, ftStatus_Donkey_ThrowFFall, 1.0F, 0);
+    ftCommon_Pass_SetStatusParam(fighter_gobj, ftStatus_Donkey_ThrowFFall, 1.0F, 0);
 }
 
 bool32 func_ovl3_8014DC08(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl3_80141E60(fp) != FALSE)
+    if (ftCommon_Pass_CheckInputSuccess(fp) != FALSE)
     {
         func_ovl3_8014DBE0(fighter_gobj);
 

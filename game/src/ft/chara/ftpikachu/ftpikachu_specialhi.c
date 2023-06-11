@@ -456,7 +456,7 @@ void func_ovl3_801534E0(GObj *fighter_gobj)
         {
             ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
-        else func_ovl3_80142E3C(fighter_gobj, 0, 0.4F);
+        else ftCommon_LandingFallSpecial_SetStatus(fighter_gobj, 0, 0.4F);
     }
 }
 

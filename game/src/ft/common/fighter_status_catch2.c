@@ -49,7 +49,7 @@ void ftCommon_CatchWait_ProcUpdate(GObj *fighter_gobj)
     {
         fp->status_vars.common.catchwait.throw_wait--;
     }
-    func_ovl3_8014A394(fighter_gobj);
+    ftCommon_Throw_CheckInterruptCatchWait(fighter_gobj);
 }
 
 // 0x8014A000

@@ -93,7 +93,7 @@ void ftCommon_DokanStart_SetStatus(GObj *fighter_gobj, s32 ground_line_id)
 }
 
 // 0x80142258
-bool32 ftCommon_Dokan_CheckEnter(GObj *fighter_gobj)
+bool32 ftCommon_DokanStart_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;

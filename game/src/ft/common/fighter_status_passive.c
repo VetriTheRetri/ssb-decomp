@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_80144660(GObj *fighter_gobj)
+// 0x80144660
+void ftCommon_Passive_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -8,17 +9,18 @@ void func_ovl3_80144660(GObj *fighter_gobj)
     {
         ftMapCollide_SetGround(fp);
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Passive, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Passive, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftCommon_VelDamageTransferGround(fp);
 }
 
-bool32 func_ovl3_801446BC(GObj *fighter_gobj)
+// 0x801446BC
+bool32 ftCommon_Passive_CheckInterruptDamage(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->time_since_last_z < 20)
+    if (fp->time_since_last_z < FTCOMMON_PASSIVE_BUFFER_FRAMES_MAX)
     {
-        func_ovl3_80144660(fighter_gobj);
+        ftCommon_Passive_SetStatus(fighter_gobj);
 
         return TRUE;
     }

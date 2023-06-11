@@ -5,7 +5,8 @@
 extern ftSpawnInfo D_ovl2_80116DD0;
 extern f32 Rebirth_Halo_Offset_X[GMMATCH_PLAYERS_MAX];
 
-void func_ovl3_8013CF60(GObj *this_gobj)
+// 0x8013CF60
+void ftCommon_RebirthDown_SetStatus(GObj *this_gobj)
 {
     Fighter_Struct *this_fp = ftGetStruct(this_gobj);
     ftSpawnInfo rebirth_vars = D_ovl2_80116DD0;
@@ -59,12 +60,12 @@ loop: // This makes no sense
     ftMapCollide_SetGround(this_fp);
 
     this_fp->coll_data.ground_line_id = -2;
-    this_fp->coll_data.ground_flags = 0x4000;
+    this_fp->coll_data.ground_flags = MPCOLL_MASK_NONSOLID;
     this_fp->coll_data.ground_angle.y = 1.0F;
     this_fp->coll_data.ground_angle.x = 0.0F;
     this_fp->coll_data.ground_angle.z = 0.0F;
 
-    ftStatus_Update(this_gobj, ftStatus_Common_RebirthDown, 100.0F, 1.0F, 0U);
+    ftStatus_Update(this_gobj, ftStatus_Common_RebirthDown, 100.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(this_gobj);
     func_ovl2_800D9444(this_gobj);
 
@@ -93,7 +94,8 @@ loop: // This makes no sense
     func_ovl2_800E7F7C(this_gobj, 1);
 }
 
-void func_ovl3_8013D1D4(GObj *fighter_gobj)
+// 0x8013D1D4
+void ftCommon_RebirthCommon_DecHaloTimers(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -107,11 +109,12 @@ void func_ovl3_8013D1D4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013D200(GObj *fighter_gobj)
+// 0x8013D200
+void ftCommon_RebirthDown_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8013D1D4(fighter_gobj);
+    ftCommon_RebirthCommon_DecHaloTimers(fighter_gobj);
 
     if (fp->status_vars.common.rebirth.halo_despawn_wait == (FTCOMMON_REBIRTH_HALO_DESPAWN_WAIT - FTCOMMON_REBIRTH_HALO_UNK_WAIT))
     {
@@ -119,11 +122,12 @@ void func_ovl3_8013D200(GObj *fighter_gobj)
     }
     if (fp->status_vars.common.rebirth.halo_despawn_wait == (FTCOMMON_REBIRTH_HALO_DESPAWN_WAIT - FTCOMMON_REBIRTH_HALO_STAND_WAIT))
     {
-        func_ovl3_8013D2DC(fighter_gobj);
+        ftCommon_RebirthStand_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8013D264(GObj *fighter_gobj)
+// 0x8013D264
+void ftCommon_RebirthCommon_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -131,17 +135,19 @@ void func_ovl3_8013D264(GObj *fighter_gobj)
                                                SQUARE(fp->status_vars.common.rebirth.halo_lower_wait)) + fp->status_vars.common.rebirth.halo_offset.y;
 }
 
-void func_ovl3_8013D2AC(GObj *fighter_gobj)
+// 0x8013D2AC
+void ftCommon_RebirthStand_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_8013D1D4(fighter_gobj);
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013D518);
+    ftCommon_RebirthCommon_DecHaloTimers(fighter_gobj);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_RebirthWait_SetStatus);
 }
 
-void func_ovl3_8013D2DC(GObj *fighter_gobj)
+// 0x8013D2DC
+void ftCommon_RebirthStand_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthStand, 0.0F, 1.0F, 0x106U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthStand, 0.0F, 1.0F, (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     ftAnim_Update(fighter_gobj);
 
     fp->x191_flag_b3 = TRUE;
@@ -152,11 +158,12 @@ void func_ovl3_8013D2DC(GObj *fighter_gobj)
     fp->fighter_cam_zoom_range = 0.6F;
 }
 
-void func_ovl3_8013D358(GObj *fighter_gobj)
+// 0x8013D358
+void ftCommon_RebirthWait_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8013D1D4(fighter_gobj);
+    ftCommon_RebirthCommon_DecHaloTimers(fighter_gobj);
 
     if (fp->status_vars.common.rebirth.halo_despawn_wait == 0)
     {
@@ -165,7 +172,8 @@ void func_ovl3_8013D358(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013D3A4(GObj *fighter_gobj)
+// 0x8013D3A4
+void ftCommon_RebirthWait_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -175,11 +183,12 @@ void func_ovl3_8013D3A4(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013D518(GObj *fighter_gobj)
+// 0x8013D518
+void ftCommon_RebirthWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, 0x106U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
 
     fp->is_stat_nodamage = TRUE;
     fp->x18E_flag_b0 = TRUE;

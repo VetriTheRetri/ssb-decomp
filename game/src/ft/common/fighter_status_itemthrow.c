@@ -2,7 +2,8 @@
 #include "ftdonkey.h"
 #include "article.h"
 
-void func_ovl3_801462A0(GObj *fighter_gobj)
+// 0x801462A0
+void ftCommon_ItemThrow_UpdateModelYaw(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -37,7 +38,8 @@ void func_ovl3_801462A0(GObj *fighter_gobj)
 
 extern FighterItemThrow Fighter_ItemThrow_Desc[ftStatus_Common_SpecialStart];
 
-void func_ovl3_8014634C(GObj *fighter_gobj)
+// 0x8014634C
+void ftCommon_ItemThrow_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 vel_base;
@@ -47,7 +49,7 @@ void func_ovl3_8014634C(GObj *fighter_gobj)
     s32 status_id;
     s32 angle;
 
-    func_ovl3_801462A0(fighter_gobj);
+    ftCommon_ItemThrow_UpdateModelYaw(fighter_gobj);
 
     if (fp->command_vars.flags.flag2 != 0)
     {
@@ -99,7 +101,8 @@ void func_ovl3_8014634C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80146618(GObj *fighter_gobj)
+// 0x80146618
+void ftCommon_ItemThrow_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -110,7 +113,8 @@ void func_ovl3_80146618(GObj *fighter_gobj)
     else func_ovl2_800D8BB4(fighter_gobj);
 }
 
-void func_ovl3_8014665C(Fighter_Struct *fp)
+// 0x8014665C
+void ftCommon_ItemThrow_InitCommandVars(Fighter_Struct *fp)
 {
     fp->command_vars.flags.flag0 = 0;
     fp->command_vars.flags.flag1 = 0;
@@ -118,7 +122,8 @@ void func_ovl3_8014665C(Fighter_Struct *fp)
     fp->command_vars.flags.flag3 = 0;
 }
 
-void func_ovl3_80146670(Fighter_Struct *fp)
+// 0x80146670
+void ftCommon_ItemThrow_InitStatusVars(Fighter_Struct *fp)
 {
     fp->status_vars.common.itemthrow.turn_frames = 0;
     fp->status_vars.common.itemthrow.throw_angle = 361;
@@ -126,20 +131,22 @@ void func_ovl3_80146670(Fighter_Struct *fp)
     fp->status_vars.common.itemthrow.throw_damage = 1.0F;
 }
 
-void func_ovl3_80146690(GObj *fighter_gobj, s32 status_id)
+// 0x80146690
+void ftCommon_ItemThrow_SetStatus(GObj *fighter_gobj, s32 status_id)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8014665C(fp);
+    ftCommon_ItemThrow_InitCommandVars(fp);
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
-    func_ovl3_80146670(fp);
-    func_ovl3_801462A0(fighter_gobj);
+    ftCommon_ItemThrow_InitStatusVars(fp);
+    ftCommon_ItemThrow_UpdateModelYaw(fighter_gobj);
 }
 
-void func_ovl3_801466EC(GObj *fighter_gobj)
+// 0x801466EC
+void ftCommon_LightThrow_DecideSetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
@@ -170,10 +177,11 @@ void func_ovl3_801466EC(GObj *fighter_gobj)
     }
     else status_id = (atGetStruct(fp->item_hold)->type == At_Type_Throw) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowDrop; // No NULL check
 
-    func_ovl3_80146690(fighter_gobj, status_id);
+    ftCommon_ItemThrow_SetStatus(fighter_gobj, status_id);
 }
 
-void func_ovl3_80146930(GObj *fighter_gobj)
+// 0x80146930
+void ftCommon_HeavyThrow_DecideSetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
@@ -192,12 +200,13 @@ void func_ovl3_80146930(GObj *fighter_gobj)
     {
         status_id += ftStatus_Common_HeavyThrowF4;
     }
-    func_ovl3_80146690(fighter_gobj, status_id);
+    ftCommon_ItemThrow_SetStatus(fighter_gobj, status_id);
 
     fp->proc_damage = ftCommon_Get_DropItem;
 }
 
-bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
+// 0x80146A8C
+bool32 ftCommon_LightThrow_CheckItemTypeThrow(Fighter_Struct *fp)
 {
     if (fp->item_hold != NULL)
     {
@@ -212,35 +221,37 @@ bool32 func_ovl3_80146A8C(Fighter_Struct *fp)
     return FALSE;
 }
 
-bool32 func_ovl3_80146AE8(GObj *fighter_gobj)
+// 0x80146AE8
+bool32 ftCommon_LightThrow_CheckInterruptGuard(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->item_hold != NULL) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
-        if (fp->status_vars.common.itemthrow.get_heavy_wait != 0)
+        if (fp->status_vars.common.itemthrow.throw_wait != 0)
         {
-            func_ovl3_80146690(fighter_gobj, ftStatus_Common_HeavyGet);
+            ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowDash);
 
             return TRUE;
         }
-        else func_ovl3_801466EC(fighter_gobj);
+        else ftCommon_LightThrow_DecideSetStatus(fighter_gobj);
 
         return TRUE;
     }
-    if (fp->status_vars.common.itemthrow.get_heavy_wait != 0)
+    if (fp->status_vars.common.itemthrow.throw_wait != 0)
     {
-        fp->status_vars.common.itemthrow.get_heavy_wait--;
+        fp->status_vars.common.itemthrow.throw_wait--;
     }
     return FALSE;
 }
 
-bool32 func_ovl3_80146B64(GObj *fighter_gobj) // Interrupt item throw from roll
+// 0x80146B64
+bool32 ftCommon_LightThrow_CheckInterruptEscape(GObj *fighter_gobj) // Interrupt item throw from roll
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
-    if ((func_ovl3_80146A8C(fp) != FALSE) && (fp->status_vars.common.itemthrow.turn_rotate_step != 0)) // Might be a different var? Not sure, this is just LightThrow again
+    if ((ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE) && (fp->status_vars.common.itemthrow.turn_rotate_step != 0)) // Might be a different var? Not sure, this is just LightThrow again
     {
         if (fp->status_info.status_id == ftStatus_Common_EscapeF)
         {
@@ -248,7 +259,7 @@ bool32 func_ovl3_80146B64(GObj *fighter_gobj) // Interrupt item throw from roll
         }
         else status_id = ftStatus_Common_LightThrowB4;
 
-        func_ovl3_80146690(fighter_gobj, status_id);
+        ftCommon_ItemThrow_SetStatus(fighter_gobj, status_id);
 
         return TRUE;
     }
@@ -259,13 +270,14 @@ bool32 func_ovl3_80146B64(GObj *fighter_gobj) // Interrupt item throw from roll
     return FALSE;
 }
 
-bool32 func_ovl3_80146BE0(GObj *fighter_gobj)
+// 0x80146BE0
+bool32 ftCommon_LightThrow_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->item_hold != NULL) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
-        func_ovl3_80146930(fighter_gobj);
+        ftCommon_HeavyThrow_DecideSetStatus(fighter_gobj);
 
         return TRUE;
     }

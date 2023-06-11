@@ -192,7 +192,7 @@
 066A CAPTAIN AttackAirD
 066B CAPTAIN LandingAirF
 066C CAPTAIN LandingAirB
-05FB CAPTAIN LandingAirX
+05FB CAPTAIN LandingAirNull
 0655 CAPTAIN Jab 3
 0656 CAPTAIN Jab Loop Start
 0657 CAPTAIN Jab Loop
@@ -408,7 +408,7 @@
 039E DONKEY AttackAirD
 039F DONKEY LandingAirF
 03A0 DONKEY LandingAirB
-0333 DONKEY LandingAirX
+0333 DONKEY LandingAirNull
 03A4 DONKEY Appear
 03A5 DONKEY Appear
 03A6 DONKEY Giant Punch (ground loop start)
@@ -629,7 +629,7 @@
 0303 FOX AttackAirD
 0304 FOX LandingAirF
 0305 FOX LandingAirB
-0295 FOX LandingAirX
+0295 FOX LandingAirNull
 02F1 FOX Jab Loop Start
 02F2 FOX Jab Loop
 02F3 FOX Jab Loop End
@@ -847,7 +847,7 @@
 0570 JIGGLY LandingAirF
 05C7 JIGGLY LandingAirB
 05C6 JIGGLY LandingAirD
-05C6 JIGGLY LandingAirX
+05C6 JIGGLY LandingAirNull
 055F JIGGLY Jab Loop Start (unused)
 0560 JIGGLY Jab Loop (unused)
 0561 JIGGLY Jab Loop End (unused)
@@ -1054,7 +1054,7 @@
 056F KIRBY AttackAirD
 0570 KIRBY LandingAirF
 0571 KIRBY LandingAirB
-0501 KIRBY LandingAirX
+0501 KIRBY LandingAirNull
 055F KIRBY Jab Loop Start
 0560 KIRBY Jab Loop
 0561 KIRBY Jab Loop End
@@ -1271,7 +1271,7 @@
 04D8 LINK AttackAirD
 04D9 LINK LandingAirF
 04DA LINK LandingAirD
-046E LINK LandingAirX
+046E LINK LandingAirNull
 04C9 LINK Jab 3
 04CA LINK Jab Loop Start
 04CB LINK Jab Loop
@@ -1485,7 +1485,7 @@
 0273 LUIGI LandingAirF
 0274 LUIGI LandingAirB
 0275 LUIGI LandingAirU
-0206 LUIGI LandingAirX
+0206 LUIGI LandingAirNull
 0260 LUIGI Jab 3
 0279 LUIGI Appear
 027A LUIGI Appear
@@ -1691,7 +1691,7 @@
 0273 MARIO LandingAirF
 0274 MARIO LandingAirB
 0275 MARIO LandingAirU
-0206 MARIO LandingAirX
+0206 MARIO LandingAirNull
 0260 MARIO Jab 3
 0279 MARIO Appear
 027A MARIO Appear
@@ -1892,7 +1892,7 @@
 06FB NESS AttackAirD
 06FC NESS LandingAirF
 06FD NESS LandingAirB
-0693 NESS LandingAirX
+0693 NESS LandingAirNull
 06ED NESS Jab 3
 0707 NESS AppearStart1
 0708 NESS AppearStart2
@@ -2107,7 +2107,7 @@
 07EE PIKACHU AttackAirD
 07EF PIKACHU LandingAirF
 07F0 PIKACHU LandingAirD
-07B8 PIKACHU LandingAirX
+07B8 PIKACHU LandingAirNull
 0821 PIKACHU Appear
 0822 PIKACHU Appear
 0826 PIKACHU Neutral Special (ground)
@@ -2324,7 +2324,7 @@
 043C SAMUS AttackAirD
 043D SAMUS LandingAirB
 043E SAMUS LandingAirU
-03CC SAMUS LandingAirX
+03CC SAMUS LandingAirNull
 0442 SAMUS Appear
 0443 SAMUS Appear
 0444 SAMUS Starting Charge shot
@@ -2529,7 +2529,7 @@
 0792 YOSHI AttackAirD
 0793 YOSHI LandingAirF
 0794 YOSHI LandingAirB
-0729 YOSHI LandingAirX
+0729 YOSHI LandingAirNull
 07A1 YOSHI Appear
 07A2 YOSHI Appear
 0798 YOSHI Egg Throw (ground)

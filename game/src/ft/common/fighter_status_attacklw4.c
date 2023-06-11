@@ -23,9 +23,9 @@ bool32 ftCommon_AttackLw4_CheckInterruptCommon(Fighter_Struct *fp)
 {
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (func_ovl3_80146A8C(fp) != FALSE)
+    if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {
-        func_ovl3_80146690(fp->fighter_gobj, ftStatus_Common_LightThrowLw4);
+        ftCommon_ItemThrow_SetStatus(fp->fighter_gobj, ftStatus_Common_LightThrowLw4);
 
         return TRUE;
     }

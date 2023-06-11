@@ -2,7 +2,8 @@
 #include "article.h"
 #include "gmground.h"
 
-void func_ovl3_80143E10(GObj *fighter_gobj)
+// 0x80143E10
+void ftCommon_TaruCann_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -16,7 +17,7 @@ void func_ovl3_80143E10(GObj *fighter_gobj)
         }
         if (fp->status_vars.common.tarucann.shoot_wait == 0)
         {
-            func_ovl3_80144038(fighter_gobj);
+            ftCommon_TaruCann_ShootFighter(fighter_gobj);
 
             return;
         }
@@ -31,7 +32,8 @@ void func_ovl3_80143E10(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80143EB0(GObj *fighter_gobj)
+// 0x80143EB0
+void ftCommon_TaruCann_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -43,7 +45,8 @@ void func_ovl3_80143EB0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80143F04(GObj *fighter_gobj)
+// 0x80143F04
+void ftCommon_TaruCann_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *tarucann_gobj = fp->status_vars.common.tarucann.tarucann_gobj;
@@ -51,7 +54,8 @@ void func_ovl3_80143F04(GObj *fighter_gobj)
     DObjGetStruct(fighter_gobj)->translate = DObjGetStruct(tarucann_gobj)->translate;
 }
 
-void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
+// 0x80143F30
+void ftCommon_TaruCann_SetStatus(GObj *fighter_gobj, GObj *tarucann_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
@@ -74,8 +78,7 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
     {
         func_ovl3_8014AECC(fp->capture_gobj, fighter_gobj);
     }
-    
-    ftStatus_Update(fighter_gobj, ftStatus_Common_TaruCann, 0.0F, 0.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_TaruCann, 0.0F, 0.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800D9444(fighter_gobj);
 
@@ -83,7 +86,7 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
     fp->status_vars.common.tarucann.release_wait = 0;
     fp->status_vars.common.tarucann.tarucann_gobj = tarucann_gobj;
 
-    ftCommon_SetHitStatusAll(fighter_gobj, 3);
+    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
 
     fp->is_invisible = TRUE;
 
@@ -94,10 +97,11 @@ void func_ovl3_80143F30(GObj *fighter_gobj, GObj *tarucann_gobj)
 extern intptr_t D_NF_00000014;
 extern intptr_t D_NF_000000BC;
 
-void func_ovl3_80144038(GObj *fighter_gobj)
+// 0x80144038
+void ftCommon_TaruCann_ShootFighter(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    ftThrowHitDesc *tarucann = (ftThrowHitDesc *)(((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
+    ftThrowHitDesc *tarucann = (ftThrowHitDesc*) (((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
     f32 knockback;
     s32 angle;
 

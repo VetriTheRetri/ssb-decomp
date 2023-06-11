@@ -4,7 +4,7 @@
 
 #define ftStatus_CheckInteruptThrowFWait(fighter_gobj) \
 (                                                      \
-    (func_ovl3_80146BE0(fighter_gobj) != FALSE) ||     \
+    (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (func_ovl3_8014DFA8(fighter_gobj) != FALSE) ||     \
     (func_ovl3_8014D9B8(fighter_gobj) != FALSE) ||     \
     (func_ovl3_8014DC08(fighter_gobj) != FALSE) ||     \

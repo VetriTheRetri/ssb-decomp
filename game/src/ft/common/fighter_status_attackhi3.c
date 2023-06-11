@@ -31,9 +31,9 @@ bool32 ftCommon_AttackHi3_CheckInterruptCommon(GObj *fighter_gobj)
     {
         if (ftCommon_GetStickAngleRadians(fp) > F_DEG_TO_RAD(50.0F)) // 0.87266463F
         {
-            if (func_ovl3_80146A8C(fp) != FALSE)
+            if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
             {
-                func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowHi);
+                ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowHi);
 
                 return TRUE;
             }

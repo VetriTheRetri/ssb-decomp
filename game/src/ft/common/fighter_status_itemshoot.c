@@ -1,7 +1,8 @@
 #include "fighter.h"
 #include "article.h"
 
-void func_ovl3_80146FB0(GObj *fighter_gobj)
+// 0x80146FB0
+void ftCommon_LGunShoot_ProcUpdate(GObj *fighter_gobj)
 {
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
@@ -9,7 +10,8 @@ void func_ovl3_80146FB0(GObj *fighter_gobj)
 const Vec3f Fighter_LGunShoot_Ammo_Offset = { FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_X, FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Y, FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z };
 const Vec3f Fighter_LGunShoot_Dust_Offset = { FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_X, FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Y, FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z };
 
-void func_ovl3_80146FD4(GObj *fighter_gobj)
+// 0x80146FD4
+void ftCommon_LGunShoot_ProcAccessory(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap;
@@ -39,13 +41,13 @@ void func_ovl3_80146FD4(GObj *fighter_gobj)
             spawn_gfx_offset.y = FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Y;
             spawn_gfx_offset.z = FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z;
 
-            ftCommon_GFXSpawn(fighter_gobj, 0x1F, fp->attributes->joint_itemhold_light, &spawn_gfx_offset, 0, fp->lr, 1, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0x1F, fp->attributes->joint_itemhold_light, &spawn_gfx_offset, NULL, fp->lr, TRUE, 0);
 
             spawn_gfx_offset.x = 0.0F;
             spawn_gfx_offset.y = 0.0F;
             spawn_gfx_offset.z = -FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Z;
 
-            ftCommon_GFXSpawn(fighter_gobj, 0x13, 0, &spawn_gfx_offset, 0, fp->lr, 0, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0x13, 0, &spawn_gfx_offset, NULL, fp->lr, FALSE, 0);
 
             func_800269C0(0x3DU);
             func_ovl2_800E806C(fp, 9, 0);
@@ -54,52 +56,58 @@ void func_ovl3_80146FD4(GObj *fighter_gobj)
         {
             dust_gfx_offset = Fighter_LGunShoot_Dust_Offset;
 
-            ftCommon_GFXSpawn(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &dust_gfx_offset, 0, -fp->lr, 1, 0);
+            ftCommon_GFXSpawn(fighter_gobj, 0xB, fp->attributes->joint_itemhold_light, &dust_gfx_offset, NULL, -fp->lr, TRUE, 0);
             func_800269C0(0x3EU);
         }
         fp->command_vars.flags.flag0 = 0;
     }
 }
 
-void func_ovl3_801471C0(GObj *fighter_gobj)
+// 0x801471C0
+void ftCommon_LGunShoot_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_80147258);
+    func_ovl2_800DDE84(fighter_gobj, ftCommon_LGunShoot_SwitchStatusAir);
 }
 
-void func_ovl3_801471E4(GObj *fighter_gobj)
+// 0x801471E4
+void ftCommon_LGunShootAir_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_80147208);
+    func_ovl2_800DE6E4(fighter_gobj, ftCommon_LGunShootAir_SwitchStatusGround);
 }
 
-void func_ovl3_80147208(GObj *fighter_gobj)
+// 0x80147208
+void ftCommon_LGunShootAir_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShoot, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShoot, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
-    fp->proc_accessory = func_ovl3_80146FD4;
+    fp->proc_accessory = ftCommon_LGunShoot_ProcAccessory;
 }
 
-void func_ovl3_80147258(GObj *fighter_gobj)
+// 0x80147258
+void ftCommon_LGunShoot_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShootAir, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShootAir, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_accessory = func_ovl3_80146FD4;
+    fp->proc_accessory = ftCommon_LGunShoot_ProcAccessory;
 }
 
-void func_ovl3_801472B0(GObj *fighter_gobj)
+// 0x801472B0
+void ftCommon_FireFlowerShoot_ProcUpdate(GObj *fighter_gobj)
 {
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl2_800DEE54);
 }
 
 const Vec3f Fighter_FireFlowerShoot_Ammo_Offset = { FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_X, FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Y, FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Z };
 
-void func_ovl3_801472D4(Fighter_Struct *fp, s32 ammo_sub)
+// 0x801472D4
+void ftCommon_FireFlowerShoot_UpdateAmmoStats(Fighter_Struct *fp, s32 ammo_sub)
 {
     Article_Struct *ap = atGetStruct(fp->item_hold);
     Vec3f flame_spawn_offset = Fighter_FireFlowerShoot_Ammo_Offset;
@@ -137,7 +145,7 @@ void func_ovl3_801472D4(Fighter_Struct *fp, s32 ammo_sub)
     {
         fp->status_vars.common.fireflower.flame_vel_index = 0;
 
-        ftCommon_MotionCountIncSetID(fp, 0x36);
+        ftCommon_MotionCountIncSetID(fp, ftAttack_Index_FireFlowerShoot);
         ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
         ftCommon_Update1PGameAttackStats(fp, 0);
     }
@@ -149,7 +157,8 @@ const Vec3f Fighter_FireFlowerShoot_Spark_Offset         = { 0.0F, 80.0F,   0.0F
 const Vec3f Fighter_FireFlowerShoot_Spark_Scatter        = { 90.0F, 90.0F, 90.0F };
 const Vec3f Fighter_FireFlowerShoot_Kickup_Offset        = { 0.0F, 0.0F, -180.0F };
 
-void func_ovl3_80147434(GObj *fighter_gobj)
+// 0x80147434
+void ftCommon_FireFlowerShoot_ProcAccessory(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap;
@@ -207,7 +216,7 @@ void func_ovl3_80147434(GObj *fighter_gobj)
             {
                 fp->status_vars.common.fireflower.ammo_sub = FTCOMMON_FIREFLOWERSHOOT_AMMO_INDEX_MAX;
 
-                func_ovl3_801472D4(fp, ammo_sub);
+                ftCommon_FireFlowerShoot_UpdateAmmoStats(fp, ammo_sub);
             }
             if (fp->command_vars.flags.flag0 == 1)
             {
@@ -234,38 +243,43 @@ void func_ovl3_80147434(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8014772C(GObj *fighter_gobj)
+// 0x8014772C
+void ftCommon_FireFlowerShoot_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_801477C8);
+    func_ovl2_800DDE84(fighter_gobj, ftCommon_FireFlowerShoot_SwitchStatusAir);
 }
 
-void func_ovl3_80147750(GObj *fighter_gobj)
+// 0x80147750
+void ftCommon_FireFlowerShootAir_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_80147774);
+    func_ovl2_800DE6E4(fighter_gobj, ftCommon_FireFlowerShootAir_SwitchStatusGround);
 }
 
-void func_ovl3_80147774(GObj *fighter_gobj)
+// 0x80147774
+void ftCommon_FireFlowerShootAir_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShoot, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShoot, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, FTSTATUPDATE_NONE_PRESERVE);
 
-    fp->proc_accessory = func_ovl3_80147434;
+    fp->proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
 }
 
-void func_ovl3_801477C8(GObj *fighter_gobj)
+// 0x801477C8
+void ftCommon_FireFlowerShoot_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShootAir, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShootAir, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_accessory = func_ovl3_80147434;
+    fp->proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
 }
 
-void func_ovl3_80147824(Fighter_Struct *fp)
+// 0x80147824
+void ftCommon_FireFlowerShoot_InitStatusVars(Fighter_Struct *fp)
 {
     fp->status_vars.common.fireflower.flame_vel_index = 0;
     fp->status_vars.common.fireflower.ammo_sub = 1;
@@ -275,7 +289,8 @@ void func_ovl3_80147824(Fighter_Struct *fp)
     fp->status_vars.common.fireflower.release_lag = 0;
 }
 
-void func_ovl3_80147844(GObj *fighter_gobj)
+// 0x80147844
+void ftCommon_ItemShoot_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap = atGetStruct(fp->item_hold);
@@ -286,25 +301,26 @@ void func_ovl3_80147844(GObj *fighter_gobj)
     {
     case At_Kind_L_Gun:
         status_id = ftStatus_Common_LGunShoot;
-        proc_accessory = func_ovl3_80146FD4;
+        proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;
 
     case At_Kind_F_Flower:
         status_id = ftStatus_Common_FireFlowerShoot;
-        proc_accessory = func_ovl3_80147434;
+        proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
         break;
     }
     fp->command_vars.flags.flag0 = 0;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->proc_accessory = proc_accessory;
 
-    func_ovl3_80147824(fp);
+    ftCommon_FireFlowerShoot_InitStatusVars(fp);
 }
 
-void func_ovl3_801478EC(GObj *fighter_gobj)
+// 0x801478EC
+void ftCommon_ItemShootAir_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Article_Struct *ap = atGetStruct(fp->item_hold);
@@ -315,21 +331,21 @@ void func_ovl3_801478EC(GObj *fighter_gobj)
     {
     case At_Kind_L_Gun:
         status_id = ftStatus_Common_LGunShootAir;
-        proc_accessory = func_ovl3_80146FD4;
+        proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;
 
     case At_Kind_F_Flower:
         status_id = ftStatus_Common_FireFlowerShootAir;
-        proc_accessory = func_ovl3_80147434;
+        proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
         break;
     }
     fp->command_vars.flags.flag0 = 0;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->proc_accessory = proc_accessory;
 
     func_ovl2_800D8EB8(fp);
-    func_ovl3_80147824(fp);
+    ftCommon_FireFlowerShoot_InitStatusVars(fp);
 }

@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_80144700(GObj *fighter_gobj, s32 status_id)
+// 0x80144700
+void ftCommon_PassiveStand_SetStatus(GObj *fighter_gobj, s32 status_id)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -12,7 +13,8 @@ void func_ovl3_80144700(GObj *fighter_gobj, s32 status_id)
     ftCommon_VelDamageTransferGround(fp);
 }
 
-bool32 func_ovl3_80144760(GObj *fighter_gobj)
+// 0x80144760
+bool32 ftCommon_PassiveStand_CheckInterruptDamage(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
@@ -27,7 +29,7 @@ bool32 func_ovl3_80144760(GObj *fighter_gobj)
             }
             else status_id = ftStatus_Common_PassiveStandB;
 
-            func_ovl3_80144700(fighter_gobj, status_id);
+            ftCommon_PassiveStand_SetStatus(fighter_gobj, status_id);
 
             return TRUE;
         }

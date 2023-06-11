@@ -3,9 +3,9 @@
 // 0x80143560
 void ftCommon_DamageFall_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_8014019C(fighter_gobj) == FALSE))
+    if ((ftCommon_SpecialAir_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_JumpAerial_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_80147CCC(fighter_gobj);
+        ftCommon_HammerFall_CheckInterruptDamageFall(fighter_gobj);
     }
 }
 
@@ -20,13 +20,14 @@ void ftCommon_DamageFall_ProcMap(GObj *fighter_gobj)
         {
             ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
-        else if ((func_ovl3_80144760(fighter_gobj) == FALSE) && (func_ovl3_801446BC(fighter_gobj) == FALSE))
+        else if ((ftCommon_PassiveStand_CheckInterruptDamage(fighter_gobj) == FALSE) && (ftCommon_Passive_CheckInterruptDamage(fighter_gobj) == FALSE))
         {
             ftCommon_DownBounce_SetStatus(fighter_gobj);
         }
     }
 }
 
+// 0x80143630
 void func_ovl3_80143630(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);

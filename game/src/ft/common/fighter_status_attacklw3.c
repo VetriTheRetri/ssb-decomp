@@ -9,7 +9,7 @@ void ftCommon_AttackLw3_ProcUpdate(GObj *fighter_gobj)
     {
         ftCommon_AttackLw3_SetStatus(fighter_gobj);
     }
-    else ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014329C);
+    else ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_SquatWait_SetStatus);
 }
 
 // 0x8014FC40
@@ -75,9 +75,9 @@ bool32 ftCommon_AttackLw3_CheckInterruptCommon(GObj *fighter_gobj)
     {
         if (ftCommon_GetStickAngleRadians(fp) < F_DEG_TO_RAD(-50.0F)) // -0.87266463F
         {
-            if (func_ovl3_80146A8C(fp) != FALSE)
+            if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
             {
-                func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowLw);
+                ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowLw);
 
                 return TRUE;
             }

@@ -93,7 +93,7 @@ void ftCommon_Dead_CheckRebirth(GObj *fighter_gobj)
     {
         if (fp->stock_count == -1)
         {
-            func_ovl3_8013D8B0(fighter_gobj);
+            ftCommon_Sleep_SetStatus(fighter_gobj);
 
             return;
         }
@@ -108,12 +108,12 @@ void ftCommon_Dead_CheckRebirth(GObj *fighter_gobj)
         }
         else if (fp->stock_count == -1)
         {
-            func_ovl3_8013D8B0(fighter_gobj);
+            ftCommon_Sleep_SetStatus(fighter_gobj);
 
             return;
         }
     }
-    func_ovl3_8013CF60(fighter_gobj);
+    ftCommon_RebirthDown_SetStatus(fighter_gobj);
 }
 
 // 0x8013C050

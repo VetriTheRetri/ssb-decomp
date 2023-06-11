@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_80144A10(GObj *fighter_gobj)
+// 0x80144A10
+void ftCommon_Rebound_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -12,24 +13,27 @@ void func_ovl3_80144A10(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80144A60(GObj *fighter_gobj)
+// 0x80144A60
+void ftCommon_Rebound_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Rebound, 0.0F, fp->status_vars.common.rebound.anim_speed, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Rebound, 0.0F, fp->status_vars.common.rebound.anim_speed, FTSTATUPDATE_NONE_PRESERVE);
 }
 
-void func_ovl3_80144A90(GObj *fighter_gobj)
+// 0x80144A90
+void ftCommon_ReboundWait_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_80144A60(fighter_gobj);
+    ftCommon_Rebound_SetStatus(fighter_gobj);
 }
 
-void func_ovl3_80144AB0(GObj *fighter_gobj)
+// 0x80144AB0
+void ftCommon_ReboundWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 lr_rebound;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_ReboundWait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_ReboundWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->status_vars.common.rebound.anim_speed = fp->attributes->rebound_anim_length / fp->attack_rebound;
 

@@ -1,11 +1,13 @@
 #include "fighter.h"
 
-void func_ovl3_80147BE0(GObj *fighter_gobj)
+// 0x80147BE0
+void ftCommon_HammerFall_ProcInterrupt(GObj *fighter_gobj)
 {
 	return;
 }
 
-void func_ovl3_80147BE8(GObj *fighter_gobj)
+// 0x80147BE8
+void ftCommon_HammerFall_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -13,13 +15,14 @@ void func_ovl3_80147BE8(GObj *fighter_gobj)
     {
         if (fp->phys_info.vel_air.y > FTCOMMON_HAMMER_SKIP_LANDING_VEL_Y_MAX)
         {
-            ftCommon_HammerWaitSetStatus(fighter_gobj);
+            ftCommon_HammerWait_SetStatus(fighter_gobj);
         }
-        else func_ovl3_801480A4(fighter_gobj);
+        else ftCommon_HammerLanding_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_80147C50(GObj *fighter_gobj)
+// 0x80147C50
+void ftCommon_HammerFall_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -32,20 +35,22 @@ void func_ovl3_80147C50(GObj *fighter_gobj)
     func_ovl2_800D8EB8(fp);
 }
 
-bool32 func_ovl3_80147CCC(GObj *fighter_gobj)
+// 0x80147CCC
+bool32 ftCommon_HammerFall_CheckInterruptDamageFall(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((ftCommon_HammerCheckHold(fighter_gobj) != FALSE) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
-        func_ovl3_80147C50(fighter_gobj); // Wiggle out of DamageFall if A or B is pressed
+        ftCommon_HammerFall_SetStatus(fighter_gobj); // Wiggle out of DamageFall if A or B is pressed
 
         return TRUE;
     }
     else return FALSE;
 }
 
-void func_ovl3_80147D30(GObj *fighter_gobj)
+// 0x80147D30
+void ftCommon_HammerFall_SetStatusJump(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -58,7 +63,7 @@ void func_ovl3_80147D30(GObj *fighter_gobj)
     switch (fp->status_vars.common.hammer.input_source)
     {
     case FTCOMMON_KNEEBEND_INPUT_TYPE_BUTTON:
-        func_ovl3_8013F6A0(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.hammer.is_short_hop);
+        ftCommon_Jump_GetJumpForceButton(fp->input.pl.stick_range.x, &vel_x, &vel_y, fp->status_vars.common.hammer.is_short_hop);
         break;
 
     case FTCOMMON_KNEEBEND_INPUT_TYPE_STICK:
@@ -73,17 +78,19 @@ void func_ovl3_80147D30(GObj *fighter_gobj)
     fp->tap_stick_y = U8_MAX - 1;
 }
 
+// 0x80147E34
 void func_ovl3_80147E34(GObj *fighter_gobj)
 {
-    func_ovl3_80141DA0(fighter_gobj, ftStatus_Common_HammerFall, ftCommon_HammerGetAnimFrame(fighter_gobj), ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
+    ftCommon_Pass_SetStatusParam(fighter_gobj, ftStatus_Common_HammerFall, ftCommon_HammerGetAnimFrame(fighter_gobj), ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
     ftCommon_HammerCheckSetColAnim(fighter_gobj);
 }
 
-bool32 func_ovl3_80147E7C(GObj *fighter_gobj)
+// 0x80147E7C
+bool32 ftCommon_HammerFall_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl3_80141E60(fp) != FALSE)
+    if (ftCommon_Pass_CheckInputSuccess(fp) != FALSE)
     {
         func_ovl3_80147E34(fighter_gobj);
 

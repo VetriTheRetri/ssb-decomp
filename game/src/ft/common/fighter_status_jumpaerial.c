@@ -8,7 +8,8 @@
 f32 Fighter_Kirby_JumpAerialVelY[ftStatus_Kirby_JumpAerialF5 - ftStatus_Kirby_JumpAerialF1] = { 60.0F, 52.0F, 47.0F, 40.0F };
 f32 Fighter_Purin_JumpAerialVelY[ftStatus_Purin_JumpAerialF5 - ftStatus_Purin_JumpAerialF1] = { 60.0F, 40.0F, 20.0F,  0.0F };
 
-void func_ovl3_8013FA90(Fighter_Struct *fp)
+// 0x8013FA90
+void ftCommon_JumpAerial_UpdateModelYaw(Fighter_Struct *fp)
 {
     if (fp->status_vars.common.jumpaerial.turn_frames != 0)
     {
@@ -25,23 +26,26 @@ void func_ovl3_8013FA90(Fighter_Struct *fp)
     }
 }
 
-void func_ovl3_8013FB00(GObj *fighter_gobj)
+// 0x8013FB00
+void ftCommon_JumpAerial_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8013FA90(fp);
+    ftCommon_JumpAerial_UpdateModelYaw(fp);
     ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
-void func_ovl3_8013FB2C(GObj *fighter_gobj)
+// 0x8013FB2C
+void ftCommon_JumpAerial_ProcInterrupt(GObj *fighter_gobj)
 {
-    if ((func_ovl3_80150F08(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
+    if ((ftCommon_SpecialAir_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_AttackAir_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_8014019C(fighter_gobj);
+        ftCommon_JumpAerial_CheckInterruptCommon(fighter_gobj);
     }
 }
 
-void func_ovl3_8013FB6C(GObj *fighter_gobj)
+// 0x8013FB6C
+void ftYoshi_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -55,7 +59,8 @@ void func_ovl3_8013FB6C(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8013FBC4(GObj *fighter_gobj)
+// 0x8013FBC4
+void ftNess_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -75,7 +80,8 @@ void func_ovl3_8013FBC4(GObj *fighter_gobj)
     fp->phys_info.vel_air.x += fp->status_vars.common.jumpaerial.drift;
 }
 
-void func_ovl3_8013FC4C(GObj *fighter_gobj)
+// 0x8013FC4C
+void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -105,7 +111,8 @@ void func_ovl3_8013FC4C(GObj *fighter_gobj)
     func_ovl2_800D9074(fp, attributes);
 }
 
-void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
+// 0x8013FD74
+void ftCommon_JumpAerial_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -115,16 +122,16 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
 
     // It would seem that the stick range jump mechanic was initially considered for double jumps as well...
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_UNK3_PRESERVE);
 
     if ((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi))
     {
-        fp->proc_physics = func_ovl3_8013FB6C;
+        fp->proc_physics = ftYoshi_JumpAerial_ProcPhysics;
         fp->knockback_resist_status = FTYOSHI_JUMPAERIAL_KNOCKBACK_RESIST;
     }
     else if ((fp->ft_kind == Ft_Kind_Ness) || (fp->ft_kind == Ft_Kind_PolyNess))
     {
-        fp->proc_physics = func_ovl3_8013FBC4;
+        fp->proc_physics = ftNess_JumpAerial_ProcPhysics;
         fp->status_vars.common.jumpaerial.drift = 0.0F;
     }
     switch (input_source) // Last minute bruh moment from HAL
@@ -138,7 +145,6 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
         stick_range_x = fp->input.pl.stick_range.x;
         break;
     } 
-
     fp->phys_info.vel_air.y = (((stick_range_y * attributes->jump_height_mul) + attributes->jump_height_base) * attributes->aerial_jump_height);
 
     if ((fp->ft_kind == Ft_Kind_Ness) || (fp->ft_kind == Ft_Kind_PolyNess))
@@ -159,10 +165,11 @@ void func_ovl3_8013FD74(GObj *fighter_gobj, s32 input_source)
     }
     else fp->status_vars.common.jumpaerial.turn_frames = 0;
 
-    func_ovl3_8013FA90(fp);
+    ftCommon_JumpAerial_UpdateModelYaw(fp);
 }
 
-void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
+// 0x8013FF38
+void ftCommon_JumpAerialMulti_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -182,7 +189,7 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
         status_id = fp->jumps_used + ftStatus_Purin_JumpAerialF1 - 1;
         break;
     }
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, 0x100U);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_UNK3_PRESERVE);
 
     switch (input_source)
     {
@@ -230,10 +237,11 @@ void func_ovl3_8013FF38(GObj *fighter_gobj, s32 input_source)
     }
     else fp->status_vars.common.jumpaerial.turn_frames = 0;
 
-    func_ovl3_8013FA90(fp);
+    ftCommon_JumpAerial_UpdateModelYaw(fp);
 }
 
-bool32 func_ovl3_8014012C(Fighter_Struct *fp)
+// 0x8014012C
+bool32 ftCommon_JumpAerialMulti_CheckJumpButtonHold(Fighter_Struct *fp)
 {
     if (fp->input.pl.button_hold & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
     {
@@ -242,20 +250,22 @@ bool32 func_ovl3_8014012C(Fighter_Struct *fp)
     else return FALSE;
 }
 
-s32 func_ovl3_80140150(Fighter_Struct *fp)
+// 0x80140150
+s32 ftCommon_JumpAerialMulti_GetJumpInputType(Fighter_Struct *fp)
 {
     if (fp->input.pl.stick_range.y >= FTCOMMON_JUMPAERIAL_STICK_RANGE_MIN)
     {
         return FTCOMMON_JUMPAERIAL_INPUT_TYPE_STICK;
     }
-    else if (func_ovl3_8014012C(fp) != FALSE)
+    else if (ftCommon_JumpAerialMulti_CheckJumpButtonHold(fp) != FALSE)
     {
         return FTCOMMON_JUMPAERIAL_INPUT_TYPE_BUTTON;
     }
     else return FTCOMMON_JUMPAERIAL_INPUT_TYPE_NONE;
 }
 
-bool32 func_ovl3_8014019C(GObj *fighter_gobj)
+// 0x8014019C
+bool32 ftCommon_JumpAerial_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 input_source;
@@ -264,18 +274,17 @@ bool32 func_ovl3_8014019C(GObj *fighter_gobj)
     {
         return FALSE;
     }
-
-    if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby) || (fp->ft_kind == Ft_Kind_Purin) || (fp->ft_kind == Ft_Kind_PolyPurin))
+    else if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby) || (fp->ft_kind == Ft_Kind_Purin) || (fp->ft_kind == Ft_Kind_PolyPurin))
     {
         if (fp->jumps_used < fp->attributes->jumps_max)
         {
             if (fp->jumps_used == 1)
             {
-                input_source = func_ovl3_8013F474(fp);
+                input_source = ftCommon_KneeBend_GetInputTypeCommon(fp);
 
                 if (input_source != FTCOMMON_JUMPAERIAL_INPUT_TYPE_NONE)
                 {
-                    func_ovl3_8013FF38(fighter_gobj, input_source);
+                    ftCommon_JumpAerialMulti_SetStatus(fighter_gobj, input_source);
 
                     return TRUE;
                 }
@@ -284,14 +293,13 @@ bool32 func_ovl3_8014019C(GObj *fighter_gobj)
             {
             case Ft_Kind_Kirby:
             case Ft_Kind_PolyKirby:
-
                 if ((fp->status_info.status_id < ftStatus_Kirby_JumpAerialF1) || (fp->status_info.status_id > ftStatus_Kirby_JumpAerialF5) || (fp->command_vars.flags.flag1 != 0))
                 {
-                    input_source = func_ovl3_80140150(fp);
+                    input_source = ftCommon_JumpAerialMulti_GetJumpInputType(fp);
 
                     if (input_source != FTCOMMON_JUMPAERIAL_INPUT_TYPE_NONE)
                     {
-                        func_ovl3_8013FF38(fighter_gobj, input_source);
+                        ftCommon_JumpAerialMulti_SetStatus(fighter_gobj, input_source);
 
                         return TRUE;
                     }
@@ -300,14 +308,13 @@ bool32 func_ovl3_8014019C(GObj *fighter_gobj)
 
             case Ft_Kind_Purin:
             case Ft_Kind_PolyPurin:
-
                 if ((fp->status_info.status_id < ftStatus_Purin_JumpAerialF1) || (fp->status_info.status_id > ftStatus_Purin_JumpAerialF5) || (fp->command_vars.flags.flag1 != 0))
                 {
-                    input_source = func_ovl3_80140150(fp);
+                    input_source = ftCommon_JumpAerialMulti_GetJumpInputType(fp);
 
                     if (input_source != FTCOMMON_JUMPAERIAL_INPUT_TYPE_NONE)
                     {
-                        func_ovl3_8013FF38(fighter_gobj, input_source);
+                        ftCommon_JumpAerialMulti_SetStatus(fighter_gobj, input_source);
 
                         return TRUE;
                     }
@@ -318,11 +325,11 @@ bool32 func_ovl3_8014019C(GObj *fighter_gobj)
     }
     else
     {
-        input_source = func_ovl3_8013F474(fp);
+        input_source = ftCommon_KneeBend_GetInputTypeCommon(fp);
 
         if ((input_source != FTCOMMON_JUMPAERIAL_INPUT_TYPE_NONE) && (fp->jumps_used < fp->attributes->jumps_max))
         {
-            func_ovl3_8013FD74(fighter_gobj, input_source);
+            ftCommon_JumpAerial_SetStatus(fighter_gobj, input_source);
 
             return TRUE;
         }

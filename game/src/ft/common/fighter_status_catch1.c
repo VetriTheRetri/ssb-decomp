@@ -119,9 +119,9 @@ bool32 ftCommon_Catch_CheckInterruptCommon(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (func_ovl3_80146A8C(fp) != FALSE)
+    if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {
-        func_ovl3_801466EC(fighter_gobj);
+        ftCommon_LightThrow_DecideSetStatus(fighter_gobj);
 
         return TRUE;
     }
@@ -140,9 +140,9 @@ bool32 ftCommon_Catch_CheckInterruptRunDash(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (func_ovl3_80146A8C(fp) != FALSE)
+    if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {
-        func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowDash);
+        ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowDash);
 
         return TRUE;
     }
@@ -161,9 +161,9 @@ bool32 ftCommon_Catch_CheckInterruptAttack11(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (func_ovl3_80146A8C(fp) != FALSE)
+    if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {
-        func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowDash);
+        ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowDash);
 
         return TRUE;
     }

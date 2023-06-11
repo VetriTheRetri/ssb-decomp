@@ -15,7 +15,7 @@ void ftCommon_Escape_ProcUpdate(GObj *fighter_gobj)
         fp->phys_info.vel_air.x = fp->phys_info.vel_air.y = fp->phys_info.vel_air.z = 0.0F;
         fp->phys_info.vel_ground.x = fp->phys_info.vel_ground.y = fp->phys_info.vel_ground.z = 0.0F;
 
-        if ((fp->ft_kind != Ft_Kind_Yoshi) && (fp->ft_kind != Ft_Kind_PolyYoshi) || (func_ovl3_80148F24(fighter_gobj) == FALSE))
+        if ((fp->ft_kind != Ft_Kind_Yoshi) && (fp->ft_kind != Ft_Kind_PolyYoshi) || (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) == FALSE))
         {
             func_ovl3_8013E1C8(fighter_gobj);
         }
@@ -25,7 +25,7 @@ void ftCommon_Escape_ProcUpdate(GObj *fighter_gobj)
 // 0x80149268
 void ftCommon_Escape_ProcInterrupt(GObj *fighter_gobj)
 {
-    func_ovl3_80146B64(fighter_gobj);
+    ftCommon_LightThrow_CheckInterruptEscape(fighter_gobj);
 }
 
 // 0x80149288

@@ -139,18 +139,18 @@ bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 
             if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
             {
-                func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowF4);
+                ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowF4);
 
                 return TRUE;
             }
             switch (ap->type)
             {
             case At_Type_Swing:
-                func_ovl3_80146E94(fighter_gobj, 2);
+                ftCommon_ItemSwing_SetStatus(fighter_gobj, 2);
                 return TRUE;
 
             case At_Type_Shoot:
-                func_ovl3_80147844(fighter_gobj);
+                ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;
             }
         }
@@ -180,7 +180,7 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 
             if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
             {
-                func_ovl3_80146690(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
+                ftCommon_ItemThrow_SetStatus(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 
                 return TRUE;
             }
@@ -188,12 +188,12 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
             {
             case At_Type_Swing:
                 ftCommon_StickInputSetLR(fp);
-                func_ovl3_80146E94(fighter_gobj, 2);
+                ftCommon_ItemSwing_SetStatus(fighter_gobj, 2);
                 return TRUE;
 
             case At_Type_Shoot:
                 ftCommon_StickInputSetLR(fp);
-                func_ovl3_80147844(fighter_gobj);
+                ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;
             }
         }
@@ -224,7 +224,7 @@ bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
 
             if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
             {
-                func_ovl3_80146690(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
+                ftCommon_ItemThrow_SetStatus(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 
                 return TRUE;
             }
@@ -232,12 +232,12 @@ bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
             {
             case At_Type_Swing:
                 ftCommon_StickInputSetLR(fp);
-                func_ovl3_80146E94(fighter_gobj, 2);
+                ftCommon_ItemSwing_SetStatus(fighter_gobj, 2);
                 return TRUE;
 
             case At_Type_Shoot:
                 ftCommon_StickInputSetLR(fp);
-                func_ovl3_80147844(fighter_gobj);
+                ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;
             }
         }

@@ -1367,7 +1367,7 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 56FD0 103510 80188AD0 */  .4byte jtgt_ovl3_80163A4C
   /* 56FD4 103514 80188AD4 */  .4byte jtgt_ovl3_8015E79C
   /* 56FD8 103518 80188AD8 */  .4byte jtgt_ovl3_8015FBC0
-  /* 56FDC 10351C 80188ADC */  .4byte jtgt_ovl3_80150ED0
+  /* 56FDC 10351C 80188ADC */  .4byte ftKirby_SpecialAirN_SetStatusIndex
   /* 56FE0 103520 80188AE0 */  .4byte jtgt_ovl3_80151D64
   /* 56FE4 103524 80188AE4 */  .4byte ftPurin_SpecialAirN_SetStatus
   /* 56FE8 103528 80188AE8 */  .4byte ftNess_SpecialAirN_SetStatus
@@ -1381,7 +1381,7 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 57008 103548 80188B08 */  .4byte jtgt_ovl3_80163A4C
   /* 5700C 10354C 80188B0C */  .4byte ftMario_SpecialAirN_SetStatus
   /* 57010 103550 80188B10 */  .4byte jtgt_ovl3_8015FBC0
-  /* 57014 103554 80188B14 */  .4byte jtgt_ovl3_80150ED0
+  /* 57014 103554 80188B14 */  .4byte ftKirby_SpecialAirN_SetStatusIndex
   /* 57018 103558 80188B18 */  .4byte jtgt_ovl3_80151D64
   /* 5701C 10355C 80188B1C */  .4byte ftPurin_SpecialAirN_SetStatus
   /* 57020 103560 80188B20 */  .4byte ftNess_SpecialAirN_SetStatus
@@ -1487,7 +1487,7 @@ glabel ftCommon_SpecialN_StatusList
   /* 57180 1036C0 80188C80 */  .4byte jtgt_ovl3_801639CC
   /* 57184 1036C4 80188C84 */  .4byte jtgt_ovl3_8015E740
   /* 57188 1036C8 80188C88 */  .4byte jtgt_ovl3_8015FB5C
-  /* 5718C 1036CC 80188C8C */  .4byte jtgt_ovl3_80151060
+  /* 5718C 1036CC 80188C8C */  .4byte ftKirby_SpecialN_SetStatusIndex
   /* 57190 1036D0 80188C90 */  .4byte jtgt_ovl3_80151D24
   /* 57194 1036D4 80188C94 */  .4byte ftPurin_SpecialN_SetStatus
   /* 57198 1036D8 80188C98 */  .4byte ftNess_SpecialN_SetStatus
@@ -1501,7 +1501,7 @@ glabel ftCommon_SpecialN_StatusList
   /* 571B8 1036F8 80188CB8 */  .4byte jtgt_ovl3_801639CC
   /* 571BC 1036FC 80188CBC */  .4byte ftMario_SpecialN_SetStatus
   /* 571C0 103700 80188CC0 */  .4byte jtgt_ovl3_8015FB5C
-  /* 571C4 103704 80188CC4 */  .4byte jtgt_ovl3_80151060
+  /* 571C4 103704 80188CC4 */  .4byte ftKirby_SpecialN_SetStatusIndex
   /* 571C8 103708 80188CC8 */  .4byte jtgt_ovl3_80151D24
   /* 571CC 10370C 80188CCC */  .4byte ftPurin_SpecialN_SetStatus
   /* 571D0 103710 80188CD0 */  .4byte ftNess_SpecialN_SetStatus

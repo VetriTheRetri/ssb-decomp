@@ -1,6 +1,7 @@
 #include "fighter.h"
 
-void func_ovl3_80148050(GObj *fighter_gobj)
+// 0x80148050
+void ftCommon_HammerLanding_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -8,11 +9,12 @@ void func_ovl3_80148050(GObj *fighter_gobj)
 
     if (fp->status_vars.common.hammer.landing_anim_frame <= 4.0F)
     {
-        ftCommon_HammerWaitSetStatus(fighter_gobj);
+        ftCommon_HammerWait_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_801480A4(GObj *fighter_gobj)
+// 0x801480A4
+void ftCommon_HammerLanding_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 

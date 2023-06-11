@@ -1,5 +1,6 @@
 #include "ftdonkey.h"
 
+// 0x8014DD00
 void func_ovl3_8014DD00(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);

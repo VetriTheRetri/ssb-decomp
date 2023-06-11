@@ -2,9 +2,9 @@
 
 #define ftStatus_CheckInterruptSquat(fighter_gobj) \
 (                                                  \
-    (func_ovl3_80151098(fighter_gobj) != FALSE) || \
-    (func_ovl3_80151160(fighter_gobj) != FALSE) || \
-    (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
@@ -15,16 +15,38 @@
     (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
-    (func_ovl3_80141F0C(fighter_gobj) != FALSE) || \
-    (ftCommon_Dokan_CheckEnter(fighter_gobj) != FALSE)    \
+    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_Pass_CheckInterruptSquat(fighter_gobj) != FALSE) || \
+    (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE)    \
 )                                                  \
 
-#define ftStatus_CheckInterruptSquatWait(fighter_gobj) \
+#define ftStatusCheckInterruptSquatWait(fighter_gobj)                    \
+(                                                                        \
+    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
+    (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
+    (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
+    (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE)      || \
+    (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
+    (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
+    (ftCommon_AttackLw4_CheckInterruptSquat(fighter_gobj) != FALSE)   || \
+    (ftCommon_AttackS3_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
+    (ftCommon_AttackHi3_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
+    (ftCommon_AttackLw3_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
+    (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE)    || \
+    (func_ovl3_80148D0C(fighter_gobj) != FALSE) ||                       \
+    (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE)     || \
+    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
+    (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE)       || \
+    (ftCommon_Pass_CheckInterruptSquat(fighter_gobj) != FALSE)        || \
+    (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_SquatRv_CheckInterruptSquatWait(fighter_gobj) != FALSE)    \
+)                                                                        \
+
+#define ftStatus_CheckInterruptSquatRv(fighter_gobj) \
 (                                                      \
-    (func_ovl3_80151098(fighter_gobj) != FALSE) ||     \
-    (func_ovl3_80151160(fighter_gobj) != FALSE) ||     \
-    (func_ovl3_801511E0(fighter_gobj) != FALSE) ||     \
+    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
+    (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
+    (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
@@ -35,13 +57,14 @@
     (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) ||     \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
-    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) ||     \
+    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
-    (func_ovl3_80141EA4(fighter_gobj) != FALSE) ||     \
-    (ftCommon_Dokan_CheckEnter(fighter_gobj) != FALSE)        \
+    (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
+    (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE)        \
 )                                                      \
 
-bool32 func_ovl3_80142E70(GObj *fighter_gobj)
+// 0x80142E70
+bool32 ftCommon_Squat_CheckGotoPass(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -53,7 +76,7 @@ bool32 func_ovl3_80142E70(GObj *fighter_gobj)
 
             if (fp->status_vars.common.squat.pass_wait == 0)
             {
-                func_ovl3_80141DA0(fighter_gobj, ftStatus_Common_Pass, 1.0F, 0);
+                ftCommon_Pass_SetStatusParam(fighter_gobj, ftStatus_Common_Pass, 1.0F, 0);
 
                 return TRUE;
             }
@@ -63,28 +86,30 @@ bool32 func_ovl3_80142E70(GObj *fighter_gobj)
     {
         fp->status_vars.common.squat.unk_0x8--;
     }
-
     return FALSE;
 }
 
-void func_ovl3_80142ED8(GObj *fighter_gobj)
+// 0x80142ED8
+void ftCommon_Squat_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8014329C);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_SquatWait_SetStatus);
 }
 
-void func_ovl3_80142EFC(GObj *fighter_gobj)
+// 0x80142EFC
+void ftCommon_Squat_ProcInterrupt(GObj *fighter_gobj)
 {
     if (!ftStatus_CheckInterruptSquat(fighter_gobj))
     {
-        func_ovl3_80142E70(fighter_gobj);
+        ftCommon_Squat_CheckGotoPass(fighter_gobj);
     }
 }
 
-void func_ovl3_80143024(GObj *fighter_gobj)
+// 0x80143024
+void ftCommon_Squat_SetStatusNoPass(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->x192_flag_b0 = TRUE;
@@ -99,11 +124,12 @@ void func_ovl3_80143024(GObj *fighter_gobj)
     else fp->status_vars.common.squat.unk_0x8 = 0;
 }
 
-void func_ovl3_801430A8(GObj *fighter_gobj)
+// 0x801430A8
+void ftCommon_Squat_SetStatusPass(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->x192_flag_b0 = TRUE;
@@ -113,40 +139,52 @@ void func_ovl3_801430A8(GObj *fighter_gobj)
     fp->status_vars.common.squat.unk_0x8 = 3;
 }
 
-bool32 func_ovl3_8014310C(GObj *fighter_gobj)
+// 0x8014310C
+bool32 ftCommon_Squat_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
-        func_ovl3_80143024(fighter_gobj);
+        ftCommon_Squat_SetStatusNoPass(fighter_gobj);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-void func_ovl3_8014314C(GObj *fighter_gobj)
+// 0x8014314C
+void ftCommon_SquatWait_ProcUpdate(GObj *fighter_gobj)
 {
     return;
 }
 
-void func_ovl3_8014329C(GObj *fighter_gobj)
+void ftCommon_SquatWait_ProcInterrupt(GObj *fighter_gobj)
+{
+    if (!ftStatusCheckInterruptSquatWait(fighter_gobj))
+    {
+        ftCommon_Squat_CheckGotoPass(fighter_gobj);
+    }
+}
+
+// 0x8014329C
+void ftCommon_SquatWait_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->x192_flag_b0 = TRUE;
 
     func_ovl2_800E7F7C(fighter_gobj, 120);
 }
 
-void func_ovl3_801432F0(GObj *fighter_gobj)
+// 0x801432F0
+void ftCommon_SquatWait_SetStatusNoPass(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->x192_flag_b0 = TRUE;
 
@@ -157,44 +195,48 @@ void func_ovl3_801432F0(GObj *fighter_gobj)
     fp->status_vars.common.squat.pass_wait = 0;
 }
 
-bool32 func_ovl3_8014310C(GObj *fighter_gobj)
+// 0x80143354
+bool32 ftCommon_SquatWait_CheckInterruptLanding(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
-        func_ovl3_801432F0(fighter_gobj);
+        ftCommon_SquatWait_SetStatusNoPass(fighter_gobj);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-void func_ovl3_80143394(GObj *fighter_gobj)
+// 0x80143394
+void ftCommon_SquatRv_ProcInterrupt(GObj *fighter_gobj)
 {
-    if (!ftStatus_CheckInterruptSquatWait(fighter_gobj))
+    if (!ftStatus_CheckInterruptSquatRv(fighter_gobj))
     {
         func_ovl3_8013E648(fighter_gobj);
     }
 }
 
-void func_ovl3_801434CC(GObj *fighter_gobj)
+// 0x801434CC
+void ftCommon_SquatRv_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_SquatRv, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_SquatRv, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->x192_flag_b0 = TRUE;
 }
 
-bool32 func_ovl3_8014351C(GObj *fighter_gobj)
+// 0x8014351C
+bool32 ftCommon_SquatRv_CheckInterruptSquatWait(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y >= (FTCOMMON_SQUAT_STICK_RANGE_MIN + 4))
     {
-        func_ovl3_801434CC(fighter_gobj);
+        ftCommon_SquatRv_SetStatus(fighter_gobj);
 
         return TRUE;
     }

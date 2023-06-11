@@ -49,18 +49,18 @@ bool32 ftCommon_AttackS3_CheckInterruptCommon(GObj *fighter_gobj)
             {
                 if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (atGetStruct(fp->item_hold)->type == At_Type_Throw))
                 {
-                    func_ovl3_80146690(fighter_gobj, ftStatus_Common_LightThrowF);
+                    ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowF);
 
                     return TRUE;
                 }
                 switch (atGetStruct(fp->item_hold)->type)
                 {
                 case At_Type_Swing:
-                    func_ovl3_80146E94(fighter_gobj, 1);
+                    ftCommon_ItemSwing_SetStatus(fighter_gobj, 1);
                     return TRUE;
 
                 case At_Type_Shoot:
-                    func_ovl3_80147844(fighter_gobj);
+                    ftCommon_ItemShoot_SetStatus(fighter_gobj);
                     return TRUE;
                 }
             }

@@ -11,16 +11,16 @@ void func_ovl3_8013F170(GObj *fighter_gobj)
         fp->lr = -fp->lr;
         fp->phys_info.vel_ground.x = -fp->phys_info.vel_ground.x;
     }
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8013EEE8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_Run_SetStatus);
 }
 
 void func_ovl3_8013F1C0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((func_ovl3_8013F598(fighter_gobj) == FALSE) && (fp->command_vars.flags.flag2 != 0))
+    if ((ftCommon_KneeBend_CheckInterruptRun(fighter_gobj) == FALSE) && (fp->command_vars.flags.flag2 != 0))
     {
-        func_ovl3_8013F0EC(fighter_gobj);
+        ftCommon_RunBrake_CheckInterruptTurnRun(fighter_gobj);
     }
 }
 

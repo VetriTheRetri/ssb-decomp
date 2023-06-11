@@ -2,9 +2,9 @@
 
 #define ftStatus_CheckInterruptWalk(fighter_gobj)  \
 (                                                  \
-    (func_ovl3_80151098(fighter_gobj) != FALSE) || \
-    (func_ovl3_80151160(fighter_gobj) != FALSE) || \
-    (func_ovl3_801511E0(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
@@ -15,9 +15,9 @@
     (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_80148D0C(fighter_gobj) != FALSE) || \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (func_ovl3_8013F4D0(fighter_gobj) != FALSE) || \
+    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (func_ovl3_8014310C(fighter_gobj) != FALSE) || \
+    (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (func_ovl3_8013E2A0(fighter_gobj) != FALSE)    \
 )                                                  \
 

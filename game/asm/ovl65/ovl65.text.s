@@ -1192,7 +1192,7 @@ glabel func_ovl65_8018D60C
   /* 10CA10 8018E1B0 90D0000D */       lbu $s0, 0xd($a2)
   /* 10CA14 8018E1B4 14400005 */      bnez $v0, .L8018E1CC
   /* 10CA18 8018E1B8 AFAE0040 */        sw $t6, 0x40($sp)
-  /* 10CA1C 8018E1BC 0C04F62C */       jal func_ovl3_8013D8B0
+  /* 10CA1C 8018E1BC 0C04F62C */       jal ftCommon_Sleep_SetStatus
   /* 10CA20 8018E1C0 00000000 */       nop 
   /* 10CA24 8018E1C4 100000F0 */         b .L8018E588
   /* 10CA28 8018E1C8 8FBF001C */        lw $ra, 0x1c($sp)
