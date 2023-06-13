@@ -20,7 +20,7 @@ void func_ovl3_8015DC94(GObj *fighter_gobj)
     if (fp->ground_or_air == air)
     {
         jtgt_ovl2_800D9414(fighter_gobj);
-        func_ovl2_800D8FC8(fp, 0, 0.5F, 20.0F);
+        ftPhysicsClampDriftStickRange(fp, 0, 0.5F, 20.0F);
     }
     else func_ovl2_800D8BB4(fighter_gobj);
 }
@@ -73,7 +73,7 @@ void func_ovl3_8015DE54(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D8E50(fp, fp->attributes);
-    func_ovl2_800D8FC8(fp, 0, 0.5F, 20.0F);
+    ftPhysicsClampDriftStickRange(fp, 0, 0.5F, 20.0F);
 }
 
 void jtgt_ovl3_8015DE90(GObj *fighter_gobj)

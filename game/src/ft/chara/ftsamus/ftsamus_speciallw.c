@@ -62,7 +62,7 @@ void func_ovl3_8015E050(GObj *fighter_gobj)
 
     if (func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTSAMUS_BOMB_DRIFT, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
+        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTSAMUS_BOMB_DRIFT, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
         func_ovl2_800D9074(fp, attributes);
     }
 }

@@ -119,7 +119,7 @@ typedef enum ftKirbyAction
     ftStatus_Kirby_SpecialHi,
     ftStatus_Kirby_SpecialHiLanding,
     ftStatus_Kirby_SpecialAirHi,
-    ftStatus_Kirby_SpecialHiFall,
+    ftStatus_Kirby_SpecialAirHiFall,
     ftStatus_Kirby_SpecialLwStart,
     ftStatus_Kirby_SpecialLwUnk,
     ftStatus_Kirby_SpecialLwHold,

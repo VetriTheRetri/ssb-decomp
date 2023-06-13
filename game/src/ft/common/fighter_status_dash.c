@@ -22,7 +22,7 @@ void ftCommon_Dash_ProcInterrupt(GObj *fighter_gobj)
     {
         if ((ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_AttackS4_CheckInterruptDash(fighter_gobj) == FALSE) && (!(fighter_gobj->anim_frame <= 3.0F) || (ftCommon_Escape_CheckInterruptDash(fighter_gobj) == FALSE)))
         {
-            if (func_ovl3_80148D0C(fighter_gobj) != FALSE) // Jump interrupt?
+            if (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) != FALSE) // Jump interrupt?
             {
                 return;
             }
@@ -46,7 +46,7 @@ void ftCommon_Dash_ProcInterrupt(GObj *fighter_gobj)
             }
         }
     }
-    else if ((ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) == FALSE) && (func_ovl3_80148D0C(fighter_gobj) == FALSE))
+    else if ((ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
     next:
         if ((ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) == FALSE) && (ftCommon_KneeBend_CheckInterruptRun(fighter_gobj) == FALSE))

@@ -64,7 +64,7 @@ interrupt1:
             if (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
         interrupt2:
-            if (func_ovl3_80148D0C(fighter_gobj) != FALSE) return;
+            if (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 
             if (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) return;
 

@@ -1366,7 +1366,7 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 56FCC 10350C 80188ACC */  .4byte ftMario_SpecialAirN_SetStatus
   /* 56FD0 103510 80188AD0 */  .4byte jtgt_ovl3_80163A4C
   /* 56FD4 103514 80188AD4 */  .4byte jtgt_ovl3_8015E79C
-  /* 56FD8 103518 80188AD8 */  .4byte jtgt_ovl3_8015FBC0
+  /* 56FD8 103518 80188AD8 */  .4byte ftCaptain_SpecialAirN_SetStatus
   /* 56FDC 10351C 80188ADC */  .4byte ftKirby_SpecialAirN_SetStatusIndex
   /* 56FE0 103520 80188AE0 */  .4byte jtgt_ovl3_80151D64
   /* 56FE4 103524 80188AE4 */  .4byte ftPurin_SpecialAirN_SetStatus
@@ -1380,7 +1380,7 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 57004 103544 80188B04 */  .4byte ftMario_SpecialAirN_SetStatus
   /* 57008 103548 80188B08 */  .4byte jtgt_ovl3_80163A4C
   /* 5700C 10354C 80188B0C */  .4byte ftMario_SpecialAirN_SetStatus
-  /* 57010 103550 80188B10 */  .4byte jtgt_ovl3_8015FBC0
+  /* 57010 103550 80188B10 */  .4byte ftCaptain_SpecialAirN_SetStatus
   /* 57014 103554 80188B14 */  .4byte ftKirby_SpecialAirN_SetStatusIndex
   /* 57018 103558 80188B18 */  .4byte jtgt_ovl3_80151D64
   /* 5701C 10355C 80188B1C */  .4byte ftPurin_SpecialAirN_SetStatus
@@ -1395,8 +1395,8 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 57038 103578 80188B38 */  .4byte ftMario_SpecialAirHi_SetStatus
   /* 5703C 10357C 80188B3C */  .4byte jtgt_ovl3_80164348
   /* 57040 103580 80188B40 */  .4byte jtgt_ovl3_8015ED7C
-  /* 57044 103584 80188B44 */  .4byte jtgt_ovl3_801607B4
-  /* 57048 103588 80188B48 */  .4byte jtgt_ovl3_80161270
+  /* 57044 103584 80188B44 */  .4byte ftCaptain_SpecialAirHi_SetStatus
+  /* 57048 103588 80188B48 */  .4byte ftKirby_SpecialAirHi_SetStatus
   /* 5704C 10358C 80188B4C */  .4byte jtgt_ovl3_801529EC
   /* 57050 103590 80188B50 */  .4byte ftPurin_SpecialAirHi_SetStatus
   /* 57054 103594 80188B54 */  .4byte ftNess_SpecialAirHiStart_SetStatus
@@ -1409,8 +1409,8 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 57070 1035B0 80188B70 */  .4byte ftMario_SpecialAirHi_SetStatus
   /* 57074 1035B4 80188B74 */  .4byte jtgt_ovl3_80164348
   /* 57078 1035B8 80188B78 */  .4byte jtgt_ovl3_8015ED7C
-  /* 5707C 1035BC 80188B7C */  .4byte jtgt_ovl3_801607B4
-  /* 57080 1035C0 80188B80 */  .4byte jtgt_ovl3_80161270
+  /* 5707C 1035BC 80188B7C */  .4byte ftCaptain_SpecialAirHi_SetStatus
+  /* 57080 1035C0 80188B80 */  .4byte ftKirby_SpecialAirHi_SetStatus
   /* 57084 1035C4 80188B84 */  .4byte jtgt_ovl3_801529EC
   /* 57088 1035C8 80188B88 */  .4byte ftPurin_SpecialAirHi_SetStatus
   /* 5708C 1035CC 80188B8C */  .4byte ftNess_SpecialAirHiStart_SetStatus
@@ -1426,7 +1426,7 @@ glabel jtbl_ovl3_80188BA0
   /* 570A4 1035E4 80188BA4 */  .4byte ftMario_SpecialAirLw_SetStatus
   /* 570A8 1035E8 80188BA8 */  .4byte jtgt_ovl3_801645E8
   /* 570AC 1035EC 80188BAC */  .4byte jtgt_ovl3_8015F04C
-  /* 570B0 1035F0 80188BB0 */  .4byte jtgt_ovl3_8016020C
+  /* 570B0 1035F0 80188BB0 */  .4byte ftCaptain_SpecialAirLw_SetStatus
   /* 570B4 1035F4 80188BB4 */  .4byte jtgt_ovl3_80161B70
   /* 570B8 1035F8 80188BB8 */  .4byte jtgt_ovl3_80151FFC
   /* 570BC 1035FC 80188BBC */  .4byte ftPurin_SpecialAirLw_SetStatus
@@ -1442,7 +1442,7 @@ glabel jtbl_ovl3_80188BD8
   /* 570DC 10361C 80188BDC */  .4byte ftMario_SpecialAirLw_SetStatus
   /* 570E0 103620 80188BE0 */  .4byte jtgt_ovl3_801645E8
   /* 570E4 103624 80188BE4 */  .4byte jtgt_ovl3_8015F04C
-  /* 570E8 103628 80188BE8 */  .4byte jtgt_ovl3_8016020C
+  /* 570E8 103628 80188BE8 */  .4byte ftCaptain_SpecialAirLw_SetStatus
   /* 570EC 10362C 80188BEC */  .4byte jtgt_ovl3_80161B70
   /* 570F0 103630 80188BF0 */  .4byte jtgt_ovl3_80151FFC
   /* 570F4 103634 80188BF4 */  .4byte ftPurin_SpecialAirLw_SetStatus
@@ -1486,7 +1486,7 @@ glabel ftCommon_SpecialN_StatusList
   /* 5717C 1036BC 80188C7C */  .4byte ftMario_SpecialN_SetStatus
   /* 57180 1036C0 80188C80 */  .4byte jtgt_ovl3_801639CC
   /* 57184 1036C4 80188C84 */  .4byte jtgt_ovl3_8015E740
-  /* 57188 1036C8 80188C88 */  .4byte jtgt_ovl3_8015FB5C
+  /* 57188 1036C8 80188C88 */  .4byte ftCaptain_SpecialN_SetStatus
   /* 5718C 1036CC 80188C8C */  .4byte ftKirby_SpecialN_SetStatusIndex
   /* 57190 1036D0 80188C90 */  .4byte jtgt_ovl3_80151D24
   /* 57194 1036D4 80188C94 */  .4byte ftPurin_SpecialN_SetStatus
@@ -1500,7 +1500,7 @@ glabel ftCommon_SpecialN_StatusList
   /* 571B4 1036F4 80188CB4 */  .4byte ftMario_SpecialN_SetStatus
   /* 571B8 1036F8 80188CB8 */  .4byte jtgt_ovl3_801639CC
   /* 571BC 1036FC 80188CBC */  .4byte ftMario_SpecialN_SetStatus
-  /* 571C0 103700 80188CC0 */  .4byte jtgt_ovl3_8015FB5C
+  /* 571C0 103700 80188CC0 */  .4byte ftCaptain_SpecialN_SetStatus
   /* 571C4 103704 80188CC4 */  .4byte ftKirby_SpecialN_SetStatusIndex
   /* 571C8 103708 80188CC8 */  .4byte jtgt_ovl3_80151D24
   /* 571CC 10370C 80188CCC */  .4byte ftPurin_SpecialN_SetStatus
@@ -1516,8 +1516,8 @@ glabel ftCommon_SpecialHi_StatusList
   /* 571F0 103730 80188CF0 */  .4byte ftMario_SpecialHi_SetStatus
   /* 571F4 103734 80188CF4 */  .4byte jtgt_ovl3_80164284
   /* 571F8 103738 80188CF8 */  .4byte jtgt_ovl3_8015ED3C
-  /* 571FC 10373C 80188CFC */  .4byte jtgt_ovl3_80160630
-  /* 57200 103740 80188D00 */  .4byte jtgt_ovl3_801611A8
+  /* 571FC 10373C 80188CFC */  .4byte ftCaptain_SpecialHi_SetStatus
+  /* 57200 103740 80188D00 */  .4byte ftKirby_SpecialHi_SetStatus
   /* 57204 103744 80188D04 */  .4byte jtgt_ovl3_801529A0
   /* 57208 103748 80188D08 */  .4byte ftPurin_SpecialHi_SetStatus
   /* 5720C 10374C 80188D0C */  .4byte ftNess_SpecialHiStart_SetStatus
@@ -1530,8 +1530,8 @@ glabel ftCommon_SpecialHi_StatusList
   /* 57228 103768 80188D28 */  .4byte ftMario_SpecialHi_SetStatus
   /* 5722C 10376C 80188D2C */  .4byte jtgt_ovl3_80164284
   /* 57230 103770 80188D30 */  .4byte jtgt_ovl3_8015ED3C
-  /* 57234 103774 80188D34 */  .4byte jtgt_ovl3_80160630
-  /* 57238 103778 80188D38 */  .4byte jtgt_ovl3_801611A8
+  /* 57234 103774 80188D34 */  .4byte ftCaptain_SpecialHi_SetStatus
+  /* 57238 103778 80188D38 */  .4byte ftKirby_SpecialHi_SetStatus
   /* 5723C 10377C 80188D3C */  .4byte jtgt_ovl3_801529A0
   /* 57240 103780 80188D40 */  .4byte ftPurin_SpecialHi_SetStatus
   /* 57244 103784 80188D44 */  .4byte ftNess_SpecialHiStart_SetStatus
@@ -1546,7 +1546,7 @@ glabel ftCommon_SpecialLw_StatusList
   /* 57260 1037A0 80188D60 */  .4byte ftMario_SpecialLw_SetStatus
   /* 57264 1037A4 80188D64 */  .4byte jtgt_ovl3_8016458C
   /* 57268 1037A8 80188D68 */  .4byte jtgt_ovl3_8015EFE4
-  /* 5726C 1037AC 80188D6C */  .4byte jtgt_ovl3_80160128
+  /* 5726C 1037AC 80188D6C */  .4byte ftCaptain_SpecialLw_SetStatus
   /* 57270 1037B0 80188D70 */  .4byte jtgt_ovl3_80161A94
   /* 57274 1037B4 80188D74 */  .4byte jtgt_ovl3_80151FBC
   /* 57278 1037B8 80188D78 */  .4byte ftPurin_SpecialLw_SetStatus
@@ -1560,7 +1560,7 @@ glabel ftCommon_SpecialLw_StatusList
   /* 57298 1037D8 80188D98 */  .4byte ftMario_SpecialLw_SetStatus
   /* 5729C 1037DC 80188D9C */  .4byte jtgt_ovl3_8016458C
   /* 572A0 1037E0 80188DA0 */  .4byte jtgt_ovl3_8015EFE4
-  /* 572A4 1037E4 80188DA4 */  .4byte jtgt_ovl3_80160128
+  /* 572A4 1037E4 80188DA4 */  .4byte ftCaptain_SpecialLw_SetStatus
   /* 572A8 1037E8 80188DA8 */  .4byte jtgt_ovl3_80161A94
   /* 572AC 1037EC 80188DAC */  .4byte jtgt_ovl3_80151FBC
   /* 572B0 1037F0 80188DB0 */  .4byte ftPurin_SpecialLw_SetStatus

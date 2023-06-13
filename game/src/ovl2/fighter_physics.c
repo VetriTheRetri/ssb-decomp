@@ -274,7 +274,7 @@ bool32 func_ovl2_800D8FA8(Fighter_Struct *fp, ftCommonAttributes *attributes)
     return func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x);
 }
 
-void func_ovl2_800D8FC8(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 clamp)
+void ftPhysicsClampDriftStickRange(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 clamp)
 {
     if (ABS(fp->input.pl.stick_range.x) >= stick_range_min)
     {
@@ -293,7 +293,7 @@ void func_ovl2_800D8FC8(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 cl
 
 void func_ovl2_800D9044(Fighter_Struct *fp, ftCommonAttributes *attributes)
 {
-    func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration, attributes->aerial_speed_max_x);
+    ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration, attributes->aerial_speed_max_x);
 }
 
 void func_ovl2_800D9074(Fighter_Struct *fp, ftCommonAttributes *attributes)

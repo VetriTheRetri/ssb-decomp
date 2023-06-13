@@ -7,7 +7,7 @@ void ftCommon_Appeal_ProcInterrupt(GObj *fighter_gobj)
 
     if ((fp->command_vars.flags.flag1 != 0) && (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) == FALSE))
     {
-        func_ovl3_80148D0C(fighter_gobj);
+        ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj);
     }
 }
 

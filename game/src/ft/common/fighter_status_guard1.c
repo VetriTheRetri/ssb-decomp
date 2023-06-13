@@ -412,7 +412,8 @@ bool32 func_ovl3_80148CBC(GObj *fighter_gobj, s32 slide_frames)
     else return FALSE;
 }
 
-bool32 func_ovl3_80148D0C(GObj *fighter_gobj)
+// 0x80148D0C
+bool32 ftCommon_GuardOn_CheckInterruptCommon(GObj *fighter_gobj)
 {
     return func_ovl3_80148CBC(fighter_gobj, 0);
 }

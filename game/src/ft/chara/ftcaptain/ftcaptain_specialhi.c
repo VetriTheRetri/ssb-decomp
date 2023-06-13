@@ -1,11 +1,13 @@
 #include "ftcaptain.h"
 
-void func_ovl3_80160280(Fighter_Struct *fp)
+// 0x80160280
+void ftCaptain_SpecialHi_InitCatchVars(Fighter_Struct *fp)
 {
-    ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALHICAPTAIN, func_ovl3_80160690, ftCommon_CaptureCaptain_ProcCapture);
+    ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALHICAPTAIN, ftCaptain_SpecialHi_ProcCatch, ftCommon_CaptureCaptain_ProcCapture);
 }
 
-void func_ovl3_801602B0(GObj *fighter_gobj)
+// 0x801602B0
+void ftCaptain_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -13,7 +15,8 @@ void func_ovl3_801602B0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80160304(GObj *fighter_gobj)
+// 0x80160304
+void ftCaptain_SpecialHiCatch_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
 
@@ -24,22 +27,20 @@ void func_ovl3_80160304(GObj *fighter_gobj)
         catch_fp->status_vars.common.capturecaptain.capture_flag |= FTCOMMON_CAPTURECAPTAIN_MASK_THROW;
 
         func_ovl2_801008F4(1); // Apply screen shake/rumble?
-        func_ovl3_80160730(fighter_gobj);
+        ftCaptain_SpecialHiThrow_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_80160370(GObj *fighter_gobj)
+// 0x80160370
+void ftCaptain_SpecialHi_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    s32 stick_x;
 
     if (fp->command_vars.flags.flag1 != 0)
     {
         fp->command_vars.flags.flag1 = 0;
 
-        stick_x = ABS(fp->input.pl.stick_range.x);
-
-        if (stick_x > 18)
+        if (ABS(fp->input.pl.stick_range.x) > FTCAPTAIN_FALCONDIVE_TURN_STICK_RANGE_MIN)
         {
             ftCommon_StickInputSetLR(fp);
 
@@ -48,7 +49,8 @@ void func_ovl3_80160370(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801603F0(GObj *fighter_gobj)
+// 0x801603F0
+void ftCaptain_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = AttributesGetStruct(fp);
@@ -59,7 +61,7 @@ void func_ovl3_801603F0(GObj *fighter_gobj)
 
     if (func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTCAPTAIN_FALCONDIVE_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL);
+        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTCAPTAIN_FALCONDIVE_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL);
         func_ovl2_800D9074(fp, attributes);
     }
     fp->status_vars.captain.specialhi.vel.x = fp->phys_info.vel_air.x;
@@ -71,7 +73,8 @@ void func_ovl3_801603F0(GObj *fighter_gobj)
     fp->phys_info.vel_air.y += fp->status_vars.captain.specialhi.vel.y;
 }
 
-void func_ovl3_801604D8(GObj *fighter_gobj)
+// 0x80160D48
+void ftCaptain_SpecialHiCatch_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vec;
@@ -89,7 +92,8 @@ void func_ovl3_801604D8(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80160560(GObj *fighter_gobj)
+// 0x80160560
+void ftCaptain_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -111,7 +115,8 @@ void func_ovl3_80160560(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_801605FC(GObj *fighter_gobj)
+// 0x801605FC
+void ftCaptain_SpecialHi_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -127,25 +132,27 @@ void func_ovl3_801605FC(GObj *fighter_gobj)
     fp->status_vars.captain.specialhi.vel.y = 0.0F;
 }
 
-void jtgt_ovl3_80160630(GObj *fighter_gobj)
+// 0x80160630
+void ftCaptain_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
 
-    fp->proc_status = func_ovl3_801605FC;
+    fp->proc_status = ftCaptain_SpecialHi_ProcStatus;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
-    func_ovl3_80160280(fp);
+    ftCaptain_SpecialHi_InitCatchVars(fp);
     ftAnim_Update(fighter_gobj);
 }
 
-void func_ovl3_80160690(GObj *fighter_gobj)
+// 0x80160690
+void ftCaptain_SpecialHi_ProcCatch(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj), *catch_fp;
     GObj *search_gobj;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     func_ovl2_800D9444(fighter_gobj);
@@ -163,11 +170,12 @@ void func_ovl3_80160690(GObj *fighter_gobj)
     else fp->x192_flag_b3 = TRUE;
 }
 
-void func_ovl3_80160730(GObj *fighter_gobj)
+// 0x80160730
+void ftCaptain_SpecialHiThrow_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiThrow, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_NONE);
 
@@ -178,13 +186,14 @@ void func_ovl3_80160730(GObj *fighter_gobj)
     fp->catch_gobj = NULL;
 }
 
-void jtgt_ovl3_801607B4(GObj *fighter_gobj)
+// 0x801607B4
+void ftCaptain_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_801605FC;
+    fp->proc_status = ftCaptain_SpecialHi_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiRelease, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
-    func_ovl3_80160280(fp);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftCaptain_SpecialHi_InitCatchVars(fp);
     ftAnim_Update(fighter_gobj);
 }

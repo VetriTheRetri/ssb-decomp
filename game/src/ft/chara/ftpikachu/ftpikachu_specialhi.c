@@ -429,7 +429,7 @@ void func_ovl3_80153414(GObj *fighter_gobj)
 
         attributes = fp->attributes;
 
-        func_ovl2_800D8FC8(F(fp, 8, attributes->aerial_acceleration * FTPIKACHU_QUICKATTACK_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTPIKACHU_QUICKATTACK_AIR_SPEED_MUL);
+        ftPhysicsClampDriftStickRange(F(fp, 8, attributes->aerial_acceleration * FTPIKACHU_QUICKATTACK_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTPIKACHU_QUICKATTACK_AIR_SPEED_MUL);
        
         func_ovl2_800D9074(fp, fp->attributes);
     }

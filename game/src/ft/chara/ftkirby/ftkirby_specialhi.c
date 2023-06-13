@@ -1,6 +1,7 @@
 #include "ftkirby.h"
 
-void func_ovl3_80160BB0(GObj *fighter_gobj)
+// 0x80160BB0
+void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -9,8 +10,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         switch (fp->command_vars.flags.flag1)
         {
         case 1:
-
-            if (fp->is_statupdate_stop_gfx != FALSE)
+            if (fp->is_statupdate_stop_gfx)
             {
                 ftCommon_ProcDestroyGFX(fighter_gobj);
                 fp->command_vars.flags.flag1 = 0;
@@ -18,7 +18,6 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
             break;
 
         default:
-
             while (TRUE)
             {
                 fatal_printf("gcFighterSpecialHiEffectKirby : Error  Unknown value %d \n", fp->command_vars.flags.flag1);
@@ -29,8 +28,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
     switch (fp->command_vars.flags.flag2)
     {
     case 0:
-
-        if (fp->is_statupdate_stop_gfx != FALSE)
+        if (fp->is_statupdate_stop_gfx)
         {
             ftCommon_ProcDestroyGFX(fighter_gobj);
             fp->command_vars.flags.flag2 = 0;
@@ -38,8 +36,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         break;
 
     case 2:
-
-        if (func_ovl2_80102508(fighter_gobj) != FALSE)
+        if (func_ovl2_80102508(fighter_gobj) != NULL)
         {
             fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
@@ -47,8 +44,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         break;
 
     case 3:
-
-        if (func_ovl2_80102418(fighter_gobj) != FALSE)
+        if (func_ovl2_80102418(fighter_gobj) != NULL)
         {
             fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
@@ -56,8 +52,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         break;
 
     case 4:
-
-        if (func_ovl2_80102490(fighter_gobj) != FALSE)
+        if (func_ovl2_80102490(fighter_gobj) != NULL)
         {
             fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
@@ -65,8 +60,7 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         break;
 
     case 5:
-
-        if (func_ovl2_80102560(fighter_gobj) != FALSE)
+        if (func_ovl2_80102560(fighter_gobj) != NULL)
         {
             fp->is_statupdate_stop_gfx = TRUE;
             fp->command_vars.flags.flag2 = 0;
@@ -74,7 +68,6 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
         break;
 
     default:
-
         while (TRUE)
         {
             fatal_printf("gcFighterSpecialHiEffectKirby : Error  Unknown value %d \n", fp->command_vars.flags.flag2);
@@ -83,12 +76,14 @@ void func_ovl3_80160BB0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80160D1C(GObj *fighter_gobj)
+// 0x80160D1C
+void ftKirby_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801612D8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftKirby_SpecialAirHiFall_SetStatus);
 }
 
-void func_ovl3_80160D40(GObj *fighter_gobj)
+// 0x80160D40
+void ftKirby_SpecialHiLanding_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -112,27 +107,29 @@ void func_ovl3_80160D40(GObj *fighter_gobj)
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_Wait_SetStatus);
 }
 
-void func_ovl3_80160DF0(GObj *fighter_gobj)
+// 0x80160DF0
+void ftKirby_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl3_80160BB0(fighter_gobj);
+    ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
     jtgt_ovl2_800D9414(fighter_gobj);
 
     if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, attributes);
     }
 }
 
-void func_ovl3_80160E70(GObj *fighter_gobj)
+// 0x80160E70
+void ftKirby_SpecialHiLanding_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl3_80160BB0(fighter_gobj);
+    ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
 
     if (fp->ground_or_air == ground)
     {
@@ -145,60 +142,51 @@ void func_ovl3_80160E70(GObj *fighter_gobj)
 
         if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+            ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
             func_ovl2_800D9074(fp, attributes);
         }
     }
 }
 
-void func_ovl3_80160F10(GObj *fighter_gobj)
+// 0x80160F10
+void ftKirby_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     f32 temp_scale;
 
-    func_ovl3_80160BB0(fighter_gobj);
+    ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
 
-    fp->joint[0]->scale.z = 0.8F;
-
-    temp_scale = fp->joint[0]->scale.z;
-
-    fp->joint[0]->scale.y = temp_scale;
-
-    fp->joint[0]->scale.x = temp_scale;
+    fp->joint[0]->scale.x = fp->joint[0]->scale.y = fp->joint[0]->scale.z = 0.8F;
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
-    fp->joint[0]->scale.z = 1.0F;
-
-    temp_scale = fp->joint[0]->scale.z;
-
-    fp->joint[0]->scale.y = temp_scale;
-
-    fp->joint[0]->scale.x = temp_scale;
+    fp->joint[0]->scale.x = fp->joint[0]->scale.y = fp->joint[0]->scale.z = 1.0F;
 
     if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, attributes);
     }
 }
 
-void func_ovl3_80160FD8(GObj *fighter_gobj)
+// 0x80160FD8
+void ftKirby_SpecialAirHiFall_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    func_ovl3_80160BB0(fighter_gobj);
+    ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
 
     if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, attributes);
     }
 }
 
-void func_ovl3_8016104C(GObj *fighter_gobj)
+// 0x8016104C
+void ftKirby_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -211,23 +199,23 @@ void func_ovl3_8016104C(GObj *fighter_gobj)
     }
     else
     {
-        if (func_ovl2_800DE87C(fighter_gobj) != 0)
+        if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
         {
             if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
             {
                 ftCommon_CliffCatch_SetStatus(fighter_gobj);
-
             }
             else if ((fp->coll_data.coll_type & MPCOLL_MASK_GROUND) && (fp->phys_info.vel_air.y < 0.0F))
             {
                 ftMapCollide_SetGround(fp);
-                func_ovl3_80161210(fighter_gobj);
+                ftKirby_SpecialHiLanding_SetStatus(fighter_gobj);
             }
         }
     }
 }
 
-void func_ovl3_80161194(GObj *fighter_gobj)
+// 0x80161194
+void ftKirby_SpecialHi_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -236,49 +224,53 @@ void func_ovl3_80161194(GObj *fighter_gobj)
     fp->command_vars.flags.flag0 = 0;
 }
 
-void jtgt_ovl3_801611A8(GObj *fighter_gobj)
+// 0x801611A8
+void ftKirby_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_80161194;
+    fp->proc_status = ftKirby_SpecialHi_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHi, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void func_ovl3_80161210(GObj *fighter_gobj)
+// 0x80161210
+void ftKirby_SpecialHiLanding_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiLanding, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiLanding, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void jtgt_ovl3_801611A8(GObj *fighter_gobj)
+// 0x80161270
+void ftKirby_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_80161194;
+    fp->proc_status = ftKirby_SpecialHi_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirHi, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void func_ovl3_801612D8(GObj *fighter_gobj)
+// 0x801612D8
+void ftKirby_SpecialAirHiFall_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 vel_y_bak = fp->phys_info.vel_air.y;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiFall, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirHiFall, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;

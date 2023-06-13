@@ -1,6 +1,7 @@
 #include "ftcaptain.h"
 
-void func_ovl3_8015FC30(GObj *fighter_gobj)
+// 0x8015FC30
+void ftCaptain_SpecialLw_UpdateGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -17,7 +18,6 @@ void func_ovl3_8015FC30(GObj *fighter_gobj)
             fp->command_vars.flags.flag2 = 0;
         }
     }
-
     else if (fp->command_vars.flags.flag2 == 2)
     {
         ftCommon_ProcDestroyGFX(fighter_gobj);
@@ -25,7 +25,8 @@ void func_ovl3_8015FC30(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015FCB0(GObj *fighter_gobj)
+// 0x8015FCB0
+void ftCaptain_SpecialLw_SetAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -38,7 +39,8 @@ void func_ovl3_8015FCC8(GObj *fighter_gobj) // Unused?
     ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
 }
 
-void func_ovl3_8015FCE8(GObj *fighter_gobj)
+// 0x8015FCE8
+void ftCaptain_SpecialLw_DecideMapCollide(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -46,14 +48,15 @@ void func_ovl3_8015FCE8(GObj *fighter_gobj)
     {
         if (fp->command_vars.flags.flag3 != 0)
         {
-            func_ovl2_800DDE84(fighter_gobj, func_ovl3_8015FCB0);
+            func_ovl2_800DDE84(fighter_gobj, ftCaptain_SpecialLw_SetAir);
         }
-        else func_ovl2_800DDDDC(fighter_gobj, func_ovl3_8015FCB0);
+        else func_ovl2_800DDDDC(fighter_gobj, ftCaptain_SpecialLw_SetAir);
     }
-    else func_ovl2_800DE6E4(fighter_gobj, func_ovl3_8015FCB0);
+    else func_ovl2_800DE6E4(fighter_gobj, ftCaptain_SpecialLw_SetAir);
 }
 
-void func_ovl3_8015FD50(GObj *fighter_gobj)
+// 0x8015FD50
+void ftCaptain_SpecialLw_DecideSetEndStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -64,12 +67,14 @@ void func_ovl3_8015FD50(GObj *fighter_gobj)
     else ftCommon_Fall_SetStatus(fighter_gobj);
 }
 
-void func_ovl3_8015FD90(GObj *fighter_gobj)
+// 0x8015FD90
+void ftCaptain_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015FD50);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCaptain_SpecialLw_DecideSetEndStatus);
 }
 
-void func_ovl3_8015FDB4(GObj *fighter_gobj)
+// 0x8015FDB4
+void ftCaptain_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -86,33 +91,37 @@ void func_ovl3_8015FDB4(GObj *fighter_gobj)
 
     vec3f_scale(&fp->phys_info.vel_air, fp->status_vars.captain.speciallw.vel_scale);
 
-    func_ovl3_8015FC30(fighter_gobj);
+    ftCaptain_SpecialLw_UpdateGFX(fighter_gobj);
 }
 
-void func_ovl3_8015FE4C(GObj *fighter_gobj)
+// 0x8015FE4C
+void ftCaptain_SpecialLwLanding_ProcPhysics(GObj *fighter_gobj)
 {
     func_ovl2_800D8C14(fighter_gobj);
 }
 
-void func_ovl3_8015FE6C(GObj *fighter_gobj)
+// 0x8015FE6C
+void ftCaptain_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
 {
-    func_ovl3_8015FC30(fighter_gobj);
+    ftCaptain_SpecialLw_UpdateGFX(fighter_gobj);
     func_ovl2_800D93E4(fighter_gobj);
 }
 
-void func_ovl3_8015FE94(GObj *fighter_gobj)
+// 0x8015FE94
+void ftCaptain_SpecialLwBound_ProcPhysics(GObj *fighter_gobj)
 {
     func_ovl2_800D93E4(fighter_gobj);
 }
 
-bool32 func_ovl3_8015FEB4(GObj *fighter_gobj)
+// 0x8015FEB4
+bool32 ftCaptain_SpecialLwBound_CheckMapCollideGoto(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
         ftMapCollide_SetAir(fp);
-        ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwBound, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwBound, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
         fp->command_vars.flags.flag1 = 0;
 
@@ -121,7 +130,8 @@ bool32 func_ovl3_8015FEB4(GObj *fighter_gobj)
     else return FALSE;
 }
 
-bool32 func_ovl3_8015FF2C(GObj *fighter_gobj)
+// 0x8015FF2C
+bool32 ftCaptain_SpecialLwAir_CheckAirGoto(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -129,7 +139,7 @@ bool32 func_ovl3_8015FF2C(GObj *fighter_gobj)
     {
         if (fp->ground_or_air == air)
         {
-            func_ovl3_80160060(fighter_gobj);
+            ftCaptain_SpecialLwAir_SetStatus(fighter_gobj);
 
             fp->command_vars.flags.flag1 = 0;
 
@@ -140,27 +150,31 @@ bool32 func_ovl3_8015FF2C(GObj *fighter_gobj)
     return FALSE;
 }
 
-void func_ovl3_8015FF88(GObj *fighter_gobj)
+// 0x8015FF88
+void ftCaptain_SpecialLw_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl3_8015FCE8(fighter_gobj);
+    ftCaptain_SpecialLw_DecideMapCollide(fighter_gobj);
 
-    if (func_ovl3_8015FEB4(fighter_gobj) == FALSE)
+    if (ftCaptain_SpecialLwBound_CheckMapCollideGoto(fighter_gobj) == FALSE)
     {
-        func_ovl3_8015FF2C(fighter_gobj);
+        ftCaptain_SpecialLwAir_CheckAirGoto(fighter_gobj);
     }
 }
 
-void func_ovl3_8015FFC0(GObj *fighter_gobj)
+// 0x8015FFC0
+void ftCaptain_SpecialLwAir_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl3_8015FCE8(fighter_gobj);
+    ftCaptain_SpecialLw_DecideMapCollide(fighter_gobj);
 }
 
-void func_ovl3_8015FFE0(GObj *fighter_gobj)
+// 0x8015FFE0
+void ftCaptain_SpecialLwLanding_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_801600EC);
+    func_ovl2_800DE6E4(fighter_gobj, ftCaptain_SpecialLwLanding_SetStatus);
 }
 
-void func_ovl3_80160004(GObj *fighter_gobj)
+// 0x80160004
+void ftCaptain_SpecialLw_ProcHit(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -172,7 +186,8 @@ void func_ovl3_80160004(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80160038(GObj *fighter_gobj)
+// 0x80160038
+void ftCaptain_SpecialLw_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -186,13 +201,14 @@ void func_ovl3_80160038(GObj *fighter_gobj)
     fp->status_vars.captain.speciallw.vel_scale = 1.0F;
 }
 
-void func_ovl3_80160060(GObj *fighter_gobj)
+// 0x80160060
+void ftCaptain_SpecialLwAir_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 rot_z = fp->joint[0]->rotate.z;
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwEnd, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwAir, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
 
     fp->joint[0]->rotate.z = rot_z;
     fp->joint[1]->rotate.z = fp->joint[0]->rotate.z;
@@ -201,23 +217,25 @@ void func_ovl3_80160060(GObj *fighter_gobj)
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void func_ovl3_801600EC(GObj *fighter_gobj)
+// 0x801600EC
+void ftCaptain_SpecialLwLanding_SetStatus(GObj *fighter_gobj)
 {
     ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwLanding, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwLanding, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 
-void jtgt_ovl3_80160128(GObj *fighter_gobj)
+// 0x80160128
+void ftCaptain_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_80160038;
+    fp->proc_status = ftCaptain_SpecialLw_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLw, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_shield = func_ovl3_80160004;
-    fp->proc_hit = func_ovl3_80160004;
+    fp->proc_shield = ftCaptain_SpecialLw_ProcHit;
+    fp->proc_hit = ftCaptain_SpecialLw_ProcHit;
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
@@ -227,22 +245,23 @@ void jtgt_ovl3_801601A0(GObj *fighter_gobj) // Unused
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwEnd, 0.0F, 1.0F, 4U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwAir, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_hit = func_ovl3_80160004;
+    fp->proc_hit = ftCaptain_SpecialLw_ProcHit;
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void jtgt_ovl3_8016020C(GObj *fighter_gobj)
+// 0x8016020C
+void ftCaptain_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_80160038;
+    fp->proc_status = ftCaptain_SpecialLw_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirLw, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;

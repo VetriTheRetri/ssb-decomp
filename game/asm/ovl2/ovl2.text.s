@@ -3078,7 +3078,7 @@ glabel func_ovl2_800D8FA8
   /* 0547C0 800D8FC0 03E00008 */        jr $ra
   /* 0547C4 800D8FC4 00000000 */       nop 
 
-glabel func_ovl2_800D8FC8
+glabel ftPhysicsClampDriftStickRange
   /* 0547C8 800D8FC8 808201C2 */        lb $v0, 0x1c2($a0)
   /* 0547CC 800D8FCC 44866000 */      mtc1 $a2, $f12
   /* 0547D0 800D8FD0 44877000 */      mtc1 $a3, $f14
@@ -3122,7 +3122,7 @@ glabel func_ovl2_800D9044
   /* 054850 800D9050 AFBF0014 */        sw $ra, 0x14($sp)
   /* 054854 800D9054 24050008 */     addiu $a1, $zero, 8
   /* 054858 800D9058 8DC70050 */        lw $a3, 0x50($t6)
-  /* 05485C 800D905C 0C0363F2 */       jal func_ovl2_800D8FC8
+  /* 05485C 800D905C 0C0363F2 */       jal ftPhysicsClampDriftStickRange
   /* 054860 800D9060 8DC6004C */        lw $a2, 0x4c($t6)
   /* 054864 800D9064 8FBF0014 */        lw $ra, 0x14($sp)
   /* 054868 800D9068 27BD0018 */     addiu $sp, $sp, 0x18

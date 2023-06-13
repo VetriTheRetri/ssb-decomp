@@ -1,6 +1,7 @@
 #include "ftcaptain.h"
 
-void func_ovl3_8015F7F0(GObj *fighter_gobj) // Falcon Punch
+// 0x8015F7F0
+void ftCaptain_SpecialN_UpdateGFX(GObj *fighter_gobj) // Falcon Punch
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -19,11 +20,13 @@ void func_ovl3_8015F7F0(GObj *fighter_gobj) // Falcon Punch
     else if (fp->command_vars.flags.flag0 == 1)
     {
         ftCommon_ProcDestroyGFX(fighter_gobj);
+
         fp->command_vars.flags.flag0 = 2;
     }
 }
 
-f32 func_ovl3_8015F874(s32 stick_y)
+// 0x8015F874
+f32 ftCaptain_SpecialN_GetAngle(s32 stick_y)
 {
     s32 temp_stick_y = ABS(stick_y);
 
@@ -44,16 +47,18 @@ f32 func_ovl3_8015F874(s32 stick_y)
         temp_stick_y = -temp_stick_y;
     }
 
-    return F_DEG_TO_RAD((temp_y * 30) / 40.0F);
+    return F_DEG_TO_RAD((temp_stick_y * 30) / 40.0F);
 }
 
-void func_ovl3_8015F8EC(GObj *fighter_gobj)
+// 0x8015F8EC
+void ftCaptain_SpecialN_ProcPhysics(GObj *fighter_gobj)
 {
-    func_ovl3_8015F7F0(fighter_gobj);
+    ftCaptain_SpecialN_UpdateGFX(fighter_gobj);
     func_ovl2_800D8C14(fighter_gobj);
 }
 
-void func_ovl3_8015F914(GObj *fighter_gobj)
+// 0x8015F914
+void ftCaptain_SpecialAirN_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 unused;
@@ -64,13 +69,13 @@ void func_ovl3_8015F914(GObj *fighter_gobj)
         fp->command_vars.flags.flag1 = 0;
         fp->fighter_vars.captain.falcon_punch_unk++;
 
-        boost = func_ovl3_8015F874(fp->input.pl.stick_range.y);
+        boost = ftCaptain_SpecialN_GetAngle(fp->input.pl.stick_range.y);
 
         fp->phys_info.vel_air.y = (__sinf(boost) * FTCAPTAIN_FALCONPUNCH_VEL_BASE);
         fp->phys_info.vel_air.x = (cosf(boost) * fp->lr * FTCAPTAIN_FALCONPUNCH_VEL_BASE);
     }
 
-    func_ovl3_8015F7F0(fighter_gobj);
+    ftCaptain_SpecialN_UpdateGFX(fighter_gobj);
 
     switch (fp->command_vars.flags.flag2)
     {
@@ -89,40 +94,45 @@ void func_ovl3_8015F914(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015FA2C(GObj *fighter_gobj)
+// 0x8015FA2C
+void ftCaptain_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void func_ovl3_8015FA8C(GObj *fighter_gobj)
+// 0x8015FA8C
+void ftCaptain_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x4006U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     func_ovl2_800D8EB8(fp);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void func_ovl3_8015FAF8(GObj *fighter_gobj)
+// 0x8015FAF8
+void ftCaptain_SpecialN_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_8015FA8C);
+    func_ovl2_800DDE84(fighter_gobj, ftCaptain_SpecialN_SwitchStatusAir);
 }
 
-void func_ovl3_8015FB1C(GObj *fighter_gobj)
+// 0x8015FB1C
+void ftCaptain_SpecialAirN_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_8015FA2C);
+    func_ovl2_800DE6E4(fighter_gobj, ftCaptain_SpecialAirN_SwitchStatusGround);
 }
 
-void func_ovl3_8015FB40(GObj *fighter_gobj)
+// 0x8015FB40
+void ftCaptain_SpecialN_InitCommandVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -136,25 +146,27 @@ void func_ovl3_8015FB54() // Unused???
     return;
 }
 
-void jtgt_ovl3_8015FB5C(GObj *fighter_gobj)
+// 0x8015FB5C
+void ftCaptain_SpecialN_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_8015FB40(fighter_gobj);
+    ftCaptain_SpecialN_InitCommandVars(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
 }
 
-void func_ovl3_8015FA8C(GObj *fighter_gobj)
+// 0x8015FBC0
+void ftCaptain_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_8015FB40(fighter_gobj);
+    ftCaptain_SpecialN_InitCommandVars(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;

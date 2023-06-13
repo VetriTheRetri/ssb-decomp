@@ -96,7 +96,7 @@ void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
     case Ft_Kind_PolyKirby:
         if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTKIRBY_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTKIRBY_JUMPAERIAL_VEL_MUL);
+            ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTKIRBY_JUMPAERIAL_VEL_MUL);
         }
         break;
 
@@ -104,7 +104,7 @@ void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
     case Ft_Kind_PolyPurin:
         if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            func_ovl2_800D8FC8(fp, 8, attributes->aerial_acceleration * FTPURIN_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTPURIN_JUMPAERIAL_VEL_MUL);
+            ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTPURIN_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTPURIN_JUMPAERIAL_VEL_MUL);
         }
         break;
     }

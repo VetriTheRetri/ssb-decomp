@@ -13,7 +13,7 @@
     (ftCommon_AttackHi3_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_AttackLw3_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
-    (func_ovl3_80148D0C(fighter_gobj) != FALSE) ||  \
+    (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
