@@ -84,6 +84,7 @@
 #define ITYOSHISTAR_OFF_Y 20.0F
 
 #define ITSPINATTACK_LIFETIME 100
+#define ITSPINATTACK_EXTEND_POS_COUNT 4
 #define ITSPINATTACK_VEL 28.0F
 #define ITSPINATTACK_VEL_CLAMP 0.4F
 #define ITSPINATTACK_OFF_X 40.0F
@@ -208,8 +209,8 @@ typedef struct Charge_Shot_ItemVars
 
 typedef struct Spin_Attack_ItemVars
 {
-    s16 pos_x[4];
-    s16 pos_y[4];
+    s16 pos_x[ITSPINATTACK_EXTEND_POS_COUNT];
+    s16 pos_y[ITSPINATTACK_EXTEND_POS_COUNT];
     Vec2f vel;
     s8 is_destroy;
     s8 pos_index;

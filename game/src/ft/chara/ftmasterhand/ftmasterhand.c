@@ -10,7 +10,7 @@ void func_ovl3_80157F60(GObj *fighter_gobj) // Turn Master Hand around?
 
     fp->lr = -fp->lr;
 
-    fp->joint[0]->rotate.y = (f32)fp->lr * HALF_PI32;
+    fp->joint[ftParts_TopN_Joint]->rotate.y = (f32)fp->lr * HALF_PI32;
 }
 
 void func_ovl3_80157F90(GObj *fighter_gobj)
@@ -152,20 +152,20 @@ void func_ovl3_80158528(GObj *fighter_gobj)
     f32 var_f2;
     s32 temp_f4;
 
-    if (fp->joint[0]->translate.z > 0.0F)
+    if (fp->joint[ftParts_TopN_Joint]->translate.z > 0.0F)
     {
         var_at = 127.0F;
         var_f2 = 1.0F;
     }
     else
     {
-        if (fp->joint[0]->translate.z < -15000.0F)
+        if (fp->joint[ftParts_TopN_Joint]->translate.z < -15000.0F)
         {
             var_f2 = 0.0F;
         }
         else
         {
-            var_f2 = (fp->joint[0]->translate.z - (-15000.0F)) / 15000.0F;
+            var_f2 = (fp->joint[ftParts_TopN_Joint]->translate.z - (-15000.0F)) / 15000.0F;
         }
         var_at = 127.0F;
     }

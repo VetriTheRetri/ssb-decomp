@@ -1,6 +1,6 @@
 #include "ftdonkey.h"
 
-#define ftStatus_CheckInterruptThrowFTurn(fighter_gobj)                     \
+#define ftCheckInterruptThrowFTurn(fighter_gobj)                     \
 (                                                                           \
     (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) != FALSE) ||    \
     (ftDonkey_ThrowFF_CheckInterruptThrowFCommon(fighter_gobj) != FALSE)    \
@@ -25,7 +25,7 @@ void ftDonkey_ThrowFTurn_ProcUpdate(GObj *fighter_gobj)
 // 0x8014D790
 void ftDonkey_ThrowFTurn_ProcInterrupt(GObj *fighter_gobj)
 {
-    if (!ftStatus_CheckInterruptThrowFTurn(fighter_gobj))
+    if (!ftCheckInterruptThrowFTurn(fighter_gobj))
     {
         ftDonkey_ThrowFKneeBend_CheckInterruptThrowFCommon(fighter_gobj);
     }

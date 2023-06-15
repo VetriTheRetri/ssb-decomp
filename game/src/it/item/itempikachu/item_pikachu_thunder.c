@@ -3,7 +3,7 @@
 
 void func_ovl3_8016A640(GObj *item_gobj, bool32 thunder_state)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (!(ip->item_vars.thunder.thunder_state & itPikachuThunderStatus_Destroy))
     {
@@ -38,7 +38,7 @@ void func_ovl3_8016A680(GObj *item_gobj, s32 arg1)
 
 bool32 jtgt_ovl3_8016A700(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (ip->item_vars.thunder.thunder_state == itPikachuThunderStatus_Collide)
     {
@@ -46,7 +46,7 @@ bool32 jtgt_ovl3_8016A700(GObj *item_gobj)
 
         return TRUE;
     }
-    else if (func_ovl3_80167FE8(ip) != 0)
+    else if (wpMain_DecLifeCheckExpire(ip) != 0)
     {
         func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         func_ovl3_8016A640(item_gobj, TRUE);
@@ -84,15 +84,15 @@ extern ItemSpawnData Item_ThunderSpawn_Desc;
 GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
     s32 unused;
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_ThunderSpawn_Desc, pos, ITEM_MASK_SPAWN_FIGHTER);
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_ThunderSpawn_Desc, pos, WEAPON_MASK_SPAWN_FIGHTER);
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
 
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->proc_dead = func_ovl3_8016A7E8;
 
@@ -116,9 +116,9 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
 bool32 func_ovl3_8016A8D8(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
         return TRUE;
     }
@@ -135,7 +135,7 @@ bool32 func_ovl3_8016A8D8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016A950(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -147,16 +147,16 @@ extern ItemSpawnData Item_ThunderChain_Desc;
 GObj* func_ovl3_8016A980(GObj *item_gobj, Vec3f *pos)
 {
     s32 unused[2];
-    Item_Struct *spawn_ip = itGetStruct(item_gobj);
-    GObj *chain_gobj = func_ovl3_801655C8(item_gobj, &Item_ThunderChain_Desc, pos, ITEM_MASK_SPAWN_ITEM);
-    Item_Struct *chain_ip;
+    Weapon_Struct *spawn_ip = wpGetStruct(item_gobj);
+    GObj *chain_gobj = wpManager_CreateWeapon(item_gobj, &Item_ThunderChain_Desc, pos, WEAPON_MASK_SPAWN_WEAPON);
+    Weapon_Struct *chain_ip;
     s32 i;
 
     if (chain_gobj == NULL)
     {
         return NULL;
     }
-    chain_ip = itGetStruct(chain_gobj);
+    chain_ip = wpGetStruct(chain_gobj);
 
     chain_ip->lifetime = ITPIKACHUTHUNDER_CHAIN_LIFETIME;
     chain_ip->group_id = spawn_ip->group_id;

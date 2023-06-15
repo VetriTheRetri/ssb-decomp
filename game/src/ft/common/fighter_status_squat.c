@@ -1,6 +1,6 @@
 #include "fighter.h"
 
-#define ftStatus_CheckInterruptSquat(fighter_gobj) \
+#define ftCheckInterruptSquat(fighter_gobj) \
 (                                                  \
     (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) || \
@@ -42,7 +42,7 @@
     (ftCommon_SquatRv_CheckInterruptSquatWait(fighter_gobj) != FALSE)    \
 )                                                                        \
 
-#define ftStatus_CheckInterruptSquatRv(fighter_gobj) \
+#define ftCheckInterruptSquatRv(fighter_gobj) \
 (                                                      \
     (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
@@ -98,7 +98,7 @@ void ftCommon_Squat_ProcUpdate(GObj *fighter_gobj)
 // 0x80142EFC
 void ftCommon_Squat_ProcInterrupt(GObj *fighter_gobj)
 {
-    if (!ftStatus_CheckInterruptSquat(fighter_gobj))
+    if (!ftCheckInterruptSquat(fighter_gobj))
     {
         ftCommon_Squat_CheckGotoPass(fighter_gobj);
     }
@@ -212,7 +212,7 @@ bool32 ftCommon_SquatWait_CheckInterruptLanding(GObj *fighter_gobj)
 // 0x80143394
 void ftCommon_SquatRv_ProcInterrupt(GObj *fighter_gobj)
 {
-    if (!ftStatus_CheckInterruptSquatRv(fighter_gobj))
+    if (!ftCheckInterruptSquatRv(fighter_gobj))
     {
         ftCommon_Walk_CheckInterruptCommon(fighter_gobj);
     }

@@ -12,16 +12,17 @@
 #define FTLINK_BOOMERANG_SMASH_BUFFER 8                 // Frames of smash input buffer
 #define FTLINK_BOOMERANG_SMASH_STICK_MIN 56             // Minimum X-Axis range range required for smash input
 
-#define FTLINK_SPIN_ATTACK_SPAWN_JOINT 0
-#define FTLINK_SPIN_ATTACK_FLAG_SIZE_1 0.0F             // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 1 
-#define FTLINK_SPIN_ATTACK_FLAG_SIZE_2 120.0F           // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 2
-#define FTLINK_SPIN_ATTACK_FLAG_SIZE_3 100.0F           // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 3
-#define FTLINK_SPIN_ATTACK_FLAG_SIZE_4 80.0F            // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 4
-#define FTLINK_SPIN_ATTACK_AIR_VEL_Y 69.0F                  // Nice vertical height gain
-#define FTLINK_SPIN_ATTACK_GRAVITY_MUL 0.23F            // Multiplies gravity
-#define FTLINK_SPIN_ATTACK_AIR_DRIFT_MUL 0.5F           // Multiplies aerial drift
-#define FTLINK_SPIN_ATTACK_FALLSPECIAL_DRIFT 0.6F       // Aerial drift multiplier once Link enters freefall after aerial Spin Attack
-#define FTLINK_SPIN_ATTACK_LANDING_LAG 0.65F            // Divide landing animation length by this value
+#define FTLINK_SPINATTACK_SPAWN_JOINT 0
+#define FTLINK_SPINATTACK_EXTEND_POS_COUNT 4
+#define FTLINK_SPINATTACK_FLAG_SIZE_1 0.0F             // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 1
+#define FTLINK_SPINATTACK_FLAG_SIZE_2 120.0F           // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 2
+#define FTLINK_SPINATTACK_FLAG_SIZE_3 100.0F           // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 3
+#define FTLINK_SPINATTACK_FLAG_SIZE_4 80.0F            // Size of Spin Attack item hitbox when 0x184 @ Fighter_Struct is 4
+#define FTLINK_SPINATTACK_AIR_VEL_Y 69.0F              // Nice vertical height gain
+#define FTLINK_SPINATTACK_GRAVITY_MUL 0.23F            // Multiplies gravity
+#define FTLINK_SPINATTACK_AIR_DRIFT_MUL 0.5F           // Multiplies aerial drift
+#define FTLINK_SPINATTACK_FALLSPECIAL_DRIFT 0.6F       // Aerial drift multiplier once Link enters freefall after aerial Spin Attack
+#define FTLINK_SPINATTACK_LANDING_LAG 0.65F            // Divide landing animation length by this value
 
 typedef enum ftLinkAction
 {

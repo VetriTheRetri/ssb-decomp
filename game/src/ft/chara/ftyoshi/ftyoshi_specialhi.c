@@ -25,7 +25,7 @@ void func_ovl3_8015E9E0(Fighter_Struct *fp)
 
 void func_ovl3_8015EA5C(GObj *fighter_gobj)
 {
-    Item_Struct *ip;
+    Weapon_Struct *ip;
     Vec3f pos;
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -35,7 +35,7 @@ void func_ovl3_8015EA5C(GObj *fighter_gobj)
 
         if (fp->status_vars.yoshi.specialhi.egg_gobj != NULL)
         {
-            ip = itGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj);
+            ip = wpGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj);
 
             ip->item_vars.egg_throw.is_throw = TRUE;
             ip->item_vars.egg_throw.throw_force = fp->status_vars.yoshi.specialhi.throw_force;

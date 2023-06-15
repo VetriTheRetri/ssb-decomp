@@ -2550,7 +2550,7 @@ glabel func_ovl28_80133F68
   /* 143570 80133F90 AFBF0014 */        sw $ra, 0x14($sp)
   /* 143574 80133F94 10A00003 */      beqz $a1, .L80133FA4
   /* 143578 80133F98 00A02025 */        or $a0, $a1, $zero
-  /* 14357C 80133F9C 0C0026A1 */       jal func_80009A84
+  /* 14357C 80133F9C 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 143580 80133FA0 AC40002C */        sw $zero, 0x2c($v0)
   .L80133FA4:
   /* 143584 80133FA4 8FBF0014 */        lw $ra, 0x14($sp)
@@ -2781,21 +2781,21 @@ glabel func_ovl28_801342B8
   /* 1438C0 801342E0 AFBF0014 */        sw $ra, 0x14($sp)
   /* 1438C4 801342E4 10A00004 */      beqz $a1, .L801342F8
   /* 1438C8 801342E8 00A02025 */        or $a0, $a1, $zero
-  /* 1438CC 801342EC 0C0026A1 */       jal func_80009A84
+  /* 1438CC 801342EC 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 1438D0 801342F0 AFA2001C */        sw $v0, 0x1c($sp)
   /* 1438D4 801342F4 8FA2001C */        lw $v0, 0x1c($sp)
   .L801342F8:
   /* 1438D8 801342F8 8C440024 */        lw $a0, 0x24($v0)
   /* 1438DC 801342FC 50800005 */      beql $a0, $zero, .L80134314
   /* 1438E0 80134300 8C440028 */        lw $a0, 0x28($v0)
-  /* 1438E4 80134304 0C0026A1 */       jal func_80009A84
+  /* 1438E4 80134304 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 1438E8 80134308 AFA2001C */        sw $v0, 0x1c($sp)
   /* 1438EC 8013430C 8FA2001C */        lw $v0, 0x1c($sp)
   /* 1438F0 80134310 8C440028 */        lw $a0, 0x28($v0)
   .L80134314:
   /* 1438F4 80134314 50800005 */      beql $a0, $zero, .L8013432C
   /* 1438F8 80134318 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 1438FC 8013431C 0C0026A1 */       jal func_80009A84
+  /* 1438FC 8013431C 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 143900 80134320 AFA2001C */        sw $v0, 0x1c($sp)
   /* 143904 80134324 8FA2001C */        lw $v0, 0x1c($sp)
   /* 143908 80134328 8FBF0014 */        lw $ra, 0x14($sp)
@@ -3029,7 +3029,7 @@ glabel func_ovl28_8013462C
   /* 143C3C 8013465C AFB0001C */        sw $s0, 0x1c($sp)
   /* 143C40 80134660 10A00004 */      beqz $a1, .L80134674
   /* 143C44 80134664 AFA40038 */        sw $a0, 0x38($sp)
-  /* 143C48 80134668 0C0026A1 */       jal func_80009A84
+  /* 143C48 80134668 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 143C4C 8013466C 00A02025 */        or $a0, $a1, $zero
   /* 143C50 80134670 AE200020 */        sw $zero, 0x20($s1)
   .L80134674:

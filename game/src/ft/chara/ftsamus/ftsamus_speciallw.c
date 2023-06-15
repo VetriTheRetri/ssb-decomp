@@ -14,7 +14,7 @@ void func_ovl3_8015DF00(GObj *fighter_gobj)
         pos.z = 0.0F;
         pos.y = 60.0F;
 
-        joint = fp->joint[0]; // Not required but stack might suggest they wrote it like this
+        joint = fp->joint[ftParts_TopN_Joint]; // Not required but stack might suggest they wrote it like this
 
         func_ovl2_800EDF24(joint, &pos);
         func_ovl3_80169328(fighter_gobj, &pos);
@@ -62,7 +62,7 @@ void func_ovl3_8015E050(GObj *fighter_gobj)
 
     if (func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT) == FALSE)
     {
-        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTSAMUS_BOMB_DRIFT, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
+        ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTSAMUS_BOMB_DRIFT, attributes->aerial_speed_max_x * FTSAMUS_BOMB_DRIFT);
         func_ovl2_800D9074(fp, attributes);
     }
 }

@@ -589,9 +589,8 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
     if ((damage_level == 3) && (is_publicity != FALSE))
     {
-        func_ovl3_80163648(this_gobj);
+        ftKirby_SpecialN_DamageCheckLoseCopy(this_gobj);
     }
-
     ftStatus_Update(this_gobj, status_id_set, 0.0F, 1.0F, FTSTATUPDATE_DAMAGEPORT_PRESERVE);
     ftAnim_Update(this_gobj);
 

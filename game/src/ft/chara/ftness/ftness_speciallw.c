@@ -30,12 +30,12 @@ void ftNess_SpecialLw_DecReleaseLag(Fighter_Struct *fp)
 void ftNess_SpecialLw_Proc_Absorb(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    DObj *joint = fp->joint[0];
+    DObj *joint = fp->joint[ftParts_TopN_Joint];
 
     fp->lr = fp->lr_absorb;
     joint->rotate.y += (-PI32);
 
-    func_ovl2_800EB528(fp->joint[0]);
+    func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
 
     if (fp->ground_or_air == ground)
     {
@@ -225,11 +225,11 @@ void ftNess_SpecialLw_InitVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->is_statupdate_stop_gfx))
+    if (!(fp->is_playing_effect))
     {
         if (func_ovl2_801025D8(fighter_gobj) != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
         }
     }
     fp->is_absorb = TRUE;

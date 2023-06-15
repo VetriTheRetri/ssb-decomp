@@ -35,7 +35,7 @@ bool32 jtgt_ovl3_80168964(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016898C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -49,7 +49,7 @@ bool32 jtgt_ovl3_8016898C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80168A14(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
@@ -64,14 +64,14 @@ extern ItemSpawnData Item_Blaster_Desc;
 
 GObj* func_ovl3_80168A74(GObj *fighter_gobj, Vec3f *pos)
 {
-    Item_Struct *ip;
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_Blaster_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_Blaster_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->phys_info.vel.x = ip->lr * ITBLASTER_VEL_X;
 

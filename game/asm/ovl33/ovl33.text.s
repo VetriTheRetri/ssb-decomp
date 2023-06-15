@@ -1920,7 +1920,7 @@ glabel func_ovl33_8013369C
   /* 15F6F8 801336A8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 15F6FC 801336AC 10A00005 */      beqz $a1, .L801336C4
   /* 15F700 801336B0 AFA40018 */        sw $a0, 0x18($sp)
-  /* 15F704 801336B4 0C0026A1 */       jal func_80009A84
+  /* 15F704 801336B4 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 15F708 801336B8 00A02025 */        or $a0, $a1, $zero
   /* 15F70C 801336BC 0C04C7CA */       jal func_ovl33_80131F28
   /* 15F710 801336C0 8FA40018 */        lw $a0, 0x18($sp)
@@ -1929,7 +1929,7 @@ glabel func_ovl33_8013369C
   /* 15F718 801336C8 8C846600 */        lw $a0, %lo(D_ovl33_80136600)($a0)
   /* 15F71C 801336CC 10800005 */      beqz $a0, .L801336E4
   /* 15F720 801336D0 00000000 */       nop 
-  /* 15F724 801336D4 0C0026A1 */       jal func_80009A84
+  /* 15F724 801336D4 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 15F728 801336D8 00000000 */       nop 
   /* 15F72C 801336DC 0C04C839 */       jal func_ovl33_801320E4
   /* 15F730 801336E0 8FA40018 */        lw $a0, 0x18($sp)
@@ -1938,7 +1938,7 @@ glabel func_ovl33_8013369C
   /* 15F738 801336E8 8C846604 */        lw $a0, %lo(D_ovl33_80136604)($a0)
   /* 15F73C 801336EC 10800005 */      beqz $a0, .L80133704
   /* 15F740 801336F0 00000000 */       nop 
-  /* 15F744 801336F4 0C0026A1 */       jal func_80009A84
+  /* 15F744 801336F4 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 15F748 801336F8 00000000 */       nop 
   /* 15F74C 801336FC 0C04C700 */       jal func_ovl33_80131C00
   /* 15F750 80133700 8FA40018 */        lw $a0, 0x18($sp)
@@ -1947,7 +1947,7 @@ glabel func_ovl33_8013369C
   /* 15F758 80133708 8C846608 */        lw $a0, %lo(D_ovl33_80136608)($a0)
   /* 15F75C 8013370C 10800005 */      beqz $a0, .L80133724
   /* 15F760 80133710 00000000 */       nop 
-  /* 15F764 80133714 0C0026A1 */       jal func_80009A84
+  /* 15F764 80133714 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 15F768 80133718 00000000 */       nop 
   /* 15F76C 8013371C 0C04C8E7 */       jal func_ovl33_8013239C
   /* 15F770 80133720 8FA40018 */        lw $a0, 0x18($sp)

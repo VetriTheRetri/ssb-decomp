@@ -1,6 +1,6 @@
 #include "fighter.h"
 
-#define ftStatus_CheckInterruptLanding(fighter_gobj)   \
+#define ftCheckInterruptLanding(fighter_gobj)   \
 (                                                      \
     (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
     (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) ||     \
@@ -26,7 +26,7 @@ void ftCommon_Landing_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fighter_gobj->anim_frame < FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fp->status_vars.common.landing.is_allow_interrupt != FALSE) && !ftStatus_CheckInterruptLanding(fighter_gobj))
+    if (!(fighter_gobj->anim_frame < FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fp->status_vars.common.landing.is_allow_interrupt != FALSE) && !ftCheckInterruptLanding(fighter_gobj))
     {
         if ((fighter_gobj->anim_frame >= FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fighter_gobj->anim_frame < (FTCOMMON_LANDING_INTERRUPT_BEGIN + DObjGetStruct(fighter_gobj)->unk_dobj_0x78)))
         {

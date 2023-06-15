@@ -91,7 +91,7 @@ void ftCommon_Catch_SetStatus(GObj *fighter_gobj)
 
     if (((fp->ft_kind == Ft_Kind_Samus) || (fp->ft_kind == Ft_Kind_PolySamus)) && (func_ovl2_80101E80(fighter_gobj) != NULL))
     {
-        fp->is_statupdate_stop_gfx = TRUE;
+        fp->is_playing_effect = TRUE;
     }
 }
 

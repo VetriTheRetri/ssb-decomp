@@ -615,7 +615,7 @@ glabel func_ovl10_80132320
   /* 1179DC 8013235C 8CC40010 */        lw $a0, 0x10($a2) # gOMObjCommonLinks + 16
   /* 1179E0 80132360 50800006 */      beql $a0, $zero, .L8013237C
   /* 1179E4 80132364 8CC40038 */        lw $a0, 0x38($a2) # gOMObjCommonLinks + 56
-  /* 1179E8 80132368 0C0026A1 */       jal func_80009A84
+  /* 1179E8 80132368 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 1179EC 8013236C 00000000 */       nop 
   /* 1179F0 80132370 3C068004 */       lui $a2, %hi(gOMObjCommonLinks)
   /* 1179F4 80132374 24C666F0 */     addiu $a2, $a2, %lo(gOMObjCommonLinks)
@@ -623,7 +623,7 @@ glabel func_ovl10_80132320
   .L8013237C:
   /* 1179FC 8013237C 10800003 */      beqz $a0, .L8013238C
   /* 117A00 80132380 00000000 */       nop 
-  /* 117A04 80132384 0C0026A1 */       jal func_80009A84
+  /* 117A04 80132384 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 117A08 80132388 00000000 */       nop 
   .L8013238C:
   /* 117A0C 8013238C 0C04C8EB */       jal func_ovl10_801323AC

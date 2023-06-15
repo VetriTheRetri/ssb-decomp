@@ -5,14 +5,14 @@ void ftCaptain_SpecialLw_UpdateGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->is_statupdate_stop_gfx))
+    if (!(fp->is_playing_effect))
     {
         if (fp->command_vars.flags.flag2 == 1)
         {
 
             if (func_ovl2_80101ED8(fighter_gobj) != FALSE)
             {
-                fp->is_statupdate_stop_gfx = TRUE;
+                fp->is_playing_effect = TRUE;
             }
 
             fp->command_vars.flags.flag2 = 0;
@@ -20,7 +20,7 @@ void ftCaptain_SpecialLw_UpdateGFX(GObj *fighter_gobj)
     }
     else if (fp->command_vars.flags.flag2 == 2)
     {
-        ftCommon_ProcDestroyGFX(fighter_gobj);
+        ftCommon_ProcStopGFX(fighter_gobj);
         fp->command_vars.flags.flag2 = 0;
     }
 }
@@ -80,7 +80,7 @@ void ftCaptain_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        fp->joint[0]->rotate.z = (f32)-atan2f(fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y);
+        fp->joint[ftParts_TopN_Joint]->rotate.z = -atan2f(fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y);
         func_ovl2_800D8C14(fighter_gobj);
     }
     else if (fp->command_vars.flags.flag0 != 0)
@@ -205,13 +205,13 @@ void ftCaptain_SpecialLw_ProcStatus(GObj *fighter_gobj)
 void ftCaptain_SpecialLwAir_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    f32 rot_z = fp->joint[0]->rotate.z;
+    f32 rot_z = fp->joint[ftParts_TopN_Joint]->rotate.z;
 
     ftMapCollide_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwAir, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
 
-    fp->joint[0]->rotate.z = rot_z;
-    fp->joint[1]->rotate.z = fp->joint[0]->rotate.z;
+    fp->joint[ftParts_TopN_Joint]->rotate.z = rot_z;
+    fp->joint[ftParts_TransN_Joint]->rotate.z = fp->joint[ftParts_TopN_Joint]->rotate.z;
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;

@@ -159,7 +159,7 @@ extern ArticleSpawnData Article_PK_Fire_Data;
 GObj* func_ovl3_80185824(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *article_gobj;
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Article_Struct *ap;
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;

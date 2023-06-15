@@ -895,7 +895,7 @@ glabel func_ovl40_8018DD80
   /* 16B924 8018DDD4 3C048019 */       lui $a0, %hi(D_ovl40_8018E1CC)
   /* 16B928 8018DDD8 5441000C */      bnel $v0, $at, .L8018DE0C
   /* 16B92C 8018DDDC 2401003C */     addiu $at, $zero, 0x3c
-  /* 16B930 8018DDE0 0C0026A1 */       jal func_80009A84
+  /* 16B930 8018DDE0 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 16B934 8018DDE4 8C84E1CC */        lw $a0, %lo(D_ovl40_8018E1CC)($a0)
   /* 16B938 8018DDE8 0C06357D */       jal func_ovl40_8018D5F4
   /* 16B93C 8018DDEC 00000000 */       nop 

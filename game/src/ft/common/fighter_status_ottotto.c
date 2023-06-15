@@ -1,6 +1,6 @@
 #include "fighter.h"
 
-#define ftStatus_CheckInterruptOttotto(fighter_gobj)\
+#define ftCheckInterruptOttotto(fighter_gobj)\
 (                                                   \
     (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
     (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) ||  \
@@ -34,7 +34,7 @@ void ftCommon_Ottotto_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!ftStatus_CheckInterruptOttotto(fighter_gobj))
+    if (!ftCheckInterruptOttotto(fighter_gobj))
     {
         if ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_OTTOTTO_WALK_STICK_RANGE_MIN)
         {

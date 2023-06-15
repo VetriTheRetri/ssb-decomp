@@ -133,9 +133,9 @@ void ftCommon_Shouldered_SetStatus(GObj *fighter_gobj)
     if (damage != 0)
     {
         ftCommon_Damage_UpdateDamageColAnim(fighter_gobj, gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, damage, damage, 0, 100, 0, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap), 0);
-        ftCommon_DamageUpdateCheckDropItem(this_fp, damage);
-        ftCommon_AttackUpdateMatchStats(capture_fp->port_id, this_fp->port_id, damage);
-        ftCommon_AttackAddStaleQueue(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->motion_count);
+        ftDamageUpdateCheckDropItem(this_fp, damage);
+        ftAttackUpdateMatchStats(capture_fp->port_id, this_fp->port_id, damage);
+        ftAttackAddStaleQueue(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->motion_count);
     }
     func_ovl2_800E806C(this_fp, 7, 0);
 }

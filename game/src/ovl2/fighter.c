@@ -6,9 +6,9 @@ void func_ovl2_800D78E8(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 i;
 
-    if (fp->is_statupdate_stop_gfx)
+    if (fp->is_playing_effect)
     {
-        ftCommon_ProcDestroyGFX(fighter_gobj);
+        ftCommon_ProcStopGFX(fighter_gobj);
     }
 
     for (i = 0; i < ARRAY_COUNT(fp->joint); i++)
@@ -19,13 +19,13 @@ void func_ovl2_800D78E8(GObj *fighter_gobj)
 
             if (temp_s0->unk_gobj != NULL)
             {
-                func_80009A84(temp_s0->unk_gobj);
+                gOMObj_EjectGObjCommon(temp_s0->unk_gobj);
             }
             func_ovl2_800D767C(temp_s0);
         }
     }
     func_ovl2_800D75EC(fp);
-    func_80009A84(fighter_gobj);
+    gOMObj_EjectGObjCommon(fighter_gobj);
 }
 
 void func_ovl2_800D7994(GObj *fighter_gobj)
@@ -41,7 +41,7 @@ void func_ovl2_800D7994(GObj *fighter_gobj)
 
     case Ft_Kind_Link:
     case Ft_Kind_PolyLink:
-        func_ovl3_801636D0(fighter_gobj);
+        ftLink_SpecialN_DestroyBoomerang(fighter_gobj);
         break;
     }
 }
@@ -75,14 +75,14 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->is_reflect = FALSE;
     fp->is_absorb = FALSE;
     fp->is_shield = FALSE;
-    fp->is_statupdate_stop_gfx = FALSE;
+    fp->is_playing_effect = FALSE;
     fp->x18F_flag_b4 = FALSE;
 
     fp->cliffcatch_wait = 0;
     fp->time_since_last_z = 0;
     fp->acid_wait = 0;
 
-    fp->tornado_wait = fp->tarucann_wait = 0;
+    fp->twister_wait = fp->tarucann_wait = 0;
 
     fp->hotfloor_wait = 0;
     fp->unk_ft_0x7AC = 0;
@@ -402,9 +402,9 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
         fp->joint[i] = NULL;
     }
     topn_joint = func_800092D0(fighter_gobj, NULL);
-    fp->joint[0] = topn_joint;
+    fp->joint[ftParts_TopN_Joint] = topn_joint;
     func_ovl0_800C89BC(topn_joint, 0x4BU, 0U, 0U);
-    fp->joint[0]->om_mtx[0]->unk05 = spawn->unk_rebirth_0x1D;
+    fp->joint[ftParts_TopN_Joint]->om_mtx[0]->unk05 = spawn->unk_rebirth_0x1D;
 
     func_ovl0_800C8DB4(fighter_gobj->obj, attributes->dobj_desc_container, fp->lod_current, &fp->joint[4], attributes->unk_ftca_0x29C, 0x4B, 0, 0, fp->costume_id, fp->unk_ft_0x149);
 

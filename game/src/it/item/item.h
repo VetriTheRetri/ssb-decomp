@@ -10,35 +10,36 @@
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 #include <game/src/sys/develop.h>
+#include <game/src/gm/gmmatch.h>
 
-#define ITEM_ALLOC_MAX 32                       // Allocate this many item user_data structs at once
+#define WEAPON_ALLOC_MAX 32                     // Allocate this many item user_data structs at once
 
-#define ITEM_STALE_DEFAULT 1.0F
+#define WEAPON_STALE_DEFAULT 1.0F
 
-#define ITEM_TEAM_DEFAULT 4U
-#define ITEM_PORT_DEFAULT 4U
-#define ITEM_UNK_DEFAULT 9U                     // CPU level?
+#define WEAPON_TEAM_DEFAULT 4
+#define WEAPON_PORT_DEFAULT GMMATCH_PLAYERS_MAX
+#define WEAPON_HANDICAP_DEFAULT 9               // CPU level?
 
-#define ITEM_FLAG_PROJECT (1U << 31)            // Perform initial collision check when spawning item?
+#define WEAPON_FLAG_PROJECT (1 << 31)           // Perform initial collision check when spawning item?
 
-#define ITEM_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
-#define ITEM_MASK_SPAWN_GROUND 1                // Item spawned by stage
-#define ITEM_MASK_SPAWN_ITEM 2                  // Item spawned by another item
-#define ITEM_MASK_SPAWN_ARTICLE 3               // Item spawned by Pokémon / misc entity class(es?)
+#define WEAPON_MASK_SPAWN_FIGHTER 0               // Item spawned by fighter
+#define WEAPON_MASK_SPAWN_GROUND 1                // Item spawned by stage
+#define WEAPON_MASK_SPAWN_WEAPON 2                // Item spawned by another item
+#define WEAPON_MASK_SPAWN_ARTICLE 3               // Item spawned by Pokémon / misc entity class(es?)
 
-#define ITEM_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
+#define WEAPON_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
 
 // Universal item hitbox attributes
 
-#define ITEM_REHIT_TIME_DEFAULT 16              // If the item is multihit, its hitbox will refresh per victim after this many frames have passed
+#define WEAPON_REHIT_TIME_DEFAULT 16            // If the item is multihit, its hitbox will refresh per victim after this many frames have passed
 
-#define ITEM_REFLECT_MAX_DEFAULT 100            // Maximum damage cap for reflected items
-#define ITEM_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
-#define ITEM_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying item's hitbox damage
+#define WEAPON_REFLECT_TIME_DEFAULT 100         // Maximum damage cap for reflected items
+#define WEAPON_REFLECT_MUL_DEFAULT 1.8F         // Universal reflect damage multiplier
+#define WEAPON_REFLECT_ADD_DEFAULT 0.99F        // Added after multiplying item's hitbox damage
 
-#define ITEM_STALE_ADD_DEFAULT 0.999F           // Bonus 1% added after multiplying hitbox damage with staling modifier
+#define WEAPON_STALE_ADD_DEFAULT 0.999F         // Bonus 1% added after multiplying hitbox damage with staling modifier
 
-#define ITEM_DEFLECT_ANGLE_DEFAULT 2.3561945F   // Determines whether item bounces off a shield
+#define WEAPON_DEFLECT_ANGLE_DEFAULT F_DEG_TO_RAD(135.0F) // 2.3561945F - Determines whether item bounces off a shield
 
 typedef enum It_Kind
 {
@@ -164,9 +165,9 @@ typedef struct _Item_Hit
 
 } Item_Hit;
 
-typedef struct _Item_Struct
+typedef struct _Weapon_Struct
 {
-    void *ip_alloc_next;        // Pointer to next item struct
+    void *wp_alloc_next;        // Pointer to next item struct
     GObj *item_gobj;            // Pointer to item's GObj
     GObj *owner_gobj;           // Current owner of this item; expected to be fighter?
     s32 it_kind;                // Item ID
@@ -302,9 +303,9 @@ typedef struct _Item_Struct
 
     s32 display_state;
 
-} Item_Struct;
+} Weapon_Struct;
 
-#define itGetStruct(item_gobj) \
-((Item_Struct*)item_gobj->user_data) \
+#define wpGetStruct(item_gobj) \
+((Weapon_Struct*)item_gobj->user_data) \
 
 #endif

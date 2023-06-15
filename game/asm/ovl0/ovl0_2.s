@@ -57,7 +57,7 @@ glabel func_ovl0_800D3E80
   /* 04F8C4 800D3EE4 8D296474 */        lw $t1, %lo(D_ovl0_800D6474)($t1)
   /* 04F8C8 800D3EE8 51200004 */      beql $t1, $zero, .L800D3EFC
   /* 04F8CC 800D3EEC 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 04F8D0 800D3EF0 0C0026A1 */       jal func_80009A84
+  /* 04F8D0 800D3EF0 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 04F8D4 800D3EF4 00000000 */       nop 
   .L800D3EF8:
   /* 04F8D8 800D3EF8 8FBF0014 */        lw $ra, 0x14($sp)

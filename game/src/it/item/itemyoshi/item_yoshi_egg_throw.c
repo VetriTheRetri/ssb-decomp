@@ -10,7 +10,7 @@
 
 bool32 func_ovl3_8016BF50(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (ip->item_vars.egg_throw.is_throw == FALSE)
     {
@@ -21,9 +21,9 @@ bool32 func_ovl3_8016BF50(GObj *item_gobj)
 
 bool32 func_ovl3_8016BF74(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
         return TRUE;
     }
@@ -32,7 +32,7 @@ bool32 func_ovl3_8016BF74(GObj *item_gobj)
 
 void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing successfully
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
@@ -58,7 +58,7 @@ void func_ovl3_8016BFA0(GObj *item_gobj) // Egg Throw explodes from landing succ
 
 void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring 
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
@@ -84,7 +84,7 @@ void func_ovl3_8016C00C(GObj *item_gobj) // Egg Throw explodes from expiring
 
 void func_ovl3_8016C07C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     f32 angle = ABS(ip->item_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
 
     if (angle > 1.0F)
@@ -117,11 +117,11 @@ void func_ovl3_8016C07C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C218(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (ip->item_vars.egg_throw.is_spin != FALSE)
     {
-        if (func_ovl3_80167FE8(ip) != FALSE)
+        if (wpMain_DecLifeCheckExpire(ip) != FALSE)
         {
             func_800269C0(0xFCU);
 
@@ -151,7 +151,7 @@ bool32 jtgt_ovl3_8016C218(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C2E0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if ((ip->item_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(item_gobj) != FALSE))
     {
@@ -183,24 +183,24 @@ bool32 jtgt_ovl3_8016C364(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C3B4(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    func_ovl3_80167FA0(item_gobj);
+    wpMain_VelSetModelYaw(item_gobj);
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_8016C404(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITEGGTHROW_LIFETIME;
 
     func_ovl3_801680EC(ip, fp);
-    func_ovl3_80167FA0(item_gobj);
+    wpMain_VelSetModelYaw(item_gobj);
 
     return FALSE;
 }
@@ -219,15 +219,15 @@ extern ItemSpawnData Item_EggThrow_Desc;
 GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
 {
     Fighter_Struct *fp = fighter_gobj->user_data;
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_EggThrow_Desc, pos, ITEM_MASK_SPAWN_FIGHTER);
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_EggThrow_Desc, pos, WEAPON_MASK_SPAWN_FIGHTER);
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
 
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     item_gobj->renderer = func_ovl3_8016C444;
 

@@ -172,10 +172,10 @@ void func_ovl3_8015CF50(GObj *fighter_gobj)
         fp->lr = (s32)-fp->lr;
     }
 
-    joint = fp->joint[0];
+    joint = fp->joint[ftParts_TopN_Joint];
     joint->rotate.y += (-QUART_PI32);
 
-    func_ovl2_800EB528(fp->joint[0]);
+    func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
 }
 
 void func_ovl3_8015CFC0(GObj *fighter_gobj)
@@ -240,7 +240,7 @@ void func_ovl3_8015D130(GObj *fighter_gobj)
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        ftCommon_ProcDestroyGFX(fighter_gobj);
+        ftCommon_ProcStopGFX(fighter_gobj);
         func_ovl2_800DEE54(fighter_gobj);
     }
 }
@@ -274,7 +274,7 @@ void func_ovl3_8015D1E0(GObj *fighter_gobj)
 
     if (reflect_gobj != NULL)
     {
-        fp->is_statupdate_stop_gfx = TRUE;
+        fp->is_playing_effect = TRUE;
     }
     fp->special_hit = (SpecialHit*)((uintptr_t)D_ovl2_80130E94 + &ftFox_LoadedFiles_SpecialLwData); // Another linker thing
 }

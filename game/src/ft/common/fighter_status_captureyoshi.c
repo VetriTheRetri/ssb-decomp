@@ -92,7 +92,7 @@ void ftCommon_YoshiEgg_SpawnEggGFX(GObj *fighter_gobj)
 
         if (fp->status_vars.common.captureyoshi.effect_gobj != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
         }
     }
 }
@@ -109,7 +109,7 @@ void ftCommon_YoshiEgg_ProcUpdate(GObj *fighter_gobj)
 
         if (fp->status_vars.common.captureyoshi.effect_gobj != NULL)
         {
-            ftCommon_ProcDestroyGFX(fighter_gobj);
+            ftCommon_ProcStopGFX(fighter_gobj);
 
             fp->status_vars.common.captureyoshi.effect_gobj = NULL;
         }
@@ -306,7 +306,7 @@ void ftCommon_YoshiEgg_SetHurt(GObj *fighter_gobj)
     ftYoshiEggDesc *egg = &Fighter_YoshiEgg_HurtDesc[fp->ft_kind];
     s32 i;
 
-    ft_hurt->joint = fp->joint[0];
+    ft_hurt->joint = fp->joint[ftParts_TopN_Joint];
     ft_hurt->joint_index = 0;
     ft_hurt->unk_ftht_0xC = 1;
     ft_hurt->unk_ftht_0x10 = 0;
@@ -356,7 +356,7 @@ void ftCommon_YoshiEgg_SetStatus(GObj *fighter_gobj)
 
     ftCommon_YoshiEgg_SetHurt(fighter_gobj);
     ftCommon_Trap_InitBreakoutVars(this_fp, FTCOMMON_YOSHIEGG_BREAKOUT_INPUTS_MIN);
-    func_ovl3_80161CA0(this_fp->capture_gobj, fighter_gobj, 5);
+    ftKirby_SpecialN_ApplyCaptureDamage(this_fp->capture_gobj, fighter_gobj, 5);
     func_ovl2_800E7F7C(fighter_gobj, 1);
 
     capture_fp = ftGetStruct(this_fp->capture_gobj);

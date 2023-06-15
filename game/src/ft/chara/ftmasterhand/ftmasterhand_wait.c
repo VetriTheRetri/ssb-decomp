@@ -42,7 +42,7 @@ void func_ovl3_80158824(GObj *fighter_gobj)
     if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
     {
         fp->lr = -fp->lr;
-        fp->joint[0]->rotate.y = fp->lr * HALF_PI32;
+        fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * HALF_PI32;
     }
 
     angle = ftCommon_GetStickAngleRadians(fp);

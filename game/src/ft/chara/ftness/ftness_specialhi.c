@@ -25,7 +25,7 @@ void ftNess_SpecialHi_DecThunderTimers(Fighter_Struct *fp)
 }
 
 // 0x80153C88
-void ftNess_SpecialHi_SpawnPKThunder(GObj *fighter_gobj)
+void ftNess_SpecialHi_CreatePKThunder(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -35,12 +35,12 @@ void ftNess_SpecialHi_SpawnPKThunder(GObj *fighter_gobj)
     pos.y = 0.0F;
     pos.z = 0.0F;
 
-    func_ovl2_800EDF24(fp->joint[FTNESS_PK_THUNDER_SPAWN_JOINT], &pos);
+    func_ovl2_800EDF24(fp->joint[FTNESS_PKTHUNDER_SPAWN_JOINT], &pos);
 
     pos.z = 0.0F;
 
     vel.z = 0.0F;
-    vel.y = 60.0F;
+    vel.y = FTNESS_PKTHUNDER_SPAWN_VEL_Y;
     vel.x = 0.0F;
 
     fp->status_vars.ness.specialhi.pk_thunder_gobj = func_ovl3_8016B2C4(fighter_gobj, &pos, &vel);
@@ -56,7 +56,7 @@ bool32 ftNess_SpecialHi_CheckCollidePKThunder(GObj *fighter_gobj)
     f32 collide_x;
     f32 collide_y;
     GObj *pk_thunder_gobj;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     pk_thunder_gobj = fp->status_vars.ness.specialhi.pk_thunder_gobj;
@@ -65,21 +65,21 @@ bool32 ftNess_SpecialHi_CheckCollidePKThunder(GObj *fighter_gobj)
 
     if ((fp->fighter_vars.ness.is_thunder_destroy & TRUE) || (pk_thunder_gobj == NULL)) return FALSE;
 
-    ip = itGetStruct(pk_thunder_gobj);
+    ip = wpGetStruct(pk_thunder_gobj);
 
     fighter_dobj_x = DObjGetStruct(fighter_gobj)->translate.x;
     item_dobj_x = DObjGetStruct(pk_thunder_gobj)->translate.x;
 
     collide_x = (fighter_dobj_x < item_dobj_x) ? -(fighter_dobj_x - item_dobj_x) : (fighter_dobj_x - item_dobj_x);
 
-    if (collide_x < FTNESS_PK_THUNDER_COLLIDE_X)
+    if (collide_x < FTNESS_PKTHUNDER_COLLIDE_X)
     {
         fighter_dobj_y = DObjGetStruct(fighter_gobj)->translate.y + 150.0F;
         item_dobj_y = DObjGetStruct(pk_thunder_gobj)->translate.y;
 
         collide_y = (fighter_dobj_y < item_dobj_y) ? -(fighter_dobj_y - item_dobj_y) : (fighter_dobj_y - item_dobj_y);
 
-        if (collide_y < FTNESS_PK_THUNDER_COLLIDE_Y)
+        if (collide_y < FTNESS_PKTHUNDER_COLLIDE_Y)
         {
             ip->item_vars.pk_thunder.pk_thunder_state = itNessThunderStatus_Collide;
 
@@ -168,8 +168,8 @@ void ftNess_SpecialHi_InitStatusVars(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.ness.specialhi.pk_jibaku_delay = FTNESS_PK_JIBAKU_DELAY;
-    fp->status_vars.ness.specialhi.pk_thunder_end_delay = FTNESS_PK_THUNDER_END_DELAY;
-    fp->status_vars.ness.specialhi.pk_thunder_gravity_delay = FTNESS_PK_THUNDER_GRAVITY_DELAY;
+    fp->status_vars.ness.specialhi.pk_thunder_end_delay = FTNESS_PKTHUNDER_END_DELAY;
+    fp->status_vars.ness.specialhi.pk_thunder_gravity_delay = FTNESS_PKTHUNDER_GRAVITY_DELAY;
     fp->fighter_vars.ness.is_thunder_destroy = FALSE;
     fp->fighter_vars.ness.pk_thunder_trail_id = 0;
 }
@@ -275,7 +275,7 @@ void ftNess_SpecialHi_SetPKThunderDestroy(GObj *fighter_gobj) // Unused
 
     if ((!(fp->fighter_vars.ness.is_thunder_destroy & TRUE)) && (item_gobj != NULL))
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        Weapon_Struct *ip = wpGetStruct(item_gobj);
 
         ip->item_vars.pk_thunder.pk_thunder_state = itNessThunderStatus_Destroy;
     }
@@ -303,11 +303,11 @@ void func_ovl3_801542F4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftNess_SpecialHi_SpawnPKThunder(fighter_gobj);
+    ftNess_SpecialHi_CreatePKThunder(fighter_gobj);
 
-    if (!(fp->is_statupdate_stop_gfx) && (func_ovl2_801029F8(fighter_gobj) != NULL))
+    if (!(fp->is_playing_effect) && (func_ovl2_801029F8(fighter_gobj) != NULL))
     {
-        fp->is_statupdate_stop_gfx = TRUE;
+        fp->is_playing_effect = TRUE;
     }
     fp->jumps_used = fp->attributes->jumps_max;
 }
@@ -333,7 +333,7 @@ void ftNess_SpecialAirHiEnd_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        ftCommon_FallSpecial_SetStatus(fighter_gobj, FTNESS_PK_THUNDER_FALLSPECIAL_DRIFT, FALSE, TRUE, TRUE, FTNESS_PK_THUNDER_LANDING_LAG, FALSE);
+        ftCommon_FallSpecial_SetStatus(fighter_gobj, FTNESS_PKTHUNDER_FALLSPECIAL_DRIFT, FALSE, TRUE, TRUE, FTNESS_PKTHUNDER_LANDING_LAG, FALSE);
     }
 }
 
@@ -745,7 +745,7 @@ void ftNess_SpecialAirHiBound_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        ftCommon_FallSpecial_SetStatus(fighter_gobj, FTNESS_PK_THUNDER_FALLSPECIAL_DRIFT, FALSE, TRUE, TRUE, FTNESS_PK_THUNDER_LANDING_LAG, FALSE);
+        ftCommon_FallSpecial_SetStatus(fighter_gobj, FTNESS_PKTHUNDER_FALLSPECIAL_DRIFT, FALSE, TRUE, TRUE, FTNESS_PKTHUNDER_LANDING_LAG, FALSE);
     }
 }
 

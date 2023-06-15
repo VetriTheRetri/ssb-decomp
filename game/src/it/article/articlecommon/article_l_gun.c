@@ -156,7 +156,7 @@ bool32 jtgt_ovl3_80175914(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80175958(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -165,7 +165,7 @@ bool32 jtgt_ovl3_80175958(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80175988(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -177,7 +177,7 @@ bool32 jtgt_ovl3_80175988(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80175A00(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
@@ -192,14 +192,14 @@ extern ItemSpawnData Item_L_Gun_Ammo_Desc;
 
 GObj* func_ovl3_80175A60(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_L_Gun_Ammo_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_L_Gun_Ammo_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->phys_info.vel.x = ip->lr * ATLGUN_AMMO_VEL_X;
 

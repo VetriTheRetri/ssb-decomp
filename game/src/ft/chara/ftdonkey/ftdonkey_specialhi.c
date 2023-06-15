@@ -35,7 +35,7 @@ void ftDonkey_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 
     func_ovl2_800D8D68(fp, attributes->gravity * gravity_mul, attributes->fall_speed_max);
 
-    ftPhysicsClampDriftStickRange(fp, 0, FTDONKEY_SPINNINGKONG_AIR_ACCEL, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
+    ftPhysics_ClampDriftStickRange(fp, 0, FTDONKEY_SPINNINGKONG_AIR_ACCEL, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
 }
 
 // 0x8015B800

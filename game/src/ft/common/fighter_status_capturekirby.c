@@ -41,7 +41,7 @@ void ftCommon_CaptureKirby_UpdatePosAll(GObj *fighter_gobj)
     capture_fp->status_vars.kirby.specialn.dist.x -= dist.x;
     capture_fp->status_vars.kirby.specialn.dist.y -= dist.y;
 
-    func_ovl3_80161DA8(capture_fp, this_fp->capture_gobj, &dist);
+    ftKirby_SpecialN_AddCaptureDistance(capture_fp, this_fp->capture_gobj, &dist);
 
     DObjGetStruct(fighter_gobj)->translate.x = capture_fp->status_vars.kirby.specialn.dist.x + dist.x;
     DObjGetStruct(fighter_gobj)->translate.y = capture_fp->status_vars.kirby.specialn.dist.y + dist.y;
@@ -124,7 +124,7 @@ void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fight
 
             if (capture_fp->ground_or_air == ground)
             {
-                func_ovl3_80162D80(capture_fp->fighter_gobj);
+                ftKirby_SpecialNWait_SwitchStatusAir(capture_fp->fighter_gobj);
 
                 is_wiggle = TRUE;
 
@@ -138,7 +138,7 @@ void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fight
 
             if (capture_fp->ground_or_air == ground)
             {
-                func_ovl3_80162D80(capture_fp->fighter_gobj);
+                ftKirby_SpecialNWait_SwitchStatusAir(capture_fp->fighter_gobj);
 
                 is_wiggle = TRUE;
 
@@ -161,7 +161,7 @@ void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fight
         {
             if (capture_fp->x9CC != NULL)
             {
-                func_ovl0_800C87F4(capture_fp->joint[0]->next, capture_fp->x9CC, 0.0F);
+                func_ovl0_800C87F4(capture_fp->joint[ftParts_TopN_Joint]->next, capture_fp->x9CC, 0.0F);
             }
         }
     }
@@ -253,11 +253,11 @@ void ftCommon_ThrownKirby_SpawnStarGFX(GObj *fighter_gobj, f32 arg1, f32 arg2)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->is_statupdate_stop_gfx))
+    if (!(fp->is_playing_effect))
     {
         if (func_ovl2_80103CF8(fighter_gobj) != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
         }
     }
 }
@@ -305,7 +305,7 @@ void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
         {
             if (((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby)) && (fp->status_vars.common.capturekirby.is_kirby != FALSE))
             {
-                func_ovl3_80161EB4(fp);
+                ftKirby_SpecialN_InitFighterVars(fp);
 
                 fp->fighter_vars.kirby.copy_id = Ft_Kind_Kirby;
 
@@ -315,12 +315,12 @@ void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
             fp->is_invisible = FALSE;
 
             ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
-            ftCommon_ProcDestroyGFX(fighter_gobj);
+            ftCommon_ProcStopGFX(fighter_gobj);
             ftCommon_ThrownKirby_Escape(fighter_gobj);
 
             if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
             {
-                fp->is_statupdate_stop_gfx = TRUE;
+                fp->is_playing_effect = TRUE;
             }
         }
         else
@@ -338,11 +338,11 @@ void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
                 }
                 else fp->phys_info.vel_air.x = ((fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) * FTCOMMON_THROWNKIRBYSTAR_RELEASE_VEL_X;
 
-                ftCommon_ProcDestroyGFX(fighter_gobj);
+                ftCommon_ProcStopGFX(fighter_gobj);
 
                 if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
                 {
-                    fp->is_statupdate_stop_gfx = TRUE;
+                    fp->is_playing_effect = TRUE;
                 }
                 fp->is_invisible = FALSE;
 

@@ -7,10 +7,18 @@
 #include <game/src/ft/fighter.h>
 #include <game/src/it/item/item.h>
 
+#define FTKIRBY_COPYDAMAGE_LOSECOPY_RANDOM ((float) 1 / 12)  // 0.083333336F
+
 #define FTKIRBY_VACUUM_RELEASE_LAG 40                   // Automatic lag frames before Inhale can be released
-#define FTKIRBY_VACUUM_COPY_STICK_Y_MIN -40             // Minimum control stick threshold on Y-axis to get copy ability
-#define FTKIRBY_VACUUM_RELEASE_DAMAGE 10                // Damage dealt to inhaled victim upon being shot out
+#define FTKIRBY_VACUUM_COPY_STICK_RANGE_MIN -40         // Minimum control stick threshold on Y-axis to get copy ability
+#define FTKIRBY_VACUUM_TURN_STICK_RANGE_MIN 28
+#define FTKIRBY_VACUUM_THROW_DAMAGE 10                  // Damage dealt to inhaled victim upon being shot out
 #define FTKIRBY_VACUUM_COPY_DAMAGE 6                    // Damage dealt to inhaled victim upon being copied
+#define FTKIRBY_VACUUM_COPY_ANGLE F_DEG_TO_RAD(75.0F)   // 1.308997F
+#define FTKIRBY_VACUUM_COPY_VEL_BASE 100.0F
+#define FTKIRBY_VACUUM_THROW_VEL_BASE 120.0F
+#define FTKIRBY_VACUUM_STOPGFX_DIST_MIN 9216.0F
+#define FTKIRBY_VACUUM_SPECIALNWAIT_DIST_MIN 1024.0F
 #define FTKIRBY_VACUUM_GRAVITY_MUL 2.0F                 
 #define FTKIRBY_VACUUM_FALL_MAX_MUL 2.0F
 
@@ -29,8 +37,11 @@
 #define FTKIRBY_STONE_HEALTH_MID 22                     // Begin flashing more rapidly when remaining Stone HP is compromised 
 #define FTKIRBY_STONE_HEALTH_LOW 10                     // Begin flashing fast when remaining Stone HP is critical
 #define FTKIRBY_STONE_COLANIM_ID_HIGH 0x33              // Color Animation ID of high-HP Stone
+#define FTKIRBY_STONE_COLANIM_LENGTH_HIGH 0
 #define FTKIRBY_STONE_COLANIM_ID_MID 0x34               // Color Animation ID of mid-HP Stone
+#define FTKIRBY_STONE_COLANIM_LENGTH_MID 0
 #define FTKIRBY_STONE_COLANIM_ID_LOW 0x35               // Color Animation ID of low-HP Stone
+#define FTKIRBY_STONE_COLANIM_LENGTH_LOW 0
 
 #define FTKIRBY_COPYMARIO_FIREBALL_SPAWN_JOINT 17
 
@@ -126,24 +137,24 @@ typedef enum ftKirbyAction
     ftStatus_Kirby_SpecialLwEnd,
     ftStatus_Kirby_SpecialAirLwStart,
     ftStatus_Kirby_SpecialAirLwHold,
-    ftStatus_Kirby_SpecialAirLwLand,
+    ftStatus_Kirby_SpecialAirLwLanding,
     ftStatus_Kirby_SpecialAirLwFall,
     ftStatus_Kirby_SpecialAirLwEnd,
     ftStatus_Kirby_SpecialNStart,
     ftStatus_Kirby_SpecialNLoop,
     ftStatus_Kirby_SpecialNEnd,
-    ftStatus_Kirby_SpecialNHit,
     ftStatus_Kirby_SpecialNCatch,
-    ftStatus_Kirby_SpecialNRelease,
+    ftStatus_Kirby_SpecialNEat,
+    ftStatus_Kirby_SpecialNThrow,
     ftStatus_Kirby_SpecialNWait,
     ftStatus_Kirby_SpecialNTurn,
     ftStatus_Kirby_SpecialNCopy,
     ftStatus_Kirby_SpecialAirNStart,
     ftStatus_Kirby_SpecialAirNLoop,
     ftStatus_Kirby_SpecialAirNEnd,
-    ftStatus_Kirby_SpecialAirNHit,
     ftStatus_Kirby_SpecialAirNCatch,
-    ftStatus_Kirby_SpecialAirNRelease,
+    ftStatus_Kirby_SpecialAirNEat,
+    ftStatus_Kirby_SpecialAirNThrow,
     ftStatus_Kirby_SpecialAirNWait,
     ftStatus_Kirby_SpecialAirNTurn,
     ftStatus_Kirby_SpecialAirNCopy,
@@ -169,7 +180,7 @@ typedef enum ftKirbyAction
 typedef struct ftKirbyCopyData
 {
     u16 copy_id;
-    s16 unk_0x2;
+    s16 copy_hat_rs;
     u32 unk_0x4;
     s32 star_damage;
 

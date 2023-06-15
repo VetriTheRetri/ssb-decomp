@@ -5,7 +5,7 @@
 // PK Fire (SpecialN/SpecialAirN)
 
 // 0x80153950
-void ftNess_SpecialN_SpawnPKFire(GObj *fighter_gobj) // PK Fire setup
+void ftNess_SpecialN_ProcAccessory(GObj *fighter_gobj) // PK Fire setup
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -20,25 +20,25 @@ void ftNess_SpecialN_SpawnPKFire(GObj *fighter_gobj) // PK Fire setup
         pos.y = 0.0F;
         pos.z = 0.0F;
 
-        func_ovl2_800EDF24(fp->joint[FTNESS_PK_FIRE_SPAWN_JOINT], &pos);
+        func_ovl2_800EDF24(fp->joint[FTNESS_PKFIRE_SPAWN_JOINT], &pos);
 
-        pos.x += FTNESS_PK_FIRE_SPAWN_OFF_X * (f32)fp->lr;
-        pos.y += FTNESS_PK_FIRE_SPAWN_OFF_Y;
+        pos.x += FTNESS_PKFIRE_SPAWN_OFF_X * fp->lr;
+        pos.y += FTNESS_PKFIRE_SPAWN_OFF_Y;
         pos.z = 0.0F;
 
         if (fp->ground_or_air == air)
         {
             vel.z = 0.0F;
-            angle = FTNESS_PK_FIRE_SPARK_ANGLE_AIR;
-            vel.x = cosf(FTNESS_PK_FIRE_SPARK_ANGLE_AIR) * FTNESS_PK_FIRE_SPARK_VEL_AIR * (f32)fp->lr;
-            vel.y = __sinf(FTNESS_PK_FIRE_SPARK_ANGLE_AIR) * FTNESS_PK_FIRE_SPARK_VEL_AIR;
+            angle = FTNESS_PKFIRE_SPARK_ANGLE_AIR;
+            vel.x = cosf(FTNESS_PKFIRE_SPARK_ANGLE_AIR) * FTNESS_PKFIRE_SPARK_VEL_AIR * fp->lr;
+            vel.y = __sinf(FTNESS_PKFIRE_SPARK_ANGLE_AIR) * FTNESS_PKFIRE_SPARK_VEL_AIR;
         }
         else
         {
             vel.z = 0.0F;
-            angle = FTNESS_PK_FIRE_SPARK_ANGLE_GROUND;
-            vel.x = cosf(FTNESS_PK_FIRE_SPARK_ANGLE_GROUND) * FTNESS_PK_FIRE_SPARK_VEL_GROUND * (f32)fp->lr;
-            vel.y = __sinf(FTNESS_PK_FIRE_SPARK_ANGLE_GROUND) * FTNESS_PK_FIRE_SPARK_VEL_GROUND;
+            angle = FTNESS_PKFIRE_SPARK_ANGLE_GROUND;
+            vel.x = cosf(FTNESS_PKFIRE_SPARK_ANGLE_GROUND) * FTNESS_PKFIRE_SPARK_VEL_GROUND * fp->lr;
+            vel.y = __sinf(FTNESS_PKFIRE_SPARK_ANGLE_GROUND) * FTNESS_PKFIRE_SPARK_VEL_GROUND;
         }
 
         func_ovl3_8016AC78(fighter_gobj, &pos, &vel, angle); // Spawn PK Fire
@@ -66,7 +66,7 @@ void ftNess_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALN_STATUPDATE_FLAGS); // Action State Change
 
-    fp->proc_accessory = ftNess_SpecialN_SpawnPKFire;
+    fp->proc_accessory = ftNess_SpecialN_ProcAccessory;
 }
 
 // 0x80153B5C
@@ -80,7 +80,7 @@ void ftNess_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_accessory = ftNess_SpecialN_SpawnPKFire;
+    fp->proc_accessory = ftNess_SpecialN_ProcAccessory;
 }
 
 // 0x80153BB8
@@ -89,13 +89,13 @@ void ftNess_SpecialN_InitStatusVars(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = FALSE;
-    fp->proc_accessory = ftNess_SpecialN_SpawnPKFire;
+    fp->proc_accessory = ftNess_SpecialN_ProcAccessory;
 }
 
 // 0x80153BD0
 void ftNess_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftNess_SpecialN_InitStatusVars(fighter_gobj);
 }
@@ -103,7 +103,7 @@ void ftNess_SpecialN_SetStatus(GObj *fighter_gobj)
 // 0x80153C10
 void ftNess_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftNess_SpecialN_InitStatusVars(fighter_gobj);
 }

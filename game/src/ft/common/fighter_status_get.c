@@ -301,9 +301,9 @@ void ftCommon_LiftTurn_UpdateModelYaw(Fighter_Struct *fp)
 {
     fp->status_vars.common.lift.turn_frames--;
 
-    fp->joint[0]->rotate.y += FTCOMMON_LIFT_TURN_STEP;
+    fp->joint[ftParts_TopN_Joint]->rotate.y += FTCOMMON_LIFT_TURN_STEP;
 
-    func_ovl2_800EB528(fp->joint[0]);
+    func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
 
     if (fp->status_vars.common.lift.turn_frames == (FTCOMMON_LIFT_TURN_FRAMES / 2))
     {

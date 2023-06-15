@@ -4,7 +4,7 @@ void func_ovl3_80156E60(Fighter_Struct *fp)
 {
     if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
     {
-        func_ovl3_8016800C(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
+        wpMain_DestroyWeapon(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
 
         fp->status_vars.kirby.copysamus_specialn.charge_gobj = NULL;
     }
@@ -83,7 +83,7 @@ void func_ovl3_8015704C(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
 
     fp->proc_damage = func_ovl3_80156E98;
 }
@@ -93,7 +93,7 @@ void func_ovl3_801570A8(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMapCollide_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[0]->unk_dobj_0x78, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
     func_ovl2_800D8EB8(fp);
 
     fp->proc_damage = func_ovl3_80156E98;
@@ -124,7 +124,7 @@ void func_ovl3_80157114(GObj *fighter_gobj)
 
             else if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
             {
-                Item_Struct *ip = itGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
+                Weapon_Struct *ip = wpGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
 
                 ip->item_vars.charge_shot.charge_size = fp->fighter_vars.kirby.copysamus_charge_level;
             }
@@ -182,7 +182,7 @@ void func_ovl3_80157314(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
     f32 charge_recoil_x;
     f32 charge_recoil_y;
 
@@ -194,7 +194,7 @@ void func_ovl3_80157314(GObj *fighter_gobj)
 
         if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
         {
-            ip = itGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
+            ip = wpGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
             ftCommon_StopLoopSFX(fp);
 
             DObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;

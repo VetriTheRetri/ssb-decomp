@@ -3,7 +3,7 @@
 // 0x8013E070
 void ftCommon_Wait_ProcInterrupt(GObj *fighter_gobj)
 {
-    !ftStatus_CheckInterruptAll(fighter_gobj);
+    !ftCheckInterruptAll(fighter_gobj);
 }
 
 // 0x8013E1C8

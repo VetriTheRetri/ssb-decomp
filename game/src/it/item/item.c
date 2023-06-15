@@ -5,37 +5,36 @@
 #include <game/src/gm/gmmatch.h>
 #include <game/src/it/article/article.h>
 
-extern Item_Struct *D_ovl3_8018CFF0;
-extern s32 D_ovl3_8018CFF8;
+extern Weapon_Struct *D_ovl3_8018CFF0;
+extern u32 D_ovl3_8018CFF8;
 extern s32 dbObjDisplayStatus_Item;
 
 void func_ovl3_801654B0(void)
 {
-    Item_Struct *ip;
+    Weapon_Struct *wp;
     s32 i;
 
-    D_ovl3_8018CFF0 = ip = hal_alloc(sizeof(Item_Struct) * ITEM_ALLOC_MAX, 8U);
+    D_ovl3_8018CFF0 = wp = hal_alloc(sizeof(Weapon_Struct) * WEAPON_ALLOC_MAX, 8U);
 
-    for (i = 0; i < (ITEM_ALLOC_MAX - 1); i++)
+    for (i = 0; i < (WEAPON_ALLOC_MAX - 1); i++)
     {
-        ip[i].ip_alloc_next = &ip[i + 1];
+        wp[i].wp_alloc_next = &wp[i + 1];
     }
-    if (ip != NULL)
+    if (wp != NULL)
     {
-        ip[i].ip_alloc_next = NULL;
+        wp[i].wp_alloc_next = NULL;
     }
     D_ovl3_8018CFF8 = 1;
     dbObjDisplayStatus_Item = dbObjDisplayStatus_Master;
 }
 
-
 // Not the first function in this file
 
 u32 func_ovl3_801655A0(void)
 {
-    u32 group_id = D_ovl3_8018CFF8;
+    u32 group_id = D_ovl3_8018CFF8++;
 
-    if ((D_ovl3_8018CFF8 += 1) == 0)
+    if (D_ovl3_8018CFF8 == 0)
     {
         D_ovl3_8018CFF8++;
     }
@@ -44,20 +43,21 @@ u32 func_ovl3_801655A0(void)
 
 extern s32 D_ovl2_80131398;
 
-GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3f *spawn_pos, u32 flags)
+// 0x801655C8
+GObj* wpManager_CreateWeapon(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
     GObj *item_gobj;
     void (*cb)(GObj*);
     ItemHitDesc *it_hit_desc;
-    Item_Struct *ip;
-    Item_Struct *owner_ip;
+    Weapon_Struct *wp;
+    Weapon_Struct *owner_wp;
     Article_Struct *ap;
     Fighter_Struct *fp;
     s32 unused[8];
 
-    ip = func_ovl3_80165558(spawn_gobj);
+    wp = func_ovl3_80165558(spawn_gobj);
 
-    if (ip == NULL)
+    if (wp == NULL)
     {
         return NULL;
     }
@@ -65,162 +65,162 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
     if (item_gobj == NULL)
     {
-        func_ovl3_80165588(ip);
+        wpManager_EjectWeaponStruct(wp);
         return NULL;
     }
     it_hit_desc = *(uintptr_t*)item_status_desc->p_item + (intptr_t)item_status_desc->offset_it_hit; // I hope this is correct?
-    item_gobj->user_data = ip;
-    ip->item_gobj = item_gobj;
-    ip->it_kind = item_status_desc->it_kind;
+    item_gobj->user_data = wp;
+    wp->item_gobj = item_gobj;
+    wp->it_kind = item_status_desc->it_kind;
 
-    switch (flags & ITEM_MASK_SPAWN_ALL)
+    switch (flags & WEAPON_MASK_SPAWN_ALL)
     {
-    case ITEM_MASK_SPAWN_FIGHTER: // Items spawned by fighters
+    case WEAPON_MASK_SPAWN_FIGHTER: // Items spawned by fighters
         fp = ftGetStruct(spawn_gobj);
-        ip->owner_gobj = spawn_gobj;
-        ip->team = fp->team;
-        ip->port_id = fp->port_id;
-        ip->handicap = fp->handicap;
-        ip->player_number = fp->player_number;
-        ip->lr = fp->lr;
+        wp->owner_gobj = spawn_gobj;
+        wp->team = fp->team;
+        wp->port_id = fp->port_id;
+        wp->handicap = fp->handicap;
+        wp->player_number = fp->player_number;
+        wp->lr = fp->lr;
 
-        ip->display_state = fp->display_state;
+        wp->display_state = fp->display_state;
 
-        ip->item_hit.stale = gmCommon_DamageGetStaleMul(fp->port_id, fp->attack_id, fp->motion_count);
-        ip->item_hit.attack_id = fp->attack_id;
-        ip->item_hit.motion_count = fp->motion_count;
-        ip->item_hit.stat_flags = fp->stat_flags;
-        ip->item_hit.stat_count = fp->stat_count;
+        wp->item_hit.stale = gmCommon_DamageGetStaleMul(fp->port_id, fp->attack_id, fp->motion_count);
+        wp->item_hit.attack_id = fp->attack_id;
+        wp->item_hit.motion_count = fp->motion_count;
+        wp->item_hit.stat_flags = fp->stat_flags;
+        wp->item_hit.stat_count = fp->stat_count;
         break;
 
-    case ITEM_MASK_SPAWN_ITEM: // Items spawned by other items
-        owner_ip = itGetStruct(spawn_gobj);
-        ip->owner_gobj = owner_ip->owner_gobj;
-        ip->team = owner_ip->team;
-        ip->port_id = owner_ip->port_id;
-        ip->handicap = owner_ip->handicap;
-        ip->player_number = owner_ip->player_number;
-        ip->lr = owner_ip->lr;
+    case WEAPON_MASK_SPAWN_WEAPON: // Items spawned by other items
+        owner_wp = wpGetStruct(spawn_gobj);
+        wp->owner_gobj = owner_wp->owner_gobj;
+        wp->team = owner_wp->team;
+        wp->port_id = owner_wp->port_id;
+        wp->handicap = owner_wp->handicap;
+        wp->player_number = owner_wp->player_number;
+        wp->lr = owner_wp->lr;
 
-        ip->display_state = owner_ip->display_state;
+        wp->display_state = owner_wp->display_state;
 
-        ip->item_hit.stale = owner_ip->item_hit.stale;
-        ip->item_hit.attack_id = owner_ip->item_hit.attack_id;
-        ip->item_hit.motion_count = owner_ip->item_hit.motion_count;
-        ip->item_hit.stat_flags = owner_ip->item_hit.stat_flags;
-        ip->item_hit.stat_count = owner_ip->item_hit.stat_count;
+        wp->item_hit.stale = owner_wp->item_hit.stale;
+        wp->item_hit.attack_id = owner_wp->item_hit.attack_id;
+        wp->item_hit.motion_count = owner_wp->item_hit.motion_count;
+        wp->item_hit.stat_flags = owner_wp->item_hit.stat_flags;
+        wp->item_hit.stat_count = owner_wp->item_hit.stat_count;
         break;
 
-    case ITEM_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
+    case WEAPON_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
         ap = atGetStruct(spawn_gobj);
-        ip->owner_gobj = ap->owner_gobj;
-        ip->team = ap->team;
-        ip->port_id = ap->port_id;
-        ip->handicap = ap->handicap;
-        ip->player_number = ap->player_number;
-        ip->lr = ap->lr;
+        wp->owner_gobj = ap->owner_gobj;
+        wp->team = ap->team;
+        wp->port_id = ap->port_id;
+        wp->handicap = ap->handicap;
+        wp->player_number = ap->player_number;
+        wp->lr = ap->lr;
 
-        ip->display_state = ap->display_state;
+        wp->display_state = ap->display_state;
 
-        ip->item_hit.stale = ap->article_hit.stale;
-        ip->item_hit.attack_id = ap->article_hit.attack_id;
-        ip->item_hit.motion_count = ap->article_hit.stat_count;
-        ip->item_hit.stat_flags = ap->article_hit.stat_flags;
-        ip->item_hit.stat_count = ap->article_hit.stat_count;
+        wp->item_hit.stale = ap->article_hit.stale;
+        wp->item_hit.attack_id = ap->article_hit.attack_id;
+        wp->item_hit.motion_count = ap->article_hit.stat_count;
+        wp->item_hit.stat_flags = ap->article_hit.stat_flags;
+        wp->item_hit.stat_count = ap->article_hit.stat_count;
         break;
 
     default: // Items spawned independently 
-    case ITEM_MASK_SPAWN_GROUND:
-        ip->owner_gobj = NULL;
-        ip->team = ITEM_TEAM_DEFAULT;
-        ip->port_id = ITEM_PORT_DEFAULT;
-        ip->handicap = ITEM_UNK_DEFAULT;
-        ip->player_number = 0;
-        ip->lr = RIGHT;
+    case WEAPON_MASK_SPAWN_GROUND:
+        wp->owner_gobj = NULL;
+        wp->team = WEAPON_TEAM_DEFAULT;
+        wp->port_id = WEAPON_PORT_DEFAULT;
+        wp->handicap = WEAPON_HANDICAP_DEFAULT;
+        wp->player_number = 0;
+        wp->lr = RIGHT;
 
-        ip->display_state = dbObjDisplayStatus_Item;
+        wp->display_state = dbObjDisplayStatus_Item;
 
-        ip->item_hit.attack_id = 0;
-        ip->item_hit.stale = ITEM_STALE_DEFAULT;
-        ip->item_hit.motion_count = gmCommon_MotionCountInc();
-        ip->item_hit.stat_flags.attack_group_id = 0;
-        ip->item_hit.stat_flags.is_smash_attack = ip->item_hit.stat_flags.is_ground_or_air = ip->item_hit.stat_flags.is_special_attack = FALSE;
-        ip->item_hit.stat_count = gmCommon_StatUpdateCountInc();
+        wp->item_hit.attack_id = 0;
+        wp->item_hit.stale = WEAPON_STALE_DEFAULT;
+        wp->item_hit.motion_count = gmCommon_MotionCountInc();
+        wp->item_hit.stat_flags.attack_group_id = 0;
+        wp->item_hit.stat_flags.is_smash_attack = wp->item_hit.stat_flags.is_ground_or_air = wp->item_hit.stat_flags.is_special_attack = FALSE;
+        wp->item_hit.stat_count = gmCommon_StatUpdateCountInc();
         break;
     }
-    ip->item_hit.update_state = gmHitCollision_UpdateState_New;
+    wp->item_hit.update_state = gmHitCollision_UpdateState_New;
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel.z = 0.0F;
+    wp->phys_info.vel.y = 0.0F;
+    wp->phys_info.vel.x = 0.0F;
 
-    ip->phys_info.vel_ground = 0.0F;
+    wp->phys_info.vel_ground = 0.0F;
 
-    ip->item_hit.damage = it_hit_desc->damage;
+    wp->item_hit.damage = it_hit_desc->damage;
 
-    ip->item_hit.element = it_hit_desc->element;
+    wp->item_hit.element = it_hit_desc->element;
 
-    ip->item_hit.offset[0].x = it_hit_desc->offset[0].x;
-    ip->item_hit.offset[0].y = it_hit_desc->offset[0].y;
-    ip->item_hit.offset[0].z = it_hit_desc->offset[0].z;
-    ip->item_hit.offset[1].x = it_hit_desc->offset[1].x;
-    ip->item_hit.offset[1].y = it_hit_desc->offset[1].y;
-    ip->item_hit.offset[1].z = it_hit_desc->offset[1].z;
+    wp->item_hit.offset[0].x = it_hit_desc->offset[0].x;
+    wp->item_hit.offset[0].y = it_hit_desc->offset[0].y;
+    wp->item_hit.offset[0].z = it_hit_desc->offset[0].z;
+    wp->item_hit.offset[1].x = it_hit_desc->offset[1].x;
+    wp->item_hit.offset[1].y = it_hit_desc->offset[1].y;
+    wp->item_hit.offset[1].z = it_hit_desc->offset[1].z;
 
-    ip->item_hit.size = it_hit_desc->size * 0.5F;
+    wp->item_hit.size = it_hit_desc->size * 0.5F;
 
-    ip->item_hit.angle = it_hit_desc->angle;
+    wp->item_hit.angle = it_hit_desc->angle;
 
-    ip->item_hit.knockback_scale = it_hit_desc->knockback_scale;
-    ip->item_hit.knockback_weight = it_hit_desc->knockback_weight;
-    ip->item_hit.knockback_base = it_hit_desc->knockback_base;
+    wp->item_hit.knockback_scale = it_hit_desc->knockback_scale;
+    wp->item_hit.knockback_weight = it_hit_desc->knockback_weight;
+    wp->item_hit.knockback_base = it_hit_desc->knockback_base;
 
-    ip->item_hit.clang = it_hit_desc->clang;
-    ip->item_hit.shield_damage = it_hit_desc->shield_damage;
+    wp->item_hit.clang = it_hit_desc->clang;
+    wp->item_hit.shield_damage = it_hit_desc->shield_damage;
 
-    ip->item_hit.hit_sfx = it_hit_desc->sfx;
+    wp->item_hit.hit_sfx = it_hit_desc->sfx;
 
-    ip->item_hit.priority = it_hit_desc->priority;
-    ip->item_hit.flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
-    ip->item_hit.flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
+    wp->item_hit.priority = it_hit_desc->priority;
+    wp->item_hit.flags_0x48_b1 = it_hit_desc->flags_0x2F_b0;
+    wp->item_hit.flags_0x48_b2 = it_hit_desc->flags_0x2F_b1;
 
-    ip->item_hit.can_rehit = FALSE;
+    wp->item_hit.can_rehit = FALSE;
 
-    ip->item_hit.can_hop = it_hit_desc->can_hop;
-    ip->item_hit.can_reflect = it_hit_desc->can_reflect;
-    ip->item_hit.can_absorb = it_hit_desc->can_absorb;
+    wp->item_hit.can_hop = it_hit_desc->can_hop;
+    wp->item_hit.can_reflect = it_hit_desc->can_reflect;
+    wp->item_hit.can_absorb = it_hit_desc->can_absorb;
 
-    ip->item_hit.noheal = FALSE;
+    wp->item_hit.noheal = FALSE;
 
-    ip->item_hit.can_shield = it_hit_desc->can_shield;
-    ip->item_hit.hitbox_count = it_hit_desc->hitbox_count;
+    wp->item_hit.can_shield = it_hit_desc->can_shield;
+    wp->item_hit.hitbox_count = it_hit_desc->hitbox_count;
 
-    ip->item_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
+    wp->item_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
 
-    func_ovl3_80168158(ip);
+    func_ovl3_80168158(wp);
 
-    ip->hit_victim_damage = 0;
-    ip->hit_reflect_damage = 0;
-    ip->hit_attack_damage = 0;
-    ip->hit_shield_damage = 0;
-    ip->reflect_gobj = NULL;
-    ip->absorb_gobj = NULL;
+    wp->hit_victim_damage = 0;
+    wp->hit_reflect_damage = 0;
+    wp->hit_attack_damage = 0;
+    wp->hit_shield_damage = 0;
+    wp->reflect_gobj = NULL;
+    wp->absorb_gobj = NULL;
 
-    ip->is_hitlag_victim = FALSE;
-    ip->is_hitlag_item = FALSE;
-    ip->is_camera_follow = FALSE;
+    wp->is_hitlag_victim = FALSE;
+    wp->is_hitlag_item = FALSE;
+    wp->is_camera_follow = FALSE;
 
-    ip->group_id = 0;
+    wp->group_id = 0;
 
-    ip->is_static_damage = FALSE;
+    wp->is_static_damage = FALSE;
 
-    ip->p_sfx = NULL;
-    ip->sfx_id = 0;
+    wp->p_sfx = NULL;
+    wp->sfx_id = 0;
 
-    ip->shield_collide_angle = 0.0F;
-    ip->shield_collide_vec.z = 0.0F;
-    ip->shield_collide_vec.y = 0.0F;
-    ip->shield_collide_vec.x = 0.0F;
+    wp->shield_collide_angle = 0.0F;
+    wp->shield_collide_vec.z = 0.0F;
+    wp->shield_collide_vec.y = 0.0F;
+    wp->shield_collide_vec.x = 0.0F;
 
     if (item_status_desc->unk_0x0 & 1)
     {
@@ -246,67 +246,67 @@ GObj* func_ovl3_801655C8(GObj *spawn_gobj, ItemSpawnData *item_status_desc, Vec3
 
         func_8000BED8(item_gobj, it_hit_desc->unk_0x8, it_hit_desc->unk_0xC, 0.0F);
     }
-    ip->coll_data.p_translate = &DObjGetStruct(item_gobj)->translate;
-    ip->coll_data.p_lr = &ip->lr;
+    wp->coll_data.p_translate = &DObjGetStruct(item_gobj)->translate;
+    wp->coll_data.p_lr = &wp->lr;
 
-    ip->coll_data.object_coll.top = (f32)it_hit_desc->objectcoll_top;
-    ip->coll_data.object_coll.center = (f32)it_hit_desc->objectcoll_center;
-    ip->coll_data.object_coll.bottom = (f32)it_hit_desc->objectcoll_bottom;
-    ip->coll_data.object_coll.width = (f32)it_hit_desc->objectcoll_width;
-    ip->coll_data.p_object_coll = &ip->coll_data.object_coll;
+    wp->coll_data.object_coll.top = (f32)it_hit_desc->objectcoll_top;
+    wp->coll_data.object_coll.center = (f32)it_hit_desc->objectcoll_center;
+    wp->coll_data.object_coll.bottom = (f32)it_hit_desc->objectcoll_bottom;
+    wp->coll_data.object_coll.width = (f32)it_hit_desc->objectcoll_width;
+    wp->coll_data.p_object_coll = &wp->coll_data.object_coll;
 
-    ip->coll_data.ignore_line_id = -1;
+    wp->coll_data.ignore_line_id = -1;
 
-    ip->coll_data.ground_line_id = -1;
-    ip->coll_data.ceil_line_id = -1;
-    ip->coll_data.rwall_line_id = -1;
-    ip->coll_data.lwall_line_id = -1;
+    wp->coll_data.ground_line_id = -1;
+    wp->coll_data.ceil_line_id = -1;
+    wp->coll_data.rwall_line_id = -1;
+    wp->coll_data.lwall_line_id = -1;
 
-    ip->coll_data.wall_flag = D_ovl2_80131398;
-    ip->coll_data.coll_mask = 0;
+    wp->coll_data.wall_flag = D_ovl2_80131398;
+    wp->coll_data.coll_mask = 0;
 
-    ip->coll_data.vel_push.x = 0.0F;
-    ip->coll_data.vel_push.y = 0.0F;
-    ip->coll_data.vel_push.z = 0.0F;
+    wp->coll_data.vel_push.x = 0.0F;
+    wp->coll_data.vel_push.y = 0.0F;
+    wp->coll_data.vel_push.z = 0.0F;
 
     func_80008188(item_gobj, func_ovl3_801662BC, 1U, 3U);
     func_80008188(item_gobj, func_ovl3_80166954, 1U, 1U);
     func_80008188(item_gobj, func_ovl3_80166BE4, 1U, 0U);
 
-    ip->proc_update = item_status_desc->proc_update;
-    ip->proc_map = item_status_desc->proc_map;
-    ip->proc_hit = item_status_desc->proc_hit;
-    ip->proc_shield = item_status_desc->proc_shield;
-    ip->proc_hop = item_status_desc->proc_hop;
-    ip->proc_setoff = item_status_desc->proc_setoff;
-    ip->proc_reflector = item_status_desc->proc_reflector;
-    ip->proc_absorb = item_status_desc->proc_absorb;
-    ip->proc_dead = NULL;
+    wp->proc_update = item_status_desc->proc_update;
+    wp->proc_map = item_status_desc->proc_map;
+    wp->proc_hit = item_status_desc->proc_hit;
+    wp->proc_shield = item_status_desc->proc_shield;
+    wp->proc_hop = item_status_desc->proc_hop;
+    wp->proc_setoff = item_status_desc->proc_setoff;
+    wp->proc_reflector = item_status_desc->proc_reflector;
+    wp->proc_absorb = item_status_desc->proc_absorb;
+    wp->proc_dead = NULL;
 
-    ip->coll_data.pos_curr = DObjGetStruct(item_gobj)->translate = *spawn_pos;
+    wp->coll_data.pos_curr = DObjGetStruct(item_gobj)->translate = *spawn_pos;
 
-    if (flags & ITEM_FLAG_PROJECT)
+    if (flags & WEAPON_FLAG_PROJECT)
     {
-        switch (flags & ITEM_MASK_SPAWN_ALL)
+        switch (flags & WEAPON_MASK_SPAWN_ALL)
         {
         default:
-        case ITEM_MASK_SPAWN_GROUND:
+        case WEAPON_MASK_SPAWN_GROUND:
             break;
 
-        case ITEM_MASK_SPAWN_FIGHTER:
+        case WEAPON_MASK_SPAWN_FIGHTER:
             func_ovl2_800DF09C(item_gobj, ftGetStruct(spawn_gobj)->coll_data.p_translate, &ftGetStruct(spawn_gobj)->coll_data);
             break;
 
-        case ITEM_MASK_SPAWN_ITEM:
-            func_ovl2_800DF09C(item_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
+        case WEAPON_MASK_SPAWN_WEAPON:
+            func_ovl2_800DF09C(item_gobj, wpGetStruct(spawn_gobj)->coll_data.p_translate, &wpGetStruct(spawn_gobj)->coll_data);
             break;
 
-        case ITEM_MASK_SPAWN_ARTICLE:
+        case WEAPON_MASK_SPAWN_ARTICLE:
             func_ovl2_800DF09C(item_gobj, atGetStruct(spawn_gobj)->coll_data.p_translate, &atGetStruct(spawn_gobj)->coll_data);
             break;
         }
     }
-    ip->ground_or_air = air;
+    wp->ground_or_air = air;
 
     func_ovl3_80165F60(item_gobj);
 
@@ -327,19 +327,19 @@ void func_ovl3_80165ED0(DObj *joint, Vec3f *vec)
 
 void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     s32 i;
 
-    for (i = 0; i < ip->item_hit.hitbox_count; i++)
+    for (i = 0; i < wp->item_hit.hitbox_count; i++)
     {
-        ItemHitUnk *it_hit_unk = &ip->item_hit.item_hit_unk[i];
+        ItemHitUnk *it_hit_unk = &wp->item_hit.item_hit_unk[i];
 
-        Vec3f *offset = &ip->item_hit.offset[i];
+        Vec3f *offset = &wp->item_hit.offset[i];
 
         Vec3f *translate = &joint->translate;
 
-        switch (ip->item_hit.update_state)
+        switch (wp->item_hit.update_state)
         {
         default:
         case gmHitCollision_UpdateState_Disable:
@@ -359,13 +359,13 @@ void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
             {
                 func_ovl3_80165ED0(joint, &it_hit_unk->pos);
             }
-            ip->item_hit.update_state = gmHitCollision_UpdateState_Transfer;
+            wp->item_hit.update_state = gmHitCollision_UpdateState_Transfer;
             it_hit_unk->unk_0x18 = 0;
             it_hit_unk->unk_0x5C = 0;
             break;
 
         case gmHitCollision_UpdateState_Transfer:
-            ip->item_hit.update_state = gmHitCollision_UpdateState_Interpolate;
+            wp->item_hit.update_state = gmHitCollision_UpdateState_Interpolate;
 
         case gmHitCollision_UpdateState_Interpolate:
 
@@ -392,16 +392,16 @@ void func_ovl3_80165F60(GObj *item_gobj) // Update hitbox(es?)
 
 void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(item_gobj);
     ItemHitArray *targets;
     Item_Hit *it_hit;
     s32 i;
 
-    it_hit = &ip->item_hit;
+    it_hit = &wp->item_hit;
 
     if (it_hit->update_state != gmHitCollision_UpdateState_Disable)
     {
-        for (i = 0; i < ARRAY_COUNT(ip->item_hit.hit_targets); i++)
+        for (i = 0; i < ARRAY_COUNT(wp->item_hit.hit_targets); i++)
         {
             targets = &it_hit->hit_targets[i];
 
@@ -427,19 +427,19 @@ void func_ovl3_801661E0(GObj *item_gobj) // Set hitbox victim array
 
 void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, physics, collision, despawn check)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(item_gobj);
     Vec3f *translate;
     DObj *joint;
 
-    if (!(ip->is_hitlag_item))
+    if (!(wp->is_hitlag_item))
     {
         func_8000DF34(item_gobj);
 
-        if (ip->proc_update != NULL)
+        if (wp->proc_update != NULL)
         {
-            if (ip->proc_update(item_gobj) != FALSE)
+            if (wp->proc_update(item_gobj) != FALSE)
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
@@ -447,51 +447,51 @@ void func_ovl3_801662BC(GObj *item_gobj) // Run item logic pass 1 (animation, ph
 
         translate = &DObjGetStruct(item_gobj)->translate;
 
-        ip->coll_data.pos_curr = *translate;
+        wp->coll_data.pos_curr = *translate;
 
-        translate->x += ip->phys_info.vel.x;
-        translate->y += ip->phys_info.vel.y;
-        translate->z += ip->phys_info.vel.z;
+        translate->x += wp->phys_info.vel.x;
+        translate->y += wp->phys_info.vel.y;
+        translate->z += wp->phys_info.vel.z;
 
-        ip->coll_data.pos_prev.x = translate->x - ip->coll_data.pos_curr.x;
-        ip->coll_data.pos_prev.y = translate->y - ip->coll_data.pos_curr.y;
-        ip->coll_data.pos_prev.z = translate->z - ip->coll_data.pos_curr.z;
+        wp->coll_data.pos_prev.x = translate->x - wp->coll_data.pos_curr.x;
+        wp->coll_data.pos_prev.y = translate->y - wp->coll_data.pos_curr.y;
+        wp->coll_data.pos_prev.z = translate->z - wp->coll_data.pos_curr.z;
 
-        if ((ip->ground_or_air == ground) && (ip->coll_data.ground_line_id != -1) && (ip->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(ip->coll_data.ground_line_id) != FALSE))
+        if ((wp->ground_or_air == ground) && (wp->coll_data.ground_line_id != -1) && (wp->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(wp->coll_data.ground_line_id) != FALSE))
         {
-            func_ovl2_800FA7B8(ip->coll_data.ground_line_id, &ip->coll_data.pos_correct);
+            func_ovl2_800FA7B8(wp->coll_data.ground_line_id, &wp->coll_data.pos_correct);
 
-            translate->x += ip->coll_data.pos_correct.x;
-            translate->y += ip->coll_data.pos_correct.y;
-            translate->z += ip->coll_data.pos_correct.z;
+            translate->x += wp->coll_data.pos_correct.x;
+            translate->y += wp->coll_data.pos_correct.y;
+            translate->z += wp->coll_data.pos_correct.z;
         }
         else
         {
-            ip->coll_data.pos_correct.z = 0.0F;
-            ip->coll_data.pos_correct.y = 0.0F;
-            ip->coll_data.pos_correct.x = 0.0F;
+            wp->coll_data.pos_correct.z = 0.0F;
+            wp->coll_data.pos_correct.y = 0.0F;
+            wp->coll_data.pos_correct.x = 0.0F;
         }
 
         if ((translate->y < Ground_Info->blastzone_bottom) || (Ground_Info->blastzone_right < translate->x) || (translate->x < Ground_Info->blastzone_left) || (Ground_Info->blastzone_top < translate->y) || (translate->z < -20000.0F) || (20000.0F < translate->z))
         {
-            if ((ip->proc_dead == NULL) || (ip->proc_dead(item_gobj) != FALSE))
+            if ((wp->proc_dead == NULL) || (wp->proc_dead(item_gobj) != FALSE))
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
 
-        if (ip->proc_map != NULL)
+        if (wp->proc_map != NULL)
         {
-            ip->coll_data.coll_mask_prev = ip->coll_data.coll_mask;
-            ip->coll_data.coll_mask = 0U;
-            ip->coll_data.unk_0x64 = 0;
-            ip->coll_data.coll_type = 0;
-            ip->coll_data.unk_0x58 = 0;
+            wp->coll_data.coll_mask_prev = wp->coll_data.coll_mask;
+            wp->coll_data.coll_mask = 0U;
+            wp->coll_data.unk_0x64 = 0;
+            wp->coll_data.coll_type = 0;
+            wp->coll_data.unk_0x58 = 0;
 
-            if (ip->proc_map(item_gobj) != FALSE)
+            if (wp->proc_map(item_gobj) != FALSE)
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
@@ -520,12 +520,12 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
 
             case gmHitCollision_Type_ShieldRehit:
                 it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
-                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = WEAPON_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Reflect:
                 it_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
-                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = WEAPON_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Absorb:
@@ -538,7 +538,7 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
 
             case gmHitCollision_Type_HurtRehit:
                 it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
-                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = WEAPON_REHIT_TIME_DEFAULT;
                 break;
 
             default: break;
@@ -569,12 +569,12 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
 
         case gmHitCollision_Type_ShieldRehit:
             it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
-            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = WEAPON_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Reflect:
             it_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
-            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = WEAPON_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Absorb:
@@ -587,7 +587,7 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
 
         case gmHitCollision_Type_HurtRehit:
             it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
-            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = WEAPON_REHIT_TIME_DEFAULT;
             break;
 
         default: break;
@@ -595,9 +595,9 @@ void func_ovl3_80166594(Item_Hit *it_hit, GObj *victim_gobj, s32 hitbox_type, u3
     }
 }
 
-void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gobj, s32 hitbox_type, u32 interact_mask)
+void func_ovl3_8016679C(Weapon_Struct *this_wp, Item_Hit *it_hit, GObj *target_gobj, s32 hitbox_type, u32 interact_mask)
 {
-    if (this_ip->group_id != 0)
+    if (this_wp->group_id != 0)
     {
         GObj *victim_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
@@ -605,11 +605,11 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
         {
             do
             {
-                Item_Struct *victim_ip = itGetStruct(victim_gobj);
+                Weapon_Struct *victim_wp = wpGetStruct(victim_gobj);
 
-                if (victim_ip->group_id == this_ip->group_id)
+                if (victim_wp->group_id == this_wp->group_id)
                 {
-                    func_ovl3_80166594(&victim_ip->item_hit, target_gobj, hitbox_type, interact_mask);
+                    func_ovl3_80166594(&victim_wp->item_hit, target_gobj, hitbox_type, interact_mask);
                 }
                 victim_gobj = victim_gobj->group_gobj_next;
 
@@ -620,7 +620,7 @@ void func_ovl3_8016679C(Item_Struct *this_ip, Item_Hit *it_hit, GObj *target_gob
     else func_ovl3_80166594(it_hit, target_gobj, hitbox_type, arg4);
 }
 
-void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_id, Item_Struct *victim_ip, Item_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
+void func_ovl3_80166854(Weapon_Struct *this_wp, Item_Hit *this_hit, s32 this_hit_id, Weapon_Struct *victim_wp, Item_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
 {
     s32 this_hit_damage;
     s32 victim_hit_damage;
@@ -628,8 +628,8 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
     s32 victim_hit_priority;
     s32 this_hit_priority;
 
-    this_hit_damage = func_ovl3_80168128(this_ip);
-    victim_hit_damage = func_ovl3_80168128(victim_ip);
+    this_hit_damage = func_ovl3_80168128(this_wp);
+    victim_hit_damage = func_ovl3_80168128(victim_wp);
 
     func_ovl2_800F0C94(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
 
@@ -638,10 +638,10 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
 
     if (this_hit_priority >= victim_hit->priority)
     {
-        func_ovl3_8016679C(victim_ip, victim_hit, this_gobj, gmHitCollision_Type_Hit, 0);
-        if (victim_ip->hit_attack_damage < victim_hit_damage)
+        func_ovl3_8016679C(victim_wp, victim_hit, this_gobj, gmHitCollision_Type_Hit, 0);
+        if (victim_wp->hit_attack_damage < victim_hit_damage)
         {
-            victim_ip->hit_attack_damage = victim_hit_damage;
+            victim_wp->hit_attack_damage = victim_hit_damage;
         }
         func_ovl2_80100BF0(&sp2C, victim_hit_damage);
         this_hit_priority = this_hit->priority;
@@ -649,10 +649,10 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
     }
     if (victim_hit_priority >= this_hit_priority)
     {
-        func_ovl3_8016679C(this_ip, this_hit, victim_gobj, gmHitCollision_Type_Hit, 0);
-        if (this_ip->hit_attack_damage < this_hit_damage)
+        func_ovl3_8016679C(this_wp, this_hit, victim_gobj, gmHitCollision_Type_Hit, 0);
+        if (this_wp->hit_attack_damage < this_hit_damage)
         {
-            this_ip->hit_attack_damage = this_hit_damage;
+            this_wp->hit_attack_damage = this_hit_damage;
         }
         func_ovl2_80100BF0(&sp2C, this_hit_damage);
     }
@@ -661,14 +661,14 @@ void func_ovl3_80166854(Item_Struct *this_ip, Item_Hit *this_hit, s32 this_hit_i
 void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other items
 {
     GObj *other_gobj;
-    Item_Struct *this_ip, *other_ip;
+    Weapon_Struct *this_wp, *other_wp;
     Item_Hit *other_hit, *this_hit;
     gmHitCollisionFlags these_flags, those_flags;
     s32 m, n, i, j;
     bool32 is_check_self;
 
-    this_ip = itGetStruct(this_gobj);
-    this_hit = &this_ip->item_hit;
+    this_wp = wpGetStruct(this_gobj);
+    this_hit = &this_wp->item_hit;
 
     if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
     {
@@ -680,18 +680,18 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
         {
             do
             {
-                other_ip = itGetStruct(other_gobj);
-                other_hit = &other_ip->item_hit;
+                other_wp = wpGetStruct(other_gobj);
+                other_hit = &other_wp->item_hit;
 
                 if (other_gobj == this_gobj)
                 {
                     is_check_self = TRUE; // Not really sure what to name this
                 }
-                else if ((is_check_self != FALSE) && (this_ip->owner_gobj != other_ip->owner_gobj))
+                else if ((is_check_self != FALSE) && (this_wp->owner_gobj != other_wp->owner_gobj))
                 {
                     if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE)) goto next_check;
                     {
-                        if (this_ip->team == other_ip->team) goto next_gobj; // YUCKY match but you can't say it's only a half
+                        if (this_wp->team == other_wp->team) goto next_gobj; // YUCKY match but you can't say it's only a half
 
                     next_check:
                         if ((other_hit->update_state != gmHitCollision_UpdateState_Disable) && (other_hit->clang))
@@ -730,7 +730,7 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
                                             {
                                                 if (func_ovl2_800F007C(other_hit, i, this_hit, j) != FALSE)
                                                 {
-                                                    func_ovl3_80166854(other_ip, other_hit, i, this_ip, this_hit, j, other_gobj, this_gobj);
+                                                    func_ovl3_80166854(other_wp, other_hit, i, this_wp, this_hit, j, other_gobj, this_gobj);
                                                     goto next_gobj;
                                                 }
                                             }
@@ -750,114 +750,114 @@ void func_ovl3_80166954(GObj *this_gobj) // Scan for hitbox collision with other
 
 void func_ovl3_80166BE4(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(item_gobj);
 
-    if ((ip->hit_victim_damage != 0) || (ip->hit_reflect_damage != 0)) // 0x238 = hit article damage?
+    if ((wp->hit_victim_damage != 0) || (wp->hit_reflect_damage != 0)) // 0x238 = hit article damage?
     {
-        if (ip->proc_hit != NULL)
+        if (wp->proc_hit != NULL)
         {
-            if (ip->proc_hit(item_gobj) != FALSE)
+            if (wp->proc_hit(item_gobj) != FALSE)
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
     }
-    if (ip->hit_shield_damage != 0)
+    if (wp->hit_shield_damage != 0)
     {
-        if ((ip->item_hit.can_hop) && (ip->ground_or_air == air))
+        if ((wp->item_hit.can_hop) && (wp->ground_or_air == air))
         {
-            if (ip->shield_collide_angle < ITEM_DEFLECT_ANGLE_DEFAULT)
+            if (wp->shield_collide_angle < WEAPON_DEFLECT_ANGLE_DEFAULT)
             {
-                ip->shield_collide_angle -= HALF_PI32;
+                wp->shield_collide_angle -= HALF_PI32;
 
-                if (ip->shield_collide_angle < 0.0F)
+                if (wp->shield_collide_angle < 0.0F)
                 {
-                    ip->shield_collide_angle = 0.0F;
+                    wp->shield_collide_angle = 0.0F;
                 }
-                if (ip->proc_hop != NULL)
+                if (wp->proc_hop != NULL)
                 {
-                    if (ip->proc_hop(item_gobj) != FALSE)
+                    if (wp->proc_hop(item_gobj) != FALSE)
                     {
-                        func_ovl3_8016800C(item_gobj);
+                        wpMain_DestroyWeapon(item_gobj);
                         return;
                     }
                 }
                 goto next_check;
             }
         }
-        if (ip->proc_shield != NULL)
+        if (wp->proc_shield != NULL)
         {
-            if (ip->proc_shield(item_gobj) != FALSE)
+            if (wp->proc_shield(item_gobj) != FALSE)
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
     }
 next_check:
-    if (ip->hit_attack_damage != 0)
+    if (wp->hit_attack_damage != 0)
     {
-        if (ip->proc_setoff != NULL)
+        if (wp->proc_setoff != NULL)
         {
-            if (ip->proc_setoff(item_gobj) != FALSE)
+            if (wp->proc_setoff(item_gobj) != FALSE)
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
     }
 
-    if (ip->reflect_gobj != NULL)
+    if (wp->reflect_gobj != NULL)
     {
         Fighter_Struct *fp;
 
-        ip->owner_gobj = ip->reflect_gobj;
+        wp->owner_gobj = wp->reflect_gobj;
 
-        fp = ftGetStruct(ip->reflect_gobj);
+        fp = ftGetStruct(wp->reflect_gobj);
 
-        ip->team = fp->team;
-        ip->port_id = fp->port_id;
-        ip->display_state = fp->display_state;
-        ip->player_number = fp->player_number;
-        ip->handicap = fp->handicap;
-        ip->item_hit.stat_flags = ip->reflect_stat_flags;
-        ip->item_hit.stat_count = ip->reflect_stat_count;
+        wp->team = fp->team;
+        wp->port_id = fp->port_id;
+        wp->display_state = fp->display_state;
+        wp->player_number = fp->player_number;
+        wp->handicap = fp->handicap;
+        wp->item_hit.stat_flags = wp->reflect_stat_flags;
+        wp->item_hit.stat_count = wp->reflect_stat_count;
 
-        if (ip->proc_reflector != NULL)
+        if (wp->proc_reflector != NULL)
         {
-            if (ip->proc_reflector(item_gobj) != FALSE)
+            if (wp->proc_reflector(item_gobj) != FALSE)
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
-        if (!(ip->is_static_damage))
+        if (!(wp->is_static_damage))
         {
-            ip->item_hit.damage = (ip->item_hit.damage * ITEM_REFLECT_MUL_DEFAULT) + ITEM_REFLECT_ADD_DEFAULT;
+            wp->item_hit.damage = (wp->item_hit.damage * WEAPON_REFLECT_MUL_DEFAULT) + WEAPON_REFLECT_ADD_DEFAULT;
 
-            if (ip->item_hit.damage > ITEM_REFLECT_MAX_DEFAULT)
+            if (wp->item_hit.damage > WEAPON_REFLECT_TIME_DEFAULT)
             {
-                ip->item_hit.damage = ITEM_REFLECT_MAX_DEFAULT;
+                wp->item_hit.damage = WEAPON_REFLECT_TIME_DEFAULT;
             }
         }
     }
 
-    if (ip->absorb_gobj != NULL)
+    if (wp->absorb_gobj != NULL)
     {
-        if (ip->proc_absorb != NULL)
+        if (wp->proc_absorb != NULL)
         {
 
-            if (ip->proc_absorb(item_gobj) != FALSE)
+            if (wp->proc_absorb(item_gobj) != FALSE)
             {
-                func_ovl3_8016800C(item_gobj);
+                wpMain_DestroyWeapon(item_gobj);
                 return;
             }
         }
     }
-    ip->hit_victim_damage = 0;
-    ip->hit_reflect_damage = 0;
-    ip->hit_attack_damage = 0;
-    ip->hit_shield_damage = 0;
-    ip->reflect_gobj = NULL;
+    wp->hit_victim_damage = 0;
+    wp->hit_reflect_damage = 0;
+    wp->hit_attack_damage = 0;
+    wp->hit_shield_damage = 0;
+    wp->reflect_gobj = NULL;
 }

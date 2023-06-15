@@ -4,7 +4,7 @@
 #include "ftfox.h"
 #include "gmmatch.h"
 
-Item_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
+Weapon_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
 {
     GObj *item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
@@ -12,7 +12,7 @@ Item_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
     {
         do
         {
-            Item_Struct *ip = itGetStruct(item_gobj);
+            Weapon_Struct *ip = wpGetStruct(item_gobj);
 
             if (ip->owner_gobj == fp->fighter_gobj)
             {
@@ -33,7 +33,7 @@ Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 it_kind)
     {
         do
         {
-            Item_Struct *ip = itGetStruct(item_gobj);
+            Weapon_Struct *ip = wpGetStruct(item_gobj);
 
             if ((ip->owner_gobj == fp->fighter_gobj) && (ip->it_kind == it_kind))
             {
@@ -135,12 +135,12 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                             break;
 
                         case 0x7FU:
-                            this_fp->input.cp.stick_range.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GCONTROLLER_RANGE_MAX_I) : -(GCONTROLLER_RANGE_MAX_I);
+                            this_fp->input.cp.stick_range.x = (this_fp->joint[ftParts_TopN_Joint]->translate.x < ft_com->target_pos.x) ? (GCONTROLLER_RANGE_MAX_I) : -(GCONTROLLER_RANGE_MAX_I);
                             p_command++;
                             break;
 
                         case 0x80U:
-                            this_fp->input.cp.stick_range.x = (this_fp->joint[0]->translate.x < ft_com->target_pos.x) ? (GCONTROLLER_RANGE_MAX_I / 2) : -(GCONTROLLER_RANGE_MAX_I / 2);
+                            this_fp->input.cp.stick_range.x = (this_fp->joint[ftParts_TopN_Joint]->translate.x < ft_com->target_pos.x) ? (GCONTROLLER_RANGE_MAX_I / 2) : -(GCONTROLLER_RANGE_MAX_I / 2);
                             p_command++;
                             break;
                         }
@@ -155,20 +155,20 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                             break;
 
                         case 0x7FU:
-                            this_fp->input.cp.stick_range.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GCONTROLLER_RANGE_MAX_I) : -(GCONTROLLER_RANGE_MAX_I);
+                            this_fp->input.cp.stick_range.y = (this_fp->joint[ftParts_TopN_Joint]->translate.y < ft_com->target_pos.y) ? (GCONTROLLER_RANGE_MAX_I) : -(GCONTROLLER_RANGE_MAX_I);
                             p_command++;
                             break;
 
                         case 0x80U:
-                            this_fp->input.cp.stick_range.y = (this_fp->joint[0]->translate.y < ft_com->target_pos.y) ? (GCONTROLLER_RANGE_MAX_I / 2) : -(GCONTROLLER_RANGE_MAX_I / 2);
+                            this_fp->input.cp.stick_range.y = (this_fp->joint[ftParts_TopN_Joint]->translate.y < ft_com->target_pos.y) ? (GCONTROLLER_RANGE_MAX_I / 2) : -(GCONTROLLER_RANGE_MAX_I / 2);
                             p_command++;
                             break;
                         }
                         break;
 
                     case 0xC0:
-                        dist_x = ft_com->target_pos.x - this_fp->joint[0]->translate.x;
-                        dist_y = ft_com->target_pos.y - this_fp->joint[0]->translate.y;
+                        dist_x = ft_com->target_pos.x - this_fp->joint[ftParts_TopN_Joint]->translate.x;
+                        dist_y = ft_com->target_pos.y - this_fp->joint[ftParts_TopN_Joint]->translate.y;
 
                         if ((this_fp->ground_or_air == ground) && (this_fp->cp_level < 5))
                         {
@@ -228,14 +228,14 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                             switch (ft_com->behavior_set)
                             {
                             case 7:
-                                if (this_fp->joint[0]->translate.y < 0)
+                                if (this_fp->joint[ftParts_TopN_Joint]->translate.y < 0)
                                 {
                                     stick_range_y = dist_y = 0.0F;
                                 }
                                 break;
                             case 8:
                             case 9:
-                                if (this_fp->joint[0]->translate.y < -300.0F)
+                                if (this_fp->joint[ftParts_TopN_Joint]->translate.y < -300.0F)
                                 {
                                     stick_range_y = dist_y = 0.0F;
                                 }
@@ -353,8 +353,8 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
 {
     Fighter_Com *ft_com = &this_fp->fighter_com;
     Fighter_Struct *other_fp;
-    f32 this_pos_x = this_fp->joint[0]->translate.x;
-    f32 this_pos_y = this_fp->joint[0]->translate.y;
+    f32 this_pos_x = this_fp->joint[ftParts_TopN_Joint]->translate.x;
+    f32 this_pos_y = this_fp->joint[ftParts_TopN_Joint]->translate.y;
     GObj *other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
     f32 distance = (f32)FLOAT_MAX;
     f32 square_xy;
@@ -370,11 +370,11 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
 
             if (this_fp->team != other_fp->team)
             {
-                other_pos_x = other_fp->joint[0]->translate.x;
-                other_pos_y = other_fp->joint[0]->translate.y;
+                other_pos_x = other_fp->joint[ftParts_TopN_Joint]->translate.x;
+                other_pos_y = other_fp->joint[ftParts_TopN_Joint]->translate.y;
 
                 if ((other_fp->status_info.status_id >= ftStatus_Common_Wait) &&
-                (((func_ovl2_800F8FFC(&other_fp->joint[0]->translate) != FALSE) &&
+                (((func_ovl2_800F8FFC(&other_fp->joint[ftParts_TopN_Joint]->translate) != FALSE) &&
                 (other_pos_x <= D_ovl2_80131308.unk_80131308_0x28) &&
                 (D_ovl2_80131308.unk_80131308_0x2C <= other_pos_x) &&
                 (D_ovl2_80131308.unk_80131308_0x24 <= other_pos_y) &&
@@ -433,8 +433,8 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
 
             if (this_fp->team != other_fp->team)
             {
-                DObj *other_joint = other_fp->joint[0];
-                DObj *this_joint = this_fp->joint[0];
+                DObj *other_joint = other_fp->joint[ftParts_TopN_Joint];
+                DObj *this_joint = this_fp->joint[ftParts_TopN_Joint];
                 f32 other_x = (other_joint->translate.x + other_fp->phys_info.vel_air.x * 3.0F);
                 f32 other_y = (other_joint->translate.y + other_fp->phys_info.vel_air.x * 3.0F);
                 f32 sqrt_xy = sqrtf(SQUARE(this_joint->translate.y - other_y) + SQUARE(this_joint->translate.x - other_x));

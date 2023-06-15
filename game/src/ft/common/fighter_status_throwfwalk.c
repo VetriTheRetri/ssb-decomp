@@ -1,6 +1,6 @@
 #include "ftdonkey.h"
 
-#define ftStatus_CheckInterruptThrowFWalk(fighter_gobj)    \
+#define ftCheckInterruptThrowFWalk(fighter_gobj)    \
 (                                                          \
     (ftCommon_LightThrow_CheckInterruptCommon(fighter_gobj) != FALSE) ||         \
     (ftDonkey_ThrowFF_CheckInterruptThrowFCommon(fighter_gobj) != FALSE) ||         \
@@ -36,7 +36,7 @@ void ftDonkey_ThrowFWalk_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!ftStatus_CheckInterruptThrowFWalk(fighter_gobj))
+    if (!ftCheckInterruptThrowFWalk(fighter_gobj))
     {
         s32 status_id = ftCommon_Walk_GetWalkStatus(ABS(fp->input.pl.stick_range.x)) + (ftStatus_Donkey_ThrowFWalkSlow - ftStatus_Common_WalkSlow);
 

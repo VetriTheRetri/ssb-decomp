@@ -158,8 +158,8 @@ void func_ovl2_800D8C14(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->phys_info.vel_ground.x = ((fp->joint[1]->translate.z - fp->anim_vel.z) * DObjGetStruct(fighter_gobj)->scale.z);
-    fp->phys_info.vel_ground.z = ((fp->joint[1]->translate.x - fp->anim_vel.x) * -fp->lr * DObjGetStruct(fighter_gobj)->scale.x);
+    fp->phys_info.vel_ground.x = ((fp->joint[ftParts_TransN_Joint]->translate.z - fp->anim_vel.z) * DObjGetStruct(fighter_gobj)->scale.z);
+    fp->phys_info.vel_ground.z = ((fp->joint[ftParts_TransN_Joint]->translate.x - fp->anim_vel.x) * -fp->lr * DObjGetStruct(fighter_gobj)->scale.x);
 
     if ((fp->lr * DObjGetStruct(fighter_gobj)->rotate.y) < 0.0F)
     {
@@ -274,7 +274,7 @@ bool32 func_ovl2_800D8FA8(Fighter_Struct *fp, ftCommonAttributes *attributes)
     return func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x);
 }
 
-void ftPhysicsClampDriftStickRange(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 clamp)
+void ftPhysics_ClampDriftStickRange(Fighter_Struct *fp, s32 stick_range_min, f32 vel, f32 clamp)
 {
     if (ABS(fp->input.pl.stick_range.x) >= stick_range_min)
     {
@@ -293,7 +293,7 @@ void ftPhysicsClampDriftStickRange(Fighter_Struct *fp, s32 stick_range_min, f32 
 
 void func_ovl2_800D9044(Fighter_Struct *fp, ftCommonAttributes *attributes)
 {
-    ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration, attributes->aerial_speed_max_x);
+    ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration, attributes->aerial_speed_max_x);
 }
 
 void func_ovl2_800D9074(Fighter_Struct *fp, ftCommonAttributes *attributes)
@@ -363,8 +363,8 @@ void func_ovl2_800D91EC(GObj *fighter_gobj)
 
 void func_ovl2_800D9260(Fighter_Struct *fp, f32 *z, f32 *y, f32 *x) // Ness / Yoshi double jump physics
 {
-    DObj *topn_joint = fp->joint[0];
-    DObj *transn_joint = fp->joint[1];
+    DObj *topn_joint = fp->joint[ftParts_TopN_Joint];
+    DObj *transn_joint = fp->joint[ftParts_TransN_Joint];
     f32 anim_vel_z = (transn_joint->translate.z - fp->anim_vel.z) * fp->lr * topn_joint->scale.z;
     f32 anim_vel_y = (transn_joint->translate.y - fp->anim_vel.y) * topn_joint->scale.y;
     f32 cos = cosf(transn_joint->rotate.z);
@@ -387,8 +387,8 @@ void func_ovl2_800D9260(Fighter_Struct *fp, f32 *z, f32 *y, f32 *x) // Ness / Yo
 void func_ovl2_800D938C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    DObj *topn_joint = fp->joint[0];
-    DObj *transn_joint = fp->joint[1];
+    DObj *topn_joint = fp->joint[ftParts_TopN_Joint];
+    DObj *transn_joint = fp->joint[ftParts_TransN_Joint];
 
     fp->phys_info.vel_air.x = (transn_joint->translate.x - fp->anim_vel.x) * topn_joint->scale.x;
     fp->phys_info.vel_air.y = (transn_joint->translate.y - fp->anim_vel.y) * topn_joint->scale.y;

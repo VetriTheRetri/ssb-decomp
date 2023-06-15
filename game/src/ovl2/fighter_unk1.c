@@ -279,7 +279,7 @@ void func_ovl2_800E827C(GObj *fighter_gobj, u8 arg1)
 void func_ovl2_800E82B8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    DObj **p_joint = &fp->joint[0];
+    DObj **p_joint = &fp->joint[ftParts_TopN_Joint];
     DObj *joint;
     MObj *mobj;
     UnkDObjData *temp_v0;
@@ -948,7 +948,7 @@ void func_ovl2_800E9248(GObj *fighter_gobj, s32 costume_id, s32 shade_id)
 
                 if (unk_dobj->unk_gobj != NULL)
                 {
-                    func_80009A84(unk_dobj->unk_gobj);
+                    gOMObj_EjectGObjCommon(unk_dobj->unk_gobj);
 
                     unk_dobj->unk_gobj = NULL;
                 }
@@ -1297,7 +1297,7 @@ void efRunProc(GObj *fighter_gobj, void (*proc)(GObj*, Effect_Struct*))
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->is_statupdate_stop_gfx)
+    if (fp->is_playing_effect)
     {
         GObj *effect_gobj = gOMObjCommonLinks[gOMObjLinkIndexEffect];
 
@@ -1326,17 +1326,17 @@ void efDestroyGFX(GObj *effect_gobj, Effect_Struct *ep)
         func_ovl0_800D39D4(einfo->unk_effect_0xB8, ep->unk_effectstruct_0x8 >> 3);
     }
     func_ovl2_800FD4F8(ep);
-    func_80009A84(effect_gobj);
+    gOMObj_EjectGObjCommon(effect_gobj);
 }
 
 // 0x800E9C3C
-void ftCommon_ProcDestroyGFX(GObj *fighter_gobj)
+void ftCommon_ProcStopGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     efRunProc(fighter_gobj, efDestroyGFX);
 
-    fp->is_statupdate_stop_gfx = FALSE;
+    fp->is_playing_effect = FALSE;
 }
 
 // 0x800E9C78
@@ -1526,7 +1526,7 @@ s32 gmCommon_DamageCalcHitLag(s32 damage, s32 status_id, f32 hitlag_mul)
 }
 
 // 0x800EA248
-void ftCommon_DamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
+void ftDamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
 {
     fp->percent_damage += damage;
     Match_Info->player_block[fp->port_id].total_damage_all += damage;
@@ -1647,7 +1647,7 @@ void ftCommon_MotionCountIncSetID(Fighter_Struct *fp, s32 attack_id)
 }
 
 // 0x800EA614
-void ftCommon_AttackAddStaleQueue(s32 attack_port_id, s32 defend_port_id, s32 attack_id, u16 motion_count)
+void ftAttackAddStaleQueue(s32 attack_port_id, s32 defend_port_id, s32 attack_id, u16 motion_count)
 {
     if ((attack_port_id != GMMATCH_PLAYERS_MAX) && (attack_port_id != defend_port_id))
     {
@@ -1755,7 +1755,7 @@ void ftCommon_ApplyIntangibleTimer(Fighter_Struct *fp, s32 intangible_timer)
 }
 
 // 0x800EA98C
-void ftCommon_AttackUpdateMatchStats(s32 attack_port_id, s32 defend_port_id, s32 attack_damage)
+void ftAttackUpdateMatchStats(s32 attack_port_id, s32 defend_port_id, s32 attack_damage)
 {
     if ((attack_port_id != GMMATCH_PLAYERS_MAX) && (attack_port_id != defend_port_id))
     {

@@ -6,20 +6,20 @@ void func_ovl3_80160810(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->is_statupdate_stop_gfx))
+    if (!(fp->is_playing_effect))
     {
         if (fp->command_vars.flags.flag0 == 1)
         {
             if (func_ovl2_80101F84(fighter_gobj) != FALSE)
             {
-                fp->is_statupdate_stop_gfx = TRUE;
+                fp->is_playing_effect = TRUE;
             }
             fp->command_vars.flags.flag0 = 0;
         }
     }
     else if (fp->command_vars.flags.flag0 == 1)
     {
-        ftCommon_ProcDestroyGFX(fighter_gobj);
+        ftCommon_ProcStopGFX(fighter_gobj);
         fp->command_vars.flags.flag0 = 2;
     }
 }

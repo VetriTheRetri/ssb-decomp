@@ -407,7 +407,7 @@ extern struct GObjCommon *
 func_80009968(u32 id, void (*arg1)(struct GObjCommon *), u8 link, u32 arg3);
 extern struct GObjCommon *
 func_800099A8(u32 id, void (*arg1)(struct GObjCommon *), u8 link, u32 arg3);
-extern void func_80009A84(struct GObjCommon *);
+extern void gOMObj_EjectGObjCommon(struct GObjCommon *);
 extern void func_80009C90(struct GObjCommon *arg0, u8 link, u32 arg2);
 extern void func_80009CC8(struct GObjCommon *arg0, u8 link, u32 arg2);
 extern void func_80009DF4(

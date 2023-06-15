@@ -19,9 +19,10 @@ extern Mtx D_ovl2_8012C128;
 extern Mtx D_ovl2_8012C160;
 extern Mtx D_ovl2_8012C310;
 
-void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
+// 0x80166E80
+void wpRender_DisplayHitCollisions(GObj *item_gobj) // Render item hitboxes
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Item_Hit *item_hit = &ip->item_hit;
     MtxStore mtx_store;
     s32 i;
@@ -93,9 +94,10 @@ void func_ovl3_80166E80(GObj *item_gobj) // Render item hitboxes
 extern Mtx D_ovl2_8012C3D8;
 extern Mtx D_ovl2_8012C458;
 
-void func_ovl3_801671F0(GObj *item_gobj) // Render item ECB?
+// 0x801671F0
+void wpRender_DisplayMapCollisions(GObj *item_gobj) // Render item ECB?
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Vec3f *translate = &DObjGetStruct(item_gobj)->translate;
     ObjectColl *object_coll = &ip->coll_data.object_coll;
     MtxStore mtx_store;
@@ -155,7 +157,7 @@ void func_ovl3_801674B8(void)
 
 void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (ip->display_state == dbObjDisplayStatus_MapCollision)
     {
@@ -165,7 +167,7 @@ void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
 
         func_ovl3_801674B8();
 
-        func_ovl3_801671F0(item_gobj);
+        wpRender_DisplayMapCollisions(item_gobj);
     }
     else
     {
@@ -177,7 +179,7 @@ void func_ovl3_80167520(GObj *item_gobj, void(*render)(GObj*))
 
             func_ovl3_801674B8();
         }
-        else func_ovl3_80166E80(item_gobj);
+        else wpRender_DisplayHitCollisions(item_gobj);
     }
 }
 
@@ -204,9 +206,10 @@ void func_ovl3_8016763C(GObj *item_gobj)
 extern GfxColor Item_PKThunder_PrimColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 94, 163, 255 }, { 152, 189, 255 }, { 194, 217, 255 }, { 179, 241, 255 } };
 extern GfxColor Item_PKThunder_EnvColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 58, 0, 131 }, { 91, 0, 178 }, { 134, 51, 217 }, { 167, 116, 248 } };
 
-void func_ovl3_80167660(GObj *item_gobj)
+// 0x80167660
+void wpRender_DisplayPKThunder(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     s32 index = ip->item_vars.pk_thunder_trail.trail_index;
 
     if (ip->display_state == dbObjDisplayStatus_MapCollision)
@@ -223,7 +226,7 @@ void func_ovl3_80167660(GObj *item_gobj)
 
         func_ovl3_801674B8();
 
-        func_ovl3_801671F0(item_gobj);
+        wpRender_DisplayMapCollisions(item_gobj);
     }
     else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit.update_state == gmHitCollision_UpdateState_Disable))
     {
@@ -239,5 +242,5 @@ void func_ovl3_80167660(GObj *item_gobj)
 
         func_ovl3_801674B8();
     }
-    else func_ovl3_80166E80(item_gobj);
+    else wpRender_DisplayHitCollisions(item_gobj);
 }

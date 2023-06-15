@@ -5,7 +5,7 @@
 
 bool32 jtgt_ovl3_8016AA40(GObj *item_gobj)
 {
-    if (func_ovl3_80167FE8(itGetStruct(item_gobj)) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wpGetStruct(item_gobj)) != FALSE)
     {
         func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
@@ -27,7 +27,7 @@ bool32 jtgt_ovl3_8016AA88(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016AACC(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Vec3f vel;
     Vec3f pos;
 
@@ -50,10 +50,10 @@ bool32 jtgt_ovl3_8016AACC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016AB84(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
-    func_ovl3_80167F68(item_gobj);
+    wpMain_VelSetLR(item_gobj);
 
     DObjGetStruct(item_gobj)->rotate.z *= -1.0F;
 
@@ -62,13 +62,13 @@ bool32 jtgt_ovl3_8016AB84(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016ABF0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITPKFIRE_LIFETIME;
 
     func_ovl3_801680EC(ip, fp);
-    func_ovl3_80167F68(item_gobj);
+    wpMain_VelSetLR(item_gobj);
 
     DObjGetStruct(item_gobj)->rotate.z *= -1.0F;
 
@@ -87,20 +87,20 @@ extern ItemSpawnData Item_PKFire_Desc;
 GObj* func_ovl3_8016AC78(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel, f32 angle)
 {
     s32 unused;
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_PKFire_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_PKFire_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->lifetime = ITPKFIRE_LIFETIME;
 
     ip->phys_info.vel = *vel;
 
-    func_ovl3_80167F68(item_gobj);
+    wpMain_VelSetLR(item_gobj);
 
     DObjGetStruct(item_gobj)->rotate.z = (angle + HALF_PI32) * ip->lr;
 

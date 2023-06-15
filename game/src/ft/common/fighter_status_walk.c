@@ -1,6 +1,6 @@
 #include "fighter.h"
 
-#define ftStatus_CheckInterruptWalk(fighter_gobj)  \
+#define ftCheckInterruptWalk(fighter_gobj)  \
 (                                                  \
     (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) || \
@@ -64,7 +64,7 @@ void ftCommon_Walk_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (!ftStatus_CheckInterruptWalk(fighter_gobj))
+    if (!ftCheckInterruptWalk(fighter_gobj))
     {
         s32 status_id = ftCommon_Walk_GetWalkStatus(ABS(fp->input.pl.stick_range.x));
 

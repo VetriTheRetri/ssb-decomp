@@ -89,7 +89,7 @@ void ftCommon_Attack100Start_KirbyUpdateGFX(Fighter_Struct *fp)
             offset.y = attack_gfx[fp->command_vars.flags.flag2 - 1].offset.y;
             offset.z = attack_gfx[fp->command_vars.flags.flag2 - 1].offset.z;
 
-            func_ovl2_800EDF24(fp->joint[0], &offset);
+            func_ovl2_800EDF24(fp->joint[ftParts_TopN_Joint], &offset);
 
             func_ovl2_80101D34(&offset, fp->lr, attack_gfx[fp->command_vars.flags.flag2 - 1].vel.x, attack_gfx[fp->command_vars.flags.flag2 - 1].vel.y, attack_gfx[fp->command_vars.flags.flag2 - 1].vel.z);
 

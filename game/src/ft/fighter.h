@@ -444,6 +444,16 @@ typedef enum ftCatchKind
 #define FTCATCHKIND_MASK_NONE (0)
 #define FTCATCHKIND_MASK_ALL (FTCATCHKIND_MASK_SPECIALHICAPTAIN | FTCATCHKIND_MASK_CATCHCOMMON | FTCATCHKIND_MASK_UNUSEDCOMMON | FTCATCHKIND_MASK_CLIFFCOMMON | FTCATCHKIND_MASK_SPECIALNKIRBY | FTCATCHKIND_MASK_SPECIALNYOSHI)
 
+typedef enum ftPartsJointLabels
+{
+    ftParts_TopN_Joint,
+    ftParts_TransN_Joint,
+    ftParts_XRotN_Joint,
+    ftParts_YRotN_Joint,
+    ftParts_CStart_Joint
+
+} ftPartsJointLabels;
+
 typedef enum ftKind
 {
     Ft_Kind_Mario,
@@ -997,7 +1007,7 @@ struct Fighter_Struct
     s32 cliffcatch_wait;
     s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
     s32 acid_wait;    // Wait this many frames before fighter can be hurt by Planet Zebes acid again?
-    s32 tornado_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
+    s32 twister_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
     s32 tarucann_wait;// Wait this many frames before fighter can enter Barrel Cannon again
     s32 hotfloor_wait;// Wait this many frames before fighter can be hurt by damaging floors again (e.g. Mario's Board the Platforms stage)
     s32 unk_0x174;
@@ -1052,7 +1062,7 @@ struct Fighter_Struct
     u32 is_playing_gfx : 1;
     u32 joint_cycle_array_index : 4; // Goes up to 5 by default; index of the array from gfx_joint_cycle_index from ftCommonAttributes which houses the actual joint ID
     u32 is_shield : 1; // Fighter's shield bubble is active
-    u32 is_statupdate_stop_gfx : 1; // Destroy GFX on action state change if TRUE
+    u32 is_playing_effect : 1; // Destroy GFX on action state change if TRUE, not sure why this and is_playing_gfx are different
     u32 x18F_flag_b4 : 1;
     u32 x18F_flag_b5 : 1;
     u32 x18F_flag_b6 : 1;
@@ -1308,12 +1318,12 @@ void ftMapCollide_SetAir(Fighter_Struct*); // ???
 void ftAnim_Update(GObj*); // ???
 
 // Macro to check if a move has been interrupted by any standard action
-#define ftStatus_CheckInterruptAll(fighter_gobj)   \
-(                                                  \
-    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+#define ftCheckInterruptAll(fighter_gobj)                               \
+(                                                                       \
+    (ftCommon_SpecialN_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
     (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_SpecialLw_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_Catch_CheckInterruptCommon(fighter_gobj) != FALSE)     || \
     (ftCommon_AttackS4_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
     (ftCommon_AttackHi4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackLw4_CheckInterruptCommon(fighter_gobj) != FALSE) || \
@@ -1321,15 +1331,15 @@ void ftAnim_Update(GObj*); // ???
     (ftCommon_AttackHi3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_AttackLw3_CheckInterruptCommon(fighter_gobj) != FALSE) || \
     (ftCommon_Attack1_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
-    (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) != FALSE) || \
+    (ftCommon_GuardOn_CheckInterruptCommon(fighter_gobj) != FALSE)   || \
     (ftCommon_Appeal_CheckInterruptCommon(fighter_gobj) != FALSE)    || \
-    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_Turn_CheckInterruptCommon(fighter_gobj) != FALSE) || \
-    (ftCommon_Walk_CheckInterruptCommon(fighter_gobj) != FALSE)    \
-)                                                  \
+    (ftCommon_KneeBend_CheckInterruptCommon(fighter_gobj) != FALSE)  || \
+    (ftCommon_Dash_CheckInterruptCommon(fighter_gobj) != FALSE)      || \
+    (ftCommon_Pass_CheckInterruptCommon(fighter_gobj) != FALSE)      || \
+    (ftCommon_DokanStart_CheckInterruptCommon(fighter_gobj) != FALSE)|| \
+    (ftCommon_Squat_CheckInterruptCommon(fighter_gobj) != FALSE)     || \
+    (ftCommon_Turn_CheckInterruptCommon(fighter_gobj) != FALSE)      || \
+    (ftCommon_Walk_CheckInterruptCommon(fighter_gobj) != FALSE)         \
+)                                                                       \
 
 #endif

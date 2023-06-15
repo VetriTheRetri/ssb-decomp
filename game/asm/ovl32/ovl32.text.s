@@ -4639,14 +4639,14 @@ glabel func_ovl32_80135D48
   /* 15CC94 80135D54 AFBF0014 */        sw $ra, 0x14($sp)
   /* 15CC98 80135D58 10A00003 */      beqz $a1, .L80135D68
   /* 15CC9C 80135D5C AFA40018 */        sw $a0, 0x18($sp)
-  /* 15CCA0 80135D60 0C0026A1 */       jal func_80009A84
+  /* 15CCA0 80135D60 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 15CCA4 80135D64 00A02025 */        or $a0, $a1, $zero
   .L80135D68:
   /* 15CCA8 80135D68 3C048013 */       lui $a0, %hi(D_ovl32_80136C24)
   /* 15CCAC 80135D6C 8C846C24 */        lw $a0, %lo(D_ovl32_80136C24)($a0)
   /* 15CCB0 80135D70 10800003 */      beqz $a0, .L80135D80
   /* 15CCB4 80135D74 00000000 */       nop 
-  /* 15CCB8 80135D78 0C0026A1 */       jal func_80009A84
+  /* 15CCB8 80135D78 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 15CCBC 80135D7C 00000000 */       nop 
   .L80135D80:
   /* 15CCC0 80135D80 0C04D64D */       jal func_ovl32_80135934

@@ -8,9 +8,9 @@ void ftCommon_DokanStart_UpdateModelYaw(Fighter_Struct *fp)
     {
         fp->status_vars.common.dokan.turn_stop_wait--;
 
-        fp->joint[0]->rotate.y += (-FTCOMMON_DOKAN_TURN_STEP * fp->lr);
+        fp->joint[ftParts_TopN_Joint]->rotate.y += (-FTCOMMON_DOKAN_TURN_STEP * fp->lr);
 
-        func_ovl2_800EB528(fp->joint[0]);
+        func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
     }
 }
 
@@ -221,9 +221,9 @@ void ftCommon_DokanEnd_UpdateModelYaw(GObj *fighter_gobj)
         {
             fp->status_vars.common.dokan.turn_stop_wait--;
 
-            fp->joint[0]->rotate.y += (FTCOMMON_DOKAN_TURN_STEP * fp->lr);
+            fp->joint[ftParts_TopN_Joint]->rotate.y += (FTCOMMON_DOKAN_TURN_STEP * fp->lr);
 
-            func_ovl2_800EB528(fp->joint[0]);
+            func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
         }
     }
 }
@@ -270,9 +270,9 @@ void ftCommon_DokanEnd_SetStatus(GObj *fighter_gobj)
     if ((fp->ft_kind != Ft_Kind_Mario) && (fp->ft_kind != Ft_Kind_MetalMario) && (fp->ft_kind != Ft_Kind_PolyMario) && (fp->ft_kind != Ft_Kind_Luigi) && (fp->ft_kind != Ft_Kind_PolyLuigi))
     {
         fp->status_vars.common.dokan.turn_stop_wait = FTCOMMON_DOKAN_TURN_STOP_WAIT_DEFAULT;
-        fp->joint[0]->rotate.y = 0.0F;
+        fp->joint[ftParts_TopN_Joint]->rotate.y = 0.0F;
 
-        func_ovl2_800EB528(fp->joint[0]);
+        func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
     }
     else fp->status_vars.common.dokan.turn_stop_wait = 0;
 

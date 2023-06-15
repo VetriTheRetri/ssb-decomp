@@ -708,19 +708,19 @@ glabel func_ovl54_8013253C
   /* 177EDC 8013253C 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 177EE0 80132540 AFBF0014 */        sw $ra, 0x14($sp)
   /* 177EE4 80132544 3C048013 */       lui $a0, %hi(D_ovl54_80132BE0)
-  /* 177EE8 80132548 0C0026A1 */       jal func_80009A84
+  /* 177EE8 80132548 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 177EEC 8013254C 8C842BE0 */        lw $a0, %lo(D_ovl54_80132BE0)($a0)
   /* 177EF0 80132550 3C048013 */       lui $a0, %hi(D_ovl54_80132BE8)
-  /* 177EF4 80132554 0C0026A1 */       jal func_80009A84
+  /* 177EF4 80132554 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 177EF8 80132558 8C842BE8 */        lw $a0, %lo(D_ovl54_80132BE8)($a0)
   /* 177EFC 8013255C 3C048013 */       lui $a0, %hi(D_ovl54_80132BEC)
-  /* 177F00 80132560 0C0026A1 */       jal func_80009A84
+  /* 177F00 80132560 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 177F04 80132564 8C842BEC */        lw $a0, %lo(D_ovl54_80132BEC)($a0)
   /* 177F08 80132568 3C048013 */       lui $a0, %hi(D_ovl54_80132BF0)
-  /* 177F0C 8013256C 0C0026A1 */       jal func_80009A84
+  /* 177F0C 8013256C 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 177F10 80132570 8C842BF0 */        lw $a0, %lo(D_ovl54_80132BF0)($a0)
   /* 177F14 80132574 3C048013 */       lui $a0, %hi(D_ovl54_80132BF4)
-  /* 177F18 80132578 0C0026A1 */       jal func_80009A84
+  /* 177F18 80132578 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 177F1C 8013257C 8C842BF4 */        lw $a0, %lo(D_ovl54_80132BF4)($a0)
   /* 177F20 80132580 8FBF0014 */        lw $ra, 0x14($sp)
   /* 177F24 80132584 27BD0018 */     addiu $sp, $sp, 0x18
@@ -926,7 +926,7 @@ glabel func_ovl54_801327C8
   /* 178218 80132878 0C035E3A */       jal func_ovl2_800D78E8
   /* 17821C 8013287C 8C842BDC */        lw $a0, %lo(D_ovl54_80132BDC)($a0)
   /* 178220 80132880 3C048013 */       lui $a0, %hi(D_ovl54_80132C04)
-  /* 178224 80132884 0C0026A1 */       jal func_80009A84
+  /* 178224 80132884 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 178228 80132888 8C842C04 */        lw $a0, %lo(D_ovl54_80132C04)($a0)
   /* 17822C 8013288C 0C009A70 */       jal func_800269C0
   /* 178230 80132890 24040014 */     addiu $a0, $zero, 0x14

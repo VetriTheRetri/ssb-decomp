@@ -11,7 +11,7 @@ void func_ovl3_80179120(GObj *effect_gobj) // Barrel/Crate smash GFX process
     if (ep->lifetime == 0)
     {
         func_ovl2_800FD4F8(ep);
-        func_80009A84(effect_gobj);
+        gOMObj_EjectGObjCommon(effect_gobj);
     }
     else if (joint != NULL)
     {

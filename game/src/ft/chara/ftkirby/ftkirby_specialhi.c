@@ -10,9 +10,9 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
         switch (fp->command_vars.flags.flag1)
         {
         case 1:
-            if (fp->is_statupdate_stop_gfx)
+            if (fp->is_playing_effect)
             {
-                ftCommon_ProcDestroyGFX(fighter_gobj);
+                ftCommon_ProcStopGFX(fighter_gobj);
                 fp->command_vars.flags.flag1 = 0;
             }
             break;
@@ -28,9 +28,9 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     switch (fp->command_vars.flags.flag2)
     {
     case 0:
-        if (fp->is_statupdate_stop_gfx)
+        if (fp->is_playing_effect)
         {
-            ftCommon_ProcDestroyGFX(fighter_gobj);
+            ftCommon_ProcStopGFX(fighter_gobj);
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -38,7 +38,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 2:
         if (func_ovl2_80102508(fighter_gobj) != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -46,7 +46,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 3:
         if (func_ovl2_80102418(fighter_gobj) != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -54,7 +54,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 4:
         if (func_ovl2_80102490(fighter_gobj) != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -62,7 +62,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 5:
         if (func_ovl2_80102560(fighter_gobj) != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -118,7 +118,7 @@ void ftKirby_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 
     if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, attributes);
     }
 }
@@ -142,7 +142,7 @@ void ftKirby_SpecialHiLanding_ProcPhysics(GObj *fighter_gobj)
 
         if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+            ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
             func_ovl2_800D9074(fp, attributes);
         }
     }
@@ -157,15 +157,15 @@ void ftKirby_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
 
-    fp->joint[0]->scale.x = fp->joint[0]->scale.y = fp->joint[0]->scale.z = 0.8F;
+    fp->joint[ftParts_TopN_Joint]->scale.x = fp->joint[ftParts_TopN_Joint]->scale.y = fp->joint[ftParts_TopN_Joint]->scale.z = 0.8F;
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
-    fp->joint[0]->scale.x = fp->joint[0]->scale.y = fp->joint[0]->scale.z = 1.0F;
+    fp->joint[ftParts_TopN_Joint]->scale.x = fp->joint[ftParts_TopN_Joint]->scale.y = fp->joint[ftParts_TopN_Joint]->scale.z = 1.0F;
 
     if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, attributes);
     }
 }
@@ -180,7 +180,7 @@ void ftKirby_SpecialAirHiFall_ProcPhysics(GObj *fighter_gobj)
 
     if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
     {
-        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
+        ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_FINALCUTTER_AIR_ACCEL_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, attributes);
     }
 }
@@ -210,6 +210,28 @@ void ftKirby_SpecialHi_ProcMap(GObj *fighter_gobj)
                 ftMapCollide_SetGround(fp);
                 ftKirby_SpecialHiLanding_SetStatus(fighter_gobj);
             }
+        }
+    }
+}
+
+// 0x80161104
+void ftKirby_SpecialAirHiFall_ProcMap(GObj *fighter_gobj)
+{
+    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+
+    if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
+    {
+        if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
+        {
+            ftMapCollide_SetGround(fp);
+            ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiLanding, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+
+            fp->proc_lagstart = ftCommon_ProcPauseGFX;
+            fp->proc_lagend = ftCommon_ProcResumeGFX;
+        }
+        else if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
+        {
+            ftCommon_CliffCatch_SetStatus(fighter_gobj);
         }
     }
 }

@@ -182,10 +182,10 @@ void func_ovl3_801728D4(GObj *article_gobj)
     }
     if (ap->unk_0x348 != NULL)
     {
-        func_80009A84(ap->unk_0x348);
+        gOMObj_EjectGObjCommon(ap->unk_0x348);
     }
     func_ovl3_8016DFDC(ap);
-    func_80009A84(article_gobj);
+    gOMObj_EjectGObjCommon(article_gobj);
 }
 
 void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flag1, u16 flag2) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2

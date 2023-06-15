@@ -339,7 +339,7 @@ void ftCommon_DeadUpStar_ProcUpdate(GObj *fighter_gobj)
 
         case 1:
             func_ovl2_800D9444(fighter_gobj);
-            func_ovl2_80100720(&fp->joint[0]->translate, 5.0F);
+            func_ovl2_80100720(&fp->joint[ftParts_TopN_Joint]->translate, 5.0F);
 
             fp->is_invisible = TRUE;
             fp->x191_flag_b3 = TRUE;
@@ -516,7 +516,7 @@ void ftCommon_DeadUpFall_SetStatus(GObj *fighter_gobj)
 bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Vec3f *pos = &fp->joint[0]->translate;
+    Vec3f *pos = &fp->joint[ftParts_TopN_Joint]->translate;
 
     if (fp->ft_kind == Ft_Kind_MasterHand)
     {

@@ -160,7 +160,7 @@ glabel func_ovl0_800D42C8
   /* 04FCC8 800D42E8 00000000 */       nop 
   /* 04FCCC 800D42EC 45020004 */     bc1fl .L800D4300
   /* 04FCD0 800D42F0 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 04FCD4 800D42F4 0C0026A1 */       jal func_80009A84
+  /* 04FCD4 800D42F4 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 04FCD8 800D42F8 00000000 */       nop 
   /* 04FCDC 800D42FC 8FBF0014 */        lw $ra, 0x14($sp)
   .L800D4300:

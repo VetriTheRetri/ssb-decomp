@@ -5,7 +5,7 @@ extern ItemChargeShotAttributes Item_ChargeShot_Attributes[];
 
 void func_ovl3_80168B00(GObj *item_gobj) // Set Charge Shot's attributes on fire
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     f32 coll_size;
 
     ip->phys_info.vel.x = Item_ChargeShot_Attributes[ip->item_vars.charge_shot.charge_size].vel_x * ip->lr;
@@ -29,7 +29,7 @@ void func_ovl3_80168B00(GObj *item_gobj) // Set Charge Shot's attributes on fire
 
 bool32 func_ovl3_80168BDC(GObj *item_gobj) // Clear GObj pointers
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (ip->item_vars.charge_shot.owner_gobj != NULL) // Always NULL though?
     {
@@ -42,7 +42,7 @@ bool32 func_ovl3_80168BDC(GObj *item_gobj) // Clear GObj pointers
 
 bool32 jtgt_ovl3_80168BFC(GObj *item_gobj) // Animation
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     f32 scale;
 
     if (ip->item_vars.charge_shot.is_release == FALSE)
@@ -70,7 +70,7 @@ bool32 jtgt_ovl3_80168BFC(GObj *item_gobj) // Animation
 
 bool32 jtgt_ovl3_80168CC4(GObj *item_gobj) // Collision 
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (ip->item_vars.charge_shot.is_release != FALSE)
     {
@@ -88,7 +88,7 @@ bool32 jtgt_ovl3_80168CC4(GObj *item_gobj) // Collision
 
 bool32 jtgt_ovl3_80168D24(GObj *item_gobj) // Hit target
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -97,21 +97,21 @@ bool32 jtgt_ovl3_80168D24(GObj *item_gobj) // Hit target
 
 bool32 jtgt_ovl3_80168D54(GObj *item_gobj) // Hit shield at deflect angle
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
-    func_ovl3_80167F68(item_gobj);
+    wpMain_VelSetLR(item_gobj);
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_80168DA4(GObj *item_gobj) // Hit reflector
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
-    func_ovl3_80167F68(item_gobj);
+    wpMain_VelSetLR(item_gobj);
 
     return FALSE;
 }
@@ -121,15 +121,15 @@ extern ItemSpawnData Item_ChargeShot_Desc;
 GObj* func_ovl3_80168DDC(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool32 is_release) // Create item
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_ChargeShot_Desc, pos, ((is_release != FALSE) ? (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER) : ITEM_MASK_SPAWN_FIGHTER));
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_ChargeShot_Desc, pos, ((is_release != FALSE) ? (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER) : WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
     f32 scale;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->item_vars.charge_shot.is_release = is_release;
     ip->item_vars.charge_shot.charge_size = charge_level;

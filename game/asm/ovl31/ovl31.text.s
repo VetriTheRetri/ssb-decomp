@@ -3651,7 +3651,7 @@ glabel func_ovl31_80134E94
   /* 15404C 80134EAC 244EFFFB */     addiu $t6, $v0, -5
   /* 154050 80134EB0 05C10005 */      bgez $t6, .L80134EC8
   /* 154054 80134EB4 AD8E0000 */        sw $t6, ($t4) # D_ovl31_80139BC4 + 0
-  /* 154058 80134EB8 0C0026A1 */       jal func_80009A84
+  /* 154058 80134EB8 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 15405C 80134EBC 00000000 */       nop 
   /* 154060 80134EC0 3C0C8014 */       lui $t4, %hi(D_ovl31_80139BC4)
   /* 154064 80134EC4 258C9BC4 */     addiu $t4, $t4, %lo(D_ovl31_80139BC4)
@@ -3799,7 +3799,7 @@ glabel func_ovl31_801350C8
   /* 154280 801350E0 244EFFFB */     addiu $t6, $v0, -5
   /* 154284 801350E4 05C10005 */      bgez $t6, .L801350FC
   /* 154288 801350E8 AD8E0000 */        sw $t6, ($t4) # D_ovl31_80139BC8 + 0
-  /* 15428C 801350EC 0C0026A1 */       jal func_80009A84
+  /* 15428C 801350EC 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 154290 801350F0 00000000 */       nop 
   /* 154294 801350F4 3C0C8014 */       lui $t4, %hi(D_ovl31_80139BC8)
   /* 154298 801350F8 258C9BC8 */     addiu $t4, $t4, %lo(D_ovl31_80139BC8)
@@ -6543,7 +6543,7 @@ glabel func_ovl31_801377C0
   /* 1569A4 80137804 00002025 */        or $a0, $zero, $zero
   /* 1569A8 80137808 0C0082AD */       jal func_80020AB4
   /* 1569AC 8013780C 24050016 */     addiu $a1, $zero, 0x16
-  /* 1569B0 80137810 0C0026A1 */       jal func_80009A84
+  /* 1569B0 80137810 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 1569B4 80137814 00002025 */        or $a0, $zero, $zero
   .L80137818:
   /* 1569B8 80137818 0C002C7A */       jal stop_current_process
@@ -6601,7 +6601,7 @@ glabel func_ovl31_80137898
   /* 156A70 801378D0 02202025 */        or $a0, $s1, $zero
   /* 156A74 801378D4 0C001125 */       jal func_80004494
   /* 156A78 801378D8 02202025 */        or $a0, $s1, $zero
-  /* 156A7C 801378DC 0C0026A1 */       jal func_80009A84
+  /* 156A7C 801378DC 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 156A80 801378E0 00002025 */        or $a0, $zero, $zero
   /* 156A84 801378E4 0C002C7A */       jal stop_current_process
   /* 156A88 801378E8 24040001 */     addiu $a0, $zero, 1

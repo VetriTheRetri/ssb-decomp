@@ -307,7 +307,7 @@ GObj* func_ovl3_8016E174(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *
             break;
 
         case ARTICLE_MASK_SPAWN_ITEM:
-            func_ovl2_800DF058(article_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF058(article_gobj, wpGetStruct(spawn_gobj)->coll_data.p_translate, &wpGetStruct(spawn_gobj)->coll_data);
             break;
 
         case ARTICLE_MASK_SPAWN_ARTICLE:
@@ -1025,7 +1025,7 @@ void func_ovl3_8016FD4C(Article_Struct *this_ap, Article_Hit *this_hit, s32 this
     }
 }
 
-void func_ovl3_8016FE4C(Item_Struct *ip, Item_Hit *it_hit, s32 it_hit_id, Article_Struct *ap, Article_Hit *at_hit, s32 at_hit_id, GObj *item_gobj, GObj *article_gobj)
+void func_ovl3_8016FE4C(Weapon_Struct *ip, Item_Hit *it_hit, s32 it_hit_id, Article_Struct *ap, Article_Hit *at_hit, s32 at_hit_id, GObj *item_gobj, GObj *article_gobj)
 {
     s32 it_hit_damage = func_ovl3_80168128(ip);
     s32 at_hit_damage = func_ovl3_801727F4(ap);
@@ -1169,7 +1169,7 @@ void func_ovl3_8016FF4C(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s
 
 // Article's hurtbox gets hit by an item
 
-void func_ovl3_801702C8(Item_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Struct *ap, Article_Hurt *at_hurt, GObj *item_gobj, GObj *article_gobj)
+void func_ovl3_801702C8(Weapon_Struct *ip, Item_Hit *it_hit, s32 arg2, Article_Struct *ap, Article_Hurt *at_hurt, GObj *item_gobj, GObj *article_gobj)
 {
     s32 damage;
     s32 unused;
@@ -1483,7 +1483,7 @@ void func_ovl3_8017088C(GObj *this_gobj) // Check other articles for hit detecti
 void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
 {
     Article_Hit *at_hit;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
     Article_Struct *ap;
     GObj *item_gobj;
     Item_Hit *it_hit;
@@ -1504,7 +1504,7 @@ void func_ovl3_80170C84(GObj *article_gobj) // Check items for hit detection
         {
 
 
-            ip = itGetStruct(item_gobj);
+            ip = wpGetStruct(item_gobj);
             it_hit = &ip->item_hit;
 
             if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))

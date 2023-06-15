@@ -2458,7 +2458,7 @@ void func_ovl2_800DE368(GObj *fighter_gobj)
 
     if (fp->publicity_knockback != 0.0F)
     {
-        if ((fp->publicity_knockback >= 100.0F) && ((fp->joint[0]->translate.x < (D_ovl2_80131308.unk_80131308_0x2C + 450.0F)) || ((D_ovl2_80131308.unk_80131308_0x28 - 450.0F) < fp->joint[0]->translate.x)))
+        if ((fp->publicity_knockback >= 100.0F) && ((fp->joint[ftParts_TopN_Joint]->translate.x < (D_ovl2_80131308.unk_80131308_0x2C + 450.0F)) || ((D_ovl2_80131308.unk_80131308_0x28 - 450.0F) < fp->joint[ftParts_TopN_Joint]->translate.x)))
         {
             func_ovl3_80164F70(fighter_gobj, fp->publicity_knockback);
         }
@@ -2889,7 +2889,7 @@ void ftMapCollide_SetAir(Fighter_Struct *fp)
 {
     fp->ground_or_air = air;
 
-    fp->phys_info.vel_air.z = fp->joint[0]->translate.z = 0.0F;
+    fp->phys_info.vel_air.z = fp->joint[ftParts_TopN_Joint]->translate.z = 0.0F;
 
     fp->jumps_used = 1;
 }
@@ -2965,7 +2965,7 @@ void func_ovl2_800DF058(GObj *article_gobj, Vec3f *pos, Coll_Data *coll_data)
 
 void func_ovl2_800DF09C(GObj *item_gobj, Vec3f *pos, Coll_Data *coll_data)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_800DEFBC(&ip->coll_data, pos, coll_data);
     func_ovl2_800DEEF4(&ip->coll_data, item_gobj, 0);

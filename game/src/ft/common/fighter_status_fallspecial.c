@@ -26,7 +26,7 @@ void ftCommon_FallSpecial_ProcPhysics(GObj *fighter_gobj)
 
     if (func_ovl2_800D8EDC(fp, fp->status_vars.common.fallspecial.drift) == FALSE)
     {
-        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration, fp->status_vars.common.fallspecial.drift);
+        ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration, fp->status_vars.common.fallspecial.drift);
         func_ovl2_800D9074(fp, attributes);
     }
 }

@@ -10,25 +10,25 @@ void (*ftKirby_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801649C0, // Link
     jtgt_ovl3_8015F60C, // Yoshi
     jtgt_ovl3_80160B70, // Captain Faclon
-    jtgt_ovl3_801633A0, // Kirby
+    ftKirby_SpecialAirNStart_SetStatus, // Kirby
     jtgt_ovl3_80153908, // Pikachu
     ftKirby_CopyPurin_SpecialAirN_SetStatus, // Jigglypuff
     ftKirby_CopyNess_SpecialAirN_SetStatus, // Ness
-    jtgt_ovl3_801633A0, // Master Hand
+    ftKirby_SpecialAirNStart_SetStatus, // Master Hand
     ftKirby_CopyMario_SpecialAirN_SetStatus, // Metal Mario
-    jtgt_ovl3_801633A0, // Poly Mario
-    jtgt_ovl3_801633A0, // Poly Fox
-    jtgt_ovl3_801633A0, // Poly Donkey Kong
-    jtgt_ovl3_801633A0, // Poly Samus
-    jtgt_ovl3_801633A0, // Poly Luigi
-    jtgt_ovl3_801633A0, // Poly Link
-    jtgt_ovl3_801633A0, // Poly Yoshi
-    jtgt_ovl3_801633A0, // Poly Captain Falcon
-    jtgt_ovl3_801633A0, // Poly Kirby
-    jtgt_ovl3_801633A0, // Poly Pikachu
-    jtgt_ovl3_801633A0, // Poly Jigglypuff
-    jtgt_ovl3_801633A0, // Poly Ness
-    jtgt_ovl3_801633A0, // Giant Donkey Kong (This is actually inaccessible, Kirby's copy ID for Giant DK is always 2)
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Mario
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Fox
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Donkey Kong
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Samus
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Luigi
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Link
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Yoshi
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Captain Falcon
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Kirby
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Pikachu
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Jigglypuff
+    ftKirby_SpecialAirNStart_SetStatus, // Poly Ness
+    ftKirby_SpecialAirNStart_SetStatus, // Giant Donkey Kong (This is actually inaccessible, Kirby's copy ID for Giant DK is always 2)
 };
 
 void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
@@ -38,7 +38,7 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftDonkey_SpecialAirNStart_SetStatus,
     jtgt_ovl3_8015DBDC,
     ftMario_SpecialAirN_SetStatus,
-    jtgt_ovl3_80163A4C,
+    ftLink_SpecialAirN_SetStatus,
     jtgt_ovl3_8015E79C,
     ftCaptain_SpecialAirN_SetStatus,
     ftKirby_SpecialAirN_SetStatusIndex,
@@ -52,7 +52,7 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftDonkey_SpecialAirNStart_SetStatus,
     jtgt_ovl3_8015DBDC,
     ftMario_SpecialAirN_SetStatus,
-    jtgt_ovl3_80163A4C,
+    ftLink_SpecialAirN_SetStatus,
     jtgt_ovl3_8015E79C,
     ftCaptain_SpecialAirN_SetStatus,
     ftKirby_SpecialAirN_SetStatusIndex,
@@ -69,7 +69,7 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftDonkey_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015DE90,
     ftMario_SpecialAirHi_SetStatus,
-    jtgt_ovl3_80164348,
+    ftLink_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015ED7C,
     ftCaptain_SpecialAirHi_SetStatus,
     ftKirby_SpecialAirHi_SetStatus,
@@ -83,7 +83,7 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftDonkey_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015DE90,
     ftMario_SpecialAirHi_SetStatus,
-    jtgt_ovl3_80164348,
+    ftLink_SpecialAirHi_SetStatus,
     jtgt_ovl3_8015ED7C,
     ftCaptain_SpecialAirHi_SetStatus,
     ftKirby_SpecialAirHi_SetStatus,
@@ -103,7 +103,7 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801645E8,
     jtgt_ovl3_8015F04C,
     ftCaptain_SpecialAirLw_SetStatus,
-    jtgt_ovl3_80161B70,
+    ftKirby_SpecialAirLwStart_SetStatus,
     jtgt_ovl3_80151FFC,
     ftPurin_SpecialAirLw_SetStatus,
     ftNess_SpecialAirLwStart_SetStatus,
@@ -117,7 +117,7 @@ void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_801645E8,
     jtgt_ovl3_8015F04C,
     ftCaptain_SpecialAirLw_SetStatus,
-    jtgt_ovl3_80161B70,
+    ftKirby_SpecialAirLwStart_SetStatus,
     jtgt_ovl3_80151FFC,
     ftPurin_SpecialAirLw_SetStatus,
     ftNess_SpecialAirLwStart_SetStatus,

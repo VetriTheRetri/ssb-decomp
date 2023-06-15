@@ -88,7 +88,7 @@ loop: // This makes no sense
 
     if (func_ovl2_80104068(this_gobj, this_fp->attributes->unk_0xEC) != NULL)
     {
-        this_fp->is_statupdate_stop_gfx = TRUE;
+        this_fp->is_playing_effect = TRUE;
     }
     ftCommon_CheckSetColAnimIndex(this_gobj, 0xB, 0);
     func_ovl2_800E7F7C(this_gobj, 1);
@@ -177,7 +177,7 @@ void ftCommon_RebirthWait_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (ftStatus_CheckInterruptAll(fighter_gobj))
+    if (ftCheckInterruptAll(fighter_gobj))
     {
         ftCommon_ApplyInvincibleTimer(fp, FTCOMMON_REBIRTH_INVINCIBLE_FRAMES);
     }

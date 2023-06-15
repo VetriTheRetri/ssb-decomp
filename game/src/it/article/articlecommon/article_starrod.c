@@ -122,7 +122,7 @@ GObj* jtgt_ovl3_80178134(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 jtgt_ovl3_801781B0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Vec3f pos;
     DObj *joint;
 
@@ -154,7 +154,7 @@ bool32 jtgt_ovl3_801781B0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801782D4(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (func_ovl3_80167C04(item_gobj) != FALSE)
     {
@@ -169,7 +169,7 @@ bool32 jtgt_ovl3_801782D4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017832C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_80102070(&DObjGetStruct(item_gobj)->translate, ip->lr);
 
@@ -178,7 +178,7 @@ bool32 jtgt_ovl3_8017832C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017835C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -197,7 +197,7 @@ bool32 jtgt_ovl3_8017835C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80178404(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
@@ -218,20 +218,20 @@ GObj *func_ovl3_80178474(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
 {
     GObj *item_gobj;
     DObj *joint;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
 
     if (is_smash == TRUE)
     {
         D_ovl3_8018A1D0 = (uintptr_t)&StarRod_Linker_Unk;
     }
-    item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_StarRod_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
+    item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_StarRod_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
     joint = DObjGetStruct(item_gobj);
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->phys_info.vel.x = ((!(is_smash)) ? ATSTARROD_AMMO_TILT_VEL_X : ATSTARROD_AMMO_SMASH_VEL_X) * ip->lr;
 

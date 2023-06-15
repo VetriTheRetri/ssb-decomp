@@ -1,7 +1,7 @@
 #include "item.h"
 #include "fighter.h"
 
-f32 func_ovl3_8016C540(Item_Struct *ip)
+f32 func_ovl3_8016C540(Weapon_Struct *ip)
 {
     f32 scale = (ip->lifetime * ITYOSHISTAR_LIFETIME_SCALE_MUL) + ITYOSHISTAR_LIFETIME_SCALE_ADD;
 
@@ -14,12 +14,12 @@ f32 func_ovl3_8016C540(Item_Struct *ip)
 
 bool32 jtgt_ovl3_8016C588(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     f32 scale;
     f32 vel_sqrt;
     f32 vel_mul;
 
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
         func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
@@ -57,7 +57,7 @@ bool32 jtgt_ovl3_8016C6A0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C6AC(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
 
@@ -77,7 +77,7 @@ bool32 jtgt_ovl3_8016C6F0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C718(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -94,7 +94,7 @@ bool32 jtgt_ovl3_8016C718(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016C7B0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITYOSHISTAR_LIFETIME;
@@ -116,7 +116,7 @@ extern ItemSpawnData Item_YoshiStar_Desc;
 GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 {
     GObj *item_gobj;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
     Vec3f offset = *pos;
 
     offset.y += ITYOSHISTAR_OFF_Y;
@@ -130,13 +130,13 @@ GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
         offset.x -= ITYOSHISTAR_OFF_X;
     }
 
-    item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_YoshiStar_Desc, &offset, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
+    item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_YoshiStar_Desc, &offset, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->lr = lr;
 

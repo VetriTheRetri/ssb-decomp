@@ -1574,7 +1574,7 @@ unref_80009A34(u32 id, void (*arg1)(struct GObjCommon *), struct GObjCommon *arg
     return com;
 }
 
-void func_80009A84(struct GObjCommon *arg0) {
+void gOMObj_EjectGObjCommon(struct GObjCommon *arg0) {
     if (arg0 == NULL || arg0 == D_80046A54) {
         D_80046A64 = 2;
         return;
@@ -1889,7 +1889,7 @@ struct GObjCommon *func_8000A40C(struct GObjCommon *arg0) {
         case 0: break;
         case 2:
             D_80046A64 = 0;
-            func_80009A84(arg0);
+            gOMObj_EjectGObjCommon(arg0);
             break;
         default: D_80046A64 = 0; break;
     }
@@ -1930,7 +1930,7 @@ struct GObjProcess *func_8000A49C(struct GObjProcess *proc) {
             D_80046A64 = 0;
             while (ret != NULL && ret->unk18 == proc->unk18) { ret = ret->unk08; }
 
-            func_80009A84(proc->unk18);
+            gOMObj_EjectGObjCommon(proc->unk18);
             break;
         }
         case 1:

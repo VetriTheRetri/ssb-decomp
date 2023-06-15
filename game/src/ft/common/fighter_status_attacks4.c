@@ -37,11 +37,11 @@ void ftCommon_AttackS4_ProcUpdate(GObj *fighter_gobj)
 
             }
             func_ovl2_800EDF24(fp->joint[11], &offset);
-            func_ovl2_800EE018(fp->joint[0], &offset);
+            func_ovl2_800EE018(fp->joint[ftParts_TopN_Joint], &offset);
 
             if (func_ovl2_801018A8(fighter_gobj, &offset, fp->status_vars.common.attack4.gfx_id) != NULL)
             {
-                fp->is_statupdate_stop_gfx = TRUE;
+                fp->is_playing_effect = TRUE;
             }
         }
         // Fallthrough, should break here for efficiency

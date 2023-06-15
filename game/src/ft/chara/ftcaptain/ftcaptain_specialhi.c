@@ -44,7 +44,7 @@ void ftCaptain_SpecialHi_ProcInterrupt(GObj *fighter_gobj)
         {
             ftCommon_StickInputSetLR(fp);
 
-            fp->joint[0]->rotate.y = fp->lr * HALF_PI32;
+            fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * HALF_PI32;
         }
     }
 }
@@ -61,7 +61,7 @@ void ftCaptain_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 
     if (func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL) == FALSE)
     {
-        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTCAPTAIN_FALCONDIVE_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL);
+        ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTCAPTAIN_FALCONDIVE_AIR_ACCEL_MUL, attributes->aerial_speed_max_x * FTCAPTAIN_FALCONDIVE_AIR_SPEED_MAX_MUL);
         func_ovl2_800D9074(fp, attributes);
     }
     fp->status_vars.captain.specialhi.vel.x = fp->phys_info.vel_air.x;

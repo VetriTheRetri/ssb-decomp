@@ -80,7 +80,7 @@ void ftMario_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
         func_ovl2_800D8D34(fp, FTMARIO_TORNADO_TAP_VEL_ADD, 40.0F);
     }
     func_ovl2_800D8E50(fp, attributes);
-    ftPhysicsClampDriftStickRange(fp, 0, 0.03F, ftMario_SpecialLw_UpdateFriction(fp, 17.0F));
+    ftPhysics_ClampDriftStickRange(fp, 0, 0.03F, ftMario_SpecialLw_UpdateFriction(fp, 17.0F));
 }
 
 // 0x8015675C

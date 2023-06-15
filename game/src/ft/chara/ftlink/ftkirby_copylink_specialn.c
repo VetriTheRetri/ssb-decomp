@@ -6,7 +6,7 @@ void func_ovl3_80164650(GObj *fighter_gobj)
 
     if (fp->fighter_vars.kirby.copylink_boomerang_gobj != NULL)
     {
-        func_ovl3_8016800C(fp->fighter_vars.kirby.copylink_boomerang_gobj);
+        wpMain_DestroyWeapon(fp->fighter_vars.kirby.copylink_boomerang_gobj);
 
         fp->fighter_vars.kirby.copylink_boomerang_gobj = NULL;
     }

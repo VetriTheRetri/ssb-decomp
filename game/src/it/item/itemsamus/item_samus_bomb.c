@@ -3,7 +3,7 @@
 
 bool32 func_ovl3_80168F00(GObj *item_gobj)
 {
-    if (func_ovl3_80167FE8(itGetStruct(item_gobj)) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wpGetStruct(item_gobj)) != FALSE)
     {
         return TRUE;
     }
@@ -12,7 +12,7 @@ bool32 func_ovl3_80168F00(GObj *item_gobj)
 
 void func_ovl3_80168F2C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     ip->lifetime = ITSAMUSBOMB_EXPLODE_LIFETIME;
 
@@ -38,9 +38,9 @@ void func_ovl3_80168F2C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80168F98(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
         func_ovl2_801005C8(&DObjGetStruct(item_gobj)->translate);
         func_ovl3_80168F2C(item_gobj);
@@ -88,7 +88,7 @@ bool32 jtgt_ovl3_80168F98(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80169108(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Vec3f *vel;
     bool32 is_collide;
 
@@ -98,7 +98,7 @@ bool32 jtgt_ovl3_80169108(GObj *item_gobj)
 
         if (func_ovl3_80167C38(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), ITSAMUSBOMB_WAIT_COLLIDE_MOD_VEL, NULL) != FALSE)
         {
-            func_ovl3_80167F68(item_gobj);
+            wpMain_VelSetLR(item_gobj);
         }
         if (is_collide != FALSE)
         {
@@ -106,7 +106,7 @@ bool32 jtgt_ovl3_80169108(GObj *item_gobj)
 
             func_ovl0_800C7B08(vel, &ip->coll_data.ground_angle);
             func_ovl0_800C7AE0(vel, 0.6F);
-            func_ovl3_80167F68(item_gobj);
+            wpMain_VelSetLR(item_gobj);
 
             if (func_ovl0_800C7A84(vel) < 8.0F)
             {
@@ -140,17 +140,17 @@ bool32 jtgt_ovl3_8016923C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80169274(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
-    func_ovl3_80167F68(item_gobj);
+    wpMain_VelSetLR(item_gobj);
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_801692C4(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITSAMUSBOMB_WAIT_LIFETIME;
@@ -158,7 +158,7 @@ bool32 jtgt_ovl3_801692C4(GObj *item_gobj)
     if (ip->ground_or_air == air)
     {
         func_ovl3_801680EC(ip, fp);
-        func_ovl3_80167F68(item_gobj);
+        wpMain_VelSetLR(item_gobj);
     }
     else
     {
@@ -171,14 +171,14 @@ extern ItemSpawnData Item_SamusBomb_Desc;
 
 GObj* func_ovl3_80169328(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_SamusBomb_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_SamusBomb_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->lifetime = ITSAMUSBOMB_WAIT_LIFETIME;
 

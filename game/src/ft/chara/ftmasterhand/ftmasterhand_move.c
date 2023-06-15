@@ -62,6 +62,6 @@ void func_ovl3_801592B4(GObj *fighter_gobj, void (*cb)(GObj*), Vec3f *vel)
     if (((vel->x - DObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
     {
         fp->lr = -fp->lr;
-        fp->joint[0]->rotate.y = fp->lr * HALF_PI32;
+        fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * HALF_PI32;
     }
 }

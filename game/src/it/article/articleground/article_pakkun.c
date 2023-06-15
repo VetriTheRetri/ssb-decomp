@@ -47,7 +47,7 @@ bool32 func_ovl3_8017CFDC(GObj *article_gobj)
         while (fighter_gobj != NULL)
         {
             Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-            DObj *joint = fp->joint[0];
+            DObj *joint = fp->joint[ftParts_TopN_Joint];
             f32 dist_x, translate_y;
 
             if (joint->translate.x < pos_x)

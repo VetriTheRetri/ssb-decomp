@@ -330,7 +330,7 @@ void func_8000B7B4(void) {
         curr = gOMObjCommonLinks[i];
         while (curr != NULL) {
             next = curr->unk04;
-            func_80009A84(curr);
+            gOMObj_EjectGObjCommon(curr);
             curr = next;
         }
     }

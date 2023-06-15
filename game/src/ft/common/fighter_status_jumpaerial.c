@@ -15,9 +15,9 @@ void ftCommon_JumpAerial_UpdateModelYaw(Fighter_Struct *fp)
     {
         fp->status_vars.common.jumpaerial.turn_frames--;
 
-        fp->joint[0]->rotate.y += FTCOMMON_JUMPAERIAL_TURN_ROTATE_STEP;
+        fp->joint[ftParts_TopN_Joint]->rotate.y += FTCOMMON_JUMPAERIAL_TURN_ROTATE_STEP;
 
-        func_ovl2_800EB528(fp->joint[0]);
+        func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
 
         if (fp->status_vars.common.jumpaerial.turn_frames == (FTCOMMON_JUMPAERIAL_TURN_FRAMES / 2))
         {
@@ -96,7 +96,7 @@ void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
     case Ft_Kind_PolyKirby:
         if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTKIRBY_JUMPAERIAL_VEL_MUL);
+            ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTKIRBY_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTKIRBY_JUMPAERIAL_VEL_MUL);
         }
         break;
 
@@ -104,7 +104,7 @@ void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
     case Ft_Kind_PolyPurin:
         if (func_ovl2_800D8FA8(fp, attributes) == FALSE)
         {
-            ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTPURIN_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTPURIN_JUMPAERIAL_VEL_MUL);
+            ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTPURIN_JUMPAERIAL_VEL_MUL, attributes->aerial_speed_max_x * FTPURIN_JUMPAERIAL_VEL_MUL);
         }
         break;
     }

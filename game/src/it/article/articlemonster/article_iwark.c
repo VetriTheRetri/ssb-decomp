@@ -11,7 +11,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
 
     if (ap->article_vars.iwark.rock_spawn_wait <= 0)
     {
-        Item_Struct *ip;
+        Weapon_Struct *ip;
         GObj *rock_gobj;
         Vec3f pos = joint->translate;
 
@@ -21,7 +21,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
 
         if (rock_gobj != NULL)
         {
-            ip = itGetStruct(rock_gobj);
+            ip = wpGetStruct(rock_gobj);
 
             ip->item_vars.rock.unk_0xC = ap->article_vars.iwark.rock_timer2 - ap->article_vars.iwark.rock_timer1;
 
@@ -218,7 +218,7 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_8017DCAC(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Article_Struct *ap = atGetStruct(ip->item_vars.rock.owner_gobj);
 
     ap->article_vars.iwark.rock_spawn_count++;
@@ -228,7 +228,7 @@ bool32 func_ovl3_8017DCAC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017DCCC(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     DObj *joint;
 
     func_ovl3_80168088(ip, ATIWARK_ROCK_GRAVITY, ATIWARK_ROCK_T_VEL);
@@ -242,7 +242,7 @@ bool32 jtgt_ovl3_8017DCCC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017DD18(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Article_Struct *ap = atGetStruct(ip->item_vars.rock.owner_gobj);
     Coll_Data *coll_data = &ip->coll_data;
     Vec3f pos = DObjGetStruct(item_gobj)->translate;
@@ -276,7 +276,7 @@ bool32 jtgt_ovl3_8017DD18(GObj *item_gobj)
 
 bool32 func_ovl3_8017DE10(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -294,7 +294,7 @@ bool32 func_ovl3_8017DE10(GObj *item_gobj)
 
 bool32 func_ovl3_8017DEB8(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
@@ -312,16 +312,16 @@ extern ItemSpawnData Item_Iwark_Rock_Data;
 GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
 {
     s32 unused;
-    GObj *item_gobj = func_ovl3_801655C8(spawn_gobj, &Item_Iwark_Rock_Data, pos, ITEM_MASK_SPAWN_ARTICLE);
+    GObj *item_gobj = wpManager_CreateWeapon(spawn_gobj, &Item_Iwark_Rock_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     f32 vel_y;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->item_vars.rock.ground_line_id = -1;
 

@@ -1,36 +1,40 @@
 #include "ftlink.h"
 
-void func_ovl3_80163B40(Fighter_Struct *fp, Item_Struct *ip)
+// 0x80163B40
+void ftLink_SpecialHi_DestroyWeapon(Fighter_Struct *fp, Weapon_Struct *wp)
 {
-    ip->is_hitlag_item = FALSE;
+    wp->is_hitlag_item = FALSE;
 
-    ip->item_vars.spin_attack.unk_0x18 = 1;
+    wp->item_vars.spin_attack.is_destroy = TRUE;
 
-    func_ovl3_8016800C(ip->item_gobj);
+    wpMain_DestroyWeapon(wp->item_gobj);
 
     fp->status_vars.link.specialhi.spin_attack_gobj = NULL;
 }
 
-void func_ovl3_80163B80(GObj *fighter_gobj, Item_Struct *ip)
+// 0x80163B80
+void ftLink_SpecialHi_UpdateWeaponPos(GObj *fighter_gobj, Weapon_Struct *wp)
 {
-    ip->item_vars.spin_attack.pos_index++;
-    ip->item_vars.spin_attack.pos_index %= (ARRAY_COUNT(ip->item_vars.spin_attack.pos_x) | ARRAY_COUNT(ip->item_vars.spin_attack.pos_y));
+    wp->item_vars.spin_attack.pos_index++;
+    wp->item_vars.spin_attack.pos_index %= ITSPINATTACK_EXTEND_POS_COUNT;
 
-    ip->item_vars.spin_attack.pos_x[ip->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
-    ip->item_vars.spin_attack.pos_y[ip->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
+    wp->item_vars.spin_attack.pos_x[wp->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
+    wp->item_vars.spin_attack.pos_y[wp->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
 }
 
-void func_ovl3_80163BF0(GObj *fighter_gobj, Item_Struct *ip)
+// 0x80163BF0
+void ftLink_SpecialHi_DecWeaponLifeCheckDestroy(GObj *fighter_gobj, Weapon_Struct *wp)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
-        func_ovl3_80163B40(fp, ip);
+        ftLink_SpecialHi_DestroyWeapon(fp, wp);
     }
 }
 
-void func_ovl3_80163C2C(GObj *fighter_gobj, Item_Struct *ip)
+// 0x80163C2C
+void ftLink_SpecialHi_UpdateWeaponHit(GObj *fighter_gobj, Weapon_Struct *wp)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -40,84 +44,79 @@ void func_ovl3_80163C2C(GObj *fighter_gobj, Item_Struct *ip)
         break;
 
     case 1:
-        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
-        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_1;
+        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_1;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 2:
 
-        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
-        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_2;
+        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_2;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 3:
-        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
-        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_3;
+        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_3;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
     case 4:
-        ip->item_hit.update_state = gmHitCollision_UpdateState_New;
-        ip->item_hit.size = FTLINK_SPIN_ATTACK_FLAG_SIZE_4;
+        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_4;
 
         func_ovl3_80165F60(fighter_gobj);
         break;
 
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-        ip->item_hit.update_state = 0;
+    case 13:
+        wp->item_hit.update_state = gmHitCollision_UpdateState_Disable;
         break;
 
-    case 13:
     default:
-        ip->item_hit.update_state = 0;
+        wp->item_hit.update_state = gmHitCollision_UpdateState_Disable;
         break;
     }
     fp->command_vars.flags.flag2 = 0;
 }
 
-void func_ovl3_80163D00(GObj *fighter_gobj)
+// 0x80163D00
+void ftLink_SpecialHi_ProcGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
+        Weapon_Struct *wp = wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
 
         if (fp->hitlag_timer != 0)
         {
-            ip->is_hitlag_item = TRUE;
+            wp->is_hitlag_item = TRUE;
         }
-        else ip->is_hitlag_item = FALSE;
+        else wp->is_hitlag_item = FALSE;
     }
 }
 
-void func_ovl3_80163D44(GObj *fighter_gobj)
+// 0x80163D44
+void ftLink_SpecialHi_UpdateWeaponVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
+        Weapon_Struct *wp = wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
 
-        func_ovl3_80163C2C(fighter_gobj, ip);
-        func_ovl3_80163B80(fighter_gobj, ip);
-        func_ovl3_80163BF0(fighter_gobj, ip);
+        ftLink_SpecialHi_UpdateWeaponHit(fighter_gobj, wp);
+        ftLink_SpecialHi_UpdateWeaponPos(fighter_gobj, wp);
+        ftLink_SpecialHi_DecWeaponLifeCheckDestroy(fighter_gobj, wp);
     }
 }
 
-void func_ovl3_80163D94(GObj *fighter_gobj, bool32 is_skip_gobj)
+// 0x80163D94
+void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *spin_attack_gobj;
@@ -127,9 +126,9 @@ void func_ovl3_80163D94(GObj *fighter_gobj, bool32 is_skip_gobj)
     {
         fp->command_vars.flags.flag0 = 0;
 
-        if (func_ovl2_80103378(fighter_gobj) != FALSE)
+        if (func_ovl2_80103378(fighter_gobj) != NULL)
         {
-            fp->is_statupdate_stop_gfx = TRUE;
+            fp->is_playing_effect = TRUE;
         }
         if (is_skip_gobj == FALSE)
         {
@@ -137,43 +136,46 @@ void func_ovl3_80163D94(GObj *fighter_gobj, bool32 is_skip_gobj)
             pos.y = 0.0F;
             pos.x = 0.0F;
 
-            func_ovl2_800EDF24(fp->joint[FTLINK_SPIN_ATTACK_SPAWN_JOINT], &pos);
+            func_ovl2_800EDF24(fp->joint[FTLINK_SPINATTACK_SPAWN_JOINT], &pos);
 
             fp->status_vars.link.specialhi.spin_attack_gobj = func_ovl3_8016CB1C(fighter_gobj, &pos);
 
             if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
             {
-                Item_Struct *ip = itGetStruct(spin_attack_gobj);
+                Weapon_Struct *wp = wpGetStruct(spin_attack_gobj);
                 s32 i;
 
-                ip->item_hit.update_state = 0;
+                wp->item_hit.update_state = 0;
 
-                for (i = 0; i < (ARRAY_COUNT(ip->item_vars.spin_attack.pos_x) | ARRAY_COUNT(ip->item_vars.spin_attack.pos_y)); i++)
+                for (i = 0; i < ITSPINATTACK_EXTEND_POS_COUNT; i++)
                 {
-                    ip->item_vars.spin_attack.pos_x[i] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
-                    ip->item_vars.spin_attack.pos_y[i] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
+                    wp->item_vars.spin_attack.pos_x[i] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
+                    wp->item_vars.spin_attack.pos_y[i] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
                 }
             }
         }
     }
 }
 
-void func_ovl3_80163EFC(GObj *fighter_gobj)
+// 0x80163EFC
+void ftLink_SpecialHi_ProcDamage(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
     {
-        func_ovl3_80163B40(fp, itGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj));
+        ftLink_SpecialHi_DestroyWeapon(fp, wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj));
     }
 }
 
-void func_ovl3_80163F30(GObj *fighter_gobj)
+// 0x80163F30
+void ftLink_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_801642EC);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftLink_SpecialHiEnd_SetStatus);
 }
 
-void func_ovl3_80163F54(GObj *fighter_gobj)
+// 0x80163F54
+void ftLink_SpecialHiEnd_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -181,13 +183,14 @@ void func_ovl3_80163F54(GObj *fighter_gobj)
 
         if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
         {
-            func_ovl3_80163B40(fp, itGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj));
+            ftLink_SpecialHi_DestroyWeapon(fp, wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj));
         }
         ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_80163FB0(GObj *fighter_gobj)
+// 0x80163FB0
+void ftLink_SpecialAirHiEnd_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -195,28 +198,30 @@ void func_ovl3_80163FB0(GObj *fighter_gobj)
 
         if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
         {
-            func_ovl3_80163B40(fp, itGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj));
+            ftLink_SpecialHi_DestroyWeapon(fp, wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj));
         }
-        ftCommon_FallSpecial_SetStatus(fighter_gobj, FTLINK_SPIN_ATTACK_FALLSPECIAL_DRIFT, FALSE, TRUE, TRUE, FTLINK_SPIN_ATTACK_LANDING_LAG, FALSE);
+        ftCommon_FallSpecial_SetStatus(fighter_gobj, FTLINK_SPINATTACK_FALLSPECIAL_DRIFT, FALSE, TRUE, TRUE, FTLINK_SPINATTACK_LANDING_LAG, FALSE);
     }
 }
 
-void func_ovl3_80164030(GObj *fighter_gobj)
+// 0x80164030
+void ftLink_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
-    func_ovl3_80163D44(fighter_gobj);
-    func_ovl3_80163D94(fighter_gobj, FALSE);
+    ftLink_SpecialHi_UpdateWeaponVars(fighter_gobj);
+    ftLink_SpecialHi_CreateWeapon(fighter_gobj, FALSE);
     func_ovl2_800D8BB4(fighter_gobj);
 }
 
-void func_ovl3_80164064(GObj *fighter_gobj)
+// 0x80164064
+void ftLink_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 gravity;
 
-    func_ovl3_80163D44(fighter_gobj);
-    func_ovl3_80163D94(fighter_gobj, TRUE);
+    ftLink_SpecialHi_UpdateWeaponVars(fighter_gobj);
+    ftLink_SpecialHi_CreateWeapon(fighter_gobj, TRUE);
 
-    gravity = (fp->command_vars.flags.flag1 != 0U) ? fp->attributes->gravity : fp->attributes->gravity * FTLINK_SPIN_ATTACK_GRAVITY_MUL;
+    gravity = (fp->command_vars.flags.flag1 != 0) ? fp->attributes->gravity : fp->attributes->gravity * FTLINK_SPINATTACK_GRAVITY_MUL;
 
     func_ovl2_800D8D68(fp, gravity, fp->attributes->fall_speed_max);
 
@@ -224,41 +229,44 @@ void func_ovl3_80164064(GObj *fighter_gobj)
     {
         ftCommonAttributes *attributes = fp->attributes;
 
-        ftPhysicsClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTLINK_SPIN_ATTACK_AIR_DRIFT_MUL, attributes->aerial_speed_max_x);
+        ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTLINK_SPINATTACK_AIR_DRIFT_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, fp->attributes);
     }
 }
 
-void func_ovl3_80164128(GObj *fighter_gobj)
+// 0x80164128
+void ftLink_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
         ftMapCollide_SetAir(fp);
-        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, 5U);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_HIT_PRESERVE));
 
-        fp->proc_damage = func_ovl3_80163EFC;
+        fp->proc_damage = ftLink_SpecialHi_ProcDamage;
 
         fp->jumps_used = fp->attributes->jumps_max;
     }
 }
 
-void func_ovl3_80164198(GObj *fighter_gobj)
+// 0x80164198
+void ftLink_SpecialHiEnd_ProcMap(GObj *fighter_gobj)
 {
     if (func_ovl2_800DDDDC(fighter_gobj, ftCommon_Fall_SetStatus) == FALSE)
     {
-        func_ovl3_80163EFC(fighter_gobj);
+        ftLink_SpecialHi_ProcDamage(fighter_gobj);
     }
 }
 
-void func_ovl3_801641D0(GObj *fighter_gobj)
+// 0x801641D0
+void ftLink_SpecialAirHiEnd_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
     {
-        func_ovl3_80163EFC(fighter_gobj);
+        ftLink_SpecialHi_ProcDamage(fighter_gobj);
 
         if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
         {
@@ -267,14 +275,15 @@ void func_ovl3_801641D0(GObj *fighter_gobj)
         else if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {
             ftMapCollide_SetGround(fp);
-            ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
+            ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
-            fp->proc_damage = func_ovl3_80163EFC;
+            fp->proc_damage = ftLink_SpecialHi_ProcDamage;
         }
     }
 }
 
-void func_ovl3_8016426C(GObj *fighter_gobj)
+// 0x8016426C
+void ftLink_SpecialHi_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -285,43 +294,46 @@ void func_ovl3_8016426C(GObj *fighter_gobj)
     fp->status_vars.link.specialhi.spin_attack_gobj = NULL;
 }
 
-void jtgt_ovl3_80164284(GObj *fighter_gobj)
+// 0x80164284
+void ftLink_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_8016426C;
+    fp->proc_status = ftLink_SpecialHi_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHi, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_damage = func_ovl3_80163EFC;
-    fp->proc_gfx = func_ovl3_80163D00;
+    fp->proc_damage = ftLink_SpecialHi_ProcDamage;
+    fp->proc_gfx = ftLink_SpecialHi_ProcGFX;
 }
 
-void func_ovl3_801642EC(GObj *fighter_gobj)
+// 0x801642EC
+void ftLink_SpecialHiEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
-    fp->proc_damage = func_ovl3_80163EFC;
-    fp->proc_gfx = func_ovl3_80163D00;
+    fp->proc_damage = ftLink_SpecialHi_ProcDamage;
+    fp->proc_gfx = ftLink_SpecialHi_ProcGFX;
 }
 
-void jtgt_ovl3_80164348(GObj *fighter_gobj)
+// 0x80164348
+void ftLink_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->proc_status = func_ovl3_8016426C;
+    fp->proc_status = ftLink_SpecialHi_ProcStatus;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
-    fp->phys_info.vel_air.y = FTLINK_SPIN_ATTACK_AIR_VEL_Y;
+    fp->phys_info.vel_air.y = FTLINK_SPINATTACK_AIR_VEL_Y;
 
     fp->jumps_used = fp->attributes->jumps_max;
 
-    fp->proc_damage = func_ovl3_80163EFC;
-    fp->proc_gfx = func_ovl3_80163D00;
+    fp->proc_damage = ftLink_SpecialHi_ProcDamage;
+    fp->proc_gfx = ftLink_SpecialHi_ProcGFX;
 }

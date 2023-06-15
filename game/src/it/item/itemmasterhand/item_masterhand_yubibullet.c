@@ -3,7 +3,7 @@
 
 bool32 func_ovl3_8016DC00(GObj *item_gobj)
 {
-    if (func_ovl3_80167FE8(itGetStruct(item_gobj)) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wpGetStruct(item_gobj)) != FALSE)
     {
         return TRUE;
     }
@@ -12,7 +12,7 @@ bool32 func_ovl3_8016DC00(GObj *item_gobj)
 
 void func_ovl3_8016DC2C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     ip->item_hit.hit_sfx = 1;
 
@@ -56,7 +56,7 @@ bool32 jtgt_ovl3_8016DCB0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016DD2C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
     func_ovl3_80168428(item_gobj);
@@ -66,7 +66,7 @@ bool32 jtgt_ovl3_8016DD2C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016DD7C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     func_ovl3_801680EC(ip, fp);
@@ -79,14 +79,14 @@ extern ItemSpawnData Item_YubiBullet_Easy;
 
 GObj *func_ovl3_8016DDB4(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_YubiBullet_Easy, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_YubiBullet_Easy, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->phys_info.vel.x = ITYUBIBULLET_VEL_X * ip->lr;
     ip->phys_info.vel.y = ITYUBIBULLET_VEL_Y;
@@ -100,14 +100,14 @@ extern ItemSpawnData Item_YubiBullet_Hard;
 
 GObj *func_ovl3_8016DE28(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_YubiBullet_Hard, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_YubiBullet_Hard, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->phys_info.vel.x = ITYUBIBULLET_VEL_X * ip->lr;
     ip->phys_info.vel.y = ITYUBIBULLET_VEL_Y;

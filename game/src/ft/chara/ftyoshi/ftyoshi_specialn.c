@@ -231,6 +231,6 @@ void func_ovl3_8015E980(GObj *fighter_gobj)
 
     if (fp->status_vars.yoshi.specialhi.egg_gobj != NULL)
     {
-        func_ovl3_8016800C(fp->status_vars.yoshi.specialhi.egg_gobj);
+        wpMain_DestroyWeapon(fp->status_vars.yoshi.specialhi.egg_gobj);
     }
 }

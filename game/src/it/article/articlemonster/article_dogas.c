@@ -168,12 +168,12 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_801830DC(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj)->next;
 
     ip->item_hit.size = joint->scale.x * ip->item_vars.smog.hit_desc->size;
 
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
         return TRUE;
     }
@@ -185,15 +185,15 @@ extern ItemSpawnData Item_Smog_Data;
 GObj* func_ovl3_80183144(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 {
     ItemSpawnData *p_data = &Item_Smog_Data;
-    GObj *item_gobj = func_ovl3_801655C8(article_gobj, &Item_Smog_Data, pos, ITEM_MASK_SPAWN_ARTICLE);
+    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->lifetime = ATDOGAS_SMOG_LIFETIME;
 

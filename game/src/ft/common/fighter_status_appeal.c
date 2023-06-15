@@ -20,7 +20,7 @@ void ftCommon_Appeal_SetStatus(GObj *fighter_gobj)
     {
         if ((fp->fighter_vars.kirby.copy_id != Ft_Kind_Kirby) && (fp->fighter_vars.kirby.copy_bool_unk == FALSE))
         {
-            func_ovl3_801635EC(fighter_gobj);
+            ftKirby_SpecialN_LoseCopy(fighter_gobj);
         }
     }
     ftStatus_Update(fighter_gobj, ftStatus_Common_Appeal, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

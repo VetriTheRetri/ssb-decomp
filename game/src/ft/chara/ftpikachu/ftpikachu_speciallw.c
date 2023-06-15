@@ -96,7 +96,7 @@ void jtgt_ovl3_80151FFC(GObj *fighter_gobj)
 bool32 func_ovl3_8015203C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ip;
+    Weapon_Struct *ip;
     DObj *fighter_joint;
     DObj *item_joint;
     GObj *thunder_gobj;
@@ -119,7 +119,7 @@ bool32 func_ovl3_8015203C(GObj *fighter_gobj)
         return FALSE;
     }
 
-    ip = itGetStruct(thunder_gobj);
+    ip = wpGetStruct(thunder_gobj);
 
     fighter_joint = DObjGetStruct(fighter_gobj);
     item_joint = DObjGetStruct(thunder_gobj);
@@ -203,7 +203,7 @@ void func_ovl3_8015225C(GObj *fighter_gobj)
     }
     if (!(fp->fighter_vars.pikachu.is_thunder_destroy & TRUE))
     {
-        Item_Struct *ip = itGetStruct(thunder_gobj);
+        Weapon_Struct *ip = wpGetStruct(thunder_gobj);
 
         ip->item_vars.thunder.thunder_state = itPikachuThunderStatus_Destroy;
     }

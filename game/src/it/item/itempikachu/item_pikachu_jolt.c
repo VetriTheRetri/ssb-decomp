@@ -7,9 +7,9 @@
 
 bool32 jtgt_ovl3_80169390(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
         func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         return TRUE;
@@ -21,7 +21,7 @@ bool32 jtgt_ovl3_80169390(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Vec3f pos;
     u32 unused[2];
 
@@ -75,7 +75,7 @@ bool32 jtgt_ovl3_801693EC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016953C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -84,7 +84,7 @@ bool32 jtgt_ovl3_8016953C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016956C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -93,7 +93,7 @@ bool32 jtgt_ovl3_8016956C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801695B0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITPIKACHUJOLT_LIFETIME;
@@ -107,14 +107,14 @@ extern ItemSpawnData Item_ThunderJoltAir_Desc;
 
 GObj* func_ovl3_801695E4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *item_gobj = func_ovl3_801655C8(fighter_gobj, &Item_ThunderJoltAir_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_FIGHTER));
-    Item_Struct *ip;
+    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_ThunderJoltAir_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->lifetime = ITPIKACHUJOLT_LIFETIME;
 
@@ -135,14 +135,14 @@ void func_ovl3_80169654(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801696A0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     if (item_gobj->anim_frame == ITPIKACHUJOLT_ANIM_PUSH_FRAME)
     {
         func_ovl2_80101C34(&DObjGetStruct(item_gobj)->translate, DObjGetStruct(item_gobj)->rotate.z);
         func_ovl3_80169654(item_gobj);
     }
-    if (func_ovl3_80167FE8(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
         func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
         return TRUE;
@@ -180,7 +180,7 @@ bool32 jtgt_ovl3_801696A0(GObj *item_gobj)
 
 s32 func_ovl3_8016981C(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Vec3f pos;
     Vec3f rotate;
     s32 line_id;
@@ -297,7 +297,7 @@ s32 func_ovl3_8016981C(GObj *item_gobj)
 
 bool32 func_ovl3_80169BF0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Vec3f rotate;
 
     func_ovl3_80169654(item_gobj);
@@ -328,7 +328,7 @@ bool32 func_ovl3_80169BF0(GObj *item_gobj)
 
 bool32 func_ovl3_80169D08(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     s32 coll_type;
     Vec3f pos;
     s32 line_id;
@@ -584,7 +584,7 @@ bool32 func_ovl3_80169D08(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016A374(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
 
@@ -593,7 +593,7 @@ bool32 jtgt_ovl3_8016A374(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8016A3A4(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     ip->lifetime = ITPIKACHUJOLT_LIFETIME;
@@ -602,7 +602,7 @@ bool32 jtgt_ovl3_8016A3A4(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->rotate.y = (ip->phys_info.vel.x >= 0.0F) ? PI32 : 0;
 
-    func_ovl3_80167F68(item_gobj);
+    wpMain_VelSetLR(item_gobj);
 
     return FALSE;
 }
@@ -612,15 +612,15 @@ extern ItemSpawnData Item_ThunderJoltGround_Desc;
 GObj* func_ovl3_8016A42C(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
 {
     s32 unused[2];
-    Item_Struct *prev_ip = prev_gobj->user_data;
-    Item_Struct *new_ip;
-    GObj *new_gobj = func_ovl3_801655C8(prev_gobj, &Item_ThunderJoltGround_Desc, pos, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+    Weapon_Struct *prev_ip = prev_gobj->user_data;
+    Weapon_Struct *new_ip;
+    GObj *new_gobj = wpManager_CreateWeapon(prev_gobj, &Item_ThunderJoltGround_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_WEAPON));
 
     if (new_gobj == NULL)
     {
         return NULL;
     }
-    new_ip = itGetStruct(new_gobj);
+    new_ip = wpGetStruct(new_gobj);
 
     new_ip->item_vars.thunder_jolt.coll_type = coll_type;
 
@@ -669,7 +669,7 @@ GObj* func_ovl3_8016A42C(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
         break;
     }
     func_ovl2_80101C34(&DObjGetStruct(new_gobj)->translate, DObjGetStruct(new_gobj)->rotate.z);
-    func_ovl3_80167F08(new_ip, 0xE6);
+    wpMain_PlayDestroySFX(new_ip, 0xE6);
 
     return new_gobj;
 }

@@ -1083,7 +1083,7 @@ glabel func_ovl30_801329AC
   /* 14E528 801329B8 AFBF001C */        sw $ra, 0x1c($sp)
   /* 14E52C 801329BC 10A00003 */      beqz $a1, .L801329CC
   /* 14E530 801329C0 AFA40020 */        sw $a0, 0x20($sp)
-  /* 14E534 801329C4 0C0026A1 */       jal func_80009A84
+  /* 14E534 801329C4 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 14E538 801329C8 00A02025 */        or $a0, $a1, $zero
   .L801329CC:
   /* 14E53C 801329CC 00002025 */        or $a0, $zero, $zero
@@ -1719,7 +1719,7 @@ glabel func_ovl30_801332DC
   /* 14EE68 801332F8 8E040000 */        lw $a0, ($s0) # D_ovl30_80134BE4 + 0
   /* 14EE6C 801332FC 10800004 */      beqz $a0, .L80133310
   /* 14EE70 80133300 00000000 */       nop 
-  /* 14EE74 80133304 0C0026A1 */       jal func_80009A84
+  /* 14EE74 80133304 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 14EE78 80133308 00000000 */       nop 
   /* 14EE7C 8013330C AE000000 */        sw $zero, ($s0) # D_ovl30_80134BE4 + 0
   .L80133310:
@@ -1731,7 +1731,7 @@ glabel func_ovl30_801332DC
   .L80133324:
   /* 14EE94 80133324 50800005 */      beql $a0, $zero, .L8013333C
   /* 14EE98 80133328 26100004 */     addiu $s0, $s0, 4
-  /* 14EE9C 8013332C 0C0026A1 */       jal func_80009A84
+  /* 14EE9C 8013332C 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 14EEA0 80133330 00000000 */       nop 
   /* 14EEA4 80133334 AE000000 */        sw $zero, ($s0) # D_ovl30_80134BF0 + 0
   /* 14EEA8 80133338 26100004 */     addiu $s0, $s0, 4
@@ -1746,7 +1746,7 @@ glabel func_ovl30_801332DC
   /* 14EEC4 80133354 8E040000 */        lw $a0, ($s0) # D_ovl30_80134BE8 + 0
   /* 14EEC8 80133358 10800004 */      beqz $a0, .L8013336C
   /* 14EECC 8013335C 00000000 */       nop 
-  /* 14EED0 80133360 0C0026A1 */       jal func_80009A84
+  /* 14EED0 80133360 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 14EED4 80133364 00000000 */       nop 
   /* 14EED8 80133368 AE000000 */        sw $zero, ($s0) # D_ovl30_80134BE8 + 0
   .L8013336C:
@@ -1758,7 +1758,7 @@ glabel func_ovl30_801332DC
   .L80133380:
   /* 14EEF0 80133380 50800005 */      beql $a0, $zero, .L80133398
   /* 14EEF4 80133384 26100004 */     addiu $s0, $s0, 4
-  /* 14EEF8 80133388 0C0026A1 */       jal func_80009A84
+  /* 14EEF8 80133388 0C0026A1 */       jal gOMObj_EjectGObjCommon
   /* 14EEFC 8013338C 00000000 */       nop 
   /* 14EF00 80133390 AE000000 */        sw $zero, ($s0) # D_ovl30_80134C00 + 0
   /* 14EF04 80133394 26100004 */     addiu $s0, $s0, 4

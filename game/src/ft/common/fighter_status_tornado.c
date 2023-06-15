@@ -111,7 +111,7 @@ void ftCommon_Twister_ShootFighter(GObj *fighter_gobj)
 
     if (damage != 0)
     {
-        ftCommon_DamageUpdateCheckDropItem(fp, damage);
+        ftDamageUpdateCheckDropItem(fp, damage);
     }
-    fp->tornado_wait = FTCOMMON_TORNADO_PICKUP_WAIT;
+    fp->twister_wait = FTCOMMON_TORNADO_PICKUP_WAIT;
 }

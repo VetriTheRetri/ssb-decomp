@@ -103,8 +103,8 @@ void ftCommon_Appear_ProcUpdate(GObj *fighter_gobj)
 void ftCommon_Appear_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    DObj *topn_joint = fp->joint[0];
-    DObj *transn_joint = fp->joint[1];
+    DObj *topn_joint = fp->joint[ftParts_TopN_Joint];
+    DObj *transn_joint = fp->joint[ftParts_TransN_Joint];
 
     topn_joint->translate.y = fp->entry_pos.y + transn_joint->translate.y;
 

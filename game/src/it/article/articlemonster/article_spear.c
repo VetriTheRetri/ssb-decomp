@@ -213,7 +213,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_80180354(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if ((ip->lr == RIGHT) && ((Ground_Info->blastzone_right - ATSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
@@ -251,16 +251,16 @@ extern ItemSpawnData Item_Pippi_Swarm_Data;
 GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
 {
     Article_Struct *ap = atGetStruct(article_gobj);
-    GObj *item_gobj = func_ovl3_801655C8(article_gobj, ((at_kind == At_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, ITEM_MASK_SPAWN_ARTICLE);
+    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, ((at_kind == At_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
-    Item_Struct *ip;
+    Weapon_Struct *ip;
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ip = itGetStruct(item_gobj);
+    ip = wpGetStruct(item_gobj);
 
     ip->lr = -ap->lr;
 

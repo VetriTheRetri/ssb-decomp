@@ -84,7 +84,7 @@ void ftCommon_Throw_SetStatus(GObj *fighter_gobj, bool32 is_throwf)
     {
         if (func_ovl2_80101E80(fighter_gobj) != NULL)
         {
-            this_fp->is_statupdate_stop_gfx = TRUE;
+            this_fp->is_playing_effect = TRUE;
         }
     }
     if (thrown_status->status1 != -1)
