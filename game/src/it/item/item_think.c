@@ -32,19 +32,19 @@ void wpMain_PlayDestroySFX(Weapon_Struct *wp, u16 sfx_id) // Play OnDestroy SFX 
 }
 
 // 0x80167F68
-void wpMain_VelSetLR(GObj *item_gobj) // Set item's facing direction based on velocity
+void wpMain_VelSetLR(GObj *weapon_gobj) // Set item's facing direction based on velocity
 {
-    Weapon_Struct *wp = wpGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
     wp->lr = (wp->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
 }
 
 // 0x80167FA0
-void wpMain_VelSetModelYaw(GObj *item_gobj) // Set yaw rotation based on velocity
+void wpMain_VelSetModelYaw(GObj *weapon_gobj) // Set yaw rotation based on velocity
 {
-    Weapon_Struct *wp = wpGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    DObjGetStruct(item_gobj)->rotate.y = (wp->phys_info.vel.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
+    DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
 }
 
 // 0x80167FE8
@@ -60,25 +60,26 @@ bool32 wpMain_DecLifeCheckExpire(Weapon_Struct *wp) // Decrement lifetime and ch
 }
 
 // 0x8016800C
-void wpMain_DestroyWeapon(GObj *item_gobj) // Destroy item?
+void wpMain_DestroyWeapon(GObj *weapon_gobj) // Destroy item?
 {
-    Weapon_Struct *wp = wpGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
     wpMain_StopSFX(wp);                 // Stop item's SFX
     wpManager_EjectWeaponStruct(wp);    // Eject item's user_data from memory?
-    gOMObj_EjectGObjCommon(item_gobj);  // Eject GObj from memory?
+    gOMObj_EjectGObjCommon(weapon_gobj);  // Eject GObj from memory?
 }
 
 // 0x80168044
-void func_ovl3_80168044(GObj *item_gobj) // Transfer item's base ground velocity to aerial velocity
+void func_ovl3_80168044(GObj *weapon_gobj) // Transfer item's base ground velocity to aerial velocity
 {
-    Weapon_Struct *wp = wpGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
     wp->phys_info.vel.x = wp->lr * wp->coll_data.ground_angle.y * wp->phys_info.vel_ground;
     wp->phys_info.vel.y = wp->lr * -wp->coll_data.ground_angle.x * wp->phys_info.vel_ground;
 }
 
-void func_ovl3_80168088(Weapon_Struct *wp, f32 gravity, f32 terminal_velocity) // Subtract vertical velocity every frame and clamp to terminal velocity
+// 0x80168088
+void wpMain_UpdateGravityClampTVel(Weapon_Struct *wp, f32 gravity, f32 terminal_velocity) // Subtract vertical velocity every frame and clamp to terminal velocity
 {
     wp->phys_info.vel.y -= gravity;
 
@@ -89,7 +90,8 @@ void func_ovl3_80168088(Weapon_Struct *wp, f32 gravity, f32 terminal_velocity) /
     }
 }
 
-void func_ovl3_801680EC(Weapon_Struct *wp, Fighter_Struct *fp) // Invert direction on reflect
+// 0x801680EC
+void wpMain_ReflectorInvertLR(Weapon_Struct *wp, Fighter_Struct *fp) // Invert direction on reflect
 {
     if ((wp->phys_info.vel.x * fp->lr) < 0.0F)
     {
@@ -97,12 +99,14 @@ void func_ovl3_801680EC(Weapon_Struct *wp, Fighter_Struct *fp) // Invert directi
     }
 }
 
-s32 func_ovl3_80168128(Weapon_Struct *wp) // Return final damage after applying staling and bonus 0.999%
+// 0x80168128
+s32 wpMain_DamageApplyStale(Weapon_Struct *wp) // Return final damage after applying staling and bonus 0.999%
 {
     return (wp->item_hit.stale * wp->item_hit.damage) + 0.999F;
 }
 
-void func_ovl3_80168158(Weapon_Struct *wp) // Clear hit victims array
+// 0x80168158
+void wpMain_ClearHitVictimRecord(Weapon_Struct *wp) // Clear hit victims array
 {
     s32 i;
 
@@ -122,9 +126,9 @@ void func_ovl3_80168158(Weapon_Struct *wp) // Clear hit victims array
 
 // Missing an unused function at 0x8016830C, some matrix stuff, no idea how to map it or where to begin
 
-void func_ovl3_80168428(GObj *item_gobj)
+void func_ovl3_80168428(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(item_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Vec3f vel = wp->phys_info.vel, direction, angle, *rotate;
 
     direction.x = 0;
@@ -135,7 +139,7 @@ void func_ovl3_80168428(GObj *item_gobj)
 
     func_ovl0_800CD5AC(&vel, &direction, &angle);
 
-    rotate = &DObjGetStruct(item_gobj)->rotate;
+    rotate = &DObjGetStruct(weapon_gobj)->rotate;
 
     if (direction.z == LEFT)
     {

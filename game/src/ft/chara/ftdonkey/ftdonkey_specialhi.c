@@ -47,7 +47,7 @@ void ftDonkey_SpecialHi_ProcMap(GObj *fighter_gobj)
 // 0x8015B824
 void ftDonkey_SpecialAirHi_ProcMap(GObj *fighter_gobj)
 {
-    ftMapCollide_CheckGroundCliff(fighter_gobj, ftDonkey_SpecialAirHi_SwitchStatusGround);
+    ftMap_CheckGroundCliff(fighter_gobj, ftDonkey_SpecialAirHi_SwitchStatusGround);
 }
 
 // 0x8015B848
@@ -55,7 +55,7 @@ void ftDonkey_SpecialAirHi_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialHi, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_UNK5_PRESERVE);
     func_ovl2_800D8938(fp, FTDONKEY_SPINNINGKONG_GROUND_VEL_MAX);
 }
@@ -65,7 +65,7 @@ void ftDonkey_SpecialHi_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_UNK5_PRESERVE);
     func_ovl2_800D8E78(fp, FTDONKEY_SPINNINGKONG_AIR_VEL_MAX);
 }
@@ -98,7 +98,7 @@ void ftDonkey_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
 
     fp->phys_info.vel_air.y = 0.0F;
 

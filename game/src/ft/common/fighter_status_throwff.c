@@ -43,7 +43,7 @@ void ftDonkey_ThrowAirFF_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFF, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->status_vars.common.throwff.is_turn = FALSE;
@@ -56,7 +56,7 @@ void ftDonkey_ThrowFF_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowAirFF, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
 }

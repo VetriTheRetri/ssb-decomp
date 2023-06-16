@@ -125,15 +125,15 @@ GObj* jtgt_ovl3_80175800(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 // Ray Gun ammo functions
 
-bool32 jtgt_ovl3_801758BC(GObj *item_gobj)
+bool32 jtgt_ovl3_801758BC(GObj *weapon_gobj)
 {
-    DObj *joint = DObjGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(weapon_gobj);
 
     if (joint->scale.x < ATLGUN_AMMO_CLAMP_SCALE_X)
     {
         joint->scale.x += ATLGUN_AMMO_STEP_SCALE_X;
 
-        joint = DObjGetStruct(item_gobj); // Y tho lol
+        joint = DObjGetStruct(weapon_gobj); // Y tho lol
 
         if (ATLGUN_AMMO_CLAMP_SCALE_X < joint->scale.x)
         {
@@ -143,69 +143,69 @@ bool32 jtgt_ovl3_801758BC(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80175914(GObj *item_gobj)
+bool32 jtgt_ovl3_80175914(GObj *weapon_gobj)
 {
-    if (func_ovl3_80167C04(item_gobj) != FALSE)
+    if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
-        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80175958(GObj *item_gobj)
+bool32 jtgt_ovl3_80175958(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage);
+    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, ip->item_hit.damage);
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_80175988(GObj *item_gobj)
+bool32 jtgt_ovl3_80175988(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
-    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80175A00(GObj *item_gobj)
+bool32 jtgt_ovl3_80175A00(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    func_ovl3_801680EC(ip, fp);
+    wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
-    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     return FALSE;
 }
 
-extern ItemSpawnData Item_L_Gun_Ammo_Desc;
+extern WeaponSpawnData Item_L_Gun_Ammo_Desc;
 
 GObj* func_ovl3_80175A60(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_L_Gun_Ammo_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_L_Gun_Ammo_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     Weapon_Struct *ip;
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->phys_info.vel.x = ip->lr * ATLGUN_AMMO_VEL_X;
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
 
-    return item_gobj;
+    return weapon_gobj;
 }
 
 void func_ovl3_80175AD8(GObj *fighter_gobj, Vec3f *pos)

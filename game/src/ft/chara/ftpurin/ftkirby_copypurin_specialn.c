@@ -88,7 +88,7 @@ void ftKirby_CopyPurin_SpecialAirN_ProcMap(GObj *fighter_gobj)
 // 0x80151A38
 void ftKirby_CopyPurin_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyPurin_SpecialN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYPURIN_SPECIALN_STATUPDATE_FLAGS);
 }
 
@@ -97,7 +97,7 @@ void ftKirby_CopyPurin_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyPurin_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYPURIN_SPECIALN_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 }

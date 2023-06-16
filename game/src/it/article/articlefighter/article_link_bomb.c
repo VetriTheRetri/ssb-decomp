@@ -439,7 +439,7 @@ void func_ovl3_8018656C(GObj *article_gobj)
 
 GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *article_gobj = func_ovl3_8016E174(fighter_gobj, &Article_Link_Bomb_Data, pos, vel, 0U);
+    GObj *article_gobj = func_ovl3_8016E174(fighter_gobj, &Article_Link_Bomb_Data, pos, vel, 0);
     DObj *joint;
     Article_Struct *ap;
 

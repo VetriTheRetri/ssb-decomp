@@ -137,7 +137,7 @@ void ftCaptain_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
 
     fp->proc_status = ftCaptain_SpecialHi_ProcStatus;
 

@@ -1,7 +1,8 @@
 #include "ftpikachu.h"
 #include "gmground.h"
 
-void func_ovl3_80151DB0(GObj *fighter_gobj)
+// 0x80151DB0
+void ftPikachu_SpecialLw_CreateThunder(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -13,7 +14,7 @@ void func_ovl3_80151DB0(GObj *fighter_gobj)
 
     func_ovl2_800EDF24(fp->joint[FTPIKACHU_THUNDER_SPAWN_JOINT], &pos);
 
-    pos.y = (f32)Ground_Info->blastzone_top - FTPIKACHU_THUNDER_SPAWN_OFF_Y;
+    pos.y = Ground_Info->blastzone_top - FTPIKACHU_THUNDER_SPAWN_OFF_Y;
 
     vel.x = 0.0F;
     vel.z = 0.0F;
@@ -28,7 +29,7 @@ void func_ovl3_80151E44(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag0 != 0)
     {
-        func_ovl3_80151DB0(fighter_gobj);
+        ftPikachu_SpecialLw_CreateThunder(fighter_gobj);
     }
 }
 
@@ -56,7 +57,7 @@ void func_ovl3_80151EF8(GObj *fighter_gobj)
 
 void func_ovl3_80151F1C(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialLwStart, fighter_gobj->anim_frame, 1.0F, 0x96U);
 }
 
@@ -64,7 +65,7 @@ void func_ovl3_80151F5C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirLwStart, fighter_gobj->anim_frame, 1.0F, 0x96U);
     func_ovl2_800D8EB8(fp);
 }
@@ -205,13 +206,13 @@ void func_ovl3_8015225C(GObj *fighter_gobj)
     {
         Weapon_Struct *ip = wpGetStruct(thunder_gobj);
 
-        ip->item_vars.thunder.thunder_state = itPikachuThunderStatus_Destroy;
+        ip->item_vars.thunder.thunder_state = wpPikachuThunderStatus_Destroy;
     }
 }
 
 void func_ovl3_8015229C(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialLwLoop, fighter_gobj->anim_frame, 1.0F, 0x4097U);
 }
 
@@ -219,7 +220,7 @@ void func_ovl3_801522DC(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirLwLoop, fighter_gobj->anim_frame, 1.0F, 0x4097U);
     func_ovl2_800D8EB8(fp);
 }
@@ -230,7 +231,7 @@ void func_ovl3_80152328(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag0 == 0)
     {
-        func_ovl3_80151DB0(fighter_gobj);
+        ftPikachu_SpecialLw_CreateThunder(fighter_gobj);
     }
     fp->command_vars.flags.flag0 = 0;
 
@@ -296,7 +297,7 @@ void func_ovl3_801524C8(GObj *fighter_gobj)
 
 void func_ovl3_801524EC(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialLwHit, fighter_gobj->anim_frame, 1.0F, 0x97U);
 }
 
@@ -304,7 +305,7 @@ void func_ovl3_8015252C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirLwHit, fighter_gobj->anim_frame, 1.0F, 0x97U);
     func_ovl2_800D8EB8(fp);
 }
@@ -353,7 +354,7 @@ void func_ovl3_80152668(GObj *fighter_gobj)
 
 void func_ovl3_8015268C(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialLwEnd, fighter_gobj->anim_frame, 1.0F, 0x96U);
 }
 
@@ -362,7 +363,7 @@ void func_ovl3_801526CC(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirLwEnd, fighter_gobj->anim_frame, 1.0F, 0x96U);
     func_ovl2_800D8EB8(fp);
 }

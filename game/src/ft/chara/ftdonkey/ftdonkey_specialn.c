@@ -48,7 +48,7 @@ void ftDonkey_SpecialAirNStart_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialNStart, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
     fp->proc_damage = ftDonkey_SpecialN_ProcDamage;
@@ -59,7 +59,7 @@ void ftDonkey_SpecialNStart_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirNStart, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
     fp->proc_damage = ftDonkey_SpecialN_ProcDamage;
@@ -84,7 +84,7 @@ void ftDonkey_SpecialNLoop_ProcUpdate(GObj *fighter_gobj)
                 {
                     gcSetAnimPlaybackRate(fighter_gobj, FTDONKEY_GIANTPUNCH_CHRAGE_ANIM_SPEED);
 
-                    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
+                    ftColor_CheckSetColAnimIndex(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
 
                     fp->status_vars.donkey.specialn.is_cancel = TRUE;
                 }
@@ -152,7 +152,7 @@ void ftDonkey_SpecialNLoop_SetProcAnimSpeed(GObj *fighter_gobj)
 // 0x8015B284
 void ftDonkey_SpecialAirNLoop_SwitchStatusGround(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialNLoop, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     ftDonkey_SpecialNLoop_SetProcAnimSpeed(fighter_gobj);
 }
@@ -162,7 +162,7 @@ void ftDonkey_SpecialNLoop_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirNLoop, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     ftDonkey_SpecialNLoop_SetProcAnimSpeed(fighter_gobj);
     func_ovl2_800D8EB8(fp);
@@ -219,7 +219,7 @@ void ftDonkey_SpecialAirNEnd_SwitchStatusGround(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
 
     status_id = (fp->status_info.status_id == ftStatus_Donkey_SpecialAirNEnd) ? ftStatus_Donkey_SpecialNEnd : ftStatus_Donkey_SpecialNFull;
 

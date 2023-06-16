@@ -1,10 +1,11 @@
 #include "ftlink.h"
 
-void func_ovl3_801643D0(GObj *fighter_gobj)
+// 0x801643D0
+void ftLink_SpecialLw_CreateBomb(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
-    Vec3f sp1C;
+    Vec3f vel;
 
     if (fp->command_vars.flags.flag0 != 0)
     {
@@ -12,49 +13,54 @@ void func_ovl3_801643D0(GObj *fighter_gobj)
 
         pos = DObjGetStruct(fighter_gobj)->translate;
 
-        sp1C.x = 0.0F;
-        sp1C.y = 0.0F;
-        sp1C.z = 0.0F;
+        vel.x = 0.0F;
+        vel.y = 0.0F;
+        vel.z = 0.0F;
 
-        func_ovl3_801865A0(fighter_gobj, &pos, &sp1C);
+        func_ovl3_801865A0(fighter_gobj, &pos, &vel);
     }
 }
 
-void func_ovl3_80164434(GObj *fighter_gobj)
+// 0x80164434
+void ftLink_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_801643D0(fighter_gobj);
+    ftLink_SpecialLw_CreateBomb(fighter_gobj);
     ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
-void func_ovl3_8016445C(GObj *fighter_gobj)
+// 0x8016445C
+void ftLink_SpecialAirLw_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_801643D0(fighter_gobj);
+    ftLink_SpecialLw_CreateBomb(fighter_gobj);
     ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
-void func_ovl3_80164484(GObj *fighter_gobj)
+// 0x80164484
+void ftLink_SpecialLw_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        ftMapCollide_SetAir(fp);
-        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
+        ftMap_SetAir(fp);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     }
 }
 
-void func_ovl3_801644D4(GObj *fighter_gobj)
+// 0x801644D4
+void ftLink_SpecialAirLw_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        ftMapCollide_SetGround(fp);
-        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0U);
+        ftMap_SetGround(fp);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     }
 }
 
-bool32 func_ovl3_80164524(GObj *fighter_gobj, bool32 is_ground)
+// 0x80164524
+bool32 ftLink_SpecialLw_CheckGotoItemThrow(GObj *fighter_gobj, bool32 is_ground)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -77,28 +83,30 @@ bool32 func_ovl3_80164524(GObj *fighter_gobj, bool32 is_ground)
     return FALSE;
 }
 
-void jtgt_ovl3_8016458C(GObj *fighter_gobj)
+// 0x8016458C
+void ftLink_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl3_80164524(fighter_gobj, TRUE) != TRUE)
+    if (ftLink_SpecialLw_CheckGotoItemThrow(fighter_gobj, TRUE) != TRUE)
     {
         fp->command_vars.flags.flag0 = 0;
 
-        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialLw, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
         ftAnim_Update(fighter_gobj);
     }
 }
 
-void jtgt_ovl3_801645E8(GObj *fighter_gobj)
+// 0x801645E8
+void ftLink_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (func_ovl3_80164524(fighter_gobj, FALSE) != TRUE)
+    if (ftLink_SpecialLw_CheckGotoItemThrow(fighter_gobj, FALSE) != TRUE)
     {
         fp->command_vars.flags.flag0 = 0;
 
-        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirLw, 0.0F, 1.0F, 0U);
+        ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
         ftAnim_Update(fighter_gobj);
     }
 }

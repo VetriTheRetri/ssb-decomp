@@ -82,7 +82,7 @@ void func_ovl3_8015D4E4(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
 
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
 
@@ -93,7 +93,7 @@ void func_ovl3_8015D540(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
     func_ovl2_800D8EB8(fp);
 
@@ -118,7 +118,7 @@ void func_ovl3_8015D5AC(GObj *fighter_gobj)
 
             if (fp->fighter_vars.samus.charge_level == FTSAMUS_CHARGE_MAX)
             {
-                ftCommon_CheckSetColAnimIndex(fighter_gobj, 6, 0);
+                ftColor_CheckSetColAnimIndex(fighter_gobj, 6, 0);
                 func_ovl3_8015D300(fp);
                 ftCommon_Wait_SetStatus(fighter_gobj);
             }
@@ -254,7 +254,7 @@ void func_ovl3_8015D9B0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->proc_damage = func_ovl3_8015D338;
@@ -264,7 +264,7 @@ void func_ovl3_8015DA04(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
     func_ovl2_800D8EB8(fp);
 
@@ -286,7 +286,7 @@ void func_ovl3_8015DAA8(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
         func_ovl2_800D8EB8(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNEnd, 0.0F, 1.0F, 2U);

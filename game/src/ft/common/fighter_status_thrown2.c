@@ -29,7 +29,7 @@ void func_ovl3_8014ADB0(GObj *fighter_gobj)
 
     if ((this_fp->ground_or_air == ground) && ((this_fp->coll_data.ground_line_id == -1) || (this_fp->coll_data.ground_dist != 0.0F)))
     {
-        ftMapCollide_SetAir(this_fp);
+        ftMap_SetAir(this_fp);
     }
 }
 
@@ -99,13 +99,13 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
 
     if (this_fp->hitstatus != gmHitCollision_HitStatus_Normal)
     {
-        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
+        ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
     }
     if (!(this_fp->x192_flag_b3))
     {
         func_ovl3_8014ADB0(fighter_gobj);
     }
-    ftMapCollide_SetAir(this_fp);
+    ftMap_SetAir(this_fp);
 
     ft_throw = capture_fp->fighter_throw;
 
@@ -180,7 +180,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
 
     if (this_fp->hitstatus != gmHitCollision_HitStatus_Normal)
     {
-        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
+        ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
     }
     if (!(this_fp->x192_flag_b3))
     {
@@ -188,7 +188,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
     }
     if (this_fp->ground_or_air == air)
     {
-        ftMapCollide_SetAir(this_fp);
+        ftMap_SetAir(this_fp);
     }
     ft_throw = &capture_fp->fighter_throw[1];
 

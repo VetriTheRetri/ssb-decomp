@@ -10,7 +10,7 @@ typedef struct ftFox_SpecialHi_StatusVars
     s32 launch_delay;
     s32 gravity_delay;
     f32 angle;
-    s32 travel_time;
+    s32 anim_frames;
     s32 decelerate_wait;
     s32 coll_timer_unk;
 

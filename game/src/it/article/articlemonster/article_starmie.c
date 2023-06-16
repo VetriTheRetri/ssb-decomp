@@ -258,9 +258,9 @@ GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     return article_gobj;
 }
 
-bool32 func_ovl3_801823B4(GObj *item_gobj)
+bool32 func_ovl3_801823B4(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     ip->phys_info.vel.x = ip->phys_info.vel.x; // Bruh
 
@@ -271,23 +271,23 @@ bool32 func_ovl3_801823B4(GObj *item_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_801823E8(GObj *item_gobj)
+bool32 jtgt_ovl3_801823E8(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    func_ovl2_80102070(&DObjGetStruct(item_gobj)->translate, ip->lr);
+    func_ovl2_80102070(&DObjGetStruct(weapon_gobj)->translate, ip->lr);
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_80182418(GObj *item_gobj)
+bool32 jtgt_ovl3_80182418(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
-    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     if (ip->phys_info.vel.x > 0.0F)
     {
@@ -298,42 +298,42 @@ bool32 jtgt_ovl3_80182418(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801824C0(GObj *item_gobj)
+bool32 jtgt_ovl3_801824C0(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    func_ovl3_801680EC(ip, fp);
+    wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
-    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
 
     return FALSE;
 }
 
-extern ItemSpawnData Item_Swift_Data;
+extern WeaponSpawnData Item_Swift_Data;
 
 GObj* func_ovl3_80182530(GObj *article_gobj, Vec3f *pos)
 {
     Article_Struct *ap = atGetStruct(article_gobj);
-    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
     Weapon_Struct *ip;
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->lr = ap->lr;
 
     ip->phys_info.vel.x = ip->lr * ATSTARMIE_SWIFT_VEL_X;
 
-    joint = DObjGetStruct(item_gobj);
+    joint = DObjGetStruct(weapon_gobj);
 
     joint->translate = *pos;
 
@@ -345,7 +345,7 @@ GObj* func_ovl3_80182530(GObj *article_gobj, Vec3f *pos)
     {
         joint->rotate.y = PI32;
     }
-    return item_gobj;
+    return weapon_gobj;
 }
 
 void func_ovl3_80182608(GObj *article_gobj, Vec3f *pos)

@@ -294,7 +294,7 @@ glabel func_ovl23_80131E3C
   /* 12A8F0 80131F30 E5F00044 */      swc1 $f16, 0x44($t7)
   /* 12A8F4 80131F34 8E180074 */        lw $t8, 0x74($s0)
   /* 12A8F8 80131F38 C4720000 */      lwc1 $f18, ($v1)
-  /* 12A8FC 80131F3C 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
+  /* 12A8FC 80131F3C 0C03A605 */       jal ftColor_CheckSetColAnimIndex
   /* 12A900 80131F40 E7120048 */      swc1 $f18, 0x48($t8)
   /* 12A904 80131F44 8FBF001C */        lw $ra, 0x1c($sp)
   /* 12A908 80131F48 8FB00018 */        lw $s0, 0x18($sp)

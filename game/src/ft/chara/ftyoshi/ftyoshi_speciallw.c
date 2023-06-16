@@ -44,7 +44,7 @@ void func_ovl3_8015EE84(GObj *fighter_gobj)
         {
             if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
             {
-                ftMapCollide_SetGround(fp);
+                ftMap_SetGround(fp);
                 ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwLanding, 0.0F, 1.0F, 0U);
             }
             else if (fp->coll_data.coll_type & MPCOLL_MASK_CLIFF_ALL)
@@ -67,7 +67,7 @@ void func_ovl3_8015EF5C(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {
-            ftMapCollide_SetGround(fp);
+            ftMap_SetGround(fp);
             ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwLanding, 0.0F, 1.0F, 0U);
         }
 
@@ -92,7 +92,7 @@ void jtgt_ovl3_8015EFE4(GObj *fighter_gobj)
 
     fp->proc_status = func_ovl3_8015EFD4;
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialLwStart, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 

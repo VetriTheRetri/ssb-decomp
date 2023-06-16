@@ -7,7 +7,7 @@ void ftMario_SpecialN_ProcUpdate(GObj *fighter_gobj)
 }
 
 // 0x80155E64
-void ftMario_SpecialN_SpawnFireball(GObj *fighter_gobj)
+void ftMario_SpecialN_ProcAccessory(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -60,11 +60,11 @@ void ftMario_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
 
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialN, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
-    fp->proc_accessory = ftMario_SpecialN_SpawnFireball;
+    fp->proc_accessory = ftMario_SpecialN_ProcAccessory;
 }
 
 // 0x80155FA0
@@ -72,11 +72,11 @@ void ftMario_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_accessory = ftMario_SpecialN_SpawnFireball;
+    fp->proc_accessory = ftMario_SpecialN_ProcAccessory;
 }
 
 // 0x80155FFC
@@ -85,13 +85,13 @@ void ftMario_SpecialN_InitStatusVars(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = FALSE;
-    fp->proc_accessory = ftMario_SpecialN_SpawnFireball;
+    fp->proc_accessory = ftMario_SpecialN_ProcAccessory;
 }
 
 // 0x80156014
 void ftMario_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftMario_SpecialN_InitStatusVars(fighter_gobj);
 }

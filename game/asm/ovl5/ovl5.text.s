@@ -153,7 +153,7 @@ glabel func_ovl5_8018D1A0
   /* 10B57C 8018D2CC 24040003 */     addiu $a0, $zero, 3
   /* 10B580 8018D2D0 0C035C65 */       jal func_ovl2_800D7194
   /* 10B584 8018D2D4 24050001 */     addiu $a1, $zero, 1
-  /* 10B588 8018D2D8 0C05952C */       jal func_ovl3_801654B0
+  /* 10B588 8018D2D8 0C05952C */       jal wpManager_AllocUserData
   /* 10B58C 8018D2DC 00000000 */       nop 
   /* 10B590 8018D2E0 0C05B7A8 */       jal func_ovl3_8016DEA0
   /* 10B594 8018D2E4 00000000 */       nop 

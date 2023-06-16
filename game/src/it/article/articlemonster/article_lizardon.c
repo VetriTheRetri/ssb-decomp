@@ -230,9 +230,9 @@ GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     return article_gobj;
 }
 
-bool32 jtgt_ovl3_8017FACC(GObj *item_gobj)
+bool32 jtgt_ovl3_8017FACC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -241,38 +241,38 @@ bool32 jtgt_ovl3_8017FACC(GObj *item_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_8017FAF8(GObj *item_gobj)
+bool32 jtgt_ovl3_8017FAF8(GObj *weapon_gobj)
 {
-    if (func_ovl3_80167C04(item_gobj) != FALSE)
+    if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
-        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_8017FB3C(GObj *item_gobj)
+bool32 jtgt_ovl3_8017FB3C(GObj *weapon_gobj)
 {
     func_800269C0(0U);
-    func_ovl2_80100480(&DObjGetStruct(item_gobj)->translate);
+    func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
     return FALSE;
 }
 
 extern s32 D_ovl3_8018D044;
 
-bool32 jtgt_ovl3_8017FB74(GObj *item_gobj)
+bool32 jtgt_ovl3_8017FB74(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
     Vec3f *translate;
 
     ip->lifetime = ATLIZARDON_FLAME_LIFETIME;
 
-    func_ovl3_801680EC(ip, fp);
+    wpMain_ReflectorInvertLR(ip, fp);
 
-    translate = &DObjGetStruct(item_gobj)->translate;
+    translate = &DObjGetStruct(weapon_gobj)->translate;
 
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
@@ -280,18 +280,18 @@ bool32 jtgt_ovl3_8017FB74(GObj *item_gobj)
     return FALSE;
 }
 
-extern ItemSpawnData Item_Lizardon_Flame_Data;
+extern WeaponSpawnData Item_Lizardon_Flame_Data;
 
 GObj *func_ovl3_8017FC38(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, &Item_Lizardon_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Lizardon_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     Weapon_Struct *ip;
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->phys_info.vel = *vel;
 
@@ -300,7 +300,7 @@ GObj *func_ovl3_8017FC38(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F); // This needs to something in v0 to match
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
 
-    return item_gobj;
+    return weapon_gobj;
 }
 
 void func_ovl3_8017FD2C(GObj *article_gobj, Vec3f *pos, s32 lr)

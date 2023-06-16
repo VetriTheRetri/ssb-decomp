@@ -198,7 +198,7 @@ glabel func_ovl4_8018D228
   /* 10A25C 8018D36C 24040002 */     addiu $a0, $zero, 2
   /* 10A260 8018D370 0C035C65 */       jal func_ovl2_800D7194
   /* 10A264 8018D374 24050004 */     addiu $a1, $zero, 4
-  /* 10A268 8018D378 0C05952C */       jal func_ovl3_801654B0
+  /* 10A268 8018D378 0C05952C */       jal wpManager_AllocUserData
   /* 10A26C 8018D37C 00000000 */       nop 
   /* 10A270 8018D380 0C03F4C0 */       jal func_ovl2_800FD300
   /* 10A274 8018D384 00000000 */       nop 
@@ -1002,7 +1002,7 @@ glabel func_ovl4_8018DE20
   /* 10ADA8 8018DEB8 24040002 */     addiu $a0, $zero, 2
   /* 10ADAC 8018DEBC 0C035C65 */       jal func_ovl2_800D7194
   /* 10ADB0 8018DEC0 24050004 */     addiu $a1, $zero, 4
-  /* 10ADB4 8018DEC4 0C05952C */       jal func_ovl3_801654B0
+  /* 10ADB4 8018DEC4 0C05952C */       jal wpManager_AllocUserData
   /* 10ADB8 8018DEC8 00000000 */       nop 
   /* 10ADBC 8018DECC 0C03F4C0 */       jal func_ovl2_800FD300
   /* 10ADC0 8018DED0 00000000 */       nop 

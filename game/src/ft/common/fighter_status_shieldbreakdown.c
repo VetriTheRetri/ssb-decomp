@@ -16,7 +16,7 @@ void ftCommon_ShieldBreakDown_SetStatus(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        ftMapCollide_SetGround(fp);
+        ftMap_SetGround(fp);
     }
     status_id = (ftCommon_DownBounce_UpOrDown(fighter_gobj) != 0) ? ftStatus_Common_ShieldBreakDownD : ftStatus_Common_ShieldBreakDownU;
 

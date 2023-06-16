@@ -211,10 +211,10 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     return article_gobj;
 }
 
-bool32 func_ovl3_80180354(GObj *item_gobj)
+bool32 func_ovl3_80180354(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
-    DObj *joint = DObjGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    DObj *joint = DObjGetStruct(weapon_gobj);
 
     if ((ip->lr == RIGHT) && ((Ground_Info->blastzone_right - ATSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
     {
@@ -245,28 +245,28 @@ void func_ovl3_80180480(GObj *article_gobj)
     func_ovl3_80167520(article_gobj, func_ovl3_80180400);
 }
 
-extern ItemSpawnData Item_Spear_Swarm_Data;
-extern ItemSpawnData Item_Pippi_Swarm_Data;
+extern WeaponSpawnData Item_Spear_Swarm_Data;
+extern WeaponSpawnData Item_Pippi_Swarm_Data;
 
 GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
 {
     Article_Struct *ap = atGetStruct(article_gobj);
-    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, ((at_kind == At_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, ((at_kind == At_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
     Weapon_Struct *ip;
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->lr = -ap->lr;
 
     ip->phys_info.vel.x = ip->lr * ATSPEAR_SWARM_FLY_VEL_X;
 
-    joint = DObjGetStruct(item_gobj);
+    joint = DObjGetStruct(weapon_gobj);
 
     if (at_kind == At_Kind_Spear)
     {
@@ -279,7 +279,7 @@ GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
     }
     else
     {
-        item_gobj->renderer = func_ovl3_80180480;
+        weapon_gobj->renderer = func_ovl3_80180480;
 
         func_80008CC0(joint->next, 0x48U, 0U);
 
@@ -292,7 +292,7 @@ GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
 
     ip->is_hitlag_victim = TRUE;
 
-    return item_gobj;
+    return weapon_gobj;
 }
 
 void func_ovl3_80180608(GObj *article_gobj, Vec3f *pos, s32 at_kind)

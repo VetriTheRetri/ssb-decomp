@@ -18,7 +18,7 @@ void ftDonkey_ThrowFLanding_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_ThrowFLanding, 0.0F, 0.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->status_vars.common.throwf.landing_anim_frame = 0.0F;

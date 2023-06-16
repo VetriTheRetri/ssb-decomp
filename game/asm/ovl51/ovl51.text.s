@@ -465,7 +465,7 @@ glabel func_ovl51_8018D670
   /* 174FE0 8018D760 24040002 */     addiu $a0, $zero, 2
   /* 174FE4 8018D764 0C035C65 */       jal func_ovl2_800D7194
   /* 174FE8 8018D768 24050002 */     addiu $a1, $zero, 2
-  /* 174FEC 8018D76C 0C05952C */       jal func_ovl3_801654B0
+  /* 174FEC 8018D76C 0C05952C */       jal wpManager_AllocUserData
   /* 174FF0 8018D770 00000000 */       nop 
   /* 174FF4 8018D774 0C05B7A8 */       jal func_ovl3_8016DEA0
   /* 174FF8 8018D778 00000000 */       nop 

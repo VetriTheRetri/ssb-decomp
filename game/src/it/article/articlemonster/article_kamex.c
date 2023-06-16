@@ -306,10 +306,10 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     return article_gobj;
 }
 
-bool32 func_ovl3_80180E10(GObj *item_gobj)
+bool32 func_ovl3_80180E10(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
-    DObj *joint = DObjGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    DObj *joint = DObjGetStruct(weapon_gobj);
 
     ip->item_hit.offset[0].x = joint->next->translate.x * ip->lr;
 
@@ -320,46 +320,46 @@ bool32 func_ovl3_80180E10(GObj *item_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80180E60(GObj *item_gobj)
+bool32 jtgt_ovl3_80180E60(GObj *weapon_gobj)
 {
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80180E6C(GObj *item_gobj)
+bool32 jtgt_ovl3_80180E6C(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    func_ovl3_801680EC(ip, fp);
+    wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
-    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
 
     return FALSE;
 }
 
-extern ItemSpawnData Item_Hydro_Data;
+extern WeaponSpawnData Item_Hydro_Data;
 
 GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
 {
     Article_Struct *ap = atGetStruct(article_gobj);
-    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, &Item_Hydro_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Hydro_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
     Weapon_Struct *ip;
     Vec3f translate;
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->lr = ap->lr;
 
-    joint = DObjGetStruct(item_gobj);
+    joint = DObjGetStruct(weapon_gobj);
 
     translate = joint->translate;
 
@@ -374,7 +374,7 @@ GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
 
     ip->lifetime = ATKAMEX_HYDRO_LIFETIME;
 
-    return item_gobj;
+    return weapon_gobj;
 }
 
 void func_ovl3_80180F9C(GObj *article_gobj, Vec3f *pos)

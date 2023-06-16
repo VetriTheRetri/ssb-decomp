@@ -6,14 +6,14 @@ void func_ovl3_8016C9A0(void) // Unused
     return;
 }
 
-bool32 func_ovl3_8016C9A8(GObj *item_gobj)
+bool32 func_ovl3_8016C9A8(GObj *weapon_gobj)
 {
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C9B4(GObj *item_gobj)
+bool32 jtgt_ovl3_8016C9B4(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     f32 sqrt_vel;
     f32 mod_vel;
 
@@ -45,9 +45,9 @@ bool32 jtgt_ovl3_8016C9B4(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016CA9C(GObj *item_gobj)
+bool32 jtgt_ovl3_8016CA9C(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     f32 pos_x, pos_y;
     s32 index = (ip->item_vars.spin_attack.pos_index + 1) % (ARRAY_COUNT(ip->item_vars.spin_attack.pos_x) | ARRAY_COUNT(ip->item_vars.spin_attack.pos_y));
 
@@ -56,36 +56,36 @@ bool32 jtgt_ovl3_8016CA9C(GObj *item_gobj)
 
     pos_y += ITSPINATTACK_OFF_Y;
 
-    ip->phys_info.vel.x = pos_x - DObjGetStruct(item_gobj)->translate.x;
-    ip->phys_info.vel.y = pos_y - DObjGetStruct(item_gobj)->translate.y;
+    ip->phys_info.vel.x = pos_x - DObjGetStruct(weapon_gobj)->translate.x;
+    ip->phys_info.vel.y = pos_y - DObjGetStruct(weapon_gobj)->translate.y;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016CB10(GObj *item_gobj)
+bool32 jtgt_ovl3_8016CB10(GObj *weapon_gobj)
 {
     return FALSE;
 }
 
-extern ItemSpawnData Item_SpinAttack_Desc;
+extern WeaponSpawnData Item_SpinAttack_Desc;
 
 GObj *func_ovl3_8016CB1C(GObj *fighter_gobj, Vec3f *pos)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *item_gobj;
+    GObj *weapon_gobj;
     Weapon_Struct *ip;
     Vec3f offset = *pos;
     s32 unused;
 
     offset.y += ITSPINATTACK_OFF_Y;
 
-    item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_SpinAttack_Desc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
+    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_SpinAttack_Desc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->item_hit.offset[0].x = ITSPINATTACK_OFF_X;
     ip->item_hit.offset[0].y = 0.0F;
@@ -107,7 +107,7 @@ GObj *func_ovl3_8016CB1C(GObj *fighter_gobj, Vec3f *pos)
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = 0.0F;
 
-    func_ovl3_80165F60(item_gobj);
+    wpManager_UpdateHitPositions(weapon_gobj);
 
-    return item_gobj;
+    return weapon_gobj;
 }

@@ -1311,10 +1311,10 @@ struct Fighter_Struct
 void ftStatus_Update(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 anim_rate, u32 flags); // Action State Change
 void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt); // FallSpecial Action State
 void func_ovl2_800DDE84(GObj*, void(*proc_map)(GObj*)); // Grounded Collision check (stop at ledge?)
-void ftMapCollide_CheckGroundCliff(GObj*, void(*proc_map)(GObj*)); // Aerial Collision check (ledge grab?)
-void ftMapCollide_SetGround(Fighter_Struct*); // ???
+void ftMap_CheckGroundCliff(GObj*, void(*proc_map)(GObj*)); // Aerial Collision check (ledge grab?)
+void ftMap_SetGround(Fighter_Struct*); // ???
 void func_ovl2_800D8EB8(Fighter_Struct*); // ???
-void ftMapCollide_SetAir(Fighter_Struct*); // ???
+void ftMap_SetAir(Fighter_Struct*); // ???
 void ftAnim_Update(GObj*); // ???
 
 // Macro to check if a move has been interrupted by any standard action

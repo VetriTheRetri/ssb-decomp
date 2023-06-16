@@ -63,7 +63,7 @@ void ftCommon_Throw_SetStatus(GObj *fighter_gobj, bool32 is_throwf)
         {
             status_id = ftStatus_Kirby_ThrowF;
 
-            ftMapCollide_SetAir(this_fp);
+            ftMap_SetAir(this_fp);
         }
         else status_id = ftStatus_Common_ThrowF;
         thrown_status = &this_fp->attributes->thrown_status[catch_fp->ft_kind].ft_thrown[0];
@@ -188,6 +188,6 @@ void ftKirby_ThrowFLanding_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFLanding, 0.0F, 1.0F, FTSTATUPDATE_TEXTUREPART_PRESERVE);
 }

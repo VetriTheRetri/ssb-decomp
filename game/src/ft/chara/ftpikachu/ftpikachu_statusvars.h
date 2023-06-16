@@ -17,7 +17,7 @@ typedef struct ftPikachu_SpecialHi_StatusVars
     bool32 is_subsequent_zip;
     u32 unk_0x8;
     Vec2i stick_range;
-    s32 coll_timer_unk;
+    s32 pass_timer;
     f32 vel_x_bak;
     f32 vel_y_bak;
     f32 vel_ground_bak;

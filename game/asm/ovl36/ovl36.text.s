@@ -996,7 +996,7 @@ glabel func_ovl36_8018DE64
   /* 16757C 8018DF4C 24040003 */     addiu $a0, $zero, 3
   /* 167580 8018DF50 0C035C65 */       jal func_ovl2_800D7194
   /* 167584 8018DF54 24050002 */     addiu $a1, $zero, 2
-  /* 167588 8018DF58 0C05952C */       jal func_ovl3_801654B0
+  /* 167588 8018DF58 0C05952C */       jal wpManager_AllocUserData
   /* 16758C 8018DF5C 00000000 */       nop 
   /* 167590 8018DF60 0C05B7A8 */       jal func_ovl3_8016DEA0
   /* 167594 8018DF64 00000000 */       nop 

@@ -36,7 +36,7 @@ void ftCaptain_SpecialLw_SetAir(GObj *fighter_gobj)
 
 void func_ovl3_8015FCC8(GObj *fighter_gobj) // Unused?
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
 }
 
 // 0x8015FCE8
@@ -120,7 +120,7 @@ bool32 ftCaptain_SpecialLwBound_CheckMapCollideGoto(GObj *fighter_gobj)
 
     if ((fp->command_vars.flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwBound, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
         fp->command_vars.flags.flag1 = 0;
@@ -207,7 +207,7 @@ void ftCaptain_SpecialLwAir_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 rot_z = fp->joint[ftParts_TopN_Joint]->rotate.z;
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwAir, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
 
     fp->joint[ftParts_TopN_Joint]->rotate.z = rot_z;
@@ -220,7 +220,7 @@ void ftCaptain_SpecialLwAir_SetStatus(GObj *fighter_gobj)
 // 0x801600EC
 void ftCaptain_SpecialLwLanding_SetStatus(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwLanding, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 

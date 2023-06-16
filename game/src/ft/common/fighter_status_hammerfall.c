@@ -28,7 +28,7 @@ void ftCommon_HammerFall_SetStatus(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
     ftCommon_HammerCheckSetColAnim(fighter_gobj);
@@ -56,7 +56,7 @@ void ftCommon_HammerFall_SetStatusJump(GObj *fighter_gobj)
     ftCommonAttributes *attributes = fp->attributes;
     s32 vel_x, vel_y;
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_HammerFall, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
     ftCommon_HammerCheckSetColAnim(fighter_gobj);
 

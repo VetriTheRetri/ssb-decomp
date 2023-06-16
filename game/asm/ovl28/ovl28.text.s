@@ -2133,7 +2133,7 @@ glabel func_ovl28_801337BC
   /* 142F58 80133978 8FAB006C */        lw $t3, 0x6c($sp)
   /* 142F5C 8013397C 556C0004 */      bnel $t3, $t4, .L80133990
   /* 142F60 80133980 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 142F64 80133984 0C03A605 */       jal ftCommon_CheckSetColAnimIndex
+  /* 142F64 80133984 0C03A605 */       jal ftColor_CheckSetColAnimIndex
   /* 142F68 80133988 00003025 */        or $a2, $zero, $zero
   /* 142F6C 8013398C 8FBF001C */        lw $ra, 0x1c($sp)
   .L80133990:

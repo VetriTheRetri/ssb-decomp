@@ -7,7 +7,7 @@ void ftCommon_PassiveStand_SetStatus(GObj *fighter_gobj, s32 status_id)
 
     if (fp->ground_or_air == air)
     {
-        ftMapCollide_SetGround(fp);
+        ftMap_SetGround(fp);
     }
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftCommon_VelDamageTransferGround(fp);

@@ -37,10 +37,10 @@ void ftCommon_CliffCatch_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CliffCatch, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     func_ovl2_800D9444(fighter_gobj);
 
     fp->coll_data.ground_line_id = -1;

@@ -41,7 +41,7 @@ void func_ovl3_8015786C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialNStart, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->proc_damage = func_ovl3_801577A0;
@@ -51,7 +51,7 @@ void func_ovl3_801578C0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialAirNStart, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->proc_damage = func_ovl3_801577A0;
@@ -75,7 +75,7 @@ void func_ovl3_80157918(GObj *fighter_gobj)
                 {
                     gcSetAnimPlaybackRate(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHRAGE_ANIM_SPEED);
 
-                    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
+                    ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
 
                     fp->status_vars.kirby.copydonkey_specialn.is_cancel = TRUE;
                 }
@@ -138,7 +138,7 @@ void func_ovl3_80157AD4(GObj *fighter_gobj)
 
 void func_ovl3_80157B14(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialNLoop, fighter_gobj->anim_frame, 1.0F, 0x4002U);
     func_ovl3_80157AD4(fighter_gobj);
 }
@@ -147,7 +147,7 @@ void func_ovl3_80157B5C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialAirNLoop, fighter_gobj->anim_frame, 1.0F, 0x4002U);
     func_ovl3_80157AD4(fighter_gobj);
     func_ovl2_800D8EB8(fp);
@@ -200,7 +200,7 @@ void func_ovl3_80157D3C(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
 
     status_id = (fp->status_info.status_id == ftStatus_Kirby_CopyDonkey_SpecialAirNEnd) ? ftStatus_Kirby_CopyDonkey_SpecialNEnd : ftStatus_Kirby_CopyDonkey_SpecialNFull;
 

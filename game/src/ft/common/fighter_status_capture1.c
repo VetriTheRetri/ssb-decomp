@@ -175,7 +175,7 @@ void ftCommon_CaptureWait_SetStatus(GObj *fighter_gobj)
     {
         this_fp->is_invisible = TRUE;
 
-        ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+        ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     }
     ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 }

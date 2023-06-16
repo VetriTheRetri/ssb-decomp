@@ -82,7 +82,7 @@ void func_ovl3_8015704C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
 
     fp->proc_damage = func_ovl3_80156E98;
@@ -92,7 +92,7 @@ void func_ovl3_801570A8(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
     func_ovl2_800D8EB8(fp);
 
@@ -117,7 +117,7 @@ void func_ovl3_80157114(GObj *fighter_gobj)
 
             if (fp->fighter_vars.kirby.copysamus_charge_level == FTKIRBY_COPYSAMUS_CHARGE_MAX)
             {
-                ftCommon_CheckSetColAnimIndex(fighter_gobj, 6, 0);
+                ftColor_CheckSetColAnimIndex(fighter_gobj, 6, 0);
                 func_ovl3_80156E60(fp);
                 ftCommon_Wait_SetStatus(fighter_gobj);
             }
@@ -253,7 +253,7 @@ void func_ovl3_80157518(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
 
     fp->proc_damage = func_ovl3_80156E98;
@@ -263,7 +263,7 @@ void func_ovl3_8015756C(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
     func_ovl2_800D8EB8(fp);
 
@@ -285,7 +285,7 @@ void func_ovl3_80157610(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
         func_ovl2_800D8EB8(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, 0.0F, 1.F, 2U);

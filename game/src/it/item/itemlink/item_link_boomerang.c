@@ -14,9 +14,9 @@ void func_ovl3_8016CC50(f32 *angle)
     }
 } 
 
-bool32 func_ovl3_8016CCA0(GObj *item_gobj)
+bool32 func_ovl3_8016CCA0(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     f32 sp30;
     f32 sp2C;
     f32 temp_f0;
@@ -35,7 +35,7 @@ bool32 func_ovl3_8016CCA0(GObj *item_gobj)
         {
             ip->item_vars.boomerang.adjust_angle_delay = 0;
 
-            func_ovl2_800EB924(D_ovl2_80131460->unk_0x74, &D_ovl2_80131470, &DObjGetStruct(item_gobj)->translate, &sp30, &sp2C);
+            func_ovl2_800EB924(D_ovl2_80131460->unk_0x74, &D_ovl2_80131470, &DObjGetStruct(weapon_gobj)->translate, &sp30, &sp2C);
 
             temp_f0 = (D_ovl2_801314B0.unk_0x38.x / 2) + 40.0F;
             temp_f2 = (D_ovl2_801314B0.unk_0x38.y / 2) + 40.0F;
@@ -49,9 +49,9 @@ bool32 func_ovl3_8016CCA0(GObj *item_gobj)
     return FALSE;
 }
 
-void func_ovl3_8016CDC8(GObj *item_gobj, bool32 arg1)
+void func_ovl3_8016CDC8(GObj *weapon_gobj, bool32 arg1)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     ip->item_vars.boomerang.flags |= 1;
 
@@ -69,7 +69,7 @@ void func_ovl3_8016CDC8(GObj *item_gobj, bool32 arg1)
 
     ip->item_vars.boomerang.homing_angle = (arg1 == TRUE) ? ITBOOMERANG_HOMING_ANGLE_MAX : ITBOOMERANG_HOMING_ANGLE_MIN;
 
-    DObjGetStruct(item_gobj)->next->next->unk_0x54 = 1;
+    DObjGetStruct(weapon_gobj)->next->next->unk_0x54 = 1;
 
     wpMain_PlayDestroySFX(ip, 0xCEU);
 }
@@ -126,9 +126,9 @@ void func_ovl3_8016CFFC(f32 *angle)
     }
 }
 
-f32 func_ovl3_8016D0E4(GObj *item_gobj)
+f32 func_ovl3_8016D0E4(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     f32 unused;
     f32 temp_f14;
     f32 temp_f0;
@@ -137,8 +137,8 @@ f32 func_ovl3_8016D0E4(GObj *item_gobj)
 
     if (ip->item_vars.boomerang.spawn_gobj != NULL)
     {
-        temp_f14 = DObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.x - DObjGetStruct(item_gobj)->translate.x;
-        temp_f0 = (DObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.y - DObjGetStruct(item_gobj)->translate.y) + 290.0F;
+        temp_f14 = DObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.x - DObjGetStruct(weapon_gobj)->translate.x;
+        temp_f0 = (DObjGetStruct(ip->item_vars.boomerang.spawn_gobj)->translate.y - DObjGetStruct(weapon_gobj)->translate.y) + 290.0F;
 
         var_f16 = sqrtf(SQUARE(temp_f14) + SQUARE(temp_f0));
 
@@ -221,9 +221,9 @@ void func_ovl3_8016D31C(Weapon_Struct *ip)
     }
 }
 
-void func_ovl3_8016D35C(GObj *item_gobj, f32 distance)
+void func_ovl3_8016D35C(GObj *weapon_gobj, f32 distance)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     if ((ip->item_vars.boomerang.flags & 1) && (distance < 180.0F))
     {
@@ -244,7 +244,7 @@ void func_ovl3_8016D35C(GObj *item_gobj, f32 distance)
             }
         }
         func_ovl3_8016D31C(ip);
-        wpMain_DestroyWeapon(item_gobj);
+        wpMain_DestroyWeapon(weapon_gobj);
     }
 }
 
@@ -267,18 +267,18 @@ bool32 func_ovl3_8016D40C(Weapon_Struct *ip, Vec3f *coll_angle)
     return FALSE;
 }
 
-bool32 func_ovl3_8016D4B8(GObj *item_gobj)
+bool32 func_ovl3_8016D4B8(GObj *weapon_gobj)
 {
-    func_ovl3_8016D31C(wpGetStruct(item_gobj));
+    func_ovl3_8016D31C(wpGetStruct(weapon_gobj));
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_8016D4DC(GObj *item_gobj)
+bool32 jtgt_ovl3_8016D4DC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    if ((wpMain_DecLifeCheckExpire(ip) != FALSE) || (func_ovl3_8016CCA0(item_gobj) == TRUE))
+    if ((wpMain_DecLifeCheckExpire(ip) != FALSE) || (func_ovl3_8016CCA0(weapon_gobj) == TRUE))
     {
         func_ovl3_8016D31C(ip);
 
@@ -298,7 +298,7 @@ bool32 jtgt_ovl3_8016D4DC(GObj *item_gobj)
     {
         func_ovl3_8016CF48(ip, func_ovl3_8016CE90(ip, 1.0F));
 
-        func_ovl3_8016D35C(item_gobj, func_ovl3_8016D0E4(item_gobj));
+        func_ovl3_8016D35C(weapon_gobj, func_ovl3_8016D0E4(weapon_gobj));
     }
     else
     {
@@ -308,27 +308,27 @@ bool32 jtgt_ovl3_8016D4DC(GObj *item_gobj)
 
         if (vel == 10.0F)
         {
-            func_ovl3_8016CDC8(item_gobj, FALSE);
+            func_ovl3_8016CDC8(weapon_gobj, FALSE);
         }
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016D5EC(GObj *item_gobj)
+bool32 jtgt_ovl3_8016D5EC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     bool32 unk_bool = FALSE;
     u16 coll_flags;
 
     if (!(ip->item_vars.boomerang.flags & 0x21))
     {
-        func_ovl3_80167A58(item_gobj);
+        func_ovl3_80167A58(weapon_gobj);
 
         coll_flags = (ip->coll_data.coll_mask_prev ^ ip->coll_data.coll_mask) & ip->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
 
         if (coll_flags)
         {
-            func_ovl2_800FECBC(&DObjGetStruct(item_gobj)->translate);
+            func_ovl2_800FECBC(&DObjGetStruct(weapon_gobj)->translate);
 
             if (coll_flags & MPCOLL_MASK_RWALL)
             {
@@ -348,50 +348,50 @@ bool32 jtgt_ovl3_8016D5EC(GObj *item_gobj)
             }
             if (unk_bool == TRUE)
             {
-                func_ovl3_8016CDC8(item_gobj, TRUE);
+                func_ovl3_8016CDC8(weapon_gobj, TRUE);
             }
         }
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016D714(GObj *item_gobj)
+bool32 jtgt_ovl3_8016D714(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     if (!(ip->item_vars.boomerang.flags & 0x21) && (ip->hit_victim_damage != 0))
     {
         func_ovl3_8016CF48(ip, func_ovl3_8016CEEC(ip, 5.0F));
-        func_ovl3_8016CDC8(item_gobj, TRUE);
+        func_ovl3_8016CDC8(weapon_gobj, TRUE);
     }
     return FALSE;
 }
 
-bool32 func_ovl3_8016D77C(GObj *item_gobj)
+bool32 func_ovl3_8016D77C(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     if (!(ip->item_vars.boomerang.flags & 0x21))
     {
-        func_ovl3_8016CDC8(item_gobj, TRUE);
+        func_ovl3_8016CDC8(weapon_gobj, TRUE);
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016D7B4(GObj *item_gobj)
+bool32 jtgt_ovl3_8016D7B4(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     if (!(ip->item_vars.boomerang.flags & 0x21))
     {
-        func_ovl3_8016CDC8(item_gobj, TRUE);
+        func_ovl3_8016CDC8(weapon_gobj, TRUE);
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016D7EC(GObj *item_gobj)
+bool32 jtgt_ovl3_8016D7EC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     if (ip->shield_collide_vec.z > 0.0F)
     {
@@ -406,9 +406,9 @@ bool32 jtgt_ovl3_8016D7EC(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016D868(GObj *item_gobj)
+bool32 jtgt_ovl3_8016D868(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     f32 dist_x, dist_y;
 
@@ -418,8 +418,8 @@ bool32 jtgt_ovl3_8016D868(GObj *item_gobj)
         ip->lifetime = ITBOOMERANG_LIFETIME_REFLECT;
     }
 
-    dist_x = DObjGetStruct(item_gobj)->translate.x - DObjGetStruct(ip->owner_gobj)->translate.x;
-    dist_y = DObjGetStruct(item_gobj)->translate.y - (DObjGetStruct(ip->owner_gobj)->translate.y + 250.0F);
+    dist_x = DObjGetStruct(weapon_gobj)->translate.x - DObjGetStruct(ip->owner_gobj)->translate.x;
+    dist_y = DObjGetStruct(weapon_gobj)->translate.y - (DObjGetStruct(ip->owner_gobj)->translate.y + 250.0F);
 
     ip->item_vars.boomerang.unk_0x8 = atan2f(dist_y, dist_x);
 
@@ -474,12 +474,12 @@ f32 func_ovl3_8016D914(Vec3f *vel, Fighter_Struct *fp, s32 lr, f32 vel_mul)
     return angle;
 }
 
-extern ItemSpawnData Item_Boomerang_Desc;
+extern WeaponSpawnData Item_Boomerang_Desc;
 
 GObj *func_ovl3_8016DA78(GObj *fighter_gobj, Vec3f *pos)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *item_gobj;
+    GObj *weapon_gobj;
     Weapon_Struct *ip;
     Vec3f offset;
     s32 unused;
@@ -490,13 +490,13 @@ GObj *func_ovl3_8016DA78(GObj *fighter_gobj, Vec3f *pos)
 
     offset.x = (fp->lr == RIGHT) ? offset.x + ITBOOMERANG_OFF_X : offset.x - ITBOOMERANG_OFF_X;
 
-    item_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_Boomerang_Desc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
+    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_Boomerang_Desc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->lr = fp->lr;
 
@@ -522,9 +522,9 @@ GObj *func_ovl3_8016DA78(GObj *fighter_gobj, Vec3f *pos)
     ip->item_vars.boomerang.homing_delay = 0x82;
     ip->item_vars.boomerang.adjust_angle_delay = 0;
 
-    wpMain_VelSetModelYaw(item_gobj);
+    wpMain_VelSetModelYaw(weapon_gobj);
 
     ip->is_hitlag_victim = TRUE;
 
-    return item_gobj;
+    return weapon_gobj;
 }

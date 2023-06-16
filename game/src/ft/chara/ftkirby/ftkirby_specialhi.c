@@ -207,7 +207,7 @@ void ftKirby_SpecialHi_ProcMap(GObj *fighter_gobj)
             }
             else if ((fp->coll_data.coll_type & MPCOLL_MASK_GROUND) && (fp->phys_info.vel_air.y < 0.0F))
             {
-                ftMapCollide_SetGround(fp);
+                ftMap_SetGround(fp);
                 ftKirby_SpecialHiLanding_SetStatus(fighter_gobj);
             }
         }
@@ -223,7 +223,7 @@ void ftKirby_SpecialAirHiFall_ProcMap(GObj *fighter_gobj)
     {
         if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {
-            ftMapCollide_SetGround(fp);
+            ftMap_SetGround(fp);
             ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiLanding, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
             fp->proc_lagstart = ftCommon_ProcPauseGFX;

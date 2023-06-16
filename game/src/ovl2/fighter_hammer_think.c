@@ -104,7 +104,7 @@ void ftCommon_HammerCheckSetColAnim(GObj *fighter_gobj)
 
     if (fp->colanim.colanim_id != FTCOMMON_HAMMER_COLANIM_ID)
     {
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_HAMMER_COLANIM_ID, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_HAMMER_COLANIM_ID, 0);
     }
 }
 
@@ -130,7 +130,7 @@ void ftCommon_HammerWait_SetStatus(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        ftMapCollide_SetGround(fp);
+        ftMap_SetGround(fp);
     }
     ftStatus_Update(fighter_gobj, ftStatus_Common_HammerWait, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
     ftCommon_HammerCheckSetColAnim(fighter_gobj);

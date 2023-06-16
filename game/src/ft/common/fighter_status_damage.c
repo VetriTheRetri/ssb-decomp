@@ -330,7 +330,7 @@ bool32 ftCommon_Damage_CheckElementSetColAnim(GObj *fighter_gobj, s32 element, s
     switch (element)
     {
     case gmHitCollision_Element_Fire:
-        is_set_colanim = ftCommon_CheckSetColAnimIndex(fighter_gobj, damage_level + 0xC, 0);
+        is_set_colanim = ftColor_CheckSetColAnimIndex(fighter_gobj, damage_level + 0xC, 0);
         break;
 
     case gmHitCollision_Element_Electric:
@@ -338,11 +338,11 @@ bool32 ftCommon_Damage_CheckElementSetColAnim(GObj *fighter_gobj, s32 element, s
         break;
 
     case gmHitCollision_Element_Sleep:
-        is_set_colanim = ftCommon_CheckSetColAnimIndex(fighter_gobj, damage_level + 0x20, 0);
+        is_set_colanim = ftColor_CheckSetColAnimIndex(fighter_gobj, damage_level + 0x20, 0);
         break;
 
     default:
-        is_set_colanim = ftCommon_CheckSetColAnimIndex(fighter_gobj, 5, 0);
+        is_set_colanim = ftColor_CheckSetColAnimIndex(fighter_gobj, 5, 0);
         break;
     }
     return is_set_colanim;
@@ -504,7 +504,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
         {
             status_id_var = status_id_set = Fighter_StatusList_DamageGround[damage_level][damage_index];
 
-            ftMapCollide_SetAir(this_fp);
+            ftMap_SetAir(this_fp);
 
             this_fp->phys_info.vel_damage_air.x = vel_damage.x;
             this_fp->phys_info.vel_damage_air.y = vel_damage.y;
@@ -512,7 +512,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
         }
         else if (damage_level == 3)
         {
-            ftMapCollide_SetAir(this_fp);
+            ftMap_SetAir(this_fp);
 
             status_id_var = status_id_set = Fighter_StatusList_DamageGround[damage_level][damage_index];
 

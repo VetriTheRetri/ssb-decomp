@@ -29,7 +29,7 @@ void ftCommon_CaptureYoshi_ProcPhysics(GObj *fighter_gobj)
 
             fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
-            ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+            ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
         }
     }
 }
@@ -68,7 +68,7 @@ void ftCommon_CaptureYoshi_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->lr = -capture_fp->lr;
 
-    ftMapCollide_SetAir(this_fp);
+    ftMap_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureYoshi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
@@ -151,7 +151,7 @@ void ftCommon_YoshiEgg_ProcUpdate(GObj *fighter_gobj)
 
         DObjGetStruct(fighter_gobj)->translate.y += FTCOMMON_YOSHIEGG_ESCAPE_OFF_Y;
 
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, FTSTATUPDATE_DAMAGEPORT_PRESERVE);
         ftCommon_ApplyIntangibleTimer(fp, FTCOMMON_YOSHIEGG_INTANGIBLE_TIMER);
     }
@@ -344,11 +344,11 @@ void ftCommon_YoshiEgg_SetStatus(GObj *fighter_gobj)
 
     if (this_fp->ground_or_air == ground)
     {
-        ftMapCollide_SetAir(this_fp);
+        ftMap_SetAir(this_fp);
     }
     this_fp->proc_status = ftCommon_YoshiEgg_ProcStatus;
 
-    ftMapCollide_SetAir(this_fp);
+    ftMap_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_YoshiEgg, 0.0F, 0.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
 

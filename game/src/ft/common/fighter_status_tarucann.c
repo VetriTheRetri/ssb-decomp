@@ -86,7 +86,7 @@ void ftCommon_TaruCann_SetStatus(GObj *fighter_gobj, GObj *tarucann_gobj)
     fp->status_vars.common.tarucann.release_wait = 0;
     fp->status_vars.common.tarucann.tarucann_gobj = tarucann_gobj;
 
-    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+    ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
 
     fp->is_invisible = TRUE;
 

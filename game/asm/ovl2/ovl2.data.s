@@ -4336,15 +4336,15 @@ glabel jtbl_ovl2_8012A6BC
   /* 54240 0A5ED0 8012A6D0 */  .4byte func_ovl2_800D91EC
   /* 54244 0A5ED4 8012A6D4 */  .4byte ftLink_SpecialAirNEmpty_ProcMap
   .incbin "ovl2.raw.bin", 0x54248, 0x4
-  /* 5424C 0A5EDC 8012A6DC */  .4byte func_ovl3_80164434
+  /* 5424C 0A5EDC 8012A6DC */  .4byte ftLink_SpecialLw_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54250, 0x4
   /* 54254 0A5EE4 8012A6E4 */  .4byte func_ovl2_800D8BB4
-  /* 54258 0A5EE8 8012A6E8 */  .4byte func_ovl3_80164484
+  /* 54258 0A5EE8 8012A6E8 */  .4byte ftLink_SpecialLw_ProcMap
   .incbin "ovl2.raw.bin", 0x5425C, 0x4
-  /* 54260 0A5EF0 8012A6F0 */  .4byte func_ovl3_8016445C
+  /* 54260 0A5EF0 8012A6F0 */  .4byte ftLink_SpecialAirLw_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54264, 0x4
   /* 54268 0A5EF8 8012A6F8 */  .4byte func_ovl2_800D91EC
-  /* 5426C 0A5EFC 8012A6FC */  .4byte func_ovl3_801644D4
+  /* 5426C 0A5EFC 8012A6FC */  .4byte ftLink_SpecialAirLw_ProcMap
 
 glabel D_ovl2_8012A700
   .incbin "ovl2.raw.bin", 0x54270, 0x4
@@ -4982,12 +4982,12 @@ glabel D_ovl2_8012B010
   /* 54BAC 0A683C 8012B03C */  .4byte ftCommon_IfAnimEnd_SetStatusWait
   .incbin "ovl2.raw.bin", 0x54BB0, 0x4
   /* 54BB4 0A6844 8012B044 */  .4byte func_ovl2_800D8BB4
-  /* 54BB8 0A6848 8012B048 */  .4byte func_ovl3_80151C14
+  /* 54BB8 0A6848 8012B048 */  .4byte ftPikachu_SpecialN_ProcMap
   .incbin "ovl2.raw.bin", 0x54BBC, 0x4
   /* 54BC0 0A6850 8012B050 */  .4byte ftCommon_IfAnimEnd_SetStatusFall
   .incbin "ovl2.raw.bin", 0x54BC4, 0x4
   /* 54BC8 0A6858 8012B058 */  .4byte func_ovl2_800D91EC
-  /* 54BCC 0A685C 8012B05C */  .4byte func_ovl3_80151C38
+  /* 54BCC 0A685C 8012B05C */  .4byte ftPikachu_SpecialAirN_ProcMap
   .incbin "ovl2.raw.bin", 0x54BD0, 0x4
   /* 54BD4 0A6864 8012B064 */  .4byte func_ovl3_80151E74
   .incbin "ovl2.raw.bin", 0x54BD8, 0x4
@@ -5029,35 +5029,35 @@ glabel D_ovl2_8012B010
   /* 54C68 0A68F8 8012B0F8 */  .4byte func_ovl2_800D91EC
   /* 54C6C 0A68FC 8012B0FC */  .4byte func_ovl3_80152668
   .incbin "ovl2.raw.bin", 0x54C70, 0x4
-  /* 54C74 0A6904 8012B104 */  .4byte func_ovl3_801527B0
+  /* 54C74 0A6904 8012B104 */  .4byte ftPikachu_SpecialHiStart_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54C78, 0x4
   /* 54C7C 0A690C 8012B10C */  .4byte func_ovl2_800D8BB4
-  /* 54C80 0A6910 8012B110 */  .4byte func_ovl3_8015286C
+  /* 54C80 0A6910 8012B110 */  .4byte ftPikachu_SpecialHiStart_ProcMap
   .incbin "ovl2.raw.bin", 0x54C84, 0x4
-  /* 54C88 0A6918 8012B118 */  .4byte func_ovl3_80152A38
+  /* 54C88 0A6918 8012B118 */  .4byte ftPikachu_SpecialHi_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54C8C, 0x4
-  /* 54C90 0A6920 8012B120 */  .4byte func_ovl3_80152B24
-  /* 54C94 0A6924 8012B124 */  .4byte func_ovl3_80152B6C
+  /* 54C90 0A6920 8012B120 */  .4byte ftPikachu_SpecialHi_ProcPhysics
+  /* 54C94 0A6924 8012B124 */  .4byte ftPikachu_SpecialHi_ProcMap
   .incbin "ovl2.raw.bin", 0x54C98, 0x4
-  /* 54C9C 0A692C 8012B12C */  .4byte func_ovl3_801532B8
+  /* 54C9C 0A692C 8012B12C */  .4byte ftPikachu_SpecialHiEnd_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54CA0, 0x4
-  /* 54CA4 0A6934 8012B134 */  .4byte func_ovl3_801533E4
-  /* 54CA8 0A6938 8012B138 */  .4byte func_ovl3_801534BC
+  /* 54CA4 0A6934 8012B134 */  .4byte ftPikachu_SpecialHiEnd_ProcPhysics
+  /* 54CA8 0A6938 8012B138 */  .4byte ftPikachu_SpecialHiEnd_ProcMap
   .incbin "ovl2.raw.bin", 0x54CAC, 0x4
-  /* 54CB0 0A6940 8012B140 */  .4byte func_ovl3_801527E4
+  /* 54CB0 0A6940 8012B140 */  .4byte ftPikachu_SpecialAirHiStart_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54CB4, 0x4
-  /* 54CB8 0A6948 8012B148 */  .4byte func_ovl3_80152818
-  /* 54CBC 0A694C 8012B14C */  .4byte func_ovl3_80152890
+  /* 54CB8 0A6948 8012B148 */  .4byte ftPikachu_SpecialAirHiStart_ProcPhysics
+  /* 54CBC 0A694C 8012B14C */  .4byte ftPikachu_SpecialAirHiStart_ProcMap
   .incbin "ovl2.raw.bin", 0x54CC0, 0x4
-  /* 54CC4 0A6954 8012B154 */  .4byte func_ovl3_80152A6C
+  /* 54CC4 0A6954 8012B154 */  .4byte ftPikachu_SpecialAirHi_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54CC8, 0x4
-  /* 54CCC 0A695C 8012B15C */  .4byte func_ovl3_80152B4C
-  /* 54CD0 0A6960 8012B160 */  .4byte func_ovl3_80152C2C
+  /* 54CCC 0A695C 8012B15C */  .4byte ftPikachu_SpecialAirHi_ProcPhysics
+  /* 54CD0 0A6960 8012B160 */  .4byte ftPikachu_SpecialAirHi_ProcMap
   .incbin "ovl2.raw.bin", 0x54CD4, 0x4
-  /* 54CD8 0A6968 8012B168 */  .4byte func_ovl3_80153340
+  /* 54CD8 0A6968 8012B168 */  .4byte ftPikachu_SpecialAirHiEnd_ProcUpdate
   .incbin "ovl2.raw.bin", 0x54CDC, 0x4
-  /* 54CE0 0A6970 8012B170 */  .4byte func_ovl3_80153414
-  /* 54CE4 0A6974 8012B174 */  .4byte func_ovl3_801534E0
+  /* 54CE0 0A6970 8012B170 */  .4byte ftPikachu_SpecialAirHiEnd_ProcPhysics
+  /* 54CE4 0A6974 8012B174 */  .4byte ftPikachu_SpecialAirHiEnd_ProcMap
 
 glabel D_ovl2_8012B178
   .incbin "ovl2.raw.bin", 0x54CE8, 0x4

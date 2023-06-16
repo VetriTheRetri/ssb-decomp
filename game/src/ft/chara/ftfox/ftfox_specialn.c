@@ -54,7 +54,7 @@ void ftFox_SpecialN_InitStatusVars(GObj *fighter_gobj)
 // 0x8015BC78
 void ftFox_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialN, 0.0F, 1.0F, 0);
+    ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftFox_SpecialN_InitStatusVars(fighter_gobj);
 }

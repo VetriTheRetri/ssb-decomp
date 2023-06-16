@@ -95,7 +95,7 @@ void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->lr = -capture_fp->lr;
 
-    ftMapCollide_SetAir(this_fp);
+    ftMap_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureKirby, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800E806C(this_fp, 7, 0);
@@ -229,7 +229,7 @@ void ftCommon_CaptureWaitKirby_SetStatus(GObj *fighter_gobj)
 
     fp->is_invisible = TRUE;
 
-    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+    ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     ftCommon_Trap_InitBreakoutVars(fp, 500);
 }
 
@@ -314,7 +314,7 @@ void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
             }
             fp->is_invisible = FALSE;
 
-            ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
+            ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
             ftCommon_ProcStopGFX(fighter_gobj);
             ftCommon_ThrownKirby_Escape(fighter_gobj);
 
@@ -346,7 +346,7 @@ void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
                 }
                 fp->is_invisible = FALSE;
 
-                ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
+                ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
             }
             if (fp->command_vars.flags.flag2 == 3)
             {
@@ -470,7 +470,7 @@ void ftCommon_ThrownKirbyStar_SetStatus(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
     }
     fp->proc_status = ftCommon_ThrownKirbyStar_ProcStatus;
 
@@ -490,7 +490,7 @@ void ftCommon_ThrownKirbyStar_SetStatus(GObj *fighter_gobj)
     }
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
-    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+    ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     func_ovl2_800E7F7C(fighter_gobj, 1);
     ftCommon_Trap_InitBreakoutVars(fp, FTCOMMON_THROWNKIRBYSTAR_BREAKOUT_INPUTS_MIN);
 }
@@ -525,7 +525,7 @@ void ftCommon_ThrownCopyStar_SetStatus(GObj *fighter_gobj)
 
     if (fp->ground_or_air == ground)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
     }
     fp->proc_status = ftCommon_ThrownCopyStar_ProcStatus;
 
@@ -535,6 +535,6 @@ void ftCommon_ThrownCopyStar_SetStatus(GObj *fighter_gobj)
     fp->proc_hit = ftCommon_ThrownStar_ProcHit;
     fp->is_invisible = fp->x18E_flag_b0 = TRUE;
 
-    ftCommon_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
+    ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Intangible);
     func_ovl2_800E7F7C(fighter_gobj, 1);
 }

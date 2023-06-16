@@ -24,7 +24,7 @@ void func_ovl3_801536C0(GObj *fighter_gobj)
         vel.z = 0.0F;
 
         func_ovl3_801695E4(fighter_gobj, &pos, &vel);
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYPIKACHU_THUNDERJOLT_COLANIM_ID, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYPIKACHU_THUNDERJOLT_COLANIM_ID, 0);
     }
 }
 
@@ -42,7 +42,7 @@ void func_ovl3_80153800(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyPikachu_SpecialN, fighter_gobj->anim_frame, 1.0F, 0x96U);
 
     fp->proc_accessory = func_ovl3_801536C0;
@@ -52,7 +52,7 @@ void func_ovl3_80153854(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyPikachu_SpecialAirN, fighter_gobj->anim_frame, 1.0F, 0x96U);
     func_ovl2_800D8EB8(fp);
 

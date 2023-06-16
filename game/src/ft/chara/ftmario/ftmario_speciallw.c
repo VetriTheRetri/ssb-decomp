@@ -109,7 +109,7 @@ void ftMario_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_UNK5_PRESERVE);
     func_ovl2_800D8938(fp, 17.0F);
 }
@@ -120,7 +120,7 @@ void ftMario_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_UNK5_PRESERVE);
     func_ovl2_800D8D10(fp, 40.0F);
     func_ovl2_800D8E78(fp, 17.0F);
@@ -144,7 +144,7 @@ void ftMario_SpecialLw_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
 

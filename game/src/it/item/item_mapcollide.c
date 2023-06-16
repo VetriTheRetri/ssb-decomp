@@ -41,9 +41,9 @@ bool32 func_ovl3_80167880(Coll_Data *coll_data, s32 arg1, s32 arg2)
     return is_collide_ground;
 }
 
-bool32 func_ovl3_8016796C(GObj *item_gobj)
+bool32 func_ovl3_8016796C(GObj *weapon_gobj)
 {
-    return func_ovl2_800DA034(&wpGetStruct(item_gobj)->coll_data, func_ovl3_80167880, item_gobj, FALSE);
+    return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_80167880, weapon_gobj, FALSE);
 }
 
 bool32 func_ovl3_801679A0(Coll_Data *coll_data, s32 arg1, s32 arg2)
@@ -75,9 +75,9 @@ bool32 func_ovl3_801679A0(Coll_Data *coll_data, s32 arg1, s32 arg2)
     return FALSE;
 }
 
-bool32 func_ovl3_80167A58(GObj *item_gobj)
+bool32 func_ovl3_80167A58(GObj *weapon_gobj)
 {
-    return func_ovl2_800DA034(&wpGetStruct(item_gobj)->coll_data, func_ovl3_801679A0, item_gobj, 0);
+    return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_801679A0, weapon_gobj, 0);
 }
 
 bool32 func_ovl3_80167A8C(Coll_Data *coll_data, s32 arg1, s32 arg2)
@@ -114,44 +114,44 @@ bool32 func_ovl3_80167A8C(Coll_Data *coll_data, s32 arg1, s32 arg2)
     return FALSE;
 }
 
-bool32 func_ovl3_80167B58(GObj *item_gobj)
+bool32 func_ovl3_80167B58(GObj *weapon_gobj)
 {
-    return func_ovl2_800DA034(&wpGetStruct(item_gobj)->coll_data, func_ovl3_80167A8C, item_gobj, 0);
+    return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_80167A8C, weapon_gobj, 0);
 }
 
-bool32 func_ovl3_80167B8C(Coll_Data *item_gobj, s32 arg1, s32 arg2)
+bool32 func_ovl3_80167B8C(Coll_Data *weapon_gobj, s32 arg1, s32 arg2)
 {
-    if (func_ovl2_800DB838(item_gobj) != FALSE)
+    if (func_ovl2_800DB838(weapon_gobj) != FALSE)
     {
-        item_gobj->unk_0x64 = TRUE;
+        weapon_gobj->unk_0x64 = TRUE;
     }
-    if (func_ovl2_800DC3C8(item_gobj) != FALSE)
+    if (func_ovl2_800DC3C8(weapon_gobj) != FALSE)
     {
-        item_gobj->unk_0x64 = TRUE;
+        weapon_gobj->unk_0x64 = TRUE;
     }
-    if (func_ovl2_800DCF58(item_gobj) != FALSE)
+    if (func_ovl2_800DCF58(weapon_gobj) != FALSE)
     {
-        item_gobj->unk_0x64 = TRUE;
+        weapon_gobj->unk_0x64 = TRUE;
     }
-    if (func_ovl2_800DD578(item_gobj) != FALSE)
+    if (func_ovl2_800DD578(weapon_gobj) != FALSE)
     {
-        item_gobj->unk_0x64 = TRUE;
+        weapon_gobj->unk_0x64 = TRUE;
     }
-    return item_gobj->unk_0x64;
+    return weapon_gobj->unk_0x64;
 }
 
 
-bool32 func_ovl3_80167C04(GObj *item_gobj)
+bool32 func_ovl3_80167C04(GObj *weapon_gobj)
 {
-    return func_ovl2_800DA034(&wpGetStruct(item_gobj)->coll_data, func_ovl3_80167B8C, item_gobj, 0);
+    return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_80167B8C, weapon_gobj, 0);
 }
 
-bool32 func_ovl3_80167C38(GObj *item_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
+bool32 func_ovl3_80167C38(GObj *weapon_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Coll_Data *coll_data = &ip->coll_data;
     bool32 return_bool = FALSE;
-    Vec3f mod_pos, *translate = &DObjGetStruct(item_gobj)->translate;
+    Vec3f mod_pos, *translate = &DObjGetStruct(weapon_gobj)->translate;
     u16 coll_flags = (ip->coll_data.coll_mask_prev ^ ip->coll_data.coll_mask) & ip->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
     u32 unused;
 
@@ -221,13 +221,15 @@ bool32 func_ovl3_80167C38(GObj *item_gobj, u32 check_flags, f32 mod_vel, Vec3f *
     return return_bool;
 }
 
-void func_ovl3_80167E78(Weapon_Struct *ip) // Make item grounded
+// 0x80167E78
+void wpMap_SetGround(Weapon_Struct *ip) // Make item grounded
 {
     ip->ground_or_air = ground;
     ip->phys_info.vel_ground = ip->phys_info.vel.x * ip->lr;
 }
 
-void func_ovl3_80167E9C(Weapon_Struct *ip) // Make item airborne
+// 0x80167E9C
+void wpMap_SetAir(Weapon_Struct *ip) // Make item airborne
 {
     ip->ground_or_air = air;
 }

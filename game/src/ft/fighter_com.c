@@ -6,42 +6,42 @@
 
 Weapon_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
 {
-    GObj *item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
+    GObj *weapon_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
-    if (item_gobj != NULL)
+    if (weapon_gobj != NULL)
     {
         do
         {
-            Weapon_Struct *ip = wpGetStruct(item_gobj);
+            Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
             if (ip->owner_gobj == fp->fighter_gobj)
             {
                 return ip;
             }
-            item_gobj = item_gobj->group_gobj_next;
+            weapon_gobj = weapon_gobj->group_gobj_next;
         } 
-        while (item_gobj != NULL);
+        while (weapon_gobj != NULL);
     }
     return NULL;
 }
 
-Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 it_kind)
+Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 wp_kind)
 {
-    GObj *item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
+    GObj *weapon_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
-    if (item_gobj != NULL)
+    if (weapon_gobj != NULL)
     {
         do
         {
-            Weapon_Struct *ip = wpGetStruct(item_gobj);
+            Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-            if ((ip->owner_gobj == fp->fighter_gobj) && (ip->it_kind == it_kind))
+            if ((ip->owner_gobj == fp->fighter_gobj) && (ip->wp_kind == wp_kind))
             {
-                return &DObjGetStruct(ip->item_gobj)->translate;
+                return &DObjGetStruct(ip->weapon_gobj)->translate;
             }
-            item_gobj = item_gobj->group_gobj_next;
+            weapon_gobj = weapon_gobj->group_gobj_next;
         } 
-        while (item_gobj != NULL);
+        while (weapon_gobj != NULL);
     }
     return NULL;
 }

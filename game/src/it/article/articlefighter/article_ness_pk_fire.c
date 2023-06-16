@@ -156,15 +156,15 @@ void func_ovl3_8018579C(GObj *article_gobj)
 extern s32 D_ovl2_80131148;
 extern ArticleSpawnData Article_PK_Fire_Data;
 
-GObj* func_ovl3_80185824(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
+GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *article_gobj;
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Article_Struct *ap;
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
 
-    article_gobj = func_ovl3_8016E174(item_gobj, &Article_PK_Fire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ITEM));
+    article_gobj = func_ovl3_8016E174(weapon_gobj, &Article_PK_Fire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ITEM));
 
     if (article_gobj == NULL)
     {

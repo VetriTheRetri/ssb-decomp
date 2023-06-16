@@ -41,5 +41,5 @@ void ftCommon_FuraFura_SetStatus(GObj *fighter_gobj)
     breakout_wait += FTCOMMON_FURAFURA_BREAKOUT_WAIT_MIN;
 
     ftCommon_Trap_InitBreakoutVars(fp, breakout_wait);
-    ftCommon_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_FURAFURA_COLANIM_ID, FTCOMMON_FURAFURA_COLANIM_LENGTH);
+    ftColor_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_FURAFURA_COLANIM_ID, FTCOMMON_FURAFURA_COLANIM_LENGTH);
 }

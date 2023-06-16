@@ -103,7 +103,7 @@ void ftCommon_DownBounce_SetStatus(GObj *fighter_gobj)
 
     if (fp->ground_or_air == air)
     {
-        ftMapCollide_SetGround(fp);
+        ftMap_SetGround(fp);
     }
     if (ftCommon_DownBounce_UpOrDown(fighter_gobj) != 0)
     {

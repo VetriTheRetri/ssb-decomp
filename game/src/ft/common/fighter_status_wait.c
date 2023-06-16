@@ -19,7 +19,7 @@ void ftCommon_Wait_SetStatus(GObj *fighter_gobj)
     {
         if (fp->ground_or_air == air)
         {
-            ftMapCollide_SetGround(fp);
+            ftMap_SetGround(fp);
         }
         ftStatus_Update(fighter_gobj, ftStatus_Common_Wait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

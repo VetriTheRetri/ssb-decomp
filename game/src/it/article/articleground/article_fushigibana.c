@@ -132,9 +132,9 @@ GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     return article_gobj;
 }
 
-bool32 func_ovl3_80184820(GObj *item_gobj)
+bool32 func_ovl3_80184820(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     ip->phys_info.vel.x += ATFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
 
@@ -145,23 +145,23 @@ bool32 func_ovl3_80184820(GObj *item_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80184874(GObj *item_gobj)
+bool32 jtgt_ovl3_80184874(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE6E4(&DObjGetStruct(item_gobj)->translate, ip->item_hit.damage, ip->lr);
+    func_ovl2_800FE6E4(&DObjGetStruct(weapon_gobj)->translate, ip->item_hit.damage, ip->lr);
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_801848BC(GObj *item_gobj)
+bool32 jtgt_ovl3_801848BC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x) + PI32;
-    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x) + PI32;
+    DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     if (ip->phys_info.vel.x > 0.0F)
     {
@@ -172,44 +172,44 @@ bool32 jtgt_ovl3_801848BC(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80184970(GObj *item_gobj)
+bool32 jtgt_ovl3_80184970(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    func_ovl3_801680EC(ip, fp);
+    wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x) + PI32;
-    DObjGetStruct(item_gobj)->scale.x = 1.0F;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x) + PI32;
+    DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
 
     return FALSE;
 }
 
-extern ItemSpawnData Item_Razor_Data;
+extern WeaponSpawnData Item_Razor_Data;
 
 GObj *func_ovl3_801849EC(GObj *article_gobj, Vec3f *pos)
 {
-    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, &Item_Razor_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Razor_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     Weapon_Struct *ip;
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->lr = LEFT;
 
     ip->phys_info.vel.x = ATFUSHIGIBANA_RAZOR_VEL_X;
 
-    joint = DObjGetStruct(item_gobj);
+    joint = DObjGetStruct(weapon_gobj);
 
     joint->translate = *pos;
 
     ip->lifetime = ATFUSHIGIBANA_RAZOR_LIFETIME;
 
-    return item_gobj;
+    return weapon_gobj;
 }

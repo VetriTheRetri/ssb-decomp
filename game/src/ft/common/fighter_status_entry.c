@@ -250,7 +250,7 @@ void ftCommon_Appear_SetStatus(GObj *fighter_gobj)
 
         break;
     }
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftCommon_Appear_InitStatusVars(fighter_gobj);
 

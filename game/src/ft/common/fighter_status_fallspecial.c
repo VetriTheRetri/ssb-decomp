@@ -76,7 +76,7 @@ void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, 
 
     if (fp->ground_or_air == ground)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
     }
     fp->jumps_used = attributes->jumps_max;
 
@@ -86,7 +86,7 @@ void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, 
     fp->status_vars.common.fallspecial.is_allow_interrupt = is_allow_interrupt;
     fp->status_vars.common.fallspecial.is_fall_accelerate = is_fall_accelerate;
 
-    ftCommon_CheckSetColAnimIndex(fighter_gobj, 7, 0);
+    ftColor_CheckSetColAnimIndex(fighter_gobj, 7, 0);
     func_ovl3_80165024(fighter_gobj);
 
     fp->x192_flag_b0 = TRUE;

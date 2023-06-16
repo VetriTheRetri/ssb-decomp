@@ -7,7 +7,7 @@ void ftLink_SpecialHi_DestroyWeapon(Fighter_Struct *fp, Weapon_Struct *wp)
 
     wp->item_vars.spin_attack.is_destroy = TRUE;
 
-    wpMain_DestroyWeapon(wp->item_gobj);
+    wpMain_DestroyWeapon(wp->weapon_gobj);
 
     fp->status_vars.link.specialhi.spin_attack_gobj = NULL;
 }
@@ -47,7 +47,7 @@ void ftLink_SpecialHi_UpdateWeaponHit(GObj *fighter_gobj, Weapon_Struct *wp)
         wp->item_hit.update_state = gmHitCollision_UpdateState_New;
         wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_1;
 
-        func_ovl3_80165F60(fighter_gobj);
+        wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 2:
@@ -55,21 +55,21 @@ void ftLink_SpecialHi_UpdateWeaponHit(GObj *fighter_gobj, Weapon_Struct *wp)
         wp->item_hit.update_state = gmHitCollision_UpdateState_New;
         wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_2;
 
-        func_ovl3_80165F60(fighter_gobj);
+        wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 3:
         wp->item_hit.update_state = gmHitCollision_UpdateState_New;
         wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_3;
 
-        func_ovl3_80165F60(fighter_gobj);
+        wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 4:
         wp->item_hit.update_state = gmHitCollision_UpdateState_New;
         wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_4;
 
-        func_ovl3_80165F60(fighter_gobj);
+        wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 13:
@@ -241,7 +241,7 @@ void ftLink_SpecialHi_ProcMap(GObj *fighter_gobj)
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_HIT_PRESERVE));
 
         fp->proc_damage = ftLink_SpecialHi_ProcDamage;
@@ -274,7 +274,7 @@ void ftLink_SpecialAirHiEnd_ProcMap(GObj *fighter_gobj)
         }
         else if (fp->coll_data.coll_type & MPCOLL_MASK_GROUND)
         {
-            ftMapCollide_SetGround(fp);
+            ftMap_SetGround(fp);
             ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
             fp->proc_damage = ftLink_SpecialHi_ProcDamage;

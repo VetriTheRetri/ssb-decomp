@@ -11,7 +11,7 @@ void (*ftCommon_SpecialHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8015ED3C,
     ftCaptain_SpecialHi_SetStatus,
     ftKirby_SpecialHi_SetStatus,
-    jtgt_ovl3_801529A0,
+    ftPikachu_SpecialHiStart_SetStatus,
     ftPurin_SpecialHi_SetStatus,
     ftNess_SpecialHiStart_SetStatus,
     ftMario_SpecialHi_SetStatus,
@@ -25,7 +25,7 @@ void (*ftCommon_SpecialHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     jtgt_ovl3_8015ED3C,
     ftCaptain_SpecialHi_SetStatus,
     ftKirby_SpecialHi_SetStatus,
-    jtgt_ovl3_801529A0,
+    ftPikachu_SpecialHiStart_SetStatus,
     ftPurin_SpecialHi_SetStatus,
     ftNess_SpecialHiStart_SetStatus,
     ftDonkey_SpecialHi_SetStatus

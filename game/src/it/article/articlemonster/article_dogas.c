@@ -166,10 +166,10 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     return article_gobj;
 }
 
-bool32 func_ovl3_801830DC(GObj *item_gobj)
+bool32 func_ovl3_801830DC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
-    DObj *joint = DObjGetStruct(item_gobj)->next;
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    DObj *joint = DObjGetStruct(weapon_gobj)->next;
 
     ip->item_hit.size = joint->scale.x * ip->item_vars.smog.hit_desc->size;
 
@@ -180,26 +180,26 @@ bool32 func_ovl3_801830DC(GObj *item_gobj)
     else return FALSE;
 }
 
-extern ItemSpawnData Item_Smog_Data;
+extern WeaponSpawnData Item_Smog_Data;
 
 GObj* func_ovl3_80183144(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 {
-    ItemSpawnData *p_data = &Item_Smog_Data;
-    GObj *item_gobj = wpManager_CreateWeapon(article_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    WeaponSpawnData *p_data = &Item_Smog_Data;
+    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     Weapon_Struct *ip;
 
-    if (item_gobj == NULL)
+    if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(item_gobj);
+    ip = wpGetStruct(weapon_gobj);
 
     ip->lifetime = ATDOGAS_SMOG_LIFETIME;
 
-    ip->item_vars.smog.hit_desc = (ItemHitDesc*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset_it_hit); // Dude I had a stroke trying to match this
+    ip->item_vars.smog.hit_desc = (wpCommonAttributes*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset_wp_hit); // Dude I had a stroke trying to match this
 
-    joint = DObjGetStruct(item_gobj);
+    joint = DObjGetStruct(weapon_gobj);
 
     ip->phys_info.vel = *vel;
 
@@ -207,5 +207,5 @@ GObj* func_ovl3_80183144(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 
     joint->translate = *pos;
 
-    return item_gobj;
+    return weapon_gobj;
 }

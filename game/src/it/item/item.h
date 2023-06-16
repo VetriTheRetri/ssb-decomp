@@ -48,19 +48,12 @@ typedef enum It_Kind
 
 } It_Kind;
 
-typedef enum Item_Hit_Element
-{
-    It_Hit_Kind_Normal,
-    It_Hit_Kind_Fire,
-
-} Item_Hit_Element;
-
-typedef struct ItemSpawnData
+typedef struct WeaponSpawnData
 {
     u8 unk_0x0;
-    s32 it_kind;
+    s32 wp_kind;
     void **p_item; // Pointer to various item data
-    intptr_t offset_it_hit; // Offset of item hitbox info
+    intptr_t offset_wp_hit; // Offset of item hitbox info
     u8 unk_0x10;
     u8 unk_0x11;
     u8 unk_0x12;
@@ -74,9 +67,9 @@ typedef struct ItemSpawnData
     bool32 (*proc_reflector)(GObj*);
     bool32 (*proc_absorb)(GObj*);
 
-} ItemSpawnData;
+} WeaponSpawnData;
 
-typedef struct ItemHitDesc // Moreso hitbox stuff
+typedef struct wpCommonAttributes // Moreso hitbox stuff
 {
     void *unk_0x0;
     void *unk_0x4;
@@ -108,7 +101,7 @@ typedef struct ItemHitDesc // Moreso hitbox stuff
     u32 flags_0x2F_b7 : 1;
     u32 knockback_base : 10;
 
-} ItemHitDesc;
+} wpCommonAttributes;
 
 typedef struct ItemHitUnk
 {
@@ -129,7 +122,7 @@ typedef struct _ItemHitArray
 
 } ItemHitArray;
 
-typedef struct _Item_Hit
+typedef struct _Weapon_Hit
 {
     s32 update_state; // 0 = disabled, 1 = new hitbox, 2 and 3 = interpolate/copy current position to previous
     s32 damage; // 0x4
@@ -163,14 +156,14 @@ typedef struct _Item_Hit
     ItemHitUnk item_hit_unk[2];
     ItemHitArray hit_targets[4];
 
-} Item_Hit;
+} Weapon_Hit;
 
 typedef struct _Weapon_Struct
 {
     void *wp_alloc_next;        // Pointer to next item struct
-    GObj *item_gobj;            // Pointer to item's GObj
+    GObj *weapon_gobj;          // Pointer to item's GObj
     GObj *owner_gobj;           // Current owner of this item; expected to be fighter?
-    s32 it_kind;                // Item ID
+    s32 wp_kind;                // Item ID
     u8 team;
     u8 port_id;
     u8 handicap;
@@ -186,7 +179,7 @@ typedef struct _Weapon_Struct
 
     Coll_Data coll_data;
     Ground_Air ground_or_air;
-    Item_Hit item_hit;          
+    Weapon_Hit item_hit;          
 
     s32 hit_victim_damage;      // Set to item hitbox's final damage output when hitting a target
     s32 hit_reflect_damage;     // Might be self-damage?
@@ -199,74 +192,15 @@ typedef struct _Weapon_Struct
     u16 reflect_stat_count;     // Attack flags
     GObj *absorb_gobj;          // GObj that absorbed this item
 
-    u8 is_hitlag_victim : 1;    // Item can deal hitlag to target
-    u8 is_hitlag_item : 1;
-    u8 x260_flag_b2 : 1;
-    u8 x260_flag_b3 : 1;
-    u8 x260_flag_b4 : 1;
-    u8 x260_flag_b5 : 1;
-    u8 x260_flag_b6 : 1;
-    u8 x260_flag_b7 : 1;
-    u8 x261_flag_b0 : 1;
-    u8 x261_flag_b1 : 1;
-    u8 x261_flag_b2 : 1;
-    u8 x261_flag_b3 : 1;
-    u8 x261_flag_b4 : 1;
-    u8 x261_flag_b5 : 1;
-    u8 x261_flag_b6 : 1;
-    u8 x261_flag_b7 : 1;
-    u8 x262_flag_b0 : 1;
-    u8 x262_flag_b1 : 1;
-    u8 x262_flag_b2 : 1;
-    u8 x262_flag_b3 : 1;
-    u8 x262_flag_b4 : 1;
-    u8 x262_flag_b5 : 1;
-    u8 x262_flag_b6 : 1;
-    u8 x262_flag_b7 : 1;
-    u8 x263_flag_b0 : 1;
-    u8 x263_flag_b1 : 1;
-    u8 x263_flag_b2 : 1;
-    u8 x263_flag_b3 : 1;
-    u8 x263_flag_b4 : 1;
-    u8 x263_flag_b5 : 1;
-    u8 x263_flag_b6 : 1;
-    u8 x263_flag_b7 : 1;
+    u32 is_hitlag_victim : 1;   // Item can deal hitlag to target
+    u32 is_hitlag_item : 1;     // Item is in hitlag
 
     u32 group_id;
+
     s32 lifetime; // Frames until item despawns
 
-    u8 is_camera_follow : 1;
-    u8 is_static_damage : 1; // If this is FALSE, item's damage can be modified (on reflection only?)
-    u8 x26C_flag_b2 : 1;
-    u8 x26C_flag_b3 : 1;
-    u8 x26C_flag_b4 : 1;
-    u8 x26C_flag_b5 : 1;
-    u8 x26C_flag_b6 : 1;
-    u8 x26C_flag_b7 : 1;
-    u8 x26D_flag_b0 : 1;
-    u8 x26D_flag_b1 : 1;
-    u8 x26D_flag_b2 : 1;
-    u8 x26D_flag_b3 : 1;
-    u8 x26D_flag_b4 : 1;
-    u8 x26D_flag_b5 : 1;
-    u8 x26D_flag_b6 : 1;
-    u8 x26D_flag_b7 : 1;
-    u8 x26E_flag_b0 : 1;
-    u8 x26E_flag_b1 : 1;
-    u8 x26E_flag_b2 : 1;
-    u8 x26E_flag_b3 : 1;
-    u8 x26E_flag_b4 : 1;
-    u8 x26E_flag_b5 : 1;
-    u8 x26E_flag_b6 : 1;
-    u8 x26E_flag_b7 : 1;
-    u8 x26F_flag_b0 : 1;
-    u8 x26F_flag_b1 : 1;
-    u8 x26F_flag_b2 : 1;
-    u8 x26F_flag_b3 : 1;
-    u8 x26F_flag_b4 : 1;
-    u8 x26F_flag_b5 : 1;
-    u8 x26F_flag_b6 : 1;
-    u8 x26F_flag_b7 : 1;
+    u32 is_camera_follow : 1;
+    u32 is_static_damage : 1; // If this is FALSE, item's damage can be modified (on reflection only?)
 
     gmSoundEffect *p_sfx;                   // Pointer to item's current ongoing sound effect
     u16 sfx_id;                             // ID of sound effect this item is supposed to play? (This gets checked against gmSoundEffect's ID when despawning)
@@ -283,21 +217,21 @@ typedef struct _Weapon_Struct
 
     union item_vars
     {
-        Fireball_ItemVars fireball;
-        Charge_Shot_ItemVars charge_shot;
-        SamusBomb_ItemVars samus_bomb;
-        ThunderJolt_ItemVars thunder_jolt;
-        Thunder_ItemVars thunder;
-        PK_Thunder_ItemVars pk_thunder;
-        PK_Thunder_Trail_ItemVars pk_thunder_trail;
-        Egg_Throw_ItemVars egg_throw;
-        Spin_Attack_ItemVars spin_attack; // Link's Up Special
-        Boomerang_ItemVars boomerang;
-        Star_ItemVars star;
-        Rock_ItemVars rock; // Onix's Rock Slide
-        Coin_ItemVars coin;
-        Hydro_ItemVars hydro;
-        Smog_ItemVars smog;
+        Fireball_WeaponVars fireball;
+        ChargeShot_WeaponVars charge_shot;
+        SamusBomb_WeaponVars samus_bomb;
+        ThunderJolt_WeaponVars thunder_jolt;
+        Thunder_WeaponVars thunder;
+        PKThunder_WeaponVars pk_thunder;
+        PKThunder_Trail_WeaponVars pk_thunder_trail;
+        EggThrow_WeaponVars egg_throw;
+        SpinAttack_WeaponVars spin_attack; // Link's Up Special
+        Boomerang_WeaponVars boomerang;
+        Star_WeaponVars star;
+        Rock_WeaponVars rock; // Onix's Rock Slide
+        Coin_WeaponVars coin;
+        Hydro_WeaponVars hydro;
+        Smog_WeaponVars smog;
 
     } item_vars;
 
@@ -305,7 +239,7 @@ typedef struct _Weapon_Struct
 
 } Weapon_Struct;
 
-#define wpGetStruct(item_gobj) \
-((Weapon_Struct*)item_gobj->user_data) \
+#define wpGetStruct(weapon_gobj) \
+((Weapon_Struct*)weapon_gobj->user_data) \
 
 #endif

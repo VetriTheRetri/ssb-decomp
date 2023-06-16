@@ -2640,7 +2640,7 @@ bool32 func_ovl2_800DE7D8(GObj *fighter_gobj)
 }
 
 // Check if fighter becomes grounded, allow CliffCatch interrupt
-bool32 ftMapCollide_CheckGroundCliff(GObj *fighter_gobj, void (*proc_map)(GObj*))
+bool32 ftMap_CheckGroundCliff(GObj *fighter_gobj, void (*proc_map)(GObj*))
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -2696,7 +2696,7 @@ bool32 func_ovl2_800DE958(GObj *fighter_gobj)
 
 bool32 func_ovl2_800DE978(GObj *fighter_gobj)
 {
-    return ftMapCollide_CheckGroundCliff(fighter_gobj, func_ovl2_800DE8E4);
+    return ftMap_CheckGroundCliff(fighter_gobj, func_ovl2_800DE8E4);
 }
 
 void jtgt_ovl2_800DE99C(GObj *fighter_gobj)
@@ -2854,12 +2854,12 @@ void func_ovl2_800DEDF0(GObj *fighter_gobj)
     {
         if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
         {
-            ftMapCollide_SetGround(fp);
+            ftMap_SetGround(fp);
         }
     }
     else if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        ftMapCollide_SetAir(fp);
+        ftMap_SetAir(fp);
     }
 }
 
@@ -2874,7 +2874,7 @@ void func_ovl2_800DEE54(GObj *fighter_gobj)
     else ftCommon_Wait_SetStatus(fighter_gobj);
 }
 
-void ftMapCollide_SetGround(Fighter_Struct *fp)
+void ftMap_SetGround(Fighter_Struct *fp)
 {
     fp->phys_info.vel_ground.x = fp->phys_info.vel_air.x * fp->lr;
 
@@ -2885,7 +2885,7 @@ void ftMapCollide_SetGround(Fighter_Struct *fp)
     fp->stat_flags.is_ground_or_air = ground; // Ground/Air bool?
 }
 
-void ftMapCollide_SetAir(Fighter_Struct *fp)
+void ftMap_SetAir(Fighter_Struct *fp)
 {
     fp->ground_or_air = air;
 
@@ -2963,11 +2963,11 @@ void func_ovl2_800DF058(GObj *article_gobj, Vec3f *pos, Coll_Data *coll_data)
     func_ovl2_800DEFF8(&ap->coll_data);
 }
 
-void func_ovl2_800DF09C(GObj *item_gobj, Vec3f *pos, Coll_Data *coll_data)
+void func_ovl2_800DF09C(GObj *weapon_gobj, Vec3f *pos, Coll_Data *coll_data)
 {
-    Weapon_Struct *ip = wpGetStruct(item_gobj);
+    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
     func_ovl2_800DEFBC(&ip->coll_data, pos, coll_data);
-    func_ovl2_800DEEF4(&ip->coll_data, item_gobj, 0);
+    func_ovl2_800DEEF4(&ip->coll_data, weapon_gobj, 0);
     func_ovl2_800DEFF8(&ip->coll_data);
 }

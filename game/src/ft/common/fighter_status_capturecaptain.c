@@ -88,7 +88,7 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
     }
     else this_fp->x192_flag_b3 = FALSE;
 
-    ftMapCollide_SetAir(this_fp);
+    ftMap_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureCaptain, FTCOMMON_CAPTURECAPTAIN_FRAME_BEGIN, FTCOMMON_CAPTURECAPTAIN_ANIM_SPEED, FTSTATUPDATE_NONE_PRESERVE);
     ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
     ftAnim_Update(fighter_gobj);

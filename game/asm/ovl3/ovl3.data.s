@@ -1368,7 +1368,7 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 56FD4 103514 80188AD4 */  .4byte jtgt_ovl3_8015E79C
   /* 56FD8 103518 80188AD8 */  .4byte ftCaptain_SpecialAirN_SetStatus
   /* 56FDC 10351C 80188ADC */  .4byte ftKirby_SpecialAirN_SetStatusIndex
-  /* 56FE0 103520 80188AE0 */  .4byte jtgt_ovl3_80151D64
+  /* 56FE0 103520 80188AE0 */  .4byte ftPikachu_SpecialAirN_SetStatus
   /* 56FE4 103524 80188AE4 */  .4byte ftPurin_SpecialAirN_SetStatus
   /* 56FE8 103528 80188AE8 */  .4byte ftNess_SpecialAirN_SetStatus
   /* 56FEC 10352C 80188AEC */  .4byte ftMario_SpecialAirN_SetStatus
@@ -1382,7 +1382,7 @@ glabel ftCommon_SpecialAirN_StatusList
   /* 5700C 10354C 80188B0C */  .4byte ftMario_SpecialAirN_SetStatus
   /* 57010 103550 80188B10 */  .4byte ftCaptain_SpecialAirN_SetStatus
   /* 57014 103554 80188B14 */  .4byte ftKirby_SpecialAirN_SetStatusIndex
-  /* 57018 103558 80188B18 */  .4byte jtgt_ovl3_80151D64
+  /* 57018 103558 80188B18 */  .4byte ftPikachu_SpecialAirN_SetStatus
   /* 5701C 10355C 80188B1C */  .4byte ftPurin_SpecialAirN_SetStatus
   /* 57020 103560 80188B20 */  .4byte ftNess_SpecialAirN_SetStatus
   /* 57024 103564 80188B24 */  .4byte ftDonkey_SpecialAirNStart_SetStatus
@@ -1397,7 +1397,7 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 57040 103580 80188B40 */  .4byte jtgt_ovl3_8015ED7C
   /* 57044 103584 80188B44 */  .4byte ftCaptain_SpecialAirHi_SetStatus
   /* 57048 103588 80188B48 */  .4byte ftKirby_SpecialAirHi_SetStatus
-  /* 5704C 10358C 80188B4C */  .4byte jtgt_ovl3_801529EC
+  /* 5704C 10358C 80188B4C */  .4byte ftPikachu_SpecialAirHiStart_SetStatus
   /* 57050 103590 80188B50 */  .4byte ftPurin_SpecialAirHi_SetStatus
   /* 57054 103594 80188B54 */  .4byte ftNess_SpecialAirHiStart_SetStatus
   /* 57058 103598 80188B58 */  .4byte ftMario_SpecialAirN_SetStatus
@@ -1411,7 +1411,7 @@ glabel ftCommon_SpecialAirHi_StatusList
   /* 57078 1035B8 80188B78 */  .4byte jtgt_ovl3_8015ED7C
   /* 5707C 1035BC 80188B7C */  .4byte ftCaptain_SpecialAirHi_SetStatus
   /* 57080 1035C0 80188B80 */  .4byte ftKirby_SpecialAirHi_SetStatus
-  /* 57084 1035C4 80188B84 */  .4byte jtgt_ovl3_801529EC
+  /* 57084 1035C4 80188B84 */  .4byte ftPikachu_SpecialAirHiStart_SetStatus
   /* 57088 1035C8 80188B88 */  .4byte ftPurin_SpecialAirHi_SetStatus
   /* 5708C 1035CC 80188B8C */  .4byte ftNess_SpecialAirHiStart_SetStatus
   /* 57090 1035D0 80188B90 */  .4byte ftDonkey_SpecialAirHi_SetStatus
@@ -1424,7 +1424,7 @@ glabel ftCommon_SpecialAirLw_StatusList
 glabel jtbl_ovl3_80188BA0
   /* 570A0 1035E0 80188BA0 */  .4byte jtgt_ovl3_8015E274
   /* 570A4 1035E4 80188BA4 */  .4byte ftMario_SpecialAirLw_SetStatus
-  /* 570A8 1035E8 80188BA8 */  .4byte jtgt_ovl3_801645E8
+  /* 570A8 1035E8 80188BA8 */  .4byte ftLink_SpecialAirLw_SetStatus
   /* 570AC 1035EC 80188BAC */  .4byte jtgt_ovl3_8015F04C
   /* 570B0 1035F0 80188BB0 */  .4byte ftCaptain_SpecialAirLw_SetStatus
   /* 570B4 1035F4 80188BB4 */  .4byte ftKirby_SpecialAirLwStart_SetStatus
@@ -1440,7 +1440,7 @@ glabel jtbl_ovl3_80188BA0
 glabel jtbl_ovl3_80188BD8
   /* 570D8 103618 80188BD8 */  .4byte jtgt_ovl3_8015E274
   /* 570DC 10361C 80188BDC */  .4byte ftMario_SpecialAirLw_SetStatus
-  /* 570E0 103620 80188BE0 */  .4byte jtgt_ovl3_801645E8
+  /* 570E0 103620 80188BE0 */  .4byte ftLink_SpecialAirLw_SetStatus
   /* 570E4 103624 80188BE4 */  .4byte jtgt_ovl3_8015F04C
   /* 570E8 103628 80188BE8 */  .4byte ftCaptain_SpecialAirLw_SetStatus
   /* 570EC 10362C 80188BEC */  .4byte ftKirby_SpecialAirLwStart_SetStatus
@@ -1488,7 +1488,7 @@ glabel ftCommon_SpecialN_StatusList
   /* 57184 1036C4 80188C84 */  .4byte jtgt_ovl3_8015E740
   /* 57188 1036C8 80188C88 */  .4byte ftCaptain_SpecialN_SetStatus
   /* 5718C 1036CC 80188C8C */  .4byte ftKirby_SpecialN_SetStatusIndex
-  /* 57190 1036D0 80188C90 */  .4byte jtgt_ovl3_80151D24
+  /* 57190 1036D0 80188C90 */  .4byte ftPikachu_SpecialN_SetStatus
   /* 57194 1036D4 80188C94 */  .4byte ftPurin_SpecialN_SetStatus
   /* 57198 1036D8 80188C98 */  .4byte ftNess_SpecialN_SetStatus
   /* 5719C 1036DC 80188C9C */  .4byte ftMario_SpecialN_SetStatus
@@ -1502,7 +1502,7 @@ glabel ftCommon_SpecialN_StatusList
   /* 571BC 1036FC 80188CBC */  .4byte ftMario_SpecialN_SetStatus
   /* 571C0 103700 80188CC0 */  .4byte ftCaptain_SpecialN_SetStatus
   /* 571C4 103704 80188CC4 */  .4byte ftKirby_SpecialN_SetStatusIndex
-  /* 571C8 103708 80188CC8 */  .4byte jtgt_ovl3_80151D24
+  /* 571C8 103708 80188CC8 */  .4byte ftPikachu_SpecialN_SetStatus
   /* 571CC 10370C 80188CCC */  .4byte ftPurin_SpecialN_SetStatus
   /* 571D0 103710 80188CD0 */  .4byte ftNess_SpecialN_SetStatus
   /* 571D4 103714 80188CD4 */  .4byte ftDonkey_SpecialNStart_SetStatus
@@ -1518,7 +1518,7 @@ glabel ftCommon_SpecialHi_StatusList
   /* 571F8 103738 80188CF8 */  .4byte jtgt_ovl3_8015ED3C
   /* 571FC 10373C 80188CFC */  .4byte ftCaptain_SpecialHi_SetStatus
   /* 57200 103740 80188D00 */  .4byte ftKirby_SpecialHi_SetStatus
-  /* 57204 103744 80188D04 */  .4byte jtgt_ovl3_801529A0
+  /* 57204 103744 80188D04 */  .4byte ftPikachu_SpecialHiStart_SetStatus
   /* 57208 103748 80188D08 */  .4byte ftPurin_SpecialHi_SetStatus
   /* 5720C 10374C 80188D0C */  .4byte ftNess_SpecialHiStart_SetStatus
   /* 57210 103750 80188D10 */  .4byte ftMario_SpecialHi_SetStatus
@@ -1532,7 +1532,7 @@ glabel ftCommon_SpecialHi_StatusList
   /* 57230 103770 80188D30 */  .4byte jtgt_ovl3_8015ED3C
   /* 57234 103774 80188D34 */  .4byte ftCaptain_SpecialHi_SetStatus
   /* 57238 103778 80188D38 */  .4byte ftKirby_SpecialHi_SetStatus
-  /* 5723C 10377C 80188D3C */  .4byte jtgt_ovl3_801529A0
+  /* 5723C 10377C 80188D3C */  .4byte ftPikachu_SpecialHiStart_SetStatus
   /* 57240 103780 80188D40 */  .4byte ftPurin_SpecialHi_SetStatus
   /* 57244 103784 80188D44 */  .4byte ftNess_SpecialHiStart_SetStatus
   /* 57248 103788 80188D48 */  .4byte ftDonkey_SpecialHi_SetStatus
@@ -1544,7 +1544,7 @@ glabel ftCommon_SpecialLw_StatusList
   /* 57258 103798 80188D58 */  .4byte ftDonkey_SpecialLwStart_SetStatus
   /* 5725C 10379C 80188D5C */  .4byte jtgt_ovl3_8015E220
   /* 57260 1037A0 80188D60 */  .4byte ftMario_SpecialLw_SetStatus
-  /* 57264 1037A4 80188D64 */  .4byte jtgt_ovl3_8016458C
+  /* 57264 1037A4 80188D64 */  .4byte ftLink_SpecialLw_SetStatus
   /* 57268 1037A8 80188D68 */  .4byte jtgt_ovl3_8015EFE4
   /* 5726C 1037AC 80188D6C */  .4byte ftCaptain_SpecialLw_SetStatus
   /* 57270 1037B0 80188D70 */  .4byte ftKirby_SpecialLwStart_SetStatus
@@ -1558,7 +1558,7 @@ glabel ftCommon_SpecialLw_StatusList
   /* 57290 1037D0 80188D90 */  .4byte ftDonkey_SpecialLwStart_SetStatus
   /* 57294 1037D4 80188D94 */  .4byte jtgt_ovl3_8015E220
   /* 57298 1037D8 80188D98 */  .4byte ftMario_SpecialLw_SetStatus
-  /* 5729C 1037DC 80188D9C */  .4byte jtgt_ovl3_8016458C
+  /* 5729C 1037DC 80188D9C */  .4byte ftLink_SpecialLw_SetStatus
   /* 572A0 1037E0 80188DA0 */  .4byte jtgt_ovl3_8015EFE4
   /* 572A4 1037E4 80188DA4 */  .4byte ftCaptain_SpecialLw_SetStatus
   /* 572A8 1037E8 80188DA8 */  .4byte ftKirby_SpecialLwStart_SetStatus
@@ -3526,7 +3526,7 @@ glabel Article_Hitokage_Status
   /* 599D4 105F14 8018B4D4 */  .4byte jtgt_ovl3_80183F20
   .incbin "ovl3.raw.bin", 0x599D8, 0x1C
 
-glabel Item_Hitokage_Flame_Data
+glabel Weapon_Hitokage_Flame_Data
   .incbin "ovl3.raw.bin", 0x599F4, 0x8
   /* 599FC 105F3C 8018B4FC */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x59A00, 0x8

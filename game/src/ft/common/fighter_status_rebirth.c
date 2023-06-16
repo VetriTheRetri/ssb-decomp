@@ -57,7 +57,7 @@ loop: // This makes no sense
 
     func_ovl2_800D79F0(this_gobj, &rebirth_vars);
     func_ovl2_8010F840(this_fp);
-    ftMapCollide_SetGround(this_fp);
+    ftMap_SetGround(this_fp);
 
     this_fp->coll_data.ground_line_id = -2;
     this_fp->coll_data.ground_flags = MPCOLL_MASK_NONSOLID;
@@ -90,7 +90,7 @@ loop: // This makes no sense
     {
         this_fp->is_playing_effect = TRUE;
     }
-    ftCommon_CheckSetColAnimIndex(this_gobj, 0xB, 0);
+    ftColor_CheckSetColAnimIndex(this_gobj, 0xB, 0);
     func_ovl2_800E7F7C(this_gobj, 1);
 }
 

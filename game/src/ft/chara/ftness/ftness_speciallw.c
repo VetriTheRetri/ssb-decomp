@@ -96,13 +96,13 @@ void ftNess_SpecialLwStart_ProcMap(GObj *fighter_gobj)
 // 0x801553A4
 void ftNess_SpecialAirLwStart_ProcMap(GObj *fighter_gobj)
 {
-    ftMapCollide_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwStart_SwitchStatusGround);
+    ftMap_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwStart_SwitchStatusGround);
 }
 
 // 0x801553C8
 void ftNess_SpecialAirLwStart_SwitchStatusGround(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwStart, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWSTART_STATUPDATE_FLAGS);
 }
 
@@ -111,7 +111,7 @@ void ftNess_SpeciaLwStart_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwStart, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWSTART_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 }
@@ -191,7 +191,7 @@ void ftNess_SpecialLwHold_ProcMap(GObj *fighter_gobj)
 // 0x80155608
 void ftNess_SpecialAirLwHold_ProcMap(GObj *fighter_gobj)
 {
-    ftMapCollide_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwHold_SwitchStatusGround);
+    ftMap_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwHold_SwitchStatusGround);
 }
 
 // 0x8015562C
@@ -199,7 +199,7 @@ void ftNess_SpecialAirLwHold_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHold, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHOLD_STATUPDATE_FLAGS);
 
     fp->is_absorb = TRUE;
@@ -210,7 +210,7 @@ void ftNess_SpecialLwHold_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHold, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHOLD_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 
@@ -286,7 +286,7 @@ void ftNess_SpecialLwHit_ProcMap(GObj *fighter_gobj)
 // 0x8015585C
 void ftNess_SpecialAirLwHit_ProcMap(GObj *fighter_gobj)
 {
-    ftMapCollide_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwHit_SwitchStatusGround);
+    ftMap_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwHit_SwitchStatusGround);
 }
 
 // 0x80155880
@@ -294,7 +294,7 @@ void ftNess_SpecialAirLwHit_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHit, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHIT_STATUPDATE_FLAGS);
     fp->is_absorb = TRUE;
 }
@@ -304,7 +304,7 @@ void ftNess_SpecialLwHit_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHit, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWHIT_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 
@@ -350,13 +350,13 @@ void ftNess_SpecialLwEnd_ProcMap(GObj *fighter_gobj)
 // 0x80155A18
 void ftNess_SpecialAirLwEnd_ProcMap(GObj *fighter_gobj)
 {
-    ftMapCollide_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwEnd_SwitchStatusGround);
+    ftMap_CheckGroundCliff(fighter_gobj, ftNess_SpecialAirLwEnd_SwitchStatusGround);
 }
 
 // 0x80155A3C
 void ftNess_SpecialAirLwEnd_SwitchStatusGround(GObj *fighter_gobj)
 {
-    ftMapCollide_SetGround(ftGetStruct(fighter_gobj));
+    ftMap_SetGround(ftGetStruct(fighter_gobj));
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwEnd, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWEND_STATUPDATE_FLAGS);
 }
 
@@ -365,7 +365,7 @@ void ftNess_SpecialLwEnd_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwEnd, fighter_gobj->anim_frame, 1.0F, FTNESS_SPECIALLWEND_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 }

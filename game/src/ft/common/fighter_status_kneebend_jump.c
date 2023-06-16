@@ -216,7 +216,7 @@ void ftCommon_Jump_SetStatus(GObj *fighter_gobj)
     s32 status_id;
     s32 vel_x, vel_y;
 
-    ftMapCollide_SetAir(fp);
+    ftMap_SetAir(fp);
 
     status_id = ((fp->input.pl.stick_range.x * fp->lr) > FTCOMMON_KNEEBEND_JUMP_F_OR_B_RANGE) ? ftStatus_Common_JumpF : ftStatus_Common_JumpB;
 

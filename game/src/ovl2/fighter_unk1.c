@@ -492,15 +492,15 @@ void ftCommon_HitStatusSetColAnim(GObj *fighter_gobj, s32 hitstatus)
     switch (hitstatus)
     {
     case gmHitCollision_HitStatus_Normal:
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 2, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 2, 0);
         break;
 
     case gmHitCollision_HitStatus_Invincible:
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 4, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 4, 0);
         break;
 
     case gmHitCollision_HitStatus_Intangible:
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 3, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 3, 0);
         break;
     }
 }
@@ -549,7 +549,7 @@ void ftCommon_SetHitStatusPart(GObj *fighter_gobj, s32 joint_index, s32 hitstatu
 }
 
 // 0x800E8A24
-void ftCommon_SetHitStatusAll(GObj *fighter_gobj, s32 hitstatus)
+void ftCollision_SetHitStatusAll(GObj *fighter_gobj, s32 hitstatus)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -1125,7 +1125,7 @@ bool32 caCheckSetColAnimIndex(Color_Overlay *colanim, s32 colanim_id, s32 durati
 }
 
 // 0x800E9814
-bool32 ftCommon_CheckSetColAnimIndex(GObj *fighter_gobj, s32 colanim_id, s32 duration)
+bool32 ftColor_CheckSetColAnimIndex(GObj *fighter_gobj, s32 colanim_id, s32 duration)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -1164,11 +1164,11 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     switch (ftCommon_GetBestHitStatusPart(fighter_gobj))
     {
     case gmHitCollision_HitStatus_Invincible:
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 4, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 4, 0);
         break;
 
     case gmHitCollision_HitStatus_Intangible:
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 3, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 3, 0);
         break;
     }
     switch (fp->ft_kind)
@@ -1178,7 +1178,7 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     case Ft_Kind_GiantDonkey:
         if (fp->fighter_vars.donkey.charge_level == FTDONKEY_GIANTPUNCH_CHARGE_MAX)
         {
-            ftCommon_CheckSetColAnimIndex(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
+            ftColor_CheckSetColAnimIndex(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
         }
         break;
 
@@ -1186,7 +1186,7 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     case Ft_Kind_PolySamus:
         if (fp->fighter_vars.samus.charge_level == FTSAMUS_CHARGE_MAX)
         {
-            ftCommon_CheckSetColAnimIndex(fighter_gobj, FTSAMUS_CHARGE_COLANIM_ID, 0);
+            ftColor_CheckSetColAnimIndex(fighter_gobj, FTSAMUS_CHARGE_COLANIM_ID, 0);
         }
         break;
 
@@ -1195,14 +1195,14 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
         {
             if (fp->fighter_vars.kirby.copysamus_charge_level == FTKIRBY_COPYSAMUS_CHARGE_MAX)
             {
-                ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYSAMUS_CHARGE_COLANIM_ID, 0);
+                ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYSAMUS_CHARGE_COLANIM_ID, 0);
             }
         }
         if ((fp->fighter_vars.kirby.copy_id == Ft_Kind_Donkey) || (fp->fighter_vars.kirby.copy_id == Ft_Kind_PolyDonkey) || (fp->fighter_vars.kirby.copy_id == Ft_Kind_GiantDonkey))
         {
             if (fp->fighter_vars.kirby.copydonkey_charge_level == FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_MAX)
             {
-                ftCommon_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
+                ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
             }
         }
         break;
@@ -1211,25 +1211,25 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     case Ft_Kind_PolyNess:
         if (fp->is_absorb)
         {
-            ftCommon_CheckSetColAnimIndex(fighter_gobj, FTNESS_PSI_MAGNET_COLANIM_ID, 0);
+            ftColor_CheckSetColAnimIndex(fighter_gobj, FTNESS_PSI_MAGNET_COLANIM_ID, 0);
         }
         break;
     }
     if (fp->damage_heal != 0)
     {
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 9, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 9, 0);
     }
     if (fp->star_invincible_timer != 0)
     {
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 0x4A, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 0x4A, 0);
     }
     if ((fp->invincible_timer != 0) || (fp->intangible_timer != 0))
     {
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 0xA, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 0xA, 0);
     }
     if (ftCommon_HammerCheckStatusID(fighter_gobj) != 0)
     {
-        ftCommon_CheckSetColAnimIndex(fighter_gobj, 0x49, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, 0x49, 0);
     }
 }
 
@@ -1268,7 +1268,7 @@ bool32 func_ovl2_800E9AF4(GObj *fighter_gobj, s32 colanim_id)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    return ftCommon_CheckSetColAnimIndex(fighter_gobj, Fighter_ColAnimIndex_Skeleton[fp->ft_kind] + colanim_id, 0);
+    return ftColor_CheckSetColAnimIndex(fighter_gobj, Fighter_ColAnimIndex_Skeleton[fp->ft_kind] + colanim_id, 0);
 }
 
 // 0x800E9B30 - Set How to Play input sequence
@@ -1562,7 +1562,7 @@ void ftDamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
 void ftCommon_ApplyDamageHeal(Fighter_Struct *fp, s32 heal)
 {
     fp->damage_heal += heal;
-    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 9, 0);
+    ftColor_CheckSetColAnimIndex(fp->fighter_gobj, 9, 0);
 }
 
 // 0x800EA40C - If fighter is grabbed, halve damage received
@@ -1723,7 +1723,7 @@ void ftCommon_ApplyStarInvincibleTimer(Fighter_Struct *fp, s32 star_invincible_t
     fp->star_hitstatus = gmHitCollision_HitStatus_Invincible;
     fp->star_invincible_timer = star_invincible_timer;
 
-    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, ATSTAR_COLANIM_ID, ATSTAR_COLANIM_LENGTH);
+    ftColor_CheckSetColAnimIndex(fp->fighter_gobj, ATSTAR_COLANIM_ID, ATSTAR_COLANIM_LENGTH);
 }
 
 // 0x800EA8EC
@@ -1739,7 +1739,7 @@ void ftCommon_ApplyInvincibleTimer(Fighter_Struct *fp, s32 invincible_timer)
     }
     else fp->special_hitstatus = gmHitCollision_HitStatus_Invincible;
 
-    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 0xA, 0);
+    ftColor_CheckSetColAnimIndex(fp->fighter_gobj, 0xA, 0);
 }
 
 // 0x800EA948
@@ -1751,7 +1751,7 @@ void ftCommon_ApplyIntangibleTimer(Fighter_Struct *fp, s32 intangible_timer)
     }
     fp->special_hitstatus = gmHitCollision_HitStatus_Intangible;
 
-    ftCommon_CheckSetColAnimIndex(fp->fighter_gobj, 0xA, 0);
+    ftColor_CheckSetColAnimIndex(fp->fighter_gobj, 0xA, 0);
 }
 
 // 0x800EA98C

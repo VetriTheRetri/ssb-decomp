@@ -46,7 +46,7 @@ void ftCommon_Landing_SetStatusParam(GObj *fighter_gobj, s32 status_id, bool32 i
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftMapCollide_SetGround(fp);
+    ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, status_id, 0.0F, anim_speed, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->status_vars.common.landing.is_allow_interrupt = is_allow_interrupt;
