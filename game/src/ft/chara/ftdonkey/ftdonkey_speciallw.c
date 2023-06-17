@@ -11,7 +11,7 @@ void ftDonkey_SpecialLwLoop_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->unk_dobj_0x78))
+    if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->dobj_f1))
     {
         if (fp->status_vars.donkey.speciallw.is_loop != FALSE)
         {

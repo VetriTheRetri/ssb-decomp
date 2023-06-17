@@ -5,9 +5,9 @@
 #include <game/src/gm/gmmatch.h>
 #include <game/src/it/article/article.h>
 
-extern Weapon_Struct *D_ovl3_8018CFF0;
-extern u32 D_ovl3_8018CFF8;
-extern s32 dbObjDisplayStatus_Item;
+extern Weapon_Struct *wpManager_Global_CurrentUserData;
+extern u32 wpManager_Global_GroupIndex;
+extern s32 dbObjDisplayStatusItem;
 
 // 0x801654B0
 void wpManager_AllocUserData(void)
@@ -15,7 +15,7 @@ void wpManager_AllocUserData(void)
     Weapon_Struct *wp;
     s32 i;
 
-    D_ovl3_8018CFF0 = wp = hal_alloc(sizeof(Weapon_Struct) * WEAPON_ALLOC_MAX, 8U);
+    wpManager_Global_CurrentUserData = wp = hal_alloc(sizeof(Weapon_Struct) * WEAPON_ALLOC_MAX, 8U);
 
     for (i = 0; i < (WEAPON_ALLOC_MAX - 1); i++)
     {
@@ -25,19 +25,43 @@ void wpManager_AllocUserData(void)
     {
         wp[i].wp_alloc_next = NULL;
     }
-    D_ovl3_8018CFF8 = 1;
-    dbObjDisplayStatus_Item = dbObjDisplayStatus_Master;
+    wpManager_Global_GroupIndex = 1;
+    dbObjDisplayStatusItem = dbObjDisplayStatus_Master;
 }
 
-// Not the first function in this file
-
-u32 func_ovl3_801655A0(void)
+// 0x80165558
+Weapon_Struct* wpManager_GetStructSetNextAlloc()
 {
-    u32 group_id = D_ovl3_8018CFF8++;
+    Weapon_Struct *next_weapon = wpManager_Global_CurrentUserData;
+    Weapon_Struct *current_weapon;
 
-    if (D_ovl3_8018CFF8 == 0)
+    if (next_weapon == NULL)
     {
-        D_ovl3_8018CFF8++;
+        return NULL;
+    }
+    current_weapon = next_weapon;
+
+    wpManager_Global_CurrentUserData = next_weapon->wp_alloc_next;
+
+    return current_weapon;
+}
+
+// 0x80165588
+void wpManager_SetPrevAlloc(Weapon_Struct *wp)
+{
+    wp->wp_alloc_next = wpManager_Global_CurrentUserData;
+
+    wpManager_Global_CurrentUserData = wp;
+}
+
+// 0x801655A0
+u32 wpManager_GetGroupIndexInc(void)
+{
+    u32 group_id = wpManager_Global_GroupIndex++;
+
+    if (wpManager_Global_GroupIndex == 0)
+    {
+        wpManager_Global_GroupIndex++;
     }
     return group_id;
 }
@@ -56,7 +80,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, WeaponSpawnData *item_status_desc
     Fighter_Struct *fp;
     s32 unused[8];
 
-    wp = func_ovl3_80165558(spawn_gobj);
+    wp = wpManager_GetStructSetNextAlloc(spawn_gobj);
 
     if (wp == NULL)
     {
@@ -66,7 +90,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, WeaponSpawnData *item_status_desc
 
     if (weapon_gobj == NULL)
     {
-        wpManager_EjectWeaponStruct(wp);
+        wpManager_SetPrevAlloc(wp);
         return NULL;
     }
     wp_hit_desc = *(uintptr_t*)item_status_desc->p_item + (intptr_t)item_status_desc->offset_wp_hit; // I hope this is correct?
@@ -139,14 +163,14 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, WeaponSpawnData *item_status_desc
         wp->player_number = 0;
         wp->lr = RIGHT;
 
-        wp->display_state = dbObjDisplayStatus_Item;
+        wp->display_state = dbObjDisplayStatusItem;
 
         wp->item_hit.attack_id = 0;
         wp->item_hit.stale = WEAPON_STALE_DEFAULT;
-        wp->item_hit.motion_count = gmCommon_MotionCountInc();
+        wp->item_hit.motion_count = gmCommon_GetMotionCountInc();
         wp->item_hit.stat_flags.attack_group_id = 0;
         wp->item_hit.stat_flags.is_smash_attack = wp->item_hit.stat_flags.is_ground_or_air = wp->item_hit.stat_flags.is_special_attack = FALSE;
-        wp->item_hit.stat_count = gmCommon_StatUpdateCountInc();
+        wp->item_hit.stat_count = gmCommon_GetStatUpdateCountInc();
         break;
     }
     wp->item_hit.update_state = gmHitCollision_UpdateState_New;
@@ -182,10 +206,10 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, WeaponSpawnData *item_status_desc
     wp->item_hit.hit_sfx = wp_hit_desc->sfx;
 
     wp->item_hit.priority = wp_hit_desc->priority;
-    wp->item_hit.flags_0x48_b1 = wp_hit_desc->flags_0x2F_b0;
+    wp->item_hit.can_rehit_hurt = wp_hit_desc->flags_0x2F_b0;
     wp->item_hit.flags_0x48_b2 = wp_hit_desc->flags_0x2F_b1;
 
-    wp->item_hit.can_rehit = FALSE;
+    wp->item_hit.can_rehit_shield = FALSE;
 
     wp->item_hit.can_hop = wp_hit_desc->can_hop;
     wp->item_hit.can_reflect = wp_hit_desc->can_reflect;

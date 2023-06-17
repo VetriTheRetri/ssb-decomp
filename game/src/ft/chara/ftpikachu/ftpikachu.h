@@ -41,6 +41,7 @@
 #define FTPIKACHU_THUNDER_COLL_OFF_Y 225.0F						// Added to Thunder's Y-position before calculating distance from Pikachu
 #define FTPIKACHU_THUNDER_COLLIDE_X 200.0F						// Width of Thunder collision box
 #define FTPIKACHU_THUNDER_COLLIDE_Y	800.0F						// Height of Thunder collision box
+#define FTPIKACHU_THUNDER_HIT_GRAVITY 0.5F
 #define FTPIKACHU_THUNDER_HIT_VEL_Y	20.0F						// Vertical velocity gained if Thunder connects with Pikachu
 
 typedef enum ftPikachuAction

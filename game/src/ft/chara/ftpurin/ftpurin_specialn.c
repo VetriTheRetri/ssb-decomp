@@ -105,7 +105,7 @@ void ftPurin_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 // 0x801514C4
 void ftPurin_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftPurin_SpecialN_InitStatusVars(fighter_gobj);
     ftAnim_Update(fighter_gobj);
 }
@@ -113,7 +113,7 @@ void ftPurin_SpecialN_SetStatus(GObj *fighter_gobj)
 // 0x80151504
 void ftPurin_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftPurin_SpecialN_InitStatusVars(fighter_gobj);
     ftAnim_Update(fighter_gobj);
 }

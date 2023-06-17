@@ -419,7 +419,49 @@ typedef enum ftAttackIndex
     ftAttack_Index_AttackS4,
     ftAttack_Index_AttackHi4,
     ftAttack_Index_AttackLw4,
-    ftAttack_Index_FireFlowerShoot = 0x36
+    ftAttack_Index_AttackAirN,
+    ftAttack_Index_AttackAirF,
+    ftAttack_Index_AttackAirB,
+    ftAttack_Index_AttackAirHi,
+    ftAttack_Index_AttackAirLw,
+    ftAttack_Index_SpecialHi,
+    ftAttack_Index_SpecialN,
+    ftAttack_Index_SpecialNCopyMario,
+    ftAttack_Index_SpecialNCopyLuigi,
+    ftAttack_Index_SpecialNCopyFox,
+    ftAttack_Index_SpecialNCopySamus,
+    ftAttack_Index_SpecialNCopyDonkey,
+    ftAttack_Index_SpecialNCopyPikachu,
+    ftAttack_Index_SpecialNCopyNess,
+    ftAttack_Index_SpecialNCopyLink,
+    ftAttack_Index_SpecialNCopyPurin,
+    ftAttack_Index_SpecialNCopyCaptain,
+    ftAttack_Index_SpecialNCopyYoshi,
+    ftAttack_Index_SpecialLw,
+    ftAttack_Index_DownAttackD,
+    ftAttack_Index_DownAttackU,
+    ftAttack_Index_CliffAttackQuick,
+    ftAttack_Index_CliffAttackSlow,
+    ftAttack_Index_ThrowF,
+    ftAttack_Index_ThrowB,
+    ftAttack_Index_SwordSwing1,
+    ftAttack_Index_SwordSwing3,
+    ftAttack_Index_SwordSwing4,
+    ftAttack_Index_SwordSwingDash,
+    ftAttack_Index_BatSwing1,
+    ftAttack_Index_BatSwing3,
+    ftAttack_Index_BatSwing4,
+    ftAttack_Index_BatSwingDash,
+    ftAttack_Index_HarisenSwing1,
+    ftAttack_Index_HarisenSwing3,
+    ftAttack_Index_HarisenSwing4,
+    ftAttack_Index_HarisenSwingDash,
+    ftAttack_Index_StarRodSwing1,
+    ftAttack_Index_StarRodSwing3,
+    ftAttack_Index_StarRodSwing4,
+    ftAttack_Index_StarRodSwingDash,
+    ftAttack_Index_LGunShoot,
+    ftAttack_Index_FireFlowerShoot
 };
 
 // Enum of flags for each unique type of grab, used to check if attacker can grab victim by ANDing attacker's grab type with victim's grab type ignore mask
@@ -763,9 +805,9 @@ typedef struct Fighter_Com
     u8 unk_ftcom_0x43; // Also neutral special?
     u8 filler_0x44[0x48 - 0x44];
     u8 ftcom_flags_0x48_b0 : 1;
-    u8 ftcom_flags_0x48_b1 : 1;
+    u8 ftcom_can_rehit_hurt : 1;
     u8 ftcom_flags_0x48_b2 : 1;
-    u8 ftcom_can_rehit : 1;
+    u8 ftcom_can_rehit_shield : 1;
     u8 ftcom_flags_0x48_b4 : 1;
     u8 ftcom_flags_0x48_b5 : 1;
     u8 ftcom_flags_0x48_b6 : 1;

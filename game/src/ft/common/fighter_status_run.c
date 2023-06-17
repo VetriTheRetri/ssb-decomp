@@ -33,7 +33,7 @@ bool32 ftCommon_Run_CheckInterruptDash(GObj *fighter_gobj)
 
     if (attributes->dash_to_run <= fighter_gobj->anim_frame)
     {
-        if (fighter_gobj->anim_frame < (attributes->dash_to_run + DObjGetStruct(fighter_gobj)->unk_dobj_0x78))
+        if (fighter_gobj->anim_frame < (attributes->dash_to_run + DObjGetStruct(fighter_gobj)->dobj_f1))
         {
             if ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_RUN_STICK_RANGE_MIN)
             {

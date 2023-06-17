@@ -129,7 +129,6 @@ GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
     {
         offset.x -= ITYOSHISTAR_OFF_X;
     }
-
     weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_YoshiStar_Desc, &offset, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)

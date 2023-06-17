@@ -108,7 +108,7 @@ extern ArticleSpawnData Article_Hammer_Data;
 
 GObj *jtgt_ovl3_801763C8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Hammer_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Hammer_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {

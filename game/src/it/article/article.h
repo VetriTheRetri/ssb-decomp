@@ -39,6 +39,8 @@
 
 #define ARTICLE_REHIT_TIME_DEFAULT 16
 
+#define ARTICLE_DEFLECT_ANGLE_DEFAULT F_DEG_TO_RAD(135.0F) // 2.3561945F
+
 #define ARTICLE_SPIN_SPEED_MUL_DEFAULT 0.31415927F
 #define ARTICLE_SPIN_SPEED_MUL_NEW_SPAWN 0.17453294F
 #define ARTICLE_SPIN_SPEED_MUL_PREV_SPAWN 0.27925268F
@@ -127,7 +129,7 @@ typedef enum atType
     At_Type_Throw,      // Article can only be thrown
     At_Type_Touch,      // Article has special properties on interaction
     At_Type_Special,    // Hammer, Heart and Maxim Tomato?
-    At_Type_FtItem      // Article spawned by fighter's item (projectile) ?
+    At_Type_Fighter     // Article spawned by fighter's item (projectile) ?
 
 } atType; 
 
@@ -136,7 +138,7 @@ typedef struct gmMonsterInfo
     u8 monster_curr;
     u8 monster_prev;
     u8 monster_index[44];
-    u8 unk_0x2E;
+    u8 monster_count;
 
 } gmMonsterInfo;
 
@@ -207,7 +209,7 @@ typedef struct _Article_Hit
     f32 stale; // Might be swapped with throw_mul
     f32 throw_mul; // Might be swapped with stale
     s32 element; // 0xC // Placed AFTER offset?
-    Vec3f offset[2]; // 0x10 - 0x18    
+    Vec3f offset[2]; // 0x10 - 0x28    
     f32 size;
     s32 angle;
     u32 knockback_scale; // Unconfirmed
@@ -218,9 +220,9 @@ typedef struct _Article_Hit
     u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;
     u32 clang : 1;
-    u32 flags_0x4C_b1 : 1;
+    u32 can_rehit_hurt : 1;
     u32 flags_0x4C_b2 : 1;
-    u32 can_rehit : 1; // Article can rehit targets after default rehit cooldown expires
+    u32 can_rehit_shield : 1; // Article can rehit targets after default rehit cooldown expires
     u32 can_hop : 1;
     u32 can_reflect : 1;
     u32 can_shield : 1; // Not actually absorb but not yet known either

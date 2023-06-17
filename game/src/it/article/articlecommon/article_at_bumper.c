@@ -460,7 +460,7 @@ extern ArticleSpawnData Article_At_Bumper_Data;
 
 GObj* jtgt_ovl3_8017BF8C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_At_Bumper_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_At_Bumper_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {
@@ -474,7 +474,7 @@ GObj* jtgt_ovl3_8017BF8C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
-        ap->article_hit.can_rehit = TRUE;
+        ap->article_hit.can_rehit_shield = TRUE;
 
         joint->mobj->anim_frame = 0.0F;
 

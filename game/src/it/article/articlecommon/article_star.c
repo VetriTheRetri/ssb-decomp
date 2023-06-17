@@ -57,7 +57,7 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     vel_real.y = ATSTAR_BOUNCE_Y;
     vel_real.z = 0.0F;
 
-    article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Star_Data, pos, &vel_real, flags);
+    article_gobj = itManager_CreateItem(spawn_gobj, &Article_Star_Data, pos, &vel_real, flags);
 
     if (article_gobj != NULL)
     {

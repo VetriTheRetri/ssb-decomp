@@ -103,11 +103,11 @@ void ftCommon_Attack100Loop_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->unk_dobj_0x78))
+    if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->dobj_f1))
     {
         fp->status_vars.common.attack100.is_anim_end = TRUE;
 
-        ftCommon_MotionCountIncSetID(fp, ftAttack_Index_Attack100Loop);
+        ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_Attack100Loop);
         ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
         ftCommon_Update1PGameAttackStats(fp, 0);
     }

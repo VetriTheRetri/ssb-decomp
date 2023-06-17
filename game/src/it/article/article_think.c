@@ -111,7 +111,7 @@ void func_ovl3_8017275C(GObj *article_gobj)
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-    func_ovl3_8016F280(article_gobj);
+    itManager_UpdateHitPositions(article_gobj);
 }
 
 void func_ovl3_8017279C(GObj *article_gobj)
@@ -184,7 +184,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
     {
         gOMObj_EjectGObjCommon(ap->unk_0x348);
     }
-    func_ovl3_8016DFDC(ap);
+    itManager_SetPrevAlloc(ap);
     gOMObj_EjectGObjCommon(article_gobj);
 }
 
@@ -404,7 +404,7 @@ void atCommon_UpdateArticleStatus(GObj *article_gobj, ArticleStatusDesc *p_desc,
     ap->article_hit.stat_flags.is_ground_or_air =
     ap->article_hit.stat_flags.is_special_attack = FALSE;
 
-    ap->article_hit.stat_count = gmCommon_StatUpdateCountInc();
+    ap->article_hit.stat_count = gmCommon_GetStatUpdateCountInc();
 }
 
 // 0x80172F98
@@ -588,11 +588,11 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
                 j++;
             }
         }
-        index = Monster_Info.monster_index[rand_u16_range(Monster_Info.unk_0x2E)];
+        index = Monster_Info.monster_index[rand_u16_range(Monster_Info.monster_count)];
     }
-    if (Monster_Info.unk_0x2E != 10)
+    if (Monster_Info.monster_count != 10)
     {
-        Monster_Info.unk_0x2E--;
+        Monster_Info.monster_count--;
     }
     Monster_Info.monster_prev = Monster_Info.monster_curr;
     Monster_Info.monster_curr = index;
@@ -611,7 +611,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
 
         if (Match_Info->game_type == gmMatch_GameType_1PGame)
         {
-            if ((mp->port_id == Scene_Info.unk_0x13) && (mp->at_kind == At_Kind_Mew))
+            if ((mp->port_id == Scene_Info.player_port) && (mp->at_kind == At_Kind_Mew))
             {
                 gmBonusStat_MewCatcher = TRUE;
             }

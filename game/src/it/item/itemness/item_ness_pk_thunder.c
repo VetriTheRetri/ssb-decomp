@@ -318,7 +318,7 @@ GObj* func_ovl3_8016B580(GObj *head_gobj, Vec3f *pos, s32 trail_index)
 
     if (trail_index == 0)
     {
-        trail_ip->group_id = func_ovl3_801655A0(head_gobj, trail_gobj); // Bruh this doesn't take arguments but it doesn't match otherwise
+        trail_ip->group_id = wpManager_GetGroupIndexInc(head_gobj, trail_gobj); // Bruh this doesn't take arguments but it doesn't match otherwise
     }
     else trail_ip->group_id = head_ip->group_id;
 
@@ -457,7 +457,7 @@ GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->lifetime = ITPKTHUNDER_LIFETIME;
 
-    ip->group_id = func_ovl3_801655A0();
+    ip->group_id = wpManager_GetGroupIndexInc();
 
     for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj); i++)
     {

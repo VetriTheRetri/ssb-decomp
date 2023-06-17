@@ -58,8 +58,8 @@ bool32 func_ovl3_801845B4(GObj *article_gobj)
     pos.x += ATFUSHIGIBANA_RAZOR_SPAWN_OFF_X;
 
     if ((ap->article_vars.fushigibana.flags == 2) ||
-        ((ap->article_vars.fushigibana.flags & 1) && (joint->unk_dobj_0x7C >= ATFUSHIGIBANA_RAZOR_SPAWN_BEGIN)) &&
-        (joint->unk_dobj_0x7C <= ATFUSHIGIBANA_RAZOR_SPAWN_END))
+        ((ap->article_vars.fushigibana.flags & 1) && (joint->dobj_f2 >= ATFUSHIGIBANA_RAZOR_SPAWN_BEGIN)) &&
+        (joint->dobj_f2 <= ATFUSHIGIBANA_RAZOR_SPAWN_END))
     {
         joint->mobj->index = 1;
 
@@ -80,7 +80,7 @@ bool32 func_ovl3_801845B4(GObj *article_gobj)
     }
     else joint->mobj->index = 0;
 
-    if ((f32)FLOAT_NEG_MAX == joint->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
         func_ovl2_8010B0B8();
 
@@ -94,7 +94,7 @@ extern s32 D_ovl2_8012EB60;
 
 GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Fushigibana_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Fushigibana_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
     Article_Struct *ap;

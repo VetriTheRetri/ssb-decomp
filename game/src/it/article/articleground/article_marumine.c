@@ -65,7 +65,7 @@ bool32 func_ovl3_80183914(GObj *article_gobj)
     joint->translate.x += ap->article_vars.marumine.offset.x;
     joint->translate.y += ap->article_vars.marumine.offset.y;
 
-    if ((f32)FLOAT_NEG_MAX == joint->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
         func_ovl3_8017275C(article_gobj);
         func_ovl3_8017279C(article_gobj);
@@ -118,7 +118,7 @@ void func_ovl3_80183A20(GObj *article_gobj)
 
 GObj* jtgt_ovl3_80183A74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Marumine_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Marumine_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {

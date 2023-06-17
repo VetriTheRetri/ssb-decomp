@@ -117,7 +117,7 @@ void ftCommon_Attack11_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftCommon_MotionCountIncSetID(fp, ftAttack_Index_Attack11);
+    ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_Attack11);
     ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
     ftCommon_Update1PGameAttackStats(fp, 0);
 }
@@ -320,7 +320,7 @@ bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
     }
     if (fp->attack1_followup_frames != 0.0F)
     {
-        fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+        fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->dobj_f1;
     }
     return FALSE;
 }
@@ -333,7 +333,7 @@ bool32 ftCommon_Attack11_CheckGoto(GObj *fighter_gobj)
 
     if (fp->attack1_followup_frames != 0.0F)
     {
-        fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+        fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->dobj_f1;
 
         if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_attack11))
         {
@@ -357,7 +357,7 @@ bool32 ftCommon_Attack12_CheckGoto(GObj *fighter_gobj)
 
     if (fp->attack1_followup_frames != 0.0F)
     {
-        fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+        fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->dobj_f1;
 
         if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_attack12))
         {
@@ -386,7 +386,7 @@ bool32 ftCommon_Attack13_CheckGoto(GObj *fighter_gobj)
     {
         if (fp->attack1_followup_frames != 0.0F)
         {
-            fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+            fp->attack1_followup_frames -= DObjGetStruct(fighter_gobj)->dobj_f1;
 
             if (fp->input.pl.button_tap & fp->input.button_mask_a)
             {

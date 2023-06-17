@@ -10,15 +10,19 @@
 #define FTSAMUS_CHARGE_JOINT 16             // Bone to attach Charge Shot
 #define FTSAMUS_CHARGE_MAX 7                // Maximum charge level
 #define FTSAMUS_CHARGE_INT 20               // Charge interval, level increrments once this timer hits zero, then begins counting the next iteration
-#define FTSAMUS_CHARGE_COLANIM_ID 6
+#define FTSAMUS_CHARGE_COLANIM_ID 0x6
+#define FTSAMUS_CHARGE_COLANIM_LENGTH 0
 #define FTSAMUS_CHARGE_OFF_X 180.0F         // X-Offset of Charge Shot
 #define FTSAMUS_CHARGE_RECOIL_BASE 10.0F    // Base unit of recoil taken from firing Charge Shot
 #define FTSAMUS_CHARGE_RECOIL_MUL 2.0F      // Charge Recoil multiplier
 #define FTSAMUS_CHARGE_RECOIL_ADD 20.0F     // Added velocity
 
+#define FTSAMUS_SCREWATTACK_PASS_STICK_RANGE_MIN (-44)
+#define FTSAMUS_SCREWATTACK_DRIFT_MUL 0.5F
+#define FTSAMUS_SCREWATTACK_DRIFT_CLAMP 20.0F
 #define FTSAMUS_SCREWATTACK_VEL_X_BASE 10.0F
 #define FTSAMUS_SCREWATTACK_VEL_Y_BASE 62.0F
-#define FTSAMUS_SCREWATTACK_AIR_DRIFT 0.66F
+#define FTSAMUS_SCREWATTACK_FALLSPECIAL_DRIFT 0.66F
 #define FTSAMUS_SCREWATTACK_LANDING_LAG 0.4F
 
 #define FTSAMUS_BOMB_VEL_Y_BASE 40.0F

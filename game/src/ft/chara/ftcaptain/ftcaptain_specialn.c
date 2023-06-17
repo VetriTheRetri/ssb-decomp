@@ -132,7 +132,7 @@ void ftCaptain_SpecialAirN_ProcMap(GObj *fighter_gobj)
 }
 
 // 0x8015FB40
-void ftCaptain_SpecialN_InitCommandVars(GObj *fighter_gobj)
+void ftCaptain_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -153,7 +153,7 @@ void ftCaptain_SpecialN_SetStatus(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCaptain_SpecialN_InitCommandVars(fighter_gobj);
+    ftCaptain_SpecialN_InitStatusVars(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;
@@ -166,7 +166,7 @@ void ftCaptain_SpecialAirN_SetStatus(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    ftCaptain_SpecialN_InitCommandVars(fighter_gobj);
+    ftCaptain_SpecialN_InitStatusVars(fighter_gobj);
 
     fp->proc_lagstart = ftCommon_ProcPauseGFX;
     fp->proc_lagend = ftCommon_ProcResumeGFX;

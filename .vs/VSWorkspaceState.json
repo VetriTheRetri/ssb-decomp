@@ -5,12 +5,12 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftfox",
+    "\\game\\src\\ft\\chara\\ftmario",
     "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\it",
-    "\\game\\src\\it\\item",
-    "\\game\\src\\ovl2",
-    "\\game\\src\\sys"
+    "\\game\\src\\ft\\chara\\ftpikachu",
+    "\\game\\src\\ft\\chara\\ftyoshi"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftlink\\ftlink_specialhi.c",
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftfox\\ftfox_speciallw.c",
   "PreviewInSolutionExplorer": false
 }

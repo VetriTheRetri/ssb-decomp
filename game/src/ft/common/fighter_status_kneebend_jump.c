@@ -6,7 +6,7 @@ void ftCommon_KneeBend_ProcUpdate(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    fp->status_vars.common.kneebend.anim_frame += DObjGetStruct(fighter_gobj)->unk_dobj_0x78;
+    fp->status_vars.common.kneebend.anim_frame += DObjGetStruct(fighter_gobj)->dobj_f1;
 
     if 
     (

@@ -73,11 +73,11 @@ bool32 func_ovl3_8017C400(GObj *article_gobj)
     joint->translate.x += ap->article_vars.gr_lucky.pos.x;
     joint->translate.y += ap->article_vars.gr_lucky.pos.y;
 
-    if ((joint->unk_dobj_0x7C >= ATGRLUCKY_EGG_SPAWN_BEGIN) && (joint->unk_dobj_0x7C <= ATGRLUCKY_EGG_SPAWN_END))
+    if ((joint->dobj_f2 >= ATGRLUCKY_EGG_SPAWN_BEGIN) && (joint->dobj_f2 <= ATGRLUCKY_EGG_SPAWN_END))
     {
         func_ovl3_8017C280(article_gobj);
     }
-    if ((f32)FLOAT_NEG_MAX == joint->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
         func_ovl2_8010B0B8();
 
@@ -129,7 +129,7 @@ bool32 jtgt_ovl3_8017C530(GObj *article_gobj)
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
         ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-        joint->unk_dobj_0x74 = (f32)FLOAT_NEG_MAX;
+        joint->dobj_f0 = (f32)FLOAT_NEG_MAX;
 
         func_ovl2_8010B0AC();
         func_ovl3_8017C240(article_gobj);
@@ -141,7 +141,7 @@ extern ArticleSpawnData Article_Gr_Lucky_Data;
 
 GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Gr_Lucky_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Lucky_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {

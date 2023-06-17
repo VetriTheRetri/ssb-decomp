@@ -1,8 +1,6 @@
 #include "article.h"
 #include "fighter.h"
 
-
-
 extern ArticleStatusDesc Article_Pakkun_Status[];
 
 void func_ovl3_8017CF20(GObj *article_gobj)
@@ -153,7 +151,7 @@ bool32 func_ovl3_8017D298(GObj *article_gobj)
 
     if (ap->article_vars.pakkun.is_wait_fighter != FALSE)
     {
-        DObjGetStruct(article_gobj)->unk_dobj_0x74 = (f32)FLOAT_NEG_MAX;
+        DObjGetStruct(article_gobj)->dobj_f0 = (f32)FLOAT_NEG_MAX;
 
         func_ovl3_8017D190(article_gobj);
 
@@ -162,7 +160,7 @@ bool32 func_ovl3_8017D298(GObj *article_gobj)
 
     joint = DObjGetStruct(article_gobj);
 
-    if ((f32)FLOAT_NEG_MAX == joint->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
         func_ovl3_8017D190(article_gobj);
     }
@@ -201,7 +199,7 @@ bool32 jtgt_ovl3_8017D334(GObj *article_gobj)
 
         func_ovl3_8017CF80(article_gobj);
 
-        joint->unk_dobj_0x74 = (f32)FLOAT_NEG_MAX;
+        joint->dobj_f0 = (f32)FLOAT_NEG_MAX;
 
         func_8000BD54(joint->mobj, (uintptr_t)D_ovl2_801313F0 + (intptr_t)&D_NF_00000E04, 0.0f);
         func_8000DF34(article_gobj);
@@ -237,7 +235,7 @@ extern ArticleSpawnData Article_Pakkun_Data;
 
 GObj* jtgt_ovl3_8017D4D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Pakkun_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Pakkun_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {
@@ -253,7 +251,7 @@ GObj* jtgt_ovl3_8017D4D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->article_vars.pakkun.is_wait_fighter = FALSE;
 
-        ap->article_hit.can_rehit = TRUE;
+        ap->article_hit.can_rehit_shield = TRUE;
     }
     return article_gobj;
 }

@@ -34,13 +34,13 @@ void ftPurin_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
 // 0x801517E4
 void ftPurin_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialLw, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }
 
 // 0x8015181C
 void ftPurin_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirLw, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }

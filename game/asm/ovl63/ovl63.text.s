@@ -1209,7 +1209,7 @@ glabel func_ovl63_8018E1A0
   /* 18B824 8018E214 00000000 */       nop 
   /* 18B828 8018E218 0C0436C0 */       jal func_ovl2_8010DB00
   /* 18B82C 8018E21C 00000000 */       nop 
-  /* 18B830 8018E220 0C05B7A8 */       jal func_ovl3_8016DEA0
+  /* 18B830 8018E220 0C05B7A8 */       jal itManager_AllocUserData
   /* 18B834 8018E224 00000000 */       nop 
   /* 18B838 8018E228 0C041580 */       jal func_ovl2_80105600
   /* 18B83C 8018E22C 00000000 */       nop 

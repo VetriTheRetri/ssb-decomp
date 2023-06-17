@@ -25,6 +25,7 @@
 #define FTFOX_REFLECTOR_RELEASE_LAG 18                  // Number of frames Fox is automatically locked in Reflector before the B button is read
 #define FTFOX_REFLECTOR_TURN_FRAMES 4                   // Number of frames it takes Fox to turn around during Reflector
 #define FTFOX_REFLECTOR_GRAVITY_DELAY 5                 // Frames required for gravity to take effect
+#define FTFOX_REFLECTOR_GRAVITY 0.8F
 
 typedef enum ftFoxAction
 {

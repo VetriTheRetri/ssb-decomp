@@ -99,7 +99,7 @@ void func_ovl3_801787CC(GObj *article_gobj)
     {
         ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-        func_ovl3_8016F280(article_gobj);
+        itManager_UpdateHitPositions(article_gobj);
         func_ovl3_80178EDC(article_gobj);
     }
     else
@@ -149,7 +149,7 @@ bool32 jtgt_ovl3_8017897C(GObj *article_gobj)
 
         ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-        func_ovl3_8016F280(article_gobj);
+        itManager_UpdateHitPositions(article_gobj);
 
         ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
@@ -286,7 +286,7 @@ bool32 jtgt_ovl3_80178CF8(GObj *article_gobj)
     {
         ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-        func_ovl3_8016F280(article_gobj);
+        itManager_UpdateHitPositions(article_gobj);
         func_ovl3_801727BC(article_gobj);
 
         if (ap->ground_or_air != FALSE)
@@ -382,7 +382,7 @@ extern ArticleSpawnData Article_G_Shell_Data;
 
 GObj* jtgt_ovl3_80178FDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_G_Shell_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_G_Shell_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {
@@ -401,7 +401,7 @@ GObj* jtgt_ovl3_80178FDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = atGetStruct(article_gobj);
 
-        ap->article_hit.can_rehit = TRUE;
+        ap->article_hit.can_rehit_shield = TRUE;
 
         ap->article_vars.shell.health = 1;
         ap->article_vars.shell.is_damage = FALSE;

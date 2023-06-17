@@ -364,13 +364,13 @@ void func_ovl2_800E82B8(GObj *fighter_gobj)
 
                 if ((temp_v0 != NULL) && (temp_v0->unk_dobjdata_0xE != 0))
                 {
-                    temp_f20 = joint->unk_dobj_0x74;
+                    temp_f20 = joint->dobj_f0;
 
-                    joint->unk_dobj_0x74 = -1.1342745e38F;
+                    joint->dobj_f0 = -1.1342745e38F;
 
                     func_ovl0_800C9488(joint, p_0x324_2);
 
-                    joint->unk_dobj_0x74 = temp_f20;
+                    joint->dobj_f0 = temp_f20;
                 }
             }
         }
@@ -385,13 +385,13 @@ void func_ovl2_800E82B8(GObj *fighter_gobj)
 
             if ((temp_v0 != NULL) && (temp_v0->unk_dobjdata_0xE != 0))
             {
-                temp_f20 = joint->unk_dobj_0x74;
+                temp_f20 = joint->dobj_f0;
 
-                joint->unk_dobj_0x74 = -1.1342745e38F;
+                joint->dobj_f0 = -1.1342745e38F;
 
                 func_8000CCBC(joint);
 
-                joint->unk_dobj_0x74 = temp_f20;
+                joint->dobj_f0 = temp_f20;
             }
         }
     }
@@ -1628,7 +1628,7 @@ s32 gmCommon_DamageApplyStale(s32 port_id, s32 damage, s32 attack_id, u16 flags)
 extern u16 Entity_Global_MotionCount; // Updated each time a new move is used? Includes non-attacks.
 
 // 0x800EA5BC
-u16 gmCommon_MotionCountInc(void)
+u16 gmCommon_GetMotionCountInc(void)
 {
     u16 motion_count = Entity_Global_MotionCount++;
 
@@ -1640,10 +1640,10 @@ u16 gmCommon_MotionCountInc(void)
 }
 
 // 0x800EA5E8
-void ftCommon_MotionCountIncSetID(Fighter_Struct *fp, s32 attack_id)
+void ftCommon_MotionCountIncSetAttackID(Fighter_Struct *fp, s32 attack_id)
 {
     fp->attack_id = attack_id;
-    fp->motion_count = gmCommon_MotionCountInc();
+    fp->motion_count = gmCommon_GetMotionCountInc();
 }
 
 // 0x800EA614
@@ -1674,7 +1674,7 @@ void ftAttackAddStaleQueue(s32 attack_port_id, s32 defend_port_id, s32 attack_id
 extern u16 Entity_Global_StatUpdateCount; // Updated each time an entity's status is changed? e.g. PK Fire pillar increments this twice, desyncing it from Entity_Global_MotionCount
 
 // 0x800EA74C
-u16 gmCommon_StatUpdateCountInc(void)
+u16 gmCommon_GetStatUpdateCountInc(void)
 {
     u16 update_count = Entity_Global_StatUpdateCount++; 
 
@@ -1689,7 +1689,7 @@ u16 gmCommon_StatUpdateCountInc(void)
 void ftCommon_StatUpdateCountIncSetFlags(Fighter_Struct *fp, u16 flags)
 {
     fp->stat_flags = *(gmAttackFlags*)&flags;
-    fp->stat_count = gmCommon_StatUpdateCountInc();
+    fp->stat_count = gmCommon_GetStatUpdateCountInc();
 }
 
 extern s32 gmBonusStat_Attacker_AttackGroupIndex_Count[];    // Index of attack groups

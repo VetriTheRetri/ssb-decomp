@@ -191,7 +191,7 @@ glabel func_ovl4_8018D228
   /* 10A240 8018D350 00000000 */       nop 
   /* 10A244 8018D354 0C0436C0 */       jal func_ovl2_8010DB00
   /* 10A248 8018D358 00000000 */       nop 
-  /* 10A24C 8018D35C 0C05B7A8 */       jal func_ovl3_8016DEA0
+  /* 10A24C 8018D35C 0C05B7A8 */       jal itManager_AllocUserData
   /* 10A250 8018D360 00000000 */       nop 
   /* 10A254 8018D364 0C041580 */       jal func_ovl2_80105600
   /* 10A258 8018D368 00000000 */       nop 
@@ -995,7 +995,7 @@ glabel func_ovl4_8018DE20
   /* 10AD8C 8018DE9C 00000000 */       nop 
   /* 10AD90 8018DEA0 0C0436C0 */       jal func_ovl2_8010DB00
   /* 10AD94 8018DEA4 00000000 */       nop 
-  /* 10AD98 8018DEA8 0C05B7A8 */       jal func_ovl3_8016DEA0
+  /* 10AD98 8018DEA8 0C05B7A8 */       jal itManager_AllocUserData
   /* 10AD9C 8018DEAC 00000000 */       nop 
   /* 10ADA0 8018DEB0 0C041580 */       jal func_ovl2_80105600
   /* 10ADA4 8018DEB4 00000000 */       nop 

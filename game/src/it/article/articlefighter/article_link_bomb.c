@@ -373,7 +373,7 @@ void func_ovl3_801863AC(GObj *article_gobj)
         ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
         ap->article_hit.size = ev[ap->x340_flag_b0123].size;
 
-        ap->article_hit.flags_0x4C_b1 = TRUE;
+        ap->article_hit.can_rehit_hurt = TRUE;
         ap->article_hit.can_hop = FALSE;
         ap->article_hit.can_reflect = FALSE;
         ap->article_hit.clang = FALSE;
@@ -439,7 +439,7 @@ void func_ovl3_8018656C(GObj *article_gobj)
 
 GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *article_gobj = func_ovl3_8016E174(fighter_gobj, &Article_Link_Bomb_Data, pos, vel, 0);
+    GObj *article_gobj = itManager_CreateItem(fighter_gobj, &Article_Link_Bomb_Data, pos, vel, 0);
     DObj *joint;
     Article_Struct *ap;
 
@@ -458,7 +458,7 @@ GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
         ap->article_vars.link_bomb.scale_index = 0;
         ap->article_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
 
-        ap->article_hit.can_rehit = TRUE;
+        ap->article_hit.can_rehit_shield = TRUE;
 
         ap->phys_info.vel.z = 0.0F;
         ap->phys_info.vel.y = 0.0F;

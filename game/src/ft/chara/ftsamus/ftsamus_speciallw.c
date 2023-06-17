@@ -1,6 +1,7 @@
 #include "ftsamus.h"
 
-void func_ovl3_8015DF00(GObj *fighter_gobj)
+// 0x8015DF00
+void ftSamus_SpecialLw_CreateBomb(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -21,26 +22,29 @@ void func_ovl3_8015DF00(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015DF64(GObj *fighter_gobj)
+// 0x8015DF64
+void ftSamus_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8015DF00(fighter_gobj);
+    ftSamus_SpecialLw_CreateBomb(fighter_gobj);
 
     if (fp->ground_or_air == air)
     {
-        func_ovl3_8015E170(fighter_gobj);
+        ftSamus_SpecialLw_TransferStatusAir(fighter_gobj);
     }
     else ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
-void func_ovl3_8015DFBC(GObj *fighter_gobj)
+// 0x8015DFBC
+void ftSamus_SpecialAirLw_ProcUpdate(GObj *fighter_gobj)
 {
-    func_ovl3_8015DF00(fighter_gobj);
+    ftSamus_SpecialLw_CreateBomb(fighter_gobj);
     ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
 }
 
-void func_ovl3_8015DFE4(GObj *fighter_gobj)
+// 0x8015DFE4
+void ftSamus_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -53,7 +57,8 @@ void func_ovl3_8015DFE4(GObj *fighter_gobj)
     else func_ovl2_800D8BB4(fighter_gobj);
 }
 
-void func_ovl3_8015E050(GObj *fighter_gobj)
+// 0x8015E050
+void ftSamus_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
@@ -67,70 +72,78 @@ void func_ovl3_8015E050(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015E0E8(GObj *fighter_gobj)
+// 0x8015E0E8
+void ftSamus_SpecialLw_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_8015E1DC);
+    func_ovl2_800DDE84(fighter_gobj, ftSamus_SpecialLw_SwitchStatusAir);
 }
 
-void func_ovl3_8015E10C(GObj *fighter_gobj)
+// 0x8015E10C
+void ftSamus_SpecialAirLw_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_8015E130);
+    func_ovl2_800DE6E4(fighter_gobj, ftSamus_SpecialAirLw_SwitchStatusGround);
 }
 
-void func_ovl3_8015E130(GObj *fighter_gobj)
+// 0x8015E130
+void ftSamus_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag3 = FALSE;
 
     ftMap_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialLw, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 
-void func_ovl3_8015E170(GObj *fighter_gobj)
+// 0x8015E170 - Go to aerial Screw Attack from grounded update process
+void ftSamus_SpecialLw_TransferStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftMap_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE;
     fp->jumps_used = attributes->jumps_max;
 }
 
-void func_ovl3_8015E1DC(GObj *fighter_gobj)
+// 0x8015E1DC
+void ftSamus_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
 {
     ftMap_SetAir(ftGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 
-void func_ovl3_8015E218(Fighter_Struct *fp)
+// 0x8015E218
+void ftSamus_SpecialLw_InitStatusVars(Fighter_Struct *fp)
 {
     fp->command_vars.flags.flag0 = FALSE;
 }
 
-void jtgt_ovl3_8015E220(GObj *fighter_gobj)
+// 0x8015E220
+void ftSamus_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag3 = FALSE;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialLw, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_8015E218(fp);
+    ftSamus_SpecialLw_InitStatusVars(fp);
 
     fp->status_vars.samus.speciallw.unused = FALSE;
 }
 
-void jtgt_ovl3_8015E274(GObj *fighter_gobj)
+// 0x8015E274
+void ftSamus_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_8015E218(fp);
+    ftSamus_SpecialLw_InitStatusVars(fp);
 
     fp->phys_info.vel_air.y = FTSAMUS_BOMB_VEL_Y_BASE - FTSAMUS_BOMB_VEL_Y_SUB;
 

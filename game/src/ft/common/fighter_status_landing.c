@@ -28,7 +28,7 @@ void ftCommon_Landing_ProcInterrupt(GObj *fighter_gobj)
 
     if (!(fighter_gobj->anim_frame < FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fp->status_vars.common.landing.is_allow_interrupt != FALSE) && !ftCheckInterruptLanding(fighter_gobj))
     {
-        if ((fighter_gobj->anim_frame >= FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fighter_gobj->anim_frame < (FTCOMMON_LANDING_INTERRUPT_BEGIN + DObjGetStruct(fighter_gobj)->unk_dobj_0x78)))
+        if ((fighter_gobj->anim_frame >= FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fighter_gobj->anim_frame < (FTCOMMON_LANDING_INTERRUPT_BEGIN + DObjGetStruct(fighter_gobj)->dobj_f1)))
         {
             if (ftCommon_SquatWait_CheckInterruptLanding(fighter_gobj) != FALSE) return;
         }

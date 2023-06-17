@@ -25,8 +25,8 @@ bool32 func_ovl3_80183DE0(GObj *article_gobj)
     pos.x += ATHITOKAGE_FLAME_SPAWN_OFF_X;
 
     if ((ap->article_vars.hitokage.flags == 2) || 
-    ((ap->article_vars.hitokage.flags & 1) && (joint->unk_dobj_0x7C >= ATHITOKAGE_FLAME_SPAWN_BEGIN)) && 
-    (joint->unk_dobj_0x7C <= ATHITOKAGE_FLAME_SPAWN_END))
+    ((ap->article_vars.hitokage.flags & 1) && (joint->dobj_f2 >= ATHITOKAGE_FLAME_SPAWN_BEGIN)) && 
+    (joint->dobj_f2 <= ATHITOKAGE_FLAME_SPAWN_END))
     {
         joint->mobj->index = 1;
 
@@ -46,7 +46,7 @@ bool32 func_ovl3_80183DE0(GObj *article_gobj)
         joint->mobj->index = 0;
     }
 
-    if ((f32)FLOAT_NEG_MAX == joint->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
         func_ovl2_8010B0B8();
 
@@ -89,7 +89,7 @@ bool32 jtgt_ovl3_80183F94(GObj *article_gobj)
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
         ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-        joint->unk_dobj_0x74 = (f32)FLOAT_NEG_MAX;
+        joint->dobj_f0 = (f32)FLOAT_NEG_MAX;
 
         func_ovl2_8010B0AC();
         func_ovl3_80183DA0(article_gobj);
@@ -102,7 +102,7 @@ extern ArticleSpawnData Article_Hitokage_Data;
 
 GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Hitokage_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Hitokage_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
     Article_Struct *ap;

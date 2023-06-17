@@ -139,9 +139,9 @@ typedef struct _Weapon_Hit
     u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;
     u32 clang : 1;
-    u32 flags_0x48_b1 : 1;
+    u32 can_rehit_hurt : 1;
     u32 flags_0x48_b2 : 1;
-    u32 can_rehit : 1;
+    u32 can_rehit_shield : 1;
     u32 can_hop : 1; // Actually determines whether item's shield deflect routine can run?
     u32 can_reflect : 1;
     u32 can_absorb : 1;

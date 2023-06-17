@@ -1,6 +1,7 @@
-#include <game/src/ft/chara/ftsamus/ftsamus.h>
+#include "ftsamus.h"
 
-void func_ovl3_8015D300(Fighter_Struct *fp)
+// 0x8015D300
+void ftSamus_SpecialN_DestroyChargeShot(Fighter_Struct *fp)
 {
     if (fp->status_vars.samus.specialn.charge_gobj != NULL)
     {
@@ -10,16 +11,18 @@ void func_ovl3_8015D300(Fighter_Struct *fp)
     }
 }
 
-void func_ovl3_8015D338(GObj *fighter_gobj) // Runs when Samus is hit out of Charge Shot
+// 0x8015D338 - Runs when Samus is hit out of Charge Shot
+void ftSamus_SpecialN_ProcDamage(GObj *fighter_gobj) 
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->fighter_vars.samus.charge_level = 0;
 
-    func_ovl3_8015D300(fp);
+    ftSamus_SpecialN_DestroyChargeShot(fp);
 }
 
-void func_ovl3_8015D35C(Fighter_Struct *fp, Vec3f *pos)
+// 0x8015D35C
+void ftSamus_SpecialN_GetChargeShotPosition(Fighter_Struct *fp, Vec3f *pos)
 {
     pos->y = 0.0F;
     pos->z = 0.0F;
@@ -28,19 +31,21 @@ void func_ovl3_8015D35C(Fighter_Struct *fp, Vec3f *pos)
     func_ovl2_800EDF24(fp->joint[FTSAMUS_CHARGE_JOINT], pos);
 }
 
-void func_ovl3_8015D394(Fighter_Struct *fp)
+// 0x8015D394
+void ftSamus_SpecialN_SetChargeShotPosition(Fighter_Struct *fp)
 {
     Vec3f pos;
 
     if (fp->status_vars.samus.specialn.charge_gobj != NULL)
     {
-        func_ovl3_8015D35C(fp, &pos);
+        ftSamus_SpecialN_GetChargeShotPosition(fp, &pos);
 
         DObjGetStruct(fp->status_vars.samus.specialn.charge_gobj)->translate = pos;
     }
 }
 
-void func_ovl3_8015D3EC(GObj *fighter_gobj)
+// 0x8015D3EC
+void ftSamus_SpecialNStart_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -48,17 +53,18 @@ void func_ovl3_8015D3EC(GObj *fighter_gobj)
     {
         if (fp->ground_or_air == air)
         {
-            func_ovl3_8015DAA8(fighter_gobj);
+            ftSamus_SpecialAirNEnd_SetStatus(fighter_gobj);
         }
         else if (fp->status_vars.samus.specialn.is_release != FALSE)
         {
-            func_ovl3_8015DA60(fighter_gobj);
+            ftSamus_SpecialNEnd_SetStatus(fighter_gobj);
         }
-        else func_ovl3_8015D734(fighter_gobj);
+        else ftSamus_SpecialNLoop_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8015D464(GObj *fighter_gobj)
+// 0x8015D464
+void ftSamus_SpecialNStart_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -68,41 +74,46 @@ void func_ovl3_8015D464(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015D49C(GObj *fighter_gobj)
+// 0x8015D49C
+void ftSamus_SpecialNStart_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_8015D540);
+    func_ovl2_800DDE84(fighter_gobj, ftSamus_SpecialNStart_SwitchStatusAir);
 }
 
-void func_ovl3_8015D4C0(GObj *fighter_gobj)
+// 0x8015D4E4
+void ftSamus_SpecialAirNStart_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_8015D4E4);
+    func_ovl2_800DE6E4(fighter_gobj, ftSamus_SpecialAirNStart_SwitchStatusGround);
 }
 
-void func_ovl3_8015D4E4(GObj *fighter_gobj)
+// 0x8015D4E4
+void ftSamus_SpecialAirNStart_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->dobj_f1, FTSTATUPDATE_COLANIM_PRESERVE);
 
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
 }
 
-void func_ovl3_8015D540(GObj *fighter_gobj)
+// 0x8015D540
+void ftSamus_SpecialNStart_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->unk_dobj_0x78, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->dobj_f1, FTSTATUPDATE_COLANIM_PRESERVE);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
 
     fp->status_vars.samus.specialn.is_release = TRUE;
 }
 
-void func_ovl3_8015D5AC(GObj *fighter_gobj)
+// 0x8015D5AC
+void ftSamus_SpecialNLoop_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -118,72 +129,73 @@ void func_ovl3_8015D5AC(GObj *fighter_gobj)
 
             if (fp->fighter_vars.samus.charge_level == FTSAMUS_CHARGE_MAX)
             {
-                ftColor_CheckSetColAnimIndex(fighter_gobj, 6, 0);
-                func_ovl3_8015D300(fp);
+                ftColor_CheckSetColAnimIndex(fighter_gobj, FTSAMUS_CHARGE_COLANIM_ID, FTSAMUS_CHARGE_COLANIM_LENGTH);
+                ftSamus_SpecialN_DestroyChargeShot(fp);
                 ftCommon_Wait_SetStatus(fighter_gobj);
             }
-
             else if (fp->status_vars.samus.specialn.charge_gobj != NULL)
             {
-                Weapon_Struct *ip = wpGetStruct(fp->status_vars.samus.specialn.charge_gobj);
+                Weapon_Struct *wp = wpGetStruct(fp->status_vars.samus.specialn.charge_gobj);
 
-                ip->item_vars.charge_shot.charge_size = fp->fighter_vars.samus.charge_level;
+                wp->item_vars.charge_shot.charge_size = fp->fighter_vars.samus.charge_level;
             }
         }
     }
 }
 
-void func_ovl3_8015D640(GObj *fighter_gobj)
+// 0x8015D640
+void ftSamus_SpecialNLoop_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
-        func_ovl3_8015DA60(fighter_gobj);
+        ftSamus_SpecialNEnd_SetStatus(fighter_gobj);
         return;
     }
-
     status_id = ftCommon_Escape_GetStatus(fp);
 
     if (status_id != -1)
     {
-        func_ovl3_8015D300(fp);
+        ftSamus_SpecialN_DestroyChargeShot(fp);
         ftCommon_Escape_SetStatus(fighter_gobj, status_id);
     }
-
     else if (fp->input.pl.button_tap & fp->input.button_mask_z)
     {
-        func_ovl3_8015D300(fp);
+        ftSamus_SpecialN_DestroyChargeShot(fp);
         ftCommon_Wait_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8015D700(GObj *fighter_gobj)
+// 0x8015D700
+void ftSamus_SpecialNLoop_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl3_8015D394(ftGetStruct(fighter_gobj));
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_8015DAA8);
+    ftSamus_SpecialN_SetChargeShotPosition(ftGetStruct(fighter_gobj));
+    func_ovl2_800DDE84(fighter_gobj, ftSamus_SpecialAirNEnd_SetStatus);
 }
 
-void func_ovl3_8015D734(GObj *fighter_gobj)
+// 0x8015D734
+void ftSamus_SpecialNLoop_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNLoop, 0.0F, 1.0F, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNLoop, 0.0F, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
     fp->status_vars.samus.specialn.charge_int = FTSAMUS_CHARGE_INT;
 
-    func_ovl3_8015D35C(fp, &pos);
+    ftSamus_SpecialN_GetChargeShotPosition(fp, &pos);
     fp->status_vars.samus.specialn.charge_gobj = func_ovl3_80168DDC(fighter_gobj, &pos, fp->fighter_vars.samus.charge_level, 0);
 }
 
-void func_ovl3_8015D7AC(GObj *fighter_gobj)
+// 0x8015D7AC
+void ftSamus_SpecialNEnd_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
-    Weapon_Struct *ip;
+    Weapon_Struct *wp;
     f32 charge_recoil_x;
     f32 charge_recoil_y;
 
@@ -191,31 +203,30 @@ void func_ovl3_8015D7AC(GObj *fighter_gobj)
     {
         fp->command_vars.flags.flag0 = FALSE;
 
-        func_ovl3_8015D35C(fp, &pos);
+        ftSamus_SpecialN_GetChargeShotPosition(fp, &pos);
 
         if (fp->status_vars.samus.specialn.charge_gobj != NULL)
         {
-            ip = wpGetStruct(fp->status_vars.samus.specialn.charge_gobj);
+            wp = wpGetStruct(fp->status_vars.samus.specialn.charge_gobj);
             ftCommon_StopLoopSFX(fp);
 
             DObjGetStruct(fp->status_vars.samus.specialn.charge_gobj)->translate = pos;
 
-            ip->item_vars.charge_shot.is_full_charge = TRUE;
-            ip->item_vars.charge_shot.charge_size = (s32)fp->fighter_vars.samus.charge_level;
+            wp->item_vars.charge_shot.is_full_charge = TRUE;
+            wp->item_vars.charge_shot.charge_size = fp->fighter_vars.samus.charge_level;
 
             func_ovl2_800DF09C(fp->status_vars.samus.specialn.charge_gobj, fp->coll_data.p_translate, &fp->coll_data);
 
-            ip->item_vars.charge_shot.owner_gobj = NULL;
+            wp->item_vars.charge_shot.owner_gobj = NULL;
             fp->status_vars.samus.specialn.charge_gobj = NULL;
         }
         else func_ovl3_80168DDC(fighter_gobj, &pos, fp->fighter_vars.samus.charge_level, 1);
 
-
         if (fp->ground_or_air == air)
         {
-            charge_recoil_x = (f32)(fp->fighter_vars.samus.charge_level + 1);
+            charge_recoil_x = (f32) (fp->fighter_vars.samus.charge_level + 1);
 
-            fp->phys_info.vel_air.x = (f32) (((FTSAMUS_CHARGE_RECOIL_MUL * charge_recoil_x) + FTSAMUS_CHARGE_RECOIL_BASE) * (f32)-fp->lr);
+            fp->phys_info.vel_air.x = (((FTSAMUS_CHARGE_RECOIL_MUL * charge_recoil_x) + FTSAMUS_CHARGE_RECOIL_BASE) * -fp->lr);
 
             charge_recoil_y = charge_recoil_x + FTSAMUS_CHARGE_RECOIL_ADD + ((f32)fp->fighter_vars.samus.charge_recoil * -FTSAMUS_CHARGE_RECOIL_BASE);
 
@@ -240,47 +251,53 @@ void func_ovl3_8015D7AC(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015D968(GObj *fighter_gobj)
+// 0x8015D968
+void ftSamus_SpecialNEnd_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DDE84(fighter_gobj, func_ovl3_8015DA04);
+    func_ovl2_800DDE84(fighter_gobj, ftSamus_SpecialNEnd_SwitchStatusAir);
 }
 
-void func_ovl3_8015D98C(GObj *fighter_gobj)
+// 0x8015D98C
+void ftSamus_SpecialAirNEnd_ProcMap(GObj *fighter_gobj)
 {
-    func_ovl2_800DE6E4(fighter_gobj, func_ovl3_8015D9B0);
+    func_ovl2_800DE6E4(fighter_gobj, ftSamus_SpecialAirNEnd_SwitchStatusGround);
 }
 
-void func_ovl3_8015D9B0(GObj *fighter_gobj)
+// 0x8015D9B0
+void ftSamus_SpecialAirNEnd_SwitchStatusGround(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
 }
 
-void func_ovl3_8015DA04(GObj *fighter_gobj)
+// 0x8015DA04
+void ftSamus_SpecialNEnd_SwitchStatusAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
 }
 
-void func_ovl3_8015DA60(GObj *fighter_gobj)
+// 0x8015DA60
+void ftSamus_SpecialNEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNEnd, 0.0F, 1.0F, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNEnd, 0.0F, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
 }
 
-void func_ovl3_8015DAA8(GObj *fighter_gobj)
+// 0x8015DAA8
+void ftSamus_SpecialAirNEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -289,12 +306,13 @@ void func_ovl3_8015DAA8(GObj *fighter_gobj)
         ftMap_SetAir(fp);
         func_ovl2_800D8EB8(fp);
     }
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNEnd, 0.0F, 1.0F, 2U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNEnd, 0.0F, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
 }
 
-f32 func_ovl3_8015DB14(Fighter_Struct *fp)
+// 0x8015DB14
+f32 ftSamus_SpecialNStart_GetAnimPlaybackRate(Fighter_Struct *fp)
 {
     f32 ret = fp->fighter_vars.samus.charge_level / (f32) FTSAMUS_CHARGE_MAX;
 
@@ -303,31 +321,34 @@ f32 func_ovl3_8015DB14(Fighter_Struct *fp)
     return ret;
 }
 
-void func_ovl3_8015DB4C(Fighter_Struct *fp)
+// 0x8015DB4C
+void ftSamus_SpecialN_InitStatusVars(Fighter_Struct *fp)
 {
-    fp->proc_damage = func_ovl3_8015D338;
+    fp->proc_damage = ftSamus_SpecialN_ProcDamage;
     fp->status_vars.samus.specialn.charge_gobj = NULL;
     fp->command_vars.flags.flag0 = FALSE;
 }
 
-void jtgt_ovl3_8015DB64(GObj *fighter_gobj)
+// 0x8015DB64
+void ftSamus_SpecialNStart_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNStart, 0.0F, func_ovl3_8015DB14(fp), 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialNStart, 0.0F, ftSamus_SpecialNStart_GetAnimPlaybackRate(fp), FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_8015DB4C(fp);
+    ftSamus_SpecialN_InitStatusVars(fp);
 
     fp->status_vars.samus.specialn.is_release = (fp->fighter_vars.samus.charge_level == FTSAMUS_CHARGE_MAX) ? TRUE : FALSE;
 }
 
-void jtgt_ovl3_8015DBDC(GObj *fighter_gobj)
+// 0x8015DBDC
+void ftSamus_SpecialAirNStart_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNStart, 0.0F, func_ovl3_8015DB14(fp), 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirNStart, 0.0F, ftSamus_SpecialNStart_GetAnimPlaybackRate(fp), FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    func_ovl3_8015DB4C(fp);
+    ftSamus_SpecialN_InitStatusVars(fp);
 
     fp->status_vars.samus.specialn.is_release = TRUE;
 }

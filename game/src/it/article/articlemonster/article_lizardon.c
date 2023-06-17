@@ -202,7 +202,7 @@ extern ArticleSpawnData Article_Lizardon_Data;
 
 GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Lizardon_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Lizardon_Data, pos, vel, flags);
     DObj *joint;
     Article_Struct *ap;
 

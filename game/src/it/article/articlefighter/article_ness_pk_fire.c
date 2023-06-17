@@ -164,7 +164,7 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
 
-    article_gobj = func_ovl3_8016E174(weapon_gobj, &Article_PK_Fire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ITEM));
+    article_gobj = itManager_CreateItem(weapon_gobj, &Article_PK_Fire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ITEM));
 
     if (article_gobj == NULL)
     {
@@ -182,7 +182,7 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     ap->handicap = ip->handicap;
     ap->player_number = ip->player_number;
 
-    ap->article_hit.can_rehit = TRUE;
+    ap->article_hit.can_rehit_shield = TRUE;
     ap->article_hit.throw_mul = ip->item_hit.stale;
     ap->article_hit.attack_id = ip->item_hit.attack_id;
     ap->article_hit.motion_count = ip->item_hit.motion_count;
@@ -190,7 +190,7 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     ap->article_hit.stat_count = ip->item_hit.stat_count;
 
     func_ovl3_80173F78(ap);
-    func_ovl3_8016F280(article_gobj);
+    itManager_UpdateHitPositions(article_gobj);
 
     ap->lifetime = ATPKFIRE_LIFETIME;
 

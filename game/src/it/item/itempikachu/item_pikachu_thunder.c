@@ -103,7 +103,7 @@ GObj *func_ovl3_8016A80C(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
     ip->item_hit.update_state = 0;
     ip->item_vars.thunder.thunder_state = wpPikachuThunderStatus_Active;
 
-    ip->group_id = func_ovl3_801655A0();
+    ip->group_id = wpManager_GetGroupIndexInc();
 
     DObjGetStruct(weapon_gobj)->mobj->index = 3;
 

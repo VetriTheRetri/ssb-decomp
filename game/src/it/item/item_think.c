@@ -65,7 +65,7 @@ void wpMain_DestroyWeapon(GObj *weapon_gobj) // Destroy item?
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
     wpMain_StopSFX(wp);                 // Stop item's SFX
-    wpManager_EjectWeaponStruct(wp);    // Eject item's user_data from memory?
+    wpManager_SetPrevAlloc(wp);    // Eject item's user_data from memory?
     gOMObj_EjectGObjCommon(weapon_gobj);  // Eject GObj from memory?
 }
 

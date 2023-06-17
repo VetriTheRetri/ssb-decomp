@@ -50,7 +50,7 @@ bool32 func_ovl3_80183C84(GObj *article_gobj)
 
     func_ovl3_80183B10(article_gobj);
 
-    if ((f32)FLOAT_NEG_MAX == joint->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
         func_ovl2_8010B0B8();
 
@@ -61,7 +61,7 @@ bool32 func_ovl3_80183C84(GObj *article_gobj)
 
 GObj* jtgt_ovl3_80183D00(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Porygon_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Porygon_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {

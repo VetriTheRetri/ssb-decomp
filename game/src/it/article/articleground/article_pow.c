@@ -2,7 +2,7 @@
 
 bool32 func_ovl3_8017C090(GObj *article_gobj)
 {
-    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(article_gobj)->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(article_gobj)->dobj_f0)
     {
         func_ovl3_8017C0D4(article_gobj);
     }
@@ -22,7 +22,7 @@ void func_ovl3_8017C0D4(GObj *article_gobj)
 
 bool32 func_ovl3_8017C110(GObj *article_gobj)
 {
-    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(article_gobj)->unk_dobj_0x74)
+    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(article_gobj)->dobj_f0)
     {
         func_ovl2_8010986C();
 
@@ -54,7 +54,7 @@ extern ArticleSpawnData Article_POW_Data;
 
 GObj* jtgt_ovl3_8017C1E0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_POW_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_POW_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {

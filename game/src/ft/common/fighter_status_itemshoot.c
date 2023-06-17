@@ -145,7 +145,7 @@ void ftCommon_FireFlowerShoot_UpdateAmmoStats(Fighter_Struct *fp, s32 ammo_sub)
     {
         fp->status_vars.common.fireflower.flame_vel_index = 0;
 
-        ftCommon_MotionCountIncSetID(fp, ftAttack_Index_FireFlowerShoot);
+        ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_FireFlowerShoot);
         ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
         ftCommon_Update1PGameAttackStats(fp, 0);
     }
@@ -231,14 +231,14 @@ void ftCommon_FireFlowerShoot_ProcAccessory(GObj *fighter_gobj)
                 }
                 fp->command_vars.flags.flag0 = 2;
 
-                gcSetAnimPlaybackRate(fighter_gobj, 0.0F);
+                gcAnim_SetPlaybackRate(fighter_gobj, 0.0F);
             }
         }
         if ((fp->status_vars.common.fireflower.ammo_fire_count >= 5) && (fp->status_vars.common.fireflower.is_release != FALSE) && (fp->status_vars.common.fireflower.release_lag >= 20))
         {
             fp->command_vars.flags.flag0 = 0;
 
-            gcSetAnimPlaybackRate(fighter_gobj, 1.0F);
+            gcAnim_SetPlaybackRate(fighter_gobj, 1.0F);
         }
     }
 }
@@ -261,7 +261,7 @@ void ftCommon_FireFlowerShootAir_SwitchStatusGround(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShoot, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, FTSTATUPDATE_NONE_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShoot, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->dobj_f1, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
 }
@@ -272,7 +272,7 @@ void ftCommon_FireFlowerShoot_SwitchStatusAir(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShootAir, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->unk_dobj_0x78, FTSTATUPDATE_NONE_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShootAir, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->dobj_f1, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl2_800D8EB8(fp);
 
     fp->proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;

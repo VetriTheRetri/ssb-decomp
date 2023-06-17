@@ -39,7 +39,7 @@ void func_ovl3_8017A3A0(GObj *article_gobj, GObj *fighter_gobj)
             {
                 ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-                func_ovl3_8016F280(article_gobj);
+                itManager_UpdateHitPositions(article_gobj);
             }
         }
         ap->lr = (ap->phys_info.vel.x < 0.0F) ? LEFT : RIGHT;
@@ -190,7 +190,7 @@ void func_ovl3_8017A83C(GObj *article_gobj)
     {
         ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-        func_ovl3_8016F280(article_gobj);
+        itManager_UpdateHitPositions(article_gobj);
         func_ovl3_8017B0D4(article_gobj);
     }
     else
@@ -238,7 +238,7 @@ bool32 jtgt_ovl3_8017A9D0(GObj *article_gobj)
 
         ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-        func_ovl3_8016F280(article_gobj);
+        itManager_UpdateHitPositions(article_gobj);
 
         func_ovl3_801727BC(article_gobj);
 
@@ -431,7 +431,7 @@ bool32 jtgt_ovl3_8017AF18(GObj *article_gobj)
     {
         ap->article_hit.update_state = gmHitCollision_UpdateState_New;
 
-        func_ovl3_8016F280(article_gobj);
+        itManager_UpdateHitPositions(article_gobj);
         func_ovl3_801727BC(article_gobj);
         func_ovl3_8017B0D4(article_gobj);
     }
@@ -521,7 +521,7 @@ extern ArticleSpawnData Article_R_Shell_Data;
 
 GObj *jtgt_ovl3_8017B1D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_R_Shell_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_R_Shell_Data, pos, vel, flags);
 
 
     if (article_gobj != NULL)
@@ -541,7 +541,7 @@ GObj *jtgt_ovl3_8017B1D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = atGetStruct(article_gobj);
 
-        ap->article_hit.can_rehit = TRUE;
+        ap->article_hit.can_rehit_shield = TRUE;
 
         ap->article_vars.shell.health = 1;
         ap->article_vars.shell.is_setup_vars = FALSE;

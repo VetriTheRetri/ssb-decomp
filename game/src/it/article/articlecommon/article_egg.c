@@ -162,7 +162,7 @@ bool32 jtgt_ovl3_80181928(GObj *article_gobj)
 
 GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Egg_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Egg_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {
@@ -209,7 +209,7 @@ void func_ovl3_80181AA8(GObj *article_gobj)
 
     func_800269C0(1U);
 
-    ap->article_hit.flags_0x4C_b1 = TRUE;
+    ap->article_hit.can_rehit_hurt = TRUE;
     ap->article_hit.can_hop = FALSE;
     ap->article_hit.can_reflect = FALSE;
     ap->article_hit.clang = FALSE;

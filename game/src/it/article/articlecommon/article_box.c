@@ -23,9 +23,9 @@ void func_ovl3_80179120(GObj *effect_gobj) // Barrel/Crate smash GFX process
             joint->translate.y += joint->scale.y;
             joint->translate.z += joint->scale.z;
 
-            joint->rotate.x += joint->unk_dobj_0x74; // ??? Seems to be rotation step, but only in this case? Otherwise -FLOAT32_MAX?
-            joint->rotate.y += joint->unk_dobj_0x78;
-            joint->rotate.z += joint->unk_dobj_0x7C;
+            joint->rotate.x += joint->dobj_f0; // ??? Seems to be rotation step, but only in this case? Otherwise -FLOAT32_MAX?
+            joint->rotate.y += joint->dobj_f1;
+            joint->rotate.z += joint->dobj_f2;
 
             joint = joint->unk_0x8;
         } 
@@ -68,9 +68,9 @@ void func_ovl3_801791F4(Vec3f *pos)
                 joint->scale.y = (f32)((rand_f32() * 50.0F) + 10.0F);
                 joint->scale.z = (f32)((rand_f32() * 32.0F) + -16.0F);
 
-                joint->unk_dobj_0x74 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
-                joint->unk_dobj_0x78 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
-                joint->unk_dobj_0x7C = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
+                joint->dobj_f0 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
+                joint->dobj_f1 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
+                joint->dobj_f2 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
             }
             ep->lifetime = ATCONTAINER_GFX_LIFETIME;
 
@@ -304,7 +304,7 @@ bool32 jtgt_ovl3_80179948(GObj *article_gobj)
 
 GObj *jtgt_ovl3_801799A4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_Box_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Box_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {
@@ -329,7 +329,7 @@ void func_ovl3_80179A34(GObj *article_gobj)
 
     ap->article_hit.hit_sfx = 1;
 
-    ap->article_hit.flags_0x4C_b1 = TRUE;
+    ap->article_hit.can_rehit_hurt = TRUE;
     ap->article_hit.can_hop = FALSE;
     ap->article_hit.can_reflect = FALSE;
 

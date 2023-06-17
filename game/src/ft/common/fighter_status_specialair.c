@@ -4,12 +4,12 @@ void (*ftKirby_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
 { 
     ftKirby_CopyMario_SpecialAirN_SetStatus, // Mario
     jtgt_ovl3_80156E18, // Fox
-    jtgt_ovl3_80157F04, // Donkey Kong
+    ftKirby_CopyDonkey_SpecialAirNStart_SetStatus, // Donkey Kong
     jtgt_ovl3_80157744, // Samus
     ftKirby_CopyMario_SpecialAirN_SetStatus, // Luigi
     jtgt_ovl3_801649C0, // Link
     jtgt_ovl3_8015F60C, // Yoshi
-    jtgt_ovl3_80160B70, // Captain Faclon
+    ftKirby_CopyCaptain_SpecialAirN_SetStatus, // Captain Faclon
     ftKirby_SpecialAirNStart_SetStatus, // Kirby
     jtgt_ovl3_80153908, // Pikachu
     ftKirby_CopyPurin_SpecialAirN_SetStatus, // Jigglypuff
@@ -36,10 +36,10 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialAirN_SetStatus,
     ftFox_SpecialAirN_SetStatus,
     ftDonkey_SpecialAirNStart_SetStatus,
-    jtgt_ovl3_8015DBDC,
+    ftSamus_SpecialAirNStart_SetStatus,
     ftMario_SpecialAirN_SetStatus,
     ftLink_SpecialAirN_SetStatus,
-    jtgt_ovl3_8015E79C,
+    ftYoshi_SpecialAirN_SetStatus,
     ftCaptain_SpecialAirN_SetStatus,
     ftKirby_SpecialAirN_SetStatusIndex,
     ftPikachu_SpecialAirN_SetStatus,
@@ -50,10 +50,10 @@ void (*ftCommon_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialAirN_SetStatus,
     ftFox_SpecialAirN_SetStatus,
     ftDonkey_SpecialAirNStart_SetStatus,
-    jtgt_ovl3_8015DBDC,
+    ftSamus_SpecialAirNStart_SetStatus,
     ftMario_SpecialAirN_SetStatus,
     ftLink_SpecialAirN_SetStatus,
-    jtgt_ovl3_8015E79C,
+    ftYoshi_SpecialAirN_SetStatus,
     ftCaptain_SpecialAirN_SetStatus,
     ftKirby_SpecialAirN_SetStatusIndex,
     ftPikachu_SpecialAirN_SetStatus,
@@ -67,10 +67,10 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialAirHi_SetStatus,
     ftFox_SpecialAirHiStart_SetStatus,
     ftDonkey_SpecialAirHi_SetStatus,
-    jtgt_ovl3_8015DE90,
+    ftSamus_SpecialAirHi_SetStatus,
     ftMario_SpecialAirHi_SetStatus,
     ftLink_SpecialAirHi_SetStatus,
-    jtgt_ovl3_8015ED7C,
+    ftYoshi_SpecialAirHi_SetStatus,
     ftCaptain_SpecialAirHi_SetStatus,
     ftKirby_SpecialAirHi_SetStatus,
     ftPikachu_SpecialAirHiStart_SetStatus,
@@ -81,10 +81,10 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftMario_SpecialAirHi_SetStatus,
     ftFox_SpecialAirHiStart_SetStatus,
     ftDonkey_SpecialAirHi_SetStatus,
-    jtgt_ovl3_8015DE90,
+    ftSamus_SpecialAirHi_SetStatus,
     ftMario_SpecialAirHi_SetStatus,
     ftLink_SpecialAirHi_SetStatus,
-    jtgt_ovl3_8015ED7C,
+    ftYoshi_SpecialAirHi_SetStatus,
     ftCaptain_SpecialAirHi_SetStatus,
     ftKirby_SpecialAirHi_SetStatus,
     ftPikachu_SpecialAirHiStart_SetStatus,
@@ -96,29 +96,29 @@ void (*ftCommon_SpecialAirHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
 void (*ftCommon_SpecialAirLw_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {
     ftMario_SpecialAirLw_SetStatus,
-    jtgt_ovl3_8015D290,
+    ftFox_SpecialAirLwStart_SetStatus,
     NULL,
-    jtgt_ovl3_8015E274,
+    ftSamus_SpecialAirLw_SetStatus,
     ftMario_SpecialAirLw_SetStatus,
     ftLink_SpecialAirLw_SetStatus,
-    jtgt_ovl3_8015F04C,
+    ftYoshi_SpecialAirLwStart_SetStatus,
     ftCaptain_SpecialAirLw_SetStatus,
     ftKirby_SpecialAirLwStart_SetStatus,
-    jtgt_ovl3_80151FFC,
+    ftPikachu_SpecialAirLwStart_SetStatus,
     ftPurin_SpecialAirLw_SetStatus,
     ftNess_SpecialAirLwStart_SetStatus,
     ftMario_SpecialAirLw_SetStatus,
     ftMario_SpecialAirLw_SetStatus,
     ftMario_SpecialAirLw_SetStatus,
-    jtgt_ovl3_8015D290,
+    ftFox_SpecialAirLwStart_SetStatus,
     NULL,
-    jtgt_ovl3_8015E274,
+    ftSamus_SpecialAirLw_SetStatus,
     ftMario_SpecialAirLw_SetStatus,
     ftLink_SpecialAirLw_SetStatus,
-    jtgt_ovl3_8015F04C,
+    ftYoshi_SpecialAirLwStart_SetStatus,
     ftCaptain_SpecialAirLw_SetStatus,
     ftKirby_SpecialAirLwStart_SetStatus,
-    jtgt_ovl3_80151FFC,
+    ftPikachu_SpecialAirLwStart_SetStatus,
     ftPurin_SpecialAirLw_SetStatus,
     ftNess_SpecialAirLwStart_SetStatus,
     NULL

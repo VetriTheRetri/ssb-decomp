@@ -54,7 +54,7 @@ extern ArticleSpawnData Article_Tomato_Data;
 
 GObj* jtgt_ovl3_80174624(GObj *article_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *spawn_gobj = func_ovl3_8016E174(article_gobj, &Article_Tomato_Data, pos, vel, flags);
+    GObj *spawn_gobj = itManager_CreateItem(article_gobj, &Article_Tomato_Data, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
     Article_Struct *ap;

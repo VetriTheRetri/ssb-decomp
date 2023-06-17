@@ -315,7 +315,7 @@ void func_ovl3_80176C14(GObj *article_gobj)
         ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
         ap->article_hit.size = ev[ap->x340_flag_b0123].size;
 
-        ap->article_hit.flags_0x4C_b1 = TRUE;
+        ap->article_hit.can_rehit_hurt = TRUE;
         ap->article_hit.can_hop = FALSE;
         ap->article_hit.can_reflect = FALSE;
         ap->article_hit.clang = FALSE;
@@ -434,7 +434,7 @@ void func_ovl3_80176F2C(GObj *article_gobj)
 
 GObj* jtgt_ovl3_80176F60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_MSBomb_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_MSBomb_Data, pos, vel, flags);
     DObj *joint;
     Article_Struct *ap;
     Vec3f translate;

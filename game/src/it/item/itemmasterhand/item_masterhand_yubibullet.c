@@ -16,7 +16,7 @@ void func_ovl3_8016DC2C(GObj *weapon_gobj)
 
     ip->item_hit.hit_sfx = 1;
 
-    ip->item_hit.flags_0x48_b1 = TRUE;
+    ip->item_hit.can_rehit_hurt = TRUE;
     ip->item_hit.can_hop = FALSE;
     ip->item_hit.can_reflect = FALSE;
 

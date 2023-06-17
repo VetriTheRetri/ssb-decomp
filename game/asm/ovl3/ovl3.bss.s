@@ -43,11 +43,11 @@ glabel D_ovl3_8018CFE4
     .space 4
 glabel D_ovl3_8018CFE8
     .space 8
-glabel D_ovl3_8018CFF0
+glabel wpManager_Global_CurrentUserData
     .space 4
-glabel dbObjDisplayStatus_Item
+glabel dbObjDisplayStatusItem
     .space 4
-glabel D_ovl3_8018CFF8
+glabel wpManager_Global_GroupIndex
     .space 72
 glabel Article_File_Data
     .space 4
@@ -59,7 +59,7 @@ glabel Monster_Info
     .space 48
 glabel dbObjDisplayStatus_Global_Article
     .space 4
-glabel Article_Alloc_Link
+glabel itManager_Global_CurrentUserData
     .space 4
 glabel D_ovl3_8018D098
     .space 4

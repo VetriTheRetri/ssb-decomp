@@ -94,7 +94,7 @@ extern ArticleSpawnData Article_F_Flower_Data;
 
 GObj* jtgt_ovl3_80175D60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = func_ovl3_8016E174(spawn_gobj, &Article_F_Flower_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_F_Flower_Data, pos, vel, flags);
 
     if (article_gobj != NULL)
     {
