@@ -18,24 +18,24 @@ void ftKirby_CopyNess_SpecialN_SpawnPKFire(GObj *fighter_gobj)
         pos.y = 0.0F;
         pos.z = 0.0F;
 
-        func_ovl2_800EDF24(fp->joint[FTKIRBY_COPYNESS_PK_FIRE_SPAWN_JOINT], &pos);
+        func_ovl2_800EDF24(fp->joint[FTKIRBY_COPYNESS_PKFIRE_SPAWN_JOINT], &pos);
 
-        pos.x += FTKIRBY_COPYNESS_PK_FIRE_SPAWN_OFF_X * (f32)fp->lr;
-        pos.y += FTKIRBY_COPYNESS_PK_FIRE_SPAWN_OFF_Y;
+        pos.x += FTKIRBY_COPYNESS_PKFIRE_SPAWN_OFF_X * fp->lr;
+        pos.y += FTKIRBY_COPYNESS_PKFIRE_SPAWN_OFF_Y;
 
         if (fp->ground_or_air == air)
         {
             vel.z = 0.0F;
-            angle = FTKIRBY_COPYNESS_PK_FIRE_SPARK_ANGLE_AIR;
-            vel.x = cosf(FTKIRBY_COPYNESS_PK_FIRE_SPARK_ANGLE_AIR) * FTKIRBY_COPYNESS_PK_FIRE_SPARK_VEL_AIR * (f32)fp->lr;
-            vel.y = __sinf(FTKIRBY_COPYNESS_PK_FIRE_SPARK_ANGLE_AIR) * FTKIRBY_COPYNESS_PK_FIRE_SPARK_VEL_AIR;
+            angle = FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_AIR;
+            vel.x = cosf(FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_AIR) * FTKIRBY_COPYNESS_PKFIRE_SPARK_VEL_AIR * fp->lr;
+            vel.y = __sinf(FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_AIR) * FTKIRBY_COPYNESS_PKFIRE_SPARK_VEL_AIR;
         }
         else
         {
             vel.z = 0.0F;
-            angle = FTKIRBY_COPYNESS_PK_FIRE_SPARK_ANGLE_GROUND;
-            vel.x = cosf(FTKIRBY_COPYNESS_PK_FIRE_SPARK_ANGLE_GROUND) * FTKIRBY_COPYNESS_PK_FIRE_SPARK_VEL_GROUND * (f32)fp->lr;
-            vel.y = __sinf(FTKIRBY_COPYNESS_PK_FIRE_SPARK_ANGLE_GROUND) * FTKIRBY_COPYNESS_PK_FIRE_SPARK_VEL_GROUND;
+            angle = FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_GROUND;
+            vel.x = cosf(FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_GROUND) * FTKIRBY_COPYNESS_PKFIRE_SPARK_VEL_GROUND * fp->lr;
+            vel.y = __sinf(FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_GROUND) * FTKIRBY_COPYNESS_PKFIRE_SPARK_VEL_GROUND;
         }
 
         func_ovl3_8016AC78(fighter_gobj, &pos, &vel, angle); // Spawn PK Fire
@@ -90,7 +90,7 @@ void ftKirby_CopyNess_SpecialN_InitStatusVars(GObj *fighter_gobj)
 // 0x80155DBC
 void ftKirby_CopyNess_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftKirby_CopyNess_SpecialN_InitStatusVars(fighter_gobj);
 }
@@ -98,7 +98,7 @@ void ftKirby_CopyNess_SpecialN_SetStatus(GObj *fighter_gobj)
 // 0x80155DFC
 void ftKirby_CopyNess_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     ftKirby_CopyNess_SpecialN_InitStatusVars(fighter_gobj);
 }

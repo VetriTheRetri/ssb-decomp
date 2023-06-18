@@ -182,7 +182,7 @@ typedef struct Thunder_WeaponVars // Pikachu's Thunder
 
 typedef struct _PKThunder_WeaponVars
 {
-    s32 pk_thunder_state;
+    s32 pkthunder_state;
     f32 angle;
     GObj *spawn_gobj; // PK Thunder's original owner
     GObj *trail_gobj[ITPKTHUNDER_TRAIL_COUNT];
@@ -191,7 +191,7 @@ typedef struct _PKThunder_WeaponVars
 
 typedef struct _PKThunder_Trail_WeaponVars
 {
-    s32 pk_thunder_trail_state;
+    s32 pkthunder_trail_state;
     s32 trail_index; // Also key of RGB struct to use to set color of PK Thunder trails?
     GObj *spawn_gobj; // Original owner?
     GObj *trail_gobj[ITPKTHUNDER_TRAIL_COUNT];

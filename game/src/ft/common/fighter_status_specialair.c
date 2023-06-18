@@ -3,15 +3,15 @@
 void (*ftKirby_SpecialAirN_StatusList[Ft_Kind_EnumMax])(GObj*) = 
 { 
     ftKirby_CopyMario_SpecialAirN_SetStatus, // Mario
-    jtgt_ovl3_80156E18, // Fox
+    ftKirby_CopyFox_SpecialAirN_SetStatus, // Fox
     ftKirby_CopyDonkey_SpecialAirNStart_SetStatus, // Donkey Kong
     jtgt_ovl3_80157744, // Samus
     ftKirby_CopyMario_SpecialAirN_SetStatus, // Luigi
-    jtgt_ovl3_801649C0, // Link
+    ftKirby_CopyLink_SpecialAirN_SetStatus, // Link
     jtgt_ovl3_8015F60C, // Yoshi
     ftKirby_CopyCaptain_SpecialAirN_SetStatus, // Captain Faclon
     ftKirby_SpecialAirNStart_SetStatus, // Kirby
-    jtgt_ovl3_80153908, // Pikachu
+    ftKirby_CopyPikachu_SpecialAirN_SetStatus, // Pikachu
     ftKirby_CopyPurin_SpecialAirN_SetStatus, // Jigglypuff
     ftKirby_CopyNess_SpecialAirN_SetStatus, // Ness
     ftKirby_SpecialAirNStart_SetStatus, // Master Hand

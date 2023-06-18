@@ -3,15 +3,15 @@
 void (*ftKirby_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) = 
 {
     ftKirby_CopyMario_SpecialN_SetStatus,
-    jtgt_ovl3_80156DD8,
+    ftKirby_CopyFox_SpecialN_SetStatus,
     ftKirby_CopyDonkey_SpecialNStart_SetStatus,
     jtgt_ovl3_801576CC,
     ftKirby_CopyMario_SpecialN_SetStatus,
-    jtgt_ovl3_80164940,
+    ftKirby_CopyLink_SpecialN_SetStatus,
     jtgt_ovl3_8015F5B0,
     ftKirby_CopyCaptain_SpecialN_SetStatus,
     ftKirby_SpecialNStart_SetStatus,
-    jtgt_ovl3_801538C8,
+    ftKirby_CopyPikachu_SpecialN_SetStatus,
     ftKirby_CopyPurin_SpecialN_SetStatus,
     ftKirby_CopyNess_SpecialN_SetStatus,
     ftKirby_SpecialNStart_SetStatus,
@@ -30,6 +30,7 @@ void (*ftKirby_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
     ftKirby_SpecialNStart_SetStatus,
     ftKirby_SpecialNStart_SetStatus
 };
+
 void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) = 
 {
     ftMario_SpecialN_SetStatus,

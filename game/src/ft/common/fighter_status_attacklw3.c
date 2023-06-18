@@ -46,7 +46,7 @@ void ftCommon_AttackLw3_InitStatusVars(GObj *fighter_gobj)
 
     fp->status_vars.common.attacklw3.is_goto_attacklw3 = FALSE;
 
-    ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_AttackLw3);
+    ftCommon_MotionCountIncSetAttackID(fp, ftMotion_AttackIndex_AttackLw3);
     ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
     ftCommon_Update1PGameAttackStats(fp, 0);
 }

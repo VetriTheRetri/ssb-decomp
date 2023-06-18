@@ -1335,11 +1335,11 @@ glabel ftKirby_SpecialAirN_StatusList
   /* 56F58 103498 80188A58 */  .4byte ftKirby_CopyDonkey_SpecialAirNStart_SetStatus
   /* 56F5C 10349C 80188A5C */  .4byte jtgt_ovl3_80157744
   /* 56F60 1034A0 80188A60 */  .4byte ftKirby_CopyMario_SpecialAirN_SetStatus
-  /* 56F64 1034A4 80188A64 */  .4byte jtgt_ovl3_801649C0
+  /* 56F64 1034A4 80188A64 */  .4byte ftKirby_CopyLink_SpecialAirN_SetStatus
   /* 56F68 1034A8 80188A68 */  .4byte jtgt_ovl3_8015F60C
   /* 56F6C 1034AC 80188A6C */  .4byte ftKirby_CopyCaptain_SpecialAirN_SetStatus
   /* 56F70 1034B0 80188A70 */  .4byte ftKirby_SpecialAirNStart_SetStatus
-  /* 56F74 1034B4 80188A74 */  .4byte jtgt_ovl3_80153908
+  /* 56F74 1034B4 80188A74 */  .4byte ftKirby_CopyPikachu_SpecialAirN_SetStatus
   /* 56F78 1034B8 80188A78 */  .4byte ftKirby_CopyPurin_SpecialAirN_SetStatus
   /* 56F7C 1034BC 80188A7C */  .4byte ftKirby_CopyNess_SpecialAirN_SetStatus
   /* 56F80 1034C0 80188A80 */  .4byte ftKirby_SpecialAirNStart_SetStatus
@@ -1455,11 +1455,11 @@ glabel ftKirby_SpecialN_StatusList
   /* 57108 103648 80188C08 */  .4byte ftKirby_CopyDonkey_SpecialNStart_SetStatus
   /* 5710C 10364C 80188C0C */  .4byte jtgt_ovl3_801576CC
   /* 57110 103650 80188C10 */  .4byte ftKirby_CopyMario_SpecialN_SetStatus
-  /* 57114 103654 80188C14 */  .4byte jtgt_ovl3_80164940
+  /* 57114 103654 80188C14 */  .4byte ftKirby_CopyLink_SpecialN_SetStatus
   /* 57118 103658 80188C18 */  .4byte jtgt_ovl3_8015F5B0
   /* 5711C 10365C 80188C1C */  .4byte ftKirby_CopyCaptain_SpecialN_SetStatus
   /* 57120 103660 80188C20 */  .4byte ftKirby_SpecialNStart_SetStatus
-  /* 57124 103664 80188C24 */  .4byte jtgt_ovl3_801538C8
+  /* 57124 103664 80188C24 */  .4byte ftKirby_CopyPikachu_SpecialN_SetStatus
   /* 57128 103668 80188C28 */  .4byte ftKirby_CopyPurin_SpecialN_SetStatus
   /* 5712C 10366C 80188C2C */  .4byte ftKirby_CopyNess_SpecialN_SetStatus
   /* 57130 103670 80188C30 */  .4byte ftKirby_SpecialNStart_SetStatus

@@ -128,6 +128,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f
     if (article_gobj == NULL)
     {
         itManager_SetPrevAlloc(ap);
+
         return NULL;
     }
     attributes = (atCommonAttributes*) ((uintptr_t)*spawn_data->p_file + (intptr_t)spawn_data->offset);
@@ -206,7 +207,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f
     ap->article_hit.shield_damage = attributes->shield_damage;
     ap->article_hit.hit_sfx = attributes->hit_sfx;
     ap->article_hit.priority = attributes->priority;
-    ap->article_hit.can_rehit_hurt = attributes->unk_atca_0x3C_b4;
+    ap->article_hit.can_rehit_hurt = attributes->can_rehit_hurt;
     ap->article_hit.flags_0x4C_b2 = attributes->unk_atca_0x3C_b5;
     ap->article_hit.can_rehit_shield = FALSE;
     ap->article_hit.can_hop = attributes->can_hop;
@@ -214,9 +215,10 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f
     ap->article_hit.can_shield = attributes->can_shield;
     ap->article_hit.hitbox_count = attributes->hitbox_count;
     ap->article_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
-    ap->article_hit.attack_id = 0;
+
+    ap->article_hit.attack_id = ftMotion_AttackIndex_None;
     ap->article_hit.stat_count = gmCommon_GetMotionCountInc();
-    ap->article_hit.stat_flags.attack_group_id = 0x39;
+    ap->article_hit.stat_flags.attack_group_id = ftStatus_AttackIndex_Null;
     ap->article_hit.stat_flags.is_smash_attack = ap->article_hit.stat_flags.is_ground_or_air = ap->article_hit.stat_flags.is_special_attack = FALSE;
     ap->article_hit.stat_count = gmCommon_GetStatUpdateCountInc();
 

@@ -36,7 +36,7 @@ void ftFox_SpecialN_ProcInterrupt(GObj *fighter_gobj)
         }
         else ftFox_SpecialN_SetStatus(fighter_gobj);
 
-        ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_SpecialN);
+        ftCommon_MotionCountIncSetAttackID(fp, ftMotion_AttackIndex_SpecialN);
         ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
         ftCommon_Update1PGameAttackStats(fp, 0);
     }

@@ -36,7 +36,7 @@ void func_ovl2_800D7994(GObj *fighter_gobj)
     {
     case Ft_Kind_Kirby:
     case Ft_Kind_PolyKirby:
-        func_ovl3_80164650(fighter_gobj);
+        ftKirby_CopyLink_SpecialN_DestroyBoomerang(fighter_gobj);
         break;
 
     case Ft_Kind_Link:
@@ -147,9 +147,9 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->is_shuffle_electric = FALSE;
     fp->shuffle_timer = 0;
 
-    fp->attack_id = 0;
+    fp->attack_id = ftMotion_AttackIndex_None;
     fp->motion_count = 0;
-    fp->stat_flags.attack_group_id = 0;
+    fp->stat_flags.attack_group_id = ftStatus_AttackIndex_None;
     fp->stat_flags.is_smash_attack = fp->stat_flags.is_ground_or_air = fp->stat_flags.is_special_attack = FALSE;
 
     fp->stat_count = fp->damage_stat_count = 0;

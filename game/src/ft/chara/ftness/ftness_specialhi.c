@@ -17,9 +17,9 @@ void ftNess_SpecialHi_DecThunderTimers(Fighter_Struct *fp)
 
     if (fp->fighter_vars.ness.is_thunder_destroy & TRUE)
     {
-        if (fp->status_vars.ness.specialhi.pk_thunder_end_delay != 0)
+        if (fp->status_vars.ness.specialhi.pkthunder_end_delay != 0)
         {
-            fp->status_vars.ness.specialhi.pk_thunder_end_delay--;
+            fp->status_vars.ness.specialhi.pkthunder_end_delay--;
         }
     }
 }
@@ -43,7 +43,7 @@ void ftNess_SpecialHi_CreatePKThunder(GObj *fighter_gobj)
     vel.y = FTNESS_PKTHUNDER_SPAWN_VEL_Y;
     vel.x = 0.0F;
 
-    fp->status_vars.ness.specialhi.pk_thunder_gobj = func_ovl3_8016B2C4(fighter_gobj, &pos, &vel);
+    fp->status_vars.ness.specialhi.pkthunder_gobj = func_ovl3_8016B2C4(fighter_gobj, &pos, &vel);
 }
 
 // 0x80153CFC
@@ -55,35 +55,35 @@ bool32 ftNess_SpecialHi_CheckCollidePKThunder(GObj *fighter_gobj)
     f32 item_dobj_y;
     f32 collide_x;
     f32 collide_y;
-    GObj *pk_thunder_gobj;
+    GObj *pkthunder_gobj;
     Weapon_Struct *ip;
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    pk_thunder_gobj = fp->status_vars.ness.specialhi.pk_thunder_gobj;
+    pkthunder_gobj = fp->status_vars.ness.specialhi.pkthunder_gobj;
 
     if (fp->status_vars.ness.specialhi.pk_jibaku_delay != 0) return FALSE;
 
-    if ((fp->fighter_vars.ness.is_thunder_destroy & TRUE) || (pk_thunder_gobj == NULL)) return FALSE;
+    if ((fp->fighter_vars.ness.is_thunder_destroy & TRUE) || (pkthunder_gobj == NULL)) return FALSE;
 
-    ip = wpGetStruct(pk_thunder_gobj);
+    ip = wpGetStruct(pkthunder_gobj);
 
     fighter_dobj_x = DObjGetStruct(fighter_gobj)->translate.x;
-    item_dobj_x = DObjGetStruct(pk_thunder_gobj)->translate.x;
+    item_dobj_x = DObjGetStruct(pkthunder_gobj)->translate.x;
 
     collide_x = (fighter_dobj_x < item_dobj_x) ? -(fighter_dobj_x - item_dobj_x) : (fighter_dobj_x - item_dobj_x);
 
     if (collide_x < FTNESS_PKTHUNDER_COLLIDE_X)
     {
         fighter_dobj_y = DObjGetStruct(fighter_gobj)->translate.y + 150.0F;
-        item_dobj_y = DObjGetStruct(pk_thunder_gobj)->translate.y;
+        item_dobj_y = DObjGetStruct(pkthunder_gobj)->translate.y;
 
         collide_y = (fighter_dobj_y < item_dobj_y) ? -(fighter_dobj_y - item_dobj_y) : (fighter_dobj_y - item_dobj_y);
 
         if (collide_y < FTNESS_PKTHUNDER_COLLIDE_Y)
         {
-            ip->item_vars.pk_thunder.pk_thunder_state = wpNessThunderStatus_Collide;
+            ip->item_vars.pkthunder.pkthunder_state = wpNessThunderStatus_Collide;
 
-            fp->status_vars.ness.specialhi.pk_thunder_pos = DObjGetStruct(pk_thunder_gobj)->translate;
+            fp->status_vars.ness.specialhi.pkthunder_pos = DObjGetStruct(pkthunder_gobj)->translate;
 
             return TRUE;
         }
@@ -108,9 +108,9 @@ void ftNess_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->status_vars.ness.specialhi.pk_thunder_gravity_delay != 0)
+    if (fp->status_vars.ness.specialhi.pkthunder_gravity_delay != 0)
     {
-        fp->status_vars.ness.specialhi.pk_thunder_gravity_delay--;
+        fp->status_vars.ness.specialhi.pkthunder_gravity_delay--;
     }
     func_ovl2_800D8BB4(fighter_gobj);
 }
@@ -121,9 +121,9 @@ void ftNess_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (fp->status_vars.ness.specialhi.pk_thunder_gravity_delay != 0)
+    if (fp->status_vars.ness.specialhi.pkthunder_gravity_delay != 0)
     {
-        fp->status_vars.ness.specialhi.pk_thunder_gravity_delay--;
+        fp->status_vars.ness.specialhi.pkthunder_gravity_delay--;
     }
     else func_ovl2_800D8D68(fp, 0.5F, attributes->fall_speed_max);
 
@@ -168,10 +168,10 @@ void ftNess_SpecialHi_InitStatusVars(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.ness.specialhi.pk_jibaku_delay = FTNESS_PK_JIBAKU_DELAY;
-    fp->status_vars.ness.specialhi.pk_thunder_end_delay = FTNESS_PKTHUNDER_END_DELAY;
-    fp->status_vars.ness.specialhi.pk_thunder_gravity_delay = FTNESS_PKTHUNDER_GRAVITY_DELAY;
+    fp->status_vars.ness.specialhi.pkthunder_end_delay = FTNESS_PKTHUNDER_END_DELAY;
+    fp->status_vars.ness.specialhi.pkthunder_gravity_delay = FTNESS_PKTHUNDER_GRAVITY_DELAY;
     fp->fighter_vars.ness.is_thunder_destroy = FALSE;
-    fp->fighter_vars.ness.pk_thunder_trail_id = 0;
+    fp->fighter_vars.ness.pkthunder_trail_id = 0;
 }
 
 // 0x80153FF0
@@ -200,17 +200,17 @@ void ftNess_SpecialAirHiStart_SetStatus(GObj *fighter_gobj)
 void ftNess_SpecialHi_UpdatePKThunder(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *weapon_gobj = fp->status_vars.ness.specialhi.pk_thunder_gobj;
+    GObj *weapon_gobj = fp->status_vars.ness.specialhi.pkthunder_gobj;
 
     if (weapon_gobj == NULL)
     {
         fp->fighter_vars.ness.is_thunder_destroy |= TRUE;
     }
-    fp->fighter_vars.ness.pk_thunder_trail_id++;
+    fp->fighter_vars.ness.pkthunder_trail_id++;
 
-    if (fp->fighter_vars.ness.pk_thunder_trail_id >= FTNESS_PKTHUNDER_TRAIL_POS_COUNT)
+    if (fp->fighter_vars.ness.pkthunder_trail_id >= FTNESS_PKTHUNDER_TRAIL_POS_COUNT)
     {
-        fp->fighter_vars.ness.pk_thunder_trail_id = 0;
+        fp->fighter_vars.ness.pkthunder_trail_id = 0;
     }
     ftNess_SpecialHi_DecThunderTimers(fp);
 }
@@ -223,7 +223,7 @@ void ftNess_SpecialHiHold_ProcUpdate(GObj *fighter_gobj)
     ftNess_SpecialHi_UpdatePKThunder(fighter_gobj);
 
     if ((fp->fighter_vars.ness.pk_jibaku_delay <= 0) &&
-    (fp->fighter_vars.ness.pk_thunder_end_delay <= 0) &&
+    (fp->fighter_vars.ness.pkthunder_end_delay <= 0) &&
     (fp->fighter_vars.ness.is_thunder_destroy & TRUE))
     {
         ftNess_SpecialHiEnd_SetStatus(fighter_gobj);
@@ -243,7 +243,7 @@ void ftNess_SpecialAirHiHold_ProcUpdate(GObj *fighter_gobj)
     ftNess_SpecialHi_UpdatePKThunder(fighter_gobj);
 
     if ((fp->fighter_vars.ness.pk_jibaku_delay <= 0) &&
-    (fp->fighter_vars.ness.pk_thunder_end_delay <= 0) &&
+    (fp->fighter_vars.ness.pkthunder_end_delay <= 0) &&
     (fp->fighter_vars.ness.is_thunder_destroy & TRUE))
     {
         ftNess_SpecialAirHiEnd_SetStatus(fighter_gobj);
@@ -271,13 +271,13 @@ void ftNess_SpecialAirHiHold_ProcMap(GObj *fighter_gobj)
 void ftNess_SpecialHi_SetPKThunderDestroy(GObj *fighter_gobj) // Unused
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *weapon_gobj = fp->status_vars.ness.specialhi.pk_thunder_gobj;
+    GObj *weapon_gobj = fp->status_vars.ness.specialhi.pkthunder_gobj;
 
     if ((!(fp->fighter_vars.ness.is_thunder_destroy & TRUE)) && (weapon_gobj != NULL))
     {
         Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-        ip->item_vars.pk_thunder.pk_thunder_state = wpNessThunderStatus_Destroy;
+        ip->item_vars.pkthunder.pkthunder_state = wpNessThunderStatus_Destroy;
     }
 }
 
@@ -687,8 +687,8 @@ void ftNess_Jibaku_SetStatus(GObj *fighter_gobj)
 
     if ((fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID)) goto block_2func;
     {
-        pos.x = DObjGetStruct(fighter_gobj)->translate.x - fp->status_vars.ness.specialhi.pk_thunder_pos.x;
-        pos.y = (DObjGetStruct(fighter_gobj)->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pk_thunder_pos.y;
+        pos.x = DObjGetStruct(fighter_gobj)->translate.x - fp->status_vars.ness.specialhi.pkthunder_pos.x;
+        pos.y = (DObjGetStruct(fighter_gobj)->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pkthunder_pos.y;
         pos.z = 0.0F;
 
         angle_diff = vec3f_angle_diff(&fp->coll_data.ground_angle, &pos);
@@ -725,8 +725,8 @@ void ftNess_JibakuAir_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *dobj = DObjGetStruct(fighter_gobj);
-    f32 vel_x = dobj->translate.x - fp->status_vars.ness.specialhi.pk_thunder_pos.x;
-    f32 vel_y = (dobj->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pk_thunder_pos.y;
+    f32 vel_x = dobj->translate.x - fp->status_vars.ness.specialhi.pkthunder_pos.x;
+    f32 vel_y = (dobj->translate.y + 150.0F) - fp->status_vars.ness.specialhi.pkthunder_pos.y;
 
     fp->lr = (vel_x >= 0.0F) ? RIGHT : LEFT;
 

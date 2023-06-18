@@ -1517,7 +1517,7 @@ glabel func_ovl2_800D7994
   /* 0531C0 800D79C0 54410008 */      bnel $v0, $at, .L800D79E4
   /* 0531C4 800D79C4 8FBF0014 */        lw $ra, 0x14($sp)
   .L800D79C8:
-  /* 0531C8 800D79C8 0C059194 */       jal func_ovl3_80164650
+  /* 0531C8 800D79C8 0C059194 */       jal ftKirby_CopyLink_SpecialN_DestroyBoomerang
   /* 0531CC 800D79CC 00000000 */       nop 
   /* 0531D0 800D79D0 10000004 */         b .L800D79E4
   /* 0531D4 800D79D4 8FBF0014 */        lw $ra, 0x14($sp)

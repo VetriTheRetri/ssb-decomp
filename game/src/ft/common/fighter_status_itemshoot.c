@@ -145,7 +145,7 @@ void ftCommon_FireFlowerShoot_UpdateAmmoStats(Fighter_Struct *fp, s32 ammo_sub)
     {
         fp->status_vars.common.fireflower.flame_vel_index = 0;
 
-        ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_FireFlowerShoot);
+        ftCommon_MotionCountIncSetAttackID(fp, ftMotion_AttackIndex_FireFlowerShoot);
         ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
         ftCommon_Update1PGameAttackStats(fp, 0);
     }

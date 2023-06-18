@@ -210,7 +210,7 @@ extern GfxColor Item_PKThunder_EnvColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 58, 0
 void wpRender_DisplayPKThunder(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    s32 index = ip->item_vars.pk_thunder_trail.trail_index;
+    s32 index = ip->item_vars.pkthunder_trail.trail_index;
 
     if (ip->display_state == dbObjDisplayStatus_MapCollision)
     {

@@ -92,12 +92,15 @@ typedef enum atKind
     At_Kind_Pakkun,                         // Pirahna Plant
     At_Kind_Mato,                           // Target
     At_Kind_Gr_Bomb,                        // Race to the Finish bomb
-    At_Kind_Gr_Lucky,                       // Chansey (Saffron City)
+
+    At_Kind_GrMonsterStart,                 // Start of stage Pokémon
+    At_Kind_Gr_Lucky=At_Kind_GrMonsterStart,// Chansey (Saffron City)
     At_Kind_Marumine,                       // Electrode
     At_Kind_Hitokage,                       // Charmander
     At_Kind_Fushigibana,                    // Venusaur
     At_Kind_Porygon,                        // Porygon
     At_Kind_GroundEnd = At_Kind_Porygon,    // End of stage hazard IDs
+    At_Kind_GrMonsterEnd=At_Kind_GroundEnd, // End of stage Pokémon
 
     // Pokémon
 
@@ -305,7 +308,7 @@ typedef struct atCommonAttributes
     u32 clang : 1;
     u32 hit_sfx : 10;
     u32 priority : 3;
-    u32 unk_atca_0x3C_b4 : 1;
+    u32 can_rehit_hurt : 1;
     u32 unk_atca_0x3C_b5 : 1;
     u32 can_hop : 1;
     u32 can_reflect : 1;
@@ -438,7 +441,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
         Hitokage_ArticleVars hitokage;
         Fushigibana_ArticleVars fushigibana;
         Gr_Bomb_ArticleVars gr_bomb;
-        PK_Fire_ArticleVars pk_fire;
+        PK_Fire_ArticleVars pkfire;
         Link_Bomb_ArticleVars link_bomb;
 
     } article_vars;

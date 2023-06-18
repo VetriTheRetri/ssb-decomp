@@ -176,7 +176,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
 
         ftCommon_GetHammerSetBGM(ap->owner_gobj);
     }
-    else if ((ap->at_kind < At_Kind_Gr_Lucky) || (ap->at_kind >= At_Kind_Iwark))
+    else if ((ap->at_kind < At_Kind_Gr_Lucky) || (ap->at_kind > At_Kind_GrMonsterEnd))
     {
         func_ovl2_800FF590(&DObjGetStruct(article_gobj)->translate);
     }
@@ -239,13 +239,13 @@ void func_ovl3_80172AEC(GObj *article_gobj, Vec3f *vel, f32 stale)
     Article_Struct *ap = atGetStruct(article_gobj);
     GObj *owner_gobj = ap->owner_gobj;
     Fighter_Struct *fp = ftGetStruct(owner_gobj);
-    void (*cb_drop)(GObj*) = Article_Callback_Drop[ap->at_kind];
+    void (*proc_drop)(GObj*) = Article_Callback_Drop[ap->at_kind];
 
-    if (cb_drop != NULL)
+    if (proc_drop != NULL)
     {
-        cb_drop(article_gobj);
+        proc_drop(article_gobj);
     }
-    func_ovl3_80172984(article_gobj, vel, stale, 0x38U, fp->stat_count);
+    func_ovl3_80172984(article_gobj, vel, stale, ftStatus_AttackIndex_ItemThrow, fp->stat_count);
 
     func_800269C0(ap->drop_sfx);
 }
@@ -399,10 +399,8 @@ void atCommon_UpdateArticleStatus(GObj *article_gobj, ArticleStatusDesc *p_desc,
 
     ap->x2CF_flag_b2 = FALSE;
 
-    ap->article_hit.stat_flags.attack_group_id = 0x39U;
-    ap->article_hit.stat_flags.is_smash_attack =
-    ap->article_hit.stat_flags.is_ground_or_air =
-    ap->article_hit.stat_flags.is_special_attack = FALSE;
+    ap->article_hit.stat_flags.attack_group_id = ftStatus_AttackIndex_Null;
+    ap->article_hit.stat_flags.is_smash_attack = ap->article_hit.stat_flags.is_ground_or_air = ap->article_hit.stat_flags.is_special_attack = FALSE;
 
     ap->article_hit.stat_count = gmCommon_GetStatUpdateCountInc();
 }
@@ -475,7 +473,7 @@ u8 func_ovl3_80173090(Unk_8018D048 *arg0) // Might actually be raw u8
     return *(u8*)(func_ovl3_8017301C(rand_u16_range((s32)arg0->unk_0x10), arg0, 0, arg0->unk_0x8) + arg0->unk_0xC);
 }
 
-extern u8 hal_ld_article_floats;
+extern intptr_t hal_ld_article_floats;
 
 static Unk_8018D048 D_ovl3_8018D048;
 
@@ -492,7 +490,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
         if (index <= At_Kind_CommonEnd)
         {
             vel.x = 0.0F;
-            vel.y = *(f32*)(&hal_ld_article_floats + ((uintptr_t)&Article_File_Data->spawn_vel_y[index])); // Linker thing
+            vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&Article_File_Data->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
             if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE)) != NULL)
@@ -524,38 +522,6 @@ void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent *event)
     }
 }
 
-struct RecordCharCombo {
-    /* 0x00 */ u16 gamesWith;
-    /* 0x02 */ u16 playedAgainst;
-}; // size == 4
-
-struct VsRecordData {
-    /* 0x00 */ u16 kos[12];
-    /* 0x18 */ u32 timeUsed; //< in seconds
-    /* 0x1C */ u32 damageDealt;
-    /* 0x20 */ u32 damageReceived;
-    /* 0x24 */ u16 totalSDs;
-    /* 0x26 */ u16 gamesPlayed;
-    /* 0x28 */ u16 gamesPlayedAgainst;
-    /* 0x2C */ struct RecordCharCombo combinations[12];
-}; // size == 0x5C
-
-// is this the saved data structure?
-struct gmSaveInfo {
-    /* 0x000 */ struct VsRecordData vsRecords[12];
-    /* 0x450 */ u8 unk540[(0x5EC - 0x450)];
-}; // size == 0x5EC
-
-struct gmSceneInfo {
-    /* 0x00 */ u8 scene;
-    /* 0x01 */ u8 pad01[0x13 - 0x01];
-    u8 player_port;
-    u8 filler_0x14[0x48 - 0x14];
-}; // size == 0x48
-
-
-extern struct gmSaveInfo Save_Info;
-extern struct gmSceneInfo Scene_Info;
 extern s8 gmBonusStat_MewCatcher;
 
 GObj* func_ovl3_80173228(GObj *article_gobj)
@@ -574,7 +540,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
 
     // Is this checking to spawn Mew?
 
-    if ((Save_Info.unk540[7] & 0xF) && ((rand_u16_range(151) == 0)) && (Monster_Info.monster_curr != At_Kind_Mew) && (Monster_Info.monster_prev != At_Kind_Mew))
+    if ((Save_Info.unlock_mask & 0xF) && ((rand_u16_range(151) == 0)) && (Monster_Info.monster_curr != At_Kind_Mew) && (Monster_Info.monster_prev != At_Kind_Mew))
     {
         index = At_Kind_Mew;
     }

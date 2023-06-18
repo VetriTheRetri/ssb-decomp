@@ -222,8 +222,8 @@ typedef struct _Weapon_Struct
         SamusBomb_WeaponVars samus_bomb;
         ThunderJolt_WeaponVars thunder_jolt;
         Thunder_WeaponVars thunder;
-        PKThunder_WeaponVars pk_thunder;
-        PKThunder_Trail_WeaponVars pk_thunder_trail;
+        PKThunder_WeaponVars pkthunder;
+        PKThunder_Trail_WeaponVars pkthunder_trail;
         EggThrow_WeaponVars egg_throw;
         SpinAttack_WeaponVars spin_attack; // Link's Up Special
         Boomerang_WeaponVars boomerang;

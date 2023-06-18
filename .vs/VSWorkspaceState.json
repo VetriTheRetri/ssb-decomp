@@ -6,11 +6,11 @@
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
     "\\game\\src\\ft\\chara\\ftfox",
-    "\\game\\src\\ft\\chara\\ftmario",
-    "\\game\\src\\ft\\chara\\ftness",
-    "\\game\\src\\ft\\chara\\ftpikachu",
-    "\\game\\src\\ft\\chara\\ftyoshi"
+    "\\game\\src\\ft\\common",
+    "\\game\\src\\it",
+    "\\game\\src\\it\\article",
+    "\\game\\src\\ovl2"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftfox\\ftfox_speciallw.c",
+  "SelectedNode": "\\game\\src\\ft\\chara\\ftkirby\\ftkirby_copylink_specialn.c",
   "PreviewInSolutionExplorer": false
 }

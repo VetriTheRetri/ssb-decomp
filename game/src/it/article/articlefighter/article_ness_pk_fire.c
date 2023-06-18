@@ -12,7 +12,7 @@ bool32 func_ovl3_80185374(GObj *article_gobj)
 {
     s32 unused1[4];
     Article_Struct *ap = atGetStruct(article_gobj);
-    Effect_Info *effect = ap->article_vars.pk_fire.effect;
+    Effect_Info *effect = ap->article_vars.pkfire.effect;
     atCommonAttributes *attributes;
     f32 lifetime_scale = ((ap->lifetime * (f32)0.5) / 100.0F) + (f32)0.5;
 
@@ -202,13 +202,13 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 
         if (effect_info != NULL)
         {
-            ap->article_vars.pk_fire.effect = effect_info;
+            ap->article_vars.pkfire.effect = effect_info;
 
             func_ovl0_800CEA14(effect_unk);
 
             if (effect_info->unk_effect_0x2A == 0)
             {
-                ap->article_vars.pk_fire.effect = NULL;
+                ap->article_vars.pkfire.effect = NULL;
 
             }
             else effect_info->translate = *pos;
@@ -217,12 +217,12 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
         {
             func_ovl0_800CEA40(effect_unk);
 
-            ap->article_vars.pk_fire.effect = NULL;
+            ap->article_vars.pkfire.effect = NULL;
         }
     }
     else
     {
-        ap->article_vars.pk_fire.effect = NULL;
+        ap->article_vars.pkfire.effect = NULL;
     }
     return article_gobj;
 }

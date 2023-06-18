@@ -25,7 +25,6 @@ bool32 func_ovl3_8016CCA0(GObj *weapon_gobj)
     if (ip->item_vars.boomerang.homing_delay > 0)
     {
         ip->item_vars.boomerang.homing_delay--;
-
     }
     else
     {
@@ -235,7 +234,7 @@ void func_ovl3_8016D35C(GObj *weapon_gobj, f32 distance)
             {
                 if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby))
                 {
-                    func_ovl3_80164A40(ip->item_vars.boomerang.spawn_gobj);
+                    ftKirby_CopyLink_SpecialNReturn_SetStatus(ip->item_vars.boomerang.spawn_gobj);
                 }
                 else
                 {

@@ -36,7 +36,7 @@ void ftKirby_CopyFox_SpecialN_ProcInterrupt(GObj *fighter_gobj)
         }
         else ftKirby_CopyFox_SpecialN_SetStatus(fighter_gobj);
 
-        ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_SpecialNCopyFox);
+        ftCommon_MotionCountIncSetAttackID(fp, ftMotion_AttackIndex_SpecialNCopyFox);
         ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
         ftCommon_Update1PGameAttackStats(fp, 0);
     }

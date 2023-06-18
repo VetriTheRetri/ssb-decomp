@@ -11,21 +11,21 @@
 typedef struct ftNess_FighterVars
 {
     bool32 is_thunder_destroy;      // Bool to check if PK Thunder exists
-    s32 pk_thunder_trail_id;
-    s16 pk_thunder_trail_x[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];
-    s16 pk_thunder_trail_y[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];
+    s32 pkthunder_trail_id;
+    s16 pkthunder_trail_x[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];
+    s16 pkthunder_trail_y[FTNESS_PKTHUNDER_TRAIL_POS_COUNT];
 
 } ftNess_FighterVars;
 
 typedef struct ftNess_SpecialHi_StatusVars
 {
     s32 pk_jibaku_delay;            // Frames before PK Thunder Blast can be initiated (PK Thunder will go through Ness while this timer is greater than 0)
-    s32 pk_thunder_end_delay;       // Frames before PK Thunder transitions to its ending animation after the projectile despawns 
-    s32 pk_thunder_gravity_delay;   // Frames before Ness is affected by gravity while performing PK Thunder
-    GObj *pk_thunder_gobj;          // Pointer to the PK Thunder object
+    s32 pkthunder_end_delay;       // Frames before PK Thunder transitions to its ending animation after the projectile despawns 
+    s32 pkthunder_gravity_delay;   // Frames before Ness is affected by gravity while performing PK Thunder
+    GObj *pkthunder_gobj;          // Pointer to the PK Thunder object
     s32 pk_jibaku_anim_length;      // Number of frames PK Thunder Blast will loop
     f32 pk_jibaku_angle;            // Angle of PK Thunder Blast (converted to 2D velocity vector with sin(vel) and cos(vel))
-    Vec3f pk_thunder_pos;           // Might be PK Thunder's collision detection when checking if Ness is hitting himself with it?
+    Vec3f pkthunder_pos;           // Might be PK Thunder's collision detection when checking if Ness is hitting himself with it?
 
 } ftNess_SpecialHi_StatusVars;
 

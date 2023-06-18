@@ -3788,7 +3788,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         }
         damage = fp->attack_damage;
 
-        if (fp->stat_flags.attack_group_id == 0x2B)
+        if (fp->stat_flags.attack_group_id == ftStatus_AttackIndex_BatSwing4)
         {
             func_ovl2_800E806C(fp, 10, 0);
         }

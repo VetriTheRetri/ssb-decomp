@@ -3,13 +3,13 @@
 #include "ftness.h"
 
 #define pktGetGObj(ip, i) \
-((GObj*)ip->item_vars.pk_thunder.trail_gobj[i])
+((GObj*)ip->item_vars.pkthunder.trail_gobj[i])
 
 #define pktTrailGetGObj(ip, i) \
-((GObj*)ip->item_vars.pk_thunder_trail.trail_gobj[i])
+((GObj*)ip->item_vars.pkthunder_trail.trail_gobj[i])
 
 #define pktGetTrailPosIndex(fp) \
-(ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_y))
+(ARRAY_COUNT(fp->fighter_vars.ness.pkthunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pkthunder_trail_y))
 
 void func_ovl3_8016AD30(GObj *weapon_gobj, bool32 is_destroy)
 {
@@ -20,7 +20,7 @@ void func_ovl3_8016AD30(GObj *weapon_gobj, bool32 is_destroy)
 
     ip = wpGetStruct(weapon_gobj);
 
-    if (!(ip->item_vars.pk_thunder.pk_thunder_state & wpNessThunderStatus_Destroy))
+    if (!(ip->item_vars.pkthunder.pkthunder_state & wpNessThunderStatus_Destroy))
     {
         fp = ftGetStruct(ip->owner_gobj);
 
@@ -31,21 +31,21 @@ void func_ovl3_8016AD30(GObj *weapon_gobj, bool32 is_destroy)
     }
     fp = ftGetStruct(ip->owner_gobj);
 
-    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1; i++)
+    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pkthunder.trail_gobj) - 1; i++)
     {
         if (pktGetGObj(ip, i) != NULL)
         {
             ip2 = wpGetStruct(pktGetGObj(ip, i));
-            ip2->item_vars.pk_thunder_trail.pk_thunder_trail_state = wpNessThunderStatus_Destroy;
-            ip->item_vars.pk_thunder.trail_gobj[i] = NULL;
+            ip2->item_vars.pkthunder_trail.pkthunder_trail_state = wpNessThunderStatus_Destroy;
+            ip->item_vars.pkthunder.trail_gobj[i] = NULL;
         }
     }
 
-    if (pktGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1) != NULL)
+    if (pktGetGObj(ip, ARRAY_COUNT(ip->item_vars.pkthunder.trail_gobj) - 1) != NULL)
     {
-        ip3 = wpGetStruct(pktGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1));
+        ip3 = wpGetStruct(pktGetGObj(ip, ARRAY_COUNT(ip->item_vars.pkthunder.trail_gobj) - 1));
         ip3->lr = RIGHT;
-        ip->item_vars.pk_thunder.trail_gobj[ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj) - 1] = NULL;
+        ip->item_vars.pkthunder.trail_gobj[ARRAY_COUNT(ip->item_vars.pkthunder.trail_gobj) - 1] = NULL;
     }
 }
 
@@ -56,15 +56,15 @@ void func_ovl3_8016ADF4(GObj *weapon_gobj)
 
     if (fp->player_number == ip->player_number)
     {
-        s32 trail_pos_id = fp->fighter_vars.ness.pk_thunder_trail_id - 1;
+        s32 trail_pos_id = fp->fighter_vars.ness.pkthunder_trail_id - 1;
 
         if (trail_pos_id < 0)
         {
-            trail_pos_id += (ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_y));
+            trail_pos_id += (ARRAY_COUNT(fp->fighter_vars.ness.pkthunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pkthunder_trail_y));
         }
 
-        fp->fighter_vars.ness.pk_thunder_trail_x[trail_pos_id] = DObjGetStruct(weapon_gobj)->translate.x;
-        fp->fighter_vars.ness.pk_thunder_trail_y[trail_pos_id] = DObjGetStruct(weapon_gobj)->translate.y;
+        fp->fighter_vars.ness.pkthunder_trail_x[trail_pos_id] = DObjGetStruct(weapon_gobj)->translate.x;
+        fp->fighter_vars.ness.pkthunder_trail_y[trail_pos_id] = DObjGetStruct(weapon_gobj)->translate.y;
     }
 }
 
@@ -88,7 +88,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *weapon_gobj) // PK Thunder physics callback?
     Vec3f stick_angle;
     Vec3f thunder_angle;
 
-    if (ip->item_vars.pk_thunder.pk_thunder_state & wpNessThunderStatus_Destroy)
+    if (ip->item_vars.pkthunder.pkthunder_state & wpNessThunderStatus_Destroy)
     {
         func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, ip->item_hit.damage);
         func_ovl3_8016AD30(weapon_gobj, TRUE);
@@ -97,7 +97,7 @@ bool32 jtgt_ovl3_8016AEA8(GObj *weapon_gobj) // PK Thunder physics callback?
 
     fp = ftGetStruct(ip->owner_gobj);
 
-    if (ip->item_vars.pk_thunder.pk_thunder_state & wpNessThunderStatus_Collide)
+    if (ip->item_vars.pkthunder.pkthunder_state & wpNessThunderStatus_Collide)
     {
         func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, ip->item_hit.damage);
         func_ovl3_8016AD30(weapon_gobj, TRUE);
@@ -132,17 +132,17 @@ bool32 jtgt_ovl3_8016AEA8(GObj *weapon_gobj) // PK Thunder physics callback?
 
             if (QUART_PI32 <= angle_diff)
             {
-                ip->item_vars.pk_thunder.angle = (thunder_angle.z > 0.0F) ? ip->item_vars.pk_thunder.angle + ITPKTHUNDER_ANGLE_STEP : ip->item_vars.pk_thunder.angle - ITPKTHUNDER_ANGLE_STEP;
+                ip->item_vars.pkthunder.angle = (thunder_angle.z > 0.0F) ? ip->item_vars.pkthunder.angle + ITPKTHUNDER_ANGLE_STEP : ip->item_vars.pkthunder.angle - ITPKTHUNDER_ANGLE_STEP;
             }
             if (angle_diff < QUART_PI32)
             {
-                ip->item_vars.pk_thunder.angle = (thunder_angle.z > 0.0F) ? ip->item_vars.pk_thunder.angle + (angle_diff / ITPKTHUNDER_ANGLE_DIV) : ip->item_vars.pk_thunder.angle - (angle_diff / ITPKTHUNDER_ANGLE_DIV);
+                ip->item_vars.pkthunder.angle = (thunder_angle.z > 0.0F) ? ip->item_vars.pkthunder.angle + (angle_diff / ITPKTHUNDER_ANGLE_DIV) : ip->item_vars.pkthunder.angle - (angle_diff / ITPKTHUNDER_ANGLE_DIV);
             }
-            ip->phys_info.vel.x = cosf(ip->item_vars.pk_thunder.angle) * ITPKTHUNDER_VEL;
-            ip->phys_info.vel.y = __sinf(ip->item_vars.pk_thunder.angle) * ITPKTHUNDER_VEL;
+            ip->phys_info.vel.x = cosf(ip->item_vars.pkthunder.angle) * ITPKTHUNDER_VEL;
+            ip->phys_info.vel.y = __sinf(ip->item_vars.pkthunder.angle) * ITPKTHUNDER_VEL;
             ip->phys_info.vel.z = 0.0F;
 
-            DObjGetStruct(weapon_gobj)->rotate.z = ip->item_vars.pk_thunder.angle - HALF_PI32;
+            DObjGetStruct(weapon_gobj)->rotate.z = ip->item_vars.pkthunder.angle - HALF_PI32;
         }
     }
     else
@@ -182,11 +182,11 @@ bool32 jtgt_ovl3_8016B22C(GObj *weapon_gobj) // Behold, PK Thunder's dangerous r
     Fighter_Struct *fp;
     Vec3f pos = DObjGetStruct(weapon_gobj)->translate; // Get current position
 
-    func_ovl3_8016B898(weapon_gobj, &pos, ip->item_vars.pk_thunder.angle); // Spawn whole new PK Thunder instance
+    func_ovl3_8016B898(weapon_gobj, &pos, ip->item_vars.pkthunder.angle); // Spawn whole new PK Thunder instance
 
-    ip->owner_gobj = ip->item_vars.pk_thunder.spawn_gobj;
+    ip->owner_gobj = ip->item_vars.pkthunder.spawn_gobj;
 
-    fp = ftGetStruct(ip->item_vars.pk_thunder.spawn_gobj);
+    fp = ftGetStruct(ip->item_vars.pkthunder.spawn_gobj);
 
     ip->player_number = fp->player_number;
 
@@ -220,18 +220,18 @@ GObj *func_ovl3_8016B2C4(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create P
 
     ip->phys_info.vel = *vel;
 
-    ip->item_vars.pk_thunder.pk_thunder_state = wpNessThunderStatus_Active;
-    ip->item_vars.pk_thunder.angle = HALF_PI32;
-    ip->item_vars.pk_thunder.spawn_gobj = fighter_gobj;
+    ip->item_vars.pkthunder.pkthunder_state = wpNessThunderStatus_Active;
+    ip->item_vars.pkthunder.angle = HALF_PI32;
+    ip->item_vars.pkthunder.spawn_gobj = fighter_gobj;
 
     ip->is_camera_follow = TRUE;
 
-    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj); i++)
+    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pkthunder.trail_gobj); i++)
     {
-        ip->item_vars.pk_thunder.trail_gobj[i] = NULL;
+        ip->item_vars.pkthunder.trail_gobj[i] = NULL;
     }
 
-    DObjGetStruct(weapon_gobj)->rotate.z = ip->item_vars.pk_thunder.angle - HALF_PI32; // Bruh this effectively makes it 0.0F due to its init a few lines above
+    DObjGetStruct(weapon_gobj)->rotate.z = ip->item_vars.pkthunder.angle - HALF_PI32; // Bruh this effectively makes it 0.0F due to its init a few lines above
 
     return weapon_gobj;
 }
@@ -242,38 +242,38 @@ bool32 func_ovl3_8016B398(GObj *weapon_gobj)
     s32 index;
     Fighter_Struct *fp;
 
-    if (ip->item_vars.pk_thunder_trail.pk_thunder_trail_state & wpNessThunderStatus_Destroy) return TRUE;
+    if (ip->item_vars.pkthunder_trail.pkthunder_trail_state & wpNessThunderStatus_Destroy) return TRUE;
 
     fp = ftGetStruct(ip->owner_gobj);
 
-    index = (fp->fighter_vars.ness.pk_thunder_trail_id - (ip->item_vars.pk_thunder_trail.trail_index * 2)) - 2;
+    index = (fp->fighter_vars.ness.pkthunder_trail_id - (ip->item_vars.pkthunder_trail.trail_index * 2)) - 2;
 
     if (index < 0)
     {
-        index += (ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pk_thunder_trail_y));
+        index += (ARRAY_COUNT(fp->fighter_vars.ness.pkthunder_trail_x) | ARRAY_COUNT(fp->fighter_vars.ness.pkthunder_trail_y));
     }
 
-    DObjGetStruct(weapon_gobj)->translate.x = fp->fighter_vars.ness.pk_thunder_trail_x[index];
-    DObjGetStruct(weapon_gobj)->translate.y = fp->fighter_vars.ness.pk_thunder_trail_y[index];
+    DObjGetStruct(weapon_gobj)->translate.x = fp->fighter_vars.ness.pkthunder_trail_x[index];
+    DObjGetStruct(weapon_gobj)->translate.y = fp->fighter_vars.ness.pkthunder_trail_y[index];
 
     if (index > 0)
     {
-        DObjGetStruct(weapon_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pk_thunder_trail_y[index] - fp->fighter_vars.ness.pk_thunder_trail_y[index - 1]), (fp->fighter_vars.ness.pk_thunder_trail_x[index] - fp->fighter_vars.ness.pk_thunder_trail_x[index - 1]));
+        DObjGetStruct(weapon_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pkthunder_trail_y[index] - fp->fighter_vars.ness.pkthunder_trail_y[index - 1]), (fp->fighter_vars.ness.pkthunder_trail_x[index] - fp->fighter_vars.ness.pkthunder_trail_x[index - 1]));
     }
     else
     {
-        DObjGetStruct(weapon_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pk_thunder_trail_y[index] - fp->fighter_vars.ness.pk_thunder_trail_y[pktGetTrailPosIndex(fp) - 1]), (fp->fighter_vars.ness.pk_thunder_trail_x[index] - fp->fighter_vars.ness.pk_thunder_trail_x[pktGetTrailPosIndex(fp) - 1]));
+        DObjGetStruct(weapon_gobj)->rotate.z = atan2f((fp->fighter_vars.ness.pkthunder_trail_y[index] - fp->fighter_vars.ness.pkthunder_trail_y[pktGetTrailPosIndex(fp) - 1]), (fp->fighter_vars.ness.pkthunder_trail_x[index] - fp->fighter_vars.ness.pkthunder_trail_x[pktGetTrailPosIndex(fp) - 1]));
     }
 
     DObjGetStruct(weapon_gobj)->rotate.z -= HALF_PI32;
 
 
-    if ((ip->item_vars.pk_thunder_trail.trail_index < (ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
+    if ((ip->item_vars.pkthunder_trail.trail_index < (ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
     {
-        func_ovl3_8016AE64(weapon_gobj, ip->item_vars.pk_thunder_trail.trail_index + 1);
+        func_ovl3_8016AE64(weapon_gobj, ip->item_vars.pkthunder_trail.trail_index + 1);
     }
 
-    if ((ip->item_vars.pk_thunder_trail.trail_index == (ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
+    if ((ip->item_vars.pkthunder_trail.trail_index == (ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
     {
         func_ovl2_80102848(ip->owner_gobj);
     }
@@ -322,21 +322,21 @@ GObj* func_ovl3_8016B580(GObj *head_gobj, Vec3f *pos, s32 trail_index)
     }
     else trail_ip->group_id = head_ip->group_id;
 
-    trail_ip->item_vars.pk_thunder_trail.pk_thunder_trail_state = wpNessThunderStatus_Active;
-    trail_ip->item_vars.pk_thunder_trail.trail_index = trail_index;
-    trail_ip->item_vars.pk_thunder_trail.spawn_gobj = head_gobj;
+    trail_ip->item_vars.pkthunder_trail.pkthunder_trail_state = wpNessThunderStatus_Active;
+    trail_ip->item_vars.pkthunder_trail.trail_index = trail_index;
+    trail_ip->item_vars.pkthunder_trail.spawn_gobj = head_gobj;
 
     if (trail_index != 0)
     {
-        head_gobj = head_ip->item_vars.pk_thunder.trail_gobj[0];
+        head_gobj = head_ip->item_vars.pkthunder.trail_gobj[0];
         head_ip = wpGetStruct(head_gobj);
     }
 
-    trail_ip->item_vars.pk_thunder_trail.trail_gobj[0] = head_gobj;
+    trail_ip->item_vars.pkthunder_trail.trail_gobj[0] = head_gobj;
 
-    for (i = 0; i < ARRAY_COUNT(head_ip->item_vars.pk_thunder.trail_gobj); i++)
+    for (i = 0; i < ARRAY_COUNT(head_ip->item_vars.pkthunder.trail_gobj); i++)
     {
-        head_ip->item_vars.pk_thunder.trail_gobj[trail_index] = trail_gobj;
+        head_ip->item_vars.pkthunder.trail_gobj[trail_index] = trail_gobj;
     }
 
     return trail_gobj;
@@ -360,21 +360,21 @@ void func_ovl3_8016B6A0(GObj *weapon_gobj, s32 unused)
 
     ip = wpGetStruct(weapon_gobj);
 
-    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1; i++)
+    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 1; i++)
     {
         if (pktTrailGetGObj(ip, i) != NULL)
         {
             ip2 = wpGetStruct(pktTrailGetGObj(ip, i));
-            ip2->item_vars.pk_thunder_trail.pk_thunder_trail_state = wpNessThunderStatus_Destroy;
-            ip->item_vars.pk_thunder_trail.trail_gobj[i] = NULL;
+            ip2->item_vars.pkthunder_trail.pkthunder_trail_state = wpNessThunderStatus_Destroy;
+            ip->item_vars.pkthunder_trail.trail_gobj[i] = NULL;
         }
     }
 
-    if (pktTrailGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1) != NULL)
+    if (pktTrailGetGObj(ip, ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 1) != NULL)
     {
-        ip3 = wpGetStruct(pktTrailGetGObj(ip, ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1));
+        ip3 = wpGetStruct(pktTrailGetGObj(ip, ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 1));
         ip3->lr = RIGHT;
-        ip->item_vars.pk_thunder_trail.trail_gobj[ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 1] = NULL;
+        ip->item_vars.pkthunder_trail.trail_gobj[ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 1] = NULL;
     }
 }
 
@@ -459,9 +459,9 @@ GObj *func_ovl3_8016B898(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->group_id = wpManager_GetGroupIndexInc();
 
-    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pk_thunder.trail_gobj); i++)
+    for (i = 0; i < ARRAY_COUNT(ip->item_vars.pkthunder.trail_gobj); i++)
     {
-        ip->item_vars.pk_thunder.trail_gobj[i] = NULL;
+        ip->item_vars.pkthunder.trail_gobj[i] = NULL;
     }
 
     localvel.x = DObjGetStruct(new_gobj)->translate.x - DObjGetStruct(ip->owner_gobj)->translate.x;
@@ -484,28 +484,28 @@ bool32 func_ovl3_8016B9E0(GObj *weapon_gobj)
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     s32 trail_index;
 
-    if (ip->item_vars.pk_thunder_trail.pk_thunder_trail_state & wpNessThunderStatus_Destroy)
+    if (ip->item_vars.pkthunder_trail.pkthunder_trail_state & wpNessThunderStatus_Destroy)
     {
         return TRUE;
     }
 
     // Game hangs on the following line when PK Thunder crash occurs (DObjGetStruct returns invalid pointer)
 
-    DObjGetStruct(weapon_gobj)->translate.x = (DObjGetStruct(ip->item_vars.pk_thunder_trail.trail_gobj[0])->translate.x - (ip->phys_info.vel.x * (ip->item_vars.pk_thunder_trail.trail_index + 1.5) * 2.0F));
-    DObjGetStruct(weapon_gobj)->translate.y = (DObjGetStruct(ip->item_vars.pk_thunder_trail.trail_gobj[0])->translate.y - (ip->phys_info.vel.y * (ip->item_vars.pk_thunder_trail.trail_index + 1.5) * 2.0F));
+    DObjGetStruct(weapon_gobj)->translate.x = (DObjGetStruct(ip->item_vars.pkthunder_trail.trail_gobj[0])->translate.x - (ip->phys_info.vel.x * (ip->item_vars.pkthunder_trail.trail_index + 1.5) * 2.0F));
+    DObjGetStruct(weapon_gobj)->translate.y = (DObjGetStruct(ip->item_vars.pkthunder_trail.trail_gobj[0])->translate.y - (ip->phys_info.vel.y * (ip->item_vars.pkthunder_trail.trail_index + 1.5) * 2.0F));
 
-    trail_index = ip->item_vars.pk_thunder_trail.trail_index;
+    trail_index = ip->item_vars.pkthunder_trail.trail_index;
 
-    if ((trail_index < (ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
+    if ((trail_index < (ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
     {
         func_ovl3_8016B65C(weapon_gobj, trail_index + 1);
 
-        trail_index = ip->item_vars.pk_thunder_trail.trail_index;
+        trail_index = ip->item_vars.pkthunder_trail.trail_index;
     }
 
-    if ((trail_index == (ARRAY_COUNT(ip->item_vars.pk_thunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
+    if ((trail_index == (ARRAY_COUNT(ip->item_vars.pkthunder_trail.trail_gobj) - 2)) && (ip->lifetime == (ITPKTHUNDER_LIFETIME - ITPKTHUNDER_SPAWN_TRAIL_TIMER)))
     {
-        func_ovl2_80102968(ip->item_vars.pk_thunder_trail.trail_gobj[0]);
+        func_ovl2_80102968(ip->item_vars.pkthunder_trail.trail_gobj[0]);
     }
 
     wpMain_DecLifeCheckExpire(ip);
@@ -546,19 +546,19 @@ GObj* func_ovl3_8016BB6C(GObj *old_gobj, Vec3f *pos, s32 trail_index)
 
     new_ip->group_id = old_ip->group_id;
 
-    new_ip->item_vars.pk_thunder_trail.pk_thunder_trail_state = wpNessThunderStatus_Active;
-    new_ip->item_vars.pk_thunder_trail.trail_index = trail_index;
-    new_ip->item_vars.pk_thunder_trail.spawn_gobj = old_gobj;
+    new_ip->item_vars.pkthunder_trail.pkthunder_trail_state = wpNessThunderStatus_Active;
+    new_ip->item_vars.pkthunder_trail.trail_index = trail_index;
+    new_ip->item_vars.pkthunder_trail.spawn_gobj = old_gobj;
 
     if (trail_index != 0)
     {
-        old_gobj = old_ip->item_vars.pk_thunder_trail.trail_gobj[0];
+        old_gobj = old_ip->item_vars.pkthunder_trail.trail_gobj[0];
         old_ip = wpGetStruct(old_gobj);
     }
 
-    new_ip->item_vars.pk_thunder_trail.trail_gobj[0] = old_gobj;
+    new_ip->item_vars.pkthunder_trail.trail_gobj[0] = old_gobj;
 
-    old_ip->item_vars.pk_thunder_trail.trail_gobj[trail_index] = new_gobj;
+    old_ip->item_vars.pkthunder_trail.trail_gobj[trail_index] = new_gobj;
 
     new_ip->phys_info.vel.x = old_ip->phys_info.vel.x;
     new_ip->phys_info.vel.y = old_ip->phys_info.vel.y;

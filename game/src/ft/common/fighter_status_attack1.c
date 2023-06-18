@@ -117,7 +117,7 @@ void ftCommon_Attack11_ProcStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftCommon_MotionCountIncSetAttackID(fp, ftAttack_Index_Attack11);
+    ftCommon_MotionCountIncSetAttackID(fp, ftMotion_AttackIndex_Attack11);
     ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
     ftCommon_Update1PGameAttackStats(fp, 0);
 }
