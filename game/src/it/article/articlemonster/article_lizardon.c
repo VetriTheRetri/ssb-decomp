@@ -280,7 +280,7 @@ bool32 jtgt_ovl3_8017FB74(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Item_Lizardon_Flame_Data;
+extern wpCreateDesc Item_Lizardon_Flame_Data;
 
 GObj *func_ovl3_8017FC38(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 {

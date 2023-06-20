@@ -16,7 +16,7 @@ void wpMain_StopSFX(Weapon_Struct *wp) // Stop item's ongoing SFX
 }
 
 // 0x80167F08
-void wpMain_PlayDestroySFX(Weapon_Struct *wp, u16 sfx_id) // Play OnDestroy SFX if applicable
+void wpMain_PlaySFX(Weapon_Struct *wp, u16 sfx_id) // Play SFX if applicable
 {
     if (wp->p_sfx != NULL)
     {

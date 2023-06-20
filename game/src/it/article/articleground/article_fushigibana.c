@@ -187,7 +187,7 @@ bool32 jtgt_ovl3_80184970(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Item_Razor_Data;
+extern wpCreateDesc Item_Razor_Data;
 
 GObj *func_ovl3_801849EC(GObj *article_gobj, Vec3f *pos)
 {

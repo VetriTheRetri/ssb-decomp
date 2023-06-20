@@ -334,7 +334,7 @@ void func_ovl3_8017AC84(GObj *article_gobj)
     {
         if (ap->lr == LEFT)
         {
-            func_ovl2_800F4428(ap->coll_data.ground_line_id, &pos);
+            mpCollision_GetLREdgeLeft(ap->coll_data.ground_line_id, &pos);
 
             if ((joint->translate.x - attributes->objectcoll_width) <= pos.x)
             {
@@ -343,7 +343,7 @@ void func_ovl3_8017AC84(GObj *article_gobj)
         }
         else
         {
-            func_ovl2_800F4408(ap->coll_data.ground_line_id, &pos);
+            mpCollision_GetLREdgeRight(ap->coll_data.ground_line_id, &pos);
 
             if (pos.x <= (joint->translate.x + attributes->objectcoll_width))
             {

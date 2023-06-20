@@ -26,7 +26,7 @@ typedef enum ftStatusUpdateFlags
     ftStatusUpdate_Unk3_Preserve,           // Preserve ???
     ftStatusUpdate_ThrowGObj_Preserve,      // Preserve thrower's GObj pointer between action states; used to tell the game not to check thrower's collateral hitbox on thrown victim?  
     ftStatusUpdate_ShuffleTime_Preserve,    // Preserve model vibration frames from hitlag between action states
-    ftStatusUpdate_Unk4_Preserve,           // Preserve ???
+    ftStatusUpdate_LoopSFX_Preserve,        // Preserve looping SFX
     ftStatusUpdate_DamagePort_Preserve,     // Preserve damaging player's port ID if grounded?
     ftStatusUpdate_AfterImage_Preserve,     // Preserve sword trail display state
     ftStatusUpdate_Unk5_Preserve            // Preserve ???
@@ -45,7 +45,7 @@ typedef enum ftStatusUpdateFlags
 #define FTSTATUPDATE_UNK3_PRESERVE          (1 << ftStatusUpdate_Unk3_Preserve)         // 0x100
 #define FTSTATUPDATE_THROWPOINTER_PRESERVE  (1 << ftStatusUpdate_ThrowGObj_Preserve)    // 0x200
 #define FTSTATUPDATE_SHUFFLETIME_PRESERVE   (1 << ftStatusUpdate_ShuffleTime_Preserve)  // 0x400
-#define FTSTATUPDATE_UNK4_PRESERVE          (1 << ftStatusUpdate_Unk4_Preserve)         // 0x800
+#define FTSTATUPDATE_LOOPSFX_PRESERVE       (1 << ftStatusUpdate_LoopSFX_Preserve)      // 0x800
 #define FTSTATUPDATE_DAMAGEPORT_PRESERVE    (1 << ftStatusUpdate_DamagePort_Preserve)   // 0x1000
 #define FTSTATUPDATE_AFTERIMAGE_PRESERVE    (1 << ftStatusUpdate_AfterImage_Preserve)   // 0x2000
 #define FTSTATUPDATE_UNK5_PRESERVE          (1 << ftStatusUpdate_Unk5_Preserve)         // 0x4000

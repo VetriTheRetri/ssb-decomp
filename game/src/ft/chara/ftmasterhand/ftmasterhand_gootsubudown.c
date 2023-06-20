@@ -1,15 +1,17 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_80159DB0(GObj *fighter_gobj)
+// 0x80159DB0
+void ftMasterHand_GootsubuDown_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80159040);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftMasterHand_Wait_SetStatus);
 }
 
-void func_ovl3_80159DD4(GObj *fighter_gobj)
+// 0x80159DD4
+void ftMasterHand_GootsubuDown_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuDown, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuDown, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp->phys_info.vel_air.y = 0.0F;
 }

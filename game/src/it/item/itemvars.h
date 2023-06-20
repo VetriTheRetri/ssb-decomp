@@ -46,7 +46,7 @@
 #define ITPKFIRE_VEL_MUL 160.0F
 
 #define ITPKTHUNDER_LIFETIME 160
-#define ITPKTHUNDER_SPAWN_TRAIL_TIMER 2                         // Subtracted from PK Thunder's maximum lifetime to determine when to begin spawning trails
+#define ITPKTHUNDER_SPAWN_TRAIL_FRAME (ITPKTHUNDER_LIFETIME - 2)// Subtracted from PK Thunder's maximum lifetime to determine when to begin spawning trails
 #define ITPKTHUNDER_TURN_STICK_THRESHOLD 45                     // Minimum stick range required to steer PK Thunder
 #define ITPKTHUNDER_ANGLE_STEP 0.10471976F                      // If there is a difference between PK Thunder and the control stick's current angle, step this amount
 #define ITPKTHUNDER_ANGLE_DIV 7.5F                              // Divide angle difference then add to current PK Thunder angle if less than quarter pi
@@ -89,7 +89,7 @@
 #define ITSPINATTACK_VEL_CLAMP 0.4F
 #define ITSPINATTACK_OFF_X 40.0F
 #define ITSPINATTACK_OFF_Y 80.0F
-#define ITSPINATTACK_ANGLE 0.17453294F
+#define ITSPINATTACK_ANGLE F_DEG_TO_RAD(10.0F)                  // 0.17453294F
 
 #define ITBOOMERANG_OFF_X 150.0F
 #define ITBOOMERANG_OFF_Y 290.0F
@@ -110,21 +110,21 @@
 
 typedef enum wpPikachuThunderCollide
 {
-    wpPikachuThunderStatus_Active,
-    wpPikachuThunderStatus_Collide,
-    wpPikachuThunderStatus_Destroy
+    wpPikachuThunder_Status_Active,
+    wpPikachuThunder_Status_Collide,
+    wpPikachuThunder_Status_Destroy
 
 } wpPikachuThunderCollide;
 
-typedef enum wpNessThunderCollide
+typedef enum wpNessPKThunderCollide
 {
-    wpNessThunderStatus_Active,                                 // PK Thunder is active
-    wpNessThunderStatus_Destroy,                                // PK Thunder despawns
-    wpNessThunderStatus_Collide                                 // PK Thunder collides with Ness
+    wpNessPKThunder_Status_Active,                                 // PK Thunder is active
+    wpNessPKThunder_Status_Destroy,                                // PK Thunder despawns
+    wpNessPKThunder_Status_Collide                                 // PK Thunder collides with Ness
 
-} wpNessThunderCollide;
+} wpNessPKThunderCollide;
 
-typedef struct ItemFireballAttributes
+typedef struct wpMarioFireballAttributes
 {
     s32 lifetime;
     f32 fall_speed_max;
@@ -132,16 +132,16 @@ typedef struct ItemFireballAttributes
     f32 gravity;
     f32 collide_vel;
     f32 rotate_speed;
-    f32 vel_ground;
-    f32 vel_air;
-    f32 vel_mul;
+    f32 angle_ground;
+    f32 angle_air;
+    f32 vel_base;
     void *p_item;
     int offset_wp_hit;
-    f32 frame_begin;    // Starting frame of texture animation?
+    f32 anim_frame;    // Starting frame of texture animation?
 
-} ItemFireballAttributes;
+} wpMarioFireballAttributes;
 
-typedef struct ItemChargeShotAttributes
+typedef struct wpSamusChargeShotAttributes
 {
     f32 gfx_size;
     f32 vel_x;
@@ -153,7 +153,7 @@ typedef struct ItemChargeShotAttributes
     u32 hit_sfx_id;
     s32 priority;
 
-} ItemChargeShotAttributes;
+} wpSamusChargeShotAttributes;
 
 typedef struct SamusBomb_WeaponVars
 {
@@ -220,11 +220,11 @@ typedef struct SpinAttack_WeaponVars
 typedef struct Boomerang_WeaponVars
 {
     GObj *spawn_gobj; // GObj that spawned Boomerang
-    u8 unk_0x4;
+    u8 flyforward_timer;
     u8 homing_delay;
     u8 flags;
     u8 adjust_angle_delay;
-    f32 unk_0x8;
+    f32 default_angle;
     f32 homing_angle;
 
 } Boomerang_WeaponVars;

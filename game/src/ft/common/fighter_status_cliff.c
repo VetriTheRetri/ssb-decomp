@@ -17,9 +17,9 @@ void ftCommon_CliffCommon_ProcPhysics(GObj *fighter_gobj)
 
     if (fp->lr == RIGHT)
     {
-        func_ovl2_800F4428(fp->coll_data.cliff_id, &vel);
+        mpCollision_GetLREdgeLeft(fp->coll_data.cliff_id, &vel);
     }
-    else func_ovl2_800F4408(fp->coll_data.cliff_id, &vel);
+    else mpCollision_GetLREdgeRight(fp->coll_data.cliff_id, &vel);
 
     topn_joint->translate.x = ((transn_joint->translate.z * fp->lr * topn_joint->scale.x) + vel.x);
     topn_joint->translate.y = ((transn_joint->translate.y * topn_joint->scale.y) + vel.y);
@@ -51,9 +51,9 @@ void ftCommon_CliffCatch_SetStatus(GObj *fighter_gobj)
 
     if (fp->lr == RIGHT)
     {
-        func_ovl2_800F4428(fp->coll_data.cliff_id, &vel);
+        mpCollision_GetLREdgeLeft(fp->coll_data.cliff_id, &vel);
     }
-    else func_ovl2_800F4408(fp->coll_data.cliff_id, &vel);
+    else mpCollision_GetLREdgeRight(fp->coll_data.cliff_id, &vel);
 
     func_ovl2_801016E0(&vel);
 
@@ -71,9 +71,9 @@ void ftCommon_CliffCommon_ProcDamage(GObj *fighter_gobj)
 
     if (fp->lr == RIGHT)
     {
-        func_ovl2_800F4428(fp->coll_data.cliff_id, &vel);
+        mpCollision_GetLREdgeLeft(fp->coll_data.cliff_id, &vel);
     }
-    else func_ovl2_800F4408(fp->coll_data.cliff_id, &vel);
+    else mpCollision_GetLREdgeRight(fp->coll_data.cliff_id, &vel);
 
     vel.x -= ((object_coll->width + 30.0F) * fp->lr);
     vel.y -= object_coll->center;

@@ -313,7 +313,7 @@ bool32 jtgt_ovl3_801824C0(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Item_Swift_Data;
+extern wpCreateDesc Item_Swift_Data;
 
 GObj* func_ovl3_80182530(GObj *article_gobj, Vec3f *pos)
 {

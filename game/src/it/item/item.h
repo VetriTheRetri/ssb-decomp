@@ -43,12 +43,28 @@
 
 typedef enum It_Kind
 {
-    It_Kind_PKThunder_Head = 0xE,
-    It_Kind_PKThunder_Trail = 0xF,
+    Wp_Kind_Fireball,
+    Wp_Kind_Blaster,
+    Wp_Kind_ChargeShot,
+    Wp_Kind_SamusBomb,
+    Wp_Kind_Cutter,
+    Wp_Kind_EggThrow,
+    Wp_Kind_YoshiStar,
+    Wp_Kind_Boomerang,
+    Wp_Kind_SpinAttack,
+    Wp_Kind_ThunderJoltAir,
+    Wp_Kind_ThunderJoltGround,
+    Wp_Kind_ThunderHead,
+    Wp_Kind_ThunderTrail,
+    Wp_Kind_PKFire,
+    Wp_Kind_PKThunderHead,
+    Wp_Kind_PKThunderTrail,
+    Wp_Kind_YubiBulletSingle,
+    Wp_Kind_YubiBulletTriple
 
 } It_Kind;
 
-typedef struct WeaponSpawnData
+typedef struct wpCreateDesc
 {
     u8 unk_0x0;
     s32 wp_kind;
@@ -67,7 +83,7 @@ typedef struct WeaponSpawnData
     bool32 (*proc_reflector)(GObj*);
     bool32 (*proc_absorb)(GObj*);
 
-} WeaponSpawnData;
+} wpCreateDesc;
 
 typedef struct wpCommonAttributes // Moreso hitbox stuff
 {

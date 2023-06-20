@@ -15,7 +15,7 @@ void ftFox_SpecialN_ProcUpdate(GObj *fighter_gobj)
         pos.z = 0.0F;
 
         func_ovl2_800EDF24(fp->joint[FTFOX_BLASTER_HOLD_JOINT], &pos);
-        func_ovl3_80168A74(fighter_gobj, &pos);
+        wpFox_Blaster_CreateWeapon(fighter_gobj, &pos);
     }
     if (fighter_gobj->anim_frame <= 0.0F)
     {

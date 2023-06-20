@@ -29,7 +29,7 @@ void ftLink_SpecialN_CreateBoomerang(GObj *fighter_gobj)
 
         func_ovl2_800EDF24(fp->joint[FTLINK_BOOMERANG_SPAWN_JOINT], &pos);
 
-        fp->fighter_vars.link.boomerang_gobj = func_ovl3_8016DA78(fighter_gobj, &pos);
+        fp->fighter_vars.link.boomerang_gobj = wpLink_Boomerang_CreateWeapon(fighter_gobj, &pos);
     }
 }
 

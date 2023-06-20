@@ -5,24 +5,23 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
-typedef struct MasterHand_Struct
+typedef struct ftBossInfo
 {
     GObj *target_gobj; // (Fighter) GObj pointer of Master Hand's target
-    void *unk_0x4;
-    s32 unk_0x8;
-    f32 unk_0xC;
+    s32 current_line_id;
+    s32 default_line_id;
+    f32 wait_div;
     u32 wait_timer; // Wait this many frames until next attack
-    s8 unk_0x14;
-    u8 unk_0x15;
-    u8 unk_0x16; // Struct probably ends here
-    u8 unk_0x17;
+    s8 status_index;
+    u8 status_index_random;
+    u8 status_index_guard; // Struct probably ends here
 
-} MasterHand_Struct;
+} ftBossInfo;
 
 typedef struct ftMasterHand_FighterVars
 {
-    MasterHand_Struct *p_masterhand;
-    MasterHand_Struct s;
+    ftBossInfo *boss;
+    ftBossInfo s;
 
 } ftMasterHand_FighterVars;
 
@@ -34,7 +33,7 @@ typedef struct ftMasterHand_Wait_StatusVars
 
 typedef struct ftMasterHand_Move_StatusVars
 {
-    void (*cb)(GObj*);
+    void (*proc_setstatus)(GObj*);
     Vec3f vel;
     f32 magnitude;
 
@@ -49,8 +48,8 @@ typedef struct ftMasterHand_Okhuikouki_StatusVars
 typedef struct ftMasterHand_Gootsubu_StatusVars
 {
     s16 wait_timer;
-    f32 pos_x1;
-    f32 pos_x2;
+    f32 edgeleft_pos_x;
+    f32 edgeright_pos_x;
 
 } ftMasterHand_Gootsubu_StatusVars;
 
@@ -63,8 +62,8 @@ typedef struct ftMasterHand_Tsutsuku_StatusVars
 typedef struct ftMasterHand_Drill_StatusVars
 {
     s16 follow_timer; // Follow player for this many frames?
-    f32 pos_x1;
-    f32 pos_x2;
+    f32 edgeleft_pos_x;
+    f32 edgeright_pos_x;
 
 } ftMasterHand_Drill_StatusVars;
 

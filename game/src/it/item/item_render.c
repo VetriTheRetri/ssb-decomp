@@ -155,7 +155,7 @@ void func_ovl3_801674B8(void)
     gDPSetRenderMode(D_800465B0[1]++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
 }
 
-void func_ovl3_80167520(GObj *weapon_gobj, void(*render)(GObj*))
+void func_ovl3_80167520(GObj *weapon_gobj, void(*proc_render)(GObj*))
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -163,7 +163,7 @@ void func_ovl3_80167520(GObj *weapon_gobj, void(*render)(GObj*))
     {
         func_ovl3_80167454(weapon_gobj);
 
-        render(weapon_gobj);
+        proc_render(weapon_gobj);
 
         func_ovl3_801674B8();
 
@@ -175,7 +175,7 @@ void func_ovl3_80167520(GObj *weapon_gobj, void(*render)(GObj*))
         {
             func_ovl3_80167454();
 
-            render(weapon_gobj);
+            proc_render(weapon_gobj);
 
             func_ovl3_801674B8();
         }

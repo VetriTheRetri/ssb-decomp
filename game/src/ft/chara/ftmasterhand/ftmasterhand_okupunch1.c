@@ -1,25 +1,27 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_8015A7A0(GObj *fighter_gobj)
+// 0x8015A7A0
+void ftMasterHand_Okupunch1_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015A950);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftMasterHand_Okupunch2_SetStatus);
 }
 
-void func_ovl3_8015A7C4(GObj *fighter_gobj)
+// 0x8015A7C4
+void ftMasterHand_Okupunch1_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *masterhand_fp, *target_fp;
-    s32 unk_coll;
-    s32 var_a3;
+    s32 ground_line_id;
+    s32 line_id;
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_OkuPunch1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okupunch1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     masterhand_fp = ftGetStruct(fighter_gobj);
 
-    target_fp = ftGetStruct(masterhand_fp->fighter_vars.masterhand.p_masterhand->target_gobj);
+    target_fp = ftGetStruct(masterhand_fp->fighter_vars.masterhand.boss->target_gobj);
 
-    unk_coll = target_fp->coll_data.ground_line_id;
+    ground_line_id = target_fp->coll_data.ground_line_id;
 
-    var_a3 = ((unk_coll != -1) && unk_coll != -2) ? unk_coll : masterhand_fp->fighter_vars.masterhand.p_masterhand->unk_0x8;
+    line_id = ((ground_line_id != -1) && ground_line_id != -2) ? ground_line_id : masterhand_fp->fighter_vars.masterhand.boss->default_line_id;
 
-    func_ovl3_8015839C(var_a3, &masterhand_fp->status_vars.masterhand.okupunch.pos);
+    func_ovl3_8015839C(line_id, &masterhand_fp->status_vars.masterhand.okupunch.pos);
 }

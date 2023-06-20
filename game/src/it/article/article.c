@@ -371,7 +371,7 @@ void func_ovl3_8016EB78(s32 unused)
     Vec3f pos;
     Vec3f sp28;
 
-    if (Match_Info->pause_status != gmPauseStatus_Disable)
+    if (Match_Info->pause_status != gmMatch_PauseStatus_Disable)
     {
         if (item_settings.item_spawn_timer > 0)
         {
@@ -1753,7 +1753,7 @@ void func_ovl3_801713B0(GObj *article_gobj)
 {
     Article_Struct *ap = atGetStruct(article_gobj);
 
-    if (func_ovl2_800E0880(&ap->colanim, article_gobj, 0, 0) != FALSE)
+    if (caMain_UpdateColAnim(&ap->colanim, article_gobj, 0, 0) != FALSE)
     {
         func_ovl3_80172FBC(article_gobj);
     }

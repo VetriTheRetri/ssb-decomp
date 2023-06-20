@@ -1,14 +1,15 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_8015A600(GObj *fighter_gobj)
+// 0x8015A600
+void ftMasterHand_Yubideppou2_UpdatePosition(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
     f32 magnitude;
 
-    pos.x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x + (-fp->lr * 3000.0F);
-    pos.y = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.y;
+    pos.x = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x + (-fp->lr * 3000.0F);
+    pos.y = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.y;
     pos.z = 0.0F;
 
     vec3f_sub(&vel, &pos, &DObjGetStruct(fighter_gobj)->translate);
@@ -30,7 +31,8 @@ void func_ovl3_8015A600(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015A6FC(GObj *fighter_gobj)
+// 0x8015A6FC
+void ftMasterHand_Yubideppou2_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -38,16 +40,17 @@ void func_ovl3_8015A6FC(GObj *fighter_gobj)
 
     if (fp->status_vars.masterhand.yubideppou.wait_timer == 0)
     {
-        func_ovl3_8015A538(fighter_gobj);
+        ftMasterHand_Yubideppou3_SetStatus(fighter_gobj);
     }
-    else func_ovl3_8015A600(fighter_gobj);
+    else ftMasterHand_Yubideppou2_UpdatePosition(fighter_gobj);
 }
 
-void func_ovl3_8015A748(GObj *fighter_gobj)
+// 0x8015A748
+void ftMasterHand_Yubideppou2_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Yubideppou2, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Yubideppou2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp = ftGetStruct(fighter_gobj);
 

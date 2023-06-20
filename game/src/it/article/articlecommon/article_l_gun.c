@@ -188,7 +188,7 @@ bool32 jtgt_ovl3_80175A00(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Item_L_Gun_Ammo_Desc;
+extern wpCreateDesc Item_L_Gun_Ammo_Desc;
 
 GObj* func_ovl3_80175A60(GObj *fighter_gobj, Vec3f *pos)
 {

@@ -3,7 +3,7 @@
 #define FTKIRBY_COPYNESS_SPECIALN_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
 
 // 0x80155B40
-void ftKirby_CopyNess_SpecialN_SpawnPKFire(GObj *fighter_gobj)
+void ftKirby_CopyNess_SpecialN_ProcAccessory(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -38,7 +38,7 @@ void ftKirby_CopyNess_SpecialN_SpawnPKFire(GObj *fighter_gobj)
             vel.y = __sinf(FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_GROUND) * FTKIRBY_COPYNESS_PKFIRE_SPARK_VEL_GROUND;
         }
 
-        func_ovl3_8016AC78(fighter_gobj, &pos, &vel, angle); // Spawn PK Fire
+        wpNess_PKFire_CreateWeapon(fighter_gobj, &pos, &vel, angle); // Spawn PK Fire
     }
 }
 
@@ -62,7 +62,7 @@ void ftKirby_CopyNess_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYNESS_SPECIALN_STATUPDATE_FLAGS);
 
-    fp->proc_accessory = ftKirby_CopyNess_SpecialN_SpawnPKFire;
+    fp->proc_accessory = ftKirby_CopyNess_SpecialN_ProcAccessory;
 }
 
 // 0x80155D48
@@ -74,7 +74,7 @@ void ftKirby_CopyNess_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyNess_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYNESS_SPECIALN_STATUPDATE_FLAGS);
     func_ovl2_800D8EB8(fp);
 
-    fp->proc_accessory = ftKirby_CopyNess_SpecialN_SpawnPKFire;
+    fp->proc_accessory = ftKirby_CopyNess_SpecialN_ProcAccessory;
 }
 
 // 0x80155DA4
@@ -84,7 +84,7 @@ void ftKirby_CopyNess_SpecialN_InitStatusVars(GObj *fighter_gobj)
 
     fp->command_vars.flags.flag0 = 0;
 
-    fp->proc_accessory = ftKirby_CopyNess_SpecialN_SpawnPKFire;
+    fp->proc_accessory = ftKirby_CopyNess_SpecialN_ProcAccessory;
 }
 
 // 0x80155DBC

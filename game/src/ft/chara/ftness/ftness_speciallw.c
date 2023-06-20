@@ -3,7 +3,7 @@
 
 #define FTNESS_SPECIALLWSTART_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
 #define FTNESS_SPECIALLWHOLD_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
-#define FTNESS_SPECIALLWHIT_STATUPDATE_FLAGS (FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
+#define FTNESS_SPECIALLWHIT_STATUPDATE_FLAGS (FTSTATUPDATE_LOOPSFX_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
 #define FTNESS_SPECIALLWEND_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
 
 // PSI Magnet (SpecialLw/SpecialAirLw)
@@ -242,7 +242,7 @@ void ftNess_SpecialLw_InitVars(GObj *fighter_gobj)
 // 0x80155750
 void ftNess_SpecialLwHold_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHold, 0.0F, 1.0F, (FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwHold, 0.0F, 1.0F, (FTSTATUPDATE_LOOPSFX_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     ftNess_SpecialLw_InitVars(fighter_gobj);
 }
@@ -250,7 +250,7 @@ void ftNess_SpecialLwHold_SetStatus(GObj *fighter_gobj)
 // 0x80155794
 void ftNess_SpecialAirLwHold_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHold, 0.0F, 1.0F, (FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwHold, 0.0F, 1.0F, (FTSTATUPDATE_LOOPSFX_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     ftAnim_Update(fighter_gobj);
     ftNess_SpecialLw_InitVars(fighter_gobj);
 }
@@ -373,13 +373,13 @@ void ftNess_SpecialLwEnd_SwitchStatusAir(GObj *fighter_gobj)
 // 0x80155AC8
 void ftNess_SpecialLwEnd_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwEnd, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialLwEnd, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }
 
 // 0x80155B00
 void ftNess_SpecialAirLwEnd_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwEnd, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirLwEnd, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 }

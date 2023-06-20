@@ -186,7 +186,7 @@ bool32 jtgt_ovl3_80184204(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Weapon_Hitokage_Flame_Data;
+extern wpCreateDesc Weapon_Hitokage_Flame_Data;
 
 GObj *func_ovl3_801842C8(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 {

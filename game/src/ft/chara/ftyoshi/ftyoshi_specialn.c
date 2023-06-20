@@ -7,7 +7,7 @@ void ftYoshi_SpecialN_InitCatchVars(Fighter_Struct *fp, void (*proc_catch)(GObj*
 }
 
 // 0x8015E33C
-void ftYoshi_SpecialNStart_GotoProcStatus(GObj *fighter_gobj, void (*proc_status)(GObj*))
+void ftYoshi_SpecialNCatch_UpdateProcStatus(GObj *fighter_gobj, void (*proc_status)(GObj*))
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -20,15 +20,15 @@ void ftYoshi_SpecialNStart_GotoProcStatus(GObj *fighter_gobj, void (*proc_status
 }
 
 // 0x8015E390
-void ftYoshi_SpecialNStart_ProcUpdate(GObj *fighter_gobj)
+void ftYoshi_SpecialNCatch_ProcUpdate(GObj *fighter_gobj)
 {
-    ftYoshi_SpecialNStart_GotoProcStatus(fighter_gobj, ftYoshi_SpecialNRelease_SetStatus);
+    ftYoshi_SpecialNCatch_UpdateProcStatus(fighter_gobj, ftYoshi_SpecialNRelease_SetStatus);
 }
 
 // 0x8015E3B4
-void ftYoshi_SpecialAirNStart_ProcUpdate(GObj *fighter_gobj)
+void ftYoshi_SpecialAirNCatch_ProcUpdate(GObj *fighter_gobj)
 {
-    ftYoshi_SpecialNStart_GotoProcStatus(fighter_gobj, ftYoshi_SpecialAirNRelease_SetStatus);
+    ftYoshi_SpecialNCatch_UpdateProcStatus(fighter_gobj, ftYoshi_SpecialAirNRelease_SetStatus);
 }
 
 // 0x8015E3D8
@@ -63,14 +63,14 @@ void ftYoshi_SpecialNCatch_UpdateCaptureVars(Fighter_Struct *fp)
 }
 
 // 0x8015E44C
-void ftYoshi_SpecialNCatch_ProcUpdate(GObj *fighter_gobj)
+void ftYoshi_SpecialNRelease_ProcUpdate(GObj *fighter_gobj)
 {
     ftYoshi_SpecialNCatch_UpdateCaptureVars(ftGetStruct(fighter_gobj));
     ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
 // 0x8015E478
-void ftYoshi_SpecialAirNCatch_ProcUpdate(GObj *fighter_gobj)
+void ftYoshi_SpecialAirNRelease_ProcUpdate(GObj *fighter_gobj)
 {
     ftYoshi_SpecialNCatch_UpdateCaptureVars(ftGetStruct(fighter_gobj));
     ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);

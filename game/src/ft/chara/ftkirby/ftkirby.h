@@ -29,7 +29,7 @@
 #define FTKIRBY_STONE_DURATION_MAX 160                  // Maximum time Kirby can spend in his Stone form
 #define FTKIRBY_STONE_DURATION_MIN 18                   // Minimum time Kirby must spend in his Stone form before he can turn back
 #define FTKIRBY_STONE_FALL_VEL -140.0F                  // Stone terminal velocity in midair
-#define FTKIRBY_STONE_SLIDE_ANGLE 0.43633232F           // Minimum surface angle required to slide? (Radians)
+#define FTKIRBY_STONE_SLIDE_ANGLE F_DEG_TO_RAD(25.0F)   // Minimum surface angle required to slide? (Radians) (0.43633232F)
 #define FTKIRBY_STONE_SLIDE_TRACTION_MUL 1.15F          // Traction multiplier?
 #define FTKIRBY_STONE_SLIDE_VEL_MUL 36.0F               // Slide velocity multiplier
 #define FTKIRBY_STONE_SLIDE_CLAMP_VEL_X 30.0F           // Maximum slide velocity?
@@ -61,6 +61,7 @@
 #define FTKIRBY_COPYSAMUS_CHARGE_MAX 7                  // Maximum charge level
 #define FTKIRBY_COPYSAMUS_CHARGE_INT 20                 // Charge interval, level increrments once this timer hits zero, then begins counting the next iteration
 #define FTKIRBY_COPYSAMUS_CHARGE_COLANIM_ID 6
+#define FTKIRBY_COPYSAMUS_CHARGE_COLANIM_LENGTH 0
 #define FTKIRBY_COPYSAMUS_CHARGE_RECOIL_BASE 10.0F      // Base unit of recoil taken from firing Charge Shot
 #define FTKIRBY_COPYSAMUS_CHARGE_RECOIL_MUL 2.0F        // Charge Recoil multiplier
 #define FTKIRBY_COPYSAMUS_CHARGE_RECOIL_ADD 20.0F       // Added velocity
@@ -73,11 +74,12 @@
 #define FTKIRBY_COPYCAPTAIN_FALCONPUNCH_VEL_MUL 0.92F   //
 
 #define FTKIRBY_COPYPIKACHU_THUNDERJOLT_SPAWN_JOINT 0
-#define FTKIRBY_COPYPIKACHU_THUNDERJOLT_SPAWN_ANGLE -0.7853982F
+#define FTKIRBY_COPYPIKACHU_THUNDERJOLT_SPAWN_ANGLE F_DEG_TO_RAD(-45.0F) // -0.7853982F
 #define FTKIRBY_COPYPIKACHU_THUNDERJOLT_SPAWN_OFF_X 200.0F
 #define FTKIRBY_COPYPIKACHU_THUNDERJOLT_SPAWN_OFF_Y 200.0F
 #define FTKIRBY_COPYPIKACHU_THUNDERJOLT_VEL 40.0F
 #define FTKIRBY_COPYPIKACHU_THUNDERJOLT_COLANIM_ID 0x3B
+#define FTKIRBY_COPYPIKACHU_THUNDERJOLT_COLANIM_LENGTH 0
 
 #define FTKIRBY_COPYPURIN_POUND_VEL_BASE 65             //
 #define FTKIRBY_COPYPURIN_POUND_VEL_MUL 0.92F           //
@@ -85,8 +87,8 @@
 #define FTKIRBY_COPYNESS_PKFIRE_SPAWN_JOINT 0
 #define FTKIRBY_COPYNESS_PKFIRE_SPAWN_OFF_X 240.0F
 #define FTKIRBY_COPYNESS_PKFIRE_SPAWN_OFF_Y 190.0F
-#define FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_AIR -0.6632251F
-#define FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_GROUND -0.06283185F
+#define FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_AIR F_DEG_TO_RAD(-38.0F) // -0.6632251F
+#define FTKIRBY_COPYNESS_PKFIRE_SPARK_ANGLE_GROUND F_DEG_TO_RAD(-3.6F) // -0.06283185F
 #define FTKIRBY_COPYNESS_PKFIRE_SPARK_VEL_AIR 95.0F
 #define FTKIRBY_COPYNESS_PKFIRE_SPARK_VEL_GROUND 73.0F
 

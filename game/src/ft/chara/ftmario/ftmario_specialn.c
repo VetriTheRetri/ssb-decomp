@@ -39,7 +39,7 @@ void ftMario_SpecialN_ProcAccessory(GObj *fighter_gobj)
             fireball_item_id = 1;
             break;
         }
-        func_ovl3_801687A0(fighter_gobj, &pos, fireball_item_id);
+        wpMario_Fireball_CreateWeapon(fighter_gobj, &pos, fireball_item_id);
     }
 }
 

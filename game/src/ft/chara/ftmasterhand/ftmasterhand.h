@@ -41,9 +41,9 @@ typedef enum ftMasterHandAction
 	ftStatus_MasterHand_Yubideppou1, // Finger gun
 	ftStatus_MasterHand_Yubideppou3,
 	ftStatus_MasterHand_Yubideppou2,
-	ftStatus_MasterHand_OkuPunch1,	// Fist rocket
-	ftStatus_MasterHand_OkuPunch2,
-	ftStatus_MasterHand_OkuPunch3,
+	ftStatus_MasterHand_Okupunch1,	// Fist rocket
+	ftStatus_MasterHand_Okupunch2,
+	ftStatus_MasterHand_Okupunch3,
 	ftStatus_MasterHand_Okutsubushi, // Vertical hand slap
 	ftStatus_MasterHand_OkutsubushiStart,
 	ftStatus_MasterHand_Dead1,
@@ -52,5 +52,11 @@ typedef enum ftMasterHandAction
 	ftStatus_MasterHand_Appear
 
 } ftMasterHandAction;
+
+typedef struct ftMasterHandRandom
+{
+	u8 r1, r2;
+
+} ftMasterHandRandom;
 
 #endif

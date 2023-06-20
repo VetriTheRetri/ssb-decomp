@@ -211,7 +211,7 @@ bool32 jtgt_ovl3_80178404(GObj *weapon_gobj)
 }
 
 extern u8 StarRod_Linker_Unk;
-extern WeaponSpawnData Item_StarRod_Desc;
+extern wpCreateDesc Item_StarRod_Desc;
 extern uintptr_t D_ovl3_8018A1D0;
 
 GObj *func_ovl3_80178474(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)

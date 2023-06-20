@@ -1,11 +1,13 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_801593E0(GObj *fighter_gobj)
+// 0x801593E0
+void ftMasterHand_Harau_ResetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Harau, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Harau, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }
 
-void func_ovl3_8015940C(GObj *fighter_gobj)
+// 0x8015940C
+void ftMasterHand_Harau_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -13,13 +15,14 @@ void func_ovl3_8015940C(GObj *fighter_gobj)
 
         if (fp->coll_data.ground_line_id == -1)
         {
-            func_ovl3_80159040(fighter_gobj);
+            ftMasterHand_Wait_SetStatus(fighter_gobj);
         }
-        else func_ovl3_801593E0(fighter_gobj);
+        else ftMasterHand_Harau_ResetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_8015946C(GObj *fighter_gobj)
+// 0x8015946C
+void ftMasterHand_Harau_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
@@ -30,8 +33,9 @@ void func_ovl3_8015946C(GObj *fighter_gobj)
     fp->phys_info.vel_air.x += fp->lr * FTMASTERHAND_HARAU_VEL_X;
 }
 
-void func_ovl3_801594BC(GObj *fighter_gobj)
+// 0x801594BC
+void ftMasterHand_Harau_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Harau, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Harau, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_80157F90(fighter_gobj);
 }

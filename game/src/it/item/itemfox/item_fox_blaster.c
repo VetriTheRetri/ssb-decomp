@@ -1,21 +1,45 @@
 #include "item.h"
 #include "fighter.h"
 
-bool32 jtgt_ovl3_801688D0(GObj *weapon_gobj)
+extern void *D_ovl2_80130E9C;
+
+wpCreateDesc wpFox_Blaster_WeaponDesc = 
+{
+    0,                                      // Render flags?
+    Wp_Kind_Blaster,                        // Weapon Kind
+    &D_ovl2_80130E9C,                       // Pointer to character's loaded files?
+    0,                                      // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpFox_Blaster_ProcUpdate,               // Proc Update
+    wpFox_Blaster_ProcMap,                  // Proc Map
+    wpFox_Blaster_ProcHit,                  // Proc Hit
+    wpFox_Blaster_ProcHit,                  // Proc Shield
+    wpFox_Blaster_ProcHop,                  // Proc Hop
+    wpFox_Blaster_ProcHit,                  // Proc Set-Off
+    wpFox_Blaster_ProcReflector,            // Proc Reflector
+    wpFox_Blaster_ProcHit                   // Proc Absorb
+};
+
+// 0x801688D0
+bool32 wpFox_Blaster_ProcUpdate(GObj *weapon_gobj)
 {
     if (DObjGetStruct(weapon_gobj)->scale.x < 53.333332F)
     {
         DObjGetStruct(weapon_gobj)->scale.x += 5.3333335F;
 
-        if (53.333332F < DObjGetStruct(weapon_gobj)->scale.x)
+        if (DObjGetStruct(weapon_gobj)->scale.x > 53.333332F)
         {
-            DObjGetStruct(weapon_gobj)->scale.x = (f32)53.333332F;
+            DObjGetStruct(weapon_gobj)->scale.x = 53.333332F;
         }
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80168924(GObj *weapon_gobj)
+// 0x80168924
+bool32 wpFox_Blaster_ProcMap(GObj *weapon_gobj)
 {
     if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
@@ -26,20 +50,22 @@ bool32 jtgt_ovl3_80168924(GObj *weapon_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80168964(GObj *weapon_gobj)
+// 0x80168964
+bool32 wpFox_Blaster_ProcHit(GObj *weapon_gobj)
 {
     func_ovl2_80103320(&DObjGetStruct(weapon_gobj)->translate);
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_8016898C(GObj *weapon_gobj)
+// 0x8016898C
+bool32 wpFox_Blaster_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
+    func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     func_ovl2_80103320(&DObjGetStruct(weapon_gobj)->translate);
@@ -47,35 +73,35 @@ bool32 jtgt_ovl3_8016898C(GObj *weapon_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80168A14(GObj *weapon_gobj)
+// 0x80168A14
+bool32 wpFox_Blaster_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorInvertLR(wp, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     return FALSE;
 }
 
-extern WeaponSpawnData Item_Blaster_Desc;
-
-GObj* func_ovl3_80168A74(GObj *fighter_gobj, Vec3f *pos)
+// 0x80168A74
+GObj* wpFox_Blaster_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    Weapon_Struct *ip;
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_Blaster_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    Weapon_Struct *wp;
+    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpFox_Blaster_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel.x = ip->lr * ITBLASTER_VEL_X;
+    wp->phys_info.vel.x = wp->lr * ITBLASTER_VEL_X;
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
 
     func_ovl2_80103320(pos);
 

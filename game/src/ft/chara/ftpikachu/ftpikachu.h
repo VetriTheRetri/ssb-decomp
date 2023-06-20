@@ -7,8 +7,8 @@
 #include <game/src/ft/fighter.h>
 #include <game/src/it/item/item.h>
 
-#define FTPIKACHU_THUNDERJOLT_SPAWN_JOINT 11					// Spawn Thunder Jolt relative to this bone (-0.7853982F)
-#define FTPIKACHU_THUNDERJOLT_SPAWN_ANGLE F_DEG_TO_RAD(-45.0F)	// Launch angle of Thunder Jolt in Radians
+#define FTPIKACHU_THUNDERJOLT_SPAWN_JOINT 11					// Spawn Thunder Jolt relative to this bone
+#define FTPIKACHU_THUNDERJOLT_SPAWN_ANGLE F_DEG_TO_RAD(-45.0F)	// Launch angle of Thunder Jolt in Radians (-0.7853982F)
 #define FTPIKACHU_THUNDERJOLT_VEL 40.0F							// Constant velocity of aerial Thunder Jolt
 #define FTPIKACHU_THUNDERJOLT_COLANIM_ID 0x3B					// ID of color animation applied to Pikachu's model
 #define FTPIKACHU_THUNDERJOLT_COLANIM_LENGTH 0

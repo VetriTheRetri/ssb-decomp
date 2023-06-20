@@ -1,28 +1,52 @@
 #include "item.h"
 #include "fighter.h"
 
+extern void *D_ovl2_80130FB0;
+
+wpCreateDesc wpLink_SpinAttack_WeaponDesc =
+{
+    3,                                      // Render flags?
+    Wp_Kind_SpinAttack,                     // Weapon Kind
+    &D_ovl2_80130FB0,                       // Pointer to character's loaded files?
+    0xC,                                    // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpLink_SpinAttack_ProcUpdate,           // Proc Update
+    wpLink_SpinAttack_ProcMap,              // Proc Map
+    wpLink_SpinAttack_ProcHit,              // Proc Hit
+    wpLink_SpinAttack_ProcHit,              // Proc Shield
+    NULL,                                   // Proc Hop
+    wpLink_SpinAttack_ProcHit,              // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Absorb
+};
+
 void func_ovl3_8016C9A0(void) // Unused
 {
     return;
 }
 
-bool32 func_ovl3_8016C9A8(GObj *weapon_gobj)
+// 0x8016C9A8
+bool32 wpLink_SpinAttack_ProcDead(GObj *weapon_gobj)
 {
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C9B4(GObj *weapon_gobj)
+// 0x8016C9B4
+bool32 wpLink_SpinAttack_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     f32 sqrt_vel;
     f32 mod_vel;
 
-    if (ip->item_vars.spin_attack.is_destroy != FALSE)
+    if (wp->item_vars.spin_attack.is_destroy != FALSE)
     {
         return TRUE;
     }
 
-    sqrt_vel = sqrtf(SQUARE(ip->item_vars.spin_attack.vel.x) + SQUARE(ip->item_vars.spin_attack.vel.y));
+    sqrt_vel = sqrtf(SQUARE(wp->item_vars.spin_attack.vel.x) + SQUARE(wp->item_vars.spin_attack.vel.y));
 
     if (sqrt_vel > 0.0F)
     {
@@ -34,78 +58,79 @@ bool32 jtgt_ovl3_8016C9B4(GObj *weapon_gobj)
         {
             mod_vel = sqrt_vel - ITSPINATTACK_VEL_CLAMP;
         }
-        ip->item_vars.spin_attack.vel.x = (ip->item_vars.spin_attack.vel.x * mod_vel) / sqrt_vel;
-        ip->item_vars.spin_attack.vel.y = (ip->item_vars.spin_attack.vel.y * mod_vel) / sqrt_vel;
+        wp->item_vars.spin_attack.vel.x = (wp->item_vars.spin_attack.vel.x * mod_vel) / sqrt_vel;
+        wp->item_vars.spin_attack.vel.y = (wp->item_vars.spin_attack.vel.y * mod_vel) / sqrt_vel;
 
-        ip->item_hit.offset[0].x += ip->item_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
-        ip->item_hit.offset[0].y += ip->item_vars.spin_attack.vel.y;
-        ip->item_hit.offset[1].x -= ip->item_vars.spin_attack.vel.x;
-        ip->item_hit.offset[1].y += ip->item_vars.spin_attack.vel.y;
+        wp->item_hit.offset[0].x += wp->item_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
+        wp->item_hit.offset[0].y += wp->item_vars.spin_attack.vel.y;
+        wp->item_hit.offset[1].x -= wp->item_vars.spin_attack.vel.x;
+        wp->item_hit.offset[1].y += wp->item_vars.spin_attack.vel.y;
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016CA9C(GObj *weapon_gobj)
+// 0x8016CA9C
+bool32 wpLink_SpinAttack_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     f32 pos_x, pos_y;
-    s32 index = (ip->item_vars.spin_attack.pos_index + 1) % (ARRAY_COUNT(ip->item_vars.spin_attack.pos_x) | ARRAY_COUNT(ip->item_vars.spin_attack.pos_y));
+    s32 index = (wp->item_vars.spin_attack.pos_index + 1) % ITSPINATTACK_EXTEND_POS_COUNT;
 
-    pos_x = ip->item_vars.spin_attack.pos_x[index];
-    pos_y = ip->item_vars.spin_attack.pos_y[index];
+    pos_x = wp->item_vars.spin_attack.pos_x[index];
+    pos_y = wp->item_vars.spin_attack.pos_y[index];
 
     pos_y += ITSPINATTACK_OFF_Y;
 
-    ip->phys_info.vel.x = pos_x - DObjGetStruct(weapon_gobj)->translate.x;
-    ip->phys_info.vel.y = pos_y - DObjGetStruct(weapon_gobj)->translate.y;
+    wp->phys_info.vel.x = pos_x - DObjGetStruct(weapon_gobj)->translate.x;
+    wp->phys_info.vel.y = pos_y - DObjGetStruct(weapon_gobj)->translate.y;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016CB10(GObj *weapon_gobj)
+// 0x8016CB10
+bool32 wpLink_SpinAttack_ProcHit(GObj *weapon_gobj)
 {
     return FALSE;
 }
 
-extern WeaponSpawnData Item_SpinAttack_Desc;
-
-GObj *func_ovl3_8016CB1C(GObj *fighter_gobj, Vec3f *pos)
+// 0x8016CB1C
+GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj;
-    Weapon_Struct *ip;
+    Weapon_Struct *wp;
     Vec3f offset = *pos;
     s32 unused;
 
     offset.y += ITSPINATTACK_OFF_Y;
 
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_SpinAttack_Desc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
+    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpLink_SpinAttack_WeaponDesc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
 
     if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
-    ip->item_hit.offset[0].x = ITSPINATTACK_OFF_X;
-    ip->item_hit.offset[0].y = 0.0F;
-    ip->item_hit.offset[1].x = -ITSPINATTACK_OFF_X;
-    ip->item_hit.offset[1].y = 0.0F;
+    wp->item_hit.offset[0].x = ITSPINATTACK_OFF_X;
+    wp->item_hit.offset[0].y = 0.0F;
+    wp->item_hit.offset[1].x = -ITSPINATTACK_OFF_X;
+    wp->item_hit.offset[1].y = 0.0F;
 
-    ip->lr = fp->lr;
+    wp->lr = fp->lr;
 
-    ip->lifetime = ITSPINATTACK_LIFETIME;
+    wp->lifetime = ITSPINATTACK_LIFETIME;
 
-    ip->proc_dead = func_ovl3_8016C9A8;
+    wp->proc_dead = wpLink_SpinAttack_ProcDead;
 
-    _bzero(&ip->item_vars.spin_attack, sizeof(ip->item_vars));
+    _bzero(&wp->item_vars.spin_attack, sizeof(wp->item_vars));
 
-    ip->item_vars.spin_attack.vel.x = cosf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
-    ip->item_vars.spin_attack.vel.y = __sinf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
+    wp->item_vars.spin_attack.vel.x = cosf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
+    wp->item_vars.spin_attack.vel.y = __sinf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel.z = 0.0F;
+    wp->phys_info.vel.y = 0.0F;
+    wp->phys_info.vel.x = 0.0F;
 
     wpManager_UpdateHitPositions(weapon_gobj);
 

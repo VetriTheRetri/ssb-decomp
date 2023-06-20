@@ -1,18 +1,20 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_8015AA10(GObj *fighter_gobj)
+// 0x8015AA10
+void ftMasterHand_Okupunch3_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80159040);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftMasterHand_Wait_SetStatus);
 }
 
-void func_ovl3_8015AA34(GObj *fighter_gobj)
+// 0x8015AA34
+void ftMasterHand_Okupunch3_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate;
 
     fp->lr = LEFT;
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_OkuPunch3, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okupunch3, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     translate = &DObjGetStruct(fighter_gobj)->translate;

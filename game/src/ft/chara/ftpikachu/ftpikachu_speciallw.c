@@ -25,7 +25,7 @@ void ftPikachu_SpecialLw_CreateThunder(GObj *fighter_gobj)
     vel.z = 0.0F;
     vel.y = FTPIKACHU_THUNDER_VEL_Y;
 
-    fp->status_vars.pikachu.speciallw.thunder_gobj = func_ovl3_8016A80C(fighter_gobj, &pos, &vel);
+    fp->status_vars.pikachu.speciallw.thunder_gobj = wpPikachu_ThunderHead_CreateWeapon(fighter_gobj, &pos, &vel);
 }
 
 // 0x80151E44
@@ -155,7 +155,7 @@ bool32 ftPikachu_SpecialLw_CheckCollideThunder(GObj *fighter_gobj)
 
         if (dist_y < FTPIKACHU_THUNDER_COLLIDE_Y)
         {
-            wp->item_vars.thunder.thunder_state = wpPikachuThunderStatus_Collide;
+            wp->item_vars.thunder.thunder_state = wpPikachuThunder_Status_Collide;
 
             return TRUE;
         }
@@ -227,7 +227,7 @@ void ftPikachu_SpecialLw_ProcDamage(GObj *fighter_gobj)
     {
         Weapon_Struct *wp = wpGetStruct(thunder_gobj);
 
-        wp->item_vars.thunder.thunder_state = wpPikachuThunderStatus_Destroy;
+        wp->item_vars.thunder.thunder_state = wpPikachuThunder_Status_Destroy;
     }
 }
 

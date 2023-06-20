@@ -1,7 +1,30 @@
 #include "item.h"
 #include "fighter.h"
 
-f32 func_ovl3_8016C540(Weapon_Struct *ip)
+extern void *D_ovl2_80130FF0;
+
+wpCreateDesc wpYoshi_Star_WeaponDesc =
+{
+    0,                                      // Render flags?
+    Wp_Kind_YoshiStar,                      // Weapon Kind
+    &D_ovl2_80130FF0,                       // Pointer to character's loaded files?
+    0x40,                                   // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpYoshi_Star_ProcUpdate,                // Proc Update
+    wpYoshi_Star_ProcMap,                   // Proc Map
+    wpYoshi_Star_ProcHit,                   // Proc Hit
+    wpYoshi_Star_ProcShield,                // Proc Shield
+    wpYoshi_Star_ProcHop,                   // Proc Hop
+    wpYoshi_Star_ProcHit,                   // Proc Set-Off
+    wpYoshi_Star_ProcReflector,             // Proc Reflector
+    wpYoshi_Star_ProcShield                 // Proc Absorb
+};
+
+// 0x8016C540
+f32 wpYoshi_Star_GetScale(Weapon_Struct *ip)
 {
     f32 scale = (ip->lifetime * ITYOSHISTAR_LIFETIME_SCALE_MUL) + ITYOSHISTAR_LIFETIME_SCALE_ADD;
 
@@ -12,7 +35,8 @@ f32 func_ovl3_8016C540(Weapon_Struct *ip)
     return scale;
 }
 
-bool32 jtgt_ovl3_8016C588(GObj *weapon_gobj)
+// 0x8016C588
+bool32 wpYoshi_Star_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     f32 scale;
@@ -25,7 +49,7 @@ bool32 jtgt_ovl3_8016C588(GObj *weapon_gobj)
 
         return TRUE;
     }
-    scale = func_ovl3_8016C540(ip);
+    scale = wpYoshi_Star_GetScale(ip);
 
     DObjGetStruct(weapon_gobj)->scale.x = scale;
     DObjGetStruct(weapon_gobj)->scale.y = scale;
@@ -50,12 +74,14 @@ bool32 jtgt_ovl3_8016C588(GObj *weapon_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C6A0(GObj *weapon_gobj)
+// 0x8016C6A0
+bool32 wpYoshi_Star_ProcMap(GObj *weapon_gobj)
 {
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C6AC(GObj *weapon_gobj)
+// 0x8016C6AC
+bool32 wpYoshi_Star_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -68,14 +94,16 @@ bool32 jtgt_ovl3_8016C6AC(GObj *weapon_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C6F0(GObj *weapon_gobj)
+// 0x8016C6F0
+bool32 wpYoshi_Star_ProcShield(GObj *weapon_gobj)
 {
     func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_8016C718(GObj *weapon_gobj)
+// 0x8016C718
+bool32 wpYoshi_Star_ProcHop(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -92,7 +120,8 @@ bool32 jtgt_ovl3_8016C718(GObj *weapon_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C7B0(GObj *weapon_gobj)
+// 0x8016C7B0
+bool32 wpYoshi_Star_ProcReflector(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
@@ -111,9 +140,8 @@ bool32 jtgt_ovl3_8016C7B0(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Item_YoshiStar_Desc;
-
-GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
+// 0x8016C834
+GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 {
     GObj *weapon_gobj;
     Weapon_Struct *ip;
@@ -129,7 +157,7 @@ GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
     {
         offset.x -= ITYOSHISTAR_OFF_X;
     }
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_YoshiStar_Desc, &offset, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpYoshi_Star_WeaponDesc, &offset, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)
     {
@@ -147,12 +175,13 @@ GObj* func_ovl3_8016C834(GObj *fighter_gobj, Vec3f *pos, s32 lr)
     return; // Undefined behavior here, no return value
 }
 
-bool32 func_ovl3_8016C954(GObj *fighter_gobj, Vec3f *pos)
+// 0x8016C954
+GObj* wpYoshi_Star_CreateWeaponLR(GObj *fighter_gobj, Vec3f *pos)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    func_ovl3_8016C834(fighter_gobj, pos, fp->lr);
-    func_ovl3_8016C834(fighter_gobj, pos, -fp->lr);
+    wpYoshi_Star_CreateWeapon(fighter_gobj, pos, fp->lr);
+    wpYoshi_Star_CreateWeapon(fighter_gobj, pos, -fp->lr);
 
-    return FALSE;
+    return NULL;
 }

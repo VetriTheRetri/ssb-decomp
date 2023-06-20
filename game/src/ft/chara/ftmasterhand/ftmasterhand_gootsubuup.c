@@ -1,6 +1,7 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_80159B00(GObj *fighter_gobj)
+// 0x80159B00
+void ftMasterHand_GootsubuUp_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
@@ -11,7 +12,8 @@ void func_ovl3_80159B00(GObj *fighter_gobj)
     fp->phys_info.vel_air.y += 50.0F;
 }
 
-void func_ovl3_80159B3C(GObj *fighter_gobj)
+// 0x80159B3C
+void ftMasterHand_GootsubuUp_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
@@ -19,17 +21,18 @@ void func_ovl3_80159B3C(GObj *fighter_gobj)
 
     fp = ftGetStruct(fighter_gobj);
 
-    if (3000.0F <= -fp->coll_data.ground_dist)
+    if (-fp->coll_data.ground_dist >= 3000.0F)
     {
         DObj *joint = DObjGetStruct(fighter_gobj);
 
         joint->translate.y += (fp->coll_data.ground_dist + 3000.0F);
 
-        func_ovl3_80159D34(fighter_gobj);
+        ftMasterHand_GootsubuWait_SetStatus(fighter_gobj);
     }
 }
 
-void func_ovl3_80159B9C(GObj *fighter_gobj)
+// 0x80159B9C
+void ftMasterHand_GootsubuUp_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuUp, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuUp, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }

@@ -48,7 +48,7 @@ Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 wp_kind)
 
 void func_ovl3_80131BA0(Fighter_Struct *fp)
 {
-    Vec3f *pos = func_ovl3_80131B44(fp, It_Kind_PKThunder_Trail);
+    Vec3f *pos = func_ovl3_80131B44(fp, Wp_Kind_PKThunderTrail);
     Fighter_Com *ft_com = &fp->fighter_com;
 
     if (pos != NULL)

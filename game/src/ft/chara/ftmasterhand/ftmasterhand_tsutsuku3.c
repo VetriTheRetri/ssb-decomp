@@ -1,11 +1,13 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_80159EF0(GObj *fighter_gobj)
+// 0x80159EF0
+void ftMasterHand_Tsutsuku3_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80159040);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftMasterHand_Wait_SetStatus);
 }
 
-void func_ovl3_80159F14(GObj *fighter_gobj)
+// 0x80159F14
+void ftMasterHand_Tsutsuku3_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Tsutsuku3, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Tsutsuku3, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 }

@@ -1178,7 +1178,7 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     case Ft_Kind_GiantDonkey:
         if (fp->fighter_vars.donkey.charge_level == FTDONKEY_GIANTPUNCH_CHARGE_MAX)
         {
-            ftColor_CheckSetColAnimIndex(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
+            ftColor_CheckSetColAnimIndex(fighter_gobj, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, FTDONKEY_GIANTPUNCH_CHARGE_COLANIM_LENGTH);
         }
         break;
 
@@ -1186,7 +1186,7 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     case Ft_Kind_PolySamus:
         if (fp->fighter_vars.samus.charge_level == FTSAMUS_CHARGE_MAX)
         {
-            ftColor_CheckSetColAnimIndex(fighter_gobj, FTSAMUS_CHARGE_COLANIM_ID, 0);
+            ftColor_CheckSetColAnimIndex(fighter_gobj, FTSAMUS_CHARGE_COLANIM_ID, FTSAMUS_CHARGE_COLANIM_LENGTH);
         }
         break;
 
@@ -1195,14 +1195,14 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
         {
             if (fp->fighter_vars.kirby.copysamus_charge_level == FTKIRBY_COPYSAMUS_CHARGE_MAX)
             {
-                ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYSAMUS_CHARGE_COLANIM_ID, 0);
+                ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYSAMUS_CHARGE_COLANIM_ID, FTKIRBY_COPYSAMUS_CHARGE_COLANIM_LENGTH);
             }
         }
         if ((fp->fighter_vars.kirby.copy_id == Ft_Kind_Donkey) || (fp->fighter_vars.kirby.copy_id == Ft_Kind_PolyDonkey) || (fp->fighter_vars.kirby.copy_id == Ft_Kind_GiantDonkey))
         {
             if (fp->fighter_vars.kirby.copydonkey_charge_level == FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_MAX)
             {
-                ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, 0);
+                ftColor_CheckSetColAnimIndex(fighter_gobj, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_ID, FTKIRBY_COPYDONKEY_GIANTPUNCH_CHARGE_COLANIM_LENGTH);
             }
         }
         break;
@@ -1211,7 +1211,7 @@ void ftCommon_ResetColAnimStatUpdate(GObj *fighter_gobj)
     case Ft_Kind_PolyNess:
         if (fp->is_absorb)
         {
-            ftColor_CheckSetColAnimIndex(fighter_gobj, FTNESS_PSI_MAGNET_COLANIM_ID, 0);
+            ftColor_CheckSetColAnimIndex(fighter_gobj, FTNESS_PSI_MAGNET_COLANIM_ID, FTNESS_PSI_MAGNET_COLANIM_LENGTH);
         }
         break;
     }
@@ -1474,7 +1474,7 @@ f32 gmCommonObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s3
     {
         knockback = 2500.0F;
     }
-    if (Save_Info.unk5E2 & 1) 
+    if (Save_Info.mprotect_fail & GMSAVE_PROTECTFAIL_RANDOMKNOCKBACK)
     {
         knockback = rand_f32() * 200.0F;
     }
@@ -1500,7 +1500,7 @@ f32 grMapObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 h
     {
         knockback = 2500.0F;
     }
-    if (Save_Info.unk5E2 & 1)
+    if (Save_Info.mprotect_fail & GMSAVE_PROTECTFAIL_RANDOMKNOCKBACK)
     {
         knockback = rand_f32() * 200.0F;
     }

@@ -69,7 +69,7 @@ u32 wpManager_GetGroupIndexInc(void)
 extern s32 D_ovl2_80131398;
 
 // 0x801655C8
-GObj* wpManager_CreateWeapon(GObj *spawn_gobj, WeaponSpawnData *item_status_desc, Vec3f *spawn_pos, u32 flags)
+GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, Vec3f *spawn_pos, u32 flags)
 {
     GObj *weapon_gobj;
     void (*cb)(GObj*);

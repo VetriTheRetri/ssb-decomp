@@ -1,8 +1,7 @@
 #include "ftmasterhand.h"
 
-
-
-void func_ovl3_8015ADC0(GObj *fighter_gobj)
+// 0x8015ADC0
+void ftMasterHand_Dead2_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -14,12 +13,13 @@ void func_ovl3_8015ADC0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015ADE8(GObj *fighter_gobj)
+// 0x8015ADE8
+void ftMasterHand_Dead2_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
     f32 vel_z;
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead2, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp = ftGetStruct(fighter_gobj);
 

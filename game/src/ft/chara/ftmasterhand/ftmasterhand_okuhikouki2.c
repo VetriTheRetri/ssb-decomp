@@ -1,16 +1,18 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_801595A0(GObj *fighter_gobj)
+// 0x801595A0
+void ftMasterHand_Okuhikouki2_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
         func_ovl2_8010CF20();
-        func_ovl3_801597A4(fighter_gobj);
+        ftMasterHand_Okuhikouki3_SetStatus(fighter_gobj);
         func_ovl3_80158620(fighter_gobj);
     }
 }
 
-void func_ovl3_801595F0(GObj *fighter_gobj)
+// 0x801595F0
+void ftMasterHand_Okuhikouki2_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
     f32 dist_x;
@@ -20,7 +22,7 @@ void func_ovl3_801595F0(GObj *fighter_gobj)
 
     fp = ftGetStruct(fighter_gobj);
 
-    dist_x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x;
+    dist_x = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x;
 
     if (ABSF(dist_x) > FTMASTERHAND_OKUHIKOUKI_VEL_ADD)
     {
@@ -35,7 +37,8 @@ void func_ovl3_801595F0(GObj *fighter_gobj)
     func_ovl3_80158528(fighter_gobj);
 }
 
-void func_ovl3_801596B0(GObj *fighter_gobj)
+// 0x801596B0
+void ftMasterHand_Okuhikouki2_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate;
@@ -44,7 +47,7 @@ void func_ovl3_801596B0(GObj *fighter_gobj)
 
     fp->lr = CENTER;    // Sets LR to zero? ILLEGAL
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okuhikouki2, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okuhikouki2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     translate = &DObjGetStruct(fighter_gobj)->translate;

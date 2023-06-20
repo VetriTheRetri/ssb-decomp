@@ -39,7 +39,7 @@ void ftCommon_Entry_ProcUpdate(GObj *fighter_gobj)
         {
             if (fp->ft_kind == Ft_Kind_MasterHand)
             {
-                func_ovl3_80159040(fighter_gobj);
+                ftMasterHand_Wait_SetStatus(fighter_gobj);
             }
             else
             {
@@ -93,7 +93,7 @@ void ftCommon_Appear_ProcUpdate(GObj *fighter_gobj)
 
         if (fp->ft_kind == Ft_Kind_MasterHand)
         {
-            func_ovl3_80159040(fighter_gobj);
+            ftMasterHand_Wait_SetStatus(fighter_gobj);
         }
         else ftCommon_Wait_SetStatus(fighter_gobj);
     }
@@ -246,7 +246,7 @@ void ftCommon_Appear_SetStatus(GObj *fighter_gobj)
             }
             else mh_target_gobj = mh_target_gobj->group_gobj_next;
         }
-        fp->fighter_vars.masterhand.p_masterhand->target_gobj = mh_target_gobj;
+        fp->fighter_vars.masterhand.boss->target_gobj = mh_target_gobj;
 
         break;
     }

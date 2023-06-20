@@ -245,8 +245,8 @@ void func_ovl3_80180480(GObj *article_gobj)
     func_ovl3_80167520(article_gobj, func_ovl3_80180400);
 }
 
-extern WeaponSpawnData Item_Spear_Swarm_Data;
-extern WeaponSpawnData Item_Pippi_Swarm_Data;
+extern wpCreateDesc Item_Spear_Swarm_Data;
+extern wpCreateDesc Item_Pippi_Swarm_Data;
 
 GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
 {

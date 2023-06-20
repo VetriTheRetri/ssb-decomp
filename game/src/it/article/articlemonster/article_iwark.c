@@ -307,7 +307,7 @@ bool32 func_ovl3_8017DEB8(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Item_Iwark_Rock_Data;
+extern wpCreateDesc Item_Iwark_Rock_Data;
 
 GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
 {

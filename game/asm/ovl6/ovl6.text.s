@@ -406,10 +406,10 @@ glabel func_ovl6_8018D62C
   /* 111D6C 8018D62C 27BDFFC8 */     addiu $sp, $sp, -0x38
   /* 111D70 8018D630 AFBF0014 */        sw $ra, 0x14($sp)
   /* 111D74 8018D634 AFA40038 */        sw $a0, 0x38($sp)
-  /* 111D78 8018D638 0C03D10A */       jal func_ovl2_800F4428
+  /* 111D78 8018D638 0C03D10A */       jal mpCollision_GetLREdgeLeft
   /* 111D7C 8018D63C 27A5002C */     addiu $a1, $sp, 0x2c
   /* 111D80 8018D640 8FA40038 */        lw $a0, 0x38($sp)
-  /* 111D84 8018D644 0C03D102 */       jal func_ovl2_800F4408
+  /* 111D84 8018D644 0C03D102 */       jal mpCollision_GetLREdgeRight
   /* 111D88 8018D648 27A50020 */     addiu $a1, $sp, 0x20
   /* 111D8C 8018D64C C7A40020 */      lwc1 $f4, 0x20($sp)
   /* 111D90 8018D650 C7A6002C */      lwc1 $f6, 0x2c($sp)

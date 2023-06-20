@@ -1,7 +1,7 @@
 #include <game/src/ft/chara/ftness/ftness.h>
 
 #define FTNESS_SPECIALHISTART_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
-#define FTNESS_SPECIALHIHOLD_STATUPDATE_FLAGS (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_UNK4_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
+#define FTNESS_SPECIALHIHOLD_STATUPDATE_FLAGS (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_LOOPSFX_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
 #define FTNESS_SPECIALHIEND_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
 #define FTNESS_SPECIALHI_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
 
@@ -43,7 +43,7 @@ void ftNess_SpecialHi_CreatePKThunder(GObj *fighter_gobj)
     vel.y = FTNESS_PKTHUNDER_SPAWN_VEL_Y;
     vel.x = 0.0F;
 
-    fp->status_vars.ness.specialhi.pkthunder_gobj = func_ovl3_8016B2C4(fighter_gobj, &pos, &vel);
+    fp->status_vars.ness.specialhi.pkthunder_gobj = wpNess_PKThunderHead_CreateWeapon(fighter_gobj, &pos, &vel);
 }
 
 // 0x80153CFC
@@ -81,7 +81,7 @@ bool32 ftNess_SpecialHi_CheckCollidePKThunder(GObj *fighter_gobj)
 
         if (collide_y < FTNESS_PKTHUNDER_COLLIDE_Y)
         {
-            ip->item_vars.pkthunder.pkthunder_state = wpNessThunderStatus_Collide;
+            ip->item_vars.pkthunder.pkthunder_state = wpNessPKThunder_Status_Collide;
 
             fp->status_vars.ness.specialhi.pkthunder_pos = DObjGetStruct(pkthunder_gobj)->translate;
 
@@ -167,7 +167,7 @@ void ftNess_SpecialHi_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->status_vars.ness.specialhi.pk_jibaku_delay = FTNESS_PK_JIBAKU_DELAY;
+    fp->status_vars.ness.specialhi.pk_jibaku_delay = FTNESS_PKJIBAKU_DELAY;
     fp->status_vars.ness.specialhi.pkthunder_end_delay = FTNESS_PKTHUNDER_END_DELAY;
     fp->status_vars.ness.specialhi.pkthunder_gravity_delay = FTNESS_PKTHUNDER_GRAVITY_DELAY;
     fp->fighter_vars.ness.is_thunder_destroy = FALSE;
@@ -277,7 +277,7 @@ void ftNess_SpecialHi_SetPKThunderDestroy(GObj *fighter_gobj) // Unused
     {
         Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-        ip->item_vars.pkthunder.pkthunder_state = wpNessThunderStatus_Destroy;
+        ip->item_vars.pkthunder.pkthunder_state = wpNessPKThunder_Status_Destroy;
     }
 }
 
@@ -315,7 +315,7 @@ void func_ovl3_801542F4(GObj *fighter_gobj)
 // 0x8015435C
 void ftNess_SpecialHiHold_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialHiHold, 0.0F, 1.0F, FTSTATUPDATE_UNK4_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialHiHold, 0.0F, 1.0F, FTSTATUPDATE_LOOPSFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl3_801542F4(fighter_gobj);
 }
@@ -323,7 +323,7 @@ void ftNess_SpecialHiHold_SetStatus(GObj *fighter_gobj)
 // 0x801543A0
 void ftNess_SpecialAirHiHold_SetStatus(GObj *fighter_gobj)
 {
-    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirHiHold, 0.0F, 1.0F, FTSTATUPDATE_UNK4_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirHiHold, 0.0F, 1.0F, FTSTATUPDATE_LOOPSFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl3_801542F4(fighter_gobj);
 }
@@ -488,7 +488,7 @@ void ftNess_Jibaku_ProcPhysics(GObj *fighter_gobj)
 
     if (fp->phys_info.vel_ground.x > 0.0F)
     {
-        fp->phys_info.vel_ground.x -= FTNESS_PK_JIBAKU_DECELERATE;
+        fp->phys_info.vel_ground.x -= FTNESS_PKJIBAKU_DECELERATE;
     }
 
     jtgt_ovl2_800D8B94(fighter_gobj);
@@ -504,9 +504,9 @@ void ftNess_JibakuAir_ProcPhysics(GObj *fighter_gobj)
     f32 fabs_axis;
     f32 fabs_axis_bak;
 
-    fp->phys_info.vel_air.x -= (FTNESS_PK_JIBAKU_DECELERATE * cosf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * fp->lr);
+    fp->phys_info.vel_air.x -= (FTNESS_PKJIBAKU_DECELERATE * cosf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * fp->lr);
 
-    fp->phys_info.vel_air.y -= (FTNESS_PK_JIBAKU_DECELERATE * __sinf(fp->status_vars.ness.specialhi.pk_jibaku_angle));
+    fp->phys_info.vel_air.y -= (FTNESS_PKJIBAKU_DECELERATE * __sinf(fp->status_vars.ness.specialhi.pk_jibaku_angle));
 
     fabs_axis = ABSF(fp->phys_info.vel_air.x);
 
@@ -533,7 +533,7 @@ bool32 ftNess_SpecialHi_CheckIgnorePass(GObj *fighter_gobj) // Check if Ness can
 {
     Fighter_Struct* fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID) || ((f32)fp->status_vars.ness.specialhi.pk_jibaku_anim_length <= FTNESS_PK_JIBAKU_PASS_FRAME_END))
+    if (!(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID) || ((f32)fp->status_vars.ness.specialhi.pk_jibaku_anim_length <= FTNESS_PKJIBAKU_PASS_FRAME_END))
     {
         return TRUE;
     }
@@ -575,7 +575,7 @@ void ftNess_JibakuAir_ProcMap(GObj *fighter_gobj)
             ftCommon_CliffCatch_SetStatus(fighter_gobj);
             return;
         }
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
+        if (FTNESS_PKJIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ground_angle, &fp->phys_info.vel_air))
         {
             fp->phys_info.vel_air.x = 0.0F;
             fp->phys_info.vel_air.y = 0.0F;
@@ -594,7 +594,7 @@ void ftNess_JibakuAir_ProcMap(GObj *fighter_gobj)
 
     if (fp->coll_data.coll_mask & MPCOLL_MASK_CEIL)
     {
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_air))
+        if (FTNESS_PKJIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.ceil_angle, &fp->phys_info.vel_air))
         {
             pos.y += fp->coll_data.object_coll.top;
 
@@ -604,7 +604,7 @@ void ftNess_JibakuAir_ProcMap(GObj *fighter_gobj)
     if (fp->coll_data.coll_mask & MPCOLL_MASK_RWALL)
     {
 
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_air))
+        if (FTNESS_PKJIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_air))
         {
             pos.x += fp->coll_data.object_coll.width;
             pos.y += fp->coll_data.object_coll.center;
@@ -615,7 +615,7 @@ void ftNess_JibakuAir_ProcMap(GObj *fighter_gobj)
     }
     if (fp->coll_data.coll_mask & MPCOLL_MASK_LWALL)
     {
-        if (FTNESS_PK_JIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_air))
+        if (FTNESS_PKJIBAKU_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_air))
         {
             pos.x -= fp->coll_data.object_coll.width;
             pos.y += fp->coll_data.object_coll.center;
@@ -668,7 +668,7 @@ void ftNess_Jibaku_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->status_vars.ness.specialhi.pk_jibaku_anim_length = FTNESS_PK_JIBAKU_ANIM_LENGTH;
+    fp->status_vars.ness.specialhi.pk_jibaku_anim_length = FTNESS_PKJIBAKU_ANIM_LENGTH;
 
     ftNess_SpecialHi_UpdateModelPitch(fighter_gobj);
 
@@ -703,7 +703,7 @@ void ftNess_Jibaku_SetStatus(GObj *fighter_gobj)
                 {
                     pos.x = -pos.x;
                 }
-                fp->phys_info.vel_ground.x = FTNESS_PK_JIBAKU_VEL;
+                fp->phys_info.vel_ground.x = FTNESS_PKJIBAKU_VEL;
 
                 ftNess_Jibaku_InitStatusVars(fighter_gobj);
                 ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -732,8 +732,8 @@ void ftNess_JibakuAir_SetStatus(GObj *fighter_gobj)
 
     fp->status_vars.ness.specialhi.pk_jibaku_angle  = atan2f(vel_y, ((f32)fp->lr * vel_x));
 
-    fp->phys_info.vel_air.x = (f32)(cosf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * FTNESS_PK_JIBAKU_VEL * (f32)fp->lr);
-    fp->phys_info.vel_air.y = (f32)(__sinf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * FTNESS_PK_JIBAKU_VEL);
+    fp->phys_info.vel_air.x = (f32)(cosf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * FTNESS_PKJIBAKU_VEL * (f32)fp->lr);
+    fp->phys_info.vel_air.y = (f32)(__sinf(fp->status_vars.ness.specialhi.pk_jibaku_angle) * FTNESS_PKJIBAKU_VEL);
 
     ftNess_Jibaku_InitStatusVars(fighter_gobj);
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -775,7 +775,7 @@ void ftNess_SpecialAirHiBound_SetStatus(GObj *fighter_gobj, Vec3f *angle, Vec3f 
     Vec3f *vel = &fp->phys_info.vel_air;
 
     func_ovl0_800C7B08(vel);
-    func_ovl0_800C7AE0(vel, FTNESS_PK_JIBAKU_REBOUND_VEL_MAG);
+    func_ovl0_800C7AE0(vel, FTNESS_PKJIBAKU_REBOUND_VEL_MAG);
     func_ovl0_800C7A84(vel);
     func_ovl2_800D8EB8(fp);
 

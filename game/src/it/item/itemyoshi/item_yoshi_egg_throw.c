@@ -6,9 +6,30 @@
 #include <game/include/PR/mbi.h>
 #include <game/include/PR/sp.h>
 
+extern void *D_ovl2_80130FF0;
 
+wpCreateDesc wpYoshi_EggThrow_WeaponDesc =
+{
+    0,                                      // Render flags?
+    Wp_Kind_EggThrow,                       // Weapon Kind
+    &D_ovl2_80130FF0,                       // Pointer to character's loaded files?
+    0xC,                                    // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0x2E,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpYoshi_EggThrow_ProcUpdate,            // Proc Update
+    wpYoshi_EggThrow_ProcMap,               // Proc Map
+    wpYoshi_EggThrow_ProcHit,               // Proc Hit
+    wpYoshi_EggThrow_ProcHit,               // Proc Shield
+    wpYoshi_EggThrow_ProcHop,               // Proc Hop
+    wpYoshi_EggThrow_ProcHit,               // Proc Set-Off
+    wpYoshi_EggThrow_ProcReflector,         // Proc Reflector
+    NULL                                    // Proc Absorb
+};
 
-bool32 func_ovl3_8016BF50(GObj *weapon_gobj)
+// 0x8016BF50
+bool32 wpYoshi_EggThrow_ProcDead(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -19,7 +40,8 @@ bool32 func_ovl3_8016BF50(GObj *weapon_gobj)
     else return TRUE;
 }
 
-bool32 func_ovl3_8016BF74(GObj *weapon_gobj)
+// 0x8016BF74
+bool32 wpYoshi_EggExplode_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -30,7 +52,8 @@ bool32 func_ovl3_8016BF74(GObj *weapon_gobj)
     else return FALSE;
 }
 
-void func_ovl3_8016BFA0(GObj *weapon_gobj) // Egg Throw explodes from landing successfully
+// 0x8016BFA0
+void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from landing successfully
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -47,7 +70,7 @@ void func_ovl3_8016BFA0(GObj *weapon_gobj) // Egg Throw explodes from landing su
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
-    ip->proc_update = func_ovl3_8016BF74;
+    ip->proc_update = wpYoshi_EggExplode_ProcUpdate;
     ip->proc_map = NULL;
     ip->proc_hit = NULL;
     ip->proc_shield = NULL;
@@ -56,7 +79,8 @@ void func_ovl3_8016BFA0(GObj *weapon_gobj) // Egg Throw explodes from landing su
     ip->proc_reflector = NULL;
 }
 
-void func_ovl3_8016C00C(GObj *weapon_gobj) // Egg Throw explodes from expiring 
+// 0x8016C00C
+void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from expiring 
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -73,7 +97,7 @@ void func_ovl3_8016C00C(GObj *weapon_gobj) // Egg Throw explodes from expiring
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
-    ip->proc_update = func_ovl3_8016BF74;
+    ip->proc_update = wpYoshi_EggExplode_ProcUpdate;
     ip->proc_map = NULL;
     ip->proc_hit = NULL;
     ip->proc_shield = NULL;
@@ -82,7 +106,8 @@ void func_ovl3_8016C00C(GObj *weapon_gobj) // Egg Throw explodes from expiring
     ip->proc_reflector = NULL;
 }
 
-void func_ovl3_8016C07C(GObj *weapon_gobj)
+// 0x8016C07C
+void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     f32 angle = ABS(ip->item_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
@@ -101,12 +126,12 @@ void func_ovl3_8016C07C(GObj *weapon_gobj)
 
     angle *= ((ip->item_vars.egg_throw.stick_range < 0) ? LEFT : RIGHT);
 
-    angle = (ip->item_vars.egg_throw.lr > 0) ? ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle : ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle;
+    angle = (ip->item_vars.egg_throw.lr > 0) ? (ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
 
     ip->phys_info.vel.y = __sinf(angle) * ((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
     ip->phys_info.vel.x = cosf(angle) * ((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
 
-    ip->item_vars.egg_throw.angle = ((((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD) * PI32) / 180.0F); // Deg2Rad macro pls
+    ip->item_vars.egg_throw.angle = F_DEG_TO_RAD((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD);
 
     DObjGetStruct(weapon_gobj)->translate.z = 0.0F;
 
@@ -115,7 +140,8 @@ void func_ovl3_8016C07C(GObj *weapon_gobj)
     wpManager_UpdateHitPositions(weapon_gobj);
 }
 
-bool32 jtgt_ovl3_8016C218(GObj *weapon_gobj)
+// 0x8016C218
+bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -123,12 +149,12 @@ bool32 jtgt_ovl3_8016C218(GObj *weapon_gobj)
     {
         if (wpMain_DecLifeCheckExpire(ip) != FALSE)
         {
-            func_800269C0(0xFCU);
+            func_800269C0(0xFC);
 
             func_ovl2_80103A88(&DObjGetStruct(weapon_gobj)->translate);
             func_ovl2_801041A0(&DObjGetStruct(weapon_gobj)->translate);
 
-            func_ovl3_8016C00C(weapon_gobj);
+            wpYoshi_EggExpire_InitWeaponVars(weapon_gobj);
 
             return FALSE;
         }
@@ -144,12 +170,13 @@ bool32 jtgt_ovl3_8016C218(GObj *weapon_gobj)
     {
         ip->item_vars.egg_throw.is_spin = TRUE;
 
-        func_ovl3_8016C07C(weapon_gobj);
+        wpYoshi_EggThrow_InitWeaponVars(weapon_gobj);
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C2E0(GObj *weapon_gobj)
+// 0x8016C2E0
+bool32 wpYoshi_EggThrow_ProcMap(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -157,31 +184,33 @@ bool32 jtgt_ovl3_8016C2E0(GObj *weapon_gobj)
     {
         func_ovl2_801008F4(2);
 
-        func_800269C0(0xFCU);
+        func_800269C0(0xFC);
 
         func_ovl2_80103A88(&DObjGetStruct(weapon_gobj)->translate);
         func_ovl2_801041A0(&DObjGetStruct(weapon_gobj)->translate);
 
         func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
-        func_ovl3_8016BFA0(weapon_gobj);
+        wpYoshi_EggHit_InitWeaponVars(weapon_gobj);
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C364(GObj *weapon_gobj)
+// 0x8016C374
+bool32 wpYoshi_EggThrow_ProcHit(GObj *weapon_gobj)
 {
-    func_800269C0(0xFCU);
+    func_800269C0(0xFC);
 
     func_ovl2_80103A88(&DObjGetStruct(weapon_gobj)->translate);
     func_ovl2_801041A0(&DObjGetStruct(weapon_gobj)->translate);
 
-    func_ovl3_8016BFA0(weapon_gobj);
+    wpYoshi_EggHit_InitWeaponVars(weapon_gobj);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C3B4(GObj *weapon_gobj)
+// 0x8016C3B4
+bool32 wpYoshi_EggThrow_ProcHop(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
@@ -192,7 +221,8 @@ bool32 jtgt_ovl3_8016C3B4(GObj *weapon_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8016C404(GObj *weapon_gobj)
+// 0x8016C404
+bool32 wpYoshi_EggThrow_ProcReflector(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
@@ -205,7 +235,8 @@ bool32 jtgt_ovl3_8016C404(GObj *weapon_gobj)
     return FALSE;
 }
 
-void func_ovl3_8016C444(GObj *weapon_gobj)
+// 0x8016C444
+void wpYoshi_EggThrow_ProcRender(GObj *weapon_gobj)
 {
     gDPPipeSync(D_800465B0[1]++);
 
@@ -214,12 +245,11 @@ void func_ovl3_8016C444(GObj *weapon_gobj)
     func_ovl3_801675D0(weapon_gobj);
 }
 
-extern WeaponSpawnData Item_EggThrow_Desc;
-
-GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
+// 0x8016C498
+GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = fighter_gobj->user_data;
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_EggThrow_Desc, pos, WEAPON_MASK_SPAWN_FIGHTER);
+    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpYoshi_EggThrow_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
     Weapon_Struct *ip;
 
     if (weapon_gobj == NULL)
@@ -229,11 +259,11 @@ GObj* func_ovl3_8016C498(GObj *fighter_gobj, Vec3f *pos)
 
     ip = wpGetStruct(weapon_gobj);
 
-    weapon_gobj->renderer = func_ovl3_8016C444;
+    weapon_gobj->renderer = wpYoshi_EggThrow_ProcRender;
 
     ip->item_vars.egg_throw.is_throw = FALSE;
 
-    ip->proc_dead = func_ovl3_8016BF50;
+    ip->proc_dead = wpYoshi_EggThrow_ProcDead;
 
     ip->lifetime = ITEGGTHROW_LIFETIME;
 

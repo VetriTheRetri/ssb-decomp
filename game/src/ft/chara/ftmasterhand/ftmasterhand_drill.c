@@ -1,11 +1,13 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_8015A0C0(GObj *fighter_gobj)
+// 0x8015A0C0
+void ftMasterHand_Drill_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_80159040);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftMasterHand_Wait_SetStatus);
 }
 
-void func_ovl3_8015A0E4(GObj *fighter_gobj)
+// 0x8015A0E4
+void ftMasterHand_Drill_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
@@ -17,12 +19,13 @@ void func_ovl3_8015A0E4(GObj *fighter_gobj)
 
     if (fp->status_vars.masterhand.drill.follow_timer == 0) // Wait until timer reaches 0 to switch physics?
     {
-        fp->proc_physics = func_ovl3_8015A138;
+        fp->proc_physics = ftMasterHand_Drill_ProcPhysicsFollow;
         fp->status_vars.masterhand.drill.follow_timer = 39;
     }
 }
 
-void func_ovl3_8015A138(GObj *fighter_gobj)
+// 0x8015A138
+void ftMasterHand_Drill_ProcPhysicsFollow(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
     f32 dist_x;
@@ -31,7 +34,7 @@ void func_ovl3_8015A138(GObj *fighter_gobj)
 
     fp = ftGetStruct(fighter_gobj);
 
-    dist_x = DObjGetStruct(fp->fighter_vars.masterhand.p_masterhand->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x;
+    dist_x = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x;
 
     if (ABSF(dist_x) > 30.0F)
     {
@@ -50,39 +53,41 @@ void func_ovl3_8015A138(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_8015A204(GObj *fighter_gobj)
+// 0x8015A204
+void ftMasterHand_Drill_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
-    if (fp->status_vars.masterhand.drill.pos_x2 < translate->x)
+    if (translate->x > fp->status_vars.masterhand.drill.edgeright_pos_x)
     {
-        translate->x = fp->status_vars.masterhand.drill.pos_x2;
+        translate->x = fp->status_vars.masterhand.drill.edgeright_pos_x;
     }
-    else if (translate->x < fp->status_vars.masterhand.drill.pos_x1)
+    else if (translate->x < fp->status_vars.masterhand.drill.edgeleft_pos_x)
     {
-        translate->x = fp->status_vars.masterhand.drill.pos_x1;
+        translate->x = fp->status_vars.masterhand.drill.edgeleft_pos_x;
     }
     func_ovl2_800DE348(fighter_gobj);
 }
 
-void func_ovl3_8015A268(GObj *fighter_gobj)
+// 0x8015A268
+void ftMasterHand_Drill_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
     Vec3f pos;
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Drill, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Drill, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_80157F90(fighter_gobj);
 
-    fp = fighter_gobj->user_data;
+    fp = ftGetStruct(fighter_gobj);
 
-    func_ovl2_800F4428(fp->coll_data.ground_line_id, &pos);
+    mpCollision_GetLREdgeLeft(fp->coll_data.ground_line_id, &pos);
 
-    fp->status_vars.masterhand.drill.pos_x1 = pos.x;
+    fp->status_vars.masterhand.drill.edgeleft_pos_x = pos.x;
 
-    func_ovl2_800F4408(fp->coll_data.ground_line_id, &pos);
+    mpCollision_GetLREdgeRight(fp->coll_data.ground_line_id, &pos);
 
-    fp->status_vars.masterhand.drill.pos_x2 = pos.x;
+    fp->status_vars.masterhand.drill.edgeright_pos_x = pos.x;
 
     fp->status_vars.masterhand.drill.follow_timer = 61;
 }

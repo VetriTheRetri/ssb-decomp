@@ -41,14 +41,14 @@ typedef enum gmSaveUnlock
 #define GMSAVE_UNLOCK_MASK_PURIN    (1 << gmSave_Unlock_Purin)
 #define GMSAVE_UNLOCK_MASK_LUIGI    (1 << gmSave_Unlock_Luigi)
 
-typedef enum gmPauseStatus
+typedef enum gmMatch_PauseStatus
 {
-    gmPauseStatus_Disable,        // Pausing not allowed
-    gmPauseStatus_Enable,         // Pausing allowed
-    gmPauseStatus_Paused,         // Player paused
-    gmPauseStatus_Unpause         // Player unpaused
+    gmMatch_PauseStatus_Disable,        // Pausing not allowed
+    gmMatch_PauseStatus_Enable,         // Pausing allowed
+    gmMatch_PauseStatus_Paused,         // Player paused
+    gmMatch_PauseStatus_Unpause         // Player unpaused
 
-} gmPauseStatus;
+} gmMatch_PauseStatus;
 
 typedef enum gmMatchGameRules
 {
@@ -73,6 +73,18 @@ typedef enum gmMatchGameDifficulty
     gmMatch_Difficulty_VeryHard
 
 } gmMatchGameDifficulty;
+
+typedef enum gmSaveProtectPenalty
+{
+    gmSave_ProtectFail_RandomKnockback,
+    gmSave_ProtectFail_HalfStickRange,
+    gmSave_ProtectFail_1PGameMario
+
+} gmSaveProtectPenalty;
+
+#define GMSAVE_PROTECTFAIL_RANDOMKNOCKBACK  (1 << gmSave_ProtectFail_RandomKnockback)   // 0x1
+#define GMSAVE_PROTECTFAIL_HALFSTICKRANGE   (1 << gmSave_ProtectFail_HalfStickRange)    // 0x2
+#define GMSAVE_PROTECTFAIL_1PGAMEMARIO      (1 << gmSave_ProtectFail_1PGameMario)       // 0x4
 
 typedef enum gmMatchGameType
 {
@@ -277,7 +289,7 @@ struct gmSaveInfo {
     u8 unk5DF;
     u8 unk5E0;
     u8 unk5E1;
-    u8 unk5E2; // Some kind of anti-piracy measure??? 0x1 results in random knockback velocity, 0x2 halves stick range
+    u8 mprotect_fail; // Some kind of anti-piracy measure??? 0x1 results in random knockback velocity, 0x2 halves stick range, 0x4 forces Mario in 1P game
     u8 unk5E3;
     u8 unk5E4;
     u8 unk5E5;

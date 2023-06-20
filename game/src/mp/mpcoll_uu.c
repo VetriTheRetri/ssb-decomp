@@ -134,7 +134,8 @@ bool32 mpCollision_GetUUCommon(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *f
     return TRUE;
 }
 
-bool32 func_ovl2_800F3DD8(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *flags, Vec3f *angle)
+// 0x800F3DD8
+bool32 mpCollision_GetUUCommonUp(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *flags, Vec3f *angle)
 {
     return mpCollision_GetUUCommon(line_id, object_pos, arg2, flags, angle, 1);
 }
@@ -329,12 +330,14 @@ void mpCollision_GetLREdge(s32 line_id, Vec3f *object_pos, s32 lr)
     }
 }
 
-void func_ovl2_800F4408(s32 line_id, Vec3f *object_pos)
+// 0x800F4408
+void mpCollision_GetLREdgeRight(s32 line_id, Vec3f *object_pos)
 {
     mpCollision_GetLREdge(line_id, object_pos, 1);
 }
 
-void func_ovl2_800F4428(s32 line_id, Vec3f *object_pos)
+// 0x800F4428
+void mpCollision_GetLREdgeLeft(s32 line_id, Vec3f *object_pos)
 {
     mpCollision_GetLREdge(line_id, object_pos, -1);
 }

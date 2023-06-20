@@ -138,7 +138,7 @@ void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 
             func_ovl2_800EDF24(fp->joint[FTLINK_SPINATTACK_SPAWN_JOINT], &pos);
 
-            fp->status_vars.link.specialhi.spin_attack_gobj = func_ovl3_8016CB1C(fighter_gobj, &pos);
+            fp->status_vars.link.specialhi.spin_attack_gobj = wpLink_SpinAttack_CreateWeapon(fighter_gobj, &pos);
 
             if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
             {

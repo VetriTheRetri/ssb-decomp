@@ -110,8 +110,8 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
                 sp134 = fp->attributes->shadow_size;
                 sp108 = 0.0F, sp104 = 1984.0F;
 
-                func_ovl2_800F4428(ground_line_id, &sp118);
-                func_ovl2_800F4408(ground_line_id, &sp10C);
+                mpCollision_GetLREdgeLeft(ground_line_id, &sp118);
+                mpCollision_GetLREdgeRight(ground_line_id, &sp10C);
 
                 var_f20 = sp13C - sp134;
                 var_f22 = sp13C + sp134;

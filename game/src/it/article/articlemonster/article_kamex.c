@@ -340,7 +340,7 @@ bool32 jtgt_ovl3_80180E6C(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern WeaponSpawnData Item_Hydro_Data;
+extern wpCreateDesc Item_Hydro_Data;
 
 GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
 {

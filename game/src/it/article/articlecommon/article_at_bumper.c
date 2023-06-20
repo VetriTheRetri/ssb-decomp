@@ -267,7 +267,7 @@ bool32 jtgt_ovl3_8017BA2C(GObj *article_gobj)
     {
         if (ap->lr == LEFT)
         {
-            func_ovl2_800F4428(ap->coll_data.ground_line_id, &sp30);
+            mpCollision_GetLREdgeLeft(ap->coll_data.ground_line_id, &sp30);
 
             if ((joint->translate.x - attributes->objectcoll_width) <= sp30.x)
             {
@@ -276,7 +276,7 @@ bool32 jtgt_ovl3_8017BA2C(GObj *article_gobj)
         }
         else
         {
-            func_ovl2_800F4408(ap->coll_data.ground_line_id, &sp30);
+            mpCollision_GetLREdgeRight(ap->coll_data.ground_line_id, &sp30);
 
             if (sp30.x <= (joint->translate.x + attributes->objectcoll_width))
             {

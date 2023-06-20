@@ -1,8 +1,7 @@
 #include "ftmasterhand.h"
 
-
-
-void func_ovl3_801591A0(GObj *fighter_gobj)
+// 0x801591A0
+void ftMasterHand_Move_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
@@ -31,7 +30,8 @@ void func_ovl3_801591A0(GObj *fighter_gobj)
     }
 }
 
-void func_ovl3_80159260(GObj *fighter_gobj)
+// 0x80159260
+void ftMasterHand_Move_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
@@ -45,21 +45,22 @@ void func_ovl3_80159260(GObj *fighter_gobj)
         fp->phys_info.vel_air.y = 0.0F;
         fp->phys_info.vel_air.x = 0.0F;
 
-        fp->status_vars.masterhand.move.cb(fighter_gobj);
+        fp->status_vars.masterhand.move.proc_setstatus(fighter_gobj);
     }
 }
 
-void func_ovl3_801592B4(GObj *fighter_gobj, void (*cb)(GObj*), Vec3f *vel)
+// 0x801592B4
+void ftMasterHand_Move_SetStatus(GObj *fighter_gobj, void (*proc_setstatus)(GObj*), Vec3f *vel)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Move, fighter_gobj->anim_frame, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Move, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
-    fp->status_vars.masterhand.move.cb = cb;
+    fp->status_vars.masterhand.move.proc_setstatus = proc_setstatus;
 
     fp->status_vars.masterhand.move.vel = *vel;
 
-    if (((vel->x - DObjGetStruct(fighter_gobj)->translate.x) * (f32)fp->lr) < 0.0F)
+    if (((vel->x - DObjGetStruct(fighter_gobj)->translate.x) * fp->lr) < 0.0F)
     {
         fp->lr = -fp->lr;
         fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * HALF_PI32;

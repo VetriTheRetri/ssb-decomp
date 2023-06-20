@@ -2,15 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\game",
+    "\\game\\include",
+    "\\game\\include\\PR",
     "\\game\\src",
-    "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftfox",
-    "\\game\\src\\ft\\common",
     "\\game\\src\\it",
-    "\\game\\src\\it\\article",
-    "\\game\\src\\ovl2"
+    "\\game\\src\\it\\item",
+    "\\game\\src\\it\\item\\itemkirby",
+    "\\game\\src\\it\\item\\itemlink"
   ],
-  "SelectedNode": "\\game\\src\\ft\\chara\\ftkirby\\ftkirby_copylink_specialn.c",
+  "SelectedNode": "\\game\\src\\it\\item\\itemkirby\\item_kirby_cutter.c",
   "PreviewInSolutionExplorer": false
 }

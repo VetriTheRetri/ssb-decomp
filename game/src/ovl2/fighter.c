@@ -263,15 +263,15 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         break;
 
     case Ft_Kind_MasterHand:
-        fp->fighter_vars.masterhand.p_masterhand = &fp->fighter_vars.masterhand.s;
-        fp->fighter_vars.masterhand.p_masterhand->unk_0xC = 1.0F;
-        fp->fighter_vars.masterhand.p_masterhand->unk_0x14 = -1;
-        fp->fighter_vars.masterhand.p_masterhand->unk_0x15 = -1;
-        fp->fighter_vars.masterhand.p_masterhand->unk_0x16 = 0;
+        fp->fighter_vars.masterhand.boss = &fp->fighter_vars.masterhand.s;
+        fp->fighter_vars.masterhand.boss->wait_div = 1.0F;
+        fp->fighter_vars.masterhand.boss->status_index = -1;
+        fp->fighter_vars.masterhand.boss->status_index_random = -1;
+        fp->fighter_vars.masterhand.boss->status_index_guard = 0;
 
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            func_ovl3_80158428(fighter_gobj);
+            ftMasterHand_Common_SetNextAttackWait(fighter_gobj);
             func_ovl3_80158634(fighter_gobj);
         }
         break;

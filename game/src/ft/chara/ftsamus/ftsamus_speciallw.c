@@ -18,7 +18,7 @@ void ftSamus_SpecialLw_CreateBomb(GObj *fighter_gobj)
         joint = fp->joint[ftParts_TopN_Joint]; // Not required but stack might suggest they wrote it like this
 
         func_ovl2_800EDF24(joint, &pos);
-        func_ovl3_80169328(fighter_gobj, &pos);
+        wpSamus_Bomb_CreateWeapon(fighter_gobj, &pos);
     }
 }
 

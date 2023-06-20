@@ -185,7 +185,7 @@ void func_ovl2_800D67DC(void)
     D_800A4B18.is_display_score = FALSE;
     D_800A4B18.unk_minfo_0x1D_b1 = TRUE;
 
-    if (Save_Info.unk5E2 & 4)
+    if (Save_Info.mprotect_fail & GMSAVE_PROTECTFAIL_1PGAMEMARIO)
     {
         Scene_Info.ft_kind = Ft_Kind_Mario;
         Scene_Info.unk15 = 0;
@@ -216,7 +216,7 @@ void func_ovl2_800D67DC(void)
 
     for (i = 0; i < ARRAY_COUNT(Scene_Info.cpu_port); i++)
     {
-        if (player_port == 3)
+        if (player_port == (GMMATCH_PLAYERS_MAX - 1))
         {
             player_port = 0;
         }

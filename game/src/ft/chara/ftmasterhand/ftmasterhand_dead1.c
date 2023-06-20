@@ -1,15 +1,17 @@
 #include "ftmasterhand.h"
 
-void func_ovl3_8015AD50(GObj *fighter_gobj)
+// 0x8015AD50
+void ftMasterHand_Dead1_ProcUpdate(GObj *fighter_gobj)
 {
-    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, func_ovl3_8015ADE8);
+    ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftMasterHand_Dead2_SetStatus);
 }
 
-void func_ovl3_8015AD74(GObj *fighter_gobj)
+// 0x8015AD74
+void ftMasterHand_Dead1_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp;
 
-    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead1, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
     fp = ftGetStruct(fighter_gobj);
 

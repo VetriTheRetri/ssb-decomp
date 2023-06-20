@@ -6,7 +6,8 @@
 #include "gmground.h"
 #include "thread6.h"
 
-void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, ftScriptEvent *p_event, u32 ev_kind)
+// 0x800DF0F0
+void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScriptEvent *p_event, u32 ev_kind)
 {
     ftScriptPointer *p_goto;
     s32 gfx_id;
@@ -581,7 +582,8 @@ void func_ovl2_800DF0F0(GObj *fighter_gobj, Fighter_Struct *fp, ftScriptEvent *p
     }
 }
 
-void func_ovl2_800E02A8(GObj *fighter_gobj)
+// 0x800E02A8
+void ftScript_UpdateAllEventsNoGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftScriptEvent *p_event;
@@ -615,7 +617,7 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
                 {
                     ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX);
                 }
-                else func_ovl2_800DF0F0(fighter_gobj, fp, p_event, ev_kind);
+                else ftScript_ProcessScriptEvent(fighter_gobj, fp, p_event, ev_kind);
 
                 goto loop;
             }
@@ -630,8 +632,8 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
     }
 }
 
-// Fast Forward script?
-void func_ovl2_800E02A8(GObj *fighter_gobj)
+// 0x800E0478 - Fast forward all fighter-specific events?
+void ftScript_UpdateDefaultEvents(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftScriptEvent *p_event;
@@ -704,7 +706,7 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
                     break;
 
                 default:
-                    func_ovl2_800DF0F0(fighter_gobj, fp, p_event, ev_kind);
+                    ftScript_ProcessScriptEvent(fighter_gobj, fp, p_event, ev_kind);
                     break;
                 }
                 goto loop;
@@ -717,7 +719,8 @@ void func_ovl2_800E02A8(GObj *fighter_gobj)
     }
 }
 
-void func_ovl2_800E0654(GObj *fighter_gobj)
+// 0x800E0654 - Update only standard events and GFX spawn
+void ftScript_UpdateDefaultEventsGFX(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftScriptEvent *p_event;
@@ -761,7 +764,7 @@ void func_ovl2_800E0654(GObj *fighter_gobj)
                 case ftScriptEvent_Kind_ScriptPause:
                 case ftScriptEvent_Kind_GFX:
                 case ftScriptEvent_Kind_GFXScaleOffset:
-                    func_ovl2_800DF0F0(fighter_gobj, fp, p_event, ev_kind);
+                    ftScript_ProcessScriptEvent(fighter_gobj, fp, p_event, ev_kind);
                     break;
 
                 case ftScriptEvent_Kind_Hit:
@@ -804,16 +807,17 @@ void func_ovl2_800E07D4(GObj *fighter_gobj)
 void ftAnim_Update(GObj *fighter_gobj)
 {
     func_ovl2_800E07D4(fighter_gobj);
-    func_ovl2_800E02A8(fighter_gobj);
+    ftScript_UpdateAllEventsNoGFX(fighter_gobj);
 }
 
 void func_ovl2_800E0858(GObj *fighter_gobj)
 {
     func_ovl2_800E07D4(fighter_gobj);
-    func_ovl2_800E0478(fighter_gobj);
+    ftScript_UpdateDefaultEvents(fighter_gobj);
 }
 
-bool32 func_ovl2_800E0880(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_playing_sfx, bool32 is_playing_gfx)
+// 0x800E0880
+bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 is_playing_sfx, bool32 is_playing_gfx)
 {
     s32 i, j;
     Fighter_Struct *fp;
@@ -1076,7 +1080,7 @@ void ftCommon_UpdateColAnim(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    while (func_ovl2_800E0880(&fp->colanim, fighter_gobj, fp->is_playing_sfx, fp->is_playing_gfx) != FALSE)
+    while (caMain_UpdateColAnim(&fp->colanim, fighter_gobj, fp->is_playing_sfx, fp->is_playing_gfx) != FALSE)
     {
         ftCommon_ResetColAnimStatUpdate(fighter_gobj);
     }
@@ -1192,7 +1196,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
         {
             pl->stick_range.y = -GCONTROLLER_RANGE_MAX_I;
         }
-        if (Save_Info.unk5E2 & 2)
+        if (Save_Info.mprotect_fail & GMSAVE_PROTECTFAIL_HALFSTICKRANGE)
         {
             pl->stick_range.x *= 0.5F;
             pl->stick_range.y *= 0.5F;
@@ -1715,7 +1719,7 @@ void func_ovl2_800E2048(GObj *fighter_gobj)
 
     if (fp->hitlag_timer == 0)
     {
-        func_ovl2_800E0654(fighter_gobj);
+        ftScript_UpdateDefaultEventsGFX(fighter_gobj);
     }
     if (fp->hitlag_timer == 0)
     {
@@ -3745,7 +3749,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
         else
         {
             ftCommon_Damage_SetDamageColAnim(fighter_gobj);
-            func_ovl3_801586A0(fighter_gobj);
+            ftMasterHand_Common_UpdateMainInfo(fighter_gobj);
         }
         damage = fp->damage_queue;
         sp84 = 1;
@@ -4245,7 +4249,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 
     if (fp->x191_flag_b0)
     {
-        func_ovl2_800E0654(fighter_gobj);
+        ftScript_UpdateDefaultEventsGFX(fighter_gobj);
 
         if (fp->proc_accessory != NULL)
         {
@@ -4375,7 +4379,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     {
         fp->shuffle_timer = 0;
     }
-    if (!(flags & FTSTATUPDATE_UNK4_PRESERVE))
+    if (!(flags & FTSTATUPDATE_LOOPSFX_PRESERVE))
     {
         ftCommon_StopLoopSFX(fp);
     }
@@ -4414,7 +4418,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     else if (status_id >= ftStatus_Common_SpecialStart)
     {
         status_struct = D_ovl2_8012B740[fp->ft_kind];
-        status_struct_id = status_id - 0xDC;
+        status_struct_id = status_id - ftStatus_Common_SpecialStart;
     }
     else if (status_id >= 6)
     {
