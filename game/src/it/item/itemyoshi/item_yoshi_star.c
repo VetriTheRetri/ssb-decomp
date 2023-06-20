@@ -24,9 +24,9 @@ wpCreateDesc wpYoshi_Star_WeaponDesc =
 };
 
 // 0x8016C540
-f32 wpYoshi_Star_GetScale(Weapon_Struct *ip)
+f32 wpYoshi_Star_GetScale(Weapon_Struct *wp)
 {
-    f32 scale = (ip->lifetime * ITYOSHISTAR_LIFETIME_SCALE_MUL) + ITYOSHISTAR_LIFETIME_SCALE_ADD;
+    f32 scale = (wp->lifetime * ITYOSHISTAR_LIFETIME_SCALE_MUL) + ITYOSHISTAR_LIFETIME_SCALE_ADD;
 
     if (scale > 1.0F)
     {
@@ -38,25 +38,25 @@ f32 wpYoshi_Star_GetScale(Weapon_Struct *ip)
 // 0x8016C588
 bool32 wpYoshi_Star_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     f32 scale;
     f32 vel_sqrt;
     f32 vel_mul;
 
-    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
         func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         return TRUE;
     }
-    scale = wpYoshi_Star_GetScale(ip);
+    scale = wpYoshi_Star_GetScale(wp);
 
     DObjGetStruct(weapon_gobj)->scale.x = scale;
     DObjGetStruct(weapon_gobj)->scale.y = scale;
 
-    DObjGetStruct(weapon_gobj)->rotate.z += (ITYOSHISTAR_ROTATE_SPEED * ip->lr);
+    DObjGetStruct(weapon_gobj)->rotate.z += (ITYOSHISTAR_ROTATE_SPEED * wp->lr);
 
-    vel_sqrt = sqrtf(SQUARE(ip->phys_info.vel.x) + SQUARE(ip->phys_info.vel.y));
+    vel_sqrt = sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y));
 
     if (vel_sqrt > 0.0F)
     {
@@ -68,8 +68,8 @@ bool32 wpYoshi_Star_ProcUpdate(GObj *weapon_gobj)
         {
             vel_mul = vel_sqrt - ITYOSHISTAR_VEL_CLAMP;
         }
-        ip->phys_info.vel.x = (ip->phys_info.vel.x * vel_mul) / vel_sqrt;
-        ip->phys_info.vel.y = (ip->phys_info.vel.y * vel_mul) / vel_sqrt;
+        wp->phys_info.vel.x = (wp->phys_info.vel.x * vel_mul) / vel_sqrt;
+        wp->phys_info.vel.y = (wp->phys_info.vel.y * vel_mul) / vel_sqrt;
     }
     return FALSE;
 }
@@ -83,11 +83,11 @@ bool32 wpYoshi_Star_ProcMap(GObj *weapon_gobj)
 // 0x8016C6AC
 bool32 wpYoshi_Star_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
-    if (ip->hit_victim_damage != 0)
+    if (wp->hit_victim_damage != 0)
     {
         return TRUE;
     }
@@ -105,17 +105,17 @@ bool32 wpYoshi_Star_ProcShield(GObj *weapon_gobj)
 // 0x8016C718
 bool32 wpYoshi_Star_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
+    func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
 
-    if (ip->phys_info.vel.x > 0.0F)
+    if (wp->phys_info.vel.x > 0.0F)
     {
-        ip->lr = RIGHT;
+        wp->lr = RIGHT;
     }
-    else ip->lr = LEFT;
+    else wp->lr = LEFT;
 
     return FALSE;
 }
@@ -123,19 +123,19 @@ bool32 wpYoshi_Star_ProcHop(GObj *weapon_gobj)
 // 0x8016C7B0
 bool32 wpYoshi_Star_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    ip->lifetime = ITYOSHISTAR_LIFETIME;
+    wp->lifetime = ITYOSHISTAR_LIFETIME;
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorInvertLR(wp, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
 
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
     DObjGetStruct(weapon_gobj)->scale.y = 1.0F;
 
-    ip->lr = -ip->lr;
+    wp->lr = -wp->lr;
 
     return FALSE;
 }
@@ -144,7 +144,7 @@ bool32 wpYoshi_Star_ProcReflector(GObj *weapon_gobj)
 GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 {
     GObj *weapon_gobj;
-    Weapon_Struct *ip;
+    Weapon_Struct *wp;
     Vec3f offset = *pos;
 
     offset.y += ITYOSHISTAR_OFF_Y;
@@ -163,14 +163,14 @@ GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
     {
         return NULL;
     }
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
-    ip->lr = lr;
+    wp->lr = lr;
 
-    ip->lifetime = ITYOSHISTAR_LIFETIME;
+    wp->lifetime = ITYOSHISTAR_LIFETIME;
 
-    ip->phys_info.vel.x = (cosf(ITYOSHISTAR_ANGLE) * (ITYOSHISTAR_VEL * ip->lr));
-    ip->phys_info.vel.y = (__sinf(ITYOSHISTAR_ANGLE) * ITYOSHISTAR_VEL);
+    wp->phys_info.vel.x = (cosf(ITYOSHISTAR_ANGLE) * (ITYOSHISTAR_VEL * wp->lr));
+    wp->phys_info.vel.y = (__sinf(ITYOSHISTAR_ANGLE) * ITYOSHISTAR_VEL);
 
     return; // Undefined behavior here, no return value
 }

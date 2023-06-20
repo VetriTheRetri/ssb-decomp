@@ -1586,10 +1586,10 @@ glabel D_ovl3_80188DEC
 glabel ftKirby_SpecialN_UnusedVec
   .incbin "ovl3.raw.bin", 0x57300, 0x10
 
-glabel Item_PKThunder_PrimColor
+glabel wpNess_PKThunder_PrimColor
   .incbin "ovl3.raw.bin", 0x57310, 0xC
 
-glabel Item_PKThunder_EnvColor
+glabel wpNess_PKThunder_EnvColor
   .incbin "ovl3.raw.bin", 0x5731C, 0x14
 
 glabel wpMario_Fireball_WeaponAttributes

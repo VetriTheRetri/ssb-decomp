@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
-    "\\game\\include\\PR",
     "\\game\\src",
     "\\game\\src\\it",
-    "\\game\\src\\it\\item",
-    "\\game\\src\\it\\item\\itemkirby",
-    "\\game\\src\\it\\item\\itemlink"
+    "\\game\\src\\it\\article",
+    "\\game\\src\\it\\article\\articlecommon",
+    "\\game\\src\\it\\item\\itemmario",
+    "\\game\\src\\it\\item\\itempikachu",
+    "\\game\\src\\it\\item\\itemsamus",
+    "\\game\\src\\ovl2"
   ],
-  "SelectedNode": "\\game\\src\\it\\item\\itemkirby\\item_kirby_cutter.c",
+  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_at_bumper.c",
   "PreviewInSolutionExplorer": false
 }

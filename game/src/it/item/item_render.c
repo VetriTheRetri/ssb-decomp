@@ -203,8 +203,8 @@ void func_ovl3_8016763C(GObj *weapon_gobj)
     func_ovl3_80167520(weapon_gobj, func_80014768);
 }
 
-extern GfxColor Item_PKThunder_PrimColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 94, 163, 255 }, { 152, 189, 255 }, { 194, 217, 255 }, { 179, 241, 255 } };
-extern GfxColor Item_PKThunder_EnvColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 58, 0, 131 }, { 91, 0, 178 }, { 134, 51, 217 }, { 167, 116, 248 } };
+extern GfxColor wpNess_PKThunder_PrimColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 94, 163, 255 }, { 152, 189, 255 }, { 194, 217, 255 }, { 179, 241, 255 } };
+extern GfxColor wpNess_PKThunder_EnvColor[ITPKTHUNDER_TRAIL_COUNT - 1] = { { 58, 0, 131 }, { 91, 0, 178 }, { 134, 51, 217 }, { 167, 116, 248 } };
 
 // 0x80167660
 void wpRender_DisplayPKThunder(GObj *weapon_gobj)
@@ -218,9 +218,9 @@ void wpRender_DisplayPKThunder(GObj *weapon_gobj)
 
         gDPPipeSync(D_800465B0[1]++);
 
-        gDPSetPrimColor(D_800465B0[1]++, 0, 0, Item_PKThunder_PrimColor[index].r, Item_PKThunder_PrimColor[index].g, Item_PKThunder_PrimColor[index].b, 255);
+        gDPSetPrimColor(D_800465B0[1]++, 0, 0, wpNess_PKThunder_PrimColor[index].r, wpNess_PKThunder_PrimColor[index].g, wpNess_PKThunder_PrimColor[index].b, 255);
 
-        gDPSetEnvColor(D_800465B0[1]++, Item_PKThunder_EnvColor[index].r, Item_PKThunder_EnvColor[index].g, Item_PKThunder_EnvColor[index].b, 255);
+        gDPSetEnvColor(D_800465B0[1]++, wpNess_PKThunder_EnvColor[index].r, wpNess_PKThunder_EnvColor[index].g, wpNess_PKThunder_EnvColor[index].b, 255);
 
         func_800143FC(weapon_gobj);
 
@@ -234,9 +234,9 @@ void wpRender_DisplayPKThunder(GObj *weapon_gobj)
 
         gDPPipeSync(D_800465B0[1]++);
 
-        gDPSetPrimColor(D_800465B0[1]++, 0, 0, Item_PKThunder_PrimColor[index].r, Item_PKThunder_PrimColor[index].g, Item_PKThunder_PrimColor[index].b, 255);
+        gDPSetPrimColor(D_800465B0[1]++, 0, 0, wpNess_PKThunder_PrimColor[index].r, wpNess_PKThunder_PrimColor[index].g, wpNess_PKThunder_PrimColor[index].b, 255);
 
-        gDPSetEnvColor(D_800465B0[1]++, Item_PKThunder_EnvColor[index].r, Item_PKThunder_EnvColor[index].g, Item_PKThunder_EnvColor[index].b, 255);
+        gDPSetEnvColor(D_800465B0[1]++, wpNess_PKThunder_EnvColor[index].r, wpNess_PKThunder_EnvColor[index].g, wpNess_PKThunder_EnvColor[index].b, 255);
 
         func_800143FC(weapon_gobj);
 

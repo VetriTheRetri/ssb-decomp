@@ -1,8 +1,6 @@
 #include "article.h"
 #include "fighter.h"
 
-
-
 bool32 jtgt_ovl3_8017B430(GObj *article_gobj)
 {
     Article_Struct *ap = atGetStruct(article_gobj);

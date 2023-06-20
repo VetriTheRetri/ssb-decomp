@@ -31,9 +31,9 @@ wpCreateDesc wpYoshi_EggThrow_WeaponDesc =
 // 0x8016BF50
 bool32 wpYoshi_EggThrow_ProcDead(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (ip->item_vars.egg_throw.is_throw == FALSE)
+    if (wp->item_vars.egg_throw.is_throw == FALSE)
     {
         return FALSE;
     }
@@ -43,9 +43,9 @@ bool32 wpYoshi_EggThrow_ProcDead(GObj *weapon_gobj)
 // 0x8016BF74
 bool32 wpYoshi_EggExplode_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
         return TRUE;
     }
@@ -55,62 +55,62 @@ bool32 wpYoshi_EggExplode_ProcUpdate(GObj *weapon_gobj)
 // 0x8016BFA0
 void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from landing successfully
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
+    wp->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
-    ip->item_hit.can_hop = FALSE;
-    ip->item_hit.can_reflect = FALSE;
+    wp->item_hit.can_hop = FALSE;
+    wp->item_hit.can_reflect = FALSE;
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel.z = 0.0F;
+    wp->phys_info.vel.y = 0.0F;
+    wp->phys_info.vel.x = 0.0F;
 
-    ip->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
+    wp->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
-    ip->proc_update = wpYoshi_EggExplode_ProcUpdate;
-    ip->proc_map = NULL;
-    ip->proc_hit = NULL;
-    ip->proc_shield = NULL;
-    ip->proc_hop = NULL;
-    ip->proc_setoff = NULL;
-    ip->proc_reflector = NULL;
+    wp->proc_update = wpYoshi_EggExplode_ProcUpdate;
+    wp->proc_map = NULL;
+    wp->proc_hit = NULL;
+    wp->proc_shield = NULL;
+    wp->proc_hop = NULL;
+    wp->proc_setoff = NULL;
+    wp->proc_reflector = NULL;
 }
 
 // 0x8016C00C
 void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from expiring 
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    ip->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
+    wp->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
-    ip->item_hit.can_reflect = FALSE;
-    ip->item_hit.can_shield = FALSE;
+    wp->item_hit.can_reflect = FALSE;
+    wp->item_hit.can_shield = FALSE;
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel.z = 0.0F;
+    wp->phys_info.vel.y = 0.0F;
+    wp->phys_info.vel.x = 0.0F;
 
-    ip->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
+    wp->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
-    ip->proc_update = wpYoshi_EggExplode_ProcUpdate;
-    ip->proc_map = NULL;
-    ip->proc_hit = NULL;
-    ip->proc_shield = NULL;
-    ip->proc_hop = NULL;
-    ip->proc_setoff = NULL;
-    ip->proc_reflector = NULL;
+    wp->proc_update = wpYoshi_EggExplode_ProcUpdate;
+    wp->proc_map = NULL;
+    wp->proc_hit = NULL;
+    wp->proc_shield = NULL;
+    wp->proc_hop = NULL;
+    wp->proc_setoff = NULL;
+    wp->proc_reflector = NULL;
 }
 
 // 0x8016C07C
 void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    f32 angle = ABS(ip->item_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    f32 angle = ABS(wp->item_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
 
     if (angle > 1.0F)
     {
@@ -124,18 +124,18 @@ void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
         angle = 0.0F;
     }
 
-    angle *= ((ip->item_vars.egg_throw.stick_range < 0) ? LEFT : RIGHT);
+    angle *= ((wp->item_vars.egg_throw.stick_range < 0) ? LEFT : RIGHT);
 
-    angle = (ip->item_vars.egg_throw.lr > 0) ? (ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
+    angle = (wp->item_vars.egg_throw.lr > 0) ? (ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
 
-    ip->phys_info.vel.y = __sinf(angle) * ((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
-    ip->phys_info.vel.x = cosf(angle) * ((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
+    wp->phys_info.vel.y = __sinf(angle) * ((wp->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
+    wp->phys_info.vel.x = cosf(angle) * ((wp->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
 
-    ip->item_vars.egg_throw.angle = F_DEG_TO_RAD((ip->item_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD);
+    wp->item_vars.egg_throw.angle = F_DEG_TO_RAD((wp->item_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD);
 
     DObjGetStruct(weapon_gobj)->translate.z = 0.0F;
 
-    ip->item_hit.update_state = gmHitCollision_UpdateState_New;
+    wp->item_hit.update_state = gmHitCollision_UpdateState_New;
 
     wpManager_UpdateHitPositions(weapon_gobj);
 }
@@ -143,11 +143,11 @@ void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 // 0x8016C218
 bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (ip->item_vars.egg_throw.is_spin != FALSE)
+    if (wp->item_vars.egg_throw.is_spin != FALSE)
     {
-        if (wpMain_DecLifeCheckExpire(ip) != FALSE)
+        if (wpMain_DecLifeCheckExpire(wp) != FALSE)
         {
             func_800269C0(0xFC);
 
@@ -160,15 +160,15 @@ bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
         }
         else
         {
-            DObjGetStruct(weapon_gobj)->rotate.z += ip->item_vars.egg_throw.angle;
-            wpMain_UpdateGravityClampTVel(ip, ITEGGTHROW_GRAVITY, ITEGGTHROW_T_VEL);
+            DObjGetStruct(weapon_gobj)->rotate.z += wp->item_vars.egg_throw.angle;
+            wpMain_UpdateGravityClampTVel(wp, ITEGGTHROW_GRAVITY, ITEGGTHROW_T_VEL);
 
             return FALSE;
         }
     }
-    else if (ip->item_vars.egg_throw.is_throw != FALSE)
+    else if (wp->item_vars.egg_throw.is_throw != FALSE)
     {
-        ip->item_vars.egg_throw.is_spin = TRUE;
+        wp->item_vars.egg_throw.is_spin = TRUE;
 
         wpYoshi_EggThrow_InitWeaponVars(weapon_gobj);
     }
@@ -178,9 +178,9 @@ bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
 // 0x8016C2E0
 bool32 wpYoshi_EggThrow_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if ((ip->item_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(weapon_gobj) != FALSE))
+    if ((wp->item_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(weapon_gobj) != FALSE))
     {
         func_ovl2_801008F4(2);
 
@@ -212,9 +212,9 @@ bool32 wpYoshi_EggThrow_ProcHit(GObj *weapon_gobj)
 // 0x8016C3B4
 bool32 wpYoshi_EggThrow_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
+    func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
     wpMain_VelSetModelYaw(weapon_gobj);
 
@@ -224,12 +224,12 @@ bool32 wpYoshi_EggThrow_ProcHop(GObj *weapon_gobj)
 // 0x8016C404
 bool32 wpYoshi_EggThrow_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    ip->lifetime = ITEGGTHROW_LIFETIME;
+    wp->lifetime = ITEGGTHROW_LIFETIME;
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorInvertLR(wp, fp);
     wpMain_VelSetModelYaw(weapon_gobj);
 
     return FALSE;
@@ -238,7 +238,7 @@ bool32 wpYoshi_EggThrow_ProcReflector(GObj *weapon_gobj)
 // 0x8016C444
 void wpYoshi_EggThrow_ProcRender(GObj *weapon_gobj)
 {
-    gDPPipeSync(D_800465B0[1]++);
+    gDPPwpeSync(D_800465B0[1]++);
 
     gDPSetEnvColor(D_800465B0[1]++, 0, 0, 0, 0);
 
@@ -250,32 +250,32 @@ GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpYoshi_EggThrow_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
-    Weapon_Struct *ip;
+    Weapon_Struct *wp;
 
     if (weapon_gobj == NULL)
     {
         return NULL;
     }
 
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
     weapon_gobj->renderer = wpYoshi_EggThrow_ProcRender;
 
-    ip->item_vars.egg_throw.is_throw = FALSE;
+    wp->item_vars.egg_throw.is_throw = FALSE;
 
-    ip->proc_dead = wpYoshi_EggThrow_ProcDead;
+    wp->proc_dead = wpYoshi_EggThrow_ProcDead;
 
-    ip->lifetime = ITEGGTHROW_LIFETIME;
+    wp->lifetime = ITEGGTHROW_LIFETIME;
 
-    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    wp->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ip->is_camera_follow = TRUE;
+    wp->is_camera_follow = TRUE;
 
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel.y = 0.0F;
+    wp->phys_info.vel.x = 0.0F;
 
-    ip->item_vars.egg_throw.is_spin = ip->item_vars.egg_throw.is_throw;
-    ip->item_vars.egg_throw.lr = fp->lr;
+    wp->item_vars.egg_throw.is_spin = wp->item_vars.egg_throw.is_throw;
+    wp->item_vars.egg_throw.lr = fp->lr;
 
     return weapon_gobj;
 }

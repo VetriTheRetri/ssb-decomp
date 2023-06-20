@@ -20,7 +20,7 @@ void wpMain_PlaySFX(Weapon_Struct *wp, u16 sfx_id) // Play SFX if applicable
 {
     if (wp->p_sfx != NULL)
     {
-        wpMain_StopSFX(ip);
+        wpMain_StopSFX(wp);
     }
     wp->p_sfx = func_800269C0(sfx_id);
 
@@ -70,7 +70,7 @@ void wpMain_DestroyWeapon(GObj *weapon_gobj) // Destroy item?
 }
 
 // 0x80168044
-void func_ovl3_80168044(GObj *weapon_gobj) // Transfer item's base ground velocity to aerial velocity
+void wpMain_VelGroundTransferAir(GObj *weapon_gobj) // Transfer item's base ground velocity to aerial velocity
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 

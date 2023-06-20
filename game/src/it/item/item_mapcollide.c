@@ -146,7 +146,7 @@ bool32 func_ovl3_80167C04(GObj *weapon_gobj)
     return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_80167B8C, weapon_gobj, 0);
 }
 
-bool32 func_ovl3_80167C38(GObj *weapon_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
+bool32 wpMap_CheckCollideAllModifyVel(GObj *weapon_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Coll_Data *coll_data = &ip->coll_data;

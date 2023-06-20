@@ -82,7 +82,7 @@ bool32 wpSamus_Bomb_ProcUpdate(GObj *weapon_gobj)
         }
         else
         {
-            func_ovl3_80168044(weapon_gobj);
+            wpMain_VelGroundTransferAir(weapon_gobj);
             DObjGetStruct(weapon_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_GROUND * ip->lr);
         }
 
@@ -122,7 +122,7 @@ bool32 wpSamus_Bomb_ProcMap(GObj *weapon_gobj)
     {
         is_collide = func_ovl3_80167B58(weapon_gobj);
 
-        if (func_ovl3_80167C38(weapon_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), ITSAMUSBOMB_WAIT_COLLIDE_MOD_VEL, NULL) != FALSE)
+        if (wpMap_CheckCollideAllModifyVel(weapon_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), ITSAMUSBOMB_WAIT_COLLIDE_MOD_VEL, NULL) != FALSE)
         {
             wpMain_VelSetLR(weapon_gobj);
         }
