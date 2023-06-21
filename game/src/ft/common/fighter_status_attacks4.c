@@ -131,13 +131,13 @@ bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 
     if (((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
-        GObj *article_gobj = fp->item_hold;
+        GObj *item_gobj = fp->item_hold;
 
-        if (article_gobj != NULL)
+        if (item_gobj != NULL)
         {
-            Item_Struct *ap = itGetStruct(article_gobj);
+            Item_Struct *ap = itGetStruct(item_gobj);
 
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(item_gobj) != FALSE)))
             {
                 ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowF4);
 
@@ -172,13 +172,13 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 
     if (((fp->input.pl.stick_range.x * fp->status_vars.common.attack4.lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
-        GObj *article_gobj = fp->item_hold;
+        GObj *item_gobj = fp->item_hold;
 
-        if (article_gobj != NULL)
+        if (item_gobj != NULL)
         {
-            Item_Struct *ap = itGetStruct(article_gobj);
+            Item_Struct *ap = itGetStruct(item_gobj);
 
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(item_gobj) != FALSE)))
             {
                 ftCommon_ItemThrow_SetStatus(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 
@@ -216,13 +216,13 @@ bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
 
     if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_ATTACKS4_BUFFER_FRAMES_MAX) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
-        GObj *article_gobj = fp->item_hold;
+        GObj *item_gobj = fp->item_hold;
 
-        if (article_gobj != NULL)
+        if (item_gobj != NULL)
         {
-            Item_Struct *ap = itGetStruct(article_gobj);
+            Item_Struct *ap = itGetStruct(item_gobj);
 
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(item_gobj) != FALSE)))
             {
                 ftCommon_ItemThrow_SetStatus(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 

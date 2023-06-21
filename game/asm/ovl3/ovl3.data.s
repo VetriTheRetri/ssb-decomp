@@ -1970,7 +1970,7 @@ glabel Article_Callback_Spawn
   /* 57980 103EC0 80189480 */  .4byte jtgt_ovl3_80174850
   /* 57984 103EC4 80189484 */  .4byte jtgt_ovl3_80174A18
   /* 57988 103EC8 80189488 */  .4byte jtgt_ovl3_80174DA0
-  /* 5798C 103ECC 8018948C */  .4byte jtgt_ovl3_801750B8
+  /* 5798C 103ECC 8018948C */  .4byte itCommon_Bat_CreateItem
   /* 57990 103ED0 80189490 */  .4byte jtgt_ovl3_80175460
   /* 57994 103ED4 80189494 */  .4byte jtgt_ovl3_80178134
   /* 57998 103ED8 80189498 */  .4byte jtgt_ovl3_80175800
@@ -2024,7 +2024,7 @@ glabel Article_Callback_Drop
 
 glabel jtbl_ovl3_8018953C
   /* 57A3C 103F7C 8018953C */  .4byte jtgt_ovl3_80174D5C
-  /* 57A40 103F80 80189540 */  .4byte jtgt_ovl3_80175074
+  /* 57A40 103F80 80189540 */  .4byte itBat_ADrop_SetStatus
   /* 57A44 103F84 80189544 */  .4byte jtgt_ovl3_801753C4
   /* 57A48 103F88 80189548 */  .4byte jtgt_ovl3_801780F0
   /* 57A4C 103F8C 8018954C */  .4byte jtgt_ovl3_80175780
@@ -2050,7 +2050,7 @@ glabel Article_Callback_Throw
 
 glabel jtbl_ovl3_80189594
   /* 57A94 103FD4 80189594 */  .4byte jtgt_ovl3_80174CE8
-  /* 57A98 103FD8 80189598 */  .4byte jtgt_ovl3_80175000
+  /* 57A98 103FD8 80189598 */  .4byte itBat_AThrow_SetStatus
   /* 57A9C 103FDC 8018959C */  .4byte jtgt_ovl3_80175350
   /* 57AA0 103FE0 801895A0 */  .4byte jtgt_ovl3_80178058
   /* 57AA4 103FE4 801895A4 */  .4byte jtgt_ovl3_801756AC
@@ -2076,7 +2076,7 @@ glabel Article_Callback_Pickup
 
 glabel jtbl_ovl3_801895EC
   /* 57AEC 10402C 801895EC */  .4byte jtgt_ovl3_80174C5C
-  /* 57AF0 104030 801895F0 */  .4byte jtgt_ovl3_80174F3C
+  /* 57AF0 104030 801895F0 */  .4byte itBat_FHold_SetStatus
   /* 57AF4 104034 801895F4 */  .4byte jtgt_ovl3_8017526C
   /* 57AF8 104038 801895F8 */  .4byte jtgt_ovl3_80177F90
   /* 57AFC 10403C 801895FC */  .4byte jtgt_ovl3_801755FC
@@ -2239,43 +2239,43 @@ glabel jtbl_ovl3_80189964
   /* 57E7C 1043BC 8018997C */  .4byte itCommon_Default_ProcReflector
   .incbin "ovl3.raw.bin", 0x57E80, 0x10
 
-glabel Article_Bat_Data
+glabel itCommon_Bat_ItemDesc
   .incbin "ovl3.raw.bin", 0x57E90, 0x4
   /* 57E94 1043D4 80189994 */  .4byte gItemFileData
   .incbin "ovl3.raw.bin", 0x57E98, 0xC
 
 glabel jtbl_ovl3_801899A4
-  /* 57EA4 1043E4 801899A4 */  .4byte jtgt_ovl3_80174E30
-  /* 57EA8 1043E8 801899A8 */  .4byte jtgt_ovl3_80174E90
+  /* 57EA4 1043E4 801899A4 */  .4byte itBat_AWaitFall_ProcUpdate
+  /* 57EA8 1043E8 801899A8 */  .4byte itBat_AWaitFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57EAC, 0x18
 
-glabel Article_Bat_Status
+glabel itCommon_Bat_StatusDesc
   .incbin "ovl3.raw.bin", 0x57EC4, 0x4
-  /* 57EC8 104408 801899C8 */  .4byte func_ovl3_80174E68
+  /* 57EC8 104408 801899C8 */  .4byte itBat_GWait_ProcMap
   .incbin "ovl3.raw.bin", 0x57ECC, 0x18
 
 glabel jtbl_ovl3_801899E4
-  /* 57EE4 104424 801899E4 */  .4byte jtgt_ovl3_80174E30
-  /* 57EE8 104428 801899E8 */  .4byte jtgt_ovl3_80174E90
+  /* 57EE4 104424 801899E4 */  .4byte itBat_AWaitFall_ProcUpdate
+  /* 57EE8 104428 801899E8 */  .4byte itBat_AWaitFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57EEC, 0x38
 
 glabel jtbl_ovl3_80189A24
-  /* 57F24 104464 80189A24 */  .4byte jtgt_ovl3_80174F70
-  /* 57F28 104468 80189A28 */  .4byte jtgt_ovl3_80174FA8
-  /* 57F2C 10446C 80189A2C */  .4byte jtgt_ovl3_80174FD8
-  /* 57F30 104470 80189A30 */  .4byte jtgt_ovl3_80174FD8
+  /* 57F24 104464 80189A24 */  .4byte itBat_AThrow_ProcUpdate
+  /* 57F28 104468 80189A28 */  .4byte itBat_AThrow_ProcMap
+  /* 57F2C 10446C 80189A2C */  .4byte itBat_AThrow_ProcHit
+  /* 57F30 104470 80189A30 */  .4byte itBat_AThrow_ProcHit
   /* 57F34 104474 80189A34 */  .4byte itCommon_Default_ProcHop
-  /* 57F38 104478 80189A38 */  .4byte jtgt_ovl3_80174FD8
+  /* 57F38 104478 80189A38 */  .4byte itBat_AThrow_ProcHit
   /* 57F3C 10447C 80189A3C */  .4byte itCommon_Default_ProcReflector
   .incbin "ovl3.raw.bin", 0x57F40, 0x4
 
 glabel jtbl_ovl3_80189A44
-  /* 57F44 104484 80189A44 */  .4byte jtgt_ovl3_80174E30
-  /* 57F48 104488 80189A48 */  .4byte jtgt_ovl3_80175044
-  /* 57F4C 10448C 80189A4C */  .4byte jtgt_ovl3_80174FD8
-  /* 57F50 104490 80189A50 */  .4byte jtgt_ovl3_80174FD8
+  /* 57F44 104484 80189A44 */  .4byte itBat_AWaitFall_ProcUpdate
+  /* 57F48 104488 80189A48 */  .4byte itBat_ADrop_ProcMap
+  /* 57F4C 10448C 80189A4C */  .4byte itBat_AThrow_ProcHit
+  /* 57F50 104490 80189A50 */  .4byte itBat_AThrow_ProcHit
   /* 57F54 104494 80189A54 */  .4byte itCommon_Default_ProcHop
-  /* 57F58 104498 80189A58 */  .4byte jtgt_ovl3_80174FD8
+  /* 57F58 104498 80189A58 */  .4byte itBat_AThrow_ProcHit
   /* 57F5C 10449C 80189A5C */  .4byte itCommon_Default_ProcReflector
   .incbin "ovl3.raw.bin", 0x57F60, 0x10
 

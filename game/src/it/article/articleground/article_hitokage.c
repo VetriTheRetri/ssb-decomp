@@ -4,17 +4,17 @@
 
 extern itStatusDesc Item_Hitokage_Status[];
 
-void func_ovl3_80183DA0(GObj *article_gobj)
+void func_ovl3_80183DA0(GObj *item_gobj)
 {
-    atCommon_UpdateArticleStatus(article_gobj, Item_Hitokage_Status, 0);
+    atCommon_UpdateArticleStatus(item_gobj, Item_Hitokage_Status, 0);
 
-    itGetStruct(article_gobj)->proc_dead = func_ovl3_80183F88;
+    itGetStruct(item_gobj)->proc_dead = func_ovl3_80183F88;
 }
 
-bool32 func_ovl3_80183DE0(GObj *article_gobj)
+bool32 func_ovl3_80183DE0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
     joint->translate.x += ap->article_vars.hitokage.offset.x;
@@ -32,7 +32,7 @@ bool32 func_ovl3_80183DE0(GObj *article_gobj)
 
         if (ap->article_vars.hitokage.flame_spawn_wait <= 0)
         {
-            func_ovl3_801843C4(article_gobj, &pos);
+            func_ovl3_801843C4(item_gobj, &pos);
 
             ap->article_vars.hitokage.flame_spawn_wait = ATHITOKAGE_FLAME_SPAWN_WAIT;
         }
@@ -55,29 +55,29 @@ bool32 func_ovl3_80183DE0(GObj *article_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80183F20(GObj *article_gobj)
+bool32 jtgt_ovl3_80183F20(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
     func_ovl3_80172558(ap, ATHITOKAGE_GRAVITY, ATHITOKAGE_T_VEL);
 
-    joint = DObjGetStruct(article_gobj);
+    joint = DObjGetStruct(item_gobj);
 
     joint->rotate.z -= (ATHITOKAGE_HIT_ROTATE_Z * ap->lr);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80183F88(GObj *article_gobj)
+bool32 func_ovl3_80183F88(GObj *item_gobj)
 {
     return TRUE;
 }
 
-bool32 jtgt_ovl3_80183F94(GObj *article_gobj)
+bool32 jtgt_ovl3_80183F94(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->damage_knockback >= 100.0F)
     {
@@ -86,13 +86,13 @@ bool32 jtgt_ovl3_80183F94(GObj *article_gobj)
         ap->phys_info.vel.x = cosf(angle) * ap->damage_knockback * -ap->lr_damage;
         ap->phys_info.vel.y = __sinf(angle) * ap->damage_knockback;
 
-        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
-        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
+        ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+        ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
         joint->dobj_f0 = (f32)FLOAT_NEG_MAX;
 
         func_ovl2_8010B0AC();
-        func_ovl3_80183DA0(article_gobj);
+        func_ovl3_80183DA0(item_gobj);
     }
     return FALSE;
 }
@@ -102,15 +102,15 @@ extern itCreateDesc Item_Hitokage_Data;
 
 GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Item_Hitokage_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Item_Hitokage_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
     Item_Struct *ap;
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        ap = itGetStruct(article_gobj);
-        joint = DObjGetStruct(article_gobj);
+        ap = itGetStruct(item_gobj);
+        joint = DObjGetStruct(item_gobj);
 
         ap->article_vars.hitokage.flame_spawn_wait = 0;
         ap->article_vars.hitokage.offset = *pos;
@@ -133,7 +133,7 @@ GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_800269C0(0x229U);
     }
-    return article_gobj;
+    return item_gobj;
 }
 
 bool32 jtgt_ovl3_8018415C(GObj *weapon_gobj)
@@ -188,9 +188,9 @@ bool32 jtgt_ovl3_80184204(GObj *weapon_gobj)
 
 extern wpCreateDesc Weapon_Hitokage_Flame_Data;
 
-GObj *func_ovl3_801842C8(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
+GObj *func_ovl3_801842C8(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Weapon_Hitokage_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Weapon_Hitokage_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     Weapon_Struct *ip;
 
     if (weapon_gobj == NULL)
@@ -211,7 +211,7 @@ GObj *func_ovl3_801842C8(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
     return weapon_gobj;
 }
 
-void func_ovl3_801843C4(GObj *article_gobj, Vec3f *pos)
+void func_ovl3_801843C4(GObj *item_gobj, Vec3f *pos)
 {
     Item_Struct *ap;
     Vec3f vel;
@@ -220,6 +220,6 @@ void func_ovl3_801843C4(GObj *article_gobj, Vec3f *pos)
     vel.y = __sinf(ATHITOKAGE_FLAME_SPAWN_ANGLE) * ATHITOKAGE_FLAME_VEL_XY;
     vel.z = 0.0F;
 
-    func_ovl3_801842C8(article_gobj, pos, &vel);
+    func_ovl3_801842C8(item_gobj, pos, &vel);
     func_800269C0(0x88U);
 }

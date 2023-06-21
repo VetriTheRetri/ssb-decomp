@@ -5,23 +5,23 @@
 extern intptr_t Fushigibana_Event;
 extern itCreateDesc Article_Fushigibana_Data;
 
-void func_ovl3_80184440(GObj *article_gobj)
+void func_ovl3_80184440(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     ArticleHitDesc *hit_desc = (ArticleHitDesc *)((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
 
     if (ap->at_multi == hit_desc[ap->x340_flag_b0123].timer)
     {
-        ap->article_hit.angle = hit_desc[ap->x340_flag_b0123].angle;
-        ap->article_hit.damage = hit_desc[ap->x340_flag_b0123].damage;
-        ap->article_hit.size = hit_desc[ap->x340_flag_b0123].size;
-        ap->article_hit.knockback_scale = hit_desc[ap->x340_flag_b0123].knockback_scale;
-        ap->article_hit.knockback_weight = hit_desc[ap->x340_flag_b0123].knockback_weight;
-        ap->article_hit.knockback_base = hit_desc[ap->x340_flag_b0123].knockback_base;
-        ap->article_hit.element = hit_desc[ap->x340_flag_b0123].element;
-        ap->article_hit.clang = hit_desc[ap->x340_flag_b0123].clang;
-        ap->article_hit.shield_damage = hit_desc[ap->x340_flag_b0123].shield_damage;
-        ap->article_hit.hit_sfx = hit_desc[ap->x340_flag_b0123].hit_sfx;
+        ap->item_hit.angle = hit_desc[ap->x340_flag_b0123].angle;
+        ap->item_hit.damage = hit_desc[ap->x340_flag_b0123].damage;
+        ap->item_hit.size = hit_desc[ap->x340_flag_b0123].size;
+        ap->item_hit.knockback_scale = hit_desc[ap->x340_flag_b0123].knockback_scale;
+        ap->item_hit.knockback_weight = hit_desc[ap->x340_flag_b0123].knockback_weight;
+        ap->item_hit.knockback_base = hit_desc[ap->x340_flag_b0123].knockback_base;
+        ap->item_hit.element = hit_desc[ap->x340_flag_b0123].element;
+        ap->item_hit.clang = hit_desc[ap->x340_flag_b0123].clang;
+        ap->item_hit.shield_damage = hit_desc[ap->x340_flag_b0123].shield_damage;
+        ap->item_hit.hit_sfx = hit_desc[ap->x340_flag_b0123].hit_sfx;
 
         ap->x340_flag_b0123++;
 
@@ -34,7 +34,7 @@ void func_ovl3_80184440(GObj *article_gobj)
 
     if (ap->at_multi == ATFUSHIGIBANA_RETURN_WAIT)
     {
-        Vec3f pos = DObjGetStruct(article_gobj)->translate;
+        Vec3f pos = DObjGetStruct(item_gobj)->translate;
 
         pos.y = 0.0F;
 
@@ -42,16 +42,16 @@ void func_ovl3_80184440(GObj *article_gobj)
     }
 }
 
-bool32 func_ovl3_801845B4(GObj *article_gobj)
+bool32 func_ovl3_801845B4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
     joint->translate.x += ap->article_vars.fushigibana.offset.x;
     joint->translate.y += ap->article_vars.fushigibana.offset.y;
 
-    func_ovl3_80184440(article_gobj);
+    func_ovl3_80184440(item_gobj);
 
     pos = joint->translate;
 
@@ -65,7 +65,7 @@ bool32 func_ovl3_801845B4(GObj *article_gobj)
 
         if (!ap->article_vars.fushigibana.razor_spawn_wait)
         {
-            func_ovl3_801849EC(article_gobj, &pos);
+            func_ovl3_801849EC(item_gobj, &pos);
 
             ap->article_vars.fushigibana.razor_spawn_wait = ATFUSHIGIBANA_RAZOR_SPAWN_WAIT;
 
@@ -94,15 +94,15 @@ extern s32 D_ovl2_8012EB60;
 
 GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Fushigibana_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Fushigibana_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
     Item_Struct *ap;
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        ap = itGetStruct(article_gobj);
-        joint = DObjGetStruct(article_gobj);
+        ap = itGetStruct(item_gobj);
+        joint = DObjGetStruct(item_gobj);
 
         ap->x340_flag_b0123 = 0;
 
@@ -129,7 +129,7 @@ GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_800269C0(0x228U);
     }
-    return article_gobj;
+    return item_gobj;
 }
 
 bool32 func_ovl3_80184820(GObj *weapon_gobj)
@@ -149,7 +149,7 @@ bool32 jtgt_ovl3_80184874(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE6E4(&DObjGetStruct(weapon_gobj)->translate, ip->item_hit.damage, ip->lr);
+    func_ovl2_800FE6E4(&DObjGetStruct(weapon_gobj)->translate, ip->weapon_hit.damage, ip->lr);
 
     return TRUE;
 }
@@ -189,9 +189,9 @@ bool32 jtgt_ovl3_80184970(GObj *weapon_gobj)
 
 extern wpCreateDesc Item_Razor_Data;
 
-GObj *func_ovl3_801849EC(GObj *article_gobj, Vec3f *pos)
+GObj *func_ovl3_801849EC(GObj *item_gobj, Vec3f *pos)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Razor_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Razor_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     Weapon_Struct *ip;
 

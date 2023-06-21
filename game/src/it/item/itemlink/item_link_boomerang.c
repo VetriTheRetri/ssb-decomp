@@ -97,7 +97,7 @@ void wpLink_Boomerang_SetReturnVars(GObj *weapon_gobj, bool32 angle_max_or_min)
 
     wp->weapon_vars.boomerang.flags |= WPLINK_BOOMERANG_MASK_RETURN;
 
-    wp->item_hit.damage = 8;
+    wp->weapon_hit.damage = 8;
 
     wp->weapon_vars.boomerang.default_angle -= F_DEG_TO_RAD(180.0F); // PI32
 

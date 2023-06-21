@@ -1,9 +1,9 @@
 #include "article.h"
 #include "gmmatch.h"
 
-bool32 jtgt_ovl3_80174930(GObj *article_gobj)
+bool32 jtgt_ovl3_80174930(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80172558(ap, ATSTAR_GRAVITY, ATSTAR_T_VEL);
 
@@ -11,22 +11,22 @@ bool32 jtgt_ovl3_80174930(GObj *article_gobj)
 
     if (ap->at_multi == 0)
     {
-        func_ovl3_8017275C(article_gobj);
+        func_ovl3_8017275C(item_gobj);
     }
-    func_ovl3_801713F4(article_gobj);
+    func_ovl3_801713F4(item_gobj);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80174990(GObj *article_gobj)
+bool32 jtgt_ovl3_80174990(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     s32 unused;
-    bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
+    bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), 1.0F, NULL) != FALSE)
+    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), 1.0F, NULL) != FALSE)
     {
-        func_ovl3_80172508(article_gobj);
+        func_ovl3_80172508(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
@@ -37,7 +37,7 @@ bool32 jtgt_ovl3_80174990(GObj *article_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80174A0C(GObj *article_gobj)
+bool32 jtgt_ovl3_80174A0C(GObj *item_gobj)
 {
     return TRUE;
 }
@@ -47,7 +47,7 @@ extern itCreateDesc Article_Star_Data;
 GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     Unk_80131460_Ptr74 *unk_ptr = D_ovl2_80131460->unk_0x74;
-    GObj *article_gobj;
+    GObj *item_gobj;
     DObj *joint;
     Item_Struct *ap;
     Vec3f vel_real;
@@ -57,17 +57,17 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     vel_real.y = ATSTAR_BOUNCE_Y;
     vel_real.z = 0.0F;
 
-    article_gobj = itManager_CreateItem(spawn_gobj, &Article_Star_Data, pos, &vel_real, flags);
+    item_gobj = itManager_CreateItem(spawn_gobj, &Article_Star_Data, pos, &vel_real, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        joint = DObjGetStruct(article_gobj);
+        joint = DObjGetStruct(item_gobj);
 
         translate = joint->translate;
 
-        ap = article_gobj->user_data;
+        ap = item_gobj->user_data;
 
-        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
+        ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
         ap->at_multi = ATSTAR_INTERACT_DELAY;
 
         ap->x2D3_flag_b5 = TRUE;
@@ -78,5 +78,5 @@ GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = translate;
     }
-    return article_gobj;
+    return item_gobj;
 }

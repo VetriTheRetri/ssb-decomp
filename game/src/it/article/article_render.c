@@ -11,21 +11,21 @@
 #include <game/include/PR/sp.h>
 #include <game/include/PR/ultratypes.h>
 
-void func_ovl3_80171410(GObj *article_gobj)
+void func_ovl3_80171410(GObj *item_gobj)
 {
     Item_Struct *ap;
     s32 i;
-    Item_Hit *at_hit;
-    Article_Hurt *at_hurt;
+    Item_Hit *it_hit;
+    Item_Hurt *at_hurt;
     MtxStore mtx_store;
     Vec3f *translate;
 
-    ap = itGetStruct(article_gobj);
-    at_hit = &ap->article_hit;
+    ap = itGetStruct(item_gobj);
+    it_hit = &ap->item_hit;
 
-    for (i = 0; i < at_hit->hitbox_count; i++)
+    for (i = 0; i < it_hit->hitbox_count; i++)
     {
-        if ((at_hit->update_state != gmHitCollision_UpdateState_Disable) && (at_hit->update_state != gmHitCollision_UpdateState_New))
+        if ((it_hit->update_state != gmHitCollision_UpdateState_Disable) && (it_hit->update_state != gmHitCollision_UpdateState_New))
         {
             gDPPipeSync(D_800465B0[0]++);
 
@@ -45,17 +45,17 @@ void func_ovl3_80171410(GObj *article_gobj)
 
                 gDPSetBlendColor(D_800465B0[0]++, 0, 0, 0, 0);
             }
-            if (at_hit->update_state == gmHitCollision_UpdateState_Interpolate)
+            if (it_hit->update_state == gmHitCollision_UpdateState_Interpolate)
             {
                 hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-                hal_translate(mtx_store.gbi, at_hit->article_hit_unk[i].pos_prev.x, at_hit->article_hit_unk[i].pos_prev.y, at_hit->article_hit_unk[i].pos_prev.z);
+                hal_translate(mtx_store.gbi, it_hit->item_hit_unk[i].pos_prev.x, it_hit->item_hit_unk[i].pos_prev.y, it_hit->item_hit_unk[i].pos_prev.z);
 
                 gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
                 hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-                hal_scale(mtx_store.gbi, at_hit->size / 15.0F, at_hit->size / 15.0F, at_hit->size / 15.0F);
+                hal_scale(mtx_store.gbi, it_hit->size / 15.0F, it_hit->size / 15.0F, it_hit->size / 15.0F);
 
                 gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -65,17 +65,17 @@ void func_ovl3_80171410(GObj *article_gobj)
             }
             hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-            hal_translate(mtx_store.gbi, at_hit->article_hit_unk[i].pos.x, at_hit->article_hit_unk[i].pos.y, at_hit->article_hit_unk[i].pos.z);
+            hal_translate(mtx_store.gbi, it_hit->item_hit_unk[i].pos.x, it_hit->item_hit_unk[i].pos.y, it_hit->item_hit_unk[i].pos.z);
 
             gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
             hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-            hal_scale(mtx_store.gbi, at_hit->size / 15.0F, at_hit->size / 15.0F, at_hit->size / 15.0F);
+            hal_scale(mtx_store.gbi, it_hit->size / 15.0F, it_hit->size / 15.0F, it_hit->size / 15.0F);
 
             gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-            if (at_hit->update_state == gmHitCollision_UpdateState_Interpolate)
+            if (it_hit->update_state == gmHitCollision_UpdateState_Interpolate)
             {
                 gSPDisplayList(D_800465B0[0]++, &D_ovl2_8012C160);
             }
@@ -84,11 +84,11 @@ void func_ovl3_80171410(GObj *article_gobj)
             gSPPopMatrix(D_800465B0[0]++, G_MTX_MODELVIEW);
         }
     }
-    at_hurt = &ap->article_hurt;
+    at_hurt = &ap->item_hurt;
 
-    if (ap->article_hurt.hitstatus != gmHitCollision_HitStatus_None)
+    if (ap->item_hurt.hitstatus != gmHitCollision_HitStatus_None)
     {
-        translate = &DObjGetStruct(article_gobj)->translate;
+        translate = &DObjGetStruct(item_gobj)->translate;
 
         hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
@@ -129,10 +129,10 @@ void func_ovl3_80171410(GObj *article_gobj)
     }
 }
 
-void func_ovl3_801719AC(GObj *article_gobj)
+void func_ovl3_801719AC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    Vec3f *translate = &DObjGetStruct(article_gobj)->translate;
+    Item_Struct *ap = itGetStruct(item_gobj);
+    Vec3f *translate = &DObjGetStruct(item_gobj)->translate;
     ObjectColl *object_coll = &ap->coll_data.object_coll;
     MtxStore mtx_store;
 
@@ -196,55 +196,55 @@ bool32 func_ovl3_80171C10(Item_Struct *ap)
     else return TRUE;
 }
 
-void func_ovl3_80171C7C(GObj *article_gobj) // Unused
+void func_ovl3_80171C7C(GObj *item_gobj) // Unused
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
         if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
-            func_80014038(article_gobj);
+            func_80014038(item_gobj);
         }
         else if (ap->display_state == dbObjDisplayStatus_MapCollision)
         {
-            func_80014038(article_gobj);
-            func_ovl3_801719AC(article_gobj);
+            func_80014038(item_gobj);
+            func_ovl3_801719AC(item_gobj);
         }
-        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
-            func_80014038(article_gobj);
+            func_80014038(item_gobj);
         }
-        else func_ovl3_80171410(article_gobj);
+        else func_ovl3_80171410(item_gobj);
     }
 }
 
-void func_ovl3_80171D38(GObj *article_gobj)
+void func_ovl3_80171D38(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
         if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
-            func_80014768(article_gobj);
+            func_80014768(item_gobj);
         }
         else if (ap->display_state == dbObjDisplayStatus_MapCollision)
         {
-            func_80014768(article_gobj);
-            func_ovl3_801719AC(article_gobj);
+            func_80014768(item_gobj);
+            func_ovl3_801719AC(item_gobj);
         }
-        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
-            func_80014768(article_gobj);
+            func_80014768(item_gobj);
         }
-        else func_ovl3_80171410(article_gobj);
+        else func_ovl3_80171410(item_gobj);
     }
 }
 
-void func_ovl3_80171DF4(GObj *article_gobj)
+void func_ovl3_80171DF4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -260,7 +260,7 @@ void func_ovl3_80171DF4(GObj *article_gobj)
     {
         gDPSetEnvColor(D_800465B0[0]++, 0, 0, 0, 0);
     }
-    func_80014038(article_gobj);
+    func_80014038(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -269,32 +269,32 @@ void func_ovl3_80171DF4(GObj *article_gobj)
     gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
 }
 
-void func_ovl3_80171F4C(GObj *article_gobj) // Unused
+void func_ovl3_80171F4C(GObj *item_gobj) // Unused
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
         if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
-            func_ovl3_80171DF4(article_gobj);
+            func_ovl3_80171DF4(item_gobj);
         }
         else if (ap->display_state == dbObjDisplayStatus_MapCollision)
         {
-            func_ovl3_80171DF4(article_gobj);
-            func_ovl3_801719AC(article_gobj);
+            func_ovl3_80171DF4(item_gobj);
+            func_ovl3_801719AC(item_gobj);
         }
-        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
-            func_ovl3_80171DF4(article_gobj);
+            func_ovl3_80171DF4(item_gobj);
         }
-        else func_ovl3_80171410(article_gobj);
+        else func_ovl3_80171410(item_gobj);
     }
 }
 
-void func_ovl3_80172008(GObj *article_gobj)
+void func_ovl3_80172008(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -320,7 +320,7 @@ void func_ovl3_80172008(GObj *article_gobj)
 
         gDPSetEnvColor(D_800465B0[1]++, 0, 0, 0, 0);
     }
-    func_80014768(article_gobj);
+    func_80014768(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -335,25 +335,25 @@ void func_ovl3_80172008(GObj *article_gobj)
     gDPSetRenderMode(D_800465B0[1]++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
 }
 
-void func_ovl3_8017224C(GObj *article_gobj)
+void func_ovl3_8017224C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
         if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
         {
-            func_ovl3_80172008(article_gobj);
+            func_ovl3_80172008(item_gobj);
         }
         else if (ap->display_state == dbObjDisplayStatus_MapCollision)
         {
-            func_ovl3_80172008(article_gobj);
-            func_ovl3_801719AC(article_gobj);
+            func_ovl3_80172008(item_gobj);
+            func_ovl3_801719AC(item_gobj);
         }
-        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
-            func_ovl3_80172008(article_gobj);
+            func_ovl3_80172008(item_gobj);
         }
-        else func_ovl3_80171410(article_gobj);
+        else func_ovl3_80171410(item_gobj);
     }
 }

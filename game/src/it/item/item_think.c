@@ -102,7 +102,7 @@ void wpMain_ReflectorInvertLR(Weapon_Struct *wp, Fighter_Struct *fp) // Invert d
 // 0x80168128
 s32 wpMain_DamageApplyStale(Weapon_Struct *wp) // Return final damage after applying staling and bonus 0.999%
 {
-    return (wp->item_hit.stale * wp->item_hit.damage) + 0.999F;
+    return (wp->weapon_hit.stale * wp->weapon_hit.damage) + 0.999F;
 }
 
 // 0x80168158
@@ -110,9 +110,9 @@ void wpMain_ClearHitVictimRecord(Weapon_Struct *wp) // Clear hit victims array
 {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(wp->item_hit.hit_targets); i++)
+    for (i = 0; i < ARRAY_COUNT(wp->weapon_hit.hit_targets); i++)
     {
-        ItemHitArray *targets = &wp->item_hit.hit_targets[i];
+        ItemHitArray *targets = &wp->weapon_hit.hit_targets[i];
 
         targets->victim_gobj = NULL;
 

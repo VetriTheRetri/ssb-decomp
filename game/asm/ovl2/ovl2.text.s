@@ -21653,8 +21653,8 @@ glabel func_ovl2_800E96B0
 
 glabel caCheckSetColAnimIndex
   /* 064F4C 800E974C 8C98003C */        lw $t8, 0x3c($a0)
-  /* 064F50 800E9750 3C038013 */       lui $v1, %hi(ColAnimTable)
-  /* 064F54 800E9754 2463DBD0 */     addiu $v1, $v1, %lo(ColAnimTable)
+  /* 064F50 800E9750 3C038013 */       lui $v1, %hi(caColorAnimDesc)
+  /* 064F54 800E9754 2463DBD0 */     addiu $v1, $v1, %lo(caColorAnimDesc)
   /* 064F58 800E9758 000570C0 */       sll $t6, $a1, 3
   /* 064F5C 800E975C 0018C8C0 */       sll $t9, $t8, 3
   /* 064F60 800E9760 00794021 */      addu $t0, $v1, $t9

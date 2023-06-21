@@ -119,7 +119,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
     return TRUE;
 }
@@ -632,7 +632,7 @@ bool32 wpPikachu_ThunderJoltGround_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
     return TRUE;
 }

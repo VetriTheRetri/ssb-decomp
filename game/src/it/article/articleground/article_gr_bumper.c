@@ -2,10 +2,10 @@
 #include "ground.h"
 #include "gmmatch.h"
 
-bool32 func_ovl3_8017D590(GObj *article_gobj)
+bool32 func_ovl3_8017D590(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if ((ap->article_vars.bumper.hit_anim_length == 0) && (joint->mobj->anim_frame == 1.0F))
     {
@@ -29,10 +29,10 @@ bool32 func_ovl3_8017D590(GObj *article_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_8017D63C(GObj *article_gobj)
+bool32 func_ovl3_8017D63C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     joint->scale.x = 2.0F;
     joint->scale.y = 2.0F;
@@ -50,22 +50,22 @@ extern itCreateDesc Article_Gr_Bumper_Data;
 
 GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Bumper_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Bumper_Data, pos, vel, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
         Item_Struct *ap;
         DObj *joint;
 
-        func_ovl3_8017279C(article_gobj);
+        func_ovl3_8017279C(item_gobj);
 
-        ap = itGetStruct(article_gobj);
-        joint = DObjGetStruct(article_gobj);
+        ap = itGetStruct(item_gobj);
+        joint = DObjGetStruct(item_gobj);
 
         ap->at_multi = 0;
 
-        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
-        ap->article_hit.can_rehit_shield = TRUE;
+        ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ap->item_hit.can_rehit_shield = TRUE;
 
         ap->phys_info.vel.x = 0.0F;
         ap->phys_info.vel.y = 0.0F;
@@ -75,9 +75,9 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         if (Match_Info->gr_kind == Gr_Kind_Castle)
         {
-            ap->article_hit.knockback_weight = ATBUMPER_CASTLE_KNOCKBACK;
-            ap->article_hit.angle = ATBUMPER_CASTLE_ANGLE;
+            ap->item_hit.knockback_weight = ATBUMPER_CASTLE_KNOCKBACK;
+            ap->item_hit.angle = ATBUMPER_CASTLE_ANGLE;
         }
     }
-    return article_gobj;
+    return item_gobj;
 }

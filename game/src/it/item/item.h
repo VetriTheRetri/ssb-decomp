@@ -168,7 +168,7 @@ typedef struct _Weapon_Hit
     gmAttackFlags stat_flags;
     u16 stat_count;
     s32 hitbox_count;
-    ItemHitUnk item_hit_unk[2];
+    ItemHitUnk weapon_hit_unk[2];
     ItemHitArray hit_targets[4];
 
 } Weapon_Hit;
@@ -194,7 +194,7 @@ typedef struct _Weapon_Struct
 
     Coll_Data coll_data;
     Ground_Air ground_or_air;
-    Weapon_Hit item_hit;          
+    Weapon_Hit weapon_hit;          
 
     s32 hit_victim_damage;              // Set to weapon hitbox's final damage output when hitting a target
     s32 hit_reflect_damage;             // Might be self-damage?

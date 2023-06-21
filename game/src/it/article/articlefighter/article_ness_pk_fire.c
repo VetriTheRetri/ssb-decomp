@@ -1,54 +1,54 @@
 #include "article.h"
 #include "item.h"
 
-bool32 func_ovl3_80185350(GObj *article_gobj)
+bool32 func_ovl3_80185350(GObj *item_gobj)
 {
-    func_ovl3_8018579C(article_gobj);
+    func_ovl3_8018579C(item_gobj);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80185374(GObj *article_gobj)
+bool32 func_ovl3_80185374(GObj *item_gobj)
 {
     s32 unused1[4];
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     Effect_Info *effect = ap->article_vars.pkfire.effect;
     atCommonAttributes *attributes;
     f32 lifetime_scale = ((ap->lifetime * (f32)0.5) / 100.0F) + (f32)0.5;
 
-    DObjGetStruct(article_gobj)->scale.x = DObjGetStruct(article_gobj)->scale.y = DObjGetStruct(article_gobj)->scale.z = lifetime_scale;
+    DObjGetStruct(item_gobj)->scale.x = DObjGetStruct(item_gobj)->scale.y = DObjGetStruct(item_gobj)->scale.z = lifetime_scale;
 
     attributes = ap->attributes;
 
-    ap->article_hit.offset[0].x = attributes->hit_offset1_x * lifetime_scale;
-    ap->article_hit.offset[0].y = attributes->hit_offset1_y * lifetime_scale;
-    ap->article_hit.offset[0].z = attributes->hit_offset1_z * lifetime_scale;
-    ap->article_hit.offset[1].x = attributes->hit_offset2_x * lifetime_scale;
-    ap->article_hit.offset[1].y = attributes->hit_offset2_y * lifetime_scale;
-    ap->article_hit.offset[1].z = attributes->hit_offset2_z * lifetime_scale;
+    ap->item_hit.offset[0].x = attributes->hit_offset1_x * lifetime_scale;
+    ap->item_hit.offset[0].y = attributes->hit_offset1_y * lifetime_scale;
+    ap->item_hit.offset[0].z = attributes->hit_offset1_z * lifetime_scale;
+    ap->item_hit.offset[1].x = attributes->hit_offset2_x * lifetime_scale;
+    ap->item_hit.offset[1].y = attributes->hit_offset2_y * lifetime_scale;
+    ap->item_hit.offset[1].z = attributes->hit_offset2_z * lifetime_scale;
 
-    ap->article_hit.size = attributes->size * (f32)0.5F * lifetime_scale;
+    ap->item_hit.size = attributes->size * (f32)0.5F * lifetime_scale;
 
-    ap->article_hurt.offset.x = attributes->hurt_offset.x * lifetime_scale;
-    ap->article_hurt.offset.y = attributes->hurt_offset.y * lifetime_scale;
-    ap->article_hurt.offset.z = attributes->hurt_offset.z * lifetime_scale;
-    ap->article_hurt.size.x = attributes->hurt_size.x * (f32)0.5F * lifetime_scale;
-    ap->article_hurt.size.y = attributes->hurt_size.y * (f32)0.5F * lifetime_scale;
-    ap->article_hurt.size.z = attributes->hurt_size.z * (f32)0.5F * lifetime_scale;
+    ap->item_hurt.offset.x = attributes->hurt_offset.x * lifetime_scale;
+    ap->item_hurt.offset.y = attributes->hurt_offset.y * lifetime_scale;
+    ap->item_hurt.offset.z = attributes->hurt_offset.z * lifetime_scale;
+    ap->item_hurt.size.x = attributes->hurt_size.x * (f32)0.5F * lifetime_scale;
+    ap->item_hurt.size.y = attributes->hurt_size.y * (f32)0.5F * lifetime_scale;
+    ap->item_hurt.size.z = attributes->hurt_size.z * (f32)0.5F * lifetime_scale;
 
     if (effect != NULL)
     {
-        effect->scale.x = DObjGetStruct(article_gobj)->scale.x;
-        effect->scale.y = DObjGetStruct(article_gobj)->scale.y;
-        effect->scale.z = DObjGetStruct(article_gobj)->scale.z;
+        effect->scale.x = DObjGetStruct(item_gobj)->scale.x;
+        effect->scale.y = DObjGetStruct(item_gobj)->scale.y;
+        effect->scale.z = DObjGetStruct(item_gobj)->scale.z;
 
-        effect->translate = DObjGetStruct(article_gobj)->translate;
+        effect->translate = DObjGetStruct(item_gobj)->translate;
     }
     ap->lifetime--;
 
     if (ap->lifetime < 0)
     {
-        func_ovl2_800FF648(&DObjGetStruct(article_gobj)->translate, 1.0F);
+        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
         if (effect != NULL)
         {
@@ -59,20 +59,20 @@ bool32 func_ovl3_80185374(GObj *article_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_801855E4(GObj *article_gobj)
+bool32 jtgt_ovl3_801855E4(GObj *item_gobj)
 {
-    if (func_ovl3_80185374(article_gobj) == TRUE)
+    if (func_ovl3_80185374(item_gobj) == TRUE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80185614(GObj *article_gobj)
+bool32 jtgt_ovl3_80185614(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (func_ovl3_80185374(article_gobj) == TRUE)
+    if (func_ovl3_80185374(item_gobj) == TRUE)
     {
         return TRUE;
     }
@@ -81,29 +81,29 @@ bool32 jtgt_ovl3_80185614(GObj *article_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80185660(GObj *article_gobj)
+bool32 jtgt_ovl3_80185660(GObj *item_gobj)
 {
-    func_ovl3_801735A0(article_gobj, func_ovl3_8018579C);
+    func_ovl3_801735A0(item_gobj, func_ovl3_8018579C);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80185688(GObj *article_gobj)
+bool32 jtgt_ovl3_80185688(GObj *item_gobj)
 {
-    func_ovl3_80173C68(article_gobj, 0.2F, 0.5F, func_ovl3_80185710);
+    func_ovl3_80173C68(item_gobj, 0.2F, 0.5F, func_ovl3_80185710);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801856BC(GObj *article_gobj)
+bool32 jtgt_ovl3_801856BC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->lifetime > 0)
     {
         ap->lifetime -= ap->damage_last * ATPKFIRE_HURT_DAMAGE_MUL;
     }
-    if (func_ovl3_80185374(article_gobj) == TRUE)
+    if (func_ovl3_80185374(item_gobj) == TRUE)
     {
         return TRUE;
     }
@@ -112,9 +112,9 @@ bool32 jtgt_ovl3_801856BC(GObj *article_gobj)
 
 extern itStatusDesc Article_PK_Fire_Status[];
 
-void func_ovl3_80185710(GObj *article_gobj)
+void func_ovl3_80185710(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     gmAttackFlags flags_hi;
     u16 flags_lw;
 
@@ -124,18 +124,18 @@ void func_ovl3_80185710(GObj *article_gobj)
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    flags_hi = ap->article_hit.stat_flags;
-    flags_lw = ap->article_hit.stat_count;
+    flags_hi = ap->item_hit.stat_flags;
+    flags_lw = ap->item_hit.stat_count;
 
-    atCommon_UpdateArticleStatus(article_gobj, Article_PK_Fire_Status, 0);
+    atCommon_UpdateArticleStatus(item_gobj, Article_PK_Fire_Status, 0);
 
-    ap->article_hit.stat_flags = flags_hi;
-    ap->article_hit.stat_count = flags_lw;
+    ap->item_hit.stat_flags = flags_hi;
+    ap->item_hit.stat_count = flags_lw;
 }
 
-void func_ovl3_8018579C(GObj *article_gobj)
+void func_ovl3_8018579C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     gmAttackFlags flags_hi;
     u16 flags_lw;
 
@@ -144,13 +144,13 @@ void func_ovl3_8018579C(GObj *article_gobj)
     ap->phys_info.vel.y = 0.0F;
     ap->phys_info.vel.x = 0.0F;
 
-    flags_hi = ap->article_hit.stat_flags;
-    flags_lw = ap->article_hit.stat_count;
+    flags_hi = ap->item_hit.stat_flags;
+    flags_lw = ap->item_hit.stat_count;
 
-    atCommon_UpdateArticleStatus(article_gobj, Article_PK_Fire_Status, 1);
+    atCommon_UpdateArticleStatus(item_gobj, Article_PK_Fire_Status, 1);
 
-    ap->article_hit.stat_flags = flags_hi;
-    ap->article_hit.stat_count = flags_lw;
+    ap->item_hit.stat_flags = flags_hi;
+    ap->item_hit.stat_count = flags_lw;
 }
 
 extern s32 D_ovl2_80131148;
@@ -158,19 +158,19 @@ extern itCreateDesc Article_PK_Fire_Data;
 
 GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *article_gobj;
+    GObj *item_gobj;
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Item_Struct *ap;
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
 
-    article_gobj = itManager_CreateItem(weapon_gobj, &Article_PK_Fire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ITEM));
+    item_gobj = itManager_CreateItem(weapon_gobj, &Article_PK_Fire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ITEM));
 
-    if (article_gobj == NULL)
+    if (item_gobj == NULL)
     {
         return NULL;
     }
-    ap = itGetStruct(article_gobj);
+    ap = itGetStruct(item_gobj);
 
     ap->owner_gobj = ip->owner_gobj;
 
@@ -182,15 +182,15 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     ap->handicap = ip->handicap;
     ap->player_number = ip->player_number;
 
-    ap->article_hit.can_rehit_shield = TRUE;
-    ap->article_hit.throw_mul = ip->item_hit.stale;
-    ap->article_hit.attack_id = ip->item_hit.attack_id;
-    ap->article_hit.motion_count = ip->item_hit.motion_count;
-    ap->article_hit.stat_flags = ip->item_hit.stat_flags;
-    ap->article_hit.stat_count = ip->item_hit.stat_count;
+    ap->item_hit.can_rehit_shield = TRUE;
+    ap->item_hit.throw_mul = ip->weapon_hit.stale;
+    ap->item_hit.attack_id = ip->weapon_hit.attack_id;
+    ap->item_hit.motion_count = ip->weapon_hit.motion_count;
+    ap->item_hit.stat_flags = ip->weapon_hit.stat_flags;
+    ap->item_hit.stat_count = ip->weapon_hit.stat_count;
 
     func_ovl3_80173F78(ap);
-    itManager_UpdateHitPositions(article_gobj);
+    itManager_UpdateHitPositions(item_gobj);
 
     ap->lifetime = ATPKFIRE_LIFETIME;
 
@@ -224,5 +224,5 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     {
         ap->article_vars.pkfire.effect = NULL;
     }
-    return article_gobj;
+    return item_gobj;
 }

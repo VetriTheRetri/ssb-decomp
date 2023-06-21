@@ -44,40 +44,40 @@ void ftLink_SpecialHi_UpdateWeaponHit(GObj *fighter_gobj, Weapon_Struct *wp)
         break;
 
     case 1:
-        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
-        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_1;
+        wp->weapon_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->weapon_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_1;
 
         wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 2:
 
-        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
-        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_2;
+        wp->weapon_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->weapon_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_2;
 
         wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 3:
-        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
-        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_3;
+        wp->weapon_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->weapon_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_3;
 
         wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 4:
-        wp->item_hit.update_state = gmHitCollision_UpdateState_New;
-        wp->item_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_4;
+        wp->weapon_hit.update_state = gmHitCollision_UpdateState_New;
+        wp->weapon_hit.size = FTLINK_SPINATTACK_FLAG_SIZE_4;
 
         wpManager_UpdateHitPositions(fighter_gobj);
         break;
 
     case 13:
-        wp->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+        wp->weapon_hit.update_state = gmHitCollision_UpdateState_Disable;
         break;
 
     default:
-        wp->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+        wp->weapon_hit.update_state = gmHitCollision_UpdateState_Disable;
         break;
     }
     fp->command_vars.flags.flag2 = 0;
@@ -145,7 +145,7 @@ void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
                 Weapon_Struct *wp = wpGetStruct(spin_attack_gobj);
                 s32 i;
 
-                wp->item_hit.update_state = 0;
+                wp->weapon_hit.update_state = 0;
 
                 for (i = 0; i < ITSPINATTACK_EXTEND_POS_COUNT; i++)
                 {

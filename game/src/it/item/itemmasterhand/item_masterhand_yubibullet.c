@@ -58,13 +58,13 @@ void wpMasterHand_YubiExplode_InitWeaponVars(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    wp->item_hit.hit_sfx = 1;
+    wp->weapon_hit.hit_sfx = 1;
 
-    wp->item_hit.can_rehit_item = TRUE;
-    wp->item_hit.can_hop = FALSE;
-    wp->item_hit.can_reflect = FALSE;
+    wp->weapon_hit.can_rehit_item = TRUE;
+    wp->weapon_hit.can_hop = FALSE;
+    wp->weapon_hit.can_reflect = FALSE;
 
-    wp->item_hit.element = gmHitCollision_Element_Fire;
+    wp->weapon_hit.element = gmHitCollision_Element_Fire;
 
     wp->lifetime = ITYUBIBULLET_EXPLODE_LIFETIME;
 
@@ -72,7 +72,7 @@ void wpMasterHand_YubiExplode_InitWeaponVars(GObj *weapon_gobj)
     wp->phys_info.vel.y = 0.0F;
     wp->phys_info.vel.x = 0.0F;
 
-    wp->item_hit.size = ITYUBIBULLET_EXPLODE_SIZE;
+    wp->weapon_hit.size = ITYUBIBULLET_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 

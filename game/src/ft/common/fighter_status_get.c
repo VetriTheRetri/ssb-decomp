@@ -11,22 +11,22 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     GObj *pickup_gobj = NULL;
     ftItemPickup *item_pickup = &fp->attributes->item_pickup;
-    GObj *article_gobj = gOMObjCommonLinks[gOMObjLinkIndexArticle];
+    GObj *item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
     f32 closest_item_dist = (f32)FLOAT_MAX;
     bool32 is_pickup;
     f32 current_item_dist;
     Vec2f pickup_range;
 
-    while (article_gobj != NULL)
+    while (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
         if (ap->is_allow_pickup)
         {
             if (fp->coll_data.ground_line_id == ap->coll_data.ground_line_id)
             {
                 Vec3f *ft_translate = &DObjGetStruct(fighter_gobj)->translate;
-                Vec3f *at_translate = &DObjGetStruct(article_gobj)->translate;
+                Vec3f *at_translate = &DObjGetStruct(item_gobj)->translate;
                 ObjectColl *object_coll = &ap->coll_data.object_coll;
 
                 is_pickup = FALSE;
@@ -64,12 +64,12 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
                     if (current_item_dist < closest_item_dist)
                     {
                         closest_item_dist = current_item_dist;
-                        pickup_gobj = article_gobj;
+                        pickup_gobj = item_gobj;
                     }
                 }
             }
         }
-        article_gobj = article_gobj->group_gobj_next;
+        item_gobj = item_gobj->group_gobj_next;
     }
     return pickup_gobj;
 }
@@ -78,11 +78,11 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
 void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *article_gobj = fp->item_hold;
+    GObj *item_gobj = fp->item_hold;
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
         if (ap->type == It_Type_Special)
         {
@@ -90,7 +90,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
             {
             case It_Kind_Tomato:
                 ftCommon_ApplyDamageHeal(fp, ATTOMATO_DAMAGE_HEAL);
-                func_ovl3_801728D4(article_gobj);
+                func_ovl3_801728D4(item_gobj);
 
                 if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (gmBonusStat_TomatoPickupCount < U8_MAX))
                 {
@@ -100,7 +100,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
 
             case It_Kind_Heart:
                 ftCommon_ApplyDamageHeal(fp, ATHEART_DAMAGE_HEAL);
-                func_ovl3_801728D4(article_gobj);
+                func_ovl3_801728D4(item_gobj);
 
                 if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (gmBonusStat_HeartPickupCount < U8_MAX))
                 {
@@ -140,17 +140,17 @@ void ftCommon_Get_DropItem(GObj *fighter_gobj)
 void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    GObj *article_gobj;
+    GObj *item_gobj;
 
     if (fp->command_vars.flags.flag1 != 0)
     {
         fp->command_vars.flags.flag1 = 0;
 
-        article_gobj = ftCommon_Get_GetItemPickupGObj(fighter_gobj, ((fp->status_info.status_id == ftStatus_Common_HeavyGet) ? FTCOMMON_GET_MASK_HEAVY : FTCOMMON_GET_MASK_LIGHT));
+        item_gobj = ftCommon_Get_GetItemPickupGObj(fighter_gobj, ((fp->status_info.status_id == ftStatus_Common_HeavyGet) ? FTCOMMON_GET_MASK_HEAVY : FTCOMMON_GET_MASK_LIGHT));
 
-        if (article_gobj != NULL)
+        if (item_gobj != NULL)
         {
-            atCommon_PickupSetHoldFighter(article_gobj, fighter_gobj);
+            atCommon_PickupSetHoldFighter(item_gobj, fighter_gobj);
         }
     }
     if (fighter_gobj->anim_frame <= 0.0F)
@@ -169,11 +169,11 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
         }
         else
         {
-            article_gobj = fp->item_hold;
+            item_gobj = fp->item_hold;
 
-            if (article_gobj != NULL)
+            if (item_gobj != NULL)
             {
-                Item_Struct *ap = itGetStruct(article_gobj);
+                Item_Struct *ap = itGetStruct(item_gobj);
 
                 if (ap->type == It_Type_Special)
                 {
@@ -241,10 +241,10 @@ void ftCommon_HeavyThrow_ProcMap(GObj *fighter_gobj)
 }
 
 // 0x80145FD8
-void ftCommon_Get_SetStatus(GObj *fighter_gobj, GObj *article_gobj)
+void ftCommon_Get_SetStatus(GObj *fighter_gobj, GObj *item_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 
@@ -265,11 +265,11 @@ bool32 ftCommon_Get_CheckInterruptCommon(GObj *fighter_gobj)
 
     if (fp->item_hold == NULL)
     {
-        GObj *article_gobj = ftCommon_Get_GetItemPickupGObj(fighter_gobj, (FTCOMMON_GET_MASK_LIGHT | FTCOMMON_GET_MASK_HEAVY));
+        GObj *item_gobj = ftCommon_Get_GetItemPickupGObj(fighter_gobj, (FTCOMMON_GET_MASK_LIGHT | FTCOMMON_GET_MASK_HEAVY));
 
-        if (article_gobj != NULL)
+        if (item_gobj != NULL)
         {
-            ftCommon_Get_SetStatus(fighter_gobj, article_gobj);
+            ftCommon_Get_SetStatus(fighter_gobj, item_gobj);
 
             return TRUE;
         }

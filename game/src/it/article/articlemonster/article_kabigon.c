@@ -11,10 +11,10 @@
 #include <game/include/PR/sp.h>
 #include <game/include/PR/ultratypes.h>
 
-bool32 func_ovl3_8017E070(GObj *article_gobj)
+bool32 func_ovl3_8017E070(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->article_vars.kabigon.rumble_wait == 0)
     {
@@ -33,9 +33,9 @@ bool32 func_ovl3_8017E070(GObj *article_gobj)
 
 extern Gfx *D_800465B0[4];
 
-void func_ovl3_8017E100(GObj *article_gobj)
+void func_ovl3_8017E100(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -45,40 +45,40 @@ void func_ovl3_8017E100(GObj *article_gobj)
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
-            func_80014038(article_gobj);
+            func_80014038(item_gobj);
         }
         else if (ap->display_state == dbObjDisplayStatus_MapCollision)
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
-            func_80014038(article_gobj);
-            func_ovl3_801719AC(article_gobj);
+            func_80014038(item_gobj);
+            func_ovl3_801719AC(item_gobj);
         }
-        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
-            func_80014038(article_gobj);
+            func_80014038(item_gobj);
         }
         else
         {
-            func_ovl3_80171410(article_gobj);
+            func_ovl3_80171410(item_gobj);
         }
     }
 
     gDPPipeSync(D_800465B0[0]++);
 }
 
-void func_ovl3_8017E25C(GObj *article_gobj)
+void func_ovl3_8017E25C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     ap->phys_info.vel.y = ATKABIGON_DROP_VEL_Y;
 
     joint->translate.x += ((ATKABIGON_DROP_OFF_X_MUL * rand_f32()) + ATKABIGON_DROP_OFF_X_ADD);
 
-    func_ovl3_8017275C(article_gobj);
+    func_ovl3_8017275C(item_gobj);
 
     ap->article_vars.kabigon.rumble_wait = 0;
 
@@ -91,32 +91,32 @@ void func_ovl3_8017E25C(GObj *article_gobj)
         joint->scale.y = ATKABIGON_DROP_SIZE_KABIGON;
         joint->scale.x = ATKABIGON_DROP_SIZE_KABIGON;
 
-        ap->article_hit.size *= ATKABIGON_DROP_SIZE_KABIGON;
+        ap->item_hit.size *= ATKABIGON_DROP_SIZE_KABIGON;
     }
     else
     {
         joint->scale.y = ATKABIGON_DROP_SIZE_OTHER;
         joint->scale.x = ATKABIGON_DROP_SIZE_OTHER;
 
-        ap->article_hit.size *= ATKABIGON_DROP_SIZE_OTHER;
+        ap->item_hit.size *= ATKABIGON_DROP_SIZE_OTHER;
     }
-    article_gobj->renderer = func_ovl3_8017E100;
+    item_gobj->renderer = func_ovl3_8017E100;
 
-    om_g_move_obj_dl_head(article_gobj, 0x12, article_gobj->room_order);
+    om_g_move_obj_dl_head(item_gobj, 0x12, item_gobj->room_order);
 }
 
 extern itStatusDesc Article_Kabigon_Status[];
 
-void func_ovl3_8017E350(GObj *article_gobj)
+void func_ovl3_8017E350(GObj *item_gobj)
 {
-    func_ovl3_8017E25C(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_Kabigon_Status, 1);
+    func_ovl3_8017E25C(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Kabigon_Status, 1);
 }
 
-bool32 func_ovl3_8017E384(GObj *article_gobj)
+bool32 func_ovl3_8017E384(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if ((Ground_Info->blastzone_top - ATKABIGON_MAP_OFF_Y) <= joint->translate.y)
     {
@@ -126,7 +126,7 @@ bool32 func_ovl3_8017E384(GObj *article_gobj)
 
         if (ap->at_multi == 0)
         {
-            func_ovl3_8017E350(article_gobj);
+            func_ovl3_8017E350(item_gobj);
         }
     }
 
@@ -146,9 +146,9 @@ bool32 func_ovl3_8017E384(GObj *article_gobj)
     return FALSE;
 }
 
-void func_ovl3_8017E4A4(GObj *article_gobj)
+void func_ovl3_8017E4A4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -158,32 +158,32 @@ void func_ovl3_8017E4A4(GObj *article_gobj)
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
-            func_80014038(article_gobj);
+            func_80014038(item_gobj);
         }
         else if (ap->display_state == dbObjDisplayStatus_MapCollision)
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
-            func_80014038(article_gobj);
-            func_ovl3_801719AC(article_gobj);
+            func_80014038(item_gobj);
+            func_ovl3_801719AC(item_gobj);
         }
-        else if ((ap->article_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->article_hit.update_state == gmHitCollision_UpdateState_Disable))
+        else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
-            func_80014038(article_gobj);
+            func_80014038(item_gobj);
         }
         else
         {
-            func_ovl3_80171410(article_gobj);
+            func_ovl3_80171410(item_gobj);
         }
     }
     gDPPipeSync(D_800465B0[0]++);
 }
 
-void func_ovl3_8017E600(GObj *article_gobj)
+void func_ovl3_8017E600(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     func_800269C0(0x86U);
 
@@ -194,19 +194,19 @@ void func_ovl3_8017E600(GObj *article_gobj)
     ap->phys_info.vel.y = ATKABIGON_JUMP_VEL_Y;
 }
 
-void func_ovl3_8017E648(GObj *article_gobj)
+void func_ovl3_8017E648(GObj *item_gobj)
 {
-    func_ovl3_8017E600(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_Kabigon_Status, 0);
+    func_ovl3_8017E600(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Kabigon_Status, 0);
 }
 
-bool32 func_ovl3_8017E67C(GObj *article_gobj)
+bool32 func_ovl3_8017E67C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->at_multi == 0)
     {
-        func_ovl3_8017E648(article_gobj);
+        func_ovl3_8017E648(item_gobj);
     }
     ap->at_multi--;
 
@@ -219,16 +219,16 @@ extern itCreateDesc Article_Kabigon_Data;
 
 GObj* jtgt_ovl3_8017E6C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Kabigon_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Kabigon_Data, pos, vel, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        DObj *joint = DObjGetStruct(article_gobj);
-        Item_Struct *ap = itGetStruct(article_gobj);
+        DObj *joint = DObjGetStruct(item_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel.z = 0.0F;
         ap->phys_info.vel.x = 0.0F;
@@ -240,7 +240,7 @@ GObj* jtgt_ovl3_8017E6C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         {
             func_800269C0(0x138U);
         }
-        article_gobj->renderer = func_ovl3_8017E4A4;
+        item_gobj->renderer = func_ovl3_8017E4A4;
     }
-    return article_gobj;
+    return item_gobj;
 }

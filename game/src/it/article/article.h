@@ -234,7 +234,7 @@ typedef struct _Item_Hit
     gmAttackFlags stat_flags;
     u16 stat_count;
     s32 hitbox_count;
-    ArticleHitUnk article_hit_unk[2];
+    ArticleHitUnk item_hit_unk[2];
     ArticleHitArray hit_targets[4];
 
 } Item_Hit;
@@ -264,14 +264,14 @@ typedef struct ArticleHitDesc
 
 } ArticleHitDesc;
 
-typedef struct Article_Hurt
+typedef struct Item_Hurt
 {
     u8 interact_mask; // 0x1 = interact with fighters, 0x2 = interact with items, 0x4 = interact with other articles
     s32 hitstatus;
     Vec3f offset; // Added to TopN joint
     Vec3f size;
 
-} Article_Hurt; // Article Hurtbox, might be larger
+} Item_Hurt; // Article Hurtbox, might be larger
 
 typedef struct atCommonAttributes
 {
@@ -285,11 +285,11 @@ typedef struct atCommonAttributes
     u32 is_give_hitlag : 1;
     u32 is_light : 1;
     s32 hit_offset1_x : 16;
-    s16 hit_offset1_y;
-    s16 hit_offset1_z;
-    s16 hit_offset2_x;
-    s16 hit_offset2_y;
-    s16 hit_offset2_z;
+    s32 hit_offset1_y : 16; // If in doubt, make these raw s16
+    s32 hit_offset1_z : 16;
+    s32 hit_offset2_x : 16;
+    s32 hit_offset2_y : 16;
+    s32 hit_offset2_z : 16;
     Vec3h hurt_offset;
     Vec3h hurt_size;
     s16 objectcoll_top;
@@ -328,7 +328,7 @@ typedef struct atCommonAttributes
 typedef struct Item_Struct // Common items, stage hazards and Pokémon
 {
     void *ap_alloc_next; // Region allocated for next Item_Struct
-    GObj *article_gobj;
+    GObj *item_gobj;
     GObj *owner_gobj;
     atKind it_kind;
     s32 type;
@@ -351,8 +351,8 @@ typedef struct Item_Struct // Common items, stage hazards and Pokémon
 
     Ground_Air ground_or_air;
 
-    Item_Hit article_hit;
-    Article_Hurt article_hurt;
+    Item_Hit item_hit;
+    Item_Hurt item_hurt;
 
     s32 hit_victim_damage;
     s32 lr_attack; // Direction of outgoing attack?
@@ -379,7 +379,7 @@ typedef struct Item_Struct // Common items, stage hazards and Pokémon
     s32 damage_taken_last;
     s32 lifetime;
     f32 vel_scale;
-    u16 unk_0x2C8;
+    u16 unk_sfx;
     u16 drop_sfx;
     u16 throw_sfx;
 
@@ -391,17 +391,11 @@ typedef struct Item_Struct // Common items, stage hazards and Pokémon
     u32 is_damage_all : 1; // Article ignores ownership and can damage anything?
     u32 x2CF_flag_b1 : 1;
     u32 x2CF_flag_b2 : 1;
-    u32 x2CF_flag_b3 : 1;
-    u32 x2CF_flag_b4 : 1;
-    u32 x2CF_flag_b5 : 1;
-    u32 x2CF_flag_b6 : 1;
-    u32 x2CF_flag_b7 : 1;
     u16 unk_0x2D0; // Some line ID 
     u32 pickup_wait : 12; // Number of frames article can last without being picked up (if applicable)
     u32 x2D3_flag_b4 : 1;
     u32 x2D3_flag_b5 : 1;
     u32 is_static_damage : 1;
-    u32 x2D3_flag_b7 : 1;
 
     atCommonAttributes *attributes;
 
@@ -412,7 +406,7 @@ typedef struct Item_Struct // Common items, stage hazards and Pokémon
 
     u8 x340_flag_b0123 : 4; // Script timer?
     f32 rotate_speed;
-    GObj *unk_0x348;
+    GObj *indicator_gobj; // Red arrow pickup indicator GObj
     u8 arrow_flash_timer; // Frequency of red arrow indicator flash
 
     union article_vars
@@ -459,8 +453,8 @@ typedef struct Item_Struct // Common items, stage hazards and Pokémon
 
 } Item_Struct;
 
-#define itGetStruct(article_gobj) \
-((Item_Struct*)article_gobj->user_data) \
+#define itGetStruct(item_gobj) \
+((Item_Struct*)item_gobj->user_data) \
 
 
 // Points to all sorts of data

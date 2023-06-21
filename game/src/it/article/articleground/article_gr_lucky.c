@@ -3,11 +3,11 @@
 
 extern itStatusDesc Article_Gr_Lucky_Status[];
 
-void func_ovl3_8017C240(GObj *article_gobj)
+void func_ovl3_8017C240(GObj *item_gobj)
 {
-    atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Lucky_Status, 0);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Gr_Lucky_Status, 0);
 
-    itGetStruct(article_gobj)->proc_dead = func_ovl3_8017C524;
+    itGetStruct(item_gobj)->proc_dead = func_ovl3_8017C524;
 }
 
 void func_ovl3_8017C280(GObj *lucky_gobj)
@@ -65,17 +65,17 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
     }
 }
 
-bool32 func_ovl3_8017C400(GObj *article_gobj)
+bool32 func_ovl3_8017C400(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     joint->translate.x += ap->article_vars.gr_lucky.pos.x;
     joint->translate.y += ap->article_vars.gr_lucky.pos.y;
 
     if ((joint->dobj_f2 >= ATGRLUCKY_EGG_SPAWN_BEGIN) && (joint->dobj_f2 <= ATGRLUCKY_EGG_SPAWN_END))
     {
-        func_ovl3_8017C280(article_gobj);
+        func_ovl3_8017C280(item_gobj);
     }
     if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
@@ -86,38 +86,38 @@ bool32 func_ovl3_8017C400(GObj *article_gobj)
     else return FALSE;
 }
 
-bool32 func_ovl3_8017C4AC(GObj *article_gobj)
+bool32 func_ovl3_8017C4AC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017C4BC(GObj *article_gobj)
+bool32 jtgt_ovl3_8017C4BC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
     func_ovl3_80172558(ap, ATGRLUCKY_GRAVITY, ATGRLUCKY_T_VEL);
 
-    joint = DObjGetStruct(article_gobj);
+    joint = DObjGetStruct(item_gobj);
 
     joint->rotate.z -= ATGRLUCKY_HIT_ROTATE_Z * ap->lr;
 
     return FALSE;
 }
 
-bool32 func_ovl3_8017C524(GObj *article_gobj)
+bool32 func_ovl3_8017C524(GObj *item_gobj)
 {
     return TRUE;
 }
 
-bool32 jtgt_ovl3_8017C530(GObj *article_gobj)
+bool32 jtgt_ovl3_8017C530(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->damage_knockback >= 100.0F)
     {
@@ -126,13 +126,13 @@ bool32 jtgt_ovl3_8017C530(GObj *article_gobj)
         ap->phys_info.vel.x = (cosf(angle) * ap->damage_knockback * -ap->lr_damage);
         ap->phys_info.vel.y = (__sinf(angle) * ap->damage_knockback);
 
-        ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
-        ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
+        ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+        ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
         joint->dobj_f0 = (f32)FLOAT_NEG_MAX;
 
         func_ovl2_8010B0AC();
-        func_ovl3_8017C240(article_gobj);
+        func_ovl3_8017C240(item_gobj);
     }
     return FALSE;
 }
@@ -141,13 +141,13 @@ extern itCreateDesc Article_Gr_Lucky_Data;
 
 GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Lucky_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Lucky_Data, pos, vel, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->article_vars.gr_lucky.pos = *pos;
 
@@ -159,5 +159,5 @@ GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_800269C0(0x22AU);
     }
-    return article_gobj;
+    return item_gobj;
 }

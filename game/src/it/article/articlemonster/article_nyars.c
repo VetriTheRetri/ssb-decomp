@@ -4,10 +4,10 @@
 
 
 
-bool32 func_ovl3_8017EEB0(GObj *article_gobj)
+bool32 func_ovl3_8017EEB0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -15,7 +15,7 @@ bool32 func_ovl3_8017EEB0(GObj *article_gobj)
     }
     if (ap->at_multi == ap->article_vars.nyars.coin_spawn_wait)
     {
-        func_ovl3_8017F408(article_gobj, ap->article_vars.nyars.coin_rotate_step * ATNYARS_COIN_ANGLE_STEP);
+        func_ovl3_8017F408(item_gobj, ap->article_vars.nyars.coin_rotate_step * ATNYARS_COIN_ANGLE_STEP);
 
         ap->article_vars.nyars.coin_rotate_step++;
         ap->article_vars.nyars.coin_spawn_wait = ap->at_multi - ATNYARS_COIN_SPAWN_WAIT;
@@ -35,9 +35,9 @@ bool32 func_ovl3_8017EEB0(GObj *article_gobj)
     return FALSE;
 }
 
-void func_ovl3_8017EFA0(GObj *article_gobj)
+void func_ovl3_8017EFA0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->at_multi = ATNYARS_LIFETIME;
 
@@ -48,22 +48,22 @@ void func_ovl3_8017EFA0(GObj *article_gobj)
 
 extern itStatusDesc Article_Nyars_Status[];
 
-void func_ovl3_8017EFC4(GObj *article_gobj)
+void func_ovl3_8017EFC4(GObj *item_gobj)
 {
-    func_ovl3_8017EFA0(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_Nyars_Status, 0);
+    func_ovl3_8017EFA0(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Nyars_Status, 0);
 }
 
-bool32 jtgt_ovl3_8017EFF8(GObj *article_gobj)
+bool32 jtgt_ovl3_8017EFF8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->at_multi == 0)
     {
         ap->phys_info.vel.y = 0.0F;
         ap->phys_info.vel.x = 0.0F;
 
-        func_ovl3_8017EFC4(article_gobj);
+        func_ovl3_8017EFC4(item_gobj);
 
     }
     ap->at_multi--;
@@ -71,11 +71,11 @@ bool32 jtgt_ovl3_8017EFF8(GObj *article_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017F04C(GObj *article_gobj)
+bool32 jtgt_ovl3_8017F04C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
+    if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
         ap->phys_info.vel.y = 0.0F;
     }
@@ -88,19 +88,19 @@ extern itCreateDesc Article_Nyars_Data;
 
 GObj *jtgt_ovl3_8017F08C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Nyars_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Nyars_Data, pos, vel, flags);
     DObj *joint;
     Item_Struct *ap;
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        joint = DObjGetStruct(article_gobj);
+        joint = DObjGetStruct(item_gobj);
 
         func_80008CC0(joint, 0x48U, 0U);
 
         joint->translate = *pos;
 
-        ap = itGetStruct(article_gobj);
+        ap = itGetStruct(item_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
@@ -112,7 +112,7 @@ GObj *jtgt_ovl3_8017F08C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_8000BD1C(joint, ArticleGetPData(ap, D_NF_0000C130, D_NF_00013624), 0.0F);
     }
-    return article_gobj;
+    return item_gobj;
 }
 
 bool32 func_ovl3_8017F17C(GObj *weapon_gobj)
@@ -170,10 +170,10 @@ bool32 jtgt_ovl3_8017F274(GObj *weapon_gobj)
 
 extern wpCreateDesc D_ovl3_8018ACF4;
 
-GObj *func_ovl3_8017F2E4(GObj *article_gobj, u8 coin_number, f32 rotate_angle)
+GObj *func_ovl3_8017F2E4(GObj *item_gobj, u8 coin_number, f32 rotate_angle)
 {
     Weapon_Struct *ip;
-    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &D_ovl3_8018ACF4, &DObjGetStruct(article_gobj)->translate, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &D_ovl3_8018ACF4, &DObjGetStruct(item_gobj)->translate, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
 
     if (weapon_gobj == NULL)
@@ -195,17 +195,17 @@ GObj *func_ovl3_8017F2E4(GObj *article_gobj, u8 coin_number, f32 rotate_angle)
     func_80008CC0(joint, 0x1CU, 0U);
     func_80008CC0(joint, 0x46U, 0U);
 
-    joint->translate = DObjGetStruct(article_gobj)->translate;
+    joint->translate = DObjGetStruct(item_gobj)->translate;
 
     return weapon_gobj;
 }
 
-void func_ovl3_8017F408(GObj *article_gobj, f32 angle)
+void func_ovl3_8017F408(GObj *item_gobj, f32 angle)
 {
     s32 coin_count;
 
     for (coin_count = 0; coin_count < ATNYARS_COIN_SPAWN_MAX; coin_count++)
     {
-        func_ovl3_8017F2E4(article_gobj, coin_count, angle);
+        func_ovl3_8017F2E4(item_gobj, coin_count, angle);
     }
 }

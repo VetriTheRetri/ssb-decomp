@@ -591,7 +591,7 @@ void itIBumper_GDisappear_SetStatus(GObj *item_gobj)
 
     joint->unk_0x54 = 0;
 
-    ip->article_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ip->phys_info.vel.x = 0.0F;
     ip->phys_info.vel.y = 0.0F;
@@ -615,9 +615,9 @@ GObj* itCommon_IBumper_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 
         ip->at_multi = 0;
 
-        ip->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ip->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
-        ip->article_hit.can_rehit_shield = TRUE;
+        ip->item_hit.can_rehit_shield = TRUE;
 
         joint->mobj->anim_frame = 0.0F;
 
@@ -629,7 +629,7 @@ GObj* itCommon_IBumper_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 
         ip->x2D3_flag_b5 = TRUE;
 
-        ip->unk_0x348 = func_ovl2_80111EC0(ip);
+        ip->indicator_gobj = func_ovl2_80111EC0(ip);
     }
     return item_gobj;
 }

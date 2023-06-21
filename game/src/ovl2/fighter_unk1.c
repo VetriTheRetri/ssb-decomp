@@ -1098,18 +1098,18 @@ void func_ovl2_800E96B0(GObj *fighter_gobj)
     fp->is_texturepart_modify = FALSE;
 }
 
-extern ColAnimDesc ColAnimTable[]; // 0x8012DBD0
+extern ColAnimDesc caColorAnimDesc[]; // 0x8012DBD0
 
 // 0x800E974C
 bool32 caCheckSetColAnimIndex(Color_Overlay *colanim, s32 colanim_id, s32 duration)
 {
-    if (ColAnimTable[colanim_id].unk_colanimdesc_0x4 >= ColAnimTable[colanim->colanim_id].unk_colanimdesc_0x4)
+    if (caColorAnimDesc[colanim_id].unk_colanimdesc_0x4 >= caColorAnimDesc[colanim->colanim_id].unk_colanimdesc_0x4)
     {
         s32 i;
 
         colanim->colanim_id = colanim_id;
         colanim->duration = duration;
-        colanim->cs[0].p_script = ColAnimTable[colanim_id].p_script;
+        colanim->cs[0].p_script = caColorAnimDesc[colanim_id].p_script;
         colanim->cs[0].color_event_timer = 0;
         colanim->cs[0].script_index = 0;
 

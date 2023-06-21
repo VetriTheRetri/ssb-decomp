@@ -1,9 +1,9 @@
 #include "article.h"
 #include "item.h"
 
-bool32 func_ovl3_80182C80(GObj *article_gobj)
+bool32 func_ovl3_80182C80(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -16,19 +16,19 @@ bool32 func_ovl3_80182C80(GObj *article_gobj)
 
 extern itStatusDesc Article_Dogas_Status[];
 
-void func_ovl3_80182CA8(GObj *article_gobj)
+void func_ovl3_80182CA8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->at_multi = ATDOGAS_DESPAWN_WAIT;
 
-    atCommon_UpdateArticleStatus(article_gobj, Article_Dogas_Status, 1);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Dogas_Status, 1);
 }
 
-void func_ovl3_80182CDC(GObj *article_gobj)
+void func_ovl3_80182CDC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
     Vec3f vel;
 
@@ -51,7 +51,7 @@ void func_ovl3_80182CDC(GObj *article_gobj)
         {
             vel.y = -vel.y;
         }
-        func_ovl3_80183144(article_gobj, &pos, &vel);
+        func_ovl3_80183144(item_gobj, &pos, &vel);
         func_800269C0(0x83U);
 
         ap->article_vars.dogas.smog_spawn_wait = ATDOGAS_SMOG_SPAWN_WAIT;
@@ -60,15 +60,15 @@ void func_ovl3_80182CDC(GObj *article_gobj)
     }
 }
 
-bool32 func_ovl3_80182E1C(GObj *article_gobj)
+bool32 func_ovl3_80182E1C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80182CDC(article_gobj);
+    func_ovl3_80182CDC(item_gobj);
 
     if (ap->at_multi == 0)
     {
-        func_ovl3_80182CA8(article_gobj);
+        func_ovl3_80182CA8(item_gobj);
 
         return FALSE;
     }
@@ -80,10 +80,10 @@ bool32 func_ovl3_80182E1C(GObj *article_gobj)
 extern intptr_t D_NF_00012820;
 extern intptr_t D_NF_000128DC;
 
-void func_ovl3_80182E78(GObj *article_gobj)
+void func_ovl3_80182E78(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     ap->at_multi = ATDOGAS_SMOG_SPAWN_COUNT;
 
@@ -95,38 +95,38 @@ void func_ovl3_80182E78(GObj *article_gobj)
 
         func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_00012820, D_NF_000128DC), 0.0F); // Linker thing
 
-        func_8000DF34(article_gobj);
+        func_8000DF34(item_gobj);
         func_800269C0(0x135U);
     }
 }
 
-void func_ovl3_80182F0C(GObj *article_gobj)
+void func_ovl3_80182F0C(GObj *item_gobj)
 {
-    func_ovl3_80182E78(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_Dogas_Status, 0);
+    func_ovl3_80182E78(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Dogas_Status, 0);
 }
 
-bool32 jtgt_ovl3_80182F40(GObj *article_gobj)
+bool32 jtgt_ovl3_80182F40(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->at_multi == 0)
     {
         ap->phys_info.vel.y = 0.0F;
         ap->phys_info.vel.x = 0.0F;
 
-        func_ovl3_80182F0C(article_gobj);
+        func_ovl3_80182F0C(item_gobj);
     }
     ap->at_multi--;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80182F94(GObj *article_gobj)
+bool32 jtgt_ovl3_80182F94(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
+    if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
         ap->phys_info.vel.y = 0.0F;
     }
@@ -138,20 +138,20 @@ extern itCreateDesc Article_Dogas_Data;
 
 GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Dogas_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Dogas_Data, pos, vel, flags);
     DObj *joint;
     Item_Struct *ap;
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        joint = article_gobj->obj;
+        joint = item_gobj->obj;
 
         func_80008CC0(joint, 0x28U, 0U);
         func_80008CC0(joint->next, 0x1CU, 0U);
 
         joint->translate = *pos;
 
-        ap = itGetStruct(article_gobj);
+        ap = itGetStruct(item_gobj);
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -163,7 +163,7 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_00012820, D_NF_00013624), 0.0F); // Linker thing
     }
-    return article_gobj;
+    return item_gobj;
 }
 
 bool32 func_ovl3_801830DC(GObj *weapon_gobj)
@@ -171,7 +171,7 @@ bool32 func_ovl3_801830DC(GObj *weapon_gobj)
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj)->next;
 
-    ip->item_hit.size = joint->scale.x * ip->weapon_vars.smog.hit_desc->size;
+    ip->weapon_hit.size = joint->scale.x * ip->weapon_vars.smog.hit_desc->size;
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -182,10 +182,10 @@ bool32 func_ovl3_801830DC(GObj *weapon_gobj)
 
 extern wpCreateDesc Item_Smog_Data;
 
-GObj* func_ovl3_80183144(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
+GObj* func_ovl3_80183144(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
     wpCreateDesc *p_data = &Item_Smog_Data;
-    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     Weapon_Struct *ip;
 

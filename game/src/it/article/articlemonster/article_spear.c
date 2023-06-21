@@ -12,10 +12,10 @@
 #include <game/include/PR/sp.h>
 #include <game/include/PR/ultratypes.h>
 
-void func_ovl3_8017FDC0(GObj *article_gobj)
+void func_ovl3_8017FDC0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->article_vars.spear.spear_spawn_wait <= 0)
     {
@@ -26,22 +26,22 @@ void func_ovl3_8017FDC0(GObj *article_gobj)
 
         pos.y += (ATSPEAR_SPAWN_OFF_Y_MUL * rand_f32()) + ATSPEAR_SPAWN_OFF_Y_ADD;
 
-        func_ovl3_80180608(article_gobj, &pos, ap->it_kind);
+        func_ovl3_80180608(item_gobj, &pos, ap->it_kind);
 
         ap->article_vars.spear.spear_spawn_count--;
         ap->article_vars.spear.spear_spawn_wait = rand_u16_range(ATSPEAR_SPAWN_WAIT_RANDOM) + ATSPEAR_SPAWN_WAIT_CONST;
     }
 }
 
-bool32 func_ovl3_8017FE70(GObj *article_gobj)
+bool32 func_ovl3_8017FE70(GObj *item_gobj)
 {
-    DObj *joint = DObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
-    if (article_gobj->anim_frame == ATSPEAR_SWARM_CALL_WAIT)
+    if (item_gobj->anim_frame == ATSPEAR_SWARM_CALL_WAIT)
     {
         joint->next->unk_dobj_0x70 = 0;
 
-        func_ovl3_80180160(article_gobj);
+        func_ovl3_80180160(item_gobj);
     }
     return FALSE;
 }
@@ -50,10 +50,10 @@ extern intptr_t D_NF_0000DF38;
 extern intptr_t D_NF_0000DFFC;
 extern intptr_t D_NF_0000E12C;
 
-void func_ovl3_8017FEB8(GObj *article_gobj)
+void func_ovl3_8017FEB8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     ap->at_multi = 0;
 
@@ -69,23 +69,23 @@ void func_ovl3_8017FEB8(GObj *article_gobj)
         s = ArticleGetPData(ap, D_NF_0000DF38, D_NF_0000E12C); // Linker thing
 
         func_8000BD54(joint->next->mobj, s, 0.0F);
-        func_8000DF34(article_gobj);
+        func_8000DF34(item_gobj);
         func_800269C0(0x140U);
     }
 }
 
 extern itStatusDesc Article_Spear_Status[];
 
-void func_ovl3_8017FF74(GObj *article_gobj)
+void func_ovl3_8017FF74(GObj *item_gobj)
 {
-    func_ovl3_8017FEB8(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_Spear_Status, 0);
+    func_ovl3_8017FEB8(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Spear_Status, 0);
 }
 
-bool32 func_ovl3_8017FFA8(GObj *article_gobj)
+bool32 func_ovl3_8017FFA8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     func_ovl3_80172558(ap, ATSPEAR_GRAVITY, ATSPEAR_T_VEL);
 
@@ -100,7 +100,7 @@ bool32 func_ovl3_8017FFA8(GObj *article_gobj)
 
             if (ap->article_vars.spear.spear_spawn_count != 0)
             {
-                func_ovl3_8017FDC0(article_gobj);
+                func_ovl3_8017FDC0(item_gobj);
             }
             else return TRUE;
 
@@ -116,7 +116,7 @@ bool32 func_ovl3_8017FFA8(GObj *article_gobj)
 
             if (ap->article_vars.spear.spear_spawn_count != 0)
             {
-                func_ovl3_8017FDC0(article_gobj);
+                func_ovl3_8017FDC0(item_gobj);
             }
             else return TRUE;
 
@@ -126,13 +126,13 @@ bool32 func_ovl3_8017FFA8(GObj *article_gobj)
     return FALSE;
 }
 
-void func_ovl3_8018010C(GObj *article_gobj)
+void func_ovl3_8018010C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->phys_info.vel.y = ATSPEAR_SWARM_CALL_VEL_Y;
 
-    ap->article_vars.spear.spear_spawn_pos_y = DObjGetStruct(article_gobj)->translate.y;
+    ap->article_vars.spear.spear_spawn_pos_y = DObjGetStruct(item_gobj)->translate.y;
     ap->article_vars.spear.spear_spawn_wait = 0;
     ap->article_vars.spear.spear_spawn_count = ATSPEAR_SPAWN_COUNT;
 
@@ -142,24 +142,24 @@ void func_ovl3_8018010C(GObj *article_gobj)
     }
 }
 
-bool32 jtgt_ovl3_80180194(GObj *article_gobj)
+bool32 jtgt_ovl3_80180194(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->at_multi == 0)
     {
-        func_ovl3_8017FF74(article_gobj);
+        func_ovl3_8017FF74(item_gobj);
     }
     ap->at_multi--;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801801D8(GObj *article_gobj)
+bool32 jtgt_ovl3_801801D8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
+    if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
         ap->phys_info.vel.y = 0.0F;
     }
@@ -171,17 +171,17 @@ extern itCreateDesc Article_Spear_Data;
 
 GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Spear_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Spear_Data, pos, vel, flags);
     DObj *joint;
     Item_Struct *ap;
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        ap = itGetStruct(article_gobj);
+        ap = itGetStruct(item_gobj);
 
-        func_ovl3_8017279C(article_gobj);
+        func_ovl3_8017279C(item_gobj);
 
-        joint = DObjGetStruct(article_gobj);
+        joint = DObjGetStruct(item_gobj);
 
         func_80008CC0(joint->next, 0x48U, 0U);
 
@@ -198,7 +198,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->article_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel.z = 0.0F;
         ap->phys_info.vel.x = 0.0F;
@@ -208,7 +208,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_0000DF38, D_NF_00013624), 0.0F);
     }
-    return article_gobj;
+    return item_gobj;
 }
 
 bool32 func_ovl3_80180354(GObj *weapon_gobj)
@@ -229,29 +229,29 @@ bool32 func_ovl3_80180354(GObj *weapon_gobj)
 
 extern Gfx *D_800465B0[4];
 
-void func_ovl3_80180400(GObj *article_gobj)
+void func_ovl3_80180400(GObj *item_gobj)
 {
     gDPPipeSync(D_800465B0[0]++);
 
     gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
-    func_80014038(article_gobj);
+    func_80014038(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 }
 
-void func_ovl3_80180480(GObj *article_gobj)
+void func_ovl3_80180480(GObj *item_gobj)
 {
-    func_ovl3_80167520(article_gobj, func_ovl3_80180400);
+    func_ovl3_80167520(item_gobj, func_ovl3_80180400);
 }
 
 extern wpCreateDesc Item_Spear_Swarm_Data;
 extern wpCreateDesc Item_Pippi_Swarm_Data;
 
-GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 it_kind)
+GObj *func_ovl3_801804A4(GObj *item_gobj, Vec3f *pos, s32 it_kind)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
     Weapon_Struct *ip;
@@ -295,7 +295,7 @@ GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 it_kind)
     return weapon_gobj;
 }
 
-void func_ovl3_80180608(GObj *article_gobj, Vec3f *pos, s32 it_kind)
+void func_ovl3_80180608(GObj *item_gobj, Vec3f *pos, s32 it_kind)
 {
-    func_ovl3_801804A4(article_gobj, pos, it_kind);
+    func_ovl3_801804A4(item_gobj, pos, it_kind);
 }

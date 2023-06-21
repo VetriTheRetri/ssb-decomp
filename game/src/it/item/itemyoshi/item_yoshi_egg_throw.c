@@ -59,14 +59,14 @@ void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from
 
     wp->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
-    wp->item_hit.can_hop = FALSE;
-    wp->item_hit.can_reflect = FALSE;
+    wp->weapon_hit.can_hop = FALSE;
+    wp->weapon_hit.can_reflect = FALSE;
 
     wp->phys_info.vel.z = 0.0F;
     wp->phys_info.vel.y = 0.0F;
     wp->phys_info.vel.x = 0.0F;
 
-    wp->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
+    wp->weapon_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
@@ -86,14 +86,14 @@ void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes f
 
     wp->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
 
-    wp->item_hit.can_reflect = FALSE;
-    wp->item_hit.can_shield = FALSE;
+    wp->weapon_hit.can_reflect = FALSE;
+    wp->weapon_hit.can_shield = FALSE;
 
     wp->phys_info.vel.z = 0.0F;
     wp->phys_info.vel.y = 0.0F;
     wp->phys_info.vel.x = 0.0F;
 
-    wp->item_hit.size = ITEGGTHROW_EXPLODE_SIZE;
+    wp->weapon_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
@@ -135,7 +135,7 @@ void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 
     DObjGetStruct(weapon_gobj)->translate.z = 0.0F;
 
-    wp->item_hit.update_state = gmHitCollision_UpdateState_New;
+    wp->weapon_hit.update_state = gmHitCollision_UpdateState_New;
 
     wpManager_UpdateHitPositions(weapon_gobj);
 }
@@ -267,7 +267,7 @@ GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     wp->lifetime = ITEGGTHROW_LIFETIME;
 
-    wp->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    wp->weapon_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     wp->is_camera_follow = TRUE;
 

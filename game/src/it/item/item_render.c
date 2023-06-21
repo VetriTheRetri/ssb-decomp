@@ -23,13 +23,13 @@ extern Mtx D_ovl2_8012C310;
 void wpRender_DisplayHitCollisions(GObj *weapon_gobj) // Render item hitboxes
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Weapon_Hit *item_hit = &ip->item_hit;
+    Weapon_Hit *weapon_hit = &ip->weapon_hit;
     MtxStore mtx_store;
     s32 i;
 
-    for (i = 0; i < item_hit->hitbox_count; i++)
+    for (i = 0; i < weapon_hit->hitbox_count; i++)
     {
-        if ((item_hit->update_state != gmHitCollision_UpdateState_Disable) && (item_hit->update_state != gmHitCollision_UpdateState_New))
+        if ((weapon_hit->update_state != gmHitCollision_UpdateState_Disable) && (weapon_hit->update_state != gmHitCollision_UpdateState_New))
         {
             gDPPipeSync(D_800465B0[0]++);
 
@@ -49,17 +49,17 @@ void wpRender_DisplayHitCollisions(GObj *weapon_gobj) // Render item hitboxes
 
                 gDPSetBlendColor(D_800465B0[0]++, 0, 0, 0, 0);
             }
-            if (item_hit->update_state == gmHitCollision_UpdateState_Interpolate)
+            if (weapon_hit->update_state == gmHitCollision_UpdateState_Interpolate)
             {
                 hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-                hal_translate(mtx_store.gbi, item_hit->item_hit_unk[i].pos_prev.x, item_hit->item_hit_unk[i].pos_prev.y, item_hit->item_hit_unk[i].pos_prev.z);
+                hal_translate(mtx_store.gbi, weapon_hit->weapon_hit_unk[i].pos_prev.x, weapon_hit->weapon_hit_unk[i].pos_prev.y, weapon_hit->weapon_hit_unk[i].pos_prev.z);
 
                 gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
                 hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-                hal_scale(mtx_store.gbi, item_hit->size / 15.0F, item_hit->size / 15.0F, item_hit->size / 15.0F);
+                hal_scale(mtx_store.gbi, weapon_hit->size / 15.0F, weapon_hit->size / 15.0F, weapon_hit->size / 15.0F);
 
                 gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -69,17 +69,17 @@ void wpRender_DisplayHitCollisions(GObj *weapon_gobj) // Render item hitboxes
             }
             hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-            hal_translate(mtx_store.gbi, item_hit->item_hit_unk[i].pos.x, item_hit->item_hit_unk[i].pos.y, item_hit->item_hit_unk[i].pos.z);
+            hal_translate(mtx_store.gbi, weapon_hit->weapon_hit_unk[i].pos.x, weapon_hit->weapon_hit_unk[i].pos.y, weapon_hit->weapon_hit_unk[i].pos.z);
 
             gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
             hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-            hal_scale(mtx_store.gbi, item_hit->size / 15.0F, item_hit->size / 15.0F, item_hit->size / 15.0F);
+            hal_scale(mtx_store.gbi, weapon_hit->size / 15.0F, weapon_hit->size / 15.0F, weapon_hit->size / 15.0F);
 
             gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-            if (item_hit->update_state == gmHitCollision_UpdateState_Interpolate)
+            if (weapon_hit->update_state == gmHitCollision_UpdateState_Interpolate)
             {
                 gSPDisplayList(D_800465B0[0]++, &D_ovl2_8012C160);
             }
@@ -171,7 +171,7 @@ void func_ovl3_80167520(GObj *weapon_gobj, void(*proc_render)(GObj*))
     }
     else
     {
-        if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit.update_state == gmHitCollision_UpdateState_Disable))
+        if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->weapon_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             func_ovl3_80167454();
 
@@ -228,7 +228,7 @@ void wpRender_DisplayPKThunder(GObj *weapon_gobj)
 
         wpRender_DisplayMapCollisions(weapon_gobj);
     }
-    else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->item_hit.update_state == gmHitCollision_UpdateState_Disable))
+    else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->weapon_hit.update_state == gmHitCollision_UpdateState_Disable))
     {
         func_ovl3_80167454();
 

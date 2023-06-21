@@ -3,23 +3,23 @@
 extern intptr_t Porygon_Event;
 extern itCreateDesc Article_Porygon_Data;
 
-void func_ovl3_80183B10(GObj *article_gobj)
+void func_ovl3_80183B10(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     ArticleHitDesc *hit_desc = (ArticleHitDesc*) ((uintptr_t)*Article_Porygon_Data.p_file + (intptr_t)&Porygon_Event); // Linker thing
 
     if (ap->at_multi == hit_desc[ap->x340_flag_b0123].timer)
     {
-        ap->article_hit.angle = hit_desc[ap->x340_flag_b0123].angle;
-        ap->article_hit.damage = hit_desc[ap->x340_flag_b0123].damage;
-        ap->article_hit.size = hit_desc[ap->x340_flag_b0123].size;
-        ap->article_hit.knockback_scale = hit_desc[ap->x340_flag_b0123].knockback_scale;
-        ap->article_hit.knockback_weight = hit_desc[ap->x340_flag_b0123].knockback_weight;
-        ap->article_hit.knockback_base = hit_desc[ap->x340_flag_b0123].knockback_base;
-        ap->article_hit.element = hit_desc[ap->x340_flag_b0123].element;
-        ap->article_hit.clang = hit_desc[ap->x340_flag_b0123].clang;
-        ap->article_hit.shield_damage = hit_desc[ap->x340_flag_b0123].shield_damage;
-        ap->article_hit.hit_sfx = hit_desc[ap->x340_flag_b0123].hit_sfx;
+        ap->item_hit.angle = hit_desc[ap->x340_flag_b0123].angle;
+        ap->item_hit.damage = hit_desc[ap->x340_flag_b0123].damage;
+        ap->item_hit.size = hit_desc[ap->x340_flag_b0123].size;
+        ap->item_hit.knockback_scale = hit_desc[ap->x340_flag_b0123].knockback_scale;
+        ap->item_hit.knockback_weight = hit_desc[ap->x340_flag_b0123].knockback_weight;
+        ap->item_hit.knockback_base = hit_desc[ap->x340_flag_b0123].knockback_base;
+        ap->item_hit.element = hit_desc[ap->x340_flag_b0123].element;
+        ap->item_hit.clang = hit_desc[ap->x340_flag_b0123].clang;
+        ap->item_hit.shield_damage = hit_desc[ap->x340_flag_b0123].shield_damage;
+        ap->item_hit.hit_sfx = hit_desc[ap->x340_flag_b0123].hit_sfx;
 
         ap->x340_flag_b0123++;
 
@@ -32,7 +32,7 @@ void func_ovl3_80183B10(GObj *article_gobj)
 
     if (ap->at_multi == ATPORYGON_SHAKE_STOP_WAIT)
     {
-        Vec3f pos = DObjGetStruct(article_gobj)->translate;
+        Vec3f pos = DObjGetStruct(item_gobj)->translate;
 
         pos.y = 0.0F;
 
@@ -40,15 +40,15 @@ void func_ovl3_80183B10(GObj *article_gobj)
     }
 }
 
-bool32 func_ovl3_80183C84(GObj *article_gobj)
+bool32 func_ovl3_80183C84(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     joint->translate.x += ap->article_vars.porygon.offset.x;
     joint->translate.y += ap->article_vars.porygon.offset.y;
 
-    func_ovl3_80183B10(article_gobj);
+    func_ovl3_80183B10(item_gobj);
 
     if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
@@ -61,11 +61,11 @@ bool32 func_ovl3_80183C84(GObj *article_gobj)
 
 GObj* jtgt_ovl3_80183D00(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Porygon_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Porygon_Data, pos, vel, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
         ap->article_vars.porygon.offset = *pos;
 
@@ -77,5 +77,5 @@ GObj* jtgt_ovl3_80183D00(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         func_800269C0(0x22CU);
     }
-    return article_gobj;
+    return item_gobj;
 }

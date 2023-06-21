@@ -4,114 +4,114 @@
 
 
 
-bool32 jtgt_ovl3_80176450(GObj *article_gobj)
+bool32 jtgt_ovl3_80176450(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     func_ovl3_80172558(ap, ATMSBOMB_GRAVITY, ATMSBOMB_T_VEL);
-    func_ovl3_801713F4(article_gobj);
+    func_ovl3_801713F4(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
 
     return FALSE;
 }
 
-bool32 func_ovl3_801764A8(GObj *article_gobj)
+bool32 func_ovl3_801764A8(GObj *item_gobj)
 {
-    func_ovl3_801735A0(article_gobj, func_ovl3_80176538);
+    func_ovl3_801735A0(item_gobj, func_ovl3_80176538);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801764D0(GObj *article_gobj)
+bool32 jtgt_ovl3_801764D0(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(article_gobj, 0.4F, 0.3F, func_ovl3_80176504);
+    return func_ovl3_80173B24(item_gobj, 0.4F, 0.3F, func_ovl3_80176504);
 }
 
 extern itStatusDesc Article_MSBomb_Status[];
 
-void func_ovl3_80176504(GObj *article_gobj)
+void func_ovl3_80176504(GObj *item_gobj)
 {
-    func_ovl3_80172E74(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 0);
+    func_ovl3_80172E74(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 0);
 }
 
-void func_ovl3_80176538(GObj *article_gobj)
+void func_ovl3_80176538(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->is_allow_pickup = FALSE;
 
     func_ovl3_80173F78(ap);
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 1);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 1);
 }
 
-void jtgt_ovl3_8017657C(GObj *article_gobj)
+void jtgt_ovl3_8017657C(GObj *item_gobj)
 {
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 2);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 2);
 }
 
-bool32 jtgt_ovl3_801765A4(GObj *article_gobj)
+bool32 jtgt_ovl3_801765A4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     func_ovl3_80172558(ap, ATMSBOMB_GRAVITY, ATMSBOMB_T_VEL);
-    func_ovl3_801713F4(article_gobj);
+    func_ovl3_801713F4(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801765FC(GObj *article_gobj)
+bool32 jtgt_ovl3_801765FC(GObj *item_gobj)
 {
-    return func_ovl3_80173E58(article_gobj, func_ovl3_80176B94);
+    return func_ovl3_80173E58(item_gobj, func_ovl3_80176B94);
 }
 
-bool32 jtgt_ovl3_80176620(GObj *article_gobj)
+bool32 jtgt_ovl3_80176620(GObj *item_gobj)
 {
-    func_ovl3_80172FE0(article_gobj);
+    func_ovl3_80172FE0(item_gobj);
 
     return FALSE;
 }
 
-void jtgt_ovl3_80176644(GObj *article_gobj)
+void jtgt_ovl3_80176644(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->coll_data.object_coll.top = ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.center = 0.0F;
     ap->coll_data.object_coll.bottom = -ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.width = ATMSBOMB_COLL_SIZE;
 
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 3);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 3);
 }
 
-bool32 jtgt_ovl3_80176694(GObj *article_gobj)
+bool32 jtgt_ovl3_80176694(GObj *item_gobj)
 {
-    return func_ovl3_80173E58(article_gobj, func_ovl3_80176B94);
+    return func_ovl3_80173E58(item_gobj, func_ovl3_80176B94);
 }
 
-void jtgt_ovl3_801766B8(GObj *article_gobj)
+void jtgt_ovl3_801766B8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->coll_data.object_coll.top = ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.center = 0.0F;
     ap->coll_data.object_coll.bottom = -ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.width = ATMSBOMB_COLL_SIZE;
 
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 4);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 4);
 }
 
-void func_ovl3_80176708(GObj *article_gobj)
+void func_ovl3_80176708(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     Coll_Data *coll_data = &ap->coll_data;
     Vec3f angle;
-    DObj *joint = DObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
 
     if ((coll_data->coll_mask & MPCOLL_MASK_CEIL) || (coll_data->coll_mask & MPCOLL_MASK_GROUND))
@@ -148,10 +148,10 @@ void func_ovl3_80176708(GObj *article_gobj)
     joint->rotate.z = atan2f(angle.y, angle.x) - HALF_PI32;
 }
 
-void func_ovl3_80176840(GObj *article_gobj)
+void func_ovl3_80176840(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     ap->coll_data.object_coll.top = ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.center = 0.0F;
@@ -165,13 +165,13 @@ void func_ovl3_80176840(GObj *article_gobj)
     joint->next->unk_0x54 = 0;
     joint->next->unk_0x8->unk_0x54 = 2;
 
-    func_ovl3_80176708(article_gobj);
+    func_ovl3_80176708(item_gobj);
 
     ap->x2CF_flag_b1 = TRUE;
 
-    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     if ((ap->port_id != -1U) && (ap->port_id != GMMATCH_PLAYERS_MAX)) // Macro might be off though
     {
@@ -184,14 +184,14 @@ void func_ovl3_80176840(GObj *article_gobj)
     }
     func_800269C0(0x2CU);
 
-    func_ovl3_8017279C(article_gobj);
+    func_ovl3_8017279C(item_gobj);
 }
 
-void func_ovl3_80176934(GObj *article_gobj)
+void func_ovl3_80176934(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     atCommonAttributes *attributes = ap->attributes;
-    DObj *joint = DObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
     s32 unused[4];
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
@@ -204,14 +204,14 @@ void func_ovl3_80176934(GObj *article_gobj)
     }
 }
 
-void func_ovl3_801769AC(GObj *article_gobj, bool32 is_fighter)
+void func_ovl3_801769AC(GObj *item_gobj, bool32 is_fighter)
 {
     Effect_Unk *ep;
-    DObj *joint = DObjGetStruct(article_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     if (is_fighter != FALSE)
     {
-        func_ovl3_80176934(article_gobj);
+        func_ovl3_80176934(item_gobj);
     }
     ep = func_ovl2_801005C8(&joint->translate);
 
@@ -222,29 +222,29 @@ void func_ovl3_801769AC(GObj *article_gobj, bool32 is_fighter)
         ep->effect_info->scale.z = ATMSBOMB_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
-    func_ovl3_8017275C(article_gobj);
-    func_ovl3_80176F2C(article_gobj);
+    func_ovl3_8017275C(item_gobj);
+    func_ovl3_80176F2C(item_gobj);
 
-    DObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(item_gobj)->unk_0x54 = 2;
 }
 
-bool32 jtgt_ovl3_80176A34(GObj *article_gobj)
+bool32 jtgt_ovl3_80176A34(GObj *item_gobj)
 {
     func_800269C0(1U);
-    func_ovl3_801769AC(article_gobj, FALSE);
+    func_ovl3_801769AC(item_gobj, FALSE);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
+bool32 jtgt_ovl3_80176A68(GObj *item_gobj)
 {
     s32 unused[2];
     GObj *fighter_gobj;
     Vec3f *translate;
     Vec3f dist;
     Vec3f f_pos;
-    DObj *aj = DObjGetStruct(article_gobj);
-    Item_Struct *ap = itGetStruct(article_gobj);
+    DObj *aj = DObjGetStruct(item_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->at_multi < ATMSBOMB_DETECT_FIGHTER_DELAY)
     {
@@ -272,7 +272,7 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
 
                 if ((SQUARE(dist.x) + SQUARE(dist.y) + SQUARE(dist.z)) < ATMSBOMB_DETECT_FIGHTER_RADIUS)
                 {
-                    func_ovl3_801769AC(article_gobj, TRUE);
+                    func_ovl3_801769AC(item_gobj, TRUE);
                 }
                 fighter_gobj = fighter_gobj->group_gobj_next;
             } 
@@ -282,21 +282,21 @@ bool32 jtgt_ovl3_80176A68(GObj *article_gobj)
     return FALSE;
 }
 
-void func_ovl3_80176B94(GObj *article_gobj)
+void func_ovl3_80176B94(GObj *item_gobj)
 {
-    func_ovl3_80176840(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 5);
+    func_ovl3_80176840(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 5);
 }
 
-bool32 jtgt_ovl3_80176BC8(GObj *article_gobj)
+bool32 jtgt_ovl3_80176BC8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (func_ovl2_800FC67C(ap->unk_0x2D0) == FALSE)
     {
         ap->x2CF_flag_b1 = FALSE;
 
-        func_ovl3_80176E68(article_gobj);
+        func_ovl3_80176E68(item_gobj);
     }
     return FALSE;
 }
@@ -304,23 +304,23 @@ bool32 jtgt_ovl3_80176BC8(GObj *article_gobj)
 extern u8 D_NF_00000404;
 extern itCreateDesc Article_MSBomb_Data;
 
-void func_ovl3_80176C14(GObj *article_gobj)
+void func_ovl3_80176C14(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     ArticleHitEvent *ev = (ArticleHitEvent*) ((uintptr_t)*Article_MSBomb_Data.p_file + &D_NF_00000404);
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
     {
-        ap->article_hit.angle = ev[ap->x340_flag_b0123].angle;
-        ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
-        ap->article_hit.size = ev[ap->x340_flag_b0123].size;
+        ap->item_hit.angle = ev[ap->x340_flag_b0123].angle;
+        ap->item_hit.damage = ev[ap->x340_flag_b0123].damage;
+        ap->item_hit.size = ev[ap->x340_flag_b0123].size;
 
-        ap->article_hit.can_rehit_item = TRUE;
-        ap->article_hit.can_hop = FALSE;
-        ap->article_hit.can_reflect = FALSE;
-        ap->article_hit.clang = FALSE;
+        ap->item_hit.can_rehit_item = TRUE;
+        ap->item_hit.can_hop = FALSE;
+        ap->item_hit.can_reflect = FALSE;
+        ap->item_hit.clang = FALSE;
 
-        ap->article_hit.element = gmHitCollision_Element_Fire;
+        ap->item_hit.element = gmHitCollision_Element_Fire;
 
         ap->x340_flag_b0123++;
 
@@ -331,25 +331,25 @@ void func_ovl3_80176C14(GObj *article_gobj)
     }
 }
 
-void func_ovl3_80176D00(GObj *article_gobj)
+void func_ovl3_80176D00(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
-    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    func_ovl3_8017279C(article_gobj);
+    func_ovl3_8017279C(item_gobj);
 }
 
-bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
+bool32 jtgt_ovl3_80176D2C(GObj *item_gobj)
 {
     s32 unused[2];
     GObj *fighter_gobj;
     Vec3f *translate;
     Vec3f dist;
     Vec3f f_pos;
-    DObj *aj = DObjGetStruct(article_gobj);
-    Item_Struct *ap = itGetStruct(article_gobj);
+    DObj *aj = DObjGetStruct(item_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80172558(ap, ATMSBOMB_GRAVITY, ATMSBOMB_T_VEL);
 
@@ -379,7 +379,7 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
 
                 if ((SQUARE(dist.x) + SQUARE(dist.y) + SQUARE(dist.z)) < ATMSBOMB_DETECT_FIGHTER_RADIUS)
                 {
-                    func_ovl3_801769AC(article_gobj, FALSE);
+                    func_ovl3_801769AC(item_gobj, FALSE);
                 }
                 fighter_gobj = fighter_gobj->group_gobj_next;
             } 
@@ -389,33 +389,33 @@ bool32 jtgt_ovl3_80176D2C(GObj *article_gobj)
     return FALSE;
 }
 
-void func_ovl3_80176E68(GObj *article_gobj)
+void func_ovl3_80176E68(GObj *item_gobj)
 {
-    func_ovl3_80176D00(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 6);
+    func_ovl3_80176D00(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 6);
 }
 
-void func_ovl3_80176E9C(GObj *article_gobj)
+void func_ovl3_80176E9C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->at_multi = 0;
 
     ap->x340_flag_b0123 = 0;
 
-    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
-    ap->article_hit.hit_sfx = 1;
+    ap->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->item_hit.hit_sfx = 1;
 
-    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_80176C14(article_gobj);
+    func_ovl3_80176C14(item_gobj);
 }
 
-bool32 jtgt_ovl3_80176EE4(GObj *article_gobj)
+bool32 jtgt_ovl3_80176EE4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80176C14(article_gobj);
+    func_ovl3_80176C14(item_gobj);
 
     ap->at_multi++;
 
@@ -426,22 +426,22 @@ bool32 jtgt_ovl3_80176EE4(GObj *article_gobj)
     else return FALSE;
 }
 
-void func_ovl3_80176F2C(GObj *article_gobj)
+void func_ovl3_80176F2C(GObj *item_gobj)
 {
-    func_ovl3_80176E9C(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_MSBomb_Status, 7);
+    func_ovl3_80176E9C(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_MSBomb_Status, 7);
 }
 
 GObj* jtgt_ovl3_80176F60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_MSBomb_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_MSBomb_Data, pos, vel, flags);
     DObj *joint;
     Item_Struct *ap;
     Vec3f translate;
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        joint = DObjGetStruct(article_gobj);
+        joint = DObjGetStruct(item_gobj);
 
         joint->next->unk_0x54 = 2;
         joint->next->unk_0x8->unk_0x54 = 0;
@@ -453,15 +453,15 @@ GObj* jtgt_ovl3_80176F60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = translate;
 
-        ap = itGetStruct(article_gobj);
+        ap = itGetStruct(item_gobj);
 
         ap->at_multi = 0;
 
         ap->x2D3_flag_b5 = TRUE;
 
-        ap->unk_0x348 = func_ovl2_80111EC0(ap);
+        ap->indicator_gobj = func_ovl2_80111EC0(ap);
 
         joint->rotate.z = 0.0F;
     }
-    return article_gobj;
+    return item_gobj;
 }

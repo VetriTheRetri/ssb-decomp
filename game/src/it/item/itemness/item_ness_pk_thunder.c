@@ -171,7 +171,7 @@ bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj) // PK Thunder physics 
 
     if (wp->weapon_vars.pkthunder.pkthunder_state & wpNessPKThunder_Status_Destroy)
     {
-        func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+        func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
         wpNess_PKThunder_SetDestroy(weapon_gobj, TRUE);
 
         return TRUE;
@@ -181,7 +181,7 @@ bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj) // PK Thunder physics 
 
     if (wp->weapon_vars.pkthunder.pkthunder_state & wpNessPKThunder_Status_Collide)
     {
-        func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+        func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
         wpNess_PKThunder_SetDestroy(weapon_gobj, TRUE);
 
         return TRUE;
@@ -257,7 +257,7 @@ bool32 wpNess_PKThunderHead_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
     wpNess_PKThunder_SetDestroy(weapon_gobj, TRUE);
 
     return TRUE;
@@ -378,7 +378,7 @@ bool32 wpNess_PKThunderTrail_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
     return FALSE;
 }
@@ -506,7 +506,7 @@ bool32 wpNess_PKReflectHead_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
     wpNess_PKReflectHead_SetDestroy(weapon_gobj, TRUE);
 
     return TRUE;
@@ -616,7 +616,7 @@ bool32 wpNess_PKReflectTrail_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->item_hit.damage);
+    func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
     return FALSE;
 }

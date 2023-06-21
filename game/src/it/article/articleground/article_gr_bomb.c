@@ -81,59 +81,59 @@ void func_ovl3_801791F4(Vec3f *pos)
     }
 }
 
-bool32 jtgt_ovl3_80184D74(GObj *article_gobj)
+bool32 jtgt_ovl3_80184D74(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
     func_ovl3_80172558(ap, ATGRBOMB_GRAVITY, ATGRBOMB_T_VEL);
 
-    joint = DObjGetStruct(article_gobj);
+    joint = DObjGetStruct(item_gobj);
     joint->rotate.z += ap->article_vars.gr_bomb.roll_rotate_speed;
 
     return FALSE;
 }
 
-bool32 func_ovl3_80184DC4(GObj *article_gobj)
+bool32 func_ovl3_80184DC4(GObj *item_gobj)
 {
     func_800269C0(0x46U);
-    func_ovl3_80184B44(&DObjGetStruct(article_gobj)->translate);
-    func_ovl3_801852B8(article_gobj);
+    func_ovl3_80184B44(&DObjGetStruct(item_gobj)->translate);
+    func_ovl3_801852B8(item_gobj);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80184E04(GObj *article_gobj)
+bool32 jtgt_ovl3_80184E04(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     if (ap->percent_damage >= ATGRBOMB_HEALTH_MAX)
     {
-        return func_ovl3_80184DC4(article_gobj);
+        return func_ovl3_80184DC4(item_gobj);
     }
     return FALSE;
 }
 
 extern itStatusDesc Article_Gr_Bomb_Status[];
 
-void func_ovl3_80184E44(GObj *article_gobj)
+void func_ovl3_80184E44(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->phys_info.vel.y = 0.0F;
 
-    atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Bomb_Status, 2);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Gr_Bomb_Status, 2);
 }
 
-bool32 func_ovl3_80184E78(GObj *article_gobj, f32 vel_mod)
+bool32 func_ovl3_80184E78(GObj *item_gobj, f32 vel_mod)
 {
     s32 unused;
     Item_Struct *ap;
-    bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
+    bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), vel_mod, NULL) != FALSE)
+    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), vel_mod, NULL) != FALSE)
     {
-        func_ovl3_80172508(article_gobj);
+        func_ovl3_80172508(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
@@ -142,21 +142,21 @@ bool32 func_ovl3_80184E78(GObj *article_gobj, f32 vel_mod)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80184EDC(GObj *article_gobj)
+bool32 jtgt_ovl3_80184EDC(GObj *item_gobj)
 {
-    if (func_ovl3_80184E78(article_gobj, 0.5F) != FALSE)
+    if (func_ovl3_80184E78(item_gobj, 0.5F) != FALSE)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
         if (ap->phys_info.vel.y >= 90.0F) // Is it even possible to meet this condition? Didn't they mean ABSF(ap->phys_info.vel.y)?
         {
-            func_ovl3_80184DC4(article_gobj); // This causes the bomb to smash on impact when landing from too high; doesn't seem possible to trigger
+            func_ovl3_80184DC4(item_gobj); // This causes the bomb to smash on impact when landing from too high; doesn't seem possible to trigger
 
             return TRUE;
         }
         else if (ap->phys_info.vel.y < 30.0F)
         {
-            func_ovl3_80184E44(article_gobj);
+            func_ovl3_80184E44(item_gobj);
         }
         else
         {
@@ -164,29 +164,29 @@ bool32 jtgt_ovl3_80184EDC(GObj *article_gobj)
 
             ap->phys_info.vel.y *= 0.2F;
 
-            func_ovl3_80172508(article_gobj);
+            func_ovl3_80172508(item_gobj);
         }
         func_800269C0(0x47U);
-        func_ovl3_8017279C(article_gobj);
+        func_ovl3_8017279C(item_gobj);
     }
     return FALSE;
 }
 
 extern intptr_t Article_Gr_Bomb_Hit;
 
-void func_ovl3_80184FAC(GObj *article_gobj)
+void func_ovl3_80184FAC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    DObjGetStruct(article_gobj)->rotate.x = HALF_PI32;
+    DObjGetStruct(item_gobj)->rotate.x = HALF_PI32;
 
     ap->coll_data.object_coll.top = ap->coll_data.object_coll.width;
     ap->coll_data.object_coll.bottom = -ap->coll_data.object_coll.width;
 }
 
-bool32 jtgt_ovl3_80184FD4(GObj *article_gobj)
+bool32 jtgt_ovl3_80184FD4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->at_multi++;
 
@@ -194,14 +194,14 @@ bool32 jtgt_ovl3_80184FD4(GObj *article_gobj)
     {
         return TRUE;
     }
-    else func_ovl3_80173180(article_gobj, (ArticleHitEvent*) ((uintptr_t)*Article_Gr_Bomb_Data.p_file + (intptr_t)&Article_Gr_Bomb_Hit)); // Linker thing
+    else func_ovl3_80173180(item_gobj, (ArticleHitEvent*) ((uintptr_t)*Article_Gr_Bomb_Data.p_file + (intptr_t)&Article_Gr_Bomb_Hit)); // Linker thing
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80185030(GObj *article_gobj)
+bool32 jtgt_ovl3_80185030(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     f32 roll_rotate_speed;
     f32 sqrt_vel;
 
@@ -215,77 +215,77 @@ bool32 jtgt_ovl3_80185030(GObj *article_gobj)
 
     ap->article_vars.gr_bomb.roll_rotate_speed = roll_rotate_speed;
 
-    DObjGetStruct(article_gobj)->rotate.z += roll_rotate_speed;
+    DObjGetStruct(item_gobj)->rotate.z += roll_rotate_speed;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8018511C(GObj *article_gobj)
+bool32 jtgt_ovl3_8018511C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (func_ovl3_8017356C(article_gobj) == FALSE)
+    if (func_ovl3_8017356C(item_gobj) == FALSE)
     {
-        atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Bomb_Status, 0);
+        atCommon_UpdateArticleStatus(item_gobj, Article_Gr_Bomb_Status, 0);
     }
     else if (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
     {
-        return func_ovl3_80184DC4(article_gobj);
+        return func_ovl3_80184DC4(item_gobj);
     }
     return FALSE;
 }
 
 GObj* jtgt_ovl3_8018518C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Bomb_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Bomb_Data, pos, vel, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
         ap->article_vars.gr_bomb.roll_rotate_speed = 0.0F;
 
-        func_ovl3_80184FAC(article_gobj);
+        func_ovl3_80184FAC(item_gobj);
     }
-    return article_gobj;
+    return item_gobj;
 }
 
-void func_ovl3_801851F4(GObj *article_gobj)
+void func_ovl3_801851F4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->at_multi = 0;
     ap->x340_flag_b0123 = 0;
 
-    ap->article_hit.hit_sfx = 1;
+    ap->item_hit.hit_sfx = 1;
 
-    ap->article_hit.can_rehit_item = TRUE;
-    ap->article_hit.can_reflect = FALSE;
+    ap->item_hit.can_rehit_item = TRUE;
+    ap->item_hit.can_reflect = FALSE;
 
-    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
-    ap->article_hit.element = gmHitCollision_Element_Fire;
+    ap->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->item_hit.element = gmHitCollision_Element_Fire;
 
-    ap->article_hit.clang = FALSE;
+    ap->item_hit.clang = FALSE;
 
-    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_8017275C(article_gobj);
-    func_ovl3_80173180(article_gobj, (ArticleHitEvent*) ((uintptr_t)*Article_Gr_Bomb_Data.p_file + (intptr_t)&Article_Gr_Bomb_Hit));
+    func_ovl3_8017275C(item_gobj);
+    func_ovl3_80173180(item_gobj, (ArticleHitEvent*) ((uintptr_t)*Article_Gr_Bomb_Data.p_file + (intptr_t)&Article_Gr_Bomb_Hit));
 }
 
-void func_ovl3_80185284(GObj *article_gobj)
+void func_ovl3_80185284(GObj *item_gobj)
 {
-    func_ovl3_801851F4(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_Gr_Bomb_Status, 1);
+    func_ovl3_801851F4(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Gr_Bomb_Status, 1);
 }
 
-void func_ovl3_801852B8(GObj *article_gobj)
+void func_ovl3_801852B8(GObj *item_gobj)
 {
     Effect_Unk *effect_unk;
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
-    ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     ap->phys_info.vel.x = 0.0F;
     ap->phys_info.vel.y = 0.0F;
@@ -301,7 +301,7 @@ void func_ovl3_801852B8(GObj *article_gobj)
     }
     func_ovl2_801008F4(1);
 
-    DObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
-    func_ovl3_80185284(article_gobj);
+    func_ovl3_80185284(item_gobj);
 }

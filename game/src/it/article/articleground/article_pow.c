@@ -1,28 +1,28 @@
 #include "article.h"
 
-bool32 func_ovl3_8017C090(GObj *article_gobj)
+bool32 func_ovl3_8017C090(GObj *item_gobj)
 {
-    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(article_gobj)->dobj_f0)
+    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(item_gobj)->dobj_f0)
     {
-        func_ovl3_8017C0D4(article_gobj);
+        func_ovl3_8017C0D4(item_gobj);
     }
     return FALSE;
 }
 
 extern itStatusDesc Article_POW_Status[];
 
-void func_ovl3_8017C0D4(GObj *article_gobj)
+void func_ovl3_8017C0D4(GObj *item_gobj)
 {
     Item_Struct *ap;
 
-    atCommon_UpdateArticleStatus(article_gobj, Article_POW_Status, 0);
+    atCommon_UpdateArticleStatus(item_gobj, Article_POW_Status, 0);
 
-    ap = itGetStruct(article_gobj), ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ap = itGetStruct(item_gobj), ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
-bool32 func_ovl3_8017C110(GObj *article_gobj)
+bool32 func_ovl3_8017C110(GObj *item_gobj)
 {
-    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(article_gobj)->dobj_f0)
+    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(item_gobj)->dobj_f0)
     {
         func_ovl2_8010986C();
 
@@ -34,15 +34,15 @@ bool32 func_ovl3_8017C110(GObj *article_gobj)
 extern intptr_t D_NF_000011F8;
 extern intptr_t D_NF_00001288;
 
-bool32 func_ovl3_8017C15C(GObj *article_gobj)
+bool32 func_ovl3_8017C15C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->proc_update = func_ovl3_8017C110;
-    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_8000BD1C(DObjGetStruct(article_gobj), ArticleGetPData(ap, D_NF_000011F8, D_NF_00001288), 0.0F); // Linker thing
-    func_8000DF34(article_gobj);
+    func_8000BD1C(DObjGetStruct(item_gobj), ArticleGetPData(ap, D_NF_000011F8, D_NF_00001288), 0.0F); // Linker thing
+    func_8000DF34(item_gobj);
     func_800269C0(0x117U);
     func_ovl2_801008F4(3);
     func_ovl2_80109B4C();
@@ -54,13 +54,13 @@ extern itCreateDesc Article_POW_Data;
 
 GObj* jtgt_ovl3_8017C1E0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_POW_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_POW_Data, pos, vel, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->article_hurt.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ap->item_hurt.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
     }
-    return article_gobj;
+    return item_gobj;
 }

@@ -40,14 +40,14 @@ void wpSamus_BombExplode_InitWeaponVars(GObj *weapon_gobj)
 
     ip->lifetime = ITSAMUSBOMB_EXPLODE_LIFETIME;
 
-    ip->item_hit.can_rehit_item = TRUE;
-    ip->item_hit.can_hop = FALSE;
+    ip->weapon_hit.can_rehit_item = TRUE;
+    ip->weapon_hit.can_hop = FALSE;
 
     ip->phys_info.vel.z = 0.0F;
     ip->phys_info.vel.y = 0.0F;
     ip->phys_info.vel.x = 0.0F;
 
-    ip->item_hit.size = ITSAMUSBOMB_EXPLODE_RADIUS;
+    ip->weapon_hit.size = ITSAMUSBOMB_EXPLODE_RADIUS;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 

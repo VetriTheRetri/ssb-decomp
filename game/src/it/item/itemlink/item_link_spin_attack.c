@@ -61,10 +61,10 @@ bool32 wpLink_SpinAttack_ProcUpdate(GObj *weapon_gobj)
         wp->weapon_vars.spin_attack.vel.x = (wp->weapon_vars.spin_attack.vel.x * mod_vel) / sqrt_vel;
         wp->weapon_vars.spin_attack.vel.y = (wp->weapon_vars.spin_attack.vel.y * mod_vel) / sqrt_vel;
 
-        wp->item_hit.offset[0].x += wp->weapon_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
-        wp->item_hit.offset[0].y += wp->weapon_vars.spin_attack.vel.y;
-        wp->item_hit.offset[1].x -= wp->weapon_vars.spin_attack.vel.x;
-        wp->item_hit.offset[1].y += wp->weapon_vars.spin_attack.vel.y;
+        wp->weapon_hit.offset[0].x += wp->weapon_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
+        wp->weapon_hit.offset[0].y += wp->weapon_vars.spin_attack.vel.y;
+        wp->weapon_hit.offset[1].x -= wp->weapon_vars.spin_attack.vel.x;
+        wp->weapon_hit.offset[1].y += wp->weapon_vars.spin_attack.vel.y;
     }
     return FALSE;
 }
@@ -112,10 +112,10 @@ GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->item_hit.offset[0].x = ITSPINATTACK_OFF_X;
-    wp->item_hit.offset[0].y = 0.0F;
-    wp->item_hit.offset[1].x = -ITSPINATTACK_OFF_X;
-    wp->item_hit.offset[1].y = 0.0F;
+    wp->weapon_hit.offset[0].x = ITSPINATTACK_OFF_X;
+    wp->weapon_hit.offset[0].y = 0.0F;
+    wp->weapon_hit.offset[1].x = -ITSPINATTACK_OFF_X;
+    wp->weapon_hit.offset[1].y = 0.0F;
 
     wp->lr = fp->lr;
 

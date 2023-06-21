@@ -1,13 +1,13 @@
 #include "article.h"
 
-void func_ovl3_801837A0(GObj *article_gobj)
+void func_ovl3_801837A0(GObj *item_gobj)
 {
     s32 unused;
     Effect_Unk *ep;
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
-    ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     ep = func_ovl2_801005C8(&joint->translate);
 
@@ -19,34 +19,34 @@ void func_ovl3_801837A0(GObj *article_gobj)
     }
     func_ovl2_801008F4(1);
 
-    DObjGetStruct(article_gobj)->unk_0x54 = 2;
+    DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
-    ap->article_hit.hit_sfx = 1;
+    ap->item_hit.hit_sfx = 1;
 
-    func_ovl3_8017275C(article_gobj);
-    func_ovl3_80183A20(article_gobj);
+    func_ovl3_8017275C(item_gobj);
+    func_ovl3_80183A20(item_gobj);
 }
 
 extern intptr_t Marumine_Event;
 extern itCreateDesc Article_Marumine_Data;
 
-void func_ovl3_80183830(GObj *article_gobj)
+void func_ovl3_80183830(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
     ArticleHitEvent *ev = (ArticleHitEvent*) ((uintptr_t)*Article_Marumine_Data.p_file + (intptr_t)&Marumine_Event); // Linker thing
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
     {
-        ap->article_hit.angle = ev[ap->x340_flag_b0123].angle;
-        ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
-        ap->article_hit.size = ev[ap->x340_flag_b0123].size;
+        ap->item_hit.angle = ev[ap->x340_flag_b0123].angle;
+        ap->item_hit.damage = ev[ap->x340_flag_b0123].damage;
+        ap->item_hit.size = ev[ap->x340_flag_b0123].size;
 
-        ap->article_hit.can_reflect = FALSE;
-        ap->article_hit.can_shield = FALSE;
+        ap->item_hit.can_reflect = FALSE;
+        ap->item_hit.can_shield = FALSE;
 
-        ap->article_hit.element = gmHitCollision_Element_Fire;
+        ap->item_hit.element = gmHitCollision_Element_Fire;
 
-        ap->article_hit.clang = FALSE;
+        ap->item_hit.clang = FALSE;
 
         ap->x340_flag_b0123++;
 
@@ -57,37 +57,37 @@ void func_ovl3_80183830(GObj *article_gobj)
     }
 }
 
-bool32 func_ovl3_80183914(GObj *article_gobj)
+bool32 func_ovl3_80183914(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     joint->translate.x += ap->article_vars.marumine.offset.x;
     joint->translate.y += ap->article_vars.marumine.offset.y;
 
     if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
-        func_ovl3_8017275C(article_gobj);
-        func_ovl3_8017279C(article_gobj);
+        func_ovl3_8017275C(item_gobj);
+        func_ovl3_8017279C(item_gobj);
 
         ap->article_vars.marumine.offset.x = 0.0F;
         ap->article_vars.marumine.offset.y = 0.0F;
 
-        func_ovl3_801837A0(article_gobj);
+        func_ovl3_801837A0(item_gobj);
         func_800269C0(1U);
     }
     return FALSE;
 }
 
-bool32 func_ovl3_801839A8(GObj *article_gobj)
+bool32 func_ovl3_801839A8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
-    DObj *joint = DObjGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
+    DObj *joint = DObjGetStruct(item_gobj);
 
     joint->translate.x += ap->article_vars.marumine.offset.x;
     joint->translate.y += ap->article_vars.marumine.offset.y;
 
-    func_ovl3_80183830(article_gobj);
+    func_ovl3_80183830(item_gobj);
 
     ap->at_multi++;
 
@@ -102,28 +102,28 @@ bool32 func_ovl3_801839A8(GObj *article_gobj)
 
 extern itStatusDesc Article_Marumine_Status[];
 
-void func_ovl3_80183A20(GObj *article_gobj)
+void func_ovl3_80183A20(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->at_multi = 0;
 
-    ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->item_hit.stale = ARTICLE_STALE_DEFAULT;
 
     ap->x340_flag_b0123 = 0;
 
-    func_ovl3_80183830(article_gobj);
-    atCommon_UpdateArticleStatus(article_gobj, Article_Marumine_Status, 0);
+    func_ovl3_80183830(item_gobj);
+    atCommon_UpdateArticleStatus(item_gobj, Article_Marumine_Status, 0);
 }
 
 GObj* jtgt_ovl3_80183A74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Marumine_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Marumine_Data, pos, vel, flags);
 
-    if (article_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(article_gobj);
-        DObj *joint = DObjGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(item_gobj);
+        DObj *joint = DObjGetStruct(item_gobj);
 
         ap->article_vars.marumine.offset = *pos;
 
@@ -132,5 +132,5 @@ GObj* jtgt_ovl3_80183A74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         func_80008CC0(joint, 0x46U, 0U);
         func_800269C0(0x22BU);
     }
-    return article_gobj;
+    return item_gobj;
 }

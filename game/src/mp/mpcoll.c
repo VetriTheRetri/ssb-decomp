@@ -2954,12 +2954,12 @@ void func_ovl2_800DF014(GObj *fighter_gobj, Vec3f *pos, Coll_Data *coll_data)
     func_ovl2_800DEFF8(&fp->coll_data);
 }
 
-void func_ovl2_800DF058(GObj *article_gobj, Vec3f *pos, Coll_Data *coll_data)
+void func_ovl2_800DF058(GObj *item_gobj, Vec3f *pos, Coll_Data *coll_data)
 {
-    Item_Struct *ap = itGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(item_gobj);
 
     func_ovl2_800DEFBC(&ap->coll_data, pos, coll_data);
-    func_ovl2_800DEEF4(&ap->coll_data, article_gobj, 0);
+    func_ovl2_800DEEF4(&ap->coll_data, item_gobj, 0);
     func_ovl2_800DEFF8(&ap->coll_data);
 }
 
