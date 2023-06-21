@@ -4,18 +4,18 @@
 
 bool32 jtgt_ovl3_8017F470(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATLIZARDON_GRAVITY, ATLIZARDON_T_VEL);
 
     return FALSE;
 }
 
-extern ArticleStatusDesc Article_Lizardon_Status[];
+extern itStatusDesc Article_Lizardon_Status[];
 
 bool32 jtgt_ovl3_8017F49C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80173C68(article_gobj, 0.2F, 1.0F, func_ovl3_8017F8E4);
 
@@ -28,7 +28,7 @@ bool32 jtgt_ovl3_8017F49C(GObj *article_gobj)
 
 bool32 func_ovl3_8017F49C(GObj *article_gobj) // Unused
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -38,7 +38,7 @@ bool32 func_ovl3_8017F49C(GObj *article_gobj) // Unused
 
 bool32 jtgt_ovl3_8017F53C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATLIZARDON_GRAVITY, ATLIZARDON_T_VEL);
 
@@ -47,7 +47,7 @@ bool32 jtgt_ovl3_8017F53C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017F568(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80173680(article_gobj);
 
@@ -68,11 +68,11 @@ void func_ovl3_8017F5C4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017F5EC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos = joint->translate;
 
-    if (ap->at_kind == At_Kind_Lizardon)
+    if (ap->it_kind == It_Kind_Lizardon)
     {
         pos.y += ATLIZARDON_LIZARDON_FLAME_OFF_Y;
 
@@ -108,7 +108,7 @@ bool32 jtgt_ovl3_8017F5EC(GObj *article_gobj)
 
         func_ovl2_800FF278(&pos, -ap->lr);
 
-        if (ap->at_kind == At_Kind_Pippi)
+        if (ap->it_kind == It_Kind_Pippi)
         {
             joint->rotate.y += PI32;
         }
@@ -133,7 +133,7 @@ extern intptr_t D_NF_0000D688;
 
 void func_ovl3_8017F810(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     s32 unused[2];
     void *s;
@@ -150,7 +150,7 @@ void func_ovl3_8017F810(GObj *article_gobj)
 
     ap->lr = LEFT;
 
-    if (ap->at_kind == At_Kind_Lizardon)
+    if (ap->it_kind == It_Kind_Lizardon)
     {
         s = (void*) ((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_0000D5C0); // Linker thing
 
@@ -167,14 +167,14 @@ void func_ovl3_8017F8E4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017F90C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
         ap->at_multi = ATLIZARDON_LIFETIME;
         ap->phys_info.vel.y = 0.0F;
 
-        if (ap->at_kind == At_Kind_Lizardon)
+        if (ap->it_kind == It_Kind_Lizardon)
         {
             func_800269C0(0x13DU);
         }
@@ -187,7 +187,7 @@ bool32 jtgt_ovl3_8017F90C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017F98C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -198,13 +198,13 @@ bool32 jtgt_ovl3_8017F98C(GObj *article_gobj)
 
 extern intptr_t D_NF_0000D5C0;
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Lizardon_Data;
+extern itCreateDesc Article_Lizardon_Data;
 
 GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Lizardon_Data, pos, vel, flags);
     DObj *joint;
-    Article_Struct *ap;
+    Item_Struct *ap;
 
     if (article_gobj != NULL)
     {
@@ -215,7 +215,7 @@ GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        ap = atGetStruct(article_gobj);
+        ap = itGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 

@@ -49,7 +49,7 @@ glabel dbObjDisplayStatusItem
     .space 4
 glabel wpManager_Global_GroupIndex
     .space 72
-glabel Article_File_Data
+glabel gItemFileData
     .space 4
 glabel D_ovl3_8018D044
     .space 4

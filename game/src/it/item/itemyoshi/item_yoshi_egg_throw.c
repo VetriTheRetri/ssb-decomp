@@ -33,7 +33,7 @@ bool32 wpYoshi_EggThrow_ProcDead(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (wp->item_vars.egg_throw.is_throw == FALSE)
+    if (wp->weapon_vars.egg_throw.is_throw == FALSE)
     {
         return FALSE;
     }
@@ -110,7 +110,7 @@ void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes f
 void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    f32 angle = ABS(wp->item_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
+    f32 angle = ABS(wp->weapon_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
 
     if (angle > 1.0F)
     {
@@ -124,14 +124,14 @@ void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
         angle = 0.0F;
     }
 
-    angle *= ((wp->item_vars.egg_throw.stick_range < 0) ? LEFT : RIGHT);
+    angle *= ((wp->weapon_vars.egg_throw.stick_range < 0) ? LEFT : RIGHT);
 
-    angle = (wp->item_vars.egg_throw.lr > 0) ? (ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
+    angle = (wp->weapon_vars.egg_throw.lr > 0) ? (ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
 
-    wp->phys_info.vel.y = __sinf(angle) * ((wp->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
-    wp->phys_info.vel.x = cosf(angle) * ((wp->item_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
+    wp->phys_info.vel.y = __sinf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
+    wp->phys_info.vel.x = cosf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
 
-    wp->item_vars.egg_throw.angle = F_DEG_TO_RAD((wp->item_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD);
+    wp->weapon_vars.egg_throw.angle = F_DEG_TO_RAD((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD);
 
     DObjGetStruct(weapon_gobj)->translate.z = 0.0F;
 
@@ -145,7 +145,7 @@ bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (wp->item_vars.egg_throw.is_spin != FALSE)
+    if (wp->weapon_vars.egg_throw.is_spin != FALSE)
     {
         if (wpMain_DecLifeCheckExpire(wp) != FALSE)
         {
@@ -160,15 +160,15 @@ bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
         }
         else
         {
-            DObjGetStruct(weapon_gobj)->rotate.z += wp->item_vars.egg_throw.angle;
+            DObjGetStruct(weapon_gobj)->rotate.z += wp->weapon_vars.egg_throw.angle;
             wpMain_UpdateGravityClampTVel(wp, ITEGGTHROW_GRAVITY, ITEGGTHROW_T_VEL);
 
             return FALSE;
         }
     }
-    else if (wp->item_vars.egg_throw.is_throw != FALSE)
+    else if (wp->weapon_vars.egg_throw.is_throw != FALSE)
     {
-        wp->item_vars.egg_throw.is_spin = TRUE;
+        wp->weapon_vars.egg_throw.is_spin = TRUE;
 
         wpYoshi_EggThrow_InitWeaponVars(weapon_gobj);
     }
@@ -180,7 +180,7 @@ bool32 wpYoshi_EggThrow_ProcMap(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if ((wp->item_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(weapon_gobj) != FALSE))
+    if ((wp->weapon_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(weapon_gobj) != FALSE))
     {
         func_ovl2_801008F4(2);
 
@@ -261,7 +261,7 @@ GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     weapon_gobj->renderer = wpYoshi_EggThrow_ProcRender;
 
-    wp->item_vars.egg_throw.is_throw = FALSE;
+    wp->weapon_vars.egg_throw.is_throw = FALSE;
 
     wp->proc_dead = wpYoshi_EggThrow_ProcDead;
 
@@ -274,8 +274,8 @@ GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     wp->phys_info.vel.y = 0.0F;
     wp->phys_info.vel.x = 0.0F;
 
-    wp->item_vars.egg_throw.is_spin = wp->item_vars.egg_throw.is_throw;
-    wp->item_vars.egg_throw.lr = fp->lr;
+    wp->weapon_vars.egg_throw.is_spin = wp->weapon_vars.egg_throw.is_throw;
+    wp->weapon_vars.egg_throw.lr = fp->lr;
 
     return weapon_gobj;
 }

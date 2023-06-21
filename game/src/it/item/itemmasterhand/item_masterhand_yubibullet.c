@@ -60,7 +60,7 @@ void wpMasterHand_YubiExplode_InitWeaponVars(GObj *weapon_gobj)
 
     wp->item_hit.hit_sfx = 1;
 
-    wp->item_hit.can_rehit_hurt = TRUE;
+    wp->item_hit.can_rehit_item = TRUE;
     wp->item_hit.can_hop = FALSE;
     wp->item_hit.can_reflect = FALSE;
 

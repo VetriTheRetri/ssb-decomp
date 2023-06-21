@@ -4,7 +4,7 @@
 
 bool32 jtgt_ovl3_80174B50(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSWORD_GRAVITY, ATSWORD_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -24,7 +24,7 @@ bool32 jtgt_ovl3_80174BB4(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.2F, 0.5F, func_ovl3_80174BE4);
 }
 
-extern ArticleStatusDesc Article_Sword_Status[];
+extern itStatusDesc Article_Sword_Status[];
 
 void func_ovl3_80174BE4(GObj *article_gobj)
 {
@@ -34,7 +34,7 @@ void func_ovl3_80174BE4(GObj *article_gobj)
 
 void func_ovl3_80174C18(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -56,7 +56,7 @@ bool32 jtgt_ovl3_80174C90(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80174CC0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -84,7 +84,7 @@ void jtgt_ovl3_80174D5C(GObj *article_gobj)
     DObjGetStruct(article_gobj)->next->rotate.y = HALF_PI32;
 }
 
-extern ArticleSpawnData Article_Sword_Data;
+extern itCreateDesc Article_Sword_Data;
 
 GObj* jtgt_ovl3_80174DA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -92,7 +92,7 @@ GObj* jtgt_ovl3_80174DA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         DObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
 

@@ -816,7 +816,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
     }
     if (this_fp->item_hold != NULL)
     {
-        if (!(atGetStruct(this_fp->item_hold)->is_light_throw) && ((this_fp->ft_kind == Ft_Kind_Donkey) || (this_fp->ft_kind == Ft_Kind_PolyDonkey) || (this_fp->ft_kind == Ft_Kind_GiantDonkey)))
+        if (!(itGetStruct(this_fp->item_hold)->is_light_throw) && ((this_fp->ft_kind == Ft_Kind_Donkey) || (this_fp->ft_kind == Ft_Kind_PolyDonkey) || (this_fp->ft_kind == Ft_Kind_GiantDonkey)))
         {
             if (func_ovl3_80140D30(this_fp) != FALSE)
             {

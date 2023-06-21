@@ -3,7 +3,7 @@
 
 bool32 func_ovl3_80182C80(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -14,11 +14,11 @@ bool32 func_ovl3_80182C80(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleStatusDesc Article_Dogas_Status[];
+extern itStatusDesc Article_Dogas_Status[];
 
 void func_ovl3_80182CA8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi = ATDOGAS_DESPAWN_WAIT;
 
@@ -27,7 +27,7 @@ void func_ovl3_80182CA8(GObj *article_gobj)
 
 void func_ovl3_80182CDC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
     Vec3f vel;
@@ -62,7 +62,7 @@ void func_ovl3_80182CDC(GObj *article_gobj)
 
 bool32 func_ovl3_80182E1C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80182CDC(article_gobj);
 
@@ -82,14 +82,14 @@ extern intptr_t D_NF_000128DC;
 
 void func_ovl3_80182E78(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->at_multi = ATDOGAS_SMOG_SPAWN_COUNT;
 
     ap->article_vars.dogas.smog_spawn_wait = 0;
 
-    if (ap->at_kind == At_Kind_Dogas)
+    if (ap->it_kind == It_Kind_Dogas)
     {
         ap->article_vars.dogas.pos = joint->translate;
 
@@ -108,7 +108,7 @@ void func_ovl3_80182F0C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80182F40(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -124,7 +124,7 @@ bool32 jtgt_ovl3_80182F40(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80182F94(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -134,13 +134,13 @@ bool32 jtgt_ovl3_80182F94(GObj *article_gobj)
 }
 
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Dogas_Data;
+extern itCreateDesc Article_Dogas_Data;
 
 GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Dogas_Data, pos, vel, flags);
     DObj *joint;
-    Article_Struct *ap;
+    Item_Struct *ap;
 
     if (article_gobj != NULL)
     {
@@ -151,7 +151,7 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        ap = atGetStruct(article_gobj);
+        ap = itGetStruct(article_gobj);
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -171,7 +171,7 @@ bool32 func_ovl3_801830DC(GObj *weapon_gobj)
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj)->next;
 
-    ip->item_hit.size = joint->scale.x * ip->item_vars.smog.hit_desc->size;
+    ip->item_hit.size = joint->scale.x * ip->weapon_vars.smog.hit_desc->size;
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -197,7 +197,7 @@ GObj* func_ovl3_80183144(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->lifetime = ATDOGAS_SMOG_LIFETIME;
 
-    ip->item_vars.smog.hit_desc = (wpCommonAttributes*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset_wp_hit); // Dude I had a stroke trying to match this
+    ip->weapon_vars.smog.hit_desc = (wpCommonAttributes*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset_wp_hit); // Dude I had a stroke trying to match this
 
     joint = DObjGetStruct(weapon_gobj);
 

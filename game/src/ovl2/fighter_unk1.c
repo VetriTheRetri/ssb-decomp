@@ -49,7 +49,7 @@ void ftSpecialItem_BGMCheckFighters(void)
         s32 bgm_id = gmMusicIndexDefault;
         s32 duration_new;
 
-        if ((fp->item_hold != NULL) && (atGetStruct(fp->item_hold)->at_kind == At_Kind_Hammer))
+        if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->it_kind == It_Kind_Hammer))
         {
             bgm_id = ATHAMMER_BGM_ID;
         }
@@ -1541,7 +1541,7 @@ void ftDamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
     {
         if ((fp->damage_knockback != 0.0F) && ((fp->hitlag_timer == 0) || !(fp->x192_flag_b6) || !(fp->damage_knockback < (fp->damage_knockback_again + 30.0F))))
         {
-            Article_Struct *ap = atGetStruct(fp->item_hold);
+            Item_Struct *ap = itGetStruct(fp->item_hold);
 
             if ((ap->is_light_throw) || (fp->ft_kind != Ft_Kind_Donkey) && (fp->ft_kind != Ft_Kind_PolyDonkey) && (fp->ft_kind != Ft_Kind_GiantDonkey))
             {

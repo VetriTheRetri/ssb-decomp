@@ -3,11 +3,11 @@
 #include "fighter.h"
 
 extern intptr_t Fushigibana_Event;
-extern ArticleSpawnData Article_Fushigibana_Data;
+extern itCreateDesc Article_Fushigibana_Data;
 
 void func_ovl3_80184440(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     ArticleHitDesc *hit_desc = (ArticleHitDesc *)((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
 
     if (ap->at_multi == hit_desc[ap->x340_flag_b0123].timer)
@@ -44,7 +44,7 @@ void func_ovl3_80184440(GObj *article_gobj)
 
 bool32 func_ovl3_801845B4(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
@@ -89,7 +89,7 @@ bool32 func_ovl3_801845B4(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleSpawnData Article_Fushigibana_Data;
+extern itCreateDesc Article_Fushigibana_Data;
 extern s32 D_ovl2_8012EB60;
 
 GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
@@ -97,11 +97,11 @@ GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Fushigibana_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
-    Article_Struct *ap;
+    Item_Struct *ap;
 
     if (article_gobj != NULL)
     {
-        ap = atGetStruct(article_gobj);
+        ap = itGetStruct(article_gobj);
         joint = DObjGetStruct(article_gobj);
 
         ap->x340_flag_b0123 = 0;

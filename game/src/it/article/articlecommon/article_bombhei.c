@@ -4,7 +4,7 @@ void func_ovl3_80177060(GObj *article_gobj, u8 arg1)
 {
     s32 unused;
     DObj *joint = DObjGetStruct(article_gobj);
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Effect_Unk *ep;
 
     func_ovl3_80177218(article_gobj);
@@ -34,7 +34,7 @@ extern u8 BombHei_Motion_WalkLeft;
 
 void func_ovl3_80177104(GObj *article_gobj, u8 lr)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     void *dll = (void*)((uintptr_t)((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft); // Linker thing
     void *dlr = (void*)((uintptr_t)((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkRight); // Linker thing
@@ -58,7 +58,7 @@ void func_ovl3_80177104(GObj *article_gobj, u8 lr)
 void func_ovl3_80177180(GObj *article_gobj, u8 is_explode)
 {
     s32 unused[4];
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
     DObj *joint = DObjGetStruct(article_gobj);
 
@@ -74,21 +74,21 @@ void func_ovl3_80177180(GObj *article_gobj, u8 is_explode)
 
 void func_ovl3_80177208(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
 void func_ovl3_80177218(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
 }
 
 bool32 jtgt_ovl3_80177224(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATBOMBHEI_GRAVITY, ATBOMBHEI_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -127,7 +127,7 @@ s32 func_ovl3_80177260(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80177304(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     void *dll = ((uintptr_t)ap->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft; // Linker thing
     s32 lr;
@@ -179,7 +179,7 @@ bool32 jtgt_ovl3_80177440(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.4F, 0.3F, func_ovl3_80177474);
 }
 
-extern ArticleStatusDesc Article_BombHei_Status[];
+extern itStatusDesc Article_BombHei_Status[];
 
 void func_ovl3_80177474(GObj *article_gobj)
 {
@@ -190,7 +190,7 @@ void func_ovl3_80177474(GObj *article_gobj)
 
 void func_ovl3_801774B0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -207,7 +207,7 @@ void jtgt_ovl3_801774FC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80177530(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATBOMBHEI_GRAVITY, ATBOMBHEI_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -239,7 +239,7 @@ void func_ovl3_801775E8(GObj *article_gobj)
 
 void func_ovl3_8017761C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.bombhei.smoke_delay == 0)
@@ -257,7 +257,7 @@ void func_ovl3_8017761C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801776A0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
@@ -300,7 +300,7 @@ bool32 jtgt_ovl3_801776A0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801777D8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_801735A0(article_gobj, func_ovl3_801775E8);
 
@@ -319,7 +319,7 @@ extern u8 BombHei_Motion_Unk;
 
 void func_ovl3_80177848(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     atCommonAttributes *attributes = ap->attributes;
     DObj *joint = DObjGetStruct(article_gobj);
     void *texture;
@@ -375,7 +375,7 @@ void func_ovl3_801779A8(GObj *article_gobj)
 
 void func_ovl3_801779E4(GObj *article_gobj, u8 arg1)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->phys_info.vel.z = 0.0F;
     ap->phys_info.vel.y = 0.0F;
@@ -387,11 +387,11 @@ void func_ovl3_801779E4(GObj *article_gobj, u8 arg1)
 }
 
 extern intptr_t BombHei_Event;
-extern ArticleSpawnData Article_BombHei_Data;
+extern itCreateDesc Article_BombHei_Data;
 
 void func_ovl3_80177A24(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     ArticleHitEvent *ev = (ArticleHitEvent*) ((uintptr_t)*Article_BombHei_Data.p_file + (intptr_t)&BombHei_Event); // Linker thing
 
     if (ap->at_multi == ev[ap->x340_flag_b0123].timer)
@@ -400,7 +400,7 @@ void func_ovl3_80177A24(GObj *article_gobj)
         ap->article_hit.damage = ev[ap->x340_flag_b0123].damage;
         ap->article_hit.size = ev[ap->x340_flag_b0123].size;
 
-        ap->article_hit.can_rehit_hurt = TRUE;
+        ap->article_hit.can_rehit_item = TRUE;
         ap->article_hit.can_hop = FALSE;
         ap->article_hit.can_reflect = FALSE;
         ap->article_hit.clang = FALSE;
@@ -440,7 +440,7 @@ void func_ovl3_80177B78(GObj *article_gobj)
 
 void func_ovl3_80177BAC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi = 0;
 
@@ -453,7 +453,7 @@ void func_ovl3_80177BAC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80177BE8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80177A24(article_gobj);
 
@@ -474,7 +474,7 @@ void func_ovl3_80177C30(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80177C64(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_8017761C(article_gobj);
 
@@ -498,7 +498,7 @@ bool32 jtgt_ovl3_80177D00(GObj *article_gobj)
 
 void func_ovl3_80177D28(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->at_multi = 0;
@@ -519,7 +519,7 @@ GObj *jtgt_ovl3_80177D9C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_BombHei_Data, pos, vel, flags);
     DObj *joint;
-    Article_Struct *ap;
+    Item_Struct *ap;
     Vec3f translate;
 
     if (article_gobj != NULL)
@@ -528,7 +528,7 @@ GObj *jtgt_ovl3_80177D9C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         translate = joint->translate;
 
-        ap = atGetStruct(article_gobj);
+        ap = itGetStruct(article_gobj);
 
         ap->at_multi = 0;
 

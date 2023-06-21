@@ -5,7 +5,7 @@ void ftLink_SpecialHi_DestroyWeapon(Fighter_Struct *fp, Weapon_Struct *wp)
 {
     wp->is_hitlag_item = FALSE;
 
-    wp->item_vars.spin_attack.is_destroy = TRUE;
+    wp->weapon_vars.spin_attack.is_destroy = TRUE;
 
     wpMain_DestroyWeapon(wp->weapon_gobj);
 
@@ -15,11 +15,11 @@ void ftLink_SpecialHi_DestroyWeapon(Fighter_Struct *fp, Weapon_Struct *wp)
 // 0x80163B80
 void ftLink_SpecialHi_UpdateWeaponPos(GObj *fighter_gobj, Weapon_Struct *wp)
 {
-    wp->item_vars.spin_attack.pos_index++;
-    wp->item_vars.spin_attack.pos_index %= ITSPINATTACK_EXTEND_POS_COUNT;
+    wp->weapon_vars.spin_attack.pos_index++;
+    wp->weapon_vars.spin_attack.pos_index %= ITSPINATTACK_EXTEND_POS_COUNT;
 
-    wp->item_vars.spin_attack.pos_x[wp->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
-    wp->item_vars.spin_attack.pos_y[wp->item_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
+    wp->weapon_vars.spin_attack.pos_x[wp->weapon_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
+    wp->weapon_vars.spin_attack.pos_y[wp->weapon_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
 }
 
 // 0x80163BF0
@@ -149,8 +149,8 @@ void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 
                 for (i = 0; i < ITSPINATTACK_EXTEND_POS_COUNT; i++)
                 {
-                    wp->item_vars.spin_attack.pos_x[i] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
-                    wp->item_vars.spin_attack.pos_y[i] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
+                    wp->weapon_vars.spin_attack.pos_x[i] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
+                    wp->weapon_vars.spin_attack.pos_y[i] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
                 }
             }
         }

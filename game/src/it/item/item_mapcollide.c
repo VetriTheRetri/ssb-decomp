@@ -1,6 +1,7 @@
 #include "item.h"
 
-bool32 func_ovl3_80167880(Coll_Data *coll_data, s32 arg1, s32 arg2)
+// 0x80167880
+bool32 wpMap_CheckCollideGround(Coll_Data *coll_data, s32 arg1, s32 arg2)
 {
     s32 ground_line_id = coll_data->ground_line_id;
     bool32 is_collide_ground = FALSE;
@@ -43,7 +44,7 @@ bool32 func_ovl3_80167880(Coll_Data *coll_data, s32 arg1, s32 arg2)
 
 bool32 func_ovl3_8016796C(GObj *weapon_gobj)
 {
-    return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_80167880, weapon_gobj, FALSE);
+    return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, wpMap_CheckCollideGround, weapon_gobj, FALSE);
 }
 
 bool32 func_ovl3_801679A0(Coll_Data *coll_data, s32 arg1, s32 arg2)

@@ -2,7 +2,7 @@
 
 bool32 jtgt_ovl3_801746F0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATHEART_GRAVITY, ATHEART_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -22,7 +22,7 @@ bool32 jtgt_ovl3_80174750(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.1F, 0.0F, func_ovl3_80174780);
 }
 
-extern ArticleStatusDesc Article_Heart_Status[];
+extern itStatusDesc Article_Heart_Status[];
 
 void func_ovl3_80174780(GObj *article_gobj)
 {
@@ -32,7 +32,7 @@ void func_ovl3_80174780(GObj *article_gobj)
 
 void func_ovl3_801747B4(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -50,19 +50,19 @@ void jtgt_ovl3_80174828(GObj *article_gobj)
     atCommon_UpdateArticleStatus(article_gobj, Article_Heart_Status, 2);
 }
 
-extern ArticleSpawnData Article_Heart_Data;
+extern itCreateDesc Article_Heart_Data;
 
 GObj *jtgt_ovl3_80174850(GObj *article_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *spawn_gobj = itManager_CreateItem(article_gobj, &Article_Heart_Data, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
-    Article_Struct *ap;
+    Item_Struct *ap;
 
     if (spawn_gobj != NULL)
     {
         joint = DObjGetStruct(spawn_gobj);
-        ap = atGetStruct(spawn_gobj);
+        ap = itGetStruct(spawn_gobj);
         translate = joint->translate;
 
         func_80008CC0(joint, 0x2E, 0);

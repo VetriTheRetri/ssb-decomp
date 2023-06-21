@@ -137,7 +137,7 @@ void ftKirby_CopySamus_SpecialNLoop_ProcUpdate(GObj *fighter_gobj)
             {
                 Weapon_Struct *wp = wpGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
 
-                wp->item_vars.charge_shot.charge_size = fp->fighter_vars.kirby.copysamus_charge_level;
+                wp->weapon_vars.charge_shot.charge_size = fp->fighter_vars.kirby.copysamus_charge_level;
             }
         }
     }
@@ -215,12 +215,12 @@ void ftKirby_CopySamus_SpecialNEnd_ProcUpdate(GObj *fighter_gobj)
 
             DObjGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj)->translate = pos;
 
-            wp->item_vars.charge_shot.is_full_charge = TRUE;
-            wp->item_vars.charge_shot.charge_size = fp->fighter_vars.kirby.copysamus_charge_level;
+            wp->weapon_vars.charge_shot.is_full_charge = TRUE;
+            wp->weapon_vars.charge_shot.charge_size = fp->fighter_vars.kirby.copysamus_charge_level;
 
             func_ovl2_800DF09C(fp->status_vars.kirby.copysamus_specialn.charge_gobj, fp->coll_data.p_translate, &fp->coll_data);
 
-            wp->item_vars.charge_shot.owner_gobj = NULL;
+            wp->weapon_vars.charge_shot.owner_gobj = NULL;
             fp->status_vars.kirby.copysamus_specialn.charge_gobj = NULL;
         }
         else wpSamus_ChargeShot_CreateWeapon(fighter_gobj, &pos, fp->fighter_vars.kirby.copysamus_charge_level, 1);

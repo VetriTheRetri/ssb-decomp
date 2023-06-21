@@ -48,7 +48,7 @@ void wpPikachu_ThunderHead_SetDestroy(GObj *weapon_gobj, bool32 is_destroy)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (!(wp->item_vars.thunder.thunder_state & wpPikachuThunder_Status_Destroy))
+    if (!(wp->weapon_vars.thunder.thunder_state & wpPikachuThunder_Status_Destroy))
     {
         Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
@@ -84,7 +84,7 @@ bool32 wpPikachu_ThunderHead_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (wp->item_vars.thunder.thunder_state == wpPikachuThunder_Status_Collide)
+    if (wp->weapon_vars.thunder.thunder_state == wpPikachuThunder_Status_Collide)
     {
         func_ovl3_8016A680(weapon_gobj, 3);
 
@@ -146,7 +146,7 @@ GObj* wpPikachu_ThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *
     wp->phys_info.vel = *vel;
 
     wp->item_hit.update_state = gmHitCollision_UpdateState_Disable;
-    wp->item_vars.thunder.thunder_state = wpPikachuThunder_Status_Active;
+    wp->weapon_vars.thunder.thunder_state = wpPikachuThunder_Status_Active;
 
     wp->group_id = wpManager_GetGroupIndexInc();
 

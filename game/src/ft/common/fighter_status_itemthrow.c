@@ -175,7 +175,7 @@ void ftCommon_LightThrow_DecideSetStatus(GObj *fighter_gobj)
     {
         status_id = ftStatus_Common_LightThrowLw; 
     }
-    else status_id = (atGetStruct(fp->item_hold)->type == At_Type_Throw) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowDrop; // No NULL check
+    else status_id = (itGetStruct(fp->item_hold)->type == It_Type_Throw) ? ftStatus_Common_LightThrowF : ftStatus_Common_LightThrowDrop; // No NULL check
 
     ftCommon_ItemThrow_SetStatus(fighter_gobj, status_id);
 }
@@ -212,7 +212,7 @@ bool32 ftCommon_LightThrow_CheckItemTypeThrow(Fighter_Struct *fp)
     {
         if (fp->input.pl.button_tap & fp->input.button_mask_a)
         {
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (atGetStruct(fp->item_hold)->type == At_Type_Throw))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || (itGetStruct(fp->item_hold)->type == It_Type_Throw))
             {
                 return TRUE;
             }

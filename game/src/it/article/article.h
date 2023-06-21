@@ -54,85 +54,85 @@ typedef enum atKind
 {
     // Common articles
 
-    At_Kind_CommonStart,                    // Start of common article IDs
-    At_Kind_Box = At_Kind_CommonStart,      // Crate
-    At_Kind_Taru,                           // Barrel
-    At_Kind_Capsule,                        // Capsule
-    At_Kind_Egg,                            // Egg
-    At_Kind_Tomato,                         // Maxim Tomato
-    At_Kind_Heart,                          // Heart
-    At_Kind_Star,                           // Star Man
-    At_Kind_Sword,                          // Beam Sword
-    At_Kind_Bat,                            // Home-Run Bat
-    At_Kind_Harisen,                        // Fan
-    At_Kind_StarRod,                        // Star Rod
-    At_Kind_L_Gun,                          // Ray Gun
-    At_Kind_F_Flower,                       // Fire Flower
-    At_Kind_Hammer,                         // Hammer
-    At_Kind_MSBomb,                         // Motion-Sensor Bomb
-    At_Kind_BombHei,                        // Bob-Omb
-    At_Kind_It_Bumper,                      // Bumper (Item)
-    At_Kind_G_Shell,                        // Green Shell
-    At_Kind_R_Shell,                        // Red Shell
-    At_Kind_M_Ball,                         // Poké Ball
-    At_Kind_CommonEnd = At_Kind_M_Ball,     // End of common article IDs
+    It_Kind_CommonStart,                    // Start of common article IDs
+    It_Kind_Box = It_Kind_CommonStart,      // Crate
+    It_Kind_Taru,                           // Barrel
+    It_Kind_Capsule,                        // Capsule
+    It_Kind_Egg,                            // Egg
+    It_Kind_Tomato,                         // Maxim Tomato
+    It_Kind_Heart,                          // Heart
+    It_Kind_Star,                           // Star Man
+    It_Kind_Sword,                          // Beam Sword
+    It_Kind_Bat,                            // Home-Run Bat
+    It_Kind_Harisen,                        // Fan
+    It_Kind_StarRod,                        // Star Rod
+    It_Kind_L_Gun,                          // Ray Gun
+    It_Kind_F_Flower,                       // Fire Flower
+    It_Kind_Hammer,                         // Hammer
+    It_Kind_MSBomb,                         // Motion-Sensor Bomb
+    It_Kind_BombHei,                        // Bob-Omb
+    It_Kind_It_Bumper,                      // Bumper (Item)
+    It_Kind_G_Shell,                        // Green Shell
+    It_Kind_R_Shell,                        // Red Shell
+    It_Kind_M_Ball,                         // Poké Ball
+    It_Kind_CommonEnd = It_Kind_M_Ball,     // End of common article IDs
 
     // Character articles
 
-    At_Kind_FighterStart,                   // Start of fighter article IDs
-    At_Kind_PK_Fire = At_Kind_FighterStart, // PK Fire pillar
-    At_Kind_Link_Bomb,                      // Link's Bomb
-    At_Kind_FighterEnd = At_Kind_Link_Bomb, // End of fighter article IDs
+    It_Kind_FighterStart,                   // Start of fighter article IDs
+    It_Kind_PK_Fire = It_Kind_FighterStart, // PK Fire pillar
+    It_Kind_Link_Bomb,                      // Link's Bomb
+    It_Kind_FighterEnd = It_Kind_Link_Bomb, // End of fighter article IDs
 
     // Stage hazards
 
-    At_Kind_GroundStart,                    // Start of stage hazard IDs
-    At_Kind_POW = At_Kind_GroundStart,      // POW block
-    At_Kind_Gr_Bumper,                      // Bumper (Peach's Castle)
-    At_Kind_Pakkun,                         // Pirahna Plant
-    At_Kind_Mato,                           // Target
-    At_Kind_Gr_Bomb,                        // Race to the Finish bomb
+    It_Kind_GroundStart,                    // Start of stage hazard IDs
+    It_Kind_POW = It_Kind_GroundStart,      // POW block
+    It_Kind_Gr_Bumper,                      // Bumper (Peach's Castle)
+    It_Kind_Pakkun,                         // Pirahna Plant
+    It_Kind_Mato,                           // Target
+    It_Kind_Gr_Bomb,                        // Race to the Finish bomb
 
-    At_Kind_GrMonsterStart,                 // Start of stage Pokémon
-    At_Kind_Gr_Lucky=At_Kind_GrMonsterStart,// Chansey (Saffron City)
-    At_Kind_Marumine,                       // Electrode
-    At_Kind_Hitokage,                       // Charmander
-    At_Kind_Fushigibana,                    // Venusaur
-    At_Kind_Porygon,                        // Porygon
-    At_Kind_GroundEnd = At_Kind_Porygon,    // End of stage hazard IDs
-    At_Kind_GrMonsterEnd=At_Kind_GroundEnd, // End of stage Pokémon
+    It_Kind_GrMonsterStart,                 // Start of stage Pokémon
+    It_Kind_Gr_Lucky=It_Kind_GrMonsterStart,// Chansey (Saffron City)
+    It_Kind_Marumine,                       // Electrode
+    It_Kind_Hitokage,                       // Charmander
+    It_Kind_Fushigibana,                    // Venusaur
+    It_Kind_Porygon,                        // Porygon
+    It_Kind_GroundEnd = It_Kind_Porygon,    // End of stage hazard IDs
+    It_Kind_GrMonsterEnd=It_Kind_GroundEnd, // End of stage Pokémon
 
     // Pokémon
 
-    At_Kind_MonsterStart,                   // Start of Pokémon article IDs
-    At_Kind_Iwark = At_Kind_MonsterStart,   // Onix
-    At_Kind_Kabigon,                        // Snorlax
-    At_Kind_Tosakinto,                      // Goldeen
-    At_Kind_Nyars,                          // Meowth
-    At_Kind_Lizardon,                       // Charizard
-    At_Kind_Spear,                          // Beedrill
-    At_Kind_Kamex,                          // Blastoise
-    At_Kind_Mb_Lucky,                       // Chansey (Poké Ball)
-    At_Kind_Starmie,                        // Starmie
-    At_Kind_Sawamura,                       // Hitmonlee
-    At_Kind_Dogas,                          // Koffing
-    At_Kind_Pippi,                          // Clefairy
-    At_Kind_Mew,                            // Mew
-    At_Kind_MonsterEnd = At_Kind_Mew,       // End of Pokémon article IDs
+    It_Kind_MonsterStart,                   // Start of Pokémon article IDs
+    It_Kind_Iwark = It_Kind_MonsterStart,   // Onix
+    It_Kind_Kabigon,                        // Snorlax
+    It_Kind_Tosakinto,                      // Goldeen
+    It_Kind_Nyars,                          // Meowth
+    It_Kind_Lizardon,                       // Charizard
+    It_Kind_Spear,                          // Beedrill
+    It_Kind_Kamex,                          // Blastoise
+    It_Kind_Mb_Lucky,                       // Chansey (Poké Ball)
+    It_Kind_Starmie,                        // Starmie
+    It_Kind_Sawamura,                       // Hitmonlee
+    It_Kind_Dogas,                          // Koffing
+    It_Kind_Pippi,                          // Clefairy
+    It_Kind_Mew,                            // Mew
+    It_Kind_MonsterEnd = It_Kind_Mew,       // End of Pokémon article IDs
 
-    At_Kind_CustomStart                     // Start of custom article IDs (future modding?)
+    It_Kind_CustomStart                     // Start of custom article IDs (future modding?)
 
 } atKind;
 
 typedef enum atType
 {
-    At_Type_Ground,     // Article is spawned by the stage (?)
-    At_Type_Swing,      // Article can be thrown and swung
-    At_Type_Shoot,      // Article can be fired
-    At_Type_Throw,      // Article can only be thrown
-    At_Type_Touch,      // Article has special properties on interaction
-    At_Type_Special,    // Hammer, Heart and Maxim Tomato?
-    At_Type_Fighter     // Article spawned by fighter's item (projectile) ?
+    It_Type_Ground,     // Article is spawned by the stage (?)
+    It_Type_Swing,      // Article can be thrown and swung
+    It_Type_Shoot,      // Article can be fired
+    It_Type_Throw,      // Article can only be thrown
+    It_Type_Touch,      // Article has special properties on interaction
+    It_Type_Special,    // Hammer, Heart and Maxim Tomato?
+    It_Type_Fighter     // Article spawned by fighter's item (projectile) ?
 
 } atType; 
 
@@ -153,9 +153,9 @@ typedef struct ArticleFileData
 
 } ArticleFileData;
 
-typedef struct ArticleSpawnData
+typedef struct itCreateDesc
 {
-    s32 at_kind;
+    s32 it_kind;
     void **p_file;
     intptr_t offset;
     u8 unk_aspd_0xC;
@@ -171,9 +171,9 @@ typedef struct ArticleSpawnData
     bool32 (*proc_reflector)(GObj*);
     bool32 (*proc_damage)(GObj*);
 
-} ArticleSpawnData;
+} itCreateDesc;
 
-extern ArticleFileData *Article_File_Data; // WARNING: This pointer exists in multiple areas and appears not to be exclusive to the Article section of Overlay 3 (0x8018D040)
+extern void *gItemFileData; // WARNING: This pointer exists in multiple areas and appears not to be exclusive to the Article section of Overlay 3 (0x8018D040)
 
 typedef struct ArticleHitUnk
 {
@@ -192,7 +192,7 @@ typedef struct _ArticleHitArray
 
 } ArticleHitArray;
 
-typedef struct ArticleStatusDesc
+typedef struct itStatusDesc
 {
     bool32 (*proc_update)(GObj*);
     bool32 (*proc_map)(GObj*);
@@ -203,9 +203,9 @@ typedef struct ArticleStatusDesc
     bool32 (*proc_reflector)(GObj*);
     bool32 (*proc_damage)(GObj*);
 
-} ArticleStatusDesc;
+} itStatusDesc;
 
-typedef struct _Article_Hit
+typedef struct _Item_Hit
 {
     s32 update_state; // 0x0
     s32 damage; // 0x4
@@ -223,14 +223,13 @@ typedef struct _Article_Hit
     u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;
     u32 clang : 1;
-    u32 can_rehit_hurt : 1;
-    u32 flags_0x4C_b2 : 1;
+    u32 can_rehit_item : 1;
+    u32 can_rehit_fighter : 1;
     u32 can_rehit_shield : 1; // Article can rehit targets after default rehit cooldown expires
     u32 can_hop : 1;
     u32 can_reflect : 1;
     u32 can_shield : 1; // Not actually absorb but not yet known either
     u32 attack_id : 6; // Unconfirmed
-    u32 flags_0x4C_b7 : 1;
     u16 motion_count;
     gmAttackFlags stat_flags;
     u16 stat_count;
@@ -238,7 +237,7 @@ typedef struct _Article_Hit
     ArticleHitUnk article_hit_unk[2];
     ArticleHitArray hit_targets[4];
 
-} Article_Hit;
+} Item_Hit;
 
 typedef struct ArticleHitEvent // Hitbox subaction event?
 {
@@ -308,8 +307,8 @@ typedef struct atCommonAttributes
     u32 clang : 1;
     u32 hit_sfx : 10;
     u32 priority : 3;
-    u32 can_rehit_hurt : 1;
-    u32 unk_atca_0x3C_b5 : 1;
+    u32 can_rehit_item : 1;
+    u32 can_rehit_fighter : 1;
     u32 can_hop : 1;
     u32 can_reflect : 1;
     u32 can_shield : 1;
@@ -326,12 +325,12 @@ typedef struct atCommonAttributes
 
 } atCommonAttributes;
 
-typedef struct Article_Struct // Common items, stage hazards and Pokémon
+typedef struct Item_Struct // Common items, stage hazards and Pokémon
 {
-    void *ap_alloc_next; // Region allocated for next Article_Struct
+    void *ap_alloc_next; // Region allocated for next Item_Struct
     GObj *article_gobj;
     GObj *owner_gobj;
-    atKind at_kind;
+    atKind it_kind;
     s32 type;
     u8 team;
     u8 port_id;
@@ -352,7 +351,7 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
 
     Ground_Air ground_or_air;
 
-    Article_Hit article_hit;
+    Item_Hit article_hit;
     Article_Hurt article_hurt;
 
     s32 hit_victim_damage;
@@ -458,10 +457,10 @@ typedef struct Article_Struct // Common items, stage hazards and Pokémon
     bool32 (*proc_damage)(GObj*);
     bool32 (*proc_dead)(GObj*);
 
-} Article_Struct;
+} Item_Struct;
 
-#define atGetStruct(article_gobj) \
-((Article_Struct*)article_gobj->user_data) \
+#define itGetStruct(article_gobj) \
+((Item_Struct*)article_gobj->user_data) \
 
 
 // Points to all sorts of data

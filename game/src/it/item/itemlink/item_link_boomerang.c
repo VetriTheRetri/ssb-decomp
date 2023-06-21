@@ -64,17 +64,17 @@ bool32 func_ovl3_8016CCA0(GObj *weapon_gobj)
     f32 temp_f0;
     f32 temp_f2;
 
-    if (wp->item_vars.boomerang.homing_delay > 0)
+    if (wp->weapon_vars.boomerang.homing_delay > 0)
     {
-        wp->item_vars.boomerang.homing_delay--;
+        wp->weapon_vars.boomerang.homing_delay--;
     }
     else
     {
-        wp->item_vars.boomerang.adjust_angle_delay++;
+        wp->weapon_vars.boomerang.adjust_angle_delay++;
 
-        if (wp->item_vars.boomerang.adjust_angle_delay >= 9)
+        if (wp->weapon_vars.boomerang.adjust_angle_delay >= 9)
         {
-            wp->item_vars.boomerang.adjust_angle_delay = 0;
+            wp->weapon_vars.boomerang.adjust_angle_delay = 0;
 
             func_ovl2_800EB924(D_ovl2_80131460->unk_0x74, &D_ovl2_80131470, &DObjGetStruct(weapon_gobj)->translate, &sp30, &sp2C);
 
@@ -95,21 +95,21 @@ void wpLink_Boomerang_SetReturnVars(GObj *weapon_gobj, bool32 angle_max_or_min)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    wp->item_vars.boomerang.flags |= WPLINK_BOOMERANG_MASK_RETURN;
+    wp->weapon_vars.boomerang.flags |= WPLINK_BOOMERANG_MASK_RETURN;
 
     wp->item_hit.damage = 8;
 
-    wp->item_vars.boomerang.default_angle -= F_DEG_TO_RAD(180.0F); // PI32
+    wp->weapon_vars.boomerang.default_angle -= F_DEG_TO_RAD(180.0F); // PI32
 
-    if (wp->item_vars.boomerang.default_angle < 0.0F)
+    if (wp->weapon_vars.boomerang.default_angle < 0.0F)
     {
-        wp->item_vars.boomerang.default_angle += F_DEG_TO_RAD(360.0F); // DOUBLE_PI32
+        wp->weapon_vars.boomerang.default_angle += F_DEG_TO_RAD(360.0F); // DOUBLE_PI32
     }
     wp->lr = -wp->lr;
 
-    wp->item_vars.boomerang.flyforward_timer = 140;
+    wp->weapon_vars.boomerang.flyforward_timer = 140;
 
-    wp->item_vars.boomerang.homing_angle = (angle_max_or_min == 1) ? ITBOOMERANG_HOMING_ANGLE_MAX : ITBOOMERANG_HOMING_ANGLE_MIN;
+    wp->weapon_vars.boomerang.homing_angle = (angle_max_or_min == 1) ? ITBOOMERANG_HOMING_ANGLE_MAX : ITBOOMERANG_HOMING_ANGLE_MIN;
 
     DObjGetStruct(weapon_gobj)->next->next->unk_0x54 = 1;
 
@@ -145,10 +145,10 @@ void wpLink_Boomerang_UpdateVelLR(Weapon_Struct *wp, f32 vel_mul)
 {
     sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y)); // Can we talk about how this doesn't do anything
 
-    wp->phys_info.vel.x = cosf(wp->item_vars.boomerang.default_angle) * vel_mul;
-    wp->phys_info.vel.y = __sinf(wp->item_vars.boomerang.default_angle) * vel_mul;
+    wp->phys_info.vel.x = cosf(wp->weapon_vars.boomerang.default_angle) * vel_mul;
+    wp->phys_info.vel.y = __sinf(wp->weapon_vars.boomerang.default_angle) * vel_mul;
 
-    wp->lr = ((wp->item_vars.boomerang.default_angle > F_DEG_TO_RAD(90.0F)) && (wp->item_vars.boomerang.default_angle < F_DEG_TO_RAD(270.0F))) ? LEFT : RIGHT; // HALF_PI32, 4.712389F
+    wp->lr = ((wp->weapon_vars.boomerang.default_angle > F_DEG_TO_RAD(90.0F)) && (wp->weapon_vars.boomerang.default_angle < F_DEG_TO_RAD(270.0F))) ? LEFT : RIGHT; // HALF_PI32, 4.712389F
 }
 
 // 0x8016CFFC
@@ -182,25 +182,25 @@ f32 wpLink_Boomerang_GetDistUpdateAngle(GObj *weapon_gobj)
     f32 angle;
     f32 sqrt_dist = 0.0F;
 
-    if (wp->item_vars.boomerang.spawn_gobj != NULL)
+    if (wp->weapon_vars.boomerang.spawn_gobj != NULL)
     {
-        dist_x = DObjGetStruct(wp->item_vars.boomerang.spawn_gobj)->translate.x - DObjGetStruct(weapon_gobj)->translate.x;
-        dist_y = (DObjGetStruct(wp->item_vars.boomerang.spawn_gobj)->translate.y - DObjGetStruct(weapon_gobj)->translate.y) + 290.0F;
+        dist_x = DObjGetStruct(wp->weapon_vars.boomerang.spawn_gobj)->translate.x - DObjGetStruct(weapon_gobj)->translate.x;
+        dist_y = (DObjGetStruct(wp->weapon_vars.boomerang.spawn_gobj)->translate.y - DObjGetStruct(weapon_gobj)->translate.y) + 290.0F;
 
         sqrt_dist = sqrtf(SQUARE(dist_x) + SQUARE(dist_y));
 
-        if (wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_FORWARD)
+        if (wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_FORWARD)
         {
-            if (wp->item_vars.boomerang.flyforward_timer > 0)
+            if (wp->weapon_vars.boomerang.flyforward_timer > 0)
             {
-                wp->item_vars.boomerang.flyforward_timer--;
+                wp->weapon_vars.boomerang.flyforward_timer--;
             }
-            else if (wp->item_vars.boomerang.flyforward_timer == 0)
+            else if (wp->weapon_vars.boomerang.flyforward_timer == 0)
             {
                 return sqrt_dist;
             }
         }
-        if ((wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_UNK3) && (((dist_x < 0.0F) && (wp->lr == RIGHT)) || ((dist_x > 0.0F) && (wp->lr == LEFT))))
+        if ((wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_UNK3) && (((dist_x < 0.0F) && (wp->lr == RIGHT)) || ((dist_x > 0.0F) && (wp->lr == LEFT))))
         {
             return sqrt_dist;
         }
@@ -217,7 +217,7 @@ f32 wpLink_Boomerang_GetDistUpdateAngle(GObj *weapon_gobj)
                 angle -= F_DEG_TO_RAD(360.0F); // DOUBLE_PI32
             }
 
-            angle -= wp->item_vars.boomerang.default_angle;
+            angle -= wp->weapon_vars.boomerang.default_angle;
 
             if (angle < F_DEG_TO_RAD(-180.0F)) // -PI32
             {
@@ -228,22 +228,22 @@ f32 wpLink_Boomerang_GetDistUpdateAngle(GObj *weapon_gobj)
                 angle -= F_DEG_TO_RAD(360.0F); // DOUBLE_PI32
             }
 
-            if (angle > wp->item_vars.boomerang.homing_angle)
+            if (angle > wp->weapon_vars.boomerang.homing_angle)
             {
-                angle = wp->item_vars.boomerang.homing_angle;
+                angle = wp->weapon_vars.boomerang.homing_angle;
             }
-            else if (angle < -wp->item_vars.boomerang.homing_angle)
+            else if (angle < -wp->weapon_vars.boomerang.homing_angle)
             {
-                angle = -wp->item_vars.boomerang.homing_angle;
+                angle = -wp->weapon_vars.boomerang.homing_angle;
             }
 
-            wp->item_vars.boomerang.default_angle += angle;
+            wp->weapon_vars.boomerang.default_angle += angle;
 
-            wpLink_Boomerang_ClampAngle360(&wp->item_vars.boomerang.default_angle);
+            wpLink_Boomerang_ClampAngle360(&wp->weapon_vars.boomerang.default_angle);
 
-            if (wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_UNK2)
+            if (wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_UNK2)
             {
-                wpLink_Boomerang_ClampAngleForward(&wp->item_vars.boomerang.default_angle);
+                wpLink_Boomerang_ClampAngleForward(&wp->weapon_vars.boomerang.default_angle);
             }
         }
     }
@@ -253,9 +253,9 @@ f32 wpLink_Boomerang_GetDistUpdateAngle(GObj *weapon_gobj)
 // 0x8016D31C
 void wpLink_Boomerang_ClearObjectReference(Weapon_Struct *wp)
 {
-    if (wp->item_vars.boomerang.spawn_gobj != NULL)
+    if (wp->weapon_vars.boomerang.spawn_gobj != NULL)
     {
-        Fighter_Struct *fp = ftGetStruct(wp->item_vars.boomerang.spawn_gobj);
+        Fighter_Struct *fp = ftGetStruct(wp->weapon_vars.boomerang.spawn_gobj);
 
         if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby))
         {
@@ -263,7 +263,7 @@ void wpLink_Boomerang_ClearObjectReference(Weapon_Struct *wp)
         }
         else fp->fighter_vars.link.boomerang_gobj = NULL;
         
-        wp->item_vars.boomerang.spawn_gobj = NULL;
+        wp->weapon_vars.boomerang.spawn_gobj = NULL;
     }
 }
 
@@ -272,19 +272,19 @@ void wpLink_Boomerang_CheckReturnOwner(GObj *weapon_gobj, f32 distance)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if ((wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_RETURN) && (distance < 180.0F))
+    if ((wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_RETURN) && (distance < 180.0F))
     {
-        if (wp->item_vars.boomerang.spawn_gobj != NULL)
+        if (wp->weapon_vars.boomerang.spawn_gobj != NULL)
         {
-            Fighter_Struct *fp = ftGetStruct(wp->item_vars.boomerang.spawn_gobj);
+            Fighter_Struct *fp = ftGetStruct(wp->weapon_vars.boomerang.spawn_gobj);
 
             if (fp->x192_flag_b0)
             {
                 if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby))
                 {
-                    ftKirby_CopyLink_SpecialNReturn_SetStatus(wp->item_vars.boomerang.spawn_gobj);
+                    ftKirby_CopyLink_SpecialNReturn_SetStatus(wp->weapon_vars.boomerang.spawn_gobj);
                 }
-                else ftLink_SpecialNReturn_SetStatus(wp->item_vars.boomerang.spawn_gobj);          
+                else ftLink_SpecialNReturn_SetStatus(wp->weapon_vars.boomerang.spawn_gobj);          
             }
         }
         wpLink_Boomerang_ClearObjectReference(wp);
@@ -303,9 +303,9 @@ bool32 wpLink_Boomerang_CheckBound(Weapon_Struct *wp, Vec3f *coll_angle)
         {
             func_ovl0_800C7B08(&wp->phys_info.vel, coll_angle);
 
-            wp->item_vars.boomerang.default_angle = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
+            wp->weapon_vars.boomerang.default_angle = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
 
-            wpLink_Boomerang_ClampAngle360(&wp->item_vars.boomerang.default_angle);
+            wpLink_Boomerang_ClampAngle360(&wp->weapon_vars.boomerang.default_angle);
         }
         else return TRUE;
     }
@@ -331,17 +331,17 @@ bool32 wpLink_Boomerang_ProcUpdate(GObj *weapon_gobj)
 
         return TRUE;
     }
-    if (wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_DESTROY)
+    if (wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_DESTROY)
     {
         wpLink_Boomerang_ClearObjectReference(wp);
 
         return TRUE;
     }
-    if (wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_REFLECT)
+    if (wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_REFLECT)
     {
         return FALSE;
     }
-    else if (wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_RETURN)
+    else if (wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_RETURN)
     {
         wpLink_Boomerang_UpdateVelLR(wp, wpLink_Boomerang_AddVelSqrt(wp, 1.0F));
 
@@ -368,7 +368,7 @@ bool32 wpLink_Boomerang_ProcMap(GObj *weapon_gobj)
     bool32 is_collide = FALSE;
     u16 coll_flags;
 
-    if (!(wp->item_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
+    if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
     {
         func_ovl3_80167A58(weapon_gobj);
 
@@ -408,7 +408,7 @@ bool32 wpLink_Boomerang_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (!(wp->item_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)) && (wp->hit_victim_damage != 0))
+    if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)) && (wp->hit_victim_damage != 0))
     {
         wpLink_Boomerang_UpdateVelLR(wp, wpLink_Boomerang_SubVelSqrt(wp, 5.0F));
         wpLink_Boomerang_SetReturnVars(weapon_gobj, TRUE);
@@ -421,7 +421,7 @@ bool32 wpLink_Boomerang_ProcSetOff(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (!(wp->item_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
+    if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
     {
         wpLink_Boomerang_SetReturnVars(weapon_gobj, TRUE);
     }
@@ -433,7 +433,7 @@ bool32 wpLink_Boomerang_ProcShield(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (!(wp->item_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
+    if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
     {
         wpLink_Boomerang_SetReturnVars(weapon_gobj, TRUE);
     }
@@ -447,11 +447,11 @@ bool32 wpLink_Boomerang_ProcHop(GObj *weapon_gobj)
 
     if (wp->shield_collide_vec.z > 0.0F)
     {
-        wp->item_vars.boomerang.default_angle += (wp->shield_collide_angle * 2);
+        wp->weapon_vars.boomerang.default_angle += (wp->shield_collide_angle * 2);
     }
-    else wp->item_vars.boomerang.default_angle -= (wp->shield_collide_angle * 2);
+    else wp->weapon_vars.boomerang.default_angle -= (wp->shield_collide_angle * 2);
     
-    wpLink_Boomerang_ClampAngle360(&wp->item_vars.boomerang.default_angle);
+    wpLink_Boomerang_ClampAngle360(&wp->weapon_vars.boomerang.default_angle);
 
     return FALSE;
 }
@@ -463,18 +463,18 @@ bool32 wpLink_Boomerang_ProcReflector(GObj *weapon_gobj)
 
     f32 dist_x, dist_y;
 
-    if (!(wp->item_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_REFLECT))
+    if (!(wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_REFLECT))
     {
-        wp->item_vars.boomerang.flags = WPLINK_BOOMERANG_MASK_REFLECT;
+        wp->weapon_vars.boomerang.flags = WPLINK_BOOMERANG_MASK_REFLECT;
         wp->lifetime = ITBOOMERANG_LIFETIME_REFLECT;
     }
 
     dist_x = DObjGetStruct(weapon_gobj)->translate.x - DObjGetStruct(wp->owner_gobj)->translate.x;
     dist_y = DObjGetStruct(weapon_gobj)->translate.y - (DObjGetStruct(wp->owner_gobj)->translate.y + 250.0F);
 
-    wp->item_vars.boomerang.default_angle = atan2f(dist_y, dist_x);
+    wp->weapon_vars.boomerang.default_angle = atan2f(dist_y, dist_x);
 
-    wpLink_Boomerang_ClampAngle360(&wp->item_vars.boomerang.default_angle);
+    wpLink_Boomerang_ClampAngle360(&wp->weapon_vars.boomerang.default_angle);
 
     wpLink_Boomerang_UpdateVelLR(wp, sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y)));
 
@@ -552,12 +552,12 @@ GObj* wpLink_Boomerang_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     if (fp->status_vars.link.specialn.is_smash == TRUE)
     {
         wp->lifetime = ITBOOMERANG_LIFETIME_SMASH;
-        wp->item_vars.boomerang.default_angle = wpLink_Boomerang_GetAngleSetVel(&wp->phys_info.vel, fp, wp->lr, ITBOOMERANG_VEL_SMASH);
+        wp->weapon_vars.boomerang.default_angle = wpLink_Boomerang_GetAngleSetVel(&wp->phys_info.vel, fp, wp->lr, ITBOOMERANG_VEL_SMASH);
     }
     else
     {
         wp->lifetime = ITBOOMERANG_LIFETIME_TILT;
-        wp->item_vars.boomerang.default_angle = wpLink_Boomerang_GetAngleSetVel(&wp->phys_info.vel, fp, wp->lr, ITBOOMERANG_VEL_TILT);
+        wp->weapon_vars.boomerang.default_angle = wpLink_Boomerang_GetAngleSetVel(&wp->phys_info.vel, fp, wp->lr, ITBOOMERANG_VEL_TILT);
     }
     wp->proc_setoff = wpLink_Boomerang_ProcSetOff;
     wp->proc_dead = wpLink_Boomerang_ProcDead;
@@ -566,10 +566,10 @@ GObj* wpLink_Boomerang_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     wpMain_PlaySFX(wp, 0xCFU);
 
-    wp->item_vars.boomerang.spawn_gobj = fighter_gobj;
-    wp->item_vars.boomerang.flags = WPLINK_BOOMERANG_MASK_FORWARD;
-    wp->item_vars.boomerang.homing_delay = 130;
-    wp->item_vars.boomerang.adjust_angle_delay = 0;
+    wp->weapon_vars.boomerang.spawn_gobj = fighter_gobj;
+    wp->weapon_vars.boomerang.flags = WPLINK_BOOMERANG_MASK_FORWARD;
+    wp->weapon_vars.boomerang.homing_delay = 130;
+    wp->weapon_vars.boomerang.adjust_angle_delay = 0;
 
     wpMain_VelSetModelYaw(weapon_gobj);
 

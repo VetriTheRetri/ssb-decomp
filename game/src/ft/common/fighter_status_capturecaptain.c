@@ -58,7 +58,7 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((this_fp->item_hold != NULL) && !(atGetStruct(this_fp->item_hold)->is_light_throw))
+    if ((this_fp->item_hold != NULL) && !(itGetStruct(this_fp->item_hold)->is_light_throw))
     {
         Vec3f vel;
 

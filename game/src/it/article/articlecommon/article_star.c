@@ -3,7 +3,7 @@
 
 bool32 jtgt_ovl3_80174930(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSTAR_GRAVITY, ATSTAR_T_VEL);
 
@@ -20,11 +20,11 @@ bool32 jtgt_ovl3_80174930(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80174990(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
 
-    if (func_ovl3_801737EC(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), 1.0F, NULL) != FALSE)
+    if (itMap_CheckCollideAllModifiyVel(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), 1.0F, NULL) != FALSE)
     {
         func_ovl3_80172508(article_gobj);
     }
@@ -42,14 +42,14 @@ bool32 jtgt_ovl3_80174A0C(GObj *article_gobj)
     return TRUE;
 }
 
-extern ArticleSpawnData Article_Star_Data;
+extern itCreateDesc Article_Star_Data;
 
 GObj *jtgt_ovl3_80174A18(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     Unk_80131460_Ptr74 *unk_ptr = D_ovl2_80131460->unk_0x74;
     GObj *article_gobj;
     DObj *joint;
-    Article_Struct *ap;
+    Item_Struct *ap;
     Vec3f vel_real;
     Vec3f translate;
 

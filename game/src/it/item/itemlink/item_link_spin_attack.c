@@ -41,12 +41,12 @@ bool32 wpLink_SpinAttack_ProcUpdate(GObj *weapon_gobj)
     f32 sqrt_vel;
     f32 mod_vel;
 
-    if (wp->item_vars.spin_attack.is_destroy != FALSE)
+    if (wp->weapon_vars.spin_attack.is_destroy != FALSE)
     {
         return TRUE;
     }
 
-    sqrt_vel = sqrtf(SQUARE(wp->item_vars.spin_attack.vel.x) + SQUARE(wp->item_vars.spin_attack.vel.y));
+    sqrt_vel = sqrtf(SQUARE(wp->weapon_vars.spin_attack.vel.x) + SQUARE(wp->weapon_vars.spin_attack.vel.y));
 
     if (sqrt_vel > 0.0F)
     {
@@ -58,13 +58,13 @@ bool32 wpLink_SpinAttack_ProcUpdate(GObj *weapon_gobj)
         {
             mod_vel = sqrt_vel - ITSPINATTACK_VEL_CLAMP;
         }
-        wp->item_vars.spin_attack.vel.x = (wp->item_vars.spin_attack.vel.x * mod_vel) / sqrt_vel;
-        wp->item_vars.spin_attack.vel.y = (wp->item_vars.spin_attack.vel.y * mod_vel) / sqrt_vel;
+        wp->weapon_vars.spin_attack.vel.x = (wp->weapon_vars.spin_attack.vel.x * mod_vel) / sqrt_vel;
+        wp->weapon_vars.spin_attack.vel.y = (wp->weapon_vars.spin_attack.vel.y * mod_vel) / sqrt_vel;
 
-        wp->item_hit.offset[0].x += wp->item_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
-        wp->item_hit.offset[0].y += wp->item_vars.spin_attack.vel.y;
-        wp->item_hit.offset[1].x -= wp->item_vars.spin_attack.vel.x;
-        wp->item_hit.offset[1].y += wp->item_vars.spin_attack.vel.y;
+        wp->item_hit.offset[0].x += wp->weapon_vars.spin_attack.vel.x; // TO DO: this might not be an array at all, loops don't match when indexed with iterator
+        wp->item_hit.offset[0].y += wp->weapon_vars.spin_attack.vel.y;
+        wp->item_hit.offset[1].x -= wp->weapon_vars.spin_attack.vel.x;
+        wp->item_hit.offset[1].y += wp->weapon_vars.spin_attack.vel.y;
     }
     return FALSE;
 }
@@ -74,10 +74,10 @@ bool32 wpLink_SpinAttack_ProcMap(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     f32 pos_x, pos_y;
-    s32 index = (wp->item_vars.spin_attack.pos_index + 1) % ITSPINATTACK_EXTEND_POS_COUNT;
+    s32 index = (wp->weapon_vars.spin_attack.pos_index + 1) % ITSPINATTACK_EXTEND_POS_COUNT;
 
-    pos_x = wp->item_vars.spin_attack.pos_x[index];
-    pos_y = wp->item_vars.spin_attack.pos_y[index];
+    pos_x = wp->weapon_vars.spin_attack.pos_x[index];
+    pos_y = wp->weapon_vars.spin_attack.pos_y[index];
 
     pos_y += ITSPINATTACK_OFF_Y;
 
@@ -123,10 +123,10 @@ GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     wp->proc_dead = wpLink_SpinAttack_ProcDead;
 
-    _bzero(&wp->item_vars.spin_attack, sizeof(wp->item_vars));
+    _bzero(&wp->weapon_vars.spin_attack, sizeof(wp->weapon_vars));
 
-    wp->item_vars.spin_attack.vel.x = cosf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
-    wp->item_vars.spin_attack.vel.y = __sinf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
+    wp->weapon_vars.spin_attack.vel.x = cosf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
+    wp->weapon_vars.spin_attack.vel.y = __sinf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
 
     wp->phys_info.vel.z = 0.0F;
     wp->phys_info.vel.y = 0.0F;

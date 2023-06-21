@@ -4,14 +4,14 @@
 
 void func_ovl3_80180630(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.kamex.hydro_spawn_wait <= 0)
     {
         Vec3f pos = joint->translate;
 
-        if (ap->at_kind == At_Kind_Kamex)
+        if (ap->it_kind == It_Kind_Kamex)
         {
             pos.x += ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_X * ap->lr;
             pos.y += ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_Y;
@@ -28,7 +28,7 @@ void func_ovl3_80180630(GObj *article_gobj)
 
         pos.y += ap->attributes->objectcoll_bottom;
 
-        if (ap->at_kind == At_Kind_Kamex)
+        if (ap->it_kind == It_Kind_Kamex)
         {
             pos.x += (ap->attributes->objectcoll_width + ATKAMEX_DUST_SPAWN_OFF_X) * -ap->lr;
         }
@@ -42,7 +42,7 @@ void func_ovl3_80180630(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801807DC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATKAMEX_GRAVITY, ATKAMEX_T_VEL);
 
@@ -51,7 +51,7 @@ bool32 jtgt_ovl3_801807DC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180808(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_801737B8(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL));
 
@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_80180808(GObj *article_gobj)
 
 void func_ovl3_80180860(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80173F78(ap);
 
@@ -77,7 +77,7 @@ void func_ovl3_80180860(GObj *article_gobj)
     ap->article_vars.kamex.hydro_push_vel_x = 0.0F;
 }
 
-extern ArticleStatusDesc Article_Kamex_Status[];
+extern itStatusDesc Article_Kamex_Status[];
 
 void func_ovl3_801808A4(GObj *article_gobj)
 {
@@ -87,7 +87,7 @@ void func_ovl3_801808A4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801808D8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATKAMEX_GRAVITY, ATKAMEX_T_VEL);
 
@@ -96,7 +96,7 @@ bool32 jtgt_ovl3_801808D8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180904(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_801737B8(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL));
 
@@ -112,11 +112,11 @@ bool32 jtgt_ovl3_80180904(GObj *article_gobj)
 
 void func_ovl3_80180964(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi = ATKAMEX_LIFETIME;
 
-    if (ap->at_kind == At_Kind_Kamex)
+    if (ap->it_kind == It_Kind_Kamex)
     {
         func_800269C0(0x139U);
     }
@@ -125,7 +125,7 @@ void func_ovl3_80180964(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801809BC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -156,14 +156,14 @@ extern intptr_t D_NF_0000ED60;
 
 void func_ovl3_80180A58(GObj *article_gobj, bool32 is_setup_vars)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (is_setup_vars == FALSE)
     {
         ap->at_multi = ATKAMEX_LIFETIME;
 
-        if (ap->at_kind == At_Kind_Kamex)
+        if (ap->it_kind == It_Kind_Kamex)
         {
             void *dl = ArticleGetPData(ap, D_NF_0000EA60, D_NF_0000ED60); // Linker thing
 
@@ -190,7 +190,7 @@ void func_ovl3_80180AF4(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180B1C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -205,7 +205,7 @@ bool32 jtgt_ovl3_80180B1C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180B6C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -220,7 +220,7 @@ void func_ovl3_80180BAC(GObj *article_gobj)
     s32 unused1;
     GObj *victim_gobj;
     s32 unused2[3];
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     f32 dist_xy;
     f32 dist_x;
@@ -263,14 +263,14 @@ void func_ovl3_80180BAC(GObj *article_gobj)
 }
 
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Kamex_Data;
+extern itCreateDesc Article_Kamex_Data;
 
 GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Kamex_Data, pos, vel, flags);
     DObj *joint;
-    Article_Struct *kamex_ap;
-    Article_Struct *m_ball_ap;
+    Item_Struct *kamex_ap;
+    Item_Struct *m_ball_ap;
 
     if (article_gobj != NULL)
     {
@@ -280,7 +280,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        kamex_ap = atGetStruct(article_gobj);
+        kamex_ap = itGetStruct(article_gobj);
 
         kamex_ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
@@ -288,7 +288,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         kamex_ap->phys_info.vel.x = 0.0F;
         kamex_ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
 
-        m_ball_ap = atGetStruct(spawn_gobj);
+        m_ball_ap = itGetStruct(spawn_gobj);
 
         kamex_ap->owner_gobj = m_ball_ap->owner_gobj;
         kamex_ap->team = m_ball_ap->team;
@@ -344,7 +344,7 @@ extern wpCreateDesc Item_Hydro_Data;
 
 GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Hydro_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
@@ -369,8 +369,8 @@ GObj *func_ovl3_80180EDC(GObj *article_gobj, Vec3f *pos)
     {
         joint->rotate.y = PI32;
     }
-    ip->item_vars.hydro.unk_0x0 = 0; // Set but never used?
-    ip->item_vars.hydro.unk_0x4 = 0; // Set but never used?
+    ip->weapon_vars.hydro.unk_0x0 = 0; // Set but never used?
+    ip->weapon_vars.hydro.unk_0x4 = 0; // Set but never used?
 
     ip->lifetime = ATKAMEX_HYDRO_LIFETIME;
 

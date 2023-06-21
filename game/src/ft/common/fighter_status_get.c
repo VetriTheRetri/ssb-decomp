@@ -19,7 +19,7 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
 
     while (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         if (ap->is_allow_pickup)
         {
@@ -82,13 +82,13 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
-        if (ap->type == At_Type_Special)
+        if (ap->type == It_Type_Special)
         {
-            switch (ap->at_kind)
+            switch (ap->it_kind)
             {
-            case At_Kind_Tomato:
+            case It_Kind_Tomato:
                 ftCommon_ApplyDamageHeal(fp, ATTOMATO_DAMAGE_HEAL);
                 func_ovl3_801728D4(article_gobj);
 
@@ -98,7 +98,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
                 }
                 break;
 
-            case At_Kind_Heart:
+            case It_Kind_Heart:
                 ftCommon_ApplyDamageHeal(fp, ATHEART_DAMAGE_HEAL);
                 func_ovl3_801728D4(article_gobj);
 
@@ -108,7 +108,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
                 }
                 break;
 
-            case At_Kind_Hammer:
+            case It_Kind_Hammer:
                 fp->hammer_timer = ATHAMMER_TIME;
 
                 ftSpecialItem_BGMSetPlay(ATHAMMER_BGM_ID);
@@ -173,13 +173,13 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 
             if (article_gobj != NULL)
             {
-                Article_Struct *ap = atGetStruct(article_gobj);
+                Item_Struct *ap = itGetStruct(article_gobj);
 
-                if (ap->type == At_Type_Special)
+                if (ap->type == It_Type_Special)
                 {
                     ftCommon_Get_ApplyItemStats(fighter_gobj);
 
-                    if (ap->at_kind == At_Kind_Hammer)
+                    if (ap->it_kind == It_Kind_Hammer)
                     {
                         ftCommon_HammerWait_SetStatus(fighter_gobj);
 
@@ -244,7 +244,7 @@ void ftCommon_HeavyThrow_ProcMap(GObj *fighter_gobj)
 void ftCommon_Get_SetStatus(GObj *fighter_gobj, GObj *article_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 

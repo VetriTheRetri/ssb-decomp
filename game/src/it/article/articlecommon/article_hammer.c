@@ -7,7 +7,7 @@ void func_ovl3_80176110(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80176134(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATHAMMER_GRAVITY, ATHAMMER_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -27,7 +27,7 @@ bool32 jtgt_ovl3_80176194(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.5F, 0.2F, func_ovl3_801761C4);
 }
 
-extern ArticleStatusDesc Article_Hammer_Status[];
+extern itStatusDesc Article_Hammer_Status[];
 
 void func_ovl3_801761C4(GObj *article_gobj)
 {
@@ -35,11 +35,11 @@ void func_ovl3_801761C4(GObj *article_gobj)
     atCommon_UpdateArticleStatus(article_gobj, Article_Hammer_Status, 0);
 }
 
-extern ArticleStatusDesc Article_Hammer_Status[];
+extern itStatusDesc Article_Hammer_Status[];
 
 void func_ovl3_801761F8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -56,7 +56,7 @@ void jtgt_ovl3_8017623C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80176270(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATHAMMER_GRAVITY, ATHAMMER_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -71,7 +71,7 @@ bool32 jtgt_ovl3_801762A8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801762D8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -104,7 +104,7 @@ void jtgt_ovl3_80176378(GObj *article_gobj)
     ftSpecialItem_BGMCheckFighters();
 }
 
-extern ArticleSpawnData Article_Hammer_Data;
+extern itCreateDesc Article_Hammer_Data;
 
 GObj *jtgt_ovl3_801763C8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -112,7 +112,7 @@ GObj *jtgt_ovl3_801763C8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         DObjGetStruct(article_gobj)->rotate.y = HALF_PI32;
 

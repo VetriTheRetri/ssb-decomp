@@ -2956,7 +2956,7 @@ void func_ovl2_800DF014(GObj *fighter_gobj, Vec3f *pos, Coll_Data *coll_data)
 
 void func_ovl2_800DF058(GObj *article_gobj, Vec3f *pos, Coll_Data *coll_data)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl2_800DEFBC(&ap->coll_data, pos, coll_data);
     func_ovl2_800DEEF4(&ap->coll_data, article_gobj, 0);

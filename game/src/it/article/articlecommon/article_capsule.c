@@ -2,7 +2,7 @@
 
 bool32 jtgt_ovl3_80173F90(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATCAPSULE_GRAVITY, ATCAPSULE_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -33,7 +33,7 @@ bool32 jtgt_ovl3_80174030(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.2F, 0.4F, func_ovl3_80174064);
 }
 
-extern ArticleStatusDesc Article_Capsule_Status[]; // Capsule states
+extern itStatusDesc Article_Capsule_Status[]; // Capsule states
 
 void func_ovl3_80174064(GObj *article_gobj)
 {
@@ -43,7 +43,7 @@ void func_ovl3_80174064(GObj *article_gobj)
 
 void func_ovl3_80174098(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -63,7 +63,7 @@ void jtgt_ovl3_801740FC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80174124(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATCAPSULE_GRAVITY, ATCAPSULE_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -86,7 +86,7 @@ bool32 jtgt_ovl3_80174160(GObj *article_gobj)
 
 void jtgt_ovl3_801741B0(GObj *article_gobj) // Capsule gets thrown
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_damage_all = TRUE;
 
@@ -114,11 +114,11 @@ void jtgt_ovl3_80174248(GObj *article_gobj)
 
 extern u8 D_NF_00000098;
 
-extern ArticleSpawnData Article_Capsule_Data;
+extern itCreateDesc Article_Capsule_Data;
 
 bool32 jtgt_ovl3_80174270(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi++;
 
@@ -137,7 +137,7 @@ GObj* jtgt_ovl3_801742CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(gobj);
+        Item_Struct *ap = itGetStruct(gobj);
 
         ap->x2D3_flag_b5 = TRUE;
 
@@ -148,7 +148,7 @@ GObj* jtgt_ovl3_801742CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 void func_ovl3_80174340(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi = 0;
     ap->x340_flag_b0123 = 0;
@@ -157,7 +157,7 @@ void func_ovl3_80174340(GObj *article_gobj)
 
     func_800269C0(1U);
 
-    ap->article_hit.can_rehit_hurt = TRUE;
+    ap->article_hit.can_rehit_item = TRUE;
     ap->article_hit.can_hop = FALSE;
     ap->article_hit.can_reflect = FALSE;
 
@@ -180,7 +180,7 @@ void func_ovl3_801743F4(GObj *article_gobj)
 
 void func_ovl3_80174428(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Effect_Unk *ep;
 

@@ -14,7 +14,7 @@ const Vec3f Fighter_LGunShoot_Dust_Offset = { FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_
 void ftCommon_LGunShoot_ProcAccessory(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Article_Struct *ap;
+    Item_Struct *ap;
     f32 size_mul;
     Vec3f spawn_ammo_offset;
     Vec3f spawn_gfx_offset;
@@ -22,7 +22,7 @@ void ftCommon_LGunShoot_ProcAccessory(GObj *fighter_gobj)
 
     if ((fp->item_hold != NULL) && (fp->command_vars.flags.flag0 != 0))
     {
-        ap = atGetStruct(fp->item_hold);
+        ap = itGetStruct(fp->item_hold);
 
         if (ap->at_multi != 0)
         {
@@ -109,7 +109,7 @@ const Vec3f Fighter_FireFlowerShoot_Ammo_Offset = { FTCOMMON_FIREFLOWERSHOOT_AMM
 // 0x801472D4
 void ftCommon_FireFlowerShoot_UpdateAmmoStats(Fighter_Struct *fp, s32 ammo_sub)
 {
-    Article_Struct *ap = atGetStruct(fp->item_hold);
+    Item_Struct *ap = itGetStruct(fp->item_hold);
     Vec3f flame_spawn_offset = Fighter_FireFlowerShoot_Ammo_Offset;
     f32 size_mul;
     s32 flame_vel_index;
@@ -161,7 +161,7 @@ const Vec3f Fighter_FireFlowerShoot_Kickup_Offset        = { 0.0F, 0.0F, -180.0F
 void ftCommon_FireFlowerShoot_ProcAccessory(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Article_Struct *ap;
+    Item_Struct *ap;
     s32 ammo_sub;
     Vec3f gfx_haveammo_offset;
     Vec3f gfx_noammo_offset;
@@ -185,7 +185,7 @@ void ftCommon_FireFlowerShoot_ProcAccessory(GObj *fighter_gobj)
     {
         if (fp->command_vars.flags.flag0 != 0)
         {
-            ap = atGetStruct(fp->item_hold);
+            ap = itGetStruct(fp->item_hold);
 
             ammo_sub = (fp->status_vars.common.fireflower.ammo_fire_count == 0) ? 2 : 1;
 
@@ -293,18 +293,18 @@ void ftCommon_FireFlowerShoot_InitStatusVars(Fighter_Struct *fp)
 void ftCommon_ItemShoot_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Article_Struct *ap = atGetStruct(fp->item_hold);
+    Item_Struct *ap = itGetStruct(fp->item_hold);
     s32 status_id;
     void (*proc_accessory)(GObj*);
 
-    switch (ap->at_kind)
+    switch (ap->it_kind)
     {
-    case At_Kind_L_Gun:
+    case It_Kind_L_Gun:
         status_id = ftStatus_Common_LGunShoot;
         proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;
 
-    case At_Kind_F_Flower:
+    case It_Kind_F_Flower:
         status_id = ftStatus_Common_FireFlowerShoot;
         proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
         break;
@@ -323,18 +323,18 @@ void ftCommon_ItemShoot_SetStatus(GObj *fighter_gobj)
 void ftCommon_ItemShootAir_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Article_Struct *ap = atGetStruct(fp->item_hold);
+    Item_Struct *ap = itGetStruct(fp->item_hold);
     s32 status_id;
     void (*proc_accessory)(GObj*);
 
-    switch (ap->at_kind)
+    switch (ap->it_kind)
     {
-    case At_Kind_L_Gun:
+    case It_Kind_L_Gun:
         status_id = ftStatus_Common_LGunShootAir;
         proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;
 
-    case At_Kind_F_Flower:
+    case It_Kind_F_Flower:
         status_id = ftStatus_Common_FireFlowerShootAir;
         proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
         break;

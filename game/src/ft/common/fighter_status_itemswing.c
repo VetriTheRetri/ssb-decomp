@@ -8,9 +8,9 @@ void ftCommon_HarisenSwing_ProcHit(GObj *fighter_gobj)
 
     if (fp->item_hold != NULL)
     {
-        Article_Struct *ap = atGetStruct(fp->item_hold);
+        Item_Struct *ap = itGetStruct(fp->item_hold);
 
-        if (ap->at_kind == At_Kind_Harisen)
+        if (ap->it_kind == It_Kind_Harisen)
         {
             func_ovl3_80175140(fp->item_hold, FTCOMMON_HARISENSWING_SCALE_HIT);
 
@@ -46,7 +46,7 @@ const Vec3f Fighter_StarRodSwing_Dust_Offset = { 0.0F, 200.0F, 0.0F };
 void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Article_Struct *ap;
+    Item_Struct *ap;
     f32 scale_mul;
     s32 unused;
 
@@ -54,7 +54,7 @@ void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
     {
         if (fp->command_vars.flags.flag1 != 0)
         {
-            ap = atGetStruct(fp->item_hold);
+            ap = itGetStruct(fp->item_hold);
 
             if (ap->at_multi != 0)
             {
@@ -67,7 +67,7 @@ void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
     }
     if ((fp->item_hold != NULL) && (fp->command_vars.flags.flag0 != 0))
     {
-        ap = atGetStruct(fp->item_hold);
+        ap = itGetStruct(fp->item_hold);
 
         if (ap->at_multi != 0)
         {
@@ -108,26 +108,26 @@ s32 Fighter_ItemSwing_Status[4][4] =
 void ftCommon_ItemSwing_SetStatus(GObj *fighter_gobj, s32 swing_type)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Article_Struct *ap = atGetStruct(fp->item_hold);
+    Item_Struct *ap = itGetStruct(fp->item_hold);
     s32 swing_item;
     s32 status_id;
     f32 anim_speed;
 
-    switch (ap->at_kind)
+    switch (ap->it_kind)
     {
-    case At_Kind_Sword:
+    case It_Kind_Sword:
         swing_item = 0;
         break;
 
-    case At_Kind_Bat:
+    case It_Kind_Bat:
         swing_item = 1;
         break;
 
-    case At_Kind_Harisen:
+    case It_Kind_Harisen:
         swing_item = 2;
         break;
 
-    case At_Kind_StarRod:
+    case It_Kind_StarRod:
         swing_item = 3;
         break;
     }

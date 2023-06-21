@@ -4,7 +4,7 @@
 
 void func_ovl3_80172310(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->rotate_speed = (ap->attributes->spin_speed != 0) ? (ap->attributes->spin_speed * ARTICLE_SPIN_SPEED_FRACTION_DEFAULT * ARTICLE_SPIN_SPEED_MUL_DEFAULT) : 0.0F;
 
@@ -18,7 +18,7 @@ void func_ovl3_80172394(GObj *article_gobj, bool32 is_prev_spawn)
 {
     // is_prev_spawn = whether article is newly spawned or previously spawned; 0 = new, 1 = old
 
-    Article_Struct *ap = atGetStruct(article_gobj); // Ternary doesn't match here smh
+    Item_Struct *ap = itGetStruct(article_gobj); // Ternary doesn't match here smh
 
     if (is_prev_spawn == FALSE)
     {
@@ -37,7 +37,7 @@ void func_ovl3_80172394(GObj *article_gobj, bool32 is_prev_spawn)
 
 void func_ovl3_8017245C(GObj *article_gobj, f32 *spin_speed, bool32 is_smash_throw)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->rotate_speed = (is_smash_throw != FALSE) ? ARTICLE_SPIN_SPEED_SET_SMASH_THROW : ARTICLE_SPIN_SPEED_SET_NORMAL_THROW;
 
@@ -51,14 +51,14 @@ void func_ovl3_8017245C(GObj *article_gobj, f32 *spin_speed, bool32 is_smash_thr
 
 void func_ovl3_80172508(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->lr = (ap->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
 
     func_ovl3_80172310(article_gobj);
 }
 
-void func_ovl3_80172558(Article_Struct *ap, f32 gravity, f32 terminal_velocity)
+void func_ovl3_80172558(Item_Struct *ap, f32 gravity, f32 terminal_velocity)
 {
     ap->phys_info.vel.y -= gravity;
 
@@ -73,7 +73,7 @@ extern s32 dbObjDisplayStatus_Global_Article; // Static (.bss)
 
 void func_ovl3_801725BC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->owner_gobj = NULL;
     ap->team = ARTICLE_TEAM_DEFAULT;
@@ -85,7 +85,7 @@ void func_ovl3_801725BC(GObj *article_gobj)
     ap->display_state = dbObjDisplayStatus_Global_Article;
 }
 
-void func_ovl3_801725F8(Article_Struct *ap)
+void func_ovl3_801725F8(Item_Struct *ap)
 {
     s32 i;
 
@@ -105,7 +105,7 @@ void func_ovl3_801725F8(Article_Struct *ap)
 
 void func_ovl3_8017275C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_801725F8(ap);
 
@@ -116,7 +116,7 @@ void func_ovl3_8017275C(GObj *article_gobj)
 
 void func_ovl3_8017279C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_damage_all = TRUE;
 
@@ -127,7 +127,7 @@ void func_ovl3_8017279C(GObj *article_gobj)
 
 void func_ovl3_801727BC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->owner_gobj = ap->damage_gobj;
     ap->team = ap->damage_team;
@@ -137,7 +137,7 @@ void func_ovl3_801727BC(GObj *article_gobj)
     ap->display_state = ap->damage_display_state;
 }
 
-s32 func_ovl3_801727F4(Article_Struct *ap)
+s32 func_ovl3_801727F4(Item_Struct *ap)
 {
     s32 damage;
 
@@ -155,9 +155,9 @@ s32 func_ovl3_801727F4(Article_Struct *ap)
 // 0x80172890
 bool32 atCommon_CheckTypeShootEmpty(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
-    if (((ap->at_kind == At_Kind_StarRod) || (ap->at_kind == At_Kind_L_Gun) || (ap->at_kind == At_Kind_F_Flower)) && (ap->at_multi == 0))
+    if (((ap->it_kind == It_Kind_StarRod) || (ap->it_kind == It_Kind_L_Gun) || (ap->it_kind == It_Kind_F_Flower)) && (ap->at_multi == 0))
     {
         return TRUE;
     }
@@ -166,7 +166,7 @@ bool32 atCommon_CheckTypeShootEmpty(GObj *article_gobj)
 
 void func_ovl3_801728D4(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if ((ap->is_hold) && (ap->owner_gobj != NULL))
     {
@@ -176,7 +176,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
 
         ftCommon_GetHammerSetBGM(ap->owner_gobj);
     }
-    else if ((ap->at_kind < At_Kind_Gr_Lucky) || (ap->at_kind > At_Kind_GrMonsterEnd))
+    else if ((ap->it_kind < It_Kind_Gr_Lucky) || (ap->it_kind > It_Kind_GrMonsterEnd))
     {
         func_ovl2_800FF590(&DObjGetStruct(article_gobj)->translate);
     }
@@ -190,7 +190,7 @@ void func_ovl3_801728D4(GObj *article_gobj)
 
 void func_ovl3_80172984(GObj *article_gobj, Vec3f *vel, f32 stale, u16 flag1, u16 flag2) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *fighter_gobj = ap->owner_gobj;
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
@@ -236,10 +236,10 @@ extern void (*Article_Callback_Drop[])(GObj*); // Assumed to contain 45 callback
 
 void func_ovl3_80172AEC(GObj *article_gobj, Vec3f *vel, f32 stale)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *owner_gobj = ap->owner_gobj;
     Fighter_Struct *fp = ftGetStruct(owner_gobj);
-    void (*proc_drop)(GObj*) = Article_Callback_Drop[ap->at_kind];
+    void (*proc_drop)(GObj*) = Article_Callback_Drop[ap->it_kind];
 
     if (proc_drop != NULL)
     {
@@ -254,7 +254,7 @@ extern void (*Article_Callback_Throw[])(GObj*);
 
 void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_smash_throw)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *owner_gobj = ap->owner_gobj;
     Fighter_Struct *fp = ftGetStruct(owner_gobj);
     void (*cb_throw)(GObj*);
@@ -270,7 +270,7 @@ void func_ovl3_80172B78(GObj *article_gobj, Vec3f *vel, f32 stale, bool32 is_sma
     {
         func_ovl2_800E806C(fp, ((is_smash_throw != FALSE) ? 9 : 6), 0);
     }
-    cb_throw = Article_Callback_Throw[ap->at_kind];
+    cb_throw = Article_Callback_Throw[ap->it_kind];
 
     if (cb_throw != NULL)
     {
@@ -290,7 +290,7 @@ extern void (*Article_Callback_Pickup[])(GObj*);
 // 0x80172CA4
 void atCommon_PickupSetHoldFighter(GObj *article_gobj, GObj *fighter_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *joint;
     void (*cb_pickup)(GObj*);
@@ -342,7 +342,7 @@ void atCommon_PickupSetHoldFighter(GObj *article_gobj, GObj *fighter_gobj)
 
     func_8000F988(article_gobj, ap->attributes->unk_0x0);
 
-    cb_pickup = Article_Callback_Pickup[ap->at_kind];
+    cb_pickup = Article_Callback_Pickup[ap->it_kind];
 
     if (cb_pickup != NULL)
     {
@@ -368,7 +368,7 @@ void atCommon_PickupSetHoldFighter(GObj *article_gobj, GObj *fighter_gobj)
 
 void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded?
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -384,9 +384,9 @@ void func_ovl3_80172E74(GObj *article_gobj) // Airborne article becomes grounded
 }
 
 // 0x80172EC8
-void atCommon_UpdateArticleStatus(GObj *article_gobj, ArticleStatusDesc *p_desc, s32 status_id) // Change article state
+void atCommon_UpdateArticleStatus(GObj *article_gobj, itStatusDesc *p_desc, s32 status_id) // Change article state
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->proc_update = p_desc[status_id].proc_update;
     ap->proc_map = p_desc[status_id].proc_map;
@@ -408,21 +408,21 @@ void atCommon_UpdateArticleStatus(GObj *article_gobj, ArticleStatusDesc *p_desc,
 // 0x80172F98
 bool32 atCommon_CheckSetColAnimIndex(GObj *article_gobj, s32 colanim_id, s32 duration)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     return caCheckSetColAnimIndex(&ap->colanim, colanim_id, duration);
 }
 
 void func_ovl3_80172FBC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     caResetColAnim(&ap->colanim);
 }
 
 void func_ovl3_80172FE0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->phys_info.vel.x *= -0.06F;
 
@@ -487,10 +487,10 @@ bool32 func_ovl3_801730D4(GObj *gobj)
     {
         index = func_ovl3_80173090(&D_ovl3_8018D048);
 
-        if (index <= At_Kind_CommonEnd)
+        if (index <= It_Kind_CommonEnd)
         {
             vel.x = 0.0F;
-            vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&Article_File_Data->spawn_vel_y[index])); // Linker thing
+            vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&gItemFileData->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
             if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE)) != NULL)
@@ -505,7 +505,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
 
 void func_ovl3_80173180(GObj *article_gobj, ArticleHitEvent *event)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (event[ap->x340_flag_b0123].timer == ap->at_multi)
     {
@@ -526,9 +526,9 @@ extern s8 gmBonusStat_MewCatcher;
 
 GObj* func_ovl3_80173228(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *monster_gobj;
-    Article_Struct *mp;
+    Item_Struct *mp;
     s32 i, j;
     s32 index;
     s32 unused;
@@ -540,17 +540,17 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
 
     // Is this checking to spawn Mew?
 
-    if ((Save_Info.unlock_mask & 0xF) && ((rand_u16_range(151) == 0)) && (Monster_Info.monster_curr != At_Kind_Mew) && (Monster_Info.monster_prev != At_Kind_Mew))
+    if ((Save_Info.unlock_mask & 0xF) && ((rand_u16_range(151) == 0)) && (Monster_Info.monster_curr != It_Kind_Mew) && (Monster_Info.monster_prev != It_Kind_Mew))
     {
-        index = At_Kind_Mew;
+        index = It_Kind_Mew;
     }
     else
     {
-        for (i = j = At_Kind_MonsterStart; i < At_Kind_Mew; i++) // Pokémon IDs
+        for (i = j = It_Kind_MonsterStart; i < It_Kind_Mew; i++) // Pokémon IDs
         {
             if ((i != Monster_Info.monster_curr) && (i != Monster_Info.monster_prev))
             {
-                Monster_Info.monster_index[j - At_Kind_MonsterStart] = i;
+                Monster_Info.monster_index[j - It_Kind_MonsterStart] = i;
                 j++;
             }
         }
@@ -567,7 +567,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
 
     if (monster_gobj != NULL)
     {
-        mp = atGetStruct(monster_gobj);
+        mp = itGetStruct(monster_gobj);
         mp->owner_gobj = ap->owner_gobj;
         mp->team = ap->team;
         mp->port_id = ap->port_id;
@@ -577,7 +577,7 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
 
         if (Match_Info->game_type == gmMatch_GameType_1PGame)
         {
-            if ((mp->port_id == Scene_Info.player_port) && (mp->at_kind == At_Kind_Mew))
+            if ((mp->port_id == Scene_Info.player_port) && (mp->it_kind == It_Kind_Mew))
             {
                 gmBonusStat_MewCatcher = TRUE;
             }
@@ -586,9 +586,10 @@ GObj* func_ovl3_80173228(GObj *article_gobj)
     return monster_gobj;
 }
 
-bool32 jtgt_ovl3_801733E4(GObj *article_gobj)
+// 0x801733E4
+bool32 itCommon_Default_ProcHop(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_80019438(&ap->phys_info.vel, &ap->shield_collide_vec, ap->shield_collide_angle * 2);
     func_ovl3_80172508(article_gobj);
@@ -596,9 +597,10 @@ bool32 jtgt_ovl3_801733E4(GObj *article_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80173434(GObj *article_gobj)
+// 0x80173434
+bool32 itCommon_Default_ProcReflector(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Fighter_Struct *fp = ftGetStruct(ap->owner_gobj);
 
     if ((ap->phys_info.vel.x * fp->lr) < 0.0F)

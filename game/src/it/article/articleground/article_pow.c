@@ -9,15 +9,15 @@ bool32 func_ovl3_8017C090(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleStatusDesc Article_POW_Status[];
+extern itStatusDesc Article_POW_Status[];
 
 void func_ovl3_8017C0D4(GObj *article_gobj)
 {
-    Article_Struct *ap;
+    Item_Struct *ap;
 
     atCommon_UpdateArticleStatus(article_gobj, Article_POW_Status, 0);
 
-    ap = atGetStruct(article_gobj), ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ap = itGetStruct(article_gobj), ap->article_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
 bool32 func_ovl3_8017C110(GObj *article_gobj)
@@ -36,7 +36,7 @@ extern intptr_t D_NF_00001288;
 
 bool32 func_ovl3_8017C15C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->proc_update = func_ovl3_8017C110;
     ap->article_hurt.hitstatus = gmHitCollision_HitStatus_None;
@@ -50,7 +50,7 @@ bool32 func_ovl3_8017C15C(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleSpawnData Article_POW_Data;
+extern itCreateDesc Article_POW_Data;
 
 GObj* jtgt_ovl3_8017C1E0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -58,7 +58,7 @@ GObj* jtgt_ovl3_8017C1E0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->article_hurt.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
     }

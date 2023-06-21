@@ -4,8 +4,8 @@
 #include "gmmatch.h"
 #include "gmground.h"
 
-extern Article_Struct *itManager_Global_CurrentUserData;
-extern void *Article_File_Data;
+extern Item_Struct *itManager_Global_CurrentUserData;
+extern void *gItemFileData;
 extern intptr_t D_NF_000000FB;
 extern intptr_t D_NF_00B1BCA0;
 extern intptr_t D_NF_00B1BDE0;
@@ -18,10 +18,10 @@ extern s32 dbObjDisplayStatus_Global_Article;
 // 0x8016DEA0
 void itManager_AllocUserData(void) // Many linker things here
 {
-    Article_Struct *ap;
+    Item_Struct *ap;
     s32 i;
 
-    itManager_Global_CurrentUserData = ap = hal_alloc(sizeof(Article_Struct) * ARTICLE_ALLOC_MAX, 8U);
+    itManager_Global_CurrentUserData = ap = hal_alloc(sizeof(Item_Struct) * ARTICLE_ALLOC_MAX, 8U);
 
     for (i = 0; i < (ARTICLE_ALLOC_MAX - 1); i++)
     {
@@ -32,7 +32,7 @@ void itManager_AllocUserData(void) // Many linker things here
     {
         ap[i].ap_alloc_next = NULL;
     }
-    Article_File_Data = rldm_get_file_with_external_heap(&D_NF_000000FB, hal_alloc(rldm_bytes_needed_to_load(&D_NF_000000FB), 0x10U));
+    gItemFileData = rldm_get_file_with_external_heap(&D_NF_000000FB, hal_alloc(rldm_bytes_needed_to_load(&D_NF_000000FB), 0x10U));
 
     D_ovl3_8018D044 = func_ovl2_801159F8(&D_NF_00B1BCA0, &D_NF_00B1BDE0, &D_NF_00B1BDE0_other, &D_NF_00B1E640);
 
@@ -44,10 +44,10 @@ void itManager_AllocUserData(void) // Many linker things here
 }
 
 // 0x8016DFAC
-Article_Struct* itManager_GetStructSetNextAlloc(void) // Set global Article user_data link pointer to next member
+Item_Struct* itManager_GetStructSetNextAlloc(void) // Set global Article user_data link pointer to next member
 {
-    Article_Struct *next_article = itManager_Global_CurrentUserData;
-    Article_Struct *current_article;
+    Item_Struct *next_article = itManager_Global_CurrentUserData;
+    Item_Struct *current_article;
 
     if (next_article == NULL)
     {
@@ -61,7 +61,7 @@ Article_Struct* itManager_GetStructSetNextAlloc(void) // Set global Article user
 }
 
 // 0x8016DFDC
-void itManager_SetPrevAlloc(Article_Struct *ap) // Set global Article user_data link pointer to previous member
+void itManager_SetPrevAlloc(Item_Struct *ap) // Set global Article user_data link pointer to previous member
 {
     ap->ap_alloc_next = itManager_Global_CurrentUserData;
 
@@ -111,9 +111,9 @@ void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 
 extern u16 D_ovl2_80131398;
 
 // 0x8016E174
-GObj* itManager_CreateItem(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    Article_Struct *ap = itManager_GetStructSetNextAlloc();
+    Item_Struct *ap = itManager_GetStructSetNextAlloc();
     GObj *article_gobj;
     atCommonAttributes *attributes;
     void (*cb_render)(GObj*);
@@ -144,7 +144,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f
     article_gobj->user_data = ap;
     ap->article_gobj = article_gobj;
     ap->owner_gobj = NULL;
-    ap->at_kind = spawn_data->at_kind;
+    ap->it_kind = spawn_data->it_kind;
     ap->type = attributes->type;
     ap->phys_info.vel = *vel;
     ap->phys_info.vel_ground = 0.0F;
@@ -207,8 +207,8 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f
     ap->article_hit.shield_damage = attributes->shield_damage;
     ap->article_hit.hit_sfx = attributes->hit_sfx;
     ap->article_hit.priority = attributes->priority;
-    ap->article_hit.can_rehit_hurt = attributes->can_rehit_hurt;
-    ap->article_hit.flags_0x4C_b2 = attributes->unk_atca_0x3C_b5;
+    ap->article_hit.can_rehit_item = attributes->can_rehit_item;
+    ap->article_hit.can_rehit_fighter = attributes->can_rehit_fighter;
     ap->article_hit.can_rehit_shield = FALSE;
     ap->article_hit.can_hop = attributes->can_hop;
     ap->article_hit.can_reflect = attributes->can_reflect;
@@ -317,7 +317,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, ArticleSpawnData *spawn_data, Vec3f
             break;
 
         case ARTICLE_MASK_SPAWN_ARTICLE:
-            func_ovl2_800DF058(article_gobj, atGetStruct(spawn_gobj)->coll_data.p_translate, &atGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF058(article_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
             break;
         }
     }
@@ -339,7 +339,7 @@ GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *vel, 
 
     if (new_gobj != NULL)
     {
-        if (index < At_Kind_FighterStart)
+        if (index < It_Kind_FighterStart)
         {
             func_ovl2_801044B4(pos);
             func_ovl3_80172394(new_gobj, FALSE);
@@ -349,7 +349,7 @@ GObj* func_ovl3_8016EA78(GObj *article_gobj, s32 index, Vec3f *pos, Vec3f *vel, 
 }
 
 // 0x8016EA78
-Article_Struct* itManager_GetCurrentStructAlloc(void)
+Item_Struct* itManager_GetCurrentStructAlloc(void)
 {
     return itManager_Global_CurrentUserData;
 }
@@ -425,7 +425,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 item_count = 0;
 
-                for (i = 0; i < At_Kind_FighterStart; i++, item_bits_2 >>= 1)
+                for (i = 0; i < It_Kind_FighterStart; i++, item_bits_2 >>= 1)
                 {
                     if (item_bits_2 & 1)
                     {
@@ -469,7 +469,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 unk_0x84 = Ground_Info->unk_0x84;
 
-                for (i = 0, j = 0; i < At_Kind_FighterStart; i++, item_bits >>= 1)
+                for (i = 0, j = 0; i < It_Kind_FighterStart; i++, item_bits >>= 1)
                 {
                     if ((item_bits & 1) && (unk_0x84->byte[i] != 0))
                     {
@@ -484,7 +484,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 item_count_2 = 0;
 
-                for (i = 0, j = 0; i < At_Kind_FighterStart; i++, item_bits_3 >>= 1)
+                for (i = 0, j = 0; i < It_Kind_FighterStart; i++, item_bits_3 >>= 1)
                 {
                     if ((item_bits_3 & 1) && (unk_0x84->byte[i] != 0))
                     {
@@ -547,7 +547,7 @@ void func_ovl3_8016EF40(void)
 
             temp_t1 = Ground_Info->unk_0x84;
 
-            for (j = 0, i = 4; i < At_Kind_FighterStart; i++, item_bits_2 >>= 1)
+            for (j = 0, i = 4; i < It_Kind_FighterStart; i++, item_bits_2 >>= 1)
             {
                 if ((item_bits_2 & 1) && (temp_t1->byte[i] != 0))
                 {
@@ -564,7 +564,7 @@ void func_ovl3_8016EF40(void)
 
             item_count_2 = 0;
 
-            for (j = 0, i = 4; i < At_Kind_FighterStart; i += 4, item_bits_2 >>= 1)
+            for (j = 0, i = 4; i < It_Kind_FighterStart; i += 4, item_bits_2 >>= 1)
             {
                 if ((item_bits_2 & 1) && (temp_t1->byte[i] != 0))
                 {
@@ -626,7 +626,7 @@ void func_ovl3_8016EF40(void)
 void itManager_InitMonsterVars(void)
 {
     Monster_Info.monster_curr = Monster_Info.monster_prev = U8_MAX;
-    Monster_Info.monster_count = (At_Kind_MonsterEnd - At_Kind_MonsterStart);
+    Monster_Info.monster_count = (It_Kind_MonsterEnd - It_Kind_MonsterStart);
 }
 
 GObj* func_ovl3_8016F238(GObj *spawn_gobj, s32 index, Vec3f *pos, Vec3f *vel, u32 flags)
@@ -637,7 +637,7 @@ GObj* func_ovl3_8016F238(GObj *spawn_gobj, s32 index, Vec3f *pos, Vec3f *vel, u3
 // 0x8016F280
 void itManager_UpdateHitPositions(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     s32 i;
 
     for (i = 0; i < ap->article_hit.hitbox_count; i++)
@@ -678,9 +678,9 @@ void itManager_UpdateHitPositions(GObj *article_gobj)
 // 0x8016F3D4
 void itManager_UpdateHitVictimRecord(GObj *article_gobj)
 {
-    Article_Struct *ip = atGetStruct(article_gobj);
+    Item_Struct *ip = itGetStruct(article_gobj);
     ArticleHitArray *targets;
-    Article_Hit *at_hit;
+    Item_Hit *at_hit;
     s32 i;
 
     at_hit = &ip->article_hit;
@@ -714,7 +714,7 @@ void itManager_UpdateHitVictimRecord(GObj *article_gobj)
 // 0x8016F534
 void itManager_ProcItemMain(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Vec3f *translate;
     DObj *joint;
 
@@ -838,7 +838,7 @@ void itManager_ProcItemMain(GObj *article_gobj)
 }
 
 // 0x8016F930
-void itManager_UpdateHitVictimInteractStats(Article_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type, u32 interact_mask)
+void itManager_UpdateHitVictimInteractStats(Item_Hit *at_hit, GObj *victim_gobj, s32 hitbox_type, u32 interact_mask)
 {
     s32 i;
 
@@ -928,7 +928,7 @@ void itManager_UpdateHitVictimInteractStats(Article_Hit *at_hit, GObj *victim_go
 }
 
 // 0x8016FB18 - Article's hurtbox gets hit by a fighter
-void itManager_UpdateDamageStatFighter(Fighter_Struct *fp, Fighter_Hit *ft_hit, Article_Struct *ap, Article_Hurt *at_hurt, GObj *fighter_gobj, GObj *article_gobj)
+void itManager_UpdateDamageStatFighter(Fighter_Struct *fp, Fighter_Hit *ft_hit, Item_Struct *ap, Article_Hurt *at_hurt, GObj *fighter_gobj, GObj *article_gobj)
 {
     s32 damage;
     f32 damage_knockback;
@@ -995,7 +995,7 @@ void itManager_UpdateDamageStatFighter(Fighter_Struct *fp, Fighter_Hit *ft_hit, 
 }
 
 // 0x8016FD4C
-void itManager_UpdateAttackStatItem(Article_Struct *this_ap, Article_Hit *this_hit, s32 this_hit_id, Article_Struct *victim_ap, Article_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
+void itManager_UpdateAttackStatItem(Item_Struct *this_ap, Item_Hit *this_hit, s32 this_hit_id, Item_Struct *victim_ap, Item_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
 {
     s32 victim_hit_damage;
     s32 this_hit_damage;
@@ -1037,7 +1037,7 @@ void itManager_UpdateAttackStatItem(Article_Struct *this_ap, Article_Hit *this_h
 }
 
 // 0x8016FE4C
-void itManager_UpdateAttackStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 wp_hit_id, Article_Struct *ap, Article_Hit *at_hit, s32 at_hit_id, GObj *weapon_gobj, GObj *article_gobj)
+void itManager_UpdateAttackStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 wp_hit_id, Item_Struct *ap, Item_Hit *at_hit, s32 at_hit_id, GObj *weapon_gobj, GObj *article_gobj)
 {
     s32 wp_hit_damage = wpMain_DamageApplyStale(ip);
     s32 at_hit_damage = func_ovl3_801727F4(ap);
@@ -1076,7 +1076,7 @@ void itManager_UpdateAttackStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
 }
 
 // 0x8016FF4C - Article's hurtbox gets hit by another article
-void itManager_UpdateDamageStatItem(Article_Struct *attack_ap, Article_Hit *attack_at_hit, s32 arg2, Article_Struct *defend_ap, Article_Hurt *at_hurt, GObj *attack_gobj, GObj *defend_gobj)
+void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_at_hit, s32 arg2, Item_Struct *defend_ap, Article_Hurt *at_hurt, GObj *attack_gobj, GObj *defend_gobj)
 {
     s32 damage;
     f32 launch_angle;
@@ -1088,7 +1088,7 @@ void itManager_UpdateDamageStatItem(Article_Struct *attack_ap, Article_Hit *atta
 
     damage = func_ovl3_801727F4(attack_ap);
 
-    unk_bool = (((defend_ap->type == At_Type_Ground) && (attack_at_hit->can_rehit_hurt)) ? TRUE : FALSE);
+    unk_bool = (((defend_ap->type == It_Type_Ground) && (attack_at_hit->can_rehit_item)) ? TRUE : FALSE);
 
     itManager_UpdateHitVictimInteractStats(attack_at_hit, defend_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt), 0);
 
@@ -1179,7 +1179,7 @@ void itManager_UpdateDamageStatItem(Article_Struct *attack_ap, Article_Hit *atta
 }
 
 // 0x801702C8 - Article's hurtbox gets hit by an item
-void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Article_Struct *ap, Article_Hurt *at_hurt, GObj *weapon_gobj, GObj *article_gobj)
+void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Item_Struct *ap, Article_Hurt *at_hurt, GObj *weapon_gobj, GObj *article_gobj)
 {
     s32 damage;
     s32 unused;
@@ -1191,7 +1191,7 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
 
     damage = wpMain_DamageApplyStale(ip);
 
-    unk_bool = ((ap->type == At_Type_Ground) && (wp_hit->can_rehit_hurt)) ? TRUE : FALSE;
+    unk_bool = ((ap->type == It_Type_Ground) && (wp_hit->can_rehit_item)) ? TRUE : FALSE;
 
     func_ovl3_8016679C(ip, wp_hit, article_gobj, ((unk_bool != FALSE) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt), 0);
 
@@ -1284,7 +1284,7 @@ void itManager_SearchHitFighter(GObj *article_gobj) // Check fighters for hit de
     Fighter_Hit *ft_hit;
     gmHitCollisionFlags fighter_victim_flags;
     Article_Hurt *at_hurt;
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Fighter_Struct *fp;
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_FIGHTER)
@@ -1371,17 +1371,17 @@ void itManager_SearchHitFighter(GObj *article_gobj) // Check fighters for hit de
 // 0x8017088C
 void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit detection
 {
-    Article_Hit *this_hit;
-    Article_Struct *other_ap;
-    Article_Struct *this_ap;
+    Item_Hit *this_hit;
+    Item_Struct *other_ap;
+    Item_Struct *this_ap;
     GObj *other_gobj;
-    Article_Hit *other_hit;
+    Item_Hit *other_hit;
     gmHitCollisionFlags these_flags, those_flags;
     s32 i, j, m, n;
     bool32 is_check_self;
     Article_Hurt *at_hurt;
 
-    this_ap = atGetStruct(this_gobj);
+    this_ap = itGetStruct(this_gobj);
     this_hit = &this_ap->article_hit;
 
     if (this_ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ARTICLE)
@@ -1398,7 +1398,7 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
             }
             else
             {
-                other_ap = atGetStruct(other_gobj);
+                other_ap = itGetStruct(other_gobj);
                 other_hit = &other_ap->article_hit;
 
                 if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
@@ -1495,9 +1495,9 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
 // 0x80170C84
 void itManager_SearchHitWeapon(GObj *article_gobj) // Check items for hit detection
 {
-    Article_Hit *at_hit;
+    Item_Hit *at_hit;
     Weapon_Struct *ip;
-    Article_Struct *ap;
+    Item_Struct *ap;
     GObj *weapon_gobj;
     Weapon_Hit *wp_hit;
     gmHitCollisionFlags these_flags;
@@ -1506,7 +1506,7 @@ void itManager_SearchHitWeapon(GObj *article_gobj) // Check items for hit detect
     bool32 is_check_self;
     Article_Hurt *at_hurt;
 
-    ap = atGetStruct(article_gobj);
+    ap = itGetStruct(article_gobj);
     at_hit = &ap->article_hit;
 
     if (ap->article_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
@@ -1611,7 +1611,7 @@ void itManager_SearchHitWeapon(GObj *article_gobj) // Check items for hit detect
 // 0x80171080
 void itManager_ProcSearchHitAll(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (!(ap->is_hold))
     {
@@ -1624,7 +1624,7 @@ void itManager_ProcSearchHitAll(GObj *article_gobj)
 // 0x801710C4
 void itManager_ProcUpdateHitCollisions(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->damage_taken_recent != 0)
     {
@@ -1751,7 +1751,7 @@ next_check:
 
 void func_ovl3_801713B0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (caMain_UpdateColAnim(&ap->colanim, article_gobj, 0, 0) != FALSE)
     {
@@ -1761,7 +1761,7 @@ void func_ovl3_801713B0(GObj *article_gobj)
 
 void func_ovl3_801713F4(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->rotate.z += ap->rotate_speed;

@@ -4,14 +4,14 @@
 
 void func_ovl3_80181C20(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.starmie.swift_spawn_wait <= 0)
     {
         Vec3f pos = joint->translate;
 
-        if (ap->at_kind == At_Kind_Starmie)
+        if (ap->it_kind == It_Kind_Starmie)
         {
             pos.x += ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_X * ap->lr;
             pos.y += ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_Y;
@@ -30,7 +30,7 @@ void func_ovl3_80181C20(GObj *article_gobj)
 
 bool32 func_ovl3_80181D24(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -49,7 +49,7 @@ bool32 func_ovl3_80181D24(GObj *article_gobj)
 
 void func_ovl3_80181D8C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     s32 lr_bak = ap->lr;
 
@@ -65,7 +65,7 @@ void func_ovl3_80181D8C(GObj *article_gobj)
     ap->article_vars.starmie.add_vel_x = ap->lr * ATSTARMIE_ADD_VEL_X;
 }
 
-extern ArticleStatusDesc Article_Starmie_Status[];
+extern itStatusDesc Article_Starmie_Status[];
 
 void func_ovl3_80181E0C(GObj *article_gobj)
 {
@@ -75,7 +75,7 @@ void func_ovl3_80181E0C(GObj *article_gobj)
 
 bool32 func_ovl3_80181E40(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if ((ap->lr == RIGHT) && (ap->article_vars.starmie.target_pos.x <= joint->translate.x))
@@ -100,7 +100,7 @@ extern intptr_t D_NF_00011338;
 
 void func_ovl3_80181EF4(GObj *article_gobj, GObj *fighter_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *aj = DObjGetStruct(article_gobj);
     DObj *fj = DObjGetStruct(fighter_gobj);
@@ -136,7 +136,7 @@ void func_ovl3_80181EF4(GObj *article_gobj, GObj *fighter_gobj)
     {
         aj->rotate.y = PI32;
     }
-    if (ap->at_kind == At_Kind_Starmie)
+    if (ap->it_kind == It_Kind_Starmie)
     {
         func_8000BD54(aj->mobj, ArticleGetPData(ap, D_NF_000112A0, D_NF_00011338), 0); // Linker thing
 
@@ -147,7 +147,7 @@ void func_ovl3_80181EF4(GObj *article_gobj, GObj *fighter_gobj)
 void func_ovl3_801820CC(GObj *article_gobj)
 {
     GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *victim_gobj;
     s32 unused2[2];
     DObj *joint = DObjGetStruct(article_gobj);
@@ -188,7 +188,7 @@ void func_ovl3_801820CC(GObj *article_gobj)
     }
     func_ovl3_80181EF4(article_gobj, victim_gobj);
 
-    if (ap->at_kind == At_Kind_Starmie)
+    if (ap->it_kind == It_Kind_Starmie)
     {
         func_800269C0(0x142U);
     }
@@ -202,7 +202,7 @@ void func_ovl3_801821E8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8018221C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -218,7 +218,7 @@ bool32 jtgt_ovl3_8018221C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80182270(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -228,7 +228,7 @@ bool32 jtgt_ovl3_80182270(GObj *article_gobj)
 }
 
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Starmie_Data;
+extern itCreateDesc Article_Starmie_Data;
 
 GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -237,7 +237,7 @@ GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
@@ -317,7 +317,7 @@ extern wpCreateDesc Item_Swift_Data;
 
 GObj* func_ovl3_80182530(GObj *article_gobj, Vec3f *pos)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;

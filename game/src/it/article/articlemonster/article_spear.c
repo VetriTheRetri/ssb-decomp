@@ -14,7 +14,7 @@
 
 void func_ovl3_8017FDC0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->article_vars.spear.spear_spawn_wait <= 0)
@@ -26,7 +26,7 @@ void func_ovl3_8017FDC0(GObj *article_gobj)
 
         pos.y += (ATSPEAR_SPAWN_OFF_Y_MUL * rand_f32()) + ATSPEAR_SPAWN_OFF_Y_ADD;
 
-        func_ovl3_80180608(article_gobj, &pos, ap->at_kind);
+        func_ovl3_80180608(article_gobj, &pos, ap->it_kind);
 
         ap->article_vars.spear.spear_spawn_count--;
         ap->article_vars.spear.spear_spawn_wait = rand_u16_range(ATSPEAR_SPAWN_WAIT_RANDOM) + ATSPEAR_SPAWN_WAIT_CONST;
@@ -52,14 +52,14 @@ extern intptr_t D_NF_0000E12C;
 
 void func_ovl3_8017FEB8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->at_multi = 0;
 
     ap->phys_info.vel.y = 0;
 
-    if (ap->at_kind == At_Kind_Spear)
+    if (ap->it_kind == It_Kind_Spear)
     {
         void *s = ArticleGetPData(ap, D_NF_0000DF38, D_NF_0000DFFC); // Linker thing
         s32 unused;
@@ -74,7 +74,7 @@ void func_ovl3_8017FEB8(GObj *article_gobj)
     }
 }
 
-extern ArticleStatusDesc Article_Spear_Status[];
+extern itStatusDesc Article_Spear_Status[];
 
 void func_ovl3_8017FF74(GObj *article_gobj)
 {
@@ -84,7 +84,7 @@ void func_ovl3_8017FF74(GObj *article_gobj)
 
 bool32 func_ovl3_8017FFA8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSPEAR_GRAVITY, ATSPEAR_T_VEL);
@@ -128,7 +128,7 @@ bool32 func_ovl3_8017FFA8(GObj *article_gobj)
 
 void func_ovl3_8018010C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->phys_info.vel.y = ATSPEAR_SWARM_CALL_VEL_Y;
 
@@ -136,7 +136,7 @@ void func_ovl3_8018010C(GObj *article_gobj)
     ap->article_vars.spear.spear_spawn_wait = 0;
     ap->article_vars.spear.spear_spawn_count = ATSPEAR_SPAWN_COUNT;
 
-    if (ap->at_kind == At_Kind_Spear)
+    if (ap->it_kind == It_Kind_Spear)
     {
         func_800269C0(0x141U);
     }
@@ -144,7 +144,7 @@ void func_ovl3_8018010C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80180194(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -157,7 +157,7 @@ bool32 jtgt_ovl3_80180194(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801801D8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -167,17 +167,17 @@ bool32 jtgt_ovl3_801801D8(GObj *article_gobj)
 }
 
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Spear_Data;
+extern itCreateDesc Article_Spear_Data;
 
 GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Spear_Data, pos, vel, flags);
     DObj *joint;
-    Article_Struct *ap;
+    Item_Struct *ap;
 
     if (article_gobj != NULL)
     {
-        ap = atGetStruct(article_gobj);
+        ap = itGetStruct(article_gobj);
 
         func_ovl3_8017279C(article_gobj);
 
@@ -248,10 +248,10 @@ void func_ovl3_80180480(GObj *article_gobj)
 extern wpCreateDesc Item_Spear_Swarm_Data;
 extern wpCreateDesc Item_Pippi_Swarm_Data;
 
-GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
+GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 it_kind)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, ((at_kind == At_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
+    Item_Struct *ap = itGetStruct(article_gobj);
+    GObj *weapon_gobj = wpManager_CreateWeapon(article_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
     Weapon_Struct *ip;
@@ -268,7 +268,7 @@ GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
 
     joint = DObjGetStruct(weapon_gobj);
 
-    if (at_kind == At_Kind_Spear)
+    if (it_kind == It_Kind_Spear)
     {
         func_80008CC0(joint->next->next, 0x48U, 0U);
 
@@ -295,7 +295,7 @@ GObj *func_ovl3_801804A4(GObj *article_gobj, Vec3f *pos, s32 at_kind)
     return weapon_gobj;
 }
 
-void func_ovl3_80180608(GObj *article_gobj, Vec3f *pos, s32 at_kind)
+void func_ovl3_80180608(GObj *article_gobj, Vec3f *pos, s32 it_kind)
 {
-    func_ovl3_801804A4(article_gobj, pos, at_kind);
+    func_ovl3_801804A4(article_gobj, pos, it_kind);
 }

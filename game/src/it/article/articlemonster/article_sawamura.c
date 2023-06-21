@@ -4,7 +4,7 @@
 
 bool32 jtgt_ovl3_80182630(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSAWAMURA_GRAVITY, ATSAWAMURA_T_VEL);
 
@@ -13,7 +13,7 @@ bool32 jtgt_ovl3_80182630(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80182660(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -24,7 +24,7 @@ bool32 jtgt_ovl3_80182660(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleStatusDesc Article_Sawamura_Status[];
+extern itStatusDesc Article_Sawamura_Status[];
 
 void func_ovl3_801826A8(GObj *article_gobj)
 {
@@ -33,7 +33,7 @@ void func_ovl3_801826A8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801826D0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -58,7 +58,7 @@ void func_ovl3_8018273C(GObj *article_gobj)
 
 bool32 func_ovl3_80182764(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATSAWAMURA_GRAVITY, ATSAWAMURA_T_VEL);
@@ -82,7 +82,7 @@ bool32 func_ovl3_80182764(GObj *article_gobj)
 
 void func_ovl3_8018285C(GObj *article_gobj, GObj *fighter_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *aj = DObjGetStruct(article_gobj);
     DObj *fj = DObjGetStruct(fighter_gobj);
@@ -116,7 +116,7 @@ extern intptr_t D_NF_00012340;
 void func_ovl3_80182958(GObj *article_gobj)
 {
     GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     GObj *victim_gobj;
     s32 unused2[3];
     DObj *joint = DObjGetStruct(article_gobj);
@@ -157,7 +157,7 @@ void func_ovl3_80182958(GObj *article_gobj)
     }
     func_ovl3_8018285C(article_gobj, victim_gobj);
 
-    if (ap->at_kind == At_Kind_Sawamura)
+    if (ap->it_kind == It_Kind_Sawamura)
     {
         void *s = ArticleGetPData(ap, D_NF_00011F40, D_NF_00012340); // Linker thing
 
@@ -178,7 +178,7 @@ void func_ovl3_80182AAC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80182AE0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -195,7 +195,7 @@ bool32 jtgt_ovl3_80182AE0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80182B34(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -205,7 +205,7 @@ bool32 jtgt_ovl3_80182B34(GObj *article_gobj)
 }
 
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Sawamura_Data;
+extern itCreateDesc Article_Sawamura_Data;
 
 GObj* jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -214,7 +214,7 @@ GObj* jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 

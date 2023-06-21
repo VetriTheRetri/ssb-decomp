@@ -51,9 +51,9 @@ void ftYoshi_SpecialHi_UpdateEggVars(GObj *fighter_gobj)
         {
             ip = wpGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj);
 
-            ip->item_vars.egg_throw.is_throw = TRUE;
-            ip->item_vars.egg_throw.throw_force = fp->status_vars.yoshi.specialhi.throw_force;
-            ip->item_vars.egg_throw.stick_range = fp->input.pl.stick_range.x;
+            ip->weapon_vars.egg_throw.is_throw = TRUE;
+            ip->weapon_vars.egg_throw.throw_force = fp->status_vars.yoshi.specialhi.throw_force;
+            ip->weapon_vars.egg_throw.stick_range = fp->input.pl.stick_range.x;
 
             func_ovl2_800DF09C(fp->status_vars.yoshi.specialhi.egg_gobj, fp->coll_data.p_translate, &fp->coll_data);
 

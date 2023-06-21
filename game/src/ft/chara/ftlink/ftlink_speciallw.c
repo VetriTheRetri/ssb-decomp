@@ -66,9 +66,9 @@ bool32 ftLink_SpecialLw_CheckGotoItemThrow(GObj *fighter_gobj, bool32 is_ground)
 
     if (fp->item_hold != NULL)
     {
-        Article_Struct *ap = atGetStruct(fp->item_hold);
+        Item_Struct *ap = itGetStruct(fp->item_hold);
 
-        if (ap->at_kind == At_Kind_Link_Bomb)
+        if (ap->it_kind == It_Kind_Link_Bomb)
         {
             if (is_ground == TRUE)
             {

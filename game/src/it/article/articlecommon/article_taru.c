@@ -4,7 +4,7 @@
 
 bool32 jtgt_ovl3_80179BA0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATTARU_GRAVITY, ATTARU_T_VEL);
 
@@ -39,7 +39,7 @@ bool32 func_ovl3_80179C20(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80179C78(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->percent_damage >= ATTARU_HEALTH_MAX)
     {
@@ -53,7 +53,7 @@ bool32 jtgt_ovl3_80179CB8(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.5F, 0.2F, func_ovl3_80179CE8);
 }
 
-extern ArticleStatusDesc Article_Taru_Status[];
+extern itStatusDesc Article_Taru_Status[];
 
 void func_ovl3_80179CE8(GObj *article_gobj)
 {
@@ -63,7 +63,7 @@ void func_ovl3_80179CE8(GObj *article_gobj)
 
 void func_ovl3_80179D1C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -79,10 +79,10 @@ void jtgt_ovl3_80179D60(GObj *article_gobj)
 bool32 func_ovl3_80179D88(GObj *article_gobj, f32 vel_mod)
 {
     s32 unused;
-    Article_Struct *ap;
+    Item_Struct *ap;
     bool32 is_collide_ground = func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND);
 
-    if (func_ovl3_801737EC(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), vel_mod, NULL) != FALSE)
+    if (itMap_CheckCollideAllModifiyVel(article_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), vel_mod, NULL) != FALSE)
     {
         func_ovl3_80172508(article_gobj);
     }
@@ -95,7 +95,7 @@ bool32 func_ovl3_80179D88(GObj *article_gobj, f32 vel_mod)
 
 void func_ovl3_80179DEC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->lifetime = ATTARU_LIFETIME;
 
@@ -108,7 +108,7 @@ bool32 jtgt_ovl3_80179E28(GObj *article_gobj)
 {
     if (func_ovl3_80179D88(article_gobj, 0.5F) != FALSE)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         if (ap->phys_info.vel.y >= 90.0F) // Is it even possible to meet this condition? Didn't they mean ABSF(ap->phys_info.vel.y)?
         {
@@ -135,7 +135,7 @@ bool32 jtgt_ovl3_80179E28(GObj *article_gobj)
 
 void func_ovl3_80179EF0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     DObjGetStruct(article_gobj)->next->rotate.x = HALF_PI32;
 
@@ -163,11 +163,11 @@ void jtgt_ovl3_80179F74(GObj *article_gobj)
 }
 
 extern intptr_t Article_Taru_Hit;
-extern ArticleSpawnData Article_Taru_Data;
+extern itCreateDesc Article_Taru_Data;
 
 bool32 jtgt_ovl3_80179FA8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi++;
 
@@ -182,7 +182,7 @@ bool32 jtgt_ovl3_80179FA8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017A004(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     f32 roll_rotate_speed;
     f32 sqrt_vel;
 
@@ -219,7 +219,7 @@ bool32 jtgt_ovl3_8017A004(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017A148(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_8017356C(article_gobj) == FALSE)
     {
@@ -238,7 +238,7 @@ GObj* jtgt_ovl3_8017A1B8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->article_vars.taru.roll_rotate_speed = 0.0F;
 
@@ -253,14 +253,14 @@ GObj* jtgt_ovl3_8017A1B8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 void func_ovl3_8017A240(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi = 0;
     ap->x340_flag_b0123 = 0;
 
     ap->article_hit.hit_sfx = 1;
 
-    ap->article_hit.can_rehit_hurt = TRUE;
+    ap->article_hit.can_rehit_item = TRUE;
     ap->article_hit.can_reflect = FALSE;
 
     ap->article_hit.stale = ARTICLE_STALE_DEFAULT;
@@ -284,7 +284,7 @@ void func_ovl3_8017A2D8(GObj *article_gobj)
 void func_ovl3_8017A30C(GObj *article_gobj)
 {
     Effect_Unk *effect_unk;
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;

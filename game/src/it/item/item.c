@@ -76,7 +76,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     wpCommonAttributes *wp_hit_desc;
     Weapon_Struct *wp;
     Weapon_Struct *owner_wp;
-    Article_Struct *ap;
+    Item_Struct *ap;
     Fighter_Struct *fp;
     s32 unused[8];
 
@@ -137,7 +137,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         break;
 
     case WEAPON_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
-        ap = atGetStruct(spawn_gobj);
+        ap = itGetStruct(spawn_gobj);
         wp->owner_gobj = ap->owner_gobj;
         wp->team = ap->team;
         wp->port_id = ap->port_id;
@@ -206,8 +206,8 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     wp->item_hit.hit_sfx = wp_hit_desc->sfx;
 
     wp->item_hit.priority = wp_hit_desc->priority;
-    wp->item_hit.can_rehit_hurt = wp_hit_desc->flags_0x2F_b0;
-    wp->item_hit.flags_0x48_b2 = wp_hit_desc->flags_0x2F_b1;
+    wp->item_hit.can_rehit_item = wp_hit_desc->can_rehit_item;
+    wp->item_hit.can_rehit_fighter = wp_hit_desc->can_rehit_fighter;
 
     wp->item_hit.can_rehit_shield = FALSE;
 
@@ -327,7 +327,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
             break;
 
         case WEAPON_MASK_SPAWN_ARTICLE:
-            func_ovl2_800DF09C(weapon_gobj, atGetStruct(spawn_gobj)->coll_data.p_translate, &atGetStruct(spawn_gobj)->coll_data);
+            func_ovl2_800DF09C(weapon_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
             break;
         }
     }

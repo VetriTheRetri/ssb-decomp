@@ -7,7 +7,7 @@ extern intptr_t D_NF_00009520;
 
 void func_ovl3_8017C690(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     void *t = (void*) (((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&D_NF_00009430) + (intptr_t)&D_NF_00009520); // Linker thing
 
@@ -24,7 +24,7 @@ void func_ovl3_8017C6F8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C710(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMBALL_GRAVITY, ATMBALL_T_VEL);
@@ -49,7 +49,7 @@ bool32 jtgt_ovl3_8017C790(GObj *article_gobj)
     return FALSE;
 }
 
-extern ArticleStatusDesc Article_M_Ball_Status[];
+extern itStatusDesc Article_M_Ball_Status[];
 
 void func_ovl3_8017C7C8(GObj *article_gobj)
 {
@@ -59,7 +59,7 @@ void func_ovl3_8017C7C8(GObj *article_gobj)
 
 void func_ovl3_8017C7FC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -69,7 +69,7 @@ void func_ovl3_8017C7FC(GObj *article_gobj)
 
 void jtgt_ovl3_8017C840(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     DObjGetStruct(article_gobj)->rotate.y = 0.0F;
 
@@ -80,7 +80,7 @@ void jtgt_ovl3_8017C840(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C880(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATMBALL_GRAVITY, ATMBALL_T_VEL);
@@ -93,7 +93,7 @@ bool32 jtgt_ovl3_8017C880(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C8D8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->article_vars.m_ball.is_rebound != FALSE)
     {
@@ -108,7 +108,7 @@ bool32 jtgt_ovl3_8017C8D8(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C94C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -121,7 +121,7 @@ bool32 jtgt_ovl3_8017C94C(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017C97C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Fighter_Struct *fp;
     GObj *fighter_gobj;
 
@@ -159,8 +159,8 @@ extern s32 D_ovl3_80189450;
 
 bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 {
-    Article_Struct *m_ball_ap = atGetStruct(m_ball_gobj);
-    Article_Struct *monster_ap;
+    Item_Struct *m_ball_ap = itGetStruct(m_ball_gobj);
+    Item_Struct *monster_ap;
     GObj *monster_gobj;
     Vec3f vel;
     s32 unused[2];
@@ -177,11 +177,11 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (At_Kind_MonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
 
         if (monster_gobj != NULL)
         {
-            monster_ap = atGetStruct(monster_gobj);
+            monster_ap = itGetStruct(monster_gobj);
 
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
@@ -203,7 +203,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
 bool32 jtgt_ovl3_8017CB38(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl2_800FC67C(ap->unk_0x2D0) == FALSE)
     {
@@ -218,7 +218,7 @@ void func_ovl3_8017CB84(GObj *article_gobj)
 {
     s32 unused[2];
     DObj *joint = DObjGetStruct(article_gobj);
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *next;
     DObj *child;
 
@@ -265,8 +265,8 @@ void func_ovl3_8017CC88(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 {
-    Article_Struct *m_ball_ap = atGetStruct(m_ball_gobj);
-    Article_Struct *monster_ap;
+    Item_Struct *m_ball_ap = itGetStruct(m_ball_gobj);
+    Item_Struct *monster_ap;
     GObj *monster_gobj;
     Vec3f vel;
     s32 unused[2];
@@ -283,11 +283,11 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (At_Kind_MonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
 
         if (monster_gobj != NULL)
         {
-            monster_ap = atGetStruct(monster_gobj);
+            monster_ap = itGetStruct(monster_gobj);
 
             monster_ap->owner_gobj = m_ball_ap->owner_gobj;
             monster_ap->team = m_ball_ap->team;
@@ -319,7 +319,7 @@ void func_ovl3_8017CDE4(GObj *article_gobj)
     atCommon_UpdateArticleStatus(article_gobj, Article_M_Ball_Status, 6);
 }
 
-extern ArticleSpawnData Article_M_Ball_Data;
+extern itCreateDesc Article_M_Ball_Data;
 
 GObj* jtgt_ovl3_8017CE0C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -328,7 +328,7 @@ GObj* jtgt_ovl3_8017CE0C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
         Vec3f translate = joint->translate;
 
         joint->next->unk_0x54 = 2;

@@ -251,7 +251,7 @@ bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
     {
         if (fp->item_hold != NULL)
         {
-            if (atGetStruct(fp->item_hold)->type == At_Type_Throw)
+            if (itGetStruct(fp->item_hold)->type == It_Type_Throw)
             {
                 ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowF);
 
@@ -263,13 +263,13 @@ bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
 
                 return TRUE;
             }
-            switch (atGetStruct(fp->item_hold)->type)
+            switch (itGetStruct(fp->item_hold)->type)
             {
-            case At_Type_Swing:
+            case It_Type_Swing:
                 ftCommon_ItemSwing_SetStatus(fighter_gobj, 0);
                 return TRUE;
 
-            case At_Type_Shoot:
+            case It_Type_Shoot:
                 ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;
             }

@@ -42,7 +42,7 @@ bool32 ftCommon_HammerCheckHold(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fp->item_hold != NULL) && (atGetStruct(fp->item_hold)->at_kind == At_Kind_Hammer))
+    if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->it_kind == It_Kind_Hammer))
     {
         return TRUE;
     }

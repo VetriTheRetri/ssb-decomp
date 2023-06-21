@@ -54,7 +54,7 @@ void ftCommon_Twister_SetStatus(GObj *fighter_gobj, GObj *tornado_gobj)
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((fp->item_hold != NULL) && !(atGetStruct(fp->item_hold)->is_light_throw))
+    if ((fp->item_hold != NULL) && !(itGetStruct(fp->item_hold)->is_light_throw))
     {
         vel.x = vel.y = vel.z = 0.0F;
 

@@ -23,7 +23,7 @@ extern void func_ovl3_801826A8(GObj *);
 extern void func_ovl3_80182F0C(GObj *);
 extern void func_ovl3_8017ED20(GObj *);
 
-void (*Article_Pippi_ProcStatus[At_Kind_MonsterEnd - At_Kind_MonsterStart])(GObj*) =
+void (*Article_Pippi_ProcStatus[It_Kind_MonsterEnd - It_Kind_MonsterStart])(GObj*) =
 {
     func_ovl3_8017DA60, func_ovl3_8017E648, func_ovl3_8017E828, func_ovl3_8017EFC4,
     func_ovl3_8017F5C4, func_ovl3_80180160, func_ovl3_80180964, func_ovl3_801811AC,
@@ -32,16 +32,16 @@ void (*Article_Pippi_ProcStatus[At_Kind_MonsterEnd - At_Kind_MonsterStart])(GObj
 
 void func_ovl3_80183210(GObj *article_gobj)
 {
-    s32 at_kind;
+    s32 it_kind;
     s32 index;
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
-    index = rand_u16_range(At_Kind_MonsterEnd - At_Kind_MonsterStart);
+    index = rand_u16_range(It_Kind_MonsterEnd - It_Kind_MonsterStart);
 
-    at_kind = index + At_Kind_MonsterStart;
+    it_kind = index + It_Kind_MonsterStart;
 
-    if ((index == (At_Kind_Spear - At_Kind_MonsterStart)) || (at_kind == At_Kind_Kamex))
+    if ((index == (It_Kind_Spear - It_Kind_MonsterStart)) || (it_kind == It_Kind_Kamex))
     {
         if (rand_u16_range(2) == 0)
         {
@@ -51,21 +51,21 @@ void func_ovl3_80183210(GObj *article_gobj)
         }
         else ap->lr = LEFT;
     }
-    if ((at_kind == At_Kind_Pippi) || (at_kind == At_Kind_Tosakinto) || (at_kind == At_Kind_Mb_Lucky))
+    if ((it_kind == It_Kind_Pippi) || (it_kind == It_Kind_Tosakinto) || (it_kind == It_Kind_Mb_Lucky))
     {
         ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
     }
-    if (at_kind == At_Kind_Sawamura)
+    if (it_kind == It_Kind_Sawamura)
     {
         ap->at_multi = ATSAWAMURA_KICK_WAIT;
     }
-    if ((at_kind == At_Kind_Sawamura) || (at_kind == At_Kind_Starmie))
+    if ((it_kind == It_Kind_Sawamura) || (it_kind == It_Kind_Starmie))
     {
         article_gobj->renderer = func_ovl3_801834A0;
 
         om_g_move_obj_dl_head(article_gobj, 0x12U, article_gobj->room_order);
     }
-    if (at_kind == At_Kind_Lizardon)
+    if (it_kind == It_Kind_Lizardon)
     {
         ap->at_multi = ATLIZARDON_LIFETIME;
     }
@@ -76,7 +76,7 @@ extern Gfx *D_800465B0[4];
 
 void func_ovl3_80183344(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -109,7 +109,7 @@ void func_ovl3_80183344(GObj *article_gobj)
 
 void func_ovl3_80183344(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -142,7 +142,7 @@ void func_ovl3_80183344(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801835FC(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -158,7 +158,7 @@ bool32 jtgt_ovl3_801835FC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80183650(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -169,7 +169,7 @@ bool32 jtgt_ovl3_80183650(GObj *article_gobj)
 
 extern intptr_t D_NF_00013598;
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Pippi_Data;
+extern itCreateDesc Article_Pippi_Data;
 
 GObj *jtgt_ovl3_80183690(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -178,7 +178,7 @@ GObj *jtgt_ovl3_80183690(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 

@@ -2,18 +2,18 @@
 #include "item.h"
 #include "fighter.h"
 
-extern ArticleStatusDesc Article_Hitokage_Status[];
+extern itStatusDesc Item_Hitokage_Status[];
 
 void func_ovl3_80183DA0(GObj *article_gobj)
 {
-    atCommon_UpdateArticleStatus(article_gobj, Article_Hitokage_Status, 0);
+    atCommon_UpdateArticleStatus(article_gobj, Item_Hitokage_Status, 0);
 
-    atGetStruct(article_gobj)->proc_dead = func_ovl3_80183F88;
+    itGetStruct(article_gobj)->proc_dead = func_ovl3_80183F88;
 }
 
 bool32 func_ovl3_80183DE0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Vec3f pos;
 
@@ -57,7 +57,7 @@ bool32 func_ovl3_80183DE0(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80183F20(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint;
 
     func_ovl3_80172558(ap, ATHITOKAGE_GRAVITY, ATHITOKAGE_T_VEL);
@@ -76,7 +76,7 @@ bool32 func_ovl3_80183F88(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80183F94(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     if (ap->damage_knockback >= 100.0F)
@@ -98,18 +98,18 @@ bool32 jtgt_ovl3_80183F94(GObj *article_gobj)
 }
 
 extern s32 D_ovl2_8012EB60;
-extern ArticleSpawnData Article_Hitokage_Data;
+extern itCreateDesc Item_Hitokage_Data;
 
 GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Article_Hitokage_Data, pos, vel, flags);
+    GObj *article_gobj = itManager_CreateItem(spawn_gobj, &Item_Hitokage_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
-    Article_Struct *ap;
+    Item_Struct *ap;
 
     if (article_gobj != NULL)
     {
-        ap = atGetStruct(article_gobj);
+        ap = itGetStruct(article_gobj);
         joint = DObjGetStruct(article_gobj);
 
         ap->article_vars.hitokage.flame_spawn_wait = 0;
@@ -213,7 +213,7 @@ GObj *func_ovl3_801842C8(GObj *article_gobj, Vec3f *pos, Vec3f *vel)
 
 void func_ovl3_801843C4(GObj *article_gobj, Vec3f *pos)
 {
-    Article_Struct *ap;
+    Item_Struct *ap;
     Vec3f vel;
 
     vel.x = cosf(ATHITOKAGE_FLAME_SPAWN_ANGLE) * -ATHITOKAGE_FLAME_VEL_XY;

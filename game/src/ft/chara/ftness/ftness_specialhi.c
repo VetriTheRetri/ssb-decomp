@@ -81,7 +81,7 @@ bool32 ftNess_SpecialHi_CheckCollidePKThunder(GObj *fighter_gobj)
 
         if (collide_y < FTNESS_PKTHUNDER_COLLIDE_Y)
         {
-            ip->item_vars.pkthunder.pkthunder_state = wpNessPKThunder_Status_Collide;
+            ip->weapon_vars.pkthunder.pkthunder_state = wpNessPKThunder_Status_Collide;
 
             fp->status_vars.ness.specialhi.pkthunder_pos = DObjGetStruct(pkthunder_gobj)->translate;
 
@@ -277,7 +277,7 @@ void ftNess_SpecialHi_SetPKThunderDestroy(GObj *fighter_gobj) // Unused
     {
         Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-        ip->item_vars.pkthunder.pkthunder_state = wpNessPKThunder_Status_Destroy;
+        ip->weapon_vars.pkthunder.pkthunder_state = wpNessPKThunder_Status_Destroy;
     }
 }
 

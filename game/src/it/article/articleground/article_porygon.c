@@ -1,11 +1,11 @@
 #include "article.h"
 
 extern intptr_t Porygon_Event;
-extern ArticleSpawnData Article_Porygon_Data;
+extern itCreateDesc Article_Porygon_Data;
 
 void func_ovl3_80183B10(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     ArticleHitDesc *hit_desc = (ArticleHitDesc*) ((uintptr_t)*Article_Porygon_Data.p_file + (intptr_t)&Porygon_Event); // Linker thing
 
     if (ap->at_multi == hit_desc[ap->x340_flag_b0123].timer)
@@ -42,7 +42,7 @@ void func_ovl3_80183B10(GObj *article_gobj)
 
 bool32 func_ovl3_80183C84(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     joint->translate.x += ap->article_vars.porygon.offset.x;
@@ -65,7 +65,7 @@ GObj* jtgt_ovl3_80183D00(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->article_vars.porygon.offset = *pos;
 

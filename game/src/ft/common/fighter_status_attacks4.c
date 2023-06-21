@@ -135,9 +135,9 @@ bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 
         if (article_gobj != NULL)
         {
-            Article_Struct *ap = atGetStruct(article_gobj);
+            Item_Struct *ap = itGetStruct(article_gobj);
 
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
             {
                 ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowF4);
 
@@ -145,11 +145,11 @@ bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
             }
             switch (ap->type)
             {
-            case At_Type_Swing:
+            case It_Type_Swing:
                 ftCommon_ItemSwing_SetStatus(fighter_gobj, 2);
                 return TRUE;
 
-            case At_Type_Shoot:
+            case It_Type_Shoot:
                 ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;
             }
@@ -176,9 +176,9 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 
         if (article_gobj != NULL)
         {
-            Article_Struct *ap = atGetStruct(article_gobj);
+            Item_Struct *ap = itGetStruct(article_gobj);
 
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
             {
                 ftCommon_ItemThrow_SetStatus(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 
@@ -186,12 +186,12 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
             }
             switch (ap->type)
             {
-            case At_Type_Swing:
+            case It_Type_Swing:
                 ftCommon_StickInputSetLR(fp);
                 ftCommon_ItemSwing_SetStatus(fighter_gobj, 2);
                 return TRUE;
 
-            case At_Type_Shoot:
+            case It_Type_Shoot:
                 ftCommon_StickInputSetLR(fp);
                 ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;
@@ -220,9 +220,9 @@ bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
 
         if (article_gobj != NULL)
         {
-            Article_Struct *ap = atGetStruct(article_gobj);
+            Item_Struct *ap = itGetStruct(article_gobj);
 
-            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == At_Type_Throw) || (ap->type == At_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
+            if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(article_gobj) != FALSE)))
             {
                 ftCommon_ItemThrow_SetStatus(fighter_gobj, ((fp->input.pl.stick_range.x * fp->lr) >= 0) ? ftStatus_Common_LightThrowF4 : ftStatus_Common_LightThrowB4);
 
@@ -230,12 +230,12 @@ bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
             }
             switch (ap->type)
             {
-            case At_Type_Swing:
+            case It_Type_Swing:
                 ftCommon_StickInputSetLR(fp);
                 ftCommon_ItemSwing_SetStatus(fighter_gobj, 2);
                 return TRUE;
 
-            case At_Type_Shoot:
+            case It_Type_Shoot:
                 ftCommon_StickInputSetLR(fp);
                 ftCommon_ItemShoot_SetStatus(fighter_gobj);
                 return TRUE;

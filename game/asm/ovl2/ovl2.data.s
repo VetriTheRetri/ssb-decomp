@@ -7421,7 +7421,7 @@ glabel D_ovl2_8012E55C
 
 glabel D_ovl2_8012E584
   .incbin "ovl2.raw.bin", 0x580F4, 0x4
-  /* 580F8 0A9D88 8012E588 */  .4byte Article_File_Data
+  /* 580F8 0A9D88 8012E588 */  .4byte gItemFileData
   .incbin "ovl2.raw.bin", 0x580FC, 0x8
   /* 58104 0A9D94 8012E594 */  .4byte func_ovl2_80102C84
   /* 58108 0A9D98 8012E598 */  .4byte func_80014038
@@ -7513,7 +7513,7 @@ glabel D_ovl2_8012E71C
 
 glabel D_ovl2_8012E720
   .incbin "ovl2.raw.bin", 0x58290, 0x4
-  /* 58294 0A9F24 8012E724 */  .4byte Article_File_Data
+  /* 58294 0A9F24 8012E724 */  .4byte gItemFileData
   .incbin "ovl2.raw.bin", 0x58298, 0x4
   /* 5829C 0A9F2C 8012E72C */
   .asciz "."
@@ -7524,7 +7524,7 @@ glabel D_ovl2_8012E720
 
 glabel D_ovl2_8012E748
   .incbin "ovl2.raw.bin", 0x582B8, 0x4
-  /* 582BC 0A9F4C 8012E74C */  .4byte Article_File_Data
+  /* 582BC 0A9F4C 8012E74C */  .4byte gItemFileData
   .incbin "ovl2.raw.bin", 0x582C0, 0x4
   /* 582C4 0A9F54 8012E754 */
   .asciz "."

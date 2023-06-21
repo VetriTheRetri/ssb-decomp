@@ -1353,7 +1353,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
             ftCommon_ResetColAnimStatUpdate(fighter_gobj);
         }
     }
-    if ((this_fp->item_hold != NULL) && (this_fp->status_info.status_id != ftStatus_Common_LightGet) && (atGetStruct(this_fp->item_hold)->at_kind == At_Kind_Hammer))
+    if ((this_fp->item_hold != NULL) && (this_fp->status_info.status_id != ftStatus_Common_LightGet) && (itGetStruct(this_fp->item_hold)->it_kind == It_Kind_Hammer))
     {
         ftCommon_HammerUpdateStats(fighter_gobj);
     }
@@ -2165,7 +2165,7 @@ void func_ovl2_800E31B4(Weapon_Struct *ip, Weapon_Hit *wp_hit, Fighter_Struct *f
 
     if (fp->special_hit->damage_resist < damage)
     {
-        if (wp_hit->flags_0x48_b2)
+        if (wp_hit->can_rehit_fighter)
         {
             if (ip->hit_reflect_damage < damage)
             {
@@ -2218,11 +2218,11 @@ void func_ovl2_800E3418(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Fighter
     s32 unk = wpMain_DamageApplyStale(ip);
     s32 damage;
 
-    func_ovl3_8016679C(ip, wp_hit, fighter_gobj, (wp_hit->flags_0x48_b2) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0U);
+    func_ovl3_8016679C(ip, wp_hit, fighter_gobj, (wp_hit->can_rehit_fighter) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
 
     damage = ftCommon_DamageAdjustCapture(fp, unk);
 
-    if (wp_hit->flags_0x48_b2)
+    if (wp_hit->can_rehit_fighter)
     {
         if (ip->hit_reflect_damage < damage)
         {
@@ -2262,7 +2262,7 @@ void func_ovl2_800E3418(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Fighter
     func_800269C0(wp_hit->hit_sfx);
 }
 
-void func_ovl2_800E35BC(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *article_gobj, GObj *fighter_gobj)
+void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *article_gobj, GObj *fighter_gobj)
 {
     s32 damage = func_ovl3_801727F4(ap);
     Vec3f sp30;
@@ -2292,7 +2292,7 @@ void func_ovl2_800E35BC(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
     }
 }
 
-void func_ovl2_800E35BC(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *article_gobj, GObj *fighter_gobj)
+void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *article_gobj, GObj *fighter_gobj)
 {
     s32 damage = func_ovl3_801727F4(ap);
     Vec3f sp30;
@@ -2322,7 +2322,7 @@ void func_ovl2_800E35BC(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
     }
 }
 
-void func_ovl2_800E36F8(Article_Struct *ap, Article_Hit *at_hit, s32 hitbox_id, Fighter_Struct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
+void func_ovl2_800E36F8(Item_Struct *ap, Item_Hit *at_hit, s32 hitbox_id, Fighter_Struct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
 {
     s32 damage = func_ovl3_801727F4(ap);
     Vec3f sp30;
@@ -2356,7 +2356,7 @@ void func_ovl2_800E36F8(Article_Struct *ap, Article_Hit *at_hit, s32 hitbox_id, 
     func_ovl2_80100BF0(&sp30, at_hit->shield_damage + damage);
 }
 
-void func_ovl2_800E3860(Article_Struct *ap, Article_Hit *at_hit, Fighter_Struct *fp, GObj *fighter_gobj)
+void func_ovl2_800E3860(Item_Struct *ap, Item_Hit *at_hit, Fighter_Struct *fp, GObj *fighter_gobj)
 {
     s32 damage = func_ovl3_801727F4(ap);
 
@@ -2364,7 +2364,7 @@ void func_ovl2_800E3860(Article_Struct *ap, Article_Hit *at_hit, Fighter_Struct 
 
     if (fp->special_hit->damage_resist < damage)
     {
-        if (at_hit->flags_0x4C_b2)
+        if (at_hit->can_rehit_fighter)
         {
             if (ap->hit_reflect_damage < damage)
             {
@@ -2392,19 +2392,19 @@ void func_ovl2_800E3860(Article_Struct *ap, Article_Hit *at_hit, Fighter_Struct 
 
 extern u8 D_ovl65_801936AA;
 
-void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hurt *ft_hurt, GObj *article_gobj, GObj *fighter_gobj)
+void func_ovl2_800E39B0(Item_Struct *ap, Item_Hit *at_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hurt *ft_hurt, GObj *article_gobj, GObj *fighter_gobj)
 {
     s32 damage = func_ovl3_801727F4(ap);
     s32 damage_again;
     s32 lr_attack;
 
-    itManager_UpdateHitVictimInteractStats(at_hit, fighter_gobj, (at_hit->flags_0x4C_b2) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
+    itManager_UpdateHitVictimInteractStats(at_hit, fighter_gobj, (at_hit->can_rehit_fighter) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
 
-    if (ap->type == At_Type_Touch)
+    if (ap->type == It_Type_Touch)
     {
-        switch (ap->at_kind)
+        switch (ap->it_kind)
         {
-        case At_Kind_Star:
+        case It_Kind_Star:
 
             at_hit->update_state = gmHitCollision_UpdateState_Disable;
             ap->hit_victim_damage = 1;
@@ -2419,7 +2419,7 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
             }
             break;
 
-        case At_Kind_Gr_Lucky:
+        case It_Kind_Gr_Lucky:
             ftCommon_ApplyDamageHeal(fp, at_hit->damage);
 
             break;
@@ -2429,7 +2429,7 @@ void func_ovl2_800E39B0(Article_Struct *ap, Article_Hit *at_hit, s32 arg2, Fight
     {
         damage_again = ftCommon_DamageAdjustCapture(fp, damage);
 
-        if (at_hit->flags_0x4C_b2)
+        if (at_hit->can_rehit_fighter)
         {
             if (ap->hit_reflect_damage < damage_again)
             {
@@ -2506,7 +2506,7 @@ void func_ovl2_800E3CAC(GObj *special_gobj, GObj *fighter_gobj, Fighter_Struct *
     case 1:
         if (temp_v0 != 0)
         {
-            ftAttackUpdateMatchStats(atGetStruct(special_gobj)->damage_port, fp->port_id, damage);
+            ftAttackUpdateMatchStats(itGetStruct(special_gobj)->damage_port, fp->port_id, damage);
         }
         break;
 
@@ -2557,7 +2557,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *attacker_fp;
     Weapon_Struct *ip;
-    Article_Struct *ap;
+    Item_Struct *ap;
     ftCommonAttributes *attributes = this_fp->attributes;
     ftHitCollisionLog *hitlog;
     s32 i, j;
@@ -2565,7 +2565,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
     f32 knockback;
     Fighter_Hit *ft_hit;
     Weapon_Hit *wp_hit;
-    Article_Hit *at_hit;
+    Item_Hit *at_hit;
     Ground_Hit *gr_hit;
     Vec3f sp84;
     s32 damage;
@@ -2672,7 +2672,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
         case ftHitCollision_LogKind_Article:
             at_hit = hitlog->attacker_hit;
-            ap = atGetStruct(hitlog->attacker_gobj);
+            ap = itGetStruct(hitlog->attacker_gobj);
 
             damage = func_ovl3_801727F4(ap);
 
@@ -2711,7 +2711,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
             if (gr_hit->env_kind == 1) // POW Block?
             {
-                gr_handicap = atGetStruct(hitlog->attacker_gobj)->damage_handicap;
+                gr_handicap = itGetStruct(hitlog->attacker_gobj)->damage_handicap;
             }
             else gr_handicap = 9;
 
@@ -2791,7 +2791,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
     case ftHitCollision_LogKind_Article:
         at_hit = hitlog->attacker_hit;
-        ap = atGetStruct(attacker_gobj);
+        ap = itGetStruct(attacker_gobj);
 
         this_fp->damage_angle = at_hit->angle;
         this_fp->damage_element = at_hit->element;
@@ -2811,12 +2811,12 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         {
             this_fp->damage_player_number = 0;
 
-            ftCommon_Update1PGameDamageStats(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ap->at_kind, 0, 0);
+            ftCommon_Update1PGameDamageStats(this_fp, GMMATCH_PLAYERS_MAX, hitlog->hit_source, ap->it_kind, 0, 0);
         }
         else
         {
             this_fp->damage_player_number = hitlog->attacker_player_number;
-            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ap->at_kind, at_hit->stat_flags.halfword, at_hit->stat_count);
+            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ap->it_kind, at_hit->stat_flags.halfword, at_hit->stat_count);
         }
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
         this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
@@ -2845,7 +2845,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             break;
 
         case 1:
-            ap = atGetStruct(attacker_gobj);
+            ap = itGetStruct(attacker_gobj);
 
             this_fp->damage_player_number = ap->damage_player_number;
 
@@ -3283,8 +3283,8 @@ void ftObjectProc_SearchArticleHit(GObj *fighter_gobj)
     gmHitCollisionFlags fighter_flags;
     gmHitCollisionFlags article_flags;
     Fighter_Struct *fp;
-    Article_Struct *ap;
-    Article_Hit *at_hit;
+    Item_Struct *ap;
+    Item_Hit *at_hit;
     f32 angle;
     Fighter_Hurt *ft_hurt;
     Fighter_Hit *ft_hit;
@@ -3296,7 +3296,7 @@ void ftObjectProc_SearchArticleHit(GObj *fighter_gobj)
 
     while (article_gobj != NULL)
     {
-        ap = atGetStruct(article_gobj);
+        ap = itGetStruct(article_gobj);
         at_hit = &ap->article_hit;
 
         if ((fighter_gobj != ap->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->team != ap->team)) && (at_hit->update_state != gmHitCollision_UpdateState_Disable))
@@ -3888,7 +3888,7 @@ void func_ovl2_800E61EC(GObj *fighter_gobj)
 
         case TRUE:
 
-            if ((fp->item_hold != NULL) && (fp->x190_flag_b6) && (atGetStruct(fp->item_hold)->at_kind == At_Kind_Sword))
+            if ((fp->item_hold != NULL) && (fp->x190_flag_b6) && (itGetStruct(fp->item_hold)->it_kind == It_Kind_Sword))
             {
                 s32 unused;
                 HAL_Bitmap bitmap;

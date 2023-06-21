@@ -85,7 +85,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
             {
                 if ((ABS(fp->input.pl.stick_range.x) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN) && (ABS(fp->input.pl.stick_range.y) < FTCOMMON_ATTACKAIR_DIRECTION_STICK_RANGE_MIN))
                 {
-                    if (atGetStruct(fp->item_hold)->type == At_Type_Throw)
+                    if (itGetStruct(fp->item_hold)->type == It_Type_Throw)
                     {
                         ftCommon_ItemThrow_SetStatus(fighter_gobj, ftStatus_Common_LightThrowAirF);
 
@@ -173,7 +173,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
             }
             if (is_goto_shoot != FALSE)
             {
-                if ((fp->item_hold != NULL) && (atGetStruct(fp->item_hold)->type == At_Type_Shoot))
+                if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->type == It_Type_Shoot))
                 {
                     ftCommon_ItemShootAir_SetStatus(fighter_gobj, status_id);
 

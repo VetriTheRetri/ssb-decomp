@@ -6,7 +6,7 @@
 
 bool32 jtgt_ovl3_801754F0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATLGUN_GRAVITY, ATLGUN_T_VEL);
     func_ovl3_801713F4(article_gobj);
@@ -26,7 +26,7 @@ bool32 jtgt_ovl3_80175550(GObj *article_gobj)
     return func_ovl3_80173B24(article_gobj, 0.2F, 0.1F, func_ovl3_80175584);
 }
 
-extern ArticleStatusDesc Article_L_Gun_Status[];
+extern itStatusDesc Article_L_Gun_Status[];
 
 void func_ovl3_80175584(GObj *article_gobj)
 {
@@ -36,7 +36,7 @@ void func_ovl3_80175584(GObj *article_gobj)
 
 void func_ovl3_801755B8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -53,7 +53,7 @@ void jtgt_ovl3_801755FC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80175630(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -64,7 +64,7 @@ bool32 jtgt_ovl3_80175630(GObj *article_gobj)
 
 bool32 jtgt_ovl3_80175684(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->article_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -75,7 +75,7 @@ bool32 jtgt_ovl3_80175684(GObj *article_gobj)
 
 void jtgt_ovl3_801756AC(GObj *article_gobj)
 {
-    s32 lr = ftGetStruct(atGetStruct(article_gobj)->owner_gobj)->lr;
+    s32 lr = ftGetStruct(itGetStruct(article_gobj)->owner_gobj)->lr;
 
     atCommon_UpdateArticleStatus(article_gobj, Article_L_Gun_Status, 3);
 
@@ -84,7 +84,7 @@ void jtgt_ovl3_801756AC(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017572C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -95,14 +95,14 @@ bool32 jtgt_ovl3_8017572C(GObj *article_gobj)
 
 void jtgt_ovl3_80175780(GObj *article_gobj)
 {
-    s32 lr = ftGetStruct(atGetStruct(article_gobj)->owner_gobj)->lr;
+    s32 lr = ftGetStruct(itGetStruct(article_gobj)->owner_gobj)->lr;
 
     atCommon_UpdateArticleStatus(article_gobj, Article_L_Gun_Status, 4);
 
     DObjGetStruct(article_gobj)->next->rotate.y = (lr == LEFT) ? -HALF_PI32 : HALF_PI32;
 }
 
-extern ArticleSpawnData Article_L_Gun_Data;
+extern itCreateDesc Article_L_Gun_Data;
 
 GObj* jtgt_ovl3_80175800(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -110,7 +110,7 @@ GObj* jtgt_ovl3_80175800(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (article_gobj != NULL)
     {
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->at_multi = ATLGUN_AMMO_MAX;
 
@@ -210,7 +210,7 @@ GObj* func_ovl3_80175A60(GObj *fighter_gobj, Vec3f *pos)
 
 void func_ovl3_80175AD8(GObj *fighter_gobj, Vec3f *pos)
 {
-    Article_Struct *ap = atGetStruct(ftGetStruct(fighter_gobj)->item_hold);
+    Item_Struct *ap = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
 
     func_ovl3_80175A60(fighter_gobj, pos);
 

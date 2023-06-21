@@ -2,7 +2,7 @@
 
 bool32 jtgt_ovl3_801815C0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATEGG_GRAVITY, ATEGG_T_VEL);
@@ -49,7 +49,7 @@ void func_ovl3_801816B8(GObj *article_gobj)
     joint->next->rotate.z = joint->rotate.z;
 }
 
-extern ArticleStatusDesc Article_Egg_Status[];
+extern itStatusDesc Article_Egg_Status[];
 
 void func_ovl3_801816E0(GObj *article_gobj)
 {
@@ -60,7 +60,7 @@ void func_ovl3_801816E0(GObj *article_gobj)
 
 void func_ovl3_8018171C(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -80,7 +80,7 @@ void jtgt_ovl3_80181778(GObj *article_gobj)
 
 bool32 jtgt_ovl3_801817A0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
 
     func_ovl3_80172558(ap, ATEGG_GRAVITY, ATEGG_T_VEL);
@@ -108,7 +108,7 @@ bool32 jtgt_ovl3_801817F8(GObj *article_gobj)
 
 void jtgt_ovl3_80181854(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_damage_all = TRUE;
 
@@ -131,7 +131,7 @@ bool32 jtgt_ovl3_801818B8(GObj *article_gobj)
 
 void jtgt_ovl3_801818E8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->is_damage_all = TRUE;
 
@@ -140,12 +140,12 @@ void jtgt_ovl3_801818E8(GObj *article_gobj)
     atCommon_UpdateArticleStatus(article_gobj, Article_Egg_Status, 4);
 }
 
-extern ArticleSpawnData Article_Egg_Data;
+extern itCreateDesc Article_Egg_Data;
 extern intptr_t D_NF_00000B14;
 
 bool32 jtgt_ovl3_80181928(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi++;
 
@@ -167,7 +167,7 @@ GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *egg_ap = atGetStruct(article_gobj);
+        Item_Struct *egg_ap = itGetStruct(article_gobj);
 
         egg_ap->x2D3_flag_b5 = TRUE;
 
@@ -179,9 +179,9 @@ GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         if (flags & ARTICLE_MASK_SPAWN_ARTICLE)
         {
-            Article_Struct *spawn_ap = atGetStruct(spawn_gobj);
+            Item_Struct *spawn_ap = itGetStruct(spawn_gobj);
 
-            if ((spawn_ap->at_kind == At_Kind_Mb_Lucky) && (rand_u16_range(2) == 0))
+            if ((spawn_ap->it_kind == It_Kind_Mb_Lucky) && (rand_u16_range(2) == 0))
             {
                 joint->next->rotate.y = PI32;
 
@@ -198,7 +198,7 @@ extern intptr_t D_NF_00000098;
 
 void func_ovl3_80181AA8(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi = 0;
 
@@ -209,7 +209,7 @@ void func_ovl3_80181AA8(GObj *article_gobj)
 
     func_800269C0(1U);
 
-    ap->article_hit.can_rehit_hurt = TRUE;
+    ap->article_hit.can_rehit_item = TRUE;
     ap->article_hit.can_hop = FALSE;
     ap->article_hit.can_reflect = FALSE;
     ap->article_hit.clang = FALSE;
@@ -230,7 +230,7 @@ void func_ovl3_80181B5C(GObj *article_gobj)
 
 void func_ovl3_80181B90(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     DObj *joint = DObjGetStruct(article_gobj);
     Effect_Unk *ep;
 

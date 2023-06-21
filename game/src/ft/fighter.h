@@ -870,8 +870,8 @@ typedef struct Fighter_Com
     u8 unk_ftcom_0x43; // Also neutral special?
     u8 filler_0x44[0x48 - 0x44];
     u8 ftcom_flags_0x48_b0 : 1;
-    u8 ftcom_can_rehit_hurt : 1;
-    u8 ftcom_flags_0x48_b2 : 1;
+    u8 ftcom_can_rehit_item : 1;
+    u8 ftcom_can_rehit_fighter : 1;
     u8 ftcom_can_rehit_shield : 1;
     u8 ftcom_flags_0x48_b4 : 1;
     u8 ftcom_flags_0x48_b5 : 1;

@@ -2,7 +2,7 @@
 
 bool32 func_ovl3_8017EBE0(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
     Vec3f pos = DObjGetStruct(article_gobj)->translate;
 
     if (ap->at_multi == 0)
@@ -26,7 +26,7 @@ bool32 func_ovl3_8017EBE0(GObj *article_gobj)
 
 void func_ovl3_8017EC84(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     ap->at_multi = ATMEW_LIFETIME;
 
@@ -42,7 +42,7 @@ void func_ovl3_8017EC84(GObj *article_gobj)
 
     func_800269C0(0x89U);
 
-    if (ap->at_kind == At_Kind_Mew)
+    if (ap->it_kind == It_Kind_Mew)
     {
         func_800269C0(0x13BU);
     }
@@ -51,7 +51,7 @@ void func_ovl3_8017EC84(GObj *article_gobj)
     ap->article_vars.mew.esper_gfx_int = 0;
 }
 
-extern ArticleStatusDesc Article_Mew_Status[];
+extern itStatusDesc Article_Mew_Status[];
 
 void func_ovl3_8017ED20(GObj *article_gobj)
 {
@@ -61,7 +61,7 @@ void func_ovl3_8017ED20(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017ED54(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (ap->at_multi == 0)
     {
@@ -76,7 +76,7 @@ bool32 jtgt_ovl3_8017ED54(GObj *article_gobj)
 
 bool32 jtgt_ovl3_8017EDA4(GObj *article_gobj)
 {
-    Article_Struct *ap = atGetStruct(article_gobj);
+    Item_Struct *ap = itGetStruct(article_gobj);
 
     if (func_ovl3_801737B8(article_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -87,7 +87,7 @@ bool32 jtgt_ovl3_8017EDA4(GObj *article_gobj)
 
 extern intptr_t D_NF_0000BCC0;
 extern intptr_t D_NF_00013624;
-extern ArticleSpawnData Article_Mew_Data;
+extern itCreateDesc Article_Mew_Data;
 
 GObj* jtgt_ovl3_8017EDE4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
@@ -96,7 +96,7 @@ GObj* jtgt_ovl3_8017EDE4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (article_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(article_gobj);
-        Article_Struct *ap = atGetStruct(article_gobj);
+        Item_Struct *ap = itGetStruct(article_gobj);
 
         ap->at_multi = ATMONSTER_RISE_STOP_WAIT;
 
