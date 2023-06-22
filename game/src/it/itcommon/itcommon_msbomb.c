@@ -401,7 +401,7 @@ void func_ovl3_80176E9C(GObj *item_gobj)
 
     ap->item_event_index = 0;
 
-    ap->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->item_hit.stale = ITEM_STALE_DEFAULT;
     ap->item_hit.hit_sfx = 1;
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;

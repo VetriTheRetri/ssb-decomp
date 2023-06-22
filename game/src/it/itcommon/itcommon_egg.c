@@ -177,7 +177,7 @@ GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        if (flags & ARTICLE_MASK_SPAWN_ARTICLE)
+        if (flags & ITEM_MASK_SPAWN_ARTICLE)
         {
             Item_Struct *spawn_ap = itGetStruct(spawn_gobj);
 
@@ -205,7 +205,7 @@ void func_ovl3_80181AA8(GObj *item_gobj)
     ap->item_event_index = 0;
 
     ap->item_hit.hit_sfx = 1;
-    ap->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->item_hit.stale = ITEM_STALE_DEFAULT;
 
     func_800269C0(1U);
 

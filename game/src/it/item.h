@@ -10,45 +10,46 @@
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 #include <game/src/ef/effect.h>
+#include "gmmatch.h"
 
-#define ARTICLE_ALLOC_MAX 16
+#define ITEM_ALLOC_MAX 16
 
-#define ARTICLE_FLAG_PROJECT (1U << 31)            // Perform initial collision check when spawning item?
+#define ARTICLE_FLAG_PROJECT (1 << 31)              // Perform initial collision check when spawning item?
 
-#define ARTICLE_MASK_SPAWN_FIGHTER 0               // Article spawned by fighter
-#define ARTICLE_MASK_SPAWN_GROUND 1                // Article spawned by stage 
-#define ARTICLE_MASK_SPAWN_ITEM 2                  // Article spawned by another item
-#define ARTICLE_MASK_SPAWN_ARTICLE 3               // Article spawned by Pokémon / misc entity class(es?)
-#define ARTICLE_MASK_SPAWN_DEFAULT 4
+#define ITEM_MASK_SPAWN_FIGHTER 0                   // Item spawned by fighter
+#define ITEM_MASK_SPAWN_GROUND 1                    // Item spawned by stage 
+#define ITEM_MASK_SPAWN_ITEM 2                      // Item spawned by another item
+#define ITEM_MASK_SPAWN_ARTICLE 3                   // Item spawned by Pokémon / misc entity class(es?)
+#define ITEM_MASK_SPAWN_DEFAULT 4
 
-#define ARTICLE_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn items?
+#define ITEM_MASK_SPAWN_ALL 0xF                     // Mask all GObj classes that can spawn items?
 
-#define ARTICLE_TEAM_DEFAULT 4U // Article is teamless; deals damage to any eligible target
-#define ARTICLE_PORT_DEFAULT 4U
-#define ARTICLE_UNK_DEFAULT 9U // Handicap?
-#define ARTICLE_STALE_DEFAULT 1.0F
+#define ITEM_TEAM_DEFAULT 4                         // Item is teamless; deals damage to any eligible target
+#define ITEM_PORT_DEFAULT GMMATCH_PLAYERS_MAX
+#define ITEM_HANDICAP_DEFAULT 9 // Handicap?
+#define ITEM_STALE_DEFAULT 1.0F
 
-#define ARTICLE_PICKUP_WAIT_DEFAULT 1400           // "Lifetime" while item is not being carried
+#define ITEM_PICKUP_WAIT_DEFAULT 1400               // "Lifetime" while item is not being carried
 
-#define ARTICLE_REFLECT_MAX_DEFAULT 100            // Maximum damage cap for reflected articles
-#define ARTICLE_REFLECT_MUL_DEFAULT 1.8F           // Universal reflect damage multiplier
-#define ARTICLE_REFLECT_ADD_DEFAULT 0.99F          // Added after multiplying article's hitbox damage
+#define ITEM_REFLECT_MAX_DEFAULT 100                // Maximum damage cap for reflected articles
+#define ITEM_REFLECT_MUL_DEFAULT 1.8F               // Universal reflect damage multiplier
+#define ITEM_REFLECT_ADD_DEFAULT 0.99F              // Added after multiplying article's hitbox damage
 
-#define ARTICLE_DESPAWN_FLASH_START_DEFAULT 180U // Article starts flashing rapidly once its lifetime (?) drops below this value
-#define ARTICLE_ARROW_BLINK_INT_DEFAULT 45 // Red arrow pointing downward at article "blinks" at this frequency (45 frames visible, 45 frames invisible)
+#define ITEM_DESPAWN_FLASH_BEGIN_DEFAULT 180U       // Item starts flashing rapidly once its lifetime (?) drops below this value
+#define ITEM_ARROW_FLASH_INT_DEFAULT 45             // Red arrow pointing downward at article "blinks" at this frequency (45 frames visible, 45 frames invisible)
 
-#define ARTICLE_REHIT_TIME_DEFAULT 16
+#define ITEM_REHIT_TIME_DEFAULT 16
 
-#define ARTICLE_DEFLECT_ANGLE_DEFAULT F_DEG_TO_RAD(135.0F) // 2.3561945F
+#define ITEM_HOP_ANGLE_DEFAULT F_DEG_TO_RAD(135.0F) // 2.3561945F
 
-#define ARTICLE_SPIN_SPEED_MUL_DEFAULT 0.31415927F
-#define ARTICLE_SPIN_SPEED_MUL_NEW_SPAWN 0.17453294F
-#define ARTICLE_SPIN_SPEED_MUL_PREV_SPAWN 0.27925268F
+#define ITEM_SPIN_SPEED_MUL_DEFAULT 0.31415927F     // 0.31415927F
+#define ITEM_SPIN_SPEED_MUL_NEW_SPAWN 0.17453294F   // 0.17453294F, might actually be incorrect
+#define ITEM_SPIN_SPEED_MUL_PREV_SPAWN 0.27925268F
 
-#define ARTICLE_SPIN_SPEED_SET_SMASH_THROW -0.36651915F
-#define ARTICLE_SPIN_SPEED_SET_NORMAL_THROW -0.17453294F
+#define ITEM_SPIN_SPEED_SET_SMASH_THROW (-0.36651915F)
+#define ITEM_SPIN_SPEED_SET_NORMAL_THROW (-0.17453294F)
 
-#define ARTICLE_SPIN_SPEED_FRACTION_DEFAULT 0.01F // Also multiplies spin speed
+#define ITEM_SPIN_SPEED_FRACTION_DEFAULT 0.01F // Also multiplies spin speed
 
 typedef enum atKind
 {
@@ -466,7 +467,10 @@ typedef struct Item_Struct // Common items, stage hazards and Pokémon
 
 // Points to all sorts of data
 
-#define ArticleGetPData(ap, off1, off2) \
-( (void*) ( ((uintptr_t)ap->attributes->unk_0x0 - (intptr_t)&off1 ) + (intptr_t)&off2) ) \
+#define itGetPData(ip, off1, off2) \
+( (void*) ( ( (uintptr_t)(ip)->attributes->unk_0x0 - (intptr_t)&(off1) ) + (intptr_t)&(off2) ) ) \
+
+#define itGetHitEvent(it_desc, off) \
+( (itHitEvent*) ( (uintptr_t)*(it_desc).p_file + (intptr_t)&(off) ) )
 
 #endif

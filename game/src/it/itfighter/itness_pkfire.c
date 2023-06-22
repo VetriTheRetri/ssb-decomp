@@ -164,7 +164,7 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
 
-    item_gobj = itManager_CreateItem(weapon_gobj, &Article_PKFire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ITEM));
+    item_gobj = itManager_CreateItem(weapon_gobj, &Article_PKFire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
     if (item_gobj == NULL)
     {

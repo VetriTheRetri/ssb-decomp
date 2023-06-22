@@ -9,7 +9,6 @@ itCreateDesc itCommon_Box_ItemDesc =
     0x1B,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     gmHitCollision_UpdateState_Disable,     // Hitbox Update State
     itBox_AFall_ProcUpdate,                 // Proc Update
     itBox_AFall_ProcMap,                    // Proc Map
@@ -240,7 +239,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
                     pos1.x = spawn_pos[i].x;
                     pos1.y = spawn_pos[i].y;
 
-                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos1, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos1, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
                 }
             }
             else
@@ -263,7 +262,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
                     pos2.x = spawn_pos[j].x;
                     pos2.y = spawn_pos[j].y;
 
-                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos2, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos2, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
                 }
                 D_ovl3_8018D048.unk_0x8++;
                 D_ovl3_8018D048.unk_0x10 = (u16)sp64;
@@ -302,7 +301,7 @@ bool32 itBox_Default_ProcHit(GObj *item_gobj)
     {
         return TRUE;
     }
-    else itBox_NExplode_CreateGFXGotoStatus(item_gobj);
+    else itBox_NExplode_CreateGFXGotoSetStatus(item_gobj);
 
     return FALSE;
 }
@@ -365,7 +364,7 @@ bool32 itBox_AThrow_ProcMap(GObj *item_gobj)
         {
             return TRUE;
         }
-        else itBox_NExplode_CreateGFXGotoStatus(item_gobj);
+        else itBox_NExplode_CreateGFXGotoSetStatus(item_gobj);
     }
     return FALSE;
 }
@@ -450,7 +449,7 @@ void itBox_NExplode_InitItemVars(GObj *item_gobj)
     ip->item_hit.can_hop = FALSE;
     ip->item_hit.can_reflect = FALSE;
 
-    ip->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ip->item_hit.stale = ITEM_STALE_DEFAULT;
     ip->item_hit.element = gmHitCollision_Element_Fire;
 
     ip->item_hit.clang = FALSE;
@@ -470,7 +469,7 @@ void itBox_NExplode_SetStatus(GObj *item_gobj)
 }
 
 // 0x80179B08
-void itBox_NExplode_CreateGFXGotoStatus(GObj *item_gobj)
+void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
     Effect_Unk *effect_unk;
     Item_Struct *ip = itGetStruct(item_gobj);

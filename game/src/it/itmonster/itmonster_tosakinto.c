@@ -93,11 +93,11 @@ void func_ovl3_8017E93C(GObj *item_gobj)
 
     if (ap->it_kind == It_Kind_Tosakinto)
     {
-        s = ArticleGetPData(ap, D_NF_0000B708, D_NF_0000B7CC); // Linker thing
+        s = itGetPData(ap, D_NF_0000B708, D_NF_0000B7CC); // Linker thing
 
         func_8000BD1C(joint->next, s, 0.0F);
 
-        s = ArticleGetPData(ap, D_NF_0000B708, D_NF_0000B90C); // Linker thing
+        s = itGetPData(ap, D_NF_0000B708, D_NF_0000B90C); // Linker thing
 
         func_8000BD54(joint->next->mobj, s, 0.0F);
 
@@ -167,7 +167,7 @@ GObj* jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
-        func_8000BD1C(joint, ArticleGetPData(ap, D_NF_0000B708, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint, itGetPData(ap, D_NF_0000B708, D_NF_00013624), 0.0F); // Linker thing
     }
     return item_gobj;
 }

@@ -8,7 +8,6 @@ itCreateDesc itCommon_BombHei_ItemDesc =
     0x12,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     gmHitCollision_UpdateState_Disable,     // Hitbox Update State
     itBombHei_AFall_ProcUpdate,             // Proc Update
     itBombHei_AFall_ProcMap,                // Proc Map
@@ -183,8 +182,8 @@ void func_ovl3_80177104(GObj *item_gobj, u8 lr)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
-    void *dll = ArticleGetPData(ip, BombHei_Motion_Data, BombHei_Motion_WalkLeft);  // (void*)((uintptr_t)((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft); // Linker thing
-    void *dlr = ArticleGetPData(ip, BombHei_Motion_Data, BombHei_Motion_WalkRight); // (void*)((uintptr_t)((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkRight); // Linker thing
+    void *dll = itGetPData(ip, BombHei_Motion_Data, BombHei_Motion_WalkLeft);  // (void*)((uintptr_t)((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft); // Linker thing
+    void *dlr = itGetPData(ip, BombHei_Motion_Data, BombHei_Motion_WalkRight); // (void*)((uintptr_t)((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkRight); // Linker thing
 
     if (lr != CENTER)
     {
@@ -500,7 +499,7 @@ void itBombHei_GWalk_InitItemVars(GObj *item_gobj)
 
     func_ovl3_8017275C(item_gobj);
 
-    texture = ArticleGetPData(ip, BombHei_Motion_Data, BombHei_Motion_Unk); // ((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_Unk; // Linker thing
+    texture = itGetPData(ip, BombHei_Motion_Data, BombHei_Motion_Unk); // ((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_Unk; // Linker thing
 
     func_8000BD54(joint->mobj, texture, 0.0F); // Set texture animation?
 
@@ -617,7 +616,7 @@ void itBombHei_NExplode_InitItemVars(GObj *item_gobj)
 
     ip->it_multi = 0;
 
-    ip->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ip->item_hit.stale = ITEM_STALE_DEFAULT;
 
     ip->item_event_index = 0;
 

@@ -113,8 +113,8 @@ void func_ovl3_8017A6A0(GObj *item_gobj) // Identical to Green Shell function
     DObj *joint = DObjGetStruct(item_gobj);
     s32 unused[2];
 
-    func_8000BD1C(joint, ArticleGetPData(ap, D_NF_00005F88, D_NF_00006018), 0.0F); // Linker thing
-    func_8000BD54(joint->mobj, ArticleGetPData(ap, D_NF_00005F88, D_NF_00006048), 0.0F); // Linker thing
+    func_8000BD1C(joint, itGetPData(ap, D_NF_00005F88, D_NF_00006018), 0.0F); // Linker thing
+    func_8000BD54(joint->mobj, itGetPData(ap, D_NF_00005F88, D_NF_00006048), 0.0F); // Linker thing
     func_8000DF34(item_gobj);
 }
 
@@ -447,7 +447,7 @@ void func_ovl3_8017AFEC(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->is_allow_pickup = FALSE;
-    ap->pickup_wait = ARTICLE_PICKUP_WAIT_DEFAULT;
+    ap->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 
     if (ap->phys_info.vel.x > ATRSHELL_CLAMP_VEL_X)
     {

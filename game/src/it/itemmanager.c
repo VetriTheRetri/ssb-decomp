@@ -21,9 +21,9 @@ void itManager_AllocUserData(void) // Many linker things here
     Item_Struct *ap;
     s32 i;
 
-    itManager_Global_CurrentUserData = ap = hal_alloc(sizeof(Item_Struct) * ARTICLE_ALLOC_MAX, 8U);
+    itManager_Global_CurrentUserData = ap = hal_alloc(sizeof(Item_Struct) * ITEM_ALLOC_MAX, 8U);
 
-    for (i = 0; i < (ARTICLE_ALLOC_MAX - 1); i++)
+    for (i = 0; i < (ITEM_ALLOC_MAX - 1); i++)
     {
         ap[i].ip_alloc_next = &ap[i + 1];
 
@@ -159,7 +159,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->x2D3_flag_b5 = FALSE;
     ap->is_static_damage = FALSE;
 
-    ap->pickup_wait = ARTICLE_PICKUP_WAIT_DEFAULT;
+    ap->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 
     ap->percent_damage = 0;
     ap->hitlag_timer = 0;
@@ -302,21 +302,21 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 
     if (flags & ARTICLE_FLAG_PROJECT)
     {
-        switch (flags & ARTICLE_MASK_SPAWN_ALL)
+        switch (flags & ITEM_MASK_SPAWN_ALL)
         {
-        case ARTICLE_MASK_SPAWN_GROUND:
-        case ARTICLE_MASK_SPAWN_DEFAULT: // Default?
+        case ITEM_MASK_SPAWN_GROUND:
+        case ITEM_MASK_SPAWN_DEFAULT: // Default?
             break;
 
-        case ARTICLE_MASK_SPAWN_FIGHTER:
+        case ITEM_MASK_SPAWN_FIGHTER:
             func_ovl2_800DF058(item_gobj, ftGetStruct(spawn_gobj)->coll_data.p_translate, &ftGetStruct(spawn_gobj)->coll_data);
             break;
 
-        case ARTICLE_MASK_SPAWN_ITEM:
+        case ITEM_MASK_SPAWN_ITEM:
             func_ovl2_800DF058(item_gobj, wpGetStruct(spawn_gobj)->coll_data.p_translate, &wpGetStruct(spawn_gobj)->coll_data);
             break;
 
-        case ARTICLE_MASK_SPAWN_ARTICLE:
+        case ITEM_MASK_SPAWN_ARTICLE:
             func_ovl2_800DF058(item_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
             break;
         }
@@ -741,7 +741,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
     {
         ap->pickup_wait--;
 
-        if (ap->pickup_wait <= ARTICLE_DESPAWN_FLASH_START_DEFAULT)
+        if (ap->pickup_wait <= ITEM_DESPAWN_FLASH_BEGIN_DEFAULT)
         {
             if (ap->pickup_wait == 0)
             {
@@ -759,7 +759,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
 
         if (ap->arrow_flash_timer == 0)
         {
-            ap->arrow_flash_timer = ARTICLE_ARROW_BLINK_INT_DEFAULT;
+            ap->arrow_flash_timer = ITEM_ARROW_FLASH_INT_DEFAULT;
         }
         ap->arrow_flash_timer--;
     }
@@ -858,12 +858,12 @@ void itManager_UpdateHitVictimInteractStats(Item_Hit *it_hit, GObj *victim_gobj,
 
             case gmHitCollision_Type_ShieldRehit:
                 it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
-                it_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Reflect:
                 it_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
-                it_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             case gmHitCollision_Type_Hit:
@@ -872,7 +872,7 @@ void itManager_UpdateHitVictimInteractStats(Item_Hit *it_hit, GObj *victim_gobj,
 
             case gmHitCollision_Type_HurtRehit:
                 it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
-                it_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+                it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
                 break;
 
             default: 
@@ -904,12 +904,12 @@ void itManager_UpdateHitVictimInteractStats(Item_Hit *it_hit, GObj *victim_gobj,
 
         case gmHitCollision_Type_ShieldRehit:
             it_hit->hit_targets[i].victim_flags.is_interact_shield = TRUE;
-            it_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Reflect:
             it_hit->hit_targets[i].victim_flags.is_interact_reflect = TRUE;
-            it_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         case gmHitCollision_Type_Hit:
@@ -918,7 +918,7 @@ void itManager_UpdateHitVictimInteractStats(Item_Hit *it_hit, GObj *victim_gobj,
 
         case gmHitCollision_Type_HurtRehit:
             it_hit->hit_targets[i].victim_flags.is_interact_hurt = TRUE;
-            it_hit->hit_targets[i].victim_flags.timer_rehit = ARTICLE_REHIT_TIME_DEFAULT;
+            it_hit->hit_targets[i].victim_flags.timer_rehit = ITEM_REHIT_TIME_DEFAULT;
             break;
 
         default: 
@@ -1660,7 +1660,7 @@ void itManager_ProcUpdateHitCollisions(GObj *item_gobj)
     {
         if ((ap->item_hit.can_hop) && (ap->ground_or_air == air))
         {
-            if (ap->shield_collide_angle < ARTICLE_DEFLECT_ANGLE_DEFAULT)
+            if (ap->shield_collide_angle < ITEM_HOP_ANGLE_DEFAULT)
             {
                 ap->shield_collide_angle -= HALF_PI32;
 
@@ -1725,11 +1725,11 @@ next_check:
         }
         if (!(ap->is_static_damage))
         {
-            ap->item_hit.damage = (ap->item_hit.damage * ARTICLE_REFLECT_MUL_DEFAULT) + ARTICLE_REFLECT_ADD_DEFAULT;
+            ap->item_hit.damage = (ap->item_hit.damage * ITEM_REFLECT_MUL_DEFAULT) + ITEM_REFLECT_ADD_DEFAULT;
 
-            if (ap->item_hit.damage > ARTICLE_REFLECT_MAX_DEFAULT)
+            if (ap->item_hit.damage > ITEM_REFLECT_MAX_DEFAULT)
             {
-                ap->item_hit.damage = ARTICLE_REFLECT_MAX_DEFAULT;
+                ap->item_hit.damage = ITEM_REFLECT_MAX_DEFAULT;
             }
         }
     }

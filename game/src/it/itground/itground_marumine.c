@@ -108,7 +108,7 @@ void func_ovl3_80183A20(GObj *item_gobj)
 
     ap->it_multi = 0;
 
-    ap->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->item_hit.stale = ITEM_STALE_DEFAULT;
 
     ap->item_event_index = 0;
 

@@ -61,12 +61,12 @@ void func_ovl3_8017FEB8(GObj *item_gobj)
 
     if (ap->it_kind == It_Kind_Spear)
     {
-        void *s = ArticleGetPData(ap, D_NF_0000DF38, D_NF_0000DFFC); // Linker thing
+        void *s = itGetPData(ap, D_NF_0000DF38, D_NF_0000DFFC); // Linker thing
         s32 unused;
 
         func_8000BD1C(joint->next, s, 0.0F);
 
-        s = ArticleGetPData(ap, D_NF_0000DF38, D_NF_0000E12C); // Linker thing
+        s = itGetPData(ap, D_NF_0000DF38, D_NF_0000E12C); // Linker thing
 
         func_8000BD54(joint->next->mobj, s, 0.0F);
         func_8000DF34(item_gobj);
@@ -206,7 +206,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
-        func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_0000DF38, D_NF_00013624), 0.0F);
+        func_8000BD1C(joint->next, itGetPData(ap, D_NF_0000DF38, D_NF_00013624), 0.0F);
     }
     return item_gobj;
 }

@@ -106,7 +106,7 @@ void func_ovl3_8017D948(GObj *item_gobj)
 
     if (ap->it_kind == It_Kind_Iwark)
     {
-        joint->display_list = dl = ArticleGetPData(ap, D_NF_0000A140, D_NF_0000A640); // Linker thing
+        joint->display_list = dl = itGetPData(ap, D_NF_0000A140, D_NF_0000A640); // Linker thing
 
         pos.y += ATIWARK_IWARK_ADD_POS_Y;
     }
@@ -211,7 +211,7 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
-        func_8000BD1C(joint, ArticleGetPData(ap, D_NF_0000A140, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint, itGetPData(ap, D_NF_0000A140, D_NF_00013624), 0.0F); // Linker thing
     }
     return item_gobj;
 }

@@ -6,7 +6,7 @@ void func_ovl3_80172310(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->rotate_speed = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ARTICLE_SPIN_SPEED_FRACTION_DEFAULT * ARTICLE_SPIN_SPEED_MUL_DEFAULT) : 0.0F;
+    ip->rotate_speed = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_DEFAULT) : 0.0F;
 
     if (ip->lr == LEFT)
     {
@@ -24,13 +24,13 @@ void func_ovl3_80172394(GObj *item_gobj, bool32 is_prev_spawn)
     {
         if (ip->attributes->spin_speed != 0)
         {
-            ip->rotate_speed = ip->attributes->spin_speed * ARTICLE_SPIN_SPEED_FRACTION_DEFAULT * ARTICLE_SPIN_SPEED_MUL_NEW_SPAWN;
+            ip->rotate_speed = ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_NEW_SPAWN;
         }
         else ip->rotate_speed = 0.0F;
     }
     else if (ip->attributes->spin_speed != 0)
     {
-        ip->rotate_speed = ip->attributes->spin_speed * ARTICLE_SPIN_SPEED_FRACTION_DEFAULT * ARTICLE_SPIN_SPEED_MUL_PREV_SPAWN;
+        ip->rotate_speed = ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_PREV_SPAWN;
     }
     else ip->rotate_speed = 0.0F;
 }
@@ -39,14 +39,14 @@ void func_ovl3_8017245C(GObj *item_gobj, f32 *spin_speed, bool32 is_smash_throw)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->rotate_speed = (is_smash_throw != FALSE) ? ARTICLE_SPIN_SPEED_SET_SMASH_THROW : ARTICLE_SPIN_SPEED_SET_NORMAL_THROW;
+    ip->rotate_speed = (is_smash_throw != FALSE) ? ITEM_SPIN_SPEED_SET_SMASH_THROW : ITEM_SPIN_SPEED_SET_NORMAL_THROW;
 
     if (*spin_speed < 0) // Facing direction, sort of
     {
         ip->rotate_speed = -ip->rotate_speed;
     }
 
-    ip->rotate_speed = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ARTICLE_SPIN_SPEED_FRACTION_DEFAULT * ip->rotate_speed) : 0.0F;
+    ip->rotate_speed = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ip->rotate_speed) : 0.0F;
 }
 
 void func_ovl3_80172508(GObj *item_gobj)
@@ -76,11 +76,11 @@ void func_ovl3_801725BC(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->owner_gobj = NULL;
-    ip->team = ARTICLE_TEAM_DEFAULT;
-    ip->port_id = ARTICLE_PORT_DEFAULT;
-    ip->handicap = ARTICLE_UNK_DEFAULT;
+    ip->team = ITEM_TEAM_DEFAULT;
+    ip->port_id = ITEM_PORT_DEFAULT;
+    ip->handicap = ITEM_HANDICAP_DEFAULT;
     ip->player_number = 0;
-    ip->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ip->item_hit.stale = ITEM_STALE_DEFAULT;
 
     ip->display_state = dbObjDisplayStatus_Global_Article;
 }
@@ -122,7 +122,7 @@ void func_ovl3_8017279C(GObj *item_gobj)
 
     ip->owner_gobj = NULL;
 
-    ip->team = ARTICLE_TEAM_DEFAULT;
+    ip->team = ITEM_TEAM_DEFAULT;
 }
 
 void func_ovl3_801727BC(GObj *item_gobj)
@@ -363,7 +363,7 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
     }
     func_ovl2_800E806C(fp, 6, 0);
 
-    ip->pickup_wait = ARTICLE_PICKUP_WAIT_DEFAULT;
+    ip->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 }
 
 void func_ovl3_80172E74(GObj *item_gobj) // Airborne article becomes grounded?
@@ -493,7 +493,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
             vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&gItemFileData->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
-            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE)) != NULL)
+            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE)) != NULL)
             {
                 func_ovl3_80172394(gobj, TRUE);
             }
@@ -564,7 +564,7 @@ GObj* func_ovl3_80173228(GObj *item_gobj)
     Monster_Info.monster_prev = Monster_Info.monster_curr;
     Monster_Info.monster_curr = index;
 
-    monster_gobj = func_ovl3_8016F238(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+    monster_gobj = func_ovl3_8016F238(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
     if (monster_gobj != NULL)
     {

@@ -11,7 +11,7 @@ void func_ovl3_80180FC0(GObj *item_gobj)
 
     if (ap->it_kind == It_Kind_Mb_Lucky)
     {
-        func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_00010000, D_NF_000100BC), 0.0F); // Linker thing
+        func_8000BD1C(joint->next, itGetPData(ap, D_NF_00010000, D_NF_000100BC), 0.0F); // Linker thing
         func_8000DF34(item_gobj);
     }
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
@@ -125,7 +125,7 @@ bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
                 vel.y = (rand_f32() * ATMBLUCKY_EGG_SPAWN_BASE_VEL) + ATMBLUCKY_EGG_SPAWN_ADD_VEL_Y;
                 vel.z = 0.0F;
 
-                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
                 if (egg_gobj != NULL)
                 {
@@ -252,7 +252,7 @@ GObj *jtgt_ovl3_801814C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
-        func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_00010000, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint->next, itGetPData(ap, D_NF_00010000, D_NF_00013624), 0.0F); // Linker thing
     }
     return item_gobj;
 }

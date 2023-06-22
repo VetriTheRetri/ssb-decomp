@@ -826,7 +826,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             {
                 vel.x = vel.y = vel.z = 0.0F;
 
-                func_ovl3_80172AEC(this_fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
+                func_ovl3_80172AEC(this_fp->item_hold, &vel, ITEM_STALE_DEFAULT);
                 ftCommon_ProcDamageStopVoice(fighter_gobj);
                 ftCommon_Damage_GotoDamageStatus(fighter_gobj);
             }

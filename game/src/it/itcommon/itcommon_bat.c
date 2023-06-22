@@ -8,7 +8,6 @@ itCreateDesc itCommon_Bat_ItemDesc =
     0x1B,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     gmHitCollision_UpdateState_Disable,     // Hitbox Update State
     itBat_AFall_ProcUpdate,                 // Proc Update
     itBat_AFall_ProcMap,                    // Proc Map

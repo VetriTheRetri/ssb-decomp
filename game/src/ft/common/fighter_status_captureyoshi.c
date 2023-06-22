@@ -48,7 +48,7 @@ void ftCommon_CaptureYoshi_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
         vel.x = vel.y = vel.z = 0.0F;
 
-        func_ovl3_80172AEC(this_fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
+        func_ovl3_80172AEC(this_fp->item_hold, &vel, ITEM_STALE_DEFAULT);
     }
     if (this_fp->catch_gobj != NULL)
     {

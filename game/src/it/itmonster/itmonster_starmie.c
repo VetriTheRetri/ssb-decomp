@@ -138,7 +138,7 @@ void func_ovl3_80181EF4(GObj *item_gobj, GObj *fighter_gobj)
     }
     if (ap->it_kind == It_Kind_Starmie)
     {
-        func_8000BD54(aj->mobj, ArticleGetPData(ap, D_NF_000112A0, D_NF_00011338), 0); // Linker thing
+        func_8000BD54(aj->mobj, itGetPData(ap, D_NF_000112A0, D_NF_00011338), 0); // Linker thing
 
         func_8000DF34(item_gobj);
     }
@@ -251,7 +251,7 @@ GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
-        func_8000BD1C(joint, ArticleGetPData(ap, D_NF_000112A0, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint, itGetPData(ap, D_NF_000112A0, D_NF_00013624), 0.0F); // Linker thing
 
         om_g_move_obj_dl_head(item_gobj, 0x12, item_gobj->room_order);
     }

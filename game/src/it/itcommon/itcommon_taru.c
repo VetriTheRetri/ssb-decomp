@@ -263,7 +263,7 @@ void func_ovl3_8017A240(GObj *item_gobj)
     ap->item_hit.can_rehit_item = TRUE;
     ap->item_hit.can_reflect = FALSE;
 
-    ap->item_hit.stale = ARTICLE_STALE_DEFAULT;
+    ap->item_hit.stale = ITEM_STALE_DEFAULT;
     ap->item_hit.element = gmHitCollision_Element_Fire;
 
     ap->item_hit.clang = FALSE;

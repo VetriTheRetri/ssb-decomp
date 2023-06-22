@@ -35,7 +35,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
                 vel.y = (rand_f32() * ATGRLUCKY_EGG_SPAWN_MUL) + ATGRLUCKY_EGG_SPAWN_ADD_Y;
                 vel.z = 0.0F;
 
-                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
                 if (egg_gobj != NULL)
                 {

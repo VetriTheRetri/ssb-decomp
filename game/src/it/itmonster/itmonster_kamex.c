@@ -165,7 +165,7 @@ void func_ovl3_80180A58(GObj *item_gobj, bool32 is_setup_vars)
 
         if (ap->it_kind == It_Kind_Kamex)
         {
-            void *dl = ArticleGetPData(ap, D_NF_0000EA60, D_NF_0000ED60); // Linker thing
+            void *dl = itGetPData(ap, D_NF_0000EA60, D_NF_0000ED60); // Linker thing
 
             joint->display_list = dl;
 
@@ -301,7 +301,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         }
         joint->translate.y -= kamex_ap->attributes->objectcoll_bottom;
 
-        func_8000BD1C(joint, ArticleGetPData(kamex_ap, D_NF_0000EA60, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint, itGetPData(kamex_ap, D_NF_0000EA60, D_NF_00013624), 0.0F); // Linker thing
     }
     return item_gobj;
 }

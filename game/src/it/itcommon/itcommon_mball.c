@@ -177,7 +177,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
         if (monster_gobj != NULL)
         {
@@ -283,7 +283,7 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ARTICLE_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
         if (monster_gobj != NULL)
         {

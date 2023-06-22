@@ -159,7 +159,7 @@ void func_ovl3_80182958(GObj *item_gobj)
 
     if (ap->it_kind == It_Kind_Sawamura)
     {
-        void *s = ArticleGetPData(ap, D_NF_00011F40, D_NF_00012340); // Linker thing
+        void *s = itGetPData(ap, D_NF_00011F40, D_NF_00012340); // Linker thing
 
         joint->display_list = s;
 
@@ -228,7 +228,7 @@ GObj* jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
-        func_8000BD1C(joint, ArticleGetPData(ap, D_NF_00011F40, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint, itGetPData(ap, D_NF_00011F40, D_NF_00013624), 0.0F); // Linker thing
 
         func_800269C0(0x13EU);
 

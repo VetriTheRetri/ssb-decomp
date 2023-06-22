@@ -93,7 +93,7 @@ void func_ovl3_80182E78(GObj *item_gobj)
     {
         ap->item_vars.dogas.pos = joint->translate;
 
-        func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_00012820, D_NF_000128DC), 0.0F); // Linker thing
+        func_8000BD1C(joint->next, itGetPData(ap, D_NF_00012820, D_NF_000128DC), 0.0F); // Linker thing
 
         func_8000DF34(item_gobj);
         func_800269C0(0x135U);
@@ -161,7 +161,7 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap->phys_info.vel.z = 0.0F;
         ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
 
-        func_8000BD1C(joint->next, ArticleGetPData(ap, D_NF_00012820, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint->next, itGetPData(ap, D_NF_00012820, D_NF_00013624), 0.0F); // Linker thing
     }
     return item_gobj;
 }

@@ -1551,7 +1551,7 @@ void ftDamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
 
                     vel.x = vel.y = vel.z = 0.0F;
 
-                    func_ovl3_80172AEC(fp->item_hold, &vel, ARTICLE_STALE_DEFAULT);
+                    func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
                 }
             }
         }
