@@ -1,6 +1,6 @@
 #include "fighter.h"
+#include "weapon.h"
 #include "item.h"
-#include "article.h"
 #include "ftfox.h"
 #include "gmmatch.h"
 

@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 
 // 0x801508E0
 void ftCommon_AttackAirLw_ProcHit(GObj *fighter_gobj)

@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 
 // 0x8014A5F0
 void ftCommon_CapturePulled_BitmapRotateScale(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)
@@ -91,7 +91,7 @@ void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((this_fp->item_hold != NULL) && !(itGetStruct(this_fp->item_hold)->is_light_throw))
+    if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
         vel.x = vel.y = vel.z = 0.0F;
 

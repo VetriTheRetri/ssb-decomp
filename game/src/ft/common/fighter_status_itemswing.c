@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 
 // 0x80146C40
 void ftCommon_HarisenSwing_ProcHit(GObj *fighter_gobj)
@@ -56,7 +56,7 @@ void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
         {
             ap = itGetStruct(fp->item_hold);
 
-            if (ap->at_multi != 0)
+            if (ap->it_multi != 0)
             {
                 func_800269C0(fp->command_vars.flags.flag1);
             }
@@ -69,7 +69,7 @@ void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
     {
         ap = itGetStruct(fp->item_hold);
 
-        if (ap->at_multi != 0)
+        if (ap->it_multi != 0)
         {
             Vec3f star_spawn_offset = Fighter_StarRodSwing_Star_Offset;
 

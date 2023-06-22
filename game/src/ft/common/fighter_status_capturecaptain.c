@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 
 extern intptr_t ftCaptain_CaptureCaptain_Offset_Add; // 0x00000000
 extern void *D_ovl2_80131034;
@@ -58,7 +58,7 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((this_fp->item_hold != NULL) && !(itGetStruct(this_fp->item_hold)->is_light_throw))
+    if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
         Vec3f vel;
 

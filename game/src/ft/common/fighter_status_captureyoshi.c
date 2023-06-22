@@ -1,5 +1,5 @@
 #include "ftyoshi.h"
-#include "article.h"
+#include "item.h"
 
 void func_ovl3_8014C770(void) // Unused
 {
@@ -42,7 +42,7 @@ void ftCommon_CaptureYoshi_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((this_fp->item_hold != NULL) && !(itGetStruct(this_fp->item_hold)->is_light_throw))
+    if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
         Vec3f vel;
 

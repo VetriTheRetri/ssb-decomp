@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 #include "gmmatch.h"
 
 extern u8 gmBonusStat_TomatoPickupCount;
@@ -31,7 +31,7 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
 
                 is_pickup = FALSE;
 
-                if ((ap->is_light_throw == TRUE) && (pickup_mask & FTCOMMON_GET_MASK_LIGHT))
+                if ((ap->weight == It_Weight_Light) && (pickup_mask & FTCOMMON_GET_MASK_LIGHT))
                 {
                     pickup_range.x = ft_translate->x + (fp->lr * item_pickup->pickup_offset_light.x);
                     pickup_range.y = ft_translate->y + item_pickup->pickup_offset_light.y;
@@ -44,7 +44,7 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
                         }
                     }
                 }
-                if ((ap->is_light_throw == FALSE) && (pickup_mask & FTCOMMON_GET_MASK_HEAVY))
+                if ((ap->weight == It_Weight_Heavy) && (pickup_mask & FTCOMMON_GET_MASK_HEAVY))
                 {
                     pickup_range.x = ft_translate->x + (fp->lr * item_pickup->pickup_offset_heavy.x);
                     pickup_range.y = ft_translate->y + item_pickup->pickup_offset_heavy.y;
@@ -150,7 +150,7 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 
         if (item_gobj != NULL)
         {
-            atCommon_PickupSetHoldFighter(item_gobj, fighter_gobj);
+            itMain_PickupSetHoldFighter(item_gobj, fighter_gobj);
         }
     }
     if (fighter_gobj->anim_frame <= 0.0F)
@@ -244,11 +244,11 @@ void ftCommon_HeavyThrow_ProcMap(GObj *fighter_gobj)
 void ftCommon_Get_SetStatus(GObj *fighter_gobj, GObj *item_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 
-    ftStatus_Update(fighter_gobj, (!(ap->is_light_throw) ? ftStatus_Common_HeavyGet : ftStatus_Common_LightGet), 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
+    ftStatus_Update(fighter_gobj, ((ip->weight == It_Weight_Heavy) ? ftStatus_Common_HeavyGet : ftStatus_Common_LightGet), 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     if (fp->status_info.status_id == ftStatus_Common_HeavyGet)

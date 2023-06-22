@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 
 // 0x8014FE40
 void ftCommon_AttackS4_ProcUpdate(GObj *fighter_gobj)

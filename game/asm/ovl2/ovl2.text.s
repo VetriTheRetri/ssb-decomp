@@ -23641,7 +23641,7 @@ glabel ftCommon_GFXSpawn
   /* 066B10 800EB310 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB314
   /* 066B14 800EB314 02002025 */        or $a0, $s0, $zero
-  /* 066B18 800EB318 0C05E47D */       jal func_ovl3_801791F4
+  /* 066B18 800EB318 0C05E47D */       jal itEffect_CreateBoxSmashGFX
   /* 066B1C 800EB31C AFA30038 */        sw $v1, 0x38($sp)
   /* 066B20 800EB320 10000019 */         b jtgt_ovl2_800EB388
   /* 066B24 800EB324 8FA30038 */        lw $v1, 0x38($sp)
@@ -67110,7 +67110,7 @@ glabel func_ovl2_80111D64
   /* 08D6B8 80111EB8 03E00008 */        jr $ra
   /* 08D6BC 80111EBC 00000000 */       nop 
 
-glabel func_ovl2_80111EC0
+glabel ifManager_ItemIndicator_CreateInterface
   /* 08D6C0 80111EC0 27BDFFD8 */     addiu $sp, $sp, -0x28
   /* 08D6C4 80111EC4 AFBF001C */        sw $ra, 0x1c($sp)
   /* 08D6C8 80111EC8 AFA40028 */        sw $a0, 0x28($sp)

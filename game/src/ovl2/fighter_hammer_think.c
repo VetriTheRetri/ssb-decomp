@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 #include "gmmatch.h"
 
 // 0x800F36E0

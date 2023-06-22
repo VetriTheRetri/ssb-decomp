@@ -1,7 +1,7 @@
 #include "mpcoll.h"
 #include "fighter.h"
+#include "weapon.h"
 #include "item.h"
-#include "article.h"
 #include "gmmatch.h"
 
 extern s32 D_ovl2_80130DE0;

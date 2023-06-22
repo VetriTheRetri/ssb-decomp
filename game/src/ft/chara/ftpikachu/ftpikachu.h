@@ -5,7 +5,7 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 #include <game/src/ft/fighter.h>
-#include <game/src/it/item/item.h>
+#include <game/src/wp/weapon.h>
 
 #define FTPIKACHU_THUNDERJOLT_SPAWN_JOINT 11					// Spawn Thunder Jolt relative to this bone
 #define FTPIKACHU_THUNDERJOLT_SPAWN_ANGLE F_DEG_TO_RAD(-45.0F)	// Launch angle of Thunder Jolt in Radians (-0.7853982F)

@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 
 // 0x80146FB0
 void ftCommon_LGunShoot_ProcUpdate(GObj *fighter_gobj)
@@ -24,7 +24,7 @@ void ftCommon_LGunShoot_ProcAccessory(GObj *fighter_gobj)
     {
         ap = itGetStruct(fp->item_hold);
 
-        if (ap->at_multi != 0)
+        if (ap->it_multi != 0)
         {
             spawn_ammo_offset = Fighter_LGunShoot_Ammo_Offset;
 
@@ -114,7 +114,7 @@ void ftCommon_FireFlowerShoot_UpdateAmmoStats(Fighter_Struct *fp, s32 ammo_sub)
     f32 size_mul;
     s32 flame_vel_index;
 
-    if (ap->at_multi >= ammo_sub)
+    if (ap->it_multi >= ammo_sub)
     {
         size_mul = 1.0F / fp->attributes->size_mul;
 
@@ -195,7 +195,7 @@ void ftCommon_FireFlowerShoot_ProcAccessory(GObj *fighter_gobj)
             {
                 fp->status_vars.common.fireflower.gfx_spawn_int = FTCOMMON_FIREFLOWERSHOOT_GFX_SPAWN_INT;
 
-                if (ap->at_multi < ammo_sub)
+                if (ap->it_multi < ammo_sub)
                 {
                     gfx_haveammo_offset = Fighter_FireFlowerShoot_HaveAmmo_Dust_Offset;
 
@@ -220,7 +220,7 @@ void ftCommon_FireFlowerShoot_ProcAccessory(GObj *fighter_gobj)
             }
             if (fp->command_vars.flags.flag0 == 1)
             {
-                if (ap->at_multi >= ammo_sub)
+                if (ap->it_multi >= ammo_sub)
                 {
                     gfx_spark_offset = Fighter_FireFlowerShoot_Spark_Offset;
                     gfx_spark_scatter = Fighter_FireFlowerShoot_Spark_Scatter;

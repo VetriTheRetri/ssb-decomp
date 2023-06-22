@@ -5,7 +5,7 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 #include <game/src/ft/fighter.h>
-#include <game/src/it/item/item.h>
+#include <game/src/wp/weapon.h>
 #include <game/src/gm/gmmatch.h>
 
 #define FTMASTERHAND_ATTACK_WAIT_MAX 120				// Master Hand will wait at most this many frames before initiating his next attack

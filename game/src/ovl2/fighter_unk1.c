@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 #include "gmmatch.h"
 #include "ftdonkey.h"
 #include "ftsamus.h"
@@ -1541,11 +1541,11 @@ void ftDamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
     {
         if ((fp->damage_knockback != 0.0F) && ((fp->hitlag_timer == 0) || !(fp->x192_flag_b6) || !(fp->damage_knockback < (fp->damage_knockback_again + 30.0F))))
         {
-            Item_Struct *ap = itGetStruct(fp->item_hold);
+            Item_Struct *ip = itGetStruct(fp->item_hold);
 
-            if ((ap->is_light_throw) || (fp->ft_kind != Ft_Kind_Donkey) && (fp->ft_kind != Ft_Kind_PolyDonkey) && (fp->ft_kind != Ft_Kind_GiantDonkey))
+            if ((ip->weight != It_Weight_Heavy) || (fp->ft_kind != Ft_Kind_Donkey) && (fp->ft_kind != Ft_Kind_PolyDonkey) && (fp->ft_kind != Ft_Kind_GiantDonkey))
             {
-                if ((damage > (s32)rand_u16_range(60)) || ((atCommon_CheckTypeShootEmpty(fp->item_hold, damage) != FALSE) && (rand_u16_range(2) == 0)))
+                if ((damage > (s32)rand_u16_range(60)) || ((atCommon_CheckTypeShootEmpty(fp->item_hold) != FALSE) && (rand_u16_range(2) == 0)))
                 {
                     Vec3f vel;
 
@@ -2155,7 +2155,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         break;
 
     case 0x2E:
-        func_ovl3_801791F4(&offset);
+        itEffect_CreateBoxSmashGFX(&offset);
         break;
 
     case 0x5A:

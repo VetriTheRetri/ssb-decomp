@@ -1,5 +1,5 @@
 #include <game/src/ft/chara/ftfox/ftfox.h>
-#include <game/src/it/item/item.h>
+#include <game/src/wp/weapon.h>
 #include "effect.h"
 
 // 0x8015CB80

@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 
 // 0x8014F670
 void ftCommon_AttackDash_SetStatus(GObj *fighter_gobj)

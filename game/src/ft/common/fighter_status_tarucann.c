@@ -1,5 +1,5 @@
 #include "fighter.h"
-#include "article.h"
+#include "item.h"
 #include "gmground.h"
 
 // 0x80143E10
@@ -62,7 +62,7 @@ void ftCommon_TaruCann_SetStatus(GObj *fighter_gobj, GObj *tarucann_gobj)
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((fp->item_hold != NULL) && !(itGetStruct(fp->item_hold)->is_light_throw))
+    if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->weight == It_Weight_Heavy))
     {
         vel.x = vel.y = vel.z = 0.0F;
 

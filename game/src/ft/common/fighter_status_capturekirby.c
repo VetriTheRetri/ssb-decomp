@@ -1,5 +1,5 @@
 #include "ftkirby.h"
-#include "article.h"
+#include "item.h"
 
 // 0x8014B700
 void ftCommon_CaptureKirby_UpdatePosMag(GObj *fighter_gobj, Vec3f *dist)
@@ -69,7 +69,7 @@ void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
-    if ((this_fp->item_hold != NULL) && !(itGetStruct(this_fp->item_hold)->is_light_throw))
+    if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
         Vec3f vel;
 

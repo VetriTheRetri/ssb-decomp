@@ -1,6 +1,6 @@
 #include "fighter.h"
 #include "ftdonkey.h"
-#include "article.h"
+#include "item.h"
 
 // 0x80140340
 void ftCommon_Damage_SetDustGFXInterval(Fighter_Struct *fp)
@@ -816,7 +816,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
     }
     if (this_fp->item_hold != NULL)
     {
-        if (!(itGetStruct(this_fp->item_hold)->is_light_throw) && ((this_fp->ft_kind == Ft_Kind_Donkey) || (this_fp->ft_kind == Ft_Kind_PolyDonkey) || (this_fp->ft_kind == Ft_Kind_GiantDonkey)))
+        if ((itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy) && ((this_fp->ft_kind == Ft_Kind_Donkey) || (this_fp->ft_kind == Ft_Kind_PolyDonkey) || (this_fp->ft_kind == Ft_Kind_GiantDonkey)))
         {
             if (func_ovl3_80140D30(this_fp) != FALSE)
             {

@@ -4,13 +4,8 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\it",
-    "\\game\\src\\it\\article",
-    "\\game\\src\\it\\article\\articlecommon",
-    "\\game\\src\\it\\item\\itemmario",
-    "\\game\\src\\it\\item\\itempikachu",
-    "\\game\\src\\it\\item\\itemsamus",
-    "\\game\\src\\ovl2"
+    "\\game\\src\\it\\itcommon"
   ],
-  "SelectedNode": "\\game\\src\\it\\article\\articlecommon\\article_at_bumper.c",
+  "SelectedNode": "\\game\\src\\it\\itcommon\\itcommon_box.c",
   "PreviewInSolutionExplorer": false
 }

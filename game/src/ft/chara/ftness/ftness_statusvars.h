@@ -4,7 +4,7 @@
 #include <game/include/ssb_types.h>
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
-#include "itemvars.h"
+#include "weaponvars.h"
 
 #define FTNESS_PKTHUNDER_TRAIL_POS_COUNT ((ITPKTHUNDER_TRAIL_COUNT * 2) + ((ITPKTHUNDER_TRAIL_COUNT * 2) / ITPKTHUNDER_TRAIL_COUNT))
 

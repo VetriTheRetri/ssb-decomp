@@ -5,7 +5,7 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 #include <game/src/ft/fighter.h>
-#include <game/src/it/item/item.h>
+#include <game/src/wp/weapon.h>
 
 #define FTKIRBY_COPYDAMAGE_LOSECOPY_RANDOM ((float) 1 / 12)  // 0.083333336F
 

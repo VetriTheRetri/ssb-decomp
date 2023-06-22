@@ -1,6 +1,6 @@
 #include "fighter.h"
 #include "ftdonkey.h"
-#include "article.h"
+#include "item.h"
 
 // 0x801462A0
 void ftCommon_ItemThrow_UpdateModelYaw(GObj *fighter_gobj)
