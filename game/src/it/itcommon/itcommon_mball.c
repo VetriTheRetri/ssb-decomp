@@ -177,7 +177,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
         if (monster_gobj != NULL)
         {
@@ -283,7 +283,7 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
         if (monster_gobj != NULL)
         {
@@ -343,7 +343,7 @@ GObj* jtgt_ovl3_8017CE0C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->item_vars.m_ball.is_rebound = FALSE;
 
-        ap->x2D3_flag_b5 = TRUE;
+        ap->is_unused_item_bool = TRUE;
 
         joint->rotate.z = 0.0F;
 

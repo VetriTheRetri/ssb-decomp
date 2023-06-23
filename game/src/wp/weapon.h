@@ -39,7 +39,7 @@
 
 #define WEAPON_STALE_ADD_DEFAULT 0.999F         // Bonus 1% added after multiplying hitbox damage with staling modifier
 
-#define WEAPON_DEFLECT_ANGLE_DEFAULT F_DEG_TO_RAD(135.0F) // 2.3561945F - Determines whether weapon bounces off a shield
+#define WEAPON_HOP_ANGLE_DEFAULT F_DEG_TO_RAD(135.0F) // 2.3561945F - Determines whether weapon bounces off a shield
 
 typedef enum Wp_Kind
 {
@@ -119,24 +119,15 @@ typedef struct wpCommonAttributes // Moreso hitbox stuff
 
 } wpCommonAttributes;
 
-typedef struct ItemHitUnk
+typedef struct wpHitPositions
 {
     Vec3f pos;
     Vec3f pos_prev;
-    s32 unk_0x18;
-    u8 filler_0x1C[0x54 - 0x1C];
-    f32 unk_0x54;
-    f32 unk_0x58;
-    f32 unk_0x5C;
+    s32 unused1;
+    u8 filler[0x5C - 0x1C];
+    f32 unused2;
 
-} ItemHitUnk;
-
-typedef struct _ItemHitArray
-{
-    GObj *victim_gobj;
-    gmHitCollisionFlags victim_flags;
-
-} ItemHitArray;
+} wpHitPositions;
 
 typedef struct _Weapon_Hit
 {
@@ -168,8 +159,8 @@ typedef struct _Weapon_Hit
     gmAttackFlags stat_flags;
     u16 stat_count;
     s32 hitbox_count;
-    ItemHitUnk weapon_hit_unk[2];
-    ItemHitArray hit_targets[4];
+    wpHitPositions hit_positions[2];
+    gmHitCollisionRecord hit_targets[4];
 
 } Weapon_Hit;
 

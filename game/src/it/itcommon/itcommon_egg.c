@@ -1,11 +1,97 @@
 #include "item.h"
 
-bool32 jtgt_ovl3_801815C0(GObj *item_gobj)
+itStatusDesc itCommon_Egg_StatusDesc[6] =
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    // Status 0 (Ground Wait)
+    {
+        NULL,                               // Proc Update
+        itEgg_GWait_ProcMap,                // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        itEgg_Default_ProcHit               // Proc Damage
+    },
+
+    // Status 1 (Air Fall Wait)
+    {
+        itEgg_AFall_ProcUpdate,             // Proc Update
+        itEgg_AFall_ProcMap,                // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        itEgg_Default_ProcHit               // Proc Damage
+    },
+
+    // Status 2 (Fighter Hold)
+    {
+        NULL,                               // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 3 (Fighter Throw)
+    {
+        itEgg_AThrow_ProcUpdate,            // Proc Update
+        itEgg_AThrow_ProcMap,               // Proc Map
+        itEgg_Default_ProcHit,              // Proc Hit
+        itEgg_Default_ProcHit,              // Proc Shield
+        itCommon_Default_ProcHop,           // Proc Hop
+        itEgg_Default_ProcHit,              // Proc Set-Off
+        itEgg_Default_ProcHit,              // Proc Reflector
+        itEgg_Default_ProcHit               // Proc Damage
+    },
+
+    // Status 4 (Fighter Drop)
+    {
+        itEgg_AFall_ProcUpdate,             // Proc Update
+        itEgg_ADrop_ProcMap,                // Proc Map
+        itEgg_Default_ProcHit,              // Proc Hit
+        itEgg_Default_ProcHit,              // Proc Shield
+        itCommon_Default_ProcHop,           // Proc Hop
+        itEgg_Default_ProcHit,              // Proc Set-Off
+        itEgg_Default_ProcHit,              // Proc Reflector
+        itEgg_Default_ProcHit               // Proc Damage
+    },
+
+    // Status 5 (Neutral Explosion)
+    {
+        itEgg_NExplode_ProcUpdate,          // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
+typedef enum itEggStatus
+{
+    itStatus_Egg_GWait,
+    itStatus_Egg_AFall,
+    itStatus_Egg_FHold,
+    itStatus_Egg_AThrow,
+    itStatus_Egg_ADrop,
+    itStatus_Egg_NExplode
+};
+
+// 0x801815C0
+bool32 itEgg_AFall_ProcUpdate(GObj *item_gobj)
+{
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATEGG_GRAVITY, ATEGG_T_VEL);
+    func_ovl3_80172558(ip, ATEGG_GRAVITY, ATEGG_T_VEL);
     func_ovl3_801713F4(item_gobj);
 
     joint->next->rotate.z = joint->rotate.z;
@@ -13,14 +99,16 @@ bool32 jtgt_ovl3_801815C0(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_80181618(GObj *item_gobj)
+// 0x80181618
+bool32 itEgg_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_8018171C);
+    func_ovl3_801735A0(item_gobj, itEgg_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80181640(GObj *item_gobj)
+// 0x80181640
+bool32 itEgg_Default_ProcHit(GObj *item_gobj)
 {
     if (func_ovl3_801730D4(item_gobj) != FALSE)
     {
@@ -28,62 +116,64 @@ bool32 func_ovl3_80181640(GObj *item_gobj)
 
         return TRUE;
     }
-    else func_ovl3_80181B90(item_gobj);
+    else itEgg_NExplode_CreateGFXGotoSetStatus(item_gobj);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80181688(GObj *item_gobj)
+// 0x80181688
+bool32 itEgg_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, func_ovl3_801816E0);
+    return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itEgg_GWait_SetStatus);
 }
 
-void func_ovl3_801816B8(GObj *item_gobj)
+// 0x801816B8
+void itEgg_GWait_SetModelVars(GObj *item_gobj)
 {
     DObj *joint = DObjGetStruct(item_gobj);
 
-    joint->scale.z = 1.0F;
-    joint->scale.y = 1.0F;
-    joint->scale.x = 1.0F;
+    joint->scale.x = joint->scale.y = joint->scale.z = 1.0F;
 
     joint->next->rotate.z = joint->rotate.z;
 }
 
-extern itStatusDesc Article_Egg_Status[];
-
-void func_ovl3_801816E0(GObj *item_gobj)
+// 0x801816E0
+void itEgg_GWait_SetStatus(GObj *item_gobj)
 {
     func_ovl3_80172E74(item_gobj);
-    func_ovl3_801816B8(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_Egg_Status, 0);
+    itEgg_GWait_SetModelVars(item_gobj);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_GWait);
 }
 
-void func_ovl3_8018171C(GObj *item_gobj)
+// 0x8018171C
+void itEgg_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->is_allow_pickup = FALSE;
+    ip->is_allow_pickup = FALSE;
 
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
-    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ap->is_damage_all = TRUE;
+    ip->is_damage_all = TRUE;
 
-    func_ovl3_80173F78(ap);
-    itMain_SetItemStatus(item_gobj, Article_Egg_Status, 1);
+    func_ovl3_80173F78(ip);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_AFall);
 }
 
-void jtgt_ovl3_80181778(GObj *item_gobj)
+// 0x80181778
+void itEgg_FHold_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_Egg_Status, 2);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_FHold);
 }
 
-bool32 jtgt_ovl3_801817A0(GObj *item_gobj)
+// 0x801817A0
+bool32 itEgg_AThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATEGG_GRAVITY, ATEGG_T_VEL);
+    func_ovl3_80172558(ip, ATEGG_GRAVITY, ATEGG_T_VEL);
     func_ovl3_801713F4(item_gobj);
 
     joint->next->rotate.z = joint->rotate.z;
@@ -91,7 +181,8 @@ bool32 jtgt_ovl3_801817A0(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801817F8(GObj *item_gobj)
+// 0x801817F8
+bool32 itEgg_AThrow_ProcMap(GObj *item_gobj)
 {
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE)
     {
@@ -101,20 +192,21 @@ bool32 jtgt_ovl3_801817F8(GObj *item_gobj)
 
             return TRUE;
         }
-        else func_ovl3_80181B90(item_gobj);
+        else itEgg_NExplode_CreateGFXGotoSetStatus(item_gobj);
     }
     return FALSE;
 }
 
-void jtgt_ovl3_80181854(GObj *item_gobj)
+// 0x80181854
+void itEgg_AThrow_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->is_damage_all = TRUE;
+    ip->is_damage_all = TRUE;
 
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    itMain_SetItemStatus(item_gobj, Article_Egg_Status, 3);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_AThrow);
 }
 
 bool32 func_ovl3_80181894(GObj *item_gobj) // Unused
@@ -124,32 +216,35 @@ bool32 func_ovl3_80181894(GObj *item_gobj) // Unused
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801818B8(GObj *item_gobj)
+// 0x801818B8
+bool32 itEgg_ADrop_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, func_ovl3_801816E0);
+    return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itEgg_GWait_SetStatus);
 }
 
-void jtgt_ovl3_801818E8(GObj *item_gobj)
+// 0x801818E8
+void itEgg_ADrop_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->is_damage_all = TRUE;
+    ip->is_damage_all = TRUE;
 
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    itMain_SetItemStatus(item_gobj, Article_Egg_Status, 4);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_ADrop);
 }
 
 extern itCreateDesc Article_Egg_Data;
 extern intptr_t D_NF_00000B14;
 
-bool32 jtgt_ovl3_80181928(GObj *item_gobj)
+// 0x80181928
+bool32 itEgg_NExplode_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->it_multi++;
+    ip->it_multi++;
 
-    if (ap->it_multi == ATEGG_EXPLODE_GFX_WAIT)
+    if (ip->it_multi == ATEGG_EXPLODE_GFX_WAIT)
     {
         func_ovl2_801041A0(&DObjGetStruct(item_gobj)->translate);
 
@@ -160,18 +255,19 @@ bool32 jtgt_ovl3_80181928(GObj *item_gobj)
     return FALSE;
 }
 
-GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80181998
+GObj* itCommon_Egg_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Egg_Data, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *egg_ap = itGetStruct(item_gobj);
+        Item_Struct *egg_ip = itGetStruct(item_gobj);
 
-        egg_ap->x2D3_flag_b5 = TRUE;
+        egg_ip->is_unused_item_bool = TRUE;
 
-        egg_ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(egg_ap);
+        egg_ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(egg_ip);
 
         func_80008CC0(joint->next, 0x2EU, 0U);
 
@@ -179,15 +275,15 @@ GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         if (flags & ITEM_MASK_SPAWN_ARTICLE)
         {
-            Item_Struct *spawn_ap = itGetStruct(spawn_gobj);
+            Item_Struct *spawn_ip = itGetStruct(spawn_gobj);
 
-            if ((spawn_ap->it_kind == It_Kind_Mb_Lucky) && (rand_u16_range(2) == 0))
+            if ((spawn_ip->it_kind == It_Kind_Mb_Lucky) && (rand_u16_range(2) == 0))
             {
                 joint->next->rotate.y = PI32;
 
-                egg_ap->phys_info.vel.x = -egg_ap->phys_info.vel.x;
+                egg_ip->phys_info.vel.x = -egg_ip->phys_info.vel.x;
 
-                egg_ap->lr = -egg_ap->lr;
+                egg_ip->lr = -egg_ip->lr;
             }
         }
     }
@@ -196,49 +292,52 @@ GObj* jtgt_ovl3_80181998(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 extern intptr_t D_NF_00000098;
 
-void func_ovl3_80181AA8(GObj *item_gobj)
+// 0x80181AA8
+void itEgg_NExplode_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->it_multi = 0;
+    ip->it_multi = 0;
 
-    ap->item_event_index = 0;
+    ip->item_event_index = 0;
 
-    ap->item_hit.hit_sfx = 1;
-    ap->item_hit.stale = ITEM_STALE_DEFAULT;
+    ip->item_hit.hit_sfx = 1;
+    ip->item_hit.stale = ITEM_STALE_DEFAULT;
 
     func_800269C0(1U);
 
-    ap->item_hit.can_rehit_item = TRUE;
-    ap->item_hit.can_hop = FALSE;
-    ap->item_hit.can_reflect = FALSE;
-    ap->item_hit.clang = FALSE;
-    ap->item_hit.element = gmHitCollision_Element_Fire;
+    ip->item_hit.can_rehit_item = TRUE;
+    ip->item_hit.can_hop = FALSE;
+    ip->item_hit.can_reflect = FALSE;
+    ip->item_hit.clang = FALSE;
+    ip->item_hit.element = gmHitCollision_Element_Fire;
 
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     func_ovl3_8017279C(item_gobj);
     func_ovl3_8017275C(item_gobj);
     itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ( (uintptr_t)*Article_Egg_Data.p_file + (intptr_t)&D_NF_00000098) ); // Linker thing
 }
 
-void func_ovl3_80181B5C(GObj *item_gobj)
+// 0x80181B5C
+void itEgg_NExplode_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80181AA8(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_Egg_Status, 5);
+    itEgg_NExplode_InitItemVars(item_gobj);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_NExplode);
 }
 
-void func_ovl3_80181B90(GObj *item_gobj)
+// 0x80181B90
+void itEgg_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Effect_Unk *ep;
 
-    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ap->phys_info.vel.x = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.z = 0.0F;
+    ip->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel.y = 0.0F;
+    ip->phys_info.vel.z = 0.0F;
 
     ep = func_ovl2_801005C8(&joint->translate);
 
@@ -251,5 +350,5 @@ void func_ovl3_80181B90(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
-    func_ovl3_80181B5C(item_gobj);
+    itEgg_NExplode_SetStatus(item_gobj);
 }

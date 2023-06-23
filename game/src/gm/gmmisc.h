@@ -109,6 +109,13 @@ typedef struct gmHitCollisionFlags
 
 } gmHitCollisionFlags;
 
+typedef struct gmHitCollisionRecord
+{
+    GObj *victim_gobj;
+    gmHitCollisionFlags victim_flags;
+
+} gmHitCollisionRecord;
+
 typedef struct gmPlayerInput
 {
     u16 button_hold;

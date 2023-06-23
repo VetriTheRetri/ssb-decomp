@@ -66,7 +66,7 @@ bool32 wpNess_PKFire_ProcHit(GObj *weapon_gobj)
     pos.y = (pos.y * ITPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.y;
     pos.z = (pos.z * ITPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.z;
 
-    func_ovl3_80185824(weapon_gobj, &pos, &vel);
+    itNess_PKFire_CreateItem(weapon_gobj, &pos, &vel);
 
     return TRUE;
 }

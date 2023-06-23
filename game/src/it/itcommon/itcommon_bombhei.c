@@ -717,7 +717,7 @@ GObj* itCommon_BombHei_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 
         joint->translate = translate;
 
-        ip->x2D3_flag_b5 = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
         joint->rotate.z = 0.0F;
 

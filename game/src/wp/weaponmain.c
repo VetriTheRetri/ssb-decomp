@@ -112,7 +112,7 @@ void wpMain_ClearHitVictimRecord(Weapon_Struct *wp) // Clear hit victims array
 
     for (i = 0; i < ARRAY_COUNT(wp->weapon_hit.hit_targets); i++)
     {
-        ItemHitArray *targets = &wp->weapon_hit.hit_targets[i];
+        gmHitCollisionRecord *targets = &wp->weapon_hit.hit_targets[i];
 
         targets->victim_gobj = NULL;
 

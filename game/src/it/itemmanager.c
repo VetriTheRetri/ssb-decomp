@@ -156,7 +156,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->is_allow_pickup = FALSE;
     ap->is_hold = FALSE;
     ap->is_allow_knockback = FALSE;
-    ap->x2D3_flag_b5 = FALSE;
+    ap->is_unused_item_bool = FALSE;
     ap->is_static_damage = FALSE;
 
     ap->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
@@ -300,7 +300,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 
     ap->coll_data.pos_curr = DObjGetStruct(item_gobj)->translate = *pos;
 
-    if (flags & ARTICLE_FLAG_PROJECT)
+    if (flags & ITEM_FLAG_PROJECT)
     {
         switch (flags & ITEM_MASK_SPAWN_ALL)
         {
@@ -637,39 +637,39 @@ GObj* func_ovl3_8016F238(GObj *spawn_gobj, s32 index, Vec3f *pos, Vec3f *vel, u3
 // 0x8016F280
 void itManager_UpdateHitPositions(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     s32 i;
 
-    for (i = 0; i < ap->item_hit.hitbox_count; i++)
+    for (i = 0; i < ip->item_hit.hitbox_count; i++)
     {
-        switch (ap->item_hit.update_state)
+        switch (ip->item_hit.update_state)
         {
         case gmHitCollision_UpdateState_Disable:
             break;
 
         case gmHitCollision_UpdateState_New:
-            ap->item_hit.item_hit_unk[i].pos.x = ap->item_hit.offset[i].x + DObjGetStruct(item_gobj)->translate.x;
-            ap->item_hit.item_hit_unk[i].pos.y = ap->item_hit.offset[i].y + DObjGetStruct(item_gobj)->translate.y;
-            ap->item_hit.item_hit_unk[i].pos.z = ap->item_hit.offset[i].z + DObjGetStruct(item_gobj)->translate.z;
+            ip->item_hit.hit_positions[i].pos.x = ip->item_hit.offset[i].x + DObjGetStruct(item_gobj)->translate.x;
+            ip->item_hit.hit_positions[i].pos.y = ip->item_hit.offset[i].y + DObjGetStruct(item_gobj)->translate.y;
+            ip->item_hit.hit_positions[i].pos.z = ip->item_hit.offset[i].z + DObjGetStruct(item_gobj)->translate.z;
 
-            ap->item_hit.update_state = gmHitCollision_UpdateState_Transfer;
+            ip->item_hit.update_state = gmHitCollision_UpdateState_Transfer;
 
-            ap->item_hit.item_hit_unk[i].unk_0x18 = 0;
-            ap->item_hit.item_hit_unk[i].unk_0x5C = 0;
+            ip->item_hit.hit_positions[i].unused1 = 0;
+            ip->item_hit.hit_positions[i].unused2 = 0;
             break;
 
         case gmHitCollision_UpdateState_Transfer:
-            ap->item_hit.update_state = gmHitCollision_UpdateState_Interpolate;
+            ip->item_hit.update_state = gmHitCollision_UpdateState_Interpolate;
 
         case gmHitCollision_UpdateState_Interpolate:
-            ap->item_hit.item_hit_unk[i].pos_prev = ap->item_hit.item_hit_unk[i].pos;
+            ip->item_hit.hit_positions[i].pos_prev = ip->item_hit.hit_positions[i].pos;
 
-            ap->item_hit.item_hit_unk[i].pos.x = ap->item_hit.offset[i].x + DObjGetStruct(item_gobj)->translate.x;
-            ap->item_hit.item_hit_unk[i].pos.y = ap->item_hit.offset[i].y + DObjGetStruct(item_gobj)->translate.y;
-            ap->item_hit.item_hit_unk[i].pos.z = ap->item_hit.offset[i].z + DObjGetStruct(item_gobj)->translate.z;
+            ip->item_hit.hit_positions[i].pos.x = ip->item_hit.offset[i].x + DObjGetStruct(item_gobj)->translate.x;
+            ip->item_hit.hit_positions[i].pos.y = ip->item_hit.offset[i].y + DObjGetStruct(item_gobj)->translate.y;
+            ip->item_hit.hit_positions[i].pos.z = ip->item_hit.offset[i].z + DObjGetStruct(item_gobj)->translate.z;
 
-            ap->item_hit.item_hit_unk[i].unk_0x18 = 0;
-            ap->item_hit.item_hit_unk[i].unk_0x5C = 0;
+            ip->item_hit.hit_positions[i].unused1 = 0;
+            ip->item_hit.hit_positions[i].unused2 = 0;
             break;
         }
     }
@@ -679,7 +679,7 @@ void itManager_UpdateHitPositions(GObj *item_gobj)
 void itManager_UpdateHitVictimRecord(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
-    ArticleHitArray *targets;
+    gmHitCollisionRecord *targets;
     Item_Hit *it_hit;
     s32 i;
 

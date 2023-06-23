@@ -1,40 +1,98 @@
 #include "item.h"
 #include "weapon.h"
 
-bool32 func_ovl3_80185350(GObj *item_gobj)
+extern void *D_ovl2_8013113C;
+
+itCreateDesc itNess_PKFire_ItemDesc = 
 {
-    func_ovl3_8018579C(item_gobj);
+    It_Kind_PKFire,                         // Item Kind
+    &D_ovl2_8013113C,                       // Pointer to item file data?
+    0x34,                                   // Offset of item attributes in file?
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_New,         // Hitbox Update State
+    itPKFire_NCreate_ProcUpdate,            // Proc Update
+    NULL,                                   // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
+
+itStatusDesc itNess_PKFire_StatusDesc[2] = 
+{
+    // Status 0 (Ground Wait)
+    {
+        itPKFire_GWait_ProcUpdate,          // Proc Update
+        itPKFire_GWait_ProcMap,             // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        itPKFire_SDefault_ProcDamage        // Proc Damage
+    },
+
+    // Status 1 (Air Wait Fall)
+    {
+        itPKFire_AFall_ProcUpdate,          // Proc Update
+        itPKFire_AFall_ProcMap,             // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        itPKFire_SDefault_ProcDamage        // Proc Damage
+    }
+};
+
+typedef enum itPKFireStatus
+{
+    itStatus_PKFire_GWait,
+    itStatus_PKFire_AFall
+
+} itPKFireStatus;
+
+// 0x80185350
+bool32 itPKFire_NCreate_ProcUpdate(GObj *item_gobj)
+{
+    itPKFire_AFall_SetStatus(item_gobj);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80185374(GObj *item_gobj)
+// 0x80185374
+bool32 itNess_SDefault_UpdateAllCheckDestroy(GObj *item_gobj)
 {
-    s32 unused1[4];
-    Item_Struct *ap = itGetStruct(item_gobj);
-    Effect_Info *effect = ap->item_vars.pkfire.effect;
+    Item_Struct *ip = itGetStruct(item_gobj);
     itCommonAttributes *attributes;
-    f32 lifetime_scale = ((ap->lifetime * (f32)0.5) / 100.0F) + (f32)0.5;
+    f32 unused;
+    f32 half = 0.5;
+    f32 lifetime_scale = ((ip->lifetime * half) / 100.0F) + half;
+    Effect_Info *effect = ip->item_vars.pkfire.effect;
 
     DObjGetStruct(item_gobj)->scale.x = DObjGetStruct(item_gobj)->scale.y = DObjGetStruct(item_gobj)->scale.z = lifetime_scale;
 
-    attributes = ap->attributes;
+    attributes = ip->attributes;
 
-    ap->item_hit.offset[0].x = attributes->hit_offset1_x * lifetime_scale;
-    ap->item_hit.offset[0].y = attributes->hit_offset1_y * lifetime_scale;
-    ap->item_hit.offset[0].z = attributes->hit_offset1_z * lifetime_scale;
-    ap->item_hit.offset[1].x = attributes->hit_offset2_x * lifetime_scale;
-    ap->item_hit.offset[1].y = attributes->hit_offset2_y * lifetime_scale;
-    ap->item_hit.offset[1].z = attributes->hit_offset2_z * lifetime_scale;
+    ip->item_hit.offset[0].x = attributes->hit_offset1_x * lifetime_scale;
+    ip->item_hit.offset[0].y = attributes->hit_offset1_y * lifetime_scale;
+    ip->item_hit.offset[0].z = attributes->hit_offset1_z * lifetime_scale;
+    ip->item_hit.offset[1].x = attributes->hit_offset2_x * lifetime_scale;
+    ip->item_hit.offset[1].y = attributes->hit_offset2_y * lifetime_scale;
+    ip->item_hit.offset[1].z = attributes->hit_offset2_z * lifetime_scale;
 
-    ap->item_hit.size = attributes->size * (f32)0.5F * lifetime_scale;
+    ip->item_hit.size = attributes->size * 0.5F * lifetime_scale;
 
-    ap->item_hurt.offset.x = attributes->hurt_offset.x * lifetime_scale;
-    ap->item_hurt.offset.y = attributes->hurt_offset.y * lifetime_scale;
-    ap->item_hurt.offset.z = attributes->hurt_offset.z * lifetime_scale;
-    ap->item_hurt.size.x = attributes->hurt_size.x * (f32)0.5F * lifetime_scale;
-    ap->item_hurt.size.y = attributes->hurt_size.y * (f32)0.5F * lifetime_scale;
-    ap->item_hurt.size.z = attributes->hurt_size.z * (f32)0.5F * lifetime_scale;
+    ip->item_hurt.offset.x = attributes->hurt_offset.x * lifetime_scale;
+    ip->item_hurt.offset.y = attributes->hurt_offset.y * lifetime_scale;
+    ip->item_hurt.offset.z = attributes->hurt_offset.z * lifetime_scale;
+    ip->item_hurt.size.x = attributes->hurt_size.x * 0.5F * lifetime_scale;
+    ip->item_hurt.size.y = attributes->hurt_size.y * 0.5F * lifetime_scale;
+    ip->item_hurt.size.z = attributes->hurt_size.z * 0.5F * lifetime_scale;
 
     if (effect != NULL)
     {
@@ -44,9 +102,9 @@ bool32 func_ovl3_80185374(GObj *item_gobj)
 
         effect->translate = DObjGetStruct(item_gobj)->translate;
     }
-    ap->lifetime--;
+    ip->lifetime--;
 
-    if (ap->lifetime < 0)
+    if (ip->lifetime < 0)
     {
         func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
@@ -59,140 +117,145 @@ bool32 func_ovl3_80185374(GObj *item_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_801855E4(GObj *item_gobj)
+// 0x801855E4
+bool32 itPKFire_GWait_ProcUpdate(GObj *item_gobj)
 {
-    if (func_ovl3_80185374(item_gobj) == TRUE)
+    if (itNess_SDefault_UpdateAllCheckDestroy(item_gobj) == TRUE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80185614(GObj *item_gobj)
+// 0x80185614
+bool32 itPKFire_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (func_ovl3_80185374(item_gobj) == TRUE)
+    if (itNess_SDefault_UpdateAllCheckDestroy(item_gobj) == TRUE)
     {
         return TRUE;
     }
-    else func_ovl3_80172558(ap, ATPKFIRE_GRAVITY, ATPKFIRE_T_VEL);
+    else func_ovl3_80172558(ip, ATPKFIRE_GRAVITY, ATPKFIRE_T_VEL);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80185660(GObj *item_gobj)
+// 0x80185660
+bool32 itPKFire_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_8018579C);
+    func_ovl3_801735A0(item_gobj, itPKFire_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80185688(GObj *item_gobj)
+// 0x80185688
+bool32 itPKFire_AFall_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_80173C68(item_gobj, 0.2F, 0.5F, func_ovl3_80185710);
+    func_ovl3_80173C68(item_gobj, 0.2F, 0.5F, itPKFire_GWait_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801856BC(GObj *item_gobj)
+// 0x801856BC
+bool32 itPKFire_SDefault_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->lifetime > 0)
+    if (ip->lifetime > 0)
     {
-        ap->lifetime -= ap->damage_last * ATPKFIRE_HURT_DAMAGE_MUL;
+        ip->lifetime -= ip->damage_last * ATPKFIRE_HURT_DAMAGE_MUL;
     }
-    if (func_ovl3_80185374(item_gobj) == TRUE)
+    if (itNess_SDefault_UpdateAllCheckDestroy(item_gobj) == TRUE)
     {
         return TRUE;
     }
     return FALSE;
 }
 
-extern itStatusDesc Article_PKFire_Status[];
-
-void func_ovl3_80185710(GObj *item_gobj)
+// 0x80185710
+void itPKFire_GWait_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    gmAttackFlags flags_hi;
-    u16 flags_lw;
+    Item_Struct *ip = itGetStruct(item_gobj);
+    gmAttackFlags stat_flags;
+    u16 stat_count;
 
-    func_ovl3_80173F54(ap);
+    func_ovl3_80173F54(ip);
 
-    ap->phys_info.vel_ground = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel_ground = 0.0F;
+    ip->phys_info.vel.y = 0.0F;
+    ip->phys_info.vel.x = 0.0F;
 
-    flags_hi = ap->item_hit.stat_flags;
-    flags_lw = ap->item_hit.stat_count;
+    stat_flags = ip->item_hit.stat_flags;
+    stat_count = ip->item_hit.stat_count;
 
-    itMain_SetItemStatus(item_gobj, Article_PKFire_Status, 0);
+    itMain_SetItemStatus(item_gobj, itNess_PKFire_StatusDesc, itStatus_PKFire_GWait);
 
-    ap->item_hit.stat_flags = flags_hi;
-    ap->item_hit.stat_count = flags_lw;
+    ip->item_hit.stat_flags = stat_flags;
+    ip->item_hit.stat_count = stat_count;
 }
 
-void func_ovl3_8018579C(GObj *item_gobj)
+// 0x8018579C
+void itPKFire_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    gmAttackFlags flags_hi;
-    u16 flags_lw;
+    Item_Struct *ip = itGetStruct(item_gobj);
+    gmAttackFlags stat_flags;
+    u16 stat_count;
 
-    func_ovl3_80173F78(ap);
+    func_ovl3_80173F78(ip);
 
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel.y = 0.0F;
+    ip->phys_info.vel.x = 0.0F;
 
-    flags_hi = ap->item_hit.stat_flags;
-    flags_lw = ap->item_hit.stat_count;
+    stat_flags = ip->item_hit.stat_flags;
+    stat_count = ip->item_hit.stat_count;
 
-    itMain_SetItemStatus(item_gobj, Article_PKFire_Status, 1);
+    itMain_SetItemStatus(item_gobj, itNess_PKFire_StatusDesc, itStatus_PKFire_AFall);
 
-    ap->item_hit.stat_flags = flags_hi;
-    ap->item_hit.stat_count = flags_lw;
+    ip->item_hit.stat_flags = stat_flags;
+    ip->item_hit.stat_count = stat_count;
 }
 
 extern s32 D_ovl2_80131148;
-extern itCreateDesc Article_PKFire_Data;
 
-GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
+// 0x80185824
+GObj* itNess_PKFire_CreateItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *item_gobj;
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Item_Struct *ap;
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    Item_Struct *ip;
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
 
-    item_gobj = itManager_CreateItem(weapon_gobj, &Article_PKFire_Data, pos, vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+    item_gobj = itManager_CreateItem(weapon_gobj, &itNess_PKFire_ItemDesc, pos, vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
     if (item_gobj == NULL)
     {
         return NULL;
     }
-    ap = itGetStruct(item_gobj);
+    ip = itGetStruct(item_gobj);
 
-    ap->owner_gobj = ip->owner_gobj;
+    ip->owner_gobj = wp->owner_gobj;
 
-    ap->is_allow_pickup = FALSE;
-    ap->is_hold = FALSE;
+    ip->is_allow_pickup = FALSE;
+    ip->is_hold = FALSE;
 
-    ap->team = ip->team;
-    ap->port_id = ip->port_id;
-    ap->handicap = ip->handicap;
-    ap->player_number = ip->player_number;
+    ip->team = wp->team;
+    ip->port_id = wp->port_id;
+    ip->handicip = wp->handicip;
+    ip->player_number = wp->player_number;
 
-    ap->item_hit.can_rehit_shield = TRUE;
-    ap->item_hit.throw_mul = ip->weapon_hit.stale;
-    ap->item_hit.attack_id = ip->weapon_hit.attack_id;
-    ap->item_hit.motion_count = ip->weapon_hit.motion_count;
-    ap->item_hit.stat_flags = ip->weapon_hit.stat_flags;
-    ap->item_hit.stat_count = ip->weapon_hit.stat_count;
+    ip->item_hit.can_rehit_shield = TRUE;
+    ip->item_hit.throw_mul = wp->weapon_hit.stale;
+    ip->item_hit.attack_id = wp->weapon_hit.attack_id;
+    ip->item_hit.motion_count = wp->weapon_hit.motion_count;
+    ip->item_hit.stat_flags = wp->weapon_hit.stat_flags;
+    ip->item_hit.stat_count = wp->weapon_hit.stat_count;
 
-    func_ovl3_80173F78(ap);
+    func_ovl3_80173F78(ip);
     itManager_UpdateHitPositions(item_gobj);
 
-    ap->lifetime = ATPKFIRE_LIFETIME;
+    ip->lifetime = ATPKFIRE_LIFETIME;
 
     effect_unk = func_ovl0_800CE9E8(D_ovl2_80131148, 0);
 
@@ -202,13 +265,13 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 
         if (effect_info != NULL)
         {
-            ap->item_vars.pkfire.effect = effect_info;
+            ip->item_vars.pkfire.effect = effect_info;
 
             func_ovl0_800CEA14(effect_unk);
 
             if (effect_info->unk_effect_0x2A == 0)
             {
-                ap->item_vars.pkfire.effect = NULL;
+                ip->item_vars.pkfire.effect = NULL;
 
             }
             else effect_info->translate = *pos;
@@ -217,12 +280,12 @@ GObj* func_ovl3_80185824(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
         {
             func_ovl0_800CEA40(effect_unk);
 
-            ap->item_vars.pkfire.effect = NULL;
+            ip->item_vars.pkfire.effect = NULL;
         }
     }
     else
     {
-        ap->item_vars.pkfire.effect = NULL;
+        ip->item_vars.pkfire.effect = NULL;
     }
     return item_gobj;
 }

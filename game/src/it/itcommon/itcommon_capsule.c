@@ -65,7 +65,7 @@ itStatusDesc itCommon_Capsule_StatusDesc[6] =
         itCapsule_Default_ProcHit,          // Proc Shield
         itCommon_Default_ProcHop,           // Proc Hop
         itCapsule_Default_ProcHit,          // Proc Set-Off
-        itCommon_Default_ProcReflector,     // Proc Reflector
+        itCapsule_Default_ProcHit,          // Proc Reflector
         itCapsule_Default_ProcHit           // Proc Damage
     },
 
@@ -77,7 +77,7 @@ itStatusDesc itCommon_Capsule_StatusDesc[6] =
         itCapsule_Default_ProcHit,          // Proc Shield
         itCommon_Default_ProcHop,           // Proc Hop
         itCapsule_Default_ProcHit,          // Proc Set-Off
-        itCommon_Default_ProcReflector,     // Proc Reflector
+        itCapsule_Default_ProcHit,          // Proc Reflector
         itCapsule_Default_ProcHit           // Proc Damage
     },
 
@@ -256,7 +256,7 @@ GObj* itCommon_Capsule_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
     {
         Item_Struct *ip = itGetStruct(item_gobj);
 
-        ip->x2D3_flag_b5 = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
         ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }

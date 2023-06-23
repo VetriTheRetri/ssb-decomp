@@ -116,7 +116,7 @@ GObj *jtgt_ovl3_801763C8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
 
-        ap->x2D3_flag_b5 = TRUE;
+        ap->is_unused_item_bool = TRUE;
 
         ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
     }

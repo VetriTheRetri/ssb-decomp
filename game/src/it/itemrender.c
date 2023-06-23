@@ -49,7 +49,7 @@ void func_ovl3_80171410(GObj *item_gobj)
             {
                 hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-                hal_translate(mtx_store.gbi, it_hit->item_hit_unk[i].pos_prev.x, it_hit->item_hit_unk[i].pos_prev.y, it_hit->item_hit_unk[i].pos_prev.z);
+                hal_translate(mtx_store.gbi, it_hit->hit_positions[i].pos_prev.x, it_hit->hit_positions[i].pos_prev.y, it_hit->hit_positions[i].pos_prev.z);
 
                 gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -65,7 +65,7 @@ void func_ovl3_80171410(GObj *item_gobj)
             }
             hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-            hal_translate(mtx_store.gbi, it_hit->item_hit_unk[i].pos.x, it_hit->item_hit_unk[i].pos.y, it_hit->item_hit_unk[i].pos.z);
+            hal_translate(mtx_store.gbi, it_hit->hit_positions[i].pos.x, it_hit->hit_positions[i].pos.y, it_hit->hit_positions[i].pos.z);
 
             gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 

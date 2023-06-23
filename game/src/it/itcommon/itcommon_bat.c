@@ -205,7 +205,7 @@ GObj* itCommon_Bat_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
 
         DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
 
-        ip->x2D3_flag_b5 = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
         ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }

@@ -53,7 +53,7 @@ void wpRender_DisplayHitCollisions(GObj *weapon_gobj) // Render item hitboxes
             {
                 hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-                hal_translate(mtx_store.gbi, weapon_hit->weapon_hit_unk[i].pos_prev.x, weapon_hit->weapon_hit_unk[i].pos_prev.y, weapon_hit->weapon_hit_unk[i].pos_prev.z);
+                hal_translate(mtx_store.gbi, weapon_hit->hit_positions[i].pos_prev.x, weapon_hit->hit_positions[i].pos_prev.y, weapon_hit->hit_positions[i].pos_prev.z);
 
                 gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -69,7 +69,7 @@ void wpRender_DisplayHitCollisions(GObj *weapon_gobj) // Render item hitboxes
             }
             hal_matrix_store_gbi(mtx_store, gMatrixHeap);
 
-            hal_translate(mtx_store.gbi, weapon_hit->weapon_hit_unk[i].pos.x, weapon_hit->weapon_hit_unk[i].pos.y, weapon_hit->weapon_hit_unk[i].pos.z);
+            hal_translate(mtx_store.gbi, weapon_hit->hit_positions[i].pos.x, weapon_hit->hit_positions[i].pos.y, weapon_hit->hit_positions[i].pos.z);
 
             gSPMatrix(D_800465B0[0]++, mtx_store.gbi, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 

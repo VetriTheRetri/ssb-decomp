@@ -125,7 +125,7 @@ bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
                 vel.y = (rand_f32() * ATMBLUCKY_EGG_SPAWN_BASE_VEL) + ATMBLUCKY_EGG_SPAWN_ADD_VEL_Y;
                 vel.z = 0.0F;
 
-                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
 
                 if (egg_gobj != NULL)
                 {

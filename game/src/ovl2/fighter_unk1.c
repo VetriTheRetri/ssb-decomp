@@ -419,7 +419,7 @@ void ftCommon_ClearHitTargetsIndex(Fighter_Struct *fp, s32 hit_id)
 
     for (i = 0; i < ARRAY_COUNT(fp->fighter_hit[hit_id].hit_targets); i++)
     {
-        FighterHitArray *targets = &fp->fighter_hit[hit_id].hit_targets[i];
+        gmHitCollisionRecord *targets = &fp->fighter_hit[hit_id].hit_targets[i];
 
         targets->victim_gobj = NULL;
 

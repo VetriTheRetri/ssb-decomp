@@ -102,7 +102,7 @@ GObj* jtgt_ovl3_80175D60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATFFLOWER_AMMO_MAX;
 
-        ap->x2D3_flag_b5 = TRUE;
+        ap->is_unused_item_bool = TRUE;
 
         ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
     }
@@ -111,9 +111,9 @@ GObj* jtgt_ovl3_80175D60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 jtgt_ovl3_80175DDC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
         return TRUE;
     }
@@ -143,18 +143,18 @@ extern s32 D_ovl3_8018D044; // Something to do with GFX IDs; static (.bss)
 
 bool32 jtgt_ovl3_80175E84(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
     Vec3f *translate;
 
-    ip->lifetime = ATFFLOWER_AMMO_LIFETIME;
+    wp->lifetime = ATFFLOWER_AMMO_LIFETIME;
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorInvertLR(wp, fp);
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
 
     return FALSE;
 }
@@ -164,22 +164,22 @@ extern wpCreateDesc Item_F_Flower_Ammo_Desc;
 GObj* func_ovl3_80175F48(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_F_Flower_Ammo_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *ip;
+    Weapon_Struct *wp;
 
     if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel.x = vel->x * ip->lr;
-    ip->phys_info.vel.y = vel->y;
-    ip->phys_info.vel.z = vel->z;
+    wp->phys_info.vel.x = vel->x * wp->lr;
+    wp->phys_info.vel.y = vel->y;
+    wp->phys_info.vel.z = vel->z;
 
-    ip->lifetime = ATFFLOWER_AMMO_LIFETIME;
+    wp->lifetime = ATFFLOWER_AMMO_LIFETIME;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
 
     return weapon_gobj;
 }

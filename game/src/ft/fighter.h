@@ -651,12 +651,12 @@ typedef struct FighterAnimFlags
 
 } FighterAnimFlags;
 
-typedef struct FighterHitArray
+typedef struct gmHitCollisionRecord
 {
     GObj *victim_gobj;
     gmHitCollisionFlags victim_flags;
 
-} FighterHitArray;
+} gmHitCollisionRecord;
 
 typedef struct ftThrowHitDesc
 {
@@ -738,7 +738,7 @@ typedef struct _Fighter_Hit
     u16 stat_count;
     Vec3f pos;
     Vec3f pos_prev;
-    FighterHitArray hit_targets[4];
+    gmHitCollisionRecord hit_targets[4];
     s32 unk_fthit_0x7C;
     u8 filler[0xC0 - 0x80];
     f32 unk_fthit_0xC0;

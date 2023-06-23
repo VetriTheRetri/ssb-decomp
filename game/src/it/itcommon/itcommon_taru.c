@@ -244,7 +244,7 @@ GObj* jtgt_ovl3_8017A1B8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->is_damage_all = TRUE;
 
-        ap->x2D3_flag_b5 = TRUE;
+        ap->is_unused_item_bool = TRUE;
 
         ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
     }

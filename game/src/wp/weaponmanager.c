@@ -360,7 +360,7 @@ void wpManager_UpdateHitPositions(GObj *weapon_gobj) // Update hitbox(es?)
 
     for (i = 0; i < wp->weapon_hit.hitbox_count; i++)
     {
-        ItemHitUnk *wp_hit_unk = &wp->weapon_hit.weapon_hit_unk[i];
+        wpHitPositions *positions = &wp->weapon_hit.hit_positions[i];
 
         Vec3f *offset = &wp->weapon_hit.offset[i];
 
@@ -368,50 +368,44 @@ void wpManager_UpdateHitPositions(GObj *weapon_gobj) // Update hitbox(es?)
 
         switch (wp->weapon_hit.update_state)
         {
-        default:
         case gmHitCollision_UpdateState_Disable:
             break;
 
         case gmHitCollision_UpdateState_New:
-
-            wp_hit_unk->pos = *offset;
+            positions->pos = *offset;
 
             if ((offset->x == 0.0F) && (offset->y == 0.0F) && (offset->z == 0.0F))
             {
-                wp_hit_unk->pos.x += translate->x;
-                wp_hit_unk->pos.y += translate->y;
-                wp_hit_unk->pos.z += translate->z;
+                positions->pos.x += translate->x;
+                positions->pos.y += translate->y;
+                positions->pos.z += translate->z;
             }
-            else
-            {
-                wpManager_UpdateWeaponVectors(joint, &wp_hit_unk->pos);
-            }
+            else wpManager_UpdateWeaponVectors(joint, &positions->pos);
+            
             wp->weapon_hit.update_state = gmHitCollision_UpdateState_Transfer;
-            wp_hit_unk->unk_0x18 = 0;
-            wp_hit_unk->unk_0x5C = 0;
+
+            positions->unused1 = 0;
+            positions->unused2 = 0;
             break;
 
         case gmHitCollision_UpdateState_Transfer:
             wp->weapon_hit.update_state = gmHitCollision_UpdateState_Interpolate;
 
         case gmHitCollision_UpdateState_Interpolate:
+            positions->pos_prev = positions->pos;
 
-            wp_hit_unk->pos_prev = wp_hit_unk->pos;
-
-            wp_hit_unk->pos = *offset;
+            positions->pos = *offset;
 
             if ((offset->x == 0.0F) && (offset->y == 0.0F) && (offset->z == 0.0F))
             {
-                wp_hit_unk->pos.x += translate->x;
-                wp_hit_unk->pos.y += translate->y;
-                wp_hit_unk->pos.z += translate->z;
+                positions->pos.x += translate->x;
+                positions->pos.y += translate->y;
+                positions->pos.z += translate->z;
             }
-            else
-            {
-                wpManager_UpdateWeaponVectors(joint, &wp_hit_unk->pos);
-            }
-            wp_hit_unk->unk_0x18 = 0;
-            wp_hit_unk->unk_0x5C = 0;
+            else wpManager_UpdateWeaponVectors(joint, &positions->pos);
+            
+            positions->unused1 = 0;
+            positions->unused2 = 0;
             break;
         }
     }
@@ -421,7 +415,7 @@ void wpManager_UpdateHitPositions(GObj *weapon_gobj) // Update hitbox(es?)
 void wpManager_UpdateHitVictimRecord(GObj *weapon_gobj) // Set hitbox victim array
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    ItemHitArray *targets;
+    gmHitCollisionRecord *targets;
     Weapon_Hit *wp_hit;
     s32 i;
 
@@ -789,7 +783,7 @@ void wpManager_ProcHitCollisions(GObj *weapon_gobj)
     {
         if ((wp->weapon_hit.can_hop) && (wp->ground_or_air == air))
         {
-            if (wp->shield_collide_angle < WEAPON_DEFLECT_ANGLE_DEFAULT)
+            if (wp->shield_collide_angle < WEAPON_HOP_ANGLE_DEFAULT)
             {
                 wp->shield_collide_angle -= HALF_PI32;
 

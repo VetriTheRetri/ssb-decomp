@@ -239,7 +239,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
                     pos1.x = spawn_pos[i].x;
                     pos1.y = spawn_pos[i].y;
 
-                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos1, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos1, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
                 }
             }
             else
@@ -262,7 +262,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
                     pos2.x = spawn_pos[j].x;
                     pos2.y = spawn_pos[j].y;
 
-                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos2, (ARTICLE_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos2, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
                 }
                 D_ovl3_8018D048.unk_0x8++;
                 D_ovl3_8018D048.unk_0x10 = (u16)sp64;
@@ -428,7 +428,7 @@ GObj* itCommon_Box_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
         DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
 
         ip->is_damage_all = TRUE;
-        ip->x2D3_flag_b5 = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
         ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }

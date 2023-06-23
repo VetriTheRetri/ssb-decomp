@@ -549,7 +549,7 @@ GObj *jtgt_ovl3_8017B1D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap->item_vars.shell.damage_all_delay = -1;
         ap->item_vars.shell.vel_x = 0;
 
-        ap->x2D3_flag_b5 = TRUE;
+        ap->is_unused_item_bool = TRUE;
 
         ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
     }
