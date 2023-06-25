@@ -63,9 +63,9 @@ itStatusDesc itCommon_Bat_StatusDesc[5] =
         itBat_AThrow_ProcMap,               // Proc Map
         itBat_AThrow_ProcHit,               // Proc Hit
         itBat_AThrow_ProcHit,               // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
+        itCommon_SDefault_ProcHop,          // Proc Hop
         itBat_AThrow_ProcHit,               // Proc Set-Off
-        itCommon_Default_ProcReflector,     // Proc Reflector
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
         NULL                                // Proc Damage
     },
 
@@ -75,9 +75,9 @@ itStatusDesc itCommon_Bat_StatusDesc[5] =
         itBat_ADrop_ProcMap,                // Proc Map
         itBat_AThrow_ProcHit,               // Proc Hit
         itBat_AThrow_ProcHit,               // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
+        itCommon_SDefault_ProcHop,          // Proc Hop
         itBat_AThrow_ProcHit,               // Proc Set-Off
-        itCommon_Default_ProcReflector,     // Proc Reflector
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
         NULL                                // Proc Damage
     }
 };

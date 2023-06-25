@@ -5,12 +5,12 @@
 #define FTNESS_SPECIALHIEND_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
 #define FTNESS_SPECIALHI_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
 
-// PK Thunder (SpecialHi/SpecialAirHi)
+// PK Thunder (SpecialHi / SpecialAirHi)
 
 // 0x80153C50
 void ftNess_SpecialHi_DecThunderTimers(Fighter_Struct *fp)
 {
-    if (fp->status_vars.ness.specialhi.pk_jibaku_delay != 0) // PK Thunder timers
+    if (fp->status_vars.ness.specialhi.pk_jibaku_delay != 0)
     {
         fp->status_vars.ness.specialhi.pk_jibaku_delay--;
     }

@@ -25,24 +25,24 @@ itStatusDesc itCommon_BombHei_StatusDesc[9] =
     {
         itBombHei_GWait_ProcUpdate,         // Proc Update
         itBombHei_GWait_ProcMap,            // Proc Map
-        itBombHei_Default_ProcHit,          // Proc Hit
+        itBombHei_SDefault_ProcHit,         // Proc Hit
         NULL,                               // Proc Shield
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itBombHei_Default_ProcHit           // Proc Damage
+        itBombHei_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 1 (Air Wait Fall)
     {
-        itBombHei_AFall_ProcUpdate,     // Proc Update
-        itBombHei_AFall_ProcMap,        // Proc Map
+        itBombHei_AFall_ProcUpdate,         // Proc Update
+        itBombHei_AFall_ProcMap,            // Proc Map
         NULL,                               // Proc Hit
         NULL,                               // Proc Shield
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itBombHei_Default_ProcHit           // Proc Damage
+        itBombHei_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 2 (Fighter Hold)
@@ -61,24 +61,24 @@ itStatusDesc itCommon_BombHei_StatusDesc[9] =
     {
         itBombHei_AThrow_ProcUpdate,        // Proc Update
         itBombHei_AThrow_ProcMap,           // Proc Map
-        itBombHei_Default_ProcHit,          // Proc Hit
-        itBombHei_Default_ProcHit,          // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
-        itBombHei_Default_ProcHit,          // Proc Set-Off
-        itCommon_Default_ProcReflector,     // Proc Reflector
-        itBombHei_Default_ProcHit           // Proc Damage
+        itBombHei_SDefault_ProcHit,         // Proc Hit
+        itBombHei_SDefault_ProcHit,         // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itBombHei_SDefault_ProcHit,         // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        itBombHei_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 4 (Fighter Throw)
     {
-        itBombHei_AFall_ProcUpdate,     // Proc Update
+        itBombHei_AFall_ProcUpdate,         // Proc Update
         itBombHei_ADrop_ProcMap,            // Proc Map
-        itBombHei_Default_ProcHit,          // Proc Hit
-        itBombHei_Default_ProcHit,          // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
-        itBombHei_Default_ProcHit,          // Proc Set-Off
-        itCommon_Default_ProcReflector,     // Proc Reflector
-        itBombHei_Default_ProcHit           // Proc Damage
+        itBombHei_SDefault_ProcHit,         // Proc Hit
+        itBombHei_SDefault_ProcHit,         // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itBombHei_SDefault_ProcHit,         // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        itBombHei_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 5 (Ground Walk)
@@ -321,7 +321,7 @@ bool32 itBombHei_GWait_ProcMap(GObj *item_gobj)
 }
 
 // 0x8017741C
-bool32 itBombHei_Default_ProcHit(GObj *item_gobj)
+bool32 itBombHei_SDefault_ProcHit(GObj *item_gobj)
 {
     itBombHei_Default_ZeroVelSetExplode(item_gobj, 1);
 

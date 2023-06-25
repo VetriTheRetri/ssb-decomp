@@ -157,7 +157,7 @@ bool32 atCommon_CheckTypeShootEmpty(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (((ip->it_kind == It_Kind_StarRod) || (ip->it_kind == It_Kind_L_Gun) || (ip->it_kind == It_Kind_F_Flower)) && (ip->it_multi == 0))
+    if (((ip->it_kind == It_Kind_StarRod) || (ip->it_kind == It_Kind_L_Gun) || (ip->it_kind == It_Kind_FFlower)) && (ip->it_multi == 0))
     {
         return TRUE;
     }
@@ -588,7 +588,7 @@ GObj* func_ovl3_80173228(GObj *item_gobj)
 }
 
 // 0x801733E4
-bool32 itCommon_Default_ProcHop(GObj *item_gobj)
+bool32 itCommon_SDefault_ProcHop(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -599,7 +599,7 @@ bool32 itCommon_Default_ProcHop(GObj *item_gobj)
 }
 
 // 0x80173434
-bool32 itCommon_Default_ProcReflector(GObj *item_gobj)
+bool32 itCommon_SDefault_ProcReflector(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);

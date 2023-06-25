@@ -64,7 +64,7 @@ itStatusDesc itCommon_IBumper_StatusDesc[8] =
         itIBumper_AThrow_ProcMap,           // Proc Map
         itIBumper_AThrow_ProcHit,           // Proc Hit
         itIBumper_AThrow_ProcShield,        // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
+        itCommon_SDefault_ProcHop,          // Proc Hop
         NULL,                               // Proc Set-Off
         itIBumper_AThrow_ProcReflector,     // Proc Reflector
         NULL                                // Proc Damage
@@ -76,7 +76,7 @@ itStatusDesc itCommon_IBumper_StatusDesc[8] =
         itIBumper_AThrow_ProcMap,           // Proc Map
         itIBumper_AThrow_ProcHit,           // Proc Hit
         itIBumper_AThrow_ProcShield,        // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
+        itCommon_SDefault_ProcHop,          // Proc Hop
         NULL,                               // Proc Set-Off
         itIBumper_AThrow_ProcReflector,     // Proc Reflector
         NULL                                // Proc Damage
@@ -100,7 +100,7 @@ itStatusDesc itCommon_IBumper_StatusDesc[8] =
         itIBumper_AThrow_ProcUpdate,        // Proc Map
         itIBumper_AThrow_ProcHit,           // Proc Hit
         itIBumper_AThrow_ProcShield,        // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
+        itCommon_SDefault_ProcHop,          // Proc Hop
         NULL,                               // Proc Set-Off
         itIBumper_AThrow_ProcReflector,     // Proc Reflector
         NULL                                // Proc Damage
@@ -122,7 +122,7 @@ itStatusDesc itCommon_IBumper_StatusDesc[8] =
 typedef enum itIBumperStatus
 {
     itStatus_IBumper_GWait,                 // Ground neutral
-    itStatus_IBumper_AFall,             // Airborne neutral
+    itStatus_IBumper_AFall,                 // Airborne neutral
     itStatus_IBumper_FHold,                 // Fighter hold
     itStatus_IBumper_AThrow,                // Fighter throw
     itStatus_IBumper_ADrop,                 // Fighter drop

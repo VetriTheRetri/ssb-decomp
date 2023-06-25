@@ -155,59 +155,59 @@ typedef struct wpSamusChargeShotAttributes
 
 } wpSamusChargeShotAttributes;
 
-typedef struct SamusBomb_WeaponVars
+typedef struct wpSamus_WeaponVars_Bomb
 {
     s32 bomb_blink_timer;
 
-} SamusBomb_WeaponVars;
+} wpSamus_WeaponVars_Bomb;
 
-typedef struct Fireball_WeaponVars
+typedef struct wpMario_WeaponVars_Fireball
 {
     s32 index; // Index of Fireball description to use; 0 = Mario, 1 = Luigi
 
-} Fireball_WeaponVars;
+} wpMario_WeaponVars_Fireball;
 
-typedef struct ThunderJolt_WeaponVars
+typedef struct wpPikachu_WeaponVars_ThunderJolt
 {
     s32 coll_type;
     Vec3f rotate;
 
-} ThunderJolt_WeaponVars;
+} wpPikachu_WeaponVars_ThunderJolt;
 
-typedef struct Thunder_WeaponVars // Pikachu's Thunder
+typedef struct wpPikachu_WeaponVars_Thunder // Pikachu's Thunder
 {
     s32 thunder_state;
 
-} Thunder_WeaponVars;
+} wpPikachu_WeaponVars_Thunder;
 
-typedef struct _PKThunder_WeaponVars
+typedef struct _wpNess_WeaponVars_PKThunder
 {
     s32 pkthunder_state;
     f32 angle;
     GObj *spawn_gobj; // PK Thunder's original owner
     GObj *trail_gobj[ITPKTHUNDER_TRAIL_COUNT];
 
-} PKThunder_WeaponVars;
+} wpNess_WeaponVars_PKThunder;
 
-typedef struct _PKThunder_Trail_WeaponVars
+typedef struct _wpNess_WeaponVars_PKThunderTrail
 {
     s32 pkthunder_trail_state;
     s32 trail_index; // Also key of RGB struct to use to set color of PK Thunder trails?
     GObj *spawn_gobj; // Original owner?
     GObj *trail_gobj[ITPKTHUNDER_TRAIL_COUNT];
 
-} PKThunder_Trail_WeaponVars;
+} wpNess_WeaponVars_PKThunderTrail;
 
-typedef struct ChargeShot_WeaponVars
+typedef struct wpSamus_WeaponVars_ChargeShot
 {
     bool32 is_release;
     bool32 is_full_charge;
     s32 charge_size;
     GObj *owner_gobj;
 
-} ChargeShot_WeaponVars;
+} wpSamus_WeaponVars_ChargeShot;
 
-typedef struct SpinAttack_WeaponVars
+typedef struct wpLink_WeaponVars_SpinAttack
 {
     s16 pos_x[ITSPINATTACK_EXTEND_POS_COUNT];
     s16 pos_y[ITSPINATTACK_EXTEND_POS_COUNT];
@@ -215,9 +215,9 @@ typedef struct SpinAttack_WeaponVars
     s8 is_destroy;
     s8 pos_index;
 
-} SpinAttack_WeaponVars;
+} wpLink_WeaponVars_SpinAttack;
 
-typedef struct Boomerang_WeaponVars
+typedef struct wpLink_WeaponVars_Boomerang
 {
     GObj *spawn_gobj; // GObj that spawned Boomerang
     u8 flyforward_timer;
@@ -227,9 +227,9 @@ typedef struct Boomerang_WeaponVars
     f32 default_angle;
     f32 homing_angle;
 
-} Boomerang_WeaponVars;
+} wpLink_WeaponVars_Boomerang;
 
-typedef struct EggThrow_WeaponVars
+typedef struct wpYoshi_WeaponVars_EggThrow
 {
     s8 is_spin; // Also determines whether Egg Throw is affected by gravity, not sure what to name it
     s8 is_throw;
@@ -238,15 +238,15 @@ typedef struct EggThrow_WeaponVars
     s16 throw_force;
     f32 angle;
 
-} EggThrow_WeaponVars;
+} wpYoshi_WeaponVars_EggThrow;
 
-typedef struct Star_WeaponVars // Star Rod projectile
+typedef struct wpStarRod_WeaponVars_Star // Star Rod projectile
 {
     s32 lifetime;
 
-} Star_WeaponVars;
+} wpStarRod_WeaponVars_Star;
 
-typedef struct Rock_WeaponVars
+typedef struct wpIwark_WeaponVars_Rock
 {
     s32 unk_0x0; // Unused?
     s32 ground_line_id;
@@ -254,25 +254,25 @@ typedef struct Rock_WeaponVars
     s32 unk_0xC; // Set but never used?
     GObj *owner_gobj;
 
-} Rock_WeaponVars;
+} wpIwark_WeaponVars_Rock;
 
-typedef struct Coin_WeaponVars
+typedef struct wpNyars_WeaponVars_Coin
 {
     s32 lifetime;
 
-} Coin_WeaponVars;
+} wpNyars_WeaponVars_Coin;
 
-typedef struct Hydro_WeaponVars
+typedef struct wpKamex_WeaponVars_Hydro
 {
     s32 unk_0x0; // Set to 0 but never used
     s32 unk_0x4; // Set to 0 but never used
 
-} Hydro_WeaponVars;
+} wpKamex_WeaponVars_Hydro;
 
-typedef struct Smog_WeaponVars
+typedef struct wpDogas_WeaponVars_Smog
 {
     wpCommonAttributes *hit_desc;
 
-} Smog_WeaponVars;
+} wpDogas_WeaponVars_Smog;
 
 #endif

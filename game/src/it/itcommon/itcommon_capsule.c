@@ -16,7 +16,7 @@ itCreateDesc itCommon_Capsule_ItemDesc =
     NULL,                                   // Proc Hop
     NULL,                                   // Proc Set-Off
     NULL,                                   // Proc Reflector
-    itCapsule_Default_ProcHit               // Proc Damage
+    itCapsule_SDefault_ProcHit              // Proc Damage
 };
 
 itStatusDesc itCommon_Capsule_StatusDesc[6] =
@@ -30,7 +30,7 @@ itStatusDesc itCommon_Capsule_StatusDesc[6] =
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itCapsule_Default_ProcHit        // Proc Damage
+        itCapsule_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 1 (Air Fall Wait)
@@ -42,7 +42,7 @@ itStatusDesc itCommon_Capsule_StatusDesc[6] =
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itCapsule_Default_ProcHit        // Proc Damage
+        itCapsule_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 2 (Fighter Hold)
@@ -61,24 +61,24 @@ itStatusDesc itCommon_Capsule_StatusDesc[6] =
     {
         itCapsule_AThrow_ProcUpdate,        // Proc Update
         itCapsule_AThrow_ProcMap,           // Proc Map
-        itCapsule_Default_ProcHit,          // Proc Hit
-        itCapsule_Default_ProcHit,          // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
-        itCapsule_Default_ProcHit,          // Proc Set-Off
-        itCapsule_Default_ProcHit,          // Proc Reflector
-        itCapsule_Default_ProcHit           // Proc Damage
+        itCapsule_SDefault_ProcHit,         // Proc Hit
+        itCapsule_SDefault_ProcHit,         // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itCapsule_SDefault_ProcHit,         // Proc Set-Off
+        itCapsule_SDefault_ProcHit,         // Proc Reflector
+        itCapsule_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 4 (Fighter Drop)
     {
         itCapsule_AFall_ProcUpdate,         // Proc Update
         itCapsule_ADrop_ProcMap,            // Proc Map
-        itCapsule_Default_ProcHit,          // Proc Hit
-        itCapsule_Default_ProcHit,          // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
-        itCapsule_Default_ProcHit,          // Proc Set-Off
-        itCapsule_Default_ProcHit,          // Proc Reflector
-        itCapsule_Default_ProcHit           // Proc Damage
+        itCapsule_SDefault_ProcHit,         // Proc Hit
+        itCapsule_SDefault_ProcHit,         // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itCapsule_SDefault_ProcHit,         // Proc Set-Off
+        itCapsule_SDefault_ProcHit,         // Proc Reflector
+        itCapsule_SDefault_ProcHit          // Proc Damage
     },
 
     // Status 5 (Fighter Hold)
@@ -125,7 +125,7 @@ bool32 itCapsule_GWait_ProcMap(GObj *item_gobj)
 }
 
 // 0x80173FF4
-bool32 itCapsule_Default_ProcHit(GObj *item_gobj)
+bool32 itCapsule_SDefault_ProcHit(GObj *item_gobj)
 {
     if (func_ovl3_801730D4(item_gobj) != FALSE)
     {

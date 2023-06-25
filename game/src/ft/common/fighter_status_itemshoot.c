@@ -130,7 +130,7 @@ void ftCommon_FireFlowerShoot_UpdateAmmoStats(Fighter_Struct *fp, s32 ammo_sub)
         }
         else flame_vel_index = fp->status_vars.common.fireflower.flame_vel_index;
 
-        func_ovl3_8017604C(fp->fighter_gobj, &flame_spawn_offset, flame_vel_index, ammo_sub);
+        ftCommon_FireFlowerShoot_CreateFlame(fp->fighter_gobj, &flame_spawn_offset, flame_vel_index, ammo_sub);
         func_ovl2_800E806C(fp, 6, 0);
     }
     fp->status_vars.common.fireflower.ammo_fire_count++;
@@ -304,7 +304,7 @@ void ftCommon_ItemShoot_SetStatus(GObj *fighter_gobj)
         proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;
 
-    case It_Kind_F_Flower:
+    case It_Kind_FFlower:
         status_id = ftStatus_Common_FireFlowerShoot;
         proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
         break;
@@ -334,7 +334,7 @@ void ftCommon_ItemShootAir_SetStatus(GObj *fighter_gobj)
         proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;
 
-    case It_Kind_F_Flower:
+    case It_Kind_FFlower:
         status_id = ftStatus_Common_FireFlowerShootAir;
         proc_accessory = ftCommon_FireFlowerShoot_ProcAccessory;
         break;

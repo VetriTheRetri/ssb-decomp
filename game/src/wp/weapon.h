@@ -60,7 +60,8 @@ typedef enum Wp_Kind
     Wp_Kind_PKThunderHead,
     Wp_Kind_PKThunderTrail,
     Wp_Kind_YubiBulletSingle,
-    Wp_Kind_YubiBulletTriple
+    Wp_Kind_YubiBulletTriple,
+    Wp_Kind_FFlowerFlame = 0x15
 
 } Wp_Kind;
 
@@ -166,86 +167,88 @@ typedef struct _Weapon_Hit
 
 typedef struct _Weapon_Struct
 {
-    void *wp_alloc_next;                // Pointer to next weapon struct
-    GObj *weapon_gobj;                  // Pointer to weapon's GObj
-    GObj *owner_gobj;                   // Current owner of this weapon; expected to be fighter?
+    void *wp_alloc_next;                // Memory region allocated for next Item_Struct
+    GObj *weapon_gobj;                  // Weapon's GObj pointer
+    GObj *owner_gobj;                   // Weapon's owner
     s32 wp_kind;                        // Weapon ID
-    u8 team;
-    u8 port_id;
-    u8 handicap;
-    s32 player_number;                  // Number of player that spawned this weapon? 0 = weapon spawned on its own
-    s32 lr;                             // Facing direction of weapon; -1 = LEFT, 0 = CENTER, 1 = RIGHT, 2 = WALL_UP (Thunder Jolt only?), 3 = WALL_DOWN (Thunder Jolt only?)
+    u8 team;                            // Weapon's team
+    u8 port_id;                         // Weapon's port index
+    u8 handicap;                        // Weapon's handicap
+    s32 player_number;                  // Weapon's player number
+    s32 lr;                             // Weapon's facing direction; -1 = LEFT, 0 = CENTER, 1 = RIGHT, 2 = WALL_UP (Thunder Jolt only?), 3 = WALL_DOWN (Thunder Jolt only?)
 
     struct
     {
-        f32 vel_ground;
-        Vec3f vel;
+        f32 vel_ground;                 // Weapon's ground velocity
+        Vec3f vel;                      // Weapon's aerial velocity
 
     } phys_info;
 
-    Coll_Data coll_data;
-    Ground_Air ground_or_air;
-    Weapon_Hit weapon_hit;          
+    Coll_Data coll_data;                // Weapon's collision data
 
-    s32 hit_victim_damage;              // Set to weapon hitbox's final damage output when hitting a target
-    s32 hit_reflect_damage;             // Might be self-damage?
-    s32 hit_attack_damage;              // Set to weapon hitbox's final damage output when hitting another attack
-    s32 hit_shield_damage;              // Set to weapon hitbox's final damage output when hitting a shield
-    f32 shield_collide_angle;           // If this is less than 135 degrees, the weapon gets deflected
-    Vec3f shield_collide_vec;           //
+    Ground_Air ground_or_air;           // Ground or air bool
+
+    Weapon_Hit weapon_hit;              // Weapon's hitbox
+
+    s32 hit_victim_damage;              // Damage applied to entity this weapon has hit
+    s32 hit_reflect_damage;             // Damage on reflection?
+    s32 hit_attack_damage;              // Damage weapon dealt to other attack
+    s32 hit_shield_damage;              // Damage weapon dealt to shield
+    f32 shield_collide_angle;           // Angle at which item collided with shield?
+    Vec3f shield_collide_vec;           // Position of shield this item collided with?
     GObj *reflect_gobj;                 // GObj that reflected this weapon
-    gmAttackFlags reflect_stat_flags;   // Attack flags
-    u16 reflect_stat_count;             // Attack flags
+    gmAttackFlags reflect_stat_flags;   // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
+    u16 reflect_stat_count;             // Status update count at the time the item is reflected?
     GObj *absorb_gobj;                  // GObj that absorbed this item
 
     u32 is_hitlag_victim : 1;           // Weapon can deal hitlag to target
     u32 is_hitlag_item : 1;             // Weapon is in hitlag
 
-    u32 group_id;
+    u32 group_id;                       // Weapon's group, identical groups = hitboxes are linked?
 
-    s32 lifetime;                       // Frames until weapon despawns
+    s32 lifetime;                       // Weapon's duration in frames
 
-    u32 is_camera_follow : 1;
-    u32 is_static_damage : 1;           // If this is FALSE, weapon's damage can be modified (on reflection only?)
+    u32 is_camera_follow : 1;           // Camera will attempt to follow the weapon
+    u32 is_static_damage : 1;           // Ignore reflect multiplier if TRUE
 
     gmSoundEffect *p_sfx;               // Pointer to weapon's current ongoing sound effect
     u16 sfx_id;                         // ID of sound effect this weapon is supposed to play? (This gets checked against gmSoundEffect's ID when despawning)
 
-    bool32 (*proc_update)(GObj*);       // Main animation routine
-    bool32 (*proc_map)(GObj*);          // Main collision routine
-    bool32 (*proc_hit)(GObj*);          // Weapon hits a hurtbox
-    bool32 (*proc_shield)(GObj*);       // Weapon collides with shield head-on
-    bool32 (*proc_hop)(GObj*);          // Weapon hits corner of shield and bounces off
-    bool32 (*proc_setoff)(GObj*);       // Weapon collides with another attack hitbox
-    bool32 (*proc_reflector)(GObj*);    // Weapon gets reflected
-    bool32 (*proc_absorb)(GObj*);       // Weapon gets absorbed
-    bool32 (*proc_dead)(GObj*);         // Weapon hits blastzones (only run on this condition?)
+    bool32 (*proc_update)(GObj*);       // Update general weapon information
+    bool32 (*proc_map)(GObj*);          // Update weapon's map collision
+    bool32 (*proc_hit)(GObj*);          // Runs when weapon collides with a hurtbox
+    bool32 (*proc_shield)(GObj*);       // Runs when weapon collides with a shield
+    bool32 (*proc_hop)(GObj*);          // Runs when weapon bounces off a shield
+    bool32 (*proc_setoff)(GObj*);       // Runs when weapon's hitbox collides with another hitbox
+    bool32 (*proc_reflector)(GObj*);    // Runs when weapon is reflected
+    bool32 (*proc_absorb)(GObj*);       // Runs when weapon takes damage
+    bool32 (*proc_dead)(GObj*);         // Runs when weapon is in a blast zone
 
-    union weapon_vars
+    union weapon_vars                   // Weapon-specific state variables
     {
-        Fireball_WeaponVars fireball;
-        ChargeShot_WeaponVars charge_shot;
-        SamusBomb_WeaponVars samus_bomb;
-        ThunderJolt_WeaponVars thunder_jolt;
-        Thunder_WeaponVars thunder;
-        PKThunder_WeaponVars pkthunder;
-        PKThunder_Trail_WeaponVars pkthunder_trail;
-        EggThrow_WeaponVars egg_throw;
-        SpinAttack_WeaponVars spin_attack; // Link's Up Special
-        Boomerang_WeaponVars boomerang;
-        Star_WeaponVars star;
-        Rock_WeaponVars rock; // Onix's Rock Slide
-        Coin_WeaponVars coin;
-        Hydro_WeaponVars hydro;
-        Smog_WeaponVars smog;
+        wpMario_WeaponVars_Fireball fireball;
+        wpSamus_WeaponVars_ChargeShot charge_shot;
+        wpSamus_WeaponVars_Bomb samus_bomb;
+        wpPikachu_WeaponVars_ThunderJolt thunder_jolt;
+        wpPikachu_WeaponVars_Thunder thunder;
+        wpNess_WeaponVars_PKThunder pkthunder;
+        wpNess_WeaponVars_PKThunderTrail pkthunder_trail;
+        wpYoshi_WeaponVars_EggThrow egg_throw;
+        wpLink_WeaponVars_SpinAttack spin_attack; // Link's Up Special
+        wpLink_WeaponVars_Boomerang boomerang;
+        wpStarRod_WeaponVars_Star star;
+        wpIwark_WeaponVars_Rock rock; // Onix's Rock Slide
+        wpNyars_WeaponVars_Coin coin;
+        wpKamex_WeaponVars_Hydro hydro;
+        wpDogas_WeaponVars_Smog smog;
 
     } weapon_vars;
 
-    s32 display_state;
+    s32 display_state;                  // Weapon's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
 
 } Weapon_Struct;
 
 #define wpGetStruct(weapon_gobj) \
-((Weapon_Struct*)weapon_gobj->user_data) \
+((Weapon_Struct*) (weapon_gobj)->user_data) \
 
 #endif

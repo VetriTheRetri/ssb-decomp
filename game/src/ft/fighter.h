@@ -989,16 +989,16 @@ typedef struct ftCommonAttributes
     u32 is_have_specialairlw : 1;
     u32 is_have_catch : 1;   // Whether fighter has a grab
     u32 is_have_voice : 1;
-    u32 catch_mask_b22 : 1;
-    u32 catch_mask_b23 : 1;
-    u32 catch_mask_b24 : 1;
-    u32 catch_mask_b25 : 1;
-    u32 catch_mask_b26 : 1;
-    u32 catch_mask_b27 : 1;
-    u32 catch_mask_b28 : 1;
-    u32 catch_mask_b29 : 1;
-    u32 catch_mask_b30 : 1;
-    u32 catch_mask_b31 : 1;
+    // u32 catch_mask_b22 : 1;
+    // u32 catch_mask_b23 : 1;
+    // u32 catch_mask_b24 : 1;
+    // u32 catch_mask_b25 : 1;
+    // u32 catch_mask_b26 : 1;
+    // u32 catch_mask_b27 : 1;
+    // u32 catch_mask_b28 : 1;
+    // u32 catch_mask_b29 : 1;
+    // u32 catch_mask_b30 : 1;
+    // u32 catch_mask_b31 : 1;
     FighterHurtDesc fighter_hurt_desc[FTPARTS_HURT_NUM_MAX];
     s32 unk_ftca_0x290;
     s32 unk_ftca_0x294;
@@ -1172,7 +1172,7 @@ struct Fighter_Struct
     u32 is_playing_effect : 1; // Destroy GFX on action state change if TRUE, not sure why this and is_playing_gfx are different
     u32 x18F_flag_b4 : 1;
     u32 x18F_flag_b5 : 1;
-    u32 x18F_flag_b6 : 1;
+    u32 is_disable_control : 1;   // Fighter cannot be controlled if TRUE; enabled when training mode menu is up
     u32 is_hitstun : 1;
 
     u32 slope_contour : 3;
@@ -1402,7 +1402,7 @@ struct Fighter_Struct
 };
 
 #define ftGetStruct(fighter_gobj) \
-((Fighter_Struct*)fighter_gobj->user_data) \
+((Fighter_Struct*) (fighter_gobj)->user_data) \
 
 #define AttributesGetStruct(fp) \
 ((ftCommonAttributes*)fp->attributes) \

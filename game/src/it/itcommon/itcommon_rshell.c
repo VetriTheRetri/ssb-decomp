@@ -163,7 +163,7 @@ bool32 jtgt_ovl3_8017A7EC(GObj *item_gobj)
     return FALSE;
 }
 
-extern itStatusDesc Article_R_Shell_Status[];
+extern itStatusDesc Article_RShell_Status[];
 
 void func_ovl3_8017A83C(GObj *item_gobj)
 {
@@ -184,7 +184,7 @@ void func_ovl3_8017A83C(GObj *item_gobj)
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(item_gobj);
-        itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 0);
+        itMain_SetItemStatus(item_gobj, Article_RShell_Status, 0);
     }
     else if (ap->item_vars.shell.is_damage != FALSE)
     {
@@ -205,7 +205,7 @@ void func_ovl3_8017A83C(GObj *item_gobj)
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
         func_ovl3_8017A734(item_gobj);
-        itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 0);
+        itMain_SetItemStatus(item_gobj, Article_RShell_Status, 0);
     }
 }
 
@@ -223,7 +223,7 @@ void func_ovl3_8017A984(GObj *item_gobj)
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
     func_ovl3_80173F78(ap);
-    itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 1);
+    itMain_SetItemStatus(item_gobj, Article_RShell_Status, 1);
 }
 
 bool32 jtgt_ovl3_8017A9D0(GObj *item_gobj)
@@ -262,7 +262,7 @@ void jtgt_ovl3_8017AABC(GObj *item_gobj)
 {
     DObjGetStruct(item_gobj)->rotate.y = 0.0F;
 
-    itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 2);
+    itMain_SetItemStatus(item_gobj, Article_RShell_Status, 2);
 }
 
 void jtgt_ovl3_8017AAF0(GObj *item_gobj)
@@ -276,7 +276,7 @@ void jtgt_ovl3_8017AAF0(GObj *item_gobj)
     ap->times_thrown = 0;
 
     func_ovl3_80173F78(ap);
-    itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 3);
+    itMain_SetItemStatus(item_gobj, Article_RShell_Status, 3);
 }
 
 void jtgt_ovl3_8017AB48(GObj *item_gobj)
@@ -290,7 +290,7 @@ void jtgt_ovl3_8017AB48(GObj *item_gobj)
     ap->times_thrown = 0;
 
     func_ovl3_80173F78(ap);
-    itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 4);
+    itMain_SetItemStatus(item_gobj, Article_RShell_Status, 4);
 }
 
 bool32 jtgt_ovl3_8017ABA0(GObj *item_gobj)
@@ -484,7 +484,7 @@ void func_ovl3_8017AFEC(GObj *item_gobj)
 void func_ovl3_8017B0D4(GObj *item_gobj)
 {
     func_ovl3_8017AFEC(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 5);
+    itMain_SetItemStatus(item_gobj, Article_RShell_Status, 5);
 }
 
 void func_ovl3_8017B108(GObj *item_gobj)
@@ -514,14 +514,14 @@ void func_ovl3_8017B108(GObj *item_gobj)
 void func_ovl3_8017B1A4(GObj *item_gobj)
 {
     func_ovl3_8017B108(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_R_Shell_Status, 6);
+    itMain_SetItemStatus(item_gobj, Article_RShell_Status, 6);
 }
 
-extern itCreateDesc Article_R_Shell_Data;
+extern itCreateDesc Article_RShell_Data;
 
 GObj *jtgt_ovl3_8017B1D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_R_Shell_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_RShell_Data, pos, vel, flags);
 
 
     if (item_gobj != NULL)

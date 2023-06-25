@@ -2,114 +2,227 @@
 #include "weapon.h"
 #include "fighter.h"
 
-bool32 jtgt_ovl3_80175B20(GObj *item_gobj)
+itCreateDesc itCommon_FFlower_ItemDesc = 
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    It_Kind_FFlower,                        // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0x2E4,                                  // Offset of item attributes in file?
+    0x1B,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itFFlower_AFall_ProcUpdate,             // Proc Update
+    itFFlower_AFall_ProcMap,                // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
 
-    func_ovl3_80172558(ap, ATFFLOWER_GRAVITY, ATFFLOWER_T_VEL);
+itStatusDesc itCommon_FFlower_StatusDesc[5] =
+{
+    // Status 0 (Ground Wait)
+    {
+        NULL,                               // Proc Update
+        itFFlower_GWait_ProcMap,            // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 1 (Air Wait Fall)
+    {
+        itFFlower_AFall_ProcUpdate,         // Proc Update
+        itFFlower_AFall_ProcMap,            // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 2 (Fighter Hold)
+    {
+        NULL,                               // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 3 (Fighter Throw)
+    {
+        itFFlower_AFall_ProcUpdate,         // Proc Update
+        itFFlower_AThrow_ProcMap,           // Proc Map
+        itFFlower_SDefault_ProcHit,         // Proc Hit
+        itFFlower_SDefault_ProcHit,         // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itFFlower_SDefault_ProcHit,         // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        itFFlower_SDefault_ProcHit          // Proc Damage
+    },
+};
+
+wpCreateDesc wpFFlower_Flame_WeaponDesc =
+{
+    0,                                      // Render flags?
+    Wp_Kind_FFlowerFlame,                   // Weapon Kind
+    &gItemFileData,                         // Pointer to character's loaded files?
+    0x32C,                                  // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpFFlower_Flame_ProcUpdate,             // Proc Update
+    wpFFlower_Flame_ProcMap,                // Proc Map
+    wpFFlower_Flame_ProcHit,                // Proc Hit
+    wpFFlower_Flame_ProcHit,                // Proc Shield
+    NULL,                                   // Proc Hop
+    wpFFlower_Flame_ProcHit,                // Proc Set-Off
+    wpFFlower_Flame_ProcReflector,          // Proc Reflector
+    NULL                                    // Proc Absorb
+};
+
+typedef enum itFFlowerStatus
+{
+    itStatus_FFlower_GWait,
+    itStatus_FFlower_AFall,
+    itStatus_FFlower_FHold,
+    itStatus_FFlower_AThrow,
+    itStatus_FFlower_ADrop
+
+} itFFlowerStatus;
+
+// 0x80175B20
+bool32 itFFlower_AFall_ProcUpdate(GObj *item_gobj)
+{
+    Item_Struct *ip = itGetStruct(item_gobj);
+
+    func_ovl3_80172558(ip, ATFFLOWER_GRAVITY, ATFFLOWER_T_VEL);
     func_ovl3_801713F4(item_gobj);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80175B5C(GObj *item_gobj)
+// 0x80175B5C
+bool32 itFFlower_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_80175BE4);
+    func_ovl3_801735A0(item_gobj, itFFlower_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80175B84(GObj *item_gobj)
+// 0x80175B84
+bool32 itFFlower_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, func_ovl3_80175BB0);
+    return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
 }
 
-extern itStatusDesc Article_F_Flower_Status[];
+extern itStatusDesc itCommon_FFlower_StatusDesc[];
 
-void func_ovl3_80175BB0(GObj *item_gobj)
+// 0x80175BB0
+void itFFlower_GWait_SetStatus(GObj *item_gobj)
 {
     func_ovl3_80172E74(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_F_Flower_Status, 0);
+    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_GWait);
 }
 
-void func_ovl3_80175BE4(GObj *item_gobj)
+// 0x80175BE4
+void itFFlower_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->is_allow_pickup = FALSE;
+    ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ap);
-    itMain_SetItemStatus(item_gobj, Article_F_Flower_Status, 1);
+    func_ovl3_80173F78(ip);
+    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_AFall);
 }
 
-void jtgt_ovl3_80175C28(GObj *item_gobj)
+// 0x80175C28
+void itFFlower_FHold_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_F_Flower_Status, 2);
+    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_FHold);
 }
 
-bool32 jtgt_ovl3_80175C50(GObj *item_gobj)
+// 0x80175C50
+bool32 itFFlower_AThrow_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->it_multi == 0)
+    if (ip->it_multi == 0)
     {
         return func_ovl3_80173DF4(item_gobj, 0.0F);
     }
-    else return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, func_ovl3_80175BB0);
+    else return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
 }
 
-bool32 jtgt_ovl3_80175C9C(GObj *item_gobj)
+// 0x80175C9C
+bool32 itFFlower_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     func_ovl3_80172FE0(item_gobj);
 
     return FALSE;
 }
 
-void jtgt_ovl3_80175CC4(GObj *item_gobj)
+// 0x80175CC4
+void itFFlower_AThrow_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_F_Flower_Status, 3);
+    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_AThrow);
 }
 
-bool32 jtgt_ovl3_80175CEC(GObj *item_gobj)
+// 0x80175CEC
+bool32 itFFlower_ADrop_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->it_multi == 0)
+    if (ip->it_multi == 0)
     {
         return func_ovl3_80173DF4(item_gobj, 0.0F);
     }
-    else return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, func_ovl3_80175BB0);
+    else return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
 }
 
-void jtgt_ovl3_80175D38(GObj *item_gobj)
+// 0x80175D38
+void itFFlower_ADrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_F_Flower_Status, 4);
+    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_ADrop);
 }
 
-extern itCreateDesc Article_F_Flower_Data;
+extern itCreateDesc itCommon_FFlower_ItemDesc;
 
-GObj* jtgt_ovl3_80175D60(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80175D60
+GObj* itCommon_FFlower_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_F_Flower_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_FFlower_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        Item_Struct *ip = itGetStruct(item_gobj);
 
-        ap->it_multi = ATFFLOWER_AMMO_MAX;
+        ip->it_multi = ATFFLOWER_AMMO_MAX;
 
-        ap->is_unused_item_bool = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
-        ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
+        ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }
     return item_gobj;
 }
 
-bool32 jtgt_ovl3_80175DDC(GObj *weapon_gobj)
+// 0x80175DDC
+bool32 wpFFlower_Flame_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
@@ -120,7 +233,8 @@ bool32 jtgt_ovl3_80175DDC(GObj *weapon_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80175E08(GObj *weapon_gobj)
+// 0x801750E8
+bool32 wpFFlower_Flame_ProcMap(GObj *weapon_gobj)
 {
     if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
@@ -131,7 +245,8 @@ bool32 jtgt_ovl3_80175E08(GObj *weapon_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80175E4C(GObj *weapon_gobj)
+// 0x80175E4C
+bool32 wpFFlower_Flame_ProcHit(GObj *weapon_gobj)
 {
     func_800269C0(0U);
     func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
@@ -141,7 +256,8 @@ bool32 jtgt_ovl3_80175E4C(GObj *weapon_gobj)
 
 extern s32 D_ovl3_8018D044; // Something to do with GFX IDs; static (.bss)
 
-bool32 jtgt_ovl3_80175E84(GObj *weapon_gobj)
+// 0x80175E84
+bool32 wpFFlower_Flame_ProcReflector(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
@@ -159,11 +275,10 @@ bool32 jtgt_ovl3_80175E84(GObj *weapon_gobj)
     return FALSE;
 }
 
-extern wpCreateDesc Item_F_Flower_Ammo_Desc;
-
-GObj* func_ovl3_80175F48(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
+// 0x80175F48
+GObj* wpFFlower_Flame_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_F_Flower_Ammo_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpFFlower_Flame_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     Weapon_Struct *wp;
 
     if (weapon_gobj == NULL)
@@ -184,20 +299,20 @@ GObj* func_ovl3_80175F48(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
     return weapon_gobj;
 }
 
-extern u8 D_NF_00000360;
-extern itCreateDesc D_ovl3_80189C60;
+extern intptr_t D_NF_00000360;
 
-void func_ovl3_8017604C(GObj *fighter_gobj, Vec3f *pos, s32 index, s32 ammo_sub)
+// 0x8017604C
+void ftCommon_FireFlowerShoot_CreateFlame(GObj *fighter_gobj, Vec3f *pos, s32 index, s32 ammo_sub)
 {
-    Item_Struct *ap = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
+    Item_Struct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
     Vec3f vel;
-    f32 *flame_vel = (f32*)((uintptr_t)*D_ovl3_80189C60.p_file + (uintptr_t)&D_NF_00000360); // Linker thing
+    f32 *flame_vel = (f32*) ((uintptr_t)*itCommon_FFlower_ItemDesc.p_file + (intptr_t)&D_NF_00000360); // Linker thing
 
     vel.x = cosf(flame_vel[index]) * ATFFLOWER_AMMO_VEL;
     vel.y = __sinf(flame_vel[index]) * ATFFLOWER_AMMO_VEL;
     vel.z = 0.0F;
 
-    func_ovl3_80175F48(fighter_gobj, pos, &vel);
+    wpFFlower_Flame_CreateWeapon(fighter_gobj, pos, &vel);
 
-    ap->it_multi -= ammo_sub;
+    ip->it_multi -= ammo_sub;
 }

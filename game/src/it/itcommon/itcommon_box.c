@@ -31,7 +31,7 @@ itStatusDesc itCommon_Box_StatusDesc[6] =
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itBox_Default_ProcDamage            // Proc Damage
+        itBox_SDefault_ProcDamage            // Proc Damage
     },
 
     // Status 1 (Air Fall)
@@ -62,24 +62,24 @@ itStatusDesc itCommon_Box_StatusDesc[6] =
     {
         itBox_AFall_ProcUpdate,             // Proc Update
         itBox_AThrow_ProcMap,               // Proc Map
-        itBox_Default_ProcHit,              // Proc Hit
-        itBox_Default_ProcHit,              // Proc Shield
+        itBox_SDefault_ProcHit,             // Proc Hit
+        itBox_SDefault_ProcHit,             // Proc Shield
         NULL,                               // Proc Hop
-        itBox_Default_ProcHit,              // Proc Set-Off
-        itBox_Default_ProcHit,              // Proc Reflector
-        itBox_Default_ProcDamage            // Proc Damage
+        itBox_SDefault_ProcHit,             // Proc Set-Off
+        itBox_SDefault_ProcHit,             // Proc Reflector
+        itBox_SDefault_ProcDamage           // Proc Damage
     },
 
     // Status 4 (Fighter Drop)
     {
         itBox_AFall_ProcUpdate,             // Proc Update
         itBox_ADrop_ProcMap,                // Proc Map
-        itBox_Default_ProcHit,              // Proc Hit
-        itBox_Default_ProcHit,              // Proc Shield
+        itBox_SDefault_ProcHit,             // Proc Hit
+        itBox_SDefault_ProcHit,             // Proc Shield
         NULL,                               // Proc Hop
-        itBox_Default_ProcHit,              // Proc Set-Off
-        itBox_Default_ProcHit,              // Proc Reflector
-        itBox_Default_ProcDamage            // Proc Damage
+        itBox_SDefault_ProcHit,             // Proc Set-Off
+        itBox_SDefault_ProcHit,             // Proc Reflector
+        itBox_SDefault_ProcDamage           // Proc Damage
     },
 
     // Status 5 (Neutral Explosion)
@@ -295,7 +295,7 @@ bool32 itBox_GWait_ProcMap(GObj *item_gobj)
 }
 
 // 0x8017969C
-bool32 itBox_Default_ProcHit(GObj *item_gobj)
+bool32 itBox_SDefault_ProcHit(GObj *item_gobj)
 {
     if (itCommon_Box_CheckSpawnItems(item_gobj) != FALSE)
     {
@@ -307,13 +307,13 @@ bool32 itBox_Default_ProcHit(GObj *item_gobj)
 }
 
 // 0x801796D8
-bool32 itBox_Default_ProcDamage(GObj *item_gobj)
+bool32 itBox_SDefault_ProcDamage(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->percent_damage >= ATBOX_HEALTH_MAX)
     {
-        return itBox_Default_ProcHit(item_gobj);
+        return itBox_SDefault_ProcHit(item_gobj);
     }
     else return FALSE;
 }

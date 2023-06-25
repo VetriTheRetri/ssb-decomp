@@ -4,12 +4,14 @@
     "\\game",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\gm",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftness",
     "\\game\\src\\it",
-    "\\game\\src\\it\\itcommon",
     "\\game\\src\\it\\itfighter",
-    "\\game\\src\\wp"
+    "\\game\\src\\ovl2",
+    "\\game\\src\\wp",
+    "\\game\\src\\wp\\wpness"
   ],
-  "SelectedNode": "\\game\\src\\it\\itcommon\\itcommon_fflower.c",
+  "SelectedNode": "\\game\\src\\ft\\fighter.h",
   "PreviewInSolutionExplorer": false
 }

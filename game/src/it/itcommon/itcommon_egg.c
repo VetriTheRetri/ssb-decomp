@@ -11,7 +11,7 @@ itStatusDesc itCommon_Egg_StatusDesc[6] =
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itEgg_Default_ProcHit               // Proc Damage
+        itEgg_SDefault_ProcHit              // Proc Damage
     },
 
     // Status 1 (Air Fall Wait)
@@ -23,7 +23,7 @@ itStatusDesc itCommon_Egg_StatusDesc[6] =
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itEgg_Default_ProcHit               // Proc Damage
+        itEgg_SDefault_ProcHit              // Proc Damage
     },
 
     // Status 2 (Fighter Hold)
@@ -42,24 +42,24 @@ itStatusDesc itCommon_Egg_StatusDesc[6] =
     {
         itEgg_AThrow_ProcUpdate,            // Proc Update
         itEgg_AThrow_ProcMap,               // Proc Map
-        itEgg_Default_ProcHit,              // Proc Hit
-        itEgg_Default_ProcHit,              // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
-        itEgg_Default_ProcHit,              // Proc Set-Off
-        itEgg_Default_ProcHit,              // Proc Reflector
-        itEgg_Default_ProcHit               // Proc Damage
+        itEgg_SDefault_ProcHit,             // Proc Hit
+        itEgg_SDefault_ProcHit,             // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itEgg_SDefault_ProcHit,             // Proc Set-Off
+        itEgg_SDefault_ProcHit,             // Proc Reflector
+        itEgg_SDefault_ProcHit              // Proc Damage
     },
 
     // Status 4 (Fighter Drop)
     {
         itEgg_AFall_ProcUpdate,             // Proc Update
         itEgg_ADrop_ProcMap,                // Proc Map
-        itEgg_Default_ProcHit,              // Proc Hit
-        itEgg_Default_ProcHit,              // Proc Shield
-        itCommon_Default_ProcHop,           // Proc Hop
-        itEgg_Default_ProcHit,              // Proc Set-Off
-        itEgg_Default_ProcHit,              // Proc Reflector
-        itEgg_Default_ProcHit               // Proc Damage
+        itEgg_SDefault_ProcHit,             // Proc Hit
+        itEgg_SDefault_ProcHit,             // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itEgg_SDefault_ProcHit,             // Proc Set-Off
+        itEgg_SDefault_ProcHit,             // Proc Reflector
+        itEgg_SDefault_ProcHit              // Proc Damage
     },
 
     // Status 5 (Neutral Explosion)
@@ -108,7 +108,7 @@ bool32 itEgg_GWait_ProcMap(GObj *item_gobj)
 }
 
 // 0x80181640
-bool32 itEgg_Default_ProcHit(GObj *item_gobj)
+bool32 itEgg_SDefault_ProcHit(GObj *item_gobj)
 {
     if (func_ovl3_801730D4(item_gobj) != FALSE)
     {

@@ -130,14 +130,14 @@ void ftCommon_ResetControllerInputs(GObj *fighter_gobj)
 
     fp->tap_stick_x = fp->tap_stick_y = fp->hold_stick_x = fp->hold_stick_y = U8_MAX - 1;
 
-    fp->x18F_flag_b6 = TRUE;
+    fp->is_disable_control = TRUE;
 }
 
 void func_ovl2_800E7F68(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->x18F_flag_b6 = FALSE;
+    fp->is_disable_control = FALSE;
 }
 
 void func_ovl2_800E7F7C(GObj *fighter_gobj, s32 arg1)

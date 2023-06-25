@@ -94,37 +94,39 @@ void wpNess_PKThunder_SetDestroy(GObj *weapon_gobj, bool32 is_destroy)
 {
     GObj *gobj;
     Fighter_Struct *fp;
-    Weapon_Struct *wp, *wp2, *wp3;
+    Weapon_Struct *head_wp, *trailmid_wp, *trailend_wp;
     s32 i;
 
-    wp = wpGetStruct(weapon_gobj);
+    head_wp = wpGetStruct(weapon_gobj);
 
-    if (!(wp->weapon_vars.pkthunder.pkthunder_state & wpNessPKThunder_Status_Destroy))
+    if (!(head_wp->weapon_vars.pkthunder.pkthunder_state & wpNessPKThunder_Status_Destroy))
     {
         fp = ftGetStruct(wp->owner_gobj);
 
-        if (fp->player_number == wp->player_number)
+        if (fp->player_number == head_wp->player_number)
         {
             fp->fighter_vars.ness.is_thunder_destroy |= is_destroy;
         }
     }
     fp = ftGetStruct(wp->owner_gobj);
 
-    for (i = 0; i < (ARRAY_COUNT(wp->weapon_vars.pkthunder.trail_gobj) - 1); i++)
+    for (i = 0; i < (ARRAY_COUNT(head_wp->weapon_vars.pkthunder.trail_gobj) - 1); i++)
     {
-        if (wpNess_PKThunderHead_GetTrailIndexGObj(wp, i) != NULL)
+        if (head_wp->weapon_vars.pkthunder.trail_gobj[i] != NULL)
         {
-            wp2 = wpGetStruct(wpNess_PKThunderHead_GetTrailIndexGObj(wp, i));
-            wp2->weapon_vars.pkthunder_trail.pkthunder_trail_state = wpNessPKThunder_Status_Destroy;
-            wp->weapon_vars.pkthunder.trail_gobj[i] = NULL;
+            trailmid_wp = wpGetStruct(head_wp->weapon_vars.pkthunder.trail_gobj[i]);
+            trailmid_wp->weapon_vars.pkthunder_trail.pkthunder_trail_state = wpNessPKThunder_Status_Destroy;
+
+            head_wp->weapon_vars.pkthunder.trail_gobj[i] = NULL;
         }
     }
 
-    if (wpNess_PKThunderHead_GetTrailIndexGObj(wp, ARRAY_COUNT(wp->weapon_vars.pkthunder.trail_gobj) - 1) != NULL)
+    if (head_wp->weapon_vars.pkthunder.trail_gobj[ARRAY_COUNT(head_wp->weapon_vars.pkthunder.trail_gobj) - 1] != NULL)
     {
-        wp3 = wpGetStruct(wpNess_PKThunderHead_GetTrailIndexGObj(wp, ARRAY_COUNT(wp->weapon_vars.pkthunder.trail_gobj) - 1));
-        wp3->lr = RIGHT;
-        wp->weapon_vars.pkthunder.trail_gobj[ARRAY_COUNT(wp->weapon_vars.pkthunder.trail_gobj) - 1] = NULL;
+        trailend_wp = wpGetStruct(wp->weapon_vars.pkthunder.trail_gobj[ARRAY_COUNT(head_wp->weapon_vars.pkthunder.trail_gobj) - 1]);
+        trailend_wp->lr = RIGHT;
+
+        head_wp->weapon_vars.pkthunder.trail_gobj[ARRAY_COUNT(head_wp->weapon_vars.pkthunder.trail_gobj) - 1] = NULL;
     }
 }
 
@@ -161,7 +163,7 @@ void wpNess_PKThunderHead_CreateTrail(GObj *weapon_gobj, s32 trail_index)
 }
 
 // 0x8016AEA68
-bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj) // PK Thunder physics callback?
+bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp;
@@ -406,7 +408,7 @@ GObj* wpNess_PKThunderTrail_CreateWeapon(GObj *head_gobj, Vec3f *pos, s32 trail_
 
     if (trail_index == 0)
     {
-        trail_wp->group_id = wpManager_GetGroupIndexInc(head_gobj, trail_gobj); // Bruh this doesn't take arguments but it doesn't match otherwise
+        trail_wp->group_id = wpManager_GetGroupIndexInc(head_gobj, trail_gobj); // Bruh this doesn't any take arguments but it doesn't match otherwise
     }
     else trail_wp->group_id = head_wp->group_id;
 

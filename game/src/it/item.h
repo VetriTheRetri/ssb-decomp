@@ -51,7 +51,7 @@
 
 #define ITEM_SPIN_SPEED_FRACTION_DEFAULT 0.01F // Also multiplies spin speed
 
-typedef enum atKind
+typedef enum itKind
 {
     // Common articles
 
@@ -68,20 +68,20 @@ typedef enum atKind
     It_Kind_Harisen,                            // Fan
     It_Kind_StarRod,                            // Star Rod
     It_Kind_L_Gun,                              // Ray Gun
-    It_Kind_F_Flower,                           // Fire Flower
+    It_Kind_FFlower,                            // Fire Flower
     It_Kind_Hammer,                             // Hammer
     It_Kind_MSBomb,                             // Motion-Sensor Bomb
     It_Kind_BombHei,                            // Bob-Omb
     It_Kind_It_Bumper,                          // Bumper (Item)
-    It_Kind_G_Shell,                            // Green Shell
-    It_Kind_R_Shell,                            // Red Shell
+    It_Kind_GShell,                             // Green Shell
+    It_Kind_RShell,                             // Red Shell
     It_Kind_M_Ball,                             // Poké Ball
     It_Kind_CommonEnd = It_Kind_M_Ball,         // End of common item IDs
 
     // Character articles
 
     It_Kind_FighterStart,                       // Start of fighter item IDs
-    It_Kind_PKFire = It_Kind_FighterStart,     // PK Fire pillar
+    It_Kind_PKFire = It_Kind_FighterStart,      // PK Fire pillar
     It_Kind_Link_Bomb,                          // Link's Bomb
     It_Kind_FighterEnd = It_Kind_Link_Bomb,     // End of fighter item IDs
 
@@ -123,26 +123,26 @@ typedef enum atKind
 
     It_Kind_CustomStart                         // Start of custom item IDs (future modding?)
 
-} atKind;
+} itKind;
 
 typedef enum itWeight
 {
-    It_Weight_Heavy,
-    It_Weight_Light
+    It_Weight_Heavy,                            // Crate and barrel
+    It_Weight_Light                             // Everything else lol
 
 } itWeight;
 
-typedef enum atType
+typedef enum itType
 {
-    It_Type_Ground,     // Item is spawned by the stage (?)
-    It_Type_Swing,      // Item can be thrown and swung
-    It_Type_Shoot,      // Item can be fired
-    It_Type_Throw,      // Item can only be thrown
-    It_Type_Touch,      // Item has special properties on interaction
-    It_Type_Special,    // Hammer, Heart and Maxim Tomato?
-    It_Type_Fighter     // Item spawned by fighter's item (projectile) ?
+    It_Type_Ground,                             // Item is spawned by the stage (?)
+    It_Type_Swing,                              // Item can be thrown and swung
+    It_Type_Shoot,                              // Item can be fired
+    It_Type_Throw,                              // Item can only be thrown
+    It_Type_Touch,                              // Item has special properties on hitbox interaction
+    It_Type_Special,                            // Hammer, Heart and Maxim Tomato?
+    It_Type_Fighter                             // Item spawned by fighter's weapon?
 
-} atType; 
+} itType; 
 
 typedef struct gmMonsterInfo
 {
@@ -331,8 +331,8 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     void *ip_alloc_next;                // Memory region allocated for next Item_Struct
     GObj *item_gobj;                    // Item's GObj pointer
     GObj *owner_gobj;                   // Item's owner
-    atKind it_kind;                     // Item ID
-    s32 type;                           // Item type
+    itKind it_kind;                     // Item ID
+    itType type;                        // Item type
     u8 team;                            // Item's team
     u8 port_id;                         // Item's port index
     u8 handicap;                        // Item's handicap
@@ -378,8 +378,11 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     u8 damage_handicap;                 // Handicap of attacker
     s32 damage_display_state;           // Display mode of attacker which the item takes on
     s32 damage_taken_last;              // Final damage intake?
+
     s32 lifetime;                       // Item's duration in frames
+
     f32 vel_scale;                      // Scale item's velocity
+
     u16 unk_sfx;                        // Unused?
     u16 drop_sfx;                       // SFX to play when item is dropped?
     u16 throw_sfx;                      // SFX to play when item is thrown?
@@ -414,35 +417,38 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     union item_vars                     // Item-specific state variables
     {
-        BombHei_ItemVars bombhei;
-        Shell_ItemVars shell;
-        Taru_ItemVars taru;
-        Bumper_ItemVars bumper;
-        Gr_Lucky_ItemVars gr_lucky;
-        M_Ball_ItemVars m_ball;
-        Pakkun_ItemVars pakkun;
-        Iwark_ItemVars iwark;
-        Kabigon_ItemVars kabigon;
-        Tosakinto_ItemVars tosakinto;
-        Mew_ItemVars mew;
-        Nyars_ItemVars nyars;
-        Lizardon_ItemVars lizardon;
-        Spear_ItemVars spear;
-        Kamex_ItemVars kamex;
-        Mb_Lucky_ItemVars mb_lucky;
-        Starmie_ItemVars starmie;
-        Dogas_ItemVars dogas;
-        Marumine_ItemVars marumine;
-        Porygon_ItemVars porygon;
-        Hitokage_ItemVars hitokage;
-        Fushigibana_ItemVars fushigibana;
-        RaceBomb_ItemVars gr_bomb;
-        PKFire_ItemVars pkfire;
-        Link_Bomb_ItemVars link_bomb;
+        itCommon_ItemVars_Taru taru;
+        itCommon_ItemVars_BombHei bombhei;
+        itCommon_ItemVars_Bumper bumper;
+        itCommon_ItemVars_Shell shell;
+        itCommon_ItemVars_MBall m_ball;
+
+        itFighter_ItemVars_PKFire pkfire;
+        itFighter_ItemVars_LinkBomb link_bomb;
+
+        itGround_ItemVars_Pakkun pakkun;
+        itGround_ItemVars_RaceBomb gr_bomb;
+        itGround_ItemVars_GrLucky gr_lucky;
+        itGround_ItemVars_Marumine marumine;
+        itGround_ItemVars_Hitokage hitokage;
+        itGround_ItemVars_Fushigibana fushigibana;
+        itGround_ItemVars_Porygon porygon;
+
+        itMonster_ItemVars_Iwark iwark;
+        itMonster_ItemVars_Kabigon kabigon;
+        itMonster_ItemVars_Tosakinto tosakinto;
+        itMonster_ItemVars_Nyars nyars;
+        itMonster_ItemVars_Lizardon lizardon;
+        itMonster_ItemVars_Spear spear;
+        itMonster_ItemVars_Kamex kamex;
+        itMonster_ItemVars_MbLucky mb_lucky;
+        itMonster_ItemVars_Starmie starmie;
+        itMonster_ItemVars_Dogas dogas;
+        itMonster_ItemVars_Mew mew;
 
     } item_vars;
 
-    s32 display_state;                  // Item's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + transparent attack hitboxes, 3 = map collisions
+    s32 display_state;                  // Item's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
 
     bool32 (*proc_update)(GObj*);       // Update general item information
     bool32 (*proc_map)(GObj*);          // Update item's map collision
@@ -451,13 +457,13 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     bool32 (*proc_hop)(GObj*);          // Runs when item bounces off a shield
     bool32 (*proc_setoff)(GObj*);       // Runs when item's hitbox collides with another hitbox
     bool32 (*proc_reflector)(GObj*);    // Runs when item is reflected
-    bool32 (*proc_damage)(GObj*);       // Runs when iteme takes damage
+    bool32 (*proc_damage)(GObj*);       // Runs when item takes damage
     bool32 (*proc_dead)(GObj*);         // Runs when item is in a blast zone
 
 } Item_Struct;
 
 #define itGetStruct(item_gobj) \
-((Item_Struct*)item_gobj->user_data) \
+((Item_Struct*) (item_gobj)->user_data) \
 
 // Points to all sorts of data
 

@@ -1105,11 +1105,11 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
     u16 button_press_com;
     f32 this_jostle;
 
-    if (!this_fp->x18F_flag_b6)
+    if (!this_fp->is_disable_control)
     {
         this_fp->status_info.status_time_spent++;
     }
-    if (!this_fp->x18F_flag_b6)
+    if (!this_fp->is_disable_control)
     {
         this_fp->input.pl.stick_prev.x = this_fp->input.pl.stick_range.x;
         this_fp->input.pl.stick_prev.y = this_fp->input.pl.stick_range.y;
@@ -1374,7 +1374,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
     }
     if (this_fp->hitlag_timer == 0)
     {
-        if ((this_fp->unk_0x174 > 1) && !(this_fp->x18F_flag_b6))
+        if ((this_fp->unk_0x174 > 1) && !(this_fp->is_disable_control))
         {
             this_fp->unk_0x174--;
         }
