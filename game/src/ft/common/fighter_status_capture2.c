@@ -24,7 +24,7 @@ void ftCommon_CaptureCut_DamageApplyKnockback(GObj *fighter_gobj, ftThrowRelease
 
     func_ovl3_8014ADB0(fighter_gobj);
 
-    if (this_fp->ground_or_air == air)
+    if (this_fp->ground_or_air == GA_Air)
     {
         this_fp->jumps_used = 1;
 

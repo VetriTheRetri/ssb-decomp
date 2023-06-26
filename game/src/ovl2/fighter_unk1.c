@@ -1366,7 +1366,7 @@ void ftCommon_ProcResumeGFX(GObj *fighter_gobj)
 // 0x800E9CE8
 void ftCommon_VelDamageTransferGround(Fighter_Struct *fp)
 {
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         Vec3f *ground_angle = &fp->coll_data.ground_angle;
 
@@ -1547,11 +1547,7 @@ void ftDamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
             {
                 if ((damage > (s32)rand_u16_range(60)) || ((atCommon_CheckTypeShootEmpty(fp->item_hold) != FALSE) && (rand_u16_range(2) == 0)))
                 {
-                    Vec3f vel;
-
-                    vel.x = vel.y = vel.z = 0.0F;
-
-                    func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+                    ftSetupDropItem(fp);
                 }
             }
         }
@@ -1688,7 +1684,7 @@ u16 gmCommon_GetStatUpdateCountInc(void)
 // 0x800EA778
 void ftCommon_StatUpdateCountIncSetFlags(Fighter_Struct *fp, u16 flags)
 {
-    fp->stat_flags = *(gmAttackFlags*)&flags;
+    fp->stat_flags = *(gmStatFlags*)&flags;
     fp->stat_count = gmCommon_GetStatUpdateCountInc();
 }
 
@@ -1700,7 +1696,7 @@ extern s32 gmBonusStat_Attacker_IsSpecialAttack_Count[2];    // Index 0 = non-sp
 // 0x800EA7B0
 void ftCommon_Update1PGameAttackStats(Fighter_Struct *fp, u16 flags)
 {
-    gmAttackFlags stat_flags = *(gmAttackFlags*)&flags;
+    gmStatFlags stat_flags = *(gmStatFlags*)&flags;
 
     if ((fp->status_info.pl_kind != Pl_Kind_Result) && (Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port))
     {
@@ -1782,7 +1778,7 @@ void ftCommon_Update1PGameDamageStats(Fighter_Struct *fp, s32 damage_port_id, s3
 
     if (!(damage_stat_count) || (fp->damage_stat_count != damage_stat_count))
     {
-        fp->damage_stat_flags = *(gmAttackFlags*)&flags;
+        fp->damage_stat_flags = *(gmStatFlags*)&flags;
         fp->damage_stat_count = damage_stat_count;
 
         if (Match_Info->game_type == gmMatch_GameType_1PGame)
@@ -2033,7 +2029,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         break;
 
     case 0x16:
-        if ((fp->ground_or_air == ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
+        if ((fp->ground_or_air == GA_Ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
         {
             p_effect = func_ovl2_800FFD58(&offset, 4, atan2f(-fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y));
         }

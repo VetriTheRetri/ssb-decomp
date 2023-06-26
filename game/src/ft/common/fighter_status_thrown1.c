@@ -57,7 +57,7 @@ void ftCommon_Thrown_SetStatusQueue(GObj *fighter_gobj, s32 status_id_new, s32 s
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
-    this_fp->ground_or_air = air;
+    this_fp->ground_or_air = GA_Air;
     this_fp->jumps_used = 1;
 
     ftStatus_Update(fighter_gobj, status_id_new, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -80,7 +80,7 @@ void ftCommon_Thrown_SetStatusImmediate(GObj *fighter_gobj, s32 status_id)
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
-    this_fp->ground_or_air = air;
+    this_fp->ground_or_air = GA_Air;
     this_fp->jumps_used = 1;
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

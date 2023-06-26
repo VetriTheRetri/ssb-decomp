@@ -86,7 +86,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
         Vec3f sp94;
         f32 sp90;
 
-        if (fp->ground_or_air == ground)
+        if (fp->ground_or_air == GA_Ground)
         {
             ground_line_id = fp->coll_data.ground_line_id;
 

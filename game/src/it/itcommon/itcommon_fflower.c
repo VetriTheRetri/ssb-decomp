@@ -269,8 +269,8 @@ bool32 wpFFlower_Flame_ProcReflector(GObj *weapon_gobj)
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
 
     return FALSE;
 }
@@ -287,14 +287,14 @@ GObj* wpFFlower_Flame_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel.x = vel->x * wp->lr;
-    wp->phys_info.vel.y = vel->y;
-    wp->phys_info.vel.z = vel->z;
+    wp->phys_info.vel_air.x = vel->x * wp->lr;
+    wp->phys_info.vel_air.y = vel->y;
+    wp->phys_info.vel_air.z = vel->z;
 
     wp->lifetime = ATFFLOWER_AMMO_LIFETIME;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, wp->phys_info.vel.x, wp->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
 
     return weapon_gobj;
 }

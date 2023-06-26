@@ -128,11 +128,7 @@ void ftCommon_Get_DropItem(GObj *fighter_gobj)
 
     if (fp->item_hold != NULL)
     {
-        Vec3f vel;
-
-        vel.x = vel.y = vel.z = 0.0F;
-
-        func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+        ftSetupDropItem(fp);
     }
 }
 
@@ -211,11 +207,7 @@ void ftCommon_HeavyGet_ProcMap(GObj *fighter_gobj)
     {
         if (fp->item_hold != NULL)
         {
-            Vec3f vel;
-
-            vel.x = vel.y = vel.z = 0.0F;
-
-            func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+            ftSetupDropItem(fp);
         }
         ftCommon_Fall_SetStatus(fighter_gobj);
     }
@@ -230,11 +222,7 @@ void ftCommon_HeavyThrow_ProcMap(GObj *fighter_gobj)
     {
         if (fp->item_hold != NULL)
         {
-            Vec3f vel;
-
-            vel.x = vel.y = vel.z = 0.0F;
-
-            func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+            ftSetupDropItem(fp);
         }
         ftCommon_Fall_SetStatus(fighter_gobj);
     }

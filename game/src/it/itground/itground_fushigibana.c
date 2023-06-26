@@ -136,7 +136,7 @@ bool32 func_ovl3_80184820(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel.x += ATFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
+    ip->phys_info.vel_air.x += ATFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -160,10 +160,10 @@ bool32 jtgt_ovl3_801848BC(GObj *weapon_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x) + PI32;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x) + PI32;
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    if (ip->phys_info.vel.x > 0.0F)
+    if (ip->phys_info.vel_air.x > 0.0F)
     {
         ip->lr = RIGHT;
     }
@@ -179,7 +179,7 @@ bool32 jtgt_ovl3_80184970(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x) + PI32;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x) + PI32;
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
@@ -203,7 +203,7 @@ GObj *func_ovl3_801849EC(GObj *item_gobj, Vec3f *pos)
 
     ip->lr = LEFT;
 
-    ip->phys_info.vel.x = ATFUSHIGIBANA_RAZOR_VEL_X;
+    ip->phys_info.vel_air.x = ATFUSHIGIBANA_RAZOR_VEL_X;
 
     joint = DObjGetStruct(weapon_gobj);
 

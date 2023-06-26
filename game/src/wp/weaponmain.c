@@ -36,7 +36,7 @@ void wpMain_VelSetLR(GObj *weapon_gobj) // Set item's facing direction based on 
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    wp->lr = (wp->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
+    wp->lr = (wp->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 }
 
 // 0x80167FA0
@@ -44,7 +44,7 @@ void wpMain_VelSetModelYaw(GObj *weapon_gobj) // Set yaw rotation based on veloc
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
+    DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel_air.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
 }
 
 // 0x80167FE8
@@ -74,14 +74,14 @@ void wpMain_VelGroundTransferAir(GObj *weapon_gobj) // Transfer item's base grou
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel.x = wp->lr * wp->coll_data.ground_angle.y * wp->phys_info.vel_ground;
-    wp->phys_info.vel.y = wp->lr * -wp->coll_data.ground_angle.x * wp->phys_info.vel_ground;
+    wp->phys_info.vel_air.x = wp->lr * wp->coll_data.ground_angle.y * wp->phys_info.vel_ground;
+    wp->phys_info.vel_air.y = wp->lr * -wp->coll_data.ground_angle.x * wp->phys_info.vel_ground;
 }
 
 // 0x80168088
 void wpMain_UpdateGravityClampTVel(Weapon_Struct *wp, f32 gravity, f32 terminal_velocity) // Subtract vertical velocity every frame and clamp to terminal velocity
 {
-    wp->phys_info.vel.y -= gravity;
+    wp->phys_info.vel_air.y -= gravity;
 
     if (terminal_velocity < func_ovl0_800C7A84(&wp->phys_info.vel))
     {
@@ -93,9 +93,9 @@ void wpMain_UpdateGravityClampTVel(Weapon_Struct *wp, f32 gravity, f32 terminal_
 // 0x801680EC
 void wpMain_ReflectorInvertLR(Weapon_Struct *wp, Fighter_Struct *fp) // Invert direction on reflect
 {
-    if ((wp->phys_info.vel.x * fp->lr) < 0.0F)
+    if ((wp->phys_info.vel_air.x * fp->lr) < 0.0F)
     {
-        wp->phys_info.vel.x = -wp->phys_info.vel.x;
+        wp->phys_info.vel_air.x = -wp->phys_info.vel_air.x;
     }
 }
 

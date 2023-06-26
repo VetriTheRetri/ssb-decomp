@@ -225,12 +225,12 @@ bool32 wpMap_CheckCollideAllModifyVel(GObj *weapon_gobj, u32 check_flags, f32 mo
 // 0x80167E78
 void wpMap_SetGround(Weapon_Struct *ip) // Make item grounded
 {
-    ip->ground_or_air = ground;
-    ip->phys_info.vel_ground = ip->phys_info.vel.x * ip->lr;
+    ip->ground_or_air = GA_Ground;
+    ip->phys_info.vel_ground = ip->phys_info.vel_air.x * ip->lr;
 }
 
 // 0x80167E9C
 void wpMap_SetAir(Weapon_Struct *ip) // Make item airborne
 {
-    ip->ground_or_air = air;
+    ip->ground_or_air = GA_Air;
 }

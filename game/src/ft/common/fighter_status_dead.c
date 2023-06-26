@@ -125,7 +125,7 @@ void ftCommon_Dead_ResetCommonVars(GObj *fighter_gobj)
     func_ovl2_800D7994(fighter_gobj);
     func_ovl3_8014AF2C(fighter_gobj);
 
-    fp->ground_or_air = air;
+    fp->ground_or_air = GA_Air;
     fp->coll_data.ground_line_id = -1;
 
     if (fp->item_hold != NULL)

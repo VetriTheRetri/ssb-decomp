@@ -35,7 +35,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
                 vel.y = (rand_f32() * ATGRLUCKY_EGG_SPAWN_MUL) + ATGRLUCKY_EGG_SPAWN_ADD_Y;
                 vel.z = 0.0F;
 
-                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
                 if (egg_gobj != NULL)
                 {
@@ -123,8 +123,8 @@ bool32 jtgt_ovl3_8017C530(GObj *item_gobj)
     {
         f32 angle = gmCommon_Damage_GetKnockbackAngle(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
 
-        ap->phys_info.vel.x = (cosf(angle) * ap->damage_knockback * -ap->lr_damage);
-        ap->phys_info.vel.y = (__sinf(angle) * ap->damage_knockback);
+        ap->phys_info.vel_air.x = (cosf(angle) * ap->damage_knockback * -ap->lr_damage);
+        ap->phys_info.vel_air.y = (__sinf(angle) * ap->damage_knockback);
 
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
         ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;

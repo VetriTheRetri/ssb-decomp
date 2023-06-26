@@ -239,7 +239,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
                     pos1.x = spawn_pos[i].x;
                     pos1.y = spawn_pos[i].y;
 
-                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos1, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos1, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
                 }
             }
             else
@@ -262,7 +262,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
                     pos2.x = spawn_pos[j].x;
                     pos2.y = spawn_pos[j].y;
 
-                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos2, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+                    func_ovl3_8016EA78(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &pos2, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
                 }
                 D_ovl3_8018D048.unk_0x8++;
                 D_ovl3_8018D048.unk_0x10 = (u16)sp64;
@@ -477,9 +477,9 @@ void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ip->phys_info.vel.x = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.z = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
 
     effect_unk = func_ovl2_801005C8(&joint->translate);
 

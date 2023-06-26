@@ -169,7 +169,7 @@ bool32 jtgt_ovl3_80175988(GObj *weapon_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     return FALSE;
@@ -182,7 +182,7 @@ bool32 jtgt_ovl3_80175A00(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     return FALSE;
@@ -201,9 +201,9 @@ GObj* func_ovl3_80175A60(GObj *fighter_gobj, Vec3f *pos)
     }
     ip = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel.x = ip->lr * ATLGUN_AMMO_VEL_X;
+    ip->phys_info.vel_air.x = ip->lr * ATLGUN_AMMO_VEL_X;
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
 
     return weapon_gobj;
 }

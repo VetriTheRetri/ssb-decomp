@@ -24,7 +24,7 @@ void func_ovl3_80181C20(GObj *item_gobj)
 
         ap->item_vars.starmie.swift_spawn_wait = (rand_u16_range(ATSTARMIE_SWIFT_SPAWN_WAIT_RANDOM) + ATSTARMIE_SWIFT_SPAWN_WAIT_CONST);
 
-        ap->phys_info.vel.x = -ap->lr * ATSTARMIE_PUSH_VEL_X;
+        ap->phys_info.vel_air.x = -ap->lr * ATSTARMIE_PUSH_VEL_X;
     }
 }
 
@@ -40,7 +40,7 @@ bool32 func_ovl3_80181D24(GObj *item_gobj)
 
     ap->item_vars.starmie.swift_spawn_wait--;
 
-    ap->phys_info.vel.x += ap->item_vars.starmie.add_vel_x;
+    ap->phys_info.vel_air.x += ap->item_vars.starmie.add_vel_x;
 
     ap->it_multi--;
 
@@ -80,15 +80,15 @@ bool32 func_ovl3_80181E40(GObj *item_gobj)
 
     if ((ap->lr == RIGHT) && (ap->item_vars.starmie.target_pos.x <= joint->translate.x))
     {
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_80181E0C(item_gobj);
     }
     if ((ap->lr == LEFT) && (joint->translate.x <= ap->item_vars.starmie.target_pos.x))
     {
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_80181E0C(item_gobj);
     }
@@ -120,9 +120,9 @@ void func_ovl3_80181EF4(GObj *item_gobj, GObj *fighter_gobj)
 
     vec3f_sub(&dist, &target_pos, &aj->translate);
 
-    ap->phys_info.vel.z = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = ATSTARMIE_FOLLOW_VEL_X;
+    ap->phys_info.vel_air.z = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.x = ATSTARMIE_FOLLOW_VEL_X;
 
     vec3_get_euler_rotation(&ap->phys_info.vel, 4, atan2f(dist.y, dist.x));
 
@@ -206,8 +206,8 @@ bool32 jtgt_ovl3_8018221C(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->phys_info.vel.y = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_801821E8(item_gobj);
     }
@@ -222,7 +222,7 @@ bool32 jtgt_ovl3_80182270(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -241,9 +241,9 @@ GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         func_80008CC0(joint, 0x48U, 0U);
 
@@ -262,7 +262,7 @@ bool32 func_ovl3_801823B4(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel.x = ip->phys_info.vel.x; // Bruh
+    ip->phys_info.vel_air.x = ip->phys_info.vel_air.x; // Bruh
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -286,10 +286,10 @@ bool32 jtgt_ovl3_80182418(GObj *weapon_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    if (ip->phys_info.vel.x > 0.0F)
+    if (ip->phys_info.vel_air.x > 0.0F)
     {
         ip->lr = RIGHT;
     }
@@ -305,7 +305,7 @@ bool32 jtgt_ovl3_801824C0(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
@@ -331,7 +331,7 @@ GObj* func_ovl3_80182530(GObj *item_gobj, Vec3f *pos)
 
     ip->lr = ap->lr;
 
-    ip->phys_info.vel.x = ip->lr * ATSTARMIE_SWIFT_VEL_X;
+    ip->phys_info.vel_air.x = ip->lr * ATSTARMIE_SWIFT_VEL_X;
 
     joint = DObjGetStruct(weapon_gobj);
 

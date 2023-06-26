@@ -80,7 +80,7 @@ void ftDonkey_ThrowFF_SetStatus(GObj *fighter_gobj, bool32 is_turn)
     s32 status_id;
     u32 flags;
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         status_id = ftStatus_Donkey_ThrowFF;
         flags = FTSTATUPDATE_NONE_PRESERVE;
@@ -114,7 +114,7 @@ bool32 ftDonkey_ThrowFF_CheckInterruptThrowFCommon(GObj *fighter_gobj)
 
     if (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b))
     {
-        if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_THROWFF_TURN_STICK_RANGE_MIN) && ((fp->input.pl.stick_range.x * fp->lr) < 0) && (fp->ground_or_air == air))
+        if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_THROWFF_TURN_STICK_RANGE_MIN) && ((fp->input.pl.stick_range.x * fp->lr) < 0) && (fp->ground_or_air == GA_Air))
         {
             is_turn = TRUE;
         }

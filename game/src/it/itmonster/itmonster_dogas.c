@@ -112,8 +112,8 @@ bool32 jtgt_ovl3_80182F40(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->phys_info.vel.y = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_80182F0C(item_gobj);
     }
@@ -128,7 +128,7 @@ bool32 jtgt_ovl3_80182F94(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -157,9 +157,9 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         func_8000BD1C(joint->next, itGetPData(ap, D_NF_00012820, D_NF_00013624), 0.0F); // Linker thing
     }

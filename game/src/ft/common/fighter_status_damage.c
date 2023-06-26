@@ -5,7 +5,7 @@
 // 0x80140340
 void ftCommon_Damage_SetDustGFXInterval(Fighter_Struct *fp)
 {
-    f32 vel = (fp->ground_or_air == air) ? vec3f_mag(&fp->phys_info.vel_damage_air) : ABSF(fp->phys_info.vel_damage_ground);
+    f32 vel = (fp->ground_or_air == GA_Air) ? vec3f_mag(&fp->phys_info.vel_damage_air) : ABSF(fp->phys_info.vel_damage_ground);
     s32 spawn_gfx_wait;
 
     if (vel < FTCOMMON_DAMAGE_GFX_KNOCKBACK_LOW)
@@ -139,7 +139,7 @@ void ftCommon_DamageCommon_ProcInterrupt(GObj *fighter_gobj)
     {
         fp->is_hitstun = FALSE;
 
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
             {
@@ -183,7 +183,7 @@ void ftCommon_DamageCommon_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         if (fp->status_vars.common.damage.hitstun_timer == 0)
         {
@@ -257,7 +257,7 @@ f32 gmCommon_Damage_GetKnockbackAngle(s32 angle_i, s32 ground_or_air, f32 knockb
     {
         angle_f = F_DEG_TO_RAD(angle_i);
     }
-    else if (ground_or_air == air)
+    else if (ground_or_air == GA_Air)
     {
         angle_f = FTCOMMON_DAMAGE_SAKURAI_ANGLE_DEFAULT_AR;
     }
@@ -484,7 +484,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
     this_fp->lr = lr_damage;
 
-    if (this_fp->ground_or_air == air)
+    if (this_fp->ground_or_air == GA_Air)
     {
         status_id_var = status_id_set = Fighter_StatusList_DamageAir[damage_level][damage_index];
 
@@ -546,7 +546,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     this_fp->phys_info.vel_air.y = 0.0F;
     this_fp->phys_info.vel_air.x = 0.0F;
 
-    if ((damage_level == 3) && (this_fp->ground_or_air == air))
+    if ((damage_level == 3) && (this_fp->ground_or_air == GA_Air))
     {
         if ((angle_end > FTCOMMON_DAMAGE_FIGHTER_FLYTOP_ANGLE_LOW) && (angle_end < FTCOMMON_DAMAGE_FIGHTER_FLYTOP_ANGLE_HIGH))
         {
@@ -697,7 +697,6 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *grab_gobj = this_fp->catch_gobj;
     Fighter_Struct *grab_fp;
-    Vec3f vel;
 
     if (grab_gobj != NULL)
     {
@@ -824,9 +823,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             }
             else
             {
-                vel.x = vel.y = vel.z = 0.0F;
-
-                func_ovl3_80172AEC(this_fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+                ftSetupDropItem(this_fp);
                 ftCommon_ProcDamageStopVoice(fighter_gobj);
                 ftCommon_Damage_GotoDamageStatus(fighter_gobj);
             }

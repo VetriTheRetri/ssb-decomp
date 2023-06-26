@@ -50,15 +50,12 @@ void ftCommon_Twister_ProcPhysics(GObj *fighter_gobj)
 void ftCommon_Twister_SetStatus(GObj *fighter_gobj, GObj *tornado_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Vec3f vel;
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->weight == It_Weight_Heavy))
     {
-        vel.x = vel.y = vel.z = 0.0F;
-
-        func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+        ftSetupDropItem(fp);
     }
     if (fp->catch_gobj != NULL)
     {
@@ -70,7 +67,7 @@ void ftCommon_Twister_SetStatus(GObj *fighter_gobj, GObj *tornado_gobj)
     {
         func_ovl3_8014AECC(fp->capture_gobj, fighter_gobj);
     }
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftMap_SetAir(fp);
     }

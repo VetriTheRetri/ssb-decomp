@@ -30,7 +30,7 @@ void ftCaptain_SpecialLw_SetAir(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->ground_or_air = air;
+    fp->ground_or_air = GA_Air;
     fp->jumps_used = 1;
 }
 
@@ -44,7 +44,7 @@ void ftCaptain_SpecialLw_DecideMapCollide(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         if (fp->command_vars.flags.flag3 != 0)
         {
@@ -60,7 +60,7 @@ void ftCaptain_SpecialLw_DecideSetEndStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftCommon_Wait_SetStatus(fighter_gobj);
     }
@@ -78,7 +78,7 @@ void ftCaptain_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         fp->joint[ftParts_TopN_Joint]->rotate.z = -atan2f(fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y);
         func_ovl2_800D8C14(fighter_gobj);
@@ -137,7 +137,7 @@ bool32 ftCaptain_SpecialLwAir_CheckAirGoto(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag1 == 2)
     {
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             ftCaptain_SpecialLwAir_SetStatus(fighter_gobj);
 

@@ -71,7 +71,7 @@ void ftFox_SpecialHiHold_ProcUpdate(GObj *fighter_gobj)
 
     if (fp->status_vars.fox.specialhi.launch_delay == 0)
     {
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             ftFox_SpecialAirHi_FromGroundSetStatus(fighter_gobj);
 
@@ -150,7 +150,7 @@ void ftFox_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 
     if (fp->status_vars.fox.specialhi.anim_frames == 0)
     {
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             ftFox_SpecialAirHiEnd_SetStatus(fighter_gobj);
         }
@@ -420,7 +420,7 @@ void ftFox_SpecialHiEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         ftMap_SetGround(fp);
     }
@@ -438,14 +438,14 @@ void ftFox_SpecialHiBound_ProcUpdate(GObj* fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fp->command_vars.flags.flag1 != 0) && (fp->ground_or_air == air))
+    if ((fp->command_vars.flags.flag1 != 0) && (fp->ground_or_air == GA_Air))
     {
         ftCommon_FallSpecial_SetStatus(fighter_gobj, FTFOX_FIREFOX_AIR_DRIFT, FALSE, TRUE, FALSE, FTFOX_FIREFOX_LANDING_LAG, TRUE);
     }
 
     else if (fighter_gobj->anim_frame <= 0.0F)
     {
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             ftCommon_FallSpecial_SetStatus(fighter_gobj, FTFOX_FIREFOX_AIR_DRIFT, FALSE, TRUE, FALSE, FTFOX_FIREFOX_LANDING_LAG, TRUE);
         }
@@ -459,7 +459,7 @@ void ftFox_SpecialHiBound_ProcPhysics(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         jtgt_ovl2_800D9414(fighter_gobj);
 
@@ -476,7 +476,7 @@ void ftFox_SpecialHiBound_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct* fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         if (func_ovl2_800DE7D8(fighter_gobj) != FALSE)
         {

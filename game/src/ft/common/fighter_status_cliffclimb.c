@@ -157,7 +157,7 @@ void ftCommon_CliffCommon2_ProcPhysics(GObj *fighter_gobj)
     Vec3f *translate;
     f32 y;
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         func_ovl2_800D8C14(fighter_gobj);
     }
@@ -195,7 +195,7 @@ void ftCommon_CliffClimbCommon2_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         jtgt_ovl2_800DDEC4(fighter_gobj);
     }
@@ -210,7 +210,7 @@ void ftCommon_CliffAttackEscape2_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         func_ovl2_800DDF44(fighter_gobj);
     }
@@ -227,7 +227,7 @@ void ftCommon_CliffCommon2_UpdateCollData(GObj *fighter_gobj)
     Coll_Data *coll_data = &fp->coll_data;
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
-    if (fp->attributes->cliff_status_ground_air_id[fp->status_vars.common.cliffmotion.status_id] == ground)
+    if (fp->attributes->cliff_status_ground_air_id[fp->status_vars.common.cliffmotion.status_id] == GA_Ground)
     {
         ftMap_SetGround(fp);
     }
@@ -257,7 +257,7 @@ void ftCommon_CliffCommon2_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         fp->x18F_flag_b4 = TRUE;
     }

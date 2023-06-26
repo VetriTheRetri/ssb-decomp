@@ -27,7 +27,7 @@ void func_ovl3_8014ADB0(GObj *fighter_gobj)
     }
     func_ovl2_800DF014(fighter_gobj, &DObjGetStruct(interact_gobj)->translate, &interact_fp->coll_data);
 
-    if ((this_fp->ground_or_air == ground) && ((this_fp->coll_data.ground_line_id == -1) || (this_fp->coll_data.ground_dist != 0.0F)))
+    if ((this_fp->ground_or_air == GA_Ground) && ((this_fp->coll_data.ground_line_id == -1) || (this_fp->coll_data.ground_dist != 0.0F)))
     {
         ftMap_SetAir(this_fp);
     }
@@ -186,7 +186,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
     {
         func_ovl3_8014ADB0(fighter_gobj);
     }
-    if (this_fp->ground_or_air == air)
+    if (this_fp->ground_or_air == GA_Air)
     {
         ftMap_SetAir(this_fp);
     }

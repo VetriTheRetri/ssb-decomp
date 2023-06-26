@@ -177,14 +177,14 @@ bool32 itPKFire_SDefault_ProcDamage(GObj *item_gobj)
 void itPKFire_GWait_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
-    gmAttackFlags stat_flags;
+    gmStatFlags stat_flags;
     u16 stat_count;
 
     func_ovl3_80173F54(ip);
 
     ip->phys_info.vel_ground = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
 
     stat_flags = ip->item_hit.stat_flags;
     stat_count = ip->item_hit.stat_count;
@@ -199,13 +199,13 @@ void itPKFire_GWait_SetStatus(GObj *item_gobj)
 void itPKFire_AFall_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
-    gmAttackFlags stat_flags;
+    gmStatFlags stat_flags;
     u16 stat_count;
 
     func_ovl3_80173F78(ip);
 
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
 
     stat_flags = ip->item_hit.stat_flags;
     stat_count = ip->item_hit.stat_count;

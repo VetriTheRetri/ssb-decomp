@@ -43,9 +43,9 @@ void wpSamus_BombExplode_InitWeaponVars(GObj *weapon_gobj)
     ip->weapon_hit.can_rehit_item = TRUE;
     ip->weapon_hit.can_hop = FALSE;
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
 
     ip->weapon_hit.size = ITSAMUSBOMB_EXPLODE_RADIUS;
 
@@ -75,7 +75,7 @@ bool32 wpSamus_Bomb_ProcUpdate(GObj *weapon_gobj)
     }
     else
     {
-        if (ip->ground_or_air == air)
+        if (ip->ground_or_air == GA_Air)
         {
             wpMain_UpdateGravityClampTVel(ip, ITSAMUSBOMB_WAIT_GRAVITY, ITSAMUSBOMB_WAIT_T_VEL);
             DObjGetStruct(weapon_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_AIR * ip->lr);
@@ -118,7 +118,7 @@ bool32 wpSamus_Bomb_ProcMap(GObj *weapon_gobj)
     Vec3f *vel;
     bool32 is_collide;
 
-    if (ip->ground_or_air == air)
+    if (ip->ground_or_air == GA_Air)
     {
         is_collide = func_ovl3_80167B58(weapon_gobj);
 
@@ -185,7 +185,7 @@ bool32 wpSamus_Bomb_ProcReflector(GObj *weapon_gobj)
 
     ip->lifetime = ITSAMUSBOMB_WAIT_LIFETIME;
 
-    if (ip->ground_or_air == air)
+    if (ip->ground_or_air == GA_Air)
     {
         wpMain_ReflectorInvertLR(ip, fp);
         wpMain_VelSetLR(weapon_gobj);
@@ -211,7 +211,7 @@ GObj* wpSamus_Bomb_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     ip->weapon_vars.samus_bomb.bomb_blink_timer = ITSAMUSBOMB_WAIT_BLINK_TIMER_SLOW;
 
-    ip->phys_info.vel.y = ITSAMUSBOMB_WAIT_VEL_Y;
+    ip->phys_info.vel_air.y = ITSAMUSBOMB_WAIT_VEL_Y;
 
     return weapon_gobj;
 }

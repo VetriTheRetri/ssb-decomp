@@ -1039,7 +1039,7 @@ typedef struct ftStatusDescFlags
 typedef struct ftStatusDesc
 {
     ftStatusDescFlags flags_h;
-    gmAttackFlags flags_l;
+    gmStatFlags flags_l;
 
     void (*proc_update)(GObj*);
     void (*proc_interrupt)(GObj*);
@@ -1106,7 +1106,7 @@ struct Fighter_Struct
 
     u8 jumps_used;
     u8 unk_ft_0x149;
-    Ground_Air ground_or_air;
+    gmCollisionGA ground_or_air;
 
     f32 attack1_followup_frames;
     s32 attack1_status_id;
@@ -1241,7 +1241,7 @@ struct Fighter_Struct
     s32 throw_player_number;
     s32 attack_id;
     u16 motion_count;
-    gmAttackFlags stat_flags;
+    gmStatFlags stat_flags;
     u16 stat_count;
 
     Fighter_Hit fighter_hit[4];
@@ -1290,7 +1290,7 @@ struct Fighter_Struct
 
     s32 unk_ft_0x820;
     s32 unk_ft_0x824;
-    gmAttackFlags damage_stat_flags;
+    gmStatFlags damage_stat_flags;
     u16 damage_stat_count; // Might be raw u16
 
     f32 publicity_knockback; // Knockback value used for crowd reactions
@@ -1403,6 +1403,15 @@ struct Fighter_Struct
 
 #define ftGetStruct(fighter_gobj) \
 ((Fighter_Struct*) (fighter_gobj)->user_data) \
+
+#define ftSetupDropItem(fp)                         \
+{                                                   \
+    Vec3f vel;                                      \
+                                                    \
+    vel.x = vel.y = vel.z = 0.0F;                   \
+                                                    \
+    func_ovl3_80172AEC((fp)->item_hold, &vel, 1.0F);\
+}                                                   \
 
 #define AttributesGetStruct(fp) \
 ((ftCommonAttributes*)fp->attributes) \

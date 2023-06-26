@@ -182,11 +182,11 @@ bool32 jtgt_ovl3_8017835C(GObj *weapon_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
 
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    if (ip->phys_info.vel.x > 0.0F)
+    if (ip->phys_info.vel_air.x > 0.0F)
     {
         ip->lr = RIGHT;
     }
@@ -202,7 +202,7 @@ bool32 jtgt_ovl3_80178404(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
@@ -233,7 +233,7 @@ GObj *func_ovl3_80178474(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
     joint = DObjGetStruct(weapon_gobj);
     ip = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel.x = ((!(is_smash)) ? ATSTARROD_AMMO_TILT_VEL_X : ATSTARROD_AMMO_SMASH_VEL_X) * ip->lr;
+    ip->phys_info.vel_air.x = ((!(is_smash)) ? ATSTARROD_AMMO_TILT_VEL_X : ATSTARROD_AMMO_SMASH_VEL_X) * ip->lr;
 
     ip->weapon_vars.star.lifetime = (!(is_smash)) ? ATSTARROD_AMMO_TILT_LIFETIME : ATSTARROD_AMMO_SMASH_LIFETIME; // Why float lol
 

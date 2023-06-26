@@ -188,14 +188,14 @@ void func_ovl3_80177104(GObj *item_gobj, u8 lr)
     if (lr != CENTER)
     {
         ip->lr = RIGHT;
-        ip->phys_info.vel.x = ATBOMBHEI_WALK_VEL_X;
+        ip->phys_info.vel_air.x = ATBOMBHEI_WALK_VEL_X;
 
         joint->display_list = dlr;
     }
     else
     {
         ip->lr = LEFT;
-        ip->phys_info.vel.x = -ATBOMBHEI_WALK_VEL_X;
+        ip->phys_info.vel_air.x = -ATBOMBHEI_WALK_VEL_X;
 
         joint->display_list = dll;
     }
@@ -295,11 +295,11 @@ bool32 itBombHei_GWait_ProcUpdate(GObj *item_gobj)
         if (lr < 0)
         {
             ip->lr = RIGHT;
-            ip->phys_info.vel.x = ATBOMBHEI_WALK_VEL_X;
+            ip->phys_info.vel_air.x = ATBOMBHEI_WALK_VEL_X;
         }
         else
         {
-            ip->phys_info.vel.x = -ATBOMBHEI_WALK_VEL_X;
+            ip->phys_info.vel_air.x = -ATBOMBHEI_WALK_VEL_X;
 
             joint->display_list = dll;
 
@@ -450,9 +450,9 @@ bool32 itBombHei_GWalk_ProcUpdate(GObj *item_gobj)
     }
     if (ip->it_multi == ATBOMBHEI_FLASH_WAIT)
     {
-        ip->phys_info.vel.z = 0.0F;
-        ip->phys_info.vel.y = 0.0F;
-        ip->phys_info.vel.x = 0.0F;
+        ip->phys_info.vel_air.z = 0.0F;
+        ip->phys_info.vel_air.y = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
 
         itBombHei_GExplodeWait_SetStatus(item_gobj);
     }
@@ -544,9 +544,9 @@ void itBombHei_Default_ZeroVelSetExplode(GObj *item_gobj, u8 arg1)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
 
     itBombHei_Default_SetExplode(item_gobj, arg1);
 
@@ -682,7 +682,7 @@ void itBombHei_GExplodeWait_InitItemVars(GObj *item_gobj)
 
     joint->mobj->unk_mobj_0x94 = 0;
 
-    atCommon_CheckSetColAnimIndex(item_gobj, ATBOMBHEI_EXPLODE_COLANIM_ID, ATBOMBHEI_EXPLODE_COLANIM_DURATION);
+    itMain_CheckSetColAnimIndex(item_gobj, ATBOMBHEI_EXPLODE_COLANIM_ID, ATBOMBHEI_EXPLODE_COLANIM_DURATION);
 }
 
 // 0x80177D60

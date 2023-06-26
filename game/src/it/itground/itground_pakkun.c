@@ -191,8 +191,8 @@ bool32 jtgt_ovl3_8017D334(GObj *item_gobj)
 
         angle = gmCommon_Damage_GetKnockbackAngle(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
 
-        ap->phys_info.vel.x = (f32)(cosf(angle) * ap->damage_knockback * -ap->lr_damage);
-        ap->phys_info.vel.y = __sinf(angle) * ap->damage_knockback;
+        ap->phys_info.vel_air.x = (f32)(cosf(angle) * ap->damage_knockback * -ap->lr_damage);
+        ap->phys_info.vel_air.y = __sinf(angle) * ap->damage_knockback;
 
         ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
@@ -216,9 +216,9 @@ bool32 func_ovl3_8017D460(GObj *item_gobj)
 
     ap->it_multi = ATPAKKUN_REBIRTH_WAIT;
 
-    ap->phys_info.vel.x = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.z = 0.0F;
+    ap->phys_info.vel_air.x = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.z = 0.0F;
 
     joint->rotate.z = 0.0F;
 

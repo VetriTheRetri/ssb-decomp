@@ -51,7 +51,7 @@ void ftSamus_SpecialNStart_ProcUpdate(GObj *fighter_gobj)
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             ftSamus_SpecialAirNEnd_SetStatus(fighter_gobj);
         }
@@ -222,7 +222,7 @@ void ftSamus_SpecialNEnd_ProcUpdate(GObj *fighter_gobj)
         }
         else wpSamus_ChargeShot_CreateWeapon(fighter_gobj, &pos, fp->fighter_vars.samus.charge_level, 1);
 
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             charge_recoil_x = (f32) (fp->fighter_vars.samus.charge_level + 1);
 
@@ -301,7 +301,7 @@ void ftSamus_SpecialAirNEnd_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftMap_SetAir(fp);
         func_ovl2_800D8EB8(fp);

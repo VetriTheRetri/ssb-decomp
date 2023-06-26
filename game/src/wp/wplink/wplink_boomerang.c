@@ -119,7 +119,7 @@ void wpLink_Boomerang_SetReturnVars(GObj *weapon_gobj, bool32 angle_max_or_min)
 // 0x8016CE90
 f32 wpLink_Boomerang_AddVelSqrt(Weapon_Struct *wp, f32 vel_add)
 {
-    f32 sqrt_vel = sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y)) + vel_add;
+    f32 sqrt_vel = sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y)) + vel_add;
 
     if (sqrt_vel > 90.0F)
     {
@@ -131,7 +131,7 @@ f32 wpLink_Boomerang_AddVelSqrt(Weapon_Struct *wp, f32 vel_add)
 // 0x8016CEEC
 f32 wpLink_Boomerang_SubVelSqrt(Weapon_Struct *wp, f32 vel_sub)
 {
-    f32 sqrt_vel = sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y)) - vel_sub;
+    f32 sqrt_vel = sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y)) - vel_sub;
 
     if (sqrt_vel < 10.0F)
     {
@@ -143,10 +143,10 @@ f32 wpLink_Boomerang_SubVelSqrt(Weapon_Struct *wp, f32 vel_sub)
 // 0x8016CF48
 void wpLink_Boomerang_UpdateVelLR(Weapon_Struct *wp, f32 vel_mul)
 {
-    sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y)); // Can we talk about how this doesn't do anything
+    sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y)); // Can we talk about how this doesn't do anything
 
-    wp->phys_info.vel.x = cosf(wp->weapon_vars.boomerang.default_angle) * vel_mul;
-    wp->phys_info.vel.y = __sinf(wp->weapon_vars.boomerang.default_angle) * vel_mul;
+    wp->phys_info.vel_air.x = cosf(wp->weapon_vars.boomerang.default_angle) * vel_mul;
+    wp->phys_info.vel_air.y = __sinf(wp->weapon_vars.boomerang.default_angle) * vel_mul;
 
     wp->lr = ((wp->weapon_vars.boomerang.default_angle > F_DEG_TO_RAD(90.0F)) && (wp->weapon_vars.boomerang.default_angle < F_DEG_TO_RAD(270.0F))) ? LEFT : RIGHT; // HALF_PI32, 4.712389F
 }
@@ -303,7 +303,7 @@ bool32 wpLink_Boomerang_CheckBound(Weapon_Struct *wp, Vec3f *coll_angle)
         {
             func_ovl0_800C7B08(&wp->phys_info.vel, coll_angle);
 
-            wp->weapon_vars.boomerang.default_angle = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
+            wp->weapon_vars.boomerang.default_angle = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
 
             wpLink_Boomerang_ClampAngle360(&wp->weapon_vars.boomerang.default_angle);
         }
@@ -476,7 +476,7 @@ bool32 wpLink_Boomerang_ProcReflector(GObj *weapon_gobj)
 
     wpLink_Boomerang_ClampAngle360(&wp->weapon_vars.boomerang.default_angle);
 
-    wpLink_Boomerang_UpdateVelLR(wp, sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y)));
+    wpLink_Boomerang_UpdateVelLR(wp, sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y)));
 
     return FALSE;
 }

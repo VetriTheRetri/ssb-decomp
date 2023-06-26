@@ -10,7 +10,7 @@ void func_ovl3_8017A3A0(GObj *item_gobj, GObj *fighter_gobj)
     s32 lr_vel;
     s32 lr_dist;
 
-    if (ap->ground_or_air == ground)
+    if (ap->ground_or_air == GA_Ground)
     {
         dist_x = (DObjGetStruct(fighter_gobj)->translate.x - DObjGetStruct(item_gobj)->translate.x);
 
@@ -20,29 +20,29 @@ void func_ovl3_8017A3A0(GObj *item_gobj, GObj *fighter_gobj)
 
         ap->item_vars.shell.vel_x = vel_x;
 
-        ap->phys_info.vel.x += vel_x;
+        ap->phys_info.vel_air.x += vel_x;
 
-        lr_vel = (ap->phys_info.vel.x < 0.0F) ? LEFT : RIGHT;
+        lr_vel = (ap->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT;
 
         lr_dist = (ap->item_vars.shell.vel_x < 0.0F) ? LEFT : RIGHT;
 
         if (lr_dist == lr_vel)
         {
-            if (ABSF(ap->phys_info.vel.x) > ATRSHELL_CLAMP_VEL_X)
+            if (ABSF(ap->phys_info.vel_air.x) > ATRSHELL_CLAMP_VEL_X)
             {
-                ap->phys_info.vel.x = ap->lr * ATRSHELL_CLAMP_VEL_X;
+                ap->phys_info.vel_air.x = ap->lr * ATRSHELL_CLAMP_VEL_X;
             }
         }
         if (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable)
         {
-            if (ABSF(ap->phys_info.vel.x) <= ATRSHELL_HIT_INIT_VEL_X)
+            if (ABSF(ap->phys_info.vel_air.x) <= ATRSHELL_HIT_INIT_VEL_X)
             {
                 ap->item_hit.update_state = gmHitCollision_UpdateState_New;
 
                 itManager_UpdateHitPositions(item_gobj);
             }
         }
-        ap->lr = (ap->phys_info.vel.x < 0.0F) ? LEFT : RIGHT;
+        ap->lr = (ap->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT;
     }
 }
 
@@ -171,12 +171,12 @@ void func_ovl3_8017A83C(GObj *item_gobj)
 
     func_ovl3_80173F54(ap);
 
-    if (ABSF(ap->phys_info.vel.x) < 8.0F)
+    if (ABSF(ap->phys_info.vel_air.x) < 8.0F)
     {
         func_ovl3_80172E74(item_gobj);
 
         ap->item_vars.shell.is_damage = FALSE;
-        ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_8017279C(item_gobj);
 
@@ -197,7 +197,7 @@ void func_ovl3_8017A83C(GObj *item_gobj)
     {
         func_ovl3_80172E74(item_gobj);
 
-        ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_8017279C(item_gobj);
 
@@ -230,9 +230,9 @@ bool32 jtgt_ovl3_8017A9D0(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->phys_info.vel.x = ap->damage_taken_recent * ATRSHELL_DAMAGE_MUL_NORMAL * (-ap->lr_damage);
+    ap->phys_info.vel_air.x = ap->damage_taken_recent * ATRSHELL_DAMAGE_MUL_NORMAL * (-ap->lr_damage);
 
-    if (ABSF(ap->phys_info.vel.x) > ATRSHELL_STOP_VEL_X)
+    if (ABSF(ap->phys_info.vel_air.x) > ATRSHELL_STOP_VEL_X)
     {
         ap->item_vars.shell.is_damage = TRUE;
 
@@ -242,7 +242,7 @@ bool32 jtgt_ovl3_8017A9D0(GObj *item_gobj)
 
         func_ovl3_801727BC(item_gobj);
 
-        if (ap->ground_or_air != ground)
+        if (ap->ground_or_air != GA_Ground)
         {
             func_ovl3_8017B1A4(item_gobj);
         }
@@ -251,7 +251,7 @@ bool32 jtgt_ovl3_8017A9D0(GObj *item_gobj)
     }
     else
     {
-        ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
 
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
     }
@@ -299,11 +299,11 @@ bool32 jtgt_ovl3_8017ABA0(GObj *item_gobj)
 
     if (func_ovl3_80173C68(item_gobj, 0.25F, 0.5F, func_ovl3_8017B0D4) != FALSE)
     {
-        if (ap->phys_info.vel.x < 0.0F) ap->lr = LEFT;
+        if (ap->phys_info.vel_air.x < 0.0F) ap->lr = LEFT;
 
         else ap->lr = RIGHT;
 
-        ap->phys_info.vel.x = (((ap->lr * -8.0F) + -10.0F) * 0.7F);
+        ap->phys_info.vel_air.x = (((ap->lr * -8.0F) + -10.0F) * 0.7F);
     }
     return FALSE;
 }
@@ -312,7 +312,7 @@ void func_ovl3_8017AC40(GObj *item_gobj, u8 lr)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->phys_info.vel.x = -ap->phys_info.vel.x;
+    ap->phys_info.vel_air.x = -ap->phys_info.vel_air.x;
 
     ap->item_vars.shell.vel_x = -ap->item_vars.shell.vel_x;
 
@@ -376,7 +376,7 @@ bool32 jtgt_ovl3_8017ADD4(GObj *item_gobj)
 
     if ((func_ovl3_801735A0(item_gobj, func_ovl3_8017B1A4) != FALSE) && (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
-        ap->phys_info.vel.x = -ap->phys_info.vel.x;
+        ap->phys_info.vel_air.x = -ap->phys_info.vel_air.x;
 
         func_ovl3_80172508(item_gobj);
         func_ovl3_8017279C(item_gobj);
@@ -400,11 +400,11 @@ bool32 jtgt_ovl3_8017AE48(GObj *item_gobj)
 
     ap->item_vars.shell.health = rand_u16_range(ATRSHELL_HEALTH_MAX);
 
-    ap->phys_info.vel.x = (((ap->phys_info.vel.x * -1.0F) + (ATRSHELL_RECOIL_VEL_X * ap->lr_attack)) * ATRSHELL_RECOIL_MUL_X);
+    ap->phys_info.vel_air.x = (((ap->phys_info.vel_air.x * -1.0F) + (ATRSHELL_RECOIL_VEL_X * ap->lr_attack)) * ATRSHELL_RECOIL_MUL_X);
 
     func_ovl3_8017A734(item_gobj);
 
-    if (ap->ground_or_air != ground)
+    if (ap->ground_or_air != GA_Ground)
     {
         func_ovl3_8017B1A4(item_gobj);
     }
@@ -425,9 +425,9 @@ bool32 jtgt_ovl3_8017AF18(GObj *item_gobj)
     {
         return TRUE;
     }
-    ap->phys_info.vel.x += (ap->damage_taken_recent * 2.0F) * -ap->lr_damage;
+    ap->phys_info.vel_air.x += (ap->damage_taken_recent * 2.0F) * -ap->lr_damage;
 
-    if (ABSF(ap->phys_info.vel.x) > ATRSHELL_STOP_VEL_X)
+    if (ABSF(ap->phys_info.vel_air.x) > ATRSHELL_STOP_VEL_X)
     {
         ap->item_hit.update_state = gmHitCollision_UpdateState_New;
 
@@ -449,17 +449,17 @@ void func_ovl3_8017AFEC(GObj *item_gobj)
     ap->is_allow_pickup = FALSE;
     ap->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 
-    if (ap->phys_info.vel.x > ATRSHELL_CLAMP_VEL_X)
+    if (ap->phys_info.vel_air.x > ATRSHELL_CLAMP_VEL_X)
     {
-        ap->phys_info.vel.x = ATRSHELL_CLAMP_VEL_X;
+        ap->phys_info.vel_air.x = ATRSHELL_CLAMP_VEL_X;
     }
-    if (ap->phys_info.vel.x < -ATRSHELL_CLAMP_VEL_X)
+    if (ap->phys_info.vel_air.x < -ATRSHELL_CLAMP_VEL_X)
     {
-        ap->phys_info.vel.x = -ATRSHELL_CLAMP_VEL_X;
+        ap->phys_info.vel_air.x = -ATRSHELL_CLAMP_VEL_X;
     }
-    ap->phys_info.vel.y = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
 
-    if (ap->phys_info.vel.x < 0.0F)
+    if (ap->phys_info.vel_air.x < 0.0F)
     {
         ap->lr = LEFT;
     }
@@ -493,15 +493,15 @@ void func_ovl3_8017B108(GObj *item_gobj)
 
     ap->is_allow_pickup = FALSE;
 
-    if (ap->phys_info.vel.x > ATRSHELL_CLAMP_AIR_X)
+    if (ap->phys_info.vel_air.x > ATRSHELL_CLAMP_AIR_X)
     {
-        ap->phys_info.vel.x = ATRSHELL_CLAMP_AIR_X;
+        ap->phys_info.vel_air.x = ATRSHELL_CLAMP_AIR_X;
     }
-    if (ap->phys_info.vel.x < -ATRSHELL_CLAMP_AIR_X)
+    if (ap->phys_info.vel_air.x < -ATRSHELL_CLAMP_AIR_X)
     {
-        ap->phys_info.vel.x = -ATRSHELL_CLAMP_AIR_X;
+        ap->phys_info.vel_air.x = -ATRSHELL_CLAMP_AIR_X;
     }
-    if (ap->phys_info.vel.x < 0.0F)
+    if (ap->phys_info.vel_air.x < 0.0F)
     {
         ap->lr = LEFT;
     }
@@ -579,9 +579,9 @@ bool32 jtgt_ovl3_8017B31C(GObj *item_gobj)
     {
         ap->lr = LEFT;
 
-        if (ap->phys_info.vel.x >= 0.0F)
+        if (ap->phys_info.vel_air.x >= 0.0F)
         {
-            ap->phys_info.vel.x = -ap->phys_info.vel.x;
+            ap->phys_info.vel_air.x = -ap->phys_info.vel_air.x;
             ap->item_vars.shell.vel_x = -ap->item_vars.shell.vel_x;
         }
     }
@@ -589,13 +589,13 @@ bool32 jtgt_ovl3_8017B31C(GObj *item_gobj)
     {
         ap->lr = RIGHT;
 
-        if (ap->phys_info.vel.x < 0.0F)
+        if (ap->phys_info.vel_air.x < 0.0F)
         {
-            ap->phys_info.vel.x = -ap->phys_info.vel.x;
+            ap->phys_info.vel_air.x = -ap->phys_info.vel_air.x;
             ap->item_vars.shell.vel_x = -ap->item_vars.shell.vel_x;
         }
     }
-    ap->phys_info.vel.x += (ATRSHELL_ADD_VEL_X * ap->lr);
+    ap->phys_info.vel_air.x += (ATRSHELL_ADD_VEL_X * ap->lr);
 
     func_ovl3_8017279C(item_gobj);
 

@@ -58,15 +58,12 @@ void ftCommon_TaruCann_ProcPhysics(GObj *fighter_gobj)
 void ftCommon_TaruCann_SetStatus(GObj *fighter_gobj, GObj *tarucann_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Vec3f vel;
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->weight == It_Weight_Heavy))
     {
-        vel.x = vel.y = vel.z = 0.0F;
-
-        func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+        ftSetupDropItem(fp);
     }
     if (fp->catch_gobj != NULL)
     {

@@ -83,8 +83,8 @@ bool32 jtgt_ovl3_80183F94(GObj *item_gobj)
     {
         f32 angle = gmCommon_Damage_GetKnockbackAngle(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
 
-        ap->phys_info.vel.x = cosf(angle) * ap->damage_knockback * -ap->lr_damage;
-        ap->phys_info.vel.y = __sinf(angle) * ap->damage_knockback;
+        ap->phys_info.vel_air.x = cosf(angle) * ap->damage_knockback * -ap->lr_damage;
+        ap->phys_info.vel_air.y = __sinf(angle) * ap->damage_knockback;
 
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
         ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
@@ -180,8 +180,8 @@ bool32 jtgt_ovl3_80184204(GObj *weapon_gobj)
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
 
     return FALSE;
 }
@@ -205,8 +205,8 @@ GObj *func_ovl3_801842C8(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->lr = LEFT;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
 
     return weapon_gobj;
 }

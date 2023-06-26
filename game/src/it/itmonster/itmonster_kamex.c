@@ -34,7 +34,7 @@ void func_ovl3_80180630(GObj *item_gobj)
         }
         ap->item_vars.kamex.is_apply_push = TRUE;
 
-        ap->phys_info.vel.x = -ap->lr * ATKAMEX_CONST_VEL_X;
+        ap->phys_info.vel_air.x = -ap->lr * ATKAMEX_CONST_VEL_X;
 
         func_ovl2_800FF278(&pos, -ap->lr);
     }
@@ -69,8 +69,8 @@ void func_ovl3_80180860(GObj *item_gobj)
 
     func_ovl3_80173F78(ap);
 
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.x = 0.0F;
 
     ap->is_allow_pickup = FALSE;
 
@@ -102,7 +102,7 @@ bool32 jtgt_ovl3_80180904(GObj *item_gobj)
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_80180A58(item_gobj, FALSE);
         func_ovl3_80180AF4(item_gobj);
@@ -135,7 +135,7 @@ bool32 jtgt_ovl3_801809BC(GObj *item_gobj)
 
     if (ap->item_vars.kamex.is_apply_push != FALSE)
     {
-        ap->phys_info.vel.x += ap->item_vars.kamex.hydro_push_vel_x;
+        ap->phys_info.vel_air.x += ap->item_vars.kamex.hydro_push_vel_x;
     }
     ap->item_vars.kamex.hydro_spawn_wait--;
 
@@ -175,8 +175,8 @@ void func_ovl3_80180A58(GObj *item_gobj, bool32 is_setup_vars)
             ap->coll_data.object_coll.width = ATKAMEX_COLL_SIZE;
         }
     }
-    ap->phys_info.vel.y = 0;
-    ap->phys_info.vel.x = 0;
+    ap->phys_info.vel_air.y = 0;
+    ap->phys_info.vel_air.x = 0;
 
     ap->item_vars.kamex.hydro_push_vel_x = ap->lr * ATKAMEX_PUSH_VEL_X;
     ap->item_vars.kamex.hydro_spawn_wait = 0;
@@ -194,7 +194,7 @@ bool32 jtgt_ovl3_80180B1C(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_80180964(item_gobj);
     }
@@ -209,7 +209,7 @@ bool32 jtgt_ovl3_80180B6C(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -284,9 +284,9 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         kamex_ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        kamex_ap->phys_info.vel.z = 0.0F;
-        kamex_ap->phys_info.vel.x = 0.0F;
-        kamex_ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        kamex_ap->phys_info.vel_air.z = 0.0F;
+        kamex_ap->phys_info.vel_air.x = 0.0F;
+        kamex_ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         m_ball_ap = itGetStruct(spawn_gobj);
 
@@ -332,7 +332,7 @@ bool32 jtgt_ovl3_80180E6C(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;

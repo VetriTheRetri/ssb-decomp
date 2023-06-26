@@ -68,9 +68,9 @@ void wpMasterHand_YubiExplode_InitWeaponVars(GObj *weapon_gobj)
 
     wp->lifetime = ITYUBIBULLET_EXPLODE_LIFETIME;
 
-    wp->phys_info.vel.z = 0.0F;
-    wp->phys_info.vel.y = 0.0F;
-    wp->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel_air.z = 0.0F;
+    wp->phys_info.vel_air.y = 0.0F;
+    wp->phys_info.vel_air.x = 0.0F;
 
     wp->weapon_hit.size = ITYUBIBULLET_EXPLODE_SIZE;
 
@@ -142,8 +142,8 @@ GObj* wpMasterHand_YubiBulletSingle_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel.x = ITYUBIBULLET_VEL_X * wp->lr;
-    wp->phys_info.vel.y = ITYUBIBULLET_VEL_Y;
+    wp->phys_info.vel_air.x = ITYUBIBULLET_VEL_X * wp->lr;
+    wp->phys_info.vel_air.y = ITYUBIBULLET_VEL_Y;
 
     func_ovl3_80168428(weapon_gobj);
 
@@ -162,8 +162,8 @@ GObj* wpMasterHand_YubiBulletTriple_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel.x = ITYUBIBULLET_VEL_X * wp->lr;
-    wp->phys_info.vel.y = ITYUBIBULLET_VEL_Y;
+    wp->phys_info.vel_air.x = ITYUBIBULLET_VEL_X * wp->lr;
+    wp->phys_info.vel_air.y = ITYUBIBULLET_VEL_Y;
 
     func_ovl3_80168428(weapon_gobj);
 

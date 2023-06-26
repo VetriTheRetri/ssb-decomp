@@ -57,7 +57,7 @@ void func_ovl3_8017FEB8(GObj *item_gobj)
 
     ap->it_multi = 0;
 
-    ap->phys_info.vel.y = 0;
+    ap->phys_info.vel_air.y = 0;
 
     if (ap->it_kind == It_Kind_Spear)
     {
@@ -89,14 +89,14 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
 
     func_ovl3_80172558(ap, ATSPEAR_GRAVITY, ATSPEAR_T_VEL);
 
-    ap->phys_info.vel.x += ATSPEAR_SWARM_CALL_VEL_X * ap->lr;
+    ap->phys_info.vel_air.x += ATSPEAR_SWARM_CALL_VEL_X * ap->lr;
 
     if (ap->lr == RIGHT)
     {
         if ((Ground_Info->blastzone_right - ATSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x)
         {
-            ap->phys_info.vel.x = 0.0F;
-            ap->phys_info.vel.y = 0.0F;
+            ap->phys_info.vel_air.x = 0.0F;
+            ap->phys_info.vel_air.y = 0.0F;
 
             if (ap->item_vars.spear.spear_spawn_count != 0)
             {
@@ -111,8 +111,8 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
     {
         if (joint->translate.x <= (Ground_Info->blastzone_left + ATSPEAR_SWARM_CALL_OFF_X))
         {
-            ap->phys_info.vel.x = 0.0F;
-            ap->phys_info.vel.y = 0.0F;
+            ap->phys_info.vel_air.x = 0.0F;
+            ap->phys_info.vel_air.y = 0.0F;
 
             if (ap->item_vars.spear.spear_spawn_count != 0)
             {
@@ -130,7 +130,7 @@ void func_ovl3_8018010C(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->phys_info.vel.y = ATSPEAR_SWARM_CALL_VEL_Y;
+    ap->phys_info.vel_air.y = ATSPEAR_SWARM_CALL_VEL_Y;
 
     ap->item_vars.spear.spear_spawn_pos_y = DObjGetStruct(item_gobj)->translate.y;
     ap->item_vars.spear.spear_spawn_wait = 0;
@@ -161,7 +161,7 @@ bool32 jtgt_ovl3_801801D8(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -200,9 +200,9 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -264,7 +264,7 @@ GObj *func_ovl3_801804A4(GObj *item_gobj, Vec3f *pos, s32 it_kind)
 
     ip->lr = -ap->lr;
 
-    ip->phys_info.vel.x = ip->lr * ATSPEAR_SWARM_FLY_VEL_X;
+    ip->phys_info.vel_air.x = ip->lr * ATSPEAR_SWARM_FLY_VEL_X;
 
     joint = DObjGetStruct(weapon_gobj);
 

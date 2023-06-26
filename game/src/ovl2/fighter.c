@@ -170,7 +170,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         }
         if ((is_collide_ground != 0) && (fp->coll_data.ground_dist > -300.0F) && (fp->ft_kind != Ft_Kind_MasterHand))
         {
-            fp->ground_or_air = ground;
+            fp->ground_or_air = GA_Ground;
 
             DObjGetStruct(fighter_gobj)->translate.y += fp->coll_data.ground_dist;
 
@@ -178,13 +178,13 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         }
         else
         {
-            fp->ground_or_air = air;
+            fp->ground_or_air = GA_Air;
             fp->jumps_used = 1;
         }
     }
     else
     {
-        fp->ground_or_air = air;
+        fp->ground_or_air = GA_Air;
         fp->jumps_used = 1;
     }
 

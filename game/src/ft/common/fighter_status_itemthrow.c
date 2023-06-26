@@ -44,7 +44,7 @@ void ftCommon_ItemThrow_ProcUpdate(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     f32 vel_base;
     FighterItemThrow *item_throw_desc;
-    f32 stale;
+    f32 damage_mul;
     Vec3f vel;
     s32 status_id;
     s32 angle;
@@ -66,8 +66,16 @@ void ftCommon_ItemThrow_ProcUpdate(GObj *fighter_gobj)
     }
     if ((fp->item_hold != NULL) && (fp->command_vars.item_throw.is_throw_item != FALSE))
     {
-        if ((fp->ft_kind == Ft_Kind_Donkey || fp->ft_kind == Ft_Kind_PolyDonkey || fp->ft_kind == Ft_Kind_GiantDonkey) &&
-        (fp->status_info.status_id >= ftStatus_Donkey_HeavyThrowF && fp->status_info.status_id <= ftStatus_Donkey_HeavyThrowB4))
+        if 
+        (
+
+            (fp->ft_kind == Ft_Kind_Donkey || fp->ft_kind == Ft_Kind_PolyDonkey || fp->ft_kind == Ft_Kind_GiantDonkey)
+
+                                                                      &&
+
+            (fp->status_info.status_id >= ftStatus_Donkey_HeavyThrowF && fp->status_info.status_id <= ftStatus_Donkey_HeavyThrowB4)
+
+        )
         {
             status_id = fp->status_info.status_id - ftStatus_Common_HeavyThrowF4;
         }
@@ -81,7 +89,7 @@ void ftCommon_ItemThrow_ProcUpdate(GObj *fighter_gobj)
         }
         else angle = fp->status_vars.common.itemthrow.throw_angle;
 
-        stale = Fighter_ItemThrow_Desc[status_id - ftStatus_Common_LightThrowDrop].damage * 0.01F * fp->status_vars.common.itemthrow.throw_damage * fp->attributes->item_throw_mul * 0.01F;
+        damage_mul = Fighter_ItemThrow_Desc[status_id - ftStatus_Common_LightThrowDrop].damage * 0.01F * fp->status_vars.common.itemthrow.throw_damage * fp->attributes->item_throw_mul * 0.01F;
 
         vel.x = cosf(F_DEG_TO_RAD(angle)) * vel_base * fp->lr;
         vel.y = __sinf(F_DEG_TO_RAD(angle)) * vel_base;
@@ -89,9 +97,9 @@ void ftCommon_ItemThrow_ProcUpdate(GObj *fighter_gobj)
 
         if (status_id == ftStatus_Common_LightThrowDrop)
         {
-            func_ovl3_80172AEC(fp->item_hold, &vel, stale);
+            func_ovl3_80172AEC(fp->item_hold, &vel, damage_mul);
         }
-        else func_ovl3_80172B78(fp->item_hold, &vel, stale, Fighter_ItemThrow_Desc[status_id - ftStatus_Common_LightThrowDrop].is_smash_throw);
+        else func_ovl3_80172B78(fp->item_hold, &vel, damage_mul, Fighter_ItemThrow_Desc[status_id - ftStatus_Common_LightThrowDrop].is_smash_throw);
 
         fp->command_vars.flags.flag0 = 0;
     }
@@ -106,7 +114,7 @@ void ftCommon_ItemThrow_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         jtgt_ovl2_800D90E0(fighter_gobj);
     }

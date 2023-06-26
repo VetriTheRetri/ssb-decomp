@@ -29,7 +29,7 @@ void ftDonkey_ThrowFFall_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftMap_SetAir(fp);
     }

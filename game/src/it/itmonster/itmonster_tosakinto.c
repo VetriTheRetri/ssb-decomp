@@ -17,7 +17,7 @@ bool32 jtgt_ovl3_8017E7CC(GObj *item_gobj)
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
-        ap->phys_info.vel.y = ATTOSAKINTO_FLAP_VEL_Y;
+        ap->phys_info.vel_air.y = ATTOSAKINTO_FLAP_VEL_Y;
 
         func_ovl3_8017EA14(item_gobj);
 
@@ -64,11 +64,11 @@ bool32 jtgt_ovl3_8017E8CC(GObj *item_gobj)
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
-        ap->phys_info.vel.y = ATTOSAKINTO_FLAP_VEL_Y;
+        ap->phys_info.vel_air.y = ATTOSAKINTO_FLAP_VEL_Y;
 
         if (rand_u16_range(2) != 0)
         {
-            ap->phys_info.vel.x = -ap->phys_info.vel.x;
+            ap->phys_info.vel_air.x = -ap->phys_info.vel_air.x;
         }
         func_800269C0(0x8DU);
     }
@@ -88,8 +88,8 @@ void func_ovl3_8017E93C(GObj *item_gobj)
 
     ap->item_vars.tosakinto.pos = joint->translate;
 
-    ap->phys_info.vel.y = ATTOSAKINTO_FLAP_VEL_Y;
-    ap->phys_info.vel.x = ATTOSAKINTO_FLAP_VEL_X;
+    ap->phys_info.vel_air.y = ATTOSAKINTO_FLAP_VEL_Y;
+    ap->phys_info.vel_air.x = ATTOSAKINTO_FLAP_VEL_X;
 
     if (ap->it_kind == It_Kind_Tosakinto)
     {
@@ -117,7 +117,7 @@ bool32 jtgt_ovl3_8017EA48(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_8017E828(item_gobj);
     }
@@ -132,7 +132,7 @@ bool32 jtgt_ovl3_8017EA98(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -161,9 +161,9 @@ GObj* jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 

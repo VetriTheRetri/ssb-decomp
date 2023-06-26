@@ -56,7 +56,7 @@ bool32 wpYoshi_Star_ProcUpdate(GObj *weapon_gobj)
 
     DObjGetStruct(weapon_gobj)->rotate.z += (ITYOSHISTAR_ROTATE_SPEED * wp->lr);
 
-    vel_sqrt = sqrtf(SQUARE(wp->phys_info.vel.x) + SQUARE(wp->phys_info.vel.y));
+    vel_sqrt = sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y));
 
     if (vel_sqrt > 0.0F)
     {
@@ -68,8 +68,8 @@ bool32 wpYoshi_Star_ProcUpdate(GObj *weapon_gobj)
         {
             vel_mul = vel_sqrt - ITYOSHISTAR_VEL_CLAMP;
         }
-        wp->phys_info.vel.x = (wp->phys_info.vel.x * vel_mul) / vel_sqrt;
-        wp->phys_info.vel.y = (wp->phys_info.vel.y * vel_mul) / vel_sqrt;
+        wp->phys_info.vel_air.x = (wp->phys_info.vel_air.x * vel_mul) / vel_sqrt;
+        wp->phys_info.vel_air.y = (wp->phys_info.vel_air.y * vel_mul) / vel_sqrt;
     }
     return FALSE;
 }
@@ -109,9 +109,9 @@ bool32 wpYoshi_Star_ProcHop(GObj *weapon_gobj)
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
 
-    if (wp->phys_info.vel.x > 0.0F)
+    if (wp->phys_info.vel_air.x > 0.0F)
     {
         wp->lr = RIGHT;
     }
@@ -130,7 +130,7 @@ bool32 wpYoshi_Star_ProcReflector(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(wp, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
 
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
     DObjGetStruct(weapon_gobj)->scale.y = 1.0F;
@@ -169,8 +169,8 @@ GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 
     wp->lifetime = ITYOSHISTAR_LIFETIME;
 
-    wp->phys_info.vel.x = (cosf(ITYOSHISTAR_ANGLE) * (ITYOSHISTAR_VEL * wp->lr));
-    wp->phys_info.vel.y = (__sinf(ITYOSHISTAR_ANGLE) * ITYOSHISTAR_VEL);
+    wp->phys_info.vel_air.x = (cosf(ITYOSHISTAR_ANGLE) * (ITYOSHISTAR_VEL * wp->lr));
+    wp->phys_info.vel_air.y = (__sinf(ITYOSHISTAR_ANGLE) * ITYOSHISTAR_VEL);
 
     return; // Undefined behavior here, no return value
 }

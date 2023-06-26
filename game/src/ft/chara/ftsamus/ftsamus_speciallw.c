@@ -29,7 +29,7 @@ void ftSamus_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 
     ftSamus_SpecialLw_CreateBomb(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         ftSamus_SpecialLw_TransferStatusAir(fighter_gobj);
     }

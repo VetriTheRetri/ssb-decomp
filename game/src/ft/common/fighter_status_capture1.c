@@ -54,14 +54,14 @@ void ftCommon_CapturePulled_ProcMap(GObj *fighter_gobj)
         {
             this_pos->y += dist_y;
 
-            this_fp->ground_or_air = ground;
+            this_fp->ground_or_air = GA_Ground;
             this_fp->jumps_used = 0;
         }
         else
         {
             this_pos->y += dist_y * 0.5F;
 
-            this_fp->ground_or_air = air;
+            this_fp->ground_or_air = GA_Air;
             this_fp->jumps_used = 1;
         }
     }
@@ -77,7 +77,7 @@ void ftCommon_CapturePulled_ProcMap(GObj *fighter_gobj)
 
         func_ovl2_800DE324(fighter_gobj);
 
-        this_fp->ground_or_air = air;
+        this_fp->ground_or_air = GA_Air;
         this_fp->jumps_used = 1;
     }
 }
@@ -87,15 +87,12 @@ void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 {
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
-    Vec3f vel;
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
     if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
-        vel.x = vel.y = vel.z = 0.0F;
-
-        func_ovl3_80172AEC(this_fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+        ftSetupDropItem(this_fp);
     }
     if (this_fp->catch_gobj != NULL)
     {
@@ -143,7 +140,7 @@ void ftCommon_CaptureWait_ProcMap(GObj *fighter_gobj)
 
         this_pos->y += dist_y;
 
-        this_fp->ground_or_air = ground;
+        this_fp->ground_or_air = GA_Ground;
         this_fp->jumps_used = 0;
     }
     else
@@ -158,7 +155,7 @@ void ftCommon_CaptureWait_ProcMap(GObj *fighter_gobj)
 
         func_ovl2_800DE324(fighter_gobj);
 
-        this_fp->ground_or_air = air;
+        this_fp->ground_or_air = GA_Air;
         this_fp->jumps_used = 1;
     }
 }

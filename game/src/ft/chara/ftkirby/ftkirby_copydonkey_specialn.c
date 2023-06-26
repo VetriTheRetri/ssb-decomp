@@ -96,7 +96,7 @@ void ftKirby_CopyDonkey_SpecialNLoop_ProcUpdate(GObj *fighter_gobj)
         }
         else if (fp->status_vars.kirby.copydonkey_specialn.is_release != FALSE)
         {
-            if (fp->ground_or_air == air)
+            if (fp->ground_or_air == GA_Air)
             {
                 ftKirby_CopyDonkey_SpecialNEnd_SetStatus(fighter_gobj);
             }
@@ -111,7 +111,7 @@ void ftKirby_CopyDonkey_SpecialNLoop_ProcInterrupt(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fp->ground_or_air != ground) || (ftCommon_Escape_CheckInterruptSpecialNDonkey(fighter_gobj) == FALSE))
+    if ((fp->ground_or_air != GA_Ground) || (ftCommon_Escape_CheckInterruptSpecialNDonkey(fighter_gobj) == FALSE))
     {
         if (fp->input.pl.button_tap & (fp->input.button_mask_b | fp->input.button_mask_a))
         {

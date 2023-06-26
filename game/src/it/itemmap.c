@@ -383,11 +383,11 @@ bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 mod_vel, void (*cb)(GObj*))
 
 void func_ovl3_80173F54(Item_Struct *ap)
 {
-    ap->ground_or_air = ground;
-    ap->phys_info.vel_ground = ap->phys_info.vel.x * ap->lr;
+    ap->ground_or_air = GA_Ground;
+    ap->phys_info.vel_ground = ap->phys_info.vel_air.x * ap->lr;
 }
 
 void func_ovl3_80173F78(Item_Struct *ap)
 {
-    ap->ground_or_air = air;
+    ap->ground_or_air = GA_Air;
 }

@@ -71,11 +71,7 @@ void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
-        Vec3f vel;
-
-        vel.x = vel.y = vel.z = 0.0F;
-
-        func_ovl3_80172AEC(this_fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+        ftSetupDropItem(this_fp);
     }
     if (this_fp->catch_gobj != NULL)
     {
@@ -122,7 +118,7 @@ void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fight
             this_fp->tap_stick_y = U8_MAX - 1;
             is_wiggle = TRUE;
 
-            if (capture_fp->ground_or_air == ground)
+            if (capture_fp->ground_or_air == GA_Ground)
             {
                 ftKirby_SpecialNWait_SwitchStatusAir(capture_fp->fighter_gobj);
 
@@ -136,7 +132,7 @@ void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fight
             this_fp->tap_stick_y = U8_MAX - 1;
             is_wiggle = TRUE;
 
-            if (capture_fp->ground_or_air == ground)
+            if (capture_fp->ground_or_air == GA_Ground)
             {
                 ftKirby_SpecialNWait_SwitchStatusAir(capture_fp->fighter_gobj);
 
@@ -468,7 +464,7 @@ void ftCommon_ThrownKirbyStar_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     ftKirbyCopyData *copy_data = (ftKirbyCopyData*) ((uintptr_t)D_ovl2_80131074 + (intptr_t)&ftKirby_LoadedFiles_SpecialNData);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftMap_SetAir(fp);
     }
@@ -523,7 +519,7 @@ void ftCommon_ThrownCopyStar_SetStatus(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftMap_SetAir(fp);
     }

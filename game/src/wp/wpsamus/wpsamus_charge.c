@@ -136,7 +136,7 @@ void wpSamus_ChargeShot_LaunchSetVars(GObj *weapon_gobj) // Set Charge Shot's at
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     f32 coll_size;
 
-    wp->phys_info.vel.x = wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].vel_x * wp->lr;
+    wp->phys_info.vel_air.x = wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].vel_x * wp->lr;
 
     wp->weapon_hit.damage = wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].damage;
     wp->weapon_hit.size = wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].hit_size * 0.5F;

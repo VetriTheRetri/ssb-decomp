@@ -82,7 +82,7 @@ void ftFox_SpecialLwLoop_ProcUpdate(GObj *fighter_gobj)
 
     if ((fp->status_vars.fox.speciallw.release_lag <= 0) && (fp->status_vars.fox.speciallw.is_release != FALSE))
     {
-        if (fp->ground_or_air == ground)
+        if (fp->ground_or_air == GA_Ground)
         {
             ftFox_SpecialLwEnd_SetStatus(fighter_gobj);
         }
@@ -125,13 +125,13 @@ void ftFox_SpecialLwHit_DecideSetStatus(GObj *fighter_gobj)
 
     if ((fp->status_vars.fox.speciallw.release_lag <= 0) && (fp->status_vars.fox.speciallw.is_release != FALSE))
     {
-        if (fp->ground_or_air == ground)
+        if (fp->ground_or_air == GA_Ground)
         {
             ftFox_SpecialLwEnd_SetStatus(fighter_gobj);
         }
         else ftFox_SpecialAirLwEnd_SetStatus(fighter_gobj);
     }
-    else if (fp->ground_or_air == ground)
+    else if (fp->ground_or_air == GA_Ground)
     {
         ftFox_SpecialLwLoop_SetStatus(fighter_gobj);
     }
@@ -160,7 +160,7 @@ void ftFox_SpecialLwHit_SetStatus(GObj *fighter_gobj)
 
     fp->lr = fp->lr_reflect;
 
-    ftStatus_Update(fighter_gobj, ((fp->ground_or_air == ground) ? ftStatus_Fox_SpecialLwHit : ftStatus_Fox_SpecialAirLwHit), 0.0F, 1.0F, (FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
+    ftStatus_Update(fighter_gobj, ((fp->ground_or_air == GA_Ground) ? ftStatus_Fox_SpecialLwHit : ftStatus_Fox_SpecialAirLwHit), 0.0F, 1.0F, (FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
 
     fp->is_reflect = TRUE;
 }
@@ -230,7 +230,7 @@ bool32 ftFox_SpecialLwTurn_CheckInterruptSpecialLwLoop(GObj *fighter_gobj)
 
     if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
     {
-        if (fp->ground_or_air == ground)
+        if (fp->ground_or_air == GA_Ground)
         {
             ftFox_SpecialLwTurn_SetStatus(fighter_gobj);
 

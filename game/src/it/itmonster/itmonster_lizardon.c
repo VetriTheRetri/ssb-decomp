@@ -21,7 +21,7 @@ bool32 jtgt_ovl3_8017F49C(GObj *item_gobj)
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -53,7 +53,7 @@ bool32 jtgt_ovl3_8017F568(GObj *item_gobj)
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_8017F8E4(item_gobj);
         func_ovl3_8017F810(item_gobj);
@@ -172,7 +172,7 @@ bool32 jtgt_ovl3_8017F90C(GObj *item_gobj)
     if (ap->it_multi == 0)
     {
         ap->it_multi = ATLIZARDON_LIFETIME;
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         if (ap->it_kind == It_Kind_Lizardon)
         {
@@ -191,7 +191,7 @@ bool32 jtgt_ovl3_8017F98C(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -219,9 +219,9 @@ GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -274,8 +274,8 @@ bool32 jtgt_ovl3_8017FB74(GObj *weapon_gobj)
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
 
     return FALSE;
 }
@@ -297,8 +297,8 @@ GObj *func_ovl3_8017FC38(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->lifetime = ATLIZARDON_FLAME_LIFETIME;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F); // This needs to something in v0 to match
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel.x, ip->phys_info.vel.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F); // This needs to something in v0 to match
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
 
     return weapon_gobj;
 }

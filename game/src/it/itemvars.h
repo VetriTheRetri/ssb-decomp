@@ -56,6 +56,7 @@
 #define ATHAMMER_BGM_ID 0x2E
 #define ATHAMMER_BGM_DURATION 20
 #define ATHAMMER_WEAR_COLANIM_ID 0x4E                        // Color animation applied to hammer when time is almost up
+#define ATHAMMER_WEAR_COLANIM_LENGTH 0
 #define ATHAMMER_WARN_BEGIN_FRAME (ATHAMMER_TIME - 600)
 #define ATHAMMER_GRAVITY 1.5F
 #define ATHAMMER_T_VEL 120.0F
@@ -581,8 +582,8 @@ typedef struct itFighter_ItemVars_LinkBomb
 
 #define ArticleSetMonster(ap) \
     ap->it_multi = 22; \
-    ap->phys_info.vel.z = 0.0F; \
-    ap->phys_info.vel.x = 0.0F; \
-    ap->phys_info.vel.y = 16.0F; \
+    ap->phys_info.vel_air.z = 0.0F; \
+    ap->phys_info.vel_air.x = 0.0F; \
+    ap->phys_info.vel_air.y = 16.0F; \
 
 #endif

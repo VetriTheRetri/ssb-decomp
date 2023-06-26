@@ -191,9 +191,9 @@ bool32 itIBumper_AThrow_ProcHit(GObj *item_gobj)
 
     joint->mobj->anim_frame = 1.0F;
 
-    ip->phys_info.vel.x = ATBUMPER_REBOUND_AIR_X * ip->lr_attack;
+    ip->phys_info.vel_air.x = ATBUMPER_REBOUND_AIR_X * ip->lr_attack;
 
-    ip->phys_info.vel.y = ATBUMPER_REBOUND_AIR_Y;
+    ip->phys_info.vel_air.y = ATBUMPER_REBOUND_AIR_Y;
 
     ip->it_multi = ATBUMPER_HIT_SCALE;
 
@@ -269,9 +269,9 @@ bool32 itIBumper_AThrow_ProcReflector(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    if ((ip->phys_info.vel.x * fp->lr) < 0.0F)
+    if ((ip->phys_info.vel_air.x * fp->lr) < 0.0F)
     {
-        ip->phys_info.vel.x = -ip->phys_info.vel.x;
+        ip->phys_info.vel_air.x = -ip->phys_info.vel_air.x;
     }
     func_ovl3_8017279C(item_gobj);
 
@@ -335,9 +335,9 @@ void itIBumper_GWaitHit_InitItemVars(GObj *item_gobj)
     ip = itGetStruct(item_gobj);
     joint = DObjGetStruct(item_gobj);
 
-    ip->phys_info.vel.x = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.z = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
 
     dl1 = itGetPData(ip, D_NF_00007648, D_NF_00007AF8); // (uintptr_t)((uintptr_t)ip->attributes->unk_0x0 - (intptr_t)&D_NF_00007648) + (intptr_t)&D_NF_00007AF8; Linker thing
 
@@ -379,7 +379,7 @@ bool32 itIBumper_GWaitHit_ProcHit(GObj *item_gobj)
 
     ip->lr = -ip->lr_attack;
 
-    ip->phys_info.vel.x = ip->lr_attack * ATBUMPER_REBOUND_VEL_X;
+    ip->phys_info.vel_air.x = ip->lr_attack * ATBUMPER_REBOUND_VEL_X;
 
     ip->it_multi = ATBUMPER_HIT_SCALE;
 
@@ -411,7 +411,7 @@ bool32 itIBumper_GWaitHit_ProcUpdate(GObj *item_gobj)
 
             if (sp30.x >= (joint->translate.x - attributes->objectcoll_width))
             {
-                ip->phys_info.vel.x = 0.0F;
+                ip->phys_info.vel_air.x = 0.0F;
             }
         }
         else
@@ -420,13 +420,13 @@ bool32 itIBumper_GWaitHit_ProcUpdate(GObj *item_gobj)
 
             if (sp30.x <= (joint->translate.x + attributes->objectcoll_width))
             {
-                ip->phys_info.vel.x = 0.0F;
+                ip->phys_info.vel_air.x = 0.0F;
             }
         }
     }
     if (ip->it_multi < ATBUMPER_RESET_VEL_TIMER)
     {
-        ip->phys_info.vel.x = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
     }
     if (ip->it_multi != 0)
     {
@@ -491,7 +491,7 @@ bool32 itIBumper_GWaitHit_ProcReflector(GObj *item_gobj)
 
     joint->mobj->anim_frame = 1.0F;
 
-    ip->phys_info.vel.x = (-fp->lr * ATBUMPER_REBOUND_VEL_X);
+    ip->phys_info.vel_air.x = (-fp->lr * ATBUMPER_REBOUND_VEL_X);
 
     ip->lr = fp->lr;
 
@@ -592,9 +592,9 @@ void itIBumper_GDisappear_SetStatus(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ip->phys_info.vel.x = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.z = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
 
     itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_GDisappear);
 }

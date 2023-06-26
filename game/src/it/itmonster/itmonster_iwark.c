@@ -46,7 +46,7 @@ bool32 func_ovl3_8017D820(GObj *item_gobj)
     {
         joint->translate.y = pos_y;
 
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         if (ap->item_vars.iwark.rock_timer1 != 0)
         {
@@ -89,9 +89,9 @@ void func_ovl3_8017D948(GObj *item_gobj)
     void *dl;
     Vec3f pos;
 
-    ap->ground_or_air = air;
+    ap->ground_or_air = GA_Air;
 
-    ap->phys_info.vel.y = ATIWARK_FLY_VEL_Y;
+    ap->phys_info.vel_air.y = ATIWARK_FLY_VEL_Y;
 
     ap->item_vars.iwark.rock_timer1 = rand_u16_range(ATIWARK_ROCK_SPAWN_COUNT_MAX) + ATIWARK_ROCK_SPAWN_COUNT_MIN;
     ap->item_vars.iwark.rock_timer2 = ap->item_vars.iwark.rock_timer1;
@@ -147,8 +147,8 @@ void func_ovl3_8017DAD8(GObj *item_gobj)
 
     ap->it_multi = ATIWARK_FLY_WAIT;
 
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.x = 0.0F;
 
     itMain_SetItemStatus(item_gobj, Article_Iwark_Status, 0);
 }
@@ -172,7 +172,7 @@ bool32 jtgt_ovl3_8017DB5C(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_80173F54(ap);
     }
@@ -205,9 +205,9 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -280,10 +280,10 @@ bool32 func_ovl3_8017DE10(GObj *weapon_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    if (ip->phys_info.vel.x > 0.0F)
+    if (ip->phys_info.vel_air.x > 0.0F)
     {
         ip->lr = RIGHT;
     }
@@ -299,7 +299,7 @@ bool32 func_ovl3_8017DEB8(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
@@ -327,7 +327,7 @@ GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
 
     if ((u32)random == 0)
     {
-        ip->phys_info.vel.y = ATIWARK_ROCK_VEL_Y_START_A;
+        ip->phys_info.vel_air.y = ATIWARK_ROCK_VEL_Y_START_A;
     }
     else
     {
@@ -339,7 +339,7 @@ GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
         {
             vel_y = ATIWARK_ROCK_VEL_Y_START_C;
         }
-        ip->phys_info.vel.y = vel_y;
+        ip->phys_info.vel_air.y = vel_y;
     }
 
     if (rand_u16_range(2) == 0)

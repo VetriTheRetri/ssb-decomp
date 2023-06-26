@@ -175,9 +175,9 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     }
     wp->weapon_hit.update_state = gmHitCollision_UpdateState_New;
 
-    wp->phys_info.vel.z = 0.0F;
-    wp->phys_info.vel.y = 0.0F;
-    wp->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel_air.z = 0.0F;
+    wp->phys_info.vel_air.y = 0.0F;
+    wp->phys_info.vel_air.x = 0.0F;
 
     wp->phys_info.vel_ground = 0.0F;
 
@@ -331,7 +331,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
             break;
         }
     }
-    wp->ground_or_air = air;
+    wp->ground_or_air = GA_Air;
 
     wpManager_UpdateHitPositions(weapon_gobj);
 
@@ -472,15 +472,15 @@ void wpManager_ProcWeaponMain(GObj *weapon_gobj) // Run item logic pass 1 (anima
 
         wp->coll_data.pos_curr = *translate;
 
-        translate->x += wp->phys_info.vel.x;
-        translate->y += wp->phys_info.vel.y;
-        translate->z += wp->phys_info.vel.z;
+        translate->x += wp->phys_info.vel_air.x;
+        translate->y += wp->phys_info.vel_air.y;
+        translate->z += wp->phys_info.vel_air.z;
 
         wp->coll_data.pos_prev.x = translate->x - wp->coll_data.pos_curr.x;
         wp->coll_data.pos_prev.y = translate->y - wp->coll_data.pos_curr.y;
         wp->coll_data.pos_prev.z = translate->z - wp->coll_data.pos_curr.z;
 
-        if ((wp->ground_or_air == ground) && (wp->coll_data.ground_line_id != -1) && (wp->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(wp->coll_data.ground_line_id) != FALSE))
+        if ((wp->ground_or_air == GA_Ground) && (wp->coll_data.ground_line_id != -1) && (wp->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(wp->coll_data.ground_line_id) != FALSE))
         {
             func_ovl2_800FA7B8(wp->coll_data.ground_line_id, &wp->coll_data.pos_correct);
 
@@ -781,7 +781,7 @@ void wpManager_ProcHitCollisions(GObj *weapon_gobj)
     }
     if (wp->hit_shield_damage != 0)
     {
-        if ((wp->weapon_hit.can_hop) && (wp->ground_or_air == air))
+        if ((wp->weapon_hit.can_hop) && (wp->ground_or_air == GA_Air))
         {
             if (wp->shield_collide_angle < WEAPON_HOP_ANGLE_DEFAULT)
             {

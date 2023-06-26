@@ -17,7 +17,7 @@ bool32 jtgt_ovl3_80182660(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_8018273C(item_gobj);
     }
@@ -96,9 +96,9 @@ void func_ovl3_8018285C(GObj *item_gobj, GObj *fighter_gobj)
 
     vec3f_sub(&dist, &target_pos, &aj->translate);
 
-    ap->phys_info.vel.z = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = ATSAWAMURA_KICK_VEL_X;
+    ap->phys_info.vel_air.z = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.x = ATSAWAMURA_KICK_VEL_X;
 
     vec3_get_euler_rotation(&ap->phys_info.vel, 4, atan2f(dist.y, dist.x));
 
@@ -184,7 +184,7 @@ bool32 jtgt_ovl3_80182AE0(GObj *item_gobj)
     {
         ap->it_multi = ATSAWAMURA_KICK_WAIT;
 
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_801826A8(item_gobj);
     }
@@ -199,7 +199,7 @@ bool32 jtgt_ovl3_80182B34(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -218,9 +218,9 @@ GObj* jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         func_80008CC0(joint, 0x48U, 0U);
 

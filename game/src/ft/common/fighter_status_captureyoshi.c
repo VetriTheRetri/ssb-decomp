@@ -44,11 +44,7 @@ void ftCommon_CaptureYoshi_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
-        Vec3f vel;
-
-        vel.x = vel.y = vel.z = 0.0F;
-
-        func_ovl3_80172AEC(this_fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+        ftSetupDropItem(this_fp);
     }
     if (this_fp->catch_gobj != NULL)
     {
@@ -166,7 +162,7 @@ void ftCommon_YoshiEgg_ProcInterrupt(GObj *fighter_gobj)
     {
         DObj *joint = DObjGetStruct(fp->status_vars.common.captureyoshi.effect_gobj)->next;
 
-        if (fp->ground_or_air == ground)
+        if (fp->ground_or_air == GA_Ground)
         {
             if (ABS(fp->input.pl.stick_range.y) >= FTCOMMON_YOSHIEGG_WIGGLE_STICK_RANGE_MIN)
             {
@@ -225,7 +221,7 @@ void ftCommon_YoshiEgg_ProcPhysics(GObj *fighter_gobj)
             ep->unk_ef_0x1C = 1;
         }
     }
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         func_ovl2_800D8BB4(fighter_gobj);
     }
@@ -237,16 +233,16 @@ void ftCommon_YoshiEgg_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
         {
-            fp->ground_or_air = air;
+            fp->ground_or_air = GA_Air;
         }
     }
     else if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
-        fp->ground_or_air = ground;
+        fp->ground_or_air = GA_Ground;
     }
 }
 
@@ -342,7 +338,7 @@ void ftCommon_YoshiEgg_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     Fighter_Struct *capture_fp;
 
-    if (this_fp->ground_or_air == ground)
+    if (this_fp->ground_or_air == GA_Ground)
     {
         ftMap_SetAir(this_fp);
     }

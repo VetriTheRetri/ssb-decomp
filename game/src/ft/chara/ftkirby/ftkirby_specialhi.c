@@ -131,7 +131,7 @@ void ftKirby_SpecialHiLanding_ProcPhysics(GObj *fighter_gobj)
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         func_ovl2_800D8C14(fighter_gobj);
     }
@@ -190,11 +190,11 @@ void ftKirby_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         if (func_ovl2_800DDE50(fighter_gobj) == FALSE)
         {
-            fp->ground_or_air = air;
+            fp->ground_or_air = GA_Air;
         }
     }
     else

@@ -19,7 +19,7 @@ bool32 func_ovl3_8017EBE0(GObj *item_gobj)
 
     ap->it_multi--;
 
-    ap->phys_info.vel.y += ATMEW_FLY_ADD_VEL_Y;
+    ap->phys_info.vel_air.y += ATMEW_FLY_ADD_VEL_Y;
 
     return FALSE;
 }
@@ -32,13 +32,13 @@ void func_ovl3_8017EC84(GObj *item_gobj)
 
     if (rand_u16_range(2) != 0)
     {
-        ap->phys_info.vel.x = ATMEW_START_VEL_X;
+        ap->phys_info.vel_air.x = ATMEW_START_VEL_X;
     }
     else
     {
-        ap->phys_info.vel.x = -ATMEW_START_VEL_X;
+        ap->phys_info.vel_air.x = -ATMEW_START_VEL_X;
     }
-    ap->phys_info.vel.y = ATMEW_START_VEL_Y;
+    ap->phys_info.vel_air.y = ATMEW_START_VEL_Y;
 
     func_800269C0(0x89U);
 
@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_8017ED54(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         func_ovl3_8017ED20(item_gobj);
     }
@@ -80,7 +80,7 @@ bool32 jtgt_ovl3_8017EDA4(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -100,9 +100,9 @@ GObj* jtgt_ovl3_8017EDE4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y; // Starting to think this is a macro
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y; // Starting to think this is a macro
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
             

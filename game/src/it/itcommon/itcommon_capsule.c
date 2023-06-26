@@ -307,9 +307,9 @@ void itCapsule_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ip->phys_info.vel.x = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.z = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
 
     ep = func_ovl2_801005C8(&joint->translate);
 

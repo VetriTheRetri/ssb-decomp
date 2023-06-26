@@ -202,7 +202,7 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
 
     func_ovl3_80173F54(ip);
 
-    if (ABSF(ip->phys_info.vel.x) < ATGSHELL_STOP_VEL_X)
+    if (ABSF(ip->phys_info.vel_air.x) < ATGSHELL_STOP_VEL_X)
     {
         func_ovl3_80172E74(item_gobj);
 
@@ -213,7 +213,7 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
         ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
         ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-        ip->phys_info.vel.x = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_80178704(item_gobj);
         itMain_SetItemStatus(item_gobj, itCommon_GShell_StatusDesc, itStatus_GShell_GWait);
@@ -234,7 +234,7 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
         ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
         ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-        ip->phys_info.vel.x = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_80178704(item_gobj);
         itMain_SetItemStatus(item_gobj, itCommon_GShell_StatusDesc, itStatus_GShell_GWait);
@@ -267,9 +267,9 @@ bool32 itGShell_SDefault_ProcDamage(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->phys_info.vel.x = ip->damage_taken_recent * ATGSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
+    ip->phys_info.vel_air.x = ip->damage_taken_recent * ATGSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
 
-    if (ABSF(ip->phys_info.vel.x) > ATGSHELL_STOP_VEL_X)
+    if (ABSF(ip->phys_info.vel_air.x) > ATGSHELL_STOP_VEL_X)
     {
         ip->item_vars.shell.is_damage = TRUE;
 
@@ -281,7 +281,7 @@ bool32 itGShell_SDefault_ProcDamage(GObj *item_gobj)
 
         func_ovl3_801727BC(item_gobj);
 
-        if (ip->ground_or_air != ground)
+        if (ip->ground_or_air != GA_Ground)
         {
             itGShell_ASpin_SetStatus(item_gobj);
         }
@@ -290,9 +290,9 @@ bool32 itGShell_SDefault_ProcDamage(GObj *item_gobj)
     }
     else
     {
-        ip->phys_info.vel.x = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
 
-        if (ip->ground_or_air != ground)
+        if (ip->ground_or_air != GA_Ground)
         {
             itGShell_AFall_SetStatus(item_gobj);
         }
@@ -399,9 +399,9 @@ bool32 itGShell_SDefault_ProcHit(GObj *item_gobj)
 
     ip->item_vars.shell.health = rand_u16_range(ATGSHELL_HEALTH_MAX);
 
-    ip->phys_info.vel.y = ATGSHELL_REBOUND_VEL_Y;
+    ip->phys_info.vel_air.y = ATGSHELL_REBOUND_VEL_Y;
 
-    ip->phys_info.vel.x = rand_f32() * (-ip->phys_info.vel.x * ATGSHELL_REBOUND_MUL_X);
+    ip->phys_info.vel_air.x = rand_f32() * (-ip->phys_info.vel_air.x * ATGSHELL_REBOUND_MUL_X);
 
     func_ovl3_8017279C(item_gobj);
     func_ovl3_80178704(item_gobj);
@@ -415,9 +415,9 @@ bool32 itGShell_GASpin_ProcDamage(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->phys_info.vel.x += (ip->damage_taken_recent * ATGSHELL_DAMAGE_MUL_ADD * -ip->lr_damage);
+    ip->phys_info.vel_air.x += (ip->damage_taken_recent * ATGSHELL_DAMAGE_MUL_ADD * -ip->lr_damage);
 
-    if (ABSF(ip->phys_info.vel.x) > ATGSHELL_STOP_VEL_X)
+    if (ABSF(ip->phys_info.vel_air.x) > ATGSHELL_STOP_VEL_X)
     {
         ip->item_hit.update_state = gmHitCollision_UpdateState_New;
 
@@ -432,9 +432,9 @@ bool32 itGShell_GASpin_ProcDamage(GObj *item_gobj)
     }
     else
     {
-        ip->phys_info.vel.x = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
 
-        if (ip->ground_or_air != ground)
+        if (ip->ground_or_air != GA_Ground)
         {
             itGShell_AFall_SetStatus(item_gobj);
         }
@@ -452,17 +452,17 @@ void itGShell_GSpin_InitItemVars(GObj *item_gobj)
 
     ip->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 
-    if (ip->phys_info.vel.x > ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x > ATGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel.x = ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = ATGSHELL_CLAMP_VEL_X;
     }
-    if (ip->phys_info.vel.x < -ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x < -ATGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel.x = -ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = -ATGSHELL_CLAMP_VEL_X;
     }
-    ip->phys_info.vel.y = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
 
-    if (ip->phys_info.vel.x < 0.0F)
+    if (ip->phys_info.vel_air.x < 0.0F)
     {
         ip->lr = LEFT;
     }
@@ -491,15 +491,15 @@ void itGShell_ASpin_InitItemVars(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ip->phys_info.vel.x > ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x > ATGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel.x = ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = ATGSHELL_CLAMP_VEL_X;
     }
-    if (ip->phys_info.vel.x < -ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x < -ATGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel.x = -ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = -ATGSHELL_CLAMP_VEL_X;
     }
-    if (ip->phys_info.vel.x < 0.0F)
+    if (ip->phys_info.vel_air.x < 0.0F)
     {
         ip->lr = LEFT;
     }

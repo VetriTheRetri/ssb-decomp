@@ -81,8 +81,8 @@ bool32 wpLink_SpinAttack_ProcMap(GObj *weapon_gobj)
 
     pos_y += ITSPINATTACK_OFF_Y;
 
-    wp->phys_info.vel.x = pos_x - DObjGetStruct(weapon_gobj)->translate.x;
-    wp->phys_info.vel.y = pos_y - DObjGetStruct(weapon_gobj)->translate.y;
+    wp->phys_info.vel_air.x = pos_x - DObjGetStruct(weapon_gobj)->translate.x;
+    wp->phys_info.vel_air.y = pos_y - DObjGetStruct(weapon_gobj)->translate.y;
 
     return FALSE;
 }
@@ -128,9 +128,9 @@ GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     wp->weapon_vars.spin_attack.vel.x = cosf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
     wp->weapon_vars.spin_attack.vel.y = __sinf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
 
-    wp->phys_info.vel.z = 0.0F;
-    wp->phys_info.vel.y = 0.0F;
-    wp->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel_air.z = 0.0F;
+    wp->phys_info.vel_air.y = 0.0F;
+    wp->phys_info.vel_air.x = 0.0F;
 
     wpManager_UpdateHitPositions(weapon_gobj);
 

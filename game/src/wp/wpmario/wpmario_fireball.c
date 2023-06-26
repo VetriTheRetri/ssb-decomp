@@ -157,12 +157,12 @@ GObj* wpMario_Fireball_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 index) /
 
     wp->lifetime = wpMario_Fireball_WeaponAttributes[index].lifetime;
 
-    angle = (fp->ground_or_air == air) ? wpMario_Fireball_WeaponAttributes[index].angle_air : wpMario_Fireball_WeaponAttributes[index].angle_ground;
+    angle = (fp->ground_or_air == GA_Air) ? wpMario_Fireball_WeaponAttributes[index].angle_air : wpMario_Fireball_WeaponAttributes[index].angle_ground;
 
-    wp->phys_info.vel.z = 0.0F;
+    wp->phys_info.vel_air.z = 0.0F;
 
-    wp->phys_info.vel.x = wpMario_Fireball_WeaponAttributes[index].vel_base * cosf(angle) * fp->lr;
-    wp->phys_info.vel.y = wpMario_Fireball_WeaponAttributes[index].vel_base * __sinf(angle);
+    wp->phys_info.vel_air.x = wpMario_Fireball_WeaponAttributes[index].vel_base * cosf(angle) * fp->lr;
+    wp->phys_info.vel_air.y = wpMario_Fireball_WeaponAttributes[index].vel_base * __sinf(angle);
 
     DObjGetStruct(weapon_gobj)->mobj->anim_frame = wpMario_Fireball_WeaponAttributes[index].anim_frame;
 

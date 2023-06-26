@@ -26,7 +26,7 @@ void ftNess_SpecialN_ProcAccessory(GObj *fighter_gobj) // PK Fire setup
         pos.y += FTNESS_PKFIRE_SPAWN_OFF_Y;
         pos.z = 0.0F;
 
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             vel.z = 0.0F;
             angle = FTNESS_PKFIRE_SPARK_ANGLE_AIR;

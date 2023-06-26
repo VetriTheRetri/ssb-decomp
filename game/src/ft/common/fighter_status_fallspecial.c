@@ -74,7 +74,7 @@ void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, 
 
     func_ovl2_800D8E78(fp, fp->status_vars.common.fallspecial.drift);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftMap_SetAir(fp);
     }

@@ -133,7 +133,7 @@ typedef struct gmComputerInput
 
 } gmComputerInput;
 
-typedef union gmAttackFlags
+typedef union gmStatFlags
 {
     struct
     {
@@ -147,12 +147,12 @@ typedef union gmAttackFlags
     };
     u16 halfword;
 
-} gmAttackFlags;
+} gmStatFlags;
 
 typedef struct FighterAttackFlags
 {
-    gmAttackFlags hi;
-    gmAttackFlags lw;
+    gmStatFlags hi;
+    gmStatFlags lw;
 
 } FighterAttackFlags;
 

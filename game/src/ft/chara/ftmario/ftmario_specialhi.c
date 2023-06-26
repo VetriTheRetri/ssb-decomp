@@ -64,7 +64,7 @@ void ftMario_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 
     if (fp->status_vars.mario.specialhi.is_air_bool == FALSE)
     {
-        if (fp->ground_or_air == air)
+        if (fp->ground_or_air == GA_Air)
         {
             func_ovl2_800D93E4(fighter_gobj);
 
@@ -110,7 +110,7 @@ void ftMario_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         if ((fp->command_vars.flags.flag1 == FALSE) || ((fp->phys_info.vel_air.y >= 0.0F)))
         {

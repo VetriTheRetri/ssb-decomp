@@ -30,7 +30,7 @@ bool32 jtgt_ovl3_80174990(GObj *item_gobj)
     }
     if (is_collide_ground != FALSE)
     {
-        ap->phys_info.vel.y = ATSTAR_BOUNCE_Y;
+        ap->phys_info.vel_air.y = ATSTAR_BOUNCE_Y;
 
         func_800269C0(0x35U);
     }

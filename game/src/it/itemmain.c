@@ -53,14 +53,14 @@ void func_ovl3_80172508(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->lr = (ip->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
+    ip->lr = (ip->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 
     func_ovl3_80172310(item_gobj);
 }
 
 void func_ovl3_80172558(Item_Struct *ip, f32 gravity, f32 terminal_velocity)
 {
-    ip->phys_info.vel.y -= gravity;
+    ip->phys_info.vel_air.y -= gravity;
 
     if (terminal_velocity < func_ovl0_800C7A84(&ip->phys_info.vel))
     {
@@ -141,7 +141,7 @@ s32 func_ovl3_801727F4(Item_Struct *ip)
 {
     s32 damage;
 
-    if (ip->is_apply_mag_stale)
+    if (ip->is_thrown)
     {
         f32 mag = vec3f_mag(&ip->phys_info.vel) * 0.1F;
 
@@ -188,7 +188,7 @@ void func_ovl3_801728D4(GObj *item_gobj)
     gOMObj_EjectGObjCommon(item_gobj);
 }
 
-void func_ovl3_80172984(GObj *item_gobj, Vec3f *vel, f32 stale, u16 flag1, u16 flag2) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2
+void func_ovl3_80172984(GObj *item_gobj, Vec3f *vel, f32 stale, u16 stat_flags, u16 stat_count) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     GObj *fighter_gobj = ip->owner_gobj;
@@ -221,25 +221,25 @@ void func_ovl3_80172984(GObj *item_gobj, Vec3f *vel, f32 stale, u16 flag1, u16 f
     vec3f_scale(&ip->phys_info.vel, ip->vel_scale);
 
     ip->times_thrown++;
-    ip->is_apply_mag_stale = TRUE;
+    ip->is_thrown = TRUE;
 
     ip->item_hit.stale = stale;
 
-    ip->item_hit.stat_flags = *(gmAttackFlags*)&flag1;
-    ip->item_hit.stat_count = flag2;
+    ip->item_hit.stat_flags = *(gmStatFlags*)&stat_flags;
+    ip->item_hit.stat_count = stat_count;
 
     ftCommon_GetHammerSetBGM(fighter_gobj);
     func_ovl3_8017275C(item_gobj);
 }
 
-extern void (*Article_Callback_Drop[])(GObj*); // Assumed to contain 45 callbacks?
+extern void (*itCommon_Drop_ProcList[It_Kind_EnumMax])(GObj*); // Assumed to contain 45 callbacks?
 
 void func_ovl3_80172AEC(GObj *item_gobj, Vec3f *vel, f32 stale)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     GObj *owner_gobj = ip->owner_gobj;
     Fighter_Struct *fp = ftGetStruct(owner_gobj);
-    void (*proc_drop)(GObj*) = Article_Callback_Drop[ip->it_kind];
+    void (*proc_drop)(GObj*) = itCommon_Drop_ProcList[ip->it_kind];
 
     if (proc_drop != NULL)
     {
@@ -250,7 +250,7 @@ void func_ovl3_80172AEC(GObj *item_gobj, Vec3f *vel, f32 stale)
     func_800269C0(ip->drop_sfx);
 }
 
-extern void (*Article_Callback_Throw[])(GObj*); 
+extern void (*itCommon_Throw_ProcList[It_Kind_EnumMax])(GObj*); 
 
 void func_ovl3_80172B78(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_throw)
 {
@@ -270,7 +270,7 @@ void func_ovl3_80172B78(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_
     {
         func_ovl2_800E806C(fp, ((is_smash_throw != FALSE) ? 9 : 6), 0);
     }
-    proc_throw = Article_Callback_Throw[ip->it_kind];
+    proc_throw = itCommon_Throw_ProcList[ip->it_kind];
 
     if (proc_throw != NULL)
     {
@@ -285,7 +285,7 @@ void func_ovl3_80172B78(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_
     func_ovl3_8017245C(item_gobj, vel, is_smash_throw);
 }
 
-extern void (*Article_Callback_Pickup[])(GObj*);
+extern void (*itCommon_Pickup_ProcList[It_Kind_EnumMax])(GObj*);
 
 // 0x80172CA4
 void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
@@ -293,7 +293,7 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     DObj *joint;
-    void (*proc_get)(GObj*);
+    void (*proc_pickup)(GObj*);
     Vec3f pos;
     s32 joint_index;
 
@@ -308,9 +308,9 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
     ip->handicap = fp->handicap;
     ip->player_number = fp->player_number;
 
-    ip->phys_info.vel.x = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.z = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
 
     ip->display_state = fp->display_state;
 
@@ -342,11 +342,11 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
 
     func_8000F988(item_gobj, ip->attributes->unk_0x0);
 
-    proc_get = Article_Callback_Pickup[ip->it_kind];
+    proc_pickup = itCommon_Pickup_ProcList[ip->it_kind];
 
-    if (proc_get != NULL)
+    if (proc_pickup != NULL)
     {
-        proc_get(item_gobj);
+        proc_pickup(item_gobj);
     }
     ftLink_SetModelPartHideShield(fighter_gobj);
 
@@ -354,13 +354,11 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
     {
         func_800269C0(0x31U);
     }
-    else
+    else if (fp->attributes->heavyget_sfx != 0x2B7)
     {
-        if (fp->attributes->heavyget_sfx != 0x2B7)
-        {
-            func_800269C0(fp->attributes->heavyget_sfx);
-        }
+        func_800269C0(fp->attributes->heavyget_sfx);
     }
+    
     func_ovl2_800E806C(fp, 6, 0);
 
     ip->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
@@ -372,11 +370,10 @@ void func_ovl3_80172E74(GObj *item_gobj) // Airborne article becomes grounded?
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = 0.0F;
+    ip->phys_info.vel_air.x = ip->phys_info.vel_air.y = ip->phys_info.vel_air.z = 0.0F;
 
     ip->is_allow_pickup = TRUE;
+
     ip->times_landed = 0;
 
     func_ovl3_801725BC(item_gobj);
@@ -397,7 +394,7 @@ void itMain_SetItemStatus(GObj *item_gobj, itStatusDesc *status_desc, s32 status
     ip->proc_reflector = status_desc[status_id].proc_reflector;
     ip->proc_damage = status_desc[status_id].proc_damage;
 
-    ip->is_apply_mag_stale = FALSE;
+    ip->is_thrown = FALSE;
 
     ip->item_hit.stat_flags.attack_group_id = ftStatus_AttackIndex_Null;
     ip->item_hit.stat_flags.is_smash_attack = ip->item_hit.stat_flags.is_ground_or_air = ip->item_hit.stat_flags.is_special_attack = FALSE;
@@ -406,7 +403,7 @@ void itMain_SetItemStatus(GObj *item_gobj, itStatusDesc *status_desc, s32 status
 }
 
 // 0x80172F98
-bool32 atCommon_CheckSetColAnimIndex(GObj *item_gobj, s32 colanim_id, s32 duration)
+bool32 itMain_CheckSetColAnimIndex(GObj *item_gobj, s32 colanim_id, s32 duration)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -424,9 +421,9 @@ void func_ovl3_80172FE0(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->phys_info.vel.x *= -0.06F;
+    ip->phys_info.vel_air.x *= -0.06F;
 
-    ip->phys_info.vel.y = (ip->phys_info.vel.y * -0.3F) + 25.0F;
+    ip->phys_info.vel_air.y = (ip->phys_info.vel_air.y * -0.3F) + 25.0F;
 }
 
  // Oh my...
@@ -481,7 +478,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
 {
     s32 unused;
     s32 index;
-    Vec3f vel; // Article's spawn velocity when falling out of a container
+    Vec3f vel; // Item's spawn velocity when falling out of a container
 
     if (D_ovl3_8018D048.unk_0x10 != 0)
     {
@@ -493,7 +490,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
             vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&gItemFileData->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
-            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE)) != NULL)
+            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM)) != NULL)
             {
                 func_ovl3_80172394(gobj, TRUE);
             }
@@ -564,11 +561,12 @@ GObj* func_ovl3_80173228(GObj *item_gobj)
     Monster_Info.monster_prev = Monster_Info.monster_curr;
     Monster_Info.monster_curr = index;
 
-    monster_gobj = func_ovl3_8016F238(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+    monster_gobj = func_ovl3_8016F238(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
     if (monster_gobj != NULL)
     {
         mp = itGetStruct(monster_gobj);
+
         mp->owner_gobj = ip->owner_gobj;
         mp->team = ip->team;
         mp->port_id = ip->port_id;
@@ -604,9 +602,9 @@ bool32 itCommon_SDefault_ProcReflector(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    if ((ip->phys_info.vel.x * fp->lr) < 0.0F)
+    if ((ip->phys_info.vel_air.x * fp->lr) < 0.0F)
     {
-        ip->phys_info.vel.x = -ip->phys_info.vel.x;
+        ip->phys_info.vel_air.x = -ip->phys_info.vel_air.x;
     }
     return FALSE;
 }

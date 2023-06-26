@@ -74,7 +74,7 @@ void func_ovl3_8017E25C(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    ap->phys_info.vel.y = ATKABIGON_DROP_VEL_Y;
+    ap->phys_info.vel_air.y = ATKABIGON_DROP_VEL_Y;
 
     joint->translate.x += ((ATKABIGON_DROP_OFF_X_MUL * rand_f32()) + ATKABIGON_DROP_OFF_X_ADD);
 
@@ -122,7 +122,7 @@ bool32 func_ovl3_8017E384(GObj *item_gobj)
     {
         ap->it_multi--;
 
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
 
         if (ap->it_multi == 0)
         {
@@ -191,7 +191,7 @@ void func_ovl3_8017E600(GObj *item_gobj)
 
     ap->item_vars.kabigon.dust_gfx_int = ATKABIGON_GFX_SPAWN_INT;
 
-    ap->phys_info.vel.y = ATKABIGON_JUMP_VEL_Y;
+    ap->phys_info.vel_air.y = ATKABIGON_JUMP_VEL_Y;
 }
 
 void func_ovl3_8017E648(GObj *item_gobj)
@@ -230,9 +230,9 @@ GObj* jtgt_ovl3_8017E6C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         func_8000BD1C(joint, itGetPData(ap, D_NF_0000B158, D_NF_00013624), 0.0F); // Linker thing
 

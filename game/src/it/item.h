@@ -19,7 +19,7 @@
 #define ITEM_MASK_SPAWN_FIGHTER 0                   // Item spawned by fighter
 #define ITEM_MASK_SPAWN_GROUND 1                    // Item spawned by stage 
 #define ITEM_MASK_SPAWN_ITEM 2                      // Item spawned by another item
-#define ITEM_MASK_SPAWN_ARTICLE 3                   // Item spawned by Pokémon / misc entity class(es?)
+#define ITEM_MASK_SPAWN_ITEM 3                   // Item spawned by Pokémon / misc entity class(es?)
 #define ITEM_MASK_SPAWN_DEFAULT 4
 
 #define ITEM_MASK_SPAWN_ALL 0xF                     // Mask all GObj classes that can spawn items?
@@ -121,7 +121,7 @@ typedef enum itKind
     It_Kind_Mew,                                // Mew
     It_Kind_MbMonsterEnd = It_Kind_Mew,         // End of Pokémon item IDs
 
-    It_Kind_CustomStart                         // Start of custom item IDs (future modding?)
+    It_Kind_EnumMax                             // Start of custom item IDs (future modding?)
 
 } itKind;
 
@@ -232,9 +232,9 @@ typedef struct _Item_Hit
     u32 can_shield : 1;                 // Item can be shielded
     u32 attack_id : 6;                  // Attack ID copied from object that spawned this item
     u16 motion_count;                   // Item's animation update number?
-    gmAttackFlags stat_flags;           // Item's status flags 
+    gmStatFlags stat_flags;             // Item's status flags 
     u16 stat_count;                     // Item's status update number
-    s32 hitbox_count;                   // Item's hitbox count (Up to 2?)
+    s32 hitbox_count;                   // Item's hitbox count, up to two
     itHitPositions hit_positions[2];    // Item hitbox position?
     gmHitCollisionRecord hit_targets[4];// Item's record of attacked targets
 
@@ -344,13 +344,13 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     struct phys_info
     {
         f32 vel_ground;                 // Item's ground velocity
-        Vec3f vel;                      // Item's aerial velocity
+        Vec3f vel_air;                  // Item's aerial velocity
 
     } phys_info;
 
     Coll_Data coll_data;                // Item's collision data
 
-    Ground_Air ground_or_air;           // Ground or air bool
+    gmCollisionGA ground_or_air;        // Ground or air bool
 
     Item_Hit item_hit;                  // Item's hitbox
     Item_Hurt item_hurt;                // Item's hurtbox
@@ -363,7 +363,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     f32 shield_collide_angle;           // Angle at which item collided with shield?
     Vec3f shield_collide_vec;           // Position of shield this item collided with?
     GObj *reflect_gobj;                 // GObj that reflected this item
-    gmAttackFlags reflect_stat_flags;   // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
+    gmStatFlags reflect_stat_flags;     // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
     u16 reflect_stat_count;             // Status update count at the time the item is reflected?
     s32 damage_last;                    // I don't know why there are at least two of these
     f32 damage_knockback;               // Angle at which article will be launched when getting hit?
@@ -371,7 +371,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     s32 damage_angle;                   // Angle of attack that hit the item
     s32 damage_element;                 // Element of attack that hit the item
     s32 lr_damage;                      // Direction of incoming attack
-    GObj *damage_gobj;                  // GObj that last dealt damage to this article?
+    GObj *damage_gobj;                  // GObj that last dealt damage to this item?
     u8 damage_team;                     // Team of attacker
     u8 damage_port;                     // Controller port of attacker
     s32 damage_player_number;           // Player number of attacker
@@ -389,19 +389,19 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     u32 is_allow_pickup : 1;            // Bool to check whether item can be picked up or not
     u32 is_hold : 1;                    // I think this is used to tell if a fighter is holding this article?
-    u32 times_landed : 2;               // Number of times item has touched the ground while not grabbed; overflows after 3
-    u32 times_thrown : 3;               // Number of times item has been dropped or thrown; overflows after 7
+    u32 times_landed : 2;               // Number of times item has touched the ground when landing, used to tell how many times item should bounce up
+    u32 times_thrown : 3;               // Number of times item has been dropped or thrown by player; overflows after 7
     u32 weight : 1;                     // 0 = item is heavy, 1 = item is light
     u32 is_damage_all : 1;              // Item ignores ownership and can damage anything?
     u32 is_attach_surface : 1;          // Item is "sticking" to a surface? Related to attach_line_id, but if it remains TRUE when there is no collision, it still falls?
-    u32 is_apply_mag_stale : 1;         // Apply magnitude and stale multiplier to damage output
+    u32 is_thrown : 1;                  // Apply magnitude and stale multiplier to damage output
     u16 attach_line_id;                 // Line ID that item is attached to? I don't understand how this works
     u32 pickup_wait : 12;               // Number of frames item can last without being picked up (if applicable)
     u32 is_allow_knockback : 1;         // Item can receive knockback velocity?
     u32 is_unused_item_bool : 1;        // Unused? Set various times, but no item process makes use of it
     u32 is_static_damage : 1;           // Ignore reflect multiplier if TRUE
 
-    itCommonAttributes *attributes;     // Pointer to attributes
+    itCommonAttributes *attributes;     // Pointer to standard attributes
 
     Color_Overlay colanim;              // Item's color animation struct
 
@@ -417,14 +417,20 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     union item_vars                     // Item-specific state variables
     {
+        // Common items
+
         itCommon_ItemVars_Taru taru;
         itCommon_ItemVars_BombHei bombhei;
         itCommon_ItemVars_Bumper bumper;
         itCommon_ItemVars_Shell shell;
         itCommon_ItemVars_MBall m_ball;
 
+        // Fighter items
+
         itFighter_ItemVars_PKFire pkfire;
         itFighter_ItemVars_LinkBomb link_bomb;
+
+        // Stage items
 
         itGround_ItemVars_Pakkun pakkun;
         itGround_ItemVars_RaceBomb gr_bomb;
@@ -433,6 +439,8 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
         itGround_ItemVars_Hitokage hitokage;
         itGround_ItemVars_Fushigibana fushigibana;
         itGround_ItemVars_Porygon porygon;
+
+        // Poké Ball Pokémon
 
         itMonster_ItemVars_Iwark iwark;
         itMonster_ItemVars_Kabigon kabigon;

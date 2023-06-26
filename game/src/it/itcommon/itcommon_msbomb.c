@@ -156,9 +156,9 @@ void func_ovl3_80176840(GObj *item_gobj)
     ap->coll_data.object_coll.bottom = -ATMSBOMB_COLL_SIZE;
     ap->coll_data.object_coll.width = ATMSBOMB_COLL_SIZE;
 
-    ap->phys_info.vel.z = 0;
-    ap->phys_info.vel.y = 0;
-    ap->phys_info.vel.x = 0;
+    ap->phys_info.vel_air.z = 0;
+    ap->phys_info.vel_air.y = 0;
+    ap->phys_info.vel_air.x = 0;
 
     joint->next->unk_0x54 = 0;
     joint->next->unk_0x8->unk_0x54 = 2;

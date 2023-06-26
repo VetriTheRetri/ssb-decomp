@@ -125,7 +125,7 @@ void ftKirby_SpecialLwUnk_DecideNextStatus(GObj *fighter_gobj, bool32 ground_or_
 
     if (!(fp->is_damage_resist) && (fp->command_vars.flags.flag1 != 0))
     {
-        if (ground_or_air == ground)
+        if (ground_or_air == GA_Ground)
         {
             ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialLwHold, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
         }
@@ -138,7 +138,7 @@ void ftKirby_SpecialLwUnk_DecideNextStatus(GObj *fighter_gobj, bool32 ground_or_
     {
         if (ftKirby_SpecialLw_CheckRelease(fighter_gobj, FALSE) == TRUE)
         {
-            (ground_or_air == ground) ? ftKirby_SpecialLwEnd_SetStatus(fighter_gobj) : ftKirby_SpecialAirLwEnd_SetStatus(fighter_gobj);
+            (ground_or_air == GA_Ground) ? ftKirby_SpecialLwEnd_SetStatus(fighter_gobj) : ftKirby_SpecialAirLwEnd_SetStatus(fighter_gobj);
 
             fp->command_vars.flags.flag2 = 0;
         }
@@ -163,7 +163,7 @@ void ftKirby_SpecialLwHold_DecideNextStatus(GObj *fighter_gobj, bool32 ground_or
 {
     if (ftKirby_SpecialLw_CheckRelease(fighter_gobj, TRUE) == TRUE)
     {
-        (ground_or_air == ground) ? ftKirby_SpecialLwEnd_SetStatus(fighter_gobj) : ftKirby_SpecialAirLwEnd_SetStatus(fighter_gobj);
+        (ground_or_air == GA_Ground) ? ftKirby_SpecialLwEnd_SetStatus(fighter_gobj) : ftKirby_SpecialAirLwEnd_SetStatus(fighter_gobj);
     }
     ftKirby_SpecialLw_UpdateColAnim(fighter_gobj);
 }

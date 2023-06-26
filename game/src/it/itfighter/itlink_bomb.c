@@ -86,8 +86,8 @@ bool32 func_ovl3_80185B84(GObj *item_gobj)
     {
         ap->lr = -ap->lr_damage;
 
-        ap->phys_info.vel.x = -ap->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_X;
-        ap->phys_info.vel.y = -ap->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_Y;
+        ap->phys_info.vel_air.x = -ap->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_X;
+        ap->phys_info.vel_air.y = -ap->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_Y;
     }
     return FALSE;
 }
@@ -96,7 +96,7 @@ bool32 func_ovl3_80185BFC(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    if ((ABSF(ap->phys_info.vel.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(ap->phys_info.vel.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
+    if ((ABSF(ap->phys_info.vel_air.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(ap->phys_info.vel_air.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
     {
         func_ovl3_80186368(item_gobj);
     }
@@ -104,8 +104,8 @@ bool32 func_ovl3_80185BFC(GObj *item_gobj)
     {
         ap->lr = -ap->lr_attack;
 
-        ap->phys_info.vel.x = -ap->lr_attack * ATLINKBOMB_HIT_RECOIL_VEL_X;
-        ap->phys_info.vel.y = ATLINKBOMB_HIT_RECOIL_VEL_Y;
+        ap->phys_info.vel_air.x = -ap->lr_attack * ATLINKBOMB_HIT_RECOIL_VEL_X;
+        ap->phys_info.vel_air.y = ATLINKBOMB_HIT_RECOIL_VEL_Y;
 
         func_ovl3_80185FD8(item_gobj);
     }
@@ -138,7 +138,7 @@ bool32 func_ovl3_80185CF0(GObj *item_gobj)
     }
     if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
-        atCommon_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+        itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ap->item_vars.link_bomb.scale_index = 1;
     }
@@ -157,13 +157,13 @@ bool32 jtgt_ovl3_80185DCC(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (ap->phys_info.vel.x != 0.0F)
+    if (ap->phys_info.vel_air.x != 0.0F)
     {
-        ap->phys_info.vel.x += (-1.0F) * ap->lr;
+        ap->phys_info.vel_air.x += (-1.0F) * ap->lr;
     }
-    if (ABSF(ap->phys_info.vel.x) < 1.0F)
+    if (ABSF(ap->phys_info.vel_air.x) < 1.0F)
     {
-        ap->phys_info.vel.x = 0;
+        ap->phys_info.vel_air.x = 0;
     }
     if (ap->lifetime == 0)
     {
@@ -171,7 +171,7 @@ bool32 jtgt_ovl3_80185DCC(GObj *item_gobj)
     }
     if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
-        atCommon_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+        itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ap->item_vars.link_bomb.scale_index = 1;
     }
@@ -210,9 +210,9 @@ void func_ovl3_80185F70(GObj *item_gobj)
 
     ap->times_landed = 0;
 
-    ap->phys_info.vel.z = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = 0.0F;
+    ap->phys_info.vel_air.z = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.x = 0.0F;
 
     func_ovl3_80173F54(ap);
     func_ovl3_80185CD4(item_gobj);
@@ -252,7 +252,7 @@ bool32 func_ovl3_80186024(GObj *item_gobj)
         }
         if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
         {
-            atCommon_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+            itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
             ap->item_vars.link_bomb.scale_index = 1;
         }
@@ -351,9 +351,9 @@ void func_ovl3_80186368(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->phys_info.vel.z = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.x = 0.0F;
+    ap->phys_info.vel_air.z = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.x = 0.0F;
 
     func_ovl3_8017279C(item_gobj);
     func_ovl3_80185A80(item_gobj);
@@ -460,9 +460,9 @@ GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
         ap->item_hit.can_rehit_shield = TRUE;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.y = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
 
         itMain_PickupSetHoldFighter(item_gobj, fighter_gobj);
     }

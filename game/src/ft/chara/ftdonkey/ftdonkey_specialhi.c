@@ -87,9 +87,9 @@ void ftDonkey_SpecialHi_SetStatusFlagGA(GObj *fighter_gobj, bool32 ground_or_air
 
     fp->status_vars.donkey.specialhi.unk_0x0 = 9;
 
-    if (ground_or_air == ground)
+    if (ground_or_air == GA_Ground)
     {
-        fp->stat_flags.is_ground_or_air = ground;
+        fp->stat_flags.is_ground_or_air = GA_Ground;
     }
 }
 

@@ -67,9 +67,9 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
         ap->item_hit.can_rehit_shield = TRUE;
 
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = 0.0F;
-        ap->phys_info.vel.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
+        ap->phys_info.vel_air.z = 0.0F;
 
         joint->mobj->anim_frame = 0;
 

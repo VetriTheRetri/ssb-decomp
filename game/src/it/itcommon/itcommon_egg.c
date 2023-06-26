@@ -273,7 +273,7 @@ GObj* itCommon_Egg_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
 
         joint->translate = *pos;
 
-        if (flags & ITEM_MASK_SPAWN_ARTICLE)
+        if (flags & ITEM_MASK_SPAWN_ITEM)
         {
             Item_Struct *spawn_ip = itGetStruct(spawn_gobj);
 
@@ -281,7 +281,7 @@ GObj* itCommon_Egg_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
             {
                 joint->next->rotate.y = PI32;
 
-                egg_ip->phys_info.vel.x = -egg_ip->phys_info.vel.x;
+                egg_ip->phys_info.vel_air.x = -egg_ip->phys_info.vel_air.x;
 
                 egg_ip->lr = -egg_ip->lr;
             }
@@ -335,9 +335,9 @@ void itEgg_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ip->phys_info.vel.x = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.z = 0.0F;
+    ip->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.z = 0.0F;
 
     ep = func_ovl2_801005C8(&joint->translate);
 

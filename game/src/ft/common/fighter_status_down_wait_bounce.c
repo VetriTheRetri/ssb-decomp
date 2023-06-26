@@ -101,7 +101,7 @@ void ftCommon_DownBounce_SetStatus(GObj *fighter_gobj)
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         ftMap_SetGround(fp);
     }

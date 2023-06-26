@@ -170,11 +170,11 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                         dist_x = ft_com->target_pos.x - this_fp->joint[ftParts_TopN_Joint]->translate.x;
                         dist_y = ft_com->target_pos.y - this_fp->joint[ftParts_TopN_Joint]->translate.y;
 
-                        if ((this_fp->ground_or_air == ground) && (this_fp->cp_level < 5))
+                        if ((this_fp->ground_or_air == GA_Ground) && (this_fp->cp_level < 5))
                         {
                             stick_range_x = (ABSF(dist_x) > 100.0F) ? (GCONTROLLER_RANGE_MAX_I / 2) : 0;
                         }
-                        else if (this_fp->ground_or_air == ground)
+                        else if (this_fp->ground_or_air == GA_Ground)
                         {
                             if ((ft_com->unk_ftcom_0x8C * 1.5F) < ABSF(dist_x))
                             {
@@ -198,7 +198,7 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
                         }
                         stick_range_y = GCONTROLLER_RANGE_MAX_I;
 
-                        if (this_fp->ground_or_air == ground)
+                        if (this_fp->ground_or_air == GA_Ground)
                         {
                             if (this_fp->status_info.status_id != ftStatus_Common_KneeBend)
                             {
@@ -313,7 +313,7 @@ void func_ovl3_80132564(Fighter_Struct *fp, s32 index)
 {
     Fighter_Com *ft_com = &fp->fighter_com;
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ft_com->input_wait = ((2 * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 2) + 1.0F);
     }
@@ -336,7 +336,7 @@ void func_ovl3_80132778(Fighter_Struct *fp, s32 index)
 {
     Fighter_Com *ft_com = &fp->fighter_com;
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ft_com->input_wait = ((4 * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 4) + 1.0F);
     }
@@ -379,11 +379,11 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
                 (D_ovl2_80131308.unk_80131308_0x2C <= other_pos_x) &&
                 (D_ovl2_80131308.unk_80131308_0x24 <= other_pos_y) &&
                 (other_pos_y < Ground_Info->cam_bound_top)) ||
-                ((this_fp->ground_or_air == ground) &&
+                ((this_fp->ground_or_air == GA_Ground) &&
                 ((other_fp->status_info.status_id == ftStatus_Common_CliffCatch) ||
                 (other_fp->status_info.status_id == ftStatus_Common_CliffWait)))) &&
                 ((this_fp->ft_kind != Ft_Kind_MetalMario) ||
-                (other_fp->ground_or_air == ground)))
+                (other_fp->ground_or_air == GA_Ground)))
                 {
                     square_xy = SQUARE(this_pos_x - other_pos_x) + SQUARE(this_pos_y - other_pos_y);
 
@@ -412,7 +412,7 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
     ft_com->ftcom_flags_0x4A_b1 = TRUE;
     ft_com->target_dist = sqrtf(distance);
 
-    if (ft_com->target_fp->ground_or_air == ground)
+    if (ft_com->target_fp->ground_or_air == GA_Ground)
     {
         ft_com->target_line_id = ft_com->target_fp->coll_data.ground_line_id;
     }

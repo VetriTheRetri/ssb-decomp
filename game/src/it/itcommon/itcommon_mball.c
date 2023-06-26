@@ -177,7 +177,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
         if (monster_gobj != NULL)
         {
@@ -222,9 +222,9 @@ void func_ovl3_8017CB84(GObj *item_gobj)
     DObj *next;
     DObj *child;
 
-    ap->phys_info.vel.x = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.z = 0.0F;
+    ap->phys_info.vel_air.x = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.z = 0.0F;
 
     next = joint->next;
     next->unk_0x54 ^= 2;
@@ -283,7 +283,7 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ARTICLE));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
         if (monster_gobj != NULL)
         {

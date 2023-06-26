@@ -99,7 +99,7 @@ void func_ovl3_80179DEC(GObj *item_gobj)
 
     ap->lifetime = ATTARU_LIFETIME;
 
-    ap->phys_info.vel.y = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
 
     itMain_SetItemStatus(item_gobj, Article_Taru_Status, 6);
 }
@@ -110,13 +110,13 @@ bool32 jtgt_ovl3_80179E28(GObj *item_gobj)
     {
         Item_Struct *ap = itGetStruct(item_gobj);
 
-        if (ap->phys_info.vel.y >= 90.0F) // Is it even possible to meet this condition? Didn't they mean ABSF(ap->phys_info.vel.y)?
+        if (ap->phys_info.vel_air.y >= 90.0F) // Is it even possible to meet this condition? Didn't they mean ABSF(ap->phys_info.vel_air.y)?
         {
             func_ovl3_80179C20(item_gobj); // This causes the barrel to smash on impact when landing from too high; doesn't seem possible to trigger
 
             return TRUE;
         }
-        else if (ap->phys_info.vel.y < 30.0F)
+        else if (ap->phys_info.vel_air.y < 30.0F)
         {
             func_ovl3_80179DEC(item_gobj);
         }
@@ -124,7 +124,7 @@ bool32 jtgt_ovl3_80179E28(GObj *item_gobj)
         {
             func_ovl0_800C7B08(&ap->phys_info.vel, &ap->coll_data.ground_angle);
 
-            ap->phys_info.vel.y *= 0.2F;
+            ap->phys_info.vel_air.y *= 0.2F;
 
             func_ovl3_80172508(item_gobj);
         }
@@ -186,11 +186,11 @@ bool32 jtgt_ovl3_8017A004(GObj *item_gobj)
     f32 roll_rotate_speed;
     f32 sqrt_vel;
 
-    ap->phys_info.vel.x += (-(atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32) * ATTARU_MUL_VEL_X);
+    ap->phys_info.vel_air.x += (-(atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32) * ATTARU_MUL_VEL_X);
 
-    ap->lr = (ap->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
+    ap->lr = (ap->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 
-    sqrt_vel = sqrtf(SQUARE(ap->phys_info.vel.x) + SQUARE(ap->phys_info.vel.y));
+    sqrt_vel = sqrtf(SQUARE(ap->phys_info.vel_air.x) + SQUARE(ap->phys_info.vel_air.y));
 
     if (sqrt_vel < ATTARU_MIN_VEL_XY)
     {
@@ -289,9 +289,9 @@ void func_ovl3_8017A30C(GObj *item_gobj)
 
     ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ap->phys_info.vel.x = 0.0F;
-    ap->phys_info.vel.y = 0.0F;
-    ap->phys_info.vel.z = 0.0F;
+    ap->phys_info.vel_air.x = 0.0F;
+    ap->phys_info.vel_air.y = 0.0F;
+    ap->phys_info.vel_air.z = 0.0F;
 
     effect_unk = func_ovl2_801005C8(&joint->translate);
 

@@ -2,7 +2,7 @@
 
 void func_ovl3_80176110(GObj *item_gobj)
 {
-    atCommon_CheckSetColAnimIndex(item_gobj, ATHAMMER_WEAR_COLANIM_ID, 0);
+    itMain_CheckSetColAnimIndex(item_gobj, ATHAMMER_WEAR_COLANIM_ID, ATHAMMER_WEAR_COLANIM_LENGTH);
 }
 
 bool32 jtgt_ovl3_80176134(GObj *item_gobj)

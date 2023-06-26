@@ -20,7 +20,7 @@ void ftCommon_Fall_SetStatus(GObj *fighter_gobj)
     }
     else
     {
-        if (fp->ground_or_air == ground)
+        if (fp->ground_or_air == GA_Ground)
         {
             ftMap_SetAir(fp);
         }

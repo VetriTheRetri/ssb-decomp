@@ -161,7 +161,7 @@ void ftKirby_ThrowFLanding_ProcPhysics(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         func_ovl2_800D8BB4(fighter_gobj);
     }
@@ -173,7 +173,7 @@ void ftKirby_ThrowFLanding_ProcMap(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftCommon_Catch_ProcMap(fighter_gobj);
     }

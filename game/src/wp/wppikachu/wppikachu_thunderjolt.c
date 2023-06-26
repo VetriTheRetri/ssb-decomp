@@ -192,29 +192,29 @@ bool32 wpPikachu_ThunderJoltGround_ProcUpdate(GObj *weapon_gobj)
         return TRUE;
     }
 
-    wp->phys_info.vel.x = cosf(DObjGetStruct(weapon_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
-    wp->phys_info.vel.y = __sinf(DObjGetStruct(weapon_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
+    wp->phys_info.vel_air.x = cosf(DObjGetStruct(weapon_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
+    wp->phys_info.vel_air.y = __sinf(DObjGetStruct(weapon_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
 
     switch (wp->weapon_vars.thunder_jolt.coll_type)
     {
     case CENTER:
-        wp->phys_info.vel.x *= wp->lr;
+        wp->phys_info.vel_air.x *= wp->lr;
         break;
 
     case WALL_UP:
     case WALL_DOWN:
         if (wp->lr == WALL_UP)
         {
-            if (wp->phys_info.vel.y < 0.0F)
+            if (wp->phys_info.vel_air.y < 0.0F)
             {
-                wp->phys_info.vel.y *= -1.0F;
+                wp->phys_info.vel_air.y *= -1.0F;
             }
         }
         if (wp->lr == WALL_DOWN)
         {
-            if (wp->phys_info.vel.y > 0.0F)
+            if (wp->phys_info.vel_air.y > 0.0F)
             {
-                wp->phys_info.vel.y *= -1.0F;
+                wp->phys_info.vel_air.y *= -1.0F;
             }
         }
         break;
@@ -647,7 +647,7 @@ bool32 wpPikachu_ThunderJoltGround_ProcReflector(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(wp, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel.x >= 0.0F) ? PI32 : 0;
+    DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel_air.x >= 0.0F) ? PI32 : 0;
 
     wpMain_VelSetLR(weapon_gobj);
 
@@ -683,7 +683,7 @@ GObj* wpPikachu_ThunderJoltGround_CreateWeapon(GObj *prev_gobj, Vec3f *pos, s32 
     switch (new_wp->weapon_vars.thunder_jolt.coll_type)
     {
     case 0:
-        new_wp->lr = (prev_wp->phys_info.vel.x >= 0.0F) ? RIGHT : LEFT;
+        new_wp->lr = (prev_wp->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 
         DObjGetStruct(new_gobj)->rotate.y = (new_wp->lr >= 0.0F) ? PI32 : 0;
         break;

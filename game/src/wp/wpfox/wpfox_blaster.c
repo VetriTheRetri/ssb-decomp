@@ -65,7 +65,7 @@ bool32 wpFox_Blaster_ProcHop(GObj *weapon_gobj)
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     func_ovl2_80103320(&DObjGetStruct(weapon_gobj)->translate);
@@ -81,7 +81,7 @@ bool32 wpFox_Blaster_ProcReflector(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(wp, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     return FALSE;
@@ -99,9 +99,9 @@ GObj* wpFox_Blaster_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel.x = wp->lr * ITBLASTER_VEL_X;
+    wp->phys_info.vel_air.x = wp->lr * ITBLASTER_VEL_X;
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel.y, wp->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
 
     func_ovl2_80103320(pos);
 

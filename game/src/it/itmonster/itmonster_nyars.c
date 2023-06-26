@@ -60,8 +60,8 @@ bool32 jtgt_ovl3_8017EFF8(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->phys_info.vel.y = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_8017EFC4(item_gobj);
 
@@ -77,7 +77,7 @@ bool32 jtgt_ovl3_8017F04C(GObj *item_gobj)
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel.y = 0.0F;
+        ap->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -104,9 +104,9 @@ GObj *jtgt_ovl3_8017F08C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel.z = 0.0F;
-        ap->phys_info.vel.x = 0.0F;
-        ap->phys_info.vel.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.z = 0.0F;
+        ap->phys_info.vel_air.x = 0.0F;
+        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -141,10 +141,10 @@ bool32 jtgt_ovl3_8017F1CC(GObj *weapon_gobj)
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    if (ip->phys_info.vel.x > 0.0F)
+    if (ip->phys_info.vel_air.x > 0.0F)
     {
         ip->lr = RIGHT;
     }
@@ -160,7 +160,7 @@ bool32 jtgt_ovl3_8017F274(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel.y, ip->phys_info.vel.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;
@@ -184,9 +184,9 @@ GObj *func_ovl3_8017F2E4(GObj *item_gobj, u8 coin_number, f32 rotate_angle)
 
     ip->weapon_vars.coin.lifetime = ATNYARS_COIN_LIFETIME;
 
-    ip->phys_info.vel.z = 0.0F;
-    ip->phys_info.vel.y = 0.0F;
-    ip->phys_info.vel.x = ATNYARS_COIN_VEL_X;
+    ip->phys_info.vel_air.z = 0.0F;
+    ip->phys_info.vel_air.y = 0.0F;
+    ip->phys_info.vel_air.x = ATNYARS_COIN_VEL_X;
 
     vec3_get_euler_rotation(&ip->phys_info.vel, 4, (((coin_number * ATYNARS_COIN_ANGLE_DIFF) + rotate_angle) * PI32) / 180.0F);
 

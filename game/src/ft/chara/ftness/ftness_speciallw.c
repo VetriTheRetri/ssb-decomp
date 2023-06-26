@@ -37,7 +37,7 @@ void ftNess_SpecialLw_Proc_Absorb(GObj *fighter_gobj)
 
     func_ovl2_800EB528(fp->joint[ftParts_TopN_Joint]);
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         ftNess_SpecialLwHit_SetStatus(fighter_gobj);
     }

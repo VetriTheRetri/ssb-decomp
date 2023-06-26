@@ -136,7 +136,7 @@ typedef struct _Weapon_Hit
     s32 damage; // 0x4
     f32 stale; // Multiplies damage
     s32 element; // 0xC // Placed AFTER offset?
-    Vec3f offset[2]; // 0x10 - 0x24   
+    Vec3f offset[2]; // 0x10 - 0x24
     f32 size;
     s32 angle;
     u32 knockback_scale; // Unconfirmed
@@ -157,7 +157,7 @@ typedef struct _Weapon_Hit
     u32 can_shield : 1;
     u32 attack_id : 6;
     u16 motion_count;
-    gmAttackFlags stat_flags;
+    gmStatFlags stat_flags;
     u16 stat_count;
     s32 hitbox_count;
     wpHitPositions hit_positions[2];
@@ -180,13 +180,13 @@ typedef struct _Weapon_Struct
     struct
     {
         f32 vel_ground;                 // Weapon's ground velocity
-        Vec3f vel;                      // Weapon's aerial velocity
+        Vec3f vel_air;                  // Weapon's aerial velocity
 
     } phys_info;
 
     Coll_Data coll_data;                // Weapon's collision data
 
-    Ground_Air ground_or_air;           // Ground or air bool
+    gmCollisionGA ground_or_air;        // Ground or air bool
 
     Weapon_Hit weapon_hit;              // Weapon's hitbox
 
@@ -197,14 +197,14 @@ typedef struct _Weapon_Struct
     f32 shield_collide_angle;           // Angle at which item collided with shield?
     Vec3f shield_collide_vec;           // Position of shield this item collided with?
     GObj *reflect_gobj;                 // GObj that reflected this weapon
-    gmAttackFlags reflect_stat_flags;   // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
+    gmStatFlags reflect_stat_flags;     // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
     u16 reflect_stat_count;             // Status update count at the time the item is reflected?
     GObj *absorb_gobj;                  // GObj that absorbed this item
 
     u32 is_hitlag_victim : 1;           // Weapon can deal hitlag to target
     u32 is_hitlag_item : 1;             // Weapon is in hitlag
 
-    u32 group_id;                       // Weapon's group, identical groups = hitboxes are linked?
+    u32 group_id;                       // Weapon's group, identical group IDs => hitbox victim records across are linked?
 
     s32 lifetime;                       // Weapon's duration in frames
 

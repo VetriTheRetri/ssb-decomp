@@ -162,7 +162,7 @@ void ftCaptain_SpecialHi_ProcCatch(GObj *fighter_gobj)
 
     catch_fp = ftGetStruct(search_gobj); // No NULL check, might be dangerous
 
-    if (catch_fp->ground_or_air == air)
+    if (catch_fp->ground_or_air == GA_Air)
     {
         fp->status_vars.common.capturecaptain.capture_flag |= FTCOMMON_CAPTURECAPTAIN_MASK_NOUPDATE;
         fp->x192_flag_b3 = FALSE;

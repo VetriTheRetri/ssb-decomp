@@ -46,26 +46,26 @@ void itManager_AllocUserData(void) // Many linker things here
 // 0x8016DFAC
 Item_Struct* itManager_GetStructSetNextAlloc(void) // Set global Article user_data link pointer to next member
 {
-    Item_Struct *next_article = itManager_Global_CurrentUserData;
-    Item_Struct *current_article;
+    Item_Struct *next_item = itManager_Global_CurrentUserData;
+    Item_Struct *current_item;
 
-    if (next_article == NULL)
+    if (next_item == NULL)
     {
         return NULL;
     }
-    current_article = next_article;
+    current_item = next_item;
 
-    itManager_Global_CurrentUserData = next_article->ip_alloc_next;
+    itManager_Global_CurrentUserData = next_item->ip_alloc_next;
 
-    return current_article;
+    return current_item;
 }
 
 // 0x8016DFDC
-void itManager_SetPrevAlloc(Item_Struct *ap) // Set global Article user_data link pointer to previous member
+void itManager_SetPrevAlloc(Item_Struct *ip) // Set global Article user_data link pointer to previous member
 {
-    ap->ip_alloc_next = itManager_Global_CurrentUserData;
+    ip->ip_alloc_next = itManager_Global_CurrentUserData;
 
-    itManager_Global_CurrentUserData = ap;
+    itManager_Global_CurrentUserData = ip;
 }
 
 void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 arg3)
@@ -180,7 +180,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->vel_scale = attributes->vel_scale * 0.01F;
 
     ap->is_damage_all = FALSE;
-    ap->is_apply_mag_stale = FALSE; // Applies magnitude and stale multiplier when hitbox is active?
+    ap->is_thrown = FALSE; // Applies magnitude and stale multiplier when hitbox is active?
     ap->is_attach_surface = FALSE;
 
     ap->rotate_speed = 0.0F;
@@ -316,12 +316,12 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
             func_ovl2_800DF058(item_gobj, wpGetStruct(spawn_gobj)->coll_data.p_translate, &wpGetStruct(spawn_gobj)->coll_data);
             break;
 
-        case ITEM_MASK_SPAWN_ARTICLE:
+        case ITEM_MASK_SPAWN_ITEM:
             func_ovl2_800DF058(item_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
             break;
         }
     }
-    ap->ground_or_air = air;
+    ap->ground_or_air = GA_Air;
 
     itManager_UpdateHitPositions(item_gobj);
     func_ovl3_80172FBC(item_gobj);
@@ -775,9 +775,9 @@ void itManager_ProcItemMain(GObj *item_gobj)
 
         if (ap->hitlag_timer == 0)
         {
-            translate->x += ap->phys_info.vel.x;
-            translate->y += ap->phys_info.vel.y;
-            translate->z += ap->phys_info.vel.z;
+            translate->x += ap->phys_info.vel_air.x;
+            translate->y += ap->phys_info.vel_air.y;
+            translate->z += ap->phys_info.vel_air.z;
         }
         ap->coll_data.pos_prev.x = translate->x - ap->coll_data.pos_curr.x;
         ap->coll_data.pos_prev.y = translate->y - ap->coll_data.pos_curr.y;
@@ -794,7 +794,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
             translate->z += coll_data->pos_correct.z;
         }
 
-        else if ((ap->ground_or_air == ground) && (ap->coll_data.ground_line_id != -1) && (ap->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(ap->coll_data.ground_line_id) != FALSE))
+        else if ((ap->ground_or_air == GA_Ground) && (ap->coll_data.ground_line_id != -1) && (ap->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(ap->coll_data.ground_line_id) != FALSE))
         {
             func_ovl2_800FA7B8(ap->coll_data.ground_line_id, &ap->coll_data.pos_correct);
 
@@ -1103,7 +1103,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
     {
         attack_ap->hit_victim_damage = damage;
     }
-    vel = (attack_ap->phys_info.vel.x < 0.0F) ? -attack_ap->phys_info.vel.x : attack_ap->phys_info.vel.x;
+    vel = (attack_ap->phys_info.vel_air.x < 0.0F) ? -attack_ap->phys_info.vel_air.x : attack_ap->phys_info.vel_air.x;
 
     if (vel < 5.0F)
     {
@@ -1111,7 +1111,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
     }
     else
     {
-        lr = (attack_ap->phys_info.vel.x < 0) ? LEFT : RIGHT;
+        lr = (attack_ap->phys_info.vel_air.x < 0) ? LEFT : RIGHT;
 
         attack_ap->lr_attack = lr;
     }
@@ -1125,7 +1125,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
             defend_ap->damage_angle = attack_it_hit->angle;
             defend_ap->damage_element = attack_it_hit->element;
 
-            vel = (attack_ap->phys_info.vel.x < 0.0F) ? -attack_ap->phys_info.vel.x : attack_ap->phys_info.vel.x;
+            vel = (attack_ap->phys_info.vel_air.x < 0.0F) ? -attack_ap->phys_info.vel_air.x : attack_ap->phys_info.vel_air.x;
 
             if (vel < 5.0F)
             {
@@ -1133,7 +1133,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
             }
             else
             {
-                lr = (attack_ap->phys_info.vel.x < 0) ? RIGHT : LEFT;
+                lr = (attack_ap->phys_info.vel_air.x < 0) ? RIGHT : LEFT;
 
                 defend_ap->lr_hit = lr;
             }
@@ -1216,7 +1216,7 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
             ap->damage_angle = wp_hit->angle;
             ap->damage_element = wp_hit->element;
 
-            vel = (ip->phys_info.vel.x < 0.0F) ? -ip->phys_info.vel.x : ip->phys_info.vel.x;
+            vel = (ip->phys_info.vel_air.x < 0.0F) ? -ip->phys_info.vel_air.x : ip->phys_info.vel_air.x;
 
             if (vel < 5.0F)
             {
@@ -1224,7 +1224,7 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
             }
             else
             {
-                lr = (ip->phys_info.vel.x < 0) ? RIGHT : LEFT;
+                lr = (ip->phys_info.vel_air.x < 0) ? RIGHT : LEFT;
 
                 ap->lr_hit = lr;
             }
@@ -1313,7 +1313,7 @@ void itManager_SearchHitFighter(GObj *item_gobj) // Check fighters for hit detec
                                 {
                                     ft_hit = &fp->fighter_hit[i];
 
-                                    if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ap->ground_or_air == air) && (ft_hit->is_hit_air) || (ap->ground_or_air == ground) && (ft_hit->is_hit_ground)))
+                                    if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ap->ground_or_air == GA_Air) && (ft_hit->is_hit_air) || (ap->ground_or_air == GA_Ground) && (ft_hit->is_hit_ground)))
                                     {
                                         fighter_victim_flags.is_interact_hurt = fighter_victim_flags.is_interact_shield = FALSE;
 
@@ -1658,7 +1658,7 @@ void itManager_ProcUpdateHitCollisions(GObj *item_gobj)
     }
     if (ap->hit_shield_damage != 0)
     {
-        if ((ap->item_hit.can_hop) && (ap->ground_or_air == air))
+        if ((ap->item_hit.can_hop) && (ap->ground_or_air == GA_Air))
         {
             if (ap->shield_collide_angle < ITEM_HOP_ANGLE_DEFAULT)
             {

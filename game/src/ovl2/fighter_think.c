@@ -276,7 +276,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
         break;
 
     case ftScriptEvent_Kind_SetAirJumpAdd:
-        fp->ground_or_air = air;
+        fp->ground_or_air = GA_Air;
 
         fp->phys_info.vel_air.z = DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
 
@@ -289,7 +289,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
     case ftScriptEvent_Kind_SetAirJumpMax:
         attributes = fp->attributes;
 
-        fp->ground_or_air = air;
+        fp->ground_or_air = GA_Air;
 
         fp->phys_info.vel_air.z = DObjGetStruct(fighter_gobj)->translate.z = 0.0F;
 
@@ -1395,7 +1395,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
         this_fp->phys_info.vel_jostle_x = this_fp->phys_info.vel_jostle_z = 0.0F;
 
-        if ((this_fp->ground_or_air == ground) && !(this_fp->x18F_flag_b4))
+        if ((this_fp->ground_or_air == GA_Ground) && !(this_fp->x18F_flag_b4))
         {
             other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
@@ -1408,7 +1408,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
                 if ((fighter_gobj != other_gobj) && (other_fp->capture_gobj == NULL))
                 {
-                    if ((other_fp->ground_or_air == ground) && (this_fp->coll_data.ground_line_id == other_fp->coll_data.ground_line_id))
+                    if ((other_fp->ground_or_air == GA_Ground) && (this_fp->coll_data.ground_line_id == other_fp->coll_data.ground_line_id))
                     {
                         this_attributes = this_fp->attributes;
                         other_attributes = other_fp->attributes;
@@ -1638,7 +1638,7 @@ void func_ovl2_800E2048(GObj *fighter_gobj)
 
         if ((fp->phys_info.vel_damage_air.x != 0.0F) || (vel_damage_air->y != 0.0F))
         {
-            if (fp->ground_or_air == air)
+            if (fp->ground_or_air == GA_Air)
             {
                 vel_damage_new.z = atan2f(vel_damage_air->y, vel_damage_air->x);
                 vel_damage_new.y = vel_damage_air->x;
@@ -1676,7 +1676,7 @@ void func_ovl2_800E2048(GObj *fighter_gobj)
     }
     vec3f_sub(&fp->coll_data.pos_prev, topn_translate, coll_translate);
 
-    if ((fp->ground_or_air == ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(fp->coll_data.ground_line_id) != 0))
+    if ((fp->ground_or_air == GA_Ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2) && (func_ovl2_800FC67C(fp->coll_data.ground_line_id) != 0))
     {
         func_ovl2_800FA7B8(fp->coll_data.ground_line_id, &fp->coll_data.pos_correct);
         vec3f_add_to(topn_translate, &fp->coll_data.pos_correct);
@@ -1886,7 +1886,7 @@ void func_ovl2_800E287C(GObj *attacker_gobj, Fighter_Struct *fp, Fighter_Hit *ft
     {
         fp->shield_attack_damage = ft_hit->damage;
 
-        if ((ft_hit->clang) && (fp->ground_or_air == ground))
+        if ((ft_hit->clang) && (fp->ground_or_air == GA_Ground))
         {
             fp->attack_rebound = (fp->shield_attack_damage * 1.62F) + 4.0F;
 
@@ -2149,7 +2149,7 @@ void func_ovl2_800E3048(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Fighter
     {
         fp->shield_damage = damage;
 
-        fp->lr_shield = (ip->phys_info.vel.x < 0.0F) ? RIGHT : LEFT;
+        fp->lr_shield = (ip->phys_info.vel_air.x < 0.0F) ? RIGHT : LEFT;
 
         fp->shield_port_id = ip->port_id;
     }
@@ -2348,7 +2348,7 @@ void func_ovl2_800E36F8(Item_Struct *ap, Item_Hit *it_hit, s32 hitbox_id, Fighte
     {
         fp->shield_damage = damage;
 
-        fp->lr_shield = (ap->phys_info.vel.x < 0.0F) ? RIGHT : LEFT;
+        fp->lr_shield = (ap->phys_info.vel_air.x < 0.0F) ? RIGHT : LEFT;
 
         fp->shield_port_id = ap->port_id;
     }
@@ -2440,13 +2440,13 @@ void func_ovl2_800E39B0(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
         {
             ap->hit_victim_damage = damage_again;
         }
-        if (ABSF(ap->phys_info.vel.x) < 5.0F)
+        if (ABSF(ap->phys_info.vel_air.x) < 5.0F)
         {
             ap->lr_attack = lr_attack = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(item_gobj)->translate.x) ? LEFT : RIGHT;
         }
         else
         {
-            lr_attack = (ap->phys_info.vel.x < 0) ? LEFT : RIGHT;
+            lr_attack = (ap->phys_info.vel_air.x < 0) ? LEFT : RIGHT;
 
             ap->lr_attack = lr_attack;
         }
@@ -2761,13 +2761,13 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         this_fp->damage_angle = wp_hit->angle;
         this_fp->damage_element = wp_hit->element;
 
-        if (ABSF(ip->phys_info.vel.x) < 5.0F)
+        if (ABSF(ip->phys_info.vel_air.x) < 5.0F)
         {
             this_fp->lr_damage = lr_damage = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(attacker_gobj)->translate.x) ? RIGHT : LEFT;
         }
         else
         {
-            lr_damage = (ip->phys_info.vel.x < 0) ? RIGHT : LEFT;
+            lr_damage = (ip->phys_info.vel_air.x < 0) ? RIGHT : LEFT;
 
             this_fp->lr_damage = lr_damage;
         }
@@ -2796,13 +2796,13 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         this_fp->damage_angle = it_hit->angle;
         this_fp->damage_element = it_hit->element;
 
-        if (ABSF(ap->phys_info.vel.x) < 5.0F)
+        if (ABSF(ap->phys_info.vel_air.x) < 5.0F)
         {
             this_fp->lr_damage = lr_damage = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(attacker_gobj)->translate.x) ? RIGHT : LEFT;
         }
         else
         {
-            lr_damage = (ap->phys_info.vel.x < 0) ? RIGHT : LEFT;
+            lr_damage = (ap->phys_info.vel_air.x < 0) ? RIGHT : LEFT;
 
             this_fp->lr_damage = lr_damage;
         }
@@ -2926,7 +2926,7 @@ void ftObjectProc_SearchFighterHit(GObj *this_gobj)
 
                     if (other_ft_hit->update_state != gmHitCollision_UpdateState_Disable)
                     {
-                        if ((this_fp->ground_or_air == air) && (other_ft_hit->is_hit_air) || (this_fp->ground_or_air == ground) && (other_ft_hit->is_hit_ground))
+                        if ((this_fp->ground_or_air == GA_Air) && (other_ft_hit->is_hit_air) || (this_fp->ground_or_air == GA_Ground) && (other_ft_hit->is_hit_ground))
                         {
                             these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
 
@@ -2959,7 +2959,7 @@ void ftObjectProc_SearchFighterHit(GObj *this_gobj)
                 {
                     k = 0;
 
-                    if ((is_check_self != FALSE) && (this_gobj != other_fp->capture_gobj) && (other_fp->ground_or_air == ground) && (this_fp->ground_or_air == ground) && !(this_fp->x192_flag_b2))
+                    if ((is_check_self != FALSE) && (this_gobj != other_fp->capture_gobj) && (other_fp->ground_or_air == GA_Ground) && (this_fp->ground_or_air == GA_Ground) && !(this_fp->x192_flag_b2))
                     {
                         if ((this_fp->throw_gobj == NULL) || (other_gobj != this_fp->throw_gobj) && (((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE)) || (((other_fp->throw_gobj != NULL) ? other_fp->throw_team : other_fp->team) != this_fp->throw_team)))
                         {
@@ -2971,7 +2971,7 @@ void ftObjectProc_SearchFighterHit(GObj *this_gobj)
 
                                 if (this_ft_hit->update_state != gmHitCollision_UpdateState_Disable)
                                 {
-                                    if ((other_fp->ground_or_air == air) && (this_ft_hit->is_hit_air) || (other_fp->ground_or_air == ground) && (this_ft_hit->is_hit_ground))
+                                    if ((other_fp->ground_or_air == GA_Air) && (this_ft_hit->is_hit_air) || (other_fp->ground_or_air == GA_Ground) && (this_ft_hit->is_hit_ground))
                                     {
                                         those_flags.is_interact_hurt = those_flags.is_interact_shield = FALSE;
 
@@ -3142,7 +3142,7 @@ void ftObjectProc_SearchItemHit(GObj *fighter_gobj)
                             {
                                 ft_hit = &fp->fighter_hit[i];
 
-                                if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ip->ground_or_air == air) && (ft_hit->is_hit_air) || (ip->ground_or_air == ground) && (ft_hit->is_hit_ground)))
+                                if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ip->ground_or_air == GA_Air) && (ft_hit->is_hit_air) || (ip->ground_or_air == GA_Ground) && (ft_hit->is_hit_ground)))
                                 {
                                     fighter_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 
@@ -3328,7 +3328,7 @@ void ftObjectProc_SearchArticleHit(GObj *fighter_gobj)
                             {
                                 ft_hit = &fp->fighter_hit[i];
 
-                                if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ap->ground_or_air == air) && (ft_hit->is_hit_air) || (ap->ground_or_air == ground) && (ft_hit->is_hit_ground)))
+                                if ((ft_hit->update_state != gmHitCollision_UpdateState_Disable) && ((ap->ground_or_air == GA_Air) && (ft_hit->is_hit_air) || (ap->ground_or_air == GA_Ground) && (ft_hit->is_hit_ground)))
                                 {
                                     fighter_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 
@@ -3460,7 +3460,7 @@ extern Ground_Hit D_ovl2_80128D30[6] =
 // 0x800E5C30
 bool32 grHitCollision_HitCheckGetPointer(Fighter_Struct *fp, Ground_Hit **p_gr_hit)
 {
-    if ((fp->hotfloor_wait == 0) && (fp->ground_or_air == ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
+    if ((fp->hotfloor_wait == 0) && (fp->ground_or_air == GA_Ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
     {
         switch (fp->coll_data.ground_flags & 0xFFFF00FF)
         {
@@ -3570,9 +3570,9 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 
             if (ft_hit->update_state != gmHitCollision_UpdateState_Disable)
             {
-                if ((other_fp->ground_or_air == air) && (!ft_hit->is_hit_air)) continue; // Why is it breaking the previously established standard for this type of check now???
+                if ((other_fp->ground_or_air == GA_Air) && (!ft_hit->is_hit_air)) continue; // Why is it breaking the previously established standard for this type of check now???
 
-                if ((other_fp->ground_or_air == ground) && (!ft_hit->is_hit_ground)) continue; // ???
+                if ((other_fp->ground_or_air == GA_Ground) && (!ft_hit->is_hit_ground)) continue; // ???
 
                 catch_mask.is_interact_hurt = catch_mask.is_interact_shield = 0, catch_mask.interact_mask = GMHITCOLLISION_MASK_ALL;
 
@@ -4226,8 +4226,8 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     s32 anim_flags_update;
     s32 anim_flags_bak;
     s32 var_s0_2;
-    gmAttackFlags status_flags;
-    gmAttackFlags attack_flags;
+    gmStatFlags status_flags;
+    gmStatFlags attack_flags;
     s32 var_v0;
     s32 anim_id;
     void *event_script_ptr;
@@ -4341,7 +4341,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 
     fp->damage_mul = 1.0F;
 
-    if ((fp->ground_or_air == ground) && !(flags & FTSTATUPDATE_DAMAGEPORT_PRESERVE))
+    if ((fp->ground_or_air == GA_Ground) && !(flags & FTSTATUPDATE_DAMAGEPORT_PRESERVE))
     {
         fp->damage_port_id = -1;
     }

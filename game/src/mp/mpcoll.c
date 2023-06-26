@@ -447,7 +447,7 @@ bool32 func_ovl2_800DA294(Coll_Data *coll_data)
 
     wall_collide = (coll_data->wall_flag != D_ovl2_80131398) ? func_ovl2_800F8974(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) : func_ovl2_800F7F00(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL);
 
-    if ((wall_collide != FALSE) && (test_line_id != ground_line_id))
+    if ((wall_collide != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -460,7 +460,7 @@ bool32 func_ovl2_800DA294(Coll_Data *coll_data)
 
     wall_collide = (coll_data->wall_flag != D_ovl2_80131398) ? func_ovl2_800F8974(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) : func_ovl2_800F7F00(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL);
 
-    if ((wall_collide != FALSE) && (test_line_id != ground_line_id))
+    if ((wall_collide != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -473,7 +473,7 @@ bool32 func_ovl2_800DA294(Coll_Data *coll_data)
 
     wall_collide = (coll_data->wall_flag != D_ovl2_80131398) ? func_ovl2_800F8974(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) : func_ovl2_800F7F00(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL);
 
-    if ((wall_collide != FALSE) && (test_line_id != ground_line_id))
+    if ((wall_collide != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -484,7 +484,7 @@ bool32 func_ovl2_800DA294(Coll_Data *coll_data)
     sp40.x = translate->x + object_coll->width;
     sp40.y = translate->y + object_coll->center;
 
-    if ((func_ovl2_800F7F00(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != ground_line_id))
+    if ((func_ovl2_800F7F00(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -495,7 +495,7 @@ bool32 func_ovl2_800DA294(Coll_Data *coll_data)
     sp40.x = translate->x + object_coll->width;
     sp40.y = translate->y + object_coll->center;
 
-    if ((func_ovl2_800F7F00(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != ground_line_id))
+    if ((func_ovl2_800F7F00(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -645,7 +645,7 @@ bool32 func_ovl2_800DAAA8(Coll_Data *coll_data)
 
     wall_collide = (coll_data->wall_flag != D_ovl2_80131398) ? func_ovl2_800F769C(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) : func_ovl2_800F6B58(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL);
 
-    if ((wall_collide != FALSE) && (test_line_id != ground_line_id))
+    if ((wall_collide != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -658,7 +658,7 @@ bool32 func_ovl2_800DAAA8(Coll_Data *coll_data)
 
     wall_collide = (coll_data->wall_flag != D_ovl2_80131398) ? func_ovl2_800F769C(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) : func_ovl2_800F6B58(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL);
 
-    if ((wall_collide != FALSE) && (test_line_id != ground_line_id))
+    if ((wall_collide != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -671,7 +671,7 @@ bool32 func_ovl2_800DAAA8(Coll_Data *coll_data)
 
     wall_collide = (coll_data->wall_flag != D_ovl2_80131398) ? func_ovl2_800F769C(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) : func_ovl2_800F6B58(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL);
 
-    if ((wall_collide != FALSE) && (test_line_id != ground_line_id))
+    if ((wall_collide != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -682,7 +682,7 @@ bool32 func_ovl2_800DAAA8(Coll_Data *coll_data)
     sp40.x = translate->x - object_coll->width;
     sp40.y = translate->y + object_coll->center;
 
-    if ((func_ovl2_800F6B58(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != ground_line_id))
+    if ((func_ovl2_800F6B58(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -693,7 +693,7 @@ bool32 func_ovl2_800DAAA8(Coll_Data *coll_data)
     sp40.x = translate->x - object_coll->width;
     sp40.y = translate->y + object_coll->center;
 
-    if ((func_ovl2_800F6B58(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != ground_line_id))
+    if ((func_ovl2_800F6B58(&sp4C, &sp40, NULL, &test_line_id, NULL, NULL) != FALSE) && (test_line_id != GA_Ground_line_id))
     {
         func_ovl2_800D951C(test_line_id);
 
@@ -2403,7 +2403,7 @@ void func_ovl2_800DE150(GObj *fighter_gobj)
     Vec3f sp30;
     f32 sp2C;
 
-    if (fp->ground_or_air == ground)
+    if (fp->ground_or_air == GA_Ground)
     {
         if ((fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2) && (fp->hitlag_timer <= 0))
         {
@@ -2850,7 +2850,7 @@ void func_ovl2_800DEDF0(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
         {
@@ -2867,7 +2867,7 @@ void func_ovl2_800DEE54(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->ground_or_air == air)
+    if (fp->ground_or_air == GA_Air)
     {
         ftCommon_Fall_SetStatus(fighter_gobj);
     }
@@ -2878,16 +2878,16 @@ void ftMap_SetGround(Fighter_Struct *fp)
 {
     fp->phys_info.vel_ground.x = fp->phys_info.vel_air.x * fp->lr;
 
-    fp->ground_or_air = ground;
+    fp->ground_or_air = GA_Ground;
 
     fp->jumps_used = 0;
 
-    fp->stat_flags.is_ground_or_air = ground; // Ground/Air bool?
+    fp->stat_flags.is_ground_or_air = GA_Ground; // Ground/Air bool?
 }
 
 void ftMap_SetAir(Fighter_Struct *fp)
 {
-    fp->ground_or_air = air;
+    fp->ground_or_air = GA_Air;
 
     fp->phys_info.vel_air.z = fp->joint[ftParts_TopN_Joint]->translate.z = 0.0F;
 

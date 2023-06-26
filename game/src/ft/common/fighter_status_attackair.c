@@ -75,7 +75,6 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
     u32 is_have_attack_flag;
     f32 angle;
     bool32 is_goto_shoot = FALSE;
-    Vec3f vel;
 
     if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
@@ -91,9 +90,7 @@ bool32 ftCommon_AttackAir_CheckInterruptCommon(GObj *fighter_gobj)
 
                         return TRUE;
                     }
-                    else vel.x = vel.y = vel.z = 0.0F;
-
-                    func_ovl3_80172AEC(fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+                    else ftSetupDropItem(fp);
 
                     return FALSE;
                 }

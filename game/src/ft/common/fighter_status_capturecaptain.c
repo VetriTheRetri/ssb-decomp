@@ -60,11 +60,7 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     if ((this_fp->item_hold != NULL) && (itGetStruct(this_fp->item_hold)->weight == It_Weight_Heavy))
     {
-        Vec3f vel;
-
-        vel.x = vel.y = vel.z = 0.0F;
-
-        func_ovl3_80172AEC(this_fp->item_hold, &vel, ITEM_STALE_DEFAULT);
+        ftSetupDropItem(this_fp);
     }
     if (this_fp->catch_gobj != NULL)
     {
@@ -80,7 +76,7 @@ void ftCommon_CaptureCaptain_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 
     this_fp->status_vars.common.capturecaptain.capture_flag = 0;
 
-    if (this_fp->ground_or_air != air)
+    if (this_fp->ground_or_air != GA_Air)
     {
         this_fp->status_vars.common.capturecaptain.capture_flag |= FTCOMMON_CAPTURECAPTAIN_MASK_NOUPDATE;
 

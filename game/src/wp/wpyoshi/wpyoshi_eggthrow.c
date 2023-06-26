@@ -62,9 +62,9 @@ void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from
     wp->weapon_hit.can_hop = FALSE;
     wp->weapon_hit.can_reflect = FALSE;
 
-    wp->phys_info.vel.z = 0.0F;
-    wp->phys_info.vel.y = 0.0F;
-    wp->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel_air.z = 0.0F;
+    wp->phys_info.vel_air.y = 0.0F;
+    wp->phys_info.vel_air.x = 0.0F;
 
     wp->weapon_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
@@ -89,9 +89,9 @@ void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes f
     wp->weapon_hit.can_reflect = FALSE;
     wp->weapon_hit.can_shield = FALSE;
 
-    wp->phys_info.vel.z = 0.0F;
-    wp->phys_info.vel.y = 0.0F;
-    wp->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel_air.z = 0.0F;
+    wp->phys_info.vel_air.y = 0.0F;
+    wp->phys_info.vel_air.x = 0.0F;
 
     wp->weapon_hit.size = ITEGGTHROW_EXPLODE_SIZE;
 
@@ -128,8 +128,8 @@ void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 
     angle = (wp->weapon_vars.egg_throw.lr > 0) ? (ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
 
-    wp->phys_info.vel.y = __sinf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
-    wp->phys_info.vel.x = cosf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
+    wp->phys_info.vel_air.y = __sinf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
+    wp->phys_info.vel_air.x = cosf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
 
     wp->weapon_vars.egg_throw.angle = F_DEG_TO_RAD((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD);
 
@@ -271,8 +271,8 @@ GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     wp->is_camera_follow = TRUE;
 
-    wp->phys_info.vel.y = 0.0F;
-    wp->phys_info.vel.x = 0.0F;
+    wp->phys_info.vel_air.y = 0.0F;
+    wp->phys_info.vel_air.x = 0.0F;
 
     wp->weapon_vars.egg_throw.is_spin = wp->weapon_vars.egg_throw.is_throw;
     wp->weapon_vars.egg_throw.lr = fp->lr;
