@@ -169,7 +169,7 @@ glabel func_ovl52_80131C38
   /* 1754C0 80131D00 24A5DF34 */     addiu $a1, $a1, %lo(func_8000DF34)
   /* 1754C4 80131D04 02002025 */        or $a0, $s0, $zero
   /* 1754C8 80131D08 24060001 */     addiu $a2, $zero, 1
-  /* 1754CC 80131D0C 0C002062 */       jal func_80008188
+  /* 1754CC 80131D0C 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1754D0 80131D10 24070001 */     addiu $a3, $zero, 1
   /* 1754D4 80131D14 8FBF0024 */        lw $ra, 0x24($sp)
   /* 1754D8 80131D18 8FB00020 */        lw $s0, 0x20($sp)
@@ -233,7 +233,7 @@ glabel func_ovl52_80131D28
   /* 1755B0 80131DF0 24A5DF34 */     addiu $a1, $a1, %lo(func_8000DF34)
   /* 1755B4 80131DF4 02002025 */        or $a0, $s0, $zero
   /* 1755B8 80131DF8 24060001 */     addiu $a2, $zero, 1
-  /* 1755BC 80131DFC 0C002062 */       jal func_80008188
+  /* 1755BC 80131DFC 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1755C0 80131E00 24070001 */     addiu $a3, $zero, 1
   /* 1755C4 80131E04 8FBF0024 */        lw $ra, 0x24($sp)
   /* 1755C8 80131E08 8FB00020 */        lw $s0, 0x20($sp)
@@ -297,7 +297,7 @@ glabel func_ovl52_80131E18
   /* 1756A0 80131EE0 24A5DF34 */     addiu $a1, $a1, %lo(func_8000DF34)
   /* 1756A4 80131EE4 02002025 */        or $a0, $s0, $zero
   /* 1756A8 80131EE8 24060001 */     addiu $a2, $zero, 1
-  /* 1756AC 80131EEC 0C002062 */       jal func_80008188
+  /* 1756AC 80131EEC 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1756B0 80131EF0 24070001 */     addiu $a3, $zero, 1
   /* 1756B4 80131EF4 8FBF0024 */        lw $ra, 0x24($sp)
   /* 1756B8 80131EF8 8FB00020 */        lw $s0, 0x20($sp)
@@ -361,7 +361,7 @@ glabel func_ovl52_80131F08
   /* 175790 80131FD0 24A5DF34 */     addiu $a1, $a1, %lo(func_8000DF34)
   /* 175794 80131FD4 02002025 */        or $a0, $s0, $zero
   /* 175798 80131FD8 24060001 */     addiu $a2, $zero, 1
-  /* 17579C 80131FDC 0C002062 */       jal func_80008188
+  /* 17579C 80131FDC 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1757A0 80131FE0 24070001 */     addiu $a3, $zero, 1
   /* 1757A4 80131FE4 8FBF0024 */        lw $ra, 0x24($sp)
   /* 1757A8 80131FE8 8FB00020 */        lw $s0, 0x20($sp)

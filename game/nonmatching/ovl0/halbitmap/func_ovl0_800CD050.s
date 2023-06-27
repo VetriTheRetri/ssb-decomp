@@ -25,7 +25,7 @@ glabel func_ovl0_800CD050
   /* 048A84 800CD0A4 93A6004F */       lbu $a2, 0x4f($sp)
   /* 048A88 800CD0A8 50A00004 */      beql $a1, $zero, .L800CD0BC
   /* 048A8C 800CD0AC 02001025 */        or $v0, $s0, $zero
-  /* 048A90 800CD0B0 0C002062 */       jal func_80008188
+  /* 048A90 800CD0B0 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 048A94 800CD0B4 8FA70054 */        lw $a3, 0x54($sp)
   /* 048A98 800CD0B8 02001025 */        or $v0, $s0, $zero
   .L800CD0BC:

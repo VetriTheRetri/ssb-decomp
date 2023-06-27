@@ -2296,7 +2296,7 @@ glabel func_ovl30_80133A88
   /* 14F6C0 80133B50 24A539C4 */     addiu $a1, $a1, %lo(func_ovl30_801339C4)
   /* 14F6C4 80133B54 8FA40048 */        lw $a0, 0x48($sp)
   /* 14F6C8 80133B58 00003025 */        or $a2, $zero, $zero
-  /* 14F6CC 80133B5C 0C002062 */       jal func_80008188
+  /* 14F6CC 80133B5C 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 14F6D0 80133B60 24070001 */     addiu $a3, $zero, 1
   /* 14F6D4 80133B64 8FBF0044 */        lw $ra, 0x44($sp)
   /* 14F6D8 80133B68 8FB00040 */        lw $s0, 0x40($sp)

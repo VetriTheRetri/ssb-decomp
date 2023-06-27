@@ -224,7 +224,7 @@ glabel func_ovl0_800D430C
   .L800D43DC:
   /* 04FDBC 800D43DC 8FA5003C */        lw $a1, 0x3c($sp)
   /* 04FDC0 800D43E0 24060001 */     addiu $a2, $zero, 1
-  /* 04FDC4 800D43E4 0C002062 */       jal func_80008188
+  /* 04FDC4 800D43E4 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 04FDC8 800D43E8 24070001 */     addiu $a3, $zero, 1
   /* 04FDCC 800D43EC 8FBF0024 */        lw $ra, 0x24($sp)
   /* 04FDD0 800D43F0 02201025 */        or $v0, $s1, $zero

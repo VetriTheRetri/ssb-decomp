@@ -216,7 +216,7 @@ glabel func_ovl58_80131C20
   /* 17EFB0 80131DF0 24A51B00 */     addiu $a1, $a1, %lo(func_ovl58_80131B00)
   /* 17EFB4 80131DF4 00402025 */        or $a0, $v0, $zero
   /* 17EFB8 80131DF8 00003025 */        or $a2, $zero, $zero
-  /* 17EFBC 80131DFC 0C002062 */       jal func_80008188
+  /* 17EFBC 80131DFC 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 17EFC0 80131E00 24070001 */     addiu $a3, $zero, 1
   /* 17EFC4 80131E04 3C05800D */       lui $a1, %hi(func_ovl0_800CCF00)
   /* 17EFC8 80131E08 2419FFFF */     addiu $t9, $zero, -1

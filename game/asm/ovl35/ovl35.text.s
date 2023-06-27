@@ -685,7 +685,7 @@ glabel func_ovl35_80132414
   /* 1661BC 801324AC 8FA40024 */        lw $a0, 0x24($sp)
   /* 1661C0 801324B0 24A521FC */     addiu $a1, $a1, %lo(func_ovl35_801321FC)
   /* 1661C4 801324B4 24060001 */     addiu $a2, $zero, 1
-  /* 1661C8 801324B8 0C002062 */       jal func_80008188
+  /* 1661C8 801324B8 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1661CC 801324BC 24070001 */     addiu $a3, $zero, 1
   /* 1661D0 801324C0 8FBF001C */        lw $ra, 0x1c($sp)
   /* 1661D4 801324C4 27BD0028 */     addiu $sp, $sp, 0x28

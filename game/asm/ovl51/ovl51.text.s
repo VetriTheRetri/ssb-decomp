@@ -141,7 +141,7 @@ glabel func_ovl51_8018D168
   /* 174B28 8018D2A8 24A50580 */     addiu $a1, $a1, %lo(func_80010580)
   /* 174B2C 8018D2AC 8C84DA58 */        lw $a0, %lo(D_ovl51_8018DA58)($a0)
   /* 174B30 8018D2B0 24060001 */     addiu $a2, $zero, 1
-  /* 174B34 8018D2B4 0C002062 */       jal func_80008188
+  /* 174B34 8018D2B4 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 174B38 8018D2B8 24070001 */     addiu $a3, $zero, 1
   /* 174B3C 8018D2BC 3C048019 */       lui $a0, %hi(D_ovl51_8018DA58)
   /* 174B40 8018D2C0 0C004160 */       jal func_80010580

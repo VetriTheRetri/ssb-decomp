@@ -1248,7 +1248,7 @@ glabel func_ovl33_80132C40
   /* 15ED30 80132CE0 24A529E8 */     addiu $a1, $a1, %lo(func_ovl33_801329E8)
   /* 15ED34 80132CE4 00402025 */        or $a0, $v0, $zero
   /* 15ED38 80132CE8 24060001 */     addiu $a2, $zero, 1
-  /* 15ED3C 80132CEC 0C002062 */       jal func_80008188
+  /* 15ED3C 80132CEC 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 15ED40 80132CF0 24070001 */     addiu $a3, $zero, 1
   /* 15ED44 80132CF4 8E030084 */        lw $v1, 0x84($s0)
   /* 15ED48 80132CF8 02002025 */        or $a0, $s0, $zero

@@ -360,7 +360,7 @@ struct GObjCommon *func_8000B824(
     func_80009DF4(gobj, arg4, arg5, arg6, arg7);
     dobj = func_800092D0(gobj, arg8);
     if (arg9 != 0) { func_8000B3EC(dobj); }
-    if (argB != 0) { func_80008188(gobj, argB, argA, argC); }
+    if (argB != 0) { gOMObj_AddGObjCommonProc(gobj, argB, argA, argC); }
 
     return gobj;
 }
@@ -384,7 +384,7 @@ struct GObjCommon *func_8000B8BC(
     if (gobj == 0) { return NULL; }
     func_80009DF4(gobj, arg4, arg5, arg6, arg7);
     func_80009614(gobj, arg8);
-    if (argA != 0) { func_80008188(gobj, argA, arg9, argB); }
+    if (argA != 0) { gOMObj_AddGObjCommonProc(gobj, argA, arg9, argB); }
 
     return gobj;
 }
@@ -411,7 +411,7 @@ struct GObjCommon *func_8000B93C(
     func_80009F74(gobj, arg4, arg5, arg7, arg8);
     cam = func_80009760(gobj);
     if (arg9 != 0) { func_8000B47C(cam); }
-    if (arg11 != 0) { func_80008188(gobj, arg11, arg10, arg12); }
+    if (arg11 != 0) { gOMObj_AddGObjCommonProc(gobj, arg11, arg10, arg12); }
     if (arg13 != 0) {
         cam->unk80 = 7;
         cam->unk84 = 0xFF;
@@ -460,7 +460,7 @@ struct DObj *func_8000BAA0(struct DObj *arg0) {
 
 #pragma GCC diagnostic pop
 
-void gcAnim_SetPlaybackRate(struct GObjCommon *arg0, f32 arg1) {
+void gOMObj_SetAnimPlaybackRate(struct GObjCommon *arg0, f32 arg1) {
     struct DObj *dobj = arg0->unk74;
 
     while (dobj != NULL) {

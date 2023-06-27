@@ -13,7 +13,7 @@ void ftCommon_HammerUpdateStats(GObj *fighter_gobj)
     }
     if (fp->hammer_timer == ATHAMMER_WARN_BEGIN_FRAME)
     {
-        func_ovl3_80176110(fp->item_hold);
+        itHammer_SDefault_SetColAnim(fp->item_hold);
     }
     if (fp->hammer_timer == 0)
     {
@@ -104,7 +104,7 @@ void ftCommon_HammerCheckSetColAnim(GObj *fighter_gobj)
 
     if (fp->colanim.colanim_id != FTCOMMON_HAMMER_COLANIM_ID)
     {
-        ftColor_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_HAMMER_COLANIM_ID, 0);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, FTCOMMON_HAMMER_COLANIM_ID, FTCOMMON_HAMMER_COLANIM_LENGTH);
     }
 }
 

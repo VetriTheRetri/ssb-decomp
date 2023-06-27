@@ -656,7 +656,7 @@ void free_om_camera(struct OMCamera *obj) {
     sCameraHead = obj;
 }
 
-struct GObjProcess *func_80008188(struct GObjCommon *com, void *ptr, u8 kind, u32 pri) {
+struct GObjProcess *gOMObj_AddGObjCommonProc(struct GObjCommon *com, void *ptr, u8 kind, u32 pri) {
     struct ThreadStackNode *stackNode; // sp2C
     struct GObjThread *thread;         // sp28
     struct GObjProcess *process;       // sp24

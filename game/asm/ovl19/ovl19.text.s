@@ -961,7 +961,7 @@ glabel func_ovl19_80132818
   /* 123234 80132884 24A5265C */     addiu $a1, $a1, %lo(func_ovl19_8013265C)
   /* 123238 80132888 8FA40024 */        lw $a0, 0x24($sp)
   /* 12323C 8013288C 00003025 */        or $a2, $zero, $zero
-  /* 123240 80132890 0C002062 */       jal func_80008188
+  /* 123240 80132890 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 123244 80132894 24070001 */     addiu $a3, $zero, 1
   /* 123248 80132898 8FBF001C */        lw $ra, 0x1c($sp)
   /* 12324C 8013289C 27BD0028 */     addiu $sp, $sp, 0x28
@@ -1053,7 +1053,7 @@ glabel func_ovl19_80132964
   /* 123380 801329D0 24A528A8 */     addiu $a1, $a1, %lo(func_ovl19_801328A8)
   /* 123384 801329D4 02002025 */        or $a0, $s0, $zero
   /* 123388 801329D8 00003025 */        or $a2, $zero, $zero
-  /* 12338C 801329DC 0C002062 */       jal func_80008188
+  /* 12338C 801329DC 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 123390 801329E0 24070001 */     addiu $a3, $zero, 1
   /* 123394 801329E4 0C04CACE */       jal func_ovl19_80132B38
   /* 123398 801329E8 00000000 */       nop 

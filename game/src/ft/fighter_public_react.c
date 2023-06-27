@@ -354,7 +354,7 @@ void func_ovl3_80165134(s32 arg0)
 
 void *func_ovl3_801653E0(void)
 {
-    void *gobj_process = func_80008188(func_80009968(0x3FA, NULL, 0xD, 0x80000000), func_ovl3_80165134, 1, 0); 
+    void *gobj_process = gOMObj_AddGObjCommonProc(func_80009968(0x3FA, NULL, 0xD, 0x80000000), func_ovl3_80165134, 1, 0); 
     D_ovl3_8018CF90 = U16_MAX + 1;
     D_ovl3_8018CF94 = U32_MAX;
     ftPublicReact_Damage_Knockback = 0.0F;

@@ -76,7 +76,7 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 
             effect_gobj->user_data = ep;
 
-            func_80008188(effect_gobj, func_ovl3_80184A70, 1U, 3U);
+            gOMObj_AddGObjCommonProc(effect_gobj, func_ovl3_80184A70, 1U, 3U);
         }
     }
 }

@@ -172,7 +172,7 @@ glabel func_ovl48_80131CA4
   /* 172434 80131D54 24A5DF34 */     addiu $a1, $a1, %lo(func_8000DF34)
   /* 172438 80131D58 02002025 */        or $a0, $s0, $zero
   /* 17243C 80131D5C 24060001 */     addiu $a2, $zero, 1
-  /* 172440 80131D60 0C002062 */       jal func_80008188
+  /* 172440 80131D60 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 172444 80131D64 24070001 */     addiu $a3, $zero, 1
   /* 172448 80131D68 8FBF0024 */        lw $ra, 0x24($sp)
   /* 17244C 80131D6C 8FB00020 */        lw $s0, 0x20($sp)
@@ -228,7 +228,7 @@ glabel func_ovl48_80131D7C
   /* 17250C 80131E2C 24A5DF34 */     addiu $a1, $a1, %lo(func_8000DF34)
   /* 172510 80131E30 02002025 */        or $a0, $s0, $zero
   /* 172514 80131E34 24060001 */     addiu $a2, $zero, 1
-  /* 172518 80131E38 0C002062 */       jal func_80008188
+  /* 172518 80131E38 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 17251C 80131E3C 24070001 */     addiu $a3, $zero, 1
   /* 172520 80131E40 8FBF0024 */        lw $ra, 0x24($sp)
   /* 172524 80131E44 8FB00020 */        lw $s0, 0x20($sp)
@@ -284,7 +284,7 @@ glabel func_ovl48_80131E54
   /* 1725E4 80131F04 24A5DF34 */     addiu $a1, $a1, %lo(func_8000DF34)
   /* 1725E8 80131F08 02002025 */        or $a0, $s0, $zero
   /* 1725EC 80131F0C 24060001 */     addiu $a2, $zero, 1
-  /* 1725F0 80131F10 0C002062 */       jal func_80008188
+  /* 1725F0 80131F10 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1725F4 80131F14 24070001 */     addiu $a3, $zero, 1
   /* 1725F8 80131F18 8FBF0024 */        lw $ra, 0x24($sp)
   /* 1725FC 80131F1C 8FB00020 */        lw $s0, 0x20($sp)
@@ -351,7 +351,7 @@ glabel func_ovl48_80131F2C
   /* 1726E8 80132008 24A50580 */     addiu $a1, $a1, %lo(func_80010580)
   /* 1726EC 8013200C 8FA4004C */        lw $a0, 0x4c($sp)
   /* 1726F0 80132010 24060001 */     addiu $a2, $zero, 1
-  /* 1726F4 80132014 0C002062 */       jal func_80008188
+  /* 1726F4 80132014 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1726F8 80132018 24070001 */     addiu $a3, $zero, 1
   /* 1726FC 8013201C 8FBF0044 */        lw $ra, 0x44($sp)
   /* 172700 80132020 8FB00040 */        lw $s0, 0x40($sp)

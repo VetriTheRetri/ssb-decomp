@@ -5,8 +5,8 @@
 // These arrays are strange, Kirby begins at .rodata padding 0x80188578, and index is never zero, but ends up using the correct values regardless???
 // If Kirby DOES begin at 0x80188578, that means his array accesses overflow into Jigglypuff's starting at index 0x4
 
-f32 Fighter_Kirby_JumpAerialVelY[ftStatus_Kirby_JumpAerialF5 - ftStatus_Kirby_JumpAerialF1] = { 60.0F, 52.0F, 47.0F, 40.0F };
-f32 Fighter_Purin_JumpAerialVelY[ftStatus_Purin_JumpAerialF5 - ftStatus_Purin_JumpAerialF1] = { 60.0F, 40.0F, 20.0F,  0.0F };
+f32 ftKirby_JumpAerialF_VelY[ftStatus_Kirby_JumpAerialF5 - ftStatus_Kirby_JumpAerialF1] = { 60.0F, 52.0F, 47.0F, 40.0F };
+f32 ftPurin_JumpAerialF_VelY[ftStatus_Purin_JumpAerialF5 - ftStatus_Purin_JumpAerialF1] = { 60.0F, 40.0F, 20.0F,  0.0F };
 
 // 0x8013FA90
 void ftCommon_JumpAerial_UpdateModelYaw(Fighter_Struct *fp)
@@ -215,13 +215,13 @@ void ftCommon_JumpAerialMulti_SetStatus(GObj *fighter_gobj, s32 input_source)
     {
     case Ft_Kind_Kirby:
     case Ft_Kind_PolyKirby:
-        fp->phys_info.vel_air.y = Fighter_Kirby_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GCONTROLLER_RANGE_MAX_F);
+        fp->phys_info.vel_air.y = ftKirby_JumpAerialF_VelY[fp->jumps_used - 2] * (stick_range_y / GCONTROLLER_RANGE_MAX_F);
 
         break;
 
     case Ft_Kind_Purin:
     case Ft_Kind_PolyPurin:
-        fp->phys_info.vel_air.y = Fighter_Purin_JumpAerialVelY[(s32)fp->jumps_used] * (stick_range_y / GCONTROLLER_RANGE_MAX_F);
+        fp->phys_info.vel_air.y = ftPurin_JumpAerialF_VelY[fp->jumps_used - 2] * (stick_range_y / GCONTROLLER_RANGE_MAX_F);
 
         break;
     }

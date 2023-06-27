@@ -385,7 +385,7 @@ extern struct Unk80046A88 D_80046A88[64];
 // functions
 
 extern s32 func_800078C8(void);
-extern struct GObjProcess *func_80008188(struct GObjCommon *com, void *ptr, u8 kind, u32 pri);
+extern struct GObjProcess *gOMObj_AddGObjCommonProc(struct GObjCommon *com, void *ptr, u8 kind, u32 pri);
 extern void func_8000848C(struct GObjProcess *);
 extern void func_80008CC0(struct DObj *, u8, u8);
 extern struct OMMtx *func_80008CF0(struct OMCamera *, u8, u8);

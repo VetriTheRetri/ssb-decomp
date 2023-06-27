@@ -181,7 +181,7 @@ glabel func_ovl0_800D4060
   /* 04FA98 800D40B8 24A53E80 */     addiu $a1, $a1, %lo(func_ovl0_800D3E80)
   /* 04FA9C 800D40BC 8FA4002C */        lw $a0, 0x2c($sp)
   /* 04FAA0 800D40C0 24060001 */     addiu $a2, $zero, 1
-  /* 04FAA4 800D40C4 0C002062 */       jal func_80008188
+  /* 04FAA4 800D40C4 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 04FAA8 800D40C8 00003825 */        or $a3, $zero, $zero
   /* 04FAAC 800D40CC 8FA8003C */        lw $t0, 0x3c($sp)
   /* 04FAB0 800D40D0 8FA30040 */        lw $v1, 0x40($sp)

@@ -876,7 +876,7 @@ glabel Rebirth_Halo_Offset_X
 glabel Fighter_Status_EntryStatusIndex
   .incbin "ovl3.raw.bin", 0x569A0, 0xD8
 
-glabel Fighter_Kirby_JumpAerialVelY
+glabel ftKirby_JumpAerialF_VelY
   /* 56A78 102FB8 80188578 */
   .4byte 0x000000 # .float 0.0
   .incbin "ovl3.raw.bin", 0x56A7C, 0x4
@@ -887,7 +887,7 @@ glabel Fighter_Kirby_JumpAerialVelY
   .asciz "BP"
   .balign 4
 
-glabel Fighter_Purin_JumpAerialVelY
+glabel ftPurin_JumpAerialF_VelY
   /* 56A88 102FC8 80188588 */
   .4byte 0x423c0000 # .float 47.0
   /* 56A8C 102FCC 8018858C */
@@ -1975,7 +1975,7 @@ glabel Article_Callback_Spawn
   /* 57994 103ED4 80189494 */  .4byte jtgt_ovl3_80178134
   /* 57998 103ED8 80189498 */  .4byte jtgt_ovl3_80175800
   /* 5799C 103EDC 8018949C */  .4byte itCommon_FFlower_CreateItem
-  /* 579A0 103EE0 801894A0 */  .4byte jtgt_ovl3_801763C8
+  /* 579A0 103EE0 801894A0 */  .4byte itCommon_Hammer_CreateItem
   /* 579A4 103EE4 801894A4 */  .4byte jtgt_ovl3_80176F60
   /* 579A8 103EE8 801894A8 */  .4byte itCommon_BombHei_CreateItem
   /* 579AC 103EEC 801894AC */  .4byte itCommon_IBumper_CreateItem
@@ -2029,7 +2029,7 @@ glabel jtbl_ovl3_8018953C
   /* 57A48 103F88 80189548 */  .4byte jtgt_ovl3_801780F0
   /* 57A4C 103F8C 8018954C */  .4byte jtgt_ovl3_80175780
   /* 57A50 103F90 80189550 */  .4byte itFFlower_ADrop_SetStatus
-  /* 57A54 103F94 80189554 */  .4byte jtgt_ovl3_80176378
+  /* 57A54 103F94 80189554 */  .4byte itHammer_ADrop_SetStatus
   /* 57A58 103F98 80189558 */  .4byte jtgt_ovl3_801766B8
   /* 57A5C 103F9C 8018955C */  .4byte itBombHei_ADrop_SetStatus
   /* 57A60 103FA0 80189560 */  .4byte itIBumper_ADrop_SetStatus
@@ -2055,7 +2055,7 @@ glabel jtbl_ovl3_80189594
   /* 57AA0 103FE0 801895A0 */  .4byte jtgt_ovl3_80178058
   /* 57AA4 103FE4 801895A4 */  .4byte jtgt_ovl3_801756AC
   /* 57AA8 103FE8 801895A8 */  .4byte itFFlower_AThrow_SetStatus
-  /* 57AAC 103FEC 801895AC */  .4byte jtgt_ovl3_80176300
+  /* 57AAC 103FEC 801895AC */  .4byte itHammer_AThrow_SetStatus
   /* 57AB0 103FF0 801895B0 */  .4byte jtgt_ovl3_80176644
   /* 57AB4 103FF4 801895B4 */  .4byte itBombHei_AThrow_SetStatus
   /* 57AB8 103FF8 801895B8 */  .4byte itIBumper_AThrow_SetStatus
@@ -2081,7 +2081,7 @@ glabel jtbl_ovl3_801895EC
   /* 57AF8 104038 801895F8 */  .4byte jtgt_ovl3_80177F90
   /* 57AFC 10403C 801895FC */  .4byte jtgt_ovl3_801755FC
   /* 57B00 104040 80189600 */  .4byte itFFlower_FHold_SetStatus
-  /* 57B04 104044 80189604 */  .4byte jtgt_ovl3_8017623C
+  /* 57B04 104044 80189604 */  .4byte itHammer_FHold_SetStatus
   /* 57B08 104048 80189608 */  .4byte jtgt_ovl3_8017657C
   /* 57B0C 10404C 8018960C */  .4byte itBombHei_FHold_SetStatus
   /* 57B10 104050 80189610 */  .4byte itIBumper_FHold_SetStatus
@@ -2437,42 +2437,42 @@ glabel jtbl_ovl3_80189D5C
   /* 58260 1047A0 80189D60 */  .4byte wpFFlower_Flame_ProcReflector
   .incbin "ovl3.raw.bin", 0x58264, 0xC
 
-glabel Article_Hammer_Data
+glabel itCommon_Hammer_ItemDesc
   .incbin "ovl3.raw.bin", 0x58270, 0x4
   /* 58274 1047B4 80189D74 */  .4byte gItemFileData
   .incbin "ovl3.raw.bin", 0x58278, 0xC
 
 glabel jtbl_ovl3_80189D84
-  /* 58284 1047C4 80189D84 */  .4byte jtgt_ovl3_80176134
-  /* 58288 1047C8 80189D88 */  .4byte jtgt_ovl3_80176194
+  /* 58284 1047C4 80189D84 */  .4byte itHammer_AFall_ProcUpdate
+  /* 58288 1047C8 80189D88 */  .4byte itHammer_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x5828C, 0x18
 
-glabel Article_Hammer_Status
+glabel itCommon_Hammer_StatusDesc
   .incbin "ovl3.raw.bin", 0x582A4, 0x4
-  /* 582A8 1047E8 80189DA8 */  .4byte func_ovl3_8017616C
+  /* 582A8 1047E8 80189DA8 */  .4byte itHammer_GWait_ProcMap
   .incbin "ovl3.raw.bin", 0x582AC, 0x18
 
 glabel jtbl_ovl3_80189DC4
-  /* 582C4 104804 80189DC4 */  .4byte jtgt_ovl3_80176134
-  /* 582C8 104808 80189DC8 */  .4byte jtgt_ovl3_80176194
+  /* 582C4 104804 80189DC4 */  .4byte itHammer_AFall_ProcUpdate
+  /* 582C8 104808 80189DC8 */  .4byte itHammer_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x582CC, 0x38
 
 glabel jtbl_ovl3_80189E04
-  /* 58304 104844 80189E04 */  .4byte jtgt_ovl3_80176270
-  /* 58308 104848 80189E08 */  .4byte jtgt_ovl3_801762A8
-  /* 5830C 10484C 80189E0C */  .4byte jtgt_ovl3_801762D8
-  /* 58310 104850 80189E10 */  .4byte jtgt_ovl3_801762D8
+  /* 58304 104844 80189E04 */  .4byte itHammer_AThrow_ProcUpdate
+  /* 58308 104848 80189E08 */  .4byte itHammer_AThrow_ProcMap
+  /* 5830C 10484C 80189E0C */  .4byte itHammer_SDefault_ProcHit
+  /* 58310 104850 80189E10 */  .4byte itHammer_SDefault_ProcHit
   .incbin "ovl3.raw.bin", 0x58314, 0x4
-  /* 58318 104858 80189E18 */  .4byte jtgt_ovl3_801762D8
+  /* 58318 104858 80189E18 */  .4byte itHammer_SDefault_ProcHit
   .incbin "ovl3.raw.bin", 0x5831C, 0x8
 
 glabel jtbl_ovl3_80189E24
-  /* 58324 104864 80189E24 */  .4byte jtgt_ovl3_80176134
-  /* 58328 104868 80189E28 */  .4byte jtgt_ovl3_80176348
-  /* 5832C 10486C 80189E2C */  .4byte jtgt_ovl3_801762D8
-  /* 58330 104870 80189E30 */  .4byte jtgt_ovl3_801762D8
+  /* 58324 104864 80189E24 */  .4byte itHammer_AFall_ProcUpdate
+  /* 58328 104868 80189E28 */  .4byte itHammer_ADrop_ProcMap
+  /* 5832C 10486C 80189E2C */  .4byte itHammer_SDefault_ProcHit
+  /* 58330 104870 80189E30 */  .4byte itHammer_SDefault_ProcHit
   .incbin "ovl3.raw.bin", 0x58334, 0x4
-  /* 58338 104878 80189E38 */  .4byte jtgt_ovl3_801762D8
+  /* 58338 104878 80189E38 */  .4byte itHammer_SDefault_ProcHit
   .incbin "ovl3.raw.bin", 0x5833C, 0x14
 
 glabel D_ovl3_80189E50

@@ -163,7 +163,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 
     ap->percent_damage = 0;
     ap->hitlag_timer = 0;
-    ap->damage_last = 0;
+    ap->damage_highest = 0;
     ap->damage_knockback = 0.0F;
     ap->damage_taken_recent = 0;
     ap->damage_taken_last = 0;
@@ -180,7 +180,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->vel_scale = attributes->vel_scale * 0.01F;
 
     ap->is_damage_all = FALSE;
-    ap->is_thrown = FALSE; // Applies magnitude and stale multiplier when hitbox is active?
+    ap->is_thrown = FALSE; // Applies magnitude and stale multiplier if TRUE and hitbox is active?
     ap->is_attach_surface = FALSE;
 
     ap->rotate_speed = 0.0F;
@@ -284,9 +284,9 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->coll_data.vel_push.y = 0.0F;
     ap->coll_data.vel_push.z = 0.0F;
 
-    func_80008188(item_gobj, itManager_ProcItemMain, 1U, 3U);
-    func_80008188(item_gobj, itManager_ProcSearchHitAll, 1U, 1U);
-    func_80008188(item_gobj, itManager_ProcUpdateHitCollisions, 1U, 0U);
+    gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcItemMain, 1, 3);
+    gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcSearchHitAll, 1, 1);
+    gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcUpdateHitCollisions, 1, 0);
 
     ap->proc_update = spawn_data->proc_update;
     ap->proc_map = spawn_data->proc_map;
@@ -331,7 +331,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 
 // Don't forget the following two functions here, stashed until I better understand articles (idk and func_ovl3_8016EA78)
 
-extern GObj* (*Article_Callback_Spawn[])(GObj*, Vec3f*, Vec3f*, u32); // Array count is likely 45
+extern GObj* (*Article_Callback_Spawn[It_Kind_EnumMax])(GObj*, Vec3f*, Vec3f*, u32); // Array count is likely 45
 
 GObj* func_ovl3_8016EA78(GObj *item_gobj, s32 index, Vec3f *pos, Vec3f *vel, u32 spawn_flags) // UPDATE: WHAT IS THIS OPTIMIZATION BRUH T.T
 {
@@ -376,6 +376,7 @@ void func_ovl3_8016EB78(s32 unused)
         if (item_settings.item_spawn_timer > 0)
         {
             item_settings.item_spawn_timer--;
+
             return;
         }
         if (itManager_GetCurrentStructAlloc() != NULL)
@@ -463,7 +464,7 @@ GObj* func_ovl3_8016EC40(void)
                 }
                 gobj = func_80009968(0x3F5U, NULL, 2U, 0x80000000U);
 
-                func_80008188(gobj, func_ovl3_8016EB78, 1U, 3U);
+                gOMObj_AddGObjCommonProc(gobj, func_ovl3_8016EB78, 1, 3);
 
                 item_bits = Match_Info->item_toggles;
 
@@ -496,6 +497,7 @@ GObj* func_ovl3_8016EC40(void)
                     }
                 }
                 func_ovl3_8016EB0C();
+
                 return gobj;
             }
         }
@@ -946,9 +948,9 @@ void itManager_UpdateDamageStatFighter(Fighter_Struct *fp, Fighter_Hit *ft_hit, 
     {
         ap->damage_taken_recent += damage;
 
-        if (ap->damage_last < damage)
+        if (ap->damage_highest < damage)
         {
-            ap->damage_last = damage;
+            ap->damage_highest = damage;
             ap->damage_angle = ft_hit->angle;
             ap->damage_element = ft_hit->element;
 
@@ -1119,9 +1121,9 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
     {
         defend_ap->damage_taken_recent += damage;
 
-        if (defend_ap->damage_last < damage)
+        if (defend_ap->damage_highest < damage)
         {
-            defend_ap->damage_last = damage; // Last source of damage?
+            defend_ap->damage_highest = damage; // Last source of damage?
             defend_ap->damage_angle = attack_it_hit->angle;
             defend_ap->damage_element = attack_it_hit->element;
 
@@ -1210,9 +1212,9 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
     {
         ap->damage_taken_recent += damage;
 
-        if (ap->damage_last < damage)
+        if (ap->damage_highest < damage)
         {
-            ap->damage_last = damage;
+            ap->damage_highest = damage;
             ap->damage_angle = wp_hit->angle;
             ap->damage_element = wp_hit->element;
 
@@ -1253,12 +1255,15 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
             case gmHitCollision_Element_Fire:
                 func_ovl2_800FE2F4(&sp4C, damage);
                 break;
+
             case gmHitCollision_Element_Electric:
                 func_ovl2_800FE4EC(&sp4C, damage);
                 break;
+
             case gmHitCollision_Element_Coin:
                 func_ovl2_80100ACC(&sp4C);
                 break;
+
             default:
                 func_ovl2_800FDC04(&sp4C, ip->port_id, damage, NULL);
                 break;
@@ -1743,7 +1748,7 @@ next_check:
     ap->hit_attack_damage = 0;
     ap->hit_shield_damage = 0;
     ap->reflect_gobj = NULL;
-    ap->damage_last = 0;
+    ap->damage_highest = 0;
     ap->damage_taken_recent = 0;
     ap->damage_taken_last = 0;
     ap->damage_knockback = 0.0F;

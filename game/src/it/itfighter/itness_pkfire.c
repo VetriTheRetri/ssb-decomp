@@ -164,7 +164,7 @@ bool32 itPKFire_SDefault_ProcDamage(GObj *item_gobj)
 
     if (ip->lifetime > 0)
     {
-        ip->lifetime -= ip->damage_last * ATPKFIRE_HURT_DAMAGE_MUL;
+        ip->lifetime -= ip->damage_highest * ATPKFIRE_HURT_DAMAGE_MUL;
     }
     if (itNess_SDefault_UpdateAllCheckDestroy(item_gobj) == TRUE)
     {

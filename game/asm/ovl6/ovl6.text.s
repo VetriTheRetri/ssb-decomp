@@ -741,7 +741,7 @@ glabel func_ovl6_8018DAE0
   /* 112240 8018DB00 24A5DA2C */     addiu $a1, $a1, %lo(func_ovl6_8018DA2C)
   /* 112244 8018DB04 00402025 */        or $a0, $v0, $zero
   /* 112248 8018DB08 24060001 */     addiu $a2, $zero, 1
-  /* 11224C 8018DB0C 0C002062 */       jal func_80008188
+  /* 11224C 8018DB0C 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 112250 8018DB10 24070004 */     addiu $a3, $zero, 4
   /* 112254 8018DB14 8FBF0014 */        lw $ra, 0x14($sp)
   /* 112258 8018DB18 27BD0018 */     addiu $sp, $sp, 0x18
@@ -873,7 +873,7 @@ glabel func_ovl6_8018DCC4
   /* 112424 8018DCE4 24A5DC70 */     addiu $a1, $a1, %lo(func_ovl6_8018DC70)
   /* 112428 8018DCE8 00402025 */        or $a0, $v0, $zero
   /* 11242C 8018DCEC 00003025 */        or $a2, $zero, $zero
-  /* 112430 8018DCF0 0C002062 */       jal func_80008188
+  /* 112430 8018DCF0 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 112434 8018DCF4 24070005 */     addiu $a3, $zero, 5
   /* 112438 8018DCF8 3C0E800A */       lui $t6, %hi(Match_Info)
   /* 11243C 8018DCFC 8DCE50E8 */        lw $t6, %lo(Match_Info)($t6)
@@ -1310,7 +1310,7 @@ glabel func_ovl6_8018E2E8
   /* 112A60 8018E320 24A5E2A8 */     addiu $a1, $a1, %lo(func_ovl6_8018E2A8)
   /* 112A64 8018E324 00402025 */        or $a0, $v0, $zero
   /* 112A68 8018E328 24060001 */     addiu $a2, $zero, 1
-  /* 112A6C 8018E32C 0C002062 */       jal func_80008188
+  /* 112A6C 8018E32C 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 112A70 8018E330 00003825 */        or $a3, $zero, $zero
   .L8018E334:
   /* 112A74 8018E334 8FBF0014 */        lw $ra, 0x14($sp)
@@ -1465,7 +1465,7 @@ glabel func_ovl6_8018E344
   /* 112CBC 8018E57C 44993000 */      mtc1 $t9, $f6
   /* 112CC0 8018E580 00000000 */       nop 
   /* 112CC4 8018E584 46803220 */   cvt.s.w $f8, $f6
-  /* 112CC8 8018E588 0C002062 */       jal func_80008188
+  /* 112CC8 8018E588 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 112CCC 8018E58C E448005C */      swc1 $f8, 0x5c($v0)
   /* 112CD0 8018E590 10000007 */         b .L8018E5B0
   /* 112CD4 8018E594 8FBF0044 */        lw $ra, 0x44($sp)

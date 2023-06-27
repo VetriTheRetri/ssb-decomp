@@ -12025,7 +12025,7 @@ glabel func_ovl8_8037B98C
   /* 198290 8037BA40 24A5BD94 */     addiu $a1, $a1, %lo(func_ovl8_8037BD94)
   /* 198294 8037BA44 00402025 */        or $a0, $v0, $zero
   /* 198298 8037BA48 00003025 */        or $a2, $zero, $zero
-  /* 19829C 8037BA4C 0C002062 */       jal func_80008188
+  /* 19829C 8037BA4C 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1982A0 8037BA50 24070001 */     addiu $a3, $zero, 1
   /* 1982A4 8037BA54 0C0DC5E8 */       jal func_ovl8_803717A0
   /* 1982A8 8037BA58 24040068 */     addiu $a0, $zero, 0x68
@@ -12051,7 +12051,7 @@ glabel func_ovl8_8037B98C
   /* 1982F0 8037BAA0 24A5BDF4 */     addiu $a1, $a1, %lo(func_ovl8_8037BDF4)
   /* 1982F4 8037BAA4 00003025 */        or $a2, $zero, $zero
   /* 1982F8 8037BAA8 24070001 */     addiu $a3, $zero, 1
-  /* 1982FC 8037BAAC 0C002062 */       jal func_80008188
+  /* 1982FC 8037BAAC 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 198300 8037BAB0 8C640048 */        lw $a0, 0x48($v1)
   /* 198304 8037BAB4 0C0DF58F */       jal func_ovl8_8037D63C
   /* 198308 8037BAB8 00000000 */       nop 
@@ -12483,7 +12483,7 @@ glabel func_ovl8_8037BF68
   /* 1988D4 8037C084 02002025 */        or $a0, $s0, $zero
   /* 1988D8 8037C088 8FA50058 */        lw $a1, 0x58($sp)
   /* 1988DC 8037C08C 00003025 */        or $a2, $zero, $zero
-  /* 1988E0 8037C090 0C002062 */       jal func_80008188
+  /* 1988E0 8037C090 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 1988E4 8037C094 24070001 */     addiu $a3, $zero, 1
   /* 1988E8 8037C098 8FAC0050 */        lw $t4, 0x50($sp)
   /* 1988EC 8037C09C 00001025 */        or $v0, $zero, $zero

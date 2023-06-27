@@ -70,6 +70,18 @@ itStatusDesc itCommon_FFlower_StatusDesc[5] =
         itCommon_SDefault_ProcReflector,    // Proc Reflector
         itFFlower_SDefault_ProcHit          // Proc Damage
     },
+
+    // Status 4 (Fighter Drop)
+    {
+        itFFlower_AFall_ProcUpdate,         // Proc Update
+        itFFlower_ADrop_ProcMap,            // Proc Map
+        itFFlower_SDefault_ProcHit,         // Proc Hit
+        itFFlower_SDefault_ProcHit,         // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itFFlower_SDefault_ProcHit,         // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        itFFlower_SDefault_ProcHit          // Proc Damage
+    }
 };
 
 wpCreateDesc wpFFlower_Flame_WeaponDesc =

@@ -294,9 +294,9 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     wp->coll_data.vel_push.y = 0.0F;
     wp->coll_data.vel_push.z = 0.0F;
 
-    func_80008188(weapon_gobj, wpManager_ProcWeaponMain, 1U, 3U);
-    func_80008188(weapon_gobj, wpManager_ProcSearchHitWeapon, 1U, 1U);
-    func_80008188(weapon_gobj, wpManager_ProcHitCollisions, 1U, 0U);
+    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcWeaponMain, 1U, 3U);
+    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcSearchHitWeapon, 1U, 1U);
+    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcHitCollisions, 1U, 0U);
 
     wp->proc_update = item_status_desc->proc_update;
     wp->proc_map = item_status_desc->proc_map;
