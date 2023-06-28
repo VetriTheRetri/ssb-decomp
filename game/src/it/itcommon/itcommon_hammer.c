@@ -70,7 +70,7 @@ itStatusDesc itCommon_Hammer_StatusDesc[5] =
     },
 
     // Status 4 (Fighter Drop)
-{
+    {
         itHammer_AFall_ProcUpdate,          // Proc Update
         itHammer_ADrop_ProcMap,             // Proc Map
         itHammer_SDefault_ProcHit,          // Proc Hit

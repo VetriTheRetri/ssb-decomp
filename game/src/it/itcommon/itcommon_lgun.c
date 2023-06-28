@@ -2,8 +2,6 @@
 #include "weapon.h"
 #include "fighter.h"
 
-
-
 bool32 jtgt_ovl3_801754F0(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
@@ -135,7 +133,7 @@ bool32 jtgt_ovl3_801758BC(GObj *weapon_gobj)
 
         joint = DObjGetStruct(weapon_gobj); // Y tho lol
 
-        if (ATLGUN_AMMO_CLAMP_SCALE_X < joint->scale.x)
+        if (joint->scale.x > ATLGUN_AMMO_CLAMP_SCALE_X)
         {
             joint->scale.x = ATLGUN_AMMO_CLAMP_SCALE_X;
         }

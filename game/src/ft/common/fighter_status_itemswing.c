@@ -12,7 +12,7 @@ void ftCommon_HarisenSwing_ProcHit(GObj *fighter_gobj)
 
         if (ap->it_kind == It_Kind_Harisen)
         {
-            func_ovl3_80175140(fp->item_hold, FTCOMMON_HARISENSWING_SCALE_HIT);
+            itHairsen_SDefault_SetScale(fp->item_hold, FTCOMMON_HARISENSWING_SCALE_HIT);
 
             fp->status_vars.common.itemswing.harisen_scale_reset_wait = FTCOMMON_HARISENSWING_SCALE_RESET_WAIT;
         }
@@ -32,7 +32,7 @@ void ftCommon_HarisenSwing_ProcUpdate(GObj *fighter_gobj)
 
             if (fp->status_vars.common.itemswing.harisen_scale_reset_wait == 0)
             {
-                func_ovl3_80175140(fp->item_hold, 1.0F);
+                itHairsen_SDefault_SetScale(fp->item_hold, 1.0F);
             }
         }
     }

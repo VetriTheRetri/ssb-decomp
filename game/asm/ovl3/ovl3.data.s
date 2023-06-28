@@ -1971,7 +1971,7 @@ glabel Article_Callback_Spawn
   /* 57984 103EC4 80189484 */  .4byte jtgt_ovl3_80174A18
   /* 57988 103EC8 80189488 */  .4byte jtgt_ovl3_80174DA0
   /* 5798C 103ECC 8018948C */  .4byte itCommon_Bat_CreateItem
-  /* 57990 103ED0 80189490 */  .4byte jtgt_ovl3_80175460
+  /* 57990 103ED0 80189490 */  .4byte itCommon_Harisen_CreateItem
   /* 57994 103ED4 80189494 */  .4byte jtgt_ovl3_80178134
   /* 57998 103ED8 80189498 */  .4byte jtgt_ovl3_80175800
   /* 5799C 103EDC 8018949C */  .4byte itCommon_FFlower_CreateItem
@@ -2025,7 +2025,7 @@ glabel itCommon_Drop_ProcList
 glabel jtbl_ovl3_8018953C
   /* 57A3C 103F7C 8018953C */  .4byte jtgt_ovl3_80174D5C
   /* 57A40 103F80 80189540 */  .4byte itBat_ADrop_SetStatus
-  /* 57A44 103F84 80189544 */  .4byte jtgt_ovl3_801753C4
+  /* 57A44 103F84 80189544 */  .4byte itHarisen_ADrop_SetStatus
   /* 57A48 103F88 80189548 */  .4byte jtgt_ovl3_801780F0
   /* 57A4C 103F8C 8018954C */  .4byte jtgt_ovl3_80175780
   /* 57A50 103F90 80189550 */  .4byte itFFlower_ADrop_SetStatus
@@ -2051,7 +2051,7 @@ glabel itCommon_Throw_ProcList
 glabel jtbl_ovl3_80189594
   /* 57A94 103FD4 80189594 */  .4byte jtgt_ovl3_80174CE8
   /* 57A98 103FD8 80189598 */  .4byte itBat_AThrow_SetStatus
-  /* 57A9C 103FDC 8018959C */  .4byte jtgt_ovl3_80175350
+  /* 57A9C 103FDC 8018959C */  .4byte itHarisen_AThrow_SetStatus
   /* 57AA0 103FE0 801895A0 */  .4byte jtgt_ovl3_80178058
   /* 57AA4 103FE4 801895A4 */  .4byte jtgt_ovl3_801756AC
   /* 57AA8 103FE8 801895A8 */  .4byte itFFlower_AThrow_SetStatus
@@ -2077,7 +2077,7 @@ glabel itCommon_Pickup_ProcList
 glabel jtbl_ovl3_801895EC
   /* 57AEC 10402C 801895EC */  .4byte jtgt_ovl3_80174C5C
   /* 57AF0 104030 801895F0 */  .4byte itBat_FHold_SetStatus
-  /* 57AF4 104034 801895F4 */  .4byte jtgt_ovl3_8017526C
+  /* 57AF4 104034 801895F4 */  .4byte itHarisen_FHold_SetStatus
   /* 57AF8 104038 801895F8 */  .4byte jtgt_ovl3_80177F90
   /* 57AFC 10403C 801895FC */  .4byte jtgt_ovl3_801755FC
   /* 57B00 104040 80189600 */  .4byte itFFlower_FHold_SetStatus
@@ -2282,43 +2282,43 @@ glabel jtbl_ovl3_80189A44
 glabel D_ovl3_80189A70
   .incbin "ovl3.raw.bin", 0x57F70, 0x8
 
-glabel Article_Harisen_Data
+glabel itCommon_Harisen_ItemDesc
   .incbin "ovl3.raw.bin", 0x57F78, 0x4
   /* 57F7C 1044BC 80189A7C */  .4byte gItemFileData
   .incbin "ovl3.raw.bin", 0x57F80, 0xC
 
 glabel jtbl_ovl3_80189A8C
-  /* 57F8C 1044CC 80189A8C */  .4byte jtgt_ovl3_80175160
-  /* 57F90 1044D0 80189A90 */  .4byte jtgt_ovl3_801751C0
+  /* 57F8C 1044CC 80189A8C */  .4byte itHarisen_AFall_ProcUpdate
+  /* 57F90 1044D0 80189A90 */  .4byte itHarisen_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57F94, 0x18
 
-glabel Article_Harisen_Status
+glabel itCommon_Harisen_StatusDesc
   .incbin "ovl3.raw.bin", 0x57FAC, 0x4
-  /* 57FB0 1044F0 80189AB0 */  .4byte func_ovl3_80175198
+  /* 57FB0 1044F0 80189AB0 */  .4byte itHarisen_GWait_ProcMap
   .incbin "ovl3.raw.bin", 0x57FB4, 0x18
 
 glabel jtbl_ovl3_80189ACC
-  /* 57FCC 10450C 80189ACC */  .4byte jtgt_ovl3_80175160
-  /* 57FD0 104510 80189AD0 */  .4byte jtgt_ovl3_801751C0
+  /* 57FCC 10450C 80189ACC */  .4byte itHarisen_AFall_ProcUpdate
+  /* 57FD0 104510 80189AD0 */  .4byte itHarisen_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57FD4, 0x38
 
 glabel jtbl_ovl3_80189B0C
-  /* 5800C 10454C 80189B0C */  .4byte jtgt_ovl3_801752C0
-  /* 58010 104550 80189B10 */  .4byte jtgt_ovl3_801752F8
-  /* 58014 104554 80189B14 */  .4byte jtgt_ovl3_80175328
-  /* 58018 104558 80189B18 */  .4byte jtgt_ovl3_80175328
+  /* 5800C 10454C 80189B0C */  .4byte itHarisen_AThrow_ProcUpdate
+  /* 58010 104550 80189B10 */  .4byte itHarisen_AThrow_ProcMap
+  /* 58014 104554 80189B14 */  .4byte itHarisen_SDefault_ProcHit
+  /* 58018 104558 80189B18 */  .4byte itHarisen_SDefault_ProcHit
   /* 5801C 10455C 80189B1C */  .4byte itCommon_SDefault_ProcHop
-  /* 58020 104560 80189B20 */  .4byte jtgt_ovl3_80175328
+  /* 58020 104560 80189B20 */  .4byte itHarisen_SDefault_ProcHit
   /* 58024 104564 80189B24 */  .4byte itCommon_SDefault_ProcReflector
   .incbin "ovl3.raw.bin", 0x58028, 0x4
 
 glabel jtbl_ovl3_80189B2C
-  /* 5802C 10456C 80189B2C */  .4byte jtgt_ovl3_80175160
-  /* 58030 104570 80189B30 */  .4byte jtgt_ovl3_80175394
-  /* 58034 104574 80189B34 */  .4byte jtgt_ovl3_80175328
-  /* 58038 104578 80189B38 */  .4byte jtgt_ovl3_80175328
+  /* 5802C 10456C 80189B2C */  .4byte itHarisen_AFall_ProcUpdate
+  /* 58030 104570 80189B30 */  .4byte itHarisen_ADrop_ProcMap
+  /* 58034 104574 80189B34 */  .4byte itHarisen_SDefault_ProcHit
+  /* 58038 104578 80189B38 */  .4byte itHarisen_SDefault_ProcHit
   /* 5803C 10457C 80189B3C */  .4byte itCommon_SDefault_ProcHop
-  /* 58040 104580 80189B40 */  .4byte jtgt_ovl3_80175328
+  /* 58040 104580 80189B40 */  .4byte itHarisen_SDefault_ProcHit
   /* 58044 104584 80189B44 */  .4byte itCommon_SDefault_ProcReflector
   .incbin "ovl3.raw.bin", 0x58048, 0x8
 
