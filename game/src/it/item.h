@@ -67,7 +67,7 @@ typedef enum itKind
     It_Kind_Bat,                                // Home-Run Bat
     It_Kind_Harisen,                            // Fan
     It_Kind_StarRod,                            // Star Rod
-    It_Kind_L_Gun,                              // Ray Gun
+    It_Kind_LGun,                              // Ray Gun
     It_Kind_FFlower,                            // Fire Flower
     It_Kind_Hammer,                             // Hammer
     It_Kind_MSBomb,                             // Motion-Sensor Bomb

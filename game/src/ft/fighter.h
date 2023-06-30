@@ -748,8 +748,8 @@ typedef struct _Fighter_Hit
 typedef struct FighterHurtDesc
 {
     s32 joint_index;
-    s32 unk_fthdesc_0x4;
-    s32 unk_fthdesc_0x8;
+    s32 placement;
+    bool32 is_grabbable;
     Vec3f offset;
     Vec3f size;
 
@@ -760,8 +760,8 @@ typedef struct Fighter_Hurt
     s32 hitstatus;
     s32 joint_index;
     DObj *joint;
-    s32 unk_ftht_0xC;
-    s32 unk_ftht_0x10;
+    s32 placement;              // 0 = low, 1 = middle, 2 = high
+    bool32 is_grabbable;
     Vec3f offset;
     Vec3f size;
 

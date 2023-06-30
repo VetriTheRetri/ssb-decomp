@@ -2747,7 +2747,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, attacker_fp->ft_kind, attacker_fp->stat_flags.halfword & ~0x400, attacker_fp->stat_count);
 
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
-        this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
+        this_fp->damage_index = hitlog->victim_hurt->placement;
 
         if (this_fp->damage_element == gmHitCollision_Element_Electric)
         {
@@ -2784,7 +2784,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ip->wp_kind, wp_hit->stat_flags.halfword, wp_hit->stat_count);
         }
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
-        this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
+        this_fp->damage_index = hitlog->victim_hurt->placement;
 
         func_ovl2_800E3DD0(fighter_gobj, attacker_gobj);
         break;
@@ -2819,7 +2819,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ap->it_kind, it_hit->stat_flags.halfword, it_hit->stat_count);
         }
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
-        this_fp->damage_index = hitlog->victim_hurt->unk_ftht_0xC;
+        this_fp->damage_index = hitlog->victim_hurt->placement;
 
         func_ovl2_800E3DD0(fighter_gobj, attacker_gobj);
         break;
@@ -3530,7 +3530,7 @@ void ftObjectProc_SearchGroundHit(GObj *fighter_gobj)
     }
 }
 
-// 0x800E5E58 Meth
+// 0x800E5E58 - Meth
 void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 {
     GObj *other_gobj;
@@ -3554,7 +3554,7 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 
         other_fp = ftGetStruct(other_gobj);
 
-        if ((other_fp->is_stat_nodamage)) goto next_gobj;
+        if (other_fp->is_stat_nodamage) goto next_gobj;
 
         if (other_fp->ft_kind == Ft_Kind_MasterHand) goto next_gobj;
 
@@ -3570,11 +3570,13 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 
             if (ft_hit->update_state != gmHitCollision_UpdateState_Disable)
             {
-                if ((other_fp->ground_or_air == GA_Air) && (!ft_hit->is_hit_air)) continue; // Why is it breaking the previously established standard for this type of check now???
+                if ((other_fp->ground_or_air == GA_Air) && !(ft_hit->is_hit_air)) continue; // Why is it breaking the previously established standard for this type of check now???
 
-                if ((other_fp->ground_or_air == GA_Ground) && (!ft_hit->is_hit_ground)) continue; // ???
+                if ((other_fp->ground_or_air == GA_Ground) && !(ft_hit->is_hit_ground)) continue; // ???
 
-                catch_mask.is_interact_hurt = catch_mask.is_interact_shield = 0, catch_mask.interact_mask = GMHITCOLLISION_MASK_ALL;
+                catch_mask.is_interact_hurt = catch_mask.is_interact_shield = FALSE;
+                
+                catch_mask.interact_mask = GMHITCOLLISION_MASK_ALL;
 
                 for (m = 0; m < ARRAY_COUNT(ft_hit->hit_targets); m++)
                 {
@@ -3595,7 +3597,7 @@ void ftObjectProc_SearchFighterCatch(GObj *this_gobj)
 
                         else if ((ft_hurt->hitstatus != gmHitCollision_HitStatus_Intangible) && (ft_hurt->hitstatus != gmHitCollision_HitStatus_Invincible))
                         {
-                            if ((ft_hurt->unk_ftht_0x10 != 0) && (func_ovl2_800EFBA4(ft_hit, ft_hurt) != FALSE))
+                            if ((ft_hurt->is_grabbable != FALSE) && (func_ovl2_800EFBA4(ft_hit, ft_hurt) != FALSE))
                             {
                                 func_ovl2_800E2B88(this_fp, ft_hit, other_fp, this_gobj, other_gobj);
 

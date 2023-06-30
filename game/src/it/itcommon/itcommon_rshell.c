@@ -374,7 +374,7 @@ bool32 jtgt_ovl3_8017ADD4(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    if ((func_ovl3_801735A0(item_gobj, func_ovl3_8017B1A4) != FALSE) && (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
+    if ((func_ovl3_801735A0(item_gobj, func_ovl3_8017B1A4) != FALSE) && (ap->coll_data.coll_mask & (MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL)))
     {
         ap->phys_info.vel_air.x = -ap->phys_info.vel_air.x;
 

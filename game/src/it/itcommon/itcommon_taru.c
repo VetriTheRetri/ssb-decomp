@@ -82,7 +82,7 @@ bool32 func_ovl3_80179D88(GObj *item_gobj, f32 vel_mod)
     Item_Struct *ap;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), vel_mod, NULL) != FALSE)
+    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), vel_mod, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }
@@ -225,7 +225,7 @@ bool32 jtgt_ovl3_8017A148(GObj *item_gobj)
     {
         itMain_SetItemStatus(item_gobj, Article_Taru_Status, 4);
     }
-    else if (ap->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+    else if (ap->coll_data.coll_mask & (MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL))
     {
         return func_ovl3_80179C20(item_gobj);
     }

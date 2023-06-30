@@ -172,14 +172,14 @@ void ftPikachu_SpecialHi_ProcMap(GObj *fighter_gobj)
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
-        if (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+        if (fp->coll_data.coll_mask & (MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL))
         {
             ftMap_SetAir(fp);
             ftPikachu_SpecialAirHiEnd_SetStatus(fighter_gobj);
         }
         else ftPikachu_SpecialHi_SwitchStatusAir(fighter_gobj);
     }
-    else if (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL))
+    else if (fp->coll_data.coll_mask & (MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL))
     {
         ftPikachu_SpecialHiEnd_SetStatus(fighter_gobj);
     }
@@ -224,11 +224,11 @@ void ftPikachu_SpecialAirHi_ProcMap(GObj *fighter_gobj)
         {
             ftPikachu_SpecialAirHiEnd_SetStatus(fighter_gobj);
         }
-        if ((fp->coll_data.coll_mask & MPCOLL_MASK_RWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_air)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_LWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_air)))
         {
             ftPikachu_SpecialAirHiEnd_SetStatus(fighter_gobj);
         }
-        if ((fp->coll_data.coll_mask & MPCOLL_MASK_LWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_air)))
+        if ((fp->coll_data.coll_mask & MPCOLL_MASK_RWALL) && (FTPIKACHU_QUICKATTACK_HALT_ANGLE < vec3f_angle_diff(&fp->coll_data.rwall_angle, &fp->phys_info.vel_air)))
         {
             ftPikachu_SpecialAirHiEnd_SetStatus(fighter_gobj);
         }

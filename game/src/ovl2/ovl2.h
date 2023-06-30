@@ -4,3 +4,7 @@
 extern void func_ovl2_800D6FE0(void);
 
 #endif /* OVL2_OVL2_H */
+
+s32 func_ovl2_800EFBA4(Fighter_Hit *, Fighter_Hurt *); /* extern */
+extern f32 D_ovl2_8012FE88;
+

@@ -24,7 +24,7 @@ bool32 jtgt_ovl3_80174990(GObj *item_gobj)
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), 1.0F, NULL) != FALSE)
+    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), 1.0F, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }

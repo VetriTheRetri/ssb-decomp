@@ -118,7 +118,7 @@ bool32 ftCaptain_SpecialLwBound_CheckMapCollideGoto(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fp->command_vars.flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
+    if ((fp->command_vars.flags.flag1 == 1) && (fp->coll_data.coll_mask & (MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL)))
     {
         ftMap_SetAir(fp);
         ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialLwBound, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

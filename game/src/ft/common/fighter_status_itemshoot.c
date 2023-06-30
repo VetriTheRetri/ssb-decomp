@@ -35,7 +35,7 @@ void ftCommon_LGunShoot_ProcAccessory(GObj *fighter_gobj)
             spawn_ammo_offset.z *= size_mul;
 
             func_ovl2_800EDF24(fp->joint[fp->attributes->joint_itemhold_light], &spawn_ammo_offset);
-            func_ovl3_80175AD8(fighter_gobj, &spawn_ammo_offset);
+            ftCommon_LGunShoot_CreateAmmo(fighter_gobj, &spawn_ammo_offset);
 
             spawn_gfx_offset.x = 0.0F;
             spawn_gfx_offset.y = FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_Y;
@@ -299,7 +299,7 @@ void ftCommon_ItemShoot_SetStatus(GObj *fighter_gobj)
 
     switch (ap->it_kind)
     {
-    case It_Kind_L_Gun:
+    case It_Kind_LGun:
         status_id = ftStatus_Common_LGunShoot;
         proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;
@@ -329,7 +329,7 @@ void ftCommon_ItemShootAir_SetStatus(GObj *fighter_gobj)
 
     switch (ap->it_kind)
     {
-    case It_Kind_L_Gun:
+    case It_Kind_LGun:
         status_id = ftStatus_Common_LGunShootAir;
         proc_accessory = ftCommon_LGunShoot_ProcAccessory;
         break;

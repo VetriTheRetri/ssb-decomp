@@ -61,7 +61,8 @@ typedef enum Wp_Kind
     Wp_Kind_PKThunderTrail,
     Wp_Kind_YubiBulletSingle,
     Wp_Kind_YubiBulletTriple,
-    Wp_Kind_FFlowerFlame = 0x15
+    Wp_Kind_LGunAmmo = 0x14,
+    Wp_Kind_FFlowerFlame
 
 } Wp_Kind;
 

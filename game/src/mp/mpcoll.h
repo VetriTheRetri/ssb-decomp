@@ -5,8 +5,8 @@
 #include <ssb_types.h>
 #include <macros.h>
 
-#define MPCOLL_MASK_RWALL       (1 << 0)    // 0x1
-#define MPCOLL_MASK_LWALL       (1 << 5)    // 0x20
+#define MPCOLL_MASK_LWALL       (1 << 0)    // 0x1
+#define MPCOLL_MASK_RWALL       (1 << 5)    // 0x20
 #define MPCOLL_MASK_CEIL        (1 << 10)   // 0x400 
 #define MPCOLL_MASK_GROUND      (1 << 11)   // 0x800
 #define MPCOLL_MASK_LCLIFF      (1 << 12)   // 0x1000
@@ -14,7 +14,7 @@
 #define MPCOLL_MASK_CEILHEAVY   (1 << 14)   // 0x4000 - head bonk?
 #define MPCOLL_MASK_UNK1        (1 << 15)   // 0x8000
 
-#define MPCOLL_MASK_MAIN_ALL    (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL) // Mask every main collision flag
+#define MPCOLL_MASK_MAIN_ALL    (MPCOLL_MASK_GROUND | MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL) // Mask every main collision flag
 #define MPCOLL_MASK_CLIFF_ALL   (MPCOLL_MASK_LCLIFF | MPCOLL_MASK_RCLIFF) // Mask all ledge flags       
 
 #define MPCOLL_MASK_NONSOLID    (1 << 14) // Line ID can be passed through
@@ -111,13 +111,13 @@ typedef struct _Coll_Data
     u32 ceil_flags;
     Vec3f ceil_angle;
 
-    s32 rwall_line_id; // Clipping ID of last right wall interacted with
-    u32 rwall_flags;
-    Vec3f rwall_angle;
-
-    s32 lwall_line_id;
+    s32 lwall_line_id; // Clipping ID of last left wall interacted with
     u32 lwall_flags;
     Vec3f lwall_angle;
+
+    s32 rwall_line_id;
+    u32 rwall_flags;
+    Vec3f rwall_angle;
 
     s32 cliff_id; // Ledge ID
     s32 ignore_line_id; // Ignore this line when checking for collision

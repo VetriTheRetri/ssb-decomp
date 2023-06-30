@@ -19,12 +19,12 @@ typedef struct ftNess_FighterVars
 
 typedef struct ftNess_SpecialHi_StatusVars
 {
-    s32 pk_jibaku_delay;            // Frames before PK Thunder Blast can be initiated (PK Thunder will go through Ness while this timer is greater than 0)
+    s32 pkjibaku_delay;            // Frames before PK Thunder Blast can be initiated (PK Thunder will go through Ness while this timer is greater than 0)
     s32 pkthunder_end_delay;       // Frames before PK Thunder transitions to its ending animation after the projectile despawns 
     s32 pkthunder_gravity_delay;   // Frames before Ness is affected by gravity while performing PK Thunder
     GObj *pkthunder_gobj;          // Pointer to the PK Thunder object
-    s32 pk_jibaku_anim_length;      // Number of frames PK Thunder Blast will loop
-    f32 pk_jibaku_angle;            // Angle of PK Thunder Blast (converted to 2D velocity vector with sin(vel) and cos(vel))
+    s32 pkjibaku_anim_length;      // Number of frames PK Thunder Blast will loop
+    f32 pkjibaku_angle;            // Angle of PK Thunder Blast (converted to 2D velocity vector with sin(vel) and cos(vel))
     Vec3f pkthunder_pos;           // Might be PK Thunder's collision detection when checking if Ness is hitting himself with it?
 
 } ftNess_SpecialHi_StatusVars;

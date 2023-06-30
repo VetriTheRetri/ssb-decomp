@@ -304,8 +304,8 @@ void ftCommon_YoshiEgg_SetHurt(GObj *fighter_gobj)
 
     ft_hurt->joint = fp->joint[ftParts_TopN_Joint];
     ft_hurt->joint_index = 0;
-    ft_hurt->unk_ftht_0xC = 1;
-    ft_hurt->unk_ftht_0x10 = 0;
+    ft_hurt->placement = 1;
+    ft_hurt->is_grabbable = 0;
     ft_hurt->offset = egg->offset;
     ft_hurt->size = egg->size;
 

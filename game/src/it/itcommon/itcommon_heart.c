@@ -1,68 +1,140 @@
 #include "item.h"
 
-bool32 jtgt_ovl3_801746F0(GObj *item_gobj)
+itCreateDesc itCommon_Heart_ItemDesc =
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    It_Kind_Heart,                          // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0x100,                                  // Offset of item attributes in file?
+    0x1B,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itHeart_AFall_ProcUpdate,               // Proc Update
+    itHeart_AFall_ProcMap,                  // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
 
-    func_ovl3_80172558(ap, ATHEART_GRAVITY, ATHEART_T_VEL);
+itStatusDesc itCommon_Harisen_StatusDesc[3] =
+{
+    // Status 0 (Ground Wait)
+    {
+        NULL,                               // Proc Update
+        itHeart_GWait_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 1 (Air Wait Fall)
+    {
+        itHeart_AFall_ProcUpdate,           // Proc Update
+        itHeart_AFall_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 2 (Fighter Drop)
+    {
+        itHeart_AFall_ProcUpdate,           // Proc Update
+        itHeart_ADrop_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
+typedef enum itHeartStatus
+{
+    itStatus_Heart_GWait,
+    itStatus_Heart_AFall,
+    itStatus_Heart_ADrop
+
+} itHeartStatus; 
+
+// 0x801746F0
+bool32 itHeart_AFall_ProcUpdate(GObj *item_gobj)
+{
+    Item_Struct *ip = itGetStruct(item_gobj);
+
+    func_ovl3_80172558(ip, ATHEART_GRAVITY, ATHEART_T_VEL);
     func_ovl3_801713F4(item_gobj);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80174728(GObj *item_gobj)
+// 0x80174728
+bool32 itHeart_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_801747B4);
+    func_ovl3_801735A0(item_gobj, itHeart_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80174750(GObj *item_gobj)
+// 0x80174750
+bool32 itHeart_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.1F, 0.0F, func_ovl3_80174780);
+    return func_ovl3_80173B24(item_gobj, 0.1F, 0.0F, itHeart_GWait_SetStatus);
 }
 
-extern itStatusDesc Article_Heart_Status[];
+extern itStatusDesc itCommon_Heart_StatusDesc[];
 
-void func_ovl3_80174780(GObj *item_gobj)
+// 0x80174780
+void itHeart_GWait_SetStatus(GObj *item_gobj)
 {
     func_ovl3_80172E74(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_Heart_Status, 0);
+    itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_GWait);
 }
 
-void func_ovl3_801747B4(GObj *item_gobj)
+// 0x801747B4
+void itHeart_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->is_allow_pickup = FALSE;
+    ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ap);
-    itMain_SetItemStatus(item_gobj, Article_Heart_Status, 1);
+    func_ovl3_80173F78(ip);
+    itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_AFall);
 }
 
-bool32 jtgt_ovl3_801747F8(GObj *item_gobj)
+// 0x801747F8
+bool32 itHeart_ADrop_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.1F, 0.0F, func_ovl3_80174780);
+    return func_ovl3_80173B24(item_gobj, 0.1F, 0.0F, itHeart_GWait_SetStatus);
 }
 
-void jtgt_ovl3_80174828(GObj *item_gobj)
+// 0x80174828
+void itHeart_ADrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_Heart_Status, 2);
+    itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_ADrop);
 }
 
-extern itCreateDesc Article_Heart_Data;
-
-GObj *jtgt_ovl3_80174850(GObj *item_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80174850
+GObj* itCommon_Heart_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *spawn_gobj = itManager_CreateItem(item_gobj, &Article_Heart_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Heart_ItemDesc, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
-    Item_Struct *ap;
+    Item_Struct *ip;
 
-    if (spawn_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        joint = DObjGetStruct(spawn_gobj);
-        ap = itGetStruct(spawn_gobj);
+        joint = DObjGetStruct(item_gobj);
+        ip = itGetStruct(item_gobj);
         translate = joint->translate;
 
         func_80008CC0(joint, 0x2E, 0);
@@ -71,9 +143,9 @@ GObj *jtgt_ovl3_80174850(GObj *item_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->rotate.z = 0.0F;
 
-        ap->is_unused_item_bool = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
-        ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
+        ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }
-    return spawn_gobj;
+    return item_gobj;
 }

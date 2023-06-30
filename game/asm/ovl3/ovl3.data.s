@@ -1967,13 +1967,13 @@ glabel Article_Callback_Spawn
   /* 57974 103EB4 80189474 */  .4byte itCommon_Capsule_CreateItem
   /* 57978 103EB8 80189478 */  .4byte itCommon_Egg_CreateItem
   /* 5797C 103EBC 8018947C */  .4byte jtgt_ovl3_80174624
-  /* 57980 103EC0 80189480 */  .4byte jtgt_ovl3_80174850
+  /* 57980 103EC0 80189480 */  .4byte itCommon_Heart_CreateItem
   /* 57984 103EC4 80189484 */  .4byte jtgt_ovl3_80174A18
   /* 57988 103EC8 80189488 */  .4byte jtgt_ovl3_80174DA0
   /* 5798C 103ECC 8018948C */  .4byte itCommon_Bat_CreateItem
   /* 57990 103ED0 80189490 */  .4byte itCommon_Harisen_CreateItem
   /* 57994 103ED4 80189494 */  .4byte jtgt_ovl3_80178134
-  /* 57998 103ED8 80189498 */  .4byte jtgt_ovl3_80175800
+  /* 57998 103ED8 80189498 */  .4byte itCommon_LGun_CreateItem
   /* 5799C 103EDC 8018949C */  .4byte itCommon_FFlower_CreateItem
   /* 579A0 103EE0 801894A0 */  .4byte itCommon_Hammer_CreateItem
   /* 579A4 103EE4 801894A4 */  .4byte jtgt_ovl3_80176F60
@@ -2019,7 +2019,7 @@ glabel itCommon_Drop_ProcList
   /* 57A28 103F68 80189528 */  .4byte itCapsule_ADrop_SetStatus
   /* 57A2C 103F6C 8018952C */  .4byte itEgg_ADrop_SetStatus
   /* 57A30 103F70 80189530 */  .4byte jtgt_ovl3_801745FC
-  /* 57A34 103F74 80189534 */  .4byte jtgt_ovl3_80174828
+  /* 57A34 103F74 80189534 */  .4byte itHeart_ADrop_SetStatus
   .incbin "ovl3.raw.bin", 0x57A38, 0x4
 
 glabel jtbl_ovl3_8018953C
@@ -2027,7 +2027,7 @@ glabel jtbl_ovl3_8018953C
   /* 57A40 103F80 80189540 */  .4byte itBat_ADrop_SetStatus
   /* 57A44 103F84 80189544 */  .4byte itHarisen_ADrop_SetStatus
   /* 57A48 103F88 80189548 */  .4byte jtgt_ovl3_801780F0
-  /* 57A4C 103F8C 8018954C */  .4byte jtgt_ovl3_80175780
+  /* 57A4C 103F8C 8018954C */  .4byte itLGun_ADrop_SetStatus
   /* 57A50 103F90 80189550 */  .4byte itFFlower_ADrop_SetStatus
   /* 57A54 103F94 80189554 */  .4byte itHammer_ADrop_SetStatus
   /* 57A58 103F98 80189558 */  .4byte jtgt_ovl3_801766B8
@@ -2053,7 +2053,7 @@ glabel jtbl_ovl3_80189594
   /* 57A98 103FD8 80189598 */  .4byte itBat_AThrow_SetStatus
   /* 57A9C 103FDC 8018959C */  .4byte itHarisen_AThrow_SetStatus
   /* 57AA0 103FE0 801895A0 */  .4byte jtgt_ovl3_80178058
-  /* 57AA4 103FE4 801895A4 */  .4byte jtgt_ovl3_801756AC
+  /* 57AA4 103FE4 801895A4 */  .4byte itLGun_AThrow_SetStatus
   /* 57AA8 103FE8 801895A8 */  .4byte itFFlower_AThrow_SetStatus
   /* 57AAC 103FEC 801895AC */  .4byte itHammer_AThrow_SetStatus
   /* 57AB0 103FF0 801895B0 */  .4byte jtgt_ovl3_80176644
@@ -2079,7 +2079,7 @@ glabel jtbl_ovl3_801895EC
   /* 57AF0 104030 801895F0 */  .4byte itBat_FHold_SetStatus
   /* 57AF4 104034 801895F4 */  .4byte itHarisen_FHold_SetStatus
   /* 57AF8 104038 801895F8 */  .4byte jtgt_ovl3_80177F90
-  /* 57AFC 10403C 801895FC */  .4byte jtgt_ovl3_801755FC
+  /* 57AFC 10403C 801895FC */  .4byte itLGun_FHold_SetStatus
   /* 57B00 104040 80189600 */  .4byte itFFlower_FHold_SetStatus
   /* 57B04 104044 80189604 */  .4byte itHammer_FHold_SetStatus
   /* 57B08 104048 80189608 */  .4byte jtgt_ovl3_8017657C
@@ -2163,29 +2163,29 @@ glabel jtbl_ovl3_801897A4
   /* 57CA8 1041E8 801897A8 */  .4byte jtgt_ovl3_801745CC
   .incbin "ovl3.raw.bin", 0x57CAC, 0x24
 
-glabel Article_Heart_Data
+glabel itCommon_Heart_ItemDesc
   .incbin "ovl3.raw.bin", 0x57CD0, 0x4
   /* 57CD4 104214 801897D4 */  .4byte gItemFileData
   .incbin "ovl3.raw.bin", 0x57CD8, 0xC
 
 glabel jtbl_ovl3_801897E4
-  /* 57CE4 104224 801897E4 */  .4byte jtgt_ovl3_801746F0
-  /* 57CE8 104228 801897E8 */  .4byte jtgt_ovl3_80174750
+  /* 57CE4 104224 801897E4 */  .4byte itHeart_AFall_ProcUpdate
+  /* 57CE8 104228 801897E8 */  .4byte itHeart_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57CEC, 0x18
 
-glabel Article_Heart_Status
+glabel itCommon_Heart_StatusDesc
   .incbin "ovl3.raw.bin", 0x57D04, 0x4
-  /* 57D08 104248 80189808 */  .4byte func_ovl3_80174728
+  /* 57D08 104248 80189808 */  .4byte itHeart_GWait_ProcMap
   .incbin "ovl3.raw.bin", 0x57D0C, 0x18
 
 glabel jtbl_ovl3_80189824
-  /* 57D24 104264 80189824 */  .4byte jtgt_ovl3_801746F0
-  /* 57D28 104268 80189828 */  .4byte jtgt_ovl3_80174750
+  /* 57D24 104264 80189824 */  .4byte itHeart_AFall_ProcUpdate
+  /* 57D28 104268 80189828 */  .4byte itHeart_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57D2C, 0x18
 
 glabel jtbl_ovl3_80189844
-  /* 57D44 104284 80189844 */  .4byte jtgt_ovl3_801746F0
-  /* 57D48 104288 80189848 */  .4byte jtgt_ovl3_801747F8
+  /* 57D44 104284 80189844 */  .4byte itHeart_AFall_ProcUpdate
+  /* 57D48 104288 80189848 */  .4byte itHeart_ADrop_ProcMap
   .incbin "ovl3.raw.bin", 0x57D4C, 0x24
 
 glabel Article_Star_Data
@@ -2322,60 +2322,60 @@ glabel jtbl_ovl3_80189B2C
   /* 58044 104584 80189B44 */  .4byte itCommon_SDefault_ProcReflector
   .incbin "ovl3.raw.bin", 0x58048, 0x8
 
-glabel Article_L_Gun_Data
+glabel itCommon_LGun_ItemDesc
   .incbin "ovl3.raw.bin", 0x58050, 0x4
   /* 58054 104594 80189B54 */  .4byte gItemFileData
   .incbin "ovl3.raw.bin", 0x58058, 0xC
 
 glabel jtbl_ovl3_80189B64
-  /* 58064 1045A4 80189B64 */  .4byte jtgt_ovl3_801754F0
-  /* 58068 1045A8 80189B68 */  .4byte jtgt_ovl3_80175550
+  /* 58064 1045A4 80189B64 */  .4byte itLGun_AFall_ProcUpdate
+  /* 58068 1045A8 80189B68 */  .4byte itLGun_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x5806C, 0x18
 
-glabel Article_L_Gun_Status
+glabel itCommon_LGun_StatusDesc
   .incbin "ovl3.raw.bin", 0x58084, 0x4
-  /* 58088 1045C8 80189B88 */  .4byte func_ovl3_80175528
+  /* 58088 1045C8 80189B88 */  .4byte itLGun_GWait_ProcMap
   .incbin "ovl3.raw.bin", 0x5808C, 0x18
 
 glabel jtbl_ovl3_80189BA4
-  /* 580A4 1045E4 80189BA4 */  .4byte jtgt_ovl3_801754F0
-  /* 580A8 1045E8 80189BA8 */  .4byte jtgt_ovl3_80175550
+  /* 580A4 1045E4 80189BA4 */  .4byte itLGun_AFall_ProcUpdate
+  /* 580A8 1045E8 80189BA8 */  .4byte itLGun_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x580AC, 0x38
 
 glabel jtbl_ovl3_80189BE4
-  /* 580E4 104624 80189BE4 */  .4byte jtgt_ovl3_801754F0
-  /* 580E8 104628 80189BE8 */  .4byte jtgt_ovl3_80175630
-  /* 580EC 10462C 80189BEC */  .4byte jtgt_ovl3_80175684
-  /* 580F0 104630 80189BF0 */  .4byte jtgt_ovl3_80175684
+  /* 580E4 104624 80189BE4 */  .4byte itLGun_AFall_ProcUpdate
+  /* 580E8 104628 80189BE8 */  .4byte itLGun_AThrow_ProcMap
+  /* 580EC 10462C 80189BEC */  .4byte itLGun_SDefault_ProcHit
+  /* 580F0 104630 80189BF0 */  .4byte itLGun_SDefault_ProcHit
   /* 580F4 104634 80189BF4 */  .4byte itCommon_SDefault_ProcHop
-  /* 580F8 104638 80189BF8 */  .4byte jtgt_ovl3_80175684
+  /* 580F8 104638 80189BF8 */  .4byte itLGun_SDefault_ProcHit
   /* 580FC 10463C 80189BFC */  .4byte itCommon_SDefault_ProcReflector
   .incbin "ovl3.raw.bin", 0x58100, 0x4
 
 glabel jtbl_ovl3_80189C04
-  /* 58104 104644 80189C04 */  .4byte jtgt_ovl3_801754F0
-  /* 58108 104648 80189C08 */  .4byte jtgt_ovl3_8017572C
-  /* 5810C 10464C 80189C0C */  .4byte jtgt_ovl3_80175684
-  /* 58110 104650 80189C10 */  .4byte jtgt_ovl3_80175684
+  /* 58104 104644 80189C04 */  .4byte itLGun_AFall_ProcUpdate
+  /* 58108 104648 80189C08 */  .4byte itLGun_ADrop_ProcMap
+  /* 5810C 10464C 80189C0C */  .4byte itLGun_SDefault_ProcHit
+  /* 58110 104650 80189C10 */  .4byte itLGun_SDefault_ProcHit
   /* 58114 104654 80189C14 */  .4byte itCommon_SDefault_ProcHop
-  /* 58118 104658 80189C18 */  .4byte jtgt_ovl3_80175684
+  /* 58118 104658 80189C18 */  .4byte itLGun_SDefault_ProcHit
   /* 5811C 10465C 80189C1C */  .4byte itCommon_SDefault_ProcReflector
   .incbin "ovl3.raw.bin", 0x58120, 0x4
 
-glabel Item_L_Gun_Ammo_Desc
+glabel wpLGun_Ammo_WeaponDesc
   .incbin "ovl3.raw.bin", 0x58124, 0x8
   /* 5812C 10466C 80189C2C */  .4byte gItemFileData
   .incbin "ovl3.raw.bin", 0x58130, 0x8
 
 glabel jtbl_ovl3_80189C38
-  /* 58138 104678 80189C38 */  .4byte jtgt_ovl3_801758BC
-  /* 5813C 10467C 80189C3C */  .4byte jtgt_ovl3_80175914
-  /* 58140 104680 80189C40 */  .4byte jtgt_ovl3_80175958
-  /* 58144 104684 80189C44 */  .4byte jtgt_ovl3_80175958
-  /* 58148 104688 80189C48 */  .4byte jtgt_ovl3_80175988
-  /* 5814C 10468C 80189C4C */  .4byte jtgt_ovl3_80175958
-  /* 58150 104690 80189C50 */  .4byte jtgt_ovl3_80175A00
-  /* 58154 104694 80189C54 */  .4byte jtgt_ovl3_80175958
+  /* 58138 104678 80189C38 */  .4byte wpLGun_Ammo_ProcUpdate
+  /* 5813C 10467C 80189C3C */  .4byte wpLGun_Ammo_ProcMap
+  /* 58140 104680 80189C40 */  .4byte wpLGun_Ammo_ProcHit
+  /* 58144 104684 80189C44 */  .4byte wpLGun_Ammo_ProcHit
+  /* 58148 104688 80189C48 */  .4byte wpLGun_Ammo_ProcHop
+  /* 5814C 10468C 80189C4C */  .4byte wpLGun_Ammo_ProcHit
+  /* 58150 104690 80189C50 */  .4byte wpLGun_Ammo_ProcReflector
+  /* 58154 104694 80189C54 */  .4byte wpLGun_Ammo_ProcHit
   .incbin "ovl3.raw.bin", 0x58158, 0x8
 
 glabel itCommon_FFlower_ItemDesc

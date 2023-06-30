@@ -465,8 +465,8 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
             fp->fighter_hurt[i].hitstatus = gmHitCollision_HitStatus_Normal;
             fp->fighter_hurt[i].joint_index = attributes->fighter_hurt_desc[i].joint_index;
             fp->fighter_hurt[i].joint = fp->joint[fp->fighter_hurt[i].joint_index];
-            fp->fighter_hurt[i].unk_ftht_0xC = attributes->fighter_hurt_desc[i].unk_fthdesc_0x4;
-            fp->fighter_hurt[i].unk_ftht_0x10 = attributes->fighter_hurt_desc[i].unk_fthdesc_0x8;
+            fp->fighter_hurt[i].placement = attributes->fighter_hurt_desc[i].placement;
+            fp->fighter_hurt[i].is_grabbable = attributes->fighter_hurt_desc[i].is_grabbable;
             fp->fighter_hurt[i].offset = attributes->fighter_hurt_desc[i].offset;
             fp->fighter_hurt[i].size = attributes->fighter_hurt_desc[i].size;
 

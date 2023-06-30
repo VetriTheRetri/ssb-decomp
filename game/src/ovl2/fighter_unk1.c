@@ -619,8 +619,8 @@ void ftCommon_InitFighterHurtParts(GObj *fighter_gobj)
             ft_hurt->joint_index = ft_hurt_desc->joint_index;
             ft_hurt->joint = fp->joint[ft_hurt->joint_index];
 
-            ft_hurt->unk_ftht_0xC = ft_hurt_desc->unk_fthdesc_0x4;
-            ft_hurt->unk_ftht_0x10 = ft_hurt_desc->unk_fthdesc_0x8;
+            ft_hurt->placement = ft_hurt_desc->placement;
+            ft_hurt->is_grabbable = ft_hurt_desc->is_grabbable;
 
             ft_hurt->offset = ft_hurt_desc->offset;
             ft_hurt->size = ft_hurt_desc->size;
@@ -2185,7 +2185,7 @@ void ftKirby_MapCheckSpawnStarGFX(GObj *fighter_gobj)
 
     if (coll_mask)
     {
-        if (coll_mask & MPCOLL_MASK_RWALL)
+        if (coll_mask & MPCOLL_MASK_LWALL)
         {
             pos = DObjGetStruct(fighter_gobj)->translate;
 
@@ -2194,7 +2194,7 @@ void ftKirby_MapCheckSpawnStarGFX(GObj *fighter_gobj)
 
             func_ovl2_80102018(&pos);
         }
-        if (coll_mask & MPCOLL_MASK_LWALL)
+        if (coll_mask & MPCOLL_MASK_RWALL)
         {
             pos = DObjGetStruct(fighter_gobj)->translate;
 

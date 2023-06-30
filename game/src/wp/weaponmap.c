@@ -157,11 +157,11 @@ bool32 wpMap_CheckCollideAllModifyVel(GObj *weapon_gobj, u32 check_flags, f32 mo
     u32 unused;
 
 
-    if (coll_flags & check_flags & MPCOLL_MASK_RWALL)
+    if (coll_flags & check_flags & MPCOLL_MASK_LWALL)
     {
-        if (func_ovl0_800C7C0C(&ip->phys_info.vel, &coll_data->rwall_angle) < 0.0F)
+        if (func_ovl0_800C7C0C(&ip->phys_info.vel, &coll_data->lwall_angle) < 0.0F)
         {
-            func_ovl0_800C7B08(&ip->phys_info.vel, &coll_data->rwall_angle);
+            func_ovl0_800C7B08(&ip->phys_info.vel, &coll_data->lwall_angle);
 
             return_bool = TRUE;
 
@@ -170,13 +170,13 @@ bool32 wpMap_CheckCollideAllModifyVel(GObj *weapon_gobj, u32 check_flags, f32 mo
         }
     }
 
-    if (coll_flags & check_flags & MPCOLL_MASK_LWALL)
+    if (coll_flags & check_flags & MPCOLL_MASK_RWALL)
     {
-        if (func_ovl0_800C7C0C(&ip->phys_info.vel, &coll_data->lwall_angle) < 0.0F)
+        if (func_ovl0_800C7C0C(&ip->phys_info.vel, &coll_data->rwall_angle) < 0.0F)
         {
             return_bool = TRUE;
 
-            func_ovl0_800C7B08(&ip->phys_info.vel, &coll_data->lwall_angle);
+            func_ovl0_800C7B08(&ip->phys_info.vel, &coll_data->rwall_angle);
 
             mod_pos.x = translate->x - coll_data->object_coll.width;
             mod_pos.y = translate->y + coll_data->object_coll.center;

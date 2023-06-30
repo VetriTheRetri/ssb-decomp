@@ -157,7 +157,7 @@ bool32 atCommon_CheckTypeShootEmpty(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (((ip->it_kind == It_Kind_StarRod) || (ip->it_kind == It_Kind_L_Gun) || (ip->it_kind == It_Kind_FFlower)) && (ip->it_multi == 0))
+    if (((ip->it_kind == It_Kind_StarRod) || (ip->it_kind == It_Kind_LGun) || (ip->it_kind == It_Kind_FFlower)) && (ip->it_multi == 0))
     {
         return TRUE;
     }
