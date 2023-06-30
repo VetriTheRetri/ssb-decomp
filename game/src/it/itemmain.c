@@ -71,13 +71,14 @@ void func_ovl3_80172558(Item_Struct *ip, f32 gravity, f32 terminal_velocity)
 
 extern s32 dbObjDisplayStatus_Global_Article; // Static (.bss)
 
-void func_ovl3_801725BC(GObj *item_gobj)
+// 0x801725BC
+void itMain_ResetPlayerVars(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->owner_gobj = NULL;
     ip->team = ITEM_TEAM_DEFAULT;
-    ip->port_id = ITEM_PORT_DEFAULT;
+    ip->player = ITEM_PORT_DEFAULT;
     ip->handicap = ITEM_HANDICAP_DEFAULT;
     ip->player_number = 0;
     ip->item_hit.stale = ITEM_STALE_DEFAULT;
@@ -131,13 +132,14 @@ void func_ovl3_801727BC(GObj *item_gobj)
 
     ip->owner_gobj = ip->damage_gobj;
     ip->team = ip->damage_team;
-    ip->port_id = ip->damage_port;
+    ip->player = ip->damage_port;
     ip->player_number = ip->player_number; // Could potentially cause a bug? Didn't they mean damage_player_number?
     ip->handicap = ip->damage_handicap;
     ip->display_state = ip->damage_display_state;
 }
 
-s32 func_ovl3_801727F4(Item_Struct *ip)
+// 0x801727F4
+s32 itMain_ApplyHitDamage(Item_Struct *ip)
 {
     s32 damage;
 
@@ -164,7 +166,8 @@ bool32 atCommon_CheckTypeShootEmpty(GObj *item_gobj)
     else return FALSE;
 }
 
-void func_ovl3_801728D4(GObj *item_gobj)
+// 0x801728D4
+void itMain_DestroyItem(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -188,7 +191,8 @@ void func_ovl3_801728D4(GObj *item_gobj)
     gOMObj_EjectGObjCommon(item_gobj);
 }
 
-void func_ovl3_80172984(GObj *item_gobj, Vec3f *vel, f32 stale, u16 stat_flags, u16 stat_count) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2
+// 0x80172984
+void itMain_SetFighterRelease(GObj *item_gobj, Vec3f *vel, f32 stale, u16 stat_flags, u16 stat_count) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     GObj *fighter_gobj = ip->owner_gobj;
@@ -198,9 +202,7 @@ void func_ovl3_80172984(GObj *item_gobj, Vec3f *vel, f32 stale, u16 stat_flags, 
 
     func_ovl0_800C9424(DObjGetStruct(item_gobj));
 
-    pos.z = 0.0F;
-    pos.y = 0.0F;
-    pos.x = 0.0F;
+    pos.x = pos.y = pos.z = 0.0F;
 
     joint_index = (ip->weight == It_Weight_Heavy) ? fp->attributes->joint_itemhold_heavy : fp->attributes->joint_itemhold_light;
 
@@ -234,7 +236,8 @@ void func_ovl3_80172984(GObj *item_gobj, Vec3f *vel, f32 stale, u16 stat_flags, 
 
 extern void (*itCommon_Drop_ProcList[It_Kind_EnumMax])(GObj*); // Assumed to contain 45 callbacks?
 
-void func_ovl3_80172AEC(GObj *item_gobj, Vec3f *vel, f32 stale)
+// 0x80172AEC
+void itMain_SetFighterDrop(GObj *item_gobj, Vec3f *vel, f32 stale)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     GObj *owner_gobj = ip->owner_gobj;
@@ -245,14 +248,15 @@ void func_ovl3_80172AEC(GObj *item_gobj, Vec3f *vel, f32 stale)
     {
         proc_drop(item_gobj);
     }
-    func_ovl3_80172984(item_gobj, vel, stale, ftStatus_AttackIndex_ItemThrow, fp->stat_count);
+    itMain_SetFighterRelease(item_gobj, vel, stale, ftStatus_AttackIndex_ItemThrow, fp->stat_count);
 
     func_800269C0(ip->drop_sfx);
 }
 
 extern void (*itCommon_Throw_ProcList[It_Kind_EnumMax])(GObj*); 
 
-void func_ovl3_80172B78(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_throw)
+// 0x80172B78
+void itMain_SetFighterThrow(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_throw)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     GObj *owner_gobj = ip->owner_gobj;
@@ -276,7 +280,7 @@ void func_ovl3_80172B78(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_
     {
         proc_throw(item_gobj);
     }
-    func_ovl3_80172984(item_gobj, vel, stale, fp->stat_flags.halfword, fp->stat_count);
+    itMain_SetFighterRelease(item_gobj, vel, stale, fp->stat_flags.halfword, fp->stat_count);
 
     func_ovl2_8010066C(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
@@ -288,7 +292,7 @@ void func_ovl3_80172B78(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_
 extern void (*itCommon_Pickup_ProcList[It_Kind_EnumMax])(GObj*);
 
 // 0x80172CA4
-void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
+void itMain_SetFighterPickup(GObj *item_gobj, GObj *fighter_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
@@ -304,7 +308,7 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
     ip->is_hold = TRUE;
 
     ip->team = fp->team;
-    ip->port_id = fp->port_id;
+    ip->player = fp->player;
     ip->handicap = fp->handicap;
     ip->player_number = fp->player_number;
 
@@ -314,7 +318,7 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
 
     ip->display_state = fp->display_state;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
 
     joint = func_800092D0(item_gobj, NULL);
 
@@ -364,7 +368,8 @@ void itMain_PickupSetHoldFighter(GObj *item_gobj, GObj *fighter_gobj)
     ip->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 }
 
-void func_ovl3_80172E74(GObj *item_gobj) // Airborne article becomes grounded?
+// 0x80172E74
+void itMain_SetGroundPickup(GObj *item_gobj) // Airborne article becomes grounded?
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -376,8 +381,8 @@ void func_ovl3_80172E74(GObj *item_gobj) // Airborne article becomes grounded?
 
     ip->times_landed = 0;
 
-    func_ovl3_801725BC(item_gobj);
-    func_ovl3_80173F54(ip);
+    itMain_ResetPlayerVars(item_gobj);
+    itMap_SetGround(ip);
 }
 
 // 0x80172EC8
@@ -522,7 +527,7 @@ void itMain_UpdateHitEvent(GObj *item_gobj, itHitEvent *ev)
 
 extern s8 gmBonusStat_MewCatcher;
 
-GObj* func_ovl3_80173228(GObj *item_gobj)
+GObj* itMain_CreateMonster(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     GObj *monster_gobj;
@@ -569,14 +574,14 @@ GObj* func_ovl3_80173228(GObj *item_gobj)
 
         mp->owner_gobj = ip->owner_gobj;
         mp->team = ip->team;
-        mp->port_id = ip->port_id;
+        mp->player = ip->player;
         mp->handicap = ip->handicap;
         mp->player_number = ip->player_number;
         mp->display_state = ip->display_state;
 
         if (Match_Info->game_type == gmMatch_GameType_1PGame)
         {
-            if ((mp->port_id == Scene_Info.player_port) && (mp->it_kind == It_Kind_Mew))
+            if ((mp->player == Scene_Info.player_port) && (mp->it_kind == It_Kind_Mew))
             {
                 gmBonusStat_MewCatcher = TRUE;
             }

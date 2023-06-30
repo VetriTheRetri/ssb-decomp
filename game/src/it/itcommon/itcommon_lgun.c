@@ -62,7 +62,7 @@ itStatusDesc itCommon_LGun_StatusDesc[5] =
     // Status 3 (Fighter Throw)
     {
         itLGun_AFall_ProcUpdate,            // Proc Update
-        itLGun_AThrow_ProcMap,              // Proc Map
+        itLGun_FThrow_ProcMap,              // Proc Map
         itLGun_SDefault_ProcHit,            // Proc Hit
         itLGun_SDefault_ProcHit,            // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -74,7 +74,7 @@ itStatusDesc itCommon_LGun_StatusDesc[5] =
     // Status 4 (Fighter Drop)
     {
         itLGun_AFall_ProcMap,               // Proc Update
-        itLGun_ADrop_ProcMap,               // Proc Map
+        itLGun_FDrop_ProcMap,               // Proc Map
         itLGun_SDefault_ProcHit,            // Proc Hit
         itLGun_SDefault_ProcHit,            // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -109,8 +109,8 @@ typedef enum itLGunStatus
     itStatus_LGun_GWait,
     itStatus_LGun_AFall,
     itStatus_LGun_FHold,
-    itStatus_LGun_AThrow,
-    itStatus_LGun_ADrop
+    itStatus_LGun_FThrow,
+    itStatus_LGun_FDrop
 
 } itLGunStatus;
 
@@ -142,7 +142,7 @@ bool32 itLGun_AFall_ProcMap(GObj *item_gobj)
 // 0x80175584
 void itLGun_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_LGun_StatusDesc, itStatus_LGun_GWait);
 }
 
@@ -153,7 +153,7 @@ void itLGun_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_LGun_StatusDesc, itStatus_LGun_AFall);
 }
 
@@ -166,7 +166,7 @@ void itLGun_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x80175630
-bool32 itLGun_AThrow_ProcMap(GObj *item_gobj)
+bool32 itLGun_FThrow_ProcMap(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -190,17 +190,17 @@ bool32 itLGun_SDefault_ProcHit(GObj *item_gobj)
 }
 
 // 0x801756AC
-void itLGun_AThrow_SetStatus(GObj *item_gobj)
+void itLGun_FThrow_SetStatus(GObj *item_gobj)
 {
     s32 lr = ftGetStruct(itGetStruct(item_gobj)->owner_gobj)->lr;
 
-    itMain_SetItemStatus(item_gobj, itCommon_LGun_StatusDesc, itStatus_LGun_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_LGun_StatusDesc, itStatus_LGun_FThrow);
 
     DObjGetStruct(item_gobj)->next->rotate.y = (lr == LEFT) ? F_DEG_TO_RAD(-90.0F) : F_DEG_TO_RAD(90.0F); // -HALF_PI32, HALF_PI32
 }
 
 // 0x8017572C
-bool32 itLGun_ADrop_ProcMap(GObj *item_gobj)
+bool32 itLGun_FDrop_ProcMap(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -212,11 +212,11 @@ bool32 itLGun_ADrop_ProcMap(GObj *item_gobj)
 }
 
 // 0x80175780
-void itLGun_ADrop_SetStatus(GObj *item_gobj)
+void itLGun_FDrop_SetStatus(GObj *item_gobj)
 {
     s32 lr = ftGetStruct(itGetStruct(item_gobj)->owner_gobj)->lr;
 
-    itMain_SetItemStatus(item_gobj, itCommon_LGun_StatusDesc, itStatus_LGun_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_LGun_StatusDesc, itStatus_LGun_FDrop);
 
     DObjGetStruct(item_gobj)->next->rotate.y = (lr == LEFT) ? F_DEG_TO_RAD(-90.0F) : F_DEG_TO_RAD(90.0F); // -HALF_PI32, HALF_PI32
 }

@@ -685,7 +685,7 @@ typedef struct ftSpawnInfo
     Vec3f pos;
     s32 lr_spawn;
     u8 team;
-    u8 port_id;
+    u8 player;
     u8 model_lod;
     u8 costume_id;
     u8 shade_id;
@@ -731,7 +731,7 @@ typedef struct _Fighter_Hit
     u32 sfx_kind : 4;
     u32 is_hit_air : 1;
     u32 is_hit_ground : 1;
-    u32 clang : 1;
+    u32 rebound : 1;
     u32 is_scale_pos : 1;
     u32 attack_id : 6;
     u16 motion_count;
@@ -774,7 +774,7 @@ typedef struct ftHitCollisionLog // Might have to return once structs are cleane
     s32 hitbox_id;
     GObj *attacker_gobj;
     Fighter_Hurt *victim_hurt; // Victim fighter's hurtbox
-    u8 attacker_port_id;
+    u8 attacker_player;
     s32 attacker_player_number;
 
 } ftHitCollisionLog;
@@ -1061,7 +1061,7 @@ struct Fighter_Struct
     GObj *fighter_gobj;
     ftKind ft_kind;
     u8 team;
-    u8 port_id;
+    u8 player;
     u8 lod_current;  // Hi-Poly = 1, Low-Poly = 2
     u8 lod_match; // Hi-Poly = 1, Low-Poly = 2
     u8 costume_id;
@@ -1106,7 +1106,7 @@ struct Fighter_Struct
 
     u8 jumps_used;
     u8 unk_ft_0x149;
-    gmCollisionGA ground_or_air;
+    mpGroundAir ground_or_air;
 
     f32 attack1_followup_frames;
     s32 attack1_status_id;
@@ -1237,7 +1237,7 @@ struct Fighter_Struct
     GObj *throw_gobj;
     ftKind throw_ft_kind;
     u8 throw_team; // Thrower's team?
-    u8 throw_port_id;
+    u8 throw_player;
     s32 throw_player_number;
     s32 attack_id;
     u16 motion_count;
@@ -1268,7 +1268,7 @@ struct Fighter_Struct
     s32 shield_damage;
     s32 shield_damage_total; // shield_damage + hitbox damage + hitbox shield damage, does not persist?
     s32 lr_shield;
-    s32 shield_port_id; // Port of player hitting this fighter's shield
+    s32 shield_player; // Port of player hitting this fighter's shield
     s32 reflect_damage;
     s32 damage_queue; // Not sure how this is different from damage_taken_recent
     f32 damage_knockback;
@@ -1282,7 +1282,7 @@ struct Fighter_Struct
     s32 damage_index;
     s32 damage_joint_index;
     s32 damage_player_number;
-    s32 damage_port_id; // Port index of damaging fighter
+    s32 damage_player; // Port index of damaging fighter
     u16 damage_count;
     s32 unk_ft_0x814;
     s32 damage_heal; // Percent damage to heal
@@ -1410,7 +1410,7 @@ struct Fighter_Struct
                                                     \
     vel.x = vel.y = vel.z = 0.0F;                   \
                                                     \
-    func_ovl3_80172AEC((fp)->item_hold, &vel, 1.0F);\
+    itMain_SetFighterDrop((fp)->item_hold, &vel, 1.0F);\
 }                                                   \
 
 #define AttributesGetStruct(fp) \

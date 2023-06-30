@@ -28,7 +28,7 @@ extern itStatusDesc Article_Sword_Status[];
 
 void func_ovl3_80174BE4(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, Article_Sword_Status, 0);
 }
 
@@ -38,7 +38,7 @@ void func_ovl3_80174C18(GObj *item_gobj)
 
     ap->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     itMain_SetItemStatus(item_gobj, Article_Sword_Status, 1);
 }
 

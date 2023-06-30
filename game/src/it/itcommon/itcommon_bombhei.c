@@ -59,8 +59,8 @@ itStatusDesc itCommon_BombHei_StatusDesc[9] =
 
     // Status 3 (Fighter Throw)
     {
-        itBombHei_AThrow_ProcUpdate,        // Proc Update
-        itBombHei_AThrow_ProcMap,           // Proc Map
+        itBombHei_FThrow_ProcUpdate,        // Proc Update
+        itBombHei_FThrow_ProcMap,           // Proc Map
         itBombHei_SDefault_ProcHit,         // Proc Hit
         itBombHei_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -72,7 +72,7 @@ itStatusDesc itCommon_BombHei_StatusDesc[9] =
     // Status 4 (Fighter Throw)
     {
         itBombHei_AFall_ProcUpdate,         // Proc Update
-        itBombHei_ADrop_ProcMap,            // Proc Map
+        itBombHei_FDrop_ProcMap,            // Proc Map
         itBombHei_SDefault_ProcHit,         // Proc Hit
         itBombHei_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -135,8 +135,8 @@ typedef enum itBombHeiStatus
     itStatus_BombHei_GWait,
     itStatus_BombHei_AFall,
     itStatus_BombHei_FHold,
-    itStatus_BombHei_AThrow,
-    itStatus_BombHei_ADrop,
+    itStatus_BombHei_FThrow,
+    itStatus_BombHei_FDrop,
     itStatus_BombHei_GWalk,
     itStatus_BombHei_MExplode,              // Explode on map collision
     itStatus_BombHei_NExplode,              // Neutral explosion
@@ -337,7 +337,7 @@ bool32 itBombHei_AFall_ProcMap(GObj *item_gobj)
 // 0x80177474
 void itBombHei_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itBombHei_Default_SetHitStatusNormal(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_BombHei_StatusDesc, itStatus_BombHei_GWait);
 }
@@ -349,7 +349,7 @@ void itBombHei_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itBombHei_Default_SetHitStatusNormal(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_BombHei_StatusDesc, itStatus_BombHei_AFall);
 }
@@ -362,7 +362,7 @@ void itBombHei_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x80177530
-bool32 itBombHei_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itBombHei_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -373,29 +373,29 @@ bool32 itBombHei_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x8017756C
-bool32 itBombHei_AThrow_ProcMap(GObj *item_gobj)
+bool32 itBombHei_FThrow_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173E58(item_gobj, itBombHei_MExplode_SetStatus);
 }
 
 // 0x80177590
-void itBombHei_AThrow_SetStatus(GObj *item_gobj)
+void itBombHei_FThrow_SetStatus(GObj *item_gobj)
 {
     itBombHei_Default_SetHitStatusNormal(item_gobj);
-    itMain_SetItemStatus(item_gobj, itCommon_BombHei_StatusDesc, itStatus_BombHei_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_BombHei_StatusDesc, itStatus_BombHei_FThrow);
 }
 
 // 0x801775C4
-bool32 itBombHei_ADrop_ProcMap(GObj *item_gobj)
+bool32 itBombHei_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173E58(item_gobj, itBombHei_MExplode_SetStatus);
 }
 
 // 0x801775E8
-void itBombHei_ADrop_SetStatus(GObj *item_gobj)
+void itBombHei_FDrop_SetStatus(GObj *item_gobj)
 {
     itBombHei_Default_SetHitStatusNormal(item_gobj);
-    itMain_SetItemStatus(item_gobj, itCommon_BombHei_StatusDesc, itStatus_BombHei_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_BombHei_StatusDesc, itStatus_BombHei_FDrop);
 }
 
 // 0x8017761C
@@ -466,7 +466,7 @@ bool32 itBombHei_GWalk_ProcMap(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_801735A0(item_gobj, itBombHei_ADrop_SetStatus);
+    func_ovl3_801735A0(item_gobj, itBombHei_FDrop_SetStatus);
 
     if (ip->coll_data.coll_mask & MPCOLL_MASK_LWALL)
     {
@@ -571,7 +571,7 @@ void itBombHei_Default_UpdateHitEvent(GObj *item_gobj)
         ip->item_hit.can_rehit_item = TRUE;
         ip->item_hit.can_hop = FALSE;
         ip->item_hit.can_reflect = FALSE;
-        ip->item_hit.clang = FALSE;
+        ip->item_hit.rebound = FALSE;
 
         ip->item_hit.element = gmHitCollision_Element_Fire;
 
@@ -667,7 +667,7 @@ bool32 itBombHei_GExplodeWait_ProcUpdate(GObj *item_gobj)
 // 0x80177D00
 bool32 itBombHei_GExplodeWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, itBombHei_ADrop_SetStatus);
+    func_ovl3_801735A0(item_gobj, itBombHei_FDrop_SetStatus);
 
     return FALSE;
 }

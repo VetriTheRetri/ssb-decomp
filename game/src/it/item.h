@@ -223,7 +223,7 @@ typedef struct _Item_Hit
     s32 priority;                       // Priority?
     u8 interact_mask;                   // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;                        // Played when hitbox connects with a hurtbox
-    u32 clang : 1;                      // Item's hitbox can collide with other hitboxes
+    u32 rebound : 1;                    // Item's hitbox can collide with other hitboxes
     u32 can_rehit_item : 1;             // Item can rehit item after default rehit cooldown expires
     u32 can_rehit_fighter : 1;          // Item can rehit fighter after default rehit cooldown expires
     u32 can_rehit_shield : 1;           // Item can rehit shield after default rehit cooldown expires
@@ -259,7 +259,7 @@ typedef struct itHitDesc
     u32 knockback_weight;
     u32 knockback_base;
     s32 element;
-    u32 clang : 1;
+    u32 rebound : 1;
     s32 shield_damage;
     u16 hit_sfx;
 
@@ -305,7 +305,7 @@ typedef struct itCommonAttributes
     u32 knockback_weight : 10;
     s32 shield_damage : 8;
     u32 hitbox_count : 2;
-    u32 clang : 1;
+    u32 rebound : 1;
     u32 hit_sfx : 10;
     u32 priority : 3;
     u32 can_rehit_item : 1;
@@ -334,7 +334,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     itKind it_kind;                     // Item ID
     itType type;                        // Item type
     u8 team;                            // Item's team
-    u8 port_id;                         // Item's port index
+    u8 player;                          // Item's port index
     u8 handicap;                        // Item's handicap
     s32 player_number;                  // Item's player number
     s32 percent_damage;                 // Item's damage
@@ -350,21 +350,22 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     Coll_Data coll_data;                // Item's collision data
 
-    gmCollisionGA ground_or_air;        // Ground or air bool
+    mpGroundAir ground_or_air;          // Ground or air bool
 
     Item_Hit item_hit;                  // Item's hitbox
     Item_Hurt item_hurt;                // Item's hurtbox
 
-    s32 hit_victim_damage;              // Damage applied to entity this item has hit
+    s32 hit_normal_damage;              // Damage applied to entity this item has hit
     s32 lr_attack;                      // Direction of outgoing attack?
-    s32 hit_reflect_damage;             // Damage on reflection?
+    s32 hit_refresh_damage;             // Damage applied to entity this item has hit, if rehit is possible?
     s32 hit_attack_damage;              // Damage item dealt to other attack
     s32 hit_shield_damage;              // Damage item dealt to shield
     f32 shield_collide_angle;           // Angle at which item collided with shield?
-    Vec3f shield_collide_vec;           // Position of shield this item collided with?
+    Vec3f shield_collide_vec;           // Position of shield item collided with? (Update: only Z axis appears to be used, can be 0, -1 or 1 depending on attack direction
     GObj *reflect_gobj;                 // GObj that reflected this item
     gmStatFlags reflect_stat_flags;     // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
     u16 reflect_stat_count;             // Status update count at the time the item is reflected?
+
     s32 damage_highest;                 // I don't know why there are at least two of these
     f32 damage_knockback;               // Angle at which article will be launched when getting hit?
     s32 damage_taken_recent;            // How does this work?

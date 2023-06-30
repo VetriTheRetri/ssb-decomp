@@ -17,7 +17,7 @@ void func_ovl3_80183B10(GObj *item_gobj)
         ap->item_hit.knockback_weight = hit_desc[ap->item_event_index].knockback_weight;
         ap->item_hit.knockback_base = hit_desc[ap->item_event_index].knockback_base;
         ap->item_hit.element = hit_desc[ap->item_event_index].element;
-        ap->item_hit.clang = hit_desc[ap->item_event_index].clang;
+        ap->item_hit.rebound = hit_desc[ap->item_event_index].rebound;
         ap->item_hit.shield_damage = hit_desc[ap->item_event_index].shield_damage;
         ap->item_hit.hit_sfx = hit_desc[ap->item_event_index].hit_sfx;
 

@@ -59,8 +59,8 @@ itStatusDesc itCommon_Hammer_StatusDesc[5] =
 
     // Status 3 (Fighter Throw)
     {
-        itHammer_AThrow_ProcUpdate,         // Proc Update
-        itHammer_AThrow_ProcMap,            // Proc Map
+        itHammer_FThrow_ProcUpdate,         // Proc Update
+        itHammer_FThrow_ProcMap,            // Proc Map
         itHammer_SDefault_ProcHit,          // Proc Hit
         itHammer_SDefault_ProcHit,          // Proc Shield
         NULL,                               // Proc Hop
@@ -72,7 +72,7 @@ itStatusDesc itCommon_Hammer_StatusDesc[5] =
     // Status 4 (Fighter Drop)
     {
         itHammer_AFall_ProcUpdate,          // Proc Update
-        itHammer_ADrop_ProcMap,             // Proc Map
+        itHammer_FDrop_ProcMap,             // Proc Map
         itHammer_SDefault_ProcHit,          // Proc Hit
         itHammer_SDefault_ProcHit,          // Proc Shield
         NULL,                               // Proc Hop
@@ -87,8 +87,8 @@ typedef enum itHammerStatus
     itStatus_Hammer_GWait,
     itStatus_Hammer_AFall,
     itStatus_Hammer_FHold,
-    itStatus_Hammer_AThrow,
-    itStatus_Hammer_ADrop
+    itStatus_Hammer_FThrow,
+    itStatus_Hammer_FDrop
 
 } itHammerStatus;
 
@@ -128,7 +128,7 @@ extern itStatusDesc itCommon_Hammer_StatusDesc[];
 // 0x801761C4
 void itHammer_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_GWait);
 }
 
@@ -141,7 +141,7 @@ void itHammer_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_AFall);
 }
 
@@ -154,7 +154,7 @@ void itHammer_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x80176270
-bool32 itHammer_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itHammer_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -165,7 +165,7 @@ bool32 itHammer_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x801762A8
-bool32 itHammer_AThrow_ProcMap(GObj *item_gobj)
+bool32 itHammer_FThrow_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
 }
@@ -183,9 +183,9 @@ bool32 itHammer_SDefault_ProcHit(GObj *item_gobj)
 }
 
 // 0x80176300
-void itHammer_AThrow_SetStatus(GObj *item_gobj)
+void itHammer_FThrow_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_FThrow);
 
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 
@@ -193,16 +193,16 @@ void itHammer_AThrow_SetStatus(GObj *item_gobj)
 }
 
 // 0x80176348
-bool32 itHammer_ADrop_ProcMap(GObj *item_gobj)
+bool32 itHammer_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
 }
 
 // 0x80176378
-void itHammer_ADrop_SetStatus(GObj *item_gobj)
+void itHammer_FDrop_SetStatus(GObj *item_gobj)
 {
     func_ovl3_80172FBC(item_gobj);
-    itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_FDrop);
 
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 

@@ -180,7 +180,7 @@ void itPKFire_GWait_SetStatus(GObj *item_gobj)
     gmStatFlags stat_flags;
     u16 stat_count;
 
-    func_ovl3_80173F54(ip);
+    itMap_SetGround(ip);
 
     ip->phys_info.vel_ground = 0.0F;
     ip->phys_info.vel_air.y = 0.0F;
@@ -202,7 +202,7 @@ void itPKFire_AFall_SetStatus(GObj *item_gobj)
     gmStatFlags stat_flags;
     u16 stat_count;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
 
     ip->phys_info.vel_air.y = 0.0F;
     ip->phys_info.vel_air.x = 0.0F;
@@ -241,7 +241,7 @@ GObj* itNess_PKFire_CreateItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     ip->is_hold = FALSE;
 
     ip->team = wp->team;
-    ip->port_id = wp->port_id;
+    ip->player = wp->player;
     ip->handicip = wp->handicip;
     ip->player_number = wp->player_number;
 
@@ -252,7 +252,7 @@ GObj* itNess_PKFire_CreateItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     ip->item_hit.stat_flags = wp->weapon_hit.stat_flags;
     ip->item_hit.stat_count = wp->weapon_hit.stat_count;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itManager_UpdateHitPositions(item_gobj);
 
     ip->lifetime = ATPKFIRE_LIFETIME;

@@ -67,7 +67,7 @@ void func_ovl3_80180860(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
 
     ap->phys_info.vel_air.y = 0.0F;
     ap->phys_info.vel_air.x = 0.0F;

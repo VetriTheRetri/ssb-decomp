@@ -31,7 +31,7 @@ extern itStatusDesc Article_MSBomb_Status[];
 
 void func_ovl3_80176504(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, Article_MSBomb_Status, 0);
 }
 
@@ -41,7 +41,7 @@ void func_ovl3_80176538(GObj *item_gobj)
 
     ap->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     itMain_SetItemStatus(item_gobj, Article_MSBomb_Status, 1);
 }
 
@@ -171,9 +171,9 @@ void func_ovl3_80176840(GObj *item_gobj)
 
     ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    if ((ap->port_id != -1U) && (ap->port_id != GMMATCH_PLAYERS_MAX)) // Macro might be off though
+    if ((ap->player != -1U) && (ap->player != GMMATCH_PLAYERS_MAX)) // Macro might be off though
     {
-        GObj *fighter_gobj = Match_Info->player_block[ap->port_id].fighter_gobj;
+        GObj *fighter_gobj = Match_Info->player_block[ap->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {
@@ -316,7 +316,7 @@ void func_ovl3_80176C14(GObj *item_gobj)
         ap->item_hit.can_rehit_item = TRUE;
         ap->item_hit.can_hop = FALSE;
         ap->item_hit.can_reflect = FALSE;
-        ap->item_hit.clang = FALSE;
+        ap->item_hit.rebound = FALSE;
 
         ap->item_hit.element = gmHitCollision_Element_Fire;
 

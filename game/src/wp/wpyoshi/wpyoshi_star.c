@@ -87,7 +87,7 @@ bool32 wpYoshi_Star_ProcHit(GObj *weapon_gobj)
 
     func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
-    if (wp->hit_victim_damage != 0)
+    if (wp->hit_normal_damage != 0)
     {
         return TRUE;
     }

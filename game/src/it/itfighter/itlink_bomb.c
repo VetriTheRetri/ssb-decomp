@@ -214,7 +214,7 @@ void func_ovl3_80185F70(GObj *item_gobj)
     ap->phys_info.vel_air.y = 0.0F;
     ap->phys_info.vel_air.x = 0.0F;
 
-    func_ovl3_80173F54(ap);
+    itMap_SetGround(ap);
     func_ovl3_80185CD4(item_gobj);
     itMain_SetItemStatus(item_gobj, Article_Link_Bomb_Status, 0);
 }
@@ -225,7 +225,7 @@ void func_ovl3_80185FD8(GObj *item_gobj)
 
     ap->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     func_ovl3_80185CD4(item_gobj);
     itMain_SetItemStatus(item_gobj, &Article_Link_Bomb_Status, 1);
 }
@@ -243,7 +243,7 @@ bool32 func_ovl3_80186024(GObj *item_gobj)
     {
         if (ap->lifetime == 0)
         {
-            func_ovl3_80172984(item_gobj, &ap->phys_info.vel, 1.0F); // Ok, WHAT? This function takes 5 arguments, but it doesn't match otherwise???
+            itMain_SetFighterRelease(item_gobj, &ap->phys_info.vel, 1.0F); // Ok, WHAT? This function takes 5 arguments, but it doesn't match otherwise???
                                                                         // Did they actually redefine this? Passes pointer in a3 instead of u16...
                                                                         // Do we leave this out of the header and declare it separately to match?
                                                                         // Update 3/23/2023: matches as variadic. No comment.
@@ -376,7 +376,7 @@ void func_ovl3_801863AC(GObj *item_gobj)
         ap->item_hit.can_rehit_item = TRUE;
         ap->item_hit.can_hop = FALSE;
         ap->item_hit.can_reflect = FALSE;
-        ap->item_hit.clang = FALSE;
+        ap->item_hit.rebound = FALSE;
 
         ap->item_hit.element = gmHitCollision_Element_Fire;
 
@@ -464,7 +464,7 @@ GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
         ap->phys_info.vel_air.y = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
 
-        itMain_PickupSetHoldFighter(item_gobj, fighter_gobj);
+        itMain_SetFighterPickup(item_gobj, fighter_gobj);
     }
     return item_gobj;
 }

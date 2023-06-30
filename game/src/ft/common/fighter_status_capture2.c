@@ -124,7 +124,7 @@ void ftCommon_Shouldered_SetStatus(GObj *fighter_gobj)
     ftCommon_Thrown_SetStatusImmediate(fighter_gobj, ftStatus_Common_Shouldered);
     ftCommon_Trap_InitBreakoutVars(this_fp, ((this_fp->percent_damage * 0.08F) + 14.0F));
 
-    damage = gmCommon_DamageApplyStale(capture_fp->port_id, 8, capture_fp->attack_id, capture_fp->motion_count);
+    damage = gmCommon_DamageApplyStale(capture_fp->player, 8, capture_fp->attack_id, capture_fp->motion_count);
 
     if (ftCommon_GetBestHitStatusAll(fighter_gobj) != gmHitCollision_HitStatus_Normal)
     {
@@ -134,8 +134,8 @@ void ftCommon_Shouldered_SetStatus(GObj *fighter_gobj)
     {
         ftCommon_Damage_UpdateDamageColAnim(fighter_gobj, gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, damage, damage, 0, 100, 0, this_fp->attributes->weight, capture_fp->handicap, this_fp->handicap), 0);
         ftDamageUpdateCheckDropItem(this_fp, damage);
-        ftAttackUpdateMatchStats(capture_fp->port_id, this_fp->port_id, damage);
-        ftAttackAddStaleQueue(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->motion_count);
+        ftAttackUpdateMatchStats(capture_fp->player, this_fp->player, damage);
+        ftAttackAddStaleQueue(capture_fp->player, this_fp->player, capture_fp->attack_id, capture_fp->motion_count);
     }
     func_ovl2_800E806C(this_fp, 7, 0);
 }

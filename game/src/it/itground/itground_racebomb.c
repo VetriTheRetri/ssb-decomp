@@ -265,7 +265,7 @@ void func_ovl3_801851F4(GObj *item_gobj)
     ap->item_hit.stale = ITEM_STALE_DEFAULT;
     ap->item_hit.element = gmHitCollision_Element_Fire;
 
-    ap->item_hit.clang = FALSE;
+    ap->item_hit.rebound = FALSE;
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 

@@ -19,7 +19,7 @@ void ftCommon_HammerUpdateStats(GObj *fighter_gobj)
     {
         bool32 is_colanim_reset = FALSE;
 
-        func_ovl3_801728D4(fp->item_hold);
+        itMain_DestroyItem(fp->item_hold);
         ftSpecialItem_BGMCheckFighters();
 
         if (fp->colanim.colanim_id == FTCOMMON_HAMMER_COLANIM_ID)

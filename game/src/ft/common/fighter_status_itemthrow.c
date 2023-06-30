@@ -97,9 +97,9 @@ void ftCommon_ItemThrow_ProcUpdate(GObj *fighter_gobj)
 
         if (status_id == ftStatus_Common_LightThrowDrop)
         {
-            func_ovl3_80172AEC(fp->item_hold, &vel, damage_mul);
+            itMain_SetFighterDrop(fp->item_hold, &vel, damage_mul);
         }
-        else func_ovl3_80172B78(fp->item_hold, &vel, damage_mul, Fighter_ItemThrow_Desc[status_id - ftStatus_Common_LightThrowDrop].is_smash_throw);
+        else itMain_SetFighterThrow(fp->item_hold, &vel, damage_mul, Fighter_ItemThrow_Desc[status_id - ftStatus_Common_LightThrowDrop].is_smash_throw);
 
         fp->command_vars.flags.flag0 = 0;
     }

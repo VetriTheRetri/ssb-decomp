@@ -57,7 +57,7 @@ extern itStatusDesc Article_Taru_Status[];
 
 void func_ovl3_80179CE8(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, Article_Taru_Status, 0);
 }
 
@@ -67,7 +67,7 @@ void func_ovl3_80179D1C(GObj *item_gobj)
 
     ap->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     itMain_SetItemStatus(item_gobj, Article_Taru_Status, 1);
 }
 
@@ -266,7 +266,7 @@ void func_ovl3_8017A240(GObj *item_gobj)
     ap->item_hit.stale = ITEM_STALE_DEFAULT;
     ap->item_hit.element = gmHitCollision_Element_Fire;
 
-    ap->item_hit.clang = FALSE;
+    ap->item_hit.rebound = FALSE;
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 

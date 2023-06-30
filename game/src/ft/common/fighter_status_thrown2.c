@@ -117,7 +117,7 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
     {
         knockback_final = 0.0F;
     }
-    damage = gmCommon_DamageApplyStale(capture_fp->port_id, ft_throw->damage, capture_fp->attack_id, capture_fp->motion_count);
+    damage = gmCommon_DamageApplyStale(capture_fp->player, ft_throw->damage, capture_fp->attack_id, capture_fp->motion_count);
 
     if (capture_fp->x192_flag_b5)
     {
@@ -132,13 +132,13 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
         this_fp->proc_status = func_ovl3_8014AF98;
     }
     ftCommon_Damage_InitDamageVars(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, ft_throw->element, capture_fp->player_number, TRUE, TRUE, TRUE);
-    ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
+    ftCommon_Update1PGameDamageStats(this_fp, capture_fp->player, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
 
     if (damage != 0)
     {
         ftDamageUpdateCheckDropItem(this_fp, damage);
-        ftAttackUpdateMatchStats(capture_fp->port_id, this_fp->port_id, damage);
-        ftAttackAddStaleQueue(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->motion_count);
+        ftAttackUpdateMatchStats(capture_fp->player, this_fp->player, damage);
+        ftAttackAddStaleQueue(capture_fp->player, this_fp->player, capture_fp->attack_id, capture_fp->motion_count);
 
         if ((s32) ((damage * 0.75F) + 4.0F) > 0)
         {
@@ -157,11 +157,11 @@ void func_ovl3_8014B2AC(Fighter_Struct *this_fp)
     GObj *capture_gobj = this_fp->capture_gobj;
     Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
     ftThrowHitDesc *ft_throw = &capture_fp->fighter_throw[1];
-    s32 damage = gmCommon_DamageApplyStale(capture_fp->port_id, ft_throw->damage, capture_fp->attack_id, capture_fp->motion_count);
+    s32 damage = gmCommon_DamageApplyStale(capture_fp->player, ft_throw->damage, capture_fp->attack_id, capture_fp->motion_count);
 
     ftDamageUpdateCheckDropItem(this_fp, damage);
-    ftAttackUpdateMatchStats(capture_fp->port_id, this_fp->port_id, damage);
-    ftAttackAddStaleQueue(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->motion_count);
+    ftAttackUpdateMatchStats(capture_fp->player, this_fp->player, damage);
+    ftAttackAddStaleQueue(capture_fp->player, this_fp->player, capture_fp->attack_id, capture_fp->motion_count);
 }
 
 void func_ovl3_8014B330(GObj *fighter_gobj)
@@ -202,7 +202,7 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
     }
     lr = (DObjGetStruct(fighter_gobj)->translate.x < DObjGetStruct(capture_gobj)->translate.x) ? RIGHT : LEFT;
 
-    damage = gmCommon_DamageApplyStale(capture_fp->port_id, ft_throw->damage, capture_fp->attack_id, capture_fp->motion_count);;
+    damage = gmCommon_DamageApplyStale(capture_fp->player, ft_throw->damage, capture_fp->attack_id, capture_fp->motion_count);;
 
     if (capture_fp->x192_flag_b5)
     {
@@ -214,13 +214,13 @@ void func_ovl3_8014B330(GObj *fighter_gobj)
         damage = 0;
     }
     ftCommon_Damage_InitDamageVars(fighter_gobj, ft_throw->status_id, damage, knockback_final, ft_throw->angle, lr, 1, gmHitCollision_Element_Normal, capture_fp->player_number, FALSE, FALSE, TRUE);
-    ftCommon_Update1PGameDamageStats(this_fp, capture_fp->port_id, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
+    ftCommon_Update1PGameDamageStats(this_fp, capture_fp->player, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
 
     if (damage != 0)
     {
         ftDamageUpdateCheckDropItem(this_fp, damage);
-        ftAttackUpdateMatchStats(capture_fp->port_id, this_fp->port_id, damage);
-        ftAttackAddStaleQueue(capture_fp->port_id, this_fp->port_id, capture_fp->attack_id, capture_fp->motion_count);
+        ftAttackUpdateMatchStats(capture_fp->player, this_fp->player, damage);
+        ftAttackAddStaleQueue(capture_fp->player, this_fp->player, capture_fp->attack_id, capture_fp->motion_count);
     }
     this_fp->capture_gobj = NULL;
 }

@@ -2,14 +2,27 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
+typedef enum itMBallStatus
+{
+    itStatus_MBall_GWait,
+    itStatus_MBall_AFall,
+    itStatus_MBall_FHold,
+    itStatus_MBall_FThrow,
+    itStatus_MBall_FDrop,
+    itStatus_MBall_GOpen,
+    itStatus_MBall_AOpen
+
+} itMBallStatus;
+
 extern intptr_t D_NF_00009430;
 extern intptr_t D_NF_00009520;
 
+// 0x8017C690
 void func_ovl3_8017C690(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
-    void *t = (void*) (((uintptr_t)ip->attributes->unk_0x0 - (intptr_t)&D_NF_00009430) + (intptr_t)&D_NF_00009520); // Linker thing
+    void *t = itGetPData(ip, D_NF_00009430, D_NF_00009520); // (void*) (((uintptr_t)ip->attributes->unk_0x0 - (intptr_t)&D_NF_00009430) + (intptr_t)&D_NF_00009520); // Linker thing
 
     func_8000BD54(joint->next->next->unk_0x8->mobj, t, 0.0F);
     func_8000DF34(item_gobj);
@@ -22,7 +35,8 @@ void func_ovl3_8017C6F8(GObj *item_gobj)
     joint->next->unk_0x8->mobj->unk_mobj_0x94 = 0;
 }
 
-bool32 jtgt_ovl3_8017C710(GObj *item_gobj)
+// 0x8017C710
+bool32 itMBall_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
@@ -35,39 +49,44 @@ bool32 jtgt_ovl3_8017C710(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_8017C768(GObj *item_gobj)
+// 0x8017C768
+bool32 itMBall_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_8017C7FC);
+    func_ovl3_801735A0(item_gobj, itMBall_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017C790(GObj *item_gobj)
+// 0x8017C790
+bool32 itMBall_AFall_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_80173B24(item_gobj, 0.2F, 0.2F, func_ovl3_8017C7C8);
+    func_ovl3_80173B24(item_gobj, 0.2F, 0.2F, itMBall_GWait_SetStatus);
 
     return FALSE;
 }
 
-extern itStatusDesc Article_M_Ball_Status[];
+extern itStatusDesc itCommon_MBall_StatusDesc[];
 
-void func_ovl3_8017C7C8(GObj *item_gobj)
+// 0x8017C7C8
+void itMBall_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_M_Ball_Status, 0);
+    itMain_SetGroundPickup(item_gobj);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_GWait);
 }
 
-void func_ovl3_8017C7FC(GObj *item_gobj)
+// 0x8017C7FC
+void itMBall_AFall_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
-    itMain_SetItemStatus(item_gobj, Article_M_Ball_Status, 1);
+    itMap_SetAir(ip);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_AFall);
 }
 
-void jtgt_ovl3_8017C840(GObj *item_gobj)
+// 0x8017C840
+void itMBall_FHold_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -75,10 +94,11 @@ void jtgt_ovl3_8017C840(GObj *item_gobj)
 
     ip->item_vars.m_ball.owner_gobj = ip->owner_gobj;
 
-    itMain_SetItemStatus(item_gobj, Article_M_Ball_Status, 2);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_FHold);
 }
 
-bool32 jtgt_ovl3_8017C880(GObj *item_gobj)
+// 0x8017C880
+bool32 itMBall_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
@@ -136,7 +156,7 @@ bool32 jtgt_ovl3_8017C97C(GObj *item_gobj)
     fp = ftGetStruct(fighter_gobj);
 
     ip->team = fp->team;
-    ip->port_id = fp->port_id;
+    ip->player = fp->player;
     ip->player_number = fp->player_number;
     ip->handicap = fp->handicap;
 
@@ -146,16 +166,16 @@ bool32 jtgt_ovl3_8017C97C(GObj *item_gobj)
 void jtgt_ovl3_8017C9E0(GObj *item_gobj)
 {
     func_ovl3_8017C690(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_M_Ball_Status, 3);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_FThrow);
 }
 
 void jtgt_ovl3_8017CA14(GObj *item_gobj)
 {
     func_ovl3_8017C690(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_M_Ball_Status, 4);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_FDrop);
 }
 
-extern s32 D_ovl3_80189450;
+extern s32 itMonster_Global_SelectMonsterIndex = 0; // Not uninitialized, so this is hardcoded in upon building the ROM? 0 = random, beyond 0 = index of Pokémon to spawn
 
 bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 {
@@ -167,17 +187,15 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
     if (m_ball_ip->it_multi == 0)
     {
-        vel.z = 0.0F;
-        vel.y = 0.0F;
-        vel.x = 0.0F;
+        vel.x = vel.y = vel.z = 0.0F;
 
-        if (D_ovl3_80189450 == 0)
+        if (itMonster_Global_SelectMonsterIndex == 0)
         {
-            func_ovl3_80173228(m_ball_gobj);
+            itMain_CreateMonster(m_ball_gobj);
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, itMonster_Global_SelectMonsterIndex + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
         if (monster_gobj != NULL)
         {
@@ -185,7 +203,7 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
 
             monster_ip->owner_gobj = m_ball_ip->owner_gobj;
             monster_ip->team = m_ball_ip->team;
-            monster_ip->port_id = m_ball_ip->port_id;
+            monster_ip->player = m_ball_ip->player;
             monster_ip->handicap = m_ball_ip->handicap;
             monster_ip->player_number = m_ball_ip->player_number;
             monster_ip->display_state = m_ball_ip->display_state;
@@ -238,9 +256,9 @@ void func_ovl3_8017CB84(GObj *item_gobj)
 
     ip->is_attach_surface = TRUE;
 
-    if ((ip->port_id != -1) && (ip->port_id != GMMATCH_PLAYERS_MAX))
+    if ((ip->player != -1) && (ip->player != GMMATCH_PLAYERS_MAX))
     {
-        GObj *fighter_gobj = Match_Info->player_block[ip->port_id].fighter_gobj;
+        GObj *fighter_gobj = Match_Info->player_block[ip->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {
@@ -260,7 +278,7 @@ void func_ovl3_8017CB84(GObj *item_gobj)
 void func_ovl3_8017CC88(GObj *item_gobj)
 {
     func_ovl3_8017CB84(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_M_Ball_Status, 5);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, 5);
 }
 
 bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
@@ -273,17 +291,15 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
     if (m_ball_ip->it_multi == 0)
     {
-        vel.z = 0.0F;
-        vel.y = 0.0F;
-        vel.x = 0.0F;
+        vel.x = vel.y = vel.z = 0.0F;
 
-        if (D_ovl3_80189450 == 0)
+        if (itMonster_Global_SelectMonsterIndex == 0)
         {
-            func_ovl3_80173228(m_ball_gobj);
+            itMain_CreateMonster(m_ball_gobj);
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, D_ovl3_80189450 + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+        monster_gobj = func_ovl3_8016F238(m_ball_gobj, itMonster_Global_SelectMonsterIndex + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
         if (monster_gobj != NULL)
         {
@@ -291,7 +307,7 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
 
             monster_ip->owner_gobj = m_ball_ip->owner_gobj;
             monster_ip->team = m_ball_ip->team;
-            monster_ip->port_id = m_ball_ip->port_id;
+            monster_ip->player = m_ball_ip->player;
             monster_ip->handicap = m_ball_ip->handicap;
             monster_ip->player_number = m_ball_ip->player_number;
             monster_ip->display_state = m_ball_ip->display_state;
@@ -316,7 +332,7 @@ bool32 jtgt_ovl3_8017CDAC(GObj *item_gobj)
 
 void func_ovl3_8017CDE4(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_M_Ball_Status, 6);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, 6);
 }
 
 extern itCreateDesc Article_M_Ball_Data;
@@ -334,8 +350,8 @@ GObj* jtgt_ovl3_8017CE0C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         joint->next->unk_0x54 = 2;
         joint->next->unk_0x8->unk_0x54 = 0;
 
-        func_80008CC0(joint, 0x1BU, 0U);
-        func_80008CC0(joint->next->unk_0x8, 0x46U, 0U);
+        func_80008CC0(joint, 0x1B, 0);
+        func_80008CC0(joint->next->unk_0x8, 0x46, 0);
 
         joint->translate = translate;
 

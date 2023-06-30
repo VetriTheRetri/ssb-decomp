@@ -40,14 +40,14 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
     case ftScriptEvent_Kind_SyncWait:
         p_event->frame_timer += ftScriptEventCast(p_event, ftScriptEventWait)->frames;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventWait);
+        ftScriptEventAdvance(p_event, ftScriptEventWait);
 
         break;
 
     case ftScriptEvent_Kind_AsyncWait:
         p_event->frame_timer = ftScriptEventCast(p_event, ftScriptEventWait)->frames - fighter_gobj->anim_frame;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventWait);
+        ftScriptEventAdvance(p_event, ftScriptEventWait);
 
         break;
 
@@ -83,20 +83,20 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
             ft_hit->joint_index = ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventCreateHit1)->joint_index);
             ft_hit->joint = fp->joint[ft_hit->joint_index];
             ft_hit->damage = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->damage;
-            ft_hit->clang = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->clang;
+            ft_hit->rebound = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->rebound;
             ft_hit->element = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->element;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit1);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateHit1);
 
             ft_hit->size = ftScriptEventCast(p_event, ftScriptEventCreateHit2)->size * 0.5F;
             ft_hit->offset.x = ftScriptEventCast(p_event, ftScriptEventCreateHit2)->off_x;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit2);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateHit2);
 
             ft_hit->offset.y = ftScriptEventCast(p_event, ftScriptEventCreateHit3)->off_y;
             ft_hit->offset.z = ftScriptEventCast(p_event, ftScriptEventCreateHit3)->off_z;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit3);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateHit3);
 
             ft_hit->angle = ftScriptEventCast(p_event, ftScriptEventCreateHit4)->angle;
             ft_hit->knockback_scale = ftScriptEventCast(p_event, ftScriptEventCreateHit4)->knockback_scale;
@@ -105,7 +105,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
             ft_hit->is_hit_air = ftScriptEventCast(p_event, ftScriptEventCreateHit4)->is_hit_ground_air & 1;           // Why?
             ft_hit->is_hit_ground = (ftScriptEventCast(p_event, ftScriptEventCreateHit4)->is_hit_ground_air & 2) >> 1; // ???
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit4);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateHit4);
 
             ft_hit->shield_damage = ftScriptEventCast(p_event, ftScriptEventCreateHit5)->shield_damage;
 
@@ -114,7 +114,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
             ft_hit->knockback_base = ftScriptEventCast(p_event, ftScriptEventCreateHit5)->knockback_base;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit5);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateHit5);
 
             ft_hit->is_scale_pos = (ev_kind == ftScriptEvent_Kind_HitScaleOffset) ? TRUE : FALSE;
 
@@ -122,9 +122,9 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
             ft_hit->motion_count = fp->motion_count;
 
-            ft_hit->damage = gmCommon_DamageApplyStale(fp->port_id, ft_hit->damage, ft_hit->attack_id, ft_hit->motion_count);
+            ft_hit->damage = gmCommon_DamageApplyStale(fp->player, ft_hit->damage, ft_hit->attack_id, ft_hit->motion_count);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit);
+        else ftScriptEventAdvance(p_event, ftScriptEventCreateHit);
 
         break;
 
@@ -135,12 +135,12 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
         ft_hit->offset.x = ftScriptEventCast(p_event, ftScriptEventSetHitOffset1)->off_x;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitOffset1);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHitOffset1);
 
         ft_hit->offset.y = ftScriptEventCast(p_event, ftScriptEventSetHitOffset2)->off_y;
         ft_hit->offset.z = ftScriptEventCast(p_event, ftScriptEventSetHitOffset2)->off_z;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitOffset2);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHitOffset2);
 
         break;
 
@@ -151,11 +151,11 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
             fp->fighter_hit[hit_id].damage = ftScriptEventCast(p_event, ftScriptEventSetHitDamage)->damage;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitDamage);
+            ftScriptEventAdvance(p_event, ftScriptEventSetHitDamage);
 
-            fp->fighter_hit[hit_id].damage = gmCommon_DamageApplyStale(fp->port_id, fp->fighter_hit[hit_id].damage, fp->fighter_hit[hit_id].attack_id, fp->fighter_hit[hit_id].motion_count);
+            fp->fighter_hit[hit_id].damage = gmCommon_DamageApplyStale(fp->player, fp->fighter_hit[hit_id].damage, fp->fighter_hit[hit_id].attack_id, fp->fighter_hit[hit_id].motion_count);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitDamage);
+        else ftScriptEventAdvance(p_event, ftScriptEventSetHitDamage);
 
         break;
 
@@ -164,7 +164,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
         fp->fighter_hit[hit_id].size = ftScriptEventCast(p_event, ftScriptEventSetHitSize)->size * 0.5F;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitSize);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHitSize);
 
         break;
 
@@ -173,14 +173,14 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
         fp->fighter_hit[hit_id].sfx_level = ftScriptEventCast(p_event, ftScriptEventSetHitSound)->sfx_level;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitSound);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHitSound);
 
         break;
 
     case ftScriptEvent_Kind_RefreshHit:
         hit_id = ftScriptEventCast(p_event, ftScriptEventResetHit)->hit_id;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventResetHit);
+        ftScriptEventAdvance(p_event, ftScriptEventResetHit);
 
         ftCommon_RefreshHitIndex(fighter_gobj, hit_id);
 
@@ -189,7 +189,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
     case ftScriptEvent_Kind_ClearHitIndex:
         hit_id = ftScriptEventCast(p_event, ftScriptEventClearHitIndex)->hit_id;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventClearHitIndex);
+        ftScriptEventAdvance(p_event, ftScriptEventClearHitIndex);
 
         fp->fighter_hit[hit_id].update_state = gmHitCollision_UpdateState_Disable;
 
@@ -198,36 +198,36 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
     case ftScriptEvent_Kind_ClearHitAll:
         ftCommon_ClearHitAll(fighter_gobj);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventClearHitAll);
+        ftScriptEventAdvance(p_event, ftScriptEventClearHitAll);
 
         break;
 
     case ftScriptEvent_Kind_SetFighterThrow:
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetFighterThrow1);
+        ftScriptEventAdvance(p_event, ftScriptEventSetFighterThrow1);
 
         fp->fighter_throw = ftScriptEventCast(p_event, ftScriptEventSetFighterThrow2)->fighter_throw;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetFighterThrow2);
+        ftScriptEventAdvance(p_event, ftScriptEventSetFighterThrow2);
 
         break;
 
     case ftScriptEvent_Kind_PlaySFXStoreInfo:
         if (!(fp->is_playing_sfx))
         {
-            fp->p_sfx = func_800269C0(ftScriptEventCastUpdate(p_event, ftScriptEventPlaySFX)->sfx_id);
+            fp->p_sfx = func_800269C0(ftScriptEventCastAdvance(p_event, ftScriptEventPlaySFX)->sfx_id);
 
             fp->sfx_id = (fp->p_sfx != NULL) ? fp->p_sfx->sfx_id : 0;
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
 
         break;
 
     case ftScriptEvent_Kind_PlaySFX:
         if (!(fp->is_playing_sfx))
         {
-            func_800269C0(ftScriptEventCastUpdate(p_event, ftScriptEventPlaySFX)->sfx_id);
+            func_800269C0(ftScriptEventCastAdvance(p_event, ftScriptEventPlaySFX)->sfx_id);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
 
         break;
 
@@ -235,32 +235,32 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
         if (!(fp->is_playing_sfx))
         {
-            ftCommon_PlayLoopSFXStoreInfo(fp, ftScriptEventCastUpdate(p_event, ftScriptEventPlaySFX)->sfx_id);
+            ftCommon_PlayLoopSFXStoreInfo(fp, ftScriptEventCastAdvance(p_event, ftScriptEventPlaySFX)->sfx_id);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
 
         break;
 
     case ftScriptEvent_Kind_StopLoopSFX:
-        ftCommon_StopLoopSFX(fp), ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+        ftCommon_StopLoopSFX(fp), ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
 
         break;
 
     case ftScriptEvent_Kind_PlayVoiceStoreInfo:
         if (!(fp->is_playing_sfx) && (fp->attributes->is_have_voice))
         {
-            ftCommon_PlayVoiceStoreInfo(fp, ftScriptEventCastUpdate(p_event, ftScriptEventPlaySFX)->sfx_id);
+            ftCommon_PlayVoiceStoreInfo(fp, ftScriptEventCastAdvance(p_event, ftScriptEventPlaySFX)->sfx_id);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
 
         break;
 
     case ftScriptEvent_Kind_PlayLoopVoiceStoreInfo:
         if (!(fp->is_playing_sfx) && (fp->attributes->is_have_voice))
         {
-            ftCommon_PlayLoopSFXStoreInfo(fp, ftScriptEventCastUpdate(p_event, ftScriptEventPlaySFX)->sfx_id);
+            ftCommon_PlayLoopSFXStoreInfo(fp, ftScriptEventCastAdvance(p_event, ftScriptEventPlaySFX)->sfx_id);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
 
         break;
 
@@ -269,9 +269,9 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
         {
             ftCommon_PlayVoiceStoreInfo(fp, fp->attributes->smash_sfx[rand_u16_range(ARRAY_COUNT(fp->attributes->smash_sfx))]);
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+            ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventPlaySFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
 
         break;
 
@@ -282,7 +282,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
         fp->jumps_used++;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         break;
 
@@ -295,7 +295,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
         fp->jumps_used = attributes->jumps_max;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         break;
 
@@ -307,76 +307,76 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
             gfx_id = ftScriptEventCast(p_event, ftScriptEventCreateGFX1)->gfx_id;
             flag = ftScriptEventCast(p_event, ftScriptEventCreateGFX1)->flag;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX1);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX1);
 
             gfx_offset.x = ftScriptEventCast(p_event, ftScriptEventCreateGFX2)->off_x;
             gfx_offset.y = ftScriptEventCast(p_event, ftScriptEventCreateGFX2)->off_y;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX2);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX2);
 
             gfx_offset.z = ftScriptEventCast(p_event, ftScriptEventCreateGFX3)->off_z;
             gfx_scatter.x = ftScriptEventCast(p_event, ftScriptEventCreateGFX3)->rng_x;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX3);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX3);
 
             gfx_scatter.y = ftScriptEventCast(p_event, ftScriptEventCreateGFX4)->rng_y;
             gfx_scatter.z = ftScriptEventCast(p_event, ftScriptEventCreateGFX4)->rng_z;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX4);
+            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX4);
 
             ftCommon_GFXSpawn(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == ftScriptEvent_Kind_GFXScaleOffset) ? TRUE : FALSE, flag);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventCreateGFX);
 
         break;
 
     case ftScriptEvent_Kind_SetHitStatusPartAll:
         ftCommon_SetHitStatusPartAll(fighter_gobj, ftScriptEventCast(p_event, ftScriptEventSetHitStatusAll)->hitstatus);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitStatusAll);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHitStatusAll);
 
         break;
 
     case ftScriptEvent_Kind_SetHitStatusPart:
         ftCommon_SetHitStatusPart(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventSetHitStatusPart)->joint_index), ftScriptEventCast(p_event, ftScriptEventSetHitStatusPart)->hitstatus);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitStatusPart);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHitStatusPart);
 
         break;
 
     case ftScriptEvent_Kind_SetHitStatusAll:
         ftCollision_SetHitStatusAll(fighter_gobj, ftScriptEventCast(p_event, ftScriptEventSetHitStatusAll)->hitstatus);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitStatusAll);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHitStatusAll);
 
         break;
 
     case ftScriptEvent_Kind_ResetHurtAll:
         ftCommon_InitFighterHurtParts(fighter_gobj);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         break;
 
     case ftScriptEvent_Kind_SetHurtPart:
         joint_index = ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventSetHurtPart1)->joint_index);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHurtPart1);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHurtPart1);
 
         hurt_offset.x = ftScriptEventCast(p_event, ftScriptEventSetHurtPart2)->off_x;
         hurt_offset.y = ftScriptEventCast(p_event, ftScriptEventSetHurtPart2)->off_y;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHurtPart2);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHurtPart2);
 
         hurt_offset.z = ftScriptEventCast(p_event, ftScriptEventSetHurtPart3)->off_z;
         hurt_size.x = ftScriptEventCast(p_event, ftScriptEventSetHurtPart3)->size_x;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHurtPart3);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHurtPart3);
 
         hurt_size.y = ftScriptEventCast(p_event, ftScriptEventSetHurtPart4)->size_y;
         hurt_size.z = ftScriptEventCast(p_event, ftScriptEventSetHurtPart4)->size_z;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetHurtPart4);
+        ftScriptEventAdvance(p_event, ftScriptEventSetHurtPart4);
 
         ftCommon_UpdateFighterHurtPartIndex(fighter_gobj, joint_index, &hurt_offset, &hurt_size);
 
@@ -387,7 +387,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
         p_event->script_index++;
 
-        p_event->loop_count[p_event->script_index++ - 1] = ftScriptEventCast(p_event, ftScriptEventLoopBegin)->loop_count, ftScriptEventUpdatePtr(p_event, ftScriptEventLoopBegin);
+        p_event->loop_count[p_event->script_index++ - 1] = ftScriptEventCast(p_event, ftScriptEventLoopBegin)->loop_count, ftScriptEventAdvance(p_event, ftScriptEventLoopBegin);
 
         break;
 
@@ -396,12 +396,12 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
         {
             p_event->p_script = p_event->p_goto[p_event->script_index - 2];
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventDefault), p_event->script_index -= 2; // Seems fake, but also impossible to match otherwise???
+        else ftScriptEventAdvance(p_event, ftScriptEventDefault), p_event->script_index -= 2; // Seems fake, but also impossible to match otherwise???
 
         break;
 
     case ftScriptEvent_Kind_Subroutine:
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSubroutine1);
+        ftScriptEventAdvance(p_event, ftScriptEventSubroutine1);
 
         p_event->p_goto[p_event->script_index] = (void*) ((uintptr_t)p_event->p_script + sizeof(ftScriptEventSubroutine2));
 
@@ -416,7 +416,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
         {
             ft_kind = fp->throw_ft_kind;
 
-            ftScriptEventUpdatePtr(p_event, ftScriptEventSubroutineThrown1);
+            ftScriptEventAdvance(p_event, ftScriptEventSubroutineThrown1);
 
             p_damage = ftScriptEventCast(p_event, ftScriptEventSubroutineThrown2)->p_subroutine;
 
@@ -428,9 +428,9 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
                 p_event->p_script = p_damage->p_script[fp->status_vars.common.damage.script_index][ft_kind];
             }
-            else ftScriptEventUpdatePtr(p_event, ftScriptEventSubroutineThrown2);
+            else ftScriptEventAdvance(p_event, ftScriptEventSubroutineThrown2);
         }
-        else ftScriptEventUpdatePtr(p_event, ftScriptEventSubroutineThrown);
+        else ftScriptEventAdvance(p_event, ftScriptEventSubroutineThrown);
 
         break;
 
@@ -440,14 +440,14 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
         break;
 
     case ftScriptEvent_Kind_Goto:
-        ftScriptEventUpdatePtr(p_event, ftScriptEventGoto1);
+        ftScriptEventAdvance(p_event, ftScriptEventGoto1);
 
         p_event->p_script = ftScriptEventCast(p_event, ftScriptEventGoto2)->p_goto;
 
         break;
 
     case ftScriptEvent_Kind_SetParallelScript:
-        ftScriptEventUpdatePtr(p_event, ftScriptEventParallel1);
+        ftScriptEventAdvance(p_event, ftScriptEventParallel1);
 
         if (fp->script_event[0][1].p_script == NULL)
         {
@@ -457,12 +457,12 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
 
             fp->script_event[0][1].script_index = fp->script_event[1][1].script_index = 0;
         }
-        ftScriptEventUpdatePtr(p_event, ftScriptEventParallel2);
+        ftScriptEventAdvance(p_event, ftScriptEventParallel2);
 
         break;
 
     case ftScriptEvent_Kind_ScriptPause:
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         p_event->frame_timer = (f32)FLOAT_MAX;
         break;
@@ -470,76 +470,76 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
     case ftScriptEvent_Kind_SetModelPart:
         ftCommon_SetModelPartRenderIndex(fighter_gobj, ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventSetModelPart)->joint_index), ftScriptEventCast(p_event, ftScriptEventSetModelPart)->mode);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetModelPart);
+        ftScriptEventAdvance(p_event, ftScriptEventSetModelPart);
         break;
 
     case ftScriptEvent_Kind_ResetModelPartAll:
         ftCommon_ResetModelPartRenderAll(fighter_gobj);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         break;
 
     case ftScriptEvent_Kind_HideModelPartAll:
         ftCommon_HideModelPartAll(fighter_gobj);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         break;
 
     case ftScriptEvent_Kind_SetTexturePart:
         ftCommon_SetTexturePartIndex(fighter_gobj, ftScriptEventCast(p_event, ftScriptEventSetTexturePart)->obj_index, ftScriptEventCast(p_event, ftScriptEventSetTexturePart)->frame);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetTexturePart);
+        ftScriptEventAdvance(p_event, ftScriptEventSetTexturePart);
 
         break;
 
     case ftScriptEvent_Kind_SetColAnim:
         ftColor_CheckSetColAnimIndex(fighter_gobj, ftScriptEventCast(p_event, ftScriptEventSetColAnim)->colanim_id, ftScriptEventCast(p_event, ftScriptEventSetColAnim)->length);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetColAnim);
+        ftScriptEventAdvance(p_event, ftScriptEventSetColAnim);
 
         break;
 
     case ftScriptEvent_Kind_ResetColAnim:
         ftCommon_ResetColAnimStatUpdate(fighter_gobj);
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         break;
 
     case ftScriptEvent_Kind_SetFlag0:
         fp->command_vars.flags.flag0 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetFlag);
+        ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
 
         break;
 
     case ftScriptEvent_Kind_SetFlag1:
         fp->command_vars.flags.flag1 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetFlag);
+        ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
 
         break;
 
     case ftScriptEvent_Kind_SetFlag2:
         fp->command_vars.flags.flag2 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetFlag);
+        ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
 
         break;
 
     case ftScriptEvent_Kind_SetFlag3:
         fp->command_vars.flags.flag3 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventSetFlag);
+        ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
 
         break;
 
     case ftScriptEvent_Kind_SlopeContour:
         flag2 = fp->slope_contour;
 
-        fp->slope_contour = ftScriptEventCastUpdate(p_event, ftScriptEventSlopeContour)->mode;
+        fp->slope_contour = ftScriptEventCastAdvance(p_event, ftScriptEventSlopeContour)->mode;
 
         if (!(flag2 & fp->slope_contour & 4))
         {
@@ -550,7 +550,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
     case ftScriptEvent_Kind_Unk14:
         fp->x190_flag_b6 = ftScriptEventCast(p_event, ftScriptEventUnkFlag)->flag;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+        ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
         break;
 
@@ -558,7 +558,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
         fp->afterimage.is_itemswing = ftScriptEventCast(p_event, ftScriptEventAfterImage)->is_itemswing;
         fp->afterimage.render_state = ftScriptEventCast(p_event, ftScriptEventAfterImage)->render_state;
 
-        ftScriptEventUpdatePtr(p_event, ftScriptEventAfterImage);
+        ftScriptEventAdvance(p_event, ftScriptEventAfterImage);
 
         break;
 
@@ -567,16 +567,16 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, Fighter_Struct *fp, ftScrip
         {
             func_ovl2_800E806C(fp, ftScriptEventCast(p_event, ftScriptEventUnk31)->value2, ftScriptEventCast(p_event, ftScriptEventUnk31)->value1);
         }
-        ftScriptEventUpdatePtr(p_event, ftScriptEventUnk31);
+        ftScriptEventAdvance(p_event, ftScriptEventUnk31);
 
         break;
 
     case ftScriptEvent_Kind_Unk16:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            func_ovl2_80115630(fp->port_id, ftScriptEventCast(p_event, ftScriptEventUnk32)->value1);
+            func_ovl2_80115630(fp->player, ftScriptEventCast(p_event, ftScriptEventUnk32)->value1);
         }
-        ftScriptEventUpdatePtr(p_event, ftScriptEventUnk32);
+        ftScriptEventAdvance(p_event, ftScriptEventUnk32);
 
         break;
     }
@@ -615,7 +615,7 @@ void ftScript_UpdateAllEventsNoGFX(GObj *fighter_gobj)
 
                 if (((ev_kind == ftScriptEvent_Kind_GFX) || (ev_kind == ftScriptEvent_Kind_GFXScaleOffset)) && (fp->x191_flag_b0))
                 {
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX);
+                    ftScriptEventAdvance(p_event, ftScriptEventCreateGFX);
                 }
                 else ftScript_ProcessScriptEvent(fighter_gobj, fp, p_event, ev_kind);
 
@@ -688,21 +688,21 @@ void ftScript_UpdateDefaultEvents(GObj *fighter_gobj)
                 case ftScriptEvent_Kind_Unk15:
                 case ftScriptEvent_Kind_Unk16:
                 case ftScriptEvent_Kind_AfterImage:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+                    ftScriptEventAdvance(p_event, ftScriptEventDefault);
                     break;
 
                 case ftScriptEvent_Kind_GFX:
                 case ftScriptEvent_Kind_GFXScaleOffset:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventCreateGFX);
+                    ftScriptEventAdvance(p_event, ftScriptEventCreateGFX);
                     break;
 
                 case ftScriptEvent_Kind_Hit:
                 case ftScriptEvent_Kind_HitScaleOffset:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit);
+                    ftScriptEventAdvance(p_event, ftScriptEventCreateHit);
                     break;
 
                 case ftScriptEvent_Kind_SetHitOffset:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventSetHitOffset);
+                    ftScriptEventAdvance(p_event, ftScriptEventSetHitOffset);
                     break;
 
                 default:
@@ -769,21 +769,21 @@ void ftScript_UpdateDefaultEventsGFX(GObj *fighter_gobj)
 
                 case ftScriptEvent_Kind_Hit:
                 case ftScriptEvent_Kind_HitScaleOffset:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventCreateHit);
+                    ftScriptEventAdvance(p_event, ftScriptEventCreateHit);
                     break;
 
                 case ftScriptEvent_Kind_SetHitOffset:
                 case ftScriptEvent_Kind_SetFighterThrow:
                 case ftScriptEvent_Kind_SetParallelScript:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventDouble);
+                    ftScriptEventAdvance(p_event, ftScriptEventDouble);
                     break;
 
                 case ftScriptEvent_Kind_SetHurtPart:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventSetHurtPart);
+                    ftScriptEventAdvance(p_event, ftScriptEventSetHurtPart);
                     break;
 
                 default:
-                    ftScriptEventUpdatePtr(p_event, ftScriptEventDefault);
+                    ftScriptEventAdvance(p_event, ftScriptEventDefault);
                     break;
                 }
                 goto loop;
@@ -861,12 +861,12 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
                 break;
 
             case gmColorEvent_Kind_Wait:
-                colanim->cs[i].color_event_timer = gmColorEventCast(colanim->cs[i].p_script, gmColorEventDefault)->value1, gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+                colanim->cs[i].color_event_timer = gmColorEventCast(colanim->cs[i].p_script, gmColorEventDefault)->value1, gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventDefault);
 
                 break;
 
             case gmColorEvent_Kind_Goto:
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventGoto1);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventGoto1);
 
                 colanim->cs[i].p_script = gmColorEventCast(colanim->cs[i].p_script, gmColorEventGoto2)->p_goto;
 
@@ -874,7 +874,7 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
 
             case gmColorEvent_Kind_LoopBegin:
                 colanim->cs[i].p_subroutine[colanim->cs[i].script_index++] = (void*) ((uintptr_t)colanim->cs[i].p_script + sizeof(gmColorEventLoopBegin));
-                colanim->cs[i].p_subroutine[colanim->cs[i].script_index++] = gmColorEventCast(colanim->cs[i].p_script, gmColorEventLoopBegin)->loop_count, gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventLoopBegin);
+                colanim->cs[i].p_subroutine[colanim->cs[i].script_index++] = gmColorEventCast(colanim->cs[i].p_script, gmColorEventLoopBegin)->loop_count, gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventLoopBegin);
 
                 break;
 
@@ -883,12 +883,12 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
                 {
                     colanim->cs[i].p_script = colanim->cs[i].p_subroutine[colanim->cs[i].script_index - 2];
                 }
-                else gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault), colanim->cs[i].script_index -= 2;
+                else gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventDefault), colanim->cs[i].script_index -= 2;
 
                 break;
 
             case gmColorEvent_Kind_Subroutine:
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSubroutine1);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSubroutine1);
 
                 colanim->cs[i].p_subroutine[colanim->cs[i].script_index++] = (void*) ((uintptr_t)colanim->cs[i].p_script + sizeof(gmColorEventSubroutine1));
 
@@ -902,7 +902,7 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
                 break;
 
             case gmColorEvent_Kind_SetParallelScript:
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventParallel1);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventParallel1);
 
                 if (colanim->cs[1].p_script == NULL)
                 {
@@ -910,21 +910,21 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
                     colanim->cs[1].color_event_timer = 0;
                     colanim->cs[1].script_index = 0;
                 }
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventParallel2);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventParallel2);
 
                 break;
 
             case gmColorEvent_Kind_ToggleColorOff:
                 colanim->is_use_color1 = colanim->is_use_color2 = colanim->unk_ca_0x60_b34 = 0;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventDefault);
 
                 break;
 
             case gmColorEvent_Kind_SetColor1:
                 colanim->is_use_color1 = TRUE;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA1);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA1);
 
                 colanim->color1.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
                 colanim->color1.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
@@ -933,14 +933,14 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
 
                 colanim->color1.ir = colanim->color1.ig = colanim->color1.ib = colanim->color1.ia = 0;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA2);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA2);
 
                 break;
 
             case gmColorEvent_Kind_SetColor2:
                 colanim->is_use_color2 = TRUE;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA1);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA1);
 
                 colanim->color2.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
                 colanim->color2.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
@@ -949,35 +949,35 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
 
                 colanim->color2.ir = colanim->color2.ig = colanim->color2.ib = colanim->color2.ia = 0;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetRGBA2);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA2);
 
                 break;
 
             case gmColorEvent_Kind_BlendColor1:
                 blend_frames = gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA1)->blend_frames;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
 
                 colanim->color1.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->color1.r) / blend_frames;
                 colanim->color1.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->color1.g) / blend_frames;
                 colanim->color1.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->color1.b) / blend_frames;
                 colanim->color1.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->color1.a) / blend_frames;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
 
                 break;
 
             case gmColorEvent_Kind_BlendColor2:
                 blend_frames = gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA1)->blend_frames;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
 
                 colanim->color2.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->color2.r) / blend_frames;
                 colanim->color2.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->color2.g) / blend_frames;
                 colanim->color2.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->color2.b) / blend_frames;
                 colanim->color2.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->color2.a) / blend_frames;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
 
                 break;
 
@@ -991,26 +991,26 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
                     gfx_id = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->gfx_id;
                     flag = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX1)->flag;
 
-                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX1);
+                    gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventCreateGFX1);
 
                     gfx_offset.x = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX2)->off_x;
                     gfx_offset.y = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX2)->off_y;
 
-                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX2);
+                    gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventCreateGFX2);
 
                     gfx_offset.z = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX3)->off_z;
                     gfx_scatter.x = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX3)->rng_x;
 
-                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX3);
+                    gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventCreateGFX3);
 
                     gfx_scatter.y = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX4)->rng_y;
                     gfx_scatter.z = gmColorEventCast(colanim->cs[i].p_script, gmColorEventCreateGFX4)->rng_z;
 
-                    gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX4);
+                    gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventCreateGFX4);
 
                     ftCommon_GFXSpawn(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == gmColorEvent_Kind_GFXScaleOffset) ? TRUE : FALSE, flag);
                 }
-                else gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventCreateGFX);
+                else gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventCreateGFX);
 
                 break;
 
@@ -1020,28 +1020,28 @@ bool32 caMain_UpdateColAnim(Color_Overlay *colanim, GObj *fighter_gobj, bool32 i
                 colanim->light_angle1 = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetLight)->light1;
                 colanim->light_angle2 = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetLight)->light2;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventSetLight);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetLight);
 
                 break;
 
             case gmColorEvent_Kind_ToggleLightOff:
                 colanim->is_use_light = FALSE;
 
-                gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+                gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventDefault);
 
                 break;
 
             case gmColorEvent_Kind_PlaySFX:
                 if (is_playing_sfx == FALSE)
                 {
-                    func_800269C0(gmColorEventCastUpdate(colanim->cs[i].p_script, gmColorEventPlaySFX)->sfx_id);
+                    func_800269C0(gmColorEventCastAdvance(colanim->cs[i].p_script, gmColorEventPlaySFX)->sfx_id);
                 }
-                else gmColorEventUpdatePtr(colanim->cs[i].p_script, gmColorEventDefault);
+                else gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventDefault);
 
                 break;
 
             case gmColorEvent_Kind_SetUnk:
-                colanim->unk_ca_0x60_b34 = gmColorEventCastUpdate(colanim->cs[i].p_script, gmColorEventDefault)->value1;
+                colanim->unk_ca_0x60_b34 = gmColorEventCastAdvance(colanim->cs[i].p_script, gmColorEventDefault)->value1;
 
                 break;
 
@@ -1342,7 +1342,7 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
 
             func_800269C0(0x112U);
 
-            Match_Info->player_block[this_fp->port_id].stock_damage_all = this_fp->percent_damage;
+            Match_Info->player_block[this_fp->player].stock_damage_all = this_fp->percent_damage;
         }
         if (this_fp->percent_damage == 0)
         {
@@ -1388,8 +1388,8 @@ void func_ovl2_800E1260(GObj *fighter_gobj)
         }
         if (!(this_fp->is_hitstun))
         {
-            Match_Info->player_block[this_fp->port_id].combo_damage_foe = 0;
-            Match_Info->player_block[this_fp->port_id].combo_count_foe = 0;
+            Match_Info->player_block[this_fp->player].combo_damage_foe = 0;
+            Match_Info->player_block[this_fp->player].combo_count_foe = 0;
         }
         is_jostle = FALSE;
 
@@ -1886,7 +1886,7 @@ void func_ovl2_800E287C(GObj *attacker_gobj, Fighter_Struct *fp, Fighter_Hit *ft
     {
         fp->shield_attack_damage = ft_hit->damage;
 
-        if ((ft_hit->clang) && (fp->ground_or_air == GA_Ground))
+        if ((ft_hit->rebound) && (fp->ground_or_air == GA_Ground))
         {
             fp->attack_rebound = (fp->shield_attack_damage * 1.62F) + 4.0F;
 
@@ -1909,7 +1909,7 @@ void func_ovl2_800E2910(Fighter_Struct *other_fp, Fighter_Hit *other_hit, Fighte
         func_ovl2_800E287C(this_gobj, this_fp, this_hit, other_gobj);
         func_ovl2_80100BF0(&sp2C, this_hit->damage);
 
-        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (this_hit->damage >= 20) && (other_fp->port_id == Scene_Info.player_port))
+        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (this_hit->damage >= 20) && (other_fp->player == Scene_Info.player_port))
         {
             D_ovl65_801936AC = TRUE;
         }
@@ -1920,7 +1920,7 @@ void func_ovl2_800E2910(Fighter_Struct *other_fp, Fighter_Hit *other_hit, Fighte
         func_ovl2_800E287C(other_gobj, other_fp, other_hit, this_gobj);
         func_ovl2_80100BF0(&sp2C, other_hit->damage);
 
-        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (other_hit->damage >= 20) && (this_fp->port_id == Scene_Info.player_port))
+        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (other_hit->damage >= 20) && (this_fp->player == Scene_Info.player_port))
         {
             D_ovl65_801936AC = TRUE;
         }
@@ -1945,7 +1945,7 @@ void func_ovl2_800E2A90(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
 
         victim_fp->lr_shield = (DObjGetStruct(victim_gobj)->translate.x < DObjGetStruct(attacker_gobj)->translate.x) ? RIGHT : LEFT;
 
-        victim_fp->shield_port_id = attacker_fp->port_id;
+        victim_fp->shield_player = attacker_fp->player;
     }
     func_ovl2_800F0B78(&sp2C, attacker_hit, victim_gobj, victim_fp->joint[ftParts_YRotN_Joint]);
     func_ovl2_80100BF0(&sp2C, attacker_hit->damage);
@@ -2029,7 +2029,7 @@ static ftHitCollisionLog ftHitCollisionLogTable[10];
 void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, Fighter_Struct *victim_fp, Fighter_Hurt *victim_hurt, GObj *attacker_gobj, GObj *victim_gobj)
 {
     s32 damage;
-    s32 attacker_port_id;
+    s32 attacker_player;
     s32 attacker_player_number;
     s32 unused;
     Vec3f sp3C;
@@ -2054,12 +2054,12 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
         {
             if (attacker_fp->throw_gobj != NULL)
             {
-                attacker_port_id = attacker_fp->throw_port_id;
+                attacker_player = attacker_fp->throw_player;
                 attacker_player_number = attacker_fp->throw_player_number;
             }
             else
             {
-                attacker_port_id = attacker_fp->port_id;
+                attacker_player = attacker_fp->player;
                 attacker_player_number = attacker_fp->player_number;
             }
             if (ftHitCollisionLogIndex < ARRAY_COUNT(ftHitCollisionLogTable))
@@ -2070,13 +2070,13 @@ void func_ovl2_800E2D44(Fighter_Struct *attacker_fp, Fighter_Hit *attacker_hit, 
                 hitlog->attacker_hit = attacker_hit;
                 hitlog->attacker_gobj = attacker_gobj;
                 hitlog->victim_hurt = victim_hurt;
-                hitlog->attacker_port_id = attacker_port_id;
+                hitlog->attacker_player = attacker_player;
                 hitlog->attacker_player_number = attacker_player_number;
 
                 ftHitCollisionLogIndex++;
             }
-            ftAttackUpdateMatchStats(attacker_port_id, victim_fp->port_id, damage);
-            ftAttackAddStaleQueue(attacker_port_id, victim_fp->port_id, attacker_hit->attack_id, attacker_hit->flags_hi.halfword);
+            ftAttackUpdateMatchStats(attacker_player, victim_fp->player, damage);
+            ftAttackAddStaleQueue(attacker_player, victim_fp->player, attacker_hit->attack_id, attacker_hit->flags_hi.halfword);
         }
         else
         {
@@ -2116,7 +2116,7 @@ void func_ovl2_800E2F04(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 index, Fighte
         }
         func_ovl2_80100BF0(&sp30, damage);
 
-        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->port_id == Scene_Info.player_port))
+        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->player == Scene_Info.player_port))
         {
             D_ovl65_801936AC = TRUE;
         }
@@ -2151,7 +2151,7 @@ void func_ovl2_800E3048(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Fighter
 
         fp->lr_shield = (ip->phys_info.vel_air.x < 0.0F) ? RIGHT : LEFT;
 
-        fp->shield_port_id = ip->port_id;
+        fp->shield_player = ip->player;
     }
     func_ovl2_800F0C4C(&sp30, wp_hit, arg2, fighter_gobj, fp->joint[ftParts_YRotN_Joint]);
     func_ovl2_80100BF0(&sp30, wp_hit->shield_damage + damage);
@@ -2167,14 +2167,14 @@ void func_ovl2_800E31B4(Weapon_Struct *ip, Weapon_Hit *wp_hit, Fighter_Struct *f
     {
         if (wp_hit->can_rehit_fighter)
         {
-            if (ip->hit_reflect_damage < damage)
+            if (ip->hit_refresh_damage < damage)
             {
-                ip->hit_reflect_damage = damage;
+                ip->hit_refresh_damage = damage;
             }
         }
-        else if (ip->hit_victim_damage < damage)
+        else if (ip->hit_normal_damage < damage)
         {
-            ip->hit_victim_damage = damage;
+            ip->hit_normal_damage = damage;
         }
         fp->reflect_damage = damage;
 
@@ -2209,7 +2209,7 @@ void func_ovl2_800E3308(Weapon_Struct *ip, Weapon_Hit *wp_hit, Fighter_Struct *f
         {
             fp->percent_damage = 0;
         }
-        Match_Info->player_block[fp->port_id].stock_damage_all = fp->percent_damage;
+        Match_Info->player_block[fp->player].stock_damage_all = fp->percent_damage;
     }
 }
 
@@ -2224,14 +2224,14 @@ void func_ovl2_800E3418(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Fighter
 
     if (wp_hit->can_rehit_fighter)
     {
-        if (ip->hit_reflect_damage < damage)
+        if (ip->hit_refresh_damage < damage)
         {
-            ip->hit_reflect_damage = damage;
+            ip->hit_refresh_damage = damage;
         }
     }
-    else if (ip->hit_victim_damage < damage)
+    else if (ip->hit_normal_damage < damage)
     {
-        ip->hit_victim_damage = damage;
+        ip->hit_normal_damage = damage;
     }
     if
     (
@@ -2251,27 +2251,27 @@ void func_ovl2_800E3418(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 arg2, Fighter
             hitlog->hitbox_id = arg2;
             hitlog->attacker_gobj = weapon_gobj;
             hitlog->victim_hurt = ft_hurt;
-            hitlog->attacker_port_id = ip->port_id;
+            hitlog->attacker_player = ip->player;
             hitlog->attacker_player_number = ip->player_number;
 
             ftHitCollisionLogIndex++;
         }
-        ftAttackUpdateMatchStats(ip->port_id, fp->port_id, damage);
-        ftAttackAddStaleQueue(ip->port_id, fp->port_id, wp_hit->attack_id, wp_hit->motion_count);
+        ftAttackUpdateMatchStats(ip->player, fp->player, damage);
+        ftAttackAddStaleQueue(ip->player, fp->player, wp_hit->attack_id, wp_hit->motion_count);
     }
     func_800269C0(wp_hit->hit_sfx);
 }
 
 void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *item_gobj, GObj *fighter_gobj)
 {
-    s32 damage = func_ovl3_801727F4(ap);
+    s32 damage = itMain_ApplyHitDamage(ap);
     Vec3f sp30;
 
     func_ovl2_800F0E70(&sp30, it_hit, arg2, ft_hit);
 
     if ((ft_hit->damage - 10) < damage)
     {
-        func_ovl2_800E26BC(fp, ft_hit->group_id, item_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
+        func_ovl2_800E26BC(fp, ft_hit->group_id, item_gobj, gmHitCollision_Type_Hit, 0, TRUE);
         func_ovl2_800E287C(fighter_gobj, fp, ft_hit, item_gobj);
         func_ovl2_80100BF0(&sp30, ft_hit->damage);
     }
@@ -2285,7 +2285,7 @@ void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
         }
         func_ovl2_80100BF0(&sp30, damage);
 
-        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->port_id == Scene_Info.player_port))
+        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->player == Scene_Info.player_port))
         {
             D_ovl65_801936AC = TRUE;
         }
@@ -2294,7 +2294,7 @@ void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
 
 void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hit *ft_hit, GObj *item_gobj, GObj *fighter_gobj)
 {
-    s32 damage = func_ovl3_801727F4(ap);
+    s32 damage = itMain_ApplyHitDamage(ap);
     Vec3f sp30;
 
     func_ovl2_800F0E70(&sp30, it_hit, arg2, ft_hit);
@@ -2315,7 +2315,7 @@ void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
         }
         func_ovl2_80100BF0(&sp30, damage);
 
-        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->port_id == Scene_Info.player_port))
+        if ((Match_Info->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->player == Scene_Info.player_port))
         {
             D_ovl65_801936AC = TRUE;
         }
@@ -2324,7 +2324,7 @@ void func_ovl2_800E35BC(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
 
 void func_ovl2_800E36F8(Item_Struct *ap, Item_Hit *it_hit, s32 hitbox_id, Fighter_Struct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
 {
-    s32 damage = func_ovl3_801727F4(ap);
+    s32 damage = itMain_ApplyHitDamage(ap);
     Vec3f sp30;
 
     itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, (it_hit->can_rehit_shield) ? gmHitCollision_Type_ShieldRehit : gmHitCollision_Type_Shield, 0);
@@ -2350,7 +2350,7 @@ void func_ovl2_800E36F8(Item_Struct *ap, Item_Hit *it_hit, s32 hitbox_id, Fighte
 
         fp->lr_shield = (ap->phys_info.vel_air.x < 0.0F) ? RIGHT : LEFT;
 
-        fp->shield_port_id = ap->port_id;
+        fp->shield_player = ap->player;
     }
     func_ovl2_800F0EB4(&sp30, it_hit, hitbox_id, fighter_gobj, fp->joint[ftParts_YRotN_Joint]);
     func_ovl2_80100BF0(&sp30, it_hit->shield_damage + damage);
@@ -2358,7 +2358,7 @@ void func_ovl2_800E36F8(Item_Struct *ap, Item_Hit *it_hit, s32 hitbox_id, Fighte
 
 void func_ovl2_800E3860(Item_Struct *ap, Item_Hit *it_hit, Fighter_Struct *fp, GObj *fighter_gobj)
 {
-    s32 damage = func_ovl3_801727F4(ap);
+    s32 damage = itMain_ApplyHitDamage(ap);
 
     itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Reflect, 0);
 
@@ -2366,14 +2366,14 @@ void func_ovl2_800E3860(Item_Struct *ap, Item_Hit *it_hit, Fighter_Struct *fp, G
     {
         if (it_hit->can_rehit_fighter)
         {
-            if (ap->hit_reflect_damage < damage)
+            if (ap->hit_refresh_damage < damage)
             {
-                ap->hit_reflect_damage = damage;
+                ap->hit_refresh_damage = damage;
             }
         }
-        else if (ap->hit_victim_damage < damage)
+        else if (ap->hit_normal_damage < damage)
         {
-            ap->hit_victim_damage = damage;
+            ap->hit_normal_damage = damage;
         }
         fp->reflect_damage = damage;
 
@@ -2394,7 +2394,7 @@ extern u8 D_ovl65_801936AA;
 
 void func_ovl2_800E39B0(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Struct *fp, Fighter_Hurt *ft_hurt, GObj *item_gobj, GObj *fighter_gobj)
 {
-    s32 damage = func_ovl3_801727F4(ap);
+    s32 damage = itMain_ApplyHitDamage(ap);
     s32 damage_again;
     s32 lr_attack;
 
@@ -2407,13 +2407,13 @@ void func_ovl2_800E39B0(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
         case It_Kind_Star:
 
             it_hit->update_state = gmHitCollision_UpdateState_Disable;
-            ap->hit_victim_damage = 1;
+            ap->hit_normal_damage = 1;
 
             ftCommon_ApplyStarInvincibleTimer(fp, ATSTAR_INVINCIBLE_TIME);
             ftSpecialItem_BGMSetPlay(0x2E);
             func_800269C0(0x36U);
 
-            if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (D_ovl65_801936AA < U8_MAX))
+            if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->player == Scene_Info.player_port) && (D_ovl65_801936AA < U8_MAX))
             {
                 D_ovl65_801936AA++;
             }
@@ -2431,14 +2431,14 @@ void func_ovl2_800E39B0(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
 
         if (it_hit->can_rehit_fighter)
         {
-            if (ap->hit_reflect_damage < damage_again)
+            if (ap->hit_refresh_damage < damage_again)
             {
-                ap->hit_reflect_damage = damage_again;
+                ap->hit_refresh_damage = damage_again;
             }
         }
-        else if (ap->hit_victim_damage < damage_again)
+        else if (ap->hit_normal_damage < damage_again)
         {
-            ap->hit_victim_damage = damage_again;
+            ap->hit_normal_damage = damage_again;
         }
         if (ABSF(ap->phys_info.vel_air.x) < 5.0F)
         {
@@ -2468,13 +2468,13 @@ void func_ovl2_800E39B0(Item_Struct *ap, Item_Hit *it_hit, s32 arg2, Fighter_Str
                 hitlog->hitbox_id = arg2;
                 hitlog->attacker_gobj = item_gobj;
                 hitlog->victim_hurt = ft_hurt;
-                hitlog->attacker_port_id = ap->port_id;
+                hitlog->attacker_player = ap->player;
                 hitlog->attacker_player_number = ap->player_number;
 
                 ftHitCollisionLogIndex++;
             }
-            ftAttackUpdateMatchStats(ap->port_id, fp->port_id, damage_again);
-            ftAttackAddStaleQueue(ap->port_id, fp->port_id, it_hit->attack_id, it_hit->stat_count);
+            ftAttackUpdateMatchStats(ap->player, fp->player, damage_again);
+            ftAttackAddStaleQueue(ap->player, fp->player, it_hit->attack_id, it_hit->stat_count);
         }
         func_800269C0(it_hit->hit_sfx);
     }
@@ -2506,7 +2506,7 @@ void func_ovl2_800E3CAC(GObj *special_gobj, GObj *fighter_gobj, Fighter_Struct *
     case 1:
         if (temp_v0 != 0)
         {
-            ftAttackUpdateMatchStats(itGetStruct(special_gobj)->damage_port, fp->port_id, damage);
+            ftAttackUpdateMatchStats(itGetStruct(special_gobj)->damage_port, fp->player, damage);
         }
         break;
 
@@ -2609,9 +2609,9 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             default:
                 if (var_f20 < 180.0F)
                 {
-                    func_ovl2_800FDC04(&sp84, hitlog->attacker_port_id, ft_hit->damage, NULL);
+                    func_ovl2_800FDC04(&sp84, hitlog->attacker_player, ft_hit->damage, NULL);
                 }
-                else func_ovl2_800FDEAC(&sp84, hitlog->attacker_port_id, ft_hit->damage);
+                else func_ovl2_800FDEAC(&sp84, hitlog->attacker_player, ft_hit->damage);
 
                 if (ft_hit->sfx_level != 0)
                 {
@@ -2661,9 +2661,9 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 default:
                     if (var_f20 < 180.0F)
                     {
-                        func_ovl2_800FDC04(&sp84, hitlog->attacker_port_id, damage, NULL);
+                        func_ovl2_800FDC04(&sp84, hitlog->attacker_player, damage, NULL);
                     }
-                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_port_id, damage);
+                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_player, damage);
 
                     break;
                 }
@@ -2674,7 +2674,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             it_hit = hitlog->attacker_hit;
             ap = itGetStruct(hitlog->attacker_gobj);
 
-            damage = func_ovl3_801727F4(ap);
+            damage = itMain_ApplyHitDamage(ap);
 
             var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_taken_recent, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, attributes->weight, ap->handicap, this_fp->handicap);
 
@@ -2697,9 +2697,9 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 default:
                     if (var_f20 < 180.0F)
                     {
-                        func_ovl2_800FDC04(&sp84, hitlog->attacker_port_id, damage, NULL);
+                        func_ovl2_800FDC04(&sp84, hitlog->attacker_player, damage, NULL);
                     }
-                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_port_id, damage);
+                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_player, damage);
 
                     break;
                 }
@@ -2744,7 +2744,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
         this_fp->damage_player_number = hitlog->attacker_player_number;
 
-        ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, attacker_fp->ft_kind, attacker_fp->stat_flags.halfword & ~0x400, attacker_fp->stat_count);
+        ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_player, hitlog->hit_source, attacker_fp->ft_kind, attacker_fp->stat_flags.halfword & ~0x400, attacker_fp->stat_count);
 
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
         this_fp->damage_index = hitlog->victim_hurt->placement;
@@ -2771,7 +2771,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
             this_fp->lr_damage = lr_damage;
         }
-        if (this_fp->port_id == hitlog->attacker_port_id)
+        if (this_fp->player == hitlog->attacker_player)
         {
             this_fp->damage_player_number = 0;
 
@@ -2781,7 +2781,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         {
             this_fp->damage_player_number = hitlog->attacker_player_number;
 
-            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ip->wp_kind, wp_hit->stat_flags.halfword, wp_hit->stat_count);
+            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_player, hitlog->hit_source, ip->wp_kind, wp_hit->stat_flags.halfword, wp_hit->stat_count);
         }
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
         this_fp->damage_index = hitlog->victim_hurt->placement;
@@ -2807,7 +2807,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             this_fp->lr_damage = lr_damage;
         }
 
-        if (this_fp->port_id == hitlog->attacker_port_id)
+        if (this_fp->player == hitlog->attacker_player)
         {
             this_fp->damage_player_number = 0;
 
@@ -2816,7 +2816,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         else
         {
             this_fp->damage_player_number = hitlog->attacker_player_number;
-            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_port_id, hitlog->hit_source, ap->it_kind, it_hit->stat_flags.halfword, it_hit->stat_count);
+            ftCommon_Update1PGameDamageStats(this_fp, hitlog->attacker_player, hitlog->hit_source, ap->it_kind, it_hit->stat_flags.halfword, it_hit->stat_count);
         }
         this_fp->damage_joint_index = hitlog->victim_hurt->joint_index;
         this_fp->damage_index = hitlog->victim_hurt->placement;
@@ -2837,11 +2837,11 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         case 0:
             this_fp->damage_player_number = 0;
 
-            if (this_fp->damage_port_id == -1)
+            if (this_fp->damage_player == -1)
             {
-                this_fp->damage_port_id = GMMATCH_PLAYERS_MAX;
+                this_fp->damage_player = GMMATCH_PLAYERS_MAX;
             }
-            ftCommon_Update1PGameDamageStats(this_fp, this_fp->damage_port_id, hitlog->hit_source, gr_hit->env_kind, 0, 0);
+            ftCommon_Update1PGameDamageStats(this_fp, this_fp->damage_player, hitlog->hit_source, gr_hit->env_kind, 0, 0);
             break;
 
         case 1:
@@ -3131,7 +3131,7 @@ void ftObjectProc_SearchItemHit(GObj *fighter_gobj)
                 }
                 if (!(item_flags.is_interact_hurt) && !(item_flags.is_interact_shield) && !(item_flags.is_interact_reflect) && !(item_flags.is_interact_absorb) && (item_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
                 {
-                    if ((wp_hit->clang) && !(fp->x192_flag_b2) && ((fp->throw_gobj == NULL) || (fp->throw_gobj != ip->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->throw_team != ip->team))))
+                    if ((wp_hit->rebound) && !(fp->x192_flag_b2) && ((fp->throw_gobj == NULL) || (fp->throw_gobj != ip->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->throw_team != ip->team))))
                     {
 
                         if (!(fp->is_reflect) || !(wp_hit->can_reflect))
@@ -3318,7 +3318,7 @@ void ftObjectProc_SearchArticleHit(GObj *fighter_gobj)
                 }
                 if (!(article_flags.is_interact_hurt) && !(article_flags.is_interact_shield) && !(article_flags.is_interact_reflect) && (article_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
                 {
-                    if ((it_hit->clang) && !(fp->x192_flag_b2) && ((fp->throw_gobj == NULL) || (fp->throw_gobj != ap->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->throw_team != ap->team))))
+                    if ((it_hit->rebound) && !(fp->x192_flag_b2) && ((fp->throw_gobj == NULL) || (fp->throw_gobj != ap->owner_gobj) && ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (fp->throw_team != ap->team))))
                     {
                         if (!(fp->is_reflect) || !(it_hit->can_reflect))
                         {
@@ -4321,12 +4321,12 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        func_ovl2_80115630(fp->port_id, 2);
-        func_ovl2_80115630(fp->port_id, 3);
+        func_ovl2_80115630(fp->player, 2);
+        func_ovl2_80115630(fp->player, 3);
 
         if (!(flags & FTSTATUPDATE_UNK5_PRESERVE))
         {
-            func_ovl2_80115630(fp->port_id, 7);
+            func_ovl2_80115630(fp->player, 7);
         }
         fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * HALF_PI32;
 
@@ -4345,7 +4345,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 
     if ((fp->ground_or_air == GA_Ground) && !(flags & FTSTATUPDATE_DAMAGEPORT_PRESERVE))
     {
-        fp->damage_port_id = -1;
+        fp->damage_player = -1;
     }
     if (!(flags & FTSTATUPDATE_SLOPECONTOUR_PRESERVE))
     {

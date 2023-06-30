@@ -106,7 +106,7 @@ typedef struct wpCommonAttributes // Moreso hitbox stuff
     u32 knockback_weight : 10;
     s32 shield_damage : 8;
     u32 hitbox_count : 2;
-    u32 clang : 1;
+    u32 rebound : 1;
     u32 sfx : 10;
     u32 priority : 3;
     u32 can_rehit_item : 1;
@@ -147,7 +147,7 @@ typedef struct _Weapon_Hit
     s32 priority; // Used to determine winner in item hitbox vs item hitbox interaction?
     u8 interact_mask; // Mask of object classes hitbox can interact with; 0x1 = fighters, 0x2 = items, 0x4 = articles
     u16 hit_sfx;
-    u32 clang : 1;
+    u32 rebound : 1;
     u32 can_rehit_item : 1;
     u32 can_rehit_fighter : 1;
     u32 can_rehit_shield : 1;
@@ -173,7 +173,7 @@ typedef struct _Weapon_Struct
     GObj *owner_gobj;                   // Weapon's owner
     s32 wp_kind;                        // Weapon ID
     u8 team;                            // Weapon's team
-    u8 port_id;                         // Weapon's port index
+    u8 player;                          // Weapon's port index
     u8 handicap;                        // Weapon's handicap
     s32 player_number;                  // Weapon's player number
     s32 lr;                             // Weapon's facing direction; -1 = LEFT, 0 = CENTER, 1 = RIGHT, 2 = WALL_UP (Thunder Jolt only?), 3 = WALL_DOWN (Thunder Jolt only?)
@@ -187,16 +187,16 @@ typedef struct _Weapon_Struct
 
     Coll_Data coll_data;                // Weapon's collision data
 
-    gmCollisionGA ground_or_air;        // Ground or air bool
+    mpGroundAir ground_or_air;          // Ground or air bool
 
     Weapon_Hit weapon_hit;              // Weapon's hitbox
 
-    s32 hit_victim_damage;              // Damage applied to entity this weapon has hit
-    s32 hit_reflect_damage;             // Damage on reflection?
+    s32 hit_normal_damage;              // Damage applied to entity this weapon has hit
+    s32 hit_refresh_damage;             // Damage applied to entity this item has hit, if rehit is possible?
     s32 hit_attack_damage;              // Damage weapon dealt to other attack
     s32 hit_shield_damage;              // Damage weapon dealt to shield
     f32 shield_collide_angle;           // Angle at which item collided with shield?
-    Vec3f shield_collide_vec;           // Position of shield this item collided with?
+    Vec3f shield_collide_vec;           // Position of shield item collided with? (Update: only Z axis appears to be used, can be 0, -1 or 1 depending on attack direction
     GObj *reflect_gobj;                 // GObj that reflected this weapon
     gmStatFlags reflect_stat_flags;     // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
     u16 reflect_stat_count;             // Status update count at the time the item is reflected?

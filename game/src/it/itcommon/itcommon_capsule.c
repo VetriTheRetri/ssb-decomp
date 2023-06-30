@@ -59,8 +59,8 @@ itStatusDesc itCommon_Capsule_StatusDesc[6] =
 
     // Status 3 (Fighter Throw)
     {
-        itCapsule_AThrow_ProcUpdate,        // Proc Update
-        itCapsule_AThrow_ProcMap,           // Proc Map
+        itCapsule_FThrow_ProcUpdate,        // Proc Update
+        itCapsule_FThrow_ProcMap,           // Proc Map
         itCapsule_SDefault_ProcHit,         // Proc Hit
         itCapsule_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -72,7 +72,7 @@ itStatusDesc itCommon_Capsule_StatusDesc[6] =
     // Status 4 (Fighter Drop)
     {
         itCapsule_AFall_ProcUpdate,         // Proc Update
-        itCapsule_ADrop_ProcMap,            // Proc Map
+        itCapsule_FDrop_ProcMap,            // Proc Map
         itCapsule_SDefault_ProcHit,         // Proc Hit
         itCapsule_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -99,8 +99,8 @@ typedef enum itCapsuleStatus
     itStatus_Capsule_GWait,
     itStatus_Capsule_AFall,
     itStatus_Capsule_FHold,
-    itStatus_Capsule_AThrow,
-    itStatus_Capsule_ADrop,
+    itStatus_Capsule_FThrow,
+    itStatus_Capsule_FDrop,
     itStatus_Capsule_NExplode
 
 } itCapsuleStatus;
@@ -147,7 +147,7 @@ extern itStatusDesc itCommon_Capsule_StatusDesc[]; // Capsule states
 // 0x80174064
 void itCapsule_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Capsule_StatusDesc, itStatus_Capsule_GWait);
 }
 
@@ -158,7 +158,7 @@ void itCapsule_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
 
     ip->is_damage_all = TRUE;
 
@@ -174,7 +174,7 @@ void itCapsule_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x80174124
-bool32 itCapsule_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itCapsule_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -185,7 +185,7 @@ bool32 itCapsule_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x80174160
-bool32 itCapsule_AThrow_ProcMap(GObj *item_gobj)
+bool32 itCapsule_FThrow_ProcMap(GObj *item_gobj)
 {
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE)
     {
@@ -199,7 +199,7 @@ bool32 itCapsule_AThrow_ProcMap(GObj *item_gobj)
 }
 
 // 0x801741B0
-void itCapsule_AThrow_SetStatus(GObj *item_gobj) // Capsule gets thrown
+void itCapsule_FThrow_SetStatus(GObj *item_gobj) // Capsule gets thrown
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -207,7 +207,7 @@ void itCapsule_AThrow_SetStatus(GObj *item_gobj) // Capsule gets thrown
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    itMain_SetItemStatus(item_gobj, itCommon_Capsule_StatusDesc, itStatus_Capsule_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_Capsule_StatusDesc, itStatus_Capsule_FThrow);
 }
 
 // 0x801741F0
@@ -219,15 +219,15 @@ bool32 func_ovl3_801741F0(GObj *item_gobj) // Unused
 }
 
 // 0x80174214
-bool32 itCapsule_ADrop_ProcMap(GObj *item_gobj)
+bool32 itCapsule_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.2F, 0.4F, itCapsule_GWait_SetStatus);
 }
 
 // 0x80174248
-void itCapsule_ADrop_SetStatus(GObj *item_gobj)
+void itCapsule_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_Capsule_StatusDesc, itStatus_Capsule_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_Capsule_StatusDesc, itStatus_Capsule_FDrop);
 }
 
 extern intptr_t itCapsule_HitEvent_Offset; // D_NF_00000098
@@ -281,7 +281,7 @@ void itCapsule_NExplode_InitItemVars(GObj *item_gobj)
 
     ip->item_hit.element = gmHitCollision_Element_Fire;
 
-    ip->item_hit.clang = FALSE;
+    ip->item_hit.rebound = FALSE;
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 

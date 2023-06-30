@@ -48,7 +48,7 @@ itStatusDesc itCommon_Harisen_StatusDesc[3] =
     // Status 2 (Fighter Drop)
     {
         itHeart_AFall_ProcUpdate,           // Proc Update
-        itHeart_ADrop_ProcMap,              // Proc Map
+        itHeart_FDrop_ProcMap,              // Proc Map
         NULL,                               // Proc Hit
         NULL,                               // Proc Shield
         NULL,                               // Proc Hop
@@ -62,7 +62,7 @@ typedef enum itHeartStatus
 {
     itStatus_Heart_GWait,
     itStatus_Heart_AFall,
-    itStatus_Heart_ADrop
+    itStatus_Heart_FDrop
 
 } itHeartStatus; 
 
@@ -96,7 +96,7 @@ extern itStatusDesc itCommon_Heart_StatusDesc[];
 // 0x80174780
 void itHeart_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_GWait);
 }
 
@@ -107,20 +107,20 @@ void itHeart_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_AFall);
 }
 
 // 0x801747F8
-bool32 itHeart_ADrop_ProcMap(GObj *item_gobj)
+bool32 itHeart_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.1F, 0.0F, itHeart_GWait_SetStatus);
 }
 
 // 0x80174828
-void itHeart_ADrop_SetStatus(GObj *item_gobj)
+void itHeart_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_FDrop);
 }
 
 // 0x80174850

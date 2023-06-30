@@ -14692,7 +14692,7 @@ glabel func_ovl2_800E35BC
   /* 05EDCC 800E35CC AFA40040 */        sw $a0, 0x40($sp)
   /* 05EDD0 800E35D0 AFA50044 */        sw $a1, 0x44($sp)
   /* 05EDD4 800E35D4 AFA60048 */        sw $a2, 0x48($sp)
-  /* 05EDD8 800E35D8 0C05C9FD */       jal func_ovl3_801727F4
+  /* 05EDD8 800E35D8 0C05C9FD */       jal itMain_ApplyHitDamage
   /* 05EDDC 800E35DC AFA7004C */        sw $a3, 0x4c($sp)
   /* 05EDE0 800E35E0 8FB00050 */        lw $s0, 0x50($sp)
   /* 05EDE4 800E35E4 00408825 */        or $s1, $v0, $zero
@@ -14777,7 +14777,7 @@ glabel func_ovl2_800E36F8
   /* 05EF08 800E3708 00808025 */        or $s0, $a0, $zero
   /* 05EF0C 800E370C 00E08825 */        or $s1, $a3, $zero
   /* 05EF10 800E3710 AFA50044 */        sw $a1, 0x44($sp)
-  /* 05EF14 800E3714 0C05C9FD */       jal func_ovl3_801727F4
+  /* 05EF14 800E3714 0C05C9FD */       jal itMain_ApplyHitDamage
   /* 05EF18 800E3718 AFA60048 */        sw $a2, 0x48($sp)
   /* 05EF1C 800E371C 8FA40044 */        lw $a0, 0x44($sp)
   /* 05EF20 800E3720 00401825 */        or $v1, $v0, $zero
@@ -14875,7 +14875,7 @@ glabel func_ovl2_800E3860
   /* 05F070 800E3870 00808025 */        or $s0, $a0, $zero
   /* 05F074 800E3874 00C08825 */        or $s1, $a2, $zero
   /* 05F078 800E3878 AFA5002C */        sw $a1, 0x2c($sp)
-  /* 05F07C 800E387C 0C05C9FD */       jal func_ovl3_801727F4
+  /* 05F07C 800E387C 0C05C9FD */       jal itMain_ApplyHitDamage
   /* 05F080 800E3880 AFA70034 */        sw $a3, 0x34($sp)
   /* 05F084 800E3884 8FA50034 */        lw $a1, 0x34($sp)
   /* 05F088 800E3888 8FA4002C */        lw $a0, 0x2c($sp)
@@ -14967,7 +14967,7 @@ glabel func_ovl2_800E39B0
   /* 05F1BC 800E39BC 00808025 */        or $s0, $a0, $zero
   /* 05F1C0 800E39C0 AFA50044 */        sw $a1, 0x44($sp)
   /* 05F1C4 800E39C4 AFA60048 */        sw $a2, 0x48($sp)
-  /* 05F1C8 800E39C8 0C05C9FD */       jal func_ovl3_801727F4
+  /* 05F1C8 800E39C8 0C05C9FD */       jal itMain_ApplyHitDamage
   /* 05F1CC 800E39CC AFA7004C */        sw $a3, 0x4c($sp)
   /* 05F1D0 800E39D0 8FA40044 */        lw $a0, 0x44($sp)
   /* 05F1D4 800E39D4 AFA2003C */        sw $v0, 0x3c($sp)
@@ -15553,7 +15553,7 @@ glabel func_ovl2_800E3EBC
   .L800E4210:
   /* 05FA10 800E4210 8E510004 */        lw $s1, 4($s2) # ftHitCollisionLogTable + 4
   /* 05FA14 800E4214 8D940084 */        lw $s4, 0x84($t4)
-  /* 05FA18 800E4218 0C05C9FD */       jal func_ovl3_801727F4
+  /* 05FA18 800E4218 0C05C9FD */       jal itMain_ApplyHitDamage
   /* 05FA1C 800E421C 02802025 */        or $a0, $s4, $zero
   /* 05FA20 800E4220 8E2D0034 */        lw $t5, 0x34($s1)
   /* 05FA24 800E4224 8EA4002C */        lw $a0, 0x2c($s5)
@@ -22536,7 +22536,7 @@ glabel ftDamageUpdateCheckDropItem
   /* 065BB0 800EA3B0 E7A00028 */      swc1 $f0, 0x28($sp)
   /* 065BB4 800EA3B4 E7A00024 */      swc1 $f0, 0x24($sp)
   /* 065BB8 800EA3B8 E7A00020 */      swc1 $f0, 0x20($sp)
-  /* 065BBC 800EA3BC 0C05CABB */       jal func_ovl3_80172AEC
+  /* 065BBC 800EA3BC 0C05CABB */       jal itMain_SetFighterDrop
   /* 065BC0 800EA3C0 8CE4084C */        lw $a0, 0x84c($a3)
   .L800EA3C4:
   /* 065BC4 800EA3C4 8FBF0014 */        lw $ra, 0x14($sp)
@@ -32789,7 +32789,7 @@ glabel ftCommon_HammerUpdateStats
   /* 06EF20 800F3720 54400018 */      bnel $v0, $zero, .L800F3784
   /* 06EF24 800F3724 8FBF001C */        lw $ra, 0x1c($sp)
   /* 06EF28 800F3728 AFA00020 */        sw $zero, 0x20($sp)
-  /* 06EF2C 800F372C 0C05CA35 */       jal func_ovl3_801728D4
+  /* 06EF2C 800F372C 0C05CA35 */       jal itMain_DestroyItem
   /* 06EF30 800F3730 8E04084C */        lw $a0, 0x84c($s0)
   /* 06EF34 800F3734 0C039ED5 */       jal ftSpecialItem_BGMCheckFighters
   /* 06EF38 800F3738 00000000 */       nop 
@@ -59278,8 +59278,8 @@ glabel func_ovl2_8010AD70
   /* 0865A0 8010ADA0 0C03F225 */       jal func_ovl2_800FC894
   /* 0865A4 8010ADA4 27A5003C */     addiu $a1, $sp, 0x3c
   /* 0865A8 8010ADA8 44800000 */      mtc1 $zero, $f0
-  /* 0865AC 8010ADAC 3C028019 */       lui $v0, %hi(D_ovl3_80189450)
-  /* 0865B0 8010ADB0 8C429450 */        lw $v0, %lo(D_ovl3_80189450)($v0)
+  /* 0865AC 8010ADAC 3C028019 */       lui $v0, %hi(itMonster_Global_SelectMonsterIndex)
+  /* 0865B0 8010ADB0 8C429450 */        lw $v0, %lo(itMonster_Global_SelectMonsterIndex)($v0)
   /* 0865B4 8010ADB4 E7A00038 */      swc1 $f0, 0x38($sp)
   /* 0865B8 8010ADB8 E7A00034 */      swc1 $f0, 0x34($sp)
   /* 0865BC 8010ADBC 10400004 */      beqz $v0, .L8010ADD0

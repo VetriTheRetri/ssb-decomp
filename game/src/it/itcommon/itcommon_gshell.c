@@ -59,8 +59,8 @@ itStatusDesc itCommon_GShell_StatusDesc[7] =
 
     // Status 3 (Fighter Throw)
     {
-        itGShell_AThrow_ProcUpdate,         // Proc Update
-        itGShell_AThrow_ProcMap,            // Proc Map
+        itGShell_FThrow_ProcUpdate,         // Proc Update
+        itGShell_FThrow_ProcMap,            // Proc Map
         itGShell_SDefault_ProcHit,          // Proc Hit
         itGShell_SDefault_ProcShield,       // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -72,7 +72,7 @@ itStatusDesc itCommon_GShell_StatusDesc[7] =
     // Status 4 (Fighter Drop)
     {
         itGShell_AFall_ProcUpdate,          // Proc Update
-        itGShell_AThrow_ProcMap,            // Proc Map
+        itGShell_FThrow_ProcMap,            // Proc Map
         itGShell_SDefault_ProcHit,          // Proc Hit
         itGShell_SDefault_ProcShield,       // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -96,7 +96,7 @@ itStatusDesc itCommon_GShell_StatusDesc[7] =
     // Status 6 (Air Spin)
     {
         itGShell_AFall_ProcUpdate,          // Proc Update
-        itGShell_AThrow_ProcMap,            // Proc Map
+        itGShell_FThrow_ProcMap,            // Proc Map
         itGShell_SDefault_ProcHit,          // Proc Hit
         itGShell_SDefault_ProcHit,          // Proc Shield
         NULL,                               // Proc Hop
@@ -111,8 +111,8 @@ typedef enum itGShellStatus
     itStatus_GShell_GWait,
     itStatus_GShell_AFall,
     itStatus_GShell_FHold,
-    itStatus_GShell_AThrow,
-    itStatus_GShell_ADrop,
+    itStatus_GShell_FThrow,
+    itStatus_GShell_FDrop,
     itStatus_GShell_GSpin,
     itStatus_GShell_ASpin
 
@@ -200,11 +200,11 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80173F54(ip);
+    itMap_SetGround(ip);
 
     if (ABSF(ip->phys_info.vel_air.x) < ATGSHELL_STOP_VEL_X)
     {
-        func_ovl3_80172E74(item_gobj);
+        itMain_SetGroundPickup(item_gobj);
 
         ip->item_vars.shell.is_damage = FALSE;
 
@@ -227,7 +227,7 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
     }
     else
     {
-        func_ovl3_80172E74(item_gobj);
+        itMain_SetGroundPickup(item_gobj);
 
         ip->is_damage_all = TRUE;
 
@@ -258,7 +258,7 @@ void itGShell_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_GShell_StatusDesc, itStatus_GShell_AFall);
 }
 
@@ -310,7 +310,7 @@ void itGShell_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x80178AC4
-bool32 itGShell_AThrow_ProcMap(GObj *item_gobj)
+bool32 itGShell_FThrow_ProcMap(GObj *item_gobj)
 {
     func_ovl3_80173C68(item_gobj, 0.2F, 0.5F, itGShell_GWait_SetStatus);
 
@@ -318,7 +318,7 @@ bool32 itGShell_AThrow_ProcMap(GObj *item_gobj)
 }
 
 // 0x80178AF8
-bool32 itGShell_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itGShell_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -328,25 +328,25 @@ bool32 itGShell_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x80178B28
-void itGShell_AThrow_SetStatus(GObj *item_gobj)
+void itGShell_FThrow_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.health = 1;
     ip->item_vars.shell.is_damage = TRUE;
 
-    itMain_SetItemStatus(item_gobj, itCommon_GShell_StatusDesc, itStatus_GShell_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_GShell_StatusDesc, itStatus_GShell_FThrow);
 }
 
 // 0x80178B60
-void itGShell_ADrop_SetStatus(GObj *item_gobj)
+void itGShell_FDrop_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.health = 1;
     ip->item_vars.shell.is_damage = TRUE;
 
-    itMain_SetItemStatus(item_gobj, itCommon_GShell_StatusDesc, itStatus_GShell_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_GShell_StatusDesc, itStatus_GShell_FDrop);
 }
 
 // 0x80178B98

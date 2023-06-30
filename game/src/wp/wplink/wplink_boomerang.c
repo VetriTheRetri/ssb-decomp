@@ -408,7 +408,7 @@ bool32 wpLink_Boomerang_ProcHit(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)) && (wp->hit_victim_damage != 0))
+    if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)) && (wp->hit_normal_damage != 0))
     {
         wpLink_Boomerang_UpdateVelLR(wp, wpLink_Boomerang_SubVelSqrt(wp, 5.0F));
         wpLink_Boomerang_SetReturnVars(weapon_gobj, TRUE);

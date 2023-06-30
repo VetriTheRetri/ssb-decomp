@@ -40,8 +40,8 @@ itStatusDesc itCommon_Egg_StatusDesc[6] =
 
     // Status 3 (Fighter Throw)
     {
-        itEgg_AThrow_ProcUpdate,            // Proc Update
-        itEgg_AThrow_ProcMap,               // Proc Map
+        itEgg_FThrow_ProcUpdate,            // Proc Update
+        itEgg_FThrow_ProcMap,               // Proc Map
         itEgg_SDefault_ProcHit,             // Proc Hit
         itEgg_SDefault_ProcHit,             // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -53,7 +53,7 @@ itStatusDesc itCommon_Egg_StatusDesc[6] =
     // Status 4 (Fighter Drop)
     {
         itEgg_AFall_ProcUpdate,             // Proc Update
-        itEgg_ADrop_ProcMap,                // Proc Map
+        itEgg_FDrop_ProcMap,                // Proc Map
         itEgg_SDefault_ProcHit,             // Proc Hit
         itEgg_SDefault_ProcHit,             // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -80,8 +80,8 @@ typedef enum itEggStatus
     itStatus_Egg_GWait,
     itStatus_Egg_AFall,
     itStatus_Egg_FHold,
-    itStatus_Egg_AThrow,
-    itStatus_Egg_ADrop,
+    itStatus_Egg_FThrow,
+    itStatus_Egg_FDrop,
     itStatus_Egg_NExplode
 };
 
@@ -140,7 +140,7 @@ void itEgg_GWait_SetModelVars(GObj *item_gobj)
 // 0x801816E0
 void itEgg_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itEgg_GWait_SetModelVars(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_GWait);
 }
@@ -157,7 +157,7 @@ void itEgg_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_damage_all = TRUE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_AFall);
 }
 
@@ -168,7 +168,7 @@ void itEgg_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x801817A0
-bool32 itEgg_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itEgg_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
@@ -182,7 +182,7 @@ bool32 itEgg_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x801817F8
-bool32 itEgg_AThrow_ProcMap(GObj *item_gobj)
+bool32 itEgg_FThrow_ProcMap(GObj *item_gobj)
 {
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE)
     {
@@ -198,7 +198,7 @@ bool32 itEgg_AThrow_ProcMap(GObj *item_gobj)
 }
 
 // 0x80181854
-void itEgg_AThrow_SetStatus(GObj *item_gobj)
+void itEgg_FThrow_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -206,7 +206,7 @@ void itEgg_AThrow_SetStatus(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_FThrow);
 }
 
 bool32 func_ovl3_80181894(GObj *item_gobj) // Unused
@@ -217,13 +217,13 @@ bool32 func_ovl3_80181894(GObj *item_gobj) // Unused
 }
 
 // 0x801818B8
-bool32 itEgg_ADrop_ProcMap(GObj *item_gobj)
+bool32 itEgg_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itEgg_GWait_SetStatus);
 }
 
 // 0x801818E8
-void itEgg_ADrop_SetStatus(GObj *item_gobj)
+void itEgg_FDrop_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -231,7 +231,7 @@ void itEgg_ADrop_SetStatus(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_FDrop);
 }
 
 extern itCreateDesc Article_Egg_Data;
@@ -309,7 +309,7 @@ void itEgg_NExplode_InitItemVars(GObj *item_gobj)
     ip->item_hit.can_rehit_item = TRUE;
     ip->item_hit.can_hop = FALSE;
     ip->item_hit.can_reflect = FALSE;
-    ip->item_hit.clang = FALSE;
+    ip->item_hit.rebound = FALSE;
     ip->item_hit.element = gmHitCollision_Element_Fire;
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;

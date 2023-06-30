@@ -46,7 +46,7 @@ void func_ovl3_80183830(GObj *item_gobj)
 
         ap->item_hit.element = gmHitCollision_Element_Fire;
 
-        ap->item_hit.clang = FALSE;
+        ap->item_hit.rebound = FALSE;
 
         ap->item_event_index++;
 

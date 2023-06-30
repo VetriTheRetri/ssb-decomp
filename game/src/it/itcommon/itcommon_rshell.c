@@ -169,11 +169,11 @@ void func_ovl3_8017A83C(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80173F54(ap);
+    itMap_SetGround(ap);
 
     if (ABSF(ap->phys_info.vel_air.x) < 8.0F)
     {
-        func_ovl3_80172E74(item_gobj);
+        itMain_SetGroundPickup(item_gobj);
 
         ap->item_vars.shell.is_damage = FALSE;
         ap->phys_info.vel_air.x = 0.0F;
@@ -195,7 +195,7 @@ void func_ovl3_8017A83C(GObj *item_gobj)
     }
     else
     {
-        func_ovl3_80172E74(item_gobj);
+        itMain_SetGroundPickup(item_gobj);
 
         ap->phys_info.vel_air.x = 0.0F;
 
@@ -222,7 +222,7 @@ void func_ovl3_8017A984(GObj *item_gobj)
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     itMain_SetItemStatus(item_gobj, Article_RShell_Status, 1);
 }
 
@@ -275,7 +275,7 @@ void jtgt_ovl3_8017AAF0(GObj *item_gobj)
 
     ap->times_thrown = 0;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     itMain_SetItemStatus(item_gobj, Article_RShell_Status, 3);
 }
 
@@ -289,7 +289,7 @@ void jtgt_ovl3_8017AB48(GObj *item_gobj)
 
     ap->times_thrown = 0;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     itMain_SetItemStatus(item_gobj, Article_RShell_Status, 4);
 }
 
@@ -478,7 +478,7 @@ void func_ovl3_8017AFEC(GObj *item_gobj)
     func_ovl3_8017A6A0(item_gobj);
     func_800269C0(0x37U);
     func_ovl3_8017279C(item_gobj);
-    func_ovl3_80173F54(ap);
+    itMap_SetGround(ap);
 }
 
 void func_ovl3_8017B0D4(GObj *item_gobj)
@@ -508,7 +508,7 @@ void func_ovl3_8017B108(GObj *item_gobj)
     else ap->lr = RIGHT;
 
     func_ovl3_8017279C(item_gobj);
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
 }
 
 void func_ovl3_8017B1A4(GObj *item_gobj)

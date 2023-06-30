@@ -5,25 +5,25 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
-#define ftScriptEventUpdatePtr(event, type)                                   \
-(event->p_script = (void*) ((uintptr_t)event->p_script + (sizeof(type))))     \
+#define ftScriptEventAdvance(event, type)                                       \
+((event)->p_script = (void*) ((uintptr_t)(event)->p_script + (sizeof(type))))   \
 
-#define ftScriptEventCast(event, type)                                        \
-((type*) event->p_script)                                                     \
-
-// WARNING: Only advances 4 bytes at a time
-#define ftScriptEventCastUpdate(event, type)                                  \
-((type*) event->p_script++)                                                   \
-
-#define gmColorEventUpdatePtr(event, type)                                    \
-(event = (void*) ((uintptr_t)event + sizeof(type)))                           \
-
-#define gmColorEventCast(event, type)                                         \
-((type*) event)                                                               \
+#define ftScriptEventCast(event, type)                                          \
+((type*) (event)->p_script)                                                     \
 
 // WARNING: Only advances 4 bytes at a time
-#define gmColorEventCastUpdate(event, type)                                   \
-((type*) event++)                                                             \
+#define ftScriptEventCastAdvance(event, type)                                   \
+((type*) (event)->p_script++)                                                   \
+
+#define gmColorEventAdvance(event, type)                                        \
+((event) = (void*) ((uintptr_t)event + sizeof(type)))                             
+
+#define gmColorEventCast(event, type)                                           \
+((type*) (event))                                                               \
+
+// WARNING: Only advances 4 bytes at a time
+#define gmColorEventCastAdvance(event, type)                                    \
+((type*) (event)++)                                                             \
 
 typedef enum ftScriptEventKind
 {
@@ -151,7 +151,7 @@ typedef struct ftScriptEventCreateHit1
     u32 group_id : 3;
     s32 joint_index : 7;
     u32 damage : 8;
-    u32 clang : 1;
+    u32 rebound : 1;
     u32 element : 4;
 
 } ftScriptEventCreateHit1;
@@ -421,7 +421,7 @@ typedef struct ftScriptEventSubroutineThrown2
 
 typedef struct ftScriptEventDamage
 {
-    void *p_script[2][27];
+    void *p_script[2][Ft_Kind_EnumMax];
 
 } ftScriptEventDamage;
 

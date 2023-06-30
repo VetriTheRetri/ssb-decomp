@@ -32,7 +32,7 @@ bool32 func_ovl3_8017F49C(GObj *item_gobj) // Unused
 
     ap->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ap);
+    itMap_SetAir(ap);
     itMain_SetItemStatus(item_gobj, Article_Lizardon_Status, 0);
 }
 

@@ -176,7 +176,7 @@ typedef struct gmPlayerBlock
     u8 player_kind; // 0 = HMN, 1 = CPU, 5 = How to Play (?)
     u8 character_kind; // Same as ftKind
     u8 team_index;
-    u8 port_id; // Identical to team index if team battle is on?
+    u8 player; // Identical to team index if team battle is on?
     u8 costume_index;
     u8 shade_index; // Color overlay applied when several players use the same costume
     u8 unk_0x8;

@@ -8,14 +8,14 @@ void ftKirby_SpecialN_ApplyCaptureDamage(GObj *kirby_gobj, GObj *victim_gobj, s3
 {
     Fighter_Struct *kirby_fp = ftGetStruct(kirby_gobj);
     Fighter_Struct *victim_fp = ftGetStruct(victim_gobj);
-    s32 star_dmg_victim = gmCommon_DamageApplyStale(kirby_fp->port_id, damage, kirby_fp->attack_id, kirby_fp->motion_count);
+    s32 star_dmg_victim = gmCommon_DamageApplyStale(kirby_fp->player, damage, kirby_fp->attack_id, kirby_fp->motion_count);
 
     damage = star_dmg_victim;
 
     ftCommon_Damage_UpdateDamageColAnim(victim_gobj, gmCommonObject_DamageCalcKnockback(victim_fp->percent_damage, star_dmg_victim, star_dmg_victim, 0, 100, 0, victim_fp->attributes->weight, kirby_fp->handicap, victim_fp->handicap), 0);
     ftDamageUpdateCheckDropItem(victim_fp, damage);
-    ftAttackUpdateMatchStats(kirby_fp->port_id, victim_fp->port_id, damage);
-    ftAttackAddStaleQueue(kirby_fp->port_id, victim_fp->port_id, kirby_fp->attack_id, kirby_fp->motion_count);
+    ftAttackUpdateMatchStats(kirby_fp->player, victim_fp->player, damage);
+    ftAttackAddStaleQueue(kirby_fp->player, victim_fp->player, kirby_fp->attack_id, kirby_fp->motion_count);
 }
 
 // 0x80161D6C - distance between Kirby and inhale victim

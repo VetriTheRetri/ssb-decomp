@@ -60,25 +60,25 @@ itStatusDesc itCommon_IBumper_StatusDesc[8] =
 
     // Status 3 (Fighter Throw)
     {
-        itIBumper_AThrow_ProcUpdate,        // Proc Update
-        itIBumper_AThrow_ProcMap,           // Proc Map
-        itIBumper_AThrow_ProcHit,           // Proc Hit
-        itIBumper_AThrow_ProcShield,        // Proc Shield
+        itIBumper_FThrow_ProcUpdate,        // Proc Update
+        itIBumper_FThrow_ProcMap,           // Proc Map
+        itIBumper_FThrow_ProcHit,           // Proc Hit
+        itIBumper_FThrow_ProcShield,        // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
         NULL,                               // Proc Set-Off
-        itIBumper_AThrow_ProcReflector,     // Proc Reflector
+        itIBumper_FThrow_ProcReflector,     // Proc Reflector
         NULL                                // Proc Damage
     },
 
     // Status 4 (Fighter Drop)
     {
-        itIBumper_AThrow_ProcUpdate,        // Proc Update
-        itIBumper_AThrow_ProcMap,           // Proc Map
-        itIBumper_AThrow_ProcHit,           // Proc Hit
-        itIBumper_AThrow_ProcShield,        // Proc Shield
+        itIBumper_FThrow_ProcUpdate,        // Proc Update
+        itIBumper_FThrow_ProcMap,           // Proc Map
+        itIBumper_FThrow_ProcHit,           // Proc Hit
+        itIBumper_FThrow_ProcShield,        // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
         NULL,                               // Proc Set-Off
-        itIBumper_AThrow_ProcReflector,     // Proc Reflector
+        itIBumper_FThrow_ProcReflector,     // Proc Reflector
         NULL                                // Proc Damage
     },
 
@@ -97,12 +97,12 @@ itStatusDesc itCommon_IBumper_StatusDesc[8] =
     // Status 6 (Airborne after Ground Active Wait)
     {
         itIBumper_AHit_ProcUpdate,          // Proc Update
-        itIBumper_AThrow_ProcUpdate,        // Proc Map
-        itIBumper_AThrow_ProcHit,           // Proc Hit
-        itIBumper_AThrow_ProcShield,        // Proc Shield
+        itIBumper_FThrow_ProcUpdate,        // Proc Map
+        itIBumper_FThrow_ProcHit,           // Proc Hit
+        itIBumper_FThrow_ProcShield,        // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
         NULL,                               // Proc Set-Off
-        itIBumper_AThrow_ProcReflector,     // Proc Reflector
+        itIBumper_FThrow_ProcReflector,     // Proc Reflector
         NULL                                // Proc Damage
     },
 
@@ -124,8 +124,8 @@ typedef enum itIBumperStatus
     itStatus_IBumper_GWait,                 // Ground neutral
     itStatus_IBumper_AFall,                 // Airborne neutral
     itStatus_IBumper_FHold,                 // Fighter hold
-    itStatus_IBumper_AThrow,                // Fighter throw
-    itStatus_IBumper_ADrop,                 // Fighter drop
+    itStatus_IBumper_FThrow,                // Fighter throw
+    itStatus_IBumper_FDrop,                 // Fighter drop
     itStatus_IBumper_GWaitHit,              // Ground active
     itStatus_IBumper_AHit,                  // Airborne hit
     itStatus_IBumper_GDisappear             // Ground despawn
@@ -178,7 +178,7 @@ bool32 itIBumper_AFall_ProcMap(GObj *item_gobj)
 }
 
 // 0x8017B57C
-bool32 itIBumper_AThrow_ProcHit(GObj *item_gobj)
+bool32 itIBumper_FThrow_ProcHit(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
@@ -205,7 +205,7 @@ bool32 itIBumper_AThrow_ProcHit(GObj *item_gobj)
 // 0x8017B600
 void itIBumper_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_GWait);
 }
 
@@ -216,7 +216,7 @@ void itIBumper_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_AFall);
 }
 
@@ -227,7 +227,7 @@ void itIBumper_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x8017B6A0
-bool32 itIBumper_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itIBumper_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -249,13 +249,13 @@ bool32 itIBumper_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x8017B720
-bool32 itIBumper_AThrow_ProcMap(GObj *item_gobj)
+bool32 itIBumper_FThrow_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173EE8(item_gobj, 0.8F, itIBumper_GWaitHit_SetStatus);
 }
 
 // 0x8017B74C
-bool32 itIBumper_AThrow_ProcShield(GObj *item_gobj)
+bool32 itIBumper_FThrow_ProcShield(GObj *item_gobj)
 {
     func_ovl3_80172FE0(item_gobj);
     func_ovl3_8017279C(item_gobj);
@@ -264,7 +264,7 @@ bool32 itIBumper_AThrow_ProcShield(GObj *item_gobj)
 }
 
 // 0x8017B778
-bool32 itIBumper_AThrow_ProcReflector(GObj *item_gobj)
+bool32 itIBumper_FThrow_ProcReflector(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
@@ -279,7 +279,7 @@ bool32 itIBumper_AThrow_ProcReflector(GObj *item_gobj)
 }
 
 // 0x8017B7DC
-void itIBumper_AThrow_SetStatus(GObj *item_gobj)
+void itIBumper_FThrow_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -288,11 +288,11 @@ void itIBumper_AThrow_SetStatus(GObj *item_gobj)
     ip->coll_data.object_coll.top = ATBUMPER_COLL_SIZE;
     ip->coll_data.object_coll.bottom = -ATBUMPER_COLL_SIZE;
 
-    itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_FThrow);
 }
 
 // 0x8017B828
-void itIBumper_ADrop_SetStatus(GObj *item_gobj)
+void itIBumper_FDrop_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -301,7 +301,7 @@ void itIBumper_ADrop_SetStatus(GObj *item_gobj)
     ip->coll_data.object_coll.top = ATBUMPER_COLL_SIZE;
     ip->coll_data.object_coll.bottom = -ATBUMPER_COLL_SIZE;
 
-    itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_FDrop);
 }
 
 // 0x8017B874
@@ -455,13 +455,13 @@ bool32 itIBumper_GWaitHit_ProcMap(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    if (func_ovl3_801735A0(item_gobj, itIBumper_ADrop_SetStatus) != FALSE)
+    if (func_ovl3_801735A0(item_gobj, itIBumper_FDrop_SetStatus) != FALSE)
     {
         if (func_ovl2_800FC67C(ip->attach_line_id) == FALSE)
         {
             ip->is_attach_surface = FALSE;
 
-            itIBumper_ADrop_SetStatus(item_gobj);
+            itIBumper_FDrop_SetStatus(item_gobj);
 
             joint->scale.z = 1.0F;
             joint->scale.y = 1.0F;

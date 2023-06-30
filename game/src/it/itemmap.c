@@ -381,13 +381,15 @@ bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 mod_vel, void (*cb)(GObj*))
     return FALSE;
 }
 
-void func_ovl3_80173F54(Item_Struct *ap)
+// 0x80173F54
+void itMap_SetGround(Item_Struct *ip)
 {
-    ap->ground_or_air = GA_Ground;
-    ap->phys_info.vel_ground = ap->phys_info.vel_air.x * ap->lr;
+    ip->ground_or_air = GA_Ground;
+    ip->phys_info.vel_ground = ip->phys_info.vel_air.x * ip->lr;
 }
 
-void func_ovl3_80173F78(Item_Struct *ap)
+// 0x80173F78
+void itMap_SetAir(Item_Struct *ip)
 {
-    ap->ground_or_air = GA_Air;
+    ip->ground_or_air = GA_Air;
 }

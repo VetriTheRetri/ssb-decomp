@@ -31,7 +31,7 @@ itStatusDesc itCommon_Box_StatusDesc[6] =
         NULL,                               // Proc Hop
         NULL,                               // Proc Set-Off
         NULL,                               // Proc Reflector
-        itBox_SDefault_ProcDamage            // Proc Damage
+        itBox_SDefault_ProcDamage           // Proc Damage
     },
 
     // Status 1 (Air Fall)
@@ -61,7 +61,7 @@ itStatusDesc itCommon_Box_StatusDesc[6] =
     // Status 3 (Fighter Throw)
     {
         itBox_AFall_ProcUpdate,             // Proc Update
-        itBox_AThrow_ProcMap,               // Proc Map
+        itBox_FThrow_ProcMap,               // Proc Map
         itBox_SDefault_ProcHit,             // Proc Hit
         itBox_SDefault_ProcHit,             // Proc Shield
         NULL,                               // Proc Hop
@@ -73,7 +73,7 @@ itStatusDesc itCommon_Box_StatusDesc[6] =
     // Status 4 (Fighter Drop)
     {
         itBox_AFall_ProcUpdate,             // Proc Update
-        itBox_ADrop_ProcMap,                // Proc Map
+        itBox_FDrop_ProcMap,                // Proc Map
         itBox_SDefault_ProcHit,             // Proc Hit
         itBox_SDefault_ProcHit,             // Proc Shield
         NULL,                               // Proc Hop
@@ -100,8 +100,8 @@ typedef enum itBoxStatus
     itStatus_Box_GWait,
     itStatus_Box_AFall,
     itStatus_Box_FHold,
-    itStatus_Box_AThrow,
-    itStatus_Box_ADrop,
+    itStatus_Box_FThrow,
+    itStatus_Box_FDrop,
     itStatus_Box_NExplode
 
 } itBoxStatus; 
@@ -331,7 +331,7 @@ void itBox_GWait_SetStatus(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->coll_data.ground_angle.y, ip->coll_data.ground_angle.x) - HALF_PI32;
 
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Box_StatusDesc, itStatus_Box_GWait);
 }
 
@@ -342,7 +342,7 @@ void itBox_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_Box_StatusDesc, itStatus_Box_AFall);
 }
 
@@ -356,7 +356,7 @@ void itBox_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x8017982C
-bool32 itBox_AThrow_ProcMap(GObj *item_gobj)
+bool32 itBox_FThrow_ProcMap(GObj *item_gobj)
 {
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE)
     {
@@ -370,11 +370,11 @@ bool32 itBox_AThrow_ProcMap(GObj *item_gobj)
 }
 
 // 0x8017987C
-void itBox_AThrow_SetStatus(GObj *item_gobj)
+void itBox_FThrow_SetStatus(GObj *item_gobj)
 {
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 
-    itMain_SetItemStatus(item_gobj, itCommon_Box_StatusDesc, itStatus_Box_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_Box_StatusDesc, itStatus_Box_FThrow);
 }
 
 bool32 func_ovl3_801798B8(GObj *item_gobj) // Unused
@@ -385,17 +385,17 @@ bool32 func_ovl3_801798B8(GObj *item_gobj) // Unused
 }
 
 // 0x801798DC
-bool32 itBox_ADrop_ProcMap(GObj *item_gobj)
+bool32 itBox_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itBox_GWait_SetStatus);
 }
 
 // 0x8017990C
-void itBox_ADrop_SetStatus(GObj *item_gobj)
+void itBox_FDrop_SetStatus(GObj *item_gobj)
 {
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 
-    itMain_SetItemStatus(item_gobj, itCommon_Box_StatusDesc, itStatus_Box_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_Box_StatusDesc, itStatus_Box_FDrop);
 }
 
 extern intptr_t Article_Box_Hit; // 0x614
@@ -452,7 +452,7 @@ void itBox_NExplode_InitItemVars(GObj *item_gobj)
     ip->item_hit.stale = ITEM_STALE_DEFAULT;
     ip->item_hit.element = gmHitCollision_Element_Fire;
 
-    ip->item_hit.clang = FALSE;
+    ip->item_hit.rebound = FALSE;
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 

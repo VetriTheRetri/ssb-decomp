@@ -104,14 +104,14 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         fp = ftGetStruct(spawn_gobj);
         wp->owner_gobj = spawn_gobj;
         wp->team = fp->team;
-        wp->port_id = fp->port_id;
+        wp->player = fp->player;
         wp->handicap = fp->handicap;
         wp->player_number = fp->player_number;
         wp->lr = fp->lr;
 
         wp->display_state = fp->display_state;
 
-        wp->weapon_hit.stale = gmCommon_DamageGetStaleMul(fp->port_id, fp->attack_id, fp->motion_count);
+        wp->weapon_hit.stale = gmCommon_DamageGetStaleMul(fp->player, fp->attack_id, fp->motion_count);
         wp->weapon_hit.attack_id = fp->attack_id;
         wp->weapon_hit.motion_count = fp->motion_count;
         wp->weapon_hit.stat_flags = fp->stat_flags;
@@ -122,7 +122,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         owner_wp = wpGetStruct(spawn_gobj);
         wp->owner_gobj = owner_wp->owner_gobj;
         wp->team = owner_wp->team;
-        wp->port_id = owner_wp->port_id;
+        wp->player = owner_wp->player;
         wp->handicap = owner_wp->handicap;
         wp->player_number = owner_wp->player_number;
         wp->lr = owner_wp->lr;
@@ -140,7 +140,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         ap = itGetStruct(spawn_gobj);
         wp->owner_gobj = ap->owner_gobj;
         wp->team = ap->team;
-        wp->port_id = ap->port_id;
+        wp->player = ap->player;
         wp->handicap = ap->handicap;
         wp->player_number = ap->player_number;
         wp->lr = ap->lr;
@@ -158,7 +158,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     case WEAPON_MASK_SPAWN_GROUND:
         wp->owner_gobj = NULL;
         wp->team = WEAPON_TEAM_DEFAULT;
-        wp->port_id = WEAPON_PORT_DEFAULT;
+        wp->player = WEAPON_PORT_DEFAULT;
         wp->handicap = WEAPON_HANDICAP_DEFAULT;
         wp->player_number = 0;
         wp->lr = RIGHT;
@@ -200,7 +200,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     wp->weapon_hit.knockback_weight = wp_hit_desc->knockback_weight;
     wp->weapon_hit.knockback_base = wp_hit_desc->knockback_base;
 
-    wp->weapon_hit.clang = wp_hit_desc->clang;
+    wp->weapon_hit.rebound = wp_hit_desc->rebound;
     wp->weapon_hit.shield_damage = wp_hit_desc->shield_damage;
 
     wp->weapon_hit.hit_sfx = wp_hit_desc->sfx;
@@ -224,8 +224,8 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
 
     wpMain_ClearHitVictimRecord(wp);
 
-    wp->hit_victim_damage = 0;
-    wp->hit_reflect_damage = 0;
+    wp->hit_normal_damage = 0;
+    wp->hit_refresh_damage = 0;
     wp->hit_attack_damage = 0;
     wp->hit_shield_damage = 0;
     wp->reflect_gobj = NULL;
@@ -690,7 +690,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
     this_wp = wpGetStruct(this_gobj);
     this_hit = &this_wp->weapon_hit;
 
-    if ((this_hit->clang) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
+    if ((this_hit->rebound) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
     {
         other_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
@@ -712,7 +712,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
                     if (this_wp->team == other_wp->team) goto next_gobj; // YUCKY match but you can't say it's only a half
 
                 next_check:
-                    if ((other_hit->update_state != gmHitCollision_UpdateState_Disable) && (other_hit->clang))
+                    if ((other_hit->update_state != gmHitCollision_UpdateState_Disable) && (other_hit->rebound))
                     {
                         if (other_hit->interact_mask & GMHITCOLLISION_MASK_ITEM)
                         {
@@ -768,7 +768,7 @@ void wpManager_ProcHitCollisions(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if ((wp->hit_victim_damage != 0) || (wp->hit_reflect_damage != 0)) // 0x238 = hit article damage?
+    if ((wp->hit_normal_damage != 0) || (wp->hit_refresh_damage != 0)) // 0x238 = hit article damage?
     {
         if (wp->proc_hit != NULL)
         {
@@ -785,7 +785,7 @@ void wpManager_ProcHitCollisions(GObj *weapon_gobj)
         {
             if (wp->shield_collide_angle < WEAPON_HOP_ANGLE_DEFAULT)
             {
-                wp->shield_collide_angle -= HALF_PI32;
+                wp->shield_collide_angle -= F_DEG_TO_RAD(90.0F); // HALF_PI32
 
                 if (wp->shield_collide_angle < 0.0F)
                 {
@@ -833,7 +833,7 @@ next_check:
         fp = ftGetStruct(wp->reflect_gobj);
 
         wp->team = fp->team;
-        wp->port_id = fp->port_id;
+        wp->player = fp->player;
         wp->display_state = fp->display_state;
         wp->player_number = fp->player_number;
         wp->handicap = fp->handicap;
@@ -871,8 +871,8 @@ next_check:
             }
         }
     }
-    wp->hit_victim_damage = 0;
-    wp->hit_reflect_damage = 0;
+    wp->hit_normal_damage = 0;
+    wp->hit_refresh_damage = 0;
     wp->hit_attack_damage = 0;
     wp->hit_shield_damage = 0;
     wp->reflect_gobj = NULL;

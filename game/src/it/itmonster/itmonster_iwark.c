@@ -174,7 +174,7 @@ bool32 jtgt_ovl3_8017DB5C(GObj *item_gobj)
     {
         ap->phys_info.vel_air.y = 0.0F;
 
-        func_ovl3_80173F54(ap);
+        itMap_SetGround(ap);
     }
     return FALSE;
 }

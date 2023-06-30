@@ -174,7 +174,7 @@ void func_ovl2_800E806C(Fighter_Struct *fp, s32 arg1, s32 arg2)
 {
     if (fp->status_info.pl_kind == Pl_Kind_Human)
     {
-        func_ovl2_80115530(fp->port_id, arg1, arg2);
+        func_ovl2_80115530(fp->player, arg1, arg2);
     }
 }
 
@@ -201,7 +201,7 @@ void ftCommon_ThrownUpdateEnemyInfo(Fighter_Struct *this_fp, GObj *throw_gobj)
 
     this_fp->throw_gobj = throw_gobj;
     this_fp->throw_ft_kind = throw_fp->ft_kind;
-    this_fp->throw_port_id = throw_fp->port_id;
+    this_fp->throw_player = throw_fp->player;
     this_fp->throw_player_number = throw_fp->player_number;
     this_fp->throw_team = throw_fp->team;
 }
@@ -1529,13 +1529,13 @@ s32 gmCommon_DamageCalcHitLag(s32 damage, s32 status_id, f32 hitlag_mul)
 void ftDamageUpdateCheckDropItem(Fighter_Struct *fp, s32 damage)
 {
     fp->percent_damage += damage;
-    Match_Info->player_block[fp->port_id].total_damage_all += damage;
+    Match_Info->player_block[fp->player].total_damage_all += damage;
 
     if (fp->percent_damage > 999)
     {
         fp->percent_damage = 999;
     }
-    Match_Info->player_block[fp->port_id].stock_damage_all = fp->percent_damage;
+    Match_Info->player_block[fp->player].stock_damage_all = fp->percent_damage;
 
     if (fp->item_hold != NULL)
     {
@@ -1578,14 +1578,14 @@ extern f32 Damage_Stale_MulTable[4] =
 };
 
 // 0x800EA470
-f32 gmCommon_DamageGetStaleMul(s32 port_id, s32 attack_id, u16 flags)
+f32 gmCommon_DamageGetStaleMul(s32 player, s32 attack_id, u16 flags)
 {
     s32 stale_index;
     s32 backup_stale_id;
     s32 stale_id;
     s32 flag_id;
 
-    stale_index = Match_Info->player_block[port_id].stale_index;
+    stale_index = Match_Info->player_block[player].stale_index;
 
     if (attack_id != 0)
     {
@@ -1593,9 +1593,9 @@ f32 gmCommon_DamageGetStaleMul(s32 port_id, s32 attack_id, u16 flags)
 
         for (stale_id = 0; stale_id < ARRAY_COUNT(Damage_Stale_MulTable); stale_id++)
         {
-            if (attack_id == Match_Info->player_block[port_id].stale_flags[flag_id][0])
+            if (attack_id == Match_Info->player_block[player].stale_flags[flag_id][0])
             {
-                if (flags != Match_Info->player_block[port_id].stale_flags[flag_id][1])
+                if (flags != Match_Info->player_block[player].stale_flags[flag_id][1])
                 {
                     return Damage_Stale_MulTable[stale_id];
                 }
@@ -1610,9 +1610,9 @@ f32 gmCommon_DamageGetStaleMul(s32 port_id, s32 attack_id, u16 flags)
     return 1.0F;
 }
 
-s32 gmCommon_DamageApplyStale(s32 port_id, s32 damage, s32 attack_id, u16 flags)
+s32 gmCommon_DamageApplyStale(s32 player, s32 damage, s32 attack_id, u16 flags)
 {
-    f32 stale = gmCommon_DamageGetStaleMul(port_id, attack_id, flags);
+    f32 stale = gmCommon_DamageGetStaleMul(player, attack_id, flags);
 
     if (stale != 1.0F)
     {
@@ -1643,27 +1643,27 @@ void ftCommon_MotionCountIncSetAttackID(Fighter_Struct *fp, s32 attack_id)
 }
 
 // 0x800EA614
-void ftAttackAddStaleQueue(s32 attack_port_id, s32 defend_port_id, s32 attack_id, u16 motion_count)
+void ftAttackAddStaleQueue(s32 attack_player, s32 defend_player, s32 attack_id, u16 motion_count)
 {
-    if ((attack_port_id != GMMATCH_PLAYERS_MAX) && (attack_port_id != defend_port_id))
+    if ((attack_player != GMMATCH_PLAYERS_MAX) && (attack_player != defend_player))
     {
-        s32 i, stale_index = Match_Info->player_block[attack_port_id].stale_index;
+        s32 i, stale_index = Match_Info->player_block[attack_player].stale_index;
 
-        for (i = 0; i < ARRAY_COUNT(Match_Info->player_block[attack_port_id].stale_flags); i++)
+        for (i = 0; i < ARRAY_COUNT(Match_Info->player_block[attack_player].stale_flags); i++)
         {
-            if ((attack_id == Match_Info->player_block[attack_port_id].stale_flags[i][0]) && (motion_count == Match_Info->player_block[attack_port_id].stale_flags[i][1]))
+            if ((attack_id == Match_Info->player_block[attack_player].stale_flags[i][0]) && (motion_count == Match_Info->player_block[attack_player].stale_flags[i][1]))
             {
                 return;
             }
         }
-        Match_Info->player_block[attack_port_id].stale_flags[stale_index][0] = attack_id;
-        Match_Info->player_block[attack_port_id].stale_flags[stale_index][1] = motion_count;
+        Match_Info->player_block[attack_player].stale_flags[stale_index][0] = attack_id;
+        Match_Info->player_block[attack_player].stale_flags[stale_index][1] = motion_count;
 
-        if (stale_index == (ARRAY_COUNT(Match_Info->player_block[attack_port_id].stale_flags) - 1))
+        if (stale_index == (ARRAY_COUNT(Match_Info->player_block[attack_player].stale_flags) - 1))
         {
-            Match_Info->player_block[attack_port_id].stale_index = 0;
+            Match_Info->player_block[attack_player].stale_index = 0;
         }
-        else Match_Info->player_block[attack_port_id].stale_index = stale_index + 1;
+        else Match_Info->player_block[attack_player].stale_index = stale_index + 1;
     }
 }
 
@@ -1698,7 +1698,7 @@ void ftCommon_Update1PGameAttackStats(Fighter_Struct *fp, u16 flags)
 {
     gmStatFlags stat_flags = *(gmStatFlags*)&flags;
 
-    if ((fp->status_info.pl_kind != Pl_Kind_Result) && (Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port))
+    if ((fp->status_info.pl_kind != Pl_Kind_Result) && (Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->player == Scene_Info.player_port))
     {
         if ((fp->stat_flags.attack_group_id != 0) && (fp->stat_flags.attack_group_id != stat_flags.attack_group_id))
         {
@@ -1751,15 +1751,15 @@ void ftCommon_ApplyIntangibleTimer(Fighter_Struct *fp, s32 intangible_timer)
 }
 
 // 0x800EA98C
-void ftAttackUpdateMatchStats(s32 attack_port_id, s32 defend_port_id, s32 attack_damage)
+void ftAttackUpdateMatchStats(s32 attack_player, s32 defend_player, s32 attack_damage)
 {
-    if ((attack_port_id != GMMATCH_PLAYERS_MAX) && (attack_port_id != defend_port_id))
+    if ((attack_player != GMMATCH_PLAYERS_MAX) && (attack_player != defend_player))
     {
-        Match_Info->player_block[attack_port_id].total_damage_dealt += attack_damage;
+        Match_Info->player_block[attack_player].total_damage_dealt += attack_damage;
 
-        Match_Info->player_block[defend_port_id].total_damage_player[attack_port_id] += attack_damage;
-        Match_Info->player_block[defend_port_id].combo_damage_foe += attack_damage;
-        Match_Info->player_block[defend_port_id].combo_count_foe++;
+        Match_Info->player_block[defend_player].total_damage_player[attack_player] += attack_damage;
+        Match_Info->player_block[defend_player].combo_damage_foe += attack_damage;
+        Match_Info->player_block[defend_player].combo_count_foe++;
     }
 }
 
@@ -1769,9 +1769,9 @@ extern s32 gmBonusStat_Defender_GroundOrAirAttack_Count[2]; // Grounded / Airbor
 extern s32 gmBonusStat_Defender_IsSpecialAttack_Count[2];   // Special attacks successfully landed on opponent
 
 // 0x800EAA2C
-void ftCommon_Update1PGameDamageStats(Fighter_Struct *fp, s32 damage_port_id, s32 arg2, s32 arg3, u16 flags, u16 damage_stat_count)
+void ftCommon_Update1PGameDamageStats(Fighter_Struct *fp, s32 damage_player, s32 arg2, s32 arg3, u16 flags, u16 damage_stat_count)
 {
-    fp->damage_port_id = damage_port_id;
+    fp->damage_player = damage_player;
     fp->unk_ft_0x820 = arg2;
     fp->unk_ft_0x824 = arg3;
     fp->damage_count++;
@@ -1783,7 +1783,7 @@ void ftCommon_Update1PGameDamageStats(Fighter_Struct *fp, s32 damage_port_id, s3
 
         if (Match_Info->game_type == gmMatch_GameType_1PGame)
         {
-            if ((Scene_Info.player_port == damage_port_id) && (fp->damage_stat_flags.attack_group_id != 0))
+            if ((Scene_Info.player_port == damage_player) && (fp->damage_stat_flags.attack_group_id != 0))
             {
                 gmBonusStat_Defender_AttackGroupIndex_Count[fp->damage_stat_flags.attack_group_id]++;
                 gmBonusStat_Defender_IsSmashAttack_Count[fp->damage_stat_flags.is_smash_attack]++;
@@ -1958,7 +1958,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
     {
     case 0x0:
         ftCommon_GFXJointCycle(fp, &offset);
-        p_effect = func_ovl2_800FDC04(&offset, fp->port_id, 0xA, NULL);
+        p_effect = func_ovl2_800FDC04(&offset, fp->player, 0xA, NULL);
         break;
 
     case 0x6:

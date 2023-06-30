@@ -61,7 +61,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        Match_Info->player_block[fp->port_id].stock_damage_all = fp->percent_damage;
+        Match_Info->player_block[fp->player].stock_damage_all = fp->percent_damage;
     }
     fp->shield_health = (fp->ft_kind == Ft_Kind_Yoshi) ? 55 : 55;
 
@@ -92,7 +92,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->shield_damage = 0;
     fp->damage_queue = 0;
     fp->damage_taken_recent = 0;
-    fp->damage_port_id = -1;
+    fp->damage_player = -1;
     fp->unk_ft_0x820 = 0;
     fp->unk_ft_0x824 = 0;
     fp->damage_count = 0;
@@ -339,12 +339,12 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     attributes = fp->attributes = (ftCommonAttributes *)((uintptr_t)*fp->ft_data->p_file + (intptr_t)fp->ft_data->o_attributes);
     fp->x9D0 = spawn->unk_rebirth_0x38;
     fp->team = spawn->team;
-    fp->port_id = spawn->port_id;
+    fp->player = spawn->player;
     fp->stock_count = spawn->stock_count;
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        Match_Info->player_block[fp->port_id].stock_count = spawn->stock_count;
+        Match_Info->player_block[fp->player].stock_count = spawn->stock_count;
     }
     fp->lod_current = fp->lod_match = spawn->model_lod;
 

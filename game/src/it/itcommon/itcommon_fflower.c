@@ -62,7 +62,7 @@ itStatusDesc itCommon_FFlower_StatusDesc[5] =
     // Status 3 (Fighter Throw)
     {
         itFFlower_AFall_ProcUpdate,         // Proc Update
-        itFFlower_AThrow_ProcMap,           // Proc Map
+        itFFlower_FThrow_ProcMap,           // Proc Map
         itFFlower_SDefault_ProcHit,         // Proc Hit
         itFFlower_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -74,7 +74,7 @@ itStatusDesc itCommon_FFlower_StatusDesc[5] =
     // Status 4 (Fighter Drop)
     {
         itFFlower_AFall_ProcUpdate,         // Proc Update
-        itFFlower_ADrop_ProcMap,            // Proc Map
+        itFFlower_FDrop_ProcMap,            // Proc Map
         itFFlower_SDefault_ProcHit,         // Proc Hit
         itFFlower_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -109,8 +109,8 @@ typedef enum itFFlowerStatus
     itStatus_FFlower_GWait,
     itStatus_FFlower_AFall,
     itStatus_FFlower_FHold,
-    itStatus_FFlower_AThrow,
-    itStatus_FFlower_ADrop
+    itStatus_FFlower_FThrow,
+    itStatus_FFlower_FDrop
 
 } itFFlowerStatus;
 
@@ -144,7 +144,7 @@ extern itStatusDesc itCommon_FFlower_StatusDesc[];
 // 0x80175BB0
 void itFFlower_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_GWait);
 }
 
@@ -155,7 +155,7 @@ void itFFlower_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_AFall);
 }
 
@@ -166,7 +166,7 @@ void itFFlower_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x80175C50
-bool32 itFFlower_AThrow_ProcMap(GObj *item_gobj)
+bool32 itFFlower_FThrow_ProcMap(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -190,13 +190,13 @@ bool32 itFFlower_SDefault_ProcHit(GObj *item_gobj)
 }
 
 // 0x80175CC4
-void itFFlower_AThrow_SetStatus(GObj *item_gobj)
+void itFFlower_FThrow_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_FThrow);
 }
 
 // 0x80175CEC
-bool32 itFFlower_ADrop_ProcMap(GObj *item_gobj)
+bool32 itFFlower_FDrop_ProcMap(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -208,9 +208,9 @@ bool32 itFFlower_ADrop_ProcMap(GObj *item_gobj)
 }
 
 // 0x80175D38
-void itFFlower_ADrop_SetStatus(GObj *item_gobj)
+void itFFlower_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_FDrop);
 }
 
 extern itCreateDesc itCommon_FFlower_ItemDesc;

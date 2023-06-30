@@ -90,9 +90,9 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
             {
             case It_Kind_Tomato:
                 ftCommon_ApplyDamageHeal(fp, ATTOMATO_DAMAGE_HEAL);
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
 
-                if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (gmBonusStat_TomatoPickupCount < U8_MAX))
+                if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->player == Scene_Info.player_port) && (gmBonusStat_TomatoPickupCount < U8_MAX))
                 {
                     gmBonusStat_TomatoPickupCount++;
                 }
@@ -100,9 +100,9 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
 
             case It_Kind_Heart:
                 ftCommon_ApplyDamageHeal(fp, ATHEART_DAMAGE_HEAL);
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
 
-                if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->port_id == Scene_Info.player_port) && (gmBonusStat_HeartPickupCount < U8_MAX))
+                if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->player == Scene_Info.player_port) && (gmBonusStat_HeartPickupCount < U8_MAX))
                 {
                     gmBonusStat_HeartPickupCount++;
                 }
@@ -146,7 +146,7 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 
         if (item_gobj != NULL)
         {
-            itMain_PickupSetHoldFighter(item_gobj, fighter_gobj);
+            itMain_SetFighterPickup(item_gobj, fighter_gobj);
         }
     }
     if (fighter_gobj->anim_frame <= 0.0F)

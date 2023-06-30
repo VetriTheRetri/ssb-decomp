@@ -59,12 +59,12 @@ itStatusDesc itCommon_Bat_StatusDesc[5] =
 
     // Status 3 (Fighter Throw)
     {
-        itBat_AThrow_ProcUpdate,            // Proc Update
-        itBat_AThrow_ProcMap,               // Proc Map
-        itBat_AThrow_ProcHit,               // Proc Hit
-        itBat_AThrow_ProcHit,               // Proc Shield
+        itBat_FThrow_ProcUpdate,            // Proc Update
+        itBat_FThrow_ProcMap,               // Proc Map
+        itBat_FThrow_ProcHit,               // Proc Hit
+        itBat_FThrow_ProcHit,               // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
-        itBat_AThrow_ProcHit,               // Proc Set-Off
+        itBat_FThrow_ProcHit,               // Proc Set-Off
         itCommon_SDefault_ProcReflector,    // Proc Reflector
         NULL                                // Proc Damage
     },
@@ -72,11 +72,11 @@ itStatusDesc itCommon_Bat_StatusDesc[5] =
     // Status 4 (Fighter Drop)
     {
         itBat_AFall_ProcUpdate,             // Proc Update
-        itBat_ADrop_ProcMap,                // Proc Map
-        itBat_AThrow_ProcHit,               // Proc Hit
-        itBat_AThrow_ProcHit,               // Proc Shield
+        itBat_FDrop_ProcMap,                // Proc Map
+        itBat_FThrow_ProcHit,               // Proc Hit
+        itBat_FThrow_ProcHit,               // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
-        itBat_AThrow_ProcHit,               // Proc Set-Off
+        itBat_FThrow_ProcHit,               // Proc Set-Off
         itCommon_SDefault_ProcReflector,    // Proc Reflector
         NULL                                // Proc Damage
     }
@@ -87,8 +87,8 @@ typedef enum itBatStatus
     itStatus_Bat_GWait,
     itStatus_Bat_AFall,
     itStatus_Bat_FHold,
-    itStatus_Bat_AThrow,
-    itStatus_Bat_ADrop
+    itStatus_Bat_FThrow,
+    itStatus_Bat_FDrop
 
 } itBatStatus;
 
@@ -122,7 +122,7 @@ bool32 itBat_AFall_ProcMap(GObj *item_gobj)
 // 0x80174EC4
 void itBat_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Bat_StatusDesc, itStatus_Bat_GWait);
 }
 
@@ -133,7 +133,7 @@ void itBat_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_Bat_StatusDesc, itStatus_Bat_AFall);
 }
 
@@ -146,7 +146,7 @@ void itBat_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x80174F70
-bool32 itBat_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itBat_FThrow_ProcUpdate(GObj *item_gobj)
 {
     func_ovl3_80172558(itGetStruct(item_gobj), ATBAT_GRAVITY, ATBAT_T_VEL);
     func_ovl3_801713F4(item_gobj);
@@ -155,13 +155,13 @@ bool32 itBat_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x80174FA8
-bool32 itBat_AThrow_ProcMap(GObj *item_gobj)
+bool32 itBat_FThrow_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itBat_GWait_SetStatus);
 }
 
 // 0x80174FD8
-bool32 itBat_AThrow_ProcHit(GObj *item_gobj)
+bool32 itBat_FThrow_ProcHit(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -173,23 +173,23 @@ bool32 itBat_AThrow_ProcHit(GObj *item_gobj)
 }
 
 // 0x80175000
-void itBat_AThrow_SetStatus(GObj *item_gobj)
+void itBat_FThrow_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_Bat_StatusDesc, itStatus_Bat_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_Bat_StatusDesc, itStatus_Bat_FThrow);
 
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 }
 
 // 0x80175044
-bool32 itBat_ADrop_ProcMap(GObj *item_gobj)
+bool32 itBat_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itBat_GWait_SetStatus);
 }
 
 // 0x80175074
-void itBat_ADrop_SetStatus(GObj *item_gobj)
+void itBat_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_Bat_StatusDesc, itStatus_Bat_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_Bat_StatusDesc, itStatus_Bat_FDrop);
 
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 }

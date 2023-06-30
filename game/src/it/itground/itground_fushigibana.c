@@ -19,7 +19,7 @@ void func_ovl3_80184440(GObj *item_gobj)
         ap->item_hit.knockback_weight = hit_desc[ap->item_event_index].knockback_weight;
         ap->item_hit.knockback_base = hit_desc[ap->item_event_index].knockback_base;
         ap->item_hit.element = hit_desc[ap->item_event_index].element;
-        ap->item_hit.clang = hit_desc[ap->item_event_index].clang;
+        ap->item_hit.rebound = hit_desc[ap->item_event_index].rebound;
         ap->item_hit.shield_damage = hit_desc[ap->item_event_index].shield_damage;
         ap->item_hit.hit_sfx = hit_desc[ap->item_event_index].hit_sfx;
 
@@ -179,7 +179,7 @@ bool32 jtgt_ovl3_80184970(GObj *weapon_gobj)
 
     wpMain_ReflectorInvertLR(ip, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x) + PI32;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x) + F_DEG_TO_RAD(180.0F); // PI32
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
     ip->lr = -ip->lr;

@@ -51,11 +51,11 @@ void ftCommon_ShieldBreakFly_UpdateVarsSetStatus(GObj *fighter_gobj)
     }
     else func_ovl2_80101790(&offset);
 
-    ftCommon_Update1PGameDamageStats(fp, fp->shield_port_id, 0, 0, 0, 0);
+    ftCommon_Update1PGameDamageStats(fp, fp->shield_player, 0, 0, 0, 0);
 
     if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->shield_damage != 0))
     {
-        if ((fp->shield_port_id == Scene_Info.player_port) && (fp->shield_port_id != fp->port_id))
+        if ((fp->shield_player == Scene_Info.player_port) && (fp->shield_player != fp->player))
         {
             gmBonusStat_ShieldBreaker = TRUE;
         }

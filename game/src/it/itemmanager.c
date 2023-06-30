@@ -151,7 +151,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->attributes = attributes;
 
     func_ovl3_80172508(item_gobj);
-    func_ovl3_801725BC(item_gobj);
+    itMain_ResetPlayerVars(item_gobj);
 
     ap->is_allow_pickup = FALSE;
     ap->is_hold = FALSE;
@@ -203,7 +203,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->item_hit.knockback_scale = attributes->knockback_scale;
     ap->item_hit.knockback_weight = attributes->knockback_weight;
     ap->item_hit.knockback_base = attributes->knockback_base;
-    ap->item_hit.clang = attributes->clang;
+    ap->item_hit.rebound = attributes->rebound;
     ap->item_hit.shield_damage = attributes->shield_damage;
     ap->item_hit.hit_sfx = attributes->hit_sfx;
     ap->item_hit.priority = attributes->priority;
@@ -238,8 +238,8 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->shield_collide_vec.y = 0.0F;
     ap->shield_collide_vec.z = 0.0F;
 
-    ap->hit_victim_damage = 0;
-    ap->hit_reflect_damage = 0;
+    ap->hit_normal_damage = 0;
+    ap->hit_refresh_damage = 0;
     ap->hit_attack_damage = 0;
     ap->hit_shield_damage = 0;
     ap->reflect_gobj = NULL;
@@ -734,7 +734,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
         {
             if (ap->proc_update(item_gobj) != FALSE)
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
@@ -749,7 +749,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
             {
                 func_ovl2_8010066C(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
 
                 return;
             }
@@ -815,7 +815,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
         {
             if ((ap->proc_dead == NULL) || (ap->proc_dead(item_gobj) != FALSE))
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
@@ -829,7 +829,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
 
             if (ap->proc_map(item_gobj) != FALSE)
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
@@ -958,7 +958,7 @@ void itManager_UpdateDamageStatFighter(Fighter_Struct *fp, Fighter_Hit *ft_hit, 
 
             ap->damage_gobj = fighter_gobj;
             ap->damage_team = fp->team;
-            ap->damage_port = fp->port_id;
+            ap->damage_port = fp->player;
             ap->damage_player_number = fp->player_number;
             ap->damage_handicap = fp->handicap;
             ap->damage_display_state = fp->display_state;
@@ -989,7 +989,7 @@ void itManager_UpdateDamageStatFighter(Fighter_Struct *fp, Fighter_Hit *ft_hit, 
             func_ovl2_800FE6E4(&sp4C, ft_hit->damage, func_ovl2_800F0FC0(fp, ft_hit));
             break;
         default:
-            func_ovl2_800FDC04(&sp4C, fp->port_id, ft_hit->damage, 0);
+            func_ovl2_800FDC04(&sp4C, fp->player, ft_hit->damage, 0);
             break;
         }
     }
@@ -1005,8 +1005,8 @@ void itManager_UpdateAttackStatItem(Item_Struct *this_ap, Item_Hit *this_hit, s3
     s32 victim_hit_priority;
     s32 this_hit_priority;
 
-    victim_hit_damage = func_ovl3_801727F4(victim_ap);
-    this_hit_damage = func_ovl3_801727F4(this_ap);
+    victim_hit_damage = itMain_ApplyHitDamage(victim_ap);
+    this_hit_damage = itMain_ApplyHitDamage(this_ap);
 
     func_ovl2_800F0EFC(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
 
@@ -1042,7 +1042,7 @@ void itManager_UpdateAttackStatItem(Item_Struct *this_ap, Item_Hit *this_hit, s3
 void itManager_UpdateAttackStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32 wp_hit_id, Item_Struct *ap, Item_Hit *it_hit, s32 it_hit_id, GObj *weapon_gobj, GObj *item_gobj)
 {
     s32 wp_hit_damage = wpMain_DamageApplyStale(ip);
-    s32 it_hit_damage = func_ovl3_801727F4(ap);
+    s32 it_hit_damage = itMain_ApplyHitDamage(ap);
     Vec3f sp2C;
     s32 it_hit_priority;
     s32 wp_hit_priority;
@@ -1088,7 +1088,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
     s32 lr;
     s32 unused;
 
-    damage = func_ovl3_801727F4(attack_ap);
+    damage = itMain_ApplyHitDamage(attack_ap);
 
     unk_bool = (((defend_ap->type == It_Type_Ground) && (attack_it_hit->can_rehit_item)) ? TRUE : FALSE);
 
@@ -1096,14 +1096,14 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
 
     if (unk_bool != FALSE)
     {
-        if (attack_ap->hit_reflect_damage < damage)
+        if (attack_ap->hit_refresh_damage < damage)
         {
-            attack_ap->hit_reflect_damage = damage;
+            attack_ap->hit_refresh_damage = damage;
         }
     }
-    else if (attack_ap->hit_victim_damage < damage)
+    else if (attack_ap->hit_normal_damage < damage)
     {
-        attack_ap->hit_victim_damage = damage;
+        attack_ap->hit_normal_damage = damage;
     }
     vel = (attack_ap->phys_info.vel_air.x < 0.0F) ? -attack_ap->phys_info.vel_air.x : attack_ap->phys_info.vel_air.x;
 
@@ -1141,7 +1141,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
             }
             defend_ap->damage_gobj = attack_ap->owner_gobj;
             defend_ap->damage_team = attack_ap->team;
-            defend_ap->damage_port = attack_ap->port_id;
+            defend_ap->damage_port = attack_ap->player;
             defend_ap->damage_player_number = attack_ap->player_number;
             defend_ap->damage_handicap = attack_ap->handicap;
             defend_ap->damage_display_state = attack_ap->display_state;
@@ -1172,7 +1172,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
                 break;
 
             default:
-                func_ovl2_800FDC04(&sp4C, attack_ap->port_id, damage, 0);
+                func_ovl2_800FDC04(&sp4C, attack_ap->player, damage, 0);
                 break;
             }
         }
@@ -1199,14 +1199,14 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
 
     if (unk_bool != FALSE)
     {
-        if (ip->hit_reflect_damage < damage)
+        if (ip->hit_refresh_damage < damage)
         {
-            ip->hit_reflect_damage = damage;
+            ip->hit_refresh_damage = damage;
         }
     }
-    else if (ip->hit_victim_damage < damage)
+    else if (ip->hit_normal_damage < damage)
     {
-        ip->hit_victim_damage = damage;
+        ip->hit_normal_damage = damage;
     }
     if (at_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     {
@@ -1232,7 +1232,7 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
             }
             ap->damage_gobj = ip->owner_gobj;
             ap->damage_team = ip->team;
-            ap->damage_port = ip->port_id;
+            ap->damage_port = ip->player;
             ap->damage_player_number = ip->player_number;
             ap->damage_handicap = ip->handicap;
             ap->damage_display_state = ip->display_state;
@@ -1265,7 +1265,7 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
                 break;
 
             default:
-                func_ovl2_800FDC04(&sp4C, ip->port_id, damage, NULL);
+                func_ovl2_800FDC04(&sp4C, ip->player, damage, NULL);
                 break;
             }
         }
@@ -1429,7 +1429,7 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
                                 }
                                 if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
                                 {
-                                    if ((is_check_self != FALSE) && (this_hit->clang) && (other_hit->clang) && (this_ap->owner_gobj != other_ap->owner_gobj))
+                                    if ((is_check_self != FALSE) && (this_hit->rebound) && (other_hit->rebound) && (this_ap->owner_gobj != other_ap->owner_gobj))
                                     {
                                         if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
                                         {
@@ -1545,7 +1545,7 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
                             }
                             if ((!(those_flags.is_interact_hurt)) && (!(those_flags.is_interact_shield)) && (those_flags.interact_mask == GMHITCOLLISION_MASK_ALL))
                             {
-                                if ((it_hit->clang) && (wp_hit->clang) && (ap->owner_gobj != ip->owner_gobj))
+                                if ((it_hit->rebound) && (wp_hit->rebound) && (ap->owner_gobj != ip->owner_gobj))
                                 {
                                     if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team))
                                     {
@@ -1645,18 +1645,18 @@ void itManager_ProcUpdateHitCollisions(GObj *item_gobj)
         {
             if (ap->proc_damage(item_gobj) != FALSE)
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
     }
-    if ((ap->hit_victim_damage != 0) || (ap->hit_reflect_damage != 0))
+    if ((ap->hit_normal_damage != 0) || (ap->hit_refresh_damage != 0))
     {
         if (ap->proc_hit != NULL)
         {
             if (ap->proc_hit(item_gobj) != FALSE)
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
@@ -1677,7 +1677,7 @@ void itManager_ProcUpdateHitCollisions(GObj *item_gobj)
                 {
                     if (ap->proc_hop(item_gobj) != FALSE)
                     {
-                        func_ovl3_801728D4(item_gobj);
+                        itMain_DestroyItem(item_gobj);
                         return;
                     }
                 }
@@ -1688,7 +1688,7 @@ void itManager_ProcUpdateHitCollisions(GObj *item_gobj)
         {
             if (ap->proc_shield(item_gobj) != FALSE)
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
@@ -1700,7 +1700,7 @@ next_check:
         {
             if (ap->proc_setoff(item_gobj) != FALSE)
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
@@ -1714,7 +1714,7 @@ next_check:
         fp = ftGetStruct(ap->reflect_gobj);
 
         ap->team = fp->team;
-        ap->port_id = fp->port_id;
+        ap->player = fp->player;
         ap->player_number = fp->player_number;
         ap->handicap = fp->handicap;
         ap->item_hit.stat_flags = ap->reflect_stat_flags;
@@ -1724,7 +1724,7 @@ next_check:
         {
             if (ap->proc_reflector(item_gobj) != FALSE)
             {
-                func_ovl3_801728D4(item_gobj);
+                itMain_DestroyItem(item_gobj);
                 return;
             }
         }
@@ -1743,8 +1743,8 @@ next_check:
         ap->hitlag_timer = gmCommon_DamageCalcHitLag(ap->damage_taken_last, ftStatus_Common_Wait, 1.0F); // Maybe 10 is the "none" status ID?
     }
 
-    ap->hit_victim_damage = 0;
-    ap->hit_reflect_damage = 0;
+    ap->hit_normal_damage = 0;
+    ap->hit_refresh_damage = 0;
     ap->hit_attack_damage = 0;
     ap->hit_shield_damage = 0;
     ap->reflect_gobj = NULL;

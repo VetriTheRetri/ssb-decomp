@@ -61,8 +61,8 @@ itStatusDesc itCommon_Harisen_StatusDesc[5] =
 
     // Status 3 (Fighter Throw)
     {
-        itHarisen_AThrow_ProcUpdate,        // Proc Update
-        itHarisen_AThrow_ProcMap,           // Proc Map
+        itHarisen_FThrow_ProcUpdate,        // Proc Update
+        itHarisen_FThrow_ProcMap,           // Proc Map
         itHarisen_SDefault_ProcHit,         // Proc Hit
         itHarisen_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -74,7 +74,7 @@ itStatusDesc itCommon_Harisen_StatusDesc[5] =
     // Status 4 (Fighter Drop)
     {
         itHarisen_AFall_ProcUpdate,         // Proc Update
-        itHarisen_ADrop_ProcMap,            // Proc Map
+        itHarisen_FDrop_ProcMap,            // Proc Map
         itHarisen_SDefault_ProcHit,         // Proc Hit
         itHarisen_SDefault_ProcHit,         // Proc Shield
         itCommon_SDefault_ProcHop,          // Proc Hop
@@ -89,8 +89,8 @@ typedef enum itHarisenStatus
     itStatus_Harisen_GWait,
     itStatus_Harisen_AFall,
     itStatus_Harisen_FHold,
-    itStatus_Harisen_AThrow,
-    itStatus_Harisen_ADrop
+    itStatus_Harisen_FThrow,
+    itStatus_Harisen_FDrop
 
 } itHarisenStatus;
 
@@ -134,7 +134,7 @@ extern itStatusDesc itCommon_Harisen_StatusDesc[];
 // 0x801751F4
 void itHarisen_GWait_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172E74(item_gobj);
+    itMain_SetGroundPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Harisen_StatusDesc, itStatus_Harisen_GWait);
 }
 
@@ -145,7 +145,7 @@ void itHarisen_AFall_SetStatus(GObj *item_gobj)
 
     ip->is_allow_pickup = FALSE;
 
-    func_ovl3_80173F78(ip);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_Harisen_StatusDesc, itStatus_Harisen_AFall);
 }
 
@@ -162,7 +162,7 @@ void itHarisen_FHold_SetStatus(GObj *item_gobj)
 }
 
 // 0x801752C0
-bool32 itHarisen_AThrow_ProcUpdate(GObj *item_gobj)
+bool32 itHarisen_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -173,7 +173,7 @@ bool32 itHarisen_AThrow_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x801752F8
-bool32 itHarisen_AThrow_ProcMap(GObj *item_gobj)
+bool32 itHarisen_FThrow_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
 }
@@ -191,23 +191,23 @@ bool32 itHarisen_SDefault_ProcHit(GObj *item_gobj)
 }
 
 // 0x80175350
-void itHarisen_AThrow_SetStatus(GObj *item_gobj)
+void itHarisen_FThrow_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_Harisen_StatusDesc, itStatus_Harisen_AThrow);
+    itMain_SetItemStatus(item_gobj, itCommon_Harisen_StatusDesc, itStatus_Harisen_FThrow);
 
     DObjGetStruct(item_gobj)->next->rotate.y = -HALF_PI32;
 }
 
 // 0x80175394
-bool32 itHarisen_ADrop_ProcMap(GObj *item_gobj)
+bool32 itHarisen_FDrop_ProcMap(GObj *item_gobj)
 {
     return func_ovl3_80173B24(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
 }
 
 // 0x801753C4
-void itHarisen_ADrop_SetStatus(GObj *item_gobj)
+void itHarisen_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_Harisen_StatusDesc, itStatus_Harisen_ADrop);
+    itMain_SetItemStatus(item_gobj, itCommon_Harisen_StatusDesc, itStatus_Harisen_FDrop);
 
     DObjGetStruct(item_gobj)->next->rotate.y = -HALF_PI32;
 }

@@ -19,12 +19,12 @@
 
 #define MPCOLL_MASK_NONSOLID    (1 << 14) // Line ID can be passed through
 
-typedef enum gmCollisionGA
+typedef enum mpGroundAir
 {
     GA_Ground,
     GA_Air
 
-} gmCollisionGA;
+} mpGroundAir;
 
 typedef struct CollisionGroupInfo
 {

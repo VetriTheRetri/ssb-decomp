@@ -5,27 +5,27 @@
 bool32 ftCommon_Sleep_CheckIgnorePauseMenu(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    s32 steal_from_port_id[GMMATCH_PLAYERS_MAX];
+    s32 steal_from_player[GMMATCH_PLAYERS_MAX];
     s32 active_teammate_count;
-    s32 port_id;
+    s32 player;
     s32 stock_count;
 
     if ((Match_Info->match_rules & GMMATCH_GAMERULE_STOCK) && (Match_Info->is_team_battle == TRUE) && (fp->status_info.status_id == ftStatus_Common_Sleep))
     {
         if (fp->status_vars.common.sleep.stock_steal_wait == 0)
         {
-            for (active_teammate_count = 0, stock_count = 0, port_id = 0; port_id < ARRAY_COUNT(Match_Info->player_block); port_id++)
+            for (active_teammate_count = 0, stock_count = 0, player = 0; player < ARRAY_COUNT(Match_Info->player_block); player++)
             {
-                if ((port_id != fp->port_id) && (Match_Info->player_block[port_id].player_kind != Pl_Kind_Unk1) && (fp->team == Match_Info->player_block[port_id].port_id))
+                if ((player != fp->player) && (Match_Info->player_block[player].player_kind != Pl_Kind_Unk1) && (fp->team == Match_Info->player_block[player].player))
                 {
-                    if (Match_Info->player_block[port_id].stock_count > 0)
+                    if (Match_Info->player_block[player].stock_count > 0)
                     {
-                        if (stock_count < Match_Info->player_block[port_id].stock_count)
+                        if (stock_count < Match_Info->player_block[player].stock_count)
                         {
                             active_teammate_count = 0;
-                            stock_count = Match_Info->player_block[port_id].stock_count;
+                            stock_count = Match_Info->player_block[player].stock_count;
                         }
-                        steal_from_port_id[active_teammate_count] = port_id;
+                        steal_from_player[active_teammate_count] = player;
 
                         active_teammate_count++;
                     }
@@ -46,8 +46,8 @@ void ftCommon_Sleep_ProcUpdate(GObj *fighter_gobj)
     Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
     GObj *steal_gobj;
     s32 active_teammate_count;
-    s32 steal_from_port_id[GMMATCH_PLAYERS_MAX];
-    s32 port_id;
+    s32 steal_from_player[GMMATCH_PLAYERS_MAX];
+    s32 player;
     s32 random_steal_target;
     s32 stock_count;
 
@@ -60,7 +60,7 @@ void ftCommon_Sleep_ProcUpdate(GObj *fighter_gobj)
             if (this_fp->status_vars.common.sleep.stock_steal_wait == 0)
             {
                 this_fp->stock_count = 0;
-                Match_Info->player_block[this_fp->port_id].stock_count = 0;
+                Match_Info->player_block[this_fp->player].stock_count = 0;
 
                 ftCommon_RebirthDown_SetStatus(fighter_gobj);
             }
@@ -69,18 +69,18 @@ void ftCommon_Sleep_ProcUpdate(GObj *fighter_gobj)
         {
             if (this_fp->input.pl.button_tap & HAL_BUTTON_START)
             {
-                for (active_teammate_count = 0, stock_count = 0, port_id = 0; port_id < ARRAY_COUNT(Match_Info->player_block); port_id++)
+                for (active_teammate_count = 0, stock_count = 0, player = 0; player < ARRAY_COUNT(Match_Info->player_block); player++)
                 {
-                    if ((port_id != this_fp->port_id) && (Match_Info->player_block[port_id].player_kind != Pl_Kind_Unk1) && (this_fp->team == Match_Info->player_block[port_id].port_id)) 
+                    if ((player != this_fp->player) && (Match_Info->player_block[player].player_kind != Pl_Kind_Unk1) && (this_fp->team == Match_Info->player_block[player].player)) 
                     {
-                        if (Match_Info->player_block[port_id].stock_count > 0)
+                        if (Match_Info->player_block[player].stock_count > 0)
                         {
-                            if (stock_count < Match_Info->player_block[port_id].stock_count)
+                            if (stock_count < Match_Info->player_block[player].stock_count)
                             {
                                 active_teammate_count = 0;
-                                stock_count = Match_Info->player_block[port_id].stock_count;
+                                stock_count = Match_Info->player_block[player].stock_count;
                             }
-                            steal_from_port_id[active_teammate_count] = port_id;
+                            steal_from_player[active_teammate_count] = player;
                             active_teammate_count++;
                         }
                     }
@@ -89,19 +89,19 @@ void ftCommon_Sleep_ProcUpdate(GObj *fighter_gobj)
                 {
                     random_steal_target = rand_u16_range(active_teammate_count);
 
-                    Match_Info->player_block[steal_from_port_id[random_steal_target]].stock_count--;
+                    Match_Info->player_block[steal_from_player[random_steal_target]].stock_count--;
 
-                    steal_gobj = Match_Info->player_block[steal_from_port_id[random_steal_target]].fighter_gobj;
+                    steal_gobj = Match_Info->player_block[steal_from_player[random_steal_target]].fighter_gobj;
 
                     ftGetStruct(steal_gobj)->stock_count--;
 
                     this_fp->stock_count = -2;
 
-                    Match_Info->player_block[this_fp->port_id].stock_count = -2;
+                    Match_Info->player_block[this_fp->player].stock_count = -2;
 
                     this_fp->status_vars.common.sleep.stock_steal_wait = FTCOMMON_SLEEP_STOCK_STEAL_WAIT;
 
-                    func_ovl2_801102B0(this_fp->port_id, steal_from_port_id[random_steal_target]);
+                    func_ovl2_801102B0(this_fp->player, steal_from_player[random_steal_target]);
 
                     func_800269C0(0x114U);
                 }
