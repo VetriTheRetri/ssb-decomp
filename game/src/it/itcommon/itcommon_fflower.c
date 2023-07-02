@@ -21,7 +21,7 @@ itCreateDesc itCommon_FFlower_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itCommon_FFlower_StatusDesc[5] =
+itStatusDesc itCommon_FFlower_StatusDesc[itStatus_FFlower_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -110,7 +110,8 @@ typedef enum itFFlowerStatus
     itStatus_FFlower_AFall,
     itStatus_FFlower_FHold,
     itStatus_FFlower_FThrow,
-    itStatus_FFlower_FDrop
+    itStatus_FFlower_FDrop,
+    itStatus_FFlower_EnumMax
 
 } itFFlowerStatus;
 
@@ -136,7 +137,7 @@ bool32 itFFlower_GWait_ProcMap(GObj *item_gobj)
 // 0x80175B84
 bool32 itFFlower_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
 }
 
 extern itStatusDesc itCommon_FFlower_StatusDesc[];
@@ -174,7 +175,7 @@ bool32 itFFlower_FThrow_ProcMap(GObj *item_gobj)
     {
         return func_ovl3_80173DF4(item_gobj, 0.0F);
     }
-    else return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
+    else return itMap_CheckMapCollideThrownLanding(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
 }
 
 // 0x80175C9C
@@ -204,7 +205,7 @@ bool32 itFFlower_FDrop_ProcMap(GObj *item_gobj)
     {
         return func_ovl3_80173DF4(item_gobj, 0.0F);
     }
-    else return func_ovl3_80173B24(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
+    else return itMap_CheckMapCollideThrownLanding(item_gobj, 0.0F, 0.5F, itFFlower_GWait_SetStatus);
 }
 
 // 0x80175D38

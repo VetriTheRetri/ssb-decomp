@@ -143,7 +143,7 @@ bool32 func_ovl3_801737B8(GObj *item_gobj, bool32 flag)
     return func_ovl2_800DA034(&itGetStruct(item_gobj)->coll_data, func_ovl3_801736B4, item_gobj, flag);
 }
 
-bool32 itMap_CheckCollideAllModifiyVel(GObj *item_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
+bool32 itMap_CheckCollideAllRebound(GObj *item_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
 {
     Item_Struct *ap = itGetStruct(item_gobj);
     Coll_Data *coll_data = &ap->coll_data;
@@ -247,95 +247,98 @@ void func_ovl3_80173A48(Vec3f *arg0, Vec3f *arg1, f32 arg2)
     }
 }
 
-bool32 func_ovl3_80173B24(GObj *item_gobj, f32 mod_vel, f32 arg2, void (*cb)(GObj*))
+// 0x80173B24
+bool32 itMap_CheckMapCollideThrownLanding(GObj *item_gobj, f32 wall_ceil_rebound, f32 ground_rebound, void (*proc_status)(GObj*))
 {
     Item_Struct *ap = itGetStruct(item_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), mod_vel, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
-        func_ovl3_80173A48(&ap->phys_info.vel, &ap->coll_data.ground_angle, arg2);
+        func_ovl3_80173A48(&ap->phys_info.vel, &ap->coll_data.ground_angle, ground_rebound);
         func_ovl3_80172508(item_gobj);
 
         ap->times_landed++;
 
         if (ap->times_landed == 1)
         {
-            if ((Match_Info->game_type != 3) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
+            if ((Match_Info->game_type != gmMatch_GameType_HowToPlay) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
             {
                 return TRUE;
             }
         }
-        if ((ap->times_landed == 2) && (cb != NULL))
+        if ((ap->times_landed == 2) && (proc_status != NULL))
         {
-            cb(item_gobj);
+            proc_status(item_gobj);
         }
     }
     return FALSE;
 }
 
-bool32 func_ovl3_80173C68(GObj *item_gobj, f32 mod_vel, f32 arg2, void (*cb)(GObj*))
+// 0x80173C68
+bool32 itMap_CheckMapCollideLanding(GObj *item_gobj, f32 wall_ceil_rebound, f32 ground_rebound, void (*proc_map)(GObj*))
 {
     Item_Struct *ap = itGetStruct(item_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), mod_vel, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
         func_ovl0_800C7B08(&ap->phys_info.vel, &ap->coll_data.ground_angle);
-        func_ovl0_800C7AE0(&ap->phys_info.vel, arg2);
+        func_ovl0_800C7AE0(&ap->phys_info.vel, ground_rebound);
         func_ovl3_80172508(item_gobj);
 
-        if (cb != NULL)
+        if (proc_map != NULL)
         {
-            cb(item_gobj);
+            proc_map(item_gobj);
         }
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_80173D24(GObj *item_gobj, f32 mod_vel, f32 arg2, void (*cb)(GObj*))
+// 0x80173D24
+bool32 itMap_CheckMapCollideAny(GObj *item_gobj, f32 wall_ceil_rebound, f32 ground_rebound, void (*proc_map)(GObj*))
 {
     Item_Struct *ap = itGetStruct(item_gobj);
     Coll_Data *coll_data = &ap->coll_data;
     bool32 is_collide_any = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), mod_vel, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }
     if (coll_data->coll_mask & MPCOLL_MASK_GROUND)
     {
         func_ovl0_800C7B08(&ap->phys_info.vel, &coll_data->ground_angle);
-        func_ovl0_800C7AE0(&ap->phys_info.vel, arg2);
+        func_ovl0_800C7AE0(&ap->phys_info.vel, ground_rebound);
         func_ovl3_80172508(item_gobj);
     }
     if (is_collide_any != FALSE)
     {
-        if (cb != NULL)
+        if (proc_map != NULL)
         {
-            cb(item_gobj);
+            proc_map(item_gobj);
         }
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_80173DF4(GObj *item_gobj, f32 mod_vel)
+bool32 func_ovl3_80173DF4(GObj *item_gobj, f32 wall_ceil_rebound)
 {
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), mod_vel, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }
@@ -368,13 +371,13 @@ bool32 func_ovl3_80173E9C(GObj *item_gobj, void (*cb)(GObj*)) // Unused
     else return FALSE;
 }
 
-bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 mod_vel, void (*cb)(GObj*))
+bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 wall_ceil_rebound, void (*cb)(GObj*))
 {
     if ((func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE) && (cb != NULL))
     {
         cb(item_gobj);
     }
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), mod_vel, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }

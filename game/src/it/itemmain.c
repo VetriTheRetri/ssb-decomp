@@ -512,9 +512,9 @@ void itMain_UpdateHitEvent(GObj *item_gobj, itHitEvent *ev)
 
     if (ip->it_multi == ev[ip->item_event_index].timer)
     {
-        ip->item_hit.angle = ev[ip->item_event_index].angle;
+        ip->item_hit.angle  = ev[ip->item_event_index].angle;
         ip->item_hit.damage = ev[ip->item_event_index].damage;
-        ip->item_hit.size = ev[ip->item_event_index].size;
+        ip->item_hit.size   = ev[ip->item_event_index].size;
 
         ip->item_event_index++;
 
@@ -527,6 +527,7 @@ void itMain_UpdateHitEvent(GObj *item_gobj, itHitEvent *ev)
 
 extern s8 gmBonusStat_MewCatcher;
 
+// 0x80173328
 GObj* itMain_CreateMonster(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
@@ -541,9 +542,8 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     vel.y = 16.0F;
     vel.z = 0.0F;
 
-    // Is this checking to spawn Mew?
-
-    if ((Save_Info.unlock_mask & 0xF) && ((rand_u16_range(151) == 0)) && (Monster_Info.monster_curr != It_Kind_Mew) && (Monster_Info.monster_prev != It_Kind_Mew))
+    // Is this checking to spawn Mew? Can only spawn after at least one character has been unlocked.
+    if ((Save_Info.unlock_mask & GMSAVE_UNLOCK_MASK_CHARACTERS) && (rand_u16_range(151) == 0) && (Monster_Info.monster_curr != It_Kind_Mew) && (Monster_Info.monster_prev != It_Kind_Mew))
     {
         index = It_Kind_Mew;
     }

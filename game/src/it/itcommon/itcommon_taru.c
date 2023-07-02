@@ -50,7 +50,7 @@ bool32 jtgt_ovl3_80179C78(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80179CB8(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.5F, 0.2F, func_ovl3_80179CE8);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.5F, 0.2F, func_ovl3_80179CE8);
 }
 
 extern itStatusDesc Article_Taru_Status[];
@@ -82,7 +82,7 @@ bool32 func_ovl3_80179D88(GObj *item_gobj, f32 vel_mod)
     Item_Struct *ap;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), vel_mod, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), vel_mod, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
     }

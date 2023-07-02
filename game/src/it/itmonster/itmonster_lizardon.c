@@ -17,7 +17,7 @@ bool32 jtgt_ovl3_8017F49C(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80173C68(item_gobj, 0.2F, 1.0F, func_ovl3_8017F8E4);
+    itMap_CheckMapCollideLanding(item_gobj, 0.2F, 1.0F, func_ovl3_8017F8E4);
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {

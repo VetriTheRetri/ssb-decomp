@@ -19,7 +19,7 @@ bool32 func_ovl3_801744FC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80174524(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.3F, 0.5F, func_ovl3_80174554);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.3F, 0.5F, func_ovl3_80174554);
 }
 
 extern itStatusDesc Article_Tomato_Status[];
@@ -42,7 +42,7 @@ void func_ovl3_80174588(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801745CC(GObj *arg0)
 {
-    return func_ovl3_80173B24(arg0, 0.3F, 0.5F, func_ovl3_80174554);
+    return itMap_CheckMapCollideThrownLanding(arg0, 0.3F, 0.5F, func_ovl3_80174554);
 }
 
 void jtgt_ovl3_801745FC(GObj *item_gobj)

@@ -4,18 +4,19 @@
 extern intptr_t Article_Link_Bomb_Scale;
 extern itCreateDesc Article_Link_Bomb_Data;
 
+// 0x801859C0;
 void func_ovl3_801859C0(GObj *item_gobj)
 {
     DObj *joint = DObjGetStruct(item_gobj);
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->item_vars.link_bomb.scale_int == 0)
+    if (ip->item_vars.link_bomb.scale_int == 0)
     {
         f32 *p_scale = (f32*) ((uintptr_t)*Article_Link_Bomb_Data.p_file + (intptr_t)&Article_Link_Bomb_Scale); // Linker thing
 
-        s32 index = (ap->item_vars.link_bomb.scale_index >= ATLINKBOMB_SCALE_INDEX_REWIND) ? ATLINKBOMB_SCALE_INDEX_MAX - ap->item_vars.link_bomb.scale_index : ap->item_vars.link_bomb.scale_index;
+        s32 index = (ip->item_vars.link_bomb.scale_index >= ATLINKBOMB_SCALE_INDEX_REWIND) ? ATLINKBOMB_SCALE_INDEX_MAX - ip->item_vars.link_bomb.scale_index : ip->item_vars.link_bomb.scale_index;
 
-        if (ap->is_hold)
+        if (ip->is_hold)
         {
             joint->next->scale.x = joint->next->scale.y = p_scale[index];
         }
@@ -23,25 +24,25 @@ void func_ovl3_801859C0(GObj *item_gobj)
         {
             joint->scale.x = joint->scale.y = p_scale[index];
         }
-        ap->item_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
+        ip->item_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
 
-        if (ap->item_vars.link_bomb.scale_index >= ATLINKBOMB_SCALE_INDEX_MAX)
+        if (ip->item_vars.link_bomb.scale_index >= ATLINKBOMB_SCALE_INDEX_MAX)
         {
-            ap->item_vars.link_bomb.scale_index = 0;
+            ip->item_vars.link_bomb.scale_index = 0;
         }
-        else ap->item_vars.link_bomb.scale_index += 1; // Doesn't match with "++" lol
+        else ip->item_vars.link_bomb.scale_index += 1; // Doesn't match with "++" lol
     }
-    ap->item_vars.link_bomb.scale_int--;
+    ip->item_vars.link_bomb.scale_int--;
 }
 
 void func_ovl3_80185A80(GObj *item_gobj)
 {
     s32 unused;
     DObj *joint = DObjGetStruct(item_gobj);
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     Effect_Unk *ep;
 
-    func_ovl3_80185CE4(item_gobj);
+    itLinkBomb_SDefault_SetHitStatusNone(item_gobj);
 
     ep = func_ovl2_801005C8(&joint->translate);
 
@@ -55,7 +56,7 @@ void func_ovl3_80185A80(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
-    ap->item_hit.hit_sfx = 1;
+    ip->item_hit.hit_sfx = 1;
 
     func_ovl3_8017275C(item_gobj);
     func_ovl3_8018656C(item_gobj);
@@ -64,89 +65,92 @@ void func_ovl3_80185A80(GObj *item_gobj)
 void func_ovl3_80185B18(GObj *item_gobj)
 {
     s32 unused[5];
-    Item_Struct *ap = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ap->attributes;
+    Item_Struct *ip = itGetStruct(item_gobj);
+    itCommonAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos = joint->translate;
 
     pos.y += attributes->objectcoll_bottom;
 
-    func_ovl2_800FF3F4(&pos, ap->lr, 1.0F);
+    func_ovl2_800FF3F4(&pos, ip->lr, 1.0F);
 }
 
 bool32 func_ovl3_80185B84(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->damage_taken_recent >= ATLINKBOMB_HEALTH)
+    if (ip->damage_taken_recent >= ATLINKBOMB_HEALTH)
     {
         func_ovl3_80186368(item_gobj);
     }
     else
     {
-        ap->lr = -ap->lr_damage;
+        ip->lr = -ip->lr_damage;
 
-        ap->phys_info.vel_air.x = -ap->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_X;
-        ap->phys_info.vel_air.y = -ap->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_Y;
+        ip->phys_info.vel_air.x = -ip->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_X;
+        ip->phys_info.vel_air.y = -ip->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_Y;
     }
     return FALSE;
 }
 
 bool32 func_ovl3_80185BFC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if ((ABSF(ap->phys_info.vel_air.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(ap->phys_info.vel_air.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
+    if ((ABSF(ip->phys_info.vel_air.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(ip->phys_info.vel_air.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
     {
         func_ovl3_80186368(item_gobj);
     }
     else
     {
-        ap->lr = -ap->lr_attack;
+        ip->lr = -ip->lr_attack;
 
-        ap->phys_info.vel_air.x = -ap->lr_attack * ATLINKBOMB_HIT_RECOIL_VEL_X;
-        ap->phys_info.vel_air.y = ATLINKBOMB_HIT_RECOIL_VEL_Y;
+        ip->phys_info.vel_air.x = -ip->lr_attack * ATLINKBOMB_HIT_RECOIL_VEL_X;
+        ip->phys_info.vel_air.y = ATLINKBOMB_HIT_RECOIL_VEL_Y;
 
-        func_ovl3_80185FD8(item_gobj);
+        itLinkBomb_AFall_SetStatus(item_gobj);
     }
     return FALSE;
 }
 
-void func_ovl3_80185CD4(GObj *item_gobj)
+// 0x80185CD4
+void itLinkBomb_SDefault_SetHitStatusNormal(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
-void func_ovl3_80185CD4(GObj *item_gobj)
+// 0x80185CE4
+void itLinkBomb_SDefault_SetHitStatusNone(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 }
 
-bool32 func_ovl3_80185CF0(GObj *item_gobj)
+// 0x80185CF0
+bool32 itLinkBomb_SDefault_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATLINKBOMB_GRAVITY, ATLINKBOMB_T_VEL);
+    func_ovl3_80172558(ip, ATLINKBOMB_GRAVITY, ATLINKBOMB_T_VEL);
 
-    if (ap->lifetime == 0)
+    if (ip->lifetime == 0)
     {
         func_ovl3_80186368(item_gobj);
     }
-    if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
         itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
-        ap->item_vars.link_bomb.scale_index = 1;
+        ip->item_vars.link_bomb.scale_index = 1;
     }
-    if (ap->lifetime < ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime < ATLINKBOMB_BLOAT_BEGIN)
     {
         func_ovl3_801859C0(item_gobj);
     }
-    ap->lifetime--;
+    ip->lifetime--;
 
     func_ovl3_801713F4(item_gobj);
 
@@ -155,85 +159,86 @@ bool32 func_ovl3_80185CF0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80185DCC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->phys_info.vel_air.x != 0.0F)
+    if (ip->phys_info.vel_air.x != 0.0F)
     {
-        ap->phys_info.vel_air.x += (-1.0F) * ap->lr;
+        ip->phys_info.vel_air.x += (-1.0F) * ip->lr;
     }
-    if (ABSF(ap->phys_info.vel_air.x) < 1.0F)
+    if (ABSF(ip->phys_info.vel_air.x) < 1.0F)
     {
-        ap->phys_info.vel_air.x = 0;
+        ip->phys_info.vel_air.x = 0;
     }
-    if (ap->lifetime == 0)
+    if (ip->lifetime == 0)
     {
         func_ovl3_80186368(item_gobj);
     }
-    if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime == ATLINKBOMB_BLOAT_BEGIN)
     {
         itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
-        ap->item_vars.link_bomb.scale_index = 1;
+        ip->item_vars.link_bomb.scale_index = 1;
     }
-    if (ap->lifetime < ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime < ATLINKBOMB_BLOAT_BEGIN)
     {
         func_ovl3_801859C0(item_gobj);
     }
-    ap->lifetime--;
+    ip->lifetime--;
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_80185F10(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_80185FD8);
+    func_ovl3_801735A0(item_gobj, itLinkBomb_AFall_SetStatus);
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_80185F38(GObj *item_gobj)
 {
-    func_ovl3_80173B24(item_gobj, 0.4F, 0.3F, func_ovl3_80185F70);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.4F, 0.3F, itLinkBomb_GWait_SetStatus);
 
     return FALSE;
 }
 
 extern itStatusDesc Article_Link_Bomb_Status[];
 
-void func_ovl3_80185F70(GObj *item_gobj)
+// 0x80185F70
+void itLinkBomb_GWait_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    ap->is_allow_pickup = TRUE;
+    ip->is_allow_pickup = TRUE;
 
-    ap->times_landed = 0;
+    ip->times_landed = 0;
 
-    ap->phys_info.vel_air.z = 0.0F;
-    ap->phys_info.vel_air.y = 0.0F;
-    ap->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.x = ip->phys_info.vel_air.y = ip->phys_info.vel_air.z = 0.0F;
 
-    itMap_SetGround(ap);
-    func_ovl3_80185CD4(item_gobj);
+    itMap_SetGround(ip);
+    itLinkBomb_SDefault_SetHitStatusNormal(item_gobj);
     itMain_SetItemStatus(item_gobj, Article_Link_Bomb_Status, 0);
 }
 
-void func_ovl3_80185FD8(GObj *item_gobj)
+// 0x80185FD8
+void itLinkBomb_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->is_allow_pickup = FALSE;
+    ip->is_allow_pickup = FALSE;
 
-    itMap_SetAir(ap);
-    func_ovl3_80185CD4(item_gobj);
+    itMap_SetAir(ip);
+    itLinkBomb_SDefault_SetHitStatusNormal(item_gobj);
     itMain_SetItemStatus(item_gobj, &Article_Link_Bomb_Status, 1);
 }
 
-bool32 func_ovl3_80186024(GObj *item_gobj)
+// 0x80186024
+bool32 itLinkBomb_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    Fighter_Struct *fp = ftGetStruct(ap->owner_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
     if (fp->status_info.status_id == ftStatus_Common_DokanWait) // Odd but go off
     {
@@ -241,44 +246,46 @@ bool32 func_ovl3_80186024(GObj *item_gobj)
     }
     else
     {
-        if (ap->lifetime == 0)
+        if (ip->lifetime == 0)
         {
-            itMain_SetFighterRelease(item_gobj, &ap->phys_info.vel, 1.0F); // Ok, WHAT? This function takes 5 arguments, but it doesn't match otherwise???
-                                                                        // Did they actually redefine this? Passes pointer in a3 instead of u16...
-                                                                        // Do we leave this out of the header and declare it separately to match?
-                                                                        // Update 3/23/2023: matches as variadic. No comment.
+            itMain_SetFighterRelease(item_gobj, &ip->phys_info.vel, 1.0F);  // Ok, WHAT? This function takes 5 arguments, but it doesn't match otherwise???
+                                                                            // Did they actually redefine this? Passes pointer in a3 instead of u16...
+                                                                            // Do we leave this out of the header and declare it separately to match?
+                                                                            // Update 3/23/2023: matches as variadic. No comment.
+                                                                            // Update  7/2/2023: variadic match confirmed fake, so does this file use an erroneous decleration?
             func_ovl3_8017279C(item_gobj);
             func_ovl3_80186368(item_gobj);
         }
-        if (ap->lifetime == ATLINKBOMB_BLOAT_BEGIN)
+        if (ip->lifetime == ATLINKBOMB_BLOAT_BEGIN)
         {
             itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
 
-            ap->item_vars.link_bomb.scale_index = 1;
+            ip->item_vars.link_bomb.scale_index = 1;
         }
-        if (ap->lifetime < ATLINKBOMB_BLOAT_BEGIN)
+        if (ip->lifetime < ATLINKBOMB_BLOAT_BEGIN)
         {
             func_ovl3_801859C0(item_gobj);
         }
-        ap->lifetime--;
+        ip->lifetime--;
 
         return FALSE;
     }
 }
 
-void func_ovl3_8018611C(GObj *item_gobj)
+// 0x8018611C
+void itLinkBomb_FHold_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80185CE4(item_gobj);
+    itLinkBomb_SDefault_SetHitStatusNone(item_gobj);
     itMain_SetItemStatus(item_gobj, Article_Link_Bomb_Status, 2);
 }
 
 bool32 jtgt_ovl3_80186150(GObj *item_gobj)
 {
     s32 unused;
-    Item_Struct *ap = itGetStruct(item_gobj);
-    Vec3f vel = ap->phys_info.vel;
+    Item_Struct *ip = itGetStruct(item_gobj);
+    Vec3f vel = ip->phys_info.vel;
 
-    if (func_ovl3_80173D24(item_gobj, 0.4F, 0.3F, &func_ovl3_80185FD8) != FALSE)
+    if (itMap_CheckMapCollideAny(item_gobj, 0.4F, 0.3F, itLinkBomb_AFall_SetStatus) != FALSE)
     {
         if ((ABSF(vel.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(vel.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
         {
@@ -290,33 +297,33 @@ bool32 jtgt_ovl3_80186150(GObj *item_gobj)
 
 void jtgt_ovl3_80186224(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80185CD4(item_gobj);
+    itLinkBomb_SDefault_SetHitStatusNormal(item_gobj);
 
-    ap->is_damage_all = TRUE;
+    ip->is_damage_all = TRUE;
 
     itMain_SetItemStatus(item_gobj, Article_Link_Bomb_Status, 3);
 }
 
 bool32 jtgt_ovl3_80186270(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->item_vars.link_bomb.unk_0x2 != 0)
+    if (ip->item_vars.link_bomb.unk_0x2 != 0)
     {
-        ap->item_vars.link_bomb.unk_0x2--;
+        ip->item_vars.link_bomb.unk_0x2--;
     }
-    else func_ovl3_80185CF0(item_gobj);
+    else itLinkBomb_SDefault_ProcUpdate(item_gobj);
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_801862AC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->item_vars.link_bomb.unk_0x2 == 0)
+    if (ip->item_vars.link_bomb.unk_0x2 == 0)
     {
         func_ovl3_80185BFC(item_gobj);
     }
@@ -325,9 +332,9 @@ bool32 jtgt_ovl3_801862AC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801862E0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->item_vars.link_bomb.unk_0x2 == 0)
+    if (ip->item_vars.link_bomb.unk_0x2 == 0)
     {
         func_ovl3_80185B84(item_gobj);
     }
@@ -336,55 +343,53 @@ bool32 jtgt_ovl3_801862E0(GObj *item_gobj)
 
 void jtgt_ovl3_80186314(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80185CD4(item_gobj);
+    itLinkBomb_SDefault_SetHitStatusNormal(item_gobj);
 
-    ap->item_vars.link_bomb.unk_0x2 = 10;
+    ip->item_vars.link_bomb.unk_0x2 = 10;
 
-    ap->is_damage_all = TRUE;
+    ip->is_damage_all = TRUE;
 
     itMain_SetItemStatus(item_gobj, Article_Link_Bomb_Status, 4);
 }
 
 void func_ovl3_80186368(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->phys_info.vel_air.z = 0.0F;
-    ap->phys_info.vel_air.y = 0.0F;
-    ap->phys_info.vel_air.x = 0.0F;
+    ip->phys_info.vel_air.x = ip->phys_info.vel_air.y = ip->phys_info.vel_air.z = 0.0F;
 
     func_ovl3_8017279C(item_gobj);
     func_ovl3_80185A80(item_gobj);
-    func_800269C0(1U);
+    func_800269C0(1);
 }
 
 extern intptr_t Link_Bomb_Event;
 
 void func_ovl3_801863AC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    itHitEvent *ev = (itHitEvent *)((uintptr_t)*Article_Link_Bomb_Data.p_file + (intptr_t)&Link_Bomb_Event); // Linker thing
+    Item_Struct *ip = itGetStruct(item_gobj);
+    itHitEvent *ev = (itHitEvent*) ((uintptr_t)*Article_Link_Bomb_Data.p_file + (intptr_t)&Link_Bomb_Event); // Linker thing
 
-    if (ap->it_multi == ev[ap->item_event_index].timer)
+    if (ip->it_multi == ev[ip->item_event_index].timer)
     {
-        ap->item_hit.angle = ev[ap->item_event_index].angle;
-        ap->item_hit.damage = ev[ap->item_event_index].damage;
-        ap->item_hit.size = ev[ap->item_event_index].size;
+        ip->item_hit.angle = ev[ip->item_event_index].angle;
+        ip->item_hit.damage = ev[ip->item_event_index].damage;
+        ip->item_hit.size = ev[ip->item_event_index].size;
 
-        ap->item_hit.can_rehit_item = TRUE;
-        ap->item_hit.can_hop = FALSE;
-        ap->item_hit.can_reflect = FALSE;
-        ap->item_hit.rebound = FALSE;
+        ip->item_hit.can_rehit_item = TRUE;
+        ip->item_hit.can_hop = FALSE;
+        ip->item_hit.can_reflect = FALSE;
+        ip->item_hit.rebound = FALSE;
 
-        ap->item_hit.element = gmHitCollision_Element_Fire;
+        ip->item_hit.element = gmHitCollision_Element_Fire;
 
-        ap->item_event_index++;
+        ip->item_event_index++;
 
-        if (ap->item_event_index == 4)
+        if (ip->item_event_index == 4)
         {
-            ap->item_event_index = 3;
+            ip->item_event_index = 3;
         }
     }
 }
@@ -406,25 +411,25 @@ bool32 func_ovl3_801864BC(GObj *item_gobj) // Unused
 
 void func_ovl3_801864E8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->it_multi = 0;
-    ap->item_event_index = 0;
+    ip->it_multi = 0;
+    ip->item_event_index = 0;
 
-    ap->item_hit.stale = ITEM_STALE_DEFAULT;
+    ip->item_hit.stale = ITEM_STALE_DEFAULT;
 
     func_ovl3_801863AC(item_gobj);
 }
 
 bool32 jtgt_ovl3_80186524(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
     func_ovl3_801863AC(item_gobj);
 
-    ap->it_multi++;
+    ip->it_multi++;
 
-    if (ap->it_multi == ATLINKBOMB_EXPLODE_LIFETIME)
+    if (ip->it_multi == ATLINKBOMB_EXPLODE_LIFETIME)
     {
         return TRUE;
     }
@@ -441,28 +446,26 @@ GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *item_gobj = itManager_CreateItem(fighter_gobj, &Article_Link_Bomb_Data, pos, vel, 0);
     DObj *joint;
-    Item_Struct *ap;
+    Item_Struct *ip;
 
     if (item_gobj != NULL)
     {
-        ap = itGetStruct(item_gobj);
+        ip = itGetStruct(item_gobj);
         joint = DObjGetStruct(item_gobj);
 
         func_80008CC0(joint, 0x2EU, 0U);
         func_80008CC0(joint->next, 0x2EU, 0U);
 
-        ap->it_multi = 0;
+        ip->it_multi = 0;
 
-        ap->lifetime = ATLINKBOMB_LIFETIME;
+        ip->lifetime = ATLINKBOMB_LIFETIME;
 
-        ap->item_vars.link_bomb.scale_index = 0;
-        ap->item_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
+        ip->item_vars.link_bomb.scale_index = 0;
+        ip->item_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
 
-        ap->item_hit.can_rehit_shield = TRUE;
+        ip->item_hit.can_rehit_shield = TRUE;
 
-        ap->phys_info.vel_air.z = 0.0F;
-        ap->phys_info.vel_air.y = 0.0F;
-        ap->phys_info.vel_air.x = 0.0F;
+        ip->phys_info.vel_air.x = ip->phys_info.vel_air.y = ip->phys_info.vel_air.z = 0.0F;
 
         itMain_SetFighterPickup(item_gobj, fighter_gobj);
     }

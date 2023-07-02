@@ -19,7 +19,7 @@ itCreateDesc itCommon_Capsule_ItemDesc =
     itCapsule_SDefault_ProcHit              // Proc Damage
 };
 
-itStatusDesc itCommon_Capsule_StatusDesc[6] =
+itStatusDesc itCommon_Capsule_StatusDesc[itStatus_Capsule_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -101,7 +101,8 @@ typedef enum itCapsuleStatus
     itStatus_Capsule_FHold,
     itStatus_Capsule_FThrow,
     itStatus_Capsule_FDrop,
-    itStatus_Capsule_NExplode
+    itStatus_Capsule_NExplode,
+    itStatus_Capsule_EnumMax
 
 } itCapsuleStatus;
 
@@ -139,7 +140,7 @@ bool32 itCapsule_SDefault_ProcHit(GObj *item_gobj)
 // 0x80174030
 bool32 itCapsule_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.2F, 0.4F, itCapsule_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.4F, itCapsule_GWait_SetStatus);
 }
 
 extern itStatusDesc itCommon_Capsule_StatusDesc[]; // Capsule states
@@ -221,7 +222,7 @@ bool32 func_ovl3_801741F0(GObj *item_gobj) // Unused
 // 0x80174214
 bool32 itCapsule_FDrop_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.2F, 0.4F, itCapsule_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.4F, itCapsule_GWait_SetStatus);
 }
 
 // 0x80174248

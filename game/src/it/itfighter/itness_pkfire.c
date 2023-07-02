@@ -152,7 +152,7 @@ bool32 itPKFire_GWait_ProcMap(GObj *item_gobj)
 // 0x80185688
 bool32 itPKFire_AFall_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_80173C68(item_gobj, 0.2F, 0.5F, itPKFire_GWait_SetStatus);
+    itMap_CheckMapCollideLanding(item_gobj, 0.2F, 0.5F, itPKFire_GWait_SetStatus);
 
     return FALSE;
 }

@@ -24,7 +24,7 @@ bool32 func_ovl3_801764A8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801764D0(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.4F, 0.3F, func_ovl3_80176504);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.4F, 0.3F, func_ovl3_80176504);
 }
 
 extern itStatusDesc Article_MSBomb_Status[];

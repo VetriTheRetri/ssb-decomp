@@ -158,7 +158,7 @@ bool32 jtgt_ovl3_8017A7EC(GObj *item_gobj)
     {
         return func_ovl3_80173DF4(item_gobj, 0.25F);
     }
-    func_ovl3_80173B24(item_gobj, 0.25F, 0.5F, func_ovl3_8017A964);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.25F, 0.5F, func_ovl3_8017A964);
 
     return FALSE;
 }
@@ -297,7 +297,7 @@ bool32 jtgt_ovl3_8017ABA0(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (func_ovl3_80173C68(item_gobj, 0.25F, 0.5F, func_ovl3_8017B0D4) != FALSE)
+    if (itMap_CheckMapCollideLanding(item_gobj, 0.25F, 0.5F, func_ovl3_8017B0D4) != FALSE)
     {
         if (ap->phys_info.vel_air.x < 0.0F) ap->lr = LEFT;
 

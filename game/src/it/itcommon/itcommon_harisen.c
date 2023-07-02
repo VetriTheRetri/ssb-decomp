@@ -21,7 +21,7 @@ itCreateDesc itCommon_Harisen_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itCommon_Harisen_StatusDesc[5] =
+itStatusDesc itCommon_Harisen_StatusDesc[itStatus_Harisen_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -90,7 +90,8 @@ typedef enum itHarisenStatus
     itStatus_Harisen_AFall,
     itStatus_Harisen_FHold,
     itStatus_Harisen_FThrow,
-    itStatus_Harisen_FDrop
+    itStatus_Harisen_FDrop,
+    itStatus_Harisen_EnumMax
 
 } itHarisenStatus;
 
@@ -124,7 +125,7 @@ bool32 itHarisen_GWait_ProcMap(GObj *item_gobj)
 // 0x801751C0
 bool32 itHarisen_AFall_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_80173B24(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
 
     return FALSE;
 }
@@ -175,7 +176,7 @@ bool32 itHarisen_FThrow_ProcUpdate(GObj *item_gobj)
 // 0x801752F8
 bool32 itHarisen_FThrow_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
 }
 
 // 0x80175328
@@ -201,7 +202,7 @@ void itHarisen_FThrow_SetStatus(GObj *item_gobj)
 // 0x80175394
 bool32 itHarisen_FDrop_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.0F, 0.3F, itHarisen_GWait_SetStatus);
 }
 
 // 0x801753C4

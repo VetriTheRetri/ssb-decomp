@@ -75,8 +75,8 @@ typedef enum itKind
     It_Kind_It_Bumper,                          // Bumper (Item)
     It_Kind_GShell,                             // Green Shell
     It_Kind_RShell,                             // Red Shell
-    It_Kind_M_Ball,                             // Poké Ball
-    It_Kind_CommonEnd = It_Kind_M_Ball,         // End of common item IDs
+    It_Kind_MBall,                             // Poké Ball
+    It_Kind_CommonEnd = It_Kind_MBall,         // End of common item IDs
 
     // Character articles
 

@@ -1,6 +1,25 @@
 #include "item.h"
 
-itStatusDesc itCommon_Egg_StatusDesc[6] =
+itCreateDesc itCommon_Capsule_ItemDesc =
+{
+    It_Kind_Egg,                            // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0xACC,                                  // Offset of item attributes in file?
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itEgg_AFall_ProcUpdate,                 // Proc Update
+    itEgg_AFall_ProcMap,                    // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    itEgg_SDefault_ProcHit                  // Proc Damage
+};
+
+itStatusDesc itCommon_Egg_StatusDesc[itStatus_Egg_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -82,7 +101,8 @@ typedef enum itEggStatus
     itStatus_Egg_FHold,
     itStatus_Egg_FThrow,
     itStatus_Egg_FDrop,
-    itStatus_Egg_NExplode
+    itStatus_Egg_NExplode,
+    itStatus_Egg_EnumMax
 };
 
 // 0x801815C0
@@ -124,7 +144,7 @@ bool32 itEgg_SDefault_ProcHit(GObj *item_gobj)
 // 0x80181688
 bool32 itEgg_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itEgg_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itEgg_GWait_SetStatus);
 }
 
 // 0x801816B8
@@ -219,7 +239,7 @@ bool32 func_ovl3_80181894(GObj *item_gobj) // Unused
 // 0x801818B8
 bool32 itEgg_FDrop_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itEgg_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itEgg_GWait_SetStatus);
 }
 
 // 0x801818E8
@@ -234,7 +254,7 @@ void itEgg_FDrop_SetStatus(GObj *item_gobj)
     itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_FDrop);
 }
 
-extern itCreateDesc Article_Egg_Data;
+extern itCreateDesc itCommon_Egg_ItemDesc;
 extern intptr_t D_NF_00000B14;
 
 // 0x80181928
@@ -250,7 +270,7 @@ bool32 itEgg_NExplode_ProcUpdate(GObj *item_gobj)
 
         return TRUE;
     }
-    itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ((uintptr_t)*Article_Egg_Data.p_file + (intptr_t)&D_NF_00000B14) ); // Linker thing
+    itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ((uintptr_t)*itCommon_Egg_ItemDesc.p_file + (intptr_t)&D_NF_00000B14) ); // Linker thing
 
     return FALSE;
 }
@@ -258,7 +278,7 @@ bool32 itEgg_NExplode_ProcUpdate(GObj *item_gobj)
 // 0x80181998
 GObj* itCommon_Egg_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Egg_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Egg_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
@@ -316,7 +336,7 @@ void itEgg_NExplode_InitItemVars(GObj *item_gobj)
 
     func_ovl3_8017279C(item_gobj);
     func_ovl3_8017275C(item_gobj);
-    itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ( (uintptr_t)*Article_Egg_Data.p_file + (intptr_t)&D_NF_00000098) ); // Linker thing
+    itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ( (uintptr_t)*itCommon_Egg_ItemDesc.p_file + (intptr_t)&D_NF_00000098) ); // Linker thing
 }
 
 // 0x80181B5C

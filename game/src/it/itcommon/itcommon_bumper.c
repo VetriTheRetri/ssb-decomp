@@ -20,7 +20,7 @@ itCreateDesc itCommon_IBumper_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itCommon_IBumper_StatusDesc[8] =
+itStatusDesc itCommon_IBumper_StatusDesc[itStatus_IBumper_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -128,7 +128,8 @@ typedef enum itIBumperStatus
     itStatus_IBumper_FDrop,                 // Fighter drop
     itStatus_IBumper_GWaitHit,              // Ground active
     itStatus_IBumper_AHit,                  // Airborne hit
-    itStatus_IBumper_GDisappear             // Ground despawn
+    itStatus_IBumper_GDisappear,            // Ground despawn
+    itStatus_IBumper_EnumMax
 
 } itIBumperStatus;
 
@@ -174,7 +175,7 @@ bool32 itIBumper_GWait_ProcMap(GObj *item_gobj)
 // 0x8017B548
 bool32 itIBumper_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.8F, 0.8F, itIBumper_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.8F, 0.8F, itIBumper_GWait_SetStatus);
 }
 
 // 0x8017B57C

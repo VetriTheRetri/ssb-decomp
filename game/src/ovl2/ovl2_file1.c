@@ -82,13 +82,13 @@ bool32 func_ovl2_800D6630(void)
     s32 ft_index;
     u16 bonus_record_count;
 
-    if (!(Save_Info.unlock_mask & GMSAVE_UNLOCK_MASK_LUIGI))
+    if (!(Save_Info.unlock_mask & GMSAVE_UNLOCK_MASK_SOUNDTEST))
     {
         for (ft_index = 0, bonus_record_count = 0; ft_index < ARRAY_COUNT(Save_Info.spgame_records); ft_index++)
         {
             if (Save_Info.spgame_records[ft_index].bonus1_task_count == 10) // Check if fighter has broken all targets
             {
-                bonus_record_count |= (ft_index << ft_index);
+                bonus_record_count |= (1 << ft_index);
             }
         }
         if ((bonus_record_count & GMSAVEINFO_CHARACTER_MASK_ALL) == GMSAVEINFO_CHARACTER_MASK_ALL)
@@ -97,7 +97,7 @@ bool32 func_ovl2_800D6630(void)
             {
                 if (Save_Info.spgame_records[ft_index].bonus2_task_count == 10) // Check if fighter has boarded all platforms
                 {
-                    bonus_record_count |= (ft_index << ft_index);
+                    bonus_record_count |= (1 << ft_index);
                 }
             }
 
@@ -188,7 +188,7 @@ void func_ovl2_800D67DC(void)
     if (Save_Info.mprotect_fail & GMSAVE_PROTECTFAIL_1PGAMEMARIO)
     {
         Scene_Info.ft_kind = Ft_Kind_Mario;
-        Scene_Info.unk15 = 0;
+        Scene_Info.costume_index = 0;
     }
     D_800A4B18.player_block[Scene_Info.player_port].handicap = 9;
     D_800A4B18.player_block[Scene_Info.player_port].player_kind = 0;
@@ -197,7 +197,7 @@ void func_ovl2_800D67DC(void)
     D_800A4B18.player_block[Scene_Info.player_port].unk_0x8 = Scene_Info.player_port;
     D_800A4B18.player_block[Scene_Info.player_port].unk_0xA = Scene_Info.player_port;
     D_800A4B18.player_block[Scene_Info.player_port].character_kind = Scene_Info.ft_kind;
-    D_800A4B18.player_block[Scene_Info.player_port].costume_index = Scene_Info.unk15;
+    D_800A4B18.player_block[Scene_Info.player_port].costume_index = Scene_Info.costume_index;
     D_800A4B18.player_block[Scene_Info.player_port].stock_count = Save_Info.spgame_stock_count;
     D_800A4B18.player_block[Scene_Info.player_port].is_rebirth_multi = FALSE;
 

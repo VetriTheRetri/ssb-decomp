@@ -19,7 +19,7 @@ itCreateDesc itCommon_Hammer_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itCommon_Hammer_StatusDesc[5] =
+itStatusDesc itCommon_Hammer_StatusDesc[itStatus_Hammer_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -88,7 +88,8 @@ typedef enum itHammerStatus
     itStatus_Hammer_AFall,
     itStatus_Hammer_FHold,
     itStatus_Hammer_FThrow,
-    itStatus_Hammer_FDrop
+    itStatus_Hammer_FDrop,
+    itStatus_Hammer_EnumMax
 
 } itHammerStatus;
 
@@ -120,7 +121,7 @@ bool32 itHammer_GWait_ProcMap(GObj *item_gobj)
 // 0x80176194
 bool32 itHammer_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
 }
 
 extern itStatusDesc itCommon_Hammer_StatusDesc[];
@@ -167,7 +168,7 @@ bool32 itHammer_FThrow_ProcUpdate(GObj *item_gobj)
 // 0x801762A8
 bool32 itHammer_FThrow_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
 }
 
 // 0x801762D8
@@ -195,7 +196,7 @@ void itHammer_FThrow_SetStatus(GObj *item_gobj)
 // 0x80176348
 bool32 itHammer_FDrop_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.5F, 0.2F, itHammer_GWait_SetStatus);
 }
 
 // 0x80176378

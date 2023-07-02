@@ -28,18 +28,24 @@
 
 typedef enum gmSaveUnlock
 {
-    gmSave_Unlock_Ness = 1,
-    gmSave_Unlock_Captain,
-    gmSave_Unlock_Purin,
-    gmSave_Unlock_Unk,
-    gmSave_Unlock_Luigi
+    gmSave_Unlock_Luigi,                // Luigi
+    gmSave_Unlock_Ness,                 // Ness
+    gmSave_Unlock_Captain,              // Captain Falcon
+    gmSave_Unlock_Purin,                // Jigglypuff
+    gmSave_Unlock_Inishie,              // Mushroom Kingdom
+    gmSave_Unlock_SoundTest,            // Sound Test menu
+    gmSave_Unlock_ItemSwitch            // Item Switch menu
 
 } gmSaveUnlock;
 
-#define GMSAVE_UNLOCK_MASK_NESS     (1 << gmSave_Unlock_Ness)
-#define GMSAVE_UNLOCK_MASK_CAPTAIN  (1 << gmSave_Unlock_Captain)
-#define GMSAVE_UNLOCK_MASK_PURIN    (1 << gmSave_Unlock_Purin)
-#define GMSAVE_UNLOCK_MASK_LUIGI    (1 << gmSave_Unlock_Luigi)
+#define GMSAVE_UNLOCK_MASK_LUIGI        (1 << gmSave_Unlock_Luigi)
+#define GMSAVE_UNLOCK_MASK_NESS         (1 << gmSave_Unlock_Ness)
+#define GMSAVE_UNLOCK_MASK_CAPTAIN      (1 << gmSave_Unlock_Captain)
+#define GMSAVE_UNLOCK_MASK_PURIN        (1 << gmSave_Unlock_Purin)
+#define GMSAVE_UNLOCK_MASK_SOUNDTEST    (1 << gmSave_Unlock_SoundTest)
+#define GMSAVE_UNLOCK_MASK_ITEMSWITCH   (1 << gmSave_Unlock_ItemSwitch)
+
+#define GMSAVE_UNLOCK_MASK_CHARACTERS   (GMSAVE_UNLOCK_MASK_PURIN | GMSAVE_UNLOCK_MASK_CAPTAIN | GMSAVE_UNLOCK_MASK_NESS | GMSAVE_UNLOCK_MASK_LUIGI)
 
 typedef enum gmMatch_PauseStatus
 {
@@ -88,7 +94,10 @@ typedef enum gmSaveProtectPenalty
 
 typedef enum gmMatchGameType
 {
-    gmMatch_GameType_Bonus = 2,
+    gmMatch_GameType_Demo,
+    gmMatch_GameType_Versus,
+    gmMatch_GameType_Bonus,
+    gmMatch_GameType_HowToPlay,
     gmMatch_GameType_1PGame = 5
 
 } gmMatchGameType;
@@ -313,7 +322,7 @@ struct gmSceneInfo
     u8 unk12;
     u8 player_port;
     u8 ft_kind;
-    u8 unk15;
+    u8 costume_index;
     u8 pad16[0x17 - 0x16];
     u8 scene_queue; // Unconfirmed
     u8 cpu_port[3];

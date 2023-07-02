@@ -19,7 +19,7 @@ itCreateDesc itCommon_GShell_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itCommon_GShell_StatusDesc[7] =
+itStatusDesc itCommon_GShell_StatusDesc[itStatus_GShell_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -114,7 +114,8 @@ typedef enum itGShellStatus
     itStatus_GShell_FThrow,
     itStatus_GShell_FDrop,
     itStatus_GShell_GSpin,
-    itStatus_GShell_ASpin
+    itStatus_GShell_ASpin,
+    itStatus_GShell_EnumMax
 
 } itGShellStatus;
 
@@ -188,7 +189,7 @@ bool32 itGShell_AFall_ProcMap(GObj *item_gobj)
     {
         return func_ovl3_80173DF4(item_gobj, 0.2F);
     }
-    else func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, itGShell_GWait_SetStatus);
+    else itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itGShell_GWait_SetStatus);
 
     return FALSE;
 }
@@ -312,7 +313,7 @@ void itGShell_FHold_SetStatus(GObj *item_gobj)
 // 0x80178AC4
 bool32 itGShell_FThrow_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_80173C68(item_gobj, 0.2F, 0.5F, itGShell_GWait_SetStatus);
+    itMap_CheckMapCollideLanding(item_gobj, 0.2F, 0.5F, itGShell_GWait_SetStatus);
 
     return FALSE;
 }
@@ -382,7 +383,7 @@ bool32 itGShell_GSpin_ProcMap(GObj *item_gobj)
 {
     func_ovl3_801735A0(item_gobj, itGShell_AFall_SetStatus);
 
-    if (itMap_CheckCollideAllModifiyVel(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), 0.2F, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), 0.2F, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
         func_ovl3_8017279C(item_gobj);

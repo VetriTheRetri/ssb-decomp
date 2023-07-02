@@ -21,7 +21,7 @@ bool32 func_ovl3_80177EBC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80177EE4(GObj *item_gobj)
 {
-    func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
 
     return FALSE;
 }
@@ -63,7 +63,7 @@ bool32 jtgt_ovl3_80177FC4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80178000(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
 }
 
 bool32 jtgt_ovl3_80178030(GObj *item_gobj)
@@ -92,7 +92,7 @@ bool32 jtgt_ovl3_8017809C(GObj *item_gobj)
     {
         return func_ovl3_80173DF4(item_gobj, 0.2F);
     }
-    else return func_ovl3_80173B24(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
+    else return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
 }
 
 void jtgt_ovl3_801780F0(GObj *item_gobj)

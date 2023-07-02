@@ -3,15 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
     "\\game\\src\\it",
     "\\game\\src\\it\\itcommon",
+    "\\game\\src\\it\\itfighter",
     "\\game\\src\\mp",
     "\\game\\src\\ovl2",
     "\\game\\src\\wp",
     "\\game\\src\\wp\\wpness"
   ],
-  "SelectedNode": "\\game\\src\\it\\itcommon\\itcommon_box.c",
+  "SelectedNode": "\\game\\src\\it\\itfighter\\itlink_bomb.c",
   "PreviewInSolutionExplorer": false
 }

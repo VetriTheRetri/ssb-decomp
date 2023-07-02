@@ -19,7 +19,7 @@ itCreateDesc itCommon_BombHei_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itCommon_BombHei_StatusDesc[9] = 
+itStatusDesc itCommon_BombHei_StatusDesc[itStatus_BombHei_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -127,7 +127,7 @@ itStatusDesc itCommon_BombHei_StatusDesc[9] =
         itBombHei_MExplode_ProcHit,         // Proc Set-Off
         itBombHei_MExplode_ProcHit,         // Proc Reflector
         itBombHei_MExplode_ProcHit          // Proc Damage
-    },
+    }
 };
 
 typedef enum itBombHeiStatus
@@ -140,7 +140,8 @@ typedef enum itBombHeiStatus
     itStatus_BombHei_GWalk,
     itStatus_BombHei_MExplode,              // Explode on map collision
     itStatus_BombHei_NExplode,              // Neutral explosion
-    itStatus_BombHei_GExplodeWait           // Stall until explosion
+    itStatus_BombHei_GExplodeWait,          // Stall until explosion
+    itStatus_BombHei_EnumMax
 
 } itBombHeiStatus;
 
@@ -331,7 +332,7 @@ bool32 itBombHei_SDefault_ProcHit(GObj *item_gobj)
 // 0x80177440
 bool32 itBombHei_AFall_ProcMap(GObj *item_gobj)
 {
-    return func_ovl3_80173B24(item_gobj, 0.4F, 0.3F, itBombHei_GWait_SetStatus);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.4F, 0.3F, itBombHei_GWait_SetStatus);
 }
 
 // 0x80177474

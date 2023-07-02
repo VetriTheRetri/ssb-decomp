@@ -2,6 +2,112 @@
 #include "fighter.h"
 #include "gmmatch.h"
 
+itCreateDesc itCommon_MBall_ItemDesc =
+{
+    It_Kind_MBall,                          // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0x6E4,                                  // Offset of item attributes in file?
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itMBall_AFall_ProcUpdate,               // Proc Update
+    itMBall_AFall_ProcMap,                  // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
+
+itStatusDesc itCommon_MBall_StatusDesc[itStatus_MBall_EnumMax] =
+{
+    // Status 0 (Ground Wait)
+    {
+        NULL,                               // Proc Update
+        itMBall_GWait_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 1 (Air Wait Fall)
+    {
+        itMBall_AFall_ProcUpdate,           // Proc Update
+        itMBall_AFall_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 2 (Fighter Hold)
+    {
+        NULL,                               // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 3 (Fighter Throw)
+    {
+        itMBall_FThrow_ProcUpdate,          // Proc Update
+        itMBall_FThrow_ProcMap,             // Proc Map
+        itMBall_SDefault_ProcHit,           // Proc Hit
+        itMBall_SDefault_ProcHit,           // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itMBall_SDefault_ProcHit,           // Proc Set-Off
+        itMBall_SDefault_ProcReflector,     // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 4 (Fighter Drop)
+    {
+        itMBall_AFall_ProcUpdate,           // Proc Update
+        itMBall_FThrow_ProcMap,             // Proc Map
+        itMBall_SDefault_ProcHit,           // Proc Hit
+        itMBall_SDefault_ProcHit,           // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itMBall_SDefault_ProcHit,           // Proc Set-Off
+        itMBall_SDefault_ProcReflector,     // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 5 (Ground Open)
+    {
+        itMBall_GOpen_ProcUpdate,           // Proc Update
+        itMBall_GOpen_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 6 (Air Open)
+    {
+        itMBall_AOpen_ProcUpdate,           // Proc Update
+        itMBall_AOpen_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        itMBall_SDefault_ProcReflector,     // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
 typedef enum itMBallStatus
 {
     itStatus_MBall_GWait,
@@ -10,7 +116,8 @@ typedef enum itMBallStatus
     itStatus_MBall_FThrow,
     itStatus_MBall_FDrop,
     itStatus_MBall_GOpen,
-    itStatus_MBall_AOpen
+    itStatus_MBall_AOpen,
+    itStatus_MBall_EnumMax
 
 } itMBallStatus;
 
@@ -60,12 +167,10 @@ bool32 itMBall_GWait_ProcMap(GObj *item_gobj)
 // 0x8017C790
 bool32 itMBall_AFall_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_80173B24(item_gobj, 0.2F, 0.2F, itMBall_GWait_SetStatus);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.2F, itMBall_GWait_SetStatus);
 
     return FALSE;
 }
-
-extern itStatusDesc itCommon_MBall_StatusDesc[];
 
 // 0x8017C7C8
 void itMBall_GWait_SetStatus(GObj *item_gobj)
@@ -111,22 +216,22 @@ bool32 itMBall_FThrow_ProcUpdate(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017C8D8(GObj *item_gobj)
+// 0x8017C8D8
+bool32 itMBall_FThrow_ProcMap(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
     if (ip->item_vars.m_ball.is_rebound != FALSE)
     {
-        func_ovl3_80173C68(item_gobj, 0.2F, 0.2F, func_ovl3_8017CC88);
+        itMap_CheckMapCollideLanding(item_gobj, 0.2F, 0.2F, itMBall_GOpen_SetStatus);
     }
-    else
-    {
-        func_ovl3_80173B24(item_gobj, 0.2F, 0.2F, func_ovl3_8017CC88);
-    }
+    else itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.2F, itMBall_GOpen_SetStatus);
+    
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017C94C(GObj *item_gobj)
+// 0x8017C94C
+bool32 itMBall_SDefault_ProcHit(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -139,7 +244,8 @@ bool32 jtgt_ovl3_8017C94C(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017C97C(GObj *item_gobj)
+// 0x8017C97C
+bool32 itMBall_SDefault_ProcReflector(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
     Fighter_Struct *fp;
@@ -163,21 +269,25 @@ bool32 jtgt_ovl3_8017C97C(GObj *item_gobj)
     return FALSE;
 }
 
-void jtgt_ovl3_8017C9E0(GObj *item_gobj)
+// 0x8017C9E0
+void itMBall_FThrow_SetStatus(GObj *item_gobj)
 {
     func_ovl3_8017C690(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_FThrow);
 }
 
-void jtgt_ovl3_8017CA14(GObj *item_gobj)
+// 0x8017CA14
+void itMBall_FDrop_SetStatus(GObj *item_gobj)
 {
     func_ovl3_8017C690(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_FDrop);
 }
 
-extern s32 itMonster_Global_SelectMonsterIndex = 0; // Not uninitialized, so this is hardcoded in upon building the ROM? 0 = random, beyond 0 = index of Pokémon to spawn
+extern u32 itMonster_Global_SelectMonsterIndex = 0; // Not uninitialized, so it's hardcoded upon building the ROM? 0 = random, beyond 0 = index of Pokémon to spawn
+                                                    // When in doubt, change to s32
 
-bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
+// 0x8017CA48
+bool32 itMBall_GOpen_ProcUpdate(GObj *m_ball_gobj)
 {
     Item_Struct *m_ball_ip = itGetStruct(m_ball_gobj);
     Item_Struct *monster_ip;
@@ -219,7 +329,8 @@ bool32 jtgt_ovl3_8017CA48(GObj *m_ball_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017CB38(GObj *item_gobj)
+// 0x8017CB38
+bool32 itMBall_GOpen_ProcMap(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -227,12 +338,13 @@ bool32 jtgt_ovl3_8017CB38(GObj *item_gobj)
     {
         ip->is_attach_surface = FALSE;
 
-        func_ovl3_8017CDE4(item_gobj);
+        itMBall_AOpen_SetStatus(item_gobj);
     }
     return FALSE;
 }
 
-void func_ovl3_8017CB84(GObj *item_gobj)
+// 0x8017CB84
+void itMBall_GOpen_InitItemVars(GObj *item_gobj)
 {
     s32 unused[2];
     DObj *joint = DObjGetStruct(item_gobj);
@@ -275,13 +387,15 @@ void func_ovl3_8017CB84(GObj *item_gobj)
     ip->item_hit.can_reflect = FALSE;
 }
 
-void func_ovl3_8017CC88(GObj *item_gobj)
+// 0x8017CC88
+void itMBall_GOpen_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_8017CB84(item_gobj);
-    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, 5);
+    itMBall_GOpen_InitItemVars(item_gobj);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_GOpen);
 }
 
-bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
+// 0x8017CCBC
+bool32 itMBall_AOpen_ProcUpdate(GObj *m_ball_gobj)
 {
     Item_Struct *m_ball_ip = itGetStruct(m_ball_gobj);
     Item_Struct *monster_ip;
@@ -323,23 +437,24 @@ bool32 jtgt_ovl3_8017CCBC(GObj *m_ball_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_8017CDAC(GObj *item_gobj)
+// 0x8017CDAC
+bool32 itMBall_AOpen_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_80173B24(item_gobj, 0.2F, 0.2F, func_ovl3_8017CC88);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.2F, itMBall_GOpen_SetStatus);
 
     return FALSE;
 }
 
-void func_ovl3_8017CDE4(GObj *item_gobj)
+// 0x8017CDE4
+void itMBall_AOpen_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, 6);
+    itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_AOpen);
 }
 
-extern itCreateDesc Article_M_Ball_Data;
-
-GObj* jtgt_ovl3_8017CE0C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x8017CE0C
+GObj* itCommon_MBall_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_M_Ball_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_MBall_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
