@@ -23,16 +23,16 @@
 
 // bss
 u8 D_800A44D0[16];
-struct gmSaveInfo Save_Info;
+struct gmSaveInfo gSaveData;
 // current screen info
-struct gmSceneInfo Scene_Info;
+struct gmSceneInfo gSceneData;
 
 struct BattleState D_800A4B18;
 struct BattleState D_800A4D08;
 struct BattleState D_800A4EF8;
 
 // pointer to battle settings
-struct gmSceneInfo *Match_Info;
+struct gmSceneInfo *gMatchData;
 u32 D_800A50EC;
 u8 D_800A50F0[8];
 u8 D_800A50F8[324];
@@ -57,8 +57,8 @@ void start_scene_manager(UNUSED u32 set) {
     load_overlay(&D_800A3070[2]);
     load_overlay(&D_800A3070[1]);
 
-    Save_Info = D_800A3994;
-    Scene_Info = D_800A3F80;
+    gSaveData = D_800A3994;
+    gSceneData = D_800A3F80;
     sp30       = gDefaultBattleSettings;
     D_800A4EF8 = sp30;
     sp220      = sp30;
@@ -82,10 +82,10 @@ void start_scene_manager(UNUSED u32 set) {
     end = 0x80400000;
     while ((uintptr_t)csr < end) { *(csr++) = GPACK_RGBA5551(0, 0, 0, 1); }
 
-    if (D_800451A0 == 0) { Scene_Info.scene_current = 0; }
+    if (D_800451A0 == 0) { gSceneData.scene_current = 0; }
 
     while (TRUE) {
-        switch (Scene_Info.scene_current) {
+        switch (gSceneData.scene_current) {
             case 0:
                 load_overlay(&D_800A3070[11]);
                 n64_logo_entry();

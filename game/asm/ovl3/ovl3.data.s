@@ -1966,7 +1966,7 @@ glabel Article_Callback_Spawn
   /* 57970 103EB0 80189470 */  .4byte jtgt_ovl3_8017A1B8
   /* 57974 103EB4 80189474 */  .4byte itCommon_Capsule_CreateItem
   /* 57978 103EB8 80189478 */  .4byte itCommon_Egg_CreateItem
-  /* 5797C 103EBC 8018947C */  .4byte jtgt_ovl3_80174624
+  /* 5797C 103EBC 8018947C */  .4byte itCommon_Tomato_CreateItem
   /* 57980 103EC0 80189480 */  .4byte itCommon_Heart_CreateItem
   /* 57984 103EC4 80189484 */  .4byte itCommon_Star_CreateItem
   /* 57988 103EC8 80189488 */  .4byte jtgt_ovl3_80174DA0
@@ -2018,7 +2018,7 @@ glabel itCommon_Drop_ProcList
   /* 57A24 103F64 80189524 */  .4byte jtgt_ovl3_80179F74
   /* 57A28 103F68 80189528 */  .4byte itCapsule_FDrop_SetStatus
   /* 57A2C 103F6C 8018952C */  .4byte itEgg_FDrop_SetStatus
-  /* 57A30 103F70 80189530 */  .4byte jtgt_ovl3_801745FC
+  /* 57A30 103F70 80189530 */  .4byte itTomato_FDrop_SetStatus
   /* 57A34 103F74 80189534 */  .4byte itHeart_FDrop_SetStatus
   .incbin "ovl3.raw.bin", 0x57A38, 0x4
 
@@ -2138,29 +2138,29 @@ glabel jtbl_ovl3_801896C4
   /* 57C04 104144 80189704 */  .4byte itCapsule_NExplode_ProcUpdate
   .incbin "ovl3.raw.bin", 0x57C08, 0x28
 
-glabel Article_Tomato_Data
+glabel itCommon_Tomato_ItemDesc
   .incbin "ovl3.raw.bin", 0x57C30, 0x4
   /* 57C34 104174 80189734 */  .4byte gItemFileData
   .incbin "ovl3.raw.bin", 0x57C38, 0xC
 
 glabel jtbl_ovl3_80189744
-  /* 57C44 104184 80189744 */  .4byte jtgt_ovl3_801744C0
-  /* 57C48 104188 80189748 */  .4byte jtgt_ovl3_80174524
+  /* 57C44 104184 80189744 */  .4byte itTomato_AFall_ProcUpdate
+  /* 57C48 104188 80189748 */  .4byte itTomato_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57C4C, 0x18
 
-glabel Article_Tomato_Status
+glabel itCommon_Tomato_StatusDesc
   .incbin "ovl3.raw.bin", 0x57C64, 0x4
-  /* 57C68 1041A8 80189768 */  .4byte func_ovl3_801744FC
+  /* 57C68 1041A8 80189768 */  .4byte itTomato_GWait_ProcMap
   .incbin "ovl3.raw.bin", 0x57C6C, 0x18
 
 glabel jtbl_ovl3_80189784
-  /* 57C84 1041C4 80189784 */  .4byte jtgt_ovl3_801744C0
-  /* 57C88 1041C8 80189788 */  .4byte jtgt_ovl3_80174524
+  /* 57C84 1041C4 80189784 */  .4byte itTomato_AFall_ProcUpdate
+  /* 57C88 1041C8 80189788 */  .4byte itTomato_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x57C8C, 0x18
 
 glabel jtbl_ovl3_801897A4
-  /* 57CA4 1041E4 801897A4 */  .4byte jtgt_ovl3_801744C0
-  /* 57CA8 1041E8 801897A8 */  .4byte jtgt_ovl3_801745CC
+  /* 57CA4 1041E4 801897A4 */  .4byte itTomato_AFall_ProcUpdate
+  /* 57CA8 1041E8 801897A8 */  .4byte itTomato_FDrop_ProcMap
   .incbin "ovl3.raw.bin", 0x57CAC, 0x24
 
 glabel itCommon_Heart_ItemDesc

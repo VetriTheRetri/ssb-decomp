@@ -3118,14 +3118,14 @@ glabel func_ovl24_801345CC
   /* 12DB4C 8013480C 00000000 */       nop 
 
 glabel func_ovl24_80134810
-  /* 12DB50 80134810 3C05800A */       lui $a1, %hi(Scene_Info)
-  /* 12DB54 80134814 24A54AD0 */     addiu $a1, $a1, %lo(Scene_Info)
-  /* 12DB58 80134818 90AE0017 */       lbu $t6, 0x17($a1) # Scene_Info + 23
+  /* 12DB50 80134810 3C05800A */       lui $a1, %hi(gSceneData)
+  /* 12DB54 80134814 24A54AD0 */     addiu $a1, $a1, %lo(gSceneData)
+  /* 12DB58 80134818 90AE0017 */       lbu $t6, 0x17($a1) # gSceneData + 23
   /* 12DB5C 8013481C 3C018013 */       lui $at, %hi(D_ovl24_80135C28)
   /* 12DB60 80134820 24080074 */     addiu $t0, $zero, 0x74
   /* 12DB64 80134824 AC2E5C28 */        sw $t6, %lo(D_ovl24_80135C28)($at)
-  /* 12DB68 80134828 90AF0013 */       lbu $t7, 0x13($a1) # Scene_Info + 19
-  /* 12DB6C 8013482C 90AD0018 */       lbu $t5, 0x18($a1) # Scene_Info + 24
+  /* 12DB68 80134828 90AF0013 */       lbu $t7, 0x13($a1) # gSceneData + 19
+  /* 12DB6C 8013482C 90AD0018 */       lbu $t5, 0x18($a1) # gSceneData + 24
   /* 12DB70 80134830 3C07800A */       lui $a3, %hi(D_800A4B18)
   /* 12DB74 80134834 01E80019 */     multu $t7, $t0
   /* 12DB78 80134838 24E74B18 */     addiu $a3, $a3, %lo(D_800A4B18)
@@ -3142,7 +3142,7 @@ glabel func_ovl24_80134810
   /* 12DBA4 80134864 01A80019 */     multu $t5, $t0
   /* 12DBA8 80134868 904C0027 */       lbu $t4, 0x27($v0)
   /* 12DBAC 8013486C ACCB0004 */        sw $t3, 4($a2) # D_ovl24_80135CC8 + 4
-  /* 12DBB0 80134870 90AB0019 */       lbu $t3, 0x19($a1) # Scene_Info + 25
+  /* 12DBB0 80134870 90AB0019 */       lbu $t3, 0x19($a1) # gSceneData + 25
   /* 12DBB4 80134874 ACCC0008 */        sw $t4, 8($a2) # D_ovl24_80135CC8 + 8
   /* 12DBB8 80134878 90590023 */       lbu $t9, 0x23($v0)
   /* 12DBBC 8013487C ACD90000 */        sw $t9, ($a2) # D_ovl24_80135CC8 + 0
@@ -3199,13 +3199,13 @@ glabel func_ovl24_801348F4
   /* 12DC78 80134938 00000000 */       nop 
   /* 12DC7C 8013493C 0C0099A8 */       jal func_800266A0
   /* 12DC80 80134940 00000000 */       nop 
-  /* 12DC84 80134944 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 12DC88 80134948 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 12DC8C 8013494C 90580000 */       lbu $t8, ($v0) # Scene_Info + 0
+  /* 12DC84 80134944 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 12DC88 80134948 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 12DC8C 8013494C 90580000 */       lbu $t8, ($v0) # gSceneData + 0
   /* 12DC90 80134950 24190001 */     addiu $t9, $zero, 1
-  /* 12DC94 80134954 A0590000 */        sb $t9, ($v0) # Scene_Info + 0
+  /* 12DC94 80134954 A0590000 */        sb $t9, ($v0) # gSceneData + 0
   /* 12DC98 80134958 0C04D23B */       jal func_ovl24_801348EC
-  /* 12DC9C 8013495C A0580001 */        sb $t8, 1($v0) # Scene_Info + 1
+  /* 12DC9C 8013495C A0580001 */        sb $t8, 1($v0) # gSceneData + 1
   /* 12DCA0 80134960 0C00171D */       jal func_80005C74
   /* 12DCA4 80134964 00000000 */       nop 
   .L80134968:
@@ -3234,13 +3234,13 @@ glabel func_ovl24_801348F4
   /* 12DCF8 801349B8 8FBF0014 */        lw $ra, 0x14($sp)
   /* 12DCFC 801349BC 0C0099A8 */       jal func_800266A0
   /* 12DD00 801349C0 00000000 */       nop 
-  /* 12DD04 801349C4 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 12DD08 801349C8 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 12DD0C 801349CC 90490000 */       lbu $t1, ($v0) # Scene_Info + 0
+  /* 12DD04 801349C4 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 12DD08 801349C8 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 12DD0C 801349CC 90490000 */       lbu $t1, ($v0) # gSceneData + 0
   /* 12DD10 801349D0 240A0001 */     addiu $t2, $zero, 1
-  /* 12DD14 801349D4 A04A0000 */        sb $t2, ($v0) # Scene_Info + 0
+  /* 12DD14 801349D4 A04A0000 */        sb $t2, ($v0) # gSceneData + 0
   /* 12DD18 801349D8 0C04D23B */       jal func_ovl24_801348EC
-  /* 12DD1C 801349DC A0490001 */        sb $t1, 1($v0) # Scene_Info + 1
+  /* 12DD1C 801349DC A0490001 */        sb $t1, 1($v0) # gSceneData + 1
   /* 12DD20 801349E0 0C00171D */       jal func_80005C74
   /* 12DD24 801349E4 00000000 */       nop 
   /* 12DD28 801349E8 8FBF0014 */        lw $ra, 0x14($sp)

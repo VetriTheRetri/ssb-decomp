@@ -1,6 +1,74 @@
 #include "item.h"
 
-bool32 jtgt_ovl3_801744C0(GObj *item_gobj)
+itCreateDesc itCommon_Tomato_ItemDesc =
+{
+    It_Kind_Tomato,                         // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0xB8,                                   // Offset of item attributes in file?
+    0x1B,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itTomato_AFall_ProcUpdate,              // Proc Update
+    itTomato_AFall_ProcMap,                 // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
+
+itStatusDesc itCommon_Tomato_StatusDesc[itStatus_Tomato_EnumMax] =
+{
+    // Status 0 (Ground Wait)
+    {
+        NULL,                               // Proc Update
+        itTomato_GWait_ProcMap,             // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 1 (Air Wait Fall)
+    {
+        itTomato_AFall_ProcUpdate,          // Proc Update
+        itTomato_AFall_ProcMap,             // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 2 (Fighter Drop)
+    {
+        itTomato_AFall_ProcUpdate,          // Proc Update
+        itTomato_FDrop_ProcMap,             // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
+typedef enum itTomatoStatus
+{
+    itStatus_Tomato_GWait,
+    itStatus_Tomato_AFall,
+    itStatus_Tomato_FDrop,
+    itStatus_Tomato_EnumMax
+
+} itTomatoStatus;
+
+// 0x801744C0
+bool32 itTomato_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
@@ -10,59 +78,62 @@ bool32 jtgt_ovl3_801744C0(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 func_ovl3_801744FC(GObj *item_gobj)
+// 0x801744FC
+bool32 itTomato_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_80174588);
+    func_ovl3_801735A0(item_gobj, itTomato_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80174524(GObj *item_gobj)
+// 0x80174524
+bool32 itTomato_AFall_ProcMap(GObj *item_gobj)
 {
-    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.3F, 0.5F, func_ovl3_80174554);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.3F, 0.5F, itTomato_GWait_SetStatus);
 }
 
-extern itStatusDesc Article_Tomato_Status[];
-
-void func_ovl3_80174554(GObj *item_gobj)
+// 0x80174554
+void itTomato_GWait_SetStatus(GObj *item_gobj)
 {
     itMain_SetGroundPickup(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_Tomato_Status, 0);
+    itMain_SetItemStatus(item_gobj, itCommon_Tomato_StatusDesc, itStatus_Tomato_GWait);
 }
 
-void func_ovl3_80174588(GObj *item_gobj)
+// 0x80174588
+void itTomato_AFall_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
     ap->is_allow_pickup = FALSE;
 
     itMap_SetAir(ap);
-    itMain_SetItemStatus(item_gobj, Article_Tomato_Status, 1);
+    itMain_SetItemStatus(item_gobj, itCommon_Tomato_StatusDesc, itStatus_Tomato_AFall);
 }
 
-bool32 jtgt_ovl3_801745CC(GObj *arg0)
+// 0x801745CC
+bool32 itTomato_FDrop_ProcMap(GObj *item_gobj)
 {
-    return itMap_CheckMapCollideThrownLanding(arg0, 0.3F, 0.5F, func_ovl3_80174554);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.3F, 0.5F, itTomato_GWait_SetStatus);
 }
 
-void jtgt_ovl3_801745FC(GObj *item_gobj)
+// 0x801745FC
+void itTomato_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_Tomato_Status, 2);
+    itMain_SetItemStatus(item_gobj, itCommon_Tomato_StatusDesc, itStatus_Tomato_FDrop);
 }
 
-extern itCreateDesc Article_Tomato_Data;
-
-GObj* jtgt_ovl3_80174624(GObj *item_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80174624
+GObj* itCommon_Tomato_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *spawn_gobj = itManager_CreateItem(item_gobj, &Article_Tomato_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Tomato_ItemDesc, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
     Item_Struct *ap;
 
-    if (spawn_gobj != NULL)
+    if (item_gobj != NULL)
     {
-        joint = DObjGetStruct(spawn_gobj);
-        ap = itGetStruct(spawn_gobj);
+        joint = DObjGetStruct(item_gobj);
+        ap = itGetStruct(item_gobj);
         translate = joint->translate;
 
         func_80008CC0(joint, 0x2E, 0);
@@ -73,5 +144,5 @@ GObj* jtgt_ovl3_80174624(GObj *item_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
     }
-    return spawn_gobj;
+    return item_gobj;
 }

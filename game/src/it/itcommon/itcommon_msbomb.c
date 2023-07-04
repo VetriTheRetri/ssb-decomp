@@ -313,7 +313,7 @@ void itMSBomb_GAttach_InitItemVars(GObj *item_gobj)
 
     if ((ip->player != -1) && (ip->player != GMMATCH_PLAYERS_MAX)) // Macro might be off though
     {
-        GObj *fighter_gobj = Match_Info->player_block[ip->player].fighter_gobj;
+        GObj *fighter_gobj = gMatchData->player_block[ip->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {

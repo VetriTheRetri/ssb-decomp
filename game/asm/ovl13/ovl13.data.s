@@ -186,7 +186,7 @@ glabel D_ovl13_80132DC8
   /* 1408 11B748 80132F08 */  .4byte D_800A50EC
   .incbin "ovl13.raw.bin", 0x140C, 0x14
   /* 1420 11B760 80132F20 */  .4byte D_ovl13_80133110
-  /* 1424 11B764 80132F24 */  .4byte (Save_Info + 0x5e3)
+  /* 1424 11B764 80132F24 */  .4byte (gSaveData + 0x5e3)
   .incbin "ovl13.raw.bin", 0x1428, 0x14
   /* 143C 11B77C 80132F3C */  .4byte D_ovl13_8013311C
   .incbin "ovl13.raw.bin", 0x1440, 0x14

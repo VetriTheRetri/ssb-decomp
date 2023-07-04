@@ -72,7 +72,7 @@ typedef enum itKind
     It_Kind_Hammer,                             // Hammer
     It_Kind_MSBomb,                             // Motion-Sensor Bomb
     It_Kind_BombHei,                            // Bob-Omb
-    It_Kind_It_Bumper,                          // Bumper (Item)
+    It_Kind_IBumper,                          // Bumper (Item)
     It_Kind_GShell,                             // Green Shell
     It_Kind_RShell,                             // Red Shell
     It_Kind_MBall,                             // Poké Ball
@@ -377,7 +377,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     u8 damage_port;                     // Controller port of attacker
     s32 damage_player_number;           // Player number of attacker
     u8 damage_handicap;                 // Handicap of attacker
-    s32 damage_display_state;           // Display mode of attacker which the item takes on
+    s32 damage_display_mode;           // Display mode of attacker which the item takes on
     s32 damage_taken_last;              // Final damage intake?
 
     s32 lifetime;                       // Item's duration in frames
@@ -453,7 +453,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     } item_vars;
 
-    s32 display_state;                  // Item's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
+    s32 display_mode;                  // Item's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
 
     bool32 (*proc_update)(GObj*);       // Update general item information
     bool32 (*proc_map)(GObj*);          // Update item's map collision

@@ -316,7 +316,7 @@ bool32 itMBall_GOpen_ProcUpdate(GObj *m_ball_gobj)
             monster_ip->player = m_ball_ip->player;
             monster_ip->handicap = m_ball_ip->handicap;
             monster_ip->player_number = m_ball_ip->player_number;
-            monster_ip->display_state = m_ball_ip->display_state;
+            monster_ip->display_mode = m_ball_ip->display_mode;
         }
         return TRUE;
     }
@@ -370,7 +370,7 @@ void itMBall_GOpen_InitItemVars(GObj *item_gobj)
 
     if ((ip->player != -1) && (ip->player != GMMATCH_PLAYERS_MAX))
     {
-        GObj *fighter_gobj = Match_Info->player_block[ip->player].fighter_gobj;
+        GObj *fighter_gobj = gMatchData->player_block[ip->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {
@@ -424,7 +424,7 @@ bool32 itMBall_AOpen_ProcUpdate(GObj *m_ball_gobj)
             monster_ip->player = m_ball_ip->player;
             monster_ip->handicap = m_ball_ip->handicap;
             monster_ip->player_number = m_ball_ip->player_number;
-            monster_ip->display_state = m_ball_ip->display_state;
+            monster_ip->display_mode = m_ball_ip->display_mode;
         }
         return TRUE;
     }

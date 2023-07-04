@@ -94,7 +94,7 @@ glabel D_ovl14_80132780
   .balign 4
   .incbin "ovl14.raw.bin", 0x0CB4, 0xC
   /* CC0 11C630 801327C0 */  .4byte D_ovl14_80132738
-  /* CC4 11C634 801327C4 */  .4byte (Scene_Info + 0x17)
+  /* CC4 11C634 801327C4 */  .4byte (gSceneData + 0x17)
   .incbin "ovl14.raw.bin", 0x0CC8, 0x14
   /* CDC 11C64C 801327DC */  .4byte D_ovl14_80132708
   /* CE0 11C650 801327E0 */  .4byte (D_800A4D08 + 0x22)

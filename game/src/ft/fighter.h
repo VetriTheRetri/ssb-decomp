@@ -1179,10 +1179,10 @@ struct Fighter_Struct
     u32 x190_flag_b3 : 1;
     u32 is_playing_sfx : 1;
     u32 x190_flag_b5 : 1;
-    u32 x190_flag_b6 : 1;
+    u32 is_hide_item : 1;
     u32 x190_flag_b7 : 1;
     u32 x191_flag_b0 : 1;
-    u32 is_stat_nodamage : 1; // ???
+    u32 is_nullstatus : 1; // Dead / Entry / Appear / Rebirth, ignore hit collisions + blastzones?
     u32 is_damage_resist : 1;
     u32 x191_flag_b3 : 1;
     u32 x191_flag_b4567 : 4;
@@ -1203,7 +1203,7 @@ struct Fighter_Struct
     u32 unk_0x1A8;
     u32 unk_0x1AC;
 
-    struct _input
+    struct input
     {
         void *p_controller; // Controller inputs?
         u16 button_mask_a;
@@ -1398,7 +1398,7 @@ struct Fighter_Struct
 
     } status_vars;
 
-    s32 display_state;
+    s32 display_mode;
 };
 
 #define ftGetStruct(fighter_gobj) \

@@ -45,7 +45,7 @@ glabel D_ovl3_8018CFE8
     .space 8
 glabel wpManager_Global_CurrentUserData
     .space 4
-glabel dbObjDisplayStatusItem
+glabel dbObject_DisplayModeItem
     .space 4
 glabel wpManager_Global_GroupIndex
     .space 72
@@ -57,7 +57,7 @@ glabel D_ovl3_8018D048
     .space 24
 glabel Monster_Info
     .space 48
-glabel dbObjDisplayStatus_Global_Article
+glabel dbObject_DisplayMode_Global_Article
     .space 4
 glabel itManager_Global_CurrentUserData
     .space 4

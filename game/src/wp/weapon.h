@@ -212,7 +212,7 @@ typedef struct _Weapon_Struct
 
     } weapon_vars;
 
-    s32 display_state;                  // Weapon's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
+    s32 display_mode;                  // Weapon's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
 
 } Weapon_Struct;
 

@@ -1768,9 +1768,9 @@ glabel func_ovl29_80133410
   /* 149450 80133420 15C0000E */      bnez $t6, .L8013345C
   /* 149454 80133424 00781821 */      addu $v1, $v1, $t8
   /* 149458 80133428 00047940 */       sll $t7, $a0, 5
-  /* 14945C 8013342C 3C03800A */       lui $v1, %hi((Save_Info + 0x46C))
+  /* 14945C 8013342C 3C03800A */       lui $v1, %hi((gSaveData + 0x46C))
   /* 149460 80133430 006F1821 */      addu $v1, $v1, $t7
-  /* 149464 80133434 8C63494C */        lw $v1, %lo((Save_Info + 0x46C))($v1)
+  /* 149464 80133434 8C63494C */        lw $v1, %lo((gSaveData + 0x46C))($v1)
   /* 149468 80133438 3C010003 */       lui $at, (0x34BC0 >> 16) # 216000
   /* 14946C 8013343C 34214BC0 */       ori $at, $at, (0x34BC0 & 0xFFFF) # 216000
   /* 149470 80133440 0061082B */      sltu $at, $v1, $at
@@ -2154,10 +2154,10 @@ glabel func_ovl29_80133990
   /* 1499D0 801339A0 15C00006 */      bnez $t6, .L801339BC
   /* 1499D4 801339A4 00581021 */      addu $v0, $v0, $t8
   /* 1499D8 801339A8 00047940 */       sll $t7, $a0, 5
-  /* 1499DC 801339AC 3C02800A */       lui $v0, %hi((Save_Info + 0x470))
+  /* 1499DC 801339AC 3C02800A */       lui $v0, %hi((gSaveData + 0x470))
   /* 1499E0 801339B0 004F1021 */      addu $v0, $v0, $t7
   /* 1499E4 801339B4 03E00008 */        jr $ra
-  /* 1499E8 801339B8 90424950 */       lbu $v0, %lo((Save_Info + 0x470))($v0)
+  /* 1499E8 801339B8 90424950 */       lbu $v0, %lo((gSaveData + 0x470))($v0)
 
   .L801339BC:
   /* 1499EC 801339BC 90424958 */       lbu $v0, 0x4958($v0)
@@ -2287,10 +2287,10 @@ glabel func_ovl29_80133B7C
   /* 149BBC 80133B8C 15C00006 */      bnez $t6, .L80133BA8
   /* 149BC0 80133B90 2401000A */     addiu $at, $zero, 0xa
   /* 149BC4 80133B94 00047940 */       sll $t7, $a0, 5
-  /* 149BC8 80133B98 3C02800A */       lui $v0, %hi((Save_Info + 0x470))
+  /* 149BC8 80133B98 3C02800A */       lui $v0, %hi((gSaveData + 0x470))
   /* 149BCC 80133B9C 004F1021 */      addu $v0, $v0, $t7
   /* 149BD0 80133BA0 10000003 */         b .L80133BB0
-  /* 149BD4 80133BA4 90424950 */       lbu $v0, %lo((Save_Info + 0x470))($v0)
+  /* 149BD4 80133BA4 90424950 */       lbu $v0, %lo((gSaveData + 0x470))($v0)
   .L80133BA8:
   /* 149BD8 80133BA8 00581021 */      addu $v0, $v0, $t8
   /* 149BDC 80133BAC 90424958 */       lbu $v0, 0x4958($v0)
@@ -4244,19 +4244,19 @@ glabel func_ovl29_80135740
   /* 14B77C 8013574C AFBF0014 */        sw $ra, 0x14($sp)
   /* 14B780 80135750 15C00006 */      bnez $t6, .L8013576C
   /* 14B784 80135754 24190008 */     addiu $t9, $zero, 8
-  /* 14B788 80135758 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 14B78C 8013575C 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 14B788 80135758 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 14B78C 8013575C 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
   /* 14B790 80135760 240F0013 */     addiu $t7, $zero, 0x13
   /* 14B794 80135764 10000005 */         b .L8013577C
-  /* 14B798 80135768 A04F0001 */        sb $t7, 1($v0) # Scene_Info + 1
+  /* 14B798 80135768 A04F0001 */        sb $t7, 1($v0) # gSceneData + 1
   .L8013576C:
-  /* 14B79C 8013576C 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 14B7A0 80135770 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 14B79C 8013576C 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 14B7A0 80135770 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
   /* 14B7A4 80135774 24180014 */     addiu $t8, $zero, 0x14
-  /* 14B7A8 80135778 A0580001 */        sb $t8, 1($v0) # Scene_Info + 1
+  /* 14B7A8 80135778 A0580001 */        sb $t8, 1($v0) # gSceneData + 1
   .L8013577C:
   /* 14B7AC 8013577C 0C04DA66 */       jal func_ovl29_80136998
-  /* 14B7B0 80135780 A0590000 */        sb $t9, ($v0) # Scene_Info + 0
+  /* 14B7B0 80135780 A0590000 */        sb $t9, ($v0) # gSceneData + 0
   /* 14B7B4 80135784 0C00829D */       jal func_80020A74
   /* 14B7B8 80135788 00000000 */       nop 
   /* 14B7BC 8013578C 0C0099A8 */       jal func_800266A0
@@ -5520,16 +5520,16 @@ glabel func_ovl29_80136704
 glabel func_ovl29_80136998
   /* 14C9C8 80136998 3C038013 */       lui $v1, %hi(D_ovl29_80137648)
   /* 14C9CC 8013699C 24637648 */     addiu $v1, $v1, %lo(D_ovl29_80137648)
-  /* 14C9D0 801369A0 3C02800A */       lui $v0, %hi(Scene_Info)
+  /* 14C9D0 801369A0 3C02800A */       lui $v0, %hi(gSceneData)
   /* 14C9D4 801369A4 3C0E8013 */       lui $t6, %hi(D_ovl29_801376F8)
   /* 14C9D8 801369A8 8DCE76F8 */        lw $t6, %lo(D_ovl29_801376F8)($t6)
   /* 14C9DC 801369AC 8C6F0020 */        lw $t7, 0x20($v1) # D_ovl29_80137648 + 32
   /* 14C9E0 801369B0 8C780024 */        lw $t8, 0x24($v1) # D_ovl29_80137648 + 36
-  /* 14C9E4 801369B4 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 14C9E8 801369B8 A04E0013 */        sb $t6, 0x13($v0) # Scene_Info + 19
-  /* 14C9EC 801369BC A04F0039 */        sb $t7, 0x39($v0) # Scene_Info + 57
+  /* 14C9E4 801369B4 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 14C9E8 801369B8 A04E0013 */        sb $t6, 0x13($v0) # gSceneData + 19
+  /* 14C9EC 801369BC A04F0039 */        sb $t7, 0x39($v0) # gSceneData + 57
   /* 14C9F0 801369C0 03E00008 */        jr $ra
-  /* 14C9F4 801369C4 A058003A */        sb $t8, 0x3a($v0) # Scene_Info + 58
+  /* 14C9F4 801369C4 A058003A */        sb $t8, 0x3a($v0) # gSceneData + 58
 
   /* 14C9F8 801369C8 03E00008 */        jr $ra
   /* 14C9FC 801369CC 00000000 */       nop 
@@ -5546,13 +5546,13 @@ glabel func_ovl29_801369D0
   /* 14CA20 801369F0 AFBF0014 */        sw $ra, 0x14($sp)
   /* 14CA24 801369F4 AFA40018 */        sw $a0, 0x18($sp)
   /* 14CA28 801369F8 170F000B */       bne $t8, $t7, .L80136A28
-  /* 14CA2C 801369FC 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 14CA30 80136A00 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 14CA34 80136A04 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
+  /* 14CA2C 801369FC 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 14CA30 80136A00 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 14CA34 80136A04 90480000 */       lbu $t0, ($v0) # gSceneData + 0
   /* 14CA38 80136A08 24090001 */     addiu $t1, $zero, 1
-  /* 14CA3C 80136A0C A0490000 */        sb $t1, ($v0) # Scene_Info + 0
+  /* 14CA3C 80136A0C A0490000 */        sb $t1, ($v0) # gSceneData + 0
   /* 14CA40 80136A10 0C04DA66 */       jal func_ovl29_80136998
-  /* 14CA44 80136A14 A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
+  /* 14CA44 80136A14 A0480001 */        sb $t0, 1($v0) # gSceneData + 1
   /* 14CA48 80136A18 0C00171D */       jal func_80005C74
   /* 14CA4C 80136A1C 00000000 */       nop 
   /* 14CA50 80136A20 10000039 */         b .L80136B08
@@ -5601,21 +5601,21 @@ glabel func_ovl29_801369D0
   /* 14CAF0 80136AC0 8FBF0014 */        lw $ra, 0x14($sp)
   .L80136AC4:
   /* 14CAF4 80136AC4 8D4A7714 */        lw $t2, %lo(D_ovl29_80137714)($t2)
-  /* 14CAF8 80136AC8 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 14CAFC 80136ACC 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 14CAF8 80136AC8 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 14CAFC 80136ACC 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
   /* 14CB00 80136AD0 15400006 */      bnez $t2, .L80136AEC
   /* 14CB04 80136AD4 240D0035 */     addiu $t5, $zero, 0x35
-  /* 14CB08 80136AD8 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 14CB0C 80136ADC 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 14CB08 80136AD8 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 14CB0C 80136ADC 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
   /* 14CB10 80136AE0 240B0013 */     addiu $t3, $zero, 0x13
   /* 14CB14 80136AE4 10000003 */         b .L80136AF4
-  /* 14CB18 80136AE8 A04B0001 */        sb $t3, 1($v0) # Scene_Info + 1
+  /* 14CB18 80136AE8 A04B0001 */        sb $t3, 1($v0) # gSceneData + 1
   .L80136AEC:
   /* 14CB1C 80136AEC 240C0014 */     addiu $t4, $zero, 0x14
-  /* 14CB20 80136AF0 A04C0001 */        sb $t4, 1($v0) # Scene_Info + 1
+  /* 14CB20 80136AF0 A04C0001 */        sb $t4, 1($v0) # gSceneData + 1
   .L80136AF4:
   /* 14CB24 80136AF4 0C04DA66 */       jal func_ovl29_80136998
-  /* 14CB28 80136AF8 A04D0000 */        sb $t5, ($v0) # Scene_Info + 0
+  /* 14CB28 80136AF8 A04D0000 */        sb $t5, ($v0) # gSceneData + 0
   /* 14CB2C 80136AFC 0C00171D */       jal func_80005C74
   /* 14CB30 80136B00 00000000 */       nop 
   .L80136B04:
@@ -5655,8 +5655,8 @@ glabel func_ovl29_80136B54
   /* 14CB9C 80136B6C 3C018013 */       lui $at, %hi(D_ovl29_801376D4)
   /* 14CBA0 80136B70 24180005 */     addiu $t8, $zero, 5
   /* 14CBA4 80136B74 AC3876D4 */        sw $t8, %lo(D_ovl29_801376D4)($at)
-  /* 14CBA8 80136B78 3C19800A */       lui $t9, %hi((Scene_Info + 0x13))
-  /* 14CBAC 80136B7C 93394AE3 */       lbu $t9, %lo((Scene_Info + 0x13))($t9)
+  /* 14CBA8 80136B78 3C19800A */       lui $t9, %hi((gSceneData + 0x13))
+  /* 14CBAC 80136B7C 93394AE3 */       lbu $t9, %lo((gSceneData + 0x13))($t9)
   /* 14CBB0 80136B80 3C018013 */       lui $at, %hi(D_ovl29_801376EC)
   /* 14CBB4 80136B84 AC2076EC */        sw $zero, %lo(D_ovl29_801376EC)($at)
   /* 14CBB8 80136B88 3C018013 */       lui $at, %hi(D_ovl29_801376F8)
@@ -5674,12 +5674,12 @@ glabel func_ovl29_80136B54
   /* 14CBE8 80136BB8 3C018013 */       lui $at, %hi(D_ovl29_801376F4)
   /* 14CBEC 80136BBC 0C04DAC9 */       jal func_ovl29_80136B24
   /* 14CBF0 80136BC0 AC2976F4 */        sw $t1, %lo(D_ovl29_801376F4)($at)
-  /* 14CBF4 80136BC4 3C0A800A */       lui $t2, %hi((Save_Info + 0x458))
-  /* 14CBF8 80136BC8 954A4938 */       lhu $t2, %lo((Save_Info + 0x458))($t2)
+  /* 14CBF4 80136BC4 3C0A800A */       lui $t2, %hi((gSaveData + 0x458))
+  /* 14CBF8 80136BC8 954A4938 */       lhu $t2, %lo((gSaveData + 0x458))($t2)
   /* 14CBFC 80136BCC 3C018013 */       lui $at, %hi(D_ovl29_8013767C)
   /* 14CC00 80136BD0 AC20767C */        sw $zero, %lo(D_ovl29_8013767C)($at)
-  /* 14CC04 80136BD4 3C0B800A */       lui $t3, %hi(Scene_Info)
-  /* 14CC08 80136BD8 916B4AD0 */       lbu $t3, %lo(Scene_Info)($t3)
+  /* 14CC04 80136BD4 3C0B800A */       lui $t3, %hi(gSceneData)
+  /* 14CC08 80136BD8 916B4AD0 */       lbu $t3, %lo(gSceneData)($t3)
   /* 14CC0C 80136BDC 3C018013 */       lui $at, %hi(D_ovl29_80137720)
   /* 14CC10 80136BE0 A42A7720 */        sh $t2, %lo(D_ovl29_80137720)($at)
   /* 14CC14 80136BE4 24010013 */     addiu $at, $zero, 0x13
@@ -5881,8 +5881,8 @@ glabel func_ovl29_80136CD8
   /* 14CEE4 80136EB4 240700FF */     addiu $a3, $zero, 0xff
   /* 14CEE8 80136EB8 0C0E4138 */       jal func_ovl1_803904E0
   /* 14CEEC 80136EBC 46006386 */     mov.s $f14, $f12
-  /* 14CEF0 80136EC0 3C0C800A */       lui $t4, %hi((Scene_Info + 0x1))
-  /* 14CEF4 80136EC4 918C4AD1 */       lbu $t4, %lo((Scene_Info + 0x1))($t4)
+  /* 14CEF0 80136EC0 3C0C800A */       lui $t4, %hi((gSceneData + 0x1))
+  /* 14CEF4 80136EC4 918C4AD1 */       lbu $t4, %lo((gSceneData + 0x1))($t4)
   /* 14CEF8 80136EC8 24010015 */     addiu $at, $zero, 0x15
   /* 14CEFC 80136ECC 00002025 */        or $a0, $zero, $zero
   /* 14CF00 80136ED0 51810004 */      beql $t4, $at, .L80136EE4

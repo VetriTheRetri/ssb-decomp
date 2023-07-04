@@ -543,12 +543,12 @@ glabel func_ovl44_80132268
   /* 16F904 801322D4 3404D000 */       ori $a0, $zero, 0xd000
   /* 16F908 801322D8 10400007 */      beqz $v0, .L801322F8
   /* 16F90C 801322DC 24090001 */     addiu $t1, $zero, 1
-  /* 16F910 801322E0 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 16F914 801322E4 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 16F918 801322E8 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
-  /* 16F91C 801322EC A0490000 */        sb $t1, ($v0) # Scene_Info + 0
+  /* 16F910 801322E0 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 16F914 801322E4 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 16F918 801322E8 90480000 */       lbu $t0, ($v0) # gSceneData + 0
+  /* 16F91C 801322EC A0490000 */        sb $t1, ($v0) # gSceneData + 0
   /* 16F920 801322F0 0C00171D */       jal func_80005C74
-  /* 16F924 801322F4 A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
+  /* 16F924 801322F4 A0480001 */        sb $t0, 1($v0) # gSceneData + 1
   .L801322F8:
   /* 16F928 801322F8 3C038013 */       lui $v1, %hi(D_ovl44_8013273C)
   /* 16F92C 801322FC 8C63273C */        lw $v1, %lo(D_ovl44_8013273C)($v1)
@@ -574,13 +574,13 @@ glabel func_ovl44_80132268
   /* 16F978 80132348 240100DC */     addiu $at, $zero, 0xdc
   .L8013234C:
   /* 16F97C 8013234C 14610007 */       bne $v1, $at, .L8013236C
-  /* 16F980 80132350 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 16F984 80132354 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 16F988 80132358 904A0000 */       lbu $t2, ($v0) # Scene_Info + 0
+  /* 16F980 80132350 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 16F984 80132354 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 16F988 80132358 904A0000 */       lbu $t2, ($v0) # gSceneData + 0
   /* 16F98C 8013235C 240B0028 */     addiu $t3, $zero, 0x28
-  /* 16F990 80132360 A04B0000 */        sb $t3, ($v0) # Scene_Info + 0
+  /* 16F990 80132360 A04B0000 */        sb $t3, ($v0) # gSceneData + 0
   /* 16F994 80132364 0C00171D */       jal func_80005C74
-  /* 16F998 80132368 A04A0001 */        sb $t2, 1($v0) # Scene_Info + 1
+  /* 16F998 80132368 A04A0001 */        sb $t2, 1($v0) # gSceneData + 1
   .L8013236C:
   /* 16F99C 8013236C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 16F9A0 80132370 27BD0018 */     addiu $sp, $sp, 0x18

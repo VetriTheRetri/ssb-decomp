@@ -3,7 +3,7 @@
 
 itCreateDesc itCommon_IBumper_ItemDesc =
 {
-    It_Kind_It_Bumper,                      // Item Kind
+    It_Kind_IBumper,                      // Item Kind
     &gItemFileData,                         // Pointer to item file data?
     0x69C,                                  // Offset of item attributes in file?
     0x12,                                   // ???

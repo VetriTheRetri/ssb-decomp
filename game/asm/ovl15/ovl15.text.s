@@ -52,13 +52,13 @@ glabel func_ovl15_800D64C4
   /* 1507BC 800D650C 8FBF001C */        lw $ra, 0x1c($sp)
   /* 1507C0 800D6510 0C0DA7B0 */       jal func_NF_80369EC0 # couldn't be resolved
   /* 1507C4 800D6514 00000000 */       nop 
-  /* 1507C8 800D6518 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 1507CC 800D651C 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 1507D0 800D6520 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
+  /* 1507C8 800D6518 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 1507CC 800D651C 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 1507D0 800D6520 90480000 */       lbu $t0, ($v0) # gSceneData + 0
   /* 1507D4 800D6524 24090004 */     addiu $t1, $zero, 4
-  /* 1507D8 800D6528 A0490000 */        sb $t1, ($v0) # Scene_Info + 0
+  /* 1507D8 800D6528 A0490000 */        sb $t1, ($v0) # gSceneData + 0
   /* 1507DC 800D652C 0C00171D */       jal func_80005C74
-  /* 1507E0 800D6530 A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
+  /* 1507E0 800D6530 A0480001 */        sb $t0, 1($v0) # gSceneData + 1
   /* 1507E4 800D6534 8FBF001C */        lw $ra, 0x1c($sp)
   .L800D6538:
   /* 1507E8 800D6538 27BD0020 */     addiu $sp, $sp, 0x20

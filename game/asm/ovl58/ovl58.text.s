@@ -109,25 +109,25 @@ glabel func_ovl58_80131C20
   /* 17EE14 80131C54 3404D000 */       ori $a0, $zero, 0xd000
   /* 17EE18 80131C58 10400009 */      beqz $v0, .L80131C80
   /* 17EE1C 80131C5C 24180001 */     addiu $t8, $zero, 1
-  /* 17EE20 80131C60 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 17EE24 80131C64 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 17EE28 80131C68 904F0000 */       lbu $t7, ($v0) # Scene_Info + 0
-  /* 17EE2C 80131C6C A0580000 */        sb $t8, ($v0) # Scene_Info + 0
+  /* 17EE20 80131C60 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 17EE24 80131C64 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 17EE28 80131C68 904F0000 */       lbu $t7, ($v0) # gSceneData + 0
+  /* 17EE2C 80131C6C A0580000 */        sb $t8, ($v0) # gSceneData + 0
   /* 17EE30 80131C70 0C00171D */       jal func_80005C74
-  /* 17EE34 80131C74 A04F0001 */        sb $t7, 1($v0) # Scene_Info + 1
+  /* 17EE34 80131C74 A04F0001 */        sb $t7, 1($v0) # gSceneData + 1
   /* 17EE38 80131C78 1000000C */         b .L80131CAC
   /* 17EE3C 80131C7C 8FBF0014 */        lw $ra, 0x14($sp)
   .L80131C80:
   /* 17EE40 80131C80 3C198013 */       lui $t9, %hi(D_ovl58_80132074)
   /* 17EE44 80131C84 8F392074 */        lw $t9, %lo(D_ovl58_80132074)($t9)
-  /* 17EE48 80131C88 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 17EE4C 80131C8C 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
+  /* 17EE48 80131C88 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 17EE4C 80131C8C 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
   /* 17EE50 80131C90 13200005 */      beqz $t9, .L80131CA8
   /* 17EE54 80131C94 2409001C */     addiu $t1, $zero, 0x1c
-  /* 17EE58 80131C98 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
-  /* 17EE5C 80131C9C A0490000 */        sb $t1, ($v0) # Scene_Info + 0
+  /* 17EE58 80131C98 90480000 */       lbu $t0, ($v0) # gSceneData + 0
+  /* 17EE5C 80131C9C A0490000 */        sb $t1, ($v0) # gSceneData + 0
   /* 17EE60 80131CA0 0C00171D */       jal func_80005C74
-  /* 17EE64 80131CA4 A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
+  /* 17EE64 80131CA4 A0480001 */        sb $t0, 1($v0) # gSceneData + 1
   .L80131CA8:
   /* 17EE68 80131CA8 8FBF0014 */        lw $ra, 0x14($sp)
   .L80131CAC:

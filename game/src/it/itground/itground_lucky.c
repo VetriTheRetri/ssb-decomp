@@ -24,7 +24,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
     {
         if (lucky_ap->item_vars.gr_lucky.egg_spawn_wait != 0)
         {
-            if ((Match_Info->item_toggles & 8) && (Match_Info->item_switch != 0)) // Return to this when 0x8 is mapped
+            if ((gMatchData->item_toggles & 8) && (gMatchData->item_switch != 0)) // Return to this when 0x8 is mapped
             {
                 pos = joint->translate;
 

@@ -7,7 +7,7 @@
 
 extern Weapon_Struct *wpManager_Global_CurrentUserData;
 extern u32 wpManager_Global_GroupIndex;
-extern s32 dbObjDisplayStatusItem;
+extern s32 dbObject_DisplayModeItem;
 
 // 0x801654B0
 void wpManager_AllocUserData(void)
@@ -26,7 +26,7 @@ void wpManager_AllocUserData(void)
         wp[i].wp_alloc_next = NULL;
     }
     wpManager_Global_GroupIndex = 1;
-    dbObjDisplayStatusItem = dbObjDisplayStatus_Master;
+    dbObject_DisplayModeItem = dbObject_DisplayMode_Master;
 }
 
 // 0x80165558
@@ -109,7 +109,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         wp->player_number = fp->player_number;
         wp->lr = fp->lr;
 
-        wp->display_state = fp->display_state;
+        wp->display_mode = fp->display_mode;
 
         wp->weapon_hit.stale = gmCommon_DamageGetStaleMul(fp->player, fp->attack_id, fp->motion_count);
         wp->weapon_hit.attack_id = fp->attack_id;
@@ -127,7 +127,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         wp->player_number = owner_wp->player_number;
         wp->lr = owner_wp->lr;
 
-        wp->display_state = owner_wp->display_state;
+        wp->display_mode = owner_wp->display_mode;
 
         wp->weapon_hit.stale = owner_wp->weapon_hit.stale;
         wp->weapon_hit.attack_id = owner_wp->weapon_hit.attack_id;
@@ -145,7 +145,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         wp->player_number = ap->player_number;
         wp->lr = ap->lr;
 
-        wp->display_state = ap->display_state;
+        wp->display_mode = ap->display_mode;
 
         wp->weapon_hit.stale = ap->item_hit.stale;
         wp->weapon_hit.attack_id = ap->item_hit.attack_id;
@@ -163,7 +163,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         wp->player_number = 0;
         wp->lr = RIGHT;
 
-        wp->display_state = dbObjDisplayStatusItem;
+        wp->display_mode = dbObject_DisplayModeItem;
 
         wp->weapon_hit.attack_id = ftMotion_AttackIndex_None;
         wp->weapon_hit.stale = WEAPON_STALE_DEFAULT;
@@ -707,7 +707,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
             }
             else if ((is_check_self != FALSE) && (this_wp->owner_gobj != other_wp->owner_gobj))
             {
-                if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE)) goto next_check;
+                if ((gMatchData->is_team_battle != TRUE) || (gMatchData->is_team_attack != FALSE)) goto next_check;
                 {
                     if (this_wp->team == other_wp->team) goto next_gobj; // YUCKY match but you can't say it's only a half
 
@@ -834,7 +834,7 @@ next_check:
 
         wp->team = fp->team;
         wp->player = fp->player;
-        wp->display_state = fp->display_state;
+        wp->display_mode = fp->display_mode;
         wp->player_number = fp->player_number;
         wp->handicap = fp->handicap;
         wp->weapon_hit.stat_flags = wp->reflect_stat_flags;

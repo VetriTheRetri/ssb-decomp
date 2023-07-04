@@ -33,7 +33,7 @@ void wpRender_DisplayHitCollisions(GObj *weapon_gobj) // Render item hitboxes
         {
             gDPPipeSync(D_800465B0[0]++);
 
-            if (ip->display_state == dbObjDisplayStatus_HitCollision_Outline)
+            if (ip->display_mode == dbObject_DisplayMode_HitAttackOutline)
             {
                 gDPSetPrimColor(D_800465B0[0]++, 0, 0, 176, 0, 0, 255);
 
@@ -159,7 +159,7 @@ void func_ovl3_80167520(GObj *weapon_gobj, void(*proc_render)(GObj*))
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    if (ip->display_state == dbObjDisplayStatus_MapCollision)
+    if (ip->display_mode == dbObject_DisplayMode_MapCollision)
     {
         func_ovl3_80167454(weapon_gobj);
 
@@ -171,7 +171,7 @@ void func_ovl3_80167520(GObj *weapon_gobj, void(*proc_render)(GObj*))
     }
     else
     {
-        if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->weapon_hit.update_state == gmHitCollision_UpdateState_Disable))
+        if ((ip->display_mode == dbObject_DisplayMode_Master) || (ip->weapon_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
             func_ovl3_80167454();
 
@@ -203,8 +203,8 @@ void func_ovl3_8016763C(GObj *weapon_gobj)
     func_ovl3_80167520(weapon_gobj, func_80014768);
 }
 
-extern GfxColor wpNess_PKThunder_PrimColor[WPPKTHUNDER_TRAIL_COUNT - 1] = { { 94, 163, 255 }, { 152, 189, 255 }, { 194, 217, 255 }, { 179, 241, 255 } };
-extern GfxColor wpNess_PKThunder_EnvColor[WPPKTHUNDER_TRAIL_COUNT - 1] = { { 58, 0, 131 }, { 91, 0, 178 }, { 134, 51, 217 }, { 167, 116, 248 } };
+GfxColor wpNess_PKThunder_PrimColor[WPPKTHUNDER_TRAIL_COUNT - 1]    = { { 94, 163, 255 }, { 152, 189, 255 }, { 194, 217, 255 }, { 179, 241, 255 } };
+GfxColor wpNess_PKThunder_EnvColor[WPPKTHUNDER_TRAIL_COUNT - 1]     = { { 58,   0, 131 }, {  91,   0, 178 }, { 134,  51, 217 }, { 167, 116, 248 } };
 
 // 0x80167660
 void wpRender_DisplayPKThunder(GObj *weapon_gobj)
@@ -212,7 +212,7 @@ void wpRender_DisplayPKThunder(GObj *weapon_gobj)
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     s32 index = ip->weapon_vars.pkthunder_trail.trail_index;
 
-    if (ip->display_state == dbObjDisplayStatus_MapCollision)
+    if (ip->display_mode == dbObject_DisplayMode_MapCollision)
     {
         func_ovl3_80167454();
 
@@ -228,7 +228,7 @@ void wpRender_DisplayPKThunder(GObj *weapon_gobj)
 
         wpRender_DisplayMapCollisions(weapon_gobj);
     }
-    else if ((ip->display_state == dbObjDisplayStatus_Master) || (ip->weapon_hit.update_state == gmHitCollision_UpdateState_Disable))
+    else if ((ip->display_mode == dbObject_DisplayMode_Master) || (ip->weapon_hit.update_state == gmHitCollision_UpdateState_Disable))
     {
         func_ovl3_80167454();
 

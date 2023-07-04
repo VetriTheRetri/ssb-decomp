@@ -3,7 +3,7 @@
 // 0x80158750
 void ftMasterHand_Unk_ProcInterrupt(GObj *fighter_gobj)
 {
-    if (Match_Info->pause_status != gmMatch_PauseStatus_Disable)
+    if (gMatchData->pause_status != gmMatch_PauseStatus_Disable)
     {
         ftMasterHand_Wait_SetStatus(fighter_gobj);
     }

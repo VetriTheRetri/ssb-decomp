@@ -22,7 +22,7 @@ void ftCommon_Entry_SetStatus(GObj *fighter_gobj)
 
     fp->is_invisible = TRUE;
     fp->x18E_flag_b0 = TRUE;
-    fp->is_stat_nodamage = TRUE;
+    fp->is_nullstatus = TRUE;
     fp->x18E_flag_b3 = TRUE;
 }
 
@@ -127,7 +127,7 @@ void ftCommon_Appear_InitStatusVars(GObj *fighter_gobj)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
-    fp->is_stat_nodamage = TRUE;
+    fp->is_nullstatus = TRUE;
 
     fp->x191_flag_b4567 = 3;
 

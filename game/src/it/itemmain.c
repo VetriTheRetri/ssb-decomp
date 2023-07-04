@@ -70,7 +70,7 @@ void itMain_UpdatePhysicsAir(Item_Struct *ip, f32 gravity, f32 terminal_velocity
     }
 }
 
-extern s32 dbObjDisplayStatus_Global_Article; // Static (.bss)
+extern s32 dbObject_DisplayMode_Global_Article; // Static (.bss)
 
 // 0x801725BC
 void itMain_ResetPlayerVars(GObj *item_gobj)
@@ -84,7 +84,7 @@ void itMain_ResetPlayerVars(GObj *item_gobj)
     ip->player_number = 0;
     ip->item_hit.stale = ITEM_STALE_DEFAULT;
 
-    ip->display_state = dbObjDisplayStatus_Global_Article;
+    ip->display_mode = dbObject_DisplayMode_Global_Article;
 }
 
 // 0x801725F8
@@ -140,7 +140,7 @@ void itMain_CopyDamageStats(GObj *item_gobj)
     ip->player = ip->damage_port;
     ip->player_number = ip->player_number; // Could potentially cause a bug? Didn't they mean damage_player_number?
     ip->handicap = ip->damage_handicap;
-    ip->display_state = ip->damage_display_state;
+    ip->display_mode = ip->damage_display_mode;
 }
 
 // 0x801727F4
@@ -321,7 +321,7 @@ void itMain_SetFighterPickup(GObj *item_gobj, GObj *fighter_gobj)
     ip->phys_info.vel_air.y = 0.0F;
     ip->phys_info.vel_air.z = 0.0F;
 
-    ip->display_state = fp->display_state;
+    ip->display_mode = fp->display_mode;
 
     itMap_SetAir(ip);
 
@@ -548,7 +548,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     vel.z = 0.0F;
 
     // Is this checking to spawn Mew? Can only spawn after at least one character has been unlocked.
-    if ((Save_Info.unlock_mask & GMSAVE_UNLOCK_MASK_CHARACTERS) && (rand_u16_range(151) == 0) && (Monster_Info.monster_curr != It_Kind_Mew) && (Monster_Info.monster_prev != It_Kind_Mew))
+    if ((gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_CHARACTERS) && (rand_u16_range(151) == 0) && (Monster_Info.monster_curr != It_Kind_Mew) && (Monster_Info.monster_prev != It_Kind_Mew))
     {
         index = It_Kind_Mew;
     }
@@ -582,11 +582,11 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
         mp->player = ip->player;
         mp->handicap = ip->handicap;
         mp->player_number = ip->player_number;
-        mp->display_state = ip->display_state;
+        mp->display_mode = ip->display_mode;
 
-        if (Match_Info->game_type == gmMatch_GameType_1PGame)
+        if (gMatchData->game_type == gmMatch_GameType_1PGame)
         {
-            if ((mp->player == Scene_Info.player_port) && (mp->it_kind == It_Kind_Mew))
+            if ((mp->player == gSceneData.player_port) && (mp->it_kind == It_Kind_Mew))
             {
                 gmBonusStat_MewCatcher = TRUE;
             }

@@ -41,13 +41,13 @@ void func_ovl3_8017E100(GObj *item_gobj)
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
+        if ((ap->display_mode == dbObject_DisplayMode_Master) || (ap->is_hold))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
             func_80014038(item_gobj);
         }
-        else if (ap->display_state == dbObjDisplayStatus_MapCollision)
+        else if (ap->display_mode == dbObject_DisplayMode_MapCollision)
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
@@ -154,13 +154,13 @@ void func_ovl3_8017E4A4(GObj *item_gobj)
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
-        if ((ap->display_state == dbObjDisplayStatus_Master) || (ap->is_hold))
+        if ((ap->display_mode == dbObject_DisplayMode_Master) || (ap->is_hold))
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
             func_80014038(item_gobj);
         }
-        else if (ap->display_state == dbObjDisplayStatus_MapCollision)
+        else if (ap->display_mode == dbObject_DisplayMode_MapCollision)
         {
             gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 

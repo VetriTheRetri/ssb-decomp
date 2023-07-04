@@ -1162,12 +1162,12 @@ glabel func_ovl21_80132AF0
   /* 12911C 80132B7C 24044000 */     addiu $a0, $zero, 0x4000
   /* 129120 80132B80 10400009 */      beqz $v0, .L80132BA8
   /* 129124 80132B84 2409000A */     addiu $t1, $zero, 0xa
-  /* 129128 80132B88 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 12912C 80132B8C 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 129130 80132B90 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
-  /* 129134 80132B94 A0490000 */        sb $t1, ($v0) # Scene_Info + 0
+  /* 129128 80132B88 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 12912C 80132B8C 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 129130 80132B90 90480000 */       lbu $t0, ($v0) # gSceneData + 0
+  /* 129134 80132B94 A0490000 */        sb $t1, ($v0) # gSceneData + 0
   /* 129138 80132B98 0C04CA91 */       jal func_ovl21_80132A44
-  /* 12913C 80132B9C A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
+  /* 12913C 80132B9C A0480001 */        sb $t0, 1($v0) # gSceneData + 1
   /* 129140 80132BA0 0C00171D */       jal func_80005C74
   /* 129144 80132BA4 00000000 */       nop 
   .L80132BA8:

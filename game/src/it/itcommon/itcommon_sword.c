@@ -1,7 +1,5 @@
 #include "item.h"
 
-
-
 bool32 jtgt_ovl3_80174B50(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);

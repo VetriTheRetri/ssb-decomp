@@ -75,7 +75,7 @@ typedef enum ftScriptEventKind
     ftScriptEvent_Kind_ResetColAnim,
     ftScriptEvent_Kind_SetParallelScript, // What
     ftScriptEvent_Kind_SlopeContour,
-    ftScriptEvent_Kind_Unk14,
+    ftScriptEvent_Kind_HideItem,
     ftScriptEvent_Kind_Unk15,
     ftScriptEvent_Kind_Unk16,
     ftScriptEvent_Kind_AfterImage // Sword Trail

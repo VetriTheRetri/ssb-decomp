@@ -73,7 +73,7 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->mobj->anim_frame = 0;
 
-        if (Match_Info->gr_kind == Gr_Kind_Castle)
+        if (gMatchData->gr_kind == Gr_Kind_Castle)
         {
             ap->item_hit.knockback_weight = ITBUMPER_CASTLE_KNOCKBACK;
             ap->item_hit.angle = ITBUMPER_CASTLE_ANGLE;

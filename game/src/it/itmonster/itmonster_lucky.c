@@ -118,7 +118,7 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
     {
         if (!lucky_ap->item_vars.mb_lucky.egg_spawn_wait)
         {
-            if ((Match_Info->item_toggles & 8) && (Match_Info->item_switch != 0))
+            if ((gMatchData->item_toggles & 8) && (gMatchData->item_switch != 0))
             {
                 pos = joint->translate;
 

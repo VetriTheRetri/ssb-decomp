@@ -2794,13 +2794,13 @@ glabel func_ovl34_80134400
   /* 164FA8 80134468 0C0E41DB */       jal func_ovl1_8039076C
   /* 164FAC 8013446C 3404D000 */       ori $a0, $zero, 0xd000
   /* 164FB0 80134470 10400007 */      beqz $v0, .L80134490
-  /* 164FB4 80134474 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 164FB8 80134478 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 164FBC 8013447C 90480000 */       lbu $t0, ($v0) # Scene_Info + 0
+  /* 164FB4 80134474 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 164FB8 80134478 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 164FBC 8013447C 90480000 */       lbu $t0, ($v0) # gSceneData + 0
   /* 164FC0 80134480 24090001 */     addiu $t1, $zero, 1
-  /* 164FC4 80134484 A0490000 */        sb $t1, ($v0) # Scene_Info + 0
+  /* 164FC4 80134484 A0490000 */        sb $t1, ($v0) # gSceneData + 0
   /* 164FC8 80134488 0C00171D */       jal func_80005C74
-  /* 164FCC 8013448C A0480001 */        sb $t0, 1($v0) # Scene_Info + 1
+  /* 164FCC 8013448C A0480001 */        sb $t0, 1($v0) # gSceneData + 1
   .L80134490:
   /* 164FD0 80134490 3C028013 */       lui $v0, %hi(D_ovl34_80134CE4)
   /* 164FD4 80134494 8C424CE4 */        lw $v0, %lo(D_ovl34_80134CE4)($v0)
@@ -2993,12 +2993,12 @@ glabel func_ovl34_80134400
   /* 165294 80134754 24010528 */     addiu $at, $zero, 0x528
   /* 165298 80134758 14410007 */       bne $v0, $at, .L80134778
   /* 16529C 8013475C 2418001D */     addiu $t8, $zero, 0x1d
-  /* 1652A0 80134760 3C02800A */       lui $v0, %hi(Scene_Info)
-  /* 1652A4 80134764 24424AD0 */     addiu $v0, $v0, %lo(Scene_Info)
-  /* 1652A8 80134768 904F0000 */       lbu $t7, ($v0) # Scene_Info + 0
-  /* 1652AC 8013476C A0580000 */        sb $t8, ($v0) # Scene_Info + 0
+  /* 1652A0 80134760 3C02800A */       lui $v0, %hi(gSceneData)
+  /* 1652A4 80134764 24424AD0 */     addiu $v0, $v0, %lo(gSceneData)
+  /* 1652A8 80134768 904F0000 */       lbu $t7, ($v0) # gSceneData + 0
+  /* 1652AC 8013476C A0580000 */        sb $t8, ($v0) # gSceneData + 0
   /* 1652B0 80134770 0C00171D */       jal func_80005C74
-  /* 1652B4 80134774 A04F0001 */        sb $t7, 1($v0) # Scene_Info + 1
+  /* 1652B4 80134774 A04F0001 */        sb $t7, 1($v0) # gSceneData + 1
   .L80134778:
   /* 1652B8 80134778 8FBF0014 */        lw $ra, 0x14($sp)
   /* 1652BC 8013477C 27BD0018 */     addiu $sp, $sp, 0x18

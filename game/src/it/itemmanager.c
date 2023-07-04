@@ -13,7 +13,7 @@ extern intptr_t D_NF_00B1BDE0_other;
 extern intptr_t D_NF_00B1E640;
 extern void *D_ovl3_8018D044;
 
-extern s32 dbObjDisplayStatus_Global_Article;
+extern s32 dbObject_DisplayMode_Global_Article;
 
 // 0x8016DEA0
 void itManager_AllocUserData(void) // Many linker things here
@@ -40,7 +40,7 @@ void itManager_AllocUserData(void) // Many linker things here
     itManager_InitMonsterVars();
     func_ovl2_80111F80();
 
-    dbObjDisplayStatus_Global_Article = dbObjDisplayStatus_Master;
+    dbObject_DisplayMode_Global_Article = dbObject_DisplayMode_Master;
 }
 
 // 0x8016DFAC
@@ -361,7 +361,7 @@ extern gmItemSpawn item_settings; // Static (.bss)
 
 void func_ovl3_8016EB0C(void)
 {
-    item_settings.item_spawn_timer = D_ovl3_80189454[Match_Info->item_switch] + rand_u16_range(D_ovl3_80189460[Match_Info->item_switch] - D_ovl3_80189454[Match_Info->item_switch]);
+    item_settings.item_spawn_timer = D_ovl3_80189454[gMatchData->item_switch] + rand_u16_range(D_ovl3_80189460[gMatchData->item_switch] - D_ovl3_80189454[gMatchData->item_switch]);
 }
 
 void func_ovl3_8016EB78(s32 unused)
@@ -371,7 +371,7 @@ void func_ovl3_8016EB78(s32 unused)
     Vec3f pos;
     Vec3f sp28;
 
-    if (Match_Info->pause_status != gmMatch_PauseStatus_Disable)
+    if (gMatchData->pause_status != gmMatch_PauseStatus_Disable)
     {
         if (item_settings.item_spawn_timer > 0)
         {
@@ -414,15 +414,15 @@ GObj* func_ovl3_8016EC40(void)
 
     // TO DO: Figure out where the iterator limit of 20 is coming from
 
-    if (Match_Info->item_switch != 0)
+    if (gMatchData->item_switch != 0)
     {
-        if (Match_Info->item_toggles != 0)
+        if (gMatchData->item_toggles != 0)
         {
             if (Ground_Info->unk_0x84 != NULL)
             {
                 unk_0x84_2 = Ground_Info->unk_0x84;
 
-                item_bits_2 = Match_Info->item_toggles;
+                item_bits_2 = gMatchData->item_toggles;
 
                 item_count = 0;
 
@@ -466,7 +466,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 gOMObj_AddGObjCommonProc(gobj, func_ovl3_8016EB78, 1, 3);
 
-                item_bits = Match_Info->item_toggles;
+                item_bits = gMatchData->item_toggles;
 
                 unk_0x84 = Ground_Info->unk_0x84;
 
@@ -481,7 +481,7 @@ GObj* func_ovl3_8016EC40(void)
                 item_settings.unk_0x18 = hal_alloc(j * sizeof(*item_settings.unk_0x18), 0);
                 item_settings.unk_0x20 = hal_alloc(j * sizeof(*item_settings.unk_0x20), 2);
 
-                item_bits_3 = Match_Info->item_toggles;
+                item_bits_3 = gMatchData->item_toggles;
 
                 item_count_2 = 0;
 
@@ -526,9 +526,9 @@ void func_ovl3_8016EF40(void)
     u32 item_bits_2;
     u32 item_bits_3;
 
-    if ((Match_Info->item_switch != 0) && (Match_Info->item_toggles != 0) && (Ground_Info->unk_0x84 != NULL))
+    if ((gMatchData->item_switch != 0) && (gMatchData->item_toggles != 0) && (Ground_Info->unk_0x84 != NULL))
     {
-        item_bits = Match_Info->item_toggles >> 4;
+        item_bits = gMatchData->item_toggles >> 4;
 
         temp_a3 = Ground_Info->unk_0x84;
 
@@ -545,7 +545,7 @@ void func_ovl3_8016EF40(void)
 
         if (item_count != 0)
         {
-            item_bits_2 = (u32)Match_Info->item_toggles >> 4;
+            item_bits_2 = (u32)gMatchData->item_toggles >> 4;
 
             temp_t1 = Ground_Info->unk_0x84;
 
@@ -562,7 +562,7 @@ void func_ovl3_8016EF40(void)
             D_ovl3_8018D048.unk_0xC = hal_alloc(j * sizeof(*D_ovl3_8018D048.unk_0xC), 0U);
             D_ovl3_8018D048.unk_0x14 = hal_alloc(j * sizeof(*D_ovl3_8018D048.unk_0x14), 2U);
 
-            item_bits_2 = Match_Info->item_toggles >> 4;
+            item_bits_2 = gMatchData->item_toggles >> 4;
 
             item_count_2 = 0;
 
@@ -961,7 +961,7 @@ void itManager_UpdateDamageStatFighter(Fighter_Struct *fp, Fighter_Hit *ft_hit, 
             ap->damage_port = fp->player;
             ap->damage_player_number = fp->player_number;
             ap->damage_handicap = fp->handicap;
-            ap->damage_display_state = fp->display_state;
+            ap->damage_display_mode = fp->display_mode;
         }
         if (ap->is_allow_knockback)
         {
@@ -1144,7 +1144,7 @@ void itManager_UpdateDamageStatItem(Item_Struct *attack_ap, Item_Hit *attack_it_
             defend_ap->damage_port = attack_ap->player;
             defend_ap->damage_player_number = attack_ap->player_number;
             defend_ap->damage_handicap = attack_ap->handicap;
-            defend_ap->damage_display_state = attack_ap->display_state;
+            defend_ap->damage_display_mode = attack_ap->display_mode;
         }
         if (defend_ap->is_allow_knockback)
         {
@@ -1235,7 +1235,7 @@ void itManager_UpdateDamageStatWeapon(Weapon_Struct *ip, Weapon_Hit *wp_hit, s32
             ap->damage_port = ip->player;
             ap->damage_player_number = ip->player_number;
             ap->damage_handicap = ip->handicap;
-            ap->damage_display_state = ip->display_state;
+            ap->damage_display_mode = ip->display_mode;
         }
         if (ap->is_allow_knockback)
         {
@@ -1306,7 +1306,7 @@ void itManager_SearchHitFighter(GObj *item_gobj) // Check fighters for hit detec
                 {
                     fp = ftGetStruct(fighter_gobj);
 
-                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (((fp->throw_gobj != NULL) ? fp->throw_team : fp->team) != ap->team) || (ap->is_damage_all))
+                    if ((gMatchData->is_team_battle != TRUE) || (gMatchData->is_team_attack != FALSE) || (((fp->throw_gobj != NULL) ? fp->throw_team : fp->team) != ap->team) || (ap->is_damage_all))
                     {
                         if (!(fp->x192_flag_b2))
                         {
@@ -1408,7 +1408,7 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
 
                 if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
                 {
-                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team) || (this_ap->is_damage_all))
+                    if ((gMatchData->is_team_battle != TRUE) || (gMatchData->is_team_attack != FALSE) || (this_ap->team != other_ap->team) || (this_ap->is_damage_all))
                     {
                         if (other_hit->update_state != gmHitCollision_UpdateState_Disable)
                         {
@@ -1431,7 +1431,7 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
                                 {
                                     if ((is_check_self != FALSE) && (this_hit->rebound) && (other_hit->rebound) && (this_ap->owner_gobj != other_ap->owner_gobj))
                                     {
-                                        if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
+                                        if ((gMatchData->is_team_battle != TRUE) || (gMatchData->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
                                         {
                                             if ((this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE))
                                             {
@@ -1525,7 +1525,7 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
 
             if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))
             {
-                if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team) || (ap->is_damage_all))
+                if ((gMatchData->is_team_battle != TRUE) || (gMatchData->is_team_attack != FALSE) || (ap->team != ip->team) || (ap->is_damage_all))
                 {
                     if (wp_hit->update_state != 0)
                     {
@@ -1547,7 +1547,7 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
                             {
                                 if ((it_hit->rebound) && (wp_hit->rebound) && (ap->owner_gobj != ip->owner_gobj))
                                 {
-                                    if ((Match_Info->is_team_battle != TRUE) || (Match_Info->is_team_attack != FALSE) || (ap->team != ip->team))
+                                    if ((gMatchData->is_team_battle != TRUE) || (gMatchData->is_team_attack != FALSE) || (ap->team != ip->team))
                                     {
                                         if ((it_hit->update_state != gmHitCollision_UpdateState_Disable) && (it_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
                                         {

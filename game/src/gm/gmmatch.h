@@ -339,8 +339,8 @@ struct gmSceneInfo
     u8 unk47;
 }; // size == 0x48
 
-extern gmMatchInfo *Match_Info;
-extern struct gmSaveInfo Save_Info;
-extern struct gmSceneInfo Scene_Info;
+extern gmMatchInfo *gMatchData;
+extern struct gmSaveInfo gSaveData;
+extern struct gmSceneInfo gSceneData;
 
 #endif

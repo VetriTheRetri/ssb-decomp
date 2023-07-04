@@ -97,8 +97,8 @@ void ftCommon_Throw_SetStatus(GObj *fighter_gobj, bool32 is_throwf)
     {
         if (status_id == ftStatus_Kirby_ThrowF)
         {
-            this_fp->is_stat_nodamage = TRUE;
-            catch_fp->is_stat_nodamage = TRUE;
+            this_fp->x192_flag_b1 = TRUE;
+            catch_fp->x192_flag_b1 = TRUE;
         }
     }
 }
@@ -153,7 +153,7 @@ void ftKirby_ThrowFFall_SetStatus(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFFall, 0.0F, 1.0F, FTSTATUPDATE_TEXTUREPART_PRESERVE);
 
-    catch_fp->is_stat_nodamage = FALSE;
+    catch_fp->x192_flag_b1 = FALSE;
 }
 
 // 0x8014A4F8

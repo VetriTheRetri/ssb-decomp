@@ -61,7 +61,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        Match_Info->player_block[fp->player].stock_damage_all = fp->percent_damage;
+        gMatchData->player_block[fp->player].stock_damage_all = fp->percent_damage;
     }
     fp->shield_health = (fp->ft_kind == Ft_Kind_Yoshi) ? 55 : 55;
 
@@ -343,7 +343,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        Match_Info->player_block[fp->player].stock_count = spawn->stock_count;
+        gMatchData->player_block[fp->player].stock_count = spawn->stock_count;
     }
     fp->lod_current = fp->lod_match = spawn->model_lod;
 
@@ -373,7 +373,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
     fp->is_invisible = FALSE;
     fp->x18E_flag_b0 = FALSE;
 
-    fp->display_state = 0;
+    fp->display_mode = dbObject_DisplayMode_Master;
 
     fp->is_playing_sfx = FALSE;
     fp->x191_flag_b0 = FALSE;
