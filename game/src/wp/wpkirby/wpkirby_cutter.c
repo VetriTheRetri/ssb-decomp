@@ -106,7 +106,7 @@ bool32 wpKirby_Cutter_ProcReflector(GObj *weapon_gobj)
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    wp->lifetime = ITFINALCUTTER_LIFETIME;
+    wp->lifetime = WPFINALCUTTER_LIFETIME;
 
     wpMain_ReflectorInvertLR(wp, fp);
     func_ovl3_80167FA0(weapon_gobj);
@@ -127,9 +127,9 @@ GObj* wpKirby_Cutter_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->lifetime = ITFINALCUTTER_LIFETIME;
+    wp->lifetime = WPFINALCUTTER_LIFETIME;
 
-    wp->phys_info.vel_air.x = wp->lr * ITFINALCUTTER_VEL;
+    wp->phys_info.vel_air.x = wp->lr * WPFINALCUTTER_VEL;
 
     if (mpCollision_GetUUCommonUp(fp->coll_data.ground_line_id, pos, NULL, NULL, &wp->coll_data.ground_angle) != FALSE)
     {

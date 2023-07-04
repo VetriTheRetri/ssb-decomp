@@ -20,7 +20,7 @@ void func_ovl3_80182CA8(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->it_multi = ATDOGAS_DESPAWN_WAIT;
+    ap->it_multi = ITDOGAS_DESPAWN_WAIT;
 
     itMain_SetItemStatus(item_gobj, Article_Dogas_Status, 1);
 }
@@ -34,14 +34,14 @@ void func_ovl3_80182CDC(GObj *item_gobj)
 
     if (ap->item_vars.dogas.smog_spawn_wait <= 0)
     {
-        vel.x = ATDOGAS_SMOG_VEL_XY;
-        vel.y = ATDOGAS_SMOG_VEL_XY;
+        vel.x = ITDOGAS_SMOG_VEL_XY;
+        vel.y = ITDOGAS_SMOG_VEL_XY;
         vel.z = 0.0F;
 
         pos = joint->translate;
 
-        pos.x += (rand_f32() * ATDOGAS_SMOG_MUL_OFF_X) - ATDOGAS_SMOG_SUB_OFF_X;
-        pos.y += (rand_f32() * ATDOGAS_SMOG_MUL_OFF_Y) - ATDGOAS_SMOG_SUB_OFF_Y;
+        pos.x += (rand_f32() * ITDOGAS_SMOG_MUL_OFF_X) - ITDOGAS_SMOG_SUB_OFF_X;
+        pos.y += (rand_f32() * ITDOGAS_SMOG_MUL_OFF_Y) - ATDGOAS_SMOG_SUB_OFF_Y;
 
         if (pos.x < joint->translate.x)
         {
@@ -54,7 +54,7 @@ void func_ovl3_80182CDC(GObj *item_gobj)
         func_ovl3_80183144(item_gobj, &pos, &vel);
         func_800269C0(0x83U);
 
-        ap->item_vars.dogas.smog_spawn_wait = ATDOGAS_SMOG_SPAWN_WAIT;
+        ap->item_vars.dogas.smog_spawn_wait = ITDOGAS_SMOG_SPAWN_WAIT;
 
         ap->it_multi--;
     }
@@ -85,7 +85,7 @@ void func_ovl3_80182E78(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    ap->it_multi = ATDOGAS_SMOG_SPAWN_COUNT;
+    ap->it_multi = ITDOGAS_SMOG_SPAWN_COUNT;
 
     ap->item_vars.dogas.smog_spawn_wait = 0;
 
@@ -155,11 +155,11 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.x = 0.0F;
         ap->phys_info.vel_air.z = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         func_8000BD1C(joint->next, itGetPData(ap, D_NF_00012820, D_NF_00013624), 0.0F); // Linker thing
     }
@@ -195,15 +195,15 @@ GObj* func_ovl3_80183144(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
     }
     ip = wpGetStruct(weapon_gobj);
 
-    ip->lifetime = ATDOGAS_SMOG_LIFETIME;
+    ip->lifetime = ITDOGAS_SMOG_LIFETIME;
 
-    ip->weapon_vars.smog.hit_desc = (wpCommonAttributes*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset_wp_hit); // Dude I had a stroke trying to match this
+    ip->weapon_vars.smog.hit_desc = (wpCommonAttributes*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset); // Dude I had a stroke trying to match this
 
     joint = DObjGetStruct(weapon_gobj);
 
     ip->phys_info.vel = *vel;
 
-    func_80008CC0(joint->next, 0x2CU, 0U);
+    func_80008CC0(joint->next, 0x2C, 0);
 
     joint->translate = *pos;
 

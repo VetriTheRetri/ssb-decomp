@@ -37,11 +37,11 @@ bool32 func_ovl3_8017D63C(GObj *item_gobj)
     joint->scale.x = 2.0F;
     joint->scale.y = 2.0F;
 
-    ap->item_vars.bumper.hit_anim_length = ATBUMPER_HIT_ANIM_LENGTH;
+    ap->item_vars.bumper.hit_anim_length = ITBUMPER_HIT_ANIM_LENGTH;
 
     joint->mobj->anim_frame = 1.0F;
 
-    ap->it_multi = ATBUMPER_HIT_SCALE;
+    ap->it_multi = ITBUMPER_HIT_SCALE;
 
     return FALSE;
 }
@@ -57,7 +57,7 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         Item_Struct *ap;
         DObj *joint;
 
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         ap = itGetStruct(item_gobj);
         joint = DObjGetStruct(item_gobj);
@@ -75,8 +75,8 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         if (Match_Info->gr_kind == Gr_Kind_Castle)
         {
-            ap->item_hit.knockback_weight = ATBUMPER_CASTLE_KNOCKBACK;
-            ap->item_hit.angle = ATBUMPER_CASTLE_ANGLE;
+            ap->item_hit.knockback_weight = ITBUMPER_CASTLE_KNOCKBACK;
+            ap->item_hit.angle = ITBUMPER_CASTLE_ANGLE;
         }
     }
     return item_gobj;

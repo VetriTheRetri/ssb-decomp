@@ -3635,7 +3635,7 @@ glabel func_ovl7_80190260
   /* 116CA0 80190480 AFA20094 */        sw $v0, 0x94($sp)
   /* 116CA4 80190484 02802025 */        or $a0, $s4, $zero
   /* 116CA8 80190488 358D0080 */       ori $t5, $t4, 0x80
-  /* 116CAC 8019048C 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 116CAC 8019048C 0C035FCF */       jal ftManager_CreateFighter
   /* 116CB0 80190490 A3AD007B */        sb $t5, 0x7b($sp)
   /* 116CB4 80190494 02002025 */        or $a0, $s0, $zero
   /* 116CB8 80190498 0C039F13 */       jal ftCommon_ClearPlayerMatchStats

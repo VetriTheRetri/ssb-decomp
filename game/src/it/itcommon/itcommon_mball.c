@@ -148,8 +148,8 @@ bool32 itMBall_AFall_ProcUpdate(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATMBALL_GRAVITY, ATMBALL_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
 
@@ -208,8 +208,8 @@ bool32 itMBall_FThrow_ProcUpdate(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATMBALL_GRAVITY, ATMBALL_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
 
@@ -470,7 +470,7 @@ GObj* itCommon_MBall_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fl
 
         joint->translate = translate;
 
-        ip->it_multi = ATMBALL_SPAWN_WAIT;
+        ip->it_multi = ITMBALL_SPAWN_WAIT;
 
         ip->item_vars.m_ball.is_rebound = FALSE;
 

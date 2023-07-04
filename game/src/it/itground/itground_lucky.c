@@ -28,11 +28,11 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
             {
                 pos = joint->translate;
 
-                pos.x -= ATGRLUCKY_EGG_SPAWN_OFF_X;
-                pos.y += ATGRLUCKY_EGG_SPAWN_OFF_Y;
+                pos.x -= ITGRLUCKY_EGG_SPAWN_OFF_X;
+                pos.y += ITGRLUCKY_EGG_SPAWN_OFF_Y;
 
-                vel.x = -((rand_f32() * ATGRLUCKY_EGG_SPAWN_MUL) + ATGRLUCKY_EGG_SPAWN_ADD_X);
-                vel.y = (rand_f32() * ATGRLUCKY_EGG_SPAWN_MUL) + ATGRLUCKY_EGG_SPAWN_ADD_Y;
+                vel.x = -((rand_f32() * ITGRLUCKY_EGG_SPAWN_MUL) + ITGRLUCKY_EGG_SPAWN_ADD_X);
+                vel.y = (rand_f32() * ITGRLUCKY_EGG_SPAWN_MUL) + ITGRLUCKY_EGG_SPAWN_ADD_Y;
                 vel.z = 0.0F;
 
                 egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
@@ -73,7 +73,7 @@ bool32 func_ovl3_8017C400(GObj *item_gobj)
     joint->translate.x += ap->item_vars.gr_lucky.pos.x;
     joint->translate.y += ap->item_vars.gr_lucky.pos.y;
 
-    if ((joint->dobj_f2 >= ATGRLUCKY_EGG_SPAWN_BEGIN) && (joint->dobj_f2 <= ATGRLUCKY_EGG_SPAWN_END))
+    if ((joint->dobj_f2 >= ITGRLUCKY_EGG_SPAWN_BEGIN) && (joint->dobj_f2 <= ITGRLUCKY_EGG_SPAWN_END))
     {
         func_ovl3_8017C280(item_gobj);
     }
@@ -100,11 +100,11 @@ bool32 jtgt_ovl3_8017C4BC(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
-    func_ovl3_80172558(ap, ATGRLUCKY_GRAVITY, ATGRLUCKY_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITGRLUCKY_GRAVITY, ITGRLUCKY_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
 
-    joint->rotate.z -= ATGRLUCKY_HIT_ROTATE_Z * ap->lr;
+    joint->rotate.z -= ITGRLUCKY_HIT_ROTATE_Z * ap->lr;
 
     return FALSE;
 }
@@ -155,7 +155,7 @@ GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->it_multi = 0;
 
-        ap->item_vars.gr_lucky.egg_spawn_wait = ATGRLUCKY_EGG_SPAWN_WAIT;
+        ap->item_vars.gr_lucky.egg_spawn_wait = ITGRLUCKY_EGG_SPAWN_WAIT;
 
         func_800269C0(0x22AU);
     }

@@ -1893,7 +1893,7 @@ glabel func_ovl2_800D79F0
   /* 053734 800D7F34 03E00008 */        jr $ra
   /* 053738 800D7F38 00000000 */       nop 
 
-glabel func_ovl2_800D7F3C
+glabel ftManager_CreateFighter
   /* 05373C 800D7F3C 27BDFF98 */     addiu $sp, $sp, -0x68
   /* 053740 800D7F40 AFB60048 */        sw $s6, 0x48($sp)
   /* 053744 800D7F44 0080B025 */        or $s6, $a0, $zero
@@ -2352,36 +2352,36 @@ glabel func_ovl2_800D7F3C
   /* 053E04 800D8604 A6A000CE */        sh $zero, 0xce($s5)
   /* 053E08 800D8608 11410025 */       beq $t2, $at, .L800D86A0
   /* 053E0C 800D860C A6AB00D4 */        sh $t3, 0xd4($s5)
-  /* 053E10 800D8610 3C05800E */       lui $a1, %hi(func_ovl2_800E1260)
-  /* 053E14 800D8614 24A51260 */     addiu $a1, $a1, %lo(func_ovl2_800E1260)
+  /* 053E10 800D8610 3C05800E */       lui $a1, %hi(ftManager_ProcInterruptMain)
+  /* 053E14 800D8614 24A51260 */     addiu $a1, $a1, %lo(ftManager_ProcInterruptMain)
   /* 053E18 800D8618 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 053E1C 800D861C 24060001 */     addiu $a2, $zero, 1
-  /* 053E20 800D8620 3C05800E */       lui $a1, %hi(func_ovl2_800E2604)
-  /* 053E24 800D8624 24A52604 */     addiu $a1, $a1, %lo(func_ovl2_800E2604)
+  /* 053E20 800D8620 3C05800E */       lui $a1, %hi(ftManager_ProcPhysicsMapNormal)
+  /* 053E24 800D8624 24A52604 */     addiu $a1, $a1, %lo(ftManager_ProcPhysicsMapNormal)
   /* 053E28 800D8628 8FA40060 */        lw $a0, 0x60($sp)
   /* 053E2C 800D862C 24060001 */     addiu $a2, $zero, 1
   /* 053E30 800D8630 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 053E34 800D8634 24070004 */     addiu $a3, $zero, 4
-  /* 053E38 800D8638 3C05800E */       lui $a1, %hi(func_ovl2_800E2660)
-  /* 053E3C 800D863C 24A52660 */     addiu $a1, $a1, %lo(func_ovl2_800E2660)
+  /* 053E38 800D8638 3C05800E */       lui $a1, %hi(ftManager_ProcPhysicsMapCapture)
+  /* 053E3C 800D863C 24A52660 */     addiu $a1, $a1, %lo(ftManager_ProcPhysicsMapCapture)
   /* 053E40 800D8640 8FA40060 */        lw $a0, 0x60($sp)
   /* 053E44 800D8644 24060001 */     addiu $a2, $zero, 1
   /* 053E48 800D8648 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 053E4C 800D864C 24070003 */     addiu $a3, $zero, 3
-  /* 053E50 800D8650 3C05800E */       lui $a1, %hi(ftObjectProc_SearchAllCatch)
-  /* 053E54 800D8654 24A56100 */     addiu $a1, $a1, %lo(ftObjectProc_SearchAllCatch)
+  /* 053E50 800D8650 3C05800E */       lui $a1, %hi(ftManager_ProcSearchAllCatch)
+  /* 053E54 800D8654 24A56100 */     addiu $a1, $a1, %lo(ftManager_ProcSearchAllCatch)
   /* 053E58 800D8658 8FA40060 */        lw $a0, 0x60($sp)
   /* 053E5C 800D865C 24060001 */     addiu $a2, $zero, 1
   /* 053E60 800D8660 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 053E64 800D8664 24070002 */     addiu $a3, $zero, 2
-  /* 053E68 800D8668 3C05800E */       lui $a1, %hi(ftObjectProc_SearchAllHit)
-  /* 053E6C 800D866C 24A56178 */     addiu $a1, $a1, %lo(ftObjectProc_SearchAllHit)
+  /* 053E68 800D8668 3C05800E */       lui $a1, %hi(ftManager_ProcSearchAllHit)
+  /* 053E6C 800D866C 24A56178 */     addiu $a1, $a1, %lo(ftManager_ProcSearchAllHit)
   /* 053E70 800D8670 8FA40060 */        lw $a0, 0x60($sp)
   /* 053E74 800D8674 24060001 */     addiu $a2, $zero, 1
   /* 053E78 800D8678 0C002062 */       jal gOMObj_AddGObjCommonProc
   /* 053E7C 800D867C 24070001 */     addiu $a3, $zero, 1
-  /* 053E80 800D8680 3C05800E */       lui $a1, %hi(func_ovl2_800E61EC)
-  /* 053E84 800D8684 24A561EC */     addiu $a1, $a1, %lo(func_ovl2_800E61EC)
+  /* 053E80 800D8680 3C05800E */       lui $a1, %hi(ftManager_ProcUpdateMain)
+  /* 053E84 800D8684 24A561EC */     addiu $a1, $a1, %lo(ftManager_ProcUpdateMain)
   /* 053E88 800D8688 8FA40060 */        lw $a0, 0x60($sp)
   /* 053E8C 800D868C 24060001 */     addiu $a2, $zero, 1
   /* 053E90 800D8690 0C002062 */       jal gOMObj_AddGObjCommonProc
@@ -9974,7 +9974,7 @@ glabel ftScript_ProcessScriptEvent
   /* 05AAE0 800DF2E0 14860006 */       bne $a0, $a2, .L800DF2FC
   /* 05AAE4 800DF2E4 02202025 */        or $a0, $s1, $zero
   /* 05AAE8 800DF2E8 AFA80034 */        sw $t0, 0x34($sp)
-  /* 05AAEC 800DF2EC 0C03A14F */       jal ftCommon_ClearHitTargetsIndex
+  /* 05AAEC 800DF2EC 0C03A14F */       jal ftCollision_ClearHitRecordIndex
   /* 05AAF0 800DF2F0 AFAC0040 */        sw $t4, 0x40($sp)
   /* 05AAF4 800DF2F4 8FA80034 */        lw $t0, 0x34($sp)
   /* 05AAF8 800DF2F8 8FAC0040 */        lw $t4, 0x40($sp)
@@ -10274,7 +10274,7 @@ glabel ftScript_ProcessScriptEvent
   /* 05AF5C 800DF75C 24780004 */     addiu $t8, $v1, 4
   /* 05AF60 800DF760 AE180004 */        sw $t8, 4($s0)
   /* 05AF64 800DF764 8FA400C0 */        lw $a0, 0xc0($sp)
-  /* 05AF68 800DF768 0C03A19A */       jal ftCommon_RefreshHitIndex
+  /* 05AF68 800DF768 0C03A19A */       jal ftCollision_RefreshHitIndex
   /* 05AF6C 800DF76C 00A12824 */       and $a1, $a1, $at
   /* 05AF70 800DF770 100002C9 */         b .L800E0298
   /* 05AF74 800DF774 8FBF002C */        lw $ra, 0x2c($sp)
@@ -12166,7 +12166,7 @@ glabel ftCommon_UpdateColAnim
   /* 05CA58 800E1258 03E00008 */        jr $ra
   /* 05CA5C 800E125C 27BD0028 */     addiu $sp, $sp, 0x28
 
-glabel func_ovl2_800E1260
+glabel ftManager_ProcInterruptMain
   /* 05CA60 800E1260 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 05CA64 800E1264 AFBF0014 */        sw $ra, 0x14($sp)
   /* 05CA68 800E1268 AFA40020 */        sw $a0, 0x20($sp)
@@ -13175,7 +13175,7 @@ glabel func_ovl2_800E1FE0
   /* 05D840 800E2040 03E00008 */        jr $ra
   /* 05D844 800E2044 00000000 */       nop 
 
-glabel func_ovl2_800E2048
+glabel ftManager_ProcPhysicsMap
   /* 05D848 800E2048 27BDFF90 */     addiu $sp, $sp, -0x70
   /* 05D84C 800E204C AFBF0024 */        sw $ra, 0x24($sp)
   /* 05D850 800E2050 AFB10020 */        sw $s1, 0x20($sp)
@@ -13572,7 +13572,7 @@ glabel func_ovl2_800E2048
   /* 05DDFC 800E25FC 03E00008 */        jr $ra
   /* 05DE00 800E2600 27BD0070 */     addiu $sp, $sp, 0x70
 
-glabel func_ovl2_800E2604
+glabel ftManager_ProcPhysicsMapNormal
   /* 05DE04 800E2604 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 05DE08 800E2608 AFBF0014 */        sw $ra, 0x14($sp)
   /* 05DE0C 800E260C 8C820084 */        lw $v0, 0x84($a0)
@@ -13592,7 +13592,7 @@ glabel func_ovl2_800E2604
   /* 05DE40 800E2640 05620004 */     bltzl $t3, .L800E2654
   /* 05DE44 800E2644 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E2648:
-  /* 05DE48 800E2648 0C038812 */       jal func_ovl2_800E2048
+  /* 05DE48 800E2648 0C038812 */       jal ftManager_ProcPhysicsMap
   /* 05DE4C 800E264C 00000000 */       nop 
   /* 05DE50 800E2650 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E2654:
@@ -13600,7 +13600,7 @@ glabel func_ovl2_800E2604
   /* 05DE58 800E2658 03E00008 */        jr $ra
   /* 05DE5C 800E265C 00000000 */       nop 
 
-glabel func_ovl2_800E2660
+glabel ftManager_ProcPhysicsMapCapture
   /* 05DE60 800E2660 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 05DE64 800E2664 AFBF0014 */        sw $ra, 0x14($sp)
   /* 05DE68 800E2668 8C820084 */        lw $v0, 0x84($a0)
@@ -13620,7 +13620,7 @@ glabel func_ovl2_800E2660
   /* 05DE9C 800E269C 05630004 */     bgezl $t3, .L800E26B0
   /* 05DEA0 800E26A0 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E26A4:
-  /* 05DEA4 800E26A4 0C038812 */       jal func_ovl2_800E2048
+  /* 05DEA4 800E26A4 0C038812 */       jal ftManager_ProcPhysicsMap
   /* 05DEA8 800E26A8 00000000 */       nop 
   /* 05DEAC 800E26AC 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E26B0:
@@ -15998,7 +15998,7 @@ glabel func_ovl2_800E3EBC
   /* 060068 800E4868 03E00008 */        jr $ra
   /* 06006C 800E486C 27BD00C8 */     addiu $sp, $sp, 0xc8
 
-glabel ftObjectProc_SearchFighterHit
+glabel ftManager_SearchFighterHit
   /* 060070 800E4870 27BDFF58 */     addiu $sp, $sp, -0xa8
   /* 060074 800E4874 3C188004 */       lui $t8, %hi(gOMObjCommonLinks + (0x03 * 4))
   /* 060078 800E4878 8F1866FC */        lw $t8, %lo(gOMObjCommonLinks + (0x03 * 4))($t8)
@@ -16454,7 +16454,7 @@ glabel ftObjectProc_SearchFighterHit
   /* 0606CC 800E4ECC 03E00008 */        jr $ra
   /* 0606D0 800E4ED0 27BD00A8 */     addiu $sp, $sp, 0xa8
 
-glabel ftObjectProc_SearchItemHit
+glabel ftManager_SearchItemHit
   /* 0606D4 800E4ED4 27BDFF48 */     addiu $sp, $sp, -0xb8
   /* 0606D8 800E4ED8 3C0F8004 */       lui $t7, %hi(gOMObjCommonLinks + (0x05 * 4))
   /* 0606DC 800E4EDC 8DEF6704 */        lw $t7, %lo(gOMObjCommonLinks + (0x05 * 4))($t7)
@@ -16955,7 +16955,7 @@ glabel ftObjectProc_SearchItemHit
   /* 060DD4 800E55D4 03E00008 */        jr $ra
   /* 060DD8 800E55D8 27BD00B8 */     addiu $sp, $sp, 0xb8
 
-glabel ftObjectProc_SearchArticleHit
+glabel ftManager_SearchArticleHit
   /* 060DDC 800E55DC 27BDFF48 */     addiu $sp, $sp, -0xb8
   /* 060DE0 800E55E0 3C0F8004 */       lui $t7, %hi(gOMObjCommonLinks + (0x04 * 4))
   /* 060DE4 800E55E4 8DEF6700 */        lw $t7, %lo(gOMObjCommonLinks + (0x04 * 4))($t7)
@@ -17483,7 +17483,7 @@ glabel grHitCollision_HitCheckGetPointer
   /* 061518 800E5D18 03E00008 */        jr $ra
   /* 06151C 800E5D1C 00000000 */       nop 
 
-glabel ftObjectProc_SearchGroundHit
+glabel ftManager_SearchGroundHit
   /* 061520 800E5D20 27BDFFA8 */     addiu $sp, $sp, -0x58
   /* 061524 800E5D24 AFBF003C */        sw $ra, 0x3c($sp)
   /* 061528 800E5D28 AFB60038 */        sw $s6, 0x38($sp)
@@ -17570,7 +17570,7 @@ glabel ftObjectProc_SearchGroundHit
   /* 061650 800E5E50 03E00008 */        jr $ra
   /* 061654 800E5E54 27BD0058 */     addiu $sp, $sp, 0x58
 
-glabel ftObjectProc_SearchFighterCatch
+glabel ftManager_SearchFighterCatch
   /* 061658 800E5E58 27BDFF78 */     addiu $sp, $sp, -0x88
   /* 06165C 800E5E5C AFBF0044 */        sw $ra, 0x44($sp)
   /* 061660 800E5E60 AFBE0040 */        sw $fp, 0x40($sp)
@@ -17757,7 +17757,7 @@ glabel ftObjectProc_SearchFighterCatch
   /* 0618F8 800E60F8 03E00008 */        jr $ra
   /* 0618FC 800E60FC 27BD0088 */     addiu $sp, $sp, 0x88
 
-glabel ftObjectProc_SearchAllCatch
+glabel ftManager_ProcSearchAllCatch
   /* 061900 800E6100 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 061904 800E6104 AFBF001C */        sw $ra, 0x1c($sp)
   /* 061908 800E6108 AFB10018 */        sw $s1, 0x18($sp)
@@ -17769,7 +17769,7 @@ glabel ftObjectProc_SearchAllCatch
   /* 061920 800E6120 000EC480 */       sll $t8, $t6, 0x12
   /* 061924 800E6124 07030010 */     bgezl $t8, .L800E6168
   /* 061928 800E6128 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 06192C 800E612C 0C039796 */       jal ftObjectProc_SearchFighterCatch
+  /* 06192C 800E612C 0C039796 */       jal ftManager_SearchFighterCatch
   /* 061930 800E6130 02202025 */        or $a0, $s1, $zero
   /* 061934 800E6134 8E190830 */        lw $t9, 0x830($s0)
   /* 061938 800E6138 5320000B */      beql $t9, $zero, .L800E6168
@@ -17790,7 +17790,7 @@ glabel ftObjectProc_SearchAllCatch
   /* 061970 800E6170 03E00008 */        jr $ra
   /* 061974 800E6174 27BD0020 */     addiu $sp, $sp, 0x20
 
-glabel ftObjectProc_SearchAllHit
+glabel ftManager_ProcSearchAllHit
   /* 061978 800E6178 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 06197C 800E617C AFBF001C */        sw $ra, 0x1c($sp)
   /* 061980 800E6180 AFB00018 */        sw $s0, 0x18($sp)
@@ -17801,13 +17801,13 @@ glabel ftObjectProc_SearchAllHit
   /* 061994 800E6194 000EC240 */       sll $t8, $t6, 9
   /* 061998 800E6198 07020010 */     bltzl $t8, .L800E61DC
   /* 06199C 800E619C 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 0619A0 800E61A0 0C03921C */       jal ftObjectProc_SearchFighterHit
+  /* 0619A0 800E61A0 0C03921C */       jal ftManager_SearchFighterHit
   /* 0619A4 800E61A4 AC2011C0 */        sw $zero, %lo(ftHitCollisionLogIndex)($at)
-  /* 0619A8 800E61A8 0C039577 */       jal ftObjectProc_SearchArticleHit
+  /* 0619A8 800E61A8 0C039577 */       jal ftManager_SearchArticleHit
   /* 0619AC 800E61AC 02002025 */        or $a0, $s0, $zero
-  /* 0619B0 800E61B0 0C0393B5 */       jal ftObjectProc_SearchItemHit
+  /* 0619B0 800E61B0 0C0393B5 */       jal ftManager_SearchItemHit
   /* 0619B4 800E61B4 02002025 */        or $a0, $s0, $zero
-  /* 0619B8 800E61B8 0C039748 */       jal ftObjectProc_SearchGroundHit
+  /* 0619B8 800E61B8 0C039748 */       jal ftManager_SearchGroundHit
   /* 0619BC 800E61BC 02002025 */        or $a0, $s0, $zero
   /* 0619C0 800E61C0 3C198013 */       lui $t9, %hi(ftHitCollisionLogIndex)
   /* 0619C4 800E61C4 8F3911C0 */        lw $t9, %lo(ftHitCollisionLogIndex)($t9)
@@ -17822,7 +17822,7 @@ glabel ftObjectProc_SearchAllHit
   /* 0619E4 800E61E4 03E00008 */        jr $ra
   /* 0619E8 800E61E8 00000000 */       nop 
 
-glabel func_ovl2_800E61EC
+glabel ftManager_ProcUpdateMain
   /* 0619EC 800E61EC 27BDFF60 */     addiu $sp, $sp, -0xa0
   /* 0619F0 800E61F0 AFBF0024 */        sw $ra, 0x24($sp)
   /* 0619F4 800E61F4 AFB00020 */        sw $s0, 0x20($sp)
@@ -20350,7 +20350,7 @@ glabel ftCommon_ClearHitAll
   /* 063D34 800E8534 03E00008 */        jr $ra
   /* 063D38 800E8538 A04F018C */        sb $t7, 0x18c($v0)
 
-glabel ftCommon_ClearHitTargetsIndex
+glabel ftCollision_ClearHitRecordIndex
   /* 063D3C 800E853C 00057080 */       sll $t6, $a1, 2
   /* 063D40 800E8540 01C57023 */      subu $t6, $t6, $a1
   /* 063D44 800E8544 000E7100 */       sll $t6, $t6, 4
@@ -20427,7 +20427,7 @@ glabel ftCommon_ClearHitTargetsIndex
   /* 063E60 800E8660 03E00008 */        jr $ra
   /* 063E64 800E8664 A04E030C */        sb $t6, 0x30c($v0)
 
-glabel ftCommon_RefreshHitIndex
+glabel ftCollision_RefreshHitIndex
   /* 063E68 800E8668 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 063E6C 800E866C 00057880 */       sll $t7, $a1, 2
   /* 063E70 800E8670 AFBF0014 */        sw $ra, 0x14($sp)
@@ -20441,7 +20441,7 @@ glabel ftCommon_RefreshHitIndex
   /* 063E90 800E8690 AF0E0294 */        sw $t6, 0x294($t8)
   /* 063E94 800E8694 9088018C */       lbu $t0, 0x18c($a0)
   /* 063E98 800E8698 35090080 */       ori $t1, $t0, 0x80
-  /* 063E9C 800E869C 0C03A14F */       jal ftCommon_ClearHitTargetsIndex
+  /* 063E9C 800E869C 0C03A14F */       jal ftCollision_ClearHitRecordIndex
   /* 063EA0 800E86A0 A089018C */        sb $t1, 0x18c($a0)
   /* 063EA4 800E86A4 8FBF0014 */        lw $ra, 0x14($sp)
   /* 063EA8 800E86A8 27BD0018 */     addiu $sp, $sp, 0x18
@@ -22134,8 +22134,8 @@ glabel gmCommonObject_DamageCalcKnockback
   /* 0655C8 800E9DC8 C430FF18 */      lwc1 $f16, %lo(D_ovl2_8012FF18)($at)
   /* 0655CC 800E9DCC 3C014190 */       lui $at, (0x41900000 >> 16) # 18.0
   /* 0655D0 800E9DD0 8F1850E8 */        lw $t8, %lo(Match_Info)($t8)
-  /* 0655D4 800E9DD4 3C028013 */       lui $v0, %hi(Knockback_Handicap_MulTable)
-  /* 0655D8 800E9DD8 2442C830 */     addiu $v0, $v0, %lo(Knockback_Handicap_MulTable)
+  /* 0655D4 800E9DD4 3C028013 */       lui $v0, %hi(ftDamage_HandicapDesc)
+  /* 0655D8 800E9DD8 2442C830 */     addiu $v0, $v0, %lo(ftDamage_HandicapDesc)
   /* 0655DC 800E9DDC 9319000B */       lbu $t9, 0xb($t8)
   /* 0655E0 800E9DE0 46123100 */     add.s $f4, $f6, $f18
   /* 0655E4 800E9DE4 44819000 */      mtc1 $at, $f18 # 18.0 to cop1
@@ -22192,8 +22192,8 @@ glabel gmCommonObject_DamageCalcKnockback
   /* 0656A8 800E9EA8 3C19800A */       lui $t9, %hi(Match_Info)
   /* 0656AC 800E9EAC 46080102 */     mul.s $f4, $f0, $f8
   /* 0656B0 800E9EB0 8F3950E8 */        lw $t9, %lo(Match_Info)($t9)
-  /* 0656B4 800E9EB4 3C028013 */       lui $v0, %hi(Knockback_Handicap_MulTable)
-  /* 0656B8 800E9EB8 2442C830 */     addiu $v0, $v0, %lo(Knockback_Handicap_MulTable)
+  /* 0656B4 800E9EB4 3C028013 */       lui $v0, %hi(ftDamage_HandicapDesc)
+  /* 0656B8 800E9EB8 2442C830 */     addiu $v0, $v0, %lo(ftDamage_HandicapDesc)
   /* 0656BC 800E9EBC 9328000B */       lbu $t0, 0xb($t9)
   /* 0656C0 800E9EC0 46102482 */     mul.s $f18, $f4, $f16
   /* 0656C4 800E9EC4 C7A40030 */      lwc1 $f4, 0x30($sp)
@@ -22282,8 +22282,8 @@ glabel grMapObject_DamageCalcKnockback
   /* 0657F8 800E9FF8 3C018013 */       lui $at, %hi(D_ovl2_8012FF34)
   /* 0657FC 800E9FFC 8FAF002C */        lw $t7, 0x2c($sp)
   /* 065800 800EA000 8FB80034 */        lw $t8, 0x34($sp)
-  /* 065804 800EA004 3C028013 */       lui $v0, %hi(Knockback_Handicap_MulTable)
-  /* 065808 800EA008 2442C830 */     addiu $v0, $v0, %lo(Knockback_Handicap_MulTable)
+  /* 065804 800EA004 3C028013 */       lui $v0, %hi(ftDamage_HandicapDesc)
+  /* 065808 800EA008 2442C830 */     addiu $v0, $v0, %lo(ftDamage_HandicapDesc)
   /* 06580C 800EA00C 46105482 */     mul.s $f18, $f10, $f16
   /* 065810 800EA010 C42AFF34 */      lwc1 $f10, %lo(D_ovl2_8012FF34)($at)
   /* 065814 800EA014 3C014190 */       lui $at, (0x41900000 >> 16) # 18.0
@@ -22332,8 +22332,8 @@ glabel grMapObject_DamageCalcKnockback
   /* 0658BC 800EA0BC 8FAE002C */        lw $t6, 0x2c($sp)
   /* 0658C0 800EA0C0 8FAF0034 */        lw $t7, 0x34($sp)
   /* 0658C4 800EA0C4 46060402 */     mul.s $f16, $f0, $f6
-  /* 0658C8 800EA0C8 3C028013 */       lui $v0, %hi(Knockback_Handicap_MulTable)
-  /* 0658CC 800EA0CC 2442C830 */     addiu $v0, $v0, %lo(Knockback_Handicap_MulTable)
+  /* 0658C8 800EA0C8 3C028013 */       lui $v0, %hi(ftDamage_HandicapDesc)
+  /* 0658CC 800EA0CC 2442C830 */     addiu $v0, $v0, %lo(ftDamage_HandicapDesc)
   /* 0658D0 800EA0D0 000FC0C0 */       sll $t8, $t7, 3
   /* 0658D4 800EA0D4 0058C821 */      addu $t9, $v0, $t8
   /* 0658D8 800EA0D8 8FA80038 */        lw $t0, 0x38($sp)

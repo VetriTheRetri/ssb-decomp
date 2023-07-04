@@ -6,7 +6,7 @@ bool32 jtgt_ovl3_80182630(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATSAWAMURA_GRAVITY, ATSAWAMURA_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
 
     return FALSE;
 }
@@ -61,13 +61,13 @@ bool32 func_ovl3_80182764(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATSAWAMURA_GRAVITY, ATSAWAMURA_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
 
-    if ((ap->lr == RIGHT) && ((Ground_Info->blastzone_right - ATSAWAMURA_DESPAWN_OFF_X) <= joint->translate.x))
+    if ((ap->lr == RIGHT) && ((Ground_Info->blastzone_right - ITSAWAMURA_DESPAWN_OFF_X) <= joint->translate.x))
     {
         return TRUE;
     }
-    else if ((ap->lr == LEFT) && (joint->translate.x <= (Ground_Info->blastzone_left + ATSAWAMURA_DESPAWN_OFF_X)))
+    else if ((ap->lr == LEFT) && (joint->translate.x <= (Ground_Info->blastzone_left + ITSAWAMURA_DESPAWN_OFF_X)))
     {
         return TRUE;
     }
@@ -92,13 +92,13 @@ void func_ovl3_8018285C(GObj *item_gobj, GObj *fighter_gobj)
 
     target_pos = fj->translate;
 
-    target_pos.y += ATSAWAMURA_TARGET_POS_OFF_Y - fp->coll_data.object_coll.bottom;
+    target_pos.y += ITSAWAMURA_TARGET_POS_OFF_Y - fp->coll_data.object_coll.bottom;
 
     vec3f_sub(&dist, &target_pos, &aj->translate);
 
     ap->phys_info.vel_air.z = 0.0F;
     ap->phys_info.vel_air.y = 0.0F;
-    ap->phys_info.vel_air.x = ATSAWAMURA_KICK_VEL_X;
+    ap->phys_info.vel_air.x = ITSAWAMURA_KICK_VEL_X;
 
     vec3_get_euler_rotation(&ap->phys_info.vel, 4, atan2f(dist.y, dist.x));
 
@@ -165,9 +165,9 @@ void func_ovl3_80182958(GObj *item_gobj)
 
         func_800269C0(0x13FU);
     }
-    ap->it_multi = ATSAWAMURA_LIFETIME;
+    ap->it_multi = ITSAWAMURA_LIFETIME;
 
-    ap->item_hit.size = ATSAWAMURA_KICK_SIZE;
+    ap->item_hit.size = ITSAWAMURA_KICK_SIZE;
 }
 
 void func_ovl3_80182AAC(GObj *item_gobj)
@@ -182,7 +182,7 @@ bool32 jtgt_ovl3_80182AE0(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->it_multi = ATSAWAMURA_KICK_WAIT;
+        ap->it_multi = ITSAWAMURA_KICK_WAIT;
 
         ap->phys_info.vel_air.y = 0.0F;
 
@@ -216,11 +216,11 @@ GObj* jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         DObj *joint = DObjGetStruct(item_gobj);
         Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         func_80008CC0(joint, 0x48U, 0U);
 

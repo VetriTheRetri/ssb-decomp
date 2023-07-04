@@ -62,9 +62,9 @@ bool32 wpNess_PKFire_ProcHit(GObj *weapon_gobj)
 
     vec3f_normalize(&pos);
 
-    pos.x = (pos.x * ITPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.x;
-    pos.y = (pos.y * ITPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.y;
-    pos.z = (pos.z * ITPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.z;
+    pos.x = (pos.x * WPPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.x;
+    pos.y = (pos.y * WPPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.y;
+    pos.z = (pos.z * WPPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.z;
 
     itNess_PKFire_CreateItem(weapon_gobj, &pos, &vel);
 
@@ -90,7 +90,7 @@ bool32 wpNess_PKFire_ProcReflector(GObj *weapon_gobj)
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    wp->lifetime = ITPKFIRE_LIFETIME;
+    wp->lifetime = WPPKFIRE_LIFETIME;
 
     wpMain_ReflectorInvertLR(wp, fp);
     wpMain_VelSetLR(weapon_gobj);
@@ -121,7 +121,7 @@ GObj* wpNess_PKFire_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel, f32
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->lifetime = ITPKFIRE_LIFETIME;
+    wp->lifetime = WPPKFIRE_LIFETIME;
 
     wp->phys_info.vel = *vel;
 

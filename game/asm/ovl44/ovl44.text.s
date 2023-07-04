@@ -162,7 +162,7 @@ glabel func_ovl44_80131BE8
   /* 16F360 80131D30 E7B40060 */      swc1 $f20, 0x60($sp)
   /* 16F364 80131D34 E7B40064 */      swc1 $f20, 0x64($sp)
   /* 16F368 80131D38 02A02025 */        or $a0, $s5, $zero
-  /* 16F36C 80131D3C 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 16F36C 80131D3C 0C035FCF */       jal ftManager_CreateFighter
   /* 16F370 80131D40 AFB90090 */        sw $t9, 0x90($sp)
   /* 16F374 80131D44 8E280000 */        lw $t0, ($s1)
   /* 16F378 80131D48 00408025 */        or $s0, $v0, $zero

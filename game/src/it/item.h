@@ -394,9 +394,9 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     u32 times_thrown : 3;               // Number of times item has been dropped or thrown by player; overflows after 7
     u32 weight : 1;                     // 0 = item is heavy, 1 = item is light
     u32 is_damage_all : 1;              // Item ignores ownership and can damage anything?
-    u32 is_attach_surface : 1;          // Item is "sticking" to a surface? Related to attach_line_id, but if it remains TRUE when there is no collision, it still falls?
+    u32 is_attach_surface : 1;          // Item is "sticking" to a collision line specified by attach_line_id
     u32 is_thrown : 1;                  // Apply magnitude and stale multiplier to damage output
-    u16 attach_line_id;                 // Line ID that item is attached to? I don't understand how this works
+    u16 attach_line_id;                 // Line ID that item is attached to
     u32 pickup_wait : 12;               // Number of frames item can last without being picked up (if applicable)
     u32 is_allow_knockback : 1;         // Item can receive knockback velocity?
     u32 is_unused_item_bool : 1;        // Unused? Set various times, but no item process makes use of it
@@ -411,7 +411,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     u32 item_event_index : 4;           // Item hitbox script index? When in doubt, make this u8 : 4
 
-    f32 rotate_speed;                   // Item rotation step
+    f32 rotate_step;                    // Item spin rotation step
 
     GObj *indicator_gobj;               // Red arrow pickup indicator GObj
     u8 arrow_flash_timer;               // Frequency of red arrow indicator flash
@@ -419,7 +419,6 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     union item_vars                     // Item-specific state variables
     {
         // Common items
-
         itCommon_ItemVars_Taru taru;
         itCommon_ItemVars_BombHei bombhei;
         itCommon_ItemVars_Bumper bumper;
@@ -427,14 +426,12 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
         itCommon_ItemVars_MBall m_ball;
 
         // Fighter items
-
         itFighter_ItemVars_PKFire pkfire;
         itFighter_ItemVars_LinkBomb link_bomb;
 
         // Stage items
-
         itGround_ItemVars_Pakkun pakkun;
-        itGround_ItemVars_RaceBomb gr_bomb;
+        itGround_ItemVars_RaceBomb rbomb;
         itGround_ItemVars_GrLucky gr_lucky;
         itGround_ItemVars_Marumine marumine;
         itGround_ItemVars_Hitokage hitokage;
@@ -442,7 +439,6 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
         itGround_ItemVars_Porygon porygon;
 
         // Poké Ball Pokémon
-
         itMonster_ItemVars_Iwark iwark;
         itMonster_ItemVars_Kabigon kabigon;
         itMonster_ItemVars_Tosakinto tosakinto;

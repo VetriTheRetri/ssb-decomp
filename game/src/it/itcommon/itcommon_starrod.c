@@ -2,131 +2,253 @@
 #include "weapon.h"
 #include "fighter.h"
 
-bool32 jtgt_ovl3_80177E80(GObj *item_gobj)
+itCreateDesc itCommon_StarRod_ItemDesc =
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    It_Kind_StarRod,                        // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0x48C,                                  // Offset of item attributes in file?
+    0x1B,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itStarRod_AFall_ProcUpdate,             // Proc Update
+    itStarRod_AFall_ProcMap,                // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
 
-    func_ovl3_80172558(ap, ATSTARROD_GRAVITY, ATSTARROD_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+itStatusDesc itCommon_StarRod_StatusDesc[itStatus_StarRod_EnumMax] =
+{
+    // Status 0 (Ground Wait)
+    {
+        NULL,                               // Proc Update
+        itStarRod_GWait_ProcMap,            // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 1 (Air Wait Fall)
+    {
+        itStarRod_AFall_ProcUpdate,         // Proc Update
+        itStarRod_AFall_ProcMap,            // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 2 (Fighter Hold)
+    {
+        NULL,                               // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 3 (Fighter Throw)
+    {
+        itStarRod_FThrow_ProcUpdate,        // Proc Update
+        itStarRod_FThrow_ProcMap,           // Proc Map
+        itStarRod_FThrow_ProcHit,           // Proc Hit
+        itStarRod_FThrow_ProcHit,           // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itStarRod_FThrow_ProcHit,           // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 4 (Fighter Drop)
+    {
+        itStarRod_AFall_ProcUpdate,         // Proc Update
+        itStarRod_FDrop_ProcMap,            // Proc Map
+        itStarRod_FThrow_ProcHit,           // Proc Hit
+        itStarRod_FThrow_ProcHit,           // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itStarRod_FThrow_ProcHit,           // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
+wpCreateDesc wpStarRod_Star_WeaponDesc =
+{
+    0,                                      // Render flags?
+    Wp_Kind_StarRodStar,                    // Weapon Kind
+    &gItemFileData,                         // Pointer to character's loaded files?
+    0x4D4,                                  // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpStarRod_Star_ProcUpdate,              // Proc Update
+    wpStarRod_Star_ProcMap,                 // Proc Map
+    wpStarRod_Star_ProcHit,                 // Proc Hit
+    wpStarRod_Star_ProcHit,                 // Proc Shield
+    wpStarRod_Star_ProcHop,                 // Proc Hop
+    wpStarRod_Star_ProcHit,                 // Proc Set-Off
+    wpStarRod_Star_ProcReflector,           // Proc Reflector
+    wpStarRod_Star_ProcHit                  // Proc Absorb
+};
+
+typedef enum itStarRodStatus
+{
+    itStatus_StarRod_GWait,
+    itStatus_StarRod_AFall,
+    itStatus_StarRod_FHold,
+    itStatus_StarRod_FThrow,
+    itStatus_StarRod_FDrop,
+    itStatus_StarRod_EnumMax
+
+} itStarRodStatus;
+
+// 0x80177E80
+bool32 itStarRod_AFall_ProcUpdate(GObj *item_gobj)
+{
+    Item_Struct *ip = itGetStruct(item_gobj);
+
+    itMain_UpdatePhysicsAir(ip, ITSTARROD_GRAVITY, ITSTARROD_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80177EBC(GObj *item_gobj)
+// 0x80177EBC
+bool32 itStarRod_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_80177F4C);
+    func_ovl3_801735A0(item_gobj, itStarRod_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80177EE4(GObj *item_gobj)
+// 0x80177EE4
+bool32 itStarRod_AFall_ProcMap(GObj *item_gobj)
 {
-    itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itStarRod_GWait_SetStatus);
 
     return FALSE;
 }
 
-extern itStatusDesc Article_StarRod_Status;
-
-void func_ovl3_80177F18(GObj *item_gobj)
+// 0x80177F18
+void itStarRod_GWait_SetStatus(GObj *item_gobj)
 {
     itMain_SetGroundPickup(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_StarRod_Status, 0);
+    itMain_SetItemStatus(item_gobj, itCommon_StarRod_StatusDesc, itStatus_StarRod_GWait);
 }
 
-void func_ovl3_80177F4C(GObj *item_gobj)
+// 0x80177F4C
+void itStarRod_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->is_allow_pickup = FALSE;
+    ip->is_allow_pickup = FALSE;
 
-    itMap_SetAir(ap);
-    itMain_SetItemStatus(item_gobj, Article_StarRod_Status, 1);
+    itMap_SetAir(ip);
+    itMain_SetItemStatus(item_gobj, itCommon_StarRod_StatusDesc, itStatus_StarRod_AFall);
 }
 
-void jtgt_ovl3_80177F90(GObj *item_gobj)
+// 0x80177F90
+void itStarRod_FHold_SetStatus(GObj *item_gobj)
 {
     DObjGetStruct(item_gobj)->rotate.y = 0.0F;
 
-    itMain_SetItemStatus(item_gobj, Article_StarRod_Status, 2);
+    itMain_SetItemStatus(item_gobj, itCommon_StarRod_StatusDesc, itStatus_StarRod_FHold);
 }
 
-bool32 jtgt_ovl3_80177FC4(GObj *item_gobj)
+// 0x80177FC4
+bool32 itStarRod_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATSTARROD_GRAVITY, ATSTARROD_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITSTARROD_GRAVITY, ITSTARROD_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80178000(GObj *item_gobj)
+// 0x80178000
+bool32 itStarRod_FThrow_ProcMap(GObj *item_gobj)
 {
-    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itStarRod_GWait_SetStatus);
 }
 
-bool32 jtgt_ovl3_80178030(GObj *item_gobj)
+// 0x80178030
+bool32 itStarRod_FThrow_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     func_ovl3_80172FE0(item_gobj);
 
     return FALSE;
 }
 
-void jtgt_ovl3_80178058(GObj *item_gobj)
+// 0x80178058
+void itStarRod_FThrow_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_StarRod_Status, 3);
-
+    itMain_SetItemStatus(item_gobj, itCommon_StarRod_StatusDesc, itStatus_StarRod_FThrow);
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 }
 
-bool32 jtgt_ovl3_8017809C(GObj *item_gobj)
+// 0x8017809C
+bool32 itStarRod_FDrop_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ap->it_multi == 0)
+    if (ip->it_multi == 0)
     {
         return func_ovl3_80173DF4(item_gobj, 0.2F);
     }
-    else return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80177F18);
+    else return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itStarRod_GWait_SetStatus);
 }
 
-void jtgt_ovl3_801780F0(GObj *item_gobj)
+// 0x801780F0
+void itStarRod_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_StarRod_Status, 4);
+    itMain_SetItemStatus(item_gobj, itCommon_StarRod_StatusDesc, itStatus_StarRod_FDrop);
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
 }
 
-extern itCreateDesc Article_StarRod_Data;
-
-GObj* jtgt_ovl3_80178134(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80178134
+GObj* itCommon_StarRod_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_StarRod_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_StarRod_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        Item_Struct *ip = itGetStruct(item_gobj);
 
-        ap->it_multi = ATSTARROD_AMMO_MAX;
+        ip->it_multi = ITSTARROD_AMMO_MAX;
 
-        ap->is_unused_item_bool = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
-        ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
+        ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }
     return item_gobj;
 }
 
-bool32 jtgt_ovl3_801781B0(GObj *weapon_gobj)
+// 0x801781B0
+bool32 wpStarRod_Star_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Vec3f pos;
     DObj *joint;
 
-    if (ip->weapon_vars.star.lifetime == 0)
+    if (wp->weapon_vars.star.lifetime == 0)
     {
         DObjGetStruct(weapon_gobj)->unk_0x54 = 2;
 
@@ -135,109 +257,112 @@ bool32 jtgt_ovl3_801781B0(GObj *weapon_gobj)
         return TRUE;
     }
 
-    ip->weapon_vars.star.lifetime--;
+    wp->weapon_vars.star.lifetime--;
 
     joint = DObjGetStruct(weapon_gobj);
 
-    joint->rotate.z += (-0.2F * ip->lr);
+    joint->rotate.z += (-0.2F * wp->lr);
 
-    if (ip->weapon_vars.star.lifetime % 2)
+    if (wp->weapon_vars.star.lifetime % 2)
     {
         pos.x = DObjGetStruct(weapon_gobj)->translate.x;
         pos.y = (s32)rand_u16_range(250) + (DObjGetStruct(weapon_gobj)->translate.y - 125.0F);
         pos.z = 0.0F;
 
-        func_ovl2_800FFEA4(&pos, ip->lr * -1.0F, weapon_gobj);
+        func_ovl2_800FFEA4(&pos, wp->lr * -1.0F, weapon_gobj);
     }
     return FALSE;
 }
 
-bool32 jtgt_ovl3_801782D4(GObj *weapon_gobj)
+// 0x801782D4
+bool32 wpStarRod_Star_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
     if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
-        func_ovl2_80102070(&DObjGetStruct(weapon_gobj)->translate, ip->lr);
+        func_ovl2_80102070(&DObjGetStruct(weapon_gobj)->translate, wp->lr);
 
-        func_800269C0(0x35U);
+        func_800269C0(0x35);
 
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_8017832C(GObj *weapon_gobj)
+// 0x8017832C
+bool32 wpStarRod_Star_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_80102070(&DObjGetStruct(weapon_gobj)->translate, ip->lr);
+    func_ovl2_80102070(&DObjGetStruct(weapon_gobj)->translate, wp->lr);
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_8017835C(GObj *weapon_gobj)
+// 0x8017835C
+bool32 wpStarRod_Star_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
+    func_80019438(&ip->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
 
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    if (ip->phys_info.vel_air.x > 0.0F)
+    if (wp->phys_info.vel_air.x > 0.0F)
     {
-        ip->lr = RIGHT;
+        wp->lr = RIGHT;
     }
-    else ip->lr = LEFT;
+    else wp->lr = LEFT;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80178404(GObj *weapon_gobj)
+// 0x80178404
+bool32 wpStarRod_Star_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorInvertLR(wp, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    ip->lr = -ip->lr;
+    wp->lr = -wp->lr;
 
     return FALSE;
 }
 
-extern u8 StarRod_Linker_Unk;
-extern wpCreateDesc Item_StarRod_Desc;
-extern uintptr_t D_ovl3_8018A1D0;
+extern intptr_t StarRod_Linker_Unk;
 
-GObj *func_ovl3_80178474(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
+// 0x80178474
+GObj* wpStarRod_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
 {
     GObj *weapon_gobj;
     DObj *joint;
-    Weapon_Struct *ip;
+    Weapon_Struct *wp;
 
     if (is_smash == TRUE)
     {
-        D_ovl3_8018A1D0 = (uintptr_t)&StarRod_Linker_Unk;
+        wpStarRod_Star_WeaponDesc.offset = (intptr_t)&StarRod_Linker_Unk; // Set attribute data on smash input - Linker thing
     }
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &Item_StarRod_Desc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpStarRod_Star_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)
     {
         return NULL;
     }
     joint = DObjGetStruct(weapon_gobj);
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel_air.x = ((!(is_smash)) ? ATSTARROD_AMMO_TILT_VEL_X : ATSTARROD_AMMO_SMASH_VEL_X) * ip->lr;
+    wp->phys_info.vel_air.x = ((!(is_smash)) ? ITSTARROD_AMMO_TILT_VEL_X : ITSTARROD_AMMO_SMASH_VEL_X) * wp->lr;
 
-    ip->weapon_vars.star.lifetime = (!(is_smash)) ? ATSTARROD_AMMO_TILT_LIFETIME : ATSTARROD_AMMO_SMASH_LIFETIME; // Why float lol
+    wp->weapon_vars.star.lifetime = (!(is_smash)) ? ITSTARROD_AMMO_TILT_LIFETIME : ITSTARROD_AMMO_SMASH_LIFETIME; // Why float lol
 
-    func_80008CC0(joint, 0x2EU, 0U);
+    func_80008CC0(joint, 0x2E, 0);
 
     joint->translate = *pos;
 
@@ -246,11 +371,12 @@ GObj *func_ovl3_80178474(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
     return weapon_gobj;
 }
 
-void func_ovl3_80178594(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
+// 0x80178594
+void ftCommon_StarRodSwing_CreateStar(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
 {
-    Item_Struct *ap = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
+    Item_Struct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
 
-    func_ovl3_80178474(fighter_gobj, pos, is_smash);
+    wpStarRod_Star_CreateWeapon(fighter_gobj, pos, is_smash);
 
-    ap->it_multi--;
+    ip->it_multi--;
 }

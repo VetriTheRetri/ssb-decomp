@@ -13,16 +13,16 @@ void func_ovl3_80180630(GObj *item_gobj)
 
         if (ap->it_kind == It_Kind_Kamex)
         {
-            pos.x += ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_X * ap->lr;
-            pos.y += ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_Y;
+            pos.x += ITKAMEX_KAMEX_HYDRO_SPAWN_OFF_X * ap->lr;
+            pos.y += ITKAMEX_KAMEX_HYDRO_SPAWN_OFF_Y;
         }
-        else pos.x += ATKAMEX_OTHER_HYDRO_SPAWN_OFF_X * ap->lr;
+        else pos.x += ITKAMEX_OTHER_HYDRO_SPAWN_OFF_X * ap->lr;
 
         func_ovl3_80180F9C(item_gobj, &pos);
         func_ovl2_801001A8(&pos, ap->lr);
         func_800269C0(0x87U);
 
-        ap->item_vars.kamex.hydro_spawn_wait = rand_u16_range(ATKAMEX_HYDRO_SPAWN_WAIT_RANDOM) + ATKAMEX_HYDRO_SPAWN_WAIT_CONST;
+        ap->item_vars.kamex.hydro_spawn_wait = rand_u16_range(ITKAMEX_HYDRO_SPAWN_WAIT_RANDOM) + ITKAMEX_HYDRO_SPAWN_WAIT_CONST;
 
         pos = joint->translate;
 
@@ -30,11 +30,11 @@ void func_ovl3_80180630(GObj *item_gobj)
 
         if (ap->it_kind == It_Kind_Kamex)
         {
-            pos.x += (ap->attributes->objectcoll_width + ATKAMEX_DUST_SPAWN_OFF_X) * -ap->lr;
+            pos.x += (ap->attributes->objectcoll_width + ITKAMEX_DUST_SPAWN_OFF_X) * -ap->lr;
         }
         ap->item_vars.kamex.is_apply_push = TRUE;
 
-        ap->phys_info.vel_air.x = -ap->lr * ATKAMEX_CONST_VEL_X;
+        ap->phys_info.vel_air.x = -ap->lr * ITKAMEX_CONST_VEL_X;
 
         func_ovl2_800FF278(&pos, -ap->lr);
     }
@@ -44,7 +44,7 @@ bool32 jtgt_ovl3_801807DC(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATKAMEX_GRAVITY, ATKAMEX_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITKAMEX_GRAVITY, ITKAMEX_T_VEL);
 
     return FALSE;
 }
@@ -89,7 +89,7 @@ bool32 jtgt_ovl3_801808D8(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATKAMEX_GRAVITY, ATKAMEX_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITKAMEX_GRAVITY, ITKAMEX_T_VEL);
 
     return FALSE;
 }
@@ -114,7 +114,7 @@ void func_ovl3_80180964(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->it_multi = ATKAMEX_LIFETIME;
+    ap->it_multi = ITKAMEX_LIFETIME;
 
     if (ap->it_kind == It_Kind_Kamex)
     {
@@ -161,7 +161,7 @@ void func_ovl3_80180A58(GObj *item_gobj, bool32 is_setup_vars)
 
     if (is_setup_vars == FALSE)
     {
-        ap->it_multi = ATKAMEX_LIFETIME;
+        ap->it_multi = ITKAMEX_LIFETIME;
 
         if (ap->it_kind == It_Kind_Kamex)
         {
@@ -169,16 +169,16 @@ void func_ovl3_80180A58(GObj *item_gobj, bool32 is_setup_vars)
 
             joint->display_list = dl;
 
-            ap->coll_data.object_coll.top = ATKAMEX_COLL_SIZE;
+            ap->coll_data.object_coll.top = ITKAMEX_COLL_SIZE;
             ap->coll_data.object_coll.center = 0.0F;
-            ap->coll_data.object_coll.bottom = -ATKAMEX_COLL_SIZE;
-            ap->coll_data.object_coll.width = ATKAMEX_COLL_SIZE;
+            ap->coll_data.object_coll.bottom = -ITKAMEX_COLL_SIZE;
+            ap->coll_data.object_coll.width = ITKAMEX_COLL_SIZE;
         }
     }
     ap->phys_info.vel_air.y = 0;
     ap->phys_info.vel_air.x = 0;
 
-    ap->item_vars.kamex.hydro_push_vel_x = ap->lr * ATKAMEX_PUSH_VEL_X;
+    ap->item_vars.kamex.hydro_push_vel_x = ap->lr * ITKAMEX_PUSH_VEL_X;
     ap->item_vars.kamex.hydro_spawn_wait = 0;
     ap->item_vars.kamex.is_apply_push = FALSE;
 }
@@ -282,11 +282,11 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         kamex_ap = itGetStruct(item_gobj);
 
-        kamex_ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        kamex_ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         kamex_ap->phys_info.vel_air.z = 0.0F;
         kamex_ap->phys_info.vel_air.x = 0.0F;
-        kamex_ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        kamex_ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         m_ball_ap = itGetStruct(spawn_gobj);
 
@@ -372,7 +372,7 @@ GObj *func_ovl3_80180EDC(GObj *item_gobj, Vec3f *pos)
     ip->weapon_vars.hydro.unk_0x0 = 0; // Set but never used?
     ip->weapon_vars.hydro.unk_0x4 = 0; // Set but never used?
 
-    ip->lifetime = ATKAMEX_HYDRO_LIFETIME;
+    ip->lifetime = ITKAMEX_HYDRO_LIFETIME;
 
     return weapon_gobj;
 }

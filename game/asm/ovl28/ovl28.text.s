@@ -2075,7 +2075,7 @@ glabel func_ovl28_801337BC
   /* 142E78 80133898 27A40024 */     addiu $a0, $sp, 0x24
   /* 142E7C 8013389C AFAB0024 */        sw $t3, 0x24($sp)
   /* 142E80 801338A0 AFAE005C */        sw $t6, 0x5c($sp)
-  /* 142E84 801338A4 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 142E84 801338A4 0C035FCF */       jal ftManager_CreateFighter
   /* 142E88 801338A8 A3B80039 */        sb $t8, 0x39($sp)
   /* 142E8C 801338AC 8FA30020 */        lw $v1, 0x20($sp)
   /* 142E90 801338B0 3C058013 */       lui $a1, %hi(func_ovl28_8013367C)

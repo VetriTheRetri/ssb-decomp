@@ -139,7 +139,7 @@ bool32 itIBumper_AFall_ProcUpdate(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATBUMPER_GRAVITY_NORMAL, ATBUMPER_T_VEL);
+    itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
 
     if (ip->it_multi != 0)
     {
@@ -151,7 +151,7 @@ bool32 itIBumper_AFall_ProcUpdate(GObj *item_gobj)
     
     if (!ip->item_vars.bumper.damage_all_delay)
     {
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         ip->item_vars.bumper.damage_all_delay = -1;
     }
@@ -159,7 +159,7 @@ bool32 itIBumper_AFall_ProcUpdate(GObj *item_gobj)
     {
         ip->item_vars.bumper.damage_all_delay--;
     }
-    func_ovl3_801713F4(item_gobj);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -188,15 +188,15 @@ bool32 itIBumper_FThrow_ProcHit(GObj *item_gobj)
     joint->scale.y = 2.0F;
     joint->scale.z = 2.0F;
 
-    ip->item_vars.bumper.hit_anim_length = ATBUMPER_HIT_ANIM_LENGTH;
+    ip->item_vars.bumper.hit_anim_length = ITBUMPER_HIT_ANIM_LENGTH;
 
     joint->mobj->anim_frame = 1.0F;
 
-    ip->phys_info.vel_air.x = ATBUMPER_REBOUND_AIR_X * ip->lr_attack;
+    ip->phys_info.vel_air.x = ITBUMPER_REBOUND_AIR_X * ip->lr_attack;
 
-    ip->phys_info.vel_air.y = ATBUMPER_REBOUND_AIR_Y;
+    ip->phys_info.vel_air.y = ITBUMPER_REBOUND_AIR_Y;
 
-    ip->it_multi = ATBUMPER_HIT_SCALE;
+    ip->it_multi = ITBUMPER_HIT_SCALE;
 
     itIBumper_AHit_SetStatus(item_gobj);
 
@@ -232,11 +232,11 @@ bool32 itIBumper_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATBUMPER_GRAVITY_NORMAL, ATBUMPER_T_VEL);
+    itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
 
     if (!(ip->item_vars.bumper.damage_all_delay))
     {
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         ip->item_vars.bumper.damage_all_delay = -1;
     }
@@ -244,7 +244,7 @@ bool32 itIBumper_FThrow_ProcUpdate(GObj *item_gobj)
     {
         ip->item_vars.bumper.damage_all_delay--;
     }
-    func_ovl3_801713F4(item_gobj);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -259,7 +259,7 @@ bool32 itIBumper_FThrow_ProcMap(GObj *item_gobj)
 bool32 itIBumper_FThrow_ProcShield(GObj *item_gobj)
 {
     func_ovl3_80172FE0(item_gobj);
-    func_ovl3_8017279C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
 
     return FALSE;
 }
@@ -274,7 +274,7 @@ bool32 itIBumper_FThrow_ProcReflector(GObj *item_gobj)
     {
         ip->phys_info.vel_air.x = -ip->phys_info.vel_air.x;
     }
-    func_ovl3_8017279C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
 
     return FALSE;
 }
@@ -284,10 +284,10 @@ void itIBumper_FThrow_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->item_vars.bumper.damage_all_delay = ATBUMPER_DAMAGE_ALL_WAIT;
+    ip->item_vars.bumper.damage_all_delay = ITBUMPER_DAMAGE_ALL_WAIT;
 
-    ip->coll_data.object_coll.top = ATBUMPER_COLL_SIZE;
-    ip->coll_data.object_coll.bottom = -ATBUMPER_COLL_SIZE;
+    ip->coll_data.object_coll.top = ITBUMPER_COLL_SIZE;
+    ip->coll_data.object_coll.bottom = -ITBUMPER_COLL_SIZE;
 
     itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_FThrow);
 }
@@ -297,10 +297,10 @@ void itIBumper_FDrop_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->item_vars.bumper.damage_all_delay = ATBUMPER_DAMAGE_ALL_WAIT;
+    ip->item_vars.bumper.damage_all_delay = ITBUMPER_DAMAGE_ALL_WAIT;
 
-    ip->coll_data.object_coll.top = ATBUMPER_COLL_SIZE;
-    ip->coll_data.object_coll.bottom = -ATBUMPER_COLL_SIZE;
+    ip->coll_data.object_coll.top = ITBUMPER_COLL_SIZE;
+    ip->coll_data.object_coll.bottom = -ITBUMPER_COLL_SIZE;
 
     itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_FDrop);
 }
@@ -353,16 +353,16 @@ void itIBumper_GWaitHit_InitItemVars(GObj *item_gobj)
     joint->scale.y = 1.0F;
     joint->scale.x = 1.0F;
 
-    ip->coll_data.object_coll.top = ATBUMPER_COLL_SIZE;
-    ip->coll_data.object_coll.bottom = -ATBUMPER_COLL_SIZE;
+    ip->coll_data.object_coll.top = ITBUMPER_COLL_SIZE;
+    ip->coll_data.object_coll.bottom = -ITBUMPER_COLL_SIZE;
 
     itIBumper_GWaitHit_SetModelRoll(item_gobj);
 
     ip->is_attach_surface = TRUE;
 
-    ip->lifetime = ATBUMPER_LIFETIME;
+    ip->lifetime = ITBUMPER_LIFETIME;
 
-    func_ovl3_8017279C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
 }
 
 // 0x8017B9C8
@@ -374,15 +374,15 @@ bool32 itIBumper_GWaitHit_ProcHit(GObj *item_gobj)
     joint->scale.x = 2.0F;
     joint->scale.z = 2.0F;
 
-    ip->item_vars.bumper.hit_anim_length = ATBUMPER_HIT_ANIM_LENGTH;
+    ip->item_vars.bumper.hit_anim_length = ITBUMPER_HIT_ANIM_LENGTH;
 
     joint->mobj->anim_frame = 1.0F;
 
     ip->lr = -ip->lr_attack;
 
-    ip->phys_info.vel_air.x = ip->lr_attack * ATBUMPER_REBOUND_VEL_X;
+    ip->phys_info.vel_air.x = ip->lr_attack * ITBUMPER_REBOUND_VEL_X;
 
-    ip->it_multi = ATBUMPER_HIT_SCALE;
+    ip->it_multi = ITBUMPER_HIT_SCALE;
 
     return FALSE;
 }
@@ -425,7 +425,7 @@ bool32 itIBumper_GWaitHit_ProcUpdate(GObj *item_gobj)
             }
         }
     }
-    if (ip->it_multi < ATBUMPER_RESET_VEL_TIMER)
+    if (ip->it_multi < ITBUMPER_RESET_VEL_TIMER)
     {
         ip->phys_info.vel_air.x = 0.0F;
     }
@@ -492,13 +492,13 @@ bool32 itIBumper_GWaitHit_ProcReflector(GObj *item_gobj)
 
     joint->mobj->anim_frame = 1.0F;
 
-    ip->phys_info.vel_air.x = (-fp->lr * ATBUMPER_REBOUND_VEL_X);
+    ip->phys_info.vel_air.x = (-fp->lr * ITBUMPER_REBOUND_VEL_X);
 
     ip->lr = fp->lr;
 
-    ip->it_multi = ATBUMPER_HIT_SCALE;
+    ip->it_multi = ITBUMPER_HIT_SCALE;
 
-    func_ovl3_8017279C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
 
     return FALSE;
 }
@@ -522,7 +522,7 @@ bool32 itIBumper_AHit_ProcUpdate(GObj *item_gobj)
     }
     else ip->item_vars.bumper.hit_anim_length--;
 
-    func_ovl3_80172558(ip, ATBUMPER_GRAVITY_HIT, ATBUMPER_T_VEL);
+    itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_HIT, ITBUMPER_T_VEL);
 
     if (ip->it_multi != 0)
     {
@@ -534,7 +534,7 @@ bool32 itIBumper_AHit_ProcUpdate(GObj *item_gobj)
     
     if (!ip->item_vars.bumper.damage_all_delay)
     {
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         ip->item_vars.bumper.damage_all_delay = -1;
     }
@@ -550,7 +550,7 @@ void itIBumper_AHit_SetStatus(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->item_vars.bumper.damage_all_delay = ATBUMPER_DAMAGE_ALL_WAIT;
+    ip->item_vars.bumper.damage_all_delay = ITBUMPER_DAMAGE_ALL_WAIT;
 
     itMain_SetItemStatus(item_gobj, itCommon_IBumper_StatusDesc, itStatus_IBumper_AHit);
 }
@@ -587,7 +587,7 @@ void itIBumper_GDisappear_SetStatus(GObj *item_gobj)
     joint->scale.y = 1.0F;
     joint->scale.z = 1.0F;
 
-    ip->lifetime = ATBUMPER_DESPAWN_TIMER;
+    ip->lifetime = ITBUMPER_DESPAWN_TIMER;
 
     joint->unk_0x54 = 0;
 

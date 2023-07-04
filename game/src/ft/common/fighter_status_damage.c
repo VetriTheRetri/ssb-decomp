@@ -713,7 +713,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
 
                     func_ovl3_80140E2C(fighter_gobj);
 
-                    grab_fp->unk_ft_0x814 = 2;
+                    grab_fp->damage_kind = 2;
                 }
                 else
                 {
@@ -721,7 +721,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
                     ftCommon_ProcDamageStopVoice(fighter_gobj);
                     ftCommon_Damage_GotoDamageStatus(fighter_gobj);
 
-                    grab_fp->unk_ft_0x814 = 1;
+                    grab_fp->damage_kind = 1;
                 }
             }
             else func_ovl3_80140E2C(fighter_gobj);
@@ -736,7 +736,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             ftCommon_ProcDamageStopVoice(fighter_gobj);
             ftCommon_Damage_GotoDamageStatus(fighter_gobj);
 
-            grab_fp->unk_ft_0x814 = 1;
+            grab_fp->damage_kind = 1;
         }
         else
         {
@@ -768,7 +768,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
                 {
                     this_fp->damage_queue = grab_fp->damage_queue;
                     this_fp->hitlag_mul = grab_fp->hitlag_mul;
-                    grab_fp->unk_ft_0x814 = 3;
+                    grab_fp->damage_kind = 3;
 
                     ftCommon_Damage_SetDamageColAnim(fighter_gobj);
                 }
@@ -779,7 +779,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
                     ftCommon_ProcDamageStopVoice(fighter_gobj);
                     ftCommon_Damage_GotoDamageStatus(fighter_gobj);
 
-                    grab_fp->unk_ft_0x814 = 1;
+                    grab_fp->damage_kind = 1;
                 }
             }
             else
@@ -801,7 +801,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             ftCommon_ProcDamageStopVoice(fighter_gobj);
             ftCommon_Damage_GotoDamageStatus(fighter_gobj);
 
-            grab_fp->unk_ft_0x814 = 1;
+            grab_fp->damage_kind = 1;
         }
         else
         {

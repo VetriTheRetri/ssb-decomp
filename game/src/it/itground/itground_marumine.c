@@ -13,9 +13,9 @@ void func_ovl3_801837A0(GObj *item_gobj)
 
     if (ep != NULL)
     {
-        ep->effect_info->scale.x = ATMARUMINE_EXPLODE_GFX_SCALE;
-        ep->effect_info->scale.y = ATMARUMINE_EXPLODE_GFX_SCALE;
-        ep->effect_info->scale.z = ATMARUMINE_EXPLODE_GFX_SCALE;
+        ep->effect_info->scale.x = ITMARUMINE_EXPLODE_GFX_SCALE;
+        ep->effect_info->scale.y = ITMARUMINE_EXPLODE_GFX_SCALE;
+        ep->effect_info->scale.z = ITMARUMINE_EXPLODE_GFX_SCALE;
     }
     func_ovl2_801008F4(1);
 
@@ -23,7 +23,7 @@ void func_ovl3_801837A0(GObj *item_gobj)
 
     ap->item_hit.hit_sfx = 1;
 
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
     func_ovl3_80183A20(item_gobj);
 }
 
@@ -37,9 +37,9 @@ void func_ovl3_80183830(GObj *item_gobj)
 
     if (ap->it_multi == ev[ap->item_event_index].timer)
     {
-        ap->item_hit.angle = ev[ap->item_event_index].angle;
+        ap->item_hit.angle  = ev[ap->item_event_index].angle;
         ap->item_hit.damage = ev[ap->item_event_index].damage;
-        ap->item_hit.size = ev[ap->item_event_index].size;
+        ap->item_hit.size   = ev[ap->item_event_index].size;
 
         ap->item_hit.can_reflect = FALSE;
         ap->item_hit.can_shield = FALSE;
@@ -67,8 +67,8 @@ bool32 func_ovl3_80183914(GObj *item_gobj)
 
     if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
     {
-        func_ovl3_8017275C(item_gobj);
-        func_ovl3_8017279C(item_gobj);
+        itMain_RefreshHit(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         ap->item_vars.marumine.offset.x = 0.0F;
         ap->item_vars.marumine.offset.y = 0.0F;
@@ -91,7 +91,7 @@ bool32 func_ovl3_801839A8(GObj *item_gobj)
 
     ap->it_multi++;
 
-    if (ap->it_multi == ATMARUMINE_EXPLODE_LIFETIME)
+    if (ap->it_multi == ITMARUMINE_EXPLODE_LIFETIME)
     {
         func_ovl2_8010B0B8();
 

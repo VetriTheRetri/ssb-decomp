@@ -6,7 +6,7 @@ bool32 jtgt_ovl3_8017F470(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATLIZARDON_GRAVITY, ATLIZARDON_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITLIZARDON_GRAVITY, ITLIZARDON_T_VEL);
 
     return FALSE;
 }
@@ -40,7 +40,7 @@ bool32 jtgt_ovl3_8017F53C(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATLIZARDON_GRAVITY, ATLIZARDON_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITLIZARDON_GRAVITY, ITLIZARDON_T_VEL);
 
     return FALSE;
 }
@@ -74,19 +74,19 @@ bool32 jtgt_ovl3_8017F5EC(GObj *item_gobj)
 
     if (ap->it_kind == It_Kind_Lizardon)
     {
-        pos.y += ATLIZARDON_LIZARDON_FLAME_OFF_Y;
+        pos.y += ITLIZARDON_LIZARDON_FLAME_OFF_Y;
 
-        pos.x += (ATLIZARDON_LIZARDON_FLAME_OFF_X * ap->lr);
+        pos.x += (ITLIZARDON_LIZARDON_FLAME_OFF_X * ap->lr);
     }
     else
     {
-        pos.x += (ATLIZARDON_OTHER_FLAME_OFF_X * ap->lr);
+        pos.x += (ITLIZARDON_OTHER_FLAME_OFF_X * ap->lr);
     }
     if (ap->item_vars.lizardon.flame_spawn_wait == 0)
     {
         func_ovl3_8017FD2C(item_gobj, &pos, ap->lr);
 
-        ap->item_vars.lizardon.flame_spawn_wait = ATLIZARDON_FLAME_SPAWN_WAIT;
+        ap->item_vars.lizardon.flame_spawn_wait = ITLIZARDON_FLAME_SPAWN_WAIT;
     }
     ap->item_vars.lizardon.flame_spawn_wait--;
 
@@ -96,7 +96,7 @@ bool32 jtgt_ovl3_8017F5EC(GObj *item_gobj)
     }
     if (ap->item_vars.lizardon.turn_wait == 0)
     {
-        ap->item_vars.lizardon.turn_wait = ATLIZARDON_TURN_WAIT;
+        ap->item_vars.lizardon.turn_wait = ITLIZARDON_TURN_WAIT;
 
         ap->lr = -ap->lr;
 
@@ -104,7 +104,7 @@ bool32 jtgt_ovl3_8017F5EC(GObj *item_gobj)
 
         pos.y += ap->attributes->objectcoll_bottom;
 
-        pos.x += (ap->attributes->objectcoll_width + ATLIZARDON_DUST_GFX_OFF_X) * -ap->lr;
+        pos.x += (ap->attributes->objectcoll_width + ITLIZARDON_DUST_GFX_OFF_X) * -ap->lr;
 
         func_ovl2_800FF278(&pos, -ap->lr);
 
@@ -140,7 +140,7 @@ void func_ovl3_8017F810(GObj *item_gobj)
     Vec3f pos;
 
 
-    ap->item_vars.lizardon.turn_wait = ATLIZARDON_TURN_WAIT;
+    ap->item_vars.lizardon.turn_wait = ITLIZARDON_TURN_WAIT;
 
     pos = joint->translate;
 
@@ -171,7 +171,7 @@ bool32 jtgt_ovl3_8017F90C(GObj *item_gobj)
 
     if (ap->it_multi == 0)
     {
-        ap->it_multi = ATLIZARDON_LIFETIME;
+        ap->it_multi = ITLIZARDON_LIFETIME;
         ap->phys_info.vel_air.y = 0.0F;
 
         if (ap->it_kind == It_Kind_Lizardon)
@@ -217,11 +217,11 @@ GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -268,7 +268,7 @@ bool32 jtgt_ovl3_8017FB74(GObj *weapon_gobj)
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
     Vec3f *translate;
 
-    ip->lifetime = ATLIZARDON_FLAME_LIFETIME;
+    ip->lifetime = ITLIZARDON_FLAME_LIFETIME;
 
     wpMain_ReflectorInvertLR(ip, fp);
 
@@ -295,7 +295,7 @@ GObj *func_ovl3_8017FC38(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->phys_info.vel = *vel;
 
-    ip->lifetime = ATLIZARDON_FLAME_LIFETIME;
+    ip->lifetime = ITLIZARDON_FLAME_LIFETIME;
 
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F); // This needs to something in v0 to match
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
@@ -308,8 +308,8 @@ void func_ovl3_8017FD2C(GObj *item_gobj, Vec3f *pos, s32 lr)
     s32 unused;
     Vec3f vel;
 
-    vel.x = cosf(ATLIZARDON_FLAME_SPAWN_ANGLE) * ATLIZARDON_FLAME_VEL_XY * lr;
-    vel.y = __sinf(ATLIZARDON_FLAME_SPAWN_ANGLE) * ATLIZARDON_FLAME_VEL_XY;
+    vel.x = cosf(ITLIZARDON_FLAME_SPAWN_ANGLE) * ITLIZARDON_FLAME_VEL_XY * lr;
+    vel.y = __sinf(ITLIZARDON_FLAME_SPAWN_ANGLE) * ITLIZARDON_FLAME_VEL_XY;
     vel.z = 0.0F;
 
     func_ovl3_8017FC38(item_gobj, pos, &vel);

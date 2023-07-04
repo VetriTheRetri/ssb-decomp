@@ -24,12 +24,12 @@ void func_ovl3_8017FDC0(GObj *item_gobj)
 
         pos.y = ap->item_vars.spear.spear_spawn_pos_y;
 
-        pos.y += (ATSPEAR_SPAWN_OFF_Y_MUL * rand_f32()) + ATSPEAR_SPAWN_OFF_Y_ADD;
+        pos.y += (ITSPEAR_SPAWN_OFF_Y_MUL * rand_f32()) + ITSPEAR_SPAWN_OFF_Y_ADD;
 
         func_ovl3_80180608(item_gobj, &pos, ap->it_kind);
 
         ap->item_vars.spear.spear_spawn_count--;
-        ap->item_vars.spear.spear_spawn_wait = rand_u16_range(ATSPEAR_SPAWN_WAIT_RANDOM) + ATSPEAR_SPAWN_WAIT_CONST;
+        ap->item_vars.spear.spear_spawn_wait = rand_u16_range(ITSPEAR_SPAWN_WAIT_RANDOM) + ITSPEAR_SPAWN_WAIT_CONST;
     }
 }
 
@@ -37,7 +37,7 @@ bool32 func_ovl3_8017FE70(GObj *item_gobj)
 {
     DObj *joint = DObjGetStruct(item_gobj);
 
-    if (item_gobj->anim_frame == ATSPEAR_SWARM_CALL_WAIT)
+    if (item_gobj->anim_frame == ITSPEAR_SWARM_CALL_WAIT)
     {
         joint->next->unk_dobj_0x70 = 0;
 
@@ -87,13 +87,13 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATSPEAR_GRAVITY, ATSPEAR_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITSPEAR_GRAVITY, ITSPEAR_T_VEL);
 
-    ap->phys_info.vel_air.x += ATSPEAR_SWARM_CALL_VEL_X * ap->lr;
+    ap->phys_info.vel_air.x += ITSPEAR_SWARM_CALL_VEL_X * ap->lr;
 
     if (ap->lr == RIGHT)
     {
-        if ((Ground_Info->blastzone_right - ATSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x)
+        if ((Ground_Info->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x)
         {
             ap->phys_info.vel_air.x = 0.0F;
             ap->phys_info.vel_air.y = 0.0F;
@@ -109,7 +109,7 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
     }
     if (ap->lr == LEFT)
     {
-        if (joint->translate.x <= (Ground_Info->blastzone_left + ATSPEAR_SWARM_CALL_OFF_X))
+        if (joint->translate.x <= (Ground_Info->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X))
         {
             ap->phys_info.vel_air.x = 0.0F;
             ap->phys_info.vel_air.y = 0.0F;
@@ -130,11 +130,11 @@ void func_ovl3_8018010C(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->phys_info.vel_air.y = ATSPEAR_SWARM_CALL_VEL_Y;
+    ap->phys_info.vel_air.y = ITSPEAR_SWARM_CALL_VEL_Y;
 
     ap->item_vars.spear.spear_spawn_pos_y = DObjGetStruct(item_gobj)->translate.y;
     ap->item_vars.spear.spear_spawn_wait = 0;
-    ap->item_vars.spear.spear_spawn_count = ATSPEAR_SPAWN_COUNT;
+    ap->item_vars.spear.spear_spawn_count = ITSPEAR_SPAWN_COUNT;
 
     if (ap->it_kind == It_Kind_Spear)
     {
@@ -179,7 +179,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     {
         ap = itGetStruct(item_gobj);
 
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         joint = DObjGetStruct(item_gobj);
 
@@ -196,13 +196,13 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         }
         else ap->lr = RIGHT;
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -216,11 +216,11 @@ bool32 func_ovl3_80180354(GObj *weapon_gobj)
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj);
 
-    if ((ip->lr == RIGHT) && ((Ground_Info->blastzone_right - ATSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
+    if ((ip->lr == RIGHT) && ((Ground_Info->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
     {
         return TRUE;
     }
-    else if ((ip->lr == LEFT) && (joint->translate.x <= (Ground_Info->blastzone_left + ATSPEAR_SWARM_CALL_OFF_X)))
+    else if ((ip->lr == LEFT) && (joint->translate.x <= (Ground_Info->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X)))
     {
         return TRUE;
     }
@@ -264,7 +264,7 @@ GObj *func_ovl3_801804A4(GObj *item_gobj, Vec3f *pos, s32 it_kind)
 
     ip->lr = -ap->lr;
 
-    ip->phys_info.vel_air.x = ip->lr * ATSPEAR_SWARM_FLY_VEL_X;
+    ip->phys_info.vel_air.x = ip->lr * ITSPEAR_SWARM_FLY_VEL_X;
 
     joint = DObjGetStruct(weapon_gobj);
 

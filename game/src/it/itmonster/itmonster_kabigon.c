@@ -20,11 +20,11 @@ bool32 func_ovl3_8017E070(GObj *item_gobj)
     {
         func_ovl2_801008F4(0);
 
-        ap->item_vars.kabigon.rumble_wait = ATKABIGON_RUMBLE_WAIT;
+        ap->item_vars.kabigon.rumble_wait = ITKABIGON_RUMBLE_WAIT;
     }
     ap->item_vars.kabigon.rumble_wait--;
 
-    if (joint->translate.y < (Ground_Info->blastzone_bottom + ATKABIGON_MAP_OFF_Y))
+    if (joint->translate.y < (Ground_Info->blastzone_bottom + ITKABIGON_MAP_OFF_Y))
     {
         return TRUE;
     }
@@ -74,11 +74,11 @@ void func_ovl3_8017E25C(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    ap->phys_info.vel_air.y = ATKABIGON_DROP_VEL_Y;
+    ap->phys_info.vel_air.y = ITKABIGON_DROP_VEL_Y;
 
-    joint->translate.x += ((ATKABIGON_DROP_OFF_X_MUL * rand_f32()) + ATKABIGON_DROP_OFF_X_ADD);
+    joint->translate.x += ((ITKABIGON_DROP_OFF_X_MUL * rand_f32()) + ITKABIGON_DROP_OFF_X_ADD);
 
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
 
     ap->item_vars.kabigon.rumble_wait = 0;
 
@@ -88,17 +88,17 @@ void func_ovl3_8017E25C(GObj *item_gobj)
     {
         func_800269C0(0x137U);
 
-        joint->scale.y = ATKABIGON_DROP_SIZE_KABIGON;
-        joint->scale.x = ATKABIGON_DROP_SIZE_KABIGON;
+        joint->scale.y = ITKABIGON_DROP_SIZE_KABIGON;
+        joint->scale.x = ITKABIGON_DROP_SIZE_KABIGON;
 
-        ap->item_hit.size *= ATKABIGON_DROP_SIZE_KABIGON;
+        ap->item_hit.size *= ITKABIGON_DROP_SIZE_KABIGON;
     }
     else
     {
-        joint->scale.y = ATKABIGON_DROP_SIZE_OTHER;
-        joint->scale.x = ATKABIGON_DROP_SIZE_OTHER;
+        joint->scale.y = ITKABIGON_DROP_SIZE_OTHER;
+        joint->scale.x = ITKABIGON_DROP_SIZE_OTHER;
 
-        ap->item_hit.size *= ATKABIGON_DROP_SIZE_OTHER;
+        ap->item_hit.size *= ITKABIGON_DROP_SIZE_OTHER;
     }
     item_gobj->renderer = func_ovl3_8017E100;
 
@@ -118,7 +118,7 @@ bool32 func_ovl3_8017E384(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    if ((Ground_Info->blastzone_top - ATKABIGON_MAP_OFF_Y) <= joint->translate.y)
+    if ((Ground_Info->blastzone_top - ITKABIGON_MAP_OFF_Y) <= joint->translate.y)
     {
         ap->it_multi--;
 
@@ -134,12 +134,12 @@ bool32 func_ovl3_8017E384(GObj *item_gobj)
     {
         Vec3f pos = joint->translate;
 
-        pos.x += (rand_f32() * ATKABIGON_JUMP_GFX_MUL_OFF) - ATKABIGON_JUMP_GFX_SUB_OFF;
-        pos.y += (rand_f32() * ATKABIGON_JUMP_GFX_MUL_OFF) - ATKABIGON_JUMP_GFX_SUB_OFF;
+        pos.x += (rand_f32() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
+        pos.y += (rand_f32() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
 
         func_ovl2_800FF590(&pos);
 
-        ap->item_vars.kabigon.dust_gfx_int = ATKABIGON_GFX_SPAWN_INT;
+        ap->item_vars.kabigon.dust_gfx_int = ITKABIGON_GFX_SPAWN_INT;
     }
     ap->item_vars.kabigon.dust_gfx_int--;
 
@@ -187,11 +187,11 @@ void func_ovl3_8017E600(GObj *item_gobj)
 
     func_800269C0(0x86U);
 
-    ap->it_multi = ATKABIGON_DROP_WAIT;
+    ap->it_multi = ITKABIGON_DROP_WAIT;
 
-    ap->item_vars.kabigon.dust_gfx_int = ATKABIGON_GFX_SPAWN_INT;
+    ap->item_vars.kabigon.dust_gfx_int = ITKABIGON_GFX_SPAWN_INT;
 
-    ap->phys_info.vel_air.y = ATKABIGON_JUMP_VEL_Y;
+    ap->phys_info.vel_air.y = ITKABIGON_JUMP_VEL_Y;
 }
 
 void func_ovl3_8017E648(GObj *item_gobj)
@@ -226,13 +226,13 @@ GObj* jtgt_ovl3_8017E6C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         DObj *joint = DObjGetStruct(item_gobj);
         Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         func_8000BD1C(joint, itGetPData(ap, D_NF_0000B158, D_NF_00013624), 0.0F); // Linker thing
 

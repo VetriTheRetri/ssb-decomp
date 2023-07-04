@@ -1,16 +1,14 @@
 #include "item.h"
 
-
-
 bool32 jtgt_ovl3_80179BA0(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATTARU_GRAVITY, ATTARU_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITTARU_GRAVITY, ITTARU_T_VEL);
 
     DObjGetStruct(item_gobj)->rotate.z += ap->item_vars.taru.roll_rotate_speed;
 
-    func_ovl3_801713F4(item_gobj);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -41,7 +39,7 @@ bool32 jtgt_ovl3_80179C78(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (ap->percent_damage >= ATTARU_HEALTH_MAX)
+    if (ap->percent_damage >= ITTARU_HEALTH_MAX)
     {
         return func_ovl3_80179C20(item_gobj);
     }
@@ -97,7 +95,7 @@ void func_ovl3_80179DEC(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->lifetime = ATTARU_LIFETIME;
+    ap->lifetime = ITTARU_LIFETIME;
 
     ap->phys_info.vel_air.y = 0.0F;
 
@@ -128,7 +126,7 @@ bool32 jtgt_ovl3_80179E28(GObj *item_gobj)
 
             func_ovl3_80172508(item_gobj);
         }
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
     }
     return FALSE;
 }
@@ -171,7 +169,7 @@ bool32 jtgt_ovl3_80179FA8(GObj *item_gobj)
 
     ap->it_multi++;
 
-    if (ap->it_multi == ATTARU_EXPLODE_LIFETIME)
+    if (ap->it_multi == ITTARU_EXPLODE_LIFETIME)
     {
         return TRUE;
     }
@@ -186,17 +184,17 @@ bool32 jtgt_ovl3_8017A004(GObj *item_gobj)
     f32 roll_rotate_speed;
     f32 sqrt_vel;
 
-    ap->phys_info.vel_air.x += (-(atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32) * ATTARU_MUL_VEL_X);
+    ap->phys_info.vel_air.x += (-(atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32) * ITTARU_MUL_VEL_X);
 
     ap->lr = (ap->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 
     sqrt_vel = sqrtf(SQUARE(ap->phys_info.vel_air.x) + SQUARE(ap->phys_info.vel_air.y));
 
-    if (sqrt_vel < ATTARU_MIN_VEL_XY)
+    if (sqrt_vel < ITTARU_MIN_VEL_XY)
     {
         ap->lifetime--;
 
-        if (ap->lifetime < ATTARU_DESPAWN_FLASH_START)
+        if (ap->lifetime < ITTARU_DESPAWN_FLASH_START)
         {
             if (ap->lifetime == 0)
             {
@@ -208,7 +206,7 @@ bool32 jtgt_ovl3_8017A004(GObj *item_gobj)
             }
         }
     }
-    roll_rotate_speed = ((ap->lr == LEFT) ? ATTARU_ROLL_ROTATE_MUL : -ATTARU_ROLL_ROTATE_MUL) * sqrt_vel;
+    roll_rotate_speed = ((ap->lr == LEFT) ? ITTARU_ROLL_ROTATE_MUL : -ITTARU_ROLL_ROTATE_MUL) * sqrt_vel;
 
     ap->item_vars.taru.roll_rotate_speed = roll_rotate_speed;
 
@@ -270,8 +268,8 @@ void func_ovl3_8017A240(GObj *item_gobj)
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_8017279C(item_gobj);
-    func_ovl3_8017275C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
+    itMain_RefreshHit(item_gobj);
     itMain_UpdateHitEvent(item_gobj, (itHitEvent*)((uintptr_t)*Article_Taru_Data.p_file + (intptr_t)&Article_Taru_Hit));
 }
 
@@ -299,7 +297,7 @@ void func_ovl3_8017A30C(GObj *item_gobj)
     {
         effect_unk->effect_info->scale.x =
         effect_unk->effect_info->scale.y =
-        effect_unk->effect_info->scale.z = ATTARU_EXPLODE_SCALE;
+        effect_unk->effect_info->scale.z = ITTARU_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
 

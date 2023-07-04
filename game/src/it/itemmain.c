@@ -6,11 +6,11 @@ void func_ovl3_80172310(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->rotate_speed = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_DEFAULT) : 0.0F;
+    ip->rotate_step = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_DEFAULT) : 0.0F;
 
     if (ip->lr == LEFT)
     {
-        ip->rotate_speed = -ip->rotate_speed;
+        ip->rotate_step = -ip->rotate_step;
     }
 }
 
@@ -24,29 +24,29 @@ void func_ovl3_80172394(GObj *item_gobj, bool32 is_prev_spawn)
     {
         if (ip->attributes->spin_speed != 0)
         {
-            ip->rotate_speed = ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_NEW_SPAWN;
+            ip->rotate_step = ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_NEW_SPAWN;
         }
-        else ip->rotate_speed = 0.0F;
+        else ip->rotate_step = 0.0F;
     }
     else if (ip->attributes->spin_speed != 0)
     {
-        ip->rotate_speed = ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_PREV_SPAWN;
+        ip->rotate_step = ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_PREV_SPAWN;
     }
-    else ip->rotate_speed = 0.0F;
+    else ip->rotate_step = 0.0F;
 }
 
 void func_ovl3_8017245C(GObj *item_gobj, f32 *spin_speed, bool32 is_smash_throw)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->rotate_speed = (is_smash_throw != FALSE) ? ITEM_SPIN_SPEED_SET_SMASH_THROW : ITEM_SPIN_SPEED_SET_NORMAL_THROW;
+    ip->rotate_step = (is_smash_throw != FALSE) ? ITEM_SPIN_SPEED_SET_SMASH_THROW : ITEM_SPIN_SPEED_SET_NORMAL_THROW;
 
     if (*spin_speed < 0) // Facing direction, sort of
     {
-        ip->rotate_speed = -ip->rotate_speed;
+        ip->rotate_step = -ip->rotate_step;
     }
 
-    ip->rotate_speed = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ip->rotate_speed) : 0.0F;
+    ip->rotate_step = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ip->rotate_step) : 0.0F;
 }
 
 void func_ovl3_80172508(GObj *item_gobj)
@@ -58,7 +58,8 @@ void func_ovl3_80172508(GObj *item_gobj)
     func_ovl3_80172310(item_gobj);
 }
 
-void func_ovl3_80172558(Item_Struct *ip, f32 gravity, f32 terminal_velocity)
+// 0x80172558
+void itMain_UpdatePhysicsAir(Item_Struct *ip, f32 gravity, f32 terminal_velocity)
 {
     ip->phys_info.vel_air.y -= gravity;
 
@@ -86,7 +87,8 @@ void itMain_ResetPlayerVars(GObj *item_gobj)
     ip->display_state = dbObjDisplayStatus_Global_Article;
 }
 
-void func_ovl3_801725F8(Item_Struct *ip)
+// 0x801725F8
+void itMain_ClearHitRecord(Item_Struct *ip)
 {
     s32 i;
 
@@ -104,18 +106,20 @@ void func_ovl3_801725F8(Item_Struct *ip)
     }
 }
 
-void func_ovl3_8017275C(GObj *item_gobj)
+// 0x8017275C
+void itMain_RefreshHit(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_801725F8(ip);
+    itMain_ClearHitRecord(ip);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_New;
 
     itManager_UpdateHitPositions(item_gobj);
 }
 
-void func_ovl3_8017279C(GObj *item_gobj)
+// 0x8017279C
+void itMain_ClearOwnerStats(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -126,7 +130,8 @@ void func_ovl3_8017279C(GObj *item_gobj)
     ip->team = ITEM_TEAM_DEFAULT;
 }
 
-void func_ovl3_801727BC(GObj *item_gobj)
+// 0x801727BC
+void itMain_CopyDamageStats(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
@@ -231,7 +236,7 @@ void itMain_SetFighterRelease(GObj *item_gobj, Vec3f *vel, f32 stale, u16 stat_f
     ip->item_hit.stat_count = stat_count;
 
     ftCommon_GetHammerSetBGM(fighter_gobj);
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
 }
 
 extern void (*itCommon_Drop_ProcList[It_Kind_EnumMax])(GObj*); // Assumed to contain 45 callbacks?

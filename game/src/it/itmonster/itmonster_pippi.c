@@ -57,7 +57,7 @@ void func_ovl3_80183210(GObj *item_gobj)
     }
     if (it_kind == It_Kind_Sawamura)
     {
-        ap->it_multi = ATSAWAMURA_KICK_WAIT;
+        ap->it_multi = ITSAWAMURA_KICK_WAIT;
     }
     if ((it_kind == It_Kind_Sawamura) || (it_kind == It_Kind_Starmie))
     {
@@ -67,7 +67,7 @@ void func_ovl3_80183210(GObj *item_gobj)
     }
     if (it_kind == It_Kind_Lizardon)
     {
-        ap->it_multi = ATLIZARDON_LIFETIME;
+        ap->it_multi = ITLIZARDON_LIFETIME;
     }
     Article_Pippi_ProcStatus[index](item_gobj);
 }
@@ -180,11 +180,11 @@ GObj *jtgt_ovl3_80183690(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         DObj *joint = DObjGetStruct(item_gobj);
         Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.x = 0.0F;
         ap->phys_info.vel_air.z = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         func_80008CC0(joint, 0x48U, 0U);
 

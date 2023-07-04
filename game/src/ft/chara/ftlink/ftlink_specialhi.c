@@ -16,7 +16,7 @@ void ftLink_SpecialHi_DestroyWeapon(Fighter_Struct *fp, Weapon_Struct *wp)
 void ftLink_SpecialHi_UpdateWeaponPos(GObj *fighter_gobj, Weapon_Struct *wp)
 {
     wp->weapon_vars.spin_attack.pos_index++;
-    wp->weapon_vars.spin_attack.pos_index %= ITSPINATTACK_EXTEND_POS_COUNT;
+    wp->weapon_vars.spin_attack.pos_index %= WPSPINATTACK_EXTEND_POS_COUNT;
 
     wp->weapon_vars.spin_attack.pos_x[wp->weapon_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
     wp->weapon_vars.spin_attack.pos_y[wp->weapon_vars.spin_attack.pos_index] = (s16) DObjGetStruct(fighter_gobj)->translate.y;
@@ -147,7 +147,7 @@ void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 
                 wp->weapon_hit.update_state = 0;
 
-                for (i = 0; i < ITSPINATTACK_EXTEND_POS_COUNT; i++)
+                for (i = 0; i < WPSPINATTACK_EXTEND_POS_COUNT; i++)
                 {
                     wp->weapon_vars.spin_attack.pos_x[i] = (s16) DObjGetStruct(fighter_gobj)->translate.x;
                     wp->weapon_vars.spin_attack.pos_y[i] = (s16) DObjGetStruct(fighter_gobj)->translate.y;

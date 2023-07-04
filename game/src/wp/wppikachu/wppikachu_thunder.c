@@ -141,7 +141,7 @@ GObj* wpPikachu_ThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *
 
     wp->proc_dead = wpPikachu_ThunderHead_ProcDead;
 
-    wp->lifetime = ITPIKACHUTHUNDER_SPAWN_LIFETIME;
+    wp->lifetime = WPPIKACHUTHUNDER_SPAWN_LIFETIME;
 
     wp->phys_info.vel = *vel;
 
@@ -168,13 +168,13 @@ bool32 wpPikachu_ThunderTrail_ProcUpdate(GObj *weapon_gobj)
     {
         return TRUE;
     }
-    else if (wp->lifetime < ITPIKACHUTHUNDER_EXPIRE)
+    else if (wp->lifetime < WPPIKACHUTHUNDER_EXPIRE)
     {
         func_ovl3_8016A680(weapon_gobj, -1);
 
         return TRUE;
     }
-    else DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(ITPIKACHUTHUNDER_TEXTURE_COUNT - 1);
+    else DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(WPPIKACHUTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -204,7 +204,7 @@ GObj* wpPikachu_ThunderTrail_CreateWeapon(GObj *weapon_gobj, Vec3f *pos)
     }
     chain_wp = wpGetStruct(chain_gobj);
 
-    chain_wp->lifetime = ITPIKACHUTHUNDER_CHAIN_LIFETIME;
+    chain_wp->lifetime = WPPIKACHUTHUNDER_CHAIN_LIFETIME;
     chain_wp->group_id = spawn_wp->group_id;
 
     for (i = 0; i < ARRAY_COUNT(spawn_wp->weapon_hit.hit_targets); i++)

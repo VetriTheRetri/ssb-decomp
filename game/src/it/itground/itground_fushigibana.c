@@ -8,7 +8,7 @@ extern itCreateDesc Article_Fushigibana_Data;
 void func_ovl3_80184440(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
-    itHitDesc *hit_desc = (itHitDesc *)((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
+    itHitDesc *hit_desc = (itHitDesc*) ((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
 
     if (ap->it_multi == hit_desc[ap->item_event_index].timer)
     {
@@ -32,7 +32,7 @@ void func_ovl3_80184440(GObj *item_gobj)
     }
     ap->it_multi++;
 
-    if (ap->it_multi == ATFUSHIGIBANA_RETURN_WAIT)
+    if (ap->it_multi == ITFUSHIGIBANA_RETURN_WAIT)
     {
         Vec3f pos = DObjGetStruct(item_gobj)->translate;
 
@@ -55,11 +55,11 @@ bool32 func_ovl3_801845B4(GObj *item_gobj)
 
     pos = joint->translate;
 
-    pos.x += ATFUSHIGIBANA_RAZOR_SPAWN_OFF_X;
+    pos.x += ITFUSHIGIBANA_RAZOR_SPAWN_OFF_X;
 
     if ((ap->item_vars.fushigibana.flags == 2) ||
-        ((ap->item_vars.fushigibana.flags & 1) && (joint->dobj_f2 >= ATFUSHIGIBANA_RAZOR_SPAWN_BEGIN)) &&
-        (joint->dobj_f2 <= ATFUSHIGIBANA_RAZOR_SPAWN_END))
+        ((ap->item_vars.fushigibana.flags & 1) && (joint->dobj_f2 >= ITFUSHIGIBANA_RAZOR_SPAWN_BEGIN)) &&
+        (joint->dobj_f2 <= ITFUSHIGIBANA_RAZOR_SPAWN_END))
     {
         joint->mobj->index = 1;
 
@@ -67,7 +67,7 @@ bool32 func_ovl3_801845B4(GObj *item_gobj)
         {
             func_ovl3_801849EC(item_gobj, &pos);
 
-            ap->item_vars.fushigibana.razor_spawn_wait = ATFUSHIGIBANA_RAZOR_SPAWN_WAIT;
+            ap->item_vars.fushigibana.razor_spawn_wait = ITFUSHIGIBANA_RAZOR_SPAWN_WAIT;
 
             func_800269C0(0x8CU);
 
@@ -136,7 +136,7 @@ bool32 func_ovl3_80184820(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel_air.x += ATFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
+    ip->phys_info.vel_air.x += ITFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -203,13 +203,13 @@ GObj *func_ovl3_801849EC(GObj *item_gobj, Vec3f *pos)
 
     ip->lr = LEFT;
 
-    ip->phys_info.vel_air.x = ATFUSHIGIBANA_RAZOR_VEL_X;
+    ip->phys_info.vel_air.x = ITFUSHIGIBANA_RAZOR_VEL_X;
 
     joint = DObjGetStruct(weapon_gobj);
 
     joint->translate = *pos;
 
-    ip->lifetime = ATFUSHIGIBANA_RAZOR_LIFETIME;
+    ip->lifetime = ITFUSHIGIBANA_RAZOR_LIFETIME;
 
     return weapon_gobj;
 }

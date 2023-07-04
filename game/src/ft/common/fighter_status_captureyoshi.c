@@ -260,7 +260,7 @@ void ftCommon_YoshiEgg_ProcTrap(GObj *fighter_gobj)
         fp->status_vars.common.captureyoshi.breakout_wait = 0;
         fp->status_vars.common.captureyoshi.unk_0x9 = 1;
     }
-    fp->unk_ft_0x814 = 4;
+    fp->damage_kind = 4;
 }
 
 ftYoshiEggDesc Fighter_YoshiEgg_HurtDesc[Ft_Kind_EnumMax] =

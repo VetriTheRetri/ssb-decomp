@@ -11,7 +11,7 @@ bool32 func_ovl3_8017EBE0(GObj *item_gobj)
     }
     if (ap->item_vars.mew.esper_gfx_int == 0)
     {
-        ap->item_vars.mew.esper_gfx_int = ATMEW_GFX_SPAWN_INT;
+        ap->item_vars.mew.esper_gfx_int = ITMEW_GFX_SPAWN_INT;
 
         func_ovl2_80102E90(&pos);
     }
@@ -19,7 +19,7 @@ bool32 func_ovl3_8017EBE0(GObj *item_gobj)
 
     ap->it_multi--;
 
-    ap->phys_info.vel_air.y += ATMEW_FLY_ADD_VEL_Y;
+    ap->phys_info.vel_air.y += ITMEW_FLY_ADD_VEL_Y;
 
     return FALSE;
 }
@@ -28,17 +28,17 @@ void func_ovl3_8017EC84(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->it_multi = ATMEW_LIFETIME;
+    ap->it_multi = ITMEW_LIFETIME;
 
     if (rand_u16_range(2) != 0)
     {
-        ap->phys_info.vel_air.x = ATMEW_START_VEL_X;
+        ap->phys_info.vel_air.x = ITMEW_START_VEL_X;
     }
     else
     {
-        ap->phys_info.vel_air.x = -ATMEW_START_VEL_X;
+        ap->phys_info.vel_air.x = -ITMEW_START_VEL_X;
     }
-    ap->phys_info.vel_air.y = ATMEW_START_VEL_Y;
+    ap->phys_info.vel_air.y = ITMEW_START_VEL_Y;
 
     func_800269C0(0x89U);
 
@@ -98,11 +98,11 @@ GObj* jtgt_ovl3_8017EDE4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         DObj *joint = DObjGetStruct(item_gobj);
         Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y; // Starting to think this is a macro
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y; // Starting to think this is a macro
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
             

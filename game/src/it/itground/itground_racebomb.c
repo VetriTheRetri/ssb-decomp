@@ -56,7 +56,7 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 
             temp_s4 = (*(uintptr_t *)((uintptr_t)*Article_Gr_Bomb_Data.p_file + Article_Gr_Bomb_Data.offset) - (uintptr_t)&D_NF_00000788) + (uintptr_t)&D_NF_000008A0; // Linker thing
 
-            for (i = 0; i < ATGRBOMB_GFX_COUNT; i++)
+            for (i = 0; i < ITRBOMB_GFX_COUNT; i++)
             {
                 joint = func_800092D0(effect_gobj, temp_s4);
 
@@ -72,7 +72,7 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
                 joint->dobj_f1 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
                 joint->dobj_f2 = (f32)((((rand_f32() * 100.0F) + -50.0F) * PI32) / 180.0F);
             }
-            ep->lifetime = ATGRBOMB_GFX_LIFETIME;
+            ep->lifetime = ITRBOMB_GFX_LIFETIME;
 
             effect_gobj->user_data = ep;
 
@@ -86,10 +86,10 @@ bool32 jtgt_ovl3_80184D74(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
-    func_ovl3_80172558(ap, ATGRBOMB_GRAVITY, ATGRBOMB_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITRBOMB_GRAVITY, ITRBOMB_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
-    joint->rotate.z += ap->item_vars.gr_bomb.roll_rotate_speed;
+    joint->rotate.z += ap->item_vars.rbomb.roll_rotate_speed;
 
     return FALSE;
 }
@@ -107,7 +107,7 @@ bool32 jtgt_ovl3_80184E04(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    if (ap->percent_damage >= ATGRBOMB_HEALTH_MAX)
+    if (ap->percent_damage >= ITRBOMB_HEALTH_MAX)
     {
         return func_ovl3_80184DC4(item_gobj);
     }
@@ -167,7 +167,7 @@ bool32 jtgt_ovl3_80184EDC(GObj *item_gobj)
             func_ovl3_80172508(item_gobj);
         }
         func_800269C0(0x47U);
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
     }
     return FALSE;
 }
@@ -190,7 +190,7 @@ bool32 jtgt_ovl3_80184FD4(GObj *item_gobj)
 
     ap->it_multi++;
 
-    if (ap->it_multi == ATGRBOMB_EXPLODE_LIFETIME)
+    if (ap->it_multi == ITRBOMB_EXPLODE_LIFETIME)
     {
         return TRUE;
     }
@@ -205,15 +205,15 @@ bool32 jtgt_ovl3_80185030(GObj *item_gobj)
     f32 roll_rotate_speed;
     f32 sqrt_vel;
 
-    ap->phys_info.vel_air.x += (-(atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32) * ATGRBOMB_MUL_VEL_X);
+    ap->phys_info.vel_air.x += (-(atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32) * ITRBOMB_MUL_VEL_X);
 
     ap->lr = (ap->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 
     sqrt_vel = sqrtf(SQUARE(ap->phys_info.vel_air.x) + SQUARE(ap->phys_info.vel_air.y));
 
-    roll_rotate_speed = ((ap->lr == LEFT) ? ATGRBOMB_ROLL_ROTATE_MUL : -ATGRBOMB_ROLL_ROTATE_MUL) * sqrt_vel;
+    roll_rotate_speed = ((ap->lr == LEFT) ? ITRBOMB_ROLL_ROTATE_MUL : -ITRBOMB_ROLL_ROTATE_MUL) * sqrt_vel;
 
-    ap->item_vars.gr_bomb.roll_rotate_speed = roll_rotate_speed;
+    ap->item_vars.rbomb.roll_rotate_speed = roll_rotate_speed;
 
     DObjGetStruct(item_gobj)->rotate.z += roll_rotate_speed;
 
@@ -243,7 +243,7 @@ GObj* jtgt_ovl3_8018518C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     {
         Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->item_vars.gr_bomb.roll_rotate_speed = 0.0F;
+        ap->item_vars.rbomb.roll_rotate_speed = 0.0F;
 
         func_ovl3_80184FAC(item_gobj);
     }
@@ -269,7 +269,7 @@ void func_ovl3_801851F4(GObj *item_gobj)
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
     itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ((uintptr_t)*Article_Gr_Bomb_Data.p_file + (intptr_t)&Article_Gr_Bomb_Hit));
 }
 
@@ -297,7 +297,7 @@ void func_ovl3_801852B8(GObj *item_gobj)
     {
         effect_unk->effect_info->scale.x =
             effect_unk->effect_info->scale.y =
-            effect_unk->effect_info->scale.z = ATGRBOMB_EXPLODE_GFX_SCALE;
+            effect_unk->effect_info->scale.z = ITRBOMB_EXPLODE_GFX_SCALE;
     }
     func_ovl2_801008F4(1);
 

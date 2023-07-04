@@ -3,7 +3,7 @@
 #include <game/src/gr/ground.h>
 #include <game/src/gm/gmground.h>
 #include <game/src/gm/gmmatch.h>
-#include <game/src/it/article/item.h>
+#include <game/src/it/item.h>
 
 extern Weapon_Struct *wpManager_Global_CurrentUserData;
 extern u32 wpManager_Global_GroupIndex;
@@ -73,7 +73,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
 {
     GObj *weapon_gobj;
     void (*cb)(GObj*);
-    wpCommonAttributes *wp_hit_desc;
+    wpCommonAttributes *attributes;
     Weapon_Struct *wp;
     Weapon_Struct *owner_wp;
     Item_Struct *ap;
@@ -93,7 +93,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         wpManager_SetPrevAlloc(wp);
         return NULL;
     }
-    wp_hit_desc = *(uintptr_t*)item_status_desc->p_item + (intptr_t)item_status_desc->offset_wp_hit; // I hope this is correct?
+    attributes = *(uintptr_t*)item_status_desc->p_item + (intptr_t)item_status_desc->offset; // I hope this is correct?
     weapon_gobj->user_data = wp;
     wp->weapon_gobj = weapon_gobj;
     wp->wp_kind = item_status_desc->wp_kind;
@@ -181,44 +181,44 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
 
     wp->phys_info.vel_ground = 0.0F;
 
-    wp->weapon_hit.damage = wp_hit_desc->damage;
+    wp->weapon_hit.damage = attributes->damage;
 
-    wp->weapon_hit.element = wp_hit_desc->element;
+    wp->weapon_hit.element = attributes->element;
 
-    wp->weapon_hit.offset[0].x = wp_hit_desc->offset[0].x;
-    wp->weapon_hit.offset[0].y = wp_hit_desc->offset[0].y;
-    wp->weapon_hit.offset[0].z = wp_hit_desc->offset[0].z;
-    wp->weapon_hit.offset[1].x = wp_hit_desc->offset[1].x;
-    wp->weapon_hit.offset[1].y = wp_hit_desc->offset[1].y;
-    wp->weapon_hit.offset[1].z = wp_hit_desc->offset[1].z;
+    wp->weapon_hit.offset[0].x = attributes->offset[0].x;
+    wp->weapon_hit.offset[0].y = attributes->offset[0].y;
+    wp->weapon_hit.offset[0].z = attributes->offset[0].z;
+    wp->weapon_hit.offset[1].x = attributes->offset[1].x;
+    wp->weapon_hit.offset[1].y = attributes->offset[1].y;
+    wp->weapon_hit.offset[1].z = attributes->offset[1].z;
 
-    wp->weapon_hit.size = wp_hit_desc->size * 0.5F;
+    wp->weapon_hit.size = attributes->size * 0.5F;
 
-    wp->weapon_hit.angle = wp_hit_desc->angle;
+    wp->weapon_hit.angle = attributes->angle;
 
-    wp->weapon_hit.knockback_scale = wp_hit_desc->knockback_scale;
-    wp->weapon_hit.knockback_weight = wp_hit_desc->knockback_weight;
-    wp->weapon_hit.knockback_base = wp_hit_desc->knockback_base;
+    wp->weapon_hit.knockback_scale = attributes->knockback_scale;
+    wp->weapon_hit.knockback_weight = attributes->knockback_weight;
+    wp->weapon_hit.knockback_base = attributes->knockback_base;
 
-    wp->weapon_hit.rebound = wp_hit_desc->rebound;
-    wp->weapon_hit.shield_damage = wp_hit_desc->shield_damage;
+    wp->weapon_hit.rebound = attributes->rebound;
+    wp->weapon_hit.shield_damage = attributes->shield_damage;
 
-    wp->weapon_hit.hit_sfx = wp_hit_desc->sfx;
+    wp->weapon_hit.hit_sfx = attributes->sfx;
 
-    wp->weapon_hit.priority = wp_hit_desc->priority;
-    wp->weapon_hit.can_rehit_item = wp_hit_desc->can_rehit_item;
-    wp->weapon_hit.can_rehit_fighter = wp_hit_desc->can_rehit_fighter;
+    wp->weapon_hit.priority = attributes->priority;
+    wp->weapon_hit.can_rehit_item = attributes->can_rehit_item;
+    wp->weapon_hit.can_rehit_fighter = attributes->can_rehit_fighter;
 
     wp->weapon_hit.can_rehit_shield = FALSE;
 
-    wp->weapon_hit.can_hop = wp_hit_desc->can_hop;
-    wp->weapon_hit.can_reflect = wp_hit_desc->can_reflect;
-    wp->weapon_hit.can_absorb = wp_hit_desc->can_absorb;
+    wp->weapon_hit.can_hop = attributes->can_hop;
+    wp->weapon_hit.can_reflect = attributes->can_reflect;
+    wp->weapon_hit.can_absorb = attributes->can_absorb;
 
     wp->weapon_hit.noheal = FALSE;
 
-    wp->weapon_hit.can_shield = wp_hit_desc->can_shield;
-    wp->weapon_hit.hitbox_count = wp_hit_desc->hitbox_count;
+    wp->weapon_hit.can_shield = attributes->can_shield;
+    wp->weapon_hit.hitbox_count = attributes->hitbox_count;
 
     wp->weapon_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
 
@@ -249,35 +249,35 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
 
     if (item_status_desc->unk_0x0 & 1)
     {
-        func_8000F590(weapon_gobj, wp_hit_desc->unk_0x0, NULL, item_status_desc->unk_0x10, item_status_desc->unk_0x11, item_status_desc->unk_0x12);
+        func_8000F590(weapon_gobj, attributes->unk_0x0, NULL, item_status_desc->unk_0x10, item_status_desc->unk_0x11, item_status_desc->unk_0x12);
 
         cb = (item_status_desc->unk_0x0 & 2) ? func_ovl3_8016763C : func_ovl3_80167618;
     }
     else
     {
-        func_ovl0_800C89BC(func_800092D0(weapon_gobj, wp_hit_desc->unk_0x0), item_status_desc->unk_0x10, item_status_desc->unk_0x11, item_status_desc->unk_0x12);
+        func_ovl0_800C89BC(func_800092D0(weapon_gobj, attributes->unk_0x0), item_status_desc->unk_0x10, item_status_desc->unk_0x11, item_status_desc->unk_0x12);
 
         cb = (item_status_desc->unk_0x0 & 2) ? func_ovl3_801675F4 : func_ovl3_801675D0;
     }
     func_80009DF4(weapon_gobj, cb, 0xE, 0x80000000, -1);
 
-    if (wp_hit_desc->unk_0x4 != NULL)
+    if (attributes->unk_0x4 != NULL)
     {
-        func_8000F8F4(weapon_gobj, wp_hit_desc->unk_0x4);
+        func_8000F8F4(weapon_gobj, attributes->unk_0x4);
     }
 
-    if ((wp_hit_desc->unk_0x8 != NULL) || (wp_hit_desc->unk_0xC != NULL))
+    if ((attributes->unk_0x8 != NULL) || (attributes->unk_0xC != NULL))
     {
 
-        func_8000BED8(weapon_gobj, wp_hit_desc->unk_0x8, wp_hit_desc->unk_0xC, 0.0F);
+        func_8000BED8(weapon_gobj, attributes->unk_0x8, attributes->unk_0xC, 0.0F);
     }
     wp->coll_data.p_translate = &DObjGetStruct(weapon_gobj)->translate;
     wp->coll_data.p_lr = &wp->lr;
 
-    wp->coll_data.object_coll.top = (f32)wp_hit_desc->objectcoll_top;
-    wp->coll_data.object_coll.center = (f32)wp_hit_desc->objectcoll_center;
-    wp->coll_data.object_coll.bottom = (f32)wp_hit_desc->objectcoll_bottom;
-    wp->coll_data.object_coll.width = (f32)wp_hit_desc->objectcoll_width;
+    wp->coll_data.object_coll.top = (f32)attributes->objectcoll_top;
+    wp->coll_data.object_coll.center = (f32)attributes->objectcoll_center;
+    wp->coll_data.object_coll.bottom = (f32)attributes->objectcoll_bottom;
+    wp->coll_data.object_coll.width = (f32)attributes->objectcoll_width;
     wp->coll_data.p_object_coll = &wp->coll_data.object_coll;
 
     wp->coll_data.ignore_line_id = -1;

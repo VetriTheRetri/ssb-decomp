@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
+    "\\game\\include",
     "\\game\\src",
     "\\game\\src\\it",
     "\\game\\src\\it\\itcommon",
     "\\game\\src\\it\\itfighter",
-    "\\game\\src\\mp",
+    "\\game\\src\\it\\itmonster",
     "\\game\\src\\ovl2",
-    "\\game\\src\\wp",
-    "\\game\\src\\wp\\wpness"
+    "\\game\\src\\wp"
   ],
-  "SelectedNode": "\\game\\src\\it\\itfighter\\itlink_bomb.c",
+  "SelectedNode": "\\game\\src\\ovl2\\fighter_think.c",
   "PreviewInSolutionExplorer": false
 }

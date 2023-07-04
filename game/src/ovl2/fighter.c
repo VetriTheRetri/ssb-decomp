@@ -80,11 +80,9 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     fp->cliffcatch_wait = 0;
     fp->time_since_last_z = 0;
-    fp->acid_wait = 0;
 
-    fp->twister_wait = fp->tarucann_wait = 0;
+    fp->acid_wait = fp->twister_wait = fp->tarucann_wait = fp->damagefloor_wait = 0;
 
-    fp->hotfloor_wait = 0;
     fp->unk_ft_0x7AC = 0;
     fp->attack_damage = 0;
     fp->attack_hit_count = 0;
@@ -96,7 +94,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->unk_ft_0x820 = 0;
     fp->unk_ft_0x824 = 0;
     fp->damage_count = 0;
-    fp->unk_ft_0x814 = 0;
+    fp->damage_kind = 0;
     fp->damage_heal = 0;
     fp->damage_joint_index = 0;
     fp->invincible_timer = 0;
@@ -118,6 +116,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->lr_absorb = CENTER;
 
     fp->reflect_damage = 0;
+
     fp->special_hit = NULL;
 
     fp->attack1_followup_frames = 0.0F;
@@ -226,8 +225,8 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     case Ft_Kind_Kirby:
     case Ft_Kind_PolyKirby:
-
         fp->fighter_vars.kirby.copy_id = spawn->copy_kind;
+
         fp->fighter_vars.kirby.copysamus_charge_level = 0;
         fp->fighter_vars.kirby.copysamus_charge_recoil = 0;
         fp->fighter_vars.kirby.copydonkey_charge_level = 0;
@@ -237,9 +236,9 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
         if (spawn->copy_kind == Ft_Kind_Kirby)
         {
-            fp->fighter_vars.kirby.copy_bool_unk = FALSE;
+            fp->fighter_vars.kirby.is_ignore_losecopy = FALSE;
         }
-        else fp->fighter_vars.kirby.copy_bool_unk = TRUE;
+        else fp->fighter_vars.kirby.is_ignore_losecopy = TRUE;
 
         if (fp->ft_kind == Ft_Kind_Kirby)
         {
@@ -259,7 +258,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     case Ft_Kind_Purin:
     case Ft_Kind_PolyPurin:
-        fp->fighter_vars.purin.unk_0x0 = 0U;
+        fp->fighter_vars.purin.unk_0x0 = 0;
         break;
 
     case Ft_Kind_MasterHand:
@@ -277,7 +276,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
         break;
     }
     ftCommon_ClearHitAll(fighter_gobj);
-    ftCommon_SetHitStatusPartAll(fighter_gobj, 1);
+    ftCommon_SetHitStatusPartAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
     ftCommon_ResetColAnim(fighter_gobj);
 }
 
@@ -313,7 +312,7 @@ extern ftData *Fighter_FileData_ContainerList[Ft_Kind_EnumMax] =
 };
 extern u16 D_ovl2_80131398;
 
-GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
+GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
 {
     Fighter_Struct *fp;
     GObj *fighter_gobj;
@@ -336,7 +335,7 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     fp->fighter_gobj = fighter_gobj;
     fp->ft_kind = spawn->ft_kind;
     fp->ft_data = Fighter_FileData_ContainerList[fp->ft_kind];
-    attributes = fp->attributes = (ftCommonAttributes *)((uintptr_t)*fp->ft_data->p_file + (intptr_t)fp->ft_data->o_attributes);
+    attributes = fp->attributes = (ftCommonAttributes*) ((uintptr_t)*fp->ft_data->p_file + (intptr_t)fp->ft_data->o_attributes);
     fp->x9D0 = spawn->unk_rebirth_0x38;
     fp->team = spawn->team;
     fp->player = spawn->player;
@@ -403,7 +402,7 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
     }
     topn_joint = func_800092D0(fighter_gobj, NULL);
     fp->joint[ftParts_TopN_Joint] = topn_joint;
-    func_ovl0_800C89BC(topn_joint, 0x4BU, 0U, 0U);
+    func_ovl0_800C89BC(topn_joint, 0x4B, 0, 0);
     fp->joint[ftParts_TopN_Joint]->om_mtx[0]->unk05 = spawn->unk_rebirth_0x1D;
 
     func_ovl0_800C8DB4(fighter_gobj->obj, attributes->dobj_desc_container, fp->lod_current, &fp->joint[4], attributes->unk_ftca_0x29C, 0x4B, 0, 0, fp->costume_id, fp->unk_ft_0x149);
@@ -487,14 +486,14 @@ GObj *func_ovl2_800D7F3C(ftSpawnInfo *spawn) // Create fighter
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        gOMObj_AddGObjCommonProc(fighter_gobj, func_ovl2_800E1260, 1U, 5U);
-        gOMObj_AddGObjCommonProc(fighter_gobj, func_ovl2_800E2604, 1U, 4U);
-        gOMObj_AddGObjCommonProc(fighter_gobj, func_ovl2_800E2660, 1U, 3U);
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftObjectProc_SearchAllCatch, 1U, 2U);
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftObjectProc_SearchAllHit, 1U, 1U);
-        gOMObj_AddGObjCommonProc(fighter_gobj, func_ovl2_800E61EC, 1U, 0U);
+        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcInterruptMain, 1, 5);
+        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcPhysicsMapNormal, 1, 4);
+        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcPhysicsMapCapture, 1, 3);
+        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcSearchAllCatch, 1, 2);
+        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcSearchAllHit, 1, 1);
+        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcUpdateMain, 1, 0);
     }
-    else gOMObj_AddGObjCommonProc(fighter_gobj, func_ovl1_80390584, 1U, 5U);
+    else gOMObj_AddGObjCommonProc(fighter_gobj, func_ovl1_80390584, 1, 5);
 
     func_ovl2_800D79F0(fighter_gobj, spawn);
 

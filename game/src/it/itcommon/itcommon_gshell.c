@@ -134,7 +134,7 @@ void itGShell_GSpin_UpdateGFX(GObj *item_gobj)
 
         func_ovl2_800FF048(&pos, ip->lr, 1.0F);
 
-        ip->item_vars.shell.dust_gfx_int = ATGSHELL_GFX_SPAWN_INT;
+        ip->item_vars.shell.dust_gfx_int = ITGSHELL_GFX_SPAWN_INT;
     }
     ip->item_vars.shell.dust_gfx_int--;
 }
@@ -167,7 +167,7 @@ bool32 itGShell_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATGSHELL_GRAVITY, ATGSHELL_T_VEL);
+    itMain_UpdatePhysicsAir(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
 
     return FALSE;
 }
@@ -203,7 +203,7 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
 
     itMap_SetGround(ip);
 
-    if (ABSF(ip->phys_info.vel_air.x) < ATGSHELL_STOP_VEL_X)
+    if (ABSF(ip->phys_info.vel_air.x) < ITGSHELL_STOP_VEL_X)
     {
         itMain_SetGroundPickup(item_gobj);
 
@@ -268,9 +268,9 @@ bool32 itGShell_SDefault_ProcDamage(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->phys_info.vel_air.x = ip->damage_taken_recent * ATGSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
+    ip->phys_info.vel_air.x = ip->damage_taken_recent * ITGSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
 
-    if (ABSF(ip->phys_info.vel_air.x) > ATGSHELL_STOP_VEL_X)
+    if (ABSF(ip->phys_info.vel_air.x) > ITGSHELL_STOP_VEL_X)
     {
         ip->item_vars.shell.is_damage = TRUE;
 
@@ -280,7 +280,7 @@ bool32 itGShell_SDefault_ProcDamage(GObj *item_gobj)
 
         ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-        func_ovl3_801727BC(item_gobj);
+        itMain_CopyDamageStats(item_gobj);
 
         if (ip->ground_or_air != GA_Ground)
         {
@@ -323,7 +323,7 @@ bool32 itGShell_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATGSHELL_GRAVITY, ATGSHELL_T_VEL);
+    itMain_UpdatePhysicsAir(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
 
     return FALSE;
 }
@@ -386,7 +386,7 @@ bool32 itGShell_GSpin_ProcMap(GObj *item_gobj)
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), 0.2F, NULL) != FALSE)
     {
         func_ovl3_80172508(item_gobj);
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
     }
     return FALSE;
 }
@@ -398,13 +398,13 @@ bool32 itGShell_SDefault_ProcHit(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    ip->item_vars.shell.health = rand_u16_range(ATGSHELL_HEALTH_MAX);
+    ip->item_vars.shell.health = rand_u16_range(ITGSHELL_HEALTH_MAX);
 
-    ip->phys_info.vel_air.y = ATGSHELL_REBOUND_VEL_Y;
+    ip->phys_info.vel_air.y = ITGSHELL_REBOUND_VEL_Y;
 
-    ip->phys_info.vel_air.x = rand_f32() * (-ip->phys_info.vel_air.x * ATGSHELL_REBOUND_MUL_X);
+    ip->phys_info.vel_air.x = rand_f32() * (-ip->phys_info.vel_air.x * ITGSHELL_REBOUND_MUL_X);
 
-    func_ovl3_8017279C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
     func_ovl3_80178704(item_gobj);
     itGShell_AFall_SetStatus(item_gobj);
 
@@ -416,14 +416,14 @@ bool32 itGShell_GASpin_ProcDamage(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    ip->phys_info.vel_air.x += (ip->damage_taken_recent * ATGSHELL_DAMAGE_MUL_ADD * -ip->lr_damage);
+    ip->phys_info.vel_air.x += (ip->damage_taken_recent * ITGSHELL_DAMAGE_MUL_ADD * -ip->lr_damage);
 
-    if (ABSF(ip->phys_info.vel_air.x) > ATGSHELL_STOP_VEL_X)
+    if (ABSF(ip->phys_info.vel_air.x) > ITGSHELL_STOP_VEL_X)
     {
         ip->item_hit.update_state = gmHitCollision_UpdateState_New;
 
         itManager_UpdateHitPositions(item_gobj);
-        func_ovl3_801727BC(item_gobj);
+        itMain_CopyDamageStats(item_gobj);
 
         if (ip->ground_or_air != FALSE)
         {
@@ -453,13 +453,13 @@ void itGShell_GSpin_InitItemVars(GObj *item_gobj)
 
     ip->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 
-    if (ip->phys_info.vel_air.x > ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x > ITGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel_air.x = ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = ITGSHELL_CLAMP_VEL_X;
     }
-    if (ip->phys_info.vel_air.x < -ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x < -ITGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel_air.x = -ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = -ITGSHELL_CLAMP_VEL_X;
     }
     ip->phys_info.vel_air.y = 0.0F;
 
@@ -469,14 +469,14 @@ void itGShell_GSpin_InitItemVars(GObj *item_gobj)
     }
     else ip->lr = RIGHT;
 
-    ip->item_vars.shell.dust_gfx_int = ATGSHELL_GFX_SPAWN_INT;
-    ip->item_vars.shell.damage_all_delay = ATGSHELL_DAMAGE_ALL_WAIT;
+    ip->item_vars.shell.dust_gfx_int = ITGSHELL_GFX_SPAWN_INT;
+    ip->item_vars.shell.damage_all_delay = ITGSHELL_DAMAGE_ALL_WAIT;
 
     func_ovl3_80178670(item_gobj);
 
     ip->is_damage_all = FALSE;
 
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
     func_800269C0(0x37);
 }
 
@@ -492,13 +492,13 @@ void itGShell_ASpin_InitItemVars(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ip->phys_info.vel_air.x > ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x > ITGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel_air.x = ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = ITGSHELL_CLAMP_VEL_X;
     }
-    if (ip->phys_info.vel_air.x < -ATGSHELL_CLAMP_VEL_X)
+    if (ip->phys_info.vel_air.x < -ITGSHELL_CLAMP_VEL_X)
     {
-        ip->phys_info.vel_air.x = -ATGSHELL_CLAMP_VEL_X;
+        ip->phys_info.vel_air.x = -ITGSHELL_CLAMP_VEL_X;
     }
     if (ip->phys_info.vel_air.x < 0.0F)
     {
@@ -508,7 +508,7 @@ void itGShell_ASpin_InitItemVars(GObj *item_gobj)
 
     ip->is_damage_all = FALSE;
 
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
 }
 
 // 0x80178FA8
@@ -549,7 +549,7 @@ GObj* itCommon_GShell_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
 
         ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
 
-        ip->lifetime = ATGSHELL_LIFETIME;
+        ip->lifetime = ITGSHELL_LIFETIME;
     }
     return item_gobj;
 }

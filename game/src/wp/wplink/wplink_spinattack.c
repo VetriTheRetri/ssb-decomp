@@ -50,13 +50,13 @@ bool32 wpLink_SpinAttack_ProcUpdate(GObj *weapon_gobj)
 
     if (sqrt_vel > 0.0F)
     {
-        if (sqrt_vel < ITSPINATTACK_VEL_CLAMP)
+        if (sqrt_vel < WPSPINATTACK_VEL_CLAMP)
         {
             mod_vel = 0.0F;
         }
         else
         {
-            mod_vel = sqrt_vel - ITSPINATTACK_VEL_CLAMP;
+            mod_vel = sqrt_vel - WPSPINATTACK_VEL_CLAMP;
         }
         wp->weapon_vars.spin_attack.vel.x = (wp->weapon_vars.spin_attack.vel.x * mod_vel) / sqrt_vel;
         wp->weapon_vars.spin_attack.vel.y = (wp->weapon_vars.spin_attack.vel.y * mod_vel) / sqrt_vel;
@@ -74,12 +74,12 @@ bool32 wpLink_SpinAttack_ProcMap(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     f32 pos_x, pos_y;
-    s32 index = (wp->weapon_vars.spin_attack.pos_index + 1) % ITSPINATTACK_EXTEND_POS_COUNT;
+    s32 index = (wp->weapon_vars.spin_attack.pos_index + 1) % WPSPINATTACK_EXTEND_POS_COUNT;
 
     pos_x = wp->weapon_vars.spin_attack.pos_x[index];
     pos_y = wp->weapon_vars.spin_attack.pos_y[index];
 
-    pos_y += ITSPINATTACK_OFF_Y;
+    pos_y += WPSPINATTACK_OFF_Y;
 
     wp->phys_info.vel_air.x = pos_x - DObjGetStruct(weapon_gobj)->translate.x;
     wp->phys_info.vel_air.y = pos_y - DObjGetStruct(weapon_gobj)->translate.y;
@@ -102,7 +102,7 @@ GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     Vec3f offset = *pos;
     s32 unused;
 
-    offset.y += ITSPINATTACK_OFF_Y;
+    offset.y += WPSPINATTACK_OFF_Y;
 
     weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpLink_SpinAttack_WeaponDesc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
 
@@ -112,21 +112,21 @@ GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->weapon_hit.offset[0].x = ITSPINATTACK_OFF_X;
+    wp->weapon_hit.offset[0].x = WPSPINATTACK_OFF_X;
     wp->weapon_hit.offset[0].y = 0.0F;
-    wp->weapon_hit.offset[1].x = -ITSPINATTACK_OFF_X;
+    wp->weapon_hit.offset[1].x = -WPSPINATTACK_OFF_X;
     wp->weapon_hit.offset[1].y = 0.0F;
 
     wp->lr = fp->lr;
 
-    wp->lifetime = ITSPINATTACK_LIFETIME;
+    wp->lifetime = WPSPINATTACK_LIFETIME;
 
     wp->proc_dead = wpLink_SpinAttack_ProcDead;
 
     _bzero(&wp->weapon_vars.spin_attack, sizeof(wp->weapon_vars));
 
-    wp->weapon_vars.spin_attack.vel.x = cosf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
-    wp->weapon_vars.spin_attack.vel.y = __sinf(ITSPINATTACK_ANGLE) * ITSPINATTACK_VEL;
+    wp->weapon_vars.spin_attack.vel.x = cosf(WPSPINATTACK_ANGLE) * WPSPINATTACK_VEL;
+    wp->weapon_vars.spin_attack.vel.y = __sinf(WPSPINATTACK_ANGLE) * WPSPINATTACK_VEL;
 
     wp->phys_info.vel_air.z = 0.0F;
     wp->phys_info.vel_air.y = 0.0F;

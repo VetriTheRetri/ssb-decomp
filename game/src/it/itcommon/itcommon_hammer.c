@@ -96,7 +96,7 @@ typedef enum itHammerStatus
 // 0x80176110
 void itHammer_SDefault_SetColAnim(GObj *item_gobj)
 {
-    itMain_CheckSetColAnimIndex(item_gobj, ATHAMMER_WEAR_COLANIM_ID, ATHAMMER_WEAR_COLANIM_LENGTH);
+    itMain_CheckSetColAnimIndex(item_gobj, ITHAMMER_WEAR_COLANIM_ID, ITHAMMER_WEAR_COLANIM_LENGTH);
 }
 
 // 0x80176134
@@ -104,8 +104,8 @@ bool32 itHammer_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATHAMMER_GRAVITY, ATHAMMER_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -159,8 +159,8 @@ bool32 itHammer_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATHAMMER_GRAVITY, ATHAMMER_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }

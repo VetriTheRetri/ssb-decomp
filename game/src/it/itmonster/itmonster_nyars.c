@@ -15,10 +15,10 @@ bool32 func_ovl3_8017EEB0(GObj *item_gobj)
     }
     if (ap->it_multi == ap->item_vars.nyars.coin_spawn_wait)
     {
-        func_ovl3_8017F408(item_gobj, ap->item_vars.nyars.coin_rotate_step * ATNYARS_COIN_ANGLE_STEP);
+        func_ovl3_8017F408(item_gobj, ap->item_vars.nyars.coin_rotate_step * ITNYARS_COIN_ANGLE_STEP);
 
         ap->item_vars.nyars.coin_rotate_step++;
-        ap->item_vars.nyars.coin_spawn_wait = ap->it_multi - ATNYARS_COIN_SPAWN_WAIT;
+        ap->item_vars.nyars.coin_spawn_wait = ap->it_multi - ITNYARS_COIN_SPAWN_WAIT;
 
         func_800269C0(0x8AU);
     }
@@ -26,7 +26,7 @@ bool32 func_ovl3_8017EEB0(GObj *item_gobj)
     {
         joint->rotate.y += PI32;
 
-        ap->item_vars.nyars.model_rotate_wait = ATNYARS_MODEL_ROTATE_WAIT;
+        ap->item_vars.nyars.model_rotate_wait = ITNYARS_MODEL_ROTATE_WAIT;
     }
     ap->item_vars.nyars.model_rotate_wait--;
 
@@ -39,11 +39,11 @@ void func_ovl3_8017EFA0(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->it_multi = ATNYARS_LIFETIME;
+    ap->it_multi = ITNYARS_LIFETIME;
 
-    ap->item_vars.nyars.coin_spawn_wait = ap->it_multi - (ATNYARS_COIN_SPAWN_WAIT / 2);
+    ap->item_vars.nyars.coin_spawn_wait = ap->it_multi - (ITNYARS_COIN_SPAWN_WAIT / 2);
     ap->item_vars.nyars.coin_rotate_step = 0;
-    ap->item_vars.nyars.model_rotate_wait = ATNYARS_MODEL_ROTATE_WAIT;
+    ap->item_vars.nyars.model_rotate_wait = ITNYARS_MODEL_ROTATE_WAIT;
 }
 
 extern itStatusDesc Article_Nyars_Status[];
@@ -102,11 +102,11 @@ GObj *jtgt_ovl3_8017F08C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -182,13 +182,13 @@ GObj *func_ovl3_8017F2E4(GObj *item_gobj, u8 coin_number, f32 rotate_angle)
     }
     ip = wpGetStruct(weapon_gobj);
 
-    ip->weapon_vars.coin.lifetime = ATNYARS_COIN_LIFETIME;
+    ip->weapon_vars.coin.lifetime = ITNYARS_COIN_LIFETIME;
 
     ip->phys_info.vel_air.z = 0.0F;
     ip->phys_info.vel_air.y = 0.0F;
-    ip->phys_info.vel_air.x = ATNYARS_COIN_VEL_X;
+    ip->phys_info.vel_air.x = ITNYARS_COIN_VEL_X;
 
-    vec3_get_euler_rotation(&ip->phys_info.vel, 4, (((coin_number * ATYNARS_COIN_ANGLE_DIFF) + rotate_angle) * PI32) / 180.0F);
+    vec3_get_euler_rotation(&ip->phys_info.vel, 4, (((coin_number * ITNYARS_COIN_ANGLE_DIFF) + rotate_angle) * PI32) / 180.0F);
 
     joint = DObjGetStruct(weapon_gobj);
 
@@ -204,7 +204,7 @@ void func_ovl3_8017F408(GObj *item_gobj, f32 angle)
 {
     s32 coin_count;
 
-    for (coin_count = 0; coin_count < ATNYARS_COIN_SPAWN_MAX; coin_count++)
+    for (coin_count = 0; coin_count < ITNYARS_COIN_SPAWN_MAX; coin_count++)
     {
         func_ovl3_8017F2E4(item_gobj, coin_count, angle);
     }

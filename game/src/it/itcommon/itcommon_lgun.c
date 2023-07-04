@@ -120,8 +120,8 @@ bool32 itLGun_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATLGUN_GRAVITY, ATLGUN_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITLGUN_GRAVITY, ITLGUN_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -230,7 +230,7 @@ GObj* itCommon_LGun_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fla
     {
         Item_Struct *ip = itGetStruct(item_gobj);
 
-        ip->it_multi = ATLGUN_AMMO_MAX;
+        ip->it_multi = ITLGUN_AMMO_MAX;
 
         DObjGetStruct(item_gobj)->rotate.y = (rand_u16() & 1) ? F_DEG_TO_RAD(90.0F) : F_DEG_TO_RAD(-90.0F); // HALF_PI32, -HALF_PI32
 
@@ -246,15 +246,15 @@ bool32 wpLGun_Ammo_ProcUpdate(GObj *weapon_gobj)
 {
     DObj *joint = DObjGetStruct(weapon_gobj);
 
-    if (joint->scale.x < ATLGUN_AMMO_CLAMP_SCALE_X)
+    if (joint->scale.x < ITLGUN_AMMO_CLAMP_SCALE_X)
     {
-        joint->scale.x += ATLGUN_AMMO_STEP_SCALE_X;
+        joint->scale.x += ITLGUN_AMMO_STEP_SCALE_X;
 
         joint = DObjGetStruct(weapon_gobj); // Y tho lol
 
-        if (joint->scale.x > ATLGUN_AMMO_CLAMP_SCALE_X)
+        if (joint->scale.x > ITLGUN_AMMO_CLAMP_SCALE_X)
         {
-            joint->scale.x = ATLGUN_AMMO_CLAMP_SCALE_X;
+            joint->scale.x = ITLGUN_AMMO_CLAMP_SCALE_X;
         }
     }
     return FALSE;
@@ -321,7 +321,7 @@ GObj* wpLGun_Ammo_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel_air.x = wp->lr * ATLGUN_AMMO_VEL_X;
+    wp->phys_info.vel_air.x = wp->lr * ITLGUN_AMMO_VEL_X;
 
     DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
 

@@ -13,18 +13,18 @@ void func_ovl3_80181C20(GObj *item_gobj)
 
         if (ap->it_kind == It_Kind_Starmie)
         {
-            pos.x += ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_X * ap->lr;
-            pos.y += ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_Y;
+            pos.x += ITSTARMIE_STARMIE_SWIFT_SPAWN_OFF_X * ap->lr;
+            pos.y += ITSTARMIE_STARMIE_SWIFT_SPAWN_OFF_Y;
         }
-        else pos.x += ATSTARMIE_OTHER_SWIFT_SPAWN_OFF_X * ap->lr;
+        else pos.x += ITSTARMIE_OTHER_SWIFT_SPAWN_OFF_X * ap->lr;
 
         func_ovl3_80182608(item_gobj, &pos);
 
         func_800269C0(0x8CU);
 
-        ap->item_vars.starmie.swift_spawn_wait = (rand_u16_range(ATSTARMIE_SWIFT_SPAWN_WAIT_RANDOM) + ATSTARMIE_SWIFT_SPAWN_WAIT_CONST);
+        ap->item_vars.starmie.swift_spawn_wait = (rand_u16_range(ITSTARMIE_SWIFT_SPAWN_WAIT_RANDOM) + ITSTARMIE_SWIFT_SPAWN_WAIT_CONST);
 
-        ap->phys_info.vel_air.x = -ap->lr * ATSTARMIE_PUSH_VEL_X;
+        ap->phys_info.vel_air.x = -ap->lr * ITSTARMIE_PUSH_VEL_X;
     }
 }
 
@@ -59,10 +59,10 @@ void func_ovl3_80181D8C(GObj *item_gobj)
     {
         joint->rotate.y += PI32;
     }
-    ap->it_multi = ATSTARMIE_LIFETIME;
+    ap->it_multi = ITSTARMIE_LIFETIME;
 
     ap->item_vars.starmie.swift_spawn_wait = 0;
-    ap->item_vars.starmie.add_vel_x = ap->lr * ATSTARMIE_ADD_VEL_X;
+    ap->item_vars.starmie.add_vel_x = ap->lr * ITSTARMIE_ADD_VEL_X;
 }
 
 extern itStatusDesc Article_Starmie_Status[];
@@ -112,9 +112,9 @@ void func_ovl3_80181EF4(GObj *item_gobj, GObj *fighter_gobj)
 
     dist.x = fj->translate.x - aj->translate.x;
 
-    target_pos.y += ATSTARMIE_TARGET_POS_OFF_Y - fp->coll_data.object_coll.bottom;
+    target_pos.y += ITSTARMIE_TARGET_POS_OFF_Y - fp->coll_data.object_coll.bottom;
 
-    target_pos.x -= (fp->coll_data.object_coll.width + ATSTARMIE_TARGET_POS_OFF_X) * ((dist.x < 0.0F) ? LEFT : RIGHT);
+    target_pos.x -= (fp->coll_data.object_coll.width + ITSTARMIE_TARGET_POS_OFF_X) * ((dist.x < 0.0F) ? LEFT : RIGHT);
 
     victim_pos = &fj->translate;
 
@@ -122,7 +122,7 @@ void func_ovl3_80181EF4(GObj *item_gobj, GObj *fighter_gobj)
 
     ap->phys_info.vel_air.z = 0.0F;
     ap->phys_info.vel_air.y = 0.0F;
-    ap->phys_info.vel_air.x = ATSTARMIE_FOLLOW_VEL_X;
+    ap->phys_info.vel_air.x = ITSTARMIE_FOLLOW_VEL_X;
 
     vec3_get_euler_rotation(&ap->phys_info.vel, 4, atan2f(dist.y, dist.x));
 
@@ -239,11 +239,11 @@ GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
         DObj *joint = DObjGetStruct(item_gobj);
         Item_Struct *ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         func_80008CC0(joint, 0x48U, 0U);
 
@@ -331,7 +331,7 @@ GObj* func_ovl3_80182530(GObj *item_gobj, Vec3f *pos)
 
     ip->lr = ap->lr;
 
-    ip->phys_info.vel_air.x = ip->lr * ATSTARMIE_SWIFT_VEL_X;
+    ip->phys_info.vel_air.x = ip->lr * ITSTARMIE_SWIFT_VEL_X;
 
     joint = DObjGetStruct(weapon_gobj);
 
@@ -339,7 +339,7 @@ GObj* func_ovl3_80182530(GObj *item_gobj, Vec3f *pos)
 
     func_ovl2_8010066C(&joint->translate, 1.0F);
 
-    ip->lifetime = ATSTARMIE_SWIFT_LIFETIME;
+    ip->lifetime = ITSTARMIE_SWIFT_LIFETIME;
 
     if (ip->lr == RIGHT)
     {

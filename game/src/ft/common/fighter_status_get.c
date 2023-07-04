@@ -89,7 +89,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
             switch (ap->it_kind)
             {
             case It_Kind_Tomato:
-                ftCommon_ApplyDamageHeal(fp, ATTOMATO_DAMAGE_HEAL);
+                ftCommon_ApplyDamageHeal(fp, ITTOMATO_DAMAGE_HEAL);
                 itMain_DestroyItem(item_gobj);
 
                 if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->player == Scene_Info.player_port) && (gmBonusStat_TomatoPickupCount < U8_MAX))
@@ -99,7 +99,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
                 break;
 
             case It_Kind_Heart:
-                ftCommon_ApplyDamageHeal(fp, ATHEART_DAMAGE_HEAL);
+                ftCommon_ApplyDamageHeal(fp, ITHEART_DAMAGE_HEAL);
                 itMain_DestroyItem(item_gobj);
 
                 if ((Match_Info->game_type == gmMatch_GameType_1PGame) && (fp->player == Scene_Info.player_port) && (gmBonusStat_HeartPickupCount < U8_MAX))
@@ -109,9 +109,9 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
                 break;
 
             case It_Kind_Hammer:
-                fp->hammer_timer = ATHAMMER_TIME;
+                fp->hammer_timer = ITHAMMER_TIME;
 
-                ftSpecialItem_BGMSetPlay(ATHAMMER_BGM_ID);
+                ftSpecialItem_BGMSetPlay(ITHAMMER_BGM_ID);
                 break;
 
             default:

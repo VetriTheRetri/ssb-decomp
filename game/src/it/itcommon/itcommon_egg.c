@@ -111,8 +111,8 @@ bool32 itEgg_AFall_ProcUpdate(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATEGG_GRAVITY, ATEGG_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     joint->next->rotate.z = joint->rotate.z;
 
@@ -193,8 +193,8 @@ bool32 itEgg_FThrow_ProcUpdate(GObj *item_gobj)
     Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATEGG_GRAVITY, ATEGG_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     joint->next->rotate.z = joint->rotate.z;
 
@@ -264,7 +264,7 @@ bool32 itEgg_NExplode_ProcUpdate(GObj *item_gobj)
 
     ip->it_multi++;
 
-    if (ip->it_multi == ATEGG_EXPLODE_GFX_WAIT)
+    if (ip->it_multi == ITEGG_EXPLODE_GFX_WAIT)
     {
         func_ovl2_801041A0(&DObjGetStruct(item_gobj)->translate);
 
@@ -334,8 +334,8 @@ void itEgg_NExplode_InitItemVars(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_8017279C(item_gobj);
-    func_ovl3_8017275C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
+    itMain_RefreshHit(item_gobj);
     itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ( (uintptr_t)*itCommon_Egg_ItemDesc.p_file + (intptr_t)&D_NF_00000098) ); // Linker thing
 }
 
@@ -363,7 +363,7 @@ void itEgg_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 
     if (ep != NULL)
     {
-        ep->effect_info->scale.x = ep->effect_info->scale.y = ep->effect_info->scale.z = ATEGG_EXPLODE_GFX_SCALE;
+        ep->effect_info->scale.x = ep->effect_info->scale.y = ep->effect_info->scale.z = ITEGG_EXPLODE_GFX_SCALE;
     }
 
     func_ovl2_801008F4(1);

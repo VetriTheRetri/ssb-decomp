@@ -82,7 +82,7 @@ bool32 func_ovl3_801735E0(Coll_Data *coll_data, GObj *item_gobj, s32 arg2)
 
         func_800269C0(0x2EU);
 
-        ap->rotate_speed = 0.0F;
+        ap->rotate_step = 0.0F;
         joint->rotate.z = 0.0F;
     }
     return coll_data->unk_0x64;
@@ -124,7 +124,7 @@ bool32 func_ovl3_801736B4(Coll_Data *coll_data, GObj *item_gobj, u32 coll_flags)
             func_ovl2_800D9F84(coll_data);
             func_800269C0(0x2EU);
 
-            ap->rotate_speed = 0.0F;
+            ap->rotate_step = 0.0F;
 
             joint->rotate.z = 0.0F;
 

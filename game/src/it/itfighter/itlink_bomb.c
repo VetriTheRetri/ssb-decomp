@@ -14,7 +14,7 @@ void func_ovl3_801859C0(GObj *item_gobj)
     {
         f32 *p_scale = (f32*) ((uintptr_t)*Article_Link_Bomb_Data.p_file + (intptr_t)&Article_Link_Bomb_Scale); // Linker thing
 
-        s32 index = (ip->item_vars.link_bomb.scale_index >= ATLINKBOMB_SCALE_INDEX_REWIND) ? ATLINKBOMB_SCALE_INDEX_MAX - ip->item_vars.link_bomb.scale_index : ip->item_vars.link_bomb.scale_index;
+        s32 index = (ip->item_vars.link_bomb.scale_index >= ITLINKBOMB_SCALE_INDEX_REWIND) ? ITLINKBOMB_SCALE_INDEX_MAX - ip->item_vars.link_bomb.scale_index : ip->item_vars.link_bomb.scale_index;
 
         if (ip->is_hold)
         {
@@ -24,9 +24,9 @@ void func_ovl3_801859C0(GObj *item_gobj)
         {
             joint->scale.x = joint->scale.y = p_scale[index];
         }
-        ip->item_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
+        ip->item_vars.link_bomb.scale_int = ITLINKBOMB_SCALE_INT;
 
-        if (ip->item_vars.link_bomb.scale_index >= ATLINKBOMB_SCALE_INDEX_MAX)
+        if (ip->item_vars.link_bomb.scale_index >= ITLINKBOMB_SCALE_INDEX_MAX)
         {
             ip->item_vars.link_bomb.scale_index = 0;
         }
@@ -48,9 +48,9 @@ void func_ovl3_80185A80(GObj *item_gobj)
 
     if (ep != NULL)
     {
-        ep->effect_info->scale.x = ATLINKBOMB_EXPLODE_GFX_SCALE;
-        ep->effect_info->scale.y = ATLINKBOMB_EXPLODE_GFX_SCALE;
-        ep->effect_info->scale.z = ATLINKBOMB_EXPLODE_GFX_SCALE;
+        ep->effect_info->scale.x = ITLINKBOMB_EXPLODE_GFX_SCALE;
+        ep->effect_info->scale.y = ITLINKBOMB_EXPLODE_GFX_SCALE;
+        ep->effect_info->scale.z = ITLINKBOMB_EXPLODE_GFX_SCALE;
     }
     func_ovl2_801008F4(1);
 
@@ -58,7 +58,7 @@ void func_ovl3_80185A80(GObj *item_gobj)
 
     ip->item_hit.hit_sfx = 1;
 
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
     func_ovl3_8018656C(item_gobj);
 }
 
@@ -79,7 +79,7 @@ bool32 func_ovl3_80185B84(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ip->damage_taken_recent >= ATLINKBOMB_HEALTH)
+    if (ip->damage_taken_recent >= ITLINKBOMB_HEALTH)
     {
         func_ovl3_80186368(item_gobj);
     }
@@ -87,8 +87,8 @@ bool32 func_ovl3_80185B84(GObj *item_gobj)
     {
         ip->lr = -ip->lr_damage;
 
-        ip->phys_info.vel_air.x = -ip->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_X;
-        ip->phys_info.vel_air.y = -ip->lr_damage * ATLINKBOMB_DAMAGE_RECOIL_VEL_Y;
+        ip->phys_info.vel_air.x = -ip->lr_damage * ITLINKBOMB_DAMAGE_RECOIL_VEL_X;
+        ip->phys_info.vel_air.y = -ip->lr_damage * ITLINKBOMB_DAMAGE_RECOIL_VEL_Y;
     }
     return FALSE;
 }
@@ -97,7 +97,7 @@ bool32 func_ovl3_80185BFC(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    if ((ABSF(ip->phys_info.vel_air.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(ip->phys_info.vel_air.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
+    if ((ABSF(ip->phys_info.vel_air.x) > ITLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(ip->phys_info.vel_air.y) > ITLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
     {
         func_ovl3_80186368(item_gobj);
     }
@@ -105,8 +105,8 @@ bool32 func_ovl3_80185BFC(GObj *item_gobj)
     {
         ip->lr = -ip->lr_attack;
 
-        ip->phys_info.vel_air.x = -ip->lr_attack * ATLINKBOMB_HIT_RECOIL_VEL_X;
-        ip->phys_info.vel_air.y = ATLINKBOMB_HIT_RECOIL_VEL_Y;
+        ip->phys_info.vel_air.x = -ip->lr_attack * ITLINKBOMB_HIT_RECOIL_VEL_X;
+        ip->phys_info.vel_air.y = ITLINKBOMB_HIT_RECOIL_VEL_Y;
 
         itLinkBomb_AFall_SetStatus(item_gobj);
     }
@@ -134,25 +134,25 @@ bool32 itLinkBomb_SDefault_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATLINKBOMB_GRAVITY, ATLINKBOMB_T_VEL);
+    itMain_UpdatePhysicsAir(ip, ITLINKBOMB_GRAVITY, ITLINKBOMB_T_VEL);
 
     if (ip->lifetime == 0)
     {
         func_ovl3_80186368(item_gobj);
     }
-    if (ip->lifetime == ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime == ITLINKBOMB_BLOAT_BEGIN)
     {
-        itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+        itMain_CheckSetColAnimIndex(item_gobj, ITLINKBOMB_BLOAT_COLANIM_ID, ITLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ip->item_vars.link_bomb.scale_index = 1;
     }
-    if (ip->lifetime < ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime < ITLINKBOMB_BLOAT_BEGIN)
     {
         func_ovl3_801859C0(item_gobj);
     }
     ip->lifetime--;
 
-    func_ovl3_801713F4(item_gobj);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -173,13 +173,13 @@ bool32 jtgt_ovl3_80185DCC(GObj *item_gobj)
     {
         func_ovl3_80186368(item_gobj);
     }
-    if (ip->lifetime == ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime == ITLINKBOMB_BLOAT_BEGIN)
     {
-        itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+        itMain_CheckSetColAnimIndex(item_gobj, ITLINKBOMB_BLOAT_COLANIM_ID, ITLINKBOMB_BLOAT_COLANIM_LENGTH);
 
         ip->item_vars.link_bomb.scale_index = 1;
     }
-    if (ip->lifetime < ATLINKBOMB_BLOAT_BEGIN)
+    if (ip->lifetime < ITLINKBOMB_BLOAT_BEGIN)
     {
         func_ovl3_801859C0(item_gobj);
     }
@@ -253,16 +253,16 @@ bool32 itLinkBomb_AFall_ProcUpdate(GObj *item_gobj)
                                                                             // Do we leave this out of the header and declare it separately to match?
                                                                             // Update 3/23/2023: matches as variadic. No comment.
                                                                             // Update  7/2/2023: variadic match confirmed fake, so does this file use an erroneous decleration?
-            func_ovl3_8017279C(item_gobj);
+            itMain_ClearOwnerStats(item_gobj);
             func_ovl3_80186368(item_gobj);
         }
-        if (ip->lifetime == ATLINKBOMB_BLOAT_BEGIN)
+        if (ip->lifetime == ITLINKBOMB_BLOAT_BEGIN)
         {
-            itMain_CheckSetColAnimIndex(item_gobj, ATLINKBOMB_BLOAT_COLANIM_ID, ATLINKBOMB_BLOAT_COLANIM_LENGTH);
+            itMain_CheckSetColAnimIndex(item_gobj, ITLINKBOMB_BLOAT_COLANIM_ID, ITLINKBOMB_BLOAT_COLANIM_LENGTH);
 
             ip->item_vars.link_bomb.scale_index = 1;
         }
-        if (ip->lifetime < ATLINKBOMB_BLOAT_BEGIN)
+        if (ip->lifetime < ITLINKBOMB_BLOAT_BEGIN)
         {
             func_ovl3_801859C0(item_gobj);
         }
@@ -287,7 +287,7 @@ bool32 jtgt_ovl3_80186150(GObj *item_gobj)
 
     if (itMap_CheckMapCollideAny(item_gobj, 0.4F, 0.3F, itLinkBomb_AFall_SetStatus) != FALSE)
     {
-        if ((ABSF(vel.x) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(vel.y) > ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
+        if ((ABSF(vel.x) > ITLINKBOMB_EXPLODE_THRESHOLD_VEL_X) || (ABSF(vel.y) > ITLINKBOMB_EXPLODE_THRESHOLD_VEL_Y))
         {
             func_ovl3_80186368(item_gobj);
         }
@@ -360,7 +360,7 @@ void func_ovl3_80186368(GObj *item_gobj)
 
     ip->phys_info.vel_air.x = ip->phys_info.vel_air.y = ip->phys_info.vel_air.z = 0.0F;
 
-    func_ovl3_8017279C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
     func_ovl3_80185A80(item_gobj);
     func_800269C0(1);
 }
@@ -429,7 +429,7 @@ bool32 jtgt_ovl3_80186524(GObj *item_gobj)
 
     ip->it_multi++;
 
-    if (ip->it_multi == ATLINKBOMB_EXPLODE_LIFETIME)
+    if (ip->it_multi == ITLINKBOMB_EXPLODE_LIFETIME)
     {
         return TRUE;
     }
@@ -458,10 +458,10 @@ GObj* func_ovl3_801865A0(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 
         ip->it_multi = 0;
 
-        ip->lifetime = ATLINKBOMB_LIFETIME;
+        ip->lifetime = ITLINKBOMB_LIFETIME;
 
         ip->item_vars.link_bomb.scale_index = 0;
-        ip->item_vars.link_bomb.scale_int = ATLINKBOMB_SCALE_INT;
+        ip->item_vars.link_bomb.scale_int = ITLINKBOMB_SCALE_INT;
 
         ip->item_hit.can_rehit_shield = TRUE;
 

@@ -287,7 +287,7 @@ glabel func_ovl4_8018D228
   /* 10A3B4 8018D4C4 0C035E2D */       jal func_ovl2_800D78B4
   /* 10A3B8 8018D4C8 90640023 */       lbu $a0, 0x23($v1)
   /* 10A3BC 8018D4CC AFA20094 */        sw $v0, 0x94($sp)
-  /* 10A3C0 8018D4D0 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 10A3C0 8018D4D0 0C035FCF */       jal ftManager_CreateFighter
   /* 10A3C4 8018D4D4 02802025 */        or $a0, $s4, $zero
   /* 10A3C8 8018D4D8 02002025 */        or $a0, $s0, $zero
   /* 10A3CC 8018D4DC 0C039F13 */       jal ftCommon_ClearPlayerMatchStats
@@ -1094,7 +1094,7 @@ glabel func_ovl4_8018DE20
   /* 10AF0C 8018E01C 0C035E2D */       jal func_ovl2_800D78B4
   /* 10AF10 8018E020 90A40023 */       lbu $a0, 0x23($a1)
   /* 10AF14 8018E024 AFA2008C */        sw $v0, 0x8c($sp)
-  /* 10AF18 8018E028 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 10AF18 8018E028 0C035FCF */       jal ftManager_CreateFighter
   /* 10AF1C 8018E02C 02802025 */        or $a0, $s4, $zero
   /* 10AF20 8018E030 02002025 */        or $a0, $s0, $zero
   /* 10AF24 8018E034 0C039F13 */       jal ftCommon_ClearPlayerMatchStats

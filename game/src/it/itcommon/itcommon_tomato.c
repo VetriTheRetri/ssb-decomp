@@ -4,8 +4,8 @@ bool32 jtgt_ovl3_801744C0(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATTOMATO_GRAVITY, ATTOMATO_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ap, ITTOMATO_GRAVITY, ITTOMATO_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }

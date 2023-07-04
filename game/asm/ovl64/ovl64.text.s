@@ -1004,7 +1004,7 @@ glabel func_ovl64_8018DCC4
   /* 18CC04 8018DEC4 AFA20084 */        sw $v0, 0x84($sp)
   /* 18CC08 8018DEC8 02802025 */        or $a0, $s4, $zero
   /* 18CC0C 8018DECC 356C0080 */       ori $t4, $t3, 0x80
-  /* 18CC10 8018DED0 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 18CC10 8018DED0 0C035FCF */       jal ftManager_CreateFighter
   /* 18CC14 8018DED4 A3AC006B */        sb $t4, 0x6b($sp)
   /* 18CC18 8018DED8 8E4D0000 */        lw $t5, ($s2) # Match_Info + 0
   /* 18CC1C 8018DEDC 02002025 */        or $a0, $s0, $zero

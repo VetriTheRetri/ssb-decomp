@@ -72,8 +72,8 @@ bool32 itHeart_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATHEART_GRAVITY, ATHEART_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITHEART_GRAVITY, ITHEART_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }

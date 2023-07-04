@@ -1425,7 +1425,7 @@ glabel func_ovl65_8018D60C
   /* 10CD84 8018E524 A3AA0063 */        sb $t2, 0x63($sp)
   /* 10CD88 8018E528 354B0040 */       ori $t3, $t2, 0x40
   /* 10CD8C 8018E52C A3AB0063 */        sb $t3, 0x63($sp)
-  /* 10CD90 8018E530 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 10CD90 8018E530 0C035FCF */       jal ftManager_CreateFighter
   /* 10CD94 8018E534 AFA70020 */        sw $a3, 0x20($sp)
   /* 10CD98 8018E538 AFA2003C */        sw $v0, 0x3c($sp)
   /* 10CD9C 8018E53C 8C460084 */        lw $a2, 0x84($v0)
@@ -3007,7 +3007,7 @@ glabel func_ovl65_8018F7B4
   /* 10E450 8018FBF0 304AFFDF */      andi $t2, $v0, 0xffdf
   /* 10E454 8018FBF4 012A1025 */        or $v0, $t1, $t2
   /* 10E458 8018FBF8 A3A2007B */        sb $v0, 0x7b($sp)
-  /* 10E45C 8018FBFC 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 10E45C 8018FBFC 0C035FCF */       jal ftManager_CreateFighter
   /* 10E460 8018FC00 27A4005C */     addiu $a0, $sp, 0x5c
   /* 10E464 8018FC04 8C430084 */        lw $v1, 0x84($v0)
   /* 10E468 8018FC08 02202025 */        or $a0, $s1, $zero

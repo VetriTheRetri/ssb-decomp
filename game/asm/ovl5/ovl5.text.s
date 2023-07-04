@@ -234,7 +234,7 @@ glabel func_ovl5_8018D1A0
   /* 10B6B8 8018D408 0C035E2D */       jal func_ovl2_800D78B4
   /* 10B6BC 8018D40C 92040023 */       lbu $a0, %lo(D_NF_80000023)($s0)
   /* 10B6C0 8018D410 AFA200AC */        sw $v0, 0xac($sp)
-  /* 10B6C4 8018D414 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 10B6C4 8018D414 0C035FCF */       jal ftManager_CreateFighter
   /* 10B6C8 8018D418 02802025 */        or $a0, $s4, $zero
   /* 10B6CC 8018D41C 00408025 */        or $s0, $v0, $zero
   /* 10B6D0 8018D420 AFC20000 */        sw $v0, ($fp) # D_ovl5_8018D750 + 0

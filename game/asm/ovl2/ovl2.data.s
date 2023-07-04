@@ -5724,7 +5724,7 @@ glabel D_ovl2_8012C520
   .balign 4
   .incbin "ovl2.raw.bin", 0x56388, 0x18
 
-glabel Knockback_Handicap_MulTable
+glabel ftDamage_HandicapDesc
   .incbin "ovl2.raw.bin", 0x563A0, 0x10
 
 glabel Fighter_ItemSwing_Desc

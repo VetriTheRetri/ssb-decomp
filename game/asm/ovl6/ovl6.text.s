@@ -1624,7 +1624,7 @@ glabel func_ovl6_8018E5F8
   /* 112F10 8018E7D0 AFA2006C */        sw $v0, 0x6c($sp)
   /* 112F14 8018E7D4 27A40034 */     addiu $a0, $sp, 0x34
   /* 112F18 8018E7D8 35C90080 */       ori $t1, $t6, 0x80
-  /* 112F1C 8018E7DC 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 112F1C 8018E7DC 0C035FCF */       jal ftManager_CreateFighter
   /* 112F20 8018E7E0 A3A90053 */        sb $t1, 0x53($sp)
   /* 112F24 8018E7E4 8FA40078 */        lw $a0, 0x78($sp)
   /* 112F28 8018E7E8 0C039F13 */       jal ftCommon_ClearPlayerMatchStats

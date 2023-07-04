@@ -4,7 +4,7 @@ bool32 jtgt_ovl3_8017E7A0(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATTOSAKINTO_GRAVITY, ATTOSAKINTO_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
 
     return FALSE;
 }
@@ -17,7 +17,7 @@ bool32 jtgt_ovl3_8017E7CC(GObj *item_gobj)
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
-        ap->phys_info.vel_air.y = ATTOSAKINTO_FLAP_VEL_Y;
+        ap->phys_info.vel_air.y = ITTOSAKINTO_FLAP_VEL_Y;
 
         func_ovl3_8017EA14(item_gobj);
 
@@ -32,7 +32,7 @@ void func_ovl3_8017E828(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->it_multi = ATTOSAKINTO_LIFETIME;
+    ap->it_multi = ITTOSAKINTO_LIFETIME;
 
     if (ap->it_kind == It_Kind_Tosakinto)
     {
@@ -45,7 +45,7 @@ bool32 jtgt_ovl3_8017E880(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATTOSAKINTO_GRAVITY, ATTOSAKINTO_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
 
     if (ap->it_multi == 0)
     {
@@ -64,7 +64,7 @@ bool32 jtgt_ovl3_8017E8CC(GObj *item_gobj)
 
     if (ap->coll_data.coll_mask & MPCOLL_MASK_GROUND)
     {
-        ap->phys_info.vel_air.y = ATTOSAKINTO_FLAP_VEL_Y;
+        ap->phys_info.vel_air.y = ITTOSAKINTO_FLAP_VEL_Y;
 
         if (rand_u16_range(2) != 0)
         {
@@ -88,8 +88,8 @@ void func_ovl3_8017E93C(GObj *item_gobj)
 
     ap->item_vars.tosakinto.pos = joint->translate;
 
-    ap->phys_info.vel_air.y = ATTOSAKINTO_FLAP_VEL_Y;
-    ap->phys_info.vel_air.x = ATTOSAKINTO_FLAP_VEL_X;
+    ap->phys_info.vel_air.y = ITTOSAKINTO_FLAP_VEL_Y;
+    ap->phys_info.vel_air.x = ITTOSAKINTO_FLAP_VEL_X;
 
     if (ap->it_kind == It_Kind_Tosakinto)
     {
@@ -148,7 +148,7 @@ GObj* jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         joint = DObjGetStruct(item_gobj);
 
@@ -159,11 +159,11 @@ GObj* jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 

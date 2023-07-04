@@ -2728,7 +2728,7 @@ glabel func_ovl29_80134108
   /* 14A1F4 801341C4 A3A2003B */        sb $v0, 0x3b($sp)
   /* 14A1F8 801341C8 27A40024 */     addiu $a0, $sp, 0x24
   /* 14A1FC 801341CC AFAD005C */        sw $t5, 0x5c($sp)
-  /* 14A200 801341D0 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 14A200 801341D0 0C035FCF */       jal ftManager_CreateFighter
   /* 14A204 801341D4 A3A80039 */        sb $t0, 0x39($sp)
   /* 14A208 801341D8 3C018013 */       lui $at, %hi(D_ovl29_80137650)
   /* 14A20C 801341DC 3C058013 */       lui $a1, %hi(func_ovl29_80133FE8)

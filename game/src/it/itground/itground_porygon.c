@@ -30,7 +30,7 @@ void func_ovl3_80183B10(GObj *item_gobj)
     }
     ap->it_multi++;
 
-    if (ap->it_multi == ATPORYGON_SHAKE_STOP_WAIT)
+    if (ap->it_multi == ITPORYGON_SHAKE_STOP_WAIT)
     {
         Vec3f pos = DObjGetStruct(item_gobj)->translate;
 

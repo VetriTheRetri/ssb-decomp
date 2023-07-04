@@ -159,7 +159,7 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 
             temp_s4 = (*(uintptr_t*) ((uintptr_t)*itCommon_Box_ItemDesc.p_file + itCommon_Box_ItemDesc.offset) - (intptr_t)&D_NF_00006778) + (intptr_t)&D_NF_000068F0; // Linker thing
 
-            for (i = 0; i < ATCONTAINER_GFX_COUNT; i++)
+            for (i = 0; i < ITCONTAINER_GFX_COUNT; i++)
             {
                 joint = func_800092D0(effect_gobj, temp_s4);
 
@@ -175,7 +175,7 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
                 joint->dobj_f1 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
                 joint->dobj_f2 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
             }
-            ep->lifetime = ATCONTAINER_GFX_LIFETIME;
+            ep->lifetime = ITCONTAINER_GFX_LIFETIME;
 
             effect_gobj->user_data = ep;
 
@@ -281,8 +281,8 @@ bool32 itBox_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATBOX_GRAVITY, ATBOX_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITBOX_GRAVITY, ITBOX_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -312,7 +312,7 @@ bool32 itBox_SDefault_ProcDamage(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    if (ip->percent_damage >= ATBOX_HEALTH_MAX)
+    if (ip->percent_damage >= ITBOX_HEALTH_MAX)
     {
         return itBox_SDefault_ProcHit(item_gobj);
     }
@@ -457,8 +457,8 @@ void itBox_NExplode_InitItemVars(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_8017279C(item_gobj);
-    func_ovl3_8017275C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
+    itMain_RefreshHit(item_gobj);
     itMain_UpdateHitEvent(item_gobj, (itHitEvent*)((uintptr_t)*itCommon_Box_ItemDesc.p_file + (intptr_t)&Article_Box_Hit));
 }
 
@@ -486,7 +486,7 @@ void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 
     if (effect_unk != NULL)
     {
-        effect_unk->effect_info->scale.x = effect_unk->effect_info->scale.y = effect_unk->effect_info->scale.z = ATBOX_EXPLODE_SCALE;
+        effect_unk->effect_info->scale.x = effect_unk->effect_info->scale.y = effect_unk->effect_info->scale.z = ITBOX_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
 

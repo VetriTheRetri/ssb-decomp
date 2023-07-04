@@ -15,9 +15,9 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
         GObj *rock_gobj;
         Vec3f pos = joint->translate;
 
-        pos.x += (ATIWARK_ROCK_SPAWN_OFF_X_MUL * rand_f32()) + ATIWARK_ROCK_SPAWN_OFF_X_ADD;
+        pos.x += (ITIWARK_ROCK_SPAWN_OFF_X_MUL * rand_f32()) + ITIWARK_ROCK_SPAWN_OFF_X_ADD;
 
-        rock_gobj = func_ovl3_8017DF28(iwark_gobj, &pos, rand_u16_range(ATIWARK_ROCK_RANDOM_VEL_MAX));
+        rock_gobj = func_ovl3_8017DF28(iwark_gobj, &pos, rand_u16_range(WPIWARK_ROCK_RANDOM_VEL_MAX));
 
         if (rock_gobj != NULL)
         {
@@ -31,7 +31,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
             {
                 ip->weapon_vars.rock.unk_0xC = -1;
             }
-            ap->item_vars.iwark.rock_spawn_wait = rand_u16_range(ATIWARK_ROCK_SPAWN_WAIT_MAX) + ATIWARK_ROCK_SPAWN_WAIT_MIN;
+            ap->item_vars.iwark.rock_spawn_wait = rand_u16_range(ITIWARK_ROCK_SPAWN_WAIT_MAX) + ITIWARK_ROCK_SPAWN_WAIT_MIN;
         }
     }
 }
@@ -40,7 +40,7 @@ bool32 func_ovl3_8017D820(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
-    f32 pos_y = Ground_Info->blastzone_top - ATIWARK_FLY_STOP_Y;
+    f32 pos_y = Ground_Info->blastzone_top - ITIWARK_FLY_STOP_Y;
 
     if (pos_y <= joint->translate.y)
     {
@@ -60,7 +60,7 @@ bool32 func_ovl3_8017D820(GObj *item_gobj)
         {
             func_ovl2_801008F4(0);
 
-            ap->item_vars.iwark.rumble_wait = ATIWARK_ROCK_RUMBLE_WAIT;
+            ap->item_vars.iwark.rumble_wait = ITIWARK_ROCK_RUMBLE_WAIT;
         }
         if (ap->item_vars.iwark.is_rumble != FALSE)
         {
@@ -68,7 +68,7 @@ bool32 func_ovl3_8017D820(GObj *item_gobj)
         }
         ap->item_vars.iwark.rock_spawn_wait--;
     }
-    if (ap->it_multi == ATIWARK_MODEL_ROTATE_WAIT)
+    if (ap->it_multi == ITIWARK_MODEL_ROTATE_WAIT)
     {
         joint->rotate.y += PI32;
 
@@ -91,9 +91,9 @@ void func_ovl3_8017D948(GObj *item_gobj)
 
     ap->ground_or_air = GA_Air;
 
-    ap->phys_info.vel_air.y = ATIWARK_FLY_VEL_Y;
+    ap->phys_info.vel_air.y = ITIWARK_FLY_VEL_Y;
 
-    ap->item_vars.iwark.rock_timer1 = rand_u16_range(ATIWARK_ROCK_SPAWN_COUNT_MAX) + ATIWARK_ROCK_SPAWN_COUNT_MIN;
+    ap->item_vars.iwark.rock_timer1 = rand_u16_range(ITIWARK_ROCK_SPAWN_COUNT_MAX) + ITIWARK_ROCK_SPAWN_COUNT_MIN;
     ap->item_vars.iwark.rock_timer2 = ap->item_vars.iwark.rock_timer1;
     ap->item_vars.iwark.rock_spawn_count = 0;
     ap->item_vars.iwark.rock_spawn_wait = 0;
@@ -108,9 +108,9 @@ void func_ovl3_8017D948(GObj *item_gobj)
     {
         joint->display_list = dl = itGetPData(ap, D_NF_0000A140, D_NF_0000A640); // Linker thing
 
-        pos.y += ATIWARK_IWARK_ADD_POS_Y;
+        pos.y += ITIWARK_IWARK_ADD_POS_Y;
     }
-    else pos.y += ATIWARK_OTHER_ADD_POS_Y;
+    else pos.y += ITIWARK_OTHER_ADD_POS_Y;
 
     func_ovl2_800FF3F4(&pos, LEFT, 1.0F);
 
@@ -145,7 +145,7 @@ void func_ovl3_8017DAD8(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->it_multi = ATIWARK_FLY_WAIT;
+    ap->it_multi = ITIWARK_FLY_WAIT;
 
     ap->phys_info.vel_air.y = 0.0F;
     ap->phys_info.vel_air.x = 0.0F;
@@ -190,7 +190,7 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         joint = DObjGetStruct(item_gobj);
 
@@ -201,13 +201,13 @@ GObj* jtgt_ovl3_8017DBA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 
@@ -231,11 +231,11 @@ bool32 jtgt_ovl3_8017DCCC(GObj *weapon_gobj)
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     DObj *joint;
 
-    wpMain_UpdateGravityClampTVel(ip, ATIWARK_ROCK_GRAVITY, ATIWARK_ROCK_T_VEL);
+    wpMain_UpdateGravityClampTVel(ip, WPIWARK_ROCK_GRAVITY, WPIWARK_ROCK_T_VEL);
 
     joint = DObjGetStruct(weapon_gobj);
 
-    joint->rotate.z += ATIWARK_ROCK_ROTATE_STEP;
+    joint->rotate.z += WPIWARK_ROCK_ROTATE_STEP;
 
     return FALSE;
 }
@@ -256,13 +256,13 @@ bool32 jtgt_ovl3_8017DD18(GObj *weapon_gobj)
         {
             func_ovl0_800C7B08(&ip->phys_info.vel, &coll_data->ground_angle);
 
-            func_ovl0_800C7AE0(&ip->phys_info.vel, ATIWARK_ROCK_COLLIDE_MUL_VEL_Y);
+            func_ovl0_800C7AE0(&ip->phys_info.vel, WPIWARK_ROCK_COLLIDE_MUL_VEL_Y);
 
             ip->weapon_vars.rock.ground_line_id = coll_data->ground_line_id;
 
             func_800269C0(0x84U);
 
-            pos.y += ATIWARK_ROCK_COLLIDE_ADD_VEL_Y;
+            pos.y += WPIWARK_ROCK_COLLIDE_ADD_VEL_Y;
 
             func_ovl2_800FF048(&pos, ip->lr, 1.0F);
 
@@ -327,17 +327,17 @@ GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
 
     if ((u32)random == 0)
     {
-        ip->phys_info.vel_air.y = ATIWARK_ROCK_VEL_Y_START_A;
+        ip->phys_info.vel_air.y = WPIWARK_ROCK_VEL_Y_START_A;
     }
     else
     {
         if ((u32)random == 1)
         {
-            vel_y = ATIWARK_ROCK_VEL_Y_START_B;
+            vel_y = WPIWARK_ROCK_VEL_Y_START_B;
         }
         else
         {
-            vel_y = ATIWARK_ROCK_VEL_Y_START_C;
+            vel_y = WPIWARK_ROCK_VEL_Y_START_C;
         }
         ip->phys_info.vel_air.y = vel_y;
     }

@@ -107,7 +107,7 @@ glabel func_ovl49_80131B60
   /* 172CB8 80131C58 E7B40050 */      swc1 $f20, 0x50($sp)
   /* 172CBC 80131C5C E7B40054 */      swc1 $f20, 0x54($sp)
   /* 172CC0 80131C60 02602025 */        or $a0, $s3, $zero
-  /* 172CC4 80131C64 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 172CC4 80131C64 0C035FCF */       jal ftManager_CreateFighter
   /* 172CC8 80131C68 AFAD0080 */        sw $t5, 0x80($sp)
   /* 172CCC 80131C6C 00408825 */        or $s1, $v0, $zero
   /* 172CD0 80131C70 00402025 */        or $a0, $v0, $zero

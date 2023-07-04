@@ -111,8 +111,8 @@ bool32 itCapsule_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATCAPSULE_GRAVITY, ATCAPSULE_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -179,8 +179,8 @@ bool32 itCapsule_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATCAPSULE_GRAVITY, ATCAPSULE_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -240,7 +240,7 @@ bool32 itCapsule_NExplode_ProcUpdate(GObj *item_gobj)
 
     ip->it_multi++;
 
-    if (ip->it_multi == ATCAPSULE_EXPLODE_FRAME_END)
+    if (ip->it_multi == ITCAPSULE_EXPLODE_FRAME_END)
     {
         return TRUE;
     }
@@ -286,8 +286,8 @@ void itCapsule_NExplode_InitItemVars(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_ovl3_8017279C(item_gobj);
-    func_ovl3_8017275C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
+    itMain_RefreshHit(item_gobj);
 
     itMain_UpdateHitEvent(item_gobj, itGetHitEvent(itCommon_Capsule_ItemDesc, itCapsule_HitEvent_Offset)); // Linker thing
 }
@@ -316,7 +316,7 @@ void itCapsule_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 
     if (ep != NULL)
     {
-        ep->effect_info->scale.x = ep->effect_info->scale.y = ep->effect_info->scale.z = ATCAPSULE_EXPLODE_SCALE;
+        ep->effect_info->scale.x = ep->effect_info->scale.y = ep->effect_info->scale.z = ITCAPSULE_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
 

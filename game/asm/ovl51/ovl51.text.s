@@ -306,7 +306,7 @@ glabel func_ovl51_8018D2DC
   /* 174D94 8018D514 0C035E2D */       jal func_ovl2_800D78B4
   /* 174D98 8018D518 92040023 */       lbu $a0, 0x23($s0) # D_ovl51_8018DA0C + 35
   /* 174D9C 8018D51C AFA20084 */        sw $v0, 0x84($sp)
-  /* 174DA0 8018D520 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 174DA0 8018D520 0C035FCF */       jal ftManager_CreateFighter
   /* 174DA4 8018D524 02C02025 */        or $a0, $s6, $zero
   /* 174DA8 8018D528 3C018019 */       lui $at, %hi(D_ovl51_8018DA50)
   /* 174DAC 8018D52C AC22DA50 */        sw $v0, %lo(D_ovl51_8018DA50)($at)

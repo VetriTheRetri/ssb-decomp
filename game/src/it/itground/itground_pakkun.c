@@ -58,7 +58,7 @@ bool32 func_ovl3_8017CFDC(GObj *item_gobj)
             }
             translate_y = joint->translate.y;
 
-            if ((dist_x < ATPAKKUN_DETECT_SIZE_WIDTH) && (pos_y + ATPAKKUN_DETECT_SIZE_BOTTOM < translate_y) && (translate_y < (pos_y + ATPAKKUN_DETECT_SIZE_TOP)))
+            if ((dist_x < ITPAKKUN_DETECT_SIZE_WIDTH) && (pos_y + ITPAKKUN_DETECT_SIZE_BOTTOM < translate_y) && (translate_y < (pos_y + ITPAKKUN_DETECT_SIZE_TOP)))
             {
                 return FALSE;
             }
@@ -78,7 +78,7 @@ bool32 func_ovl3_8017D0A4(GObj *item_gobj)
 
     if (ap->item_vars.pakkun.is_wait_fighter != FALSE)
     {
-        ap->it_multi = ATPAKKUN_APPEAR_WAIT;
+        ap->it_multi = ITPAKKUN_APPEAR_WAIT;
         ap->item_vars.pakkun.is_wait_fighter = FALSE;
     }
     ap->it_multi--;
@@ -99,7 +99,7 @@ bool32 func_ovl3_8017D0A4(GObj *item_gobj)
         }
         else
         {
-            ap->it_multi = ATPAKKUN_APPEAR_WAIT;
+            ap->it_multi = ITPAKKUN_APPEAR_WAIT;
         }
     }
     return FALSE;
@@ -109,7 +109,7 @@ void func_ovl3_8017D190(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->it_multi = ATPAKKUN_APPEAR_WAIT;
+    ap->it_multi = ITPAKKUN_APPEAR_WAIT;
 
     func_ovl3_8017CF20(item_gobj);
 
@@ -123,9 +123,9 @@ void func_ovl3_8017D1DC(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
     f32 pos_y = DObjGetStruct(item_gobj)->translate.y - ap->item_vars.pakkun.pos.y;
-    f32 off_y = pos_y + ATPAKKUN_APPEAR_OFF_Y;
+    f32 off_y = pos_y + ITPAKKUN_APPEAR_OFF_Y;
 
-    if (off_y <= ATPAKKUN_CLAMP_OFF_Y)
+    if (off_y <= ITPAKKUN_CLAMP_OFF_Y)
     {
         ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
@@ -137,10 +137,10 @@ void func_ovl3_8017D1DC(GObj *item_gobj)
         {
             ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-            func_ovl3_8017275C(item_gobj);
+            itMain_RefreshHit(item_gobj);
         }
-        ap->item_hurt.size.y = (off_y - ATPAKKUN_CLAMP_OFF_Y) * ATPAKKUN_HURT_SIZE_MUL_Y;
-        ap->item_hurt.offset.y = (ap->item_hurt.size.y + ATPAKKUN_CLAMP_OFF_Y) - pos_y;
+        ap->item_hurt.size.y = (off_y - ITPAKKUN_CLAMP_OFF_Y) * ITPAKKUN_HURT_SIZE_MUL_Y;
+        ap->item_hurt.offset.y = (ap->item_hurt.size.y + ITPAKKUN_CLAMP_OFF_Y) - pos_y;
     }
 }
 
@@ -214,7 +214,7 @@ bool32 func_ovl3_8017D460(GObj *item_gobj)
 
     joint->translate = ap->item_vars.pakkun.pos;
 
-    ap->it_multi = ATPAKKUN_REBIRTH_WAIT;
+    ap->it_multi = ITPAKKUN_REBIRTH_WAIT;
 
     ap->phys_info.vel_air.x = 0.0F;
     ap->phys_info.vel_air.y = 0.0F;
@@ -245,7 +245,7 @@ GObj* jtgt_ovl3_8017D4D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         DObjGetStruct(item_gobj)->translate = *pos;
 
-        ap->it_multi = ATPAKKUN_APPEAR_WAIT;
+        ap->it_multi = ITPAKKUN_APPEAR_WAIT;
 
         ap->is_allow_knockback = TRUE;
 

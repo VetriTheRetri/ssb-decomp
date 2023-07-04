@@ -5,389 +5,389 @@
 #include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 
-#define ATCAPSULE_GRAVITY 1.2F
-#define ATCAPSULE_T_VEL 100.0F
-#define ATCAPSULE_EXPLODE_SCALE 1.4F                    // Size of explosion graphics
-#define ATCAPSULE_EXPLODE_FRAME_END 6
+#define ITCAPSULE_GRAVITY 1.2F
+#define ITCAPSULE_T_VEL 100.0F
+#define ITCAPSULE_EXPLODE_SCALE 1.4F                    // Size of explosion graphics
+#define ITCAPSULE_EXPLODE_FRAME_END 6
 
-#define ATTOMATO_DAMAGE_HEAL 100
-#define ATTOMATO_GRAVITY 1.2F
-#define ATTOMATO_T_VEL 100.0F
+#define ITTOMATO_DAMAGE_HEAL 100
+#define ITTOMATO_GRAVITY 1.2F
+#define ITTOMATO_T_VEL 100.0F
 
-#define ATHEART_DAMAGE_HEAL 999
-#define ATHEART_GRAVITY 0.25F
-#define ATHEART_T_VEL 30.0F
+#define ITHEART_DAMAGE_HEAL 999
+#define ITHEART_GRAVITY 0.25F
+#define ITHEART_T_VEL 30.0F
 
-#define ATSTAR_COLANIM_ID 0x4A
-#define ATSTAR_COLANIM_LENGTH 0
-#define ATSTAR_BGM_ID 0x2D
-#define ATSTAR_BGM_DURATION 10
-#define ATSTAR_INVINCIBLE_TIME 600
-#define ATSTAR_WARN_BEGIN_FRAME (ATSTAR_INVINCIBLE_TIME - 480)
-#define ATSTAR_INTERACT_DELAY 16                        // Wait this many frames before becoming tangible
-#define ATSTAR_GRAVITY 1.2F
-#define ATSTAR_T_VEL 100.0F
-#define ATSTAR_VEL_X 8.0F
-#define ATSTAR_BOUNCE_Y 50.0F                           // Y-velocity added when Star Man touches the ground
+#define ITSTAR_COLANIM_ID 0x4A
+#define ITSTAR_COLANIM_LENGTH 0
+#define ITSTAR_BGM_ID 0x2D
+#define ITSTAR_BGM_DURATION 10
+#define ITSTAR_INVINCIBLE_TIME 600
+#define ITSTAR_WARN_BEGIN_FRAME (ITSTAR_INVINCIBLE_TIME - 480)
+#define ITSTAR_INTERACT_DELAY 16                        // Wait this many frames before becoming tangible
+#define ITSTAR_GRAVITY 1.2F
+#define ITSTAR_T_VEL 100.0F
+#define ITSTAR_VEL_X 8.0F
+#define ITSTAR_BOUNCE_Y 50.0F                           // Y-velocity added when Star Man touches the ground
 
-#define ATSWORD_GRAVITY 1.2F
-#define ATSWORD_T_VEL 100.0F
+#define ITSWORD_GRAVITY 1.2F
+#define ITSWORD_T_VEL 100.0F
 
-#define ATBAT_GRAVITY 1.5F
-#define ATBAT_T_VEL 120.0F
+#define ITBAT_GRAVITY 1.5F
+#define ITBAT_T_VEL 120.0F
 
-#define ATHARISEN_GRAVITY 1.0F
-#define ATHARISEN_T_VEL 80.0F
+#define ITHARISEN_GRAVITY 1.0F
+#define ITHARISEN_T_VEL 80.0F
 
-#define ATLGUN_AMMO_MAX 16
-#define ATLGUN_GRAVITY 1.5F
-#define ATLGUN_T_VEL 130.0F
-#define ATLGUN_AMMO_VEL_X 300.0F
-#define ATLGUN_AMMO_STEP_SCALE_X 10.0F
-#define ATLGUN_AMMO_CLAMP_SCALE_X 53.333332F
+#define ITLGUN_AMMO_MAX 16
+#define ITLGUN_GRAVITY 1.5F
+#define ITLGUN_T_VEL 130.0F
+#define ITLGUN_AMMO_VEL_X 300.0F
+#define ITLGUN_AMMO_STEP_SCALE_X 10.0F
+#define ITLGUN_AMMO_CLAMP_SCALE_X 53.333332F
 
-#define ATFFLOWER_AMMO_MAX 60
-#define ATFFLOWER_AMMO_LIFETIME 30
-#define ATFFLOWER_AMMO_VEL 30.0F
-#define ATFFLOWER_GRAVITY 1.2F
-#define ATFFLOWER_T_VEL 100.0F
+#define ITFFLOWER_AMMO_MAX 60
+#define ITFFLOWER_AMMO_LIFETIME 30
+#define ITFFLOWER_AMMO_VEL 30.0F
+#define ITFFLOWER_GRAVITY 1.2F
+#define ITFFLOWER_T_VEL 100.0F
     
-#define ATHAMMER_TIME 720
-#define ATHAMMER_BGM_ID 0x2E
-#define ATHAMMER_BGM_DURATION 20
-#define ATHAMMER_WEAR_COLANIM_ID 0x4E                        // Color animation applied to hammer when time is almost up
-#define ATHAMMER_WEAR_COLANIM_LENGTH 0
-#define ATHAMMER_WARN_BEGIN_FRAME (ATHAMMER_TIME - 600)
-#define ATHAMMER_GRAVITY 1.5F
-#define ATHAMMER_T_VEL 120.0F
+#define ITHAMMER_TIME 720
+#define ITHAMMER_BGM_ID 0x2E
+#define ITHAMMER_BGM_DURATION 20
+#define ITHAMMER_WEAR_COLANIM_ID 0x4E                       // Color animation applied to hammer when time is almost up
+#define ITHAMMER_WEAR_COLANIM_LENGTH 0
+#define ITHAMMER_WARN_BEGIN_FRAME (ITHAMMER_TIME - 600)
+#define ITHAMMER_GRAVITY 1.5F
+#define ITHAMMER_T_VEL 120.0F
 
-#define ATMSBOMB_EXPLODE_LIFETIME 16
-#define ATMSBOMB_DETECT_FIGHTER_DELAY 100
-#define ATMSBOMB_DETECT_FIGHTER_RADIUS SQUARE(400.0F)   // Radius is actually 400 units, but it is not sqrt'd in the detection function, so it ends up checking 160000.0F
-#define ATMSBOMB_GRAVITY 1.5F
-#define ATMSBOMB_T_VEL 80.0F
-#define ATMSBOMB_COLL_SIZE 30.0F                        // Size of Motion Sensor Bomb collision box
-#define ATMSBOMB_EXPLODE_SCALE 1.2F                     // Size of explosion graphics
+#define ITMSBOMB_EXPLODE_LIFETIME 16
+#define ITMSBOMB_DETECT_FIGHTER_DELAY 100
+#define ITMSBOMB_DETECT_FIGHTER_RADIUS SQUARE(400.0F)       // Radius is actually 400 units, but it is not sqrt'd in the detection function, so it ends up checking 160000.0F
+#define ITMSBOMB_GRAVITY 1.5F
+#define ITMSBOMB_T_VEL 80.0F
+#define ITMSBOMB_COLL_SIZE 30.0F                            // Size of Motion Sensor Bomb collision box
+#define ITMSBOMB_EXPLODE_SCALE 1.2F                         // Size of explosion graphics
 
-#define ATBOMBHEI_EXPLODE_COLANIM_ID 0x4D
-#define ATBOMBHEI_EXPLODE_COLANIM_DURATION 90
-#define ATBOMBHEI_EXPLODE_LIFETIME 6
-#define ATBOMBHEI_WALK_WAIT 180                         // Number of frames required to pass for Bob-Omb to begin walking
-#define ATBOMBHEI_FLASH_WAIT 480                        // Number of frames required to pass for Bob-Omb to begin flashing
-#define ATBOMBHEI_SMOKE_WAIT 4                          // Delay between smoke GFX?
-#define ATBOMBHEI_EXPLODE_WAIT 90.0F                    // Number of frames required to pass for Bob-Omb to explode after flashing? Also a float for some reason
-#define ATBOMBHEI_WALK_VEL_X 24.0F
-#define ATBOMBHEI_GRAVITY 1.2F
-#define ATBOMBHEI_T_VEL 100.0F
-#define ATBOMBHEI_EXPLODE_SCALE 1.4F
+#define ITBOMBHEI_EXPLODE_COLANIM_ID 0x4D
+#define ITBOMBHEI_EXPLODE_COLANIM_DURATION 90
+#define ITBOMBHEI_EXPLODE_LIFETIME 6
+#define ITBOMBHEI_WALK_WAIT 180                             // Number of frames required to pass for Bob-Omb to begin walking
+#define ITBOMBHEI_FLASH_WAIT 480                            // Number of frames required to pass for Bob-Omb to begin flashing
+#define ITBOMBHEI_SMOKE_WAIT 4                              // Delay between smoke GFX?
+#define ITBOMBHEI_EXPLODE_WAIT 90.0F                        // Number of frames required to pass for Bob-Omb to explode after flashing? Also a float for some reason
+#define ITBOMBHEI_WALK_VEL_X 24.0F
+#define ITBOMBHEI_GRAVITY 1.2F
+#define ITBOMBHEI_T_VEL 100.0F
+#define ITBOMBHEI_EXPLODE_SCALE 1.4F
 
-#define ATSTARROD_AMMO_MAX 20
-#define ATSTARROD_GRAVITY 1.2F
-#define ATSTARROD_T_VEL 100.0F
-#define ATSTARROD_AMMO_SMASH_VEL_X 120.0F
-#define ATSTARROD_AMMO_TILT_VEL_X 80.0F
-#define ATSTARROD_AMMO_SMASH_LIFETIME 30.0F
-#define ATSTARROD_AMMO_TILT_LIFETIME 30.0F
+#define ITSTARROD_AMMO_MAX 20
+#define ITSTARROD_GRAVITY 1.2F
+#define ITSTARROD_T_VEL 100.0F
+#define ITSTARROD_AMMO_SMASH_VEL_X 120.0F
+#define ITSTARROD_AMMO_TILT_VEL_X 80.0F
+#define ITSTARROD_AMMO_SMASH_LIFETIME 30.0F
+#define ITSTARROD_AMMO_TILT_LIFETIME 30.0F
 
-#define ATGSHELL_LIFETIME 240
-#define ATGSHELL_HEALTH_MAX 4                           // Set every time shell hits a target
-#define ATGSHELL_GFX_SPAWN_INT 8                        // Interval between dust GFX
-#define ATGSHELL_DAMAGE_ALL_WAIT 32                     // Wait this many frames before shell can damage its owner and teammates
-#define ATGSHELL_CLAMP_VEL_X 90.0F                      // Limit maximum X-velocity to this value
-#define ATGSHELL_REBOUND_MUL_X 0.125F                   // Multiplies negated X-velocity; actually division, but optimized into multiplication if possible
-#define ATGSHELL_REBOUND_VEL_Y 38.0F                    // Y-velocity gained when recoiling from hitting a target
-#define ATGSHELL_STOP_VEL_X 12.0F                       // Halt all horizontal velocity if less than this value
-#define ATGSHELL_DAMAGE_MUL_NORMAL 8.0F                 // Multiplies damage taken and turns it into horizontal velocity; run when Shell is hit out of its "wait" state
-#define ATGSHELL_DAMAGE_MUL_ADD 3.0F                    // Multiplies damage taken and adds it to horizontal velocity; run whe Shell is hit out of its "slide" state
-#define ATGSHELL_GRAVITY 1.2F
-#define ATGSHELL_T_VEL 100.0F
+#define ITGSHELL_LIFETIME 240
+#define ITGSHELL_HEALTH_MAX 4                               // Set every time shell hits a target
+#define ITGSHELL_GFX_SPAWN_INT 8                            // Interval between dust GFX
+#define ITGSHELL_DAMAGE_ALL_WAIT 32                         // Wait this many frames before shell can damage its owner and teammates
+#define ITGSHELL_CLAMP_VEL_X 90.0F                          // Limit maximum X-velocity to this value
+#define ITGSHELL_REBOUND_MUL_X 0.125F                       // Multiplies negated X-velocity; actually division, but optimized into multiplication if possible
+#define ITGSHELL_REBOUND_VEL_Y 38.0F                        // Y-velocity gained when recoiling from hitting a target
+#define ITGSHELL_STOP_VEL_X 12.0F                           // Halt all horizontal velocity if less than this value
+#define ITGSHELL_DAMAGE_MUL_NORMAL 8.0F                     // Multiplies damage taken and turns it into horizontal velocity; run when Shell is hit out of its "wait" state
+#define ITGSHELL_DAMAGE_MUL_ADD 3.0F                        // Multiplies damage taken and adds it to horizontal velocity; run whe Shell is hit out of its "slide" state
+#define ITGSHELL_GRAVITY 1.2F
+#define ITGSHELL_T_VEL 100.0F
 
-#define ATCONTAINER_GFX_COUNT 7                         // Number of pieces Barrel and Crate containers burst into when smashed open
-#define ATCONTAINER_GFX_LIFETIME 90                     // Smashed container pieces despawn once this runs out
+#define ITCONTAINER_GFX_COUNT 7                             // Number of pieces Barrel and Crate containers burst into when smashed open
+#define ITCONTAINER_GFX_LIFETIME 90                         // Smashed container pieces despawn once this runs out
 
-#define ATBOX_HEALTH_MAX 15                             // Maximum damage box can resist before breaking
-#define ATBOX_EXPLODE_SCALE 1.4F                        // Size of explosion graphics
-#define ATBOX_GRAVITY 4.0F
-#define ATBOX_T_VEL 120.0F
+#define ITBOX_HEALTH_MAX 15                                 // Maximum damage box can resist before breaking
+#define ITBOX_EXPLODE_SCALE 1.4F                            // Size of explosion graphics
+#define ITBOX_GRAVITY 4.0F
+#define ITBOX_T_VEL 120.0F
 
-#define ATTARU_LIFETIME 360
-#define ATTARU_EXPLODE_LIFETIME 8
-#define ATTARU_DESPAWN_FLASH_START 60                   // Begin flashing when below this value
-#define ATTARU_HEALTH_MAX 10
-#define ATTARU_MUL_VEL_X 1.4F
-#define ATTARU_MIN_VEL_XY 0.1F                          // Decrement lifetime if Barrel's XY velocity is less than this value
-#define ATTARU_ROLL_ROTATE_MUL 0.0045F                  // Multiplies rotation of barrel
-#define ATTARU_EXPLODE_SCALE 1.4F                       // Size of explosion graphics
-#define ATTARU_GRAVITY 4.0F
-#define ATTARU_T_VEL 90.0F
+#define ITTARU_LIFETIME 360
+#define ITTARU_EXPLODE_LIFETIME 8
+#define ITTARU_DESPAWN_FLASH_START 60                       // Begin flashing when below this value
+#define ITTARU_HEALTH_MAX 10
+#define ITTARU_MUL_VEL_X 1.4F
+#define ITTARU_MIN_VEL_XY 0.1F                              // Decrement lifetime if Barrel's XY velocity is less than this value
+#define ITTARU_ROLL_ROTATE_MUL 0.0045F                      // Multiplies rotation of barrel
+#define ITTARU_EXPLODE_SCALE 1.4F                           // Size of explosion graphics
+#define ITTARU_GRAVITY 4.0F
+#define ITTARU_T_VEL 90.0F
 
-#define ATRSHELL_INTERACT_MAX 24
-#define ATRSHELL_LIFETIME 480
-#define ATRSHELL_HEALTH_MAX 4
-#define ATRSHELL_GFX_SPAWN_INT 8
-#define ATRSHELL_DAMAGE_ALL_WAIT 16
-#define ATRSHELL_CLAMP_VEL_X 70.0F
-#define ATRSHELL_CLAMP_AIR_X 90.0F                      // Leftover from Green Shell? This is checked only when the ground beneath the Red Shell collapses
-#define ATRSHELL_HIT_INIT_VEL_X 8.0F                    // Initialize hitbox if it is currently inactive and velocity is less than this value
-#define ATRSHELL_MUL_VEL_X 1.2F
-#define ATRSHELL_STOP_VEL_X 8.0F                        // Halt all horizontal velocity if less than this value OR disable hitbox
-#define ATRSHELL_ADD_VEL_X 60.0F                        // Added when Red Shell is reflected
-#define ATRSHELL_RECOIL_VEL_X (-8.0F)                   // Applied when shell is attacked
-#define ATRSHELL_RECOIL_MUL_X 0.7F                      // Multiplies recoil velocity
-#define ATRSHELL_DAMAGE_MUL_NORMAL 10.0F                // Multiplies damage taken and turns it into horizontal velocity; run when Shell is hit out of its "wait" state
-#define ATRSHELL_GRAVITY 1.2F
-#define ATRSHELL_T_VEL 100.0F
+#define ITRSHELL_INTERACT_MAX 24
+#define ITRSHELL_LIFETIME 480
+#define ITRSHELL_HEALTH_MAX 4
+#define ITRSHELL_GFX_SPAWN_INT 8
+#define ITRSHELL_DAMAGE_ALL_WAIT 16
+#define ITRSHELL_CLAMP_VEL_X 70.0F
+#define ITRSHELL_CLAMP_AIR_X 90.0F                          // Leftover from Green Shell? This is checked only when the ground beneath the Red Shell collapses
+#define ITRSHELL_HIT_INIT_VEL_X 8.0F                        // Initialize hitbox if it is currently inactive and velocity is less than this value
+#define ITRSHELL_MUL_VEL_X 1.2F
+#define ITRSHELL_STOP_VEL_X 8.0F                            // Halt all horizontal velocity if less than this value OR disable hitbox
+#define ITRSHELL_ADD_VEL_X 60.0F                            // Added when Red Shell is reflected
+#define ITRSHELL_RECOIL_VEL_X (-8.0F)                       // Applied when shell is attacked
+#define ITRSHELL_RECOIL_MUL_X 0.7F                          // Multiplies recoil velocity
+#define ITRSHELL_DAMAGE_MUL_NORMAL 10.0F                    // Multiplies damage taken and turns it into horizontal velocity; run when Shell is hit out of its "wait" state
+#define ITRSHELL_GRAVITY 1.2F
+#define ITRSHELL_T_VEL 100.0F
 
-#define ATBUMPER_CASTLE_KNOCKBACK 300                   // Weight-Dependent Set Knockback of Bumper on Peach's Castle
-#define ATBUMPER_CASTLE_ANGLE 361                       // Knockback angle of Bumper on Peach's Castle
-#define ATBUMPER_LIFETIME 360
-#define ATBUMPER_DESPAWN_TIMER 60                       // Bumper's lifetime is reset to this value; there is no hitbox during this state, and it vanishes for good once it runs out
-#define ATBUMPER_RESET_VEL_TIMER 4                      // Bumper's X-velocity is reset to 0.0 when it_multi is less than this value
-#define ATBUMPER_DAMAGE_ALL_WAIT 16     
-#define ATBUMPER_HIT_SCALE 10                           // Initial of bumper when hitting a target while airborne
-#define ATBUMPER_HIT_ANIM_LENGTH 3                      // Number of frames bumper's airborne hit texture lasts 
-#define ATBUMPER_COLL_SIZE 120.0F           
-#define ATBUMPER_REBOUND_VEL_X (-100.0F)                // Applied when bumper hits a target while grounded 
-#define ATBUMPER_REBOUND_AIR_X (-400.0F)                // Applied when bumper hits a target while airborne
-#define ATBUMPER_REBOUND_AIR_Y 200.0F                   // Applied when bumper hits a target while airborne
-#define ATBUMPER_GRAVITY_NORMAL 1.4F
-#define ATBUMPER_GRAVITY_HIT 4.0F
-#define ATBUMPER_T_VEL 80.0F
+#define ITBUMPER_CASTLE_KNOCKBACK 300                       // Weight-Dependent Set Knockback of Bumper on Peach's Castle
+#define ITBUMPER_CASTLE_ANGLE 361                           // Knockback angle of Bumper on Peach's Castle
+#define ITBUMPER_LIFETIME 360
+#define ITBUMPER_DESPAWN_TIMER 60                           // Bumper's lifetime is reset to this value; there is no hitbox during this state, and it vanishes for good once it runs out
+#define ITBUMPER_RESET_VEL_TIMER 4                          // Bumper's X-velocity is reset to 0.0 when it_multi is less than this value
+#define ITBUMPER_DAMAGE_ALL_WAIT 16     
+#define ITBUMPER_HIT_SCALE 10                               // Initial of bumper when hitting a target while airborne
+#define ITBUMPER_HIT_ANIM_LENGTH 3                          // Number of frames bumper's airborne hit texture lasts 
+#define ITBUMPER_COLL_SIZE 120.0F           
+#define ITBUMPER_REBOUND_VEL_X (-100.0F)                    // Applied when bumper hits a target while grounded 
+#define ITBUMPER_REBOUND_AIR_X (-400.0F)                    // Applied when bumper hits a target while airborne
+#define ITBUMPER_REBOUND_AIR_Y 200.0F                       // Applied when bumper hits a target while airborne
+#define ITBUMPER_GRAVITY_NORMAL 1.4F
+#define ITBUMPER_GRAVITY_HIT 4.0F
+#define ITBUMPER_T_VEL 80.0F
 
-#define ATGRLUCKY_EGG_SPAWN_WAIT 1                      // Wait this many frames before spawning egg (read only when egg spawn function is called)
-#define ATGRLUCKY_EGG_SPAWN_OFF_X 200.0F                // X-offset of egg spawn
-#define ATGRLUCKY_EGG_SPAWN_OFF_Y 200.0F                // Y-offset of egg spawn
-#define ATGRLUCKY_EGG_SPAWN_MUL 8.0F                    // Multiplies random velocity of egg
-#define ATGRLUCKY_EGG_SPAWN_ADD_X 8.0F                  // Added to mutliplied random velocity of egg
-#define ATGRLUCKY_EGG_SPAWN_ADD_Y 30.0F                 // Added to multiplide random velocity of egg
-#define ATGRLUCKY_EGG_SPAWN_BEGIN 80.0F                 // First frame egg spawn function is called
-#define ATGRLUCKY_EGG_SPAWN_END 85.0F                   // Last frame egg spawn function is called
-#define ATGRLUCKY_HIT_ROTATE_Z 0.10471976F              // Rotation step when Chansey is knocked out of the Pokémon hut? Not actually applied?
-#define ATGRLUCKY_GRAVITY 1.2F
-#define ATGRLUCKY_T_VEL 100.0F
+#define ITGRLUCKY_EGG_SPAWN_WAIT 1                          // Wait this many frames before spawning egg (read only when egg spawn function is called)
+#define ITGRLUCKY_EGG_SPAWN_OFF_X 200.0F                    // X-offset of egg spawn
+#define ITGRLUCKY_EGG_SPAWN_OFF_Y 200.0F                    // Y-offset of egg spawn
+#define ITGRLUCKY_EGG_SPAWN_MUL 8.0F                        // Multiplies random velocity of egg
+#define ITGRLUCKY_EGG_SPAWN_ADD_X 8.0F                      // Added to mutliplied random velocity of egg
+#define ITGRLUCKY_EGG_SPAWN_ADD_Y 30.0F                     // Added to multiplide random velocity of egg
+#define ITGRLUCKY_EGG_SPAWN_BEGIN 80.0F                     // First frame egg spawn function is called
+#define ITGRLUCKY_EGG_SPAWN_END 85.0F                       // Last frame egg spawn function is called
+#define ITGRLUCKY_HIT_ROTATE_Z 0.10471976F                  // Rotation step when Chansey is knocked out of the Pokémon hut? Not actually applied?
+#define ITGRLUCKY_GRAVITY 1.2F
+#define ITGRLUCKY_T_VEL 100.0F
 
-#define ATMBALL_SPAWN_WAIT 30                           // Wait this many frames before releasing Pokémon once thrown and landed
-#define ATMBALL_GRAVITY 1.5F 
-#define ATMBALL_T_VEL 120.0F
+#define ITMBALL_SPAWN_WAIT 30                               // Wait this many frames before releasing Pokémon once thrown and landed
+#define ITMBALL_GRAVITY 1.5F 
+#define ITMBALL_T_VEL 120.0F
 
-#define ATMONSTER_RISE_STOP_WAIT 22                     // Universal attribute for Pokémon to stop slowly levitating upward and to use designated physics this many frames after spawning
-#define ATMONSTER_RISE_VEL_Y 16.0F                      // Y-velocity of "levitate" effect after exiting Poké Ball
+#define ITMONSTER_RISE_STOP_WAIT 22                         // Universal attribute for Pokémon to stop slowly levitating upward and to use designated physics this many frames after spawning
+#define ITMONSTER_RISE_VEL_Y 16.0F                          // Y-velocity of "levitate" effect after exiting Poké Ball
 
-#define ATPAKKUN_APPEAR_WAIT 180                        // Duration Pirahna Plant waits before coming out of its pipe
-#define ATPAKKUN_REBIRTH_WAIT 1200                      // Duration Pirahna Plant waits before respawning after being knocked out and hitting one of the blast zones
-#define ATPAKKUN_APPEAR_OFF_Y 245.0F      
-#define ATPAKKUN_CLAMP_OFF_Y 360.0F      
-#define ATPAKKUN_HURT_SIZE_MUL_Y 0.5F   
-#define ATPAKKUN_DETECT_SIZE_WIDTH 600.0F               // Width of Pirahna Plant fighter detection box when checking to stay inside the pipe
-#define ATPAKKUN_DETECT_SIZE_BOTTOM (-300.0F)           // Bottom of Pirahna Plant fighter detection box when checking to stay inside the pipe
-#define ATPAKKUN_DETECT_SIZE_TOP 700.0F                 // Top of Pirahna Plant fighter detection box when checking to stay inside the pipe
+#define ITPAKKUN_APPEAR_WAIT 180                            // Duration Pirahna Plant waits before coming out of its pipe
+#define ITPAKKUN_REBIRTH_WAIT 1200                          // Duration Pirahna Plant waits before respawning after being knocked out and hitting one of the blast zones
+#define ITPAKKUN_APPEAR_OFF_Y 245.0F      
+#define ITPAKKUN_CLAMP_OFF_Y 360.0F      
+#define ITPAKKUN_HURT_SIZE_MUL_Y 0.5F   
+#define ITPAKKUN_DETECT_SIZE_WIDTH 600.0F                   // Width of Pirahna Plant fighter detection box when checking to stay inside the pipe
+#define ITPAKKUN_DETECT_SIZE_BOTTOM (-300.0F)               // Bottom of Pirahna Plant fighter detection box when checking to stay inside the pipe
+#define ITPAKKUN_DETECT_SIZE_TOP 700.0F                     // Top of Pirahna Plant fighter detection box when checking to stay inside the pipe
 
-#define ATIWARK_FLY_WAIT 30                             // Unconfirmed?
-#define ATIWARK_MODEL_ROTATE_WAIT 6                     // Onix's sprite is flipped every time this timer is up; counts up, reset to 0 when reaching destination value
-#define ATIWARK_ROCK_RUMBLE_WAIT 18                     // Frames to wait between screen shake effects
-#define ATIWARK_ROCK_SPAWN_COUNT_MAX 9                  // Maximum number of rocks that can be spawned
-#define ATIWARK_ROCK_SPAWN_COUNT_MIN 8                  // Added to number of rocks that can be spawned
-#define ATIWARK_ROCK_SPAWN_WAIT_MAX 30                  // Maximum random delay between spawned rocks
-#define ATIWARK_ROCK_SPAWN_WAIT_MIN 15                  // Added to random delay between spawned rocks
-#define ATIWARK_ROCK_SPAWN_OFF_X_MUL 2000.0F            // Multiplies random spawn position of rock projectile
-#define ATIWARK_ROCK_SPAWN_OFF_X_ADD (-1000.0F)         // Added to random spawn position of rock projectile
-#define ATIWARK_FLY_VEL_Y 80.0F                         // Y-velocity of Onix when flying up
-#define ATIWARK_FLY_STOP_Y 200.0F                       // Stop this many units away from the upper blast zone
-#define ATIWARK_IWARK_ADD_POS_Y (-660.0F)               // Add this to Y-position if user is Onix
-#define ATIWARK_OTHER_ADD_POS_Y (-100.0F)               // Add this to Y-position if user is not Onix
+#define ITIWARK_FLY_WAIT 30                                 // Unconfirmed?
+#define ITIWARK_MODEL_ROTATE_WAIT 6                         // Onix's sprite is flipped every time this timer is up; counts up, reset to 0 when reaching destination value
+#define ITIWARK_ROCK_RUMBLE_WAIT 18                         // Frames to wait between screen shake effects
+#define ITIWARK_ROCK_SPAWN_COUNT_MAX 9                      // Maximum number of rocks that can be spawned
+#define ITIWARK_ROCK_SPAWN_COUNT_MIN 8                      // Added to number of rocks that can be spawned
+#define ITIWARK_ROCK_SPAWN_WAIT_MAX 30                      // Maximum random delay between spawned rocks
+#define ITIWARK_ROCK_SPAWN_WAIT_MIN 15                      // Added to random delay between spawned rocks
+#define ITIWARK_ROCK_SPAWN_OFF_X_MUL 2000.0F                // Multiplies random spawn position of rock projectile
+#define ITIWARK_ROCK_SPAWN_OFF_X_ADD (-1000.0F)             // Added to random spawn position of rock projectile
+#define ITIWARK_FLY_VEL_Y 80.0F                             // Y-velocity of Onix when flying up
+#define ITIWARK_FLY_STOP_Y 200.0F                           // Stop this many units away from the upper blast zone
+#define ITIWARK_IWARK_ADD_POS_Y (-660.0F)                   // Add this to Y-position if user is Onix
+#define ITIWARK_OTHER_ADD_POS_Y (-100.0F)                   // Add this to Y-position if user is not Onix
 
-#define ATIWARK_ROCK_RANDOM_VEL_MAX 3                   // Maximum number of random initial Y-velocities possible
-#define ATIWARK_ROCK_GRAVITY 2.0F                       // Gravity of rock projectile
-#define ATIWARK_ROCK_T_VEL 200.0F                       // Terminal velocity of rock projectile
-#define ATIWARK_ROCK_ROTATE_STEP (-0.5F)                // Z-rotation step of rock projectile
-#define ATIWARK_ROCK_VEL_Y_START_A (-100.0F)            // One of three random initial Y-velocities possible
-#define ATIWARK_ROCK_VEL_Y_START_B (-50.0F)             // One of three random initial Y-velocities possible
-#define ATIWARK_ROCK_VEL_Y_START_C 0.0F                 // One of three random initial Y-velocities possible
-#define ATIWARK_ROCK_COLLIDE_MUL_VEL_Y 0.1F             // Assume this is what slows the rocks down so much when they hit the ground
-#define ATIWARK_ROCK_COLLIDE_ADD_VEL_Y (-150.0F)        // Added when rock collides with ground
+#define WPIWARK_ROCK_RANDOM_VEL_MAX 3                       // Maximum number of random initial Y-velocities possible
+#define WPIWARK_ROCK_GRAVITY 2.0F                           // Gravity of rock projectile
+#define WPIWARK_ROCK_T_VEL 200.0F                           // Terminal velocity of rock projectile
+#define WPIWARK_ROCK_ROTATE_STEP (-0.5F)                    // Z-rotation step of rock projectile
+#define WPIWARK_ROCK_VEL_Y_START_A (-100.0F)                // One of three random initial Y-velocities possible
+#define WPIWARK_ROCK_VEL_Y_START_B (-50.0F)                 // One of three random initial Y-velocities possible
+#define WPIWARK_ROCK_VEL_Y_START_C 0.0F                     // One of three random initial Y-velocities possible
+#define WPIWARK_ROCK_COLLIDE_MUL_VEL_Y 0.1F                 // Assume this is what slows the rocks down so much when they hit the ground
+#define WPIWARK_ROCK_COLLIDE_ADD_VEL_Y (-150.0F)            // Added when rock collides with ground
 
-#define ATKABIGON_GFX_SPAWN_INT 4
-#define ATKABIGON_DROP_WAIT 60                          // Wait this many frames before dropping after reaching the top of the screen
-#define ATKABIGON_RUMBLE_WAIT 18                        // Wait this many frames between screen shake effects
-#define ATKABIGON_DROP_VEL_Y (-220.0F)                  // Velocity of downward drop
-#define ATKABIGON_DROP_OFF_X_MUL 2000.0F                // Multiplies random drop X-position
-#define ATKABIGON_DROP_OFF_X_ADD (-1000.0F)             // Added to multiplied random drop X-position
-#define ATKABIGON_DROP_SIZE_KABIGON 4.0F                // Size of Snorlax's drop model and hitbox
-#define ATKABIGON_DROP_SIZE_OTHER 5.2F                  // Size of non-Snorlax drop model and hitbox (Clefairy)
-#define ATKABIGON_JUMP_VEL_Y 80.0F                      // Y-velocity of Snorlax's jump
-#define ATKABIGON_JUMP_GFX_MUL_OFF 200.0F               // Multiplies random spawn position of dust GFX when Snorlax jumps
-#define ATKABIGON_JUMP_GFX_SUB_OFF 100.0F               // Subtracted from random spawn position of dust GFX when Snorlax jumps
-#define ATKABIGON_MAP_OFF_Y 200.0F                      // Halt jump this many units away from top blastonze / despawn if Y-position is less than bottom blastzone + this value
+#define ITKABIGON_GFX_SPAWN_INT 4
+#define ITKABIGON_DROP_WAIT 60                              // Wait this many frames before dropping after reaching the top of the screen
+#define ITKABIGON_RUMBLE_WAIT 18                            // Wait this many frames between screen shake effects
+#define ITKABIGON_DROP_VEL_Y (-220.0F)                      // Velocity of downward drop
+#define ITKABIGON_DROP_OFF_X_MUL 2000.0F                    // Multiplies random drop X-position
+#define ITKABIGON_DROP_OFF_X_ADD (-1000.0F)                 // Added to multiplied random drop X-position
+#define ITKABIGON_DROP_SIZE_KABIGON 4.0F                    // Size of Snorlax's drop model and hitbox
+#define ITKABIGON_DROP_SIZE_OTHER 5.2F                      // Size of non-Snorlax drop model and hitbox (Clefairy)
+#define ITKABIGON_JUMP_VEL_Y 80.0F                          // Y-velocity of Snorlax's jump
+#define ITKABIGON_JUMP_GFX_MUL_OFF 200.0F                   // Multiplies random spawn position of dust GFX when Snorlax jumps
+#define ITKABIGON_JUMP_GFX_SUB_OFF 100.0F                   // Subtracted from random spawn position of dust GFX when Snorlax jumps
+#define ITKABIGON_MAP_OFF_Y 200.0F                          // Halt jump this many units away from top blastonze / despawn if Y-position is less than bottom blastzone + this value
 
-#define ATTOSAKINTO_LIFETIME 360
-#define ATTOSAKINTO_FLAP_VEL_X 10.0F                    // Semi-constant horizontal velocity that may randomly be inverted
-#define ATTOSAKINTO_FLAP_VEL_Y 60.0F                    // Vertical velocity gained from touching the ground
-#define ATTOSAKINTO_GRAVITY 6.0F
-#define ATTOSAKINTO_T_VEL 90.0F
+#define ITTOSAKINTO_LIFETIME 360
+#define ITTOSAKINTO_FLAP_VEL_X 10.0F                        // Semi-constant horizontal velocity that may randomly be inverted
+#define ITTOSAKINTO_FLAP_VEL_Y 60.0F                        // Vertical velocity gained from touching the ground
+#define ITTOSAKINTO_GRAVITY 6.0F
+#define ITTOSAKINTO_T_VEL 90.0F
 
-#define ATMEW_LIFETIME 480
-#define ATMEW_GFX_SPAWN_INT 3
-#define ATMEW_START_VEL_X 8.0F                          // Mew's initial X-velocity
-#define ATMEW_START_VEL_Y -20.0F                        // Mew's initial Y-velocity
-#define ATMEW_FLY_ADD_VEL_Y 0.8F                        // Added to Mew's Y-velocity every frame
+#define ITMEW_LIFETIME 480
+#define ITMEW_GFX_SPAWN_INT 3
+#define ITMEW_START_VEL_X 8.0F                              // Mew's initial X-velocity
+#define ITMEW_START_VEL_Y -20.0F                            // Mew's initial Y-velocity
+#define ITMEW_FLY_ADD_VEL_Y 0.8F                            // Added to Mew's Y-velocity every frame
 
-#define ATNYARS_LIFETIME 240
-#define ATNYARS_MODEL_ROTATE_WAIT 30                    // Flip Meowth's model every time this timer runs out; reset at 0
-#define ATNYARS_COIN_SPAWN_MAX 4                        // Spawn this many coins simultaneously
-#define ATNYARS_COIN_LIFETIME 10
-#define ATNYARS_COIN_SPAWN_WAIT 8                       // Spawn a new set of coins at this frequency (frames)
-#define ATNYARS_COIN_ANGLE_STEP 13.0F                   // Multiplies coin rotation step, actually angle in degrees
-#define ATYNARS_COIN_ANGLE_DIFF 90.0F                   // Angle difference between each simultaneously spawned coin (90 degrees by default, this is why it's cross-shaped)
-#define ATNYARS_COIN_VEL_X 130.0F
+#define ITNYARS_LIFETIME 240
+#define ITNYARS_MODEL_ROTATE_WAIT 30                        // Flip Meowth's model every time this timer runs out; reset at 0
+#define ITNYARS_COIN_SPAWN_MAX 4                            // Spawn this many coins simultaneously
+#define ITNYARS_COIN_LIFETIME 10
+#define ITNYARS_COIN_SPAWN_WAIT 8                           // Spawn a new set of coins at this frequency (frames)
+#define ITNYARS_COIN_ANGLE_STEP 13.0F                       // Multiplies coin rotation step, actually angle in degrees
+#define ITNYARS_COIN_ANGLE_DIFF 90.0F                       // Angle difference between each simultaneously spawned coin
+#define ITNYARS_COIN_VEL_X 130.0F
 
-#define ATLIZARDON_LIFETIME 480
-#define ATLIZARDON_FLAME_LIFETIME 30
-#define ATLIZARDON_FLAME_SPAWN_WAIT 8                   // Wait this many frames before spawning another flame projectile
-#define ATLIZARDON_TURN_WAIT 26                         // Wait this many frames before flipping Charizard's sprite
-#define ATLIZARDON_FLAME_SPAWN_ANGLE -0.2617994F        // Angle at which flame projectile spreads
-#define ATLIZARDON_FLAME_VEL_XY 50.0F       
-#define ATLIZARDON_LIZARDON_FLAME_OFF_X 180.0F          // X-offset of Charizard's flame spawn position
-#define ATLIZARDON_LIZARDON_FLAME_OFF_Y 120.0F          // Y-offset of Charizard's flame spawn position
-#define ATLIZARDON_OTHER_FLAME_OFF_X 100.0F             // X-offset of other flame spawn position (Clefairy)
-#define ATLIZARDON_DUST_GFX_OFF_X (-400.0F)             // X-offset of dust GFX when turning around
-#define ATLIZARDON_GRAVITY 1.0F 
-#define ATLIZARDON_T_VEL 40.0F
+#define ITLIZARDON_LIFETIME 480
+#define ITLIZARDON_FLAME_LIFETIME 30
+#define ITLIZARDON_FLAME_SPAWN_WAIT 8                       // Wait this many frames before spawning another flame projectile
+#define ITLIZARDON_TURN_WAIT 26                             // Wait this many frames before flipping Charizard's sprite
+#define ITLIZARDON_FLAME_SPAWN_ANGLE F_DEG_TO_RAD(-15.0F)   // Angle at which flame projectile spreads (-0.2617994F)
+#define ITLIZARDON_FLAME_VEL_XY 50.0F       
+#define ITLIZARDON_LIZARDON_FLAME_OFF_X 180.0F          // X-offset of Charizard's flame spawn position
+#define ITLIZARDON_LIZARDON_FLAME_OFF_Y 120.0F          // Y-offset of Charizard's flame spawn position
+#define ITLIZARDON_OTHER_FLAME_OFF_X 100.0F             // X-offset of other flame spawn position (Clefairy)
+#define ITLIZARDON_DUST_GFX_OFF_X (-400.0F)             // X-offset of dust GFX when turning around
+#define ITLIZARDON_GRAVITY 1.0F 
+#define ITLIZARDON_T_VEL 40.0F
 
-#define ATSPEAR_SPAWN_COUNT 16                          // Swarm will have this many member Beedrill
-#define ATSPEAR_SPAWN_WAIT_CONST 12                     // Minimum number of frames between Beedrill swarm member spawns
-#define ATSPEAR_SPAWN_WAIT_RANDOM 9                     // Added to minimum number of frames between Beedrill swarm member spawns
-#define ATSPEAR_SPAWN_OFF_Y_MUL 1800.0F                 // Multiplies random vertical spawn position
-#define ATSPEAR_SPAWN_OFF_Y_ADD (-800.0F)               // Added to random vertical spawn position
-#define ATSPEAR_SWARM_FLY_VEL_X 130.0F                  // X-velocity of Beedrill swarm members
-#define ATSPEAR_SWARM_CALL_VEL_X 6.0F                   // Leader Beedrill's X-velocity when flying off to call the swarm, added each frame until called
-#define ATSPEAR_SWARM_CALL_VEL_Y 60.0F                  // ???
-#define ATSPEAR_SWARM_CALL_OFF_X 500.0F                 // Begin swarm when leader is this many units away from the side blastzone
-#define ATSPEAR_SWARM_CALL_WAIT 51.0F                   // Fly off into the distance and call Beedrill swarm on this frame of the leader's wait animation
-#define ATSPEAR_GRAVITY 1.0F
-#define ATSPEAR_T_VEL 90.0F 
+#define ITSPEAR_SPAWN_COUNT 16                          // Swarm will have this many member Beedrill
+#define ITSPEAR_SPAWN_WAIT_CONST 12                     // Minimum number of frames between Beedrill swarm member spawns
+#define ITSPEAR_SPAWN_WAIT_RANDOM 9                     // Added to minimum number of frames between Beedrill swarm member spawns
+#define ITSPEAR_SPAWN_OFF_Y_MUL 1800.0F                 // Multiplies random vertical spawn position
+#define ITSPEAR_SPAWN_OFF_Y_ADD (-800.0F)               // Added to random vertical spawn position
+#define ITSPEAR_SWARM_FLY_VEL_X 130.0F                  // X-velocity of Beedrill swarm members
+#define ITSPEAR_SWARM_CALL_VEL_X 6.0F                   // Leader Beedrill's X-velocity when flying off to call the swarm, added each frame until called
+#define ITSPEAR_SWARM_CALL_VEL_Y 60.0F                  // ???
+#define ITSPEAR_SWARM_CALL_OFF_X 500.0F                 // Begin swarm when leader is this many units away from the side blastzone
+#define ITSPEAR_SWARM_CALL_WAIT 51.0F                   // Fly off into the distance and call Beedrill swarm on this frame of the leader's wait animation
+#define ITSPEAR_GRAVITY 1.0F
+#define ITSPEAR_T_VEL 90.0F 
 
-#define ATKAMEX_LIFETIME 360
-#define ATKAMEX_HYDRO_LIFETIME 20
-#define ATKAMEX_HYDRO_SPAWN_WAIT_CONST 30               // Constant wait frames to spawn Hydro Pump
-#define ATKAMEX_HYDRO_SPAWN_WAIT_RANDOM 1               // Maximum random wait frames to spawn Hydro Pump
-#define ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_X 360.0F          // X-offset of Blastoise Hydro Pump spawn position
-#define ATKAMEX_KAMEX_HYDRO_SPAWN_OFF_Y 100.0F          // Y-offset of Blastoise Hydro Pump spawn position
-#define ATKAMEX_OTHER_HYDRO_SPAWN_OFF_X 100.0F          // X-offset of other Hydro Pump spawn position (Clefairy)
-#define ATKAMEX_DUST_SPAWN_OFF_X (-150.0F)              // X-offset of dust GFX
-#define ATKAMEX_COLL_SIZE 341.0F
-#define ATKAMEX_PUSH_VEL_X 2.3F
-#define ATKAMEX_CONST_VEL_X 38.0F                       // Constant velocity after Blastoise lands
-#define ATKAMEX_GRAVITY 1.0F
-#define ATKAMEX_T_VEL 40.0F
+#define ITKAMEX_LIFETIME 360
+#define ITKAMEX_HYDRO_LIFETIME 20
+#define ITKAMEX_HYDRO_SPAWN_WAIT_CONST 30               // Constant wait frames to spawn Hydro Pump
+#define ITKAMEX_HYDRO_SPAWN_WAIT_RANDOM 1               // Maximum random wait frames to spawn Hydro Pump
+#define ITKAMEX_KAMEX_HYDRO_SPAWN_OFF_X 360.0F          // X-offset of Blastoise Hydro Pump spawn position
+#define ITKAMEX_KAMEX_HYDRO_SPAWN_OFF_Y 100.0F          // Y-offset of Blastoise Hydro Pump spawn position
+#define ITKAMEX_OTHER_HYDRO_SPAWN_OFF_X 100.0F          // X-offset of other Hydro Pump spawn position (Clefairy)
+#define ITKAMEX_DUST_SPAWN_OFF_X (-150.0F)              // X-offset of dust GFX
+#define ITKAMEX_COLL_SIZE 341.0F
+#define ITKAMEX_PUSH_VEL_X 2.3F
+#define ITKAMEX_CONST_VEL_X 38.0F                       // Constant velocity after Blastoise lands
+#define ITKAMEX_GRAVITY 1.0F
+#define ITKAMEX_T_VEL 40.0F
 
-#define ATMBLUCKY_LIFETIME 90                           // Used only after Chansey has spawned all of its eggs
-#define ATMBLUCKY_EGG_SPAWN_WAIT_ADD 4                  // Added when Chansey gets hit
-#define ATMBLUCKY_EGG_SPAWN_COUNT 3 
-#define ATMBLUCKY_EGG_SPAWN_WAIT_CONST 30
-#define ATMBLUCKY_EGG_SPAWN_BASE_VEL 8.0F               // Multiplies random velocity
-#define ATMBLUCKY_EGG_SPAWN_ADD_VEL_X 7.0F              // Added to multiplied random X-velocity
-#define ATMBLUCKY_EGG_SPAWN_ADD_VEL_Y 40.0F             // Added to multiplide random Y-velocity
-#define ATMBLUCKY_GRAVITY 1.0F
-#define ATMBLUCKY_T_VEL 40.0F
+#define ITMBLUCKY_LIFETIME 90                           // Used only after Chansey has spawned all of its eggs
+#define ITMBLUCKY_EGG_SPAWN_WAIT_ADD 4                  // Added when Chansey gets hit
+#define ITMBLUCKY_EGG_SPAWN_COUNT 3 
+#define ITMBLUCKY_EGG_SPAWN_WAIT_CONST 30
+#define ITMBLUCKY_EGG_SPAWN_BASE_VEL 8.0F               // Multiplies random velocity
+#define ITMBLUCKY_EGG_SPAWN_ADD_VEL_X 7.0F              // Added to multiplied random X-velocity
+#define ITMBLUCKY_EGG_SPAWN_ADD_VEL_Y 40.0F             // Added to multiplide random Y-velocity
+#define ITMBLUCKY_GRAVITY 1.0F
+#define ITMBLUCKY_T_VEL 40.0F
 
-#define ATEGG_EXPLODE_GFX_WAIT 8                        // Wait this many frames before spawning eggshell break GFX on explosion
-#define ATEGG_EXPLODE_GFX_SCALE 1.4F                    // Scale of explosion GFX
-#define ATEGG_GRAVITY 1.2F
-#define ATEGG_T_VEL 100.0F
+#define ITEGG_EXPLODE_GFX_WAIT 8                        // Wait this many frames before spawning eggshell break GFX on explosion
+#define ITEGG_EXPLODE_GFX_SCALE 1.4F                    // Scale of explosion GFX
+#define ITEGG_GRAVITY 1.2F
+#define ITEGG_T_VEL 100.0F
 
-#define ATSTARMIE_LIFETIME 240
-#define ATSTARMIE_SWIFT_LIFETIME 30
-#define ATSTARMIE_SWIFT_SPAWN_WAIT_CONST 12             // Constant wait frames to spawn Hydro Pump
-#define ATSTARMIE_SWIFT_SPAWN_WAIT_RANDOM 1             // Maximum random wait frames to spawn Swift
-#define ATSTARMIE_SWIFT_VEL_X 150.0F
-#define ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_X 200.0F      // X-offset of Starmie Swift spawn position
-#define ATSTARMIE_STARMIE_SWIFT_SPAWN_OFF_Y 100.0F      // Y-offset of Starmie Swift spawn position
-#define ATSTARMIE_OTHER_SWIFT_SPAWN_OFF_X 100.0F        // X-offset of other Swift spawn position (Clefairy)
-#define ATSTARMIE_TARGET_POS_OFF_X 400.0F               // Added to Starmie's target travel position + fighter's collision box
-#define ATSTARMIE_TARGET_POS_OFF_Y 250.0F               // Added to Starmie's target travel position + fighter's collision box
-#define ATSTARMIE_FOLLOW_VEL_X 20.0F                    // X-velocity at which Starmie follows its victim
-#define ATSTARMIE_ADD_VEL_X 10.0F
-#define ATSTARMIE_PUSH_VEL_X 70.0F                      // Set every time Starmie fires Swift
+#define ITSTARMIE_LIFETIME 240
+#define ITSTARMIE_SWIFT_LIFETIME 30
+#define ITSTARMIE_SWIFT_SPAWN_WAIT_CONST 12             // Constant wait frames to spawn Hydro Pump
+#define ITSTARMIE_SWIFT_SPAWN_WAIT_RANDOM 1             // Maximum random wait frames to spawn Swift
+#define ITSTARMIE_SWIFT_VEL_X 150.0F
+#define ITSTARMIE_STARMIE_SWIFT_SPAWN_OFF_X 200.0F      // X-offset of Starmie Swift spawn position
+#define ITSTARMIE_STARMIE_SWIFT_SPAWN_OFF_Y 100.0F      // Y-offset of Starmie Swift spawn position
+#define ITSTARMIE_OTHER_SWIFT_SPAWN_OFF_X 100.0F        // X-offset of other Swift spawn position (Clefairy)
+#define ITSTARMIE_TARGET_POS_OFF_X 400.0F               // Added to Starmie's target travel position + fighter's collision box
+#define ITSTARMIE_TARGET_POS_OFF_Y 250.0F               // Added to Starmie's target travel position + fighter's collision box
+#define ITSTARMIE_FOLLOW_VEL_X 20.0F                    // X-velocity at which Starmie follows its victim
+#define ITSTARMIE_ADD_VEL_X 10.0F
+#define ITSTARMIE_PUSH_VEL_X 70.0F                      // Set every time Starmie fires Swift
 
-#define ATSAWAMURA_LIFETIME 600
-#define ATSAWAMURA_KICK_WAIT 40
-#define ATSAWAMURA_TARGET_POS_OFF_Y 500.0F              // Added to Hitmonlee's target travel position + fighter's collision box
-#define ATSAWAMURA_DESPAWN_OFF_X 500.0F                 // Despawn if Hitmonlee is within this many units of the side blastzones
-#define ATSAWAMURA_KICK_SIZE 300.0F                     // Size of kick hitbox
-#define ATSAWAMURA_KICK_VEL_X 400.0F
-#define ATSAWAMURA_GRAVITY 2.4F
-#define ATSAWAMURA_T_VEL 100.0F
+#define ITSAWAMURA_LIFETIME 600
+#define ITSAWAMURA_KICK_WAIT 40
+#define ITSAWAMURA_TARGET_POS_OFF_Y 500.0F              // Added to Hitmonlee's target travel position + fighter's collision box
+#define ITSAWAMURA_DESPAWN_OFF_X 500.0F                 // Despawn if Hitmonlee is within this many units of the side blastzones
+#define ITSAWAMURA_KICK_SIZE 300.0F                     // Size of kick hitbox
+#define ITSAWAMURA_KICK_VEL_X 400.0F
+#define ITSAWAMURA_GRAVITY 2.4F
+#define ITSAWAMURA_T_VEL 100.0F
 
-#define ATDOGAS_DESPAWN_WAIT 90                         // Wait this many frames after running out of gas before despawning
-#define ATDOGAS_SMOG_SPAWN_WAIT 8
-#define ATDOGAS_SMOG_SPAWN_COUNT 32                     // Spawn this many Smog clouds
-#define ATDOGAS_SMOG_LIFETIME 30
-#define ATDOGAS_SMOG_VEL_XY 18.0F                  
-#define ATDOGAS_SMOG_MUL_OFF_X 400.0F                   // Multiply random spawn position
-#define ATDOGAS_SMOG_SUB_OFF_X 200.0F                   // Subtracted from multiplied random spawn position
-#define ATDOGAS_SMOG_MUL_OFF_Y 800.0F                   // Multiply random spawn position
+#define ITDOGAS_DESPAWN_WAIT 90                         // Wait this many frames after running out of gas before despawning
+#define ITDOGAS_SMOG_SPAWN_WAIT 8
+#define ITDOGAS_SMOG_SPAWN_COUNT 32                     // Spawn this many Smog clouds
+#define ITDOGAS_SMOG_LIFETIME 30
+#define ITDOGAS_SMOG_VEL_XY 18.0F                  
+#define ITDOGAS_SMOG_MUL_OFF_X 400.0F                   // Multiply random spawn position
+#define ITDOGAS_SMOG_SUB_OFF_X 200.0F                   // Subtracted from multiplied random spawn position
+#define ITDOGAS_SMOG_MUL_OFF_Y 800.0F                   // Multiply random spawn position
 #define ATDGOAS_SMOG_SUB_OFF_Y 400.0F                   // Subtracted from multiplied random spawn position
 
-#define ATMARUMINE_EXPLODE_LIFETIME 6
-#define ATMARUMINE_EXPLODE_GFX_SCALE 1.4F
+#define ITMARUMINE_EXPLODE_LIFETIME 6
+#define ITMARUMINE_EXPLODE_GFX_SCALE 1.4F
 
-#define ATPORYGON_SHAKE_STOP_WAIT 32                    // Stop vertical shake after this many frames have passed?
+#define ITPORYGON_SHAKE_STOP_WAIT 32                    // Stop vertical shake after this many frames have passed?
 
-#define ATHITOKAGE_FLAME_LIFETIME 20
-#define ATHITOKAGE_FLAME_SPAWN_WAIT 8
-#define ATHITOKAGE_FLAME_SPAWN_ANGLE -0.20943952F
-#define ATHITOKAGE_FLAME_VEL_XY 45.0F
-#define ATHITOKAGE_FLAME_SPAWN_BEGIN 40.0F              // Charmander can begin firing Flamethrower this frame onward
-#define ATHITOKAGE_FLAME_SPAWN_END 120.0F               // Charmander can no longer fire Flamethrower this frame onward
-#define ATHITOKAGE_FLAME_SPAWN_OFF_X (-250.0F)          // X-offset of flame spawn
-#define ATHITOKAGE_HIT_ROTATE_Z 0.10471976F
-#define ATHITOKAGE_GRAVITY 1.2F
-#define ATHITOKAGE_T_VEL 100.0F
+#define ITHITOKAGE_FLAME_LIFETIME 20
+#define ITHITOKAGE_FLAME_SPAWN_WAIT 8
+#define ITHITOKAGE_FLAME_SPAWN_ANGLE F_DEG_TO_RAD(-12.0F) // -0.20943952F
+#define ITHITOKAGE_FLAME_VEL_XY 45.0F   
+#define ITHITOKAGE_FLAME_SPAWN_BEGIN 40.0F              // Charmander can begin firing Flamethrower this frame onward
+#define ITHITOKAGE_FLAME_SPAWN_END 120.0F               // Charmander can no longer fire Flamethrower this frame onward
+#define ITHITOKAGE_FLAME_SPAWN_OFF_X (-250.0F)          // X-offset of flame spawn
+#define ITHITOKAGE_HIT_ROTATE_Z F_DEG_TO_RAD(6.0F)      // 0.10471976F
+#define ITHITOKAGE_GRAVITY 1.2F
+#define ITHITOKAGE_T_VEL 100.0F
 
-#define ATFUSHIGIBANA_RETURN_WAIT 128                   // Wait this many frames before deactivating hitbox?
-#define ATFUSHIGIBANA_RAZOR_LIFETIME 24
-#define ATFUSHIGIBANA_RAZOR_SPAWN_WAIT 16
-#define ATFUSHIGIBANA_RAZOR_VEL_X (-100.0F)
-#define ATFUSHIGIBANA_RAZOR_ADD_VEL_X 5.0F              
-#define ATFUSHIGIBANA_RAZOR_SPAWN_BEGIN 40.0F           // Venusaur can begin shooting Razor Leaf this frame onward
-#define ATFUSHIGIBANA_RAZOR_SPAWN_END 120.0F            // Venusaur can no longer shoot Razor Leaf this frame onward
-#define ATFUSHIGIBANA_RAZOR_SPAWN_OFF_X (-540.0F)       // X-offset of leaf spawn
+#define ITFUSHIGIBANA_RETURN_WAIT 128                   // Wait this many frames before deactivating hitbox?
+#define ITFUSHIGIBANA_RAZOR_LIFETIME 24
+#define ITFUSHIGIBANA_RAZOR_SPAWN_WAIT 16
+#define ITFUSHIGIBANA_RAZOR_VEL_X (-100.0F)
+#define ITFUSHIGIBANA_RAZOR_ADD_VEL_X 5.0F              
+#define ITFUSHIGIBANA_RAZOR_SPAWN_BEGIN 40.0F           // Venusaur can begin shooting Razor Leaf this frame onward
+#define ITFUSHIGIBANA_RAZOR_SPAWN_END 120.0F            // Venusaur can no longer shoot Razor Leaf this frame onward
+#define ITFUSHIGIBANA_RAZOR_SPAWN_OFF_X (-540.0F)       // X-offset of leaf spawn
 
-#define ATGRBOMB_GFX_COUNT 7                            // Number of pieces RTTF Bomb bursts into when smashed open
-#define ATGRBOMB_GFX_LIFETIME 90                        // Smashed RTTF Bomb pieces despawn once this runs out
+#define ITRBOMB_GFX_COUNT 7                             // Number of pieces RTTF Bomb bursts into when smashed open
+#define ITRBOMB_GFX_LIFETIME 90                         // Smashed RTTF Bomb pieces despawn once this runs out
 
-#define ATGRBOMB_HEALTH_MAX 10
-#define ATGRBOMB_EXPLODE_LIFETIME 6
-#define ATGRBOMB_EXPLODE_GFX_SCALE 1.4F
-#define ATGRBOMB_MUL_VEL_X 1.4F
-#define ATGRBOMB_MIN_VEL_XY 0.1F                        // Decrement lifetime if Barrel's XY velocity is less than this value
-#define ATGRBOMB_ROLL_ROTATE_MUL 0.0045F                // Multiplies rotation of barrel
-#define ATGRBOMB_GRAVITY 4.0F
-#define ATGRBOMB_T_VEL 90.0F
+#define ITRBOMB_HEALTH_MAX 10
+#define ITRBOMB_EXPLODE_LIFETIME 6
+#define ITRBOMB_EXPLODE_GFX_SCALE 1.4F
+#define ITRBOMB_MUL_VEL_X 1.4F
+#define ITRBOMB_MIN_VEL_XY 0.1F                         // Decrement lifetime if Barrel's XY velocity is less than this value
+#define ITRBOMB_ROLL_ROTATE_MUL 0.0045F                 // Multiplies rotation of barrel
+#define ITRBOMB_GRAVITY 4.0F
+#define ITRBOMB_T_VEL 90.0F
 
-#define ATPKFIRE_LIFETIME 100
-#define ATPKFIRE_HURT_DAMAGE_MUL 3                      // Multiplies damage taken, result gets subtracted from lifetime
-#define ATPKFIRE_GRAVITY 0.45F
-#define ATPKFIRE_T_VEL 55.0F
+#define ITPKFIRE_LIFETIME 100
+#define ITPKFIRE_HURT_DAMAGE_MUL 3                      // Multiplies damage taken, result gets subtracted from lifetime
+#define ITPKFIRE_GRAVITY 0.45F
+#define ITPKFIRE_T_VEL 55.0F
 
-#define ATLINKBOMB_HEALTH 7
-#define ATLINKBOMB_LIFETIME 300
-#define ATLINKBOMB_EXPLODE_LIFETIME 6
-#define ATLINKBOMB_BLOAT_COLANIM_ID 0x4F                // Apply this color animation when Bomb begins to bloat
-#define ATLINKBOMB_BLOAT_COLANIM_LENGTH 96              // Duration of bloat color animation
-#define ATLINKBOMB_SCALE_INDEX_MAX 10                   // Maximum number of scale floats in array?
-#define ATLINKBOMB_SCALE_INDEX_REWIND 6                 // When index reaches this value, rewind
-#define ATLINKBOMB_SCALE_INT 4                          // Interval between Bomb inflate/deflate animation updates; effectively animation speed
-#define ATLINKBOMB_DAMAGE_RECOIL_VEL_X 20.0F            // Horizontal knockback taken from hits dealing less than ATLINKBOMB_HEALTH can sustain
-#define ATLINKBOMB_DAMAGE_RECOIL_VEL_Y 18.0F            // Vertical knockback taken from hits dealing less than ATLINKBOMB_HEALTH can sustain
-#define ATLINKBOMB_EXPLODE_THRESHOLD_VEL_X 36.0F        // If X-velocity is greater than this value when hitting a target, explode
-#define ATLINKBOMB_EXPLODE_THRESHOLD_VEL_Y 25.0F        // If Y-velocity is greater than this value when hitting a target, explode
-#define ATLINKBOMB_BLOAT_BEGIN 96.0F                    // Bomb begins bloating when lifetime is equal or less than this value
-#define ATLINKBOMB_HIT_RECOIL_VEL_X 8.0F                // X-velocity upon hitting a target without exploding
-#define ATLINKBOMB_HIT_RECOIL_VEL_Y 20.0F               // Y-velocity upon hitting a target without exploding
-#define ATLINKBOMB_EXPLODE_GFX_SCALE 1.3F
-#define ATLINKBOMB_GRAVITY 1.2F
-#define ATLINKBOMB_T_VEL 100.0F
+#define ITLINKBOMB_HEALTH 7
+#define ITLINKBOMB_LIFETIME 300
+#define ITLINKBOMB_EXPLODE_LIFETIME 6
+#define ITLINKBOMB_BLOAT_COLANIM_ID 0x4F                // Apply this color animation when Bomb begins to bloat
+#define ITLINKBOMB_BLOAT_COLANIM_LENGTH 96              // Duration of bloat color animation
+#define ITLINKBOMB_SCALE_INDEX_MAX 10                   // Maximum number of scale floats in array?
+#define ITLINKBOMB_SCALE_INDEX_REWIND 6                 // When index reaches this value, rewind
+#define ITLINKBOMB_SCALE_INT 4                          // Interval between Bomb inflate/deflate animation updates; effectively animation speed
+#define ITLINKBOMB_DAMAGE_RECOIL_VEL_X 20.0F            // Horizontal knockback taken from hits dealing less than ITLINKBOMB_HEALTH can sustain
+#define ITLINKBOMB_DAMAGE_RECOIL_VEL_Y 18.0F            // Vertical knockback taken from hits dealing less than ITLINKBOMB_HEALTH can sustain
+#define ITLINKBOMB_EXPLODE_THRESHOLD_VEL_X 36.0F        // If X-velocity is greater than this value when hitting a target, explode
+#define ITLINKBOMB_EXPLODE_THRESHOLD_VEL_Y 25.0F        // If Y-velocity is greater than this value when hitting a target, explode
+#define ITLINKBOMB_BLOAT_BEGIN 96.0F                    // Bomb begins bloating when lifetime is equal or less than this value
+#define ITLINKBOMB_HIT_RECOIL_VEL_X 8.0F                // X-velocity upon hitting a target without exploding
+#define ITLINKBOMB_HIT_RECOIL_VEL_Y 20.0F               // Y-velocity upon hitting a target without exploding
+#define ITLINKBOMB_EXPLODE_GFX_SCALE 1.3F
+#define ITLINKBOMB_GRAVITY 1.2F
+#define ITLINKBOMB_T_VEL 100.0F
 
 typedef struct itCommon_ItemVars_BombHei
 {

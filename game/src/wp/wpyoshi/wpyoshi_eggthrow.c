@@ -57,7 +57,7 @@ void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    wp->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
+    wp->lifetime = WPEGGTHROW_EXPLODE_LIFETIME;
 
     wp->weapon_hit.can_hop = FALSE;
     wp->weapon_hit.can_reflect = FALSE;
@@ -66,7 +66,7 @@ void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from
     wp->phys_info.vel_air.y = 0.0F;
     wp->phys_info.vel_air.x = 0.0F;
 
-    wp->weapon_hit.size = ITEGGTHROW_EXPLODE_SIZE;
+    wp->weapon_hit.size = WPEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
@@ -84,7 +84,7 @@ void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes f
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    wp->lifetime = ITEGGTHROW_EXPLODE_LIFETIME;
+    wp->lifetime = WPEGGTHROW_EXPLODE_LIFETIME;
 
     wp->weapon_hit.can_reflect = FALSE;
     wp->weapon_hit.can_shield = FALSE;
@@ -93,7 +93,7 @@ void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes f
     wp->phys_info.vel_air.y = 0.0F;
     wp->phys_info.vel_air.x = 0.0F;
 
-    wp->weapon_hit.size = ITEGGTHROW_EXPLODE_SIZE;
+    wp->weapon_hit.size = WPEGGTHROW_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
@@ -110,28 +110,28 @@ void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes f
 void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    f32 angle = ABS(wp->weapon_vars.egg_throw.stick_range) / ITEGGTHROW_TRAJECTORY_DIV;
+    f32 angle = ABS(wp->weapon_vars.egg_throw.stick_range) / WPEGGTHROW_TRAJECTORY_DIV;
 
     if (angle > 1.0F)
     {
         angle = 1.0F;
     }
 
-    angle *= ITEGGTHROW_ANGLE_MUL;
+    angle *= WPEGGTHROW_ANGLE_MUL;
 
-    if (angle < ITEGGTHROW_ANGLE_CLAMP)
+    if (angle < WPEGGTHROW_ANGLE_CLAMP)
     {
         angle = 0.0F;
     }
 
     angle *= ((wp->weapon_vars.egg_throw.stick_range < 0) ? LEFT : RIGHT);
 
-    angle = (wp->weapon_vars.egg_throw.lr > 0) ? (ITEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (ITEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
+    angle = (wp->weapon_vars.egg_throw.lr > 0) ? (WPEGGTHROW_TRAJECTORY_SUB_RIGHT - angle) : (WPEGGTHROW_TRAJECTORY_SUB_LEFT - angle);
 
-    wp->phys_info.vel_air.y = __sinf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
-    wp->phys_info.vel_air.x = cosf(angle) * ((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_VEL_FORCE_MUL) + ITEGGTHROW_VEL_ADD);
+    wp->phys_info.vel_air.y = __sinf(angle) * ((wp->weapon_vars.egg_throw.throw_force * WPEGGTHROW_VEL_FORCE_MUL) + WPEGGTHROW_VEL_ADD);
+    wp->phys_info.vel_air.x = cosf(angle) * ((wp->weapon_vars.egg_throw.throw_force * WPEGGTHROW_VEL_FORCE_MUL) + WPEGGTHROW_VEL_ADD);
 
-    wp->weapon_vars.egg_throw.angle = F_DEG_TO_RAD((wp->weapon_vars.egg_throw.throw_force * ITEGGTHROW_ANGLE_FORCE_MUL) + ITEGGTHROW_ANGLE_ADD);
+    wp->weapon_vars.egg_throw.angle = F_DEG_TO_RAD((wp->weapon_vars.egg_throw.throw_force * WPEGGTHROW_ANGLE_FORCE_MUL) + WPEGGTHROW_ANGLE_ADD);
 
     DObjGetStruct(weapon_gobj)->translate.z = 0.0F;
 
@@ -161,7 +161,7 @@ bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
         else
         {
             DObjGetStruct(weapon_gobj)->rotate.z += wp->weapon_vars.egg_throw.angle;
-            wpMain_UpdateGravityClampTVel(wp, ITEGGTHROW_GRAVITY, ITEGGTHROW_T_VEL);
+            wpMain_UpdateGravityClampTVel(wp, WPEGGTHROW_GRAVITY, WPEGGTHROW_T_VEL);
 
             return FALSE;
         }
@@ -227,7 +227,7 @@ bool32 wpYoshi_EggThrow_ProcReflector(GObj *weapon_gobj)
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    wp->lifetime = ITEGGTHROW_LIFETIME;
+    wp->lifetime = WPEGGTHROW_LIFETIME;
 
     wpMain_ReflectorInvertLR(wp, fp);
     wpMain_VelSetModelYaw(weapon_gobj);
@@ -265,7 +265,7 @@ GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     wp->proc_dead = wpYoshi_EggThrow_ProcDead;
 
-    wp->lifetime = ITEGGTHROW_LIFETIME;
+    wp->lifetime = WPEGGTHROW_LIFETIME;
 
     wp->weapon_hit.update_state = gmHitCollision_UpdateState_Disable;
 

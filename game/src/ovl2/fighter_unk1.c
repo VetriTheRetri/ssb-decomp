@@ -14,11 +14,11 @@ s32 ftSpecialItem_BGMGetDuration(s32 bgm_id)
 {
     switch (bgm_id)
     {
-    case ATHAMMER_BGM_ID:
-        return ATHAMMER_BGM_DURATION;
+    case ITHAMMER_BGM_ID:
+        return ITHAMMER_BGM_DURATION;
 
-    case ATSTAR_BGM_ID:
-        return ATSTAR_BGM_DURATION;
+    case ITSTAR_BGM_ID:
+        return ITSTAR_BGM_DURATION;
 
     default:
         return 0;
@@ -51,11 +51,11 @@ void ftSpecialItem_BGMCheckFighters(void)
 
         if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->it_kind == It_Kind_Hammer))
         {
-            bgm_id = ATHAMMER_BGM_ID;
+            bgm_id = ITHAMMER_BGM_ID;
         }
-        if (fp->star_invincible_timer > ATSTAR_WARN_BEGIN_FRAME)
+        if (fp->star_invincible_timer > ITSTAR_WARN_BEGIN_FRAME)
         {
-            bgm_id = ATSTAR_BGM_ID;
+            bgm_id = ITSTAR_BGM_ID;
         }
         duration_new = ftSpecialItem_BGMGetDuration(bgm_id);
 
@@ -413,7 +413,7 @@ void ftCommon_ClearHitAll(GObj *fighter_gobj)
 }
 
 // 0x800E853C
-void ftCommon_ClearHitTargetsIndex(Fighter_Struct *fp, s32 hit_id)
+void ftCollision_ClearHitRecordIndex(Fighter_Struct *fp, s32 hit_id)
 {
     s32 i;
 
@@ -432,7 +432,7 @@ void ftCommon_ClearHitTargetsIndex(Fighter_Struct *fp, s32 hit_id)
 }
 
 // 0x800E8668
-void ftCommon_RefreshHitIndex(GObj *fighter_gobj, s32 hit_id)
+void ftCollision_RefreshHitIndex(GObj *fighter_gobj, s32 hit_id)
 {
     Fighter_Struct *fp = ftGetStruct(fighter_gobj);
 
@@ -440,7 +440,7 @@ void ftCommon_RefreshHitIndex(GObj *fighter_gobj, s32 hit_id)
 
     fp->is_hit_enable = TRUE;
 
-    ftCommon_ClearHitTargetsIndex(fp, hit_id);
+    ftCollision_ClearHitRecordIndex(fp, hit_id);
 }
 
 // 0x800E86B4
@@ -1411,7 +1411,7 @@ void ftCommon_VelDamageTransferGround(Fighter_Struct *fp)
 3FC00000 3F800000 3F8A3D71 3F6D097B
 */
 
-f32 Knockback_Handicap_MulTable[40][2] = 
+f32 ftDamage_HandicapDesc[40][2] = 
 {
     { 0.55F,  16.363636363636F / 9.0F },
     {  0.6F,             15.0F / 9.0F },
@@ -1462,13 +1462,13 @@ f32 gmCommonObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s3
 
     if (knockback_weight != 0)
     {
-        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     } 
     else 
     {
         f32 damage_add = percent_damage + recent_damage;
 
-        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( Match_Info->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     }
     if (knockback >= 2500.0F)
     {
@@ -1488,13 +1488,13 @@ f32 grMapObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 h
 
     if (knockback_weight != 0)
     {
-        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * 1 * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * 1 * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     }
     else
     {
         f32 damage_add = percent_damage + recent_damage;
 
-        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base) * 1 * Knockback_Handicap_MulTable[attack_handicap - 1][0] ) * Knockback_Handicap_MulTable[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base) * 1 * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     }
     if (knockback >= 2500.0F)
     {
@@ -1719,7 +1719,7 @@ void ftCommon_ApplyStarInvincibleTimer(Fighter_Struct *fp, s32 star_invincible_t
     fp->star_hitstatus = gmHitCollision_HitStatus_Invincible;
     fp->star_invincible_timer = star_invincible_timer;
 
-    ftColor_CheckSetColAnimIndex(fp->fighter_gobj, ATSTAR_COLANIM_ID, ATSTAR_COLANIM_LENGTH);
+    ftColor_CheckSetColAnimIndex(fp->fighter_gobj, ITSTAR_COLANIM_ID, ITSTAR_COLANIM_LENGTH);
 }
 
 // 0x800EA8EC

@@ -38,7 +38,7 @@ void wpSamus_BombExplode_InitWeaponVars(GObj *weapon_gobj)
 {
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
 
-    ip->lifetime = ITSAMUSBOMB_EXPLODE_LIFETIME;
+    ip->lifetime = WPSAMUSBOMB_EXPLODE_LIFETIME;
 
     ip->weapon_hit.can_rehit_item = TRUE;
     ip->weapon_hit.can_hop = FALSE;
@@ -47,7 +47,7 @@ void wpSamus_BombExplode_InitWeaponVars(GObj *weapon_gobj)
     ip->phys_info.vel_air.y = 0.0F;
     ip->phys_info.vel_air.x = 0.0F;
 
-    ip->weapon_hit.size = ITSAMUSBOMB_EXPLODE_RADIUS;
+    ip->weapon_hit.size = WPSAMUSBOMB_EXPLODE_RADIUS;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
@@ -77,13 +77,13 @@ bool32 wpSamus_Bomb_ProcUpdate(GObj *weapon_gobj)
     {
         if (ip->ground_or_air == GA_Air)
         {
-            wpMain_UpdateGravityClampTVel(ip, ITSAMUSBOMB_WAIT_GRAVITY, ITSAMUSBOMB_WAIT_T_VEL);
-            DObjGetStruct(weapon_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_AIR * ip->lr);
+            wpMain_UpdateGravityClampTVel(ip, WPSAMUSBOMB_WAIT_GRAVITY, WPSAMUSBOMB_WAIT_T_VEL);
+            DObjGetStruct(weapon_gobj)->rotate.z -= (WPSAMUSBOMB_WAIT_ROTATE_SPEED_AIR * ip->lr);
         }
         else
         {
             wpMain_VelGroundTransferAir(weapon_gobj);
-            DObjGetStruct(weapon_gobj)->rotate.z -= (ITSAMUSBOMB_WAIT_ROTATE_SPEED_GROUND * ip->lr);
+            DObjGetStruct(weapon_gobj)->rotate.z -= (WPSAMUSBOMB_WAIT_ROTATE_SPEED_GROUND * ip->lr);
         }
 
         ip->weapon_vars.samus_bomb.bomb_blink_timer--;
@@ -94,17 +94,17 @@ bool32 wpSamus_Bomb_ProcUpdate(GObj *weapon_gobj)
 
             image->anim_frame = (image->anim_frame != 0) ? 0.0F : 1.0F;
 
-            if (ip->lifetime > ITSAMUSBOMB_WAIT_BLINK_SLOW)
+            if (ip->lifetime > WPSAMUSBOMB_WAIT_BLINK_SLOW)
             {
-                ip->weapon_vars.samus_bomb.bomb_blink_timer = ITSAMUSBOMB_WAIT_BLINK_TIMER_SLOW;
+                ip->weapon_vars.samus_bomb.bomb_blink_timer = WPSAMUSBOMB_WAIT_BLINK_TIMER_SLOW;
             }
-            else if (ip->lifetime > ITSAMUSBOMB_WAIT_BLINK_MID)
+            else if (ip->lifetime > WPSAMUSBOMB_WAIT_BLINK_MID)
             {
-                ip->weapon_vars.samus_bomb.bomb_blink_timer = ITSAMUSBOMB_WAIT_BLINK_TIMER_MID;
+                ip->weapon_vars.samus_bomb.bomb_blink_timer = WPSAMUSBOMB_WAIT_BLINK_TIMER_MID;
             }
             else
             {
-                ip->weapon_vars.samus_bomb.bomb_blink_timer = ITSAMUSBOMB_WAIT_BLINK_TIMER_FAST;
+                ip->weapon_vars.samus_bomb.bomb_blink_timer = WPSAMUSBOMB_WAIT_BLINK_TIMER_FAST;
             }
         }
     }
@@ -122,7 +122,7 @@ bool32 wpSamus_Bomb_ProcMap(GObj *weapon_gobj)
     {
         is_collide = func_ovl3_80167B58(weapon_gobj);
 
-        if (wpMap_CheckCollideAllModifyVel(weapon_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), ITSAMUSBOMB_WAIT_COLLIDE_MOD_VEL, NULL) != FALSE)
+        if (wpMap_CheckCollideAllModifyVel(weapon_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), WPSAMUSBOMB_WAIT_COLLIDE_MOD_VEL, NULL) != FALSE)
         {
             wpMain_VelSetLR(weapon_gobj);
         }
@@ -183,7 +183,7 @@ bool32 wpSamus_Bomb_ProcReflector(GObj *weapon_gobj)
     Weapon_Struct *ip = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
 
-    ip->lifetime = ITSAMUSBOMB_WAIT_LIFETIME;
+    ip->lifetime = WPSAMUSBOMB_WAIT_LIFETIME;
 
     if (ip->ground_or_air == GA_Air)
     {
@@ -207,11 +207,11 @@ GObj* wpSamus_Bomb_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     ip = wpGetStruct(weapon_gobj);
 
-    ip->lifetime = ITSAMUSBOMB_WAIT_LIFETIME;
+    ip->lifetime = WPSAMUSBOMB_WAIT_LIFETIME;
 
-    ip->weapon_vars.samus_bomb.bomb_blink_timer = ITSAMUSBOMB_WAIT_BLINK_TIMER_SLOW;
+    ip->weapon_vars.samus_bomb.bomb_blink_timer = WPSAMUSBOMB_WAIT_BLINK_TIMER_SLOW;
 
-    ip->phys_info.vel_air.y = ITSAMUSBOMB_WAIT_VEL_Y;
+    ip->phys_info.vel_air.y = WPSAMUSBOMB_WAIT_VEL_Y;
 
     return weapon_gobj;
 }

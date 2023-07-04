@@ -496,7 +496,7 @@ glabel func_ovl43_8018D62C
   /* 16E708 8018D7F8 0C035E2D */       jal func_ovl2_800D78B4
   /* 16E70C 8018D7FC 92040023 */       lbu $a0, 0x23($s0) # D_ovl43_8018E1F0 + 35
   /* 16E710 8018D800 AFA20088 */        sw $v0, 0x88($sp)
-  /* 16E714 8018D804 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 16E714 8018D804 0C035FCF */       jal ftManager_CreateFighter
   /* 16E718 8018D808 02802025 */        or $a0, $s4, $zero
   /* 16E71C 8018D80C 3C018019 */       lui $at, %hi(D_ovl43_8018E230)
   /* 16E720 8018D810 AC22E230 */        sw $v0, %lo(D_ovl43_8018E230)($at)
@@ -708,7 +708,7 @@ glabel func_ovl43_8018DA8C
   /* 16EA18 8018DB08 E7A00028 */      swc1 $f0, 0x28($sp)
   /* 16EA1C 8018DB0C E7A00030 */      swc1 $f0, 0x30($sp)
   /* 16EA20 8018DB10 AFAA005C */        sw $t2, 0x5c($sp)
-  /* 16EA24 8018DB14 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 16EA24 8018DB14 0C035FCF */       jal ftManager_CreateFighter
   /* 16EA28 8018DB18 E7A4002C */      swc1 $f4, 0x2c($sp)
   /* 16EA2C 8018DB1C 3C050001 */       lui $a1, (0x1000C >> 16) # 65548
   /* 16EA30 8018DB20 00408025 */        or $s0, $v0, $zero

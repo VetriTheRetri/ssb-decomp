@@ -35,8 +35,8 @@ void ftCommon_AttackAirLw_ProcUpdate(GObj *fighter_gobj)
 
             if ((fp->status_vars.common.attackair.rehit_timer == 0) && (fighter_gobj->anim_frame < FTCOMMON_ATTACKAIRLW_LINK_REHIT_FRAME_END))
             {
-                ftCommon_RefreshHitIndex(fighter_gobj, 0);
-                ftCommon_RefreshHitIndex(fighter_gobj, 1);
+                ftCollision_RefreshHitIndex(fighter_gobj, 0);
+                ftCollision_RefreshHitIndex(fighter_gobj, 1);
             }
         }
     }

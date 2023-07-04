@@ -16,16 +16,16 @@ void func_ovl3_80180FC0(GObj *item_gobj)
     }
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    ap->item_vars.mb_lucky.egg_spawn_wait = ATMBLUCKY_EGG_SPAWN_WAIT_CONST;
+    ap->item_vars.mb_lucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
 
-    ap->it_multi = ATMBLUCKY_EGG_SPAWN_COUNT;
+    ap->it_multi = ITMBLUCKY_EGG_SPAWN_COUNT;
 }
 
 bool32 jtgt_ovl3_80181048(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATMBLUCKY_GRAVITY, ATMBLUCKY_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITMBLUCKY_GRAVITY, ITMBLUCKY_T_VEL);
 
     return FALSE;
 }
@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_80181124(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ap, ATMBLUCKY_GRAVITY, ATMBLUCKY_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITMBLUCKY_GRAVITY, ITMBLUCKY_T_VEL);
 
     return FALSE;
 }
@@ -98,7 +98,8 @@ void func_ovl3_801811AC(GObj *item_gobj)
     itMain_SetItemStatus(item_gobj, Article_Mb_Lucky_Status, 1);
 }
 
-bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
+// 0x80181200
+bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
 {
     Item_Struct *lucky_ap = itGetStruct(lucky_gobj), *egg_ap;
     DObj *joint = DObjGetStruct(lucky_gobj);
@@ -121,8 +122,8 @@ bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
             {
                 pos = joint->translate;
 
-                vel.x = (rand_f32() * ATMBLUCKY_EGG_SPAWN_BASE_VEL) + ATMBLUCKY_EGG_SPAWN_ADD_VEL_X;
-                vel.y = (rand_f32() * ATMBLUCKY_EGG_SPAWN_BASE_VEL) + ATMBLUCKY_EGG_SPAWN_ADD_VEL_Y;
+                vel.x = (rand_f32() * ITMBLUCKY_EGG_SPAWN_BASE_VEL) + ITMBLUCKY_EGG_SPAWN_ADD_VEL_X;
+                vel.y = (rand_f32() * ITMBLUCKY_EGG_SPAWN_BASE_VEL) + ITMBLUCKY_EGG_SPAWN_ADD_VEL_Y;
                 vel.z = 0.0F;
 
                 egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
@@ -131,9 +132,9 @@ bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
                 {
                     egg_ap = itGetStruct(egg_gobj);
 
-                    func_800269C0(0xCAU);
+                    func_800269C0(0xCA);
 
-                    lucky_ap->item_vars.mb_lucky.egg_spawn_wait = ATMBLUCKY_EGG_SPAWN_WAIT_CONST;
+                    lucky_ap->item_vars.mb_lucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
                     lucky_ap->it_multi--;
 
                     func_ovl2_800FF048(&pos, egg_ap->lr, 1.0F);
@@ -141,8 +142,7 @@ bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
             }
             else
             {
-                lucky_ap->item_vars.mb_lucky.egg_spawn_wait = ATMBLUCKY_EGG_SPAWN_WAIT_CONST;
-
+                lucky_ap->item_vars.mb_lucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
                 lucky_ap->it_multi--;
             }
         }
@@ -154,18 +154,20 @@ bool32 jtgt_ovl3_80181200(GObj *lucky_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80181368(GObj *item_gobj)
+// 0x80181368
+bool32 itMBLucky_GSpawn_ProcMap(GObj *item_gobj)
 {
     func_ovl3_801735A0(item_gobj, func_ovl3_801810E0);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80181390(GObj *item_gobj)
+// 0x80181390
+bool32 itMBLucky_GSpawn_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
 
-    ap->item_vars.mb_lucky.egg_spawn_wait += ATMBLUCKY_EGG_SPAWN_WAIT_ADD;
+    ip->item_vars.mb_lucky.egg_spawn_wait += ITMBLUCKY_EGG_SPAWN_WAIT_ADD;
 
     return FALSE;
 }
@@ -192,7 +194,7 @@ void func_ovl3_801813F8(GObj *item_gobj)
 {
     Item_Struct *ap = itGetStruct(item_gobj);
 
-    ap->item_vars.mb_lucky.lifetime = ATMBLUCKY_LIFETIME;
+    ap->item_vars.mb_lucky.lifetime = ITMBLUCKY_LIFETIME;
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
@@ -244,11 +246,11 @@ GObj *jtgt_ovl3_801814C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap = itGetStruct(item_gobj);
 
-        ap->it_multi = ATMONSTER_RISE_STOP_WAIT;
+        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
         ap->phys_info.vel_air.z = 0.0F;
         ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = ATMONSTER_RISE_VEL_Y;
+        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
         joint->translate.y -= ap->attributes->objectcoll_bottom;
 

@@ -1116,7 +1116,7 @@ struct Fighter_Struct
     s32 acid_wait;    // Wait this many frames before fighter can be hurt by Planet Zebes acid again?
     s32 twister_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
     s32 tarucann_wait;// Wait this many frames before fighter can enter Barrel Cannon again
-    s32 hotfloor_wait;// Wait this many frames before fighter can be hurt by damaging floors again (e.g. Mario's Board the Platforms stage)
+    s32 damagefloor_wait;// Wait this many frames before fighter can be hurt by damaging floors again (e.g. Mario's Board the Platforms stage)
     s32 unk_0x174;
     s32 unk_0x178;
 
@@ -1284,7 +1284,7 @@ struct Fighter_Struct
     s32 damage_player_number;
     s32 damage_player; // Port index of damaging fighter
     u16 damage_count;
-    s32 unk_ft_0x814;
+    s32 damage_kind;
     s32 damage_heal; // Percent damage to heal
     f32 damage_mul;
 

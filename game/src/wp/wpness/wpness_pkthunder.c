@@ -189,7 +189,7 @@ bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj)
         return TRUE;
     }
 
-    if (wp->lifetime == ITPKTHUNDER_SPAWN_TRAIL_FRAME)
+    if (wp->lifetime == WPPKTHUNDER_SPAWN_TRAIL_FRAME)
     {
         wpNess_PKThunderHead_CreateTrail(weapon_gobj, 0);
     }
@@ -206,7 +206,7 @@ bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj)
 
     if ((fp->status_info.status_id == ftStatus_Ness_SpecialHiHold) || (fp->status_info.status_id == ftStatus_Ness_SpecialAirHiHold))
     {
-        if ((ABS(fp->input.pl.stick_range.x) + ABS(fp->input.pl.stick_range.y)) > ITPKTHUNDER_TURN_STICK_THRESHOLD)
+        if ((ABS(fp->input.pl.stick_range.x) + ABS(fp->input.pl.stick_range.y)) > WPPKTHUNDER_TURN_STICK_THRESHOLD)
         {
             stick_angle.x = fp->input.pl.stick_range.x;
             stick_angle.y = fp->input.pl.stick_range.y;
@@ -218,14 +218,14 @@ bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj)
 
             if (angle_diff >= F_DEG_TO_RAD(45.0F)) // QUART_PI32
             {
-                wp->weapon_vars.pkthunder.angle = (thunder_angle.z > 0.0F) ? (wp->weapon_vars.pkthunder.angle + ITPKTHUNDER_ANGLE_STEP) : (wp->weapon_vars.pkthunder.angle - ITPKTHUNDER_ANGLE_STEP);
+                wp->weapon_vars.pkthunder.angle = (thunder_angle.z > 0.0F) ? (wp->weapon_vars.pkthunder.angle + WPPKTHUNDER_ANGLE_STEP) : (wp->weapon_vars.pkthunder.angle - WPPKTHUNDER_ANGLE_STEP);
             }
             if (angle_diff < F_DEG_TO_RAD(45.0F))  // QUART_PI32
             {
-                wp->weapon_vars.pkthunder.angle = (thunder_angle.z > 0.0F) ? (wp->weapon_vars.pkthunder.angle + (angle_diff / ITPKTHUNDER_ANGLE_DIV)) : (wp->weapon_vars.pkthunder.angle - (angle_diff / ITPKTHUNDER_ANGLE_DIV));
+                wp->weapon_vars.pkthunder.angle = (thunder_angle.z > 0.0F) ? (wp->weapon_vars.pkthunder.angle + (angle_diff / WPPKTHUNDER_ANGLE_DIV)) : (wp->weapon_vars.pkthunder.angle - (angle_diff / WPPKTHUNDER_ANGLE_DIV));
             }
-            wp->phys_info.vel_air.x = cosf(wp->weapon_vars.pkthunder.angle) * ITPKTHUNDER_VEL;
-            wp->phys_info.vel_air.y = __sinf(wp->weapon_vars.pkthunder.angle) * ITPKTHUNDER_VEL;
+            wp->phys_info.vel_air.x = cosf(wp->weapon_vars.pkthunder.angle) * WPPKTHUNDER_VEL;
+            wp->phys_info.vel_air.y = __sinf(wp->weapon_vars.pkthunder.angle) * WPPKTHUNDER_VEL;
             wp->phys_info.vel_air.z = 0.0F;
 
             DObjGetStruct(weapon_gobj)->rotate.z = wp->weapon_vars.pkthunder.angle - F_DEG_TO_RAD(90.0F); // HALF_PI32
@@ -306,7 +306,7 @@ GObj* wpNess_PKThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *v
 
     wp->proc_dead = wpNess_PKThunderHead_ProcDead;
 
-    wp->lifetime = ITPKTHUNDER_LIFETIME;
+    wp->lifetime = WPPKTHUNDER_LIFETIME;
 
     wp->phys_info.vel = *vel;
 
@@ -359,18 +359,18 @@ bool32 wpNess_PKThunderTrail_ProcUpdate(GObj *weapon_gobj)
     DObjGetStruct(weapon_gobj)->rotate.z -= HALF_PI32;
 
 
-    if ((wp->weapon_vars.pkthunder_trail.trail_index < (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == ITPKTHUNDER_SPAWN_TRAIL_FRAME))
+    if ((wp->weapon_vars.pkthunder_trail.trail_index < (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == WPPKTHUNDER_SPAWN_TRAIL_FRAME))
     {
         wpNess_PKThunderHead_CreateTrail(weapon_gobj, wp->weapon_vars.pkthunder_trail.trail_index + 1);
     }
 
-    if ((wp->weapon_vars.pkthunder_trail.trail_index == (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == ITPKTHUNDER_SPAWN_TRAIL_FRAME))
+    if ((wp->weapon_vars.pkthunder_trail.trail_index == (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == WPPKTHUNDER_SPAWN_TRAIL_FRAME))
     {
         func_ovl2_80102848(wp->owner_gobj);
     }
     wpMain_DecLifeCheckExpire(wp);
 
-    DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
+    DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(WPPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -404,7 +404,7 @@ GObj* wpNess_PKThunderTrail_CreateWeapon(GObj *head_gobj, Vec3f *pos, s32 trail_
 
     trail_gobj->renderer = wpRender_DisplayPKThunder;
 
-    trail_wp->lifetime = ITPKTHUNDER_LIFETIME;
+    trail_wp->lifetime = WPPKTHUNDER_LIFETIME;
 
     if (trail_index == 0)
     {
@@ -475,7 +475,7 @@ bool32 wpNess_PKReflectHead_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (wp->lifetime == ITPKTHUNDER_SPAWN_TRAIL_FRAME) // This will keep spawning PK Thunder trails every time it is reflected, since lifetime is reset to 160 on each occasion
+    if (wp->lifetime == WPPKTHUNDER_SPAWN_TRAIL_FRAME) // This will keep spawning PK Thunder trails every time it is reflected, since lifetime is reset to 160 on each occasion
     {
         wpNess_PKReflectHead_CreateTrail(weapon_gobj, 0);
     }
@@ -520,7 +520,7 @@ bool32 wpNess_PKReflectHead_ProcReflector(GObj *weapon_gobj)
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    wp->lifetime = ITPKTHUNDER_LIFETIME; // This line is directly responsible for the PK Thunder double reflect crash; omitting it fixes the oversight
+    wp->lifetime = WPPKTHUNDER_LIFETIME; // This line is directly responsible for the PK Thunder double reflect crash; omitting it fixes the oversight
 
     wpMain_ReflectorInvertLR(wp, fp);
 
@@ -552,7 +552,7 @@ GObj* wpNess_PKReflectHead_CreateWeapon(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 
     wp->proc_dead = wpNess_PKReflectHead_ProcDead;
 
-    wp->lifetime = ITPKTHUNDER_LIFETIME;
+    wp->lifetime = WPPKTHUNDER_LIFETIME;
 
     wp->group_id = wpManager_GetGroupIndexInc();
 
@@ -562,13 +562,13 @@ GObj* wpNess_PKReflectHead_CreateWeapon(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
     }
 
     localvel.x = DObjGetStruct(new_gobj)->translate.x - DObjGetStruct(wp->owner_gobj)->translate.x;
-    localvel.y = DObjGetStruct(new_gobj)->translate.y - (DObjGetStruct(wp->owner_gobj)->translate.y + ITPKTHUNDER_REFLECT_POS_Y_ADD);
+    localvel.y = DObjGetStruct(new_gobj)->translate.y - (DObjGetStruct(wp->owner_gobj)->translate.y + WPPKTHUNDER_REFLECT_POS_Y_ADD);
     localvel.z = DObjGetStruct(new_gobj)->translate.z - DObjGetStruct(wp->owner_gobj)->translate.z;
 
     vec3f_normalize(&localvel);
 
-    wp->phys_info.vel_air.x = (ITPKTHUNDER_VEL * localvel.x);
-    wp->phys_info.vel_air.y = (ITPKTHUNDER_VEL * localvel.y);
+    wp->phys_info.vel_air.x = (WPPKTHUNDER_VEL * localvel.x);
+    wp->phys_info.vel_air.y = (WPPKTHUNDER_VEL * localvel.y);
     wp->phys_info.vel_air.z = 0.0F;
 
     DObjGetStruct(new_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
@@ -594,21 +594,21 @@ bool32 wpNess_PKReflectTrail_ProcUpdate(GObj *weapon_gobj)
 
     trail_index = wp->weapon_vars.pkthunder_trail.trail_index;
 
-    if ((trail_index < (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == ITPKTHUNDER_SPAWN_TRAIL_FRAME))
+    if ((trail_index < (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == WPPKTHUNDER_SPAWN_TRAIL_FRAME))
     {
         wpNess_PKReflectHead_CreateTrail(weapon_gobj, trail_index + 1);
 
         trail_index = wp->weapon_vars.pkthunder_trail.trail_index;
     }
 
-    if ((trail_index == (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == ITPKTHUNDER_SPAWN_TRAIL_FRAME))
+    if ((trail_index == (ARRAY_COUNT(wp->weapon_vars.pkthunder_trail.trail_gobj) - 2)) && (wp->lifetime == WPPKTHUNDER_SPAWN_TRAIL_FRAME))
     {
         func_ovl2_80102968(wp->weapon_vars.pkthunder_trail.trail_gobj[0]);
     }
 
     wpMain_DecLifeCheckExpire(wp);
 
-    DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(ITPKTHUNDER_TEXTURE_COUNT - 1);
+    DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(WPPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -640,7 +640,7 @@ GObj* wpNess_PKReflectTrail_CreateWeapon(GObj *old_gobj, Vec3f *pos, s32 trail_i
 
     new_gobj->renderer = wpRender_DisplayPKThunder;
 
-    new_wp->lifetime = ITPKTHUNDER_LIFETIME;
+    new_wp->lifetime = WPPKTHUNDER_LIFETIME;
 
     new_wp->group_id = old_wp->group_id;
 

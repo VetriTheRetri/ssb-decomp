@@ -3399,7 +3399,7 @@ glabel func_ovl26_80134A8C
   /* 132DEC 80134B6C AFAC0024 */        sw $t4, 0x24($sp)
   /* 132DF0 80134B70 A3B8003C */        sb $t8, 0x3c($sp)
   /* 132DF4 80134B74 AFB9005C */        sw $t9, 0x5c($sp)
-  /* 132DF8 80134B78 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 132DF8 80134B78 0C035FCF */       jal ftManager_CreateFighter
   /* 132DFC 80134B7C A3AA0039 */        sb $t2, 0x39($sp)
   /* 132E00 80134B80 8FA80020 */        lw $t0, 0x20($sp)
   /* 132E04 80134B84 3C058013 */       lui $a1, %hi(func_ovl26_8013494C)

@@ -22,11 +22,11 @@ bool32 func_ovl3_80183DE0(GObj *item_gobj)
 
     pos = joint->translate;
 
-    pos.x += ATHITOKAGE_FLAME_SPAWN_OFF_X;
+    pos.x += ITHITOKAGE_FLAME_SPAWN_OFF_X;
 
     if ((ap->item_vars.hitokage.flags == 2) || 
-    ((ap->item_vars.hitokage.flags & 1) && (joint->dobj_f2 >= ATHITOKAGE_FLAME_SPAWN_BEGIN)) && 
-    (joint->dobj_f2 <= ATHITOKAGE_FLAME_SPAWN_END))
+    ((ap->item_vars.hitokage.flags & 1) && (joint->dobj_f2 >= ITHITOKAGE_FLAME_SPAWN_BEGIN)) && 
+    (joint->dobj_f2 <= ITHITOKAGE_FLAME_SPAWN_END))
     {
         joint->mobj->index = 1;
 
@@ -34,7 +34,7 @@ bool32 func_ovl3_80183DE0(GObj *item_gobj)
         {
             func_ovl3_801843C4(item_gobj, &pos);
 
-            ap->item_vars.hitokage.flame_spawn_wait = ATHITOKAGE_FLAME_SPAWN_WAIT;
+            ap->item_vars.hitokage.flame_spawn_wait = ITHITOKAGE_FLAME_SPAWN_WAIT;
         }
         else
         {
@@ -60,11 +60,11 @@ bool32 jtgt_ovl3_80183F20(GObj *item_gobj)
     Item_Struct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
-    func_ovl3_80172558(ap, ATHITOKAGE_GRAVITY, ATHITOKAGE_T_VEL);
+    itMain_UpdatePhysicsAir(ap, ITHITOKAGE_GRAVITY, ITHITOKAGE_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
 
-    joint->rotate.z -= (ATHITOKAGE_HIT_ROTATE_Z * ap->lr);
+    joint->rotate.z -= (ITHITOKAGE_HIT_ROTATE_Z * ap->lr);
 
     return FALSE;
 }
@@ -174,7 +174,7 @@ bool32 jtgt_ovl3_80184204(GObj *weapon_gobj)
     Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
     Vec3f *translate;
 
-    ip->lifetime = ATHITOKAGE_FLAME_LIFETIME;
+    ip->lifetime = ITHITOKAGE_FLAME_LIFETIME;
 
     wpMain_ReflectorInvertLR(ip, fp);
 
@@ -201,7 +201,7 @@ GObj *func_ovl3_801842C8(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->phys_info.vel = *vel;
 
-    ip->lifetime = ATHITOKAGE_FLAME_LIFETIME;
+    ip->lifetime = ITHITOKAGE_FLAME_LIFETIME;
 
     ip->lr = LEFT;
 
@@ -216,8 +216,8 @@ void func_ovl3_801843C4(GObj *item_gobj, Vec3f *pos)
     Item_Struct *ap;
     Vec3f vel;
 
-    vel.x = cosf(ATHITOKAGE_FLAME_SPAWN_ANGLE) * -ATHITOKAGE_FLAME_VEL_XY;
-    vel.y = __sinf(ATHITOKAGE_FLAME_SPAWN_ANGLE) * ATHITOKAGE_FLAME_VEL_XY;
+    vel.x = cosf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * -ITHITOKAGE_FLAME_VEL_XY;
+    vel.y = __sinf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * ITHITOKAGE_FLAME_VEL_XY;
     vel.z = 0.0F;
 
     func_ovl3_801842C8(item_gobj, pos, &vel);

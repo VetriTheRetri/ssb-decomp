@@ -472,7 +472,7 @@ glabel func_ovl55_801320D4
   /* 178BB8 80132158 A3AA0034 */        sb $t2, 0x34($sp)
   /* 178BBC 8013215C AFAB0054 */        sw $t3, 0x54($sp)
   /* 178BC0 80132160 E7A60024 */      swc1 $f6, 0x24($sp)
-  /* 178BC4 80132164 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 178BC4 80132164 0C035FCF */       jal ftManager_CreateFighter
   /* 178BC8 80132168 E7A80028 */      swc1 $f8, 0x28($sp)
   /* 178BCC 8013216C 3C018013 */       lui $at, %hi(D_ovl55_80134300)
   /* 178BD0 80132170 3C050001 */       lui $a1, (0x10009 >> 16) # 65545

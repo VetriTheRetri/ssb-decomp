@@ -62,7 +62,8 @@ typedef enum Wp_Kind
     Wp_Kind_YubiBulletSingle,
     Wp_Kind_YubiBulletTriple,
     Wp_Kind_LGunAmmo = 0x14,
-    Wp_Kind_FFlowerFlame
+    Wp_Kind_FFlowerFlame,
+    Wp_Kind_StarRodStar
 
 } Wp_Kind;
 
@@ -71,7 +72,7 @@ typedef struct wpCreateDesc
     u8 unk_0x0;
     s32 wp_kind;
     void **p_item; // Pointer to various item data
-    intptr_t offset_wp_hit; // Offset of item hitbox info
+    intptr_t offset; // Offset of item hitbox info
     u8 unk_0x10;
     u8 unk_0x11;
     u8 unk_0x12;
@@ -86,40 +87,6 @@ typedef struct wpCreateDesc
     bool32 (*proc_absorb)(GObj*);
 
 } wpCreateDesc;
-
-typedef struct wpCommonAttributes // Moreso hitbox stuff
-{
-    void *unk_0x0;
-    void *unk_0x4;
-    void *unk_0x8;
-    void *unk_0xC;
-    Vec3h offset[2];
-    s16 objectcoll_top;
-    s16 objectcoll_center;
-    s16 objectcoll_bottom;
-    s16 objectcoll_width;
-    u16 size;
-    s32 angle : 10;
-    u32 knockback_scale : 10;
-    u32 damage : 8;
-    u32 element : 4;
-    u32 knockback_weight : 10;
-    s32 shield_damage : 8;
-    u32 hitbox_count : 2;
-    u32 rebound : 1;
-    u32 sfx : 10;
-    u32 priority : 3;
-    u32 can_rehit_item : 1;
-    u32 can_rehit_fighter : 1;
-    u32 can_hop : 1;
-    u32 can_reflect : 1;
-    u32 can_absorb : 1;
-    u32 can_shield : 1;
-    u32 flags_0x2F_b6 : 1;
-    u32 flags_0x2F_b7 : 1;
-    u32 knockback_base : 10;
-
-} wpCommonAttributes;
 
 typedef struct wpHitPositions
 {

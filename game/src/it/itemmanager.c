@@ -183,7 +183,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->is_thrown = FALSE; // Applies magnitude and stale multiplier if TRUE and hitbox is active?
     ap->is_attach_surface = FALSE;
 
-    ap->rotate_speed = 0.0F;
+    ap->rotate_step = 0.0F;
     ap->indicator_gobj = NULL;
     ap->arrow_flash_timer = 0;
 
@@ -222,7 +222,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->item_hit.stat_flags.is_smash_attack = ap->item_hit.stat_flags.is_ground_or_air = ap->item_hit.stat_flags.is_special_attack = FALSE;
     ap->item_hit.stat_count = gmCommon_GetStatUpdateCountInc();
 
-    func_ovl3_801725F8(ap);
+    itMain_ClearHitRecord(ap);
 
     ap->item_hurt.hitstatus = attributes->hitstatus;
     ap->item_hurt.offset.x = attributes->hurt_offset.x;
@@ -1764,10 +1764,11 @@ void func_ovl3_801713B0(GObj *item_gobj)
     }
 }
 
-void func_ovl3_801713F4(GObj *item_gobj)
+// 0x801713F4
+void itManager_UpdateSpin(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    Item_Struct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    joint->rotate.z += ap->rotate_speed;
+    joint->rotate.z += ip->rotate_step;
 }

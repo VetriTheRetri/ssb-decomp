@@ -29,8 +29,8 @@ wpMarioFireballAttributes wpMario_Fireball_WeaponAttributes[2] =
         0.0F                    // Gravity
         0.85F                   // Map collision rebound velocity?
         F_DEG_TO_RAD(25.0F),    // Rotate speed (0.436332315207F)
-        F_DEG_TO_RAD(0.0F),     // Grounded launch angle (-0.0872664675117F)
-        F_DEG_TO_RAD(0.0F),     // Aerial launch angle (-0.0872664675117F)
+        F_DEG_TO_RAD(0.0F),     // Grounded launch angle (0.0F)
+        F_DEG_TO_RAD(0.0F),     // Aerial launch angle (0.0F)
         36.0F,                  // Base velocity
         &D_ovl2_80130F7C,       // Pointer to ???
         0x0,                    // Offset of hitbox/attributes?
@@ -143,7 +143,7 @@ GObj* wpMario_Fireball_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 index) /
     f32 angle;
 
     wpMario_Fireball_WeaponDesc.p_item = wpMario_Fireball_WeaponAttributes[index].p_item;
-    wpMario_Fireball_WeaponDesc.offset_wp_hit = wpMario_Fireball_WeaponAttributes[index].offset_wp_hit;
+    wpMario_Fireball_WeaponDesc.offset = wpMario_Fireball_WeaponAttributes[index].offset;
 
     weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpMario_Fireball_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 

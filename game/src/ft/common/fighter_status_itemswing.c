@@ -81,7 +81,7 @@ void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
 
             func_ovl2_800EDF24(fp->joint[fp->attributes->joint_itemhold_light], &star_spawn_offset);
 
-            func_ovl3_80178594(fighter_gobj, &star_spawn_offset, (fp->command_vars.flags.flag0 == 1) ? FALSE : TRUE);
+            ftCommon_StarRodSwing_CreateStar(fighter_gobj, &star_spawn_offset, (fp->command_vars.flags.flag0 == 1) ? FALSE : TRUE);
         }
         else
         {

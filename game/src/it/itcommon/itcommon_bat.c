@@ -98,8 +98,8 @@ bool32 itBat_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATBAT_GRAVITY, ATBAT_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITBAT_GRAVITY, ITBAT_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -149,8 +149,8 @@ void itBat_FHold_SetStatus(GObj *item_gobj)
 // 0x80174F70
 bool32 itBat_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    func_ovl3_80172558(itGetStruct(item_gobj), ATBAT_GRAVITY, ATBAT_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(itGetStruct(item_gobj), ITBAT_GRAVITY, ITBAT_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }

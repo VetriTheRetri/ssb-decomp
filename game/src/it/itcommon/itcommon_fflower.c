@@ -120,8 +120,8 @@ bool32 itFFlower_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATFFLOWER_GRAVITY, ATFFLOWER_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITFFLOWER_GRAVITY, ITFFLOWER_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -225,7 +225,7 @@ GObj* itCommon_FFlower_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
     {
         Item_Struct *ip = itGetStruct(item_gobj);
 
-        ip->it_multi = ATFFLOWER_AMMO_MAX;
+        ip->it_multi = ITFFLOWER_AMMO_MAX;
 
         ip->is_unused_item_bool = TRUE;
 
@@ -276,7 +276,7 @@ bool32 wpFFlower_Flame_ProcReflector(GObj *weapon_gobj)
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
     Vec3f *translate;
 
-    wp->lifetime = ATFFLOWER_AMMO_LIFETIME;
+    wp->lifetime = ITFFLOWER_AMMO_LIFETIME;
 
     wpMain_ReflectorInvertLR(wp, fp);
 
@@ -304,7 +304,7 @@ GObj* wpFFlower_Flame_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
     wp->phys_info.vel_air.y = vel->y;
     wp->phys_info.vel_air.z = vel->z;
 
-    wp->lifetime = ATFFLOWER_AMMO_LIFETIME;
+    wp->lifetime = ITFFLOWER_AMMO_LIFETIME;
 
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
     func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
@@ -321,8 +321,8 @@ void ftCommon_FireFlowerShoot_CreateFlame(GObj *fighter_gobj, Vec3f *pos, s32 in
     Vec3f vel;
     f32 *flame_vel = (f32*) ((uintptr_t)*itCommon_FFlower_ItemDesc.p_file + (intptr_t)&D_NF_00000360); // Linker thing
 
-    vel.x = cosf(flame_vel[index]) * ATFFLOWER_AMMO_VEL;
-    vel.y = __sinf(flame_vel[index]) * ATFFLOWER_AMMO_VEL;
+    vel.x = cosf(flame_vel[index]) * ITFFLOWER_AMMO_VEL;
+    vel.y = __sinf(flame_vel[index]) * ITFFLOWER_AMMO_VEL;
     vel.z = 0.0F;
 
     wpFFlower_Flame_CreateWeapon(fighter_gobj, pos, &vel);

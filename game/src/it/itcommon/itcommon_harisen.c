@@ -108,8 +108,8 @@ bool32 itHarisen_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATHARISEN_GRAVITY, ATHARISEN_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITHARISEN_GRAVITY, ITHARISEN_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -167,8 +167,8 @@ bool32 itHarisen_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATHARISEN_GRAVITY, ATHARISEN_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITHARISEN_GRAVITY, ITHARISEN_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }

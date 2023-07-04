@@ -15,7 +15,7 @@ typedef struct ftKirby_FighterVars
     s32 copydonkey_charge_level;
     s32 copycaptain_falcon_punch_unk;
     s32 copypurin_unk;
-    bool32 copy_bool_unk;
+    bool32 is_ignore_losecopy;
     GObj *copylink_boomerang_gobj;
 
 } ftKirby_FighterVars;

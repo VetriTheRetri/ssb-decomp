@@ -330,7 +330,7 @@ glabel func_ovl54_80131F24
   /* 17794C 80131FAC A3A90033 */        sb $t1, 0x33($sp)
   /* 177950 80131FB0 A3AA0034 */        sb $t2, 0x34($sp)
   /* 177954 80131FB4 AFAB0054 */        sw $t3, 0x54($sp)
-  /* 177958 80131FB8 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 177958 80131FB8 0C035FCF */       jal ftManager_CreateFighter
   /* 17795C 80131FBC E7A80028 */      swc1 $f8, 0x28($sp)
   /* 177960 80131FC0 3C018013 */       lui $at, %hi(D_ovl54_80132BDC)
   /* 177964 80131FC4 3C050001 */       lui $a1, (0x10009 >> 16) # 65545

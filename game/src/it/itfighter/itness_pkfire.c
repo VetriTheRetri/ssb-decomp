@@ -136,7 +136,7 @@ bool32 itPKFire_AFall_ProcUpdate(GObj *item_gobj)
     {
         return TRUE;
     }
-    else func_ovl3_80172558(ip, ATPKFIRE_GRAVITY, ATPKFIRE_T_VEL);
+    else itMain_UpdatePhysicsAir(ip, ITPKFIRE_GRAVITY, ITPKFIRE_T_VEL);
 
     return FALSE;
 }
@@ -164,7 +164,7 @@ bool32 itPKFire_SDefault_ProcDamage(GObj *item_gobj)
 
     if (ip->lifetime > 0)
     {
-        ip->lifetime -= ip->damage_highest * ATPKFIRE_HURT_DAMAGE_MUL;
+        ip->lifetime -= ip->damage_highest * ITPKFIRE_HURT_DAMAGE_MUL;
     }
     if (itNess_SDefault_UpdateAllCheckDestroy(item_gobj) == TRUE)
     {
@@ -255,7 +255,7 @@ GObj* itNess_PKFire_CreateItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     itMap_SetAir(ip);
     itManager_UpdateHitPositions(item_gobj);
 
-    ip->lifetime = ATPKFIRE_LIFETIME;
+    ip->lifetime = ITPKFIRE_LIFETIME;
 
     effect_unk = func_ovl0_800CE9E8(D_ovl2_80131148, 0);
 

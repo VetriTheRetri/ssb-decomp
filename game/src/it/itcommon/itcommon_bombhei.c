@@ -159,9 +159,9 @@ void itBombHei_Default_SetExplode(GObj *item_gobj, u8 arg1)
 
     if (ep != NULL)
     {
-        ep->effect_info->scale.x = ATBOMBHEI_EXPLODE_SCALE;
-        ep->effect_info->scale.y = ATBOMBHEI_EXPLODE_SCALE;
-        ep->effect_info->scale.z = ATBOMBHEI_EXPLODE_SCALE;
+        ep->effect_info->scale.x = ITBOMBHEI_EXPLODE_SCALE;
+        ep->effect_info->scale.y = ITBOMBHEI_EXPLODE_SCALE;
+        ep->effect_info->scale.z = ITBOMBHEI_EXPLODE_SCALE;
     }
     func_ovl2_801008F4(1);
 
@@ -169,8 +169,8 @@ void itBombHei_Default_SetExplode(GObj *item_gobj, u8 arg1)
 
     ip->item_hit.hit_sfx = 1;
 
-    func_ovl3_8017275C(item_gobj);
-    func_ovl3_8017279C(item_gobj);
+    itMain_RefreshHit(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
     itBombHei_NExplode_SetStatus(item_gobj);
 }
 
@@ -189,14 +189,14 @@ void func_ovl3_80177104(GObj *item_gobj, u8 lr)
     if (lr != CENTER)
     {
         ip->lr = RIGHT;
-        ip->phys_info.vel_air.x = ATBOMBHEI_WALK_VEL_X;
+        ip->phys_info.vel_air.x = ITBOMBHEI_WALK_VEL_X;
 
         joint->display_list = dlr;
     }
     else
     {
         ip->lr = LEFT;
-        ip->phys_info.vel_air.x = -ATBOMBHEI_WALK_VEL_X;
+        ip->phys_info.vel_air.x = -ITBOMBHEI_WALK_VEL_X;
 
         joint->display_list = dll;
     }
@@ -240,8 +240,8 @@ bool32 itBombHei_AFall_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATBOMBHEI_GRAVITY, ATBOMBHEI_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITBOMBHEI_GRAVITY, ITBOMBHEI_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -285,7 +285,7 @@ bool32 itBombHei_GWait_ProcUpdate(GObj *item_gobj)
     void *dll = ((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_WalkLeft; // Linker thing
     s32 lr;
 
-    if (ip->it_multi == ATBOMBHEI_WALK_WAIT)
+    if (ip->it_multi == ITBOMBHEI_WALK_WAIT)
     {
         lr = itBombHei_GWalk_GetMostPlayersLR(item_gobj);
 
@@ -296,11 +296,11 @@ bool32 itBombHei_GWait_ProcUpdate(GObj *item_gobj)
         if (lr < 0)
         {
             ip->lr = RIGHT;
-            ip->phys_info.vel_air.x = ATBOMBHEI_WALK_VEL_X;
+            ip->phys_info.vel_air.x = ITBOMBHEI_WALK_VEL_X;
         }
         else
         {
-            ip->phys_info.vel_air.x = -ATBOMBHEI_WALK_VEL_X;
+            ip->phys_info.vel_air.x = -ITBOMBHEI_WALK_VEL_X;
 
             joint->display_list = dll;
 
@@ -367,8 +367,8 @@ bool32 itBombHei_FThrow_ProcUpdate(GObj *item_gobj)
 {
     Item_Struct *ip = itGetStruct(item_gobj);
 
-    func_ovl3_80172558(ip, ATBOMBHEI_GRAVITY, ATBOMBHEI_T_VEL);
-    func_ovl3_801713F4(item_gobj);
+    itMain_UpdatePhysicsAir(ip, ITBOMBHEI_GRAVITY, ITBOMBHEI_T_VEL);
+    itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
@@ -413,7 +413,7 @@ void itBombHei_GWalk_UpdateGFX(GObj *item_gobj)
 
         func_ovl2_800FF048(&pos, ip->lr, 1.0F);
 
-        ip->item_vars.bombhei.smoke_delay = ATBOMBHEI_SMOKE_WAIT;
+        ip->item_vars.bombhei.smoke_delay = ITBOMBHEI_SMOKE_WAIT;
     }
     ip->item_vars.bombhei.smoke_delay--;
 }
@@ -449,7 +449,7 @@ bool32 itBombHei_GWalk_ProcUpdate(GObj *item_gobj)
             }
         }
     }
-    if (ip->it_multi == ATBOMBHEI_FLASH_WAIT)
+    if (ip->it_multi == ITBOMBHEI_FLASH_WAIT)
     {
         ip->phys_info.vel_air.z = 0.0F;
         ip->phys_info.vel_air.y = 0.0F;
@@ -496,9 +496,9 @@ void itBombHei_GWalk_InitItemVars(GObj *item_gobj)
 
     ip->it_multi = 0;
 
-    ip->item_vars.bombhei.smoke_delay = ATBOMBHEI_SMOKE_WAIT;
+    ip->item_vars.bombhei.smoke_delay = ITBOMBHEI_SMOKE_WAIT;
 
-    func_ovl3_8017275C(item_gobj);
+    itMain_RefreshHit(item_gobj);
 
     texture = itGetPData(ip, BombHei_Motion_Data, BombHei_Motion_Unk); // ((uintptr_t)ip->attributes->unk_0x0 - (uintptr_t)&BombHei_Motion_Data) + &BombHei_Motion_Unk; // Linker thing
 
@@ -527,7 +527,7 @@ void itBombHei_GWalk_InitItemVars(GObj *item_gobj)
             }
         }
     }
-    func_ovl3_8017279C(item_gobj);
+    itMain_ClearOwnerStats(item_gobj);
 
     func_800269C0(0x2DU);
 }
@@ -633,7 +633,7 @@ bool32 itBombHei_NExplode_ProcUpdate(GObj *item_gobj)
 
     ip->it_multi++;
 
-    if (ip->it_multi == ATBOMBHEI_EXPLODE_LIFETIME)
+    if (ip->it_multi == ITBOMBHEI_EXPLODE_LIFETIME)
     {
         return TRUE;
     }
@@ -654,7 +654,7 @@ bool32 itBombHei_GExplodeWait_ProcUpdate(GObj *item_gobj)
 
     itBombHei_GWalk_UpdateGFX(item_gobj);
 
-    if (ip->it_multi == ATBOMBHEI_EXPLODE_WAIT)
+    if (ip->it_multi == ITBOMBHEI_EXPLODE_WAIT)
     {
         func_ovl3_80177180(item_gobj, 1);
         itBombHei_Default_ZeroVelSetExplode(item_gobj, 0);
@@ -683,7 +683,7 @@ void itBombHei_GExplodeWait_InitItemVars(GObj *item_gobj)
 
     joint->mobj->unk_mobj_0x94 = 0;
 
-    itMain_CheckSetColAnimIndex(item_gobj, ATBOMBHEI_EXPLODE_COLANIM_ID, ATBOMBHEI_EXPLODE_COLANIM_DURATION);
+    itMain_CheckSetColAnimIndex(item_gobj, ITBOMBHEI_EXPLODE_COLANIM_ID, ITBOMBHEI_EXPLODE_COLANIM_DURATION);
 }
 
 // 0x80177D60
@@ -712,7 +712,7 @@ GObj* itCommon_BombHei_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 
         ip->it_multi = 0;
 
-        func_ovl3_8017279C(item_gobj);
+        itMain_ClearOwnerStats(item_gobj);
 
         func_80008CC0(joint, 0x2EU, 0U);
 

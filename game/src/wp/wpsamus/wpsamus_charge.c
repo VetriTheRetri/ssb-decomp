@@ -177,7 +177,7 @@ bool32 wpSamus_ChargeShot_ProcUpdate(GObj *weapon_gobj) // Animation
 
     if (wp->weapon_vars.charge_shot.is_release == FALSE)
     {
-        scale = wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].gfx_size / ITCHARGESHOT_GFX_SIZE_DIV;
+        scale = wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].gfx_size / WPCHARGESHOT_GFX_SIZE_DIV;
 
         DObjGetStruct(weapon_gobj)->scale.y = scale;
         DObjGetStruct(weapon_gobj)->scale.x = scale;
@@ -193,7 +193,7 @@ bool32 wpSamus_ChargeShot_ProcUpdate(GObj *weapon_gobj) // Animation
             wpManager_UpdateHitPositions(weapon_gobj);
         }
     }
-    DObjGetStruct(weapon_gobj)->rotate.z -= ITCHARGESHOT_ROTATE_SPEED * wp->lr;
+    DObjGetStruct(weapon_gobj)->rotate.z -= WPCHARGESHOT_ROTATE_SPEED * wp->lr;
 
     return FALSE;
 }
@@ -281,7 +281,7 @@ GObj* wpSamus_ChargeShot_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 charge
         ftCommon_PlayLoopSFXStoreInfo(fp, wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].charge_sfx_id);
     }
 
-    scale = wpSamus_ChargeShot_WeaponAttributes[charge_level].gfx_size / ITCHARGESHOT_GFX_SIZE_DIV;
+    scale = wpSamus_ChargeShot_WeaponAttributes[charge_level].gfx_size / WPCHARGESHOT_GFX_SIZE_DIV;
 
     DObjGetStruct(weapon_gobj)->scale.y = scale;
     DObjGetStruct(weapon_gobj)->scale.x = scale;

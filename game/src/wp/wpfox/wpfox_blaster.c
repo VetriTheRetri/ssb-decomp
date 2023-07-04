@@ -99,7 +99,7 @@ GObj* wpFox_Blaster_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel_air.x = wp->lr * ITBLASTER_VEL_X;
+    wp->phys_info.vel_air.x = wp->lr * WPBLASTER_VEL_X;
 
     DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
 

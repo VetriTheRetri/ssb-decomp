@@ -66,13 +66,13 @@ void wpMasterHand_YubiExplode_InitWeaponVars(GObj *weapon_gobj)
 
     wp->weapon_hit.element = gmHitCollision_Element_Fire;
 
-    wp->lifetime = ITYUBIBULLET_EXPLODE_LIFETIME;
+    wp->lifetime = WPYUBIBULLET_EXPLODE_LIFETIME;
 
     wp->phys_info.vel_air.z = 0.0F;
     wp->phys_info.vel_air.y = 0.0F;
     wp->phys_info.vel_air.x = 0.0F;
 
-    wp->weapon_hit.size = ITYUBIBULLET_EXPLODE_SIZE;
+    wp->weapon_hit.size = WPYUBIBULLET_EXPLODE_SIZE;
 
     DObjGetStruct(weapon_gobj)->display_list = NULL;
 
@@ -142,8 +142,8 @@ GObj* wpMasterHand_YubiBulletSingle_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel_air.x = ITYUBIBULLET_VEL_X * wp->lr;
-    wp->phys_info.vel_air.y = ITYUBIBULLET_VEL_Y;
+    wp->phys_info.vel_air.x = WPYUBIBULLET_VEL_X * wp->lr;
+    wp->phys_info.vel_air.y = WPYUBIBULLET_VEL_Y;
 
     func_ovl3_80168428(weapon_gobj);
 
@@ -162,8 +162,8 @@ GObj* wpMasterHand_YubiBulletTriple_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->phys_info.vel_air.x = ITYUBIBULLET_VEL_X * wp->lr;
-    wp->phys_info.vel_air.y = ITYUBIBULLET_VEL_Y;
+    wp->phys_info.vel_air.x = WPYUBIBULLET_VEL_X * wp->lr;
+    wp->phys_info.vel_air.y = WPYUBIBULLET_VEL_Y;
 
     func_ovl3_80168428(weapon_gobj);
 

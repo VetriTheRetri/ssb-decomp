@@ -112,7 +112,7 @@ glabel func_ovl47_80131C00
   /* 171488 80131C68 E7A00020 */      swc1 $f0, 0x20($sp)
   /* 17148C 80131C6C E7A00024 */      swc1 $f0, 0x24($sp)
   /* 171490 80131C70 E7A00028 */      swc1 $f0, 0x28($sp)
-  /* 171494 80131C74 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 171494 80131C74 0C035FCF */       jal ftManager_CreateFighter
   /* 171498 80131C78 AFA90054 */        sw $t1, 0x54($sp)
   /* 17149C 80131C7C 3C050001 */       lui $a1, (0x1000F >> 16) # 65551
   /* 1714A0 80131C80 34A5000F */       ori $a1, $a1, (0x1000F & 0xFFFF) # 65551
@@ -141,7 +141,7 @@ glabel func_ovl47_80131C00
   /* 1714FC 80131CDC E7A00020 */      swc1 $f0, 0x20($sp)
   /* 171500 80131CE0 E7A00024 */      swc1 $f0, 0x24($sp)
   /* 171504 80131CE4 E7A00028 */      swc1 $f0, 0x28($sp)
-  /* 171508 80131CE8 0C035FCF */       jal func_ovl2_800D7F3C
+  /* 171508 80131CE8 0C035FCF */       jal ftManager_CreateFighter
   /* 17150C 80131CEC AFA80054 */        sw $t0, 0x54($sp)
   /* 171510 80131CF0 3C050001 */       lui $a1, (0x1000F >> 16) # 65551
   /* 171514 80131CF4 34A5000F */       ori $a1, $a1, (0x1000F & 0xFFFF) # 65551

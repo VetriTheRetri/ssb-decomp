@@ -54,7 +54,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcUpdate(GObj *weapon_gobj)
 
         return TRUE;
     }
-    else wpMain_UpdateGravityClampTVel(wp, ITPIKACHUJOLT_GRAVITY, ITPIKACHUJOLT_T_VEL);
+    else wpMain_UpdateGravityClampTVel(wp, WPPIKACHUJOLT_GRAVITY, WPPIKACHUJOLT_T_VEL);
 
     return FALSE;
 }
@@ -140,7 +140,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcReflector(GObj *weapon_gobj)
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    wp->lifetime = ITPIKACHUJOLT_LIFETIME;
+    wp->lifetime = WPPIKACHUJOLT_LIFETIME;
 
     wpMain_ReflectorInvertLR(wp, fp);
 
@@ -159,7 +159,7 @@ GObj* wpPikachu_ThunderJoltAir_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3
     }
     wp = wpGetStruct(weapon_gobj);
 
-    wp->lifetime = ITPIKACHUJOLT_LIFETIME;
+    wp->lifetime = WPPIKACHUJOLT_LIFETIME;
 
     wp->phys_info.vel = *vel;
 
@@ -181,7 +181,7 @@ bool32 wpPikachu_ThunderJoltGround_ProcUpdate(GObj *weapon_gobj)
 {
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
 
-    if (weapon_gobj->anim_frame == ITPIKACHUJOLT_ANIM_PUSH_FRAME)
+    if (weapon_gobj->anim_frame == WPPIKACHUJOLT_ANIM_PUSH_FRAME)
     {
         func_ovl2_80101C34(&DObjGetStruct(weapon_gobj)->translate, DObjGetStruct(weapon_gobj)->rotate.z);
         func_ovl3_80169654(weapon_gobj);
@@ -192,8 +192,8 @@ bool32 wpPikachu_ThunderJoltGround_ProcUpdate(GObj *weapon_gobj)
         return TRUE;
     }
 
-    wp->phys_info.vel_air.x = cosf(DObjGetStruct(weapon_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
-    wp->phys_info.vel_air.y = __sinf(DObjGetStruct(weapon_gobj)->rotate.z) * ITPIKACHUJOLT_VEL;
+    wp->phys_info.vel_air.x = cosf(DObjGetStruct(weapon_gobj)->rotate.z) * WPPIKACHUJOLT_VEL;
+    wp->phys_info.vel_air.y = __sinf(DObjGetStruct(weapon_gobj)->rotate.z) * WPPIKACHUJOLT_VEL;
 
     switch (wp->weapon_vars.thunder_jolt.coll_type)
     {
@@ -359,7 +359,7 @@ bool32 func_ovl3_80169BF0(GObj *weapon_gobj)
         break;
     }
 
-    if (vec3f_angle_diff(&angle, &wp->weapon_vars.thunder_jolt.rotate) > ITPIKACHUJOLT_ROTATE_ANGLE_MAX)
+    if (vec3f_angle_diff(&angle, &wp->weapon_vars.thunder_jolt.rotate) > WPPIKACHUJOLT_ROTATE_ANGLE_MAX)
     {
         func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
@@ -643,7 +643,7 @@ bool32 wpPikachu_ThunderJoltGround_ProcReflector(GObj *weapon_gobj)
     Weapon_Struct *wp = wpGetStruct(weapon_gobj);
     Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
 
-    wp->lifetime = ITPIKACHUJOLT_LIFETIME;
+    wp->lifetime = WPPIKACHUJOLT_LIFETIME;
 
     wpMain_ReflectorInvertLR(wp, fp);
 
