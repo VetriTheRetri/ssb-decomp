@@ -9,7 +9,7 @@ void ftDonkey_SpecialLwStart_ProcUpdate(GObj *fighter_gobj)
 // 0x8015BA14
 void ftDonkey_SpecialLwLoop_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->dobj_f1))
     {
@@ -24,7 +24,7 @@ void ftDonkey_SpecialLwLoop_ProcUpdate(GObj *fighter_gobj)
 // 0x8015BA7C
 void ftDonkey_SpecialLwLoop_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_tap & fp->input.button_mask_b)
     {
@@ -47,7 +47,7 @@ void ftDonkey_SpecialLwEnd_SetStatus(GObj *fighter_gobj)
 // 0x8015BAFC
 void ftDonkey_SpecialLwStart_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialLwStart, 0.0F, 1.0F, 0);
     ftAnim_Update(fighter_gobj);

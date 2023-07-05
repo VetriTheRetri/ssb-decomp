@@ -46,7 +46,7 @@ wpCreateDesc wpPikachu_ThunderJoltGround_WeaponDesc =
 // 0x80169390
 bool32 wpPikachu_ThunderJoltAir_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
@@ -62,7 +62,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcUpdate(GObj *weapon_gobj)
 // 0x801693EC
 bool32 wpPikachu_ThunderJoltAir_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     Vec3f pos;
     u32 unused[2];
 
@@ -117,7 +117,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcMap(GObj *weapon_gobj)
 // 0x8016953C
 bool32 wpPikachu_ThunderJoltAir_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
@@ -127,7 +127,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcHit(GObj *weapon_gobj)
 // 0x8016956C
 bool32 wpPikachu_ThunderJoltAir_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
@@ -137,8 +137,8 @@ bool32 wpPikachu_ThunderJoltAir_ProcHop(GObj *weapon_gobj)
 // 0x801695B0
 bool32 wpPikachu_ThunderJoltAir_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = WPPIKACHUJOLT_LIFETIME;
 
@@ -151,7 +151,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcReflector(GObj *weapon_gobj)
 GObj* wpPikachu_ThunderJoltAir_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpPikachu_ThunderJoltAir_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {
@@ -179,7 +179,7 @@ void func_ovl3_80169654(GObj *weapon_gobj)
 // 0x801696A0
 bool32 wpPikachu_ThunderJoltGround_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (weapon_gobj->anim_frame == WPPIKACHUJOLT_ANIM_PUSH_FRAME)
     {
@@ -225,7 +225,7 @@ bool32 wpPikachu_ThunderJoltGround_ProcUpdate(GObj *weapon_gobj)
 // 0x8016981C
 s32 wpPikachu_ThunderJoltGround_GetSurfaceType(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     Vec3f pos;
     Vec3f rotate;
     s32 line_id;
@@ -341,7 +341,7 @@ s32 wpPikachu_ThunderJoltGround_GetSurfaceType(GObj *weapon_gobj)
 // 0x80169BF0
 bool32 func_ovl3_80169BF0(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     Vec3f angle;
 
     func_ovl3_80169654(weapon_gobj);
@@ -373,7 +373,7 @@ bool32 func_ovl3_80169BF0(GObj *weapon_gobj)
 // 0x80169D08
 bool32 wpPikachu_ThunderJoltGround_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     s32 coll_type;
     Vec3f pos;
     s32 line_id;
@@ -630,7 +630,7 @@ bool32 wpPikachu_ThunderJoltGround_ProcMap(GObj *weapon_gobj)
 // 0x8016A374
 bool32 wpPikachu_ThunderJoltGround_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
@@ -640,8 +640,8 @@ bool32 wpPikachu_ThunderJoltGround_ProcHit(GObj *weapon_gobj)
 // 0x8016A3A4
 bool32 wpPikachu_ThunderJoltGround_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = WPPIKACHUJOLT_LIFETIME;
 
@@ -658,8 +658,8 @@ bool32 wpPikachu_ThunderJoltGround_ProcReflector(GObj *weapon_gobj)
 GObj* wpPikachu_ThunderJoltGround_CreateWeapon(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
 {
     s32 unused[2];
-    Weapon_Struct *prev_wp = prev_gobj->user_data;
-    Weapon_Struct *new_wp;
+    wpStruct *prev_wp = prev_gobj->user_data;
+    wpStruct *new_wp;
     GObj *new_gobj = wpManager_CreateWeapon(prev_gobj, &wpPikachu_ThunderJoltGround_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_WEAPON));
 
     if (new_gobj == NULL)

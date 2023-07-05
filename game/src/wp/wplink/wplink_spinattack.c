@@ -37,7 +37,7 @@ bool32 wpLink_SpinAttack_ProcDead(GObj *weapon_gobj)
 // 0x8016C9B4
 bool32 wpLink_SpinAttack_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 sqrt_vel;
     f32 mod_vel;
 
@@ -72,7 +72,7 @@ bool32 wpLink_SpinAttack_ProcUpdate(GObj *weapon_gobj)
 // 0x8016CA9C
 bool32 wpLink_SpinAttack_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 pos_x, pos_y;
     s32 index = (wp->weapon_vars.spin_attack.pos_index + 1) % WPSPINATTACK_EXTEND_POS_COUNT;
 
@@ -96,9 +96,9 @@ bool32 wpLink_SpinAttack_ProcHit(GObj *weapon_gobj)
 // 0x8016CB1C
 GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj;
-    Weapon_Struct *wp;
+    wpStruct *wp;
     Vec3f offset = *pos;
     s32 unused;
 

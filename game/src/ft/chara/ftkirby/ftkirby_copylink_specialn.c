@@ -3,7 +3,7 @@
 // 0x80164650
 void ftKirby_CopyLink_SpecialN_DestroyBoomerang(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->fighter_vars.kirby.copylink_boomerang_gobj != NULL)
     {
@@ -16,7 +16,7 @@ void ftKirby_CopyLink_SpecialN_DestroyBoomerang(GObj *fighter_gobj)
 // 0x80164688
 void ftKirby_CopyLink_SpecialN_CreateBoomerang(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->command_vars.flags.flag0 != 0)
@@ -74,7 +74,7 @@ void ftKirby_CopyLink_SpecialAirNEmpty_ProcMap(GObj *fighter_gobj)
 // 0x801647D0
 void ftKirby_CopyLink_SpecialN_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
 
@@ -102,7 +102,7 @@ void ftKirby_CopyLink_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x801648A0
 void ftKirby_CopyLink_SpecialNEmpty_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyLink_SpecialAirNEmpty, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -113,7 +113,7 @@ void ftKirby_CopyLink_SpecialNEmpty_SwitchStatusAir(GObj *fighter_gobj)
 // 0x801648F0
 void ftKirby_CopyLink_SpecialAirNEmpty_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyLink_SpecialNEmpty, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -124,7 +124,7 @@ void ftKirby_CopyLink_SpecialAirNEmpty_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80164940
 void ftKirby_CopyLink_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftKirby_CopyLink_SpecialN_ProcStatus;
 
@@ -142,7 +142,7 @@ void ftKirby_CopyLink_SpecialN_SetStatus(GObj *fighter_gobj)
 // 0x801649C0
 void ftKirby_CopyLink_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftKirby_CopyLink_SpecialN_ProcStatus;
 
@@ -159,7 +159,7 @@ void ftKirby_CopyLink_SpecialAirN_SetStatus(GObj *fighter_gobj)
 // 0x80164A40
 void ftKirby_CopyLink_SpecialNReturn_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Air)
     {

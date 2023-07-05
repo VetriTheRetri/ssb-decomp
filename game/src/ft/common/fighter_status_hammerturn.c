@@ -3,7 +3,7 @@
 // 0x80147A70
 void ftCommon_HammerTurn_UpdateModelYaw(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -22,7 +22,7 @@ void ftCommon_HammerTurn_UpdateModelYaw(GObj *fighter_gobj)
 // 0x80147AD0
 void ftCommon_HammerTurn_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_HammerTurn_UpdateModelYaw(fighter_gobj);
 
@@ -41,7 +41,7 @@ void ftCommon_HammerTurn_ProcInterrupt(GObj *fighter_gobj)
 // 0x80147B34
 void ftCommon_HammerTurn_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = FTCOMMON_HAMMER_TURN_FRAMES;
 

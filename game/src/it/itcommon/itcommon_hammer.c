@@ -102,7 +102,7 @@ void itHammer_SDefault_SetColAnim(GObj *item_gobj)
 // 0x80176134
 bool32 itHammer_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -138,7 +138,7 @@ extern itStatusDesc itCommon_Hammer_StatusDesc[];
 // 0x801761F8
 void itHammer_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -157,7 +157,7 @@ void itHammer_FHold_SetStatus(GObj *item_gobj)
 // 0x80176270
 bool32 itHammer_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -174,7 +174,7 @@ bool32 itHammer_FThrow_ProcMap(GObj *item_gobj)
 // 0x801762D8
 bool32 itHammer_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -217,7 +217,7 @@ GObj* itCommon_Hammer_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
         DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
 

@@ -22,7 +22,7 @@
 )                                                  \
 
 // 0x8013E2E0
-f32 ftCommon_Walk_GetWalkAnimSpeed(Fighter_Struct *fp, s32 status_id)
+f32 ftCommon_Walk_GetWalkAnimSpeed(ftStruct *fp, s32 status_id)
 {
     f32 walk_anim_speed;
 
@@ -62,7 +62,7 @@ s32 ftCommon_Walk_GetWalkStatus(s8 stick_range_x)
 // 0x8013E390
 void ftCommon_Walk_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!ftCheckInterruptWalk(fighter_gobj))
     {
@@ -81,7 +81,7 @@ void ftCommon_Walk_ProcInterrupt(GObj *fighter_gobj)
 // 0x8013E548
 void ftCommon_Walk_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D8A70(fp, fp->attributes->walk_speed_mul, fp->attributes->traction);
     func_ovl2_800D87D0(fighter_gobj);
@@ -90,7 +90,7 @@ void ftCommon_Walk_ProcPhysics(GObj *fighter_gobj)
 // 0x8013E580
 void ftCommon_Walk_SetStatusParam(GObj *fighter_gobj, f32 anim_frame_begin)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id = ftCommon_Walk_GetWalkStatus(fp->input.pl.stick_range.x);
 
     ftStatus_Update(fighter_gobj, status_id, anim_frame_begin, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -111,7 +111,7 @@ void ftCommon_Walk_SetStatusDefault(GObj *fighter_gobj)
 // 0x8013E614
 bool32 ftCommon_Walk_CheckInputSuccess(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.stick_range.x * fp->lr) >= 8)
     {

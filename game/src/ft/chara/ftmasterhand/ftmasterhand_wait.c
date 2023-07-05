@@ -9,7 +9,7 @@ u8 D_ovl3_80188DEC[20];
 // 0x801587B0 - New file?
 void ftMasterHand_Wait_SetVelStickRange(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     s32 vel_x = (ABS(fp->input.pl.stick_range.x) >= 8) ? fp->input.pl.stick_range.x : 0;
     s32 vel_y = (ABS(fp->input.pl.stick_range.y) >= 8) ? fp->input.pl.stick_range.y : 0;
@@ -21,9 +21,9 @@ void ftMasterHand_Wait_SetVelStickRange(GObj *fighter_gobj)
 // 0x80158824
 void ftMasterHand_Wait_DecideStatusPlayer(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 angle;
-    Fighter_Struct *fp_target;
+    ftStruct *fp_target;
     Vec3f sp30;
 
     if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
@@ -117,7 +117,7 @@ void ftMasterHand_Wait_DecideStatusPlayer(GObj *fighter_gobj)
 // 0x80158C34
 void ftMasterHand_Wait_DecideStatusComputer(GObj *fighter_gobj) // Decide Master Hand's next attack
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     u32 random;
     u32 var;
@@ -232,7 +232,7 @@ void ftMasterHand_Wait_DecideStatusComputer(GObj *fighter_gobj) // Decide Master
 // 0x80158F74
 void ftMasterHand_Wait_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_info.pl_kind == Pl_Kind_Human)
     {
@@ -244,7 +244,7 @@ void ftMasterHand_Wait_ProcInterrupt(GObj *fighter_gobj)
 // 0x80158FB4
 void ftMasterHand_Wait_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
     f32 magnitude;
 
@@ -268,7 +268,7 @@ static gmUnkInfo_80131308 D_ovl2_80131308;
 // 0x80159040
 void ftMasterHand_Wait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     Vec3f *translate;
     Vec3f pos;
     s32 ground_line_id;

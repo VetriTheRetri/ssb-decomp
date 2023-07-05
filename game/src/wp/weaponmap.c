@@ -1,7 +1,7 @@
 #include "weapon.h"
 
 // 0x80167880
-bool32 wpMap_CheckCollideGround(Coll_Data *coll_data, s32 arg1, s32 arg2)
+bool32 wpMap_CheckCollideGround(mpCollData *coll_data, s32 arg1, s32 arg2)
 {
     s32 ground_line_id = coll_data->ground_line_id;
     bool32 is_collide_ground = FALSE;
@@ -47,7 +47,7 @@ bool32 func_ovl3_8016796C(GObj *weapon_gobj)
     return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, wpMap_CheckCollideGround, weapon_gobj, FALSE);
 }
 
-bool32 func_ovl3_801679A0(Coll_Data *coll_data, s32 arg1, s32 arg2)
+bool32 func_ovl3_801679A0(mpCollData *coll_data, s32 arg1, s32 arg2)
 {
     if (func_ovl2_800DB838(coll_data) != FALSE)
     {
@@ -81,7 +81,7 @@ bool32 func_ovl3_80167A58(GObj *weapon_gobj)
     return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_801679A0, weapon_gobj, 0);
 }
 
-bool32 func_ovl3_80167A8C(Coll_Data *coll_data, s32 arg1, s32 arg2)
+bool32 func_ovl3_80167A8C(mpCollData *coll_data, s32 arg1, s32 arg2)
 {
     if (func_ovl2_800DB838(coll_data) != FALSE)
     {
@@ -120,7 +120,7 @@ bool32 func_ovl3_80167B58(GObj *weapon_gobj)
     return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_80167A8C, weapon_gobj, 0);
 }
 
-bool32 func_ovl3_80167B8C(Coll_Data *weapon_gobj, s32 arg1, s32 arg2)
+bool32 func_ovl3_80167B8C(mpCollData *weapon_gobj, s32 arg1, s32 arg2)
 {
     if (func_ovl2_800DB838(weapon_gobj) != FALSE)
     {
@@ -149,8 +149,8 @@ bool32 func_ovl3_80167C04(GObj *weapon_gobj)
 
 bool32 wpMap_CheckCollideAllModifyVel(GObj *weapon_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Coll_Data *coll_data = &ip->coll_data;
+    wpStruct *ip = wpGetStruct(weapon_gobj);
+    mpCollData *coll_data = &ip->coll_data;
     bool32 return_bool = FALSE;
     Vec3f mod_pos, *translate = &DObjGetStruct(weapon_gobj)->translate;
     u16 coll_flags = (ip->coll_data.coll_mask_prev ^ ip->coll_data.coll_mask) & ip->coll_data.coll_mask & MPCOLL_MASK_MAIN_ALL;
@@ -223,14 +223,14 @@ bool32 wpMap_CheckCollideAllModifyVel(GObj *weapon_gobj, u32 check_flags, f32 mo
 }
 
 // 0x80167E78
-void wpMap_SetGround(Weapon_Struct *ip) // Make item grounded
+void wpMap_SetGround(wpStruct *ip) // Make item grounded
 {
     ip->ground_or_air = GA_Ground;
     ip->phys_info.vel_ground = ip->phys_info.vel_air.x * ip->lr;
 }
 
 // 0x80167E9C
-void wpMap_SetAir(Weapon_Struct *ip) // Make item airborne
+void wpMap_SetAir(wpStruct *ip) // Make item airborne
 {
     ip->ground_or_air = GA_Air;
 }

@@ -32,7 +32,7 @@ void ftCommon_Ottotto_ProcUpdate(GObj *fighter_gobj)
 // 0x80142874
 void ftCommon_Ottotto_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!ftCheckInterruptOttotto(fighter_gobj))
     {
@@ -46,7 +46,7 @@ void ftCommon_Ottotto_ProcInterrupt(GObj *fighter_gobj)
 // 0x801429F4
 void ftCommon_Ottotto_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     f32 dist_x;
 
@@ -78,7 +78,7 @@ void ftCommon_Ottotto_ProcMap(GObj *fighter_gobj)
 // 0x80142AC4
 void ftCommon_OttottoWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_OttottoWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -88,7 +88,7 @@ void ftCommon_OttottoWait_SetStatus(GObj *fighter_gobj)
 // 0x80142B08
 void ftCommon_Ottotto_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Ottotto, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

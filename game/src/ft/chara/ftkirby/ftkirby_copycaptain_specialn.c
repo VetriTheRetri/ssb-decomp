@@ -3,7 +3,7 @@
 // 0x80160810
 void ftKirby_CopyCaptain_SpecialN_UpdateGFX(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fp->is_playing_effect))
     {
@@ -58,7 +58,7 @@ void ftKirby_CopyCaptain_SpecialN_ProcPhysics(GObj *fighter_gobj)
 // 0x80160934
 void ftKirby_CopyCaptain_SpecialAirN_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 unused;
     f32 boost;
 
@@ -101,7 +101,7 @@ void ftKirby_CopyCaptain_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80160A80
 void ftKirby_CopyCaptain_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyCaptain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
@@ -123,7 +123,7 @@ void ftKirby_CopyCaptain_SpecialAirN_ProcMap(GObj *fighter_gobj)
 // 0x80160B14
 void ftKirby_CopyCaptain_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;

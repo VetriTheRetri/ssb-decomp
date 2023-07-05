@@ -2,7 +2,7 @@
 
 bool32 jtgt_ovl3_8017E7A0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
 
@@ -11,7 +11,7 @@ bool32 jtgt_ovl3_8017E7A0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017E7CC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80173680(item_gobj);
 
@@ -30,7 +30,7 @@ extern itStatusDesc Article_Tosakinto_Status[];
 
 void func_ovl3_8017E828(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->it_multi = ITTOSAKINTO_LIFETIME;
 
@@ -43,7 +43,7 @@ void func_ovl3_8017E828(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017E880(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
 
@@ -58,7 +58,7 @@ bool32 jtgt_ovl3_8017E880(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017E8CC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80173680(item_gobj);
 
@@ -81,7 +81,7 @@ extern intptr_t D_NF_0000B90C;
 
 void func_ovl3_8017E93C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     void *s;
     s32 unused[2];
@@ -113,7 +113,7 @@ void func_ovl3_8017EA14(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017EA48(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -128,7 +128,7 @@ bool32 jtgt_ovl3_8017EA48(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017EA98(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -144,7 +144,7 @@ GObj* jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Tosakinto_Data, pos, vel, flags);
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {

@@ -4,7 +4,7 @@
 // 0x80148E30
 void ftCommon_GuardOn_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOn, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -40,7 +40,7 @@ void ftCommon_GuardOn_SetStatus(GObj *fighter_gobj)
 // 0x80148F24
 bool32 ftCommon_GuardOn_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
     {
@@ -54,7 +54,7 @@ bool32 ftCommon_GuardOn_CheckInterruptCommon(GObj *fighter_gobj)
 // 0x80148F74
 void ftCommon_GuardOn_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Guard_UpdateShieldVars(fighter_gobj);
 
@@ -72,7 +72,7 @@ void ftCommon_GuardOn_ProcUpdate(GObj *fighter_gobj)
 // 0x80148FF0
 void ftCommon_GuardOff_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     u32 flag = fp->is_shield;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOff, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
@@ -87,7 +87,7 @@ void ftCommon_GuardOff_SetStatus(GObj *fighter_gobj)
 // 0x80149074
 void ftCommon_GuardSetOff_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Guard_CheckScheduleRelease(fp);
 
@@ -107,7 +107,7 @@ void ftCommon_GuardSetOff_ProcUpdate(GObj *fighter_gobj)
 // 0x80149108
 void ftCommon_GuardSetOff_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_GuardSetOff, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 
@@ -117,7 +117,7 @@ void ftCommon_GuardSetOff_SetStatus(GObj *fighter_gobj)
 
     if (fp->status_vars.common.guard.effect_gobj != NULL)
     {
-        Effect_Struct *ep = efGetStruct(fp->status_vars.common.guard.effect_gobj);
+        efStruct *ep = efGetStruct(fp->status_vars.common.guard.effect_gobj);
 
         ep->unk_ef_0x1C = 1;
     }

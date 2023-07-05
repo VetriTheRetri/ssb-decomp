@@ -4,7 +4,7 @@
 
 void func_ovl3_80180630(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->item_vars.kamex.hydro_spawn_wait <= 0)
@@ -42,7 +42,7 @@ void func_ovl3_80180630(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801807DC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITKAMEX_GRAVITY, ITKAMEX_T_VEL);
 
@@ -51,7 +51,7 @@ bool32 jtgt_ovl3_801807DC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80180808(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_801737B8(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL));
 
@@ -65,7 +65,7 @@ bool32 jtgt_ovl3_80180808(GObj *item_gobj)
 
 void func_ovl3_80180860(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMap_SetAir(ap);
 
@@ -87,7 +87,7 @@ void func_ovl3_801808A4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801808D8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITKAMEX_GRAVITY, ITKAMEX_T_VEL);
 
@@ -96,7 +96,7 @@ bool32 jtgt_ovl3_801808D8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80180904(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_801737B8(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL));
 
@@ -112,7 +112,7 @@ bool32 jtgt_ovl3_80180904(GObj *item_gobj)
 
 void func_ovl3_80180964(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->it_multi = ITKAMEX_LIFETIME;
 
@@ -125,7 +125,7 @@ void func_ovl3_80180964(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801809BC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -156,7 +156,7 @@ extern intptr_t D_NF_0000ED60;
 
 void func_ovl3_80180A58(GObj *item_gobj, bool32 is_setup_vars)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (is_setup_vars == FALSE)
@@ -190,7 +190,7 @@ void func_ovl3_80180AF4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80180B1C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -205,7 +205,7 @@ bool32 jtgt_ovl3_80180B1C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80180B6C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -220,7 +220,7 @@ void func_ovl3_80180BAC(GObj *item_gobj)
     s32 unused1;
     GObj *victim_gobj;
     s32 unused2[3];
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     f32 dist_xy;
     f32 dist_x;
@@ -232,7 +232,7 @@ void func_ovl3_80180BAC(GObj *item_gobj)
     {
         do
         {
-            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+            ftStruct *fp = ftGetStruct(fighter_gobj);
 
             if ((fighter_gobj != ap->owner_gobj) && (fp->team != ap->team))
             {
@@ -269,8 +269,8 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Kamex_Data, pos, vel, flags);
     DObj *joint;
-    Item_Struct *kamex_ap;
-    Item_Struct *m_ball_ap;
+    itStruct *kamex_ap;
+    itStruct *m_ball_ap;
 
     if (item_gobj != NULL)
     {
@@ -308,7 +308,7 @@ GObj *jtgt_ovl3_80180CDC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_80180E10(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj);
 
     ip->weapon_hit.offset[0].x = joint->next->translate.x * ip->lr;
@@ -327,8 +327,8 @@ bool32 jtgt_ovl3_80180E60(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_80180E6C(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
     wpMain_ReflectorInvertLR(ip, fp);
 
@@ -344,11 +344,11 @@ extern wpCreateDesc Item_Hydro_Data;
 
 GObj *func_ovl3_80180EDC(GObj *item_gobj, Vec3f *pos)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Hydro_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
-    Weapon_Struct *ip;
+    wpStruct *ip;
     Vec3f translate;
 
     if (weapon_gobj == NULL)

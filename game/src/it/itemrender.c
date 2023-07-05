@@ -13,10 +13,10 @@
 
 void func_ovl3_80171410(GObj *item_gobj)
 {
-    Item_Struct *ap;
+    itStruct *ap;
     s32 i;
-    Item_Hit *it_hit;
-    Item_Hurt *at_hurt;
+    itHitbox *it_hit;
+    itHurtbox *at_hurt;
     MtxStore mtx_store;
     Vec3f *translate;
 
@@ -131,7 +131,7 @@ void func_ovl3_80171410(GObj *item_gobj)
 
 void func_ovl3_801719AC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     Vec3f *translate = &DObjGetStruct(item_gobj)->translate;
     ObjectColl *object_coll = &ap->coll_data.object_coll;
     MtxStore mtx_store;
@@ -171,9 +171,9 @@ void func_ovl3_801719AC(GObj *item_gobj)
     gSPPopMatrix(D_800465B0[1]++, G_MTX_MODELVIEW);
 }
 
-bool32 func_ovl3_80171C10(Item_Struct *ap)
+bool32 func_ovl3_80171C10(itStruct *ap)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     if (ap->owner_gobj == NULL)
     {
@@ -198,7 +198,7 @@ bool32 func_ovl3_80171C10(Item_Struct *ap)
 
 void func_ovl3_80171C7C(GObj *item_gobj) // Unused
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
@@ -221,7 +221,7 @@ void func_ovl3_80171C7C(GObj *item_gobj) // Unused
 
 void func_ovl3_80171D38(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
@@ -244,7 +244,7 @@ void func_ovl3_80171D38(GObj *item_gobj)
 
 void func_ovl3_80171DF4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -271,7 +271,7 @@ void func_ovl3_80171DF4(GObj *item_gobj)
 
 void func_ovl3_80171F4C(GObj *item_gobj) // Unused
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
@@ -294,7 +294,7 @@ void func_ovl3_80171F4C(GObj *item_gobj) // Unused
 
 void func_ovl3_80172008(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -337,7 +337,7 @@ void func_ovl3_80172008(GObj *item_gobj)
 
 void func_ovl3_8017224C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {

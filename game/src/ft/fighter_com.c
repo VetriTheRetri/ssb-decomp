@@ -4,7 +4,7 @@
 #include "ftfox.h"
 #include "gmmatch.h"
 
-Weapon_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
+wpStruct* func_ovl3_80131B00(ftStruct *fp)
 {
     GObj *weapon_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
@@ -12,7 +12,7 @@ Weapon_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
     {
         do
         {
-            Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+            wpStruct *ip = wpGetStruct(weapon_gobj);
 
             if (ip->owner_gobj == fp->fighter_gobj)
             {
@@ -25,7 +25,7 @@ Weapon_Struct* func_ovl3_80131B00(Fighter_Struct *fp)
     return NULL;
 }
 
-Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 wp_kind)
+Vec3f* func_ovl3_80131B44(ftStruct *fp, s32 wp_kind)
 {
     GObj *weapon_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
@@ -33,7 +33,7 @@ Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 wp_kind)
     {
         do
         {
-            Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+            wpStruct *ip = wpGetStruct(weapon_gobj);
 
             if ((ip->owner_gobj == fp->fighter_gobj) && (ip->wp_kind == wp_kind))
             {
@@ -46,10 +46,10 @@ Vec3f* func_ovl3_80131B44(Fighter_Struct *fp, s32 wp_kind)
     return NULL;
 }
 
-void func_ovl3_80131BA0(Fighter_Struct *fp)
+void func_ovl3_80131BA0(ftStruct *fp)
 {
     Vec3f *pos = func_ovl3_80131B44(fp, Wp_Kind_PKThunderTrail);
-    Fighter_Com *ft_com = &fp->fighter_com;
+    ftComputer *ft_com = &fp->fighter_com;
 
     if (pos != NULL)
     {
@@ -68,9 +68,9 @@ void func_ovl3_80131BA0(Fighter_Struct *fp)
     }
 }
 
-void func_ovl3_80131C68(Fighter_Struct *this_fp)
+void func_ovl3_80131C68(ftStruct *this_fp)
 {
-    Fighter_Com *ft_com = &this_fp->fighter_com;
+    ftComputer *ft_com = &this_fp->fighter_com;
     u8 *p_command;
     u8 command;
     s8 var_t1;
@@ -307,11 +307,11 @@ void func_ovl3_80131C68(Fighter_Struct *this_fp)
     }
 }
 
-extern u8 *Fighter_Com_Script[]; // CPU player commands
+extern u8 *ftComputer_Script[]; // CPU player commands
 
-void func_ovl3_80132564(Fighter_Struct *fp, s32 index)
+void func_ovl3_80132564(ftStruct *fp, s32 index)
 {
-    Fighter_Com *ft_com = &fp->fighter_com;
+    ftComputer *ft_com = &fp->fighter_com;
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -321,20 +321,20 @@ void func_ovl3_80132564(Fighter_Struct *fp, s32 index)
     {
         ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) / 2) + 1.0F);
     }
-    ft_com->p_command = Fighter_Com_Script[index];
+    ft_com->p_command = ftComputer_Script[index];
 }
 
-void func_ovl3_80132758(Fighter_Struct *fp, s32 index)
+void func_ovl3_80132758(ftStruct *fp, s32 index)
 {
-    Fighter_Com *ft_com = &fp->fighter_com;
+    ftComputer *ft_com = &fp->fighter_com;
 
     ft_com->input_wait = 1;
-    ft_com->p_command = Fighter_Com_Script[index];
+    ft_com->p_command = ftComputer_Script[index];
 }
 
-void func_ovl3_80132778(Fighter_Struct *fp, s32 index)
+void func_ovl3_80132778(ftStruct *fp, s32 index)
 {
-    Fighter_Com *ft_com = &fp->fighter_com;
+    ftComputer *ft_com = &fp->fighter_com;
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -344,15 +344,15 @@ void func_ovl3_80132778(Fighter_Struct *fp, s32 index)
     {
         ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + (GMCOMPLAYER_LEVEL_MAX - fp->cp_level) + 1.0F);
     }
-    ft_com->p_command = Fighter_Com_Script[index];
+    ft_com->p_command = ftComputer_Script[index];
 }
 
 static gmUnkInfo_80131308 D_ovl2_80131308; // Extern
 
-bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
+bool32 func_ovl3_8013295C(ftStruct *this_fp)
 {
-    Fighter_Com *ft_com = &this_fp->fighter_com;
-    Fighter_Struct *other_fp;
+    ftComputer *ft_com = &this_fp->fighter_com;
+    ftStruct *other_fp;
     f32 this_pos_x = this_fp->joint[ftParts_TopN_Joint]->translate.x;
     f32 this_pos_y = this_fp->joint[ftParts_TopN_Joint]->translate.y;
     GObj *other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
@@ -421,7 +421,7 @@ bool32 func_ovl3_8013295C(Fighter_Struct *this_fp)
     return TRUE;
 }
 
-bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
+bool32 func_ovl3_80132BC8(ftStruct *this_fp)
 {
     GObj *other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
@@ -429,7 +429,7 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
     {
         if (other_gobj != this_fp->fighter_gobj)
         {
-            Fighter_Struct *other_fp = ftGetStruct(other_gobj);
+            ftStruct *other_fp = ftGetStruct(other_gobj);
 
             if (this_fp->team != other_fp->team)
             {
@@ -454,18 +454,18 @@ bool32 func_ovl3_80132BC8(Fighter_Struct *this_fp)
     return FALSE;
 }
 
-Fighter_Struct* func_ovl3_80132D18(Fighter_Struct *this_fp)
+ftStruct* func_ovl3_80132D18(ftStruct *this_fp)
 {
-    Fighter_Com *ft_com = &this_fp->fighter_com;
+    ftComputer *ft_com = &this_fp->fighter_com;
     GObj *other_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
     s32 target_damage = 9999;
-    Fighter_Struct *target_fp = NULL;
+    ftStruct *target_fp = NULL;
 
     while (other_gobj != NULL)
     {
         if (other_gobj != this_fp->fighter_gobj)
         {
-            Fighter_Struct *other_fp = ftGetStruct(other_gobj);
+            ftStruct *other_fp = ftGetStruct(other_gobj);
 
             if (this_fp->team != other_fp->team)
             {

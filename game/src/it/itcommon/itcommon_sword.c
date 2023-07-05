@@ -1,102 +1,203 @@
 #include "item.h"
 
-bool32 jtgt_ovl3_80174B50(GObj *item_gobj)
+itCreateDesc itCommon_Sword_ItemDesc =
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    It_Kind_Sword,                          // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0x190,                                  // Offset of item attributes in file?
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itSword_AFall_ProcUpdate,               // Proc Update
+    itSword_AFall_ProcMap,                  // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
 
-    itMain_UpdatePhysicsAir(ap, ITSWORD_GRAVITY, ITSWORD_T_VEL);
+itStatusDesc itCommon_Sword_StatusDesc[itStatus_Sword_EnumMax] = 
+{
+    // Status 0 (Ground Wait)
+    {
+        NULL,                               // Proc Update
+        itSword_GWait_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 1 (Air Wait Fall)
+    {
+        itSword_AFall_ProcUpdate,           // Proc Update
+        itSword_AFall_ProcMap,              // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 2 (Fighter Hold)
+    {
+        NULL,                               // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 3 (Fighter Throw)
+    {
+        itSword_AFall_ProcUpdate,           // Proc Update
+        itSword_FThrow_ProcMap,             // Proc Map
+        itSword_FThrow_ProcHit,             // Proc Hit
+        itSword_FThrow_ProcHit,             // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itSword_FThrow_ProcHit,             // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        NULL                                // Proc Damage
+    },
+
+    // Status 4 (Fighter Drop)
+    {
+        itSword_AFall_ProcUpdate,           // Proc Update
+        itSword_FDrop_ProcMap,              // Proc Map
+        itSword_FThrow_ProcHit,             // Proc Hit
+        itSword_FThrow_ProcHit,             // Proc Shield
+        itCommon_SDefault_ProcHop,          // Proc Hop
+        itSword_FThrow_ProcHit,             // Proc Set-Off
+        itCommon_SDefault_ProcReflector,    // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
+typedef enum itSwordStatus
+{
+    itStatus_Sword_GWait,
+    itStatus_Sword_AFall,
+    itStatus_Sword_FHold,
+    itStatus_Sword_FThrow,
+    itStatus_Sword_FDrop,
+    itStatus_Sword_EnumMax
+
+} itSwordStatus;
+
+// 0x80174B50
+bool32 itSword_AFall_ProcUpdate(GObj *item_gobj)
+{
+    itStruct *ip = itGetStruct(item_gobj);
+
+    itMain_UpdatePhysicsAir(ip, ITSWORD_GRAVITY, ITSWORD_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80174B8C(GObj *item_gobj)
+// 0x80174B8C
+bool32 itSword_GWait_ProcMap(GObj *item_gobj)
 {
-    func_ovl3_801735A0(item_gobj, func_ovl3_80174C18);
+    func_ovl3_801735A0(item_gobj, itSword_AFall_SetStatus);
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80174BB4(GObj *item_gobj)
+// 0x80174BB4
+bool32 itSword_AFall_ProcMap(GObj *item_gobj)
 {
-    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80174BE4);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itSword_GWait_SetStatus);
 }
 
-extern itStatusDesc Article_Sword_Status[];
-
-void func_ovl3_80174BE4(GObj *item_gobj)
+// 0x80174BE4
+void itSword_GWait_SetStatus(GObj *item_gobj)
 {
     itMain_SetGroundPickup(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_Sword_Status, 0);
+    itMain_SetItemStatus(item_gobj, itCommon_Sword_StatusDesc, itStatus_Sword_GWait);
 }
 
-void func_ovl3_80174C18(GObj *item_gobj)
+// 0x80174C18
+void itSword_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    ap->is_allow_pickup = FALSE;
+    ip->is_allow_pickup = FALSE;
 
-    itMap_SetAir(ap);
-    itMain_SetItemStatus(item_gobj, Article_Sword_Status, 1);
+    itMap_SetAir(ip);
+    itMain_SetItemStatus(item_gobj, itCommon_Sword_StatusDesc, itStatus_Sword_AFall);
 }
 
-void jtgt_ovl3_80174C5C(GObj *item_gobj)
+// 0x80174C5C
+void itSword_FHold_SetStatus(GObj *item_gobj)
 {
     DObjGetStruct(item_gobj)->rotate.y = 0.0F;
 
-    itMain_SetItemStatus(item_gobj, Article_Sword_Status, 2);
+    itMain_SetItemStatus(item_gobj, itCommon_Sword_StatusDesc, itStatus_Sword_FHold);
 }
 
-bool32 jtgt_ovl3_80174C90(GObj *item_gobj)
+// 0x80174C90
+bool32 itSword_FThrow_ProcMap(GObj *item_gobj)
 {
-    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80174BE4);
+    return itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itSword_GWait_SetStatus);
 }
 
-bool32 jtgt_ovl3_80174CC0(GObj *item_gobj)
+// 0x80174CC0
+bool32 itSword_FThrow_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+    ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
     func_ovl3_80172FE0(item_gobj);
 
     return FALSE;
 }
 
-void jtgt_ovl3_80174CE8(GObj *item_gobj)
+// 0x80174CE8
+void itSword_FThrow_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_Sword_Status, 3);
+    itMain_SetItemStatus(item_gobj, itCommon_Sword_StatusDesc, itStatus_Sword_FThrow);
 
-    DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
+    DObjGetStruct(item_gobj)->next->rotate.y = F_DEG_TO_RAD(90.0F);
 }
 
-void jtgt_ovl3_80174D2C(GObj *item_gobj)
+// 0x80174D2C
+void itSword_FDrop_ProcMap(GObj *item_gobj)
 {
-    itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, func_ovl3_80174BE4);
+    itMap_CheckMapCollideThrownLanding(item_gobj, 0.2F, 0.5F, itSword_GWait_SetStatus);
 }
 
-void jtgt_ovl3_80174D5C(GObj *item_gobj)
+// 0x80174D5C
+void itSword_FDrop_SetStatus(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Article_Sword_Status, 4);
+    itMain_SetItemStatus(item_gobj, itCommon_Sword_StatusDesc, itStatus_Sword_FDrop);
 
-    DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;
+    DObjGetStruct(item_gobj)->next->rotate.y = F_DEG_TO_RAD(90.0F);
 }
 
-extern itCreateDesc Article_Sword_Data;
-
-GObj* jtgt_ovl3_80174DA0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80174DA0
+GObj* itCommon_Sword_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Sword_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Sword_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
-        DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
+        DObjGetStruct(item_gobj)->rotate.y = F_DEG_TO_RAD(90.0F);
 
-        ap->is_unused_item_bool = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
-        ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
+        ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }
     return item_gobj;
 }

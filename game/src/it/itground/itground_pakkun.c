@@ -26,7 +26,7 @@ void func_ovl3_8017CFC0(GObj *item_gobj)
 {
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->item_vars.pakkun.is_wait_fighter = TRUE;
     }
@@ -36,7 +36,7 @@ bool32 func_ovl3_8017CFDC(GObj *item_gobj)
 {
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
@@ -44,7 +44,7 @@ bool32 func_ovl3_8017CFDC(GObj *item_gobj)
 
         while (fighter_gobj != NULL)
         {
-            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+            ftStruct *fp = ftGetStruct(fighter_gobj);
             DObj *joint = fp->joint[ftParts_TopN_Joint];
             f32 dist_x, translate_y;
 
@@ -74,7 +74,7 @@ extern void *D_ovl2_801313F0;
 
 bool32 func_ovl3_8017D0A4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->item_vars.pakkun.is_wait_fighter != FALSE)
     {
@@ -107,7 +107,7 @@ bool32 func_ovl3_8017D0A4(GObj *item_gobj)
 
 void func_ovl3_8017D190(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->it_multi = ITPAKKUN_APPEAR_WAIT;
 
@@ -121,7 +121,7 @@ void func_ovl3_8017D190(GObj *item_gobj)
 
 void func_ovl3_8017D1DC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     f32 pos_y = DObjGetStruct(item_gobj)->translate.y - ap->item_vars.pakkun.pos.y;
     f32 off_y = pos_y + ITPAKKUN_APPEAR_OFF_Y;
 
@@ -146,7 +146,7 @@ void func_ovl3_8017D1DC(GObj *item_gobj)
 
 bool32 func_ovl3_8017D298(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
     if (ap->item_vars.pakkun.is_wait_fighter != FALSE)
@@ -178,7 +178,7 @@ extern intptr_t D_NF_00000E04;
 
 bool32 jtgt_ovl3_8017D334(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->damage_knockback >= 100.0F)
     {
@@ -209,7 +209,7 @@ bool32 jtgt_ovl3_8017D334(GObj *item_gobj)
 
 bool32 func_ovl3_8017D460(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->translate = ap->item_vars.pakkun.pos;
@@ -239,7 +239,7 @@ GObj* jtgt_ovl3_8017D4D8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->item_vars.pakkun.pos = *pos;
 

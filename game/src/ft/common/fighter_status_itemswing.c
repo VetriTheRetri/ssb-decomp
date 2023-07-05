@@ -4,11 +4,11 @@
 // 0x80146C40
 void ftCommon_HarisenSwing_ProcHit(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold != NULL)
     {
-        Item_Struct *ap = itGetStruct(fp->item_hold);
+        itStruct *ap = itGetStruct(fp->item_hold);
 
         if (ap->it_kind == It_Kind_Harisen)
         {
@@ -22,7 +22,7 @@ void ftCommon_HarisenSwing_ProcHit(GObj *fighter_gobj)
 // 0x80146C98
 void ftCommon_HarisenSwing_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold != NULL)
     {
@@ -45,8 +45,8 @@ const Vec3f Fighter_StarRodSwing_Dust_Offset = { 0.0F, 200.0F, 0.0F };
 // 0x80146CF4
 void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap;
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap;
     f32 scale_mul;
     s32 unused;
 
@@ -107,8 +107,8 @@ s32 Fighter_ItemSwing_Status[4][4] =
 // 0x80146E94
 void ftCommon_ItemSwing_SetStatus(GObj *fighter_gobj, s32 swing_type)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap = itGetStruct(fp->item_hold);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap = itGetStruct(fp->item_hold);
     s32 swing_item;
     s32 status_id;
     f32 anim_speed;

@@ -40,7 +40,7 @@ typedef struct Shadow_Struct
 void func_ovl3_8013AE60(GObj *shadow_gobj)
 {
     Shadow_Struct *sp;
-    Fighter_Struct *fp;
+    ftStruct *fp;
     f32 sp13C;
     Vtx *shadow_vertex;
     f32 sp134;
@@ -76,7 +76,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
     }
     sp = (Shadow_Struct*)shadow_gobj->user_data;
 
-    fighter_gobj = gMatchData->player_block[sp->player].fighter_gobj;
+    fighter_gobj = gpMatchData->player_block[sp->player].fighter_gobj;
 
     fp = ftGetStruct(fighter_gobj);
 
@@ -268,7 +268,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 
                     gDPPipeSync(D_800465B0[0]++);
 
-                    if ((gMatchData->is_team_battle == TRUE) && !(gMatchData->unk_minfo_0x1D_b1))
+                    if ((gpMatchData->is_team_battle == TRUE) && !(gpMatchData->unk_minfo_0x1D_b1))
                     {
                         gDPSetPrimColor(D_800465B0[0]++, 0, 0, D_ovl2_8012CA7C[fp->team].r, D_ovl2_8012CA7C[fp->team].g, D_ovl2_8012CA7C[fp->team].b, D_ovl2_8012CA7C[fp->team].a);
                     }
@@ -407,7 +407,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 GObj *func_ovl3_8013BB88(GObj *fighter_gobj)
 {
     GObj *shadow_gobj = func_80009968(0x3FC, 0, 0xD, 0x80000000);
-    Fighter_Struct *fp;
+    ftStruct *fp;
     Shadow_Struct *sp = hal_alloc(sizeof(Shadow_Struct), 8);
     s32 i;
 

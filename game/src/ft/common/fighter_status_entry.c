@@ -16,7 +16,7 @@
 // 0x8013D930
 void ftCommon_Entry_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Entry, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -29,7 +29,7 @@ void ftCommon_Entry_SetStatus(GObj *fighter_gobj)
 // 0x8013D994
 void ftCommon_Entry_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.entry.entry_wait != 0)
     {
@@ -58,7 +58,7 @@ void ftCommon_Entry_ProcUpdate(GObj *fighter_gobj)
 // 0x8013DA14
 void ftCommon_Entry_UpdateEffects(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -79,7 +79,7 @@ void ftCommon_Entry_UpdateEffects(GObj *fighter_gobj)
 // 0x8013DA94
 void ftCommon_Appear_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Entry_UpdateEffects(fighter_gobj);
 
@@ -102,7 +102,7 @@ void ftCommon_Appear_ProcUpdate(GObj *fighter_gobj)
 // 0x8013DB2C
 void ftCommon_Appear_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     DObj *topn_joint = fp->joint[ftParts_TopN_Joint];
     DObj *transn_joint = fp->joint[ftParts_TransN_Joint];
 
@@ -125,7 +125,7 @@ void ftCommon_Appear_ProcPhysics(GObj *fighter_gobj)
 // 0x8013DBAC
 void ftCommon_Appear_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->is_nullstatus = TRUE;
 
@@ -169,7 +169,7 @@ s32 Fighter_Status_EntryStatusIndex[Ft_Kind_EnumMax][2] =
 // 0x8013DBE0
 void ftCommon_Appear_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
     s32 entry_id;
     GObj *mh_target_gobj;
@@ -269,7 +269,7 @@ void ftCommon_Appear_SetStatus(GObj *fighter_gobj)
 // 0x8013DDE0
 void ftCommon_Appear_SetPosition(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->x191_flag_b4567 = 3;
 

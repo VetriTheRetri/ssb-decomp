@@ -2,7 +2,7 @@
 #include "gmmatch.h"
 
 // 0x80173480
-bool32 itMap_CheckCollideGround(Coll_Data *coll_data, s32 arg1, s32 arg2)
+bool32 itMap_CheckCollideGround(mpCollData *coll_data, s32 arg1, s32 arg2)
 {
     s32 ground_line_id = coll_data->ground_line_id;
     bool32 is_collide_ground = FALSE;
@@ -59,9 +59,9 @@ bool32 func_ovl3_801735A0(GObj *item_gobj, void (*proc_map)(GObj*))
     else return TRUE;
 }
 
-bool32 func_ovl3_801735E0(Coll_Data *coll_data, GObj *item_gobj, s32 arg2)
+bool32 func_ovl3_801735E0(mpCollData *coll_data, GObj *item_gobj, s32 arg2)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (func_ovl2_800DB838(coll_data) != FALSE)
@@ -93,9 +93,9 @@ bool32 func_ovl3_80173680(GObj *item_gobj)
     return func_ovl2_800DA034(&itGetStruct(item_gobj)->coll_data, func_ovl3_801735E0, item_gobj, FALSE);
 }
 
-bool32 func_ovl3_801736B4(Coll_Data *coll_data, GObj *item_gobj, u32 coll_flags)
+bool32 func_ovl3_801736B4(mpCollData *coll_data, GObj *item_gobj, u32 coll_flags)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (func_ovl2_800DB838(coll_data) != FALSE)
@@ -145,8 +145,8 @@ bool32 func_ovl3_801737B8(GObj *item_gobj, bool32 flag)
 
 bool32 itMap_CheckCollideAllRebound(GObj *item_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos) // Modify velocity based on angle of collision
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    Coll_Data *coll_data = &ap->coll_data;
+    itStruct *ap = itGetStruct(item_gobj);
+    mpCollData *coll_data = &ap->coll_data;
     Vec3f *translate = &DObjGetStruct(item_gobj)->translate;
     Vec3f mod_pos;
     bool32 return_bool = FALSE;
@@ -250,7 +250,7 @@ void func_ovl3_80173A48(Vec3f *arg0, Vec3f *arg1, f32 arg2)
 // 0x80173B24
 bool32 itMap_CheckMapCollideThrownLanding(GObj *item_gobj, f32 wall_ceil_rebound, f32 ground_rebound, void (*proc_status)(GObj*))
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
@@ -267,7 +267,7 @@ bool32 itMap_CheckMapCollideThrownLanding(GObj *item_gobj, f32 wall_ceil_rebound
 
         if (ap->times_landed == 1)
         {
-            if ((gMatchData->game_type != gmMatch_GameType_HowToPlay) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
+            if ((gpMatchData->game_type != gmMatch_GameType_HowToPlay) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
             {
                 return TRUE;
             }
@@ -283,7 +283,7 @@ bool32 itMap_CheckMapCollideThrownLanding(GObj *item_gobj, f32 wall_ceil_rebound
 // 0x80173C68
 bool32 itMap_CheckMapCollideLanding(GObj *item_gobj, f32 wall_ceil_rebound, f32 ground_rebound, void (*proc_map)(GObj*))
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
@@ -309,8 +309,8 @@ bool32 itMap_CheckMapCollideLanding(GObj *item_gobj, f32 wall_ceil_rebound, f32 
 // 0x80173D24
 bool32 itMap_CheckMapCollideAny(GObj *item_gobj, f32 wall_ceil_rebound, f32 ground_rebound, void (*proc_map)(GObj*))
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    Coll_Data *coll_data = &ap->coll_data;
+    itStruct *ap = itGetStruct(item_gobj);
+    mpCollData *coll_data = &ap->coll_data;
     bool32 is_collide_any = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL);
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
@@ -385,14 +385,14 @@ bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 wall_ceil_rebound, void (*cb)(GOb
 }
 
 // 0x80173F54
-void itMap_SetGround(Item_Struct *ip)
+void itMap_SetGround(itStruct *ip)
 {
     ip->ground_or_air = GA_Ground;
     ip->phys_info.vel_ground = ip->phys_info.vel_air.x * ip->lr;
 }
 
 // 0x80173F78
-void itMap_SetAir(Item_Struct *ip)
+void itMap_SetAir(itStruct *ip)
 {
     ip->ground_or_air = GA_Air;
 }

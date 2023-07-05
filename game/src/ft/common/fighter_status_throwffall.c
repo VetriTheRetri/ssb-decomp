@@ -12,7 +12,7 @@ void ftDonkey_ThrowFFall_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014DA30
 void ftDonkey_ThrowFFall_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -27,7 +27,7 @@ void ftDonkey_ThrowFFall_ProcMap(GObj *fighter_gobj)
 // 0x8014DA98
 void ftDonkey_ThrowFFall_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -40,7 +40,7 @@ void ftDonkey_ThrowFFall_SetStatus(GObj *fighter_gobj)
 // 0x8014DAF8
 void ftDonkey_ThrowFJump_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 vel_x;
     s32 vel_y;
@@ -75,7 +75,7 @@ void ftDonkey_ThrowFFall_SetStatusPass(GObj *fighter_gobj)
 // 0x8014DC08
 bool32 ftDonkey_ThrowFFall_CheckInterruptPass(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_Pass_CheckInputSuccess(fp) != FALSE)
     {

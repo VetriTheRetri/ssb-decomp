@@ -67,7 +67,7 @@ bool32 itPKFire_NCreate_ProcUpdate(GObj *item_gobj)
 // 0x80185374
 bool32 itNess_SDefault_UpdateAllCheckDestroy(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     itCommonAttributes *attributes;
     f32 unused;
     f32 half = 0.5;
@@ -130,7 +130,7 @@ bool32 itPKFire_GWait_ProcUpdate(GObj *item_gobj)
 // 0x80185614
 bool32 itPKFire_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (itNess_SDefault_UpdateAllCheckDestroy(item_gobj) == TRUE)
     {
@@ -160,7 +160,7 @@ bool32 itPKFire_AFall_ProcMap(GObj *item_gobj)
 // 0x801856BC
 bool32 itPKFire_SDefault_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->lifetime > 0)
     {
@@ -176,7 +176,7 @@ bool32 itPKFire_SDefault_ProcDamage(GObj *item_gobj)
 // 0x80185710
 void itPKFire_GWait_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     gmStatFlags stat_flags;
     u16 stat_count;
 
@@ -198,7 +198,7 @@ void itPKFire_GWait_SetStatus(GObj *item_gobj)
 // 0x8018579C
 void itPKFire_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     gmStatFlags stat_flags;
     u16 stat_count;
 
@@ -222,8 +222,8 @@ extern s32 D_ovl2_80131148;
 GObj* itNess_PKFire_CreateItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *item_gobj;
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Item_Struct *ip;
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    itStruct *ip;
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
 

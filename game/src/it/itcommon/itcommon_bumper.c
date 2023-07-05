@@ -136,7 +136,7 @@ typedef enum itIBumperStatus
 // 0x8017B430
 bool32 itIBumper_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
@@ -181,7 +181,7 @@ bool32 itIBumper_AFall_ProcMap(GObj *item_gobj)
 // 0x8017B57C
 bool32 itIBumper_FThrow_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->scale.x = 2.0F;
@@ -213,7 +213,7 @@ void itIBumper_GWait_SetStatus(GObj *item_gobj)
 // 0x8017B634
 void itIBumper_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -230,7 +230,7 @@ void itIBumper_FHold_SetStatus(GObj *item_gobj)
 // 0x8017B6A0
 bool32 itIBumper_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
 
@@ -267,8 +267,8 @@ bool32 itIBumper_FThrow_ProcShield(GObj *item_gobj)
 // 0x8017B778
 bool32 itIBumper_FThrow_ProcReflector(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
     if ((ip->phys_info.vel_air.x * fp->lr) < 0.0F)
     {
@@ -282,7 +282,7 @@ bool32 itIBumper_FThrow_ProcReflector(GObj *item_gobj)
 // 0x8017B7DC
 void itIBumper_FThrow_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.bumper.damage_all_delay = ITBUMPER_DAMAGE_ALL_WAIT;
 
@@ -295,7 +295,7 @@ void itIBumper_FThrow_SetStatus(GObj *item_gobj)
 // 0x8017B828
 void itIBumper_FDrop_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.bumper.damage_all_delay = ITBUMPER_DAMAGE_ALL_WAIT;
 
@@ -308,7 +308,7 @@ void itIBumper_FDrop_SetStatus(GObj *item_gobj)
 // 0x8017B874
 void itIBumper_GWaitHit_SetModelRoll(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     s32 filler;
     Vec3f ground_angle;
     DObj *joint = DObjGetStruct(item_gobj);
@@ -330,7 +330,7 @@ void itIBumper_GWaitHit_InitItemVars(GObj *item_gobj)
     void *sp2C;
     void *sp24;
     DObj *joint;
-    Item_Struct *ip;
+    itStruct *ip;
     void *dl2, *dl1;
 
     ip = itGetStruct(item_gobj);
@@ -368,7 +368,7 @@ void itIBumper_GWaitHit_InitItemVars(GObj *item_gobj)
 // 0x8017B9C8
 bool32 itIBumper_GWaitHit_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->scale.x = 2.0F;
@@ -390,7 +390,7 @@ bool32 itIBumper_GWaitHit_ProcHit(GObj *item_gobj)
 // 0x8017BA2C
 bool32 itIBumper_GWaitHit_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     itCommonAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f sp30;
@@ -453,7 +453,7 @@ bool32 itIBumper_GWaitHit_ProcUpdate(GObj *item_gobj)
 // 0x8017BBFC
 bool32 itIBumper_GWaitHit_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (func_ovl3_801735A0(item_gobj, itIBumper_FDrop_SetStatus) != FALSE)
@@ -481,8 +481,8 @@ bool32 itIBumper_GWaitHit_ProcMap(GObj *item_gobj)
 // 0x8017BCC0
 bool32 itIBumper_GWaitHit_ProcReflector(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->scale.x = 2.0F;
@@ -513,7 +513,7 @@ void itIBumper_GWaitHit_SetStatus(GObj *item_gobj)
 // 0x8017BD80
 bool32 itIBumper_AHit_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if ((ip->item_vars.bumper.hit_anim_length == 0) && (joint->mobj->anim_frame == 1.0F))
@@ -548,7 +548,7 @@ bool32 itIBumper_AHit_ProcUpdate(GObj *item_gobj)
 // 0x8017BEA0
 void itIBumper_AHit_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.bumper.damage_all_delay = ITBUMPER_DAMAGE_ALL_WAIT;
 
@@ -558,7 +558,7 @@ void itIBumper_AHit_SetStatus(GObj *item_gobj)
 // 0x8017BED4
 bool32 itIBumper_GDisappear_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->lifetime == 0)
     {
@@ -578,7 +578,7 @@ bool32 itIBumper_GDisappear_ProcUpdate(GObj *item_gobj)
 // 0x8017BF1C
 void itIBumper_GDisappear_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->mobj->anim_frame = 0;
@@ -608,7 +608,7 @@ GObj* itCommon_IBumper_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ip;
+        itStruct *ip;
         Vec3f translate = joint->translate;
 
         ip = itGetStruct(item_gobj);

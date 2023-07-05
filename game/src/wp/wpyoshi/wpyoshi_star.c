@@ -24,7 +24,7 @@ wpCreateDesc wpYoshi_Star_WeaponDesc =
 };
 
 // 0x8016C540
-f32 wpYoshi_Star_GetScale(Weapon_Struct *wp)
+f32 wpYoshi_Star_GetScale(wpStruct *wp)
 {
     f32 scale = (wp->lifetime * WPYOSHISTAR_LIFETIME_SCALE_MUL) + WPYOSHISTAR_LIFETIME_SCALE_ADD;
 
@@ -38,7 +38,7 @@ f32 wpYoshi_Star_GetScale(Weapon_Struct *wp)
 // 0x8016C588
 bool32 wpYoshi_Star_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 scale;
     f32 vel_sqrt;
     f32 vel_mul;
@@ -83,7 +83,7 @@ bool32 wpYoshi_Star_ProcMap(GObj *weapon_gobj)
 // 0x8016C6AC
 bool32 wpYoshi_Star_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
@@ -105,7 +105,7 @@ bool32 wpYoshi_Star_ProcShield(GObj *weapon_gobj)
 // 0x8016C718
 bool32 wpYoshi_Star_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
@@ -123,8 +123,8 @@ bool32 wpYoshi_Star_ProcHop(GObj *weapon_gobj)
 // 0x8016C7B0
 bool32 wpYoshi_Star_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = WPYOSHISTAR_LIFETIME;
 
@@ -144,7 +144,7 @@ bool32 wpYoshi_Star_ProcReflector(GObj *weapon_gobj)
 GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 {
     GObj *weapon_gobj;
-    Weapon_Struct *wp;
+    wpStruct *wp;
     Vec3f offset = *pos;
 
     offset.y += WPYOSHISTAR_OFF_Y;
@@ -178,7 +178,7 @@ GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 // 0x8016C954
 GObj* wpYoshi_Star_CreateWeaponLR(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     wpYoshi_Star_CreateWeapon(fighter_gobj, pos, fp->lr);
     wpYoshi_Star_CreateWeapon(fighter_gobj, pos, -fp->lr);

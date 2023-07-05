@@ -9,7 +9,7 @@ void ftMasterHand_Okupunch3_ProcUpdate(GObj *fighter_gobj)
 // 0x8015AA34
 void ftMasterHand_Okupunch3_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate;
 
     fp->lr = LEFT;

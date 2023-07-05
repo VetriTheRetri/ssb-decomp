@@ -9,7 +9,7 @@ void ftYoshi_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 // 0x8015EDE4
 void ftYoshi_SpecialLwLanding_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->command_vars.flags.flag0 != 0)
@@ -29,7 +29,7 @@ void ftYoshi_SpecialLwLanding_ProcUpdate(GObj *fighter_gobj)
 // 0x8015EE4C
 void ftYoshi_SpecialAirLwLoop_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800D8FA8(fp, fp->attributes) == FALSE)
     {
@@ -40,7 +40,7 @@ void ftYoshi_SpecialAirLwLoop_ProcPhysics(GObj *fighter_gobj)
 // 0x8015EE84
 void ftYoshi_SpecialLw_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 != 0) && (fp->phys_info.vel_air.y <= 0.0F))
     {
@@ -66,7 +66,7 @@ void ftYoshi_SpecialLw_ProcMap(GObj *fighter_gobj)
 // 0x8015EF5C
 void ftYoshi_SpecialAirLwLoop_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
     {
@@ -85,7 +85,7 @@ void ftYoshi_SpecialAirLwLoop_ProcMap(GObj *fighter_gobj)
 // 0x8015EFD4
 void ftYoshi_SpecialLw_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
     fp->command_vars.flags.flag1 = 0;
@@ -94,7 +94,7 @@ void ftYoshi_SpecialLw_ProcStatus(GObj *fighter_gobj)
 // 0x8015EFE4
 void ftYoshi_SpecialLwStart_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftYoshi_SpecialLw_ProcStatus;
 
@@ -108,7 +108,7 @@ void ftYoshi_SpecialLwStart_SetStatus(GObj *fighter_gobj)
 // 0x8015F04C
 void ftYoshi_SpecialAirLwStart_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftYoshi_SpecialLw_ProcStatus;
 
@@ -121,7 +121,7 @@ void ftYoshi_SpecialAirLwStart_SetStatus(GObj *fighter_gobj)
 // 0x8015F0A8
 void ftYoshi_SpecialAirLwLoop_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 vel_y_bak;
 
     if (ABSF(fp->phys_info.vel_air.x) > FTYOSHI_YOSHIBOMB_VEL_X_CLAMP)

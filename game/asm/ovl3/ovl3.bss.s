@@ -55,7 +55,7 @@ glabel D_ovl3_8018D044
     .space 4
 glabel D_ovl3_8018D048
     .space 24
-glabel Monster_Info
+glabel gMonsterData
     .space 48
 glabel dbObject_DisplayMode_Global_Article
     .space 4

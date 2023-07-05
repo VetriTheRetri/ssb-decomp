@@ -3,14 +3,14 @@
     "",
     "\\game",
     "\\game\\src",
-    "\\game\\src\\gm",
+    "\\game\\src\\ft",
+    "\\game\\src\\ft\\common",
     "\\game\\src\\it",
     "\\game\\src\\it\\itmonster",
-    "\\game\\src\\ovl2",
-    "\\game\\src\\sys",
     "\\game\\src\\wp",
-    "\\game\\src\\wp\\wpness"
+    "\\game\\src\\wp\\wpness",
+    "\\game\\src\\wp\\wpsamus"
   ],
-  "SelectedNode": "\\game\\src\\gm\\gmscript.h",
+  "SelectedNode": "\\game\\src\\it\\itmonster\\itmonster_kabigon.c",
   "PreviewInSolutionExplorer": false
 }

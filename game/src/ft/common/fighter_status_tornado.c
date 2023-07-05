@@ -4,7 +4,7 @@
 
 void ftCommon_Twister_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.twister.release_wait++;
 
@@ -17,7 +17,7 @@ void ftCommon_Twister_ProcUpdate(GObj *fighter_gobj)
 // 0x80143A20
 void ftCommon_Twister_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *tornado_gobj = fp->status_vars.common.twister.tornado_gobj;
     Vec3f pos = DObjGetStruct(tornado_gobj)->translate;
     Vec3f vel;
@@ -49,7 +49,7 @@ void ftCommon_Twister_ProcPhysics(GObj *fighter_gobj)
 // 0x80143BC4
 void ftCommon_Twister_SetStatus(GObj *fighter_gobj, GObj *tornado_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
@@ -88,7 +88,7 @@ extern intptr_t D_NF_000000BC;
 // 0x80143CC4
 void ftCommon_Twister_ShootFighter(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftThrowHitDesc *tornado = (ftThrowHitDesc*) (((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
     f32 knockback;
     s32 damage;

@@ -9,7 +9,7 @@ void ftCommon_HammerFall_ProcInterrupt(GObj *fighter_gobj)
 // 0x80147BE8
 void ftCommon_HammerFall_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -24,7 +24,7 @@ void ftCommon_HammerFall_ProcMap(GObj *fighter_gobj)
 // 0x80147C50
 void ftCommon_HammerFall_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -38,7 +38,7 @@ void ftCommon_HammerFall_SetStatus(GObj *fighter_gobj)
 // 0x80147CCC
 bool32 ftCommon_HammerFall_CheckInterruptDamageFall(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((ftCommon_HammerCheckHold(fighter_gobj) != FALSE) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
@@ -52,7 +52,7 @@ bool32 ftCommon_HammerFall_CheckInterruptDamageFall(GObj *fighter_gobj)
 // 0x80147D30
 void ftCommon_HammerFall_SetStatusJump(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 vel_x, vel_y;
 
@@ -88,7 +88,7 @@ void func_ovl3_80147E34(GObj *fighter_gobj)
 // 0x80147E7C
 bool32 ftCommon_HammerFall_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_Pass_CheckInputSuccess(fp) != FALSE)
     {

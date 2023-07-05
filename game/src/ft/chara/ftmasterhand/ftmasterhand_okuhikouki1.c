@@ -9,8 +9,8 @@ void ftMasterHand_Okuhikouki1_ProcUpdate(GObj *fighter_gobj)
 // 0x80159524
 void ftMasterHand_Okuhikouki1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *target_fp;
-    Fighter_Struct *masterhand_fp;
+    ftStruct *target_fp;
+    ftStruct *masterhand_fp;
     s32 var_a3;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Okuhikouki1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

@@ -56,7 +56,7 @@ bool32 wpMasterHand_YubiExplode_ProcUpdate(GObj *weapon_gobj)
 // 0x8016DC2C
 void wpMasterHand_YubiExplode_InitWeaponVars(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     wp->weapon_hit.hit_sfx = 1;
 
@@ -110,7 +110,7 @@ bool32 wpMasterHand_YubiBullet_ProcHit(GObj *weapon_gobj)
 // 0x8016DD2C
 bool32 wpMasterHand_YubiBullet_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
     func_ovl3_80168428(weapon_gobj);
@@ -121,8 +121,8 @@ bool32 wpMasterHand_YubiBullet_ProcHop(GObj *weapon_gobj)
 // 0x8016DD7C
 bool32 wpMasterHand_YubiBullet_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wpMain_ReflectorInvertLR(wp, fp);
     func_ovl3_80168428(weapon_gobj);
@@ -134,7 +134,7 @@ bool32 wpMasterHand_YubiBullet_ProcReflector(GObj *weapon_gobj)
 GObj* wpMasterHand_YubiBulletSingle_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpMasterHand_YubiBulletSingle_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {
@@ -154,7 +154,7 @@ GObj* wpMasterHand_YubiBulletSingle_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 GObj* wpMasterHand_YubiBulletTriple_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpMasterHand_YubiBulletTriple_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {

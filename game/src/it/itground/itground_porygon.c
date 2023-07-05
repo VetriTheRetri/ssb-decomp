@@ -5,8 +5,8 @@ extern itCreateDesc Article_Porygon_Data;
 
 void func_ovl3_80183B10(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    itHitDesc *hit_desc = (itHitDesc*) ((uintptr_t)*Article_Porygon_Data.p_file + (intptr_t)&Porygon_Event); // Linker thing
+    itStruct *ap = itGetStruct(item_gobj);
+    itHitParty *hit_desc = (itHitParty*) ((uintptr_t)*Article_Porygon_Data.p_file + (intptr_t)&Porygon_Event); // Linker thing
 
     if (ap->it_multi == hit_desc[ap->item_event_index].timer)
     {
@@ -42,7 +42,7 @@ void func_ovl3_80183B10(GObj *item_gobj)
 
 bool32 func_ovl3_80183C84(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->translate.x += ap->item_vars.porygon.offset.x;
@@ -65,7 +65,7 @@ GObj* jtgt_ovl3_80183D00(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->item_vars.porygon.offset = *pos;
 

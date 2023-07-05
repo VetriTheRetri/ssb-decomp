@@ -1,7 +1,7 @@
 #include "ftlink.h"
 
 // 0x80163B40
-void ftLink_SpecialHi_DestroyWeapon(Fighter_Struct *fp, Weapon_Struct *wp)
+void ftLink_SpecialHi_DestroyWeapon(ftStruct *fp, wpStruct *wp)
 {
     wp->is_hitlag_item = FALSE;
 
@@ -13,7 +13,7 @@ void ftLink_SpecialHi_DestroyWeapon(Fighter_Struct *fp, Weapon_Struct *wp)
 }
 
 // 0x80163B80
-void ftLink_SpecialHi_UpdateWeaponPos(GObj *fighter_gobj, Weapon_Struct *wp)
+void ftLink_SpecialHi_UpdateWeaponPos(GObj *fighter_gobj, wpStruct *wp)
 {
     wp->weapon_vars.spin_attack.pos_index++;
     wp->weapon_vars.spin_attack.pos_index %= WPSPINATTACK_EXTEND_POS_COUNT;
@@ -23,9 +23,9 @@ void ftLink_SpecialHi_UpdateWeaponPos(GObj *fighter_gobj, Weapon_Struct *wp)
 }
 
 // 0x80163BF0
-void ftLink_SpecialHi_DecWeaponLifeCheckDestroy(GObj *fighter_gobj, Weapon_Struct *wp)
+void ftLink_SpecialHi_DecWeaponLifeCheckDestroy(GObj *fighter_gobj, wpStruct *wp)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
@@ -34,9 +34,9 @@ void ftLink_SpecialHi_DecWeaponLifeCheckDestroy(GObj *fighter_gobj, Weapon_Struc
 }
 
 // 0x80163C2C
-void ftLink_SpecialHi_UpdateWeaponHit(GObj *fighter_gobj, Weapon_Struct *wp)
+void ftLink_SpecialHi_UpdateWeaponHit(GObj *fighter_gobj, wpStruct *wp)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     switch (fp->command_vars.flags.flag2) // jtbl at 0x8018C9F0
     {
@@ -86,11 +86,11 @@ void ftLink_SpecialHi_UpdateWeaponHit(GObj *fighter_gobj, Weapon_Struct *wp)
 // 0x80163D00
 void ftLink_SpecialHi_ProcGFX(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
     {
-        Weapon_Struct *wp = wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
+        wpStruct *wp = wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
 
         if (fp->hitlag_timer != 0)
         {
@@ -103,11 +103,11 @@ void ftLink_SpecialHi_ProcGFX(GObj *fighter_gobj)
 // 0x80163D44
 void ftLink_SpecialHi_UpdateWeaponVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
     {
-        Weapon_Struct *wp = wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
+        wpStruct *wp = wpGetStruct(fp->status_vars.link.specialhi.spin_attack_gobj);
 
         ftLink_SpecialHi_UpdateWeaponHit(fighter_gobj, wp);
         ftLink_SpecialHi_UpdateWeaponPos(fighter_gobj, wp);
@@ -118,7 +118,7 @@ void ftLink_SpecialHi_UpdateWeaponVars(GObj *fighter_gobj)
 // 0x80163D94
 void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *spin_attack_gobj;
     Vec3f pos;
 
@@ -142,7 +142,7 @@ void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 
             if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
             {
-                Weapon_Struct *wp = wpGetStruct(spin_attack_gobj);
+                wpStruct *wp = wpGetStruct(spin_attack_gobj);
                 s32 i;
 
                 wp->weapon_hit.update_state = 0;
@@ -160,7 +160,7 @@ void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 // 0x80163EFC
 void ftLink_SpecialHi_ProcDamage(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
     {
@@ -179,7 +179,7 @@ void ftLink_SpecialHiEnd_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+        ftStruct *fp = ftGetStruct(fighter_gobj);
 
         if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
         {
@@ -194,7 +194,7 @@ void ftLink_SpecialAirHiEnd_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+        ftStruct *fp = ftGetStruct(fighter_gobj);
 
         if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
         {
@@ -215,7 +215,7 @@ void ftLink_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 // 0x80164064
 void ftLink_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 gravity;
 
     ftLink_SpecialHi_UpdateWeaponVars(fighter_gobj);
@@ -237,7 +237,7 @@ void ftLink_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 // 0x80164128
 void ftLink_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
@@ -262,7 +262,7 @@ void ftLink_SpecialHiEnd_ProcMap(GObj *fighter_gobj)
 // 0x801641D0
 void ftLink_SpecialAirHiEnd_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
     {
@@ -285,7 +285,7 @@ void ftLink_SpecialAirHiEnd_ProcMap(GObj *fighter_gobj)
 // 0x8016426C
 void ftLink_SpecialHi_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
     fp->command_vars.flags.flag2 = 0;
@@ -297,7 +297,7 @@ void ftLink_SpecialHi_ProcStatus(GObj *fighter_gobj)
 // 0x80164284
 void ftLink_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftLink_SpecialHi_ProcStatus;
 
@@ -311,7 +311,7 @@ void ftLink_SpecialHi_SetStatus(GObj *fighter_gobj)
 // 0x801642EC
 void ftLink_SpecialHiEnd_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialHiEnd, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -323,7 +323,7 @@ void ftLink_SpecialHiEnd_SetStatus(GObj *fighter_gobj)
 // 0x80164348
 void ftLink_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftLink_SpecialHi_ProcStatus;
 

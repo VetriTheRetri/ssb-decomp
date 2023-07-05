@@ -137,7 +137,7 @@ typedef enum itMSBombStatus
 // 0x80176450
 bool32 itMSBomb_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
@@ -172,7 +172,7 @@ void itMSBomb_GWait_SetStatus(GObj *item_gobj)
 // 0x80176538
 void itMSBomb_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -189,7 +189,7 @@ void itMSBomb_FHold_SetStatus(GObj *item_gobj)
 // 0x801765A4
 bool32 itMSBomb_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
@@ -217,7 +217,7 @@ bool32 itMSBomb_SDefault_ProcHit(GObj *item_gobj)
 // 0x80176644
 void itMSBomb_FThrow_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->coll_data.object_coll.top = ITMSBOMB_COLL_SIZE;
     ip->coll_data.object_coll.center = 0.0F;
@@ -236,7 +236,7 @@ bool32 itMSBomb_FDrop_ProcMap(GObj *item_gobj)
 // 0x801766B8
 void itMSBomb_FDrop_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->coll_data.object_coll.top = ITMSBOMB_COLL_SIZE;
     ip->coll_data.object_coll.center = 0.0F;
@@ -249,8 +249,8 @@ void itMSBomb_FDrop_SetStatus(GObj *item_gobj)
 // 0x80176708
 void itMSBomb_GAttach_UpdateSurfaceData(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
-    Coll_Data *coll_data = &ip->coll_data;
+    itStruct *ip = itGetStruct(item_gobj);
+    mpCollData *coll_data = &ip->coll_data;
     Vec3f angle;
     DObj *joint = DObjGetStruct(item_gobj);
 
@@ -290,7 +290,7 @@ void itMSBomb_GAttach_UpdateSurfaceData(GObj *item_gobj)
 // 0x80176840
 void itMSBomb_GAttach_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     ip->coll_data.object_coll.top = ITMSBOMB_COLL_SIZE;
@@ -313,7 +313,7 @@ void itMSBomb_GAttach_InitItemVars(GObj *item_gobj)
 
     if ((ip->player != -1) && (ip->player != GMMATCH_PLAYERS_MAX)) // Macro might be off though
     {
-        GObj *fighter_gobj = gMatchData->player_block[ip->player].fighter_gobj;
+        GObj *fighter_gobj = gpMatchData->player_block[ip->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {
@@ -328,7 +328,7 @@ void itMSBomb_GAttach_InitItemVars(GObj *item_gobj)
 // 0x80176934
 void itMSBomb_NExplode_SpawnGFXFighter(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     itCommonAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     s32 unused[4];
@@ -386,7 +386,7 @@ bool32 itMSBomb_GAttach_ProcUpdate(GObj *item_gobj)
     Vec3f dist;
     Vec3f f_pos;
     DObj *aj = DObjGetStruct(item_gobj);
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->it_multi < ITMSBOMB_DETECT_FIGHTER_DELAY)
     {
@@ -400,7 +400,7 @@ bool32 itMSBomb_GAttach_ProcUpdate(GObj *item_gobj)
 
         while (fighter_gobj != NULL)
         {
-            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+            ftStruct *fp = ftGetStruct(fighter_gobj);
             DObj *fj = DObjGetStruct(fighter_gobj);
             f32 var = fp->attributes->object_coll.top * 0.5F;
 
@@ -430,7 +430,7 @@ void itMSBomb_GAttach_SetStatus(GObj *item_gobj)
 // 0x80176BC8
 bool32 itMSBomb_GAttach_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (func_ovl2_800FC67C(ip->attach_line_id) == FALSE)
     {
@@ -446,7 +446,7 @@ extern itCreateDesc itCommon_MSBomb_ItemDesc;
 
 void itMSBomb_NExplode_UpdateHitEvent(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     itHitEvent *ev = itGetHitEvent(itCommon_MSBomb_ItemDesc, D_NF_00000404); // (itHitEvent *)((uintptr_t)*itCommon_MSBomb_ItemDesc.p_file + &D_NF_00000404); - Linker thing
 
     if (ip->it_multi == ev[ip->item_event_index].timer)
@@ -474,7 +474,7 @@ void itMSBomb_NExplode_UpdateHitEvent(GObj *item_gobj)
 // 0x80176D00
 void itMSBomb_ADetach_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
@@ -491,7 +491,7 @@ bool32 itMSBomb_ADetach_ProcUpdate(GObj *item_gobj)
     Vec3f dist;
     Vec3f f_pos;
     DObj *aj = DObjGetStruct(item_gobj);
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
 
@@ -507,7 +507,7 @@ bool32 itMSBomb_ADetach_ProcUpdate(GObj *item_gobj)
 
         while (fighter_gobj != NULL)
         {
-            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+            ftStruct *fp = ftGetStruct(fighter_gobj);
             DObj *fj = DObjGetStruct(fighter_gobj);
             f32 var = fp->attributes->object_coll.top * 0.5F;
 
@@ -538,7 +538,7 @@ void itMSBomb_ADetach_SetStatus(GObj *item_gobj)
 // 0x80176E9C
 void itMSBomb_NExplode_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->it_multi = 0;
 
@@ -555,7 +555,7 @@ void itMSBomb_NExplode_InitItemVars(GObj *item_gobj)
 // 0x80176EE4
 bool32 itMSBomb_NExplode_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMSBomb_NExplode_UpdateHitEvent(item_gobj);
 
@@ -580,7 +580,7 @@ GObj* itCommon_MSBomb_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_MSBomb_ItemDesc, pos, vel, flags);
     DObj *joint;
-    Item_Struct *ip;
+    itStruct *ip;
     Vec3f translate;
 
     if (item_gobj != NULL)

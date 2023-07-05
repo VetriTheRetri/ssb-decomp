@@ -7,8 +7,8 @@ extern itCreateDesc Article_Fushigibana_Data;
 
 void func_ovl3_80184440(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    itHitDesc *hit_desc = (itHitDesc*) ((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
+    itStruct *ap = itGetStruct(item_gobj);
+    itHitParty *hit_desc = (itHitParty*) ((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
 
     if (ap->it_multi == hit_desc[ap->item_event_index].timer)
     {
@@ -44,7 +44,7 @@ void func_ovl3_80184440(GObj *item_gobj)
 
 bool32 func_ovl3_801845B4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
@@ -97,7 +97,7 @@ GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Fushigibana_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {
@@ -134,7 +134,7 @@ GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_80184820(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     ip->phys_info.vel_air.x += ITFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
 
@@ -147,7 +147,7 @@ bool32 func_ovl3_80184820(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_80184874(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE6E4(&DObjGetStruct(weapon_gobj)->translate, ip->weapon_hit.damage, ip->lr);
 
@@ -156,7 +156,7 @@ bool32 jtgt_ovl3_80184874(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_801848BC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -174,8 +174,8 @@ bool32 jtgt_ovl3_801848BC(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_80184970(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
     wpMain_ReflectorInvertLR(ip, fp);
 
@@ -193,7 +193,7 @@ GObj *func_ovl3_801849EC(GObj *item_gobj, Vec3f *pos)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Razor_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
-    Weapon_Struct *ip;
+    wpStruct *ip;
 
     if (weapon_gobj == NULL)
     {

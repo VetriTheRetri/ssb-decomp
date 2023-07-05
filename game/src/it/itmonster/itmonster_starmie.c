@@ -4,7 +4,7 @@
 
 void func_ovl3_80181C20(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->item_vars.starmie.swift_spawn_wait <= 0)
@@ -30,7 +30,7 @@ void func_ovl3_80181C20(GObj *item_gobj)
 
 bool32 func_ovl3_80181D24(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -49,7 +49,7 @@ bool32 func_ovl3_80181D24(GObj *item_gobj)
 
 void func_ovl3_80181D8C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     s32 lr_bak = ap->lr;
 
@@ -75,7 +75,7 @@ void func_ovl3_80181E0C(GObj *item_gobj)
 
 bool32 func_ovl3_80181E40(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if ((ap->lr == RIGHT) && (ap->item_vars.starmie.target_pos.x <= joint->translate.x))
@@ -100,8 +100,8 @@ extern intptr_t D_NF_00011338;
 
 void func_ovl3_80181EF4(GObj *item_gobj, GObj *fighter_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     DObj *aj = DObjGetStruct(item_gobj);
     DObj *fj = DObjGetStruct(fighter_gobj);
     Vec3f dist;
@@ -147,7 +147,7 @@ void func_ovl3_80181EF4(GObj *item_gobj, GObj *fighter_gobj)
 void func_ovl3_801820CC(GObj *item_gobj)
 {
     GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     GObj *victim_gobj;
     s32 unused2[2];
     DObj *joint = DObjGetStruct(item_gobj);
@@ -161,7 +161,7 @@ void func_ovl3_801820CC(GObj *item_gobj)
     {
         do
         {
-            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+            ftStruct *fp = ftGetStruct(fighter_gobj);
 
             if ((fighter_gobj != ap->owner_gobj) && (fp->team != ap->team))
             {
@@ -202,7 +202,7 @@ void func_ovl3_801821E8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8018221C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -218,7 +218,7 @@ bool32 jtgt_ovl3_8018221C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80182270(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -237,7 +237,7 @@ GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
@@ -260,7 +260,7 @@ GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_801823B4(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     ip->phys_info.vel_air.x = ip->phys_info.vel_air.x; // Bruh
 
@@ -273,7 +273,7 @@ bool32 func_ovl3_801823B4(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_801823E8(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     func_ovl2_80102070(&DObjGetStruct(weapon_gobj)->translate, ip->lr);
 
@@ -282,7 +282,7 @@ bool32 jtgt_ovl3_801823E8(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_80182418(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
 
@@ -300,8 +300,8 @@ bool32 jtgt_ovl3_80182418(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_801824C0(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
     wpMain_ReflectorInvertLR(ip, fp);
 
@@ -317,11 +317,11 @@ extern wpCreateDesc Item_Swift_Data;
 
 GObj* func_ovl3_80182530(GObj *item_gobj, Vec3f *pos)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
-    Weapon_Struct *ip;
+    wpStruct *ip;
 
     if (weapon_gobj == NULL)
     {

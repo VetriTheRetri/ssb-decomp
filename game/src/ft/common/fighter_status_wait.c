@@ -9,7 +9,7 @@ void ftCommon_Wait_ProcInterrupt(GObj *fighter_gobj)
 // 0x8013E1C8
 void ftCommon_Wait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
     {
@@ -32,7 +32,7 @@ void ftCommon_Wait_SetStatus(GObj *fighter_gobj)
 // 0x8013E258
 bool32 ftCommon_Wait_CheckInputSuccess(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (((fp->input.pl.stick_range.x * fp->lr) < 0) || (ABS(fp->input.pl.stick_range.x) < 8))
     {

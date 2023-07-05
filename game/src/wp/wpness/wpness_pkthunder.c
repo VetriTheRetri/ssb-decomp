@@ -93,8 +93,8 @@ wpCreateDesc wpNess_PKReflectTrail_WeaponDesc =
 void wpNess_PKThunder_SetDestroy(GObj *weapon_gobj, bool32 is_destroy)
 {
     GObj *gobj;
-    Fighter_Struct *fp;
-    Weapon_Struct *head_wp, *trailmid_wp, *trailend_wp;
+    ftStruct *fp;
+    wpStruct *head_wp, *trailmid_wp, *trailend_wp;
     s32 i;
 
     head_wp = wpGetStruct(weapon_gobj);
@@ -133,8 +133,8 @@ void wpNess_PKThunder_SetDestroy(GObj *weapon_gobj, bool32 is_destroy)
 // 0x8016ADF4
 void wpNess_PKThunderTrail_UpdateTrailPositions(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     if (fp->player_number == wp->player_number)
     {
@@ -165,8 +165,8 @@ void wpNess_PKThunderHead_CreateTrail(GObj *weapon_gobj, s32 trail_index)
 // 0x8016AEA68
 bool32 wpNess_PKThunderHead_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp;
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp;
     f32 angle_diff;
     Vec3f stick_angle;
     Vec3f thunder_angle;
@@ -257,7 +257,7 @@ bool32 wpNess_PKThunderHead_ProcMap(GObj *weapon_gobj)
 // 0x8016B1E8
 bool32 wpNess_PKThunderHead_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
     wpNess_PKThunder_SetDestroy(weapon_gobj, TRUE);
@@ -268,8 +268,8 @@ bool32 wpNess_PKThunderHead_ProcHit(GObj *weapon_gobj)
 // 0x8016B22C
 bool32 wpNess_PKThunderHead_ProcReflector(GObj *weapon_gobj) // Behold, PK Thunder's dangerous reflect callback
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp;
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp;
     Vec3f pos = DObjGetStruct(weapon_gobj)->translate; // Get current position
 
     wpNess_PKReflectHead_CreateWeapon(weapon_gobj, &pos, wp->weapon_vars.pkthunder.angle); // Spawn whole new PK Thunder instance
@@ -297,7 +297,7 @@ bool32 wpNess_PKThunderHead_ProcDead(GObj *weapon_gobj)
 GObj* wpNess_PKThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create PK Thunder Head 
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpNess_PKThunderHead_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
     s32 i;
 
     if (weapon_gobj == NULL) return NULL;
@@ -329,9 +329,9 @@ GObj* wpNess_PKThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *v
 // 0x8016B398
 bool32 wpNess_PKThunderTrail_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     s32 index;
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     if (wp->weapon_vars.pkthunder_trail.pkthunder_trail_state & wpNessPKThunder_Status_Destroy) return TRUE;
 
@@ -378,7 +378,7 @@ bool32 wpNess_PKThunderTrail_ProcUpdate(GObj *weapon_gobj)
 // 0x8016B550
 bool32 wpNess_PKThunderTrail_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
@@ -389,8 +389,8 @@ bool32 wpNess_PKThunderTrail_ProcHit(GObj *weapon_gobj)
 GObj* wpNess_PKThunderTrail_CreateWeapon(GObj *head_gobj, Vec3f *pos, s32 trail_index)
 {
     GObj *trail_gobj;
-    Weapon_Struct *trail_wp;
-    Weapon_Struct *head_wp = wpGetStruct(head_gobj);
+    wpStruct *trail_wp;
+    wpStruct *head_wp = wpGetStruct(head_gobj);
     s32 i;
 
     trail_gobj = wpManager_CreateWeapon(head_gobj, &wpNess_PKThunderTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
@@ -447,7 +447,7 @@ void wpNess_PKReflectHead_CreateTrail(GObj *weapon_gobj, s32 trail_index)
 // 0x8016B6A0
 void wpNess_PKReflectHead_SetDestroy(GObj *weapon_gobj, s32 unused)
 {
-    Weapon_Struct *wp, *wp2, *wp3;
+    wpStruct *wp, *wp2, *wp3;
     s32 i;
 
     wp = wpGetStruct(weapon_gobj);
@@ -473,7 +473,7 @@ void wpNess_PKReflectHead_SetDestroy(GObj *weapon_gobj, s32 unused)
 // 0x8016B734
 bool32 wpNess_PKReflectHead_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->lifetime == WPPKTHUNDER_SPAWN_TRAIL_FRAME) // This will keep spawning PK Thunder trails every time it is reflected, since lifetime is reset to 160 on each occasion
     {
@@ -506,7 +506,7 @@ bool32 wpNess_PKReflectHead_ProcMap(GObj *weapon_gobj)
 // 0x8016B7FC
 bool32 wpNess_PKReflectHead_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
     wpNess_PKReflectHead_SetDestroy(weapon_gobj, TRUE);
@@ -517,8 +517,8 @@ bool32 wpNess_PKReflectHead_ProcHit(GObj *weapon_gobj)
 // 0x8016B840
 bool32 wpNess_PKReflectHead_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = WPPKTHUNDER_LIFETIME; // This line is directly responsible for the PK Thunder double reflect crash; omitting it fixes the oversight
 
@@ -540,7 +540,7 @@ GObj* wpNess_PKReflectHead_CreateWeapon(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 {
     s32 i;
     GObj *new_gobj;
-    Weapon_Struct *wp;
+    wpStruct *wp;
     Vec3f localvel;
     f32 unk_vec;
 
@@ -579,7 +579,7 @@ GObj* wpNess_PKReflectHead_CreateWeapon(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 // 0x8016B9E0
 bool32 wpNess_PKReflectTrail_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     s32 trail_index;
 
     if (wp->weapon_vars.pkthunder_trail.pkthunder_trail_state & wpNessPKThunder_Status_Destroy)
@@ -616,7 +616,7 @@ bool32 wpNess_PKReflectTrail_ProcUpdate(GObj *weapon_gobj)
 // 0x8016BB3C
 bool32 wpNess_PKReflectTrail_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
@@ -628,7 +628,7 @@ GObj* wpNess_PKReflectTrail_CreateWeapon(GObj *old_gobj, Vec3f *pos, s32 trail_i
 {
     GObj *new_gobj;
     s32 unused;
-    Weapon_Struct *old_wp, *new_wp;
+    wpStruct *old_wp, *new_wp;
 
     old_wp = wpGetStruct(old_gobj);
 

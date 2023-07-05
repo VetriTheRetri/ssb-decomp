@@ -3,7 +3,7 @@
 // 0x801636D0
 void ftLink_SpecialN_DestroyBoomerang(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->fighter_vars.link.boomerang_gobj != NULL)
     {
@@ -16,7 +16,7 @@ void ftLink_SpecialN_DestroyBoomerang(GObj *fighter_gobj)
 // 0x80163708
 void ftLink_SpecialN_CreateBoomerang(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->command_vars.flags.flag0 != 0)
@@ -74,7 +74,7 @@ void ftLink_SpecialAirNEmpty_ProcMap(GObj *fighter_gobj)
 // 0x80163850 - Check for Smash-B input and reset flag0
 void ftLink_SpecialN_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
 
@@ -104,7 +104,7 @@ void ftLink_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x8016392C
 void ftLink_SpecialNEmpty_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialAirNEmpty, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -114,7 +114,7 @@ void ftLink_SpecialNEmpty_SwitchStatusAir(GObj *fighter_gobj)
 // 0x8016397C
 void ftLink_SpecialAirNEmpty_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Link_SpecialNEmpty, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -124,7 +124,7 @@ void ftLink_SpecialAirNEmpty_SwitchStatusGround(GObj *fighter_gobj)
 // 0x801639CC
 void ftLink_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftLink_SpecialN_ProcStatus;
 
@@ -142,7 +142,7 @@ void ftLink_SpecialN_SetStatus(GObj *fighter_gobj)
 // 0x80163A4C
 void ftLink_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftLink_SpecialN_ProcStatus;
 
@@ -160,7 +160,7 @@ void ftLink_SpecialAirN_SetStatus(GObj *fighter_gobj)
 // 0x80163ACC
 void ftLink_SpecialNReturn_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Air)
     {

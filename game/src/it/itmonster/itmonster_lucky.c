@@ -6,7 +6,7 @@ extern intptr_t D_NF_000100BC;
 
 void func_ovl3_80180FC0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->it_kind == It_Kind_Mb_Lucky)
@@ -23,7 +23,7 @@ void func_ovl3_80180FC0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80181048(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITMBLUCKY_GRAVITY, ITMBLUCKY_T_VEL);
 
@@ -32,7 +32,7 @@ bool32 jtgt_ovl3_80181048(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80181074(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80173680(item_gobj);
 
@@ -53,7 +53,7 @@ extern itStatusDesc Article_Mb_Lucky_Status[];
 
 void func_ovl3_801810E0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -63,7 +63,7 @@ void func_ovl3_801810E0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80181124(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITMBLUCKY_GRAVITY, ITMBLUCKY_T_VEL);
 
@@ -72,7 +72,7 @@ bool32 jtgt_ovl3_80181124(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80181150(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80173680(item_gobj);
 
@@ -89,7 +89,7 @@ bool32 jtgt_ovl3_80181150(GObj *item_gobj)
 
 void func_ovl3_801811AC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_kind == It_Kind_Mb_Lucky)
     {
@@ -101,7 +101,7 @@ void func_ovl3_801811AC(GObj *item_gobj)
 // 0x80181200
 bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
 {
-    Item_Struct *lucky_ap = itGetStruct(lucky_gobj), *egg_ap;
+    itStruct *lucky_ap = itGetStruct(lucky_gobj), *egg_ap;
     DObj *joint = DObjGetStruct(lucky_gobj);
     GObj *egg_gobj;
     s32 unused;
@@ -118,7 +118,7 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
     {
         if (!lucky_ap->item_vars.mb_lucky.egg_spawn_wait)
         {
-            if ((gMatchData->item_toggles & 8) && (gMatchData->item_switch != 0))
+            if ((gpMatchData->item_toggles & 8) && (gpMatchData->item_switch != 0))
             {
                 pos = joint->translate;
 
@@ -165,7 +165,7 @@ bool32 itMBLucky_GSpawn_ProcMap(GObj *item_gobj)
 // 0x80181390
 bool32 itMBLucky_GSpawn_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.mb_lucky.egg_spawn_wait += ITMBLUCKY_EGG_SPAWN_WAIT_ADD;
 
@@ -179,7 +179,7 @@ void func_ovl3_801813A8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801813D0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->item_vars.mb_lucky.lifetime == 0)
     {
@@ -192,7 +192,7 @@ bool32 jtgt_ovl3_801813D0(GObj *item_gobj)
 
 void func_ovl3_801813F8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->item_vars.mb_lucky.lifetime = ITMBLUCKY_LIFETIME;
 
@@ -203,7 +203,7 @@ void func_ovl3_801813F8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80181430(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -218,7 +218,7 @@ bool32 jtgt_ovl3_80181430(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80181480(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -234,7 +234,7 @@ GObj *jtgt_ovl3_801814C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Mb_Lucky_Data, pos, vel, flags);
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {

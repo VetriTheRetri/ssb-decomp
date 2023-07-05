@@ -118,7 +118,7 @@ typedef enum itLGunStatus
 // 0x801754F0
 bool32 itLGun_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITLGUN_GRAVITY, ITLGUN_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -150,7 +150,7 @@ void itLGun_GWait_SetStatus(GObj *item_gobj)
 // 0x801755B8
 void itLGun_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -169,7 +169,7 @@ void itLGun_FHold_SetStatus(GObj *item_gobj)
 // 0x80175630
 bool32 itLGun_FThrow_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->it_multi == 0)
     {
@@ -181,7 +181,7 @@ bool32 itLGun_FThrow_ProcMap(GObj *item_gobj)
 // 0x80175684
 bool32 itLGun_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -203,7 +203,7 @@ void itLGun_FThrow_SetStatus(GObj *item_gobj)
 // 0x8017572C
 bool32 itLGun_FDrop_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->it_multi == 0)
     {
@@ -228,7 +228,7 @@ GObj* itCommon_LGun_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fla
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
         ip->it_multi = ITLGUN_AMMO_MAX;
 
@@ -275,7 +275,7 @@ bool32 wpLGun_Ammo_ProcMap(GObj *weapon_gobj)
 // 0x80175958
 bool32 wpLGun_Ammo_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
@@ -285,7 +285,7 @@ bool32 wpLGun_Ammo_ProcHit(GObj *weapon_gobj)
 // 0x80175988
 bool32 wpLGun_Ammo_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
@@ -298,8 +298,8 @@ bool32 wpLGun_Ammo_ProcHop(GObj *weapon_gobj)
 // 0x80175A00
 bool32 wpLGun_Ammo_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wpMain_ReflectorInvertLR(wp, fp);
 
@@ -313,7 +313,7 @@ bool32 wpLGun_Ammo_ProcReflector(GObj *weapon_gobj)
 GObj* wpLGun_Ammo_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpLGun_Ammo_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {
@@ -331,7 +331,7 @@ GObj* wpLGun_Ammo_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 // 0x80175AD8
 void ftCommon_LGunShoot_CreateAmmo(GObj *fighter_gobj, Vec3f *pos)
 {
-    Item_Struct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
+    itStruct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
 
     wpLGun_Ammo_CreateWeapon(fighter_gobj, pos);
 

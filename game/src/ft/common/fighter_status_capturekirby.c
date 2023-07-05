@@ -20,9 +20,9 @@ void ftCommon_CaptureKirby_UpdatePosMag(GObj *fighter_gobj, Vec3f *dist)
 // 0x8014B774
 void ftCommon_CaptureKirby_UpdatePosAll(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     Vec3f dist;
-    Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
+    ftStruct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
     dist.x = capture_fp->status_vars.kirby.specialn.dist.x;
     dist.y = capture_fp->status_vars.kirby.specialn.dist.y;
@@ -51,7 +51,7 @@ void ftCommon_CaptureKirby_UpdatePosAll(GObj *fighter_gobj)
 // 0x8014B914
 void ftCommon_CaptureKirby_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_CaptureKirby_UpdatePosAll(fighter_gobj);
 
@@ -64,8 +64,8 @@ void ftCommon_CaptureKirby_ProcPhysics(GObj *fighter_gobj)
 // 0x8014B968
 void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp;
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *capture_fp;
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
@@ -107,7 +107,7 @@ void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
 }
 
 // 0x8014BA98
-void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fighter_Struct *capture_fp)
+void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(ftStruct *this_fp, ftStruct *capture_fp)
 {
     bool32 is_wiggle = FALSE;
 
@@ -166,9 +166,9 @@ void ftCommon_CaptureWaitKirby_UpdateBreakoutVars(Fighter_Struct *this_fp, Fight
 // 0x8014BC94
 void ftCommon_CaptureWaitKirby_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
+    ftStruct *capture_fp = ftGetStruct(capture_gobj);
     Vec3f *this_translate = &DObjGetStruct(fighter_gobj)->translate;
 
     *this_translate = DObjGetStruct(capture_gobj)->translate;
@@ -186,12 +186,12 @@ ftThrowReleaseDesc Fighter_CaptureKirby_Capture_Release = {  80, 100, 60, 0 };
 // 0x8014BD04
 void ftCommon_CaptureWaitKirby_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
 
     if (capture_gobj != NULL)
     {
-        Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
+        ftStruct *capture_fp = ftGetStruct(capture_gobj);
         s32 breakout_wait;
 
         ftCommon_CaptureWaitKirby_UpdateBreakoutVars(this_fp, capture_fp);
@@ -218,7 +218,7 @@ void ftCommon_CaptureWaitKirby_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014BDB4
 void ftCommon_CaptureWaitKirby_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureWaitKirby, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
@@ -238,7 +238,7 @@ void ftCommon_ThrownKirby_Escape(GObj *fighter_gobj)
 // 0x8014BE54
 void ftCommon_ThrownStar_ProcHit(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Fall, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl2_800D8EB8(fp);
@@ -247,7 +247,7 @@ void ftCommon_ThrownStar_ProcHit(GObj *fighter_gobj)
 // 0x8014BE90
 void ftCommon_ThrownKirby_SpawnStarGFX(GObj *fighter_gobj, f32 arg1, f32 arg2)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fp->is_playing_effect))
     {
@@ -267,7 +267,7 @@ void ftCommon_ThrownKirbyStar_ProcUpdate(GObj *fighter_gobj)
 // 0x8014BF04
 void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 != 0) && (fp->command_vars.flags.flag2 != 3))
     {
@@ -371,7 +371,7 @@ void ftCommon_ThrownKirbyStar_ProcPhysics(GObj *fighter_gobj)
 // 0x8014C280
 void ftCommon_ThrownStar_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f *angle;
     Vec3f pos = DObjGetStruct(fighter_gobj)->translate;
     Vec3f vel_bak;
@@ -422,12 +422,12 @@ void ftCommon_ThrownStar_ProcMap(GObj *fighter_gobj)
 // 0x8014C424
 void ftCommon_ThrownKirbyStar_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
 
     if (capture_gobj != NULL)
     {
-        Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
+        ftStruct *capture_fp = ftGetStruct(capture_gobj);
 
         func_ovl3_8014ADB0(fighter_gobj);
         ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_NONE);
@@ -446,7 +446,7 @@ void ftCommon_ThrownKirbyStar_InitStatusVars(GObj *fighter_gobj)
 // 0x8014C4D8
 void ftCommon_ThrownKirbyStar_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 30;
     fp->command_vars.flags.flag2 = 2;
@@ -461,7 +461,7 @@ extern void *D_ovl2_80131074;
 void ftCommon_ThrownKirbyStar_SetStatus(GObj *fighter_gobj)
 {
     s32 i;
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftKirbyCopyData *copy_data = (ftKirbyCopyData*) ((uintptr_t)D_ovl2_80131074 + (intptr_t)&ftKirby_LoadedFiles_SpecialNData);
 
     if (fp->ground_or_air == GA_Ground)
@@ -477,7 +477,7 @@ void ftCommon_ThrownKirbyStar_SetStatus(GObj *fighter_gobj)
 
     for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
     {
-        Fighter_Hit *ft_hit = &fp->fighter_hit[i];
+        ftHitbox *ft_hit = &fp->fighter_hit[i];
 
         if (ft_hit->update_state == gmHitCollision_UpdateState_New)
         {
@@ -506,7 +506,7 @@ void ftCommon_ThrownCopyStar_ProcPhysics(GObj *fighter_gobj)
 // 0x8014C67C
 void ftCommon_ThrownCopyStar_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 10;
     fp->command_vars.flags.flag2 = 1;
@@ -517,7 +517,7 @@ void ftCommon_ThrownCopyStar_ProcStatus(GObj *fighter_gobj)
 // 0x8014C6AC
 void ftCommon_ThrownCopyStar_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Ground)
     {

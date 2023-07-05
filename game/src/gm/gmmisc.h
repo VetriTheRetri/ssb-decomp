@@ -175,7 +175,7 @@ typedef struct Color_Info
 
 } Color_Info;
 
-typedef struct Color_Overlay
+typedef struct caStruct
 {
     Color_Script cs[2];
     s32 duration;
@@ -189,7 +189,7 @@ typedef struct Color_Overlay
     u8 is_use_color2 : 1;
     u8 unk_ca_0x60_b34 : 2;
 
-} Color_Overlay;
+} caStruct;
 
 typedef struct ColAnimDesc
 {

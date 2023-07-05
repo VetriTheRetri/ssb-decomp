@@ -11,7 +11,7 @@ void ftMasterHand_Harau_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+        ftStruct *fp = ftGetStruct(fighter_gobj);
 
         if (fp->coll_data.ground_line_id == -1)
         {
@@ -24,7 +24,7 @@ void ftMasterHand_Harau_ProcUpdate(GObj *fighter_gobj)
 // 0x8015946C
 void ftMasterHand_Harau_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     func_ovl2_800D93E4(fighter_gobj);
 

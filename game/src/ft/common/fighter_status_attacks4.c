@@ -4,7 +4,7 @@
 // 0x8014FE40
 void ftCommon_AttackS4_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f offset;
 
     switch (fp->ft_kind)
@@ -66,7 +66,7 @@ extern void *D_ovl2_80131134;               // Pointer to Ness' file?
 // 0x8014FFE0
 void ftCommon_AttackS4_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 stick_angle;
     s32 status_id;
 
@@ -126,7 +126,7 @@ void ftCommon_AttackS4_SetStatus(GObj *fighter_gobj)
 // 0x801501E0
 bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
@@ -135,7 +135,7 @@ bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 
         if (item_gobj != NULL)
         {
-            Item_Struct *ap = itGetStruct(item_gobj);
+            itStruct *ap = itGetStruct(item_gobj);
 
             if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(item_gobj) != FALSE)))
             {
@@ -167,7 +167,7 @@ bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 // 0x8015030C
 bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (((fp->input.pl.stick_range.x * fp->status_vars.common.attack4.lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
@@ -176,7 +176,7 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 
         if (item_gobj != NULL)
         {
-            Item_Struct *ap = itGetStruct(item_gobj);
+            itStruct *ap = itGetStruct(item_gobj);
 
             if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(item_gobj) != FALSE)))
             {
@@ -211,7 +211,7 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 // 0x80150470
 bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_ATTACKS4_BUFFER_FRAMES_MAX) && (fp->input.pl.button_tap & fp->input.button_mask_a))
@@ -220,7 +220,7 @@ bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
 
         if (item_gobj != NULL)
         {
-            Item_Struct *ap = itGetStruct(item_gobj);
+            itStruct *ap = itGetStruct(item_gobj);
 
             if ((fp->input.pl.button_hold & fp->input.button_mask_z) || ((ap->type == It_Type_Throw) || (ap->type == It_Type_Shoot) && (atCommon_CheckTypeShootEmpty(item_gobj) != FALSE)))
             {

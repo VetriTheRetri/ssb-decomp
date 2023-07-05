@@ -5,7 +5,7 @@
 // 0x80143E10
 void ftCommon_TaruCann_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.tarucann.shoot_wait != 0)
     {
@@ -35,7 +35,7 @@ void ftCommon_TaruCann_ProcUpdate(GObj *fighter_gobj)
 // 0x80143EB0
 void ftCommon_TaruCann_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->status_vars.common.tarucann.shoot_wait == 0) && (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
     {
@@ -48,7 +48,7 @@ void ftCommon_TaruCann_ProcInterrupt(GObj *fighter_gobj)
 // 0x80143F04
 void ftCommon_TaruCann_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *tarucann_gobj = fp->status_vars.common.tarucann.tarucann_gobj;
 
     DObjGetStruct(fighter_gobj)->translate = DObjGetStruct(tarucann_gobj)->translate;
@@ -57,7 +57,7 @@ void ftCommon_TaruCann_ProcPhysics(GObj *fighter_gobj)
 // 0x80143F30
 void ftCommon_TaruCann_SetStatus(GObj *fighter_gobj, GObj *tarucann_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_ProcDamageStopVoice(fighter_gobj);
 
@@ -97,7 +97,7 @@ extern intptr_t D_NF_000000BC;
 // 0x80144038
 void ftCommon_TaruCann_ShootFighter(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftThrowHitDesc *tarucann = (ftThrowHitDesc*) (((uintptr_t)Ground_Info - (intptr_t)&D_NF_00000014) + (intptr_t)&D_NF_000000BC); // Linker thing
     f32 knockback;
     s32 angle;

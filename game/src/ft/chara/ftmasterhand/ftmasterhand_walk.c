@@ -9,7 +9,7 @@ void ftMasterHand_Walk_ProcUpdate(GObj *fighter_gobj)
 // 0x80159854
 void ftMasterHand_Walk_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Walk, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     func_ovl3_80157F90(fighter_gobj);

@@ -9,7 +9,7 @@ f32 ftKirby_JumpAerialF_VelY[ftStatus_Kirby_JumpAerialF5 - ftStatus_Kirby_JumpAe
 f32 ftPurin_JumpAerialF_VelY[ftStatus_Purin_JumpAerialF5 - ftStatus_Purin_JumpAerialF1] = { 60.0F, 40.0F, 20.0F,  0.0F };
 
 // 0x8013FA90
-void ftCommon_JumpAerial_UpdateModelYaw(Fighter_Struct *fp)
+void ftCommon_JumpAerial_UpdateModelYaw(ftStruct *fp)
 {
     if (fp->status_vars.common.jumpaerial.turn_frames != 0)
     {
@@ -29,7 +29,7 @@ void ftCommon_JumpAerial_UpdateModelYaw(Fighter_Struct *fp)
 // 0x8013FB00
 void ftCommon_JumpAerial_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_JumpAerial_UpdateModelYaw(fp);
     ftCommon_IfAnimEnd_SetStatusFall(fighter_gobj);
@@ -47,7 +47,7 @@ void ftCommon_JumpAerial_ProcInterrupt(GObj *fighter_gobj)
 // 0x8013FB6C
 void ftYoshi_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     jtgt_ovl2_800D9414(fighter_gobj);
@@ -62,7 +62,7 @@ void ftYoshi_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 // 0x8013FBC4
 void ftNess_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     f32 vel_x;
 
@@ -83,7 +83,7 @@ void ftNess_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 // 0x8013FC4C
 void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8DB0(fp);
@@ -114,7 +114,7 @@ void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 // 0x8013FD74
 void ftCommon_JumpAerial_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id = ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_JUMPAERIAL_F_OR_B_RANGE) ? ftStatus_Common_JumpAerialF : ftStatus_Common_JumpAerialB;
     s32 stick_range_y = GCONTROLLER_RANGE_MAX_I;
@@ -171,7 +171,7 @@ void ftCommon_JumpAerial_SetStatus(GObj *fighter_gobj, s32 input_source)
 // 0x8013FF38
 void ftCommon_JumpAerialMulti_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id;
     s32 stick_range_x;
@@ -241,7 +241,7 @@ void ftCommon_JumpAerialMulti_SetStatus(GObj *fighter_gobj, s32 input_source)
 }
 
 // 0x8014012C
-bool32 ftCommon_JumpAerialMulti_CheckJumpButtonHold(Fighter_Struct *fp)
+bool32 ftCommon_JumpAerialMulti_CheckJumpButtonHold(ftStruct *fp)
 {
     if (fp->input.pl.button_hold & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
     {
@@ -251,7 +251,7 @@ bool32 ftCommon_JumpAerialMulti_CheckJumpButtonHold(Fighter_Struct *fp)
 }
 
 // 0x80140150
-s32 ftCommon_JumpAerialMulti_GetJumpInputType(Fighter_Struct *fp)
+s32 ftCommon_JumpAerialMulti_GetJumpInputType(ftStruct *fp)
 {
     if (fp->input.pl.stick_range.y >= FTCOMMON_JUMPAERIAL_STICK_RANGE_MIN)
     {
@@ -267,7 +267,7 @@ s32 ftCommon_JumpAerialMulti_GetJumpInputType(Fighter_Struct *fp)
 // 0x8014019C
 bool32 ftCommon_JumpAerial_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 input_source;
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)

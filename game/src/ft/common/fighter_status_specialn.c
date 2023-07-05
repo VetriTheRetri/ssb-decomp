@@ -65,7 +65,7 @@ void (*ftCommon_SpecialN_StatusList[Ft_Kind_EnumMax])(GObj*) =
 // 0x80151060
 void ftKirby_SpecialN_SetStatusIndex(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftKirby_SpecialN_StatusList[fp->fighter_vars.kirby.copy_id](fighter_gobj);
 }
@@ -73,7 +73,7 @@ void ftKirby_SpecialN_SetStatusIndex(GObj *fighter_gobj)
 // 0x80151098
 bool32 ftCommon_SpecialN_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_b) && (attributes->is_have_specialn))

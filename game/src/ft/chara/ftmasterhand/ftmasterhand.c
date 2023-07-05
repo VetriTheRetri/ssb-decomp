@@ -5,7 +5,7 @@
 // 0x80157F60
 void ftMasterHand_Common_InvertLR(GObj *fighter_gobj) // Turn Master Hand around?
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->lr = -fp->lr;
 
@@ -14,7 +14,7 @@ void ftMasterHand_Common_InvertLR(GObj *fighter_gobj) // Turn Master Hand around
 
 void func_ovl3_80157F90(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos_b;
     Vec3f pos_a;
 
@@ -30,7 +30,7 @@ void func_ovl3_80157F90(GObj *fighter_gobj)
 
 void func_ovl3_80158030(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (((DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x - DObjGetStruct(fighter_gobj)->translate.x) * fp->lr) < 0.0F)
     {
@@ -49,8 +49,8 @@ void func_ovl3_80158094(s32 var, Vec3f *pos)
 
 void func_ovl3_801580E0(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Fighter_Struct *unk_fp = ftGetStruct(fp->fighter_vars.masterhand.boss->target_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *unk_fp = ftGetStruct(fp->fighter_vars.masterhand.boss->target_gobj);
     ftBossInfo *boss = fp->fighter_vars.masterhand.boss;
 
     if ((unk_fp->coll_data.ground_line_id != -1) && (unk_fp->coll_data.ground_line_id != -2))
@@ -76,7 +76,7 @@ void func_ovl3_801580E0(GObj *fighter_gobj, Vec3f *pos)
 // 0x8015817C
 void ftMasterHand_Common_SetPosOffsetY(GObj *fighter_gobj, Vec3f *pos, f32 off_y)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     pos->x = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x;
     pos->y = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.y + off_y;
@@ -86,8 +86,8 @@ void ftMasterHand_Common_SetPosOffsetY(GObj *fighter_gobj, Vec3f *pos, f32 off_y
 // 0x801581BC
 void ftMasterHand_Common_SetPosAddVelPlayer(GObj *fighter_gobj, Vec3f *pos, f32 vel_x, f32 vel_y)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Fighter_Struct *fp_unk = ftGetStruct(fp->fighter_vars.masterhand.boss->target_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp_unk = ftGetStruct(fp->fighter_vars.masterhand.boss->target_gobj);
     Vec3f translate = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate;
     f32 x;
     f32 y;
@@ -113,7 +113,7 @@ void ftMasterHand_Common_SetPosAddVelPlayer(GObj *fighter_gobj, Vec3f *pos, f32 
 // 0x80158310
 void ftMasterHand_Common_SetPosAddVelAuto(GObj *fighter_gobj, Vec3f *pos, f32 vel_x, f32 vel_y)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     pos->x = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x + ((rand_u16() & 1) ? vel_x : -vel_x);
     pos->y = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.y + vel_y;
@@ -143,14 +143,14 @@ void func_ovl3_8015839C(s32 var, Vec3f *pos_input)
 // 0x80158428
 void ftMasterHand_Common_SetNextAttackWait(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->fighter_vars.masterhand.boss->wait_timer = ((rand_u16_range(FTMASTERHAND_ATTACK_WAIT_MAX) + (FTMASTERHAND_ATTACK_WAIT_LEVEL_DIV / fp->cp_level)) / fp->fighter_vars.masterhand.boss->wait_div);
 }
 
 void func_ovl3_80158528(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 var_at;
     f32 var_f2;
     s32 temp_f4;
@@ -200,7 +200,7 @@ void func_ovl3_80158528(GObj *fighter_gobj)
 
 void func_ovl3_80158604(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->x192_flag_b4 = TRUE;
     fp->unk_0xA8F = U8_MAX;
@@ -208,14 +208,14 @@ void func_ovl3_80158604(GObj *fighter_gobj)
 
 void func_ovl3_80158620(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->x192_flag_b4 = FALSE;
 }
 
 void func_ovl3_80158634(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     if (func_ovl2_800FC8EC(0) == FALSE)
     {
@@ -233,7 +233,7 @@ void func_ovl3_80158634(GObj *fighter_gobj)
 // 0x801586A0
 void ftMasterHand_Common_UpdateMainInfo(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id = fp->status_info.status_id;
 
     if ((status_id != ftStatus_MasterHand_Dead1) && (status_id != ftStatus_MasterHand_Dead2) && (status_id != ftStatus_MasterHand_Dead3))

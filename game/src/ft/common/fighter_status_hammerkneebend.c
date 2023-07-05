@@ -3,7 +3,7 @@
 // 0x80147EC0
 void ftCommon_HammerKneeBend_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.hammer.kneebend_anim_frame++;
@@ -26,7 +26,7 @@ void ftCommon_HammerKneeBend_ProcUpdate(GObj *fighter_gobj)
 // 0x80147F54
 void ftCommon_HammerKneeBend_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.hammer.jump_force < fp->input.pl.stick_range.y)
     {
@@ -37,7 +37,7 @@ void ftCommon_HammerKneeBend_ProcInterrupt(GObj *fighter_gobj)
 // 0x80147F88
 void ftCommon_HammerKneeBend_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_HammerKneeBend, ftCommon_HammerGetAnimFrame(fighter_gobj), 1.0F, ftCommon_HammerGetStatUpdateFlags(fighter_gobj));
     ftCommon_HammerCheckSetColAnim(fighter_gobj);
@@ -51,7 +51,7 @@ void ftCommon_HammerKneeBend_SetStatus(GObj *fighter_gobj, s32 input_source)
 // 0x8014800C
 bool32 ftCommon_HammerKneeBend_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 input_source = ftCommon_KneeBend_GetInputTypeCommon(fp);
 
     if (input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE)

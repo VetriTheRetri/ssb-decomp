@@ -5,7 +5,7 @@ void ftMasterHand_Okutsubushi_ProcUpdate(GObj *fighter_gobj)
 {
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+        ftStruct *fp = ftGetStruct(fighter_gobj);
 
         fp->lr = LEFT;
 
@@ -18,7 +18,7 @@ void ftMasterHand_Okutsubushi_ProcUpdate(GObj *fighter_gobj)
 // 0x8015AB08
 void ftMasterHand_Okutsubushi_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     f32 dist_x;
 
     func_ovl2_800D938C(fighter_gobj);
@@ -51,7 +51,7 @@ void ftMasterHand_Okutsubushi_ProcPhysics(GObj *fighter_gobj)
 // 0x8015ABEC
 void ftMasterHand_Okutsubushi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate;
     Vec3f sp34;
     Vec3f sp28;

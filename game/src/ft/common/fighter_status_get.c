@@ -8,7 +8,7 @@ extern u8 gmBonusStat_HeartPickupCount;
 // 0x80145990
 GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *pickup_gobj = NULL;
     ftItemPickup *item_pickup = &fp->attributes->item_pickup;
     GObj *item_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
@@ -19,7 +19,7 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
 
     while (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         if (ap->is_allow_pickup)
         {
@@ -77,12 +77,12 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
 // 0x80145BE4
 void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *item_gobj = fp->item_hold;
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         if (ap->type == It_Type_Special)
         {
@@ -92,7 +92,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
                 ftCommon_ApplyDamageHeal(fp, ITTOMATO_DAMAGE_HEAL);
                 itMain_DestroyItem(item_gobj);
 
-                if ((gMatchData->game_type == gmMatch_GameType_1PGame) && (fp->player == gSceneData.player_port) && (gmBonusStat_TomatoPickupCount < U8_MAX))
+                if ((gpMatchData->game_type == gmMatch_GameType_1PGame) && (fp->player == gSceneData.player_port) && (gmBonusStat_TomatoPickupCount < U8_MAX))
                 {
                     gmBonusStat_TomatoPickupCount++;
                 }
@@ -102,7 +102,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
                 ftCommon_ApplyDamageHeal(fp, ITHEART_DAMAGE_HEAL);
                 itMain_DestroyItem(item_gobj);
 
-                if ((gMatchData->game_type == gmMatch_GameType_1PGame) && (fp->player == gSceneData.player_port) && (gmBonusStat_HeartPickupCount < U8_MAX))
+                if ((gpMatchData->game_type == gmMatch_GameType_1PGame) && (fp->player == gSceneData.player_port) && (gmBonusStat_HeartPickupCount < U8_MAX))
                 {
                     gmBonusStat_HeartPickupCount++;
                 }
@@ -124,7 +124,7 @@ void ftCommon_Get_ApplyItemStats(GObj *fighter_gobj)
 // 0x80145D28
 void ftCommon_Get_DropItem(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold != NULL)
     {
@@ -135,7 +135,7 @@ void ftCommon_Get_DropItem(GObj *fighter_gobj)
 // 0x80145D70
 void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *item_gobj;
 
     if (fp->command_vars.flags.flag1 != 0)
@@ -169,7 +169,7 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 
             if (item_gobj != NULL)
             {
-                Item_Struct *ap = itGetStruct(item_gobj);
+                itStruct *ap = itGetStruct(item_gobj);
 
                 if (ap->type == It_Type_Special)
                 {
@@ -201,7 +201,7 @@ void ftCommon_LightGet_ProcMap(GObj *fighter_gobj)
 // 0x80145F10
 void ftCommon_HeavyGet_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
@@ -216,7 +216,7 @@ void ftCommon_HeavyGet_ProcMap(GObj *fighter_gobj)
 // 0x80145F74
 void ftCommon_HeavyThrow_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDE50(fighter_gobj) == FALSE)
     {
@@ -231,8 +231,8 @@ void ftCommon_HeavyThrow_ProcMap(GObj *fighter_gobj)
 // 0x80145FD8
 void ftCommon_Get_SetStatus(GObj *fighter_gobj, GObj *item_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ip = itGetStruct(item_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 
@@ -249,7 +249,7 @@ void ftCommon_Get_SetStatus(GObj *fighter_gobj, GObj *item_gobj)
 // 0x80146064
 bool32 ftCommon_Get_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold == NULL)
     {
@@ -277,7 +277,7 @@ void ftCommon_LiftWait_ProcInterrupt(GObj *fighter_gobj)
 // 0x801460E8
 void ftCommon_LiftWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_LiftWait, 0.0F, 1.0F, FTSTATUPDATE_SLOPECONTOUR_PRESERVE);
 
@@ -285,7 +285,7 @@ void ftCommon_LiftWait_SetStatus(GObj *fighter_gobj)
 }
 
 // 0x80146130
-void ftCommon_LiftTurn_UpdateModelYaw(Fighter_Struct *fp)
+void ftCommon_LiftTurn_UpdateModelYaw(ftStruct *fp)
 {
     fp->status_vars.common.lift.turn_frames--;
 
@@ -303,7 +303,7 @@ void ftCommon_LiftTurn_UpdateModelYaw(Fighter_Struct *fp)
 // 0x801461A8
 void ftCommon_LiftTurn_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_LiftTurn_UpdateModelYaw(fp);
 
@@ -322,7 +322,7 @@ void ftCommon_LiftTurn_ProcInterrupt(GObj *fighter_gobj)
 // 0x80146208
 void ftCommon_LiftTurn_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_LiftTurn, 0.0F, 1.0F, FTSTATUPDATE_SLOPECONTOUR_PRESERVE);
 

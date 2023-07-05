@@ -41,7 +41,7 @@
 
 #define WEAPON_HOP_ANGLE_DEFAULT F_DEG_TO_RAD(135.0F) // 2.3561945F - Determines whether weapon bounces off a shield
 
-typedef enum Wp_Kind
+typedef enum wpKind
 {
     Wp_Kind_Fireball,
     Wp_Kind_Blaster,
@@ -65,12 +65,12 @@ typedef enum Wp_Kind
     Wp_Kind_FFlowerFlame,
     Wp_Kind_StarRodStar
 
-} Wp_Kind;
+} wpKind;
 
 typedef struct wpCreateDesc
 {
     u8 unk_0x0;
-    s32 wp_kind;
+    wpKind wp_kind;
     void **p_item; // Pointer to various item data
     intptr_t offset; // Offset of item hitbox info
     u8 unk_0x10;
@@ -133,12 +133,12 @@ typedef struct _Weapon_Hit
 
 } Weapon_Hit;
 
-typedef struct _Weapon_Struct
+typedef struct _wpStruct
 {
-    void *wp_alloc_next;                // Memory region allocated for next Item_Struct
+    void *wp_alloc_next;                // Memory region allocated for next itStruct
     GObj *weapon_gobj;                  // Weapon's GObj pointer
     GObj *owner_gobj;                   // Weapon's owner
-    s32 wp_kind;                        // Weapon ID
+    wpKind wp_kind;                     // Weapon ID
     u8 team;                            // Weapon's team
     u8 player;                          // Weapon's port index
     u8 handicap;                        // Weapon's handicap
@@ -152,7 +152,7 @@ typedef struct _Weapon_Struct
 
     } phys_info;
 
-    Coll_Data coll_data;                // Weapon's collision data
+    mpCollData coll_data;                // Weapon's collision data
 
     mpGroundAir ground_or_air;          // Ground or air bool
 
@@ -214,9 +214,9 @@ typedef struct _Weapon_Struct
 
     s32 display_mode;                  // Weapon's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
 
-} Weapon_Struct;
+} wpStruct;
 
 #define wpGetStruct(weapon_gobj) \
-((Weapon_Struct*) (weapon_gobj)->user_data) \
+((wpStruct*) (weapon_gobj)->user_data) \
 
 #endif

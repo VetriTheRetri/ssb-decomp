@@ -13,8 +13,8 @@ const Vec3f Fighter_LGunShoot_Dust_Offset = { FTCOMMON_LGUNSHOOT_AMMO_SPAWN_OFF_
 // 0x80146FD4
 void ftCommon_LGunShoot_ProcAccessory(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap;
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap;
     f32 size_mul;
     Vec3f spawn_ammo_offset;
     Vec3f spawn_gfx_offset;
@@ -78,7 +78,7 @@ void ftCommon_LGunShootAir_ProcMap(GObj *fighter_gobj)
 // 0x80147208
 void ftCommon_LGunShootAir_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShoot, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -89,7 +89,7 @@ void ftCommon_LGunShootAir_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80147258
 void ftCommon_LGunShoot_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_LGunShootAir, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -107,9 +107,9 @@ void ftCommon_FireFlowerShoot_ProcUpdate(GObj *fighter_gobj)
 const Vec3f Fighter_FireFlowerShoot_Ammo_Offset = { FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_X, FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Y, FTCOMMON_FIREFLOWERSHOOT_AMMO_SPAWN_OFF_Z };
 
 // 0x801472D4
-void ftCommon_FireFlowerShoot_UpdateAmmoStats(Fighter_Struct *fp, s32 ammo_sub)
+void ftCommon_FireFlowerShoot_UpdateAmmoStats(ftStruct *fp, s32 ammo_sub)
 {
-    Item_Struct *ap = itGetStruct(fp->item_hold);
+    itStruct *ap = itGetStruct(fp->item_hold);
     Vec3f flame_spawn_offset = Fighter_FireFlowerShoot_Ammo_Offset;
     f32 size_mul;
     s32 flame_vel_index;
@@ -160,8 +160,8 @@ const Vec3f Fighter_FireFlowerShoot_Kickup_Offset        = { 0.0F, 0.0F, -180.0F
 // 0x80147434
 void ftCommon_FireFlowerShoot_ProcAccessory(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap;
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap;
     s32 ammo_sub;
     Vec3f gfx_haveammo_offset;
     Vec3f gfx_noammo_offset;
@@ -258,7 +258,7 @@ void ftCommon_FireFlowerShootAir_ProcMap(GObj *fighter_gobj)
 // 0x80147774
 void ftCommon_FireFlowerShootAir_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShoot, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->dobj_f1, FTSTATUPDATE_NONE_PRESERVE);
@@ -269,7 +269,7 @@ void ftCommon_FireFlowerShootAir_SwitchStatusGround(GObj *fighter_gobj)
 // 0x801477C8
 void ftCommon_FireFlowerShoot_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_FireFlowerShootAir, fighter_gobj->anim_frame, DObjGetStruct(fighter_gobj)->dobj_f1, FTSTATUPDATE_NONE_PRESERVE);
@@ -279,7 +279,7 @@ void ftCommon_FireFlowerShoot_SwitchStatusAir(GObj *fighter_gobj)
 }
 
 // 0x80147824
-void ftCommon_FireFlowerShoot_InitStatusVars(Fighter_Struct *fp)
+void ftCommon_FireFlowerShoot_InitStatusVars(ftStruct *fp)
 {
     fp->status_vars.common.fireflower.flame_vel_index = 0;
     fp->status_vars.common.fireflower.ammo_sub = 1;
@@ -292,8 +292,8 @@ void ftCommon_FireFlowerShoot_InitStatusVars(Fighter_Struct *fp)
 // 0x80147844
 void ftCommon_ItemShoot_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap = itGetStruct(fp->item_hold);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap = itGetStruct(fp->item_hold);
     s32 status_id;
     void (*proc_accessory)(GObj*);
 
@@ -322,8 +322,8 @@ void ftCommon_ItemShoot_SetStatus(GObj *fighter_gobj)
 // 0x801478EC
 void ftCommon_ItemShootAir_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
-    Item_Struct *ap = itGetStruct(fp->item_hold);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap = itGetStruct(fp->item_hold);
     s32 status_id;
     void (*proc_accessory)(GObj*);
 

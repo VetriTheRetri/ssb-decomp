@@ -3,7 +3,7 @@
 // 0x8015E980
 void ftYoshi_SpecialHi_ProcDamage(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.yoshi.specialhi.egg_gobj != NULL)
     {
@@ -12,7 +12,7 @@ void ftYoshi_SpecialHi_ProcDamage(GObj *fighter_gobj)
 }
 
 // 0x8015E9B0
-void ftYoshi_SpecialHi_GetEggPosition(Fighter_Struct *fp, Vec3f *pos)
+void ftYoshi_SpecialHi_GetEggPosition(ftStruct *fp, Vec3f *pos)
 {
     pos->x = 0.0F;
     pos->y = 0.0F;
@@ -22,7 +22,7 @@ void ftYoshi_SpecialHi_GetEggPosition(Fighter_Struct *fp, Vec3f *pos)
 }
 
 // 0x8015E9E0
-void ftYoshi_SpecialHi_UpdateEggVectors(Fighter_Struct *fp)
+void ftYoshi_SpecialHi_UpdateEggVectors(ftStruct *fp)
 {
     Vec3f pos;
 
@@ -39,9 +39,9 @@ void ftYoshi_SpecialHi_UpdateEggVectors(Fighter_Struct *fp)
 // 0x8015EA5C
 void ftYoshi_SpecialHi_UpdateEggVars(GObj *fighter_gobj)
 {
-    Weapon_Struct *ip;
+    wpStruct *ip;
     Vec3f pos;
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag2 == 2)
     {
@@ -74,7 +74,7 @@ void ftYoshi_SpecialHi_UpdateEggVars(GObj *fighter_gobj)
 // 0x8015EB0C
 void ftYoshi_SpecialHi_UpdateEggThrowForce(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.button_hold & fp->input.button_mask_b)
     {
@@ -115,7 +115,7 @@ void ftYoshi_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 // 0x8015EC00
 void ftYoshi_SpecialAirHi_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialHi, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
@@ -126,7 +126,7 @@ void ftYoshi_SpecialAirHi_SwitchStatusGround(GObj *fighter_gobj)
 // 0x8015EC54
 void ftYoshi_SpecialHi_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
@@ -145,7 +145,7 @@ void ftYoshi_SpecialHi_ProcMap(GObj *fighter_gobj)
 // 0x8015ECD0
 void ftYoshi_SpecialAirHi_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -157,7 +157,7 @@ void ftYoshi_SpecialAirHi_ProcMap(GObj *fighter_gobj)
 // 0x8015ED18
 void ftYoshi_SpecialHi_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_damage = ftYoshi_SpecialHi_ProcDamage;
     fp->command_vars.flags.flag2 = 0;

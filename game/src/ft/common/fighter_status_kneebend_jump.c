@@ -3,7 +3,7 @@
 // 0x8013F2A0
 void ftCommon_KneeBend_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.kneebend.anim_frame += DObjGetStruct(fighter_gobj)->dobj_f1;
@@ -26,7 +26,7 @@ void ftCommon_KneeBend_ProcUpdate(GObj *fighter_gobj)
 // 0x8013F334
 void ftCommon_KneeBend_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_SpecialHi_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
@@ -43,7 +43,7 @@ void ftCommon_KneeBend_ProcInterrupt(GObj *fighter_gobj)
 // 0x8013F3A0
 void ftCommon_KneeBend_SetStatusParam(GObj *fighter_gobj, s32 status_id, s32 input_source)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -68,7 +68,7 @@ void ftCommon_GuardKneeBend_SetStatus(GObj *fighter_gobj, s32 input_source)
 }
 
 // 0x8013F450
-bool32 ftCommon_KneeBend_CheckButtonTap(Fighter_Struct *fp)
+bool32 ftCommon_KneeBend_CheckButtonTap(ftStruct *fp)
 {
     if (fp->input.pl.button_tap & (HAL_BUTTON_C_RIGHT | HAL_BUTTON_C_LEFT | HAL_BUTTON_C_DOWN | HAL_BUTTON_C_UP))
     {
@@ -78,7 +78,7 @@ bool32 ftCommon_KneeBend_CheckButtonTap(Fighter_Struct *fp)
 }
 
 // 0x8013F474
-s32 ftCommon_KneeBend_GetInputTypeCommon(Fighter_Struct *fp)
+s32 ftCommon_KneeBend_GetInputTypeCommon(ftStruct *fp)
 {
     if ((fp->input.pl.stick_range.y >= FTCOMMON_KNEEBEND_STICK_RANGE_MIN) && (fp->tap_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
     {
@@ -94,7 +94,7 @@ s32 ftCommon_KneeBend_GetInputTypeCommon(Fighter_Struct *fp)
 // 0x8013F4D0
 bool32 ftCommon_KneeBend_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 input_source;
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
@@ -113,7 +113,7 @@ bool32 ftCommon_KneeBend_CheckInterruptCommon(GObj *fighter_gobj)
 }
 
 // 0x8013F53C
-s32 ftCommon_KneeBend_GetInputTypeRun(Fighter_Struct *fp)
+s32 ftCommon_KneeBend_GetInputTypeRun(ftStruct *fp)
 {
     if ((fp->input.pl.stick_range.y > FTCOMMON_KNEEBEND_RUN_STICK_RANGE_MIN) && (fp->tap_stick_y <= FTCOMMON_KNEEBEND_BUFFER_FRAMES_MAX))
     {
@@ -129,7 +129,7 @@ s32 ftCommon_KneeBend_GetInputTypeRun(Fighter_Struct *fp)
 // 0x8013F598
 bool32 ftCommon_KneeBend_CheckInterruptRun(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 input_source;
 
     if (ftCommon_HammerCheckHold(fighter_gobj) != FALSE)
@@ -150,7 +150,7 @@ bool32 ftCommon_KneeBend_CheckInterruptRun(GObj *fighter_gobj)
 // 0x8013F604
 bool32 ftCommon_GuardKneeBend_CheckInterruptGuard(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 input_source = ftCommon_KneeBend_GetInputTypeCommon(fp);
 
     if ((input_source != FTCOMMON_KNEEBEND_INPUT_TYPE_NONE) && (fp->input.pl.button_hold & fp->input.button_mask_z))
@@ -211,7 +211,7 @@ void ftCommon_Jump_GetJumpForceButton(s32 stick_range_x, s32 *jump_vel_x, s32 *j
 // 0x8013F880
 void ftCommon_Jump_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     s32 status_id;
     s32 vel_x, vel_y;

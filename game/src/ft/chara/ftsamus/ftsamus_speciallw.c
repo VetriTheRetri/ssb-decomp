@@ -3,7 +3,7 @@
 // 0x8015DF00
 void ftSamus_SpecialLw_CreateBomb(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     DObj *joint;
 
@@ -25,7 +25,7 @@ void ftSamus_SpecialLw_CreateBomb(GObj *fighter_gobj)
 // 0x8015DF64
 void ftSamus_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftSamus_SpecialLw_CreateBomb(fighter_gobj);
 
@@ -46,7 +46,7 @@ void ftSamus_SpecialAirLw_ProcUpdate(GObj *fighter_gobj)
 // 0x8015DFE4
 void ftSamus_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->command_vars.flags.flag3 != FALSE)
@@ -60,7 +60,7 @@ void ftSamus_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 // 0x8015E050
 void ftSamus_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8E50(fp, attributes);
@@ -87,7 +87,7 @@ void ftSamus_SpecialAirLw_ProcMap(GObj *fighter_gobj)
 // 0x8015E130
 void ftSamus_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag3 = FALSE;
 
@@ -98,7 +98,7 @@ void ftSamus_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 // 0x8015E170 - Go to aerial Screw Attack from grounded update process
 void ftSamus_SpecialLw_TransferStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftMap_SetAir(fp);
@@ -116,7 +116,7 @@ void ftSamus_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
 }
 
 // 0x8015E218
-void ftSamus_SpecialLw_InitStatusVars(Fighter_Struct *fp)
+void ftSamus_SpecialLw_InitStatusVars(ftStruct *fp)
 {
     fp->command_vars.flags.flag0 = FALSE;
 }
@@ -124,7 +124,7 @@ void ftSamus_SpecialLw_InitStatusVars(Fighter_Struct *fp)
 // 0x8015E220
 void ftSamus_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag3 = FALSE;
 
@@ -138,7 +138,7 @@ void ftSamus_SpecialLw_SetStatus(GObj *fighter_gobj)
 // 0x8015E274
 void ftSamus_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

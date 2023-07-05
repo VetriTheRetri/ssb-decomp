@@ -9,7 +9,7 @@ void ftMasterHand_GootsubuDown_ProcUpdate(GObj *fighter_gobj)
 // 0x80159DD4
 void ftMasterHand_GootsubuDown_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuDown, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

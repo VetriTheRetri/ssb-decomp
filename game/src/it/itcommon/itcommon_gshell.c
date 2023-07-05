@@ -122,7 +122,7 @@ typedef enum itGShellStatus
 // 0x801785E0
 void itGShell_GSpin_UpdateGFX(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
@@ -146,7 +146,7 @@ extern intptr_t D_NF_00006048;
 // 0x80178670
 void func_ovl3_80178670(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     s32 unused[2];
 
@@ -165,7 +165,7 @@ void func_ovl3_80178704(GObj *item_gobj)
 // 0x8017871C
 bool32 itGShell_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
 
@@ -183,7 +183,7 @@ bool32 itGShell_GWait_ProcMap(GObj *item_gobj)
 // 0x80178774
 bool32 itGShell_AFall_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->item_vars.shell.health == 0)
     {
@@ -199,7 +199,7 @@ extern itStatusDesc itCommon_GShell_StatusDesc[];
 // 0x801787CC
 void itGShell_GWait_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMap_SetGround(ip);
 
@@ -251,7 +251,7 @@ void itGShell_GWait_SetStatus(GObj *item_gobj)
 // 0x80178930
 void itGShell_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
@@ -266,7 +266,7 @@ void itGShell_AFall_SetStatus(GObj *item_gobj)
 // 0x8017897C
 bool32 itGShell_SDefault_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel_air.x = ip->damage_taken_recent * ITGSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
 
@@ -321,7 +321,7 @@ bool32 itGShell_FThrow_ProcMap(GObj *item_gobj)
 // 0x80178AF8
 bool32 itGShell_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
 
@@ -331,7 +331,7 @@ bool32 itGShell_FThrow_ProcUpdate(GObj *item_gobj)
 // 0x80178B28
 void itGShell_FThrow_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.health = 1;
     ip->item_vars.shell.is_damage = TRUE;
@@ -342,7 +342,7 @@ void itGShell_FThrow_SetStatus(GObj *item_gobj)
 // 0x80178B60
 void itGShell_FDrop_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.health = 1;
     ip->item_vars.shell.is_damage = TRUE;
@@ -353,7 +353,7 @@ void itGShell_FDrop_SetStatus(GObj *item_gobj)
 // 0x80178B98
 bool32 itGShell_GSpin_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itGShell_GSpin_UpdateGFX(item_gobj);
 
@@ -394,7 +394,7 @@ bool32 itGShell_GSpin_ProcMap(GObj *item_gobj)
 // 0x80178C6C
 bool32 itGShell_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
@@ -414,7 +414,7 @@ bool32 itGShell_SDefault_ProcHit(GObj *item_gobj)
 // 0x80178CF8
 bool32 itGShell_GASpin_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel_air.x += (ip->damage_taken_recent * ITGSHELL_DAMAGE_MUL_ADD * -ip->lr_damage);
 
@@ -447,7 +447,7 @@ bool32 itGShell_GASpin_ProcDamage(GObj *item_gobj)
 // 0x80178E04
 void itGShell_GSpin_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -490,7 +490,7 @@ void itGShell_GSpin_SetStatus(GObj *item_gobj)
 // 0x80178F10
 void itGShell_ASpin_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->phys_info.vel_air.x > ITGSHELL_CLAMP_VEL_X)
     {
@@ -526,7 +526,7 @@ GObj* itCommon_GShell_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ip;
+        itStruct *ip;
         Vec3f translate = joint->translate;
 
         joint->rotate.y = HALF_PI32;

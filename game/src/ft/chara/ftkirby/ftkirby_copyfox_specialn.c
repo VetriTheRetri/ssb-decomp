@@ -3,7 +3,7 @@
 // 0x80156CB0
 void ftKirby_CopyFox_SpecialN_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->command_vars.flags.flag0 != FALSE)
@@ -26,7 +26,7 @@ void ftKirby_CopyFox_SpecialN_ProcUpdate(GObj *fighter_gobj)
 // 0x80156D38
 void ftKirby_CopyFox_SpecialN_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 != 0) && (fp->input.pl.button_tap & fp->input.button_mask_b))
     {
@@ -45,7 +45,7 @@ void ftKirby_CopyFox_SpecialN_ProcInterrupt(GObj *fighter_gobj)
 // 0x80156DC8
 void ftKirby_CopyFox_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
     fp->command_vars.flags.flag1 = 0;

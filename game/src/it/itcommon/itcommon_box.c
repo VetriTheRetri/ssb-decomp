@@ -110,7 +110,7 @@ typedef enum itBoxStatus
 // 0x80179120
 void itEffect_UpdateBoxSmashGFX(GObj *effect_gobj) // Barrel/Crate smash GFX process
 {
-    Effect_Struct *ep = efGetStruct(effect_gobj);
+    efStruct *ep = efGetStruct(effect_gobj);
     DObj *joint = DObjGetStruct(effect_gobj);
 
     ep->lifetime--;
@@ -143,7 +143,7 @@ extern intptr_t D_NF_000068F0;
 void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 {
     GObj *effect_gobj;
-    Effect_Struct *ep = func_ovl2_800FD4B8();
+    efStruct *ep = func_ovl2_800FD4B8();
     DObj *joint;
     s32 i;
     void *temp_s4;
@@ -189,7 +189,7 @@ extern Vec2f D_ovl3_8018A320[6];
 static Unk_8018D048 D_ovl3_8018D048;
 
 // 0x80179424
-bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
+bool32 itBox_SDefault_CheckSpawnItems(GObj *item_gobj)
 {
     s32 random, spawn_item_num, index;
     s32 i, j;
@@ -200,7 +200,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
     s32 var;
     Vec3f pos2;
 
-    func_800269C0(0x3BU);
+    func_800269C0(0x3B);
 
     itEffect_CreateBoxSmashGFX(&DObjGetStruct(item_gobj)->translate);
 
@@ -279,7 +279,7 @@ bool32 itCommon_Box_CheckSpawnItems(GObj *item_gobj)
 // 0x8017963C
 bool32 itBox_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITBOX_GRAVITY, ITBOX_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -298,7 +298,7 @@ bool32 itBox_GWait_ProcMap(GObj *item_gobj)
 // 0x8017969C
 bool32 itBox_SDefault_ProcHit(GObj *item_gobj)
 {
-    if (itCommon_Box_CheckSpawnItems(item_gobj) != FALSE)
+    if (itBox_SDefault_CheckSpawnItems(item_gobj) != FALSE)
     {
         return TRUE;
     }
@@ -310,7 +310,7 @@ bool32 itBox_SDefault_ProcHit(GObj *item_gobj)
 // 0x801796D8
 bool32 itBox_SDefault_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->percent_damage >= ITBOX_HEALTH_MAX)
     {
@@ -328,7 +328,7 @@ bool32 itBox_AFall_ProcMap(GObj *item_gobj)
 // 0x80179748
 void itBox_GWait_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->coll_data.ground_angle.y, ip->coll_data.ground_angle.x) - HALF_PI32;
 
@@ -339,7 +339,7 @@ void itBox_GWait_SetStatus(GObj *item_gobj)
 // 0x801797A4
 void itBox_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -361,7 +361,7 @@ bool32 itBox_FThrow_ProcMap(GObj *item_gobj)
 {
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE)
     {
-        if (itCommon_Box_CheckSpawnItems(item_gobj) != FALSE)
+        if (itBox_SDefault_CheckSpawnItems(item_gobj) != FALSE)
         {
             return TRUE;
         }
@@ -404,7 +404,7 @@ extern intptr_t Article_Box_Hit; // 0x614
 // 0x80179948
 bool32 itBox_NExplode_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->it_multi--;
 
@@ -412,7 +412,7 @@ bool32 itBox_NExplode_ProcUpdate(GObj *item_gobj)
     {
         return TRUE;
     }
-    else itMain_UpdateHitEvent(item_gobj, (itHitEvent*) ((uintptr_t)*itCommon_Box_ItemDesc.p_file + (intptr_t)&Article_Box_Hit)); // Linker thing
+    else itMain_UpdateHitEvent(item_gobj, itGetHitEvent(itCommon_Box_ItemDesc, Article_Box_Hit)); // Linker thing
 
     return FALSE;
 }
@@ -424,7 +424,7 @@ GObj* itCommon_Box_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
         DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
 
@@ -439,7 +439,7 @@ GObj* itCommon_Box_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
 // 0x80179A34
 void itBox_NExplode_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_event_index = 0;
     ip->it_multi = 0;
@@ -459,7 +459,7 @@ void itBox_NExplode_InitItemVars(GObj *item_gobj)
 
     itMain_ClearOwnerStats(item_gobj);
     itMain_RefreshHit(item_gobj);
-    itMain_UpdateHitEvent(item_gobj, (itHitEvent*)((uintptr_t)*itCommon_Box_ItemDesc.p_file + (intptr_t)&Article_Box_Hit));
+    itMain_UpdateHitEvent(item_gobj, itGetHitEvent(itCommon_Box_ItemDesc, Article_Box_Hit)); // Linker thing
 }
 
 // 0x80179AD4
@@ -473,7 +473,7 @@ void itBox_NExplode_SetStatus(GObj *item_gobj)
 void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
     Effect_Unk *effect_unk;
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;

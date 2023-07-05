@@ -3,7 +3,7 @@
 // 0x80149810
 void ftCommon_FuraFura_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 breakout_wait;
 
     fp->shield_health = (fp->ft_kind == Ft_Kind_Yoshi) ? 30 : 30;
@@ -25,7 +25,7 @@ void ftCommon_FuraFura_ProcInterrupt(GObj *fighter_gobj)
 // 0x801498A4
 void ftCommon_FuraFura_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 breakout_wait;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_FuraFura, 0.0F, 1.0F, (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE));

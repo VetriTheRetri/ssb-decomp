@@ -10,7 +10,7 @@
 )                                                          \
 
 // 0x8014D530
-f32 ftDonkey_ThrowFWalk_GetWalkAnimSpeed(Fighter_Struct *fp, s32 status_id)
+f32 ftDonkey_ThrowFWalk_GetWalkAnimSpeed(ftStruct *fp, s32 status_id)
 {
     f32 walk_anim_speed;
 
@@ -34,7 +34,7 @@ f32 ftDonkey_ThrowFWalk_GetWalkAnimSpeed(Fighter_Struct *fp, s32 status_id)
 // 0x8014D590
 void ftDonkey_ThrowFWalk_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!ftCheckInterruptThrowFWalk(fighter_gobj))
     {
@@ -53,7 +53,7 @@ void ftDonkey_ThrowFWalk_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014D68C
 void ftDonkey_ThrowFWalk_SetStatusParam(GObj *fighter_gobj, f32 frame_begin)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftCommon_Walk_GetWalkStatus(fp->input.pl.stick_range.x) + (ftStatus_Donkey_ThrowFWalkSlow - ftStatus_Common_WalkSlow), frame_begin, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);

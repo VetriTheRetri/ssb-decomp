@@ -3,7 +3,7 @@
 // 0x8015ADC0
 void ftMasterHand_Dead2_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.masterhand.dead.dead_timer--;
 
@@ -16,7 +16,7 @@ void ftMasterHand_Dead2_ProcPhysics(GObj *fighter_gobj)
 // 0x8015ADE8
 void ftMasterHand_Dead2_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     f32 vel_z;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

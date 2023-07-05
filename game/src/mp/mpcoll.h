@@ -82,7 +82,7 @@ typedef struct _ObjectColl
 
 } ObjectColl;
 
-typedef struct _Coll_Data
+typedef struct _mpCollData
 {
     Vec3f *p_translate; // Points to TopN translation vector
     s32 *p_lr; // Points to facing direction?
@@ -122,6 +122,6 @@ typedef struct _Coll_Data
     s32 cliff_id; // Ledge ID
     s32 ignore_line_id; // Ignore this line when checking for collision
 
-} Coll_Data;
+} mpCollData;
 
 #endif

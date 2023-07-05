@@ -9,7 +9,7 @@ void ftMasterHand_OkutsubushiStart_ProcUpdate(GObj *fighter_gobj)
 // 0x8015ACD4
 void ftMasterHand_OkutsubushiStart_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *masterhand_fp, *target_fp;
+    ftStruct *masterhand_fp, *target_fp;
     s32 ground_line_id;
     s32 line_id;
 

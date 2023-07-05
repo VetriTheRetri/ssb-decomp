@@ -10,7 +10,7 @@
 )                                                  \
 
 // 0x80148120
-void ftCommon_Guard_CheckScheduleRelease(Fighter_Struct *fp)
+void ftCommon_Guard_CheckScheduleRelease(ftStruct *fp)
 {
     if (!(fp->input.pl.button_hold & fp->input.button_mask_z))
     {
@@ -61,7 +61,7 @@ Vec3f Fighter_Yoshi_GuardOffGfxOffset = { 0.0F, 0.0F, 0.0F };
 // 0x80148304
 void ftCommon_Guard_UpdateShieldVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->is_shield)
     {
@@ -111,7 +111,7 @@ void ftCommon_Guard_UpdateShieldVars(GObj *fighter_gobj)
 }
 
 // 0x80148408
-void ftCommon_Guard_UpdateShieldHitbox(Fighter_Struct *fp)
+void ftCommon_Guard_UpdateShieldHitbox(ftStruct *fp)
 {
     Vec3f *scale = &fp->joint[ftParts_YRotN_Joint]->scale;
     f32 scale_final;
@@ -129,7 +129,7 @@ void ftCommon_Guard_UpdateShieldHitbox(Fighter_Struct *fp)
 }
 
 // 0x80148488
-void func_ovl3_80148488(Fighter_Struct *fp)
+void func_ovl3_80148488(ftStruct *fp)
 {
     f32 angle_r = atan2f(fp->input.pl.stick_range.y, fp->input.pl.stick_range.x * fp->lr);
     f32 angle_d;
@@ -197,7 +197,7 @@ void func_ovl3_80148664(DObj *joint, DObjDesc *joint_desc, f32 range, Vec3f *sca
 // Return to this when the struct at 0x2D8 of ftCommonAttributes is mapped
 void func_ovl3_80148714(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 unused2;
     DObj *yrotn_joint = fp->joint[ftParts_YRotN_Joint];
     DObj **fj = &fp->joint[ftParts_XRotN_Joint];
@@ -245,7 +245,7 @@ void func_ovl3_80148714(GObj *fighter_gobj)
 // Need to revisit this when once I have a better understanding of these structs...
 void func_ovl3_8014889C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     DObj **p_joint = &fp->joint[4];
     DObjDesc *unk_vec = &attributes->dobj_lookup[1];
@@ -321,7 +321,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
 
 void func_ovl3_80148A88(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Guard_CheckScheduleRelease(fp);
     ftCommon_Guard_UpdateShieldVars(fighter_gobj);
@@ -372,7 +372,7 @@ void func_ovl3_80148B84(GObj *fighter_gobj)
 
 void func_ovl3_80148BFC(GObj *fighter_gobj, s32 slide_frames)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOn, 0.0F, 1.0F, 0U);
     ftAnim_Update(fighter_gobj);
@@ -401,7 +401,7 @@ void func_ovl3_80148BFC(GObj *fighter_gobj, s32 slide_frames)
 
 bool32 func_ovl3_80148CBC(GObj *fighter_gobj, s32 slide_frames)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_hold & fp->input.button_mask_z) && (fp->shield_health != 0))
     {
@@ -425,7 +425,7 @@ bool32 func_ovl3_80148D2C(GObj *fighter_gobj, s32 slide_frames)
 
 void func_ovl3_80148D4C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Guard_CheckScheduleRelease(fp);
     ftCommon_Guard_UpdateShieldVars(fighter_gobj);
@@ -443,7 +443,7 @@ void func_ovl3_80148D4C(GObj *fighter_gobj)
 
 void func_ovl3_80148DDC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Guard, 0.0F, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
     func_ovl3_8014889C(fighter_gobj);

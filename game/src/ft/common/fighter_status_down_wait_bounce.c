@@ -7,7 +7,7 @@
 // 0x80144220
 void ftCommon_DownWait_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.downwait.stand_wait--;
 
@@ -29,7 +29,7 @@ void ftCommon_DownWait_ProcInterrupt(GObj *fighter_gobj)
 // 0x80144294
 void ftCommon_DownWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->status_info.status_id == ftStatus_Common_DownBounceD)
@@ -50,7 +50,7 @@ void ftCommon_DownWait_SetStatus(GObj *fighter_gobj)
 // 0x80144308
 void ftCommon_DownBounce_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.downbounce.attack_buffer != 0)
     {
@@ -69,7 +69,7 @@ void ftCommon_DownBounce_ProcUpdate(GObj *fighter_gobj)
 // 0x80144398
 bool32 ftCommon_DownBounce_UpOrDown(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 rot_x = fp->joint[4]->rotate.x;
 
     rot_x /= DOUBLE_PI32;
@@ -88,7 +88,7 @@ extern u16 Fighter_DownBounce_Sound[];
 // 0x801444248
 void ftCommon_DownBounce_UpdateEffects(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_GFXSpawn(fighter_gobj, 0x16, 0, NULL, NULL, fp->lr, FALSE, 0);
     func_800269C0(Fighter_DownBounce_Sound[fp->ft_kind]);
@@ -98,7 +98,7 @@ void ftCommon_DownBounce_UpdateEffects(GObj *fighter_gobj)
 // 0x80144498
 void ftCommon_DownBounce_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->ground_or_air == GA_Air)

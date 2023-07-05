@@ -16,7 +16,7 @@ void ftCommon_ShieldBreakFly_ProcMap(GObj *fighter_gobj)
 // 0x80149488
 void ftCommon_ShieldBreakFly_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftMap_SetAir(fp);
@@ -35,7 +35,7 @@ extern s8 gmBonusStat_ShieldBreaker; // Bonus for breaking an enemy's shield in 
 // 0x80149510
 void ftCommon_ShieldBreakFly_UpdateVarsSetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f offset;
 
     offset.x = 0.0F;
@@ -53,7 +53,7 @@ void ftCommon_ShieldBreakFly_UpdateVarsSetStatus(GObj *fighter_gobj)
 
     ftCommon_Update1PGameDamageStats(fp, fp->shield_player, 0, 0, 0, 0);
 
-    if ((gMatchData->game_type == gmMatch_GameType_1PGame) && (fp->shield_damage != 0))
+    if ((gpMatchData->game_type == gmMatch_GameType_1PGame) && (fp->shield_damage != 0))
     {
         if ((fp->shield_player == gSceneData.player_port) && (fp->shield_player != fp->player))
         {
@@ -66,7 +66,7 @@ void ftCommon_ShieldBreakFly_UpdateVarsSetStatus(GObj *fighter_gobj)
 // 0x80149608
 void ftCommon_ShieldBreakFlyReflector_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     SpecialHit *special_hit = fp->special_hit;
     Vec3f offset = special_hit->offset;
 

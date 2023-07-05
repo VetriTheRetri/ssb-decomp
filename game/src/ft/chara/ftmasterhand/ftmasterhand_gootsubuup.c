@@ -3,7 +3,7 @@
 // 0x80159B00
 void ftMasterHand_GootsubuUp_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
@@ -15,7 +15,7 @@ void ftMasterHand_GootsubuUp_ProcPhysics(GObj *fighter_gobj)
 // 0x80159B3C
 void ftMasterHand_GootsubuUp_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     func_ovl2_800DE324(fighter_gobj);
 

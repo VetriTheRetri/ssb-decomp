@@ -3,7 +3,7 @@
 // 0x80159BD0
 void ftMasterHand_GootsubuWait_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
@@ -28,7 +28,7 @@ void ftMasterHand_GootsubuWait_ProcPhysics(GObj *fighter_gobj)
 // 0x80159CA4
 void ftMasterHand_GootsubuWait_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
     f32 var;
 
@@ -54,7 +54,7 @@ void ftMasterHand_GootsubuWait_ProcMap(GObj *fighter_gobj)
 // 0x80159D34
 void ftMasterHand_GootsubuWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

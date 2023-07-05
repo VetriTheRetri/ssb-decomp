@@ -118,7 +118,7 @@ typedef enum itFFlowerStatus
 // 0x80175B20
 bool32 itFFlower_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITFFLOWER_GRAVITY, ITFFLOWER_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -152,7 +152,7 @@ void itFFlower_GWait_SetStatus(GObj *item_gobj)
 // 0x80175BE4
 void itFFlower_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -169,7 +169,7 @@ void itFFlower_FHold_SetStatus(GObj *item_gobj)
 // 0x80175C50
 bool32 itFFlower_FThrow_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->it_multi == 0)
     {
@@ -181,7 +181,7 @@ bool32 itFFlower_FThrow_ProcMap(GObj *item_gobj)
 // 0x80175C9C
 bool32 itFFlower_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -199,7 +199,7 @@ void itFFlower_FThrow_SetStatus(GObj *item_gobj)
 // 0x80175CEC
 bool32 itFFlower_FDrop_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->it_multi == 0)
     {
@@ -223,7 +223,7 @@ GObj* itCommon_FFlower_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
         ip->it_multi = ITFFLOWER_AMMO_MAX;
 
@@ -237,7 +237,7 @@ GObj* itCommon_FFlower_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 // 0x80175DDC
 bool32 wpFFlower_Flame_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
@@ -272,8 +272,8 @@ extern s32 D_ovl3_8018D044; // Something to do with GFX IDs; static (.bss)
 // 0x80175E84
 bool32 wpFFlower_Flame_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
     Vec3f *translate;
 
     wp->lifetime = ITFFLOWER_AMMO_LIFETIME;
@@ -292,7 +292,7 @@ bool32 wpFFlower_Flame_ProcReflector(GObj *weapon_gobj)
 GObj* wpFFlower_Flame_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpFFlower_Flame_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {
@@ -317,7 +317,7 @@ extern intptr_t D_NF_00000360;
 // 0x8017604C
 void ftCommon_FireFlowerShoot_CreateFlame(GObj *fighter_gobj, Vec3f *pos, s32 index, s32 ammo_sub)
 {
-    Item_Struct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
+    itStruct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
     Vec3f vel;
     f32 *flame_vel = (f32*) ((uintptr_t)*itCommon_FFlower_ItemDesc.p_file + (intptr_t)&D_NF_00000360); // Linker thing
 

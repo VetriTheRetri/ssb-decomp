@@ -3,7 +3,7 @@
 // 0x801598C0
 bool32 ftMasterHand_WalkLoop_CheckPlayerRange(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     Vec3f *translate_m = &DObjGetStruct(fighter_gobj)->translate;
     Vec3f *translate_t = &DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate;
@@ -41,7 +41,7 @@ void ftMasterHand_WalkLoop_ProcMap(GObj *fighter_gobj)
 // 0x801599C4
 void ftMasterHand_WalkLoop_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->phys_info.vel_air.y = 0;
 

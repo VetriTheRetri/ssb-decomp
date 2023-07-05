@@ -26,7 +26,7 @@ typedef struct Effect_Unk
 
 } Effect_Unk;
 
-typedef struct Effect_Struct
+typedef struct efStruct
 {
     s32 unk_0x0;
     GObj *fighter_gobj;
@@ -40,9 +40,9 @@ typedef struct Effect_Struct
     s32 lifetime;
     s32 unk_ef_0x1C;
 
-} Effect_Struct;
+} efStruct;
 
 #define efGetStruct(effect_gobj) \
-((Effect_Struct*)effect_gobj->user_data) \
+((efStruct*)(effect_gobj)->user_data) \
 
 #endif

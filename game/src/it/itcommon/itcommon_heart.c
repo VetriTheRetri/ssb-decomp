@@ -70,7 +70,7 @@ typedef enum itHeartStatus
 // 0x801746F0
 bool32 itHeart_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITHEART_GRAVITY, ITHEART_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -102,7 +102,7 @@ void itHeart_GWait_SetStatus(GObj *item_gobj)
 // 0x801747B4
 void itHeart_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -128,7 +128,7 @@ GObj* itCommon_Heart_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fl
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Heart_ItemDesc, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
-    Item_Struct *ip;
+    itStruct *ip;
 
     if (item_gobj != NULL)
     {

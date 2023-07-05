@@ -46,11 +46,11 @@ wpCreateDesc wpPikachu_ThunderTrail_WeaponDesc =
 // 0x8016A640
 void wpPikachu_ThunderHead_SetDestroy(GObj *weapon_gobj, bool32 is_destroy)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (!(wp->weapon_vars.thunder.thunder_state & wpPikachuThunder_Status_Destroy))
     {
-        Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+        ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
         if (fp->player_number == wp->player_number) // Check number of player that spawned Thunder
         {
@@ -82,7 +82,7 @@ void func_ovl3_8016A680(GObj *weapon_gobj, s32 arg1)
 // 0x8016A700
 bool32 wpPikachu_ThunderHead_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->weapon_vars.thunder.thunder_state == wpPikachuThunder_Status_Collide)
     {
@@ -130,7 +130,7 @@ GObj* wpPikachu_ThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *
 {
     s32 unused;
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpPikachu_ThunderHead_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {
@@ -162,7 +162,7 @@ GObj* wpPikachu_ThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *
 // 0x8016A8D8
 bool32 wpPikachu_ThunderTrail_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
@@ -182,7 +182,7 @@ bool32 wpPikachu_ThunderTrail_ProcUpdate(GObj *weapon_gobj)
 // 0x8016A950
 bool32 wpPikachu_ThunderTrail_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
@@ -193,9 +193,9 @@ bool32 wpPikachu_ThunderTrail_ProcHit(GObj *weapon_gobj)
 GObj* wpPikachu_ThunderTrail_CreateWeapon(GObj *weapon_gobj, Vec3f *pos)
 {
     s32 unused[2];
-    Weapon_Struct *spawn_wp = wpGetStruct(weapon_gobj);
+    wpStruct *spawn_wp = wpGetStruct(weapon_gobj);
     GObj *chain_gobj = wpManager_CreateWeapon(weapon_gobj, &wpPikachu_ThunderTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
-    Weapon_Struct *chain_wp;
+    wpStruct *chain_wp;
     s32 i;
 
     if (chain_gobj == NULL)

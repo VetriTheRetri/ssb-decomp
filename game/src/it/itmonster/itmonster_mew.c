@@ -2,7 +2,7 @@
 
 bool32 func_ovl3_8017EBE0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     Vec3f pos = DObjGetStruct(item_gobj)->translate;
 
     if (ap->it_multi == 0)
@@ -26,7 +26,7 @@ bool32 func_ovl3_8017EBE0(GObj *item_gobj)
 
 void func_ovl3_8017EC84(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->it_multi = ITMEW_LIFETIME;
 
@@ -61,7 +61,7 @@ void func_ovl3_8017ED20(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017ED54(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -76,7 +76,7 @@ bool32 jtgt_ovl3_8017ED54(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017EDA4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -96,7 +96,7 @@ GObj* jtgt_ovl3_8017EDE4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 

@@ -5,7 +5,7 @@
 // 0x80151260
 void ftPurin_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;
@@ -40,7 +40,7 @@ f32 ftPurin_SpecialN_GetAngle(s32 stick_y)
 // 0x801512EC
 void ftPurin_SpecialAirN_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 unused;
     f32 angle;
 
@@ -95,7 +95,7 @@ void ftPurin_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80151478
 void ftPurin_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Purin_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTPURIN_SPECIALN_STATUPDATE_FLAGS);

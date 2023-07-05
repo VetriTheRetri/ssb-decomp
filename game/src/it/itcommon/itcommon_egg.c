@@ -108,7 +108,7 @@ typedef enum itEggStatus
 // 0x801815C0
 bool32 itEgg_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
@@ -168,7 +168,7 @@ void itEgg_GWait_SetStatus(GObj *item_gobj)
 // 0x8018171C
 void itEgg_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -190,7 +190,7 @@ void itEgg_FHold_SetStatus(GObj *item_gobj)
 // 0x801817A0
 bool32 itEgg_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
@@ -220,7 +220,7 @@ bool32 itEgg_FThrow_ProcMap(GObj *item_gobj)
 // 0x80181854
 void itEgg_FThrow_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_damage_all = TRUE;
 
@@ -245,7 +245,7 @@ bool32 itEgg_FDrop_ProcMap(GObj *item_gobj)
 // 0x801818E8
 void itEgg_FDrop_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_damage_all = TRUE;
 
@@ -260,7 +260,7 @@ extern intptr_t D_NF_00000B14;
 // 0x80181928
 bool32 itEgg_NExplode_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->it_multi++;
 
@@ -283,7 +283,7 @@ GObj* itCommon_Egg_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *egg_ip = itGetStruct(item_gobj);
+        itStruct *egg_ip = itGetStruct(item_gobj);
 
         egg_ip->is_unused_item_bool = TRUE;
 
@@ -295,7 +295,7 @@ GObj* itCommon_Egg_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
 
         if (flags & ITEM_MASK_SPAWN_ITEM)
         {
-            Item_Struct *spawn_ip = itGetStruct(spawn_gobj);
+            itStruct *spawn_ip = itGetStruct(spawn_gobj);
 
             if ((spawn_ip->it_kind == It_Kind_Mb_Lucky) && (rand_u16_range(2) == 0))
             {
@@ -315,7 +315,7 @@ extern intptr_t D_NF_00000098;
 // 0x80181AA8
 void itEgg_NExplode_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->it_multi = 0;
 
@@ -349,7 +349,7 @@ void itEgg_NExplode_SetStatus(GObj *item_gobj)
 // 0x80181B90
 void itEgg_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Effect_Unk *ep;
 

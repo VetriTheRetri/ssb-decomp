@@ -9,7 +9,7 @@ void ftMasterHand_Dead1_ProcUpdate(GObj *fighter_gobj)
 // 0x8015AD74
 void ftMasterHand_Dead1_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Dead1, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

@@ -66,7 +66,7 @@
 // 0x80142E70
 bool32 ftCommon_Squat_CheckGotoPass(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.squat.is_allow_pass != FALSE)
     {
@@ -107,7 +107,7 @@ void ftCommon_Squat_ProcInterrupt(GObj *fighter_gobj)
 // 0x80143024
 void ftCommon_Squat_SetStatusNoPass(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -127,7 +127,7 @@ void ftCommon_Squat_SetStatusNoPass(GObj *fighter_gobj)
 // 0x801430A8
 void ftCommon_Squat_SetStatusPass(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Squat, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -142,7 +142,7 @@ void ftCommon_Squat_SetStatusPass(GObj *fighter_gobj)
 // 0x8014310C
 bool32 ftCommon_Squat_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
@@ -170,7 +170,7 @@ void ftCommon_SquatWait_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014329C
 void ftCommon_SquatWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -182,7 +182,7 @@ void ftCommon_SquatWait_SetStatus(GObj *fighter_gobj)
 // 0x801432F0
 void ftCommon_SquatWait_SetStatusNoPass(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_SquatWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
@@ -198,7 +198,7 @@ void ftCommon_SquatWait_SetStatusNoPass(GObj *fighter_gobj)
 // 0x80143354
 bool32 ftCommon_SquatWait_CheckInterruptLanding(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y <= (FTCOMMON_SQUAT_STICK_RANGE_MIN - 2))
     {
@@ -221,7 +221,7 @@ void ftCommon_SquatRv_ProcInterrupt(GObj *fighter_gobj)
 // 0x801434CC
 void ftCommon_SquatRv_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_SquatRv, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -232,7 +232,7 @@ void ftCommon_SquatRv_SetStatus(GObj *fighter_gobj)
 // 0x8014351C
 bool32 ftCommon_SquatRv_CheckInterruptSquatWait(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->input.pl.stick_range.y >= (FTCOMMON_SQUAT_STICK_RANGE_MIN + 4))
     {

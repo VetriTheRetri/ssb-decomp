@@ -3,7 +3,7 @@
 // 0x8015A3C0
 void ftMasterHand_Yubideppou3_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->fighter_vars.masterhand.boss->wait_div == 1.5F) && (fighter_gobj->anim_frame >= 20.0F) && (fp->status_vars.masterhand.yubideppou.bullet_count != 3))
     {
@@ -18,7 +18,7 @@ void ftMasterHand_Yubideppou3_ProcUpdate(GObj *fighter_gobj)
 // 0x8015A45C
 void ftMasterHand_Yubideppou3_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->status_vars.masterhand.yubideppou.shoot_timer != 0)
@@ -52,7 +52,7 @@ void ftMasterHand_Yubideppou3_ProcPhysics(GObj *fighter_gobj)
 // 0x8015A538
 void ftMasterHand_Yubideppou3_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Yubideppou3, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

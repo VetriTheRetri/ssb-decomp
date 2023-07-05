@@ -2,7 +2,7 @@
 #include "ground.h"
 
 // 0x80141FF0
-void ftCommon_DokanStart_UpdateModelYaw(Fighter_Struct *fp)
+void ftCommon_DokanStart_UpdateModelYaw(ftStruct *fp)
 {
     if (fp->status_vars.common.dokan.turn_stop_wait != 0)
     {
@@ -17,7 +17,7 @@ void ftCommon_DokanStart_UpdateModelYaw(Fighter_Struct *fp)
 // 0x8014204C
 void ftCommon_DokanStart_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_DokanStart_UpdateModelYaw(fp);
     ftAnim_IfAnimEnd_ProcStatus(fighter_gobj, ftCommon_DokanWait_SetStatus);
@@ -26,7 +26,7 @@ void ftCommon_DokanStart_ProcUpdate(GObj *fighter_gobj)
 // 0x80142080
 void ftCommon_DokanStart_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 unused[2];
     f32 pos_x;
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
@@ -58,7 +58,7 @@ void ftCommon_DokanStart_ProcPhysics(GObj *fighter_gobj)
 // 0x80142164
 void ftCommon_DokanStart_SetStatus(GObj *fighter_gobj, s32 ground_line_id)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 new_line_id;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_DokanStart, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -95,7 +95,7 @@ void ftCommon_DokanStart_SetStatus(GObj *fighter_gobj, s32 ground_line_id)
 // 0x80142258
 bool32 ftCommon_DokanStart_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     s32 ground_line_id;
     f32 dist_x;
@@ -145,7 +145,7 @@ bool32 ftCommon_DokanStart_CheckInterruptCommon(GObj *fighter_gobj)
 // 0x801423B4
 void ftCommon_DokanWait_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.dokan.pos_adjust_wait++;
 
@@ -162,7 +162,7 @@ void ftCommon_DokanWait_ProcUpdate(GObj *fighter_gobj)
 // 0x80142424
 void ftCommon_DokanWait_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     DObjGetStruct(fighter_gobj)->translate.x = func_8000CA28(0.033333335F, fp->status_vars.common.dokan.pos_adjust_wait, fp->status_vars.common.dokan.pos_current.x, fp->status_vars.common.dokan.pos_target.x, 0.0F, 0.0F);
     DObjGetStruct(fighter_gobj)->translate.y = func_8000CA28(0.033333335F, fp->status_vars.common.dokan.pos_adjust_wait, fp->status_vars.common.dokan.pos_current.y, fp->status_vars.common.dokan.pos_target.y, 0.0F, 0.0F);
@@ -171,7 +171,7 @@ void ftCommon_DokanWait_ProcMap(GObj *fighter_gobj)
 // 0x801424BC
 void ftCommon_DokanWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 pos_target_x;
     s32 wall_line_id;
 
@@ -213,7 +213,7 @@ void ftCommon_DokanWait_SetStatus(GObj *fighter_gobj)
 // 0x801425E4
 void ftCommon_DokanEnd_UpdateModelYaw(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fighter_gobj->anim_frame >= FTCOMMON_DOKAN_EXIT_WAIT)
     {
@@ -231,7 +231,7 @@ void ftCommon_DokanEnd_UpdateModelYaw(GObj *fighter_gobj)
 // 0x80142660
 void ftCommon_DokanEnd_UpdateUnknown(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.dokan.set_unk_wait != 0)
     {
@@ -255,7 +255,7 @@ void ftCommon_DokanEnd_ProcUpdate(GObj *fighter_gobj)
 // 0x801426D0
 void ftCommon_DokanEnd_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_DokanEnd, 0.0F, 1.0F, FTSTATUPDATE_HITSTATUS_PRESERVE);
@@ -282,7 +282,7 @@ void ftCommon_DokanEnd_SetStatus(GObj *fighter_gobj)
 // 0x801427CC
 void ftCommon_DokanEndWalk_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
 

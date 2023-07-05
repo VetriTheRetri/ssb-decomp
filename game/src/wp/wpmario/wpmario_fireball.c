@@ -61,7 +61,7 @@ wpCreateDesc wpMario_Fireball_WeaponDesc =
 // 0x80168540
 bool32 wpMario_Fireball_ProcUpdate(GObj *weapon_gobj) // Animation
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     DObj *joint;
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
@@ -82,7 +82,7 @@ bool32 wpMario_Fireball_ProcUpdate(GObj *weapon_gobj) // Animation
 // 0x801685F0
 bool32 wpMario_Fireball_ProcMap(GObj *weapon_gobj) // Collision
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     Vec3f pos;
 
     func_ovl3_80167A58(weapon_gobj);
@@ -112,7 +112,7 @@ bool32 wpMario_Fireball_ProcHit(GObj *weapon_gobj) // Hit target
 // 0x801686F8
 bool32 wpMario_Fireball_ProcHop(GObj *weapon_gobj) // Hit shield at deflect angle
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
     wpMain_VelSetModelYaw(weapon_gobj);
@@ -123,8 +123,8 @@ bool32 wpMario_Fireball_ProcHop(GObj *weapon_gobj) // Hit shield at deflect angl
 // 0x80168748
 bool32 wpMario_Fireball_ProcReflector(GObj *weapon_gobj) // Hit reflector
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = wpMario_Fireball_WeaponAttributes[wp->weapon_vars.fireball.index].lifetime;
 
@@ -137,9 +137,9 @@ bool32 wpMario_Fireball_ProcReflector(GObj *weapon_gobj) // Hit reflector
 // 0x801687A0
 GObj* wpMario_Fireball_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create item
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj;
-    Weapon_Struct *wp;
+    wpStruct *wp;
     f32 angle;
 
     wpMario_Fireball_WeaponDesc.p_item = wpMario_Fireball_WeaponAttributes[index].p_item;

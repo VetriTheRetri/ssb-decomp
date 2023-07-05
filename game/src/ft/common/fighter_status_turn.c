@@ -3,7 +3,7 @@
 // 0x8013E690
 void ftCommon_Turn_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -24,7 +24,7 @@ void ftCommon_Turn_ProcUpdate(GObj *fighter_gobj)
 // Dawg what
 void ftCommon_Turn_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     bool32 unk_bool;
 
     if (fp->status_vars.common.turn.is_allow_turn_direction != FALSE)
@@ -101,7 +101,7 @@ interrupt1:
 // 0x8013E908
 void ftCommon_Turn_SetStatus(GObj *fighter_gobj, s32 lr_dash)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 
@@ -125,7 +125,7 @@ void ftCommon_Turn_SetStatusCenter(GObj *fighter_gobj)
 // 0x8013E9A8
 void ftCommon_Turn_SetStatusInvertLR(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_Turn_SetStatus(fighter_gobj, -fp->lr);
 }
@@ -133,7 +133,7 @@ void ftCommon_Turn_SetStatusInvertLR(GObj *fighter_gobj)
 // 0x8013ED90
 bool32 ftCommon_Turn_CheckInputSuccess(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.stick_range.x * fp->lr) <= FTCOMMON_TURN_STICK_RANGE_MIN)
     {

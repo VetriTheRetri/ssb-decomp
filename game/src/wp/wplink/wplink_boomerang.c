@@ -58,7 +58,7 @@ void wpLink_Boomerang_ClampAngle360(f32 *angle)
 // 0x8016CCA0
 bool32 func_ovl3_8016CCA0(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 sp30;
     f32 sp2C;
     f32 temp_f0;
@@ -93,7 +93,7 @@ bool32 func_ovl3_8016CCA0(GObj *weapon_gobj)
 // 0x8016CDC8
 void wpLink_Boomerang_SetReturnVars(GObj *weapon_gobj, bool32 angle_max_or_min)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     wp->weapon_vars.boomerang.flags |= WPLINK_BOOMERANG_MASK_RETURN;
 
@@ -117,7 +117,7 @@ void wpLink_Boomerang_SetReturnVars(GObj *weapon_gobj, bool32 angle_max_or_min)
 }
 
 // 0x8016CE90
-f32 wpLink_Boomerang_AddVelSqrt(Weapon_Struct *wp, f32 vel_add)
+f32 wpLink_Boomerang_AddVelSqrt(wpStruct *wp, f32 vel_add)
 {
     f32 sqrt_vel = sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y)) + vel_add;
 
@@ -129,7 +129,7 @@ f32 wpLink_Boomerang_AddVelSqrt(Weapon_Struct *wp, f32 vel_add)
 }
 
 // 0x8016CEEC
-f32 wpLink_Boomerang_SubVelSqrt(Weapon_Struct *wp, f32 vel_sub)
+f32 wpLink_Boomerang_SubVelSqrt(wpStruct *wp, f32 vel_sub)
 {
     f32 sqrt_vel = sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y)) - vel_sub;
 
@@ -141,7 +141,7 @@ f32 wpLink_Boomerang_SubVelSqrt(Weapon_Struct *wp, f32 vel_sub)
 }
 
 // 0x8016CF48
-void wpLink_Boomerang_UpdateVelLR(Weapon_Struct *wp, f32 vel_mul)
+void wpLink_Boomerang_UpdateVelLR(wpStruct *wp, f32 vel_mul)
 {
     sqrtf(SQUARE(wp->phys_info.vel_air.x) + SQUARE(wp->phys_info.vel_air.y)); // Can we talk about how this doesn't do anything
 
@@ -175,7 +175,7 @@ void wpLink_Boomerang_ClampAngleForward(f32 *angle)
 // 0x8016D0E4
 f32 wpLink_Boomerang_GetDistUpdateAngle(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 unused;
     f32 dist_x;
     f32 dist_y;
@@ -251,11 +251,11 @@ f32 wpLink_Boomerang_GetDistUpdateAngle(GObj *weapon_gobj)
 }
 
 // 0x8016D31C
-void wpLink_Boomerang_ClearObjectReference(Weapon_Struct *wp)
+void wpLink_Boomerang_ClearObjectReference(wpStruct *wp)
 {
     if (wp->weapon_vars.boomerang.spawn_gobj != NULL)
     {
-        Fighter_Struct *fp = ftGetStruct(wp->weapon_vars.boomerang.spawn_gobj);
+        ftStruct *fp = ftGetStruct(wp->weapon_vars.boomerang.spawn_gobj);
 
         if ((fp->ft_kind == Ft_Kind_Kirby) || (fp->ft_kind == Ft_Kind_PolyKirby))
         {
@@ -270,13 +270,13 @@ void wpLink_Boomerang_ClearObjectReference(Weapon_Struct *wp)
 // 0x8016D35C
 void wpLink_Boomerang_CheckReturnOwner(GObj *weapon_gobj, f32 distance)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if ((wp->weapon_vars.boomerang.flags & WPLINK_BOOMERANG_MASK_RETURN) && (distance < 180.0F))
     {
         if (wp->weapon_vars.boomerang.spawn_gobj != NULL)
         {
-            Fighter_Struct *fp = ftGetStruct(wp->weapon_vars.boomerang.spawn_gobj);
+            ftStruct *fp = ftGetStruct(wp->weapon_vars.boomerang.spawn_gobj);
 
             if (fp->x192_flag_b0)
             {
@@ -293,7 +293,7 @@ void wpLink_Boomerang_CheckReturnOwner(GObj *weapon_gobj, f32 distance)
 }
 
 // 0x8016D40C
-bool32 wpLink_Boomerang_CheckBound(Weapon_Struct *wp, Vec3f *coll_angle)
+bool32 wpLink_Boomerang_CheckBound(wpStruct *wp, Vec3f *coll_angle)
 {
     f32 angle = func_ovl0_800C7C0C(&wp->phys_info.vel, coll_angle);
 
@@ -323,7 +323,7 @@ bool32 wpLink_Boomerang_ProcDead(GObj *weapon_gobj)
 // 0x8016D4DC
 bool32 wpLink_Boomerang_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if ((wpMain_DecLifeCheckExpire(wp) != FALSE) || (func_ovl3_8016CCA0(weapon_gobj) == TRUE))
     {
@@ -364,7 +364,7 @@ bool32 wpLink_Boomerang_ProcUpdate(GObj *weapon_gobj)
 // 0x8016D5EC
 bool32 wpLink_Boomerang_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     bool32 is_collide = FALSE;
     u16 coll_flags;
 
@@ -406,7 +406,7 @@ bool32 wpLink_Boomerang_ProcMap(GObj *weapon_gobj)
 // 0x8016D714
 bool32 wpLink_Boomerang_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)) && (wp->hit_normal_damage != 0))
     {
@@ -419,7 +419,7 @@ bool32 wpLink_Boomerang_ProcHit(GObj *weapon_gobj)
 // 0x8016D77C
 bool32 wpLink_Boomerang_ProcSetOff(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
     {
@@ -431,7 +431,7 @@ bool32 wpLink_Boomerang_ProcSetOff(GObj *weapon_gobj)
 // 0x8016D7B4
 bool32 wpLink_Boomerang_ProcShield(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (!(wp->weapon_vars.boomerang.flags & (WPLINK_BOOMERANG_MASK_REFLECT | WPLINK_BOOMERANG_MASK_RETURN)))
     {
@@ -443,7 +443,7 @@ bool32 wpLink_Boomerang_ProcShield(GObj *weapon_gobj)
 // 0x8016D7EC
 bool32 wpLink_Boomerang_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->shield_collide_vec.z > 0.0F)
     {
@@ -459,7 +459,7 @@ bool32 wpLink_Boomerang_ProcHop(GObj *weapon_gobj)
 // 0x8016D868
 bool32 wpLink_Boomerang_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     f32 dist_x, dist_y;
 
@@ -482,7 +482,7 @@ bool32 wpLink_Boomerang_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x8016D914
-f32 wpLink_Boomerang_GetAngleSetVel(Vec3f *vel, Fighter_Struct *fp, s32 lr, f32 vel_mul)
+f32 wpLink_Boomerang_GetAngleSetVel(Vec3f *vel, ftStruct *fp, s32 lr, f32 vel_mul)
 {
     f32 angle;
 
@@ -527,9 +527,9 @@ f32 wpLink_Boomerang_GetAngleSetVel(Vec3f *vel, Fighter_Struct *fp, s32 lr, f32 
 // 0x8016DA78
 GObj* wpLink_Boomerang_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj;
-    Weapon_Struct *wp;
+    wpStruct *wp;
     Vec3f offset;
     s32 unused;
 

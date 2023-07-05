@@ -14,7 +14,7 @@ void ftMasterHand_Okupunch2_ProcUpdate(GObj *fighter_gobj)
 // 0x8015A890
 void ftMasterHand_Okupunch2_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     f32 dist_x;
 
     func_ovl2_800D938C(fighter_gobj);
@@ -39,7 +39,7 @@ void ftMasterHand_Okupunch2_ProcPhysics(GObj *fighter_gobj)
 // 0x8015A950
 void ftMasterHand_Okupunch2_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate;
     Vec3f sp34;
     Vec3f sp28;

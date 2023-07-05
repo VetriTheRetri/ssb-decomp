@@ -106,7 +106,7 @@ void itHairsen_SDefault_SetScale(GObj *item_gobj, f32 scale)
 // 0x80175160
 bool32 itHarisen_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITHARISEN_GRAVITY, ITHARISEN_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -142,7 +142,7 @@ void itHarisen_GWait_SetStatus(GObj *item_gobj)
 // 0x80175228
 void itHarisen_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -165,7 +165,7 @@ void itHarisen_FHold_SetStatus(GObj *item_gobj)
 // 0x801752C0
 bool32 itHarisen_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITHARISEN_GRAVITY, ITHARISEN_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -182,7 +182,7 @@ bool32 itHarisen_FThrow_ProcMap(GObj *item_gobj)
 // 0x80175328
 bool32 itHarisen_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -217,7 +217,7 @@ extern intptr_t D_NF_00002198;
 
 void func_ovl3_80175408(GObj *item_gobj, s32 index) // Unused
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     func_8000BD8C(item_gobj, ((D_ovl3_80189A70[index] + (uintptr_t)ip->attributes->unk_0x0) - (intptr_t)&D_NF_00002198), 0.0F); // Linker thing
     func_8000DF34(item_gobj);
@@ -230,7 +230,7 @@ GObj* itCommon_Harisen_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
         DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
 

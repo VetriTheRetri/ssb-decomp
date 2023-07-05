@@ -3,7 +3,7 @@
 // 0x801564F0
 void ftMario_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag3 != FALSE)
     {
@@ -26,7 +26,7 @@ void ftMario_SpecialLw_ProcUpdate(GObj *fighter_gobj)
 // 0x801565A8
 void ftMario_SpecialAirLw_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag2 != FALSE)
     {
@@ -37,7 +37,7 @@ void ftMario_SpecialAirLw_ProcUpdate(GObj *fighter_gobj)
 }
 
 // 0x801565E4
-f32 ftMario_SpecialLw_UpdateFriction(Fighter_Struct *fp, f32 vel)
+f32 ftMario_SpecialLw_UpdateFriction(ftStruct *fp, f32 vel)
 {
     if (fp->command_vars.flags.flag1 != FALSE)
     {
@@ -56,7 +56,7 @@ f32 ftMario_SpecialLw_UpdateFriction(Fighter_Struct *fp, f32 vel)
 // 0x80156630
 void ftMario_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D89E0(fp, 0, 0.025F, ftMario_SpecialLw_UpdateFriction(fp, 17.0F));
     func_ovl2_800D87D0(fighter_gobj);
@@ -72,7 +72,7 @@ void ftMario_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 // 0x801566C4
 void ftMario_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if ((fp->fighter_vars.mario.is_expend_tornado == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.pl.button_tap & fp->input.button_mask_b))
@@ -98,7 +98,7 @@ void ftMario_SpecialAirLw_ProcMap(GObj *fighter_gobj)
 // 0x801567A4
 void ftMario_SpecialAirLw_SetDisableRise(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag3 = FALSE;
 }
@@ -106,7 +106,7 @@ void ftMario_SpecialAirLw_SetDisableRise(GObj *fighter_gobj)
 // 0x801567B0
 void ftMario_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
     ftMap_SetGround(fp);
@@ -117,7 +117,7 @@ void ftMario_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80156808
 void ftMario_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
     ftMap_SetAir(fp);
@@ -129,7 +129,7 @@ void ftMario_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
 // 0x8015686C
 void ftMario_SpecialLw_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = FALSE;
     fp->command_vars.flags.flag2 = FALSE;
@@ -141,7 +141,7 @@ void ftMario_SpecialLw_InitStatusVars(GObj *fighter_gobj)
 // 0x8015688C
 void ftMario_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
     ftMap_SetAir(fp);
@@ -159,7 +159,7 @@ void ftMario_SpecialLw_SetStatus(GObj *fighter_gobj)
 // 0x80156910
 void ftMario_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 tornado_vel_y;
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);

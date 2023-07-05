@@ -4,7 +4,7 @@
 // 0x8014A0C0
 void ftCommon_Throw_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -48,10 +48,10 @@ void ftCommon_Throw_ProcUpdate(GObj *fighter_gobj)
 // 0x8014A1E8
 void ftCommon_Throw_SetStatus(GObj *fighter_gobj, bool32 is_throwf)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     s32 status_id;
     GObj *catch_gobj;
-    Fighter_Struct *catch_fp;
+    ftStruct *catch_fp;
     ftThrownStatus *thrown_status;
 
     catch_gobj = this_fp->catch_gobj;
@@ -106,7 +106,7 @@ void ftCommon_Throw_SetStatus(GObj *fighter_gobj, bool32 is_throwf)
 // 0x8014A394
 bool32 ftCommon_Throw_CheckInterruptCatchWait(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     bool32 is_throwf = FALSE;
 
     if ((fp->status_vars.common.catchwait.throw_wait == 0) || (fp->input.pl.button_tap & (fp->input.button_mask_a | fp->input.button_mask_b)))
@@ -136,7 +136,7 @@ void ftKirby_ThrowF_ProcUpdate(GObj *fighter_gobj)
 // 0x8014A454
 void ftKirby_ThrowF_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((func_ovl2_800DE6B0(fighter_gobj) != FALSE) && (fp->phys_info.vel_air.y < 0.0F))
     {
@@ -147,9 +147,9 @@ void ftKirby_ThrowF_ProcMap(GObj *fighter_gobj)
 // 0x8014A4A8
 void ftKirby_ThrowFFall_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     GObj *catch_gobj = this_fp->catch_gobj;
-    Fighter_Struct *catch_fp = ftGetStruct(catch_gobj);
+    ftStruct *catch_fp = ftGetStruct(catch_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFFall, 0.0F, 1.0F, FTSTATUPDATE_TEXTUREPART_PRESERVE);
 
@@ -159,7 +159,7 @@ void ftKirby_ThrowFFall_SetStatus(GObj *fighter_gobj)
 // 0x8014A4F8
 void ftKirby_ThrowFLanding_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -171,7 +171,7 @@ void ftKirby_ThrowFLanding_ProcPhysics(GObj *fighter_gobj)
 // 0x8014A538
 void ftKirby_ThrowFLanding_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -186,7 +186,7 @@ void ftKirby_ThrowFLanding_ProcMap(GObj *fighter_gobj)
 // 0x8014A5AC
 void ftKirby_ThrowFLanding_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_ThrowFLanding, 0.0F, 1.0F, FTSTATUPDATE_TEXTUREPART_PRESERVE);

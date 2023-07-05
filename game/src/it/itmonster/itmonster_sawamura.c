@@ -4,7 +4,7 @@
 
 bool32 jtgt_ovl3_80182630(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
 
@@ -13,7 +13,7 @@ bool32 jtgt_ovl3_80182630(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80182660(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -33,7 +33,7 @@ void func_ovl3_801826A8(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801826D0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -58,7 +58,7 @@ void func_ovl3_8018273C(GObj *item_gobj)
 
 bool32 func_ovl3_80182764(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
@@ -82,8 +82,8 @@ bool32 func_ovl3_80182764(GObj *item_gobj)
 
 void func_ovl3_8018285C(GObj *item_gobj, GObj *fighter_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     DObj *aj = DObjGetStruct(item_gobj);
     DObj *fj = DObjGetStruct(fighter_gobj);
     s32 unused;
@@ -116,7 +116,7 @@ extern intptr_t D_NF_00012340;
 void func_ovl3_80182958(GObj *item_gobj)
 {
     GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     GObj *victim_gobj;
     s32 unused2[3];
     DObj *joint = DObjGetStruct(item_gobj);
@@ -130,7 +130,7 @@ void func_ovl3_80182958(GObj *item_gobj)
     {
         do
         {
-            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+            ftStruct *fp = ftGetStruct(fighter_gobj);
 
             if ((fighter_gobj != ap->owner_gobj) && (fp->team != ap->team))
             {
@@ -178,7 +178,7 @@ void func_ovl3_80182AAC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80182AE0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -195,7 +195,7 @@ bool32 jtgt_ovl3_80182AE0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80182B34(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -214,7 +214,7 @@ GObj* jtgt_ovl3_80182B74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 

@@ -5,7 +5,7 @@
 // 0x801536C0
 void ftKirby_CopyPikachu_SpecialN_ProcAccessory(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
 
@@ -46,7 +46,7 @@ void ftKirby_CopyPikachu_SpecialAirN_ProcMap(GObj *fighter_gobj)
 // 0x80153800
 void ftKirby_CopyPikachu_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyPikachu_SpecialN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYPIKACHU_SPECIALN_STATUPDATE_FLAGS);
@@ -57,7 +57,7 @@ void ftKirby_CopyPikachu_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80153854
 void ftKirby_CopyPikachu_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyPikachu_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTKIRBY_COPYPIKACHU_SPECIALN_STATUPDATE_FLAGS);
@@ -69,7 +69,7 @@ void ftKirby_CopyPikachu_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 // 0x801538B0
 void ftKirby_CopyPikachu_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
 

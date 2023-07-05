@@ -3,7 +3,7 @@
 
 void func_ovl2_800D78E8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 i;
 
     if (fp->is_playing_effect)
@@ -30,7 +30,7 @@ void func_ovl2_800D78E8(GObj *fighter_gobj)
 
 void func_ovl2_800D7994(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     switch (fp->ft_kind)
     {
@@ -52,7 +52,7 @@ extern void *D_ovl2_80131074; // Pointer to fighter files?
 
 void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     f32 scale;
 
@@ -61,7 +61,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        gMatchData->player_block[fp->player].stock_damage_all = fp->percent_damage;
+        gpMatchData->player_block[fp->player].stock_damage_all = fp->percent_damage;
     }
     fp->shield_health = (fp->ft_kind == Ft_Kind_Yoshi) ? 55 : 55;
 
@@ -314,7 +314,7 @@ extern u16 D_ovl2_80131398;
 
 GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     GObj *fighter_gobj;
     s32 i;
     UnkDObjData *dobj_unk;
@@ -343,16 +343,16 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        gMatchData->player_block[fp->player].stock_count = spawn->stock_count;
+        gpMatchData->player_block[fp->player].stock_count = spawn->stock_count;
     }
     fp->lod_current = fp->lod_match = spawn->model_lod;
 
-    fp->costume_id = spawn->costume_id;
-    fp->shade_id = spawn->shade_id;
+    fp->costume = spawn->costume;
+    fp->shade = spawn->shade;
 
-    fp->shade.r = (attributes->shade_color[fp->shade_id - 1].r * attributes->shade_color[fp->shade_id - 1].a) / 255;
-    fp->shade.g = (attributes->shade_color[fp->shade_id - 1].g * attributes->shade_color[fp->shade_id - 1].a) / 255;
-    fp->shade.b = (attributes->shade_color[fp->shade_id - 1].b * attributes->shade_color[fp->shade_id - 1].a) / 255;
+    fp->shade.r = (attributes->shade_color[fp->shade - 1].r * attributes->shade_color[fp->shade - 1].a) / 255;
+    fp->shade.g = (attributes->shade_color[fp->shade - 1].g * attributes->shade_color[fp->shade - 1].a) / 255;
+    fp->shade.b = (attributes->shade_color[fp->shade - 1].b * attributes->shade_color[fp->shade - 1].a) / 255;
 
     fp->handicap = spawn->handicap;
     fp->cp_level = spawn->cp_level;
@@ -405,7 +405,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
     func_ovl0_800C89BC(topn_joint, 0x4B, 0, 0);
     fp->joint[ftParts_TopN_Joint]->om_mtx[0]->unk05 = spawn->unk_rebirth_0x1D;
 
-    func_ovl0_800C8DB4(fighter_gobj->obj, attributes->dobj_desc_container, fp->lod_current, &fp->joint[4], attributes->unk_ftca_0x29C, 0x4B, 0, 0, fp->costume_id, fp->unk_ft_0x149);
+    func_ovl0_800C8DB4(fighter_gobj->obj, attributes->dobj_desc_container, fp->lod_current, &fp->joint[4], attributes->unk_ftca_0x29C, 0x4B, 0, 0, fp->costume, fp->unk_ft_0x149);
 
     for (i = 0; i < ARRAY_COUNT(fp->joint); i++)
     {
@@ -417,7 +417,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
             dobj_unk->unk_0xC = attributes->dobj_desc_container->dobj_desc_array[fp->lod_current - 1].unk_dobjcontain_0xC;
             dobj_unk->unk_0xD = i;
 
-            if (fp->costume_id != 0)
+            if (fp->costume != 0)
             {
                 if ((attributes->unk_0x32C != NULL) && (i == attributes->unk_0x32C->joint_index))
                 {
@@ -426,7 +426,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
                     dobj_unk->unk_gobj = func_80009968(0x3E9U, NULL, 0xDU, 0x80000000U);
 
                     func_800092D0(dobj_unk->unk_gobj, unk_ft_dobj->unk_ftdobj_0x4);
-                    func_ovl0_800C8CB8(dobj_unk->unk_gobj->obj, unk_ft_dobj->unk_ftdobj_0x8, unk_ft_dobj->unk_ftdobj_0xC, 0, fp->costume_id);
+                    func_ovl0_800C8CB8(dobj_unk->unk_gobj->obj, unk_ft_dobj->unk_ftdobj_0x8, unk_ft_dobj->unk_ftdobj_0xC, 0, fp->costume);
                 }
             }
         }

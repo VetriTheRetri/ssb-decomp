@@ -4,7 +4,7 @@
 
 bool32 func_ovl3_8017D590(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if ((ap->item_vars.bumper.hit_anim_length == 0) && (joint->mobj->anim_frame == 1.0F))
@@ -31,7 +31,7 @@ bool32 func_ovl3_8017D590(GObj *item_gobj)
 
 bool32 func_ovl3_8017D63C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->scale.x = 2.0F;
@@ -54,7 +54,7 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap;
+        itStruct *ap;
         DObj *joint;
 
         itMain_ClearOwnerStats(item_gobj);
@@ -73,7 +73,7 @@ GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->mobj->anim_frame = 0;
 
-        if (gMatchData->gr_kind == Gr_Kind_Castle)
+        if (gpMatchData->gr_kind == Gr_Kind_Castle)
         {
             ap->item_hit.knockback_weight = ITBUMPER_CASTLE_KNOCKBACK;
             ap->item_hit.angle = ITBUMPER_CASTLE_ANGLE;

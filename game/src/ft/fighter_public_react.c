@@ -22,7 +22,7 @@ static u16 D_ovl3_8018CFE8;
 
 bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     GObj *fighter_gobj = ftCommon_GetPlayerNumGObj(player_id);
     u16 sfx_id;
 
@@ -178,7 +178,7 @@ void func_ovl3_80164DE4(f32 arg0, s32 arg1, f32 knockback, s32 arg3)
 
 void func_ovl3_80164F2C(GObj *fighter_gobj, f32 knockback, bool32 arg2)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (knockback >= 100.0F) // Check if knockback is over 100 units
     {
@@ -188,7 +188,7 @@ void func_ovl3_80164F2C(GObj *fighter_gobj, f32 knockback, bool32 arg2)
 
 void func_ovl3_80164F70(GObj *fighter_gobj, f32 knockback)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftPublicReact_Player_Number == fp->player_number)
     {
@@ -212,7 +212,7 @@ static f32 D_ovl2_8013132C; // Extern
 
 void func_ovl3_80165024(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     f32 pos_y = fp->joint[ftParts_TopN_Joint]->translate.y;
 
@@ -266,9 +266,9 @@ void func_ovl3_80165134(s32 arg0)
     {
         do
         {
-            Fighter_Struct *fp = ftGetStruct(gobj);
+            ftStruct *fp = ftGetStruct(gobj);
 
-            if (!(gMatchData->match_rules & GMMATCH_GAMERULE_STOCK) || (fp->stock_count != -1))
+            if (!(gpMatchData->match_rules & GMMATCH_GAMERULE_STOCK) || (fp->stock_count != -1))
             {
                 if (DObjGetStruct(gobj)->translate.y < (D_ovl2_80131308.unk_80131308_0x24 - 100.0F)) // 0x80131308 = stage data?
                 {

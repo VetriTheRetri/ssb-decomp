@@ -14,7 +14,7 @@
 
 void func_ovl3_8017FDC0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->item_vars.spear.spear_spawn_wait <= 0)
@@ -52,7 +52,7 @@ extern intptr_t D_NF_0000E12C;
 
 void func_ovl3_8017FEB8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     ap->it_multi = 0;
@@ -84,7 +84,7 @@ void func_ovl3_8017FF74(GObj *item_gobj)
 
 bool32 func_ovl3_8017FFA8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITSPEAR_GRAVITY, ITSPEAR_T_VEL);
@@ -128,7 +128,7 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
 
 void func_ovl3_8018010C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->phys_info.vel_air.y = ITSPEAR_SWARM_CALL_VEL_Y;
 
@@ -144,7 +144,7 @@ void func_ovl3_8018010C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80180194(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -157,7 +157,7 @@ bool32 jtgt_ovl3_80180194(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801801D8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -173,7 +173,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Spear_Data, pos, vel, flags);
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {
@@ -213,7 +213,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_80180354(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj);
 
     if ((ip->lr == RIGHT) && ((Ground_Info->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
@@ -250,11 +250,11 @@ extern wpCreateDesc Item_Pippi_Swarm_Data;
 
 GObj *func_ovl3_801804A4(GObj *item_gobj, Vec3f *pos, s32 it_kind)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
     s32 unused;
-    Weapon_Struct *ip;
+    wpStruct *ip;
 
     if (weapon_gobj == NULL)
     {

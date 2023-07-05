@@ -13,7 +13,7 @@ extern itStatusDesc Article_POW_Status[];
 
 void func_ovl3_8017C0D4(GObj *item_gobj)
 {
-    Item_Struct *ap;
+    itStruct *ap;
 
     itMain_SetItemStatus(item_gobj, Article_POW_Status, 0);
 
@@ -36,7 +36,7 @@ extern intptr_t D_NF_00001288;
 
 bool32 func_ovl3_8017C15C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->proc_update = func_ovl3_8017C110;
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
@@ -58,7 +58,7 @@ GObj* jtgt_ovl3_8017C1E0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->item_hurt.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
     }

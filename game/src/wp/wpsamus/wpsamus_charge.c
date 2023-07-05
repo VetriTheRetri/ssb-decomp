@@ -133,7 +133,7 @@ wpCreateDesc wpSamus_ChargeShot_WeaponDesc =
 // 0x80168B00
 void wpSamus_ChargeShot_LaunchSetVars(GObj *weapon_gobj) // Set Charge Shot's attributes upon firing
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 coll_size;
 
     wp->phys_info.vel_air.x = wpSamus_ChargeShot_WeaponAttributes[wp->weapon_vars.charge_shot.charge_size].vel_x * wp->lr;
@@ -158,11 +158,11 @@ void wpSamus_ChargeShot_LaunchSetVars(GObj *weapon_gobj) // Set Charge Shot's at
 // 0x80168BDC
 bool32 wpSamus_ChargeShot_ProcDead(GObj *weapon_gobj) // Clear GObj pointers
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->weapon_vars.charge_shot.owner_gobj != NULL) // Always NULL though?
     {
-        Fighter_Struct *fp = ftGetStruct(wp->weapon_vars.charge_shot.owner_gobj);
+        ftStruct *fp = ftGetStruct(wp->weapon_vars.charge_shot.owner_gobj);
 
         fp->status_vars.samus.specialn.charge_gobj = NULL; // This would quite problematic if Samus and Kirby's SpecialN statevar structs deviated...
     }
@@ -172,7 +172,7 @@ bool32 wpSamus_ChargeShot_ProcDead(GObj *weapon_gobj) // Clear GObj pointers
 // 0x80168BFC
 bool32 wpSamus_ChargeShot_ProcUpdate(GObj *weapon_gobj) // Animation
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 scale;
 
     if (wp->weapon_vars.charge_shot.is_release == FALSE)
@@ -201,7 +201,7 @@ bool32 wpSamus_ChargeShot_ProcUpdate(GObj *weapon_gobj) // Animation
 // 0x80168CC4
 bool32 wpSamus_ChargeShot_ProcMap(GObj *weapon_gobj) // Collision 
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->weapon_vars.charge_shot.is_release != FALSE)
     {
@@ -220,7 +220,7 @@ bool32 wpSamus_ChargeShot_ProcMap(GObj *weapon_gobj) // Collision
 // 0x80168D24
 bool32 wpSamus_ChargeShot_ProcHit(GObj *weapon_gobj) // Hit target
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_ovl2_800FE068(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage);
 
@@ -230,7 +230,7 @@ bool32 wpSamus_ChargeShot_ProcHit(GObj *weapon_gobj) // Hit target
 // 0x80168D54
 bool32 wpSamus_ChargeShot_ProcHop(GObj *weapon_gobj) // Hit shield at deflect angle
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
     wpMain_VelSetLR(weapon_gobj);
@@ -241,8 +241,8 @@ bool32 wpSamus_ChargeShot_ProcHop(GObj *weapon_gobj) // Hit shield at deflect an
 // 0x80168DA4
 bool32 wpSamus_ChargeShot_ProcReflector(GObj *weapon_gobj) // Hit reflector
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wpMain_ReflectorInvertLR(wp, fp);
     wpMain_VelSetLR(weapon_gobj);
@@ -253,9 +253,9 @@ bool32 wpSamus_ChargeShot_ProcReflector(GObj *weapon_gobj) // Hit reflector
 // 0x80168DDC
 GObj* wpSamus_ChargeShot_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 charge_level, bool32 is_release) // Create item
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpSamus_ChargeShot_WeaponDesc, pos, ((is_release != FALSE) ? (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER) : WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
     f32 scale;
 
     if (weapon_gobj == NULL)

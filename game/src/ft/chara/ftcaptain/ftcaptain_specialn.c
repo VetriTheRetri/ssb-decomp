@@ -3,7 +3,7 @@
 // 0x8015F7F0
 void ftCaptain_SpecialN_UpdateGFX(GObj *fighter_gobj) // Falcon Punch
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fp->is_playing_effect))
     {
@@ -60,7 +60,7 @@ void ftCaptain_SpecialN_ProcPhysics(GObj *fighter_gobj)
 // 0x8015F914
 void ftCaptain_SpecialAirN_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 unused;
     f32 boost;
 
@@ -97,7 +97,7 @@ void ftCaptain_SpecialAirN_ProcPhysics(GObj *fighter_gobj)
 // 0x8015FA2C
 void ftCaptain_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
@@ -109,7 +109,7 @@ void ftCaptain_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x8015FA8C
 void ftCaptain_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
@@ -134,7 +134,7 @@ void ftCaptain_SpecialAirN_ProcMap(GObj *fighter_gobj)
 // 0x8015FB40
 void ftCaptain_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;
@@ -149,7 +149,7 @@ void func_ovl3_8015FB54() // Unused???
 // 0x8015FB5C
 void ftCaptain_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -162,7 +162,7 @@ void ftCaptain_SpecialN_SetStatus(GObj *fighter_gobj)
 // 0x8015FBC0
 void ftCaptain_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialAirN, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);

@@ -3,7 +3,7 @@
 // 0x80159F40
 void ftMasterHand_Tsutsuku2_ProcPhysi(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f translate;
     Vec3f vel;
     f32 magnitude;
@@ -43,7 +43,7 @@ void ftMasterHand_Tsutsuku2_ProcPhysi(GObj *fighter_gobj)
 // 0x8015A070
 void ftMasterHand_Tsutsuku2_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Tsutsuku2, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

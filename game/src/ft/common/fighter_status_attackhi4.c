@@ -9,7 +9,7 @@ void ftCommon_AttackHi4_SetStatus(GObj *fighter_gobj)
 }
 
 // 0x80150628
-bool32 ftCommon_AttackHi4_CheckInputSuccess(Fighter_Struct *fp)
+bool32 ftCommon_AttackHi4_CheckInputSuccess(ftStruct *fp)
 {
     if ((fp->input.pl.stick_range.y >= FTCOMMON_ATTACKHI4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -19,7 +19,7 @@ bool32 ftCommon_AttackHi4_CheckInputSuccess(Fighter_Struct *fp)
 }
 
 // 0x80150660
-bool32 ftCommon_AttackHi4_CheckInterruptCommon(Fighter_Struct *fp)
+bool32 ftCommon_AttackHi4_CheckInterruptCommon(ftStruct *fp)
 {
     ftCommonAttributes *attributes = fp->attributes;
 
@@ -41,7 +41,7 @@ bool32 ftCommon_AttackHi4_CheckInterruptCommon(Fighter_Struct *fp)
 // 0x801506CC
 bool32 ftCommon_AttackHi4_CheckInterruptKneeBend(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE)
     {
@@ -53,7 +53,7 @@ bool32 ftCommon_AttackHi4_CheckInterruptKneeBend(GObj *fighter_gobj)
 // 0x8015070C
 bool32 ftCommon_AttackHi4_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE) && (fp->tap_stick_y < FTCOMMON_ATTACKHI4_BUFFER_FRAMES_MAX))
     {

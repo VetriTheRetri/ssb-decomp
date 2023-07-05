@@ -9,7 +9,7 @@ void ftMasterHand_Drill_ProcUpdate(GObj *fighter_gobj)
 // 0x8015A0E4
 void ftMasterHand_Drill_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
@@ -27,7 +27,7 @@ void ftMasterHand_Drill_ProcPhysics(GObj *fighter_gobj)
 // 0x8015A138
 void ftMasterHand_Drill_ProcPhysicsFollow(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     f32 dist_x;
 
     jtgt_ovl2_800D9414(fighter_gobj);
@@ -56,7 +56,7 @@ void ftMasterHand_Drill_ProcPhysicsFollow(GObj *fighter_gobj)
 // 0x8015A204
 void ftMasterHand_Drill_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate = &DObjGetStruct(fighter_gobj)->translate;
 
     if (translate->x > fp->status_vars.masterhand.drill.edgeright_pos_x)
@@ -73,7 +73,7 @@ void ftMasterHand_Drill_ProcMap(GObj *fighter_gobj)
 // 0x8015A268
 void ftMasterHand_Drill_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Drill, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

@@ -1,7 +1,7 @@
 #include "ftyoshi.h"
 
 // 0x8015E310
-void ftYoshi_SpecialN_InitCatchVars(Fighter_Struct *fp, void (*proc_catch)(GObj*))
+void ftYoshi_SpecialN_InitCatchVars(ftStruct *fp, void (*proc_catch)(GObj*))
 {
     ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALNYOSHI, proc_catch, ftCommon_CaptureYoshi_ProcCapture);
 }
@@ -9,7 +9,7 @@ void ftYoshi_SpecialN_InitCatchVars(Fighter_Struct *fp, void (*proc_catch)(GObj*
 // 0x8015E33C
 void ftYoshi_SpecialNCatch_UpdateProcStatus(GObj *fighter_gobj, void (*proc_status)(GObj*))
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (((fp->command_vars.flags.flag1 != 0) && (fp->catch_gobj != NULL)) || (fighter_gobj->anim_frame <= 0.0F))
     {
@@ -32,13 +32,13 @@ void ftYoshi_SpecialAirNCatch_ProcUpdate(GObj *fighter_gobj)
 }
 
 // 0x8015E3D8
-void ftYoshi_SpecialNCatch_UpdateCaptureVars(Fighter_Struct *fp)
+void ftYoshi_SpecialNCatch_UpdateCaptureVars(ftStruct *fp)
 {
     if (fp->command_vars.flags.flag2 != 0)
     {
         if (fp->catch_gobj != NULL)
         {
-            Fighter_Struct *catch_fp = ftGetStruct(fp->catch_gobj);
+            ftStruct *catch_fp = ftGetStruct(fp->catch_gobj);
 
             catch_fp->status_vars.common.captureyoshi.stage = 1;
 
@@ -49,7 +49,7 @@ void ftYoshi_SpecialNCatch_UpdateCaptureVars(Fighter_Struct *fp)
     {
         if (fp->catch_gobj != NULL)
         {
-            Fighter_Struct *catch_fp = ftGetStruct(fp->catch_gobj);
+            ftStruct *catch_fp = ftGetStruct(fp->catch_gobj);
 
             catch_fp->status_vars.common.captureyoshi.stage = 3;
 
@@ -115,7 +115,7 @@ void ftYoshi_SpecialAirNRelease_ProcMap(GObj *fighter_gobj)
 // 0x8015E57C
 void ftYoshi_SpecialN_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 }
@@ -123,7 +123,7 @@ void ftYoshi_SpecialN_ProcStatus(GObj *fighter_gobj)
 // 0x8015E588
 void ftYoshi_SpecialAirN_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;
@@ -132,7 +132,7 @@ void ftYoshi_SpecialAirN_ProcStatus(GObj *fighter_gobj)
 // 0x8015E598
 void ftYoshi_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_HIT_PRESERVE));
@@ -142,7 +142,7 @@ void ftYoshi_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x8015E5EC
 void ftYoshi_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Yoshi_SpecialAirN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_MODELPART_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_HIT_PRESERVE));
@@ -180,7 +180,7 @@ void ftYoshi_SpecialNRelease_SwitchStatusAir(GObj *fighter_gobj)
 // 0x8015E740
 void ftYoshi_SpecialN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftYoshi_SpecialN_ProcStatus;
 
@@ -192,7 +192,7 @@ void ftYoshi_SpecialN_SetStatus(GObj *fighter_gobj)
 // 0x8015E
 void ftYoshi_SpecialAirN_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftYoshi_SpecialAirN_ProcStatus;
 
@@ -204,7 +204,7 @@ void ftYoshi_SpecialAirN_SetStatus(GObj *fighter_gobj)
 // 0x8015E7F8
 void ftYoshi_SpecialNCatch_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL); // Store grab vulnerability flags?
     func_ovl2_800D9444(fighter_gobj);
@@ -231,7 +231,7 @@ void ftYoshi_SpecialAirNCatch_ProcCatch(GObj *fighter_gobj)
 // 0x8015E8C4
 void ftYoshi_SpecialNRelease_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
     fp->command_vars.flags.flag2 = 0;

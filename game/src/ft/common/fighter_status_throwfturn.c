@@ -9,7 +9,7 @@
 // 0x8014D740
 void ftDonkey_ThrowFTurn_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -34,7 +34,7 @@ void ftDonkey_ThrowFTurn_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014D7D0
 void ftDonkey_ThrowFTurn_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag1 = 0;
 

@@ -3,7 +3,7 @@
 // 0x80160BB0
 void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -85,7 +85,7 @@ void ftKirby_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 // 0x80160D40
 void ftKirby_SpecialHiLanding_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     if (fp->command_vars.flags.flag0 != 0)
@@ -110,7 +110,7 @@ void ftKirby_SpecialHiLanding_ProcUpdate(GObj *fighter_gobj)
 // 0x80160DF0
 void ftKirby_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
@@ -126,7 +126,7 @@ void ftKirby_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 // 0x80160E70
 void ftKirby_SpecialHiLanding_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
@@ -151,7 +151,7 @@ void ftKirby_SpecialHiLanding_ProcPhysics(GObj *fighter_gobj)
 // 0x80160F10
 void ftKirby_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     f32 temp_scale;
 
@@ -173,7 +173,7 @@ void ftKirby_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 // 0x80160FD8
 void ftKirby_SpecialAirHiFall_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
@@ -188,7 +188,7 @@ void ftKirby_SpecialAirHiFall_ProcPhysics(GObj *fighter_gobj)
 // 0x8016104C
 void ftKirby_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -217,7 +217,7 @@ void ftKirby_SpecialHi_ProcMap(GObj *fighter_gobj)
 // 0x80161104
 void ftKirby_SpecialAirHiFall_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = FighterGetStruct(fighter_gobj);
+    ftStruct *fp = FighterGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
     {
@@ -239,7 +239,7 @@ void ftKirby_SpecialAirHiFall_ProcMap(GObj *fighter_gobj)
 // 0x80161194
 void ftKirby_SpecialHi_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag2 = 0;
     fp->command_vars.flags.flag1 = 0;
@@ -249,7 +249,7 @@ void ftKirby_SpecialHi_ProcStatus(GObj *fighter_gobj)
 // 0x801611A8
 void ftKirby_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftKirby_SpecialHi_ProcStatus;
 
@@ -263,7 +263,7 @@ void ftKirby_SpecialHi_SetStatus(GObj *fighter_gobj)
 // 0x80161210
 void ftKirby_SpecialHiLanding_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialHiLanding, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -275,7 +275,7 @@ void ftKirby_SpecialHiLanding_SetStatus(GObj *fighter_gobj)
 // 0x80161270
 void ftKirby_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftKirby_SpecialHi_ProcStatus;
 
@@ -289,7 +289,7 @@ void ftKirby_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 // 0x801612D8
 void ftKirby_SpecialAirHiFall_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 vel_y_bak = fp->phys_info.vel_air.y;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_SpecialAirHiFall, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);

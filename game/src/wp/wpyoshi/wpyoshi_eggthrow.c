@@ -31,7 +31,7 @@ wpCreateDesc wpYoshi_EggThrow_WeaponDesc =
 // 0x8016BF50
 bool32 wpYoshi_EggThrow_ProcDead(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->weapon_vars.egg_throw.is_throw == FALSE)
     {
@@ -43,7 +43,7 @@ bool32 wpYoshi_EggThrow_ProcDead(GObj *weapon_gobj)
 // 0x8016BF74
 bool32 wpYoshi_EggExplode_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
@@ -55,7 +55,7 @@ bool32 wpYoshi_EggExplode_ProcUpdate(GObj *weapon_gobj)
 // 0x8016BFA0
 void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from landing successfully
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     wp->lifetime = WPEGGTHROW_EXPLODE_LIFETIME;
 
@@ -82,7 +82,7 @@ void wpYoshi_EggHit_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from
 // 0x8016C00C
 void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes from expiring 
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     wp->lifetime = WPEGGTHROW_EXPLODE_LIFETIME;
 
@@ -109,7 +109,7 @@ void wpYoshi_EggExpire_InitWeaponVars(GObj *weapon_gobj) // Egg Throw explodes f
 // 0x8016C07C
 void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     f32 angle = ABS(wp->weapon_vars.egg_throw.stick_range) / WPEGGTHROW_TRAJECTORY_DIV;
 
     if (angle > 1.0F)
@@ -143,7 +143,7 @@ void wpYoshi_EggThrow_InitWeaponVars(GObj *weapon_gobj)
 // 0x8016C218
 bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->weapon_vars.egg_throw.is_spin != FALSE)
     {
@@ -178,7 +178,7 @@ bool32 wpYoshi_EggThrow_ProcUpdate(GObj *weapon_gobj)
 // 0x8016C2E0
 bool32 wpYoshi_EggThrow_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if ((wp->weapon_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(weapon_gobj) != FALSE))
     {
@@ -212,7 +212,7 @@ bool32 wpYoshi_EggThrow_ProcHit(GObj *weapon_gobj)
 // 0x8016C3B4
 bool32 wpYoshi_EggThrow_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
@@ -224,8 +224,8 @@ bool32 wpYoshi_EggThrow_ProcHop(GObj *weapon_gobj)
 // 0x8016C404
 bool32 wpYoshi_EggThrow_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = WPEGGTHROW_LIFETIME;
 
@@ -248,9 +248,9 @@ void wpYoshi_EggThrow_ProcRender(GObj *weapon_gobj)
 // 0x8016C498
 GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpYoshi_EggThrow_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {

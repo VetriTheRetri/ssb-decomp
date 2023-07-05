@@ -122,7 +122,7 @@ typedef enum itRShellStatus
 // 0x8017A3A0
 void itRShell_GSpin_UpdateFollowPlayer(GObj *item_gobj, GObj *fighter_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     f32 vel_x;
     f32 dist_x;
     s32 lr_vel;
@@ -203,7 +203,7 @@ void itRShell_GSpin_SearchFollowPlayer(GObj *item_gobj)
 // 0x8017A610
 void itRShell_GSpin_UpdateGFX(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (ip->item_vars.shell.dust_gfx_int == 0)
@@ -226,7 +226,7 @@ extern intptr_t D_NF_00006048;
 // 0x8017A6A0
 void func_ovl3_8017A6A0(GObj *item_gobj) // Identical to Green Shell function
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     s32 unused[2];
 
@@ -244,7 +244,7 @@ void func_ovl3_8017A734(GObj *item_gobj)
 // 0x8017A74C
 bool32 itRShell_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITRSHELL_GRAVITY, ITRSHELL_T_VEL);
 
@@ -272,7 +272,7 @@ bool32 itRShell_GWait_ProcMap(GObj *item_gobj)
 // 0x8017A7EC
 bool32 itRShell_AFall_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->item_vars.shell.health == 0)
     {
@@ -288,7 +288,7 @@ extern itStatusDesc itCommon_RShell_StatusDesc[];
 // 0x8017A83C
 void itRShell_GWait_UpdateStatusVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMap_SetGround(ip);
 
@@ -338,7 +338,7 @@ void func_ovl3_8017A964(GObj *item_gobj) // Unused
 // 0x8017A984
 void itRShell_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -351,7 +351,7 @@ void itRShell_AFall_SetStatus(GObj *item_gobj)
 // 0x8017A9D0
 bool32 itRShell_SDefault_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel_air.x = ip->damage_taken_recent * ITRSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
 
@@ -391,7 +391,7 @@ void itRShell_FHold_SetStatus(GObj *item_gobj)
 // 0x8017AAF0
 void itRShell_FThrow_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.health = 1;
     ip->item_vars.shell.is_damage = TRUE;
@@ -406,7 +406,7 @@ void itRShell_FThrow_SetStatus(GObj *item_gobj)
 // 0x8017AB48
 void itRShell_FDrop_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.health = 1;
     ip->item_vars.shell.is_damage = TRUE;
@@ -421,7 +421,7 @@ void itRShell_FDrop_SetStatus(GObj *item_gobj)
 // 0x8017ABA0
 bool32 itRShell_FThrow_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (itMap_CheckMapCollideLanding(item_gobj, 0.25F, 0.5F, itRShell_GSpin_SetStatus) != FALSE)
     {
@@ -439,7 +439,7 @@ bool32 itRShell_FThrow_ProcMap(GObj *item_gobj)
 // 0x8017AC40 - 0 = left, 1 = right
 void itRShell_GSpin_EdgeInvertVelLR(GObj *item_gobj, u8 lr)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel_air.x = -ip->phys_info.vel_air.x;
 
@@ -455,7 +455,7 @@ void itRShell_GSpin_EdgeInvertVelLR(GObj *item_gobj, u8 lr)
 // 0x8017AC84
 void itRShell_GSpin_CheckCollisionEdge(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     itCommonAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
@@ -486,7 +486,7 @@ void itRShell_GSpin_CheckCollisionEdge(GObj *item_gobj)
 // 0x8017AD7C
 bool32 itRShell_GSpin_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itRShell_GSpin_UpdateGFX(item_gobj);
     itRShell_GSpin_SearchFollowPlayer(item_gobj);
@@ -504,7 +504,7 @@ bool32 itRShell_GSpin_ProcUpdate(GObj *item_gobj)
 // 0x8017ADD4
 bool32 itRShell_GSpin_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if ((func_ovl3_801735A0(item_gobj, itRShell_ASpin_SetStatus) != FALSE) && (ip->coll_data.coll_mask & (MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL)))
     {
@@ -521,7 +521,7 @@ bool32 itRShell_GSpin_ProcMap(GObj *item_gobj)
 // 0x8017AE48
 bool32 itRShell_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.interact--;
 
@@ -549,7 +549,7 @@ bool32 itRShell_SDefault_ProcHit(GObj *item_gobj)
 // 0x8017AF18
 bool32 itRShell_GSpin_ProcDamage(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_vars.shell.interact--;
 
@@ -577,7 +577,7 @@ bool32 itRShell_GSpin_ProcDamage(GObj *item_gobj)
 // 0x8017AFEC
 void itRShell_GSpin_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
     ip->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
@@ -624,7 +624,7 @@ void itRShell_GSpin_SetStatus(GObj *item_gobj)
 // 0x8017B108
 void itRShell_ASpin_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -663,7 +663,7 @@ GObj* itCommon_RShell_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ip;
+        itStruct *ip;
         Vec3f translate = joint->translate;
 
         joint->rotate.y = HALF_PI32;
@@ -703,7 +703,7 @@ bool32 itRShell_SDefault_ProcShield(GObj *item_gobj)
 // 0x8017B31C
 bool32 itRShell_SDefault_ProcReflector(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *aj = DObjGetStruct(item_gobj), *fj = DObjGetStruct(ip->owner_gobj);
 
     ip->item_vars.shell.interact--;

@@ -3,7 +3,7 @@
 // 0x8014FA50
 void ftCommon_AttackHi3_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 stick_angle;
     s32 status_id;
 
@@ -24,7 +24,7 @@ void ftCommon_AttackHi3_SetStatus(GObj *fighter_gobj)
 // 0x8014FB1C
 bool32 ftCommon_AttackHi3_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (fp->input.pl.stick_range.y >= FTCOMMON_ATTACKHI3_STICK_RANGE_MIN))

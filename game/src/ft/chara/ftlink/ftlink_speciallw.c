@@ -3,7 +3,7 @@
 // 0x801643D0
 void ftLink_SpecialLw_CreateBomb(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
 
@@ -38,7 +38,7 @@ void ftLink_SpecialAirLw_ProcUpdate(GObj *fighter_gobj)
 // 0x80164484
 void ftLink_SpecialLw_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDDA8(fighter_gobj) == FALSE)
     {
@@ -50,7 +50,7 @@ void ftLink_SpecialLw_ProcMap(GObj *fighter_gobj)
 // 0x801644D4
 void ftLink_SpecialAirLw_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE6B0(fighter_gobj) != FALSE)
     {
@@ -62,11 +62,11 @@ void ftLink_SpecialAirLw_ProcMap(GObj *fighter_gobj)
 // 0x80164524
 bool32 ftLink_SpecialLw_CheckGotoItemThrow(GObj *fighter_gobj, bool32 is_ground)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->item_hold != NULL)
     {
-        Item_Struct *ap = itGetStruct(fp->item_hold);
+        itStruct *ap = itGetStruct(fp->item_hold);
 
         if (ap->it_kind == It_Kind_Link_Bomb)
         {
@@ -86,7 +86,7 @@ bool32 ftLink_SpecialLw_CheckGotoItemThrow(GObj *fighter_gobj, bool32 is_ground)
 // 0x8016458C
 void ftLink_SpecialLw_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftLink_SpecialLw_CheckGotoItemThrow(fighter_gobj, TRUE) != TRUE)
     {
@@ -100,7 +100,7 @@ void ftLink_SpecialLw_SetStatus(GObj *fighter_gobj)
 // 0x801645E8
 void ftLink_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftLink_SpecialLw_CheckGotoItemThrow(fighter_gobj, FALSE) != TRUE)
     {

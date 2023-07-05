@@ -409,7 +409,7 @@ typedef struct itCommon_ItemVars_Shell
 
 typedef struct itCommon_ItemVars_Taru
 {
-    f32 roll_rotate_speed;
+    f32 roll_rotate_step;
 
 } itCommon_ItemVars_Taru;
 
@@ -559,7 +559,7 @@ typedef struct itGround_ItemVars_Fushigibana
 
 typedef struct itGround_ItemVars_RaceBomb
 {
-    f32 roll_rotate_speed;
+    f32 roll_rotate_step;
 
 } itGround_ItemVars_RaceBomb;
 

@@ -3,7 +3,7 @@
 // 0x80149A10
 void ftCommon_Catch_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.catchmain.catch_pull_frame_begin > 0.0F)
     {
@@ -28,8 +28,8 @@ void ftCommon_Catch_ProcUpdate(GObj *fighter_gobj)
 // 0x80149AC8
 void ftCommon_Catch_CaptureSetStatusRelease(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
-    Fighter_Struct *catch_fp;
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *catch_fp;
     GObj *catch_gobj;
 
     ftCommon_Fall_SetStatus(fighter_gobj);
@@ -74,7 +74,7 @@ void ftCommon_Catch_ProcMap(GObj *fighter_gobj)
 // 0x80149BA8
 void ftCommon_Catch_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Catch, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -98,7 +98,7 @@ void ftCommon_Catch_SetStatus(GObj *fighter_gobj)
 // 0x80149C60
 bool32 ftCommon_Catch_CheckInterruptGuard(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
     u32 flags = fp->status_vars.common.catchmain.unk_0x24;
 
@@ -116,7 +116,7 @@ bool32 ftCommon_Catch_CheckInterruptGuard(GObj *fighter_gobj)
 // 0x80149CE0
 bool32 ftCommon_Catch_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
@@ -137,7 +137,7 @@ bool32 ftCommon_Catch_CheckInterruptCommon(GObj *fighter_gobj)
 // 0x80149D80
 bool32 ftCommon_Catch_CheckInterruptRunDash(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
@@ -158,7 +158,7 @@ bool32 ftCommon_Catch_CheckInterruptRunDash(GObj *fighter_gobj)
 // 0x80149E24
 bool32 ftCommon_Catch_CheckInterruptAttack11(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)

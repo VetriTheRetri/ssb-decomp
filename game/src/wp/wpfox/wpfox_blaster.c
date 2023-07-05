@@ -61,7 +61,7 @@ bool32 wpFox_Blaster_ProcHit(GObj *weapon_gobj)
 // 0x8016898C
 bool32 wpFox_Blaster_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
@@ -76,8 +76,8 @@ bool32 wpFox_Blaster_ProcHop(GObj *weapon_gobj)
 // 0x80168A14
 bool32 wpFox_Blaster_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wpMain_ReflectorInvertLR(wp, fp);
 
@@ -90,7 +90,7 @@ bool32 wpFox_Blaster_ProcReflector(GObj *weapon_gobj)
 // 0x80168A74
 GObj* wpFox_Blaster_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    Weapon_Struct *wp;
+    wpStruct *wp;
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpFox_Blaster_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)

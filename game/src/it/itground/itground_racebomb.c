@@ -2,7 +2,7 @@
 
 void func_ovl3_80184A70(GObj *effect_gobj) // RTTF bomb explode GFX process
 {
-    Effect_Struct *ep = efGetStruct(effect_gobj);
+    efStruct *ep = efGetStruct(effect_gobj);
     DObj *joint = DObjGetStruct(effect_gobj);
 
     ep->lifetime--;
@@ -40,7 +40,7 @@ extern itCreateDesc Article_Gr_Bomb_Data;
 void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 {
     GObj *effect_gobj;
-    Effect_Struct *ep = func_ovl2_800FD4B8();
+    efStruct *ep = func_ovl2_800FD4B8();
     DObj *joint;
     s32 i;
     void *temp_s4;
@@ -83,13 +83,13 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 
 bool32 jtgt_ovl3_80184D74(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
     itMain_UpdatePhysicsAir(ap, ITRBOMB_GRAVITY, ITRBOMB_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
-    joint->rotate.z += ap->item_vars.rbomb.roll_rotate_speed;
+    joint->rotate.z += ap->item_vars.rbomb.roll_rotate_step;
 
     return FALSE;
 }
@@ -105,7 +105,7 @@ bool32 func_ovl3_80184DC4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80184E04(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->percent_damage >= ITRBOMB_HEALTH_MAX)
     {
@@ -118,7 +118,7 @@ extern itStatusDesc Article_Gr_Bomb_Status[];
 
 void func_ovl3_80184E44(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->phys_info.vel_air.y = 0.0F;
 
@@ -128,7 +128,7 @@ void func_ovl3_80184E44(GObj *item_gobj)
 bool32 func_ovl3_80184E78(GObj *item_gobj, f32 vel_mod)
 {
     s32 unused;
-    Item_Struct *ap;
+    itStruct *ap;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), vel_mod, NULL) != FALSE)
@@ -146,7 +146,7 @@ bool32 jtgt_ovl3_80184EDC(GObj *item_gobj)
 {
     if (func_ovl3_80184E78(item_gobj, 0.5F) != FALSE)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         if (ap->phys_info.vel_air.y >= 90.0F) // Is it even possible to meet this condition? Didn't they mean ABSF(ap->phys_info.vel_air.y)?
         {
@@ -176,7 +176,7 @@ extern intptr_t Article_Gr_Bomb_Hit;
 
 void func_ovl3_80184FAC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     DObjGetStruct(item_gobj)->rotate.x = HALF_PI32;
 
@@ -186,7 +186,7 @@ void func_ovl3_80184FAC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80184FD4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->it_multi++;
 
@@ -201,8 +201,8 @@ bool32 jtgt_ovl3_80184FD4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80185030(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
-    f32 roll_rotate_speed;
+    itStruct *ap = itGetStruct(item_gobj);
+    f32 roll_rotate_step;
     f32 sqrt_vel;
 
     ap->phys_info.vel_air.x += (-(atan2f(ap->coll_data.ground_angle.y, ap->coll_data.ground_angle.x) - HALF_PI32) * ITRBOMB_MUL_VEL_X);
@@ -211,18 +211,18 @@ bool32 jtgt_ovl3_80185030(GObj *item_gobj)
 
     sqrt_vel = sqrtf(SQUARE(ap->phys_info.vel_air.x) + SQUARE(ap->phys_info.vel_air.y));
 
-    roll_rotate_speed = ((ap->lr == LEFT) ? ITRBOMB_ROLL_ROTATE_MUL : -ITRBOMB_ROLL_ROTATE_MUL) * sqrt_vel;
+    roll_rotate_step = ((ap->lr == LEFT) ? ITRBOMB_ROLL_ROTATE_MUL : -ITRBOMB_ROLL_ROTATE_MUL) * sqrt_vel;
 
-    ap->item_vars.rbomb.roll_rotate_speed = roll_rotate_speed;
+    ap->item_vars.rbomb.roll_rotate_step = roll_rotate_step;
 
-    DObjGetStruct(item_gobj)->rotate.z += roll_rotate_speed;
+    DObjGetStruct(item_gobj)->rotate.z += roll_rotate_step;
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_8018511C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_8017356C(item_gobj) == FALSE)
     {
@@ -241,9 +241,9 @@ GObj* jtgt_ovl3_8018518C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
-        ap->item_vars.rbomb.roll_rotate_speed = 0.0F;
+        ap->item_vars.rbomb.roll_rotate_step = 0.0F;
 
         func_ovl3_80184FAC(item_gobj);
     }
@@ -252,7 +252,7 @@ GObj* jtgt_ovl3_8018518C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 void func_ovl3_801851F4(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->it_multi = 0;
     ap->item_event_index = 0;
@@ -282,7 +282,7 @@ void func_ovl3_80185284(GObj *item_gobj)
 void func_ovl3_801852B8(GObj *item_gobj)
 {
     Effect_Unk *effect_unk;
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;

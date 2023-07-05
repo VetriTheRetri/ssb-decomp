@@ -70,7 +70,7 @@ typedef enum itTomatoStatus
 // 0x801744C0
 bool32 itTomato_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITTOMATO_GRAVITY, ITTOMATO_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -102,7 +102,7 @@ void itTomato_GWait_SetStatus(GObj *item_gobj)
 // 0x80174588
 void itTomato_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -128,7 +128,7 @@ GObj* itCommon_Tomato_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Tomato_ItemDesc, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {

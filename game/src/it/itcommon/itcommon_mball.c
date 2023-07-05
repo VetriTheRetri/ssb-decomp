@@ -127,7 +127,7 @@ extern intptr_t D_NF_00009520;
 // 0x8017C690
 void func_ovl3_8017C690(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     void *t = itGetPData(ip, D_NF_00009430, D_NF_00009520); // (void*) (((uintptr_t)ip->attributes->unk_0x0 - (intptr_t)&D_NF_00009430) + (intptr_t)&D_NF_00009520); // Linker thing
 
@@ -145,7 +145,7 @@ void func_ovl3_8017C6F8(GObj *item_gobj)
 // 0x8017C710
 bool32 itMBall_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
@@ -182,7 +182,7 @@ void itMBall_GWait_SetStatus(GObj *item_gobj)
 // 0x8017C7FC
 void itMBall_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -193,7 +193,7 @@ void itMBall_AFall_SetStatus(GObj *item_gobj)
 // 0x8017C840
 void itMBall_FHold_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     DObjGetStruct(item_gobj)->rotate.y = 0.0F;
 
@@ -205,7 +205,7 @@ void itMBall_FHold_SetStatus(GObj *item_gobj)
 // 0x8017C880
 bool32 itMBall_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
@@ -219,7 +219,7 @@ bool32 itMBall_FThrow_ProcUpdate(GObj *item_gobj)
 // 0x8017C8D8
 bool32 itMBall_FThrow_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->item_vars.m_ball.is_rebound != FALSE)
     {
@@ -233,7 +233,7 @@ bool32 itMBall_FThrow_ProcMap(GObj *item_gobj)
 // 0x8017C94C
 bool32 itMBall_SDefault_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -247,8 +247,8 @@ bool32 itMBall_SDefault_ProcHit(GObj *item_gobj)
 // 0x8017C97C
 bool32 itMBall_SDefault_ProcReflector(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
-    Fighter_Struct *fp;
+    itStruct *ip = itGetStruct(item_gobj);
+    ftStruct *fp;
     GObj *fighter_gobj;
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
@@ -289,8 +289,8 @@ extern u32 itMonster_Global_SelectMonsterIndex = 0; // Not uninitialized, so it'
 // 0x8017CA48
 bool32 itMBall_GOpen_ProcUpdate(GObj *m_ball_gobj)
 {
-    Item_Struct *m_ball_ip = itGetStruct(m_ball_gobj);
-    Item_Struct *monster_ip;
+    itStruct *m_ball_ip = itGetStruct(m_ball_gobj);
+    itStruct *monster_ip;
     GObj *monster_gobj;
     Vec3f vel;
     s32 unused[2];
@@ -332,7 +332,7 @@ bool32 itMBall_GOpen_ProcUpdate(GObj *m_ball_gobj)
 // 0x8017CB38
 bool32 itMBall_GOpen_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (func_ovl2_800FC67C(ip->attach_line_id) == FALSE)
     {
@@ -348,7 +348,7 @@ void itMBall_GOpen_InitItemVars(GObj *item_gobj)
 {
     s32 unused[2];
     DObj *joint = DObjGetStruct(item_gobj);
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *next;
     DObj *child;
 
@@ -370,11 +370,11 @@ void itMBall_GOpen_InitItemVars(GObj *item_gobj)
 
     if ((ip->player != -1) && (ip->player != GMMATCH_PLAYERS_MAX))
     {
-        GObj *fighter_gobj = gMatchData->player_block[ip->player].fighter_gobj;
+        GObj *fighter_gobj = gpMatchData->player_block[ip->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {
-            Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+            ftStruct *fp = ftGetStruct(fighter_gobj);
 
             func_ovl2_800E806C(fp, 8, 20);
         }
@@ -397,8 +397,8 @@ void itMBall_GOpen_SetStatus(GObj *item_gobj)
 // 0x8017CCBC
 bool32 itMBall_AOpen_ProcUpdate(GObj *m_ball_gobj)
 {
-    Item_Struct *m_ball_ip = itGetStruct(m_ball_gobj);
-    Item_Struct *monster_ip;
+    itStruct *m_ball_ip = itGetStruct(m_ball_gobj);
+    itStruct *monster_ip;
     GObj *monster_gobj;
     Vec3f vel;
     s32 unused[2];
@@ -459,7 +459,7 @@ GObj* itCommon_MBall_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fl
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
         Vec3f translate = joint->translate;
 
         joint->next->unk_0x54 = 2;

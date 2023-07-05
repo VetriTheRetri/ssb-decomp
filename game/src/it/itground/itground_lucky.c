@@ -12,8 +12,8 @@ void func_ovl3_8017C240(GObj *item_gobj)
 
 void func_ovl3_8017C280(GObj *lucky_gobj)
 {
-    Item_Struct *lucky_ap = itGetStruct(lucky_gobj);
-    Item_Struct *egg_ap;
+    itStruct *lucky_ap = itGetStruct(lucky_gobj);
+    itStruct *egg_ap;
     s32 unused;
     DObj *joint = DObjGetStruct(lucky_gobj);
     GObj *egg_gobj;
@@ -24,7 +24,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
     {
         if (lucky_ap->item_vars.gr_lucky.egg_spawn_wait != 0)
         {
-            if ((gMatchData->item_toggles & 8) && (gMatchData->item_switch != 0)) // Return to this when 0x8 is mapped
+            if ((gpMatchData->item_toggles & 8) && (gpMatchData->item_switch != 0)) // Return to this when 0x8 is mapped
             {
                 pos = joint->translate;
 
@@ -67,7 +67,7 @@ void func_ovl3_8017C280(GObj *lucky_gobj)
 
 bool32 func_ovl3_8017C400(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->translate.x += ap->item_vars.gr_lucky.pos.x;
@@ -88,7 +88,7 @@ bool32 func_ovl3_8017C400(GObj *item_gobj)
 
 bool32 func_ovl3_8017C4AC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -97,7 +97,7 @@ bool32 func_ovl3_8017C4AC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017C4BC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
     itMain_UpdatePhysicsAir(ap, ITGRLUCKY_GRAVITY, ITGRLUCKY_T_VEL);
@@ -116,7 +116,7 @@ bool32 func_ovl3_8017C524(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017C530(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->damage_knockback >= 100.0F)
@@ -145,7 +145,7 @@ GObj* jtgt_ovl3_8017C5F4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
 

@@ -3,7 +3,7 @@
 // 0x80144A10
 void ftCommon_Rebound_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.rebound.rebound_timer--;
 
@@ -16,7 +16,7 @@ void ftCommon_Rebound_ProcUpdate(GObj *fighter_gobj)
 // 0x80144A60
 void ftCommon_Rebound_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_Rebound, 0.0F, fp->status_vars.common.rebound.anim_speed, FTSTATUPDATE_NONE_PRESERVE);
 }
@@ -30,7 +30,7 @@ void ftCommon_ReboundWait_ProcUpdate(GObj *fighter_gobj)
 // 0x80144AB0
 void ftCommon_ReboundWait_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 lr_rebound;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ReboundWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);

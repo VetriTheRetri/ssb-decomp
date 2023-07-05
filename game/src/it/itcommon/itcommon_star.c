@@ -23,7 +23,7 @@ itCreateDesc itCommon_Star_ItemDesc =
 // 0x80174930
 bool32 itStar_SDefault_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITSTAR_GRAVITY, ITSTAR_T_VEL);
 
@@ -41,7 +41,7 @@ bool32 itStar_SDefault_ProcUpdate(GObj *item_gobj)
 // 0x80174990
 bool32 itStar_SDefault_ProcMap(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
@@ -70,7 +70,7 @@ GObj* itCommon_Star_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fla
     Unk_80131460_Ptr74 *unk_ptr = D_ovl2_80131460->unk_0x74;
     GObj *item_gobj;
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
     Vec3f vel_real;
     Vec3f translate;
 

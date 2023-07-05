@@ -22,7 +22,7 @@ extern Mtx D_ovl2_8012C310;
 // 0x80166E80
 void wpRender_DisplayHitCollisions(GObj *weapon_gobj) // Render item hitboxes
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
     Weapon_Hit *weapon_hit = &ip->weapon_hit;
     MtxStore mtx_store;
     s32 i;
@@ -97,7 +97,7 @@ extern Mtx D_ovl2_8012C458;
 // 0x801671F0
 void wpRender_DisplayMapCollisions(GObj *weapon_gobj) // Render item ECB?
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
     Vec3f *translate = &DObjGetStruct(weapon_gobj)->translate;
     ObjectColl *object_coll = &ip->coll_data.object_coll;
     MtxStore mtx_store;
@@ -157,7 +157,7 @@ void func_ovl3_801674B8(void)
 
 void func_ovl3_80167520(GObj *weapon_gobj, void(*proc_render)(GObj*))
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     if (ip->display_mode == dbObject_DisplayMode_MapCollision)
     {
@@ -209,7 +209,7 @@ GfxColor wpNess_PKThunder_EnvColor[WPPKTHUNDER_TRAIL_COUNT - 1]     = { { 58,   
 // 0x80167660
 void wpRender_DisplayPKThunder(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
     s32 index = ip->weapon_vars.pkthunder_trail.trail_index;
 
     if (ip->display_mode == dbObject_DisplayMode_MapCollision)

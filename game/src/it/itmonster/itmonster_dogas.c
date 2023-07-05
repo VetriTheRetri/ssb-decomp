@@ -3,7 +3,7 @@
 
 bool32 func_ovl3_80182C80(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -18,7 +18,7 @@ extern itStatusDesc Article_Dogas_Status[];
 
 void func_ovl3_80182CA8(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->it_multi = ITDOGAS_DESPAWN_WAIT;
 
@@ -27,7 +27,7 @@ void func_ovl3_80182CA8(GObj *item_gobj)
 
 void func_ovl3_80182CDC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
     Vec3f vel;
@@ -62,7 +62,7 @@ void func_ovl3_80182CDC(GObj *item_gobj)
 
 bool32 func_ovl3_80182E1C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80182CDC(item_gobj);
 
@@ -82,7 +82,7 @@ extern intptr_t D_NF_000128DC;
 
 void func_ovl3_80182E78(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     ap->it_multi = ITDOGAS_SMOG_SPAWN_COUNT;
@@ -108,7 +108,7 @@ void func_ovl3_80182F0C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80182F40(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -124,7 +124,7 @@ bool32 jtgt_ovl3_80182F40(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80182F94(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -140,7 +140,7 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Dogas_Data, pos, vel, flags);
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {
@@ -168,7 +168,7 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 func_ovl3_801830DC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj)->next;
 
     ip->weapon_hit.size = joint->scale.x * ip->weapon_vars.smog.hit_desc->size;
@@ -187,7 +187,7 @@ GObj* func_ovl3_80183144(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
     wpCreateDesc *p_data = &Item_Smog_Data;
     GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
     DObj *joint;
-    Weapon_Struct *ip;
+    wpStruct *ip;
 
     if (weapon_gobj == NULL)
     {

@@ -3,7 +3,7 @@
 // 0x801447E0
 void ftCommon_DownForwardOrBack_SetStatus(GObj *fighter_gobj, s32 status_id)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -14,7 +14,7 @@ void ftCommon_DownForwardOrBack_SetStatus(GObj *fighter_gobj, s32 status_id)
 // 0x8014482C
 bool32 ftCommon_DownForwardOrBack_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (ABS(fp->input.pl.stick_range.x) >= FTCOMMON_DOWN_FORWARD_BACK_RANGE_MIN)

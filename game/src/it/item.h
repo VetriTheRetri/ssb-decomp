@@ -153,17 +153,17 @@ typedef struct gmMonsterInfo
 
 } gmMonsterInfo;
 
-static gmMonsterInfo Monster_Info; // Static (.bss) (0x8018D060)
+static gmMonsterInfo gMonsterData; // Static (.bss) (0x8018D060)
 
-typedef struct ArticleFileData
+typedef struct itFileData
 {
     f32 spawn_vel_y[20];
 
-} ArticleFileData;
+} itFileData;
 
 typedef struct itCreateDesc
 {
-    s32 it_kind;
+    itKind it_kind;
     void **p_file;
     intptr_t offset;
     u8 unk_aspd_0xC;
@@ -206,7 +206,7 @@ typedef struct itStatusDesc
 
 } itStatusDesc;
 
-typedef struct _Item_Hit
+typedef struct itHitbox
 {
     s32 update_state;                   // Hitbox's position update mode (0 = disabled, 1 = fresh, 2 = transfer, 3 = interpolate)
     s32 damage;                         // Hitbox's base damage output
@@ -238,9 +238,9 @@ typedef struct _Item_Hit
     itHitPositions hit_positions[2];    // Item hitbox position?
     gmHitCollisionRecord hit_targets[4];// Item's record of attacked targets
 
-} Item_Hit;
+} itHitbox;
 
-typedef struct itHitEvent               // Hitbox subaction event?
+typedef struct itHitEvent               // Miniature Hitbox subaction event? Used by explosions.
 {
     u8 timer;
     s32 angle : 10;
@@ -249,7 +249,7 @@ typedef struct itHitEvent               // Hitbox subaction event?
 
 } itHitEvent;
 
-typedef struct itHitDesc
+typedef struct itHitParty               // Full-scale hitbox subaction event? Used by Venusaur and Porygon.
 {
     u8 timer;
     s32 angle : 10;
@@ -263,16 +263,16 @@ typedef struct itHitDesc
     s32 shield_damage;
     u16 hit_sfx;
 
-} itHitDesc;
+} itHitParty;
 
-typedef struct Item_Hurt
+typedef struct itHurtbox
 {
     u8 interact_mask;                   // 0x1 = interact with fighters, 0x2 = interact with weapons, 0x4 = interact with other items
     s32 hitstatus;                      // 0 = none, 1 = normal, 2 = invincible, 3 = intangible
     Vec3f offset;                       // Offset added to TopN joint's translation vector
     Vec3f size;                         // Hurtbox size
 
-} Item_Hurt;
+} itHurtbox;
 
 typedef struct itCommonAttributes
 {
@@ -326,9 +326,9 @@ typedef struct itCommonAttributes
 
 } itCommonAttributes;
 
-typedef struct Item_Struct              // Common items, stage hazards and Pokémon
+typedef struct itStruct              // Common items, stage hazards and Pokémon
 {
-    void *ip_alloc_next;                // Memory region allocated for next Item_Struct
+    void *ip_alloc_next;                // Memory region allocated for next itStruct
     GObj *item_gobj;                    // Item's GObj pointer
     GObj *owner_gobj;                   // Item's owner
     itKind it_kind;                     // Item ID
@@ -348,12 +348,11 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     } phys_info;
 
-    Coll_Data coll_data;                // Item's collision data
-
+    mpCollData coll_data;               // Item's collision data
     mpGroundAir ground_or_air;          // Ground or air bool
 
-    Item_Hit item_hit;                  // Item's hitbox
-    Item_Hurt item_hurt;                // Item's hurtbox
+    itHitbox item_hit;                  // Item's hitbox
+    itHurtbox item_hurt;                // Item's hurtbox
 
     s32 hit_normal_damage;              // Damage applied to entity this item has hit
     s32 lr_attack;                      // Direction of outgoing attack?
@@ -377,7 +376,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     u8 damage_port;                     // Controller port of attacker
     s32 damage_player_number;           // Player number of attacker
     u8 damage_handicap;                 // Handicap of attacker
-    s32 damage_display_mode;           // Display mode of attacker which the item takes on
+    s32 damage_display_mode;            // Display mode of attacker which the item takes on
     s32 damage_taken_last;              // Final damage intake?
 
     s32 lifetime;                       // Item's duration in frames
@@ -404,7 +403,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     itCommonAttributes *attributes;     // Pointer to standard attributes
 
-    Color_Overlay colanim;              // Item's color animation struct
+    caStruct colanim;                   // Item's color animation struct
 
     u32 is_hitlag_victim : 1;           // Item can deal hitlag to target
     u16 it_multi;                       // Some sort of universal multi-purpose variable, e.g. it is used as intangibility delay for Star Man and ammo count for Ray Gun
@@ -453,7 +452,7 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
     } item_vars;
 
-    s32 display_mode;                  // Item's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
+    s32 display_mode;                   // Item's display mode: 0 = normal, 1 = hit collisions, 2 = opaque hurtboxes + outlined attack hitboxes, 3 = map collisions
 
     bool32 (*proc_update)(GObj*);       // Update general item information
     bool32 (*proc_map)(GObj*);          // Update item's map collision
@@ -465,10 +464,10 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
     bool32 (*proc_damage)(GObj*);       // Runs when item takes damage
     bool32 (*proc_dead)(GObj*);         // Runs when item is in a blast zone
 
-} Item_Struct;
+} itStruct;
 
 #define itGetStruct(item_gobj) \
-((Item_Struct*) (item_gobj)->user_data) \
+((itStruct*) (item_gobj)->user_data) \
 
 // Points to all sorts of data
 
@@ -477,5 +476,8 @@ typedef struct Item_Struct              // Common items, stage hazards and Pokém
 
 #define itGetHitEvent(it_desc, off) \
 ( (itHitEvent*) ( (uintptr_t)*(it_desc).p_file + (intptr_t)&(off) ) )
+
+#define itGetHitParty(it_desc, off) \
+( (itHitParty*) ( (uintptr_t)*(it_desc).p_file + (intptr_t)&(off) ) )
 
 #endif

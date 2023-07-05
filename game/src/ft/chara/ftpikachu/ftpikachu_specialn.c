@@ -5,7 +5,7 @@
 // 0x80151B50
 void ftPikachu_SpecialN_ProcAccessory(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     Vec3f vel;
 
@@ -43,7 +43,7 @@ void ftPikachu_SpecialAirN_ProcMap(GObj *fighter_gobj)
 // 0x80151C5C
 void ftPikachu_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialN, fighter_gobj->anim_frame, 1.0F, FTPIKACHU_SPECIALN_STATUPDATE_FLAGS);
@@ -54,7 +54,7 @@ void ftPikachu_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 // 0x80151CB0
 void ftPikachu_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Pikachu_SpecialAirN, fighter_gobj->anim_frame, 1.0F, FTPIKACHU_SPECIALN_STATUPDATE_FLAGS);
@@ -66,7 +66,7 @@ void ftPikachu_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
 // 0x80151D0C
 void ftPikachu_SpecialN_InitStatusVars(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->command_vars.flags.flag0 = 0;
     fp->proc_accessory = ftPikachu_SpecialN_ProcAccessory;

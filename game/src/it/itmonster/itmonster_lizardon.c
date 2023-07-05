@@ -4,7 +4,7 @@
 
 bool32 jtgt_ovl3_8017F470(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITLIZARDON_GRAVITY, ITLIZARDON_T_VEL);
 
@@ -15,7 +15,7 @@ extern itStatusDesc Article_Lizardon_Status[];
 
 bool32 jtgt_ovl3_8017F49C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMap_CheckMapCollideLanding(item_gobj, 0.2F, 1.0F, func_ovl3_8017F8E4);
 
@@ -28,7 +28,7 @@ bool32 jtgt_ovl3_8017F49C(GObj *item_gobj)
 
 bool32 func_ovl3_8017F49C(GObj *item_gobj) // Unused
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     ap->is_allow_pickup = FALSE;
 
@@ -38,7 +38,7 @@ bool32 func_ovl3_8017F49C(GObj *item_gobj) // Unused
 
 bool32 jtgt_ovl3_8017F53C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ap, ITLIZARDON_GRAVITY, ITLIZARDON_T_VEL);
 
@@ -47,7 +47,7 @@ bool32 jtgt_ovl3_8017F53C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017F568(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl3_80173680(item_gobj);
 
@@ -68,7 +68,7 @@ void func_ovl3_8017F5C4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017F5EC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos = joint->translate;
 
@@ -133,7 +133,7 @@ extern intptr_t D_NF_0000D688;
 
 void func_ovl3_8017F810(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     s32 unused[2];
     void *s;
@@ -167,7 +167,7 @@ void func_ovl3_8017F8E4(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017F90C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -187,7 +187,7 @@ bool32 jtgt_ovl3_8017F90C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_8017F98C(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -204,7 +204,7 @@ GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Lizardon_Data, pos, vel, flags);
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {
@@ -232,7 +232,7 @@ GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 jtgt_ovl3_8017FACC(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -264,8 +264,8 @@ extern s32 D_ovl3_8018D044;
 
 bool32 jtgt_ovl3_8017FB74(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
     Vec3f *translate;
 
     ip->lifetime = ITLIZARDON_FLAME_LIFETIME;
@@ -285,7 +285,7 @@ extern wpCreateDesc Item_Lizardon_Flame_Data;
 GObj *func_ovl3_8017FC38(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Lizardon_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
-    Weapon_Struct *ip;
+    wpStruct *ip;
 
     if (weapon_gobj == NULL)
     {

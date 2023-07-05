@@ -28,7 +28,7 @@ void ftCommon_Attack100Start_ProcUpdate(GObj *fighter_gobj)
 // 0x8014F0F4
 void ftCommon_Attack100Start_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
@@ -75,7 +75,7 @@ extern intptr_t D_NF_00001220;
 extern void *D_ovl2_80131074;
 
 // 0x8014F1BC
-void ftCommon_Attack100Start_KirbyUpdateGFX(Fighter_Struct *fp)
+void ftCommon_Attack100Start_KirbyUpdateGFX(ftStruct *fp)
 {
     Vec3f offset;
 
@@ -101,7 +101,7 @@ void ftCommon_Attack100Start_KirbyUpdateGFX(Fighter_Struct *fp)
 // 0x8014F2A8
 void ftCommon_Attack100Loop_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fighter_gobj->anim_frame >= 0.0F) && (fighter_gobj->anim_frame < DObjGetStruct(fighter_gobj)->dobj_f1))
     {
@@ -133,7 +133,7 @@ void ftCommon_Attack100Loop_ProcUpdate(GObj *fighter_gobj)
 // 0x8014F388
 void ftCommon_Attack100Loop_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) || (fp->input.pl.button_tap_prev & fp->input.button_mask_a))
     {
@@ -144,7 +144,7 @@ void ftCommon_Attack100Loop_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014F3C0
 void ftCommon_Attack100Loop_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     switch (fp->ft_kind)
@@ -181,7 +181,7 @@ void ftCommon_Attack100Loop_SetStatus(GObj *fighter_gobj)
 // 0x8014F45C
 void ftCommon_Attack100End_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     switch (fp->ft_kind)
@@ -217,7 +217,7 @@ void ftCommon_Attack100End_SetStatus(GObj *fighter_gobj)
 // 0x8014F4EC
 bool32 ftCommon_Attack100Start_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
     s32 inputs_req;
 

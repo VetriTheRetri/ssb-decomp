@@ -26,7 +26,7 @@ wpCreateDesc wpKirby_Cutter_WeaponDesc =
 // 0x8016BC50
 bool32 wpKirby_Cutter_ProcUpdate(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
@@ -44,7 +44,7 @@ bool32 wpKirby_Cutter_ProcUpdate(GObj *weapon_gobj)
 // 0x8016BCC8
 bool32 wpKirby_Cutter_ProcMap(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if (wp->ground_or_air == GA_Air)
     {
@@ -103,8 +103,8 @@ bool32 wpKirby_Cutter_ProcSetOff(GObj *weapon_gobj)
 // 0x8016BE4C
 bool32 wpKirby_Cutter_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = WPFINALCUTTER_LIFETIME;
 
@@ -117,9 +117,9 @@ bool32 wpKirby_Cutter_ProcReflector(GObj *weapon_gobj)
 // 0x8016BE8C
 GObj* wpKirby_Cutter_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpKirby_Cutter_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {

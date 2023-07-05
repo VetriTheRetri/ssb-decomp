@@ -24,7 +24,7 @@
 // 0x80142B70
 void ftCommon_Landing_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fighter_gobj->anim_frame < FTCOMMON_LANDING_INTERRUPT_BEGIN) && (fp->status_vars.common.landing.is_allow_interrupt != FALSE) && !ftCheckInterruptLanding(fighter_gobj))
     {
@@ -44,7 +44,7 @@ void ftCommon_Landing_ProcInterrupt(GObj *fighter_gobj)
 // 0x80142D44
 void ftCommon_Landing_SetStatusParam(GObj *fighter_gobj, s32 status_id, bool32 is_allow_interrupt, f32 anim_speed)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, status_id, 0.0F, anim_speed, FTSTATUPDATE_NONE_PRESERVE);
@@ -55,7 +55,7 @@ void ftCommon_Landing_SetStatusParam(GObj *fighter_gobj, s32 status_id, bool32 i
 // 0x80142D9C
 void ftCommon_Landing_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->is_fast_fall) && (fp->phys_info.vel_air.y <= -fp->attributes->fast_fall_speed))
     {

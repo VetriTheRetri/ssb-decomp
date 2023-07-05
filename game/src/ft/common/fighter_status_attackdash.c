@@ -10,7 +10,7 @@ void ftCommon_AttackDash_SetStatus(GObj *fighter_gobj)
 // 0x8014F69C - Also checks LightThrowDash and ItemSwingDash
 bool32 ftCommon_AttackDash_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->input.pl.button_tap & fp->input.button_mask_a)

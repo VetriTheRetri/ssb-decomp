@@ -1,7 +1,7 @@
 #include "ftcaptain.h"
 
 // 0x80160280
-void ftCaptain_SpecialHi_InitCatchVars(Fighter_Struct *fp)
+void ftCaptain_SpecialHi_InitCatchVars(ftStruct *fp)
 {
     ftCommon_SetCatchVars(fp, FTCATCHKIND_MASK_SPECIALHICAPTAIN, ftCaptain_SpecialHi_ProcCatch, ftCommon_CaptureCaptain_ProcCapture);
 }
@@ -18,11 +18,11 @@ void ftCaptain_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 // 0x80160304
 void ftCaptain_SpecialHiCatch_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
 
     if ((fighter_gobj->anim_frame <= 0.0F) || (this_fp->command_vars.flags.flag0 != 0))
     {
-        Fighter_Struct *catch_fp = ftGetStruct(fp->catch_gobj);
+        ftStruct *catch_fp = ftGetStruct(fp->catch_gobj);
 
         catch_fp->status_vars.common.capturecaptain.capture_flag |= FTCOMMON_CAPTURECAPTAIN_MASK_THROW;
 
@@ -34,7 +34,7 @@ void ftCaptain_SpecialHiCatch_ProcUpdate(GObj *fighter_gobj)
 // 0x80160370
 void ftCaptain_SpecialHi_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != 0)
     {
@@ -52,7 +52,7 @@ void ftCaptain_SpecialHi_ProcInterrupt(GObj *fighter_gobj)
 // 0x801603F0
 void ftCaptain_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = AttributesGetStruct(fp);
 
     fp->phys_info.vel_air.x = fp->status_vars.captain.specialhi.vel.x;
@@ -76,7 +76,7 @@ void ftCaptain_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 // 0x80160D48
 void ftCaptain_SpecialHiCatch_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f vec;
 
     if (!(fp->status_vars.captain.specialhi.unk_0x0 & 4))
@@ -95,7 +95,7 @@ void ftCaptain_SpecialHiCatch_ProcPhysics(GObj *fighter_gobj)
 // 0x80160560
 void ftCaptain_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->phys_info.vel_air.y < 0.0F)
     {
@@ -118,7 +118,7 @@ void ftCaptain_SpecialHi_ProcMap(GObj *fighter_gobj)
 // 0x801605FC
 void ftCaptain_SpecialHi_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->jumps_used = fp->attributes->jumps_max;
 
@@ -135,7 +135,7 @@ void ftCaptain_SpecialHi_ProcStatus(GObj *fighter_gobj)
 // 0x80160630
 void ftCaptain_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
 
@@ -149,7 +149,7 @@ void ftCaptain_SpecialHi_SetStatus(GObj *fighter_gobj)
 // 0x80160690
 void ftCaptain_SpecialHi_ProcCatch(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj), *catch_fp;
+    ftStruct *fp = ftGetStruct(fighter_gobj), *catch_fp;
     GObj *search_gobj;
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiCatch, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
@@ -173,7 +173,7 @@ void ftCaptain_SpecialHi_ProcCatch(GObj *fighter_gobj)
 // 0x80160730
 void ftCaptain_SpecialHiThrow_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Captain_SpecialHiThrow, 0.0F, 1.0F, FTSTATUPDATE_GFX_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -189,7 +189,7 @@ void ftCaptain_SpecialHiThrow_SetStatus(GObj *fighter_gobj)
 // 0x801607B4
 void ftCaptain_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->proc_status = ftCaptain_SpecialHi_ProcStatus;
 

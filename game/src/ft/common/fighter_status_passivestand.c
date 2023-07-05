@@ -3,7 +3,7 @@
 // 0x80144700
 void ftCommon_PassiveStand_SetStatus(GObj *fighter_gobj, s32 status_id)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Air)
     {
@@ -16,7 +16,7 @@ void ftCommon_PassiveStand_SetStatus(GObj *fighter_gobj, s32 status_id)
 // 0x80144760
 bool32 ftCommon_PassiveStand_CheckInterruptDamage(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (fp->time_since_last_z < FTCOMMON_PASSIVE_BUFFER_FRAMES_MAX)

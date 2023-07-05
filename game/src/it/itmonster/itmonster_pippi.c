@@ -34,7 +34,7 @@ void func_ovl3_80183210(GObj *item_gobj)
 {
     s32 it_kind;
     s32 index;
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     index = rand_u16_range(It_Kind_MbMonsterEnd - It_Kind_MbMonsterStart);
@@ -76,7 +76,7 @@ extern Gfx *D_800465B0[4];
 
 void func_ovl3_80183344(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -109,7 +109,7 @@ void func_ovl3_80183344(GObj *item_gobj)
 
 void func_ovl3_80183344(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     gDPPipeSync(D_800465B0[0]++);
 
@@ -142,7 +142,7 @@ void func_ovl3_80183344(GObj *item_gobj)
 
 bool32 jtgt_ovl3_801835FC(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (ap->it_multi == 0)
     {
@@ -158,7 +158,7 @@ bool32 jtgt_ovl3_801835FC(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80183650(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
@@ -178,7 +178,7 @@ GObj *jtgt_ovl3_80183690(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
     if (item_gobj != NULL)
     {
         DObj *joint = DObjGetStruct(item_gobj);
-        Item_Struct *ap = itGetStruct(item_gobj);
+        itStruct *ap = itGetStruct(item_gobj);
 
         ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
 

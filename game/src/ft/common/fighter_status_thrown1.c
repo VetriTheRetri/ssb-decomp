@@ -3,11 +3,11 @@
 // 0x8014AAF0
 void ftCommon_Thrown_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
-        Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
+        ftStruct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
         if 
         (
@@ -32,9 +32,9 @@ void ftCommon_Thrown_ProcPhysics(GObj *fighter_gobj)
 // 0x8014AB8C
 void ftCommon_Thrown_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     GObj *capture_gobj = this_fp->capture_gobj;
-    Fighter_Struct *capture_fp = ftGetStruct(capture_gobj);
+    ftStruct *capture_fp = ftGetStruct(capture_gobj);
     Vec3f *this_pos = &DObjGetStruct(fighter_gobj)->translate;
     s32 unused[3];
     f32 dist_y;
@@ -54,8 +54,8 @@ void ftCommon_Thrown_ProcMap(GObj *fighter_gobj)
 // 0x8014AC0C
 void ftCommon_Thrown_SetStatusQueue(GObj *fighter_gobj, s32 status_id_new, s32 status_id_queue)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
     this_fp->ground_or_air = GA_Air;
     this_fp->jumps_used = 1;
@@ -77,8 +77,8 @@ void ftCommon_Thrown_SetStatusQueue(GObj *fighter_gobj, s32 status_id_new, s32 s
 // 0x8014ACB4
 void ftCommon_Thrown_SetStatusImmediate(GObj *fighter_gobj, s32 status_id)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
-    Fighter_Struct *capture_fp = ftGetStruct(this_fp->capture_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *capture_fp = ftGetStruct(this_fp->capture_gobj);
 
     this_fp->ground_or_air = GA_Air;
     this_fp->jumps_used = 1;

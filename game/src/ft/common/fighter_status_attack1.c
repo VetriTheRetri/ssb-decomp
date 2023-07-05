@@ -29,7 +29,7 @@
 // 0x8014E7B0
 void ftCommon_Attack11_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->command_vars.flags.flag1 != 0) && (fp->status_vars.common.attack1.is_goto_followup != FALSE))
     {
@@ -45,7 +45,7 @@ void ftCommon_Attack11_ProcUpdate(GObj *fighter_gobj)
 // 0x8014E824
 void ftCommon_Attack12_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->ft_kind != Ft_Kind_Captain) && (fp->ft_kind != Ft_Kind_PolyCaptain) && (fp->command_vars.flags.flag1 != 0) && (fp->is_goto_attack100))
     {
@@ -61,7 +61,7 @@ void ftCommon_Attack12_ProcUpdate(GObj *fighter_gobj)
 // 0x8014E8B4
 void ftCommon_Attack13_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (((fp->ft_kind == Ft_Kind_Captain) || (fp->ft_kind == Ft_Kind_PolyCaptain)) && (fp->command_vars.flags.flag1 != 0) && (fp->is_goto_attack100))
     {
@@ -73,7 +73,7 @@ void ftCommon_Attack13_ProcUpdate(GObj *fighter_gobj)
 // 0x8014E91C
 void ftCommon_Attack11_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->status_vars.common.attack1.interrupt_catch_timer < 2)
     {
@@ -115,7 +115,7 @@ void ftCommon_Attack13_ProcInterrupt(GObj *fighter_gobj)
 // 0x8014EA04
 void ftCommon_Attack11_ProcStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftCommon_MotionCountIncSetAttackID(fp, ftMotion_AttackIndex_Attack11);
     ftCommon_StatUpdateCountIncSetFlags(fp, fp->stat_flags.halfword);
@@ -125,7 +125,7 @@ void ftCommon_Attack11_ProcStatus(GObj *fighter_gobj)
 // 0x8014EA44
 void ftCommon_Attack11_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
@@ -150,7 +150,7 @@ void ftCommon_Attack11_SetStatus(GObj *fighter_gobj)
 // 0x8014EAD8
 void ftCommon_Attack12_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
@@ -197,7 +197,7 @@ void ftCommon_Attack12_SetStatus(GObj *fighter_gobj)
 // 0x8014EBB4
 void ftCommon_Attack13_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
@@ -244,7 +244,7 @@ void ftCommon_Attack13_SetStatus(GObj *fighter_gobj)
 // 0x8014EC78
 bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->input.pl.button_tap & fp->input.button_mask_a)
@@ -328,7 +328,7 @@ bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
 // 0x8014EEC0
 bool32 ftCommon_Attack11_CheckGoto(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->attack1_followup_frames != 0.0F)
@@ -352,7 +352,7 @@ bool32 ftCommon_Attack11_CheckGoto(GObj *fighter_gobj)
 // 0x8014EF50
 bool32 ftCommon_Attack12_CheckGoto(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *attributes = fp->attributes;
 
     if (fp->attack1_followup_frames != 0.0F)
@@ -376,7 +376,7 @@ bool32 ftCommon_Attack12_CheckGoto(GObj *fighter_gobj)
 // 0x8014EFE0
 bool32 ftCommon_Attack13_CheckGoto(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if(!ftStatus_CheckAttack13Kind(fp))
     {

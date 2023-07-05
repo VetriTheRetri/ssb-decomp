@@ -12,7 +12,7 @@ void ftCommon_DamageFall_ProcInterrupt(GObj *fighter_gobj)
 // 0x801435B0
 void ftCommon_DamageFall_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE7D8(fighter_gobj) != FALSE)
     {
@@ -30,7 +30,7 @@ void ftCommon_DamageFall_ProcMap(GObj *fighter_gobj)
 // 0x80143630
 void func_ovl3_80143630(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D8EB8(fp);
     func_ovl2_800E806C(fp, 3, 0);
@@ -46,7 +46,7 @@ void ftCommon_DamageFall_SetStatusFromDamage(GObj *fighter_gobj)
 // 0x801436A0
 void ftCommon_DamageFall_SetStatusFromCliffWait(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_DamageFall, 0.0F, 1.0F, FTSTATUPDATE_FASTFALL_PRESERVE);
     func_ovl3_80143630(fighter_gobj);

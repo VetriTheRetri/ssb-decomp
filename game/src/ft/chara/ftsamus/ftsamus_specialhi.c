@@ -12,7 +12,7 @@ void ftSamus_SpecialHi_ProcUpdate(GObj *fighter_gobj)
 // 0x8015DC94
 void ftSamus_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->command_vars.flags.flag1 != FALSE)
     {
@@ -30,7 +30,7 @@ void ftSamus_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 // 0x8015DD20
 bool32 ftSamus_SpecialHi_CheckIgnorePass(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (!(fp->coll_data.ground_flags & MPCOLL_MASK_NONSOLID) || (fp->input.pl.stick_range.y >= FTSAMUS_SCREWATTACK_PASS_STICK_RANGE_MIN))
     {
@@ -42,7 +42,7 @@ bool32 ftSamus_SpecialHi_CheckIgnorePass(GObj *fighter_gobj)
 // 0x8015DD58
 void ftSamus_SpecialHi_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Air)
     {
@@ -65,7 +65,7 @@ void ftSamus_SpecialHi_ProcMap(GObj *fighter_gobj)
 // 0x8015DE0C
 void ftSamus_SpecialHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -76,7 +76,7 @@ void ftSamus_SpecialHi_SetStatus(GObj *fighter_gobj)
 // 0x8015DE54
 void ftSamus_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D8E50(fp, fp->attributes);
     ftPhysics_ClampDriftStickRange(fp, 0, FTSAMUS_SCREWATTACK_DRIFT_MUL, FTSAMUS_SCREWATTACK_DRIFT_CLAMP);
@@ -85,7 +85,7 @@ void ftSamus_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 // 0x8015DE90
 void ftSamus_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE;
     ftAnim_Update(fighter_gobj);

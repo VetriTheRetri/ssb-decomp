@@ -5,7 +5,7 @@
 // 0x8014E050
 void ftDonkey_ThrowFDamage_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.throwfdamage.hitstun_timer -= 1.0F;
 
@@ -24,7 +24,7 @@ void ftDonkey_ThrowFDamage_ProcUpdate(GObj *fighter_gobj)
 // 0x8014E0E0
 void ftDonkey_ThrowFDamage_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     f32 knockback_resist = (this_fp->knockback_resist_status < this_fp->knockback_resist_passive) ? this_fp->knockback_resist_passive : this_fp->knockback_resist_status;
 
     this_fp->damage_knockback -= knockback_resist;
@@ -38,7 +38,7 @@ void ftDonkey_ThrowFDamage_SetStatus(GObj *fighter_gobj)
     if (this_fp->catch_gobj != NULL)
     {
         GObj *catch_gobj = this_fp->catch_gobj;
-        Fighter_Struct *capture_fp = ftGetStruct(catch_gobj);
+        ftStruct *capture_fp = ftGetStruct(catch_gobj);
 
         ftCommon_Thrown_ProcPhysics(catch_gobj);
         func_ovl2_800EB528(capture_fp->joint[ftParts_TopN_Joint]);

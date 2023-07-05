@@ -53,7 +53,7 @@ typedef enum ftStatusUpdateFlags
 #define FTPARTS_HURT_NUM_MAX 11
 #define FTPARTS_JOINT_NUM_MAX 37
 
-typedef struct Fighter_Struct Fighter_Struct;
+typedef struct ftStruct ftStruct;
 
 typedef struct SpecialHit
 {
@@ -105,7 +105,7 @@ typedef struct ftScriptInfo
 {
     s32 anim_id;
     intptr_t offset;
-    FighterAnimFlags anim_flags;
+    ftAnimFlags anim_flags;
 
 } ftScriptInfo;
 
@@ -605,7 +605,7 @@ typedef enum plKind
 
 } plKind;
 
-typedef struct FighterAnimFlags
+typedef struct ftAnimFlags
 {
     union
     {
@@ -649,7 +649,7 @@ typedef struct FighterAnimFlags
         u32 word;
     };
 
-} FighterAnimFlags;
+} ftAnimFlags;
 
 typedef struct gmHitCollisionRecord
 {
@@ -687,8 +687,8 @@ typedef struct ftSpawnInfo
     u8 team;
     u8 player;
     u8 model_lod;
-    u8 costume_id;
-    u8 shade_id;
+    u8 costume;
+    u8 shade;
     u8 handicap;
     u8 cp_level;
     u8 stock_count;
@@ -712,7 +712,7 @@ typedef struct ftSpawnInfo
 
 } ftSpawnInfo;
 
-typedef struct _Fighter_Hit
+typedef struct _ftHitbox
 {
     gmHitCollisionUpdateState update_state;
     u32 group_id;
@@ -743,7 +743,7 @@ typedef struct _Fighter_Hit
     u8 filler[0xC0 - 0x80];
     f32 unk_fthit_0xC0;
 
-} Fighter_Hit;
+} ftHitbox;
 
 typedef struct FighterHurtDesc
 {
@@ -755,7 +755,7 @@ typedef struct FighterHurtDesc
 
 } FighterHurtDesc;
 
-typedef struct Fighter_Hurt
+typedef struct ftHurtbox
 {
     s32 hitstatus;
     s32 joint_index;
@@ -765,7 +765,7 @@ typedef struct Fighter_Hurt
     Vec3f offset;
     Vec3f size;
 
-} Fighter_Hurt;
+} ftHurtbox;
 
 typedef struct ftHitCollisionLog // Might have to return once structs are cleaned up (alas once forward declarations are implemented to replace void* with struct*)
 {
@@ -773,7 +773,7 @@ typedef struct ftHitCollisionLog // Might have to return once structs are cleane
     void *attacker_hit;
     s32 hitbox_id;
     GObj *attacker_gobj;
-    Fighter_Hurt *victim_hurt; // Victim fighter's hurtbox
+    ftHurtbox *victim_hurt; // Victim fighter's hurtbox
     u8 attacker_player;
     s32 attacker_player_number;
 
@@ -823,16 +823,16 @@ typedef struct ftPartsUnkIndexTable // Probably animation-related
 
 } ftPartsUnkIndexTable;
 
-typedef struct AfterImageDesc
+typedef struct ftAfterImage
 {
     s16 unk_afid_0x0;
     s16 unk_afid_0x2;
     s16 unk_afid_0x4;
     Vec3f vec;
 
-} AfterImageDesc;
+} ftAfterImage;
 
-typedef struct Fighter_Com
+typedef struct ftComputer
 {
     u8 behave_current;
     u8 behave_default;
@@ -906,11 +906,11 @@ typedef struct Fighter_Com
     s32 target_line_id; // Line ID target is standing on
     Vec2f target_pos;
     f32 target_dist; // FLOAT_MAX when offstage
-    Fighter_Struct *target_fp; // I assume this is what the documentation means?
+    ftStruct *target_fp; // I assume this is what the documentation means?
     u8 filler_0x70[0x8C - 0x70];
     f32 unk_ftcom_0x8C;
 
-} Fighter_Com;
+} ftComputer;
 
 typedef struct ftCommonAttributes
 {
@@ -1055,7 +1055,7 @@ typedef struct ftIntroStatusDesc
 
 } ftIntroStatusDesc;
 
-struct Fighter_Struct
+struct ftStruct
 {
     void *fp_alloc_next;
     GObj *fighter_gobj;
@@ -1064,8 +1064,8 @@ struct Fighter_Struct
     u8 player;
     u8 lod_current;  // Hi-Poly = 1, Low-Poly = 2
     u8 lod_match; // Hi-Poly = 1, Low-Poly = 2
-    u8 costume_id;
-    u8 shade_id; // i.e. When multiple instances of the same character costume are in-game
+    u8 costume;
+    u8 shade; // i.e. When multiple instances of the same character costume are in-game
     u8 handicap; // Original note: offset to attack hitbox type in 5x (???)
     u8 cp_level; // CPU level
     s8 stock_count;
@@ -1102,7 +1102,7 @@ struct Fighter_Struct
 
     } phys_info;
 
-    Coll_Data coll_data;
+    mpCollData coll_data;
 
     u8 jumps_used;
     u8 unk_ft_0x149;
@@ -1112,11 +1112,11 @@ struct Fighter_Struct
     s32 attack1_status_id;
     s32 attack1_input_count;
     s32 cliffcatch_wait;
-    s32 time_since_last_z; // Frames since last Z-press, resets to 65536 on action state change
-    s32 acid_wait;    // Wait this many frames before fighter can be hurt by Planet Zebes acid again?
-    s32 twister_wait; // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
-    s32 tarucann_wait;// Wait this many frames before fighter can enter Barrel Cannon again
-    s32 damagefloor_wait;// Wait this many frames before fighter can be hurt by damaging floors again (e.g. Mario's Board the Platforms stage)
+    s32 time_since_last_z;  // Frames since last Z-press, resets to 65536 on action state change
+    s32 acid_wait;          // Wait this many frames before fighter can be hurt by Planet Zebes acid again?
+    s32 twister_wait;       // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
+    s32 tarucann_wait;      // Wait this many frames before fighter can enter Barrel Cannon again
+    s32 damagefloor_wait;   // Wait this many frames before fighter can be hurt by damaging floors again (e.g. Mario's Board the Platforms stage)
     s32 unk_0x174;
     s32 unk_0x178;
 
@@ -1197,7 +1197,7 @@ struct Fighter_Struct
     u8 capture_ignore_mask; // Fighter is immune to these grab types
     u8 catch_mask;          // Fighter's current grab type
 
-    FighterAnimFlags anim_flags;
+    ftAnimFlags anim_flags;
 
     Vec3f anim_vel;
     u32 unk_0x1A8;
@@ -1215,36 +1215,38 @@ struct Fighter_Struct
 
     } input;
 
-    Fighter_Com fighter_com;
+    ftComputer fighter_com;
 
     f32 unk_fighter_0x25C;
     f32 unk_fighter_0x260;
     f32 unk_fighter_0x264;
 
-    u8 tap_stick_x; // Frames control stick has been tapped
-    u8 tap_stick_y; // Frames control stick has been tapped
-    u8 hold_stick_x; // Frames control stick has been tapped or held
-    u8 hold_stick_y; // Frames control stick has been tapped or held
+    u8 tap_stick_x;         // Frames control stick has been tapped
+    u8 tap_stick_y;         // Frames control stick has been tapped
+    u8 hold_stick_x;        // Frames control stick has been tapped or held
+    u8 hold_stick_y;        // Frames control stick has been tapped or held
 
-    s32 breakout_wait; // Frames until fighter breaks out of shield break / sleep / Cargo Throw
-    s8 breakout_lr; // Whether victim is mashing left or right
-    s8 breakout_ud; // Whether victim is mashing up or down
+    s32 breakout_wait;      // Frames until fighter breaks out of shield break / sleep / Cargo Throw
+    s8 breakout_lr;         // Whether victim is mashing left or right
+    s8 breakout_ud;         // Whether victim is mashing up or down
 
     u8 shuffle_frame_index; // Ranges from 0-3; position of fighter's model vibration is adjusted based on this index when receiving hitlag
     u8 shuffle_index_max;   // How many iterations the frame index increments before looping back to 0;
     s8 is_shuffle_electric; // Fighter vibrates horizontally instead of vertically if hit by an electric attack
-    s16 shuffle_timer; // Model shift timer
+    s16 shuffle_timer;      // Model shift timer
+
     GObj *throw_gobj;
     ftKind throw_ft_kind;
-    u8 throw_team; // Thrower's team?
+    u8 throw_team;          // Thrower's team?
     u8 throw_player;
     s32 throw_player_number;
+
     s32 attack_id;
     u16 motion_count;
     gmStatFlags stat_flags;
     u16 stat_count;
 
-    Fighter_Hit fighter_hit[4];
+    ftHitbox fighter_hit[4];
 
     s32 invincible_timer;
     s32 intangible_timer;
@@ -1253,7 +1255,8 @@ struct Fighter_Struct
     s32 star_hitstatus;  // Enemy CPUs avoid player depending on this?
     s32 hitstatus;
 
-    Fighter_Hurt fighter_hurt[FTPARTS_HURT_NUM_MAX];
+    ftHurtbox fighter_hurt[FTPARTS_HURT_NUM_MAX];
+
     f32 unk_ft_0x7A0;
     f32 hitlag_mul;
     f32 shield_lifeup_wait;
@@ -1301,9 +1304,13 @@ struct Fighter_Struct
     void (*proc_capture)(GObj*, GObj*); // Run this callback on grabbed victim
     GObj *catch_gobj;   // GObj this fighter has caught
     GObj *capture_gobj; // GObj this fighter is captured by
+
     ftThrowHitDesc *fighter_throw; // Pointer to throw description
+
     GObj *item_hold;
+
     SpecialHit *special_hit;
+
     Vec3f entry_pos;
 
     f32 fighter_cam_zoom_frame; // Maximum size of fighter's camera range?
@@ -1345,7 +1352,7 @@ struct Fighter_Struct
     gmSoundEffect *p_loop_sfx;
     u16 loop_sfx_id;
 
-    Color_Overlay colanim;
+    caStruct colanim;
 
     u8 unk_0xA8C;
     u8 unk_0xA8D;
@@ -1360,7 +1367,7 @@ struct Fighter_Struct
         u8 is_itemswing;
         s8 render_state;
         u8 desc_index;
-        AfterImageDesc desc[3];
+        ftAfterImage desc[3];
 
     } afterimage;
 
@@ -1402,16 +1409,16 @@ struct Fighter_Struct
 };
 
 #define ftGetStruct(fighter_gobj) \
-((Fighter_Struct*) (fighter_gobj)->user_data) \
+((ftStruct*) (fighter_gobj)->user_data) \
 
-#define ftSetupDropItem(fp)                         \
-{                                                   \
-    Vec3f vel;                                      \
-                                                    \
-    vel.x = vel.y = vel.z = 0.0F;                   \
-                                                    \
-    itMain_SetFighterDrop((fp)->item_hold, &vel, 1.0F);\
-}                                                   \
+#define ftSetupDropItem(fp)                             \
+{                                                       \
+    Vec3f vel;                                          \
+                                                        \
+    vel.x = vel.y = vel.z = 0.0F;                       \
+                                                        \
+    itMain_SetFighterDrop((fp)->item_hold, &vel, 1.0F); \
+}                                                       \
 
 #define AttributesGetStruct(fp) \
 ((ftCommonAttributes*)fp->attributes) \
@@ -1428,9 +1435,9 @@ void ftStatus_Update(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 ani
 void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt); // FallSpecial Action State
 void func_ovl2_800DDE84(GObj*, void(*proc_map)(GObj*)); // Grounded Collision check (stop at ledge?)
 void ftMap_CheckGroundCliff(GObj*, void(*proc_map)(GObj*)); // Aerial Collision check (ledge grab?)
-void ftMap_SetGround(Fighter_Struct*); // ???
-void func_ovl2_800D8EB8(Fighter_Struct*); // ???
-void ftMap_SetAir(Fighter_Struct*); // ???
+void ftMap_SetGround(ftStruct*); // ???
+void func_ovl2_800D8EB8(ftStruct*); // ???
+void ftMap_SetAir(ftStruct*); // ???
 void ftAnim_Update(GObj*); // ???
 
 // Macro to check if a move has been interrupted by any standard action

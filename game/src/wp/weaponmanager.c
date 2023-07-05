@@ -5,17 +5,17 @@
 #include <game/src/gm/gmmatch.h>
 #include <game/src/it/item.h>
 
-extern Weapon_Struct *wpManager_Global_CurrentUserData;
+extern wpStruct *wpManager_Global_CurrentUserData;
 extern u32 wpManager_Global_GroupIndex;
 extern s32 dbObject_DisplayModeItem;
 
 // 0x801654B0
 void wpManager_AllocUserData(void)
 {
-    Weapon_Struct *wp;
+    wpStruct *wp;
     s32 i;
 
-    wpManager_Global_CurrentUserData = wp = hal_alloc(sizeof(Weapon_Struct) * WEAPON_ALLOC_MAX, 8U);
+    wpManager_Global_CurrentUserData = wp = hal_alloc(sizeof(wpStruct) * WEAPON_ALLOC_MAX, 8U);
 
     for (i = 0; i < (WEAPON_ALLOC_MAX - 1); i++)
     {
@@ -30,10 +30,10 @@ void wpManager_AllocUserData(void)
 }
 
 // 0x80165558
-Weapon_Struct* wpManager_GetStructSetNextAlloc()
+wpStruct* wpManager_GetStructSetNextAlloc()
 {
-    Weapon_Struct *next_weapon = wpManager_Global_CurrentUserData;
-    Weapon_Struct *current_weapon;
+    wpStruct *next_weapon = wpManager_Global_CurrentUserData;
+    wpStruct *current_weapon;
 
     if (next_weapon == NULL)
     {
@@ -47,7 +47,7 @@ Weapon_Struct* wpManager_GetStructSetNextAlloc()
 }
 
 // 0x80165588
-void wpManager_SetPrevAlloc(Weapon_Struct *wp)
+void wpManager_SetPrevAlloc(wpStruct *wp)
 {
     wp->wp_alloc_next = wpManager_Global_CurrentUserData;
 
@@ -74,10 +74,10 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     GObj *weapon_gobj;
     void (*cb)(GObj*);
     wpCommonAttributes *attributes;
-    Weapon_Struct *wp;
-    Weapon_Struct *owner_wp;
-    Item_Struct *ap;
-    Fighter_Struct *fp;
+    wpStruct *wp;
+    wpStruct *owner_wp;
+    itStruct *ap;
+    ftStruct *fp;
     s32 unused[8];
 
     wp = wpManager_GetStructSetNextAlloc(spawn_gobj);
@@ -354,7 +354,7 @@ void wpManager_UpdateWeaponVectors(DObj *joint, Vec3f *vec)
 // 0x80165F60
 void wpManager_UpdateHitPositions(GObj *weapon_gobj) // Update hitbox(es?)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj);
     s32 i;
 
@@ -414,7 +414,7 @@ void wpManager_UpdateHitPositions(GObj *weapon_gobj) // Update hitbox(es?)
 // 0x801661E0
 void wpManager_UpdateHitVictimRecord(GObj *weapon_gobj) // Set hitbox victim array
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     gmHitCollisionRecord *targets;
     Weapon_Hit *wp_hit;
     s32 i;
@@ -450,7 +450,7 @@ void wpManager_UpdateHitVictimRecord(GObj *weapon_gobj) // Set hitbox victim arr
 // 0x801662BC
 void wpManager_ProcWeaponMain(GObj *weapon_gobj) // Run item logic pass 1 (animation, physics, collision, despawn check)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     Vec3f *translate;
     DObj *joint;
 
@@ -619,7 +619,7 @@ void wpManager_UpdateHitVictimInteractStats(Weapon_Hit *wp_hit, GObj *victim_gob
     }
 }
 
-void func_ovl3_8016679C(Weapon_Struct *this_wp, Weapon_Hit *wp_hit, GObj *target_gobj, s32 hitbox_type, u32 interact_mask)
+void func_ovl3_8016679C(wpStruct *this_wp, Weapon_Hit *wp_hit, GObj *target_gobj, s32 hitbox_type, u32 interact_mask)
 {
     if (this_wp->group_id != 0)
     {
@@ -627,7 +627,7 @@ void func_ovl3_8016679C(Weapon_Struct *this_wp, Weapon_Hit *wp_hit, GObj *target
 
         while (victim_gobj != NULL)
         {
-            Weapon_Struct *victim_wp = wpGetStruct(victim_gobj);
+            wpStruct *victim_wp = wpGetStruct(victim_gobj);
 
             if (victim_wp->group_id == this_wp->group_id)
             {
@@ -639,7 +639,7 @@ void func_ovl3_8016679C(Weapon_Struct *this_wp, Weapon_Hit *wp_hit, GObj *target
     else wpManager_UpdateHitVictimInteractStats(wp_hit, target_gobj, hitbox_type, interact_mask);
 }
 
-void func_ovl3_80166854(Weapon_Struct *this_wp, Weapon_Hit *this_hit, s32 this_hit_id, Weapon_Struct *victim_wp, Weapon_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
+void func_ovl3_80166854(wpStruct *this_wp, Weapon_Hit *this_hit, s32 this_hit_id, wpStruct *victim_wp, Weapon_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
 {
     s32 this_hit_damage;
     s32 victim_hit_damage;
@@ -681,7 +681,7 @@ void func_ovl3_80166854(Weapon_Struct *this_wp, Weapon_Hit *this_hit, s32 this_h
 void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision with other items
 {
     GObj *other_gobj;
-    Weapon_Struct *this_wp, *other_wp;
+    wpStruct *this_wp, *other_wp;
     Weapon_Hit *other_hit, *this_hit;
     gmHitCollisionFlags these_flags, those_flags;
     s32 m, n, i, j;
@@ -707,7 +707,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
             }
             else if ((is_check_self != FALSE) && (this_wp->owner_gobj != other_wp->owner_gobj))
             {
-                if ((gMatchData->is_team_battle != TRUE) || (gMatchData->is_team_attack != FALSE)) goto next_check;
+                if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE)) goto next_check;
                 {
                     if (this_wp->team == other_wp->team) goto next_gobj; // YUCKY match but you can't say it's only a half
 
@@ -766,7 +766,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
 // 0x80166BE4
 void wpManager_ProcHitCollisions(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     if ((wp->hit_normal_damage != 0) || (wp->hit_refresh_damage != 0)) // 0x238 = hit article damage?
     {
@@ -826,7 +826,7 @@ next_check:
 
     if (wp->reflect_gobj != NULL)
     {
-        Fighter_Struct *fp;
+        ftStruct *fp;
 
         wp->owner_gobj = wp->reflect_gobj;
 

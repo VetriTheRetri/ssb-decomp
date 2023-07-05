@@ -2,18 +2,18 @@
 #include "weapon.h"
 #include "fighter.h"
 
-extern itStatusDesc Item_Hitokage_Status[];
+extern itStatusDesc itHitboxokage_Status[];
 
 void func_ovl3_80183DA0(GObj *item_gobj)
 {
-    itMain_SetItemStatus(item_gobj, Item_Hitokage_Status, 0);
+    itMain_SetItemStatus(item_gobj, itHitboxokage_Status, 0);
 
     itGetStruct(item_gobj)->proc_dead = func_ovl3_80183F88;
 }
 
 bool32 func_ovl3_80183DE0(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
@@ -57,7 +57,7 @@ bool32 func_ovl3_80183DE0(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80183F20(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint;
 
     itMain_UpdatePhysicsAir(ap, ITHITOKAGE_GRAVITY, ITHITOKAGE_T_VEL);
@@ -76,7 +76,7 @@ bool32 func_ovl3_80183F88(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80183F94(GObj *item_gobj)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (ap->damage_knockback >= 100.0F)
@@ -98,14 +98,14 @@ bool32 jtgt_ovl3_80183F94(GObj *item_gobj)
 }
 
 extern s32 D_ovl2_8012EB60;
-extern itCreateDesc Item_Hitokage_Data;
+extern itCreateDesc itHitboxokage_Data;
 
 GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Item_Hitokage_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itHitboxokage_Data, pos, vel, flags);
     s32 unused;
     DObj *joint;
-    Item_Struct *ap;
+    itStruct *ap;
 
     if (item_gobj != NULL)
     {
@@ -138,7 +138,7 @@ GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
 bool32 jtgt_ovl3_8018415C(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     if (wpMain_DecLifeCheckExpire(ip) != FALSE)
     {
@@ -170,8 +170,8 @@ extern s32 D_ovl3_8018D044;
 
 bool32 jtgt_ovl3_80184204(GObj *weapon_gobj)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
     Vec3f *translate;
 
     ip->lifetime = ITHITOKAGE_FLAME_LIFETIME;
@@ -191,7 +191,7 @@ extern wpCreateDesc Weapon_Hitokage_Flame_Data;
 GObj *func_ovl3_801842C8(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Weapon_Hitokage_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
-    Weapon_Struct *ip;
+    wpStruct *ip;
 
     if (weapon_gobj == NULL)
     {
@@ -213,7 +213,7 @@ GObj *func_ovl3_801842C8(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
 void func_ovl3_801843C4(GObj *item_gobj, Vec3f *pos)
 {
-    Item_Struct *ap;
+    itStruct *ap;
     Vec3f vel;
 
     vel.x = cosf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * -ITHITOKAGE_FLAME_VEL_XY;

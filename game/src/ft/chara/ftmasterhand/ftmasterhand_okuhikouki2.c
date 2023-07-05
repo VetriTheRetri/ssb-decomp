@@ -14,7 +14,7 @@ void ftMasterHand_Okuhikouki2_ProcUpdate(GObj *fighter_gobj)
 // 0x801595F0
 void ftMasterHand_Okuhikouki2_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
     f32 dist_x;
     f32 vel_x;
 
@@ -40,7 +40,7 @@ void ftMasterHand_Okuhikouki2_ProcPhysics(GObj *fighter_gobj)
 // 0x801596B0
 void ftMasterHand_Okuhikouki2_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f *translate;
     Vec3f sp34;
     Vec3f sp28;

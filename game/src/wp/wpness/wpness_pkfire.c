@@ -50,7 +50,7 @@ bool32 wpNess_PKFire_ProcMap(GObj *weapon_gobj)
 // 0x8016AACC
 bool32 wpNess_PKFire_ProcHit(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
     Vec3f pos;
     Vec3f vel;
 
@@ -74,7 +74,7 @@ bool32 wpNess_PKFire_ProcHit(GObj *weapon_gobj)
 // 0x8016AB84
 bool32 wpNess_PKFire_ProcHop(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
     func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
     wpMain_VelSetLR(weapon_gobj);
@@ -87,8 +87,8 @@ bool32 wpNess_PKFire_ProcHop(GObj *weapon_gobj)
 // 0x8016ABF0
 bool32 wpNess_PKFire_ProcReflector(GObj *weapon_gobj)
 {
-    Weapon_Struct *wp = wpGetStruct(weapon_gobj);
-    Fighter_Struct *fp = ftGetStruct(wp->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
     wp->lifetime = WPPKFIRE_LIFETIME;
 
@@ -113,7 +113,7 @@ GObj* wpNess_PKFire_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel, f32
 {
     s32 unused;
     GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpNess_PKFire_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
-    Weapon_Struct *wp;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {

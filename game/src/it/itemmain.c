@@ -4,7 +4,7 @@
 
 void func_ovl3_80172310(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->rotate_step = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ITEM_SPIN_SPEED_MUL_DEFAULT) : 0.0F;
 
@@ -18,7 +18,7 @@ void func_ovl3_80172394(GObj *item_gobj, bool32 is_prev_spawn)
 {
     // is_prev_spawn = whether article is newly spawned or previously spawned; 0 = new, 1 = old
 
-    Item_Struct *ip = itGetStruct(item_gobj); // Ternary doesn't match here smh
+    itStruct *ip = itGetStruct(item_gobj); // Ternary doesn't match here smh
 
     if (is_prev_spawn == FALSE)
     {
@@ -37,7 +37,7 @@ void func_ovl3_80172394(GObj *item_gobj, bool32 is_prev_spawn)
 
 void func_ovl3_8017245C(GObj *item_gobj, f32 *spin_speed, bool32 is_smash_throw)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->rotate_step = (is_smash_throw != FALSE) ? ITEM_SPIN_SPEED_SET_SMASH_THROW : ITEM_SPIN_SPEED_SET_NORMAL_THROW;
 
@@ -45,13 +45,12 @@ void func_ovl3_8017245C(GObj *item_gobj, f32 *spin_speed, bool32 is_smash_throw)
     {
         ip->rotate_step = -ip->rotate_step;
     }
-
     ip->rotate_step = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ip->rotate_step) : 0.0F;
 }
 
 void func_ovl3_80172508(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->lr = (ip->phys_info.vel_air.x >= 0.0F) ? RIGHT : LEFT;
 
@@ -59,7 +58,7 @@ void func_ovl3_80172508(GObj *item_gobj)
 }
 
 // 0x80172558
-void itMain_UpdatePhysicsAir(Item_Struct *ip, f32 gravity, f32 terminal_velocity)
+void itMain_UpdatePhysicsAir(itStruct *ip, f32 gravity, f32 terminal_velocity)
 {
     ip->phys_info.vel_air.y -= gravity;
 
@@ -75,7 +74,7 @@ extern s32 dbObject_DisplayMode_Global_Article; // Static (.bss)
 // 0x801725BC
 void itMain_ResetPlayerVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->owner_gobj = NULL;
     ip->team = ITEM_TEAM_DEFAULT;
@@ -88,7 +87,7 @@ void itMain_ResetPlayerVars(GObj *item_gobj)
 }
 
 // 0x801725F8
-void itMain_ClearHitRecord(Item_Struct *ip)
+void itMain_ClearHitRecord(itStruct *ip)
 {
     s32 i;
 
@@ -109,7 +108,7 @@ void itMain_ClearHitRecord(Item_Struct *ip)
 // 0x8017275C
 void itMain_RefreshHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_ClearHitRecord(ip);
 
@@ -121,7 +120,7 @@ void itMain_RefreshHit(GObj *item_gobj)
 // 0x8017279C
 void itMain_ClearOwnerStats(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_damage_all = TRUE;
 
@@ -133,7 +132,7 @@ void itMain_ClearOwnerStats(GObj *item_gobj)
 // 0x801727BC
 void itMain_CopyDamageStats(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->owner_gobj = ip->damage_gobj;
     ip->team = ip->damage_team;
@@ -144,7 +143,7 @@ void itMain_CopyDamageStats(GObj *item_gobj)
 }
 
 // 0x801727F4
-s32 itMain_ApplyHitDamage(Item_Struct *ip)
+s32 itMain_ApplyHitDamage(itStruct *ip)
 {
     s32 damage;
 
@@ -162,7 +161,7 @@ s32 itMain_ApplyHitDamage(Item_Struct *ip)
 // 0x80172890
 bool32 atCommon_CheckTypeShootEmpty(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (((ip->it_kind == It_Kind_StarRod) || (ip->it_kind == It_Kind_LGun) || (ip->it_kind == It_Kind_FFlower)) && (ip->it_multi == 0))
     {
@@ -174,11 +173,11 @@ bool32 atCommon_CheckTypeShootEmpty(GObj *item_gobj)
 // 0x801728D4
 void itMain_DestroyItem(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if ((ip->is_hold) && (ip->owner_gobj != NULL))
     {
-        Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+        ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
         fp->item_hold = NULL;
 
@@ -199,9 +198,9 @@ void itMain_DestroyItem(GObj *item_gobj)
 // 0x80172984
 void itMain_SetFighterRelease(GObj *item_gobj, Vec3f *vel, f32 stale, u16 stat_flags, u16 stat_count) // Very high probability that Link's Bomb erroneously declares this without flag1 and flag2
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     GObj *fighter_gobj = ip->owner_gobj;
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
     s32 joint_index;
 
@@ -244,9 +243,9 @@ extern void (*itCommon_Drop_ProcList[It_Kind_EnumMax])(GObj*); // Assumed to con
 // 0x80172AEC
 void itMain_SetFighterDrop(GObj *item_gobj, Vec3f *vel, f32 stale)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     GObj *owner_gobj = ip->owner_gobj;
-    Fighter_Struct *fp = ftGetStruct(owner_gobj);
+    ftStruct *fp = ftGetStruct(owner_gobj);
     void (*proc_drop)(GObj*) = itCommon_Drop_ProcList[ip->it_kind];
 
     if (proc_drop != NULL)
@@ -263,9 +262,9 @@ extern void (*itCommon_Throw_ProcList[It_Kind_EnumMax])(GObj*);
 // 0x80172B78
 void itMain_SetFighterThrow(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_smash_throw)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     GObj *owner_gobj = ip->owner_gobj;
-    Fighter_Struct *fp = ftGetStruct(owner_gobj);
+    ftStruct *fp = ftGetStruct(owner_gobj);
     void (*proc_throw)(GObj*);
 
     if (ip->weight == It_Weight_Light)
@@ -299,8 +298,8 @@ extern void (*itCommon_Pickup_ProcList[It_Kind_EnumMax])(GObj*);
 // 0x80172CA4
 void itMain_SetFighterPickup(GObj *item_gobj, GObj *fighter_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     DObj *joint;
     void (*proc_pickup)(GObj*);
     Vec3f pos;
@@ -376,7 +375,7 @@ void itMain_SetFighterPickup(GObj *item_gobj, GObj *fighter_gobj)
 // 0x80172E74
 void itMain_SetGroundPickup(GObj *item_gobj) // Airborne article becomes grounded?
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -393,7 +392,7 @@ void itMain_SetGroundPickup(GObj *item_gobj) // Airborne article becomes grounde
 // 0x80172EC8
 void itMain_SetItemStatus(GObj *item_gobj, itStatusDesc *status_desc, s32 status_id) // Change article state
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->proc_update = status_desc[status_id].proc_update;
     ip->proc_map = status_desc[status_id].proc_map;
@@ -415,21 +414,21 @@ void itMain_SetItemStatus(GObj *item_gobj, itStatusDesc *status_desc, s32 status
 // 0x80172F98
 bool32 itMain_CheckSetColAnimIndex(GObj *item_gobj, s32 colanim_id, s32 duration)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     return caCheckSetColAnimIndex(&ip->colanim, colanim_id, duration);
 }
 
 void func_ovl3_80172FBC(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     caResetColAnim(&ip->colanim);
 }
 
 void func_ovl3_80172FE0(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->phys_info.vel_air.x *= -0.06F;
 
@@ -513,7 +512,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
 // 0x80173180
 void itMain_UpdateHitEvent(GObj *item_gobj, itHitEvent *ev)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (ip->it_multi == ev[ip->item_event_index].timer)
     {
@@ -535,9 +534,9 @@ extern s8 gmBonusStat_MewCatcher;
 // 0x80173328
 GObj* itMain_CreateMonster(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     GObj *monster_gobj;
-    Item_Struct *mp;
+    itStruct *mp;
     s32 i, j;
     s32 index;
     s32 unused;
@@ -548,7 +547,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     vel.z = 0.0F;
 
     // Is this checking to spawn Mew? Can only spawn after at least one character has been unlocked.
-    if ((gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_CHARACTERS) && (rand_u16_range(151) == 0) && (Monster_Info.monster_curr != It_Kind_Mew) && (Monster_Info.monster_prev != It_Kind_Mew))
+    if ((gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_CHARACTERS) && (rand_u16_range(151) == 0) && (gMonsterData.monster_curr != It_Kind_Mew) && (gMonsterData.monster_prev != It_Kind_Mew))
     {
         index = It_Kind_Mew;
     }
@@ -556,20 +555,20 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     {
         for (i = j = It_Kind_MbMonsterStart; i < It_Kind_Mew; i++) // Pokémon IDs
         {
-            if ((i != Monster_Info.monster_curr) && (i != Monster_Info.monster_prev))
+            if ((i != gMonsterData.monster_curr) && (i != gMonsterData.monster_prev))
             {
-                Monster_Info.monster_index[j - It_Kind_MbMonsterStart] = i;
+                gMonsterData.monster_index[j - It_Kind_MbMonsterStart] = i;
                 j++;
             }
         }
-        index = Monster_Info.monster_index[rand_u16_range(Monster_Info.monster_count)];
+        index = gMonsterData.monster_index[rand_u16_range(gMonsterData.monster_count)];
     }
-    if (Monster_Info.monster_count != 10)
+    if (gMonsterData.monster_count != 10)
     {
-        Monster_Info.monster_count--;
+        gMonsterData.monster_count--;
     }
-    Monster_Info.monster_prev = Monster_Info.monster_curr;
-    Monster_Info.monster_curr = index;
+    gMonsterData.monster_prev = gMonsterData.monster_curr;
+    gMonsterData.monster_curr = index;
 
     monster_gobj = func_ovl3_8016F238(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
@@ -584,7 +583,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
         mp->player_number = ip->player_number;
         mp->display_mode = ip->display_mode;
 
-        if (gMatchData->game_type == gmMatch_GameType_1PGame)
+        if (gpMatchData->game_type == gmMatch_GameType_1PGame)
         {
             if ((mp->player == gSceneData.player_port) && (mp->it_kind == It_Kind_Mew))
             {
@@ -598,7 +597,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
 // 0x801733E4
 bool32 itCommon_SDefault_ProcHop(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
     func_ovl3_80172508(item_gobj);
@@ -609,8 +608,8 @@ bool32 itCommon_SDefault_ProcHop(GObj *item_gobj)
 // 0x80173434
 bool32 itCommon_SDefault_ProcReflector(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
-    Fighter_Struct *fp = ftGetStruct(ip->owner_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
+    ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
     if ((ip->phys_info.vel_air.x * fp->lr) < 0.0F)
     {

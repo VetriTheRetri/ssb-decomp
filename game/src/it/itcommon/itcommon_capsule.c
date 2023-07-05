@@ -109,7 +109,7 @@ typedef enum itCapsuleStatus
 // 0x80173F90
 bool32 itCapsule_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -155,7 +155,7 @@ void itCapsule_GWait_SetStatus(GObj *item_gobj)
 // 0x80174098
 void itCapsule_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -177,7 +177,7 @@ void itCapsule_FHold_SetStatus(GObj *item_gobj)
 // 0x80174124
 bool32 itCapsule_FThrow_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -202,7 +202,7 @@ bool32 itCapsule_FThrow_ProcMap(GObj *item_gobj)
 // 0x801741B0
 void itCapsule_FThrow_SetStatus(GObj *item_gobj) // Capsule gets thrown
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_damage_all = TRUE;
 
@@ -236,7 +236,7 @@ extern intptr_t itCapsule_HitEvent_Offset; // D_NF_00000098
 // 0x80174270
 bool32 itCapsule_NExplode_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->it_multi++;
 
@@ -255,7 +255,7 @@ GObj* itCommon_Capsule_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
         ip->is_unused_item_bool = TRUE;
 
@@ -267,7 +267,7 @@ GObj* itCommon_Capsule_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 
 // 0x80174340
 void itCapsule_NExplode_InitItemVars(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->it_multi = 0;
     ip->item_event_index = 0;
@@ -302,7 +302,7 @@ void itCapsule_NExplode_SetStatus(GObj *item_gobj)
 // 0x80174428
 void itCapsule_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Effect_Unk *ep;
 

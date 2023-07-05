@@ -1,7 +1,7 @@
 #include "ftkirby.h"
 
 // 0x80156E60
-void ftKirby_CopySamus_SpecialN_DestroyChargeShot(Fighter_Struct *fp)
+void ftKirby_CopySamus_SpecialN_DestroyChargeShot(ftStruct *fp)
 {
     if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
     {
@@ -14,7 +14,7 @@ void ftKirby_CopySamus_SpecialN_DestroyChargeShot(Fighter_Struct *fp)
 // 0x80156E98
 void ftKirby_CopySamus_SpecialN_ProcDamage(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->fighter_vars.kirby.copysamus_charge_level = 0;
 
@@ -22,7 +22,7 @@ void ftKirby_CopySamus_SpecialN_ProcDamage(GObj *fighter_gobj)
 }
 
 // 0x80156EBC
-void ftKirby_CopySamus_SpecialN_GetChargeShotPosition(Fighter_Struct *fp, Vec3f *pos)
+void ftKirby_CopySamus_SpecialN_GetChargeShotPosition(ftStruct *fp, Vec3f *pos)
 {
     pos->x = 0.0F;
     pos->y = FTKIRBY_COPYSAMUS_CHARGE_OFF_Y;
@@ -32,7 +32,7 @@ void ftKirby_CopySamus_SpecialN_GetChargeShotPosition(Fighter_Struct *fp, Vec3f 
 }
 
 // 0x80156EFC
-void ftKirby_CopySamus_SpecialN_SetChargeShotPosition(Fighter_Struct *fp)
+void ftKirby_CopySamus_SpecialN_SetChargeShotPosition(ftStruct *fp)
 {
     Vec3f pos;
 
@@ -47,7 +47,7 @@ void ftKirby_CopySamus_SpecialN_SetChargeShotPosition(Fighter_Struct *fp)
 // 0x80156F54
 void func_ovl3_80156F54(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fighter_gobj->anim_frame <= 0.0F)
     {
@@ -66,7 +66,7 @@ void func_ovl3_80156F54(GObj *fighter_gobj)
 // 0x80156FCC
 void ftKirby_CopySamus_SpecialNStart_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -89,7 +89,7 @@ void ftKirby_CopySamus_SpecialAirNStart_ProcMap(GObj *fighter_gobj)
 // 0x8015704C
 void ftKirby_CopySamus_SpecialAirNStart_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->dobj_f1, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -100,7 +100,7 @@ void ftKirby_CopySamus_SpecialAirNStart_SwitchStatusGround(GObj *fighter_gobj)
 // 0x801570A8
 void ftKirby_CopySamus_SpecialNStart_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, fighter_gobj->anim_frame, fp->joint[ftParts_TopN_Joint]->dobj_f1, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -114,7 +114,7 @@ void ftKirby_CopySamus_SpecialNStart_SwitchStatusAir(GObj *fighter_gobj)
 // 0x80157114
 void ftKirby_CopySamus_SpecialNLoop_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.kirby.copysamus_specialn.charge_int--;
 
@@ -135,7 +135,7 @@ void ftKirby_CopySamus_SpecialNLoop_ProcUpdate(GObj *fighter_gobj)
 
             else if (fp->status_vars.kirby.copysamus_specialn.charge_gobj != NULL)
             {
-                Weapon_Struct *wp = wpGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
+                wpStruct *wp = wpGetStruct(fp->status_vars.kirby.copysamus_specialn.charge_gobj);
 
                 wp->weapon_vars.charge_shot.charge_size = fp->fighter_vars.kirby.copysamus_charge_level;
             }
@@ -146,7 +146,7 @@ void ftKirby_CopySamus_SpecialNLoop_ProcUpdate(GObj *fighter_gobj)
 // 0x801571A8
 void ftKirby_CopySamus_SpecialNLoop_ProcInterrupt(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 status_id;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_b) || (fp->input.pl.button_tap & fp->input.button_mask_a))
@@ -181,7 +181,7 @@ void ftKirby_CopySamus_SpecialNLoop_ProcMap(GObj *fighter_gobj)
 // 0x8015729C
 void ftKirby_CopySamus_SpecialNLoop_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNLoop, 0.0F, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -196,9 +196,9 @@ void ftKirby_CopySamus_SpecialNLoop_SetStatus(GObj *fighter_gobj)
 // 0x80157314
 void ftKirby_CopySamus_SpecialNEnd_ProcUpdate(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f pos;
-    Weapon_Struct *wp;
+    wpStruct *wp;
     f32 charge_recoil_x;
     f32 charge_recoil_y;
 
@@ -266,7 +266,7 @@ void ftKirby_CopySamus_SpecialAirNEnd_ProcMap(GObj *fighter_gobj)
 // 0x80157518
 void ftKirby_CopySamus_SpecialAirNEnd_SwitchStatusGround(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetGround(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -277,7 +277,7 @@ void ftKirby_CopySamus_SpecialAirNEnd_SwitchStatusGround(GObj *fighter_gobj)
 // 0x8015756C
 void ftKirby_CopySamus_SpecialNEnd_SwitchStatusAir(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNEnd, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -289,7 +289,7 @@ void ftKirby_CopySamus_SpecialNEnd_SwitchStatusAir(GObj *fighter_gobj)
 // 0x801575C8
 void ftKirby_CopySamus_SpecialNEnd_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNEnd, 0.0F, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
 
@@ -299,7 +299,7 @@ void ftKirby_CopySamus_SpecialNEnd_SetStatus(GObj *fighter_gobj)
 // 0x80157610
 void ftKirby_CopySamus_SpecialAirNEnd_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Ground)
     {
@@ -312,7 +312,7 @@ void ftKirby_CopySamus_SpecialAirNEnd_SetStatus(GObj *fighter_gobj)
 }
 
 // 0x8015767C
-f32 ftKirby_CopySamus_SpecialNStart_GetAnimPlaybackRate(Fighter_Struct *fp)
+f32 ftKirby_CopySamus_SpecialNStart_GetAnimPlaybackRate(ftStruct *fp)
 {
     f32 ret = fp->fighter_vars.kirby.copysamus_charge_level / (f32) FTKIRBY_COPYSAMUS_CHARGE_MAX;
 
@@ -322,7 +322,7 @@ f32 ftKirby_CopySamus_SpecialNStart_GetAnimPlaybackRate(Fighter_Struct *fp)
 }
 
 // 0x801576B4
-void ftKirby_CopySamus_SpecialN_InitStatusVars(Fighter_Struct *fp)
+void ftKirby_CopySamus_SpecialN_InitStatusVars(ftStruct *fp)
 {
     fp->proc_damage = ftKirby_CopySamus_SpecialN_ProcDamage;
     fp->status_vars.kirby.copysamus_specialn.charge_gobj = NULL;
@@ -332,7 +332,7 @@ void ftKirby_CopySamus_SpecialN_InitStatusVars(Fighter_Struct *fp)
 // 0x801576CC
 void ftKirby_CopySamus_SpecialNStart_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialNStart, 0.0F, ftKirby_CopySamus_SpecialNStart_GetAnimPlaybackRate(fp), FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
@@ -344,7 +344,7 @@ void ftKirby_CopySamus_SpecialNStart_SetStatus(GObj *fighter_gobj)
 // 0x80157744
 void ftKirby_CopySamus_SpecialAirNStart_SetStatus(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopySamus_SpecialAirNStart, 0.0F, ftKirby_CopySamus_SpecialNStart_GetAnimPlaybackRate(fp), FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);

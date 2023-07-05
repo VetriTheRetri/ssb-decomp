@@ -3,7 +3,7 @@
 // 0x801591A0
 void ftMasterHand_Move_ProcPhysics(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     Vec3f vel;
     f32 magnitude;
 
@@ -33,7 +33,7 @@ void ftMasterHand_Move_ProcPhysics(GObj *fighter_gobj)
 // 0x80159260
 void ftMasterHand_Move_ProcMap(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp;
+    ftStruct *fp;
 
     func_ovl2_800DE324(fighter_gobj);
 
@@ -52,7 +52,7 @@ void ftMasterHand_Move_ProcMap(GObj *fighter_gobj)
 // 0x801592B4
 void ftMasterHand_Move_SetStatus(GObj *fighter_gobj, void (*proc_setstatus)(GObj*), Vec3f *vel)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_Move, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 

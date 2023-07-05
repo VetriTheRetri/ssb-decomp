@@ -96,7 +96,7 @@ typedef enum itBatStatus
 // 0x80174E30 
 bool32 itBat_AFall_ProcUpdate(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     itMain_UpdatePhysicsAir(ip, ITBAT_GRAVITY, ITBAT_T_VEL);
     itManager_UpdateSpin(item_gobj);
@@ -130,7 +130,7 @@ void itBat_GWait_SetStatus(GObj *item_gobj)
 // 0x80174EF8
 void itBat_AFall_SetStatus(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->is_allow_pickup = FALSE;
 
@@ -164,7 +164,7 @@ bool32 itBat_FThrow_ProcMap(GObj *item_gobj)
 // 0x80174FD8
 bool32 itBat_FThrow_ProcHit(GObj *item_gobj)
 {
-    Item_Struct *ip = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     ip->weapon_hit.update_state = gmHitCollision_UpdateState_Disable;
 
@@ -202,7 +202,7 @@ GObj* itCommon_Bat_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
 
     if (item_gobj != NULL)
     {
-        Item_Struct *ip = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
         DObjGetStruct(item_gobj)->rotate.y = HALF_PI32;
 

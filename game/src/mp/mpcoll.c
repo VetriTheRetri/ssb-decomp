@@ -62,7 +62,7 @@ void func_ovl2_800D95E0(f32 *arg0, s32 *arg1, s32 *arg2, Vec3f *arg3)
     *arg3 = D_ovl2_80130E08;
 }
 
-bool32 func_ovl2_800D9628(Coll_Data *coll_data)
+bool32 func_ovl2_800D9628(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -85,7 +85,7 @@ bool32 func_ovl2_800D9628(Coll_Data *coll_data)
     else return FALSE;
 }
 
-void func_ovl2_800D96D8(Coll_Data *coll_data)
+void func_ovl2_800D96D8(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -115,7 +115,7 @@ void func_ovl2_800D96D8(Coll_Data *coll_data)
     }
 }
 
-bool32 func_ovl2_800D97F0(Coll_Data *coll_data)
+bool32 func_ovl2_800D97F0(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -138,7 +138,7 @@ bool32 func_ovl2_800D97F0(Coll_Data *coll_data)
     else return FALSE;
 }
 
-void func_ovl2_800D98A0(Coll_Data *coll_data)
+void func_ovl2_800D98A0(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -168,7 +168,7 @@ void func_ovl2_800D98A0(Coll_Data *coll_data)
     }
 }
 
-void func_ovl2_800D99B8(Coll_Data *coll_data)
+void func_ovl2_800D99B8(mpCollData *coll_data)
 {
     if (func_ovl2_800D9628(coll_data) != FALSE)
     {
@@ -180,7 +180,7 @@ void func_ovl2_800D99B8(Coll_Data *coll_data)
     }
 }
 
-bool32 func_ovl2_800D9A00(Coll_Data *coll_data)
+bool32 func_ovl2_800D9A00(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -200,7 +200,7 @@ bool32 func_ovl2_800D9A00(Coll_Data *coll_data)
     else return FALSE;
 }
 
-void func_ovl2_800D9AB0(Coll_Data *coll_data)
+void func_ovl2_800D9AB0(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -255,7 +255,7 @@ void func_ovl2_800D9AB0(Coll_Data *coll_data)
     }
 }
 
-bool32 func_ovl2_800D9CC0(Coll_Data *coll_data)
+bool32 func_ovl2_800D9CC0(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -275,7 +275,7 @@ bool32 func_ovl2_800D9CC0(Coll_Data *coll_data)
     else return FALSE;
 }
 
-void func_ovl2_800D9D70(Coll_Data *coll_data)
+void func_ovl2_800D9D70(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -330,7 +330,7 @@ void func_ovl2_800D9D70(Coll_Data *coll_data)
     }
 }
 
-void func_ovl2_800D9F84(Coll_Data *coll_data)
+void func_ovl2_800D9F84(mpCollData *coll_data)
 {
     if (func_ovl2_800D9A00(coll_data) != FALSE)
     {
@@ -342,7 +342,7 @@ void func_ovl2_800D9F84(Coll_Data *coll_data)
     }
 }
 
-void func_ovl2_800D9FCC(Coll_Data *coll_data) // Check if fighter is above ground while airborne
+void func_ovl2_800D9FCC(mpCollData *coll_data) // Check if fighter is above ground while airborne
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -357,7 +357,7 @@ void func_ovl2_800D9FCC(Coll_Data *coll_data) // Check if fighter is above groun
     }
 }
 
-bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*proc_map)(Coll_Data*, GObj*, s32), GObj *gobj, bool32 arg3)
+bool32 func_ovl2_800DA034(mpCollData *coll_data, bool32(*proc_map)(mpCollData*, GObj*, s32), GObj *gobj, bool32 arg3)
 {
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
@@ -423,7 +423,7 @@ bool32 func_ovl2_800DA034(Coll_Data *coll_data, bool32(*proc_map)(Coll_Data*, GO
     return sp50;
 }
 
-bool32 func_ovl2_800DA294(Coll_Data *coll_data)
+bool32 func_ovl2_800DA294(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     ObjectColl *p_object_coll = coll_data->p_object_coll;
@@ -508,7 +508,7 @@ bool32 func_ovl2_800DA294(Coll_Data *coll_data)
     return is_collide_lwall;
 }
 
-void func_ovl2_800DA658(Coll_Data *coll_data)
+void func_ovl2_800DA658(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -621,7 +621,7 @@ void func_ovl2_800DA658(Coll_Data *coll_data)
     }
 }
 
-bool32 func_ovl2_800DAAA8(Coll_Data *coll_data)
+bool32 func_ovl2_800DAAA8(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     ObjectColl *p_object_coll = coll_data->p_object_coll;
@@ -706,7 +706,7 @@ bool32 func_ovl2_800DAAA8(Coll_Data *coll_data)
     return is_collide_rwall;
 }
 
-void func_ovl2_800DAE6C(Coll_Data *coll_data)
+void func_ovl2_800DAE6C(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -819,7 +819,7 @@ void func_ovl2_800DAE6C(Coll_Data *coll_data)
     }
 }
 
-bool32 func_ovl2_800DB2BC(Coll_Data *coll_data)
+bool32 func_ovl2_800DB2BC(mpCollData *coll_data)
 {
     Vec3f *translate = coll_data->p_translate;
     s32 temp_v0;
@@ -890,7 +890,7 @@ bool32 func_ovl2_800DB2BC(Coll_Data *coll_data)
     return FALSE;
 }
 
-bool32 func_ovl2_800DB474(Coll_Data *coll_data, s32 arg1)
+bool32 func_ovl2_800DB474(mpCollData *coll_data, s32 arg1)
 {
     ObjectColl *p_object_coll = coll_data->p_object_coll;
     ObjectColl *object_coll = &coll_data->object_coll;
@@ -933,7 +933,7 @@ bool32 func_ovl2_800DB474(Coll_Data *coll_data, s32 arg1)
     else return FALSE;
 }
 
-bool32 func_ovl2_800DB590(Coll_Data *coll_data)
+bool32 func_ovl2_800DB590(mpCollData *coll_data)
 {
     Vec3f *translate = coll_data->p_translate;
     Vec2f *cliffcatch_coll = &coll_data->cliffcatch_coll;
@@ -983,7 +983,7 @@ bool32 func_ovl2_800DB590(Coll_Data *coll_data)
     return FALSE;
 }
 
-bool32 func_ovl2_800DB6F0(Coll_Data *coll_data)
+bool32 func_ovl2_800DB6F0(mpCollData *coll_data)
 {
     Vec3f *translate = coll_data->p_translate;
     Vec2f *cliffcatch_coll = &coll_data->cliffcatch_coll;
@@ -1032,7 +1032,7 @@ bool32 func_ovl2_800DB6F0(Coll_Data *coll_data)
     return FALSE;
 }
 
-bool32 func_ovl2_800DB838(Coll_Data *coll_data)
+bool32 func_ovl2_800DB838(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     ObjectColl *p_object_coll = coll_data->p_object_coll;
@@ -1284,7 +1284,7 @@ bool32 func_ovl2_800DB838(Coll_Data *coll_data)
     return is_collide_lwall;
 }
 
-void func_ovl2_800DBF58(Coll_Data *coll_data)
+void func_ovl2_800DBF58(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -1400,7 +1400,7 @@ void func_ovl2_800DBF58(Coll_Data *coll_data)
     coll_data->unk_0x58 |= MPCOLL_MASK_LWALL;
 }
 
-bool32 func_ovl2_800DC3C8(Coll_Data *coll_data)
+bool32 func_ovl2_800DC3C8(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     ObjectColl *p_object_coll = coll_data->p_object_coll;
@@ -1652,7 +1652,7 @@ bool32 func_ovl2_800DC3C8(Coll_Data *coll_data)
     return is_collide_rwall;
 }
 
-void func_ovl2_800DCAE8(Coll_Data *coll_data)
+void func_ovl2_800DCAE8(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -1768,7 +1768,7 @@ void func_ovl2_800DCAE8(Coll_Data *coll_data)
     coll_data->unk_0x58 |= MPCOLL_MASK_RWALL;
 }
 
-bool32 func_ovl2_800DCF58(Coll_Data *coll_data)
+bool32 func_ovl2_800DCF58(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     ObjectColl *p_object_coll = coll_data->p_object_coll;
@@ -1831,7 +1831,7 @@ bool32 func_ovl2_800DCF58(Coll_Data *coll_data)
     return FALSE;
 }
 
-void func_ovl2_800DD160(Coll_Data *coll_data)
+void func_ovl2_800DD160(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -1886,7 +1886,7 @@ void func_ovl2_800DD160(Coll_Data *coll_data)
     }
 }
 
-bool32 func_ovl2_800DD2C8(Coll_Data *coll_data, bool32(*proc_map)(GObj*), GObj *gobj)
+bool32 func_ovl2_800DD2C8(mpCollData *coll_data, bool32(*proc_map)(GObj*), GObj *gobj)
 {
     ObjectColl *p_object_coll = coll_data->p_object_coll;
     ObjectColl *object_coll = &coll_data->object_coll;
@@ -1971,12 +1971,12 @@ bool32 func_ovl2_800DD2C8(Coll_Data *coll_data, bool32(*proc_map)(GObj*), GObj *
     return FALSE;
 }
 
-bool32 func_ovl2_800DD578(Coll_Data *coll_data)
+bool32 func_ovl2_800DD578(mpCollData *coll_data)
 {
     return func_ovl2_800DD2C8(coll_data, NULL, NULL);
 }
 
-void func_ovl2_800DD59C(Coll_Data *coll_data)
+void func_ovl2_800DD59C(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -2007,7 +2007,7 @@ void func_ovl2_800DD59C(Coll_Data *coll_data)
     coll_data->ground_dist = 0.0F;
 }
 
-void func_ovl2_800DD6A8(Coll_Data *coll_data)
+void func_ovl2_800DD6A8(mpCollData *coll_data)
 {
     ObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
@@ -2067,7 +2067,7 @@ void func_ovl2_800DD6A8(Coll_Data *coll_data)
 
 bool32 func_ovl2_800DD820(GObj *fighter_gobj, s32 ground_line_id)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ObjectColl *object_coll = &fp->coll_data.object_coll;
     Vec3f *translate = fp->coll_data.p_translate;
     Vec3f sp58;
@@ -2141,7 +2141,7 @@ setground: // ???
 
 bool32 func_ovl2_800DDA6C(GObj *fighter_gobj, s32 ground_line_id)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ObjectColl *object_coll = &fp->coll_data.object_coll;
     Vec3f *translate = fp->coll_data.p_translate;
     Vec3f sp58;
@@ -2205,7 +2205,7 @@ setground: // Absolutely ridiculous match
     return TRUE;
 }
 
-bool32 func_ovl2_800DDC50(Coll_Data *coll_data, GObj *fighter_gobj, s32 arg2)
+bool32 func_ovl2_800DDC50(mpCollData *coll_data, GObj *fighter_gobj, s32 arg2)
 {
     s32 ground_line_id = coll_data->ground_line_id;
     bool32 sp20 = FALSE;
@@ -2266,7 +2266,7 @@ bool32 func_ovl2_800DDC50(Coll_Data *coll_data, GObj *fighter_gobj, s32 arg2)
 
 bool32 func_ovl2_800DDDA8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DDC50, fighter_gobj, 0);
 }
@@ -2284,14 +2284,14 @@ bool32 func_ovl2_800DDDDC(GObj *fighter_gobj, void (*proc_map)(GObj*))
 
 void func_ovl2_800DDE1C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DDC50, fighter_gobj, 1);
 }
 
 void func_ovl2_800DDE50(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DDC50, fighter_gobj, 2);
 }
@@ -2314,7 +2314,7 @@ void jtgt_ovl2_800DDEC4(GObj *fighter_gobj)
 
 void jtgt_ovl2_800DDEE8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DDE1C(fighter_gobj) == FALSE)
     {
@@ -2334,7 +2334,7 @@ void func_ovl2_800DDF44(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl2_800DDF74(GObj *fighter_gobj, Fighter_Struct *fp, ftCommonAttributes *attributes, DObj *target_joint, Vec3f *vec)
+bool32 func_ovl2_800DDF74(GObj *fighter_gobj, ftStruct *fp, ftCommonAttributes *attributes, DObj *target_joint, Vec3f *vec)
 {
     Vec3f sp64;
     Vec3f vec_translate;
@@ -2397,7 +2397,7 @@ bool32 func_ovl2_800DDF74(GObj *fighter_gobj, Fighter_Struct *fp, ftCommonAttrib
 
 void func_ovl2_800DE150(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     ftCommonAttributes *common_attrs = fp->attributes;
     DObj *joint;
     Vec3f sp30;
@@ -2442,7 +2442,7 @@ void func_ovl2_800DE150(GObj *fighter_gobj)
 
 void func_ovl2_800DE324(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D9FCC(&fp->coll_data);
 }
@@ -2454,7 +2454,7 @@ void func_ovl2_800DE348(GObj *fighter_gobj)
 
 void func_ovl2_800DE368(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->publicity_knockback != 0.0F)
     {
@@ -2496,11 +2496,11 @@ void func_ovl2_800DE368(GObj *fighter_gobj)
 
 static bool32(*D_ovl2_80130E20)(GObj*); // Static function pointer???
 
-bool32 func_ovl2_800DE45C(Coll_Data *coll_data, GObj *fighter_gobj, u32 arg2)
+bool32 func_ovl2_800DE45C(mpCollData *coll_data, GObj *fighter_gobj, u32 arg2)
 {
-    Fighter_Struct *this_fp = ftGetStruct(fighter_gobj);
+    ftStruct *this_fp = ftGetStruct(fighter_gobj);
     GObj *cliffcatch_gobj;
-    Fighter_Struct *cliffcatch_fp;
+    ftStruct *cliffcatch_fp;
     s32 unused;
     s32 sp24 = FALSE;
     s32 var_v0;
@@ -2591,7 +2591,7 @@ bool32 func_ovl2_800DE45C(Coll_Data *coll_data, GObj *fighter_gobj, u32 arg2)
 
 bool32 func_ovl2_800DE6B0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 0);
 }
@@ -2609,14 +2609,14 @@ bool32 func_ovl2_800DE6E4(GObj *fighter_gobj, void(*proc_map)(GObj*))
 
 bool32 func_ovl2_800DE724(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 2);
 }
 
 bool32 func_ovl2_800DE758(GObj *fighter_gobj, bool32(*proc_map)(GObj*))
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     D_ovl2_80130E20 = proc_map;
 
@@ -2625,7 +2625,7 @@ bool32 func_ovl2_800DE758(GObj *fighter_gobj, bool32(*proc_map)(GObj*))
 
 bool32 func_ovl2_800DE798(GObj *fighter_gobj, bool32(*proc_map)(GObj*))
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     D_ovl2_80130E20 = proc_map;
 
@@ -2634,7 +2634,7 @@ bool32 func_ovl2_800DE798(GObj *fighter_gobj, bool32(*proc_map)(GObj*))
 
 bool32 func_ovl2_800DE7D8(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 1);
 }
@@ -2642,7 +2642,7 @@ bool32 func_ovl2_800DE7D8(GObj *fighter_gobj)
 // Check if fighter becomes grounded, allow CliffCatch interrupt
 bool32 ftMap_CheckGroundCliff(GObj *fighter_gobj, void (*proc_map)(GObj*))
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE7D8(fighter_gobj) != FALSE)
     {
@@ -2661,21 +2661,21 @@ bool32 ftMap_CheckGroundCliff(GObj *fighter_gobj, void (*proc_map)(GObj*))
 
 bool32 func_ovl2_800DE87C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 9);
 }
 
 bool32 func_ovl2_800DE8B0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     return func_ovl2_800DA034(&fp->coll_data, func_ovl2_800DE45C, fighter_gobj, 8);
 }
 
 void func_ovl2_800DE8E4(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->phys_info.vel_air.y > FTCOMMON_ATTACKAIR_SKIP_LANDING_VEL_Y_MAX)
     {
@@ -2701,7 +2701,7 @@ bool32 func_ovl2_800DE978(GObj *fighter_gobj)
 
 void jtgt_ovl2_800DE99C(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (func_ovl2_800DE87C(fighter_gobj) != FALSE)
     {
@@ -2720,9 +2720,9 @@ void jtgt_ovl2_800DE99C(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl2_800DEA20(Coll_Data *coll_data, GObj *fighter_gobj, bool32 arg2)
+bool32 func_ovl2_800DEA20(mpCollData *coll_data, GObj *fighter_gobj, bool32 arg2)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
     bool32 is_collide = FALSE;
 
     if (func_ovl2_800DB838(coll_data) != FALSE)
@@ -2837,7 +2837,7 @@ bool32 func_ovl2_800DEA20(Coll_Data *coll_data, GObj *fighter_gobj, bool32 arg2)
 
 void func_ovl2_800DEDAC(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     fp->status_vars.common.damage.coll_mask_prev = fp->status_vars.common.damage.coll_mask_curr;
     fp->status_vars.common.damage.coll_mask_curr = 0;
@@ -2848,7 +2848,7 @@ void func_ovl2_800DEDAC(GObj *fighter_gobj)
 
 void func_ovl2_800DEDF0(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Air)
     {
@@ -2865,7 +2865,7 @@ void func_ovl2_800DEDF0(GObj *fighter_gobj)
 
 void func_ovl2_800DEE54(GObj *fighter_gobj)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     if (fp->ground_or_air == GA_Air)
     {
@@ -2874,7 +2874,7 @@ void func_ovl2_800DEE54(GObj *fighter_gobj)
     else ftCommon_Wait_SetStatus(fighter_gobj);
 }
 
-void ftMap_SetGround(Fighter_Struct *fp)
+void ftMap_SetGround(ftStruct *fp)
 {
     fp->phys_info.vel_ground.x = fp->phys_info.vel_air.x * fp->lr;
 
@@ -2885,7 +2885,7 @@ void ftMap_SetGround(Fighter_Struct *fp)
     fp->stat_flags.is_ground_or_air = GA_Ground; // Ground/Air bool?
 }
 
-void ftMap_SetAir(Fighter_Struct *fp)
+void ftMap_SetAir(ftStruct *fp)
 {
     fp->ground_or_air = GA_Air;
 
@@ -2894,7 +2894,7 @@ void ftMap_SetAir(Fighter_Struct *fp)
     fp->jumps_used = 1;
 }
 
-void func_ovl2_800DEEF4(Coll_Data *coll_data, GObj *fighter_gobj, s32 arg2)
+void func_ovl2_800DEEF4(mpCollData *coll_data, GObj *fighter_gobj, s32 arg2)
 {
     if (func_ovl2_800DB838(coll_data) != FALSE)
     {
@@ -2925,7 +2925,7 @@ void func_ovl2_800DEEF4(Coll_Data *coll_data, GObj *fighter_gobj, s32 arg2)
     else func_ovl2_800D9FCC(coll_data);
 }
 
-void func_ovl2_800DEFBC(Coll_Data *this_coll_data, Vec3f *pos, Coll_Data *other_coll_data)
+void func_ovl2_800DEFBC(mpCollData *this_coll_data, Vec3f *pos, mpCollData *other_coll_data)
 {
     this_coll_data->pos_curr = *pos;
 
@@ -2937,7 +2937,7 @@ void func_ovl2_800DEFBC(Coll_Data *this_coll_data, Vec3f *pos, Coll_Data *other_
     this_coll_data->wall_flag = other_coll_data->wall_flag;
 }
 
-void func_ovl2_800DEFF8(Coll_Data *coll_data)
+void func_ovl2_800DEFF8(mpCollData *coll_data)
 {
     coll_data->p_object_coll = &coll_data->object_coll;
 
@@ -2945,27 +2945,27 @@ void func_ovl2_800DEFF8(Coll_Data *coll_data)
     coll_data->coll_mask = 0;
 }
 
-void func_ovl2_800DF014(GObj *fighter_gobj, Vec3f *pos, Coll_Data *coll_data)
+void func_ovl2_800DF014(GObj *fighter_gobj, Vec3f *pos, mpCollData *coll_data)
 {
-    Fighter_Struct *fp = ftGetStruct(fighter_gobj);
+    ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800DEFBC(&fp->coll_data, pos, coll_data);
     func_ovl2_800DEEF4(&fp->coll_data, fighter_gobj, 0);
     func_ovl2_800DEFF8(&fp->coll_data);
 }
 
-void func_ovl2_800DF058(GObj *item_gobj, Vec3f *pos, Coll_Data *coll_data)
+void func_ovl2_800DF058(GObj *item_gobj, Vec3f *pos, mpCollData *coll_data)
 {
-    Item_Struct *ap = itGetStruct(item_gobj);
+    itStruct *ap = itGetStruct(item_gobj);
 
     func_ovl2_800DEFBC(&ap->coll_data, pos, coll_data);
     func_ovl2_800DEEF4(&ap->coll_data, item_gobj, 0);
     func_ovl2_800DEFF8(&ap->coll_data);
 }
 
-void func_ovl2_800DF09C(GObj *weapon_gobj, Vec3f *pos, Coll_Data *coll_data)
+void func_ovl2_800DF09C(GObj *weapon_gobj, Vec3f *pos, mpCollData *coll_data)
 {
-    Weapon_Struct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *ip = wpGetStruct(weapon_gobj);
 
     func_ovl2_800DEFBC(&ip->coll_data, pos, coll_data);
     func_ovl2_800DEEF4(&ip->coll_data, weapon_gobj, 0);
