@@ -2039,7 +2039,7 @@ glabel jtbl_ovl3_8018953C
   .incbin "ovl3.raw.bin", 0x57A70, 0x4
 
 glabel jtbl_ovl3_80189574
-  /* 57A74 103FB4 80189574 */  .4byte jtgt_ovl3_80186314
+  /* 57A74 103FB4 80189574 */  .4byte itLinkBomb_FDrop_SetStatus
 
 glabel itCommon_Throw_ProcList
   /* 57A78 103FB8 80189578 */  .4byte itBox_FThrow_SetStatus
@@ -2065,7 +2065,7 @@ glabel jtbl_ovl3_80189594
   .incbin "ovl3.raw.bin", 0x57AC8, 0x4
 
 glabel jtbl_ovl3_801895CC
-  /* 57ACC 10400C 801895CC */  .4byte jtgt_ovl3_80186224
+  /* 57ACC 10400C 801895CC */  .4byte itLinkBomb_FThrow_SetStatus
 
 glabel itCommon_Pickup_ProcList
   /* 57AD0 104010 801895D0 */  .4byte itBox_FHold_SetStatus
@@ -3634,53 +3634,53 @@ glabel jtbl_ovl3_8018B690
   /* 59BB0 1060F0 8018B6B0 */  .4byte itPKFire_SDefault_ProcDamage
   .incbin "ovl3.raw.bin", 0x59BB4, 0xC
 
-glabel Article_Link_Bomb_Data
+glabel itLink_Bomb_ItemDesc
   .incbin "ovl3.raw.bin", 0x59BC0, 0x4
 
 glabel D_ovl3_8018B6C4
   /* 59BC4 106104 8018B6C4 */  .4byte D_ovl2_80130FB0
   .incbin "ovl3.raw.bin", 0x59BC8, 0xC
-  /* 59BD4 106114 8018B6D4 */  .4byte itLinkBomb_AFall_ProcUpdate
+  /* 59BD4 106114 8018B6D4 */  .4byte itLinkBomb_FHold_ProcUpdate
   .incbin "ovl3.raw.bin", 0x59BD8, 0x1C
 
-glabel Article_Link_Bomb_Status
-  /* 59BF4 106134 8018B6F4 */  .4byte jtgt_ovl3_80185DCC
-  /* 59BF8 106138 8018B6F8 */  .4byte jtgt_ovl3_80185F10
+glabel itLink_Bomb_StatusDesc
+  /* 59BF4 106134 8018B6F4 */  .4byte itLinkBomb_GWait_ProcUpdate
+  /* 59BF8 106138 8018B6F8 */  .4byte itLinkBomb_GWait_ProcMap
   .incbin "ovl3.raw.bin", 0x59BFC, 0x14
 
 glabel jtbl_ovl3_8018B710
-  /* 59C10 106150 8018B710 */  .4byte func_ovl3_80185B84
-  /* 59C14 106154 8018B714 */  .4byte itLinkBomb_SDefault_ProcUpdate
-  /* 59C18 106158 8018B718 */  .4byte jtgt_ovl3_80185F38
+  /* 59C10 106150 8018B710 */  .4byte itLinkBomb_SDefault_ProcDamage
+  /* 59C14 106154 8018B714 */  .4byte itLinkBomb_AFall_ProcUpdate
+  /* 59C18 106158 8018B718 */  .4byte itLinkBomb_AFall_ProcMap
   .incbin "ovl3.raw.bin", 0x59C1C, 0x14
 
 glabel jtbl_ovl3_8018B730
-  /* 59C30 106170 8018B730 */  .4byte func_ovl3_80185B84
-  /* 59C34 106174 8018B734 */  .4byte itLinkBomb_AFall_ProcUpdate
+  /* 59C30 106170 8018B730 */  .4byte itLinkBomb_SDefault_ProcDamage
+  /* 59C34 106174 8018B734 */  .4byte itLinkBomb_FHold_ProcUpdate
   .incbin "ovl3.raw.bin", 0x59C38, 0x1C
 
 glabel jtbl_ovl3_8018B754
-  /* 59C54 106194 8018B754 */  .4byte itLinkBomb_SDefault_ProcUpdate
-  /* 59C58 106198 8018B758 */  .4byte jtgt_ovl3_80186150
-  /* 59C5C 10619C 8018B75C */  .4byte func_ovl3_80185BFC
-  /* 59C60 1061A0 8018B760 */  .4byte jtgt_ovl3_80186498
+  /* 59C54 106194 8018B754 */  .4byte itLinkBomb_AFall_ProcUpdate
+  /* 59C58 106198 8018B758 */  .4byte itLinkBomb_FThrow_ProcMap
+  /* 59C5C 10619C 8018B75C */  .4byte itLinkBomb_FThrow_ProcHit
+  /* 59C60 1061A0 8018B760 */  .4byte itLinkBomb_SDefault_ProcShield
   /* 59C64 1061A4 8018B764 */  .4byte itCommon_SDefault_ProcHop
   .incbin "ovl3.raw.bin", 0x59C68, 0x4
 
 glabel jtbl_ovl3_8018B76C
   /* 59C6C 1061AC 8018B76C */  .4byte itCommon_SDefault_ProcReflector
-  /* 59C70 1061B0 8018B770 */  .4byte func_ovl3_80185B84
-  /* 59C74 1061B4 8018B774 */  .4byte jtgt_ovl3_80186270
-  /* 59C78 1061B8 8018B778 */  .4byte jtgt_ovl3_80186150
-  /* 59C7C 1061BC 8018B77C */  .4byte jtgt_ovl3_801862AC
-  /* 59C80 1061C0 8018B780 */  .4byte jtgt_ovl3_80186498
+  /* 59C70 1061B0 8018B770 */  .4byte itLinkBomb_SDefault_ProcDamage
+  /* 59C74 1061B4 8018B774 */  .4byte itLinkBomb_FDrop_ProcUpdate
+  /* 59C78 1061B8 8018B778 */  .4byte itLinkBomb_FThrow_ProcMap
+  /* 59C7C 1061BC 8018B77C */  .4byte itLinkBomb_FDrop_ProcHit
+  /* 59C80 1061C0 8018B780 */  .4byte itLinkBomb_SDefault_ProcShield
   /* 59C84 1061C4 8018B784 */  .4byte itCommon_SDefault_ProcHop
   .incbin "ovl3.raw.bin", 0x59C88, 0x4
 
 glabel jtbl_ovl3_8018B78C
   /* 59C8C 1061CC 8018B78C */  .4byte itCommon_SDefault_ProcReflector
-  /* 59C90 1061D0 8018B790 */  .4byte jtgt_ovl3_801862E0
-  /* 59C94 1061D4 8018B794 */  .4byte jtgt_ovl3_80186524
+  /* 59C90 1061D0 8018B790 */  .4byte itLinkBomb_FDrop_ProcDamage
+  /* 59C94 1061D4 8018B794 */  .4byte itLinkBomb_NExplode_ProcUpdate
   .incbin "ovl3.raw.bin", 0x59C98, 0x28
 
 glabel jtbl_ovl3_8018B7C0

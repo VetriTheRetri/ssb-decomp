@@ -257,7 +257,7 @@ void func_ovl3_801851F4(GObj *item_gobj)
     ap->it_multi = 0;
     ap->item_event_index = 0;
 
-    ap->item_hit.hit_sfx = 1;
+    ap->item_hit.hit_sfx = gmSound_SFX_ExplodoeL;
 
     ap->item_hit.can_rehit_item = TRUE;
     ap->item_hit.can_reflect = FALSE;

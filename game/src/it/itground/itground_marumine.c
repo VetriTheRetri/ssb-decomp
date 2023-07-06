@@ -21,7 +21,7 @@ void func_ovl3_801837A0(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
-    ap->item_hit.hit_sfx = 1;
+    ap->item_hit.hit_sfx = gmSound_SFX_ExplodoeL;
 
     itMain_RefreshHit(item_gobj);
     func_ovl3_80183A20(item_gobj);

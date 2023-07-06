@@ -43,7 +43,7 @@ void ftCommon_Twister_ProcPhysics(GObj *fighter_gobj)
     }
     fp->phys_info.vel_air = vel;
 
-    DObjGetStruct(fighter_gobj)->rotate.y = (fp->lr * HALF_PI32) + F_DEG_TO_RAD(1800.0F * angle_d);
+    DObjGetStruct(fighter_gobj)->rotate.y = (fp->lr * F_DEG_TO_RAD(90.0F) /* HALF_PI32 */) + F_DEG_TO_RAD(1800.0F * angle_d);
 }
 
 // 0x80143BC4
@@ -79,7 +79,7 @@ void ftCommon_Twister_SetStatus(GObj *fighter_gobj, GObj *tornado_gobj)
     fp->status_vars.common.twister.tornado_gobj = tornado_gobj;
 
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_ALL);
-    func_800269C0(0x11CU);
+    func_800269C0(gmSound_SFX_HyruleTwisterEnter);
 }
 
 extern intptr_t D_NF_00000014;

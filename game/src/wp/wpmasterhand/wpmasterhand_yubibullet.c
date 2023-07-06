@@ -58,7 +58,7 @@ void wpMasterHand_YubiExplode_InitWeaponVars(GObj *weapon_gobj)
 {
     wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    wp->weapon_hit.hit_sfx = 1;
+    wp->weapon_hit.hit_sfx = gmSound_SFX_ExplodoeL;
 
     wp->weapon_hit.can_rehit_item = TRUE;
     wp->weapon_hit.can_hop = FALSE;

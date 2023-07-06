@@ -296,7 +296,7 @@ void itMain_SetFighterThrow(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_sm
 extern void (*itCommon_Pickup_ProcList[It_Kind_EnumMax])(GObj*);
 
 // 0x80172CA4
-void itMain_SetFighterPickup(GObj *item_gobj, GObj *fighter_gobj)
+void itMain_SetFighterHold(GObj *item_gobj, GObj *fighter_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
     ftStruct *fp = ftGetStruct(fighter_gobj);

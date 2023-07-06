@@ -91,10 +91,10 @@ typedef enum gmHitCollisionSoundLevel
 
 typedef enum ftHitCollisionLogKind
 {
-    ftHitCollision_LogKind_Fighter = 1,
-    ftHitCollision_LogKind_Item,
-    ftHitCollision_LogKind_Article,
-    ftHitCollision_LogKind_Special
+    ftHitlog_ObjectClass_Fighter = 1,
+    ftHitlog_ObjectClass_Weapon,
+    ftHitlog_ObjectClass_Item,
+    ftHitlog_ObjectClass_Ground
 
 } ftHitCollisionLogKind;
 

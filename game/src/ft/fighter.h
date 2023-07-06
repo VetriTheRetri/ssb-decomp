@@ -745,7 +745,7 @@ typedef struct _ftHitbox
 
 } ftHitbox;
 
-typedef struct FighterHurtDesc
+typedef struct ftHurtboxDesc
 {
     s32 joint_index;
     s32 placement;
@@ -753,7 +753,7 @@ typedef struct FighterHurtDesc
     Vec3f offset;
     Vec3f size;
 
-} FighterHurtDesc;
+} ftHurtboxDesc;
 
 typedef struct ftHurtbox
 {
@@ -769,7 +769,7 @@ typedef struct ftHurtbox
 
 typedef struct ftHitCollisionLog // Might have to return once structs are cleaned up (alas once forward declarations are implemented to replace void* with struct*)
 {
-    s32 hit_source;
+    s32 attacker_object_class;
     void *attacker_hit;
     s32 hitbox_id;
     GObj *attacker_gobj;
@@ -999,7 +999,7 @@ typedef struct ftCommonAttributes
     // u32 catch_mask_b29 : 1;
     // u32 catch_mask_b30 : 1;
     // u32 catch_mask_b31 : 1;
-    FighterHurtDesc fighter_hurt_desc[FTPARTS_HURT_NUM_MAX];
+    ftHurtboxDesc fighter_hurt_desc[FTPARTS_HURT_NUM_MAX];
     s32 unk_ftca_0x290;
     s32 unk_ftca_0x294;
     s32 unk_ftca_0x298;
@@ -1188,7 +1188,7 @@ struct ftStruct
     u32 x191_flag_b4567 : 4;
     u32 x192_flag_b0 : 1;
     u32 x192_flag_b1 : 1;
-    u32 x192_flag_b2 : 1;
+    u32 is_catchstatus : 1;
     u32 x192_flag_b3 : 1;
     u32 x192_flag_b4 : 1;
     u32 x192_flag_b5 : 1;
@@ -1290,9 +1290,8 @@ struct ftStruct
     s32 damage_kind;
     s32 damage_heal; // Percent damage to heal
     f32 damage_mul;
-
-    s32 unk_ft_0x820;
-    s32 unk_ft_0x824;
+    s32 damage_object_class;    // Fighter, Weapon, Item or Ground
+    s32 damage_object_kind;     // ftKind, wpKind, itKind, envKind
     gmStatFlags damage_stat_flags;
     u16 damage_stat_count; // Might be raw u16
 

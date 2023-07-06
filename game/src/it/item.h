@@ -82,8 +82,8 @@ typedef enum itKind
 
     It_Kind_FighterStart,                       // Start of fighter item IDs
     It_Kind_PKFire = It_Kind_FighterStart,      // PK Fire pillar
-    It_Kind_Link_Bomb,                          // Link's Bomb
-    It_Kind_FighterEnd = It_Kind_Link_Bomb,     // End of fighter item IDs
+    It_Kind_LinkBomb,                           // Link's Bomb
+    It_Kind_FighterEnd = It_Kind_LinkBomb,      // End of fighter item IDs
 
     // Stage hazards
 
@@ -326,7 +326,7 @@ typedef struct itCommonAttributes
 
 } itCommonAttributes;
 
-typedef struct itStruct              // Common items, stage hazards and Pokémon
+typedef struct itStruct                 // Common items, stage hazards, fighter items and Pokémon
 {
     void *ip_alloc_next;                // Memory region allocated for next itStruct
     GObj *item_gobj;                    // Item's GObj pointer
@@ -358,9 +358,11 @@ typedef struct itStruct              // Common items, stage hazards and Pokémon
     s32 lr_attack;                      // Direction of outgoing attack?
     s32 hit_refresh_damage;             // Damage applied to entity this item has hit, if rehit is possible?
     s32 hit_attack_damage;              // Damage item dealt to other attack
+
     s32 hit_shield_damage;              // Damage item dealt to shield
     f32 shield_collide_angle;           // Angle at which item collided with shield?
     Vec3f shield_collide_vec;           // Position of shield item collided with? (Update: only Z axis appears to be used, can be 0, -1 or 1 depending on attack direction
+    
     GObj *reflect_gobj;                 // GObj that reflected this item
     gmStatFlags reflect_stat_flags;     // Status flags of GObj reflecting this item (e.g. is_smash_attack, is_ground_or_air, is_special_attack, etc.)
     u16 reflect_stat_count;             // Status update count at the time the item is reflected?
@@ -406,8 +408,8 @@ typedef struct itStruct              // Common items, stage hazards and Pokémon
     caStruct colanim;                   // Item's color animation struct
 
     u32 is_hitlag_victim : 1;           // Item can deal hitlag to target
-    u16 it_multi;                       // Some sort of universal multi-purpose variable, e.g. it is used as intangibility delay for Star Man and ammo count for Ray Gun
 
+    u16 it_multi;                       // Some sort of universal multi-purpose variable, e.g. it is used as intangibility delay for Star Man and ammo count for Ray Gun
     u32 item_event_index : 4;           // Item hitbox script index? When in doubt, make this u8 : 4
 
     f32 rotate_step;                    // Item spin rotation step

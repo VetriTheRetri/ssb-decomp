@@ -271,7 +271,7 @@ void itCapsule_NExplode_InitItemVars(GObj *item_gobj)
 
     ip->it_multi = 0;
     ip->item_event_index = 0;
-    ip->item_hit.hit_sfx = 1;
+    ip->item_hit.hit_sfx = gmSound_SFX_ExplodoeL;
     ip->item_hit.stale = ITEM_STALE_DEFAULT;
 
     func_800269C0(1);

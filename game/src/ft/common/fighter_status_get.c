@@ -146,7 +146,7 @@ void ftCommon_Get_ProcUpdate(GObj *fighter_gobj)
 
         if (item_gobj != NULL)
         {
-            itMain_SetFighterPickup(item_gobj, fighter_gobj);
+            itMain_SetFighterHold(item_gobj, fighter_gobj);
         }
     }
     if (fighter_gobj->anim_frame <= 0.0F)

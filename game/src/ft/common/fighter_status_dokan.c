@@ -75,7 +75,7 @@ void ftCommon_DokanStart_SetStatus(GObj *fighter_gobj, s32 ground_line_id)
     func_ovl2_800FC814((fp->status_vars.common.dokan.ground_material == Gr_Mat_DokanLeft) ? 0xA : 0xB, &new_line_id);
     func_ovl2_800FC894(new_line_id, &fp->status_vars.common.dokan.pos_current);
 
-    func_800269C0(0xD6U);
+    func_800269C0(0xD6);
     func_ovl2_800E7F7C(fighter_gobj, 1);
 
     if

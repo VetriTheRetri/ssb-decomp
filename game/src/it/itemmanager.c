@@ -1308,7 +1308,7 @@ void itManager_SearchHitFighter(GObj *item_gobj) // Check fighters for hit detec
 
                     if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE) || (((fp->throw_gobj != NULL) ? fp->throw_team : fp->team) != ap->team) || (ap->is_damage_all))
                     {
-                        if (!(fp->x192_flag_b2))
+                        if (!(fp->is_catchstatus))
                         {
                             k = 0;
 

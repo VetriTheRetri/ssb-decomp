@@ -147,7 +147,7 @@ void func_ovl2_800E7F7C(GObj *fighter_gobj, s32 arg1)
     fp->unk_0x174 = arg1;
 }
 
-extern u8 ftCommon_ShuffleFrameIndexMax[2] = { 4, 3 };
+u8 ftCommon_ShuffleFrameIndexMax[2] = { 4, 3 };
 
 // 0x800E7F88
 void ftCommon_SetShuffleInfo(ftStruct *fp, bool32 is_electric, s32 damage, s32 status_id, f32 hitlag_mul)
@@ -187,7 +187,7 @@ void ftCommon_SetCaptureIgnoreMask(ftStruct *fp, u8 capture_ignore_mask)
 // 0x800E80A4
 void ftCommon_SetCatchVars(ftStruct *fp, u8 catch_mask, void (*proc_catch)(GObj*), void (*proc_capture)(GObj*, GObj*))
 {
-    fp->x192_flag_b2 = TRUE;
+    fp->is_catchstatus = TRUE;
 
     fp->catch_mask = catch_mask;
     fp->proc_catch = proc_catch;
@@ -609,7 +609,7 @@ void ftCommon_InitFighterHurtParts(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     ftHurtbox *ft_hurt = &fp->fighter_hurt[0];
-    FighterHurtDesc *ft_hurt_desc = &fp->attributes->fighter_hurt_desc[0];
+    ftHurtboxDesc *ft_hurt_desc = &fp->attributes->fighter_hurt_desc[0];
     s32 i;
 
     for (i = 0; i < FTPARTS_HURT_NUM_MAX; i++, ft_hurt++, ft_hurt_desc++)
@@ -1769,11 +1769,11 @@ extern s32 gmBonusStat_Defender_GroundOrAirAttack_Count[2]; // Grounded / Airbor
 extern s32 gmBonusStat_Defender_IsSpecialAttack_Count[2];   // Special attacks successfully landed on opponent
 
 // 0x800EAA2C
-void ftCommon_Update1PGameDamageStats(ftStruct *fp, s32 damage_player, s32 arg2, s32 arg3, u16 flags, u16 damage_stat_count)
+void ftCommon_Update1PGameDamageStats(ftStruct *fp, s32 damage_player, s32 damage_object_class, s32 damage_object_kind, u16 flags, u16 damage_stat_count)
 {
     fp->damage_player = damage_player;
-    fp->unk_ft_0x820 = arg2;
-    fp->unk_ft_0x824 = arg3;
+    fp->damage_object_class = damage_object_class;
+    fp->damage_object_kind = damage_object_kind;
     fp->damage_count++;
 
     if (!(damage_stat_count) || (fp->damage_stat_count != damage_stat_count))

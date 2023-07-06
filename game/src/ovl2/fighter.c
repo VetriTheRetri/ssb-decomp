@@ -91,8 +91,8 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->damage_queue = 0;
     fp->damage_taken_recent = 0;
     fp->damage_player = -1;
-    fp->unk_ft_0x820 = 0;
-    fp->unk_ft_0x824 = 0;
+    fp->damage_object_class = 0;
+    fp->damage_object_kind = 0;
     fp->damage_count = 0;
     fp->damage_kind = 0;
     fp->damage_heal = 0;

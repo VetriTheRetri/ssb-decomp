@@ -255,7 +255,7 @@ void ftCommon_YoshiEgg_ProcTrap(GObj *fighter_gobj)
     {
         fp->status_vars.common.captureyoshi.breakout_wait -= ((2.0F * fp->damage_taken_recent) / 0.5F);
     }
-    if ((fp->unk_ft_0x820 == 4) && (fp->unk_ft_0x824 == 0))
+    if ((fp->damage_object_class == ftHitlog_ObjectClass_Ground) && (fp->damage_object_kind == 0))
     {
         fp->status_vars.common.captureyoshi.breakout_wait = 0;
         fp->status_vars.common.captureyoshi.unk_0x9 = 1;
@@ -375,6 +375,6 @@ void ftCommon_YoshiEgg_SetStatus(GObj *fighter_gobj)
     this_fp->status_vars.common.captureyoshi.effect_gobj = NULL;
     this_fp->status_vars.common.captureyoshi.unk_0x9 = 0;
 
-    ftCommon_Update1PGameDamageStats(this_fp, capture_fp->player, 1, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
+    ftCommon_Update1PGameDamageStats(this_fp, capture_fp->player, ftHitlog_ObjectClass_Fighter, capture_fp->ft_kind, capture_fp->stat_flags.halfword, capture_fp->stat_count);
     ftCommon_YoshiEgg_SpawnEggGFX(fighter_gobj);
 }

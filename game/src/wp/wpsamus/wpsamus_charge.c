@@ -5,106 +5,106 @@ wpSamusChargeShotAttributes wpSamus_ChargeShot_WeaponAttributes[FTSAMUS_CHARGE_M
 {
     // Level 0 (Uncharged)
     {
-        150.0F,                     // Sprite size
-        60.0F                       // X-Velocity
-        3,                          // Damage
-        100,                        // Hitbox size
-        10,                         // Object collision size
-        0xEE,                       // Shoot SFX
-        0xEF,                       // Charge SFX
-        0x18,                       // Hit SFX
-        1,                          // Priority
+        150.0F,                             // Sprite size
+        60.0F                               // X-Velocity
+        3,                                  // Damage
+        100,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootS,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge0,   // Charge SFX
+        gmSound_SFX_ShockS,                 // Hit SFX
+        1,                                  // Priority
     },
 
     // Level 1
     {
-        230.0F,                     // Sprite size
-        62.0F                       // X-Velocity
-        6,                          // Damage
-        120,                        // Hitbox size
-        10,                         // Object collision size
-        0xEE,                       // Shoot SFX
-        0xF0,                       // Charge SFX
-        0x18,                       // Hit SFX
-        1,                          // Priority
+        230.0F,                             // Sprite size
+        62.0F                               // X-Velocity
+        6,                                  // Damage
+        120,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootS,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge1,   // Charge SFX
+        gmSound_SFX_ShockS,                 // Hit SFX
+        1,                                  // Priority
     },
 
     // Level 2
     {
-        280.0F,                     // Sprite size
-        64.0F                       // X-Velocity
-        9,                          // Damage
-        140,                        // Hitbox size
-        10,                         // Object collision size
-        0xED,                       // Shoot SFX
-        0xF1,                       // Charge SFX
-        0x17,                       // Hit SFX
-        1,                          // Priority
+        280.0F,                             // Sprite size
+        64.0F                               // X-Velocity
+        9,                                  // Damage
+        140,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootM,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge2,   // Charge SFX
+        gmSound_SFX_ShockM,                 // Hit SFX
+        1,                                  // Priority
     },
 
     // Level 3
     {
-        340.0F,                     // Sprite size
-        66.0F                       // X-Velocity
-        12,                         // Damage
-        160,                        // Hitbox size
-        10,                         // Object collision size
-        0xED,                       // Shoot SFX
-        0xF2,                       // Charge SFX
-        0x17,                       // Hit SFX
-        1,                          // Priority
+        340.0F,                             // Sprite size
+        66.0F                               // X-Velocity
+        12,                                 // Damage
+        160,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootM,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge3,   // Charge SFX
+        gmSound_SFX_ShockM,                 // Hit SFX
+        1,                                  // Priority
     },
 
     // Level 4
     {
-        410.0F,                     // Sprite size
-        68.0F                       // X-Velocity
-        15,                         // Damage
-        180,                        // Hitbox size
-        10,                         // Object collision size
-        0xED,                       // Shoot SFX
-        0xF3,                       // Charge SFX
-        0x17,                       // Hit SFX
-        1,                          // Priority
+        410.0F,                             // Sprite size
+        68.0F                               // X-Velocity
+        15,                                 // Damage
+        180,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootM,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge4,   // Charge SFX
+        gmSound_SFX_ShockM,                 // Hit SFX
+        1,                                  // Priority
     },
 
     // Level 5
     {
-        490.0F,                     // Sprite size
-        70.0F                       // X-Velocity
-        18,                         // Damage
-        200,                        // Hitbox size
-        10,                         // Object collision size
-        0xEC,                       // Shoot SFX
-        0xF4,                       // Charge SFX
-        0x16,                       // Hit SFX
-        1,                          // Priority
+        490.0F,                             // Sprite size
+        70.0F                               // X-Velocity
+        18,                                 // Damage
+        200,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootL,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge5,   // Charge SFX
+        gmSound_SFX_ShockL,                 // Hit SFX
+        1,                                  // Priority
     },
 
     // Level 6
     {
-        600.0F,                     // Sprite size
-        72.0F                       // X-Velocity
-        21,                         // Damage
-        240,                        // Hitbox size
-        10,                         // Object collision size
-        0xEC,                       // Shoot SFX
-        0xF5,                       // Charge SFX
-        0x16,                       // Hit SFX
-        1,                          // Priority
+        600.0F,                             // Sprite size
+        72.0F                               // X-Velocity
+        21,                                 // Damage
+        240,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootL,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge6,   // Charge SFX
+        gmSound_SFX_ShockL,                 // Hit SFX
+        1,                                  // Priority
     },
 
     // Level 7 (Full charge)
     {
-        700.0F,                     // Sprite size
-        74.0F                       // X-Velocity
-        26,                         // Damage
-        260,                        // Hitbox size
-        10,                         // Object collision size
-        0xEB,                       // Shoot SFX
-        0xF6,                       // Charge SFX
-        0x16,                       // Hit SFX
-        2,                          // Priority
+        700.0F,                             // Sprite size
+        74.0F                               // X-Velocity
+        26,                                 // Damage
+        260,                                // Hitbox size
+        10,                                 // Object collision size
+        gmSound_SFX_SamusSpecialNShootF,    // Shoot SFX
+        gmSound_SFX_SamusSpecialNCharge7,   // Charge SFX
+        gmSound_SFX_ShockL,                 // Hit SFX
+        2,                                  // Priority
     }
 };
 

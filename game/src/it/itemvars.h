@@ -572,7 +572,7 @@ typedef struct itFighter_ItemVars_PKFire
 typedef struct itFighter_ItemVars_LinkBomb
 {
     u16 unk_0x0;
-    u16 unk_0x2;
+    u16 drop_update_wait;   // Wait frames when dropping bomb, must pass before ProcUpdate, ProcHit and ProcDamage can be checked?
     u16 scale_index;
     u16 scale_int; // Interval between Bomb inflate/deflate animation updates; effectively animation speed
 

@@ -17,7 +17,7 @@ void ftLink_SpecialLw_CreateBomb(GObj *fighter_gobj)
         vel.y = 0.0F;
         vel.z = 0.0F;
 
-        func_ovl3_801865A0(fighter_gobj, &pos, &vel);
+        itLink_Bomb_CreateItem(fighter_gobj, &pos, &vel);
     }
 }
 
