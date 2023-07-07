@@ -318,7 +318,7 @@ extern wpCreateDesc Item_Swift_Data;
 GObj* func_ovl3_80182530(GObj *item_gobj, Vec3f *pos)
 {
     itStruct *ap = itGetStruct(item_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
     s32 unused;
     wpStruct *ip;

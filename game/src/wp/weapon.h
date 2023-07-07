@@ -22,14 +22,12 @@
 
 #define WEAPON_FLAG_PROJECT (1 << 31)           // Perform initial collision check when spawning weapon?
 
-#define WEAPON_MASK_SPAWN_FIGHTER 0               // Weapon spawned by fighter
-#define WEAPON_MASK_SPAWN_GROUND 1                // Weapon spawned by stage
-#define WEAPON_MASK_SPAWN_WEAPON 2                // Weapon spawned by another weapon
-#define WEAPON_MASK_SPAWN_ARTICLE 3               // ItWeaponem spawned by Pokémon / misc entity class(es?)
+#define WEAPON_MASK_SPAWN_FIGHTER 0             // Weapon spawned by fighter
+#define WEAPON_MASK_SPAWN_GROUND 1              // Weapon spawned by stage
+#define WEAPON_MASK_SPAWN_WEAPON 2              // Weapon spawned by another weapon
+#define WEAPON_MASK_SPAWN_ITEM 3                // Weapon spawned by Item
 
-#define WEAPON_MASK_SPAWN_ALL 0xF                 // Mask all GObj classes that can spawn weapons?
-
-// Universal item hitbox attributes
+#define WEAPON_MASK_SPAWN_ALL 0xF               // Mask all GObj classes that can spawn weapons?
 
 #define WEAPON_REHIT_TIME_DEFAULT 16            // If the weapon is multihit, its hitbox will refresh per victim after this many frames have passed
 
@@ -63,7 +61,9 @@ typedef enum wpKind
     Wp_Kind_YubiBulletTriple,
     Wp_Kind_LGunAmmo = 0x14,
     Wp_Kind_FFlowerFlame,
-    Wp_Kind_StarRodStar
+    Wp_Kind_StarRodStar,
+    Wp_Kind_HitokageFlame = 0x1E,
+    Wp_Kind_FushigibanaRazor
 
 } wpKind;
 

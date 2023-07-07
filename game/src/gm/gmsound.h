@@ -158,7 +158,7 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_MewFly,
     gmSound_SFX_NyarsCoin,
     gmSound_SFX_MBallOpen,
-    gmSound_SFX_StarmieSwift,
+    gmSound_SFX_MonsterWeapon,
     gmSound_SFX_TosakintoSplash,
     gmSound_SFX_JKickL,
     gmSound_SFX_JKickM,
@@ -378,7 +378,10 @@ typedef enum gmSoundEffectSFX
     gmSound_Voice_KirbyAppeal,
     gmSound_Voice_KirbySmash1,
     gmSound_Voice_KirbySmash2,
-    gmSound_Voice_KirbySmash3
+    gmSound_Voice_KirbySmash3,
+    gmSound_Voice_YCityFushigibana = 0x228,
+    gmSound_Voice_YCityHitokage,
+    gmSound_Voice_YCityLucky
 
 } gmSoundEffectSFX;
 

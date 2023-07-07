@@ -173,7 +173,7 @@ extern wpCreateDesc D_ovl3_8018ACF4;
 GObj *func_ovl3_8017F2E4(GObj *item_gobj, u8 coin_number, f32 rotate_angle)
 {
     wpStruct *ip;
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &D_ovl3_8018ACF4, &DObjGetStruct(item_gobj)->translate, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &D_ovl3_8018ACF4, &DObjGetStruct(item_gobj)->translate, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
 
     if (weapon_gobj == NULL)

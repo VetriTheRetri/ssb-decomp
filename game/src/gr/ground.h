@@ -115,7 +115,7 @@ static s32 D_ovl2_8013119C;
 
 /*
 
-struct Ground_Info_80131300
+struct gpMapData_80131300
 {
     void *unk_0x0;
     void *unk_0x4;
@@ -154,7 +154,7 @@ struct Ground_Info_80131300
     s16 blastzone_left;
 };
 
-static struct Ground_Info_80131300 *Ground_Info; // TO DO: move this to the correct file
+static struct gpMapData_80131300 *gpMapData; // TO DO: move this to the correct file
 
 */
 

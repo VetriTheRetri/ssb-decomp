@@ -202,14 +202,14 @@ void ftCommon_DeadDown_SetStatus(GObj *fighter_gobj)
 
     if (gpMatchData->game_type != 2)
     {
-        if (Ground_Info->cam_bound_right < pos.x)
+        if (gpMapData->cam_bound_right < pos.x)
         {
-            pos.x = Ground_Info->cam_bound_right;
+            pos.x = gpMapData->cam_bound_right;
         }
 
-        if (pos.x < Ground_Info->cam_bound_left)
+        if (pos.x < gpMapData->cam_bound_left)
         {
-            pos.x = Ground_Info->cam_bound_left;
+            pos.x = gpMapData->cam_bound_left;
         }
     }
     func_ovl2_801021C0(&pos, fp->player, 0);
@@ -240,14 +240,14 @@ void ftCommon_DeadRight_SetStatus(GObj *fighter_gobj)
 
     if (gpMatchData->game_type != gmMatch_GameType_Bonus)
     {
-        if (pos.y > Ground_Info->cam_bound_top)
+        if (pos.y > gpMapData->cam_bound_top)
         {
-            pos.y = Ground_Info->cam_bound_top;
+            pos.y = gpMapData->cam_bound_top;
         }
 
-        if (pos.y < Ground_Info->cam_bound_bottom)
+        if (pos.y < gpMapData->cam_bound_bottom)
         {
-            pos.y = Ground_Info->cam_bound_bottom;
+            pos.y = gpMapData->cam_bound_bottom;
         }
     }
     func_ovl2_801021C0(&pos, fp->player, 1);
@@ -278,13 +278,13 @@ void ftCommon_DeadLeft_SetStatus(GObj *fighter_gobj)
 
     if (gpMatchData->game_type != gmMatch_GameType_Bonus)
     {
-        if (pos.y > Ground_Info->cam_bound_top)
+        if (pos.y > gpMapData->cam_bound_top)
         {
-            pos.y = Ground_Info->cam_bound_top;
+            pos.y = gpMapData->cam_bound_top;
         }
-        if (pos.y < Ground_Info->cam_bound_bottom)
+        if (pos.y < gpMapData->cam_bound_bottom)
         {
-            pos.y = Ground_Info->cam_bound_bottom;
+            pos.y = gpMapData->cam_bound_bottom;
         }
     }
     func_ovl2_801021C0(&pos, fp->player, 3);
@@ -322,14 +322,14 @@ void ftCommon_DeadUpStar_ProcUpdate(GObj *fighter_gobj)
         switch (fp->command_vars.flags.flag1)
         {
         case 0:
-            fp->phys_info.vel_air.y = ((Ground_Info->cam_bound_top * 0.6F) - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
+            fp->phys_info.vel_air.y = ((gpMapData->cam_bound_top * 0.6F) - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
             fp->phys_info.vel_air.z = FTCOMMON_DEADUPFALL_VEL_Z;
 
             fp->colanim.is_use_color1 = TRUE;
 
-            fp->colanim.color1.r = Ground_Info->fog_color.r;
-            fp->colanim.color1.g = Ground_Info->fog_color.g;
-            fp->colanim.color1.b = Ground_Info->fog_color.b;
+            fp->colanim.color1.r = gpMapData->fog_color.r;
+            fp->colanim.color1.g = gpMapData->fog_color.g;
+            fp->colanim.color1.b = gpMapData->fog_color.b;
             fp->colanim.color1.a = 0;
 
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEADUP_REBIRTH_WAIT;
@@ -402,7 +402,7 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
     switch (fp->command_vars.flags.flag1)
     {
     case 1:
-        if (DObjGetStruct(fighter_gobj)->translate.y < Ground_Info->blastzone_bottom)
+        if (DObjGetStruct(fighter_gobj)->translate.y < gpMapData->blastzone_bottom)
         {
             fp->phys_info.vel_air.y = 0.0F;
         }
@@ -420,7 +420,7 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
         switch (fp->command_vars.flags.flag1)
         {
         case 0:
-            fp->phys_info.vel_air.y = (Ground_Info->cam_bound_bottom - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
+            fp->phys_info.vel_air.y = (gpMapData->cam_bound_bottom - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
             DObjGetStruct(fighter_gobj)->translate.z = (D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.z - 3000.0F);
 
             if (DObjGetStruct(fighter_gobj)->translate.z < 2000.0F)
@@ -430,9 +430,9 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
             DObjGetStruct(fighter_gobj)->translate.x = (f32)D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.x;
             DObjGetStruct(fighter_gobj)->translate.y = (f32)(D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.y + 3000.0F);
 
-            if (Ground_Info->blastzone_top < DObjGetStruct(fighter_gobj)->translate.y)
+            if (gpMapData->blastzone_top < DObjGetStruct(fighter_gobj)->translate.y)
             {
-                DObjGetStruct(fighter_gobj)->translate.y = Ground_Info->blastzone_top;
+                DObjGetStruct(fighter_gobj)->translate.y = gpMapData->blastzone_top;
             }
             fp->status_vars.common.dead.rebirth_wait = FTCOMMON_DEADUP_REBIRTH_WAIT;
 
@@ -528,33 +528,33 @@ bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
     }
     if (fp->is_check_blastzone)
     {
-        if (pos->y < Ground_Info->blastzone_bottom)
+        if (pos->y < gpMapData->blastzone_bottom)
         {
-            pos->y = Ground_Info->blastzone_bottom + 500.0F;
+            pos->y = gpMapData->blastzone_bottom + 500.0F;
 
             fp->phys_info.vel_air.x = 0.0F;
             fp->phys_info.vel_air.y = 0.0F;
             fp->phys_info.vel_air.z = 0.0F;
         }
-        else if (Ground_Info->blastzone_top < pos->y)
+        else if (gpMapData->blastzone_top < pos->y)
         {
-            pos->y = Ground_Info->blastzone_top - 500.0F;
+            pos->y = gpMapData->blastzone_top - 500.0F;
 
             fp->phys_info.vel_air.x = 0.0F;
             fp->phys_info.vel_air.y = 0.0F;
             fp->phys_info.vel_air.z = 0.0F;
         }
-        if (Ground_Info->blastzone_right < pos->x)
+        if (gpMapData->blastzone_right < pos->x)
         {
-            pos->x = Ground_Info->blastzone_right - 500.0F;
+            pos->x = gpMapData->blastzone_right - 500.0F;
 
             fp->phys_info.vel_air.x = 0.0F;
             fp->phys_info.vel_air.y = 0.0F;
             fp->phys_info.vel_air.z = 0.0F;
         }
-        else if (pos->x < Ground_Info->blastzone_left)
+        else if (pos->x < gpMapData->blastzone_left)
         {
-            pos->x = Ground_Info->blastzone_left + 500.0F;
+            pos->x = gpMapData->blastzone_left + 500.0F;
 
             fp->phys_info.vel_air.x = 0.0F;
             fp->phys_info.vel_air.y = 0.0F;
@@ -566,25 +566,25 @@ bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
     {
         if ((gpMatchData->game_type == gmMatch_GameType_1PGame) && (gpMatchData->player_block[fp->player].is_rebirth_multi != FALSE))
         {
-            if (pos->y < Ground_Info->unk_bound_bottom)
+            if (pos->y < gpMapData->unk_bound_bottom)
             {
                 ftCommon_DeadDown_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
-            if (pos->x > Ground_Info->unk_bound_right)
+            if (pos->x > gpMapData->unk_bound_right)
             {
                 ftCommon_DeadRight_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
-            if (pos->x < Ground_Info->unk_bound_left)
+            if (pos->x < gpMapData->unk_bound_left)
             {
                 ftCommon_DeadLeft_SetStatus(fighter_gobj);
 
                 return TRUE;
             }
-            if (pos->y > Ground_Info->unk_bound_top)
+            if (pos->y > gpMapData->unk_bound_top)
             {
                 if (rand_f32() < 0.16666667F)
                 {
@@ -597,25 +597,25 @@ bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
                 return TRUE;
             }
         }
-        else if (pos->y < Ground_Info->blastzone_bottom)
+        else if (pos->y < gpMapData->blastzone_bottom)
         {
             ftCommon_DeadDown_SetStatus(fighter_gobj);
 
             return TRUE;
         }
-        else if (Ground_Info->blastzone_right < pos->x)
+        else if (gpMapData->blastzone_right < pos->x)
         {
             ftCommon_DeadRight_SetStatus(fighter_gobj);
 
             return TRUE;
         }
-        else if (pos->x < Ground_Info->blastzone_left)
+        else if (pos->x < gpMapData->blastzone_left)
         {
             ftCommon_DeadLeft_SetStatus(fighter_gobj);
 
             return TRUE;
         }
-        else if (Ground_Info->blastzone_top < pos->y)
+        else if (gpMapData->blastzone_top < pos->y)
         {
             if (rand_f32() < 0.16666667F)
             {

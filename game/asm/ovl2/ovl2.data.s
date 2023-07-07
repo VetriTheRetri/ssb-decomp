@@ -7704,7 +7704,7 @@ glabel D_ovl2_8012EB48
 glabel D_ovl2_8012EB50
   .incbin "ovl2.raw.bin", 0x586C0, 0x10
 
-glabel D_ovl2_8012EB60
+glabel grYamabuki_MonsterFlag_Prev
   .incbin "ovl2.raw.bin", 0x586D0, 0x4
 
 glabel D_ovl2_8012EB64

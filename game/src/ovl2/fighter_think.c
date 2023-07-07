@@ -1687,7 +1687,7 @@ void ftManager_ProcPhysicsMap(GObj *fighter_gobj)
 
     ftCommon_Dead_CheckInterruptCommon(fighter_gobj);
 
-    if ((Ground_Info->unk_groundinfo_0x88 <= fp->coll_data.pos_curr.y) && (topn_translate->y < Ground_Info->unk_groundinfo_0x88) && (fp->ft_kind != Ft_Kind_MasterHand))
+    if ((gpMapData->unk_groundinfo_0x88 <= fp->coll_data.pos_curr.y) && (topn_translate->y < gpMapData->unk_groundinfo_0x88) && (fp->ft_kind != Ft_Kind_MasterHand))
     {
         func_800269C0(0x99U);
     }
@@ -2423,7 +2423,7 @@ void func_ovl2_800E39B0(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
             }
             break;
 
-        case It_Kind_Gr_Lucky:
+        case It_Kind_GLucky:
             ftCommon_ApplyDamageHeal(fp, it_hit->damage);
 
             break;

@@ -53,8 +53,7 @@
 
 typedef enum itKind
 {
-    // Common articles
-
+    // Common items
     It_Kind_CommonStart,                        // Start of common item IDs
     It_Kind_Box = It_Kind_CommonStart,          // Crate
     It_Kind_Taru,                               // Barrel
@@ -67,35 +66,33 @@ typedef enum itKind
     It_Kind_Bat,                                // Home-Run Bat
     It_Kind_Harisen,                            // Fan
     It_Kind_StarRod,                            // Star Rod
-    It_Kind_LGun,                              // Ray Gun
+    It_Kind_LGun,                               // Ray Gun
     It_Kind_FFlower,                            // Fire Flower
     It_Kind_Hammer,                             // Hammer
     It_Kind_MSBomb,                             // Motion-Sensor Bomb
     It_Kind_BombHei,                            // Bob-Omb
-    It_Kind_IBumper,                          // Bumper (Item)
+    It_Kind_NBumper,                            // Bumper (Item)
     It_Kind_GShell,                             // Green Shell
     It_Kind_RShell,                             // Red Shell
-    It_Kind_MBall,                             // Poké Ball
-    It_Kind_CommonEnd = It_Kind_MBall,         // End of common item IDs
+    It_Kind_MBall,                              // Poké Ball
+    It_Kind_CommonEnd = It_Kind_MBall,          // End of common item IDs
 
-    // Character articles
-
+    // Fighter items
     It_Kind_FighterStart,                       // Start of fighter item IDs
     It_Kind_PKFire = It_Kind_FighterStart,      // PK Fire pillar
     It_Kind_LinkBomb,                           // Link's Bomb
     It_Kind_FighterEnd = It_Kind_LinkBomb,      // End of fighter item IDs
 
-    // Stage hazards
-
+    // Stage items
     It_Kind_GroundStart,                        // Start of stage hazard IDs
     It_Kind_PowerBlock = It_Kind_GroundStart,   // POW block
-    It_Kind_Gr_Bumper,                          // Bumper (Peach's Castle)
+    It_Kind_GBumper,                            // Bumper (Stage Hazard)
     It_Kind_Pakkun,                             // Pirahna Plant
     It_Kind_Mato,                               // Target
-    It_Kind_RaceBomb,                           // Race to the Finish bomb
+    It_Kind_RBomb,                              // Race to the Finish bomb
 
     It_Kind_GrMonsterStart,                     // Start of stage Pokémon
-    It_Kind_Gr_Lucky = It_Kind_GrMonsterStart,  // Chansey (Saffron City)
+    It_Kind_GLucky = It_Kind_GrMonsterStart,    // Chansey (Saffron City)
     It_Kind_Marumine,                           // Electrode
     It_Kind_Hitokage,                           // Charmander
     It_Kind_Fushigibana,                        // Venusaur
@@ -104,7 +101,6 @@ typedef enum itKind
     It_Kind_GrMonsterEnd = It_Kind_GroundEnd,   // End of stage Pokémon
 
     // Pokémon
-
     It_Kind_MbMonsterStart,                     // Start of Pokémon item IDs
     It_Kind_Iwark = It_Kind_MbMonsterStart,     // Onix
     It_Kind_Kabigon,                            // Snorlax
@@ -113,7 +109,7 @@ typedef enum itKind
     It_Kind_Lizardon,                           // Charizard
     It_Kind_Spear,                              // Beedrill
     It_Kind_Kamex,                              // Blastoise
-    It_Kind_Mb_Lucky,                           // Chansey (Poké Ball)
+    It_Kind_MLucky,                             // Chansey (Poké Ball)
     It_Kind_Starmie,                            // Starmie
     It_Kind_Sawamura,                           // Hitmonlee
     It_Kind_Dogas,                              // Koffing
@@ -433,7 +429,7 @@ typedef struct itStruct                 // Common items, stage hazards, fighter 
         // Stage items
         itGround_ItemVars_Pakkun pakkun;
         itGround_ItemVars_RaceBomb rbomb;
-        itGround_ItemVars_GrLucky gr_lucky;
+        itGround_ItemVars_GrLucky grlucky;
         itGround_ItemVars_Marumine marumine;
         itGround_ItemVars_Hitokage hitokage;
         itGround_ItemVars_Fushigibana fushigibana;
@@ -447,7 +443,7 @@ typedef struct itStruct                 // Common items, stage hazards, fighter 
         itMonster_ItemVars_Lizardon lizardon;
         itMonster_ItemVars_Spear spear;
         itMonster_ItemVars_Kamex kamex;
-        itMonster_ItemVars_MbLucky mb_lucky;
+        itMonster_ItemVars_MbLucky mblucky;
         itMonster_ItemVars_Starmie starmie;
         itMonster_ItemVars_Dogas dogas;
         itMonster_ItemVars_Mew mew;

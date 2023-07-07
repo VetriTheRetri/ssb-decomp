@@ -2,51 +2,111 @@
 #include "weapon.h"
 #include "fighter.h"
 
-extern itStatusDesc itHitboxokage_Status[];
+extern void *D_ovl2_801313F4;
 
-void func_ovl3_80183DA0(GObj *item_gobj)
+itCreateDesc itGround_Hitokage_ItemDesc =
 {
-    itMain_SetItemStatus(item_gobj, itHitboxokage_Status, 0);
+    It_Kind_Hitokage,                       // Item Kind
+    &D_ovl2_801313F4,                       // Pointer to item file data?
+    0x1FC,                                  // Offset of item attributes in file?
+    0x1B,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_New,         // Hitbox Update State
+    itHitokage_SDefault_ProcUpdate,         // Proc Update
+    NULL,                                   // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    itHitokage_SDefault_ProcDamage          // Proc Damage
+};
 
-    itGetStruct(item_gobj)->proc_dead = func_ovl3_80183F88;
+itStatusDesc itGround_Hitokage_StatusDesc[itStatus_Hitokage_EnumMax] = 
+{
+    // Status 0 (Neutral Damage)
+    {
+        itHitokage_NDamage_ProcUpdate,      // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
+wpCreateDesc wpHitokage_Flame_WeaponDesc =
+{
+    0,                                      // Render flags?
+    Wp_Kind_HitokageFlame,                  // Weapon Kind
+    &D_ovl2_801313F4,                       // Pointer to character's loaded files?
+    0x244,                                  // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpHitokage_Flame_ProcUpdate,            // Proc Update
+    wpHitokage_Flame_ProcMap,               // Proc Map
+    wpHitokage_Flame_ProcHit,               // Proc Hit
+    wpHitokage_Flame_ProcHit,               // Proc Shield
+    NULL,                                   // Proc Hop
+    wpHitokage_Flame_ProcHit,               // Proc Set-Off
+    wpHitokage_Flame_ProcReflector,         // Proc Reflector
+    NULL                                    // Proc Absorb
+};
+
+typedef enum itHitokageStatus
+{
+    itStatus_Hitokage_NDamage,
+    itStatus_Hitokage_EnumMax
+
+} itHitokageStatus;
+
+// 0x80183DA0
+void itHitokage_NDamage_SetStatus(GObj *item_gobj)
+{
+    itMain_SetItemStatus(item_gobj, itGround_Hitokage_StatusDesc, itStatus_Hitokage_NDamage);
+
+    itGetStruct(item_gobj)->proc_dead = itHitokage_NDamage_ProcDead;
 }
 
-bool32 func_ovl3_80183DE0(GObj *item_gobj)
+// 0x80183DE0
+bool32 itHitokage_SDefault_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
-    joint->translate.x += ap->item_vars.hitokage.offset.x;
-    joint->translate.y += ap->item_vars.hitokage.offset.y;
+    joint->translate.x += ip->item_vars.hitokage.offset.x;
+    joint->translate.y += ip->item_vars.hitokage.offset.y;
 
     pos = joint->translate;
 
     pos.x += ITHITOKAGE_FLAME_SPAWN_OFF_X;
 
-    if ((ap->item_vars.hitokage.flags == 2) || 
-    ((ap->item_vars.hitokage.flags & 1) && (joint->dobj_f2 >= ITHITOKAGE_FLAME_SPAWN_BEGIN)) && 
-    (joint->dobj_f2 <= ITHITOKAGE_FLAME_SPAWN_END))
+    if 
+    (
+        (ip->item_vars.hitokage.flags == ITYCITYMONSTER_WEAPON_INSTANT) || ( (ip->item_vars.hitokage.flags & ITYCITYMONSTER_WEAPON_WAIT) && (joint->dobj_f2 >= ITHITOKAGE_FLAME_SPAWN_BEGIN) ) &&
+        (joint->dobj_f2 <= ITHITOKAGE_FLAME_SPAWN_END)
+    )
     {
         joint->mobj->index = 1;
 
-        if (ap->item_vars.hitokage.flame_spawn_wait <= 0)
+        if (ip->item_vars.hitokage.flame_spawn_wait <= 0)
         {
-            func_ovl3_801843C4(item_gobj, &pos);
+            itHitokage_SDefault_CreateFlame(item_gobj, &pos);
 
-            ap->item_vars.hitokage.flame_spawn_wait = ITHITOKAGE_FLAME_SPAWN_WAIT;
+            ip->item_vars.hitokage.flame_spawn_wait = ITHITOKAGE_FLAME_SPAWN_WAIT;
         }
-        else
-        {
-            ap->item_vars.hitokage.flame_spawn_wait--;
-        }
+        else ip->item_vars.hitokage.flame_spawn_wait--; 
     }
-    else
-    {
-        joint->mobj->index = 0;
-    }
+    else joint->mobj->index = 0;
+    
 
-    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
+    if (joint->dobj_f0 == (f32)FLOAT_NEG_MAX)
     {
         func_ovl2_8010B0B8();
 
@@ -55,99 +115,104 @@ bool32 func_ovl3_80183DE0(GObj *item_gobj)
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80183F20(GObj *item_gobj)
+// 0x80183F20
+bool32 itHitokage_NDamage_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint;
 
-    itMain_UpdatePhysicsAir(ap, ITHITOKAGE_GRAVITY, ITHITOKAGE_T_VEL);
+    itMain_UpdatePhysicsAir(ip, ITHITOKAGE_GRAVITY, ITHITOKAGE_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
 
-    joint->rotate.z -= (ITHITOKAGE_HIT_ROTATE_Z * ap->lr);
+    joint->rotate.z -= (ITHITOKAGE_HIT_ROTATE_Z * ip->lr);
 
     return FALSE;
 }
 
-bool32 func_ovl3_80183F88(GObj *item_gobj)
+// 0x80183F88
+bool32 itHitokage_NDamage_ProcDead(GObj *item_gobj)
 {
     return TRUE;
 }
 
-bool32 jtgt_ovl3_80183F94(GObj *item_gobj)
+// 0x80183F94
+bool32 itHitokage_SDefault_ProcDamage(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    if (ap->damage_knockback >= 100.0F)
+    if (ip->damage_knockback >= ITHITOKAGE_NDAMAGE_KNOCKBACK_MIN)
     {
-        f32 angle = gmCommon_Damage_GetKnockbackAngle(ap->damage_angle, ap->ground_or_air, ap->damage_knockback);
+        f32 angle = gmCommon_Damage_GetKnockbackAngle(ip->damage_angle, ip->ground_or_air, ip->damage_knockback);
 
-        ap->phys_info.vel_air.x = cosf(angle) * ap->damage_knockback * -ap->lr_damage;
-        ap->phys_info.vel_air.y = __sinf(angle) * ap->damage_knockback;
+        ip->phys_info.vel_air.x = cosf(angle) * ip->damage_knockback * -ip->lr_damage;
+        ip->phys_info.vel_air.y = __sinf(angle) * ip->damage_knockback;
 
-        ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
-        ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
+        ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
+        ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
         joint->dobj_f0 = (f32)FLOAT_NEG_MAX;
 
         func_ovl2_8010B0AC();
-        func_ovl3_80183DA0(item_gobj);
+        itHitokage_NDamage_SetStatus(item_gobj);
     }
     return FALSE;
 }
 
-extern s32 D_ovl2_8012EB60;
-extern itCreateDesc itHitboxokage_Data;
+extern s32 grYamabuki_MonsterFlag_Prev;
 
-GObj* jtgt_ovl3_80184058(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80184058
+GObj* itGround_Hitokage_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itHitboxokage_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Hitokage_ItemDesc, pos, vel, flags);
     s32 unused;
     DObj *joint;
-    itStruct *ap;
+    itStruct *ip;
 
     if (item_gobj != NULL)
     {
-        ap = itGetStruct(item_gobj);
+        ip = itGetStruct(item_gobj);
         joint = DObjGetStruct(item_gobj);
 
-        ap->item_vars.hitokage.flame_spawn_wait = 0;
-        ap->item_vars.hitokage.offset = *pos;
+        ip->item_vars.hitokage.flame_spawn_wait = 0;
+        ip->item_vars.hitokage.offset = *pos;
 
-        ap->is_allow_knockback = TRUE;
+        ip->is_allow_knockback = TRUE;
 
-        ap->item_vars.hitokage.flags = rand_u16_range(4);
+        ip->item_vars.hitokage.flags = rand_u16_range(ITYCITYMONSTER_WEAPON_ALL + 1);
 
-        if ((D_ovl2_8012EB60 == ap->item_vars.hitokage.flags) || (ap->item_vars.hitokage.flags & D_ovl2_8012EB60))
+        if ((grYamabuki_MonsterFlag_Prev == ip->item_vars.hitokage.flags) || (ip->item_vars.hitokage.flags & grYamabuki_MonsterFlag_Prev))
         {
-            ap->item_vars.hitokage.flags++;
+            ip->item_vars.hitokage.flags++;
 
-            ap->item_vars.hitokage.flags &= 3;
+            ip->item_vars.hitokage.flags &= ITYCITYMONSTER_WEAPON_ALL;
         }
-        if (ap->item_vars.hitokage.flags == 2)
+        if (ip->item_vars.hitokage.flags == ITYCITYMONSTER_WEAPON_INSTANT)
         {
             joint->mobj->index = 1;
         }
-        D_ovl2_8012EB60 = ap->item_vars.hitokage.flags;
+        grYamabuki_MonsterFlag_Prev = ip->item_vars.hitokage.flags;
 
-        func_800269C0(0x229U);
+        func_800269C0(gmSound_Voice_YCityHitokage);
     }
     return item_gobj;
 }
 
-bool32 jtgt_ovl3_8018415C(GObj *weapon_gobj)
+// 0x8018415C
+bool32 wpHitokage_Flame_ProcUpdate(GObj *weapon_gobj)
 {
-    wpStruct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80184188(GObj *weapon_gobj)
+// 0x80184188
+bool32 wpHitokage_Flame_ProcMap(GObj *weapon_gobj)
 {
     if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
@@ -158,9 +223,10 @@ bool32 jtgt_ovl3_80184188(GObj *weapon_gobj)
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_801841CC(GObj *weapon_gobj)
+// 0x801841CC
+bool32 wpHitokage_Flame_ProcHit(GObj *weapon_gobj)
 {
-    func_800269C0(0U);
+    func_800269C0(gmSound_SFX_ExplodeS);
     func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
     return FALSE;
@@ -168,58 +234,60 @@ bool32 jtgt_ovl3_801841CC(GObj *weapon_gobj)
 
 extern s32 D_ovl3_8018D044;
 
-bool32 jtgt_ovl3_80184204(GObj *weapon_gobj)
+// 0x80184204
+bool32 wpHitokage_Flame_ProcReflector(GObj *weapon_gobj)
 {
-    wpStruct *ip = wpGetStruct(weapon_gobj);
-    ftStruct *fp = ftGetStruct(ip->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
     Vec3f *translate;
 
-    ip->lifetime = ITHITOKAGE_FLAME_LIFETIME;
+    wp->lifetime = ITHITOKAGE_FLAME_LIFETIME;
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorInvertLR(wp, fp);
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, translate->x, translate->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, translate->x, translate->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
 
     return FALSE;
 }
 
-extern wpCreateDesc Weapon_Hitokage_Flame_Data;
-
-GObj *func_ovl3_801842C8(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
+// 0x801842C8
+GObj* wpHitokage_Flame_CreateWeapon(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Weapon_Hitokage_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
-    wpStruct *ip;
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &wpHitokage_Flame_WeaponDesc, pos, WEAPON_MASK_SPAWN_ITEM);
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel = *vel;
+    wp->phys_info.vel = *vel;
 
-    ip->lifetime = ITHITOKAGE_FLAME_LIFETIME;
+    wp->lifetime = ITHITOKAGE_FLAME_LIFETIME;
 
-    ip->lr = LEFT;
+    wp->lr = LEFT;
 
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
-    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, ip->phys_info.vel_air.x, ip->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 2, pos->x, pos->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
+    func_ovl0_800CE8C0(D_ovl3_8018D044 | 8, 0, pos->x, pos->y, 0.0F, wp->phys_info.vel_air.x, wp->phys_info.vel_air.y, 0.0F);
 
     return weapon_gobj;
 }
 
-void func_ovl3_801843C4(GObj *item_gobj, Vec3f *pos)
+// 0x801843C4
+void itHitokage_SDefault_CreateFlame(GObj *item_gobj, Vec3f *pos)
 {
-    itStruct *ap;
+    itStruct *ip;
     Vec3f vel;
 
-    vel.x = cosf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * -ITHITOKAGE_FLAME_VEL_XY;
-    vel.y = __sinf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * ITHITOKAGE_FLAME_VEL_XY;
+    vel.x = cosf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * -ITHITOKAGE_FLAME_VEL_BASE;
+    vel.y = __sinf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * ITHITOKAGE_FLAME_VEL_BASE;
     vel.z = 0.0F;
 
-    func_ovl3_801842C8(item_gobj, pos, &vel);
-    func_800269C0(0x88U);
+    wpHitokage_Flame_CreateWeapon(item_gobj, pos, &vel);
+
+    func_800269C0(gmSound_SFX_LizardonFlame);
 }

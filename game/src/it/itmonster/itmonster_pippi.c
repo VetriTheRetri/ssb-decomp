@@ -51,7 +51,7 @@ void func_ovl3_80183210(GObj *item_gobj)
         }
         else ap->lr = LEFT;
     }
-    if ((it_kind == It_Kind_Pippi) || (it_kind == It_Kind_Tosakinto) || (it_kind == It_Kind_Mb_Lucky))
+    if ((it_kind == It_Kind_Pippi) || (it_kind == It_Kind_Tosakinto) || (it_kind == It_Kind_MLucky))
     {
         ap->item_hit.update_state = gmHitCollision_UpdateState_Disable;
     }

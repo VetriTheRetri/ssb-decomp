@@ -394,14 +394,14 @@ void itMain_SetItemStatus(GObj *item_gobj, itStatusDesc *status_desc, s32 status
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    ip->proc_update = status_desc[status_id].proc_update;
-    ip->proc_map = status_desc[status_id].proc_map;
-    ip->proc_hit = status_desc[status_id].proc_hit;
-    ip->proc_shield = status_desc[status_id].proc_shield;
-    ip->proc_hop = status_desc[status_id].proc_hop;
-    ip->proc_setoff = status_desc[status_id].proc_setoff;
+    ip->proc_update    = status_desc[status_id].proc_update;
+    ip->proc_map       = status_desc[status_id].proc_map;
+    ip->proc_hit       = status_desc[status_id].proc_hit;
+    ip->proc_shield    = status_desc[status_id].proc_shield;
+    ip->proc_hop       = status_desc[status_id].proc_hop;
+    ip->proc_setoff    = status_desc[status_id].proc_setoff;
     ip->proc_reflector = status_desc[status_id].proc_reflector;
-    ip->proc_damage = status_desc[status_id].proc_damage;
+    ip->proc_damage    = status_desc[status_id].proc_damage;
 
     ip->is_thrown = FALSE;
 

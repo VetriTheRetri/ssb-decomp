@@ -2,37 +2,78 @@
 #include "weapon.h"
 #include "fighter.h"
 
+extern s32 grYamabuki_MonsterFlag_Prev;
 extern intptr_t Fushigibana_Event;
-extern itCreateDesc Article_Fushigibana_Data;
+extern void *D_ovl2_801313F4;
 
-void func_ovl3_80184440(GObj *item_gobj)
+itCreateDesc itGround_Fushigibana_ItemDesc =
 {
-    itStruct *ap = itGetStruct(item_gobj);
-    itHitParty *hit_desc = (itHitParty*) ((uintptr_t)*Article_Fushigibana_Data.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
+    It_Kind_Fushigibana,                    // Item Kind
+    &D_ovl2_801313F4,                       // Pointer to item file data?
+    0x278,                                  // Offset of item attributes in file?
+    0x1B,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_New,         // Hitbox Update State
+    itFushigibana_SDefault_ProcUpdate,      // Proc Update
+    NULL,                                   // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
 
-    if (ap->it_multi == hit_desc[ap->item_event_index].timer)
+wpCreateDesc wpFushigibana_Razor_WeaponDesc =
+{
+    3,                                      // Render flags?
+    Wp_Kind_FushigibanaRazor,               // Weapon Kind
+    &D_ovl2_801313F4,                       // Pointer to character's loaded files?
+    0x308,                                  // Offset of weapon attributes in loaded files
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    0,                                      // ???
+    wpFushigibana_Razor_ProcUpdate,         // Proc Update
+    NULL,                                   // Proc Map
+    wpFushigibana_Razor_ProcHit,            // Proc Hit
+    wpFushigibana_Razor_ProcHit,            // Proc Shield
+    wpFushigibana_Razor_ProcHop,            // Proc Hop
+    wpFushigibana_Razor_ProcHit,            // Proc Set-Off
+    wpFushigibana_Razor_ProcReflector,      // Proc Reflector
+    wpFushigibana_Razor_ProcHit             // Proc Absorb
+};
+
+// 0x80184440
+void itFushigibana_SDefault_UpdateHitParty(GObj *item_gobj)
+{
+    itStruct *ip = itGetStruct(item_gobj);
+    itHitParty *hit_desc = itGetHitParty(itGround_Fushigibana_ItemDesc, Fushigibana_Event); // (itHitParty*) ((uintptr_t)*itGround_Fushigibana_ItemDesc.p_file + (intptr_t)&Fushigibana_Event); // Linker thing
+
+    if (ip->it_multi == hit_desc[ip->item_event_index].timer)
     {
-        ap->item_hit.angle = hit_desc[ap->item_event_index].angle;
-        ap->item_hit.damage = hit_desc[ap->item_event_index].damage;
-        ap->item_hit.size = hit_desc[ap->item_event_index].size;
-        ap->item_hit.knockback_scale = hit_desc[ap->item_event_index].knockback_scale;
-        ap->item_hit.knockback_weight = hit_desc[ap->item_event_index].knockback_weight;
-        ap->item_hit.knockback_base = hit_desc[ap->item_event_index].knockback_base;
-        ap->item_hit.element = hit_desc[ap->item_event_index].element;
-        ap->item_hit.rebound = hit_desc[ap->item_event_index].rebound;
-        ap->item_hit.shield_damage = hit_desc[ap->item_event_index].shield_damage;
-        ap->item_hit.hit_sfx = hit_desc[ap->item_event_index].hit_sfx;
+        ip->item_hit.angle            = hit_desc[ip->item_event_index].angle;
+        ip->item_hit.damage           = hit_desc[ip->item_event_index].damage;
+        ip->item_hit.size             = hit_desc[ip->item_event_index].size;
+        ip->item_hit.knockback_scale  = hit_desc[ip->item_event_index].knockback_scale;
+        ip->item_hit.knockback_weight = hit_desc[ip->item_event_index].knockback_weight;
+        ip->item_hit.knockback_base   = hit_desc[ip->item_event_index].knockback_base;
+        ip->item_hit.element          = hit_desc[ip->item_event_index].element;
+        ip->item_hit.rebound          = hit_desc[ip->item_event_index].rebound;
+        ip->item_hit.shield_damage    = hit_desc[ip->item_event_index].shield_damage;
+        ip->item_hit.hit_sfx          = hit_desc[ip->item_event_index].hit_sfx;
 
-        ap->item_event_index++;
+        ip->item_event_index++;
 
-        if (ap->item_event_index == 2)
+        if (ip->item_event_index == 2)
         {
-            ap->item_event_index = 1;
+            ip->item_event_index = 1;
         }
     }
-    ap->it_multi++;
+    ip->it_multi++;
 
-    if (ap->it_multi == ITFUSHIGIBANA_RETURN_WAIT)
+    if (ip->it_multi == ITFUSHIGIBANA_RETURN_WAIT)
     {
         Vec3f pos = DObjGetStruct(item_gobj)->translate;
 
@@ -42,45 +83,48 @@ void func_ovl3_80184440(GObj *item_gobj)
     }
 }
 
-bool32 func_ovl3_801845B4(GObj *item_gobj)
+// 0x801845B4
+bool32 itFushigibana_SDefault_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
-    joint->translate.x += ap->item_vars.fushigibana.offset.x;
-    joint->translate.y += ap->item_vars.fushigibana.offset.y;
+    joint->translate.x += ip->item_vars.fushigibana.offset.x;
+    joint->translate.y += ip->item_vars.fushigibana.offset.y;
 
-    func_ovl3_80184440(item_gobj);
+    itFushigibana_SDefault_UpdateHitParty(item_gobj);
 
     pos = joint->translate;
 
     pos.x += ITFUSHIGIBANA_RAZOR_SPAWN_OFF_X;
 
-    if ((ap->item_vars.fushigibana.flags == 2) ||
-        ((ap->item_vars.fushigibana.flags & 1) && (joint->dobj_f2 >= ITFUSHIGIBANA_RAZOR_SPAWN_BEGIN)) &&
-        (joint->dobj_f2 <= ITFUSHIGIBANA_RAZOR_SPAWN_END))
+    if 
+    (
+        (ip->item_vars.fushigibana.flags == ITYCITYMONSTER_WEAPON_INSTANT) || ( (ip->item_vars.fushigibana.flags & ITYCITYMONSTER_WEAPON_WAIT) && (joint->dobj_f2 >= ITFUSHIGIBANA_RAZOR_SPAWN_BEGIN) ) &&
+        (joint->dobj_f2 <= ITFUSHIGIBANA_RAZOR_SPAWN_END)
+    )
     {
         joint->mobj->index = 1;
 
-        if (!ap->item_vars.fushigibana.razor_spawn_wait)
+        if (!ip->item_vars.fushigibana.razor_spawn_wait)
         {
-            func_ovl3_801849EC(item_gobj, &pos);
+            wpFushigibana_Razor_CreateWeapon(item_gobj, &pos);
 
-            ap->item_vars.fushigibana.razor_spawn_wait = ITFUSHIGIBANA_RAZOR_SPAWN_WAIT;
+            ip->item_vars.fushigibana.razor_spawn_wait = ITFUSHIGIBANA_RAZOR_SPAWN_WAIT;
 
-            func_800269C0(0x8CU);
+            func_800269C0(gmSound_SFX_MonsterWeapon);
 
             func_ovl2_800FECBC(&pos);
         }
-        if (ap->item_vars.fushigibana.razor_spawn_wait > 0)
+        if (ip->item_vars.fushigibana.razor_spawn_wait > 0)
         {
-            ap->item_vars.fushigibana.razor_spawn_wait--;
+            ip->item_vars.fushigibana.razor_spawn_wait--;
         }
     }
     else joint->mobj->index = 0;
 
-    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
+    if (joint->dobj_f0 == (f32)FLOAT_NEG_MAX)
     {
         func_ovl2_8010B0B8();
 
@@ -89,127 +133,128 @@ bool32 func_ovl3_801845B4(GObj *item_gobj)
     return FALSE;
 }
 
-extern itCreateDesc Article_Fushigibana_Data;
-extern s32 D_ovl2_8012EB60;
-
-GObj *jtgt_ovl3_8018470C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x8018470C
+GObj* itGround_Fushigibana_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Fushigibana_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Fushigibana_ItemDesc, pos, vel, flags);
     s32 unused;
     DObj *joint;
-    itStruct *ap;
+    itStruct *ip;
 
     if (item_gobj != NULL)
     {
-        ap = itGetStruct(item_gobj);
+        ip = itGetStruct(item_gobj);
         joint = DObjGetStruct(item_gobj);
 
-        ap->item_event_index = 0;
+        ip->item_event_index = 0;
 
-        ap->it_multi = 0;
+        ip->it_multi = 0;
 
-        ap->item_vars.fushigibana.razor_spawn_wait = 0;
-        ap->item_vars.fushigibana.offset = *pos;
+        ip->item_vars.fushigibana.razor_spawn_wait = 0;
+        ip->item_vars.fushigibana.offset = *pos;
 
-        ap->is_allow_knockback = TRUE;
+        ip->is_allow_knockback = TRUE;
 
-        ap->item_vars.hitokage.flags = rand_u16_range(4);
+        ip->item_vars.hitokage.flags = rand_u16_range(ITYCITYMONSTER_WEAPON_ALL + 1);
 
-        if ((D_ovl2_8012EB60 == ap->item_vars.fushigibana.flags) || (ap->item_vars.fushigibana.flags & D_ovl2_8012EB60))
+        if ((grYamabuki_MonsterFlag_Prev == ip->item_vars.fushigibana.flags) || (ip->item_vars.fushigibana.flags & grYamabuki_MonsterFlag_Prev))
         {
-            ap->item_vars.fushigibana.flags++;
+            ip->item_vars.fushigibana.flags++;
 
-            ap->item_vars.fushigibana.flags &= 3;
+            ip->item_vars.fushigibana.flags &= ITYCITYMONSTER_WEAPON_ALL;
         }
-        if (ap->item_vars.fushigibana.flags == 2)
+        if (ip->item_vars.fushigibana.flags == ITYCITYMONSTER_WEAPON_INSTANT)
         {
             joint->mobj->index = 1;
         }
-        D_ovl2_8012EB60 = ap->item_vars.fushigibana.flags;
+        grYamabuki_MonsterFlag_Prev = ip->item_vars.fushigibana.flags;
 
-        func_800269C0(0x228U);
+        func_800269C0(gmSound_Voice_YCityFushigibana);
     }
     return item_gobj;
 }
 
-bool32 func_ovl3_80184820(GObj *weapon_gobj)
+// 0x80184820
+bool32 wpFushigibana_Razor_ProcUpdate(GObj *weapon_gobj)
 {
-    wpStruct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    ip->phys_info.vel_air.x += ITFUSHIGIBANA_RAZOR_ADD_VEL_X * ip->lr;
+    wp->phys_info.vel_air.x += ITFUSHIGIBANA_RAZOR_ADD_VEL_X * wp->lr;
 
-    if (wpMain_DecLifeCheckExpire(ip) != FALSE)
+    if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 jtgt_ovl3_80184874(GObj *weapon_gobj)
+// 0x80184874
+bool32 wpFushigibana_Razor_ProcHit(GObj *weapon_gobj)
 {
-    wpStruct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE6E4(&DObjGetStruct(weapon_gobj)->translate, ip->weapon_hit.damage, ip->lr);
+    func_ovl2_800FE6E4(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage, wp->lr);
 
     return TRUE;
 }
 
-bool32 jtgt_ovl3_801848BC(GObj *weapon_gobj)
+// 0x801848BC
+bool32 wpFushigibana_Razor_ProcHop(GObj *weapon_gobj)
 {
-    wpStruct *ip = wpGetStruct(weapon_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
+    func_80019438(&wp->phys_info.vel, &wp->shield_collide_vec, wp->shield_collide_angle * 2);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x) + PI32;
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x) + F_DEG_TO_RAD(180.0F); // PI32
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    if (ip->phys_info.vel_air.x > 0.0F)
+    if (wp->phys_info.vel_air.x > 0.0F)
     {
-        ip->lr = RIGHT;
+        wp->lr = RIGHT;
     }
-    else ip->lr = LEFT;
+    else wp->lr = LEFT;
 
     return FALSE;
 }
 
-bool32 jtgt_ovl3_80184970(GObj *weapon_gobj)
+// 0x80184970
+bool32 wpFushigibana_Razor_ProcReflector(GObj *weapon_gobj)
 {
-    wpStruct *ip = wpGetStruct(weapon_gobj);
-    ftStruct *fp = ftGetStruct(ip->owner_gobj);
+    wpStruct *wp = wpGetStruct(weapon_gobj);
+    ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorInvertLR(wp, fp);
 
-    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x) + F_DEG_TO_RAD(180.0F); // PI32
+    DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x) + F_DEG_TO_RAD(180.0F); // PI32
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;
 
-    ip->lr = -ip->lr;
+    wp->lr = -wp->lr;
 
     return FALSE;
 }
 
-extern wpCreateDesc Item_Razor_Data;
-
-GObj *func_ovl3_801849EC(GObj *item_gobj, Vec3f *pos)
+// 0x801849EC
+GObj* wpFushigibana_Razor_CreateWeapon(GObj *item_gobj, Vec3f *pos)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Razor_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &wpFushigibana_Razor_WeaponDesc, pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
-    wpStruct *ip;
+    wpStruct *wp;
 
     if (weapon_gobj == NULL)
     {
         return NULL;
     }
-    ip = wpGetStruct(weapon_gobj);
+    wp = wpGetStruct(weapon_gobj);
 
-    ip->lr = LEFT;
+    wp->lr = LEFT;
 
-    ip->phys_info.vel_air.x = ITFUSHIGIBANA_RAZOR_VEL_X;
+    wp->phys_info.vel_air.x = ITFUSHIGIBANA_RAZOR_VEL_X;
 
     joint = DObjGetStruct(weapon_gobj);
 
     joint->translate = *pos;
 
-    ip->lifetime = ITFUSHIGIBANA_RAZOR_LIFETIME;
+    wp->lifetime = ITFUSHIGIBANA_RAZOR_LIFETIME;
 
     return weapon_gobj;
 }

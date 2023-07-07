@@ -9,14 +9,14 @@ void func_ovl3_80180FC0(GObj *item_gobj)
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    if (ap->it_kind == It_Kind_Mb_Lucky)
+    if (ap->it_kind == It_Kind_MLucky)
     {
         func_8000BD1C(joint->next, itGetPData(ap, D_NF_00010000, D_NF_000100BC), 0.0F); // Linker thing
         func_8000DF34(item_gobj);
     }
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    ap->item_vars.mb_lucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
+    ap->item_vars.mblucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
 
     ap->it_multi = ITMBLUCKY_EGG_SPAWN_COUNT;
 }
@@ -91,7 +91,7 @@ void func_ovl3_801811AC(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    if (ap->it_kind == It_Kind_Mb_Lucky)
+    if (ap->it_kind == It_Kind_MLucky)
     {
         func_800269C0(0x13AU);
     }
@@ -116,7 +116,7 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
     }
     else
     {
-        if (!lucky_ap->item_vars.mb_lucky.egg_spawn_wait)
+        if (!lucky_ap->item_vars.mblucky.egg_spawn_wait)
         {
             if ((gpMatchData->item_toggles & 8) && (gpMatchData->item_switch != 0))
             {
@@ -132,9 +132,9 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
                 {
                     egg_ap = itGetStruct(egg_gobj);
 
-                    func_800269C0(0xCA);
+                    func_800269C0(gmSound_SFX_KirbySpecialLwStart);
 
-                    lucky_ap->item_vars.mb_lucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
+                    lucky_ap->item_vars.mblucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
                     lucky_ap->it_multi--;
 
                     func_ovl2_800FF048(&pos, egg_ap->lr, 1.0F);
@@ -142,13 +142,13 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
             }
             else
             {
-                lucky_ap->item_vars.mb_lucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
+                lucky_ap->item_vars.mblucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
                 lucky_ap->it_multi--;
             }
         }
-        if (lucky_ap->item_vars.mb_lucky.egg_spawn_wait > 0)
+        if (lucky_ap->item_vars.mblucky.egg_spawn_wait > 0)
         {
-            lucky_ap->item_vars.mb_lucky.egg_spawn_wait--;
+            lucky_ap->item_vars.mblucky.egg_spawn_wait--;
         }
     }
     return FALSE;
@@ -167,7 +167,7 @@ bool32 itMBLucky_GSpawn_ProcDamage(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    ip->item_vars.mb_lucky.egg_spawn_wait += ITMBLUCKY_EGG_SPAWN_WAIT_ADD;
+    ip->item_vars.mblucky.egg_spawn_wait += ITMBLUCKY_EGG_SPAWN_WAIT_ADD;
 
     return FALSE;
 }
@@ -181,11 +181,11 @@ bool32 jtgt_ovl3_801813D0(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    if (ap->item_vars.mb_lucky.lifetime == 0)
+    if (ap->item_vars.mblucky.lifetime == 0)
     {
         return TRUE;
     }
-    ap->item_vars.mb_lucky.lifetime--;
+    ap->item_vars.mblucky.lifetime--;
 
     return FALSE;
 }
@@ -194,7 +194,7 @@ void func_ovl3_801813F8(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    ap->item_vars.mb_lucky.lifetime = ITMBLUCKY_LIFETIME;
+    ap->item_vars.mblucky.lifetime = ITMBLUCKY_LIFETIME;
 
     ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 

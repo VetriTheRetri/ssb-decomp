@@ -1,8 +1,7 @@
 #include "item.h"
 #include "weapon.h"
 #include "fighter.h"
-
-
+#include "gmground.h"
 
 void func_ovl3_8017D740(GObj *iwark_gobj)
 {
@@ -40,7 +39,7 @@ bool32 func_ovl3_8017D820(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
-    f32 pos_y = Ground_Info->blastzone_top - ITIWARK_FLY_STOP_Y;
+    f32 pos_y = gpMapData->blastzone_top - ITIWARK_FLY_STOP_Y;
 
     if (pos_y <= joint->translate.y)
     {
@@ -312,7 +311,7 @@ extern wpCreateDesc Item_Iwark_Rock_Data;
 GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
 {
     s32 unused;
-    GObj *weapon_gobj = wpManager_CreateWeapon(spawn_gobj, &Item_Iwark_Rock_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(spawn_gobj, &Item_Iwark_Rock_Data, pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
     f32 vel_y;
     wpStruct *ip;

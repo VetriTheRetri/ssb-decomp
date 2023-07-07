@@ -185,7 +185,7 @@ extern wpCreateDesc Item_Smog_Data;
 GObj* func_ovl3_80183144(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
     wpCreateDesc *p_data = &Item_Smog_Data;
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Smog_Data, pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
     wpStruct *ip;
 

@@ -52,7 +52,7 @@ loop: // This makes no sense
         while (FALSE);
     }
     rebirth_vars.pos.x = Rebirth_Halo_Offset_X[halo_number] + halo_spawn_pos.x;
-    rebirth_vars.pos.y = Ground_Info->blastzone_top;
+    rebirth_vars.pos.y = gpMapData->blastzone_top;
     rebirth_vars.pos.z = 0.0F;
 
     func_ovl2_800D79F0(this_gobj, &rebirth_vars);

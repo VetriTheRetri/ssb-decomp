@@ -223,10 +223,10 @@ glabel func_ovl6_8018D374
   /* 111ADC 8018D39C F7B40018 */      sdc1 $f20, 0x18($sp)
   /* 111AE0 8018D3A0 91CF0001 */       lbu $t7, 1($t6)
   /* 111AE4 8018D3A4 4480A000 */      mtc1 $zero, $f20
-  /* 111AE8 8018D3A8 3C098013 */       lui $t1, %hi(Ground_Info)
+  /* 111AE8 8018D3A8 3C098013 */       lui $t1, %hi(gpMapData)
   /* 111AEC 8018D3AC 000FC080 */       sll $t8, $t7, 2
   /* 111AF0 8018D3B0 030FC023 */      subu $t8, $t8, $t7
-  /* 111AF4 8018D3B4 8D291300 */        lw $t1, %lo(Ground_Info)($t1)
+  /* 111AF4 8018D3B4 8D291300 */        lw $t1, %lo(gpMapData)($t1)
   /* 111AF8 8018D3B8 0018C080 */       sll $t8, $t8, 2
   /* 111AFC 8018D3BC 3C088019 */       lui $t0, %hi(D_ovl6_8018EEC4)
   /* 111B00 8018D3C0 2508EEC4 */     addiu $t0, $t0, %lo(D_ovl6_8018EEC4)
@@ -750,8 +750,8 @@ glabel func_ovl6_8018DAE0
 
 glabel func_ovl6_8018DB24
   /* 112264 8018DB24 27BDFF98 */     addiu $sp, $sp, -0x68
-  /* 112268 8018DB28 3C0E8013 */       lui $t6, %hi(Ground_Info)
-  /* 11226C 8018DB2C 8DCE1300 */        lw $t6, %lo(Ground_Info)($t6)
+  /* 112268 8018DB28 3C0E8013 */       lui $t6, %hi(gpMapData)
+  /* 11226C 8018DB2C 8DCE1300 */        lw $t6, %lo(gpMapData)($t6)
   /* 112270 8018DB30 AFBF003C */        sw $ra, 0x3c($sp)
   /* 112274 8018DB34 AFB40038 */        sw $s4, 0x38($sp)
   /* 112278 8018DB38 AFB30034 */        sw $s3, 0x34($sp)

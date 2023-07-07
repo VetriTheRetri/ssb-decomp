@@ -63,11 +63,11 @@ bool32 func_ovl3_80182764(GObj *item_gobj)
 
     itMain_UpdatePhysicsAir(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
 
-    if ((ap->lr == RIGHT) && ((Ground_Info->blastzone_right - ITSAWAMURA_DESPAWN_OFF_X) <= joint->translate.x))
+    if ((ap->lr == RIGHT) && ((gpMapData->blastzone_right - ITSAWAMURA_DESPAWN_OFF_X) <= joint->translate.x))
     {
         return TRUE;
     }
-    else if ((ap->lr == LEFT) && (joint->translate.x <= (Ground_Info->blastzone_left + ITSAWAMURA_DESPAWN_OFF_X)))
+    else if ((ap->lr == LEFT) && (joint->translate.x <= (gpMapData->blastzone_left + ITSAWAMURA_DESPAWN_OFF_X)))
     {
         return TRUE;
     }

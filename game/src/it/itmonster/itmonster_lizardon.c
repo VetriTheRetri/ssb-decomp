@@ -284,7 +284,7 @@ extern wpCreateDesc Item_Lizardon_Flame_Data;
 
 GObj *func_ovl3_8017FC38(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Lizardon_Flame_Data, pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Lizardon_Flame_Data, pos, WEAPON_MASK_SPAWN_ITEM);
     wpStruct *ip;
 
     if (weapon_gobj == NULL)

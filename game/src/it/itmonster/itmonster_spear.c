@@ -93,7 +93,7 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
 
     if (ap->lr == RIGHT)
     {
-        if ((Ground_Info->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x)
+        if ((gpMapData->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x)
         {
             ap->phys_info.vel_air.x = 0.0F;
             ap->phys_info.vel_air.y = 0.0F;
@@ -109,7 +109,7 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
     }
     if (ap->lr == LEFT)
     {
-        if (joint->translate.x <= (Ground_Info->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X))
+        if (joint->translate.x <= (gpMapData->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X))
         {
             ap->phys_info.vel_air.x = 0.0F;
             ap->phys_info.vel_air.y = 0.0F;
@@ -216,11 +216,11 @@ bool32 func_ovl3_80180354(GObj *weapon_gobj)
     wpStruct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj);
 
-    if ((ip->lr == RIGHT) && ((Ground_Info->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
+    if ((ip->lr == RIGHT) && ((gpMapData->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
     {
         return TRUE;
     }
-    else if ((ip->lr == LEFT) && (joint->translate.x <= (Ground_Info->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X)))
+    else if ((ip->lr == LEFT) && (joint->translate.x <= (gpMapData->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X)))
     {
         return TRUE;
     }
@@ -251,7 +251,7 @@ extern wpCreateDesc Item_Pippi_Swarm_Data;
 GObj *func_ovl3_801804A4(GObj *item_gobj, Vec3f *pos, s32 it_kind)
 {
     itStruct *ap = itGetStruct(item_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ARTICLE);
+    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
     s32 unused;
     wpStruct *ip;

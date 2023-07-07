@@ -2,81 +2,96 @@
 #include "ground.h"
 #include "gmmatch.h"
 
-bool32 func_ovl3_8017D590(GObj *item_gobj)
+itCreateDesc itGround_Bumper_ItemDesc =
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    It_Kind_GBumper,                        // Item Kind
+    &gItemFileData,                         // Pointer to item file data?
+    0xCF0,                                  // Offset of item attributes in file?
+    0x1C,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_New,         // Hitbox Update State
+    itGBumper_SDefault_ProcUpdate,          // Proc Update
+    NULL,                                   // Proc Map
+    itGBumper_SDefault_ProcHit,             // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
+
+// 0x8017D590
+bool32 itGBumper_SDefault_ProcUpdate(GObj *item_gobj)
+{
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    if ((ap->item_vars.bumper.hit_anim_length == 0) && (joint->mobj->anim_frame == 1.0F))
+    if ((ip->item_vars.bumper.hit_anim_length == 0) && (joint->mobj->anim_frame == 1.0F))
     {
         joint->mobj->anim_frame = 0;
     }
-    else
+    else ip->item_vars.bumper.hit_anim_length--;
+    
+    if (ip->it_multi != 0)
     {
-        ap->item_vars.bumper.hit_anim_length--;
-    }
-    if (ap->it_multi != 0)
-    {
-        joint->scale.x = joint->scale.y = 2.0F - ((10 - ap->it_multi) * 0.1F);
+        joint->scale.x = joint->scale.y = ( 2.0F - ( (10 - ip->it_multi) * 0.1F ) );
 
-        ap->it_multi--;
+        ip->it_multi--;
     }
-    else
-    {
-        joint->scale.y = 1;
-        joint->scale.x = 1;
-    }
+    else joint->scale.x = joint->scale.y = 1;
+    
     return FALSE;
 }
 
-bool32 func_ovl3_8017D63C(GObj *item_gobj)
+// 0x8017D63C
+bool32 itGBumper_SDefault_ProcHit(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
     joint->scale.x = 2.0F;
     joint->scale.y = 2.0F;
 
-    ap->item_vars.bumper.hit_anim_length = ITBUMPER_HIT_ANIM_LENGTH;
+    ip->item_vars.bumper.hit_anim_length = ITBUMPER_HIT_ANIM_LENGTH;
 
     joint->mobj->anim_frame = 1.0F;
 
-    ap->it_multi = ITBUMPER_HIT_SCALE;
+    ip->it_multi = ITBUMPER_HIT_SCALE;
 
     return FALSE;
 }
 
-extern itCreateDesc Article_Gr_Bumper_Data;
-
-GObj *jtgt_ovl3_8017D67C(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x8017D67C
+GObj* itGround_Bumper_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Gr_Bumper_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Bumper_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
-        itStruct *ap;
+        itStruct *ip;
         DObj *joint;
 
         itMain_ClearOwnerStats(item_gobj);
 
-        ap = itGetStruct(item_gobj);
+        ip = itGetStruct(item_gobj);
         joint = DObjGetStruct(item_gobj);
 
-        ap->it_multi = 0;
+        ip->it_multi = 0;
 
-        ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
-        ap->item_hit.can_rehit_shield = TRUE;
+        ip->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ip->item_hit.can_rehit_shield = TRUE;
 
-        ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.y = 0.0F;
-        ap->phys_info.vel_air.z = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
+        ip->phys_info.vel_air.y = 0.0F;
+        ip->phys_info.vel_air.z = 0.0F;
 
         joint->mobj->anim_frame = 0;
 
         if (gpMatchData->gr_kind == Gr_Kind_Castle)
         {
-            ap->item_hit.knockback_weight = ITBUMPER_CASTLE_KNOCKBACK;
-            ap->item_hit.angle = ITBUMPER_CASTLE_ANGLE;
+            ip->item_hit.knockback_weight = ITBUMPER_CASTLE_KNOCKBACK;
+            ip->item_hit.angle = ITBUMPER_CASTLE_ANGLE;
         }
     }
     return item_gobj;

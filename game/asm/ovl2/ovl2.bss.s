@@ -371,7 +371,7 @@ glabel D_ovl2_801312F1
     .space 3
 glabel D_ovl2_801312F4
     .space 12
-glabel Ground_Info
+glabel gpMapData
     .space 4
 glabel D_ovl2_80131304
     .space 4

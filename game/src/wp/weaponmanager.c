@@ -136,7 +136,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
         wp->weapon_hit.stat_count = owner_wp->weapon_hit.stat_count;
         break;
 
-    case WEAPON_MASK_SPAWN_ARTICLE: // Items spawned by Pokémon
+    case WEAPON_MASK_SPAWN_ITEM: // Items spawned by Pokémon
         ap = itGetStruct(spawn_gobj);
         wp->owner_gobj = ap->owner_gobj;
         wp->team = ap->team;
@@ -326,7 +326,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
             func_ovl2_800DF09C(weapon_gobj, wpGetStruct(spawn_gobj)->coll_data.p_translate, &wpGetStruct(spawn_gobj)->coll_data);
             break;
 
-        case WEAPON_MASK_SPAWN_ARTICLE:
+        case WEAPON_MASK_SPAWN_ITEM:
             func_ovl2_800DF09C(weapon_gobj, itGetStruct(spawn_gobj)->coll_data.p_translate, &itGetStruct(spawn_gobj)->coll_data);
             break;
         }
@@ -495,7 +495,7 @@ void wpManager_ProcWeaponMain(GObj *weapon_gobj) // Run item logic pass 1 (anima
             wp->coll_data.pos_correct.x = 0.0F;
         }
 
-        if ((translate->y < Ground_Info->blastzone_bottom) || (Ground_Info->blastzone_right < translate->x) || (translate->x < Ground_Info->blastzone_left) || (Ground_Info->blastzone_top < translate->y) || (translate->z < -20000.0F) || (20000.0F < translate->z))
+        if ((translate->y < gpMapData->blastzone_bottom) || (gpMapData->blastzone_right < translate->x) || (translate->x < gpMapData->blastzone_left) || (gpMapData->blastzone_top < translate->y) || (translate->z < -20000.0F) || (20000.0F < translate->z))
         {
             if ((wp->proc_dead == NULL) || (wp->proc_dead(weapon_gobj) != FALSE))
             {

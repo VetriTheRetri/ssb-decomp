@@ -154,7 +154,7 @@
 #define ITBUMPER_GRAVITY_HIT 4.0F
 #define ITBUMPER_T_VEL 80.0F
 
-#define ITGRLUCKY_EGG_SPAWN_WAIT 1                          // Wait this many frames before spawning egg (read only when egg spawn function is called)
+#define ITGRLUCKY_EGG_SPAWN_COUNT 1                          // Wait this many frames before spawning egg (read only when egg spawn function is called)
 #define ITGRLUCKY_EGG_SPAWN_OFF_X 200.0F                    // X-offset of egg spawn
 #define ITGRLUCKY_EGG_SPAWN_OFF_Y 200.0F                    // Y-offset of egg spawn
 #define ITGRLUCKY_EGG_SPAWN_MUL 8.0F                        // Multiplies random velocity of egg
@@ -164,6 +164,7 @@
 #define ITGRLUCKY_EGG_SPAWN_END 85.0F                       // Last frame egg spawn function is called
 #define ITGRLUCKY_HIT_ROTATE_Z 0.10471976F                  // Rotation step when Chansey is knocked out of the Pokémon hut? Not actually applied?
 #define ITGRLUCKY_GRAVITY 1.2F
+#define ITGRLUCKY_NDAMAGE_KNOCKBACK_MIN 100.0F
 #define ITGRLUCKY_T_VEL 100.0F
 
 #define ITMBALL_SPAWN_WAIT 30                               // Wait this many frames before releasing Pokémon once thrown and landed
@@ -336,11 +337,12 @@
 #define ITHITOKAGE_FLAME_LIFETIME 20
 #define ITHITOKAGE_FLAME_SPAWN_WAIT 8
 #define ITHITOKAGE_FLAME_SPAWN_ANGLE F_DEG_TO_RAD(-12.0F) // -0.20943952F
-#define ITHITOKAGE_FLAME_VEL_XY 45.0F   
+#define ITHITOKAGE_FLAME_VEL_BASE 45.0F   
 #define ITHITOKAGE_FLAME_SPAWN_BEGIN 40.0F              // Charmander can begin firing Flamethrower this frame onward
 #define ITHITOKAGE_FLAME_SPAWN_END 120.0F               // Charmander can no longer fire Flamethrower this frame onward
 #define ITHITOKAGE_FLAME_SPAWN_OFF_X (-250.0F)          // X-offset of flame spawn
 #define ITHITOKAGE_HIT_ROTATE_Z F_DEG_TO_RAD(6.0F)      // 0.10471976F
+#define ITHITOKAGE_NDAMAGE_KNOCKBACK_MIN 100.0F         // Minimum knockback required to send Charmander into damage state
 #define ITHITOKAGE_GRAVITY 1.2F
 #define ITHITOKAGE_T_VEL 100.0F
 
@@ -389,6 +391,18 @@
 #define ITLINKBOMB_GRAVITY 1.2F
 #define ITLINKBOMB_T_VEL 100.0F
 
+typedef enum itYCityMonsterFlags
+{
+    itYCityMonster_Flags_WeaponWait,
+    itYCityMonster_Flags_WeaponInstant
+
+} itYCityMonsterFlags;
+
+#define ITYCITYMONSTER_FLAG_NONE            (0)
+#define ITYCITYMONSTER_WEAPON_WAIT      (1 << itYCityMonster_Flags_WeaponWait)
+#define ITYCITYMONSTER_WEAPON_INSTANT   (1 << itYCityMonster_Flags_WeaponInstant)
+#define ITYCITYMONSTER_WEAPON_ALL       (ITYCITYMONSTER_WEAPON_INSTANT | ITYCITYMONSTER_WEAPON_WAIT)
+
 typedef struct itCommon_ItemVars_BombHei
 {
     u16 smoke_delay;     // Frames before smoke effect is created when Bob-Omb begins walking?
@@ -424,7 +438,7 @@ typedef struct itCommon_ItemVars_Bumper
 typedef struct itGround_ItemVars_GrLucky
 {
     Vec3f pos;
-    u16 egg_spawn_wait;
+    u16 egg_spawn_count;
 
 } itGround_ItemVars_GrLucky;
 

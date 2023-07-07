@@ -378,7 +378,7 @@ bool32 func_ovl3_8013295C(ftStruct *this_fp)
                 (other_pos_x <= D_ovl2_80131308.unk_80131308_0x28) &&
                 (D_ovl2_80131308.unk_80131308_0x2C <= other_pos_x) &&
                 (D_ovl2_80131308.unk_80131308_0x24 <= other_pos_y) &&
-                (other_pos_y < Ground_Info->cam_bound_top)) ||
+                (other_pos_y < gpMapData->cam_bound_top)) ||
                 ((this_fp->ground_or_air == GA_Ground) &&
                 ((other_fp->status_info.status_id == ftStatus_Common_CliffCatch) ||
                 (other_fp->status_info.status_id == ftStatus_Common_CliffWait)))) &&

@@ -418,9 +418,9 @@ GObj* func_ovl3_8016EC40(void)
     {
         if (gpMatchData->item_toggles != 0)
         {
-            if (Ground_Info->unk_0x84 != NULL)
+            if (gpMapData->unk_0x84 != NULL)
             {
-                unk_0x84_2 = Ground_Info->unk_0x84;
+                unk_0x84_2 = gpMapData->unk_0x84;
 
                 item_bits_2 = gpMatchData->item_toggles;
 
@@ -468,7 +468,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 item_bits = gpMatchData->item_toggles;
 
-                unk_0x84 = Ground_Info->unk_0x84;
+                unk_0x84 = gpMapData->unk_0x84;
 
                 for (i = 0, j = 0; i < It_Kind_FighterStart; i++, item_bits >>= 1)
                 {
@@ -526,11 +526,11 @@ void func_ovl3_8016EF40(void)
     u32 item_bits_2;
     u32 item_bits_3;
 
-    if ((gpMatchData->item_switch != 0) && (gpMatchData->item_toggles != 0) && (Ground_Info->unk_0x84 != NULL))
+    if ((gpMatchData->item_switch != 0) && (gpMatchData->item_toggles != 0) && (gpMapData->unk_0x84 != NULL))
     {
         item_bits = gpMatchData->item_toggles >> 4;
 
-        temp_a3 = Ground_Info->unk_0x84;
+        temp_a3 = gpMapData->unk_0x84;
 
         item_count = 0;
 
@@ -547,7 +547,7 @@ void func_ovl3_8016EF40(void)
         {
             item_bits_2 = (u32)gpMatchData->item_toggles >> 4;
 
-            temp_t1 = Ground_Info->unk_0x84;
+            temp_t1 = gpMapData->unk_0x84;
 
             for (j = 0, i = 4; i < It_Kind_FighterStart; i++, item_bits_2 >>= 1)
             {
@@ -811,7 +811,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
             ap->coll_data.pos_correct.x = 0.0F;
         }
 
-        if ((translate->y < Ground_Info->blastzone_bottom) || (Ground_Info->blastzone_right < translate->x) || (translate->x < Ground_Info->blastzone_left) || (Ground_Info->blastzone_top < translate->y))
+        if ((translate->y < gpMapData->blastzone_bottom) || (gpMapData->blastzone_right < translate->x) || (translate->x < gpMapData->blastzone_left) || (gpMapData->blastzone_top < translate->y))
         {
             if ((ap->proc_dead == NULL) || (ap->proc_dead(item_gobj) != FALSE))
             {

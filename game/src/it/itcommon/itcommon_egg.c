@@ -297,7 +297,7 @@ GObj* itCommon_Egg_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flag
         {
             itStruct *spawn_ip = itGetStruct(spawn_gobj);
 
-            if ((spawn_ip->it_kind == It_Kind_Mb_Lucky) && (rand_u16_range(2) == 0))
+            if ((spawn_ip->it_kind == It_Kind_MLucky) && (rand_u16_range(2) == 0))
             {
                 joint->next->rotate.y = PI32;
 
