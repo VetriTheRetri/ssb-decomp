@@ -33,7 +33,7 @@ void lbMemory_SaveData_WriteSRAM(void)
 }
 
 // 0x800D4644
-bool32 lbMemory_SaveData_CheckSaveDataSuccess(void)
+bool32 lbMemory_SaveData_CheckSaveDataValid(void)
 {
     dma_sram_read(ALIGN(sizeof(gmSaveInfo), 0), &gSaveData, sizeof(gmSaveInfo));
 

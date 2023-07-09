@@ -182,6 +182,9 @@
 #define ITPAKKUN_DETECT_SIZE_WIDTH 600.0F                   // Width of Pirahna Plant fighter detection box when checking to stay inside the pipe
 #define ITPAKKUN_DETECT_SIZE_BOTTOM (-300.0F)               // Bottom of Pirahna Plant fighter detection box when checking to stay inside the pipe
 #define ITPAKKUN_DETECT_SIZE_TOP 700.0F                     // Top of Pirahna Plant fighter detection box when checking to stay inside the pipe
+#define ITPAKKUN_NDAMAGE_KNOCKBACK_MIN 100.0F
+#define ITPAKKUN_GRAVITY 1.5F
+#define ITPAKKUN_T_VEL 120.0F
 
 #define ITIWARK_FLY_WAIT 30                                 // Unconfirmed?
 #define ITIWARK_MODEL_ROTATE_WAIT 6                         // Onix's sprite is flipped every time this timer is up; counts up, reset to 0 when reaching destination value

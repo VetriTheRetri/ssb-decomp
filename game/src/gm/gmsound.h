@@ -381,7 +381,8 @@ typedef enum gmSoundEffectSFX
     gmSound_Voice_KirbySmash3,
     gmSound_Voice_YCityFushigibana = 0x228,
     gmSound_Voice_YCityHitokage,
-    gmSound_Voice_YCityLucky
+    gmSound_Voice_YCityLucky,
+    gmSound_Voice_YCityMarumine
 
 } gmSoundEffectSFX;
 

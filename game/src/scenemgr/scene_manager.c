@@ -74,7 +74,7 @@ void start_scene_manager(UNUSED u32 set) {
     func_80020A40(6);
     while (func_80021048()) { }
 
-    lbMemory_SaveData_CheckSaveDataSuccess();
+    lbMemory_SaveData_CheckSaveDataValid();
     func_ovl0_800D46F4();
 
     // it needs to be something like this to match

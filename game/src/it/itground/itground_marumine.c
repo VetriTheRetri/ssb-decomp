@@ -1,5 +1,50 @@
 #include "item.h"
 
+extern intptr_t Marumine_Event;
+
+extern void *D_ovl2_801313F4;
+
+itCreateDesc itGround_Marumine_ItemDesc = 
+{
+    It_Kind_Marumine,                       // Item Kind
+    &D_ovl2_801313F4,                       // Pointer to item file data?
+    0x104,                                  // Offset of item attributes in file?
+    0x12,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itMarumine_SDefault_ProcUpdate,         // Proc Update
+    NULL,                                   // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
+
+itStatusDesc itGround_Marumine_StatusDesc[itStatus_Marumine_EnumMax] = 
+{
+    // Status 0 (Neutral Explosion)
+    {
+        itMarumine_NExplode_ProcUpdate,     // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        NULL                                // Proc Damage
+    }
+};
+
+typedef enum itMarumineStatus
+{
+    itStatus_Marumine_NExplode,
+    itStatus_Marumine_EnumMax
+
+} itMarumineStatus;
+
 // 0x801837A0
 void itMarumine_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
@@ -28,8 +73,6 @@ void itMarumine_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     itMarumine_NExplode_SetStatus(item_gobj);
 }
 
-extern intptr_t Marumine_Event;
-extern itCreateDesc itGround_Marumine_ItemDesc;
 
 // 0x80183830
 void itMarumine_NExplode_UpdateHitEvent(GObj *item_gobj)
@@ -104,8 +147,6 @@ bool32 itMarumine_NExplode_ProcUpdate(GObj *item_gobj)
     else return FALSE;
 }
 
-itStatusDesc itGround_Marumine_StatusDesc[1];
-
 // 0x80183A20
 void itMarumine_NExplode_SetStatus(GObj *item_gobj)
 {
@@ -118,7 +159,7 @@ void itMarumine_NExplode_SetStatus(GObj *item_gobj)
     ap->item_event_index = 0;
 
     itMarumine_NExplode_UpdateHitEvent(item_gobj);
-    itMain_SetItemStatus(item_gobj, itGround_Marumine_StatusDesc, 0);
+    itMain_SetItemStatus(item_gobj, itGround_Marumine_StatusDesc, itStatus_Marumine_NExplode);
 }
 
 // 0x80183A74
@@ -136,7 +177,7 @@ GObj* itGround_Marumine_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32
         ap->is_allow_knockback = TRUE;
 
         func_80008CC0(joint, 0x46, 0);
-        func_800269C0(0x22B);
+        func_800269C0(gmSound_Voice_YCityMarumine);
     }
     return item_gobj;
 }

@@ -1989,7 +1989,7 @@ glabel D_ovl3_801894BC
 glabel jtbl_ovl3_801894C4
   /* 579C4 103F04 801894C4 */  .4byte jtgt_ovl3_8017C1E0
   /* 579C8 103F08 801894C8 */  .4byte itGround_Bumper_CreateItem
-  /* 579CC 103F0C 801894CC */  .4byte jtgt_ovl3_8017D4D8
+  /* 579CC 103F0C 801894CC */  .4byte itGround_Pakkun_CreateItem
   /* 579D0 103F10 801894D0 */  .4byte D_unkmulti_8018EE5C
 
 glabel jtbl_ovl3_801894D4
@@ -3059,22 +3059,22 @@ glabel jtbl_ovl3_8018A984
   /* 58E9C 1053DC 8018A99C */  .4byte itMBall_SDefault_ProcReflector
   .incbin "ovl3.raw.bin", 0x58EA0, 0x10
 
-glabel Article_Pakkun_Data
+glabel itGround_Pakkun_ItemDesc
   .incbin "ovl3.raw.bin", 0x58EB0, 0x4
   /* 58EB4 1053F4 8018A9B4 */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x58EB8, 0xC
-  /* 58EC4 105404 8018A9C4 */  .4byte func_ovl3_8017D0A4
+  /* 58EC4 105404 8018A9C4 */  .4byte itPakkun_DWait_ProcUpdate
   .incbin "ovl3.raw.bin", 0x58EC8, 0x1C
 
-glabel Article_Pakkun_Status
-  /* 58EE4 105424 8018A9E4 */  .4byte func_ovl3_8017D0A4
+glabel itGround_Pakkun_StatusDesc
+  /* 58EE4 105424 8018A9E4 */  .4byte itPakkun_DWait_ProcUpdate
   .incbin "ovl3.raw.bin", 0x58EE8, 0x1C
-  /* 58F04 105444 8018AA04 */  .4byte func_ovl3_8017D298
+  /* 58F04 105444 8018AA04 */  .4byte itPakkun_DAppear_ProcUpdate
   .incbin "ovl3.raw.bin", 0x58F08, 0x18
 
 glabel jtbl_ovl3_8018AA20
-  /* 58F20 105460 8018AA20 */  .4byte jtgt_ovl3_8017D334
-  /* 58F24 105464 8018AA24 */  .4byte jtgt_ovl3_8017D434
+  /* 58F20 105460 8018AA20 */  .4byte itPakkun_DAppear_ProcDamage
+  /* 58F24 105464 8018AA24 */  .4byte itPakkun_NDamage_ProcUpdate
   .incbin "ovl3.raw.bin", 0x58F28, 0x28
 
 glabel itGround_Bumper_ItemDesc

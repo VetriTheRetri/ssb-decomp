@@ -91,7 +91,7 @@ glabel lbMemory_SaveData_WriteSRAM
   /* 05001C 800D463C 03E00008 */        jr $ra
   /* 050020 800D4640 00000000 */       nop 
 
-glabel lbMemory_SaveData_CheckSaveDataSuccess
+glabel lbMemory_SaveData_CheckSaveDataValid
   /* 050024 800D4644 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 050028 800D4648 AFBF0014 */        sw $ra, 0x14($sp)
   /* 05002C 800D464C 3C05800A */       lui $a1, %hi(gSaveData)
