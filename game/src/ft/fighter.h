@@ -1257,10 +1257,10 @@ struct ftStruct
 
     ftHurtbox fighter_hurt[FTPARTS_HURT_NUM_MAX];
 
-    f32 unk_ft_0x7A0;
+    f32 unk_ft_0x7A0;       // Unused?
     f32 hitlag_mul;
     f32 shield_lifeup_wait;
-    s32 unk_ft_0x7AC;
+    s32 unk_ft_0x7AC;       // Unused?
 
     s32 attack_damage;
     f32 attack_knockback;
@@ -1273,12 +1273,12 @@ struct ftStruct
     s32 lr_shield;
     s32 shield_player; // Port of player hitting this fighter's shield
     s32 reflect_damage;
-    s32 damage_queue; // Not sure how this is different from damage_taken_recent
+    s32 damage_lag; // Used to calculate hitlag?
     f32 damage_knockback;
     f32 knockback_resist_passive;// Passive armor, always active (?)
     f32 knockback_resist_status; // Resist this many units of knockback, effectively knockback-based armor
-    f32 damage_knockback_again;
-    s32 damage_taken_recent;
+    f32 damage_stack;               // Knockback stacking?
+    s32 damage_queue;            // Used to calculate knockback?
     s32 damage_angle;
     s32 damage_element;
     s32 lr_damage;

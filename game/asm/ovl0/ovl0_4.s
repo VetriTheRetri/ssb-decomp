@@ -10,7 +10,7 @@
 .align 4
 
 # Likely start of new file
-glabel func_ovl0_800D4520
+glabel lbMemory_SaveData_CreateChecksum
   /* 04FF00 800D4520 00001825 */        or $v1, $zero, $zero
   /* 04FF04 800D4524 00801025 */        or $v0, $a0, $zero
   /* 04FF08 800D4528 00002825 */        or $a1, $zero, $zero
@@ -46,11 +46,11 @@ glabel func_ovl0_800D4520
   /* 04FF7C 800D459C 03E00008 */        jr $ra
   /* 04FF80 800D45A0 00601025 */        or $v0, $v1, $zero
 
-glabel func_ovl0_800D45A4
+glabel lbMemory_SaveData_CheckHashValid
   /* 04FF84 800D45A4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 04FF88 800D45A8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 04FF8C 800D45AC 3C04800A */       lui $a0, %hi(gSaveData)
-  /* 04FF90 800D45B0 0C035148 */       jal func_ovl0_800D4520
+  /* 04FF90 800D45B0 0C035148 */       jal lbMemory_SaveData_CreateChecksum
   /* 04FF94 800D45B4 248444E0 */     addiu $a0, $a0, %lo(gSaveData)
   /* 04FF98 800D45B8 3C03800A */       lui $v1, %hi(gSaveData)
   /* 04FF9C 800D45BC 246344E0 */     addiu $v1, $v1, %lo(gSaveData)
@@ -69,11 +69,11 @@ glabel func_ovl0_800D45A4
   /* 04FFCC 800D45EC 03E00008 */        jr $ra
   /* 04FFD0 800D45F0 27BD0018 */     addiu $sp, $sp, 0x18
 
-glabel func_ovl0_800D45F4
+glabel lbMemory_SaveData_WriteSRAM
   /* 04FFD4 800D45F4 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 04FFD8 800D45F8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 04FFDC 800D45FC 3C04800A */       lui $a0, %hi(gSaveData)
-  /* 04FFE0 800D4600 0C035148 */       jal func_ovl0_800D4520
+  /* 04FFE0 800D4600 0C035148 */       jal lbMemory_SaveData_CreateChecksum
   /* 04FFE4 800D4604 248444E0 */     addiu $a0, $a0, %lo(gSaveData)
   /* 04FFE8 800D4608 3C04800A */       lui $a0, %hi(gSaveData)
   /* 04FFEC 800D460C 248444E0 */     addiu $a0, $a0, %lo(gSaveData)
@@ -91,7 +91,7 @@ glabel func_ovl0_800D45F4
   /* 05001C 800D463C 03E00008 */        jr $ra
   /* 050020 800D4640 00000000 */       nop 
 
-glabel func_ovl0_800D4644
+glabel lbMemory_SaveData_CheckSaveDataSuccess
   /* 050024 800D4644 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 050028 800D4648 AFBF0014 */        sw $ra, 0x14($sp)
   /* 05002C 800D464C 3C05800A */       lui $a1, %hi(gSaveData)
@@ -99,7 +99,7 @@ glabel func_ovl0_800D4644
   /* 050034 800D4654 00002025 */        or $a0, $zero, $zero
   /* 050038 800D4658 0C000B69 */       jal dma_sram_read
   /* 05003C 800D465C 240605EC */     addiu $a2, $zero, 0x5ec
-  /* 050040 800D4660 0C035169 */       jal func_ovl0_800D45A4
+  /* 050040 800D4660 0C035169 */       jal lbMemory_SaveData_CheckHashValid
   /* 050044 800D4664 00000000 */       nop 
   /* 050048 800D4668 1440001D */      bnez $v0, .L800D46E0
   /* 05004C 800D466C 240405F0 */     addiu $a0, $zero, 0x5f0
@@ -107,31 +107,31 @@ glabel func_ovl0_800D4644
   /* 050054 800D4674 24A544E0 */     addiu $a1, $a1, %lo(gSaveData)
   /* 050058 800D4678 0C000B69 */       jal dma_sram_read
   /* 05005C 800D467C 240605EC */     addiu $a2, $zero, 0x5ec
-  /* 050060 800D4680 0C035169 */       jal func_ovl0_800D45A4
+  /* 050060 800D4680 0C035169 */       jal lbMemory_SaveData_CheckHashValid
   /* 050064 800D4684 00000000 */       nop 
   /* 050068 800D4688 14400013 */      bnez $v0, .L800D46D8
   /* 05006C 800D468C 3C0E800A */       lui $t6, %hi(gSaveData)
-  /* 050070 800D4690 3C0F800A */       lui $t7, %hi(D_800A3994)
-  /* 050074 800D4694 25EF3994 */     addiu $t7, $t7, %lo(D_800A3994)
+  /* 050070 800D4690 3C0F800A */       lui $t7, %hi(gDefaultSaveData)
+  /* 050074 800D4694 25EF3994 */     addiu $t7, $t7, %lo(gDefaultSaveData)
   /* 050078 800D4698 25E805E8 */     addiu $t0, $t7, 0x5e8
   /* 05007C 800D469C 25CE44E0 */     addiu $t6, $t6, %lo(gSaveData)
   .L800D46A0:
-  /* 050080 800D46A0 8DF90000 */        lw $t9, ($t7) # D_800A3994 + 0
+  /* 050080 800D46A0 8DF90000 */        lw $t9, ($t7) # gDefaultSaveData + 0
   /* 050084 800D46A4 25EF000C */     addiu $t7, $t7, 0xc
   /* 050088 800D46A8 25CE000C */     addiu $t6, $t6, 0xc
   /* 05008C 800D46AC ADD9FFF4 */        sw $t9, -0xc($t6) # gSaveData + -12
-  /* 050090 800D46B0 8DF8FFF8 */        lw $t8, -8($t7) # D_800A3994 + -8
+  /* 050090 800D46B0 8DF8FFF8 */        lw $t8, -8($t7) # gDefaultSaveData + -8
   /* 050094 800D46B4 ADD8FFF8 */        sw $t8, -8($t6) # gSaveData + -8
-  /* 050098 800D46B8 8DF9FFFC */        lw $t9, -4($t7) # D_800A3994 + -4
+  /* 050098 800D46B8 8DF9FFFC */        lw $t9, -4($t7) # gDefaultSaveData + -4
   /* 05009C 800D46BC 15E8FFF8 */       bne $t7, $t0, .L800D46A0
   /* 0500A0 800D46C0 ADD9FFFC */        sw $t9, -4($t6) # gSaveData + -4
-  /* 0500A4 800D46C4 8DF90000 */        lw $t9, ($t7) # D_800A3994 + 0
-  /* 0500A8 800D46C8 0C03517D */       jal func_ovl0_800D45F4
+  /* 0500A4 800D46C4 8DF90000 */        lw $t9, ($t7) # gDefaultSaveData + 0
+  /* 0500A8 800D46C8 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 0500AC 800D46CC ADD90000 */        sw $t9, ($t6) # gSaveData + 0
   /* 0500B0 800D46D0 10000004 */         b .L800D46E4
   /* 0500B4 800D46D4 00001025 */        or $v0, $zero, $zero
   .L800D46D8:
-  /* 0500B8 800D46D8 0C03517D */       jal func_ovl0_800D45F4
+  /* 0500B8 800D46D8 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 0500BC 800D46DC 00000000 */       nop 
   .L800D46E0:
   /* 0500C0 800D46E0 24020001 */     addiu $v0, $zero, 1
@@ -172,8 +172,8 @@ glabel func_ovl0_800D473C
   /* 050138 800D4758 0058C824 */       and $t9, $v0, $t8
   /* 05013C 800D475C 17200004 */      bnez $t9, .L800D4770
   /* 050140 800D4760 3C04800A */       lui $a0, %hi(gSceneData)
-  /* 050144 800D4764 3C08800A */       lui $t0, %hi((D_800A3994 + 0x456))
-  /* 050148 800D4768 91083DEA */       lbu $t0, %lo((D_800A3994 + 0x456))($t0)
+  /* 050144 800D4764 3C08800A */       lui $t0, %hi((gDefaultSaveData + 0x456))
+  /* 050148 800D4768 91083DEA */       lbu $t0, %lo((gDefaultSaveData + 0x456))($t0)
   /* 05014C 800D476C A0680456 */        sb $t0, 0x456($v1) # gSaveData + 1110
   .L800D4770:
   /* 050150 800D4770 24844AD0 */     addiu $a0, $a0, %lo(gSceneData)
@@ -268,10 +268,10 @@ glabel func_ovl0_800D473C
   .L800D48B4:
   /* 050294 800D48B4 17000008 */      bnez $t8, .L800D48D8
   /* 050298 800D48B8 3C02800A */       lui $v0, %hi(D_800A4D08)
-  /* 05029C 800D48BC 3C03800A */       lui $v1, %hi(gDefaultBattleSettings)
-  /* 0502A0 800D48C0 24633FC8 */     addiu $v1, $v1, %lo(gDefaultBattleSettings)
-  /* 0502A4 800D48C4 8C68000C */        lw $t0, 0xc($v1) # gDefaultBattleSettings + 12
-  /* 0502A8 800D48C8 9079001C */       lbu $t9, 0x1c($v1) # gDefaultBattleSettings + 28
+  /* 05029C 800D48BC 3C03800A */       lui $v1, %hi(gDefaultBattleState)
+  /* 0502A0 800D48C0 24633FC8 */     addiu $v1, $v1, %lo(gDefaultBattleState)
+  /* 0502A4 800D48C4 8C68000C */        lw $t0, 0xc($v1) # gDefaultBattleState + 12
+  /* 0502A8 800D48C8 9079001C */       lbu $t9, 0x1c($v1) # gDefaultBattleState + 28
   /* 0502AC 800D48CC 24424D08 */     addiu $v0, $v0, %lo(D_800A4D08)
   /* 0502B0 800D48D0 AC48000C */        sw $t0, 0xc($v0) # D_800A4D08 + 12
   /* 0502B4 800D48D4 A059001C */        sb $t9, 0x1c($v0) # D_800A4D08 + 28
@@ -279,39 +279,39 @@ glabel func_ovl0_800D473C
   /* 0502B8 800D48D8 03E00008 */        jr $ra
   /* 0502BC 800D48DC 00000000 */       nop 
 
-glabel func_ovl0_800D48E0
+glabel lbMemory_SaveData_BackupClearNewcomers
   /* 0502C0 800D48E0 3C02800A */       lui $v0, %hi(gSaveData)
   /* 0502C4 800D48E4 244244E0 */     addiu $v0, $v0, %lo(gSaveData)
   /* 0502C8 800D48E8 904E0457 */       lbu $t6, 0x457($v0) # gSaveData + 1111
-  /* 0502CC 800D48EC 3C03800A */       lui $v1, %hi(D_800A3994)
-  /* 0502D0 800D48F0 24633994 */     addiu $v1, $v1, %lo(D_800A3994)
-  /* 0502D4 800D48F4 90790457 */       lbu $t9, 0x457($v1) # D_800A3994 + 1111
+  /* 0502CC 800D48EC 3C03800A */       lui $v1, %hi(gDefaultSaveData)
+  /* 0502D0 800D48F0 24633994 */     addiu $v1, $v1, %lo(gDefaultSaveData)
+  /* 0502D4 800D48F4 90790457 */       lbu $t9, 0x457($v1) # gDefaultSaveData + 1111
   /* 0502D8 800D48F8 31D8FFF0 */      andi $t8, $t6, 0xfff0
-  /* 0502DC 800D48FC 94690458 */       lhu $t1, 0x458($v1) # D_800A3994 + 1112
+  /* 0502DC 800D48FC 94690458 */       lhu $t1, 0x458($v1) # gDefaultSaveData + 1112
   /* 0502E0 800D4900 A0580457 */        sb $t8, 0x457($v0) # gSaveData + 1111
   /* 0502E4 800D4904 03194025 */        or $t0, $t8, $t9
   /* 0502E8 800D4908 A0480457 */        sb $t0, 0x457($v0) # gSaveData + 1111
   /* 0502EC 800D490C 03E00008 */        jr $ra
   /* 0502F0 800D4910 A4490458 */        sh $t1, 0x458($v0) # gSaveData + 1112
 
-glabel func_ovl0_800D4914
+glabel lbMemory_SaveData_BackupClear1PHighScore
   /* 0502F4 800D4914 3C03800A */       lui $v1, %hi(gSaveData)
-  /* 0502F8 800D4918 3C04800A */       lui $a0, %hi(D_800A3994)
-  /* 0502FC 800D491C 3C02800A */       lui $v0, %hi((D_800A3994 + 0x180))
-  /* 050300 800D4920 24423B14 */     addiu $v0, $v0, %lo((D_800A3994 + 0x180))
-  /* 050304 800D4924 24843994 */     addiu $a0, $a0, %lo(D_800A3994)
+  /* 0502F8 800D4918 3C04800A */       lui $a0, %hi(gDefaultSaveData)
+  /* 0502FC 800D491C 3C02800A */       lui $v0, %hi((gDefaultSaveData + 0x180))
+  /* 050300 800D4920 24423B14 */     addiu $v0, $v0, %lo((gDefaultSaveData + 0x180))
+  /* 050304 800D4924 24843994 */     addiu $a0, $a0, %lo(gDefaultSaveData)
   /* 050308 800D4928 246344E0 */     addiu $v1, $v1, %lo(gSaveData)
   .L800D492C:
-  /* 05030C 800D492C 8C89047C */        lw $t1, 0x47c($a0) # D_800A3994 + 1148
-  /* 050310 800D4930 8C8A0480 */        lw $t2, 0x480($a0) # D_800A3994 + 1152
-  /* 050314 800D4934 8C8B0484 */        lw $t3, 0x484($a0) # D_800A3994 + 1156
-  /* 050318 800D4938 908C0488 */       lbu $t4, 0x488($a0) # D_800A3994 + 1160
-  /* 05031C 800D493C 908D0499 */       lbu $t5, 0x499($a0) # D_800A3994 + 1177
-  /* 050320 800D4940 8C8E045C */        lw $t6, 0x45c($a0) # D_800A3994 + 1116
-  /* 050324 800D4944 8C8F0460 */        lw $t7, 0x460($a0) # D_800A3994 + 1120
-  /* 050328 800D4948 8C980464 */        lw $t8, 0x464($a0) # D_800A3994 + 1124
-  /* 05032C 800D494C 90990468 */       lbu $t9, 0x468($a0) # D_800A3994 + 1128
-  /* 050330 800D4950 90880479 */       lbu $t0, 0x479($a0) # D_800A3994 + 1145
+  /* 05030C 800D492C 8C89047C */        lw $t1, 0x47c($a0) # gDefaultSaveData + 1148
+  /* 050310 800D4930 8C8A0480 */        lw $t2, 0x480($a0) # gDefaultSaveData + 1152
+  /* 050314 800D4934 8C8B0484 */        lw $t3, 0x484($a0) # gDefaultSaveData + 1156
+  /* 050318 800D4938 908C0488 */       lbu $t4, 0x488($a0) # gDefaultSaveData + 1160
+  /* 05031C 800D493C 908D0499 */       lbu $t5, 0x499($a0) # gDefaultSaveData + 1177
+  /* 050320 800D4940 8C8E045C */        lw $t6, 0x45c($a0) # gDefaultSaveData + 1116
+  /* 050324 800D4944 8C8F0460 */        lw $t7, 0x460($a0) # gDefaultSaveData + 1120
+  /* 050328 800D4948 8C980464 */        lw $t8, 0x464($a0) # gDefaultSaveData + 1124
+  /* 05032C 800D494C 90990468 */       lbu $t9, 0x468($a0) # gDefaultSaveData + 1128
+  /* 050330 800D4950 90880479 */       lbu $t0, 0x479($a0) # gDefaultSaveData + 1145
   /* 050334 800D4954 AC69047C */        sw $t1, 0x47c($v1) # gSaveData + 1148
   /* 050338 800D4958 AC6A0480 */        sw $t2, 0x480($v1) # gSaveData + 1152
   /* 05033C 800D495C AC6B0484 */        sw $t3, 0x484($v1) # gSaveData + 1156
@@ -322,16 +322,16 @@ glabel func_ovl0_800D4914
   /* 050350 800D4970 AC780464 */        sw $t8, 0x464($v1) # gSaveData + 1124
   /* 050354 800D4974 A0790468 */        sb $t9, 0x468($v1) # gSaveData + 1128
   /* 050358 800D4978 A0680479 */        sb $t0, 0x479($v1) # gSaveData + 1145
-  /* 05035C 800D497C 908804B9 */       lbu $t0, 0x4b9($a0) # D_800A3994 + 1209
-  /* 050360 800D4980 909904A8 */       lbu $t9, 0x4a8($a0) # D_800A3994 + 1192
-  /* 050364 800D4984 8C9804A4 */        lw $t8, 0x4a4($a0) # D_800A3994 + 1188
-  /* 050368 800D4988 8C8F04A0 */        lw $t7, 0x4a0($a0) # D_800A3994 + 1184
-  /* 05036C 800D498C 8C8E049C */        lw $t6, 0x49c($a0) # D_800A3994 + 1180
-  /* 050370 800D4990 908D04D9 */       lbu $t5, 0x4d9($a0) # D_800A3994 + 1241
-  /* 050374 800D4994 908C04C8 */       lbu $t4, 0x4c8($a0) # D_800A3994 + 1224
-  /* 050378 800D4998 8C8B04C4 */        lw $t3, 0x4c4($a0) # D_800A3994 + 1220
-  /* 05037C 800D499C 8C8A04C0 */        lw $t2, 0x4c0($a0) # D_800A3994 + 1216
-  /* 050380 800D49A0 8C8904BC */        lw $t1, 0x4bc($a0) # D_800A3994 + 1212
+  /* 05035C 800D497C 908804B9 */       lbu $t0, 0x4b9($a0) # gDefaultSaveData + 1209
+  /* 050360 800D4980 909904A8 */       lbu $t9, 0x4a8($a0) # gDefaultSaveData + 1192
+  /* 050364 800D4984 8C9804A4 */        lw $t8, 0x4a4($a0) # gDefaultSaveData + 1188
+  /* 050368 800D4988 8C8F04A0 */        lw $t7, 0x4a0($a0) # gDefaultSaveData + 1184
+  /* 05036C 800D498C 8C8E049C */        lw $t6, 0x49c($a0) # gDefaultSaveData + 1180
+  /* 050370 800D4990 908D04D9 */       lbu $t5, 0x4d9($a0) # gDefaultSaveData + 1241
+  /* 050374 800D4994 908C04C8 */       lbu $t4, 0x4c8($a0) # gDefaultSaveData + 1224
+  /* 050378 800D4998 8C8B04C4 */        lw $t3, 0x4c4($a0) # gDefaultSaveData + 1220
+  /* 05037C 800D499C 8C8A04C0 */        lw $t2, 0x4c0($a0) # gDefaultSaveData + 1216
+  /* 050380 800D49A0 8C8904BC */        lw $t1, 0x4bc($a0) # gDefaultSaveData + 1212
   /* 050384 800D49A4 24840080 */     addiu $a0, $a0, 0x80
   /* 050388 800D49A8 24630080 */     addiu $v1, $v1, 0x80
   /* 05038C 800D49AC A0680439 */        sb $t0, 0x439($v1) # gSaveData + 1081
@@ -348,24 +348,24 @@ glabel func_ovl0_800D4914
   /* 0503B8 800D49D8 03E00008 */        jr $ra
   /* 0503BC 800D49DC 00000000 */       nop 
 
-glabel func_ovl0_800D49E0
+glabel lbMemory_SaveData_BackupClearVSRecord
   /* 0503C0 800D49E0 3C03800A */       lui $v1, %hi(gSaveData)
-  /* 0503C4 800D49E4 3C04800A */       lui $a0, %hi(D_800A3994)
+  /* 0503C4 800D49E4 3C04800A */       lui $a0, %hi(gDefaultSaveData)
   /* 0503C8 800D49E8 3C05800A */       lui $a1, %hi((gSaveData + 0x5C))
-  /* 0503CC 800D49EC 3C06800A */       lui $a2, %hi((D_800A3994 + 0x5c))
+  /* 0503CC 800D49EC 3C06800A */       lui $a2, %hi((gDefaultSaveData + 0x5c))
   /* 0503D0 800D49F0 3C07800A */       lui $a3, %hi((gSaveData + 0xB8))
-  /* 0503D4 800D49F4 3C08800A */       lui $t0, %hi((D_800A3994 + 0xB8))
+  /* 0503D4 800D49F4 3C08800A */       lui $t0, %hi((gDefaultSaveData + 0xB8))
   /* 0503D8 800D49F8 3C09800A */       lui $t1, %hi((gSaveData + 0x114))
-  /* 0503DC 800D49FC 3C0A800A */       lui $t2, %hi((D_800A3994 + 0x114))
-  /* 0503E0 800D4A00 3C02800A */       lui $v0, %hi((D_800A3994 + 0x564))
-  /* 0503E4 800D4A04 24423EF8 */     addiu $v0, $v0, %lo((D_800A3994 + 0x564))
-  /* 0503E8 800D4A08 254A3AA8 */     addiu $t2, $t2, %lo((D_800A3994 + 0x114))
+  /* 0503DC 800D49FC 3C0A800A */       lui $t2, %hi((gDefaultSaveData + 0x114))
+  /* 0503E0 800D4A00 3C02800A */       lui $v0, %hi((gDefaultSaveData + 0x564))
+  /* 0503E4 800D4A04 24423EF8 */     addiu $v0, $v0, %lo((gDefaultSaveData + 0x564))
+  /* 0503E8 800D4A08 254A3AA8 */     addiu $t2, $t2, %lo((gDefaultSaveData + 0x114))
   /* 0503EC 800D4A0C 252945F4 */     addiu $t1, $t1, %lo((gSaveData + 0x114))
-  /* 0503F0 800D4A10 25083A4C */     addiu $t0, $t0, %lo((D_800A3994 + 0xB8))
+  /* 0503F0 800D4A10 25083A4C */     addiu $t0, $t0, %lo((gDefaultSaveData + 0xB8))
   /* 0503F4 800D4A14 24E74598 */     addiu $a3, $a3, %lo((gSaveData + 0xB8))
-  /* 0503F8 800D4A18 24C639F0 */     addiu $a2, $a2, %lo((D_800A3994 + 0x5c))
+  /* 0503F8 800D4A18 24C639F0 */     addiu $a2, $a2, %lo((gDefaultSaveData + 0x5c))
   /* 0503FC 800D4A1C 24A5453C */     addiu $a1, $a1, %lo((gSaveData + 0x5C))
-  /* 050400 800D4A20 24843994 */     addiu $a0, $a0, %lo(D_800A3994)
+  /* 050400 800D4A20 24843994 */     addiu $a0, $a0, %lo(gDefaultSaveData)
   /* 050404 800D4A24 246344E0 */     addiu $v1, $v1, %lo(gSaveData)
   .L800D4A28:
   /* 050408 800D4A28 0080C025 */        or $t8, $a0, $zero
@@ -445,42 +445,42 @@ glabel func_ovl0_800D49E0
   /* 050520 800D4B40 25290170 */     addiu $t1, $t1, 0x170
   /* 050524 800D4B44 1542FFB8 */       bne $t2, $v0, .L800D4A28
   /* 050528 800D4B48 AF2C0004 */        sw $t4, 4($t9)
-  /* 05052C 800D4B4C 3C0E800A */       lui $t6, %hi((D_800A3994 + 0x5e0))
-  /* 050530 800D4B50 95CE3F74 */       lhu $t6, %lo((D_800A3994 + 0x5e0))($t6)
+  /* 05052C 800D4B4C 3C0E800A */       lui $t6, %hi((gDefaultSaveData + 0x5e0))
+  /* 050530 800D4B50 95CE3F74 */       lhu $t6, %lo((gDefaultSaveData + 0x5e0))($t6)
   /* 050534 800D4B54 3C01800A */       lui $at, %hi((gSaveData + 0x5e0))
   /* 050538 800D4B58 03E00008 */        jr $ra
   /* 05053C 800D4B5C A42E4AC0 */        sh $t6, %lo((gSaveData + 0x5e0))($at)
 
-glabel func_ovl0_800D4B60
+glabel lbMemory_SaveData_BackupClearBonusStageTime
   /* 050540 800D4B60 3C03800A */       lui $v1, %hi(gSaveData)
-  /* 050544 800D4B64 3C04800A */       lui $a0, %hi(D_800A3994)
-  /* 050548 800D4B68 3C02800A */       lui $v0, %hi((D_800A3994 + 0x180))
-  /* 05054C 800D4B6C 24423B14 */     addiu $v0, $v0, %lo((D_800A3994 + 0x180))
-  /* 050550 800D4B70 24843994 */     addiu $a0, $a0, %lo(D_800A3994)
+  /* 050544 800D4B64 3C04800A */       lui $a0, %hi(gDefaultSaveData)
+  /* 050548 800D4B68 3C02800A */       lui $v0, %hi((gDefaultSaveData + 0x180))
+  /* 05054C 800D4B6C 24423B14 */     addiu $v0, $v0, %lo((gDefaultSaveData + 0x180))
+  /* 050550 800D4B70 24843994 */     addiu $a0, $a0, %lo(gDefaultSaveData)
   /* 050554 800D4B74 246344E0 */     addiu $v1, $v1, %lo(gSaveData)
   .L800D4B78:
-  /* 050558 800D4B78 8C88048C */        lw $t0, 0x48c($a0) # D_800A3994 + 1164
-  /* 05055C 800D4B7C 90890490 */       lbu $t1, 0x490($a0) # D_800A3994 + 1168
-  /* 050560 800D4B80 8C8E046C */        lw $t6, 0x46c($a0) # D_800A3994 + 1132
-  /* 050564 800D4B84 908F0470 */       lbu $t7, 0x470($a0) # D_800A3994 + 1136
-  /* 050568 800D4B88 8C980474 */        lw $t8, 0x474($a0) # D_800A3994 + 1140
-  /* 05056C 800D4B8C 90990478 */       lbu $t9, 0x478($a0) # D_800A3994 + 1144
+  /* 050558 800D4B78 8C88048C */        lw $t0, 0x48c($a0) # gDefaultSaveData + 1164
+  /* 05055C 800D4B7C 90890490 */       lbu $t1, 0x490($a0) # gDefaultSaveData + 1168
+  /* 050560 800D4B80 8C8E046C */        lw $t6, 0x46c($a0) # gDefaultSaveData + 1132
+  /* 050564 800D4B84 908F0470 */       lbu $t7, 0x470($a0) # gDefaultSaveData + 1136
+  /* 050568 800D4B88 8C980474 */        lw $t8, 0x474($a0) # gDefaultSaveData + 1140
+  /* 05056C 800D4B8C 90990478 */       lbu $t9, 0x478($a0) # gDefaultSaveData + 1144
   /* 050570 800D4B90 AC68048C */        sw $t0, 0x48c($v1) # gSaveData + 1164
   /* 050574 800D4B94 A0690490 */        sb $t1, 0x490($v1) # gSaveData + 1168
   /* 050578 800D4B98 AC6E046C */        sw $t6, 0x46c($v1) # gSaveData + 1132
   /* 05057C 800D4B9C A06F0470 */        sb $t7, 0x470($v1) # gSaveData + 1136
   /* 050580 800D4BA0 AC780474 */        sw $t8, 0x474($v1) # gSaveData + 1140
   /* 050584 800D4BA4 A0790478 */        sb $t9, 0x478($v1) # gSaveData + 1144
-  /* 050588 800D4BA8 909904D0 */       lbu $t9, 0x4d0($a0) # D_800A3994 + 1232
-  /* 05058C 800D4BAC 8C9804CC */        lw $t8, 0x4cc($a0) # D_800A3994 + 1228
-  /* 050590 800D4BB0 908F04B8 */       lbu $t7, 0x4b8($a0) # D_800A3994 + 1208
-  /* 050594 800D4BB4 8C8E04B4 */        lw $t6, 0x4b4($a0) # D_800A3994 + 1204
-  /* 050598 800D4BB8 908904D8 */       lbu $t1, 0x4d8($a0) # D_800A3994 + 1240
-  /* 05059C 800D4BBC 8C8804D4 */        lw $t0, 0x4d4($a0) # D_800A3994 + 1236
-  /* 0505A0 800D4BC0 8C8A0494 */        lw $t2, 0x494($a0) # D_800A3994 + 1172
-  /* 0505A4 800D4BC4 908B0498 */       lbu $t3, 0x498($a0) # D_800A3994 + 1176
-  /* 0505A8 800D4BC8 8C8C04AC */        lw $t4, 0x4ac($a0) # D_800A3994 + 1196
-  /* 0505AC 800D4BCC 908D04B0 */       lbu $t5, 0x4b0($a0) # D_800A3994 + 1200
+  /* 050588 800D4BA8 909904D0 */       lbu $t9, 0x4d0($a0) # gDefaultSaveData + 1232
+  /* 05058C 800D4BAC 8C9804CC */        lw $t8, 0x4cc($a0) # gDefaultSaveData + 1228
+  /* 050590 800D4BB0 908F04B8 */       lbu $t7, 0x4b8($a0) # gDefaultSaveData + 1208
+  /* 050594 800D4BB4 8C8E04B4 */        lw $t6, 0x4b4($a0) # gDefaultSaveData + 1204
+  /* 050598 800D4BB8 908904D8 */       lbu $t1, 0x4d8($a0) # gDefaultSaveData + 1240
+  /* 05059C 800D4BBC 8C8804D4 */        lw $t0, 0x4d4($a0) # gDefaultSaveData + 1236
+  /* 0505A0 800D4BC0 8C8A0494 */        lw $t2, 0x494($a0) # gDefaultSaveData + 1172
+  /* 0505A4 800D4BC4 908B0498 */       lbu $t3, 0x498($a0) # gDefaultSaveData + 1176
+  /* 0505A8 800D4BC8 8C8C04AC */        lw $t4, 0x4ac($a0) # gDefaultSaveData + 1196
+  /* 0505AC 800D4BCC 908D04B0 */       lbu $t5, 0x4b0($a0) # gDefaultSaveData + 1200
   /* 0505B0 800D4BD0 24840080 */     addiu $a0, $a0, 0x80
   /* 0505B4 800D4BD4 24630080 */     addiu $v1, $v1, 0x80
   /* 0505B8 800D4BD8 A0790450 */        sb $t9, 0x450($v1) # gSaveData + 1104
@@ -497,16 +497,16 @@ glabel func_ovl0_800D4B60
   /* 0505E4 800D4C04 03E00008 */        jr $ra
   /* 0505E8 800D4C08 00000000 */       nop 
 
-glabel func_ovl0_800D4C0C
+glabel lbMemory_SaveData_BackupClearPrize
   /* 0505EC 800D4C0C 3C02800A */       lui $v0, %hi(gSaveData)
   /* 0505F0 800D4C10 244244E0 */     addiu $v0, $v0, %lo(gSaveData)
   /* 0505F4 800D4C14 904E0457 */       lbu $t6, 0x457($v0) # gSaveData + 1111
-  /* 0505F8 800D4C18 3C03800A */       lui $v1, %hi(D_800A3994)
-  /* 0505FC 800D4C1C 24633994 */     addiu $v1, $v1, %lo(D_800A3994)
-  /* 050600 800D4C20 90790457 */       lbu $t9, 0x457($v1) # D_800A3994 + 1111
+  /* 0505F8 800D4C18 3C03800A */       lui $v1, %hi(gDefaultSaveData)
+  /* 0505FC 800D4C1C 24633994 */     addiu $v1, $v1, %lo(gDefaultSaveData)
+  /* 050600 800D4C20 90790457 */       lbu $t9, 0x457($v1) # gDefaultSaveData + 1111
   /* 050604 800D4C24 31D8FF8F */      andi $t8, $t6, 0xff8f
-  /* 050608 800D4C28 946905DC */       lhu $t1, 0x5dc($v1) # D_800A3994 + 1500
-  /* 05060C 800D4C2C 906A05DE */       lbu $t2, 0x5de($v1) # D_800A3994 + 1502
+  /* 050608 800D4C28 946905DC */       lhu $t1, 0x5dc($v1) # gDefaultSaveData + 1500
+  /* 05060C 800D4C2C 906A05DE */       lbu $t2, 0x5de($v1) # gDefaultSaveData + 1502
   /* 050610 800D4C30 A0580457 */        sb $t8, 0x457($v0) # gSaveData + 1111
   /* 050614 800D4C34 03194025 */        or $t0, $t8, $t9
   /* 050618 800D4C38 A0480457 */        sb $t0, 0x457($v0) # gSaveData + 1111
@@ -514,23 +514,23 @@ glabel func_ovl0_800D4C0C
   /* 050620 800D4C40 03E00008 */        jr $ra
   /* 050624 800D4C44 A04A05DE */        sb $t2, 0x5de($v0) # gSaveData + 1502
 
-glabel func_ovl0_800D4C48
-  /* 050628 800D4C48 3C0F800A */       lui $t7, %hi(D_800A3994)
-  /* 05062C 800D4C4C 25EF3994 */     addiu $t7, $t7, %lo(D_800A3994)
+glabel lbMemory_SaveData_BackupClearAllData
+  /* 050628 800D4C48 3C0F800A */       lui $t7, %hi(gDefaultSaveData)
+  /* 05062C 800D4C4C 25EF3994 */     addiu $t7, $t7, %lo(gDefaultSaveData)
   /* 050630 800D4C50 3C0E800A */       lui $t6, %hi(gSaveData)
   /* 050634 800D4C54 25CE44E0 */     addiu $t6, $t6, %lo(gSaveData)
   /* 050638 800D4C58 25E805E8 */     addiu $t0, $t7, 0x5e8
   .L800D4C5C:
-  /* 05063C 800D4C5C 8DF90000 */        lw $t9, ($t7) # D_800A3994 + 0
+  /* 05063C 800D4C5C 8DF90000 */        lw $t9, ($t7) # gDefaultSaveData + 0
   /* 050640 800D4C60 25EF000C */     addiu $t7, $t7, 0xc
   /* 050644 800D4C64 25CE000C */     addiu $t6, $t6, 0xc
   /* 050648 800D4C68 ADD9FFF4 */        sw $t9, -0xc($t6) # gSaveData + -12
-  /* 05064C 800D4C6C 8DF8FFF8 */        lw $t8, -8($t7) # D_800A3994 + -8
+  /* 05064C 800D4C6C 8DF8FFF8 */        lw $t8, -8($t7) # gDefaultSaveData + -8
   /* 050650 800D4C70 ADD8FFF8 */        sw $t8, -8($t6) # gSaveData + -8
-  /* 050654 800D4C74 8DF9FFFC */        lw $t9, -4($t7) # D_800A3994 + -4
+  /* 050654 800D4C74 8DF9FFFC */        lw $t9, -4($t7) # gDefaultSaveData + -4
   /* 050658 800D4C78 15E8FFF8 */       bne $t7, $t0, .L800D4C5C
   /* 05065C 800D4C7C ADD9FFFC */        sw $t9, -4($t6) # gSaveData + -4
-  /* 050660 800D4C80 8DF90000 */        lw $t9, ($t7) # D_800A3994 + 0
+  /* 050660 800D4C80 8DF90000 */        lw $t9, ($t7) # gDefaultSaveData + 0
   /* 050664 800D4C84 03E00008 */        jr $ra
   /* 050668 800D4C88 ADD90000 */        sw $t9, ($t6) # gSaveData + 0
 

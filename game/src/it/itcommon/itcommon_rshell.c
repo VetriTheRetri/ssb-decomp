@@ -353,7 +353,7 @@ bool32 itRShell_SDefault_ProcDamage(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    ip->phys_info.vel_air.x = ip->damage_taken_recent * ITRSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
+    ip->phys_info.vel_air.x = ip->damage_queue * ITRSHELL_DAMAGE_MUL_NORMAL * (-ip->lr_damage);
 
     if (ABSF(ip->phys_info.vel_air.x) > ITRSHELL_STOP_VEL_X)
     {
@@ -557,7 +557,7 @@ bool32 itRShell_GSpin_ProcDamage(GObj *item_gobj)
     {
         return TRUE;
     }
-    ip->phys_info.vel_air.x += (ip->damage_taken_recent * 2.0F) * -ip->lr_damage;
+    ip->phys_info.vel_air.x += (ip->damage_queue * 2.0F) * -ip->lr_damage;
 
     if (ABSF(ip->phys_info.vel_air.x) > ITRSHELL_STOP_VEL_X)
     {

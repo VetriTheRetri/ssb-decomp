@@ -1,13 +1,14 @@
 #include "item.h"
 
-void func_ovl3_801837A0(GObj *item_gobj)
+// 0x801837A0
+void itMarumine_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
     s32 unused;
     Effect_Unk *ep;
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
     ep = func_ovl2_801005C8(&joint->translate);
 
@@ -21,77 +22,80 @@ void func_ovl3_801837A0(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
-    ap->item_hit.hit_sfx = gmSound_SFX_ExplodoeL;
+    ip->item_hit.hit_sfx = gmSound_SFX_ExplodeL;
 
     itMain_RefreshHit(item_gobj);
-    func_ovl3_80183A20(item_gobj);
+    itMarumine_NExplode_SetStatus(item_gobj);
 }
 
 extern intptr_t Marumine_Event;
-extern itCreateDesc Article_Marumine_Data;
+extern itCreateDesc itGround_Marumine_ItemDesc;
 
-void func_ovl3_80183830(GObj *item_gobj)
+// 0x80183830
+void itMarumine_NExplode_UpdateHitEvent(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
-    itHitEvent *ev = (itHitEvent*) ((uintptr_t)*Article_Marumine_Data.p_file + (intptr_t)&Marumine_Event); // Linker thing
+    itStruct *ip = itGetStruct(item_gobj);
+    itHitEvent *ev = itGetHitEvent(itGround_Marumine_ItemDesc, Marumine_Event); // (itHitEvent*) ((uintptr_t)*itGround_Marumine_ItemDesc.p_file + (intptr_t)&Marumine_Event); // Linker thing
 
-    if (ap->it_multi == ev[ap->item_event_index].timer)
+    if (ip->it_multi == ev[ip->item_event_index].timer)
     {
-        ap->item_hit.angle  = ev[ap->item_event_index].angle;
-        ap->item_hit.damage = ev[ap->item_event_index].damage;
-        ap->item_hit.size   = ev[ap->item_event_index].size;
+        ip->item_hit.angle  = ev[ip->item_event_index].angle;
+        ip->item_hit.damage = ev[ip->item_event_index].damage;
+        ip->item_hit.size   = ev[ip->item_event_index].size;
 
-        ap->item_hit.can_reflect = FALSE;
-        ap->item_hit.can_shield = FALSE;
+        ip->item_hit.can_reflect = FALSE;
+        ip->item_hit.can_shield = FALSE;
 
-        ap->item_hit.element = gmHitCollision_Element_Fire;
+        ip->item_hit.element = gmHitCollision_Element_Fire;
 
-        ap->item_hit.rebound = FALSE;
+        ip->item_hit.rebound = FALSE;
 
-        ap->item_event_index++;
+        ip->item_event_index++;
 
-        if (ap->item_event_index == 4)
+        if (ip->item_event_index == 4)
         {
-            ap->item_event_index = 3;
+            ip->item_event_index = 3;
         }
     }
 }
 
-bool32 func_ovl3_80183914(GObj *item_gobj)
+// 0x80183914
+bool32 itMarumine_SDefault_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    joint->translate.x += ap->item_vars.marumine.offset.x;
-    joint->translate.y += ap->item_vars.marumine.offset.y;
+    joint->translate.x += ip->item_vars.marumine.offset.x;
+    joint->translate.y += ip->item_vars.marumine.offset.y;
 
-    if ((f32)FLOAT_NEG_MAX == joint->dobj_f0)
+    if (joint->dobj_f0 == (f32)FLOAT_NEG_MAX)
     {
         itMain_RefreshHit(item_gobj);
         itMain_ClearOwnerStats(item_gobj);
 
-        ap->item_vars.marumine.offset.x = 0.0F;
-        ap->item_vars.marumine.offset.y = 0.0F;
+        ip->item_vars.marumine.offset.x = 0.0F;
+        ip->item_vars.marumine.offset.y = 0.0F;
 
-        func_ovl3_801837A0(item_gobj);
-        func_800269C0(1U);
+        itMarumine_NExplode_CreateGFXGotoSetStatus(item_gobj);
+        func_800269C0(gmSound_SFX_ExplodeL);
     }
     return FALSE;
 }
 
-bool32 func_ovl3_801839A8(GObj *item_gobj)
+// 0x801839A8
+bool32 itMarumine_NExplode_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    joint->translate.x += ap->item_vars.marumine.offset.x;
-    joint->translate.y += ap->item_vars.marumine.offset.y;
+    joint->translate.x += ip->item_vars.marumine.offset.x;
+    joint->translate.y += ip->item_vars.marumine.offset.y;
 
-    func_ovl3_80183830(item_gobj);
+    itMarumine_NExplode_UpdateHitEvent(item_gobj);
 
-    ap->it_multi++;
+    ip->it_multi++;
 
-    if (ap->it_multi == ITMARUMINE_EXPLODE_LIFETIME)
+    if (ip->it_multi == ITMARUMINE_EXPLODE_LIFETIME)
     {
         func_ovl2_8010B0B8();
 
@@ -100,9 +104,10 @@ bool32 func_ovl3_801839A8(GObj *item_gobj)
     else return FALSE;
 }
 
-extern itStatusDesc Article_Marumine_Status[];
+itStatusDesc itGround_Marumine_StatusDesc[1];
 
-void func_ovl3_80183A20(GObj *item_gobj)
+// 0x80183A20
+void itMarumine_NExplode_SetStatus(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
@@ -112,13 +117,14 @@ void func_ovl3_80183A20(GObj *item_gobj)
 
     ap->item_event_index = 0;
 
-    func_ovl3_80183830(item_gobj);
-    itMain_SetItemStatus(item_gobj, Article_Marumine_Status, 0);
+    itMarumine_NExplode_UpdateHitEvent(item_gobj);
+    itMain_SetItemStatus(item_gobj, itGround_Marumine_StatusDesc, 0);
 }
 
-GObj* jtgt_ovl3_80183A74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x80183A74
+GObj* itGround_Marumine_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Marumine_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Marumine_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
@@ -129,8 +135,8 @@ GObj* jtgt_ovl3_80183A74(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         ap->is_allow_knockback = TRUE;
 
-        func_80008CC0(joint, 0x46U, 0U);
-        func_800269C0(0x22BU);
+        func_80008CC0(joint, 0x46, 0);
+        func_800269C0(0x22B);
     }
     return item_gobj;
 }

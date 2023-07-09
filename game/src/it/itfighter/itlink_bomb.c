@@ -187,7 +187,7 @@ bool32 itLinkBomb_SDefault_ProcDamage(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    if (ip->damage_taken_recent >= ITLINKBOMB_HEALTH)
+    if (ip->damage_queue >= ITLINKBOMB_HEALTH)
     {
         itLinkBomb_NExplode_InitItemVars(item_gobj);
     }

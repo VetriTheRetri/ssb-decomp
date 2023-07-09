@@ -708,39 +708,39 @@ glabel func_ovl53_8013251C
   /* 17693C 8013253C 01C00008 */        jr $t6
   /* 176940 80132540 00000000 */       nop 
   glabel jtgt_ovl53_80132544
-  /* 176944 80132544 0C035238 */       jal func_ovl0_800D48E0
+  /* 176944 80132544 0C035238 */       jal lbMemory_SaveData_BackupClearNewcomers
   /* 176948 80132548 00000000 */       nop 
   /* 17694C 8013254C 10000015 */         b .L801325A4
   /* 176950 80132550 00000000 */       nop 
   glabel jtgt_ovl53_80132554
-  /* 176954 80132554 0C035245 */       jal func_ovl0_800D4914
+  /* 176954 80132554 0C035245 */       jal lbMemory_SaveData_BackupClear1PHighScore
   /* 176958 80132558 00000000 */       nop 
   /* 17695C 8013255C 10000011 */         b .L801325A4
   /* 176960 80132560 00000000 */       nop 
   glabel jtgt_ovl53_80132564
-  /* 176964 80132564 0C035278 */       jal func_ovl0_800D49E0
+  /* 176964 80132564 0C035278 */       jal lbMemory_SaveData_BackupClearVSRecord
   /* 176968 80132568 00000000 */       nop 
   /* 17696C 8013256C 1000000D */         b .L801325A4
   /* 176970 80132570 00000000 */       nop 
   glabel jtgt_ovl53_80132574
-  /* 176974 80132574 0C0352D8 */       jal func_ovl0_800D4B60
+  /* 176974 80132574 0C0352D8 */       jal lbMemory_SaveData_BackupClearBonusStageTime
   /* 176978 80132578 00000000 */       nop 
   /* 17697C 8013257C 10000009 */         b .L801325A4
   /* 176980 80132580 00000000 */       nop 
   glabel jtgt_ovl53_80132584
-  /* 176984 80132584 0C035303 */       jal func_ovl0_800D4C0C
+  /* 176984 80132584 0C035303 */       jal lbMemory_SaveData_BackupClearPrize
   /* 176988 80132588 00000000 */       nop 
   /* 17698C 8013258C 10000005 */         b .L801325A4
   /* 176990 80132590 00000000 */       nop 
   glabel jtgt_ovl53_80132594
-  /* 176994 80132594 0C035312 */       jal func_ovl0_800D4C48
+  /* 176994 80132594 0C035312 */       jal lbMemory_SaveData_BackupClearAllData
   /* 176998 80132598 00000000 */       nop 
   /* 17699C 8013259C 0C0351BD */       jal func_ovl0_800D46F4
   /* 1769A0 801325A0 00000000 */       nop 
   .L801325A4:
   /* 1769A4 801325A4 0C0351CF */       jal func_ovl0_800D473C
   /* 1769A8 801325A8 00000000 */       nop 
-  /* 1769AC 801325AC 0C03517D */       jal func_ovl0_800D45F4
+  /* 1769AC 801325AC 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 1769B0 801325B0 00000000 */       nop 
   /* 1769B4 801325B4 0C009A70 */       jal func_800269C0
   /* 1769B8 801325B8 2404010D */     addiu $a0, $zero, 0x10d

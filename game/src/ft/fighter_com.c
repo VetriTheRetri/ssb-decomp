@@ -98,35 +98,45 @@ void func_ovl3_80131C68(ftStruct *this_fp)
                     switch (command & 0xF0)
                     {
                     case 0x0:
-                        this_fp->input.cp.button_inputs |= 0x8000;
+                        this_fp->input.cp.button_inputs |= HAL_BUTTON_A;
                         break;
+
                     case 0x10:
-                        this_fp->input.cp.button_inputs &= 0xFFFF7FFF;
+                        this_fp->input.cp.button_inputs &= ~HAL_BUTTON_A;
                         break;
+
                     case 0x20:
-                        this_fp->input.cp.button_inputs |= 0x4000;
+                        this_fp->input.cp.button_inputs |= HAL_BUTTON_B;
                         break;
+
                     case 0x30:
-                        this_fp->input.cp.button_inputs &= 0xBFFF;
+                        this_fp->input.cp.button_inputs &= ~HAL_BUTTON_B;
                         break;
+
                     case 0x40:
-                        this_fp->input.cp.button_inputs |= 0x2000;
+                        this_fp->input.cp.button_inputs |= HAL_BUTTON_Z;
                         break;
+
                     case 0x50:
-                        this_fp->input.cp.button_inputs &= 0xDFFF;
+                        this_fp->input.cp.button_inputs &= ~HAL_BUTTON_Z;
                         break;
+
                     case 0x60:
-                        this_fp->input.cp.button_inputs |= 0x20;
+                        this_fp->input.cp.button_inputs |= HAL_BUTTON_L;
                         break;
+
                     case 0x70:
-                        this_fp->input.cp.button_inputs &= 0xFFDF;
+                        this_fp->input.cp.button_inputs &= ~HAL_BUTTON_L;
                         break;
+
                     case 0x80:
-                        this_fp->input.cp.button_inputs |= 0x1000;
+                        this_fp->input.cp.button_inputs |= HAL_BUTTON_START;
                         break;
+
                     case 0x90:
-                        this_fp->input.cp.button_inputs &= 0xEFFF;
+                        this_fp->input.cp.button_inputs &= ~HAL_BUTTON_START;
                         break;
+
                     case 0xA0:
                         switch (*p_command)
                         {
@@ -150,7 +160,6 @@ void func_ovl3_80131C68(ftStruct *this_fp)
                         switch (*p_command)
                         {
                         default:
-
                             this_fp->input.cp.stick_range.y = *p_command++;
                             break;
 

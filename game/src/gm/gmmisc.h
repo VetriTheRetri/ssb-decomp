@@ -17,11 +17,11 @@
 
 #define GMCOMPLAYER_LEVEL_MAX 9
 
-#define GMHITCOLLISION_MASK_FIGHTER (1 << 0) // Can interact with fighters
-#define GMHITCOLLISION_MASK_ITEM    (1 << 1) // Can interact with items
-#define GMHITCOLLISION_MASK_ARTICLE (1 << 2) // Can interact with articles
+#define GMHITCOLLISION_MASK_FIGHTER (1 << 0)    // Can interact with fighters
+#define GMHITCOLLISION_MASK_WEAPON  (1 << 1)    // Can interact with weapons
+#define GMHITCOLLISION_MASK_ITEM    (1 << 2)    // Can interact with items
 
-#define GMHITCOLLISION_MASK_ALL     (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_ITEM | GMHITCOLLISION_MASK_ARTICLE)
+#define GMHITCOLLISION_MASK_ALL     (GMHITCOLLISION_MASK_FIGHTER | GMHITCOLLISION_MASK_WEAPON | GMHITCOLLISION_MASK_ITEM)
 
 typedef enum gmHitCollisionStatus
 {
@@ -148,13 +148,6 @@ typedef union gmStatFlags
     u16 halfword;
 
 } gmStatFlags;
-
-typedef struct FighterAttackFlags
-{
-    gmStatFlags hi;
-    gmStatFlags lw;
-
-} FighterAttackFlags;
 
 typedef struct Color_Script
 {

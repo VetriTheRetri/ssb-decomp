@@ -1302,7 +1302,7 @@ glabel func_ovl60_80132E10
   /* 1205D8 80132E28 8DEF37BC */        lw $t7, %lo(D_ovl60_801337BC)($t7)
   /* 1205DC 80132E2C 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 1205E0 80132E30 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 1205E4 80132E34 0C03517D */       jal func_ovl0_800D45F4
+  /* 1205E4 80132E34 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 1205E8 80132E38 A04F0451 */        sb $t7, 0x451($v0) # gSaveData + 1105
   /* 1205EC 80132E3C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 1205F0 80132E40 27BD0018 */     addiu $sp, $sp, 0x18

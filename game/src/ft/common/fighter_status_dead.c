@@ -17,17 +17,17 @@ void func_ovl3_8013BC8C(ftStruct *this_fp)
 
     func_ovl2_800E806C(this_fp, 0, 30);
 
-    for (i = 0; i < ARRAY_COUNT(gpMatchData->player_block); i++)
+    for (i = 0; i < ARRAY_COUNT(gpBattleState->player_block); i++)
     {
-        if ((i != this_fp->player) && (gpMatchData->player_block[i].player_kind == Ft_Kind_Mario))
+        if ((i != this_fp->player) && (gpBattleState->player_block[i].player_kind == Ft_Kind_Mario))
         {
-            GObj *fighter_gobj = gpMatchData->player_block[i].fighter_gobj;
+            GObj *fighter_gobj = gpBattleState->player_block[i].fighter_gobj;
 
             if (fighter_gobj != NULL)
             {
                 ftStruct *other_fp = ftGetStruct(fighter_gobj);
 
-                if ((!(gpMatchData->match_rules & GMMATCH_GAMERULE_STOCK)) || (other_fp->stock_count != -1))
+                if ((!(gpBattleState->match_rules & GMMATCH_GAMERULE_STOCK)) || (other_fp->stock_count != -1))
                 {
                     func_ovl2_800E806C(other_fp, 1, 15);
                 }
@@ -43,42 +43,42 @@ void ftCommon_Dead_UpdateScore(ftStruct *this_fp)
     func_ovl2_8010F76C(this_fp);
     func_ovl2_80114968(this_fp);
 
-    gpMatchData->player_block[this_fp->player].falls++;
+    gpBattleState->player_block[this_fp->player].falls++;
 
-    if (gpMatchData->is_display_score)
+    if (gpBattleState->is_display_score)
     {
         ifDisplayScoreFighter(this_fp, -1);
     }
     if ((this_fp->damage_player != -1) && (this_fp->damage_player != GMMATCH_PLAYERS_MAX))
     {
-        gpMatchData->player_block[this_fp->damage_player].score++;
+        gpBattleState->player_block[this_fp->damage_player].score++;
 
-        gpMatchData->player_block[this_fp->damage_player].total_ko_player[this_fp->player]++;
+        gpBattleState->player_block[this_fp->damage_player].total_ko_player[this_fp->player]++;
 
-        if (gpMatchData->is_display_score)
+        if (gpBattleState->is_display_score)
         {
-            ifDisplayScoreFighter(ftGetStruct(gpMatchData->player_block[this_fp->damage_player].fighter_gobj), 1);
+            ifDisplayScoreFighter(ftGetStruct(gpBattleState->player_block[this_fp->damage_player].fighter_gobj), 1);
         }
     }
-    else gpMatchData->player_block[this_fp->player].total_self_destruct++;
+    else gpBattleState->player_block[this_fp->player].total_self_destruct++;
     
-    if (gpMatchData->match_rules & GMMATCH_GAMERULE_STOCK)
+    if (gpBattleState->match_rules & GMMATCH_GAMERULE_STOCK)
     {
         this_fp->stock_count--;
 
-        gpMatchData->player_block[this_fp->player].stock_count--;
+        gpBattleState->player_block[this_fp->player].stock_count--;
 
         ifDisplayStockIconFall(this_fp);
     }
-    if (gpMatchData->match_rules & GMMATCH_GAMERULE_1PGAME)
+    if (gpBattleState->match_rules & GMMATCH_GAMERULE_1PGAME)
     {
         this_fp->stock_count--;
 
-        gpMatchData->player_block[this_fp->player].stock_count--;
+        gpBattleState->player_block[this_fp->player].stock_count--;
 
         func_unkmulti_8018EFFC(this_fp->player, this_fp->unk_0x15);
     }
-    if (gpMatchData->match_rules & GMMATCH_GAMERULE_BONUS)
+    if (gpBattleState->match_rules & GMMATCH_GAMERULE_BONUS)
     {
         ifDisplayBonusFailure();
     }
@@ -89,7 +89,7 @@ void ftCommon_Dead_CheckRebirth(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    if (gpMatchData->match_rules & GMMATCH_GAMERULE_STOCK)
+    if (gpBattleState->match_rules & GMMATCH_GAMERULE_STOCK)
     {
         if (fp->stock_count == -1)
         {
@@ -98,9 +98,9 @@ void ftCommon_Dead_CheckRebirth(GObj *fighter_gobj)
             return;
         }
     }
-    else if (gpMatchData->match_rules & GMMATCH_GAMERULE_1PGAME)
+    else if (gpBattleState->match_rules & GMMATCH_GAMERULE_1PGAME)
     {
-        if (gpMatchData->player_block[fp->player].is_rebirth_multi != FALSE)
+        if (gpBattleState->player_block[fp->player].is_rebirth_multi != FALSE)
         {
             func_unkmulti_8018E18C(fighter_gobj);
 
@@ -200,7 +200,7 @@ void ftCommon_DeadDown_SetStatus(GObj *fighter_gobj)
 
     pos = DObjGetStruct(fighter_gobj)->translate;
 
-    if (gpMatchData->game_type != 2)
+    if (gpBattleState->game_type != 2)
     {
         if (gpMapData->cam_bound_right < pos.x)
         {
@@ -215,7 +215,7 @@ void ftCommon_DeadDown_SetStatus(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->player, 0);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((gpMatchData->gr_kind >= Gr_Kind_Bonus1Start) && (gpMatchData->gr_kind < Gr_Kind_Bonus2Start)) || ((gpMatchData->gr_kind >= Gr_Kind_Bonus2Start) && (gpMatchData->gr_kind < Gr_Kind_CustomStart)))
+    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
     {
         sfx_id = 0x9B;
     }
@@ -238,7 +238,7 @@ void ftCommon_DeadRight_SetStatus(GObj *fighter_gobj)
 
     pos = DObjGetStruct(fighter_gobj)->translate;
 
-    if (gpMatchData->game_type != gmMatch_GameType_Bonus)
+    if (gpBattleState->game_type != gmMatch_GameType_Bonus)
     {
         if (pos.y > gpMapData->cam_bound_top)
         {
@@ -253,7 +253,7 @@ void ftCommon_DeadRight_SetStatus(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->player, 1);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((gpMatchData->gr_kind >= Gr_Kind_Bonus1Start) && (gpMatchData->gr_kind < Gr_Kind_Bonus2Start)) || ((gpMatchData->gr_kind >= Gr_Kind_Bonus2Start) && (gpMatchData->gr_kind < Gr_Kind_CustomStart)))
+    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
     {
         sfx_id = 0x9B;
     }
@@ -276,7 +276,7 @@ void ftCommon_DeadLeft_SetStatus(GObj *fighter_gobj)
 
     pos = DObjGetStruct(fighter_gobj)->translate;
 
-    if (gpMatchData->game_type != gmMatch_GameType_Bonus)
+    if (gpBattleState->game_type != gmMatch_GameType_Bonus)
     {
         if (pos.y > gpMapData->cam_bound_top)
         {
@@ -290,7 +290,7 @@ void ftCommon_DeadLeft_SetStatus(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->player, 3);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((gpMatchData->gr_kind >= Gr_Kind_Bonus1Start) && (gpMatchData->gr_kind < Gr_Kind_Bonus2Start)) || ((gpMatchData->gr_kind >= Gr_Kind_Bonus2Start) && (gpMatchData->gr_kind < Gr_Kind_CustomStart)))
+    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
     {
         sfx_id = 0x9B;
     }
@@ -452,7 +452,7 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
 
             ftCommon_Dead_UpdateScore(fp);
 
-            if (((gpMatchData->gr_kind >= Gr_Kind_Bonus1Start) && (gpMatchData->gr_kind < Gr_Kind_Bonus2Start)) || ((gpMatchData->gr_kind >= Gr_Kind_Bonus2Start) && (gpMatchData->gr_kind < Gr_Kind_CustomStart)))
+            if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
             {
                 sfx_id = 0x9B;
             }
@@ -564,7 +564,7 @@ bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
     }
     else if (!(fp->is_nullstatus))
     {
-        if ((gpMatchData->game_type == gmMatch_GameType_1PGame) && (gpMatchData->player_block[fp->player].is_rebirth_multi != FALSE))
+        if ((gpBattleState->game_type == gmMatch_GameType_1PGame) && (gpBattleState->player_block[fp->player].is_rebirth_multi != FALSE))
         {
             if (pos->y < gpMapData->unk_bound_bottom)
             {

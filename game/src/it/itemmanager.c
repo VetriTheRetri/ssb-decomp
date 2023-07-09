@@ -165,8 +165,8 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->hitlag_timer = 0;
     ap->damage_highest = 0;
     ap->damage_knockback = 0.0F;
-    ap->damage_taken_recent = 0;
-    ap->damage_taken_last = 0;
+    ap->damage_queue = 0;
+    ap->damage_lag = 0;
 
     ap->times_landed = 0;
     ap->times_thrown = 0;
@@ -361,7 +361,7 @@ extern gmItemSpawn item_settings; // Static (.bss)
 
 void func_ovl3_8016EB0C(void)
 {
-    item_settings.item_spawn_timer = D_ovl3_80189454[gpMatchData->item_switch] + rand_u16_range(D_ovl3_80189460[gpMatchData->item_switch] - D_ovl3_80189454[gpMatchData->item_switch]);
+    item_settings.item_spawn_timer = D_ovl3_80189454[gpBattleState->item_switch] + rand_u16_range(D_ovl3_80189460[gpBattleState->item_switch] - D_ovl3_80189454[gpBattleState->item_switch]);
 }
 
 void func_ovl3_8016EB78(s32 unused)
@@ -371,7 +371,7 @@ void func_ovl3_8016EB78(s32 unused)
     Vec3f pos;
     Vec3f sp28;
 
-    if (gpMatchData->pause_status != gmMatch_PauseStatus_Disable)
+    if (gpBattleState->pause_status != gmMatch_PauseStatus_Disable)
     {
         if (item_settings.item_spawn_timer > 0)
         {
@@ -414,15 +414,15 @@ GObj* func_ovl3_8016EC40(void)
 
     // TO DO: Figure out where the iterator limit of 20 is coming from
 
-    if (gpMatchData->item_switch != 0)
+    if (gpBattleState->item_switch != 0)
     {
-        if (gpMatchData->item_toggles != 0)
+        if (gpBattleState->item_toggles != 0)
         {
             if (gpMapData->unk_0x84 != NULL)
             {
                 unk_0x84_2 = gpMapData->unk_0x84;
 
-                item_bits_2 = gpMatchData->item_toggles;
+                item_bits_2 = gpBattleState->item_toggles;
 
                 item_count = 0;
 
@@ -466,7 +466,7 @@ GObj* func_ovl3_8016EC40(void)
 
                 gOMObj_AddGObjCommonProc(gobj, func_ovl3_8016EB78, 1, 3);
 
-                item_bits = gpMatchData->item_toggles;
+                item_bits = gpBattleState->item_toggles;
 
                 unk_0x84 = gpMapData->unk_0x84;
 
@@ -481,7 +481,7 @@ GObj* func_ovl3_8016EC40(void)
                 item_settings.unk_0x18 = hal_alloc(j * sizeof(*item_settings.unk_0x18), 0);
                 item_settings.unk_0x20 = hal_alloc(j * sizeof(*item_settings.unk_0x20), 2);
 
-                item_bits_3 = gpMatchData->item_toggles;
+                item_bits_3 = gpBattleState->item_toggles;
 
                 item_count_2 = 0;
 
@@ -526,9 +526,9 @@ void func_ovl3_8016EF40(void)
     u32 item_bits_2;
     u32 item_bits_3;
 
-    if ((gpMatchData->item_switch != 0) && (gpMatchData->item_toggles != 0) && (gpMapData->unk_0x84 != NULL))
+    if ((gpBattleState->item_switch != 0) && (gpBattleState->item_toggles != 0) && (gpMapData->unk_0x84 != NULL))
     {
-        item_bits = gpMatchData->item_toggles >> 4;
+        item_bits = gpBattleState->item_toggles >> 4;
 
         temp_a3 = gpMapData->unk_0x84;
 
@@ -545,7 +545,7 @@ void func_ovl3_8016EF40(void)
 
         if (item_count != 0)
         {
-            item_bits_2 = (u32)gpMatchData->item_toggles >> 4;
+            item_bits_2 = (u32)gpBattleState->item_toggles >> 4;
 
             temp_t1 = gpMapData->unk_0x84;
 
@@ -562,7 +562,7 @@ void func_ovl3_8016EF40(void)
             D_ovl3_8018D048.unk_0xC = hal_alloc(j * sizeof(*D_ovl3_8018D048.unk_0xC), 0U);
             D_ovl3_8018D048.unk_0x14 = hal_alloc(j * sizeof(*D_ovl3_8018D048.unk_0x14), 2U);
 
-            item_bits_2 = gpMatchData->item_toggles >> 4;
+            item_bits_2 = gpBattleState->item_toggles >> 4;
 
             item_count_2 = 0;
 
@@ -929,7 +929,7 @@ void itManager_UpdateHitVictimInteractStats(itHitbox *it_hit, GObj *victim_gobj,
     }
 }
 
-// 0x8016FB18 - Article's hurtbox gets hit by a fighter
+// 0x8016FB18 - Item's hurtbox gets hit by a fighter
 void itManager_UpdateDamageStatFighter(ftStruct *fp, ftHitbox *ft_hit, itStruct *ap, itHurtbox *at_hurt, GObj *fighter_gobj, GObj *item_gobj)
 {
     s32 damage;
@@ -946,7 +946,7 @@ void itManager_UpdateDamageStatFighter(ftStruct *fp, ftHitbox *ft_hit, itStruct 
     }
     if (at_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     {
-        ap->damage_taken_recent += damage;
+        ap->damage_queue += damage;
 
         if (ap->damage_highest < damage)
         {
@@ -965,7 +965,7 @@ void itManager_UpdateDamageStatFighter(ftStruct *fp, ftHitbox *ft_hit, itStruct 
         }
         if (ap->is_allow_knockback)
         {
-            damage_knockback = gmCommonObject_DamageCalcKnockback(ap->percent_damage, ap->damage_taken_recent, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->handicap, ap->handicap);
+            damage_knockback = gmCommonObject_DamageCalcKnockback(ap->percent_damage, ap->damage_queue, damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, 1.0F, fp->handicap, ap->handicap);
 
             if (ap->damage_knockback < damage_knockback)
             {
@@ -1119,7 +1119,7 @@ void itManager_UpdateDamageStatItem(itStruct *attack_ap, itHitbox *attack_it_hit
     }
     if (at_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     {
-        defend_ap->damage_taken_recent += damage;
+        defend_ap->damage_queue += damage;
 
         if (defend_ap->damage_highest < damage)
         {
@@ -1148,7 +1148,7 @@ void itManager_UpdateDamageStatItem(itStruct *attack_ap, itHitbox *attack_it_hit
         }
         if (defend_ap->is_allow_knockback)
         {
-            launch_angle = gmCommonObject_DamageCalcKnockback(defend_ap->percent_damage, defend_ap->damage_taken_recent, damage, attack_it_hit->knockback_weight, attack_it_hit->knockback_scale, attack_it_hit->knockback_base, 1.0f, attack_ap->handicap, )defend_ap->handicap);
+            launch_angle = gmCommonObject_DamageCalcKnockback(defend_ap->percent_damage, defend_ap->damage_queue, damage, attack_it_hit->knockback_weight, attack_it_hit->knockback_scale, attack_it_hit->knockback_base, 1.0f, attack_ap->handicap, )defend_ap->handicap);
 
             if (defend_ap->damage_knockback < launch_angle)
             {
@@ -1210,7 +1210,7 @@ void itManager_UpdateDamageStatWeapon(wpStruct *ip, Weapon_Hit *wp_hit, s32 arg2
     }
     if (at_hurt->hitstatus == gmHitCollision_HitStatus_Normal)
     {
-        ap->damage_taken_recent += damage;
+        ap->damage_queue += damage;
 
         if (ap->damage_highest < damage)
         {
@@ -1239,7 +1239,7 @@ void itManager_UpdateDamageStatWeapon(wpStruct *ip, Weapon_Hit *wp_hit, s32 arg2
         }
         if (ap->is_allow_knockback)
         {
-            angle = gmCommonObject_DamageCalcKnockback(ap->percent_damage, ap->damage_taken_recent, damage, wp_hit->knockback_weight, wp_hit->knockback_scale, wp_hit->knockback_base, 1.0F, ip->handicap, ap->handicap);
+            angle = gmCommonObject_DamageCalcKnockback(ap->percent_damage, ap->damage_queue, damage, wp_hit->knockback_weight, wp_hit->knockback_scale, wp_hit->knockback_base, 1.0F, ip->handicap, ap->handicap);
 
             if (ap->damage_knockback < angle)
             {
@@ -1306,7 +1306,7 @@ void itManager_SearchHitFighter(GObj *item_gobj) // Check fighters for hit detec
                 {
                     fp = ftGetStruct(fighter_gobj);
 
-                    if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE) || (((fp->throw_gobj != NULL) ? fp->throw_team : fp->team) != ap->team) || (ap->is_damage_all))
+                    if ((gpBattleState->is_team_battle != TRUE) || (gpBattleState->is_team_attack != FALSE) || (((fp->throw_gobj != NULL) ? fp->throw_team : fp->team) != ap->team) || (ap->is_damage_all))
                     {
                         if (!(fp->is_catchstatus))
                         {
@@ -1389,7 +1389,7 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
     this_ap = itGetStruct(this_gobj);
     this_hit = &this_ap->item_hit;
 
-    if (this_ap->item_hurt.interact_mask & GMHITCOLLISION_MASK_ARTICLE)
+    if (this_ap->item_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
     {
         other_gobj = gOMObjCommonLinks[gOMObjLinkIndexItem];
 
@@ -1408,11 +1408,11 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
 
                 if ((this_ap->owner_gobj != other_ap->owner_gobj) || (this_ap->is_damage_all))
                 {
-                    if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE) || (this_ap->team != other_ap->team) || (this_ap->is_damage_all))
+                    if ((gpBattleState->is_team_battle != TRUE) || (gpBattleState->is_team_attack != FALSE) || (this_ap->team != other_ap->team) || (this_ap->is_damage_all))
                     {
                         if (other_hit->update_state != gmHitCollision_UpdateState_Disable)
                         {
-                            if (other_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
+                            if (other_hit->interact_mask & GMHITCOLLISION_MASK_ITEM)
                             {
                                 those_flags.is_interact_hurt = those_flags.is_interact_shield = FALSE;
 
@@ -1431,9 +1431,9 @@ void itManager_SearchHitItem(GObj *this_gobj) // Check other articles for hit de
                                 {
                                     if ((is_check_self != FALSE) && (this_hit->rebound) && (other_hit->rebound) && (this_ap->owner_gobj != other_ap->owner_gobj))
                                     {
-                                        if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
+                                        if ((gpBattleState->is_team_battle != TRUE) || (gpBattleState->is_team_attack != FALSE) || (this_ap->team != other_ap->team))
                                         {
-                                            if ((this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE))
+                                            if ((this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
                                             {
                                                 these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
 
@@ -1514,7 +1514,7 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
     ap = itGetStruct(item_gobj);
     it_hit = &ap->item_hit;
 
-    if (ap->item_hurt.interact_mask & GMHITCOLLISION_MASK_ITEM)
+    if (ap->item_hurt.interact_mask & GMHITCOLLISION_MASK_WEAPON)
     {
         weapon_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
@@ -1525,11 +1525,11 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
 
             if ((ap->owner_gobj != ip->owner_gobj) || (ap->is_damage_all))
             {
-                if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE) || (ap->team != ip->team) || (ap->is_damage_all))
+                if ((gpBattleState->is_team_battle != TRUE) || (gpBattleState->is_team_attack != FALSE) || (ap->team != ip->team) || (ap->is_damage_all))
                 {
                     if (wp_hit->update_state != 0)
                     {
-                        if (wp_hit->interact_mask & GMHITCOLLISION_MASK_ARTICLE)
+                        if (wp_hit->interact_mask & GMHITCOLLISION_MASK_ITEM)
                         {
                             those_flags.is_interact_hurt = those_flags.is_interact_shield = FALSE;
 
@@ -1547,9 +1547,9 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
                             {
                                 if ((it_hit->rebound) && (wp_hit->rebound) && (ap->owner_gobj != ip->owner_gobj))
                                 {
-                                    if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE) || (ap->team != ip->team))
+                                    if ((gpBattleState->is_team_battle != TRUE) || (gpBattleState->is_team_attack != FALSE) || (ap->team != ip->team))
                                     {
-                                        if ((it_hit->update_state != gmHitCollision_UpdateState_Disable) && (it_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
+                                        if ((it_hit->update_state != gmHitCollision_UpdateState_Disable) && (it_hit->interact_mask & GMHITCOLLISION_MASK_WEAPON))
                                         {
                                             these_flags.is_interact_hurt = these_flags.is_interact_shield = FALSE;
 
@@ -1616,9 +1616,9 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
 // 0x80171080
 void itManager_ProcSearchHitAll(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    if (!(ap->is_hold))
+    if (!(ip->is_hold))
     {
         itManager_SearchHitFighter(item_gobj);
         itManager_SearchHitItem(item_gobj);
@@ -1631,15 +1631,15 @@ void itManager_ProcUpdateHitCollisions(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    if (ap->damage_taken_recent != 0)
+    if (ap->damage_queue != 0)
     {
-        ap->percent_damage += ap->damage_taken_recent;
+        ap->percent_damage += ap->damage_queue;
 
         if (ap->percent_damage > PERCENT_DAMAGE_MAX)
         {
             ap->percent_damage = PERCENT_DAMAGE_MAX;
         }
-        ap->damage_taken_last = ap->damage_taken_recent;
+        ap->damage_lag = ap->damage_queue;
 
         if (ap->proc_damage != NULL)
         {
@@ -1738,9 +1738,9 @@ next_check:
             }
         }
     }
-    if (ap->damage_taken_last != 0)
+    if (ap->damage_lag != 0)
     {
-        ap->hitlag_timer = gmCommon_DamageCalcHitLag(ap->damage_taken_last, ftStatus_Common_Wait, 1.0F); // Maybe 10 is the "none" status ID?
+        ap->hitlag_timer = gmCommon_DamageCalcHitLag(ap->damage_lag, ftStatus_Common_Wait, 1.0F); // Maybe 10 is the "none" status ID?
     }
 
     ap->hit_normal_damage = 0;
@@ -1749,8 +1749,8 @@ next_check:
     ap->hit_shield_damage = 0;
     ap->reflect_gobj = NULL;
     ap->damage_highest = 0;
-    ap->damage_taken_recent = 0;
-    ap->damage_taken_last = 0;
+    ap->damage_queue = 0;
+    ap->damage_lag = 0;
     ap->damage_knockback = 0.0F;
 }
 

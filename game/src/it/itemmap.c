@@ -267,7 +267,7 @@ bool32 itMap_CheckMapCollideThrownLanding(GObj *item_gobj, f32 wall_ceil_rebound
 
         if (ap->times_landed == 1)
         {
-            if ((gpMatchData->game_type != gmMatch_GameType_HowToPlay) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
+            if ((gpBattleState->game_type != gmMatch_GameType_HowToPlay) && (ap->times_thrown != 0) && ((ap->times_thrown == 4) || (rand_u16_range(4) == 0)))
             {
                 return TRUE;
             }

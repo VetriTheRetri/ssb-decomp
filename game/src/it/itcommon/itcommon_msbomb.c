@@ -313,7 +313,7 @@ void itMSBomb_GAttach_InitItemVars(GObj *item_gobj)
 
     if ((ip->player != -1) && (ip->player != GMMATCH_PLAYERS_MAX)) // Macro might be off though
     {
-        GObj *fighter_gobj = gpMatchData->player_block[ip->player].fighter_gobj;
+        GObj *fighter_gobj = gpBattleState->player_block[ip->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {
@@ -545,7 +545,7 @@ void itMSBomb_NExplode_InitItemVars(GObj *item_gobj)
     ip->item_event_index = 0;
 
     ip->item_hit.stale = ITEM_STALE_DEFAULT;
-    ip->item_hit.hit_sfx = gmSound_SFX_ExplodoeL;
+    ip->item_hit.hit_sfx = gmSound_SFX_ExplodeL;
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 

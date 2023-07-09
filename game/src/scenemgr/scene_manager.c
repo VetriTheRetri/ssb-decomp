@@ -32,7 +32,7 @@ struct BattleState D_800A4D08;
 struct BattleState D_800A4EF8;
 
 // pointer to battle settings
-struct gmSceneInfo *gpMatchData;
+struct gmSceneInfo *gpBattleState;
 u32 D_800A50EC;
 u8 D_800A50F0[8];
 u8 D_800A50F8[324];
@@ -57,9 +57,9 @@ void start_scene_manager(UNUSED u32 set) {
     load_overlay(&D_800A3070[2]);
     load_overlay(&D_800A3070[1]);
 
-    gSaveData = D_800A3994;
+    gSaveData = gDefaultSaveData;
     gSceneData = D_800A3F80;
-    sp30       = gDefaultBattleSettings;
+    sp30       = gDefaultBattleState;
     D_800A4EF8 = sp30;
     sp220      = sp30;
     D_800A4D08 = sp220;
@@ -74,7 +74,7 @@ void start_scene_manager(UNUSED u32 set) {
     func_80020A40(6);
     while (func_80021048()) { }
 
-    func_ovl0_800D4644();
+    lbMemory_SaveData_CheckSaveDataSuccess();
     func_ovl0_800D46F4();
 
     // it needs to be something like this to match
@@ -1326,7 +1326,7 @@ struct Overlay D_800A3070[65] = {
     },
 };
 
-struct gmSaveInfo D_800A3994 = {
+struct gmSaveInfo gDefaultSaveData = {
     {{{0}, 0, 0, 0, 0, 0, 0, {{0, 0}}}},
     {0x01010000, 0x00000000, 0x00000102, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00034BC0,
      0x00000000, 0x00034BC0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00034BC0,
@@ -1353,7 +1353,7 @@ struct gmSceneInfo D_800A3F80 = {
      0x00, 0x1C, 0x00, 0x1C, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}};
 
 // clang-format off
-struct BattleState gDefaultBattleSettings = {
+struct BattleState gDefaultBattleState = {
     /* 00 */ 0, 0, 0, TIMESTOCK_TIME_ON,
     /* 04 */ 0, 0, 3, 2,
     /* 08 */ HANDICAP_MODE_OFF, FALSE, 1, 100,

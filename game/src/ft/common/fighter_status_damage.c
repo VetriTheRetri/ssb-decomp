@@ -396,7 +396,7 @@ bool32 func_ovl3_80140D30(ftStruct *fp)
     {
         return TRUE;
     }
-    if ((fp->hitlag_timer > 0) && (fp->x192_flag_b6) && (fp->damage_knockback < (fp->damage_knockback_again + 30.0F)))
+    if ((fp->hitlag_timer > 0) && (fp->x192_flag_b6) && (fp->damage_knockback < (fp->damage_stack + 30.0F)))
     {
         return TRUE;
     }
@@ -415,7 +415,7 @@ void func_ovl3_80140E2C(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    if ((fp->damage_knockback == 0.0F) || ((fp->hitlag_timer > 0) && (fp->x192_flag_b6) && (fp->damage_knockback < (fp->damage_knockback_again + 30.0F))))
+    if ((fp->damage_knockback == 0.0F) || ((fp->hitlag_timer > 0) && (fp->x192_flag_b6) && (fp->damage_knockback < (fp->damage_stack + 30.0F))))
     {
         ftCommon_Damage_SetDamageColAnim(fighter_gobj);
     }
@@ -429,7 +429,7 @@ void func_ovl3_80140E2C(GObj *fighter_gobj)
 // 0x80140EC0
 bool32 ftCommon_Damage_CheckCaptureKeepHold(ftStruct *fp)
 {
-    if (fp->damage_taken_recent < FTCOMMON_DAMAGE_CATCH_RELEASE_THRESHOLD)
+    if (fp->damage_queue < FTCOMMON_DAMAGE_CATCH_RELEASE_THRESHOLD)
     {
         return TRUE;
     }
@@ -611,7 +611,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
     this_fp->tap_stick_x = this_fp->tap_stick_y = U8_MAX - 1;
 
-    this_fp->damage_knockback_again = knockback;
+    this_fp->damage_stack = knockback;
 
     if ((damage_level == 3) || (arg9 != 0))
     {
@@ -671,7 +671,7 @@ void ftCommon_Damage_GotoDamageStatus(GObj *fighter_gobj)
     {
         ftCommon_FuraSleep_SetStatus(fighter_gobj);
     }
-    else ftCommon_Damage_InitDamageVars(fighter_gobj, -1, fp->damage_taken_recent, fp->damage_knockback, fp->damage_angle, fp->lr_damage, fp->damage_index, fp->damage_element, fp->damage_player_number, 0, 0, TRUE);
+    else ftCommon_Damage_InitDamageVars(fighter_gobj, -1, fp->damage_queue, fp->damage_knockback, fp->damage_angle, fp->lr_damage, fp->damage_index, fp->damage_element, fp->damage_player_number, 0, 0, TRUE);
 }
 
 // 0x801415F8
@@ -708,7 +708,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             {
                 if (ftCommon_Damage_CheckCaptureKeepHold(grab_fp) != FALSE)
                 {
-                    grab_fp->damage_queue = this_fp->damage_queue;
+                    grab_fp->damage_lag = this_fp->damage_lag;
                     grab_fp->hitlag_mul = this_fp->hitlag_mul;
 
                     func_ovl3_80140E2C(fighter_gobj);
@@ -766,7 +766,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             {
                 if (func_ovl3_80140D30(grab_fp) != 0)
                 {
-                    this_fp->damage_queue = grab_fp->damage_queue;
+                    this_fp->damage_lag = grab_fp->damage_lag;
                     this_fp->hitlag_mul = grab_fp->hitlag_mul;
                     grab_fp->damage_kind = 3;
 
@@ -784,7 +784,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             }
             else
             {
-                grab_fp->hitlag_timer = gmCommon_DamageCalcHitLag(this_fp->damage_queue, grab_fp->status_info.status_id, grab_fp->hitlag_mul);
+                grab_fp->hitlag_timer = gmCommon_DamageCalcHitLag(this_fp->damage_lag, grab_fp->status_info.status_id, grab_fp->hitlag_mul);
 
                 this_fp->input.pl.button_tap = this_fp->input.pl.button_tap_prev = 0;
 
@@ -830,7 +830,7 @@ void ftCommon_Damage_UpdateMain(GObj *fighter_gobj)
             return;
         }
     }
-    if ((this_fp->damage_element != gmHitCollision_Element_Sleep) && ((this_fp->damage_knockback == 0.0F) || ((this_fp->hitlag_timer > 0) && (this_fp->x192_flag_b6) && (this_fp->damage_knockback < (this_fp->damage_knockback_again + 30.0F)))))
+    if ((this_fp->damage_element != gmHitCollision_Element_Sleep) && ((this_fp->damage_knockback == 0.0F) || ((this_fp->hitlag_timer > 0) && (this_fp->x192_flag_b6) && (this_fp->damage_knockback < (this_fp->damage_stack + 30.0F)))))
     {
         ftCommon_Damage_SetDamageColAnim(fighter_gobj);
     }
@@ -883,9 +883,10 @@ void ftCommon_WallDamage_SetStatus(GObj *fighter_gobj, Vec3f *angle, Vec3f *pos)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_WallDamage, 0.0F, 2.0F, (FTSTATUPDATE_DAMAGEPORT_PRESERVE | FTSTATUPDATE_UNK3_PRESERVE));
 
-    fp->damage_knockback_again = knockback;
+    fp->damage_stack = knockback;
 
     func_ovl2_800E806C(fp, 2, 0);
+
     ftCommon_ApplyIntangibleTimer(fp, FTCOMMON_WALLDAMAGE_INTANGIBLE_TIMER);
 
     fp->is_hitstun = FALSE;

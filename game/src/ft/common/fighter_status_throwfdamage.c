@@ -33,7 +33,7 @@ void ftDonkey_ThrowFDamage_SetStatus(GObj *fighter_gobj)
     {
         this_fp->damage_knockback = 0.0F;
     }
-    ftCommon_Damage_InitDamageVars(fighter_gobj, ftStatus_Donkey_ThrowFDamage, this_fp->damage_taken_recent, this_fp->damage_knockback, this_fp->damage_angle, this_fp->lr_damage, this_fp->damage_index, this_fp->damage_element, this_fp->damage_player_number, FALSE, FALSE, TRUE);
+    ftCommon_Damage_InitDamageVars(fighter_gobj, ftStatus_Donkey_ThrowFDamage, this_fp->damage_queue, this_fp->damage_knockback, this_fp->damage_angle, this_fp->lr_damage, this_fp->damage_index, this_fp->damage_element, this_fp->damage_player_number, FALSE, FALSE, TRUE);
 
     if (this_fp->catch_gobj != NULL)
     {

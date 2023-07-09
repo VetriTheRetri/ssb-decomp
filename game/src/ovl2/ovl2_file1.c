@@ -136,7 +136,7 @@ void func_ovl2_800D6738(s32 arg0)
     }
     if (var_a2 != 0)
     {
-        func_ovl0_800D45F4();
+        lbMemory_SaveData_WriteSRAM();
     }
 }
 
@@ -232,7 +232,7 @@ void func_ovl2_800D67DC(void)
     {
         while (gSceneData.scene_queue < 0xE)
         {
-            u32 ignore_mask = ~(gmSaveChrMask(Ft_Kind_Ness) | gmSaveChrMask(Ft_Kind_Purin) | gmSaveChrMask(Ft_Kind_Captain) | gmSaveChrMask(Ft_Kind_Luigi));
+            u32 ignore_mask = ~GMSAVEINFO_CHARACTER_MASK_UNLOCK;
 
             temp_s1 = (gSaveData.unk458 | (GMSAVEINFO_CHARACTER_MASK_ALL & ignore_mask)) & ~(1 << gSceneData.ft_kind);
 
@@ -457,7 +457,7 @@ block_45:
             return;
         }
     }
-    if (!(gSaveData.unlock_mask & 0x10))
+    if (!(gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_INISHIE))
     {
         if ((gSaveData.unk5DC & 0xFF) == 0xFF)
         {
@@ -469,7 +469,7 @@ block_45:
                 }
             }
 
-            if ((unk_spgame_record & 0x36F) == 0x36F)
+            if ((unk_spgame_record & GMSAVEINFO_CHARACTER_MASK_STARTER) == GMSAVEINFO_CHARACTER_MASK_STARTER)
             {
                 gSceneData.unk02 = 4;
 

@@ -253,7 +253,7 @@ void ftCommon_YoshiEgg_ProcTrap(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag0 == 0)
     {
-        fp->status_vars.common.captureyoshi.breakout_wait -= ((2.0F * fp->damage_taken_recent) / 0.5F);
+        fp->status_vars.common.captureyoshi.breakout_wait -= ((2.0F * fp->damage_queue) / 0.5F);
     }
     if ((fp->damage_object_class == ftHitlog_ObjectClass_Ground) && (fp->damage_object_kind == 0))
     {

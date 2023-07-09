@@ -1995,7 +1995,7 @@ glabel jtbl_ovl3_801894C4
 glabel jtbl_ovl3_801894D4
   /* 579D4 103F14 801894D4 */  .4byte jtgt_ovl3_8018518C
   /* 579D8 103F18 801894D8 */  .4byte itGround_Lucky_CreateItem
-  /* 579DC 103F1C 801894DC */  .4byte jtgt_ovl3_80183A74
+  /* 579DC 103F1C 801894DC */  .4byte itGround_Marumine_CreateItem
   /* 579E0 103F20 801894E0 */  .4byte itGround_Hitokage_CreateItem
   /* 579E4 103F24 801894E4 */  .4byte itGround_Fushigibana_CreateItem
   /* 579E8 103F28 801894E8 */  .4byte jtgt_ovl3_80183D00
@@ -3490,17 +3490,17 @@ glabel jtbl_ovl3_8018B3B4
   /* 598B8 105DF8 8018B3B8 */  .4byte jtgt_ovl3_80183650
   .incbin "ovl3.raw.bin", 0x598BC, 0x44
 
-glabel Article_Marumine_Data
+glabel itGround_Marumine_ItemDesc
   .incbin "ovl3.raw.bin", 0x59900, 0x4
 
 glabel D_ovl3_8018B404
   /* 59904 105E44 8018B404 */  .4byte D_ovl2_801313F4
   .incbin "ovl3.raw.bin", 0x59908, 0xC
-  /* 59914 105E54 8018B414 */  .4byte func_ovl3_80183914
+  /* 59914 105E54 8018B414 */  .4byte itMarumine_SDefault_ProcUpdate
   .incbin "ovl3.raw.bin", 0x59918, 0x1C
 
-glabel Article_Marumine_Status
-  /* 59934 105E74 8018B434 */  .4byte func_ovl3_801839A8
+glabel itGround_Marumine_StatusDesc
+  /* 59934 105E74 8018B434 */  .4byte itMarumine_NExplode_ProcUpdate
   .incbin "ovl3.raw.bin", 0x59938, 0x28
 
 glabel Article_Porygon_Data

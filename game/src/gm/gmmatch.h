@@ -26,6 +26,16 @@
     gmSaveChrMask(Ft_Kind_Ness)       \
 )                                     \
 
+#define GMSAVEINFO_CHARACTER_MASK_UNLOCK \
+(                                        \
+    gmSaveChrMask(Ft_Kind_Ness)    |     \
+    gmSaveChrMask(Ft_Kind_Purin)   |     \
+    gmSaveChrMask(Ft_Kind_Captain) |     \
+    gmSaveChrMask(Ft_Kind_Luigi)         \
+)                                        \
+
+#define GMSAVEINFO_CHARACTER_MASK_STARTER (GMSAVEINFO_CHARACTER_MASK_ALL & ~GMSAVEINFO_CHARACTER_MASK_UNLOCK)
+
 typedef enum gmSaveUnlock
 {
     gmSave_Unlock_Luigi,                // Luigi
@@ -42,10 +52,13 @@ typedef enum gmSaveUnlock
 #define GMSAVE_UNLOCK_MASK_NESS         (1 << gmSave_Unlock_Ness)
 #define GMSAVE_UNLOCK_MASK_CAPTAIN      (1 << gmSave_Unlock_Captain)
 #define GMSAVE_UNLOCK_MASK_PURIN        (1 << gmSave_Unlock_Purin)
+#define GMSAVE_UNLOCK_MASK_INISHIE      (1 << gmSave_Unlock_Inishie)
 #define GMSAVE_UNLOCK_MASK_SOUNDTEST    (1 << gmSave_Unlock_SoundTest)
 #define GMSAVE_UNLOCK_MASK_ITEMSWITCH   (1 << gmSave_Unlock_ItemSwitch)
 
-#define GMSAVE_UNLOCK_MASK_CHARACTERS   (GMSAVE_UNLOCK_MASK_PURIN | GMSAVE_UNLOCK_MASK_CAPTAIN | GMSAVE_UNLOCK_MASK_NESS | GMSAVE_UNLOCK_MASK_LUIGI)
+#define GMSAVE_UNLOCK_MASK_ALL          (GMSAVE_UNLOCK_MASK_ITEMSWITCH | GMSAVE_UNLOCK_MASK_SOUNDTEST | GMSAVE_UNLOCK_MASK_INISHIE | GMSAVE_UNLOCK_MASK_PURIN | GMSAVE_UNLOCK_MASK_CAPTAIN | GMSAVE_UNLOCK_MASK_NESS | GMSAVE_UNLOCK_MASK_LUIGI)
+#define GMSAVE_UNLOCK_MASK_NEWCOMERS   (GMSAVE_UNLOCK_MASK_PURIN | GMSAVE_UNLOCK_MASK_CAPTAIN | GMSAVE_UNLOCK_MASK_NESS | GMSAVE_UNLOCK_MASK_LUIGI)
+#define GMSAVE_UNLOCK_MASK_PRIZE      (GMSAVE_UNLOCK_MASK_ALL & ~GMSAVE_UNLOCK_MASK_NEWCOMERS)
 
 typedef enum gmMatch_PauseStatus
 {
@@ -268,7 +281,7 @@ struct SinglePlayerData
     u32 spgame_hiscore;
     u32 spgame_continues;
     u32 spgame_bonuses;
-    s8 spgame_best_difficulty;
+    u8 spgame_best_difficulty;
     u32 bonus1_time; // Break the Targets high score
     u8 bonus1_task_count; // Targets broken
     u32 bonus2_time; // Board the Platforms high scoree
@@ -279,14 +292,13 @@ struct SinglePlayerData
 };
 
 // is this the saved data structure?
-struct gmSaveInfo {
+typedef struct gmSaveInfo
+{
     /* 0x000 */ struct VsRecordData vsRecords[DARIANTOU_CHR_PLAYABLE_MAX];
     u8 unk450;
     u8 unk451;
-    u8 unk452;
-    u8 unk453;
-    u8 unk454;
-    u8 unk455;
+    s16 unk452;
+    s16 unk454;
     u8 unk456;
     u8 unlock_mask;
     u16 unk458;
@@ -296,18 +308,18 @@ struct gmSaveInfo {
     u16 unk5DC;
     u8 unk5DE;
     u8 unk5DF;
-    u8 unk5E0;
-    u8 unk5E1;
+    u16 unk5E0;
     u8 mprotect_fail; // Some kind of anti-piracy measure??? 0x1 results in random knockback velocity, 0x2 halves stick range, 0x4 forces Mario in 1P game
     u8 unk5E3;
     u8 unk5E4;
     u8 unk5E5;
     u8 unk5E6;
     u8 unk5E7;
-    u32 unk5E8;
-}; // size == 0x5EC
+    s32 mprotect_hash; // Checksum of save data
 
-struct gmSceneInfo
+} gmSaveInfo; // size == 0x5EC
+
+typedef struct gmSceneInfo
 {
     u8 scene_current;
     u8 scene_previous;
@@ -330,17 +342,29 @@ struct gmSceneInfo
     u32 spgame_score;
     u32 continues_used;
     u32 bonuses; // Number of bonuses player acquired throughout the game
-    u32 bonus_get_mask[5]; // Different bonuses the player has accumulated per match
-    u8 pad2C[0x43 - 0x40];
+    u32 bonus_get_mask[2]; // Different bonuses the player has accumulated per match
+    u8 pad34[0x38 - 0x34];
+    u8 unk38;
+    u8 unk39;
+    u8 unk3A;
+    u8 unk3B;
+    u8 unk3C;
+    u8 unk3D;
+    u8 unk3E;
+    u8 unk3F;
+    u8 unk40;
+    u8 unk41;
+    u8 unk42;
     u8 unk43;
     u8 unk44;
     u8 unk45;
     u8 unk46;
     u8 unk47;
-}; // size == 0x48
 
-extern gmMatchInfo *gpMatchData;
-extern struct gmSaveInfo gSaveData;
-extern struct gmSceneInfo gSceneData;
+} gmSceneInfo; // size == 0x48
+
+extern gmMatchInfo *gpBattleState, gDefaultBattleState, D_800A4D08;
+extern gmSaveInfo gSaveData, gDefaultSaveData;
+extern gmSceneInfo gSceneData, D_800A3F80;
 
 #endif

@@ -364,8 +364,8 @@ typedef struct itStruct                 // Common items, stage hazards, fighter 
     u16 reflect_stat_count;             // Status update count at the time the item is reflected?
 
     s32 damage_highest;                 // I don't know why there are at least two of these
-    f32 damage_knockback;               // Angle at which article will be launched when getting hit?
-    s32 damage_taken_recent;            // How does this work?
+    f32 damage_knockback;               // Item's calculated knockback
+    s32 damage_queue;                   // Used to calculate knockback?
     s32 damage_angle;                   // Angle of attack that hit the item
     s32 damage_element;                 // Element of attack that hit the item
     s32 lr_damage;                      // Direction of incoming attack
@@ -375,7 +375,7 @@ typedef struct itStruct                 // Common items, stage hazards, fighter 
     s32 damage_player_number;           // Player number of attacker
     u8 damage_handicap;                 // Handicap of attacker
     s32 damage_display_mode;            // Display mode of attacker which the item takes on
-    s32 damage_taken_last;              // Final damage intake?
+    s32 damage_lag;                     // Used to calculate hitlag?
 
     s32 lifetime;                       // Item's duration in frames
 

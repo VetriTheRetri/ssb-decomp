@@ -7047,7 +7047,7 @@ glabel func_ovl27_80137F10
   /* 14017C 80137F7C A04A0014 */        sb $t2, 0x14($v0) # gSceneData + 20
   .L80137F80:
   /* 140180 80137F80 8C8B0024 */        lw $t3, 0x24($a0) # D_ovl27_80138EE8 + 36
-  /* 140184 80137F84 0C03517D */       jal func_ovl0_800D45F4
+  /* 140184 80137F84 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 140188 80137F88 A04B0015 */        sb $t3, 0x15($v0) # gSceneData + 21
   /* 14018C 80137F8C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 140190 80137F90 27BD0018 */     addiu $sp, $sp, 0x18

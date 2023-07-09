@@ -546,8 +546,8 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     vel.y = 16.0F;
     vel.z = 0.0F;
 
-    // Is this checking to spawn Mew? Can only spawn after at least one character has been unlocked.
-    if ((gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_CHARACTERS) && (rand_u16_range(151) == 0) && (gMonsterData.monster_curr != It_Kind_Mew) && (gMonsterData.monster_prev != It_Kind_Mew))
+    // Is this checking to spawn Mew? Can only spawn once at least one character has been unlocked.
+    if ((gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_NEWCOMERS) && (rand_u16_range(151) == 0) && (gMonsterData.monster_curr != It_Kind_Mew) && (gMonsterData.monster_prev != It_Kind_Mew))
     {
         index = It_Kind_Mew;
     }
@@ -583,7 +583,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
         mp->player_number = ip->player_number;
         mp->display_mode = ip->display_mode;
 
-        if (gpMatchData->game_type == gmMatch_GameType_1PGame)
+        if (gpBattleState->game_type == gmMatch_GameType_1PGame)
         {
             if ((mp->player == gSceneData.player_port) && (mp->it_kind == It_Kind_Mew))
             {

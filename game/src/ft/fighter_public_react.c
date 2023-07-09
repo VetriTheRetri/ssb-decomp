@@ -268,7 +268,7 @@ void func_ovl3_80165134(s32 arg0)
         {
             ftStruct *fp = ftGetStruct(gobj);
 
-            if (!(gpMatchData->match_rules & GMMATCH_GAMERULE_STOCK) || (fp->stock_count != -1))
+            if (!(gpBattleState->match_rules & GMMATCH_GAMERULE_STOCK) || (fp->stock_count != -1))
             {
                 if (DObjGetStruct(gobj)->translate.y < (D_ovl2_80131308.unk_80131308_0x24 - 100.0F)) // 0x80131308 = stage data?
                 {

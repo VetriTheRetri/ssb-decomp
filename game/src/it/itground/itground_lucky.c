@@ -67,7 +67,7 @@ void itGLucky_SDefault_UpdateEggSpawn(GObj *lucky_gobj)
     {
         if (lucky_ip->item_vars.grlucky.egg_spawn_count != 0)
         {
-            if ((gpMatchData->item_toggles & 8) && (gpMatchData->item_switch != 0)) // Return to this when 0x8 is mapped
+            if ((gpBattleState->item_toggles & 8) && (gpBattleState->item_switch != 0)) // Return to this when 0x8 is mapped
             {
                 pos = joint->translate;
 

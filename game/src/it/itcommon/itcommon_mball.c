@@ -370,7 +370,7 @@ void itMBall_GOpen_InitItemVars(GObj *item_gobj)
 
     if ((ip->player != -1) && (ip->player != GMMATCH_PLAYERS_MAX))
     {
-        GObj *fighter_gobj = gpMatchData->player_block[ip->player].fighter_gobj;
+        GObj *fighter_gobj = gpBattleState->player_block[ip->player].fighter_gobj;
 
         if (fighter_gobj != NULL)
         {

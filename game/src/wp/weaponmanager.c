@@ -690,7 +690,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
     this_wp = wpGetStruct(this_gobj);
     this_hit = &this_wp->weapon_hit;
 
-    if ((this_hit->rebound) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_ITEM))
+    if ((this_hit->rebound) && (this_hit->update_state != gmHitCollision_UpdateState_Disable) && (this_hit->interact_mask & GMHITCOLLISION_MASK_WEAPON))
     {
         other_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
@@ -707,14 +707,14 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
             }
             else if ((is_check_self != FALSE) && (this_wp->owner_gobj != other_wp->owner_gobj))
             {
-                if ((gpMatchData->is_team_battle != TRUE) || (gpMatchData->is_team_attack != FALSE)) goto next_check;
+                if ((gpBattleState->is_team_battle != TRUE) || (gpBattleState->is_team_attack != FALSE)) goto next_check;
                 {
                     if (this_wp->team == other_wp->team) goto next_gobj; // YUCKY match but you can't say it's only a half
 
                 next_check:
                     if ((other_hit->update_state != gmHitCollision_UpdateState_Disable) && (other_hit->rebound))
                     {
-                        if (other_hit->interact_mask & GMHITCOLLISION_MASK_ITEM)
+                        if (other_hit->interact_mask & GMHITCOLLISION_MASK_WEAPON)
                         {
                             those_flags.interact_mask = GMHITCOLLISION_MASK_ALL;
 

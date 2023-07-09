@@ -214,7 +214,7 @@ glabel func_ovl31_80131B90
   .L80131DD8:
   /* 150F78 80131DD8 1657FF91 */       bne $s2, $s7, .L80131C20
   /* 150F7C 80131DDC 24420074 */     addiu $v0, $v0, 0x74
-  /* 150F80 80131DE0 0C03517D */       jal func_ovl0_800D45F4
+  /* 150F80 80131DE0 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 150F84 80131DE4 00000000 */       nop 
   /* 150F88 80131DE8 8FBF003C */        lw $ra, 0x3c($sp)
   /* 150F8C 80131DEC 8FB00018 */        lw $s0, 0x18($sp)

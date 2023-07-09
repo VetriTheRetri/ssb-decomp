@@ -384,7 +384,7 @@ glabel func_ovl25_8013204C
   /* 12F4D8 80132078 C428292C */      lwc1 $f8, %lo(D_ovl25_8013292C)($at)
   /* 12F4DC 8013207C 4600428D */ trunc.w.s $f10, $f8
   /* 12F4E0 80132080 44195000 */      mfc1 $t9, $f10
-  /* 12F4E4 80132084 0C03517D */       jal func_ovl0_800D45F4
+  /* 12F4E4 80132084 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 12F4E8 80132088 A4590454 */        sh $t9, 0x454($v0) # gSaveData + 1108
   /* 12F4EC 8013208C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 12F4F0 80132090 27BD0018 */     addiu $sp, $sp, 0x18

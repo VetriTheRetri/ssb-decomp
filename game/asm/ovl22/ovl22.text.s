@@ -495,7 +495,7 @@ glabel func_ovl22_801321A4
   /* 12A08C 8013221C A48F0458 */        sh $t7, 0x458($a0) # gSaveData + 1112
   /* 12A090 80132220 A0820456 */        sb $v0, 0x456($a0) # gSaveData + 1110
   .L80132224:
-  /* 12A094 80132224 0C03517D */       jal func_ovl0_800D45F4
+  /* 12A094 80132224 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 12A098 80132228 00000000 */       nop 
   /* 12A09C 8013222C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 12A0A0 80132230 27BD0028 */     addiu $sp, $sp, 0x28

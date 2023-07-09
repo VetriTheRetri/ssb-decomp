@@ -2669,7 +2669,7 @@ glabel title_screen_entry
   /* 119778 801340F8 28410100 */      slti $at, $v0, 0x100
   /* 11977C 801340FC 10200003 */      beqz $at, .L8013410C
   /* 119780 80134100 24590001 */     addiu $t9, $v0, 1
-  /* 119784 80134104 0C03517D */       jal func_ovl0_800D45F4
+  /* 119784 80134104 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 119788 80134108 A07905E3 */        sb $t9, 0x5e3($v1) # gSaveData + 1507
   .L8013410C:
   /* 11978C 8013410C 3C088037 */       lui $t0, %hi(func_ovl9_80369240)

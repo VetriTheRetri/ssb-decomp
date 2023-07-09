@@ -88,7 +88,7 @@ GObj* itGround_Bumper_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
 
         joint->mobj->anim_frame = 0;
 
-        if (gpMatchData->gr_kind == Gr_Kind_Castle)
+        if (gpBattleState->gr_kind == Gr_Kind_Castle)
         {
             ip->item_hit.knockback_weight = ITBUMPER_CASTLE_KNOCKBACK;
             ip->item_hit.angle = ITBUMPER_CASTLE_ANGLE;

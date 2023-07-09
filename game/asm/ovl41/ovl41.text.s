@@ -427,8 +427,8 @@ glabel func_ovl41_8018D61C
   /* 16C340 8018D6F0 0C0594F8 */       jal func_NF_801653E0 # couldn't be resolved
   /* 16C344 8018D6F4 00000000 */       nop 
   /* 16C348 8018D6F8 3C168011 */       lui $s6, %hi(D_ovl2_80116DD0)
-  /* 16C34C 8018D6FC 3C15800A */       lui $s5, %hi(gpMatchData)
-  /* 16C350 8018D700 26B550E8 */     addiu $s5, $s5, %lo(gpMatchData)
+  /* 16C34C 8018D6FC 3C15800A */       lui $s5, %hi(gpBattleState)
+  /* 16C350 8018D700 26B550E8 */     addiu $s5, $s5, %lo(gpBattleState)
   /* 16C354 8018D704 26D66DD0 */     addiu $s6, $s6, %lo(D_ovl2_80116DD0)
   /* 16C358 8018D708 00008825 */        or $s1, $zero, $zero
   /* 16C35C 8018D70C 00009025 */        or $s2, $zero, $zero
@@ -453,7 +453,7 @@ glabel func_ovl41_8018D61C
   /* 16C3A0 8018D750 00116880 */       sll $t5, $s1, 2
   /* 16C3A4 8018D754 01B16821 */      addu $t5, $t5, $s1
   /* 16C3A8 8018D758 AD390000 */        sw $t9, ($t1)
-  /* 16C3AC 8018D75C 8EAB0000 */        lw $t3, ($s5) # gpMatchData + 0
+  /* 16C3AC 8018D75C 8EAB0000 */        lw $t3, ($s5) # gpBattleState + 0
   /* 16C3B0 8018D760 3C0E8004 */       lui $t6, %hi(gContInput)
   /* 16C3B4 8018D764 25CE5228 */     addiu $t6, $t6, %lo(gContInput)
   /* 16C3B8 8018D768 01728021 */      addu $s0, $t3, $s2
@@ -464,7 +464,7 @@ glabel func_ovl41_8018D61C
   /* 16C3CC 8018D77C 26310001 */     addiu $s1, $s1, 1
   /* 16C3D0 8018D780 0C035E1B */       jal func_ovl2_800D786C
   /* 16C3D4 8018D784 92040023 */       lbu $a0, 0x23($s0) # D_ovl41_8018E1F0 + 35
-  /* 16C3D8 8018D788 8EA20000 */        lw $v0, ($s5) # gpMatchData + 0
+  /* 16C3D8 8018D788 8EA20000 */        lw $v0, ($s5) # gpBattleState + 0
   /* 16C3DC 8018D78C C7A40090 */      lwc1 $f4, 0x90($sp)
   /* 16C3E0 8018D790 C7A60094 */      lwc1 $f6, 0x94($sp)
   /* 16C3E4 8018D794 00528021 */      addu $s0, $v0, $s2
@@ -944,32 +944,32 @@ glabel func_ovl41_8018DE7C
 
 glabel func_ovl41_8018DE88
   /* 16CAD8 8018DE88 3C038019 */       lui $v1, %hi(D_ovl41_8018E448)
-  /* 16CADC 8018DE8C 3C0E800A */       lui $t6, %hi(gDefaultBattleSettings)
+  /* 16CADC 8018DE8C 3C0E800A */       lui $t6, %hi(gDefaultBattleState)
   /* 16CAE0 8018DE90 2463E448 */     addiu $v1, $v1, %lo(D_ovl41_8018E448)
   /* 16CAE4 8018DE94 27BDFFE0 */     addiu $sp, $sp, -0x20
-  /* 16CAE8 8018DE98 3C02800A */       lui $v0, %hi(gpMatchData)
-  /* 16CAEC 8018DE9C 25CE3FC8 */     addiu $t6, $t6, %lo(gDefaultBattleSettings)
-  /* 16CAF0 8018DEA0 244250E8 */     addiu $v0, $v0, %lo(gpMatchData)
+  /* 16CAE8 8018DE98 3C02800A */       lui $v0, %hi(gpBattleState)
+  /* 16CAEC 8018DE9C 25CE3FC8 */     addiu $t6, $t6, %lo(gDefaultBattleState)
+  /* 16CAF0 8018DEA0 244250E8 */     addiu $v0, $v0, %lo(gpBattleState)
   /* 16CAF4 8018DEA4 AFBF001C */        sw $ra, 0x1c($sp)
   /* 16CAF8 8018DEA8 24040004 */     addiu $a0, $zero, 4
   /* 16CAFC 8018DEAC 25C801EC */     addiu $t0, $t6, 0x1ec
   /* 16CB00 8018DEB0 0060C825 */        or $t9, $v1, $zero
   .L8018DEB4:
-  /* 16CB04 8018DEB4 8DD80000 */        lw $t8, ($t6) # gDefaultBattleSettings + 0
+  /* 16CB04 8018DEB4 8DD80000 */        lw $t8, ($t6) # gDefaultBattleState + 0
   /* 16CB08 8018DEB8 25CE000C */     addiu $t6, $t6, 0xc
   /* 16CB0C 8018DEBC 2739000C */     addiu $t9, $t9, 0xc
   /* 16CB10 8018DEC0 AF38FFF4 */        sw $t8, -0xc($t9)
-  /* 16CB14 8018DEC4 8DCFFFF8 */        lw $t7, -8($t6) # gDefaultBattleSettings + -8
+  /* 16CB14 8018DEC4 8DCFFFF8 */        lw $t7, -8($t6) # gDefaultBattleState + -8
   /* 16CB18 8018DEC8 AF2FFFF8 */        sw $t7, -8($t9)
-  /* 16CB1C 8018DECC 8DD8FFFC */        lw $t8, -4($t6) # gDefaultBattleSettings + -4
+  /* 16CB1C 8018DECC 8DD8FFFC */        lw $t8, -4($t6) # gDefaultBattleState + -4
   /* 16CB20 8018DED0 15C8FFF8 */       bne $t6, $t0, .L8018DEB4
   /* 16CB24 8018DED4 AF38FFFC */        sw $t8, -4($t9)
-  /* 16CB28 8018DED8 8DD80000 */        lw $t8, ($t6) # gDefaultBattleSettings + 0
+  /* 16CB28 8018DED8 8DD80000 */        lw $t8, ($t6) # gDefaultBattleState + 0
   /* 16CB2C 8018DEDC 240A0005 */     addiu $t2, $zero, 5
   /* 16CB30 8018DEE0 240C0001 */     addiu $t4, $zero, 1
   /* 16CB34 8018DEE4 AF380000 */        sw $t8, ($t9)
   /* 16CB38 8018DEE8 24080006 */     addiu $t0, $zero, 6
-  /* 16CB3C 8018DEEC AC430000 */        sw $v1, ($v0) # gpMatchData + 0
+  /* 16CB3C 8018DEEC AC430000 */        sw $v1, ($v0) # gpBattleState + 0
   /* 16CB40 8018DEF0 A0640000 */        sb $a0, ($v1) # D_ovl41_8018E448 + 0
   /* 16CB44 8018DEF4 A06A0001 */        sb $t2, 1($v1) # D_ovl41_8018E448 + 1
   /* 16CB48 8018DEF8 A06C0004 */        sb $t4, 4($v1) # D_ovl41_8018E448 + 4

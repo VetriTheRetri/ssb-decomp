@@ -78,26 +78,26 @@ void ftCommon_ClearPlayerMatchStats(s32 player_id, GObj *fighter_gobj)
 {
     s32 i;
 
-    gpMatchData->player_block[player_id].stock_count = 0;
-    gpMatchData->player_block[player_id].falls = gpMatchData->player_block[player_id].score = 0;
+    gpBattleState->player_block[player_id].stock_count = 0;
+    gpBattleState->player_block[player_id].falls = gpBattleState->player_block[player_id].score = 0;
 
     for (i = 0; i < GMMATCH_PLAYERS_MAX; i++)
     {
-        gpMatchData->player_block[player_id].total_ko_player[i] = 0;
-        gpMatchData->player_block[player_id].total_damage_player[i] = 0;
+        gpBattleState->player_block[player_id].total_ko_player[i] = 0;
+        gpBattleState->player_block[player_id].total_damage_player[i] = 0;
     }
-    gpMatchData->player_block[player_id].unk_pblock_0x28 = gpMatchData->player_block[player_id].unk_pblock_0x2C = gpMatchData->player_block[player_id].total_self_destruct = 0;
-    gpMatchData->player_block[player_id].total_damage_dealt = gpMatchData->player_block[player_id].total_damage_all = 0;
-    gpMatchData->player_block[player_id].combo_damage_foe = gpMatchData->player_block[player_id].combo_count_foe = 0;
+    gpBattleState->player_block[player_id].unk_pblock_0x28 = gpBattleState->player_block[player_id].unk_pblock_0x2C = gpBattleState->player_block[player_id].total_self_destruct = 0;
+    gpBattleState->player_block[player_id].total_damage_dealt = gpBattleState->player_block[player_id].total_damage_all = 0;
+    gpBattleState->player_block[player_id].combo_damage_foe = gpBattleState->player_block[player_id].combo_count_foe = 0;
 
-    gpMatchData->player_block[player_id].fighter_gobj = fighter_gobj;
+    gpBattleState->player_block[player_id].fighter_gobj = fighter_gobj;
 
-    gpMatchData->player_block[player_id].stale_index = 0;
+    gpBattleState->player_block[player_id].stale_index = 0;
 
-    for (i = 0; i < ARRAY_COUNT(gpMatchData->player_block[i].stale_flags); i++)
+    for (i = 0; i < ARRAY_COUNT(gpBattleState->player_block[i].stale_flags); i++)
     {
-        gpMatchData->player_block[player_id].stale_flags[i][0] = 0;
-        gpMatchData->player_block[player_id].stale_flags[i][1] = 0;
+        gpBattleState->player_block[player_id].stale_flags[i][0] = 0;
+        gpBattleState->player_block[player_id].stale_flags[i][1] = 0;
     }
 }
 
@@ -1462,13 +1462,13 @@ f32 gmCommonObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s3
 
     if (knockback_weight != 0)
     {
-        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpMatchData->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpBattleState->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     } 
     else 
     {
         f32 damage_add = percent_damage + recent_damage;
 
-        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpMatchData->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpBattleState->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     }
     if (knockback >= 2500.0F)
     {
@@ -1529,17 +1529,17 @@ s32 gmCommon_DamageCalcHitLag(s32 damage, s32 status_id, f32 hitlag_mul)
 void ftDamageUpdateCheckDropItem(ftStruct *fp, s32 damage)
 {
     fp->percent_damage += damage;
-    gpMatchData->player_block[fp->player].total_damage_all += damage;
+    gpBattleState->player_block[fp->player].total_damage_all += damage;
 
     if (fp->percent_damage > 999)
     {
         fp->percent_damage = 999;
     }
-    gpMatchData->player_block[fp->player].stock_damage_all = fp->percent_damage;
+    gpBattleState->player_block[fp->player].stock_damage_all = fp->percent_damage;
 
     if (fp->item_hold != NULL)
     {
-        if ((fp->damage_knockback != 0.0F) && ((fp->hitlag_timer == 0) || !(fp->x192_flag_b6) || !(fp->damage_knockback < (fp->damage_knockback_again + 30.0F))))
+        if ((fp->damage_knockback != 0.0F) && ((fp->hitlag_timer == 0) || !(fp->x192_flag_b6) || !(fp->damage_knockback < (fp->damage_stack + 30.0F))))
         {
             itStruct *ip = itGetStruct(fp->item_hold);
 
@@ -1585,17 +1585,17 @@ f32 gmCommon_DamageGetStaleMul(s32 player, s32 attack_id, u16 flags)
     s32 stale_id;
     s32 flag_id;
 
-    stale_index = gpMatchData->player_block[player].stale_index;
+    stale_index = gpBattleState->player_block[player].stale_index;
 
     if (attack_id != 0)
     {
-        flag_id = backup_stale_id = (stale_index != 0) ? stale_index - 1 : ARRAY_COUNT(gpMatchData->player_block);
+        flag_id = backup_stale_id = (stale_index != 0) ? stale_index - 1 : ARRAY_COUNT(gpBattleState->player_block);
 
         for (stale_id = 0; stale_id < ARRAY_COUNT(Damage_Stale_MulTable); stale_id++)
         {
-            if (attack_id == gpMatchData->player_block[player].stale_flags[flag_id][0])
+            if (attack_id == gpBattleState->player_block[player].stale_flags[flag_id][0])
             {
-                if (flags != gpMatchData->player_block[player].stale_flags[flag_id][1])
+                if (flags != gpBattleState->player_block[player].stale_flags[flag_id][1])
                 {
                     return Damage_Stale_MulTable[stale_id];
                 }
@@ -1647,23 +1647,23 @@ void ftAttackAddStaleQueue(s32 attack_player, s32 defend_player, s32 attack_id, 
 {
     if ((attack_player != GMMATCH_PLAYERS_MAX) && (attack_player != defend_player))
     {
-        s32 i, stale_index = gpMatchData->player_block[attack_player].stale_index;
+        s32 i, stale_index = gpBattleState->player_block[attack_player].stale_index;
 
-        for (i = 0; i < ARRAY_COUNT(gpMatchData->player_block[attack_player].stale_flags); i++)
+        for (i = 0; i < ARRAY_COUNT(gpBattleState->player_block[attack_player].stale_flags); i++)
         {
-            if ((attack_id == gpMatchData->player_block[attack_player].stale_flags[i][0]) && (motion_count == gpMatchData->player_block[attack_player].stale_flags[i][1]))
+            if ((attack_id == gpBattleState->player_block[attack_player].stale_flags[i][0]) && (motion_count == gpBattleState->player_block[attack_player].stale_flags[i][1]))
             {
                 return;
             }
         }
-        gpMatchData->player_block[attack_player].stale_flags[stale_index][0] = attack_id;
-        gpMatchData->player_block[attack_player].stale_flags[stale_index][1] = motion_count;
+        gpBattleState->player_block[attack_player].stale_flags[stale_index][0] = attack_id;
+        gpBattleState->player_block[attack_player].stale_flags[stale_index][1] = motion_count;
 
-        if (stale_index == (ARRAY_COUNT(gpMatchData->player_block[attack_player].stale_flags) - 1))
+        if (stale_index == (ARRAY_COUNT(gpBattleState->player_block[attack_player].stale_flags) - 1))
         {
-            gpMatchData->player_block[attack_player].stale_index = 0;
+            gpBattleState->player_block[attack_player].stale_index = 0;
         }
-        else gpMatchData->player_block[attack_player].stale_index = stale_index + 1;
+        else gpBattleState->player_block[attack_player].stale_index = stale_index + 1;
     }
 }
 
@@ -1698,7 +1698,7 @@ void ftCommon_Update1PGameAttackStats(ftStruct *fp, u16 flags)
 {
     gmStatFlags stat_flags = *(gmStatFlags*)&flags;
 
-    if ((fp->status_info.pl_kind != Pl_Kind_Result) && (gpMatchData->game_type == gmMatch_GameType_1PGame) && (fp->player == gSceneData.player_port))
+    if ((fp->status_info.pl_kind != Pl_Kind_Result) && (gpBattleState->game_type == gmMatch_GameType_1PGame) && (fp->player == gSceneData.player_port))
     {
         if ((fp->stat_flags.attack_group_id != 0) && (fp->stat_flags.attack_group_id != stat_flags.attack_group_id))
         {
@@ -1755,11 +1755,11 @@ void ftAttackUpdateMatchStats(s32 attack_player, s32 defend_player, s32 attack_d
 {
     if ((attack_player != GMMATCH_PLAYERS_MAX) && (attack_player != defend_player))
     {
-        gpMatchData->player_block[attack_player].total_damage_dealt += attack_damage;
+        gpBattleState->player_block[attack_player].total_damage_dealt += attack_damage;
 
-        gpMatchData->player_block[defend_player].total_damage_player[attack_player] += attack_damage;
-        gpMatchData->player_block[defend_player].combo_damage_foe += attack_damage;
-        gpMatchData->player_block[defend_player].combo_count_foe++;
+        gpBattleState->player_block[defend_player].total_damage_player[attack_player] += attack_damage;
+        gpBattleState->player_block[defend_player].combo_damage_foe += attack_damage;
+        gpBattleState->player_block[defend_player].combo_count_foe++;
     }
 }
 
@@ -1781,7 +1781,7 @@ void ftCommon_Update1PGameDamageStats(ftStruct *fp, s32 damage_player, s32 damag
         fp->damage_stat_flags = *(gmStatFlags*)&flags;
         fp->damage_stat_count = damage_stat_count;
 
-        if (gpMatchData->game_type == gmMatch_GameType_1PGame)
+        if (gpBattleState->game_type == gmMatch_GameType_1PGame)
         {
             if ((gSceneData.player_port == damage_player) && (fp->damage_stat_flags.attack_group_id != 0))
             {

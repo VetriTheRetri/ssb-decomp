@@ -141,9 +141,9 @@ struct EffectInfo {
 }; // size >= 0x18
 
 // data
-extern struct gmSaveInfo D_800A3994;
+extern struct gmSaveInfo gDefaultSaveData;
 extern struct gmSceneInfo D_800A3F80;
-extern struct BattleState gDefaultBattleSettings;
+extern struct BattleState gDefaultBattleState;
 
 // bss
 extern struct gmSaveInfo gSaveData;
@@ -151,7 +151,7 @@ extern struct gmSceneInfo gSceneData;
 extern struct BattleState D_800A4B18;
 extern struct BattleState D_800A4D08;
 extern struct BattleState D_800A4EF8;
-// extern struct gmSceneInfo *gpMatchData; //
+// extern struct gmSceneInfo *gpBattleState; //
 extern u32 D_800A50EC;
 extern u8 D_800A50F0[8];
 extern u8 D_800A50F8[324];

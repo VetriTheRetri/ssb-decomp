@@ -1906,7 +1906,7 @@ glabel func_ovl33_8013366C
   /* 15F6C8 80133678 0C04C6D6 */       jal func_ovl33_80131B58
   /* 15F6CC 8013367C 8C8465F8 */        lw $a0, %lo(D_ovl33_801365F8)($a0)
   /* 15F6D0 80133680 3C01800A */       lui $at, %hi((gSaveData + 0x456))
-  /* 15F6D4 80133684 0C03517D */       jal func_ovl0_800D45F4
+  /* 15F6D4 80133684 0C03517D */       jal lbMemory_SaveData_WriteSRAM
   /* 15F6D8 80133688 A0224936 */        sb $v0, %lo((gSaveData + 0x456))($at)
   /* 15F6DC 8013368C 8FBF0014 */        lw $ra, 0x14($sp)
   /* 15F6E0 80133690 27BD0018 */     addiu $sp, $sp, 0x18
