@@ -121,7 +121,7 @@ typedef enum gmSaveProtectPenalty
 typedef enum gmMatchGameType
 {
     gmMatch_GameType_Demo,
-    gmMatch_GameType_Versus,
+    gmMatch_GameType_VSMode,
     gmMatch_GameType_Bonus,
     gmMatch_GameType_HowToPlay,
     gmMatch_GameType_1PGame = 5

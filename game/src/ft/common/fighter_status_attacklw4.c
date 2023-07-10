@@ -19,7 +19,7 @@ bool32 ftCommon_AttackLw4_CheckInputSuccess(ftStruct *fp)
 }
 
 // 0x801507D0
-bool32 ftCommon_AttackLw4_CheckInterruptCommon(ftStruct *fp)
+bool32 ftCommon_AttackLw4_CheckInterruptMain(ftStruct *fp)
 {
     ftCommonAttributes *attributes = fp->attributes;
 
@@ -45,7 +45,7 @@ bool32 ftCommon_AttackLw4_CheckInterruptSquat(GObj *fighter_gobj)
 
     if ((ftCommon_AttackLw4_CheckInputSuccess(fp) != FALSE) && (fp->status_vars.common.attack4.is_goto_attacklw4 != FALSE))
     {
-        return ftCommon_AttackLw4_CheckInterruptCommon(fp);
+        return ftCommon_AttackLw4_CheckInterruptMain(fp);
     }
     else return FALSE;
 }
@@ -57,7 +57,7 @@ bool32 ftCommon_AttackLw4_CheckInterruptCommon(GObj *fighter_gobj)
 
     if ((ftCommon_AttackLw4_CheckInputSuccess(fp) != FALSE) && (fp->tap_stick_y < FTCOMMON_ATTACKLW4_BUFFER_FRAMES_MAX))
     {
-        return ftCommon_AttackLw4_CheckInterruptCommon(fp);
+        return ftCommon_AttackLw4_CheckInterruptMain(fp);
     }
     else return FALSE;
 }

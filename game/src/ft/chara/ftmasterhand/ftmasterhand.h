@@ -1,9 +1,6 @@
 #ifndef _FTMASTERHAND_H_
 #define _FTMASTERHAND_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
 #include <game/src/ft/fighter.h>
 #include <game/src/wp/weapon.h>
 #include <game/src/gm/gmmatch.h>

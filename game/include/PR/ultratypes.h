@@ -15,24 +15,24 @@
  **************************************************************************/
 
 
-/*************************************************************************
- *
- *  File: ultratypes.h
- *
- *  This file contains various types used in Ultra64 interfaces.
- *
- *  $Revision: 1.6 $
- *  $Date: 1997/12/17 04:02:06 $
- *  $Source: /disk6/Master/cvsmdev2/PR/include/ultratypes.h,v $
- *
- **************************************************************************/
+ /*************************************************************************
+  *
+  *  File: ultratypes.h
+  *
+  *  This file contains various types used in Ultra64 interfaces.
+  *
+  *  $Revision: 1.6 $
+  *  $Date: 1997/12/17 04:02:06 $
+  *  $Source: /disk6/Master/cvsmdev2/PR/include/ultratypes.h,v $
+  *
+  **************************************************************************/
 
 
 
-/**********************************************************************
- * General data types for R4300
- */
-// #if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
+  /**********************************************************************
+   * General data types for R4300
+   */
+#if defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS)
 
 typedef unsigned char			u8;	/* unsigned  8-bit */
 typedef unsigned short			u16;	/* unsigned 16-bit */
@@ -87,4 +87,3 @@ typedef unsigned long   size_t;
 #endif
 
 #endif  /* _ULTRATYPES_H_ */
-

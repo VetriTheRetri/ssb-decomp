@@ -1,10 +1,7 @@
 #ifndef _FTCAPTAIN_H_
 #define _FTCAPTAIN_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
-#include <game/src/ft/fighter.h>
+#include <fighter.h>
 
 #define FTCAPTAIN_FALCONPUNCH_VEL_BASE 65.0F
 #define FTCAPTAIN_FALCONPUNCH_VEL_MUL 0.92

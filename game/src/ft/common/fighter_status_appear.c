@@ -1,3 +1,4 @@
+#include "fighter.h"
 #include "ftcaptain.h"
 #include "ftness.h"
 

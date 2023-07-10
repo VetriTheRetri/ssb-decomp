@@ -530,7 +530,7 @@ bool32 func_ovl3_801864BC(GObj *item_gobj) // Unused
 }
 
 // 0x801864E8
-void itLinkBomb_NExplode_InitItemVars(GObj *item_gobj)
+void itLinkBomb_NExplode_InitHitbox(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
@@ -561,7 +561,7 @@ bool32 itLinkBomb_NExplode_ProcUpdate(GObj *item_gobj)
 // 0x8018656C
 void itLinkBomb_NExplode_SetStatus(GObj *item_gobj)
 {
-    itLinkBomb_NExplode_InitItemVars(item_gobj);
+    itLinkBomb_NExplode_InitHitbox(item_gobj);
     itMain_SetItemStatus(item_gobj, itLink_Bomb_StatusDesc, itStatus_LinkBomb_NExplode);
 }
 

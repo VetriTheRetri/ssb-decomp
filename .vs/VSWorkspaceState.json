@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
+    "\\game\\include",
     "\\game\\src",
-    "\\game\\src\\gm",
-    "\\game\\src\\gr",
-    "\\game\\src\\it",
-    "\\game\\src\\it\\itground",
-    "\\game\\src\\ovl0",
-    "\\game\\src\\ovl2",
-    "\\game\\src\\sys"
+    "\\game\\src\\ft",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftcaptain",
+    "\\game\\src\\ft\\chara\\ftmasterhand",
+    "\\game\\src\\ft\\common",
+    "\\game\\src\\it"
   ],
-  "SelectedNode": "\\game\\src\\gr\\ground.h",
+  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_appear.c",
   "PreviewInSolutionExplorer": false
 }

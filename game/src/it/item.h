@@ -1,16 +1,16 @@
 #ifndef _ITEM_H_
 #define _ITEM_H_
 
-#include <ssb_types.h>
-#include <macros.h>
-#include <PR/ultratypes.h>
+#include <game/include/ssb_types.h>
+#include <game/include/macros.h>
+#include <game/include/PR/ultratypes.h>
 #include <game/src/sys/obj.h>
 #include <game/src/mp/mpcoll.h>
 #include <game/src/it/itemvars.h>
 #include <game/src/gm/gmmisc.h>
 #include <game/src/gm/gmsound.h>
 #include <game/src/ef/effect.h>
-#include "gmmatch.h"
+#include <game/src/gm/gmmatch.h>
 
 #define ITEM_ALLOC_MAX 16
 

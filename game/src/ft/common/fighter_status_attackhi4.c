@@ -19,7 +19,7 @@ bool32 ftCommon_AttackHi4_CheckInputSuccess(ftStruct *fp)
 }
 
 // 0x80150660
-bool32 ftCommon_AttackHi4_CheckInterruptCommon(ftStruct *fp)
+bool32 ftCommon_AttackHi4_CheckInterruptMain(ftStruct *fp)
 {
     ftCommonAttributes *attributes = fp->attributes;
 
@@ -45,7 +45,7 @@ bool32 ftCommon_AttackHi4_CheckInterruptKneeBend(GObj *fighter_gobj)
 
     if (ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE)
     {
-        return ftCommon_AttackHi4_CheckInterruptCommon(fp);
+        return ftCommon_AttackHi4_CheckInterruptMain(fp);
     }
     else return FALSE;
 }
@@ -57,7 +57,7 @@ bool32 ftCommon_AttackHi4_CheckInterruptCommon(GObj *fighter_gobj)
 
     if ((ftCommon_AttackHi4_CheckInputSuccess(fp) != FALSE) && (fp->tap_stick_y < FTCOMMON_ATTACKHI4_BUFFER_FRAMES_MAX))
     {
-        return ftCommon_AttackHi4_CheckInterruptCommon(fp);
+        return ftCommon_AttackHi4_CheckInterruptMain(fp);
     }
     else return FALSE;
 }

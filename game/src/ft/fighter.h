@@ -4,7 +4,7 @@
 #include <game/include/ssb_types.h>
 #include <game/include/macros.h>
 #include <game/src/sys/obj_renderer.h> // Probably shouldn't be included
-#include <game/include/ultratypes.h>
+#include <game/include/PR/ultratypes.h>
 #include <game/src/sys/hal_input.h>
 #include <game/src/sys/obj.h>
 #include <game/src/mp/mpcoll.h>
