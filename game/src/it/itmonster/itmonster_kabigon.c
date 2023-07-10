@@ -18,7 +18,7 @@ bool32 func_ovl3_8017E070(GObj *item_gobj)
 
     if (ap->item_vars.kabigon.rumble_wait == 0)
     {
-        func_ovl2_801008F4(0);
+        efMain_CreateEarthquake(0);
 
         ap->item_vars.kabigon.rumble_wait = ITKABIGON_RUMBLE_WAIT;
     }

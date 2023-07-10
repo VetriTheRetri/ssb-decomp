@@ -57,7 +57,7 @@ bool32 func_ovl3_8017D820(GObj *item_gobj)
         }
         if ((ap->item_vars.iwark.rumble_wait == 0) && (ap->item_vars.iwark.is_rumble != FALSE))
         {
-            func_ovl2_801008F4(0);
+            efMain_CreateEarthquake(0);
 
             ap->item_vars.iwark.rumble_wait = ITIWARK_ROCK_RUMBLE_WAIT;
         }

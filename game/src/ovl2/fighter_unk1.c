@@ -1462,13 +1462,13 @@ f32 gmCommonObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s3
 
     if (knockback_weight != 0)
     {
-        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpBattleState->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( 1 + ( 10.0F * knockback_weight * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpBattleState->damage_ratio * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     } 
     else 
     {
         f32 damage_add = percent_damage + recent_damage;
 
-        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpBattleState->unk_0xB * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
+        knockback = ( ( ( ( ( ( ( damage_add * 0.1F ) + ( damage_add * hit_damage * 0.05F ) ) * weight * 1.4F ) + 18.0F ) * ( knockback_scale * 0.01F ) ) + knockback_base ) * ( gpBattleState->damage_ratio * 0.01F ) * ftDamage_HandicapDesc[attack_handicap - 1][0] ) * ftDamage_HandicapDesc[defend_handicap - 1][1];
     }
     if (knockback >= 2500.0F)
     {
@@ -1572,39 +1572,39 @@ s32 ftCommon_DamageAdjustCapture(ftStruct *fp, s32 damage)
 }
 
 // 0x8012B820
-extern f32 Damage_Stale_MulTable[4] = 
+f32 gmCommon_DamageStaleTable[4] = 
 {
     0.75F, 0.82F, 0.89F, 0.96F
 };
 
 // 0x800EA470
-f32 gmCommon_DamageGetStaleMul(s32 player, s32 attack_id, u16 flags)
+f32 gmCommon_DamageGetStaleMul(s32 player, s32 attack_id, u16 motion_count)
 {
     s32 stale_index;
-    s32 backup_stale_id;
-    s32 stale_id;
-    s32 flag_id;
+    s32 start_array_id;
+    s32 current_array_id;
+    s32 i;
 
     stale_index = gpBattleState->player_block[player].stale_index;
 
     if (attack_id != 0)
     {
-        flag_id = backup_stale_id = (stale_index != 0) ? stale_index - 1 : ARRAY_COUNT(gpBattleState->player_block);
+        current_array_id = start_array_id = (stale_index != 0) ? stale_index - 1 : ARRAY_COUNT(gpBattleState->player_block[player].stale_info) - 1;
 
-        for (stale_id = 0; stale_id < ARRAY_COUNT(Damage_Stale_MulTable); stale_id++)
+        for (i = 0; i < ARRAY_COUNT(gmCommon_DamageStaleTable); i++)
         {
-            if (attack_id == gpBattleState->player_block[player].stale_flags[flag_id][0])
+            if (attack_id == gpBattleState->player_block[player].stale_info[current_array_id].attack_id)
             {
-                if (flags != gpBattleState->player_block[player].stale_flags[flag_id][1])
+                if (motion_count != gpBattleState->player_block[player].stale_info[current_array_id].motion_count)
                 {
-                    return Damage_Stale_MulTable[stale_id];
+                    return gmCommon_DamageStaleTable[i];
                 }
-                else if (flag_id == backup_stale_id)
+                else if (current_array_id == start_array_id)
                 {
-                    stale_id--;
+                    i--;
                 }
             }
-            flag_id = (flag_id != 0) ? flag_id-- : ARRAY_COUNT(Damage_Stale_MulTable);
+            current_array_id = (current_array_id != 0) ? current_array_id-- : ARRAY_COUNT(gpBattleState->player_block[player].stale_info) - 1;
         }
     }
     return 1.0F;
@@ -1651,15 +1651,15 @@ void ftAttackAddStaleQueue(s32 attack_player, s32 defend_player, s32 attack_id, 
 
         for (i = 0; i < ARRAY_COUNT(gpBattleState->player_block[attack_player].stale_flags); i++)
         {
-            if ((attack_id == gpBattleState->player_block[attack_player].stale_flags[i][0]) && (motion_count == gpBattleState->player_block[attack_player].stale_flags[i][1]))
+            if ((attack_id == gpBattleState->player_block[attack_player].stale_info[i].attack_id) && (motion_count == gpBattleState->player_block[attack_player].stale_info[i].motion_count))
             {
                 return;
             }
         }
-        gpBattleState->player_block[attack_player].stale_flags[stale_index][0] = attack_id;
-        gpBattleState->player_block[attack_player].stale_flags[stale_index][1] = motion_count;
+        gpBattleState->player_block[attack_player].stale_info[stale_index].attack_id    = attack_id;
+        gpBattleState->player_block[attack_player].stale_info[stale_index].motion_count = motion_count;
 
-        if (stale_index == (ARRAY_COUNT(gpBattleState->player_block[attack_player].stale_flags) - 1))
+        if (stale_index == (ARRAY_COUNT(gpBattleState->player_block[attack_player].stale_info) - 1))
         {
             gpBattleState->player_block[attack_player].stale_index = 0;
         }
@@ -2075,21 +2075,21 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
     case 0x20:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            p_effect = func_ovl2_801008F4(0);
+            p_effect = efMain_CreateEarthquake(0);
         }
         break;
 
     case 0x21:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            p_effect = func_ovl2_801008F4(1);
+            p_effect = efMain_CreateEarthquake(1);
         }
         break;
 
     case 0x22:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            p_effect = func_ovl2_801008F4(2);
+            p_effect = efMain_CreateEarthquake(2);
         }
         break;
 

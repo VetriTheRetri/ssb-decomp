@@ -22627,10 +22627,10 @@ glabel gmCommon_DamageGetStaleMul
   /* 065CEC 800EA4EC 946A0082 */       lhu $t2, 0x82($v1)
   /* 065CF0 800EA4F0 120A0005 */       beq $s0, $t2, .L800EA508
   /* 065CF4 800EA4F4 00075880 */       sll $t3, $a3, 2
-  /* 065CF8 800EA4F8 3C018013 */       lui $at, %hi(Damage_Stale_MulTable)
+  /* 065CF8 800EA4F8 3C018013 */       lui $at, %hi(gmCommon_DamageStaleTable)
   /* 065CFC 800EA4FC 002B0821 */      addu $at, $at, $t3
   /* 065D00 800EA500 1000000F */         b .L800EA540
-  /* 065D04 800EA504 C420B820 */      lwc1 $f0, %lo(Damage_Stale_MulTable)($at)
+  /* 065D04 800EA504 C420B820 */      lwc1 $f0, %lo(gmCommon_DamageStaleTable)($at)
   .L800EA508:
   /* 065D08 800EA508 14460002 */       bne $v0, $a2, .L800EA514
   /* 065D0C 800EA50C 00000000 */       nop 
@@ -23543,7 +23543,7 @@ glabel ftCommon_GFXSpawn
   /* 0669C4 800EB1C4 8D4B0020 */        lw $t3, 0x20($t2)
   /* 0669C8 800EB1C8 51610070 */      beql $t3, $at, .L800EB38C
   /* 0669CC 800EB1CC 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 0669D0 800EB1D0 0C04023D */       jal func_ovl2_801008F4
+  /* 0669D0 800EB1D0 0C04023D */       jal efMain_CreateEarthquake
   /* 0669D4 800EB1D4 00002025 */        or $a0, $zero, $zero
   /* 0669D8 800EB1D8 1000006B */         b jtgt_ovl2_800EB388
   /* 0669DC 800EB1DC 00401825 */        or $v1, $v0, $zero
@@ -23553,7 +23553,7 @@ glabel ftCommon_GFXSpawn
   /* 0669E8 800EB1E8 8D8D0020 */        lw $t5, 0x20($t4)
   /* 0669EC 800EB1EC 51A10067 */      beql $t5, $at, .L800EB38C
   /* 0669F0 800EB1F0 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 0669F4 800EB1F4 0C04023D */       jal func_ovl2_801008F4
+  /* 0669F4 800EB1F4 0C04023D */       jal efMain_CreateEarthquake
   /* 0669F8 800EB1F8 24040001 */     addiu $a0, $zero, 1
   /* 0669FC 800EB1FC 10000062 */         b jtgt_ovl2_800EB388
   /* 066A00 800EB200 00401825 */        or $v1, $v0, $zero
@@ -23563,7 +23563,7 @@ glabel ftCommon_GFXSpawn
   /* 066A0C 800EB20C 8DCF0020 */        lw $t7, 0x20($t6)
   /* 066A10 800EB210 51E1005E */      beql $t7, $at, .L800EB38C
   /* 066A14 800EB214 8FBF001C */        lw $ra, 0x1c($sp)
-  /* 066A18 800EB218 0C04023D */       jal func_ovl2_801008F4
+  /* 066A18 800EB218 0C04023D */       jal efMain_CreateEarthquake
   /* 066A1C 800EB21C 24040002 */     addiu $a0, $zero, 2
   /* 066A20 800EB220 10000059 */         b jtgt_ovl2_800EB388
   /* 066A24 800EB224 00401825 */        or $v1, $v0, $zero
@@ -47567,7 +47567,7 @@ glabel func_ovl2_801008B8
   /* 07C0EC 801008EC 03E00008 */        jr $ra
   /* 07C0F0 801008F0 00000000 */       nop 
 
-glabel func_ovl2_801008F4
+glabel efMain_CreateEarthquake
   /* 07C0F4 801008F4 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 07C0F8 801008F8 AFBF001C */        sw $ra, 0x1c($sp)
   /* 07C0FC 801008FC AFB00018 */        sw $s0, 0x18($sp)
@@ -53553,7 +53553,7 @@ glabel func_ovl2_80105D20
   /* 081530 80105D30 AFBF0014 */        sw $ra, 0x14($sp)
   /* 081534 80105D34 54400009 */      bnel $v0, $zero, .L80105D5C
   /* 081538 80105D38 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 08153C 80105D3C 0C04023D */       jal func_ovl2_801008F4
+  /* 08153C 80105D3C 0C04023D */       jal efMain_CreateEarthquake
   /* 081540 80105D40 00002025 */        or $a0, $zero, $zero
   /* 081544 80105D44 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 081548 80105D48 240E0012 */     addiu $t6, $zero, 0x12
@@ -56198,7 +56198,7 @@ glabel func_ovl2_80108268
   /* 083A78 80108278 AFBF0014 */        sw $ra, 0x14($sp)
   /* 083A7C 8010827C 54400009 */      bnel $v0, $zero, .L801082A4
   /* 083A80 80108280 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 083A84 80108284 0C04023D */       jal func_ovl2_801008F4
+  /* 083A84 80108284 0C04023D */       jal efMain_CreateEarthquake
   /* 083A88 80108288 00002025 */        or $a0, $zero, $zero
   /* 083A8C 8010828C 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 083A90 80108290 240E0012 */     addiu $t6, $zero, 0x12

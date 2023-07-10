@@ -1,4 +1,5 @@
 #include "gmmatch.h"
+#include "ground.h"
 #include "fighter.h"
 
 s32 func_ovl2_800D6490(u16 arg0)
@@ -112,13 +113,13 @@ bool32 func_ovl2_800D6630(void)
 
 void func_ovl2_800D6738(s32 arg0)
 {
-    s32 var_a2 = 0;
+    s32 is_write_data = FALSE;
 
     if (gSaveData.spgame_records[gSceneData.ft_kind].spgame_hiscore < gSceneData.spgame_score)
     {
-        gSaveData.spgame_records[gSceneData.ft_kind].spgame_hiscore = gSceneData.spgame_score;
+        gSaveData.spgame_records[gSceneData.ft_kind].spgame_hiscore   = gSceneData.spgame_score;
         gSaveData.spgame_records[gSceneData.ft_kind].spgame_continues = gSceneData.continues_used;
-        gSaveData.spgame_records[gSceneData.ft_kind].spgame_bonuses = gSceneData.bonuses;
+        gSaveData.spgame_records[gSceneData.ft_kind].spgame_bonuses   = gSceneData.bonuses;
 
         if (arg0 != 0)
         {
@@ -126,15 +127,15 @@ void func_ovl2_800D6738(s32 arg0)
         }
         else gSaveData.spgame_records[gSceneData.ft_kind].spgame_best_difficulty = 0;
 
-        var_a2 = 1;
+        is_write_data = TRUE;
     }
-    if ((gSaveData.spgame_records[gSceneData.ft_kind].unk_0x1D == 0) && (arg0 != 0))
+    if ((gSaveData.spgame_records[gSceneData.ft_kind].spgame_complete == FALSE) && (arg0 != 0))
     {
-        gSaveData.spgame_records[gSceneData.ft_kind].unk_0x1D = 1;
+        gSaveData.spgame_records[gSceneData.ft_kind].spgame_complete = TRUE;
 
-        var_a2 = 1;
+        is_write_data = TRUE;
     }
-    if (var_a2 != 0)
+    if (is_write_data != FALSE)
     {
         lbMemory_SaveData_WriteSRAM();
     }
@@ -171,7 +172,7 @@ void func_ovl2_800D67DC(void)
     u16 temp_s1;
     s32 bonus_stat_count;
     bool32 is_player_lose;
-    u16 unk_spgame_record;
+    u16 spgame_characters_complete;
     u32 bonus_stat_mask;
     s32 temp_v0;
     s32 player_port;
@@ -181,9 +182,9 @@ void func_ovl2_800D67DC(void)
 
     D_800A4B18.is_team_battle = TRUE;
     D_800A4B18.match_rules = (GMMATCH_GAMERULE_1PGAME | GMMATCH_GAMERULE_TIME);
-    D_800A4B18.unk_0xB = 100;
+    D_800A4B18.damage_ratio = 100;
     D_800A4B18.is_display_score = FALSE;
-    D_800A4B18.unk_minfo_0x1D_b1 = TRUE;
+    D_800A4B18.is_ignore_teamshadow = TRUE;
 
     if (gSaveData.mprotect_fail & GMSAVE_PROTECTFAIL_1PGAMEMARIO)
     {
@@ -459,17 +460,17 @@ block_45:
     }
     if (!(gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_INISHIE))
     {
-        if ((gSaveData.unk5DC & 0xFF) == 0xFF)
+        if ((gSaveData.unlock_task_inishie & GMSAVE_GROUND_MASK_ALL) == GMSAVE_GROUND_MASK_ALL)
         {
-            for (i = 0, unk_spgame_record = 0; i < ARRAY_COUNT(gSaveData.spgame_records); i++)
+            for (i = 0, spgame_characters_complete = 0; i < ARRAY_COUNT(gSaveData.spgame_records); i++)
             {
-                if (gSaveData.spgame_records[i].unk_0x1D != 0)
+                if (gSaveData.spgame_records[i].spgame_complete != FALSE)
                 {
-                    unk_spgame_record |= (1 << i);
+                    spgame_characters_complete |= (1 << i);
                 }
             }
 
-            if ((unk_spgame_record & GMSAVEINFO_CHARACTER_MASK_STARTER) == GMSAVEINFO_CHARACTER_MASK_STARTER)
+            if ((spgame_characters_complete & GMSAVEINFO_CHARACTER_MASK_STARTER) == GMSAVEINFO_CHARACTER_MASK_STARTER)
             {
                 gSceneData.unk02 = 4;
 

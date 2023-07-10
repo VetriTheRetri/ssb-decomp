@@ -863,7 +863,7 @@ void ftCommon_WallDamage_SetStatus(GObj *fighter_gobj, Vec3f *angle, Vec3f *pos)
     f32 knockback;
 
     func_ovl2_800FFD58(pos, 4, atan2f(-angle->x, angle->y));
-    func_ovl2_801008F4(2);
+    efMain_CreateEarthquake(2);
 
     vel_air = fp->phys_info.vel_air;
 

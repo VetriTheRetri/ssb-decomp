@@ -361,7 +361,7 @@ void itMSBomb_NExplode_InitStatusVars(GObj *item_gobj, bool32 is_create_gfx)
         ep->effect_info->scale.y = ITMSBOMB_EXPLODE_SCALE;
         ep->effect_info->scale.z = ITMSBOMB_EXPLODE_SCALE;
     }
-    func_ovl2_801008F4(1);
+    efMain_CreateEarthquake(1);
     itMain_RefreshHit(item_gobj);
     itMSBomb_NExplode_SetStatus(item_gobj);
 

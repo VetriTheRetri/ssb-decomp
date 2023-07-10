@@ -158,7 +158,7 @@ void itLinkBomb_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
         ep->effect_info->scale.y = ITLINKBOMB_EXPLODE_GFX_SCALE;
         ep->effect_info->scale.z = ITLINKBOMB_EXPLODE_GFX_SCALE;
     }
-    func_ovl2_801008F4(1);
+    efMain_CreateEarthquake(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 

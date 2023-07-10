@@ -163,7 +163,7 @@ void itBombHei_Default_SetExplode(GObj *item_gobj, u8 arg1)
         ep->effect_info->scale.y = ITBOMBHEI_EXPLODE_SCALE;
         ep->effect_info->scale.z = ITBOMBHEI_EXPLODE_SCALE;
     }
-    func_ovl2_801008F4(1);
+    efMain_CreateEarthquake(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 

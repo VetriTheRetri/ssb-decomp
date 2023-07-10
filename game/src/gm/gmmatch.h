@@ -9,6 +9,7 @@
 #define GMMATCH_PLAYERS_MAX 4 // Global limit for simultaneous players in a match
 
 #define gmSaveChrMask(kind) (1 << (kind))
+#define gmSaveGndMask(kind) (1 << (kind))
 
 #define GMSAVEINFO_CHARACTER_MASK_ALL \
 (                                     \
@@ -57,8 +58,20 @@ typedef enum gmSaveUnlock
 #define GMSAVE_UNLOCK_MASK_ITEMSWITCH   (1 << gmSave_Unlock_ItemSwitch)
 
 #define GMSAVE_UNLOCK_MASK_ALL          (GMSAVE_UNLOCK_MASK_ITEMSWITCH | GMSAVE_UNLOCK_MASK_SOUNDTEST | GMSAVE_UNLOCK_MASK_INISHIE | GMSAVE_UNLOCK_MASK_PURIN | GMSAVE_UNLOCK_MASK_CAPTAIN | GMSAVE_UNLOCK_MASK_NESS | GMSAVE_UNLOCK_MASK_LUIGI)
-#define GMSAVE_UNLOCK_MASK_NEWCOMERS   (GMSAVE_UNLOCK_MASK_PURIN | GMSAVE_UNLOCK_MASK_CAPTAIN | GMSAVE_UNLOCK_MASK_NESS | GMSAVE_UNLOCK_MASK_LUIGI)
-#define GMSAVE_UNLOCK_MASK_PRIZE      (GMSAVE_UNLOCK_MASK_ALL & ~GMSAVE_UNLOCK_MASK_NEWCOMERS)
+#define GMSAVE_UNLOCK_MASK_NEWCOMERS    (GMSAVE_UNLOCK_MASK_PURIN | GMSAVE_UNLOCK_MASK_CAPTAIN | GMSAVE_UNLOCK_MASK_NESS | GMSAVE_UNLOCK_MASK_LUIGI)
+#define GMSAVE_UNLOCK_MASK_PRIZE        (GMSAVE_UNLOCK_MASK_ALL & ~GMSAVE_UNLOCK_MASK_NEWCOMERS)
+
+#define GMSAVE_GROUND_MASK_ALL      \
+(                                   \
+    gmSaveGndMask(Gr_Kind_Castle) | \
+    gmSaveGndMask(Gr_Kind_Sector) | \
+    gmSaveGndMask(Gr_Kind_Jungle) | \
+    gmSaveGndMask(Gr_Kind_Zebes)  | \
+    gmSaveGndMask(Gr_Kind_Hyrule) | \
+    gmSaveGndMask(Gr_Kind_Yoster) | \
+    gmSaveGndMask(Gr_Kind_Pupupu) | \
+    gmSaveGndMask(Gr_Kind_Yamabuki) \
+)                                   \
 
 typedef enum gmMatch_PauseStatus
 {
@@ -191,6 +204,12 @@ typedef struct gmUnkInfo_80131308
 
 static gmUnkInfo_80131308 D_ovl2_80131308;
 
+typedef struct gmStaleInfo
+{
+    u16 attack_id, motion_count;
+
+} gmStaleInfo;
+
 typedef struct gmPlayerBlock
 {
     u8 level; // Actually begins at 1 instead of 0
@@ -220,7 +239,7 @@ typedef struct gmPlayerBlock
     s32 combo_count_foe; // Number of consecutive hits received from foes (Resets when hitstun ends)
     GObj *fighter_gobj; // Pointer to player's fighter GObj
     u32 stale_index; // Current position in stale queue?
-    u16 stale_flags[5][2];
+    gmStaleInfo stale_info[5];
 
 } gmPlayerBlock;
 
@@ -237,7 +256,7 @@ typedef struct gmMatchInfo
     u8 handicap_setting; // 0 = OFF, 1 = ON, 2 = AUTO
     u8 is_team_attack; // Boolean for friendly fire
     u8 unk_0xA;
-    u8 unk_0xB;
+    u8 damage_ratio;
     u32 item_toggles; // Bits = item's on/off switch from match settings
     u8 unk_0x10;
     u8 pause_status;
@@ -246,55 +265,50 @@ typedef struct gmMatchInfo
     u32 match_time_remain; // Frames remaining until timeout
     u32 match_time_current; // Current match frame, counts up from 0
     u8 item_switch; // Has various settings (0x0 on Master Hand and Giant DK (?), 0x1 on Metal Mario battle, 0x2 on Hyrule Castle, 0x3 on various stages, 0x4 on Polygon Team? 
-    u32 is_display_score : 1;   // Displays score when a fighter falls
-    u32 unk_minfo_0x1D_b1 : 1;
-    u32 unk_minfo_0x1D_b2 : 1;
-    u32 unk_minfo_0x1D_b3 : 1;
-    u32 unk_minfo_0x1D_b4 : 1;
-    u32 unk_minfo_0x1D_b5 : 1;
-    u32 unk_minfo_0x1D_b6 : 1;
-    u32 unk_minfo_0x1D_b7 : 1;
-    u32 unk_0x1E : 8;
-    u32 unk_0x1F : 8;
+    u32 is_display_score : 1;       // Displays score when a fighter falls
+    u32 is_ignore_teamshadow : 1;   // If FALSE, shadows are colored based on players' team affiliation, otherwise use default shadow color
     gmPlayerBlock player_block[GMMATCH_PLAYERS_MAX]; // Holds data for each player
 
 } gmMatchInfo;
 
-struct RecordCharCombo {
-    /* 0x00 */ u16 gamesWith;
-    /* 0x02 */ u16 playedAgainst;
-}; // size == 4
+typedef struct gmSaveVSRecordCombo
+{
+    /* 0x00 */ u16 games_with;
+    /* 0x02 */ u16 games_played_against;
 
-struct VsRecordData {
-    /* 0x00 */ u16 kos[DARIANTOU_CHR_PLAYABLE_MAX];
-    /* 0x18 */ u32 timeUsed; //< in seconds
-    /* 0x1C */ u32 damageDealt;
-    /* 0x20 */ u32 damageReceived;
-    /* 0x24 */ u16 totalSDs;
-    /* 0x26 */ u16 gamesPlayed;
-    /* 0x28 */ u16 gamesPlayedAgainst;
-    /* 0x2C */ struct RecordCharCombo combinations[DARIANTOU_CHR_PLAYABLE_MAX];
-}; // size == 0x5C
+} gmSaveVSRecordCombo; // size == 4
 
-struct SinglePlayerData
+typedef struct gmSaveVSRecord 
+{
+    /* 0x00 */ u16 ko_count[DARIANTOU_CHR_PLAYABLE_MAX];
+    /* 0x18 */ u32 time_used; //< in seconds
+    /* 0x1C */ u32 damage_dealt;
+    /* 0x20 */ u32 damage_taken;
+    /* 0x24 */ u16 self_destructs;
+    /* 0x26 */ u16 games_played;
+    /* 0x28 */ u16 games_played_against;
+    /* 0x2C */ gmSaveVSRecordCombo combinations[DARIANTOU_CHR_PLAYABLE_MAX];
+
+} gmSaveVSRecord; // size == 0x5C
+
+typedef struct gmSave1PRecord
 {
     u32 spgame_hiscore;
     u32 spgame_continues;
     u32 spgame_bonuses;
     u8 spgame_best_difficulty;
-    u32 bonus1_time; // Break the Targets high score
-    u8 bonus1_task_count; // Targets broken
-    u32 bonus2_time; // Board the Platforms high scoree
-    u8 bonus2_task_count; // Platforms boarded
-    u8 unk_0x1D;
-    u8 unk_0x1E;
-    u8 unk_0x1F;
-};
+    u32 bonus1_time;            // Break the Targets high score
+    u8 bonus1_task_count;       // Targets broken
+    u32 bonus2_time;            // Board the Platforms high score
+    u8 bonus2_task_count;       // Platforms boarded
+    u8 spgame_complete;         // Whether character has completed 1P Game or not
+
+} gmSave1PRecord;
 
 // is this the saved data structure?
 typedef struct gmSaveInfo
 {
-    /* 0x000 */ struct VsRecordData vsRecords[DARIANTOU_CHR_PLAYABLE_MAX];
+    gmSaveVSRecord vs_records[DARIANTOU_CHR_PLAYABLE_MAX];
     u8 unk450;
     u8 unk451;
     s16 unk452;
@@ -304,13 +318,12 @@ typedef struct gmSaveInfo
     u16 unk458;
     u8 spgame_difficulty;
     u8 spgame_stock_count;
-    struct SinglePlayerData spgame_records[DARIANTOU_CHR_PLAYABLE_MAX];
-    u16 unk5DC;
-    u8 unk5DE;
-    u8 unk5DF;
-    u16 unk5E0;
-    u8 mprotect_fail; // Some kind of anti-piracy measure??? 0x1 results in random knockback velocity, 0x2 halves stick range, 0x4 forces Mario in 1P game
-    u8 unk5E3;
+    gmSave1PRecord spgame_records[DARIANTOU_CHR_PLAYABLE_MAX];
+    u16 unlock_task_inishie;    // Records mask of unique stages played in VS mode
+    u8 unlock_task_itemswitch;  // Records number of VS games played for Item Switch unlock
+    u16 vsgame_total;           // Total amount of VS games played?
+    u8 mprotect_fail;           // Some kind of anti-piracy measure??? 0x1 results in random knockback velocity, 0x2 halves stick range, 0x4 forces Mario in 1P game
+    u8 unk5E3;  
     u8 unk5E4;
     u8 unk5E5;
     u8 unk5E6;

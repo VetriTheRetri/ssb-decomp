@@ -268,7 +268,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 
                     gDPPipeSync(D_800465B0[0]++);
 
-                    if ((gpBattleState->is_team_battle == TRUE) && !(gpBattleState->unk_minfo_0x1D_b1))
+                    if ((gpBattleState->is_team_battle == TRUE) && !(gpBattleState->is_ignore_teamshadow))
                     {
                         gDPSetPrimColor(D_800465B0[0]++, 0, 0, D_ovl2_8012CA7C[fp->team].r, D_ovl2_8012CA7C[fp->team].g, D_ovl2_8012CA7C[fp->team].b, D_ovl2_8012CA7C[fp->team].a);
                     }

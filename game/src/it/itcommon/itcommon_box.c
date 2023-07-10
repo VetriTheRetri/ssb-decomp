@@ -34,7 +34,7 @@ itStatusDesc itCommon_Box_StatusDesc[itStatus_Box_EnumMax] =
         itBox_SDefault_ProcDamage           // Proc Damage
     },
 
-    // Status 1 (Air Fall)
+    // Status 1 (Air Wait Fall)
     {
         itBox_AFall_ProcUpdate,             // Proc Update
         itBox_AFall_ProcMap,                // Proc Map
@@ -488,7 +488,7 @@ void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     {
         effect_unk->effect_info->scale.x = effect_unk->effect_info->scale.y = effect_unk->effect_info->scale.z = ITBOX_EXPLODE_SCALE;
     }
-    func_ovl2_801008F4(1);
+    efMain_CreateEarthquake(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 

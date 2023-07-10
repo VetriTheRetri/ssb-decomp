@@ -2217,25 +2217,25 @@ void func_ovl2_800E3308(wpStruct *ip, Weapon_Hit *wp_hit, ftStruct *fp, GObj *fi
     }
 }
 
-void func_ovl2_800E3418(wpStruct *ip, Weapon_Hit *wp_hit, s32 arg2, ftStruct *fp, ftHurtbox *ft_hurt, GObj *weapon_gobj, GObj *fighter_gobj)
+void func_ovl2_800E3418(wpStruct *wp, Weapon_Hit *wp_hit, s32 hitbox_id, ftStruct *fp, ftHurtbox *ft_hurt, GObj *weapon_gobj, GObj *fighter_gobj)
 {
-    s32 unk = wpMain_DamageApplyStale(ip);
+    s32 unk = wpMain_DamageApplyStale(wp);
     s32 damage;
 
-    func_ovl3_8016679C(ip, wp_hit, fighter_gobj, (wp_hit->can_rehit_fighter) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
+    func_ovl3_8016679C(wp, wp_hit, fighter_gobj, (wp_hit->can_rehit_fighter) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
 
     damage = ftCommon_DamageAdjustCapture(fp, unk);
 
     if (wp_hit->can_rehit_fighter)
     {
-        if (ip->hit_refresh_damage < damage)
+        if (wp->hit_refresh_damage < damage)
         {
-            ip->hit_refresh_damage = damage;
+            wp->hit_refresh_damage = damage;
         }
     }
-    else if (ip->hit_normal_damage < damage)
+    else if (wp->hit_normal_damage < damage)
     {
-        ip->hit_normal_damage = damage;
+        wp->hit_normal_damage = damage;
     }
     if
     (
@@ -2252,23 +2252,23 @@ void func_ovl2_800E3418(wpStruct *ip, Weapon_Hit *wp_hit, s32 arg2, ftStruct *fp
 
             hitlog->attacker_object_class = ftHitlog_ObjectClass_Weapon;
             hitlog->attacker_hit = wp_hit;
-            hitlog->hitbox_id = arg2;
+            hitlog->hitbox_id = hitbox_id;
             hitlog->attacker_gobj = weapon_gobj;
             hitlog->victim_hurt = ft_hurt;
-            hitlog->attacker_player = ip->player;
-            hitlog->attacker_player_number = ip->player_number;
+            hitlog->attacker_player = wp->player;
+            hitlog->attacker_player_number = wp->player_number;
 
             ftHitCollisionLogIndex++;
         }
-        ftAttackUpdateMatchStats(ip->player, fp->player, damage);
-        ftAttackAddStaleQueue(ip->player, fp->player, wp_hit->attack_id, wp_hit->motion_count);
+        ftAttackUpdateMatchStats(wp->player, fp->player, damage);
+        ftAttackAddStaleQueue(wp->player, fp->player, wp_hit->attack_id, wp_hit->motion_count);
     }
     func_800269C0(wp_hit->hit_sfx);
 }
 
-void func_ovl2_800E35BC(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, ftHitbox *ft_hit, GObj *item_gobj, GObj *fighter_gobj)
+void func_ovl2_800E35BC(itStruct *ip, itHitbox *it_hit, s32 arg2, ftStruct *fp, ftHitbox *ft_hit, GObj *item_gobj, GObj *fighter_gobj)
 {
-    s32 damage = itMain_ApplyHitDamage(ap);
+    s32 damage = itMain_ApplyHitDamage(ip);
     Vec3f sp30;
 
     func_ovl2_800F0E70(&sp30, it_hit, arg2, ft_hit);
@@ -2283,9 +2283,9 @@ void func_ovl2_800E35BC(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
     {
         itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
 
-        if (ap->hit_attack_damage < damage)
+        if (ip->hit_attack_damage < damage)
         {
-            ap->hit_attack_damage = damage;
+            ip->hit_attack_damage = damage;
         }
         func_ovl2_80100BF0(&sp30, damage);
 

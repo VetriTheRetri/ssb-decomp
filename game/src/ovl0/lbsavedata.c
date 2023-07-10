@@ -126,7 +126,7 @@ void lbMemory_SaveData_BackupClear1PHighScore(void)
         gSaveData.spgame_records[i].spgame_continues       = gDefaultSaveData.spgame_records[i].spgame_continues;
         gSaveData.spgame_records[i].spgame_bonuses         = gDefaultSaveData.spgame_records[i].spgame_bonuses;
         gSaveData.spgame_records[i].spgame_best_difficulty = gDefaultSaveData.spgame_records[i].spgame_best_difficulty;
-        gSaveData.spgame_records[i].unk_0x1D               = gDefaultSaveData.spgame_records[i].unk_0x1D;
+        gSaveData.spgame_records[i].spgame_complete        = gDefaultSaveData.spgame_records[i].spgame_complete;
     }
 }
 
@@ -135,11 +135,11 @@ void lbMemory_SaveData_BackupClearVSRecord(void)
 {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gSaveData.vsRecords); i++)
+    for (i = 0; i < ARRAY_COUNT(gSaveData.vs_records); i++)
     {
-        gSaveData.vsRecords[i] = gDefaultSaveData.vsRecords[i];
+        gSaveData.vs_records[i] = gDefaultSaveData.vs_records[i];
     }
-    gSaveData.unk5E0 = gDefaultSaveData.unk5E0;
+    gSaveData.vsgame_total = gDefaultSaveData.vsgame_total;
 }
 
 // 0x800D4B60
@@ -162,8 +162,8 @@ void lbMemory_SaveData_BackupClearPrize(void)
     gSaveData.unlock_mask &= ~GMSAVE_UNLOCK_MASK_PRIZE;
     gSaveData.unlock_mask |= gDefaultSaveData.unlock_mask;
 
-    gSaveData.unk5DC = gDefaultSaveData.unk5DC;
-    gSaveData.unk5DE = gDefaultSaveData.unk5DE;
+    gSaveData.unlock_task_inishie    = gDefaultSaveData.unlock_task_inishie;
+    gSaveData.unlock_task_itemswitch = gDefaultSaveData.unlock_task_itemswitch;
 }
 
 // 0x800D4C48

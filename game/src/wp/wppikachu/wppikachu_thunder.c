@@ -109,7 +109,7 @@ bool32 wpPikachu_ThunderHead_ProcMap(GObj *weapon_gobj)
     if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
         wpPikachu_ThunderHead_SetDestroy(weapon_gobj, TRUE);
-        func_ovl2_801008F4(1);
+        efMain_CreateEarthquake(1);
         func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
         return TRUE;

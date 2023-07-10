@@ -435,7 +435,7 @@ void itTaru_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     {
         effect_unk->effect_info->scale.x = effect_unk->effect_info->scale.y = effect_unk->effect_info->scale.z = ITTARU_EXPLODE_SCALE;
     }
-    func_ovl2_801008F4(1);
+    efMain_CreateEarthquake(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 

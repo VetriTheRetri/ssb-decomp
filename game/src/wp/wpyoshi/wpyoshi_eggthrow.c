@@ -182,7 +182,7 @@ bool32 wpYoshi_EggThrow_ProcMap(GObj *weapon_gobj)
 
     if ((wp->weapon_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(weapon_gobj) != FALSE))
     {
-        func_ovl2_801008F4(2);
+        efMain_CreateEarthquake(2);
 
         func_800269C0(0xFC);
 

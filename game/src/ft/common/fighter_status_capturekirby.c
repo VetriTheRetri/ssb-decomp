@@ -414,7 +414,7 @@ void ftCommon_ThrownStar_ProcMap(GObj *fighter_gobj)
 
             fp->command_vars.flags.flag1 = 0;
         }
-        func_ovl2_801008F4(2);
+        efMain_CreateEarthquake(2);
         func_ovl2_800FFD58(&pos, 4, atan2f(-angle->x, angle->y));
     }
 }

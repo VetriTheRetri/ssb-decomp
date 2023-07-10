@@ -1242,7 +1242,7 @@ struct ftStruct
     s32 throw_player_number;
 
     s32 attack_id;
-    u16 motion_count;
+    u16 motion_count;       // This is used to tell the game not to stale multihit attacks
     gmStatFlags stat_flags;
     u16 stat_count;
 

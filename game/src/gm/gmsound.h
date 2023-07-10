@@ -98,8 +98,8 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_SwordSwing4,
     gmSound_SFX_SwordSwing3,
     gmSound_SFX_SwordSwing1,
-    gmSound_SFX_TaruCannShoot,           // DK Barrel?
-    gmSound_SFX_RBombHit,           // 
+    gmSound_SFX_RBombHit,           // Hit entity?
+    gmSound_SFX_RBombMap,           // Collide with wall?
     gmSound_SFX_Footstep1,
     gmSound_SFX_Footstep2,
     gmSound_SFX_Footstep3,
@@ -382,7 +382,8 @@ typedef enum gmSoundEffectSFX
     gmSound_Voice_YCityFushigibana = 0x228,
     gmSound_Voice_YCityHitokage,
     gmSound_Voice_YCityLucky,
-    gmSound_Voice_YCityMarumine
+    gmSound_Voice_YCityMarumine,
+    gmSound_Voice_YCityPorygon
 
 } gmSoundEffectSFX;
 

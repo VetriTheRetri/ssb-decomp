@@ -1,28 +1,74 @@
 #include "item.h"
 
-bool32 func_ovl3_8017C090(GObj *item_gobj)
+extern intptr_t D_NF_000011F8;
+extern intptr_t D_NF_00001288;
+extern void *D_ovl2_801313F4;
+
+itCreateDesc itGround_PowerBlock_ItemDesc =
 {
-    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(item_gobj)->dobj_f0)
+    It_Kind_PowerBlock,                     // Item Kind
+    &D_ovl2_801313F4,                       // Pointer to item file data?
+    0xD8,                                   // Offset of item attributes in file?
+    0x44,                                   // ???
+    0,                                      // ???
+    0,                                      // ???
+    gmHitCollision_UpdateState_Disable,     // Hitbox Update State
+    itPowerBlock_SDefault_ProcUpdate,       // Proc Update
+    NULL,                                   // Proc Map
+    NULL,                                   // Proc Hit
+    NULL,                                   // Proc Shield
+    NULL,                                   // Proc Hop
+    NULL,                                   // Proc Set-Off
+    NULL,                                   // Proc Reflector
+    NULL                                    // Proc Damage
+};
+
+itStatusDesc itGround_PowerBlock_StatusDesc[itStatus_PowerBlock_EnumMax] = 
+{
+    // Status 0 (Neutral Wait)
     {
-        func_ovl3_8017C0D4(item_gobj);
+        NULL,                               // Proc Update
+        NULL,                               // Proc Map
+        NULL,                               // Proc Hit
+        NULL,                               // Proc Shield
+        NULL,                               // Proc Hop
+        NULL,                               // Proc Set-Off
+        NULL,                               // Proc Reflector
+        itPowerBlock_NWait_ProcDamage       // Proc Damage
+    },
+};
+
+typedef enum itPowerBlockStatus
+{
+    itStatus_PowerBlock_NWait,
+    itStatus_PowerBlock_EnumMax
+
+} itPowerBlockStatus;
+
+// 0x8017C090
+bool32 itPowerBlock_SDefault_ProcUpdate(GObj *item_gobj)
+{
+    if (DObjGetStruct(item_gobj)->dobj_f0 == (f32)FLOAT_NEG_MAX)
+    {
+        itPowerBlock_NWait_SetStatus(item_gobj);
     }
     return FALSE;
 }
 
-extern itStatusDesc Article_POW_Status[];
-
-void func_ovl3_8017C0D4(GObj *item_gobj)
+// 0x8017C0D4
+void itPowerBlock_NWait_SetStatus(GObj *item_gobj)
 {
-    itStruct *ap;
+    itStruct *ip;
 
-    itMain_SetItemStatus(item_gobj, Article_POW_Status, 0);
+    itMain_SetItemStatus(item_gobj, itGround_PowerBlock_StatusDesc, itStatus_PowerBlock_NWait);
 
-    ap = itGetStruct(item_gobj), ap->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
+    ip = itGetStruct(item_gobj), ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 }
 
-bool32 func_ovl3_8017C110(GObj *item_gobj)
+// 0x8017C110
+bool32 itPowerBlock_NDamage_ProcUpdate(GObj *item_gobj)
 {
-    if ((f32)FLOAT_NEG_MAX == DObjGetStruct(item_gobj)->dobj_f0)
+    if (DObjGetStruct(item_gobj)->dobj_f0 == (f32)FLOAT_NEG_MAX)
     {
         func_ovl2_8010986C();
 
@@ -31,36 +77,33 @@ bool32 func_ovl3_8017C110(GObj *item_gobj)
     else return FALSE;
 }
 
-extern intptr_t D_NF_000011F8;
-extern intptr_t D_NF_00001288;
-
-bool32 func_ovl3_8017C15C(GObj *item_gobj)
+// 0x8017C15C
+bool32 itPowerBlock_NWait_ProcDamage(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    ap->proc_update = func_ovl3_8017C110;
-    ap->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
+    ip->proc_update = itPowerBlock_NDamage_ProcUpdate;
+    ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    func_8000BD1C(DObjGetStruct(item_gobj), itGetPData(ap, D_NF_000011F8, D_NF_00001288), 0.0F); // Linker thing
+    func_8000BD1C(DObjGetStruct(item_gobj), itGetPData(ip, D_NF_000011F8, D_NF_00001288), 0.0F); // Linker thing
     func_8000DF34(item_gobj);
-    func_800269C0(0x117U);
-    func_ovl2_801008F4(3);
+    func_800269C0(gmSound_SFX_InishiePowerBlock);
+    efMain_CreateEarthquake(3);
     func_ovl2_80109B4C();
 
     return FALSE;
 }
 
-extern itCreateDesc Article_POW_Data;
-
-GObj* jtgt_ovl3_8017C1E0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+// 0x8017C1E0
+GObj* itGround_PowerBlock_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_POW_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_PowerBlock_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
-        itStruct *ap = itGetStruct(item_gobj);
+        itStruct *ip = itGetStruct(item_gobj);
 
-        ap->item_hurt.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
+        ip->item_hurt.interact_mask = GMHITCOLLISION_MASK_FIGHTER;
     }
     return item_gobj;
 }
