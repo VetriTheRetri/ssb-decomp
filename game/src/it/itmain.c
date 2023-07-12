@@ -48,7 +48,8 @@ void func_ovl3_8017245C(GObj *item_gobj, f32 *spin_speed, bool32 is_smash_throw)
     ip->rotate_step = (ip->attributes->spin_speed != 0) ? (ip->attributes->spin_speed * ITEM_SPIN_SPEED_FRACTION_DEFAULT * ip->rotate_step) : 0.0F;
 }
 
-void func_ovl3_80172508(GObj *item_gobj)
+// 0x80172508
+void itMain_VelSetRotateStepLR(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
@@ -58,11 +59,11 @@ void func_ovl3_80172508(GObj *item_gobj)
 }
 
 // 0x80172558
-void itMain_UpdatePhysicsAir(itStruct *ip, f32 gravity, f32 terminal_velocity)
+void itMain_UpdateGravityClampTVel(itStruct *ip, f32 gravity, f32 terminal_velocity)
 {
     ip->phys_info.vel_air.y -= gravity;
 
-    if (terminal_velocity < func_ovl0_800C7A84(&ip->phys_info.vel))
+    if (func_ovl0_800C7A84(&ip->phys_info.vel) > terminal_velocity)
     {
         func_ovl0_800C7A00(&ip->phys_info.vel);
         func_ovl0_800C7AE0(&ip->phys_info.vel, terminal_velocity);
@@ -143,7 +144,7 @@ void itMain_CopyDamageStats(GObj *item_gobj)
 }
 
 // 0x801727F4
-s32 itMain_ApplyHitDamage(itStruct *ip)
+s32 itMain_GetDamageOutput(itStruct *ip)
 {
     s32 damage;
 
@@ -159,7 +160,7 @@ s32 itMain_ApplyHitDamage(itStruct *ip)
 }
 
 // 0x80172890
-bool32 atCommon_CheckTypeShootEmpty(GObj *item_gobj)
+bool32 itMain_CheckShootNoAmmo(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
@@ -183,7 +184,7 @@ void itMain_DestroyItem(GObj *item_gobj)
 
         ftCommon_GetHammerSetBGM(ip->owner_gobj);
     }
-    else if ((ip->it_kind < It_Kind_GrMonsterStart) || (ip->it_kind > It_Kind_GrMonsterEnd))
+    else if ((ip->it_kind < It_Kind_GrMonsterStart) || (ip->it_kind > It_Kind_GrMonsterMax))
     {
         func_ovl2_800FF590(&DObjGetStruct(item_gobj)->translate);
     }
@@ -373,7 +374,7 @@ void itMain_SetFighterHold(GObj *item_gobj, GObj *fighter_gobj)
 }
 
 // 0x80172E74
-void itMain_SetGroundPickup(GObj *item_gobj) // Airborne article becomes grounded?
+void itMain_SetGroundAllowPickup(GObj *item_gobj) // Airborne item becomes grounded?
 {
     itStruct *ip = itGetStruct(item_gobj);
 
@@ -419,14 +420,16 @@ bool32 itMain_CheckSetColAnimIndex(GObj *item_gobj, s32 colanim_id, s32 duration
     return caCheckSetColAnimIndex(&ip->colanim, colanim_id, duration);
 }
 
-void func_ovl3_80172FBC(GObj *item_gobj)
+// 0x80172FBC
+void itMain_ResetColAnim(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
     caResetColAnim(&ip->colanim);
 }
 
-void func_ovl3_80172FE0(GObj *item_gobj)
+// 0x80172FE0
+void itMain_VelSetRebound(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
@@ -483,6 +486,7 @@ extern intptr_t hal_ld_article_floats;
 
 static Unk_8018D048 D_ovl3_8018D048;
 
+// 0x801730D4
 bool32 func_ovl3_801730D4(GObj *gobj)
 {
     s32 unused;
@@ -493,7 +497,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
     {
         index = func_ovl3_80173090(&D_ovl3_8018D048);
 
-        if (index <= It_Kind_CommonEnd)
+        if (index < It_Kind_CommonMax)
         {
             vel.x = 0.0F;
             vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&gItemFileData->spawn_vel_y[index])); // Linker thing
@@ -553,7 +557,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     }
     else
     {
-        for (i = j = It_Kind_MbMonsterStart; i < It_Kind_Mew; i++) // Pokémon IDs
+        for (i = j = It_Kind_MbMonsterStart; i < It_Kind_MbMonsterMax; i++) // Pokémon IDs
         {
             if ((i != gMonsterData.monster_curr) && (i != gMonsterData.monster_prev))
             {
@@ -600,7 +604,7 @@ bool32 itCommon_SDefault_ProcHop(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
 
     func_80019438(&ip->phys_info.vel, &ip->shield_collide_vec, ip->shield_collide_angle * 2);
-    func_ovl3_80172508(item_gobj);
+    itMain_VelSetRotateStepLR(item_gobj);
 
     return FALSE;
 }

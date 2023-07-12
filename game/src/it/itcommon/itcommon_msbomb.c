@@ -140,7 +140,7 @@ bool32 itMSBomb_AFall_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
@@ -165,7 +165,7 @@ bool32 itMSBomb_AFall_ProcMap(GObj *item_gobj)
 // 0x80176504
 void itMSBomb_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_MSBomb_StatusDesc, itStatus_MSBomb_GWait);
 }
 
@@ -192,7 +192,7 @@ bool32 itMSBomb_FThrow_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
@@ -209,7 +209,7 @@ bool32 itMSBomb_FThrow_ProcMap(GObj *item_gobj)
 // 0x80176620
 bool32 itMSBomb_SDefault_ProcHit(GObj *item_gobj)
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }
@@ -493,7 +493,7 @@ bool32 itMSBomb_ADetach_ProcUpdate(GObj *item_gobj)
     DObj *aj = DObjGetStruct(item_gobj);
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITMSBOMB_GRAVITY, ITMSBOMB_T_VEL);
 
     if (ip->it_multi < ITMSBOMB_DETECT_FIGHTER_DELAY)
     {

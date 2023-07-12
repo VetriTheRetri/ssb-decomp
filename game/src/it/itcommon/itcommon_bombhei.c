@@ -240,7 +240,7 @@ bool32 itBombHei_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITBOMBHEI_GRAVITY, ITBOMBHEI_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITBOMBHEI_GRAVITY, ITBOMBHEI_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -338,7 +338,7 @@ bool32 itBombHei_AFall_ProcMap(GObj *item_gobj)
 // 0x80177474
 void itBombHei_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itBombHei_Default_SetHitStatusNormal(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_BombHei_StatusDesc, itStatus_BombHei_GWait);
 }
@@ -367,7 +367,7 @@ bool32 itBombHei_FThrow_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITBOMBHEI_GRAVITY, ITBOMBHEI_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITBOMBHEI_GRAVITY, ITBOMBHEI_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;

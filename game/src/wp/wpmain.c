@@ -100,13 +100,13 @@ void wpMain_ReflectorSetLR(wpStruct *wp, ftStruct *fp) // Invert direction on re
 }
 
 // 0x80168128
-s32 wpMain_DamageApplyStale(wpStruct *wp) // Return final damage after applying staling and bonus 0.999%
+s32 wpMain_GetDamageOutput(wpStruct *wp) // Return final damage after applying staling and bonus 0.999%
 {
     return (wp->weapon_hit.stale * wp->weapon_hit.damage) + 0.999F;
 }
 
 // 0x80168158
-void wpMain_ClearHitVictimRecord(wpStruct *wp) // Clear hit victims array
+void wpMain_ClearHitRecord(wpStruct *wp) // Clear hit victims array
 {
     s32 i;
 

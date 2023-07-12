@@ -19,7 +19,7 @@ f32 func_ovl3_8013AE10(Vec3f *a, Vec3f *b, f32 f)
     else return (((f - a->x) * (b->y - a->y)) / (b->x - a->x)) + a->y;
 }
 
-extern Gfx *D_800465B0[4];
+extern Gfx *gpDisplayListHead[4];
 extern intptr_t D_NF_00003A68;
 extern GfxColorAlpha D_ovl2_8012CA78;
 extern GfxColorAlpha D_ovl2_8012CA7C[3];
@@ -69,10 +69,10 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 
     if (shadow_gobj->room_gobj_prev == NULL)
     {
-        gSPDisplayList(D_800465B0[0]++, &D_ovl3_80188410);
+        gSPDisplayList(gpDisplayListHead[0]++, &D_ovl3_80188410);
 
         // Linker thing here
-        gDPLoadTextureBlock_4b(D_800465B0[0]++, ((uintptr_t)D_ovl2_801313B4 + (intptr_t)&D_NF_00003A68), G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock_4b(gpDisplayListHead[0]++, ((uintptr_t)D_ovl2_801313B4 + (intptr_t)&D_NF_00003A68), G_IM_FMT_I, 16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
     }
     sp = (Shadow_Struct*)shadow_gobj->user_data;
 
@@ -266,13 +266,13 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
                     if (gGtlTaskId != 0) shadow_vertex = &sp->shadow_vertex2[0];
                     else shadow_vertex = &sp->shadow_vertex1[0];
 
-                    gDPPipeSync(D_800465B0[0]++);
+                    gDPPipeSync(gpDisplayListHead[0]++);
 
                     if ((gpBattleState->is_team_battle == TRUE) && !(gpBattleState->is_ignore_teamshadow))
                     {
-                        gDPSetPrimColor(D_800465B0[0]++, 0, 0, D_ovl2_8012CA7C[fp->team].r, D_ovl2_8012CA7C[fp->team].g, D_ovl2_8012CA7C[fp->team].b, D_ovl2_8012CA7C[fp->team].a);
+                        gDPSetPrimColor(gpDisplayListHead[0]++, 0, 0, D_ovl2_8012CA7C[fp->team].r, D_ovl2_8012CA7C[fp->team].g, D_ovl2_8012CA7C[fp->team].b, D_ovl2_8012CA7C[fp->team].a);
                     }
-                    else gDPSetPrimColor(D_800465B0[0]++, 0, 0, D_ovl2_8012CA78.r, D_ovl2_8012CA78.g, D_ovl2_8012CA78.b, D_ovl2_8012CA78.a);
+                    else gDPSetPrimColor(gpDisplayListHead[0]++, 0, 0, D_ovl2_8012CA78.r, D_ovl2_8012CA78.g, D_ovl2_8012CA78.b, D_ovl2_8012CA78.a);
 
                     sv = shadow_vertex;
 
@@ -360,39 +360,39 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
                             sv->n.tc[0] = 1984;
                             sv->n.tc[1] = spEC;
 
-                            gSPVertex(D_800465B0[0]++, shadow_vertex, 8, 0);
+                            gSPVertex(gpDisplayListHead[0]++, shadow_vertex, 8, 0);
 
                             if (spCC != 0)
                             {
-                                gSP2Triangles(D_800465B0[0]++, 1, 0, 7, 0, 0, 6, 7, 0);
+                                gSP2Triangles(gpDisplayListHead[0]++, 1, 0, 7, 0, 0, 6, 7, 0);
 
-                                gSP2Triangles(D_800465B0[0]++, 7, 6, 5, 0, 6, 4, 5, 0);
+                                gSP2Triangles(gpDisplayListHead[0]++, 7, 6, 5, 0, 6, 4, 5, 0);
 
-                                gSP2Triangles(D_800465B0[0]++, 5, 4, 3, 0, 4, 2, 3, 0);
+                                gSP2Triangles(gpDisplayListHead[0]++, 5, 4, 3, 0, 4, 2, 3, 0);
                             }
                             else
                             {
-                                gSP2Triangles(D_800465B0[0]++, 1, 0, 5, 0, 0, 4, 5, 0);
+                                gSP2Triangles(gpDisplayListHead[0]++, 1, 0, 5, 0, 0, 4, 5, 0);
 
-                                gSP2Triangles(D_800465B0[0]++, 5, 4, 7, 0, 4, 6, 7, 0);
+                                gSP2Triangles(gpDisplayListHead[0]++, 5, 4, 7, 0, 4, 6, 7, 0);
 
-                                gSP2Triangles(D_800465B0[0]++, 7, 6, 3, 0, 6, 2, 3, 0);
+                                gSP2Triangles(gpDisplayListHead[0]++, 7, 6, 3, 0, 6, 2, 3, 0);
                             }
                         }
                         else
                         {
-                            gSPVertex(D_800465B0[0]++, shadow_vertex, 6, 0);
+                            gSPVertex(gpDisplayListHead[0]++, shadow_vertex, 6, 0);
 
-                            gSP2Triangles(D_800465B0[0]++, 1, 0, 5, 0, 0, 4, 5, 0);
+                            gSP2Triangles(gpDisplayListHead[0]++, 1, 0, 5, 0, 0, 4, 5, 0);
 
-                            gSP2Triangles(D_800465B0[0]++, 5, 4, 3, 0, 4, 2, 3, 0);
+                            gSP2Triangles(gpDisplayListHead[0]++, 5, 4, 3, 0, 4, 2, 3, 0);
                         }
                     }
                     else
                     {
-                        gSPVertex(D_800465B0[0]++, shadow_vertex, 4, 0);
+                        gSPVertex(gpDisplayListHead[0]++, shadow_vertex, 4, 0);
 
-                        gSP2Triangles(D_800465B0[0]++, 1, 0, 3, 0, 0, 2, 3, 0);
+                        gSP2Triangles(gpDisplayListHead[0]++, 1, 0, 3, 0, 0, 2, 3, 0);
                     }
                 }
             }
@@ -400,7 +400,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
     }
     if (shadow_gobj->room_gobj_next == NULL)
     {
-        gSPDisplayList(D_800465B0[0]++, &D_ovl3_80188458);
+        gSPDisplayList(gpDisplayListHead[0]++, &D_ovl3_80188458);
     }
 }
 

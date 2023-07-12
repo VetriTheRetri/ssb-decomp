@@ -3,6 +3,17 @@
 
 extern void *D_ovl2_80130FB0;
 
+enum itLinkBombStatus
+{
+    itStatus_LinkBomb_GWait,
+    itStatus_LinkBomb_AFall,
+    itStatus_LinkBomb_FHold,
+    itStatus_LinkBomb_FThrow,
+    itStatus_LinkBomb_FDrop,
+    itStatus_LinkBomb_NExplode,
+    itStatus_LinkBomb_EnumMax
+};
+
 itCreateDesc itLink_Bomb_ItemDesc = 
 {   
     It_Kind_LinkBomb,                       // Item Kind
@@ -97,19 +108,7 @@ itStatusDesc itLink_Bomb_StatusDesc[itStatus_LinkBomb_EnumMax] =
     }
 };
 
-typedef enum itLinkBombStatus
-{
-    itStatus_LinkBomb_GWait,
-    itStatus_LinkBomb_AFall,
-    itStatus_LinkBomb_FHold,
-    itStatus_LinkBomb_FThrow,
-    itStatus_LinkBomb_FDrop,
-    itStatus_LinkBomb_NExplode,
-    itStatus_LinkBomb_EnumMax
-
-} itLinkBombStatus;
-
-intptr_t Article_Link_Bomb_Scale;
+intptr_t itLink_Bomb_FileOffsetScale;
 
 // 0x801859C0
 void itLinkBomb_NExplodeWait_UpdateScale(GObj *item_gobj)
@@ -119,7 +118,7 @@ void itLinkBomb_NExplodeWait_UpdateScale(GObj *item_gobj)
 
     if (ip->item_vars.link_bomb.scale_int == 0)
     {
-        f32 *p_scale = (f32*) ((uintptr_t)*itLink_Bomb_ItemDesc.p_file + (intptr_t)&Article_Link_Bomb_Scale); // Linker thing
+        f32 *p_scale = (f32*) ((uintptr_t)*itLink_Bomb_ItemDesc.p_file + (intptr_t)&itLink_Bomb_FileOffsetScale); // Linker thing
 
         s32 index = (ip->item_vars.link_bomb.scale_index >= ITLINKBOMB_SCALE_INDEX_REWIND) ? (ITLINKBOMB_SCALE_INDEX_MAX - ip->item_vars.link_bomb.scale_index) : ip->item_vars.link_bomb.scale_index;
 
@@ -243,7 +242,7 @@ bool32 itLinkBomb_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITLINKBOMB_GRAVITY, ITLINKBOMB_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITLINKBOMB_GRAVITY, ITLINKBOMB_T_VEL);
 
     if (ip->lifetime == 0)
     {
@@ -313,8 +312,6 @@ bool32 itLinkBomb_AFall_ProcMap(GObj *item_gobj)
 
     return FALSE;
 }
-
-extern itStatusDesc itLink_Bomb_StatusDesc[];
 
 // 0x80185F70
 void itLinkBomb_GWait_SetStatus(GObj *item_gobj)
@@ -516,7 +513,7 @@ void itLinkBomb_NExplode_UpdateHitEvent(GObj *item_gobj)
 // 0x80186498
 bool32 itLinkBomb_SDefault_ProcShield(GObj *item_gobj)
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

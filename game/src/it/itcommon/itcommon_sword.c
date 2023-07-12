@@ -98,7 +98,7 @@ bool32 itSword_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITSWORD_GRAVITY, ITSWORD_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITSWORD_GRAVITY, ITSWORD_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -121,7 +121,7 @@ bool32 itSword_AFall_ProcMap(GObj *item_gobj)
 // 0x80174BE4
 void itSword_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Sword_StatusDesc, itStatus_Sword_GWait);
 }
 
@@ -157,7 +157,7 @@ bool32 itSword_FThrow_ProcHit(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

@@ -41,11 +41,11 @@ void		wpMain_ReflectorSetLR				(wpStruct *wp, ftStruct *fp);
 
 
 // Apply stale multiplier to final hitbox damage output (+ 0.999% bonus)
-s32			wpMain_DamageApplyStale				(wpStruct *wp);
+s32			wpMain_GetDamageOutput				(wpStruct *wp);
 
 
 // Reset weapon's record of previously hit targets
-void		wpMain_ClearHitVictimRecord			(wpStruct *wp);
+void		wpMain_ClearHitRecord				(wpStruct *wp);
 
 
 // Unknown

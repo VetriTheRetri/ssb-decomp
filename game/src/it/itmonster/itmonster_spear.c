@@ -87,7 +87,7 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ap, ITSPEAR_GRAVITY, ITSPEAR_T_VEL);
+    itMain_UpdateGravityClampTVel(ap, ITSPEAR_GRAVITY, ITSPEAR_T_VEL);
 
     ap->phys_info.vel_air.x += ITSPEAR_SWARM_CALL_VEL_X * ap->lr;
 
@@ -227,17 +227,17 @@ bool32 func_ovl3_80180354(GObj *weapon_gobj)
     else return FALSE;
 }
 
-extern Gfx *D_800465B0[4];
+extern Gfx *gpDisplayListHead[4];
 
 void func_ovl3_80180400(GObj *item_gobj)
 {
-    gDPPipeSync(D_800465B0[0]++);
+    gDPPipeSync(gpDisplayListHead[0]++);
 
-    gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+    gDPSetRenderMode(gpDisplayListHead[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
     func_80014038(item_gobj);
 
-    gDPPipeSync(D_800465B0[0]++);
+    gDPPipeSync(gpDisplayListHead[0]++);
 }
 
 void func_ovl3_80180480(GObj *item_gobj)

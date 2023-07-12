@@ -256,12 +256,12 @@ bool32 itMap_CheckMapCollideThrownLanding(GObj *item_gobj, f32 wall_ceil_rebound
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
         func_ovl3_80173A48(&ap->phys_info.vel, &ap->coll_data.ground_angle, ground_rebound);
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
 
         ap->times_landed++;
 
@@ -289,13 +289,13 @@ bool32 itMap_CheckMapCollideLanding(GObj *item_gobj, f32 wall_ceil_rebound, f32 
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
         func_ovl0_800C7B08(&ap->phys_info.vel, &ap->coll_data.ground_angle);
         func_ovl0_800C7AE0(&ap->phys_info.vel, ground_rebound);
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
 
         if (proc_map != NULL)
         {
@@ -315,13 +315,13 @@ bool32 itMap_CheckMapCollideAny(GObj *item_gobj, f32 wall_ceil_rebound, f32 grou
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (coll_data->coll_mask & MPCOLL_MASK_GROUND)
     {
         func_ovl0_800C7B08(&ap->phys_info.vel, &coll_data->ground_angle);
         func_ovl0_800C7AE0(&ap->phys_info.vel, ground_rebound);
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (is_collide_any != FALSE)
     {
@@ -340,7 +340,7 @@ bool32 func_ovl3_80173DF4(GObj *item_gobj, f32 wall_ceil_rebound)
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
@@ -379,7 +379,7 @@ bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 wall_ceil_rebound, void (*cb)(GOb
     }
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     return FALSE;
 }

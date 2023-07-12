@@ -23,7 +23,7 @@ extern void func_ovl3_801826A8(GObj*);
 extern void func_ovl3_80182F0C(GObj*);
 extern void func_ovl3_8017ED20(GObj*);
 
-void (*Article_Pippi_ProcStatus[It_Kind_MbMonsterEnd - It_Kind_MbMonsterStart])(GObj*) =
+void (*Article_Pippi_ProcStatus[It_Kind_MbMonsterMax - It_Kind_MbMonsterStart])(GObj*) =
 {
     func_ovl3_8017DA60, func_ovl3_8017E648, func_ovl3_8017E828, func_ovl3_8017EFC4,
     func_ovl3_8017F5C4, func_ovl3_80180160, func_ovl3_80180964, func_ovl3_801811AC,
@@ -37,7 +37,7 @@ void func_ovl3_80183210(GObj *item_gobj)
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    index = rand_u16_range(It_Kind_MbMonsterEnd - It_Kind_MbMonsterStart);
+    index = rand_u16_range(It_Kind_MbMonsterMax - It_Kind_MbMonsterStart);
 
     it_kind = index + It_Kind_MbMonsterStart;
 
@@ -72,72 +72,72 @@ void func_ovl3_80183210(GObj *item_gobj)
     Article_Pippi_ProcStatus[index](item_gobj);
 }
 
-extern Gfx *D_800465B0[4];
+extern Gfx *gpDisplayListHead[4];
 
 void func_ovl3_80183344(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    gDPPipeSync(D_800465B0[0]++);
+    gDPPipeSync(gpDisplayListHead[0]++);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
         if ((ap->display_mode == dbObject_DisplayMode_Master) || (ap->is_hold))
         {
-            gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+            gDPSetRenderMode(gpDisplayListHead[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
 
             func_80014038(item_gobj);
         }
         else if (ap->display_mode == dbObject_DisplayMode_MapCollision)
         {
-            gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+            gDPSetRenderMode(gpDisplayListHead[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
             func_80014038(item_gobj);
-            func_ovl3_801719AC(item_gobj);
+            itRender_DisplayMapCollisions(item_gobj);
         }
         else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
-            gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+            gDPSetRenderMode(gpDisplayListHead[0]++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
             func_80014038(item_gobj);
         }
         else
         {
-            func_ovl3_80171410(item_gobj);
+            itRender_DisplayHitCollisions(item_gobj);
         }
     }
-    gDPPipeSync(D_800465B0[0]++);
+    gDPPipeSync(gpDisplayListHead[0]++);
 }
 
 void func_ovl3_80183344(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    gDPPipeSync(D_800465B0[0]++);
+    gDPPipeSync(gpDisplayListHead[0]++);
 
     if (func_ovl3_80171C10(ap) != FALSE)
     {
         if ((ap->display_mode == dbObject_DisplayMode_Master) || (ap->is_hold))
         {
-            gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+            gDPSetRenderMode(gpDisplayListHead[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
 
             func_80014038(item_gobj);
         }
         else if (ap->display_mode == dbObject_DisplayMode_MapCollision)
         {
-            gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+            gDPSetRenderMode(gpDisplayListHead[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
             func_80014038(item_gobj);
-            func_ovl3_801719AC(item_gobj);
+            itRender_DisplayMapCollisions(item_gobj);
         }
         else if ((ap->item_hurt.hitstatus == gmHitCollision_HitStatus_None) && (ap->item_hit.update_state == gmHitCollision_UpdateState_Disable))
         {
-            gDPSetRenderMode(D_800465B0[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+            gDPSetRenderMode(gpDisplayListHead[0]++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
             func_80014038(item_gobj);
         }
         else
         {
-            func_ovl3_80171410(item_gobj);
+            itRender_DisplayHitCollisions(item_gobj);
         }
     }
-    gDPPipeSync(D_800465B0[0]++);
+    gDPPipeSync(gpDisplayListHead[0]++);
 }
 
 bool32 jtgt_ovl3_801835FC(GObj *item_gobj)

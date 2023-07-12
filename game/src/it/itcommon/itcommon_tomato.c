@@ -72,7 +72,7 @@ bool32 itTomato_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ap, ITTOMATO_GRAVITY, ITTOMATO_T_VEL);
+    itMain_UpdateGravityClampTVel(ap, ITTOMATO_GRAVITY, ITTOMATO_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -95,7 +95,7 @@ bool32 itTomato_AFall_ProcMap(GObj *item_gobj)
 // 0x80174554
 void itTomato_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Tomato_StatusDesc, itStatus_Tomato_GWait);
 }
 

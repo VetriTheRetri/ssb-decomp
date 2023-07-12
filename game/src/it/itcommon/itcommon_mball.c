@@ -148,7 +148,7 @@ bool32 itMBall_AFall_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
@@ -175,7 +175,7 @@ bool32 itMBall_AFall_ProcMap(GObj *item_gobj)
 // 0x8017C7C8
 void itMBall_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_GWait);
 }
 
@@ -208,7 +208,7 @@ bool32 itMBall_FThrow_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITMBALL_GRAVITY, ITMBALL_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     joint->next->unk_0x8->rotate.z = joint->rotate.z;
@@ -239,7 +239,7 @@ bool32 itMBall_SDefault_ProcHit(GObj *item_gobj)
 
     ip->item_vars.m_ball.is_rebound = TRUE;
 
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }
@@ -255,7 +255,7 @@ bool32 itMBall_SDefault_ProcReflector(GObj *item_gobj)
 
     ip->item_vars.m_ball.is_rebound = TRUE;
 
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     fighter_gobj = ip->item_vars.m_ball.owner_gobj;
     ip->owner_gobj = fighter_gobj;

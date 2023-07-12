@@ -246,7 +246,7 @@ bool32 itRShell_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITRSHELL_GRAVITY, ITRSHELL_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITRSHELL_GRAVITY, ITRSHELL_T_VEL);
 
     if (!(ip->item_vars.shell.damage_all_delay))
     {
@@ -294,7 +294,7 @@ void itRShell_GWait_UpdateStatusVars(GObj *item_gobj)
 
     if (ABSF(ip->phys_info.vel_air.x) < ITRSHELL_STOP_VEL_X)
     {
-        itMain_SetGroundPickup(item_gobj);
+        itMain_SetGroundAllowPickup(item_gobj);
 
         ip->item_vars.shell.is_damage = FALSE;
         ip->phys_info.vel_air.x = 0.0F;
@@ -316,7 +316,7 @@ void itRShell_GWait_UpdateStatusVars(GObj *item_gobj)
     }
     else
     {
-        itMain_SetGroundPickup(item_gobj);
+        itMain_SetGroundAllowPickup(item_gobj);
 
         ip->phys_info.vel_air.x = 0.0F;
 
@@ -510,7 +510,7 @@ bool32 itRShell_GSpin_ProcMap(GObj *item_gobj)
     {
         ip->phys_info.vel_air.x = -ip->phys_info.vel_air.x;
 
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
         itMain_ClearOwnerStats(item_gobj);
 
         ip->item_vars.shell.vel_x = -ip->item_vars.shell.vel_x;
@@ -695,7 +695,7 @@ GObj* itCommon_RShell_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
 // 0x8017B2F8
 bool32 itRShell_SDefault_ProcShield(GObj *item_gobj)
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

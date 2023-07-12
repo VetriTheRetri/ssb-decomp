@@ -111,7 +111,7 @@ bool32 itCapsule_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -148,7 +148,7 @@ extern itStatusDesc itCommon_Capsule_StatusDesc[]; // Capsule states
 // 0x80174064
 void itCapsule_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Capsule_StatusDesc, itStatus_Capsule_GWait);
 }
 
@@ -179,7 +179,7 @@ bool32 itCapsule_FThrow_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITCAPSULE_GRAVITY, ITCAPSULE_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -214,7 +214,7 @@ void itCapsule_FThrow_SetStatus(GObj *item_gobj) // Capsule gets thrown
 // 0x801741F0
 bool32 func_ovl3_801741F0(GObj *item_gobj) // Unused
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

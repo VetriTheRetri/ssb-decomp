@@ -1121,7 +1121,7 @@ struct ftStruct
     u32 x190_flag_b3 : 1;
     u32 is_playing_sfx : 1;
     u32 x190_flag_b5 : 1;
-    u32 is_hide_item : 1;
+    u32 is_show_item : 1;
     u32 x190_flag_b7 : 1;
     u32 x191_flag_b0 : 1;
     u32 is_nullstatus : 1; // Dead / Entry / Appear / Rebirth, ignore hit collisions + blastzones?

@@ -25,7 +25,7 @@ bool32 itStar_SDefault_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ap, ITSTAR_GRAVITY, ITSTAR_T_VEL);
+    itMain_UpdateGravityClampTVel(ap, ITSTAR_GRAVITY, ITSTAR_T_VEL);
 
     ap->it_multi--;
 
@@ -47,7 +47,7 @@ bool32 itStar_SDefault_ProcMap(GObj *item_gobj)
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), 1.0F, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {

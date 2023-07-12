@@ -167,7 +167,7 @@ bool32 itGShell_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
 
     return FALSE;
 }
@@ -205,7 +205,7 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
 
     if (ABSF(ip->phys_info.vel_air.x) < ITGSHELL_STOP_VEL_X)
     {
-        itMain_SetGroundPickup(item_gobj);
+        itMain_SetGroundAllowPickup(item_gobj);
 
         ip->item_vars.shell.is_damage = FALSE;
 
@@ -228,7 +228,7 @@ void itGShell_GWait_InitItemVars(GObj *item_gobj)
     }
     else
     {
-        itMain_SetGroundPickup(item_gobj);
+        itMain_SetGroundAllowPickup(item_gobj);
 
         ip->is_damage_all = TRUE;
 
@@ -323,7 +323,7 @@ bool32 itGShell_FThrow_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITGSHELL_GRAVITY, ITGSHELL_T_VEL);
 
     return FALSE;
 }
@@ -385,7 +385,7 @@ bool32 itGShell_GSpin_ProcMap(GObj *item_gobj)
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), 0.2F, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
         itMain_ClearOwnerStats(item_gobj);
     }
     return FALSE;
@@ -557,7 +557,7 @@ GObj* itCommon_GShell_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
 // 0x801790F4
 bool32 itGShell_SDefault_ProcShield(GObj *item_gobj)
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

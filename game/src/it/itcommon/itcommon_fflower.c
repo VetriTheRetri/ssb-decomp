@@ -120,7 +120,7 @@ bool32 itFFlower_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITFFLOWER_GRAVITY, ITFFLOWER_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITFFLOWER_GRAVITY, ITFFLOWER_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -145,7 +145,7 @@ extern itStatusDesc itCommon_FFlower_StatusDesc[];
 // 0x80175BB0
 void itFFlower_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_FFlower_StatusDesc, itStatus_FFlower_GWait);
 }
 
@@ -185,7 +185,7 @@ bool32 itFFlower_SDefault_ProcHit(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

@@ -6,7 +6,7 @@ bool32 jtgt_ovl3_80182630(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
+    itMain_UpdateGravityClampTVel(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
 
     return FALSE;
 }
@@ -61,7 +61,7 @@ bool32 func_ovl3_80182764(GObj *item_gobj)
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
+    itMain_UpdateGravityClampTVel(ap, ITSAWAMURA_GRAVITY, ITSAWAMURA_T_VEL);
 
     if ((ap->lr == RIGHT) && ((gpMapData->blastzone_right - ITSAWAMURA_DESPAWN_OFF_X) <= joint->translate.x))
     {

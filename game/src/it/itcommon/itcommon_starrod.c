@@ -120,7 +120,7 @@ bool32 itStarRod_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITSTARROD_GRAVITY, ITSTARROD_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITSTARROD_GRAVITY, ITSTARROD_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -145,7 +145,7 @@ bool32 itStarRod_AFall_ProcMap(GObj *item_gobj)
 // 0x80177F18
 void itStarRod_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_StarRod_StatusDesc, itStatus_StarRod_GWait);
 }
 
@@ -173,7 +173,7 @@ bool32 itStarRod_FThrow_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITSTARROD_GRAVITY, ITSTARROD_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITSTARROD_GRAVITY, ITSTARROD_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -192,7 +192,7 @@ bool32 itStarRod_FThrow_ProcHit(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

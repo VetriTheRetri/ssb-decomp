@@ -72,7 +72,7 @@ bool32 itHeart_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITHEART_GRAVITY, ITHEART_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITHEART_GRAVITY, ITHEART_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -95,7 +95,7 @@ bool32 itHeart_AFall_ProcMap(GObj *item_gobj)
 // 0x80174780
 void itHeart_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Heart_StatusDesc, itStatus_Heart_GWait);
 }
 

@@ -157,7 +157,7 @@ bool32 itRBomb_AFall_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint;
 
-    itMain_UpdatePhysicsAir(ip, ITRBOMB_GRAVITY, ITRBOMB_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITRBOMB_GRAVITY, ITRBOMB_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
     joint->rotate.z += ip->item_vars.rbomb.roll_rotate_step;
@@ -206,7 +206,7 @@ bool32 itRBomb_AFall_CheckCollideGround(GObj *item_gobj, f32 vel_mod)
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), vel_mod, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
@@ -238,7 +238,7 @@ bool32 itRBomb_AFall_ProcMap(GObj *item_gobj)
 
             ap->phys_info.vel_air.y *= 0.2F;
 
-            func_ovl3_80172508(item_gobj);
+            itMain_VelSetRotateStepLR(item_gobj);
         }
         func_800269C0(gmSound_SFX_RBombMap);
         itMain_ClearOwnerStats(item_gobj);

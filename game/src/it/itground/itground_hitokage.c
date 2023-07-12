@@ -121,7 +121,7 @@ bool32 itHitokage_NDamage_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint;
 
-    itMain_UpdatePhysicsAir(ip, ITHITOKAGE_GRAVITY, ITHITOKAGE_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITHITOKAGE_GRAVITY, ITHITOKAGE_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
 

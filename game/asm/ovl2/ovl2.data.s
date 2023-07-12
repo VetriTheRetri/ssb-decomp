@@ -5593,7 +5593,7 @@ glabel D_ovl2_8012BFF8
 glabel D_ovl2_8012C028
   .incbin "ovl2.raw.bin", 0x55B98, 0x30
 
-glabel D_ovl2_8012C058
+glabel gDisplayListHurtboxCuboid
   .incbin "ovl2.raw.bin", 0x55BC8, 0x1C
   /* 55BE4 0A7874 8012C074 */
   .asciz "@@@"
@@ -5608,12 +5608,12 @@ glabel D_ovl2_8012C058
   /* 55C44 0A78D4 8012C0D4 */  .4byte D_ovl2_8012BB78
   .incbin "ovl2.raw.bin", 0x55C48, 0x50
 
-glabel D_ovl2_8012C128
+glabel gDisplayListHitboxEdge
   .incbin "ovl2.raw.bin", 0x55C98, 0x1C
   /* 55CB4 0A7944 8012C144 */  .4byte D_ovl2_8012BCF8
   .incbin "ovl2.raw.bin", 0x55CB8, 0x18
 
-glabel D_ovl2_8012C160
+glabel gDisplayListHitboxBlend
   .incbin "ovl2.raw.bin", 0x55CD0, 0x3C
   /* 55D0C 0A799C 8012C19C */  .4byte D_ovl2_8012B978
   .incbin "ovl2.raw.bin", 0x55D10, 0x5C
@@ -5630,21 +5630,21 @@ glabel D_ovl2_8012C160
   /* 55E34 0A7AC4 8012C2C4 */  .4byte D_ovl2_8012BFB8
   .incbin "ovl2.raw.bin", 0x55E38, 0x48
 
-glabel D_ovl2_8012C310
+glabel gDisplayListHitboxCube
   .incbin "ovl2.raw.bin", 0x55E80, 0x3C
   /* 55EBC 0A7B4C 8012C34C */  .4byte D_ovl2_8012B978
   .incbin "ovl2.raw.bin", 0x55EC0, 0x2C
   /* 55EEC 0A7B7C 8012C37C */  .4byte D_ovl2_8012BE78
   .incbin "ovl2.raw.bin", 0x55EF0, 0x58
 
-glabel D_ovl2_8012C3D8
+glabel gDisplayListMapCollisionBottom
   .incbin "ovl2.raw.bin", 0x55F48, 0x3C
   /* 55F84 0A7C14 8012C414 */  .4byte D_ovl2_8012B978
   .incbin "ovl2.raw.bin", 0x55F88, 0x2C
   /* 55FB4 0A7C44 8012C444 */  .4byte D_ovl2_8012BFF8
   .incbin "ovl2.raw.bin", 0x55FB8, 0x10
 
-glabel D_ovl2_8012C458
+glabel gDisplayListMapCollisionTop
   .incbin "ovl2.raw.bin", 0x55FC8, 0xC
   /* 55FD4 0A7C64 8012C464 */  .4byte D_ovl2_8012C028
   .incbin "ovl2.raw.bin", 0x55FD8, 0x28

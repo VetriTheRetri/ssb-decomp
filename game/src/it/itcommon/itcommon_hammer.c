@@ -104,7 +104,7 @@ bool32 itHammer_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -129,7 +129,7 @@ extern itStatusDesc itCommon_Hammer_StatusDesc[];
 // 0x801761C4
 void itHammer_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_GWait);
 }
 
@@ -159,7 +159,7 @@ bool32 itHammer_FThrow_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITHAMMER_GRAVITY, ITHAMMER_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -178,7 +178,7 @@ bool32 itHammer_SDefault_ProcHit(GObj *item_gobj)
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }
@@ -202,7 +202,7 @@ bool32 itHammer_FDrop_ProcMap(GObj *item_gobj)
 // 0x80176378
 void itHammer_FDrop_SetStatus(GObj *item_gobj)
 {
-    func_ovl3_80172FBC(item_gobj);
+    itMain_ResetColAnim(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Hammer_StatusDesc, itStatus_Hammer_FDrop);
 
     DObjGetStruct(item_gobj)->next->rotate.y = HALF_PI32;

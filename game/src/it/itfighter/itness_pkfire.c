@@ -136,7 +136,7 @@ bool32 itPKFire_AFall_ProcUpdate(GObj *item_gobj)
     {
         return TRUE;
     }
-    else itMain_UpdatePhysicsAir(ip, ITPKFIRE_GRAVITY, ITPKFIRE_T_VEL);
+    else itMain_UpdateGravityClampTVel(ip, ITPKFIRE_GRAVITY, ITPKFIRE_T_VEL);
 
     return FALSE;
 }

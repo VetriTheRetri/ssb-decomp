@@ -139,7 +139,7 @@ bool32 itNBumper_AFall_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
 
     if (ip->it_multi != 0)
     {
@@ -206,7 +206,7 @@ bool32 itNBumper_FThrow_ProcHit(GObj *item_gobj)
 // 0x8017B600
 void itNBumper_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_NBumper_StatusDesc, itStatus_NBumper_GWait);
 }
 
@@ -232,7 +232,7 @@ bool32 itNBumper_FThrow_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITBUMPER_GRAVITY_NORMAL, ITBUMPER_T_VEL);
 
     if (!(ip->item_vars.bumper.damage_all_delay))
     {
@@ -258,7 +258,7 @@ bool32 itNBumper_FThrow_ProcMap(GObj *item_gobj)
 // 0x8017B74C
 bool32 itNBumper_FThrow_ProcShield(GObj *item_gobj)
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
     itMain_ClearOwnerStats(item_gobj);
 
     return FALSE;
@@ -522,7 +522,7 @@ bool32 itNBumper_AHit_ProcUpdate(GObj *item_gobj)
     }
     else ip->item_vars.bumper.hit_anim_length--;
 
-    itMain_UpdatePhysicsAir(ip, ITBUMPER_GRAVITY_HIT, ITBUMPER_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITBUMPER_GRAVITY_HIT, ITBUMPER_T_VEL);
 
     if (ip->it_multi != 0)
     {

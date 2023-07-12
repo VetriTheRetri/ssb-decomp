@@ -548,7 +548,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
         break;
 
     case ftScriptEvent_Kind_HideItem:
-        fp->is_hide_item = ftScriptEventCast(p_event, ftScriptEventUnkFlag)->flag;
+        fp->is_show_item = ftScriptEventCast(p_event, ftScriptEventUnkFlag)->flag;
 
         ftScriptEventAdvance(p_event, ftScriptEventDefault);
 
@@ -915,39 +915,39 @@ bool32 caMain_UpdateColAnim(caStruct *colanim, GObj *fighter_gobj, bool32 is_pla
                 break;
 
             case gmColorEvent_Kind_ToggleColorOff:
-                colanim->is_use_color1 = colanim->is_use_color2 = colanim->unk_ca_0x60_b34 = 0;
+                colanim->is_use_envcolor = colanim->is_use_blendcolor = colanim->unk_ca_0x60_b34 = 0;
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventDefault);
 
                 break;
 
             case gmColorEvent_Kind_SetColor1:
-                colanim->is_use_color1 = TRUE;
+                colanim->is_use_envcolor = TRUE;
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA1);
 
-                colanim->color1.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
-                colanim->color1.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
-                colanim->color1.b = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->b;
-                colanim->color1.a = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->a;
+                colanim->envcolor.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
+                colanim->envcolor.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
+                colanim->envcolor.b = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->b;
+                colanim->envcolor.a = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->a;
 
-                colanim->color1.ir = colanim->color1.ig = colanim->color1.ib = colanim->color1.ia = 0;
+                colanim->envcolor.ir = colanim->envcolor.ig = colanim->envcolor.ib = colanim->envcolor.ia = 0;
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA2);
 
                 break;
 
             case gmColorEvent_Kind_SetColor2:
-                colanim->is_use_color2 = TRUE;
+                colanim->is_use_blendcolor = TRUE;
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA1);
 
-                colanim->color2.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
-                colanim->color2.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
-                colanim->color2.b = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->b;
-                colanim->color2.a = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->a;
+                colanim->blendcolor.r = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->r;
+                colanim->blendcolor.g = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->g;
+                colanim->blendcolor.b = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->b;
+                colanim->blendcolor.a = gmColorEventCast(colanim->cs[i].p_script, gmColorEventSetRGBA2)->a;
 
-                colanim->color2.ir = colanim->color2.ig = colanim->color2.ib = colanim->color2.ia = 0;
+                colanim->blendcolor.ir = colanim->blendcolor.ig = colanim->blendcolor.ib = colanim->blendcolor.ia = 0;
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventSetRGBA2);
 
@@ -958,10 +958,10 @@ bool32 caMain_UpdateColAnim(caStruct *colanim, GObj *fighter_gobj, bool32 is_pla
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
 
-                colanim->color1.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->color1.r) / blend_frames;
-                colanim->color1.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->color1.g) / blend_frames;
-                colanim->color1.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->color1.b) / blend_frames;
-                colanim->color1.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->color1.a) / blend_frames;
+                colanim->envcolor.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->envcolor.r) / blend_frames;
+                colanim->envcolor.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->envcolor.g) / blend_frames;
+                colanim->envcolor.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->envcolor.b) / blend_frames;
+                colanim->envcolor.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->envcolor.a) / blend_frames;
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
 
@@ -972,10 +972,10 @@ bool32 caMain_UpdateColAnim(caStruct *colanim, GObj *fighter_gobj, bool32 is_pla
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA1);
 
-                colanim->color2.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->color2.r) / blend_frames;
-                colanim->color2.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->color2.g) / blend_frames;
-                colanim->color2.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->color2.b) / blend_frames;
-                colanim->color2.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->color2.a) / blend_frames;
+                colanim->blendcolor.ir = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->r - colanim->blendcolor.r) / blend_frames;
+                colanim->blendcolor.ig = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->g - colanim->blendcolor.g) / blend_frames;
+                colanim->blendcolor.ib = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->b - colanim->blendcolor.b) / blend_frames;
+                colanim->blendcolor.ia = (s32)(gmColorEventCast(colanim->cs[i].p_script, gmColorEventBlendRGBA2)->a - colanim->blendcolor.a) / blend_frames;
 
                 gmColorEventAdvance(colanim->cs[i].p_script, gmColorEventBlendRGBA2);
 
@@ -1050,19 +1050,19 @@ bool32 caMain_UpdateColAnim(caStruct *colanim, GObj *fighter_gobj, bool32 is_pla
             }
         }
     }
-    if (colanim->is_use_color1)
+    if (colanim->is_use_envcolor)
     {
-        colanim->color1.r += colanim->color1.ir;
-        colanim->color1.g += colanim->color1.ig;
-        colanim->color1.b += colanim->color1.ib;
-        colanim->color1.a += colanim->color1.ia;
+        colanim->envcolor.r += colanim->envcolor.ir;
+        colanim->envcolor.g += colanim->envcolor.ig;
+        colanim->envcolor.b += colanim->envcolor.ib;
+        colanim->envcolor.a += colanim->envcolor.ia;
     }
-    if (colanim->is_use_color2)
+    if (colanim->is_use_blendcolor)
     {
-        colanim->color2.r += colanim->color2.ir;
-        colanim->color2.g += colanim->color2.ig;
-        colanim->color2.b += colanim->color2.ib;
-        colanim->color2.a += colanim->color2.ia;
+        colanim->blendcolor.r += colanim->blendcolor.ir;
+        colanim->blendcolor.g += colanim->blendcolor.ig;
+        colanim->blendcolor.b += colanim->blendcolor.ib;
+        colanim->blendcolor.a += colanim->blendcolor.ia;
     }
     if (colanim->duration != 0)
     {
@@ -2098,7 +2098,7 @@ void func_ovl2_800E2D44(ftStruct *attacker_fp, ftHitbox *attacker_hit, ftStruct 
 
 void func_ovl2_800E2F04(wpStruct *ip, wpHitbox *wp_hit, s32 index, ftStruct *fp, ftHitbox *ft_hit, GObj *weapon_gobj, GObj *fighter_gobj)
 {
-    s32 damage = wpMain_DamageApplyStale(ip);
+    s32 damage = wpMain_GetDamageOutput(ip);
     Vec3f sp30;
 
     func_ovl2_800F0C08(&sp30, wp_hit, index, ft_hit);
@@ -2129,7 +2129,7 @@ void func_ovl2_800E2F04(wpStruct *ip, wpHitbox *wp_hit, s32 index, ftStruct *fp,
 
 void func_ovl2_800E3048(wpStruct *ip, wpHitbox *wp_hit, s32 arg2, ftStruct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
 {
-    s32 damage = wpMain_DamageApplyStale(ip);
+    s32 damage = wpMain_GetDamageOutput(ip);
     Vec3f sp30;
 
     func_ovl3_8016679C(ip, wp_hit, fighter_gobj, (wp_hit->can_rehit_shield) ? gmHitCollision_Type_ShieldRehit : gmHitCollision_Type_Shield, 0);
@@ -2163,7 +2163,7 @@ void func_ovl2_800E3048(wpStruct *ip, wpHitbox *wp_hit, s32 arg2, ftStruct *fp, 
 
 void func_ovl2_800E31B4(wpStruct *ip, wpHitbox *wp_hit, ftStruct *fp, GObj *fighter_gobj)
 {
-    s32 damage = wpMain_DamageApplyStale(ip);
+    s32 damage = wpMain_GetDamageOutput(ip);
 
     func_ovl3_8016679C(ip, wp_hit, fighter_gobj, gmHitCollision_Type_Reflect, 0);
 
@@ -2197,7 +2197,7 @@ void func_ovl2_800E31B4(wpStruct *ip, wpHitbox *wp_hit, ftStruct *fp, GObj *figh
 
 void func_ovl2_800E3308(wpStruct *ip, wpHitbox *wp_hit, ftStruct *fp, GObj *fighter_gobj)
 {
-    s32 damage = wpMain_DamageApplyStale(ip);
+    s32 damage = wpMain_GetDamageOutput(ip);
 
     func_ovl3_8016679C(ip, wp_hit, fighter_gobj, gmHitCollision_Type_Absorb, 0);
 
@@ -2219,7 +2219,7 @@ void func_ovl2_800E3308(wpStruct *ip, wpHitbox *wp_hit, ftStruct *fp, GObj *figh
 
 void func_ovl2_800E3418(wpStruct *wp, wpHitbox *wp_hit, s32 hitbox_id, ftStruct *fp, ftHurtbox *ft_hurt, GObj *weapon_gobj, GObj *fighter_gobj)
 {
-    s32 unk = wpMain_DamageApplyStale(wp);
+    s32 unk = wpMain_GetDamageOutput(wp);
     s32 damage;
 
     func_ovl3_8016679C(wp, wp_hit, fighter_gobj, (wp_hit->can_rehit_fighter) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
@@ -2268,7 +2268,7 @@ void func_ovl2_800E3418(wpStruct *wp, wpHitbox *wp_hit, s32 hitbox_id, ftStruct 
 
 void func_ovl2_800E35BC(itStruct *ip, itHitbox *it_hit, s32 arg2, ftStruct *fp, ftHitbox *ft_hit, GObj *item_gobj, GObj *fighter_gobj)
 {
-    s32 damage = itMain_ApplyHitDamage(ip);
+    s32 damage = itMain_GetDamageOutput(ip);
     Vec3f sp30;
 
     func_ovl2_800F0E70(&sp30, it_hit, arg2, ft_hit);
@@ -2298,7 +2298,7 @@ void func_ovl2_800E35BC(itStruct *ip, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
 
 void func_ovl2_800E35BC(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, ftHitbox *ft_hit, GObj *item_gobj, GObj *fighter_gobj)
 {
-    s32 damage = itMain_ApplyHitDamage(ap);
+    s32 damage = itMain_GetDamageOutput(ap);
     Vec3f sp30;
 
     func_ovl2_800F0E70(&sp30, it_hit, arg2, ft_hit);
@@ -2328,7 +2328,7 @@ void func_ovl2_800E35BC(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
 
 void func_ovl2_800E36F8(itStruct *ap, itHitbox *it_hit, s32 hitbox_id, ftStruct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
 {
-    s32 damage = itMain_ApplyHitDamage(ap);
+    s32 damage = itMain_GetDamageOutput(ap);
     Vec3f sp30;
 
     itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, (it_hit->can_rehit_shield) ? gmHitCollision_Type_ShieldRehit : gmHitCollision_Type_Shield, 0);
@@ -2362,7 +2362,7 @@ void func_ovl2_800E36F8(itStruct *ap, itHitbox *it_hit, s32 hitbox_id, ftStruct 
 
 void func_ovl2_800E3860(itStruct *ap, itHitbox *it_hit, ftStruct *fp, GObj *fighter_gobj)
 {
-    s32 damage = itMain_ApplyHitDamage(ap);
+    s32 damage = itMain_GetDamageOutput(ap);
 
     itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Reflect, 0);
 
@@ -2398,7 +2398,7 @@ extern u8 D_ovl65_801936AA;
 
 void func_ovl2_800E39B0(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, ftHurtbox *ft_hurt, GObj *item_gobj, GObj *fighter_gobj)
 {
-    s32 damage = itMain_ApplyHitDamage(ap);
+    s32 damage = itMain_GetDamageOutput(ap);
     s32 damage_again;
     s32 lr_attack;
 
@@ -2642,7 +2642,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         case ftHitlog_ObjectClass_Weapon:
             wp_hit = hitlog->attacker_hit;
             ip = wpGetStruct(hitlog->attacker_gobj);
-            damage = wpMain_DamageApplyStale(ip);
+            damage = wpMain_GetDamageOutput(ip);
 
             var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, damage, wp_hit->knockback_weight, wp_hit->knockback_scale, wp_hit->knockback_base, attributes->weight, ip->handicap, this_fp->handicap);
 
@@ -2678,7 +2678,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             it_hit = hitlog->attacker_hit;
             ap = itGetStruct(hitlog->attacker_gobj);
 
-            damage = itMain_ApplyHitDamage(ap);
+            damage = itMain_GetDamageOutput(ap);
 
             var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, attributes->weight, ap->handicap, this_fp->handicap);
 
@@ -3895,7 +3895,7 @@ void ftManager_ProcUpdateMain(GObj *fighter_gobj)
 
         case TRUE:
 
-            if ((fp->item_hold != NULL) && (fp->is_hide_item) && (itGetStruct(fp->item_hold)->it_kind == It_Kind_Sword))
+            if ((fp->item_hold != NULL) && (fp->is_show_item) && (itGetStruct(fp->item_hold)->it_kind == It_Kind_Sword))
             {
                 s32 unused;
                 HAL_Bitmap bitmap;
@@ -4358,7 +4358,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     }
     fp->coll_data.ignore_line_id = -1;
 
-    fp->is_hide_item = TRUE;
+    fp->is_show_item = TRUE;
     fp->x190_flag_b7 = FALSE;
 
     ftCommon_SetCaptureIgnoreMask(fp, FTCATCHKIND_MASK_NONE);

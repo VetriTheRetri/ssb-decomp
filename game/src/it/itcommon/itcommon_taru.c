@@ -124,7 +124,7 @@ bool32 itTaru_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITTARU_GRAVITY, ITTARU_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITTARU_GRAVITY, ITTARU_T_VEL);
 
     DObjGetStruct(item_gobj)->rotate.z += ip->item_vars.taru.roll_rotate_step;
 
@@ -178,7 +178,7 @@ bool32 itTaru_AFall_ProcMap(GObj *item_gobj)
 // 0x80179CE8
 void itTaru_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Taru_StatusDesc, itStatus_Taru_GWait);
 }
 
@@ -208,7 +208,7 @@ bool32 itTaru_FThrow_CheckMapCollision(GObj *item_gobj, f32 vel_mod)
 
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), vel_mod, NULL) != FALSE)
     {
-        func_ovl3_80172508(item_gobj);
+        itMain_VelSetRotateStepLR(item_gobj);
     }
     if (is_collide_ground != FALSE)
     {
@@ -252,7 +252,7 @@ bool32 itTaru_FThrow_ProcMap(GObj *item_gobj)
 
             ip->phys_info.vel_air.y *= 0.2F;
 
-            func_ovl3_80172508(item_gobj);
+            itMain_VelSetRotateStepLR(item_gobj);
         }
         itMain_ClearOwnerStats(item_gobj);
     }
@@ -280,7 +280,7 @@ void itTaru_FThrow_SetStatus(GObj *item_gobj)
 // 0x80179F50 - Unused
 bool32 func_ovl3_80179F50(GObj *item_gobj)
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

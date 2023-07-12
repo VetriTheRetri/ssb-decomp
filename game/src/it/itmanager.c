@@ -135,9 +135,9 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 
     if (attributes->unk_0x10_b2)
     {
-        cb_render = (attributes->unk_0x10_b0) ? func_ovl3_8017224C : func_ovl3_80171F4C;
+        cb_render = (attributes->unk_0x10_b0) ? itRender_ProcRenderColAnimXLU : itRender_ProcRenderColAnimOPA;
     }
-    else cb_render = (attributes->unk_0x10_b0) ? func_ovl3_80171D38 : func_ovl3_80171C7C;
+    else cb_render = (attributes->unk_0x10_b0) ? itRender_ProcRenderAlphaBlend : itRender_ProcRenderNoAlpha;
 
     func_80009DF4(item_gobj, cb_render, 0xB, 0x80000000, -1);
 
@@ -150,7 +150,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->phys_info.vel_ground = 0.0F;
     ap->attributes = attributes;
 
-    func_ovl3_80172508(item_gobj);
+    itMain_VelSetRotateStepLR(item_gobj);
     itMain_ResetPlayerVars(item_gobj);
 
     ap->is_allow_pickup = FALSE;
@@ -324,7 +324,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->ground_or_air = GA_Air;
 
     itManager_UpdateHitPositions(item_gobj);
-    func_ovl3_80172FBC(item_gobj);
+    itMain_ResetColAnim(item_gobj);
 
     return item_gobj;
 }
@@ -339,7 +339,7 @@ GObj* func_ovl3_8016EA78(GObj *item_gobj, s32 index, Vec3f *pos, Vec3f *vel, u32
 
     if (new_gobj != NULL)
     {
-        if (index <= It_Kind_CommonEnd)
+        if (index < It_Kind_CommonMax)
         {
             func_ovl2_801044B4(pos);
             func_ovl3_80172394(new_gobj, FALSE);
@@ -628,7 +628,7 @@ void func_ovl3_8016EF40(void)
 void itManager_InitMonsterVars(void)
 {
     gMonsterData.monster_curr = gMonsterData.monster_prev = U8_MAX;
-    gMonsterData.monster_count = (It_Kind_MbMonsterEnd - It_Kind_MbMonsterStart);
+    gMonsterData.monster_count = (It_Kind_MbMonsterMax - It_Kind_MbMonsterStart);
 }
 
 GObj* func_ovl3_8016F238(GObj *spawn_gobj, s32 index, Vec3f *pos, Vec3f *vel, u32 flags)
@@ -1005,8 +1005,8 @@ void itManager_UpdateAttackStatItem(itStruct *this_ap, itHitbox *this_hit, s32 t
     s32 victim_hit_priority;
     s32 this_hit_priority;
 
-    victim_hit_damage = itMain_ApplyHitDamage(victim_ap);
-    this_hit_damage = itMain_ApplyHitDamage(this_ap);
+    victim_hit_damage = itMain_GetDamageOutput(victim_ap);
+    this_hit_damage = itMain_GetDamageOutput(this_ap);
 
     func_ovl2_800F0EFC(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
 
@@ -1041,8 +1041,8 @@ void itManager_UpdateAttackStatItem(itStruct *this_ap, itHitbox *this_hit, s32 t
 // 0x8016FE4C
 void itManager_UpdateAttackStatWeapon(wpStruct *ip, wpHitbox *wp_hit, s32 wp_hit_id, itStruct *ap, itHitbox *it_hit, s32 it_hit_id, GObj *weapon_gobj, GObj *item_gobj)
 {
-    s32 wp_hit_damage = wpMain_DamageApplyStale(ip);
-    s32 it_hit_damage = itMain_ApplyHitDamage(ap);
+    s32 wp_hit_damage = wpMain_GetDamageOutput(ip);
+    s32 it_hit_damage = itMain_GetDamageOutput(ap);
     Vec3f sp2C;
     s32 it_hit_priority;
     s32 wp_hit_priority;
@@ -1088,7 +1088,7 @@ void itManager_UpdateDamageStatItem(itStruct *attack_ap, itHitbox *attack_it_hit
     s32 lr;
     s32 unused;
 
-    damage = itMain_ApplyHitDamage(attack_ap);
+    damage = itMain_GetDamageOutput(attack_ap);
 
     unk_bool = (((defend_ap->type == It_Type_Ground) && (attack_it_hit->can_rehit_item)) ? TRUE : FALSE);
 
@@ -1191,7 +1191,7 @@ void itManager_UpdateDamageStatWeapon(wpStruct *ip, wpHitbox *wp_hit, s32 arg2, 
     f32 vel;
     s32 lr;
 
-    damage = wpMain_DamageApplyStale(ip);
+    damage = wpMain_GetDamageOutput(ip);
 
     unk_bool = ((ap->type == It_Type_Ground) && (wp_hit->can_rehit_item)) ? TRUE : FALSE;
 
@@ -1760,7 +1760,7 @@ void func_ovl3_801713B0(GObj *item_gobj)
 
     if (caMain_UpdateColAnim(&ap->colanim, item_gobj, 0, 0) != FALSE)
     {
-        func_ovl3_80172FBC(item_gobj);
+        itMain_ResetColAnim(item_gobj);
     }
 }
 

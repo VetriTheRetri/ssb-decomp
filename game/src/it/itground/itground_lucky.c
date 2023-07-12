@@ -146,7 +146,7 @@ bool32 itGLucky_NDamage_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint;
 
-    itMain_UpdatePhysicsAir(ip, ITGRLUCKY_GRAVITY, ITGRLUCKY_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITGRLUCKY_GRAVITY, ITGRLUCKY_T_VEL);
 
     joint = DObjGetStruct(item_gobj);
 

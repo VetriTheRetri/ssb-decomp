@@ -111,7 +111,7 @@ bool32 itEgg_AFall_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     joint->next->rotate.z = joint->rotate.z;
@@ -160,7 +160,7 @@ void itEgg_GWait_SetModelVars(GObj *item_gobj)
 // 0x801816E0
 void itEgg_GWait_SetStatus(GObj *item_gobj)
 {
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itEgg_GWait_SetModelVars(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Egg_StatusDesc, itStatus_Egg_GWait);
 }
@@ -193,7 +193,7 @@ bool32 itEgg_FThrow_ProcUpdate(GObj *item_gobj)
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITEGG_GRAVITY, ITEGG_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     joint->next->rotate.z = joint->rotate.z;
@@ -231,7 +231,7 @@ void itEgg_FThrow_SetStatus(GObj *item_gobj)
 
 bool32 func_ovl3_80181894(GObj *item_gobj) // Unused
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

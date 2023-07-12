@@ -149,7 +149,7 @@ typedef union gmStatFlags
 
 } gmStatFlags;
 
-typedef struct Color_Script
+typedef struct caScript
 {
     u32 *p_script; // Pointer to Color Animation script?
     u16 color_event_timer;
@@ -159,27 +159,27 @@ typedef struct Color_Script
     void *p_goto[2];
     s32 unk_ca_timer;
 
-} Color_Script;
+} caScript;
 
-typedef struct Color_Info
+typedef struct caColorInfo
 {
     u8 r, g, b, a;
     s16 ir, ig, ib, ia; // Interpolation step
 
-} Color_Info;
+} caColorInfo;
 
 typedef struct caStruct
 {
-    Color_Script cs[2];
+    caScript cs[2];
     s32 duration;
     s32 colanim_id;
-    Color_Info color1;
+    caColorInfo envcolor;
     f32 light_angle1;
     f32 light_angle2;
-    Color_Info color2;
-    u8 is_use_color1 : 1;
+    caColorInfo blendcolor;
+    u8 is_use_envcolor : 1;
     u8 is_use_light : 1;
-    u8 is_use_color2 : 1;
+    u8 is_use_blendcolor : 1;
     u8 unk_ca_0x60_b34 : 2;
 
 } caStruct;

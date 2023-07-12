@@ -4,7 +4,7 @@ bool32 jtgt_ovl3_8017E7A0(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
+    itMain_UpdateGravityClampTVel(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
 
     return FALSE;
 }
@@ -45,7 +45,7 @@ bool32 jtgt_ovl3_8017E880(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
+    itMain_UpdateGravityClampTVel(ap, ITTOSAKINTO_GRAVITY, ITTOSAKINTO_T_VEL);
 
     if (ap->it_multi == 0)
     {

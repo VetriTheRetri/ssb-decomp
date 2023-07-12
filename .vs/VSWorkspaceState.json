@@ -3,12 +3,13 @@
     "",
     "\\game",
     "\\game\\include",
+    "\\game\\include\\PR",
     "\\game\\src",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
+    "\\game\\src\\gm",
     "\\game\\src\\it",
-    "\\game\\src\\ovl0"
+    "\\game\\src\\wp"
   ],
-  "SelectedNode": "\\game\\src\\ovl0\\lbsavedata.c",
+  "SelectedNode": "\\game\\src\\it\\itmanager.c",
   "PreviewInSolutionExplorer": false
 }

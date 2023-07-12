@@ -222,7 +222,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
 
     wp->weapon_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
 
-    wpMain_ClearHitVictimRecord(wp);
+    wpMain_ClearHitRecord(wp);
 
     wp->hit_normal_damage = 0;
     wp->hit_refresh_damage = 0;
@@ -641,8 +641,8 @@ void func_ovl3_8016679C(wpStruct *this_wp, wpHitbox *wp_hit, GObj *target_gobj, 
 // 0x80166854
 void wpManager_ProcessWeaponSetOff(wpStruct *this_wp, wpHitbox *this_hit, s32 this_hit_id, wpStruct *victim_wp, wpHitbox *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
 {
-    s32 this_hit_damage = wpMain_DamageApplyStale(this_wp);
-    s32 victim_hit_damage = wpMain_DamageApplyStale(victim_wp);
+    s32 this_hit_damage = wpMain_GetDamageOutput(this_wp);
+    s32 victim_hit_damage = wpMain_GetDamageOutput(victim_wp);
     Vec3f sp2C;
     s32 priority_high;
 

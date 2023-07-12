@@ -12,11 +12,11 @@ void		wpRender_DisplayMapCollisions		(GObj *weapon_gobj);
 
 
 // Unknown
-void		func_ovl3_80167454					(void);
+void		wpRender_DrawMaster					(void);
 
 
 // Unknown
-void		func_ovl3_801674B8					(void);
+void		wpRender_DrawZBuffer					(void);
 
 
 // Unknown

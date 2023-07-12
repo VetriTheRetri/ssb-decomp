@@ -208,7 +208,7 @@ bool32 itBox_SDefault_CheckSpawnItems(GObj *item_gobj)
     {
         index = func_ovl3_80173090(&D_ovl3_8018D048);
 
-        if (index <= It_Kind_CommonEnd)
+        if (index < It_Kind_CommonMax)
         {
             random = rand_u16_range(5);
 
@@ -281,7 +281,7 @@ bool32 itBox_AFall_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdatePhysicsAir(ip, ITBOX_GRAVITY, ITBOX_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITBOX_GRAVITY, ITBOX_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -332,7 +332,7 @@ void itBox_GWait_SetStatus(GObj *item_gobj)
 
     DObjGetStruct(item_gobj)->rotate.z = atan2f(ip->coll_data.ground_angle.y, ip->coll_data.ground_angle.x) - HALF_PI32;
 
-    itMain_SetGroundPickup(item_gobj);
+    itMain_SetGroundAllowPickup(item_gobj);
     itMain_SetItemStatus(item_gobj, itCommon_Box_StatusDesc, itStatus_Box_GWait);
 }
 
@@ -380,7 +380,7 @@ void itBox_FThrow_SetStatus(GObj *item_gobj)
 
 bool32 func_ovl3_801798B8(GObj *item_gobj) // Unused
 {
-    func_ovl3_80172FE0(item_gobj);
+    itMain_VelSetRebound(item_gobj);
 
     return FALSE;
 }

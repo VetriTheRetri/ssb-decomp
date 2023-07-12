@@ -1117,7 +1117,7 @@ bool32 caCheckSetColAnimIndex(caStruct *colanim, s32 colanim_id, s32 duration)
         {
             colanim->cs[i].p_script = NULL;
         }
-        colanim->is_use_color1 = colanim->is_use_light = colanim->is_use_color2 = colanim->unk_ca_0x60_b34 = 0;
+        colanim->is_use_envcolor = colanim->is_use_light = colanim->is_use_blendcolor = colanim->unk_ca_0x60_b34 = 0;
 
         return TRUE;
     }
@@ -1144,7 +1144,7 @@ void caResetColAnim(caStruct *colanim)
     colanim->duration = 0;
     colanim->colanim_id = 0;
 
-    colanim->is_use_color1 = colanim->is_use_light = colanim->is_use_color2 = colanim->unk_ca_0x60_b34 = 0;
+    colanim->is_use_envcolor = colanim->is_use_light = colanim->is_use_blendcolor = colanim->unk_ca_0x60_b34 = 0;
 }
 
 void ftCommon_ResetColAnim(GObj *fighter_gobj)
@@ -1545,7 +1545,7 @@ void ftDamageUpdateCheckDropItem(ftStruct *fp, s32 damage)
 
             if ((ip->weight != It_Weight_Heavy) || (fp->ft_kind != Ft_Kind_Donkey) && (fp->ft_kind != Ft_Kind_PolyDonkey) && (fp->ft_kind != Ft_Kind_GiantDonkey))
             {
-                if ((damage > (s32)rand_u16_range(60)) || ((atCommon_CheckTypeShootEmpty(fp->item_hold) != FALSE) && (rand_u16_range(2) == 0)))
+                if ((damage > (s32)rand_u16_range(60)) || ((itMain_CheckShootNoAmmo(fp->item_hold) != FALSE) && (rand_u16_range(2) == 0)))
                 {
                     ftSetupDropItem(fp);
                 }
