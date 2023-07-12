@@ -1,9 +1,9 @@
 #ifndef _GMMATCH_H_
 #define _GMMATCH_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
 
 #define DARIANTOU_CHR_PLAYABLE_MAX 12
 #define GMMATCH_PLAYERS_MAX 4 // Global limit for simultaneous players in a match

@@ -1,9 +1,9 @@
-#include "fighter.h"
-#include "weapon.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <wp/weapon.h>
+#include <it/item.h>
 #include "ground.h"
-#include "gmmatch.h"
-#include "gmground.h"
+#include <gm/gmmatch.h>
+#include <gm/gmground.h>
 #include "thread6.h"
 
 // 0x800DF0F0
@@ -2096,7 +2096,7 @@ void func_ovl2_800E2D44(ftStruct *attacker_fp, ftHitbox *attacker_hit, ftStruct 
     func_ovl2_800E2C24(attacker_fp, attacker_hit);
 }
 
-void func_ovl2_800E2F04(wpStruct *ip, Weapon_Hit *wp_hit, s32 index, ftStruct *fp, ftHitbox *ft_hit, GObj *weapon_gobj, GObj *fighter_gobj)
+void func_ovl2_800E2F04(wpStruct *ip, wpHitbox *wp_hit, s32 index, ftStruct *fp, ftHitbox *ft_hit, GObj *weapon_gobj, GObj *fighter_gobj)
 {
     s32 damage = wpMain_DamageApplyStale(ip);
     Vec3f sp30;
@@ -2127,7 +2127,7 @@ void func_ovl2_800E2F04(wpStruct *ip, Weapon_Hit *wp_hit, s32 index, ftStruct *f
     }
 }
 
-void func_ovl2_800E3048(wpStruct *ip, Weapon_Hit *wp_hit, s32 arg2, ftStruct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
+void func_ovl2_800E3048(wpStruct *ip, wpHitbox *wp_hit, s32 arg2, ftStruct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
 {
     s32 damage = wpMain_DamageApplyStale(ip);
     Vec3f sp30;
@@ -2161,7 +2161,7 @@ void func_ovl2_800E3048(wpStruct *ip, Weapon_Hit *wp_hit, s32 arg2, ftStruct *fp
     func_ovl2_80100BF0(&sp30, wp_hit->shield_damage + damage);
 }
 
-void func_ovl2_800E31B4(wpStruct *ip, Weapon_Hit *wp_hit, ftStruct *fp, GObj *fighter_gobj)
+void func_ovl2_800E31B4(wpStruct *ip, wpHitbox *wp_hit, ftStruct *fp, GObj *fighter_gobj)
 {
     s32 damage = wpMain_DamageApplyStale(ip);
 
@@ -2195,7 +2195,7 @@ void func_ovl2_800E31B4(wpStruct *ip, Weapon_Hit *wp_hit, ftStruct *fp, GObj *fi
     }
 }
 
-void func_ovl2_800E3308(wpStruct *ip, Weapon_Hit *wp_hit, ftStruct *fp, GObj *fighter_gobj)
+void func_ovl2_800E3308(wpStruct *ip, wpHitbox *wp_hit, ftStruct *fp, GObj *fighter_gobj)
 {
     s32 damage = wpMain_DamageApplyStale(ip);
 
@@ -2217,7 +2217,7 @@ void func_ovl2_800E3308(wpStruct *ip, Weapon_Hit *wp_hit, ftStruct *fp, GObj *fi
     }
 }
 
-void func_ovl2_800E3418(wpStruct *wp, Weapon_Hit *wp_hit, s32 hitbox_id, ftStruct *fp, ftHurtbox *ft_hurt, GObj *weapon_gobj, GObj *fighter_gobj)
+void func_ovl2_800E3418(wpStruct *wp, wpHitbox *wp_hit, s32 hitbox_id, ftStruct *fp, ftHurtbox *ft_hurt, GObj *weapon_gobj, GObj *fighter_gobj)
 {
     s32 unk = wpMain_DamageApplyStale(wp);
     s32 damage;
@@ -2568,7 +2568,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
     f32 var_f20;
     f32 knockback;
     ftHitbox *ft_hit;
-    Weapon_Hit *wp_hit;
+    wpHitbox *wp_hit;
     itHitbox *it_hit;
     Ground_Hit *gr_hit;
     Vec3f sp84;
@@ -3101,7 +3101,7 @@ void ftManager_SearchWeaponHit(GObj *fighter_gobj)
     gmHitCollisionFlags item_flags;
     ftStruct *fp;
     wpStruct *ip;
-    Weapon_Hit *wp_hit;
+    wpHitbox *wp_hit;
     f32 angle;
     ftHurtbox *ft_hurt;
     ftHitbox *ft_hit;

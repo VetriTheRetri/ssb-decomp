@@ -1,6 +1,6 @@
-#include "item.h"
-#include "weapon.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 itCreateDesc itCommon_FFlower_ItemDesc = 
 {
@@ -278,7 +278,7 @@ bool32 wpFFlower_Flame_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = ITFFLOWER_AMMO_LIFETIME;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 

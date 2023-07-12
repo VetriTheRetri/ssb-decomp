@@ -1,6 +1,6 @@
-#include "weapon.h"
-#include "fighter.h"
-#include "gmmatch.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
+#include <gm/gmmatch.h>
 
 typedef enum wpLinkBoomerangFlags
 {

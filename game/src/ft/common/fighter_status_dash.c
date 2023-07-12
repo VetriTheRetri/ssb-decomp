@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x8013EA40
 void ftCommon_Dash_ProcUpdate(GObj *fighter_gobj)

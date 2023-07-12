@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80144530
 void ftCommon_DownStand_ProcInterrupt(GObj *fighter_gobj)

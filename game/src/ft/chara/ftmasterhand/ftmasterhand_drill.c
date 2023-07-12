@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x8015A0C0
 void ftMasterHand_Drill_ProcUpdate(GObj *fighter_gobj)

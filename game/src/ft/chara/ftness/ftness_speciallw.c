@@ -1,5 +1,5 @@
-#include <game/src/ft/chara/ftness/ftness.h>
-#include <game/src/wp/weapon.h>
+#include <ft/chara/ftness/ftness.h>
+#include <wp/weapon.h>
 
 #define FTNESS_SPECIALLWSTART_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE)
 #define FTNESS_SPECIALLWHOLD_STATUPDATE_FLAGS (FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_HITSTATUS_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE | FTSTATUPDATE_HIT_PRESERVE)
@@ -234,7 +234,7 @@ void ftNess_SpecialLw_InitVars(GObj *fighter_gobj)
     }
     fp->is_absorb = TRUE;
 
-    fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80131134 + (intptr_t)&ftNess_LoadedFiles_SpecialLwData); // Linker thing (attempt uintptr_t for 64-bit compatibility?)
+    fp->special_hit = (ftSpecialHit*) ((uintptr_t)D_ovl2_80131134 + (intptr_t)&ftNess_LoadedFiles_SpecialLwData); // Linker thing (attempt uintptr_t for 64-bit compatibility?)
 
     fp->command_vars.flags.flag1 = 0;
 }

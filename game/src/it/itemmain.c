@@ -1,6 +1,6 @@
-#include "item.h"
-#include "fighter.h"
-#include "gmmatch.h"
+#include <it/item.h>
+#include <ft/fighter.h>
+#include <gm/gmmatch.h>
 
 void func_ovl3_80172310(GObj *item_gobj)
 {

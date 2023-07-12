@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x80158750
 void ftMasterHand_Unk_ProcInterrupt(GObj *fighter_gobj)

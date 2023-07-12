@@ -1,5 +1,5 @@
-#include "ftyoshi.h"
-#include "item.h"
+#include <ft/chara/ftyoshi/ftyoshi.h>
+#include <it/item.h>
 
 void func_ovl3_8014C770(void) // Unused
 {

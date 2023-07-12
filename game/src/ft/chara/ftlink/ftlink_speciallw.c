@@ -1,4 +1,4 @@
-#include "ftlink.h"
+#include <ft/chara/ftlink/ftlink.h>
 
 // 0x801643D0
 void ftLink_SpecialLw_CreateBomb(GObj *fighter_gobj)

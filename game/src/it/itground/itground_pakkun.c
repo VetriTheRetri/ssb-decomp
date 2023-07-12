@@ -1,5 +1,5 @@
-#include "item.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <ft/fighter.h>
 
 extern intptr_t D_NF_00000CC8;
 extern intptr_t D_NF_00000CF8;

@@ -1,6 +1,6 @@
-#include "item.h"
-#include "weapon.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 void func_ovl3_80181C20(GObj *item_gobj)
 {
@@ -303,7 +303,7 @@ bool32 jtgt_ovl3_801824C0(GObj *weapon_gobj)
     wpStruct *ip = wpGetStruct(weapon_gobj);
     ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorSetLR(ip, fp);
 
     DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;

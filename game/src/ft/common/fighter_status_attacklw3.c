@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x8014FBF0
 void ftCommon_AttackLw3_ProcUpdate(GObj *fighter_gobj)

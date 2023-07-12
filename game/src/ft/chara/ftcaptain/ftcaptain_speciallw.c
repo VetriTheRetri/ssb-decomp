@@ -1,4 +1,4 @@
-#include "ftcaptain.h"
+#include <ft/chara/ftcaptain/ftcaptain.h>
 
 // 0x8015FC30
 void ftCaptain_SpecialLw_UpdateGFX(GObj *fighter_gobj)

@@ -1,10 +1,10 @@
 #ifndef _FTPURIN_H_
 #define _FTPURIN_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
-#include <game/src/ft/fighter.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
+#include <ft/fighter.h>
 
 #define FTPURIN_POUND_VEL_BASE 0.65F
 #define FTPURIN_POUND_VEL_MUL 0.92F

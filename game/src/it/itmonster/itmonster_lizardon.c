@@ -1,6 +1,6 @@
-#include "item.h"
-#include "weapon.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 bool32 jtgt_ovl3_8017F470(GObj *item_gobj)
 {
@@ -270,7 +270,7 @@ bool32 jtgt_ovl3_8017FB74(GObj *weapon_gobj)
 
     ip->lifetime = ITLIZARDON_FLAME_LIFETIME;
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorSetLR(ip, fp);
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 

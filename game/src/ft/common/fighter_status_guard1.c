@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 #define ftCheckInterruptGuard(fighter_gobj) \
 (                                                  \

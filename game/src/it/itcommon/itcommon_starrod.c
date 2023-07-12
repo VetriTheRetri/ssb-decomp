@@ -1,6 +1,6 @@
-#include "item.h"
-#include "weapon.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 itCreateDesc itCommon_StarRod_ItemDesc =
 {
@@ -326,7 +326,7 @@ bool32 wpStarRod_Star_ProcReflector(GObj *weapon_gobj)
     wpStruct *wp = wpGetStruct(weapon_gobj);
     ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
 
     DObjGetStruct(weapon_gobj)->rotate.z = atan2f(wp->phys_info.vel_air.y, wp->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;

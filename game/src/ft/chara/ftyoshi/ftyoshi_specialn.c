@@ -1,4 +1,4 @@
-#include "ftyoshi.h"
+#include <ft/chara/ftyoshi/ftyoshi.h>
 
 // 0x8015E310
 void ftYoshi_SpecialN_InitCatchVars(ftStruct *fp, void (*proc_catch)(GObj*))

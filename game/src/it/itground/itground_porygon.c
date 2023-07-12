@@ -1,4 +1,4 @@
-#include "item.h"
+#include <it/item.h>
 
 extern intptr_t Porygon_Event;
 extern void *D_ovl2_801313F4;

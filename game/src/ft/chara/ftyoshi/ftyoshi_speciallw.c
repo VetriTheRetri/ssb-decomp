@@ -1,4 +1,4 @@
-#include "ftyoshi.h"
+#include <ft/chara/ftyoshi/ftyoshi.h>
 
 // 0x8015EDC0
 void ftYoshi_SpecialLw_ProcUpdate(GObj *fighter_gobj)

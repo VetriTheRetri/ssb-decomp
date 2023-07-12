@@ -1,9 +1,9 @@
 #ifndef _FTMASTERHAND_H_
 #define _FTMASTERHAND_H_
 
-#include <game/src/ft/fighter.h>
-#include <game/src/wp/weapon.h>
-#include <game/src/gm/gmmatch.h>
+#include <ft/fighter.h>
+#include <wp/weapon.h>
+#include <gm/gmmatch.h>
 
 #define FTMASTERHAND_ATTACK_WAIT_MAX 120				// Master Hand will wait at most this many frames before initiating his next attack
 #define FTMASTERHAND_ATTACK_WAIT_LEVEL_DIV 100			// Divide this value by CPU level

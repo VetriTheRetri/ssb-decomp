@@ -1,11 +1,11 @@
 #ifndef _FTNESS_H_
 #define _FTNESS_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
-#include <game/src/ft/fighter.h>
-#include <game/src/wp/weapon.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
+#include <ft/fighter.h>
+#include <wp/weapon.h>
 
 // Special move attributes
 

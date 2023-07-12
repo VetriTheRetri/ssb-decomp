@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <it/item.h>
 
 // 0x8014F760
 void ftCommon_AttackS3_SetStatus(GObj *fighter_gobj)

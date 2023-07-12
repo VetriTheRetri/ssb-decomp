@@ -1,5 +1,5 @@
-#include "weapon.h"
-#include "ftsamus.h"
+#include <wp/weapon.h>
+#include <ft/chara/ftsamus/ftsamus.h>
 
 wpSamusChargeShotAttributes wpSamus_ChargeShot_WeaponAttributes[FTSAMUS_CHARGE_MAX + 1] =
 {
@@ -244,7 +244,7 @@ bool32 wpSamus_ChargeShot_ProcReflector(GObj *weapon_gobj) // Hit reflector
     wpStruct *wp = wpGetStruct(weapon_gobj);
     ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
     wpMain_VelSetLR(weapon_gobj);
 
     return FALSE;

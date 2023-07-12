@@ -1,15 +1,15 @@
-#include "fighter.h"
-#include "ftmario.h"
-#include "ftfox.h"
-#include "ftdonkey.h"
-#include "ftsamus.h"
-#include "ftlink.h"
-#include "ftyoshi.h"
-#include "ftcaptain.h"
-#include "ftkirby.h"
-#include "ftpikachu.h"
-#include "ftpurin.h"
-#include "ftness.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftmario/ftmario.h>
+#include <ft/chara/ftfox/ftox.h>
+#include <ft/chara/ftdonkey/ftdonkey.h>
+#include <ft/chara/ftsamus/ftsamus.h>
+#include <ft/chara/ftlink/ftlink.h>
+#include <ft/chara/ftyoshi/ftyoshi.h>
+#include <ft/chara/ftcaptain/ftcaptain.h>
+#include <ft/chara/ftkirby/ftkirby.h>
+#include <ft/chara/ftpikachu/ftpikachu.h>
+#include <ft/chara/ftpurin/ftpurin.h>
+#include <ft/chara/ftness/ftness.h>
 
 #define ftStatus_CheckAttack13Kind(fp)        \
 (                                             \

@@ -1,4 +1,4 @@
-#include "item.h"
+#include <it/item.h>
 
 bool32 func_ovl3_8017EBE0(GObj *item_gobj)
 {

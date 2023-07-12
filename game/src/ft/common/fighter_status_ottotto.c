@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 #define ftCheckInterruptOttotto(fighter_gobj)\
 (                                                   \

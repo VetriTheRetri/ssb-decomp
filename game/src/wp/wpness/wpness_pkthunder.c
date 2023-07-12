@@ -1,11 +1,11 @@
-#include "weapon.h"
-#include "ftness.h"
+#include <wp/weapon.h>
+#include <ft/chara/ftness/ftness.h>
 
 #define wpNess_PKThunderHead_GetTrailIndexGObj(wp, i) \
-((GObj*)wp->weapon_vars.pkthunder.trail_gobj[(i)])
+((GObj*)(wp)->weapon_vars.pkthunder.trail_gobj[(i)])
 
 #define wpNess_PKThunderTrail_GetTrailIndexGObj(wp, i) \
-((GObj*)wp->weapon_vars.pkthunder_trail.trail_gobj[(i)])
+((GObj*)(wp)->weapon_vars.pkthunder_trail.trail_gobj[(i)])
 
 extern void *D_ovl2_80131130;
 
@@ -522,7 +522,7 @@ bool32 wpNess_PKReflectHead_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = WPPKTHUNDER_LIFETIME; // This line is directly responsible for the PK Thunder double reflect crash; omitting it fixes the oversight
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
 
     return FALSE;
 }

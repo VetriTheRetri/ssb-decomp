@@ -1,5 +1,5 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_80130F30;
 
@@ -187,7 +187,7 @@ bool32 wpSamus_Bomb_ProcReflector(GObj *weapon_gobj)
 
     if (ip->ground_or_air == GA_Air)
     {
-        wpMain_ReflectorInvertLR(ip, fp);
+        wpMain_ReflectorSetLR(ip, fp);
         wpMain_VelSetLR(weapon_gobj);
     }
     else ip->lr = fp->lr;

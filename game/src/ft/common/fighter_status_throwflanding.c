@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ft/chara/ftdonkey/ftdonkey.h>
 
 // 0x8014DC50
 void ftDonkey_ThrowFLanding_ProcUpdate(GObj *fighter_gobj)

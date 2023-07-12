@@ -1,5 +1,5 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_8013113C;
 
@@ -92,7 +92,7 @@ bool32 wpNess_PKFire_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = WPPKFIRE_LIFETIME;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
     wpMain_VelSetLR(weapon_gobj);
 
     DObjGetStruct(weapon_gobj)->rotate.z *= -1.0F;

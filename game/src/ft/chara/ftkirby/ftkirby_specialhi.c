@@ -1,4 +1,4 @@
-#include "ftkirby.h"
+#include <ft/chara/ftkirby/ftkirby.h>
 
 // 0x80160BB0
 void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)

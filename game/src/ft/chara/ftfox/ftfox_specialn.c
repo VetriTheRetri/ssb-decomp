@@ -1,4 +1,4 @@
-#include <game/src/ft/chara/ftfox/ftfox.h>
+#include <ft/chara/ftfox/ftfox.h>
 
 // 0x8015BB50
 void ftFox_SpecialN_ProcUpdate(GObj *fighter_gobj)

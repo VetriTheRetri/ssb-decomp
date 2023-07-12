@@ -1,7 +1,7 @@
-#include "item.h"
-#include "weapon.h"
-#include "fighter.h"
-#include "gmground.h"
+#include <it/item.h>
+#include <wp/weapon.h>
+#include <ft/fighter.h>
+#include <gm/gmground.h>
 
 void func_ovl3_8017D740(GObj *iwark_gobj)
 {
@@ -296,7 +296,7 @@ bool32 func_ovl3_8017DEB8(GObj *weapon_gobj)
     wpStruct *ip = wpGetStruct(weapon_gobj);
     ftStruct *fp = ftGetStruct(ip->owner_gobj);
 
-    wpMain_ReflectorInvertLR(ip, fp);
+    wpMain_ReflectorSetLR(ip, fp);
 
     DObjGetStruct(weapon_gobj)->rotate.z = atan2f(ip->phys_info.vel_air.y, ip->phys_info.vel_air.x);
     DObjGetStruct(weapon_gobj)->scale.x = 1.0F;

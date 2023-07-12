@@ -1,6 +1,6 @@
-#include "fighter.h"
-#include "gmmatch.h"
-#include "gmground.h"
+#include <ft/fighter.h>
+#include <gm/gmmatch.h>
+#include <gm/gmground.h>
 
 extern ftSpawnInfo D_ovl2_80116DD0;
 extern f32 Rebirth_Halo_Offset_X[GMMATCH_PLAYERS_MAX];

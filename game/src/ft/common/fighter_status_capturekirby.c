@@ -1,5 +1,5 @@
-#include "ftkirby.h"
-#include "item.h"
+#include <ft/chara/ftkirby/ftkirby.h>
+#include <it/item.h>
 
 // 0x8014B700
 void ftCommon_CaptureKirby_UpdatePosMag(GObj *fighter_gobj, Vec3f *dist)

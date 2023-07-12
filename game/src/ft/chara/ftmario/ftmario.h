@@ -1,10 +1,10 @@
 #ifndef _FTMARIO_H_
 #define _FTMARIO_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
-#include <game/src/ft/fighter.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
+#include <ft/fighter.h>
 
 #define FTMARIO_FIREBALL_SPAWN_JOINT 16
 

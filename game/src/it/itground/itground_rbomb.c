@@ -1,4 +1,4 @@
-#include "item.h"
+#include <it/item.h>
 
 extern intptr_t Article_Gr_Bomb_Hit;
 extern intptr_t D_NF_00000788;

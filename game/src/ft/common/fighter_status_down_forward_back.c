@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x801447E0
 void ftCommon_DownForwardOrBack_SetStatus(GObj *fighter_gobj, s32 status_id)

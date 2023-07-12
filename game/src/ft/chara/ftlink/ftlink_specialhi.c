@@ -1,4 +1,4 @@
-#include "ftlink.h"
+#include <ft/chara/ftlink/ftlink.h>
 
 // 0x80163B40
 void ftLink_SpecialHi_DestroyWeapon(ftStruct *fp, wpStruct *wp)

@@ -1,5 +1,5 @@
-#include "item.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_80130FB0;
 

@@ -1,18 +1,18 @@
 #ifndef _FIGHTERVARS_H_
 #define _FIGHTERVARS_H_
 
-#include <game/src/ft/chara/ftmario/ftmario_statusvars.h>
-#include <game/src/ft/chara/ftfox/ftfox_statusvars.h>
-#include <game/src/ft/chara/ftdonkey/ftdonkey_statusvars.h>
-#include <game/src/ft/chara/ftsamus/ftsamus_statusvars.h>
-#include <game/src/ft/chara/ftlink/ftlink_statusvars.h>
-#include <game/src/ft/chara/ftyoshi/ftyoshi_statusvars.h>
-#include <game/src/ft/chara/ftcaptain/ftcaptain_statusvars.h>
-#include <game/src/ft/chara/ftkirby/ftkirby_statusvars.h>
-#include <game/src/ft/chara/ftpikachu/ftpikachu_statusvars.h>
-#include <game/src/ft/chara/ftpurin/ftpurin_statusvars.h>
-#include <game/src/ft/chara/ftness/ftness_statusvars.h>
-#include <game/src/ft/chara/ftmasterhand/ftmasterhand_statusvars.h>
+#include <ft/chara/ftmario/ftmario_statusvars.h>
+#include <ft/chara/ftfox/ftfox_statusvars.h>
+#include <ft/chara/ftdonkey/ftdonkey_statusvars.h>
+#include <ft/chara/ftsamus/ftsamus_statusvars.h>
+#include <ft/chara/ftlink/ftlink_statusvars.h>
+#include <ft/chara/ftyoshi/ftyoshi_statusvars.h>
+#include <ft/chara/ftcaptain/ftcaptain_statusvars.h>
+#include <ft/chara/ftkirby/ftkirby_statusvars.h>
+#include <ft/chara/ftpikachu/ftpikachu_statusvars.h>
+#include <ft/chara/ftpurin/ftpurin_statusvars.h>
+#include <ft/chara/ftness/ftness_statusvars.h>
+#include <ft/chara/ftmasterhand/ftmasterhand_statusvars.h>
 
 #define FTCOMMON_DEAD_REBIRTH_WAIT 45
 #define FTCOMMON_DEADUP_REBIRTH_WAIT 180

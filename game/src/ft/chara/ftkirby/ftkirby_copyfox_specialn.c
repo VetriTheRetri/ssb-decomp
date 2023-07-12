@@ -1,4 +1,4 @@
-#include "ftkirby.h"
+#include <ft/chara/ftkirby/ftkirby.h>
 
 // 0x80156CB0
 void ftKirby_CopyFox_SpecialN_ProcUpdate(GObj *fighter_gobj)

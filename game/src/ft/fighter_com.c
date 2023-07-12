@@ -1,8 +1,8 @@
-#include "fighter.h"
-#include "weapon.h"
-#include "item.h"
-#include "ftfox.h"
-#include "gmmatch.h"
+#include <ft/fighter.h>
+#include <wp/weapon.h>
+#include <it/item.h>
+#include <ft/chara/ftfox/ftox.h>
+#include <gm/gmmatch.h>
 
 wpStruct* func_ovl3_80131B00(ftStruct *fp)
 {
@@ -33,11 +33,11 @@ Vec3f* func_ovl3_80131B44(ftStruct *fp, s32 wp_kind)
     {
         do
         {
-            wpStruct *ip = wpGetStruct(weapon_gobj);
+            wpStruct *wp = wpGetStruct(weapon_gobj);
 
-            if ((ip->owner_gobj == fp->fighter_gobj) && (ip->wp_kind == wp_kind))
+            if ((wp->owner_gobj == fp->fighter_gobj) && (wp->wp_kind == wp_kind))
             {
-                return &DObjGetStruct(ip->weapon_gobj)->translate;
+                return &DObjGetStruct(wp->weapon_gobj)->translate;
             }
             weapon_gobj = weapon_gobj->group_gobj_next;
         } 

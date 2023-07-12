@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x8015AE80
 void ftMasterHand_Dead3_SetStatus(GObj *fighter_gobj)

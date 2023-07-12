@@ -1,4 +1,4 @@
-#include <game/src/ft/chara/ftmario/ftmario.h>
+#include <ft/chara/ftmario/ftmario.h>
 
 // 0x801560A0
 void ftMario_SpecialHi_ProcUpdate(GObj *fighter_gobj)

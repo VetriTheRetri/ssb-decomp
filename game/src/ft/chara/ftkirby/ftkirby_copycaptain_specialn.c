@@ -1,4 +1,4 @@
-#include "ftkirby.h"
+#include <ft/chara/ftkirby/ftkirby.h>
 
 // 0x80160810
 void ftKirby_CopyCaptain_SpecialN_UpdateGFX(GObj *fighter_gobj)

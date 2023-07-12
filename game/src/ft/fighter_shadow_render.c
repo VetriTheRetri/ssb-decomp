@@ -1,14 +1,14 @@
-#include "fighter.h"
-#include "gmmatch.h"
+#include <ft/fighter.h>
+#include <gm/gmmatch.h>
 
-#include <game/src/sys/obj_renderer.h>
-#include <game/src/sys/obj.h>
+#include <sys/obj_renderer.h>
+#include <sys/obj.h>
 
-#include <game/include/PR/gbi.h>
-#include <game/include/PR/gu.h>
-#include <game/include/PR/mbi.h>
-#include <game/include/PR/sp.h>
-#include <game/include/PR/ultratypes.h>
+#include <PR/gbi.h>
+#include <PR/gu.h>
+#include <PR/mbi.h>
+#include <PR/sp.h>
+#include <PR/ultratypes.h>
 
 f32 func_ovl3_8013AE10(Vec3f *a, Vec3f *b, f32 f)
 {

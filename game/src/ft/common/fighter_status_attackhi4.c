@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <it/item.h>
 
 // 0x801505F0
 void ftCommon_AttackHi4_SetStatus(GObj *fighter_gobj)

@@ -1,5 +1,5 @@
-#include "item.h"
-#include "gmmatch.h"
+#include <it/item.h>
+#include <gm/gmmatch.h>
 
 extern intptr_t D_NF_00010000;
 extern intptr_t D_NF_000100BC;

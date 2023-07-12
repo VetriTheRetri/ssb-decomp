@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80144910
 void ftCommon_DownAttack_SetStatus(GObj *fighter_gobj, s32 status_id)

@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ft/chara/ftdonkey/ftdonkey.h>
 
 // 0x8014DD00
 void ftDonkey_ThrowFF_ProcUpdate(GObj *fighter_gobj)

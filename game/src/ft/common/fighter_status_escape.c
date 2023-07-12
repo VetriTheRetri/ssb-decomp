@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x801491D0
 void ftCommon_Escape_ProcUpdate(GObj *fighter_gobj)

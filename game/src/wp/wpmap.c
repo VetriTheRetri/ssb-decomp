@@ -141,7 +141,6 @@ bool32 func_ovl3_80167B8C(mpCollData *weapon_gobj, s32 arg1, s32 arg2)
     return weapon_gobj->unk_0x64;
 }
 
-
 bool32 func_ovl3_80167C04(GObj *weapon_gobj)
 {
     return func_ovl2_800DA034(&wpGetStruct(weapon_gobj)->coll_data, func_ovl3_80167B8C, weapon_gobj, 0);

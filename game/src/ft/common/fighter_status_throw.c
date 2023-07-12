@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "ftkirby.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftkirby/ftkirby.h>
 
 // 0x8014A0C0
 void ftCommon_Throw_ProcUpdate(GObj *fighter_gobj)

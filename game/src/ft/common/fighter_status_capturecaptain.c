@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <it/item.h>
 
 extern intptr_t ftCaptain_CaptureCaptain_Offset_Add; // 0x00000000
 extern void *D_ovl2_80131034;

@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 #include "effect.h"
 
 // 0x80148E30

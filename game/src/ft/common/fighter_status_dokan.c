@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 #include "ground.h"
 
 // 0x80141FF0

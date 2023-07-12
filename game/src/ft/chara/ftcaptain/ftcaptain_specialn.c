@@ -1,4 +1,4 @@
-#include "ftcaptain.h"
+#include <ft/chara/ftcaptain/ftcaptain.h>
 
 // 0x8015F7F0
 void ftCaptain_SpecialN_UpdateGFX(GObj *fighter_gobj) // Falcon Punch

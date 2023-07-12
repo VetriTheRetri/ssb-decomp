@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x801593E0
 void ftMasterHand_Harau_ResetStatus(GObj *fighter_gobj)

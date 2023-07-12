@@ -1,6 +1,6 @@
-#include "fighter.h"
-#include "item.h"
-#include "gmmatch.h"
+#include <ft/fighter.h>
+#include <it/item.h>
+#include <gm/gmmatch.h>
 
 // 0x800F36E0
 void ftCommon_HammerUpdateStats(GObj *fighter_gobj)

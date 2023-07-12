@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 void func_ovl3_8014ADB0(GObj *fighter_gobj)
 {

@@ -1,9 +1,9 @@
 #ifndef _GMSOUND_H_
 #define _GMSOUND_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
 
 typedef struct gmSoundEffect
 {
@@ -23,6 +23,7 @@ typedef struct gmSoundEffect
     u16 unk_0x22;
     u16 unk_0x24;
     u16 sfx_id;
+    u16 sfx_max;    // End of SFX index
 
 } gmSoundEffect;
 
@@ -116,7 +117,7 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_UnkGrind4,
     gmSound_SFX_InflateJump1,
     gmSound_SFX_UnkGrind5,
-    gmSound_SFX_SamusJump1,
+    gmSound_SFX_SamusJump2,
     gmSound_SFX_UnkNessPSI,
     gmSound_SFX_InflateJump2,
     gmSound_SFX_InflateJump3,
@@ -133,8 +134,7 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_InflateJump8,
     gmSound_SFX_GroundGrind4,
     gmSound_SFX_InflateJump9,
-    gmSound_SFX_Footstep10,    // Might be footsteps? They are very quiet
-    gmSound_SFX_Footstep11,
+    gmSound_SFX_Footstep11,    // Might be footsteps? They are very quiet
     gmSound_SFX_Footstep12,
     gmSound_SFX_Footstep13,
     gmSound_SFX_Footstep14,
@@ -145,6 +145,7 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_Footstep19,
     gmSound_SFX_Footstep20,
     gmSound_SFX_Footstep21,
+    gmSound_SFX_Footstep22,
     gmSound_SFX_MetalMarioFoot = 0x7A,
     gmSound_SFX_MetalMarioLanding,  // Unconfirmed
     gmSound_SFX_SamusTurnClick = 0x7F,
@@ -153,7 +154,7 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_IwarkRockCreate = 0x84,
     gmSound_SFX_KabigonFall,
     gmSound_SFX_KabigonJump, // ???
-    gmSound_SFX_UnkWhirr1,
+    gmSound_SFX_UnkWhirr2,
     gmSound_SFX_LizardonFlame,
     gmSound_SFX_MewFly,
     gmSound_SFX_NyarsCoin,
@@ -167,7 +168,7 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_JPunchM,
     gmSound_SFX_JPunchS,
     gmSound_SFX_WindAmbient1,
-    gmSound_SFX_UnkWhirr2,
+    gmSound_SFX_UnkWhirr3,
     gmSound_SFX_PublicCheer1,
     gmSound_SFX_UnkBatS,
     gmSound_SFX_UnkBatM,

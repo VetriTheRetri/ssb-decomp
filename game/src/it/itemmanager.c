@@ -1,8 +1,8 @@
-#include "item.h"
-#include "fighter.h"
-#include "weapon.h"
-#include "gmmatch.h"
-#include "gmground.h"
+#include <it/item.h>
+#include <ft/fighter.h>
+#include <wp/weapon.h>
+#include <gm/gmmatch.h>
+#include <gm/gmground.h>
 
 extern itStruct *itManager_Global_CurrentUserData;
 extern void *gItemFileData;
@@ -339,7 +339,7 @@ GObj* func_ovl3_8016EA78(GObj *item_gobj, s32 index, Vec3f *pos, Vec3f *vel, u32
 
     if (new_gobj != NULL)
     {
-        if (index < It_Kind_FighterStart)
+        if (index <= It_Kind_CommonEnd)
         {
             func_ovl2_801044B4(pos);
             func_ovl3_80172394(new_gobj, FALSE);
@@ -1039,7 +1039,7 @@ void itManager_UpdateAttackStatItem(itStruct *this_ap, itHitbox *this_hit, s32 t
 }
 
 // 0x8016FE4C
-void itManager_UpdateAttackStatWeapon(wpStruct *ip, Weapon_Hit *wp_hit, s32 wp_hit_id, itStruct *ap, itHitbox *it_hit, s32 it_hit_id, GObj *weapon_gobj, GObj *item_gobj)
+void itManager_UpdateAttackStatWeapon(wpStruct *ip, wpHitbox *wp_hit, s32 wp_hit_id, itStruct *ap, itHitbox *it_hit, s32 it_hit_id, GObj *weapon_gobj, GObj *item_gobj)
 {
     s32 wp_hit_damage = wpMain_DamageApplyStale(ip);
     s32 it_hit_damage = itMain_ApplyHitDamage(ap);
@@ -1181,7 +1181,7 @@ void itManager_UpdateDamageStatItem(itStruct *attack_ap, itHitbox *attack_it_hit
 }
 
 // 0x801702C8 - Article's hurtbox gets hit by an item
-void itManager_UpdateDamageStatWeapon(wpStruct *ip, Weapon_Hit *wp_hit, s32 arg2, itStruct *ap, itHurtbox *at_hurt, GObj *weapon_gobj, GObj *item_gobj)
+void itManager_UpdateDamageStatWeapon(wpStruct *ip, wpHitbox *wp_hit, s32 arg2, itStruct *ap, itHurtbox *at_hurt, GObj *weapon_gobj, GObj *item_gobj)
 {
     s32 damage;
     s32 unused;
@@ -1504,7 +1504,7 @@ void itManager_SearchHitWeapon(GObj *item_gobj) // Check items for hit detection
     wpStruct *ip;
     itStruct *ap;
     GObj *weapon_gobj;
-    Weapon_Hit *wp_hit;
+    wpHitbox *wp_hit;
     gmHitCollisionFlags these_flags;
     gmHitCollisionFlags those_flags;
     s32 i, j, m, n;

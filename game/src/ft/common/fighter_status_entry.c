@@ -1,17 +1,17 @@
-#include "fighter.h"
-#include "ftmario.h"
-#include "ftfox.h"
-#include "ftdonkey.h"
-#include "ftsamus.h"
-#include "ftlink.h"
-#include "ftyoshi.h"
-#include "ftcaptain.h"
-#include "ftkirby.h"
-#include "ftpikachu.h"
-#include "ftpurin.h"
-#include "ftness.h"
-#include "ftmasterhand.h"
-#include "gmground.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftmario/ftmario.h>
+#include <ft/chara/ftfox/ftox.h>
+#include <ft/chara/ftdonkey/ftdonkey.h>
+#include <ft/chara/ftsamus/ftsamus.h>
+#include <ft/chara/ftlink/ftlink.h>
+#include <ft/chara/ftyoshi/ftyoshi.h>
+#include <ft/chara/ftcaptain/ftcaptain.h>
+#include <ft/chara/ftkirby/ftkirby.h>
+#include <ft/chara/ftpikachu/ftpikachu.h>
+#include <ft/chara/ftpurin/ftpurin.h>
+#include <ft/chara/ftness/ftness.h>
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
+#include <gm/gmground.h>
 
 // 0x8013D930
 void ftCommon_Entry_SetStatus(GObj *fighter_gobj)

@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80144EE0
 void ftCommon_CliffQuick_ProcUpdate(GObj *fighter_gobj)

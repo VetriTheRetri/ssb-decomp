@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x80159830
 void ftMasterHand_Walk_ProcUpdate(GObj *fighter_gobj)

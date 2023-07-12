@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80144660
 void ftCommon_Passive_SetStatus(GObj *fighter_gobj)

@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <it/item.h>
 
 // 0x80146FB0
 void ftCommon_LGunShoot_ProcUpdate(GObj *fighter_gobj)

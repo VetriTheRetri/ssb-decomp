@@ -1,6 +1,6 @@
-#include "fighter.h"
-#include "ftdonkey.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftdonkey/ftdonkey.h>
+#include <it/item.h>
 
 // 0x801462A0
 void ftCommon_ItemThrow_UpdateModelYaw(GObj *fighter_gobj)
@@ -36,14 +36,14 @@ void ftCommon_ItemThrow_UpdateModelYaw(GObj *fighter_gobj)
     }
 }
 
-extern FighterItemThrow Fighter_ItemThrow_Desc[ftStatus_Common_SpecialStart];
+extern ftItemThrow Fighter_ItemThrow_Desc[ftStatus_Common_SpecialStart];
 
 // 0x8014634C
 void ftCommon_ItemThrow_ProcUpdate(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     f32 vel_base;
-    FighterItemThrow *item_throw_desc;
+    ftItemThrow *item_throw_desc;
     f32 damage_mul;
     Vec3f vel;
     s32 status_id;

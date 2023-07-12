@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 u8 ftMasterHand_Random_StatusList[12];
 u8 D_ovl3_80188DCC[16];

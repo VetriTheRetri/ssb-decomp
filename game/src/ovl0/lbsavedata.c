@@ -1,5 +1,5 @@
-#include "gmmatch.h"
-#include "fighter.h"
+#include <gm/gmmatch.h>
+#include <ft/fighter.h>
 
 // 0x800D4520
 s32 lbMemory_SaveData_CreateChecksum(gmSaveInfo *sp)

@@ -9,7 +9,7 @@ Collection of things that should be explained more throughly
 3. Ensure `OK` build, and run `utils/cpy_expected.py`
 4. Use script to split asm into "C" file:
 ```
-utils/split_asm.py <input.s> game/nonmatching/ game/src/<output directory>
+utils/split_asm.py <input.s> game/nonmatching/ <output directory>
 ```
 5. Delete routines from the split asm from step 2
 6. Add new object file into `spec.dhall` (named as `src/{overlay}/{filename}.asm.o`). Add it as a new `Obj` before the old asm object.

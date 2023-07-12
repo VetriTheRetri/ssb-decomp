@@ -6,11 +6,9 @@
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\ft\\chara",
-    "\\game\\src\\ft\\chara\\ftcaptain",
-    "\\game\\src\\ft\\chara\\ftmasterhand",
-    "\\game\\src\\ft\\common",
-    "\\game\\src\\it"
+    "\\game\\src\\it",
+    "\\game\\src\\ovl0"
   ],
-  "SelectedNode": "\\game\\src\\ft\\common\\fighter_status_appear.c",
+  "SelectedNode": "\\game\\src\\ovl0\\lbsavedata.c",
   "PreviewInSolutionExplorer": false
 }

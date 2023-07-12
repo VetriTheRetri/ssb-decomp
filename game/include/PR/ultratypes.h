@@ -1,6 +1,7 @@
 #ifndef _ULTRATYPES_H_
 #define _ULTRATYPES_H_
 
+#define _LANGUAGE_C
 
 /**************************************************************************
  *                                                                        *

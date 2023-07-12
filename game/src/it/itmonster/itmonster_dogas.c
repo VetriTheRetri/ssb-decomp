@@ -1,5 +1,5 @@
-#include "item.h"
-#include "weapon.h"
+#include <it/item.h>
+#include <wp/weapon.h>
 
 bool32 func_ovl3_80182C80(GObj *item_gobj)
 {

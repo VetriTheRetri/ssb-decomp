@@ -1,8 +1,8 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 // 0x80167EB0
-void wpMain_StopSFX(wpStruct *wp) // Stop item's ongoing SFX
+void wpMain_StopSFX(wpStruct *wp) // Stop weapon's ongoing SFX
 {
     if (wp->p_sfx != NULL)
     {
@@ -16,7 +16,7 @@ void wpMain_StopSFX(wpStruct *wp) // Stop item's ongoing SFX
 }
 
 // 0x80167F08
-void wpMain_PlaySFX(wpStruct *wp, u16 sfx_id) // Play SFX if applicable
+void wpMain_PlaySFX(wpStruct *wp, u16 sfx_id) // Play sound effect for weapon
 {
     if (wp->p_sfx != NULL)
     {
@@ -32,7 +32,7 @@ void wpMain_PlaySFX(wpStruct *wp, u16 sfx_id) // Play SFX if applicable
 }
 
 // 0x80167F68
-void wpMain_VelSetLR(GObj *weapon_gobj) // Set item's facing direction based on velocity
+void wpMain_VelSetLR(GObj *weapon_gobj) // Set weapon's facing direction based on velocity
 {
     wpStruct *wp = wpGetStruct(weapon_gobj);
 
@@ -44,7 +44,7 @@ void wpMain_VelSetModelYaw(GObj *weapon_gobj) // Set yaw rotation based on veloc
 {
     wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel_air.x >= 0.0F) ? HALF_PI32 : -HALF_PI32;
+    DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel_air.x >= 0.0F) ? F_DEG_TO_RAD(90.0F) /* HALF_PI32 */ : F_DEG_TO_RAD(-90.0F); // -HALF_PI32
 }
 
 // 0x80167FE8
@@ -64,9 +64,9 @@ void wpMain_DestroyWeapon(GObj *weapon_gobj) // Destroy item?
 {
     wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    wpMain_StopSFX(wp);                 // Stop item's SFX
-    wpManager_SetPrevAlloc(wp);    // Eject item's user_data from memory?
-    gOMObj_EjectGObjCommon(weapon_gobj);  // Eject GObj from memory?
+    wpMain_StopSFX(wp);                     // Stop item's SFX
+    wpManager_SetPrevAlloc(wp);             // Eject item's user_data from memory?
+    gOMObj_EjectGObjCommon(weapon_gobj);    // Eject GObj from memory?
 }
 
 // 0x80168044
@@ -83,7 +83,7 @@ void wpMain_UpdateGravityClampTVel(wpStruct *wp, f32 gravity, f32 terminal_veloc
 {
     wp->phys_info.vel_air.y -= gravity;
 
-    if (terminal_velocity < func_ovl0_800C7A84(&wp->phys_info.vel))
+    if (func_ovl0_800C7A84(&wp->phys_info.vel) > terminal_velocity)
     {
         func_ovl0_800C7A00(&wp->phys_info.vel);
         func_ovl0_800C7AE0(&wp->phys_info.vel, terminal_velocity);
@@ -91,7 +91,7 @@ void wpMain_UpdateGravityClampTVel(wpStruct *wp, f32 gravity, f32 terminal_veloc
 }
 
 // 0x801680EC
-void wpMain_ReflectorInvertLR(wpStruct *wp, ftStruct *fp) // Invert direction on reflect
+void wpMain_ReflectorSetLR(wpStruct *wp, ftStruct *fp) // Invert direction on reflect
 {
     if ((wp->phys_info.vel_air.x * fp->lr) < 0.0F)
     {

@@ -1,10 +1,10 @@
-#include "fighter.h"
-#include "item.h"
-#include "gmmatch.h"
-#include "ftdonkey.h"
-#include "ftsamus.h"
-#include "ftkirby.h"
-#include "ftness.h"
+#include <ft/fighter.h>
+#include <it/item.h>
+#include <gm/gmmatch.h>
+#include <ft/chara/ftdonkey/ftdonkey.h>
+#include <ft/chara/ftsamus/ftsamus.h>
+#include <ft/chara/ftkirby/ftkirby.h>
+#include <ft/chara/ftness/ftness.h>
 
 extern s32 gmMusicIndexCurrent; // Static (.bss)
 extern s32 gmMusicIndexDefault; // Static (.bss)
@@ -967,9 +967,9 @@ void func_ovl2_800E9248(GObj *fighter_gobj, s32 costume, s32 shade)
     fp->costume = costume;
     fp->shade = shade;
 
-    fp->shade.r = ((attributes->shade_color[fp->shade - 1].r * attributes->shade_color[fp->shade - 1].a) / 255);
-    fp->shade.g = ((attributes->shade_color[fp->shade - 1].g * attributes->shade_color[fp->shade - 1].a) / 255);
-    fp->shade.b = ((attributes->shade_color[fp->shade - 1].b * attributes->shade_color[fp->shade - 1].a) / 255);
+    fp->costume_shade.r = ((attributes->shade_color[fp->shade - 1].r * attributes->shade_color[fp->shade - 1].a) / 255);
+    fp->costume_shade.g = ((attributes->shade_color[fp->shade - 1].g * attributes->shade_color[fp->shade - 1].a) / 255);
+    fp->costume_shade.b = ((attributes->shade_color[fp->shade - 1].b * attributes->shade_color[fp->shade - 1].a) / 255);
 
     func_ovl2_800E9598(fighter_gobj);
 }

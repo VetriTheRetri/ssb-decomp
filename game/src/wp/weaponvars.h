@@ -1,9 +1,9 @@
 #ifndef _WEAPONVARS_H_
 #define _WEAPONVARS_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
 
 #define WPBLASTER_VEL_X 160.0F
 

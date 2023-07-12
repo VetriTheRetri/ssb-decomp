@@ -1,5 +1,5 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_80131174;
 
@@ -124,7 +124,7 @@ bool32 wpMasterHand_YubiBullet_ProcReflector(GObj *weapon_gobj)
     wpStruct *wp = wpGetStruct(weapon_gobj);
     ftStruct *fp = ftGetStruct(wp->owner_gobj);
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
     func_ovl3_80168428(weapon_gobj);
 
     return FALSE;

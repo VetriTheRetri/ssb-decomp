@@ -1,4 +1,4 @@
-#include "item.h"
+#include <it/item.h>
 
 bool32 jtgt_ovl3_8017E7A0(GObj *item_gobj)
 {

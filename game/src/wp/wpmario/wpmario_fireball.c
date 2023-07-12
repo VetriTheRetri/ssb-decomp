@@ -1,5 +1,5 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_80130E3C, *D_ovl2_80130F7C;
 
@@ -128,7 +128,7 @@ bool32 wpMario_Fireball_ProcReflector(GObj *weapon_gobj) // Hit reflector
 
     wp->lifetime = wpMario_Fireball_WeaponAttributes[wp->weapon_vars.fireball.index].lifetime;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
     wpMain_VelSetModelYaw(weapon_gobj);
 
     return FALSE;

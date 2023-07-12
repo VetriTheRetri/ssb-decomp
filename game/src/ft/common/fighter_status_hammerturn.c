@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80147A70
 void ftCommon_HammerTurn_UpdateModelYaw(GObj *fighter_gobj)

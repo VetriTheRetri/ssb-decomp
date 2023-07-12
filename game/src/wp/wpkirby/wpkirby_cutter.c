@@ -1,5 +1,5 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_80131070;
 
@@ -108,7 +108,7 @@ bool32 wpKirby_Cutter_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = WPFINALCUTTER_LIFETIME;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
     func_ovl3_80167FA0(weapon_gobj);
 
     return FALSE;

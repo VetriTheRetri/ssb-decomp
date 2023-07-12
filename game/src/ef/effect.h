@@ -4,7 +4,7 @@
 #include <ssb_types.h>
 #include <macros.h>
 #include <PR/ultratypes.h>
-#include <game/src/sys/obj.h>
+#include <sys/obj.h>
 
 typedef struct Effect_Info
 {

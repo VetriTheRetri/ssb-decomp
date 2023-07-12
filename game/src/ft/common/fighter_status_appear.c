@@ -1,6 +1,6 @@
-#include "fighter.h"
-#include "ftcaptain.h"
-#include "ftness.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftcaptain/ftcaptain.h>
+#include <ft/chara/ftness/ftness.h>
 
 // 0x8013DE60
 void ftNess_AppearStart_ProcUpdate(GObj *fighter_gobj)

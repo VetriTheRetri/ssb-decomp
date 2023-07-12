@@ -1,6 +1,6 @@
-#include "gmmatch.h"
+#include <gm/gmmatch.h>
 #include "ground.h"
-#include "fighter.h"
+#include <ft/fighter.h>
 
 s32 func_ovl2_800D6490(u16 arg0)
 {

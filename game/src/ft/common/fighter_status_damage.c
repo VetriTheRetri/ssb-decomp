@@ -1,6 +1,6 @@
-#include "fighter.h"
-#include "ftdonkey.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftdonkey/ftdonkey.h>
+#include <it/item.h>
 
 // 0x80140340
 void ftCommon_Damage_SetDustGFXInterval(ftStruct *fp)

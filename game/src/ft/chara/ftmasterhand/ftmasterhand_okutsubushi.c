@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x8015AAB0
 void ftMasterHand_Okutsubushi_ProcUpdate(GObj *fighter_gobj)

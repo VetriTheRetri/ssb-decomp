@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 void (*ftCommon_SpecialHi_StatusList[Ft_Kind_EnumMax])(GObj*) =
 {

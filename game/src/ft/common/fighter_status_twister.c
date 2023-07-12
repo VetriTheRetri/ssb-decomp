@@ -1,6 +1,6 @@
-#include "fighter.h"
-#include "item.h"
-#include "gmground.h"
+#include <ft/fighter.h>
+#include <it/item.h>
+#include <gm/gmground.h>
 
 void ftCommon_Twister_ProcUpdate(GObj *fighter_gobj)
 {

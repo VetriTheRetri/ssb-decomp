@@ -1,6 +1,6 @@
-#include "fighter.h"
-#include "gmmatch.h"
-#include "gmground.h"
+#include <ft/fighter.h>
+#include <gm/gmmatch.h>
+#include <gm/gmground.h>
 #include "ground.h"
 
 // 0x8013BC60

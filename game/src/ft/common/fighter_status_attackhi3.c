@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x8014FA50
 void ftCommon_AttackHi3_SetStatus(GObj *fighter_gobj)

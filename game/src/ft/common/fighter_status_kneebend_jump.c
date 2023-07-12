@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x8013F2A0
 void ftCommon_KneeBend_ProcUpdate(GObj *fighter_gobj)

@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80149EC0
 void ftCommon_CatchPull_ProcUpdate(GObj *fighter_gobj)

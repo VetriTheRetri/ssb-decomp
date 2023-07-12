@@ -1,4 +1,4 @@
-#include "item.h"
+#include <it/item.h>
 
 itCreateDesc itCommon_Sword_ItemDesc =
 {

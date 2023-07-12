@@ -1,5 +1,5 @@
-#include <game/src/ft/chara/ftfox/ftfox.h>
-#include <game/src/wp/weapon.h>
+#include <ft/chara/ftfox/ftfox.h>
+#include <wp/weapon.h>
 #include "effect.h"
 
 // 0x8015CB80
@@ -286,7 +286,7 @@ void ftFox_SpecialLwStart_InitStatusVars(GObj *fighter_gobj)
     {
         fp->is_playing_effect = TRUE;
     }
-    fp->special_hit = (SpecialHit*) ((uintptr_t)D_ovl2_80130E94 + (intptr_t)&ftFox_LoadedFiles_SpecialLwData); // Another linker thing
+    fp->special_hit = (ftSpecialHit*) ((uintptr_t)D_ovl2_80130E94 + (intptr_t)&ftFox_LoadedFiles_SpecialLwData); // Another linker thing
 }
 
 // 0x8015D250

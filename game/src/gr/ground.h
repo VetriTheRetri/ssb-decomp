@@ -1,10 +1,10 @@
 #ifndef _GROUND_H_
 #define _GROUND_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
-#include <game/src/sys/obj_renderer.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
+#include <sys/obj_renderer.h>
 
 typedef enum grKind
 {

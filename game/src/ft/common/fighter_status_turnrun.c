@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x8013F170
 void ftCommon_TurnRun_ProcUpdate(GObj *fighter_gobj)

@@ -1,4 +1,4 @@
-#include "item.h"
+#include <it/item.h>
 
 s32 D_ovl3_80189A70[2] = { 0x2250, 0x2270 };
 

@@ -1,9 +1,9 @@
 #ifndef _ITEMVARS_H_
 #define _ITEMVARS_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
 
 #define ITCAPSULE_GRAVITY 1.2F
 #define ITCAPSULE_T_VEL 100.0F

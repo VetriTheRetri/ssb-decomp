@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80145620
 bool32 ftCommon_CliffAttack_CheckInterruptCommon(GObj *fighter_gobj)

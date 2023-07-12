@@ -1,6 +1,6 @@
-#include "item.h"
-#include "weapon.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_801313F4;
 
@@ -243,7 +243,7 @@ bool32 wpHitokage_Flame_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = ITHITOKAGE_FLAME_LIFETIME;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
 
     translate = &DObjGetStruct(weapon_gobj)->translate;
 

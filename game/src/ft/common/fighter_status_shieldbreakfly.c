@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "gmmatch.h"
+#include <ft/fighter.h>
+#include <gm/gmmatch.h>
 
 // 0x80149440
 void ftCommon_ShieldBreakFly_ProcUpdate(GObj *fighter_gobj)
@@ -67,7 +67,7 @@ void ftCommon_ShieldBreakFly_UpdateVarsSetStatus(GObj *fighter_gobj)
 void ftCommon_ShieldBreakFlyReflector_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    SpecialHit *special_hit = fp->special_hit;
+    ftSpecialHit *special_hit = fp->special_hit;
     Vec3f offset = special_hit->offset;
 
     func_ovl2_800EDF24(fp->joint[special_hit->joint_index], &offset);

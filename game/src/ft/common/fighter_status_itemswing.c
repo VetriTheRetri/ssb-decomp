@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <it/item.h>
 
 // 0x80146C40
 void ftCommon_HarisenSwing_ProcHit(GObj *fighter_gobj)
@@ -94,7 +94,7 @@ void ftCommon_StarRodSwing_ProcUpdate(GObj *fighter_gobj)
     ftCommon_IfAnimEnd_SetStatusWait(fighter_gobj);
 }
 
-extern FighterItemSwing Fighter_ItemSwing_Desc[4]; // Warning: seems to blend into another struct, possibly part of main move logic table?
+extern ftItemSwing Fighter_ItemSwing_Desc[4]; // Warning: seems to blend into another struct, possibly part of main move logic table?
 
 s32 Fighter_ItemSwing_Status[4][4] = 
 { 

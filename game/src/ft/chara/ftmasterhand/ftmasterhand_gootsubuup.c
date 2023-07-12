@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x80159B00
 void ftMasterHand_GootsubuUp_ProcPhysics(GObj *fighter_gobj)

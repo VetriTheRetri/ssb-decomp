@@ -1,10 +1,10 @@
 #ifndef _FTDONKEY_H_
 #define _FTDONKEY_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
-#include <game/src/ft/fighter.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
+#include <ft/fighter.h>
 
 #define FTDONKEY_GIANTPUNCH_CHARGE_MAX 10
 #define FTDONKEY_GIANTPUNCH_CHARGE_DAMAGE_MUL 2 // Uncharged Giant Punch damage = base hitbox damage + charge level * this value

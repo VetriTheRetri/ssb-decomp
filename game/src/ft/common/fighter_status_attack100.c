@@ -1,9 +1,9 @@
-#include "fighter.h"
-#include "ftfox.h"
-#include "ftlink.h"
-#include "ftkirby.h"
-#include "ftpurin.h"
-#include "ftcaptain.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftfox/ftox.h>
+#include <ft/chara/ftlink/ftlink.h>
+#include <ft/chara/ftkirby/ftkirby.h>
+#include <ft/chara/ftpurin/ftpurin.h>
+#include <ft/chara/ftcaptain/ftcaptain.h>
 
 #define ftStatus_CheckAttack100Kind(fp)       \
 (                                             \

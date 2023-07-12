@@ -1,4 +1,4 @@
-#include "ftdonkey.h"
+#include <ft/chara/ftdonkey/ftdonkey.h>
 
 // DK enters this state when hit out of Cargo Thorw but it does not persist?
 

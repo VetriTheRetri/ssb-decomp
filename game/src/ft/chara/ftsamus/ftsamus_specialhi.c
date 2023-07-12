@@ -1,4 +1,4 @@
-#include "ftsamus.h"
+#include <ft/chara/ftsamus/ftsamus.h>
 
 // 0x8015DC40
 void ftSamus_SpecialHi_ProcUpdate(GObj *fighter_gobj)

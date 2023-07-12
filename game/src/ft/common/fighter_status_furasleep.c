@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80149940
 void ftCommon_FuraSleep_ProcInterrupt(GObj *fighter_gobj)

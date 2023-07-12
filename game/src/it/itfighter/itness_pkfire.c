@@ -1,5 +1,5 @@
-#include "item.h"
-#include "weapon.h"
+#include <it/item.h>
+#include <wp/weapon.h>
 
 extern void *D_ovl2_8013113C;
 

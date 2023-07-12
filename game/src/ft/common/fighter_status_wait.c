@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x8013E070
 void ftCommon_Wait_ProcInterrupt(GObj *fighter_gobj)

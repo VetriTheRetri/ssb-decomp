@@ -1,5 +1,5 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
 extern void *D_ovl2_801310BC;
 
@@ -142,7 +142,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = WPPIKACHUJOLT_LIFETIME;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
 
     return FALSE;
 }
@@ -645,7 +645,7 @@ bool32 wpPikachu_ThunderJoltGround_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = WPPIKACHUJOLT_LIFETIME;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
 
     DObjGetStruct(weapon_gobj)->rotate.y = (wp->phys_info.vel_air.x >= 0.0F) ? PI32 : 0;
 

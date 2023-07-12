@@ -1,9 +1,9 @@
 #ifndef _FTYOSHI_STATUSVARS_H_
 #define _FTYOSHI_STATUSVARS_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
 
 #define FTYOSHI_JUMPAERIAL_KNOCKBACK_RESIST 140.0F
 

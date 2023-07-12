@@ -1,9 +1,9 @@
-#include "weapon.h"
-#include <game/src/ft/fighter.h>
-#include <game/src/gr/ground.h>
-#include <game/src/gm/gmground.h>
-#include <game/src/gm/gmmatch.h>
-#include <game/src/it/item.h>
+#include <wp/weapon.h>
+#include <ft/fighter.h>
+#include <gr/ground.h>
+#include <gm/gmground.h>
+#include <gm/gmmatch.h>
+#include <it/item.h>
 
 extern wpStruct *wpManager_Global_CurrentUserData;
 extern u32 wpManager_Global_GroupIndex;
@@ -243,9 +243,8 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     wp->sfx_id = 0;
 
     wp->shield_collide_angle = 0.0F;
-    wp->shield_collide_vec.z = 0.0F;
-    wp->shield_collide_vec.y = 0.0F;
-    wp->shield_collide_vec.x = 0.0F;
+
+    wp->shield_collide_vec.x = wp->shield_collide_vec.y = wp->shield_collide_vec.z = 0.0F;
 
     if (item_status_desc->unk_0x0 & 1)
     {
@@ -294,9 +293,9 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     wp->coll_data.vel_push.y = 0.0F;
     wp->coll_data.vel_push.z = 0.0F;
 
-    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcWeaponMain, 1U, 3U);
-    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcSearchHitWeapon, 1U, 1U);
-    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcHitCollisions, 1U, 0U);
+    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcWeaponMain, 1, 3);
+    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcSearchHitWeapon, 1, 1);
+    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcHitCollisions, 1, 0);
 
     wp->proc_update = item_status_desc->proc_update;
     wp->proc_map = item_status_desc->proc_map;
@@ -416,7 +415,7 @@ void wpManager_UpdateHitVictimRecord(GObj *weapon_gobj) // Set hitbox victim arr
 {
     wpStruct *wp = wpGetStruct(weapon_gobj);
     gmHitCollisionRecord *targets;
-    Weapon_Hit *wp_hit;
+    wpHitbox *wp_hit;
     s32 i;
 
     wp_hit = &wp->weapon_hit;
@@ -524,7 +523,7 @@ void wpManager_ProcWeaponMain(GObj *weapon_gobj) // Run item logic pass 1 (anima
 }
 
 // 0x80166594
-void wpManager_UpdateHitVictimInteractStats(Weapon_Hit *wp_hit, GObj *victim_gobj, s32 hitbox_type, u32 interact_mask)
+void wpManager_SetHitVictimInteractStats(wpHitbox *wp_hit, GObj *victim_gobj, s32 hitbox_type, u32 interact_mask)
 {
     s32 i;
 
@@ -619,7 +618,7 @@ void wpManager_UpdateHitVictimInteractStats(Weapon_Hit *wp_hit, GObj *victim_gob
     }
 }
 
-void func_ovl3_8016679C(wpStruct *this_wp, Weapon_Hit *wp_hit, GObj *target_gobj, s32 hitbox_type, u32 interact_mask)
+void func_ovl3_8016679C(wpStruct *this_wp, wpHitbox *wp_hit, GObj *target_gobj, s32 hitbox_type, u32 interact_mask)
 {
     if (this_wp->group_id != 0)
     {
@@ -631,44 +630,42 @@ void func_ovl3_8016679C(wpStruct *this_wp, Weapon_Hit *wp_hit, GObj *target_gobj
 
             if (victim_wp->group_id == this_wp->group_id)
             {
-                wpManager_UpdateHitVictimInteractStats(&victim_wp->weapon_hit, target_gobj, hitbox_type, interact_mask);
+                wpManager_SetHitVictimInteractStats(&victim_wp->weapon_hit, target_gobj, hitbox_type, interact_mask);
             }
             victim_gobj = victim_gobj->group_gobj_next;
         }
     }
-    else wpManager_UpdateHitVictimInteractStats(wp_hit, target_gobj, hitbox_type, interact_mask);
+    else wpManager_SetHitVictimInteractStats(wp_hit, target_gobj, hitbox_type, interact_mask);
 }
 
-void func_ovl3_80166854(wpStruct *this_wp, Weapon_Hit *this_hit, s32 this_hit_id, wpStruct *victim_wp, Weapon_Hit *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
+// 0x80166854
+void wpManager_ProcessWeaponSetOff(wpStruct *this_wp, wpHitbox *this_hit, s32 this_hit_id, wpStruct *victim_wp, wpHitbox *victim_hit, s32 victim_hit_id, GObj *this_gobj, GObj *victim_gobj)
 {
-    s32 this_hit_damage;
-    s32 victim_hit_damage;
+    s32 this_hit_damage = wpMain_DamageApplyStale(this_wp);
+    s32 victim_hit_damage = wpMain_DamageApplyStale(victim_wp);
     Vec3f sp2C;
-    s32 victim_hit_priority;
-    s32 this_hit_priority;
-
-    this_hit_damage = wpMain_DamageApplyStale(this_wp);
-    victim_hit_damage = wpMain_DamageApplyStale(victim_wp);
+    s32 priority_high;
 
     func_ovl2_800F0C94(&sp2C, victim_hit, victim_hit_id, this_hit, this_hit_id);
 
-    victim_hit_priority = victim_hit->priority;
-    this_hit_priority = this_hit->priority;
+    priority_high = this_hit->priority;
 
-    if (this_hit_priority >= victim_hit->priority)
+    if (victim_hit->priority <= priority_high)
     {
         func_ovl3_8016679C(victim_wp, victim_hit, this_gobj, gmHitCollision_Type_Hit, 0);
+
         if (victim_wp->hit_attack_damage < victim_hit_damage)
         {
             victim_wp->hit_attack_damage = victim_hit_damage;
         }
         func_ovl2_80100BF0(&sp2C, victim_hit_damage);
-        this_hit_priority = this_hit->priority;
-        victim_hit_priority = victim_hit->priority;
     }
-    if (victim_hit_priority >= this_hit_priority)
+    priority_high = victim_hit->priority;
+
+    if (this_hit_priority <= priority_high)
     {
         func_ovl3_8016679C(this_wp, this_hit, victim_gobj, gmHitCollision_Type_Hit, 0);
+
         if (this_wp->hit_attack_damage < this_hit_damage)
         {
             this_wp->hit_attack_damage = this_hit_damage;
@@ -682,7 +679,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
 {
     GObj *other_gobj;
     wpStruct *this_wp, *other_wp;
-    Weapon_Hit *other_hit, *this_hit;
+    wpHitbox *other_hit, *this_hit;
     gmHitCollisionFlags these_flags, those_flags;
     s32 m, n, i, j;
     bool32 is_check_self;
@@ -747,7 +744,7 @@ void wpManager_ProcSearchHitWeapon(GObj *this_gobj) // Scan for hitbox collision
                                         {
                                             if (func_ovl2_800F007C(other_hit, i, this_hit, j) != FALSE)
                                             {
-                                                func_ovl3_80166854(other_wp, other_hit, i, this_wp, this_hit, j, other_gobj, this_gobj);
+                                                wpManager_ProcessWeaponSetOff(other_wp, other_hit, i, this_wp, this_hit, j, other_gobj, this_gobj);
                                                 goto next_gobj;
                                             }
                                         }
@@ -863,7 +860,6 @@ next_check:
     {
         if (wp->proc_absorb != NULL)
         {
-
             if (wp->proc_absorb(weapon_gobj) != FALSE)
             {
                 wpMain_DestroyWeapon(weapon_gobj);

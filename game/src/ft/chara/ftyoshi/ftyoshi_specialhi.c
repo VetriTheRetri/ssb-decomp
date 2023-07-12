@@ -1,4 +1,4 @@
-#include "ftyoshi.h"
+#include <ft/chara/ftyoshi/ftyoshi.h>
 
 // 0x8015E980
 void ftYoshi_SpecialHi_ProcDamage(GObj *fighter_gobj)
@@ -39,7 +39,7 @@ void ftYoshi_SpecialHi_UpdateEggVectors(ftStruct *fp)
 // 0x8015EA5C
 void ftYoshi_SpecialHi_UpdateEggVars(GObj *fighter_gobj)
 {
-    wpStruct *ip;
+    wpStruct *wp;
     Vec3f pos;
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
@@ -49,11 +49,11 @@ void ftYoshi_SpecialHi_UpdateEggVars(GObj *fighter_gobj)
 
         if (fp->status_vars.yoshi.specialhi.egg_gobj != NULL)
         {
-            ip = wpGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj);
+            wp = wpGetStruct(fp->status_vars.yoshi.specialhi.egg_gobj);
 
-            ip->weapon_vars.egg_throw.is_throw = TRUE;
-            ip->weapon_vars.egg_throw.throw_force = fp->status_vars.yoshi.specialhi.throw_force;
-            ip->weapon_vars.egg_throw.stick_range = fp->input.pl.stick_range.x;
+            wp->weapon_vars.egg_throw.is_throw = TRUE;
+            wp->weapon_vars.egg_throw.throw_force = fp->status_vars.yoshi.specialhi.throw_force;
+            wp->weapon_vars.egg_throw.stick_range = fp->input.pl.stick_range.x;
 
             func_ovl2_800DF09C(fp->status_vars.yoshi.specialhi.egg_gobj, fp->coll_data.p_translate, &fp->coll_data);
 

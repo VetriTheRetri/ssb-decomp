@@ -1,11 +1,11 @@
 #ifndef _FTSAMUS_H_
 #define _FTSAMUS_H_
 
-#include <game/include/ssb_types.h>
-#include <game/include/PR/ultratypes.h>
-#include <game/src/sys/obj.h>
-#include <game/src/ft/fighter.h>
-#include <game/src/wp/weapon.h>
+#include <ssb_types.h>
+#include <PR/ultratypes.h>
+#include <sys/obj.h>
+#include <ft/fighter.h>
+#include <wp/weapon.h>
 
 #define FTSAMUS_CHARGE_JOINT 16             // Bone to attach Charge Shot
 #define FTSAMUS_CHARGE_MAX 7                // Maximum charge level

@@ -1,5 +1,5 @@
-#include "item.h"
-#include "fighter.h"
+#include <it/item.h>
+#include <ft/fighter.h>
 
 itCreateDesc itCommon_NBumper_ItemDesc =
 {

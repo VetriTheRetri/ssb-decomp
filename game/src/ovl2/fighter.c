@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "ftkirby.h"
+#include <ft/fighter.h>
+#include <ft/chara/ftkirby/ftkirby.h>
 
 void func_ovl2_800D78E8(GObj *fighter_gobj)
 {
@@ -350,9 +350,9 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
     fp->costume = spawn->costume;
     fp->shade = spawn->shade;
 
-    fp->shade.r = (attributes->shade_color[fp->shade - 1].r * attributes->shade_color[fp->shade - 1].a) / 255;
-    fp->shade.g = (attributes->shade_color[fp->shade - 1].g * attributes->shade_color[fp->shade - 1].a) / 255;
-    fp->shade.b = (attributes->shade_color[fp->shade - 1].b * attributes->shade_color[fp->shade - 1].a) / 255;
+    fp->costume_shade.r = (attributes->shade_color[fp->shade - 1].r * attributes->shade_color[fp->shade - 1].a) / 255;
+    fp->costume_shade.g = (attributes->shade_color[fp->shade - 1].g * attributes->shade_color[fp->shade - 1].a) / 255;
+    fp->costume_shade.b = (attributes->shade_color[fp->shade - 1].b * attributes->shade_color[fp->shade - 1].a) / 255;
 
     fp->handicap = spawn->handicap;
     fp->cp_level = spawn->cp_level;

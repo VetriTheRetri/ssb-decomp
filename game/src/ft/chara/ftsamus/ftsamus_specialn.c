@@ -1,4 +1,4 @@
-#include "ftsamus.h"
+#include <ft/chara/ftsamus/ftsamus.h>
 
 // 0x8015D300
 void ftSamus_SpecialN_DestroyChargeShot(ftStruct *fp)

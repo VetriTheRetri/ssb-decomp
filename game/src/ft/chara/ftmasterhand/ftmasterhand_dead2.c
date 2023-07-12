@@ -1,4 +1,4 @@
-#include "ftmasterhand.h"
+#include <ft/chara/ftmasterhand/ftmasterhand.h>
 
 // 0x8015ADC0
 void ftMasterHand_Dead2_ProcPhysics(GObj *fighter_gobj)

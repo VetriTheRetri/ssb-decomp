@@ -1,5 +1,5 @@
-#include "item.h"
-#include "gmmatch.h"
+#include <it/item.h>
+#include <gm/gmmatch.h>
 
 itCreateDesc itCommon_Box_ItemDesc = 
 {

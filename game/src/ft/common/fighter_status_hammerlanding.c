@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x80148050
 void ftCommon_HammerLanding_ProcUpdate(GObj *fighter_gobj)

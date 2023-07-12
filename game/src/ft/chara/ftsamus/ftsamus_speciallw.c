@@ -1,4 +1,4 @@
-#include "ftsamus.h"
+#include <ft/chara/ftsamus/ftsamus.h>
 
 // 0x8015DF00
 void ftSamus_SpecialLw_CreateBomb(GObj *fighter_gobj)

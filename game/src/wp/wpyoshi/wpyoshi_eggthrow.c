@@ -1,10 +1,10 @@
-#include "weapon.h"
-#include "fighter.h"
+#include <wp/weapon.h>
+#include <ft/fighter.h>
 
-#include <game/src/sys/obj_renderer.h>
-#include <game/include/PR/gu.h>
-#include <game/include/PR/mbi.h>
-#include <game/include/PR/sp.h>
+#include <sys/obj_renderer.h>
+#include <PR/gu.h>
+#include <PR/mbi.h>
+#include <PR/sp.h>
 
 extern void *D_ovl2_80130FF0;
 
@@ -229,7 +229,7 @@ bool32 wpYoshi_EggThrow_ProcReflector(GObj *weapon_gobj)
 
     wp->lifetime = WPEGGTHROW_LIFETIME;
 
-    wpMain_ReflectorInvertLR(wp, fp);
+    wpMain_ReflectorSetLR(wp, fp);
     wpMain_VelSetModelYaw(weapon_gobj);
 
     return FALSE;
@@ -238,7 +238,7 @@ bool32 wpYoshi_EggThrow_ProcReflector(GObj *weapon_gobj)
 // 0x8016C444
 void wpYoshi_EggThrow_ProcRender(GObj *weapon_gobj)
 {
-    gDPPwpeSync(D_800465B0[1]++);
+    gDPPipeSync(D_800465B0[1]++);
 
     gDPSetEnvColor(D_800465B0[1]++, 0, 0, 0, 0);
 
@@ -271,8 +271,7 @@ GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     wp->is_camera_follow = TRUE;
 
-    wp->phys_info.vel_air.y = 0.0F;
-    wp->phys_info.vel_air.x = 0.0F;
+    wp->phys_info.vel_air.x = wp->phys_info.vel_air.y = 0.0F;
 
     wp->weapon_vars.egg_throw.is_spin = wp->weapon_vars.egg_throw.is_throw;
     wp->weapon_vars.egg_throw.lr = fp->lr;

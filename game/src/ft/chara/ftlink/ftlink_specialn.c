@@ -1,4 +1,4 @@
-#include "ftlink.h"
+#include <ft/chara/ftlink/ftlink.h>
 
 // 0x801636D0
 void ftLink_SpecialN_DestroyBoomerang(GObj *fighter_gobj)

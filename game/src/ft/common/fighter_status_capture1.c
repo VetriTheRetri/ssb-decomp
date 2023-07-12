@@ -1,5 +1,5 @@
-#include "fighter.h"
-#include "item.h"
+#include <ft/fighter.h>
+#include <it/item.h>
 
 // 0x8014A5F0
 void ftCommon_CapturePulled_BitmapRotateScale(GObj *fighter_gobj, Vec3f *this_pos, Vec3f *rotate)

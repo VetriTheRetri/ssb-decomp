@@ -55112,7 +55112,7 @@ glabel func_ovl2_8010719C
   /* 082AD0 801072D0 8CCF0008 */        lw $t7, 8($a2)
   /* 082AD4 801072D4 00C02025 */        or $a0, $a2, $zero
   /* 082AD8 801072D8 8DE50084 */        lw $a1, 0x84($t7)
-  /* 082ADC 801072DC 0C05A03B */       jal wpMain_ReflectorInvertLR
+  /* 082ADC 801072DC 0C05A03B */       jal wpMain_ReflectorSetLR
   /* 082AE0 801072E0 AFA6002C */        sw $a2, 0x2c($sp)
   /* 082AE4 801072E4 8FA6002C */        lw $a2, 0x2c($sp)
   /* 082AE8 801072E8 27A4001C */     addiu $a0, $sp, 0x1c

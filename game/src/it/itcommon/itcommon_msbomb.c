@@ -1,6 +1,6 @@
-#include "item.h"
-#include "fighter.h"
-#include "gmmatch.h"
+#include <it/item.h>
+#include <ft/fighter.h>
+#include <gm/gmmatch.h>
 
 itCreateDesc itCommon_MSBomb_ItemDesc =
 {

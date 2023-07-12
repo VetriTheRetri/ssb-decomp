@@ -1,4 +1,4 @@
-#include "fighter.h"
+#include <ft/fighter.h>
 
 // 0x801441C0
 void ftCommon_StopCeil_SetStatus(GObj *fighter_gobj)

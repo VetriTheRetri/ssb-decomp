@@ -1,8 +1,8 @@
 #include "mpcoll.h"
-#include "fighter.h"
-#include "weapon.h"
-#include "item.h"
-#include "gmmatch.h"
+#include <ft/fighter.h>
+#include <wp/weapon.h>
+#include <it/item.h>
+#include <gm/gmmatch.h>
 
 extern s32 D_ovl2_80130DE0;
 extern s32 D_ovl2_80130DE8[5]; // Wall line ID?

@@ -1,16 +1,16 @@
-#include "item.h"
-#include "weapon.h"
-#include "gmground.h"
+#include <it/item.h>
+#include <wp/weapon.h>
+#include <gm/gmground.h>
 
-#include <game/src/sys/develop.h>
-#include <game/src/sys/hal_gu.h>
-#include <game/src/sys/obj_renderer.h>
-#include <game/src/sys/obj.h>
+#include <sys/develop.h>
+#include <sys/hal_gu.h>
+#include <sys/obj_renderer.h>
+#include <sys/obj.h>
 
-#include <game/include/PR/gu.h>
-#include <game/include/PR/mbi.h>
-#include <game/include/PR/sp.h>
-#include <game/include/PR/ultratypes.h>
+#include <PR/gu.h>
+#include <PR/mbi.h>
+#include <PR/sp.h>
+#include <PR/ultratypes.h>
 
 void func_ovl3_8017FDC0(GObj *item_gobj)
 {
