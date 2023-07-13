@@ -127,7 +127,7 @@ void ftCommon_AttackS4_SetStatus(GObj *fighter_gobj)
 bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -168,7 +168,7 @@ bool32 ftCommon_AttackS4_CheckInterruptDash(GObj *fighter_gobj)
 bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (((fp->input.pl.stick_range.x * fp->status_vars.common.attack4.lr) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {
@@ -212,7 +212,7 @@ bool32 ftCommon_AttackS4_CheckInterruptTurn(GObj *fighter_gobj)
 bool32 ftCommon_AttackS4_CheckInterruptCommon(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if ((ABS(fp->input.pl.stick_range.x) >= FTCOMMON_ATTACKS4_STICK_RANGE_MIN) && (fp->tap_stick_x < FTCOMMON_ATTACKS4_BUFFER_FRAMES_MAX) && (fp->input.pl.button_tap & fp->input.button_mask_a))
     {

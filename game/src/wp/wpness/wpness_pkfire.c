@@ -12,7 +12,6 @@ wpCreateDesc wpNess_PKFire_WeaponDesc =
     0x12,                                   // ???
     0x2E,                                   // ???
     0,                                      // ???
-    0,                                      // ???
     wpNess_PKFire_ProcUpdate,               // Proc Update
     wpNess_PKFire_ProcMap,                  // Proc Map
     wpNess_PKFire_ProcHit,                  // Proc Hit

@@ -10,7 +10,7 @@ void ftCommon_FallSpecial_ProcInterrupt(GObj *fighter_gobj)
 void ftCommon_FallSpecial_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8DB0(fp);
 
@@ -66,7 +66,7 @@ void ftCommon_FallSpecial_ProcMap(GObj *fighter_gobj)
 void ftCommon_FallSpecial_SetStatus(GObj *fighter_gobj, f32 drift, bool32 unk1, bool32 is_fall_accelerate, bool32 is_goto_landing, f32 landing_lag, bool32 is_allow_interrupt)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_FallSpecial, 0.0F, 1.0F, FTSTATUPDATE_FASTFALL_PRESERVE);
 

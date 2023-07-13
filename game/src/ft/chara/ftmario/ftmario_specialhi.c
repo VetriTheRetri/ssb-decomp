@@ -60,7 +60,7 @@ void ftMario_SpecialHi_ProcInterrupt(GObj *fighter_gobj)
 void ftMario_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->status_vars.mario.specialhi.is_air_bool == FALSE)
     {

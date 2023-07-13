@@ -16,7 +16,7 @@ void ftFox_SpecialAirHiStart_ProcUpdate(GObj *fighter_gobj)
 void ftFox_SpecialAirHiStart_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->status_vars.fox.specialhi.gravity_delay != 0)
     {
@@ -270,7 +270,7 @@ void ftFox_SpecialAirHi_ProcMap(GObj *fighter_gobj)
 void ftFox_SpecialAirHi_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Fox_SpecialAirHi, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_COLANIM_PRESERVE);
@@ -346,7 +346,7 @@ void ftFox_SpecialHi_DecideSetStatus(GObj *fighter_gobj)
 void ftFox_SpecialAirHi_FromGroundSetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     s32 stick_x;
     s32 stick_y;
     s32 stick_x_2;
@@ -457,7 +457,7 @@ void ftFox_SpecialHiBound_ProcUpdate(GObj* fighter_gobj)
 void ftFox_SpecialHiBound_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->ground_or_air == GA_Air)
     {

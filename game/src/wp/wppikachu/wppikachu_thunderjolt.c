@@ -12,7 +12,6 @@ wpCreateDesc wpPikachu_ThunderJoltAir_WeaponDesc =
     0x12,                                       // ???
     0x2E,                                       // ???
     0,                                          // ???
-    0,                                          // ???
     wpPikachu_ThunderJoltAir_ProcUpdate,        // Proc Update
     wpPikachu_ThunderJoltAir_ProcMap,           // Proc Map
     wpPikachu_ThunderJoltAir_ProcHit,           // Proc Hit
@@ -30,7 +29,6 @@ wpCreateDesc wpPikachu_ThunderJoltGround_WeaponDesc =
     &D_ovl2_801310BC,                           // Pointer to character's loaded files?
     0x34,                                       // Offset of weapon attributes in loaded files
     0x1C,                                       // ???
-    0,                                          // ???
     0,                                          // ???
     0,                                          // ???
     wpPikachu_ThunderJoltGround_ProcUpdate,     // Proc Update

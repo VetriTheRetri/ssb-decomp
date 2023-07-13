@@ -194,7 +194,7 @@ void func_ovl3_80148664(DObj *joint, DObjDesc *joint_desc, f32 range, Vec3f *sca
     joint->translate.z = ((joint->translate.z - scale_translate) * range) + scale_translate;
 }
 
-// Return to this when the struct at 0x2D8 of ftCommonAttributes is mapped
+// Return to this when the struct at 0x2D8 of ftAttributes is mapped
 void func_ovl3_80148714(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
@@ -246,7 +246,7 @@ void func_ovl3_80148714(GObj *fighter_gobj)
 void func_ovl3_8014889C(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     DObj **p_joint = &fp->joint[4];
     DObjDesc *unk_vec = &attributes->dobj_lookup[1];
     DObj *joint;

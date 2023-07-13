@@ -148,7 +148,7 @@ extern f32 D_ovl2_8012C4E0[16] = { 4.0F, 3.0F, 3.0F, 1.0F, 2.0F, 2.0F, 4.0F, 4.0
 void func_ovl2_800D8BB4(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8978(fp, D_ovl2_8012C4E0[fp->coll_data.ground_flags & 0xFFFF00FF] * attributes->traction);
     func_ovl2_800D87D0(fighter_gobj);
@@ -208,7 +208,7 @@ void func_ovl2_800D8D68(ftStruct *fp, f32 gravity, f32 t_vel)
     }
 }
 
-void func_ovl2_800D8DA0(ftStruct *fp, ftCommonAttributes *attributes)
+void func_ovl2_800D8DA0(ftStruct *fp, ftAttributes *attributes)
 {
     fp->phys_info.vel_air.y = -attributes->fast_fall_speed;
 }
@@ -228,7 +228,7 @@ void func_ovl2_800D8DB0(ftStruct *fp)
     }
 }
 
-void func_ovl2_800D8E50(ftStruct *fp, ftCommonAttributes *attributes)
+void func_ovl2_800D8E50(ftStruct *fp, ftAttributes *attributes)
 {
     func_ovl2_800D8D68(fp, attributes->gravity, attributes->fall_speed_max);
 }
@@ -269,7 +269,7 @@ bool32 func_ovl2_800D8EDC(ftStruct *fp, f32 clamp)
     else return FALSE;
 }
 
-bool32 func_ovl2_800D8FA8(ftStruct *fp, ftCommonAttributes *attributes)
+bool32 func_ovl2_800D8FA8(ftStruct *fp, ftAttributes *attributes)
 {
     return func_ovl2_800D8EDC(fp, attributes->aerial_speed_max_x);
 }
@@ -292,12 +292,12 @@ void ftPhysics_ClampDriftStickRange(ftStruct *fp, s32 stick_range_min, f32 vel, 
     }
 }
 
-void func_ovl2_800D9044(ftStruct *fp, ftCommonAttributes *attributes)
+void func_ovl2_800D9044(ftStruct *fp, ftAttributes *attributes)
 {
     ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration, attributes->aerial_speed_max_x);
 }
 
-void func_ovl2_800D9074(ftStruct *fp, ftCommonAttributes *attributes)
+void func_ovl2_800D9074(ftStruct *fp, ftAttributes *attributes)
 {
     if (fp->phys_info.vel_air.x < 0.0F)
     {
@@ -322,7 +322,7 @@ void func_ovl2_800D9074(ftStruct *fp, ftCommonAttributes *attributes)
 void jtgt_ovl2_800D90E0(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
 
@@ -336,7 +336,7 @@ void jtgt_ovl2_800D90E0(GObj *fighter_gobj)
 void jtgt_ovl2_800D9160(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8DB0(fp);
 
@@ -352,7 +352,7 @@ void jtgt_ovl2_800D9160(GObj *fighter_gobj)
 void func_ovl2_800D91EC(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     (fp->is_fast_fall) ? func_ovl2_800D8DA0(fp, attributes) : func_ovl2_800D8E50(fp, attributes);
 

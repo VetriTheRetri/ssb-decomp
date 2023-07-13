@@ -39,7 +39,7 @@ void ftCommon_AttackS3_SetStatus(GObj *fighter_gobj)
 bool32 ftCommon_AttackS3_CheckInterruptCommon(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_ATTACKS3_STICK_RANGE_MIN))
     {

@@ -5,9 +5,10 @@
 typedef enum wpKind wpKind;
 
 // Structs
-typedef struct wpStruct			wpStruct;
-typedef struct wpCreateDesc		wpCreateDesc;
-typedef struct wpHitPositions	wpHitPositions;
-typedef struct wpHitbox			wpHitbox;
+typedef struct wpStruct				wpStruct;
+typedef struct wpAttributes			wpAttributes;
+typedef struct wpCreateDesc			wpCreateDesc;
+typedef struct wpHitPositions		wpHitPositions;
+typedef struct wpHitbox				wpHitbox;
 
 #endif

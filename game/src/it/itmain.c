@@ -277,7 +277,7 @@ void itMain_SetFighterThrow(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_sm
     }
     else
     {
-        func_ovl2_800E806C(fp, ((is_smash_throw != FALSE) ? 9 : 6), 0);
+        func_ovl2_800E806C(fp, (is_smash_throw != FALSE) ? 9 : 6, 0);
     }
     proc_throw = itCommon_Throw_ProcList[ip->it_kind];
 
@@ -289,7 +289,7 @@ void itMain_SetFighterThrow(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_sm
 
     func_ovl2_8010066C(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
-    func_800269C0(((is_smash_throw != FALSE) ? ip->throw_sfx : ip->drop_sfx));
+    func_800269C0((is_smash_throw != FALSE) ? ip->throw_sfx : ip->drop_sfx);
 
     func_ovl3_8017245C(item_gobj, vel, is_smash_throw);
 }

@@ -22,7 +22,7 @@ void ftCommon_AttackLw3_ProcInterrupt(GObj *fighter_gobj)
 bool32 ftCommon_AttackLw3_CheckInterruptSelf(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_attacklw3))
     {
@@ -69,7 +69,7 @@ void ftCommon_AttackLw3_SetStatus(GObj *fighter_gobj)
 bool32 ftCommon_AttackLw3_CheckInterruptCommon(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (fp->input.pl.stick_range.y <= FTCOMMON_ATTACKLW3_STICK_RANGE_MIN))
     {

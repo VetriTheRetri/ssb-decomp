@@ -12,7 +12,6 @@ wpCreateDesc wpPikachu_ThunderHead_WeaponDesc =
     0x1C,                                       // ???
     0,                                          // ???
     0,                                          // ???
-    0,                                          // ???
     wpPikachu_ThunderHead_ProcUpdate,           // Proc Update
     wpPikachu_ThunderHead_ProcMap,              // Proc Map
     NULL,                                       // Proc Hit
@@ -30,7 +29,6 @@ wpCreateDesc wpPikachu_ThunderTrail_WeaponDesc =
     &D_ovl2_801310B0,                           // Pointer to character's loaded files?
     0x40,                                       // Offset of weapon attributes in loaded files
     0x1C,                                       // ???
-    0,                                          // ???
     0,                                          // ???
     0,                                          // ???
     wpPikachu_ThunderTrail_ProcUpdate,          // Proc Update

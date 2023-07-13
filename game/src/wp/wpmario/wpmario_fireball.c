@@ -47,7 +47,6 @@ wpCreateDesc wpMario_Fireball_WeaponDesc =
     0x12,                                   // ???
     0x47,                                   // ???
     0,                                      // ???
-    0,                                      // ???
     wpMario_Fireball_ProcUpdate,            // Proc Update
     wpMario_Fireball_ProcMap,               // Proc Map
     wpMario_Fireball_ProcHit,               // Proc Hit

@@ -29,7 +29,7 @@ void ftDonkey_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     f32 gravity_mul = (fp->command_vars.flags.flag1 != 0) ? FTDONKEY_SPINNINGKONG_END_GRAVITY_MUL : FTDONKEY_SPINNINGKONG_START_GRAVITY_MUL;
 
@@ -74,7 +74,7 @@ void ftDonkey_SpecialHi_SwitchStatusAir(GObj *fighter_gobj)
 void ftDonkey_SpecialHi_SetStatusFlagGA(GObj *fighter_gobj, bool32 ground_or_air)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftStatus_Update(fighter_gobj, ftStatus_Donkey_SpecialAirHi, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);

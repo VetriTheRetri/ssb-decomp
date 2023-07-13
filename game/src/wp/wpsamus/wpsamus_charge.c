@@ -119,7 +119,6 @@ wpCreateDesc wpSamus_ChargeShot_WeaponDesc =
     0x12,                                   // ???
     0x2E,                                   // ???
     0,                                      // ???
-    0,                                      // ???
     wpSamus_ChargeShot_ProcUpdate,          // Proc Update
     wpSamus_ChargeShot_ProcMap,             // Proc Map
     wpSamus_ChargeShot_ProcHit,             // Proc Hit

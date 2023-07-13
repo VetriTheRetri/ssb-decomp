@@ -391,7 +391,7 @@ bool32 itNBumper_GWaitHit_ProcHit(GObj *item_gobj)
 bool32 itNBumper_GWaitHit_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ip->attributes;
+    itAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f sp30;
 

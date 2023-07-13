@@ -53,7 +53,7 @@ bool32 ftCommon_HammerFall_CheckInterruptDamageFall(GObj *fighter_gobj)
 void ftCommon_HammerFall_SetStatusJump(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     s32 vel_x, vel_y;
 
     ftMap_SetAir(fp);

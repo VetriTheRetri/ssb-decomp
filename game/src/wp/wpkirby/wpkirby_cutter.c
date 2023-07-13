@@ -12,7 +12,6 @@ wpCreateDesc wpKirby_Cutter_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpKirby_Cutter_ProcUpdate,              // Proc Update
     wpKirby_Cutter_ProcMap,                 // Proc Map
     wpKirby_Cutter_ProcHit,                 // Proc Hit

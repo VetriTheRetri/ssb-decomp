@@ -329,7 +329,7 @@ void itMSBomb_GAttach_InitItemVars(GObj *item_gobj)
 void itMSBomb_NExplode_SpawnGFXFighter(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ip->attributes;
+    itAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     s32 unused[4];
 

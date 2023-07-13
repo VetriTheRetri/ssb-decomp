@@ -99,7 +99,7 @@ void ftCommon_Catch_SetStatus(GObj *fighter_gobj)
 bool32 ftCommon_Catch_CheckInterruptGuard(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     u32 flags = fp->status_vars.common.catchmain.unk_0x24;
 
     if ((fp->input.pl.button_tap & fp->input.button_mask_a) && (attributes->is_have_catch))
@@ -117,7 +117,7 @@ bool32 ftCommon_Catch_CheckInterruptGuard(GObj *fighter_gobj)
 bool32 ftCommon_Catch_CheckInterruptCommon(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {
@@ -138,7 +138,7 @@ bool32 ftCommon_Catch_CheckInterruptCommon(GObj *fighter_gobj)
 bool32 ftCommon_Catch_CheckInterruptRunDash(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {
@@ -159,7 +159,7 @@ bool32 ftCommon_Catch_CheckInterruptRunDash(GObj *fighter_gobj)
 bool32 ftCommon_Catch_CheckInterruptAttack11(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {

@@ -126,7 +126,7 @@ void ftCommon_Attack11_ProcStatus(GObj *fighter_gobj)
 void ftCommon_Attack11_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (ftCommon_Get_CheckInterruptCommon(fighter_gobj) == FALSE)
     {
@@ -245,7 +245,7 @@ void ftCommon_Attack13_SetStatus(GObj *fighter_gobj)
 bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->input.pl.button_tap & fp->input.button_mask_a)
     {
@@ -329,7 +329,7 @@ bool32 ftCommon_Attack1_CheckInterruptCommon(GObj *fighter_gobj)
 bool32 ftCommon_Attack11_CheckGoto(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->attack1_followup_frames != 0.0F)
     {
@@ -353,7 +353,7 @@ bool32 ftCommon_Attack11_CheckGoto(GObj *fighter_gobj)
 bool32 ftCommon_Attack12_CheckGoto(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->attack1_followup_frames != 0.0F)
     {

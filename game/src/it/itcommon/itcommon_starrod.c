@@ -93,7 +93,6 @@ wpCreateDesc wpStarRod_Star_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpStarRod_Star_ProcUpdate,              // Proc Update
     wpStarRod_Star_ProcMap,                 // Proc Map
     wpStarRod_Star_ProcHit,                 // Proc Hit

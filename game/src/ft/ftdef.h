@@ -44,7 +44,7 @@ typedef struct ftPartIndex				ftPartIndex;
 typedef struct ftPartsUnkIndexTable		ftPartsUnkIndexTable;
 typedef struct ftAfterImage				ftAfterImage;
 typedef struct ftComputer				ftComputer;
-typedef struct ftCommonAttributes		ftCommonAttributes;
+typedef struct ftAttributes		ftAttributes;
 typedef struct UnkFighterDObjData		UnkFighterDObjData;
 
 #endif

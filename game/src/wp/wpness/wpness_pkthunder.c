@@ -18,7 +18,6 @@ wpCreateDesc wpNess_PKThunderHead_WeaponDesc =
     0x12,                                   // ???
     0x2E,                                   // ???
     0,                                      // ???
-    0,                                      // ???
     wpNess_PKThunderHead_ProcUpdate,        // Proc Update
     wpNess_PKThunderHead_ProcMap,           // Proc Map
     wpNess_PKThunderHead_ProcHit,           // Proc Hit
@@ -37,7 +36,6 @@ wpCreateDesc wpNess_PKThunderTrail_WeaponDesc =
     0x40,                                   // Offset of weapon attributes in loaded files
     0x12,                                   // ???
     0x2E,                                   // ???
-    0,                                      // ???
     0,                                      // ???
     wpNess_PKThunderTrail_ProcUpdate,       // Proc Update
     NULL,                                   // Proc Map
@@ -58,7 +56,6 @@ wpCreateDesc wpNess_PKReflectHead_WeaponDesc =
     0x12,                                   // ???
     0x2E,                                   // ???
     0,                                      // ???
-    0,                                      // ???
     wpNess_PKReflectHead_ProcUpdate,        // Proc Update
     wpNess_PKReflectHead_ProcMap,           // Proc Map
     wpNess_PKReflectHead_ProcHit,           // Proc Hit
@@ -77,7 +74,6 @@ wpCreateDesc wpNess_PKReflectTrail_WeaponDesc =
     0x40,                                   // Offset of weapon attributes in loaded files
     0x12,                                   // ???
     0x2E,                                   // ???
-    0,                                      // ???
     0,                                      // ???
     wpNess_PKReflectTrail_ProcUpdate,       // Proc Update
     NULL,                                   // Proc Map

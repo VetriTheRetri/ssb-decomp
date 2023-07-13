@@ -206,7 +206,7 @@ void func_ovl3_80177180(GObj *item_gobj, u8 is_explode)
 {
     s32 unused[4];
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ip->attributes;
+    itAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
 
     if ((ip->coll_data.coll_mask & MPCOLL_MASK_GROUND) || (is_explode != FALSE))
@@ -422,7 +422,7 @@ void itBombHei_GWalk_UpdateGFX(GObj *item_gobj)
 bool32 itBombHei_GWalk_ProcUpdate(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ip->attributes;
+    itAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
@@ -486,7 +486,7 @@ extern intptr_t BombHei_Motion_Unk;
 void itBombHei_GWalk_InitItemVars(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ip->attributes;
+    itAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     void *texture;
     s32 unused;

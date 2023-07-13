@@ -4,7 +4,7 @@
 void ftCommon_HammerKneeBend_ProcUpdate(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.hammer.kneebend_anim_frame++;
 

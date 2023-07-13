@@ -93,7 +93,6 @@ wpCreateDesc wpLGun_Ammo_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpLGun_Ammo_ProcUpdate,                 // Proc Update
     wpLGun_Ammo_ProcMap,                    // Proc Map
     wpLGun_Ammo_ProcHit,                    // Proc Hit

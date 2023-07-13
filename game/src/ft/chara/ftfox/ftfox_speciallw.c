@@ -57,7 +57,7 @@ void ftFox_SpecialLwStart_ProcUpdate(GObj *fighter_gobj)
 void ftFox_SpecialLwCommon_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->status_vars.fox.speciallw.gravity_delay != 0)
     {

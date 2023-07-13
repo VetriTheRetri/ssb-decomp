@@ -31,7 +31,6 @@ wpCreateDesc wpLink_Booemrang_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpLink_Boomerang_ProcUpdate,            // Proc Update
     wpLink_Boomerang_ProcMap,               // Proc Map
     wpLink_Boomerang_ProcHit,               // Proc Hit

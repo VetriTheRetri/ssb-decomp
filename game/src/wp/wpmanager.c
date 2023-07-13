@@ -73,7 +73,7 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
 {
     GObj *weapon_gobj;
     void (*cb)(GObj*);
-    wpCommonAttributes *attributes;
+    wpAttributes *attributes;
     wpStruct *wp;
     wpStruct *owner_wp;
     itStruct *ap;
@@ -260,23 +260,22 @@ GObj* wpManager_CreateWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, V
     }
     func_80009DF4(weapon_gobj, cb, 0xE, 0x80000000, -1);
 
-    if (attributes->unk_0x4 != NULL)
+    if (attributes->mobj != NULL)
     {
-        func_8000F8F4(weapon_gobj, attributes->unk_0x4);
+        func_8000F8F4(weapon_gobj, attributes->mobj);
     }
 
-    if ((attributes->unk_0x8 != NULL) || (attributes->unk_0xC != NULL))
+    if ((attributes->anim_joint != NULL) || (attributes->matanim_joint != NULL))
     {
-
-        func_8000BED8(weapon_gobj, attributes->unk_0x8, attributes->unk_0xC, 0.0F);
+        func_8000BED8(weapon_gobj, attributes->anim_joint, attributes->matanim_joint, 0.0F);
     }
     wp->coll_data.p_translate = &DObjGetStruct(weapon_gobj)->translate;
     wp->coll_data.p_lr = &wp->lr;
 
-    wp->coll_data.object_coll.top = (f32)attributes->objectcoll_top;
-    wp->coll_data.object_coll.center = (f32)attributes->objectcoll_center;
-    wp->coll_data.object_coll.bottom = (f32)attributes->objectcoll_bottom;
-    wp->coll_data.object_coll.width = (f32)attributes->objectcoll_width;
+    wp->coll_data.object_coll.top = attributes->objectcoll_top;
+    wp->coll_data.object_coll.center = attributes->objectcoll_center;
+    wp->coll_data.object_coll.bottom = attributes->objectcoll_bottom;
+    wp->coll_data.object_coll.width = attributes->objectcoll_width;
     wp->coll_data.p_object_coll = &wp->coll_data.object_coll;
 
     wp->coll_data.ignore_line_id = -1;

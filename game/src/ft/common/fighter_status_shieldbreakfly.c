@@ -17,7 +17,7 @@ void ftCommon_ShieldBreakFly_ProcMap(GObj *fighter_gobj)
 void ftCommon_ShieldBreakFly_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_ShieldBreakFly, 0.0F, 1.0F, FTSTATUPDATE_DAMAGEPORT_PRESERVE);

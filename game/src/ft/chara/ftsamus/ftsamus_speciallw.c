@@ -47,7 +47,7 @@ void ftSamus_SpecialAirLw_ProcUpdate(GObj *fighter_gobj)
 void ftSamus_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->command_vars.flags.flag3 != FALSE)
     {
@@ -61,7 +61,7 @@ void ftSamus_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 void ftSamus_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8E50(fp, attributes);
 
@@ -99,7 +99,7 @@ void ftSamus_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 void ftSamus_SpecialLw_TransferStatusAir(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftMap_SetAir(fp);
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
@@ -139,7 +139,7 @@ void ftSamus_SpecialLw_SetStatus(GObj *fighter_gobj)
 void ftSamus_SpecialAirLw_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftStatus_Update(fighter_gobj, ftStatus_Samus_SpecialAirLw, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);

@@ -21,7 +21,7 @@ bool32 ftCommon_AttackLw4_CheckInputSuccess(ftStruct *fp)
 // 0x801507D0
 bool32 ftCommon_AttackLw4_CheckInterruptMain(ftStruct *fp)
 {
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (ftCommon_LightThrow_CheckItemTypeThrow(fp) != FALSE)
     {

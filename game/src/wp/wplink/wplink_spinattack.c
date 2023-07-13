@@ -12,7 +12,6 @@ wpCreateDesc wpLink_SpinAttack_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpLink_SpinAttack_ProcUpdate,           // Proc Update
     wpLink_SpinAttack_ProcMap,              // Proc Map
     wpLink_SpinAttack_ProcHit,              // Proc Hit

@@ -48,7 +48,7 @@ void ftCommon_JumpAerial_ProcInterrupt(GObj *fighter_gobj)
 void ftYoshi_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     jtgt_ovl2_800D9414(fighter_gobj);
 
@@ -63,7 +63,7 @@ void ftYoshi_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 void ftNess_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     f32 vel_x;
 
     func_ovl2_800D9260(fp, &fp->status_vars.common.jumpaerial.drift, &fp->phys_info.vel_air.y, &fp->phys_info.vel_air.z);
@@ -84,7 +84,7 @@ void ftNess_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8DB0(fp);
 
@@ -115,7 +115,7 @@ void ftCommon_JumpAerial_ProcPhysics(GObj *fighter_gobj)
 void ftCommon_JumpAerial_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     s32 status_id = ((fp->input.pl.stick_range.x * fp->lr) >= FTCOMMON_JUMPAERIAL_F_OR_B_RANGE) ? ftStatus_Common_JumpAerialF : ftStatus_Common_JumpAerialB;
     s32 stick_range_y = GCONTROLLER_RANGE_MAX_I;
     s32 stick_range_x;
@@ -172,7 +172,7 @@ void ftCommon_JumpAerial_SetStatus(GObj *fighter_gobj, s32 input_source)
 void ftCommon_JumpAerialMulti_SetStatus(GObj *fighter_gobj, s32 input_source)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     s32 status_id;
     s32 stick_range_x;
     s32 stick_range_y = GCONTROLLER_RANGE_MAX_I;

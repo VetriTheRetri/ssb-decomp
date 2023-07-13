@@ -93,7 +93,6 @@ wpCreateDesc wpFFlower_Flame_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpFFlower_Flame_ProcUpdate,             // Proc Update
     wpFFlower_Flame_ProcMap,                // Proc Map
     wpFFlower_Flame_ProcHit,                // Proc Hit

@@ -71,7 +71,7 @@ void ftNess_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 void ftNess_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->status_vars.ness.speciallw.gravity_delay != 0)
     {

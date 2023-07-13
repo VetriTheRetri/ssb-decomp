@@ -111,7 +111,7 @@ void ftKirby_SpecialHiLanding_ProcUpdate(GObj *fighter_gobj)
 void ftKirby_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
     jtgt_ovl2_800D9414(fighter_gobj);
@@ -127,7 +127,7 @@ void ftKirby_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 void ftKirby_SpecialHiLanding_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
 
@@ -152,7 +152,7 @@ void ftKirby_SpecialHiLanding_ProcPhysics(GObj *fighter_gobj)
 void ftKirby_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     f32 temp_scale;
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
@@ -174,7 +174,7 @@ void ftKirby_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 void ftKirby_SpecialAirHiFall_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     ftKirby_SpecialHi_UpdateGFX(fighter_gobj);
 

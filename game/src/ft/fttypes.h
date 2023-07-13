@@ -873,7 +873,7 @@ struct ftComputer
     f32 unk_ftcom_0x8C;
 };
 
-struct ftCommonAttributes
+struct ftAttributes
 {
     f32 size_mul;
     f32 walkslow_anim_speed;
@@ -1109,7 +1109,7 @@ struct ftStruct
     u32 x18E_flag_b3 : 1;
     u32 x18E_flag_b4 : 1;
     u32 is_playing_gfx : 1;
-    u32 joint_cycle_array_index : 4; // Goes up to 5 by default; index of the array from gfx_joint_cycle_index from ftCommonAttributes which houses the actual joint ID
+    u32 joint_cycle_array_index : 4; // Goes up to 5 by default; index of the array from gfx_joint_cycle_index from ftAttributes which houses the actual joint ID
     u32 is_shield : 1; // Fighter's shield bubble is active
     u32 is_playing_effect : 1; // Destroy GFX on action state change if TRUE, not sure why this and is_playing_gfx are different
     u32 x18F_flag_b4 : 1;
@@ -1265,7 +1265,7 @@ struct ftStruct
     ftTexturePartRenderState texture_render_state[2];
 
     ftData *ft_data;
-    ftCommonAttributes *attributes;
+    ftAttributes *attributes;
 
     s32 x9CC;
     s32 x9D0;

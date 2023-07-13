@@ -23,7 +23,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
     u32 flag;
     Vec3f hurt_offset;
     Vec3f hurt_size;
-    ftCommonAttributes *attributes;
+    ftAttributes *attributes;
     ftScriptEventDamage *p_damage;
     s32 ft_kind;
     s32 script_index;
@@ -1091,8 +1091,8 @@ void ftManager_ProcInterruptMain(GObj *fighter_gobj)
 {
     ftStruct *this_fp = ftGetStruct(fighter_gobj);
     ftStruct *other_fp;
-    ftCommonAttributes *this_attributes;
-    ftCommonAttributes *other_attributes;
+    ftAttributes *this_attributes;
+    ftAttributes *other_attributes;
     gmPlayerInput *pl;
     gmComputerInput *cp;
     gControllerInput *p_controller;
@@ -2562,7 +2562,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
     ftStruct *attacker_fp;
     wpStruct *ip;
     itStruct *ap;
-    ftCommonAttributes *attributes = this_fp->attributes;
+    ftAttributes *attributes = this_fp->attributes;
     ftHitCollisionLog *hitlog;
     s32 i, j;
     f32 var_f20;
@@ -3934,7 +3934,7 @@ void func_ovl2_800E69C4(ftStruct *fp, s32 index)
     DObj *joint;
     DObj *j2;
     DObj *j1;
-    ftCommonAttributes *attributes;
+    ftAttributes *attributes;
     DObjDescArray *container;
     DObj *part_joint;
     UnkDObjData *unk_dobj;
@@ -4225,7 +4225,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 event_ptr;
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     ftStatusDesc *status_struct;
     ftIntroStatusDesc *unk_callback;
     f32 anim_frame;

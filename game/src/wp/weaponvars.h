@@ -5,6 +5,8 @@
 #include <PR/ultratypes.h>
 #include <sys/obj.h>
 
+#include "wpdef.h"
+
 #define WPBLASTER_VEL_X 160.0F
 
 #define WPCHARGESHOT_GFX_SIZE_DIV 30.0F
@@ -106,40 +108,6 @@
 #define WPYUBIBULLET_EXPLODE_SIZE 180.0F
 #define WPYUBIBULLET_VEL_X 160.0F
 #define WPYUBIBULLET_VEL_Y -25.0F
-
-typedef struct wpCommonAttributes // Moreso hitbox stuff
-{
-    void *unk_0x0;
-    void *unk_0x4;
-    void *unk_0x8;
-    void *unk_0xC;
-    Vec3h offset[2];
-    s16 objectcoll_top;
-    s16 objectcoll_center;
-    s16 objectcoll_bottom;
-    s16 objectcoll_width;
-    u16 size;
-    s32 angle : 10;
-    u32 knockback_scale : 10;
-    u32 damage : 8;
-    u32 element : 4;
-    u32 knockback_weight : 10;
-    s32 shield_damage : 8;
-    u32 hitbox_count : 2;
-    u32 rebound : 1;
-    u32 sfx : 10;
-    u32 priority : 3;
-    u32 can_rehit_item : 1;
-    u32 can_rehit_fighter : 1;
-    u32 can_hop : 1;
-    u32 can_reflect : 1;
-    u32 can_absorb : 1;
-    u32 can_shield : 1;
-    u32 flags_0x2F_b6 : 1;
-    u32 flags_0x2F_b7 : 1;
-    u32 knockback_base : 10;
-
-} wpCommonAttributes;
 
 typedef enum wpPikachuThunderCollide
 {
@@ -304,7 +272,7 @@ typedef struct wpKamex_WeaponVars_Hydro
 
 typedef struct wpDogas_WeaponVars_Smog
 {
-    wpCommonAttributes *hit_desc;
+    wpAttributes *hit_desc;
 
 } wpDogas_WeaponVars_Smog;
 

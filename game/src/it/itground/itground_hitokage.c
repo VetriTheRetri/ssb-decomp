@@ -47,7 +47,6 @@ wpCreateDesc wpHitokage_Flame_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpHitokage_Flame_ProcUpdate,            // Proc Update
     wpHitokage_Flame_ProcMap,               // Proc Map
     wpHitokage_Flame_ProcHit,               // Proc Hit

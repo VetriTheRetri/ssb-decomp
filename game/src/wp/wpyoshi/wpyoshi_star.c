@@ -12,7 +12,6 @@ wpCreateDesc wpYoshi_Star_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpYoshi_Star_ProcUpdate,                // Proc Update
     wpYoshi_Star_ProcMap,                   // Proc Map
     wpYoshi_Star_ProcHit,                   // Proc Hit

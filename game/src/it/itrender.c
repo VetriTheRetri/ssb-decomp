@@ -196,6 +196,7 @@ bool32 itRender_CheckItemVisible(itStruct *ip)
     {
         return TRUE;
     }
+
     fp = ftGetStruct(ip->owner_gobj);
 
     if (!(fp->is_show_item))
@@ -210,7 +211,7 @@ bool32 itRender_CheckItemVisible(itStruct *ip)
 }
 
 // 0x80171C7C
-void itRender_ProcRenderNoAlpha(GObj *item_gobj)
+void itRender_ProcRenderOPA(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
@@ -234,7 +235,7 @@ void itRender_ProcRenderNoAlpha(GObj *item_gobj)
 }
 
 // 0x80171D38
-void itRender_ProcRenderAlphaBlend(GObj *item_gobj)
+void itRender_ProcRenderXLU(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 

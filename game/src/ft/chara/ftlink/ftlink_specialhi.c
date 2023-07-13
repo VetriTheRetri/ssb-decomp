@@ -227,7 +227,7 @@ void ftLink_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
 
     if (func_ovl2_800D8FA8(fp, fp->attributes) == FALSE)
     {
-        ftCommonAttributes *attributes = fp->attributes;
+        ftAttributes *attributes = fp->attributes;
 
         ftPhysics_ClampDriftStickRange(fp, 8, attributes->aerial_acceleration * FTLINK_SPINATTACK_AIR_DRIFT_MUL, attributes->aerial_speed_max_x);
         func_ovl2_800D9074(fp, fp->attributes);

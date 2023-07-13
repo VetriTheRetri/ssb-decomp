@@ -186,7 +186,7 @@ extern f32 D_ovl2_8012C4E0[6];
 void ftKirby_SpecialLwHold_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     f32 temp_slide_angle;
     f32 ground_vel_x;
     f32 slide_angle;

@@ -8,7 +8,7 @@ typedef enum	itWeight			itWeight;
 
 // Structs
 typedef struct	itStruct			itStruct;			// Main item struct
-typedef struct	itCommonAttributes	itCommonAttributes;
+typedef struct	itAttributes	itAttributes;
 typedef struct	itMonsterInfo		itMonsterInfo;		// Info specific to Pokémon
 typedef struct	itFileData			itFileData;
 typedef struct	itCreateDesc		itCreateDesc;

@@ -68,7 +68,7 @@ bool32 itPKFire_NCreate_ProcUpdate(GObj *item_gobj)
 bool32 itNess_SDefault_UpdateAllCheckDestroy(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes;
+    itAttributes *attributes;
     f32 unused;
     f32 half = 0.5;
     f32 lifetime_scale = ((ip->lifetime * half) / 100.0F) + half;

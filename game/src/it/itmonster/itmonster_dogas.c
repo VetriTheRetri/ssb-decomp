@@ -197,7 +197,7 @@ GObj* func_ovl3_80183144(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->lifetime = ITDOGAS_SMOG_LIFETIME;
 
-    ip->weapon_vars.smog.hit_desc = (wpCommonAttributes*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset); // Dude I had a stroke trying to match this
+    ip->weapon_vars.smog.hit_desc = (wpAttributes*) (*(uintptr_t*)p_data->p_item + (intptr_t)p_data->offset); // Dude I had a stroke trying to match this
 
     joint = DObjGetStruct(weapon_gobj);
 

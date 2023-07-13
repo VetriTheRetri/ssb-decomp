@@ -304,7 +304,7 @@ void ftPikachu_SpecialAirLwHit_ProcUpdate(GObj *fighter_gobj)
 void ftPikachu_SpecialLwHit_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8D68(fp, FTPIKACHU_THUNDER_HIT_GRAVITY, attributes->fall_speed_max);
 

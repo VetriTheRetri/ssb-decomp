@@ -4,7 +4,7 @@
 void ftDonkey_ThrowFKneeBend_ProcUpdate(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.throwf.kneebend_anim_frame++;
 

@@ -2334,7 +2334,7 @@ void func_ovl2_800DDF44(GObj *fighter_gobj)
     }
 }
 
-bool32 func_ovl2_800DDF74(GObj *fighter_gobj, ftStruct *fp, ftCommonAttributes *attributes, DObj *target_joint, Vec3f *vec)
+bool32 func_ovl2_800DDF74(GObj *fighter_gobj, ftStruct *fp, ftAttributes *attributes, DObj *target_joint, Vec3f *vec)
 {
     Vec3f sp64;
     Vec3f vec_translate;
@@ -2398,7 +2398,7 @@ bool32 func_ovl2_800DDF74(GObj *fighter_gobj, ftStruct *fp, ftCommonAttributes *
 void func_ovl2_800DE150(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *common_attrs = fp->attributes;
+    ftAttributes *common_attrs = fp->attributes;
     DObj *joint;
     Vec3f sp30;
     f32 sp2C;

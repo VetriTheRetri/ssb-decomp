@@ -136,7 +136,7 @@ void ftKirby_SpecialAirN_SetStatusIndex(GObj *fighter_gobj)
 bool32 ftCommon_SpecialAir_CheckInterruptCommon(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fp->input.pl.button_tap & fp->input.button_mask_b)
     {

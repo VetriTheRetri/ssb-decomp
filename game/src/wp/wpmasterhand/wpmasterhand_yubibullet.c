@@ -12,7 +12,6 @@ wpCreateDesc wpMasterHand_YubiBulletSingle_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     NULL,                                   // Proc Update
     wpMasterHand_YubiBullet_ProcMap,        // Proc Map
     wpMasterHand_YubiBullet_ProcHit,        // Proc Hit
@@ -30,7 +29,6 @@ wpCreateDesc wpMasterHand_YubiBulletTriple_WeaponDesc =
     &D_ovl2_80131174,                       // Pointer to character's loaded files?
     0x7A8,                                  // Offset of weapon attributes in loaded files
     0x1C,                                   // ???
-    0,                                      // ???
     0,                                      // ???
     0,                                      // ???
     NULL,                                   // Proc Update

@@ -663,7 +663,7 @@ void ftCommon_UpdateFighterHurtPartIndex(GObj *fighter_gobj, s32 joint_index, Ve
 void ftCommon_SetModelPartRenderIndex(GObj *fighter_gobj, s32 joint_index, s32 render_state)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     DObjDescContainer *dobj_desc_container;
     ftModelPart *model_part;
     ftModelPartRenderState *joint_render_state;
@@ -745,7 +745,7 @@ void ftCommon_SetModelPartRenderStateIndex(GObj *fighter_gobj, s32 joint_index, 
 void ftCommon_ResetModelPartRenderAll(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     DObjDescContainer *dobj_desc_container;
     ftModelPart *model_part;
     ftModelPartRenderState *joint_render_state;
@@ -885,7 +885,7 @@ void ftCommon_SetModelPartLevelDetailAll(GObj *fighter_gobj, u8 lod)
 void func_ovl2_800E9248(GObj *fighter_gobj, s32 costume, s32 shade)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     DObj *joint;
     GObj *unk_gobj;
     UnkDObjData *unk_dobj;
@@ -1797,7 +1797,7 @@ void ftCommon_Update1PGameDamageStats(ftStruct *fp, s32 damage_player, s32 damag
 // 0x800EAB40
 void ftCommon_GFXJointCycle(ftStruct *fp, Vec3f *pos)
 {
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     fp->joint_cycle_array_index++;
 
@@ -2426,7 +2426,7 @@ void func_ovl2_800EB6EC(ftStruct *fp)
     UnkDObjData *temp_s0;
     s32 i;
     ftPartsUnkIndexTable *temp_v0;
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     var_s2 = 4;
     temp_v0 = attributes->unk_ftca_0x2A0;

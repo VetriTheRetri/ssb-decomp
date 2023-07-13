@@ -15,7 +15,7 @@ void ftCommon_RunBrake_ProcInterrupt(GObj *fighter_gobj)
 void ftCommon_RunBrake_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8978(fp, attributes->traction * 1.25F);
     func_ovl2_800D87D0(fighter_gobj);

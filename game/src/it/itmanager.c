@@ -115,7 +115,7 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 {
     itStruct *ap = itManager_GetStructSetNextAlloc();
     GObj *item_gobj;
-    itCommonAttributes *attributes;
+    itAttributes *attributes;
     void (*cb_render)(GObj*);
     s32 unused[4];
 
@@ -131,13 +131,13 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 
         return NULL;
     }
-    attributes = (itCommonAttributes*) ((uintptr_t)*spawn_data->p_file + (intptr_t)spawn_data->offset);
+    attributes = (itAttributes*) ((uintptr_t)*spawn_data->p_file + (intptr_t)spawn_data->offset);
 
-    if (attributes->unk_0x10_b2)
+    if (attributes->is_render_colanim)
     {
-        cb_render = (attributes->unk_0x10_b0) ? itRender_ProcRenderColAnimXLU : itRender_ProcRenderColAnimOPA;
+        cb_render = (attributes->is_render_transparency) ? itRender_ProcRenderColAnimXLU : itRender_ProcRenderColAnimOPA;
     }
-    else cb_render = (attributes->unk_0x10_b0) ? itRender_ProcRenderAlphaBlend : itRender_ProcRenderNoAlpha;
+    else cb_render = (attributes->is_render_transparency) ? itRender_ProcRenderXLU : itRender_ProcRenderOPA;
 
     func_80009DF4(item_gobj, cb_render, 0xB, 0x80000000, -1);
 
@@ -179,58 +179,60 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
 
     ap->vel_scale = attributes->vel_scale * 0.01F;
 
-    ap->is_damage_all = FALSE;
-    ap->is_thrown = FALSE; // Applies magnitude and stale multiplier if TRUE and hitbox is active?
-    ap->is_attach_surface = FALSE;
+    ap->is_damage_all       = FALSE;
+    ap->is_thrown           = FALSE; // Applies magnitude and stale multiplier if TRUE and hitbox is active?
+    ap->is_attach_surface   = FALSE;
 
     ap->rotate_step = 0.0F;
-    ap->indicator_gobj = NULL;
-    ap->arrow_flash_timer = 0;
 
-    ap->item_hit.update_state = spawn_data->update_state;
-    ap->item_hit.damage = attributes->damage;
-    ap->item_hit.stale = 1.0F;
-    ap->item_hit.throw_mul = 1.0F;
-    ap->item_hit.element = attributes->element;
-    ap->item_hit.offset[0].x = attributes->hit_offset1_x;
-    ap->item_hit.offset[0].y = attributes->hit_offset1_y;
-    ap->item_hit.offset[0].z = attributes->hit_offset1_z;
-    ap->item_hit.offset[1].x = attributes->hit_offset2_x;
-    ap->item_hit.offset[1].y = attributes->hit_offset2_y;
-    ap->item_hit.offset[1].z = attributes->hit_offset2_z;
-    ap->item_hit.size = attributes->size * 0.5F;
-    ap->item_hit.angle = attributes->angle;
-    ap->item_hit.knockback_scale = attributes->knockback_scale;
-    ap->item_hit.knockback_weight = attributes->knockback_weight;
-    ap->item_hit.knockback_base = attributes->knockback_base;
-    ap->item_hit.rebound = attributes->rebound;
-    ap->item_hit.shield_damage = attributes->shield_damage;
-    ap->item_hit.hit_sfx = attributes->hit_sfx;
-    ap->item_hit.priority = attributes->priority;
-    ap->item_hit.can_rehit_item = attributes->can_rehit_item;
-    ap->item_hit.can_rehit_fighter = attributes->can_rehit_fighter;
-    ap->item_hit.can_rehit_shield = FALSE;
-    ap->item_hit.can_hop = attributes->can_hop;
-    ap->item_hit.can_reflect = attributes->can_reflect;
-    ap->item_hit.can_shield = attributes->can_shield;
-    ap->item_hit.hitbox_count = attributes->hitbox_count;
-    ap->item_hit.interact_mask = GMHITCOLLISION_MASK_ALL;
+    ap->indicator_gobj      = NULL;
+    ap->indicator_timer     = 0;
 
-    ap->item_hit.attack_id = ftMotion_AttackIndex_None;
-    ap->item_hit.stat_count = gmCommon_GetMotionCountInc();
+    ap->item_hit.update_state       = spawn_data->update_state;
+    ap->item_hit.damage             = attributes->damage;
+    ap->item_hit.stale              = 1.0F;
+    ap->item_hit.throw_mul          = 1.0F;
+    ap->item_hit.element            = attributes->element;
+    ap->item_hit.offset[0].x        = attributes->hit_offset1_x;
+    ap->item_hit.offset[0].y        = attributes->hit_offset1_y;
+    ap->item_hit.offset[0].z        = attributes->hit_offset1_z;
+    ap->item_hit.offset[1].x        = attributes->hit_offset2_x;
+    ap->item_hit.offset[1].y        = attributes->hit_offset2_y;
+    ap->item_hit.offset[1].z        = attributes->hit_offset2_z;
+    ap->item_hit.size               = attributes->size * 0.5F;
+    ap->item_hit.angle              = attributes->angle;
+    ap->item_hit.knockback_scale    = attributes->knockback_scale;
+    ap->item_hit.knockback_weight   = attributes->knockback_weight;
+    ap->item_hit.knockback_base     = attributes->knockback_base;
+    ap->item_hit.rebound            = attributes->rebound;
+    ap->item_hit.shield_damage      = attributes->shield_damage;
+    ap->item_hit.hit_sfx            = attributes->hit_sfx;
+    ap->item_hit.priority           = attributes->priority;
+    ap->item_hit.can_rehit_item     = attributes->can_rehit_item;
+    ap->item_hit.can_rehit_fighter  = attributes->can_rehit_fighter;
+    ap->item_hit.can_rehit_shield   = FALSE;
+    ap->item_hit.can_hop            = attributes->can_hop;
+    ap->item_hit.can_reflect        = attributes->can_reflect;
+    ap->item_hit.can_shield         = attributes->can_shield;
+    ap->item_hit.hitbox_count       = attributes->hitbox_count;
+    ap->item_hit.interact_mask      = GMHITCOLLISION_MASK_ALL;
+
+
+    ap->item_hit.attack_id                  = ftMotion_AttackIndex_None;
+    ap->item_hit.stat_count                 = gmCommon_GetMotionCountInc();
     ap->item_hit.stat_flags.attack_group_id = ftStatus_AttackIndex_Null;
     ap->item_hit.stat_flags.is_smash_attack = ap->item_hit.stat_flags.is_ground_or_air = ap->item_hit.stat_flags.is_special_attack = FALSE;
-    ap->item_hit.stat_count = gmCommon_GetStatUpdateCountInc();
+    ap->item_hit.stat_count                 = gmCommon_GetStatUpdateCountInc();
 
     itMain_ClearHitRecord(ap);
 
-    ap->item_hurt.hitstatus = attributes->hitstatus;
-    ap->item_hurt.offset.x = attributes->hurt_offset.x;
-    ap->item_hurt.offset.y = attributes->hurt_offset.y;
-    ap->item_hurt.offset.z = attributes->hurt_offset.z;
-    ap->item_hurt.size.x = attributes->hurt_size.x * 0.5F;
-    ap->item_hurt.size.y = attributes->hurt_size.y * 0.5F;
-    ap->item_hurt.size.z = attributes->hurt_size.z * 0.5F;
+    ap->item_hurt.hitstatus     = attributes->hitstatus;
+    ap->item_hurt.offset.x      = attributes->hurt_offset.x;
+    ap->item_hurt.offset.y      = attributes->hurt_offset.y;
+    ap->item_hurt.offset.z      = attributes->hurt_offset.z;
+    ap->item_hurt.size.x        = attributes->hurt_size.x * 0.5F;
+    ap->item_hurt.size.y        = attributes->hurt_size.y * 0.5F;
+    ap->item_hurt.size.z        = attributes->hurt_size.z * 0.5F;
     ap->item_hurt.interact_mask = GMHITCOLLISION_MASK_ALL;
 
     ap->shield_collide_angle = 0.0F;
@@ -238,10 +240,11 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     ap->shield_collide_vec.y = 0.0F;
     ap->shield_collide_vec.z = 0.0F;
 
-    ap->hit_normal_damage = 0;
-    ap->hit_refresh_damage = 0;
-    ap->hit_attack_damage = 0;
-    ap->hit_shield_damage = 0;
+    ap->hit_normal_damage   = 0;
+    ap->hit_refresh_damage  = 0;
+    ap->hit_attack_damage   = 0;
+    ap->hit_shield_damage   = 0;
+
     ap->reflect_gobj = NULL;
 
     if (attributes->unk_0x0 != NULL)
@@ -254,14 +257,14 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
         {
             func_ovl3_8016DFF4(item_gobj, attributes->unk_0x0, 0, spawn_data->unk_aspd_0xC);
 
-            if (attributes->unk_0x4 != NULL)
+            if (attributes->mobj != NULL)
             {
-                func_8000F8F4(item_gobj, attributes->unk_0x4);
+                func_8000F8F4(item_gobj, attributes->mobj);
             }
         }
-        if ((attributes->unk_atca_0x8 != NULL) || (attributes->unk_atca_0xC != NULL))
+        if ((attributes->anim_joint != NULL) || (attributes->matanim_joint != NULL)) // Runs if item has joint or texture animation on spawn?
         {
-            func_8000BED8(item_gobj, attributes->unk_atca_0x8, attributes->unk_atca_0xC, 0.0F);
+            func_8000BED8(item_gobj, attributes->anim_joint, attributes->matanim_joint, 0.0F);
             func_8000DF34(item_gobj);
         }
         func_ovl0_800C9424(DObjGetStruct(item_gobj));
@@ -270,33 +273,33 @@ GObj* itManager_CreateItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *po
     {
         func_800092D0(item_gobj, NULL);
     }
-    ap->coll_data.p_translate = &DObjGetStruct(item_gobj)->translate;
-    ap->coll_data.p_lr = &ap->lr;
-    ap->coll_data.object_coll.top = attributes->objectcoll_top;
-    ap->coll_data.object_coll.center = attributes->objectcoll_center;
-    ap->coll_data.object_coll.bottom = attributes->objectcoll_bottom;
-    ap->coll_data.object_coll.width = attributes->objectcoll_width;
-    ap->coll_data.p_object_coll = &ap->coll_data.object_coll;
-    ap->coll_data.ignore_line_id = -1;
-    ap->coll_data.wall_flag = D_ovl2_80131398;
-    ap->coll_data.coll_mask = 0;
-    ap->coll_data.vel_push.x = 0.0F;
-    ap->coll_data.vel_push.y = 0.0F;
-    ap->coll_data.vel_push.z = 0.0F;
+    ap->coll_data.p_translate           = &DObjGetStruct(item_gobj)->translate;
+    ap->coll_data.p_lr                  = &ap->lr;
+    ap->coll_data.object_coll.top       = attributes->objectcoll_top;
+    ap->coll_data.object_coll.center    = attributes->objectcoll_center;
+    ap->coll_data.object_coll.bottom    = attributes->objectcoll_bottom;
+    ap->coll_data.object_coll.width     = attributes->objectcoll_width;
+    ap->coll_data.p_object_coll         = &ap->coll_data.object_coll;
+    ap->coll_data.ignore_line_id        = -1;
+    ap->coll_data.wall_flag             = D_ovl2_80131398;
+    ap->coll_data.coll_mask             = 0;
+    ap->coll_data.vel_push.x            = 0.0F;
+    ap->coll_data.vel_push.y            = 0.0F;
+    ap->coll_data.vel_push.z            = 0.0F;
 
     gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcItemMain, 1, 3);
     gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcSearchHitAll, 1, 1);
     gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcUpdateHitCollisions, 1, 0);
 
-    ap->proc_update = spawn_data->proc_update;
-    ap->proc_map = spawn_data->proc_map;
-    ap->proc_hit = spawn_data->proc_hit;
-    ap->proc_shield = spawn_data->proc_shield;
-    ap->proc_hop = spawn_data->proc_hop;
-    ap->proc_setoff = spawn_data->proc_setoff;
-    ap->proc_reflector = spawn_data->proc_reflector;
-    ap->proc_damage = spawn_data->proc_damage;
-    ap->proc_dead = NULL;
+    ap->proc_update     = spawn_data->proc_update;
+    ap->proc_map        = spawn_data->proc_map;
+    ap->proc_hit        = spawn_data->proc_hit;
+    ap->proc_shield     = spawn_data->proc_shield;
+    ap->proc_hop        = spawn_data->proc_hop;
+    ap->proc_setoff     = spawn_data->proc_setoff;
+    ap->proc_reflector  = spawn_data->proc_reflector;
+    ap->proc_damage     = spawn_data->proc_damage;
+    ap->proc_dead       = NULL;
 
     ap->coll_data.pos_curr = DObjGetStruct(item_gobj)->translate = *pos;
 
@@ -759,11 +762,11 @@ void itManager_ProcItemMain(GObj *item_gobj)
             }
         }
 
-        if (ap->arrow_flash_timer == 0)
+        if (ap->indicator_timer == 0)
         {
-            ap->arrow_flash_timer = ITEM_ARROW_FLASH_INT_DEFAULT;
+            ap->indicator_timer = ITEM_ARROW_FLASH_INT_DEFAULT;
         }
-        ap->arrow_flash_timer--;
+        ap->indicator_timer--;
     }
     else item_gobj->is_render = FALSE;
 

@@ -17,7 +17,6 @@ wpCreateDesc wpYoshi_EggThrow_WeaponDesc =
     0x1C,                                   // ???
     0x2E,                                   // ???
     0,                                      // ???
-    0,                                      // ???
     wpYoshi_EggThrow_ProcUpdate,            // Proc Update
     wpYoshi_EggThrow_ProcMap,               // Proc Map
     wpYoshi_EggThrow_ProcHit,               // Proc Hit

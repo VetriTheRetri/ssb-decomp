@@ -180,21 +180,25 @@ void func_ovl3_80167520(GObj *weapon_gobj, void(*proc_render)(GObj*))
     else wpRender_DisplayHitCollisions(weapon_gobj);
 }
 
+// 0x801675D0
 void func_ovl3_801675D0(GObj *weapon_gobj)
 {
     func_ovl3_80167520(weapon_gobj, func_80013E8C);
 }
 
+// 0x801675F4
 void func_ovl3_801675F4(GObj *weapon_gobj)
 {
     func_ovl3_80167520(weapon_gobj, func_800143FC);
 }
 
+// 0x80167618
 void func_ovl3_80167618(GObj *weapon_gobj)
 {
     func_ovl3_80167520(weapon_gobj, func_ovl0_800CB4B0); // Unused
 }
 
+// 0x8016763C
 void func_ovl3_8016763C(GObj *weapon_gobj)
 {
     func_ovl3_80167520(weapon_gobj, func_80014768);

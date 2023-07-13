@@ -53,7 +53,7 @@ extern void *D_ovl2_80131074; // Pointer to fighter files?
 void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     f32 scale;
 
     fp->lr = spawn->lr_spawn;
@@ -318,7 +318,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
     GObj *fighter_gobj;
     s32 i;
     UnkDObjData *dobj_unk;
-    ftCommonAttributes *attributes;
+    ftAttributes *attributes;
     GObj *unk_dobj_gobj;
     DObj *topn_joint;
     UnkFighterDObjData *unk_ft_dobj;
@@ -335,7 +335,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
     fp->fighter_gobj = fighter_gobj;
     fp->ft_kind = spawn->ft_kind;
     fp->ft_data = Fighter_FileData_ContainerList[fp->ft_kind];
-    attributes = fp->attributes = (ftCommonAttributes*) ((uintptr_t)*fp->ft_data->p_file + (intptr_t)fp->ft_data->o_attributes);
+    attributes = fp->attributes = (ftAttributes*) ((uintptr_t)*fp->ft_data->p_file + (intptr_t)fp->ft_data->o_attributes);
     fp->x9D0 = spawn->unk_rebirth_0x38;
     fp->team = spawn->team;
     fp->player = spawn->player;

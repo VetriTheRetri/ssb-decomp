@@ -29,7 +29,7 @@ void ftCommon_Run_SetStatus(GObj *fighter_gobj)
 bool32 ftCommon_Run_CheckInterruptDash(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (attributes->dash_to_run <= fighter_gobj->anim_frame)
     {

@@ -41,7 +41,7 @@ void ftDonkey_ThrowFFall_SetStatus(GObj *fighter_gobj)
 void ftDonkey_ThrowFJump_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     s32 vel_x;
     s32 vel_y;
 

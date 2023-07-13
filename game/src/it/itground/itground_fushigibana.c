@@ -34,7 +34,6 @@ wpCreateDesc wpFushigibana_Razor_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpFushigibana_Razor_ProcUpdate,         // Proc Update
     NULL,                                   // Proc Map
     wpFushigibana_Razor_ProcHit,            // Proc Hit

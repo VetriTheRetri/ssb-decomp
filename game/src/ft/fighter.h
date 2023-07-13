@@ -16,7 +16,7 @@
 }                                                       \
 
 #define AttributesGetStruct(fp) \
-((ftCommonAttributes*)fp->attributes) \
+((ftAttributes*)fp->attributes) \
 
 #define FighterGetJoint(fp, id) \
 ((DObj*)fp->joint[id]) \

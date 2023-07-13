@@ -12,7 +12,6 @@ wpCreateDesc wpFox_Blaster_WeaponDesc =
     0x1C,                                   // ???
     0,                                      // ???
     0,                                      // ???
-    0,                                      // ???
     wpFox_Blaster_ProcUpdate,               // Proc Update
     wpFox_Blaster_ProcMap,                  // Proc Map
     wpFox_Blaster_ProcHit,                  // Proc Hit

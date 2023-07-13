@@ -73,7 +73,7 @@ void ftMario_SpecialLw_ProcPhysics(GObj *fighter_gobj)
 void ftMario_SpecialAirLw_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if ((fp->fighter_vars.mario.is_expend_tornado == FALSE) && (fp->command_vars.flags.flag3 != FALSE) && (fp->input.pl.button_tap & fp->input.button_mask_b))
     {

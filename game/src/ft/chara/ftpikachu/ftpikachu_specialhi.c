@@ -32,7 +32,7 @@ void ftPikachu_SpecialAirHiStart_ProcUpdate(GObj *fighter_gobj)
 void ftPikachu_SpecialAirHiStart_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     func_ovl2_800D8D68(fp, 0.8F, attributes->fall_speed_max);
 
@@ -454,7 +454,7 @@ void ftPikachu_SpecialAirHiEnd_ProcPhysics(GObj *fighter_gobj)
 
     if (fp->command_vars.flags.flag1 != 0)
     {
-        ftCommonAttributes *attributes;
+        ftAttributes *attributes;
 
         func_ovl2_800D8E50(fp, fp->attributes);
 

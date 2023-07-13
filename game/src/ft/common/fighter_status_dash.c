@@ -60,7 +60,7 @@ void ftCommon_Dash_ProcInterrupt(GObj *fighter_gobj)
 void ftCommon_Dash_ProcPhysics(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (fighter_gobj->anim_frame >= FTCOMMON_DASH_DECELERATE_BEGIN)
     {
@@ -73,7 +73,7 @@ void ftCommon_Dash_ProcPhysics(GObj *fighter_gobj)
 void ftCommon_Dash_ProcMap(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     if (attributes->dash_to_run <= fighter_gobj->anim_frame)
     {

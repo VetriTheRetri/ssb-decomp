@@ -12,7 +12,6 @@ wpCreateDesc wpSamus_Bomb_WeaponDesc =
     0x12,                                   // ???
     0x46,                                   // ???
     0,                                      // ???
-    0,                                      // ???
     wpSamus_Bomb_ProcUpdate,                // Proc Update
     wpSamus_Bomb_ProcMap,                   // Proc Map
     wpSamus_Bomb_ProcHit,                   // Proc Hit

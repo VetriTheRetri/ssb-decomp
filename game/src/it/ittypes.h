@@ -260,15 +260,15 @@ struct itHurtbox
     Vec3f size;                         // Hurtbox size
 };
 
-struct itCommonAttributes
+struct itAttributes
 {
     void *unk_0x0;
-    void *unk_0x4;
-    void *unk_atca_0x8;
-    void *unk_atca_0xC;
-    u32 unk_0x10_b0 : 1;
+    void ***mobj;
+    void **anim_joint;
+    void ***matanim_joint;
+    u32 is_render_transparency : 1;
     u32 unk_0x10_b1 : 1;
-    u32 unk_0x10_b2 : 1;
+    u32 is_render_colanim : 1;
     u32 is_give_hitlag : 1;
     u32 weight : 1;                     // Heavy = 0, Light = 1
     s32 hit_offset1_x : 16;
@@ -388,7 +388,7 @@ struct itStruct                         // Common items, stage hazards, fighter 
     u32 is_unused_item_bool : 1;        // Unused? Set various times, but no item process makes use of it
     u32 is_static_damage : 1;           // Ignore reflect multiplier if TRUE
 
-    itCommonAttributes *attributes;     // Pointer to standard attributes
+    itAttributes *attributes;     // Pointer to standard attributes
 
     caStruct colanim;                   // Item's color animation struct
 
@@ -400,7 +400,7 @@ struct itStruct                         // Common items, stage hazards, fighter 
     f32 rotate_step;                    // Item spin rotation step
 
     GObj *indicator_gobj;               // Red arrow pickup indicator GObj
-    u8 arrow_flash_timer;               // Frequency of red arrow indicator flash
+    u8 indicator_timer;               // Frequency of red arrow indicator flash
 
     union item_vars                     // Item-specific state variables
     {

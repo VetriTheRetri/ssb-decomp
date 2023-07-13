@@ -172,7 +172,7 @@ void func_ovl3_80185B18(GObj *item_gobj)
 {
     s32 unused[5];
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ip->attributes;
+    itAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos = joint->translate;
 

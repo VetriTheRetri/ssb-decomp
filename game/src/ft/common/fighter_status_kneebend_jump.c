@@ -4,7 +4,7 @@
 void ftCommon_KneeBend_ProcUpdate(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
 
     fp->status_vars.common.kneebend.anim_frame += DObjGetStruct(fighter_gobj)->dobj_f1;
 
@@ -212,7 +212,7 @@ void ftCommon_Jump_GetJumpForceButton(s32 stick_range_x, s32 *jump_vel_x, s32 *j
 void ftCommon_Jump_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ftCommonAttributes *attributes = fp->attributes;
+    ftAttributes *attributes = fp->attributes;
     s32 status_id;
     s32 vel_x, vel_y;
 

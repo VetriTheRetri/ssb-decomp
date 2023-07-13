@@ -456,7 +456,7 @@ void itRShell_GSpin_EdgeInvertVelLR(GObj *item_gobj, u8 lr)
 void itRShell_GSpin_CheckCollisionEdge(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
-    itCommonAttributes *attributes = ip->attributes;
+    itAttributes *attributes = ip->attributes;
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
 
