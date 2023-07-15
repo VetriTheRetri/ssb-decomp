@@ -202,7 +202,7 @@ extern itCreateDesc Article_Lizardon_Data;
 
 GObj *jtgt_ovl3_8017F9CC(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Lizardon_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &Article_Lizardon_Data, pos, vel, flags);
     DObj *joint;
     itStruct *ap;
 
@@ -284,7 +284,7 @@ extern wpCreateDesc Item_Lizardon_Flame_Data;
 
 GObj *func_ovl3_8017FC38(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Lizardon_Flame_Data, pos, WEAPON_MASK_SPAWN_ITEM);
+    GObj *weapon_gobj = wpManager_MakeWeapon(item_gobj, &Item_Lizardon_Flame_Data, pos, WEAPON_MASK_SPAWN_ITEM);
     wpStruct *ip;
 
     if (weapon_gobj == NULL)

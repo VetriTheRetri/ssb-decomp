@@ -503,7 +503,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
             vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&gItemFileData->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
-            if (func_ovl3_8016EA78(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM)) != NULL)
+            if (itManager_MakeItemSetupCommon(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM)) != NULL)
             {
                 func_ovl3_80172394(gobj, TRUE);
             }
@@ -574,7 +574,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     gMonsterData.monster_prev = gMonsterData.monster_curr;
     gMonsterData.monster_curr = index;
 
-    monster_gobj = func_ovl3_8016F238(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+    monster_gobj = itManager_MakeItemIndex(item_gobj, index, &DObjGetStruct(item_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
     if (monster_gobj != NULL)
     {

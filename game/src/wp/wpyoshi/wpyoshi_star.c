@@ -140,7 +140,7 @@ bool32 wpYoshi_Star_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x8016C834
-GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
+GObj* wpYoshi_Star_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 {
     GObj *weapon_gobj;
     wpStruct *wp;
@@ -156,7 +156,7 @@ GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
     {
         offset.x -= WPYOSHISTAR_OFF_X;
     }
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpYoshi_Star_WeaponDesc, &offset, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpYoshi_Star_WeaponDesc, &offset, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)
     {
@@ -175,12 +175,12 @@ GObj* wpYoshi_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 lr)
 }
 
 // 0x8016C954
-GObj* wpYoshi_Star_CreateWeaponLR(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpYoshi_Star_MakeWeaponLR(GObj *fighter_gobj, Vec3f *pos)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    wpYoshi_Star_CreateWeapon(fighter_gobj, pos, fp->lr);
-    wpYoshi_Star_CreateWeapon(fighter_gobj, pos, -fp->lr);
+    wpYoshi_Star_MakeWeapon(fighter_gobj, pos, fp->lr);
+    wpYoshi_Star_MakeWeapon(fighter_gobj, pos, -fp->lr);
 
     return NULL;
 }

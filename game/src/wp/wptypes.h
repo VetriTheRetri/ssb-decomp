@@ -72,7 +72,7 @@ enum wpKind
 
 // Structs
 
-// Weapon's blueprint to feed into wpManager_CreateWeapon
+// Weapon's blueprint to feed into wpManager_MakeWeapon
 struct wpCreateDesc
 {
     u8 unk_0x0;

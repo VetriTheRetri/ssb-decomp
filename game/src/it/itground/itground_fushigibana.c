@@ -108,7 +108,7 @@ bool32 itFushigibana_SDefault_ProcUpdate(GObj *item_gobj)
 
         if (!ip->item_vars.fushigibana.razor_spawn_wait)
         {
-            wpFushigibana_Razor_CreateWeapon(item_gobj, &pos);
+            wpFushigibana_Razor_MakeWeapon(item_gobj, &pos);
 
             ip->item_vars.fushigibana.razor_spawn_wait = ITFUSHIGIBANA_RAZOR_SPAWN_WAIT;
 
@@ -133,9 +133,9 @@ bool32 itFushigibana_SDefault_ProcUpdate(GObj *item_gobj)
 }
 
 // 0x8018470C
-GObj* itGround_Fushigibana_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itGround_Fushigibana_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Fushigibana_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itGround_Fushigibana_ItemDesc, pos, vel, flags);
     s32 unused;
     DObj *joint;
     itStruct *ip;
@@ -233,9 +233,9 @@ bool32 wpFushigibana_Razor_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x801849EC
-GObj* wpFushigibana_Razor_CreateWeapon(GObj *item_gobj, Vec3f *pos)
+GObj* wpFushigibana_Razor_MakeWeapon(GObj *item_gobj, Vec3f *pos)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &wpFushigibana_Razor_WeaponDesc, pos, WEAPON_MASK_SPAWN_ITEM);
+    GObj *weapon_gobj = wpManager_MakeWeapon(item_gobj, &wpFushigibana_Razor_WeaponDesc, pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
     wpStruct *wp;
 

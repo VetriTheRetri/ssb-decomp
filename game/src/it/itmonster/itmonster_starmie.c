@@ -232,7 +232,7 @@ extern itCreateDesc Article_Starmie_Data;
 
 GObj* jtgt_ovl3_801822B0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Starmie_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &Article_Starmie_Data, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
@@ -318,7 +318,7 @@ extern wpCreateDesc Item_Swift_Data;
 GObj* func_ovl3_80182530(GObj *item_gobj, Vec3f *pos)
 {
     itStruct *ap = itGetStruct(item_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ITEM);
+    GObj *weapon_gobj = wpManager_MakeWeapon(item_gobj, &Item_Swift_Data, pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
     s32 unused;
     wpStruct *ip;

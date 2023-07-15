@@ -155,7 +155,7 @@ void wpNess_PKThunderHead_CreateTrail(GObj *weapon_gobj, s32 trail_index)
     pos.y = DObjGetStruct(weapon_gobj)->translate.y;
     pos.z = 0.0F;
 
-    wpNess_PKThunderTrail_CreateWeapon(weapon_gobj, &pos, trail_index);
+    wpNess_PKThunderTrail_MakeWeapon(weapon_gobj, &pos, trail_index);
 }
 
 // 0x8016AEA68
@@ -268,7 +268,7 @@ bool32 wpNess_PKThunderHead_ProcReflector(GObj *weapon_gobj) // Behold, PK Thund
     ftStruct *fp;
     Vec3f pos = DObjGetStruct(weapon_gobj)->translate; // Get current position
 
-    wpNess_PKReflectHead_CreateWeapon(weapon_gobj, &pos, wp->weapon_vars.pkthunder.angle); // Spawn whole new PK Thunder instance
+    wpNess_PKReflectHead_MakeWeapon(weapon_gobj, &pos, wp->weapon_vars.pkthunder.angle); // Spawn whole new PK Thunder instance
 
     wp->owner_gobj = wp->weapon_vars.pkthunder.spawn_gobj;
 
@@ -290,9 +290,9 @@ bool32 wpNess_PKThunderHead_ProcDead(GObj *weapon_gobj)
 }
 
 // 0x8016B2C4
-GObj* wpNess_PKThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create PK Thunder Head 
+GObj* wpNess_PKThunderHead_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel) // Create PK Thunder Head 
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpNess_PKThunderHead_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpNess_PKThunderHead_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
     s32 i;
 
@@ -382,14 +382,14 @@ bool32 wpNess_PKThunderTrail_ProcHit(GObj *weapon_gobj)
 }
 
 // 0x8016B580
-GObj* wpNess_PKThunderTrail_CreateWeapon(GObj *head_gobj, Vec3f *pos, s32 trail_index)
+GObj* wpNess_PKThunderTrail_MakeWeapon(GObj *head_gobj, Vec3f *pos, s32 trail_index)
 {
     GObj *trail_gobj;
     wpStruct *trail_wp;
     wpStruct *head_wp = wpGetStruct(head_gobj);
     s32 i;
 
-    trail_gobj = wpManager_CreateWeapon(head_gobj, &wpNess_PKThunderTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
+    trail_gobj = wpManager_MakeWeapon(head_gobj, &wpNess_PKThunderTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
 
     if (trail_gobj == NULL)
     {
@@ -437,7 +437,7 @@ void wpNess_PKReflectHead_CreateTrail(GObj *weapon_gobj, s32 trail_index)
     pos.y = DObjGetStruct(weapon_gobj)->translate.y;
     pos.z = 0.0F;
 
-    wpNess_PKReflectTrail_CreateWeapon(weapon_gobj, &pos, trail_index);
+    wpNess_PKReflectTrail_MakeWeapon(weapon_gobj, &pos, trail_index);
 }
 
 // 0x8016B6A0
@@ -532,7 +532,7 @@ bool32 wpNess_PKReflectHead_ProcDead(GObj *weapon_gobj)
 }
 
 // 0x8016B898
-GObj* wpNess_PKReflectHead_CreateWeapon(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
+GObj* wpNess_PKReflectHead_MakeWeapon(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
 {
     s32 i;
     GObj *new_gobj;
@@ -540,7 +540,7 @@ GObj* wpNess_PKReflectHead_CreateWeapon(GObj *old_gobj, Vec3f *pos, Vec3f *vel)
     Vec3f localvel;
     f32 unk_vec;
 
-    new_gobj = wpManager_CreateWeapon(old_gobj, &wpNess_PKReflectHead_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_WEAPON));
+    new_gobj = wpManager_MakeWeapon(old_gobj, &wpNess_PKReflectHead_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_WEAPON));
 
     if (new_gobj == NULL) return NULL;
 
@@ -620,7 +620,7 @@ bool32 wpNess_PKReflectTrail_ProcHit(GObj *weapon_gobj)
 }
 
 // 0x8016BB6C
-GObj* wpNess_PKReflectTrail_CreateWeapon(GObj *old_gobj, Vec3f *pos, s32 trail_index)
+GObj* wpNess_PKReflectTrail_MakeWeapon(GObj *old_gobj, Vec3f *pos, s32 trail_index)
 {
     GObj *new_gobj;
     s32 unused;
@@ -628,7 +628,7 @@ GObj* wpNess_PKReflectTrail_CreateWeapon(GObj *old_gobj, Vec3f *pos, s32 trail_i
 
     old_wp = wpGetStruct(old_gobj);
 
-    new_gobj = wpManager_CreateWeapon(old_gobj, &wpNess_PKReflectTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
+    new_gobj = wpManager_MakeWeapon(old_gobj, &wpNess_PKReflectTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
 
     if (new_gobj == NULL) return NULL;
 

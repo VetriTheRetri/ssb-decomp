@@ -87,10 +87,10 @@ bool32 wpFox_Blaster_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x80168A74
-GObj* wpFox_Blaster_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpFox_Blaster_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     wpStruct *wp;
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpFox_Blaster_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpFox_Blaster_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)
     {

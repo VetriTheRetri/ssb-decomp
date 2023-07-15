@@ -134,7 +134,7 @@ bool32 wpMario_Fireball_ProcReflector(GObj *weapon_gobj) // Hit reflector
 }
 
 // 0x801687A0
-GObj* wpMario_Fireball_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create item
+GObj* wpMario_Fireball_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, s32 index) // Create item
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj;
@@ -144,7 +144,7 @@ GObj* wpMario_Fireball_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, s32 index) /
     wpMario_Fireball_WeaponDesc.p_item = wpMario_Fireball_WeaponAttributes[index].p_item;
     wpMario_Fireball_WeaponDesc.offset = wpMario_Fireball_WeaponAttributes[index].offset;
 
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpMario_Fireball_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpMario_Fireball_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)
     {

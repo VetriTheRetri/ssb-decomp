@@ -305,7 +305,7 @@ bool32 itMBall_GOpen_ProcUpdate(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, itMonster_Global_SelectMonsterIndex + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+        monster_gobj = itManager_MakeItemIndex(m_ball_gobj, itMonster_Global_SelectMonsterIndex + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
         if (monster_gobj != NULL)
         {
@@ -413,7 +413,7 @@ bool32 itMBall_AOpen_ProcUpdate(GObj *m_ball_gobj)
 
             return TRUE;
         }
-        monster_gobj = func_ovl3_8016F238(m_ball_gobj, itMonster_Global_SelectMonsterIndex + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+        monster_gobj = itManager_MakeItemIndex(m_ball_gobj, itMonster_Global_SelectMonsterIndex + (It_Kind_MbMonsterStart - 1), &DObjGetStruct(m_ball_gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
         if (monster_gobj != NULL)
         {
@@ -452,9 +452,9 @@ void itMBall_AOpen_SetStatus(GObj *item_gobj)
 }
 
 // 0x8017CE0C
-GObj* itCommon_MBall_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_MBall_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_MBall_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_MBall_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {

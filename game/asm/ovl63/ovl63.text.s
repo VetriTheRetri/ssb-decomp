@@ -1053,7 +1053,7 @@ glabel func_ovl63_8018DF80
   /* 18B5E4 8018DFD4 E7A00034 */      swc1 $f0, 0x34($sp)
   /* 18B5E8 8018DFD8 E7A00028 */      swc1 $f0, 0x28($sp)
   /* 18B5EC 8018DFDC E7A00020 */      swc1 $f0, 0x20($sp)
-  /* 18B5F0 8018DFE0 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 18B5F0 8018DFE0 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 18B5F4 8018DFE4 E7A80024 */      swc1 $f8, 0x24($sp)
   .L8018DFE8:
   /* 18B5F8 8018DFE8 8FBF001C */        lw $ra, 0x1c($sp)

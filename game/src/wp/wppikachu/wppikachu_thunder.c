@@ -74,7 +74,7 @@ void func_ovl3_8016A680(GObj *weapon_gobj, s32 arg1)
     {
         func_ovl2_80101B88(&pos, 6, 0);
     }
-    else wpPikachu_ThunderTrail_CreateWeapon(weapon_gobj, &pos);
+    else wpPikachu_ThunderTrail_MakeWeapon(weapon_gobj, &pos);
 }
 
 // 0x8016A700
@@ -124,10 +124,10 @@ bool32 wpPikachu_ThunderHead_ProcDead(GObj *weapon_gobj)
 }
 
 // 0x8016A80C
-GObj* wpPikachu_ThunderHead_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
+GObj* wpPikachu_ThunderHead_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
     s32 unused;
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpPikachu_ThunderHead_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpPikachu_ThunderHead_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
     wpStruct *wp;
 
     if (weapon_gobj == NULL)
@@ -188,11 +188,11 @@ bool32 wpPikachu_ThunderTrail_ProcHit(GObj *weapon_gobj)
 }
 
 // 0x8016A980
-GObj* wpPikachu_ThunderTrail_CreateWeapon(GObj *weapon_gobj, Vec3f *pos)
+GObj* wpPikachu_ThunderTrail_MakeWeapon(GObj *weapon_gobj, Vec3f *pos)
 {
     s32 unused[2];
     wpStruct *spawn_wp = wpGetStruct(weapon_gobj);
-    GObj *chain_gobj = wpManager_CreateWeapon(weapon_gobj, &wpPikachu_ThunderTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
+    GObj *chain_gobj = wpManager_MakeWeapon(weapon_gobj, &wpPikachu_ThunderTrail_WeaponDesc, pos, WEAPON_MASK_SPAWN_WEAPON);
     wpStruct *chain_wp;
     s32 i;
 

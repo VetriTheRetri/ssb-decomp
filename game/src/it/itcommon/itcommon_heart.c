@@ -123,9 +123,9 @@ void itHeart_FDrop_SetStatus(GObj *item_gobj)
 }
 
 // 0x80174850
-GObj* itCommon_Heart_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_Heart_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Heart_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_Heart_ItemDesc, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
     itStruct *ip;

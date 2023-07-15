@@ -2,7 +2,7 @@
 
 // Covers DownBounce, DownWait
 
-#define FTCOMMON_DOWNBOUNCE_STATUPDATE_FLAGS (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE)
+#define FTCOMMON_DOWNBOUNCE_STATUPDATE_FLAGS (FTSTATUPDATE_PLAYERTAG_PRESERVE | FTSTATUPDATE_TEXTUREPART_PRESERVE | FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_MODELPART_PRESERVE)
 
 // 0x80144220
 void ftCommon_DownWait_ProcUpdate(GObj *fighter_gobj)
@@ -111,7 +111,7 @@ void ftCommon_DownBounce_SetStatus(GObj *fighter_gobj)
     }
     else status_id = ftStatus_Common_DownBounceU;
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_UNK3_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_PLAYERTAG_PRESERVE);
     ftCommon_DownBounce_UpdateEffects(fighter_gobj);
 
     fp->status_vars.common.downbounce.attack_buffer = 0;

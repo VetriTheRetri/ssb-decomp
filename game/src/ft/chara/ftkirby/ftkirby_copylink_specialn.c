@@ -29,7 +29,7 @@ void ftKirby_CopyLink_SpecialN_CreateBoomerang(GObj *fighter_gobj)
 
         func_ovl2_800EDF24(fp->joint[FTKIRBY_COPYLINK_BOOMERANG_SPAWN_JOINT], &pos);
 
-        fp->fighter_vars.kirby.copylink_boomerang_gobj = wpLink_Boomerang_CreateWeapon(fighter_gobj, &pos);
+        fp->fighter_vars.kirby.copylink_boomerang_gobj = wpLink_Boomerang_MakeWeapon(fighter_gobj, &pos);
     }
 }
 

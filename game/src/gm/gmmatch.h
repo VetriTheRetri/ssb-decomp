@@ -140,7 +140,7 @@ typedef struct gmItemSpawn
 {
     u8 max_items; // Maximum number of items allowed to spawn?
     u8 *item_toggles; // Pointer to array of item on/off toggles
-    u32 item_spawn_timer; // Spawn a random new item when this reaches 0
+    u32 item_spawn_wait; // Spawn a random new item when this reaches 0
     void *unk_0xC;
     u32 unk_0x10;
     s8 unk_0x14;

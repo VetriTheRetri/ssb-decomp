@@ -171,7 +171,7 @@ extern itCreateDesc Article_Spear_Data;
 
 GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Spear_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &Article_Spear_Data, pos, vel, flags);
     DObj *joint;
     itStruct *ap;
 
@@ -251,7 +251,7 @@ extern wpCreateDesc Item_Pippi_Swarm_Data;
 GObj *func_ovl3_801804A4(GObj *item_gobj, Vec3f *pos, s32 it_kind)
 {
     itStruct *ap = itGetStruct(item_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ITEM);
+    GObj *weapon_gobj = wpManager_MakeWeapon(item_gobj, ((it_kind == It_Kind_Spear) ? &Item_Spear_Swarm_Data : &Item_Pippi_Swarm_Data), pos, WEAPON_MASK_SPAWN_ITEM);
     DObj *joint;
     s32 unused;
     wpStruct *ip;

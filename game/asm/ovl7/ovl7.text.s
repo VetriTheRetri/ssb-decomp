@@ -407,7 +407,7 @@ glabel func_ovl7_8018D4D0
   /* 113E50 8018D630 46083280 */     add.s $f10, $f6, $f8
   /* 113E54 8018D634 E7A0003C */      swc1 $f0, 0x3c($sp)
   /* 113E58 8018D638 24A50003 */     addiu $a1, $a1, 3
-  /* 113E5C 8018D63C 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 113E5C 8018D63C 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 113E60 8018D640 E7AA0038 */      swc1 $f10, 0x38($sp)
   /* 113E64 8018D644 0C009A70 */       jal func_800269C0
   /* 113E68 8018D648 2404009E */     addiu $a0, $zero, 0x9e
@@ -3421,20 +3421,20 @@ glabel func_ovl7_801900C4
 
 glabel func_ovl7_80190164
   /* 116984 80190164 27BDFFE8 */     addiu $sp, $sp, -0x18
-  /* 116988 80190168 3C028013 */       lui $v0, %hi(gmMusicIndexDefault)
-  /* 11698C 8019016C 244213A0 */     addiu $v0, $v0, %lo(gmMusicIndexDefault)
+  /* 116988 80190168 3C028013 */       lui $v0, %hi(gMusicIndexDefault)
+  /* 11698C 8019016C 244213A0 */     addiu $v0, $v0, %lo(gMusicIndexDefault)
   /* 116990 80190170 AFBF0014 */        sw $ra, 0x14($sp)
   /* 116994 80190174 2405002A */     addiu $a1, $zero, 0x2a
-  /* 116998 80190178 AC450000 */        sw $a1, ($v0) # gmMusicIndexDefault + 0
+  /* 116998 80190178 AC450000 */        sw $a1, ($v0) # gMusicIndexDefault + 0
   /* 11699C 8019017C 0C0082AD */       jal func_80020AB4
   /* 1169A0 80190180 00002025 */        or $a0, $zero, $zero
   /* 1169A4 80190184 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 1169A8 80190188 3C0F8013 */       lui $t7, %hi(gmMusicIndexDefault)
-  /* 1169AC 8019018C 8DEF13A0 */        lw $t7, %lo(gmMusicIndexDefault)($t7)
-  /* 1169B0 80190190 3C018013 */       lui $at, %hi(gmMusicIndexCurrent)
+  /* 1169A8 80190188 3C0F8013 */       lui $t7, %hi(gMusicIndexDefault)
+  /* 1169AC 8019018C 8DEF13A0 */        lw $t7, %lo(gMusicIndexDefault)($t7)
+  /* 1169B0 80190190 3C018013 */       lui $at, %hi(gMusicIndexCurrent)
   /* 1169B4 80190194 27BD0018 */     addiu $sp, $sp, 0x18
   /* 1169B8 80190198 03E00008 */        jr $ra
-  /* 1169BC 8019019C AC2F139C */        sw $t7, %lo(gmMusicIndexCurrent)($at)
+  /* 1169BC 8019019C AC2F139C */        sw $t7, %lo(gMusicIndexCurrent)($at)
 
 glabel func_ovl7_801901A0
   /* 1169C0 801901A0 27BDFFE0 */     addiu $sp, $sp, -0x20

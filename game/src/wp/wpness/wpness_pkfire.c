@@ -65,7 +65,7 @@ bool32 wpNess_PKFire_ProcHit(GObj *weapon_gobj)
     pos.y = (pos.y * WPPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.y;
     pos.z = (pos.z * WPPKFIRE_VEL_MUL) + DObjGetStruct(weapon_gobj)->translate.z;
 
-    itNess_PKFire_CreateItem(weapon_gobj, &pos, &vel);
+    itNess_PKFire_MakeItem(weapon_gobj, &pos, &vel);
 
     return TRUE;
 }
@@ -108,10 +108,10 @@ bool32 wpNess_PKFire_ProcAbsorb(GObj *weapon_gobj)
 }
 
 // 0x8016AC78
-GObj* wpNess_PKFire_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel, f32 angle)
+GObj* wpNess_PKFire_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel, f32 angle)
 {
     s32 unused;
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpNess_PKFire_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpNess_PKFire_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
 
     if (weapon_gobj == NULL)

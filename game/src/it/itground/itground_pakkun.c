@@ -311,9 +311,9 @@ bool32 itPakkun_NDamage_ProcDead(GObj *item_gobj)
 }
 
 // 0x8017D4D8
-GObj* itGround_Pakkun_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itGround_Pakkun_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Pakkun_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itGround_Pakkun_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {

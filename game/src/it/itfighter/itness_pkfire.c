@@ -219,7 +219,7 @@ void itPKFire_AFall_SetStatus(GObj *item_gobj)
 extern s32 D_ovl2_80131148;
 
 // 0x80185824
-GObj* itNess_PKFire_CreateItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
+GObj* itNess_PKFire_MakeItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 {
     GObj *item_gobj;
     wpStruct *wp = wpGetStruct(weapon_gobj);
@@ -227,7 +227,7 @@ GObj* itNess_PKFire_CreateItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     Effect_Unk *effect_unk;
     Effect_Info *effect_info;
 
-    item_gobj = itManager_CreateItem(weapon_gobj, &itNess_PKFire_ItemDesc, pos, vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+    item_gobj = itManager_MakeItem(weapon_gobj, &itNess_PKFire_ItemDesc, pos, vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
     if (item_gobj == NULL)
     {

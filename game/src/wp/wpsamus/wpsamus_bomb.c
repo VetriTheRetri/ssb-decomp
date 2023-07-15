@@ -195,9 +195,9 @@ bool32 wpSamus_Bomb_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x80169328
-GObj* wpSamus_Bomb_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpSamus_Bomb_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpSamus_Bomb_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpSamus_Bomb_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *ip;
 
     if (weapon_gobj == NULL)

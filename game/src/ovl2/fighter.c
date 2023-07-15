@@ -47,7 +47,7 @@ void func_ovl2_800D7994(GObj *fighter_gobj)
 }
 
 extern intptr_t ftKirby_LoadedFiles_SpecialNData;
-extern s32 gmMatchInfo_PlayerCount;
+extern s32 gBattlePlayerCount;
 extern void *D_ovl2_80131074; // Pointer to fighter files?
 
 void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
@@ -132,7 +132,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
 
     fp->is_fast_fall = FALSE;
 
-    fp->player_number = gmMatchInfo_PlayerCount++;
+    fp->player_number = gBattlePlayerCount++;
 
     fp->publicity_knockback = 0.0F;
 

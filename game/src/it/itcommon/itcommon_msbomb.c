@@ -576,9 +576,9 @@ void itMSBomb_NExplode_SetStatus(GObj *item_gobj)
 }
 
 // 0x80176F60
-GObj* itCommon_MSBomb_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_MSBomb_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_MSBomb_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_MSBomb_ItemDesc, pos, vel, flags);
     DObj *joint;
     itStruct *ip;
     Vec3f translate;

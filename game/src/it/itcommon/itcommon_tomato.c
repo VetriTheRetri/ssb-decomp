@@ -123,9 +123,9 @@ void itTomato_FDrop_SetStatus(GObj *item_gobj)
 }
 
 // 0x80174624
-GObj* itCommon_Tomato_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_Tomato_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Tomato_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_Tomato_ItemDesc, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
     itStruct *ap;

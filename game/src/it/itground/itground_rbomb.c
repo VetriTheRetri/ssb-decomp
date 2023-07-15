@@ -313,9 +313,9 @@ bool32 itRBomb_GRoll_ProcMap(GObj *item_gobj)
 }
 
 // 0x8018518C
-GObj* itGround_RBomb_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itGround_RBomb_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_RBomb_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itGround_RBomb_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {

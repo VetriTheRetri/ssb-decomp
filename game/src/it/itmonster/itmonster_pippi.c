@@ -173,7 +173,7 @@ extern itCreateDesc Article_Pippi_Data;
 
 GObj *jtgt_ovl3_80183690(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Pippi_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &Article_Pippi_Data, pos, vel, flags);
 
     if (item_gobj != NULL)
     {

@@ -365,9 +365,9 @@ bool32 itTaru_GRoll_ProcMap(GObj *item_gobj)
 }
 
 // 0x8017A1B8
-GObj* itCommon_Taru_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_Taru_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Taru_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_Taru_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {

@@ -1955,50 +1955,50 @@ glabel jtbl_ovl3_8018942C
 glabel itMonster_Global_SelectMonsterIndex
   .incbin "ovl3.raw.bin", 0x57950, 0x4
 
-glabel D_ovl3_80189454
+glabel gItemAppearanceRate1
   .incbin "ovl3.raw.bin", 0x57954, 0xC
 
-glabel D_ovl3_80189460
+glabel gItemAppearanceRate2
   .incbin "ovl3.raw.bin", 0x57960, 0xC
 
-glabel Article_Callback_Spawn
-  /* 5796C 103EAC 8018946C */  .4byte itCommon_Box_CreateItem
-  /* 57970 103EB0 80189470 */  .4byte itCommon_Taru_CreateItem
-  /* 57974 103EB4 80189474 */  .4byte itCommon_Capsule_CreateItem
-  /* 57978 103EB8 80189478 */  .4byte itCommon_Egg_CreateItem
-  /* 5797C 103EBC 8018947C */  .4byte itCommon_Tomato_CreateItem
-  /* 57980 103EC0 80189480 */  .4byte itCommon_Heart_CreateItem
-  /* 57984 103EC4 80189484 */  .4byte itCommon_Star_CreateItem
-  /* 57988 103EC8 80189488 */  .4byte itCommon_Sword_CreateItem
-  /* 5798C 103ECC 8018948C */  .4byte itCommon_Bat_CreateItem
-  /* 57990 103ED0 80189490 */  .4byte itCommon_Harisen_CreateItem
-  /* 57994 103ED4 80189494 */  .4byte itCommon_StarRod_CreateItem
-  /* 57998 103ED8 80189498 */  .4byte itCommon_LGun_CreateItem
-  /* 5799C 103EDC 8018949C */  .4byte itCommon_FFlower_CreateItem
-  /* 579A0 103EE0 801894A0 */  .4byte itCommon_Hammer_CreateItem
-  /* 579A4 103EE4 801894A4 */  .4byte itCommon_MSBomb_CreateItem
-  /* 579A8 103EE8 801894A8 */  .4byte itCommon_BombHei_CreateItem
-  /* 579AC 103EEC 801894AC */  .4byte itCommon_NBumper_CreateItem
-  /* 579B0 103EF0 801894B0 */  .4byte itCommon_GShell_CreateItem
-  /* 579B4 103EF4 801894B4 */  .4byte itCommon_RShell_CreateItem
-  /* 579B8 103EF8 801894B8 */  .4byte itCommon_MBall_CreateItem
+glabel itManager_ProcMake
+  /* 5796C 103EAC 8018946C */  .4byte itCommon_Box_MakeItem
+  /* 57970 103EB0 80189470 */  .4byte itCommon_Taru_MakeItem
+  /* 57974 103EB4 80189474 */  .4byte itCommon_Capsule_MakeItem
+  /* 57978 103EB8 80189478 */  .4byte itCommon_Egg_MakeItem
+  /* 5797C 103EBC 8018947C */  .4byte itCommon_Tomato_MakeItem
+  /* 57980 103EC0 80189480 */  .4byte itCommon_Heart_MakeItem
+  /* 57984 103EC4 80189484 */  .4byte itCommon_Star_MakeItem
+  /* 57988 103EC8 80189488 */  .4byte itCommon_Sword_MakeItem
+  /* 5798C 103ECC 8018948C */  .4byte itCommon_Bat_MakeItem
+  /* 57990 103ED0 80189490 */  .4byte itCommon_Harisen_MakeItem
+  /* 57994 103ED4 80189494 */  .4byte itCommon_StarRod_MakeItem
+  /* 57998 103ED8 80189498 */  .4byte itCommon_LGun_MakeItem
+  /* 5799C 103EDC 8018949C */  .4byte itCommon_FFlower_MakeItem
+  /* 579A0 103EE0 801894A0 */  .4byte itCommon_Hammer_MakeItem
+  /* 579A4 103EE4 801894A4 */  .4byte itCommon_MSBomb_MakeItem
+  /* 579A8 103EE8 801894A8 */  .4byte itCommon_BombHei_MakeItem
+  /* 579AC 103EEC 801894AC */  .4byte itCommon_NBumper_MakeItem
+  /* 579B0 103EF0 801894B0 */  .4byte itCommon_GShell_MakeItem
+  /* 579B4 103EF4 801894B4 */  .4byte itCommon_RShell_MakeItem
+  /* 579B8 103EF8 801894B8 */  .4byte itCommon_MBall_MakeItem
 
 glabel D_ovl3_801894BC
   .incbin "ovl3.raw.bin", 0x579BC, 0x8
 
 glabel jtbl_ovl3_801894C4
-  /* 579C4 103F04 801894C4 */  .4byte itGround_PowerBlock_CreateItem
-  /* 579C8 103F08 801894C8 */  .4byte itGround_Bumper_CreateItem
-  /* 579CC 103F0C 801894CC */  .4byte itGround_Pakkun_CreateItem
+  /* 579C4 103F04 801894C4 */  .4byte itGround_PowerBlock_MakeItem
+  /* 579C8 103F08 801894C8 */  .4byte itGround_Bumper_MakeItem
+  /* 579CC 103F0C 801894CC */  .4byte itGround_Pakkun_MakeItem
   /* 579D0 103F10 801894D0 */  .4byte D_unkmulti_8018EE5C
 
 glabel jtbl_ovl3_801894D4
-  /* 579D4 103F14 801894D4 */  .4byte itGround_RBomb_CreateItem
-  /* 579D8 103F18 801894D8 */  .4byte itGround_Lucky_CreateItem
-  /* 579DC 103F1C 801894DC */  .4byte itGround_Marumine_CreateItem
-  /* 579E0 103F20 801894E0 */  .4byte itGround_Hitokage_CreateItem
-  /* 579E4 103F24 801894E4 */  .4byte itGround_Fushigibana_CreateItem
-  /* 579E8 103F28 801894E8 */  .4byte itGround_Porygon_CreateItem
+  /* 579D4 103F14 801894D4 */  .4byte itGround_RBomb_MakeItem
+  /* 579D8 103F18 801894D8 */  .4byte itGround_Lucky_MakeItem
+  /* 579DC 103F1C 801894DC */  .4byte itGround_Marumine_MakeItem
+  /* 579E0 103F20 801894E0 */  .4byte itGround_Hitokage_MakeItem
+  /* 579E4 103F24 801894E4 */  .4byte itGround_Fushigibana_MakeItem
+  /* 579E8 103F28 801894E8 */  .4byte itGround_Porygon_MakeItem
   /* 579EC 103F2C 801894EC */  .4byte jtgt_ovl3_8017DBA0
   /* 579F0 103F30 801894F0 */  .4byte jtgt_ovl3_8017E6C0
   /* 579F4 103F34 801894F4 */  .4byte jtgt_ovl3_8017EAD8

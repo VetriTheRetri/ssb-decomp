@@ -257,7 +257,7 @@ glabel func_ovl6_8018D374
   /* 111B60 8018D420 00002025 */        or $a0, $zero, $zero
   /* 111B64 8018D424 24050019 */     addiu $a1, $zero, 0x19
   /* 111B68 8018D428 26260008 */     addiu $a2, $s1, 8
-  /* 111B6C 8018D42C 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 111B6C 8018D42C 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 111B70 8018D430 02A03825 */        or $a3, $s5, $zero
   /* 111B74 8018D434 8E450000 */        lw $a1, ($s2)
   /* 111B78 8018D438 00408025 */        or $s0, $v0, $zero
@@ -794,7 +794,7 @@ glabel func_ovl6_8018DB24
   /* 112308 8018DBC8 00002025 */        or $a0, $zero, $zero
   /* 11230C 8018DBCC 24050017 */     addiu $a1, $zero, 0x17
   /* 112310 8018DBD0 26260008 */     addiu $a2, $s1, 8
-  /* 112314 8018DBD4 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 112314 8018DBD4 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 112318 8018DBD8 02803825 */        or $a3, $s4, $zero
   /* 11231C 8018DBDC 8E450000 */        lw $a1, ($s2)
   /* 112320 8018DBE0 00408025 */        or $s0, $v0, $zero
@@ -2088,7 +2088,7 @@ glabel func_ovl6_8018EE10
   /* 1135B8 8018EE78 3C058019 */       lui $a1, %hi(D_ovl6_8018F130)
   /* 1135BC 8018EE7C 8FA70028 */        lw $a3, 0x28($sp)
   /* 1135C0 8018EE80 24A5F130 */     addiu $a1, $a1, %lo(D_ovl6_8018F130)
-  /* 1135C4 8018EE84 0C05B85D */       jal itManager_CreateItem
+  /* 1135C4 8018EE84 0C05B85D */       jal itManager_MakeItem
   /* 1135C8 8018EE88 AFAE0010 */        sw $t6, 0x10($sp)
   /* 1135CC 8018EE8C 10400005 */      beqz $v0, .L8018EEA4
   /* 1135D0 8018EE90 00402025 */        or $a0, $v0, $zero

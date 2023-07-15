@@ -112,6 +112,6 @@ void ftCommon_TaruCann_ShootFighter(GObj *fighter_gobj)
     ftCommon_Damage_InitDamageVars(fighter_gobj, ftStatus_Common_DamageFlyRoll, tarucann->damage, knockback, angle, fp->lr, 0, tarucann->element, 0, TRUE, TRUE, FALSE);
     ftCommon_Update1PGameDamageStats(fp, 4, 4, 3, 0, 0);
 
-    fp->unk_0x174 = 0;
+    fp->playertag_wait = 0;
     fp->tarucann_wait = FTCOMMON_TARUCANN_PICKUP_WAIT;
 }

@@ -57,7 +57,7 @@ s32 func_ovl2_800D6554(u16 arg0, s32 arg1)
     return var_v1;
 }
 
-extern u32 gmMatchInfo_1PGameTimeTotal; // Static (.bss); Total time taken to complete 1P Game (in frames);
+extern u32 g1PGameTimeTotal; // Static (.bss); Total time taken to complete 1P Game (in frames);
 
 void func_ovl2_800D6590(void)
 {
@@ -66,7 +66,7 @@ void func_ovl2_800D6590(void)
         gSceneData.scene_queue = gmSceneIndex_Challenger_Ness;
         return;
     }
-    if (!(gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_CAPTAIN) && (gmMatchInfo_1PGameTimeTotal < 43200)) // Captain Falcon's unlock criteria is 12 minutes instead of 20???
+    if (!(gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_CAPTAIN) && (g1PGameTimeTotal < 43200)) // Captain Falcon's unlock criteria is 12 minutes instead of 20???
     {
         gSceneData.scene_queue = gmSceneIndex_Challenger_Captain;
         return;
@@ -206,7 +206,7 @@ void func_ovl2_800D67DC(void)
     gSceneData.continues_used = 0;
     gSceneData.bonuses = 0;
 
-    gmMatchInfo_1PGameTimeTotal = 0;
+    g1PGameTimeTotal = 0;
 
     D_ovl2_80130D68 = 0;
     D_ovl2_80130D6C = 0;

@@ -20,7 +20,7 @@ u32			wpManager_GetGroupIndexInc			(void);
 
 
 // Create new weapon
-GObj*		wpManager_CreateWeapon				(GObj *spawn_gobj, wpCreateDesc *wp_desc, Vec3f *spawn_pos, u32 flags);
+GObj*		wpManager_MakeWeapon				(GObj *spawn_gobj, wpCreateDesc *wp_desc, Vec3f *spawn_pos, u32 flags);
 
 
 // Update weapon's scale, rotate and translate vectors
@@ -32,7 +32,7 @@ void		wpManager_UpdateHitPositions		(GObj *weapon_gobj);
 
 
 // Update weapon's record of interacted targets	(Decrement rehit timer if available, clear targets if timer reaches 0)
-void		wpManager_UpdateHitVictimRecord		(GObj *weapon_gobj);
+void		wpManager_UpdateHitRecord		(GObj *weapon_gobj);
 
 
 // Main weapon logic GObj process (animation, physics, collision, blastzone check)
@@ -48,7 +48,7 @@ void		func_ovl3_8016679C					(wpStruct *this_wp, wpHitbox *wp_hit, GObj *target_
 
 
 // Set weapon VS weapon hitbox detection results
-void		wpManager_ProcessWeaponSetOff		(wpStruct *this_wp,		wpHitbox *this_hit,		s32 this_hit_id, 
+void		wpManager_UpdateAttackStatWeapon	(wpStruct *this_wp,		wpHitbox *this_hit,		s32 this_hit_id, 
 												 wpStruct *victim_wp,	wpHitbox *victim_hit,	s32 victim_hit_id, 
 																			GObj *this_gobj,	GObj *victim_gobj);
 

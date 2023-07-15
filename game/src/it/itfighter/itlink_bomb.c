@@ -563,9 +563,9 @@ void itLinkBomb_NExplode_SetStatus(GObj *item_gobj)
 }
 
 // 0x801865A0
-GObj* itLink_Bomb_CreateItem(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
+GObj* itLink_Bomb_MakeItem(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *item_gobj = itManager_CreateItem(fighter_gobj, &itLink_Bomb_ItemDesc, pos, vel, 0);
+    GObj *item_gobj = itManager_MakeItem(fighter_gobj, &itLink_Bomb_ItemDesc, pos, vel, 0);
     DObj *joint;
     itStruct *ip;
 

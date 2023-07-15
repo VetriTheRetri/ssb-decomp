@@ -93,7 +93,7 @@ bool32 wpLink_SpinAttack_ProcHit(GObj *weapon_gobj)
 }
 
 // 0x8016CB1C
-GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpLink_SpinAttack_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj;
@@ -103,7 +103,7 @@ GObj* wpLink_SpinAttack_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     offset.y += WPSPINATTACK_OFF_Y;
 
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpLink_SpinAttack_WeaponDesc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
+    weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpLink_SpinAttack_WeaponDesc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
 
     if (weapon_gobj == NULL)
     {

@@ -65,7 +65,7 @@ bool32 itStar_SDefault_ProcHit(GObj *item_gobj)
 }
 
 // 0x80174A18
-GObj* itCommon_Star_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_Star_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     Unk_80131460_Ptr74 *unk_ptr = D_ovl2_80131460->unk_0x74;
     GObj *item_gobj;
@@ -78,7 +78,7 @@ GObj* itCommon_Star_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fla
     vel_real.y = ITSTAR_BOUNCE_Y;
     vel_real.z = 0.0F;
 
-    item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_Star_ItemDesc, pos, &vel_real, flags);
+    item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_Star_ItemDesc, pos, &vel_real, flags);
 
     if (item_gobj != NULL)
     {

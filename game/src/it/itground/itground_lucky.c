@@ -78,7 +78,7 @@ void itGLucky_SDefault_UpdateEggSpawn(GObj *lucky_gobj)
                 vel.y = (rand_f32() * ITGRLUCKY_EGG_SPAWN_MUL) + ITGRLUCKY_EGG_SPAWN_ADD_Y;
                 vel.z = 0.0F;
 
-                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+                egg_gobj = itManager_MakeItemSetupCommon(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
                 if (egg_gobj != NULL)
                 {
@@ -186,9 +186,9 @@ bool32 itGLucky_SDefault_ProcDamage(GObj *item_gobj)
 }
 
 // 0x8017C5F4
-GObj* itGround_Lucky_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itGround_Lucky_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Lucky_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itGround_Lucky_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {

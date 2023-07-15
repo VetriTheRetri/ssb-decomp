@@ -41,7 +41,7 @@ void ftNess_SpecialN_ProcAccessory(GObj *fighter_gobj) // PK Fire setup
             vel.y = __sinf(FTNESS_PKFIRE_SPARK_ANGLE_GROUND) * FTNESS_PKFIRE_SPARK_VEL_GROUND;
         }
 
-        wpNess_PKFire_CreateWeapon(fighter_gobj, &pos, &vel, angle); // Spawn PK Fire
+        wpNess_PKFire_MakeWeapon(fighter_gobj, &pos, &vel, angle); // Spawn PK Fire
     }
 }
 

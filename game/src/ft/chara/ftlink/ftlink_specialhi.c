@@ -116,7 +116,7 @@ void ftLink_SpecialHi_UpdateWeaponVars(GObj *fighter_gobj)
 }
 
 // 0x80163D94
-void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
+void ftLink_SpecialHi_MakeWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *spin_attack_gobj;
@@ -138,7 +138,7 @@ void ftLink_SpecialHi_CreateWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 
             func_ovl2_800EDF24(fp->joint[FTLINK_SPINATTACK_SPAWN_JOINT], &pos);
 
-            fp->status_vars.link.specialhi.spin_attack_gobj = wpLink_SpinAttack_CreateWeapon(fighter_gobj, &pos);
+            fp->status_vars.link.specialhi.spin_attack_gobj = wpLink_SpinAttack_MakeWeapon(fighter_gobj, &pos);
 
             if (fp->status_vars.link.specialhi.spin_attack_gobj != NULL)
             {
@@ -208,7 +208,7 @@ void ftLink_SpecialAirHiEnd_ProcUpdate(GObj *fighter_gobj)
 void ftLink_SpecialHi_ProcPhysics(GObj *fighter_gobj)
 {
     ftLink_SpecialHi_UpdateWeaponVars(fighter_gobj);
-    ftLink_SpecialHi_CreateWeapon(fighter_gobj, FALSE);
+    ftLink_SpecialHi_MakeWeapon(fighter_gobj, FALSE);
     func_ovl2_800D8BB4(fighter_gobj);
 }
 
@@ -219,7 +219,7 @@ void ftLink_SpecialAirHi_ProcPhysics(GObj *fighter_gobj)
     f32 gravity;
 
     ftLink_SpecialHi_UpdateWeaponVars(fighter_gobj);
-    ftLink_SpecialHi_CreateWeapon(fighter_gobj, TRUE);
+    ftLink_SpecialHi_MakeWeapon(fighter_gobj, TRUE);
 
     gravity = (fp->command_vars.flags.flag1 != 0) ? fp->attributes->gravity : fp->attributes->gravity * FTLINK_SPINATTACK_GRAVITY_MUL;
 

@@ -223,9 +223,9 @@ void itStarRod_FDrop_SetStatus(GObj *item_gobj)
 }
 
 // 0x80178134
-GObj* itCommon_StarRod_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_StarRod_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_StarRod_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_StarRod_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
@@ -338,7 +338,7 @@ bool32 wpStarRod_Star_ProcReflector(GObj *weapon_gobj)
 extern intptr_t StarRod_Linker_Unk;
 
 // 0x80178474
-GObj* wpStarRod_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
+GObj* wpStarRod_Star_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
 {
     GObj *weapon_gobj;
     DObj *joint;
@@ -348,7 +348,7 @@ GObj* wpStarRod_Star_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, u8 is_smash)
     {
         wpStarRod_Star_WeaponDesc.offset = (intptr_t)&StarRod_Linker_Unk; // Set attribute data on smash input - Linker thing
     }
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpStarRod_Star_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpStarRod_Star_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
 
     if (weapon_gobj == NULL)
     {
@@ -375,7 +375,7 @@ void ftCommon_StarRodSwing_CreateStar(GObj *fighter_gobj, Vec3f *pos, u8 is_smas
 {
     itStruct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
 
-    wpStarRod_Star_CreateWeapon(fighter_gobj, pos, is_smash);
+    wpStarRod_Star_MakeWeapon(fighter_gobj, pos, is_smash);
 
     ip->it_multi--;
 }

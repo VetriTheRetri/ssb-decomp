@@ -216,9 +216,9 @@ void itFFlower_FDrop_SetStatus(GObj *item_gobj)
 extern itCreateDesc itCommon_FFlower_ItemDesc;
 
 // 0x80175D60
-GObj* itCommon_FFlower_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_FFlower_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_FFlower_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_FFlower_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
@@ -288,9 +288,9 @@ bool32 wpFFlower_Flame_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x80175F48
-GObj* wpFFlower_Flame_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
+GObj* wpFFlower_Flame_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpFFlower_Flame_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpFFlower_Flame_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
 
     if (weapon_gobj == NULL)
@@ -324,7 +324,7 @@ void ftCommon_FireFlowerShoot_CreateFlame(GObj *fighter_gobj, Vec3f *pos, s32 in
     vel.y = __sinf(flame_vel[index]) * ITFFLOWER_AMMO_VEL;
     vel.z = 0.0F;
 
-    wpFFlower_Flame_CreateWeapon(fighter_gobj, pos, &vel);
+    wpFFlower_Flame_MakeWeapon(fighter_gobj, pos, &vel);
 
     ip->it_multi -= ammo_sub;
 }

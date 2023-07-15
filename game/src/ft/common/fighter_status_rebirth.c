@@ -147,7 +147,7 @@ void ftCommon_RebirthStand_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthStand, 0.0F, 1.0F, (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthStand, 0.0F, 1.0F, (FTSTATUPDATE_PLAYERTAG_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     ftAnim_Update(fighter_gobj);
 
     fp->x191_flag_b3 = TRUE;
@@ -188,7 +188,7 @@ void ftCommon_RebirthWait_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, (FTSTATUPDATE_UNK3_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Common_RebirthWait, 0.0F, 1.0F, (FTSTATUPDATE_PLAYERTAG_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
 
     fp->is_nullstatus = TRUE;
     fp->x18E_flag_b0 = TRUE;

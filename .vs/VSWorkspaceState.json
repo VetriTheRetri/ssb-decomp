@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\include",
-    "\\game\\include\\PR",
+    "\\game\\asm",
+    "\\game\\asm\\ovl2",
     "\\game\\src",
     "\\game\\src\\ft",
     "\\game\\src\\gm",
     "\\game\\src\\it",
+    "\\game\\src\\ovl2",
     "\\game\\src\\wp"
   ],
-  "SelectedNode": "\\game\\src\\wp\\weaponvars.h",
+  "SelectedNode": "\\game\\asm\\ovl2\\ovl2.bss.s",
   "PreviewInSolutionExplorer": false
 }

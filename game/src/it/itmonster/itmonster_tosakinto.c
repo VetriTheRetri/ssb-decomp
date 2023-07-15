@@ -142,7 +142,7 @@ extern itCreateDesc Article_Tosakinto_Data;
 
 GObj* jtgt_ovl3_8017EAD8(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Tosakinto_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &Article_Tosakinto_Data, pos, vel, flags);
     DObj *joint;
     itStruct *ap;
 

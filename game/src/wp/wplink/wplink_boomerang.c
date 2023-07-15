@@ -524,7 +524,7 @@ f32 wpLink_Boomerang_GetAngleSetVel(Vec3f *vel, ftStruct *fp, s32 lr, f32 vel_mu
 }
 
 // 0x8016DA78
-GObj* wpLink_Boomerang_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpLink_Boomerang_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     GObj *weapon_gobj;
@@ -538,7 +538,7 @@ GObj* wpLink_Boomerang_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 
     offset.x = (fp->lr == RIGHT) ? offset.x + WPBOOMERANG_OFF_X : offset.x - WPBOOMERANG_OFF_X;
 
-    weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpLink_Boomerang_CreateDesc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
+    weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpLink_Boomerang_CreateDesc, &offset, WEAPON_MASK_SPAWN_FIGHTER);
 
     if (weapon_gobj == NULL)
     {

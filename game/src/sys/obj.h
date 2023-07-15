@@ -42,7 +42,7 @@ struct GObj
     u8 filler_0x3C[0x74 - 0x3C];
     void *obj;
     f32 anim_frame; // Current frame of animation?
-    bool32 is_render;
+    bool32 is_skip_render;
     u32 unk_0x80;
     void *user_data;
 
@@ -175,6 +175,6 @@ struct DObj
 };
 
 #define DObjGetStruct(gobj) \
-((DObj*)gobj->obj) \
+((DObj*)(gobj)->obj) \
 
 #endif

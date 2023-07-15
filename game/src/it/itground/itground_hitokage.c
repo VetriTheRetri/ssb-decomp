@@ -162,9 +162,9 @@ bool32 itHitokage_SDefault_ProcDamage(GObj *item_gobj)
 extern s32 grYamabuki_MonsterFlag_Prev;
 
 // 0x80184058
-GObj* itGround_Hitokage_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itGround_Hitokage_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itGround_Hitokage_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itGround_Hitokage_ItemDesc, pos, vel, flags);
     s32 unused;
     DObj *joint;
     itStruct *ip;
@@ -253,9 +253,9 @@ bool32 wpHitokage_Flame_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x801842C8
-GObj* wpHitokage_Flame_CreateWeapon(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
+GObj* wpHitokage_Flame_MakeWeapon(GObj *item_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(item_gobj, &wpHitokage_Flame_WeaponDesc, pos, WEAPON_MASK_SPAWN_ITEM);
+    GObj *weapon_gobj = wpManager_MakeWeapon(item_gobj, &wpHitokage_Flame_WeaponDesc, pos, WEAPON_MASK_SPAWN_ITEM);
     wpStruct *wp;
 
     if (weapon_gobj == NULL)
@@ -286,7 +286,7 @@ void itHitokage_SDefault_CreateFlame(GObj *item_gobj, Vec3f *pos)
     vel.y = __sinf(ITHITOKAGE_FLAME_SPAWN_ANGLE) * ITHITOKAGE_FLAME_VEL_BASE;
     vel.z = 0.0F;
 
-    wpHitokage_Flame_CreateWeapon(item_gobj, pos, &vel);
+    wpHitokage_Flame_MakeWeapon(item_gobj, pos, &vel);
 
     func_800269C0(gmSound_SFX_LizardonFlame);
 }

@@ -126,7 +126,7 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
                 vel.y = (rand_f32() * ITMBLUCKY_EGG_SPAWN_BASE_VEL) + ITMBLUCKY_EGG_SPAWN_ADD_VEL_Y;
                 vel.z = 0.0F;
 
-                egg_gobj = func_ovl3_8016EA78(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
+                egg_gobj = itManager_MakeItemSetupCommon(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
                 if (egg_gobj != NULL)
                 {
@@ -232,7 +232,7 @@ extern itCreateDesc Article_Mb_Lucky_Data;
 
 GObj *jtgt_ovl3_801814C0(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &Article_Mb_Lucky_Data, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &Article_Mb_Lucky_Data, pos, vel, flags);
     DObj *joint;
     itStruct *ap;
 

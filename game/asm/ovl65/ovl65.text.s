@@ -1808,9 +1808,9 @@ glabel func_ovl65_8018E9A4
   /* 10D314 8018EAB4 0C0439A4 */       jal func_ovl2_8010E690
   /* 10D318 8018EAB8 A0221580 */        sb $v0, %lo(D_ovl2_80131580)($at)
   /* 10D31C 8018EABC 240C0019 */     addiu $t4, $zero, 0x19
-  /* 10D320 8018EAC0 3C018013 */       lui $at, %hi(gmMusicIndexDefault)
+  /* 10D320 8018EAC0 3C018013 */       lui $at, %hi(gMusicIndexDefault)
   /* 10D324 8018EAC4 0C039ED5 */       jal ftSpecialItem_BGMCheckFighters
-  /* 10D328 8018EAC8 AC2C13A0 */        sw $t4, %lo(gmMusicIndexDefault)($at)
+  /* 10D328 8018EAC8 AC2C13A0 */        sw $t4, %lo(gMusicIndexDefault)($at)
   /* 10D32C 8018EACC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 10D330 8018EAD0 27BD0040 */     addiu $sp, $sp, 0x40
   /* 10D334 8018EAD4 03E00008 */        jr $ra
@@ -3112,8 +3112,8 @@ glabel func_ovl65_8018FD5C
   /* 10E5DC 8018FD7C 01E2001B */      divu $zero, $t7, $v0
   /* 10E5E0 8018FD80 0000C012 */      mflo $t8
   /* 10E5E4 8018FD84 ADB80000 */        sw $t8, ($t5) # D_ovl65_801938B0 + 0
-  /* 10E5E8 8018FD88 3C198013 */       lui $t9, %hi(gmMatchInfo_1PGameTimeTotal)
-  /* 10E5EC 8018FD8C 8F390D64 */        lw $t9, %lo(gmMatchInfo_1PGameTimeTotal)($t9)
+  /* 10E5E8 8018FD88 3C198013 */       lui $t9, %hi(g1PGameTimeTotal)
+  /* 10E5EC 8018FD8C 8F390D64 */        lw $t9, %lo(g1PGameTimeTotal)($t9)
   /* 10E5F0 8018FD90 3C088019 */       lui $t0, %hi(D_ovl65_801936A0)
   /* 10E5F4 8018FD94 8D0836A0 */        lw $t0, %lo(D_ovl65_801936A0)($t0)
   /* 10E5F8 8018FD98 0322001B */      divu $zero, $t9, $v0
@@ -4339,9 +4339,9 @@ glabel func_ovl65_80190E58
   /* 10F6D8 80190E78 AFBF0014 */        sw $ra, 0x14($sp)
   /* 10F6DC 80190E7C 908E0006 */       lbu $t6, 6($a0)
   /* 10F6E0 80190E80 24010064 */     addiu $at, $zero, 0x64
-  /* 10F6E4 80190E84 3C058013 */       lui $a1, %hi(gmMatchInfo_1PGameTimeTotal)
+  /* 10F6E4 80190E84 3C058013 */       lui $a1, %hi(g1PGameTimeTotal)
   /* 10F6E8 80190E88 15C10003 */       bne $t6, $at, .L80190E98
-  /* 10F6EC 80190E8C 24A50D64 */     addiu $a1, $a1, %lo(gmMatchInfo_1PGameTimeTotal)
+  /* 10F6EC 80190E8C 24A50D64 */     addiu $a1, $a1, %lo(g1PGameTimeTotal)
   /* 10F6F0 80190E90 10000008 */         b .L80190EB4
   /* 10F6F4 80190E94 AC60001C */        sw $zero, 0x1c($v1) # gSceneData + 28
   .L80190E98:
@@ -4354,7 +4354,7 @@ glabel func_ovl65_80190E58
   /* 10F710 80190EB0 00000000 */       nop 
   .L80190EB4:
   /* 10F714 80190EB4 906B0013 */       lbu $t3, 0x13($v1) # gSceneData + 19
-  /* 10F718 80190EB8 8CA80000 */        lw $t0, ($a1) # gmMatchInfo_1PGameTimeTotal + 0
+  /* 10F718 80190EB8 8CA80000 */        lw $t0, ($a1) # g1PGameTimeTotal + 0
   /* 10F71C 80190EBC 8C890018 */        lw $t1, 0x18($a0)
   /* 10F720 80190EC0 000B60C0 */       sll $t4, $t3, 3
   /* 10F724 80190EC4 018B6023 */      subu $t4, $t4, $t3
@@ -4364,7 +4364,7 @@ glabel func_ovl65_80190E58
   /* 10F734 80190ED4 000C6080 */       sll $t4, $t4, 2
   /* 10F738 80190ED8 01095021 */      addu $t2, $t0, $t1
   /* 10F73C 80190EDC 24C60D68 */     addiu $a2, $a2, %lo(D_ovl2_80130D68)
-  /* 10F740 80190EE0 ACAA0000 */        sw $t2, ($a1) # gmMatchInfo_1PGameTimeTotal + 0
+  /* 10F740 80190EE0 ACAA0000 */        sw $t2, ($a1) # g1PGameTimeTotal + 0
   /* 10F744 80190EE4 008C1021 */      addu $v0, $a0, $t4
   /* 10F748 80190EE8 8C4E0030 */        lw $t6, 0x30($v0)
   /* 10F74C 80190EEC 8CCD0000 */        lw $t5, ($a2) # D_ovl2_80130D68 + 0

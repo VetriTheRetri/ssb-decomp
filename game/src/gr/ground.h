@@ -111,7 +111,7 @@ typedef struct grMapEnvironment
 static grMapObject D_ovl2_80131180[2];
 static grMapEnvironment D_ovl2_80131190[1];
 static s32 D_ovl2_80131198;
-static s32 D_ovl2_8013119C;
+static s32 gMapEnvironmentCount;
 
 /*
 

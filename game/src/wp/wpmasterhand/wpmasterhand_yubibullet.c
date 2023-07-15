@@ -129,9 +129,9 @@ bool32 wpMasterHand_YubiBullet_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x8016DDB4
-GObj* wpMasterHand_YubiBulletSingle_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpMasterHand_YubiBulletSingle_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpMasterHand_YubiBulletSingle_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpMasterHand_YubiBulletSingle_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
 
     if (weapon_gobj == NULL)
@@ -149,9 +149,9 @@ GObj* wpMasterHand_YubiBulletSingle_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
 }
 
 // 0x8016DE28
-GObj* wpMasterHand_YubiBulletTriple_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpMasterHand_YubiBulletTriple_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpMasterHand_YubiBulletTriple_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpMasterHand_YubiBulletTriple_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
 
     if (weapon_gobj == NULL)

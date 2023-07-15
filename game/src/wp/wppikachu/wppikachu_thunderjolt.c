@@ -66,7 +66,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcMap(GObj *weapon_gobj)
 
     if (func_ovl3_80167B58(weapon_gobj) != FALSE)
     {
-        wpPikachu_ThunderJoltGround_CreateWeapon(weapon_gobj, &DObjGetStruct(weapon_gobj)->translate, 0);
+        wpPikachu_ThunderJoltGround_MakeWeapon(weapon_gobj, &DObjGetStruct(weapon_gobj)->translate, 0);
 
         return TRUE;
     }
@@ -86,7 +86,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcMap(GObj *weapon_gobj)
         {
             DObjGetStruct(weapon_gobj)->translate.y = pos.y;
         }
-        wpPikachu_ThunderJoltGround_CreateWeapon(weapon_gobj, &DObjGetStruct(weapon_gobj)->translate, 3);
+        wpPikachu_ThunderJoltGround_MakeWeapon(weapon_gobj, &DObjGetStruct(weapon_gobj)->translate, 3);
 
         return TRUE;
     }
@@ -105,7 +105,7 @@ bool32 wpPikachu_ThunderJoltAir_ProcMap(GObj *weapon_gobj)
         {
             DObjGetStruct(weapon_gobj)->translate.y = pos.y;
         }
-        wpPikachu_ThunderJoltGround_CreateWeapon(weapon_gobj, &DObjGetStruct(weapon_gobj)->translate, 1);
+        wpPikachu_ThunderJoltGround_MakeWeapon(weapon_gobj, &DObjGetStruct(weapon_gobj)->translate, 1);
 
         return TRUE;
     }
@@ -146,9 +146,9 @@ bool32 wpPikachu_ThunderJoltAir_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x801695E4
-GObj* wpPikachu_ThunderJoltAir_CreateWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
+GObj* wpPikachu_ThunderJoltAir_MakeWeapon(GObj *fighter_gobj, Vec3f *pos, Vec3f *vel)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpPikachu_ThunderJoltAir_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpPikachu_ThunderJoltAir_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
 
     if (weapon_gobj == NULL)
@@ -653,12 +653,12 @@ bool32 wpPikachu_ThunderJoltGround_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x8016A42C
-GObj* wpPikachu_ThunderJoltGround_CreateWeapon(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
+GObj* wpPikachu_ThunderJoltGround_MakeWeapon(GObj *prev_gobj, Vec3f *pos, s32 coll_type)
 {
     s32 unused[2];
     wpStruct *prev_wp = prev_gobj->user_data;
     wpStruct *new_wp;
-    GObj *new_gobj = wpManager_CreateWeapon(prev_gobj, &wpPikachu_ThunderJoltGround_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_WEAPON));
+    GObj *new_gobj = wpManager_MakeWeapon(prev_gobj, &wpPikachu_ThunderJoltGround_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_WEAPON));
 
     if (new_gobj == NULL)
     {

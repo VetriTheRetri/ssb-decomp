@@ -1106,11 +1106,11 @@ void ftManager_ProcInterruptMain(GObj *fighter_gobj)
     u16 button_press_com;
     f32 this_jostle;
 
-    if (!this_fp->is_disable_control)
+    if (!(this_fp->is_disable_control))
     {
         this_fp->status_info.status_time_spent++;
     }
-    if (!this_fp->is_disable_control)
+    if (!(this_fp->is_disable_control))
     {
         this_fp->input.pl.stick_prev.x = this_fp->input.pl.stick_range.x;
         this_fp->input.pl.stick_prev.y = this_fp->input.pl.stick_range.y;
@@ -1218,7 +1218,6 @@ void ftManager_ProcInterruptMain(GObj *fighter_gobj)
                 this_fp->tap_stick_x++, this_fp->hold_stick_x++;
             }
             else this_fp->tap_stick_x = this_fp->hold_stick_x = 1;
-
         }
         else this_fp->tap_stick_x = this_fp->hold_stick_x = U8_MAX - 1;
 
@@ -1366,7 +1365,7 @@ void ftManager_ProcInterruptMain(GObj *fighter_gobj)
 
         if (this_fp->shuffle_frame_index == this_fp->shuffle_index_max)
         {
-            this_fp->shuffle_frame_index = 0U;
+            this_fp->shuffle_frame_index = 0;
         }
     }
     if (this_fp->proc_gfx != NULL)
@@ -1375,9 +1374,9 @@ void ftManager_ProcInterruptMain(GObj *fighter_gobj)
     }
     if (this_fp->hitlag_timer == 0)
     {
-        if ((this_fp->unk_0x174 > 1) && !(this_fp->is_disable_control))
+        if ((this_fp->playertag_wait > 1) && !(this_fp->is_disable_control))
         {
-            this_fp->unk_0x174--;
+            this_fp->playertag_wait--;
         }
         if (this_fp->proc_update != NULL)
         {
@@ -1460,7 +1459,7 @@ void func_ovl2_800E1CF0(void)
 {
     s32 i;
 
-    D_ovl2_80131198 = D_ovl2_8013119C = 0;
+    D_ovl2_80131198 = gMapEnvironmentCount = 0;
 
     for (i = 0; i < ARRAY_COUNT(D_ovl2_80131180); i++)
     {
@@ -1516,7 +1515,7 @@ bool32 func_ovl2_800E1DE8(GObj *egobj, bool32(*proc_update)(GObj*, GObj*, Ground
         {
             D_ovl2_80131190[i].egobj = egobj;
             D_ovl2_80131190[i].proc_update = proc_update;
-            D_ovl2_8013119C++;
+            gMapEnvironmentCount++;
 
             return TRUE;
         }
@@ -1533,7 +1532,7 @@ void func_ovl2_800E1E3C(GObj *egobj)
         if (D_ovl2_80131190[i].egobj == egobj)
         {
             D_ovl2_80131190[i].egobj = NULL;
-            D_ovl2_8013119C--;
+            gMapEnvironmentCount--;
 
             return;
         }
@@ -2281,7 +2280,7 @@ void func_ovl2_800E35BC(itStruct *ip, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
     }
     if ((damage - 10) < ft_hit->damage)
     {
-        itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
+        itManager_SetHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
 
         if (ip->hit_attack_damage < damage)
         {
@@ -2311,7 +2310,7 @@ void func_ovl2_800E35BC(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
     }
     if ((damage - 10) < ft_hit->damage)
     {
-        itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
+        itManager_SetHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Hit, ft_hit->group_id);
 
         if (ap->hit_attack_damage < damage)
         {
@@ -2331,7 +2330,7 @@ void func_ovl2_800E36F8(itStruct *ap, itHitbox *it_hit, s32 hitbox_id, ftStruct 
     s32 damage = itMain_GetDamageOutput(ap);
     Vec3f sp30;
 
-    itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, (it_hit->can_rehit_shield) ? gmHitCollision_Type_ShieldRehit : gmHitCollision_Type_Shield, 0);
+    itManager_SetHitVictimInteractStats(it_hit, fighter_gobj, (it_hit->can_rehit_shield) ? gmHitCollision_Type_ShieldRehit : gmHitCollision_Type_Shield, 0);
 
     if (ap->hit_shield_damage < damage)
     {
@@ -2364,7 +2363,7 @@ void func_ovl2_800E3860(itStruct *ap, itHitbox *it_hit, ftStruct *fp, GObj *figh
 {
     s32 damage = itMain_GetDamageOutput(ap);
 
-    itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Reflect, 0);
+    itManager_SetHitVictimInteractStats(it_hit, fighter_gobj, gmHitCollision_Type_Reflect, 0);
 
     if (fp->special_hit->damage_resist < damage)
     {
@@ -2402,7 +2401,7 @@ void func_ovl2_800E39B0(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
     s32 damage_again;
     s32 lr_attack;
 
-    itManager_UpdateHitVictimInteractStats(it_hit, fighter_gobj, (it_hit->can_rehit_fighter) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
+    itManager_SetHitVictimInteractStats(it_hit, fighter_gobj, (it_hit->can_rehit_fighter) ? gmHitCollision_Type_HurtRehit : gmHitCollision_Type_Hurt, 0);
 
     if (ap->type == It_Type_Touch)
     {
@@ -3520,7 +3519,7 @@ void ftManager_SearchGroundHit(GObj *fighter_gobj)
     }
     if (ftCommon_GetBestHitStatusAll(fighter_gobj) == gmHitCollision_HitStatus_Normal)
     {
-        for (i = 0; i < D_ovl2_8013119C; i++, me++)
+        for (i = 0; i < gMapEnvironmentCount; i++, me++)
         {
             if ((me->egobj != NULL) && (me->proc_update(me->egobj, fighter_gobj, &gr_hit, &sp44) != FALSE))
             {
@@ -3572,46 +3571,41 @@ void ftManager_SearchFighterCatch(GObj *this_gobj)
         {
             ft_hit = &this_fp->fighter_hit[i];
 
-            if (ft_hit->update_state != gmHitCollision_UpdateState_Disable)
+            if (ft_hit->update_state == gmHitCollision_UpdateState_Disable) continue;
+            
+            if ((other_fp->ground_or_air == GA_Air) && !(ft_hit->is_hit_air) || (other_fp->ground_or_air == GA_Ground) && !(ft_hit->is_hit_ground)) continue;
+
+            catch_mask.is_interact_hurt = catch_mask.is_interact_shield = FALSE;
+
+            catch_mask.interact_mask = GMHITCOLLISION_MASK_ALL;
+
+            for (m = 0; m < ARRAY_COUNT(ft_hit->hit_targets); m++)
             {
-                if ((other_fp->ground_or_air == GA_Air) && !(ft_hit->is_hit_air)) continue; // Why is it breaking the previously established standard for this type of check now???
-
-                if ((other_fp->ground_or_air == GA_Ground) && !(ft_hit->is_hit_ground)) continue; // ???
-
-                catch_mask.is_interact_hurt = catch_mask.is_interact_shield = FALSE;
-                
-                catch_mask.interact_mask = GMHITCOLLISION_MASK_ALL;
-
-                for (m = 0; m < ARRAY_COUNT(ft_hit->hit_targets); m++)
+                if (other_gobj == ft_hit->hit_targets[m].victim_gobj)
                 {
-                    if (other_gobj == ft_hit->hit_targets[m].victim_gobj)
-                    {
-                        catch_mask = ft_hit->hit_targets[m].victim_flags;
+                    catch_mask = ft_hit->hit_targets[m].victim_flags;
 
-                        break;
-                    }
-                }
-                if (!(catch_mask.is_interact_hurt) && !(catch_mask.is_interact_shield) && (catch_mask.interact_mask == GMHITCOLLISION_MASK_ALL))
-                {
-                    for (j = 0; j < ARRAY_COUNT(other_fp->fighter_hurt); j++)
-                    {
-                        ft_hurt = &other_fp->fighter_hurt[j];
-
-                        if (ft_hurt->hitstatus == gmHitCollision_HitStatus_None) break;
-
-                        else if ((ft_hurt->hitstatus != gmHitCollision_HitStatus_Intangible) && (ft_hurt->hitstatus != gmHitCollision_HitStatus_Invincible))
-                        {
-                            if ((ft_hurt->is_grabbable != FALSE) && (func_ovl2_800EFBA4(ft_hit, ft_hurt) != FALSE))
-                            {
-                                func_ovl2_800E2B88(this_fp, ft_hit, other_fp, this_gobj, other_gobj);
-
-                                goto next_gobj;
-                            }
-                        }
-                    }
-                    continue; // Believe it or not, necessary (for now)
+                    break;
                 }
             }
+            if ((catch_mask.is_interact_hurt) || (catch_mask.is_interact_shield) || (catch_mask.interact_mask != GMHITCOLLISION_MASK_ALL)) continue;
+
+            for (j = 0; j < ARRAY_COUNT(other_fp->fighter_hurt); j++)
+            {
+                ft_hurt = &other_fp->fighter_hurt[j];
+
+                if (ft_hurt->hitstatus == gmHitCollision_HitStatus_None) break;
+
+                if ((ft_hurt->hitstatus != gmHitCollision_HitStatus_Intangible) && (ft_hurt->hitstatus != gmHitCollision_HitStatus_Invincible))
+                {
+                    if ((ft_hurt->is_grabbable != FALSE) && (func_ovl2_800EFBA4(ft_hit, ft_hurt) != FALSE))
+                    {
+                        func_ovl2_800E2B88(this_fp, ft_hit, other_fp, this_gobj, other_gobj);
+
+                        goto next_gobj;
+                    }
+                }
+            }        
         }
     next_gobj:
         other_gobj = other_gobj->group_gobj_next;
@@ -4373,11 +4367,10 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
     }
     fp->fighter_cam_zoom_range = 1.0F;
 
-    if (!(flags & FTSTATUPDATE_UNK3_PRESERVE))
+    if (!(flags & FTSTATUPDATE_PLAYERTAG_PRESERVE))
     {
-        fp->unk_0x174 = 0;
+        fp->playertag_wait = 0;
     }
-
     fp->x192_flag_b0 = FALSE;
     fp->is_catchstatus = FALSE;
     fp->x192_flag_b1 = FALSE;

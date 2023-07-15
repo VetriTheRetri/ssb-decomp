@@ -6,8 +6,8 @@
 #include <ft/chara/ftkirby/ftkirby.h>
 #include <ft/chara/ftness/ftness.h>
 
-extern s32 gmMusicIndexCurrent; // Static (.bss)
-extern s32 gmMusicIndexDefault; // Static (.bss)
+extern s32 gMusicIndexCurrent; // Static (.bss)
+extern s32 gMusicIndexDefault; // Static (.bss)
 
 // 0x800E7AD0 - Get duration of special music in seconds
 s32 ftSpecialItem_BGMGetDuration(s32 bgm_id)
@@ -28,25 +28,25 @@ s32 ftSpecialItem_BGMGetDuration(s32 bgm_id)
 // 0x800E7AFC
 void ftSpecialItem_BGMSetPlay(s32 bgm_id)
 {
-    if (ftSpecialItem_BGMGetDuration(bgm_id) >= ftSpecialItem_BGMGetDuration(gmMusicIndexCurrent))
+    if (ftSpecialItem_BGMGetDuration(bgm_id) >= ftSpecialItem_BGMGetDuration(gMusicIndexCurrent))
     {
         func_80020AB4(0, bgm_id);
 
-        gmMusicIndexCurrent = bgm_id;
+        gMusicIndexCurrent = bgm_id;
     }
 }
 
 // 0x800E7B54
 void ftSpecialItem_BGMCheckFighters(void)
 {
-    s32 bgm_play = gmMusicIndexDefault;
+    s32 bgm_play = gMusicIndexDefault;
     s32 duration = ftSpecialItem_BGMGetDuration(bgm_play);
     GObj *fighter_gobj = gOMObjCommonLinks[gOMObjLinkIndexFighter];
 
     while (fighter_gobj != NULL)
     {
         ftStruct *fp = ftGetStruct(fighter_gobj);
-        s32 bgm_id = gmMusicIndexDefault;
+        s32 bgm_id = gMusicIndexDefault;
         s32 duration_new;
 
         if ((fp->item_hold != NULL) && (itGetStruct(fp->item_hold)->it_kind == It_Kind_Hammer))
@@ -66,10 +66,10 @@ void ftSpecialItem_BGMCheckFighters(void)
         }
         fighter_gobj = fighter_gobj->group_gobj_next;
     }
-    if (bgm_play != gmMusicIndexCurrent)
+    if (bgm_play != gMusicIndexCurrent)
     {
         func_80020AB4(0, bgm_play);
-        gmMusicIndexCurrent = bgm_play;
+        gMusicIndexCurrent = bgm_play;
     }
 }
 
@@ -140,11 +140,11 @@ void func_ovl2_800E7F68(GObj *fighter_gobj)
     fp->is_disable_control = FALSE;
 }
 
-void func_ovl2_800E7F7C(GObj *fighter_gobj, s32 arg1)
+void func_ovl2_800E7F7C(GObj *fighter_gobj, s32 playertag_wait)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    fp->unk_0x174 = arg1;
+    fp->playertag_wait = playertag_wait;
 }
 
 u8 ftCommon_ShuffleFrameIndexMax[2] = { 4, 3 };
@@ -1621,16 +1621,16 @@ s32 gmCommon_DamageApplyStale(s32 player, s32 damage, s32 attack_id, u16 flags)
     return damage;
 }
 
-extern u16 Entity_Global_MotionCount; // Updated each time a new move is used? Includes non-attacks.
+extern u16 gEntityMotionCount; // Updated each time a new move is used? Includes non-attacks.
 
 // 0x800EA5BC
 u16 gmCommon_GetMotionCountInc(void)
 {
-    u16 motion_count = Entity_Global_MotionCount++;
+    u16 motion_count = gEntityMotionCount++;
 
-    if (Entity_Global_MotionCount == 0)
+    if (gEntityMotionCount == 0)
     {
-        Entity_Global_MotionCount = 1;
+        gEntityMotionCount = 1;
     }
     return motion_count;
 }
@@ -1667,16 +1667,16 @@ void ftAttackAddStaleQueue(s32 attack_player, s32 defend_player, s32 attack_id, 
     }
 }
 
-extern u16 Entity_Global_StatUpdateCount; // Updated each time an entity's status is changed? e.g. PK Fire pillar increments this twice, desyncing it from Entity_Global_MotionCount
+extern u16 gEntityStatUpdateCount; // Updated each time an entity's status is changed? e.g. PK Fire pillar increments this twice, desyncing it from gEntityMotionCount
 
 // 0x800EA74C
 u16 gmCommon_GetStatUpdateCountInc(void)
 {
-    u16 update_count = Entity_Global_StatUpdateCount++; 
+    u16 update_count = gEntityStatUpdateCount++; 
 
-    if (Entity_Global_StatUpdateCount == 0)
+    if (gEntityStatUpdateCount == 0)
     {
-        Entity_Global_StatUpdateCount = 1;
+        gEntityStatUpdateCount = 1;
     }
     return update_count;
 }

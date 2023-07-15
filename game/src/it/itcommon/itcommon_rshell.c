@@ -656,9 +656,9 @@ void itRShell_ASpin_SetStatus(GObj *item_gobj)
 extern itCreateDesc itCommon_RShell_ItemDesc;
 
 // 0x8017B1D8
-GObj* itCommon_RShell_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_RShell_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_RShell_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_RShell_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {

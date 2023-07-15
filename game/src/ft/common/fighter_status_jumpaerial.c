@@ -122,7 +122,7 @@ void ftCommon_JumpAerial_SetStatus(GObj *fighter_gobj, s32 input_source)
 
     // It would seem that the stick range jump mechanic was initially considered for double jumps as well...
 
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_UNK3_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_PLAYERTAG_PRESERVE);
 
     if ((fp->ft_kind == Ft_Kind_Yoshi) || (fp->ft_kind == Ft_Kind_PolyYoshi))
     {
@@ -189,7 +189,7 @@ void ftCommon_JumpAerialMulti_SetStatus(GObj *fighter_gobj, s32 input_source)
         status_id = fp->jumps_used + ftStatus_Purin_JumpAerialF1 - 1;
         break;
     }
-    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_UNK3_PRESERVE);
+    ftStatus_Update(fighter_gobj, status_id, 0.0F, 1.0F, FTSTATUPDATE_PLAYERTAG_PRESERVE);
 
     switch (input_source)
     {

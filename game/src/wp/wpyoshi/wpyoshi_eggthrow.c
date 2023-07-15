@@ -245,10 +245,10 @@ void wpYoshi_EggThrow_ProcRender(GObj *weapon_gobj)
 }
 
 // 0x8016C498
-GObj* wpYoshi_EggThrow_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpYoshi_EggThrow_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpYoshi_EggThrow_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpYoshi_EggThrow_WeaponDesc, pos, WEAPON_MASK_SPAWN_FIGHTER);
     wpStruct *wp;
 
     if (weapon_gobj == NULL)

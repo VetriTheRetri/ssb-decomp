@@ -114,10 +114,10 @@ bool32 wpKirby_Cutter_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x8016BE8C
-GObj* wpKirby_Cutter_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpKirby_Cutter_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpKirby_Cutter_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpKirby_Cutter_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
 
     if (weapon_gobj == NULL)

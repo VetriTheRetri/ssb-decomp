@@ -96,7 +96,7 @@ void itRender_DisplayHitCollisions(GObj *item_gobj)
     }
     it_hurt = &ip->item_hurt;
 
-    if (ip->item_hurt.hitstatus != gmHitCollision_HitStatus_None)
+    if (it_hurt->hitstatus != gmHitCollision_HitStatus_None)
     {
         translate = &DObjGetStruct(item_gobj)->translate;
 

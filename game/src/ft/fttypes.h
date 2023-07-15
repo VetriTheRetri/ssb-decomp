@@ -28,7 +28,7 @@
 #define FTSTATUPDATE_MODELPART_PRESERVE     (1 << ftStatusUpdate_ModelPart_Preserve)    // 0x20
 #define FTSTATUPDATE_SLOPECONTOUR_PRESERVE  (1 << ftStatusUpdate_SlopeContour_Preserve) // 0x40
 #define FTSTATUPDATE_TEXTUREPART_PRESERVE   (1 << ftStatusUpdate_TexturePart_Preserve)  // 0x80
-#define FTSTATUPDATE_UNK3_PRESERVE          (1 << ftStatusUpdate_Unk3_Preserve)         // 0x100
+#define FTSTATUPDATE_PLAYERTAG_PRESERVE     (1 << ftStatusUpdate_PlayerTag_Preserve)    // 0x100
 #define FTSTATUPDATE_THROWPOINTER_PRESERVE  (1 << ftStatusUpdate_ThrowGObj_Preserve)    // 0x200
 #define FTSTATUPDATE_SHUFFLETIME_PRESERVE   (1 << ftStatusUpdate_ShuffleTime_Preserve)  // 0x400
 #define FTSTATUPDATE_LOOPSFX_PRESERVE       (1 << ftStatusUpdate_LoopSFX_Preserve)      // 0x800
@@ -36,12 +36,12 @@
 #define FTSTATUPDATE_AFTERIMAGE_PRESERVE    (1 << ftStatusUpdate_AfterImage_Preserve)   // 0x2000
 #define FTSTATUPDATE_UNK5_PRESERVE          (1 << ftStatusUpdate_Unk5_Preserve)         // 0x4000
 
-#define FTCATCHKIND_MASK_SPECIALNYOSHI      (1 << ftCatch_Kind_SpecialNYoshi)     // 0x1
-#define FTCATCHKIND_MASK_SPECIALNKIRBY      (1 << ftCatch_Kind_SpecialNKirby)     // 0x2
-#define FTCATCHKIND_MASK_CLIFFCOMMON        (1 << ftCatch_Kind_CliffCommon)       // 0x4
-#define FTCATCHKIND_MASK_UNUSEDCOMMON       (1 << ftCatch_Kind_UnusedCommon)      // 0x8
-#define FTCATCHKIND_MASK_CATCHCOMMON        (1 << ftCatch_Kind_CatchCommon)       // 0x10
-#define FTCATCHKIND_MASK_SPECIALHICAPTAIN   (1 << ftCatch_Kind_SpecialHiCaptain)  // 0x20
+#define FTCATCHKIND_MASK_SPECIALNYOSHI      (1 << ftCatch_Kind_SpecialNYoshi)           // 0x1
+#define FTCATCHKIND_MASK_SPECIALNKIRBY      (1 << ftCatch_Kind_SpecialNKirby)           // 0x2
+#define FTCATCHKIND_MASK_CLIFFCOMMON        (1 << ftCatch_Kind_CliffCommon)             // 0x4
+#define FTCATCHKIND_MASK_UNUSEDCOMMON       (1 << ftCatch_Kind_UnusedCommon)            // 0x8
+#define FTCATCHKIND_MASK_CATCHCOMMON        (1 << ftCatch_Kind_CatchCommon)             // 0x10
+#define FTCATCHKIND_MASK_SPECIALHICAPTAIN   (1 << ftCatch_Kind_SpecialHiCaptain)        // 0x20
 
 #define FTCATCHKIND_MASK_NONE (0)
 #define FTCATCHKIND_MASK_ALL (FTCATCHKIND_MASK_SPECIALHICAPTAIN | FTCATCHKIND_MASK_CATCHCOMMON | FTCATCHKIND_MASK_UNUSEDCOMMON | FTCATCHKIND_MASK_CLIFFCOMMON | FTCATCHKIND_MASK_SPECIALNKIRBY | FTCATCHKIND_MASK_SPECIALNYOSHI)
@@ -57,7 +57,7 @@ enum ftStatusUpdateFlags
     ftStatusUpdate_ModelPart_Preserve,      // Preserve modified model part display state between action states
     ftStatusUpdate_SlopeContour_Preserve,   // Preserve inverse kinematics mode between action states
     ftStatusUpdate_TexturePart_Preserve,    // Preserve modified texture part display state between action states
-    ftStatusUpdate_Unk3_Preserve,           // Preserve ???
+    ftStatusUpdate_PlayerTag_Preserve,      // Preserve player indicator wait timer
     ftStatusUpdate_ThrowGObj_Preserve,      // Preserve thrower's GObj pointer between action states; used to tell the game not to check thrower's collateral hitbox on thrown victim?  
     ftStatusUpdate_ShuffleTime_Preserve,    // Preserve model vibration frames from hitlag between action states
     ftStatusUpdate_LoopSFX_Preserve,        // Preserve looping SFX
@@ -997,19 +997,20 @@ struct UnkFighterDObjData
     s32 unk_ftdobj_0xC;
 };
 
+// Main fighter struct
 struct ftStruct
 {
-    void *fp_alloc_next;
+    ftStruct *fp_alloc_next;
     GObj *fighter_gobj;
     ftKind ft_kind;
     u8 team;
     u8 player;
-    u8 lod_current;  // Hi-Poly = 1, Low-Poly = 2
-    u8 lod_match; // Hi-Poly = 1, Low-Poly = 2
+    u8 lod_current; // Hi-Poly = 1, Low-Poly = 2
+    u8 lod_match;   // Hi-Poly = 1, Low-Poly = 2
     u8 costume;
-    u8 shade; // i.e. When multiple instances of the same character costume are in-game
-    u8 handicap; // Original note: offset to attack hitbox type in 5x (???)
-    u8 cp_level; // CPU level
+    u8 shade;       // i.e. When multiple instances of the same character costume are in-game
+    u8 handicap;
+    u8 cp_level;
     s8 stock_count;
     u8 unk_0x15;
     u8 unk_0x16;
@@ -1059,7 +1060,7 @@ struct ftStruct
     s32 twister_wait;       // Wait this many frames before fighter can be picked up by the Hyrule Tornado again
     s32 tarucann_wait;      // Wait this many frames before fighter can enter Barrel Cannon again
     s32 damagefloor_wait;   // Wait this many frames before fighter can be hurt by damaging floors again (e.g. Mario's Board the Platforms stage)
-    s32 unk_0x174;
+    s32 playertag_wait;     // Wait this many frames before fighter's player indicator is shown again; tag is shown when this reaches 1 or is overridden by position on stage
     s32 unk_0x178;
 
     union command_vars

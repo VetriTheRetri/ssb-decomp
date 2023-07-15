@@ -42,7 +42,7 @@ void ftKirby_CopyMario_SpecialN_SpawnFireball(GObj *fighter_gobj)
             fireball_item_id = 1;
             break;
         }
-        wpMario_Fireball_CreateWeapon(fighter_gobj, &pos, fireball_item_id);
+        wpMario_Fireball_MakeWeapon(fighter_gobj, &pos, fireball_item_id);
     }
 }
 

@@ -221,9 +221,9 @@ void itLGun_FDrop_SetStatus(GObj *item_gobj)
     DObjGetStruct(item_gobj)->next->rotate.y = (lr == LEFT) ? F_DEG_TO_RAD(-90.0F) : F_DEG_TO_RAD(90.0F); // -HALF_PI32, HALF_PI32
 }
 
-GObj* itCommon_LGun_CreateItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
+GObj* itCommon_LGun_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    GObj *item_gobj = itManager_CreateItem(spawn_gobj, &itCommon_LGun_ItemDesc, pos, vel, flags);
+    GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_LGun_ItemDesc, pos, vel, flags);
 
     if (item_gobj != NULL)
     {
@@ -309,9 +309,9 @@ bool32 wpLGun_Ammo_ProcReflector(GObj *weapon_gobj)
 }
 
 // 0x80175A60
-GObj* wpLGun_Ammo_CreateWeapon(GObj *fighter_gobj, Vec3f *pos)
+GObj* wpLGun_Ammo_MakeWeapon(GObj *fighter_gobj, Vec3f *pos)
 {
-    GObj *weapon_gobj = wpManager_CreateWeapon(fighter_gobj, &wpLGun_Ammo_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
+    GObj *weapon_gobj = wpManager_MakeWeapon(fighter_gobj, &wpLGun_Ammo_WeaponDesc, pos, (WEAPON_FLAG_PROJECT | WEAPON_MASK_SPAWN_FIGHTER));
     wpStruct *wp;
 
     if (weapon_gobj == NULL)
@@ -332,7 +332,7 @@ void ftCommon_LGunShoot_CreateAmmo(GObj *fighter_gobj, Vec3f *pos)
 {
     itStruct *ip = itGetStruct(ftGetStruct(fighter_gobj)->item_hold);
 
-    wpLGun_Ammo_CreateWeapon(fighter_gobj, pos);
+    wpLGun_Ammo_MakeWeapon(fighter_gobj, pos);
 
     ip->it_multi--;
 }

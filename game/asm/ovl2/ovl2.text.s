@@ -119,8 +119,8 @@ glabel func_ovl2_800D6590
   /* 051DE8 800D65E8 3C04800A */       lui $a0, %hi(gSceneData)
   /* 051DEC 800D65EC 1520000A */      bnez $t1, .L800D6618
   /* 051DF0 800D65F0 24844AD0 */     addiu $a0, $a0, %lo(gSceneData)
-  /* 051DF4 800D65F4 3C0A8013 */       lui $t2, %hi(gmMatchInfo_1PGameTimeTotal)
-  /* 051DF8 800D65F8 8D4A0D64 */        lw $t2, %lo(gmMatchInfo_1PGameTimeTotal)($t2)
+  /* 051DF4 800D65F4 3C0A8013 */       lui $t2, %hi(g1PGameTimeTotal)
+  /* 051DF8 800D65F8 8D4A0D64 */        lw $t2, %lo(g1PGameTimeTotal)($t2)
   /* 051DFC 800D65FC 3401A8C0 */       ori $at, $zero, 0xa8c0
   /* 051E00 800D6600 240B0011 */     addiu $t3, $zero, 0x11
   /* 051E04 800D6604 0141082B */      sltu $at, $t2, $at
@@ -308,7 +308,7 @@ glabel func_ovl2_800D67DC
   /* 052074 800D6874 00550019 */     multu $v0, $s5
   /* 052078 800D6878 92580015 */       lbu $t8, 0x15($s2) # gSceneData + 21
   /* 05207C 800D687C 3C19800A */       lui $t9, %hi((gSaveData + 0x45B))
-  /* 052080 800D6880 3C018013 */       lui $at, %hi(gmMatchInfo_1PGameTimeTotal)
+  /* 052080 800D6880 3C018013 */       lui $at, %hi(g1PGameTimeTotal)
   /* 052084 800D6884 3C168013 */       lui $s6, %hi(D_ovl2_80130D70)
   /* 052088 800D6888 3C178013 */       lui $s7, %hi(D_ovl2_80130D74)
   /* 05208C 800D688C 26F70D74 */     addiu $s7, $s7, %lo(D_ovl2_80130D74)
@@ -331,7 +331,7 @@ glabel func_ovl2_800D67DC
   /* 0520D0 800D68D0 AE400024 */        sw $zero, 0x24($s2) # gSceneData + 36
   /* 0520D4 800D68D4 AE400028 */        sw $zero, 0x28($s2) # gSceneData + 40
   /* 0520D8 800D68D8 A099002B */        sb $t9, 0x2b($a0)
-  /* 0520DC 800D68DC AC200D64 */        sw $zero, %lo(gmMatchInfo_1PGameTimeTotal)($at)
+  /* 0520DC 800D68DC AC200D64 */        sw $zero, %lo(g1PGameTimeTotal)($at)
   /* 0520E0 800D68E0 3C018013 */       lui $at, %hi(D_ovl2_80130D68)
   /* 0520E4 800D68E4 AC200D68 */        sw $zero, %lo(D_ovl2_80130D68)($at)
   /* 0520E8 800D68E8 3C018013 */       lui $at, %hi(D_ovl2_80130D6C)
@@ -1119,14 +1119,14 @@ glabel func_ovl2_800D7194
   /* 052C40 800D7440 006D7021 */      addu $t6, $v1, $t5
   /* 052C44 800D7444 24020001 */     addiu $v0, $zero, 1
   /* 052C48 800D7448 ADC00008 */        sw $zero, 8($t6)
-  /* 052C4C 800D744C 3C018013 */       lui $at, %hi(gmMatchInfo_PlayerCount)
-  /* 052C50 800D7450 AC220D90 */        sw $v0, %lo(gmMatchInfo_PlayerCount)($at)
-  /* 052C54 800D7454 3C018013 */       lui $at, %hi(Entity_Global_MotionCount)
-  /* 052C58 800D7458 A4220D94 */        sh $v0, %lo(Entity_Global_MotionCount)($at)
+  /* 052C4C 800D744C 3C018013 */       lui $at, %hi(gBattlePlayerCount)
+  /* 052C50 800D7450 AC220D90 */        sw $v0, %lo(gBattlePlayerCount)($at)
+  /* 052C54 800D7454 3C018013 */       lui $at, %hi(gEntityMotionCount)
+  /* 052C58 800D7458 A4220D94 */        sh $v0, %lo(gEntityMotionCount)($at)
   /* 052C5C 800D745C 3C040000 */       lui $a0, %hi(D_NF_000000A3)
-  /* 052C60 800D7460 3C018013 */       lui $at, %hi(Entity_Global_StatUpdateCount)
+  /* 052C60 800D7460 3C018013 */       lui $at, %hi(gEntityStatUpdateCount)
   /* 052C64 800D7464 248400A3 */     addiu $a0, $a0, %lo(D_NF_000000A3)
-  /* 052C68 800D7468 A4220D96 */        sh $v0, %lo(Entity_Global_StatUpdateCount)($at)
+  /* 052C68 800D7468 A4220D96 */        sh $v0, %lo(gEntityStatUpdateCount)($at)
   /* 052C6C 800D746C AFA40020 */        sw $a0, 0x20($sp)
   /* 052C70 800D7470 AFAA0038 */        sw $t2, 0x38($sp)
   /* 052C74 800D7474 0C0336F4 */       jal rldm_bytes_needed_to_load
@@ -1604,11 +1604,11 @@ glabel func_ovl2_800D79F0
   /* 0532FC 800D7AFC 332FFF9F */      andi $t7, $t9, 0xff9f
   /* 053300 800D7B00 330CFFEF */      andi $t4, $t8, 0xffef
   /* 053304 800D7B04 2409FFFF */     addiu $t1, $zero, -1
-  /* 053308 800D7B08 3C028013 */       lui $v0, %hi(gmMatchInfo_PlayerCount)
+  /* 053308 800D7B08 3C028013 */       lui $v0, %hi(gBattlePlayerCount)
   /* 05330C 800D7B0C 31F800F7 */      andi $t8, $t7, 0xf7
   /* 053310 800D7B10 A06F018D */        sb $t7, 0x18d($v1)
   /* 053314 800D7B14 316DFFFC */      andi $t5, $t3, 0xfffc
-  /* 053318 800D7B18 24420D90 */     addiu $v0, $v0, %lo(gmMatchInfo_PlayerCount)
+  /* 053318 800D7B18 24420D90 */     addiu $v0, $v0, %lo(gBattlePlayerCount)
   /* 05331C 800D7B1C A0600148 */        sb $zero, 0x148($v1)
   /* 053320 800D7B20 AC60015C */        sw $zero, 0x15c($v1)
   /* 053324 800D7B24 AC600160 */        sw $zero, 0x160($v1)
@@ -1655,14 +1655,14 @@ glabel func_ovl2_800D79F0
   /* 0533C8 800D7BC8 E46007E0 */      swc1 $f0, 0x7e0($v1)
   /* 0533CC 800D7BCC E46407A4 */      swc1 $f4, 0x7a4($v1)
   /* 0533D0 800D7BD0 E46607A8 */      swc1 $f6, 0x7a8($v1)
-  /* 0533D4 800D7BD4 8C4C0000 */        lw $t4, ($v0) # gmMatchInfo_PlayerCount + 0
+  /* 0533D4 800D7BD4 8C4C0000 */        lw $t4, ($v0) # gBattlePlayerCount + 0
   /* 0533D8 800D7BD8 24010003 */     addiu $at, $zero, 3
   /* 0533DC 800D7BDC 246500EC */     addiu $a1, $v1, 0xec
   /* 0533E0 800D7BE0 AC6C0018 */        sw $t4, 0x18($v1)
-  /* 0533E4 800D7BE4 8C4B0000 */        lw $t3, ($v0) # gmMatchInfo_PlayerCount + 0
+  /* 0533E4 800D7BE4 8C4B0000 */        lw $t3, ($v0) # gBattlePlayerCount + 0
   /* 0533E8 800D7BE8 246700F4 */     addiu $a3, $v1, 0xf4
   /* 0533EC 800D7BEC 256D0001 */     addiu $t5, $t3, 1
-  /* 0533F0 800D7BF0 AC4D0000 */        sw $t5, ($v0) # gmMatchInfo_PlayerCount + 0
+  /* 0533F0 800D7BF0 AC4D0000 */        sw $t5, ($v0) # gBattlePlayerCount + 0
   /* 0533F4 800D7BF4 9079018F */       lbu $t9, 0x18f($v1)
   /* 0533F8 800D7BF8 906F0190 */       lbu $t7, 0x190($v1)
   /* 0533FC 800D7BFC 906B0192 */       lbu $t3, 0x192($v1)
@@ -12918,9 +12918,9 @@ glabel ftManager_ProcInterruptMain
   /* 05D4EC 800E1CEC 00000000 */       nop 
 
 glabel func_ovl2_800E1CF0
-  /* 05D4F0 800E1CF0 3C048013 */       lui $a0, %hi(D_ovl2_8013119C)
-  /* 05D4F4 800E1CF4 2484119C */     addiu $a0, $a0, %lo(D_ovl2_8013119C)
-  /* 05D4F8 800E1CF8 AC800000 */        sw $zero, ($a0) # D_ovl2_8013119C + 0
+  /* 05D4F0 800E1CF0 3C048013 */       lui $a0, %hi(gMapEnvironmentCount)
+  /* 05D4F4 800E1CF4 2484119C */     addiu $a0, $a0, %lo(gMapEnvironmentCount)
+  /* 05D4F8 800E1CF8 AC800000 */        sw $zero, ($a0) # gMapEnvironmentCount + 0
   /* 05D4FC 800E1CFC 3C018013 */       lui $at, %hi(D_ovl2_80131198)
   /* 05D500 800E1D00 3C038013 */       lui $v1, %hi(D_ovl2_80131180)
   /* 05D504 800E1D04 3C028013 */       lui $v0, %hi(D_ovl2_80131190)
@@ -13001,13 +13001,13 @@ glabel func_ovl2_800E1DE8
   /* 05D5F8 800E1DF8 8C6E0000 */        lw $t6, ($v1) # D_ovl2_80131190 + 0
   .L800E1DFC:
   /* 05D5FC 800E1DFC 15C00009 */      bnez $t6, .L800E1E24
-  /* 05D600 800E1E00 3C068013 */       lui $a2, %hi(D_ovl2_8013119C)
-  /* 05D604 800E1E04 24C6119C */     addiu $a2, $a2, %lo(D_ovl2_8013119C)
-  /* 05D608 800E1E08 8CCF0000 */        lw $t7, ($a2) # D_ovl2_8013119C + 0
+  /* 05D600 800E1E00 3C068013 */       lui $a2, %hi(gMapEnvironmentCount)
+  /* 05D604 800E1E04 24C6119C */     addiu $a2, $a2, %lo(gMapEnvironmentCount)
+  /* 05D608 800E1E08 8CCF0000 */        lw $t7, ($a2) # gMapEnvironmentCount + 0
   /* 05D60C 800E1E0C AC640000 */        sw $a0, ($v1) # D_ovl2_80131190 + 0
   /* 05D610 800E1E10 AC650004 */        sw $a1, 4($v1) # D_ovl2_80131190 + 4
   /* 05D614 800E1E14 25F80001 */     addiu $t8, $t7, 1
-  /* 05D618 800E1E18 ACD80000 */        sw $t8, ($a2) # D_ovl2_8013119C + 0
+  /* 05D618 800E1E18 ACD80000 */        sw $t8, ($a2) # gMapEnvironmentCount + 0
   /* 05D61C 800E1E1C 03E00008 */        jr $ra
   /* 05D620 800E1E20 24020001 */     addiu $v0, $zero, 1
 
@@ -13028,13 +13028,13 @@ glabel func_ovl2_800E1E3C
   .L800E1E50:
   /* 05D650 800E1E50 548E0009 */      bnel $a0, $t6, .L800E1E78
   /* 05D654 800E1E54 24630008 */     addiu $v1, $v1, 8
-  /* 05D658 800E1E58 3C028013 */       lui $v0, %hi(D_ovl2_8013119C)
-  /* 05D65C 800E1E5C 2442119C */     addiu $v0, $v0, %lo(D_ovl2_8013119C)
-  /* 05D660 800E1E60 8C4F0000 */        lw $t7, ($v0) # D_ovl2_8013119C + 0
+  /* 05D658 800E1E58 3C028013 */       lui $v0, %hi(gMapEnvironmentCount)
+  /* 05D65C 800E1E5C 2442119C */     addiu $v0, $v0, %lo(gMapEnvironmentCount)
+  /* 05D660 800E1E60 8C4F0000 */        lw $t7, ($v0) # gMapEnvironmentCount + 0
   /* 05D664 800E1E64 AC600000 */        sw $zero, ($v1) # D_ovl2_80131190 + 0
   /* 05D668 800E1E68 25F8FFFF */     addiu $t8, $t7, -1
   /* 05D66C 800E1E6C 03E00008 */        jr $ra
-  /* 05D670 800E1E70 AC580000 */        sw $t8, ($v0) # D_ovl2_8013119C + 0
+  /* 05D670 800E1E70 AC580000 */        sw $t8, ($v0) # gMapEnvironmentCount + 0
 
   /* 05D674 800E1E74 24630008 */     addiu $v1, $v1, 8
   .L800E1E78:
@@ -14730,7 +14730,7 @@ glabel func_ovl2_800E35BC
   /* 05EE60 800E3660 8E070004 */        lw $a3, 4($s0)
   /* 05EE64 800E3664 AFA80028 */        sw $t0, 0x28($sp)
   /* 05EE68 800E3668 8FA50058 */        lw $a1, 0x58($sp)
-  /* 05EE6C 800E366C 0C05BE4C */       jal itManager_UpdateHitVictimInteractStats
+  /* 05EE6C 800E366C 0C05BE4C */       jal itManager_SetHitVictimInteractStats
   /* 05EE70 800E3670 24060003 */     addiu $a2, $zero, 3
   /* 05EE74 800E3674 8FA20040 */        lw $v0, 0x40($sp)
   /* 05EE78 800E3678 8FA80028 */        lw $t0, 0x28($sp)
@@ -14791,7 +14791,7 @@ glabel func_ovl2_800E36F8
   /* 05EF40 800E3740 10000001 */         b .L800E3748
   /* 05EF44 800E3744 24060002 */     addiu $a2, $zero, 2
   .L800E3748:
-  /* 05EF48 800E3748 0C05BE4C */       jal itManager_UpdateHitVictimInteractStats
+  /* 05EF48 800E3748 0C05BE4C */       jal itManager_SetHitVictimInteractStats
   /* 05EF4C 800E374C AFA3003C */        sw $v1, 0x3c($sp)
   /* 05EF50 800E3750 8FA3003C */        lw $v1, 0x3c($sp)
   /* 05EF54 800E3754 8E190274 */        lw $t9, 0x274($s0)
@@ -14881,7 +14881,7 @@ glabel func_ovl2_800E3860
   /* 05F088 800E3888 8FA4002C */        lw $a0, 0x2c($sp)
   /* 05F08C 800E388C 24060006 */     addiu $a2, $zero, 6
   /* 05F090 800E3890 00003825 */        or $a3, $zero, $zero
-  /* 05F094 800E3894 0C05BE4C */       jal itManager_UpdateHitVictimInteractStats
+  /* 05F094 800E3894 0C05BE4C */       jal itManager_SetHitVictimInteractStats
   /* 05F098 800E3898 AFA20024 */        sw $v0, 0x24($sp)
   /* 05F09C 800E389C 8E2E0850 */        lw $t6, 0x850($s1)
   /* 05F0A0 800E38A0 8FA30024 */        lw $v1, 0x24($sp)
@@ -14980,7 +14980,7 @@ glabel func_ovl2_800E39B0
   /* 05F1F0 800E39F0 10000001 */         b .L800E39F8
   /* 05F1F4 800E39F4 24060004 */     addiu $a2, $zero, 4
   .L800E39F8:
-  /* 05F1F8 800E39F8 0C05BE4C */       jal itManager_UpdateHitVictimInteractStats
+  /* 05F1F8 800E39F8 0C05BE4C */       jal itManager_SetHitVictimInteractStats
   /* 05F1FC 800E39FC 00003825 */        or $a3, $zero, $zero
   /* 05F200 800E3A00 8E190010 */        lw $t9, 0x10($s0)
   /* 05F204 800E3A04 24010004 */     addiu $at, $zero, 4
@@ -17514,9 +17514,9 @@ glabel ftManager_SearchGroundHit
   /* 061584 800E5D84 02402025 */        or $a0, $s2, $zero
   /* 061588 800E5D88 24010001 */     addiu $at, $zero, 1
   /* 06158C 800E5D8C 14410028 */       bne $v0, $at, .L800E5E30
-  /* 061590 800E5D90 3C138013 */       lui $s3, %hi(D_ovl2_8013119C)
-  /* 061594 800E5D94 2673119C */     addiu $s3, $s3, %lo(D_ovl2_8013119C)
-  /* 061598 800E5D98 8E790000 */        lw $t9, ($s3) # D_ovl2_8013119C + 0
+  /* 061590 800E5D90 3C138013 */       lui $s3, %hi(gMapEnvironmentCount)
+  /* 061594 800E5D94 2673119C */     addiu $s3, $s3, %lo(gMapEnvironmentCount)
+  /* 061598 800E5D98 8E790000 */        lw $t9, ($s3) # gMapEnvironmentCount + 0
   /* 06159C 800E5D9C 00008025 */        or $s0, $zero, $zero
   /* 0615A0 800E5DA0 27B50044 */     addiu $s5, $sp, 0x44
   /* 0615A4 800E5DA4 1B200017 */      blez $t9, .L800E5E04
@@ -17524,7 +17524,7 @@ glabel ftManager_SearchGroundHit
   /* 0615AC 800E5DAC 8E240000 */        lw $a0, ($s1) # D_ovl2_80131190 + 0
   .L800E5DB0:
   /* 0615B0 800E5DB0 5080000F */      beql $a0, $zero, .L800E5DF0
-  /* 0615B4 800E5DB4 8E690000 */        lw $t1, ($s3) # D_ovl2_8013119C + 0
+  /* 0615B4 800E5DB4 8E690000 */        lw $t1, ($s3) # gMapEnvironmentCount + 0
   /* 0615B8 800E5DB8 8E390004 */        lw $t9, 4($s1) # D_ovl2_80131190 + 4
   /* 0615BC 800E5DBC 02402825 */        or $a1, $s2, $zero
   /* 0615C0 800E5DC0 02803025 */        or $a2, $s4, $zero
@@ -17539,7 +17539,7 @@ glabel ftManager_SearchGroundHit
   /* 0615E4 800E5DE4 0C038F2B */       jal func_ovl2_800E3CAC
   /* 0615E8 800E5DE8 AFA80010 */        sw $t0, 0x10($sp)
   .L800E5DEC:
-  /* 0615EC 800E5DEC 8E690000 */        lw $t1, ($s3) # D_ovl2_8013119C + 0
+  /* 0615EC 800E5DEC 8E690000 */        lw $t1, ($s3) # gMapEnvironmentCount + 0
   .L800E5DF0:
   /* 0615F0 800E5DF0 26100001 */     addiu $s0, $s0, 1
   /* 0615F4 800E5DF4 26310008 */     addiu $s1, $s1, 8
@@ -19615,8 +19615,8 @@ glabel ftSpecialItem_BGMSetPlay
   /* 063300 800E7B00 AFBF0014 */        sw $ra, 0x14($sp)
   /* 063304 800E7B04 0C039EB4 */       jal ftSpecialItem_BGMGetDuration
   /* 063308 800E7B08 AFA40020 */        sw $a0, 0x20($sp)
-  /* 06330C 800E7B0C 3C048013 */       lui $a0, %hi(gmMusicIndexCurrent)
-  /* 063310 800E7B10 8C84139C */        lw $a0, %lo(gmMusicIndexCurrent)($a0)
+  /* 06330C 800E7B0C 3C048013 */       lui $a0, %hi(gMusicIndexCurrent)
+  /* 063310 800E7B10 8C84139C */        lw $a0, %lo(gMusicIndexCurrent)($a0)
   /* 063314 800E7B14 0C039EB4 */       jal ftSpecialItem_BGMGetDuration
   /* 063318 800E7B18 AFA2001C */        sw $v0, 0x1c($sp)
   /* 06331C 800E7B1C 8FAE001C */        lw $t6, 0x1c($sp)
@@ -19627,8 +19627,8 @@ glabel ftSpecialItem_BGMSetPlay
   /* 063330 800E7B30 0C0082AD */       jal func_80020AB4
   /* 063334 800E7B34 8FA50020 */        lw $a1, 0x20($sp)
   /* 063338 800E7B38 8FAF0020 */        lw $t7, 0x20($sp)
-  /* 06333C 800E7B3C 3C018013 */       lui $at, %hi(gmMusicIndexCurrent)
-  /* 063340 800E7B40 AC2F139C */        sw $t7, %lo(gmMusicIndexCurrent)($at)
+  /* 06333C 800E7B3C 3C018013 */       lui $at, %hi(gMusicIndexCurrent)
+  /* 063340 800E7B40 AC2F139C */        sw $t7, %lo(gMusicIndexCurrent)($at)
   /* 063344 800E7B44 8FBF0014 */        lw $ra, 0x14($sp)
   .L800E7B48:
   /* 063348 800E7B48 27BD0020 */     addiu $sp, $sp, 0x20
@@ -19638,10 +19638,10 @@ glabel ftSpecialItem_BGMSetPlay
 glabel ftSpecialItem_BGMCheckFighters
   /* 063354 800E7B54 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 063358 800E7B58 AFB50028 */        sw $s5, 0x28($sp)
-  /* 06335C 800E7B5C 3C158013 */       lui $s5, %hi(gmMusicIndexDefault)
-  /* 063360 800E7B60 26B513A0 */     addiu $s5, $s5, %lo(gmMusicIndexDefault)
+  /* 06335C 800E7B5C 3C158013 */       lui $s5, %hi(gMusicIndexDefault)
+  /* 063360 800E7B60 26B513A0 */     addiu $s5, $s5, %lo(gMusicIndexDefault)
   /* 063364 800E7B64 AFB40024 */        sw $s4, 0x24($sp)
-  /* 063368 800E7B68 8EB40000 */        lw $s4, ($s5) # gmMusicIndexDefault + 0
+  /* 063368 800E7B68 8EB40000 */        lw $s4, ($s5) # gMusicIndexDefault + 0
   /* 06336C 800E7B6C AFBF002C */        sw $ra, 0x2c($sp)
   /* 063370 800E7B70 AFB30020 */        sw $s3, 0x20($sp)
   /* 063374 800E7B74 AFB2001C */        sw $s2, 0x1c($sp)
@@ -19657,7 +19657,7 @@ glabel ftSpecialItem_BGMCheckFighters
   /* 06339C 800E7B9C 00000000 */       nop 
   /* 0633A0 800E7BA0 8E220084 */        lw $v0, 0x84($s1)
   .L800E7BA4:
-  /* 0633A4 800E7BA4 8EB00000 */        lw $s0, ($s5) # gmMusicIndexDefault + 0
+  /* 0633A4 800E7BA4 8EB00000 */        lw $s0, ($s5) # gMusicIndexDefault + 0
   /* 0633A8 800E7BA8 8C43084C */        lw $v1, 0x84c($v0)
   /* 0633AC 800E7BAC 50600007 */      beql $v1, $zero, .L800E7BCC
   /* 0633B0 800E7BB0 8C5805B0 */        lw $t8, 0x5b0($v0)
@@ -19685,15 +19685,15 @@ glabel ftSpecialItem_BGMCheckFighters
   /* 0633FC 800E7BFC 5620FFE9 */      bnel $s1, $zero, .L800E7BA4
   /* 063400 800E7C00 8E220084 */        lw $v0, 0x84($s1)
   .L800E7C04:
-  /* 063404 800E7C04 3C108013 */       lui $s0, %hi(gmMusicIndexCurrent)
-  /* 063408 800E7C08 2610139C */     addiu $s0, $s0, %lo(gmMusicIndexCurrent)
-  /* 06340C 800E7C0C 8E190000 */        lw $t9, ($s0) # gmMusicIndexCurrent + 0
+  /* 063404 800E7C04 3C108013 */       lui $s0, %hi(gMusicIndexCurrent)
+  /* 063408 800E7C08 2610139C */     addiu $s0, $s0, %lo(gMusicIndexCurrent)
+  /* 06340C 800E7C0C 8E190000 */        lw $t9, ($s0) # gMusicIndexCurrent + 0
   /* 063410 800E7C10 00002025 */        or $a0, $zero, $zero
   /* 063414 800E7C14 52990005 */      beql $s4, $t9, .L800E7C2C
   /* 063418 800E7C18 8FBF002C */        lw $ra, 0x2c($sp)
   /* 06341C 800E7C1C 0C0082AD */       jal func_80020AB4
   /* 063420 800E7C20 02802825 */        or $a1, $s4, $zero
-  /* 063424 800E7C24 AE140000 */        sw $s4, ($s0) # gmMusicIndexCurrent + 0
+  /* 063424 800E7C24 AE140000 */        sw $s4, ($s0) # gMusicIndexCurrent + 0
   /* 063428 800E7C28 8FBF002C */        lw $ra, 0x2c($sp)
   .L800E7C2C:
   /* 06342C 800E7C2C 8FB00014 */        lw $s0, 0x14($sp)
@@ -22687,15 +22687,15 @@ glabel gmCommon_DamageApplyStale
   /* 065DB8 800EA5B8 27BD0018 */     addiu $sp, $sp, 0x18
 
 glabel gmCommon_GetMotionCountInc
-  /* 065DBC 800EA5BC 3C048013 */       lui $a0, %hi(Entity_Global_MotionCount)
-  /* 065DC0 800EA5C0 24840D94 */     addiu $a0, $a0, %lo(Entity_Global_MotionCount)
-  /* 065DC4 800EA5C4 94830000 */       lhu $v1, ($a0) # Entity_Global_MotionCount + 0
+  /* 065DBC 800EA5BC 3C048013 */       lui $a0, %hi(gEntityMotionCount)
+  /* 065DC0 800EA5C0 24840D94 */     addiu $a0, $a0, %lo(gEntityMotionCount)
+  /* 065DC4 800EA5C4 94830000 */       lhu $v1, ($a0) # gEntityMotionCount + 0
   /* 065DC8 800EA5C8 24180001 */     addiu $t8, $zero, 1
   /* 065DCC 800EA5CC 246E0001 */     addiu $t6, $v1, 1
   /* 065DD0 800EA5D0 31CFFFFF */      andi $t7, $t6, 0xffff
   /* 065DD4 800EA5D4 15E00002 */      bnez $t7, .L800EA5E0
-  /* 065DD8 800EA5D8 A48E0000 */        sh $t6, ($a0) # Entity_Global_MotionCount + 0
-  /* 065DDC 800EA5DC A4980000 */        sh $t8, ($a0) # Entity_Global_MotionCount + 0
+  /* 065DD8 800EA5D8 A48E0000 */        sh $t6, ($a0) # gEntityMotionCount + 0
+  /* 065DDC 800EA5DC A4980000 */        sh $t8, ($a0) # gEntityMotionCount + 0
   .L800EA5E0:
   /* 065DE0 800EA5E0 03E00008 */        jr $ra
   /* 065DE4 800EA5E4 00601025 */        or $v0, $v1, $zero
@@ -22802,15 +22802,15 @@ glabel ftAttackAddStaleQueue
   /* 065F48 800EA748 27BD0008 */     addiu $sp, $sp, 8
 
 glabel gmCommon_GetStatUpdateCountInc
-  /* 065F4C 800EA74C 3C048013 */       lui $a0, %hi(Entity_Global_StatUpdateCount)
-  /* 065F50 800EA750 24840D96 */     addiu $a0, $a0, %lo(Entity_Global_StatUpdateCount)
-  /* 065F54 800EA754 94830000 */       lhu $v1, ($a0) # Entity_Global_StatUpdateCount + 0
+  /* 065F4C 800EA74C 3C048013 */       lui $a0, %hi(gEntityStatUpdateCount)
+  /* 065F50 800EA750 24840D96 */     addiu $a0, $a0, %lo(gEntityStatUpdateCount)
+  /* 065F54 800EA754 94830000 */       lhu $v1, ($a0) # gEntityStatUpdateCount + 0
   /* 065F58 800EA758 24180001 */     addiu $t8, $zero, 1
   /* 065F5C 800EA75C 246E0001 */     addiu $t6, $v1, 1
   /* 065F60 800EA760 31CFFFFF */      andi $t7, $t6, 0xffff
   /* 065F64 800EA764 15E00002 */      bnez $t7, .L800EA770
-  /* 065F68 800EA768 A48E0000 */        sh $t6, ($a0) # Entity_Global_StatUpdateCount + 0
-  /* 065F6C 800EA76C A4980000 */        sh $t8, ($a0) # Entity_Global_StatUpdateCount + 0
+  /* 065F68 800EA768 A48E0000 */        sh $t6, ($a0) # gEntityStatUpdateCount + 0
+  /* 065F6C 800EA76C A4980000 */        sh $t8, ($a0) # gEntityStatUpdateCount + 0
   .L800EA770:
   /* 065F70 800EA770 03E00008 */        jr $ra
   /* 065F74 800EA774 00601025 */        or $v0, $v1, $zero
@@ -42702,29 +42702,29 @@ glabel func_ovl2_800FC3E8
   /* 077BF0 800FC3F0 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 077BF4 800FC3F4 AFBF0014 */        sw $ra, 0x14($sp)
   /* 077BF8 800FC3F8 8DC5007C */        lw $a1, 0x7c($t6)
-  /* 077BFC 800FC3FC 3C028013 */       lui $v0, %hi(gmMusicIndexDefault)
-  /* 077C00 800FC400 244213A0 */     addiu $v0, $v0, %lo(gmMusicIndexDefault)
+  /* 077BFC 800FC3FC 3C028013 */       lui $v0, %hi(gMusicIndexDefault)
+  /* 077C00 800FC400 244213A0 */     addiu $v0, $v0, %lo(gMusicIndexDefault)
   /* 077C04 800FC404 00002025 */        or $a0, $zero, $zero
   /* 077C08 800FC408 0C0082AD */       jal func_80020AB4
-  /* 077C0C 800FC40C AC450000 */        sw $a1, ($v0) # gmMusicIndexDefault + 0
+  /* 077C0C 800FC40C AC450000 */        sw $a1, ($v0) # gMusicIndexDefault + 0
   /* 077C10 800FC410 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 077C14 800FC414 3C188013 */       lui $t8, %hi(gmMusicIndexDefault)
-  /* 077C18 800FC418 8F1813A0 */        lw $t8, %lo(gmMusicIndexDefault)($t8)
-  /* 077C1C 800FC41C 3C018013 */       lui $at, %hi(gmMusicIndexCurrent)
+  /* 077C14 800FC414 3C188013 */       lui $t8, %hi(gMusicIndexDefault)
+  /* 077C18 800FC418 8F1813A0 */        lw $t8, %lo(gMusicIndexDefault)($t8)
+  /* 077C1C 800FC41C 3C018013 */       lui $at, %hi(gMusicIndexCurrent)
   /* 077C20 800FC420 27BD0018 */     addiu $sp, $sp, 0x18
   /* 077C24 800FC424 03E00008 */        jr $ra
-  /* 077C28 800FC428 AC38139C */        sw $t8, %lo(gmMusicIndexCurrent)($at)
+  /* 077C28 800FC428 AC38139C */        sw $t8, %lo(gMusicIndexCurrent)($at)
 
 glabel func_ovl2_800FC42C
   /* 077C2C 800FC42C 3C0E8013 */       lui $t6, %hi(gpMapData)
   /* 077C30 800FC430 8DCE1300 */        lw $t6, %lo(gpMapData)($t6)
-  /* 077C34 800FC434 3C028013 */       lui $v0, %hi(gmMusicIndexDefault)
-  /* 077C38 800FC438 244213A0 */     addiu $v0, $v0, %lo(gmMusicIndexDefault)
+  /* 077C34 800FC434 3C028013 */       lui $v0, %hi(gMusicIndexDefault)
+  /* 077C38 800FC438 244213A0 */     addiu $v0, $v0, %lo(gMusicIndexDefault)
   /* 077C3C 800FC43C 8DCF007C */        lw $t7, 0x7c($t6)
-  /* 077C40 800FC440 3C018013 */       lui $at, %hi(gmMusicIndexCurrent)
-  /* 077C44 800FC444 AC4F0000 */        sw $t7, ($v0) # gmMusicIndexDefault + 0
+  /* 077C40 800FC440 3C018013 */       lui $at, %hi(gMusicIndexCurrent)
+  /* 077C44 800FC444 AC4F0000 */        sw $t7, ($v0) # gMusicIndexDefault + 0
   /* 077C48 800FC448 03E00008 */        jr $ra
-  /* 077C4C 800FC44C AC2F139C */        sw $t7, %lo(gmMusicIndexCurrent)($at)
+  /* 077C4C 800FC44C AC2F139C */        sw $t7, %lo(gMusicIndexCurrent)($at)
 
 glabel func_ovl2_800FC450
   /* 077C50 800FC450 3C0E8013 */       lui $t6, %hi(gpMapData)
@@ -55179,7 +55179,7 @@ glabel func_ovl2_80107330
   /* 082BD4 801073D4 00002025 */        or $a0, $zero, $zero
   /* 082BD8 801073D8 27A6003C */     addiu $a2, $sp, 0x3c
   /* 082BDC 801073DC E7B00044 */      swc1 $f16, 0x44($sp)
-  /* 082BE0 801073E0 0C059572 */       jal wpManager_CreateWeapon
+  /* 082BE0 801073E0 0C059572 */       jal wpManager_MakeWeapon
   /* 082BE4 801073E4 24070001 */     addiu $a3, $zero, 1
   /* 082BE8 801073E8 10400047 */      beqz $v0, .L80107508
   /* 082BEC 801073EC 3C01C366 */       lui $at, (0xC3660000 >> 16) # -230.0
@@ -55238,7 +55238,7 @@ glabel func_ovl2_80107330
   /* 082CC0 801074C0 00002025 */        or $a0, $zero, $zero
   /* 082CC4 801074C4 27A6003C */     addiu $a2, $sp, 0x3c
   /* 082CC8 801074C8 E7B20044 */      swc1 $f18, 0x44($sp)
-  /* 082CCC 801074CC 0C059572 */       jal wpManager_CreateWeapon
+  /* 082CCC 801074CC 0C059572 */       jal wpManager_MakeWeapon
   /* 082CD0 801074D0 24070001 */     addiu $a3, $zero, 1
   /* 082CD4 801074D4 1040000C */      beqz $v0, .L80107508
   /* 082CD8 801074D8 3C01C366 */       lui $at, (0xC3660000 >> 16) # -230.0
@@ -55509,7 +55509,7 @@ glabel func_ovl2_801076E8
   /* 0830A0 801078A0 24A5EA24 */     addiu $a1, $a1, %lo(D_ovl2_8012EA24)
   /* 0830A4 801078A4 00002025 */        or $a0, $zero, $zero
   /* 0830A8 801078A8 27A600AC */     addiu $a2, $sp, 0xac
-  /* 0830AC 801078AC 0C059572 */       jal wpManager_CreateWeapon
+  /* 0830AC 801078AC 0C059572 */       jal wpManager_MakeWeapon
   /* 0830B0 801078B0 24070001 */     addiu $a3, $zero, 1
   /* 0830B4 801078B4 10400011 */      beqz $v0, .L801078FC
   /* 0830B8 801078B8 00401825 */        or $v1, $v0, $zero
@@ -57700,7 +57700,7 @@ glabel func_ovl2_80109774
   /* 084FEC 801097EC 00002025 */        or $a0, $zero, $zero
   /* 084FF0 801097F0 24050018 */     addiu $a1, $zero, 0x18
   /* 084FF4 801097F4 02403025 */        or $a2, $s2, $zero
-  /* 084FF8 801097F8 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 084FF8 801097F8 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 084FFC 801097FC 02803825 */        or $a3, $s4, $zero
   /* 085000 80109800 26100004 */     addiu $s0, $s0, 4
   /* 085004 80109804 26310002 */     addiu $s1, $s1, 2
@@ -57769,7 +57769,7 @@ glabel func_ovl2_80109888
   /* 0850E4 801098E4 27A7002C */     addiu $a3, $sp, 0x2c
   /* 0850E8 801098E8 E7A00034 */      swc1 $f0, 0x34($sp)
   /* 0850EC 801098EC E7A00030 */      swc1 $f0, 0x30($sp)
-  /* 0850F0 801098F0 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 0850F0 801098F0 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 0850F4 801098F4 E7A0002C */      swc1 $f0, 0x2c($sp)
   /* 0850F8 801098F8 10400005 */      beqz $v0, .L80109910
   /* 0850FC 801098FC 3C018013 */       lui $at, %hi(D_ovl2_8013142C)
@@ -59310,7 +59310,7 @@ glabel func_ovl2_8010AD70
   /* 086614 8010AE14 00002025 */        or $a0, $zero, $zero
   /* 086618 8010AE18 2465001B */     addiu $a1, $v1, 0x1b
   /* 08661C 8010AE1C 27A6003C */     addiu $a2, $sp, 0x3c
-  /* 086620 8010AE20 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 086620 8010AE20 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 086624 8010AE24 27A70030 */     addiu $a3, $sp, 0x30
   /* 086628 8010AE28 8FBF001C */        lw $ra, 0x1c($sp)
   /* 08662C 8010AE2C 3C018013 */       lui $at, %hi(D_ovl2_801313F8)
@@ -59768,7 +59768,7 @@ glabel func_ovl2_8010B378
   /* 086C7C 8010B47C E7B40044 */      swc1 $f20, 0x44($sp)
   /* 086C80 8010B480 E7B40048 */      swc1 $f20, 0x48($sp)
   /* 086C84 8010B484 AFAB0010 */        sw $t3, 0x10($sp)
-  /* 086C88 8010B488 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 086C88 8010B488 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 086C8C 8010B48C 27A70040 */     addiu $a3, $sp, 0x40
   /* 086C90 8010B490 8FBF002C */        lw $ra, 0x2c($sp)
   /* 086C94 8010B494 3C018013 */       lui $at, %hi(D_ovl2_801313F8)
@@ -59838,7 +59838,7 @@ glabel func_ovl2_8010B508
   /* 086D78 8010B578 00002025 */        or $a0, $zero, $zero
   /* 086D7C 8010B57C 24050017 */     addiu $a1, $zero, 0x17
   /* 086D80 8010B580 26260008 */     addiu $a2, $s1, 8
-  /* 086D84 8010B584 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 086D84 8010B584 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 086D88 8010B588 02803825 */        or $a3, $s4, $zero
   /* 086D8C 8010B58C 8E450000 */        lw $a1, ($s2)
   /* 086D90 8010B590 00408025 */        or $s0, $v0, $zero
@@ -59886,7 +59886,7 @@ glabel func_ovl2_8010B5F0
   /* 086E28 8010B628 27A70024 */     addiu $a3, $sp, 0x24
   /* 086E2C 8010B62C E7A0002C */      swc1 $f0, 0x2c($sp)
   /* 086E30 8010B630 E7A00028 */      swc1 $f0, 0x28($sp)
-  /* 086E34 8010B634 0C05BA9E */       jal func_ovl3_8016EA78
+  /* 086E34 8010B634 0C05BA9E */       jal itManager_MakeItemSetupCommon
   /* 086E38 8010B638 E7A00024 */      swc1 $f0, 0x24($sp)
   /* 086E3C 8010B63C 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 086E40 8010B640 246313F0 */     addiu $v1, $v1, %lo(D_ovl2_801313F0)
@@ -68426,8 +68426,8 @@ glabel func_ovl2_80113104
   /* 08E9BC 801131BC 55810010 */      bnel $t4, $at, .L80113200
   /* 08E9C0 801131C0 8C830014 */        lw $v1, 0x14($a0)
   /* 08E9C4 801131C4 8C8D0014 */        lw $t5, 0x14($a0)
-  /* 08E9C8 801131C8 3C038013 */       lui $v1, %hi(gmMusicIndexDefault)
-  /* 08E9CC 801131CC 246313A0 */     addiu $v1, $v1, %lo(gmMusicIndexDefault)
+  /* 08E9C8 801131C8 3C038013 */       lui $v1, %hi(gMusicIndexDefault)
+  /* 08E9CC 801131CC 246313A0 */     addiu $v1, $v1, %lo(gMusicIndexDefault)
   /* 08E9D0 801131D0 2DA10709 */     sltiu $at, $t5, 0x709
   /* 08E9D4 801131D4 5020000A */      beql $at, $zero, .L80113200
   /* 08E9D8 801131D8 8C830014 */        lw $v1, 0x14($a0)

@@ -15,7 +15,7 @@ glabel D_ovl2_80130D54
     .space 12
 glabel D_ovl2_80130D60
     .space 4
-glabel gmMatchInfo_1PGameTimeTotal
+glabel g1PGameTimeTotal
     .space 4
 glabel D_ovl2_80130D68
     .space 4
@@ -37,11 +37,11 @@ glabel D_ovl2_80130D88
     .space 4
 glabel D_ovl2_80130D8C
     .space 4
-glabel gmMatchInfo_PlayerCount
+glabel gBattlePlayerCount
     .space 4
-glabel Entity_Global_MotionCount
+glabel gEntityMotionCount
     .space 2
-glabel Entity_Global_StatUpdateCount
+glabel gEntityStatUpdateCount
     .space 2
 glabel D_ovl2_80130D98
     .space 4
@@ -355,7 +355,7 @@ glabel D_ovl2_80131190
     .space 8
 glabel D_ovl2_80131198
     .space 4
-glabel D_ovl2_8013119C
+glabel gMapEnvironmentCount
     .space 4
 glabel D_ovl2_801311A0
     .space 16
@@ -415,9 +415,9 @@ glabel D_ovl2_80131394
     .space 4
 glabel D_ovl2_80131398
     .space 4
-glabel gmMusicIndexCurrent
+glabel gMusicIndexCurrent
     .space 4
-glabel gmMusicIndexDefault
+glabel gMusicIndexDefault
     .space 16
 glabel D_ovl2_801313B0
     .space 4
