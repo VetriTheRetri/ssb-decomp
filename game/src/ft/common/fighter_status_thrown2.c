@@ -142,11 +142,11 @@ void func_ovl3_8014AFD0(GObj *fighter_gobj, s32 lr, s32 unk_index, bool32 is_pro
 
         if ((s32) ((damage * 0.75F) + 4.0F) > 0)
         {
-            func_ovl2_800E806C(this_fp, 0, (s32) ((damage * 0.75F) + 4.0F));
+            ftMain_MakeRumble(this_fp, 0, (s32) ((damage * 0.75F) + 4.0F));
         }
         if ((s32) ((damage * 0.5F) + 2.0F) > 0)
         {
-            func_ovl2_800E806C(capture_fp, 5, (s32) ((damage * 0.5F) + 2.0F));
+            ftMain_MakeRumble(capture_fp, 5, (s32) ((damage * 0.5F) + 2.0F));
         }
     }
     this_fp->capture_gobj = NULL;

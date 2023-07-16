@@ -1,9 +1,25 @@
 #include <it/item.h>
 
+extern intptr_t D_NF_00005F88;
+extern intptr_t D_NF_00006018;
+extern intptr_t D_NF_00006048;
+
+enum itGShellStatus
+{
+    itStatus_GShell_GWait,
+    itStatus_GShell_AFall,
+    itStatus_GShell_FHold,
+    itStatus_GShell_FThrow,
+    itStatus_GShell_FDrop,
+    itStatus_GShell_GSpin,
+    itStatus_GShell_ASpin,
+    itStatus_GShell_EnumMax
+};
+
 itCreateDesc itCommon_GShell_ItemDesc =
 {
     It_Kind_GShell,                         // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x53C,                                  // Offset of item attributes in file?
     0,                                      // ???
     0,                                      // ???
@@ -106,19 +122,6 @@ itStatusDesc itCommon_GShell_StatusDesc[itStatus_GShell_EnumMax] =
     }
 };
 
-typedef enum itGShellStatus
-{
-    itStatus_GShell_GWait,
-    itStatus_GShell_AFall,
-    itStatus_GShell_FHold,
-    itStatus_GShell_FThrow,
-    itStatus_GShell_FDrop,
-    itStatus_GShell_GSpin,
-    itStatus_GShell_ASpin,
-    itStatus_GShell_EnumMax
-
-} itGShellStatus;
-
 // 0x801785E0
 void itGShell_GSpin_UpdateGFX(GObj *item_gobj)
 {
@@ -138,10 +141,6 @@ void itGShell_GSpin_UpdateGFX(GObj *item_gobj)
     }
     ip->item_vars.shell.dust_gfx_int--;
 }
-
-extern intptr_t D_NF_00005F88;
-extern intptr_t D_NF_00006018;
-extern intptr_t D_NF_00006048;
 
 // 0x80178670
 void func_ovl3_80178670(GObj *item_gobj)
@@ -193,8 +192,6 @@ bool32 itGShell_AFall_ProcMap(GObj *item_gobj)
 
     return FALSE;
 }
-
-extern itStatusDesc itCommon_GShell_StatusDesc[];
 
 // 0x801787CC
 void itGShell_GWait_InitItemVars(GObj *item_gobj)

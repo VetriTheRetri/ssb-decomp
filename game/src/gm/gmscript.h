@@ -77,8 +77,8 @@ typedef enum ftScriptEventKind
     ftScriptEvent_Kind_SetParallelScript, // What
     ftScriptEvent_Kind_SlopeContour,
     ftScriptEvent_Kind_HideItem,
-    ftScriptEvent_Kind_Unk15,
-    ftScriptEvent_Kind_Unk16,
+    ftScriptEvent_Kind_MakeRumble,
+    ftScriptEvent_Kind_StopRumble,
     ftScriptEvent_Kind_AfterImage // Sword Trail
 
 } ftScriptEventKind;
@@ -145,7 +145,7 @@ typedef struct ftScriptEventWait
 
 } ftScriptEventWait;
 
-typedef struct ftScriptEventCreateHit1
+typedef struct ftScriptEventMakeHit1
 {
     u32 opcode : 6;
     u32 hit_id : 3;
@@ -155,49 +155,49 @@ typedef struct ftScriptEventCreateHit1
     u32 rebound : 1;
     u32 element : 4;
 
-} ftScriptEventCreateHit1;
+} ftScriptEventMakeHit1;
 
-typedef struct ftScriptEventCreateHit2
+typedef struct ftScriptEventMakeHit2
 {
     u32 size : 16;
     s32 off_x : 16;
 
-} ftScriptEventCreateHit2;
+} ftScriptEventMakeHit2;
 
-typedef struct ftScriptEventCreateHit3
+typedef struct ftScriptEventMakeHit3
 {
     s32 off_y : 16;
     s32 off_z : 16;
 
-} ftScriptEventCreateHit3;
+} ftScriptEventMakeHit3;
 
-typedef struct ftScriptEventCreateHit4
+typedef struct ftScriptEventMakeHit4
 {
     s32 angle : 10;
     u32 knockback_scale : 10;
     u32 knockback_weight : 10;
     u32 is_hit_ground_air : 2;
 
-} ftScriptEventCreateHit4;
+} ftScriptEventMakeHit4;
 
-typedef struct ftScriptEventCreateHit5
+typedef struct ftScriptEventMakeHit5
 {
     s32 shield_damage : 8;
     u32 sfx_level : 3;
     u32 sfx_kind : 4;
     u32 knockback_base : 10;
 
-} ftScriptEventCreateHit5;
+} ftScriptEventMakeHit5;
 
-typedef struct ftScriptEventCreateHit
+typedef struct ftScriptEventMakeHit
 {
-    ftScriptEventCreateHit1 s1;
-    ftScriptEventCreateHit2 s2;
-    ftScriptEventCreateHit3 s3;
-    ftScriptEventCreateHit4 s4;
-    ftScriptEventCreateHit5 s5;
+    ftScriptEventMakeHit1 s1;
+    ftScriptEventMakeHit2 s2;
+    ftScriptEventMakeHit3 s3;
+    ftScriptEventMakeHit4 s4;
+    ftScriptEventMakeHit5 s5;
 
-} ftScriptEventCreateHit;
+} ftScriptEventMakeHit;
 
 typedef struct ftScriptEventSetHitOffset1
 {
@@ -291,44 +291,44 @@ typedef struct ftScriptEventPlaySFX
 
 } ftScriptEventPlaySFX;
 
-typedef struct ftScriptEventCreateGFX1
+typedef struct ftScriptEventMakeGFX1
 {
     u32 opcode : 6;
     s32 joint_index : 7;
     u32 gfx_id : 9;
     u32 flag : 10;
 
-} ftScriptEventCreateGFX1;
+} ftScriptEventMakeGFX1;
 
-typedef struct ftScriptEventCreateGFX2
+typedef struct ftScriptEventMakeGFX2
 {
     s32 off_x : 16;
     s32 off_y : 16;
 
-} ftScriptEventCreateGFX2;
+} ftScriptEventMakeGFX2;
 
-typedef struct ftScriptEventCreateGFX3
+typedef struct ftScriptEventMakeGFX3
 {
     s32 off_z : 16;
     s32 rng_x : 16;
 
-} ftScriptEventCreateGFX3;
+} ftScriptEventMakeGFX3;
 
-typedef struct ftScriptEventCreateGFX4
+typedef struct ftScriptEventMakeGFX4
 {
     s32 rng_y : 16;
     s32 rng_z : 16;
 
-} ftScriptEventCreateGFX4;
+} ftScriptEventMakeGFX4;
 
-typedef struct ftScriptEventCreateGFX
+typedef struct ftScriptEventMakeGFX
 {
-    ftScriptEventCreateGFX1 s1;
-    ftScriptEventCreateGFX2 s2;
-    ftScriptEventCreateGFX3 s3;
-    ftScriptEventCreateGFX4 s4;
+    ftScriptEventMakeGFX1 s1;
+    ftScriptEventMakeGFX2 s2;
+    ftScriptEventMakeGFX3 s3;
+    ftScriptEventMakeGFX4 s4;
 
-} ftScriptEventCreateGFX;
+} ftScriptEventMakeGFX;
 
 typedef struct ftScriptEventSetHitStatusAll
 {
@@ -497,7 +497,7 @@ typedef struct ftScriptEventSetColAnim
 {
     u32 opcode : 6;
     u32 colanim_id : 8;
-    u32 length : 18;
+    u32 duration : 18;
 
 } ftScriptEventSetColAnim;
 
@@ -516,12 +516,12 @@ typedef struct ftScriptEventSlopeContour
 
 } ftScriptEventSlopeContour;
 
-typedef struct ftScriptEventUnkFlag
+typedef struct ftScriptEventShowItem
 {
     u32 opcode : 6;
     u32 flag : 26;
 
-} ftScriptEventUnkFlag;
+} ftScriptEventShowItem;
 
 typedef struct ftScriptEventAfterImage
 {
@@ -531,20 +531,20 @@ typedef struct ftScriptEventAfterImage
 
 } ftScriptEventAfterImage;
 
-typedef struct ftScriptEventUnk31
+typedef struct ftScriptEventMakeRumble
 {
     u32 opcode : 6;
-    u32 value1 : 13;
-    u32 value2 : 13;
+    u32 duration : 13;
+    u32 rumble_id : 13;
 
-} ftScriptEventUnk31;
+} ftScriptEventMakeRumble;
 
-typedef struct ftScriptEventUnk32
+typedef struct ftScriptEventStopRumble
 {
     u32 opcode : 6;
-    u32 value1 : 26;
+    u32 rumble_id : 26;
 
-} ftScriptEventUnk32;
+} ftScriptEventStopRumble;
 
 typedef struct gmColorEventDefault
 {

@@ -272,12 +272,12 @@ void itMain_SetFighterThrow(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_sm
     {
         if (is_smash_throw != FALSE)
         {
-            func_ovl2_800E806C(fp, 6, 0);
+            ftMain_MakeRumble(fp, 6, 0);
         }
     }
     else
     {
-        func_ovl2_800E806C(fp, (is_smash_throw != FALSE) ? 9 : 6, 0);
+        ftMain_MakeRumble(fp, (is_smash_throw != FALSE) ? 9 : 6, 0);
     }
     proc_throw = itCommon_Throw_ProcList[ip->it_kind];
 
@@ -368,7 +368,7 @@ void itMain_SetFighterHold(GObj *item_gobj, GObj *fighter_gobj)
         func_800269C0(fp->attributes->heavyget_sfx);
     }
     
-    func_ovl2_800E806C(fp, 6, 0);
+    ftMain_MakeRumble(fp, 6, 0);
 
     ip->pickup_wait = ITEM_PICKUP_WAIT_DEFAULT;
 }
@@ -500,7 +500,7 @@ bool32 func_ovl3_801730D4(GObj *gobj)
         if (index < It_Kind_CommonMax)
         {
             vel.x = 0.0F;
-            vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&gItemFileData->spawn_vel_y[index])); // Linker thing
+            vel.y = *(f32*)((intptr_t)&hal_ld_article_floats + ((uintptr_t)&gpItemFileData->spawn_vel_y[index])); // Linker thing
             vel.z = 0;
 
             if (itManager_MakeItemSetupCommon(gobj, index, &DObjGetStruct(gobj)->translate, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM)) != NULL)

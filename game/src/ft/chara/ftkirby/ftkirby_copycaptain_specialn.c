@@ -95,7 +95,7 @@ void ftKirby_CopyCaptain_SpecialAirN_ProcPhysics(GObj *fighter_gobj)
 void ftKirby_CopyCaptain_SpecialAirN_SwitchStatusGround(GObj *fighter_gobj)
 {
     ftMap_SetGround(ftGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyCaptain_SpecialN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyCaptain_SpecialN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_RUMBLE_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
 }
 
 // 0x80160A80
@@ -104,7 +104,7 @@ void ftKirby_CopyCaptain_SpecialN_SwitchStatusAir(GObj *fighter_gobj)
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyCaptain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyCaptain_SpecialAirN, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_RUMBLE_PRESERVE | FTSTATUPDATE_GFX_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     func_ovl2_800D8EB8(fp);
 }
 

@@ -34,7 +34,7 @@
 #define FTSTATUPDATE_LOOPSFX_PRESERVE       (1 << ftStatusUpdate_LoopSFX_Preserve)      // 0x800
 #define FTSTATUPDATE_DAMAGEPORT_PRESERVE    (1 << ftStatusUpdate_DamagePort_Preserve)   // 0x1000
 #define FTSTATUPDATE_AFTERIMAGE_PRESERVE    (1 << ftStatusUpdate_AfterImage_Preserve)   // 0x2000
-#define FTSTATUPDATE_UNK5_PRESERVE          (1 << ftStatusUpdate_Unk5_Preserve)         // 0x4000
+#define FTSTATUPDATE_RUMBLE_PRESERVE        (1 << ftStatusUpdate_Rumble_Preserve)       // 0x4000
 
 #define FTCATCHKIND_MASK_SPECIALNYOSHI      (1 << ftCatch_Kind_SpecialNYoshi)           // 0x1
 #define FTCATCHKIND_MASK_SPECIALNKIRBY      (1 << ftCatch_Kind_SpecialNKirby)           // 0x2
@@ -63,8 +63,7 @@ enum ftStatusUpdateFlags
     ftStatusUpdate_LoopSFX_Preserve,        // Preserve looping SFX
     ftStatusUpdate_DamagePort_Preserve,     // Preserve damaging player's port ID if grounded?
     ftStatusUpdate_AfterImage_Preserve,     // Preserve sword trail display state
-    ftStatusUpdate_Unk5_Preserve            // Preserve ???
-
+    ftStatusUpdate_Rumble_Preserve          // Preserve ???
 };
 
 enum ftCommonAction
@@ -1089,9 +1088,9 @@ struct ftStruct
 
     } command_vars;
 
-    u32 is_hit_enable : 1;
+    u32 is_hitbox_active : 1;
     u32 is_hitstatus_nodamage : 1;
-    u32 is_fthurt_modify : 1;
+    u32 is_hurtbox_modify : 1;
     u32 is_modelpart_modify : 1;
     u32 is_texturepart_modify : 1;
     u32 is_reflect : 1; // Fighter's reflect box is active

@@ -1,11 +1,23 @@
 #include <it/item.h>
 #include <ft/fighter.h>
-#include <gm/gmmatch.h>
+
+enum itMSBombStatus
+{
+    itStatus_MSBomb_GWait,
+    itStatus_MSBomb_AFall,
+    itStatus_MSBomb_FHold,
+    itStatus_MSBomb_FThrow,
+    itStatus_MSBomb_FDrop,
+    itStatus_MSBomb_GAttach,
+    itStatus_MSBomb_ADetach,
+    itStatus_MSBomb_NExplode,
+    itStatus_MSBomb_EnumMax
+};
 
 itCreateDesc itCommon_MSBomb_ItemDesc =
 {
     It_Kind_MSBomb,                         // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x3BC,                                  // Offset of item attributes in file?
     0,                                      // ???
     0,                                      // ???
@@ -119,20 +131,6 @@ itStatusDesc itCommon_MSBomb_StatusDesc[itStatus_MSBomb_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itMSBombStatus
-{
-    itStatus_MSBomb_GWait,
-    itStatus_MSBomb_AFall,
-    itStatus_MSBomb_FHold,
-    itStatus_MSBomb_FThrow,
-    itStatus_MSBomb_FDrop,
-    itStatus_MSBomb_GAttach,
-    itStatus_MSBomb_ADetach,
-    itStatus_MSBomb_NExplode,
-    itStatus_MSBomb_EnumMax
-
-} itMSBombStatus;
 
 // 0x80176450
 bool32 itMSBomb_AFall_ProcUpdate(GObj *item_gobj)
@@ -317,7 +315,7 @@ void itMSBomb_GAttach_InitItemVars(GObj *item_gobj)
 
         if (fighter_gobj != NULL)
         {
-            func_ovl2_800E806C(ftGetStruct(fighter_gobj), 6, 0);
+            ftMain_MakeRumble(ftGetStruct(fighter_gobj), 6, 0);
         }
     }
     func_800269C0(0x2CU);

@@ -1,7 +1,7 @@
 #include <ft/fighter.h>
 #include <wp/weapon.h>
 #include <it/item.h>
-#include "ground.h"
+#include <gr/ground.h>
 #include <gm/gmmatch.h>
 #include <gm/gmground.h>
 #include "thread6.h"
@@ -55,14 +55,14 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
     case ftScriptEvent_Kind_HitScaleOffset:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            hit_id = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->hit_id;
+            hit_id = ftScriptEventCast(p_event, ftScriptEventMakeHit1)->hit_id;
             ft_hit = &fp->fighter_hit[hit_id];
 
-            if ((ft_hit->update_state == gmHitCollision_UpdateState_Disable) || (ft_hit->group_id != ftScriptEventCast(p_event, ftScriptEventCreateHit1)->group_id))
+            if ((ft_hit->update_state == gmHitCollision_UpdateState_Disable) || (ft_hit->group_id != ftScriptEventCast(p_event, ftScriptEventMakeHit1)->group_id))
             {
-                ft_hit->group_id = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->group_id;
+                ft_hit->group_id = ftScriptEventCast(p_event, ftScriptEventMakeHit1)->group_id;
                 ft_hit->update_state = gmHitCollision_UpdateState_New;
-                fp->is_hit_enable = TRUE;
+                fp->is_hitbox_active = TRUE;
 
                 for (i = 0; i < ARRAY_COUNT(fp->fighter_hit); i++)
                 {
@@ -80,41 +80,41 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
                     ftCollision_ClearHitRecordIndex(fp, hit_id);
                 }
             }
-            ft_hit->joint_index = ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventCreateHit1)->joint_index);
+            ft_hit->joint_index = ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventMakeHit1)->joint_index);
             ft_hit->joint = fp->joint[ft_hit->joint_index];
-            ft_hit->damage = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->damage;
-            ft_hit->rebound = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->rebound;
-            ft_hit->element = ftScriptEventCast(p_event, ftScriptEventCreateHit1)->element;
+            ft_hit->damage = ftScriptEventCast(p_event, ftScriptEventMakeHit1)->damage;
+            ft_hit->rebound = ftScriptEventCast(p_event, ftScriptEventMakeHit1)->rebound;
+            ft_hit->element = ftScriptEventCast(p_event, ftScriptEventMakeHit1)->element;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateHit1);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeHit1);
 
-            ft_hit->size = ftScriptEventCast(p_event, ftScriptEventCreateHit2)->size * 0.5F;
-            ft_hit->offset.x = ftScriptEventCast(p_event, ftScriptEventCreateHit2)->off_x;
+            ft_hit->size = ftScriptEventCast(p_event, ftScriptEventMakeHit2)->size * 0.5F;
+            ft_hit->offset.x = ftScriptEventCast(p_event, ftScriptEventMakeHit2)->off_x;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateHit2);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeHit2);
 
-            ft_hit->offset.y = ftScriptEventCast(p_event, ftScriptEventCreateHit3)->off_y;
-            ft_hit->offset.z = ftScriptEventCast(p_event, ftScriptEventCreateHit3)->off_z;
+            ft_hit->offset.y = ftScriptEventCast(p_event, ftScriptEventMakeHit3)->off_y;
+            ft_hit->offset.z = ftScriptEventCast(p_event, ftScriptEventMakeHit3)->off_z;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateHit3);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeHit3);
 
-            ft_hit->angle = ftScriptEventCast(p_event, ftScriptEventCreateHit4)->angle;
-            ft_hit->knockback_scale = ftScriptEventCast(p_event, ftScriptEventCreateHit4)->knockback_scale;
-            ft_hit->knockback_weight = ftScriptEventCast(p_event, ftScriptEventCreateHit4)->knockback_weight;
+            ft_hit->angle = ftScriptEventCast(p_event, ftScriptEventMakeHit4)->angle;
+            ft_hit->knockback_scale = ftScriptEventCast(p_event, ftScriptEventMakeHit4)->knockback_scale;
+            ft_hit->knockback_weight = ftScriptEventCast(p_event, ftScriptEventMakeHit4)->knockback_weight;
 
-            ft_hit->is_hit_air = ftScriptEventCast(p_event, ftScriptEventCreateHit4)->is_hit_ground_air & 1;           // Why?
-            ft_hit->is_hit_ground = (ftScriptEventCast(p_event, ftScriptEventCreateHit4)->is_hit_ground_air & 2) >> 1; // ???
+            ft_hit->is_hit_air = ftScriptEventCast(p_event, ftScriptEventMakeHit4)->is_hit_ground_air & 1;           // Why?
+            ft_hit->is_hit_ground = (ftScriptEventCast(p_event, ftScriptEventMakeHit4)->is_hit_ground_air & 2) >> 1; // ???
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateHit4);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeHit4);
 
-            ft_hit->shield_damage = ftScriptEventCast(p_event, ftScriptEventCreateHit5)->shield_damage;
+            ft_hit->shield_damage = ftScriptEventCast(p_event, ftScriptEventMakeHit5)->shield_damage;
 
-            ft_hit->sfx_level = ftScriptEventCast(p_event, ftScriptEventCreateHit5)->sfx_level;
-            ft_hit->sfx_kind = ftScriptEventCast(p_event, ftScriptEventCreateHit5)->sfx_kind;
+            ft_hit->sfx_level = ftScriptEventCast(p_event, ftScriptEventMakeHit5)->sfx_level;
+            ft_hit->sfx_kind = ftScriptEventCast(p_event, ftScriptEventMakeHit5)->sfx_kind;
 
-            ft_hit->knockback_base = ftScriptEventCast(p_event, ftScriptEventCreateHit5)->knockback_base;
+            ft_hit->knockback_base = ftScriptEventCast(p_event, ftScriptEventMakeHit5)->knockback_base;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateHit5);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeHit5);
 
             ft_hit->is_scale_pos = (ev_kind == ftScriptEvent_Kind_HitScaleOffset) ? TRUE : FALSE;
 
@@ -124,7 +124,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
 
             ft_hit->damage = gmCommon_DamageApplyStale(fp->player, ft_hit->damage, ft_hit->attack_id, ft_hit->motion_count);
         }
-        else ftScriptEventAdvance(p_event, ftScriptEventCreateHit);
+        else ftScriptEventAdvance(p_event, ftScriptEventMakeHit);
 
         break;
 
@@ -303,30 +303,30 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
     case ftScriptEvent_Kind_GFXScaleOffset:
         if (!(fp->is_playing_gfx))
         {
-            joint_index = ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventCreateGFX1)->joint_index);
-            gfx_id = ftScriptEventCast(p_event, ftScriptEventCreateGFX1)->gfx_id;
-            flag = ftScriptEventCast(p_event, ftScriptEventCreateGFX1)->flag;
+            joint_index = ftCommon_GetLightHoldJointIndex(fp, ftScriptEventCast(p_event, ftScriptEventMakeGFX1)->joint_index);
+            gfx_id = ftScriptEventCast(p_event, ftScriptEventMakeGFX1)->gfx_id;
+            flag = ftScriptEventCast(p_event, ftScriptEventMakeGFX1)->flag;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX1);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeGFX1);
 
-            gfx_offset.x = ftScriptEventCast(p_event, ftScriptEventCreateGFX2)->off_x;
-            gfx_offset.y = ftScriptEventCast(p_event, ftScriptEventCreateGFX2)->off_y;
+            gfx_offset.x = ftScriptEventCast(p_event, ftScriptEventMakeGFX2)->off_x;
+            gfx_offset.y = ftScriptEventCast(p_event, ftScriptEventMakeGFX2)->off_y;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX2);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeGFX2);
 
-            gfx_offset.z = ftScriptEventCast(p_event, ftScriptEventCreateGFX3)->off_z;
-            gfx_scatter.x = ftScriptEventCast(p_event, ftScriptEventCreateGFX3)->rng_x;
+            gfx_offset.z = ftScriptEventCast(p_event, ftScriptEventMakeGFX3)->off_z;
+            gfx_scatter.x = ftScriptEventCast(p_event, ftScriptEventMakeGFX3)->rng_x;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX3);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeGFX3);
 
-            gfx_scatter.y = ftScriptEventCast(p_event, ftScriptEventCreateGFX4)->rng_y;
-            gfx_scatter.z = ftScriptEventCast(p_event, ftScriptEventCreateGFX4)->rng_z;
+            gfx_scatter.y = ftScriptEventCast(p_event, ftScriptEventMakeGFX4)->rng_y;
+            gfx_scatter.z = ftScriptEventCast(p_event, ftScriptEventMakeGFX4)->rng_z;
 
-            ftScriptEventAdvance(p_event, ftScriptEventCreateGFX4);
+            ftScriptEventAdvance(p_event, ftScriptEventMakeGFX4);
 
             ftCommon_GFXSpawn(fighter_gobj, gfx_id, joint_index, &gfx_offset, &gfx_scatter, fp->lr, (ev_kind == ftScriptEvent_Kind_GFXScaleOffset) ? TRUE : FALSE, flag);
         }
-        else ftScriptEventAdvance(p_event, ftScriptEventCreateGFX);
+        else ftScriptEventAdvance(p_event, ftScriptEventMakeGFX);
 
         break;
 
@@ -443,7 +443,6 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
         ftScriptEventAdvance(p_event, ftScriptEventGoto1);
 
         p_event->p_script = ftScriptEventCast(p_event, ftScriptEventGoto2)->p_goto;
-
         break;
 
     case ftScriptEvent_Kind_SetParallelScript:
@@ -477,63 +476,54 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
         ftCommon_ResetModelPartRenderAll(fighter_gobj);
 
         ftScriptEventAdvance(p_event, ftScriptEventDefault);
-
         break;
 
     case ftScriptEvent_Kind_HideModelPartAll:
         ftCommon_HideModelPartAll(fighter_gobj);
 
         ftScriptEventAdvance(p_event, ftScriptEventDefault);
-
         break;
 
     case ftScriptEvent_Kind_SetTexturePart:
         ftCommon_SetTexturePartIndex(fighter_gobj, ftScriptEventCast(p_event, ftScriptEventSetTexturePart)->obj_index, ftScriptEventCast(p_event, ftScriptEventSetTexturePart)->frame);
 
         ftScriptEventAdvance(p_event, ftScriptEventSetTexturePart);
-
         break;
 
     case ftScriptEvent_Kind_SetColAnim:
-        ftColor_CheckSetColAnimIndex(fighter_gobj, ftScriptEventCast(p_event, ftScriptEventSetColAnim)->colanim_id, ftScriptEventCast(p_event, ftScriptEventSetColAnim)->length);
+        ftColor_CheckSetColAnimIndex(fighter_gobj, ftScriptEventCast(p_event, ftScriptEventSetColAnim)->colanim_id, ftScriptEventCast(p_event, ftScriptEventSetColAnim)->duration);
 
         ftScriptEventAdvance(p_event, ftScriptEventSetColAnim);
-
         break;
 
     case ftScriptEvent_Kind_ResetColAnim:
         ftCommon_ResetColAnimStatUpdate(fighter_gobj);
 
         ftScriptEventAdvance(p_event, ftScriptEventDefault);
-
         break;
 
     case ftScriptEvent_Kind_SetFlag0:
         fp->command_vars.flags.flag0 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
         ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
-
         break;
 
     case ftScriptEvent_Kind_SetFlag1:
         fp->command_vars.flags.flag1 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
         ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
-
         break;
 
     case ftScriptEvent_Kind_SetFlag2:
         fp->command_vars.flags.flag2 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
         ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
-
         break;
 
     case ftScriptEvent_Kind_SetFlag3:
         fp->command_vars.flags.flag3 = ftScriptEventCast(p_event, ftScriptEventSetFlag)->flag;
 
         ftScriptEventAdvance(p_event, ftScriptEventSetFlag);
-
         break;
 
     case ftScriptEvent_Kind_SlopeContour:
@@ -543,15 +533,14 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
 
         if (!(flag2 & fp->slope_contour & 4))
         {
-            DObjGetStruct(fighter_gobj)->rotate.x = 0.0F;
+            DObjGetStruct(fighter_gobj)->rotate.x = F_DEG_TO_RAD(0.0F);
         }
         break;
 
     case ftScriptEvent_Kind_HideItem:
-        fp->is_show_item = ftScriptEventCast(p_event, ftScriptEventUnkFlag)->flag;
+        fp->is_show_item = ftScriptEventCast(p_event, ftScriptEventShowItem)->flag;
 
         ftScriptEventAdvance(p_event, ftScriptEventDefault);
-
         break;
 
     case ftScriptEvent_Kind_AfterImage:
@@ -559,25 +548,22 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
         fp->afterimage.render_state = ftScriptEventCast(p_event, ftScriptEventAfterImage)->render_state;
 
         ftScriptEventAdvance(p_event, ftScriptEventAfterImage);
-
         break;
 
-    case ftScriptEvent_Kind_Unk15:
+    case ftScriptEvent_Kind_MakeRumble:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            func_ovl2_800E806C(fp, ftScriptEventCast(p_event, ftScriptEventUnk31)->value2, ftScriptEventCast(p_event, ftScriptEventUnk31)->value1);
+            ftMain_MakeRumble(fp, ftScriptEventCast(p_event, ftScriptEventMakeRumble)->rumble_id, ftScriptEventCast(p_event, ftScriptEventMakeRumble)->duration);
         }
-        ftScriptEventAdvance(p_event, ftScriptEventUnk31);
-
+        ftScriptEventAdvance(p_event, ftScriptEventMakeRumble);
         break;
 
-    case ftScriptEvent_Kind_Unk16:
+    case ftScriptEvent_Kind_StopRumble:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            func_ovl2_80115630(fp->player, ftScriptEventCast(p_event, ftScriptEventUnk32)->value1);
+            func_ovl2_80115630(fp->player, ftScriptEventCast(p_event, ftScriptEventStopRumble)->rumble_id);
         }
-        ftScriptEventAdvance(p_event, ftScriptEventUnk32);
-
+        ftScriptEventAdvance(p_event, ftScriptEventStopRumble);
         break;
     }
 }
@@ -611,11 +597,11 @@ void ftScript_UpdateAllEventsNoGFX(GObj *fighter_gobj)
                 }
                 else if (p_event->frame_timer > 0.0F) continue;
 
-                ev_kind = ftScriptEventCast(p_event, ftScriptEventCreateGFX1)->opcode;
+                ev_kind = ftScriptEventCast(p_event, ftScriptEventMakeGFX1)->opcode;
 
                 if (((ev_kind == ftScriptEvent_Kind_GFX) || (ev_kind == ftScriptEvent_Kind_GFXScaleOffset)) && (fp->x191_flag_b0))
                 {
-                    ftScriptEventAdvance(p_event, ftScriptEventCreateGFX);
+                    ftScriptEventAdvance(p_event, ftScriptEventMakeGFX);
                 }
                 else ftScript_ProcessScriptEvent(fighter_gobj, fp, p_event, ev_kind);
 
@@ -685,20 +671,20 @@ void ftScript_UpdateDefaultEvents(GObj *fighter_gobj)
                 case ftScriptEvent_Kind_SetAirJumpMax:
                 case ftScriptEvent_Kind_SetColAnim:
                 case ftScriptEvent_Kind_ResetColAnim:
-                case ftScriptEvent_Kind_Unk15:
-                case ftScriptEvent_Kind_Unk16:
+                case ftScriptEvent_Kind_MakeRumble:
+                case ftScriptEvent_Kind_StopRumble:
                 case ftScriptEvent_Kind_AfterImage:
                     ftScriptEventAdvance(p_event, ftScriptEventDefault);
                     break;
 
                 case ftScriptEvent_Kind_GFX:
                 case ftScriptEvent_Kind_GFXScaleOffset:
-                    ftScriptEventAdvance(p_event, ftScriptEventCreateGFX);
+                    ftScriptEventAdvance(p_event, ftScriptEventMakeGFX);
                     break;
 
                 case ftScriptEvent_Kind_Hit:
                 case ftScriptEvent_Kind_HitScaleOffset:
-                    ftScriptEventAdvance(p_event, ftScriptEventCreateHit);
+                    ftScriptEventAdvance(p_event, ftScriptEventMakeHit);
                     break;
 
                 case ftScriptEvent_Kind_SetHitOffset:
@@ -769,7 +755,7 @@ void ftScript_UpdateDefaultEventsGFX(GObj *fighter_gobj)
 
                 case ftScriptEvent_Kind_Hit:
                 case ftScriptEvent_Kind_HitScaleOffset:
-                    ftScriptEventAdvance(p_event, ftScriptEventCreateHit);
+                    ftScriptEventAdvance(p_event, ftScriptEventMakeHit);
                     break;
 
                 case ftScriptEvent_Kind_SetHitOffset:
@@ -3759,7 +3745,7 @@ void ftManager_ProcUpdateMain(GObj *fighter_gobj)
 
         if ((s32)((fp->damage_queue * 0.75F) + 4.0F) > 0)
         {
-            func_ovl2_800E806C(fp, 0, (s32)((fp->damage_queue * 0.75F) + 4.0F));
+            ftMain_MakeRumble(fp, 0, (s32)((fp->damage_queue * 0.75F) + 4.0F));
         }
     }
     else if (fp->shield_damage != 0)
@@ -3795,11 +3781,11 @@ void ftManager_ProcUpdateMain(GObj *fighter_gobj)
 
         if (fp->stat_flags.attack_group_id == ftStatus_AttackIndex_BatSwing4)
         {
-            func_ovl2_800E806C(fp, 10, 0);
+            ftMain_MakeRumble(fp, 10, 0);
         }
         else if ((s32)((fp->attack_damage * 0.5F) + 2.0F) > 0)
         {
-            func_ovl2_800E806C(fp, 5, (s32)((fp->attack_damage * 0.5F) + 2.0F));
+            ftMain_MakeRumble(fp, 5, (s32)((fp->attack_damage * 0.5F) + 2.0F));
         }
     }
     else if (fp->reflect_damage != 0)
@@ -4264,7 +4250,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
         ftCommon_SetModelPartLevelDetailAll(fighter_gobj, fp->lod_match);
         fp->lod_current = fp->lod_match;
     }
-    if (!(flags & FTSTATUPDATE_HIT_PRESERVE) && (fp->is_hit_enable))
+    if (!(flags & FTSTATUPDATE_HIT_PRESERVE) && (fp->is_hitbox_active))
     {
         ftCommon_ClearHitAll(fighter_gobj);
     }
@@ -4283,7 +4269,7 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
             ftCollision_SetHitStatusAll(fighter_gobj, gmHitCollision_HitStatus_Normal);
         }
     }
-    if (fp->is_fthurt_modify)
+    if (fp->is_hurtbox_modify)
     {
         ftCommon_InitFighterHurtParts(fighter_gobj);
     }
@@ -4323,11 +4309,11 @@ void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 
         func_ovl2_80115630(fp->player, 2);
         func_ovl2_80115630(fp->player, 3);
 
-        if (!(flags & FTSTATUPDATE_UNK5_PRESERVE))
+        if (!(flags & FTSTATUPDATE_RUMBLE_PRESERVE))
         {
             func_ovl2_80115630(fp->player, 7);
         }
-        fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * HALF_PI32;
+        fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * F_DEG_TO_RAD(90.0F); // HALF_PI32
 
         DObjGetStruct(fighter_gobj)->rotate.z = 0.0F;
 

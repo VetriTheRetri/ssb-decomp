@@ -15,6 +15,6 @@ void ftCommon_ShieldBreakFall_SetStatus(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_ShieldBreakFall, 0.0F, 1.0F, FTCOMMON_SHIELDBREAKFALL_STATUPDATE_FLAGS); // 0x10B2
     func_ovl2_800D8EB8(fp);
-    func_ovl2_800E806C(fp, 3, 0);
+    ftMain_MakeRumble(fp, 3, 0);
 }
 

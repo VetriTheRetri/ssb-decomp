@@ -1,9 +1,19 @@
 #include <it/item.h>
 
+enum itHammerStatus
+{
+    itStatus_Hammer_GWait,
+    itStatus_Hammer_AFall,
+    itStatus_Hammer_FHold,
+    itStatus_Hammer_FThrow,
+    itStatus_Hammer_FDrop,
+    itStatus_Hammer_EnumMax
+};
+
 itCreateDesc itCommon_Hammer_ItemDesc =
 {
     It_Kind_Hammer,                         // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x374,                                  // Offset of item attributes in file?
     0,                                      // ???
     0,                                      // ???
@@ -81,17 +91,6 @@ itStatusDesc itCommon_Hammer_StatusDesc[itStatus_Hammer_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itHammerStatus
-{
-    itStatus_Hammer_GWait,
-    itStatus_Hammer_AFall,
-    itStatus_Hammer_FHold,
-    itStatus_Hammer_FThrow,
-    itStatus_Hammer_FDrop,
-    itStatus_Hammer_EnumMax
-
-} itHammerStatus;
 
 // 0x80176110
 void itHammer_SDefault_SetColAnim(GObj *item_gobj)

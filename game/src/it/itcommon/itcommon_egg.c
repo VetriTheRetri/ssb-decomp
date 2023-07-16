@@ -1,9 +1,20 @@
 #include <it/item.h>
 
+enum itEggStatus
+{
+    itStatus_Egg_GWait,
+    itStatus_Egg_AFall,
+    itStatus_Egg_FHold,
+    itStatus_Egg_FThrow,
+    itStatus_Egg_FDrop,
+    itStatus_Egg_NExplode,
+    itStatus_Egg_EnumMax
+};
+
 itCreateDesc itCommon_Capsule_ItemDesc =
 {
     It_Kind_Egg,                            // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0xACC,                                  // Offset of item attributes in file?
     0x1C,                                   // ???
     0,                                      // ???
@@ -92,17 +103,6 @@ itStatusDesc itCommon_Egg_StatusDesc[itStatus_Egg_EnumMax] =
         NULL,                               // Proc Reflector
         NULL                                // Proc Damage
     }
-};
-
-typedef enum itEggStatus
-{
-    itStatus_Egg_GWait,
-    itStatus_Egg_AFall,
-    itStatus_Egg_FHold,
-    itStatus_Egg_FThrow,
-    itStatus_Egg_FDrop,
-    itStatus_Egg_NExplode,
-    itStatus_Egg_EnumMax
 };
 
 // 0x801815C0

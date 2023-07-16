@@ -2,10 +2,20 @@
 #include <wp/weapon.h>
 #include <ft/fighter.h>
 
+enum itFFlowerStatus
+{
+    itStatus_FFlower_GWait,
+    itStatus_FFlower_AFall,
+    itStatus_FFlower_FHold,
+    itStatus_FFlower_FThrow,
+    itStatus_FFlower_FDrop,
+    itStatus_FFlower_EnumMax
+};
+
 itCreateDesc itCommon_FFlower_ItemDesc = 
 {
     It_Kind_FFlower,                        // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x2E4,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -88,7 +98,7 @@ wpCreateDesc wpFFlower_Flame_WeaponDesc =
 {
     0,                                      // Render flags?
     Wp_Kind_FFlowerFlame,                   // Weapon Kind
-    &gItemFileData,                         // Pointer to character's loaded files?
+    &gpItemFileData,                        // Pointer to character's loaded files?
     0x32C,                                  // Offset of weapon attributes in loaded files
     0x1C,                                   // ???
     0,                                      // ???
@@ -102,17 +112,6 @@ wpCreateDesc wpFFlower_Flame_WeaponDesc =
     wpFFlower_Flame_ProcReflector,          // Proc Reflector
     NULL                                    // Proc Absorb
 };
-
-typedef enum itFFlowerStatus
-{
-    itStatus_FFlower_GWait,
-    itStatus_FFlower_AFall,
-    itStatus_FFlower_FHold,
-    itStatus_FFlower_FThrow,
-    itStatus_FFlower_FDrop,
-    itStatus_FFlower_EnumMax
-
-} itFFlowerStatus;
 
 // 0x80175B20
 bool32 itFFlower_AFall_ProcUpdate(GObj *item_gobj)

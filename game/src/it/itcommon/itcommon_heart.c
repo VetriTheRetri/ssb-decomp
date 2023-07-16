@@ -1,9 +1,17 @@
 #include <it/item.h>
 
+enum itHeartStatus
+{
+    itStatus_Heart_GWait,
+    itStatus_Heart_AFall,
+    itStatus_Heart_FDrop,
+    itStatus_Heart_EnumMax
+};
+
 itCreateDesc itCommon_Heart_ItemDesc =
 {
     It_Kind_Heart,                          // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x100,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -19,7 +27,7 @@ itCreateDesc itCommon_Heart_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itCommon_Harisen_StatusDesc[itStatus_Heart_EnumMax] =
+itStatusDesc itCommon_Heart_StatusDesc[itStatus_Heart_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -57,15 +65,6 @@ itStatusDesc itCommon_Harisen_StatusDesc[itStatus_Heart_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itHeartStatus
-{
-    itStatus_Heart_GWait,
-    itStatus_Heart_AFall,
-    itStatus_Heart_FDrop,
-    itStatus_Heart_EnumMax
-
-} itHeartStatus; 
 
 // 0x801746F0
 bool32 itHeart_AFall_ProcUpdate(GObj *item_gobj)

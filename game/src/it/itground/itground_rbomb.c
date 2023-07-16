@@ -1,5 +1,13 @@
 #include <it/item.h>
 
+enum itRBombStatus
+{
+    itStatus_RBomb_AFall,
+    itStatus_RBomb_NExplode,
+    itStatus_RBomb_GRoll,
+    itStatus_RBomb_EnumMax
+};
+
 extern intptr_t Article_Gr_Bomb_Hit;
 extern intptr_t D_NF_00000788;
 extern intptr_t D_NF_000008A0;
@@ -64,15 +72,6 @@ itStatusDesc itGround_RBomb_StatusDesc[itStatus_RBomb_EnumMax] =
     }
 };
 
-typedef enum itRBombStatus
-{
-    itStatus_RBomb_AFall,
-    itStatus_RBomb_NExplode,
-    itStatus_RBomb_GRoll,
-    itStatus_RBomb_EnumMax
-
-} itRBombStatus;
-
 // 0x80184A70
 void itEffect_UpdateRBombSmashGFX(GObj *effect_gobj) // RTTF bomb explode GFX process
 {
@@ -86,23 +85,19 @@ void itEffect_UpdateRBombSmashGFX(GObj *effect_gobj) // RTTF bomb explode GFX pr
         func_ovl2_800FD4F8(ep);
         gOMObj_EjectGObjCommon(effect_gobj);
     }
-    else if (joint != NULL)
+    else while (joint != NULL)
     {
-        do
-        {
-            joint->scale.y -= 1.3F;
+        joint->scale.y -= 1.3F;
 
-            joint->translate.x += joint->scale.x; // This makes no sense, seems this custom effect is very... custom
-            joint->translate.y += joint->scale.y;
-            joint->translate.z += joint->scale.z;
+        joint->translate.x += joint->scale.x; // This makes no sense, seems this custom effect is very... custom
+        joint->translate.y += joint->scale.y;
+        joint->translate.z += joint->scale.z;
 
-            joint->rotate.x += joint->dobj_f0; // ??? Seems to be rotation step, but only in this case? Otherwise -FLOAT32_MAX?
-            joint->rotate.y += joint->dobj_f1;
-            joint->rotate.z += joint->dobj_f2;
+        joint->rotate.x += joint->dobj_f0; // ??? Seems to be rotation step, but only in this case? Otherwise -FLOAT32_MAX?
+        joint->rotate.y += joint->dobj_f1;
+        joint->rotate.z += joint->dobj_f2;
 
-            joint = joint->unk_0x8;
-        } 
-        while (joint != NULL);
+        joint = joint->unk_0x8;
     }
 }
 

@@ -2,10 +2,25 @@
 #include <ft/fighter.h>
 #include <gm/gmmatch.h>
 
+extern intptr_t D_NF_00009430;
+extern intptr_t D_NF_00009520;
+
+enum itMBallStatus
+{
+    itStatus_MBall_GWait,
+    itStatus_MBall_AFall,
+    itStatus_MBall_FHold,
+    itStatus_MBall_FThrow,
+    itStatus_MBall_FDrop,
+    itStatus_MBall_GOpen,
+    itStatus_MBall_AOpen,
+    itStatus_MBall_EnumMax
+};
+
 itCreateDesc itCommon_MBall_ItemDesc =
 {
     It_Kind_MBall,                          // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x6E4,                                  // Offset of item attributes in file?
     0,                                      // ???
     0,                                      // ???
@@ -107,22 +122,6 @@ itStatusDesc itCommon_MBall_StatusDesc[itStatus_MBall_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itMBallStatus
-{
-    itStatus_MBall_GWait,
-    itStatus_MBall_AFall,
-    itStatus_MBall_FHold,
-    itStatus_MBall_FThrow,
-    itStatus_MBall_FDrop,
-    itStatus_MBall_GOpen,
-    itStatus_MBall_AOpen,
-    itStatus_MBall_EnumMax
-
-} itMBallStatus;
-
-extern intptr_t D_NF_00009430;
-extern intptr_t D_NF_00009520;
 
 // 0x8017C690
 void func_ovl3_8017C690(GObj *item_gobj)
@@ -283,8 +282,7 @@ void itMBall_FDrop_SetStatus(GObj *item_gobj)
     itMain_SetItemStatus(item_gobj, itCommon_MBall_StatusDesc, itStatus_MBall_FDrop);
 }
 
-extern u32 itMonster_Global_SelectMonsterIndex = 0; // Not uninitialized, so it's hardcoded upon building the ROM? 0 = random, beyond 0 = index of Pokémon to spawn
-                                                    // When in doubt, change to s32
+extern u32 itMonster_Global_SelectMonsterIndex;
 
 // 0x8017CA48
 bool32 itMBall_GOpen_ProcUpdate(GObj *m_ball_gobj)
@@ -376,7 +374,7 @@ void itMBall_GOpen_InitItemVars(GObj *item_gobj)
         {
             ftStruct *fp = ftGetStruct(fighter_gobj);
 
-            func_ovl2_800E806C(fp, 8, 20);
+            ftMain_MakeRumble(fp, 8, 20);
         }
     }
     ip->item_vars.m_ball.effect_gobj = func_ovl2_80102C28(&joint->translate);

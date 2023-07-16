@@ -1,9 +1,19 @@
 #include <it/item.h>
 
+enum itBatStatus
+{
+    itStatus_Bat_GWait,
+    itStatus_Bat_AFall,
+    itStatus_Bat_FHold,
+    itStatus_Bat_FThrow,
+    itStatus_Bat_FDrop,
+    itStatus_Bat_EnumMax
+};
+
 itCreateDesc itCommon_Bat_ItemDesc =
 {
     It_Kind_Bat,                            // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x1D8,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -81,17 +91,6 @@ itStatusDesc itCommon_Bat_StatusDesc[itStatus_Bat_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itBatStatus
-{
-    itStatus_Bat_GWait,
-    itStatus_Bat_AFall,
-    itStatus_Bat_FHold,
-    itStatus_Bat_FThrow,
-    itStatus_Bat_FDrop,
-    itStatus_Bat_EnumMax
-
-} itBatStatus;
 
 // 0x80174E30 
 bool32 itBat_AFall_ProcUpdate(GObj *item_gobj)

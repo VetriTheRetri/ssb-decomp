@@ -121,7 +121,7 @@ bool32 wpSamus_Bomb_ProcMap(GObj *weapon_gobj)
     {
         is_collide = func_ovl3_80167B58(weapon_gobj);
 
-        if (wpMap_CheckCollideAllModifyVel(weapon_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), WPSAMUSBOMB_WAIT_COLLIDE_MOD_VEL, NULL) != FALSE)
+        if (wpMap_CheckCollideAllRebound(weapon_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), WPSAMUSBOMB_WAIT_COLLIDE_MOD_VEL, NULL) != FALSE)
         {
             wpMain_VelSetLR(weapon_gobj);
         }

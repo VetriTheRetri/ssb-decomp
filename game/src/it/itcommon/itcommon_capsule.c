@@ -1,9 +1,20 @@
 #include <it/item.h>
 
+enum itCapsuleStatus
+{
+    itStatus_Capsule_GWait,
+    itStatus_Capsule_AFall,
+    itStatus_Capsule_FHold,
+    itStatus_Capsule_FThrow,
+    itStatus_Capsule_FDrop,
+    itStatus_Capsule_NExplode,
+    itStatus_Capsule_EnumMax
+};
+
 itCreateDesc itCommon_Capsule_ItemDesc = 
 {
     It_Kind_Capsule,                        // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                         // Pointer to item file data?
     0x50,                                   // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -93,18 +104,6 @@ itStatusDesc itCommon_Capsule_StatusDesc[itStatus_Capsule_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itCapsuleStatus
-{
-    itStatus_Capsule_GWait,
-    itStatus_Capsule_AFall,
-    itStatus_Capsule_FHold,
-    itStatus_Capsule_FThrow,
-    itStatus_Capsule_FDrop,
-    itStatus_Capsule_NExplode,
-    itStatus_Capsule_EnumMax
-
-} itCapsuleStatus;
 
 // 0x80173F90
 bool32 itCapsule_AFall_ProcUpdate(GObj *item_gobj)

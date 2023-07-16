@@ -1,9 +1,21 @@
 #include <it/item.h>
 
+enum itTaruStatus
+{
+    itStatus_Taru_GWait,
+    itStatus_Taru_AFall,
+    itStatus_Taru_FHold,
+    itStatus_Taru_FThrow,
+    itStatus_Taru_FDrop,
+    itStatus_Taru_NExplode,
+    itStatus_Taru_GRoll,
+    itStatus_Taru_EnumMax
+};
+
 itCreateDesc itCommon_Taru_ItemDesc =
 {
     It_Kind_Taru,                           // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x634,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -105,19 +117,6 @@ itStatusDesc itCommon_Taru_StatusDesc[itStatus_Taru_EnumMax] =
         itTaru_SDefault_ProcDamage          // Proc Damage
     }
 };
-
-typedef enum itTaruStatus
-{
-    itStatus_Taru_GWait,
-    itStatus_Taru_AFall,
-    itStatus_Taru_FHold,
-    itStatus_Taru_FThrow,
-    itStatus_Taru_FDrop,
-    itStatus_Taru_NExplode,
-    itStatus_Taru_GRoll,
-    itStatus_Taru_EnumMax
-
-} itTaruStatus;
 
 // 0x80179BA0
 bool32 itTaru_AFall_ProcUpdate(GObj *item_gobj)

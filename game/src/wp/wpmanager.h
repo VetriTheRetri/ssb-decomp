@@ -32,7 +32,7 @@ void		wpManager_UpdateHitPositions		(GObj *weapon_gobj);
 
 
 // Update weapon's record of interacted targets	(Decrement rehit timer if available, clear targets if timer reaches 0)
-void		wpManager_UpdateHitRecord		(GObj *weapon_gobj);
+void		wpManager_UpdateHitRecord			(GObj *weapon_gobj);
 
 
 // Main weapon logic GObj process (animation, physics, collision, blastzone check)

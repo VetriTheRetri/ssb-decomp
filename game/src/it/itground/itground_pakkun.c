@@ -1,6 +1,14 @@
 #include <it/item.h>
 #include <ft/fighter.h>
 
+enum itPakkunStatus
+{
+    itStatus_Pakkun_DWait,
+    itStatus_Pakkun_DAppear,
+    itStatus_Pakkun_NDamage,
+    itStatus_Pakkun_EnumMax
+};
+
 extern intptr_t D_NF_00000CC8;
 extern intptr_t D_NF_00000CF8;
 extern intptr_t D_NF_00000E04;
@@ -64,15 +72,6 @@ itStatusDesc itGround_Pakkun_StatusDesc[itStatus_Pakkun_EnumMax] =
         NULL                                // Proc Damage
     },
 };
-
-typedef enum itPakkunStatus
-{
-    itStatus_Pakkun_DWait,
-    itStatus_Pakkun_DAppear,
-    itStatus_Pakkun_NDamage,
-    itStatus_Pakkun_EnumMax
-
-} itPakkunStatus;
 
 // 0x8017CF20
 void itPakkun_DWait_SetStatus(GObj *item_gobj)

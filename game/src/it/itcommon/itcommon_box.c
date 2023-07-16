@@ -1,10 +1,21 @@
 #include <it/item.h>
 #include <gm/gmmatch.h>
 
+enum itBoxStatus
+{
+    itStatus_Box_GWait,
+    itStatus_Box_AFall,
+    itStatus_Box_FHold,
+    itStatus_Box_FThrow,
+    itStatus_Box_FDrop,
+    itStatus_Box_NExplode,
+    itStatus_Box_EnumMax
+};
+
 itCreateDesc itCommon_Box_ItemDesc = 
 {
     It_Kind_Box,                            // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x5CC,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -94,18 +105,6 @@ itStatusDesc itCommon_Box_StatusDesc[itStatus_Box_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itBoxStatus
-{
-    itStatus_Box_GWait,
-    itStatus_Box_AFall,
-    itStatus_Box_FHold,
-    itStatus_Box_FThrow,
-    itStatus_Box_FDrop,
-    itStatus_Box_NExplode,
-    itStatus_Box_EnumMax
-
-} itBoxStatus; 
 
 // 0x80179120
 void itEffect_UpdateBoxSmashGFX(GObj *effect_gobj) // Barrel/Crate smash GFX process

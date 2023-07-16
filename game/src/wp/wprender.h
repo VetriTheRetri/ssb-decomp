@@ -16,7 +16,7 @@ void		wpRender_DrawMaster					(void);
 
 
 // Unknown
-void		wpRender_DrawZBuffer					(void);
+void		wpRender_DrawZBuffer				(void);
 
 
 // Unknown

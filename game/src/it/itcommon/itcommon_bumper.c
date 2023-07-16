@@ -1,10 +1,23 @@
 #include <it/item.h>
 #include <ft/fighter.h>
 
+enum itNBumperStatus
+{
+    itStatus_NBumper_GWait,                 // Ground neutral
+    itStatus_NBumper_AFall,                 // Airborne neutral
+    itStatus_NBumper_FHold,                 // Fighter hold
+    itStatus_NBumper_FThrow,                // Fighter throw
+    itStatus_NBumper_FDrop,                 // Fighter drop
+    itStatus_NBumper_GWaitHit,              // Ground active
+    itStatus_NBumper_AHit,                  // Airborne hit
+    itStatus_NBumper_GDisappear,            // Ground despawn
+    itStatus_NBumper_EnumMax
+};
+
 itCreateDesc itCommon_NBumper_ItemDesc =
 {
-    It_Kind_NBumper,                      // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    It_Kind_NBumper,                        // Item Kind
+    &gpItemFileData,                        // Pointer to item file data?
     0x69C,                                  // Offset of item attributes in file?
     0x12,                                   // ???
     0,                                      // ???
@@ -118,20 +131,6 @@ itStatusDesc itCommon_NBumper_StatusDesc[itStatus_NBumper_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itNBumperStatus
-{
-    itStatus_NBumper_GWait,                 // Ground neutral
-    itStatus_NBumper_AFall,                 // Airborne neutral
-    itStatus_NBumper_FHold,                 // Fighter hold
-    itStatus_NBumper_FThrow,                // Fighter throw
-    itStatus_NBumper_FDrop,                 // Fighter drop
-    itStatus_NBumper_GWaitHit,              // Ground active
-    itStatus_NBumper_AHit,                  // Airborne hit
-    itStatus_NBumper_GDisappear,            // Ground despawn
-    itStatus_NBumper_EnumMax
-
-} itNBumperStatus;
 
 // 0x8017B430
 bool32 itNBumper_AFall_ProcUpdate(GObj *item_gobj)

@@ -170,11 +170,12 @@ void ftCommon_StickInputSetLR(ftStruct *fp)
     fp->lr = (fp->input.pl.stick_range.x >= 0) ? RIGHT : LEFT;
 }
 
-void func_ovl2_800E806C(ftStruct *fp, s32 arg1, s32 arg2)
+// 0x800E806C
+void ftMain_MakeRumble(ftStruct *fp, s32 rumble_id, s32 duration)
 {
     if (fp->status_info.pl_kind == Pl_Kind_Human)
     {
-        func_ovl2_80115530(fp->player, arg1, arg2);
+        func_ovl2_80115530(fp->player, rumble_id, duration);
     }
 }
 
@@ -409,7 +410,7 @@ void ftCommon_ClearHitAll(GObj *fighter_gobj)
 
         ft_hit->update_state = gmHitCollision_UpdateState_Disable;
     }
-    fp->is_hit_enable = FALSE;
+    fp->is_hitbox_active = FALSE;
 }
 
 // 0x800E853C
@@ -438,7 +439,7 @@ void ftCollision_RefreshHitIndex(GObj *fighter_gobj, s32 hit_id)
 
     fp->fighter_hit[hit_id].update_state = gmHitCollision_UpdateState_New;
 
-    fp->is_hit_enable = TRUE;
+    fp->is_hitbox_active = TRUE;
 
     ftCollision_ClearHitRecordIndex(fp, hit_id);
 }
@@ -630,7 +631,7 @@ void ftCommon_InitFighterHurtParts(GObj *fighter_gobj)
             ft_hurt->size.z *= 0.5F;
         }
     }
-    fp->is_fthurt_modify = FALSE;
+    fp->is_hurtbox_modify = FALSE;
 }
 
 // 0x800E8BC8
@@ -652,7 +653,7 @@ void ftCommon_UpdateFighterHurtPartIndex(GObj *fighter_gobj, s32 joint_index, Ve
             fp->fighter_hurt[i].size.y *= 0.5F;
             fp->fighter_hurt[i].size.z *= 0.5F;
 
-            fp->is_fthurt_modify = TRUE;
+            fp->is_hurtbox_modify = TRUE;
 
             return; // The same oversight as ftCommon_SetHitStatusPart except this time on hurtbox offset and size
         }

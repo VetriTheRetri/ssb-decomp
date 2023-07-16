@@ -1,11 +1,21 @@
 #include <it/item.h>
 
-s32 D_ovl3_80189A70[2] = { 0x2250, 0x2270 };
+enum itHarisenStatus
+{
+    itStatus_Harisen_GWait,
+    itStatus_Harisen_AFall,
+    itStatus_Harisen_FHold,
+    itStatus_Harisen_FThrow,
+    itStatus_Harisen_FDrop,
+    itStatus_Harisen_EnumMax
+};
+
+intptr_t D_ovl3_80189A70[2] = { 0x2250, 0x2270 };
 
 itCreateDesc itCommon_Harisen_ItemDesc =
 {
     It_Kind_Harisen,                        // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x220,                                  // Offset of item attributes in file?
     0x1C,                                   // ???
     0,                                      // ???
@@ -84,17 +94,6 @@ itStatusDesc itCommon_Harisen_StatusDesc[itStatus_Harisen_EnumMax] =
     }
 };
 
-typedef enum itHarisenStatus
-{
-    itStatus_Harisen_GWait,
-    itStatus_Harisen_AFall,
-    itStatus_Harisen_FHold,
-    itStatus_Harisen_FThrow,
-    itStatus_Harisen_FDrop,
-    itStatus_Harisen_EnumMax
-
-} itHarisenStatus;
-
 // 0x80175140
 void itHairsen_SDefault_SetScale(GObj *item_gobj, f32 scale)
 {
@@ -129,8 +128,6 @@ bool32 itHarisen_AFall_ProcMap(GObj *item_gobj)
 
     return FALSE;
 }
-
-extern itStatusDesc itCommon_Harisen_StatusDesc[];
 
 // 0x801751F4
 void itHarisen_GWait_SetStatus(GObj *item_gobj)

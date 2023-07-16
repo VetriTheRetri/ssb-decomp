@@ -3,6 +3,12 @@
 
 extern void *D_ovl2_8013113C;
 
+enum itPKFireStatus
+{
+    itStatus_PKFire_GWait,
+    itStatus_PKFire_AFall
+};
+
 itCreateDesc itNess_PKFire_ItemDesc = 
 {
     It_Kind_PKFire,                         // Item Kind
@@ -48,13 +54,6 @@ itStatusDesc itNess_PKFire_StatusDesc[2] =
         itPKFire_SDefault_ProcDamage        // Proc Damage
     }
 };
-
-typedef enum itPKFireStatus
-{
-    itStatus_PKFire_GWait,
-    itStatus_PKFire_AFall
-
-} itPKFireStatus;
 
 // 0x80185350
 bool32 itPKFire_NCreate_ProcUpdate(GObj *item_gobj)

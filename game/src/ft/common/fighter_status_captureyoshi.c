@@ -319,7 +319,7 @@ void ftCommon_YoshiEgg_SetHurt(GObj *fighter_gobj)
         }
     }
     fp->is_hitstatus_nodamage = TRUE;
-    fp->is_fthurt_modify = TRUE;
+    fp->is_hurtbox_modify = TRUE;
 }
 
 // 0x8014CF0C

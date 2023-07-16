@@ -2,6 +2,12 @@
 #include <wp/weapon.h>
 #include <ft/fighter.h>
 
+enum itHitokageStatus
+{
+    itStatus_Hitokage_NDamage,
+    itStatus_Hitokage_EnumMax
+};
+
 extern void *D_ovl2_801313F4;
 
 itCreateDesc itGround_Hitokage_ItemDesc =
@@ -56,13 +62,6 @@ wpCreateDesc wpHitokage_Flame_WeaponDesc =
     wpHitokage_Flame_ProcReflector,         // Proc Reflector
     NULL                                    // Proc Absorb
 };
-
-typedef enum itHitokageStatus
-{
-    itStatus_Hitokage_NDamage,
-    itStatus_Hitokage_EnumMax
-
-} itHitokageStatus;
 
 // 0x80183DA0
 void itHitokage_NDamage_SetStatus(GObj *item_gobj)

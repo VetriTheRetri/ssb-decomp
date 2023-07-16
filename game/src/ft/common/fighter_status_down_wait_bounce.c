@@ -92,7 +92,7 @@ void ftCommon_DownBounce_UpdateEffects(GObj *fighter_gobj)
 
     ftCommon_GFXSpawn(fighter_gobj, 0x16, 0, NULL, NULL, fp->lr, FALSE, 0);
     func_800269C0(Fighter_DownBounce_Sound[fp->ft_kind]);
-    func_ovl2_800E806C(fp, 4, 0);
+    ftMain_MakeRumble(fp, 4, 0);
 }
 
 // 0x80144498

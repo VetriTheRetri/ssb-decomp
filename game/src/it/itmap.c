@@ -80,7 +80,7 @@ bool32 func_ovl3_801735E0(mpCollData *coll_data, GObj *item_gobj, s32 arg2)
     {
         coll_data->unk_0x64 = TRUE;
 
-        func_800269C0(0x2EU);
+        func_800269C0(gmSound_SFX_ItemMapCollide);
 
         ap->rotate_step = 0.0F;
         joint->rotate.z = 0.0F;
@@ -163,7 +163,7 @@ bool32 itMap_CheckCollideAllRebound(GObj *item_gobj, u32 check_flags, f32 mod_ve
 
             return_bool = TRUE;
 
-            func_800269C0(0x2EU);
+            func_800269C0(gmSound_SFX_ItemMapCollide);
         }
     }
 
@@ -178,7 +178,7 @@ bool32 itMap_CheckCollideAllRebound(GObj *item_gobj, u32 check_flags, f32 mod_ve
 
             return_bool = TRUE;
 
-            func_800269C0(0x2EU);
+            func_800269C0(gmSound_SFX_ItemMapCollide);
         }
     }
 
@@ -206,7 +206,7 @@ bool32 itMap_CheckCollideAllRebound(GObj *item_gobj, u32 check_flags, f32 mod_ve
 
             return_bool = TRUE;
 
-            func_800269C0(0x2EU);
+            func_800269C0(gmSound_SFX_ItemMapCollide);
         }
     }
     if (return_bool != FALSE)
@@ -223,27 +223,27 @@ bool32 itMap_CheckCollideAllRebound(GObj *item_gobj, u32 check_flags, f32 mod_ve
     return return_bool;
 }
 
-void func_ovl3_80173A48(Vec3f *arg0, Vec3f *arg1, f32 arg2)
+void func_ovl3_80173A48(Vec3f *vel, Vec3f *ground_angle, f32 ground_rebound)
 {
     f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f12;
+    f32 scale;
+    f32 rebound;
 
-    temp_f0 = func_ovl0_800C7A84(arg0);
+    temp_f0 = func_ovl0_800C7A84(vel);
 
     if (temp_f0 != 0.0F)
     {
-        temp_f0_2 = 1.0F / temp_f0;
-        temp_f12 = temp_f0 * arg2 * 0.5F;
+        scale = 1.0F / temp_f0;
+        rebound = temp_f0 * ground_rebound * 0.5F;
 
-        func_ovl0_800C7B08(arg0, arg1);
+        func_ovl0_800C7B08(vel, ground_angle);
 
-        arg0->x *= temp_f0_2;
-        arg0->y *= temp_f0_2;
-        arg0->x += arg1->x;
-        arg0->y += arg1->y;
-        arg0->x *= temp_f12;
-        arg0->y *= temp_f12;
+        vel->x *= scale;
+        vel->y *= scale;
+        vel->x += ground_angle->x;
+        vel->y += ground_angle->y;
+        vel->x *= rebound;
+        vel->y *= rebound;
     }
 }
 
@@ -349,33 +349,33 @@ bool32 func_ovl3_80173DF4(GObj *item_gobj, f32 wall_ceil_rebound)
     else return FALSE;
 }
 
-bool32 func_ovl3_80173E58(GObj *item_gobj, void (*cb)(GObj*))
+bool32 func_ovl3_80173E58(GObj *item_gobj, void (*proc)(GObj*))
 {
-    if ((func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE) && (cb != NULL))
+    if ((func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE) && (proc != NULL))
     {
-        cb(item_gobj);
+        proc(item_gobj);
     }
     return FALSE;
 }
 
-bool32 func_ovl3_80173E9C(GObj *item_gobj, void (*cb)(GObj*)) // Unused
+bool32 func_ovl3_80173E9C(GObj *item_gobj, void (*proc)(GObj*)) // Unused
 {
     if ((func_ovl3_801737B8(item_gobj, MPCOLL_MASK_MAIN_ALL) != FALSE))
     {
-        if (cb != NULL)
+        if (proc != NULL)
         {
-            cb(item_gobj);
+            proc(item_gobj);
         }
         return TRUE;
     }
     else return FALSE;
 }
 
-bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 wall_ceil_rebound, void (*cb)(GObj*))
+bool32 func_ovl3_80173EE8(GObj *item_gobj, f32 wall_ceil_rebound, void (*proc)(GObj*))
 {
-    if ((func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE) && (cb != NULL))
+    if ((func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE) && (proc != NULL))
     {
-        cb(item_gobj);
+        proc(item_gobj);
     }
     if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), wall_ceil_rebound, NULL) != FALSE)
     {

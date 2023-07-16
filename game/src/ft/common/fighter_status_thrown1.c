@@ -105,7 +105,7 @@ void ftCommon_Thrown_SetStatusImmediate(GObj *fighter_gobj, s32 status_id)
     {
         if (capture_fp->status_info.status_id == ftStatus_Common_ThrowB)
         {
-            func_ovl2_800E806C(this_fp, 7, 0);
+            ftMain_MakeRumble(this_fp, 7, 0);
         }
     }
 }

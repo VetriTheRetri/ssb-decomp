@@ -1,5 +1,11 @@
 #include <it/item.h>
 
+enum itMarumineStatus
+{
+    itStatus_Marumine_NExplode,
+    itStatus_Marumine_EnumMax
+};
+
 extern intptr_t Marumine_Event;
 
 extern void *D_ovl2_801313F4;
@@ -37,13 +43,6 @@ itStatusDesc itGround_Marumine_StatusDesc[itStatus_Marumine_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itMarumineStatus
-{
-    itStatus_Marumine_NExplode,
-    itStatus_Marumine_EnumMax
-
-} itMarumineStatus;
 
 // 0x801837A0
 void itMarumine_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)

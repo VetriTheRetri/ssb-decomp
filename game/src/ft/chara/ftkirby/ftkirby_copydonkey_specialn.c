@@ -153,7 +153,7 @@ void ftKirby_CopyDonkey_SpecialNLoop_SetProcDamageAnimRate(GObj *fighter_gobj)
 void ftKirby_CopyDonkey_SpecialAirNLoop_SwitchStatusGround(GObj *fighter_gobj)
 {
     ftMap_SetGround(ftGetStruct(fighter_gobj));
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialNLoop, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialNLoop, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_RUMBLE_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     ftKirby_CopyDonkey_SpecialNLoop_SetProcDamageAnimRate(fighter_gobj);
 }
 
@@ -163,7 +163,7 @@ void ftKirby_CopyDonkey_SpecialNLoop_SwitchStatusAir(GObj *fighter_gobj)
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
     ftMap_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialAirNLoop, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_UNK5_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
+    ftStatus_Update(fighter_gobj, ftStatus_Kirby_CopyDonkey_SpecialAirNLoop, fighter_gobj->anim_frame, 1.0F, (FTSTATUPDATE_RUMBLE_PRESERVE | FTSTATUPDATE_COLANIM_PRESERVE));
     ftKirby_CopyDonkey_SpecialNLoop_SetProcDamageAnimRate(fighter_gobj);
     func_ovl2_800D8EB8(fp);
 }

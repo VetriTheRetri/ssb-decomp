@@ -2,10 +2,20 @@
 #include <wp/weapon.h>
 #include <ft/fighter.h>
 
+enum itStarRodStatus
+{
+    itStatus_StarRod_GWait,
+    itStatus_StarRod_AFall,
+    itStatus_StarRod_FHold,
+    itStatus_StarRod_FThrow,
+    itStatus_StarRod_FDrop,
+    itStatus_StarRod_EnumMax
+};
+
 itCreateDesc itCommon_StarRod_ItemDesc =
 {
     It_Kind_StarRod,                        // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x48C,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -88,7 +98,7 @@ wpCreateDesc wpStarRod_Star_WeaponDesc =
 {
     0,                                      // Render flags?
     Wp_Kind_StarRodStar,                    // Weapon Kind
-    &gItemFileData,                         // Pointer to character's loaded files?
+    &gpItemFileData,                        // Pointer to character's loaded files?
     0x4D4,                                  // Offset of weapon attributes in loaded files
     0x1C,                                   // ???
     0,                                      // ???
@@ -102,17 +112,6 @@ wpCreateDesc wpStarRod_Star_WeaponDesc =
     wpStarRod_Star_ProcReflector,           // Proc Reflector
     wpStarRod_Star_ProcHit                  // Proc Absorb
 };
-
-typedef enum itStarRodStatus
-{
-    itStatus_StarRod_GWait,
-    itStatus_StarRod_AFall,
-    itStatus_StarRod_FHold,
-    itStatus_StarRod_FThrow,
-    itStatus_StarRod_FDrop,
-    itStatus_StarRod_EnumMax
-
-} itStarRodStatus;
 
 // 0x80177E80
 bool32 itStarRod_AFall_ProcUpdate(GObj *item_gobj)

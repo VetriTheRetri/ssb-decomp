@@ -4,7 +4,7 @@
 itCreateDesc itCommon_Star_ItemDesc =
 {
     It_Kind_Star,                           // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x148,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???

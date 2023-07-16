@@ -1,5 +1,11 @@
 #include <it/item.h>
 
+enum itPowerBlockStatus
+{
+    itStatus_PowerBlock_NWait,
+    itStatus_PowerBlock_EnumMax
+};
+
 extern intptr_t D_NF_000011F8;
 extern intptr_t D_NF_00001288;
 extern void *D_ovl2_801313F4;
@@ -37,13 +43,6 @@ itStatusDesc itGround_PowerBlock_StatusDesc[itStatus_PowerBlock_EnumMax] =
         itPowerBlock_NWait_ProcDamage       // Proc Damage
     },
 };
-
-typedef enum itPowerBlockStatus
-{
-    itStatus_PowerBlock_NWait,
-    itStatus_PowerBlock_EnumMax
-
-} itPowerBlockStatus;
 
 // 0x8017C090
 bool32 itPowerBlock_SDefault_ProcUpdate(GObj *item_gobj)

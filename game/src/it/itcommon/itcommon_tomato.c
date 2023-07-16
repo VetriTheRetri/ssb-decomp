@@ -3,7 +3,7 @@
 itCreateDesc itCommon_Tomato_ItemDesc =
 {
     It_Kind_Tomato,                         // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                         // Pointer to item file data?
     0xB8,                                   // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -58,21 +58,20 @@ itStatusDesc itCommon_Tomato_StatusDesc[itStatus_Tomato_EnumMax] =
     }
 };
 
-typedef enum itTomatoStatus
+enum itTomatoStatus
 {
     itStatus_Tomato_GWait,
     itStatus_Tomato_AFall,
     itStatus_Tomato_FDrop,
     itStatus_Tomato_EnumMax
-
-} itTomatoStatus;
+};
 
 // 0x801744C0
 bool32 itTomato_AFall_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdateGravityClampTVel(ap, ITTOMATO_GRAVITY, ITTOMATO_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITTOMATO_GRAVITY, ITTOMATO_T_VEL);
     itManager_UpdateSpin(item_gobj);
 
     return FALSE;
@@ -102,11 +101,11 @@ void itTomato_GWait_SetStatus(GObj *item_gobj)
 // 0x80174588
 void itTomato_AFall_SetStatus(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    ap->is_allow_pickup = FALSE;
+    ip->is_allow_pickup = FALSE;
 
-    itMap_SetAir(ap);
+    itMap_SetAir(ip);
     itMain_SetItemStatus(item_gobj, itCommon_Tomato_StatusDesc, itStatus_Tomato_AFall);
 }
 
@@ -128,21 +127,21 @@ GObj* itCommon_Tomato_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 fla
     GObj *item_gobj = itManager_MakeItem(spawn_gobj, &itCommon_Tomato_ItemDesc, pos, vel, flags);
     DObj *joint;
     Vec3f translate;
-    itStruct *ap;
+    itStruct *ip;
 
     if (item_gobj != NULL)
     {
         joint = DObjGetStruct(item_gobj);
-        ap = itGetStruct(item_gobj);
+        ip = itGetStruct(item_gobj);
         translate = joint->translate;
 
         func_80008CC0(joint, 0x2E, 0);
 
         joint->translate = translate;
 
-        ap->is_unused_item_bool = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
-        ap->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ap);
+        ip->indicator_gobj = ifManager_ItemIndicator_CreateInterface(ip);
     }
     return item_gobj;
 }

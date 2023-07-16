@@ -1,9 +1,25 @@
 #include <it/item.h>
 
+extern intptr_t D_NF_00005F88;
+extern intptr_t D_NF_00006018;
+extern intptr_t D_NF_00006048;
+
+enum itRShellStatus
+{
+    itStatus_RShell_GWait,
+    itStatus_RShell_AFall,
+    itStatus_RShell_FHold,
+    itStatus_RShell_FThrow,
+    itStatus_RShell_FDrop,
+    itStatus_RShell_GSpin,
+    itStatus_RShell_ASpin,
+    itStatus_RShell_EnumMax
+};
+
 itCreateDesc itCommon_RShell_CreateDesc =
 {
     It_Kind_RShell,                         // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                         // Pointer to item file data?
     0x584,                                  // Offset of item attributes in file?
     0,                                      // ???
     0,                                      // ???
@@ -106,19 +122,6 @@ itStatusDesc itCommon_RShell_StatusDesc[itStatus_RShell_EnumMax] =
     }
 };
 
-typedef enum itRShellStatus
-{
-    itStatus_RShell_GWait,
-    itStatus_RShell_AFall,
-    itStatus_RShell_FHold,
-    itStatus_RShell_FThrow,
-    itStatus_RShell_FDrop,
-    itStatus_RShell_GSpin,
-    itStatus_RShell_ASpin,
-    itStatus_RShell_EnumMax
-
-} itRShellStatus;
-
 // 0x8017A3A0
 void itRShell_GSpin_UpdateFollowPlayer(GObj *item_gobj, GObj *fighter_gobj)
 {
@@ -218,10 +221,6 @@ void itRShell_GSpin_UpdateGFX(GObj *item_gobj)
     }
     ip->item_vars.shell.dust_gfx_int--;
 }
-
-extern intptr_t D_NF_00005F88;
-extern intptr_t D_NF_00006018;
-extern intptr_t D_NF_00006048;
 
 // 0x8017A6A0
 void func_ovl3_8017A6A0(GObj *item_gobj) // Identical to Green Shell function

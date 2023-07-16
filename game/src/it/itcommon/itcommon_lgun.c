@@ -2,10 +2,20 @@
 #include <wp/weapon.h>
 #include <ft/fighter.h>
 
+enum itLGunStatus
+{
+    itStatus_LGun_GWait,
+    itStatus_LGun_AFall,
+    itStatus_LGun_FHold,
+    itStatus_LGun_FThrow,
+    itStatus_LGun_FDrop,
+    itStatus_LGun_EnumMax
+};
+
 itCreateDesc itCommon_LGun_ItemDesc =
 {
     It_Kind_LGun,                           // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x268,                                  // Offset of item attributes in file?
     0x1B,                                   // ???
     0,                                      // ???
@@ -88,7 +98,7 @@ wpCreateDesc wpLGun_Ammo_WeaponDesc =
 {
     0,                                      // Render flags?
     Wp_Kind_LGunAmmo,                       // Weapon Kind
-    &gItemFileData,                         // Pointer to character's loaded files?
+    &gpItemFileData,                        // Pointer to character's loaded files?
     0x2B0,                                  // Offset of weapon attributes in loaded files
     0x1C,                                   // ???
     0,                                      // ???
@@ -102,17 +112,6 @@ wpCreateDesc wpLGun_Ammo_WeaponDesc =
     wpLGun_Ammo_ProcReflector,              // Proc Reflector
     wpLGun_Ammo_ProcHit                     // Proc Absorb
 };
-
-typedef enum itLGunStatus
-{
-    itStatus_LGun_GWait,
-    itStatus_LGun_AFall,
-    itStatus_LGun_FHold,
-    itStatus_LGun_FThrow,
-    itStatus_LGun_FDrop,
-    itStatus_LGun_EnumMax
-
-} itLGunStatus;
 
 // 0x801754F0
 bool32 itLGun_AFall_ProcUpdate(GObj *item_gobj)

@@ -36,7 +36,7 @@ bool32		func_ovl3_80167C04					(GObj *weapon_gobj);
 
 
 // Check for specific weapon map collision and modify velocity on contact
-bool32		wpMap_CheckCollideAllModifyVel		(GObj *weapon_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos);
+bool32		wpMap_CheckCollideAllRebound		(GObj *weapon_gobj, u32 check_flags, f32 mod_vel, Vec3f *pos);
 
 
 // Make weapon grounded

@@ -451,6 +451,7 @@ s32 Fighter_StatusList_DamageAir[4][3] =
     { ftStatus_Common_DamageAir3,  ftStatus_Common_DamageAir3,  ftStatus_Common_DamageAir3  } 
 };
 
+// 0x80140EE4
 void ftCommon_Damage_InitDamageVars(GObj *this_gobj, s32 status_id_replace, s32 damage, f32 knockback, s32 angle_start, s32 lr_damage,
 s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bool, bool32 is_publicity)
 {
@@ -467,7 +468,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
     s32 status_id_var;
     Vec3f vel_damage;
     f32 angle_diff;
-    s32 unused3[3];
+    s32 unused3;
 
     this_fp->status_vars.common.damage.hitstun_timer = hitstun_timer;
 
@@ -541,22 +542,17 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
             this_fp->phys_info.vel_damage_air.y = -this_fp->coll_data.ground_angle.x * (-vel_x * this_fp->lr);
         }
     }
-    this_fp->phys_info.vel_ground.x = 0.0F;
-    this_fp->phys_info.vel_air.z = 0.0F;
-    this_fp->phys_info.vel_air.y = 0.0F;
-    this_fp->phys_info.vel_air.x = 0.0F;
+    this_fp->phys_info.vel_air.x = this_fp->phys_info.vel_air.y = this_fp->phys_info.vel_air.z = this_fp->phys_info.vel_ground.x = 0.0F;
 
     if ((damage_level == 3) && (this_fp->ground_or_air == GA_Air))
     {
         if ((angle_end > FTCOMMON_DAMAGE_FIGHTER_FLYTOP_ANGLE_LOW) && (angle_end < FTCOMMON_DAMAGE_FIGHTER_FLYTOP_ANGLE_HIGH))
         {
             status_id_var = status_id_set = ftStatus_Common_DamageFlyTop;
-            
         }
         else if ((this_fp->percent_damage >= FTCOMMON_DAMAGE_FIGHTER_FLYROLL_DAMAGE_MIN) && (rand_f32() < FTCOMMON_DAMAGE_FIGHTER_FLYROLL_RANDOM_CHANCE))
         {
-            status_id_var = status_id_set = ftStatus_Common_DamageFlyRoll;
-            
+            status_id_var = status_id_set = ftStatus_Common_DamageFlyRoll;           
         }
     }
     if (status_id_replace != -1)
@@ -615,7 +611,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
 
     if ((damage_level == 3) || (arg9 != 0))
     {
-        func_ovl2_800E806C(this_fp, 2, 0);
+        ftMain_MakeRumble(this_fp, 2, 0);
     }
     if (this_fp->status_info.status_id == ftStatus_Common_DamageFlyRoll)
     {
@@ -885,7 +881,7 @@ void ftCommon_WallDamage_SetStatus(GObj *fighter_gobj, Vec3f *angle, Vec3f *pos)
 
     fp->damage_stack = knockback;
 
-    func_ovl2_800E806C(fp, 2, 0);
+    ftMain_MakeRumble(fp, 2, 0);
 
     ftCommon_ApplyIntangibleTimer(fp, FTCOMMON_WALLDAMAGE_INTANGIBLE_TIMER);
 

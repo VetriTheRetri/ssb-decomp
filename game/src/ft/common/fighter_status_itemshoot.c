@@ -50,7 +50,7 @@ void ftCommon_LGunShoot_ProcAccessory(GObj *fighter_gobj)
             ftCommon_GFXSpawn(fighter_gobj, 0x13, 0, &spawn_gfx_offset, NULL, fp->lr, FALSE, 0);
 
             func_800269C0(0x3DU);
-            func_ovl2_800E806C(fp, 9, 0);
+            ftMain_MakeRumble(fp, 9, 0);
         }
         else
         {
@@ -131,7 +131,7 @@ void ftCommon_FireFlowerShoot_UpdateAmmoStats(ftStruct *fp, s32 ammo_sub)
         else flame_vel_index = fp->status_vars.common.fireflower.flame_vel_index;
 
         ftCommon_FireFlowerShoot_CreateFlame(fp->fighter_gobj, &flame_spawn_offset, flame_vel_index, ammo_sub);
-        func_ovl2_800E806C(fp, 6, 0);
+        ftMain_MakeRumble(fp, 6, 0);
     }
     fp->status_vars.common.fireflower.ammo_fire_count++;
 

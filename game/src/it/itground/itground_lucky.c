@@ -1,6 +1,12 @@
 #include <it/item.h>
 #include <gm/gmmatch.h>
 
+enum itGLuckyStatus
+{
+    itStatus_GLucky_NDamage,
+    itStatus_GLucky_EnumMax
+};
+
 extern void *D_ovl2_801313F4;
 
 itCreateDesc itGround_Lucky_ItemDesc =
@@ -36,13 +42,6 @@ itStatusDesc itGround_Lucky_StatusDesc[itStatus_GLucky_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itGLuckyStatus
-{
-    itStatus_GLucky_NDamage,
-    itStatus_GLucky_EnumMax
-
-} itGLuckyStatus;
 
 // 0x8017C240
 void itGLucky_NDamage_SetStatus(GObj *item_gobj)

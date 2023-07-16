@@ -110,7 +110,7 @@ void ftMario_SpecialAirLw_SwitchStatusGround(GObj *fighter_gobj)
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
     ftMap_SetGround(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_UNK5_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_RUMBLE_PRESERVE);
     func_ovl2_800D8938(fp, 17.0F);
 }
 
@@ -121,7 +121,7 @@ void ftMario_SpecialLw_SwitchStatusAir(GObj *fighter_gobj)
 
     ftMario_SpecialAirLw_SetDisableRise(fighter_gobj);
     ftMap_SetAir(fp);
-    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_UNK5_PRESERVE);
+    ftStatus_Update(fighter_gobj, ftStatus_Mario_SpecialAirLw, fighter_gobj->anim_frame, 1.0F, FTSTATUPDATE_RUMBLE_PRESERVE);
     func_ovl2_800D8D10(fp, 40.0F);
     func_ovl2_800D8E78(fp, 17.0F);
 }

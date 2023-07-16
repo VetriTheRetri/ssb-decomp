@@ -15,7 +15,7 @@ void func_ovl3_8013BC8C(ftStruct *this_fp)
 {
     s32 i;
 
-    func_ovl2_800E806C(this_fp, 0, 30);
+    ftMain_MakeRumble(this_fp, 0, 30);
 
     for (i = 0; i < ARRAY_COUNT(gpBattleState->player_block); i++)
     {
@@ -29,7 +29,7 @@ void func_ovl3_8013BC8C(ftStruct *this_fp)
 
                 if ((!(gpBattleState->match_rules & GMMATCH_GAMERULE_STOCK)) || (other_fp->stock_count != -1))
                 {
-                    func_ovl2_800E806C(other_fp, 1, 15);
+                    ftMain_MakeRumble(other_fp, 1, 15);
                 }
                 else continue;
             }

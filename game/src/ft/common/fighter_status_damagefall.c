@@ -33,7 +33,7 @@ void func_ovl3_80143630(GObj *fighter_gobj)
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
     func_ovl2_800D8EB8(fp);
-    func_ovl2_800E806C(fp, 3, 0);
+    ftMain_MakeRumble(fp, 3, 0);
 }
 
 // 0x80143664

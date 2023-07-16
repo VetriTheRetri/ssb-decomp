@@ -118,7 +118,7 @@ void ftCommon_CapturePulled_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
     this_fp->status_vars.common.capture.is_goto_pulled_wait = FALSE;
 
     ftCommon_SetCaptureIgnoreMask(this_fp, FTCATCHKIND_MASK_ALL);
-    func_ovl2_800E806C(this_fp, 9, 0);
+    ftMain_MakeRumble(this_fp, 9, 0);
     func_ovl2_800D9444(fighter_gobj);
     ftCommon_Capture_ProcPhysics(fighter_gobj);
     ftCommon_CapturePulled_ProcMap(fighter_gobj);

@@ -1,9 +1,23 @@
 #include <it/item.h>
 
+enum itBombHeiStatus
+{
+    itStatus_BombHei_GWait,
+    itStatus_BombHei_AFall,
+    itStatus_BombHei_FHold,
+    itStatus_BombHei_FThrow,
+    itStatus_BombHei_FDrop,
+    itStatus_BombHei_GWalk,
+    itStatus_BombHei_MExplode,              // Explode on map collision
+    itStatus_BombHei_NExplode,              // Neutral explosion
+    itStatus_BombHei_GExplodeWait,          // Stall until explosion
+    itStatus_BombHei_EnumMax
+};
+
 itCreateDesc itCommon_BombHei_ItemDesc =
 {
     It_Kind_BombHei,                        // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                        // Pointer to item file data?
     0x424,                                  // Offset of item attributes in file?
     0x12,                                   // ???
     0,                                      // ???
@@ -129,21 +143,6 @@ itStatusDesc itCommon_BombHei_StatusDesc[itStatus_BombHei_EnumMax] =
         itBombHei_MExplode_ProcHit          // Proc Damage
     }
 };
-
-typedef enum itBombHeiStatus
-{
-    itStatus_BombHei_GWait,
-    itStatus_BombHei_AFall,
-    itStatus_BombHei_FHold,
-    itStatus_BombHei_FThrow,
-    itStatus_BombHei_FDrop,
-    itStatus_BombHei_GWalk,
-    itStatus_BombHei_MExplode,              // Explode on map collision
-    itStatus_BombHei_NExplode,              // Neutral explosion
-    itStatus_BombHei_GExplodeWait,          // Stall until explosion
-    itStatus_BombHei_EnumMax
-
-} itBombHeiStatus;
 
 // 0x80177060
 void itBombHei_Default_SetExplode(GObj *item_gobj, u8 arg1)

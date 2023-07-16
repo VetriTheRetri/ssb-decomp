@@ -37,7 +37,7 @@ void ftCommon_CatchPull_SetStatus(GObj *fighter_gobj)
 
     func_ovl2_800EDF24(fp->joint[fp->attributes->joint_itemhold_heavy], &offset);
     func_ovl2_80101500(&offset);
-    func_ovl2_800E806C(fp, 9, 0);
+    ftMain_MakeRumble(fp, 9, 0);
 }
 
 // 0x80149FCC

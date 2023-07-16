@@ -1,38 +1,40 @@
 #include <it/item.h>
 #include <wp/weapon.h>
 
-bool32 func_ovl3_80182C80(GObj *item_gobj)
+// 0x80182C80
+bool32 itDogas_NDisappear_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    if (ap->it_multi == 0)
+    if (ip->it_multi == 0)
     {
         return TRUE;
     }
-    ap->it_multi--;
+    ip->it_multi--;
 
     return FALSE;
 }
 
 extern itStatusDesc Article_Dogas_Status[];
 
+// 0x80182CA8
 void func_ovl3_80182CA8(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    ap->it_multi = ITDOGAS_DESPAWN_WAIT;
+    ip->it_multi = ITDOGAS_DESPAWN_WAIT;
 
     itMain_SetItemStatus(item_gobj, Article_Dogas_Status, 1);
 }
 
 void func_ovl3_80182CDC(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
     Vec3f pos;
     Vec3f vel;
 
-    if (ap->item_vars.dogas.smog_spawn_wait <= 0)
+    if (ip->item_vars.dogas.smog_spawn_wait <= 0)
     {
         vel.x = ITDOGAS_SMOG_VEL_XY;
         vel.y = ITDOGAS_SMOG_VEL_XY;
@@ -54,25 +56,25 @@ void func_ovl3_80182CDC(GObj *item_gobj)
         func_ovl3_80183144(item_gobj, &pos, &vel);
         func_800269C0(0x83U);
 
-        ap->item_vars.dogas.smog_spawn_wait = ITDOGAS_SMOG_SPAWN_WAIT;
+        ip->item_vars.dogas.smog_spawn_wait = ITDOGAS_SMOG_SPAWN_WAIT;
 
-        ap->it_multi--;
+        ip->it_multi--;
     }
 }
 
 bool32 func_ovl3_80182E1C(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     func_ovl3_80182CDC(item_gobj);
 
-    if (ap->it_multi == 0)
+    if (ip->it_multi == 0)
     {
         func_ovl3_80182CA8(item_gobj);
 
         return FALSE;
     }
-    ap->item_vars.dogas.smog_spawn_wait--;
+    ip->item_vars.dogas.smog_spawn_wait--;
 
     return FALSE;
 }
@@ -82,18 +84,18 @@ extern intptr_t D_NF_000128DC;
 
 void func_ovl3_80182E78(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    ap->it_multi = ITDOGAS_SMOG_SPAWN_COUNT;
+    ip->it_multi = ITDOGAS_SMOG_SPAWN_COUNT;
 
-    ap->item_vars.dogas.smog_spawn_wait = 0;
+    ip->item_vars.dogas.smog_spawn_wait = 0;
 
-    if (ap->it_kind == It_Kind_Dogas)
+    if (ip->it_kind == It_Kind_Dogas)
     {
-        ap->item_vars.dogas.pos = joint->translate;
+        ip->item_vars.dogas.pos = joint->translate;
 
-        func_8000BD1C(joint->next, itGetPData(ap, D_NF_00012820, D_NF_000128DC), 0.0F); // Linker thing
+        func_8000BD1C(joint->next, itGetPData(ip, D_NF_00012820, D_NF_000128DC), 0.0F); // Linker thing
 
         func_8000DF34(item_gobj);
         func_800269C0(0x135U);
@@ -108,27 +110,27 @@ void func_ovl3_80182F0C(GObj *item_gobj)
 
 bool32 jtgt_ovl3_80182F40(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    if (ap->it_multi == 0)
+    if (ip->it_multi == 0)
     {
-        ap->phys_info.vel_air.y = 0.0F;
-        ap->phys_info.vel_air.x = 0.0F;
+        ip->phys_info.vel_air.y = 0.0F;
+        ip->phys_info.vel_air.x = 0.0F;
 
         func_ovl3_80182F0C(item_gobj);
     }
-    ap->it_multi--;
+    ip->it_multi--;
 
     return FALSE;
 }
 
 bool32 jtgt_ovl3_80182F94(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
     if (func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND) != FALSE)
     {
-        ap->phys_info.vel_air.y = 0.0F;
+        ip->phys_info.vel_air.y = 0.0F;
     }
     return FALSE;
 }
@@ -140,7 +142,7 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
     GObj *item_gobj = itManager_MakeItem(spawn_gobj, &Article_Dogas_Data, pos, vel, flags);
     DObj *joint;
-    itStruct *ap;
+    itStruct *ip;
 
     if (item_gobj != NULL)
     {
@@ -151,17 +153,17 @@ GObj *jtgt_ovl3_80182FD4(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        ap = itGetStruct(item_gobj);
+        ip = itGetStruct(item_gobj);
 
-        joint->translate.y -= ap->attributes->objectcoll_bottom;
+        joint->translate.y -= ip->attributes->objectcoll_bottom;
 
-        ap->it_multi = ITMONSTER_RISE_STOP_WAIT;
+        ip->it_multi = ITMONSTER_RISE_STOP_WAIT;
 
-        ap->phys_info.vel_air.x = 0.0F;
-        ap->phys_info.vel_air.z = 0.0F;
-        ap->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
+        ip->phys_info.vel_air.x = 0.0F;
+        ip->phys_info.vel_air.z = 0.0F;
+        ip->phys_info.vel_air.y = ITMONSTER_RISE_VEL_Y;
 
-        func_8000BD1C(joint->next, itGetPData(ap, D_NF_00012820, D_NF_00013624), 0.0F); // Linker thing
+        func_8000BD1C(joint->next, itGetPData(ip, D_NF_00012820, D_NF_00013624), 0.0F); // Linker thing
     }
     return item_gobj;
 }

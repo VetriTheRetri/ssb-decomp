@@ -94,7 +94,7 @@ void ftCommon_CaptureKirby_ProcCapture(GObj *fighter_gobj, GObj *capture_gobj)
     ftMap_SetAir(this_fp);
     ftStatus_Update(fighter_gobj, ftStatus_Common_CaptureKirby, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
-    func_ovl2_800E806C(this_fp, 7, 0);
+    ftMain_MakeRumble(this_fp, 7, 0);
 
     this_fp->status_vars.common.capturekirby.is_goto_capturewait = FALSE;
     this_fp->status_vars.common.capturekirby.lr = CENTER;

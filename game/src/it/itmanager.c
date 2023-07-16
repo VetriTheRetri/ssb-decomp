@@ -5,7 +5,7 @@
 #include <gm/gmground.h>
 
 extern itStruct *itManager_Global_CurrentUserData;
-extern void *gItemFileData;
+extern void *gpItemFileData;
 extern intptr_t D_NF_000000FB;
 extern intptr_t D_NF_00B1BCA0;
 extern intptr_t D_NF_00B1BDE0;
@@ -32,7 +32,7 @@ void itManager_AllocUserData(void) // Many linker things here
     {
         ap[i].ip_alloc_next = NULL;
     }
-    gItemFileData = rldm_get_file_with_external_heap(&D_NF_000000FB, hal_alloc(rldm_bytes_needed_to_load(&D_NF_000000FB), 0x10));
+    gpItemFileData = rldm_get_file_with_external_heap(&D_NF_000000FB, hal_alloc(rldm_bytes_needed_to_load(&D_NF_000000FB), 0x10));
 
     D_ovl3_8018D044 = func_ovl2_801159F8(&D_NF_00B1BCA0, &D_NF_00B1BDE0, &D_NF_00B1BDE0_other, &D_NF_00B1E640);
 
@@ -357,6 +357,9 @@ itStruct* itManager_GetCurrentStructAlloc(void)
 {
     return itManager_Global_CurrentUserData;
 }
+
+u32 itMonster_Global_SelectMonsterIndex = 0;    // Not uninitialized, so it's hardcoded upon building the ROM? 0 = random, beyond 0 = index of Pokémon to spawn
+                                                // When in doubt, change to s32
 
 extern u16 gItemAppearanceRate1[6];
 extern u16 gItemAppearanceRate2[6];

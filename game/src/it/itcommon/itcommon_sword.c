@@ -1,9 +1,19 @@
 #include <it/item.h>
 
+enum itSwordStatus
+{
+    itStatus_Sword_GWait,
+    itStatus_Sword_AFall,
+    itStatus_Sword_FHold,
+    itStatus_Sword_FThrow,
+    itStatus_Sword_FDrop,
+    itStatus_Sword_EnumMax
+};
+
 itCreateDesc itCommon_Sword_ItemDesc =
 {
     It_Kind_Sword,                          // Item Kind
-    &gItemFileData,                         // Pointer to item file data?
+    &gpItemFileData,                         // Pointer to item file data?
     0x190,                                  // Offset of item attributes in file?
     0x1C,                                   // ???
     0,                                      // ???
@@ -81,17 +91,6 @@ itStatusDesc itCommon_Sword_StatusDesc[itStatus_Sword_EnumMax] =
         NULL                                // Proc Damage
     }
 };
-
-typedef enum itSwordStatus
-{
-    itStatus_Sword_GWait,
-    itStatus_Sword_AFall,
-    itStatus_Sword_FHold,
-    itStatus_Sword_FThrow,
-    itStatus_Sword_FDrop,
-    itStatus_Sword_EnumMax
-
-} itSwordStatus;
 
 // 0x80174B50
 bool32 itSword_AFall_ProcUpdate(GObj *item_gobj)

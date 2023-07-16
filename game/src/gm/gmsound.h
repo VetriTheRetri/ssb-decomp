@@ -75,7 +75,7 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_LightSwingS,
     gmSound_SFX_MSBombAttach,
     gmSound_SFX_Thunder1,
-    gmSound_SFX_ItemGroundCollide,   // Item falls on ground
+    gmSound_SFX_ItemMapCollide,   // Item falls on ground
     gmSound_SFX_BumperHit,
     gmSound_SFX_UnkGrind1,
     gmSound_SFX_ItemPickup,
