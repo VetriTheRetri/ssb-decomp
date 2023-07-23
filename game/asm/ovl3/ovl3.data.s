@@ -806,7 +806,7 @@ glabel D_ovl3_80188324
 glabel D_ovl3_8018833C
   .incbin "ovl3.raw.bin", 0x5683C, 0x4
 
-glabel ftComputer_Script
+glabel gpComputerPlayerScripts
   /* 56840 102D80 80188340 */  .4byte D_ovl3_80188130
   /* 56844 102D84 80188344 */  .4byte D_ovl3_80188138
   /* 56848 102D88 80188348 */  .4byte D_ovl3_8018813C
@@ -2009,7 +2009,7 @@ glabel jtbl_ovl3_801894D4
   /* 57A08 103F48 80189508 */  .4byte jtgt_ovl3_801814C0
   /* 57A0C 103F4C 8018950C */  .4byte jtgt_ovl3_801822B0
   /* 57A10 103F50 80189510 */  .4byte jtgt_ovl3_80182B74
-  /* 57A14 103F54 80189514 */  .4byte jtgt_ovl3_80182FD4
+  /* 57A14 103F54 80189514 */  .4byte itMonster_Dogas_MakeItem
   /* 57A18 103F58 80189518 */  .4byte jtgt_ovl3_80183690
   /* 57A1C 103F5C 8018951C */  .4byte jtgt_ovl3_8017EDE4
 
@@ -3445,12 +3445,12 @@ glabel Article_Dogas_Data
   .incbin "ovl3.raw.bin", 0x597C8, 0xC
 
 glabel jtbl_ovl3_8018B2D4
-  /* 597D4 105D14 8018B2D4 */  .4byte jtgt_ovl3_80182F40
-  /* 597D8 105D18 8018B2D8 */  .4byte jtgt_ovl3_80182F94
+  /* 597D4 105D14 8018B2D4 */  .4byte itDogas_NAppear_ProcUpdate
+  /* 597D8 105D18 8018B2D8 */  .4byte itDogas_NAppear_ProcMap
   .incbin "ovl3.raw.bin", 0x597DC, 0x18
 
-glabel Article_Dogas_Status
-  /* 597F4 105D34 8018B2F4 */  .4byte func_ovl3_80182E1C
+glabel itMonster_Dogas_StatusDesc
+  /* 597F4 105D34 8018B2F4 */  .4byte itDogas_NActive_ProcUpdate
   .incbin "ovl3.raw.bin", 0x597F8, 0x1C
   /* 59814 105D54 8018B314 */  .4byte itDogas_NDisappear_ProcUpdate
   .incbin "ovl3.raw.bin", 0x59818, 0x1C
@@ -3463,7 +3463,7 @@ glabel D_ovl3_8018B33C
 
 glabel D_ovl3_8018B340
   .incbin "ovl3.raw.bin", 0x59840, 0x8
-  /* 59848 105D88 8018B348 */  .4byte func_ovl3_801830DC
+  /* 59848 105D88 8018B348 */  .4byte wpDogas_Smog_ProcUpdate
   .incbin "ovl3.raw.bin", 0x5984C, 0x24
 
 glabel Article_Pippi_ProcStatus
@@ -3477,7 +3477,7 @@ glabel Article_Pippi_ProcStatus
   /* 5988C 105DCC 8018B38C */  .4byte func_ovl3_801811AC
   /* 59890 105DD0 8018B390 */  .4byte func_ovl3_801821E8
   /* 59894 105DD4 8018B394 */  .4byte func_ovl3_801826A8
-  /* 59898 105DD8 8018B398 */  .4byte func_ovl3_80182F0C
+  /* 59898 105DD8 8018B398 */  .4byte itDogas_NActive_SetStatus
   /* 5989C 105DDC 8018B39C */  .4byte func_ovl3_8017ED20
 
 glabel Article_Pippi_Data

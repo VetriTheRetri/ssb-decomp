@@ -15,6 +15,8 @@
 #define I_DEG_TO_RAD(x) (( int )(((x) * PI32) / 180.0F))
 #define I_RAD_TO_DEG(x) (( int )(((x) / PI32) * 180.0F))
 
+#define F_PCT_TO_DEC(x) ((float)((x) * 0.01F))
+
 #define U8_MAX 0xFF
 #define S8_MAX 0x7F
 #define S8_MIN 0x80

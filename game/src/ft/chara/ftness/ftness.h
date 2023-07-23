@@ -23,7 +23,7 @@
 #define FTNESS_PKTHUNDER_COLLIDE_Y 370.0F  // Height of Ness + PK Thunder collision detection box
 #define FTNESS_PKTHUNDER_END_DELAY 30
 #define FTNESS_PKTHUNDER_GRAVITY_DELAY 25
-#define FTNESS_PKTHUNDER_LANDING_LAG 0.17F // Divides landing animation length by this value
+#define FTNESS_PKTHUNDER_LANDING_LAG F_PCT_TO_DEC(17.0F) // Divides landing animation length by this value
 #define FTNESS_PKTHUNDER_FALLSPECIAL_DRIFT 0.6F
 #define FTNESS_PKJIBAKU_DELAY 30
 #define FTNESS_PKJIBAKU_ANIM_LENGTH 28

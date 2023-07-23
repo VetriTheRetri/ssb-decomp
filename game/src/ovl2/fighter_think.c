@@ -3801,7 +3801,7 @@ void ftManager_ProcUpdateMain(GObj *fighter_gobj)
             break;
 
         case 2:
-            func_800269C0(0x34U);
+            func_800269C0(gmSound_SFX_BatL);
             break;
         }
     }
@@ -4201,7 +4201,8 @@ extern ftStatusDesc D_ovl2_80128E50;
 extern ftStatusDesc *D_ovl2_8012B740[];
 extern ColAnimDesc caColorAnimDesc[]; // The disassembler thinks this is 0x8012DBD5, actually starts at 0x8012DBD0
 
-void func_ovl2_800E6F24(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 anim_rate, u32 flags)
+// 0x800E6F24
+void ftStatus_Update(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 anim_rate, u32 flags)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 event_ptr;

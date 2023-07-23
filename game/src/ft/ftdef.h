@@ -8,6 +8,7 @@ typedef enum ftMotionAttackIndex		ftMotionAttackIndex;
 typedef enum ftStatusAttackIndex		ftStatusAttackIndex;
 typedef enum ftCatchKind				ftCatchKind;
 typedef enum ftPartsJointLabels			ftPartsJointLabels;
+typedef enum ftComputerInput			ftComputerInput;
 typedef enum ftKind						ftKind;
 typedef enum plKind						plKind;
 
@@ -18,6 +19,7 @@ typedef struct ftItemPickup				ftItemPickup;
 typedef struct ftThrownStatus			ftThrownStatus;
 typedef struct ftThrownStatusArray		ftThrownStatusArray;
 typedef struct ftDataUnkContainer3		ftDataUnkContainer3;
+typedef struct ftScriptInfo				ftScriptInfo;
 typedef struct ftScriptInfoArray		ftScriptInfoArray;
 typedef struct ftData					ftData;
 typedef struct ftModelPart				ftModelPart;
@@ -44,7 +46,7 @@ typedef struct ftPartIndex				ftPartIndex;
 typedef struct ftPartsUnkIndexTable		ftPartsUnkIndexTable;
 typedef struct ftAfterImage				ftAfterImage;
 typedef struct ftComputer				ftComputer;
-typedef struct ftAttributes		ftAttributes;
+typedef struct ftAttributes				ftAttributes;
 typedef struct UnkFighterDObjData		UnkFighterDObjData;
 
 #endif

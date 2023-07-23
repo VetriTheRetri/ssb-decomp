@@ -27,7 +27,7 @@ GObj* ftCommon_Get_GetItemPickupGObj(GObj *fighter_gobj, u8 pickup_mask)
             {
                 Vec3f *ft_translate = &DObjGetStruct(fighter_gobj)->translate;
                 Vec3f *at_translate = &DObjGetStruct(item_gobj)->translate;
-                ObjectColl *object_coll = &ap->coll_data.object_coll;
+                mpObjectColl *object_coll = &ap->coll_data.object_coll;
 
                 is_pickup = FALSE;
 

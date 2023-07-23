@@ -33066,15 +33066,15 @@ glabel mpCollision_GetUUCommon
   /* 06F2B8 800F3AB8 1000FFF9 */         b .L800F3AA0
   /* 06F2BC 800F3ABC 00000000 */       nop 
   .L800F3AC0:
-  /* 06F2C0 800F3AC0 3C0F8013 */       lui $t7, %hi(D_ovl2_8013136C)
-  /* 06F2C4 800F3AC4 8DEF136C */        lw $t7, %lo(D_ovl2_8013136C)($t7)
+  /* 06F2C0 800F3AC0 3C0F8013 */       lui $t7, %hi(gpMapVertexInfo)
+  /* 06F2C4 800F3AC4 8DEF136C */        lw $t7, %lo(gpMapVertexInfo)($t7)
   /* 06F2C8 800F3AC8 0018C880 */       sll $t9, $t8, 2
   /* 06F2CC 800F3ACC 0338C821 */      addu $t9, $t9, $t8
   /* 06F2D0 800F3AD0 0019C840 */       sll $t9, $t9, 1
   /* 06F2D4 800F3AD4 01F96021 */      addu $t4, $t7, $t9
   /* 06F2D8 800F3AD8 918D0000 */       lbu $t5, ($t4)
-  /* 06F2DC 800F3ADC 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 06F2E0 800F3AE0 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 06F2DC 800F3ADC 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 06F2E0 800F3AE0 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 06F2E4 800F3AE4 000D7080 */       sll $t6, $t5, 2
   /* 06F2E8 800F3AE8 3C0D8013 */       lui $t5, 0x8013
   /* 06F2EC 800F3AEC 030E7821 */      addu $t7, $t8, $t6
@@ -33126,8 +33126,8 @@ glabel mpCollision_GetUUCommon
   /* 06F390 800F3B90 012C6821 */      addu $t5, $t1, $t4
   /* 06F394 800F3B94 01B87021 */      addu $t6, $t5, $t8
   /* 06F398 800F3B98 95CF0000 */       lhu $t7, ($t6)
-  /* 06F39C 800F3B9C 3C048013 */       lui $a0, %hi(D_ovl2_80131370)
-  /* 06F3A0 800F3BA0 8C841370 */        lw $a0, %lo(D_ovl2_80131370)($a0)
+  /* 06F39C 800F3B9C 3C048013 */       lui $a0, %hi(gpMapVertexData)
+  /* 06F3A0 800F3BA0 8C841370 */        lw $a0, %lo(gpMapVertexData)($a0)
   /* 06F3A4 800F3BA4 0000C812 */      mflo $t9
   /* 06F3A8 800F3BA8 00993021 */      addu $a2, $a0, $t9
   /* 06F3AC 800F3BAC 84C50000 */        lh $a1, ($a2)
@@ -33277,7 +33277,7 @@ glabel mpCollision_GetUUCommon
   /* 06F5B0 800F3DB0 24020001 */     addiu $v0, $zero, 1
   /* 06F5B4 800F3DB4 8FAF0064 */        lw $t7, 0x64($sp)
   /* 06F5B8 800F3DB8 AFA20010 */        sw $v0, 0x10($sp)
-  /* 06F5BC 800F3DBC 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 06F5BC 800F3DBC 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 06F5C0 800F3DC0 AFAF0014 */        sw $t7, 0x14($sp)
   /* 06F5C4 800F3DC4 24020001 */     addiu $v0, $zero, 1
   .L800F3DC8:
@@ -33333,15 +33333,15 @@ glabel mpCollision_GetLRCommon
   /* 06F670 800F3E70 1000FFF9 */         b .L800F3E58
   /* 06F674 800F3E74 00000000 */       nop 
   .L800F3E78:
-  /* 06F678 800F3E78 3C0F8013 */       lui $t7, %hi(D_ovl2_8013136C)
-  /* 06F67C 800F3E7C 8DEF136C */        lw $t7, %lo(D_ovl2_8013136C)($t7)
+  /* 06F678 800F3E78 3C0F8013 */       lui $t7, %hi(gpMapVertexInfo)
+  /* 06F67C 800F3E7C 8DEF136C */        lw $t7, %lo(gpMapVertexInfo)($t7)
   /* 06F680 800F3E80 0018C880 */       sll $t9, $t8, 2
   /* 06F684 800F3E84 0338C821 */      addu $t9, $t9, $t8
   /* 06F688 800F3E88 0019C840 */       sll $t9, $t9, 1
   /* 06F68C 800F3E8C 01F96021 */      addu $t4, $t7, $t9
   /* 06F690 800F3E90 918D0000 */       lbu $t5, ($t4)
-  /* 06F694 800F3E94 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 06F698 800F3E98 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 06F694 800F3E94 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 06F698 800F3E98 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 06F69C 800F3E9C 000D7080 */       sll $t6, $t5, 2
   /* 06F6A0 800F3EA0 3C0D8013 */       lui $t5, 0x8013
   /* 06F6A4 800F3EA4 030E7821 */      addu $t7, $t8, $t6
@@ -33393,8 +33393,8 @@ glabel mpCollision_GetLRCommon
   /* 06F748 800F3F48 012C6821 */      addu $t5, $t1, $t4
   /* 06F74C 800F3F4C 01B87021 */      addu $t6, $t5, $t8
   /* 06F750 800F3F50 95CF0000 */       lhu $t7, ($t6)
-  /* 06F754 800F3F54 3C048013 */       lui $a0, %hi(D_ovl2_80131370)
-  /* 06F758 800F3F58 8C841370 */        lw $a0, %lo(D_ovl2_80131370)($a0)
+  /* 06F754 800F3F54 3C048013 */       lui $a0, %hi(gpMapVertexData)
+  /* 06F758 800F3F58 8C841370 */        lw $a0, %lo(gpMapVertexData)($a0)
   /* 06F75C 800F3F5C 0000C812 */      mflo $t9
   /* 06F760 800F3F60 00992821 */      addu $a1, $a0, $t9
   /* 06F764 800F3F64 84A60002 */        lh $a2, 2($a1)
@@ -33545,7 +33545,7 @@ glabel mpCollision_GetLRCommon
   /* 06F96C 800F416C 24020001 */     addiu $v0, $zero, 1
   /* 06F970 800F4170 8FB9005C */        lw $t9, 0x5c($sp)
   /* 06F974 800F4174 AFA80010 */        sw $t0, 0x10($sp)
-  /* 06F978 800F4178 0C03DC68 */       jal func_ovl2_800F71A0
+  /* 06F978 800F4178 0C03DC68 */       jal mpCollision_GetLRAngle
   /* 06F97C 800F417C AFB90014 */        sw $t9, 0x14($sp)
   /* 06F980 800F4180 24020001 */     addiu $v0, $zero, 1
   .L800F4184:
@@ -33611,8 +33611,8 @@ glabel mpCollision_GetLREdge
   /* 06FA4C 800F424C 000F7840 */       sll $t7, $t7, 1
   /* 06FA50 800F4250 01CFC021 */      addu $t8, $t6, $t7
   /* 06FA54 800F4254 93190000 */       lbu $t9, ($t8)
-  /* 06FA58 800F4258 3C0F8013 */       lui $t7, %hi(D_ovl2_80131304)
-  /* 06FA5C 800F425C 8DEF1304 */        lw $t7, %lo(D_ovl2_80131304)($t7)
+  /* 06FA58 800F4258 3C0F8013 */       lui $t7, %hi(gpMapRooms)
+  /* 06FA5C 800F425C 8DEF1304 */        lw $t7, %lo(gpMapRooms)($t7)
   /* 06FA60 800F4260 00197080 */       sll $t6, $t9, 2
   /* 06FA64 800F4264 3C108013 */       lui $s0, 0x8013
   /* 06FA68 800F4268 01EEC021 */      addu $t8, $t7, $t6
@@ -33643,15 +33643,15 @@ glabel mpCollision_GetLREdge
   /* 06FAC4 800F42C4 00ABC821 */      addu $t9, $a1, $t3
   /* 06FAC8 800F42C8 972F0000 */       lhu $t7, ($t9)
   /* 06FACC 800F42CC 94580002 */       lhu $t8, 2($v0)
-  /* 06FAD0 800F42D0 3C1F8013 */       lui $ra, %hi(D_ovl2_80131370)
+  /* 06FAD0 800F42D0 3C1F8013 */       lui $ra, %hi(gpMapVertexData)
   /* 06FAD4 800F42D4 01ED0019 */     multu $t7, $t5
   /* 06FAD8 800F42D8 03033021 */      addu $a2, $t8, $v1
   /* 06FADC 800F42DC 24C6FFFF */     addiu $a2, $a2, -1
   /* 06FAE0 800F42E0 00066040 */       sll $t4, $a2, 1
   /* 06FAE4 800F42E4 00ACC821 */      addu $t9, $a1, $t4
   /* 06FAE8 800F42E8 972F0000 */       lhu $t7, ($t9)
-  /* 06FAEC 800F42EC 27FF1370 */     addiu $ra, $ra, %lo(D_ovl2_80131370)
-  /* 06FAF0 800F42F0 8FE40000 */        lw $a0, ($ra) # D_ovl2_80131370 + 0
+  /* 06FAEC 800F42EC 27FF1370 */     addiu $ra, $ra, %lo(gpMapVertexData)
+  /* 06FAF0 800F42F0 8FE40000 */        lw $a0, ($ra) # gpMapVertexData + 0
   /* 06FAF4 800F42F4 8FB90028 */        lw $t9, 0x28($sp)
   /* 06FAF8 800F42F8 00007012 */      mflo $t6
   /* 06FAFC 800F42FC 008EC021 */      addu $t8, $a0, $t6
@@ -33673,7 +33673,7 @@ glabel mpCollision_GetLREdge
   /* 06FB34 800F4334 468021A0 */   cvt.s.w $f6, $f4
   /* 06FB38 800F4338 E4E60000 */      swc1 $f6, ($a3)
   /* 06FB3C 800F433C 8E0E0000 */        lw $t6, ($s0) # D_ovl2_80130340 + 0
-  /* 06FB40 800F4340 8FEF0000 */        lw $t7, ($ra) # D_ovl2_80131370 + 0
+  /* 06FB40 800F4340 8FEF0000 */        lw $t7, ($ra) # gpMapVertexData + 0
   /* 06FB44 800F4344 01CBC021 */      addu $t8, $t6, $t3
   /* 06FB48 800F4348 97190000 */       lhu $t9, ($t8)
   /* 06FB4C 800F434C 032D0019 */     multu $t9, $t5
@@ -33691,7 +33691,7 @@ glabel mpCollision_GetLREdge
   /* 06FB78 800F4378 468084A0 */   cvt.s.w $f18, $f16
   /* 06FB7C 800F437C E4F20000 */      swc1 $f18, ($a3)
   /* 06FB80 800F4380 8E0E0000 */        lw $t6, ($s0) # D_ovl2_80130340 + 0
-  /* 06FB84 800F4384 8FEF0000 */        lw $t7, ($ra) # D_ovl2_80131370 + 0
+  /* 06FB84 800F4384 8FEF0000 */        lw $t7, ($ra) # gpMapVertexData + 0
   /* 06FB88 800F4388 01CCC021 */      addu $t8, $t6, $t4
   /* 06FB8C 800F438C 97190000 */       lhu $t9, ($t8)
   /* 06FB90 800F4390 032D0019 */     multu $t9, $t5
@@ -33799,8 +33799,8 @@ glabel mpCollision_GetUDEdge
   /* 06FCE8 800F44E8 000F7840 */       sll $t7, $t7, 1
   /* 06FCEC 800F44EC 01CFC021 */      addu $t8, $t6, $t7
   /* 06FCF0 800F44F0 93190000 */       lbu $t9, ($t8)
-  /* 06FCF4 800F44F4 3C0F8013 */       lui $t7, %hi(D_ovl2_80131304)
-  /* 06FCF8 800F44F8 8DEF1304 */        lw $t7, %lo(D_ovl2_80131304)($t7)
+  /* 06FCF4 800F44F4 3C0F8013 */       lui $t7, %hi(gpMapRooms)
+  /* 06FCF8 800F44F8 8DEF1304 */        lw $t7, %lo(gpMapRooms)($t7)
   /* 06FCFC 800F44FC 00197080 */       sll $t6, $t9, 2
   /* 06FD00 800F4500 01EEC021 */      addu $t8, $t7, $t6
   /* 06FD04 800F4504 8F0A0000 */        lw $t2, ($t8)
@@ -33821,23 +33821,23 @@ glabel mpCollision_GetUDEdge
   .L800F453C:
   /* 06FD3C 800F453C 8DCE1378 */        lw $t6, 0x1378($t6)
   /* 06FD40 800F4540 00117880 */       sll $t7, $s1, 2
-  /* 06FD44 800F4544 3C058013 */       lui $a1, %hi(D_ovl2_80131374)
+  /* 06FD44 800F4544 3C058013 */       lui $a1, %hi(gpMapVertexID)
   /* 06FD48 800F4548 01EE1021 */      addu $v0, $t7, $t6
   /* 06FD4C 800F454C 94430000 */       lhu $v1, ($v0)
-  /* 06FD50 800F4550 8CA51374 */        lw $a1, %lo(D_ovl2_80131374)($a1)
+  /* 06FD50 800F4550 8CA51374 */        lw $a1, %lo(gpMapVertexID)($a1)
   /* 06FD54 800F4554 240D0006 */     addiu $t5, $zero, 6
   /* 06FD58 800F4558 0003C840 */       sll $t9, $v1, 1
   /* 06FD5C 800F455C 00B97821 */      addu $t7, $a1, $t9
   /* 06FD60 800F4560 95EE0000 */       lhu $t6, ($t7)
   /* 06FD64 800F4564 94580002 */       lhu $t8, 2($v0)
-  /* 06FD68 800F4568 3C048013 */       lui $a0, %hi(D_ovl2_80131370)
+  /* 06FD68 800F4568 3C048013 */       lui $a0, %hi(gpMapVertexData)
   /* 06FD6C 800F456C 01CD0019 */     multu $t6, $t5
   /* 06FD70 800F4570 03033021 */      addu $a2, $t8, $v1
   /* 06FD74 800F4574 24C6FFFF */     addiu $a2, $a2, -1
   /* 06FD78 800F4578 0006C840 */       sll $t9, $a2, 1
   /* 06FD7C 800F457C 00B97821 */      addu $t7, $a1, $t9
   /* 06FD80 800F4580 95EE0000 */       lhu $t6, ($t7)
-  /* 06FD84 800F4584 8C841370 */        lw $a0, %lo(D_ovl2_80131370)($a0)
+  /* 06FD84 800F4584 8C841370 */        lw $a0, %lo(gpMapVertexData)($a0)
   /* 06FD88 800F4588 0000C012 */      mflo $t8
   /* 06FD8C 800F458C 00985821 */      addu $t3, $a0, $t8
   /* 06FD90 800F4590 85680002 */        lh $t0, 2($t3)
@@ -33935,7 +33935,7 @@ glabel func_ovl2_800F46B0
   /* 06FEC8 800F46C8 03E00008 */        jr $ra
   /* 06FECC 800F46CC 00000000 */       nop 
 
-glabel mpCollision_VertexCalcAngle
+glabel mpCollision_GetUDAngle
   /* 06FED0 800F46D0 44801000 */      mtc1 $zero, $f2
   /* 06FED4 800F46D4 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 06FED8 800F46D8 AFBF0014 */        sw $ra, 0x14($sp)
@@ -33996,7 +33996,7 @@ glabel mpCollision_VertexCalcAngle
   /* 06FFA4 800F47A4 03E00008 */        jr $ra
   /* 06FFA8 800F47A8 00000000 */       nop 
 
-glabel func_ovl2_800F47AC
+glabel mpCollision_CheckGroundSurfaceTilt
   /* 06FFAC 800F47AC 27BDFF98 */     addiu $sp, $sp, -0x68
   /* 06FFB0 800F47B0 C7AC007C */      lwc1 $f12, 0x7c($sp)
   /* 06FFB4 800F47B4 C7AE0084 */      lwc1 $f14, 0x84($sp)
@@ -34287,8 +34287,8 @@ glabel func_ovl2_800F47AC
 
 glabel func_ovl2_800F4BD8
   /* 0703D8 800F4BD8 27BDFF00 */     addiu $sp, $sp, -0x100
-  /* 0703DC 800F4BDC 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 0703E0 800F4BE0 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 0703DC 800F4BDC 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 0703E0 800F4BE0 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 0703E4 800F4BE4 AFBF0084 */        sw $ra, 0x84($sp)
   /* 0703E8 800F4BE8 AFBE0080 */        sw $fp, 0x80($sp)
   /* 0703EC 800F4BEC AFB7007C */        sw $s7, 0x7c($sp)
@@ -34315,11 +34315,11 @@ glabel func_ovl2_800F4BD8
   /* 070440 800F4C40 00C0A825 */        or $s5, $a2, $zero
   /* 070444 800F4C44 1900015C */      blez $t0, .L800F51B8
   /* 070448 800F4C48 C43607A4 */      lwc1 $f22, %lo(D_ovl2_801307A4)($at)
-  /* 07044C 800F4C4C 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 070450 800F4C50 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 07044C 800F4C4C 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 070450 800F4C50 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 070454 800F4C54 4480C000 */      mtc1 $zero, $f24
-  /* 070458 800F4C58 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 07045C 800F4C5C 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 070458 800F4C58 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 07045C 800F4C5C 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 070460 800F4C60 8FBE0110 */        lw $fp, 0x110($sp)
   /* 070464 800F4C64 8FB60114 */        lw $s6, 0x114($sp)
   /* 070468 800F4C68 240B0006 */     addiu $t3, $zero, 6
@@ -34327,8 +34327,8 @@ glabel func_ovl2_800F4BD8
   /* 07046C 800F4C6C 25840002 */     addiu $a0, $t4, 2
   /* 070470 800F4C70 AFA400F8 */        sw $a0, 0xf8($sp)
   /* 070474 800F4C74 958F0000 */       lhu $t7, ($t4)
-  /* 070478 800F4C78 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
-  /* 07047C 800F4C7C 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 070478 800F4C78 3C0E8013 */       lui $t6, %hi(gpMapRooms)
+  /* 07047C 800F4C7C 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 070480 800F4C80 958D0004 */       lhu $t5, 4($t4)
   /* 070484 800F4C84 000FC080 */       sll $t8, $t7, 2
   /* 070488 800F4C88 01D8C821 */      addu $t9, $t6, $t8
@@ -34400,8 +34400,8 @@ glabel func_ovl2_800F4BD8
   /* 07057C 800F4D7C 00042040 */       sll $a0, $a0, 1
   /* 070580 800F4D80 AFAC00FC */        sw $t4, 0xfc($sp)
   .L800F4D84:
-  /* 070584 800F4D84 3C0F8013 */       lui $t7, %hi(D_ovl2_8013136C)
-  /* 070588 800F4D88 8DEF136C */        lw $t7, %lo(D_ovl2_8013136C)($t7)
+  /* 070584 800F4D84 3C0F8013 */       lui $t7, %hi(gpMapVertexInfo)
+  /* 070588 800F4D88 8DEF136C */        lw $t7, %lo(gpMapVertexInfo)($t7)
   /* 07058C 800F4D8C C7B000E8 */      lwc1 $f16, 0xe8($sp)
   /* 070590 800F4D90 8FB800F8 */        lw $t8, 0xf8($sp)
   /* 070594 800F4D94 01E41021 */      addu $v0, $t7, $a0
@@ -34424,23 +34424,23 @@ glabel func_ovl2_800F4BD8
   /* 0705D4 800F4DD4 C7AA00EC */      lwc1 $f10, 0xec($sp)
   /* 0705D8 800F4DD8 8FB700C8 */        lw $s7, 0xc8($sp)
   /* 0705DC 800F4DDC 448F3000 */      mtc1 $t7, $f6
-  /* 0705E0 800F4DE0 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 0705E0 800F4DE0 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 0705E4 800F4DE4 46803220 */   cvt.s.w $f8, $f6
   /* 0705E8 800F4DE8 460A403C */    c.lt.s $f8, $f10
   /* 0705EC 800F4DEC 00000000 */       nop 
   /* 0705F0 800F4DF0 45000005 */      bc1f .L800F4E08
-  /* 0705F4 800F4DF4 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 0705F8 800F4DF8 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 0705F4 800F4DF4 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 0705F8 800F4DF8 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 0705FC 800F4DFC 8FAC00FC */        lw $t4, 0xfc($sp)
   /* 070600 800F4E00 100000E7 */         b .L800F51A0
   /* 070604 800F4E04 95C80000 */       lhu $t0, ($t6)
   .L800F4E08:
-  /* 070608 800F4E08 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 070608 800F4E08 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 07060C 800F4E0C 0017B880 */       sll $s7, $s7, 2
-  /* 070610 800F4E10 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
+  /* 070610 800F4E10 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
   /* 070614 800F4E14 03171021 */      addu $v0, $t8, $s7
   /* 070618 800F4E18 94430000 */       lhu $v1, ($v0)
-  /* 07061C 800F4E1C 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 07061C 800F4E1C 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 070620 800F4E20 00039040 */       sll $s2, $v1, 1
   /* 070624 800F4E24 01B27821 */      addu $t7, $t5, $s2
   /* 070628 800F4E28 95EE0000 */       lhu $t6, ($t7)
@@ -34454,9 +34454,9 @@ glabel func_ovl2_800F4BD8
   /* 070648 800F4E48 84930000 */        lh $s3, ($a0)
   /* 07064C 800F4E4C 102000C6 */      beqz $at, .L800F5168
   /* 070650 800F4E50 84940002 */        lh $s4, 2($a0)
-  /* 070654 800F4E54 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 070654 800F4E54 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F4E58:
-  /* 070658 800F4E58 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 070658 800F4E58 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 07065C 800F4E5C 02808025 */        or $s0, $s4, $zero
   /* 070660 800F4E60 03126821 */      addu $t5, $t8, $s2
   /* 070664 800F4E64 95AF0002 */       lhu $t7, 2($t5)
@@ -34486,19 +34486,19 @@ glabel func_ovl2_800F4BD8
   /* 0706C4 800F4EC4 AFB8001C */        sw $t8, 0x1c($sp)
   /* 0706C8 800F4EC8 E7B40010 */      swc1 $f20, 0x10($sp)
   /* 0706CC 800F4ECC E7BA0018 */      swc1 $f26, 0x18($sp)
-  /* 0706D0 800F4ED0 0C03D628 */       jal func_ovl2_800F58A0
+  /* 0706D0 800F4ED0 0C03D628 */       jal mpCollision_CheckUDSurfaceFlat
   /* 0706D4 800F4ED4 E7B20014 */      swc1 $f18, 0x14($sp)
-  /* 0706D8 800F4ED8 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 0706DC 800F4EDC 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 0706D8 800F4ED8 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 0706DC 800F4EDC 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 0706E0 800F4EE0 24010001 */     addiu $at, $zero, 1
-  /* 0706E4 800F4EE4 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0706E8 800F4EE8 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 0706E4 800F4EE4 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0706E8 800F4EE8 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0706EC 800F4EEC 8FA8010C */        lw $t0, 0x10c($sp)
   /* 0706F0 800F4EF0 14410091 */       bne $v0, $at, .L800F5138
   /* 0706F4 800F4EF4 240B0006 */     addiu $t3, $zero, 6
   /* 0706F8 800F4EF8 C7B000AC */      lwc1 $f16, 0xac($sp)
   /* 0706FC 800F4EFC C7A400AC */      lwc1 $f4, 0xac($sp)
-  /* 070700 800F4F00 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 070700 800F4F00 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 070704 800F4F04 4614803C */    c.lt.s $f16, $f20
   /* 070708 800F4F08 00000000 */       nop 
   /* 07070C 800F4F0C 45020005 */     bc1fl .L800F4F24
@@ -34512,7 +34512,7 @@ glabel func_ovl2_800F4BD8
   /* 070728 800F4F28 00000000 */       nop 
   /* 07072C 800F4F2C 45000009 */      bc1f .L800F4F54
   /* 070730 800F4F30 00000000 */       nop 
-  /* 070734 800F4F34 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 070734 800F4F34 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 070738 800F4F38 01F71021 */      addu $v0, $t7, $s7
   /* 07073C 800F4F3C 94590002 */       lhu $t9, 2($v0)
   /* 070740 800F4F40 944E0000 */       lhu $t6, ($v0)
@@ -34543,8 +34543,8 @@ glabel func_ovl2_800F4BD8
   .L800F4F98:
   /* 070798 800F4F98 53C0000B */      beql $fp, $zero, .L800F4FC8
   /* 07079C 800F4F9C C7A400AC */      lwc1 $f4, 0xac($sp)
-  /* 0707A0 800F4FA0 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 0707A4 800F4FA4 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 0707A0 800F4FA0 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 0707A4 800F4FA4 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 0707A8 800F4FA8 01F2C821 */      addu $t9, $t7, $s2
   /* 0707AC 800F4FAC 972E0000 */       lhu $t6, ($t9)
   /* 0707B0 800F4FB0 01CB0019 */     multu $t6, $t3
@@ -34571,19 +34571,19 @@ glabel func_ovl2_800F4BD8
   /* 0707F8 800F4FF8 E7BA001C */      swc1 $f26, 0x1c($sp)
   /* 0707FC 800F4FFC AFAE0020 */        sw $t6, 0x20($sp)
   /* 070800 800F5000 AFAD0024 */        sw $t5, 0x24($sp)
-  /* 070804 800F5004 0C03D1EB */       jal func_ovl2_800F47AC
+  /* 070804 800F5004 0C03D1EB */       jal mpCollision_CheckGroundSurfaceTilt
   /* 070808 800F5008 E7A80018 */      swc1 $f8, 0x18($sp)
-  /* 07080C 800F500C 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 070810 800F5010 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 07080C 800F500C 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 070810 800F5010 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 070814 800F5014 24010001 */     addiu $at, $zero, 1
-  /* 070818 800F5018 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 07081C 800F501C 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 070818 800F5018 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 07081C 800F501C 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 070820 800F5020 8FA8010C */        lw $t0, 0x10c($sp)
   /* 070824 800F5024 14410044 */       bne $v0, $at, .L800F5138
   /* 070828 800F5028 240B0006 */     addiu $t3, $zero, 6
   /* 07082C 800F502C C7AA00AC */      lwc1 $f10, 0xac($sp)
   /* 070830 800F5030 C7B200AC */      lwc1 $f18, 0xac($sp)
-  /* 070834 800F5034 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 070834 800F5034 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 070838 800F5038 4614503C */    c.lt.s $f10, $f20
   /* 07083C 800F503C 00000000 */       nop 
   /* 070840 800F5040 45020005 */     bc1fl .L800F5058
@@ -34597,7 +34597,7 @@ glabel func_ovl2_800F4BD8
   /* 07085C 800F505C 00000000 */       nop 
   /* 070860 800F5060 45000009 */      bc1f .L800F5088
   /* 070864 800F5064 00000000 */       nop 
-  /* 070868 800F5068 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 070868 800F5068 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 07086C 800F506C 03171021 */      addu $v0, $t8, $s7
   /* 070870 800F5070 944F0002 */       lhu $t7, 2($v0)
   /* 070874 800F5074 94590000 */       lhu $t9, ($v0)
@@ -34626,18 +34626,18 @@ glabel func_ovl2_800F4BD8
   /* 0708C4 800F50C4 02202825 */        or $a1, $s1, $zero
   /* 0708C8 800F50C8 02003025 */        or $a2, $s0, $zero
   /* 0708CC 800F50CC 02603825 */        or $a3, $s3, $zero
-  /* 0708D0 800F50D0 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 0708D0 800F50D0 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 0708D4 800F50D4 AFB40010 */        sw $s4, 0x10($sp)
-  /* 0708D8 800F50D8 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 0708DC 800F50DC 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 0708E0 800F50E0 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0708E4 800F50E4 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 0708D8 800F50D8 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 0708DC 800F50DC 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 0708E0 800F50E0 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0708E4 800F50E4 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0708E8 800F50E8 240B0006 */     addiu $t3, $zero, 6
   .L800F50EC:
   /* 0708EC 800F50EC 53C0000B */      beql $fp, $zero, .L800F511C
   /* 0708F0 800F50F0 C7AA00AC */      lwc1 $f10, 0xac($sp)
-  /* 0708F4 800F50F4 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 0708F8 800F50F8 8D380000 */        lw $t8, ($t1) # D_ovl2_80131370 + 0
+  /* 0708F4 800F50F4 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 0708F8 800F50F8 8D380000 */        lw $t8, ($t1) # gpMapVertexData + 0
   /* 0708FC 800F50FC 01F2C821 */      addu $t9, $t7, $s2
   /* 070900 800F5100 972E0000 */       lhu $t6, ($t9)
   /* 070904 800F5104 01CB0019 */     multu $t6, $t3
@@ -34655,8 +34655,8 @@ glabel func_ovl2_800F4BD8
   /* 070930 800F5130 46000587 */     neg.s $f22, $f0
   /* 070934 800F5134 46000586 */     mov.s $f22, $f0
   .L800F5138:
-  /* 070938 800F5138 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 07093C 800F513C 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 070938 800F5138 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 07093C 800F513C 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 070940 800F5140 01D71021 */      addu $v0, $t6, $s7
   /* 070944 800F5144 94580002 */       lhu $t8, 2($v0)
   /* 070948 800F5148 944D0000 */       lhu $t5, ($v0)
@@ -34667,7 +34667,7 @@ glabel func_ovl2_800F4BD8
   /* 070958 800F5158 26520002 */     addiu $s2, $s2, 2
   /* 07095C 800F515C 0244082A */       slt $at, $s2, $a0
   /* 070960 800F5160 5420FF3D */      bnel $at, $zero, .L800F4E58
-  /* 070964 800F5164 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 070964 800F5164 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F5168:
   /* 070968 800F5168 8FA300F8 */        lw $v1, 0xf8($sp)
   /* 07096C 800F516C 8FA400A0 */        lw $a0, 0xa0($sp)
@@ -34680,8 +34680,8 @@ glabel func_ovl2_800F4BD8
   /* 070984 800F5184 0062082A */       slt $at, $v1, $v0
   /* 070988 800F5188 1420FEFE */      bnez $at, .L800F4D84
   /* 07098C 800F518C 2484000A */     addiu $a0, $a0, 0xa
-  /* 070990 800F5190 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 070994 800F5194 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 070990 800F5190 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 070994 800F5194 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 070998 800F5198 95C80000 */       lhu $t0, ($t6)
   .L800F519C:
   /* 07099C 800F519C 8FAC00FC */        lw $t4, 0xfc($sp)
@@ -34724,8 +34724,8 @@ glabel func_ovl2_800F4BD8
 
 glabel func_ovl2_800F521C
   /* 070A1C 800F521C 27BDFEF8 */     addiu $sp, $sp, -0x108
-  /* 070A20 800F5220 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 070A24 800F5224 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 070A20 800F5220 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 070A24 800F5224 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 070A28 800F5228 AFBF0084 */        sw $ra, 0x84($sp)
   /* 070A2C 800F522C AFBE0080 */        sw $fp, 0x80($sp)
   /* 070A30 800F5230 AFB7007C */        sw $s7, 0x7c($sp)
@@ -34754,17 +34754,17 @@ glabel func_ovl2_800F521C
   /* 070A8C 800F528C C43607BC */      lwc1 $f22, %lo(D_ovl2_801307BC)($at)
   /* 070A90 800F5290 1900016A */      blez $t0, .L800F583C
   /* 070A94 800F5294 8FBE0118 */        lw $fp, 0x118($sp)
-  /* 070A98 800F5298 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 070A9C 800F529C 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 070A98 800F5298 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 070A9C 800F529C 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 070AA0 800F52A0 4480D000 */      mtc1 $zero, $f26
-  /* 070AA4 800F52A4 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 070AA8 800F52A8 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 070AA4 800F52A4 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 070AA8 800F52A8 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 070AAC 800F52AC 8FB6011C */        lw $s6, 0x11c($sp)
   /* 070AB0 800F52B0 240B0006 */     addiu $t3, $zero, 6
   .L800F52B4:
   /* 070AB4 800F52B4 8FAF0104 */        lw $t7, 0x104($sp)
-  /* 070AB8 800F52B8 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 070ABC 800F52BC 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 070AB8 800F52B8 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 070ABC 800F52BC 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 070AC0 800F52C0 25E40002 */     addiu $a0, $t7, 2
   /* 070AC4 800F52C4 AFA40100 */        sw $a0, 0x100($sp)
   /* 070AC8 800F52C8 95E50000 */       lhu $a1, ($t7)
@@ -34787,9 +34787,9 @@ glabel func_ovl2_800F521C
   /* 070B0C 800F530C C7100004 */      lwc1 $f16, 4($t8)
   /* 070B10 800F5310 10400015 */      beqz $v0, .L800F5368
   .L800F5314:
-  /* 070B14 800F5314 3C0C8013 */       lui $t4, %hi(D_ovl2_8013137C)
+  /* 070B14 800F5314 3C0C8013 */       lui $t4, %hi(gpMapRoomVectors)
   /* 070B18 800F5318 C47E001C */      lwc1 $f30, 0x1c($v1)
-  /* 070B1C 800F531C 8D8C137C */        lw $t4, %lo(D_ovl2_8013137C)($t4)
+  /* 070B1C 800F531C 8D8C137C */        lw $t4, %lo(gpMapRoomVectors)($t4)
   /* 070B20 800F5320 00057880 */       sll $t7, $a1, 2
   /* 070B24 800F5324 01E57823 */      subu $t7, $t7, $a1
   /* 070B28 800F5328 000F7880 */       sll $t7, $t7, 2
@@ -34847,14 +34847,14 @@ glabel func_ovl2_800F521C
   /* 070BE8 800F53E8 00822021 */      addu $a0, $a0, $v0
   /* 070BEC 800F53EC 00042040 */       sll $a0, $a0, 1
   .L800F53F0:
-  /* 070BF0 800F53F0 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 070BF4 800F53F4 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
+  /* 070BF0 800F53F0 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 070BF4 800F53F4 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
   /* 070BF8 800F53F8 C7AA00F0 */      lwc1 $f10, 0xf0($sp)
   /* 070BFC 800F53FC 8FAC0100 */        lw $t4, 0x100($sp)
   /* 070C00 800F5400 03041021 */      addu $v0, $t8, $a0
   /* 070C04 800F5404 84590004 */        lh $t9, 4($v0)
   /* 070C08 800F5408 44992000 */      mtc1 $t9, $f4
-  /* 070C0C 800F540C 3C198013 */       lui $t9, %hi(D_ovl2_80131378)
+  /* 070C0C 800F540C 3C198013 */       lui $t9, %hi(gpMapVertexLinks)
   /* 070C10 800F5410 468021A0 */   cvt.s.w $f6, $f4
   /* 070C14 800F5414 4606503C */    c.lt.s $f10, $f6
   /* 070C18 800F5418 00000000 */       nop 
@@ -34876,18 +34876,18 @@ glabel func_ovl2_800F521C
   /* 070C54 800F5454 460A203C */    c.lt.s $f4, $f10
   /* 070C58 800F5458 00000000 */       nop 
   /* 070C5C 800F545C 45000004 */      bc1f .L800F5470
-  /* 070C60 800F5460 3C188013 */       lui $t8, %hi(D_ovl2_80131368)
-  /* 070C64 800F5464 8F181368 */        lw $t8, %lo(D_ovl2_80131368)($t8)
+  /* 070C60 800F5460 3C188013 */       lui $t8, %hi(gpMapGeometry)
+  /* 070C64 800F5464 8F181368 */        lw $t8, %lo(gpMapGeometry)($t8)
   /* 070C68 800F5468 100000EC */         b .L800F581C
   /* 070C6C 800F546C 97080000 */       lhu $t0, ($t8)
   .L800F5470:
-  /* 070C70 800F5470 8F391378 */        lw $t9, %lo(D_ovl2_80131378)($t9)
+  /* 070C70 800F5470 8F391378 */        lw $t9, %lo(gpMapVertexLinks)($t9)
   /* 070C74 800F5474 0017B880 */       sll $s7, $s7, 2
-  /* 070C78 800F5478 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
+  /* 070C78 800F5478 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
   /* 070C7C 800F547C 03371021 */      addu $v0, $t9, $s7
   /* 070C80 800F5480 94430000 */       lhu $v1, ($v0)
   /* 070C84 800F5484 94590002 */       lhu $t9, 2($v0)
-  /* 070C88 800F5488 8D2C0000 */        lw $t4, ($t1) # D_ovl2_80131370 + 0
+  /* 070C88 800F5488 8D2C0000 */        lw $t4, ($t1) # gpMapVertexData + 0
   /* 070C8C 800F548C 00039040 */       sll $s2, $v1, 1
   /* 070C90 800F5490 01F26821 */      addu $t5, $t7, $s2
   /* 070C94 800F5494 95AE0000 */       lhu $t6, ($t5)
@@ -34900,9 +34900,9 @@ glabel func_ovl2_800F521C
   /* 070CB0 800F54B0 84930000 */        lh $s3, ($a0)
   /* 070CB4 800F54B4 102000CC */      beqz $at, .L800F57E8
   /* 070CB8 800F54B8 84940002 */        lh $s4, 2($a0)
-  /* 070CBC 800F54BC 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 070CBC 800F54BC 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F54C0:
-  /* 070CC0 800F54C0 8D2E0000 */        lw $t6, ($t1) # D_ovl2_80131370 + 0
+  /* 070CC0 800F54C0 8D2E0000 */        lw $t6, ($t1) # gpMapVertexData + 0
   /* 070CC4 800F54C4 02808025 */        or $s0, $s4, $zero
   /* 070CC8 800F54C8 0192C021 */      addu $t8, $t4, $s2
   /* 070CCC 800F54CC 97190002 */       lhu $t9, 2($t8)
@@ -34932,13 +34932,13 @@ glabel func_ovl2_800F521C
   /* 070D2C 800F552C AFAD001C */        sw $t5, 0x1c($sp)
   /* 070D30 800F5530 E7B80010 */      swc1 $f24, 0x10($sp)
   /* 070D34 800F5534 E7BC0018 */      swc1 $f28, 0x18($sp)
-  /* 070D38 800F5538 0C03D628 */       jal func_ovl2_800F58A0
+  /* 070D38 800F5538 0C03D628 */       jal mpCollision_CheckUDSurfaceFlat
   /* 070D3C 800F553C E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 070D40 800F5540 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 070D44 800F5544 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 070D40 800F5540 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 070D44 800F5544 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 070D48 800F5548 24010001 */     addiu $at, $zero, 1
-  /* 070D4C 800F554C 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 070D50 800F5550 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 070D4C 800F554C 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 070D50 800F5550 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 070D54 800F5554 8FA80114 */        lw $t0, 0x114($sp)
   /* 070D58 800F5558 14410097 */       bne $v0, $at, .L800F57B8
   /* 070D5C 800F555C 240B0006 */     addiu $t3, $zero, 6
@@ -34946,7 +34946,7 @@ glabel func_ovl2_800F521C
   /* 070D64 800F5564 C7A400B0 */      lwc1 $f4, 0xb0($sp)
   /* 070D68 800F5568 C7AA00B0 */      lwc1 $f10, 0xb0($sp)
   /* 070D6C 800F556C 4608C501 */     sub.s $f20, $f24, $f8
-  /* 070D70 800F5570 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 070D70 800F5570 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 070D74 800F5574 4614203C */    c.lt.s $f4, $f20
   /* 070D78 800F5578 00000000 */       nop 
   /* 070D7C 800F557C 45020005 */     bc1fl .L800F5594
@@ -34960,7 +34960,7 @@ glabel func_ovl2_800F521C
   /* 070D98 800F5598 00000000 */       nop 
   /* 070D9C 800F559C 45000009 */      bc1f .L800F55C4
   /* 070DA0 800F55A0 00000000 */       nop 
-  /* 070DA4 800F55A4 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 070DA4 800F55A4 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 070DA8 800F55A8 03171021 */      addu $v0, $t8, $s7
   /* 070DAC 800F55AC 94590002 */       lhu $t9, 2($v0)
   /* 070DB0 800F55B0 944E0000 */       lhu $t6, ($v0)
@@ -34992,8 +34992,8 @@ glabel func_ovl2_800F521C
   .L800F560C:
   /* 070E0C 800F560C 53C0000B */      beql $fp, $zero, .L800F563C
   /* 070E10 800F5610 C7A400B0 */      lwc1 $f4, 0xb0($sp)
-  /* 070E14 800F5614 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
-  /* 070E18 800F5618 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 070E14 800F5614 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
+  /* 070E18 800F5618 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 070E1C 800F561C 0192C021 */      addu $t8, $t4, $s2
   /* 070E20 800F5620 97190000 */       lhu $t9, ($t8)
   /* 070E24 800F5624 032B0019 */     multu $t9, $t3
@@ -35020,13 +35020,13 @@ glabel func_ovl2_800F521C
   /* 070E6C 800F566C E7BC001C */      swc1 $f28, 0x1c($sp)
   /* 070E70 800F5670 AFB80020 */        sw $t8, 0x20($sp)
   /* 070E74 800F5674 AFB90024 */        sw $t9, 0x24($sp)
-  /* 070E78 800F5678 0C03D1EB */       jal func_ovl2_800F47AC
+  /* 070E78 800F5678 0C03D1EB */       jal mpCollision_CheckGroundSurfaceTilt
   /* 070E7C 800F567C E7A60018 */      swc1 $f6, 0x18($sp)
-  /* 070E80 800F5680 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 070E84 800F5684 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 070E80 800F5680 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 070E84 800F5684 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 070E88 800F5688 24010001 */     addiu $at, $zero, 1
-  /* 070E8C 800F568C 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 070E90 800F5690 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 070E8C 800F568C 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 070E90 800F5690 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 070E94 800F5694 8FA80114 */        lw $t0, 0x114($sp)
   /* 070E98 800F5698 14410047 */       bne $v0, $at, .L800F57B8
   /* 070E9C 800F569C 240B0006 */     addiu $t3, $zero, 6
@@ -35034,7 +35034,7 @@ glabel func_ovl2_800F521C
   /* 070EA4 800F56A4 C7A400B0 */      lwc1 $f4, 0xb0($sp)
   /* 070EA8 800F56A8 C7AA00B0 */      lwc1 $f10, 0xb0($sp)
   /* 070EAC 800F56AC 4608C501 */     sub.s $f20, $f24, $f8
-  /* 070EB0 800F56B0 3C0D8013 */       lui $t5, %hi(D_ovl2_80131378)
+  /* 070EB0 800F56B0 3C0D8013 */       lui $t5, %hi(gpMapVertexLinks)
   /* 070EB4 800F56B4 4614203C */    c.lt.s $f4, $f20
   /* 070EB8 800F56B8 00000000 */       nop 
   /* 070EBC 800F56BC 45020005 */     bc1fl .L800F56D4
@@ -35048,7 +35048,7 @@ glabel func_ovl2_800F521C
   /* 070ED8 800F56D8 00000000 */       nop 
   /* 070EDC 800F56DC 45000009 */      bc1f .L800F5704
   /* 070EE0 800F56E0 00000000 */       nop 
-  /* 070EE4 800F56E4 8DAD1378 */        lw $t5, %lo(D_ovl2_80131378)($t5)
+  /* 070EE4 800F56E4 8DAD1378 */        lw $t5, %lo(gpMapVertexLinks)($t5)
   /* 070EE8 800F56E8 01B71021 */      addu $v0, $t5, $s7
   /* 070EEC 800F56EC 944E0002 */       lhu $t6, 2($v0)
   /* 070EF0 800F56F0 944F0000 */       lhu $t7, ($v0)
@@ -35078,18 +35078,18 @@ glabel func_ovl2_800F521C
   /* 070F44 800F5744 02202825 */        or $a1, $s1, $zero
   /* 070F48 800F5748 02003025 */        or $a2, $s0, $zero
   /* 070F4C 800F574C 02603825 */        or $a3, $s3, $zero
-  /* 070F50 800F5750 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 070F50 800F5750 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 070F54 800F5754 AFB40010 */        sw $s4, 0x10($sp)
-  /* 070F58 800F5758 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 070F5C 800F575C 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 070F60 800F5760 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 070F64 800F5764 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 070F58 800F5758 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 070F5C 800F575C 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 070F60 800F5760 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 070F64 800F5764 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 070F68 800F5768 240B0006 */     addiu $t3, $zero, 6
   .L800F576C:
   /* 070F6C 800F576C 53C0000B */      beql $fp, $zero, .L800F579C
   /* 070F70 800F5770 C7A800B0 */      lwc1 $f8, 0xb0($sp)
-  /* 070F74 800F5774 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
-  /* 070F78 800F5778 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 070F74 800F5774 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
+  /* 070F78 800F5778 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 070F7C 800F577C 01B27021 */      addu $t6, $t5, $s2
   /* 070F80 800F5780 95CF0000 */       lhu $t7, ($t6)
   /* 070F84 800F5784 01EB0019 */     multu $t7, $t3
@@ -35107,8 +35107,8 @@ glabel func_ovl2_800F521C
   /* 070FB0 800F57B0 46000587 */     neg.s $f22, $f0
   /* 070FB4 800F57B4 46000586 */     mov.s $f22, $f0
   .L800F57B8:
-  /* 070FB8 800F57B8 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 070FBC 800F57BC 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 070FB8 800F57B8 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 070FBC 800F57BC 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 070FC0 800F57C0 01D71021 */      addu $v0, $t6, $s7
   /* 070FC4 800F57C4 944F0002 */       lhu $t7, 2($v0)
   /* 070FC8 800F57C8 94590000 */       lhu $t9, ($v0)
@@ -35119,7 +35119,7 @@ glabel func_ovl2_800F521C
   /* 070FD8 800F57D8 26520002 */     addiu $s2, $s2, 2
   /* 070FDC 800F57DC 0244082A */       slt $at, $s2, $a0
   /* 070FE0 800F57E0 5420FF37 */      bnel $at, $zero, .L800F54C0
-  /* 070FE4 800F57E4 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 070FE4 800F57E4 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F57E8:
   /* 070FE8 800F57E8 8FA30100 */        lw $v1, 0x100($sp)
   /* 070FEC 800F57EC 8FA400A4 */        lw $a0, 0xa4($sp)
@@ -35132,8 +35132,8 @@ glabel func_ovl2_800F521C
   /* 071004 800F5804 0062082A */       slt $at, $v1, $v0
   /* 071008 800F5808 1420FEF9 */      bnez $at, .L800F53F0
   /* 07100C 800F580C 2484000A */     addiu $a0, $a0, 0xa
-  /* 071010 800F5810 3C0D8013 */       lui $t5, %hi(D_ovl2_80131368)
-  /* 071014 800F5814 8DAD1368 */        lw $t5, %lo(D_ovl2_80131368)($t5)
+  /* 071010 800F5810 3C0D8013 */       lui $t5, %hi(gpMapGeometry)
+  /* 071014 800F5814 8DAD1368 */        lw $t5, %lo(gpMapGeometry)($t5)
   /* 071018 800F5818 95A80000 */       lhu $t0, ($t5)
   .L800F581C:
   /* 07101C 800F581C 8FAE00F8 */        lw $t6, 0xf8($sp)
@@ -35174,7 +35174,7 @@ glabel func_ovl2_800F521C
   /* 071098 800F5898 03E00008 */        jr $ra
   /* 07109C 800F589C 27BD0108 */     addiu $sp, $sp, 0x108
 
-glabel func_ovl2_800F58A0
+glabel mpCollision_CheckUDSurfaceFlat
   /* 0710A0 800F58A0 27BDFFD8 */     addiu $sp, $sp, -0x28
   /* 0710A4 800F58A4 C7AC0038 */      lwc1 $f12, 0x38($sp)
   /* 0710A8 800F58A8 C7AE0040 */      lwc1 $f14, 0x40($sp)
@@ -35301,7 +35301,7 @@ glabel func_ovl2_800F58A0
   /* 07125C 800F5A5C 03E00008 */        jr $ra
   /* 071260 800F5A60 27BD0028 */     addiu $sp, $sp, 0x28
 
-glabel func_ovl2_800F5A64
+glabel mpCollision_CheckCeilSurfaceTilt
   /* 071264 800F5A64 27BDFF98 */     addiu $sp, $sp, -0x68
   /* 071268 800F5A68 C7AC007C */      lwc1 $f12, 0x7c($sp)
   /* 07126C 800F5A6C C7AE0084 */      lwc1 $f14, 0x84($sp)
@@ -35592,8 +35592,8 @@ glabel func_ovl2_800F5A64
 
 glabel func_ovl2_800F5E90
   /* 071690 800F5E90 27BDFF00 */     addiu $sp, $sp, -0x100
-  /* 071694 800F5E94 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 071698 800F5E98 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 071694 800F5E94 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 071698 800F5E98 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 07169C 800F5E9C AFBF0084 */        sw $ra, 0x84($sp)
   /* 0716A0 800F5EA0 AFBE0080 */        sw $fp, 0x80($sp)
   /* 0716A4 800F5EA4 AFB7007C */        sw $s7, 0x7c($sp)
@@ -35620,11 +35620,11 @@ glabel func_ovl2_800F5E90
   /* 0716F8 800F5EF8 00C0A825 */        or $s5, $a2, $zero
   /* 0716FC 800F5EFC 1900015C */      blez $t0, .L800F6470
   /* 071700 800F5F00 C4360804 */      lwc1 $f22, %lo(D_ovl2_80130804)($at)
-  /* 071704 800F5F04 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 071708 800F5F08 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 071704 800F5F04 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 071708 800F5F08 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 07170C 800F5F0C 4480C000 */      mtc1 $zero, $f24
-  /* 071710 800F5F10 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 071714 800F5F14 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 071710 800F5F10 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 071714 800F5F14 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 071718 800F5F18 8FBE0110 */        lw $fp, 0x110($sp)
   /* 07171C 800F5F1C 8FB60114 */        lw $s6, 0x114($sp)
   /* 071720 800F5F20 240B0006 */     addiu $t3, $zero, 6
@@ -35632,8 +35632,8 @@ glabel func_ovl2_800F5E90
   /* 071724 800F5F24 25840006 */     addiu $a0, $t4, 6
   /* 071728 800F5F28 AFA400F8 */        sw $a0, 0xf8($sp)
   /* 07172C 800F5F2C 958F0000 */       lhu $t7, ($t4)
-  /* 071730 800F5F30 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
-  /* 071734 800F5F34 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 071730 800F5F30 3C0E8013 */       lui $t6, %hi(gpMapRooms)
+  /* 071734 800F5F34 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 071738 800F5F38 958D0008 */       lhu $t5, 8($t4)
   /* 07173C 800F5F3C 000FC080 */       sll $t8, $t7, 2
   /* 071740 800F5F40 01D8C821 */      addu $t9, $t6, $t8
@@ -35705,8 +35705,8 @@ glabel func_ovl2_800F5E90
   /* 071834 800F6034 00042040 */       sll $a0, $a0, 1
   /* 071838 800F6038 AFAC00FC */        sw $t4, 0xfc($sp)
   .L800F603C:
-  /* 07183C 800F603C 3C0F8013 */       lui $t7, %hi(D_ovl2_8013136C)
-  /* 071840 800F6040 8DEF136C */        lw $t7, %lo(D_ovl2_8013136C)($t7)
+  /* 07183C 800F603C 3C0F8013 */       lui $t7, %hi(gpMapVertexInfo)
+  /* 071840 800F6040 8DEF136C */        lw $t7, %lo(gpMapVertexInfo)($t7)
   /* 071844 800F6044 C7A400EC */      lwc1 $f4, 0xec($sp)
   /* 071848 800F6048 8FB800F8 */        lw $t8, 0xf8($sp)
   /* 07184C 800F604C 01E41021 */      addu $v0, $t7, $a0
@@ -35729,23 +35729,23 @@ glabel func_ovl2_800F5E90
   /* 07188C 800F608C C7A600E8 */      lwc1 $f6, 0xe8($sp)
   /* 071890 800F6090 8FB700C8 */        lw $s7, 0xc8($sp)
   /* 071894 800F6094 448F4000 */      mtc1 $t7, $f8
-  /* 071898 800F6098 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 071898 800F6098 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 07189C 800F609C 468042A0 */   cvt.s.w $f10, $f8
   /* 0718A0 800F60A0 460A303C */    c.lt.s $f6, $f10
   /* 0718A4 800F60A4 00000000 */       nop 
   /* 0718A8 800F60A8 45000005 */      bc1f .L800F60C0
-  /* 0718AC 800F60AC 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 0718B0 800F60B0 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 0718AC 800F60AC 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 0718B0 800F60B0 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 0718B4 800F60B4 8FAC00FC */        lw $t4, 0xfc($sp)
   /* 0718B8 800F60B8 100000E7 */         b .L800F6458
   /* 0718BC 800F60BC 95C80000 */       lhu $t0, ($t6)
   .L800F60C0:
-  /* 0718C0 800F60C0 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 0718C0 800F60C0 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 0718C4 800F60C4 0017B880 */       sll $s7, $s7, 2
-  /* 0718C8 800F60C8 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
+  /* 0718C8 800F60C8 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
   /* 0718CC 800F60CC 03171021 */      addu $v0, $t8, $s7
   /* 0718D0 800F60D0 94430000 */       lhu $v1, ($v0)
-  /* 0718D4 800F60D4 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 0718D4 800F60D4 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 0718D8 800F60D8 00039040 */       sll $s2, $v1, 1
   /* 0718DC 800F60DC 01B27821 */      addu $t7, $t5, $s2
   /* 0718E0 800F60E0 95EE0000 */       lhu $t6, ($t7)
@@ -35759,9 +35759,9 @@ glabel func_ovl2_800F5E90
   /* 071900 800F6100 84930000 */        lh $s3, ($a0)
   /* 071904 800F6104 102000C6 */      beqz $at, .L800F6420
   /* 071908 800F6108 84940002 */        lh $s4, 2($a0)
-  /* 07190C 800F610C 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 07190C 800F610C 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F6110:
-  /* 071910 800F6110 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 071910 800F6110 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 071914 800F6114 02808025 */        or $s0, $s4, $zero
   /* 071918 800F6118 03126821 */      addu $t5, $t8, $s2
   /* 07191C 800F611C 95AF0002 */       lhu $t7, 2($t5)
@@ -35791,19 +35791,19 @@ glabel func_ovl2_800F5E90
   /* 07197C 800F617C AFB8001C */        sw $t8, 0x1c($sp)
   /* 071980 800F6180 E7B40010 */      swc1 $f20, 0x10($sp)
   /* 071984 800F6184 E7BA0018 */      swc1 $f26, 0x18($sp)
-  /* 071988 800F6188 0C03D628 */       jal func_ovl2_800F58A0
+  /* 071988 800F6188 0C03D628 */       jal mpCollision_CheckUDSurfaceFlat
   /* 07198C 800F618C E7B00014 */      swc1 $f16, 0x14($sp)
-  /* 071990 800F6190 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 071994 800F6194 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 071990 800F6190 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 071994 800F6194 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 071998 800F6198 24010001 */     addiu $at, $zero, 1
-  /* 07199C 800F619C 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0719A0 800F61A0 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 07199C 800F619C 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0719A0 800F61A0 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0719A4 800F61A4 8FA8010C */        lw $t0, 0x10c($sp)
   /* 0719A8 800F61A8 14410091 */       bne $v0, $at, .L800F63F0
   /* 0719AC 800F61AC 240B0006 */     addiu $t3, $zero, 6
   /* 0719B0 800F61B0 C7B200AC */      lwc1 $f18, 0xac($sp)
   /* 0719B4 800F61B4 C7A400AC */      lwc1 $f4, 0xac($sp)
-  /* 0719B8 800F61B8 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 0719B8 800F61B8 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 0719BC 800F61BC 4614903C */    c.lt.s $f18, $f20
   /* 0719C0 800F61C0 00000000 */       nop 
   /* 0719C4 800F61C4 45020005 */     bc1fl .L800F61DC
@@ -35817,7 +35817,7 @@ glabel func_ovl2_800F5E90
   /* 0719E0 800F61E0 00000000 */       nop 
   /* 0719E4 800F61E4 45000009 */      bc1f .L800F620C
   /* 0719E8 800F61E8 00000000 */       nop 
-  /* 0719EC 800F61EC 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 0719EC 800F61EC 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 0719F0 800F61F0 01F71021 */      addu $v0, $t7, $s7
   /* 0719F4 800F61F4 94590002 */       lhu $t9, 2($v0)
   /* 0719F8 800F61F8 944E0000 */       lhu $t6, ($v0)
@@ -35848,8 +35848,8 @@ glabel func_ovl2_800F5E90
   .L800F6250:
   /* 071A50 800F6250 53C0000B */      beql $fp, $zero, .L800F6280
   /* 071A54 800F6254 C7A400AC */      lwc1 $f4, 0xac($sp)
-  /* 071A58 800F6258 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 071A5C 800F625C 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 071A58 800F6258 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 071A5C 800F625C 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 071A60 800F6260 01F2C821 */      addu $t9, $t7, $s2
   /* 071A64 800F6264 972E0000 */       lhu $t6, ($t9)
   /* 071A68 800F6268 01CB0019 */     multu $t6, $t3
@@ -35876,19 +35876,19 @@ glabel func_ovl2_800F5E90
   /* 071AB0 800F62B0 E7BA001C */      swc1 $f26, 0x1c($sp)
   /* 071AB4 800F62B4 AFAE0020 */        sw $t6, 0x20($sp)
   /* 071AB8 800F62B8 AFAD0024 */        sw $t5, 0x24($sp)
-  /* 071ABC 800F62BC 0C03D699 */       jal func_ovl2_800F5A64
+  /* 071ABC 800F62BC 0C03D699 */       jal mpCollision_CheckCeilSurfaceTilt
   /* 071AC0 800F62C0 E7A60018 */      swc1 $f6, 0x18($sp)
-  /* 071AC4 800F62C4 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 071AC8 800F62C8 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 071AC4 800F62C4 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 071AC8 800F62C8 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 071ACC 800F62CC 24010001 */     addiu $at, $zero, 1
-  /* 071AD0 800F62D0 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 071AD4 800F62D4 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 071AD0 800F62D0 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 071AD4 800F62D4 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 071AD8 800F62D8 8FA8010C */        lw $t0, 0x10c($sp)
   /* 071ADC 800F62DC 14410044 */       bne $v0, $at, .L800F63F0
   /* 071AE0 800F62E0 240B0006 */     addiu $t3, $zero, 6
   /* 071AE4 800F62E4 C7AA00AC */      lwc1 $f10, 0xac($sp)
   /* 071AE8 800F62E8 C7B000AC */      lwc1 $f16, 0xac($sp)
-  /* 071AEC 800F62EC 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 071AEC 800F62EC 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 071AF0 800F62F0 4614503C */    c.lt.s $f10, $f20
   /* 071AF4 800F62F4 00000000 */       nop 
   /* 071AF8 800F62F8 45020005 */     bc1fl .L800F6310
@@ -35902,7 +35902,7 @@ glabel func_ovl2_800F5E90
   /* 071B14 800F6314 00000000 */       nop 
   /* 071B18 800F6318 45000009 */      bc1f .L800F6340
   /* 071B1C 800F631C 00000000 */       nop 
-  /* 071B20 800F6320 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 071B20 800F6320 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 071B24 800F6324 03171021 */      addu $v0, $t8, $s7
   /* 071B28 800F6328 944F0002 */       lhu $t7, 2($v0)
   /* 071B2C 800F632C 94590000 */       lhu $t9, ($v0)
@@ -35931,18 +35931,18 @@ glabel func_ovl2_800F5E90
   /* 071B7C 800F637C 02202825 */        or $a1, $s1, $zero
   /* 071B80 800F6380 02003025 */        or $a2, $s0, $zero
   /* 071B84 800F6384 02603825 */        or $a3, $s3, $zero
-  /* 071B88 800F6388 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 071B88 800F6388 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 071B8C 800F638C AFB40010 */        sw $s4, 0x10($sp)
-  /* 071B90 800F6390 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 071B94 800F6394 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 071B98 800F6398 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 071B9C 800F639C 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 071B90 800F6390 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 071B94 800F6394 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 071B98 800F6398 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 071B9C 800F639C 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 071BA0 800F63A0 240B0006 */     addiu $t3, $zero, 6
   .L800F63A4:
   /* 071BA4 800F63A4 53C0000B */      beql $fp, $zero, .L800F63D4
   /* 071BA8 800F63A8 C7AA00AC */      lwc1 $f10, 0xac($sp)
-  /* 071BAC 800F63AC 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 071BB0 800F63B0 8D380000 */        lw $t8, ($t1) # D_ovl2_80131370 + 0
+  /* 071BAC 800F63AC 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 071BB0 800F63B0 8D380000 */        lw $t8, ($t1) # gpMapVertexData + 0
   /* 071BB4 800F63B4 01F2C821 */      addu $t9, $t7, $s2
   /* 071BB8 800F63B8 972E0000 */       lhu $t6, ($t9)
   /* 071BBC 800F63BC 01CB0019 */     multu $t6, $t3
@@ -35960,8 +35960,8 @@ glabel func_ovl2_800F5E90
   /* 071BE8 800F63E8 46000587 */     neg.s $f22, $f0
   /* 071BEC 800F63EC 46000586 */     mov.s $f22, $f0
   .L800F63F0:
-  /* 071BF0 800F63F0 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 071BF4 800F63F4 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 071BF0 800F63F0 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 071BF4 800F63F4 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 071BF8 800F63F8 01D71021 */      addu $v0, $t6, $s7
   /* 071BFC 800F63FC 94580002 */       lhu $t8, 2($v0)
   /* 071C00 800F6400 944D0000 */       lhu $t5, ($v0)
@@ -35972,7 +35972,7 @@ glabel func_ovl2_800F5E90
   /* 071C10 800F6410 26520002 */     addiu $s2, $s2, 2
   /* 071C14 800F6414 0244082A */       slt $at, $s2, $a0
   /* 071C18 800F6418 5420FF3D */      bnel $at, $zero, .L800F6110
-  /* 071C1C 800F641C 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 071C1C 800F641C 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F6420:
   /* 071C20 800F6420 8FA300F8 */        lw $v1, 0xf8($sp)
   /* 071C24 800F6424 8FA400A0 */        lw $a0, 0xa0($sp)
@@ -35985,8 +35985,8 @@ glabel func_ovl2_800F5E90
   /* 071C3C 800F643C 0062082A */       slt $at, $v1, $v0
   /* 071C40 800F6440 1420FEFE */      bnez $at, .L800F603C
   /* 071C44 800F6444 2484000A */     addiu $a0, $a0, 0xa
-  /* 071C48 800F6448 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 071C4C 800F644C 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 071C48 800F6448 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 071C4C 800F644C 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 071C50 800F6450 95C80000 */       lhu $t0, ($t6)
   .L800F6454:
   /* 071C54 800F6454 8FAC00FC */        lw $t4, 0xfc($sp)
@@ -36029,8 +36029,8 @@ glabel func_ovl2_800F5E90
 
 glabel func_ovl2_800F64D4
   /* 071CD4 800F64D4 27BDFEF8 */     addiu $sp, $sp, -0x108
-  /* 071CD8 800F64D8 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 071CDC 800F64DC 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 071CD8 800F64D8 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 071CDC 800F64DC 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 071CE0 800F64E0 AFBF0084 */        sw $ra, 0x84($sp)
   /* 071CE4 800F64E4 AFBE0080 */        sw $fp, 0x80($sp)
   /* 071CE8 800F64E8 AFB7007C */        sw $s7, 0x7c($sp)
@@ -36059,17 +36059,17 @@ glabel func_ovl2_800F64D4
   /* 071D44 800F6544 C436081C */      lwc1 $f22, %lo(D_ovl2_8013081C)($at)
   /* 071D48 800F6548 1900016A */      blez $t0, .L800F6AF4
   /* 071D4C 800F654C 8FBE0118 */        lw $fp, 0x118($sp)
-  /* 071D50 800F6550 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 071D54 800F6554 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 071D50 800F6550 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 071D54 800F6554 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 071D58 800F6558 4480D000 */      mtc1 $zero, $f26
-  /* 071D5C 800F655C 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 071D60 800F6560 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 071D5C 800F655C 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 071D60 800F6560 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 071D64 800F6564 8FB6011C */        lw $s6, 0x11c($sp)
   /* 071D68 800F6568 240B0006 */     addiu $t3, $zero, 6
   .L800F656C:
   /* 071D6C 800F656C 8FAF0104 */        lw $t7, 0x104($sp)
-  /* 071D70 800F6570 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 071D74 800F6574 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 071D70 800F6570 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 071D74 800F6574 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 071D78 800F6578 25E40006 */     addiu $a0, $t7, 6
   /* 071D7C 800F657C AFA40100 */        sw $a0, 0x100($sp)
   /* 071D80 800F6580 95E50000 */       lhu $a1, ($t7)
@@ -36092,9 +36092,9 @@ glabel func_ovl2_800F64D4
   /* 071DC4 800F65C4 C7100004 */      lwc1 $f16, 4($t8)
   /* 071DC8 800F65C8 10400015 */      beqz $v0, .L800F6620
   .L800F65CC:
-  /* 071DCC 800F65CC 3C0C8013 */       lui $t4, %hi(D_ovl2_8013137C)
+  /* 071DCC 800F65CC 3C0C8013 */       lui $t4, %hi(gpMapRoomVectors)
   /* 071DD0 800F65D0 C47E001C */      lwc1 $f30, 0x1c($v1)
-  /* 071DD4 800F65D4 8D8C137C */        lw $t4, %lo(D_ovl2_8013137C)($t4)
+  /* 071DD4 800F65D4 8D8C137C */        lw $t4, %lo(gpMapRoomVectors)($t4)
   /* 071DD8 800F65D8 00057880 */       sll $t7, $a1, 2
   /* 071DDC 800F65DC 01E57823 */      subu $t7, $t7, $a1
   /* 071DE0 800F65E0 000F7880 */       sll $t7, $t7, 2
@@ -36152,14 +36152,14 @@ glabel func_ovl2_800F64D4
   /* 071EA0 800F66A0 00822021 */      addu $a0, $a0, $v0
   /* 071EA4 800F66A4 00042040 */       sll $a0, $a0, 1
   .L800F66A8:
-  /* 071EA8 800F66A8 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 071EAC 800F66AC 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
+  /* 071EA8 800F66A8 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 071EAC 800F66AC 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
   /* 071EB0 800F66B0 C7A600F4 */      lwc1 $f6, 0xf4($sp)
   /* 071EB4 800F66B4 8FAC0100 */        lw $t4, 0x100($sp)
   /* 071EB8 800F66B8 03041021 */      addu $v0, $t8, $a0
   /* 071EBC 800F66BC 84590002 */        lh $t9, 2($v0)
   /* 071EC0 800F66C0 44995000 */      mtc1 $t9, $f10
-  /* 071EC4 800F66C4 3C198013 */       lui $t9, %hi(D_ovl2_80131378)
+  /* 071EC4 800F66C4 3C198013 */       lui $t9, %hi(gpMapVertexLinks)
   /* 071EC8 800F66C8 46805120 */   cvt.s.w $f4, $f10
   /* 071ECC 800F66CC 4606203C */    c.lt.s $f4, $f6
   /* 071ED0 800F66D0 00000000 */       nop 
@@ -36181,18 +36181,18 @@ glabel func_ovl2_800F64D4
   /* 071F0C 800F670C 4604403C */    c.lt.s $f8, $f4
   /* 071F10 800F6710 00000000 */       nop 
   /* 071F14 800F6714 45000004 */      bc1f .L800F6728
-  /* 071F18 800F6718 3C188013 */       lui $t8, %hi(D_ovl2_80131368)
-  /* 071F1C 800F671C 8F181368 */        lw $t8, %lo(D_ovl2_80131368)($t8)
+  /* 071F18 800F6718 3C188013 */       lui $t8, %hi(gpMapGeometry)
+  /* 071F1C 800F671C 8F181368 */        lw $t8, %lo(gpMapGeometry)($t8)
   /* 071F20 800F6720 100000EC */         b .L800F6AD4
   /* 071F24 800F6724 97080000 */       lhu $t0, ($t8)
   .L800F6728:
-  /* 071F28 800F6728 8F391378 */        lw $t9, %lo(D_ovl2_80131378)($t9)
+  /* 071F28 800F6728 8F391378 */        lw $t9, %lo(gpMapVertexLinks)($t9)
   /* 071F2C 800F672C 0017B880 */       sll $s7, $s7, 2
-  /* 071F30 800F6730 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
+  /* 071F30 800F6730 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
   /* 071F34 800F6734 03371021 */      addu $v0, $t9, $s7
   /* 071F38 800F6738 94430000 */       lhu $v1, ($v0)
   /* 071F3C 800F673C 94590002 */       lhu $t9, 2($v0)
-  /* 071F40 800F6740 8D2C0000 */        lw $t4, ($t1) # D_ovl2_80131370 + 0
+  /* 071F40 800F6740 8D2C0000 */        lw $t4, ($t1) # gpMapVertexData + 0
   /* 071F44 800F6744 00039040 */       sll $s2, $v1, 1
   /* 071F48 800F6748 01F26821 */      addu $t5, $t7, $s2
   /* 071F4C 800F674C 95AE0000 */       lhu $t6, ($t5)
@@ -36205,9 +36205,9 @@ glabel func_ovl2_800F64D4
   /* 071F68 800F6768 84930000 */        lh $s3, ($a0)
   /* 071F6C 800F676C 102000CC */      beqz $at, .L800F6AA0
   /* 071F70 800F6770 84940002 */        lh $s4, 2($a0)
-  /* 071F74 800F6774 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 071F74 800F6774 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F6778:
-  /* 071F78 800F6778 8D2E0000 */        lw $t6, ($t1) # D_ovl2_80131370 + 0
+  /* 071F78 800F6778 8D2E0000 */        lw $t6, ($t1) # gpMapVertexData + 0
   /* 071F7C 800F677C 02808025 */        or $s0, $s4, $zero
   /* 071F80 800F6780 0192C021 */      addu $t8, $t4, $s2
   /* 071F84 800F6784 97190002 */       lhu $t9, 2($t8)
@@ -36237,13 +36237,13 @@ glabel func_ovl2_800F64D4
   /* 071FE4 800F67E4 AFAD001C */        sw $t5, 0x1c($sp)
   /* 071FE8 800F67E8 E7B80010 */      swc1 $f24, 0x10($sp)
   /* 071FEC 800F67EC E7BC0018 */      swc1 $f28, 0x18($sp)
-  /* 071FF0 800F67F0 0C03D628 */       jal func_ovl2_800F58A0
+  /* 071FF0 800F67F0 0C03D628 */       jal mpCollision_CheckUDSurfaceFlat
   /* 071FF4 800F67F4 E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 071FF8 800F67F8 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 071FFC 800F67FC 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 071FF8 800F67F8 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 071FFC 800F67FC 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 072000 800F6800 24010001 */     addiu $at, $zero, 1
-  /* 072004 800F6804 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 072008 800F6808 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 072004 800F6804 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 072008 800F6808 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 07200C 800F680C 8FA80114 */        lw $t0, 0x114($sp)
   /* 072010 800F6810 14410097 */       bne $v0, $at, .L800F6A70
   /* 072014 800F6814 240B0006 */     addiu $t3, $zero, 6
@@ -36251,7 +36251,7 @@ glabel func_ovl2_800F64D4
   /* 07201C 800F681C C7A800B0 */      lwc1 $f8, 0xb0($sp)
   /* 072020 800F6820 C7A400B0 */      lwc1 $f4, 0xb0($sp)
   /* 072024 800F6824 460AC501 */     sub.s $f20, $f24, $f10
-  /* 072028 800F6828 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 072028 800F6828 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 07202C 800F682C 4614403C */    c.lt.s $f8, $f20
   /* 072030 800F6830 00000000 */       nop 
   /* 072034 800F6834 45020005 */     bc1fl .L800F684C
@@ -36265,7 +36265,7 @@ glabel func_ovl2_800F64D4
   /* 072050 800F6850 00000000 */       nop 
   /* 072054 800F6854 45000009 */      bc1f .L800F687C
   /* 072058 800F6858 00000000 */       nop 
-  /* 07205C 800F685C 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 07205C 800F685C 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 072060 800F6860 03171021 */      addu $v0, $t8, $s7
   /* 072064 800F6864 94590002 */       lhu $t9, 2($v0)
   /* 072068 800F6868 944E0000 */       lhu $t6, ($v0)
@@ -36297,8 +36297,8 @@ glabel func_ovl2_800F64D4
   .L800F68C4:
   /* 0720C4 800F68C4 53C0000B */      beql $fp, $zero, .L800F68F4
   /* 0720C8 800F68C8 C7A800B0 */      lwc1 $f8, 0xb0($sp)
-  /* 0720CC 800F68CC 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
-  /* 0720D0 800F68D0 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 0720CC 800F68CC 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
+  /* 0720D0 800F68D0 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 0720D4 800F68D4 0192C021 */      addu $t8, $t4, $s2
   /* 0720D8 800F68D8 97190000 */       lhu $t9, ($t8)
   /* 0720DC 800F68DC 032B0019 */     multu $t9, $t3
@@ -36325,13 +36325,13 @@ glabel func_ovl2_800F64D4
   /* 072124 800F6924 E7BC001C */      swc1 $f28, 0x1c($sp)
   /* 072128 800F6928 AFB80020 */        sw $t8, 0x20($sp)
   /* 07212C 800F692C AFB90024 */        sw $t9, 0x24($sp)
-  /* 072130 800F6930 0C03D699 */       jal func_ovl2_800F5A64
+  /* 072130 800F6930 0C03D699 */       jal mpCollision_CheckCeilSurfaceTilt
   /* 072134 800F6934 E7A60018 */      swc1 $f6, 0x18($sp)
-  /* 072138 800F6938 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 07213C 800F693C 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 072138 800F6938 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 07213C 800F693C 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 072140 800F6940 24010001 */     addiu $at, $zero, 1
-  /* 072144 800F6944 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 072148 800F6948 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 072144 800F6944 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 072148 800F6948 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 07214C 800F694C 8FA80114 */        lw $t0, 0x114($sp)
   /* 072150 800F6950 14410047 */       bne $v0, $at, .L800F6A70
   /* 072154 800F6954 240B0006 */     addiu $t3, $zero, 6
@@ -36339,7 +36339,7 @@ glabel func_ovl2_800F64D4
   /* 07215C 800F695C C7A800B0 */      lwc1 $f8, 0xb0($sp)
   /* 072160 800F6960 C7A400B0 */      lwc1 $f4, 0xb0($sp)
   /* 072164 800F6964 460AC501 */     sub.s $f20, $f24, $f10
-  /* 072168 800F6968 3C0D8013 */       lui $t5, %hi(D_ovl2_80131378)
+  /* 072168 800F6968 3C0D8013 */       lui $t5, %hi(gpMapVertexLinks)
   /* 07216C 800F696C 4614403C */    c.lt.s $f8, $f20
   /* 072170 800F6970 00000000 */       nop 
   /* 072174 800F6974 45020005 */     bc1fl .L800F698C
@@ -36353,7 +36353,7 @@ glabel func_ovl2_800F64D4
   /* 072190 800F6990 00000000 */       nop 
   /* 072194 800F6994 45000009 */      bc1f .L800F69BC
   /* 072198 800F6998 00000000 */       nop 
-  /* 07219C 800F699C 8DAD1378 */        lw $t5, %lo(D_ovl2_80131378)($t5)
+  /* 07219C 800F699C 8DAD1378 */        lw $t5, %lo(gpMapVertexLinks)($t5)
   /* 0721A0 800F69A0 01B71021 */      addu $v0, $t5, $s7
   /* 0721A4 800F69A4 944E0002 */       lhu $t6, 2($v0)
   /* 0721A8 800F69A8 944F0000 */       lhu $t7, ($v0)
@@ -36383,18 +36383,18 @@ glabel func_ovl2_800F64D4
   /* 0721FC 800F69FC 02202825 */        or $a1, $s1, $zero
   /* 072200 800F6A00 02003025 */        or $a2, $s0, $zero
   /* 072204 800F6A04 02603825 */        or $a3, $s3, $zero
-  /* 072208 800F6A08 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 072208 800F6A08 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 07220C 800F6A0C AFB40010 */        sw $s4, 0x10($sp)
-  /* 072210 800F6A10 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 072214 800F6A14 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 072218 800F6A18 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 07221C 800F6A1C 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 072210 800F6A10 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 072214 800F6A14 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 072218 800F6A18 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 07221C 800F6A1C 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 072220 800F6A20 240B0006 */     addiu $t3, $zero, 6
   .L800F6A24:
   /* 072224 800F6A24 53C0000B */      beql $fp, $zero, .L800F6A54
   /* 072228 800F6A28 C7AA00B0 */      lwc1 $f10, 0xb0($sp)
-  /* 07222C 800F6A2C 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
-  /* 072230 800F6A30 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 07222C 800F6A2C 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
+  /* 072230 800F6A30 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 072234 800F6A34 01B27021 */      addu $t6, $t5, $s2
   /* 072238 800F6A38 95CF0000 */       lhu $t7, ($t6)
   /* 07223C 800F6A3C 01EB0019 */     multu $t7, $t3
@@ -36412,8 +36412,8 @@ glabel func_ovl2_800F64D4
   /* 072268 800F6A68 46000587 */     neg.s $f22, $f0
   /* 07226C 800F6A6C 46000586 */     mov.s $f22, $f0
   .L800F6A70:
-  /* 072270 800F6A70 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 072274 800F6A74 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 072270 800F6A70 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 072274 800F6A74 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 072278 800F6A78 01D71021 */      addu $v0, $t6, $s7
   /* 07227C 800F6A7C 944F0002 */       lhu $t7, 2($v0)
   /* 072280 800F6A80 94590000 */       lhu $t9, ($v0)
@@ -36424,7 +36424,7 @@ glabel func_ovl2_800F64D4
   /* 072290 800F6A90 26520002 */     addiu $s2, $s2, 2
   /* 072294 800F6A94 0244082A */       slt $at, $s2, $a0
   /* 072298 800F6A98 5420FF37 */      bnel $at, $zero, .L800F6778
-  /* 07229C 800F6A9C 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 07229C 800F6A9C 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F6AA0:
   /* 0722A0 800F6AA0 8FA30100 */        lw $v1, 0x100($sp)
   /* 0722A4 800F6AA4 8FA400A4 */        lw $a0, 0xa4($sp)
@@ -36437,8 +36437,8 @@ glabel func_ovl2_800F64D4
   /* 0722BC 800F6ABC 0062082A */       slt $at, $v1, $v0
   /* 0722C0 800F6AC0 1420FEF9 */      bnez $at, .L800F66A8
   /* 0722C4 800F6AC4 2484000A */     addiu $a0, $a0, 0xa
-  /* 0722C8 800F6AC8 3C0D8013 */       lui $t5, %hi(D_ovl2_80131368)
-  /* 0722CC 800F6ACC 8DAD1368 */        lw $t5, %lo(D_ovl2_80131368)($t5)
+  /* 0722C8 800F6AC8 3C0D8013 */       lui $t5, %hi(gpMapGeometry)
+  /* 0722CC 800F6ACC 8DAD1368 */        lw $t5, %lo(gpMapGeometry)($t5)
   /* 0722D0 800F6AD0 95A80000 */       lhu $t0, ($t5)
   .L800F6AD4:
   /* 0722D4 800F6AD4 8FAE00F8 */        lw $t6, 0xf8($sp)
@@ -36481,8 +36481,8 @@ glabel func_ovl2_800F64D4
 
 glabel func_ovl2_800F6B58
   /* 072358 800F6B58 27BDFF00 */     addiu $sp, $sp, -0x100
-  /* 07235C 800F6B5C 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 072360 800F6B60 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 07235C 800F6B5C 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 072360 800F6B60 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 072364 800F6B64 AFBF0084 */        sw $ra, 0x84($sp)
   /* 072368 800F6B68 AFBE0080 */        sw $fp, 0x80($sp)
   /* 07236C 800F6B6C AFB7007C */        sw $s7, 0x7c($sp)
@@ -36509,11 +36509,11 @@ glabel func_ovl2_800F6B58
   /* 0723C0 800F6BC0 00C0A825 */        or $s5, $a2, $zero
   /* 0723C4 800F6BC4 1900015D */      blez $t0, .L800F713C
   /* 0723C8 800F6BC8 C4360830 */      lwc1 $f22, %lo(D_ovl2_80130830)($at)
-  /* 0723CC 800F6BCC 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 0723D0 800F6BD0 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 0723CC 800F6BCC 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 0723D0 800F6BD0 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 0723D4 800F6BD4 4480C000 */      mtc1 $zero, $f24
-  /* 0723D8 800F6BD8 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 0723DC 800F6BDC 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 0723D8 800F6BD8 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 0723DC 800F6BDC 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 0723E0 800F6BE0 8FBE0110 */        lw $fp, 0x110($sp)
   /* 0723E4 800F6BE4 8FB60114 */        lw $s6, 0x114($sp)
   /* 0723E8 800F6BE8 240B0006 */     addiu $t3, $zero, 6
@@ -36521,8 +36521,8 @@ glabel func_ovl2_800F6B58
   /* 0723EC 800F6BEC 2584000A */     addiu $a0, $t4, 0xa
   /* 0723F0 800F6BF0 AFA400F8 */        sw $a0, 0xf8($sp)
   /* 0723F4 800F6BF4 958F0000 */       lhu $t7, ($t4)
-  /* 0723F8 800F6BF8 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
-  /* 0723FC 800F6BFC 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 0723F8 800F6BF8 3C0E8013 */       lui $t6, %hi(gpMapRooms)
+  /* 0723FC 800F6BFC 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 072400 800F6C00 958D000C */       lhu $t5, 0xc($t4)
   /* 072404 800F6C04 000FC080 */       sll $t8, $t7, 2
   /* 072408 800F6C08 01D8C821 */      addu $t9, $t6, $t8
@@ -36594,8 +36594,8 @@ glabel func_ovl2_800F6B58
   /* 0724FC 800F6CFC 00042040 */       sll $a0, $a0, 1
   /* 072500 800F6D00 AFAC00FC */        sw $t4, 0xfc($sp)
   .L800F6D04:
-  /* 072504 800F6D04 3C0F8013 */       lui $t7, %hi(D_ovl2_8013136C)
-  /* 072508 800F6D08 8DEF136C */        lw $t7, %lo(D_ovl2_8013136C)($t7)
+  /* 072504 800F6D04 3C0F8013 */       lui $t7, %hi(gpMapVertexInfo)
+  /* 072508 800F6D08 8DEF136C */        lw $t7, %lo(gpMapVertexInfo)($t7)
   /* 07250C 800F6D0C C7B000E8 */      lwc1 $f16, 0xe8($sp)
   /* 072510 800F6D10 8FB800F8 */        lw $t8, 0xf8($sp)
   /* 072514 800F6D14 01E41021 */      addu $v0, $t7, $a0
@@ -36618,23 +36618,23 @@ glabel func_ovl2_800F6B58
   /* 072554 800F6D54 C7AA00EC */      lwc1 $f10, 0xec($sp)
   /* 072558 800F6D58 8FB700C8 */        lw $s7, 0xc8($sp)
   /* 07255C 800F6D5C 448F3000 */      mtc1 $t7, $f6
-  /* 072560 800F6D60 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 072560 800F6D60 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 072564 800F6D64 46803220 */   cvt.s.w $f8, $f6
   /* 072568 800F6D68 460A403C */    c.lt.s $f8, $f10
   /* 07256C 800F6D6C 00000000 */       nop 
   /* 072570 800F6D70 45000005 */      bc1f .L800F6D88
-  /* 072574 800F6D74 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 072578 800F6D78 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 072574 800F6D74 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 072578 800F6D78 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 07257C 800F6D7C 8FAC00FC */        lw $t4, 0xfc($sp)
   /* 072580 800F6D80 100000E8 */         b .L800F7124
   /* 072584 800F6D84 95C80000 */       lhu $t0, ($t6)
   .L800F6D88:
-  /* 072588 800F6D88 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 072588 800F6D88 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 07258C 800F6D8C 0017B880 */       sll $s7, $s7, 2
-  /* 072590 800F6D90 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
+  /* 072590 800F6D90 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
   /* 072594 800F6D94 03171021 */      addu $v0, $t8, $s7
   /* 072598 800F6D98 94430000 */       lhu $v1, ($v0)
-  /* 07259C 800F6D9C 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 07259C 800F6D9C 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 0725A0 800F6DA0 00039040 */       sll $s2, $v1, 1
   /* 0725A4 800F6DA4 01B27821 */      addu $t7, $t5, $s2
   /* 0725A8 800F6DA8 95EE0000 */       lhu $t6, ($t7)
@@ -36648,9 +36648,9 @@ glabel func_ovl2_800F6B58
   /* 0725C8 800F6DC8 84930000 */        lh $s3, ($a0)
   /* 0725CC 800F6DCC 102000C7 */      beqz $at, .L800F70EC
   /* 0725D0 800F6DD0 84940002 */        lh $s4, 2($a0)
-  /* 0725D4 800F6DD4 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 0725D4 800F6DD4 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F6DD8:
-  /* 0725D8 800F6DD8 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 0725D8 800F6DD8 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 0725DC 800F6DDC 02608025 */        or $s0, $s3, $zero
   /* 0725E0 800F6DE0 03126821 */      addu $t5, $t8, $s2
   /* 0725E4 800F6DE4 95AF0002 */       lhu $t7, 2($t5)
@@ -36680,19 +36680,19 @@ glabel func_ovl2_800F6B58
   /* 072644 800F6E44 AFB8001C */        sw $t8, 0x1c($sp)
   /* 072648 800F6E48 E7B20010 */      swc1 $f18, 0x10($sp)
   /* 07264C 800F6E4C E7BA0014 */      swc1 $f26, 0x14($sp)
-  /* 072650 800F6E50 0C03DF49 */       jal func_ovl2_800F7D24
+  /* 072650 800F6E50 0C03DF49 */       jal mpCollision_CheckLRSurfaceFlat
   /* 072654 800F6E54 E7B00018 */      swc1 $f16, 0x18($sp)
-  /* 072658 800F6E58 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 07265C 800F6E5C 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 072658 800F6E58 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 07265C 800F6E5C 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 072660 800F6E60 24010001 */     addiu $at, $zero, 1
-  /* 072664 800F6E64 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 072668 800F6E68 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 072664 800F6E64 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 072668 800F6E68 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 07266C 800F6E6C 8FA8010C */        lw $t0, 0x10c($sp)
   /* 072670 800F6E70 14410092 */       bne $v0, $at, .L800F70BC
   /* 072674 800F6E74 240B0006 */     addiu $t3, $zero, 6
   /* 072678 800F6E78 C7A400B0 */      lwc1 $f4, 0xb0($sp)
   /* 07267C 800F6E7C C7A600B0 */      lwc1 $f6, 0xb0($sp)
-  /* 072680 800F6E80 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 072680 800F6E80 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 072684 800F6E84 4614203C */    c.lt.s $f4, $f20
   /* 072688 800F6E88 00000000 */       nop 
   /* 07268C 800F6E8C 45020005 */     bc1fl .L800F6EA4
@@ -36706,7 +36706,7 @@ glabel func_ovl2_800F6B58
   /* 0726A8 800F6EA8 00000000 */       nop 
   /* 0726AC 800F6EAC 45000009 */      bc1f .L800F6ED4
   /* 0726B0 800F6EB0 00000000 */       nop 
-  /* 0726B4 800F6EB4 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 0726B4 800F6EB4 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 0726B8 800F6EB8 01F71021 */      addu $v0, $t7, $s7
   /* 0726BC 800F6EBC 94590002 */       lhu $t9, 2($v0)
   /* 0726C0 800F6EC0 944E0000 */       lhu $t6, ($v0)
@@ -36737,8 +36737,8 @@ glabel func_ovl2_800F6B58
   .L800F6F18:
   /* 072718 800F6F18 53C0000B */      beql $fp, $zero, .L800F6F48
   /* 07271C 800F6F1C C7A600B0 */      lwc1 $f6, 0xb0($sp)
-  /* 072720 800F6F20 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 072724 800F6F24 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 072720 800F6F20 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 072724 800F6F24 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 072728 800F6F28 01F2C821 */      addu $t9, $t7, $s2
   /* 07272C 800F6F2C 972E0000 */       lhu $t6, ($t9)
   /* 072730 800F6F30 01CB0019 */     multu $t6, $t3
@@ -36766,19 +36766,19 @@ glabel func_ovl2_800F6B58
   /* 07277C 800F6F7C AFAE0020 */        sw $t6, 0x20($sp)
   /* 072780 800F6F80 AFAD0024 */        sw $t5, 0x24($sp)
   /* 072784 800F6F84 E7A80014 */      swc1 $f8, 0x14($sp)
-  /* 072788 800F6F88 0C03DC9C */       jal func_ovl2_800F7270
+  /* 072788 800F6F88 0C03DC9C */       jal mpCollision_CheckLWallSurfaceTilt
   /* 07278C 800F6F8C E7AA001C */      swc1 $f10, 0x1c($sp)
-  /* 072790 800F6F90 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 072794 800F6F94 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 072790 800F6F90 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 072794 800F6F94 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 072798 800F6F98 24010001 */     addiu $at, $zero, 1
-  /* 07279C 800F6F9C 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0727A0 800F6FA0 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 07279C 800F6F9C 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0727A0 800F6FA0 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0727A4 800F6FA4 8FA8010C */        lw $t0, 0x10c($sp)
   /* 0727A8 800F6FA8 14410044 */       bne $v0, $at, .L800F70BC
   /* 0727AC 800F6FAC 240B0006 */     addiu $t3, $zero, 6
   /* 0727B0 800F6FB0 C7B200B0 */      lwc1 $f18, 0xb0($sp)
   /* 0727B4 800F6FB4 C7B000B0 */      lwc1 $f16, 0xb0($sp)
-  /* 0727B8 800F6FB8 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 0727B8 800F6FB8 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 0727BC 800F6FBC 4614903C */    c.lt.s $f18, $f20
   /* 0727C0 800F6FC0 00000000 */       nop 
   /* 0727C4 800F6FC4 45020005 */     bc1fl .L800F6FDC
@@ -36792,7 +36792,7 @@ glabel func_ovl2_800F6B58
   /* 0727E0 800F6FE0 00000000 */       nop 
   /* 0727E4 800F6FE4 45000009 */      bc1f .L800F700C
   /* 0727E8 800F6FE8 00000000 */       nop 
-  /* 0727EC 800F6FEC 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 0727EC 800F6FEC 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 0727F0 800F6FF0 03171021 */      addu $v0, $t8, $s7
   /* 0727F4 800F6FF4 944F0002 */       lhu $t7, 2($v0)
   /* 0727F8 800F6FF8 94590000 */       lhu $t9, ($v0)
@@ -36821,18 +36821,18 @@ glabel func_ovl2_800F6B58
   /* 072848 800F7048 02002825 */        or $a1, $s0, $zero
   /* 07284C 800F704C 02203025 */        or $a2, $s1, $zero
   /* 072850 800F7050 02603825 */        or $a3, $s3, $zero
-  /* 072854 800F7054 0C03DC68 */       jal func_ovl2_800F71A0
+  /* 072854 800F7054 0C03DC68 */       jal mpCollision_GetLRAngle
   /* 072858 800F7058 AFB40010 */        sw $s4, 0x10($sp)
-  /* 07285C 800F705C 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 072860 800F7060 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 072864 800F7064 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 072868 800F7068 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 07285C 800F705C 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 072860 800F7060 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 072864 800F7064 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 072868 800F7068 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 07286C 800F706C 240B0006 */     addiu $t3, $zero, 6
   .L800F7070:
   /* 072870 800F7070 53C0000B */      beql $fp, $zero, .L800F70A0
   /* 072874 800F7074 C7B200B0 */      lwc1 $f18, 0xb0($sp)
-  /* 072878 800F7078 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 07287C 800F707C 8D380000 */        lw $t8, ($t1) # D_ovl2_80131370 + 0
+  /* 072878 800F7078 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 07287C 800F707C 8D380000 */        lw $t8, ($t1) # gpMapVertexData + 0
   /* 072880 800F7080 01F2C821 */      addu $t9, $t7, $s2
   /* 072884 800F7084 972E0000 */       lhu $t6, ($t9)
   /* 072888 800F7088 01CB0019 */     multu $t6, $t3
@@ -36850,8 +36850,8 @@ glabel func_ovl2_800F6B58
   /* 0728B4 800F70B4 46000587 */     neg.s $f22, $f0
   /* 0728B8 800F70B8 46000586 */     mov.s $f22, $f0
   .L800F70BC:
-  /* 0728BC 800F70BC 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 0728C0 800F70C0 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 0728BC 800F70BC 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 0728C0 800F70C0 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 0728C4 800F70C4 01D71021 */      addu $v0, $t6, $s7
   /* 0728C8 800F70C8 94580002 */       lhu $t8, 2($v0)
   /* 0728CC 800F70CC 944D0000 */       lhu $t5, ($v0)
@@ -36862,7 +36862,7 @@ glabel func_ovl2_800F6B58
   /* 0728DC 800F70DC 26520002 */     addiu $s2, $s2, 2
   /* 0728E0 800F70E0 0244082A */       slt $at, $s2, $a0
   /* 0728E4 800F70E4 5420FF3C */      bnel $at, $zero, .L800F6DD8
-  /* 0728E8 800F70E8 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 0728E8 800F70E8 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F70EC:
   /* 0728EC 800F70EC 8FA300F8 */        lw $v1, 0xf8($sp)
   /* 0728F0 800F70F0 8FA400A0 */        lw $a0, 0xa0($sp)
@@ -36875,8 +36875,8 @@ glabel func_ovl2_800F6B58
   /* 072908 800F7108 0062082A */       slt $at, $v1, $v0
   /* 07290C 800F710C 1420FEFD */      bnez $at, .L800F6D04
   /* 072910 800F7110 2484000A */     addiu $a0, $a0, 0xa
-  /* 072914 800F7114 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 072918 800F7118 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 072914 800F7114 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 072918 800F7118 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 07291C 800F711C 95C80000 */       lhu $t0, ($t6)
   .L800F7120:
   /* 072920 800F7120 8FAC00FC */        lw $t4, 0xfc($sp)
@@ -36917,7 +36917,7 @@ glabel func_ovl2_800F6B58
   /* 072998 800F7198 03E00008 */        jr $ra
   /* 07299C 800F719C 27BD0100 */     addiu $sp, $sp, 0x100
 
-glabel func_ovl2_800F71A0
+glabel mpCollision_GetLRAngle
   /* 0729A0 800F71A0 00E57023 */      subu $t6, $a3, $a1
   /* 0729A4 800F71A4 448E2000 */      mtc1 $t6, $f4
   /* 0729A8 800F71A8 44801000 */      mtc1 $zero, $f2
@@ -36975,7 +36975,7 @@ glabel func_ovl2_800F71A0
   /* 072A68 800F7268 03E00008 */        jr $ra
   /* 072A6C 800F726C 00000000 */       nop 
 
-glabel func_ovl2_800F7270
+glabel mpCollision_CheckLWallSurfaceTilt
   /* 072A70 800F7270 27BDFF98 */     addiu $sp, $sp, -0x68
   /* 072A74 800F7274 C7AC0078 */      lwc1 $f12, 0x78($sp)
   /* 072A78 800F7278 C7AE0080 */      lwc1 $f14, 0x80($sp)
@@ -37266,8 +37266,8 @@ glabel func_ovl2_800F7270
 
 glabel func_ovl2_800F769C
   /* 072E9C 800F769C 27BDFEF8 */     addiu $sp, $sp, -0x108
-  /* 072EA0 800F76A0 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 072EA4 800F76A4 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 072EA0 800F76A0 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 072EA4 800F76A4 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 072EA8 800F76A8 AFBF0084 */        sw $ra, 0x84($sp)
   /* 072EAC 800F76AC AFBE0080 */        sw $fp, 0x80($sp)
   /* 072EB0 800F76B0 AFB7007C */        sw $s7, 0x7c($sp)
@@ -37296,17 +37296,17 @@ glabel func_ovl2_800F769C
   /* 072F0C 800F770C C4360874 */      lwc1 $f22, %lo(D_ovl2_80130874)($at)
   /* 072F10 800F7710 1900016B */      blez $t0, .L800F7CC0
   /* 072F14 800F7714 8FBE0118 */        lw $fp, 0x118($sp)
-  /* 072F18 800F7718 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 072F1C 800F771C 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 072F18 800F7718 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 072F1C 800F771C 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 072F20 800F7720 4480D000 */      mtc1 $zero, $f26
-  /* 072F24 800F7724 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 072F28 800F7728 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 072F24 800F7724 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 072F28 800F7728 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 072F2C 800F772C 8FB6011C */        lw $s6, 0x11c($sp)
   /* 072F30 800F7730 240B0006 */     addiu $t3, $zero, 6
   .L800F7734:
   /* 072F34 800F7734 8FAF0104 */        lw $t7, 0x104($sp)
-  /* 072F38 800F7738 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 072F3C 800F773C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 072F38 800F7738 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 072F3C 800F773C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 072F40 800F7740 25E4000A */     addiu $a0, $t7, 0xa
   /* 072F44 800F7744 AFA40100 */        sw $a0, 0x100($sp)
   /* 072F48 800F7748 95E50000 */       lhu $a1, ($t7)
@@ -37329,9 +37329,9 @@ glabel func_ovl2_800F769C
   /* 072F8C 800F778C C7100004 */      lwc1 $f16, 4($t8)
   /* 072F90 800F7790 10400015 */      beqz $v0, .L800F77E8
   .L800F7794:
-  /* 072F94 800F7794 3C0C8013 */       lui $t4, %hi(D_ovl2_8013137C)
+  /* 072F94 800F7794 3C0C8013 */       lui $t4, %hi(gpMapRoomVectors)
   /* 072F98 800F7798 C47E001C */      lwc1 $f30, 0x1c($v1)
-  /* 072F9C 800F779C 8D8C137C */        lw $t4, %lo(D_ovl2_8013137C)($t4)
+  /* 072F9C 800F779C 8D8C137C */        lw $t4, %lo(gpMapRoomVectors)($t4)
   /* 072FA0 800F77A0 00057880 */       sll $t7, $a1, 2
   /* 072FA4 800F77A4 C4600020 */      lwc1 $f0, 0x20($v1)
   /* 072FA8 800F77A8 01E57823 */      subu $t7, $t7, $a1
@@ -37389,14 +37389,14 @@ glabel func_ovl2_800F769C
   /* 073068 800F7868 00822021 */      addu $a0, $a0, $v0
   /* 07306C 800F786C 00042040 */       sll $a0, $a0, 1
   .L800F7870:
-  /* 073070 800F7870 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 073074 800F7874 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
+  /* 073070 800F7870 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 073074 800F7874 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
   /* 073078 800F7878 C7AA00F0 */      lwc1 $f10, 0xf0($sp)
   /* 07307C 800F787C 8FAC0100 */        lw $t4, 0x100($sp)
   /* 073080 800F7880 03041021 */      addu $v0, $t8, $a0
   /* 073084 800F7884 84590004 */        lh $t9, 4($v0)
   /* 073088 800F7888 44992000 */      mtc1 $t9, $f4
-  /* 07308C 800F788C 3C198013 */       lui $t9, %hi(D_ovl2_80131378)
+  /* 07308C 800F788C 3C198013 */       lui $t9, %hi(gpMapVertexLinks)
   /* 073090 800F7890 468021A0 */   cvt.s.w $f6, $f4
   /* 073094 800F7894 4606503C */    c.lt.s $f10, $f6
   /* 073098 800F7898 00000000 */       nop 
@@ -37418,18 +37418,18 @@ glabel func_ovl2_800F769C
   /* 0730D4 800F78D4 460A203C */    c.lt.s $f4, $f10
   /* 0730D8 800F78D8 00000000 */       nop 
   /* 0730DC 800F78DC 45000004 */      bc1f .L800F78F0
-  /* 0730E0 800F78E0 3C188013 */       lui $t8, %hi(D_ovl2_80131368)
-  /* 0730E4 800F78E4 8F181368 */        lw $t8, %lo(D_ovl2_80131368)($t8)
+  /* 0730E0 800F78E0 3C188013 */       lui $t8, %hi(gpMapGeometry)
+  /* 0730E4 800F78E4 8F181368 */        lw $t8, %lo(gpMapGeometry)($t8)
   /* 0730E8 800F78E8 100000ED */         b .L800F7CA0
   /* 0730EC 800F78EC 97080000 */       lhu $t0, ($t8)
   .L800F78F0:
-  /* 0730F0 800F78F0 8F391378 */        lw $t9, %lo(D_ovl2_80131378)($t9)
+  /* 0730F0 800F78F0 8F391378 */        lw $t9, %lo(gpMapVertexLinks)($t9)
   /* 0730F4 800F78F4 0017B880 */       sll $s7, $s7, 2
-  /* 0730F8 800F78F8 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
+  /* 0730F8 800F78F8 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
   /* 0730FC 800F78FC 03371021 */      addu $v0, $t9, $s7
   /* 073100 800F7900 94430000 */       lhu $v1, ($v0)
   /* 073104 800F7904 94590002 */       lhu $t9, 2($v0)
-  /* 073108 800F7908 8D2C0000 */        lw $t4, ($t1) # D_ovl2_80131370 + 0
+  /* 073108 800F7908 8D2C0000 */        lw $t4, ($t1) # gpMapVertexData + 0
   /* 07310C 800F790C 00039040 */       sll $s2, $v1, 1
   /* 073110 800F7910 01F26821 */      addu $t5, $t7, $s2
   /* 073114 800F7914 95AE0000 */       lhu $t6, ($t5)
@@ -37442,9 +37442,9 @@ glabel func_ovl2_800F769C
   /* 073130 800F7930 84930000 */        lh $s3, ($a0)
   /* 073134 800F7934 102000CD */      beqz $at, .L800F7C6C
   /* 073138 800F7938 84940002 */        lh $s4, 2($a0)
-  /* 07313C 800F793C 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 07313C 800F793C 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F7940:
-  /* 073140 800F7940 8D2E0000 */        lw $t6, ($t1) # D_ovl2_80131370 + 0
+  /* 073140 800F7940 8D2E0000 */        lw $t6, ($t1) # gpMapVertexData + 0
   /* 073144 800F7944 02608025 */        or $s0, $s3, $zero
   /* 073148 800F7948 0192C021 */      addu $t8, $t4, $s2
   /* 07314C 800F794C 97190002 */       lhu $t9, 2($t8)
@@ -37474,13 +37474,13 @@ glabel func_ovl2_800F769C
   /* 0731AC 800F79AC AFAD001C */        sw $t5, 0x1c($sp)
   /* 0731B0 800F79B0 E7A60010 */      swc1 $f6, 0x10($sp)
   /* 0731B4 800F79B4 E7BC0014 */      swc1 $f28, 0x14($sp)
-  /* 0731B8 800F79B8 0C03DF49 */       jal func_ovl2_800F7D24
+  /* 0731B8 800F79B8 0C03DF49 */       jal mpCollision_CheckLRSurfaceFlat
   /* 0731BC 800F79BC E7A80018 */      swc1 $f8, 0x18($sp)
-  /* 0731C0 800F79C0 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 0731C4 800F79C4 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 0731C0 800F79C0 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 0731C4 800F79C4 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 0731C8 800F79C8 24010001 */     addiu $at, $zero, 1
-  /* 0731CC 800F79CC 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0731D0 800F79D0 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 0731CC 800F79CC 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0731D0 800F79D0 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0731D4 800F79D4 8FA80114 */        lw $t0, 0x114($sp)
   /* 0731D8 800F79D8 14410098 */       bne $v0, $at, .L800F7C3C
   /* 0731DC 800F79DC 240B0006 */     addiu $t3, $zero, 6
@@ -37488,7 +37488,7 @@ glabel func_ovl2_800F769C
   /* 0731E4 800F79E4 C7AA00B4 */      lwc1 $f10, 0xb4($sp)
   /* 0731E8 800F79E8 C7A600B4 */      lwc1 $f6, 0xb4($sp)
   /* 0731EC 800F79EC 4604C501 */     sub.s $f20, $f24, $f4
-  /* 0731F0 800F79F0 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 0731F0 800F79F0 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 0731F4 800F79F4 4614503C */    c.lt.s $f10, $f20
   /* 0731F8 800F79F8 00000000 */       nop 
   /* 0731FC 800F79FC 45020005 */     bc1fl .L800F7A14
@@ -37502,7 +37502,7 @@ glabel func_ovl2_800F769C
   /* 073218 800F7A18 00000000 */       nop 
   /* 07321C 800F7A1C 45000009 */      bc1f .L800F7A44
   /* 073220 800F7A20 00000000 */       nop 
-  /* 073224 800F7A24 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 073224 800F7A24 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 073228 800F7A28 03171021 */      addu $v0, $t8, $s7
   /* 07322C 800F7A2C 94590002 */       lhu $t9, 2($v0)
   /* 073230 800F7A30 944E0000 */       lhu $t6, ($v0)
@@ -37534,8 +37534,8 @@ glabel func_ovl2_800F769C
   .L800F7A8C:
   /* 07328C 800F7A8C 53C0000B */      beql $fp, $zero, .L800F7ABC
   /* 073290 800F7A90 C7AA00B4 */      lwc1 $f10, 0xb4($sp)
-  /* 073294 800F7A94 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
-  /* 073298 800F7A98 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 073294 800F7A94 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
+  /* 073298 800F7A98 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 07329C 800F7A9C 0192C021 */      addu $t8, $t4, $s2
   /* 0732A0 800F7AA0 97190000 */       lhu $t9, ($t8)
   /* 0732A4 800F7AA4 032B0019 */     multu $t9, $t3
@@ -37563,13 +37563,13 @@ glabel func_ovl2_800F769C
   /* 0732F0 800F7AF0 AFB80020 */        sw $t8, 0x20($sp)
   /* 0732F4 800F7AF4 AFB90024 */        sw $t9, 0x24($sp)
   /* 0732F8 800F7AF8 E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 0732FC 800F7AFC 0C03DC9C */       jal func_ovl2_800F7270
+  /* 0732FC 800F7AFC 0C03DC9C */       jal mpCollision_CheckLWallSurfaceTilt
   /* 073300 800F7B00 E7A8001C */      swc1 $f8, 0x1c($sp)
-  /* 073304 800F7B04 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 073308 800F7B08 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 073304 800F7B04 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 073308 800F7B08 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 07330C 800F7B0C 24010001 */     addiu $at, $zero, 1
-  /* 073310 800F7B10 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 073314 800F7B14 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 073310 800F7B10 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 073314 800F7B14 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 073318 800F7B18 8FA80114 */        lw $t0, 0x114($sp)
   /* 07331C 800F7B1C 14410047 */       bne $v0, $at, .L800F7C3C
   /* 073320 800F7B20 240B0006 */     addiu $t3, $zero, 6
@@ -37577,7 +37577,7 @@ glabel func_ovl2_800F769C
   /* 073328 800F7B28 C7AA00B4 */      lwc1 $f10, 0xb4($sp)
   /* 07332C 800F7B2C C7A600B4 */      lwc1 $f6, 0xb4($sp)
   /* 073330 800F7B30 4604C501 */     sub.s $f20, $f24, $f4
-  /* 073334 800F7B34 3C0D8013 */       lui $t5, %hi(D_ovl2_80131378)
+  /* 073334 800F7B34 3C0D8013 */       lui $t5, %hi(gpMapVertexLinks)
   /* 073338 800F7B38 4614503C */    c.lt.s $f10, $f20
   /* 07333C 800F7B3C 00000000 */       nop 
   /* 073340 800F7B40 45020005 */     bc1fl .L800F7B58
@@ -37591,7 +37591,7 @@ glabel func_ovl2_800F769C
   /* 07335C 800F7B5C 00000000 */       nop 
   /* 073360 800F7B60 45000009 */      bc1f .L800F7B88
   /* 073364 800F7B64 00000000 */       nop 
-  /* 073368 800F7B68 8DAD1378 */        lw $t5, %lo(D_ovl2_80131378)($t5)
+  /* 073368 800F7B68 8DAD1378 */        lw $t5, %lo(gpMapVertexLinks)($t5)
   /* 07336C 800F7B6C 01B71021 */      addu $v0, $t5, $s7
   /* 073370 800F7B70 944E0002 */       lhu $t6, 2($v0)
   /* 073374 800F7B74 944F0000 */       lhu $t7, ($v0)
@@ -37621,18 +37621,18 @@ glabel func_ovl2_800F769C
   /* 0733C8 800F7BC8 02002825 */        or $a1, $s0, $zero
   /* 0733CC 800F7BCC 02203025 */        or $a2, $s1, $zero
   /* 0733D0 800F7BD0 02603825 */        or $a3, $s3, $zero
-  /* 0733D4 800F7BD4 0C03DC68 */       jal func_ovl2_800F71A0
+  /* 0733D4 800F7BD4 0C03DC68 */       jal mpCollision_GetLRAngle
   /* 0733D8 800F7BD8 AFB40010 */        sw $s4, 0x10($sp)
-  /* 0733DC 800F7BDC 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 0733E0 800F7BE0 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 0733E4 800F7BE4 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0733E8 800F7BE8 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 0733DC 800F7BDC 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 0733E0 800F7BE0 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 0733E4 800F7BE4 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0733E8 800F7BE8 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0733EC 800F7BEC 240B0006 */     addiu $t3, $zero, 6
   .L800F7BF0:
   /* 0733F0 800F7BF0 53C0000B */      beql $fp, $zero, .L800F7C20
   /* 0733F4 800F7BF4 C7A400B4 */      lwc1 $f4, 0xb4($sp)
-  /* 0733F8 800F7BF8 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
-  /* 0733FC 800F7BFC 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 0733F8 800F7BF8 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
+  /* 0733FC 800F7BFC 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 073400 800F7C00 01B27021 */      addu $t6, $t5, $s2
   /* 073404 800F7C04 95CF0000 */       lhu $t7, ($t6)
   /* 073408 800F7C08 01EB0019 */     multu $t7, $t3
@@ -37650,8 +37650,8 @@ glabel func_ovl2_800F769C
   /* 073434 800F7C34 46000587 */     neg.s $f22, $f0
   /* 073438 800F7C38 46000586 */     mov.s $f22, $f0
   .L800F7C3C:
-  /* 07343C 800F7C3C 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 073440 800F7C40 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 07343C 800F7C3C 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 073440 800F7C40 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 073444 800F7C44 01D71021 */      addu $v0, $t6, $s7
   /* 073448 800F7C48 944F0002 */       lhu $t7, 2($v0)
   /* 07344C 800F7C4C 94590000 */       lhu $t9, ($v0)
@@ -37662,7 +37662,7 @@ glabel func_ovl2_800F769C
   /* 07345C 800F7C5C 26520002 */     addiu $s2, $s2, 2
   /* 073460 800F7C60 0244082A */       slt $at, $s2, $a0
   /* 073464 800F7C64 5420FF36 */      bnel $at, $zero, .L800F7940
-  /* 073468 800F7C68 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 073468 800F7C68 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F7C6C:
   /* 07346C 800F7C6C 8FA30100 */        lw $v1, 0x100($sp)
   /* 073470 800F7C70 8FA400A4 */        lw $a0, 0xa4($sp)
@@ -37675,8 +37675,8 @@ glabel func_ovl2_800F769C
   /* 073488 800F7C88 0062082A */       slt $at, $v1, $v0
   /* 07348C 800F7C8C 1420FEF8 */      bnez $at, .L800F7870
   /* 073490 800F7C90 2484000A */     addiu $a0, $a0, 0xa
-  /* 073494 800F7C94 3C0D8013 */       lui $t5, %hi(D_ovl2_80131368)
-  /* 073498 800F7C98 8DAD1368 */        lw $t5, %lo(D_ovl2_80131368)($t5)
+  /* 073494 800F7C94 3C0D8013 */       lui $t5, %hi(gpMapGeometry)
+  /* 073498 800F7C98 8DAD1368 */        lw $t5, %lo(gpMapGeometry)($t5)
   /* 07349C 800F7C9C 95A80000 */       lhu $t0, ($t5)
   .L800F7CA0:
   /* 0734A0 800F7CA0 8FAE00F8 */        lw $t6, 0xf8($sp)
@@ -37717,7 +37717,7 @@ glabel func_ovl2_800F769C
   /* 07351C 800F7D1C 03E00008 */        jr $ra
   /* 073520 800F7D20 27BD0108 */     addiu $sp, $sp, 0x108
 
-glabel func_ovl2_800F7D24
+glabel mpCollision_CheckLRSurfaceFlat
   /* 073524 800F7D24 27BDFFD0 */     addiu $sp, $sp, -0x30
   /* 073528 800F7D28 C7AE0044 */      lwc1 $f14, 0x44($sp)
   /* 07352C 800F7D2C 44876000 */      mtc1 $a3, $f12
@@ -37852,8 +37852,8 @@ glabel func_ovl2_800F7D24
 
 glabel func_ovl2_800F7F00
   /* 073700 800F7F00 27BDFF00 */     addiu $sp, $sp, -0x100
-  /* 073704 800F7F04 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 073708 800F7F08 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 073704 800F7F04 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 073708 800F7F08 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 07370C 800F7F0C AFBF0084 */        sw $ra, 0x84($sp)
   /* 073710 800F7F10 AFBE0080 */        sw $fp, 0x80($sp)
   /* 073714 800F7F14 AFB7007C */        sw $s7, 0x7c($sp)
@@ -37880,11 +37880,11 @@ glabel func_ovl2_800F7F00
   /* 073768 800F7F68 00C0A825 */        or $s5, $a2, $zero
   /* 07376C 800F7F6C 1900015D */      blez $t0, .L800F84E4
   /* 073770 800F7F70 C4360890 */      lwc1 $f22, %lo(D_ovl2_80130890)($at)
-  /* 073774 800F7F74 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 073778 800F7F78 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 073774 800F7F74 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 073778 800F7F78 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 07377C 800F7F7C 4480C000 */      mtc1 $zero, $f24
-  /* 073780 800F7F80 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 073784 800F7F84 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 073780 800F7F80 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 073784 800F7F84 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 073788 800F7F88 8FBE0110 */        lw $fp, 0x110($sp)
   /* 07378C 800F7F8C 8FB60114 */        lw $s6, 0x114($sp)
   /* 073790 800F7F90 240B0006 */     addiu $t3, $zero, 6
@@ -37892,8 +37892,8 @@ glabel func_ovl2_800F7F00
   /* 073794 800F7F94 2584000E */     addiu $a0, $t4, 0xe
   /* 073798 800F7F98 AFA400F8 */        sw $a0, 0xf8($sp)
   /* 07379C 800F7F9C 958F0000 */       lhu $t7, ($t4)
-  /* 0737A0 800F7FA0 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
-  /* 0737A4 800F7FA4 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 0737A0 800F7FA0 3C0E8013 */       lui $t6, %hi(gpMapRooms)
+  /* 0737A4 800F7FA4 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 0737A8 800F7FA8 958D0010 */       lhu $t5, 0x10($t4)
   /* 0737AC 800F7FAC 000FC080 */       sll $t8, $t7, 2
   /* 0737B0 800F7FB0 01D8C821 */      addu $t9, $t6, $t8
@@ -37965,8 +37965,8 @@ glabel func_ovl2_800F7F00
   /* 0738A4 800F80A4 00042040 */       sll $a0, $a0, 1
   /* 0738A8 800F80A8 AFAC00FC */        sw $t4, 0xfc($sp)
   .L800F80AC:
-  /* 0738AC 800F80AC 3C0F8013 */       lui $t7, %hi(D_ovl2_8013136C)
-  /* 0738B0 800F80B0 8DEF136C */        lw $t7, %lo(D_ovl2_8013136C)($t7)
+  /* 0738AC 800F80AC 3C0F8013 */       lui $t7, %hi(gpMapVertexInfo)
+  /* 0738B0 800F80B0 8DEF136C */        lw $t7, %lo(gpMapVertexInfo)($t7)
   /* 0738B4 800F80B4 C7A400EC */      lwc1 $f4, 0xec($sp)
   /* 0738B8 800F80B8 8FB800F8 */        lw $t8, 0xf8($sp)
   /* 0738BC 800F80BC 01E41021 */      addu $v0, $t7, $a0
@@ -37989,23 +37989,23 @@ glabel func_ovl2_800F7F00
   /* 0738FC 800F80FC C7A600E8 */      lwc1 $f6, 0xe8($sp)
   /* 073900 800F8100 8FB700C8 */        lw $s7, 0xc8($sp)
   /* 073904 800F8104 448F4000 */      mtc1 $t7, $f8
-  /* 073908 800F8108 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 073908 800F8108 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 07390C 800F810C 468042A0 */   cvt.s.w $f10, $f8
   /* 073910 800F8110 460A303C */    c.lt.s $f6, $f10
   /* 073914 800F8114 00000000 */       nop 
   /* 073918 800F8118 45000005 */      bc1f .L800F8130
-  /* 07391C 800F811C 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 073920 800F8120 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 07391C 800F811C 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 073920 800F8120 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 073924 800F8124 8FAC00FC */        lw $t4, 0xfc($sp)
   /* 073928 800F8128 100000E8 */         b .L800F84CC
   /* 07392C 800F812C 95C80000 */       lhu $t0, ($t6)
   .L800F8130:
-  /* 073930 800F8130 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 073930 800F8130 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 073934 800F8134 0017B880 */       sll $s7, $s7, 2
-  /* 073938 800F8138 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
+  /* 073938 800F8138 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
   /* 07393C 800F813C 03171021 */      addu $v0, $t8, $s7
   /* 073940 800F8140 94430000 */       lhu $v1, ($v0)
-  /* 073944 800F8144 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 073944 800F8144 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 073948 800F8148 00039040 */       sll $s2, $v1, 1
   /* 07394C 800F814C 01B27821 */      addu $t7, $t5, $s2
   /* 073950 800F8150 95EE0000 */       lhu $t6, ($t7)
@@ -38019,9 +38019,9 @@ glabel func_ovl2_800F7F00
   /* 073970 800F8170 84930000 */        lh $s3, ($a0)
   /* 073974 800F8174 102000C7 */      beqz $at, .L800F8494
   /* 073978 800F8178 84940002 */        lh $s4, 2($a0)
-  /* 07397C 800F817C 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 07397C 800F817C 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F8180:
-  /* 073980 800F8180 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 073980 800F8180 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 073984 800F8184 02608025 */        or $s0, $s3, $zero
   /* 073988 800F8188 03126821 */      addu $t5, $t8, $s2
   /* 07398C 800F818C 95AF0002 */       lhu $t7, 2($t5)
@@ -38051,19 +38051,19 @@ glabel func_ovl2_800F7F00
   /* 0739EC 800F81EC AFB8001C */        sw $t8, 0x1c($sp)
   /* 0739F0 800F81F0 E7B00010 */      swc1 $f16, 0x10($sp)
   /* 0739F4 800F81F4 E7BA0014 */      swc1 $f26, 0x14($sp)
-  /* 0739F8 800F81F8 0C03DF49 */       jal func_ovl2_800F7D24
+  /* 0739F8 800F81F8 0C03DF49 */       jal mpCollision_CheckLRSurfaceFlat
   /* 0739FC 800F81FC E7B20018 */      swc1 $f18, 0x18($sp)
-  /* 073A00 800F8200 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 073A04 800F8204 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 073A00 800F8200 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 073A04 800F8204 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 073A08 800F8208 24010001 */     addiu $at, $zero, 1
-  /* 073A0C 800F820C 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 073A10 800F8210 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 073A0C 800F820C 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 073A10 800F8210 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 073A14 800F8214 8FA8010C */        lw $t0, 0x10c($sp)
   /* 073A18 800F8218 14410092 */       bne $v0, $at, .L800F8464
   /* 073A1C 800F821C 240B0006 */     addiu $t3, $zero, 6
   /* 073A20 800F8220 C7A400B0 */      lwc1 $f4, 0xb0($sp)
   /* 073A24 800F8224 C7A800B0 */      lwc1 $f8, 0xb0($sp)
-  /* 073A28 800F8228 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 073A28 800F8228 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 073A2C 800F822C 4614203C */    c.lt.s $f4, $f20
   /* 073A30 800F8230 00000000 */       nop 
   /* 073A34 800F8234 45020005 */     bc1fl .L800F824C
@@ -38077,7 +38077,7 @@ glabel func_ovl2_800F7F00
   /* 073A50 800F8250 00000000 */       nop 
   /* 073A54 800F8254 45000009 */      bc1f .L800F827C
   /* 073A58 800F8258 00000000 */       nop 
-  /* 073A5C 800F825C 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 073A5C 800F825C 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 073A60 800F8260 01F71021 */      addu $v0, $t7, $s7
   /* 073A64 800F8264 94590002 */       lhu $t9, 2($v0)
   /* 073A68 800F8268 944E0000 */       lhu $t6, ($v0)
@@ -38108,8 +38108,8 @@ glabel func_ovl2_800F7F00
   .L800F82C0:
   /* 073AC0 800F82C0 53C0000B */      beql $fp, $zero, .L800F82F0
   /* 073AC4 800F82C4 C7A800B0 */      lwc1 $f8, 0xb0($sp)
-  /* 073AC8 800F82C8 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 073ACC 800F82CC 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 073AC8 800F82C8 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 073ACC 800F82CC 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 073AD0 800F82D0 01F2C821 */      addu $t9, $t7, $s2
   /* 073AD4 800F82D4 972E0000 */       lhu $t6, ($t9)
   /* 073AD8 800F82D8 01CB0019 */     multu $t6, $t3
@@ -38137,19 +38137,19 @@ glabel func_ovl2_800F7F00
   /* 073B24 800F8324 AFAE0020 */        sw $t6, 0x20($sp)
   /* 073B28 800F8328 AFAD0024 */        sw $t5, 0x24($sp)
   /* 073B2C 800F832C E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 073B30 800F8330 0C03E152 */       jal func_ovl2_800F8548
+  /* 073B30 800F8330 0C03E152 */       jal mpCollision_CheckRWallSurfaceTilt
   /* 073B34 800F8334 E7AA001C */      swc1 $f10, 0x1c($sp)
-  /* 073B38 800F8338 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 073B3C 800F833C 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 073B38 800F8338 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 073B3C 800F833C 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 073B40 800F8340 24010001 */     addiu $at, $zero, 1
-  /* 073B44 800F8344 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 073B48 800F8348 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 073B44 800F8344 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 073B48 800F8348 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 073B4C 800F834C 8FA8010C */        lw $t0, 0x10c($sp)
   /* 073B50 800F8350 14410044 */       bne $v0, $at, .L800F8464
   /* 073B54 800F8354 240B0006 */     addiu $t3, $zero, 6
   /* 073B58 800F8358 C7B000B0 */      lwc1 $f16, 0xb0($sp)
   /* 073B5C 800F835C C7B200B0 */      lwc1 $f18, 0xb0($sp)
-  /* 073B60 800F8360 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 073B60 800F8360 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 073B64 800F8364 4614803C */    c.lt.s $f16, $f20
   /* 073B68 800F8368 00000000 */       nop 
   /* 073B6C 800F836C 45020005 */     bc1fl .L800F8384
@@ -38163,7 +38163,7 @@ glabel func_ovl2_800F7F00
   /* 073B88 800F8388 00000000 */       nop 
   /* 073B8C 800F838C 45000009 */      bc1f .L800F83B4
   /* 073B90 800F8390 00000000 */       nop 
-  /* 073B94 800F8394 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 073B94 800F8394 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 073B98 800F8398 03171021 */      addu $v0, $t8, $s7
   /* 073B9C 800F839C 944F0002 */       lhu $t7, 2($v0)
   /* 073BA0 800F83A0 94590000 */       lhu $t9, ($v0)
@@ -38192,18 +38192,18 @@ glabel func_ovl2_800F7F00
   /* 073BF0 800F83F0 02002825 */        or $a1, $s0, $zero
   /* 073BF4 800F83F4 02203025 */        or $a2, $s1, $zero
   /* 073BF8 800F83F8 02603825 */        or $a3, $s3, $zero
-  /* 073BFC 800F83FC 0C03DC68 */       jal func_ovl2_800F71A0
+  /* 073BFC 800F83FC 0C03DC68 */       jal mpCollision_GetLRAngle
   /* 073C00 800F8400 AFB40010 */        sw $s4, 0x10($sp)
-  /* 073C04 800F8404 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 073C08 800F8408 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 073C0C 800F840C 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 073C10 800F8410 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 073C04 800F8404 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 073C08 800F8408 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 073C0C 800F840C 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 073C10 800F8410 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 073C14 800F8414 240B0006 */     addiu $t3, $zero, 6
   .L800F8418:
   /* 073C18 800F8418 53C0000B */      beql $fp, $zero, .L800F8448
   /* 073C1C 800F841C C7B000B0 */      lwc1 $f16, 0xb0($sp)
-  /* 073C20 800F8420 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
-  /* 073C24 800F8424 8D380000 */        lw $t8, ($t1) # D_ovl2_80131370 + 0
+  /* 073C20 800F8420 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
+  /* 073C24 800F8424 8D380000 */        lw $t8, ($t1) # gpMapVertexData + 0
   /* 073C28 800F8428 01F2C821 */      addu $t9, $t7, $s2
   /* 073C2C 800F842C 972E0000 */       lhu $t6, ($t9)
   /* 073C30 800F8430 01CB0019 */     multu $t6, $t3
@@ -38221,8 +38221,8 @@ glabel func_ovl2_800F7F00
   /* 073C5C 800F845C 46000587 */     neg.s $f22, $f0
   /* 073C60 800F8460 46000586 */     mov.s $f22, $f0
   .L800F8464:
-  /* 073C64 800F8464 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 073C68 800F8468 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 073C64 800F8464 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 073C68 800F8468 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 073C6C 800F846C 01D71021 */      addu $v0, $t6, $s7
   /* 073C70 800F8470 94580002 */       lhu $t8, 2($v0)
   /* 073C74 800F8474 944D0000 */       lhu $t5, ($v0)
@@ -38233,7 +38233,7 @@ glabel func_ovl2_800F7F00
   /* 073C84 800F8484 26520002 */     addiu $s2, $s2, 2
   /* 073C88 800F8488 0244082A */       slt $at, $s2, $a0
   /* 073C8C 800F848C 5420FF3C */      bnel $at, $zero, .L800F8180
-  /* 073C90 800F8490 8D580000 */        lw $t8, ($t2) # D_ovl2_80131374 + 0
+  /* 073C90 800F8490 8D580000 */        lw $t8, ($t2) # gpMapVertexID + 0
   .L800F8494:
   /* 073C94 800F8494 8FA300F8 */        lw $v1, 0xf8($sp)
   /* 073C98 800F8498 8FA400A0 */        lw $a0, 0xa0($sp)
@@ -38246,8 +38246,8 @@ glabel func_ovl2_800F7F00
   /* 073CB0 800F84B0 0062082A */       slt $at, $v1, $v0
   /* 073CB4 800F84B4 1420FEFD */      bnez $at, .L800F80AC
   /* 073CB8 800F84B8 2484000A */     addiu $a0, $a0, 0xa
-  /* 073CBC 800F84BC 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 073CC0 800F84C0 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 073CBC 800F84BC 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 073CC0 800F84C0 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 073CC4 800F84C4 95C80000 */       lhu $t0, ($t6)
   .L800F84C8:
   /* 073CC8 800F84C8 8FAC00FC */        lw $t4, 0xfc($sp)
@@ -38288,7 +38288,7 @@ glabel func_ovl2_800F7F00
   /* 073D40 800F8540 03E00008 */        jr $ra
   /* 073D44 800F8544 27BD0100 */     addiu $sp, $sp, 0x100
 
-glabel func_ovl2_800F8548
+glabel mpCollision_CheckRWallSurfaceTilt
   /* 073D48 800F8548 27BDFF98 */     addiu $sp, $sp, -0x68
   /* 073D4C 800F854C C7AC0078 */      lwc1 $f12, 0x78($sp)
   /* 073D50 800F8550 C7AE0080 */      lwc1 $f14, 0x80($sp)
@@ -38579,8 +38579,8 @@ glabel func_ovl2_800F8548
 
 glabel func_ovl2_800F8974
   /* 074174 800F8974 27BDFEF8 */     addiu $sp, $sp, -0x108
-  /* 074178 800F8978 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 07417C 800F897C 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 074178 800F8978 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 07417C 800F897C 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 074180 800F8980 AFBF0084 */        sw $ra, 0x84($sp)
   /* 074184 800F8984 AFBE0080 */        sw $fp, 0x80($sp)
   /* 074188 800F8988 AFB7007C */        sw $s7, 0x7c($sp)
@@ -38609,17 +38609,17 @@ glabel func_ovl2_800F8974
   /* 0741E4 800F89E4 C43608D4 */      lwc1 $f22, %lo(D_ovl2_801308D4)($at)
   /* 0741E8 800F89E8 1900016B */      blez $t0, .L800F8F98
   /* 0741EC 800F89EC 8FBE0118 */        lw $fp, 0x118($sp)
-  /* 0741F0 800F89F0 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 0741F4 800F89F4 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
+  /* 0741F0 800F89F0 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 0741F4 800F89F4 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 0741F8 800F89F8 4480D000 */      mtc1 $zero, $f26
-  /* 0741FC 800F89FC 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
-  /* 074200 800F8A00 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
+  /* 0741FC 800F89FC 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
+  /* 074200 800F8A00 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
   /* 074204 800F8A04 8FB6011C */        lw $s6, 0x11c($sp)
   /* 074208 800F8A08 240B0006 */     addiu $t3, $zero, 6
   .L800F8A0C:
   /* 07420C 800F8A0C 8FAF0104 */        lw $t7, 0x104($sp)
-  /* 074210 800F8A10 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 074214 800F8A14 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 074210 800F8A10 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 074214 800F8A14 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 074218 800F8A18 25E4000E */     addiu $a0, $t7, 0xe
   /* 07421C 800F8A1C AFA40100 */        sw $a0, 0x100($sp)
   /* 074220 800F8A20 95E50000 */       lhu $a1, ($t7)
@@ -38642,9 +38642,9 @@ glabel func_ovl2_800F8974
   /* 074264 800F8A64 C7100004 */      lwc1 $f16, 4($t8)
   /* 074268 800F8A68 10400015 */      beqz $v0, .L800F8AC0
   .L800F8A6C:
-  /* 07426C 800F8A6C 3C0C8013 */       lui $t4, %hi(D_ovl2_8013137C)
+  /* 07426C 800F8A6C 3C0C8013 */       lui $t4, %hi(gpMapRoomVectors)
   /* 074270 800F8A70 C47E001C */      lwc1 $f30, 0x1c($v1)
-  /* 074274 800F8A74 8D8C137C */        lw $t4, %lo(D_ovl2_8013137C)($t4)
+  /* 074274 800F8A74 8D8C137C */        lw $t4, %lo(gpMapRoomVectors)($t4)
   /* 074278 800F8A78 00057880 */       sll $t7, $a1, 2
   /* 07427C 800F8A7C C4600020 */      lwc1 $f0, 0x20($v1)
   /* 074280 800F8A80 01E57823 */      subu $t7, $t7, $a1
@@ -38702,14 +38702,14 @@ glabel func_ovl2_800F8974
   /* 074340 800F8B40 00822021 */      addu $a0, $a0, $v0
   /* 074344 800F8B44 00042040 */       sll $a0, $a0, 1
   .L800F8B48:
-  /* 074348 800F8B48 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 07434C 800F8B4C 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
+  /* 074348 800F8B48 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 07434C 800F8B4C 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
   /* 074350 800F8B50 C7A600F4 */      lwc1 $f6, 0xf4($sp)
   /* 074354 800F8B54 8FAC0100 */        lw $t4, 0x100($sp)
   /* 074358 800F8B58 03041021 */      addu $v0, $t8, $a0
   /* 07435C 800F8B5C 84590002 */        lh $t9, 2($v0)
   /* 074360 800F8B60 44995000 */      mtc1 $t9, $f10
-  /* 074364 800F8B64 3C198013 */       lui $t9, %hi(D_ovl2_80131378)
+  /* 074364 800F8B64 3C198013 */       lui $t9, %hi(gpMapVertexLinks)
   /* 074368 800F8B68 46805120 */   cvt.s.w $f4, $f10
   /* 07436C 800F8B6C 4606203C */    c.lt.s $f4, $f6
   /* 074370 800F8B70 00000000 */       nop 
@@ -38731,18 +38731,18 @@ glabel func_ovl2_800F8974
   /* 0743AC 800F8BAC 4604403C */    c.lt.s $f8, $f4
   /* 0743B0 800F8BB0 00000000 */       nop 
   /* 0743B4 800F8BB4 45000004 */      bc1f .L800F8BC8
-  /* 0743B8 800F8BB8 3C188013 */       lui $t8, %hi(D_ovl2_80131368)
-  /* 0743BC 800F8BBC 8F181368 */        lw $t8, %lo(D_ovl2_80131368)($t8)
+  /* 0743B8 800F8BB8 3C188013 */       lui $t8, %hi(gpMapGeometry)
+  /* 0743BC 800F8BBC 8F181368 */        lw $t8, %lo(gpMapGeometry)($t8)
   /* 0743C0 800F8BC0 100000ED */         b .L800F8F78
   /* 0743C4 800F8BC4 97080000 */       lhu $t0, ($t8)
   .L800F8BC8:
-  /* 0743C8 800F8BC8 8F391378 */        lw $t9, %lo(D_ovl2_80131378)($t9)
+  /* 0743C8 800F8BC8 8F391378 */        lw $t9, %lo(gpMapVertexLinks)($t9)
   /* 0743CC 800F8BCC 0017B880 */       sll $s7, $s7, 2
-  /* 0743D0 800F8BD0 8D4F0000 */        lw $t7, ($t2) # D_ovl2_80131374 + 0
+  /* 0743D0 800F8BD0 8D4F0000 */        lw $t7, ($t2) # gpMapVertexID + 0
   /* 0743D4 800F8BD4 03371021 */      addu $v0, $t9, $s7
   /* 0743D8 800F8BD8 94430000 */       lhu $v1, ($v0)
   /* 0743DC 800F8BDC 94590002 */       lhu $t9, 2($v0)
-  /* 0743E0 800F8BE0 8D2C0000 */        lw $t4, ($t1) # D_ovl2_80131370 + 0
+  /* 0743E0 800F8BE0 8D2C0000 */        lw $t4, ($t1) # gpMapVertexData + 0
   /* 0743E4 800F8BE4 00039040 */       sll $s2, $v1, 1
   /* 0743E8 800F8BE8 01F26821 */      addu $t5, $t7, $s2
   /* 0743EC 800F8BEC 95AE0000 */       lhu $t6, ($t5)
@@ -38755,9 +38755,9 @@ glabel func_ovl2_800F8974
   /* 074408 800F8C08 84930000 */        lh $s3, ($a0)
   /* 07440C 800F8C0C 102000CD */      beqz $at, .L800F8F44
   /* 074410 800F8C10 84940002 */        lh $s4, 2($a0)
-  /* 074414 800F8C14 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 074414 800F8C14 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F8C18:
-  /* 074418 800F8C18 8D2E0000 */        lw $t6, ($t1) # D_ovl2_80131370 + 0
+  /* 074418 800F8C18 8D2E0000 */        lw $t6, ($t1) # gpMapVertexData + 0
   /* 07441C 800F8C1C 02608025 */        or $s0, $s3, $zero
   /* 074420 800F8C20 0192C021 */      addu $t8, $t4, $s2
   /* 074424 800F8C24 97190002 */       lhu $t9, 2($t8)
@@ -38787,13 +38787,13 @@ glabel func_ovl2_800F8974
   /* 074484 800F8C84 AFAD001C */        sw $t5, 0x1c($sp)
   /* 074488 800F8C88 E7A60010 */      swc1 $f6, 0x10($sp)
   /* 07448C 800F8C8C E7BC0014 */      swc1 $f28, 0x14($sp)
-  /* 074490 800F8C90 0C03DF49 */       jal func_ovl2_800F7D24
+  /* 074490 800F8C90 0C03DF49 */       jal mpCollision_CheckLRSurfaceFlat
   /* 074494 800F8C94 E7AA0018 */      swc1 $f10, 0x18($sp)
-  /* 074498 800F8C98 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 07449C 800F8C9C 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 074498 800F8C98 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 07449C 800F8C9C 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 0744A0 800F8CA0 24010001 */     addiu $at, $zero, 1
-  /* 0744A4 800F8CA4 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0744A8 800F8CA8 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 0744A4 800F8CA4 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0744A8 800F8CA8 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0744AC 800F8CAC 8FA80114 */        lw $t0, 0x114($sp)
   /* 0744B0 800F8CB0 14410098 */       bne $v0, $at, .L800F8F14
   /* 0744B4 800F8CB4 240B0006 */     addiu $t3, $zero, 6
@@ -38801,7 +38801,7 @@ glabel func_ovl2_800F8974
   /* 0744BC 800F8CBC C7A400B4 */      lwc1 $f4, 0xb4($sp)
   /* 0744C0 800F8CC0 C7A600B4 */      lwc1 $f6, 0xb4($sp)
   /* 0744C4 800F8CC4 4608C501 */     sub.s $f20, $f24, $f8
-  /* 0744C8 800F8CC8 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
+  /* 0744C8 800F8CC8 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
   /* 0744CC 800F8CCC 4614203C */    c.lt.s $f4, $f20
   /* 0744D0 800F8CD0 00000000 */       nop 
   /* 0744D4 800F8CD4 45020005 */     bc1fl .L800F8CEC
@@ -38815,7 +38815,7 @@ glabel func_ovl2_800F8974
   /* 0744F0 800F8CF0 00000000 */       nop 
   /* 0744F4 800F8CF4 45000009 */      bc1f .L800F8D1C
   /* 0744F8 800F8CF8 00000000 */       nop 
-  /* 0744FC 800F8CFC 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 0744FC 800F8CFC 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 074500 800F8D00 03171021 */      addu $v0, $t8, $s7
   /* 074504 800F8D04 94590002 */       lhu $t9, 2($v0)
   /* 074508 800F8D08 944E0000 */       lhu $t6, ($v0)
@@ -38847,8 +38847,8 @@ glabel func_ovl2_800F8974
   .L800F8D64:
   /* 074564 800F8D64 53C0000B */      beql $fp, $zero, .L800F8D94
   /* 074568 800F8D68 C7A400B4 */      lwc1 $f4, 0xb4($sp)
-  /* 07456C 800F8D6C 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
-  /* 074570 800F8D70 8D2D0000 */        lw $t5, ($t1) # D_ovl2_80131370 + 0
+  /* 07456C 800F8D6C 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
+  /* 074570 800F8D70 8D2D0000 */        lw $t5, ($t1) # gpMapVertexData + 0
   /* 074574 800F8D74 0192C021 */      addu $t8, $t4, $s2
   /* 074578 800F8D78 97190000 */       lhu $t9, ($t8)
   /* 07457C 800F8D7C 032B0019 */     multu $t9, $t3
@@ -38876,13 +38876,13 @@ glabel func_ovl2_800F8974
   /* 0745C8 800F8DC8 AFB80020 */        sw $t8, 0x20($sp)
   /* 0745CC 800F8DCC AFB90024 */        sw $t9, 0x24($sp)
   /* 0745D0 800F8DD0 E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 0745D4 800F8DD4 0C03E152 */       jal func_ovl2_800F8548
+  /* 0745D4 800F8DD4 0C03E152 */       jal mpCollision_CheckRWallSurfaceTilt
   /* 0745D8 800F8DD8 E7AA001C */      swc1 $f10, 0x1c($sp)
-  /* 0745DC 800F8DDC 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 0745E0 800F8DE0 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
+  /* 0745DC 800F8DDC 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 0745E0 800F8DE0 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
   /* 0745E4 800F8DE4 24010001 */     addiu $at, $zero, 1
-  /* 0745E8 800F8DE8 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0745EC 800F8DEC 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 0745E8 800F8DE8 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0745EC 800F8DEC 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0745F0 800F8DF0 8FA80114 */        lw $t0, 0x114($sp)
   /* 0745F4 800F8DF4 14410047 */       bne $v0, $at, .L800F8F14
   /* 0745F8 800F8DF8 240B0006 */     addiu $t3, $zero, 6
@@ -38890,7 +38890,7 @@ glabel func_ovl2_800F8974
   /* 074600 800F8E00 C7A400B4 */      lwc1 $f4, 0xb4($sp)
   /* 074604 800F8E04 C7A600B4 */      lwc1 $f6, 0xb4($sp)
   /* 074608 800F8E08 4608C501 */     sub.s $f20, $f24, $f8
-  /* 07460C 800F8E0C 3C0D8013 */       lui $t5, %hi(D_ovl2_80131378)
+  /* 07460C 800F8E0C 3C0D8013 */       lui $t5, %hi(gpMapVertexLinks)
   /* 074610 800F8E10 4614203C */    c.lt.s $f4, $f20
   /* 074614 800F8E14 00000000 */       nop 
   /* 074618 800F8E18 45020005 */     bc1fl .L800F8E30
@@ -38904,7 +38904,7 @@ glabel func_ovl2_800F8974
   /* 074634 800F8E34 00000000 */       nop 
   /* 074638 800F8E38 45000009 */      bc1f .L800F8E60
   /* 07463C 800F8E3C 00000000 */       nop 
-  /* 074640 800F8E40 8DAD1378 */        lw $t5, %lo(D_ovl2_80131378)($t5)
+  /* 074640 800F8E40 8DAD1378 */        lw $t5, %lo(gpMapVertexLinks)($t5)
   /* 074644 800F8E44 01B71021 */      addu $v0, $t5, $s7
   /* 074648 800F8E48 944E0002 */       lhu $t6, 2($v0)
   /* 07464C 800F8E4C 944F0000 */       lhu $t7, ($v0)
@@ -38934,18 +38934,18 @@ glabel func_ovl2_800F8974
   /* 0746A0 800F8EA0 02002825 */        or $a1, $s0, $zero
   /* 0746A4 800F8EA4 02203025 */        or $a2, $s1, $zero
   /* 0746A8 800F8EA8 02603825 */        or $a3, $s3, $zero
-  /* 0746AC 800F8EAC 0C03DC68 */       jal func_ovl2_800F71A0
+  /* 0746AC 800F8EAC 0C03DC68 */       jal mpCollision_GetLRAngle
   /* 0746B0 800F8EB0 AFB40010 */        sw $s4, 0x10($sp)
-  /* 0746B4 800F8EB4 3C098013 */       lui $t1, %hi(D_ovl2_80131370)
-  /* 0746B8 800F8EB8 3C0A8013 */       lui $t2, %hi(D_ovl2_80131374)
-  /* 0746BC 800F8EBC 254A1374 */     addiu $t2, $t2, %lo(D_ovl2_80131374)
-  /* 0746C0 800F8EC0 25291370 */     addiu $t1, $t1, %lo(D_ovl2_80131370)
+  /* 0746B4 800F8EB4 3C098013 */       lui $t1, %hi(gpMapVertexData)
+  /* 0746B8 800F8EB8 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
+  /* 0746BC 800F8EBC 254A1374 */     addiu $t2, $t2, %lo(gpMapVertexID)
+  /* 0746C0 800F8EC0 25291370 */     addiu $t1, $t1, %lo(gpMapVertexData)
   /* 0746C4 800F8EC4 240B0006 */     addiu $t3, $zero, 6
   .L800F8EC8:
   /* 0746C8 800F8EC8 53C0000B */      beql $fp, $zero, .L800F8EF8
   /* 0746CC 800F8ECC C7A800B4 */      lwc1 $f8, 0xb4($sp)
-  /* 0746D0 800F8ED0 8D4D0000 */        lw $t5, ($t2) # D_ovl2_80131374 + 0
-  /* 0746D4 800F8ED4 8D390000 */        lw $t9, ($t1) # D_ovl2_80131370 + 0
+  /* 0746D0 800F8ED0 8D4D0000 */        lw $t5, ($t2) # gpMapVertexID + 0
+  /* 0746D4 800F8ED4 8D390000 */        lw $t9, ($t1) # gpMapVertexData + 0
   /* 0746D8 800F8ED8 01B27021 */      addu $t6, $t5, $s2
   /* 0746DC 800F8EDC 95CF0000 */       lhu $t7, ($t6)
   /* 0746E0 800F8EE0 01EB0019 */     multu $t7, $t3
@@ -38963,8 +38963,8 @@ glabel func_ovl2_800F8974
   /* 07470C 800F8F0C 46000587 */     neg.s $f22, $f0
   /* 074710 800F8F10 46000586 */     mov.s $f22, $f0
   .L800F8F14:
-  /* 074714 800F8F14 3C0E8013 */       lui $t6, %hi(D_ovl2_80131378)
-  /* 074718 800F8F18 8DCE1378 */        lw $t6, %lo(D_ovl2_80131378)($t6)
+  /* 074714 800F8F14 3C0E8013 */       lui $t6, %hi(gpMapVertexLinks)
+  /* 074718 800F8F18 8DCE1378 */        lw $t6, %lo(gpMapVertexLinks)($t6)
   /* 07471C 800F8F1C 01D71021 */      addu $v0, $t6, $s7
   /* 074720 800F8F20 944F0002 */       lhu $t7, 2($v0)
   /* 074724 800F8F24 94590000 */       lhu $t9, ($v0)
@@ -38975,7 +38975,7 @@ glabel func_ovl2_800F8974
   /* 074734 800F8F34 26520002 */     addiu $s2, $s2, 2
   /* 074738 800F8F38 0244082A */       slt $at, $s2, $a0
   /* 07473C 800F8F3C 5420FF36 */      bnel $at, $zero, .L800F8C18
-  /* 074740 800F8F40 8D4C0000 */        lw $t4, ($t2) # D_ovl2_80131374 + 0
+  /* 074740 800F8F40 8D4C0000 */        lw $t4, ($t2) # gpMapVertexID + 0
   .L800F8F44:
   /* 074744 800F8F44 8FA30100 */        lw $v1, 0x100($sp)
   /* 074748 800F8F48 8FA400A4 */        lw $a0, 0xa4($sp)
@@ -38988,8 +38988,8 @@ glabel func_ovl2_800F8974
   /* 074760 800F8F60 0062082A */       slt $at, $v1, $v0
   /* 074764 800F8F64 1420FEF8 */      bnez $at, .L800F8B48
   /* 074768 800F8F68 2484000A */     addiu $a0, $a0, 0xa
-  /* 07476C 800F8F6C 3C0D8013 */       lui $t5, %hi(D_ovl2_80131368)
-  /* 074770 800F8F70 8DAD1368 */        lw $t5, %lo(D_ovl2_80131368)($t5)
+  /* 07476C 800F8F6C 3C0D8013 */       lui $t5, %hi(gpMapGeometry)
+  /* 074770 800F8F70 8DAD1368 */        lw $t5, %lo(gpMapGeometry)($t5)
   /* 074774 800F8F74 95A80000 */       lhu $t0, ($t5)
   .L800F8F78:
   /* 074778 800F8F78 8FAE00F8 */        lw $t6, 0xf8($sp)
@@ -39032,8 +39032,8 @@ glabel func_ovl2_800F8974
 
 glabel func_ovl2_800F8FFC
   /* 0747FC 800F8FFC 27BDFF90 */     addiu $sp, $sp, -0x70
-  /* 074800 800F9000 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 074804 800F9004 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 074800 800F9000 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 074804 800F9004 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 074808 800F9008 AFBF005C */        sw $ra, 0x5c($sp)
   /* 07480C 800F900C AFBE0058 */        sw $fp, 0x58($sp)
   /* 074810 800F9010 AFB70054 */        sw $s7, 0x54($sp)
@@ -39050,20 +39050,20 @@ glabel func_ovl2_800F8FFC
   /* 07483C 800F903C AFA40070 */        sw $a0, 0x70($sp)
   /* 074840 800F9040 8C4E0010 */        lw $t6, 0x10($v0)
   /* 074844 800F9044 AFA00064 */        sw $zero, 0x64($sp)
-  /* 074848 800F9048 3C158013 */       lui $s5, %hi(D_ovl2_80131374)
+  /* 074848 800F9048 3C158013 */       lui $s5, %hi(gpMapVertexID)
   /* 07484C 800F904C AFAE006C */        sw $t6, 0x6c($sp)
   /* 074850 800F9050 94450000 */       lhu $a1, ($v0)
-  /* 074854 800F9054 26B51374 */     addiu $s5, $s5, %lo(D_ovl2_80131374)
-  /* 074858 800F9058 3C148013 */       lui $s4, %hi(D_ovl2_80131370)
+  /* 074854 800F9054 26B51374 */     addiu $s5, $s5, %lo(gpMapVertexID)
+  /* 074858 800F9058 3C148013 */       lui $s4, %hi(gpMapVertexData)
   /* 07485C 800F905C 18A000AA */      blez $a1, .L800F9308
   /* 074860 800F9060 3C018013 */       lui $at, %hi(D_ovl2_801308E8)
   /* 074864 800F9064 C43808E8 */      lwc1 $f24, %lo(D_ovl2_801308E8)($at)
-  /* 074868 800F9068 26941370 */     addiu $s4, $s4, %lo(D_ovl2_80131370)
+  /* 074868 800F9068 26941370 */     addiu $s4, $s4, %lo(gpMapVertexData)
   /* 07486C 800F906C 24130006 */     addiu $s3, $zero, 6
   .L800F9070:
   /* 074870 800F9070 8FAF006C */        lw $t7, 0x6c($sp)
-  /* 074874 800F9074 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 074878 800F9078 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 074874 800F9074 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 074878 800F9078 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 07487C 800F907C 95F90000 */       lhu $t9, ($t7)
   /* 074880 800F9080 95EC0004 */       lhu $t4, 4($t7)
   /* 074884 800F9084 25E40002 */     addiu $a0, $t7, 2
@@ -39105,9 +39105,9 @@ glabel func_ovl2_800F8FFC
   /* 074908 800F9108 02E2B821 */      addu $s7, $s7, $v0
   /* 07490C 800F910C 0017B840 */       sll $s7, $s7, 1
   .L800F9110:
-  /* 074910 800F9110 3C0A8013 */       lui $t2, %hi(D_ovl2_8013136C)
-  /* 074914 800F9114 8D4A136C */        lw $t2, %lo(D_ovl2_8013136C)($t2)
-  /* 074918 800F9118 3C0C8013 */       lui $t4, %hi(D_ovl2_80131378)
+  /* 074910 800F9110 3C0A8013 */       lui $t2, %hi(gpMapVertexInfo)
+  /* 074914 800F9114 8D4A136C */        lw $t2, %lo(gpMapVertexInfo)($t2)
+  /* 074918 800F9118 3C0C8013 */       lui $t4, %hi(gpMapVertexLinks)
   /* 07491C 800F911C 01575821 */      addu $t3, $t2, $s7
   /* 074920 800F9120 856F0004 */        lh $t7, 4($t3)
   /* 074924 800F9124 448F5000 */      mtc1 $t7, $f10
@@ -39117,13 +39117,13 @@ glabel func_ovl2_800F8FFC
   /* 074934 800F9134 00000000 */       nop 
   /* 074938 800F9138 45020061 */     bc1fl .L800F92C0
   /* 07493C 800F913C 97CA0000 */       lhu $t2, ($fp)
-  /* 074940 800F9140 8D8C1378 */        lw $t4, %lo(D_ovl2_80131378)($t4)
+  /* 074940 800F9140 8D8C1378 */        lw $t4, %lo(gpMapVertexLinks)($t4)
   /* 074944 800F9144 00166880 */       sll $t5, $s6, 2
-  /* 074948 800F9148 8EA90000 */        lw $t1, ($s5) # D_ovl2_80131374 + 0
+  /* 074948 800F9148 8EA90000 */        lw $t1, ($s5) # gpMapVertexID + 0
   /* 07494C 800F914C 018D3021 */      addu $a2, $t4, $t5
   /* 074950 800F9150 94C20000 */       lhu $v0, ($a2)
   /* 074954 800F9154 94D20002 */       lhu $s2, 2($a2)
-  /* 074958 800F9158 8E830000 */        lw $v1, ($s4) # D_ovl2_80131370 + 0
+  /* 074958 800F9158 8E830000 */        lw $v1, ($s4) # gpMapVertexData + 0
   /* 07495C 800F915C 00028840 */       sll $s1, $v0, 1
   /* 074960 800F9160 01312021 */      addu $a0, $t1, $s1
   /* 074964 800F9164 948E0000 */       lhu $t6, ($a0)
@@ -39172,8 +39172,8 @@ glabel func_ovl2_800F8FFC
   /* 074A08 800F9208 1A40002C */      blez $s2, .L800F92BC
   /* 074A0C 800F920C 00008025 */        or $s0, $zero, $zero
   .L800F9210:
-  /* 074A10 800F9210 8EB90000 */        lw $t9, ($s5) # D_ovl2_80131374 + 0
-  /* 074A14 800F9214 8E830000 */        lw $v1, ($s4) # D_ovl2_80131370 + 0
+  /* 074A10 800F9210 8EB90000 */        lw $t9, ($s5) # gpMapVertexID + 0
+  /* 074A14 800F9214 8E830000 */        lw $v1, ($s4) # gpMapVertexData + 0
   /* 074A18 800F9218 4600A306 */     mov.s $f12, $f20
   /* 074A1C 800F921C 03312021 */      addu $a0, $t9, $s1
   /* 074A20 800F9220 94980000 */       lhu $t8, ($a0)
@@ -39227,8 +39227,8 @@ glabel func_ovl2_800F8FFC
   /* 074AD0 800F92D0 02CF082A */       slt $at, $s6, $t7
   /* 074AD4 800F92D4 1420FF8E */      bnez $at, .L800F9110
   /* 074AD8 800F92D8 00000000 */       nop 
-  /* 074ADC 800F92DC 3C0C8013 */       lui $t4, %hi(D_ovl2_80131368)
-  /* 074AE0 800F92E0 8D8C1368 */        lw $t4, %lo(D_ovl2_80131368)($t4)
+  /* 074ADC 800F92DC 3C0C8013 */       lui $t4, %hi(gpMapGeometry)
+  /* 074AE0 800F92E0 8D8C1368 */        lw $t4, %lo(gpMapGeometry)($t4)
   /* 074AE4 800F92E4 95850000 */       lhu $a1, ($t4)
   .L800F92E8:
   /* 074AE8 800F92E8 8FAD0064 */        lw $t5, 0x64($sp)
@@ -39261,8 +39261,8 @@ glabel func_ovl2_800F8FFC
 
 glabel func_ovl2_800F9348
   /* 074B48 800F9348 27BDFF80 */     addiu $sp, $sp, -0x80
-  /* 074B4C 800F934C 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 074B50 800F9350 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 074B4C 800F934C 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 074B50 800F9350 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 074B54 800F9354 AFBF006C */        sw $ra, 0x6c($sp)
   /* 074B58 800F9358 AFBE0068 */        sw $fp, 0x68($sp)
   /* 074B5C 800F935C AFB70064 */        sw $s7, 0x64($sp)
@@ -39294,8 +39294,8 @@ glabel func_ovl2_800F9348
   /* 074BC4 800F93C4 24130006 */     addiu $s3, $zero, 6
   .L800F93C8:
   /* 074BC8 800F93C8 8FAF007C */        lw $t7, 0x7c($sp)
-  /* 074BCC 800F93CC 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 074BD0 800F93D0 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 074BCC 800F93CC 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 074BD0 800F93D0 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 074BD4 800F93D4 95F90000 */       lhu $t9, ($t7)
   /* 074BD8 800F93D8 95EB0004 */       lhu $t3, 4($t7)
   /* 074BDC 800F93DC 25E40002 */     addiu $a0, $t7, 2
@@ -39336,9 +39336,9 @@ glabel func_ovl2_800F9348
   /* 074C5C 800F945C 02E2B821 */      addu $s7, $s7, $v0
   /* 074C60 800F9460 0017B840 */       sll $s7, $s7, 1
   .L800F9464:
-  /* 074C64 800F9464 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 074C68 800F9468 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
-  /* 074C6C 800F946C 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 074C64 800F9464 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 074C68 800F9468 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
+  /* 074C6C 800F946C 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 074C70 800F9470 03174821 */      addu $t1, $t8, $s7
   /* 074C74 800F9474 852A0004 */        lh $t2, 4($t1)
   /* 074C78 800F9478 448A4000 */      mtc1 $t2, $f8
@@ -39348,18 +39348,18 @@ glabel func_ovl2_800F9348
   /* 074C88 800F9488 00000000 */       nop 
   /* 074C8C 800F948C 450200A1 */     bc1fl .L800F9714
   /* 074C90 800F9490 97CA0000 */       lhu $t2, ($fp)
-  /* 074C94 800F9494 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 074C94 800F9494 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 074C98 800F9498 00165880 */       sll $t3, $s6, 2
-  /* 074C9C 800F949C 3C068013 */       lui $a2, %hi(D_ovl2_80131374)
+  /* 074C9C 800F949C 3C068013 */       lui $a2, %hi(gpMapVertexID)
   /* 074CA0 800F94A0 01EB2821 */      addu $a1, $t7, $t3
   /* 074CA4 800F94A4 94A20000 */       lhu $v0, ($a1)
-  /* 074CA8 800F94A8 8CC61374 */        lw $a2, %lo(D_ovl2_80131374)($a2)
+  /* 074CA8 800F94A8 8CC61374 */        lw $a2, %lo(gpMapVertexID)($a2)
   /* 074CAC 800F94AC 94A70002 */       lhu $a3, 2($a1)
   /* 074CB0 800F94B0 00029040 */       sll $s2, $v0, 1
   /* 074CB4 800F94B4 00D21821 */      addu $v1, $a2, $s2
   /* 074CB8 800F94B8 946C0000 */       lhu $t4, ($v1)
-  /* 074CBC 800F94BC 3C088013 */       lui $t0, %hi(D_ovl2_80131370)
-  /* 074CC0 800F94C0 8D081370 */        lw $t0, %lo(D_ovl2_80131370)($t0)
+  /* 074CBC 800F94BC 3C088013 */       lui $t0, %hi(gpMapVertexData)
+  /* 074CC0 800F94C0 8D081370 */        lw $t0, %lo(gpMapVertexData)($t0)
   /* 074CC4 800F94C4 01930019 */     multu $t4, $s3
   /* 074CC8 800F94C8 00027040 */       sll $t6, $v0, 1
   /* 074CCC 800F94CC 24E7FFFF */     addiu $a3, $a3, -1
@@ -39480,7 +39480,7 @@ glabel func_ovl2_800F9348
   /* 074E78 800F9678 45020026 */     bc1fl .L800F9714
   /* 074E7C 800F967C 97CA0000 */       lhu $t2, ($fp)
   /* 074E80 800F9680 11A00002 */      beqz $t5, .L800F968C
-  /* 074E84 800F9684 3C098013 */       lui $t1, %hi(D_ovl2_80131374)
+  /* 074E84 800F9684 3C098013 */       lui $t1, %hi(gpMapVertexID)
   /* 074E88 800F9688 ADB60000 */        sw $s6, ($t5)
   .L800F968C:
   /* 074E8C 800F968C 8FAE0088 */        lw $t6, 0x88($sp)
@@ -39493,9 +39493,9 @@ glabel func_ovl2_800F9348
   /* 074EA4 800F96A4 8FB9008C */        lw $t9, 0x8c($sp)
   /* 074EA8 800F96A8 5320000C */      beql $t9, $zero, .L800F96DC
   /* 074EAC 800F96AC 8FAE0090 */        lw $t6, 0x90($sp)
-  /* 074EB0 800F96B0 8D291374 */        lw $t1, %lo(D_ovl2_80131374)($t1)
-  /* 074EB4 800F96B4 3C188013 */       lui $t8, %hi(D_ovl2_80131370)
-  /* 074EB8 800F96B8 8F181370 */        lw $t8, %lo(D_ovl2_80131370)($t8)
+  /* 074EB0 800F96B0 8D291374 */        lw $t1, %lo(gpMapVertexID)($t1)
+  /* 074EB4 800F96B4 3C188013 */       lui $t8, %hi(gpMapVertexData)
+  /* 074EB8 800F96B8 8F181370 */        lw $t8, %lo(gpMapVertexData)($t8)
   /* 074EBC 800F96BC 01325021 */      addu $t2, $t1, $s2
   /* 074EC0 800F96C0 954F0000 */       lhu $t7, ($t2)
   /* 074EC4 800F96C4 01F30019 */     multu $t7, $s3
@@ -39509,7 +39509,7 @@ glabel func_ovl2_800F9348
   /* 074EE0 800F96E0 11C00004 */      beqz $t6, .L800F96F4
   /* 074EE4 800F96E4 01C02025 */        or $a0, $t6, $zero
   /* 074EE8 800F96E8 AFB50010 */        sw $s5, 0x10($sp)
-  /* 074EEC 800F96EC 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 074EEC 800F96EC 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 074EF0 800F96F0 AFA90014 */        sw $t1, 0x14($sp)
   .L800F96F4:
   /* 074EF4 800F96F4 461CB03C */    c.lt.s $f22, $f28
@@ -39529,8 +39529,8 @@ glabel func_ovl2_800F9348
   /* 074F24 800F9724 02D8082A */       slt $at, $s6, $t8
   /* 074F28 800F9728 1420FF4E */      bnez $at, .L800F9464
   /* 074F2C 800F972C 00000000 */       nop 
-  /* 074F30 800F9730 3C0B8013 */       lui $t3, %hi(D_ovl2_80131368)
-  /* 074F34 800F9734 8D6B1368 */        lw $t3, %lo(D_ovl2_80131368)($t3)
+  /* 074F30 800F9730 3C0B8013 */       lui $t3, %hi(gpMapGeometry)
+  /* 074F34 800F9734 8D6B1368 */        lw $t3, %lo(gpMapGeometry)($t3)
   /* 074F38 800F9738 95680000 */       lhu $t0, ($t3)
   .L800F973C:
   /* 074F3C 800F973C 8FAC0070 */        lw $t4, 0x70($sp)
@@ -39571,8 +39571,8 @@ glabel func_ovl2_800F9348
   /* 074FB8 800F97B8 27BD0080 */     addiu $sp, $sp, 0x80
 
   /* 074FBC 800F97BC 27BDFF80 */     addiu $sp, $sp, -0x80
-  /* 074FC0 800F97C0 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 074FC4 800F97C4 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 074FC0 800F97C0 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 074FC4 800F97C4 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 074FC8 800F97C8 AFBF006C */        sw $ra, 0x6c($sp)
   /* 074FCC 800F97CC AFBE0068 */        sw $fp, 0x68($sp)
   /* 074FD0 800F97D0 AFB70064 */        sw $s7, 0x64($sp)
@@ -39604,8 +39604,8 @@ glabel func_ovl2_800F9348
   /* 075038 800F9838 24130006 */     addiu $s3, $zero, 6
   .L800F983C:
   /* 07503C 800F983C 8FAF007C */        lw $t7, 0x7c($sp)
-  /* 075040 800F9840 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 075044 800F9844 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 075040 800F9840 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 075044 800F9844 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 075048 800F9848 95F90000 */       lhu $t9, ($t7)
   /* 07504C 800F984C 95EB0008 */       lhu $t3, 8($t7)
   /* 075050 800F9850 25E40006 */     addiu $a0, $t7, 6
@@ -39646,9 +39646,9 @@ glabel func_ovl2_800F9348
   /* 0750D0 800F98D0 02E2B821 */      addu $s7, $s7, $v0
   /* 0750D4 800F98D4 0017B840 */       sll $s7, $s7, 1
   .L800F98D8:
-  /* 0750D8 800F98D8 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 0750DC 800F98DC 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
-  /* 0750E0 800F98E0 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 0750D8 800F98D8 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 0750DC 800F98DC 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
+  /* 0750E0 800F98E0 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 0750E4 800F98E4 03174821 */      addu $t1, $t8, $s7
   /* 0750E8 800F98E8 852A0002 */        lh $t2, 2($t1)
   /* 0750EC 800F98EC 448A4000 */      mtc1 $t2, $f8
@@ -39658,18 +39658,18 @@ glabel func_ovl2_800F9348
   /* 0750FC 800F98FC 00000000 */       nop 
   /* 075100 800F9900 450200A1 */     bc1fl .L800F9B88
   /* 075104 800F9904 97CA0000 */       lhu $t2, ($fp)
-  /* 075108 800F9908 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 075108 800F9908 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 07510C 800F990C 00165880 */       sll $t3, $s6, 2
-  /* 075110 800F9910 3C068013 */       lui $a2, %hi(D_ovl2_80131374)
+  /* 075110 800F9910 3C068013 */       lui $a2, %hi(gpMapVertexID)
   /* 075114 800F9914 01EB2821 */      addu $a1, $t7, $t3
   /* 075118 800F9918 94A20000 */       lhu $v0, ($a1)
-  /* 07511C 800F991C 8CC61374 */        lw $a2, %lo(D_ovl2_80131374)($a2)
+  /* 07511C 800F991C 8CC61374 */        lw $a2, %lo(gpMapVertexID)($a2)
   /* 075120 800F9920 94A70002 */       lhu $a3, 2($a1)
   /* 075124 800F9924 00029040 */       sll $s2, $v0, 1
   /* 075128 800F9928 00D21821 */      addu $v1, $a2, $s2
   /* 07512C 800F992C 946C0000 */       lhu $t4, ($v1)
-  /* 075130 800F9930 3C088013 */       lui $t0, %hi(D_ovl2_80131370)
-  /* 075134 800F9934 8D081370 */        lw $t0, %lo(D_ovl2_80131370)($t0)
+  /* 075130 800F9930 3C088013 */       lui $t0, %hi(gpMapVertexData)
+  /* 075134 800F9934 8D081370 */        lw $t0, %lo(gpMapVertexData)($t0)
   /* 075138 800F9938 01930019 */     multu $t4, $s3
   /* 07513C 800F993C 00027040 */       sll $t6, $v0, 1
   /* 075140 800F9940 24E7FFFF */     addiu $a3, $a3, -1
@@ -39790,7 +39790,7 @@ glabel func_ovl2_800F9348
   /* 0752EC 800F9AEC 45020026 */     bc1fl .L800F9B88
   /* 0752F0 800F9AF0 97CA0000 */       lhu $t2, ($fp)
   /* 0752F4 800F9AF4 11A00002 */      beqz $t5, .L800F9B00
-  /* 0752F8 800F9AF8 3C098013 */       lui $t1, %hi(D_ovl2_80131374)
+  /* 0752F8 800F9AF8 3C098013 */       lui $t1, %hi(gpMapVertexID)
   /* 0752FC 800F9AFC ADB60000 */        sw $s6, ($t5)
   .L800F9B00:
   /* 075300 800F9B00 8FAE0088 */        lw $t6, 0x88($sp)
@@ -39803,9 +39803,9 @@ glabel func_ovl2_800F9348
   /* 075318 800F9B18 8FB9008C */        lw $t9, 0x8c($sp)
   /* 07531C 800F9B1C 5320000C */      beql $t9, $zero, .L800F9B50
   /* 075320 800F9B20 8FAE0090 */        lw $t6, 0x90($sp)
-  /* 075324 800F9B24 8D291374 */        lw $t1, %lo(D_ovl2_80131374)($t1)
-  /* 075328 800F9B28 3C188013 */       lui $t8, %hi(D_ovl2_80131370)
-  /* 07532C 800F9B2C 8F181370 */        lw $t8, %lo(D_ovl2_80131370)($t8)
+  /* 075324 800F9B24 8D291374 */        lw $t1, %lo(gpMapVertexID)($t1)
+  /* 075328 800F9B28 3C188013 */       lui $t8, %hi(gpMapVertexData)
+  /* 07532C 800F9B2C 8F181370 */        lw $t8, %lo(gpMapVertexData)($t8)
   /* 075330 800F9B30 01325021 */      addu $t2, $t1, $s2
   /* 075334 800F9B34 954F0000 */       lhu $t7, ($t2)
   /* 075338 800F9B38 01F30019 */     multu $t7, $s3
@@ -39819,7 +39819,7 @@ glabel func_ovl2_800F9348
   /* 075354 800F9B54 11C00004 */      beqz $t6, .L800F9B68
   /* 075358 800F9B58 01C02025 */        or $a0, $t6, $zero
   /* 07535C 800F9B5C AFB50010 */        sw $s5, 0x10($sp)
-  /* 075360 800F9B60 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 075360 800F9B60 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 075364 800F9B64 AFA90014 */        sw $t1, 0x14($sp)
   .L800F9B68:
   /* 075368 800F9B68 461CB03C */    c.lt.s $f22, $f28
@@ -39839,8 +39839,8 @@ glabel func_ovl2_800F9348
   /* 075398 800F9B98 02D8082A */       slt $at, $s6, $t8
   /* 07539C 800F9B9C 1420FF4E */      bnez $at, .L800F98D8
   /* 0753A0 800F9BA0 00000000 */       nop 
-  /* 0753A4 800F9BA4 3C0B8013 */       lui $t3, %hi(D_ovl2_80131368)
-  /* 0753A8 800F9BA8 8D6B1368 */        lw $t3, %lo(D_ovl2_80131368)($t3)
+  /* 0753A4 800F9BA4 3C0B8013 */       lui $t3, %hi(gpMapGeometry)
+  /* 0753A8 800F9BA8 8D6B1368 */        lw $t3, %lo(gpMapGeometry)($t3)
   /* 0753AC 800F9BAC 95680000 */       lhu $t0, ($t3)
   .L800F9BB0:
   /* 0753B0 800F9BB0 8FAC0070 */        lw $t4, 0x70($sp)
@@ -39882,8 +39882,8 @@ glabel func_ovl2_800F9348
 
 glabel func_ovl2_800F9C30
   /* 075430 800F9C30 27BDFF80 */     addiu $sp, $sp, -0x80
-  /* 075434 800F9C34 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 075438 800F9C38 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 075434 800F9C34 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 075438 800F9C38 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 07543C 800F9C3C AFBF006C */        sw $ra, 0x6c($sp)
   /* 075440 800F9C40 AFBE0068 */        sw $fp, 0x68($sp)
   /* 075444 800F9C44 AFB70064 */        sw $s7, 0x64($sp)
@@ -39915,8 +39915,8 @@ glabel func_ovl2_800F9C30
   /* 0754AC 800F9CAC 24130006 */     addiu $s3, $zero, 6
   .L800F9CB0:
   /* 0754B0 800F9CB0 8FAF007C */        lw $t7, 0x7c($sp)
-  /* 0754B4 800F9CB4 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 0754B8 800F9CB8 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 0754B4 800F9CB4 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 0754B8 800F9CB8 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 0754BC 800F9CBC 95F90000 */       lhu $t9, ($t7)
   /* 0754C0 800F9CC0 95EB000C */       lhu $t3, 0xc($t7)
   /* 0754C4 800F9CC4 25E4000A */     addiu $a0, $t7, 0xa
@@ -39957,9 +39957,9 @@ glabel func_ovl2_800F9C30
   /* 075544 800F9D44 02E2B821 */      addu $s7, $s7, $v0
   /* 075548 800F9D48 0017B840 */       sll $s7, $s7, 1
   .L800F9D4C:
-  /* 07554C 800F9D4C 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 075550 800F9D50 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
-  /* 075554 800F9D54 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 07554C 800F9D4C 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 075550 800F9D50 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
+  /* 075554 800F9D54 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 075558 800F9D58 03174821 */      addu $t1, $t8, $s7
   /* 07555C 800F9D5C 852A0004 */        lh $t2, 4($t1)
   /* 075560 800F9D60 448A4000 */      mtc1 $t2, $f8
@@ -39969,18 +39969,18 @@ glabel func_ovl2_800F9C30
   /* 075570 800F9D70 00000000 */       nop 
   /* 075574 800F9D74 450200A1 */     bc1fl .L800F9FFC
   /* 075578 800F9D78 97CA0000 */       lhu $t2, ($fp)
-  /* 07557C 800F9D7C 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 07557C 800F9D7C 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 075580 800F9D80 00165880 */       sll $t3, $s6, 2
-  /* 075584 800F9D84 3C068013 */       lui $a2, %hi(D_ovl2_80131374)
+  /* 075584 800F9D84 3C068013 */       lui $a2, %hi(gpMapVertexID)
   /* 075588 800F9D88 01EB2821 */      addu $a1, $t7, $t3
   /* 07558C 800F9D8C 94A20000 */       lhu $v0, ($a1)
-  /* 075590 800F9D90 8CC61374 */        lw $a2, %lo(D_ovl2_80131374)($a2)
+  /* 075590 800F9D90 8CC61374 */        lw $a2, %lo(gpMapVertexID)($a2)
   /* 075594 800F9D94 94A70002 */       lhu $a3, 2($a1)
   /* 075598 800F9D98 00029040 */       sll $s2, $v0, 1
   /* 07559C 800F9D9C 00D21821 */      addu $v1, $a2, $s2
   /* 0755A0 800F9DA0 946C0000 */       lhu $t4, ($v1)
-  /* 0755A4 800F9DA4 3C088013 */       lui $t0, %hi(D_ovl2_80131370)
-  /* 0755A8 800F9DA8 8D081370 */        lw $t0, %lo(D_ovl2_80131370)($t0)
+  /* 0755A4 800F9DA4 3C088013 */       lui $t0, %hi(gpMapVertexData)
+  /* 0755A8 800F9DA8 8D081370 */        lw $t0, %lo(gpMapVertexData)($t0)
   /* 0755AC 800F9DAC 01930019 */     multu $t4, $s3
   /* 0755B0 800F9DB0 00027040 */       sll $t6, $v0, 1
   /* 0755B4 800F9DB4 24E7FFFF */     addiu $a3, $a3, -1
@@ -40101,7 +40101,7 @@ glabel func_ovl2_800F9C30
   /* 075760 800F9F60 45020026 */     bc1fl .L800F9FFC
   /* 075764 800F9F64 97CA0000 */       lhu $t2, ($fp)
   /* 075768 800F9F68 11A00002 */      beqz $t5, .L800F9F74
-  /* 07576C 800F9F6C 3C098013 */       lui $t1, %hi(D_ovl2_80131374)
+  /* 07576C 800F9F6C 3C098013 */       lui $t1, %hi(gpMapVertexID)
   /* 075770 800F9F70 ADB60000 */        sw $s6, ($t5)
   .L800F9F74:
   /* 075774 800F9F74 8FAE0088 */        lw $t6, 0x88($sp)
@@ -40114,9 +40114,9 @@ glabel func_ovl2_800F9C30
   /* 07578C 800F9F8C 8FB9008C */        lw $t9, 0x8c($sp)
   /* 075790 800F9F90 5320000C */      beql $t9, $zero, .L800F9FC4
   /* 075794 800F9F94 8FAE0090 */        lw $t6, 0x90($sp)
-  /* 075798 800F9F98 8D291374 */        lw $t1, %lo(D_ovl2_80131374)($t1)
-  /* 07579C 800F9F9C 3C188013 */       lui $t8, %hi(D_ovl2_80131370)
-  /* 0757A0 800F9FA0 8F181370 */        lw $t8, %lo(D_ovl2_80131370)($t8)
+  /* 075798 800F9F98 8D291374 */        lw $t1, %lo(gpMapVertexID)($t1)
+  /* 07579C 800F9F9C 3C188013 */       lui $t8, %hi(gpMapVertexData)
+  /* 0757A0 800F9FA0 8F181370 */        lw $t8, %lo(gpMapVertexData)($t8)
   /* 0757A4 800F9FA4 01325021 */      addu $t2, $t1, $s2
   /* 0757A8 800F9FA8 954F0000 */       lhu $t7, ($t2)
   /* 0757AC 800F9FAC 01F30019 */     multu $t7, $s3
@@ -40130,7 +40130,7 @@ glabel func_ovl2_800F9C30
   /* 0757C8 800F9FC8 11C00004 */      beqz $t6, .L800F9FDC
   /* 0757CC 800F9FCC 01C02025 */        or $a0, $t6, $zero
   /* 0757D0 800F9FD0 AFB00010 */        sw $s0, 0x10($sp)
-  /* 0757D4 800F9FD4 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 0757D4 800F9FD4 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 0757D8 800F9FD8 AFA90014 */        sw $t1, 0x14($sp)
   .L800F9FDC:
   /* 0757DC 800F9FDC 461CB03C */    c.lt.s $f22, $f28
@@ -40150,8 +40150,8 @@ glabel func_ovl2_800F9C30
   /* 07580C 800FA00C 02D8082A */       slt $at, $s6, $t8
   /* 075810 800FA010 1420FF4E */      bnez $at, .L800F9D4C
   /* 075814 800FA014 00000000 */       nop 
-  /* 075818 800FA018 3C0B8013 */       lui $t3, %hi(D_ovl2_80131368)
-  /* 07581C 800FA01C 8D6B1368 */        lw $t3, %lo(D_ovl2_80131368)($t3)
+  /* 075818 800FA018 3C0B8013 */       lui $t3, %hi(gpMapGeometry)
+  /* 07581C 800FA01C 8D6B1368 */        lw $t3, %lo(gpMapGeometry)($t3)
   /* 075820 800FA020 95680000 */       lhu $t0, ($t3)
   .L800FA024:
   /* 075824 800FA024 8FAC0070 */        lw $t4, 0x70($sp)
@@ -40192,8 +40192,8 @@ glabel func_ovl2_800F9C30
   /* 0758A0 800FA0A0 27BD0080 */     addiu $sp, $sp, 0x80
 
   /* 0758A4 800FA0A4 27BDFF80 */     addiu $sp, $sp, -0x80
-  /* 0758A8 800FA0A8 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 0758AC 800FA0AC 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 0758A8 800FA0A8 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 0758AC 800FA0AC 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 0758B0 800FA0B0 AFBF006C */        sw $ra, 0x6c($sp)
   /* 0758B4 800FA0B4 AFBE0068 */        sw $fp, 0x68($sp)
   /* 0758B8 800FA0B8 AFB70064 */        sw $s7, 0x64($sp)
@@ -40225,8 +40225,8 @@ glabel func_ovl2_800F9C30
   /* 075920 800FA120 24130006 */     addiu $s3, $zero, 6
   .L800FA124:
   /* 075924 800FA124 8FAF007C */        lw $t7, 0x7c($sp)
-  /* 075928 800FA128 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07592C 800FA12C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 075928 800FA128 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07592C 800FA12C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 075930 800FA130 95F90000 */       lhu $t9, ($t7)
   /* 075934 800FA134 95EB0010 */       lhu $t3, 0x10($t7)
   /* 075938 800FA138 25E4000E */     addiu $a0, $t7, 0xe
@@ -40267,9 +40267,9 @@ glabel func_ovl2_800F9C30
   /* 0759B8 800FA1B8 02E2B821 */      addu $s7, $s7, $v0
   /* 0759BC 800FA1BC 0017B840 */       sll $s7, $s7, 1
   .L800FA1C0:
-  /* 0759C0 800FA1C0 3C188013 */       lui $t8, %hi(D_ovl2_8013136C)
-  /* 0759C4 800FA1C4 8F18136C */        lw $t8, %lo(D_ovl2_8013136C)($t8)
-  /* 0759C8 800FA1C8 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
+  /* 0759C0 800FA1C0 3C188013 */       lui $t8, %hi(gpMapVertexInfo)
+  /* 0759C4 800FA1C4 8F18136C */        lw $t8, %lo(gpMapVertexInfo)($t8)
+  /* 0759C8 800FA1C8 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
   /* 0759CC 800FA1CC 03174821 */      addu $t1, $t8, $s7
   /* 0759D0 800FA1D0 852A0002 */        lh $t2, 2($t1)
   /* 0759D4 800FA1D4 448A4000 */      mtc1 $t2, $f8
@@ -40279,18 +40279,18 @@ glabel func_ovl2_800F9C30
   /* 0759E4 800FA1E4 00000000 */       nop 
   /* 0759E8 800FA1E8 450200A1 */     bc1fl .L800FA470
   /* 0759EC 800FA1EC 97CA0000 */       lhu $t2, ($fp)
-  /* 0759F0 800FA1F0 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 0759F0 800FA1F0 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 0759F4 800FA1F4 00165880 */       sll $t3, $s6, 2
-  /* 0759F8 800FA1F8 3C068013 */       lui $a2, %hi(D_ovl2_80131374)
+  /* 0759F8 800FA1F8 3C068013 */       lui $a2, %hi(gpMapVertexID)
   /* 0759FC 800FA1FC 01EB2821 */      addu $a1, $t7, $t3
   /* 075A00 800FA200 94A20000 */       lhu $v0, ($a1)
-  /* 075A04 800FA204 8CC61374 */        lw $a2, %lo(D_ovl2_80131374)($a2)
+  /* 075A04 800FA204 8CC61374 */        lw $a2, %lo(gpMapVertexID)($a2)
   /* 075A08 800FA208 94A70002 */       lhu $a3, 2($a1)
   /* 075A0C 800FA20C 00029040 */       sll $s2, $v0, 1
   /* 075A10 800FA210 00D21821 */      addu $v1, $a2, $s2
   /* 075A14 800FA214 946C0000 */       lhu $t4, ($v1)
-  /* 075A18 800FA218 3C088013 */       lui $t0, %hi(D_ovl2_80131370)
-  /* 075A1C 800FA21C 8D081370 */        lw $t0, %lo(D_ovl2_80131370)($t0)
+  /* 075A18 800FA218 3C088013 */       lui $t0, %hi(gpMapVertexData)
+  /* 075A1C 800FA21C 8D081370 */        lw $t0, %lo(gpMapVertexData)($t0)
   /* 075A20 800FA220 01930019 */     multu $t4, $s3
   /* 075A24 800FA224 00027040 */       sll $t6, $v0, 1
   /* 075A28 800FA228 24E7FFFF */     addiu $a3, $a3, -1
@@ -40411,7 +40411,7 @@ glabel func_ovl2_800F9C30
   /* 075BD4 800FA3D4 45020026 */     bc1fl .L800FA470
   /* 075BD8 800FA3D8 97CA0000 */       lhu $t2, ($fp)
   /* 075BDC 800FA3DC 11A00002 */      beqz $t5, .L800FA3E8
-  /* 075BE0 800FA3E0 3C098013 */       lui $t1, %hi(D_ovl2_80131374)
+  /* 075BE0 800FA3E0 3C098013 */       lui $t1, %hi(gpMapVertexID)
   /* 075BE4 800FA3E4 ADB60000 */        sw $s6, ($t5)
   .L800FA3E8:
   /* 075BE8 800FA3E8 8FAE0088 */        lw $t6, 0x88($sp)
@@ -40424,9 +40424,9 @@ glabel func_ovl2_800F9C30
   /* 075C00 800FA400 8FB9008C */        lw $t9, 0x8c($sp)
   /* 075C04 800FA404 5320000C */      beql $t9, $zero, .L800FA438
   /* 075C08 800FA408 8FAE0090 */        lw $t6, 0x90($sp)
-  /* 075C0C 800FA40C 8D291374 */        lw $t1, %lo(D_ovl2_80131374)($t1)
-  /* 075C10 800FA410 3C188013 */       lui $t8, %hi(D_ovl2_80131370)
-  /* 075C14 800FA414 8F181370 */        lw $t8, %lo(D_ovl2_80131370)($t8)
+  /* 075C0C 800FA40C 8D291374 */        lw $t1, %lo(gpMapVertexID)($t1)
+  /* 075C10 800FA410 3C188013 */       lui $t8, %hi(gpMapVertexData)
+  /* 075C14 800FA414 8F181370 */        lw $t8, %lo(gpMapVertexData)($t8)
   /* 075C18 800FA418 01325021 */      addu $t2, $t1, $s2
   /* 075C1C 800FA41C 954F0000 */       lhu $t7, ($t2)
   /* 075C20 800FA420 01F30019 */     multu $t7, $s3
@@ -40440,7 +40440,7 @@ glabel func_ovl2_800F9C30
   /* 075C3C 800FA43C 11C00004 */      beqz $t6, .L800FA450
   /* 075C40 800FA440 01C02025 */        or $a0, $t6, $zero
   /* 075C44 800FA444 AFB00010 */        sw $s0, 0x10($sp)
-  /* 075C48 800FA448 0C03D1B4 */       jal mpCollision_VertexCalcAngle
+  /* 075C48 800FA448 0C03D1B4 */       jal mpCollision_GetUDAngle
   /* 075C4C 800FA44C AFA90014 */        sw $t1, 0x14($sp)
   .L800FA450:
   /* 075C50 800FA450 461CB03C */    c.lt.s $f22, $f28
@@ -40460,8 +40460,8 @@ glabel func_ovl2_800F9C30
   /* 075C80 800FA480 02D8082A */       slt $at, $s6, $t8
   /* 075C84 800FA484 1420FF4E */      bnez $at, .L800FA1C0
   /* 075C88 800FA488 00000000 */       nop 
-  /* 075C8C 800FA48C 3C0B8013 */       lui $t3, %hi(D_ovl2_80131368)
-  /* 075C90 800FA490 8D6B1368 */        lw $t3, %lo(D_ovl2_80131368)($t3)
+  /* 075C8C 800FA48C 3C0B8013 */       lui $t3, %hi(gpMapGeometry)
+  /* 075C90 800FA490 8D6B1368 */        lw $t3, %lo(gpMapGeometry)($t3)
   /* 075C94 800FA494 95680000 */       lhu $t0, ($t3)
   .L800FA498:
   /* 075C98 800FA498 8FAC0070 */        lw $t4, 0x70($sp)
@@ -40530,8 +40530,8 @@ glabel func_ovl2_800FA518
   /* 075D70 800FA570 000F7840 */       sll $t7, $t7, 1
   /* 075D74 800FA574 01CFC021 */      addu $t8, $t6, $t7
   /* 075D78 800FA578 93190000 */       lbu $t9, ($t8)
-  /* 075D7C 800FA57C 3C098013 */       lui $t1, %hi(D_ovl2_80131304)
-  /* 075D80 800FA580 8D291304 */        lw $t1, %lo(D_ovl2_80131304)($t1)
+  /* 075D7C 800FA57C 3C098013 */       lui $t1, %hi(gpMapRooms)
+  /* 075D80 800FA580 8D291304 */        lw $t1, %lo(gpMapRooms)($t1)
   /* 075D84 800FA584 00194080 */       sll $t0, $t9, 2
   /* 075D88 800FA588 3C0C8013 */       lui $t4, 0x8013
   /* 075D8C 800FA58C 01285021 */      addu $t2, $t1, $t0
@@ -40584,9 +40584,9 @@ glabel func_ovl2_800FA5E8
   /* 075E30 800FA630 1000FFFB */         b .L800FA620
   /* 075E34 800FA634 02002025 */        or $a0, $s0, $zero
   .L800FA638:
-  /* 075E38 800FA638 3C0C8013 */       lui $t4, %hi(D_ovl2_8013136C)
-  /* 075E3C 800FA63C 258C136C */     addiu $t4, $t4, %lo(D_ovl2_8013136C)
-  /* 075E40 800FA640 8D8F0000 */        lw $t7, ($t4) # D_ovl2_8013136C + 0
+  /* 075E38 800FA638 3C0C8013 */       lui $t4, %hi(gpMapVertexInfo)
+  /* 075E3C 800FA63C 258C136C */     addiu $t4, $t4, %lo(gpMapVertexInfo)
+  /* 075E40 800FA640 8D8F0000 */        lw $t7, ($t4) # gpMapVertexInfo + 0
   /* 075E44 800FA644 00112880 */       sll $a1, $s1, 2
   /* 075E48 800FA648 00B12821 */      addu $a1, $a1, $s1
   /* 075E4C 800FA64C 00052840 */       sll $a1, $a1, 1
@@ -40595,15 +40595,15 @@ glabel func_ovl2_800FA5E8
   /* 075E58 800FA658 256B1304 */     addiu $t3, $t3, 0x1304
   /* 075E5C 800FA65C 8D6E0000 */        lw $t6, ($t3)
   /* 075E60 800FA660 00196880 */       sll $t5, $t9, 2
-  /* 075E64 800FA664 3C098013 */       lui $t1, %hi(D_ovl2_80131378)
+  /* 075E64 800FA664 3C098013 */       lui $t1, %hi(gpMapVertexLinks)
   /* 075E68 800FA668 01CD7821 */      addu $t7, $t6, $t5
   /* 075E6C 800FA66C 8DE20000 */        lw $v0, ($t7)
-  /* 075E70 800FA670 25291378 */     addiu $t1, $t1, %lo(D_ovl2_80131378)
+  /* 075E70 800FA670 25291378 */     addiu $t1, $t1, %lo(gpMapVertexLinks)
   /* 075E74 800FA674 3C088013 */       lui $t0, 0x8013
   /* 075E78 800FA678 8C580084 */        lw $t8, 0x84($v0)
   /* 075E7C 800FA67C 2B010003 */      slti $at, $t8, 3
   /* 075E80 800FA680 5420000A */      bnel $at, $zero, .L800FA6AC
-  /* 075E84 800FA684 8D2E0000 */        lw $t6, ($t1) # D_ovl2_80131378 + 0
+  /* 075E84 800FA684 8D2E0000 */        lw $t6, ($t1) # gpMapVertexLinks + 0
   /* 075E88 800FA688 3C108013 */       lui $s0, %hi(D_ovl2_801303E4)
   /* 075E8C 800FA68C 261003E4 */     addiu $s0, $s0, %lo(D_ovl2_801303E4)
   .L800FA690:
@@ -40626,10 +40626,10 @@ glabel func_ovl2_800FA5E8
   /* 075ECC 800FA6CC 01C46821 */      addu $t5, $t6, $a0
   /* 075ED0 800FA6D0 95AF0000 */       lhu $t7, ($t5)
   /* 075ED4 800FA6D4 240A0006 */     addiu $t2, $zero, 6
-  /* 075ED8 800FA6D8 3C078013 */       lui $a3, %hi(D_ovl2_80131370)
+  /* 075ED8 800FA6D8 3C078013 */       lui $a3, %hi(gpMapVertexData)
   /* 075EDC 800FA6DC 01EA0019 */     multu $t7, $t2
-  /* 075EE0 800FA6E0 24E71370 */     addiu $a3, $a3, %lo(D_ovl2_80131370)
-  /* 075EE4 800FA6E4 8CF80000 */        lw $t8, ($a3) # D_ovl2_80131370 + 0
+  /* 075EE0 800FA6E0 24E71370 */     addiu $a3, $a3, %lo(gpMapVertexData)
+  /* 075EE4 800FA6E4 8CF80000 */        lw $t8, ($a3) # gpMapVertexData + 0
   /* 075EE8 800FA6E8 44808000 */      mtc1 $zero, $f16
   /* 075EEC 800FA6EC 0000C812 */      mflo $t9
   /* 075EF0 800FA6F0 03197021 */      addu $t6, $t8, $t9
@@ -40646,7 +40646,7 @@ glabel func_ovl2_800FA5E8
   /* 075F1C 800FA71C 01EDC021 */      addu $t8, $t7, $t5
   /* 075F20 800FA720 0304C821 */      addu $t9, $t8, $a0
   /* 075F24 800FA724 972E0000 */       lhu $t6, ($t9)
-  /* 075F28 800FA728 8CED0000 */        lw $t5, ($a3) # D_ovl2_80131370 + 0
+  /* 075F28 800FA728 8CED0000 */        lw $t5, ($a3) # gpMapVertexData + 0
   /* 075F2C 800FA72C 01CA0019 */     multu $t6, $t2
   /* 075F30 800FA730 00007812 */      mflo $t7
   /* 075F34 800FA734 01AFC021 */      addu $t8, $t5, $t7
@@ -40714,8 +40714,8 @@ glabel func_ovl2_800FA7B8
   /* 076010 800FA810 000F7840 */       sll $t7, $t7, 1
   /* 076014 800FA814 01CFC021 */      addu $t8, $t6, $t7
   /* 076018 800FA818 93030000 */       lbu $v1, ($t8)
-  /* 07601C 800FA81C 3C198013 */       lui $t9, %hi(D_ovl2_80131304)
-  /* 076020 800FA820 8F391304 */        lw $t9, %lo(D_ovl2_80131304)($t9)
+  /* 07601C 800FA81C 3C198013 */       lui $t9, %hi(gpMapRooms)
+  /* 076020 800FA820 8F391304 */        lw $t9, %lo(gpMapRooms)($t9)
   /* 076024 800FA824 00034080 */       sll $t0, $v1, 2
   /* 076028 800FA828 3C108013 */       lui $s0, %hi(D_ovl2_80130418)
   /* 07602C 800FA82C 03284821 */      addu $t1, $t9, $t0
@@ -40780,8 +40780,8 @@ glabel func_ovl2_800FA8A4
   /* 0760FC 800FA8FC 000F7840 */       sll $t7, $t7, 1
   /* 076100 800FA900 01CF1821 */      addu $v1, $t6, $t7
   /* 076104 800FA904 90790000 */       lbu $t9, ($v1)
-  /* 076108 800FA908 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07610C 800FA90C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 076108 800FA908 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07610C 800FA90C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 076110 800FA910 00194080 */       sll $t0, $t9, 2
   /* 076114 800FA914 24010003 */     addiu $at, $zero, 3
   /* 076118 800FA918 03084821 */      addu $t1, $t8, $t0
@@ -40835,8 +40835,8 @@ glabel func_ovl2_800FA964
   /* 0761BC 800FA9BC 000F7840 */       sll $t7, $t7, 1
   /* 0761C0 800FA9C0 01CF1821 */      addu $v1, $t6, $t7
   /* 0761C4 800FA9C4 90790000 */       lbu $t9, ($v1)
-  /* 0761C8 800FA9C8 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 0761CC 800FA9CC 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 0761C8 800FA9C8 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 0761CC 800FA9CC 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 0761D0 800FA9D0 00194080 */       sll $t0, $t9, 2
   /* 0761D4 800FA9D4 8FB00014 */        lw $s0, 0x14($sp)
   /* 0761D8 800FA9D8 03084821 */      addu $t1, $t8, $t0
@@ -40890,8 +40890,8 @@ glabel func_ovl2_800FAA24
   /* 07627C 800FAA7C 000F7840 */       sll $t7, $t7, 1
   /* 076280 800FAA80 01CF1821 */      addu $v1, $t6, $t7
   /* 076284 800FAA84 90790000 */       lbu $t9, ($v1)
-  /* 076288 800FAA88 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07628C 800FAA8C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 076288 800FAA88 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07628C 800FAA8C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 076290 800FAA90 00194080 */       sll $t0, $t9, 2
   /* 076294 800FAA94 8FB00014 */        lw $s0, 0x14($sp)
   /* 076298 800FAA98 03084821 */      addu $t1, $t8, $t0
@@ -40945,8 +40945,8 @@ glabel func_ovl2_800FAAE4
   /* 07633C 800FAB3C 000F7840 */       sll $t7, $t7, 1
   /* 076340 800FAB40 01CF1821 */      addu $v1, $t6, $t7
   /* 076344 800FAB44 90790000 */       lbu $t9, ($v1)
-  /* 076348 800FAB48 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07634C 800FAB4C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 076348 800FAB48 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07634C 800FAB4C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 076350 800FAB50 00194080 */       sll $t0, $t9, 2
   /* 076354 800FAB54 8FB00014 */        lw $s0, 0x14($sp)
   /* 076358 800FAB58 03084821 */      addu $t1, $t8, $t0
@@ -41000,8 +41000,8 @@ glabel func_ovl2_800FABA4
   /* 0763FC 800FABFC 000F7840 */       sll $t7, $t7, 1
   /* 076400 800FAC00 01CF1821 */      addu $v1, $t6, $t7
   /* 076404 800FAC04 90790000 */       lbu $t9, ($v1)
-  /* 076408 800FAC08 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07640C 800FAC0C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 076408 800FAC08 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07640C 800FAC0C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 076410 800FAC10 00194080 */       sll $t0, $t9, 2
   /* 076414 800FAC14 8FB00014 */        lw $s0, 0x14($sp)
   /* 076418 800FAC18 03084821 */      addu $t1, $t8, $t0
@@ -41055,8 +41055,8 @@ glabel func_ovl2_800FAC64
   /* 0764BC 800FACBC 000F7840 */       sll $t7, $t7, 1
   /* 0764C0 800FACC0 01CF1821 */      addu $v1, $t6, $t7
   /* 0764C4 800FACC4 90790000 */       lbu $t9, ($v1)
-  /* 0764C8 800FACC8 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 0764CC 800FACCC 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 0764C8 800FACC8 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 0764CC 800FACCC 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 0764D0 800FACD0 00194080 */       sll $t0, $t9, 2
   /* 0764D4 800FACD4 8FB00014 */        lw $s0, 0x14($sp)
   /* 0764D8 800FACD8 03084821 */      addu $t1, $t8, $t0
@@ -41110,8 +41110,8 @@ glabel func_ovl2_800FAD24
   /* 07657C 800FAD7C 000F7840 */       sll $t7, $t7, 1
   /* 076580 800FAD80 01CF1821 */      addu $v1, $t6, $t7
   /* 076584 800FAD84 90790000 */       lbu $t9, ($v1)
-  /* 076588 800FAD88 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07658C 800FAD8C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 076588 800FAD88 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07658C 800FAD8C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 076590 800FAD90 00194080 */       sll $t0, $t9, 2
   /* 076594 800FAD94 8FB00014 */        lw $s0, 0x14($sp)
   /* 076598 800FAD98 03084821 */      addu $t1, $t8, $t0
@@ -41165,8 +41165,8 @@ glabel func_ovl2_800FADE4
   /* 07663C 800FAE3C 000F7840 */       sll $t7, $t7, 1
   /* 076640 800FAE40 01CF1821 */      addu $v1, $t6, $t7
   /* 076644 800FAE44 90790000 */       lbu $t9, ($v1)
-  /* 076648 800FAE48 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07664C 800FAE4C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 076648 800FAE48 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07664C 800FAE4C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 076650 800FAE50 00194080 */       sll $t0, $t9, 2
   /* 076654 800FAE54 8FB00014 */        lw $s0, 0x14($sp)
   /* 076658 800FAE58 03084821 */      addu $t1, $t8, $t0
@@ -41220,8 +41220,8 @@ glabel func_ovl2_800FAEA4
   /* 0766FC 800FAEFC 000F7840 */       sll $t7, $t7, 1
   /* 076700 800FAF00 01CF1821 */      addu $v1, $t6, $t7
   /* 076704 800FAF04 90790000 */       lbu $t9, ($v1)
-  /* 076708 800FAF08 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
-  /* 07670C 800FAF0C 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 076708 800FAF08 3C188013 */       lui $t8, %hi(gpMapRooms)
+  /* 07670C 800FAF0C 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 076710 800FAF10 00194080 */       sll $t0, $t9, 2
   /* 076714 800FAF14 8FB00014 */        lw $s0, 0x14($sp)
   /* 076718 800FAF18 03084821 */      addu $t1, $t8, $t0
@@ -41247,8 +41247,8 @@ glabel func_ovl2_800FAEA4
   /* 076760 800FAF60 27BD0020 */     addiu $sp, $sp, 0x20
 
 glabel func_ovl2_800FAF64
-  /* 076764 800FAF64 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 076768 800FAF68 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 076764 800FAF64 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 076768 800FAF68 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 07676C 800FAF6C 00001825 */        or $v1, $zero, $zero
   /* 076770 800FAF70 95C20014 */       lhu $v0, 0x14($t6)
   /* 076774 800FAF74 14400007 */      bnez $v0, .L800FAF94
@@ -41309,15 +41309,15 @@ glabel func_ovl2_800FB010
   /* 076830 800FB030 0C001260 */       jal hal_alloc
   /* 076834 800FB034 24050008 */     addiu $a1, $zero, 8
   /* 076838 800FB038 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 07683C 800FB03C 3C018013 */       lui $at, %hi(D_ovl2_8013136C)
-  /* 076840 800FB040 AC22136C */        sw $v0, %lo(D_ovl2_8013136C)($at)
+  /* 07683C 800FB03C 3C018013 */       lui $at, %hi(gpMapVertexInfo)
+  /* 076840 800FB040 AC22136C */        sw $v0, %lo(gpMapVertexInfo)($at)
   /* 076844 800FB044 03E00008 */        jr $ra
   /* 076848 800FB048 27BD0018 */     addiu $sp, $sp, 0x18
 
 glabel func_ovl2_800FB04C
   /* 07684C 800FB04C 27BDFF68 */     addiu $sp, $sp, -0x98
-  /* 076850 800FB050 3C028013 */       lui $v0, %hi(D_ovl2_80131368)
-  /* 076854 800FB054 8C421368 */        lw $v0, %lo(D_ovl2_80131368)($v0)
+  /* 076850 800FB050 3C028013 */       lui $v0, %hi(gpMapGeometry)
+  /* 076854 800FB054 8C421368 */        lw $v0, %lo(gpMapGeometry)($v0)
   /* 076858 800FB058 AFBF002C */        sw $ra, 0x2c($sp)
   /* 07685C 800FB05C AFBE0028 */        sw $fp, 0x28($sp)
   /* 076860 800FB060 AFB70024 */        sw $s7, 0x24($sp)
@@ -41330,18 +41330,18 @@ glabel func_ovl2_800FB04C
   /* 07687C 800FB07C AFB00008 */        sw $s0, 8($sp)
   /* 076880 800FB080 8C4E0010 */        lw $t6, 0x10($v0)
   /* 076884 800FB084 AFA00090 */        sw $zero, 0x90($sp)
-  /* 076888 800FB088 3C1F8013 */       lui $ra, %hi(D_ovl2_80131378)
+  /* 076888 800FB088 3C1F8013 */       lui $ra, %hi(gpMapVertexLinks)
   /* 07688C 800FB08C AFAE008C */        sw $t6, 0x8c($sp)
   /* 076890 800FB090 944F0000 */       lhu $t7, ($v0)
-  /* 076894 800FB094 27FF1378 */     addiu $ra, $ra, %lo(D_ovl2_80131378)
-  /* 076898 800FB098 3C158013 */       lui $s5, %hi(D_ovl2_80131374)
+  /* 076894 800FB094 27FF1378 */     addiu $ra, $ra, %lo(gpMapVertexLinks)
+  /* 076898 800FB098 3C158013 */       lui $s5, %hi(gpMapVertexID)
   /* 07689C 800FB09C 19E00074 */      blez $t7, .L800FB270
   /* 0768A0 800FB0A0 0000B025 */        or $s6, $zero, $zero
-  /* 0768A4 800FB0A4 3C148013 */       lui $s4, %hi(D_ovl2_80131370)
-  /* 0768A8 800FB0A8 3C138013 */       lui $s3, %hi(D_ovl2_8013136C)
-  /* 0768AC 800FB0AC 2673136C */     addiu $s3, $s3, %lo(D_ovl2_8013136C)
-  /* 0768B0 800FB0B0 26941370 */     addiu $s4, $s4, %lo(D_ovl2_80131370)
-  /* 0768B4 800FB0B4 26B51374 */     addiu $s5, $s5, %lo(D_ovl2_80131374)
+  /* 0768A4 800FB0A4 3C148013 */       lui $s4, %hi(gpMapVertexData)
+  /* 0768A8 800FB0A8 3C138013 */       lui $s3, %hi(gpMapVertexInfo)
+  /* 0768AC 800FB0AC 2673136C */     addiu $s3, $s3, %lo(gpMapVertexInfo)
+  /* 0768B0 800FB0B0 26941370 */     addiu $s4, $s4, %lo(gpMapVertexData)
+  /* 0768B4 800FB0B4 26B51374 */     addiu $s5, $s5, %lo(gpMapVertexID)
   /* 0768B8 800FB0B8 24080006 */     addiu $t0, $zero, 6
   .L800FB0BC:
   /* 0768BC 800FB0BC 8FB8008C */        lw $t8, 0x8c($sp)
@@ -41361,14 +41361,14 @@ glabel func_ovl2_800FB04C
   /* 0768F0 800FB0F0 01CBB821 */      addu $s7, $t6, $t3
   /* 0768F4 800FB0F4 00029080 */       sll $s2, $v0, 2
   /* 0768F8 800FB0F8 AFA40034 */        sw $a0, 0x34($sp)
-  /* 0768FC 800FB0FC 8FEF0000 */        lw $t7, ($ra) # D_ovl2_80131378 + 0
+  /* 0768FC 800FB0FC 8FEF0000 */        lw $t7, ($ra) # gpMapVertexLinks + 0
   .L800FB100:
   /* 076900 800FB100 29610008 */      slti $at, $t3, 8
   /* 076904 800FB104 1020000C */      beqz $at, .L800FB138
   /* 076908 800FB108 024F2021 */      addu $a0, $s2, $t7
   /* 07690C 800FB10C 94830000 */       lhu $v1, ($a0)
-  /* 076910 800FB110 8EAA0000 */        lw $t2, ($s5) # D_ovl2_80131374 + 0
-  /* 076914 800FB114 8E850000 */        lw $a1, ($s4) # D_ovl2_80131370 + 0
+  /* 076910 800FB110 8EAA0000 */        lw $t2, ($s5) # gpMapVertexID + 0
+  /* 076914 800FB114 8E850000 */        lw $a1, ($s4) # gpMapVertexData + 0
   /* 076918 800FB118 0003C040 */       sll $t8, $v1, 1
   /* 07691C 800FB11C 0158C821 */      addu $t9, $t2, $t8
   /* 076920 800FB120 972E0000 */       lhu $t6, ($t9)
@@ -41379,8 +41379,8 @@ glabel func_ovl2_800FB04C
   /* 076934 800FB134 87090002 */        lh $t1, 2($t8)
   .L800FB138:
   /* 076938 800FB138 94830000 */       lhu $v1, ($a0)
-  /* 07693C 800FB13C 8EAA0000 */        lw $t2, ($s5) # D_ovl2_80131374 + 0
-  /* 076940 800FB140 8E850000 */        lw $a1, ($s4) # D_ovl2_80131370 + 0
+  /* 07693C 800FB13C 8EAA0000 */        lw $t2, ($s5) # gpMapVertexID + 0
+  /* 076940 800FB140 8E850000 */        lw $a1, ($s4) # gpMapVertexData + 0
   /* 076944 800FB144 0003C840 */       sll $t9, $v1, 1
   /* 076948 800FB148 01597021 */      addu $t6, $t2, $t9
   /* 07694C 800FB14C 95CF0000 */       lhu $t7, ($t6)
@@ -41430,31 +41430,31 @@ glabel func_ovl2_800FB04C
   /* 0769E4 800FB1E4 1420FFE8 */      bnez $at, .L800FB188
   /* 0769E8 800FB1E8 24630002 */     addiu $v1, $v1, 2
   .L800FB1EC:
-  /* 0769EC 800FB1EC 8E790000 */        lw $t9, ($s3) # D_ovl2_8013136C + 0
+  /* 0769EC 800FB1EC 8E790000 */        lw $t9, ($s3) # gpMapVertexInfo + 0
   /* 0769F0 800FB1F0 26310001 */     addiu $s1, $s1, 1
   /* 0769F4 800FB1F4 26520004 */     addiu $s2, $s2, 4
   /* 0769F8 800FB1F8 03307021 */      addu $t6, $t9, $s0
   /* 0769FC 800FB1FC A5C70002 */        sh $a3, 2($t6)
-  /* 076A00 800FB200 8E6F0000 */        lw $t7, ($s3) # D_ovl2_8013136C + 0
+  /* 076A00 800FB200 8E6F0000 */        lw $t7, ($s3) # gpMapVertexInfo + 0
   /* 076A04 800FB204 26D60001 */     addiu $s6, $s6, 1
   /* 076A08 800FB208 01F0C021 */      addu $t8, $t7, $s0
   /* 076A0C 800FB20C A7060004 */        sh $a2, 4($t8)
-  /* 076A10 800FB210 8E790000 */        lw $t9, ($s3) # D_ovl2_8013136C + 0
+  /* 076A10 800FB210 8E790000 */        lw $t9, ($s3) # gpMapVertexInfo + 0
   /* 076A14 800FB214 03307021 */      addu $t6, $t9, $s0
   /* 076A18 800FB218 A1DE0000 */        sb $fp, ($t6)
   /* 076A1C 800FB21C 96EF0002 */       lhu $t7, 2($s7)
   /* 076A20 800FB220 2610000A */     addiu $s0, $s0, 0xa
   /* 076A24 800FB224 022F082A */       slt $at, $s1, $t7
   /* 076A28 800FB228 5420FFB5 */      bnel $at, $zero, .L800FB100
-  /* 076A2C 800FB22C 8FEF0000 */        lw $t7, ($ra) # D_ovl2_80131378 + 0
+  /* 076A2C 800FB22C 8FEF0000 */        lw $t7, ($ra) # gpMapVertexLinks + 0
   /* 076A30 800FB230 8FA40034 */        lw $a0, 0x34($sp)
   .L800FB234:
   /* 076A34 800FB234 256B0004 */     addiu $t3, $t3, 4
   /* 076A38 800FB238 24010010 */     addiu $at, $zero, 0x10
   /* 076A3C 800FB23C 1561FFA4 */       bne $t3, $at, .L800FB0D0
   /* 076A40 800FB240 24840004 */     addiu $a0, $a0, 4
-  /* 076A44 800FB244 3C188013 */       lui $t8, %hi(D_ovl2_80131368)
-  /* 076A48 800FB248 8F181368 */        lw $t8, %lo(D_ovl2_80131368)($t8)
+  /* 076A44 800FB244 3C188013 */       lui $t8, %hi(gpMapGeometry)
+  /* 076A48 800FB248 8F181368 */        lw $t8, %lo(gpMapGeometry)($t8)
   /* 076A4C 800FB24C 8FB90090 */        lw $t9, 0x90($sp)
   /* 076A50 800FB250 8FAF008C */        lw $t7, 0x8c($sp)
   /* 076A54 800FB254 97020000 */       lhu $v0, ($t8)
@@ -41480,8 +41480,8 @@ glabel func_ovl2_800FB04C
 
 glabel func_ovl2_800FB2A0
   /* 076AA0 800FB2A0 3C048013 */       lui $a0, %hi(D_ovl2_80131348)
-  /* 076AA4 800FB2A4 3C068013 */       lui $a2, %hi(D_ovl2_8013136C)
-  /* 076AA8 800FB2A8 24C6136C */     addiu $a2, $a2, %lo(D_ovl2_8013136C)
+  /* 076AA4 800FB2A4 3C068013 */       lui $a2, %hi(gpMapVertexInfo)
+  /* 076AA8 800FB2A8 24C6136C */     addiu $a2, $a2, %lo(gpMapVertexInfo)
   /* 076AAC 800FB2AC 24841348 */     addiu $a0, $a0, %lo(D_ovl2_80131348)
   /* 076AB0 800FB2B0 00001025 */        or $v0, $zero, $zero
   /* 076AB4 800FB2B4 24080004 */     addiu $t0, $zero, 4
@@ -41494,7 +41494,7 @@ glabel func_ovl2_800FB2A0
   /* 076ACC 800FB2CC 24420001 */     addiu $v0, $v0, 1
   /* 076AD0 800FB2D0 8C980004 */        lw $t8, 4($a0) # D_ovl2_80131348 + 4
   .L800FB2D4:
-  /* 076AD4 800FB2D4 8CCF0000 */        lw $t7, ($a2) # D_ovl2_8013136C + 0
+  /* 076AD4 800FB2D4 8CCF0000 */        lw $t7, ($a2) # gpMapVertexInfo + 0
   /* 076AD8 800FB2D8 24630001 */     addiu $v1, $v1, 1
   /* 076ADC 800FB2DC 0305C821 */      addu $t9, $t8, $a1
   /* 076AE0 800FB2E0 97290000 */       lhu $t1, ($t9)
@@ -41530,21 +41530,21 @@ glabel func_ovl2_800FB31C
   /* 076B4C 800FB34C AFB1000C */        sw $s1, 0xc($sp)
   /* 076B50 800FB350 19600074 */      blez $t3, .L800FB524
   /* 076B54 800FB354 00008025 */        or $s0, $zero, $zero
-  /* 076B58 800FB358 3C1E8013 */       lui $fp, %hi(D_ovl2_80131374)
-  /* 076B5C 800FB35C 3C178013 */       lui $s7, %hi(D_ovl2_80131378)
-  /* 076B60 800FB360 3C168013 */       lui $s6, %hi(D_ovl2_80131370)
-  /* 076B64 800FB364 3C148013 */       lui $s4, %hi(D_ovl2_8013136C)
-  /* 076B68 800FB368 2694136C */     addiu $s4, $s4, %lo(D_ovl2_8013136C)
-  /* 076B6C 800FB36C 26D61370 */     addiu $s6, $s6, %lo(D_ovl2_80131370)
-  /* 076B70 800FB370 26F71378 */     addiu $s7, $s7, %lo(D_ovl2_80131378)
-  /* 076B74 800FB374 27DE1374 */     addiu $fp, $fp, %lo(D_ovl2_80131374)
+  /* 076B58 800FB358 3C1E8013 */       lui $fp, %hi(gpMapVertexID)
+  /* 076B5C 800FB35C 3C178013 */       lui $s7, %hi(gpMapVertexLinks)
+  /* 076B60 800FB360 3C168013 */       lui $s6, %hi(gpMapVertexData)
+  /* 076B64 800FB364 3C148013 */       lui $s4, %hi(gpMapVertexInfo)
+  /* 076B68 800FB368 2694136C */     addiu $s4, $s4, %lo(gpMapVertexInfo)
+  /* 076B6C 800FB36C 26D61370 */     addiu $s6, $s6, %lo(gpMapVertexData)
+  /* 076B70 800FB370 26F71378 */     addiu $s7, $s7, %lo(gpMapVertexLinks)
+  /* 076B74 800FB374 27DE1374 */     addiu $fp, $fp, %lo(gpMapVertexID)
   /* 076B78 800FB378 0000A825 */        or $s5, $zero, $zero
   /* 076B7C 800FB37C 00008825 */        or $s1, $zero, $zero
   /* 076B80 800FB380 241F0001 */     addiu $ra, $zero, 1
   /* 076B84 800FB384 24130006 */     addiu $s3, $zero, 6
   .L800FB388:
-  /* 076B88 800FB388 8EEA0000 */        lw $t2, ($s7) # D_ovl2_80131378 + 0
-  /* 076B8C 800FB38C 8FC70000 */        lw $a3, ($fp) # D_ovl2_80131374 + 0
+  /* 076B88 800FB388 8EEA0000 */        lw $t2, ($s7) # gpMapVertexLinks + 0
+  /* 076B8C 800FB38C 8FC70000 */        lw $a3, ($fp) # gpMapVertexID + 0
   /* 076B90 800FB390 240CFFFF */     addiu $t4, $zero, -1
   /* 076B94 800FB394 01551021 */      addu $v0, $t2, $s5
   /* 076B98 800FB398 94450000 */       lhu $a1, ($v0)
@@ -41595,7 +41595,7 @@ glabel func_ovl2_800FB31C
   /* 076C34 800FB434 1420FFE5 */      bnez $at, .L800FB3CC
   /* 076C38 800FB438 00000000 */       nop 
   .L800FB43C:
-  /* 076C3C 800FB43C 8E990000 */        lw $t9, ($s4) # D_ovl2_8013136C + 0
+  /* 076C3C 800FB43C 8E990000 */        lw $t9, ($s4) # gpMapVertexInfo + 0
   /* 076C40 800FB440 3C0B8013 */       lui $t3, %hi(D_ovl2_80131384)
   /* 076C44 800FB444 03311821 */      addu $v1, $t9, $s1
   /* 076C48 800FB448 90620001 */       lbu $v0, 1($v1)
@@ -41611,7 +41611,7 @@ glabel func_ovl2_800FB31C
   /* 076C70 800FB470 00000000 */       nop 
   .L800FB474:
   /* 076C74 800FB474 01330019 */     multu $t1, $s3
-  /* 076C78 800FB478 8EC20000 */        lw $v0, ($s6) # D_ovl2_80131370 + 0
+  /* 076C78 800FB478 8EC20000 */        lw $v0, ($s6) # gpMapVertexData + 0
   /* 076C7C 800FB47C 00007012 */      mflo $t6
   /* 076C80 800FB480 004E7821 */      addu $t7, $v0, $t6
   /* 076C84 800FB484 85F80000 */        lh $t8, ($t7)
@@ -41626,7 +41626,7 @@ glabel func_ovl2_800FB31C
   /* 076CA8 800FB4A8 03E09025 */        or $s2, $ra, $zero
   .L800FB4AC:
   /* 076CAC 800FB4AC 01330019 */     multu $t1, $s3
-  /* 076CB0 800FB4B0 8EC20000 */        lw $v0, ($s6) # D_ovl2_80131370 + 0
+  /* 076CB0 800FB4B0 8EC20000 */        lw $v0, ($s6) # gpMapVertexData + 0
   /* 076CB4 800FB4B4 0000C812 */      mflo $t9
   /* 076CB8 800FB4B8 00597021 */      addu $t6, $v0, $t9
   /* 076CBC 800FB4BC 85D80002 */        lh $t8, 2($t6)
@@ -41642,13 +41642,13 @@ glabel func_ovl2_800FB31C
   /* 076CE0 800FB4E0 52400007 */      beql $s2, $zero, .L800FB500
   /* 076CE4 800FB4E4 A46C0006 */        sh $t4, 6($v1)
   /* 076CE8 800FB4E8 A46D0006 */        sh $t5, 6($v1)
-  /* 076CEC 800FB4EC 8E8F0000 */        lw $t7, ($s4) # D_ovl2_8013136C + 0
+  /* 076CEC 800FB4EC 8E8F0000 */        lw $t7, ($s4) # gpMapVertexInfo + 0
   /* 076CF0 800FB4F0 01F1C821 */      addu $t9, $t7, $s1
   /* 076CF4 800FB4F4 10000005 */         b .L800FB50C
   /* 076CF8 800FB4F8 A72C0008 */        sh $t4, 8($t9)
   /* 076CFC 800FB4FC A46C0006 */        sh $t4, 6($v1)
   .L800FB500:
-  /* 076D00 800FB500 8E980000 */        lw $t8, ($s4) # D_ovl2_8013136C + 0
+  /* 076D00 800FB500 8E980000 */        lw $t8, ($s4) # gpMapVertexInfo + 0
   /* 076D04 800FB504 03117021 */      addu $t6, $t8, $s1
   /* 076D08 800FB508 A5CD0008 */        sh $t5, 8($t6)
   .L800FB50C:
@@ -41705,17 +41705,17 @@ glabel func_ovl2_800FB584
   /* 076DB8 800FB5B8 0C001260 */       jal hal_alloc
   /* 076DBC 800FB5BC AFA6001C */        sw $a2, 0x1c($sp)
   /* 076DC0 800FB5C0 8FA6001C */        lw $a2, 0x1c($sp)
-  /* 076DC4 800FB5C4 3C018013 */       lui $at, %hi(D_ovl2_80131304)
-  /* 076DC8 800FB5C8 AC221304 */        sw $v0, %lo(D_ovl2_80131304)($at)
+  /* 076DC4 800FB5C4 3C018013 */       lui $at, %hi(gpMapRooms)
+  /* 076DC8 800FB5C8 AC221304 */        sw $v0, %lo(gpMapRooms)($at)
   /* 076DCC 800FB5CC 00062080 */       sll $a0, $a2, 2
   /* 076DD0 800FB5D0 00862023 */      subu $a0, $a0, $a2
   /* 076DD4 800FB5D4 00042080 */       sll $a0, $a0, 2
   /* 076DD8 800FB5D8 0C001260 */       jal hal_alloc
   /* 076DDC 800FB5DC 24050004 */     addiu $a1, $zero, 4
   /* 076DE0 800FB5E0 8FA6001C */        lw $a2, 0x1c($sp)
-  /* 076DE4 800FB5E4 3C048013 */       lui $a0, %hi(D_ovl2_8013137C)
-  /* 076DE8 800FB5E8 2484137C */     addiu $a0, $a0, %lo(D_ovl2_8013137C)
-  /* 076DEC 800FB5EC AC820000 */        sw $v0, ($a0) # D_ovl2_8013137C + 0
+  /* 076DE4 800FB5E4 3C048013 */       lui $a0, %hi(gpMapRoomVectors)
+  /* 076DE8 800FB5E8 2484137C */     addiu $a0, $a0, %lo(gpMapRoomVectors)
+  /* 076DEC 800FB5EC AC820000 */        sw $v0, ($a0) # gpMapRoomVectors + 0
   /* 076DF0 800FB5F0 18C00080 */      blez $a2, .L800FB7F4
   /* 076DF4 800FB5F4 00002825 */        or $a1, $zero, $zero
   /* 076DF8 800FB5F8 30C30003 */      andi $v1, $a2, 3
@@ -41725,31 +41725,31 @@ glabel func_ovl2_800FB584
   /* 076E08 800FB608 00401023 */      subu $v0, $v0, $zero
   /* 076E0C 800FB60C 44801000 */      mtc1 $zero, $f2
   /* 076E10 800FB610 00021080 */       sll $v0, $v0, 2
-  /* 076E14 800FB614 8C980000 */        lw $t8, ($a0) # D_ovl2_8013137C + 0
+  /* 076E14 800FB614 8C980000 */        lw $t8, ($a0) # gpMapRoomVectors + 0
   /* 076E18 800FB618 24A50001 */     addiu $a1, $a1, 1
   /* 076E1C 800FB61C 0302C821 */      addu $t9, $t8, $v0
   /* 076E20 800FB620 E7220008 */      swc1 $f2, 8($t9)
   /* 076E24 800FB624 10E5000E */       beq $a3, $a1, .L800FB660
-  /* 076E28 800FB628 8C880000 */        lw $t0, ($a0) # D_ovl2_8013137C + 0
+  /* 076E28 800FB628 8C880000 */        lw $t0, ($a0) # gpMapRoomVectors + 0
   .L800FB62C:
   /* 076E2C 800FB62C 01021821 */      addu $v1, $t0, $v0
   /* 076E30 800FB630 C4720008 */      lwc1 $f18, 8($v1)
   /* 076E34 800FB634 24A50001 */     addiu $a1, $a1, 1
   /* 076E38 800FB638 E4720004 */      swc1 $f18, 4($v1)
-  /* 076E3C 800FB63C 8C890000 */        lw $t1, ($a0) # D_ovl2_8013137C + 0
+  /* 076E3C 800FB63C 8C890000 */        lw $t1, ($a0) # gpMapRoomVectors + 0
   /* 076E40 800FB640 01225021 */      addu $t2, $t1, $v0
   /* 076E44 800FB644 E5520000 */      swc1 $f18, ($t2)
-  /* 076E48 800FB648 8C980000 */        lw $t8, ($a0) # D_ovl2_8013137C + 0
+  /* 076E48 800FB648 8C980000 */        lw $t8, ($a0) # gpMapRoomVectors + 0
   /* 076E4C 800FB64C 2442000C */     addiu $v0, $v0, 0xc
   /* 076E50 800FB650 0302C821 */      addu $t9, $t8, $v0
   /* 076E54 800FB654 E7220008 */      swc1 $f2, 8($t9)
   /* 076E58 800FB658 14E5FFF4 */       bne $a3, $a1, .L800FB62C
-  /* 076E5C 800FB65C 8C880000 */        lw $t0, ($a0) # D_ovl2_8013137C + 0
+  /* 076E5C 800FB65C 8C880000 */        lw $t0, ($a0) # gpMapRoomVectors + 0
   .L800FB660:
   /* 076E60 800FB660 01021821 */      addu $v1, $t0, $v0
   /* 076E64 800FB664 C4720008 */      lwc1 $f18, 8($v1)
   /* 076E68 800FB668 E4720004 */      swc1 $f18, 4($v1)
-  /* 076E6C 800FB66C 8C890000 */        lw $t1, ($a0) # D_ovl2_8013137C + 0
+  /* 076E6C 800FB66C 8C890000 */        lw $t1, ($a0) # gpMapRoomVectors + 0
   /* 076E70 800FB670 01225021 */      addu $t2, $t1, $v0
   /* 076E74 800FB674 2442000C */     addiu $v0, $v0, 0xc
   /* 076E78 800FB678 E5520000 */      swc1 $f18, ($t2)
@@ -41762,91 +41762,91 @@ glabel func_ovl2_800FB584
   /* 076E90 800FB690 44801000 */      mtc1 $zero, $f2
   /* 076E94 800FB694 00021080 */       sll $v0, $v0, 2
   /* 076E98 800FB698 00073880 */       sll $a3, $a3, 2
-  /* 076E9C 800FB69C 8C8B0000 */        lw $t3, ($a0) # D_ovl2_8013137C + 0
+  /* 076E9C 800FB69C 8C8B0000 */        lw $t3, ($a0) # gpMapRoomVectors + 0
   /* 076EA0 800FB6A0 24E7FFD0 */     addiu $a3, $a3, -0x30
   /* 076EA4 800FB6A4 01626021 */      addu $t4, $t3, $v0
   /* 076EA8 800FB6A8 E5820008 */      swc1 $f2, 8($t4)
   /* 076EAC 800FB6AC 1047002B */       beq $v0, $a3, .L800FB75C
-  /* 076EB0 800FB6B0 8C8D0000 */        lw $t5, ($a0) # D_ovl2_8013137C + 0
+  /* 076EB0 800FB6B0 8C8D0000 */        lw $t5, ($a0) # gpMapRoomVectors + 0
   .L800FB6B4:
   /* 076EB4 800FB6B4 01A21821 */      addu $v1, $t5, $v0
   /* 076EB8 800FB6B8 C4720008 */      lwc1 $f18, 8($v1)
   /* 076EBC 800FB6BC E4720004 */      swc1 $f18, 4($v1)
-  /* 076EC0 800FB6C0 8C8E0000 */        lw $t6, ($a0) # D_ovl2_8013137C + 0
+  /* 076EC0 800FB6C0 8C8E0000 */        lw $t6, ($a0) # gpMapRoomVectors + 0
   /* 076EC4 800FB6C4 01C27821 */      addu $t7, $t6, $v0
   /* 076EC8 800FB6C8 E5F20000 */      swc1 $f18, ($t7)
-  /* 076ECC 800FB6CC 8C980000 */        lw $t8, ($a0) # D_ovl2_8013137C + 0
+  /* 076ECC 800FB6CC 8C980000 */        lw $t8, ($a0) # gpMapRoomVectors + 0
   /* 076ED0 800FB6D0 0302C821 */      addu $t9, $t8, $v0
   /* 076ED4 800FB6D4 E7220014 */      swc1 $f2, 0x14($t9)
-  /* 076ED8 800FB6D8 8C880000 */        lw $t0, ($a0) # D_ovl2_8013137C + 0
+  /* 076ED8 800FB6D8 8C880000 */        lw $t0, ($a0) # gpMapRoomVectors + 0
   /* 076EDC 800FB6DC 01021821 */      addu $v1, $t0, $v0
   /* 076EE0 800FB6E0 C4720014 */      lwc1 $f18, 0x14($v1)
   /* 076EE4 800FB6E4 E4720010 */      swc1 $f18, 0x10($v1)
-  /* 076EE8 800FB6E8 8C890000 */        lw $t1, ($a0) # D_ovl2_8013137C + 0
+  /* 076EE8 800FB6E8 8C890000 */        lw $t1, ($a0) # gpMapRoomVectors + 0
   /* 076EEC 800FB6EC 01225021 */      addu $t2, $t1, $v0
   /* 076EF0 800FB6F0 E552000C */      swc1 $f18, 0xc($t2)
-  /* 076EF4 800FB6F4 8C8B0000 */        lw $t3, ($a0) # D_ovl2_8013137C + 0
+  /* 076EF4 800FB6F4 8C8B0000 */        lw $t3, ($a0) # gpMapRoomVectors + 0
   /* 076EF8 800FB6F8 01626021 */      addu $t4, $t3, $v0
   /* 076EFC 800FB6FC E5820020 */      swc1 $f2, 0x20($t4)
-  /* 076F00 800FB700 8C8D0000 */        lw $t5, ($a0) # D_ovl2_8013137C + 0
+  /* 076F00 800FB700 8C8D0000 */        lw $t5, ($a0) # gpMapRoomVectors + 0
   /* 076F04 800FB704 01A21821 */      addu $v1, $t5, $v0
   /* 076F08 800FB708 C4720020 */      lwc1 $f18, 0x20($v1)
   /* 076F0C 800FB70C E472001C */      swc1 $f18, 0x1c($v1)
-  /* 076F10 800FB710 8C8E0000 */        lw $t6, ($a0) # D_ovl2_8013137C + 0
+  /* 076F10 800FB710 8C8E0000 */        lw $t6, ($a0) # gpMapRoomVectors + 0
   /* 076F14 800FB714 01C27821 */      addu $t7, $t6, $v0
   /* 076F18 800FB718 E5F20018 */      swc1 $f18, 0x18($t7)
-  /* 076F1C 800FB71C 8C980000 */        lw $t8, ($a0) # D_ovl2_8013137C + 0
+  /* 076F1C 800FB71C 8C980000 */        lw $t8, ($a0) # gpMapRoomVectors + 0
   /* 076F20 800FB720 0302C821 */      addu $t9, $t8, $v0
   /* 076F24 800FB724 E722002C */      swc1 $f2, 0x2c($t9)
-  /* 076F28 800FB728 8C880000 */        lw $t0, ($a0) # D_ovl2_8013137C + 0
+  /* 076F28 800FB728 8C880000 */        lw $t0, ($a0) # gpMapRoomVectors + 0
   /* 076F2C 800FB72C 01021821 */      addu $v1, $t0, $v0
   /* 076F30 800FB730 C472002C */      lwc1 $f18, 0x2c($v1)
   /* 076F34 800FB734 E4720028 */      swc1 $f18, 0x28($v1)
-  /* 076F38 800FB738 8C890000 */        lw $t1, ($a0) # D_ovl2_8013137C + 0
+  /* 076F38 800FB738 8C890000 */        lw $t1, ($a0) # gpMapRoomVectors + 0
   /* 076F3C 800FB73C 01225021 */      addu $t2, $t1, $v0
   /* 076F40 800FB740 E5520024 */      swc1 $f18, 0x24($t2)
-  /* 076F44 800FB744 8C8B0000 */        lw $t3, ($a0) # D_ovl2_8013137C + 0
+  /* 076F44 800FB744 8C8B0000 */        lw $t3, ($a0) # gpMapRoomVectors + 0
   /* 076F48 800FB748 24420030 */     addiu $v0, $v0, 0x30
   /* 076F4C 800FB74C 01626021 */      addu $t4, $t3, $v0
   /* 076F50 800FB750 E5820008 */      swc1 $f2, 8($t4)
   /* 076F54 800FB754 1447FFD7 */       bne $v0, $a3, .L800FB6B4
-  /* 076F58 800FB758 8C8D0000 */        lw $t5, ($a0) # D_ovl2_8013137C + 0
+  /* 076F58 800FB758 8C8D0000 */        lw $t5, ($a0) # gpMapRoomVectors + 0
   .L800FB75C:
   /* 076F5C 800FB75C 01A21821 */      addu $v1, $t5, $v0
   /* 076F60 800FB760 C4720008 */      lwc1 $f18, 8($v1)
   /* 076F64 800FB764 24E70030 */     addiu $a3, $a3, 0x30
   /* 076F68 800FB768 E4720004 */      swc1 $f18, 4($v1)
-  /* 076F6C 800FB76C 8C8E0000 */        lw $t6, ($a0) # D_ovl2_8013137C + 0
+  /* 076F6C 800FB76C 8C8E0000 */        lw $t6, ($a0) # gpMapRoomVectors + 0
   /* 076F70 800FB770 01C27821 */      addu $t7, $t6, $v0
   /* 076F74 800FB774 E5F20000 */      swc1 $f18, ($t7)
-  /* 076F78 800FB778 8C980000 */        lw $t8, ($a0) # D_ovl2_8013137C + 0
+  /* 076F78 800FB778 8C980000 */        lw $t8, ($a0) # gpMapRoomVectors + 0
   /* 076F7C 800FB77C 0302C821 */      addu $t9, $t8, $v0
   /* 076F80 800FB780 E7220014 */      swc1 $f2, 0x14($t9)
-  /* 076F84 800FB784 8C880000 */        lw $t0, ($a0) # D_ovl2_8013137C + 0
+  /* 076F84 800FB784 8C880000 */        lw $t0, ($a0) # gpMapRoomVectors + 0
   /* 076F88 800FB788 01021821 */      addu $v1, $t0, $v0
   /* 076F8C 800FB78C C4720014 */      lwc1 $f18, 0x14($v1)
   /* 076F90 800FB790 E4720010 */      swc1 $f18, 0x10($v1)
-  /* 076F94 800FB794 8C890000 */        lw $t1, ($a0) # D_ovl2_8013137C + 0
+  /* 076F94 800FB794 8C890000 */        lw $t1, ($a0) # gpMapRoomVectors + 0
   /* 076F98 800FB798 01225021 */      addu $t2, $t1, $v0
   /* 076F9C 800FB79C E552000C */      swc1 $f18, 0xc($t2)
-  /* 076FA0 800FB7A0 8C8B0000 */        lw $t3, ($a0) # D_ovl2_8013137C + 0
+  /* 076FA0 800FB7A0 8C8B0000 */        lw $t3, ($a0) # gpMapRoomVectors + 0
   /* 076FA4 800FB7A4 01626021 */      addu $t4, $t3, $v0
   /* 076FA8 800FB7A8 E5820020 */      swc1 $f2, 0x20($t4)
-  /* 076FAC 800FB7AC 8C8D0000 */        lw $t5, ($a0) # D_ovl2_8013137C + 0
+  /* 076FAC 800FB7AC 8C8D0000 */        lw $t5, ($a0) # gpMapRoomVectors + 0
   /* 076FB0 800FB7B0 01A21821 */      addu $v1, $t5, $v0
   /* 076FB4 800FB7B4 C4720020 */      lwc1 $f18, 0x20($v1)
   /* 076FB8 800FB7B8 E472001C */      swc1 $f18, 0x1c($v1)
-  /* 076FBC 800FB7BC 8C8E0000 */        lw $t6, ($a0) # D_ovl2_8013137C + 0
+  /* 076FBC 800FB7BC 8C8E0000 */        lw $t6, ($a0) # gpMapRoomVectors + 0
   /* 076FC0 800FB7C0 01C27821 */      addu $t7, $t6, $v0
   /* 076FC4 800FB7C4 E5F20018 */      swc1 $f18, 0x18($t7)
-  /* 076FC8 800FB7C8 8C980000 */        lw $t8, ($a0) # D_ovl2_8013137C + 0
+  /* 076FC8 800FB7C8 8C980000 */        lw $t8, ($a0) # gpMapRoomVectors + 0
   /* 076FCC 800FB7CC 0302C821 */      addu $t9, $t8, $v0
   /* 076FD0 800FB7D0 E722002C */      swc1 $f2, 0x2c($t9)
-  /* 076FD4 800FB7D4 8C880000 */        lw $t0, ($a0) # D_ovl2_8013137C + 0
+  /* 076FD4 800FB7D4 8C880000 */        lw $t0, ($a0) # gpMapRoomVectors + 0
   /* 076FD8 800FB7D8 01021821 */      addu $v1, $t0, $v0
   /* 076FDC 800FB7DC C472002C */      lwc1 $f18, 0x2c($v1)
   /* 076FE0 800FB7E0 E4720028 */      swc1 $f18, 0x28($v1)
-  /* 076FE4 800FB7E4 8C890000 */        lw $t1, ($a0) # D_ovl2_8013137C + 0
+  /* 076FE4 800FB7E4 8C890000 */        lw $t1, ($a0) # gpMapRoomVectors + 0
   /* 076FE8 800FB7E8 01225021 */      addu $t2, $t1, $v0
   /* 076FEC 800FB7EC 24420030 */     addiu $v0, $v0, 0x30
   /* 076FF0 800FB7F0 E5520024 */      swc1 $f18, 0x24($t2)
@@ -41871,11 +41871,11 @@ glabel func_ovl2_800FB808
   /* 077030 800FB830 25CE1318 */     addiu $t6, $t6, %lo(D_ovl2_80131318)
   /* 077034 800FB834 8DD80000 */        lw $t8, ($t6) # D_ovl2_80131318 + 0
   /* 077038 800FB838 27AB007C */     addiu $t3, $sp, 0x7c
-  /* 07703C 800FB83C 3C098013 */       lui $t1, %hi(D_ovl2_80131368)
+  /* 07703C 800FB83C 3C098013 */       lui $t1, %hi(gpMapGeometry)
   /* 077040 800FB840 AD780000 */        sw $t8, ($t3)
   /* 077044 800FB844 8DCF0004 */        lw $t7, 4($t6) # D_ovl2_80131318 + 4
   /* 077048 800FB848 00004025 */        or $t0, $zero, $zero
-  /* 07704C 800FB84C 3C0A8013 */       lui $t2, %hi(D_ovl2_80131304)
+  /* 07704C 800FB84C 3C0A8013 */       lui $t2, %hi(gpMapRooms)
   /* 077050 800FB850 AD6F0004 */        sw $t7, 4($t3)
   /* 077054 800FB854 8DD80008 */        lw $t8, 8($t6) # D_ovl2_80131318 + 8
   /* 077058 800FB858 24060010 */     addiu $a2, $zero, 0x10
@@ -41883,12 +41883,12 @@ glabel func_ovl2_800FB808
   /* 077060 800FB860 AD780008 */        sw $t8, 8($t3)
   /* 077064 800FB864 8DCF000C */        lw $t7, 0xc($t6) # D_ovl2_80131318 + 12
   /* 077068 800FB868 AD6F000C */        sw $t7, 0xc($t3)
-  /* 07706C 800FB86C 8D291368 */        lw $t1, %lo(D_ovl2_80131368)($t1)
+  /* 07706C 800FB86C 8D291368 */        lw $t1, %lo(gpMapGeometry)($t1)
   /* 077070 800FB870 95230000 */       lhu $v1, ($t1)
   /* 077074 800FB874 8D270010 */        lw $a3, 0x10($t1)
   /* 077078 800FB878 5860006F */     blezl $v1, .L800FBA38
   /* 07707C 800FB87C 8D780000 */        lw $t8, ($t3)
-  /* 077080 800FB880 8D4A1304 */        lw $t2, %lo(D_ovl2_80131304)($t2)
+  /* 077080 800FB880 8D4A1304 */        lw $t2, %lo(gpMapRooms)($t2)
   .L800FB884:
   /* 077084 800FB884 94F90000 */       lhu $t9, ($a3)
   /* 077088 800FB888 25080001 */     addiu $t0, $t0, 1
@@ -41914,8 +41914,8 @@ glabel func_ovl2_800FB808
   /* 0770D0 800FB8D0 948C0000 */       lhu $t4, ($a0)
   /* 0770D4 800FB8D4 00008025 */        or $s0, $zero, $zero
   /* 0770D8 800FB8D8 1B20004F */      blez $t9, .L800FBA18
-  /* 0770DC 800FB8DC 3C0F8013 */       lui $t7, %hi(D_ovl2_80131378)
-  /* 0770E0 800FB8E0 8DEF1378 */        lw $t7, %lo(D_ovl2_80131378)($t7)
+  /* 0770DC 800FB8DC 3C0F8013 */       lui $t7, %hi(gpMapVertexLinks)
+  /* 0770E0 800FB8E0 8DEF1378 */        lw $t7, %lo(gpMapVertexLinks)($t7)
   /* 0770E4 800FB8E4 000C7080 */       sll $t6, $t4, 2
   /* 0770E8 800FB8E8 00A36821 */      addu $t5, $a1, $v1
   /* 0770EC 800FB8EC 01CF8821 */      addu $s1, $t6, $t7
@@ -41923,15 +41923,15 @@ glabel func_ovl2_800FB808
   .L800FB8F4:
   /* 0770F4 800FB8F4 96380002 */       lhu $t8, 2($s1)
   /* 0770F8 800FB8F8 02206025 */        or $t4, $s1, $zero
-  /* 0770FC 800FB8FC 3C148013 */       lui $s4, %hi(D_ovl2_80131370)
+  /* 0770FC 800FB8FC 3C148013 */       lui $s4, %hi(gpMapVertexData)
   /* 077100 800FB900 0278C821 */      addu $t9, $s3, $t8
   /* 077104 800FB904 0279082A */       slt $at, $s3, $t9
   /* 077108 800FB908 1020003D */      beqz $at, .L800FBA00
   /* 07710C 800FB90C 02609025 */        or $s2, $s3, $zero
-  /* 077110 800FB910 3C0E8013 */       lui $t6, %hi(D_ovl2_80131374)
-  /* 077114 800FB914 8DCE1374 */        lw $t6, %lo(D_ovl2_80131374)($t6)
+  /* 077110 800FB910 3C0E8013 */       lui $t6, %hi(gpMapVertexID)
+  /* 077114 800FB914 8DCE1374 */        lw $t6, %lo(gpMapVertexID)($t6)
   /* 077118 800FB918 00137840 */       sll $t7, $s3, 1
-  /* 07711C 800FB91C 8E941370 */        lw $s4, %lo(D_ovl2_80131370)($s4)
+  /* 07711C 800FB91C 8E941370 */        lw $s4, %lo(gpMapVertexData)($s4)
   /* 077120 800FB920 01CFA821 */      addu $s5, $t6, $t7
   /* 077124 800FB924 96B80000 */       lhu $t8, ($s5)
   .L800FB928:
@@ -42069,12 +42069,12 @@ glabel func_ovl2_800FBA84
   /* 0772F8 800FBAF8 0000A025 */        or $s4, $zero, $zero
   /* 0772FC 800FBAFC 0000A825 */        or $s5, $zero, $zero
   /* 077300 800FBB00 1220006A */      beqz $s1, .L800FBCAC
-  /* 077304 800FBB04 3C168013 */       lui $s6, %hi(D_ovl2_8013137C)
-  /* 077308 800FBB08 26D6137C */     addiu $s6, $s6, %lo(D_ovl2_8013137C)
+  /* 077304 800FBB04 3C168013 */       lui $s6, %hi(gpMapRoomVectors)
+  /* 077308 800FBB08 26D6137C */     addiu $s6, $s6, %lo(gpMapRoomVectors)
   /* 07730C 800FBB0C 24130001 */     addiu $s3, $zero, 1
   .L800FBB10:
-  /* 077310 800FBB10 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
-  /* 077314 800FBB14 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 077310 800FBB10 3C0E8013 */       lui $t6, %hi(gpMapRooms)
+  /* 077314 800FBB14 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 077318 800FBB18 01D57821 */      addu $t7, $t6, $s5
   /* 07731C 800FBB1C 8DF80000 */        lw $t8, ($t7)
   /* 077320 800FBB20 1638003C */       bne $s1, $t8, .L800FBC14
@@ -42101,19 +42101,19 @@ glabel func_ovl2_800FBA84
   /* 077374 800FBB74 AF290008 */        sw $t1, 8($t9)
   /* 077378 800FBB78 C624001C */      lwc1 $f4, 0x1c($s1)
   /* 07737C 800FBB7C C7A60048 */      lwc1 $f6, 0x48($sp)
-  /* 077380 800FBB80 8ECA0000 */        lw $t2, ($s6) # D_ovl2_8013137C + 0
+  /* 077380 800FBB80 8ECA0000 */        lw $t2, ($s6) # gpMapRoomVectors + 0
   /* 077384 800FBB84 46062201 */     sub.s $f8, $f4, $f6
   /* 077388 800FBB88 01505821 */      addu $t3, $t2, $s0
   /* 07738C 800FBB8C E5680000 */      swc1 $f8, ($t3)
   /* 077390 800FBB90 C7B0004C */      lwc1 $f16, 0x4c($sp)
   /* 077394 800FBB94 C62A0020 */      lwc1 $f10, 0x20($s1)
-  /* 077398 800FBB98 8ECC0000 */        lw $t4, ($s6) # D_ovl2_8013137C + 0
+  /* 077398 800FBB98 8ECC0000 */        lw $t4, ($s6) # gpMapRoomVectors + 0
   /* 07739C 800FBB9C 46105481 */     sub.s $f18, $f10, $f16
   /* 0773A0 800FBBA0 01906821 */      addu $t5, $t4, $s0
   /* 0773A4 800FBBA4 E5B20004 */      swc1 $f18, 4($t5)
   /* 0773A8 800FBBA8 C7A60050 */      lwc1 $f6, 0x50($sp)
   /* 0773AC 800FBBAC C6240024 */      lwc1 $f4, 0x24($s1)
-  /* 0773B0 800FBBB0 8ECE0000 */        lw $t6, ($s6) # D_ovl2_8013137C + 0
+  /* 0773B0 800FBBB0 8ECE0000 */        lw $t6, ($s6) # gpMapRoomVectors + 0
   /* 0773B4 800FBBB4 46062201 */     sub.s $f8, $f4, $f6
   /* 0773B8 800FBBB8 01D07821 */      addu $t7, $t6, $s0
   /* 0773BC 800FBBBC 16400007 */      bnez $s2, .L800FBBDC
@@ -42222,8 +42222,8 @@ glabel func_ovl2_800FBCF8
 glabel func_ovl2_800FBD14
   /* 077514 800FBD14 27BDFF50 */     addiu $sp, $sp, -0xb0
   /* 077518 800FBD18 AFB1000C */        sw $s1, 0xc($sp)
-  /* 07751C 800FBD1C 3C118013 */       lui $s1, %hi(D_ovl2_80131368)
-  /* 077520 800FBD20 8E311368 */        lw $s1, %lo(D_ovl2_80131368)($s1)
+  /* 07751C 800FBD1C 3C118013 */       lui $s1, %hi(gpMapGeometry)
+  /* 077520 800FBD20 8E311368 */        lw $s1, %lo(gpMapGeometry)($s1)
   /* 077524 800FBD24 AFBF002C */        sw $ra, 0x2c($sp)
   /* 077528 800FBD28 AFBE0028 */        sw $fp, 0x28($sp)
   /* 07752C 800FBD2C AFB70024 */        sw $s7, 0x24($sp)
@@ -42248,11 +42248,11 @@ glabel func_ovl2_800FBD14
   /* 077578 800FBD78 E7A2009C */      swc1 $f2, 0x9c($sp)
   /* 07757C 800FBD7C 96220000 */       lhu $v0, ($s1)
   /* 077580 800FBD80 00008025 */        or $s0, $zero, $zero
-  /* 077584 800FBD84 3C128013 */       lui $s2, %hi(D_ovl2_80131304)
+  /* 077584 800FBD84 3C128013 */       lui $s2, %hi(gpMapRooms)
   /* 077588 800FBD88 18400090 */      blez $v0, .L800FBFCC
   /* 07758C 800FBD8C 24140003 */     addiu $s4, $zero, 3
   /* 077590 800FBD90 44806000 */      mtc1 $zero, $f12
-  /* 077594 800FBD94 8E521304 */        lw $s2, %lo(D_ovl2_80131304)($s2)
+  /* 077594 800FBD94 8E521304 */        lw $s2, %lo(gpMapRooms)($s2)
   /* 077598 800FBD98 24130001 */     addiu $s3, $zero, 1
   /* 07759C 800FBD9C 240C0010 */     addiu $t4, $zero, 0x10
   /* 0775A0 800FBDA0 24050006 */     addiu $a1, $zero, 6
@@ -42283,8 +42283,8 @@ glabel func_ovl2_800FBD14
   /* 0775F8 800FBDF8 95420000 */       lhu $v0, ($t2)
   /* 0775FC 800FBDFC 00003025 */        or $a2, $zero, $zero
   /* 077600 800FBE00 19C0006B */      blez $t6, .L800FBFB0
-  /* 077604 800FBE04 3C188013 */       lui $t8, %hi(D_ovl2_80131378)
-  /* 077608 800FBE08 8F181378 */        lw $t8, %lo(D_ovl2_80131378)($t8)
+  /* 077604 800FBE04 3C188013 */       lui $t8, %hi(gpMapVertexLinks)
+  /* 077608 800FBE08 8F181378 */        lw $t8, %lo(gpMapVertexLinks)($t8)
   /* 07760C 800FBE0C 00027880 */       sll $t7, $v0, 2
   /* 077610 800FBE10 01694021 */      addu $t0, $t3, $t1
   /* 077614 800FBE14 01F83821 */      addu $a3, $t7, $t8
@@ -42292,15 +42292,15 @@ glabel func_ovl2_800FBD14
   .L800FBE1C:
   /* 07761C 800FBE1C 94F90002 */       lhu $t9, 2($a3)
   /* 077620 800FBE20 00E01825 */        or $v1, $a3, $zero
-  /* 077624 800FBE24 3C168013 */       lui $s6, %hi(D_ovl2_80131370)
+  /* 077624 800FBE24 3C168013 */       lui $s6, %hi(gpMapVertexData)
   /* 077628 800FBE28 02B97021 */      addu $t6, $s5, $t9
   /* 07762C 800FBE2C 02AE082A */       slt $at, $s5, $t6
   /* 077630 800FBE30 10200059 */      beqz $at, .L800FBF98
   /* 077634 800FBE34 02A01025 */        or $v0, $s5, $zero
-  /* 077638 800FBE38 3C0F8013 */       lui $t7, %hi(D_ovl2_80131374)
-  /* 07763C 800FBE3C 8DEF1374 */        lw $t7, %lo(D_ovl2_80131374)($t7)
+  /* 077638 800FBE38 3C0F8013 */       lui $t7, %hi(gpMapVertexID)
+  /* 07763C 800FBE3C 8DEF1374 */        lw $t7, %lo(gpMapVertexID)($t7)
   /* 077640 800FBE40 0015C040 */       sll $t8, $s5, 1
-  /* 077644 800FBE44 8ED61370 */        lw $s6, %lo(D_ovl2_80131370)($s6)
+  /* 077644 800FBE44 8ED61370 */        lw $s6, %lo(gpMapVertexData)($s6)
   /* 077648 800FBE48 01F8B821 */      addu $s7, $t7, $t8
   /* 07764C 800FBE4C 96F90000 */       lhu $t9, ($s7)
   .L800FBE50:
@@ -42480,8 +42480,8 @@ glabel func_ovl2_800FC09C
   /* 0778C0 800FC0C0 0222082B */      sltu $at, $s1, $v0
   /* 0778C4 800FC0C4 1420FFFD */      bnez $at, .L800FC0BC
   /* 0778C8 800FC0C8 AE20FFFC */        sw $zero, -4($s1)
-  /* 0778CC 800FC0CC 3C068013 */       lui $a2, %hi(D_ovl2_80131368)
-  /* 0778D0 800FC0D0 8CC61368 */        lw $a2, %lo(D_ovl2_80131368)($a2)
+  /* 0778CC 800FC0CC 3C068013 */       lui $a2, %hi(gpMapGeometry)
+  /* 0778D0 800FC0D0 8CC61368 */        lw $a2, %lo(gpMapGeometry)($a2)
   /* 0778D4 800FC0D4 00002025 */        or $a0, $zero, $zero
   /* 0778D8 800FC0D8 00009025 */        or $s2, $zero, $zero
   /* 0778DC 800FC0DC 94CE0000 */       lhu $t6, ($a2)
@@ -42514,8 +42514,8 @@ glabel func_ovl2_800FC09C
   /* 077944 800FC144 5420FFEB */      bnel $at, $zero, .L800FC0F4
   /* 077948 800FC148 8FAF003C */        lw $t7, 0x3c($sp)
   .L800FC14C:
-  /* 07794C 800FC14C 3C138013 */       lui $s3, %hi(D_ovl2_80131368)
-  /* 077950 800FC150 26731368 */     addiu $s3, $s3, %lo(D_ovl2_80131368)
+  /* 07794C 800FC14C 3C138013 */       lui $s3, %hi(gpMapGeometry)
+  /* 077950 800FC150 26731368 */     addiu $s3, $s3, %lo(gpMapGeometry)
   /* 077954 800FC154 26101348 */     addiu $s0, $s0, %lo(D_ovl2_80131348)
   .L800FC158:
   /* 077958 800FC158 8E220000 */        lw $v0, ($s1)
@@ -42548,8 +42548,8 @@ glabel func_ovl2_800FC1A4
   /* 0779B4 800FC1B4 0062082B */      sltu $at, $v1, $v0
   /* 0779B8 800FC1B8 1420FFFD */      bnez $at, .L800FC1B0
   /* 0779BC 800FC1BC AC60FFFC */        sw $zero, -4($v1)
-  /* 0779C0 800FC1C0 3C048013 */       lui $a0, %hi(D_ovl2_80131368)
-  /* 0779C4 800FC1C4 8C841368 */        lw $a0, %lo(D_ovl2_80131368)($a0)
+  /* 0779C0 800FC1C0 3C048013 */       lui $a0, %hi(gpMapGeometry)
+  /* 0779C4 800FC1C4 8C841368 */        lw $a0, %lo(gpMapGeometry)($a0)
   /* 0779C8 800FC1C8 00001025 */        or $v0, $zero, $zero
   /* 0779CC 800FC1CC 24090004 */     addiu $t1, $zero, 4
   /* 0779D0 800FC1D0 948E0000 */       lhu $t6, ($a0)
@@ -42591,8 +42591,8 @@ glabel func_ovl2_800FC1A4
   /* 077A50 800FC250 24A50001 */     addiu $a1, $a1, 1
   /* 077A54 800FC254 14A9FFE3 */       bne $a1, $t1, .L800FC1E4
   /* 077A58 800FC258 24840004 */     addiu $a0, $a0, 4
-  /* 077A5C 800FC25C 3C0D8013 */       lui $t5, %hi(D_ovl2_80131368)
-  /* 077A60 800FC260 8DAD1368 */        lw $t5, %lo(D_ovl2_80131368)($t5)
+  /* 077A5C 800FC25C 3C0D8013 */       lui $t5, %hi(gpMapGeometry)
+  /* 077A60 800FC260 8DAD1368 */        lw $t5, %lo(gpMapGeometry)($t5)
   /* 077A64 800FC264 24420001 */     addiu $v0, $v0, 1
   /* 077A68 800FC268 24630012 */     addiu $v1, $v1, 0x12
   /* 077A6C 800FC26C 95A40000 */       lhu $a0, ($t5)
@@ -42632,8 +42632,8 @@ glabel func_ovl2_800FC284
   /* 077AE8 800FC2E8 3C058013 */       lui $a1, %hi(gpMapData)
   /* 077AEC 800FC2EC 24A51300 */     addiu $a1, $a1, %lo(gpMapData)
   /* 077AF0 800FC2F0 918D0001 */       lbu $t5, 1($t4)
-  /* 077AF4 800FC2F4 3C048013 */       lui $a0, %hi(D_ovl2_80131368)
-  /* 077AF8 800FC2F8 24841368 */     addiu $a0, $a0, %lo(D_ovl2_80131368)
+  /* 077AF4 800FC2F4 3C048013 */       lui $a0, %hi(gpMapGeometry)
+  /* 077AF8 800FC2F8 24841368 */     addiu $a0, $a0, %lo(gpMapGeometry)
   /* 077AFC 800FC2FC 000D70C0 */       sll $t6, $t5, 3
   /* 077B00 800FC300 020E7821 */      addu $t7, $s0, $t6
   /* 077B04 800FC304 8DF80004 */        lw $t8, 4($t7)
@@ -42643,7 +42643,7 @@ glabel func_ovl2_800FC284
   /* 077B14 800FC314 ACB90000 */        sw $t9, ($a1) # gpMapData + 0
   /* 077B18 800FC318 8F230040 */        lw $v1, 0x40($t9)
   /* 077B1C 800FC31C 14600007 */      bnez $v1, .L800FC33C
-  /* 077B20 800FC320 AC830000 */        sw $v1, ($a0) # D_ovl2_80131368 + 0
+  /* 077B20 800FC320 AC830000 */        sw $v1, ($a0) # gpMapGeometry + 0
   .L800FC324:
   /* 077B24 800FC324 0C008D89 */       jal fatal_printf
   /* 077B28 800FC328 02002025 */        or $a0, $s0, $zero
@@ -42653,14 +42653,14 @@ glabel func_ovl2_800FC284
   /* 077B38 800FC338 00000000 */       nop 
   .L800FC33C:
   /* 077B3C 800FC33C 8C6A0004 */        lw $t2, 4($v1)
-  /* 077B40 800FC340 3C018013 */       lui $at, %hi(D_ovl2_80131370)
-  /* 077B44 800FC344 AC2A1370 */        sw $t2, %lo(D_ovl2_80131370)($at)
+  /* 077B40 800FC340 3C018013 */       lui $at, %hi(gpMapVertexData)
+  /* 077B44 800FC344 AC2A1370 */        sw $t2, %lo(gpMapVertexData)($at)
   /* 077B48 800FC348 8C6B0008 */        lw $t3, 8($v1)
-  /* 077B4C 800FC34C 3C018013 */       lui $at, %hi(D_ovl2_80131374)
-  /* 077B50 800FC350 AC2B1374 */        sw $t3, %lo(D_ovl2_80131374)($at)
+  /* 077B4C 800FC34C 3C018013 */       lui $at, %hi(gpMapVertexID)
+  /* 077B50 800FC350 AC2B1374 */        sw $t3, %lo(gpMapVertexID)($at)
   /* 077B54 800FC354 8C6C000C */        lw $t4, 0xc($v1)
-  /* 077B58 800FC358 3C018013 */       lui $at, %hi(D_ovl2_80131378)
-  /* 077B5C 800FC35C AC2C1378 */        sw $t4, %lo(D_ovl2_80131378)($at)
+  /* 077B58 800FC358 3C018013 */       lui $at, %hi(gpMapVertexLinks)
+  /* 077B5C 800FC35C AC2C1378 */        sw $t4, %lo(gpMapVertexLinks)($at)
   /* 077B60 800FC360 8C6D0018 */        lw $t5, 0x18($v1)
   /* 077B64 800FC364 3C018013 */       lui $at, %hi(D_ovl2_80131380)
   /* 077B68 800FC368 0C03F027 */       jal func_ovl2_800FC09C
@@ -42730,15 +42730,15 @@ glabel func_ovl2_800FC450
   /* 077C50 800FC450 3C0E8013 */       lui $t6, %hi(gpMapData)
   /* 077C54 800FC454 8DCE1300 */        lw $t6, %lo(gpMapData)($t6)
   /* 077C58 800FC458 24040012 */     addiu $a0, $zero, 0x12
-  /* 077C5C 800FC45C 3C058013 */       lui $a1, %hi(D_ovl2_80131304)
+  /* 077C5C 800FC45C 3C058013 */       lui $a1, %hi(gpMapRooms)
   /* 077C60 800FC460 8DC20010 */        lw $v0, 0x10($t6)
-  /* 077C64 800FC464 24A51304 */     addiu $a1, $a1, %lo(D_ovl2_80131304)
+  /* 077C64 800FC464 24A51304 */     addiu $a1, $a1, %lo(gpMapRooms)
   /* 077C68 800FC468 00001825 */        or $v1, $zero, $zero
   /* 077C6C 800FC46C 8C4F0000 */        lw $t7, ($v0)
   /* 077C70 800FC470 3C018013 */       lui $at, %hi(D_ovl2_80131398)
   /* 077C74 800FC474 108F000A */       beq $a0, $t7, .L800FC4A0
   /* 077C78 800FC478 00000000 */       nop 
-  /* 077C7C 800FC47C 8CB80000 */        lw $t8, ($a1) # D_ovl2_80131304 + 0
+  /* 077C7C 800FC47C 8CB80000 */        lw $t8, ($a1) # gpMapRooms + 0
   .L800FC480:
   /* 077C80 800FC480 2442002C */     addiu $v0, $v0, 0x2c
   /* 077C84 800FC484 0303C821 */      addu $t9, $t8, $v1
@@ -42747,7 +42747,7 @@ glabel func_ovl2_800FC450
   /* 077C90 800FC490 AD000084 */        sw $zero, 0x84($t0)
   /* 077C94 800FC494 8C490000 */        lw $t1, ($v0)
   /* 077C98 800FC498 5489FFF9 */      bnel $a0, $t1, .L800FC480
-  /* 077C9C 800FC49C 8CB80000 */        lw $t8, ($a1) # D_ovl2_80131304 + 0
+  /* 077C9C 800FC49C 8CB80000 */        lw $t8, ($a1) # gpMapRooms + 0
   .L800FC4A0:
   /* 077CA0 800FC4A0 03E00008 */        jr $ra
   /* 077CA4 800FC4A4 A4201398 */        sh $zero, %lo(D_ovl2_80131398)($at)
@@ -42780,10 +42780,10 @@ glabel func_ovl2_800FC4A8
   /* 077CFC 800FC4FC C4A40000 */      lwc1 $f4, ($a1)
   /* 077D00 800FC500 01CFC021 */      addu $t8, $t6, $t7
   /* 077D04 800FC504 8F020000 */        lw $v0, ($t8)
-  /* 077D08 800FC508 3C048013 */       lui $a0, %hi(D_ovl2_8013137C)
-  /* 077D0C 800FC50C 2484137C */     addiu $a0, $a0, %lo(D_ovl2_8013137C)
+  /* 077D08 800FC508 3C048013 */       lui $a0, %hi(gpMapRoomVectors)
+  /* 077D0C 800FC50C 2484137C */     addiu $a0, $a0, %lo(gpMapRoomVectors)
   /* 077D10 800FC510 C446001C */      lwc1 $f6, 0x1c($v0)
-  /* 077D14 800FC514 8C990000 */        lw $t9, ($a0) # D_ovl2_8013137C + 0
+  /* 077D14 800FC514 8C990000 */        lw $t9, ($a0) # gpMapRoomVectors + 0
   /* 077D18 800FC518 00111880 */       sll $v1, $s1, 2
   /* 077D1C 800FC51C 46062201 */     sub.s $f8, $f4, $f6
   /* 077D20 800FC520 00711823 */      subu $v1, $v1, $s1
@@ -42792,13 +42792,13 @@ glabel func_ovl2_800FC4A8
   /* 077D2C 800FC52C E5080000 */      swc1 $f8, ($t0)
   /* 077D30 800FC530 C4AA0004 */      lwc1 $f10, 4($a1)
   /* 077D34 800FC534 C4500020 */      lwc1 $f16, 0x20($v0)
-  /* 077D38 800FC538 8C890000 */        lw $t1, ($a0) # D_ovl2_8013137C + 0
+  /* 077D38 800FC538 8C890000 */        lw $t1, ($a0) # gpMapRoomVectors + 0
   /* 077D3C 800FC53C 46105481 */     sub.s $f18, $f10, $f16
   /* 077D40 800FC540 01235021 */      addu $t2, $t1, $v1
   /* 077D44 800FC544 E5520004 */      swc1 $f18, 4($t2)
   /* 077D48 800FC548 C4A40008 */      lwc1 $f4, 8($a1)
   /* 077D4C 800FC54C C4460024 */      lwc1 $f6, 0x24($v0)
-  /* 077D50 800FC550 8C8B0000 */        lw $t3, ($a0) # D_ovl2_8013137C + 0
+  /* 077D50 800FC550 8C8B0000 */        lw $t3, ($a0) # gpMapRoomVectors + 0
   /* 077D54 800FC554 46062201 */     sub.s $f8, $f4, $f6
   /* 077D58 800FC558 01636021 */      addu $t4, $t3, $v1
   /* 077D5C 800FC55C E5880008 */      swc1 $f8, 8($t4)
@@ -42909,15 +42909,15 @@ glabel func_ovl2_800FC67C
   /* 077EC8 800FC6C8 10000014 */         b .L800FC71C
   /* 077ECC 800FC6CC 00001025 */        or $v0, $zero, $zero
   .L800FC6D0:
-  /* 077ED0 800FC6D0 3C0E8013 */       lui $t6, %hi(D_ovl2_8013136C)
-  /* 077ED4 800FC6D4 8DCE136C */        lw $t6, %lo(D_ovl2_8013136C)($t6)
+  /* 077ED0 800FC6D0 3C0E8013 */       lui $t6, %hi(gpMapVertexInfo)
+  /* 077ED4 800FC6D4 8DCE136C */        lw $t6, %lo(gpMapVertexInfo)($t6)
   /* 077ED8 800FC6D8 00117880 */       sll $t7, $s1, 2
   /* 077EDC 800FC6DC 01F17821 */      addu $t7, $t7, $s1
   /* 077EE0 800FC6E0 000F7840 */       sll $t7, $t7, 1
   /* 077EE4 800FC6E4 01CFC021 */      addu $t8, $t6, $t7
   /* 077EE8 800FC6E8 93190000 */       lbu $t9, ($t8)
-  /* 077EEC 800FC6EC 3C098013 */       lui $t1, %hi(D_ovl2_80131304)
-  /* 077EF0 800FC6F0 8D291304 */        lw $t1, %lo(D_ovl2_80131304)($t1)
+  /* 077EEC 800FC6EC 3C098013 */       lui $t1, %hi(gpMapRooms)
+  /* 077EF0 800FC6F0 8D291304 */        lw $t1, %lo(gpMapRooms)($t1)
   /* 077EF4 800FC6F4 00194080 */       sll $t0, $t9, 2
   /* 077EF8 800FC6F8 00001025 */        or $v0, $zero, $zero
   /* 077EFC 800FC6FC 01285021 */      addu $t2, $t1, $t0
@@ -42970,8 +42970,8 @@ glabel func_ovl2_800FC72C
   /* 077FA0 800FC7A0 27BD0020 */     addiu $sp, $sp, 0x20
 
 glabel func_ovl2_800FC7A4
-  /* 077FA4 800FC7A4 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 077FA8 800FC7A8 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 077FA4 800FC7A4 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 077FA8 800FC7A8 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 077FAC 800FC7AC 00803025 */        or $a2, $a0, $zero
   /* 077FB0 800FC7B0 00001825 */        or $v1, $zero, $zero
   /* 077FB4 800FC7B4 95C20014 */       lhu $v0, 0x14($t6)
@@ -43005,8 +43005,8 @@ glabel func_ovl2_800FC7A4
   /* 078010 800FC810 00000000 */       nop 
 
 glabel func_ovl2_800FC814
-  /* 078014 800FC814 3C0E8013 */       lui $t6, %hi(D_ovl2_80131368)
-  /* 078018 800FC818 8DCE1368 */        lw $t6, %lo(D_ovl2_80131368)($t6)
+  /* 078014 800FC814 3C0E8013 */       lui $t6, %hi(gpMapGeometry)
+  /* 078018 800FC818 8DCE1368 */        lw $t6, %lo(gpMapGeometry)($t6)
   /* 07801C 800FC81C 00803025 */        or $a2, $a0, $zero
   /* 078020 800FC820 00A03825 */        or $a3, $a1, $zero
   /* 078024 800FC824 95C20014 */       lhu $v0, 0x14($t6)
@@ -43025,11 +43025,11 @@ glabel func_ovl2_800FC814
   /* 078054 800FC854 00E95021 */      addu $t2, $a3, $t1
   /* 078058 800FC858 01E2C021 */      addu $t8, $t7, $v0
   /* 07805C 800FC85C 97190000 */       lhu $t9, ($t8)
-  /* 078060 800FC860 3C0B8013 */       lui $t3, %hi(D_ovl2_80131368)
+  /* 078060 800FC860 3C0B8013 */       lui $t3, %hi(gpMapGeometry)
   /* 078064 800FC864 54D90006 */      bnel $a2, $t9, .L800FC880
   /* 078068 800FC868 24840001 */     addiu $a0, $a0, 1
   /* 07806C 800FC86C AD440000 */        sw $a0, ($t2)
-  /* 078070 800FC870 8D6B1368 */        lw $t3, %lo(D_ovl2_80131368)($t3)
+  /* 078070 800FC870 8D6B1368 */        lw $t3, %lo(gpMapGeometry)($t3)
   /* 078074 800FC874 24630001 */     addiu $v1, $v1, 1
   /* 078078 800FC878 95650014 */       lhu $a1, 0x14($t3)
   /* 07807C 800FC87C 24840001 */     addiu $a0, $a0, 1
@@ -43179,8 +43179,8 @@ glabel func_ovl2_800FCA18
   /* 078270 800FCA70 000F7840 */       sll $t7, $t7, 1
   /* 078274 800FCA74 01CFC021 */      addu $t8, $t6, $t7
   /* 078278 800FCA78 93190000 */       lbu $t9, ($t8)
-  /* 07827C 800FCA7C 3C098013 */       lui $t1, %hi(D_ovl2_80131304)
-  /* 078280 800FCA80 8D291304 */        lw $t1, %lo(D_ovl2_80131304)($t1)
+  /* 07827C 800FCA7C 3C098013 */       lui $t1, %hi(gpMapRooms)
+  /* 078280 800FCA80 8D291304 */        lw $t1, %lo(gpMapRooms)($t1)
   /* 078284 800FCA84 00194080 */       sll $t0, $t9, 2
   /* 078288 800FCA88 8FBF001C */        lw $ra, 0x1c($sp)
   /* 07828C 800FCA8C 01285021 */      addu $t2, $t1, $t0
@@ -43226,15 +43226,15 @@ glabel func_ovl2_800FCAC8
   .L800FCB14:
   /* 078314 800FCB14 8DCE1378 */        lw $t6, 0x1378($t6)
   /* 078318 800FCB18 00117880 */       sll $t7, $s1, 2
-  /* 07831C 800FCB1C 3C098013 */       lui $t1, %hi(D_ovl2_80131374)
+  /* 07831C 800FCB1C 3C098013 */       lui $t1, %hi(gpMapVertexID)
   /* 078320 800FCB20 01CFC021 */      addu $t8, $t6, $t7
   /* 078324 800FCB24 97190000 */       lhu $t9, ($t8)
-  /* 078328 800FCB28 8D291374 */        lw $t1, %lo(D_ovl2_80131374)($t1)
-  /* 07832C 800FCB2C 3C0D8013 */       lui $t5, %hi(D_ovl2_80131370)
+  /* 078328 800FCB28 8D291374 */        lw $t1, %lo(gpMapVertexID)($t1)
+  /* 07832C 800FCB2C 3C0D8013 */       lui $t5, %hi(gpMapVertexData)
   /* 078330 800FCB30 00194040 */       sll $t0, $t9, 1
   /* 078334 800FCB34 01285021 */      addu $t2, $t1, $t0
   /* 078338 800FCB38 954B0000 */       lhu $t3, ($t2)
-  /* 07833C 800FCB3C 8DAD1370 */        lw $t5, %lo(D_ovl2_80131370)($t5)
+  /* 07833C 800FCB3C 8DAD1370 */        lw $t5, %lo(gpMapVertexData)($t5)
   /* 078340 800FCB40 8FBF001C */        lw $ra, 0x1c($sp)
   /* 078344 800FCB44 000B6080 */       sll $t4, $t3, 2
   /* 078348 800FCB48 018B6023 */      subu $t4, $t4, $t3
@@ -53036,9 +53036,9 @@ glabel func_ovl2_80105600
   /* 080E1C 8010561C 3C048013 */       lui $a0, %hi(gpMapData)
   /* 080E20 80105620 8C841300 */        lw $a0, %lo(gpMapData)($a0)
   /* 080E24 80105624 3C018013 */       lui $at, %hi(D_ovl2_801313E0)
-  /* 080E28 80105628 3C068013 */       lui $a2, %hi(D_ovl2_80131304)
+  /* 080E28 80105628 3C068013 */       lui $a2, %hi(gpMapRooms)
   /* 080E2C 8010562C AC2213E0 */        sw $v0, %lo(D_ovl2_801313E0)($at)
-  /* 080E30 80105630 8CC61304 */        lw $a2, %lo(D_ovl2_80131304)($a2)
+  /* 080E30 80105630 8CC61304 */        lw $a2, %lo(gpMapRooms)($a2)
   /* 080E34 80105634 24050001 */     addiu $a1, $zero, 1
   /* 080E38 80105638 0C04151F */       jal func_ovl2_8010547C
   /* 080E3C 8010563C 24840010 */     addiu $a0, $a0, 0x10
@@ -56820,8 +56820,8 @@ glabel func_ovl2_801089F4
   /* 084324 80108B24 0C002F63 */       jal func_8000BD8C
   /* 084328 80108B28 8FA50068 */        lw $a1, 0x68($sp)
   /* 08432C 80108B2C 8FA80064 */        lw $t0, 0x64($sp)
-  /* 084330 80108B30 3C198013 */       lui $t9, %hi(D_ovl2_80131304)
-  /* 084334 80108B34 8F391304 */        lw $t9, %lo(D_ovl2_80131304)($t9)
+  /* 084330 80108B30 3C198013 */       lui $t9, %hi(gpMapRooms)
+  /* 084334 80108B34 8F391304 */        lw $t9, %lo(gpMapRooms)($t9)
   /* 084338 80108B38 91090000 */       lbu $t1, ($t0)
   /* 08433C 80108B3C 8FD10074 */        lw $s1, 0x74($fp)
   /* 084340 80108B40 00009025 */        or $s2, $zero, $zero
@@ -59323,9 +59323,9 @@ glabel func_ovl2_8010AE3C
   /* 086640 8010AE40 44812000 */      mtc1 $at, $f4 # 1600.0 to cop1
   /* 086644 8010AE44 3C028013 */       lui $v0, %hi(D_ovl2_801313F0)
   /* 086648 8010AE48 244213F0 */     addiu $v0, $v0, %lo(D_ovl2_801313F0)
-  /* 08664C 8010AE4C 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
+  /* 08664C 8010AE4C 3C0E8013 */       lui $t6, %hi(gpMapRooms)
   /* 086650 8010AE50 E4440010 */      swc1 $f4, 0x10($v0) # D_ovl2_801313F0 + 16
-  /* 086654 8010AE54 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 086654 8010AE54 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 086658 8010AE58 8DCF000C */        lw $t7, 0xc($t6)
   /* 08665C 8010AE5C C5E60020 */      lwc1 $f6, 0x20($t7)
   /* 086660 8010AE60 03E00008 */        jr $ra
@@ -59336,9 +59336,9 @@ glabel func_ovl2_8010AE68
   /* 08666C 8010AE6C 44812000 */      mtc1 $at, $f4 # 960.0 to cop1
   /* 086670 8010AE70 3C028013 */       lui $v0, %hi(D_ovl2_801313F0)
   /* 086674 8010AE74 244213F0 */     addiu $v0, $v0, %lo(D_ovl2_801313F0)
-  /* 086678 8010AE78 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
+  /* 086678 8010AE78 3C0E8013 */       lui $t6, %hi(gpMapRooms)
   /* 08667C 8010AE7C E4440010 */      swc1 $f4, 0x10($v0) # D_ovl2_801313F0 + 16
-  /* 086680 8010AE80 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 086680 8010AE80 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 086684 8010AE84 8DCF000C */        lw $t7, 0xc($t6)
   /* 086688 8010AE88 C5E60020 */      lwc1 $f6, 0x20($t7)
   /* 08668C 8010AE8C 03E00008 */        jr $ra
@@ -59465,7 +59465,7 @@ glabel func_ovl2_8010AFF4
   /* 086828 8010B028 8FBF0014 */        lw $ra, 0x14($sp)
   /* 08682C 8010B02C 8C640084 */        lw $a0, 0x84($v1)
   /* 086830 8010B030 8C6F0074 */        lw $t7, 0x74($v1)
-  /* 086834 8010B034 3C188013 */       lui $t8, %hi(D_ovl2_80131304)
+  /* 086834 8010B034 3C188013 */       lui $t8, %hi(gpMapRooms)
   /* 086838 8010B038 C486007C */      lwc1 $f6, 0x7c($a0)
   /* 08683C 8010B03C C5E4001C */      lwc1 $f4, 0x1c($t7)
   /* 086840 8010B040 3C014470 */       lui $at, (0x44700000 >> 16) # 960.0
@@ -59474,7 +59474,7 @@ glabel func_ovl2_8010AFF4
   /* 08684C 8010B04C 3C0144C8 */       lui $at, (0x44C80000 >> 16) # 1600.0
   /* 086850 8010B050 24080001 */     addiu $t0, $zero, 1
   /* 086854 8010B054 E4480010 */      swc1 $f8, 0x10($v0)
-  /* 086858 8010B058 8F181304 */        lw $t8, %lo(D_ovl2_80131304)($t8)
+  /* 086858 8010B058 8F181304 */        lw $t8, %lo(gpMapRooms)($t8)
   /* 08685C 8010B05C C4400010 */      lwc1 $f0, 0x10($v0)
   /* 086860 8010B060 8F19000C */        lw $t9, 0xc($t8)
   /* 086864 8010B064 4602003C */    c.lt.s $f0, $f2

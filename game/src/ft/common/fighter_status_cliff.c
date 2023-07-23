@@ -66,7 +66,7 @@ void ftCommon_CliffCatch_SetStatus(GObj *fighter_gobj)
 void ftCommon_CliffCommon_ProcDamage(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ObjectColl *object_coll = &fp->coll_data.object_coll;
+    mpObjectColl *object_coll = &fp->coll_data.object_coll;
     Vec3f vel;
 
     if (fp->lr == RIGHT)

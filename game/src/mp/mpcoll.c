@@ -64,7 +64,7 @@ void func_ovl2_800D95E0(f32 *arg0, s32 *arg1, s32 *arg2, Vec3f *arg3)
 
 bool32 func_ovl2_800D9628(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f b;
     Vec3f a;
@@ -87,7 +87,7 @@ bool32 func_ovl2_800D9628(mpCollData *coll_data)
 
 void func_ovl2_800D96D8(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp3C;
     Vec3f sp30;
@@ -117,7 +117,7 @@ void func_ovl2_800D96D8(mpCollData *coll_data)
 
 bool32 func_ovl2_800D97F0(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f b;
     Vec3f a;
@@ -140,7 +140,7 @@ bool32 func_ovl2_800D97F0(mpCollData *coll_data)
 
 void func_ovl2_800D98A0(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp3C;
     Vec3f sp30;
@@ -182,7 +182,7 @@ void func_ovl2_800D99B8(mpCollData *coll_data)
 
 bool32 func_ovl2_800D9A00(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f b;
     Vec3f a;
@@ -202,7 +202,7 @@ bool32 func_ovl2_800D9A00(mpCollData *coll_data)
 
 void func_ovl2_800D9AB0(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp44;
     Vec3f sp38;
@@ -257,7 +257,7 @@ void func_ovl2_800D9AB0(mpCollData *coll_data)
 
 bool32 func_ovl2_800D9CC0(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f b;
     Vec3f a;
@@ -277,7 +277,7 @@ bool32 func_ovl2_800D9CC0(mpCollData *coll_data)
 
 void func_ovl2_800D9D70(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp44;
     Vec3f sp38;
@@ -344,7 +344,7 @@ void func_ovl2_800D9F84(mpCollData *coll_data)
 
 void func_ovl2_800D9FCC(mpCollData *coll_data) // Check if fighter is above ground while airborne
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp2C;
 
@@ -425,8 +425,8 @@ bool32 func_ovl2_800DA034(mpCollData *coll_data, bool32(*proc_map)(mpCollData*, 
 
 bool32 func_ovl2_800DA294(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
-    ObjectColl *p_object_coll = coll_data->p_object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *p_object_coll = coll_data->p_object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
     Vec3f sp4C;
@@ -510,7 +510,7 @@ bool32 func_ovl2_800DA294(mpCollData *coll_data)
 
 void func_ovl2_800DA658(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp94;
     Vec3f sp88;
@@ -623,8 +623,8 @@ void func_ovl2_800DA658(mpCollData *coll_data)
 
 bool32 func_ovl2_800DAAA8(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
-    ObjectColl *p_object_coll = coll_data->p_object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *p_object_coll = coll_data->p_object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
     Vec3f sp4C;
@@ -708,7 +708,7 @@ bool32 func_ovl2_800DAAA8(mpCollData *coll_data)
 
 void func_ovl2_800DAE6C(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp94;
     Vec3f sp88;
@@ -892,8 +892,8 @@ bool32 func_ovl2_800DB2BC(mpCollData *coll_data)
 
 bool32 func_ovl2_800DB474(mpCollData *coll_data, s32 arg1)
 {
-    ObjectColl *p_object_coll = coll_data->p_object_coll;
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *p_object_coll = coll_data->p_object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     s32 var_v0;
     Vec3f sp4C;
@@ -1034,8 +1034,8 @@ bool32 func_ovl2_800DB6F0(mpCollData *coll_data)
 
 bool32 func_ovl2_800DB838(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
-    ObjectColl *p_object_coll = coll_data->p_object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *p_object_coll = coll_data->p_object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
     Vec3f sp54;
@@ -1286,7 +1286,7 @@ bool32 func_ovl2_800DB838(mpCollData *coll_data)
 
 void func_ovl2_800DBF58(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp94;
     Vec3f sp88;
@@ -1402,8 +1402,8 @@ void func_ovl2_800DBF58(mpCollData *coll_data)
 
 bool32 func_ovl2_800DC3C8(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
-    ObjectColl *p_object_coll = coll_data->p_object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *p_object_coll = coll_data->p_object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
     Vec3f sp54;
@@ -1654,7 +1654,7 @@ bool32 func_ovl2_800DC3C8(mpCollData *coll_data)
 
 void func_ovl2_800DCAE8(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp94;
     Vec3f sp88;
@@ -1770,8 +1770,8 @@ void func_ovl2_800DCAE8(mpCollData *coll_data)
 
 bool32 func_ovl2_800DCF58(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
-    ObjectColl *p_object_coll = coll_data->p_object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *p_object_coll = coll_data->p_object_coll;
     Vec3f *translate = coll_data->p_translate;
     s32 unused;
     Vec3f sp4C;
@@ -1833,7 +1833,7 @@ bool32 func_ovl2_800DCF58(mpCollData *coll_data)
 
 void func_ovl2_800DD160(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp3C;
     s32 temp_v0;
@@ -1888,8 +1888,8 @@ void func_ovl2_800DD160(mpCollData *coll_data)
 
 bool32 func_ovl2_800DD2C8(mpCollData *coll_data, bool32(*proc_map)(GObj*), GObj *gobj)
 {
-    ObjectColl *p_object_coll = coll_data->p_object_coll;
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *p_object_coll = coll_data->p_object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f *pcurr = &coll_data->pos_curr;
     Vec3f sp4C;
@@ -1978,7 +1978,7 @@ bool32 func_ovl2_800DD578(mpCollData *coll_data)
 
 void func_ovl2_800DD59C(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp34;
     f32 sp30;
@@ -2009,7 +2009,7 @@ void func_ovl2_800DD59C(mpCollData *coll_data)
 
 void func_ovl2_800DD6A8(mpCollData *coll_data)
 {
-    ObjectColl *object_coll = &coll_data->object_coll;
+    mpObjectColl *object_coll = &coll_data->object_coll;
     Vec3f *translate = coll_data->p_translate;
     Vec3f sp3C;
     s32 temp_v0;
@@ -2068,7 +2068,7 @@ void func_ovl2_800DD6A8(mpCollData *coll_data)
 bool32 func_ovl2_800DD820(GObj *fighter_gobj, s32 ground_line_id)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ObjectColl *object_coll = &fp->coll_data.object_coll;
+    mpObjectColl *object_coll = &fp->coll_data.object_coll;
     Vec3f *translate = fp->coll_data.p_translate;
     Vec3f sp58;
     Vec3f sp4C;
@@ -2142,7 +2142,7 @@ setground: // ???
 bool32 func_ovl2_800DDA6C(GObj *fighter_gobj, s32 ground_line_id)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    ObjectColl *object_coll = &fp->coll_data.object_coll;
+    mpObjectColl *object_coll = &fp->coll_data.object_coll;
     Vec3f *translate = fp->coll_data.p_translate;
     Vec3f sp58;
     Vec3f sp4C;

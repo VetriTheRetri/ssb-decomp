@@ -26,7 +26,7 @@ typedef enum mpGroundAir
 
 } mpGroundAir;
 
-typedef struct CollisionGroupInfo
+typedef struct mpRoomInfo
 {
     u8 filler_0x0[0x1C];
     Vec3f dynacoll_pos;
@@ -35,52 +35,103 @@ typedef struct CollisionGroupInfo
     u8 filler_0x74[0x84 - 0x74];
     s32 collision_kind;
 
-} CollisionGroupInfo;
+} mpRoomInfo;
 
-typedef struct CollisionVertexInfo
+typedef struct mpVertexInfo
 {
-    u8 coll_group_id;
+    u8 room_id;
     u8 coll_vertex_id;
     s16 coll_pos_next;
     s16 coll_pos_prev;
     s16 coll_type_next;
     s16 coll_type_prev;
 
-} CollisionVertexInfo;
+} mpVertexInfo;
 
-typedef struct CollisionVertexLinks
+typedef struct mpVertexLinks
 {
     u16 vertex1, vertex2;
 
-} CollisionVertexLinks;
+} mpVertexLinks;
 
-typedef struct CollisionVertexArray
+typedef struct mpVertexArray
 {
-    u16 unk_vertex[1];
+    u16 vertex_id[1];
 
-} CollisionVertexArray;
+} mpVertexArray;
 
-typedef struct CollisionVertexPosition
+typedef struct mpVertexData
 {
     Vec2h pos;
-    u16 unk_0x4;
+    u16 vertex_flags; // upper 8 bits = surface type (e.g. drop-through, cliff), lower 8 bits = material (e.g. normal, damaging floor, etc.)
 
-} CollisionVertexPosition;
+} mpVertexData;
 
-typedef struct CollisionVtxPosContainer
+typedef struct mpVertexPosContainer
 {
-    CollisionVertexPosition vpos[1];
+    mpVertexData vpos[1];
 
-} CollisionVtxPosContainer;
+} mpVertexPosContainer;
 
-typedef struct _ObjectColl
+typedef struct mpLineData
+{
+    u16 group_id;
+    u16 line_count;    // Number of lines with collision type? e.g. there are 4 ground lines on Saffron City in the main group
+
+} mpLineData;
+
+typedef struct mpLineInfo
+{
+    u16 room_id; // Group that this line
+    mpLineData line_data[4];
+
+} mpLineInfo;
+
+typedef struct mpGeometryInfo // 0x80131368
+{
+    u16 room_count;
+    void *unk_mpmap_0x4;
+    void *unk_mpmap_0x8;
+    void *unk_mpmap_0xC;
+    mpLineInfo *line_info;
+
+} mpGeometryInfo;
+
+typedef struct mpVertexInfoContainer
+{
+    mpVertexInfo vertex_info[1];
+
+} mpVertexInfoContainer;
+
+typedef struct mpVertexLinksContainer
+{
+    mpVertexLinks vertex_links[1];
+
+} mpVertexLinksContainer;
+
+typedef struct mpRoomInfoContainer
+{
+    mpRoomInfo *room_info[1];
+
+} mpRoomInfoContainer;
+
+typedef enum mpLineType
+{
+    mpCollision_LineType_Ground,
+    mpCollision_LineType_Ceil,
+    mpCollision_LineType_LWall,
+    mpCollision_LineType_RWall
+
+} mpLineType;
+
+typedef struct _mpObjectColl
 {
     f32 top;
     f32 center;
     f32 bottom;
     f32 width;
 
-} ObjectColl;
+} mpObjectColl;
 
 typedef struct _mpCollData
 {
@@ -90,8 +141,8 @@ typedef struct _mpCollData
     Vec3f pos_correct; // Unconfirmed
     Vec3f pos_prev; // Unconfirmed
     Vec3f vel_push; // Applied from extern stage objects such as Whispy's Wind?
-    ObjectColl object_coll;
-    ObjectColl *p_object_coll; // Points back to collision box???
+    mpObjectColl object_coll;
+    mpObjectColl *p_object_coll; // Points back to collision box???
     Vec2f cliffcatch_coll;
     u16 coll_mask_prev;
     u16 coll_mask;

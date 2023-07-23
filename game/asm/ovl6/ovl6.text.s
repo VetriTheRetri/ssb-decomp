@@ -443,8 +443,8 @@ glabel func_ovl6_8018D6A8
   /* 111DF0 8018D6B0 AFB00020 */        sw $s0, 0x20($sp)
   /* 111DF4 8018D6B4 0C03F1CB */       jal func_ovl2_800FC72C
   /* 111DF8 8018D6B8 AFA40038 */        sw $a0, 0x38($sp)
-  /* 111DFC 8018D6BC 3C0E8013 */       lui $t6, %hi(D_ovl2_80131304)
-  /* 111E00 8018D6C0 8DCE1304 */        lw $t6, %lo(D_ovl2_80131304)($t6)
+  /* 111DFC 8018D6BC 3C0E8013 */       lui $t6, %hi(gpMapRooms)
+  /* 111E00 8018D6C0 8DCE1304 */        lw $t6, %lo(gpMapRooms)($t6)
   /* 111E04 8018D6C4 00027880 */       sll $t7, $v0, 2
   /* 111E08 8018D6C8 8FA40038 */        lw $a0, 0x38($sp)
   /* 111E0C 8018D6CC 01CFC021 */      addu $t8, $t6, $t7
@@ -521,10 +521,10 @@ glabel func_ovl6_8018D794
   /* 111F20 8018D7E0 1AA00021 */      blez $s5, .L8018D868
   /* 111F24 8018D7E4 27B0004C */     addiu $s0, $sp, 0x4c
   /* 111F28 8018D7E8 00157880 */       sll $t7, $s5, 2
-  /* 111F2C 8018D7EC 3C148013 */       lui $s4, %hi(D_ovl2_80131304)
+  /* 111F2C 8018D7EC 3C148013 */       lui $s4, %hi(gpMapRooms)
   /* 111F30 8018D7F0 3C13FFFF */       lui $s3, (0xFFFF00FF >> 16) # 4294902015
   /* 111F34 8018D7F4 367300FF */       ori $s3, $s3, (0xFFFF00FF & 0xFFFF) # 4294902015
-  /* 111F38 8018D7F8 26941304 */     addiu $s4, $s4, %lo(D_ovl2_80131304)
+  /* 111F38 8018D7F8 26941304 */     addiu $s4, $s4, %lo(gpMapRooms)
   /* 111F3C 8018D7FC 01F0B021 */      addu $s6, $t7, $s0
   /* 111F40 8018D800 2412000E */     addiu $s2, $zero, 0xe
   .L8018D804:
@@ -535,7 +535,7 @@ glabel func_ovl6_8018D794
   /* 111F54 8018D814 26100004 */     addiu $s0, $s0, 4
   /* 111F58 8018D818 0C03F1CB */       jal func_ovl2_800FC72C
   /* 111F5C 8018D81C 8E040000 */        lw $a0, ($s0)
-  /* 111F60 8018D820 8E990000 */        lw $t9, ($s4) # D_ovl2_80131304 + 0
+  /* 111F60 8018D820 8E990000 */        lw $t9, ($s4) # gpMapRooms + 0
   /* 111F64 8018D824 00024080 */       sll $t0, $v0, 2
   /* 111F68 8018D828 00402025 */        or $a0, $v0, $zero
   /* 111F6C 8018D82C 03284821 */      addu $t1, $t9, $t0
@@ -690,10 +690,10 @@ glabel func_ovl6_8018DA2C
   /* 112188 8018DA48 AFB10018 */        sw $s1, 0x18($sp)
   /* 11218C 8018DA4C 1200001D */      beqz $s0, .L8018DAC4
   /* 112190 8018DA50 AFA40028 */        sw $a0, 0x28($sp)
-  /* 112194 8018DA54 3C138013 */       lui $s3, %hi(D_ovl2_80131304)
+  /* 112194 8018DA54 3C138013 */       lui $s3, %hi(gpMapRooms)
   /* 112198 8018DA58 3C12FFFF */       lui $s2, (0xFFFF00FF >> 16) # 4294902015
   /* 11219C 8018DA5C 365200FF */       ori $s2, $s2, (0xFFFF00FF & 0xFFFF) # 4294902015
-  /* 1121A0 8018DA60 26731304 */     addiu $s3, $s3, %lo(D_ovl2_80131304)
+  /* 1121A0 8018DA60 26731304 */     addiu $s3, $s3, %lo(gpMapRooms)
   /* 1121A4 8018DA64 2411000E */     addiu $s1, $zero, 0xe
   /* 1121A8 8018DA68 8E020084 */        lw $v0, 0x84($s0)
   .L8018DA6C:
@@ -706,7 +706,7 @@ glabel func_ovl6_8018DA2C
   /* 1121C4 8018DA84 8E100004 */        lw $s0, 4($s0)
   /* 1121C8 8018DA88 0C03F1CB */       jal func_ovl2_800FC72C
   /* 1121CC 8018DA8C 8C4400EC */        lw $a0, 0xec($v0)
-  /* 1121D0 8018DA90 8E790000 */        lw $t9, ($s3) # D_ovl2_80131304 + 0
+  /* 1121D0 8018DA90 8E790000 */        lw $t9, ($s3) # gpMapRooms + 0
   /* 1121D4 8018DA94 00024080 */       sll $t0, $v0, 2
   /* 1121D8 8018DA98 03284821 */      addu $t1, $t9, $t0
   /* 1121DC 8018DA9C 8D240000 */        lw $a0, ($t1)

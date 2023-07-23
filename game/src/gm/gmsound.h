@@ -151,7 +151,8 @@ typedef enum gmSoundEffectSFX
     gmSound_SFX_SamusTurnClick = 0x7F,
     gmSound_SFX_GroundBrakeGrind,
     gmSound_SFX_UnkEchoHit1,
-    gmSound_SFX_IwarkRockCreate = 0x84,
+    gmSound_SFX_DogasGas = 0x83,
+    gmSound_SFX_IwarkRockCreate,
     gmSound_SFX_KabigonFall,
     gmSound_SFX_KabigonJump, // ???
     gmSound_SFX_UnkWhirr2,

@@ -44,7 +44,35 @@
 #define FTCATCHKIND_MASK_SPECIALHICAPTAIN   (1 << ftCatch_Kind_SpecialHiCaptain)        // 0x20
 
 #define FTCATCHKIND_MASK_NONE (0)
-#define FTCATCHKIND_MASK_ALL (FTCATCHKIND_MASK_SPECIALHICAPTAIN | FTCATCHKIND_MASK_CATCHCOMMON | FTCATCHKIND_MASK_UNUSEDCOMMON | FTCATCHKIND_MASK_CLIFFCOMMON | FTCATCHKIND_MASK_SPECIALNKIRBY | FTCATCHKIND_MASK_SPECIALNYOSHI)
+#define FTCATCHKIND_MASK_ALL            \
+(                                       \
+    FTCATCHKIND_MASK_SPECIALHICAPTAIN | \
+    FTCATCHKIND_MASK_CATCHCOMMON      | \
+    FTCATCHKIND_MASK_UNUSEDCOMMON     | \
+    FTCATCHKIND_MASK_CLIFFCOMMON      | \
+    FTCATCHKIND_MASK_SPECIALNKIRBY    | \
+    FTCATCHKIND_MASK_SPECIALNYOSHI      \
+)                                       \
+
+#define FTCOMPUTER_COMMAND_TIMER_BITS           (0x4)
+#define FTCOMPUTER_COMMAND_OPCODE_BITS          (0x4)
+
+#define FTCOMPUTER_COMMAND_BUTTON_A_PRESS       (ftComputer_Input_ButtonAPress      << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x0
+#define FTCOMPUTER_COMMAND_BUTTON_A_RELEASE     (ftComputer_Input_ButtonARelease    << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x10
+#define FTCOMPUTER_COMMAND_BUTTON_B_PRESS       (ftComputer_Input_ButtonBPress      << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x20
+#define FTCOMPUTER_COMMAND_BUTTON_B_RELEASE     (ftComputer_Input_ButtonBRelease    << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x30
+#define FTCOMPUTER_COMMAND_BUTTON_Z_PRESS       (ftComputer_Input_ButtonZPress      << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x40
+#define FTCOMPUTER_COMMAND_BUTTON_Z_RELEASE     (ftComputer_Input_ButtonZRelease    << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x50
+#define FTCOMPUTER_COMMAND_BUTTON_L_PRESS       (ftComputer_Input_ButtonLPress      << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x60
+#define FTCOMPUTER_COMMAND_BUTTON_L_RELEASE     (ftComputer_Input_ButtonLRelease    << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x70
+#define FTCOMPUTER_COMMAND_BUTTON_START_PRESS   (ftComputer_Input_ButtonStartPress  << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x80
+#define FTCOMPUTER_COMMAND_BUTTON_START_RELEASE (ftComputer_Input_ButtonStartRelease<< FTCOMPUTER_COMMAND_TIMER_BITS)   // 0x90
+#define FTCOMPUTER_COMMAND_STICK_X_TILT         (ftComputer_Input_StickXTilt        << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0xA0
+#define FTCOMPUTER_COMMAND_STICK_Y_TILT         (ftComputer_Input_StickYTilt        << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0xB0
+#define FTCOMPUTER_COMMAND_FOXSPECIALHI         (ftComputer_Input_FoxSpecialHi      << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0xC0
+#define FTCOMPUTER_COMMAND_STICK_X_VAR          (ftComputer_Input_StickXVar         << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0xD0
+#define FTCOMPUTER_COMMAND_STICK_Y_VAR          (ftComputer_Input_StickYVar         << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0xE0
+#define FTCOMPUTER_COMMAND_DEFAULT_MAX          (ftComputer_Input_EnumMax           << FTCOMPUTER_COMMAND_TIMER_BITS)   // 0xF0
 
 // Enums
 enum ftStatusUpdateFlags
@@ -63,7 +91,7 @@ enum ftStatusUpdateFlags
     ftStatusUpdate_LoopSFX_Preserve,        // Preserve looping SFX
     ftStatusUpdate_DamagePort_Preserve,     // Preserve damaging player's port ID if grounded?
     ftStatusUpdate_AfterImage_Preserve,     // Preserve sword trail display state
-    ftStatusUpdate_Rumble_Preserve          // Preserve ???
+    ftStatusUpdate_Rumble_Preserve          // Preserve rumble
 };
 
 enum ftCommonAction
@@ -475,6 +503,26 @@ enum plKind
     Pl_Kind_Result,
     Pl_Kind_Intro,
     Pl_Kind_HowToPlay
+};
+
+enum ftComputerInput
+{
+    ftComputer_Input_ButtonAPress,
+    ftComputer_Input_ButtonARelease,
+    ftComputer_Input_ButtonBPress,
+    ftComputer_Input_ButtonBRelease,
+    ftComputer_Input_ButtonZPress,
+    ftComputer_Input_ButtonZRelease,
+    ftComputer_Input_ButtonLPress,
+    ftComputer_Input_ButtonLRelease,
+    ftComputer_Input_ButtonStartPress,
+    ftComputer_Input_ButtonStartRelease,
+    ftComputer_Input_StickXTilt,
+    ftComputer_Input_StickYTilt,
+    ftComputer_Input_FoxSpecialHi,
+    ftComputer_Input_StickXVar,
+    ftComputer_Input_StickYVar,
+    ftComputer_Input_EnumMax
 };
 
 // Structs
@@ -913,7 +961,7 @@ struct ftAttributes
     f32 cam_offset_y;
     f32 cam_zoom;
     f32 cam_zoom_default;
-    ObjectColl object_coll;
+    mpObjectColl object_coll;
     Vec2f cliff_catch; // Ledge grab box
     u16 dead_sfx[2]; // KO voices
     u16 deadup_sfx;  // Star-KO voice

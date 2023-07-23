@@ -20,14 +20,14 @@ extern void func_ovl3_80180964(GObj*);
 extern void func_ovl3_801811AC(GObj*);
 extern void func_ovl3_801821E8(GObj*);
 extern void func_ovl3_801826A8(GObj*);
-extern void func_ovl3_80182F0C(GObj*);
+extern void itDogas_NActive_SetStatus(GObj*);
 extern void func_ovl3_8017ED20(GObj*);
 
 void (*Article_Pippi_ProcStatus[It_Kind_MbMonsterMax - It_Kind_MbMonsterStart])(GObj*) =
 {
     func_ovl3_8017DA60, func_ovl3_8017E648, func_ovl3_8017E828, func_ovl3_8017EFC4,
     func_ovl3_8017F5C4, func_ovl3_80180160, func_ovl3_80180964, func_ovl3_801811AC,
-    func_ovl3_801821E8, func_ovl3_801826A8, func_ovl3_80182F0C, func_ovl3_8017ED20,
+    func_ovl3_801821E8, func_ovl3_801826A8, itDogas_NActive_SetStatus, func_ovl3_8017ED20,
 };
 
 void func_ovl3_80183210(GObj *item_gobj)

@@ -1,54 +1,48 @@
 #include <ft/fighter.h>
 #include <wp/weapon.h>
 #include <it/item.h>
-#include <ft/chara/ftfox/ftox.h>
+#include <ft/chara/ftfox/ftfox.h>
 #include <gm/gmmatch.h>
 
 wpStruct* func_ovl3_80131B00(ftStruct *fp)
 {
     GObj *weapon_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
-    if (weapon_gobj != NULL)
+    while (weapon_gobj != NULL)
     {
-        do
-        {
-            wpStruct *ip = wpGetStruct(weapon_gobj);
+        wpStruct *ip = wpGetStruct(weapon_gobj);
 
-            if (ip->owner_gobj == fp->fighter_gobj)
-            {
-                return ip;
-            }
-            weapon_gobj = weapon_gobj->group_gobj_next;
-        } 
-        while (weapon_gobj != NULL);
+        if (ip->owner_gobj == fp->fighter_gobj)
+        {
+            return ip;
+        }
+        weapon_gobj = weapon_gobj->group_gobj_next;
     }
     return NULL;
 }
 
-Vec3f* func_ovl3_80131B44(ftStruct *fp, s32 wp_kind)
+// 0x80131B44
+Vec3f* ftComputer_GetWeaponKindPosition(ftStruct *fp, s32 wp_kind)
 {
     GObj *weapon_gobj = gOMObjCommonLinks[gOMObjLinkIndexWeapon];
 
-    if (weapon_gobj != NULL)
+    while (weapon_gobj != NULL)
     {
-        do
-        {
-            wpStruct *wp = wpGetStruct(weapon_gobj);
+        wpStruct *wp = wpGetStruct(weapon_gobj);
 
-            if ((wp->owner_gobj == fp->fighter_gobj) && (wp->wp_kind == wp_kind))
-            {
-                return &DObjGetStruct(wp->weapon_gobj)->translate;
-            }
-            weapon_gobj = weapon_gobj->group_gobj_next;
-        } 
-        while (weapon_gobj != NULL);
+        if ((wp->owner_gobj == fp->fighter_gobj) && (wp->wp_kind == wp_kind))
+        {
+            return &DObjGetStruct(wp->weapon_gobj)->translate;
+        }
+        weapon_gobj = weapon_gobj->group_gobj_next;
     }
     return NULL;
 }
 
-void func_ovl3_80131BA0(ftStruct *fp)
+// 0x80131BA0
+void ftComputer_SetControlPKThunder(ftStruct *fp)
 {
-    Vec3f *pos = func_ovl3_80131B44(fp, Wp_Kind_PKThunderTrail);
+    Vec3f *pos = ftComputer_GetWeaponKindPosition(fp, Wp_Kind_PKThunderTrail);
     ftComputer *ft_com = &fp->fighter_com;
 
     if (pos != NULL)
@@ -56,10 +50,10 @@ void func_ovl3_80131BA0(ftStruct *fp)
         f32 dist_x = ft_com->target_pos.x - pos->x;
         f32 dist_y = ft_com->target_pos.y - pos->y;
 
-        f32 sqrt = 1.0F / sqrtf(SQUARE(dist_x) + SQUARE(dist_y));
+        f32 scale = 1.0F / sqrtf(SQUARE(dist_x) + SQUARE(dist_y));
 
-        fp->input.cp.stick_range.x = (GCONTROLLER_RANGE_MAX_F * dist_x * sqrt);
-        fp->input.cp.stick_range.y = (GCONTROLLER_RANGE_MAX_F * dist_y * sqrt);
+        fp->input.cp.stick_range.x = (GCONTROLLER_RANGE_MAX_F * dist_x * scale);
+        fp->input.cp.stick_range.y = (GCONTROLLER_RANGE_MAX_F * dist_y * scale);
     }
     else
     {
@@ -91,53 +85,53 @@ void func_ovl3_80131C68(ftStruct *this_fp)
             {
                 command = *p_command++;
 
-                if (command < 0xF0)
+                if (command < FTCOMPUTER_COMMAND_DEFAULT_MAX)
                 {
                     ft_com->input_wait = command & 0xF;
 
-                    switch (command & 0xF0)
+                    switch (command & FTCOMPUTER_COMMAND_DEFAULT_MAX)
                     {
-                    case 0x0:
+                    case FTCOMPUTER_COMMAND_BUTTON_A_PRESS:
                         this_fp->input.cp.button_inputs |= HAL_BUTTON_A;
                         break;
 
-                    case 0x10:
+                    case FTCOMPUTER_COMMAND_BUTTON_A_RELEASE:
                         this_fp->input.cp.button_inputs &= ~HAL_BUTTON_A;
                         break;
 
-                    case 0x20:
+                    case FTCOMPUTER_COMMAND_BUTTON_B_PRESS:
                         this_fp->input.cp.button_inputs |= HAL_BUTTON_B;
                         break;
 
-                    case 0x30:
+                    case FTCOMPUTER_COMMAND_BUTTON_B_RELEASE:
                         this_fp->input.cp.button_inputs &= ~HAL_BUTTON_B;
                         break;
 
-                    case 0x40:
+                    case FTCOMPUTER_COMMAND_BUTTON_Z_PRESS:
                         this_fp->input.cp.button_inputs |= HAL_BUTTON_Z;
                         break;
 
-                    case 0x50:
+                    case FTCOMPUTER_COMMAND_BUTTON_Z_RELEASE:
                         this_fp->input.cp.button_inputs &= ~HAL_BUTTON_Z;
                         break;
 
-                    case 0x60:
+                    case FTCOMPUTER_COMMAND_BUTTON_L_PRESS:
                         this_fp->input.cp.button_inputs |= HAL_BUTTON_L;
                         break;
 
-                    case 0x70:
+                    case FTCOMPUTER_COMMAND_BUTTON_L_RELEASE:
                         this_fp->input.cp.button_inputs &= ~HAL_BUTTON_L;
                         break;
 
-                    case 0x80:
+                    case FTCOMPUTER_COMMAND_BUTTON_START_PRESS:
                         this_fp->input.cp.button_inputs |= HAL_BUTTON_START;
                         break;
 
-                    case 0x90:
+                    case FTCOMPUTER_COMMAND_BUTTON_START_RELEASE:
                         this_fp->input.cp.button_inputs &= ~HAL_BUTTON_START;
                         break;
 
-                    case 0xA0:
+                    case FTCOMPUTER_COMMAND_STICK_X_TILT:
                         switch (*p_command)
                         {
                         default:
@@ -156,7 +150,7 @@ void func_ovl3_80131C68(ftStruct *this_fp)
                         }
                         break;
 
-                    case 0xB0:
+                    case FTCOMPUTER_COMMAND_STICK_Y_TILT:
                         switch (*p_command)
                         {
                         default:
@@ -175,7 +169,7 @@ void func_ovl3_80131C68(ftStruct *this_fp)
                         }
                         break;
 
-                    case 0xC0:
+                    case FTCOMPUTER_COMMAND_FOXSPECIALHI:
                         dist_x = ft_com->target_pos.x - this_fp->joint[ftParts_TopN_Joint]->translate.x;
                         dist_y = ft_com->target_pos.y - this_fp->joint[ftParts_TopN_Joint]->translate.y;
 
@@ -283,29 +277,35 @@ void func_ovl3_80131C68(ftStruct *this_fp)
                             this_fp->input.cp.stick_range.x = this_fp->input.cp.stick_range.y = 0;
                         }
                         break;
-                    case 0xD0:
+
+                    case FTCOMPUTER_COMMAND_STICK_X_VAR:
                         this_fp->input.cp.stick_range.x = var_t1;
                         break;
-                    case 0xE0:
+
+                    case FTCOMPUTER_COMMAND_STICK_Y_VAR:
                         this_fp->input.cp.stick_range.y = var_t1;
                         break;
                     }
                 }
                 else switch (command)
                 {
-                case 0xF0:
+                case FTCOMPUTER_COMMAND_DEFAULT_MAX + 0:
                     ft_com->input_wait = *p_command++;
                     break;
-                case 0xF1:
+
+                case FTCOMPUTER_COMMAND_DEFAULT_MAX + 1:
                     var_t1 = 1;
                     break;
-                case 0xF2:
+
+                case FTCOMPUTER_COMMAND_DEFAULT_MAX + 2:
                     ft_com->input_wait = var_t1;
                     break;
-                case 0xF3:
-                    func_ovl3_80131BA0(this_fp);
+
+                case FTCOMPUTER_COMMAND_DEFAULT_MAX + 3:
+                    ftComputer_SetControlPKThunder(this_fp);
                     break;
-                case 0xFF:
+
+                case FTCOMPUTER_COMMAND_DEFAULT_MAX + 0xF:
                     ft_com->input_wait = 0;
                     ft_com->p_command = NULL;
                     return;
@@ -316,7 +316,7 @@ void func_ovl3_80131C68(ftStruct *this_fp)
     }
 }
 
-extern u8 *ftComputer_Script[]; // CPU player commands
+extern u8 *gpComputerPlayerScripts[]; // CPU player commands
 
 void func_ovl3_80132564(ftStruct *fp, s32 index)
 {
@@ -330,7 +330,7 @@ void func_ovl3_80132564(ftStruct *fp, s32 index)
     {
         ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) / 2) + 1.0F);
     }
-    ft_com->p_command = ftComputer_Script[index];
+    ft_com->p_command = gpComputerPlayerScripts[index];
 }
 
 void func_ovl3_80132758(ftStruct *fp, s32 index)
@@ -338,7 +338,7 @@ void func_ovl3_80132758(ftStruct *fp, s32 index)
     ftComputer *ft_com = &fp->fighter_com;
 
     ft_com->input_wait = 1;
-    ft_com->p_command = ftComputer_Script[index];
+    ft_com->p_command = gpComputerPlayerScripts[index];
 }
 
 void func_ovl3_80132778(ftStruct *fp, s32 index)
@@ -353,7 +353,7 @@ void func_ovl3_80132778(ftStruct *fp, s32 index)
     {
         ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + (GMCOMPLAYER_LEVEL_MAX - fp->cp_level) + 1.0F);
     }
-    ft_com->p_command = ftComputer_Script[index];
+    ft_com->p_command = gpComputerPlayerScripts[index];
 }
 
 static gmUnkInfo_80131308 D_ovl2_80131308; // Extern

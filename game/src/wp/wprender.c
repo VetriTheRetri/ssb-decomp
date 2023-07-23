@@ -97,7 +97,7 @@ void wpRender_DisplayMapCollisions(GObj *weapon_gobj) // Render item ECB?
 {
     wpStruct *ip = wpGetStruct(weapon_gobj);
     Vec3f *translate = &DObjGetStruct(weapon_gobj)->translate;
-    ObjectColl *object_coll = &ip->coll_data.object_coll;
+    mpObjectColl *object_coll = &ip->coll_data.object_coll;
     MtxStore mtx_store;
 
     gDPPipeSync(gpDisplayListHead[1]++);

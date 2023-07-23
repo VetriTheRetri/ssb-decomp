@@ -1,6 +1,6 @@
 #include <ft/fighter.h>
 #include <ft/chara/ftmario/ftmario.h>
-#include <ft/chara/ftfox/ftox.h>
+#include <ft/chara/ftfox/ftfox.h>
 #include <ft/chara/ftdonkey/ftdonkey.h>
 #include <ft/chara/ftsamus/ftsamus.h>
 #include <ft/chara/ftlink/ftlink.h>

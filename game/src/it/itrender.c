@@ -145,7 +145,7 @@ void itRender_DisplayMapCollisions(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
     Vec3f *translate = &DObjGetStruct(item_gobj)->translate;
-    ObjectColl *object_coll = &ip->coll_data.object_coll;
+    mpObjectColl *object_coll = &ip->coll_data.object_coll;
     MtxStore mtx_store;
 
     gDPPipeSync(gpDisplayListHead[1]++);
