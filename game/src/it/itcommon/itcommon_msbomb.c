@@ -269,17 +269,17 @@ void itMSBomb_GAttach_UpdateSurfaceData(GObj *item_gobj)
     }
     else
     {
-        if (coll_data->coll_mask & MPCOLL_MASK_LWALL)
-        {
-            angle = coll_data->lwall_angle;
-
-            ip->attach_line_id = coll_data->lwall_line_id;
-        }
         if (coll_data->coll_mask & MPCOLL_MASK_RWALL)
         {
             angle = coll_data->rwall_angle;
 
             ip->attach_line_id = coll_data->rwall_line_id;
+        }
+        if (coll_data->coll_mask & MPCOLL_MASK_LWALL)
+        {
+            angle = coll_data->lwall_angle;
+
+            ip->attach_line_id = coll_data->lwall_line_id;
         }
     }
     joint->rotate.z = atan2f(angle.y, angle.x) - HALF_PI32;

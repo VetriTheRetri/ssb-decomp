@@ -36766,7 +36766,7 @@ glabel func_ovl2_800F6B58
   /* 07277C 800F6F7C AFAE0020 */        sw $t6, 0x20($sp)
   /* 072780 800F6F80 AFAD0024 */        sw $t5, 0x24($sp)
   /* 072784 800F6F84 E7A80014 */      swc1 $f8, 0x14($sp)
-  /* 072788 800F6F88 0C03DC9C */       jal mpCollision_CheckLWallSurfaceTilt
+  /* 072788 800F6F88 0C03DC9C */       jal mpCollision_CheckRWallSurfaceTilt
   /* 07278C 800F6F8C E7AA001C */      swc1 $f10, 0x1c($sp)
   /* 072790 800F6F90 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 072794 800F6F94 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
@@ -36975,7 +36975,7 @@ glabel mpCollision_GetLRAngle
   /* 072A68 800F7268 03E00008 */        jr $ra
   /* 072A6C 800F726C 00000000 */       nop 
 
-glabel mpCollision_CheckLWallSurfaceTilt
+glabel mpCollision_CheckRWallSurfaceTilt
   /* 072A70 800F7270 27BDFF98 */     addiu $sp, $sp, -0x68
   /* 072A74 800F7274 C7AC0078 */      lwc1 $f12, 0x78($sp)
   /* 072A78 800F7278 C7AE0080 */      lwc1 $f14, 0x80($sp)
@@ -37563,7 +37563,7 @@ glabel func_ovl2_800F769C
   /* 0732F0 800F7AF0 AFB80020 */        sw $t8, 0x20($sp)
   /* 0732F4 800F7AF4 AFB90024 */        sw $t9, 0x24($sp)
   /* 0732F8 800F7AF8 E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 0732FC 800F7AFC 0C03DC9C */       jal mpCollision_CheckLWallSurfaceTilt
+  /* 0732FC 800F7AFC 0C03DC9C */       jal mpCollision_CheckRWallSurfaceTilt
   /* 073300 800F7B00 E7A8001C */      swc1 $f8, 0x1c($sp)
   /* 073304 800F7B04 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 073308 800F7B08 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
@@ -38137,7 +38137,7 @@ glabel func_ovl2_800F7F00
   /* 073B24 800F8324 AFAE0020 */        sw $t6, 0x20($sp)
   /* 073B28 800F8328 AFAD0024 */        sw $t5, 0x24($sp)
   /* 073B2C 800F832C E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 073B30 800F8330 0C03E152 */       jal mpCollision_CheckRWallSurfaceTilt
+  /* 073B30 800F8330 0C03E152 */       jal mpCollision_CheckLWallSurfaceTilt
   /* 073B34 800F8334 E7AA001C */      swc1 $f10, 0x1c($sp)
   /* 073B38 800F8338 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 073B3C 800F833C 3C0A8013 */       lui $t2, %hi(gpMapVertexID)
@@ -38288,7 +38288,7 @@ glabel func_ovl2_800F7F00
   /* 073D40 800F8540 03E00008 */        jr $ra
   /* 073D44 800F8544 27BD0100 */     addiu $sp, $sp, 0x100
 
-glabel mpCollision_CheckRWallSurfaceTilt
+glabel mpCollision_CheckLWallSurfaceTilt
   /* 073D48 800F8548 27BDFF98 */     addiu $sp, $sp, -0x68
   /* 073D4C 800F854C C7AC0078 */      lwc1 $f12, 0x78($sp)
   /* 073D50 800F8550 C7AE0080 */      lwc1 $f14, 0x80($sp)
@@ -38876,7 +38876,7 @@ glabel func_ovl2_800F8974
   /* 0745C8 800F8DC8 AFB80020 */        sw $t8, 0x20($sp)
   /* 0745CC 800F8DCC AFB90024 */        sw $t9, 0x24($sp)
   /* 0745D0 800F8DD0 E7A60014 */      swc1 $f6, 0x14($sp)
-  /* 0745D4 800F8DD4 0C03E152 */       jal mpCollision_CheckRWallSurfaceTilt
+  /* 0745D4 800F8DD4 0C03E152 */       jal mpCollision_CheckLWallSurfaceTilt
   /* 0745D8 800F8DD8 E7AA001C */      swc1 $f10, 0x1c($sp)
   /* 0745DC 800F8DDC 3C098013 */       lui $t1, %hi(gpMapVertexData)
   /* 0745E0 800F8DE0 3C0A8013 */       lui $t2, %hi(gpMapVertexID)

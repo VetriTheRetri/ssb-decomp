@@ -380,7 +380,7 @@ bool32 itGShell_GSpin_ProcMap(GObj *item_gobj)
 {
     func_ovl3_801735A0(item_gobj, itGShell_AFall_SetStatus);
 
-    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL), 0.2F, NULL) != FALSE)
+    if (itMap_CheckCollideAllRebound(item_gobj, (MPCOLL_MASK_CEIL | MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL), 0.2F, NULL) != FALSE)
     {
         itMain_VelSetRotateStepLR(item_gobj);
         itMain_ClearOwnerStats(item_gobj);

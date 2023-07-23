@@ -2186,7 +2186,7 @@ void ftKirby_MapCheckSpawnStarGFX(GObj *fighter_gobj)
 
     if (coll_mask)
     {
-        if (coll_mask & MPCOLL_MASK_LWALL)
+        if (coll_mask & MPCOLL_MASK_RWALL)
         {
             pos = DObjGetStruct(fighter_gobj)->translate;
 
@@ -2195,7 +2195,7 @@ void ftKirby_MapCheckSpawnStarGFX(GObj *fighter_gobj)
 
             func_ovl2_80102018(&pos);
         }
-        if (coll_mask & MPCOLL_MASK_RWALL)
+        if (coll_mask & MPCOLL_MASK_LWALL)
         {
             pos = DObjGetStruct(fighter_gobj)->translate;
 

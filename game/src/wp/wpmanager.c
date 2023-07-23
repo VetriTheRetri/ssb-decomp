@@ -282,8 +282,8 @@ GObj* wpManager_MakeWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, Vec
 
     wp->coll_data.ground_line_id = -1;
     wp->coll_data.ceil_line_id = -1;
-    wp->coll_data.lwall_line_id = -1;
     wp->coll_data.rwall_line_id = -1;
+    wp->coll_data.lwall_line_id = -1;
 
     wp->coll_data.wall_flag = D_ovl2_80131398;
     wp->coll_data.coll_mask = 0;

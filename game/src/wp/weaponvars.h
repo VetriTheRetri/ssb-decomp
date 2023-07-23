@@ -35,9 +35,9 @@
 #define WPPIKACHUJOLT_ROTATE_ANGLE_MAX 1.7453293F               
 #define WPPIKACHUJOLT_ANIM_PUSH_FRAME 7.5F                      // Frame on which Thunder Jolt gets pushed ahead to simulate movement?
 #define WPPIKACHUJOLT_COLL_GROUND 0                             // ID of Thunder Jolt collision type
-#define WPPIKACHUJOLT_COLL_LWALL 1                              // ID of Thunder Jolt collision type
+#define WPPIKACHUJOLT_COLL_RWALL 1                              // ID of Thunder Jolt collision type
 #define WPPIKACHUJOLT_COLL_CEIL 2                               // ID of Thunder Jolt collision type
-#define WPPIKACHUJOLT_COLL_RWALL 3                              // ID of Thunder Jolt collision type
+#define WPPIKACHUJOLT_COLL_LWALL 3                              // ID of Thunder Jolt collision type
 
 #define WPPIKACHUTHUNDER_TEXTURE_COUNT 4                        // Number of textures Thunder contains
 #define WPPIKACHUTHUNDER_SPAWN_LIFETIME 40                      // Duration of inital Thunder projectile?

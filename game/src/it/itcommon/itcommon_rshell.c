@@ -505,7 +505,7 @@ bool32 itRShell_GSpin_ProcMap(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
 
-    if ((func_ovl3_801735A0(item_gobj, itRShell_ASpin_SetStatus) != FALSE) && (ip->coll_data.coll_mask & (MPCOLL_MASK_RWALL | MPCOLL_MASK_LWALL)))
+    if ((func_ovl3_801735A0(item_gobj, itRShell_ASpin_SetStatus) != FALSE) && (ip->coll_data.coll_mask & (MPCOLL_MASK_LWALL | MPCOLL_MASK_RWALL)))
     {
         ip->phys_info.vel_air.x = -ip->phys_info.vel_air.x;
 

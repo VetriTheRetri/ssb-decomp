@@ -1385,7 +1385,7 @@ bool32 func_ovl2_800F6B58(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
-        line_data = &line_info->line_data[mpCollision_LineType_LWall];
+        line_data = &line_info->line_data[mpCollision_LineType_RWall];
         room_info = gpMapRooms->room_info[line_info->room_id];
 
         if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
@@ -1478,7 +1478,7 @@ bool32 func_ovl2_800F6B58(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                 }
                             }
                         }
-                        else if (mpCollision_CheckLWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
+                        else if (mpCollision_CheckRWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
                             if (line_project_pos <= ((spB0 < vpdist_x) ? -(spB0 - vpdist_x) : (spB0 - vpdist_x))) continue;
 
@@ -1517,7 +1517,7 @@ bool32 func_ovl2_800F6B58(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 }
 
 // 0x800F7270
-bool32 mpCollision_CheckLWallSurfaceTilt(s32 v1x, s32 v1y, s32 v2x, s32 v2y, f32 d1x, f32 d1y, f32 d2x, f32 d2y, f32 *dfx, f32 *dfy)
+bool32 mpCollision_CheckRWallSurfaceTilt(s32 v1x, s32 v1y, s32 v2x, s32 v2y, f32 d1x, f32 d1y, f32 d2x, f32 d2y, f32 *dfx, f32 *dfy)
 {
     s32 vfarx;
     s32 vnearx;
@@ -1669,7 +1669,7 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
-        line_data = &line_info->line_data[mpCollision_LineType_LWall];
+        line_data = &line_info->line_data[mpCollision_LineType_RWall];
         room_info = gpMapRooms->room_info[line_info->room_id];
 
         if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
@@ -1765,7 +1765,7 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                 }
                             }
                         }
-                        else if (mpCollision_CheckLWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
+                        else if (mpCollision_CheckRWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
                             if (line_project_pos <= ((spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x)))) continue;
 
@@ -1888,7 +1888,7 @@ bool32 func_ovl2_800F7F00(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
-        line_data = &line_info->line_data[mpCollision_LineType_RWall];
+        line_data = &line_info->line_data[mpCollision_LineType_LWall];
         room_info = gpMapRooms->room_info[line_info->room_id];
 
         if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
@@ -1981,7 +1981,7 @@ bool32 func_ovl2_800F7F00(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                 }
                             }
                         }
-                        else if (mpCollision_CheckRWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
+                        else if (mpCollision_CheckLWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
                             if (line_project_pos <= ((spB0 < vpdist_x) ? -(spB0 - vpdist_x) : (spB0 - vpdist_x))) continue;
 
@@ -2019,7 +2019,7 @@ bool32 func_ovl2_800F7F00(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     else return TRUE;
 }
 
-bool32 mpCollision_CheckRWallSurfaceTilt(s32 v1x, s32 v1y, s32 v2x, s32 v2y, f32 d1x, f32 d1y, f32 d2x, f32 d2y, f32 *dfx, f32 *dfy)
+bool32 mpCollision_CheckLWallSurfaceTilt(s32 v1x, s32 v1y, s32 v2x, s32 v2y, f32 d1x, f32 d1y, f32 d2x, f32 d2y, f32 *dfx, f32 *dfy)
 {
     s32 vfarx;
     s32 vnearx;
@@ -2171,7 +2171,7 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
-        line_data = &line_info->line_data[mpCollision_LineType_RWall];
+        line_data = &line_info->line_data[mpCollision_LineType_LWall];
         room_info = gpMapRooms->room_info[line_info->room_id];
 
         if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
@@ -2267,7 +2267,7 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                 }
                             }
                         }
-                        else if (mpCollision_CheckRWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
+                        else if (mpCollision_CheckLWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
                             if (line_project_pos <= ((spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x)))) continue;
 

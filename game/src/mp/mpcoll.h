@@ -119,8 +119,8 @@ typedef enum mpLineType
 {
     mpCollision_LineType_Ground,
     mpCollision_LineType_Ceil,
-    mpCollision_LineType_LWall,
-    mpCollision_LineType_RWall
+    mpCollision_LineType_RWall,
+    mpCollision_LineType_LWall
 
 } mpLineType;
 
@@ -162,13 +162,13 @@ typedef struct _mpCollData
     u32 ceil_flags;
     Vec3f ceil_angle;
 
-    s32 lwall_line_id; // Clipping ID of last left wall interacted with
-    u32 lwall_flags;
-    Vec3f lwall_angle;
-
-    s32 rwall_line_id;
+    s32 rwall_line_id; // Clipping ID of last left wall interacted with
     u32 rwall_flags;
     Vec3f rwall_angle;
+
+    s32 lwall_line_id;
+    u32 lwall_flags;
+    Vec3f lwall_angle;
 
     s32 cliff_id; // Ledge ID
     s32 ignore_line_id; // Ignore this line when checking for collision
