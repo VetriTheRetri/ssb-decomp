@@ -403,7 +403,7 @@ glabel gpMapRoomVectors
     .space 4
 glabel D_ovl2_80131380
     .space 4
-glabel D_ovl2_80131384
+glabel gMapVertexGroupCount
     .space 4
 glabel D_ovl2_80131388
     .space 4

@@ -595,7 +595,6 @@ void ftNess_JibakuAir_ProcMap(GObj *fighter_gobj)
     }
     if (fp->coll_data.coll_mask & MPCOLL_MASK_LWALL)
     {
-
         if (vec3f_angle_diff(&fp->coll_data.lwall_angle, &fp->phys_info.vel_air) > FTNESS_PKJIBAKU_HALT_ANGLE)
         {
             pos.x += fp->coll_data.object_coll.width;

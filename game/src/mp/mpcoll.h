@@ -43,8 +43,8 @@ typedef struct mpVertexInfo
     u8 coll_vertex_id;
     s16 coll_pos_next;
     s16 coll_pos_prev;
-    s16 coll_type_next;
-    s16 coll_type_prev;
+    s16 edge_psign_id;  // PSign = positive sign -> collision types that use +1 for orientation (Upper/Ground and Right)
+    s16 edge_nsign_id;  // NSign = negative sign -> collision types that use -1 for orientation (Under/Down/Ceil and Left)
 
 } mpVertexInfo;
 
@@ -94,6 +94,7 @@ typedef struct mpGeometryInfo // 0x80131368
     void *unk_mpmap_0x8;
     void *unk_mpmap_0xC;
     mpLineInfo *line_info;
+    u16 unk_mpgeo_count;
 
 } mpGeometryInfo;
 
@@ -114,6 +115,19 @@ typedef struct mpRoomInfoContainer
     mpRoomInfo *room_info[1];
 
 } mpRoomInfoContainer;
+
+typedef struct mpUnkVectorData
+{
+    u16 mpvector_id;
+    Vec2h pos;
+
+} mpUnkVectorData;
+
+typedef struct mpUnkVectorContainer
+{
+    mpUnkVectorData vector_data[1];
+
+} mpUnkVectorContainer;
 
 typedef enum mpLineType
 {

@@ -41298,8 +41298,8 @@ glabel func_ovl2_800FAF64
   /* 07680C 800FB00C 00000000 */       nop 
 
 glabel func_ovl2_800FB010
-  /* 076810 800FB010 3C048013 */       lui $a0, %hi(D_ovl2_80131384)
-  /* 076814 800FB014 8C841384 */        lw $a0, %lo(D_ovl2_80131384)($a0)
+  /* 076810 800FB010 3C048013 */       lui $a0, %hi(gMapVertexGroupCount)
+  /* 076814 800FB014 8C841384 */        lw $a0, %lo(gMapVertexGroupCount)($a0)
   /* 076818 800FB018 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07681C 800FB01C AFBF0014 */        sw $ra, 0x14($sp)
   /* 076820 800FB020 00800821 */      addu $at, $a0, $zero
@@ -41516,8 +41516,8 @@ glabel func_ovl2_800FB2A0
 
 glabel func_ovl2_800FB31C
   /* 076B1C 800FB31C 27BDFFD0 */     addiu $sp, $sp, -0x30
-  /* 076B20 800FB320 3C0B8013 */       lui $t3, %hi(D_ovl2_80131384)
-  /* 076B24 800FB324 8D6B1384 */        lw $t3, %lo(D_ovl2_80131384)($t3)
+  /* 076B20 800FB320 3C0B8013 */       lui $t3, %hi(gMapVertexGroupCount)
+  /* 076B24 800FB324 8D6B1384 */        lw $t3, %lo(gMapVertexGroupCount)($t3)
   /* 076B28 800FB328 AFB00008 */        sw $s0, 8($sp)
   /* 076B2C 800FB32C AFBF002C */        sw $ra, 0x2c($sp)
   /* 076B30 800FB330 AFBE0028 */        sw $fp, 0x28($sp)
@@ -41596,7 +41596,7 @@ glabel func_ovl2_800FB31C
   /* 076C38 800FB438 00000000 */       nop 
   .L800FB43C:
   /* 076C3C 800FB43C 8E990000 */        lw $t9, ($s4) # gpMapVertexInfo + 0
-  /* 076C40 800FB440 3C0B8013 */       lui $t3, %hi(D_ovl2_80131384)
+  /* 076C40 800FB440 3C0B8013 */       lui $t3, %hi(gMapVertexGroupCount)
   /* 076C44 800FB444 03311821 */      addu $v1, $t9, $s1
   /* 076C48 800FB448 90620001 */       lbu $v0, 1($v1)
   /* 076C4C 800FB44C 10400009 */      beqz $v0, .L800FB474
@@ -41652,7 +41652,7 @@ glabel func_ovl2_800FB31C
   /* 076D04 800FB504 03117021 */      addu $t6, $t8, $s1
   /* 076D08 800FB508 A5CD0008 */        sh $t5, 8($t6)
   .L800FB50C:
-  /* 076D0C 800FB50C 8D6B1384 */        lw $t3, %lo(D_ovl2_80131384)($t3)
+  /* 076D0C 800FB50C 8D6B1384 */        lw $t3, %lo(gMapVertexGroupCount)($t3)
   /* 076D10 800FB510 26100001 */     addiu $s0, $s0, 1
   /* 076D14 800FB514 26B50004 */     addiu $s5, $s5, 4
   /* 076D18 800FB518 020B082A */       slt $at, $s0, $t3
@@ -42666,8 +42666,8 @@ glabel func_ovl2_800FC284
   /* 077B68 800FC368 0C03F027 */       jal func_ovl2_800FC09C
   /* 077B6C 800FC36C AC2D1380 */        sw $t5, %lo(D_ovl2_80131380)($at)
   /* 077B70 800FC370 3C108013 */       lui $s0, %hi(gpMapData)
-  /* 077B74 800FC374 3C018013 */       lui $at, %hi(D_ovl2_80131384)
-  /* 077B78 800FC378 AC221384 */        sw $v0, %lo(D_ovl2_80131384)($at)
+  /* 077B74 800FC374 3C018013 */       lui $at, %hi(gMapVertexGroupCount)
+  /* 077B78 800FC378 AC221384 */        sw $v0, %lo(gMapVertexGroupCount)($at)
   /* 077B7C 800FC37C 0C03F069 */       jal func_ovl2_800FC1A4
   /* 077B80 800FC380 26101300 */     addiu $s0, $s0, %lo(gpMapData)
   /* 077B84 800FC384 0C03EC04 */       jal func_ovl2_800FB010

@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\asm",
-    "\\game\\asm\\ovl2",
     "\\game\\src",
+    "\\game\\src\\ft",
+    "\\game\\src\\ft\\chara",
+    "\\game\\src\\ft\\chara\\ftness",
     "\\game\\src\\it",
     "\\game\\src\\it\\itmonster",
     "\\game\\src\\mp",
     "\\game\\src\\ovl2",
     "\\game\\src\\wp"
   ],
-  "SelectedNode": "\\game\\src\\mp\\mpcoll_uu.c",
   "PreviewInSolutionExplorer": false
 }
