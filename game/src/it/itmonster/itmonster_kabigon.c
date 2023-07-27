@@ -24,7 +24,7 @@ bool32 func_ovl3_8017E070(GObj *item_gobj)
     }
     ap->item_vars.kabigon.rumble_wait--;
 
-    if (joint->translate.y < (gpMapData->blastzone_bottom + ITKABIGON_MAP_OFF_Y))
+    if (joint->translate.y < (gpGroundInfo->blastzone_bottom + ITKABIGON_MAP_OFF_Y))
     {
         return TRUE;
     }
@@ -118,7 +118,7 @@ bool32 func_ovl3_8017E384(GObj *item_gobj)
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    if ((gpMapData->blastzone_top - ITKABIGON_MAP_OFF_Y) <= joint->translate.y)
+    if ((gpGroundInfo->blastzone_top - ITKABIGON_MAP_OFF_Y) <= joint->translate.y)
     {
         ap->it_multi--;
 

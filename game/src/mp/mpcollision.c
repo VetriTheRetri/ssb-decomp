@@ -1,14 +1,21 @@
 #include "mpcoll.h"
-#include "gmmisc.h"
+#include <gm/gmmisc.h>
+#include <gm/gmground.h>
 
-extern mpRoomInfoContainer *gpMapRooms;
+extern mpEdgeBounds gMapEdgeBounds;
+extern mpRoomDObj *gpMapRooms;
+extern mpLineGroup gMapLineTypeGroups[mpCollision_LineType_EnumMax];
 extern mpGeometryInfo *gpMapGeometry;
 extern mpVertexInfoContainer *gpMapVertexInfo;
 extern mpVertexArray *gpMapVertexID;
 extern mpVertexLinks *gpMapVertexLinks;   //
 extern mpVertexPosContainer *gpMapVertexData; // Vertex positions
-extern Vec3f *gpMapRoomVectors;
+extern Vec3f *gpMapDynamicCollisions;
 extern mpUnkVectorContainer *D_ovl2_80131380;
+extern s32 gMapLineCount;
+extern s32 gMapRoomCount;
+extern u16 D_ovl2_80131398;
+
 
 f32 func_ovl2_800F39F0(f32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
@@ -24,7 +31,7 @@ f32 func_ovl2_800F3A34(f32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 bool32 mpCollision_GetUUCommon(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *flags, Vec3f *angle, s32 lr)
 {
     mpVertexLinks *vlinks;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     f32 vnear;
     u16 *pv;
     s32 v1x;
@@ -47,9 +54,9 @@ bool32 mpCollision_GetUUCommon(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *f
             scnmgr_crash_print_gobj_state();
         }
     }
-    room_info = gpMapRooms->room_info[gpMapVertexInfo->vertex_info[line_id].room_id];
+    room_dobj = gpMapRooms->room_dobj[gpMapVertexInfo->vertex_info[line_id].room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -60,10 +67,10 @@ bool32 mpCollision_GetUUCommon(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *f
     }
     vlinks = &gpMapVertexLinks[line_id];
 
-    if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+    if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
     {
-        object_pos_x = object_pos->x - room_info->dynacoll_pos.x;
-        object_pos_y = object_pos->y - room_info->dynacoll_pos.y;
+        object_pos_x = object_pos->x - room_dobj->translate.x;
+        object_pos_y = object_pos->y - room_dobj->translate.y;
     }
     else
     {
@@ -152,7 +159,7 @@ bool32 func_ovl2_800F3E04(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *flags,
 bool32 mpCollision_GetLRCommon(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *flags, Vec3f *angle, s32 lr)
 {
     mpVertexLinks *vlinks;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     f32 vnear;
     f32 vfar;
     s32 v1x;
@@ -175,9 +182,9 @@ bool32 mpCollision_GetLRCommon(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *f
             scnmgr_crash_print_gobj_state();
         }
     }
-    room_info = gpMapRooms->room_info[gpMapVertexInfo->vertex_info[line_id].room_id];
+    room_dobj = gpMapRooms->room_dobj[gpMapVertexInfo->vertex_info[line_id].room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -188,10 +195,10 @@ bool32 mpCollision_GetLRCommon(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *f
     }
     vlinks = &gpMapVertexLinks[line_id];
 
-    if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+    if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
     {
-        object_pos_x = object_pos->x - room_info->dynacoll_pos.x;
-        object_pos_y = object_pos->y - room_info->dynacoll_pos.y;
+        object_pos_x = object_pos->x - room_dobj->translate.x;
+        object_pos_y = object_pos->y - room_dobj->translate.y;
     }
     else
     {
@@ -279,7 +286,7 @@ bool32 func_ovl2_800F41C0(s32 line_id, Vec3f *object_pos, f32 *arg2, u32 *flags,
 void mpCollision_GetLREdge(s32 line_id, Vec3f *object_pos, s32 lr)
 {
     mpVertexLinks *vlinks;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 v1x;
     s32 v1y;
     s32 v2x;
@@ -296,9 +303,9 @@ void mpCollision_GetLREdge(s32 line_id, Vec3f *object_pos, s32 lr)
             scnmgr_crash_print_gobj_state();
         }
     }
-    room_info = gpMapRooms->room_info[gpMapVertexInfo->vertex_info[line_id].room_id];
+    room_dobj = gpMapRooms->room_dobj[gpMapVertexInfo->vertex_info[line_id].room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -326,10 +333,10 @@ void mpCollision_GetLREdge(s32 line_id, Vec3f *object_pos, s32 lr)
     }
     object_pos->z = 0.0F;
 
-    if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+    if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
     {
-        object_pos->x += room_info->dynacoll_pos.x;
-        object_pos->y += room_info->dynacoll_pos.y;
+        object_pos->x += room_dobj->translate.x;
+        object_pos->y += room_dobj->translate.y;
     }
 }
 
@@ -359,7 +366,7 @@ void func_ovl2_800F4468(s32 line_id, Vec3f *object_pos)
 void mpCollision_GetUDEdge(s32 line_id, Vec3f *object_pos, s32 ud)
 {
     mpVertexLinks *vlinks;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexData *vpos1;
     mpVertexData *vpos2;
     s32 v1x;
@@ -378,9 +385,9 @@ void mpCollision_GetUDEdge(s32 line_id, Vec3f *object_pos, s32 ud)
             scnmgr_crash_print_gobj_state();
         }
     }
-    room_info = gpMapRooms->room_info[gpMapVertexInfo->vertex_info[line_id].room_id];
+    room_dobj = gpMapRooms->room_dobj[gpMapVertexInfo->vertex_info[line_id].room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -411,10 +418,10 @@ void mpCollision_GetUDEdge(s32 line_id, Vec3f *object_pos, s32 ud)
     }
     object_pos->z = 0.0F;
 
-    if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+    if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
     {
-        object_pos->x += room_info->dynacoll_pos.x;
-        object_pos->y += room_info->dynacoll_pos.y;
+        object_pos->x += room_dobj->translate.x;
+        object_pos->y += room_dobj->translate.y;
     }
 }
 
@@ -603,7 +610,7 @@ bool32 func_ovl2_800F4BD8(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -626,15 +633,15 @@ bool32 func_ovl2_800F4BD8(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_Ground];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_x = room_info->dynacoll_pos.x;
-                vedge_y = room_info->dynacoll_pos.y;
+                vedge_x = room_dobj->translate.x;
+                vedge_y = room_dobj->translate.y;
 
                 vpdist_x = position->x - vedge_x;
                 vpdist_y = position->y - vedge_y;
@@ -760,7 +767,7 @@ bool32 func_ovl2_800F521C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -768,7 +775,7 @@ bool32 func_ovl2_800F521C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     f32 vtdist_x, vtdist_y;
     f32 line_project_pos;
     f32 vedge_y;
-    f32 unkpos_y;
+    f32 dynamic_y;
     f32 vedge_x;
     s32 line_id, vertex_id;
     s32 temp_s0;
@@ -784,27 +791,27 @@ bool32 func_ovl2_800F521C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_Ground];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_x = room_info->dynacoll_pos.x;
-                vedge_y = room_info->dynacoll_pos.y;
+                vedge_x = room_dobj->translate.x;
+                vedge_y = room_dobj->translate.y;
 
-                unkpos_y = gpMapRoomVectors[line_info->room_id].y;
+                dynamic_y = gpMapDynamicCollisions[line_info->room_id].y;
 
-                vpdist_x = (position->x - vedge_x) + gpMapRoomVectors[line_info->room_id].x;
-                vpdist_y = (position->y - vedge_y) + unkpos_y;
+                vpdist_x = (position->x - vedge_x) + gpMapDynamicCollisions[line_info->room_id].x;
+                vpdist_y = (position->y - vedge_y) + dynamic_y;
 
                 vtdist_x = translate->x - vedge_x;
                 vtdist_y = translate->y - vedge_y;
             }
             else
             {
-                unkpos_y = 0.0F;
+                dynamic_y = 0.0F;
                 vedge_x = vedge_y = 0.0F;
 
                 vpdist_x = position->x;
@@ -854,7 +861,7 @@ bool32 func_ovl2_800F521C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 if (mpCollision_CheckUDSurfaceFlat(temp_s1, temp_s0, vpos_x, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                                 {
-                                    if (line_project_pos <= ((spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y)))) continue;
+                                    if (line_project_pos <= ((spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y)))) continue;
 
                                     if (ga_last != NULL)
                                     {
@@ -875,13 +882,13 @@ bool32 func_ovl2_800F521C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                     {
                                         *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                                     }
-                                    line_project_pos = (spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y));
+                                    line_project_pos = (spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y));
                                 }
                             }
                         }
                         else if (mpCollision_CheckGroundSurfaceTilt(temp_s1, temp_s0, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
-                            if (line_project_pos <= ((spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y)))) continue;
+                            if (line_project_pos <= ((spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y)))) continue;
 
                             if (ga_last != NULL)
                             {
@@ -901,7 +908,7 @@ bool32 func_ovl2_800F521C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                             }
-                            line_project_pos = (spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y));
+                            line_project_pos = (spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y));
                         }
                     }
                 }
@@ -1046,7 +1053,7 @@ bool32 func_ovl2_800F5E90(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -1069,15 +1076,15 @@ bool32 func_ovl2_800F5E90(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_Ceil];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_x = room_info->dynacoll_pos.x;
-                vedge_y = room_info->dynacoll_pos.y;
+                vedge_x = room_dobj->translate.x;
+                vedge_y = room_dobj->translate.y;
 
                 vpdist_x = position->x - vedge_x;
                 vpdist_y = position->y - vedge_y;
@@ -1203,7 +1210,7 @@ bool32 func_ovl2_800F64D4(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -1211,7 +1218,7 @@ bool32 func_ovl2_800F64D4(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     f32 vtdist_x, vtdist_y;
     f32 line_project_pos;
     f32 vedge_y;
-    f32 unkpos_y;
+    f32 dynamic_y;
     f32 vedge_x;
     s32 line_id, vertex_id;
     s32 temp_s0;
@@ -1227,27 +1234,27 @@ bool32 func_ovl2_800F64D4(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_Ceil];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_x = room_info->dynacoll_pos.x;
-                vedge_y = room_info->dynacoll_pos.y;
+                vedge_x = room_dobj->translate.x;
+                vedge_y = room_dobj->translate.y;
 
-                unkpos_y = gpMapRoomVectors[line_info->room_id].y;
+                dynamic_y = gpMapDynamicCollisions[line_info->room_id].y;
 
-                vpdist_x = (position->x - vedge_x) + gpMapRoomVectors[line_info->room_id].x;
-                vpdist_y = (position->y - vedge_y) + unkpos_y;
+                vpdist_x = (position->x - vedge_x) + gpMapDynamicCollisions[line_info->room_id].x;
+                vpdist_y = (position->y - vedge_y) + dynamic_y;
 
                 vtdist_x = translate->x - vedge_x;
                 vtdist_y = translate->y - vedge_y;
             }
             else
             {
-                unkpos_y = 0.0F;
+                dynamic_y = 0.0F;
                 vedge_x = vedge_y = 0.0F;
 
                 vpdist_x = position->x;
@@ -1297,7 +1304,7 @@ bool32 func_ovl2_800F64D4(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 if (mpCollision_CheckUDSurfaceFlat(temp_s1, temp_s0, vpos_x, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                                 {
-                                    if (line_project_pos <= ((spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y)))) continue;
+                                    if (line_project_pos <= ((spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y)))) continue;
 
                                     if (ga_last != NULL)
                                     {
@@ -1318,13 +1325,13 @@ bool32 func_ovl2_800F64D4(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                     {
                                         *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                                     }
-                                    line_project_pos = (spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y));
+                                    line_project_pos = (spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y));
                                 }
                             }
                         }
                         else if (mpCollision_CheckCeilSurfaceTilt(temp_s1, temp_s0, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
-                            if (line_project_pos <= ((spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y)))) continue;
+                            if (line_project_pos <= ((spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y)))) continue;
 
                             if (ga_last != NULL)
                             {
@@ -1344,7 +1351,7 @@ bool32 func_ovl2_800F64D4(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                             }
-                            line_project_pos = (spAC < (vpdist_y - unkpos_y)) ? -(spAC - (vpdist_y - unkpos_y)) : (spAC - (vpdist_y - unkpos_y));
+                            line_project_pos = (spAC < (vpdist_y - dynamic_y)) ? -(spAC - (vpdist_y - dynamic_y)) : (spAC - (vpdist_y - dynamic_y));
                         }
                     }
                 }
@@ -1364,7 +1371,7 @@ bool32 func_ovl2_800F6B58(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -1387,15 +1394,15 @@ bool32 func_ovl2_800F6B58(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_RWall];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_y = room_info->dynacoll_pos.x;
-                vedge_x = room_info->dynacoll_pos.y;
+                vedge_y = room_dobj->translate.x;
+                vedge_x = room_dobj->translate.y;
 
                 vpdist_x = position->x - vedge_y;
                 vpdist_y = position->y - vedge_x;
@@ -1647,7 +1654,7 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -1655,7 +1662,7 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     f32 vtdist_x, vtdist_y;
     f32 line_project_pos;
     f32 vedge_x;
-    f32 unkpos_x;
+    f32 dynamic_x;
     f32 vedge_y;
     s32 line_id, vertex_id;
     s32 temp_s0;
@@ -1671,27 +1678,27 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_RWall];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_y = room_info->dynacoll_pos.x;
-                vedge_x = room_info->dynacoll_pos.y;
+                vedge_y = room_dobj->translate.x;
+                vedge_x = room_dobj->translate.y;
 
-                unkpos_x = gpMapRoomVectors[line_info->room_id].x;
+                dynamic_x = gpMapDynamicCollisions[line_info->room_id].x;
 
-                vpdist_x = (position->x - vedge_y) + unkpos_x;
-                vpdist_y = (position->y - vedge_x) + gpMapRoomVectors[line_info->room_id].y;
+                vpdist_x = (position->x - vedge_y) + dynamic_x;
+                vpdist_y = (position->y - vedge_x) + gpMapDynamicCollisions[line_info->room_id].y;
 
                 vtdist_x = translate->x - vedge_y;
                 vtdist_y = translate->y - vedge_x;
             }
             else
             {
-                unkpos_x = 0.0F;
+                dynamic_x = 0.0F;
                 vedge_y = vedge_x = 0.0F;
 
                 vpdist_x = position->x;
@@ -1741,7 +1748,7 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 if (mpCollision_CheckLRSurfaceFlat(temp_s0, temp_s1, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                                 {
-                                    if (line_project_pos <= ((spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x)))) continue;
+                                    if (line_project_pos <= ((spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x)))) continue;
 
                                     if (ga_last != NULL)
                                     {
@@ -1762,13 +1769,13 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                     {
                                         *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                                     }
-                                    line_project_pos = (spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x));
+                                    line_project_pos = (spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x));
                                 }
                             }
                         }
                         else if (mpCollision_CheckRWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
-                            if (line_project_pos <= ((spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x)))) continue;
+                            if (line_project_pos <= ((spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x)))) continue;
 
                             if (ga_last != NULL)
                             {
@@ -1788,7 +1795,7 @@ bool32 func_ovl2_800F769C(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                             }
-                            line_project_pos = (spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x));
+                            line_project_pos = (spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x));
                         }
                     }
                 }
@@ -1867,7 +1874,7 @@ bool32 func_ovl2_800F7F00(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -1890,15 +1897,15 @@ bool32 func_ovl2_800F7F00(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_LWall];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_y = room_info->dynacoll_pos.x;
-                vedge_x = room_info->dynacoll_pos.y;
+                vedge_y = room_dobj->translate.x;
+                vedge_x = room_dobj->translate.y;
 
                 vpdist_x = position->x - vedge_y;
                 vpdist_y = position->y - vedge_x;
@@ -2149,7 +2156,7 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i;
     f32 vdist1;
     f32 vdist2;
@@ -2157,7 +2164,7 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     f32 vtdist_x, vtdist_y;
     f32 line_project_pos;
     f32 vedge_x;
-    f32 unkpos_x;
+    f32 dynamic_x;
     f32 vedge_y;
     s32 line_id, vertex_id;
     s32 temp_s0;
@@ -2173,27 +2180,27 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_LWall];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vedge_y = room_info->dynacoll_pos.x;
-                vedge_x = room_info->dynacoll_pos.y;
+                vedge_y = room_dobj->translate.x;
+                vedge_x = room_dobj->translate.y;
 
-                unkpos_x = gpMapRoomVectors[line_info->room_id].x;
+                dynamic_x = gpMapDynamicCollisions[line_info->room_id].x;
 
-                vpdist_x = (position->x - vedge_y) + unkpos_x;
-                vpdist_y = (position->y - vedge_x) + gpMapRoomVectors[line_info->room_id].y;
+                vpdist_x = (position->x - vedge_y) + dynamic_x;
+                vpdist_y = (position->y - vedge_x) + gpMapDynamicCollisions[line_info->room_id].y;
 
                 vtdist_x = translate->x - vedge_y;
                 vtdist_y = translate->y - vedge_x;
             }
             else
             {
-                unkpos_x = 0.0F;
+                dynamic_x = 0.0F;
                 vedge_y = vedge_x = 0.0F;
 
                 vpdist_x = position->x;
@@ -2243,7 +2250,7 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 if (mpCollision_CheckLRSurfaceFlat(temp_s0, temp_s1, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                                 {
-                                    if (line_project_pos <= ((spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x)))) continue;
+                                    if (line_project_pos <= ((spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x)))) continue;
 
                                     if (ga_last != NULL)
                                     {
@@ -2264,13 +2271,13 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                                     {
                                         *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                                     }
-                                    line_project_pos = (spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x));
+                                    line_project_pos = (spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x));
                                 }
                             }
                         }
                         else if (mpCollision_CheckLWallSurfaceTilt(temp_s0, temp_s1, vpos_x, vpos_y, vpdist_x, vpdist_y, vtdist_x, vtdist_y, &spB0, &spAC) == TRUE)
                         {
-                            if (line_project_pos <= ((spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x)))) continue;
+                            if (line_project_pos <= ((spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x)))) continue;
 
                             if (ga_last != NULL)
                             {
@@ -2290,7 +2297,7 @@ bool32 func_ovl2_800F8974(Vec3f *position, Vec3f *translate, Vec3f *ga_last, s32
                             {
                                 *stand_coll_flags = gpMapVertexData->vpos[gpMapVertexID->vertex_id[vertex_id]].vertex_flags;
                             }
-                            line_project_pos = (spB0 < (vpdist_x - unkpos_x)) ? -(spB0 - (vpdist_x - unkpos_x)) : (spB0 - (vpdist_x - unkpos_x));
+                            line_project_pos = (spB0 < (vpdist_x - dynamic_x)) ? -(spB0 - (vpdist_x - dynamic_x)) : (spB0 - (vpdist_x - dynamic_x));
                         }
                     }
                 }
@@ -2311,7 +2318,7 @@ bool32 func_ovl2_800F8FFC(Vec3f *position)
     mpLineInfo *line_info;
     mpLineData *line_data;
     s32 i, j;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     f32 vpdist_x, vpdist_y;
     s32 line_id;
 
@@ -2320,15 +2327,15 @@ bool32 func_ovl2_800F8FFC(Vec3f *position)
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_Ground];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vpdist_x = (position->x - room_info->dynacoll_pos.x);
-                vpdist_y = (position->y - room_info->dynacoll_pos.y) + 0.001F;
+                vpdist_x = (position->x - room_dobj->translate.x);
+                vpdist_y = (position->y - room_dobj->translate.y) + 0.001F;
             }
             else
             {
@@ -2376,7 +2383,7 @@ bool32 func_ovl2_800F9348(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i, j;
     f32 vpdist_x, vpdist_y;
     s32 line_id;
@@ -2390,15 +2397,15 @@ bool32 func_ovl2_800F9348(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_Ground];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vpdist_x = (position->x - room_info->dynacoll_pos.x);
-                vpdist_y = (position->y - room_info->dynacoll_pos.y);
+                vpdist_x = (position->x - room_dobj->translate.x);
+                vpdist_y = (position->y - room_dobj->translate.y);
             }
             else
             {
@@ -2479,7 +2486,7 @@ bool32 func_ovl2_800F97BC(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i, j;
     f32 vpdist_x, vpdist_y;
     s32 line_id;
@@ -2493,15 +2500,15 @@ bool32 func_ovl2_800F97BC(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_Ceil];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vpdist_x = (position->x - room_info->dynacoll_pos.x);
-                vpdist_y = (position->y - room_info->dynacoll_pos.y);
+                vpdist_x = (position->x - room_dobj->translate.x);
+                vpdist_y = (position->y - room_dobj->translate.y);
             }
             else
             {
@@ -2581,7 +2588,7 @@ bool32 func_ovl2_800F9C30(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i, j;
     f32 vpdist_x, vpdist_y;
     s32 line_id;
@@ -2595,15 +2602,15 @@ bool32 func_ovl2_800F9C30(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_RWall];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vpdist_x = (position->x - room_info->dynacoll_pos.x);
-                vpdist_y = (position->y - room_info->dynacoll_pos.y);
+                vpdist_x = (position->x - room_dobj->translate.x);
+                vpdist_y = (position->y - room_dobj->translate.y);
             }
             else
             {
@@ -2684,7 +2691,7 @@ bool32 func_ovl2_800FA0A4(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
 {
     mpLineInfo *line_info;
     mpLineData *line_data;
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     s32 i, j;
     f32 vpdist_x, vpdist_y;
     s32 line_id;
@@ -2698,15 +2705,15 @@ bool32 func_ovl2_800FA0A4(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
     for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
     {
         line_data = &line_info->line_data[mpCollision_LineType_LWall];
-        room_info = gpMapRooms->room_info[line_info->room_id];
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
 
-        if ((line_data->line_count != 0) && (room_info->collision_kind < 3))
+        if ((line_data->line_count != 0) && (room_dobj->anim_type < 3))
         {
-            if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+            if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
             {
                 // This runs when the corner of the character's map collision diamond collides with a wall?
-                vpdist_x = (position->x - room_info->dynacoll_pos.x);
-                vpdist_y = (position->y - room_info->dynacoll_pos.y);
+                vpdist_x = (position->x - room_dobj->translate.x);
+                vpdist_y = (position->y - room_dobj->translate.y);
             }
             else
             {
@@ -2785,7 +2792,7 @@ bool32 func_ovl2_800FA0A4(Vec3f *position, s32 *project_line_id, f32 *ga_dist, u
 // 0x800FA518
 s32 func_ovl2_800FA518(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
 
     if ((line_id == -1) || (line_id == -2))
     {
@@ -2795,9 +2802,9 @@ s32 func_ovl2_800FA518(s32 line_id)
             scnmgr_crash_print_gobj_state();
         }
     }
-    room_info = gpMapRooms->room_info[gpMapVertexInfo->vertex_info[line_id].room_id];
+    room_dobj = gpMapRooms->room_dobj[gpMapVertexInfo->vertex_info[line_id].room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -2811,7 +2818,7 @@ s32 func_ovl2_800FA518(s32 line_id)
 // 0x800F15E8
 void func_ovl2_800FA5E8(s32 line_id, s32 vertex_id, Vec3f *pos)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
 
     if ((line_id == -1) || (line_id == -2))
     {
@@ -2821,9 +2828,9 @@ void func_ovl2_800FA5E8(s32 line_id, s32 vertex_id, Vec3f *pos)
             scnmgr_crash_print_gobj_state();
         }
     }
-    room_info = gpMapRooms->room_info[gpMapVertexInfo->vertex_info[line_id].room_id];
+    room_dobj = gpMapRooms->room_dobj[gpMapVertexInfo->vertex_info[line_id].room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -2835,19 +2842,19 @@ void func_ovl2_800FA5E8(s32 line_id, s32 vertex_id, Vec3f *pos)
     pos->y = gpMapVertexData->vpos[gpMapVertexID->vertex_id[gpMapVertexLinks[line_id].vertex1 + vertex_id]].pos.y;
     pos->z = 0.0F;
 
-    room_info = gpMapRooms->room_info[gpMapVertexInfo->vertex_info[line_id].room_id];
+    room_dobj = gpMapRooms->room_dobj[gpMapVertexInfo->vertex_info[line_id].room_id];
 
-    if ((room_info->p_dynacoll != NULL) || (room_info->collision_kind != 0))
+    if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type != 0))
     {
-        pos->x += room_info->dynacoll_pos.x;
-        pos->y += room_info->dynacoll_pos.y;
+        pos->x += room_dobj->translate.x;
+        pos->y += room_dobj->translate.y;
     }
 }
 
 // 0x800FA7B8
 void func_ovl2_800FA7B8(s32 line_id, Vec3f *speed)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     u8 room_id;
 
     if ((line_id == -1) || (line_id == -2))
@@ -2860,9 +2867,9 @@ void func_ovl2_800FA7B8(s32 line_id, Vec3f *speed)
     }
     room_id = gpMapVertexInfo->vertex_info[line_id].room_id;
 
-    room_info = gpMapRooms->room_info[room_id];
+    room_dobj = gpMapRooms->room_dobj[room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -2870,13 +2877,13 @@ void func_ovl2_800FA7B8(s32 line_id, Vec3f *speed)
             scnmgr_crash_print_gobj_state();
         }
     }
-    *speed = gpMapRoomVectors[room_id];
+    *speed = gpMapDynamicCollisions[room_id];
 }
 
 // 0x800FA8A4
 s32 func_ovl2_800FA8A4(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
     u8 room_id;
 
@@ -2889,9 +2896,9 @@ s32 func_ovl2_800FA8A4(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind == 3)
+    if (room_dobj->anim_type == 3)
     {
         while (TRUE)
         {
@@ -2899,13 +2906,13 @@ s32 func_ovl2_800FA8A4(s32 line_id)
             scnmgr_crash_print_gobj_state();
         }
     }
-    return vertex_info->coll_vertex_id;
+    return vertex_info->line_type;
 }
 
 // 0x800FA964
 s32 func_ovl2_800FA964(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -2917,9 +2924,9 @@ s32 func_ovl2_800FA964(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -2933,7 +2940,7 @@ s32 func_ovl2_800FA964(s32 line_id)
 // 0x800FAA24
 s32 func_ovl2_800FAA24(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -2945,9 +2952,9 @@ s32 func_ovl2_800FAA24(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -2961,7 +2968,7 @@ s32 func_ovl2_800FAA24(s32 line_id)
 // 0x800FAAE4
 s32 func_ovl2_800FAAE4(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -2973,9 +2980,9 @@ s32 func_ovl2_800FAAE4(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -2989,7 +2996,7 @@ s32 func_ovl2_800FAAE4(s32 line_id)
 // 0x800FABA4
 s32 func_ovl2_800FABA4(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -3001,9 +3008,9 @@ s32 func_ovl2_800FABA4(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -3017,7 +3024,7 @@ s32 func_ovl2_800FABA4(s32 line_id)
 // 0x800FAC64
 s32 func_ovl2_800FAC64(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -3029,9 +3036,9 @@ s32 func_ovl2_800FAC64(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -3045,7 +3052,7 @@ s32 func_ovl2_800FAC64(s32 line_id)
 // 0X800FAD24
 s32 func_ovl2_800FAD24(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -3057,9 +3064,9 @@ s32 func_ovl2_800FAD24(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -3073,7 +3080,7 @@ s32 func_ovl2_800FAD24(s32 line_id)
 // 0x800FADE4
 s32 func_ovl2_800FADE4(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -3085,9 +3092,9 @@ s32 func_ovl2_800FADE4(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -3101,7 +3108,7 @@ s32 func_ovl2_800FADE4(s32 line_id)
 // 0x800FAEA4
 s32 func_ovl2_800FAEA4(s32 line_id)
 {
-    mpRoomInfo *room_info;
+    mpRoomInfo *room_dobj;
     mpVertexInfo *vertex_info;
 
     if ((line_id == -1) || (line_id == -2))
@@ -3113,9 +3120,9 @@ s32 func_ovl2_800FAEA4(s32 line_id)
         }
     }
     vertex_info = &gpMapVertexInfo->vertex_info[line_id];
-    room_info = gpMapRooms->room_info[vertex_info->room_id];
+    room_dobj = gpMapRooms->room_dobj[vertex_info->room_id];
 
-    if (room_info->collision_kind >= 3)
+    if (room_dobj->anim_type >= 3)
     {
         while (TRUE)
         {
@@ -3150,9 +3157,496 @@ void func_ovl2_800FAF64(s32 arg0, Vec3f *vec)
     }
 }
 
-extern s32 gMapVertexGroupCount;
-
 void func_ovl2_800FB010(void)
 {
-    gpMapVertexInfo = hal_alloc(gMapVertexGroupCount * sizeof(mpVertexInfo), 8);
+    gpMapVertexInfo = hal_alloc(gMapLineCount * sizeof(mpVertexInfo), 8);
+}
+
+// 0x800FB04C
+void func_ovl2_800FB04C(void)
+{
+    s32 line_id;
+    s32 i;
+    mpLineInfo *line_info;
+    mpLineData *line_data;
+    s32 j;
+    s32 k;
+    s32 l;
+    s32 room_id;
+    s32 vnear;
+    s32 vfar;
+    s32 vp2;
+    s32 index;
+
+    line_info = gpMapGeometry->line_info;
+
+    for (i = l = 0; i < gpMapGeometry->room_count; i++, line_info++)
+    {
+        line_data = &line_info->line_data[0];
+        room_id = line_info->room_id;
+
+        for (j = 0; j < ARRAY_COUNT(line_info->line_data); j++)
+        {
+            for (index = line_data[j].group_id, line_id = 0; line_id < line_data[j].line_count; line_id++, index++)
+            {
+                mpVertexLinks *vlinks = &gpMapVertexLinks[index];
+
+                vfar = vnear = (j < ARRAY_COUNT(line_info->line_data) / 2) ? gpMapVertexData->vpos[gpMapVertexID->vertex_id[vlinks->vertex1]].pos.y:
+                                                                             gpMapVertexData->vpos[gpMapVertexID->vertex_id[vlinks->vertex1]].pos.x;
+
+                for (k = vlinks->vertex1 + 1; k < (vlinks->vertex1 + vlinks->vertex2); k++)
+                {
+                    // There are various ways to fake-match this function (e.g. do {} while (0), if(1), if(!gpMapVertexData->vpos) right where this comment is)...
+
+                    vp2 = (j < ARRAY_COUNT(line_info->line_data) / 2) ? gpMapVertexData->vpos[gpMapVertexID->vertex_id[k]].pos.y:
+                                                                        gpMapVertexData->vpos[gpMapVertexID->vertex_id[k]].pos.x;
+
+                    if (vp2 >= vfar)
+                    {
+                        vfar = vp2;
+                    }
+                    if (vnear >= vp2)
+                    {
+                        vnear = vp2;
+                    }
+                    else continue; // ...but this seems to be the most realistic solution for now.
+                }
+                gpMapVertexInfo->vertex_info[l].coll_pos_next = vfar;
+                gpMapVertexInfo->vertex_info[l].coll_pos_prev = vnear;
+                gpMapVertexInfo->vertex_info[l].room_id = room_id;
+
+                l++;
+            }
+        }
+    }
+}
+
+// 0x800FB2A0
+void func_ovl2_800FB2A0(void)
+{
+    s32 line_type, line_id;
+
+    for (line_type = 0; i < ARRAY_COUNT(gMapLineTypeGroups); line_type++)
+    {
+        for (line_id = 0; line_id < gMapLineTypeGroups[line_type].line_count; line_id++)
+        {
+            gpMapVertexInfo->vertex_info[gMapLineTypeGroups[line_type].line_id[line_id]].line_type = line_type;
+        }
+    }
+}
+
+void func_ovl2_800FB31C(void)
+{
+    s32 line_id;
+    s32 line_next;
+    s32 line_prev;
+    s32 i;
+    bool32 unk_bool;
+    s32 vertex_id1;
+    s32 vertex_id2;
+    s32 vid;
+    s32 vtemp1, vtemp2;
+
+    for (i = 0; i < gMapLineCount; i++)
+    {
+        line_next = -1;
+        line_prev = -1;
+
+        unk_bool = FALSE;
+
+        vtemp1 = gpMapVertexLinks[i].vertex1;
+
+        vertex_id1 = gpMapVertexID->vertex_id[vtemp1];
+        vertex_id2 = gpMapVertexID->vertex_id[vtemp1 + gpMapVertexLinks[i].vertex2 - 1];
+
+        for (line_id = 0; line_id < gMapLineCount; line_id++)
+        {
+            if (i != line_id)
+            {
+                vtemp2 = gpMapVertexLinks[line_id].vertex1;
+
+                vid = vtemp2 + gpMapVertexLinks[line_id].vertex2 - 1;
+
+                if ((vertex_id1 == gpMapVertexID->vertex_id[vtemp2]) || (vertex_id1 == gpMapVertexID->vertex_id[vid]))
+                {
+                    line_prev = line_id;
+                }
+                if ((vertex_id2 == gpMapVertexID->vertex_id[vtemp2]) || (vertex_id2 == gpMapVertexID->vertex_id[vid]))
+                {
+                    line_next = line_id;
+                }
+            }
+            continue;
+        }
+        switch (gpMapVertexInfo->vertex_info[i].line_type)
+        {
+        default:
+            break;
+
+        case mpCollision_LineType_Ground:
+        case mpCollision_LineType_Ceil:
+            if (gpMapVertexData->vpos[vertex_id2].pos.x < gpMapVertexData->vpos[vertex_id1].pos.x)
+            {
+                unk_bool = TRUE;
+            }
+            break;
+
+        case mpCollision_LineType_RWall:
+        case mpCollision_LineType_LWall:
+            if (gpMapVertexData->vpos[vertex_id2].pos.y < gpMapVertexData->vpos[vertex_id1].pos.y)
+            {
+                unk_bool = TRUE;
+            }
+            break;
+        }
+        if (unk_bool != FALSE)
+        {
+            gpMapVertexInfo->vertex_info[i].edge_psign_id = line_prev;
+            gpMapVertexInfo->vertex_info[i].edge_nsign_id = line_next;
+        }
+        else
+        {
+            gpMapVertexInfo->vertex_info[i].edge_psign_id = line_next;
+            gpMapVertexInfo->vertex_info[i].edge_nsign_id = line_prev;
+        }
+        continue;
+    }
+}
+
+void func_ovl2_800FB554(void)
+{
+    func_ovl2_800FB04C();
+    func_ovl2_800FB2A0();
+    func_ovl2_800FB31C();
+}
+
+void func_ovl2_800FB584(grMapCollisionRoom *gr_room)
+{
+    s32 room_count;
+    s32 i;
+
+    for (room_count = 0; gr_room->room_id != 0x12; room_count++)
+    {
+        gr_room++;
+    }
+    gpMapRooms = hal_alloc(room_count * sizeof(gpMapRooms), 4);
+    gpMapDynamicCollisions = hal_alloc(room_count * sizeof(Vec3f), 4);
+
+    for (i = 0; i < room_count; i++)
+    {
+        gpMapDynamicCollisions[i].x = gpMapDynamicCollisions[i].y = gpMapDynamicCollisions[i].z = 0.0F;
+    }
+    gMapRoomCount = room_count;
+}
+
+void func_ovl2_800FB808(void)
+{
+    s32 index;
+    mpDirection dir;
+    mpLineData *line_data;
+    mpLineInfo *line_info;
+    mpRoomInfo *room_dobj;
+    mpVertexLinks *vlinks;
+    s32 i, j, k, l;
+
+    dir = gMapEdgeBounds.d1;
+
+    line_info = gpMapGeometry->line_info;
+
+    for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
+    {
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
+
+        if ((room_dobj->unk_dobj_0x70 != NULL) || (room_dobj->anim_type < 3 && room_dobj->anim_type != 0))
+        {
+            f32 x = room_dobj->translate.x, y = room_dobj->translate.y;
+
+            line_data = &line_info->line_data[0];
+
+            for (j = 0; j < ARRAY_COUNT(line_info->line_data); j++)
+            {
+                for (index = line_data[j].group_id, k = 0; k < line_data[j].line_count; k++, index++)
+                {
+                    vlinks = &gpMapVertexLinks[index];
+
+                    for (l = vlinks->vertex1; l < (vlinks->vertex1 + vlinks->vertex2); l++)
+                    {
+                        s32 vx = gpMapVertexData->vpos[gpMapVertexID->vertex_id[l]].pos.x + x;
+                        s32 vy = gpMapVertexData->vpos[gpMapVertexID->vertex_id[l]].pos.y + y;
+
+                        if (dir.top < vy)
+                        {
+                            dir.top = vy;
+                        }
+                        else if (vy < dir.bottom)
+                        {
+                            dir.bottom = vy;
+                        }
+                        if (dir.left < vx)
+                        {
+                            dir.left = vx;
+                        }
+                        else if (vx < dir.right)
+                        {
+                            dir.right = vx;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    gMapEdgeBounds.d2 = dir;
+}
+
+void func_ovl2_800FBA84(void)
+{
+    gMapEdgeBounds.d3.top      =   gMapEdgeBounds.d2.top      -   gMapEdgeBounds.d0.top;
+    gMapEdgeBounds.d3.bottom   =   gMapEdgeBounds.d2.bottom   -   gMapEdgeBounds.d0.bottom;
+    gMapEdgeBounds.d3.right    =   gMapEdgeBounds.d2.right    -   gMapEdgeBounds.d0.right;
+    gMapEdgeBounds.d3.left     =   gMapEdgeBounds.d2.left     -   gMapEdgeBounds.d0.left;
+}
+
+void jtgt_ovl2_800FBAD0(GObj *ground_gobj)
+{
+    DObj *dobj;
+    MObj *mobj;
+    s32 i;
+    Vec3f translate;
+    u8 temp_s2;
+
+    dobj = DObjGetStruct(ground_gobj);
+
+    i = 0;
+
+    while (dobj != NULL)
+    {
+        if (dobj == gpMapRooms->room_info[i])
+        {
+            if ((dobj->anim_type != 1) && (dobj->anim_type != 3))
+            {
+                temp_s2 = dobj->unk_0x54;
+
+                func_8000BFE8(dobj);
+
+                translate = dobj->translate;
+
+                func_8000CCBC(dobj);
+
+                gpMapRoomVectors[i].x = dobj->translate.x - translate.x;
+                gpMapRoomVectors[i].y = dobj->translate.y - translate.y;
+                gpMapRoomVectors[i].z = dobj->translate.z - translate.z;
+
+                if (temp_s2 == 0)
+                {
+                    if (dobj->unk_0x54 != 0)
+                    {
+                        dobj->anim_type = 4;
+                    }
+                }
+                else if (dobj->unk_0x54 == 0)
+                {
+                    dobj->anim_type = 2;
+                }
+            }
+            if (i < (gMapRoomCount - 1))
+            {
+                i++;
+            }
+        }
+        else
+        {
+            func_8000BFE8(dobj);
+            func_8000CCBC(dobj);
+        }
+        mobj = dobj->mobj;
+
+        while (mobj != NULL)
+        {
+            func_8000CF6C(mobj);
+            func_8000DA40(mobj);
+
+            mobj = mobj->mobj_next;
+        }
+        if (dobj->next != NULL)
+        {
+            dobj = dobj->next;
+        }
+        else if (dobj->unk_0x8 != NULL)
+        {
+            dobj = dobj->unk_0x8;
+        }
+        else while (TRUE)
+        {
+            if (dobj->prev == (DObj *)1)
+            {
+                dobj = NULL;
+
+                break;
+            }
+            else if (dobj->prev->unk_0x8 != NULL)
+            {
+                dobj = dobj->prev->unk_0x8;
+
+                break;
+            }
+            else
+            {
+                dobj = dobj->prev;
+
+                continue;
+            }
+        }
+    }
+
+    func_ovl2_800FB808();
+    func_ovl2_800FBA84();
+
+    D_ovl2_80131398++;
+}
+
+void func_ovl2_800FBCF8(GObj *ground_gobj)
+{
+    D_ovl2_80131398++;
+}
+
+void func_ovl2_800FBD14(void)
+{
+    s32 index;
+    DObj *room_dobj;
+    mpDirection dir1;
+    mpDirection dir2;
+    s32 vx;
+    s32 vy;
+    f32 tx;
+    f32 ty;
+    mpLineData *line_data;
+    mpLineInfo *line_info;
+    mpVertexLinks *vlinks;
+    s32 i, j, k, l;
+    s32 unused[2];
+
+    line_info = gpMapGeometry->line_info;
+
+    dir1.top = -65536.0F;
+    dir1.right = -65536.0F;
+    dir2.top = -65536.0F;
+    dir2.right = -65536.0F;
+    dir2.left = 65536.0F;
+    dir2.bottom = 65536.0F;
+    dir1.left = 65536.0F;
+    dir1.bottom = 65536.0F;
+
+    for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
+    {
+        room_dobj = gpMapRooms->room_dobj[line_info->room_id];
+
+        if ((room_dobj->anim_type != 1) && (room_dobj->anim_type != 3))
+        {
+            if (room_dobj->unk_dobj_0x70 != NULL)
+            {
+                tx = room_dobj->translate.x;
+                ty = room_dobj->translate.y;
+            }
+            else
+            {
+                tx = 0.0F;
+                ty = 0.0F;
+            }
+            line_data = &line_info->line_data[0];
+
+            for (j = 0; j < ARRAY_COUNT(line_info->line_data); j++)
+            {
+                for (index = line_data[j].group_id, k = 0; k < line_data[j].line_count; k++, index++)
+                {
+                    vlinks = &gpMapVertexLinks[index];
+
+                    for (l = vlinks->vertex1; l < (vlinks->vertex1 + vlinks->vertex2); l++)
+                    {
+                        vx = gpMapVertexData->vpos[gpMapVertexID->vertex_id[l]].pos.x;
+                        vy = gpMapVertexData->vpos[gpMapVertexID->vertex_id[l]].pos.y;
+
+                        if (room_dobj->unk_dobj_0x70 == NULL)
+                        {
+                            if (dir2.top < vy)
+                            {
+                                dir2.top = vy;
+                            }
+                            if (vy < dir2.bottom)
+                            {
+                                dir2.bottom = vy;
+                            }
+                            if (dir2.right < vx)
+                            {
+                                dir2.right = vx;
+                            }
+                            if (vx < dir2.left)
+                            {
+                                dir2.left = vx;
+                            }
+                        }
+                        vx += tx;
+                        vy += ty;
+
+                        if (dir1.top < vy)
+                        {
+                            dir1.top = vy;
+                        }
+                        if (vy < dir1.bottom)
+                        {
+                            dir1.bottom = vy;
+                        }
+                        if (dir1.right < vx)
+                        {
+                            dir1.right = vx;
+                        }
+                        if (vx < dir1.left)
+                        {
+                            dir1.left = vx;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    gMapEdgeBounds.d0 = dir1;
+    gMapEdgeBounds.d1 = dir2;
+    gMapEdgeBounds.d2 = dir1;
+    gMapEdgeBounds.d3.top = gMapEdgeBounds.d3.bottom = gMapEdgeBounds.d3.right = gMapEdgeBounds.d3.left = 0.0F;
+}
+
+s32 func_ovl2_800FC09C(void)
+{
+    mpLineInfo *line_info;
+    mpLineData *line_data;
+    s32 i;
+    s32 line_count[4];
+    s32 line_total, j;
+
+    for (i = 0; i < ARRAY_COUNT(line_count); i++)
+    {
+        line_count[i] = 0;
+    }
+    line_info = gpMapGeometry->line_info;
+
+    for (i = 0; i < gpMapGeometry->room_count; i++, line_info++)
+    {
+        line_data = &line_info->line_data[0];
+
+        for (j = 0; j < (ARRAY_COUNT(line_count) + ARRAY_COUNT(line_info->line_data)) / 2; j++, line_data++)
+        {
+            line_count[j] += line_data->line_count;
+        }
+    }
+    for (i = 0, line_total = 0; i < (ARRAY_COUNT(line_count) + ARRAY_COUNT(gMapLineTypeGroups)) / 2; i++)
+    {
+        gMapLineTypeGroups[i].line_count = line_count[i];
+
+        line_total += line_count[i];
+
+        if (line_count[i] != 0)
+        {
+            gMapLineTypeGroups[i].line_id = hal_alloc(line_count[i] * sizeof(*gMapLineTypeGroups[i].line_id), 2);
+        }
+    }
+    return line_total;
 }

@@ -93,7 +93,7 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
 
     if (ap->lr == RIGHT)
     {
-        if ((gpMapData->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x)
+        if ((gpGroundInfo->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x)
         {
             ap->phys_info.vel_air.x = 0.0F;
             ap->phys_info.vel_air.y = 0.0F;
@@ -109,7 +109,7 @@ bool32 func_ovl3_8017FFA8(GObj *item_gobj)
     }
     if (ap->lr == LEFT)
     {
-        if (joint->translate.x <= (gpMapData->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X))
+        if (joint->translate.x <= (gpGroundInfo->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X))
         {
             ap->phys_info.vel_air.x = 0.0F;
             ap->phys_info.vel_air.y = 0.0F;
@@ -216,11 +216,11 @@ bool32 func_ovl3_80180354(GObj *weapon_gobj)
     wpStruct *ip = wpGetStruct(weapon_gobj);
     DObj *joint = DObjGetStruct(weapon_gobj);
 
-    if ((ip->lr == RIGHT) && ((gpMapData->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
+    if ((ip->lr == RIGHT) && ((gpGroundInfo->blastzone_right - ITSPEAR_SWARM_CALL_OFF_X) <= joint->translate.x))
     {
         return TRUE;
     }
-    else if ((ip->lr == LEFT) && (joint->translate.x <= (gpMapData->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X)))
+    else if ((ip->lr == LEFT) && (joint->translate.x <= (gpGroundInfo->blastzone_left + ITSPEAR_SWARM_CALL_OFF_X)))
     {
         return TRUE;
     }

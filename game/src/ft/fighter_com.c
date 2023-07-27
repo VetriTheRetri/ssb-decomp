@@ -356,7 +356,7 @@ void func_ovl3_80132778(ftStruct *fp, s32 index)
     ft_com->p_command = gpComputerPlayerScripts[index];
 }
 
-static gmUnkInfo_80131308 D_ovl2_80131308; // Extern
+static mpEdgeBounds gMapEdgeBounds; // Extern
 
 bool32 func_ovl3_8013295C(ftStruct *this_fp)
 {
@@ -384,10 +384,10 @@ bool32 func_ovl3_8013295C(ftStruct *this_fp)
 
                 if ((other_fp->status_info.status_id >= ftStatus_Common_Wait) &&
                 (((func_ovl2_800F8FFC(&other_fp->joint[ftParts_TopN_Joint]->translate) != FALSE) &&
-                (other_pos_x <= D_ovl2_80131308.unk_80131308_0x28) &&
-                (D_ovl2_80131308.unk_80131308_0x2C <= other_pos_x) &&
-                (D_ovl2_80131308.unk_80131308_0x24 <= other_pos_y) &&
-                (other_pos_y < gpMapData->cam_bound_top)) ||
+                (other_pos_x <= gMapEdgeBounds.d2.right) &&
+                (gMapEdgeBounds.d2.left <= other_pos_x) &&
+                (gMapEdgeBounds.d2.bottom <= other_pos_y) &&
+                (other_pos_y < gpGroundInfo->cam_bound_top)) ||
                 ((this_fp->ground_or_air == GA_Ground) &&
                 ((other_fp->status_info.status_id == ftStatus_Common_CliffCatch) ||
                 (other_fp->status_info.status_id == ftStatus_Common_CliffWait)))) &&

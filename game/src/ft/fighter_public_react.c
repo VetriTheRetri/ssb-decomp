@@ -242,7 +242,7 @@ static u32 D_ovl3_8018CFDC;
 static u32 D_ovl3_8018CFE0;
 static gmSoundEffect *D_ovl3_8018CFE4;
 static u16 D_ovl3_8018CFE8;
-extern gmUnkInfo_80131308 D_ovl2_80131308;
+extern mpEdgeBounds gMapEdgeBounds;
 
 void func_ovl3_80165134(s32 arg0)
 {
@@ -270,7 +270,7 @@ void func_ovl3_80165134(s32 arg0)
 
             if (!(gpBattleState->match_rules & GMMATCH_GAMERULE_STOCK) || (fp->stock_count != -1))
             {
-                if (DObjGetStruct(gobj)->translate.y < (D_ovl2_80131308.unk_80131308_0x24 - 100.0F)) // 0x80131308 = stage data?
+                if (DObjGetStruct(gobj)->translate.y < (gMapEdgeBounds.d2.bottom - 100.0F)) // 0x80131308 = stage data?
                 {
                     D_ovl3_8018CFC0++;
                 }

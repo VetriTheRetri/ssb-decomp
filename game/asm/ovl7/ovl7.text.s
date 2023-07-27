@@ -944,11 +944,11 @@ glabel func_ovl7_8018DD0C
   /* 1145DC 8018DDBC AFBF0014 */        sw $ra, 0x14($sp)
   /* 1145E0 8018DDC0 91C20001 */       lbu $v0, 1($t6)
   /* 1145E4 8018DDC4 3C0F8019 */       lui $t7, %hi(D_ovl7_80190848)
-  /* 1145E8 8018DDC8 3C198013 */       lui $t9, %hi(gpMapData)
+  /* 1145E8 8018DDC8 3C198013 */       lui $t9, %hi(gpGroundInfo)
   /* 1145EC 8018DDCC 00021080 */       sll $v0, $v0, 2
   /* 1145F0 8018DDD0 01E27821 */      addu $t7, $t7, $v0
   /* 1145F4 8018DDD4 8DEF0848 */        lw $t7, %lo(D_ovl7_80190848)($t7)
-  /* 1145F8 8018DDD8 8F391300 */        lw $t9, %lo(gpMapData)($t9)
+  /* 1145F8 8018DDD8 8F391300 */        lw $t9, %lo(gpGroundInfo)($t9)
   /* 1145FC 8018DDDC 3C098019 */       lui $t1, %hi(D_ovl7_801907B8)
   /* 114600 8018DDE0 000FC080 */       sll $t8, $t7, 2
   /* 114604 8018DDE4 01224821 */      addu $t1, $t1, $v0
@@ -966,8 +966,8 @@ glabel func_ovl7_8018DD0C
   /* 114634 8018DE14 3C0D8019 */       lui $t5, %hi(D_ovl7_80190848)
   /* 114638 8018DE18 3C0F8019 */       lui $t7, %hi(D_ovl7_80190828)
   /* 11463C 8018DE1C 914B0001 */       lbu $t3, 1($t2)
-  /* 114640 8018DE20 3C198013 */       lui $t9, %hi(gpMapData)
-  /* 114644 8018DE24 8F391300 */        lw $t9, %lo(gpMapData)($t9)
+  /* 114640 8018DE20 3C198013 */       lui $t9, %hi(gpGroundInfo)
+  /* 114644 8018DE24 8F391300 */        lw $t9, %lo(gpGroundInfo)($t9)
   /* 114648 8018DE28 000B6080 */       sll $t4, $t3, 2
   /* 11464C 8018DE2C 01AC6821 */      addu $t5, $t5, $t4
   /* 114650 8018DE30 8DAD0848 */        lw $t5, %lo(D_ovl7_80190848)($t5)
@@ -995,14 +995,14 @@ glabel func_ovl7_8018DE60
   /* 1146A0 8018DE80 01194021 */      addu $t0, $t0, $t9
   /* 1146A4 8018DE84 8D080848 */        lw $t0, %lo(D_ovl7_80190848)($t0)
   /* 1146A8 8018DE88 256B0824 */     addiu $t3, $t3, %lo(D_ovl7_80190824)
-  /* 1146AC 8018DE8C 3C0E8013 */       lui $t6, %hi(gpMapData)
+  /* 1146AC 8018DE8C 3C0E8013 */       lui $t6, %hi(gpGroundInfo)
   /* 1146B0 8018DE90 00084880 */       sll $t1, $t0, 2
   /* 1146B4 8018DE94 01284823 */      subu $t1, $t1, $t0
   /* 1146B8 8018DE98 00094880 */       sll $t1, $t1, 2
   /* 1146BC 8018DE9C 252A0008 */     addiu $t2, $t1, 8
   /* 1146C0 8018DEA0 014B6021 */      addu $t4, $t2, $t3
   /* 1146C4 8018DEA4 918F0000 */       lbu $t7, ($t4)
-  /* 1146C8 8018DEA8 8DCE1300 */        lw $t6, %lo(gpMapData)($t6)
+  /* 1146C8 8018DEA8 8DCE1300 */        lw $t6, %lo(gpGroundInfo)($t6)
   /* 1146CC 8018DEAC A1CF004C */        sb $t7, 0x4c($t6)
   /* 1146D0 8018DEB0 918D0001 */       lbu $t5, 1($t4)
   /* 1146D4 8018DEB4 A1CD004D */        sb $t5, 0x4d($t6)

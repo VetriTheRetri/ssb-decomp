@@ -26,21 +26,25 @@ typedef enum mpGroundAir
 
 } mpGroundAir;
 
+// Room = collection of groups
+// Group = collection of lines
+// Line = collection of vertices
+
 typedef struct mpRoomInfo
 {
     u8 filler_0x0[0x1C];
-    Vec3f dynacoll_pos;
+    Vec3f translate;
     u8 filler_0x28[0x70 - 0x28];
-    void *p_dynacoll;
+    void *unk_dobj_0x70;
     u8 filler_0x74[0x84 - 0x74];
-    s32 collision_kind;
+    s32 anim_type;
 
 } mpRoomInfo;
 
 typedef struct mpVertexInfo
 {
     u8 room_id;
-    u8 coll_vertex_id;
+    u8 line_type;
     s16 coll_pos_next;
     s16 coll_pos_prev;
     s16 edge_psign_id;  // PSign = positive sign -> collision types that use +1 for orientation (Upper/Ground and Right)
@@ -110,11 +114,11 @@ typedef struct mpVertexLinksContainer
 
 } mpVertexLinksContainer;
 
-typedef struct mpRoomInfoContainer
+typedef struct mpRoomDObj
 {
-    mpRoomInfo *room_info[1];
+    DObj *room_dobj[1];
 
-} mpRoomInfoContainer;
+} mpRoomDObj;
 
 typedef struct mpUnkVectorData
 {
@@ -134,9 +138,30 @@ typedef enum mpLineType
     mpCollision_LineType_Ground,
     mpCollision_LineType_Ceil,
     mpCollision_LineType_RWall,
-    mpCollision_LineType_LWall
+    mpCollision_LineType_LWall,
+    mpCollision_LineType_EnumMax
 
 } mpLineType;
+
+typedef struct mpLineGroup // This is all getting hard to wrap one's head around, but this is basically a group of line types (ground, ceil, rwall, lwall)
+{
+    u16 line_count, *line_id;
+
+} mpLineGroup;
+
+typedef struct mpDirection
+{
+    f32 top, bottom, right, left;
+
+} mpDirection;
+
+typedef struct mpEdgeBounds
+{
+    mpDirection d0, d1, d2, d3;
+
+} mpEdgeBounds;
+
+extern mpEdgeBounds gMapEdgeBounds;
 
 typedef struct _mpObjectColl
 {

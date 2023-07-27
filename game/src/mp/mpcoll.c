@@ -2458,7 +2458,7 @@ void func_ovl2_800DE368(GObj *fighter_gobj)
 
     if (fp->publicity_knockback != 0.0F)
     {
-        if ((fp->publicity_knockback >= 100.0F) && ((fp->joint[ftParts_TopN_Joint]->translate.x < (D_ovl2_80131308.unk_80131308_0x2C + 450.0F)) || ((D_ovl2_80131308.unk_80131308_0x28 - 450.0F) < fp->joint[ftParts_TopN_Joint]->translate.x)))
+        if ((fp->publicity_knockback >= 100.0F) && ((fp->joint[ftParts_TopN_Joint]->translate.x < (gMapEdgeBounds.d2.left + 450.0F)) || ((gMapEdgeBounds.d2.right - 450.0F) < fp->joint[ftParts_TopN_Joint]->translate.x)))
         {
             func_ovl3_80164F70(fighter_gobj, fp->publicity_knockback);
         }
@@ -2523,7 +2523,7 @@ bool32 func_ovl2_800DE45C(mpCollData *coll_data, GObj *fighter_gobj, u32 arg2)
         }
         if ((arg2 & 8) && (this_fp->phys_info.vel_air.y >= 30.0F))
         {
-            coll_data->coll_mask |= 0x4000;
+            coll_data->coll_mask |= MPCOLL_MASK_CEILHEAVY;
 
             sp24 = TRUE;
 

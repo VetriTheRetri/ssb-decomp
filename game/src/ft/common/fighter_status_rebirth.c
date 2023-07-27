@@ -3,7 +3,7 @@
 #include <gm/gmground.h>
 
 extern ftSpawnInfo D_ovl2_80116DD0;
-extern f32 Rebirth_Halo_Offset_X[GMMATCH_PLAYERS_MAX];
+extern f32 ftCommon_Rebirth_OffsetX[GMMATCH_PLAYERS_MAX];
 
 // 0x8013CF60
 void ftCommon_RebirthDown_SetStatus(GObj *this_gobj)
@@ -51,8 +51,8 @@ loop: // This makes no sense
         }
         while (FALSE);
     }
-    rebirth_vars.pos.x = Rebirth_Halo_Offset_X[halo_number] + halo_spawn_pos.x;
-    rebirth_vars.pos.y = gpMapData->blastzone_top;
+    rebirth_vars.pos.x = ftCommon_Rebirth_OffsetX[halo_number] + halo_spawn_pos.x;
+    rebirth_vars.pos.y = gpGroundInfo->blastzone_top;
     rebirth_vars.pos.z = 0.0F;
 
     func_ovl2_800D79F0(this_gobj, &rebirth_vars);
@@ -72,7 +72,7 @@ loop: // This makes no sense
     this_fp->status_vars.common.rebirth.halo_lower_wait = FTCOMMON_REBIRTH_HALO_LOWER_WAIT;
     this_fp->status_vars.common.rebirth.halo_despawn_wait = FTCOMMON_REBIRTH_HALO_DESPAWN_WAIT;
     this_fp->status_vars.common.rebirth.pos = DObjGetStruct(this_gobj)->translate;
-    this_fp->status_vars.common.rebirth.halo_offset.x = Rebirth_Halo_Offset_X[halo_number] + halo_spawn_pos.x;
+    this_fp->status_vars.common.rebirth.halo_offset.x = ftCommon_Rebirth_OffsetX[halo_number] + halo_spawn_pos.x;
     this_fp->status_vars.common.rebirth.halo_offset.y = halo_spawn_pos.y;
     this_fp->status_vars.common.rebirth.halo_offset.z = 0.0F;
 

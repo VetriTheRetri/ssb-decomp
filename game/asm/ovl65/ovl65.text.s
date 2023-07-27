@@ -1344,8 +1344,8 @@ glabel func_ovl65_8018D60C
   /* 10CC4C 8018E3EC AFA70020 */        sw $a3, 0x20($sp)
   /* 10CC50 8018E3F0 0C063517 */       jal func_ovl65_8018D45C
   /* 10CC54 8018E3F4 AFAF0044 */        sw $t7, 0x44($sp)
-  /* 10CC58 8018E3F8 3C028013 */       lui $v0, %hi(gpMapData)
-  /* 10CC5C 8018E3FC 8C421300 */        lw $v0, %lo(gpMapData)($v0)
+  /* 10CC58 8018E3F8 3C028013 */       lui $v0, %hi(gpGroundInfo)
+  /* 10CC5C 8018E3FC 8C421300 */        lw $v0, %lo(gpGroundInfo)($v0)
   /* 10CC60 8018E400 3C013F00 */       lui $at, (0x3F000000 >> 16) # 0.5
   /* 10CC64 8018E404 44814000 */      mtc1 $at, $f8 # 0.5 to cop1
   /* 10CC68 8018E408 844E006C */        lh $t6, 0x6c($v0)
@@ -1748,9 +1748,9 @@ glabel func_ovl65_8018E9A4
   /* 10D230 8018E9D0 01D8C821 */      addu $t9, $t6, $t8
   /* 10D234 8018E9D4 8F220078 */        lw $v0, 0x78($t9)
   /* 10D238 8018E9D8 44800000 */      mtc1 $zero, $f0
-  /* 10D23C 8018E9DC 3C098013 */       lui $t1, %hi(gpMapData)
+  /* 10D23C 8018E9DC 3C098013 */       lui $t1, %hi(gpGroundInfo)
   /* 10D240 8018E9E0 8C480084 */        lw $t0, 0x84($v0)
-  /* 10D244 8018E9E4 8D291300 */        lw $t1, %lo(gpMapData)($t1)
+  /* 10D244 8018E9E4 8D291300 */        lw $t1, %lo(gpGroundInfo)($t1)
   /* 10D248 8018E9E8 E7A00020 */      swc1 $f0, 0x20($sp)
   /* 10D24C 8018E9EC E7A00024 */      swc1 $f0, 0x24($sp)
   /* 10D250 8018E9F0 E7A00028 */      swc1 $f0, 0x28($sp)
@@ -2675,8 +2675,8 @@ glabel func_ovl65_8018F6F0
   /* 10DF64 8018F704 00002825 */        or $a1, $zero, $zero
   /* 10DF68 8018F708 0C064445 */       jal func_ovl65_80191114
   /* 10DF6C 8018F70C 00000000 */       nop 
-  /* 10DF70 8018F710 3C0E8013 */       lui $t6, %hi(gpMapData)
-  /* 10DF74 8018F714 8DCE1300 */        lw $t6, %lo(gpMapData)($t6)
+  /* 10DF70 8018F710 3C0E8013 */       lui $t6, %hi(gpGroundInfo)
+  /* 10DF74 8018F714 8DCE1300 */        lw $t6, %lo(gpGroundInfo)($t6)
   /* 10DF78 8018F718 3C180000 */       lui $t8, %hi(D_NF_00004D48)
   /* 10DF7C 8018F71C 27184D48 */     addiu $t8, $t8, %lo(D_NF_00004D48)
   /* 10DF80 8018F720 8DCF0010 */        lw $t7, 0x10($t6)
@@ -5219,11 +5219,11 @@ glabel func_ovl65_80191B44
   /* 1103B4 80191B54 24040002 */     addiu $a0, $zero, 2
   /* 1103B8 80191B58 0C006265 */       jal rand_u16_range
   /* 1103BC 80191B5C AFA60034 */        sw $a2, 0x34($sp)
-  /* 1103C0 80191B60 3C058013 */       lui $a1, %hi(D_ovl2_80131308)
-  /* 1103C4 80191B64 24A51308 */     addiu $a1, $a1, %lo(D_ovl2_80131308)
+  /* 1103C0 80191B60 3C058013 */       lui $a1, %hi(gMapEdgeBounds)
+  /* 1103C4 80191B64 24A51308 */     addiu $a1, $a1, %lo(gMapEdgeBounds)
   /* 1103C8 80191B68 3C0144FA */       lui $at, (0x44FA0000 >> 16) # 2000.0
   /* 1103CC 80191B6C 44816000 */      mtc1 $at, $f12 # 2000.0 to cop1
-  /* 1103D0 80191B70 C4A0002C */      lwc1 $f0, 0x2c($a1) # D_ovl2_80131308 + 44
+  /* 1103D0 80191B70 C4A0002C */      lwc1 $f0, 0x2c($a1) # gMapEdgeBounds + 44
   /* 1103D4 80191B74 00022100 */       sll $a0, $v0, 4
   /* 1103D8 80191B78 00822023 */      subu $a0, $a0, $v0
   /* 1103DC 80191B7C 460C003C */    c.lt.s $f0, $f12
@@ -5238,9 +5238,9 @@ glabel func_ovl65_80191B44
   .L80191BA0:
   /* 110400 80191BA0 460C0381 */     sub.s $f14, $f0, $f12
   .L80191BA4:
-  /* 110404 80191BA4 C4A40028 */      lwc1 $f4, 0x28($a1) # D_ovl2_80131308 + 40
+  /* 110404 80191BA4 C4A40028 */      lwc1 $f4, 0x28($a1) # gMapEdgeBounds + 40
   /* 110408 80191BA8 44809000 */      mtc1 $zero, $f18
-  /* 11040C 80191BAC 3C028013 */       lui $v0, %hi(gpMapData)
+  /* 11040C 80191BAC 3C028013 */       lui $v0, %hi(gpGroundInfo)
   /* 110410 80191BB0 460C2000 */     add.s $f0, $f4, $f12
   /* 110414 80191BB4 4612003C */    c.lt.s $f0, $f18
   /* 110418 80191BB8 00000000 */       nop 
@@ -5250,7 +5250,7 @@ glabel func_ovl65_80191B44
   /* 110428 80191BC8 46000087 */     neg.s $f2, $f0
   /* 11042C 80191BCC 46000086 */     mov.s $f2, $f0
   .L80191BD0:
-  /* 110430 80191BD0 8C421300 */        lw $v0, %lo(gpMapData)($v0)
+  /* 110430 80191BD0 8C421300 */        lw $v0, %lo(gpGroundInfo)($v0)
   /* 110434 80191BD4 460E1400 */     add.s $f16, $f2, $f14
   /* 110438 80191BD8 844E0074 */        lh $t6, 0x74($v0)
   /* 11043C 80191BDC 448E3000 */      mtc1 $t6, $f6
@@ -5286,19 +5286,19 @@ glabel func_ovl65_80191B44
   /* 1104AC 80191C4C 0C006252 */       jal rand_f32
   /* 1104B0 80191C50 E7B00030 */      swc1 $f16, 0x30($sp)
   /* 1104B4 80191C54 C7B00030 */      lwc1 $f16, 0x30($sp)
-  /* 1104B8 80191C58 3C058013 */       lui $a1, %hi(D_ovl2_80131308)
-  /* 1104BC 80191C5C 24A51308 */     addiu $a1, $a1, %lo(D_ovl2_80131308)
+  /* 1104B8 80191C58 3C058013 */       lui $a1, %hi(gMapEdgeBounds)
+  /* 1104BC 80191C5C 24A51308 */     addiu $a1, $a1, %lo(gMapEdgeBounds)
   /* 1104C0 80191C60 3C0144FA */       lui $at, (0x44FA0000 >> 16) # 2000.0
   /* 1104C4 80191C64 46100102 */     mul.s $f4, $f0, $f16
   /* 1104C8 80191C68 44816000 */      mtc1 $at, $f12 # 2000.0 to cop1
-  /* 1104CC 80191C6C C4A6002C */      lwc1 $f6, 0x2c($a1) # D_ovl2_80131308 + 44
+  /* 1104CC 80191C6C C4A6002C */      lwc1 $f6, 0x2c($a1) # gMapEdgeBounds + 44
   /* 1104D0 80191C70 8FA60034 */        lw $a2, 0x34($sp)
   /* 1104D4 80191C74 460C3201 */     sub.s $f8, $f6, $f12
   /* 1104D8 80191C78 46082280 */     add.s $f10, $f4, $f8
   /* 1104DC 80191C7C 0C006252 */       jal rand_f32
   /* 1104E0 80191C80 E4CA001C */      swc1 $f10, 0x1c($a2)
-  /* 1104E4 80191C84 3C188013 */       lui $t8, %hi(gpMapData)
-  /* 1104E8 80191C88 8F181300 */        lw $t8, %lo(gpMapData)($t8)
+  /* 1104E4 80191C84 3C188013 */       lui $t8, %hi(gpGroundInfo)
+  /* 1104E8 80191C88 8F181300 */        lw $t8, %lo(gpGroundInfo)($t8)
   /* 1104EC 80191C8C C7A20020 */      lwc1 $f2, 0x20($sp)
   /* 1104F0 80191C90 C7AE001C */      lwc1 $f14, 0x1c($sp)
   /* 1104F4 80191C94 87190076 */        lh $t9, 0x76($t8)
@@ -6095,8 +6095,8 @@ glabel func_ovl65_80192764
   /* 111018 801927B8 244238D8 */     addiu $v0, $v0, %lo(D_ovl65_801938D8)
   /* 11101C 801927BC AC400000 */        sw $zero, ($v0) # D_ovl65_801938D8 + 0
   /* 111020 801927C0 AC400004 */        sw $zero, 4($v0) # D_ovl65_801938D8 + 4
-  /* 111024 801927C4 3C0E8013 */       lui $t6, %hi(gpMapData)
-  /* 111028 801927C8 8DCE1300 */        lw $t6, %lo(gpMapData)($t6)
+  /* 111024 801927C4 3C0E8013 */       lui $t6, %hi(gpGroundInfo)
+  /* 111028 801927C8 8DCE1300 */        lw $t6, %lo(gpGroundInfo)($t6)
   /* 11102C 801927CC 3C180000 */       lui $t8, %hi(D_NF_00004D48)
   /* 111030 801927D0 44802000 */      mtc1 $zero, $f4
   /* 111034 801927D4 8DCF0010 */        lw $t7, 0x10($t6)

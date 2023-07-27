@@ -12,13 +12,20 @@ typedef  struct gmGroundUnkBytes
 
 } gmGroundUnkBytes;
 
+typedef struct grMapCollisionRoom
+{
+    s32 room_id;
+    u8 filler_0x4[0x2C - 0x4];
+
+} grMapCollisionRoom;
+
 typedef struct gmGroundInfo
 {
     void *unk_0x0;
     void *unk_0x4;
     void *unk_0x8;
     void *unk_0xC;
-    void *unk_0x10;
+    grMapCollisionRoom *collision_rooms;
     void *unk_0x14;
     void *unk_0x18;
     void *unk_0x1C;
@@ -62,6 +69,6 @@ typedef struct gmGroundInfo
 
 } gmGroundInfo;
 
-static gmGroundInfo *gpMapData; // TO DO: move this to the correct file
+static gmGroundInfo *gpGroundInfo; // TO DO: move this to the correct file
 
 #endif

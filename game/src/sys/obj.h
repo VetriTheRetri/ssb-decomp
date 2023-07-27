@@ -45,7 +45,6 @@ struct GObj
     bool32 is_skip_render;
     u32 unk_0x80;
     void *user_data;
-
 };
 
 typedef struct HAL_Bitmap // Probably belongs in a different header
@@ -62,21 +61,6 @@ typedef struct HAL_Bitmap // Probably belongs in a different header
 } HAL_Bitmap;
 
 extern GObj *gOMObjCommonLinks[];
-
-#ifndef Mtx_t
-
-typedef long	Mtx_t[4][4];
-
-#endif
-
-#ifndef Mtx
-
-typedef union {
-    Mtx_t		m;
-    long long int	force_structure_alignment;
-} Mtx;
-
-#endif 
 
 typedef struct OMMtx OMMtx;
 
@@ -166,12 +150,16 @@ struct DObj
     u8 unk_0x54;
     OMMtx *unk58[5];
     void *aobj;
-    s32 unk_dobj_0x70;
+    void *unk_dobj_0x70;
     f32 dobj_f0; // Multi-purpose? Usually FLOAT32_MAX, used as rotation step in Crate/Barrel smash GFX?
     f32 dobj_f1; // Multi-purpose? Fighters use this as animation playback rate, but it is used as rotation step in Crate/Barrel smash GFX?
     f32 dobj_f2; // Multi-purpose? Usually animation frame, but used as rotation step in Crate/Barrel smash GFX?
     MObj *mobj;
-    void *unk_0x84;    // Multi-purpose? Articles store a fighter joint here, but func_ovl2_800D78E8 expects a different struct
+    union
+    {
+        void *unk_0x84;    // Multi-purpose? Articles store a fighter joint here, but func_ovl2_800D78E8 expects a different struct
+        s32 anim_type;     // Used in mpcollision.c to determine whether to check for collision?
+    };
 };
 
 #define DObjGetStruct(gobj) \

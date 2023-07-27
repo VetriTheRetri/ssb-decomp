@@ -29,7 +29,7 @@ void ftMasterHand_Wait_DecideStatusPlayer(GObj *fighter_gobj)
     if (ftCommon_Turn_CheckInputSuccess(fighter_gobj) != FALSE)
     {
         fp->lr = -fp->lr;
-        fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * HALF_PI32;
+        fp->joint[ftParts_TopN_Joint]->rotate.y = fp->lr * F_DEG_TO_RAD(90.0F); // HALF_PI32
     }
 
     angle = ftCommon_GetStickAngleRadians(fp);
@@ -263,7 +263,7 @@ void ftMasterHand_Wait_ProcPhysics(GObj *fighter_gobj)
     }
 }
 
-static gmUnkInfo_80131308 D_ovl2_80131308;
+static mpEdgeBounds gMapEdgeBounds;
 
 // 0x80159040
 void ftMasterHand_Wait_SetStatus(GObj *fighter_gobj)
@@ -293,11 +293,11 @@ void ftMasterHand_Wait_SetStatus(GObj *fighter_gobj)
             ground_line_id = fp->fighter_vars.masterhand.boss->default_line_id;
         }
 
-        if (D_ovl2_80131308.unk_80131308_0x28 < translate->x)
+        if (gMapEdgeBounds.d2.right < translate->x)
         {
             mpCollision_GetLREdgeRight(ground_line_id, &pos);
         }
-        else if (translate->x < D_ovl2_80131308.unk_80131308_0x2C)
+        else if (translate->x < gMapEdgeBounds.d2.left)
         {
             mpCollision_GetLREdgeLeft(ground_line_id, &pos);
         }

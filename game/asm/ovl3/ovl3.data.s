@@ -866,7 +866,7 @@ glabel D_ovl3_80188410
 glabel D_ovl3_80188458
   .incbin "ovl3.raw.bin", 0x56958, 0x38
 
-glabel Rebirth_Halo_Offset_X
+glabel ftCommon_Rebirth_OffsetX
   .incbin "ovl3.raw.bin", 0x56990, 0x8
   /* 56998 102ED8 80188498 */
   .asciz "Dz"

@@ -275,7 +275,7 @@ void ftCommon_Appear_SetPosition(GObj *fighter_gobj)
 
     fp->entry_pos = DObjGetStruct(fighter_gobj)->translate;
 
-    DObjGetStruct(fighter_gobj)->translate.y = (gpMapData->cam_bound_top + gpMapData->blastzone_top) * 0.5F;
+    DObjGetStruct(fighter_gobj)->translate.y = (gpGroundInfo->cam_bound_top + gpGroundInfo->blastzone_top) * 0.5F;
 
     ftCommon_Fall_SetStatus(fighter_gobj);
 }

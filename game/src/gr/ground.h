@@ -115,7 +115,7 @@ static s32 gMapEnvironmentCount;
 
 /*
 
-struct gpMapData_80131300
+struct gpGroundInfo_80131300
 {
     void *unk_0x0;
     void *unk_0x4;
@@ -154,7 +154,7 @@ struct gpMapData_80131300
     s16 blastzone_left;
 };
 
-static struct gpMapData_80131300 *gpMapData; // TO DO: move this to the correct file
+static struct gpGroundInfo_80131300 *gpGroundInfo; // TO DO: move this to the correct file
 
 */
 

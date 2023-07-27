@@ -192,17 +192,7 @@ extern Unk_80131460 *D_ovl2_80131460;
 extern void *D_ovl2_80131470;
 extern Unk_801314B0 D_ovl2_801314B0;
 
-typedef struct gmUnkInfo_80131308
-{
-    u8 filler_0x0[0x24];
-    f32 unk_80131308_0x24;
-    f32 unk_80131308_0x28;
-    f32 unk_80131308_0x2C;
-    f32 unk_80131308_0x30;
-
-} gmUnkInfo_80131308;
-
-static gmUnkInfo_80131308 D_ovl2_80131308;
+static mpEdgeBounds gMapEdgeBounds;
 
 typedef struct gmStaleInfo
 {

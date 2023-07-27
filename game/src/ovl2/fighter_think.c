@@ -1672,13 +1672,13 @@ void ftManager_ProcPhysicsMap(GObj *fighter_gobj)
 
     ftCommon_Dead_CheckInterruptCommon(fighter_gobj);
 
-    if ((gpMapData->unk_groundinfo_0x88 <= fp->coll_data.pos_curr.y) && (topn_translate->y < gpMapData->unk_groundinfo_0x88) && (fp->ft_kind != Ft_Kind_MasterHand))
+    if ((gpGroundInfo->unk_groundinfo_0x88 <= fp->coll_data.pos_curr.y) && (topn_translate->y < gpGroundInfo->unk_groundinfo_0x88) && (fp->ft_kind != Ft_Kind_MasterHand))
     {
         func_800269C0(0x99U);
     }
     if (fp->publicity_knockback != 0)
     {
-        if (((D_ovl2_80131308.unk_80131308_0x2C + 450.0F) < fp->joint[ftParts_TopN_Joint]->translate.x) && (fp->joint[ftParts_TopN_Joint]->translate.x < (D_ovl2_80131308.unk_80131308_0x28 - 450.0F)))
+        if (((gMapEdgeBounds.d2.left + 450.0F) < fp->joint[ftParts_TopN_Joint]->translate.x) && (fp->joint[ftParts_TopN_Joint]->translate.x < (gMapEdgeBounds.d2.right - 450.0F)))
         {
             fp->publicity_knockback = 0.0F;
         }
