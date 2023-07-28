@@ -5,6 +5,7 @@
 #include <PR/ultratypes.h>
 #include <sys/obj.h>
 #include <sys/obj_renderer.h>
+#include <mp/mpcoll.h>
 
 typedef enum grKind
 {
@@ -80,8 +81,6 @@ typedef enum grMaterial
 
 } grMaterial;
 
-
-
 typedef struct _Ground_Hit
 {
     s32 env_kind; // Not actually UpdateState, no idea what this is; something to do with sound effects?
@@ -113,15 +112,32 @@ static grMapEnvironment D_ovl2_80131190[1];
 static s32 D_ovl2_80131198;
 static s32 gMapEnvironmentCount;
 
-/*
+typedef  struct gmGroundUnkBytes
+{
+    u8 byte[1]; // Size currently unknown
 
-struct gpGroundInfo_80131300
+} gmGroundUnkBytes;
+
+typedef struct grMapCollisionRoom
+{
+    s32 room_id;
+    u8 filler_0x4[0x2C - 0x4];
+
+} grMapCollisionRoom;
+
+typedef struct grFileInfo
+{
+    intptr_t size, offset;
+
+} grFileInfo;
+
+typedef struct gmGroundInfo
 {
     void *unk_0x0;
     void *unk_0x4;
     void *unk_0x8;
     void *unk_0xC;
-    void *unk_0x10;
+    grMapCollisionRoom *collision_rooms;
     void *unk_0x14;
     void *unk_0x18;
     void *unk_0x1C;
@@ -133,7 +149,7 @@ struct gpGroundInfo_80131300
     void *unk_0x34;
     void *unk_0x38;
     void *unk_0x3C;
-    void *unk_0x40;
+    mpGeometryInfo *map_geometry;
     void *unk_0x44;
     void *unk_0x48;
     GfxColorAlpha fog_color;
@@ -141,9 +157,7 @@ struct gpGroundInfo_80131300
     s32 unk_0x54;
     s32 unk_0x58;
     s32 unk_0x5C;
-    f32 unk_0x60;
-    f32 unk_0x64;
-    f32 unk_0x68;
+    Vec3f light_angle;
     s16 cam_bound_top;
     s16 cam_bound_bottom;
     s16 cam_bound_right;
@@ -152,10 +166,19 @@ struct gpGroundInfo_80131300
     s16 blastzone_bottom;
     s16 blastzone_right;
     s16 blastzone_left;
-};
+    u32 music_id;
+    u32 unk_0x80;
+    gmGroundUnkBytes *unk_0x84;
+    s16 unk_groundinfo_0x88;
+    s16 unk_groundinfo_0x8A;
+    u8 filler_0x88[0x92 - 0x8C];
+    s16 unk_bound_top;
+    s16 unk_bound_bottom;
+    s16 unk_bound_right;
+    s16 unk_bound_left;
 
-static struct gpGroundInfo_80131300 *gpGroundInfo; // TO DO: move this to the correct file
+} gmGroundInfo;
 
-*/
+static gmGroundInfo *gpGroundInfo; // TO DO: move this to the correct file
 
 #endif

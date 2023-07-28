@@ -12,7 +12,7 @@
 
 extern Gfx *gpDisplayListHead[4];
 
-extern BumpAllocRegion gMatrixHeap;
+extern mlBumpAllocRegion gMatrixHeap;
 
 extern Gfx gDisplayListHitboxEdge;  // 0x8012C128
 extern Gfx gDisplayListHitboxBlend; // 0x8012C160

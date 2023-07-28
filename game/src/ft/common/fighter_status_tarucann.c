@@ -1,6 +1,6 @@
 #include <ft/fighter.h>
 #include <it/item.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 
 // 0x80143E10
 void ftCommon_TaruCann_ProcUpdate(GObj *fighter_gobj)

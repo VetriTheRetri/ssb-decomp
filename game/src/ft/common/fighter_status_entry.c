@@ -11,7 +11,7 @@
 #include <ft/chara/ftpurin/ftpurin.h>
 #include <ft/chara/ftness/ftness.h>
 #include <ft/chara/ftmasterhand/ftmasterhand.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 
 // 0x8013D930
 void ftCommon_Entry_SetStatus(GObj *fighter_gobj)

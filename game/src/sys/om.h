@@ -385,7 +385,7 @@ extern struct Unk80046A88 D_80046A88[64];
 // functions
 
 extern s32 func_800078C8(void);
-extern struct GObjProcess *gOMObj_AddGObjCommonProc(struct GObjCommon *com, void *ptr, u8 kind, u32 pri);
+extern struct GObjProcess *omAddGObjCommonProc(struct GObjCommon *com, void *ptr, u8 kind, u32 pri);
 extern void func_8000848C(struct GObjProcess *);
 extern void func_80008CC0(struct DObj *, u8, u8);
 extern struct OMMtx *func_80008CF0(struct OMCamera *, u8, u8);
@@ -404,17 +404,17 @@ extern struct SObj *func_80009614(struct GObjCommon *, Sprite *);
 extern void func_800096EC(struct SObj *);
 extern struct OMCamera *func_80009760(struct GObjCommon *);
 extern struct GObjCommon *
-func_80009968(u32 id, void (*arg1)(struct GObjCommon *), u8 link, u32 arg3);
+omMakeGObjCommon(u32 id, void (*arg1)(struct GObjCommon *), u8 link, u32 arg3);
 extern struct GObjCommon *
 func_800099A8(u32 id, void (*arg1)(struct GObjCommon *), u8 link, u32 arg3);
-extern void gOMObj_EjectGObjCommon(struct GObjCommon *);
+extern void omEjectGObjCommon(struct GObjCommon *);
 extern void func_80009C90(struct GObjCommon *arg0, u8 link, u32 arg2);
 extern void func_80009CC8(struct GObjCommon *arg0, u8 link, u32 arg2);
 extern void func_80009DF4(
     struct GObjCommon *arg0,
     void (*arg1)(struct GObjCommon *),
     u8 dlLink,
-    s32 arg3,
+    u32 arg3,
     s32 arg4);
 extern void func_80009F74(
     struct GObjCommon *arg0,

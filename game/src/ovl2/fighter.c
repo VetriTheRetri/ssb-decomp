@@ -19,13 +19,13 @@ void func_ovl2_800D78E8(GObj *fighter_gobj)
 
             if (temp_s0->unk_gobj != NULL)
             {
-                gOMObj_EjectGObjCommon(temp_s0->unk_gobj);
+                omEjectGObjCommon(temp_s0->unk_gobj);
             }
             func_ovl2_800D767C(temp_s0);
         }
     }
     func_ovl2_800D75EC(fp);
-    gOMObj_EjectGObjCommon(fighter_gobj);
+    omEjectGObjCommon(fighter_gobj);
 }
 
 void func_ovl2_800D7994(GObj *fighter_gobj)
@@ -323,7 +323,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
     DObj *topn_joint;
     UnkFighterDObjData *unk_ft_dobj;
 
-    fighter_gobj = func_80009968(0x3E8U, NULL, 3U, 0x80000000U);
+    fighter_gobj = omMakeGObjCommon(0x3E8U, NULL, 3U, 0x80000000U);
 
     func_80009DF4(fighter_gobj, spawn->unk_rebirth_0x3C, 9, 0x80000000, -1);
 
@@ -423,7 +423,7 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
                 {
                     unk_ft_dobj = attributes->unk_0x32C;
 
-                    dobj_unk->unk_gobj = func_80009968(0x3E9U, NULL, 0xDU, 0x80000000U);
+                    dobj_unk->unk_gobj = omMakeGObjCommon(0x3E9U, NULL, 0xDU, 0x80000000U);
 
                     func_800092D0(dobj_unk->unk_gobj, unk_ft_dobj->unk_ftdobj_0x4);
                     func_ovl0_800C8CB8(dobj_unk->unk_gobj->obj, unk_ft_dobj->unk_ftdobj_0x8, unk_ft_dobj->unk_ftdobj_0xC, 0, fp->costume);
@@ -486,14 +486,14 @@ GObj* ftManager_CreateFighter(ftSpawnInfo *spawn) // Create fighter
 
     if (fp->status_info.pl_kind != Pl_Kind_Result)
     {
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcInterruptMain, 1, 5);
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcPhysicsMapNormal, 1, 4);
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcPhysicsMapCapture, 1, 3);
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcSearchAllCatch, 1, 2);
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcSearchAllHit, 1, 1);
-        gOMObj_AddGObjCommonProc(fighter_gobj, ftManager_ProcUpdateMain, 1, 0);
+        omAddGObjCommonProc(fighter_gobj, ftManager_ProcInterruptMain, 1, 5);
+        omAddGObjCommonProc(fighter_gobj, ftManager_ProcPhysicsMapNormal, 1, 4);
+        omAddGObjCommonProc(fighter_gobj, ftManager_ProcPhysicsMapCapture, 1, 3);
+        omAddGObjCommonProc(fighter_gobj, ftManager_ProcSearchAllCatch, 1, 2);
+        omAddGObjCommonProc(fighter_gobj, ftManager_ProcSearchAllHit, 1, 1);
+        omAddGObjCommonProc(fighter_gobj, ftManager_ProcUpdateMain, 1, 0);
     }
-    else gOMObj_AddGObjCommonProc(fighter_gobj, func_ovl1_80390584, 1, 5);
+    else omAddGObjCommonProc(fighter_gobj, func_ovl1_80390584, 1, 5);
 
     func_ovl2_800D79F0(fighter_gobj, spawn);
 

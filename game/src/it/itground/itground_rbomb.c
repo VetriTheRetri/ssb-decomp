@@ -82,8 +82,8 @@ void itEffect_UpdateRBombSmashGFX(GObj *effect_gobj) // RTTF bomb explode GFX pr
 
     if (ep->lifetime == 0)
     {
-        func_ovl2_800FD4F8(ep);
-        gOMObj_EjectGObjCommon(effect_gobj);
+        efManager_SetPrevAlloc(ep);
+        omEjectGObjCommon(effect_gobj);
     }
     else while (joint != NULL)
     {
@@ -109,15 +109,14 @@ void itEffect_CreateRBombSmashGFX(Vec3f *pos)
     DObj *joint;
     s32 i;
     void *temp_s4;
-    u32 var = 0x80000000;
 
     if (ep != NULL)
     {
-        effect_gobj = func_80009968(0x3F3U, NULL, 6U, var);
+        effect_gobj = omMakeGObjCommon(gOMObj_Kind_Effect, NULL, 6U, 0x80000000);
 
         if (effect_gobj != NULL)
         {
-            func_80009DF4(effect_gobj, func_80014038, 0xB, var, -1);
+            func_80009DF4(effect_gobj, func_80014038, 0xB, 0x80000000U, -1);
 
             temp_s4 = (*(uintptr_t*)((uintptr_t)*itGround_RBomb_ItemDesc.p_file + itGround_RBomb_ItemDesc.offset) - (uintptr_t)&D_NF_00000788) + (uintptr_t)&D_NF_000008A0; // Linker thing
 
@@ -141,7 +140,7 @@ void itEffect_CreateRBombSmashGFX(Vec3f *pos)
 
             effect_gobj->user_data = ep;
 
-            gOMObj_AddGObjCommonProc(effect_gobj, itEffect_UpdateRBombSmashGFX, 1, 3);
+            omAddGObjCommonProc(effect_gobj, itEffect_UpdateRBombSmashGFX, 1, 3);
         }
     }
 }

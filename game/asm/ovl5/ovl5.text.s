@@ -122,7 +122,7 @@ glabel func_ovl5_8018D1A0
   /* 10B500 8018D250 24A5D160 */     addiu $a1, $a1, %lo(func_ovl5_8018D160)
   /* 10B504 8018D254 02003825 */        or $a3, $s0, $zero
   /* 10B508 8018D258 240403F7 */     addiu $a0, $zero, 0x3f7
-  /* 10B50C 8018D25C 0C00265A */       jal func_80009968
+  /* 10B50C 8018D25C 0C00265A */       jal omMakeGObjCommon
   /* 10B510 8018D260 2406000D */     addiu $a2, $zero, 0xd
   /* 10B514 8018D264 241900FF */     addiu $t9, $zero, 0xff
   /* 10B518 8018D268 AFB90010 */        sw $t9, 0x10($sp)
@@ -157,7 +157,7 @@ glabel func_ovl5_8018D1A0
   /* 10B58C 8018D2DC 00000000 */       nop 
   /* 10B590 8018D2E0 0C05B7A8 */       jal itManager_AllocUserData
   /* 10B594 8018D2E4 00000000 */       nop 
-  /* 10B598 8018D2E8 0C03F4C0 */       jal func_ovl2_800FD300
+  /* 10B598 8018D2E8 0C03F4C0 */       jal efManager_AllocUserData
   /* 10B59C 8018D2EC 00000000 */       nop 
   /* 10B5A0 8018D2F0 0C0455B9 */       jal func_ovl2_801156E4
   /* 10B5A4 8018D2F4 00000000 */       nop 
@@ -287,13 +287,13 @@ glabel func_ovl5_8018D4BC
   /* 10B780 8018D4D0 246E0008 */     addiu $t6, $v1, 8
   /* 10B784 8018D4D4 AC8E0000 */        sw $t6, ($a0)
   /* 10B788 8018D4D8 3C180002 */       lui $t8, 2
-  /* 10B78C 8018D4DC 3C058013 */       lui $a1, %hi(D_ovl2_80131390)
-  /* 10B790 8018D4E0 3C068013 */       lui $a2, %hi(D_ovl2_80131394)
+  /* 10B78C 8018D4DC 3C058013 */       lui $a1, %hi(gMapLightAngleX)
+  /* 10B790 8018D4E0 3C068013 */       lui $a2, %hi(gMapLightAngleY)
   /* 10B794 8018D4E4 AC780004 */        sw $t8, 4($v1)
   /* 10B798 8018D4E8 AC6F0000 */        sw $t7, ($v1)
-  /* 10B79C 8018D4EC 8CC61394 */        lw $a2, %lo(D_ovl2_80131394)($a2)
+  /* 10B79C 8018D4EC 8CC61394 */        lw $a2, %lo(gMapLightAngleY)($a2)
   /* 10B7A0 8018D4F0 0C03F2DC */       jal func_ovl2_800FCB70
-  /* 10B7A4 8018D4F4 8CA51390 */        lw $a1, %lo(D_ovl2_80131390)($a1)
+  /* 10B7A4 8018D4F4 8CA51390 */        lw $a1, %lo(gMapLightAngleX)($a1)
   /* 10B7A8 8018D4F8 8FBF0014 */        lw $ra, 0x14($sp)
   /* 10B7AC 8018D4FC 27BD0018 */     addiu $sp, $sp, 0x18
   /* 10B7B0 8018D500 03E00008 */        jr $ra

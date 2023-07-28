@@ -70,7 +70,7 @@ void itMain_UpdateGravityClampTVel(itStruct *ip, f32 gravity, f32 terminal_veloc
     }
 }
 
-extern s32 dbObject_DisplayMode_Global_Article; // Static (.bss)
+extern s32 gItemDisplayMode; // Static (.bss)
 
 // 0x801725BC
 void itMain_ResetPlayerVars(GObj *item_gobj)
@@ -84,7 +84,7 @@ void itMain_ResetPlayerVars(GObj *item_gobj)
     ip->player_number = 0;
     ip->item_hit.stale = ITEM_STALE_DEFAULT;
 
-    ip->display_mode = dbObject_DisplayMode_Global_Article;
+    ip->display_mode = gItemDisplayMode;
 }
 
 // 0x801725F8
@@ -190,10 +190,10 @@ void itMain_DestroyItem(GObj *item_gobj)
     }
     if (ip->indicator_gobj != NULL)
     {
-        gOMObj_EjectGObjCommon(ip->indicator_gobj);
+        omEjectGObjCommon(ip->indicator_gobj);
     }
     itManager_SetPrevAlloc(ip);
-    gOMObj_EjectGObjCommon(item_gobj);
+    omEjectGObjCommon(item_gobj);
 }
 
 // 0x80172984

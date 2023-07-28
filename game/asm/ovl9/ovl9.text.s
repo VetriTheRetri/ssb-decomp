@@ -879,7 +879,7 @@ glabel func_ovl9_80369D78
   /* 1AC2F0 80369E80 8C640000 */        lw $a0, ($v1) # D_ovl9_80371408 + 0
   /* 1AC2F4 80369E84 24A5975C */     addiu $a1, $a1, %lo(func_ovl9_8036975C)
   /* 1AC2F8 80369E88 24060001 */     addiu $a2, $zero, 1
-  /* 1AC2FC 80369E8C 0C002062 */       jal gOMObj_AddGObjCommonProc
+  /* 1AC2FC 80369E8C 0C002062 */       jal omAddGObjCommonProc
   /* 1AC300 80369E90 24070001 */     addiu $a3, $zero, 1
   /* 1AC304 80369E94 3C038004 */       lui $v1, %hi(D_80046640)
   /* 1AC308 80369E98 24636640 */     addiu $v1, $v1, %lo(D_80046640)

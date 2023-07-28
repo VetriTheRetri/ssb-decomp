@@ -656,7 +656,7 @@ void free_om_camera(struct OMCamera *obj) {
     sCameraHead = obj;
 }
 
-struct GObjProcess *gOMObj_AddGObjCommonProc(struct GObjCommon *com, void *ptr, u8 kind, u32 pri) {
+struct GObjProcess *omAddGObjCommonProc(struct GObjCommon *com, void *ptr, u8 kind, u32 pri) {
     struct ThreadStackNode *stackNode; // sp2C
     struct GObjThread *thread;         // sp28
     struct GObjProcess *process;       // sp24
@@ -1532,7 +1532,7 @@ struct GObjCommon *om_g_add_common(u32 id, void (*arg1)(struct GObjCommon *), u8
 }
 
 // from 64remix: render.create_object
-struct GObjCommon *func_80009968(u32 id, void (*arg1)(struct GObjCommon *), u8 link, u32 arg3) {
+struct GObjCommon *omMakeGObjCommon(u32 id, void (*arg1)(struct GObjCommon *), u8 link, u32 arg3) {
     struct GObjCommon *com = om_g_add_common(id, arg1, link, arg3);
 
     if (com == NULL) { return NULL; }
@@ -1574,7 +1574,7 @@ unref_80009A34(u32 id, void (*arg1)(struct GObjCommon *), struct GObjCommon *arg
     return com;
 }
 
-void gOMObj_EjectGObjCommon(struct GObjCommon *arg0) {
+void omEjectGObjCommon(struct GObjCommon *arg0) {
     if (arg0 == NULL || arg0 == D_80046A54) {
         D_80046A64 = 2;
         return;
@@ -1679,7 +1679,7 @@ void func_80009DF4(
     struct GObjCommon *arg0,
     void (*arg1)(struct GObjCommon *),
     u8 dlLink,
-    s32 arg3,
+    u32 arg3,
     s32 arg4) {
     if (arg0 == NULL) { arg0 = D_80046A54; }
     om_g_link_obj_dl_common(arg0, arg1, dlLink, arg3, arg4);
@@ -1889,7 +1889,7 @@ struct GObjCommon *func_8000A40C(struct GObjCommon *arg0) {
         case 0: break;
         case 2:
             D_80046A64 = 0;
-            gOMObj_EjectGObjCommon(arg0);
+            omEjectGObjCommon(arg0);
             break;
         default: D_80046A64 = 0; break;
     }
@@ -1930,7 +1930,7 @@ struct GObjProcess *func_8000A49C(struct GObjProcess *proc) {
             D_80046A64 = 0;
             while (ret != NULL && ret->unk18 == proc->unk18) { ret = ret->unk08; }
 
-            gOMObj_EjectGObjCommon(proc->unk18);
+            omEjectGObjCommon(proc->unk18);
             break;
         }
         case 1:

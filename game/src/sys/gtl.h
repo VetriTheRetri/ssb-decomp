@@ -63,8 +63,8 @@ extern u32 D_8003B6E4;
 extern union WeirdBytewise D_8003B6E8;
 extern Gfx *gpDisplayListHead[4];
 extern Gfx *D_800465C0[4];
-extern struct BumpAllocRegion gMatrixHeap;
-extern struct BumpAllocRegion gGeneralHeap;
+extern struct mlBumpAllocRegion gMatrixHeap;
+extern struct mlBumpAllocRegion gGeneralHeap;
 // Gfx *? Gfx
 extern u32 D_80046610;
 // Gfx *? Gfx

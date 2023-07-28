@@ -37,7 +37,7 @@ typedef struct mpRoomInfo
     u8 filler_0x28[0x70 - 0x28];
     void *unk_dobj_0x70;
     u8 filler_0x74[0x84 - 0x74];
-    s32 anim_type;
+    s32 yakumono_id;
 
 } mpRoomInfo;
 
@@ -142,6 +142,15 @@ typedef enum mpLineType
     mpCollision_LineType_EnumMax
 
 } mpLineType;
+
+typedef enum mpYakumonoStatus // State of collision line?
+{
+    mpCollision_Yakumono_None,
+    mpCollision_Yakumono_On,
+    mpCollision_Yakumono_Unk,
+    mpCollision_Yakumono_Off
+
+} mpYakumonoStatus;
 
 typedef struct mpLineGroup // This is all getting hard to wrap one's head around, but this is basically a group of line types (ground, ceil, rwall, lwall)
 {

@@ -6,11 +6,11 @@
 
 #include <PR/ultratypes.h>
 
-void reset_bump_alloc(struct BumpAllocRegion *bp) {
+void reset_bump_alloc(struct mlBumpAllocRegion *bp) {
     bp->ptr = bp->start;
 }
 
-void *bump_alloc(struct BumpAllocRegion *bp, u32 size, u32 alignment) {
+void *bump_alloc(struct mlBumpAllocRegion *bp, u32 size, u32 alignment) {
     u8 *aligned;
     u32 offset;
 
@@ -30,7 +30,7 @@ void *bump_alloc(struct BumpAllocRegion *bp, u32 size, u32 alignment) {
     return aligned;
 }
 
-void init_bump_alloc(struct BumpAllocRegion *bp, u32 id, void *start, u32 size) {
+void init_bump_alloc(struct mlBumpAllocRegion *bp, u32 id, void *start, u32 size) {
     bp->id    = id;
     bp->ptr   = start;
     bp->start = start;

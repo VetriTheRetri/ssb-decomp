@@ -667,13 +667,13 @@ glabel func_ovl14_8013239C
   /* 11C290 80132420 24A51F3C */     addiu $a1, $a1, %lo(func_ovl14_80131F3C)
   /* 11C294 80132424 02003825 */        or $a3, $s0, $zero
   /* 11C298 80132428 00002025 */        or $a0, $zero, $zero
-  /* 11C29C 8013242C 0C00265A */       jal func_80009968
+  /* 11C29C 8013242C 0C00265A */       jal omMakeGObjCommon
   /* 11C2A0 80132430 2406000F */     addiu $a2, $zero, 0xf
   /* 11C2A4 80132434 3C058013 */       lui $a1, %hi(func_ovl14_80132238)
   /* 11C2A8 80132438 24A52238 */     addiu $a1, $a1, %lo(func_ovl14_80132238)
   /* 11C2AC 8013243C 00402025 */        or $a0, $v0, $zero
   /* 11C2B0 80132440 24060001 */     addiu $a2, $zero, 1
-  /* 11C2B4 80132444 0C002062 */       jal gOMObj_AddGObjCommonProc
+  /* 11C2B4 80132444 0C002062 */       jal omAddGObjCommonProc
   /* 11C2B8 80132448 00003825 */        or $a3, $zero, $zero
   /* 11C2BC 8013244C 240A00FF */     addiu $t2, $zero, 0xff
   /* 11C2C0 80132450 AFAA0010 */        sw $t2, 0x10($sp)
@@ -686,7 +686,7 @@ glabel func_ovl14_8013239C
   /* 11C2DC 8013246C 00000000 */       nop 
   /* 11C2E0 80132470 0C04C8B7 */       jal func_ovl14_801322DC
   /* 11C2E4 80132474 00002025 */        or $a0, $zero, $zero
-  /* 11C2E8 80132478 0C03F4C0 */       jal func_ovl2_800FD300
+  /* 11C2E8 80132478 0C03F4C0 */       jal efManager_AllocUserData
   /* 11C2EC 8013247C 00000000 */       nop 
   /* 11C2F0 80132480 24040003 */     addiu $a0, $zero, 3
   /* 11C2F4 80132484 0C035C65 */       jal func_ovl2_800D7194

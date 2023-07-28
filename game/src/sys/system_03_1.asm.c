@@ -330,7 +330,7 @@ void func_8000B7B4(void) {
         curr = gOMObjCommonLinks[i];
         while (curr != NULL) {
             next = curr->unk04;
-            gOMObj_EjectGObjCommon(curr);
+            omEjectGObjCommon(curr);
             curr = next;
         }
     }
@@ -353,14 +353,14 @@ struct GObjCommon *func_8000B824(
     struct GObjCommon *gobj;
     struct DObj *dobj;
 
-    gobj = func_80009968(arg0, arg1, arg2, arg3);
+    gobj = omMakeGObjCommon(arg0, arg1, arg2, arg3);
 
     if (gobj == NULL) { return NULL; }
 
     func_80009DF4(gobj, arg4, arg5, arg6, arg7);
     dobj = func_800092D0(gobj, arg8);
     if (arg9 != 0) { func_8000B3EC(dobj); }
-    if (argB != 0) { gOMObj_AddGObjCommonProc(gobj, argB, argA, argC); }
+    if (argB != 0) { omAddGObjCommonProc(gobj, argB, argA, argC); }
 
     return gobj;
 }
@@ -380,11 +380,11 @@ struct GObjCommon *func_8000B8BC(
     u32 argB) {
     struct GObjCommon *gobj;
 
-    gobj = func_80009968(arg0, arg1, arg2, arg3);
+    gobj = omMakeGObjCommon(arg0, arg1, arg2, arg3);
     if (gobj == 0) { return NULL; }
     func_80009DF4(gobj, arg4, arg5, arg6, arg7);
     func_80009614(gobj, arg8);
-    if (argA != 0) { gOMObj_AddGObjCommonProc(gobj, argA, arg9, argB); }
+    if (argA != 0) { omAddGObjCommonProc(gobj, argA, arg9, argB); }
 
     return gobj;
 }
@@ -406,12 +406,12 @@ struct GObjCommon *func_8000B93C(
     struct GObjCommon *gobj;
     struct OMCamera *cam;
 
-    gobj = func_80009968(id, arg1, link, arg3);
+    gobj = omMakeGObjCommon(id, arg1, link, arg3);
     if (gobj == NULL) { return NULL; }
     func_80009F74(gobj, arg4, arg5, arg7, arg8);
     cam = func_80009760(gobj);
     if (arg9 != 0) { func_8000B47C(cam); }
-    if (arg11 != 0) { gOMObj_AddGObjCommonProc(gobj, arg11, arg10, arg12); }
+    if (arg11 != 0) { omAddGObjCommonProc(gobj, arg11, arg10, arg12); }
     if (arg13 != 0) {
         cam->unk80 = 7;
         cam->unk84 = 0xFF;

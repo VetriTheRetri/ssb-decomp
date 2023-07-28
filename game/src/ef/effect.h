@@ -3,8 +3,12 @@
 
 #include <ssb_types.h>
 #include <macros.h>
+#include <sys/obj_renderer.h> // Probably shouldn't be included
 #include <PR/ultratypes.h>
 #include <sys/obj.h>
+
+#define EFFECT_ALLOC_NUM 38
+#define EFFECT_ALLOC_ALIGN 0x8
 
 typedef struct Effect_Info
 {
@@ -39,6 +43,7 @@ typedef struct efStruct
     u8 filler_0x14[0x18 - 0x14];
     s32 lifetime;
     s32 unk_ef_0x1C;
+    u8 filler_0x20[0x3C - 0x20];
 
 } efStruct;
 

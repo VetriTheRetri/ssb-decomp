@@ -103,7 +103,7 @@ glabel func_ovl23_80131C40
   /* 12A60C 80131C4C 00002025 */        or $a0, $zero, $zero
   /* 12A610 80131C50 00002825 */        or $a1, $zero, $zero
   /* 12A614 80131C54 24060002 */     addiu $a2, $zero, 2
-  /* 12A618 80131C58 0C00265A */       jal func_80009968
+  /* 12A618 80131C58 0C00265A */       jal omMakeGObjCommon
   /* 12A61C 80131C5C 3C078000 */       lui $a3, 0x8000
   /* 12A620 80131C60 3C058013 */       lui $a1, %hi(func_ovl23_80131B24)
   /* 12A624 80131C64 240EFFFF */     addiu $t6, $zero, -1
@@ -265,7 +265,7 @@ glabel func_ovl23_80131E3C
   /* 12A87C 80131EBC 24A51DF4 */     addiu $a1, $a1, %lo(func_ovl23_80131DF4)
   /* 12A880 80131EC0 00402025 */        or $a0, $v0, $zero
   /* 12A884 80131EC4 24060001 */     addiu $a2, $zero, 1
-  /* 12A888 80131EC8 0C002062 */       jal gOMObj_AddGObjCommonProc
+  /* 12A888 80131EC8 0C002062 */       jal omAddGObjCommonProc
   /* 12A88C 80131ECC 24070001 */     addiu $a3, $zero, 1
   /* 12A890 80131ED0 3C018013 */       lui $at, %hi(D_ovl23_80132468)
   /* 12A894 80131ED4 C4242468 */      lwc1 $f4, %lo(D_ovl23_80132468)($at)
@@ -510,7 +510,7 @@ glabel func_ovl23_801321C0
   /* 12AC14 80132254 24A52118 */     addiu $a1, $a1, %lo(func_ovl23_80132118)
   /* 12AC18 80132258 00002025 */        or $a0, $zero, $zero
   /* 12AC1C 8013225C 00003025 */        or $a2, $zero, $zero
-  /* 12AC20 80132260 0C00265A */       jal func_80009968
+  /* 12AC20 80132260 0C00265A */       jal omMakeGObjCommon
   /* 12AC24 80132264 3C078000 */       lui $a3, 0x8000
   /* 12AC28 80132268 240A00FF */     addiu $t2, $zero, 0xff
   /* 12AC2C 8013226C AFAA0010 */        sw $t2, 0x10($sp)
@@ -523,7 +523,7 @@ glabel func_ovl23_801321C0
   /* 12AC48 80132288 00000000 */       nop 
   /* 12AC4C 8013228C 0C045624 */       jal func_ovl2_80115890
   /* 12AC50 80132290 00000000 */       nop 
-  /* 12AC54 80132294 0C03F4C0 */       jal func_ovl2_800FD300
+  /* 12AC54 80132294 0C03F4C0 */       jal efManager_AllocUserData
   /* 12AC58 80132298 00000000 */       nop 
   /* 12AC5C 8013229C 24040001 */     addiu $a0, $zero, 1
   /* 12AC60 801322A0 0C035C65 */       jal func_ovl2_800D7194

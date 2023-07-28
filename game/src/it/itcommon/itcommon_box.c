@@ -116,8 +116,8 @@ void itEffect_UpdateBoxSmashGFX(GObj *effect_gobj) // Barrel/Crate smash GFX pro
 
     if (ep->lifetime == 0)
     {
-        func_ovl2_800FD4F8(ep);
-        gOMObj_EjectGObjCommon(effect_gobj);
+        efManager_SetPrevAlloc(ep);
+        omEjectGObjCommon(effect_gobj);
     }
     else while (joint != NULL)
     {
@@ -146,15 +146,14 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
     DObj *joint;
     s32 i;
     void *temp_s4;
-    u32 var = 0x80000000;
 
     if (ep != NULL)
     {
-        effect_gobj = func_80009968(0x3F3U, NULL, 6U, var);
+        effect_gobj = omMakeGObjCommon(gOMObj_Kind_Effect, NULL, 6U, 0x80000000);
 
         if (effect_gobj != NULL)
         {
-            func_80009DF4(effect_gobj, func_80014038, 0xB, var, -1);
+            func_80009DF4(effect_gobj, func_80014038, 0xB, 0x80000000U, -1);
 
             temp_s4 = (*(uintptr_t*) ((uintptr_t)*itCommon_Box_ItemDesc.p_file + itCommon_Box_ItemDesc.offset) - (intptr_t)&D_NF_00006778) + (intptr_t)&D_NF_000068F0; // Linker thing
 
@@ -178,7 +177,7 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 
             effect_gobj->user_data = ep;
 
-            gOMObj_AddGObjCommonProc(effect_gobj, itEffect_UpdateBoxSmashGFX, 1U, 3U);
+            omAddGObjCommonProc(effect_gobj, itEffect_UpdateBoxSmashGFX, 1U, 3U);
         }
     }
 }

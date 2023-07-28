@@ -19,7 +19,7 @@ extern Gfx gDisplayListHitboxBlend;
 extern Gfx gDisplayListHitboxCube;
 extern Gfx gDisplayListMapCollisionBottom;
 extern Gfx gDisplayListMapCollisionTop;
-extern BumpAllocRegion gMatrixHeap;
+extern mlBumpAllocRegion gMatrixHeap;
 
 // 0x80171410
 void itRender_DisplayHitCollisions(GObj *item_gobj)

@@ -5,6 +5,7 @@
 #include <PR/ultratypes.h>
 #include <sys/obj.h>
 #include <sys/obj_renderer.h>
+#include <mp/mpcoll.h>
 
 typedef  struct gmGroundUnkBytes
 {
@@ -18,6 +19,12 @@ typedef struct grMapCollisionRoom
     u8 filler_0x4[0x2C - 0x4];
 
 } grMapCollisionRoom;
+
+typedef struct grFileInfo
+{
+    intptr_t size, offset;
+
+} grFileInfo;
 
 typedef struct gmGroundInfo
 {
@@ -37,7 +44,7 @@ typedef struct gmGroundInfo
     void *unk_0x34;
     void *unk_0x38;
     void *unk_0x3C;
-    void *unk_0x40;
+    mpGeometryInfo *map_geometry;
     void *unk_0x44;
     void *unk_0x48;
     GfxColorAlpha fog_color;

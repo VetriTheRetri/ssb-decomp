@@ -21,8 +21,8 @@ f32 func_ovl3_8013AE10(Vec3f *a, Vec3f *b, f32 f)
 
 extern Gfx *gpDisplayListHead[4];
 extern intptr_t D_NF_00003A68;
-extern GfxColorAlpha D_ovl2_8012CA78;
-extern GfxColorAlpha D_ovl2_8012CA7C[3];
+extern GfxColorAlpha gDefaultShadowColor;
+extern GfxColorAlpha gTeamShadowColors[3];
 extern void *D_ovl2_801313B4;
 extern Gfx D_ovl3_80188410;
 extern Gfx D_ovl3_80188458;
@@ -270,9 +270,9 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 
                     if ((gpBattleState->is_team_battle == TRUE) && !(gpBattleState->is_ignore_teamshadow))
                     {
-                        gDPSetPrimColor(gpDisplayListHead[0]++, 0, 0, D_ovl2_8012CA7C[fp->team].r, D_ovl2_8012CA7C[fp->team].g, D_ovl2_8012CA7C[fp->team].b, D_ovl2_8012CA7C[fp->team].a);
+                        gDPSetPrimColor(gpDisplayListHead[0]++, 0, 0, gTeamShadowColors[fp->team].r, gTeamShadowColors[fp->team].g, gTeamShadowColors[fp->team].b, gTeamShadowColors[fp->team].a);
                     }
-                    else gDPSetPrimColor(gpDisplayListHead[0]++, 0, 0, D_ovl2_8012CA78.r, D_ovl2_8012CA78.g, D_ovl2_8012CA78.b, D_ovl2_8012CA78.a);
+                    else gDPSetPrimColor(gpDisplayListHead[0]++, 0, 0, gDefaultShadowColor.r, gDefaultShadowColor.g, gDefaultShadowColor.b, gDefaultShadowColor.a);
 
                     sv = shadow_vertex;
 
@@ -406,7 +406,7 @@ void func_ovl3_8013AE60(GObj *shadow_gobj)
 
 GObj *func_ovl3_8013BB88(GObj *fighter_gobj)
 {
-    GObj *shadow_gobj = func_80009968(0x3FC, 0, 0xD, 0x80000000);
+    GObj *shadow_gobj = omMakeGObjCommon(0x3FC, 0, 0xD, 0x80000000);
     ftStruct *fp;
     Shadow_Struct *sp = hal_alloc(sizeof(Shadow_Struct), 8);
     s32 i;

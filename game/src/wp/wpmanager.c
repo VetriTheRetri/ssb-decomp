@@ -1,13 +1,13 @@
 #include <wp/weapon.h>
 #include <ft/fighter.h>
 #include <gr/ground.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 #include <gm/gmmatch.h>
 #include <it/item.h>
 
-extern wpStruct *wpManager_Global_CurrentUserData;
-extern u32 wpManager_Global_GroupIndex;
-extern s32 dbObject_DisplayModeItem;
+extern wpStruct *gpWeaponStructCurrent;
+extern u32 gWeaponGroupIndex;
+extern s32 gWeaponDisplayMode;
 
 // 0x801654B0
 void wpManager_AllocUserData(void)
@@ -15,7 +15,7 @@ void wpManager_AllocUserData(void)
     wpStruct *wp;
     s32 i;
 
-    wpManager_Global_CurrentUserData = wp = hal_alloc(sizeof(wpStruct) * WEAPON_ALLOC_MAX, 8U);
+    gpWeaponStructCurrent = wp = hal_alloc(sizeof(wpStruct) * WEAPON_ALLOC_MAX, 8U);
 
     for (i = 0; i < (WEAPON_ALLOC_MAX - 1); i++)
     {
@@ -25,14 +25,14 @@ void wpManager_AllocUserData(void)
     {
         wp[i].wp_alloc_next = NULL;
     }
-    wpManager_Global_GroupIndex = 1;
-    dbObject_DisplayModeItem = dbObject_DisplayMode_Master;
+    gWeaponGroupIndex = 1;
+    gWeaponDisplayMode = dbObject_DisplayMode_Master;
 }
 
 // 0x80165558
 wpStruct* wpManager_GetStructSetNextAlloc()
 {
-    wpStruct *next_weapon = wpManager_Global_CurrentUserData;
+    wpStruct *next_weapon = gpWeaponStructCurrent;
     wpStruct *current_weapon;
 
     if (next_weapon == NULL)
@@ -41,7 +41,7 @@ wpStruct* wpManager_GetStructSetNextAlloc()
     }
     current_weapon = next_weapon;
 
-    wpManager_Global_CurrentUserData = next_weapon->wp_alloc_next;
+    gpWeaponStructCurrent = next_weapon->wp_alloc_next;
 
     return current_weapon;
 }
@@ -49,19 +49,19 @@ wpStruct* wpManager_GetStructSetNextAlloc()
 // 0x80165588
 void wpManager_SetPrevAlloc(wpStruct *wp)
 {
-    wp->wp_alloc_next = wpManager_Global_CurrentUserData;
+    wp->wp_alloc_next = gpWeaponStructCurrent;
 
-    wpManager_Global_CurrentUserData = wp;
+    gpWeaponStructCurrent = wp;
 }
 
 // 0x801655A0
 u32 wpManager_GetGroupIndexInc(void)
 {
-    u32 group_id = wpManager_Global_GroupIndex++;
+    u32 group_id = gWeaponGroupIndex++;
 
-    if (wpManager_Global_GroupIndex == 0)
+    if (gWeaponGroupIndex == 0)
     {
-        wpManager_Global_GroupIndex++;
+        gWeaponGroupIndex++;
     }
     return group_id;
 }
@@ -86,7 +86,7 @@ GObj* wpManager_MakeWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, Vec
     {
         return NULL;
     }
-    weapon_gobj = func_80009968(0x3F4U, NULL, 5U, 0x80000000U);
+    weapon_gobj = omMakeGObjCommon(0x3F4U, NULL, 5U, 0x80000000U);
 
     if (weapon_gobj == NULL)
     {
@@ -163,7 +163,7 @@ GObj* wpManager_MakeWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, Vec
         wp->player_number = 0;
         wp->lr = RIGHT;
 
-        wp->display_mode = dbObject_DisplayModeItem;
+        wp->display_mode = gWeaponDisplayMode;
 
         wp->weapon_hit.attack_id = ftMotion_AttackIndex_None;
         wp->weapon_hit.stale = WEAPON_STALE_DEFAULT;
@@ -292,9 +292,9 @@ GObj* wpManager_MakeWeapon(GObj *spawn_gobj, wpCreateDesc *item_status_desc, Vec
     wp->coll_data.vel_push.y = 0.0F;
     wp->coll_data.vel_push.z = 0.0F;
 
-    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcWeaponMain, 1, 3);
-    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcSearchHitWeapon, 1, 1);
-    gOMObj_AddGObjCommonProc(weapon_gobj, wpManager_ProcHitCollisions, 1, 0);
+    omAddGObjCommonProc(weapon_gobj, wpManager_ProcWeaponMain, 1, 3);
+    omAddGObjCommonProc(weapon_gobj, wpManager_ProcSearchHitWeapon, 1, 1);
+    omAddGObjCommonProc(weapon_gobj, wpManager_ProcHitCollisions, 1, 0);
 
     wp->proc_update = item_status_desc->proc_update;
     wp->proc_map = item_status_desc->proc_map;

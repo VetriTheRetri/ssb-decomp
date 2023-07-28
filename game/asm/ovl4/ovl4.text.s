@@ -200,7 +200,7 @@ glabel func_ovl4_8018D228
   /* 10A264 8018D374 24050004 */     addiu $a1, $zero, 4
   /* 10A268 8018D378 0C05952C */       jal wpManager_AllocUserData
   /* 10A26C 8018D37C 00000000 */       nop 
-  /* 10A270 8018D380 0C03F4C0 */       jal func_ovl2_800FD300
+  /* 10A270 8018D380 0C03F4C0 */       jal efManager_AllocUserData
   /* 10A274 8018D384 00000000 */       nop 
   /* 10A278 8018D388 0C04577A */       jal func_ovl2_80115DE8
   /* 10A27C 8018D38C 240400FF */     addiu $a0, $zero, 0xff
@@ -1004,7 +1004,7 @@ glabel func_ovl4_8018DE20
   /* 10ADB0 8018DEC0 24050004 */     addiu $a1, $zero, 4
   /* 10ADB4 8018DEC4 0C05952C */       jal wpManager_AllocUserData
   /* 10ADB8 8018DEC8 00000000 */       nop 
-  /* 10ADBC 8018DECC 0C03F4C0 */       jal func_ovl2_800FD300
+  /* 10ADBC 8018DECC 0C03F4C0 */       jal efManager_AllocUserData
   /* 10ADC0 8018DED0 00000000 */       nop 
   /* 10ADC4 8018DED4 0C04577A */       jal func_ovl2_80115DE8
   /* 10ADC8 8018DED8 240400FF */     addiu $a0, $zero, 0xff
@@ -1176,13 +1176,13 @@ glabel func_ovl4_8018E144
   /* 10B048 8018E158 246E0008 */     addiu $t6, $v1, 8
   /* 10B04C 8018E15C AC8E0000 */        sw $t6, ($a0)
   /* 10B050 8018E160 3C180002 */       lui $t8, 2
-  /* 10B054 8018E164 3C058013 */       lui $a1, %hi(D_ovl2_80131390)
-  /* 10B058 8018E168 3C068013 */       lui $a2, %hi(D_ovl2_80131394)
+  /* 10B054 8018E164 3C058013 */       lui $a1, %hi(gMapLightAngleX)
+  /* 10B058 8018E168 3C068013 */       lui $a2, %hi(gMapLightAngleY)
   /* 10B05C 8018E16C AC780004 */        sw $t8, 4($v1)
   /* 10B060 8018E170 AC6F0000 */        sw $t7, ($v1)
-  /* 10B064 8018E174 8CC61394 */        lw $a2, %lo(D_ovl2_80131394)($a2)
+  /* 10B064 8018E174 8CC61394 */        lw $a2, %lo(gMapLightAngleY)($a2)
   /* 10B068 8018E178 0C03F2DC */       jal func_ovl2_800FCB70
-  /* 10B06C 8018E17C 8CA51390 */        lw $a1, %lo(D_ovl2_80131390)($a1)
+  /* 10B06C 8018E17C 8CA51390 */        lw $a1, %lo(gMapLightAngleX)($a1)
   /* 10B070 8018E180 8FBF0014 */        lw $ra, 0x14($sp)
   /* 10B074 8018E184 27BD0018 */     addiu $sp, $sp, 0x18
   /* 10B078 8018E188 03E00008 */        jr $ra

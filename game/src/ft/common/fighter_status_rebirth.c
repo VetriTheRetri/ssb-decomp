@@ -1,6 +1,6 @@
 #include <ft/fighter.h>
 #include <gm/gmmatch.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 
 extern ftSpawnInfo D_ovl2_80116DD0;
 extern f32 ftCommon_Rebirth_OffsetX[GMMATCH_PLAYERS_MAX];

@@ -5772,10 +5772,10 @@ glabel Fighter_ItemThrow_Desc
   .balign 4
   .incbin "ovl2.raw.bin", 0x565D4, 0x14
 
-glabel D_ovl2_8012CA78
+glabel gDefaultShadowColor
   .incbin "ovl2.raw.bin", 0x565E8, 0x4
 
-glabel D_ovl2_8012CA7C
+glabel gTeamShadowColors
   .incbin "ovl2.raw.bin", 0x565EC, 0x14
 
 glabel D_ovl2_8012CA90

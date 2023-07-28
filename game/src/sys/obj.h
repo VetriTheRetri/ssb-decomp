@@ -14,6 +14,15 @@ typedef enum gOMObjLinkIndex
 
 } gOMObjLinkIndex;
 
+typedef enum gOMObjKind
+{
+    gOMObj_Kind_Fighter = 1000,
+    gOMObj_Kind_Effect  = 1011,
+    gOMObj_Kind_Weapon,
+    gOMObj_Kind_Item
+
+} gOMObjKind;
+
 typedef f32 mtx[3][4];
 
 typedef struct GObj GObj;
@@ -21,7 +30,7 @@ typedef struct GObj GObj;
 struct GObj
 {
     // Info here acquired from halofactory of the Smash Remix team
-    s32 unk_info; // arbitrary ID signifying related objects? e.g. 0x000003F8
+    gOMObjKind gobj_id; // arbitrary ID signifying related objects? e.g. 0x000003F8
     GObj *group_gobj_next;
     GObj *group_gobj_prev;
     u8 group;
@@ -36,8 +45,7 @@ struct GObj
     GObj *room_gobj_prev; // Unconfirmed, might be int
     s32 room_order; // Might be group? Assuming room based on order here
     void (*renderer)(GObj *gobj);
-    s32 unk_0x30;
-    s32 unk_0x34;
+    u64 unk_0x30;
     s32 unk_0x38; // 0xFFFFFFFF, textures or series of flags?
     u8 filler_0x3C[0x74 - 0x3C];
     void *obj;
@@ -157,8 +165,9 @@ struct DObj
     MObj *mobj;
     union
     {
+        DObj *joint;
         void *unk_0x84;    // Multi-purpose? Articles store a fighter joint here, but func_ovl2_800D78E8 expects a different struct
-        s32 anim_type;     // Used in mpcollision.c to determine whether to check for collision?
+        s32 yakumono_id;     // Used in mpcollision.c to determine whether to check for collision?
     };
 };
 

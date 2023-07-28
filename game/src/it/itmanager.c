@@ -2,9 +2,9 @@
 #include <ft/fighter.h>
 #include <wp/weapon.h>
 #include <gm/gmmatch.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 
-extern itStruct *itManager_Global_CurrentUserData;
+extern itStruct *gpItemStructCurrent;
 extern void *gpItemFileData;
 extern intptr_t D_NF_000000FB;
 extern intptr_t D_NF_00B1BCA0;
@@ -13,24 +13,23 @@ extern intptr_t D_NF_00B1BDE0_other;
 extern intptr_t D_NF_00B1E640;
 extern void *D_ovl3_8018D044;
 
-extern s32 dbObject_DisplayMode_Global_Article;
+extern s32 gItemDisplayMode;
 
 // 0x8016DEA0
 void itManager_AllocUserData(void) // Many linker things here
 {
-    itStruct *ap;
+    itStruct *ip;
     s32 i;
 
-    itManager_Global_CurrentUserData = ap = hal_alloc(sizeof(itStruct) * ITEM_ALLOC_MAX, 8U);
+    gpItemStructCurrent = ip = hal_alloc(sizeof(itStruct) * ITEM_ALLOC_MAX, 0x8);
 
     for (i = 0; i < (ITEM_ALLOC_MAX - 1); i++)
     {
-        ap[i].ip_alloc_next = &ap[i + 1];
-
+        ip[i].ip_alloc_next = &ip[i + 1];
     }
-    if (ap != NULL)
+    if (ip != NULL)
     {
-        ap[i].ip_alloc_next = NULL;
+        ip[i].ip_alloc_next = NULL;
     }
     gpItemFileData = rldm_get_file_with_external_heap(&D_NF_000000FB, hal_alloc(rldm_bytes_needed_to_load(&D_NF_000000FB), 0x10));
 
@@ -40,13 +39,13 @@ void itManager_AllocUserData(void) // Many linker things here
     itManager_InitMonsterVars();
     func_ovl2_80111F80();
 
-    dbObject_DisplayMode_Global_Article = dbObject_DisplayMode_Master;
+    gItemDisplayMode = dbObject_DisplayMode_Master;
 }
 
 // 0x8016DFAC
 itStruct* itManager_GetStructSetNextAlloc(void) // Set global Article user_data link pointer to next member
 {
-    itStruct *next_item = itManager_Global_CurrentUserData;
+    itStruct *next_item = gpItemStructCurrent;
     itStruct *current_item;
 
     if (next_item == NULL)
@@ -55,7 +54,7 @@ itStruct* itManager_GetStructSetNextAlloc(void) // Set global Article user_data 
     }
     current_item = next_item;
 
-    itManager_Global_CurrentUserData = next_item->ip_alloc_next;
+    gpItemStructCurrent = next_item->ip_alloc_next;
 
     return current_item;
 }
@@ -63,9 +62,9 @@ itStruct* itManager_GetStructSetNextAlloc(void) // Set global Article user_data 
 // 0x8016DFDC
 void itManager_SetPrevAlloc(itStruct *ip) // Set global Article user_data link pointer to previous member
 {
-    ip->ip_alloc_next = itManager_Global_CurrentUserData;
+    ip->ip_alloc_next = gpItemStructCurrent;
 
-    itManager_Global_CurrentUserData = ip;
+    gpItemStructCurrent = ip;
 }
 
 void func_ovl3_8016DFF4(GObj *gobj, DObjDesc *joint_desc, DObj **p_ptr_dobj, u8 arg3)
@@ -123,7 +122,7 @@ GObj* itManager_MakeItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *pos,
     {
         return NULL;
     }
-    else item_gobj = func_80009968(0x3F5U, NULL, 4U, 0x80000000U);
+    else item_gobj = omMakeGObjCommon(0x3F5U, NULL, 4U, 0x80000000U);
 
     if (item_gobj == NULL)
     {
@@ -287,9 +286,9 @@ GObj* itManager_MakeItem(GObj *spawn_gobj, itCreateDesc *spawn_data, Vec3f *pos,
     ap->coll_data.vel_push.y            = 0.0F;
     ap->coll_data.vel_push.z            = 0.0F;
 
-    gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcItemMain, 1, 3);
-    gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcSearchHitAll, 1, 1);
-    gOMObj_AddGObjCommonProc(item_gobj, itManager_ProcUpdateHitCollisions, 1, 0);
+    omAddGObjCommonProc(item_gobj, itManager_ProcItemMain, 1, 3);
+    omAddGObjCommonProc(item_gobj, itManager_ProcSearchHitAll, 1, 1);
+    omAddGObjCommonProc(item_gobj, itManager_ProcUpdateHitCollisions, 1, 0);
 
     ap->proc_update     = spawn_data->proc_update;
     ap->proc_map        = spawn_data->proc_map;
@@ -355,7 +354,7 @@ GObj* itManager_MakeItemSetupCommon(GObj *spawn_gobj, s32 index, Vec3f *pos, Vec
 // 0x8016EB00
 itStruct* itManager_GetCurrentStructAlloc(void)
 {
-    return itManager_Global_CurrentUserData;
+    return gpItemStructCurrent;
 }
 
 u32 itMonster_Global_SelectMonsterIndex = 0;    // Not uninitialized, so it's hardcoded upon building the ROM? 0 = random, beyond 0 = index of Pokémon to spawn
@@ -470,9 +469,9 @@ GObj* func_ovl3_8016EC40(void)
                 {
                     gItemSettings.item_toggles[i] = item_toggles[i];
                 }
-                gobj = func_80009968(0x3F5U, NULL, 2U, 0x80000000U);
+                gobj = omMakeGObjCommon(0x3F5U, NULL, 2U, 0x80000000U);
 
-                gOMObj_AddGObjCommonProc(gobj, itManager_ProcMakeItems, 1, 3);
+                omAddGObjCommonProc(gobj, itManager_ProcMakeItems, 1, 3);
 
                 item_bits = gpBattleState->item_toggles;
 

@@ -4,12 +4,12 @@
 extern const u16 D_ovl2_8012C9A8[28];
 static s32 D_ovl3_8018CF90;
 static u32 D_ovl3_8018CF94; // Either this...
-static f32 ftPublicReact_Damage_Knockback;
+static f32 gReactDamageKnockback;
 static gmSoundEffect *D_ovl3_8018CF9C;
 static u16 D_ovl3_8018CFA0;
 static s32 D_ovl3_8018CFA4; 
 static s32 D_ovl3_8018CFA8;
-static s32 ftPublicReact_Player_Number; // Or this is u32 and the other s32, not entirely sure which
+static s32 gReactPlayerNum; // Or this is u32 and the other s32, not entirely sure which
 static gmSoundEffect *D_ovl3_8018CFB0;
 static u16 D_ovl3_8018CFB4;
 static s32 D_ovl3_8018CFB8;
@@ -35,7 +35,7 @@ bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
     {
         return FALSE;
     }
-    if (player_id == ftPublicReact_Player_Number)
+    if (player_id == gReactPlayerNum)
     {
         return FALSE;
     }
@@ -59,7 +59,7 @@ bool32 func_ovl3_80164AB0(s32 unused, f32 knockback, s32 player_id)
     if (D_ovl3_8018CFB0 != NULL)
     {
         D_ovl3_8018CFB4 = D_ovl3_8018CFB0->sfx_id;
-        ftPublicReact_Player_Number = player_id;
+        gReactPlayerNum = player_id;
         D_ovl3_8018CFB8 = 0;
 
         return TRUE;
@@ -144,13 +144,13 @@ void func_ovl3_80164DE4(f32 arg0, s32 arg1, f32 knockback, s32 arg3)
     }
     else if ((arg1 == D_ovl3_8018CF94) && (D_ovl3_8018CF90 < 0x3C))
     {
-        if (ftPublicReact_Damage_Knockback < knockback)
+        if (gReactDamageKnockback < knockback)
         {
             var_f2 = knockback;
         }
         else
         {
-            var_f2 = ftPublicReact_Damage_Knockback;
+            var_f2 = gReactDamageKnockback;
         }
         func_ovl3_80164D08(arg0, arg1, var_f2);
     }
@@ -161,7 +161,7 @@ void func_ovl3_80164DE4(f32 arg0, s32 arg1, f32 knockback, s32 arg3)
     }
     else if (knockback >= 130.0F)
     {
-        if (arg1 == ftPublicReact_Player_Number)
+        if (arg1 == gReactPlayerNum)
         {
             func_ovl3_80164C18();
         }
@@ -173,7 +173,7 @@ void func_ovl3_80164DE4(f32 arg0, s32 arg1, f32 knockback, s32 arg3)
     }
     D_ovl3_8018CF90 = 0;
     D_ovl3_8018CF94 = arg1;
-    ftPublicReact_Damage_Knockback = knockback;
+    gReactDamageKnockback = knockback;
 }
 
 void func_ovl3_80164F2C(GObj *fighter_gobj, f32 knockback, bool32 arg2)
@@ -190,7 +190,7 @@ void func_ovl3_80164F70(GObj *fighter_gobj, f32 knockback)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    if (ftPublicReact_Player_Number == fp->player_number)
+    if (gReactPlayerNum == fp->player_number)
     {
         func_ovl3_80164C18();
     }
@@ -230,7 +230,7 @@ void func_ovl3_80165024(GObj *fighter_gobj)
         {
             func_ovl3_80164C44(0x269);
         }
-        if (ftPublicReact_Player_Number == fp->player_number)
+        if (gReactPlayerNum == fp->player_number)
         {
             func_ovl3_80164C18();
         }
@@ -287,7 +287,7 @@ void func_ovl3_80165134(s32 arg0)
     {
         func_ovl3_80164C44(0x267);
 
-        if ((var_gobj != NULL) && (ftPublicReact_Player_Number == ftGetStruct(var_gobj)->player_number))
+        if ((var_gobj != NULL) && (gReactPlayerNum == ftGetStruct(var_gobj)->player_number))
         {
             func_ovl3_80164C18();
         }
@@ -354,15 +354,15 @@ void func_ovl3_80165134(s32 arg0)
 
 void *func_ovl3_801653E0(void)
 {
-    void *gobj_process = gOMObj_AddGObjCommonProc(func_80009968(0x3FA, NULL, 0xD, 0x80000000), func_ovl3_80165134, 1, 0); 
+    void *gobj_process = omAddGObjCommonProc(omMakeGObjCommon(0x3FA, NULL, 0xD, 0x80000000), func_ovl3_80165134, 1, 0); 
     D_ovl3_8018CF90 = U16_MAX + 1;
     D_ovl3_8018CF94 = U32_MAX;
-    ftPublicReact_Damage_Knockback = 0.0F;
+    gReactDamageKnockback = 0.0F;
     D_ovl3_8018CF9C = 0;
     D_ovl3_8018CFA0 = 0;
     D_ovl3_8018CFA4 = 0;
     D_ovl3_8018CFA8 = 1200;
-    ftPublicReact_Player_Number = -1;
+    gReactPlayerNum = -1;
     D_ovl3_8018CFB8 = 9;
     D_ovl3_8018CFC0 = 0;
     D_ovl3_8018CFE4 = 0;

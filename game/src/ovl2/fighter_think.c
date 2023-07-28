@@ -3,7 +3,7 @@
 #include <it/item.h>
 #include <gr/ground.h>
 #include <gm/gmmatch.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 #include "thread6.h"
 
 // 0x800DF0F0

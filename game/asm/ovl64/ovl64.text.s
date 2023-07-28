@@ -470,7 +470,7 @@ glabel func_ovl64_8018D704
   /* 18C450 8018D710 24A5D6DC */     addiu $a1, $a1, %lo(func_ovl64_8018D6DC)
   /* 18C454 8018D714 240403F8 */     addiu $a0, $zero, 0x3f8
   /* 18C458 8018D718 2406000A */     addiu $a2, $zero, 0xa
-  /* 18C45C 8018D71C 0C00265A */       jal func_80009968
+  /* 18C45C 8018D71C 0C00265A */       jal omMakeGObjCommon
   /* 18C460 8018D720 3C078000 */       lui $a3, 0x8000
   /* 18C464 8018D724 3C0E8019 */       lui $t6, %hi(D_ovl64_8018E180)
   /* 18C468 8018D728 25CEE180 */     addiu $t6, $t6, %lo(D_ovl64_8018E180)
@@ -787,7 +787,7 @@ glabel func_ovl64_8018DB18
   /* 18C8BC 8018DB7C 02003825 */        or $a3, $s0, $zero
   /* 18C8C0 8018DB80 240403F8 */     addiu $a0, $zero, 0x3f8
   /* 18C8C4 8018DB84 00002825 */        or $a1, $zero, $zero
-  /* 18C8C8 8018DB88 0C00265A */       jal func_80009968
+  /* 18C8C8 8018DB88 0C00265A */       jal omMakeGObjCommon
   /* 18C8CC 8018DB8C 2406000B */     addiu $a2, $zero, 0xb
   /* 18C8D0 8018DB90 3C018019 */       lui $at, %hi(D_ovl64_8018E4E8)
   /* 18C8D4 8018DB94 3C05800D */       lui $a1, %hi(func_ovl0_800CCF00)
@@ -912,7 +912,7 @@ glabel func_ovl64_8018DCC4
   /* 18CAA4 8018DD64 24050004 */     addiu $a1, $zero, 4
   /* 18CAA8 8018DD68 0C05952C */       jal wpManager_AllocUserData
   /* 18CAAC 8018DD6C 00000000 */       nop 
-  /* 18CAB0 8018DD70 0C03F4C0 */       jal func_ovl2_800FD300
+  /* 18CAB0 8018DD70 0C03F4C0 */       jal efManager_AllocUserData
   /* 18CAB4 8018DD74 00000000 */       nop 
   /* 18CAB8 8018DD78 0C04577A */       jal func_ovl2_80115DE8
   /* 18CABC 8018DD7C 240400FF */     addiu $a0, $zero, 0xff
@@ -1076,13 +1076,13 @@ glabel func_ovl64_8018DFC8
   /* 18CD1C 8018DFDC 246E0008 */     addiu $t6, $v1, 8
   /* 18CD20 8018DFE0 AC8E0000 */        sw $t6, ($a0)
   /* 18CD24 8018DFE4 3C180002 */       lui $t8, 2
-  /* 18CD28 8018DFE8 3C058013 */       lui $a1, %hi(D_ovl2_80131390)
-  /* 18CD2C 8018DFEC 3C068013 */       lui $a2, %hi(D_ovl2_80131394)
+  /* 18CD28 8018DFE8 3C058013 */       lui $a1, %hi(gMapLightAngleX)
+  /* 18CD2C 8018DFEC 3C068013 */       lui $a2, %hi(gMapLightAngleY)
   /* 18CD30 8018DFF0 AC780004 */        sw $t8, 4($v1)
   /* 18CD34 8018DFF4 AC6F0000 */        sw $t7, ($v1)
-  /* 18CD38 8018DFF8 8CC61394 */        lw $a2, %lo(D_ovl2_80131394)($a2)
+  /* 18CD38 8018DFF8 8CC61394 */        lw $a2, %lo(gMapLightAngleY)($a2)
   /* 18CD3C 8018DFFC 0C03F2DC */       jal func_ovl2_800FCB70
-  /* 18CD40 8018E000 8CA51390 */        lw $a1, %lo(D_ovl2_80131390)($a1)
+  /* 18CD40 8018E000 8CA51390 */        lw $a1, %lo(gMapLightAngleX)($a1)
   /* 18CD44 8018E004 8FBF0014 */        lw $ra, 0x14($sp)
   /* 18CD48 8018E008 27BD0018 */     addiu $sp, $sp, 0x18
   /* 18CD4C 8018E00C 03E00008 */        jr $ra

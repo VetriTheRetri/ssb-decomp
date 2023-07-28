@@ -949,13 +949,13 @@ void func_ovl2_800E9248(GObj *fighter_gobj, s32 costume, s32 shade)
 
                 if (unk_dobj->unk_gobj != NULL)
                 {
-                    gOMObj_EjectGObjCommon(unk_dobj->unk_gobj);
+                    omEjectGObjCommon(unk_dobj->unk_gobj);
 
                     unk_dobj->unk_gobj = NULL;
                 }
                 if (costume != 0)
                 {
-                    unk_gobj = func_80009968(0x3E9U, NULL, 0xDU, 0x80000000U);
+                    unk_gobj = omMakeGObjCommon(0x3E9U, NULL, 0xDU, 0x80000000U);
                     unk_dobj->unk_gobj = unk_gobj;
 
                     func_800092D0(unk_gobj, unk_ftdobj->unk_ftdobj_0x4);
@@ -1326,8 +1326,8 @@ void efDestroyGFX(GObj *effect_gobj, efStruct *ep)
     {
         func_ovl0_800D39D4(einfo->unk_effect_0xB8, ep->unk_effectstruct_0x8 >> 3);
     }
-    func_ovl2_800FD4F8(ep);
-    gOMObj_EjectGObjCommon(effect_gobj);
+    efManager_SetPrevAlloc(ep);
+    omEjectGObjCommon(effect_gobj);
 }
 
 // 0x800E9C3C

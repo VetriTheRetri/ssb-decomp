@@ -1,7 +1,7 @@
 #include <it/item.h>
 #include <wp/weapon.h>
 #include <ft/fighter.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 
 void func_ovl3_8017D740(GObj *iwark_gobj)
 {

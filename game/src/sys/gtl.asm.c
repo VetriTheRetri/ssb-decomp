@@ -92,8 +92,8 @@ Gfx *D_800465C0[4];
 // from smash remix: Writing 1 to this word will load the screen at current_screen (gSceneData).
 u32 D_800465D0;
 s32 D_800465D4;
-struct BumpAllocRegion gMatrixHeap;  // D_800465D8
-struct BumpAllocRegion gGeneralHeap; // D_800465E8
+struct mlBumpAllocRegion gMatrixHeap;  // D_800465D8
+struct mlBumpAllocRegion gGeneralHeap; // D_800465E8
 struct FnBundle D_800465F8;
 u32 D_8004660C;
 u32 D_80046610;
@@ -110,7 +110,7 @@ u32 gGtlTaskId;
 s32 D_80046634;
 s32 D_80046638[2];
 s32 D_80046640;
-struct BumpAllocRegion sMtxTaskHeaps[2];
+struct mlBumpAllocRegion sMtxTaskHeaps[2];
 void (*D_80046668)(void *); // takes function bundle struct?
 SCTaskCallback D_8004666C;  // function pointer?
 

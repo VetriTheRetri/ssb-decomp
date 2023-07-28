@@ -1,6 +1,6 @@
 #include <it/item.h>
 #include <wp/weapon.h>
-#include <gm/gmground.h>
+#include <gr/ground.h>
 
 #include <sys/develop.h>
 #include <sys/hal_gu.h>
