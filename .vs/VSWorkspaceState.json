@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\asm",
-    "\\game\\asm\\ovl2",
+    "\\game\\nonmatching",
+    "\\game\\nonmatching\\ovl0\\halsprite",
     "\\game\\src",
-    "\\game\\src\\ef",
     "\\game\\src\\ft",
-    "\\game\\src\\ft\\chara",
-    "\\game\\src\\it",
-    "\\game\\src\\it\\itground"
+    "\\game\\src\\ft\\common",
+    "\\game\\src\\ovl0",
+    "\\game\\src\\ovl2",
+    "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\it\\itmanager.c",
+  "SelectedNode": "\\game\\src\\ef\\effectvars.h",
   "PreviewInSolutionExplorer": false
 }

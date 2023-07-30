@@ -418,7 +418,7 @@ void itTaru_NExplode_SetStatus(GObj *item_gobj)
 // 0x8017A30C
 void itTaru_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
-    Effect_Unk *effect_unk;
+    efParticle *effect_unk;
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 

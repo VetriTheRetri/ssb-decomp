@@ -429,7 +429,7 @@ glabel gpEffectStructCurrent
     .space 4
 glabel gEffectStructsFree
     .space 4
-glabel D_ovl2_801313C4
+glabel gEffectBankIndex
     .space 12
 glabel D_ovl2_801313D0
     .space 8

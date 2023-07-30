@@ -145,7 +145,7 @@ void itLinkBomb_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     s32 unused;
     DObj *joint = DObjGetStruct(item_gobj);
     itStruct *ip = itGetStruct(item_gobj);
-    Effect_Unk *ep;
+    efParticle *ep;
 
     itLinkBomb_SDefault_SetHitStatusNone(item_gobj);
 

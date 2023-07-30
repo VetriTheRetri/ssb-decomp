@@ -344,7 +344,7 @@ void itMSBomb_NExplode_SpawnGFXFighter(GObj *item_gobj)
 // 0x801769AC
 void itMSBomb_NExplode_InitStatusVars(GObj *item_gobj, bool32 is_create_gfx)
 {
-    Effect_Unk *ep;
+    efParticle *ep;
     DObj *joint = DObjGetStruct(item_gobj);
 
     if (is_create_gfx != FALSE)
@@ -369,7 +369,7 @@ void itMSBomb_NExplode_InitStatusVars(GObj *item_gobj, bool32 is_create_gfx)
 // 0x80176A34
 bool32 itMSBomb_SDefault_ProcDamage(GObj *item_gobj)
 {
-    func_800269C0(1);
+    func_800269C0(gmSound_SFX_ExplodeL);
     itMSBomb_NExplode_InitStatusVars(item_gobj, FALSE);
 
     return FALSE;
@@ -410,7 +410,7 @@ bool32 itMSBomb_GAttach_ProcUpdate(GObj *item_gobj)
 
             if ((SQUARE(dist.x) + SQUARE(dist.y) + SQUARE(dist.z)) < ITMSBOMB_DETECT_FIGHTER_RADIUS)
             {
-                itMSBomb_NExplode_InitStatusVars(item_gobj, TRUE);
+                itMSBomb_NExplode_InitStatusVars(item_gobj, TRUE); // We might want to break out of the loop here
             }
             fighter_gobj = fighter_gobj->group_gobj_next;
         }
@@ -440,7 +440,6 @@ bool32 itMSBomb_GAttach_ProcMap(GObj *item_gobj)
 }
 
 extern intptr_t D_NF_00000404;
-extern itCreateDesc itCommon_MSBomb_ItemDesc;
 
 void itMSBomb_NExplode_UpdateHitEvent(GObj *item_gobj)
 {
@@ -517,9 +516,8 @@ bool32 itMSBomb_ADetach_ProcUpdate(GObj *item_gobj)
 
             if ((SQUARE(dist.x) + SQUARE(dist.y) + SQUARE(dist.z)) < ITMSBOMB_DETECT_FIGHTER_RADIUS)
             {
-                itMSBomb_NExplode_InitStatusVars(item_gobj, FALSE);
+                itMSBomb_NExplode_InitStatusVars(item_gobj, FALSE); // We might want to break out of the loop here
             }
-
             fighter_gobj = fighter_gobj->group_gobj_next;
         }
     }

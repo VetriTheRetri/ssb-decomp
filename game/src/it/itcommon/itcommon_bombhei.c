@@ -150,7 +150,7 @@ void itBombHei_Default_SetExplode(GObj *item_gobj, u8 arg1)
     s32 unused;
     DObj *joint = DObjGetStruct(item_gobj);
     itStruct *ip = itGetStruct(item_gobj);
-    Effect_Unk *ep;
+    efParticle *ep;
 
     itBombHei_Default_SetHitStatusNone(item_gobj);
 

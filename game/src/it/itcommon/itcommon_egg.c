@@ -351,7 +351,7 @@ void itEgg_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
-    Effect_Unk *ep;
+    efParticle *ep;
 
     ip->item_hit.update_state = gmHitCollision_UpdateState_Disable;
 

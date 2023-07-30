@@ -956,7 +956,7 @@ void itManager_UpdateDamageStatFighter(ftStruct *fp, ftHitbox *ft_hit, itStruct 
         switch (ft_hit->element)
         {
         case gmHitCollision_Element_Fire:
-            func_ovl2_800FE2F4(&sp4C, ft_hit->damage);
+            efParticle_DamageFire_MakeEffect(&sp4C, ft_hit->damage);
             break;
         case gmHitCollision_Element_Electric:
             func_ovl2_800FE4EC(&sp4C, ft_hit->damage);
@@ -965,10 +965,10 @@ void itManager_UpdateDamageStatFighter(ftStruct *fp, ftHitbox *ft_hit, itStruct 
             func_ovl2_80100ACC(&sp4C);
             break;
         case gmHitCollision_Element_Slash:
-            func_ovl2_800FE6E4(&sp4C, ft_hit->damage, func_ovl2_800F0FC0(fp, ft_hit));
+            efParticle_DamageSlash_MakeEffect(&sp4C, ft_hit->damage, func_ovl2_800F0FC0(fp, ft_hit));
             break;
         default:
-            func_ovl2_800FDC04(&sp4C, fp->player, ft_hit->damage, 0);
+            efParticle_DamageNormalLight_MakeEffect(&sp4C, fp->player, ft_hit->damage, 0);
             break;
         }
     }
@@ -1132,7 +1132,7 @@ void itManager_UpdateDamageStatItem(itStruct *attack_ip, itHitbox *attack_it_hit
             switch (attack_it_hit->element)
             {
             case gmHitCollision_Element_Fire:
-                func_ovl2_800FE2F4(&sp4C, damage);
+                efParticle_DamageFire_MakeEffect(&sp4C, damage);
                 break;
             case gmHitCollision_Element_Electric:
                 func_ovl2_800FE4EC(&sp4C, damage);
@@ -1142,7 +1142,7 @@ void itManager_UpdateDamageStatItem(itStruct *attack_ip, itHitbox *attack_it_hit
                 break;
 
             default:
-                func_ovl2_800FDC04(&sp4C, attack_ip->player, damage, 0);
+                efParticle_DamageNormalLight_MakeEffect(&sp4C, attack_ip->player, damage, 0);
                 break;
             }
         }
@@ -1223,7 +1223,7 @@ void itManager_UpdateDamageStatWeapon(wpStruct *wp, wpHitbox *wp_hit, s32 hitbox
             switch (wp_hit->element)
             {
             case gmHitCollision_Element_Fire:
-                func_ovl2_800FE2F4(&sp4C, damage);
+                efParticle_DamageFire_MakeEffect(&sp4C, damage);
                 break;
 
             case gmHitCollision_Element_Electric:
@@ -1235,7 +1235,7 @@ void itManager_UpdateDamageStatWeapon(wpStruct *wp, wpHitbox *wp_hit, s32 hitbox
                 break;
 
             default:
-                func_ovl2_800FDC04(&sp4C, wp->player, damage, NULL);
+                efParticle_DamageNormalLight_MakeEffect(&sp4C, wp->player, damage, NULL);
                 break;
             }
         }

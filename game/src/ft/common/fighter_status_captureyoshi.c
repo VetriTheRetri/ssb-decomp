@@ -118,7 +118,7 @@ void ftCommon_YoshiEgg_ProcUpdate(GObj *fighter_gobj)
         {
             efStruct *ep = efGetStruct(fp->status_vars.common.captureyoshi.effect_gobj);
 
-            if ((ep->lifetime == 1) && (fp->status_vars.common.captureyoshi.effect_gobj->anim_frame <= 0.0F))
+            if ((ep->effect_vars.basic1.lifetime == 1) && (fp->status_vars.common.captureyoshi.effect_gobj->anim_frame <= 0.0F))
             {
                 is_escape = TRUE;
             }
@@ -218,7 +218,7 @@ void ftCommon_YoshiEgg_ProcPhysics(GObj *fighter_gobj)
         {
             efStruct *ep = efGetStruct(fp->status_vars.common.captureyoshi.effect_gobj);
 
-            ep->unk_ef_0x1C = 1;
+            ep->effect_vars.basic1.unk_ef_0x1C = 1;
         }
     }
     if (fp->ground_or_air == GA_Ground)

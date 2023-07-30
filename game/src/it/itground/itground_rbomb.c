@@ -78,9 +78,9 @@ void itEffect_UpdateRBombSmashGFX(GObj *effect_gobj) // RTTF bomb explode GFX pr
     efStruct *ep = efGetStruct(effect_gobj);
     DObj *joint = DObjGetStruct(effect_gobj);
 
-    ep->lifetime--;
+    ep->effect_vars.basic1.lifetime--;
 
-    if (ep->lifetime == 0)
+    if (ep->effect_vars.basic1.lifetime == 0)
     {
         efManager_SetPrevAlloc(ep);
         omEjectGObjCommon(effect_gobj);
@@ -105,7 +105,7 @@ void itEffect_UpdateRBombSmashGFX(GObj *effect_gobj) // RTTF bomb explode GFX pr
 void itEffect_CreateRBombSmashGFX(Vec3f *pos)
 {
     GObj *effect_gobj;
-    efStruct *ep = func_ovl2_800FD4B8();
+    efStruct *ep = efManager_GetStructNoForceReturn();
     DObj *joint;
     s32 i;
     void *temp_s4;
@@ -136,7 +136,7 @@ void itEffect_CreateRBombSmashGFX(Vec3f *pos)
                 joint->dobj_f1 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
                 joint->dobj_f2 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
             }
-            ep->lifetime = ITRBOMB_GFX_LIFETIME;
+            ep->effect_vars.basic1.lifetime = ITRBOMB_GFX_LIFETIME;
 
             effect_gobj->user_data = ep;
 
@@ -356,7 +356,7 @@ void itRBomb_NExplode_SetStatus(GObj *item_gobj)
 // 0x801852B8
 void itRBomb_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
-    Effect_Unk *effect_unk;
+    efParticle *effect_unk;
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 

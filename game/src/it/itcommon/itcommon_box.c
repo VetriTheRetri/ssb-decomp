@@ -112,9 +112,9 @@ void itEffect_UpdateBoxSmashGFX(GObj *effect_gobj) // Barrel/Crate smash GFX pro
     efStruct *ep = efGetStruct(effect_gobj);
     DObj *joint = DObjGetStruct(effect_gobj);
 
-    ep->lifetime--;
+    ep->effect_vars.basic1.lifetime--;
 
-    if (ep->lifetime == 0)
+    if (ep->effect_vars.basic1.lifetime == 0)
     {
         efManager_SetPrevAlloc(ep);
         omEjectGObjCommon(effect_gobj);
@@ -142,7 +142,7 @@ extern intptr_t D_NF_000068F0;
 void itEffect_CreateBoxSmashGFX(Vec3f *pos)
 {
     GObj *effect_gobj;
-    efStruct *ep = func_ovl2_800FD4B8();
+    efStruct *ep = efManager_GetStructNoForceReturn();
     DObj *joint;
     s32 i;
     void *temp_s4;
@@ -173,11 +173,11 @@ void itEffect_CreateBoxSmashGFX(Vec3f *pos)
                 joint->dobj_f1 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
                 joint->dobj_f2 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
             }
-            ep->lifetime = ITCONTAINER_GFX_LIFETIME;
+            ep->effect_vars.basic1.lifetime = ITCONTAINER_GFX_LIFETIME;
 
             effect_gobj->user_data = ep;
 
-            omAddGObjCommonProc(effect_gobj, itEffect_UpdateBoxSmashGFX, 1U, 3U);
+            omAddGObjCommonProc(effect_gobj, itEffect_UpdateBoxSmashGFX, 1, 3);
         }
     }
 }
@@ -470,7 +470,7 @@ void itBox_NExplode_SetStatus(GObj *item_gobj)
 // 0x80179B08
 void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
-    Effect_Unk *effect_unk;
+    efParticle *effect_unk;
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 

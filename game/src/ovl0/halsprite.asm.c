@@ -216,12 +216,20 @@ struct Temp002 {
     /* 0x5C */ struct Temp001 *unk5C;
 }; // sizeof == 0x60
 
-void func_ovl0_800CE1DC(struct Temp002 *arg0, s8 arg1) {
+struct Temp001* func_ovl0_800CE1DC(struct Temp002 *arg0, s8 arg1) {
     arg0->unk5C = func_ovl0_800CE0D8(arg1, arg0->unk04);
+
+    return arg0->unk5C;
+
+    // WARNING: This is confirmed to return arg0->unk5C
 }
 
-void unref_ovl0_800CE218(struct Temp003 *arg0, s8 arg1) {
+struct Temp001* unref_ovl0_800CE218(struct Temp003 *arg0, s8 arg1) {
     arg0->unk4C = func_ovl0_800CE0D8(arg1, arg0->unk04);
+
+    return arg0->unk4C;
+
+    // WARNING: This might similarly return arg0->unk4C
 }
 
 struct SpriteBankCmds {
@@ -354,27 +362,7 @@ struct GObjCommon *func_ovl0_800CE418(s32 arg0) {
     return omMakeGObjCommon(-6, func_ovl0_800D0C74, 0, 0x80000000);
 }
 
-struct Temp002 *func_ovl0_800CE4E4(
-    struct Temp002 *arg0,
-    s32 arg1, // loaded bank id
-    s32 arg2,
-    u16 arg3, // texture/sprite entry id
-    u8 *arg4, // command byte code
-    s32 arg5, // total frames?
-    f32 arg6,
-    f32 arg7,
-    f32 arg8,
-    f32 arg9,
-    f32 argA,
-    f32 argB,
-    f32 argC,
-    f32 argD,
-    f32 argE,
-    s32 argF, // texture/sprite entry flags
-    struct Temp003 *arg10);
-
-#ifdef NON_MATCHING
-// nonmatching: regalloc / can't make a zero constant
+// Formerly nonmatching
 struct Temp002 *func_ovl0_800CE4E4(
     struct Temp002 *arg0,
     s32 arg1,
@@ -394,6 +382,7 @@ struct Temp002 *func_ovl0_800CE4E4(
     s32 argF,
     struct Temp003 *arg10) {
     struct Temp002 *s;
+    s32 i;
 
     s = D_ovl0_800D6350;
     if (s == NULL) { return NULL; }
@@ -401,25 +390,38 @@ struct Temp002 *func_ovl0_800CE4E4(
     D_ovl0_800D6448++;
     if (D_ovl0_800D644E < D_ovl0_800D6448) { D_ovl0_800D644E = D_ovl0_800D6448; }
 
-    if (arg10 != NULL) {
+    if (arg10 != NULL)
+    {
         s->unk04 = arg10->unk04;
-    } else {
+    }
+    else
+    {
         s->unk04 = ++D_ovl0_800D5D58[0];
     }
     // L800CE568
-    if (arg10 != NULL) {
+    if (arg10 != NULL)
+    {
         s->unk5C = arg10->unk4C;
-        if (s->unk5C != NULL) { s->unk5C->unk2A++; }
-    } else {
+
+        if (s->unk5C != NULL)
+        {
+            s->unk5C->unk2A++;
+        }
+    }
+    else
+    {
         s->unk5C = NULL;
     }
     // L800CE590
     D_ovl0_800D6350 = s->next;
-    if (arg0 == NULL) {
-        s->next                    = D_ovl0_800D6358[arg1 >> 3];
+    if (arg0 == NULL)
+    {
+        s->next = D_ovl0_800D6358[arg1 >> 3];
         D_ovl0_800D6358[arg1 >> 3] = s;
-    } else {
-        s->next    = arg0->next;
+    }
+    else
+    {
+        s->next = arg0->next;
         arg0->next = s;
     }
     // L800CE5D4
@@ -438,24 +440,28 @@ struct Temp002 *func_ovl0_800CE4E4(
     s->unk3C = argE;
 
     s->unk1E = arg5 + 1; // s16
-    s->unk18 = 0;        // u16
-    s->unk1A = 0;        // s16
+    s->unk18 = s->unk1A = 0;        // s16
     s->unk14 = arg4;
 
-    if (argF) { s->unk06 = (arg2 | 0x10); }
-
-    if (arg4 != NULL) {
-        s->unk0C = TRUE; // s16
-    } else {
-        s->unk0C = FALSE;
+    if (argF != 0)
+    {
+        s->unk06 |= 0x10;
     }
+
+    s->unk0C = (arg4 != NULL) ? TRUE : FALSE;
+
     // L800CE670
     // s->unk48[3] = 0xFF; // s8/u8
     // s->unk48[2] = 0xFF;
     // s->unk48[1] = 0xFF;
-    s->unk48.b0 = s->unk48.b1 = s->unk48.b2 = s->unk48.b3 = 0xFF;
-    s->unk50.b0 = s->unk50.b1 = s->unk50.b2 = s->unk50.b3 = 0;
-    s->unk0B                                              = 0; // s8
+
+    s->unk0B = 0; // s8
+
+    if (TRUE) // What
+    {
+        s->unk48.b0 = s->unk48.b1 = s->unk48.b2 = s->unk48.b3 = 255;
+        s->unk50.b0 = s->unk50.b1 = s->unk50.b2 = s->unk50.b3 = 0;
+    }
     // s->unk53 = 0;
     s->unk12 = 0; // s16
     s->unk10 = 0;
@@ -464,9 +470,6 @@ struct Temp002 *func_ovl0_800CE4E4(
 
     return s;
 }
-#else
-#pragma GLOBAL_ASM("game/nonmatching/ovl0/halsprite/func_ovl0_800CE4E4.s")
-#endif
 
 // bankIdx looks to be a compound int? lower seven/eight bits are the actual idx
 struct Temp002 *func_ovl0_800CE6B8(struct Temp002 *arg0, s32 bankIdx, s32 cmdIdx) {
@@ -668,103 +671,91 @@ CmdCsr bytecode_read_f32(CmdCsr raw, f32 *dst) {
     buf[3] = raw[3];
     *dst   = *(f32 *)buf;
 
-    return raw + 4;
+    return raw + sizeof(f32);
 }
 
-CmdCsr bytecode_read_u16(CmdCsr raw, u16 *dst);
-#ifdef NON_MATCHING
-// expects big-endian data
-// nonmatching: can't figure out how mask 2 byte condition without masking 1 byte condition
-CmdCsr bytecode_read_u16(CmdCsr raw, u16 *dst) {
-    s32 temp;
-    s32 ext;
+// Formerly nonmatching
+CmdCsr bytecode_read_u16(CmdCsr raw, u16 *dst)
+{
+    u16 ext = *raw++;
 
-    temp = *raw++;
-    if (temp & 0x80) {
-        ext = ((*raw++ + ((temp & 0x7F) << 8))) & 0xFFFF;
-    } else {
-        ext = temp;
+    if (ext & 0x80)
+    {
+        ext = ((((ext & 0x7F) << 8)) + *raw++);
     }
-
     *dst = ext + 1;
+
     return raw;
 }
-#else
-#pragma GLOBAL_ASM("game/nonmatching/ovl0/halsprite/bytecode_read_u16.s")
-#endif
 
-void func_ovl0_800CEC34(struct Temp002 *arg0, f32 arg1);
-#ifdef MIPS_TO_C
-void func_ovl0_800CEC34(struct Temp002 *arg0, f32 arg1) {
+// Formerly nonmatching
+void func_ovl0_800CEC34(struct Temp002 *arg0, f32 arg1)
+{
+    f32 temp_f20;
+    f32 temp_f22;
+    f32 temp_f24;
+    f32 new_var;
     f32 sp5C;
-    f32 theta; // sp58
+    f32 sp58;
     f32 sp54;
-    f32 sinT; // f26
-    f32 cosT; // sp4C
+    f32 temp_f26;
+    f32 sp4C;
     f32 sp48;
     f32 sp44;
-    f32 randAng;
+    f32 temp_f2;
 
-    f32 f22, f20, tempf2;
+    temp_f22 = arg0->unk2C;
+    temp_f20 = arg0->unk30;
+    temp_f24 = arg0->unk34;
 
-    theta   = atan2f(arg0->unk30, arg0->unk34);
-    sinT    = sinf(theta);
-    cosT    = cosf(theta);
-    sp54    = atan2f(arg0->unk2C, (arg0->unk30 * sinT) + (arg0->unk34 * cosT));
-    sp48    = sinf(sp54);
-    sp44    = cosf(sp54);
-    sp5C    = sqrtf(SQUARE(arg0->unk2C) + SQUARE(arg0->unk30) + SQUARE(arg0->unk34));
-    randAng = rand_f32() * (2.0f * M_PI_F);
+    sp58 = func_8001863C(temp_f20, temp_f24);
+    temp_f26 = __sinf(sp58);
+    sp4C = cosf(sp58);
+    sp54 = func_8001863C(temp_f22, (temp_f20 * temp_f26) + (temp_f24 * sp4C));
+    sp48 = __sinf(sp54);
+    sp44 = cosf(sp54);
+    sp5C = sqrtf(((temp_f22 * temp_f22) + (temp_f20 * temp_f20)) + (temp_f24 * temp_f24));
+    temp_f20 = func_80018948() * (M_PI_F * 2);
+    new_var = __sinf(arg1) * sp5C;
+    temp_f24 = sp48;
+    temp_f22 = cosf(temp_f20) * new_var;
+    temp_f20 = __sinf(temp_f20) * new_var;
+    temp_f2 = cosf(arg1) * sp5C;
 
-    f22    = cosf(randAng) * sinf(arg1) * sp5C;
-    f20    = sinf(randAng) * sinf(arg1) * sp5C;
-    tempf2 = cosf(arg1) * sp5C;
-
-    arg0->unk2C = (f22 * sp44) + (cosf(arg1) * sp5C * sp48);
-    arg0->unk30 = (-f22 * sinT * sp48) + (f20 * cosT) + (tempf2 * sinT * sp44);
-    arg0->unk34 = (-f22 * cosT * sp48) - (f20 * sinT) + (tempf2 * cosT * sp44);
+    arg0->unk2C = (f32)((temp_f22 * sp44) + (temp_f2 * sp48));
+    arg0->unk30 = (f32)(((((-temp_f22) * temp_f26) * sp48) + (temp_f20 * sp4C)) + ((temp_f2 * temp_f26) * sp44));
+    arg0->unk34 = (f32)(((((-temp_f22) * sp4C) * temp_f24) - (temp_f20 * temp_f26)) + ((temp_f2 * sp4C) * sp44));
 }
-#else
-#pragma GLOBAL_ASM("game/nonmatching/ovl0/halsprite/func_ovl0_800CEC34.s")
-#endif
 
-void func_ovl0_800CEDBC(struct Temp002 *arg0, struct Temp001 *arg1);
-#ifdef NON_MATCHING
-// is the arg1 type correct?
-// nonmatching: `sp1C` is not reloaded into the correct register or at the correct time
-void func_ovl0_800CEDBC(struct Temp002 *arg0, struct Temp001 *arg1) {
-    f32 sp24;
-    f32 sp20;
-    f32 sp1C;
-    f32 sp18;
-    f32 denom;
+// Formerly nonmatching
+void func_ovl0_800CEDBC(struct Temp002 *arg0, struct Temp001 *arg1)
+{
+    Vec3f sp1C;
     f32 ratio;
+    f32 denom;
 
-    if (arg1 != NULL) {
-        sp24 = arg1->unk1C - arg0->unk20;
-        sp20 = arg1->unk20 - arg0->unk24;
-        sp1C = arg1->unk24 - arg0->unk28;
+    if (arg1 != NULL)
+    {
+        sp1C.z = arg1->unk1C - arg0->unk20;
+        sp1C.y = arg1->unk20 - arg0->unk24;
+        sp1C.x = arg1->unk24 - arg0->unk28;
 
-        sp18  = sqrtf(SQUARE(arg0->unk2C) + SQUARE(arg0->unk30) + SQUARE(arg0->unk34));
-        denom = SQUARE(sp24) + SQUARE(sp20) + SQUARE(sp1C);
+        ratio = sqrtf(SQUARE(arg0->unk2C.x) + SQUARE(arg0->unk2C.y) + SQUARE(arg0->unk2C.z));
 
-        if (denom != 0.0f) {
-            ratio = sp18 / sqrtf(denom);
+        denom = SQUARE(sp1C.z) + SQUARE(sp1C.y) + SQUARE(sp1C.x);
 
-            arg0->unk2C = sp24 * ratio;
-            arg0->unk30 = sp20 * ratio;
-            arg0->unk34 = sp1C * ratio;
+        if (denom != 0.0F)
+        {
+            ratio = ratio / sqrtf(denom);
+
+            arg0->unk2C.x = sp1C.z * ratio;
+            arg0->unk2C.y = sp1C.y * ratio;
+            arg0->unk2C.z = sp1C.x * ratio;
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("game/nonmatching/ovl0/halsprite/func_ovl0_800CEDBC.s")
-#endif
 
-void func_ovl0_800CEEB8(struct Temp002 *arg0, struct Temp001 *arg1, f32 arg2);
-#ifdef NON_MATCHING
-// is arg1 typed correctly?
-// nonmatching: `sos` aand `frac` are in swapped regs
+// Formerly nonmatching
 void func_ovl0_800CEEB8(struct Temp002 *arg0, struct Temp001 *arg1, f32 arg2) {
     // guess on the local names
     f32 dx;
@@ -773,14 +764,17 @@ void func_ovl0_800CEEB8(struct Temp002 *arg0, struct Temp001 *arg1, f32 arg2) {
     f32 sos;
     f32 frac;
 
-    if (arg1 != NULL) {
-        dx  = arg1->unk1C - arg0->unk20;
-        dy  = arg1->unk20 - arg0->unk24;
-        dz  = arg1->unk24 - arg0->unk28;
-        sos = SQUARE(dx) + SQUARE(dy) + SQUARE(dz);
+    if (arg1 != NULL)
+    {
+        dx = arg1->unk1C - arg0->unk20;
+        dy = arg1->unk20 - arg0->unk24;
+        dz = arg1->unk24 - arg0->unk28;
 
-        if (sos) {
-            frac = arg2 / sos;
+        frac = SQUARE(dx) + SQUARE(dy) + SQUARE(dz);
+
+        if (frac != 0.0F)
+        {
+            frac = (arg2 / frac);
 
             arg0->unk2C += frac * dx;
             arg0->unk30 += frac * dy;
@@ -788,9 +782,6 @@ void func_ovl0_800CEEB8(struct Temp002 *arg0, struct Temp001 *arg1, f32 arg2) {
         }
     }
 }
-#else
-#pragma GLOBAL_ASM("game/nonmatching/ovl0/halsprite/func_ovl0_800CEEB8.s")
-#endif
 
 struct Temp003 *func_ovl0_800D35DC(s32 bankIdx, s32);
 

@@ -42,7 +42,7 @@ struct GObj
     s32 unk_0x18;
     s32 unk_0x1C;
     GObj *room_gobj_next; // Unconfirmed, might be int
-    GObj *room_gobj_prev; // Unconfirmed, might be int
+    f32 unk_gobj_0x24; // Unconfirmed, might be int
     s32 room_order; // Might be group? Assuming room based on order here
     void (*renderer)(GObj *gobj);
     u64 unk_0x30;
@@ -91,6 +91,8 @@ typedef struct MObj // Image footer struct
     u8 filler_0x8C[0x94 - 0x8C];
     u32 unk_mobj_0x94;
     f32 unk_mobj_0x98;
+    f32 unk_mobj_0x9C;
+    f32 unk_mobj_0xA0;
 
 } MObj;
 

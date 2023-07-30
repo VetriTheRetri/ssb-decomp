@@ -192,7 +192,7 @@ bool32 wpFushigibana_Razor_ProcHit(GObj *weapon_gobj)
 {
     wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_800FE6E4(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage, wp->lr);
+    efParticle_DamageSlash_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, wp->weapon_hit.damage, wp->lr);
 
     return TRUE;
 }

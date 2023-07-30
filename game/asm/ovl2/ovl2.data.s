@@ -7005,22 +7005,22 @@ glabel D_ovl2_8012DE94
   /* 57A04 0A9694 8012DE94 */
   .4byte 0xc1900000 # .float -18.0
 
-glabel D_ovl2_8012DE98
+glabel efParticle_DamageNormalHeavy_Color1R
   .incbin "ovl2.raw.bin", 0x57A08, 0x8
 
-glabel D_ovl2_8012DEA0
+glabel efParticle_DamageNormalHeavy_Color1G
   .incbin "ovl2.raw.bin", 0x57A10, 0x8
 
-glabel D_ovl2_8012DEA8
+glabel efParticle_DamageNormalHeavy_Color1B
   .incbin "ovl2.raw.bin", 0x57A18, 0x8
 
-glabel D_ovl2_8012DEB0
+glabel efParticle_DamageNormalHeavy_Color2R
   .incbin "ovl2.raw.bin", 0x57A20, 0x8
 
-glabel D_ovl2_8012DEB8
+glabel efParticle_DamageNormalHeavy_Color2G
   .incbin "ovl2.raw.bin", 0x57A28, 0x8
 
-glabel D_ovl2_8012DEC0
+glabel efParticle_DamageNormalHeavy_Color2B
   .incbin "ovl2.raw.bin", 0x57A30, 0x8
 
 glabel D_ovl2_8012DEC8

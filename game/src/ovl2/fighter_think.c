@@ -1727,7 +1727,6 @@ void ftManager_ProcPhysicsMap(GObj *fighter_gobj)
             break;
 
         case gmHitCollision_UpdateState_New:
-
             ft_hit->pos = ft_hit->offset;
 
             if (ft_hit->is_scale_pos)
@@ -1751,7 +1750,6 @@ void ftManager_ProcPhysicsMap(GObj *fighter_gobj)
             ft_hit->update_state = gmHitCollision_UpdateState_Interpolate;
 
         case gmHitCollision_UpdateState_Interpolate:
-
             ft_hit->pos_prev = ft_hit->pos;
             ft_hit->pos = ft_hit->offset;
 
@@ -2580,7 +2578,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             switch (ft_hit->element)
             {
             case gmHitCollision_Element_Fire:
-                func_ovl2_800FE2F4(&sp84, ft_hit->damage);
+                efParticle_DamageFire_MakeEffect(&sp84, ft_hit->damage);
                 break;
 
             case gmHitCollision_Element_Electric:
@@ -2592,15 +2590,15 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 break;
 
             case gmHitCollision_Element_Slash:
-                func_ovl2_800FE6E4(&sp84, ft_hit->damage, func_ovl2_800F0FC0(attacker_fp, ft_hit));
+                efParticle_DamageSlash_MakeEffect(&sp84, ft_hit->damage, func_ovl2_800F0FC0(attacker_fp, ft_hit));
                 break;
 
             default:
                 if (var_f20 < 180.0F)
                 {
-                    func_ovl2_800FDC04(&sp84, hitlog->attacker_player, ft_hit->damage, NULL);
+                    efParticle_DamageNormalLight_MakeEffect(&sp84, hitlog->attacker_player, ft_hit->damage, 0);
                 }
-                else func_ovl2_800FDEAC(&sp84, hitlog->attacker_player, ft_hit->damage);
+                else efParticle_DamageNormalHeavy_MakeEffect(&sp84, hitlog->attacker_player, ft_hit->damage);
 
                 if (ft_hit->sfx_level != 0)
                 {
@@ -2638,7 +2636,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 switch (wp_hit->element)
                 {
                 case gmHitCollision_Element_Fire:
-                    func_ovl2_800FE2F4(&sp84, damage);
+                    efParticle_DamageFire_MakeEffect(&sp84, damage);
                     break;
                 case gmHitCollision_Element_Electric:
                     func_ovl2_800FE4EC(&sp84, damage);
@@ -2650,9 +2648,9 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 default:
                     if (var_f20 < 180.0F)
                     {
-                        func_ovl2_800FDC04(&sp84, hitlog->attacker_player, damage, NULL);
+                        efParticle_DamageNormalLight_MakeEffect(&sp84, hitlog->attacker_player, damage, NULL);
                     }
-                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_player, damage);
+                    else efParticle_DamageNormalHeavy_MakeEffect(&sp84, hitlog->attacker_player, damage);
 
                     break;
                 }
@@ -2674,7 +2672,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 switch (it_hit->element)
                 {
                 case gmHitCollision_Element_Fire:
-                    func_ovl2_800FE2F4(&sp84, damage);
+                    efParticle_DamageFire_MakeEffect(&sp84, damage);
                     break;
                 case gmHitCollision_Element_Electric:
                     func_ovl2_800FE4EC(&sp84, damage);
@@ -2686,9 +2684,9 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 default:
                     if (var_f20 < 180.0F)
                     {
-                        func_ovl2_800FDC04(&sp84, hitlog->attacker_player, damage, NULL);
+                        efParticle_DamageNormalLight_MakeEffect(&sp84, hitlog->attacker_player, damage, NULL);
                     }
-                    else func_ovl2_800FDEAC(&sp84, hitlog->attacker_player, damage);
+                    else efParticle_DamageNormalHeavy_MakeEffect(&sp84, hitlog->attacker_player, damage);
 
                     break;
                 }

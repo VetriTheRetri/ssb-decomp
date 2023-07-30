@@ -119,7 +119,7 @@ void ftCommon_GuardSetOff_SetStatus(GObj *fighter_gobj)
     {
         efStruct *ep = efGetStruct(fp->status_vars.common.guard.effect_gobj);
 
-        ep->unk_ef_0x1C = 1;
+        ep->effect_vars.basic1.unk_ef_0x1C = 1;
     }
     fp->is_shield = TRUE;
 

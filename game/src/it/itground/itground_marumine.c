@@ -48,7 +48,7 @@ itStatusDesc itGround_Marumine_StatusDesc[itStatus_Marumine_EnumMax] =
 void itMarumine_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 {
     s32 unused;
-    Effect_Unk *ep;
+    efParticle *ep;
     itStruct *ip = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 

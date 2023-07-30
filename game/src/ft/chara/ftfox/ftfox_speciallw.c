@@ -20,7 +20,7 @@ void ftFox_SpecialLw_UpdateGFX(ftStruct *fp)
         {
             efStruct *ep = efGetStruct(fp->status_vars.fox.speciallw.effect_gobj);
 
-            ep->unk_ef_0x1C = fp->command_vars.flags.flag2;
+            ep->effect_vars.basic1.unk_ef_0x1C = fp->command_vars.flags.flag2;
         }
         fp->command_vars.flags.flag2 = 4;
     }

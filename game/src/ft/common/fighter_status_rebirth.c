@@ -29,27 +29,23 @@ loop: // This makes no sense
 
     while (other_gobj != NULL)
     {
-        do
+        if (other_gobj != this_gobj)
         {
-            if (other_gobj != this_gobj)
+            other_fp = ftGetStruct(other_gobj);
+
+            if ((other_fp->status_info.status_id >= ftStatus_Common_RebirthDown) && (other_fp->status_info.status_id <= ftStatus_Common_RebirthWait))
             {
-                other_fp = ftGetStruct(other_gobj);
-
-                if ((other_fp->status_info.status_id >= ftStatus_Common_RebirthDown) && (other_fp->status_info.status_id <= ftStatus_Common_RebirthWait))
+                if (halo_number == other_fp->status_vars.common.rebirth.halo_number)
                 {
-                    if (halo_number == other_fp->status_vars.common.rebirth.halo_number)
-                    {
-                        halo_number++;
+                    halo_number++;
 
-                        goto loop;
-                    }
+                    goto loop;
                 }
             }
-            other_gobj = other_gobj->group_gobj_next;
-
-            continue;
+            else goto next_gobj;
         }
-        while (FALSE);
+    next_gobj:
+        other_gobj = other_gobj->group_gobj_next;
     }
     rebirth_vars.pos.x = ftCommon_Rebirth_OffsetX[halo_number] + halo_spawn_pos.x;
     rebirth_vars.pos.y = gpGroundInfo->blastzone_top;

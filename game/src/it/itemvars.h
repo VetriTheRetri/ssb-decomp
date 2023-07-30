@@ -582,7 +582,7 @@ typedef struct itGround_ItemVars_RaceBomb
 
 typedef struct itFighter_ItemVars_PKFire
 {
-    Effect_Info *effect;
+    efImage *effect;
 
 } itFighter_ItemVars_PKFire;
 
