@@ -135,7 +135,7 @@ void itGShell_GSpin_UpdateGFX(GObj *item_gobj)
 
         pos.y += ip->attributes->objectcoll_bottom;
 
-        func_ovl2_800FF048(&pos, ip->lr, 1.0F);
+        efParticle_DustLight_MakeEffect(&pos, ip->lr, 1.0F);
 
         ip->item_vars.shell.dust_gfx_int = ITGSHELL_GFX_SPAWN_INT;
     }

@@ -36,7 +36,7 @@ void func_ovl3_80180630(GObj *item_gobj)
 
         ap->phys_info.vel_air.x = -ap->lr * ITKAMEX_CONST_VEL_X;
 
-        func_ovl2_800FF278(&pos, -ap->lr);
+        efParticle_DustHeavy_MakeEffect(&pos, -ap->lr);
     }
 }
 

@@ -774,5 +774,5 @@ void ftNess_SpecialAirHiBound_SetStatus(GObj *fighter_gobj, Vec3f *angle, Vec3f 
     ftStatus_Update(fighter_gobj, ftStatus_Ness_SpecialAirHiBound, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
     func_ovl2_800FFD58(pos, 4, atan2f(-angle->x, angle->y));
-    efMain_CreateEarthquake(2);
+    efParticle_Quake_MakeEffect(2);
 }

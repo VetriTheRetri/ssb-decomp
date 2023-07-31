@@ -337,7 +337,7 @@ void itMSBomb_NExplode_SpawnGFXFighter(GObj *item_gobj)
 
         translate.y += attributes->objectcoll_bottom;
 
-        func_ovl2_800FF3F4(&translate, ip->lr, 1.0F);
+        efParticle_DustHeavyDouble_MakeEffect(&translate, ip->lr, 1.0F);
     }
 }
 
@@ -359,7 +359,7 @@ void itMSBomb_NExplode_InitStatusVars(GObj *item_gobj, bool32 is_create_gfx)
         ep->effect_info->scale.y = ITMSBOMB_EXPLODE_SCALE;
         ep->effect_info->scale.z = ITMSBOMB_EXPLODE_SCALE;
     }
-    efMain_CreateEarthquake(1);
+    efParticle_Quake_MakeEffect(1);
     itMain_RefreshHit(item_gobj);
     itMSBomb_NExplode_SetStatus(item_gobj);
 

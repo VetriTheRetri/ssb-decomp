@@ -181,14 +181,14 @@ bool32 wpYoshi_EggThrow_ProcMap(GObj *weapon_gobj)
 
     if ((wp->weapon_vars.egg_throw.is_spin != FALSE) && (func_ovl3_80167C04(weapon_gobj) != FALSE))
     {
-        efMain_CreateEarthquake(2);
+        efParticle_Quake_MakeEffect(2);
 
         func_800269C0(0xFC);
 
         func_ovl2_80103A88(&DObjGetStruct(weapon_gobj)->translate);
         func_ovl2_801041A0(&DObjGetStruct(weapon_gobj)->translate);
 
-        func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
+        efParticle_DustExpandSmall_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         wpYoshi_EggHit_InitWeaponVars(weapon_gobj);
     }

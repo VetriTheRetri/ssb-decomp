@@ -9,6 +9,59 @@
 
 #include "efdef.h"
 
+#define EFPART_FLAMELR_OFF_X_BASE 300.0F
+#define EFPART_FLAMELR_OFF_X_ADD (-150.0F)
+#define EFPART_FLAMELR_OFF_Y_BASE 200.0F
+#define EFPART_FLAMELR_OFF_Y_ADD (-150.0F)
+#define EFPART_FLAMELR_VEL_BASE 20.0F
+
+#define EFPART_FLAMERANDOM_ANGLE_BASE F_DEG_TO_RAD(90.0F)
+#define EFPART_FLAMERANDOM_ANGLE_ADD F_DEG_TO_RAD(45.0F)
+#define EFPART_FLAMERANDOM_VEL_BASE 15.0F
+
+#define EFPART_DUSTCOLL_OFF_BASE 300.0F
+#define EFPART_DUSTCOLL_OFF_ADD (-150.0F)
+#define EFPART_DUSTCOLL_ANGLE_BASE F_DEG_TO_RAD(90.0F)
+#define EFPART_DUSTCOLL_ANGLE_ADD F_DEG_TO_RAD(45.0F)
+#define EFPART_DUSTCOLL_VEL_BASE 15.0F
+
+#define EFPART_SHOCKSMALL_OFF_BASE 300.0F
+#define EFPART_SHOCKSMALL_OFF_ADD  (-150.0F)
+#define EFPART_SHOCKSMALL_SCALE_BASE 0.5F
+#define EFPART_SHOCKSMALL_SCALE_ADD 0.75F
+
+#define EFPART_DUSTNORMAL_LIFETIME 9
+#define EFPART_DUSTNORMAL_ANGLE_BASE F_DEG_TO_RAD(30.0F)
+#define EFPART_DUSTNORMAL_ANGLE_ADD F_DEG_TO_RAD(-15.0F)
+#define EFPART_DUSTNORMAL_OFF_Y 39.375F
+#define EFPART_DUSTNORMAL_VEL_BASE 36.0F
+#define EFPART_DUSTNORMAL_SCATTER (1.0F / (float)EFPART_DUSTNORMAL_LIFETIME)
+
+#define EFPART_DUSTHEAVY_OFF_Y 126.0F
+
+#define EFPART_DUSTEXPANDLARGE_OFF_BASE 160.0F
+#define EFPART_DUSTEXPANDLARGE_OFF_SUB 80.0F
+#define EFPART_DUSTEXPANDLARGE_SCALE 3.0F
+
+#define EFPART_DUSTEXPANDSMALL_VEL_Y 5.0F
+#define EFPART_DUSTEXPANDSMALL_VEL_X 0.0F
+
+#define EFPART_DUSTDASH_SCALE_SMALL 1.0F
+#define EFPART_DUSTDASH_SCALE_LARGE 1.5F
+#define EFPART_DUSTDASH_OFF_Y 280.0F
+
+#define EFPART_DAMAGEFLYORBS_VEL_SUB 10.0F
+
+#define EFPART_DAMAGESPAWNORBS_LIFETIME_RANDOM_MOD 4
+#define EFPART_DAMAGESPAWNORBS_LIFETIME_ADD 12
+#define EFPART_DAMAGESPAWNORBS_SCALE_BASE 2
+#define EFPART_DAMAGESPAWNORBS_SCALE_ADD 3.0F
+#define EFPART_DAMAGESPAWNORBS_VEL_BASE 100.0F
+#define EFPART_DAMAGESPAWNORBS_VEL_ADD 120.0F
+#define EFPART_DAMAGESPAWNORBS_ANGLE_BASE F_DEG_TO_RAD(60.0F)
+#define EFPART_DAMAGESPAWNORBS_ANGLE_ADD1 F_DEG_TO_RAD(-30.0F)
+#define EFPART_DAMAGESPAWNORBS_ANGLE_ADD2 F_DEG_TO_RAD(90.0F)
+
 typedef struct efVars_BoxSmash
 {
 	s32 lifetime;
@@ -34,14 +87,6 @@ typedef struct efVars_DamageNormalHeavy
 
 } efVars_DamageNormalHeavy;
 
-typedef struct efVars_DamageEHit
-{
-    Vec3f vel;
-    s32 size;
-    efImage *efimage;
-
-} efVars_DamageEHit;
-
 typedef struct efVars_Common
 {
     Vec3f vel;
@@ -49,5 +94,36 @@ typedef struct efVars_Common
     efImage *efimage;
 
 } efVars_Common;
+
+typedef struct efVars_DustLight
+{
+    Vec3f vel1, vel2;
+    s32 lifetime;
+    efImage *efimage;
+
+} efVars_DustLight;
+
+typedef struct efVars_DustHeavy
+{
+    Vec3f pos;
+    s32 lr;
+    s32 anim_frame;
+    efImage *efimage;
+
+} efVars_DustHeavy;
+
+typedef struct efVars_DamageFlyOrbs
+{
+    Vec3f vel;
+    s32 lifetime;
+
+} efVars_DamageFlyOrbs;
+
+typedef struct efVars_DamageSpawnOrbs
+{
+    s32 lifetime;
+    Vec3f pos;
+
+} efVars_DamageSpawnOrbs;
 
 #endif

@@ -7094,7 +7094,7 @@ glabel D_ovl2_8012DF74
   .incbin "ovl2.raw.bin", 0x57AE4, 0x4
   /* 57AE8 0A9778 8012DF78 */  .4byte D_ovl2_801313B0
   .incbin "ovl2.raw.bin", 0x57AEC, 0x8
-  /* 57AF4 0A9784 8012DF84 */  .4byte func_ovl2_800FF8C0
+  /* 57AF4 0A9784 8012DF84 */  .4byte efParticle_DamageFlyOrbs_ProcUpdate
   /* 57AF8 0A9788 8012DF88 */  .4byte func_ovl0_800CB4B0
   .incbin "ovl2.raw.bin", 0x57AFC, 0x10
 
@@ -7102,7 +7102,7 @@ glabel D_ovl2_8012DF9C
   .incbin "ovl2.raw.bin", 0x57B0C, 0x4
   /* 57B10 0A97A0 8012DFA0 */  .4byte D_ovl2_801313B0
   .incbin "ovl2.raw.bin", 0x57B14, 0x8
-  /* 57B1C 0A97AC 8012DFAC */  .4byte func_ovl2_800FF95C
+  /* 57B1C 0A97AC 8012DFAC */  .4byte efParticle_DamageSpawnOrbs_ProcUpdate
   .incbin "ovl2.raw.bin", 0x57B20, 0x14
 
 glabel D_ovl2_8012DFC4

@@ -56,7 +56,7 @@ void itPorygon_SDefault_UpdateHitParty(GObj *item_gobj)
 
         pos.y = 0.0F;
 
-        func_ovl2_800FF048(&pos, LEFT, 1.0F);
+        efParticle_DustLight_MakeEffect(&pos, LEFT, 1.0F);
     }
 }
 

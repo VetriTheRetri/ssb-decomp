@@ -172,7 +172,7 @@ void ftCommon_Dead_InitStatusVars(GObj *fighter_gobj)
     fp->x191_flag_b3 = TRUE;
     fp->x18E_flag_b3 = TRUE;
 
-    efMain_CreateEarthquake(2);
+    efParticle_Quake_MakeEffect(2);
     func_ovl3_8013BC8C(fp);
     ftCommon_Dead_UpdateScore(fp);
 
@@ -443,7 +443,7 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
         case 1:
             func_ovl2_800D9444(fighter_gobj);
             func_ovl2_80115BF0(0x51, 0);
-            efMain_CreateEarthquake(2);
+            efParticle_Quake_MakeEffect(2);
             func_ovl3_8013BC8C(fp);
 
             fp->x18E_flag_b3 = TRUE;

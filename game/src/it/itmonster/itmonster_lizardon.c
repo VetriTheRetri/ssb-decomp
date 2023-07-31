@@ -106,7 +106,7 @@ bool32 jtgt_ovl3_8017F5EC(GObj *item_gobj)
 
         pos.x += (ap->attributes->objectcoll_width + ITLIZARDON_DUST_GFX_OFF_X) * -ap->lr;
 
-        func_ovl2_800FF278(&pos, -ap->lr);
+        efParticle_DustHeavy_MakeEffect(&pos, -ap->lr);
 
         if (ap->it_kind == It_Kind_Pippi)
         {
@@ -245,7 +245,7 @@ bool32 jtgt_ovl3_8017FAF8(GObj *weapon_gobj)
 {
     if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
-        func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
+        efParticle_DustExpandSmall_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         return TRUE;
     }

@@ -1925,52 +1925,52 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         p_effect = efParticle_FlameStatic_MakeEffect(&pos);
         break;
 
-    case Ef_Kind_ShockwaveS:
+    case Ef_Kind_ShockSmall:
         ftCommon_GFXJointCycle(fp, &pos);
-        p_effect = func_ovl2_800FEEB0(&pos);
+        p_effect = efParticle_ShockSmall_MakeEffect(&pos);
         break;
 
-    case 0xB:
-        p_effect = func_ovl2_800FF048(&pos, lr, 1.0F);
+    case Ef_Kind_DustLight:
+        p_effect = efParticle_DustLight_MakeEffect(&pos, lr, 1.0F);
         break;
 
-    case 0xC:
-        p_effect = func_ovl2_800FF048(&pos, lr, 2.0F);
+    case Ef_Kind_DustLightRapid:
+        p_effect = efParticle_DustLight_MakeEffect(&pos, lr, 2.0F);
         break;
 
-    case 0xD:
-        p_effect = func_ovl2_800FF3F4(&pos, lr, 1.0F);
+    case Ef_Kind_DustHeavyDouble:
+        p_effect = efParticle_DustHeavyDouble_MakeEffect(&pos, lr, 1.0F);
         break;
 
-    case 0xE:
-        p_effect = func_ovl2_800FF3F4(&pos, lr, 1.7F);
+    case Ef_Kind_DustHeavyDoubleRapid:
+        p_effect = efParticle_DustHeavyDouble_MakeEffect(&pos, lr, 1.7F);
         break;
 
-    case 0xF:
-        p_effect = func_ovl2_800FF278(&pos, lr);
+    case Ef_Kind_DustHeavy:
+        p_effect = efParticle_DustHeavy_MakeEffect(&pos, lr);
         break;
 
-    case 0x10:
-        p_effect = func_ovl2_800FF278(&pos, -lr);
+    case Ef_Kind_DustHeavyReverse:
+        p_effect = efParticle_DustHeavy_MakeEffect(&pos, -lr);
         break;
 
-    case 0x11:
-        pos.x += (rand_f32() * 160.0F) - 80.0F;
-        pos.y += (rand_f32() * 160.0F) - 80.0F;
+    case Ef_Kind_DustExpandLarge:
+        pos.x += ((rand_f32() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
+        pos.y += ((rand_f32() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
 
-        p_effect = func_ovl2_800FF590(&pos);
+        p_effect = efParticle_DustExpandLarge_MakeEffect(&pos);
         break;
 
-    case 0x12:
-        p_effect = func_ovl2_800FF648(&pos, 1.0F);
+    case Ef_Kind_DustExpandSmall:
+        p_effect = efParticle_DustExpandSmall_MakeEffect(&pos, 1.0F);
         break;
 
-    case 0x13:
-        p_effect = func_ovl2_800FF7D8(&pos, lr, 1.0F);
+    case Ef_Kind_DustDashSmall:
+        p_effect = efParticle_DustDash_MakeEffect(&pos, lr, EFPART_DUSTDASH_SCALE_SMALL);
         break;
 
-    case 0x14:
-        p_effect = func_ovl2_800FF7D8(&pos, lr, 1.5F);
+    case Ef_Kind_DustDashLarge:
+        p_effect = efParticle_DustDash_MakeEffect(&pos, lr, EFPART_DUSTDASH_SCALE_LARGE);
         break;
 
     case 0x15:
@@ -2024,21 +2024,21 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
     case Ef_Kind_QuakeM0:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            p_effect = efMain_CreateEarthquake(0);
+            p_effect = efParticle_Quake_MakeEffect(0);
         }
         break;
 
     case Ef_Kind_QuakeM1:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            p_effect = efMain_CreateEarthquake(1);
+            p_effect = efParticle_Quake_MakeEffect(1);
         }
         break;
 
     case Ef_Kind_QuakeM2:
         if (fp->status_info.pl_kind != Pl_Kind_Result)
         {
-            p_effect = efMain_CreateEarthquake(2);
+            p_effect = efParticle_Quake_MakeEffect(2);
         }
         break;
 
@@ -2100,7 +2100,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         break;
 
     case 0x2E:
-        itEffect_CreateBoxSmashGFX(&pos);
+        itParticle_BoxSmash_MakeEffect(&pos);
         break;
 
     case 0x5A:

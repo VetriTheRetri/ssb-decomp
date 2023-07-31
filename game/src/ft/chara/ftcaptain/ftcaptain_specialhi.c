@@ -26,7 +26,7 @@ void ftCaptain_SpecialHiCatch_ProcUpdate(GObj *fighter_gobj)
 
         catch_fp->status_vars.common.capturecaptain.capture_flag |= FTCOMMON_CAPTURECAPTAIN_MASK_THROW;
 
-        efMain_CreateEarthquake(1); // Apply screen shake/rumble?
+        efParticle_Quake_MakeEffect(1); // Apply screen shake/rumble?
         ftCaptain_SpecialHiThrow_SetStatus(fighter_gobj);
     }
 }

@@ -44,7 +44,7 @@ bool32 wpYoshi_Star_ProcUpdate(GObj *weapon_gobj)
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
-        func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
+        efParticle_DustExpandSmall_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         return TRUE;
     }

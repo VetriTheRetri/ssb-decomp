@@ -139,7 +139,7 @@ extern intptr_t D_NF_00006778;
 extern intptr_t D_NF_000068F0;
 
 // 0x801791F4
-void itEffect_CreateBoxSmashGFX(Vec3f *pos)
+void itParticle_BoxSmash_MakeEffect(Vec3f *pos)
 {
     GObj *effect_gobj;
     efStruct *ep = efManager_GetStructNoForceReturn();
@@ -200,7 +200,7 @@ bool32 itBox_SDefault_CheckSpawnItems(GObj *item_gobj)
 
     func_800269C0(0x3B);
 
-    itEffect_CreateBoxSmashGFX(&DObjGetStruct(item_gobj)->translate);
+    itParticle_BoxSmash_MakeEffect(&DObjGetStruct(item_gobj)->translate);
 
     if (D_ovl3_8018D048.unk_0x10 != 0)
     {
@@ -486,7 +486,7 @@ void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     {
         effect_unk->effect_info->scale.x = effect_unk->effect_info->scale.y = effect_unk->effect_info->scale.z = ITBOX_EXPLODE_SCALE;
     }
-    efMain_CreateEarthquake(1);
+    efParticle_Quake_MakeEffect(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 

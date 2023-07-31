@@ -65,7 +65,7 @@ bool32 wpMario_Fireball_ProcUpdate(GObj *weapon_gobj) // Animation
 
     if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
-        func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
+        efParticle_DustExpandSmall_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         return TRUE;
     }
@@ -90,7 +90,7 @@ bool32 wpMario_Fireball_ProcMap(GObj *weapon_gobj) // Collision
     {
         if (func_ovl0_800C7A84(&wp->phys_info.vel) < wpMario_Fireball_WeaponAttributes[wp->weapon_vars.fireball.index].collide_damage)
         {
-            func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
+            efParticle_DustExpandSmall_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
             return TRUE;
         }
         wpMain_VelSetModelYaw(weapon_gobj);

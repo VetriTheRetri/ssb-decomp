@@ -375,7 +375,7 @@ bool32 wpLink_Boomerang_ProcMap(GObj *weapon_gobj)
 
         if (coll_flags)
         {
-            func_ovl2_800FECBC(&DObjGetStruct(weapon_gobj)->translate);
+            efParticle_DustCollision_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
             if (coll_flags & MPCOLL_MASK_RWALL)
             {

@@ -90,7 +90,7 @@ bool32 wpPikachu_ThunderHead_ProcUpdate(GObj *weapon_gobj)
     }
     else if (wpMain_DecLifeCheckExpire(wp) != FALSE)
     {
-        func_ovl2_800FF648(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
+        efParticle_DustExpandSmall_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
         wpPikachu_ThunderHead_SetDestroy(weapon_gobj, TRUE);
         func_ovl3_8016A680(weapon_gobj, 3);
 
@@ -107,7 +107,7 @@ bool32 wpPikachu_ThunderHead_ProcMap(GObj *weapon_gobj)
     if (func_ovl3_80167C04(weapon_gobj) != FALSE)
     {
         wpPikachu_ThunderHead_SetDestroy(weapon_gobj, TRUE);
-        efMain_CreateEarthquake(1);
+        efParticle_Quake_MakeEffect(1);
         func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
 
         return TRUE;

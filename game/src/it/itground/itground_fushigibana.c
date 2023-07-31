@@ -78,7 +78,7 @@ void itFushigibana_SDefault_UpdateHitParty(GObj *item_gobj)
 
         pos.y = 0.0F;
 
-        func_ovl2_800FF048(&pos, LEFT, 1.0F);
+        efParticle_DustLight_MakeEffect(&pos, LEFT, 1.0F);
     }
 }
 
@@ -114,7 +114,7 @@ bool32 itFushigibana_SDefault_ProcUpdate(GObj *item_gobj)
 
             func_800269C0(gmSound_SFX_MonsterWeapon);
 
-            func_ovl2_800FECBC(&pos);
+            efParticle_DustCollision_MakeEffect(&pos);
         }
         if (ip->item_vars.fushigibana.razor_spawn_wait > 0)
         {

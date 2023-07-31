@@ -145,7 +145,7 @@ bool32 itTaru_SDefault_ProcHit(GObj *item_gobj)
 {
     func_800269C0(0x3B);
 
-    itEffect_CreateBoxSmashGFX(&DObjGetStruct(item_gobj)->translate);
+    itParticle_BoxSmash_MakeEffect(&DObjGetStruct(item_gobj)->translate);
 
     if (func_ovl3_801730D4(item_gobj) != FALSE)
     {
@@ -434,7 +434,7 @@ void itTaru_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     {
         effect_unk->effect_info->scale.x = effect_unk->effect_info->scale.y = effect_unk->effect_info->scale.z = ITTARU_EXPLODE_SCALE;
     }
-    efMain_CreateEarthquake(1);
+    efParticle_Quake_MakeEffect(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 

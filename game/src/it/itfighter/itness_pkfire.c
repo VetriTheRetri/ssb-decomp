@@ -6,7 +6,8 @@ extern void *D_ovl2_8013113C;
 enum itPKFireStatus
 {
     itStatus_PKFire_GWait,
-    itStatus_PKFire_AFall
+    itStatus_PKFire_AFall,
+    itStatus_PKFire_EnumMax
 };
 
 itCreateDesc itNess_PKFire_ItemDesc = 
@@ -28,7 +29,7 @@ itCreateDesc itNess_PKFire_ItemDesc =
     NULL                                    // Proc Damage
 };
 
-itStatusDesc itNess_PKFire_StatusDesc[2] = 
+itStatusDesc itNess_PKFire_StatusDesc[itStatus_PKFire_EnumMax] =
 {
     // Status 0 (Ground Wait)
     {
@@ -105,7 +106,7 @@ bool32 itNess_SDefault_UpdateAllCheckDestroy(GObj *item_gobj)
 
     if (ip->lifetime < 0)
     {
-        func_ovl2_800FF648(&DObjGetStruct(item_gobj)->translate, 1.0F);
+        efParticle_DustExpandSmall_MakeEffect(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
         if (effect != NULL)
         {
@@ -241,7 +242,7 @@ GObj* itNess_PKFire_MakeItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
 
     ip->team = wp->team;
     ip->player = wp->player;
-    ip->handicip = wp->handicip;
+    ip->handicap = wp->handicap;
     ip->player_number = wp->player_number;
 
     ip->item_hit.can_rehit_shield = TRUE;
@@ -271,7 +272,6 @@ GObj* itNess_PKFire_MakeItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
             if (effect_info->unk_effect_0x2A == 0)
             {
                 ip->item_vars.pkfire.effect = NULL;
-
             }
             else effect_info->translate = *pos;
         }

@@ -372,7 +372,7 @@ void itRBomb_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     {
         effect_unk->effect_info->scale.x = effect_unk->effect_info->scale.y = effect_unk->effect_info->scale.z = ITRBOMB_EXPLODE_GFX_SCALE;
     }
-    efMain_CreateEarthquake(1);
+    efParticle_Quake_MakeEffect(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 

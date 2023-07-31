@@ -162,7 +162,7 @@ void itBombHei_Default_SetExplode(GObj *item_gobj, u8 arg1)
         ep->effect_info->scale.y = ITBOMBHEI_EXPLODE_SCALE;
         ep->effect_info->scale.z = ITBOMBHEI_EXPLODE_SCALE;
     }
-    efMain_CreateEarthquake(1);
+    efParticle_Quake_MakeEffect(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
@@ -214,7 +214,7 @@ void func_ovl3_80177180(GObj *item_gobj, u8 is_explode)
 
         pos.y += attributes->objectcoll_bottom;
 
-        func_ovl2_800FF3F4(&pos, ip->lr, 1.0F);
+        efParticle_DustHeavyDouble_MakeEffect(&pos, ip->lr, 1.0F);
     }
 }
 
@@ -410,7 +410,7 @@ void itBombHei_GWalk_UpdateGFX(GObj *item_gobj)
 
         pos.y += 120.0F;
 
-        func_ovl2_800FF048(&pos, ip->lr, 1.0F);
+        efParticle_DustLight_MakeEffect(&pos, ip->lr, 1.0F);
 
         ip->item_vars.bombhei.smoke_delay = ITBOMBHEI_SMOKE_WAIT;
     }

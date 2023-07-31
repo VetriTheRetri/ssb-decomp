@@ -19,9 +19,18 @@ enum efKind
     Ef_Kind_FlameLR = 6,                // Flame whose velocity depends on the user's facing direction
     Ef_Kind_FlameRandom,                // Small flame texture that scatters
     Ef_Kind_FlameStatic,                // Small flame texture that is stationary?
-    Ef_Kind_ShockwaveS = 10,            // Texture displayed when hit by an attack of the electric element; small shockwave texture
-    Ef_Kind_DustNSmall,                 // e.g. Light landing (no fast fall)
-    Ef_Kind_DustNLarge,                 // e.g. Heavy landing (fast fall)
+    Ef_Kind_ShockSmall = 10,            // Texture displayed when hit by an attack of the electric element; small shockwave texture
+    Ef_Kind_DustLight,                  // e.g. Light landing (no fast fall)
+    Ef_Kind_DustLightRapid,             // Faster version of DustLight?
+    Ef_Kind_DustHeavyDouble,            // Two instances of heavy dust clouds
+    Ef_Kind_DustHeavyDoubleRapid,       // Two instances of faster heavy dust clouds?
+    Ef_Kind_DustHeavy,                  // Single instance of heavy dust cloud
+    Ef_Kind_DustHeavyReverse,           // Single instance of direction-flipped heavy dust cloud
+    Ef_Kind_DustExpandLarge,            // Large dust cloud that grows in size
+    Ef_Kind_DustExpandSmall,            // Small dust cloud that grows in size
+    Ef_Kind_DustDashSmall,              // Small (actually pretty large) dust kickup behind user
+    Ef_Kind_DustDashLarge,              // Large dust kickup behind user
+    Ef_Kind_DamageFlyOrbs,              // Cyan orbs that fly outward, used only on DamageFlyRoll?
     Ef_Kind_QuakeM0 = 32,               // Creates an earthquake of magnitude 0
     Ef_Kind_QuakeM1,                    // Creates an earthquake of magnitude 1
     Ef_Kind_QuakeM2                     // Creates an earthquake of magnitude 2
@@ -69,7 +78,10 @@ struct efStruct
         efVars_BoxSmash basic1;
         efVars_Basic2 basic2;
         efVars_DamageNormalHeavy damage_normal_heavy;
-        efVars_DamageEHit damage_e_hit;
+        efVars_DustLight dust_light;
+        efVars_DustHeavy dust_heavy;
+        efVars_DamageFlyOrbs damage_fly_orbs;
+        efVars_DamageSpawnOrbs damage_spawn_orbs;
     } 
     effect_vars;
 };

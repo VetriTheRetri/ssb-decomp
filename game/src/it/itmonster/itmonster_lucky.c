@@ -137,7 +137,7 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
                     lucky_ap->item_vars.mblucky.egg_spawn_wait = ITMBLUCKY_EGG_SPAWN_WAIT_CONST;
                     lucky_ap->it_multi--;
 
-                    func_ovl2_800FF048(&pos, egg_ap->lr, 1.0F);
+                    efParticle_DustLight_MakeEffect(&pos, egg_ap->lr, 1.0F);
                 }
             }
             else

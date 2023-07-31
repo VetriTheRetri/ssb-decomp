@@ -57,7 +57,7 @@ bool32 func_ovl3_8017D820(GObj *item_gobj)
         }
         if ((ap->item_vars.iwark.rumble_wait == 0) && (ap->item_vars.iwark.is_rumble != FALSE))
         {
-            efMain_CreateEarthquake(0);
+            efParticle_Quake_MakeEffect(0);
 
             ap->item_vars.iwark.rumble_wait = ITIWARK_ROCK_RUMBLE_WAIT;
         }
@@ -111,7 +111,7 @@ void func_ovl3_8017D948(GObj *item_gobj)
     }
     else pos.y += ITIWARK_OTHER_ADD_POS_Y;
 
-    func_ovl2_800FF3F4(&pos, LEFT, 1.0F);
+    efParticle_DustHeavyDouble_MakeEffect(&pos, LEFT, 1.0F);
 
     if (ap->it_kind == It_Kind_Iwark)
     {
@@ -263,7 +263,7 @@ bool32 jtgt_ovl3_8017DD18(GObj *weapon_gobj)
 
             pos.y += WPIWARK_ROCK_COLLIDE_ADD_VEL_Y;
 
-            func_ovl2_800FF048(&pos, ip->lr, 1.0F);
+            efParticle_DustLight_MakeEffect(&pos, ip->lr, 1.0F);
 
             ip->lr = -ip->lr;
 

@@ -18,7 +18,7 @@ bool32 func_ovl3_8017E070(GObj *item_gobj)
 
     if (ap->item_vars.kabigon.rumble_wait == 0)
     {
-        efMain_CreateEarthquake(0);
+        efParticle_Quake_MakeEffect(0);
 
         ap->item_vars.kabigon.rumble_wait = ITKABIGON_RUMBLE_WAIT;
     }
@@ -137,7 +137,7 @@ bool32 func_ovl3_8017E384(GObj *item_gobj)
         pos.x += (rand_f32() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
         pos.y += (rand_f32() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
 
-        func_ovl2_800FF590(&pos);
+        efParticle_DustExpandLarge_MakeEffect(&pos);
 
         ap->item_vars.kabigon.dust_gfx_int = ITKABIGON_GFX_SPAWN_INT;
     }

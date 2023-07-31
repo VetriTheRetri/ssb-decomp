@@ -88,7 +88,7 @@ void itGLucky_SDefault_UpdateEggSpawn(GObj *lucky_gobj)
                     lucky_ip->it_multi = 10;
                     lucky_ip->item_vars.grlucky.egg_spawn_count--;
 
-                    func_ovl2_800FF048(&pos, egg_ip->lr, 1.0F);
+                    efParticle_DustLight_MakeEffect(&pos, egg_ip->lr, 1.0F);
                 }
             }
             else

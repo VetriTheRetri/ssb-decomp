@@ -157,7 +157,7 @@ void itLinkBomb_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
         ep->effect_info->scale.y = ITLINKBOMB_EXPLODE_GFX_SCALE;
         ep->effect_info->scale.z = ITLINKBOMB_EXPLODE_GFX_SCALE;
     }
-    efMain_CreateEarthquake(1);
+    efParticle_Quake_MakeEffect(1);
 
     DObjGetStruct(item_gobj)->unk_0x54 = 2;
 
@@ -178,7 +178,7 @@ void func_ovl3_80185B18(GObj *item_gobj)
 
     pos.y += attributes->objectcoll_bottom;
 
-    func_ovl2_800FF3F4(&pos, ip->lr, 1.0F);
+    efParticle_DustHeavyDouble_MakeEffect(&pos, ip->lr, 1.0F);
 }
 
 // 0x80185B84

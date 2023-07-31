@@ -186,7 +186,7 @@ void itMain_DestroyItem(GObj *item_gobj)
     }
     else if ((ip->it_kind < It_Kind_GrMonsterStart) || (ip->it_kind > It_Kind_GrMonsterMax))
     {
-        func_ovl2_800FF590(&DObjGetStruct(item_gobj)->translate);
+        efParticle_DustExpandLarge_MakeEffect(&DObjGetStruct(item_gobj)->translate);
     }
     if (ip->indicator_gobj != NULL)
     {
