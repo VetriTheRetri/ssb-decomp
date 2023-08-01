@@ -19,10 +19,10 @@ void func_ovl3_80180630(GObj *item_gobj)
         else pos.x += ITKAMEX_OTHER_HYDRO_SPAWN_OFF_X * ap->lr;
 
         func_ovl3_80180F9C(item_gobj, &pos);
-        func_ovl2_801001A8(&pos, ap->lr);
+        efParticle_DamageSpawnSparks_MakeEffect(&pos, ap->lr);
         func_800269C0(0x87U);
 
-        ap->item_vars.kamex.hydro_spawn_wait = rand_u16_range(ITKAMEX_HYDRO_SPAWN_WAIT_RANDOM) + ITKAMEX_HYDRO_SPAWN_WAIT_CONST;
+        ap->item_vars.kamex.hydro_spawn_wait = lbRandom_GetIntRange(ITKAMEX_HYDRO_SPAWN_WAIT_RANDOM) + ITKAMEX_HYDRO_SPAWN_WAIT_CONST;
 
         pos = joint->translate;
 

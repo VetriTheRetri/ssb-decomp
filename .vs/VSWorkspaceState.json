@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\game",
-    "\\game\\nonmatching",
-    "\\game\\nonmatching\\ovl0\\halsprite",
     "\\game\\src",
-    "\\game\\src\\ft",
-    "\\game\\src\\ft\\common",
+    "\\game\\src\\ef",
+    "\\game\\src\\it",
+    "\\game\\src\\it\\itfighter",
+    "\\game\\src\\mp",
     "\\game\\src\\ovl0",
     "\\game\\src\\ovl2",
     "\\game\\src\\sys"
   ],
-  "SelectedNode": "\\game\\src\\ef\\effectvars.h",
+  "SelectedNode": "\\game\\src\\mp\\mpcoll.h",
   "PreviewInSolutionExplorer": false
 }

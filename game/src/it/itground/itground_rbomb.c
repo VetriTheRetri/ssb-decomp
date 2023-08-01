@@ -128,13 +128,13 @@ void itEffect_CreateRBombSmashGFX(Vec3f *pos)
 
                 joint->translate = *pos;
 
-                joint->scale.x = (rand_f32() * 48.0F) + -24.0F;
-                joint->scale.y = (rand_f32() * 50.0F) + 10.0F;
-                joint->scale.z = (rand_f32() * 32.0F) + -16.0F;
+                joint->scale.x = (lbRandom_GetFloat() * 48.0F) + -24.0F;
+                joint->scale.y = (lbRandom_GetFloat() * 50.0F) + 10.0F;
+                joint->scale.z = (lbRandom_GetFloat() * 32.0F) + -16.0F;
 
-                joint->dobj_f0 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
-                joint->dobj_f1 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
-                joint->dobj_f2 = F_DEG_TO_RAD((rand_f32() * 100.0F) + -50.0F);
+                joint->dobj_f0 = F_DEG_TO_RAD((lbRandom_GetFloat() * 100.0F) + -50.0F);
+                joint->dobj_f1 = F_DEG_TO_RAD((lbRandom_GetFloat() * 100.0F) + -50.0F);
+                joint->dobj_f2 = F_DEG_TO_RAD((lbRandom_GetFloat() * 100.0F) + -50.0F);
             }
             ep->effect_vars.basic1.lifetime = ITRBOMB_GFX_LIFETIME;
 

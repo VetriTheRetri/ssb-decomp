@@ -30,7 +30,13 @@ enum efKind
     Ef_Kind_DustExpandSmall,            // Small dust cloud that grows in size
     Ef_Kind_DustDashSmall,              // Small (actually pretty large) dust kickup behind user
     Ef_Kind_DustDashLarge,              // Large dust kickup behind user
-    Ef_Kind_DamageFlyOrbs,              // Cyan orbs that fly outward, used only on DamageFlyRoll?
+    Ef_Kind_DamageFlyOrbs,              // Cyan orbs that fly outward
+    Ef_Kind_ImpactSW,                   // Green impact shockwave that is created when a character slams into collision
+    Ef_Kind_StarRodSpark,               // Star Rod / Star projectile sparkles 
+    Ef_Kind_DamageFlySparks,            // Shows sometimes when getting hit
+    Ef_Kind_DamageFlySparksReverse,     // LR-inverted version
+    Ef_Kind_DamageFlyMDust,             // Metal dust effect, shows sometimes when getting hit
+    Ef_Kind_DamageFlyMDustReverse,      // LR-inverted version
     Ef_Kind_QuakeM0 = 32,               // Creates an earthquake of magnitude 0
     Ef_Kind_QuakeM1,                    // Creates an earthquake of magnitude 1
     Ef_Kind_QuakeM2                     // Creates an earthquake of magnitude 2
@@ -64,12 +70,15 @@ struct efStruct
 {
     efStruct *ep_alloc_next;
     GObj *fighter_gobj;
+
     u16 unk_effectstruct_0x8;
     efImage *einfo;
+
     u32 is_pause_effect : 1;
     u32 effect_flags_b1 : 1;
     u32 effect_flags_b2 : 1;
     u32 effect_flags_b3 : 1;
+
     void (*proc_update)(GObj*);
 
     union effect_vars // Effect vars union?
@@ -82,6 +91,12 @@ struct efStruct
         efVars_DustHeavy dust_heavy;
         efVars_DamageFlyOrbs damage_fly_orbs;
         efVars_DamageSpawnOrbs damage_spawn_orbs;
+        efVars_ImpactSW impact_sw;
+        efVars_StarRodSpark star_rod_spark;
+        efVars_DamageFlySpark damage_fly_sparks;
+        efVars_DamageSpawnSpark damage_spawn_sparks;
+        efVars_DamageFlyMDust damage_fly_mdust;
+        efVars_DamageSpawnMDust damage_spawn_mdust;
     } 
     effect_vars;
 };

@@ -910,7 +910,7 @@ glabel func_ovl33_801327FC
   /* 15E850 80132800 AFBF001C */        sw $ra, 0x1c($sp)
   /* 15E854 80132804 AFB00018 */        sw $s0, 0x18($sp)
   .L80132808:
-  /* 15E858 80132808 0C00628C */       jal timerand_u8_range
+  /* 15E858 80132808 0C00628C */       jal lbRandom_GetTimeByteRange
   /* 15E85C 8013280C 24040027 */     addiu $a0, $zero, 0x27
   /* 15E860 80132810 00408025 */        or $s0, $v0, $zero
   /* 15E864 80132814 0C04C9F0 */       jal func_ovl33_801327C0

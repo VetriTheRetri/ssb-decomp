@@ -962,26 +962,26 @@ struct Temp002 *func_ovl0_800CEF4C(struct Temp002 *arg0, struct Temp002 *arg1, s
 
                             // csr += 4;
 
-                            arg0->unk1E = (s32)((f32)temp1 * rand_f32()) + temp2;
+                            arg0->unk1E = (s32)((f32)temp1 * lbRandom_GetFloat()) + temp2;
                             break;
                         }
                         case 0xA7:
                         {
                             temp1 = *csr++;
 
-                            if (temp1 >= (s32)(rand_f32() * 100.0f)) { arg0->unk1E = 1; }
+                            if (temp1 >= (s32)(lbRandom_GetFloat() * 100.0f)) { arg0->unk1E = 1; }
                             goto loop_break;
                         }
                         case 0xA8:
                         {
                             csr = bytecode_read_f32(csr, &sp80);
-                            arg0->unk20 += sp80 * rand_f32();
+                            arg0->unk20 += sp80 * lbRandom_GetFloat();
 
                             csr = bytecode_read_f32(csr, &sp80);
-                            arg0->unk24 += sp80 * rand_f32();
+                            arg0->unk24 += sp80 * lbRandom_GetFloat();
 
                             csr = bytecode_read_f32(csr, &sp80);
-                            arg0->unk28 += sp80 * rand_f32();
+                            arg0->unk28 += sp80 * lbRandom_GetFloat();
 
                             break;
                         }
@@ -1005,7 +1005,7 @@ struct Temp002 *func_ovl0_800CEF4C(struct Temp002 *arg0, struct Temp002 *arg1, s
                             temp2 += *csr++;
 
                             ret = func_ovl0_800CE6B8(
-                                arg0, arg0->unk08, temp2 + (s32)((f32)temp1 * rand_f32()));
+                                arg0, arg0->unk08, temp2 + (s32)((f32)temp1 * lbRandom_GetFloat()));
                             if (ret != NULL) {
                                 ret->unk20 = arg0->unk20;
                                 ret->unk24 = arg0->unk24;
@@ -1033,7 +1033,7 @@ struct Temp002 *func_ovl0_800CEF4C(struct Temp002 *arg0, struct Temp002 *arg1, s
                             csr = bytecode_read_f32(csr, &arg0->unk44);
                             csr = bytecode_read_f32(csr, &sp80);
 
-                            arg0->unk44 += sp80 * rand_f32();
+                            arg0->unk44 += sp80 * lbRandom_GetFloat();
                             if (arg0->unk0E == 1) {
                                 arg0->unk04 = 0;
                                 arg0->unk40 = arg0->unk44;
@@ -1133,13 +1133,13 @@ struct Temp002 *func_ovl0_800CEF4C(struct Temp002 *arg0, struct Temp002 *arg1, s
                         case 0xBA:
                         {
                             sp80 = (f32)*csr++;
-                            arg0->unk4C.b0 += sp80 * rand_f32();
+                            arg0->unk4C.b0 += sp80 * lbRandom_GetFloat();
                             sp80 = (f32)*csr++;
-                            arg0->unk4C.b1 += sp80 * rand_f32();
+                            arg0->unk4C.b1 += sp80 * lbRandom_GetFloat();
                             sp80 = (f32)*csr++;
-                            arg0->unk4C.b2 += sp80 * rand_f32();
+                            arg0->unk4C.b2 += sp80 * lbRandom_GetFloat();
                             sp80 = (f32)*csr++;
-                            arg0->unk4C.b3 += sp80 * rand_f32();
+                            arg0->unk4C.b3 += sp80 * lbRandom_GetFloat();
 
                             if (arg0->unk10 == 0) {
                                 // this has lwl and lwr, so maybe it's a struct?
@@ -1150,13 +1150,13 @@ struct Temp002 *func_ovl0_800CEF4C(struct Temp002 *arg0, struct Temp002 *arg1, s
                         case 0xBB:
                         {
                             sp80 = (f32)*csr++;
-                            arg0->unk54.b0 += sp80 * rand_f32();
+                            arg0->unk54.b0 += sp80 * lbRandom_GetFloat();
                             sp80 = (f32)*csr++;
-                            arg0->unk54.b1 += sp80 * rand_f32();
+                            arg0->unk54.b1 += sp80 * lbRandom_GetFloat();
                             sp80 = (f32)*csr++;
-                            arg0->unk54.b2 += sp80 * rand_f32();
+                            arg0->unk54.b2 += sp80 * lbRandom_GetFloat();
                             sp80 = (f32)*csr++;
-                            arg0->unk54.b3 += sp80 * rand_f32();
+                            arg0->unk54.b3 += sp80 * lbRandom_GetFloat();
 
                             if (arg0->unk12 == 0) {
                                 // this has lwl and lwr, so maybe it's a struct?
@@ -1168,7 +1168,7 @@ struct Temp002 *func_ovl0_800CEF4C(struct Temp002 *arg0, struct Temp002 *arg1, s
                         {
                             arg0->unk0B = *csr++;
                             sp80        = (f32)*csr++;
-                            arg0->unk0B += sp80 * rand_f32();
+                            arg0->unk0B += sp80 * lbRandom_GetFloat();
                             break;
                         }
                         case 0xBD:
@@ -1176,7 +1176,7 @@ struct Temp002 *func_ovl0_800CEF4C(struct Temp002 *arg0, struct Temp002 *arg1, s
                             csr = bytecode_read_f32(csr, &sp80);
                             csr = bytecode_read_f32(csr, &sp7C);
 
-                            sp80 += sp7C * rand_f32();
+                            sp80 += sp7C * lbRandom_GetFloat();
 
                             sp7C = sqrtf(
                                 SQUARE(arg0->unk2C) + SQUARE(arg0->unk30) + SQUARE(arg0->unk34));
@@ -1945,7 +1945,7 @@ void func_ovl0_800D2C4C(struct GObjCommon *obj) {
             curr->unk44 -= curr->unk40;
         } else {
             // L800D2D30
-            curr->unk44 += rand_f32() * curr->unk40;
+            curr->unk44 += lbRandom_GetFloat() * curr->unk40;
         }
         // L800D2D54
         // f26 1.0f
@@ -1965,11 +1965,11 @@ void func_ovl0_800D2C4C(struct GObjCommon *obj) {
             if (curr->unk08 == 0 || curr->unk08 == 3 || curr->unk08 == 4) {
                 // L800D2DCC
                 // unk54 is a u16, but it should be a u32?
-                spDC = (rand_f32() * (curr->unk54 - curr->unk50)) + curr->unk50;
+                spDC = (lbRandom_GetFloat() * (curr->unk54 - curr->unk50)) + curr->unk50;
                 spB8 = (curr->unk54 - curr->unk50) / (f32)(s32)curr->unk44;
             } else {
                 // L800D2E1C
-                spDC = rand_f32() * (2.0f * M_PI_F);
+                spDC = lbRandom_GetFloat() * (2.0f * M_PI_F);
                 spB8 = (2.0f * M_PI_F) / (f32)(s32)curr->unk44;
             }
         }

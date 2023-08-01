@@ -24,12 +24,12 @@ void func_ovl3_8017FDC0(GObj *item_gobj)
 
         pos.y = ap->item_vars.spear.spear_spawn_pos_y;
 
-        pos.y += (ITSPEAR_SPAWN_OFF_Y_MUL * rand_f32()) + ITSPEAR_SPAWN_OFF_Y_ADD;
+        pos.y += (ITSPEAR_SPAWN_OFF_Y_MUL * lbRandom_GetFloat()) + ITSPEAR_SPAWN_OFF_Y_ADD;
 
         func_ovl3_80180608(item_gobj, &pos, ap->it_kind);
 
         ap->item_vars.spear.spear_spawn_count--;
-        ap->item_vars.spear.spear_spawn_wait = rand_u16_range(ITSPEAR_SPAWN_WAIT_RANDOM) + ITSPEAR_SPAWN_WAIT_CONST;
+        ap->item_vars.spear.spear_spawn_wait = lbRandom_GetIntRange(ITSPEAR_SPAWN_WAIT_RANDOM) + ITSPEAR_SPAWN_WAIT_CONST;
     }
 }
 
@@ -187,7 +187,7 @@ GObj *jtgt_ovl3_80180218(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 
         joint->translate = *pos;
 
-        if (rand_u16_range(2) == 0)
+        if (lbRandom_GetIntRange(2) == 0)
         {
             joint->next->rotate.y = PI32;
 

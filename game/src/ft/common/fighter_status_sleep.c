@@ -87,7 +87,7 @@ void ftCommon_Sleep_ProcUpdate(GObj *fighter_gobj)
                 }
                 if (active_teammate_count != 0)
                 {
-                    random_steal_target = rand_u16_range(active_teammate_count);
+                    random_steal_target = lbRandom_GetIntRange(active_teammate_count);
 
                     gpBattleState->player_block[steal_from_player[random_steal_target]].stock_count--;
 

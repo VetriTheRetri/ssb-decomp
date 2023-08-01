@@ -530,7 +530,7 @@ bool32 itRShell_SDefault_ProcHit(GObj *item_gobj)
     }
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    ip->item_vars.shell.health = rand_u16_range(ITRSHELL_HEALTH_MAX);
+    ip->item_vars.shell.health = lbRandom_GetIntRange(ITRSHELL_HEALTH_MAX);
 
     ip->phys_info.vel_air.x = ((ip->phys_info.vel_air.x * -1.0F) + (ITRSHELL_RECOIL_VEL_X * ip->lr_attack)) * ITRSHELL_RECOIL_MUL_X;
 

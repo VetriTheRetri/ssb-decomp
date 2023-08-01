@@ -196,7 +196,7 @@ void ftCommon_DokanWait_SetStatus(GObj *fighter_gobj)
 
     func_ovl2_800FC894(wall_line_id, &fp->status_vars.common.dokan.pos_target);
 
-    if (rand_f32() <= 0.25F)
+    if (lbRandom_GetFloat() <= 0.25F)
     {
         fp->status_vars.common.dokan.wall_line_id = 0x14;
 

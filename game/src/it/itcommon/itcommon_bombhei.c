@@ -290,7 +290,7 @@ bool32 itBombHei_GWait_ProcUpdate(GObj *item_gobj)
 
         if (lr == 0)
         {
-            lr = rand_u16_range(2) - 1;
+            lr = lbRandom_GetIntRange(2) - 1;
         }
         if (lr < 0)
         {

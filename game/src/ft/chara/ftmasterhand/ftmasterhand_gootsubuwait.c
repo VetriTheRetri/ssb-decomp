@@ -59,7 +59,7 @@ void ftMasterHand_GootsubuWait_SetStatus(GObj *fighter_gobj)
 
     ftStatus_Update(fighter_gobj, ftStatus_MasterHand_GootsubuWait, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
 
-    fp->status_vars.masterhand.gootsubu.wait_timer = rand_u16_range(60) + 60;
+    fp->status_vars.masterhand.gootsubu.wait_timer = lbRandom_GetIntRange(60) + 60;
 
     mpCollision_GetLREdgeLeft(fp->coll_data.ground_line_id, &pos);
 

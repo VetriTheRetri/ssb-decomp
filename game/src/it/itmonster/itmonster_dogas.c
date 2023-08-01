@@ -50,8 +50,8 @@ void itDogas_NActive_UpdateSmog(GObj *item_gobj)
 
         pos = joint->translate;
 
-        pos.x += (rand_f32() * ITDOGAS_SMOG_MUL_OFF_X) - ITDOGAS_SMOG_SUB_OFF_X;
-        pos.y += (rand_f32() * ITDOGAS_SMOG_MUL_OFF_Y) - ATDGOAS_SMOG_SUB_OFF_Y;
+        pos.x += (lbRandom_GetFloat() * ITDOGAS_SMOG_MUL_OFF_X) - ITDOGAS_SMOG_SUB_OFF_X;
+        pos.y += (lbRandom_GetFloat() * ITDOGAS_SMOG_MUL_OFF_Y) - ATDGOAS_SMOG_SUB_OFF_Y;
 
         if (pos.x < joint->translate.x)
         {

@@ -1477,7 +1477,7 @@ f32 gmCommonObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s3
     }
     if (gSaveData.mprotect_fail & GMSAVE_PROTECTFAIL_RANDOMKNOCKBACK)
     {
-        knockback = rand_f32() * 200.0F;
+        knockback = lbRandom_GetFloat() * 200.0F;
     }
     return knockback;
 }
@@ -1503,7 +1503,7 @@ f32 grMapObject_DamageCalcKnockback(s32 percent_damage, s32 recent_damage, s32 h
     }
     if (gSaveData.mprotect_fail & GMSAVE_PROTECTFAIL_RANDOMKNOCKBACK)
     {
-        knockback = rand_f32() * 200.0F;
+        knockback = lbRandom_GetFloat() * 200.0F;
     }
     return knockback;
 }
@@ -1546,7 +1546,7 @@ void ftDamageUpdateCheckDropItem(ftStruct *fp, s32 damage)
 
             if ((ip->weight != It_Weight_Heavy) || (fp->ft_kind != Ft_Kind_Donkey) && (fp->ft_kind != Ft_Kind_PolyDonkey) && (fp->ft_kind != Ft_Kind_GiantDonkey))
             {
-                if ((damage > (s32)rand_u16_range(60)) || ((itMain_CheckShootNoAmmo(fp->item_hold) != FALSE) && (rand_u16_range(2) == 0)))
+                if ((damage > (s32)lbRandom_GetIntRange(60)) || ((itMain_CheckShootNoAmmo(fp->item_hold) != FALSE) && (lbRandom_GetIntRange(2) == 0)))
                 {
                     ftSetupDropItem(fp);
                 }
@@ -1882,15 +1882,15 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         {
             if (gfx_scatter->x != 0)
             {
-                pos.x += (rand_f32() - 0.5F) * (gfx_scatter->x * 2.0F);
+                pos.x += (lbRandom_GetFloat() - 0.5F) * (gfx_scatter->x * 2.0F);
             }
             if (gfx_scatter->y != 0)
             {
-                pos.y += (rand_f32() - 0.5F) * (gfx_scatter->y * 2.0F);
+                pos.y += (lbRandom_GetFloat() - 0.5F) * (gfx_scatter->y * 2.0F);
             }
             if (gfx_scatter->z != 0)
             {
-                pos.z += (rand_f32() - 0.5F) * (gfx_scatter->z * 2.0F);
+                pos.z += (lbRandom_GetFloat() - 0.5F) * (gfx_scatter->z * 2.0F);
             }
         }
         if (is_scale_pos != FALSE)
@@ -1955,8 +1955,8 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         break;
 
     case Ef_Kind_DustExpandLarge:
-        pos.x += ((rand_f32() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
-        pos.y += ((rand_f32() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
+        pos.x += ((lbRandom_GetFloat() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
+        pos.y += ((lbRandom_GetFloat() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
 
         p_effect = efParticle_DustExpandLarge_MakeEffect(&pos);
         break;
@@ -1973,36 +1973,36 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         p_effect = efParticle_DustDash_MakeEffect(&pos, lr, EFPART_DUSTDASH_SCALE_LARGE);
         break;
 
-    case 0x15:
-        p_effect = func_ovl2_800FFAB8(&pos);
+    case Ef_Kind_DamageFlyOrbs:
+        p_effect = efParticle_DamageSpawnOrbs_MakeEffect(&pos);
         break;
 
-    case 0x16:
+    case Ef_Kind_ImpactSW:
         if ((fp->ground_or_air == GA_Ground) && (fp->coll_data.ground_line_id != -1) && (fp->coll_data.ground_line_id != -2))
         {
-            p_effect = func_ovl2_800FFD58(&pos, 4, atan2f(-fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y));
+            p_effect = efParticle_ImpactSW_MakeEffect(&pos, 4, atan2f(-fp->coll_data.ground_angle.x, fp->coll_data.ground_angle.y));
         }
-        else p_effect = func_ovl2_800FFDE8(&pos, 4);
+        else p_effect = efParticle_ImpactAirSW_MakeEffect(&pos, 4);
         break;
 
-    case 0x17:
-        p_effect = func_ovl2_800FFEA4(&pos, -lr);
+    case Ef_Kind_StarRodSpark:
+        p_effect = efParticle_StarRodSpark_MakeEffect(&pos, -lr);
         break;
 
-    case 0x18:
-        p_effect = func_ovl2_801001A8(&pos, lr);
+    case Ef_Kind_DamageFlySparks:
+        p_effect = efParticle_DamageSpawnSparks_MakeEffect(&pos, lr);
         break;
 
-    case 0x19:
-        p_effect = func_ovl2_801001A8(&pos, -lr);
+    case Ef_Kind_DamageFlySparksReverse:
+        p_effect = efParticle_DamageSpawnSparks_MakeEffect(&pos, -lr);
         break;
 
-    case 0x1A:
-        p_effect = func_ovl2_801003D0(&pos, lr);
+    case Ef_Kind_DamageFlyMDust:
+        p_effect = efParticle_DamageSpawnMDust_MakeEffect(&pos, lr);
         break;
 
-    case 0x1B:
-        p_effect = func_ovl2_801003D0(&pos, -lr);
+    case Ef_Kind_DamageFlyMDustReverse:
+        p_effect = efParticle_DamageSpawnMDust_MakeEffect(&pos, -lr);
         break;
 
     case 0x1C:

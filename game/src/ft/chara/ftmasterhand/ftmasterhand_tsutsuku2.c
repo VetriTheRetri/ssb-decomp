@@ -49,5 +49,5 @@ void ftMasterHand_Tsutsuku2_SetStatus(GObj *fighter_gobj)
 
     fp = ftGetStruct(fighter_gobj);
 
-    fp->status_vars.masterhand.tsutsuku.wait_timer = rand_u16_range(80) + 60;
+    fp->status_vars.masterhand.tsutsuku.wait_timer = lbRandom_GetIntRange(80) + 60;
 }

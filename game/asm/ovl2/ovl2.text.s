@@ -390,7 +390,7 @@ glabel func_ovl2_800D67DC
   /* 0521A8 800D69A8 3231FFFF */      andi $s1, $s1, 0xffff
   /* 0521AC 800D69AC 0C035924 */       jal func_ovl2_800D6490
   /* 0521B0 800D69B0 3224FFFF */      andi $a0, $s1, 0xffff
-  /* 0521B4 800D69B4 0C006265 */       jal rand_u16_range
+  /* 0521B4 800D69B4 0C006265 */       jal lbRandom_GetIntRange
   /* 0521B8 800D69B8 00402025 */        or $a0, $v0, $zero
   /* 0521BC 800D69BC 3224FFFF */      andi $a0, $s1, 0xffff
   /* 0521C0 800D69C0 00002825 */        or $a1, $zero, $zero
@@ -422,7 +422,7 @@ glabel func_ovl2_800D67DC
   /* 05221C 800D6A1C 0C035924 */       jal func_ovl2_800D6490
   /* 052220 800D6A20 3224FFFF */      andi $a0, $s1, 0xffff
   /* 052224 800D6A24 AFA20040 */        sw $v0, 0x40($sp)
-  /* 052228 800D6A28 0C006265 */       jal rand_u16_range
+  /* 052228 800D6A28 0C006265 */       jal lbRandom_GetIntRange
   /* 05222C 800D6A2C 00402025 */        or $a0, $v0, $zero
   /* 052230 800D6A30 3224FFFF */      andi $a0, $s1, 0xffff
   /* 052234 800D6A34 00002825 */        or $a1, $zero, $zero
@@ -436,7 +436,7 @@ glabel func_ovl2_800D67DC
   /* 052254 800D6A54 028A1821 */      addu $v1, $s4, $t2
   /* 052258 800D6A58 A0620023 */        sb $v0, 0x23($v1)
   /* 05225C 800D6A5C A0600026 */        sb $zero, 0x26($v1)
-  /* 052260 800D6A60 0C006265 */       jal rand_u16_range
+  /* 052260 800D6A60 0C006265 */       jal lbRandom_GetIntRange
   /* 052264 800D6A64 A0600027 */        sb $zero, 0x27($v1)
   /* 052268 800D6A68 924C0018 */       lbu $t4, 0x18($s2) # gSceneData + 24
   /* 05226C 800D6A6C 240F0001 */     addiu $t7, $zero, 1
@@ -462,7 +462,7 @@ glabel func_ovl2_800D67DC
   /* 0522B8 800D6AB8 3231FFFF */      andi $s1, $s1, 0xffff
   /* 0522BC 800D6ABC 0C035924 */       jal func_ovl2_800D6490
   /* 0522C0 800D6AC0 3224FFFF */      andi $a0, $s1, 0xffff
-  /* 0522C4 800D6AC4 0C006265 */       jal rand_u16_range
+  /* 0522C4 800D6AC4 0C006265 */       jal lbRandom_GetIntRange
   /* 0522C8 800D6AC8 00402025 */        or $a0, $v0, $zero
   /* 0522CC 800D6ACC 3224FFFF */      andi $a0, $s1, 0xffff
   /* 0522D0 800D6AD0 0C035955 */       jal func_ovl2_800D6554
@@ -10445,7 +10445,7 @@ glabel ftScript_ProcessScriptEvent
   /* 05B1C8 800DF9C8 000DC900 */       sll $t9, $t5, 4
   /* 05B1CC 800DF9CC 0722000E */     bltzl $t9, .L800DFA08
   /* 05B1D0 800DF9D0 8E0E0004 */        lw $t6, 4($s0)
-  /* 05B1D4 800DF9D4 0C006265 */       jal rand_u16_range
+  /* 05B1D4 800DF9D4 0C006265 */       jal lbRandom_GetIntRange
   /* 05B1D8 800DF9D8 24040003 */     addiu $a0, $zero, 3
   /* 05B1DC 800DF9DC 8E2E09C8 */        lw $t6, 0x9c8($s1)
   /* 05B1E0 800DF9E0 00027840 */       sll $t7, $v0, 1
@@ -15445,7 +15445,7 @@ glabel func_ovl2_800E3EBC
   /* 05F888 800E4088 000B6742 */       srl $t4, $t3, 0x1d
   /* 05F88C 800E408C 11800012 */      beqz $t4, .L800E40D8
   /* 05F890 800E4090 00000000 */       nop 
-  /* 05F894 800E4094 0C03FECE */       jal func_ovl2_800FFB38
+  /* 05F894 800E4094 0C03FECE */       jal efParticle_DamageSpawnOrbs_CheckRandomMakeEffect
   /* 05F898 800E4098 02602025 */        or $a0, $s3, $zero
   /* 05F89C 800E409C 8EAD09C8 */        lw $t5, 0x9c8($s5)
   /* 05F8A0 800E40A0 02602025 */        or $a0, $s3, $zero
@@ -15457,12 +15457,12 @@ glabel func_ovl2_800E3EBC
   /* 05F8B8 800E40B8 10000007 */         b .L800E40D8
   /* 05F8BC 800E40BC 00000000 */       nop 
   .L800E40C0:
-  /* 05F8C0 800E40C0 0C040086 */       jal func_ovl2_80100218
+  /* 05F8C0 800E40C0 0C040086 */       jal efParticle_DamageSpawnSparks_CheckRandomMakeEffect
   /* 05F8C4 800E40C4 8EA50044 */        lw $a1, 0x44($s5)
   /* 05F8C8 800E40C8 10000003 */         b .L800E40D8
   /* 05F8CC 800E40CC 00000000 */       nop 
   .L800E40D0:
-  /* 05F8D0 800E40D0 0C040110 */       jal func_ovl2_80100440
+  /* 05F8D0 800E40D0 0C040110 */       jal efParticle_DamageSpawnMDust_CheckRandomMakeEffect
   /* 05F8D4 800E40D4 8EA50044 */        lw $a1, 0x44($s5)
   .L800E40D8:
   /* 05F8D8 800E40D8 3C028013 */       lui $v0, %hi(ftHitCollisionLogIndex)
@@ -22250,7 +22250,7 @@ glabel gmCommonObject_DamageCalcKnockback
   /* 065784 800E9F84 31F80001 */      andi $t8, $t7, 1
   /* 065788 800E9F88 53000009 */      beql $t8, $zero, .L800E9FB0
   /* 06578C 800E9F8C 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 065790 800E9F90 0C006252 */       jal rand_f32
+  /* 065790 800E9F90 0C006252 */       jal lbRandom_GetFloat
   /* 065794 800E9F94 00000000 */       nop 
   /* 065798 800E9F98 3C014348 */       lui $at, (0x43480000 >> 16) # 200.0
   /* 06579C 800E9F9C 44818000 */      mtc1 $at, $f16 # 200.0 to cop1
@@ -22380,7 +22380,7 @@ glabel grMapObject_DamageCalcKnockback
   /* 065974 800EA174 316C0001 */      andi $t4, $t3, 1
   /* 065978 800EA178 51800009 */      beql $t4, $zero, .L800EA1A0
   /* 06597C 800EA17C 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 065980 800EA180 0C006252 */       jal rand_f32
+  /* 065980 800EA180 0C006252 */       jal lbRandom_GetFloat
   /* 065984 800EA184 00000000 */       nop 
   /* 065988 800EA188 3C014348 */       lui $at, (0x43480000 >> 16) # 200.0
   /* 06598C 800EA18C 44819000 */      mtc1 $at, $f18 # 200.0 to cop1
@@ -22512,7 +22512,7 @@ glabel ftDamageUpdateCheckDropItem
   /* 065B58 800EA358 8FBF0014 */        lw $ra, 0x14($sp)
   /* 065B5C 800EA35C AFA50034 */        sw $a1, 0x34($sp)
   .L800EA360:
-  /* 065B60 800EA360 0C006265 */       jal rand_u16_range
+  /* 065B60 800EA360 0C006265 */       jal lbRandom_GetIntRange
   /* 065B64 800EA364 AFA70030 */        sw $a3, 0x30($sp)
   /* 065B68 800EA368 8FA50034 */        lw $a1, 0x34($sp)
   /* 065B6C 800EA36C 8FA70030 */        lw $a3, 0x30($sp)
@@ -22525,7 +22525,7 @@ glabel ftDamageUpdateCheckDropItem
   /* 065B88 800EA388 1040000E */      beqz $v0, .L800EA3C4
   /* 065B8C 800EA38C 8FA70030 */        lw $a3, 0x30($sp)
   /* 065B90 800EA390 24040002 */     addiu $a0, $zero, 2
-  /* 065B94 800EA394 0C006265 */       jal rand_u16_range
+  /* 065B94 800EA394 0C006265 */       jal lbRandom_GetIntRange
   /* 065B98 800EA398 AFA70030 */        sw $a3, 0x30($sp)
   /* 065B9C 800EA39C 14400009 */      bnez $v0, .L800EA3C4
   /* 065BA0 800EA3A0 8FA70030 */        lw $a3, 0x30($sp)
@@ -23217,7 +23217,7 @@ glabel ftCommon_GFXSpawn
   /* 066530 800EAD30 45030011 */     bc1tl .L800EAD78
   /* 066534 800EAD34 44802000 */      mtc1 $zero, $f4
   /* 066538 800EAD38 AFA30038 */        sw $v1, 0x38($sp)
-  /* 06653C 800EAD3C 0C006252 */       jal rand_f32
+  /* 06653C 800EAD3C 0C006252 */       jal lbRandom_GetFloat
   /* 066540 800EAD40 AFA60060 */        sw $a2, 0x60($sp)
   /* 066544 800EAD44 8FA20068 */        lw $v0, 0x68($sp)
   /* 066548 800EAD48 3C013F00 */       lui $at, (0x3F000000 >> 16) # 0.5
@@ -23239,7 +23239,7 @@ glabel ftCommon_GFXSpawn
   /* 066584 800EAD84 45030011 */     bc1tl .L800EADCC
   /* 066588 800EAD88 44804000 */      mtc1 $zero, $f8
   /* 06658C 800EAD8C AFA30038 */        sw $v1, 0x38($sp)
-  /* 066590 800EAD90 0C006252 */       jal rand_f32
+  /* 066590 800EAD90 0C006252 */       jal lbRandom_GetFloat
   /* 066594 800EAD94 AFA60060 */        sw $a2, 0x60($sp)
   /* 066598 800EAD98 8FA20068 */        lw $v0, 0x68($sp)
   /* 06659C 800EAD9C 3C013F00 */       lui $at, (0x3F000000 >> 16) # 0.5
@@ -23261,7 +23261,7 @@ glabel ftCommon_GFXSpawn
   /* 0665D8 800EADD8 45030011 */     bc1tl .L800EAE20
   /* 0665DC 800EADDC 8FAA0070 */        lw $t2, 0x70($sp)
   /* 0665E0 800EADE0 AFA30038 */        sw $v1, 0x38($sp)
-  /* 0665E4 800EADE4 0C006252 */       jal rand_f32
+  /* 0665E4 800EADE4 0C006252 */       jal lbRandom_GetFloat
   /* 0665E8 800EADE8 AFA60060 */        sw $a2, 0x60($sp)
   /* 0665EC 800EADEC 8FA20068 */        lw $v0, 0x68($sp)
   /* 0665F0 800EADF0 3C013F00 */       lui $at, (0x3F000000 >> 16) # 0.5
@@ -23406,7 +23406,7 @@ glabel ftCommon_GFXSpawn
   /* 0667E4 800EAFE4 100000E8 */         b jtgt_ovl2_800EB388
   /* 0667E8 800EAFE8 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EAFEC
-  /* 0667EC 800EAFEC 0C006252 */       jal rand_f32
+  /* 0667EC 800EAFEC 0C006252 */       jal lbRandom_GetFloat
   /* 0667F0 800EAFF0 00000000 */       nop 
   /* 0667F4 800EAFF4 3C014320 */       lui $at, (0x43200000 >> 16) # 160.0
   /* 0667F8 800EAFF8 44812000 */      mtc1 $at, $f4 # 160.0 to cop1
@@ -23416,7 +23416,7 @@ glabel ftCommon_GFXSpawn
   /* 066808 800EB008 C7B00048 */      lwc1 $f16, 0x48($sp)
   /* 06680C 800EB00C 46089181 */     sub.s $f6, $f18, $f8
   /* 066810 800EB010 46068280 */     add.s $f10, $f16, $f6
-  /* 066814 800EB014 0C006252 */       jal rand_f32
+  /* 066814 800EB014 0C006252 */       jal lbRandom_GetFloat
   /* 066818 800EB018 E7AA0048 */      swc1 $f10, 0x48($sp)
   /* 06681C 800EB01C 3C014320 */       lui $at, (0x43200000 >> 16) # 160.0
   /* 066820 800EB020 44812000 */      mtc1 $at, $f4 # 160.0 to cop1
@@ -23452,7 +23452,7 @@ glabel ftCommon_GFXSpawn
   /* 06688C 800EB08C 100000BE */         b jtgt_ovl2_800EB388
   /* 066890 800EB090 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB094
-  /* 066894 800EB094 0C03FEAE */       jal func_ovl2_800FFAB8
+  /* 066894 800EB094 0C03FEAE */       jal efParticle_DamageSpawnOrbs_MakeEffect
   /* 066898 800EB098 02002025 */        or $a0, $s0, $zero
   /* 06689C 800EB09C 100000BA */         b jtgt_ovl2_800EB388
   /* 0668A0 800EB0A0 00401825 */        or $v1, $v0, $zero
@@ -23474,45 +23474,45 @@ glabel ftCommon_GFXSpawn
   /* 0668DC 800EB0DC 46006307 */     neg.s $f12, $f12
   /* 0668E0 800EB0E0 44060000 */      mfc1 $a2, $f0
   /* 0668E4 800EB0E4 02002025 */        or $a0, $s0, $zero
-  /* 0668E8 800EB0E8 0C03FF56 */       jal func_ovl2_800FFD58
+  /* 0668E8 800EB0E8 0C03FF56 */       jal efParticle_ImpactSW_MakeEffect
   /* 0668EC 800EB0EC 24050004 */     addiu $a1, $zero, 4
   /* 0668F0 800EB0F0 100000A5 */         b jtgt_ovl2_800EB388
   /* 0668F4 800EB0F4 00401825 */        or $v1, $v0, $zero
   .L800EB0F8:
-  /* 0668F8 800EB0F8 0C03FF7A */       jal func_ovl2_800FFDE8
+  /* 0668F8 800EB0F8 0C03FF7A */       jal efParticle_ImpactAirSW_MakeEffect
   /* 0668FC 800EB0FC 24050004 */     addiu $a1, $zero, 4
   /* 066900 800EB100 100000A1 */         b jtgt_ovl2_800EB388
   /* 066904 800EB104 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB108
   /* 066908 800EB108 8FA5006C */        lw $a1, 0x6c($sp)
   /* 06690C 800EB10C 02002025 */        or $a0, $s0, $zero
-  /* 066910 800EB110 0C03FFA9 */       jal func_ovl2_800FFEA4
+  /* 066910 800EB110 0C03FFA9 */       jal efParticle_StarRodSpark_MakeEffect
   /* 066914 800EB114 00052823 */      negu $a1, $a1
   /* 066918 800EB118 1000009B */         b jtgt_ovl2_800EB388
   /* 06691C 800EB11C 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB120
   /* 066920 800EB120 02002025 */        or $a0, $s0, $zero
-  /* 066924 800EB124 0C04006A */       jal func_ovl2_801001A8
+  /* 066924 800EB124 0C04006A */       jal efParticle_DamageSpawnSparks_MakeEffect
   /* 066928 800EB128 8FA5006C */        lw $a1, 0x6c($sp)
   /* 06692C 800EB12C 10000096 */         b jtgt_ovl2_800EB388
   /* 066930 800EB130 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB134
   /* 066934 800EB134 8FA5006C */        lw $a1, 0x6c($sp)
   /* 066938 800EB138 02002025 */        or $a0, $s0, $zero
-  /* 06693C 800EB13C 0C04006A */       jal func_ovl2_801001A8
+  /* 06693C 800EB13C 0C04006A */       jal efParticle_DamageSpawnSparks_MakeEffect
   /* 066940 800EB140 00052823 */      negu $a1, $a1
   /* 066944 800EB144 10000090 */         b jtgt_ovl2_800EB388
   /* 066948 800EB148 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB14C
   /* 06694C 800EB14C 02002025 */        or $a0, $s0, $zero
-  /* 066950 800EB150 0C0400F4 */       jal func_ovl2_801003D0
+  /* 066950 800EB150 0C0400F4 */       jal efParticle_DamageSpawnMDust_MakeEffect
   /* 066954 800EB154 8FA5006C */        lw $a1, 0x6c($sp)
   /* 066958 800EB158 1000008B */         b jtgt_ovl2_800EB388
   /* 06695C 800EB15C 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB160
   /* 066960 800EB160 8FA5006C */        lw $a1, 0x6c($sp)
   /* 066964 800EB164 02002025 */        or $a0, $s0, $zero
-  /* 066968 800EB168 0C0400F4 */       jal func_ovl2_801003D0
+  /* 066968 800EB168 0C0400F4 */       jal efParticle_DamageSpawnMDust_MakeEffect
   /* 06696C 800EB16C 00052823 */      negu $a1, $a1
   /* 066970 800EB170 10000085 */         b jtgt_ovl2_800EB388
   /* 066974 800EB174 00401825 */        or $v1, $v0, $zero
@@ -44492,7 +44492,7 @@ glabel efParticle_DamageNormalLight_MakeEffect
   /* 079528 800FDD28 1000000B */         b .L800FDD58
   /* 07952C 800FDD2C E7A40018 */      swc1 $f4, 0x18($sp)
   .L800FDD30:
-  /* 079530 800FDD30 0C006252 */       jal rand_f32
+  /* 079530 800FDD30 0C006252 */       jal lbRandom_GetFloat
   /* 079534 800FDD34 AFA30024 */        sw $v1, 0x24($sp)
   /* 079538 800FDD38 3C014218 */       lui $at, (0x42180000 >> 16) # 38.0
   /* 07953C 800FDD3C 44813000 */      mtc1 $at, $f6 # 38.0 to cop1
@@ -44503,7 +44503,7 @@ glabel efParticle_DamageNormalLight_MakeEffect
   /* 079550 800FDD50 460A4400 */     add.s $f16, $f8, $f10
   /* 079554 800FDD54 E7B00018 */      swc1 $f16, 0x18($sp)
   .L800FDD58:
-  /* 079558 800FDD58 0C006252 */       jal rand_f32
+  /* 079558 800FDD58 0C006252 */       jal lbRandom_GetFloat
   /* 07955C 800FDD5C AFA30024 */        sw $v1, 0x24($sp)
   /* 079560 800FDD60 3C018013 */       lui $at, %hi(D_ovl2_80130920)
   /* 079564 800FDD64 C4320920 */      lwc1 $f18, %lo(D_ovl2_80130920)($at)
@@ -44781,7 +44781,7 @@ glabel func_ovl2_800FE068
   /* 07994C 800FE14C 8D2A0004 */        lw $t2, 4($t1)
   /* 079950 800FE150 AE0A0008 */        sw $t2, 8($s0)
   /* 079954 800FE154 8D2B0008 */        lw $t3, 8($t1)
-  /* 079958 800FE158 0C006252 */       jal rand_f32
+  /* 079958 800FE158 0C006252 */       jal lbRandom_GetFloat
   /* 07995C 800FE15C AE0B000C */        sw $t3, 0xc($s0)
   /* 079960 800FE160 3C014100 */       lui $at, (0x41000000 >> 16) # 8.0
   /* 079964 800FE164 44812000 */      mtc1 $at, $f4 # 8.0 to cop1
@@ -44789,7 +44789,7 @@ glabel func_ovl2_800FE068
   /* 07996C 800FE16C 44814000 */      mtc1 $at, $f8 # 2.0 to cop1
   /* 079970 800FE170 46040182 */     mul.s $f6, $f0, $f4
   /* 079974 800FE174 46083280 */     add.s $f10, $f6, $f8
-  /* 079978 800FE178 0C006252 */       jal rand_f32
+  /* 079978 800FE178 0C006252 */       jal lbRandom_GetFloat
   /* 07997C 800FE17C E7AA0020 */      swc1 $f10, 0x20($sp)
   /* 079980 800FE180 3C018013 */       lui $at, %hi(D_ovl2_8013092C)
   /* 079984 800FE184 C430092C */      lwc1 $f16, %lo(D_ovl2_8013092C)($at)
@@ -44959,7 +44959,7 @@ glabel efParticle_DamageFire_MakeEffect
   /* 079BD8 800FE3D8 8D2A0004 */        lw $t2, 4($t1)
   /* 079BDC 800FE3DC AE0A0008 */        sw $t2, 8($s0)
   /* 079BE0 800FE3E0 8D2B0008 */        lw $t3, 8($t1)
-  /* 079BE4 800FE3E4 0C006252 */       jal rand_f32
+  /* 079BE4 800FE3E4 0C006252 */       jal lbRandom_GetFloat
   /* 079BE8 800FE3E8 AE0B000C */        sw $t3, 0xc($s0)
   /* 079BEC 800FE3EC 3C014190 */       lui $at, (0x41900000 >> 16) # 18.0
   /* 079BF0 800FE3F0 44812000 */      mtc1 $at, $f4 # 18.0 to cop1
@@ -44967,7 +44967,7 @@ glabel efParticle_DamageFire_MakeEffect
   /* 079BF8 800FE3F8 44814000 */      mtc1 $at, $f8 # 12.0 to cop1
   /* 079BFC 800FE3FC 46040182 */     mul.s $f6, $f0, $f4
   /* 079C00 800FE400 46083280 */     add.s $f10, $f6, $f8
-  /* 079C04 800FE404 0C006252 */       jal rand_f32
+  /* 079C04 800FE404 0C006252 */       jal lbRandom_GetFloat
   /* 079C08 800FE408 E7AA0020 */      swc1 $f10, 0x20($sp)
   /* 079C0C 800FE40C 3C018013 */       lui $at, %hi(D_ovl2_80130938)
   /* 079C10 800FE410 C4300938 */      lwc1 $f16, %lo(D_ovl2_80130938)($at)
@@ -45096,7 +45096,7 @@ glabel func_ovl2_800FE4EC
   /* 079DD0 800FE5D0 8D2A0004 */        lw $t2, 4($t1)
   /* 079DD4 800FE5D4 AE0A0008 */        sw $t2, 8($s0)
   /* 079DD8 800FE5D8 8D2B0008 */        lw $t3, 8($t1)
-  /* 079DDC 800FE5DC 0C006252 */       jal rand_f32
+  /* 079DDC 800FE5DC 0C006252 */       jal lbRandom_GetFloat
   /* 079DE0 800FE5E0 AE0B000C */        sw $t3, 0xc($s0)
   /* 079DE4 800FE5E4 3C0140E0 */       lui $at, (0x40E00000 >> 16) # 7.0
   /* 079DE8 800FE5E8 44812000 */      mtc1 $at, $f4 # 7.0 to cop1
@@ -45104,7 +45104,7 @@ glabel func_ovl2_800FE4EC
   /* 079DF0 800FE5F0 44814000 */      mtc1 $at, $f8 # 3.0 to cop1
   /* 079DF4 800FE5F4 46040182 */     mul.s $f6, $f0, $f4
   /* 079DF8 800FE5F8 46083280 */     add.s $f10, $f6, $f8
-  /* 079DFC 800FE5FC 0C006252 */       jal rand_f32
+  /* 079DFC 800FE5FC 0C006252 */       jal lbRandom_GetFloat
   /* 079E00 800FE600 E7AA0020 */      swc1 $f10, 0x20($sp)
   /* 079E04 800FE604 3C018013 */       lui $at, %hi(D_ovl2_80130944)
   /* 079E08 800FE608 C4300944 */      lwc1 $f16, %lo(D_ovl2_80130944)($at)
@@ -45291,7 +45291,7 @@ glabel efParticle_FlameLR_MakeEffect
   /* 07A098 800FE898 8D2A0004 */        lw $t2, 4($t1)
   /* 07A09C 800FE89C AE0A0008 */        sw $t2, 8($s0)
   /* 07A0A0 800FE8A0 8D2B0008 */        lw $t3, 8($t1)
-  /* 07A0A4 800FE8A4 0C006252 */       jal rand_f32
+  /* 07A0A4 800FE8A4 0C006252 */       jal lbRandom_GetFloat
   /* 07A0A8 800FE8A8 AE0B000C */        sw $t3, 0xc($s0)
   /* 07A0AC 800FE8AC 3C014396 */       lui $at, (0x43960000 >> 16) # 300.0
   /* 07A0B0 800FE8B0 44812000 */      mtc1 $at, $f4 # 300.0 to cop1
@@ -45301,7 +45301,7 @@ glabel efParticle_FlameLR_MakeEffect
   /* 07A0C0 800FE8C0 C6100004 */      lwc1 $f16, 4($s0)
   /* 07A0C4 800FE8C4 46083280 */     add.s $f10, $f6, $f8
   /* 07A0C8 800FE8C8 460A8480 */     add.s $f18, $f16, $f10
-  /* 07A0CC 800FE8CC 0C006252 */       jal rand_f32
+  /* 07A0CC 800FE8CC 0C006252 */       jal lbRandom_GetFloat
   /* 07A0D0 800FE8D0 E6120004 */      swc1 $f18, 4($s0)
   /* 07A0D4 800FE8D4 3C014348 */       lui $at, (0x43480000 >> 16) # 200.0
   /* 07A0D8 800FE8D8 44812000 */      mtc1 $at, $f4 # 200.0 to cop1
@@ -45311,7 +45311,7 @@ glabel efParticle_FlameLR_MakeEffect
   /* 07A0E8 800FE8E8 C60A0008 */      lwc1 $f10, 8($s0)
   /* 07A0EC 800FE8EC 46083400 */     add.s $f16, $f6, $f8
   /* 07A0F0 800FE8F0 46105480 */     add.s $f18, $f10, $f16
-  /* 07A0F4 800FE8F4 0C006252 */       jal rand_f32
+  /* 07A0F4 800FE8F4 0C006252 */       jal lbRandom_GetFloat
   /* 07A0F8 800FE8F8 E6120008 */      swc1 $f18, 8($s0)
   /* 07A0FC 800FE8FC 3C018013 */       lui $at, %hi(D_ovl2_80130958)
   /* 07A100 800FE900 C4240958 */      lwc1 $f4, %lo(D_ovl2_80130958)($at)
@@ -45334,7 +45334,7 @@ glabel efParticle_FlameLR_MakeEffect
   /* 07A144 800FE944 44812000 */      mtc1 $at, $f4 # 20.0 to cop1
   /* 07A148 800FE948 8FAF0028 */        lw $t7, 0x28($sp)
   /* 07A14C 800FE94C 46040182 */     mul.s $f6, $f0, $f4
-  /* 07A150 800FE950 0C006252 */       jal rand_f32
+  /* 07A150 800FE950 0C006252 */       jal lbRandom_GetFloat
   /* 07A154 800FE954 E5E6001C */      swc1 $f6, 0x1c($t7)
   /* 07A158 800FE958 3C013F80 */       lui $at, (0x3F800000 >> 16) # 1.0
   /* 07A15C 800FE95C 44815000 */      mtc1 $at, $f10 # 1.0 to cop1
@@ -45427,7 +45427,7 @@ glabel efParticle_FlameRandom_MakeEffect
   /* 07A294 800FEA94 8D2A0004 */        lw $t2, 4($t1)
   /* 07A298 800FEA98 AE0A0008 */        sw $t2, 8($s0)
   /* 07A29C 800FEA9C 8D2B0008 */        lw $t3, 8($t1)
-  /* 07A2A0 800FEAA0 0C006252 */       jal rand_f32
+  /* 07A2A0 800FEAA0 0C006252 */       jal lbRandom_GetFloat
   /* 07A2A4 800FEAA4 AE0B000C */        sw $t3, 0xc($s0)
   /* 07A2A8 800FEAA8 3C018013 */       lui $at, %hi(D_ovl2_8013095C)
   /* 07A2AC 800FEAAC C424095C */      lwc1 $f4, %lo(D_ovl2_8013095C)($at)
@@ -45448,7 +45448,7 @@ glabel efParticle_FlameRandom_MakeEffect
   /* 07A2E8 800FEAE8 44819000 */      mtc1 $at, $f18 # 15.0 to cop1
   /* 07A2EC 800FEAEC 8FAD0028 */        lw $t5, 0x28($sp)
   /* 07A2F0 800FEAF0 46120102 */     mul.s $f4, $f0, $f18
-  /* 07A2F4 800FEAF4 0C006252 */       jal rand_f32
+  /* 07A2F4 800FEAF4 0C006252 */       jal lbRandom_GetFloat
   /* 07A2F8 800FEAF8 E5A4001C */      swc1 $f4, 0x1c($t5)
   /* 07A2FC 800FEAFC 3C013F80 */       lui $at, (0x3F800000 >> 16) # 1.0
   /* 07A300 800FEB00 44813000 */      mtc1 $at, $f6 # 1.0 to cop1
@@ -45546,7 +45546,7 @@ glabel efParticle_FlameStatic_MakeEffect
   /* 07A44C 800FEC4C 8F290008 */        lw $t1, 8($t9)
   /* 07A450 800FEC50 AC69000C */        sw $t1, 0xc($v1)
   /* 07A454 800FEC54 E6000018 */      swc1 $f0, 0x18($s0)
-  /* 07A458 800FEC58 0C006252 */       jal rand_f32
+  /* 07A458 800FEC58 0C006252 */       jal lbRandom_GetFloat
   /* 07A45C 800FEC5C E600001C */      swc1 $f0, 0x1c($s0)
   /* 07A460 800FEC60 3C013F80 */       lui $at, (0x3F800000 >> 16) # 1.0
   /* 07A464 800FEC64 44812000 */      mtc1 $at, $f4 # 1.0 to cop1
@@ -45639,7 +45639,7 @@ glabel efParticle_DustCollision_MakeEffect
   /* 07A59C 800FED9C 8D2A0004 */        lw $t2, 4($t1)
   /* 07A5A0 800FEDA0 AE0A0008 */        sw $t2, 8($s0)
   /* 07A5A4 800FEDA4 8D2B0008 */        lw $t3, 8($t1)
-  /* 07A5A8 800FEDA8 0C006252 */       jal rand_f32
+  /* 07A5A8 800FEDA8 0C006252 */       jal lbRandom_GetFloat
   /* 07A5AC 800FEDAC AE0B000C */        sw $t3, 0xc($s0)
   /* 07A5B0 800FEDB0 3C014396 */       lui $at, (0x43960000 >> 16) # 300.0
   /* 07A5B4 800FEDB4 44812000 */      mtc1 $at, $f4 # 300.0 to cop1
@@ -45649,7 +45649,7 @@ glabel efParticle_DustCollision_MakeEffect
   /* 07A5C4 800FEDC4 C6100004 */      lwc1 $f16, 4($s0)
   /* 07A5C8 800FEDC8 46083280 */     add.s $f10, $f6, $f8
   /* 07A5CC 800FEDCC 460A8480 */     add.s $f18, $f16, $f10
-  /* 07A5D0 800FEDD0 0C006252 */       jal rand_f32
+  /* 07A5D0 800FEDD0 0C006252 */       jal lbRandom_GetFloat
   /* 07A5D4 800FEDD4 E6120004 */      swc1 $f18, 4($s0)
   /* 07A5D8 800FEDD8 3C014396 */       lui $at, (0x43960000 >> 16) # 300.0
   /* 07A5DC 800FEDDC 44812000 */      mtc1 $at, $f4 # 300.0 to cop1
@@ -45659,7 +45659,7 @@ glabel efParticle_DustCollision_MakeEffect
   /* 07A5EC 800FEDEC C60A0008 */      lwc1 $f10, 8($s0)
   /* 07A5F0 800FEDF0 46083400 */     add.s $f16, $f6, $f8
   /* 07A5F4 800FEDF4 46105480 */     add.s $f18, $f10, $f16
-  /* 07A5F8 800FEDF8 0C006252 */       jal rand_f32
+  /* 07A5F8 800FEDF8 0C006252 */       jal lbRandom_GetFloat
   /* 07A5FC 800FEDFC E6120008 */      swc1 $f18, 8($s0)
   /* 07A600 800FEE00 3C018013 */       lui $at, %hi(D_ovl2_80130964)
   /* 07A604 800FEE04 C4240964 */      lwc1 $f4, %lo(D_ovl2_80130964)($at)
@@ -45680,7 +45680,7 @@ glabel efParticle_DustCollision_MakeEffect
   /* 07A640 800FEE40 44819000 */      mtc1 $at, $f18 # 15.0 to cop1
   /* 07A644 800FEE44 8FAD0028 */        lw $t5, 0x28($sp)
   /* 07A648 800FEE48 46120102 */     mul.s $f4, $f0, $f18
-  /* 07A64C 800FEE4C 0C006252 */       jal rand_f32
+  /* 07A64C 800FEE4C 0C006252 */       jal lbRandom_GetFloat
   /* 07A650 800FEE50 E5A4001C */      swc1 $f4, 0x1c($t5)
   /* 07A654 800FEE54 3C013F80 */       lui $at, (0x3F800000 >> 16) # 1.0
   /* 07A658 800FEE58 44813000 */      mtc1 $at, $f6 # 1.0 to cop1
@@ -45727,7 +45727,7 @@ glabel efParticle_ShockSmall_MakeEffect
   /* 07A6E0 800FEEE0 8C6E0084 */        lw $t6, 0x84($v1)
   /* 07A6E4 800FEEE4 8C710074 */        lw $s1, 0x74($v1)
   /* 07A6E8 800FEEE8 AFA30034 */        sw $v1, 0x34($sp)
-  /* 07A6EC 800FEEEC 0C006252 */       jal rand_f32
+  /* 07A6EC 800FEEEC 0C006252 */       jal lbRandom_GetFloat
   /* 07A6F0 800FEEF0 AFAE002C */        sw $t6, 0x2c($sp)
   /* 07A6F4 800FEEF4 3C014396 */       lui $at, (0x43960000 >> 16) # 300.0
   /* 07A6F8 800FEEF8 44812000 */      mtc1 $at, $f4 # 300.0 to cop1
@@ -45737,7 +45737,7 @@ glabel efParticle_ShockSmall_MakeEffect
   /* 07A708 800FEF08 C6100000 */      lwc1 $f16, ($s0)
   /* 07A70C 800FEF0C 46083280 */     add.s $f10, $f6, $f8
   /* 07A710 800FEF10 460A8480 */     add.s $f18, $f16, $f10
-  /* 07A714 800FEF14 0C006252 */       jal rand_f32
+  /* 07A714 800FEF14 0C006252 */       jal lbRandom_GetFloat
   /* 07A718 800FEF18 E6120000 */      swc1 $f18, ($s0)
   /* 07A71C 800FEF1C 3C014396 */       lui $at, (0x43960000 >> 16) # 300.0
   /* 07A720 800FEF20 44812000 */      mtc1 $at, $f4 # 300.0 to cop1
@@ -45753,7 +45753,7 @@ glabel efParticle_ShockSmall_MakeEffect
   /* 07A748 800FEF48 8E0F0004 */        lw $t7, 4($s0)
   /* 07A74C 800FEF4C AE2F0020 */        sw $t7, 0x20($s1)
   /* 07A750 800FEF50 8E180008 */        lw $t8, 8($s0)
-  /* 07A754 800FEF54 0C006252 */       jal rand_f32
+  /* 07A754 800FEF54 0C006252 */       jal lbRandom_GetFloat
   /* 07A758 800FEF58 AE380024 */        sw $t8, 0x24($s1)
   /* 07A75C 800FEF5C 3C018013 */       lui $at, %hi(D_ovl2_8013096C)
   /* 07A760 800FEF60 C424096C */      lwc1 $f4, %lo(D_ovl2_8013096C)($at)
@@ -45767,7 +45767,7 @@ glabel efParticle_ShockSmall_MakeEffect
   /* 07A780 800FEF80 C7AC0024 */      lwc1 $f12, 0x24($sp)
   /* 07A784 800FEF84 44804000 */      mtc1 $zero, $f8
   /* 07A788 800FEF88 8FA8002C */        lw $t0, 0x2c($sp)
-  /* 07A78C 800FEF8C 0C006252 */       jal rand_f32
+  /* 07A78C 800FEF8C 0C006252 */       jal lbRandom_GetFloat
   /* 07A790 800FEF90 E508001C */      swc1 $f8, 0x1c($t0)
   /* 07A794 800FEF94 3C013F00 */       lui $at, (0x3F000000 >> 16) # 0.5
   /* 07A798 800FEF98 44815000 */      mtc1 $at, $f10 # 0.5 to cop1
@@ -45776,7 +45776,7 @@ glabel efParticle_ShockSmall_MakeEffect
   /* 07A7A4 800FEFA4 460A0402 */     mul.s $f16, $f0, $f10
   /* 07A7A8 800FEFA8 46128080 */     add.s $f2, $f16, $f18
   /* 07A7AC 800FEFAC E6220044 */      swc1 $f2, 0x44($s1)
-  /* 07A7B0 800FEFB0 0C006252 */       jal rand_f32
+  /* 07A7B0 800FEFB0 0C006252 */       jal lbRandom_GetFloat
   /* 07A7B4 800FEFB4 E6220040 */      swc1 $f2, 0x40($s1)
   /* 07A7B8 800FEFB8 3C018013 */       lui $at, %hi(D_ovl2_80130970)
   /* 07A7BC 800FEFBC C4240970 */      lwc1 $f4, %lo(D_ovl2_80130970)($at)
@@ -45908,13 +45908,13 @@ glabel efParticle_DustLight_MakeEffect
   /* 07A988 800FF188 AC69000C */        sw $t1, 0xc($v1)
   /* 07A98C 800FF18C C42A0974 */      lwc1 $f10, %lo(D_ovl2_80130974)($at)
   /* 07A990 800FF190 460A4400 */     add.s $f16, $f8, $f10
-  /* 07A994 800FF194 0C006252 */       jal rand_f32
+  /* 07A994 800FF194 0C006252 */       jal lbRandom_GetFloat
   /* 07A998 800FF198 E4700008 */      swc1 $f16, 8($v1)
   /* 07A99C 800FF19C 3C018013 */       lui $at, %hi(D_ovl2_80130978)
   /* 07A9A0 800FF1A0 C4320978 */      lwc1 $f18, %lo(D_ovl2_80130978)($at)
   /* 07A9A4 800FF1A4 8FA3002C */        lw $v1, 0x2c($sp)
   /* 07A9A8 800FF1A8 46120102 */     mul.s $f4, $f0, $f18
-  /* 07A9AC 800FF1AC 0C006252 */       jal rand_f32
+  /* 07A9AC 800FF1AC 0C006252 */       jal lbRandom_GetFloat
   /* 07A9B0 800FF1B0 E4640018 */      swc1 $f4, 0x18($v1)
   /* 07A9B4 800FF1B4 3C018013 */       lui $at, %hi(D_ovl2_8013097C)
   /* 07A9B8 800FF1B8 C426097C */      lwc1 $f6, %lo(D_ovl2_8013097C)($at)
@@ -46491,7 +46491,7 @@ glabel efParticle_DamageSpawnOrbs_ProcUpdate
   /* 07B1C0 800FF9C0 AC480020 */        sw $t0, 0x20($v0)
   /* 07B1C4 800FF9C4 8E090024 */        lw $t1, 0x24($s0)
   /* 07B1C8 800FF9C8 AC490024 */        sw $t1, 0x24($v0)
-  /* 07B1CC 800FF9CC 0C006252 */       jal rand_f32
+  /* 07B1CC 800FF9CC 0C006252 */       jal lbRandom_GetFloat
   /* 07B1D0 800FF9D0 AFA20030 */        sw $v0, 0x30($sp)
   /* 07B1D4 800FF9D4 3C014000 */       lui $at, (0x40000000 >> 16) # 2.0
   /* 07B1D8 800FF9D8 44812000 */      mtc1 $at, $f4 # 2.0 to cop1
@@ -46501,7 +46501,7 @@ glabel efParticle_DamageSpawnOrbs_ProcUpdate
   /* 07B1E8 800FF9E8 8FA20030 */        lw $v0, 0x30($sp)
   /* 07B1EC 800FF9EC 46083080 */     add.s $f2, $f6, $f8
   /* 07B1F0 800FF9F0 E4420044 */      swc1 $f2, 0x44($v0)
-  /* 07B1F4 800FF9F4 0C006252 */       jal rand_f32
+  /* 07B1F4 800FF9F4 0C006252 */       jal lbRandom_GetFloat
   /* 07B1F8 800FF9F8 E4420040 */      swc1 $f2, 0x40($v0)
   /* 07B1FC 800FF9FC 3C0142C8 */       lui $at, (0x42C80000 >> 16) # 100.0
   /* 07B200 800FFA00 44815000 */      mtc1 $at, $f10 # 100.0 to cop1
@@ -46509,7 +46509,7 @@ glabel efParticle_DamageSpawnOrbs_ProcUpdate
   /* 07B208 800FFA08 44819000 */      mtc1 $at, $f18 # 120.0 to cop1
   /* 07B20C 800FFA0C 460A0402 */     mul.s $f16, $f0, $f10
   /* 07B210 800FFA10 46128100 */     add.s $f4, $f16, $f18
-  /* 07B214 800FFA14 0C006252 */       jal rand_f32
+  /* 07B214 800FFA14 0C006252 */       jal lbRandom_GetFloat
   /* 07B218 800FFA18 E7A40024 */      swc1 $f4, 0x24($sp)
   /* 07B21C 800FFA1C 3C018013 */       lui $at, %hi(D_ovl2_80130998)
   /* 07B220 800FFA20 C4260998 */      lwc1 $f6, %lo(D_ovl2_80130998)($at)
@@ -46532,7 +46532,7 @@ glabel efParticle_DamageSpawnOrbs_ProcUpdate
   /* 07B264 800FFA64 8FAB0028 */        lw $t3, 0x28($sp)
   /* 07B268 800FFA68 24040004 */     addiu $a0, $zero, 4
   /* 07B26C 800FFA6C 46080282 */     mul.s $f10, $f0, $f8
-  /* 07B270 800FFA70 0C006265 */       jal rand_u16_range
+  /* 07B270 800FFA70 0C006265 */       jal lbRandom_GetIntRange
   /* 07B274 800FFA74 E56A001C */      swc1 $f10, 0x1c($t3)
   /* 07B278 800FFA78 8FAD0028 */        lw $t5, 0x28($sp)
   /* 07B27C 800FFA7C 244C000C */     addiu $t4, $v0, 0xc
@@ -46554,7 +46554,7 @@ glabel efParticle_DamageSpawnOrbs_ProcUpdate
   /* 07B2B0 800FFAB0 03E00008 */        jr $ra
   /* 07B2B4 800FFAB4 00000000 */       nop 
 
-glabel func_ovl2_800FFAB8
+glabel efParticle_DamageSpawnOrbs_MakeEffect
   /* 07B2B8 800FFAB8 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 07B2BC 800FFABC AFA40020 */        sw $a0, 0x20($sp)
   /* 07B2C0 800FFAC0 AFBF0014 */        sw $ra, 0x14($sp)
@@ -46576,7 +46576,7 @@ glabel func_ovl2_800FFAB8
   /* 07B2FC 800FFAFC 8DD80008 */        lw $t8, 8($t6)
   /* 07B300 800FFB00 ACB80024 */        sw $t8, 0x24($a1)
   /* 07B304 800FFB04 AFA3001C */        sw $v1, 0x1c($sp)
-  /* 07B308 800FFB08 0C006265 */       jal rand_u16_range
+  /* 07B308 800FFB08 0C006265 */       jal lbRandom_GetIntRange
   /* 07B30C 800FFB0C AFA50018 */        sw $a1, 0x18($sp)
   /* 07B310 800FFB10 8FA3001C */        lw $v1, 0x1c($sp)
   /* 07B314 800FFB14 8FA50018 */        lw $a1, 0x18($sp)
@@ -46590,18 +46590,18 @@ glabel func_ovl2_800FFAB8
   /* 07B330 800FFB30 03E00008 */        jr $ra
   /* 07B334 800FFB34 00000000 */       nop 
 
-glabel func_ovl2_800FFB38
+glabel efParticle_DamageSpawnOrbs_CheckRandomMakeEffect
   /* 07B338 800FFB38 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07B33C 800FFB3C AFBF0014 */        sw $ra, 0x14($sp)
   /* 07B340 800FFB40 AFA40018 */        sw $a0, 0x18($sp)
-  /* 07B344 800FFB44 0C006265 */       jal rand_u16_range
+  /* 07B344 800FFB44 0C006265 */       jal lbRandom_GetIntRange
   /* 07B348 800FFB48 24040004 */     addiu $a0, $zero, 4
   /* 07B34C 800FFB4C 10400003 */      beqz $v0, .L800FFB5C
   /* 07B350 800FFB50 00000000 */       nop 
   /* 07B354 800FFB54 10000003 */         b .L800FFB64
   /* 07B358 800FFB58 00001025 */        or $v0, $zero, $zero
   .L800FFB5C:
-  /* 07B35C 800FFB5C 0C03FEAE */       jal func_ovl2_800FFAB8
+  /* 07B35C 800FFB5C 0C03FEAE */       jal efParticle_DamageSpawnOrbs_MakeEffect
   /* 07B360 800FFB60 8FA40018 */        lw $a0, 0x18($sp)
   .L800FFB64:
   /* 07B364 800FFB64 8FBF0014 */        lw $ra, 0x14($sp)
@@ -46609,7 +46609,7 @@ glabel func_ovl2_800FFB38
   /* 07B36C 800FFB6C 03E00008 */        jr $ra
   /* 07B370 800FFB70 00000000 */       nop 
 
-  glabel jtgt_ovl2_800FFB74
+  glabel efParticle_ImpactSW_ProcRender
   /* 07B374 800FFB74 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07B378 800FFB78 3C058004 */       lui $a1, %hi(gpDisplayListHead)
   /* 07B37C 800FFB7C 24A565B0 */     addiu $a1, $a1, %lo(gpDisplayListHead)
@@ -46632,22 +46632,22 @@ glabel func_ovl2_800FFB38
   /* 07B3C0 800FFBC0 AC590000 */        sw $t9, ($v0)
   /* 07B3C4 800FFBC4 AC4B0004 */        sw $t3, 4($v0)
   /* 07B3C8 800FFBC8 8CA20000 */        lw $v0, ($a1) # gpDisplayListHead + 0
-  /* 07B3CC 800FFBCC 3C0E8013 */       lui $t6, %hi(D_ovl2_8012DED8)
+  /* 07B3CC 800FFBCC 3C0E8013 */       lui $t6, %hi(efParticle_ImpactSW_PrimColorB)
   /* 07B3D0 800FFBD0 3C0DFA00 */       lui $t5, 0xfa00
   /* 07B3D4 800FFBD4 244C0008 */     addiu $t4, $v0, 8
   /* 07B3D8 800FFBD8 ACAC0000 */        sw $t4, ($a1) # gpDisplayListHead + 0
   /* 07B3DC 800FFBDC 01C37021 */      addu $t6, $t6, $v1
   /* 07B3E0 800FFBE0 AC4D0000 */        sw $t5, ($v0)
-  /* 07B3E4 800FFBE4 91CEDED8 */       lbu $t6, %lo(D_ovl2_8012DED8)($t6)
+  /* 07B3E4 800FFBE4 91CEDED8 */       lbu $t6, %lo(efParticle_ImpactSW_PrimColorB)($t6)
   /* 07B3E8 800FFBE8 C4C4001C */      lwc1 $f4, 0x1c($a2)
-  /* 07B3EC 800FFBEC 3C198013 */       lui $t9, %hi(D_ovl2_8012DEC8)
+  /* 07B3EC 800FFBEC 3C198013 */       lui $t9, %hi(efParticle_ImpactSW_PrimColorR)
   /* 07B3F0 800FFBF0 0323C821 */      addu $t9, $t9, $v1
-  /* 07B3F4 800FFBF4 932BDEC8 */       lbu $t3, %lo(D_ovl2_8012DEC8)($t9)
+  /* 07B3F4 800FFBF4 932BDEC8 */       lbu $t3, %lo(efParticle_ImpactSW_PrimColorR)($t9)
   /* 07B3F8 800FFBF8 31CF00FF */      andi $t7, $t6, 0xff
   /* 07B3FC 800FFBFC 4600218D */ trunc.w.s $f6, $f4
-  /* 07B400 800FFC00 3C0E8013 */       lui $t6, %hi(D_ovl2_8012DED0)
+  /* 07B400 800FFC00 3C0E8013 */       lui $t6, %hi(efParticle_ImpactSW_PrimColorG)
   /* 07B404 800FFC04 01C37021 */      addu $t6, $t6, $v1
-  /* 07B408 800FFC08 91CEDED0 */       lbu $t6, %lo(D_ovl2_8012DED0)($t6)
+  /* 07B408 800FFC08 91CEDED0 */       lbu $t6, %lo(efParticle_ImpactSW_PrimColorG)($t6)
   /* 07B40C 800FFC0C 000FC200 */       sll $t8, $t7, 8
   /* 07B410 800FFC10 000B6600 */       sll $t4, $t3, 0x18
   /* 07B414 800FFC14 030C6825 */        or $t5, $t8, $t4
@@ -46660,19 +46660,19 @@ glabel func_ovl2_800FFB38
   /* 07B430 800FFC30 AC4F0004 */        sw $t7, 4($v0)
   /* 07B434 800FFC34 8CA20000 */        lw $v0, ($a1) # gpDisplayListHead + 0
   /* 07B438 800FFC38 3C19FB00 */       lui $t9, 0xfb00
-  /* 07B43C 800FFC3C 3C188013 */       lui $t8, %hi(D_ovl2_8012DEF0)
+  /* 07B43C 800FFC3C 3C188013 */       lui $t8, %hi(efParticle_ImpactSW_EnvColorB)
   /* 07B440 800FFC40 244D0008 */     addiu $t5, $v0, 8
   /* 07B444 800FFC44 ACAD0000 */        sw $t5, ($a1) # gpDisplayListHead + 0
   /* 07B448 800FFC48 0303C021 */      addu $t8, $t8, $v1
   /* 07B44C 800FFC4C AC590000 */        sw $t9, ($v0)
-  /* 07B450 800FFC50 9318DEF0 */       lbu $t8, %lo(D_ovl2_8012DEF0)($t8)
-  /* 07B454 800FFC54 3C0E8013 */       lui $t6, %hi(D_ovl2_8012DEE0)
+  /* 07B450 800FFC50 9318DEF0 */       lbu $t8, %lo(efParticle_ImpactSW_EnvColorB)($t8)
+  /* 07B454 800FFC54 3C0E8013 */       lui $t6, %hi(efParticle_ImpactSW_EnvColorR)
   /* 07B458 800FFC58 01C37021 */      addu $t6, $t6, $v1
   /* 07B45C 800FFC5C 330C00FF */      andi $t4, $t8, 0xff
-  /* 07B460 800FFC60 3C188013 */       lui $t8, %hi(D_ovl2_8012DEE8)
+  /* 07B460 800FFC60 3C188013 */       lui $t8, %hi(efParticle_ImpactSW_EnvColorG)
   /* 07B464 800FFC64 0303C021 */      addu $t8, $t8, $v1
-  /* 07B468 800FFC68 9318DEE8 */       lbu $t8, %lo(D_ovl2_8012DEE8)($t8)
-  /* 07B46C 800FFC6C 91CFDEE0 */       lbu $t7, %lo(D_ovl2_8012DEE0)($t6)
+  /* 07B468 800FFC68 9318DEE8 */       lbu $t8, %lo(efParticle_ImpactSW_EnvColorG)($t8)
+  /* 07B46C 800FFC6C 91CFDEE0 */       lbu $t7, %lo(efParticle_ImpactSW_EnvColorR)($t6)
   /* 07B470 800FFC70 000C5A00 */       sll $t3, $t4, 8
   /* 07B474 800FFC74 330C00FF */      andi $t4, $t8, 0xff
   /* 07B478 800FFC78 000F6E00 */       sll $t5, $t7, 0x18
@@ -46687,7 +46687,7 @@ glabel func_ovl2_800FFB38
   /* 07B49C 800FFC9C 03E00008 */        jr $ra
   /* 07B4A0 800FFCA0 00000000 */       nop 
 
-  glabel jtgt_ovl2_800FFCA4
+  glabel efParticle_ImpactSW_ProcUpdate
   /* 07B4A4 800FFCA4 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 07B4A8 800FFCA8 AFBF0014 */        sw $ra, 0x14($sp)
   /* 07B4AC 800FFCAC 8C820084 */        lw $v0, 0x84($a0)
@@ -46738,7 +46738,7 @@ glabel func_ovl2_800FFB38
   /* 07B550 800FFD50 03E00008 */        jr $ra
   /* 07B554 800FFD54 00000000 */       nop 
 
-glabel func_ovl2_800FFD58
+glabel efParticle_ImpactSW_MakeEffect
   /* 07B558 800FFD58 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07B55C 800FFD5C AFA40018 */        sw $a0, 0x18($sp)
   /* 07B560 800FFD60 AFBF0014 */        sw $ra, 0x14($sp)
@@ -46778,17 +46778,17 @@ glabel func_ovl2_800FFD58
   /* 07B5E0 800FFDE0 03E00008 */        jr $ra
   /* 07B5E4 800FFDE4 00000000 */       nop 
 
-glabel func_ovl2_800FFDE8
+glabel efParticle_ImpactAirSW_MakeEffect
   /* 07B5E8 800FFDE8 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07B5EC 800FFDEC AFBF0014 */        sw $ra, 0x14($sp)
-  /* 07B5F0 800FFDF0 0C03FF56 */       jal func_ovl2_800FFD58
+  /* 07B5F0 800FFDF0 0C03FF56 */       jal efParticle_ImpactSW_MakeEffect
   /* 07B5F4 800FFDF4 24060000 */     addiu $a2, $zero, 0
   /* 07B5F8 800FFDF8 8FBF0014 */        lw $ra, 0x14($sp)
   /* 07B5FC 800FFDFC 27BD0018 */     addiu $sp, $sp, 0x18
   /* 07B600 800FFE00 03E00008 */        jr $ra
   /* 07B604 800FFE04 00000000 */       nop 
 
-glabel func_ovl2_800FFE08
+glabel efParticle_StarRodSpark_ProcUpdate
   /* 07B608 800FFE08 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 07B60C 800FFE0C AFBF0014 */        sw $ra, 0x14($sp)
   /* 07B610 800FFE10 8C850084 */        lw $a1, 0x84($a0)
@@ -46832,7 +46832,7 @@ glabel func_ovl2_800FFE08
   /* 07B69C 800FFE9C 03E00008 */        jr $ra
   /* 07B6A0 800FFEA0 00000000 */       nop 
 
-glabel func_ovl2_800FFEA4
+glabel efParticle_StarRodSpark_MakeEffect
   /* 07B6A4 800FFEA4 27BDFFD8 */     addiu $sp, $sp, -0x28
   /* 07B6A8 800FFEA8 AFA40028 */        sw $a0, 0x28($sp)
   /* 07B6AC 800FFEAC AFBF0014 */        sw $ra, 0x14($sp)
@@ -46853,7 +46853,7 @@ glabel func_ovl2_800FFEA4
   /* 07B6E8 800FFEE8 AC580024 */        sw $t8, 0x24($v0)
   /* 07B6EC 800FFEEC AFA30024 */        sw $v1, 0x24($sp)
   /* 07B6F0 800FFEF0 AFA20020 */        sw $v0, 0x20($sp)
-  /* 07B6F4 800FFEF4 0C006252 */       jal rand_f32
+  /* 07B6F4 800FFEF4 0C006252 */       jal lbRandom_GetFloat
   /* 07B6F8 800FFEF8 AFA4001C */        sw $a0, 0x1c($sp)
   /* 07B6FC 800FFEFC 3C013F40 */       lui $at, (0x3F400000 >> 16) # 0.75
   /* 07B700 800FFF00 44816000 */      mtc1 $at, $f12 # 0.75 to cop1
@@ -46887,7 +46887,7 @@ glabel func_ovl2_800FFEA4
   /* 07B76C 800FFF6C 03E00008 */        jr $ra
   /* 07B770 800FFF70 00000000 */       nop 
 
-glabel func_ovl2_800FFF74
+glabel efParticle_DamageFlySparks_ProcUpdate
   /* 07B774 800FFF74 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 07B778 800FFF78 AFBF0014 */        sw $ra, 0x14($sp)
   /* 07B77C 800FFF7C 8C850084 */        lw $a1, 0x84($a0)
@@ -46938,7 +46938,7 @@ glabel func_ovl2_800FFF74
   /* 07B828 80100028 03E00008 */        jr $ra
   /* 07B82C 8010002C 00000000 */       nop 
 
-glabel func_ovl2_80100030
+glabel efParticle_DamageSpawnSparks_ProcUpdate
   /* 07B830 80100030 27BDFFB8 */     addiu $sp, $sp, -0x48
   /* 07B834 80100034 AFBF001C */        sw $ra, 0x1c($sp)
   /* 07B838 80100038 AFB10018 */        sw $s1, 0x18($sp)
@@ -46971,7 +46971,7 @@ glabel func_ovl2_80100030
   /* 07B8A0 801000A0 8E390024 */        lw $t9, 0x24($s1)
   /* 07B8A4 801000A4 AC590024 */        sw $t9, 0x24($v0)
   /* 07B8A8 801000A8 AFA30034 */        sw $v1, 0x34($sp)
-  /* 07B8AC 801000AC 0C006252 */       jal rand_f32
+  /* 07B8AC 801000AC 0C006252 */       jal lbRandom_GetFloat
   /* 07B8B0 801000B0 AFA20040 */        sw $v0, 0x40($sp)
   /* 07B8B4 801000B4 3C018013 */       lui $at, %hi(D_ovl2_801309B0)
   /* 07B8B8 801000B8 C42409B0 */      lwc1 $f4, %lo(D_ovl2_801309B0)($at)
@@ -46986,9 +46986,9 @@ glabel func_ovl2_80100030
   .L801000DC:
   /* 07B8DC 801000DC 00084823 */      negu $t1, $t0
   /* 07B8E0 801000E0 00095080 */       sll $t2, $t1, 2
-  /* 07B8E4 801000E4 3C018013 */       lui $at, %hi(D_ovl2_8012DE88)
+  /* 07B8E4 801000E4 3C018013 */       lui $at, %hi(efParticle_DamageSpawnSparks_Angles)
   /* 07B8E8 801000E8 002A0821 */      addu $at, $at, $t2
-  /* 07B8EC 801000EC C422DE88 */      lwc1 $f2, %lo(D_ovl2_8012DE88)($at)
+  /* 07B8EC 801000EC C422DE88 */      lwc1 $f2, %lo(efParticle_DamageSpawnSparks_Angles)($at)
   /* 07B8F0 801000F0 3C018013 */       lui $at, %hi(D_ovl2_801309B4)
   /* 07B8F4 801000F4 C42809B4 */      lwc1 $f8, %lo(D_ovl2_801309B4)($at)
   /* 07B8F8 801000F8 3C014334 */       lui $at, (0x43340000 >> 16) # 180.0
@@ -47039,7 +47039,7 @@ glabel func_ovl2_80100030
   /* 07B9A0 801001A0 03E00008 */        jr $ra
   /* 07B9A4 801001A4 27BD0048 */     addiu $sp, $sp, 0x48
 
-glabel func_ovl2_801001A8
+glabel efParticle_DamageSpawnSparks_MakeEffect
   /* 07B9A8 801001A8 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07B9AC 801001AC AFA40018 */        sw $a0, 0x18($sp)
   /* 07B9B0 801001B0 AFBF0014 */        sw $ra, 0x14($sp)
@@ -47071,19 +47071,19 @@ glabel func_ovl2_801001A8
   /* 07BA10 80100210 03E00008 */        jr $ra
   /* 07BA14 80100214 00000000 */       nop 
 
-glabel func_ovl2_80100218
+glabel efParticle_DamageSpawnSparks_CheckRandomMakeEffect
   /* 07BA18 80100218 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07BA1C 8010021C AFBF0014 */        sw $ra, 0x14($sp)
   /* 07BA20 80100220 AFA40018 */        sw $a0, 0x18($sp)
   /* 07BA24 80100224 AFA5001C */        sw $a1, 0x1c($sp)
-  /* 07BA28 80100228 0C006265 */       jal rand_u16_range
+  /* 07BA28 80100228 0C006265 */       jal lbRandom_GetIntRange
   /* 07BA2C 8010022C 24040004 */     addiu $a0, $zero, 4
   /* 07BA30 80100230 10400003 */      beqz $v0, .L80100240
   /* 07BA34 80100234 8FA40018 */        lw $a0, 0x18($sp)
   /* 07BA38 80100238 10000003 */         b .L80100248
   /* 07BA3C 8010023C 00001025 */        or $v0, $zero, $zero
   .L80100240:
-  /* 07BA40 80100240 0C04006A */       jal func_ovl2_801001A8
+  /* 07BA40 80100240 0C04006A */       jal efParticle_DamageSpawnSparks_MakeEffect
   /* 07BA44 80100244 8FA5001C */        lw $a1, 0x1c($sp)
   .L80100248:
   /* 07BA48 80100248 8FBF0014 */        lw $ra, 0x14($sp)
@@ -47091,7 +47091,7 @@ glabel func_ovl2_80100218
   /* 07BA50 80100250 03E00008 */        jr $ra
   /* 07BA54 80100254 00000000 */       nop 
 
-glabel func_ovl2_80100258
+glabel efParticle_DamageSpawnMDust_ProcUpdate
   /* 07BA58 80100258 27BDFFB8 */     addiu $sp, $sp, -0x48
   /* 07BA5C 8010025C AFBF001C */        sw $ra, 0x1c($sp)
   /* 07BA60 80100260 AFB10018 */        sw $s1, 0x18($sp)
@@ -47124,7 +47124,7 @@ glabel func_ovl2_80100258
   /* 07BAC8 801002C8 8E390024 */        lw $t9, 0x24($s1)
   /* 07BACC 801002CC AC590024 */        sw $t9, 0x24($v0)
   /* 07BAD0 801002D0 AFA30034 */        sw $v1, 0x34($sp)
-  /* 07BAD4 801002D4 0C006252 */       jal rand_f32
+  /* 07BAD4 801002D4 0C006252 */       jal lbRandom_GetFloat
   /* 07BAD8 801002D8 AFA20040 */        sw $v0, 0x40($sp)
   /* 07BADC 801002DC 3C018013 */       lui $at, %hi(D_ovl2_801309BC)
   /* 07BAE0 801002E0 C42409BC */      lwc1 $f4, %lo(D_ovl2_801309BC)($at)
@@ -47139,9 +47139,9 @@ glabel func_ovl2_80100258
   .L80100304:
   /* 07BB04 80100304 00084823 */      negu $t1, $t0
   /* 07BB08 80100308 00095080 */       sll $t2, $t1, 2
-  /* 07BB0C 8010030C 3C018013 */       lui $at, %hi(D_ovl2_8012DE94)
+  /* 07BB0C 8010030C 3C018013 */       lui $at, %hi(efParticle_DamageSpawnMDust_Angles)
   /* 07BB10 80100310 002A0821 */      addu $at, $at, $t2
-  /* 07BB14 80100314 C422DE94 */      lwc1 $f2, %lo(D_ovl2_8012DE94)($at)
+  /* 07BB14 80100314 C422DE94 */      lwc1 $f2, %lo(efParticle_DamageSpawnMDust_Angles)($at)
   /* 07BB18 80100318 3C018013 */       lui $at, %hi(D_ovl2_801309C0)
   /* 07BB1C 8010031C C42809C0 */      lwc1 $f8, %lo(D_ovl2_801309C0)($at)
   /* 07BB20 80100320 3C014334 */       lui $at, (0x43340000 >> 16) # 180.0
@@ -47192,7 +47192,7 @@ glabel func_ovl2_80100258
   /* 07BBC8 801003C8 03E00008 */        jr $ra
   /* 07BBCC 801003CC 27BD0048 */     addiu $sp, $sp, 0x48
 
-glabel func_ovl2_801003D0
+glabel efParticle_DamageSpawnMDust_MakeEffect
   /* 07BBD0 801003D0 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07BBD4 801003D4 AFA40018 */        sw $a0, 0x18($sp)
   /* 07BBD8 801003D8 AFBF0014 */        sw $ra, 0x14($sp)
@@ -47224,19 +47224,19 @@ glabel func_ovl2_801003D0
   /* 07BC38 80100438 03E00008 */        jr $ra
   /* 07BC3C 8010043C 00000000 */       nop 
 
-glabel func_ovl2_80100440
+glabel efParticle_DamageSpawnMDust_CheckRandomMakeEffect
   /* 07BC40 80100440 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 07BC44 80100444 AFBF0014 */        sw $ra, 0x14($sp)
   /* 07BC48 80100448 AFA40018 */        sw $a0, 0x18($sp)
   /* 07BC4C 8010044C AFA5001C */        sw $a1, 0x1c($sp)
-  /* 07BC50 80100450 0C006265 */       jal rand_u16_range
+  /* 07BC50 80100450 0C006265 */       jal lbRandom_GetIntRange
   /* 07BC54 80100454 24040004 */     addiu $a0, $zero, 4
   /* 07BC58 80100458 10400003 */      beqz $v0, .L80100468
   /* 07BC5C 8010045C 8FA40018 */        lw $a0, 0x18($sp)
   /* 07BC60 80100460 10000003 */         b .L80100470
   /* 07BC64 80100464 00001025 */        or $v0, $zero, $zero
   .L80100468:
-  /* 07BC68 80100468 0C0400F4 */       jal func_ovl2_801003D0
+  /* 07BC68 80100468 0C0400F4 */       jal efParticle_DamageSpawnMDust_MakeEffect
   /* 07BC6C 8010046C 8FA5001C */        lw $a1, 0x1c($sp)
   .L80100470:
   /* 07BC70 80100470 8FBF0014 */        lw $ra, 0x14($sp)
@@ -47844,7 +47844,7 @@ glabel func_ovl2_80100BF0
   /* 07C4D8 80100CD8 8D2A0004 */        lw $t2, 4($t1)
   /* 07C4DC 80100CDC AE0A0008 */        sw $t2, 8($s0)
   /* 07C4E0 80100CE0 8D2B0008 */        lw $t3, 8($t1)
-  /* 07C4E4 80100CE4 0C006252 */       jal rand_f32
+  /* 07C4E4 80100CE4 0C006252 */       jal lbRandom_GetFloat
   /* 07C4E8 80100CE8 AE0B000C */        sw $t3, 0xc($s0)
   /* 07C4EC 80100CEC 3C014190 */       lui $at, (0x41900000 >> 16) # 18.0
   /* 07C4F0 80100CF0 44812000 */      mtc1 $at, $f4 # 18.0 to cop1
@@ -47852,7 +47852,7 @@ glabel func_ovl2_80100BF0
   /* 07C4F8 80100CF8 44814000 */      mtc1 $at, $f8 # 12.0 to cop1
   /* 07C4FC 80100CFC 46040182 */     mul.s $f6, $f0, $f4
   /* 07C500 80100D00 46083280 */     add.s $f10, $f6, $f8
-  /* 07C504 80100D04 0C006252 */       jal rand_f32
+  /* 07C504 80100D04 0C006252 */       jal lbRandom_GetFloat
   /* 07C508 80100D08 E7AA0024 */      swc1 $f10, 0x24($sp)
   /* 07C50C 80100D0C 3C018013 */       lui $at, %hi(D_ovl2_801309CC)
   /* 07C510 80100D10 C43009CC */      lwc1 $f16, %lo(D_ovl2_801309CC)($at)
@@ -48817,7 +48817,7 @@ glabel func_ovl2_801018A8
   /* 07D278 80101A78 10000007 */         b .L80101A98
   /* 07D27C 80101A7C E5240038 */      swc1 $f4, 0x38($t1)
   .L80101A80:
-  /* 07D280 80101A80 0C006265 */       jal rand_u16_range
+  /* 07D280 80101A80 0C006265 */       jal lbRandom_GetIntRange
   /* 07D284 80101A84 AFA60018 */        sw $a2, 0x18($sp)
   /* 07D288 80101A88 8FA60018 */        lw $a2, 0x18($sp)
   /* 07D28C 80101A8C 8CCA0074 */        lw $t2, 0x74($a2)
@@ -51055,7 +51055,7 @@ glabel func_ovl2_801039D4
   /* 07F1D8 801039D8 AFBF001C */        sw $ra, 0x1c($sp)
   /* 07F1DC 801039DC AFA40028 */        sw $a0, 0x28($sp)
   /* 07F1E0 801039E0 AFB00018 */        sw $s0, 0x18($sp)
-  /* 07F1E4 801039E4 0C006265 */       jal rand_u16_range
+  /* 07F1E4 801039E4 0C006265 */       jal lbRandom_GetIntRange
   /* 07F1E8 801039E8 24040003 */     addiu $a0, $zero, 3
   /* 07F1EC 801039EC 3C048013 */       lui $a0, %hi(gEffectBankIndex)
   /* 07F1F0 801039F0 8C8413C4 */        lw $a0, %lo(gEffectBankIndex)($a0)
@@ -51199,7 +51199,7 @@ glabel func_ovl2_80103B28
   /* 07F3E4 80103BE4 46128102 */     mul.s $f4, $f16, $f18
   /* 07F3E8 80103BE8 4600218D */ trunc.w.s $f6, $f4
   /* 07F3EC 80103BEC 44043000 */      mfc1 $a0, $f6
-  /* 07F3F0 80103BF0 0C006265 */       jal rand_u16_range
+  /* 07F3F0 80103BF0 0C006265 */       jal lbRandom_GetIntRange
   /* 07F3F4 80103BF4 00000000 */       nop 
   /* 07F3F8 80103BF8 44825000 */      mtc1 $v0, $f10
   /* 07F3FC 80103BFC C7A80030 */      lwc1 $f8, 0x30($sp)
@@ -51225,7 +51225,7 @@ glabel func_ovl2_80103B28
   /* 07F44C 80103C4C 46085402 */     mul.s $f16, $f10, $f8
   /* 07F450 80103C50 4600848D */ trunc.w.s $f18, $f16
   /* 07F454 80103C54 44049000 */      mfc1 $a0, $f18
-  /* 07F458 80103C58 0C006265 */       jal rand_u16_range
+  /* 07F458 80103C58 0C006265 */       jal lbRandom_GetIntRange
   /* 07F45C 80103C5C 00000000 */       nop 
   /* 07F460 80103C60 44823000 */      mtc1 $v0, $f6
   /* 07F464 80103C64 C7A4002C */      lwc1 $f4, 0x2c($sp)
@@ -51233,7 +51233,7 @@ glabel func_ovl2_80103B28
   /* 07F46C 80103C6C 468032A0 */   cvt.s.w $f10, $f6
   /* 07F470 80103C70 2405FFFF */     addiu $a1, $zero, -1
   /* 07F474 80103C74 460A2201 */     sub.s $f8, $f4, $f10
-  /* 07F478 80103C78 0C03FFA9 */       jal func_ovl2_800FFEA4
+  /* 07F478 80103C78 0C03FFA9 */       jal efParticle_StarRodSpark_MakeEffect
   /* 07F47C 80103C7C E7A8002C */      swc1 $f8, 0x2c($sp)
   /* 07F480 80103C80 10000016 */         b .L80103CDC
   /* 07F484 80103C84 8E060018 */        lw $a2, 0x18($s0)
@@ -51248,7 +51248,7 @@ glabel func_ovl2_80103B28
   /* 07F4A4 80103CA4 46128182 */     mul.s $f6, $f16, $f18
   /* 07F4A8 80103CA8 4600310D */ trunc.w.s $f4, $f6
   /* 07F4AC 80103CAC 44042000 */      mfc1 $a0, $f4
-  /* 07F4B0 80103CB0 0C006265 */       jal rand_u16_range
+  /* 07F4B0 80103CB0 0C006265 */       jal lbRandom_GetIntRange
   /* 07F4B4 80103CB4 00000000 */       nop 
   /* 07F4B8 80103CB8 44824000 */      mtc1 $v0, $f8
   /* 07F4BC 80103CBC C7AA002C */      lwc1 $f10, 0x2c($sp)
@@ -51256,7 +51256,7 @@ glabel func_ovl2_80103B28
   /* 07F4C4 80103CC4 46804420 */   cvt.s.w $f16, $f8
   /* 07F4C8 80103CC8 24050001 */     addiu $a1, $zero, 1
   /* 07F4CC 80103CCC 46105480 */     add.s $f18, $f10, $f16
-  /* 07F4D0 80103CD0 0C03FFA9 */       jal func_ovl2_800FFEA4
+  /* 07F4D0 80103CD0 0C03FFA9 */       jal efParticle_StarRodSpark_MakeEffect
   /* 07F4D4 80103CD4 E7B2002C */      swc1 $f18, 0x2c($sp)
   /* 07F4D8 80103CD8 8E060018 */        lw $a2, 0x18($s0)
   .L80103CDC:
@@ -53529,7 +53529,7 @@ glabel func_ovl2_80105CAC
   /* 0814DC 80105CDC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 0814E0 80105CE0 A06F0026 */        sb $t7, 0x26($v1) # D_ovl2_801313F0 + 38
   /* 0814E4 80105CE4 A079002C */        sb $t9, 0x2c($v1) # D_ovl2_801313F0 + 44
-  /* 0814E8 80105CE8 0C006265 */       jal rand_u16_range
+  /* 0814E8 80105CE8 0C006265 */       jal lbRandom_GetIntRange
   /* 0814EC 80105CEC A079002B */        sb $t9, 0x2b($v1) # D_ovl2_801313F0 + 43
   /* 0814F0 80105CF0 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 0814F4 80105CF4 246313F0 */     addiu $v1, $v1, %lo(D_ovl2_801313F0)
@@ -53609,7 +53609,7 @@ glabel func_ovl2_80105DD8
   /* 0815F8 80105DF8 00000000 */       nop 
   /* 0815FC 80105DFC 4502000A */     bc1fl .L80105E28
   /* 081600 80105E00 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 081604 80105E04 0C006265 */       jal rand_u16_range
+  /* 081604 80105E04 0C006265 */       jal lbRandom_GetIntRange
   /* 081608 80105E08 24040474 */     addiu $a0, $zero, 0x474
   /* 08160C 80105E0C 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 081610 80105E10 246313F0 */     addiu $v1, $v1, %lo(D_ovl2_801313F0)
@@ -53664,7 +53664,7 @@ glabel func_ovl2_80105E34
   .L80105EC4:
   /* 0816C4 80105EC4 50400008 */      beql $v0, $zero, .L80105EE8
   /* 0816C8 80105EC8 8FBF0014 */        lw $ra, 0x14($sp)
-  /* 0816CC 80105ECC 0C006265 */       jal rand_u16_range
+  /* 0816CC 80105ECC 0C006265 */       jal lbRandom_GetIntRange
   /* 0816D0 80105ED0 2404010E */     addiu $a0, $zero, 0x10e
   /* 0816D4 80105ED4 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 0816D8 80105ED8 246313F0 */     addiu $v1, $v1, %lo(D_ovl2_801313F0)
@@ -54214,11 +54214,11 @@ glabel func_ovl2_8010658C
   /* 081E58 80106658 A209002E */        sb $t1, 0x2e($s0) # D_ovl2_801313F0 + 46
   /* 081E5C 8010665C 820A002E */        lb $t2, 0x2e($s0) # D_ovl2_801313F0 + 46
   /* 081E60 80106660 24040474 */     addiu $a0, $zero, 0x474
-  /* 081E64 80106664 0C006265 */       jal rand_u16_range
+  /* 081E64 80106664 0C006265 */       jal lbRandom_GetIntRange
   /* 081E68 80106668 A20A002D */        sb $t2, 0x2d($s0) # D_ovl2_801313F0 + 45
   /* 081E6C 8010666C 244C03C0 */     addiu $t4, $v0, 0x3c0
   /* 081E70 80106670 A60C0020 */        sh $t4, 0x20($s0) # D_ovl2_801313F0 + 32
-  /* 081E74 80106674 0C006265 */       jal rand_u16_range
+  /* 081E74 80106674 0C006265 */       jal lbRandom_GetIntRange
   /* 081E78 80106678 2404010E */     addiu $a0, $zero, 0x10e
   /* 081E7C 8010667C 244D001E */     addiu $t5, $v0, 0x1e
   /* 081E80 80106680 240F000F */     addiu $t7, $zero, 0xf
@@ -54537,12 +54537,12 @@ glabel func_ovl2_80106AC0
   /* 0822EC 80106AEC 44802000 */      mtc1 $zero, $f4
   /* 0822F0 80106AF0 11E0001A */      beqz $t7, .L80106B5C
   /* 0822F4 80106AF4 E6040040 */      swc1 $f4, 0x40($s0) # D_ovl2_801313F0 + 64
-  /* 0822F8 80106AF8 0C006265 */       jal rand_u16_range
+  /* 0822F8 80106AF8 0C006265 */       jal lbRandom_GetIntRange
   /* 0822FC 80106AFC 24040005 */     addiu $a0, $zero, 5
   /* 082300 80106B00 24010004 */     addiu $at, $zero, 4
   /* 082304 80106B04 1441000B */       bne $v0, $at, .L80106B34
   /* 082308 80106B08 AFA20024 */        sw $v0, 0x24($sp)
-  /* 08230C 80106B0C 0C006265 */       jal rand_u16_range
+  /* 08230C 80106B0C 0C006265 */       jal lbRandom_GetIntRange
   /* 082310 80106B10 24040003 */     addiu $a0, $zero, 3
   /* 082314 80106B14 0002C040 */       sll $t8, $v0, 1
   /* 082318 80106B18 3C198013 */       lui $t9, %hi(D_ovl2_8012E978)
@@ -54556,7 +54556,7 @@ glabel func_ovl2_80106AC0
   /* 082334 80106B34 9208004A */       lbu $t0, 0x4a($s0) # D_ovl2_801313F0 + 74
   /* 082338 80106B38 2404021C */     addiu $a0, $zero, 0x21c
   /* 08233C 80106B3C 2509FFFF */     addiu $t1, $t0, -1
-  /* 082340 80106B40 0C006265 */       jal rand_u16_range
+  /* 082340 80106B40 0C006265 */       jal lbRandom_GetIntRange
   /* 082344 80106B44 A209004A */        sb $t1, 0x4a($s0) # D_ovl2_801313F0 + 74
   /* 082348 80106B48 244A00B4 */     addiu $t2, $v0, 0xb4
   /* 08234C 80106B4C 240BFFFF */     addiu $t3, $zero, -1
@@ -54564,10 +54564,10 @@ glabel func_ovl2_80106AC0
   /* 082354 80106B54 10000012 */         b .L80106BA0
   /* 082358 80106B58 A20B0053 */        sb $t3, 0x53($s0) # D_ovl2_801313F0 + 83
   .L80106B5C:
-  /* 08235C 80106B5C 0C006265 */       jal rand_u16_range
+  /* 08235C 80106B5C 0C006265 */       jal lbRandom_GetIntRange
   /* 082360 80106B60 24040003 */     addiu $a0, $zero, 3
   /* 082364 80106B64 244C0005 */     addiu $t4, $v0, 5
-  /* 082368 80106B68 0C006244 */       jal rand_u16
+  /* 082368 80106B68 0C006244 */       jal lbRandom_GetShort
   /* 08236C 80106B6C AFAC0024 */        sw $t4, 0x24($sp)
   /* 082370 80106B70 304D0001 */      andi $t5, $v0, 1
   /* 082374 80106B74 11A00005 */      beqz $t5, .L80106B8C
@@ -54815,7 +54815,7 @@ glabel func_ovl2_80106DD8
   /* 0826B0 80106EB0 000C6840 */       sll $t5, $t4, 1
   /* 0826B4 80106EB4 01AE2821 */      addu $a1, $t5, $t6
   /* 0826B8 80106EB8 90A40001 */       lbu $a0, 1($a1)
-  /* 0826BC 80106EBC 0C006265 */       jal rand_u16_range
+  /* 0826BC 80106EBC 0C006265 */       jal lbRandom_GetIntRange
   /* 0826C0 80106EC0 AFA50024 */        sw $a1, 0x24($sp)
   /* 0826C4 80106EC4 8FA50024 */        lw $a1, 0x24($sp)
   /* 0826C8 80106EC8 3C038013 */       lui $v1, %hi(D_ovl2_8012E988)
@@ -54850,7 +54850,7 @@ glabel func_ovl2_80106DD8
 glabel func_ovl2_80106F2C
   /* 08272C 80106F2C 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 082730 80106F30 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 082734 80106F34 0C006265 */       jal rand_u16_range
+  /* 082734 80106F34 0C006265 */       jal lbRandom_GetIntRange
   /* 082738 80106F38 24040003 */     addiu $a0, $zero, 3
   /* 08273C 80106F3C 28410003 */      slti $at, $v0, 3
   /* 082740 80106F40 14200003 */      bnez $at, .L80106F50
@@ -55449,7 +55449,7 @@ glabel func_ovl2_801076E8
   /* 082FC4 801077C4 8C4250E8 */        lw $v0, %lo(gpBattleState)($v0)
   /* 082FC8 801077C8 904E0004 */       lbu $t6, 4($v0)
   /* 082FCC 801077CC 904F0005 */       lbu $t7, 5($v0)
-  /* 082FD0 801077D0 0C006265 */       jal rand_u16_range
+  /* 082FD0 801077D0 0C006265 */       jal lbRandom_GetIntRange
   /* 082FD4 801077D4 01CF2021 */      addu $a0, $t6, $t7
   /* 082FD8 801077D8 3C048004 */       lui $a0, %hi(gOMObjCommonLinks + (0x03 * 4))
   /* 082FDC 801077DC 00402825 */        or $a1, $v0, $zero
@@ -55818,7 +55818,7 @@ glabel func_ovl2_80107CA0
   /* 0834F8 80107CF8 94690044 */       lhu $t1, 0x44($v1) # D_ovl2_801313F0 + 68
   /* 0834FC 80107CFC 8C780004 */        lw $t8, 4($v1) # D_ovl2_801313F0 + 4
   /* 083500 80107D00 24040474 */     addiu $a0, $zero, 0x474
-  /* 083504 80107D04 0C006265 */       jal rand_u16_range
+  /* 083504 80107D04 0C006265 */       jal lbRandom_GetIntRange
   /* 083508 80107D08 AF0F007C */        sw $t7, 0x7c($t8)
   /* 08350C 80107D0C 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 083510 80107D10 246313F0 */     addiu $v1, $v1, %lo(D_ovl2_801313F0)
@@ -56038,7 +56038,7 @@ glabel func_ovl2_80107E7C
 glabel func_ovl2_80108020
   /* 083820 80108020 27BDFFE8 */     addiu $sp, $sp, -0x18
   /* 083824 80108024 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 083828 80108028 0C006252 */       jal rand_f32
+  /* 083828 80108028 0C006252 */       jal lbRandom_GetFloat
   /* 08382C 8010802C 00000000 */       nop 
   /* 083830 80108030 3C028013 */       lui $v0, %hi(D_ovl2_801313F0)
   /* 083834 80108034 244213F0 */     addiu $v0, $v0, %lo(D_ovl2_801313F0)
@@ -56077,7 +56077,7 @@ glabel func_ovl2_80108088
   /* 0838B0 801080B0 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 0838B4 801080B4 AFBF0014 */        sw $ra, 0x14($sp)
   /* 0838B8 801080B8 AFA30018 */        sw $v1, 0x18($sp)
-  /* 0838BC 801080BC 0C006265 */       jal rand_u16_range
+  /* 0838BC 801080BC 0C006265 */       jal lbRandom_GetIntRange
   /* 0838C0 801080C0 03192023 */      subu $a0, $t8, $t9
   /* 0838C4 801080C4 8FA30018 */        lw $v1, 0x18($sp)
   /* 0838C8 801080C8 8FBF0014 */        lw $ra, 0x14($sp)
@@ -57753,7 +57753,7 @@ glabel func_ovl2_80109888
   /* 0850A4 801098A4 31F8FFFF */      andi $t8, $t7, 0xffff
   /* 0850A8 801098A8 1700001B */      bnez $t8, .L80109918
   /* 0850AC 801098AC A60F0044 */        sh $t7, 0x44($s0) # D_ovl2_801313F0 + 68
-  /* 0850B0 801098B0 0C006265 */       jal rand_u16_range
+  /* 0850B0 801098B0 0C006265 */       jal lbRandom_GetIntRange
   /* 0850B4 801098B4 92040046 */       lbu $a0, 0x46($s0) # D_ovl2_801313F0 + 70
   /* 0850B8 801098B8 8E190048 */        lw $t9, 0x48($s0) # D_ovl2_801313F0 + 72
   /* 0850BC 801098BC 27A50038 */     addiu $a1, $sp, 0x38
@@ -58099,7 +58099,7 @@ glabel func_ovl2_80109D44
   /* 085564 80109D64 17000011 */      bnez $t8, .L80109DAC
   /* 085568 80109D68 A46F000A */        sh $t7, 0xa($v1) # D_ovl2_801313F0 + 10
   /* 08556C 80109D6C 24190001 */     addiu $t9, $zero, 1
-  /* 085570 80109D70 0C006244 */       jal rand_u16
+  /* 085570 80109D70 0C006244 */       jal lbRandom_GetShort
   /* 085574 80109D74 A0790008 */        sb $t9, 8($v1) # D_ovl2_801313F0 + 8
   /* 085578 80109D78 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 08557C 80109D7C 30480001 */      andi $t0, $v0, 1
@@ -58135,7 +58135,7 @@ glabel func_ovl2_80109DBC
   /* 0855E0 80109DE0 A46F000A */        sh $t7, 0xa($v1) # D_ovl2_801313F0 + 10
   /* 0855E4 80109DE4 A0600008 */        sb $zero, 8($v1) # D_ovl2_801313F0 + 8
   /* 0855E8 80109DE8 240400B4 */     addiu $a0, $zero, 0xb4
-  /* 0855EC 80109DEC 0C006265 */       jal rand_u16_range
+  /* 0855EC 80109DEC 0C006265 */       jal lbRandom_GetIntRange
   /* 0855F0 80109DF0 AFA5001C */        sw $a1, 0x1c($sp)
   /* 0855F4 80109DF4 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 0855F8 80109DF8 8FA5001C */        lw $a1, 0x1c($sp)
@@ -58246,7 +58246,7 @@ glabel func_ovl2_80109E84
   /* 085778 80109F78 02002025 */        or $a0, $s0, $zero
   /* 08577C 80109F7C 3C018013 */       lui $at, %hi(D_ovl2_801313F8)
   /* 085780 80109F80 A02013F8 */        sb $zero, %lo(D_ovl2_801313F8)($at)
-  /* 085784 80109F84 0C006265 */       jal rand_u16_range
+  /* 085784 80109F84 0C006265 */       jal lbRandom_GetIntRange
   /* 085788 80109F88 240400B4 */     addiu $a0, $zero, 0xb4
   /* 08578C 80109F8C 8FBF0024 */        lw $ra, 0x24($sp)
   /* 085790 80109F90 244B00B4 */     addiu $t3, $v0, 0xb4
@@ -58539,7 +58539,7 @@ glabel func_ovl2_8010A36C
   /* 085B84 8010A384 3C018013 */       lui $at, %hi(D_ovl2_80131418)
   /* 085B88 8010A388 11E00006 */      beqz $t7, .L8010A3A4
   /* 085B8C 8010A38C 240404B0 */     addiu $a0, $zero, 0x4b0
-  /* 085B90 8010A390 0C006265 */       jal rand_u16_range
+  /* 085B90 8010A390 0C006265 */       jal lbRandom_GetIntRange
   /* 085B94 8010A394 A0381418 */        sb $t8, %lo(D_ovl2_80131418)($at)
   /* 085B98 8010A398 24590640 */     addiu $t9, $v0, 0x640
   /* 085B9C 8010A39C 3C018013 */       lui $at, %hi(D_ovl2_80131410)
@@ -58561,7 +58561,7 @@ glabel func_ovl2_8010A3B4
   /* 085BD0 8010A3D0 31F8FFFF */      andi $t8, $t7, 0xffff
   /* 085BD4 8010A3D4 17000016 */      bnez $t8, .L8010A430
   /* 085BD8 8010A3D8 A60F0020 */        sh $t7, 0x20($s0) # D_ovl2_801313F0 + 32
-  /* 085BDC 8010A3DC 0C006265 */       jal rand_u16_range
+  /* 085BDC 8010A3DC 0C006265 */       jal lbRandom_GetIntRange
   /* 085BE0 8010A3E0 92040029 */       lbu $a0, 0x29($s0) # D_ovl2_801313F0 + 41
   /* 085BE4 8010A3E4 8E190018 */        lw $t9, 0x18($s0) # D_ovl2_801313F0 + 24
   /* 085BE8 8010A3E8 27A5002C */     addiu $a1, $sp, 0x2c
@@ -58572,7 +58572,7 @@ glabel func_ovl2_8010A3B4
   /* 085BFC 8010A3FC 27A4002C */     addiu $a0, $sp, 0x2c
   /* 085C00 8010A400 14400006 */      bnez $v0, .L8010A41C
   /* 085C04 8010A404 240A0050 */     addiu $t2, $zero, 0x50
-  /* 085C08 8010A408 0C006265 */       jal rand_u16_range
+  /* 085C08 8010A408 0C006265 */       jal lbRandom_GetIntRange
   /* 085C0C 8010A40C 240404B0 */     addiu $a0, $zero, 0x4b0
   /* 085C10 8010A410 24490640 */     addiu $t1, $v0, 0x640
   /* 085C14 8010A414 10000006 */         b .L8010A430
@@ -58603,10 +58603,10 @@ glabel func_ovl2_8010A444
   /* 085C68 8010A468 1700001D */      bnez $t8, .L8010A4E0
   /* 085C6C 8010A46C A60F0020 */        sh $t7, 0x20($s0) # D_ovl2_801313F0 + 32
   /* 085C70 8010A470 A2190028 */        sb $t9, 0x28($s0) # D_ovl2_801313F0 + 40
-  /* 085C74 8010A474 0C006265 */       jal rand_u16_range
+  /* 085C74 8010A474 0C006265 */       jal lbRandom_GetIntRange
   /* 085C78 8010A478 24040258 */     addiu $a0, $zero, 0x258
   /* 085C7C 8010A47C 24480208 */     addiu $t0, $v0, 0x208
-  /* 085C80 8010A480 0C006244 */       jal rand_u16
+  /* 085C80 8010A480 0C006244 */       jal lbRandom_GetShort
   /* 085C84 8010A484 A6080020 */        sh $t0, 0x20($s0) # D_ovl2_801313F0 + 32
   /* 085C88 8010A488 30490001 */      andi $t1, $v0, 1
   /* 085C8C 8010A48C 11200003 */      beqz $t1, .L8010A49C
@@ -58621,7 +58621,7 @@ glabel func_ovl2_8010A444
   /* 085CAC 8010A4AC A6000024 */        sh $zero, 0x24($s0) # D_ovl2_801313F0 + 36
   /* 085CB0 8010A4B0 24040078 */     addiu $a0, $zero, 0x78
   /* 085CB4 8010A4B4 46083282 */     mul.s $f10, $f6, $f8
-  /* 085CB8 8010A4B8 0C006265 */       jal rand_u16_range
+  /* 085CB8 8010A4B8 0C006265 */       jal lbRandom_GetIntRange
   /* 085CBC 8010A4BC E60A0014 */      swc1 $f10, 0x14($s0) # D_ovl2_801313F0 + 20
   /* 085CC0 8010A4C0 244A00B4 */     addiu $t2, $v0, 0xb4
   /* 085CC4 8010A4C4 3C058011 */       lui $a1, %hi(func_ovl2_8010AB74)
@@ -58700,7 +58700,7 @@ glabel func_ovl2_8010A52C
   .L8010A5BC:
   /* 085DBC 8010A5BC 14A4000A */       bne $a1, $a0, .L8010A5E8
   /* 085DC0 8010A5C0 0085082A */       slt $at, $a0, $a1
-  /* 085DC4 8010A5C4 0C006244 */       jal rand_u16
+  /* 085DC4 8010A5C4 0C006244 */       jal lbRandom_GetShort
   /* 085DC8 8010A5C8 00000000 */       nop 
   /* 085DCC 8010A5CC 304A0001 */      andi $t2, $v0, 1
   /* 085DD0 8010A5D0 11400003 */      beqz $t2, .L8010A5E0
@@ -58768,11 +58768,11 @@ glabel func_ovl2_8010A610
   /* 085EA8 8010A6A8 00000000 */       nop 
   /* 085EAC 8010A6AC 10400010 */      beqz $v0, .L8010A6F0
   /* 085EB0 8010A6B0 AFA20030 */        sw $v0, 0x30($sp)
-  /* 085EB4 8010A6B4 0C006265 */       jal rand_u16_range
+  /* 085EB4 8010A6B4 0C006265 */       jal lbRandom_GetIntRange
   /* 085EB8 8010A6B8 24040005 */     addiu $a0, $zero, 5
   /* 085EBC 8010A6BC 5440000D */      bnel $v0, $zero, .L8010A6F4
   /* 085EC0 8010A6C0 C6280000 */      lwc1 $f8, ($s1)
-  /* 085EC4 8010A6C4 0C006265 */       jal rand_u16_range
+  /* 085EC4 8010A6C4 0C006265 */       jal lbRandom_GetIntRange
   /* 085EC8 8010A6C8 240400B4 */     addiu $a0, $zero, 0xb4
   /* 085ECC 8010A6CC 8FAB0030 */        lw $t3, 0x30($sp)
   /* 085ED0 8010A6D0 3C014248 */       lui $at, (0x42480000 >> 16) # 50.0
@@ -58925,7 +58925,7 @@ glabel func_ovl2_8010A8B4
   /* 0860D4 8010A8D4 A46F0020 */        sh $t7, 0x20($v1) # D_ovl2_801313F0 + 32
   /* 0860D8 8010A8D8 24190001 */     addiu $t9, $zero, 1
   /* 0860DC 8010A8DC A0790028 */        sb $t9, 0x28($v1) # D_ovl2_801313F0 + 40
-  /* 0860E0 8010A8E0 0C006265 */       jal rand_u16_range
+  /* 0860E0 8010A8E0 0C006265 */       jal lbRandom_GetIntRange
   /* 0860E4 8010A8E4 240404B0 */     addiu $a0, $zero, 0x4b0
   /* 0860E8 8010A8E8 3C038013 */       lui $v1, %hi(D_ovl2_801313F0)
   /* 0860EC 8010A8EC 246313F0 */     addiu $v1, $v1, %lo(D_ovl2_801313F0)
@@ -59223,7 +59223,7 @@ glabel func_ovl2_8010ACD0
   /* 0864E8 8010ACE8 3C018013 */       lui $at, %hi(D_ovl2_8013140C)
   /* 0864EC 8010ACEC 11E00006 */      beqz $t7, .L8010AD08
   /* 0864F0 8010ACF0 240403E8 */     addiu $a0, $zero, 0x3e8
-  /* 0864F4 8010ACF4 0C006265 */       jal rand_u16_range
+  /* 0864F4 8010ACF4 0C006265 */       jal lbRandom_GetIntRange
   /* 0864F8 8010ACF8 A038140C */        sb $t8, %lo(D_ovl2_8013140C)($at)
   /* 0864FC 8010ACFC 245903E8 */     addiu $t9, $v0, 0x3e8
   /* 086500 8010AD00 3C018013 */       lui $at, %hi(D_ovl2_8013140E)
@@ -59288,7 +59288,7 @@ glabel func_ovl2_8010AD70
   /* 0865C8 8010ADC8 14200010 */      bnez $at, .L8010AE0C
   /* 0865CC 8010ADCC 2443FFFF */     addiu $v1, $v0, -1
   .L8010ADD0:
-  /* 0865D0 8010ADD0 0C006265 */       jal rand_u16_range
+  /* 0865D0 8010ADD0 0C006265 */       jal lbRandom_GetIntRange
   /* 0865D4 8010ADD4 24040005 */     addiu $a0, $zero, 5
   /* 0865D8 8010ADD8 3C0F8013 */       lui $t7, %hi(D_ovl2_80131412)
   /* 0865DC 8010ADDC 91EF1412 */       lbu $t7, %lo(D_ovl2_80131412)($t7)
@@ -59513,7 +59513,7 @@ glabel func_ovl2_8010B0B8
   /* 0868CC 8010B0CC 240F03E8 */     addiu $t7, $zero, 0x3e8
   /* 0868D0 8010B0D0 A04E001C */        sb $t6, 0x1c($v0) # D_ovl2_801313F0 + 28
   /* 0868D4 8010B0D4 A44F0020 */        sh $t7, 0x20($v0) # D_ovl2_801313F0 + 32
-  /* 0868D8 8010B0D8 0C006265 */       jal rand_u16_range
+  /* 0868D8 8010B0D8 0C006265 */       jal lbRandom_GetIntRange
   /* 0868DC 8010B0DC 240403E8 */     addiu $a0, $zero, 0x3e8
   /* 0868E0 8010B0E0 245803E8 */     addiu $t8, $v0, 0x3e8
   /* 0868E4 8010B0E4 3C018013 */       lui $at, %hi(D_ovl2_8013140E)
@@ -63705,7 +63705,7 @@ glabel func_ovl2_8010EC50
   /* 08A4E0 8010ECE0 18A00029 */      blez $a1, .L8010ED88
   /* 08A4E4 8010ECE4 00A02025 */        or $a0, $a1, $zero
   /* 08A4E8 8010ECE8 AFA7001C */        sw $a3, 0x1c($sp)
-  /* 08A4EC 8010ECEC 0C006265 */       jal rand_u16_range
+  /* 08A4EC 8010ECEC 0C006265 */       jal lbRandom_GetIntRange
   /* 08A4F0 8010ECF0 AFA8003C */        sw $t0, 0x3c($sp)
   /* 08A4F4 8010ECF4 8FA7001C */        lw $a3, 0x1c($sp)
   /* 08A4F8 8010ECF8 8FA8003C */        lw $t0, 0x3c($sp)
@@ -64455,7 +64455,7 @@ glabel func_ovl2_8010F76C
   /* 08AFD4 8010F7D4 4481A000 */      mtc1 $at, $f20 # 2.0 to cop1
   /* 08AFD8 8010F7D8 02408025 */        or $s0, $s2, $zero
   .L8010F7DC:
-  /* 08AFDC 8010F7DC 0C006252 */       jal rand_f32
+  /* 08AFDC 8010F7DC 0C006252 */       jal lbRandom_GetFloat
   /* 08AFE0 8010F7E0 00000000 */       nop 
   /* 08AFE4 8010F7E4 46140102 */     mul.s $f4, $f0, $f20
   /* 08AFE8 8010F7E8 E618001C */      swc1 $f24, 0x1c($s0)
@@ -67912,7 +67912,7 @@ glabel func_ovl2_80112A34
   /* 08E244 80112A44 2404005A */     addiu $a0, $zero, 0x5a
   /* 08E248 80112A48 0C04499A */       jal func_ovl2_80112668
   /* 08E24C 80112A4C 00000000 */       nop 
-  /* 08E250 80112A50 0C006265 */       jal rand_u16_range
+  /* 08E250 80112A50 0C006265 */       jal lbRandom_GetIntRange
   /* 08E254 80112A54 24040003 */     addiu $a0, $zero, 3
   /* 08E258 80112A58 0C044A77 */       jal func_ovl2_801129DC
   /* 08E25C 80112A5C 00402025 */        or $a0, $v0, $zero
@@ -71911,7 +71911,7 @@ glabel func_ovl2_80116204
   /* 091A34 80116234 E4440024 */      swc1 $f4, 0x24($v0)
   /* 091A38 80116238 AFA6001C */        sw $a2, 0x1c($sp)
   /* 091A3C 8011623C AFA40030 */        sw $a0, 0x30($sp)
-  /* 091A40 80116240 0C006252 */       jal rand_f32
+  /* 091A40 80116240 0C006252 */       jal lbRandom_GetFloat
   /* 091A44 80116244 AFA20028 */        sw $v0, 0x28($sp)
   /* 091A48 80116248 3C078013 */       lui $a3, %hi(D_ovl2_80131AD8)
   /* 091A4C 8011624C 24E71AD8 */     addiu $a3, $a3, %lo(D_ovl2_80131AD8)
@@ -72362,7 +72362,7 @@ glabel func_ovl2_8011677C
   /* 092090 80116890 240A001E */     addiu $t2, $zero, 0x1e
   /* 092094 80116894 57200009 */      bnel $t9, $zero, .L801168BC
   /* 092098 80116898 AD0A0000 */        sw $t2, ($t0) # D_ovl2_80131AD8 + 0
-  /* 09209C 8011689C 0C006265 */       jal rand_u16_range
+  /* 09209C 8011689C 0C006265 */       jal lbRandom_GetIntRange
   /* 0920A0 801168A0 24042710 */     addiu $a0, $zero, 0x2710
   /* 0920A4 801168A4 3C088013 */       lui $t0, %hi(D_ovl2_80131AD8)
   /* 0920A8 801168A8 25081AD8 */     addiu $t0, $t0, %lo(D_ovl2_80131AD8)
@@ -72390,7 +72390,7 @@ glabel func_ovl2_801168CC
   /* 0920F4 801168F4 96060004 */       lhu $a2, 4($s0) # D_ovl2_80131AD8 + 4
   /* 0920F8 801168F8 1440002A */      bnez $v0, .L801169A4
   /* 0920FC 801168FC 2459FFFF */     addiu $t9, $v0, -1
-  /* 092100 80116900 0C006265 */       jal rand_u16_range
+  /* 092100 80116900 0C006265 */       jal lbRandom_GetIntRange
   /* 092104 80116904 92040008 */       lbu $a0, 8($s0) # D_ovl2_80131AD8 + 8
   /* 092108 80116908 8E0E000C */        lw $t6, 0xc($s0) # D_ovl2_80131AD8 + 12
   /* 09210C 8011690C 8E180018 */        lw $t8, 0x18($s0) # D_ovl2_80131AD8 + 24
@@ -72409,7 +72409,7 @@ glabel func_ovl2_801168CC
   /* 092140 80116940 1520000C */      bnez $t1, .L80116974
   /* 092144 80116944 AE090010 */        sw $t1, 0x10($s0) # D_ovl2_80131AD8 + 16
   /* 092148 80116948 AFA50024 */        sw $a1, 0x24($sp)
-  /* 09214C 8011694C 0C006265 */       jal rand_u16_range
+  /* 09214C 8011694C 0C006265 */       jal lbRandom_GetIntRange
   /* 092150 80116950 AFA60030 */        sw $a2, 0x30($sp)
   /* 092154 80116954 8FA50024 */        lw $a1, 0x24($sp)
   /* 092158 80116958 14400004 */      bnez $v0, .L8011696C
@@ -72426,7 +72426,7 @@ glabel func_ovl2_801168CC
   /* 09217C 8011697C 31AEFFFF */      andi $t6, $t5, 0xffff
   /* 092180 80116980 11C00009 */      beqz $t6, .L801169A8
   /* 092184 80116984 A60D0006 */        sh $t5, 6($s0) # D_ovl2_80131AD8 + 6
-  /* 092188 80116988 0C006265 */       jal rand_u16_range
+  /* 092188 80116988 0C006265 */       jal lbRandom_GetIntRange
   /* 09218C 8011698C AFA60030 */        sw $a2, 0x30($sp)
   /* 092190 80116990 960F0006 */       lhu $t7, 6($s0) # D_ovl2_80131AD8 + 6
   /* 092194 80116994 8FA60030 */        lw $a2, 0x30($sp)
@@ -72554,7 +72554,7 @@ glabel func_ovl2_80116AD0
   /* 09234C 80116B4C 3C058013 */       lui $a1, %hi(D_ovl2_80131AD8)
   /* 092350 80116B50 24A51AD8 */     addiu $a1, $a1, %lo(D_ovl2_80131AD8)
   /* 092354 80116B54 24042710 */     addiu $a0, $zero, 0x2710
-  /* 092358 80116B58 0C006265 */       jal rand_u16_range
+  /* 092358 80116B58 0C006265 */       jal lbRandom_GetIntRange
   /* 09235C 80116B5C AD050084 */        sw $a1, 0x84($t0)
   /* 092360 80116B60 3C058013 */       lui $a1, %hi(D_ovl2_80131AD8)
   /* 092364 80116B64 24A51AD8 */     addiu $a1, $a1, %lo(D_ovl2_80131AD8)

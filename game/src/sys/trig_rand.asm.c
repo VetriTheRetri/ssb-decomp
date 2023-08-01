@@ -118,7 +118,7 @@ void set_lcg_seed_ptr(s32 *seedptr) {
     }
 }
 
-u16 rand_u16(void) {
+u16 lbRandom_GetShort(void) {
     s32 step;
 
     step         = (*sLcgSeedPtr * 214013) + 2531011;
@@ -128,7 +128,7 @@ u16 rand_u16(void) {
 }
 
 // between 0..1
-f32 rand_f32(void) {
+f32 lbRandom_GetFloat(void) {
     s32 step;
 
     step         = (*sLcgSeedPtr * 214013) + 2531011;
@@ -137,19 +137,19 @@ f32 rand_f32(void) {
     return ((step >> 16) & 0xFFFF) / ((f32)65536.0f);
 }
 
-u32 rand_u16_range(s32 range) {
-    return rand_u16() * range / 0x10000;
+u32 lbRandom_GetIntRange(s32 range) {
+    return lbRandom_GetShort() * range / 0x10000;
 }
 
-u8 timerand_u8(void) {
+u8 lbRandom_GetTimeByte(void) {
     return osGetTime();
 }
 
-f32 timerand_f32(void) {
+f32 lbRandom_GetTimeFloat(void) {
     return (osGetTime() & 0xFF) / 256.0f;
 }
 
-s32 timerand_u8_range(s32 range) {
+s32 lbRandom_GetTimeByteRange(s32 range) {
     return (f32)((s32)(osGetTime() & 0xFF) * range) / 256.0f;
 }
 

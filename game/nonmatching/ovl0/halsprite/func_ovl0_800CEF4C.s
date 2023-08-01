@@ -444,7 +444,7 @@ glabel func_ovl0_800CEF4C
   /* 04ADEC 800CF40C 00591021 */      addu $v0, $v0, $t9
   /* 04ADF0 800CF410 26310004 */     addiu $s1, $s1, 4
   /* 04ADF4 800CF414 AFA20088 */        sw $v0, 0x88($sp)
-  /* 04ADF8 800CF418 0C006252 */       jal rand_f32
+  /* 04ADF8 800CF418 0C006252 */       jal lbRandom_GetFloat
   /* 04ADFC 800CF41C 02188021 */      addu $s0, $s0, $t8
   /* 04AE00 800CF420 8FA20088 */        lw $v0, 0x88($sp)
   /* 04AE04 800CF424 44823000 */      mtc1 $v0, $f6
@@ -459,7 +459,7 @@ glabel func_ovl0_800CEF4C
   /* 04AE28 800CF448 A64A001E */        sh $t2, 0x1e($s2)
   glabel jtgt_ovl0_800CF44C # 0xA7
   /* 04AE2C 800CF44C 92300000 */       lbu $s0, ($s1)
-  /* 04AE30 800CF450 0C006252 */       jal rand_f32
+  /* 04AE30 800CF450 0C006252 */       jal lbRandom_GetFloat
   /* 04AE34 800CF454 26310001 */     addiu $s1, $s1, 1
   /* 04AE38 800CF458 3C0142C8 */       lui $at, (0x42C80000 >> 16) # 100.0
   /* 04AE3C 800CF45C 44813000 */      mtc1 $at, $f6 # 100.0 to cop1
@@ -480,7 +480,7 @@ glabel func_ovl0_800CEF4C
   /* 04AE74 800CF494 02202025 */        or $a0, $s1, $zero
   /* 04AE78 800CF498 0C033AF0 */       jal bytecode_read_f32
   /* 04AE7C 800CF49C 02602825 */        or $a1, $s3, $zero
-  /* 04AE80 800CF4A0 0C006252 */       jal rand_f32
+  /* 04AE80 800CF4A0 0C006252 */       jal lbRandom_GetFloat
   /* 04AE84 800CF4A4 00408825 */        or $s1, $v0, $zero
   /* 04AE88 800CF4A8 C7A60080 */      lwc1 $f6, 0x80($sp)
   /* 04AE8C 800CF4AC C6440020 */      lwc1 $f4, 0x20($s2)
@@ -490,7 +490,7 @@ glabel func_ovl0_800CEF4C
   /* 04AE9C 800CF4BC 46082280 */     add.s $f10, $f4, $f8
   /* 04AEA0 800CF4C0 0C033AF0 */       jal bytecode_read_f32
   /* 04AEA4 800CF4C4 E64A0020 */      swc1 $f10, 0x20($s2)
-  /* 04AEA8 800CF4C8 0C006252 */       jal rand_f32
+  /* 04AEA8 800CF4C8 0C006252 */       jal lbRandom_GetFloat
   /* 04AEAC 800CF4CC 00408825 */        or $s1, $v0, $zero
   /* 04AEB0 800CF4D0 C7A40080 */      lwc1 $f4, 0x80($sp)
   /* 04AEB4 800CF4D4 C6460024 */      lwc1 $f6, 0x24($s2)
@@ -500,7 +500,7 @@ glabel func_ovl0_800CEF4C
   /* 04AEC4 800CF4E4 46083280 */     add.s $f10, $f6, $f8
   /* 04AEC8 800CF4E8 0C033AF0 */       jal bytecode_read_f32
   /* 04AECC 800CF4EC E64A0024 */      swc1 $f10, 0x24($s2)
-  /* 04AED0 800CF4F0 0C006252 */       jal rand_f32
+  /* 04AED0 800CF4F0 0C006252 */       jal lbRandom_GetFloat
   /* 04AED4 800CF4F4 00408825 */        or $s1, $v0, $zero
   /* 04AED8 800CF4F8 C7A60080 */      lwc1 $f6, 0x80($sp)
   /* 04AEDC 800CF4FC C6440028 */      lwc1 $f4, 0x28($s2)
@@ -528,7 +528,7 @@ glabel func_ovl0_800CEF4C
   /* 04AF2C 800CF54C 00581021 */      addu $v0, $v0, $t8
   /* 04AF30 800CF550 26310004 */     addiu $s1, $s1, 4
   /* 04AF34 800CF554 AFA20088 */        sw $v0, 0x88($sp)
-  /* 04AF38 800CF558 0C006252 */       jal rand_f32
+  /* 04AF38 800CF558 0C006252 */       jal lbRandom_GetFloat
   /* 04AF3C 800CF55C 020F8021 */      addu $s0, $s0, $t7
   /* 04AF40 800CF560 8FA20088 */        lw $v0, 0x88($sp)
   /* 04AF44 800CF564 02402025 */        or $a0, $s2, $zero
@@ -597,7 +597,7 @@ glabel func_ovl0_800CEF4C
   /* 04B034 800CF654 00402025 */        or $a0, $v0, $zero
   /* 04B038 800CF658 0C033AF0 */       jal bytecode_read_f32
   /* 04B03C 800CF65C 02602825 */        or $a1, $s3, $zero
-  /* 04B040 800CF660 0C006252 */       jal rand_f32
+  /* 04B040 800CF660 0C006252 */       jal lbRandom_GetFloat
   /* 04B044 800CF664 00408825 */        or $s1, $v0, $zero
   /* 04B048 800CF668 C7A40080 */      lwc1 $f4, 0x80($sp)
   /* 04B04C 800CF66C C6460044 */      lwc1 $f6, 0x44($s2)
@@ -750,7 +750,7 @@ glabel func_ovl0_800CEF4C
   /* 04B25C 800CF87C 00000000 */       nop 
   /* 04B260 800CF880 46062100 */     add.s $f4, $f4, $f6
   .L800CF884:
-  /* 04B264 800CF884 0C006252 */       jal rand_f32
+  /* 04B264 800CF884 0C006252 */       jal lbRandom_GetFloat
   /* 04B268 800CF888 E7A40080 */      swc1 $f4, 0x80($sp)
   /* 04B26C 800CF88C 9248004C */       lbu $t0, 0x4c($s2)
   /* 04B270 800CF890 C7A40080 */      lwc1 $f4, 0x80($sp)
@@ -813,7 +813,7 @@ glabel func_ovl0_800CEF4C
   /* 04B344 800CF964 00000000 */       nop 
   /* 04B348 800CF968 46064200 */     add.s $f8, $f8, $f6
   .L800CF96C:
-  /* 04B34C 800CF96C 0C006252 */       jal rand_f32
+  /* 04B34C 800CF96C 0C006252 */       jal lbRandom_GetFloat
   /* 04B350 800CF970 E7A80080 */      swc1 $f8, 0x80($sp)
   /* 04B354 800CF974 924C004D */       lbu $t4, 0x4d($s2)
   /* 04B358 800CF978 C7A80080 */      lwc1 $f8, 0x80($sp)
@@ -876,7 +876,7 @@ glabel func_ovl0_800CEF4C
   /* 04B42C 800CFA4C 00000000 */       nop 
   /* 04B430 800CFA50 46062100 */     add.s $f4, $f4, $f6
   .L800CFA54:
-  /* 04B434 800CFA54 0C006252 */       jal rand_f32
+  /* 04B434 800CFA54 0C006252 */       jal lbRandom_GetFloat
   /* 04B438 800CFA58 E7A40080 */      swc1 $f4, 0x80($sp)
   /* 04B43C 800CFA5C 9258004E */       lbu $t8, 0x4e($s2)
   /* 04B440 800CFA60 C7A40080 */      lwc1 $f4, 0x80($sp)
@@ -939,7 +939,7 @@ glabel func_ovl0_800CEF4C
   /* 04B514 800CFB34 00000000 */       nop 
   /* 04B518 800CFB38 46064200 */     add.s $f8, $f8, $f6
   .L800CFB3C:
-  /* 04B51C 800CFB3C 0C006252 */       jal rand_f32
+  /* 04B51C 800CFB3C 0C006252 */       jal lbRandom_GetFloat
   /* 04B520 800CFB40 E7A80080 */      swc1 $f8, 0x80($sp)
   /* 04B524 800CFB44 924A004F */       lbu $t2, 0x4f($s2)
   /* 04B528 800CFB48 C7A80080 */      lwc1 $f8, 0x80($sp)
@@ -1013,7 +1013,7 @@ glabel func_ovl0_800CEF4C
   /* 04B624 800CFC44 00000000 */       nop 
   /* 04B628 800CFC48 46062100 */     add.s $f4, $f4, $f6
   .L800CFC4C:
-  /* 04B62C 800CFC4C 0C006252 */       jal rand_f32
+  /* 04B62C 800CFC4C 0C006252 */       jal lbRandom_GetFloat
   /* 04B630 800CFC50 E7A40080 */      swc1 $f4, 0x80($sp)
   /* 04B634 800CFC54 92590054 */       lbu $t9, 0x54($s2)
   /* 04B638 800CFC58 C7A40080 */      lwc1 $f4, 0x80($sp)
@@ -1076,7 +1076,7 @@ glabel func_ovl0_800CEF4C
   /* 04B70C 800CFD2C 00000000 */       nop 
   /* 04B710 800CFD30 46064200 */     add.s $f8, $f8, $f6
   .L800CFD34:
-  /* 04B714 800CFD34 0C006252 */       jal rand_f32
+  /* 04B714 800CFD34 0C006252 */       jal lbRandom_GetFloat
   /* 04B718 800CFD38 E7A80080 */      swc1 $f8, 0x80($sp)
   /* 04B71C 800CFD3C 924B0055 */       lbu $t3, 0x55($s2)
   /* 04B720 800CFD40 C7A80080 */      lwc1 $f8, 0x80($sp)
@@ -1139,7 +1139,7 @@ glabel func_ovl0_800CEF4C
   /* 04B7F4 800CFE14 00000000 */       nop 
   /* 04B7F8 800CFE18 46062100 */     add.s $f4, $f4, $f6
   .L800CFE1C:
-  /* 04B7FC 800CFE1C 0C006252 */       jal rand_f32
+  /* 04B7FC 800CFE1C 0C006252 */       jal lbRandom_GetFloat
   /* 04B800 800CFE20 E7A40080 */      swc1 $f4, 0x80($sp)
   /* 04B804 800CFE24 924F0056 */       lbu $t7, 0x56($s2)
   /* 04B808 800CFE28 C7A40080 */      lwc1 $f4, 0x80($sp)
@@ -1202,7 +1202,7 @@ glabel func_ovl0_800CEF4C
   /* 04B8DC 800CFEFC 00000000 */       nop 
   /* 04B8E0 800CFF00 46064200 */     add.s $f8, $f8, $f6
   .L800CFF04:
-  /* 04B8E4 800CFF04 0C006252 */       jal rand_f32
+  /* 04B8E4 800CFF04 0C006252 */       jal lbRandom_GetFloat
   /* 04B8E8 800CFF08 E7A80080 */      swc1 $f8, 0x80($sp)
   /* 04B8EC 800CFF0C 92490057 */       lbu $t1, 0x57($s2)
   /* 04B8F0 800CFF10 C7A80080 */      lwc1 $f8, 0x80($sp)
@@ -1279,7 +1279,7 @@ glabel func_ovl0_800CEF4C
   /* 04B9F8 800D0018 00000000 */       nop 
   /* 04B9FC 800D001C 46062100 */     add.s $f4, $f4, $f6
   .L800D0020:
-  /* 04BA00 800D0020 0C006252 */       jal rand_f32
+  /* 04BA00 800D0020 0C006252 */       jal lbRandom_GetFloat
   /* 04BA04 800D0024 E7A40080 */      swc1 $f4, 0x80($sp)
   /* 04BA08 800D0028 9259000B */       lbu $t9, 0xb($s2)
   /* 04BA0C 800D002C C7A40080 */      lwc1 $f4, 0x80($sp)
@@ -1342,7 +1342,7 @@ glabel func_ovl0_800CEF4C
   /* 04BADC 800D00FC 00402025 */        or $a0, $v0, $zero
   /* 04BAE0 800D0100 0C033AF0 */       jal bytecode_read_f32
   /* 04BAE4 800D0104 27A5007C */     addiu $a1, $sp, 0x7c
-  /* 04BAE8 800D0108 0C006252 */       jal rand_f32
+  /* 04BAE8 800D0108 0C006252 */       jal lbRandom_GetFloat
   /* 04BAEC 800D010C 00408825 */        or $s1, $v0, $zero
   /* 04BAF0 800D0110 C7A8007C */      lwc1 $f8, 0x7c($sp)
   /* 04BAF4 800D0114 C7AA0080 */      lwc1 $f10, 0x80($sp)

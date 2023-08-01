@@ -2623,7 +2623,7 @@ glabel func_ovl34_801341B4
   /* 164D44 80134204 8DD80018 */        lw $t8, 0x18($t6) # D_ovl34_80134B90 + 24
   /* 164D48 80134208 AE180018 */        sw $t8, 0x18($s0)
   /* 164D4C 8013420C 8DCF001C */        lw $t7, 0x1c($t6) # D_ovl34_80134B90 + 28
-  /* 164D50 80134210 0C00628C */       jal timerand_u8_range
+  /* 164D50 80134210 0C00628C */       jal lbRandom_GetTimeByteRange
   /* 164D54 80134214 AE0F001C */        sw $t7, 0x1c($s0)
   /* 164D58 80134218 3C118013 */       lui $s1, %hi(D_ovl34_80134CF8)
   /* 164D5C 8013421C 0002C880 */       sll $t9, $v0, 2
@@ -2634,7 +2634,7 @@ glabel func_ovl34_801341B4
   /* 164D70 80134230 5469000A */      bnel $v1, $t1, .L8013425C
   /* 164D74 80134234 8FBF001C */        lw $ra, 0x1c($sp)
   .L80134238:
-  /* 164D78 80134238 0C00628C */       jal timerand_u8_range
+  /* 164D78 80134238 0C00628C */       jal lbRandom_GetTimeByteRange
   /* 164D7C 8013423C 24040008 */     addiu $a0, $zero, 8
   /* 164D80 80134240 00025080 */       sll $t2, $v0, 2
   /* 164D84 80134244 020A5821 */      addu $t3, $s0, $t2
@@ -2672,7 +2672,7 @@ glabel func_ovl34_80134270
   /* 164DF8 801342B8 8DF8001C */        lw $t8, 0x1c($t7) # D_ovl34_80134BB0 + 28
   /* 164DFC 801342BC 8DF90018 */        lw $t9, 0x18($t7) # D_ovl34_80134BB0 + 24
   /* 164E00 801342C0 ADD8001C */        sw $t8, 0x1c($t6)
-  /* 164E04 801342C4 0C00628C */       jal timerand_u8_range
+  /* 164E04 801342C4 0C00628C */       jal lbRandom_GetTimeByteRange
   /* 164E08 801342C8 ADD90018 */        sw $t9, 0x18($t6)
   /* 164E0C 801342CC 8FBF0014 */        lw $ra, 0x14($sp)
   /* 164E10 801342D0 00024080 */       sll $t0, $v0, 2

@@ -40,7 +40,7 @@ void func_ovl3_80158030(GObj *fighter_gobj)
 
 void func_ovl3_80158094(s32 var, Vec3f *pos)
 {
-    if (rand_u16() & 1)
+    if (lbRandom_GetShort() & 1)
     {
         mpCollision_GetLREdgeLeft(var, pos);
     }
@@ -94,7 +94,7 @@ void ftMasterHand_Common_SetPosAddVelPlayer(GObj *fighter_gobj, Vec3f *pos, f32 
 
     x = translate.x;
 
-    translate.x += (rand_u16() & 1) ? vel_x : -vel_x;
+    translate.x += (lbRandom_GetShort() & 1) ? vel_x : -vel_x;
 
     if (mpCollision_GetUUCommonUp(fp_unk->coll_data.ground_line_id, &translate, &y, 0, 0) != FALSE)
     {
@@ -115,7 +115,7 @@ void ftMasterHand_Common_SetPosAddVelAuto(GObj *fighter_gobj, Vec3f *pos, f32 ve
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    pos->x = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x + ((rand_u16() & 1) ? vel_x : -vel_x);
+    pos->x = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.x + ((lbRandom_GetShort() & 1) ? vel_x : -vel_x);
     pos->y = DObjGetStruct(fp->fighter_vars.masterhand.boss->target_gobj)->translate.y + vel_y;
     pos->z = 0.0F;
 }
@@ -145,7 +145,7 @@ void ftMasterHand_Common_SetNextAttackWait(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    fp->fighter_vars.masterhand.boss->wait_timer = ((rand_u16_range(FTMASTERHAND_ATTACK_WAIT_MAX) + (FTMASTERHAND_ATTACK_WAIT_LEVEL_DIV / fp->cp_level)) / fp->fighter_vars.masterhand.boss->wait_div);
+    fp->fighter_vars.masterhand.boss->wait_timer = ((lbRandom_GetIntRange(FTMASTERHAND_ATTACK_WAIT_MAX) + (FTMASTERHAND_ATTACK_WAIT_LEVEL_DIV / fp->cp_level)) / fp->fighter_vars.masterhand.boss->wait_div);
 }
 
 void func_ovl3_80158528(GObj *fighter_gobj)

@@ -76,7 +76,7 @@ void func_ovl3_8017E25C(GObj *item_gobj)
 
     ap->phys_info.vel_air.y = ITKABIGON_DROP_VEL_Y;
 
-    joint->translate.x += ((ITKABIGON_DROP_OFF_X_MUL * rand_f32()) + ITKABIGON_DROP_OFF_X_ADD);
+    joint->translate.x += ((ITKABIGON_DROP_OFF_X_MUL * lbRandom_GetFloat()) + ITKABIGON_DROP_OFF_X_ADD);
 
     itMain_RefreshHit(item_gobj);
 
@@ -134,8 +134,8 @@ bool32 func_ovl3_8017E384(GObj *item_gobj)
     {
         Vec3f pos = joint->translate;
 
-        pos.x += (rand_f32() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
-        pos.y += (rand_f32() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
+        pos.x += (lbRandom_GetFloat() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
+        pos.y += (lbRandom_GetFloat() * ITKABIGON_JUMP_GFX_MUL_OFF) - ITKABIGON_JUMP_GFX_SUB_OFF;
 
         efParticle_DustExpandLarge_MakeEffect(&pos);
 

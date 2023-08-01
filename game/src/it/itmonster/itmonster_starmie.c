@@ -22,7 +22,7 @@ void func_ovl3_80181C20(GObj *item_gobj)
 
         func_800269C0(0x8CU);
 
-        ap->item_vars.starmie.swift_spawn_wait = (rand_u16_range(ITSTARMIE_SWIFT_SPAWN_WAIT_RANDOM) + ITSTARMIE_SWIFT_SPAWN_WAIT_CONST);
+        ap->item_vars.starmie.swift_spawn_wait = (lbRandom_GetIntRange(ITSTARMIE_SWIFT_SPAWN_WAIT_RANDOM) + ITSTARMIE_SWIFT_SPAWN_WAIT_CONST);
 
         ap->phys_info.vel_air.x = -ap->lr * ITSTARMIE_PUSH_VEL_X;
     }

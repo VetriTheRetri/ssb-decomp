@@ -368,7 +368,7 @@ extern gmItemSpawn gItemSettings; // Static (.bss)
 // 0x8016EB0C
 void itManager_SetItemSpawnWait(void)
 {
-    gItemSettings.item_spawn_wait = gItemAppearanceRate1[gpBattleState->item_switch] + rand_u16_range(gItemAppearanceRate2[gpBattleState->item_switch] - gItemAppearanceRate1[gpBattleState->item_switch]);
+    gItemSettings.item_spawn_wait = gItemAppearanceRate1[gpBattleState->item_switch] + lbRandom_GetIntRange(gItemAppearanceRate2[gpBattleState->item_switch] - gItemAppearanceRate1[gpBattleState->item_switch]);
 }
 
 // 0x8016EB78
@@ -391,7 +391,7 @@ void itManager_ProcMakeItems(GObj *item_gobj)
         {
             index = func_ovl3_80173090(&gItemSettings.unk_0xC);
 
-            func_ovl2_800FC894(gItemSettings.item_toggles[rand_u16_range(gItemSettings.max_items)], &pos);
+            func_ovl2_800FC894(gItemSettings.item_toggles[lbRandom_GetIntRange(gItemSettings.max_items)], &pos);
 
             vel.x = vel.y = vel.z = 0.0F;
 

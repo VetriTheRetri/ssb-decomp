@@ -244,7 +244,7 @@ void func_ovl2_800D67DC(void)
             case 4:
                 temp_s1 &= ~1;
 
-                D_800A4B18.player_block[gSceneData.cpu_port[0]].character_kind = func_ovl2_800D6508(temp_s1, 0, rand_u16_range(func_ovl2_800D6490(temp_s1)));
+                D_800A4B18.player_block[gSceneData.cpu_port[0]].character_kind = func_ovl2_800D6508(temp_s1, 0, lbRandom_GetIntRange(func_ovl2_800D6490(temp_s1)));
 
                 if (D_800A4B18.player_block[gSceneData.cpu_port[0]].character_kind == Ft_Kind_Luigi)
                 {
@@ -258,11 +258,11 @@ void func_ovl2_800D67DC(void)
             case 6:
                 temp_v0 = func_ovl2_800D6490(temp_s1);
 
-                D_800A4B18.player_block[gSceneData.cpu_port[0]].character_kind = func_ovl2_800D6508(temp_s1, 0, rand_u16_range(temp_v0));
+                D_800A4B18.player_block[gSceneData.cpu_port[0]].character_kind = func_ovl2_800D6508(temp_s1, 0, lbRandom_GetIntRange(temp_v0));
                 D_800A4B18.player_block[gSceneData.cpu_port[0]].costume_index = 0;
                 D_800A4B18.player_block[gSceneData.cpu_port[0]].shade_index = 0;
 
-                D_800A4B18.player_block[gSceneData.cpu_port[1]].character_kind = func_ovl2_800D6508(temp_s1, (1 << D_800A4B18.player_block[gSceneData.cpu_port[0]].character_kind), rand_u16_range(temp_v0 - 1));
+                D_800A4B18.player_block[gSceneData.cpu_port[1]].character_kind = func_ovl2_800D6508(temp_s1, (1 << D_800A4B18.player_block[gSceneData.cpu_port[0]].character_kind), lbRandom_GetIntRange(temp_v0 - 1));
                 D_800A4B18.player_block[gSceneData.cpu_port[1]].costume_index = 0;
                 D_800A4B18.player_block[gSceneData.cpu_port[1]].shade_index = 0;
                 break;
@@ -270,7 +270,7 @@ void func_ovl2_800D67DC(void)
             case 8:
                 temp_s1 = (gSaveData.unk458 | gmSaveChrMask(Ft_Kind_Kirby));
 
-                D_ovl2_80130D75 = func_ovl2_800D6554(temp_s1, rand_u16_range(func_ovl2_800D6490(temp_s1)));
+                D_ovl2_80130D75 = func_ovl2_800D6554(temp_s1, lbRandom_GetIntRange(func_ovl2_800D6490(temp_s1)));
 
                 D_ovl2_80130D76 = D_ovl2_80116DA0[D_ovl2_80130D75];
                 break;

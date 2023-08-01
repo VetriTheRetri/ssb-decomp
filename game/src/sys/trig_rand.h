@@ -13,11 +13,11 @@ extern f32 secf(f32 x);
 extern f32 cotf(f32 x);
 
 extern void set_lcg_seed_ptr(s32 *seedptr);
-extern u16 rand_u16(void);
-extern f32 rand_f32(void);
-extern u32 rand_u16_range(s32 range);
-extern u8 timerand_u8(void);
-extern f32 timerand_f32(void);
-extern s32 timerand_u8_range(s32 range);
+extern u16 lbRandom_GetShort(void);
+extern f32 lbRandom_GetFloat(void);
+extern u32 lbRandom_GetIntRange(s32 range); // Does this actually return u32? Found a function that needs to cast this to s32, and assigning to a variable first would bump the stack
+extern u8 lbRandom_GetTimeByte(void);
+extern f32 lbRandom_GetTimeFloat(void);
+extern s32 lbRandom_GetTimeByteRange(s32 range);
 
 #endif /* SYS_TRIG_RAND_H */

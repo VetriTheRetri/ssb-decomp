@@ -366,7 +366,7 @@ bool32 wpNess_PKThunderTrail_ProcUpdate(GObj *weapon_gobj)
     }
     wpMain_DecLifeCheckExpire(wp);
 
-    DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(WPPKTHUNDER_TEXTURE_COUNT - 1);
+    DObjGetStruct(weapon_gobj)->mobj->index = lbRandom_GetIntRange(WPPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }
@@ -604,7 +604,7 @@ bool32 wpNess_PKReflectTrail_ProcUpdate(GObj *weapon_gobj)
 
     wpMain_DecLifeCheckExpire(wp);
 
-    DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(WPPKTHUNDER_TEXTURE_COUNT - 1);
+    DObjGetStruct(weapon_gobj)->mobj->index = lbRandom_GetIntRange(WPPKTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }

@@ -2330,7 +2330,7 @@ glabel func_ovl30_80133B78
   /* 14F73C 80133BCC 1481000D */       bne $a0, $at, .L80133C04
   /* 14F740 80133BD0 26314AD0 */     addiu $s1, $s1, %lo(gSceneData)
   .L80133BD4:
-  /* 14F744 80133BD4 0C00628C */       jal timerand_u8_range
+  /* 14F744 80133BD4 0C00628C */       jal lbRandom_GetTimeByteRange
   /* 14F748 80133BD8 24040009 */     addiu $a0, $zero, 9
   /* 14F74C 80133BDC 00408025 */        or $s0, $v0, $zero
   /* 14F750 80133BE0 0C04C6EB */       jal func_ovl30_80131BAC

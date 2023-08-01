@@ -324,11 +324,11 @@ void func_ovl3_80132564(ftStruct *fp, s32 index)
 
     if (fp->ground_or_air == GA_Ground)
     {
-        ft_com->input_wait = ((2 * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 2) + 1.0F);
+        ft_com->input_wait = ((2 * (lbRandom_GetFloat() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 2) + 1.0F);
     }
     else
     {
-        ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) / 2) + 1.0F);
+        ft_com->input_wait = ((lbRandom_GetFloat() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) / 2) + 1.0F);
     }
     ft_com->p_command = gpComputerPlayerScripts[index];
 }
@@ -347,11 +347,11 @@ void func_ovl3_80132778(ftStruct *fp, s32 index)
 
     if (fp->ground_or_air == GA_Ground)
     {
-        ft_com->input_wait = ((4 * (rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 4) + 1.0F);
+        ft_com->input_wait = ((4 * (lbRandom_GetFloat() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level))) + ((GMCOMPLAYER_LEVEL_MAX - fp->cp_level) * 4) + 1.0F);
     }
     else
     {
-        ft_com->input_wait = ((rand_f32() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + (GMCOMPLAYER_LEVEL_MAX - fp->cp_level) + 1.0F);
+        ft_com->input_wait = ((lbRandom_GetFloat() * (GMCOMPLAYER_LEVEL_MAX - fp->cp_level)) + (GMCOMPLAYER_LEVEL_MAX - fp->cp_level) + 1.0F);
     }
     ft_com->p_command = gpComputerPlayerScripts[index];
 }
@@ -510,7 +510,7 @@ ftStruct* func_ovl3_80132D18(ftStruct *this_fp)
     {
         ft_com->target_damage_percent = target_damage;
         ft_com->target_gobj = target_fp->fighter_gobj;
-        ft_com->target_find_wait = (rand_f32() * 300.0F) + 600.0F;
+        ft_com->target_find_wait = (lbRandom_GetFloat() * 300.0F) + 600.0F;
     }
     return NULL;
 }

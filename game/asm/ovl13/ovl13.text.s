@@ -395,13 +395,13 @@ glabel func_ovl13_80131FDC
   /* 11A874 80132034 00003025 */        or $a2, $zero, $zero
   /* 11A878 80132038 0C00265A */       jal omMakeGObjCommon
   /* 11A87C 8013203C 3C078000 */       lui $a3, 0x8000
-  /* 11A880 80132040 0C006265 */       jal rand_u16_range
+  /* 11A880 80132040 0C006265 */       jal lbRandom_GetIntRange
   /* 11A884 80132044 24040080 */     addiu $a0, $zero, 0x80
   /* 11A888 80132048 AFA20020 */        sw $v0, 0x20($sp)
-  /* 11A88C 8013204C 0C006265 */       jal rand_u16_range
+  /* 11A88C 8013204C 0C006265 */       jal lbRandom_GetIntRange
   /* 11A890 80132050 24040080 */     addiu $a0, $zero, 0x80
   /* 11A894 80132054 AFA20024 */        sw $v0, 0x24($sp)
-  /* 11A898 80132058 0C006265 */       jal rand_u16_range
+  /* 11A898 80132058 0C006265 */       jal lbRandom_GetIntRange
   /* 11A89C 8013205C 24040080 */     addiu $a0, $zero, 0x80
   /* 11A8A0 80132060 8FA90024 */        lw $t1, 0x24($sp)
   /* 11A8A4 80132064 8FAC0020 */        lw $t4, 0x20($sp)

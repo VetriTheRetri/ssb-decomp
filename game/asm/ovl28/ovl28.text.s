@@ -5327,7 +5327,7 @@ glabel func_ovl28_80136748
   /* 145D80 801367A0 4502000F */     bc1fl .L801367E0
   /* 145D84 801367A4 46001481 */     sub.s $f18, $f2, $f0
   /* 145D88 801367A8 AFA30024 */        sw $v1, 0x24($sp)
-  /* 145D8C 801367AC 0C006265 */       jal rand_u16_range
+  /* 145D8C 801367AC 0C006265 */       jal lbRandom_GetIntRange
   /* 145D90 801367B0 AFA70018 */        sw $a3, 0x18($sp)
   /* 145D94 801367B4 244AFFFF */     addiu $t2, $v0, -1
   /* 145D98 801367B8 448A3000 */      mtc1 $t2, $f6
@@ -5361,7 +5361,7 @@ glabel func_ovl28_80136748
   /* 145E00 80136820 00000000 */       nop 
   /* 145E04 80136824 4502000C */     bc1fl .L80136858
   /* 145E08 80136828 46001401 */     sub.s $f16, $f2, $f0
-  /* 145E0C 8013682C 0C006265 */       jal rand_u16_range
+  /* 145E0C 8013682C 0C006265 */       jal lbRandom_GetIntRange
   /* 145E10 80136830 AFA30024 */        sw $v1, 0x24($sp)
   /* 145E14 80136834 244EFFFF */     addiu $t6, $v0, -1
   /* 145E18 80136838 448E3000 */      mtc1 $t6, $f6
@@ -6653,7 +6653,7 @@ glabel func_ovl28_801379CC
   /* 147088 80137AA8 5601001F */      bnel $s0, $at, .L80137B28
   /* 14708C 80137AAC 9223003E */       lbu $v1, 0x3e($s1) # gSceneData + 62
   .L80137AB0:
-  /* 147090 80137AB0 0C00628C */       jal timerand_u8_range
+  /* 147090 80137AB0 0C00628C */       jal lbRandom_GetTimeByteRange
   /* 147094 80137AB4 2404000C */     addiu $a0, $zero, 0xc
   /* 147098 80137AB8 00408025 */        or $s0, $v0, $zero
   /* 14709C 80137ABC 0C04C761 */       jal func_ovl28_80131D84

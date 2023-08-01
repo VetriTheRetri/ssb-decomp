@@ -6996,12 +6996,12 @@ glabel D_ovl2_8012DBD5
   /* 579E8 0A9678 8012DE78 */  .4byte D_ovl2_8012DBB8
   .incbin "ovl2.raw.bin", 0x579EC, 0xC
 
-glabel D_ovl2_8012DE88
+glabel efParticle_DamageSpawnSparks_Angles
   /* 579F8 0A9688 8012DE88 */
   .4byte 0xc1900000 # .float -18.0
   .incbin "ovl2.raw.bin", 0x579FC, 0x8
 
-glabel D_ovl2_8012DE94
+glabel efParticle_DamageSpawnMDust_Angles
   /* 57A04 0A9694 8012DE94 */
   .4byte 0xc1900000 # .float -18.0
 
@@ -7023,22 +7023,22 @@ glabel efParticle_DamageNormalHeavy_Color2G
 glabel efParticle_DamageNormalHeavy_Color2B
   .incbin "ovl2.raw.bin", 0x57A30, 0x8
 
-glabel D_ovl2_8012DEC8
+glabel efParticle_ImpactSW_PrimColorR
   .incbin "ovl2.raw.bin", 0x57A38, 0x8
 
-glabel D_ovl2_8012DED0
+glabel efParticle_ImpactSW_PrimColorG
   .incbin "ovl2.raw.bin", 0x57A40, 0x8
 
-glabel D_ovl2_8012DED8
+glabel efParticle_ImpactSW_PrimColorB
   .incbin "ovl2.raw.bin", 0x57A48, 0x8
 
-glabel D_ovl2_8012DEE0
+glabel efParticle_ImpactSW_EnvColorR
   .incbin "ovl2.raw.bin", 0x57A50, 0x8
 
-glabel D_ovl2_8012DEE8
+glabel efParticle_ImpactSW_EnvColorG
   .incbin "ovl2.raw.bin", 0x57A58, 0x8
 
-glabel D_ovl2_8012DEF0
+glabel efParticle_ImpactSW_EnvColorB
   .incbin "ovl2.raw.bin", 0x57A60, 0x8
 
 glabel D_ovl2_8012DEF8
@@ -7111,15 +7111,15 @@ glabel D_ovl2_8012DFC4
   .incbin "ovl2.raw.bin", 0x57B3C, 0x8
 
 glabel jtbl_ovl2_8012DFD4
-  /* 57B44 0A97D4 8012DFD4 */  .4byte jtgt_ovl2_800FFCA4
-  /* 57B48 0A97D8 8012DFD8 */  .4byte jtgt_ovl2_800FFB74
+  /* 57B44 0A97D4 8012DFD4 */  .4byte efParticle_ImpactSW_ProcUpdate
+  /* 57B48 0A97D8 8012DFD8 */  .4byte efParticle_ImpactSW_ProcRender
   .incbin "ovl2.raw.bin", 0x57B4C, 0x10
 
 glabel D_ovl2_8012DFEC
   .incbin "ovl2.raw.bin", 0x57B5C, 0x4
   /* 57B60 0A97F0 8012DFF0 */  .4byte D_ovl2_801313B0
   .incbin "ovl2.raw.bin", 0x57B64, 0x8
-  /* 57B6C 0A97FC 8012DFFC */  .4byte func_ovl2_800FFE08
+  /* 57B6C 0A97FC 8012DFFC */  .4byte efParticle_StarRodSpark_ProcUpdate
   /* 57B70 0A9800 8012E000 */  .4byte func_ovl0_800CB4B0
   .incbin "ovl2.raw.bin", 0x57B74, 0x10
 
@@ -7127,7 +7127,7 @@ glabel D_ovl2_8012E014
   .incbin "ovl2.raw.bin", 0x57B84, 0x4
   /* 57B88 0A9818 8012E018 */  .4byte D_ovl2_801313B0
   .incbin "ovl2.raw.bin", 0x57B8C, 0x8
-  /* 57B94 0A9824 8012E024 */  .4byte func_ovl2_800FFF74
+  /* 57B94 0A9824 8012E024 */  .4byte efParticle_DamageFlySparks_ProcUpdate
   /* 57B98 0A9828 8012E028 */  .4byte func_ovl0_800CB4B0
   .incbin "ovl2.raw.bin", 0x57B9C, 0x10
 
@@ -7135,14 +7135,14 @@ glabel D_ovl2_8012E03C
   .incbin "ovl2.raw.bin", 0x57BAC, 0x4
   /* 57BB0 0A9840 8012E040 */  .4byte D_ovl2_801313B0
   .incbin "ovl2.raw.bin", 0x57BB4, 0x8
-  /* 57BBC 0A984C 8012E04C */  .4byte func_ovl2_80100030
+  /* 57BBC 0A984C 8012E04C */  .4byte efParticle_DamageSpawnSparks_ProcUpdate
   .incbin "ovl2.raw.bin", 0x57BC0, 0x14
 
 glabel D_ovl2_8012E064
   .incbin "ovl2.raw.bin", 0x57BD4, 0x4
   /* 57BD8 0A9868 8012E068 */  .4byte D_ovl2_801313B0
   .incbin "ovl2.raw.bin", 0x57BDC, 0x8
-  /* 57BE4 0A9874 8012E074 */  .4byte func_ovl2_800FFF74
+  /* 57BE4 0A9874 8012E074 */  .4byte efParticle_DamageFlySparks_ProcUpdate
   /* 57BE8 0A9878 8012E078 */  .4byte func_80014768
   .incbin "ovl2.raw.bin", 0x57BEC, 0x10
 
@@ -7150,7 +7150,7 @@ glabel D_ovl2_8012E08C
   .incbin "ovl2.raw.bin", 0x57BFC, 0x4
   /* 57C00 0A9890 8012E090 */  .4byte D_ovl2_801313B0
   .incbin "ovl2.raw.bin", 0x57C04, 0x8
-  /* 57C0C 0A989C 8012E09C */  .4byte func_ovl2_80100258
+  /* 57C0C 0A989C 8012E09C */  .4byte efParticle_DamageSpawnMDust_ProcUpdate
   .incbin "ovl2.raw.bin", 0x57C10, 0x14
 
 glabel D_ovl2_8012E0B4

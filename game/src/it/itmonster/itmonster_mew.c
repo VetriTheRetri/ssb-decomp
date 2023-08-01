@@ -30,7 +30,7 @@ void func_ovl3_8017EC84(GObj *item_gobj)
 
     ap->it_multi = ITMEW_LIFETIME;
 
-    if (rand_u16_range(2) != 0)
+    if (lbRandom_GetIntRange(2) != 0)
     {
         ap->phys_info.vel_air.x = ITMEW_START_VEL_X;
     }

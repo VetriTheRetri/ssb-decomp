@@ -66,7 +66,7 @@ bool32 jtgt_ovl3_8017E8CC(GObj *item_gobj)
     {
         ap->phys_info.vel_air.y = ITTOSAKINTO_FLAP_VEL_Y;
 
-        if (rand_u16_range(2) != 0)
+        if (lbRandom_GetIntRange(2) != 0)
         {
             ap->phys_info.vel_air.x = -ap->phys_info.vel_air.x;
         }

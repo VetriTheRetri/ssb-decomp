@@ -45,7 +45,7 @@ glabel func_ovl0_800CEC34
   /* 04A6A8 800CECC8 4618C182 */     mul.s $f6, $f24, $f24
   /* 04A6AC 800CECCC 0C00CD44 */       jal sqrtf
   /* 04A6B0 800CECD0 46062300 */     add.s $f12, $f4, $f6
-  /* 04A6B4 800CECD4 0C006252 */       jal rand_f32
+  /* 04A6B4 800CECD4 0C006252 */       jal lbRandom_GetFloat
   /* 04A6B8 800CECD8 E7A0005C */      swc1 $f0, 0x5c($sp)
   /* 04A6BC 800CECDC 3C01800D */       lui $at, %hi(D_ovl0_800D5FC0)
   /* 04A6C0 800CECE0 C4285FC0 */      lwc1 $f8, %lo(D_ovl0_800D5FC0)($at)

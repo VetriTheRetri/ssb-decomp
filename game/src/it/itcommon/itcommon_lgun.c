@@ -230,7 +230,7 @@ GObj* itCommon_LGun_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags
 
         ip->it_multi = ITLGUN_AMMO_MAX;
 
-        DObjGetStruct(item_gobj)->rotate.y = (rand_u16() & 1) ? F_DEG_TO_RAD(90.0F) : F_DEG_TO_RAD(-90.0F); // HALF_PI32, -HALF_PI32
+        DObjGetStruct(item_gobj)->rotate.y = (lbRandom_GetShort() & 1) ? F_DEG_TO_RAD(90.0F) : F_DEG_TO_RAD(-90.0F); // HALF_PI32, -HALF_PI32
 
         ip->is_unused_item_bool = TRUE;
 

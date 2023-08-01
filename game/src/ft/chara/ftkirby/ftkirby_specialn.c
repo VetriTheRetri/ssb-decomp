@@ -960,7 +960,7 @@ void ftKirby_SpecialN_DamageCheckLoseCopy(GObj *fighter_gobj)
         )                                                   &&
         (fp->fighter_vars.kirby.copy_id != Ft_Kind_Kirby)   &&
         (fp->fighter_vars.kirby.is_ignore_losecopy == FALSE) &&
-        (rand_f32() < FTKIRBY_COPYDAMAGE_LOSECOPY_RANDOM)
+        (lbRandom_GetFloat() < FTKIRBY_COPYDAMAGE_LOSECOPY_RANDOM)
     )
     {
         ftKirby_SpecialN_LoseCopy(fighter_gobj);

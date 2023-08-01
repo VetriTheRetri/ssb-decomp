@@ -415,7 +415,7 @@ void ftCommon_ThrownStar_ProcMap(GObj *fighter_gobj)
             fp->command_vars.flags.flag1 = 0;
         }
         efParticle_Quake_MakeEffect(2);
-        func_ovl2_800FFD58(&pos, 4, atan2f(-angle->x, angle->y));
+        efParticle_ImpactSW_MakeEffect(&pos, 4, atan2f(-angle->x, angle->y));
     }
 }
 

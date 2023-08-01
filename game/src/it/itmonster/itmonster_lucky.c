@@ -122,8 +122,8 @@ bool32 itMBLucky_GSpawn_ProcUpdate(GObj *lucky_gobj)
             {
                 pos = joint->translate;
 
-                vel.x = (rand_f32() * ITMBLUCKY_EGG_SPAWN_BASE_VEL) + ITMBLUCKY_EGG_SPAWN_ADD_VEL_X;
-                vel.y = (rand_f32() * ITMBLUCKY_EGG_SPAWN_BASE_VEL) + ITMBLUCKY_EGG_SPAWN_ADD_VEL_Y;
+                vel.x = (lbRandom_GetFloat() * ITMBLUCKY_EGG_SPAWN_BASE_VEL) + ITMBLUCKY_EGG_SPAWN_ADD_VEL_X;
+                vel.y = (lbRandom_GetFloat() * ITMBLUCKY_EGG_SPAWN_BASE_VEL) + ITMBLUCKY_EGG_SPAWN_ADD_VEL_Y;
                 vel.z = 0.0F;
 
                 egg_gobj = itManager_MakeItemSetupCommon(lucky_gobj, It_Kind_Egg, &pos, &vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));

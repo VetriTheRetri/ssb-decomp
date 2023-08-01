@@ -1521,7 +1521,7 @@ glabel func_ovl31_80132EA8
   /* 1521AC 8013300C 3C038014 */       lui $v1, 0x8014
   /* 1521B0 80133010 17210005 */       bne $t9, $at, .L80133028
   /* 1521B4 80133014 00000000 */       nop 
-  /* 1521B8 80133018 0C006265 */       jal rand_u16_range
+  /* 1521B8 80133018 0C006265 */       jal lbRandom_GetIntRange
   /* 1521BC 8013301C 24040004 */     addiu $a0, $zero, 4
   /* 1521C0 80133020 10000012 */         b .L8013306C
   /* 1521C4 80133024 AFA20098 */        sw $v0, 0x98($sp)
@@ -1834,14 +1834,14 @@ glabel func_ovl31_8013345C
   /* 152624 80133484 ADD80004 */        sw $t8, 4($t6)
   /* 152628 80133488 14810007 */       bne $a0, $at, .L801334A8
   /* 15262C 8013348C ADD90008 */        sw $t9, 8($t6)
-  /* 152630 80133490 0C006265 */       jal rand_u16_range
+  /* 152630 80133490 0C006265 */       jal lbRandom_GetIntRange
   /* 152634 80133494 24040002 */     addiu $a0, $zero, 2
   /* 152638 80133498 00024080 */       sll $t0, $v0, 2
   /* 15263C 8013349C 03A81021 */      addu $v0, $sp, $t0
   /* 152640 801334A0 10000006 */         b .L801334BC
   /* 152644 801334A4 8C42001C */        lw $v0, 0x1c($v0)
   .L801334A8:
-  /* 152648 801334A8 0C006265 */       jal rand_u16_range
+  /* 152648 801334A8 0C006265 */       jal lbRandom_GetIntRange
   /* 15264C 801334AC 24040003 */     addiu $a0, $zero, 3
   /* 152650 801334B0 00024880 */       sll $t1, $v0, 2
   /* 152654 801334B4 03A91021 */      addu $v0, $sp, $t1
@@ -8074,7 +8074,7 @@ glabel func_ovl31_80138B70
   /* 157EBC 80138D1C 00002825 */        or $a1, $zero, $zero
   /* 157EC0 80138D20 0C03504C */       jal func_ovl0_800D4130
   /* 157EC4 80138D24 2406000A */     addiu $a2, $zero, 0xa
-  /* 157EC8 80138D28 0C006265 */       jal rand_u16_range
+  /* 157EC8 80138D28 0C006265 */       jal lbRandom_GetIntRange
   /* 157ECC 80138D2C 2404000B */     addiu $a0, $zero, 0xb
   /* 157ED0 80138D30 3C19800D */       lui $t9, %hi(func_ovl0_800D42C8)
   /* 157ED4 80138D34 273942C8 */     addiu $t9, $t9, %lo(func_ovl0_800D42C8)

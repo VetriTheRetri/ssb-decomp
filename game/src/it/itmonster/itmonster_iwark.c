@@ -14,9 +14,9 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
         GObj *rock_gobj;
         Vec3f pos = joint->translate;
 
-        pos.x += (ITIWARK_ROCK_SPAWN_OFF_X_MUL * rand_f32()) + ITIWARK_ROCK_SPAWN_OFF_X_ADD;
+        pos.x += (ITIWARK_ROCK_SPAWN_OFF_X_MUL * lbRandom_GetFloat()) + ITIWARK_ROCK_SPAWN_OFF_X_ADD;
 
-        rock_gobj = func_ovl3_8017DF28(iwark_gobj, &pos, rand_u16_range(WPIWARK_ROCK_RANDOM_VEL_MAX));
+        rock_gobj = func_ovl3_8017DF28(iwark_gobj, &pos, lbRandom_GetIntRange(WPIWARK_ROCK_RANDOM_VEL_MAX));
 
         if (rock_gobj != NULL)
         {
@@ -30,7 +30,7 @@ void func_ovl3_8017D740(GObj *iwark_gobj)
             {
                 ip->weapon_vars.rock.unk_0xC = -1;
             }
-            ap->item_vars.iwark.rock_spawn_wait = rand_u16_range(ITIWARK_ROCK_SPAWN_WAIT_MAX) + ITIWARK_ROCK_SPAWN_WAIT_MIN;
+            ap->item_vars.iwark.rock_spawn_wait = lbRandom_GetIntRange(ITIWARK_ROCK_SPAWN_WAIT_MAX) + ITIWARK_ROCK_SPAWN_WAIT_MIN;
         }
     }
 }
@@ -92,7 +92,7 @@ void func_ovl3_8017D948(GObj *item_gobj)
 
     ap->phys_info.vel_air.y = ITIWARK_FLY_VEL_Y;
 
-    ap->item_vars.iwark.rock_timer1 = rand_u16_range(ITIWARK_ROCK_SPAWN_COUNT_MAX) + ITIWARK_ROCK_SPAWN_COUNT_MIN;
+    ap->item_vars.iwark.rock_timer1 = lbRandom_GetIntRange(ITIWARK_ROCK_SPAWN_COUNT_MAX) + ITIWARK_ROCK_SPAWN_COUNT_MIN;
     ap->item_vars.iwark.rock_timer2 = ap->item_vars.iwark.rock_timer1;
     ap->item_vars.iwark.rock_spawn_count = 0;
     ap->item_vars.iwark.rock_spawn_wait = 0;
@@ -341,7 +341,7 @@ GObj *func_ovl3_8017DF28(GObj *spawn_gobj, Vec3f *pos, u8 random)
         ip->phys_info.vel_air.y = vel_y;
     }
 
-    if (rand_u16_range(2) == 0)
+    if (lbRandom_GetIntRange(2) == 0)
     {
         ip->lr = LEFT;
     }

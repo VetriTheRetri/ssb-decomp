@@ -178,7 +178,7 @@ GObj* itGround_Hitokage_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 f
 
         ip->is_allow_knockback = TRUE;
 
-        ip->item_vars.hitokage.flags = rand_u16_range(ITYCITYMONSTER_WEAPON_ALL + 1);
+        ip->item_vars.hitokage.flags = lbRandom_GetIntRange(ITYCITYMONSTER_WEAPON_ALL + 1);
 
         if ((grYamabuki_MonsterFlag_Prev == ip->item_vars.hitokage.flags) || (ip->item_vars.hitokage.flags & grYamabuki_MonsterFlag_Prev))
         {

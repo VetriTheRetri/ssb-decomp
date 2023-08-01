@@ -122,10 +122,10 @@ glabel func_ovl64_8018D220
   /* 18BF60 8018D220 27BDFFD8 */     addiu $sp, $sp, -0x28
   /* 18BF64 8018D224 AFBF001C */        sw $ra, 0x1c($sp)
   /* 18BF68 8018D228 AFA40028 */        sw $a0, 0x28($sp)
-  /* 18BF6C 8018D22C 0C006265 */       jal rand_u16_range
+  /* 18BF6C 8018D22C 0C006265 */       jal lbRandom_GetIntRange
   /* 18BF70 8018D230 24040006 */     addiu $a0, $zero, 6
   /* 18BF74 8018D234 AFA20020 */        sw $v0, 0x20($sp)
-  /* 18BF78 8018D238 0C006265 */       jal rand_u16_range
+  /* 18BF78 8018D238 0C006265 */       jal lbRandom_GetIntRange
   /* 18BF7C 8018D23C 24040005 */     addiu $a0, $zero, 5
   /* 18BF80 8018D240 3C018019 */       lui $at, %hi(D_ovl64_8018E2E0)
   /* 18BF84 8018D244 C420E2E0 */      lwc1 $f0, %lo(D_ovl64_8018E2E0)($at)
@@ -492,7 +492,7 @@ glabel func_ovl64_8018D758
   /* 18C4A0 8018D760 240E0008 */     addiu $t6, $zero, 8
   /* 18C4A4 8018D764 AFB00018 */        sw $s0, 0x18($sp)
   /* 18C4A8 8018D768 AFA50044 */        sw $a1, 0x44($sp)
-  /* 18C4AC 8018D76C 0C006265 */       jal rand_u16_range
+  /* 18C4AC 8018D76C 0C006265 */       jal lbRandom_GetIntRange
   /* 18C4B0 8018D770 01C42023 */      subu $a0, $t6, $a0
   /* 18C4B4 8018D774 3C048019 */       lui $a0, %hi(D_ovl64_8018E170)
   /* 18C4B8 8018D778 3C058019 */       lui $a1, %hi(D_ovl64_8018E4F0)
@@ -615,7 +615,7 @@ glabel func_ovl64_8018D8C0
   /* 18C640 8018D900 0C0635FF */       jal func_ovl64_8018D7FC
   /* 18C644 8018D904 AFA20018 */        sw $v0, 0x18($sp)
   /* 18C648 8018D908 8FAE0018 */        lw $t6, 0x18($sp)
-  /* 18C64C 8018D90C 0C006265 */       jal rand_u16_range
+  /* 18C64C 8018D90C 0C006265 */       jal lbRandom_GetIntRange
   /* 18C650 8018D910 01C22023 */      subu $a0, $t6, $v0
   /* 18C654 8018D914 3C058019 */       lui $a1, %hi(D_ovl64_8018E4E4)
   /* 18C658 8018D918 94A5E4E4 */       lhu $a1, %lo(D_ovl64_8018E4E4)($a1)
@@ -640,12 +640,12 @@ glabel func_ovl64_8018D954
   /* 18C698 8018D958 28810002 */      slti $at, $a0, 2
   /* 18C69C 8018D95C 10200005 */      beqz $at, .L8018D974
   /* 18C6A0 8018D960 AFBF0014 */        sw $ra, 0x14($sp)
-  /* 18C6A4 8018D964 0C006265 */       jal rand_u16_range
+  /* 18C6A4 8018D964 0C006265 */       jal lbRandom_GetIntRange
   /* 18C6A8 8018D968 2404001E */     addiu $a0, $zero, 0x1e
   /* 18C6AC 8018D96C 10000005 */         b .L8018D984
   /* 18C6B0 8018D970 8FBF0014 */        lw $ra, 0x14($sp)
   .L8018D974:
-  /* 18C6B4 8018D974 0C006265 */       jal rand_u16_range
+  /* 18C6B4 8018D974 0C006265 */       jal lbRandom_GetIntRange
   /* 18C6B8 8018D978 2404003C */     addiu $a0, $zero, 0x3c
   /* 18C6BC 8018D97C 24420028 */     addiu $v0, $v0, 0x28
   /* 18C6C0 8018D980 8FBF0014 */        lw $ra, 0x14($sp)

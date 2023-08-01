@@ -956,7 +956,7 @@ struct ftAttributes
     f32 shadow_size;
     f32 jostle_width; // ???
     f32 jostle_x;
-    s32 unk_ftca_0x88;
+    bool32 is_metallic; // So far only seen this used to determine whether the character makes blue sparks or gray metal dust particles when hit; used by Metal Mario and Samus
     f32 vs_pause_zoom;
     f32 cam_offset_y;
     f32 cam_zoom;
@@ -997,16 +997,6 @@ struct ftAttributes
     u32 is_have_specialairlw : 1;
     u32 is_have_catch : 1;   // Whether fighter has a grab
     u32 is_have_voice : 1;
-    // u32 catch_mask_b22 : 1;
-    // u32 catch_mask_b23 : 1;
-    // u32 catch_mask_b24 : 1;
-    // u32 catch_mask_b25 : 1;
-    // u32 catch_mask_b26 : 1;
-    // u32 catch_mask_b27 : 1;
-    // u32 catch_mask_b28 : 1;
-    // u32 catch_mask_b29 : 1;
-    // u32 catch_mask_b30 : 1;
-    // u32 catch_mask_b31 : 1;
     ftHurtboxDesc fighter_hurt_desc[FTPARTS_HURT_NUM_MAX];
     s32 unk_ftca_0x290;
     s32 unk_ftca_0x294;

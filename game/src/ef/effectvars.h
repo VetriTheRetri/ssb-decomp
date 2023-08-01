@@ -62,6 +62,23 @@
 #define EFPART_DAMAGESPAWNORBS_ANGLE_ADD1 F_DEG_TO_RAD(-30.0F)
 #define EFPART_DAMAGESPAWNORBS_ANGLE_ADD2 F_DEG_TO_RAD(90.0F)
 
+#define EFPART_STARRODSPARK_ADD_TIMER 62
+#define EFPART_STARRODSPARK_SCALE 0.75F
+#define EFPART_STARRODSPARK_VEL_BASE 25.0F
+#define EFPART_STARRODSPARK_VEL_ADD (-0.4F)
+
+#define EFPART_DAMAGESPAWNSPARK_LIFETIME 8
+#define EFPART_DAMAGESPAWNSPARK_ADD_TIMER 250
+#define EFPART_DAMAGESPAWNSPARK_LIFETIME_MOD 4
+#define EFPART_DAMAGESPAWNSPARK_VEL_BASE 50.0F
+#define EFPART_DAMAGESPAWNSPARK_VEL_ADD 0.004F
+
+#define EFPART_DAMAGESPAWNMDUST_LIFETIME 8
+#define EFPART_DAMAGESPAWNMDUST_ADD_TIMER 250
+#define EFPART_DAMAGESPAWNMDUST_LIFETIME_MOD 4
+#define EFPART_DAMAGESPAWNMDUST_VEL_BASE 50.0F
+#define EFPART_DAMAGESPAWNMDUST_VEL_ADD 0.004F
+
 typedef struct efVars_BoxSmash
 {
 	s32 lifetime;
@@ -125,5 +142,50 @@ typedef struct efVars_DamageSpawnOrbs
     Vec3f pos;
 
 } efVars_DamageSpawnOrbs;
+
+typedef struct efVars_ImpactSW
+{
+    u8 index;
+    f32 alpha;
+    f32 decay;
+
+} efVars_ImpactSW;
+
+typedef struct efVars_StarRodSpark
+{
+    Vec3f vel, add;
+    s32 add_timer;
+
+} efVars_StarRodSpark;
+
+typedef struct efVars_DamageFlySpark
+{
+    Vec3f vel, add;
+    s32 add_timer;
+
+} efVars_DamageFlySpark;
+
+typedef struct efVars_DamageSpawnSpark
+{
+    s32 lifetime;
+    Vec3f pos;
+    s32 lr;
+
+} efVars_DamageSpawnSpark;
+
+typedef struct efVars_DamageFlyMDust
+{
+    Vec3f vel, add;
+    s32 add_timer;
+
+} efVars_DamageFlyMDust;
+
+typedef struct efVars_DamageSpawnMDust
+{
+    s32 lifetime;
+    Vec3f pos;
+    s32 lr;
+
+} efVars_DamageSpawnMDust;
 
 #endif

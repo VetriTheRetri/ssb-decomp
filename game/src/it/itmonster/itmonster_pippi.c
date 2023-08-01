@@ -37,13 +37,13 @@ void func_ovl3_80183210(GObj *item_gobj)
     itStruct *ap = itGetStruct(item_gobj);
     DObj *joint = DObjGetStruct(item_gobj);
 
-    index = rand_u16_range(It_Kind_MbMonsterMax - It_Kind_MbMonsterStart);
+    index = lbRandom_GetIntRange(It_Kind_MbMonsterMax - It_Kind_MbMonsterStart);
 
     it_kind = index + It_Kind_MbMonsterStart;
 
     if ((index == (It_Kind_Spear - It_Kind_MbMonsterStart)) || (it_kind == It_Kind_Kamex))
     {
-        if (rand_u16_range(2) == 0)
+        if (lbRandom_GetIntRange(2) == 0)
         {
             joint->rotate.y = PI32;
 

@@ -586,7 +586,7 @@ bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
             }
             if (pos->y > gpGroundInfo->unk_bound_top)
             {
-                if (rand_f32() < 0.16666667F)
+                if (lbRandom_GetFloat() < 0.16666667F)
                 {
                     ftCommon_DeadUpFall_SetStatus(fighter_gobj);
 
@@ -617,7 +617,7 @@ bool32 ftCommon_Dead_CheckInterruptCommon(GObj *fighter_gobj)
         }
         else if (gpGroundInfo->blastzone_top < pos->y)
         {
-            if (rand_f32() < 0.16666667F)
+            if (lbRandom_GetFloat() < 0.16666667F)
             {
                 ftCommon_DeadUpFall_SetStatus(fighter_gobj);
             }

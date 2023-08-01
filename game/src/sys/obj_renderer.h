@@ -7,7 +7,9 @@
 #include <PR/mbi.h>
 #include <PR/ultratypes.h>
 
-#define hal_matrix_store_gbi(mtx_store, mtx_heap) \
+extern Gfx *gpDisplayListHead[4];
+
+#define hlMatrixStoreGBI(mtx_store, mtx_heap) \
 (mtx_store.gbi = mtx_heap.ptr, mtx_heap.ptr = (Mtx*)mtx_heap.ptr + 1) \
 
 // should be a concrete pointer type

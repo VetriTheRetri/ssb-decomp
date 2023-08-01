@@ -264,10 +264,10 @@ bool32 wpStarRod_Star_ProcUpdate(GObj *weapon_gobj)
     if (wp->weapon_vars.star.lifetime % 2)
     {
         pos.x = DObjGetStruct(weapon_gobj)->translate.x;
-        pos.y = (s32)rand_u16_range(250) + (DObjGetStruct(weapon_gobj)->translate.y - 125.0F);
+        pos.y = (s32)lbRandom_GetIntRange(250) + (DObjGetStruct(weapon_gobj)->translate.y - 125.0F);
         pos.z = 0.0F;
 
-        func_ovl2_800FFEA4(&pos, wp->lr * -1.0F, weapon_gobj);
+        efParticle_StarRodSpark_MakeEffect(&pos, wp->lr * -1.0F, weapon_gobj);
     }
     return FALSE;
 }

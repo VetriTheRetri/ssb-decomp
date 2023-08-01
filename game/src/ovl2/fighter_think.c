@@ -267,7 +267,7 @@ void ftScript_ProcessScriptEvent(GObj *fighter_gobj, ftStruct *fp, ftScriptEvent
     case ftScriptEvent_Kind_PlaySmashVoice:
         if (!(fp->is_playing_sfx))
         {
-            ftCommon_PlayVoiceStoreInfo(fp, fp->attributes->smash_sfx[rand_u16_range(ARRAY_COUNT(fp->attributes->smash_sfx))]);
+            ftCommon_PlayVoiceStoreInfo(fp, fp->attributes->smash_sfx[lbRandom_GetIntRange(ARRAY_COUNT(fp->attributes->smash_sfx))]);
 
             ftScriptEventAdvance(p_event, ftScriptEventPlaySFX);
         }
@@ -2010,8 +2010,8 @@ bool32 func_ovl2_800E2CC0(ftStruct *fp, s32 *damage)
     else return FALSE;
 }
 
-static s32 ftHitCollisionLogIndex;
-static ftHitCollisionLog ftHitCollisionLogTable[10];
+s32 ftHitCollisionLogIndex;
+ftHitCollisionLog ftHitCollisionLogTable[10];
 
 void func_ovl2_800E2D44(ftStruct *attacker_fp, ftHitbox *attacker_hit, ftStruct *victim_fp, ftHurtbox *victim_hurt, GObj *attacker_gobj, GObj *victim_gobj)
 {
@@ -2067,13 +2067,13 @@ void func_ovl2_800E2D44(ftStruct *attacker_fp, ftHitbox *attacker_hit, ftStruct 
         }
         else
         {
-            func_ovl2_800F0A90(&sp3C, attacker_hit, victim_hit);
+            func_ovl2_800F0A90(&sp3C, attacker_hit, victim_hurt);
             func_ovl2_80100BF0(&sp3C, damage);
         }
     }
     else
     {
-        func_ovl2_800F0A90(&sp3C, attacker_hit, victim_hit);
+        func_ovl2_800F0A90(&sp3C, attacker_hit, victim_hurt);
         func_ovl2_80100BF0(&sp3C, damage);
     }
     func_ovl2_800E2C24(attacker_fp, attacker_hit);
@@ -2110,7 +2110,7 @@ void func_ovl2_800E2F04(wpStruct *ip, wpHitbox *wp_hit, s32 index, ftStruct *fp,
     }
 }
 
-void func_ovl2_800E3048(wpStruct *ip, wpHitbox *wp_hit, s32 arg2, ftStruct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
+void func_ovl2_800E3048(wpStruct *ip, wpHitbox *wp_hit, s32 hitbox_id, ftStruct *fp, void *arg4, GObj *fighter_gobj, f32 angle, f32 *lr)
 {
     s32 damage = wpMain_GetDamageOutput(ip);
     Vec3f sp30;
@@ -2140,7 +2140,7 @@ void func_ovl2_800E3048(wpStruct *ip, wpHitbox *wp_hit, s32 arg2, ftStruct *fp, 
 
         fp->shield_player = ip->player;
     }
-    func_ovl2_800F0C4C(&sp30, wp_hit, arg2, fighter_gobj, fp->joint[ftParts_YRotN_Joint]);
+    func_ovl2_800F0C4C(&sp30, wp_hit, hitbox_id, fighter_gobj, fp->joint[ftParts_YRotN_Joint]);
     func_ovl2_80100BF0(&sp30, wp_hit->shield_damage + damage);
 }
 
@@ -2548,13 +2548,13 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
     ftAttributes *attributes = this_fp->attributes;
     ftHitCollisionLog *hitlog;
     s32 i, j;
-    f32 var_f20;
+    f32 knockback_temp;
     f32 knockback;
     ftHitbox *ft_hit;
     wpHitbox *wp_hit;
     itHitbox *it_hit;
     Ground_Hit *gr_hit;
-    Vec3f sp84;
+    Vec3f pos;
     s32 damage;
     u8 gr_handicap;
     GObj *attacker_gobj;
@@ -2571,51 +2571,50 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
         case ftHitlog_ObjectClass_Fighter:
             ft_hit = hitlog->attacker_hit;
             attacker_fp = ftGetStruct(hitlog->attacker_gobj);
-            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, ft_hit->damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, attributes->weight, attacker_fp->handicap, this_fp->handicap);
+            knockback_temp = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, ft_hit->damage, ft_hit->knockback_weight, ft_hit->knockback_scale, ft_hit->knockback_base, attributes->weight, attacker_fp->handicap, this_fp->handicap);
 
-            func_ovl2_800F0A90(&sp84, ft_hit, hitlog->victim_hurt);
+            func_ovl2_800F0A90(&pos, ft_hit, hitlog->victim_hurt);
 
             switch (ft_hit->element)
             {
             case gmHitCollision_Element_Fire:
-                efParticle_DamageFire_MakeEffect(&sp84, ft_hit->damage);
+                efParticle_DamageFire_MakeEffect(&pos, ft_hit->damage);
                 break;
 
             case gmHitCollision_Element_Electric:
-                func_ovl2_800FE4EC(&sp84, ft_hit->damage);
+                func_ovl2_800FE4EC(&pos, ft_hit->damage);
                 break;
 
             case gmHitCollision_Element_Coin:
-                func_ovl2_80100ACC(&sp84);
+                func_ovl2_80100ACC(&pos);
                 break;
 
             case gmHitCollision_Element_Slash:
-                efParticle_DamageSlash_MakeEffect(&sp84, ft_hit->damage, func_ovl2_800F0FC0(attacker_fp, ft_hit));
+                efParticle_DamageSlash_MakeEffect(&pos, ft_hit->damage, func_ovl2_800F0FC0(attacker_fp, ft_hit));
                 break;
 
             default:
-                if (var_f20 < 180.0F)
+                if (knockback_temp < 180.0F)
                 {
-                    efParticle_DamageNormalLight_MakeEffect(&sp84, hitlog->attacker_player, ft_hit->damage, 0);
+                    efParticle_DamageNormalLight_MakeEffect(&pos, hitlog->attacker_player, ft_hit->damage, 0);
                 }
-                else efParticle_DamageNormalHeavy_MakeEffect(&sp84, hitlog->attacker_player, ft_hit->damage);
+                else efParticle_DamageNormalHeavy_MakeEffect(&pos, hitlog->attacker_player, ft_hit->damage);
 
-                if (ft_hit->sfx_level != 0)
+                if (ft_hit->sfx_level > 0) // Changed this to > 0 for now, makes a bit more sense to me since it only does this on moves with hit SFX levels greater than weak (0)
                 {
-                    func_ovl2_800FFB38(&sp84);
+                    efParticle_DamageSpawnOrbs_CheckRandomMakeEffect(&pos);
 
-                    switch (this_fp->attributes->unk_ftca_0x88)
+                    switch (this_fp->attributes->is_metallic)
                     {
-                    case 0:
-                        func_ovl2_80100218(&sp84, this_fp->lr);
+                    case FALSE:
+                        efParticle_DamageSpawnSparks_CheckRandomMakeEffect(&pos, this_fp->lr);
                         break;
 
-                    case 1:
-                        func_ovl2_80100440(&sp84, this_fp->lr);
+                    case TRUE:
+                        efParticle_DamageSpawnMDust_CheckRandomMakeEffect(&pos, this_fp->lr);
                         break;
 
-                    default:
-                        break;
+                    // default: break; // This might not be necessary
                     }
                 }
                 break;
@@ -2627,30 +2626,30 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             ip = wpGetStruct(hitlog->attacker_gobj);
             damage = wpMain_GetDamageOutput(ip);
 
-            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, damage, wp_hit->knockback_weight, wp_hit->knockback_scale, wp_hit->knockback_base, attributes->weight, ip->handicap, this_fp->handicap);
+            knockback_temp = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, damage, wp_hit->knockback_weight, wp_hit->knockback_scale, wp_hit->knockback_base, attributes->weight, ip->handicap, this_fp->handicap);
 
             if (ip->is_hitlag_victim)
             {
-                func_ovl2_800F0D24(&sp84, wp_hit, hitlog->hitbox_id, hitlog->victim_hurt);
+                func_ovl2_800F0D24(&pos, wp_hit, hitlog->hitbox_id, hitlog->victim_hurt);
 
                 switch (wp_hit->element)
                 {
                 case gmHitCollision_Element_Fire:
-                    efParticle_DamageFire_MakeEffect(&sp84, damage);
+                    efParticle_DamageFire_MakeEffect(&pos, damage);
                     break;
                 case gmHitCollision_Element_Electric:
-                    func_ovl2_800FE4EC(&sp84, damage);
+                    func_ovl2_800FE4EC(&pos, damage);
                     break;
                 case gmHitCollision_Element_Coin:
-                    func_ovl2_80100ACC(&sp84);
+                    func_ovl2_80100ACC(&pos);
                     break;
 
                 default:
-                    if (var_f20 < 180.0F)
+                    if (knockback_temp < 180.0F)
                     {
-                        efParticle_DamageNormalLight_MakeEffect(&sp84, hitlog->attacker_player, damage, NULL);
+                        efParticle_DamageNormalLight_MakeEffect(&pos, hitlog->attacker_player, damage, NULL);
                     }
-                    else efParticle_DamageNormalHeavy_MakeEffect(&sp84, hitlog->attacker_player, damage);
+                    else efParticle_DamageNormalHeavy_MakeEffect(&pos, hitlog->attacker_player, damage);
 
                     break;
                 }
@@ -2663,31 +2662,32 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
 
             damage = itMain_GetDamageOutput(ap);
 
-            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, attributes->weight, ap->handicap, this_fp->handicap);
+            knockback_temp = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, damage, it_hit->knockback_weight, it_hit->knockback_scale, it_hit->knockback_base, attributes->weight, ap->handicap, this_fp->handicap);
 
             if (ap->is_hitlag_victim)
             {
-                func_ovl2_800F0E08(&sp84, it_hit, hitlog->hitbox_id, hitlog->victim_hurt);
+                func_ovl2_800F0E08(&pos, it_hit, hitlog->hitbox_id, hitlog->victim_hurt);
 
                 switch (it_hit->element)
                 {
                 case gmHitCollision_Element_Fire:
-                    efParticle_DamageFire_MakeEffect(&sp84, damage);
+                    efParticle_DamageFire_MakeEffect(&pos, damage);
                     break;
+
                 case gmHitCollision_Element_Electric:
-                    func_ovl2_800FE4EC(&sp84, damage);
+                    func_ovl2_800FE4EC(&pos, damage);
                     break;
+
                 case gmHitCollision_Element_Coin:
-                    func_ovl2_80100ACC(&sp84);
+                    func_ovl2_80100ACC(&pos);
                     break;
 
                 default:
-                    if (var_f20 < 180.0F)
+                    if (knockback_temp < 180.0F)
                     {
-                        efParticle_DamageNormalLight_MakeEffect(&sp84, hitlog->attacker_player, damage, NULL);
+                        efParticle_DamageNormalLight_MakeEffect(&pos, hitlog->attacker_player, damage, NULL);
                     }
-                    else efParticle_DamageNormalHeavy_MakeEffect(&sp84, hitlog->attacker_player, damage);
-
+                    else efParticle_DamageNormalHeavy_MakeEffect(&pos, hitlog->attacker_player, damage);
                     break;
                 }
             }
@@ -2702,16 +2702,16 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
             }
             else gr_handicap = 9;
 
-            var_f20 = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, gr_hit->damage, gr_hit->knockback_weight, gr_hit->knockback_scale, gr_hit->knockback_base, attributes->weight, gr_handicap, this_fp->handicap);
+            knockback_temp = gmCommonObject_DamageCalcKnockback(this_fp->percent_damage, this_fp->damage_queue, gr_hit->damage, gr_hit->knockback_weight, gr_hit->knockback_scale, gr_hit->knockback_base, attributes->weight, gr_handicap, this_fp->handicap);
 
             break;
 
         default:
             break;
         }
-        if (knockback < var_f20)
+        if (knockback < knockback_temp)
         {
-            knockback = var_f20;
+            knockback = knockback_temp;
 
             j = i;
         }

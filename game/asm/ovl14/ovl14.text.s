@@ -271,7 +271,7 @@ glabel func_ovl14_80131E38
   /* 11BCE8 80131E78 0C04C75D */       jal func_ovl14_80131D74
   /* 11BCEC 80131E7C 9604000A */       lhu $a0, 0xa($s0) # gSceneData + 10
   /* 11BCF0 80131E80 8FAF0024 */        lw $t7, 0x24($sp)
-  /* 11BCF4 80131E84 0C006265 */       jal rand_u16_range
+  /* 11BCF4 80131E84 0C006265 */       jal lbRandom_GetIntRange
   /* 11BCF8 80131E88 01E22023 */      subu $a0, $t7, $v0
   /* 11BCFC 80131E8C 3224FFFF */      andi $a0, $s1, 0xffff
   /* 11BD00 80131E90 9605000A */       lhu $a1, 0xa($s0) # gSceneData + 10
@@ -301,7 +301,7 @@ glabel func_ovl14_80131E38
   /* 11BD5C 80131EEC 1000000E */         b .L80131F28
   /* 11BD60 80131EF0 A20C000E */        sb $t4, 0xe($s0) # gSceneData + 14
   .L80131EF4:
-  /* 11BD64 80131EF4 0C006265 */       jal rand_u16_range
+  /* 11BD64 80131EF4 0C006265 */       jal lbRandom_GetIntRange
   /* 11BD68 80131EF8 00000000 */       nop 
   /* 11BD6C 80131EFC 3224FFFF */      andi $a0, $s1, 0xffff
   /* 11BD70 80131F00 9605000A */       lhu $a1, 0xa($s0) # gSceneData + 10

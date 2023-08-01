@@ -172,7 +172,7 @@ bool32 wpPikachu_ThunderTrail_ProcUpdate(GObj *weapon_gobj)
 
         return TRUE;
     }
-    else DObjGetStruct(weapon_gobj)->mobj->index = rand_u16_range(WPPIKACHUTHUNDER_TEXTURE_COUNT - 1);
+    else DObjGetStruct(weapon_gobj)->mobj->index = lbRandom_GetIntRange(WPPIKACHUTHUNDER_TEXTURE_COUNT - 1);
 
     return FALSE;
 }

@@ -137,7 +137,7 @@ void ftMasterHand_Wait_DecideStatusComputer(GObj *fighter_gobj) // Decide Master
         }
         else
         {
-            random = rand_u16_range(3);
+            random = lbRandom_GetIntRange(3);
 
             var = D_ovl3_80188DEC[fp->fighter_vars.masterhand.boss->status_index * 3 + random];
 
@@ -158,7 +158,7 @@ void ftMasterHand_Wait_DecideStatusComputer(GObj *fighter_gobj) // Decide Master
         }
         else index_ptr = &D_ovl3_80188DDC[var];
 
-        random = D_ovl3_80188DCC[index_ptr->r1 + rand_u16_range(index_ptr->r2)];
+        random = D_ovl3_80188DCC[index_ptr->r1 + lbRandom_GetIntRange(index_ptr->r2)];
 
         fp->fighter_vars.masterhand.boss->status_index = var;
 

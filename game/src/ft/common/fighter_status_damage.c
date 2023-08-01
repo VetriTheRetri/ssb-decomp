@@ -550,7 +550,7 @@ s32 damage_index, s32 element, s32 damage_player_number, s32 arg9, bool32 unk_bo
         {
             status_id_var = status_id_set = ftStatus_Common_DamageFlyTop;
         }
-        else if ((this_fp->percent_damage >= FTCOMMON_DAMAGE_FIGHTER_FLYROLL_DAMAGE_MIN) && (rand_f32() < FTCOMMON_DAMAGE_FIGHTER_FLYROLL_RANDOM_CHANCE))
+        else if ((this_fp->percent_damage >= FTCOMMON_DAMAGE_FIGHTER_FLYROLL_DAMAGE_MIN) && (lbRandom_GetFloat() < FTCOMMON_DAMAGE_FIGHTER_FLYROLL_RANDOM_CHANCE))
         {
             status_id_var = status_id_set = ftStatus_Common_DamageFlyRoll;           
         }
@@ -858,7 +858,7 @@ void ftCommon_WallDamage_SetStatus(GObj *fighter_gobj, Vec3f *angle, Vec3f *pos)
     Vec3f vel_air;
     f32 knockback;
 
-    func_ovl2_800FFD58(pos, 4, atan2f(-angle->x, angle->y));
+    efParticle_ImpactSW_MakeEffect(pos, 4, atan2f(-angle->x, angle->y));
     efParticle_Quake_MakeEffect(2);
 
     vel_air = fp->phys_info.vel_air;

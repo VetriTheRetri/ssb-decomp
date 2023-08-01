@@ -395,11 +395,11 @@ bool32 itGShell_SDefault_ProcHit(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_Normal;
 
-    ip->item_vars.shell.health = rand_u16_range(ITGSHELL_HEALTH_MAX);
+    ip->item_vars.shell.health = lbRandom_GetIntRange(ITGSHELL_HEALTH_MAX);
 
     ip->phys_info.vel_air.y = ITGSHELL_REBOUND_VEL_Y;
 
-    ip->phys_info.vel_air.x = rand_f32() * (-ip->phys_info.vel_air.x * ITGSHELL_REBOUND_MUL_X);
+    ip->phys_info.vel_air.x = lbRandom_GetFloat() * (-ip->phys_info.vel_air.x * ITGSHELL_REBOUND_MUL_X);
 
     itMain_ClearOwnerStats(item_gobj);
     func_ovl3_80178704(item_gobj);

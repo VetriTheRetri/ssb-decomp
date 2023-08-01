@@ -479,7 +479,7 @@ s32 func_ovl3_8017301C(s32 arg0, Unk_8018D048 *arg1, s32 arg2, u32 arg3) // Recu
 
 u8 func_ovl3_80173090(Unk_8018D048 *arg0) // Might actually be raw u8
 {
-    return *(u8*)(func_ovl3_8017301C(rand_u16_range((s32)arg0->unk_0x10), arg0, 0, arg0->unk_0x8) + arg0->unk_0xC);
+    return *(u8*)(func_ovl3_8017301C(lbRandom_GetIntRange((s32)arg0->unk_0x10), arg0, 0, arg0->unk_0x8) + arg0->unk_0xC);
 }
 
 extern intptr_t hal_ld_article_floats;
@@ -551,7 +551,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
     vel.z = 0.0F;
 
     // Is this checking to spawn Mew? Can only spawn once at least one character has been unlocked.
-    if ((gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_NEWCOMERS) && (rand_u16_range(151) == 0) && (gMonsterData.monster_curr != It_Kind_Mew) && (gMonsterData.monster_prev != It_Kind_Mew))
+    if ((gSaveData.unlock_mask & GMSAVE_UNLOCK_MASK_NEWCOMERS) && (lbRandom_GetIntRange(151) == 0) && (gMonsterData.monster_curr != It_Kind_Mew) && (gMonsterData.monster_prev != It_Kind_Mew))
     {
         index = It_Kind_Mew;
     }
@@ -565,7 +565,7 @@ GObj* itMain_CreateMonster(GObj *item_gobj)
                 j++;
             }
         }
-        index = gMonsterData.monster_index[rand_u16_range(gMonsterData.monster_count)];
+        index = gMonsterData.monster_index[lbRandom_GetIntRange(gMonsterData.monster_count)];
     }
     if (gMonsterData.monster_count != 10)
     {

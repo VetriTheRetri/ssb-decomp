@@ -54,5 +54,5 @@ void ftMasterHand_Yubideppou2_SetStatus(GObj *fighter_gobj)
 
     fp = ftGetStruct(fighter_gobj);
 
-    fp->status_vars.masterhand.yubideppou.wait_timer = rand_u16_range(120) + 60;
+    fp->status_vars.masterhand.yubideppou.wait_timer = lbRandom_GetIntRange(120) + 60;
 }
