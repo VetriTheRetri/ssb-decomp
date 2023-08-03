@@ -225,11 +225,11 @@ void ftNess_SpecialLw_InitVars(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->is_playing_effect))
+    if (!(fp->is_persist_effect))
     {
         if (func_ovl2_801025D8(fighter_gobj) != NULL)
         {
-            fp->is_playing_effect = TRUE;
+            fp->is_persist_effect = TRUE;
         }
     }
     fp->is_absorb = TRUE;

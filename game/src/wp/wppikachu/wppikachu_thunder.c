@@ -108,7 +108,7 @@ bool32 wpPikachu_ThunderHead_ProcMap(GObj *weapon_gobj)
     {
         wpPikachu_ThunderHead_SetDestroy(weapon_gobj, TRUE);
         efParticle_Quake_MakeEffect(1);
-        func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
+        efParticle_SparkleWhite_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
         return TRUE;
     }

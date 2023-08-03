@@ -337,7 +337,7 @@ GObj* func_ovl3_80182530(GObj *item_gobj, Vec3f *pos)
 
     joint->translate = *pos;
 
-    func_ovl2_8010066C(&joint->translate, 1.0F);
+    efParticle_SparkleWhiteScale_MakeEffect(&joint->translate, 1.0F);
 
     ip->lifetime = ITSTARMIE_SWIFT_LIFETIME;
 

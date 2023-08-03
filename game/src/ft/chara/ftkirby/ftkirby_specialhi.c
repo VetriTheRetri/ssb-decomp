@@ -10,7 +10,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
         switch (fp->command_vars.flags.flag1)
         {
         case 1:
-            if (fp->is_playing_effect)
+            if (fp->is_persist_effect)
             {
                 ftCommon_ProcStopGFX(fighter_gobj);
                 fp->command_vars.flags.flag1 = 0;
@@ -28,7 +28,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     switch (fp->command_vars.flags.flag2)
     {
     case 0:
-        if (fp->is_playing_effect)
+        if (fp->is_persist_effect)
         {
             ftCommon_ProcStopGFX(fighter_gobj);
             fp->command_vars.flags.flag2 = 0;
@@ -38,7 +38,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 2:
         if (func_ovl2_80102508(fighter_gobj) != NULL)
         {
-            fp->is_playing_effect = TRUE;
+            fp->is_persist_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -46,7 +46,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 3:
         if (func_ovl2_80102418(fighter_gobj) != NULL)
         {
-            fp->is_playing_effect = TRUE;
+            fp->is_persist_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -54,7 +54,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 4:
         if (func_ovl2_80102490(fighter_gobj) != NULL)
         {
-            fp->is_playing_effect = TRUE;
+            fp->is_persist_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;
@@ -62,7 +62,7 @@ void ftKirby_SpecialHi_UpdateGFX(GObj *fighter_gobj)
     case 5:
         if (func_ovl2_80102560(fighter_gobj) != NULL)
         {
-            fp->is_playing_effect = TRUE;
+            fp->is_persist_effect = TRUE;
             fp->command_vars.flags.flag2 = 0;
         }
         break;

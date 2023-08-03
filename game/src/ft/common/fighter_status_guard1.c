@@ -95,7 +95,7 @@ void ftCommon_Guard_UpdateShieldVars(GObj *fighter_gobj)
                 ftCommon_ResetModelPartRenderAll(fighter_gobj);
                 ftCommon_GuardOff_SetHitStatusYoshi(fighter_gobj);
 
-                if (fp->is_playing_effect)
+                if (fp->is_persist_effect)
                 {
                     Vec3f egg_gfx_offset = Fighter_Yoshi_GuardOffGfxOffset;
 
@@ -272,7 +272,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
 
             if (joint != NULL)
             {
-                if ((f32)FLOAT_NEG_MAX != joint->dobj_f0)
+                if (joint->dobj_f0 != (f32)FLOAT_NEG_MAX)
                 {
                     func_ovl3_80148664(joint, unk_vec, fp->status_vars.common.guard.shield_rotate_range, scale);
                     joint->dobj_f0 = (f32)FLOAT_NEG_MAX;
@@ -282,7 +282,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
         }
         joint = fp->joint[ftParts_YRotN_Joint];
 
-        if ((f32)FLOAT_NEG_MAX != joint->dobj_f0)
+        if (joint->dobj_f0 != (f32)FLOAT_NEG_MAX)
         {
             func_ovl3_80148664(joint, unk_vec, fp->status_vars.common.guard.shield_rotate_range, &fp->attributes->unk_0x324[3]);
 
@@ -297,7 +297,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
 
             if (joint != NULL)
             {
-                if ((f32)FLOAT_NEG_MAX != joint->dobj_f0)
+                if (joint->dobj_f0 != (f32)FLOAT_NEG_MAX)
                 {
                     func_ovl3_801485CC(joint, unk_vec, fp->status_vars.common.guard.shield_rotate_range);
 
@@ -308,7 +308,7 @@ void func_ovl3_8014889C(GObj *fighter_gobj)
         }
         joint = fp->joint[ftParts_YRotN_Joint];
 
-        if ((f32)FLOAT_NEG_MAX != joint->dobj_f0)
+        if (joint->dobj_f0 != (f32)FLOAT_NEG_MAX)
         {
             func_ovl3_801485CC(joint, unk_vec, fp->status_vars.common.guard.shield_rotate_range);
 
@@ -346,7 +346,7 @@ void func_ovl3_80148A88(GObj *fighter_gobj)
             {
                 if (fp->ft_kind == Ft_Kind_Yoshi)
                 {
-                    fp->status_vars.common.guard.effect_gobj = func_ovl2_80101374(fighter_gobj);
+                    fp->status_vars.common.guard.effect_gobj = efParticle_YoshiShield_MakeEffect(fighter_gobj);
 
                     ftCommon_HideModelPartAll(fighter_gobj);
                     ftCommon_Guard_SetHitStatusYoshi(fighter_gobj);
@@ -374,7 +374,7 @@ void func_ovl3_80148BFC(GObj *fighter_gobj, s32 slide_frames)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOn, 0.0F, 1.0F, 0U);
+    ftStatus_Update(fighter_gobj, ftStatus_Common_GuardOn, 0.0F, 1.0F, FTSTATUPDATE_NONE_PRESERVE);
     ftAnim_Update(fighter_gobj);
 
     if (fp->shield_health != 0)
@@ -385,18 +385,19 @@ void func_ovl3_80148BFC(GObj *fighter_gobj, s32 slide_frames)
         }
         else
         {
-            fp->status_vars.common.guard.effect_gobj = func_ovl2_80101108(fighter_gobj);
+            fp->status_vars.common.guard.effect_gobj = efParticle_Shield_MakeEffect(fighter_gobj);
             fp->is_shield = TRUE;
         }
     }
     func_ovl3_80148714(fighter_gobj);
+
     fp->status_vars.common.guard.release_lag = FTCOMMON_GUARD_RELEASE_LAG;
     fp->status_vars.common.guard.shield_decay_wait = FTCOMMON_GUARD_DECAY_INT;
     fp->status_vars.common.guard.is_release = FALSE;
     fp->status_vars.common.guard.slide_frames = slide_frames;
     fp->status_vars.common.guard.is_setoff = FALSE;
 
-    func_800269C0(0xDU);
+    func_800269C0(gmSound_SFX_GuardOn);
 }
 
 bool32 func_ovl3_80148CBC(GObj *fighter_gobj, s32 slide_frames)

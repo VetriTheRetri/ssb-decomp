@@ -480,7 +480,7 @@ void itBox_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
     ip->phys_info.vel_air.y = 0.0F;
     ip->phys_info.vel_air.z = 0.0F;
 
-    effect_unk = func_ovl2_801005C8(&joint->translate);
+    effect_unk = efParticle_SparkleWhiteMultiExplode_MakeEffect(&joint->translate);
 
     if (effect_unk != NULL)
     {

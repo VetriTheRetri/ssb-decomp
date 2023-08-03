@@ -513,7 +513,7 @@ glabel D_ovl2_80131450
     .space 4
 glabel D_ovl2_80131454
     .space 12
-glabel D_ovl2_80131460
+glabel gpCameraGObj
     .space 4
 glabel D_ovl2_80131464
     .space 4

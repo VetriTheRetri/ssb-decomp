@@ -727,7 +727,7 @@ void itManager_ProcItemMain(GObj *item_gobj)
         {
             if (ap->pickup_wait == 0)
             {
-                func_ovl2_8010066C(&DObjGetStruct(item_gobj)->translate, 1.0F);
+                efParticle_SparkleWhiteScale_MakeEffect(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
                 itMain_DestroyItem(item_gobj);
 
@@ -958,15 +958,19 @@ void itManager_UpdateDamageStatFighter(ftStruct *fp, ftHitbox *ft_hit, itStruct 
         case gmHitCollision_Element_Fire:
             efParticle_DamageFire_MakeEffect(&sp4C, ft_hit->damage);
             break;
+
         case gmHitCollision_Element_Electric:
             func_ovl2_800FE4EC(&sp4C, ft_hit->damage);
             break;
+
         case gmHitCollision_Element_Coin:
-            func_ovl2_80100ACC(&sp4C);
+            efParticle_DamageCoin_MakeEffect(&sp4C);
             break;
+
         case gmHitCollision_Element_Slash:
             efParticle_DamageSlash_MakeEffect(&sp4C, ft_hit->damage, func_ovl2_800F0FC0(fp, ft_hit));
             break;
+
         default:
             efParticle_DamageNormalLight_MakeEffect(&sp4C, fp->player, ft_hit->damage, 0);
             break;
@@ -995,7 +999,7 @@ void itManager_UpdateAttackStatItem(itStruct *this_ip, itHitbox *this_hit, s32 t
         {
             victim_ip->hit_attack_damage = victim_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, victim_hit_damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, victim_hit_damage);
     }
     highest_priority = victim_hit->priority;
 
@@ -1007,7 +1011,7 @@ void itManager_UpdateAttackStatItem(itStruct *this_ip, itHitbox *this_hit, s32 t
         {
             this_ip->hit_attack_damage = this_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, this_hit_damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, this_hit_damage);
     }
 }
 
@@ -1031,7 +1035,7 @@ void itManager_UpdateAttackStatWeapon(wpStruct *wp, wpHitbox *wp_hit, s32 wp_hit
         {
             ip->hit_attack_damage = it_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, it_hit_damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, it_hit_damage);
     }
     highest_priority = it_hit->priority;
 
@@ -1043,7 +1047,7 @@ void itManager_UpdateAttackStatWeapon(wpStruct *wp, wpHitbox *wp_hit, s32 wp_hit
         {
             wp->hit_attack_damage = wp_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, wp_hit_damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, wp_hit_damage);
     }
 }
 
@@ -1138,7 +1142,7 @@ void itManager_UpdateDamageStatItem(itStruct *attack_ip, itHitbox *attack_it_hit
                 func_ovl2_800FE4EC(&sp4C, damage);
                 break;
             case gmHitCollision_Element_Coin:
-                func_ovl2_80100ACC(&sp4C);
+                efParticle_DamageCoin_MakeEffect(&sp4C);
                 break;
 
             default:
@@ -1231,7 +1235,7 @@ void itManager_UpdateDamageStatWeapon(wpStruct *wp, wpHitbox *wp_hit, s32 hitbox
                 break;
 
             case gmHitCollision_Element_Coin:
-                func_ovl2_80100ACC(&sp4C);
+                efParticle_DamageCoin_MakeEffect(&sp4C);
                 break;
 
             default:

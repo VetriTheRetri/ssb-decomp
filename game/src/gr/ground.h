@@ -9,7 +9,8 @@
 
 typedef enum grKind
 {
-    Gr_Kind_Castle, // Peach's Castle
+    Gr_Kind_CommonStart,
+    Gr_Kind_Castle = Gr_Kind_CommonStart, // Peach's Castle
     Gr_Kind_Sector,
     Gr_Kind_Jungle,
     Gr_Kind_Zebes,
@@ -21,11 +22,12 @@ typedef enum grKind
     Gr_Kind_PPPTest1,
     Gr_Kind_PPPTest2,
     Gr_Kind_Explain, // How to Play
-    Gr_Kind_Yoster1P, // Small Yoshi's Island 
+    Gr_Kind_Yoster1P, // Small Yoshi's Island
     Gr_Kind_Crystal, // Meta Crystal
     Gr_Kind_Duel, // Duel Zone
     Gr_Kind_Bonus3, // Race to the Finish
     Gr_Kind_Last, // Final Destination
+    Gr_Kind_CommonEnd = Gr_Kind_Last,
 
     Gr_Kind_Bonus1Start, // Start of Target Test stages
     Gr_Kind_Bonus1Mario = Gr_Kind_Bonus1Start,
@@ -40,6 +42,7 @@ typedef enum grKind
     Gr_Kind_Bonus1Pikachu,
     Gr_Kind_Bonus1Purin,
     Gr_Kind_Bonus1Ness,
+    Gr_Kind_Bonus1End = Gr_Kind_Bonus1Ness,
 
     Gr_Kind_Bonus2Start, // Start of Board the Platforms stages
     Gr_Kind_Bonus2Mario = Gr_Kind_Bonus2Start,
@@ -54,8 +57,7 @@ typedef enum grKind
     Gr_Kind_Bonus2Pikachu,
     Gr_Kind_Bonus2Purin,
     Gr_Kind_Bonus2Ness,
-
-    Gr_Kind_CustomStart // Start of custom stages
+    Gr_Kind_Bonus2End = Gr_Kind_Bonus2Ness
 
 } grKind;
 

@@ -1298,7 +1298,7 @@ void efRunProc(GObj *fighter_gobj, void (*proc)(GObj*, efStruct*))
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    if (fp->is_playing_effect)
+    if (fp->is_persist_effect)
     {
         GObj *effect_gobj = gOMObjCommonLinks[gOMObjLinkIndexEffect];
 
@@ -1320,7 +1320,7 @@ void efRunProc(GObj *fighter_gobj, void (*proc)(GObj*, efStruct*))
 // 0x800E9BE8
 void efDestroyGFX(GObj *effect_gobj, efStruct *ep)
 {
-    efImage *einfo = ep->einfo;
+    efTransform *einfo = ep->einfo;
 
     if (einfo != NULL)
     {
@@ -1337,7 +1337,7 @@ void ftCommon_ProcStopGFX(GObj *fighter_gobj)
 
     efRunProc(fighter_gobj, efDestroyGFX);
 
-    fp->is_playing_effect = FALSE;
+    fp->is_persist_effect = FALSE;
 }
 
 // 0x800E9C78
@@ -1825,7 +1825,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
 
     switch (gfx_id)
     {
-    case 0x49:
+    case Ef_Kind_ChargeSparkle:
         switch (fp->ft_kind)
         {
         case Ft_Kind_Samus:
@@ -1955,8 +1955,8 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         break;
 
     case Ef_Kind_DustExpandLarge:
-        pos.x += ((lbRandom_GetFloat() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
-        pos.y += ((lbRandom_GetFloat() * EFPART_DUSTEXPANDLARGE_OFF_BASE) - EFPART_DUSTEXPANDLARGE_OFF_SUB);
+        pos.x += ((lbRandom_GetFloat() * 160.0F) - 80.0F);
+        pos.y += ((lbRandom_GetFloat() * 160.0F) - 80.0F);
 
         p_effect = efParticle_DustExpandLarge_MakeEffect(&pos);
         break;
@@ -1966,11 +1966,11 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         break;
 
     case Ef_Kind_DustDashSmall:
-        p_effect = efParticle_DustDash_MakeEffect(&pos, lr, EFPART_DUSTDASH_SCALE_SMALL);
+        p_effect = efParticle_DustDash_MakeEffect(&pos, lr, 1.0F);
         break;
 
     case Ef_Kind_DustDashLarge:
-        p_effect = efParticle_DustDash_MakeEffect(&pos, lr, EFPART_DUSTDASH_SCALE_LARGE);
+        p_effect = efParticle_DustDash_MakeEffect(&pos, lr, 1.5F);
         break;
 
     case Ef_Kind_DamageFlyOrbs:
@@ -2005,20 +2005,20 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         p_effect = efParticle_DamageSpawnMDust_MakeEffect(&pos, -lr);
         break;
 
-    case 0x1C:
-        p_effect = func_ovl2_80100480(&pos);
+    case Ef_Kind_SparkleWhite:
+        p_effect = efParticle_SparkleWhite_MakeEffect(&pos);
         break;
 
-    case 0x1D:
-        p_effect = func_ovl2_801005C8(&pos);
+    case Ef_Kind_SparkleWhiteMultiExplode:
+        p_effect = efParticle_SparkleWhiteMultiExplode_MakeEffect(&pos);
         break;
 
-    case 0x1E:
-        p_effect = func_ovl2_80100524(&pos);
+    case Ef_Kind_SparkleWhiteMulti:
+        p_effect = efParticle_SparkleWhiteMulti_MakeEffect(&pos);
         break;
 
-    case 0x1F:
-        p_effect = func_ovl2_8010066C(&pos, 1.0F);
+    case Ef_Kind_SparkleWhiteScale:
+        p_effect = efParticle_SparkleWhiteScale_MakeEffect(&pos, 1.0F);
         break;
 
     case Ef_Kind_QuakeM0:
@@ -2042,24 +2042,24 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         }
         break;
 
-    case 0x29:
-        p_effect = func_ovl2_80101630(&pos);
+    case Ef_Kind_Psionic:
+        p_effect = efParticle_Psionic_MakeEffect(&pos);
         break;
 
-    case 0x2A:
-        p_effect = func_ovl2_80101688(&pos);
+    case Ef_Kind_FlashSmall:
+        p_effect = efParticle_FlashSmall_MakeEffect(&pos);
         break;
 
-    case 0x2B:
-        p_effect = func_ovl2_801016E0(&pos);
+    case Ef_Kind_FlashMiddle:
+        p_effect = efParticle_FlashMiddle_MakeEffect(&pos);
         break;
 
-    case 0x2C:
-        p_effect = func_ovl2_80101738(&pos);
+    case Ef_Kind_FlashLarge:
+        p_effect = efParticle_FlashLarge_MakeEffect(&pos);
         break;
 
-    case 0x28:
-        p_effect = func_ovl2_801015D4(&pos);
+    case Ef_Kind_FuraSparkle:
+        p_effect = efParticle_FuraSparkle_MakeEffect(&pos);
         break;
 
     case 0x36:
@@ -2070,21 +2070,21 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         p_effect = func_ovl2_8010183C(&pos, arg7);
         break;
 
-    case 0x49:
-        efpart = func_ovl2_8010066C(&pos, 0.7F);
+    case Ef_Kind_ChargeSparkle:
+        efpart = efParticle_SparkleWhiteScale_MakeEffect(&pos, 0.7F);
 
         if (efpart != NULL)
         {
-            efpart->color1.a = 192;
+            efpart->color1.a = 0xC0;
         }
         break;
 
-    case 0x46:
-        p_effect = func_ovl2_80101408(&pos);
+    case Ef_Kind_ThunderHit:
+        p_effect = efParticle_ThunderHit_MakeEffect(&pos);
         break;
 
-    case 0x47:
-        p_effect = func_ovl2_801014A8(&pos);
+    case Ef_Kind_Ripple:
+        p_effect = efGenerator_Ripple_MakeEffect(&pos);
         break;
 
     case 0x4C:
@@ -2118,8 +2118,8 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         }
         break;
 
-    case 0x25:
-        func_ovl2_80100DEC(fighter_gobj);
+    case Ef_Kind_FireSpark:
+        efParticle_FireSpark_MakeEffect(fighter_gobj);
         break;
     }
     return p_effect;

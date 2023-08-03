@@ -401,7 +401,7 @@ enum itYCityMonsterFlags
 
 } itYCityMonsterFlags;
 
-#define ITYCITYMONSTER_FLAG_NONE            (0)
+#define ITYCITYMONSTER_FLAG_NONE        (0)
 #define ITYCITYMONSTER_WEAPON_WAIT      (1 << itYCityMonster_Flags_WeaponWait)
 #define ITYCITYMONSTER_WEAPON_INSTANT   (1 << itYCityMonster_Flags_WeaponInstant)
 #define ITYCITYMONSTER_WEAPON_ALL       (ITYCITYMONSTER_WEAPON_INSTANT | ITYCITYMONSTER_WEAPON_WAIT)
@@ -582,7 +582,7 @@ typedef struct itGround_ItemVars_RaceBomb
 
 typedef struct itFighter_ItemVars_PKFire
 {
-    efImage *effect;
+    efTransform *effect;
 
 } itFighter_ItemVars_PKFire;
 

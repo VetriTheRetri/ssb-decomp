@@ -6,7 +6,7 @@ void func_ovl2_800D78E8(GObj *fighter_gobj)
     ftStruct *fp = ftGetStruct(fighter_gobj);
     s32 i;
 
-    if (fp->is_playing_effect)
+    if (fp->is_persist_effect)
     {
         ftCommon_ProcStopGFX(fighter_gobj);
     }
@@ -75,7 +75,7 @@ void func_ovl2_800D79F0(GObj *fighter_gobj, ftSpawnInfo *spawn)
     fp->is_reflect = FALSE;
     fp->is_absorb = FALSE;
     fp->is_shield = FALSE;
-    fp->is_playing_effect = FALSE;
+    fp->is_persist_effect = FALSE;
     fp->x18F_flag_b4 = FALSE;
 
     fp->cliffcatch_wait = 0;

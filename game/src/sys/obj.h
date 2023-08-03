@@ -173,7 +173,19 @@ struct DObj
     };
 };
 
+typedef struct OMCamera OMCamera;
+
+struct OMCamera
+{
+    u8 filler_0x0[0x3C];
+    Vec3f rotate;
+    Vec3f pan;
+};
+
 #define DObjGetStruct(gobj) \
 ((DObj*)(gobj)->obj) \
+
+#define OMCameraGetStruct(gobj) \
+((OMCamera*)(gobj)->obj) \
 
 #endif

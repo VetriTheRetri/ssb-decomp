@@ -215,7 +215,7 @@ void ftCommon_DeadDown_SetStatus(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->player, 0);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
+    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind <= Gr_Kind_Bonus1End)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind <= Gr_Kind_Bonus2End)))
     {
         sfx_id = 0x9B;
     }
@@ -253,7 +253,7 @@ void ftCommon_DeadRight_SetStatus(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->player, 1);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
+    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind <= Gr_Kind_Bonus1End)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind <= Gr_Kind_Bonus2End)))
     {
         sfx_id = 0x9B;
     }
@@ -290,7 +290,7 @@ void ftCommon_DeadLeft_SetStatus(GObj *fighter_gobj)
     func_ovl2_801021C0(&pos, fp->player, 3);
     func_ovl2_80115BF0(0x51, 0);
 
-    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
+    if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2End)))
     {
         sfx_id = 0x9B;
     }
@@ -339,7 +339,7 @@ void ftCommon_DeadUpStar_ProcUpdate(GObj *fighter_gobj)
 
         case 1:
             func_ovl2_800D9444(fighter_gobj);
-            func_ovl2_80100720(&fp->joint[ftParts_TopN_Joint]->translate, 5.0F);
+            efParticle_SparkleWhiteDead_MakeEffect(&fp->joint[ftParts_TopN_Joint]->translate, 5.0F);
 
             fp->is_invisible = TRUE;
             fp->x191_flag_b3 = TRUE;
@@ -421,14 +421,15 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
         {
         case 0:
             fp->phys_info.vel_air.y = (gpGroundInfo->cam_bound_bottom - DObjGetStruct(fighter_gobj)->translate.y) / 180.0F;
-            DObjGetStruct(fighter_gobj)->translate.z = (D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.z - 3000.0F);
+
+            DObjGetStruct(fighter_gobj)->translate.z = OMCameraGetStruct(gpCameraGObj)->rotate.z - 3000.0F;
 
             if (DObjGetStruct(fighter_gobj)->translate.z < 2000.0F)
             {
                 DObjGetStruct(fighter_gobj)->translate.z = 2000.0F;
             }
-            DObjGetStruct(fighter_gobj)->translate.x = (f32)D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.x;
-            DObjGetStruct(fighter_gobj)->translate.y = (f32)(D_ovl2_80131460->unk_0x74->unk_p_80131460_vec.y + 3000.0F);
+            DObjGetStruct(fighter_gobj)->translate.x = OMCameraGetStruct(gpCameraGObj)->rotate.x;
+            DObjGetStruct(fighter_gobj)->translate.y = OMCameraGetStruct(gpCameraGObj)->rotate.y + 3000.0F;
 
             if (gpGroundInfo->blastzone_top < DObjGetStruct(fighter_gobj)->translate.y)
             {
@@ -452,7 +453,7 @@ void ftCommon_DeadUpFall_ProcUpdate(GObj *fighter_gobj)
 
             ftCommon_Dead_UpdateScore(fp);
 
-            if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind < Gr_Kind_Bonus2Start)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind < Gr_Kind_CustomStart)))
+            if (((gpBattleState->gr_kind >= Gr_Kind_Bonus1Start) && (gpBattleState->gr_kind <= Gr_Kind_Bonus1End)) || ((gpBattleState->gr_kind >= Gr_Kind_Bonus2Start) && (gpBattleState->gr_kind <= Gr_Kind_Bonus2End)))
             {
                 sfx_id = 0x9B;
             }

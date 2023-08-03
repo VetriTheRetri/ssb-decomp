@@ -128,7 +128,7 @@ void ftLink_SpecialHi_MakeWeapon(GObj *fighter_gobj, bool32 is_skip_gobj)
 
         if (func_ovl2_80103378(fighter_gobj) != NULL)
         {
-            fp->is_playing_effect = TRUE;
+            fp->is_persist_effect = TRUE;
         }
         if (is_skip_gobj == FALSE)
         {

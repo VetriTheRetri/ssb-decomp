@@ -7171,11 +7171,11 @@ glabel D_ovl2_8012E0EC
   /* 57C68 0A98F8 8012E0F8 */
   .asciz ","
   .balign 4
-  /* 57C6C 0A98FC 8012E0FC */  .4byte func_ovl2_80100ED4
+  /* 57C6C 0A98FC 8012E0FC */  .4byte efParticle_Reflector_ProcUpdate
   /* 57C70 0A9900 8012E100 */  .4byte func_80014038
   .incbin "ovl2.raw.bin", 0x57C74, 0x10
 
-glabel D_ovl2_8012E114
+glabel efParticle_Shield_GfxColors
   .incbin "ovl2.raw.bin", 0x57C84, 0x20
 
 glabel D_ovl2_8012E134
@@ -7185,7 +7185,7 @@ glabel D_ovl2_8012E134
 
 glabel jtbl_ovl2_8012E144
   /* 57CB4 0A9944 8012E144 */  .4byte jtgt_ovl2_80101008
-  /* 57CB8 0A9948 8012E148 */  .4byte jtgt_ovl2_80101024
+  /* 57CB8 0A9948 8012E148 */  .4byte efParticle_Shield_ProcUpdate
   .incbin "ovl2.raw.bin", 0x57CBC, 0x10
 
 glabel D_ovl2_8012E15C
@@ -7198,7 +7198,7 @@ glabel D_ovl2_8012E15C
 
 glabel jtbl_ovl2_8012E16C
   /* 57CDC 0A996C 8012E16C */  .4byte jtgt_ovl2_80101008
-  /* 57CE0 0A9970 8012E170 */  .4byte jtgt_ovl2_80101180
+  /* 57CE0 0A9970 8012E170 */  .4byte efParticle_YoshiShield_ProcUpdate
   .incbin "ovl2.raw.bin", 0x57CE4, 0x10
 
 glabel D_ovl2_8012E184
@@ -7453,7 +7453,7 @@ glabel D_ovl2_8012E604
   .asciz "PJ."
   .balign 4
   .incbin "ovl2.raw.bin", 0x58180, 0x8
-  /* 58188 0A9E18 8012E618 */  .4byte jtgt_ovl2_80101180
+  /* 58188 0A9E18 8012E618 */  .4byte efParticle_YoshiShield_ProcUpdate
   .incbin "ovl2.raw.bin", 0x5818C, 0x10
 
 glabel D_ovl2_8012E62C

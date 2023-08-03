@@ -75,7 +75,7 @@ bool32 func_ovl3_8016CCA0(GObj *weapon_gobj)
         {
             wp->weapon_vars.boomerang.adjust_angle_delay = 0;
 
-            func_ovl2_800EB924(D_ovl2_80131460->unk_0x74, &D_ovl2_80131470, &DObjGetStruct(weapon_gobj)->translate, &sp30, &sp2C);
+            func_ovl2_800EB924(OMCameraGetStruct(gpCameraGObj), &D_ovl2_80131470, &DObjGetStruct(weapon_gobj)->translate, &sp30, &sp2C);
 
             temp_f0 = (D_ovl2_801314B0.unk_0x38.x / 2) + 40.0F;
             temp_f2 = (D_ovl2_801314B0.unk_0x38.y / 2) + 40.0F;

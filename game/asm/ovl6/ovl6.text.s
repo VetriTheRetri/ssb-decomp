@@ -2062,7 +2062,7 @@ glabel func_ovl6_8018EE10
   /* 113554 8018EE14 AFBF0014 */        sw $ra, 0x14($sp)
   /* 113558 8018EE18 AFA40018 */        sw $a0, 0x18($sp)
   /* 11355C 8018EE1C 8C840074 */        lw $a0, 0x74($a0)
-  /* 113560 8018EE20 0C0405E4 */       jal func_ovl2_80101790
+  /* 113560 8018EE20 0C0405E4 */       jal efParticle_ShieldBreak_MakeEffect
   /* 113564 8018EE24 2484001C */     addiu $a0, $a0, 0x1c
   /* 113568 8018EE28 8FAF0018 */        lw $t7, 0x18($sp)
   /* 11356C 8018EE2C 8DE40074 */        lw $a0, 0x74($t7)

@@ -41,7 +41,7 @@ void ftCommon_AttackS4_ProcUpdate(GObj *fighter_gobj)
 
             if (func_ovl2_801018A8(fighter_gobj, &offset, fp->status_vars.common.attack4.gfx_id) != NULL)
             {
-                fp->is_playing_effect = TRUE;
+                fp->is_persist_effect = TRUE;
             }
         }
         // Fallthrough, should break here for efficiency

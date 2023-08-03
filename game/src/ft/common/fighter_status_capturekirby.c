@@ -249,11 +249,11 @@ void ftCommon_ThrownKirby_SpawnStarGFX(GObj *fighter_gobj, f32 arg1, f32 arg2)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->is_playing_effect))
+    if (!(fp->is_persist_effect))
     {
         if (func_ovl2_80103CF8(fighter_gobj) != NULL)
         {
-            fp->is_playing_effect = TRUE;
+            fp->is_persist_effect = TRUE;
         }
     }
 }
@@ -316,7 +316,7 @@ void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
 
             if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
             {
-                fp->is_playing_effect = TRUE;
+                fp->is_persist_effect = TRUE;
             }
         }
         else
@@ -338,7 +338,7 @@ void ftCommon_ThrownStar_UpdatePhysics(GObj *fighter_gobj, f32 decelerate)
 
                 if (func_ovl2_80102070(&DObjGetStruct(fighter_gobj)->translate, (-fp->phys_info.vel_air.x < 0.0F) ? LEFT : RIGHT) != NULL)
                 {
-                    fp->is_playing_effect = TRUE;
+                    fp->is_persist_effect = TRUE;
                 }
                 fp->is_invisible = FALSE;
 

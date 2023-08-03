@@ -1894,7 +1894,7 @@ void func_ovl2_800E2910(ftStruct *other_fp, ftHitbox *other_hit, ftStruct *this_
     {
         func_ovl2_800E26BC(this_fp, this_hit->group_id, other_gobj, gmHitCollision_Type_Hit, other_hit->group_id, TRUE);
         func_ovl2_800E287C(this_gobj, this_fp, this_hit, other_gobj);
-        func_ovl2_80100BF0(&sp2C, this_hit->damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, this_hit->damage);
 
         if ((gpBattleState->game_type == gmMatch_GameType_1PGame) && (this_hit->damage >= 20) && (other_fp->player == gSceneData.player_port))
         {
@@ -1905,7 +1905,7 @@ void func_ovl2_800E2910(ftStruct *other_fp, ftHitbox *other_hit, ftStruct *this_
     {
         func_ovl2_800E26BC(other_fp, other_hit->group_id, this_gobj, gmHitCollision_Type_Hit, this_hit->group_id, FALSE);
         func_ovl2_800E287C(other_gobj, other_fp, other_hit, this_gobj);
-        func_ovl2_80100BF0(&sp2C, other_hit->damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, other_hit->damage);
 
         if ((gpBattleState->game_type == gmMatch_GameType_1PGame) && (other_hit->damage >= 20) && (this_fp->player == gSceneData.player_port))
         {
@@ -1935,7 +1935,7 @@ void func_ovl2_800E2A90(ftStruct *attacker_fp, ftHitbox *attacker_hit, ftStruct 
         victim_fp->shield_player = attacker_fp->player;
     }
     func_ovl2_800F0B78(&sp2C, attacker_hit, victim_gobj, victim_fp->joint[ftParts_YRotN_Joint]);
-    func_ovl2_80100BF0(&sp2C, attacker_hit->damage);
+    efParticle_DamageShieldImpact_MakeEffect(&sp2C, attacker_hit->damage);
 }
 
 void func_ovl2_800E2B88(ftStruct *attacker_fp, ftHitbox *attacker_hit, ftStruct *victim_fp, GObj *attacker_gobj, GObj *victim_gobj)
@@ -2068,13 +2068,13 @@ void func_ovl2_800E2D44(ftStruct *attacker_fp, ftHitbox *attacker_hit, ftStruct 
         else
         {
             func_ovl2_800F0A90(&sp3C, attacker_hit, victim_hurt);
-            func_ovl2_80100BF0(&sp3C, damage);
+            efParticle_DamageShieldImpact_MakeEffect(&sp3C, damage);
         }
     }
     else
     {
         func_ovl2_800F0A90(&sp3C, attacker_hit, victim_hurt);
-        func_ovl2_80100BF0(&sp3C, damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp3C, damage);
     }
     func_ovl2_800E2C24(attacker_fp, attacker_hit);
 }
@@ -2090,7 +2090,7 @@ void func_ovl2_800E2F04(wpStruct *ip, wpHitbox *wp_hit, s32 index, ftStruct *fp,
     {
         func_ovl2_800E26BC(fp, ft_hit->group_id, weapon_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
         func_ovl2_800E287C(fighter_gobj, fp, ft_hit, weapon_gobj);
-        func_ovl2_80100BF0(&sp30, ft_hit->damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp30, ft_hit->damage);
     }
 
     if ((damage - 10) < ft_hit->damage)
@@ -2101,7 +2101,7 @@ void func_ovl2_800E2F04(wpStruct *ip, wpHitbox *wp_hit, s32 index, ftStruct *fp,
         {
             ip->hit_attack_damage = damage;
         }
-        func_ovl2_80100BF0(&sp30, damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp30, damage);
 
         if ((gpBattleState->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->player == gSceneData.player_port))
         {
@@ -2141,7 +2141,7 @@ void func_ovl2_800E3048(wpStruct *ip, wpHitbox *wp_hit, s32 hitbox_id, ftStruct 
         fp->shield_player = ip->player;
     }
     func_ovl2_800F0C4C(&sp30, wp_hit, hitbox_id, fighter_gobj, fp->joint[ftParts_YRotN_Joint]);
-    func_ovl2_80100BF0(&sp30, wp_hit->shield_damage + damage);
+    efParticle_DamageShieldImpact_MakeEffect(&sp30, wp_hit->shield_damage + damage);
 }
 
 void func_ovl2_800E31B4(wpStruct *ip, wpHitbox *wp_hit, ftStruct *fp, GObj *fighter_gobj)
@@ -2260,7 +2260,7 @@ void func_ovl2_800E35BC(itStruct *ip, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
     {
         func_ovl2_800E26BC(fp, ft_hit->group_id, item_gobj, gmHitCollision_Type_Hit, 0, TRUE);
         func_ovl2_800E287C(fighter_gobj, fp, ft_hit, item_gobj);
-        func_ovl2_80100BF0(&sp30, ft_hit->damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp30, ft_hit->damage);
     }
     if ((damage - 10) < ft_hit->damage)
     {
@@ -2270,7 +2270,7 @@ void func_ovl2_800E35BC(itStruct *ip, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
         {
             ip->hit_attack_damage = damage;
         }
-        func_ovl2_80100BF0(&sp30, damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp30, damage);
 
         if ((gpBattleState->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->player == gSceneData.player_port))
         {
@@ -2290,7 +2290,7 @@ void func_ovl2_800E35BC(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
     {
         func_ovl2_800E26BC(fp, ft_hit->group_id, item_gobj, gmHitCollision_Type_Hit, 0U, TRUE);
         func_ovl2_800E287C(fighter_gobj, fp, ft_hit, item_gobj);
-        func_ovl2_80100BF0(&sp30, ft_hit->damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp30, ft_hit->damage);
     }
     if ((damage - 10) < ft_hit->damage)
     {
@@ -2300,7 +2300,7 @@ void func_ovl2_800E35BC(itStruct *ap, itHitbox *it_hit, s32 arg2, ftStruct *fp, 
         {
             ap->hit_attack_damage = damage;
         }
-        func_ovl2_80100BF0(&sp30, damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp30, damage);
 
         if ((gpBattleState->game_type == gmMatch_GameType_1PGame) && ((damage - 10) >= 10) && (fp->player == gSceneData.player_port))
         {
@@ -2340,7 +2340,7 @@ void func_ovl2_800E36F8(itStruct *ap, itHitbox *it_hit, s32 hitbox_id, ftStruct 
         fp->shield_player = ap->player;
     }
     func_ovl2_800F0EB4(&sp30, it_hit, hitbox_id, fighter_gobj, fp->joint[ftParts_YRotN_Joint]);
-    func_ovl2_80100BF0(&sp30, it_hit->shield_damage + damage);
+    efParticle_DamageShieldImpact_MakeEffect(&sp30, it_hit->shield_damage + damage);
 }
 
 void func_ovl2_800E3860(itStruct *ap, itHitbox *it_hit, ftStruct *fp, GObj *fighter_gobj)
@@ -2586,7 +2586,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                 break;
 
             case gmHitCollision_Element_Coin:
-                func_ovl2_80100ACC(&pos);
+                efParticle_DamageCoin_MakeEffect(&pos);
                 break;
 
             case gmHitCollision_Element_Slash:
@@ -2641,7 +2641,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                     func_ovl2_800FE4EC(&pos, damage);
                     break;
                 case gmHitCollision_Element_Coin:
-                    func_ovl2_80100ACC(&pos);
+                    efParticle_DamageCoin_MakeEffect(&pos);
                     break;
 
                 default:
@@ -2679,7 +2679,7 @@ void func_ovl2_800E3EBC(GObj *fighter_gobj)
                     break;
 
                 case gmHitCollision_Element_Coin:
-                    func_ovl2_80100ACC(&pos);
+                    efParticle_DamageCoin_MakeEffect(&pos);
                     break;
 
                 default:
@@ -3424,7 +3424,6 @@ void ftManager_SearchItemHit(GObj *fighter_gobj)
                                 }
                             }
                         }
-
                     }
                 }
             }
@@ -4284,7 +4283,7 @@ void ftStatus_Update(GObj *fighter_gobj, s32 status_id, f32 frame_begin, f32 ani
     {
         ftCommon_ResetColAnimStatUpdate(fighter_gobj);
     }
-    if (!(flags & FTSTATUPDATE_GFX_PRESERVE) && (fp->is_playing_effect))
+    if (!(flags & FTSTATUPDATE_GFX_PRESERVE) && (fp->is_persist_effect))
     {
         ftCommon_ProcStopGFX(fighter_gobj);
     }

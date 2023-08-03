@@ -975,28 +975,28 @@ struct ftAttributes
     u16 unk_0xEA;
     s32 unk_0xEC;
     GfxColorAlpha shade_color[4];
-    u32 is_have_attack11 : 1;
-    u32 is_have_attack12 : 1;
-    u32 is_have_attackdash : 1;
-    u32 is_have_attacks3 : 1;
-    u32 is_have_attackhi3 : 1;
-    u32 is_have_attacklw3 : 1;
-    u32 is_have_attacks4 : 1;
-    u32 is_have_attackhi4 : 1;
-    u32 is_have_attacklw4 : 1;
-    u32 is_have_attackairn : 1;
-    u32 is_have_attackairf : 1;
-    u32 is_have_attackairb : 1;
-    u32 is_have_attackairhi : 1;
-    u32 is_have_attackairlw : 1;
-    u32 is_have_specialn : 1;
-    u32 is_have_specialairn : 1;
-    u32 is_have_specialhi : 1;
-    u32 is_have_specialairhi : 1;
-    u32 is_have_speciallw : 1;
-    u32 is_have_specialairlw : 1;
-    u32 is_have_catch : 1;   // Whether fighter has a grab
-    u32 is_have_voice : 1;
+    u32 is_have_attack11    :  1;
+    u32 is_have_attack12    :  1;
+    u32 is_have_attackdash  :  1;
+    u32 is_have_attacks3    :  1;
+    u32 is_have_attackhi3   :  1;
+    u32 is_have_attacklw3   :  1;
+    u32 is_have_attacks4    :  1;
+    u32 is_have_attackhi4   :  1;
+    u32 is_have_attacklw4   :  1;
+    u32 is_have_attackairn  :  1;
+    u32 is_have_attackairf  :  1;
+    u32 is_have_attackairb  :  1;
+    u32 is_have_attackairhi :  1;
+    u32 is_have_attackairlw :  1;
+    u32 is_have_specialn    :  1;
+    u32 is_have_specialairn :  1;
+    u32 is_have_specialhi   :  1;
+    u32 is_have_specialairhi:  1;
+    u32 is_have_speciallw   :  1;
+    u32 is_have_specialairlw:  1;
+    u32 is_have_catch       :  1;   // Whether fighter has a grab
+    u32 is_have_voice       :  1;
     ftHurtboxDesc fighter_hurt_desc[FTPARTS_HURT_NUM_MAX];
     s32 unk_ftca_0x290;
     s32 unk_ftca_0x294;
@@ -1071,7 +1071,7 @@ struct ftStruct
     u32 hitlag_timer; // Freeze if TRUE
     s32 lr; // Facing direction; -1 = LEFT, 1 = RIGHT
 
-    struct phys_info
+    struct fighter_phys
     {
         Vec3f vel_air; // Aerial self-induced velocity
         Vec3f vel_damage_air; // Aerial knockback velocity
@@ -1149,7 +1149,7 @@ struct ftStruct
     u32 is_playing_gfx : 1;
     u32 joint_cycle_array_index : 4; // Goes up to 5 by default; index of the array from gfx_joint_cycle_index from ftAttributes which houses the actual joint ID
     u32 is_shield : 1; // Fighter's shield bubble is active
-    u32 is_playing_effect : 1; // Destroy GFX on action state change if TRUE, not sure why this and is_playing_gfx are different
+    u32 is_persist_effect : 1; // Destroy GFX on action state change if TRUE, not sure why this and is_playing_gfx are different
     u32 x18F_flag_b4 : 1;
     u32 x18F_flag_b5 : 1;
     u32 is_disable_control : 1;   // Fighter cannot be controlled if TRUE; enabled when training mode menu is up

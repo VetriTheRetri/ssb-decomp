@@ -49,7 +49,7 @@ void ftCommon_ShieldBreakFly_UpdateVarsSetStatus(GObj *fighter_gobj)
         func_ovl2_80103A88(&DObjGetStruct(fighter_gobj)->translate);
         func_ovl2_801041A0(&DObjGetStruct(fighter_gobj)->translate);
     }
-    else func_ovl2_80101790(&offset);
+    else efParticle_ShieldBreak_MakeEffect(&offset);
 
     ftCommon_Update1PGameDamageStats(fp, fp->shield_player, 0, 0, 0, 0);
 
@@ -71,6 +71,6 @@ void ftCommon_ShieldBreakFlyReflector_SetStatus(GObj *fighter_gobj)
     Vec3f offset = special_hit->offset;
 
     func_ovl2_800EDF24(fp->joint[special_hit->joint_index], &offset);
-    func_ovl2_8010155C(&offset, fp->lr_reflect);
+    efParticle_ReflectBreak_MakeEffect(&offset, fp->lr_reflect);
     ftCommon_ShieldBreakFly_SetStatus(fighter_gobj);
 }

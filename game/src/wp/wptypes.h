@@ -173,7 +173,7 @@ struct wpHitbox
 // Main weapon struct
 struct wpStruct
 {
-    void *wp_alloc_next;                // Memory region allocated for next itStruct
+    wpStruct *wp_alloc_next;            // Memory region allocated for next wpStruct
     GObj *weapon_gobj;                  // Weapon's GObj pointer
     GObj *owner_gobj;                   // Weapon's owner
     wpKind wp_kind;                     // Weapon ID
@@ -183,7 +183,7 @@ struct wpStruct
     s32 player_number;                  // Weapon's player number
     s32 lr;                             // Weapon's facing direction; -1 = LEFT, 0 = CENTER, 1 = RIGHT, 2 = WALL_UP (Thunder Jolt only?), 3 = WALL_DOWN (Thunder Jolt only?)
 
-    struct phys_info
+    struct weapon_phys
     {
         f32 vel_ground;                 // Weapon's ground velocity
         Vec3f vel_air;                  // Weapon's aerial velocity

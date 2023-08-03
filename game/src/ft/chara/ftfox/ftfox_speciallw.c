@@ -280,11 +280,11 @@ void ftFox_SpecialLwStart_InitStatusVars(GObj *fighter_gobj)
     fp->command_vars.flags.flag2 = 4;
     fp->status_vars.fox.speciallw.gravity_delay = FTFOX_REFLECTOR_GRAVITY_DELAY;
 
-    fp->status_vars.fox.speciallw.effect_gobj = func_ovl2_80100FA4(fighter_gobj);
+    fp->status_vars.fox.speciallw.effect_gobj = efParticle_Reflector_MakeEffect(fighter_gobj);
 
     if (fp->status_vars.fox.speciallw.effect_gobj != NULL)
     {
-        fp->is_playing_effect = TRUE;
+        fp->is_persist_effect = TRUE;
     }
     fp->special_hit = (ftSpecialHit*) ((uintptr_t)D_ovl2_80130E94 + (intptr_t)&ftFox_LoadedFiles_SpecialLwData); // Another linker thing
 }

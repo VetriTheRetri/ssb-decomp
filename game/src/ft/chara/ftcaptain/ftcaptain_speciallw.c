@@ -5,14 +5,14 @@ void ftCaptain_SpecialLw_UpdateGFX(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
 
-    if (!(fp->is_playing_effect))
+    if (!(fp->is_persist_effect))
     {
         if (fp->command_vars.flags.flag2 == 1)
         {
 
             if (func_ovl2_80101ED8(fighter_gobj) != FALSE)
             {
-                fp->is_playing_effect = TRUE;
+                fp->is_persist_effect = TRUE;
             }
 
             fp->command_vars.flags.flag2 = 0;

@@ -188,7 +188,7 @@ typedef struct Unk_801314B0
 
 } Unk_801314B0;
 
-extern Unk_80131460 *D_ovl2_80131460;
+extern GObj *gpCameraGObj;
 extern void *D_ovl2_80131470;
 extern Unk_801314B0 D_ovl2_801314B0;
 

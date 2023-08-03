@@ -54,7 +54,7 @@ void itMarumine_NExplode_CreateGFXGotoSetStatus(GObj *item_gobj)
 
     ip->item_hurt.hitstatus = gmHitCollision_HitStatus_None;
 
-    ep = func_ovl2_801005C8(&joint->translate);
+    ep = efParticle_SparkleWhiteMultiExplode_MakeEffect(&joint->translate);
 
     if (ep != NULL)
     {

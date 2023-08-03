@@ -305,9 +305,9 @@ void func_ovl3_801542F4(GObj *fighter_gobj)
 
     ftNess_SpecialHi_CreatePKThunder(fighter_gobj);
 
-    if (!(fp->is_playing_effect) && (func_ovl2_801029F8(fighter_gobj) != NULL))
+    if (!(fp->is_persist_effect) && (func_ovl2_801029F8(fighter_gobj) != NULL))
     {
-        fp->is_playing_effect = TRUE;
+        fp->is_persist_effect = TRUE;
     }
     fp->jumps_used = fp->attributes->jumps_max;
 }

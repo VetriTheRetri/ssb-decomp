@@ -15,7 +15,7 @@ void wpManager_AllocUserData(void)
     wpStruct *wp;
     s32 i;
 
-    gpWeaponStructCurrent = wp = hal_alloc(sizeof(wpStruct) * WEAPON_ALLOC_MAX, 8U);
+    gpWeaponStructCurrent = wp = hal_alloc(sizeof(wpStruct) * WEAPON_ALLOC_MAX, 0x8);
 
     for (i = 0; i < (WEAPON_ALLOC_MAX - 1); i++)
     {
@@ -657,7 +657,7 @@ void wpManager_UpdateAttackStatWeapon(wpStruct *this_wp, wpHitbox *this_hit, s32
         {
             victim_wp->hit_attack_damage = victim_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, victim_hit_damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, victim_hit_damage);
     }
     priority_high = victim_hit->priority;
 
@@ -669,7 +669,7 @@ void wpManager_UpdateAttackStatWeapon(wpStruct *this_wp, wpHitbox *this_hit, s32
         {
             this_wp->hit_attack_damage = this_hit_damage;
         }
-        func_ovl2_80100BF0(&sp2C, this_hit_damage);
+        efParticle_DamageShieldImpact_MakeEffect(&sp2C, this_hit_damage);
     }
 }
 

@@ -79,7 +79,7 @@ bool32 wpKirby_Cutter_ProcMap(GObj *weapon_gobj)
 bool32 wpKirby_Cutter_ProcHit(GObj *weapon_gobj)
 {
     func_800269C0(0U);
-    func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
+    efParticle_SparkleWhite_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
     return FALSE;
 }
@@ -94,7 +94,7 @@ bool32 wpKirby_Cutter_ProcShield(GObj *weapon_gobj)
 bool32 wpKirby_Cutter_ProcSetOff(GObj *weapon_gobj)
 {
     func_800269C0(0U);
-    func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
+    efParticle_SparkleWhite_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
     return TRUE;
 }

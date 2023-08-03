@@ -13,13 +13,13 @@ void ftCommon_CatchPull_ProcUpdate(GObj *fighter_gobj)
     }
 }
 
-Vec3f Fighter_CatchPull_Gfx_Offset = { 0.0F, 0.0F, 0.0F };
+Vec3f ftCommon_CatchPull_OffsetGFX = { 0.0F, 0.0F, 0.0F };
 
 // 0x80149F04
 void ftCommon_CatchPull_SetStatus(GObj *fighter_gobj)
 {
     ftStruct *fp = ftGetStruct(fighter_gobj);
-    Vec3f offset;
+    Vec3f pos;
 
     ftStatus_Update(fighter_gobj, ftStatus_Common_CatchPull, fp->status_vars.common.catchmain.catch_pull_frame_begin, 1.0F, (FTSTATUPDATE_SLOPECONTOUR_PRESERVE | FTSTATUPDATE_GFX_PRESERVE));
 
@@ -33,10 +33,10 @@ void ftCommon_CatchPull_SetStatus(GObj *fighter_gobj)
     {
         fp->proc_slope(fighter_gobj);
     }
-    offset = Fighter_CatchPull_Gfx_Offset;
+    pos = ftCommon_CatchPull_OffsetGFX;
 
-    func_ovl2_800EDF24(fp->joint[fp->attributes->joint_itemhold_heavy], &offset);
-    func_ovl2_80101500(&offset);
+    func_ovl2_800EDF24(fp->joint[fp->attributes->joint_itemhold_heavy], &pos);
+    efParticle_CatchSwirl_MakeEffect(&pos);
     ftMain_MakeRumble(fp, 9, 0);
 }
 

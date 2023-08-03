@@ -351,7 +351,7 @@ void itMSBomb_NExplode_InitStatusVars(GObj *item_gobj, bool32 is_create_gfx)
     {
         itMSBomb_NExplode_SpawnGFXFighter(item_gobj);
     }
-    ep = func_ovl2_801005C8(&joint->translate);
+    ep = efParticle_SparkleWhiteMultiExplode_MakeEffect(&joint->translate);
 
     if (ep != NULL)
     {

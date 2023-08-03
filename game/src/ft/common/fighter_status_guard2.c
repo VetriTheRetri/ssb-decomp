@@ -13,12 +13,12 @@ void ftCommon_GuardOn_SetStatus(GObj *fighter_gobj)
     {
         if (fp->ft_kind == Ft_Kind_Yoshi)
         {
-            fp->status_vars.common.guard.effect_gobj = func_ovl2_80101374(fighter_gobj);
+            fp->status_vars.common.guard.effect_gobj = efParticle_YoshiShield_MakeEffect(fighter_gobj);
 
             ftCommon_HideModelPartAll(fighter_gobj);
             ftCommon_Guard_SetHitStatusYoshi(fighter_gobj);
         }
-        else fp->status_vars.common.guard.effect_gobj = func_ovl2_80101108(fighter_gobj);
+        else fp->status_vars.common.guard.effect_gobj = efParticle_Shield_MakeEffect(fighter_gobj);
 
         fp->is_shield = TRUE;
     }

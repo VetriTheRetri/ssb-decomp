@@ -287,7 +287,7 @@ void itMain_SetFighterThrow(GObj *item_gobj, Vec3f *vel, f32 stale, bool32 is_sm
     }
     itMain_SetFighterRelease(item_gobj, vel, stale, fp->stat_flags.halfword, fp->stat_count);
 
-    func_ovl2_8010066C(&DObjGetStruct(item_gobj)->translate, 1.0F);
+    efParticle_SparkleWhiteScale_MakeEffect(&DObjGetStruct(item_gobj)->translate, 1.0F);
 
     func_800269C0((is_smash_throw != FALSE) ? ip->throw_sfx : ip->drop_sfx);
 

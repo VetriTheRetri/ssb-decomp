@@ -79,6 +79,8 @@
 #define EFPART_DAMAGESPAWNMDUST_VEL_BASE 50.0F
 #define EFPART_DAMAGESPAWNMDUST_VEL_ADD 0.004F
 
+#define EFPART_QUAKE_MAGNITUDE 6500.0F
+
 typedef struct efVars_BoxSmash
 {
 	s32 lifetime;
@@ -91,8 +93,8 @@ typedef struct efVars_Basic2 // Stuff like the effect that is created when hit b
     Vec3f vel;
     u8 player;
     s32 size;
-    efImage *efimage;
-    u8 filler_0x2C[0x3C - 0x2C];
+    efTransform *eftrans;
+    u8 filler_0x2C[0x3C - 0x30];
 
 } efVars_Basic2;
 
@@ -108,7 +110,7 @@ typedef struct efVars_Common
 {
     Vec3f vel;
     s32 size;
-    efImage *efimage;
+    efTransform *eftrans;
 
 } efVars_Common;
 
@@ -116,7 +118,7 @@ typedef struct efVars_DustLight
 {
     Vec3f vel1, vel2;
     s32 lifetime;
-    efImage *efimage;
+    efTransform *eftrans;
 
 } efVars_DustLight;
 
@@ -125,7 +127,7 @@ typedef struct efVars_DustHeavy
     Vec3f pos;
     s32 lr;
     s32 anim_frame;
-    efImage *efimage;
+    efTransform *eftrans;
 
 } efVars_DustHeavy;
 
@@ -187,5 +189,24 @@ typedef struct efVars_DamageSpawnMDust
     s32 lr;
 
 } efVars_DamageSpawnMDust;
+
+typedef struct efVars_Quake
+{
+    u8 priority;
+
+} efVars_Quake;
+
+typedef struct efVars_Reflector
+{
+    s32 index, status;
+
+} efVars_Reflector;
+
+typedef struct efVars_Shield
+{
+    s32 player;
+    bool32 is_damage_shield;
+
+} efVars_Shield;
 
 #endif

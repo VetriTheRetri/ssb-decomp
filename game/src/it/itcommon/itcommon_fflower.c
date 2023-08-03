@@ -259,8 +259,8 @@ bool32 wpFFlower_Flame_ProcMap(GObj *weapon_gobj)
 // 0x80175E4C
 bool32 wpFFlower_Flame_ProcHit(GObj *weapon_gobj)
 {
-    func_800269C0(0U);
-    func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
+    func_800269C0(gmSound_SFX_ExplodeS);
+    efParticle_SparkleWhite_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
     return FALSE;
 }

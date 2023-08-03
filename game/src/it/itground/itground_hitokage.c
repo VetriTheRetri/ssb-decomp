@@ -225,7 +225,7 @@ bool32 wpHitokage_Flame_ProcMap(GObj *weapon_gobj)
 bool32 wpHitokage_Flame_ProcHit(GObj *weapon_gobj)
 {
     func_800269C0(gmSound_SFX_ExplodeS);
-    func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
+    efParticle_SparkleWhite_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
     return FALSE;
 }

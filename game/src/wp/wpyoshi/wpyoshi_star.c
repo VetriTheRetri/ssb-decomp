@@ -84,7 +84,7 @@ bool32 wpYoshi_Star_ProcHit(GObj *weapon_gobj)
 {
     wpStruct *wp = wpGetStruct(weapon_gobj);
 
-    func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
+    efParticle_SparkleWhite_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
     if (wp->hit_normal_damage != 0)
     {
@@ -96,7 +96,7 @@ bool32 wpYoshi_Star_ProcHit(GObj *weapon_gobj)
 // 0x8016C6F0
 bool32 wpYoshi_Star_ProcShield(GObj *weapon_gobj)
 {
-    func_ovl2_80100480(&DObjGetStruct(weapon_gobj)->translate);
+    efParticle_SparkleWhite_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
     return TRUE;
 }

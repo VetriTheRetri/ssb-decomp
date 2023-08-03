@@ -154,7 +154,7 @@ void itBombHei_Default_SetExplode(GObj *item_gobj, u8 arg1)
 
     itBombHei_Default_SetHitStatusNone(item_gobj);
 
-    ep = func_ovl2_801005C8(&joint->translate); // WARNING: Actually some sprite struct
+    ep = efParticle_SparkleWhiteMultiExplode_MakeEffect(&joint->translate); // WARNING: Actually some sprite struct
 
     if (ep != NULL)
     {

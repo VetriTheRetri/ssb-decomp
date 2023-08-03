@@ -4,7 +4,7 @@
 #include "fttypes.h"
 
 #define ftGetStruct(fighter_gobj) \
-((ftStruct*) (fighter_gobj)->user_data) \
+((ftStruct*)(fighter_gobj)->user_data) \
 
 #define ftSetupDropItem(fp)                             \
 {                                                       \

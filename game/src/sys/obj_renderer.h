@@ -18,6 +18,14 @@ struct MtxProcTemp {
     /* 0x04 */ void *unk04;
 };
 
+enum GfxColorIndex
+{
+    GfxColorIndexR,
+    GfxColorIndexG,
+    GfxColorIndexB,
+    GfxColorIndexA
+};
+
 typedef struct GfxColor
 {
     u8 r, g, b;

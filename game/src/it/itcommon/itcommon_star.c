@@ -23,13 +23,13 @@ itCreateDesc itCommon_Star_ItemDesc =
 // 0x80174930
 bool32 itStar_SDefault_ProcUpdate(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
 
-    itMain_UpdateGravityClampTVel(ap, ITSTAR_GRAVITY, ITSTAR_T_VEL);
+    itMain_UpdateGravityClampTVel(ip, ITSTAR_GRAVITY, ITSTAR_T_VEL);
 
-    ap->it_multi--;
+    ip->it_multi--;
 
-    if (ap->it_multi == 0)
+    if (ip->it_multi == 0)
     {
         itMain_RefreshHit(item_gobj);
     }
@@ -41,7 +41,7 @@ bool32 itStar_SDefault_ProcUpdate(GObj *item_gobj)
 // 0x80174990
 bool32 itStar_SDefault_ProcMap(GObj *item_gobj)
 {
-    itStruct *ap = itGetStruct(item_gobj);
+    itStruct *ip = itGetStruct(item_gobj);
     s32 unused;
     bool32 is_collide_ground = func_ovl3_801737B8(item_gobj, MPCOLL_MASK_GROUND);
 
@@ -51,9 +51,9 @@ bool32 itStar_SDefault_ProcMap(GObj *item_gobj)
     }
     if (is_collide_ground != FALSE)
     {
-        ap->phys_info.vel_air.y = ITSTAR_BOUNCE_Y;
+        ip->phys_info.vel_air.y = ITSTAR_BOUNCE_Y;
 
-        func_800269C0(0x35);
+        func_800269C0(gmSound_SFX_StarMapCollide);
     }
     return FALSE;
 }
@@ -67,14 +67,14 @@ bool32 itStar_SDefault_ProcHit(GObj *item_gobj)
 // 0x80174A18
 GObj* itCommon_Star_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags)
 {
-    Unk_80131460_Ptr74 *unk_ptr = D_ovl2_80131460->unk_0x74;
+    OMCamera *cam = OMCameraGetStruct(gpCameraGObj);
     GObj *item_gobj;
     DObj *joint;
-    itStruct *ap;
+    itStruct *ip;
     Vec3f vel_real;
     Vec3f translate;
 
-    vel_real.x = (pos->x < unk_ptr->unk_0x48) ? ITSTAR_VEL_X : -ITSTAR_VEL_X;
+    vel_real.x = (pos->x < cam->pan.x) ? ITSTAR_VEL_X : -ITSTAR_VEL_X;
     vel_real.y = ITSTAR_BOUNCE_Y;
     vel_real.z = 0.0F;
 
@@ -86,12 +86,12 @@ GObj* itCommon_Star_MakeItem(GObj *spawn_gobj, Vec3f *pos, Vec3f *vel, u32 flags
 
         translate = joint->translate;
 
-        ap = item_gobj->user_data;
+        ip = itGetStruct(item_gobj);
 
-        ap->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
-        ap->it_multi = ITSTAR_INTERACT_DELAY;
+        ip->item_hit.interact_mask = GMHITCOLLISION_MASK_FIGHTER; // Star Man can only interact with fighters
+        ip->it_multi = ITSTAR_INTERACT_DELAY;
 
-        ap->is_unused_item_bool = TRUE;
+        ip->is_unused_item_bool = TRUE;
 
         func_80008CC0(joint, 0x2E, 0);
 

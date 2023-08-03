@@ -363,7 +363,7 @@ GObj *func_ovl3_80180EDC(GObj *item_gobj, Vec3f *pos)
 
     translate = joint->translate;
 
-    func_ovl2_8010066C(&translate, 1.0F);
+    efParticle_SparkleWhiteScale_MakeEffect(&translate, 1.0F);
 
     if (ip->lr == LEFT)
     {

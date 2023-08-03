@@ -250,7 +250,7 @@ bool32 wpStarRod_Star_ProcUpdate(GObj *weapon_gobj)
     {
         DObjGetStruct(weapon_gobj)->unk_0x54 = 2;
 
-        func_ovl2_8010066C(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
+        efParticle_SparkleWhiteScale_MakeEffect(&DObjGetStruct(weapon_gobj)->translate, 1.0F);
 
         return TRUE;
     }

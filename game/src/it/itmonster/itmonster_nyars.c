@@ -1,9 +1,6 @@
 #include <it/item.h>
 #include <wp/weapon.h>
 
-
-
-
 bool32 func_ovl3_8017EEB0(GObj *item_gobj)
 {
     itStruct *ap = itGetStruct(item_gobj);
@@ -130,7 +127,7 @@ bool32 func_ovl3_8017F17C(GObj *weapon_gobj)
 
 bool32 jtgt_ovl3_8017F1A4(GObj *weapon_gobj)
 {
-    func_ovl2_80100ACC(&DObjGetStruct(weapon_gobj)->translate);
+    efParticle_DamageCoin_MakeEffect(&DObjGetStruct(weapon_gobj)->translate);
 
     return TRUE;
 }

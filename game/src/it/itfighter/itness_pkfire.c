@@ -72,7 +72,7 @@ bool32 itNess_SDefault_UpdateAllCheckDestroy(GObj *item_gobj)
     f32 unused;
     f32 half = 0.5;
     f32 lifetime_scale = ((ip->lifetime * half) / 100.0F) + half;
-    efImage *effect = ip->item_vars.pkfire.effect;
+    efTransform *effect = ip->item_vars.pkfire.effect;
 
     DObjGetStruct(item_gobj)->scale.x = DObjGetStruct(item_gobj)->scale.y = DObjGetStruct(item_gobj)->scale.z = lifetime_scale;
 
@@ -225,7 +225,7 @@ GObj* itNess_PKFire_MakeItem(GObj *weapon_gobj, Vec3f *pos, Vec3f *vel)
     wpStruct *wp = wpGetStruct(weapon_gobj);
     itStruct *ip;
     efParticle *effect_unk;
-    efImage *effect_info;
+    efTransform *effect_info;
 
     item_gobj = itManager_MakeItem(weapon_gobj, &itNess_PKFire_ItemDesc, pos, vel, (ITEM_FLAG_PROJECT | ITEM_MASK_SPAWN_ITEM));
 
