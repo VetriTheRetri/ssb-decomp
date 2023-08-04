@@ -145,7 +145,7 @@ bool32 itTaru_SDefault_ProcHit(GObj *item_gobj)
 {
     func_800269C0(0x3B);
 
-    itParticle_BoxSmash_MakeEffect(&DObjGetStruct(item_gobj)->translate);
+    efParticle_BoxSmash_MakeEffect(&DObjGetStruct(item_gobj)->translate);
 
     if (func_ovl3_801730D4(item_gobj) != FALSE)
     {

@@ -1,9 +1,0 @@
-format = 'i'
-bitdepth = 4
-width = 16
-height = 16
-images = [
-    '000968_0.i4.png',
-    '000968_1.i4.png',
-    '000968_2.i4.png',
-]

@@ -50,6 +50,8 @@ enum efKind
     Ef_Kind_FlashSmall,                 // Expanding green circle, plays when teching
     Ef_Kind_FlashMiddle,                // Other expanding green circle, plays when grabbing ledge
     Ef_Kind_FlashLarge,                 // Large expanding green circle, plays when grabbing Star Man?
+    Ef_Kind_BoxSmash = 46,              // Crate / Barrel smash effect
+    Ef_Kind_CrashTheGame,               // Literally crashes the game; this takes an argument which acts as a timer; must be extra specific, during a certain scene
     Ef_Kind_ThunderHit = 70,            // Pikachu's Thunder self-hit
     Ef_Kind_Ripple,                     // Pikachu's Quick-Attack, Ness's PSI Magnet, etc.
     Ef_Kind_ChargeSparkle = 73,         // Fully charged Neutral Special, e.g. DK or Samus
@@ -121,6 +123,7 @@ struct efStruct
         efVars_Quake quake;
         efVars_Reflector reflector;
         efVars_Shield shield;
+        efVars_Unknown1 unknown1;
 
     } effect_vars;
 };

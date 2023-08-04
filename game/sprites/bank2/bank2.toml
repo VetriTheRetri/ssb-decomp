@@ -1,6 +1,0 @@
-entries = [
-    'rock',
-    'sphere',
-    'particle',
-]
-include_end = false

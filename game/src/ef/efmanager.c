@@ -2562,3 +2562,91 @@ efGenerator* efParticle_ShieldBreak_MakeEffect(Vec3f *pos)
     }
     return efgen;
 }
+
+// 0x801017E8
+void func_ovl2_801017E8(GObj *effect_gobj)
+{
+    efStruct *ep = efGetStruct(effect_gobj);
+
+    func_8000DF34(effect_gobj);
+
+    if (ep->effect_vars.unknown1.efvars_unk1_0x0 == 0)
+    {
+        efManager_SetPrevAlloc(ep);
+        omEjectGObjCommon(effect_gobj);
+    }
+    else ep->effect_vars.unknown1.efvars_unk1_0x0--;
+}
+
+extern efCreateDesc D_ovl2_8012E1D4;
+
+// 0x8010183C
+GObj* func_ovl2_8010183C(Vec3f *pos, s32 arg1)
+{
+    GObj *effect_gobj;
+    efStruct *ep;
+    DObj *dobj;
+
+    effect_gobj = func_ovl2_800FDAFC(&D_ovl2_8012E1D4);
+
+    if (effect_gobj == NULL)
+    {
+        return NULL;
+    }
+    ep = efGetStruct(effect_gobj);
+
+    ep->effect_vars.unknown1.efvars_unk1_0x0 = arg1;
+
+    dobj = DObjGetStruct(effect_gobj);
+    dobj->translate = *pos;
+
+    return effect_gobj;
+}
+
+extern intptr_t D_NF_00001850;
+extern intptr_t D_NF_00001970;
+extern intptr_t D_NF_00001AC0;
+extern intptr_t D_NF_00001B10;
+extern efCreateDesc D_ovl2_8012E1FC;
+extern void *D_ovl2_801310C0;
+
+// 0x801018A8
+GObj* efParticle_ThunderShock_MakeEffect(GObj *fighter_gobj, Vec3f *pos, s32 frame)
+{
+    GObj *effect_gobj;
+    efStruct *ep;
+    DObj *dobj;
+
+    effect_gobj = func_ovl2_800FDAFC(&D_ovl2_8012E1FC);
+
+    if (effect_gobj == NULL)
+    {
+        return NULL;
+    }
+    ep = efGetStruct(effect_gobj);
+
+    ep->fighter_gobj = fighter_gobj;
+
+    dobj = DObjGetStruct(effect_gobj);
+    dobj->attach_dobj = ftGetStruct(fighter_gobj)->joint[ftParts_TopN_Joint];
+
+    dobj->next->translate = *pos;
+
+    dobj->next->translate.x = (ftGetStruct(fighter_gobj)->lr == -1) ? -pos->x : pos->x;
+
+    func_80008CC0(dobj->next->next, 0x2E, 0);
+
+    switch (frame)
+    {
+    case 1:
+        func_8000BED8(effect_gobj, (uintptr_t)D_ovl2_801310C0 + (intptr_t)&D_NF_00001850, (uintptr_t)D_ovl2_801310C0 + (intptr_t)&D_NF_00001AC0, 0.0F); // Linker thing
+        func_8000DF34(effect_gobj);
+        break;
+
+    case 2:
+        func_8000BED8(effect_gobj, (uintptr_t)D_ovl2_801310C0 + (intptr_t)&D_NF_00001970, (uintptr_t)D_ovl2_801310C0 + (intptr_t)&D_NF_00001B10, 0.0F); // Linker thing
+        func_8000DF34(effect_gobj);
+        break;
+    }
+    return effect_gobj;
+}

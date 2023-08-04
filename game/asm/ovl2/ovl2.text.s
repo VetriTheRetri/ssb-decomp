@@ -23641,7 +23641,7 @@ glabel ftCommon_GFXSpawn
   /* 066B10 800EB310 00401825 */        or $v1, $v0, $zero
   glabel jtgt_ovl2_800EB314
   /* 066B14 800EB314 02002025 */        or $a0, $s0, $zero
-  /* 066B18 800EB318 0C05E47D */       jal itParticle_BoxSmash_MakeEffect
+  /* 066B18 800EB318 0C05E47D */       jal efParticle_BoxSmash_MakeEffect
   /* 066B1C 800EB31C AFA30038 */        sw $v1, 0x38($sp)
   /* 066B20 800EB320 10000019 */         b jtgt_ovl2_800EB388
   /* 066B24 800EB324 8FA30038 */        lw $v1, 0x38($sp)
@@ -48688,7 +48688,7 @@ glabel func_ovl2_8010183C
   /* 07D0A0 801018A0 03E00008 */        jr $ra
   /* 07D0A4 801018A4 00000000 */       nop 
 
-glabel func_ovl2_801018A8
+glabel efParticle_ThunderShock_MakeEffect
   /* 07D0A8 801018A8 27BDFFE0 */     addiu $sp, $sp, -0x20
   /* 07D0AC 801018AC 00803825 */        or $a3, $a0, $zero
   /* 07D0B0 801018B0 AFBF001C */        sw $ra, 0x1c($sp)

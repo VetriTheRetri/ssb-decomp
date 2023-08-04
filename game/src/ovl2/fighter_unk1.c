@@ -2066,7 +2066,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         p_effect = func_ovl2_80102018(&pos);
         break;
 
-    case 0x2F:
+    case Ef_Kind_CrashTheGame:
         p_effect = func_ovl2_8010183C(&pos, arg7);
         break;
 
@@ -2100,7 +2100,7 @@ void* ftCommon_GFXSpawn(GObj *fighter_gobj, s32 gfx_id, s32 joint_index, Vec3f *
         break;
 
     case 0x2E:
-        itParticle_BoxSmash_MakeEffect(&pos);
+        efParticle_BoxSmash_MakeEffect(&pos);
         break;
 
     case 0x5A:

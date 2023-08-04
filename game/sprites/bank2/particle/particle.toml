@@ -1,5 +1,0 @@
-format = 'ia'
-bitdepth = 8
-width = 8
-height = 8
-images = ['particle_0.ia8.png']

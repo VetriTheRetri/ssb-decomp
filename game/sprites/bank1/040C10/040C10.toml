@@ -1,8 +1,0 @@
-format = 'i'
-bitdepth = 8
-width = 16
-height = 16
-images = [
-    '040C10_0.i8.png',
-    '040C10_1.i8.png',
-]

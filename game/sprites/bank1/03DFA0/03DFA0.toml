@@ -1,9 +1,0 @@
-format = 'ia'
-bitdepth = 16
-width = 32
-height = 32
-images = [
-    '03DFA0_0.ia16.png',
-    '03DFA0_1.ia16.png',
-    '03DFA0_2.ia16.png',
-]

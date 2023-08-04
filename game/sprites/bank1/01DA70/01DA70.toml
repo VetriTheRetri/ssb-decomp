@@ -1,5 +1,0 @@
-format = 'ci'
-bitdepth = 4
-width = 16
-height = 8
-images = ['01DA70_0.ci4.png']

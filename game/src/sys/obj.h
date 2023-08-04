@@ -167,7 +167,7 @@ struct DObj
     MObj *mobj;
     union
     {
-        DObj *joint;
+        DObj *attach_dobj;
         void *unk_0x84;    // Multi-purpose? Articles store a fighter joint here, but func_ovl2_800D78E8 expects a different struct
         s32 yakumono_id;     // Used in mpcollision.c to determine whether to check for collision?
     };

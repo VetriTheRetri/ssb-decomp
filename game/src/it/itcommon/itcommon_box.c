@@ -139,7 +139,7 @@ extern intptr_t D_NF_00006778;
 extern intptr_t D_NF_000068F0;
 
 // 0x801791F4
-void itParticle_BoxSmash_MakeEffect(Vec3f *pos)
+void efParticle_BoxSmash_MakeEffect(Vec3f *pos)
 {
     GObj *effect_gobj;
     efStruct *ep = efManager_GetStructNoForceReturn();
@@ -200,7 +200,7 @@ bool32 itBox_SDefault_CheckSpawnItems(GObj *item_gobj)
 
     func_800269C0(0x3B);
 
-    itParticle_BoxSmash_MakeEffect(&DObjGetStruct(item_gobj)->translate);
+    efParticle_BoxSmash_MakeEffect(&DObjGetStruct(item_gobj)->translate);
 
     if (D_ovl3_8018D048.unk_0x10 != 0)
     {

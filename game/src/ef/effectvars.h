@@ -209,4 +209,10 @@ typedef struct efVars_Shield
 
 } efVars_Shield;
 
+typedef struct efVars_Unknown1
+{
+    s32 efvars_unk1_0x0;
+
+} efVars_Unknown1;
+
 #endif

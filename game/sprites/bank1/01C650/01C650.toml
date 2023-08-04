@@ -1,5 +1,0 @@
-format = 'ia'
-bitdepth = 16
-width = 32
-height = 32
-images = ['01C650_0.ia16.png']
